@@ -45,10 +45,10 @@ public class DrawingPointPath extends DrawingPath
 {
   // float mXpos;        // scene coords
   // float mYpos;
-  int mPointType;
+  public int mPointType;
   protected int mScale;  //! symbol scale
   public double mOrientation;   // orientation [degrees]
-  String mPointText;
+  public String mPointText;
   IDrawingLink mLink;    // linked drawing item
 
   // FIXME-COPYPATH
@@ -105,6 +105,27 @@ public class DrawingPointPath extends DrawingPath
   //   return null;
   // }
 
+  public DrawingPointPath( int type, float x, float y, int scale, int scrap )
+  {
+    super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
+    // TDLog.Log( TDLog.LOG_PATH, "Point " + type + " X " + x + " Y " + y );
+    mPointType = type;
+    setCenter( x, y );
+    // mScale   = PointScale.SCALE_NONE;
+    mOrientation = 0.0;
+    mOptions   = BrushManager.getPointDefaultOptions( mPointType );
+    mPointText = null; // getTextFromOptions( options ); // this can also reset mOptions
+    mLevel     = BrushManager.getPointLevel( mPointType );
+
+    if ( BrushManager.isPointOrientable( mPointType ) ) {
+      mOrientation = BrushManager.getPointOrientation( mPointType );
+    }
+    setPathPaint( BrushManager.getPointPaint( mPointType ) );
+    mScale = scale;
+    resetPath( 1.0f );
+    mLink = null;
+  }
+
   public DrawingPointPath( int type, float x, float y, int scale, String text, String options, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
@@ -127,7 +148,7 @@ public class DrawingPointPath extends DrawingPath
     // Log.v( TopoDroidApp.TAG, "Point cstr " + type + " orientation " + mOrientation );
   }
 
-  static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y /* , SymbolsPalette missingSymbols */ ) 
+  public static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y /* , SymbolsPalette missingSymbols */ ) 
   {
     float ccx, ccy, orientation;
     int   type;
@@ -344,7 +365,7 @@ public class DrawingPointPath extends DrawingPath
 
   public int getScale() { return mScale; }
 
-  float getScaleValue() // FIX Asenov
+  public float getScaleValue() // FIX Asenov
   {
     switch ( mScale ) {
       case PointScale.SCALE_XS: return 0.50f;
@@ -467,10 +488,10 @@ public class DrawingPointPath extends DrawingPath
       pw.format("    <crosssection>\n" );
       exportTCsxXSection( pw, section, survey, cave, branch );
       pw.format("    </crosssection>\n" );
-      String filename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
-      File imagefile = TDFile.getFile( filename );
-      if ( imagefile.exists() ) {
-        byte[] buf = TDExporter.readFileBytes( imagefile );
+      String imagefilename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
+      // File imagefile = TDFile.getFile( imagefilename );
+      if ( TDFile.hasFile( imagefilename ) ) {
+        byte[] buf = TDExporter.readFileBytes( imagefilename );
         if ( buf != null ) {
           pw.format("    <crosssectionfile>\n" );
           pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 

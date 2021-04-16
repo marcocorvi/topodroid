@@ -9,22 +9,26 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDMath;
-import com.topodroid.shp.ShpObject;
-import com.topodroid.shp.ShpPoint;
-import com.topodroid.shp.ShpPolyline;
-import com.topodroid.shp.ShpStation;
-import com.topodroid.shp.ShpSegment;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 import com.topodroid.num.NumStation;
+import com.topodroid.DistoX.Archiver;
+import com.topodroid.DistoX.GeoReference;
+import com.topodroid.DistoX.ICanvasCommand;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingPointLinePath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.DrawingStationName;
 
 import android.util.Log;
-
 
 import java.util.List;
 import java.util.ArrayList;
@@ -32,14 +36,14 @@ import java.util.ArrayList;
 import java.io.File;
 import java.io.IOException;
 
-class DrawingShp
+public class DrawingShp
 {
   // @param basepath   TopoDroid/shp/survey-plot
   // @param plot       sketch items
   // @param type       sketch type
   // @param station    WGS84 data of the sketch origin 
   // @return true if successful
-  static boolean writeShp( String basepath, DrawingCommandManager plot, long type, GeoReference station )
+  public static boolean writeShp( String basepath, DrawingCommandManager plot, long type, GeoReference station )
   {
 
     File dir   = null;

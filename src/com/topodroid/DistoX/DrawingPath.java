@@ -602,7 +602,7 @@ public class DrawingPath extends RectF
   }
 
   // key must be not null and start with '-'
-  String getOption( String key )
+  public String getOption( String key )
   {
     if ( mOptions == null ) return null;
     String[] vals = mOptions.split(" ");
@@ -616,7 +616,7 @@ public class DrawingPath extends RectF
     return null;
   }
 
-  String getOptionString() { return ( mOptions == null )? "" : mOptions; }
+  public String getOptionString() { return ( mOptions == null )? "" : mOptions; }
 
   void setOptions( String options ) { mOptions = options; }
 

@@ -12,6 +12,7 @@
 package com.topodroid.help;
 
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TDandroid;
 import com.topodroid.DistoX.TDPath;
@@ -75,7 +76,7 @@ public class UserManualActivity extends Activity
         if ( pos > 0 ) {
           String name = filename.substring( pos + NEEDLE.length() );
           String pagename = TDPath.getManFileName( name );
-          File pagefile = TDPath.getManFile( name );
+          File pagefile = TDFile.getManFile( name );
           // Log.v("DistoX", "MAN-2 pagefile " + pagefile.getPath() );
           // Log.v("DistoX", "MAN-2 pagename " + pagename );
           loadLocal( view, pagefile );
@@ -83,7 +84,7 @@ public class UserManualActivity extends Activity
       }
     } else {
       String pagename = TDPath.getManFileName( filename );
-      File pagefile = TDPath.getManFile( filename );
+      File pagefile = TDFile.getManFile( filename );
       // Log.v("DistoX", "MAN-3 filename " + filename );
       // Log.v("DistoX", "MAN-3 pagename " + pagename );
       if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {

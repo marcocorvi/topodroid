@@ -59,9 +59,9 @@ public class BrushManager
   static boolean tryLoadMissingArea( String thname )  { return mAreaLib  != null && mAreaLib.tryLoadMissingArea( thname ); }
   */
 
-  static SymbolPointLibrary getPointLib() { return mPointLib; }
-  static SymbolLineLibrary  getLineLib()  { return mLineLib; }
-  static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
+  public static SymbolPointLibrary getPointLib() { return mPointLib; }
+  public static SymbolLineLibrary  getLineLib()  { return mLineLib; }
+  public static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
 
   static boolean isPointRoundTrip( DrawingPointPath path, int rt )
   { return (mPointLib != null) && mPointLib.getSymbolByIndex( path.mPointType ).mRoundTrip == rt; }
@@ -85,9 +85,9 @@ public class BrushManager
   static Symbol getLineByThName( String thname )  { return (mLineLib  == null)? null : mLineLib.getSymbolByThName( thname ); }
   static Symbol getAreaByThName( String thname )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolByThName( thname ); }
 
-  static SymbolPoint getPointByIndex( int idx ) { return (mPointLib == null)? null : (SymbolPoint)mPointLib.getSymbolByIndex( idx ); }
-  static SymbolLine  getLineByIndex(  int idx ) { return (mLineLib  == null)? null : (SymbolLine)mLineLib.getSymbolByIndex( idx ); }
-  static SymbolArea  getAreaByIndex(  int idx ) { return (mAreaLib  == null)? null : (SymbolArea)mAreaLib.getSymbolByIndex( idx ); }
+  public static SymbolPoint getPointByIndex( int idx ) { return (mPointLib == null)? null : (SymbolPoint)mPointLib.getSymbolByIndex( idx ); }
+  public static SymbolLine  getLineByIndex(  int idx ) { return (mLineLib  == null)? null : (SymbolLine)mLineLib.getSymbolByIndex( idx ); }
+  public static SymbolArea  getAreaByIndex(  int idx ) { return (mAreaLib  == null)? null : (SymbolArea)mAreaLib.getSymbolByIndex( idx ); }
 
   static boolean hasPointByThName( String thname ) { return mPointLib != null && mPointLib.hasSymbolByThName( thname ); }
   static boolean hasLineByThName( String thname )  { return mLineLib  != null && mLineLib.hasSymbolByThName( thname ); }
@@ -101,14 +101,16 @@ public class BrushManager
   static void setRecentLines( Symbol[] lines )   { if (mLineLib  != null) mLineLib.setRecentSymbols( lines ); }
   static void setRecentAreas( Symbol[] areas )   { if (mAreaLib  != null) mAreaLib.setRecentSymbols( areas ); }
 
-  static String getPointThName( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolThName( idx ); }
-  static String getLineThName( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolThName( idx ); }
-  static String getAreaThName( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolThName( idx ); }
+  public static String getPointThName( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolThName( idx ); }
+  public static String getLineThName( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolThName( idx ); }
+  public static String getAreaThName( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolThName( idx ); }
 
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }
   static String getLineWallGroup() { return (mLineLib == null)? "wall": getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
+
+  static String getPointDefaultOptions( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolDefaultOptions(idx ); }
 
   static boolean hasPoint( int idx ) { return mPointLib != null && idx < mPointLib.size(); }
   static boolean hasLine( int idx )  { return mLineLib  != null && idx < mLineLib.size(); }
@@ -122,9 +124,9 @@ public class BrushManager
   static int getLineColor(  int idx ) { return (mLineLib  == null)? 0xffffffff : mLineLib.getSymbolPaint( idx ).getColor(); }
   static int getAreaColor(  int idx ) { return (mAreaLib  == null)? 0xffffffff : mAreaLib.getSymbolPaint( idx ).getColor(); }
 
-  static int getPointLibSize() { return ( mPointLib == null )? 0 : mPointLib.size(); }
-  static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
-  static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
+  public static int getPointLibSize() { return ( mPointLib == null )? 0 : mPointLib.size(); }
+  public static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
+  public static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
 
   static boolean hasLineEffect( int index ) { return mLineLib != null && mLineLib.hasEffect( index ); }
   static int getLineStyleX( int index ) { return (mLineLib == null)? 1 : mLineLib.getStyleX( index ); }
@@ -166,10 +168,10 @@ public class BrushManager
   static Path getPointPath( int i )                  { return (mPointLib == null)? null : mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i )              { return (mPointLib == null)? null : mPointLib.getPointOrigPath( i ); }
 
-  static boolean isPointLabel( int index )   { return mPointLib != null && index == mPointLib.mPointLabelIndex; }
-  static boolean isPointPhoto( int index )   { return mPointLib != null && index == mPointLib.mPointPhotoIndex; }
-  static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
-  static boolean isPointSection( int index ) { return mPointLib != null && index == mPointLib.mPointSectionIndex; }
+  public static boolean isPointLabel( int index )   { return mPointLib != null && index == mPointLib.mPointLabelIndex; }
+  public static boolean isPointPhoto( int index )   { return mPointLib != null && index == mPointLib.mPointPhotoIndex; }
+  public static boolean isPointAudio( int index )   { return mPointLib != null && index == mPointLib.mPointAudioIndex; }
+  public static boolean isPointSection( int index ) { return mPointLib != null && index == mPointLib.mPointSectionIndex; }
 
   static boolean isPointEnabled( String name ) { return mPointLib != null && mPointLib.isSymbolEnabled( name ); }
   static boolean isLineEnabled( String name )  { return mLineLib  != null && mLineLib.isSymbolEnabled( name ); }

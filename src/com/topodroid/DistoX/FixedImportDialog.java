@@ -142,8 +142,12 @@ class FixedImportDialog extends MyDialog
   {
     mArrayAdapter.clear();
 
-    File dir = TDFile.getFile( POINTLISTS );
-    if ( ! dir.exists() ) dir = TDFile.getFile( POINTLISTS_PRO );
+    String dirname = POINTLISTS;
+    File dir = TDFile.getExternalFile( dirname );
+    if ( ! dir.exists() ) {
+      dirname = POINTLISTS_PRO;
+      dir = TDFile.getExternalFile( dirname );
+    }
     if ( ! dir.exists() ) return 0;
 
     File[] files = dir.listFiles();
@@ -154,20 +158,20 @@ class FixedImportDialog extends MyDialog
     for ( File f : files ) {
       // Log.v("DistoX", "file " + f.getName() + " is dir " + f.isDirectory() );
       if ( ! f.isDirectory() ) {
-        ret += readPointFile( dir, f.getName() ); // N.B. read file before oring with ret
+        ret += readPointFile( dirname, f.getName() ); // N.B. read file before oring with ret
       }
     }
     return ret;
   }
 
-  private int readPointFile( File dir, String filename )
+  private int readPointFile( String dirname, String filename )
   {
     // Log.v("DistoX", "reading file " + filename );
     int ret = 0;
     try {
       // TDLog.Log( TDLog.LOG_IO, "read GPS points file " + filename );
-      File file = TDFile.getFile( dir, filename );
-      FileReader fr = TDFile.getFileReader( file );
+      // File file = TDFile.getFile( dirname, filename );
+      FileReader fr = TDFile.getExternalFileReader( dirname, filename );
       BufferedReader br = new BufferedReader( fr );
       for ( ; ; ) {
         String line = br.readLine();
@@ -181,6 +185,7 @@ class FixedImportDialog extends MyDialog
           ret ++;
         }
       }
+      fr.close();
     } catch ( IOException e ) { 
     } catch ( NumberFormatException e ) {
     }

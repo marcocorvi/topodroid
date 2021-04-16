@@ -17,7 +17,7 @@ import com.topodroid.common.SymbolType;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-class Symbol implements SymbolInterface
+public class Symbol implements SymbolInterface
 {
   static final int W2D_NONE       = 0; // Walls roundtrip values
   static final int W2D_WALLS_SHP  = 1;
@@ -29,6 +29,7 @@ class Symbol implements SymbolInterface
   String  mThName;   // therion name
   String  mGroup;    // group of this symbol (null if no group)
   // String  mFilename; // filename coincide with therion name
+  protected String mDefaultOptions;
 
   int     mLevel;       // canvas levels [flag]
   int     mRoundTrip;
@@ -40,6 +41,7 @@ class Symbol implements SymbolInterface
     mEnabled = true;
     mThName  = null;
     mGroup   = null;
+    mDefaultOptions = null;
     // mFilename = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
     mRoundTrip = W2D_NONE;
@@ -54,6 +56,7 @@ class Symbol implements SymbolInterface
     mEnabled  = true;
     mThName   = th_name;
     mGroup    = group;
+    mDefaultOptions = null;
     // mFilename = filename;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
     mRoundTrip = rt;
@@ -67,10 +70,13 @@ class Symbol implements SymbolInterface
     mEnabled  = enabled; 
     mThName   = null;
     mGroup    = null;
+    mDefaultOptions = null;
     // mFilename = null;
     mLevel = DrawingLevel.LEVEL_DEFAULT;
     mRoundTrip = W2D_NONE;
   }
+
+  public String getDefaultOptions() { return mDefaultOptions; }
 
   // SymbolInterface methods
   public String getThName()     { return mThName; }
@@ -87,9 +93,14 @@ class Symbol implements SymbolInterface
   // FIXME this is half not-translatable: mGroup must be english
   public String getGroupName()   { return (mGroup == null)? "-" : mGroup; }
 
-  public Paint  getPaint()      { return null; }
+  public Paint  getPaint()      { return null; } // Overridden
   public Path   getPath()       { return null; }
   public boolean isOrientable() { return false; }
+  public int    getColor() 
+  { 
+    Paint paint = getPaint();
+    return ( paint == null )? 0xffffffff : paint.getColor();
+  }
 
   public boolean isEnabled() { return mEnabled; }
   public void setEnabled( boolean enabled ) { mEnabled = enabled; }

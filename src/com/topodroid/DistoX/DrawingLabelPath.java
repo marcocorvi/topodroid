@@ -53,7 +53,7 @@ public class DrawingLabelPath extends DrawingPointPath
     doSetScale( mScale );
   }
 
-  static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
+  public static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     float ccx, ccy;
     int scale;

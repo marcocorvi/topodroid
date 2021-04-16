@@ -22,6 +22,7 @@ interface SymbolInterface
   String getThName();
   Paint  getPaint();
   Path   getPath();
+  String getDefaultOptions(); 
   boolean isOrientable();
   boolean isEnabled();
   void setEnabled( boolean enabled );

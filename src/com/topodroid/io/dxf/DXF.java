@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.dxf;
 
 import com.topodroid.utils.TDString;
 import com.topodroid.math.Point2D;
@@ -47,6 +47,9 @@ public class DXF
   static boolean mVersion13 = false;
   static boolean mVersion14 = false;
   static boolean mVersion13_14 = false;
+
+  final static int BY_BLOCK = 0;
+  final static int BY_LAYER = 256;
 
   public static int inc( int h ) { ++h; if ( h == 0x0105 ) ++h; return h; }
 
@@ -379,7 +382,7 @@ public class DXF
       printString( pw, 8, layer );
       printString( pw, 6, lt_byLayer );
       printInt( pw, 43, 0 ); // width 0: constant
-      printInt( pw, 62, 256 );
+      printInt( pw, 62, BY_LAYER );
       printInt( pw, 70, (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       printInt( pw, 90, npt );
     } else {
@@ -388,7 +391,7 @@ public class DXF
         handle = printAcDb( pw, handle, AcDbEntity );
         printString( pw, 8, layer );
         printString( pw, 100, AcDb3dPolyline );
-        printInt( pw, 62, 256 ); // color
+        printInt( pw, 62, BY_LAYER );
         printInt( pw, 66, 1 ); // group 1
         printInt( pw, 70, 8 + (closed? 1:0) ); // polyline flag 8 = 3D polyline, 1 = closed  // inlined close in 5.1.20
       } else { // mVersion9 
@@ -447,7 +450,7 @@ public class DXF
       // printString( pw5, 8, "AREA" );  // layer (color BYLAYER)
       printString( pw, 8, layer );      // layer (color BYLAYER)
       printString( pw, 6, lt_byLayer ); // line color BYLAYER
-      printInt( pw, 62, 256 );
+      printInt( pw, 62, BY_LAYER );
       printAcDb( pw, -1, AcDbHatch );
 
       printXYZ( pw, 0f, 0f, 0f, 0 );
@@ -631,7 +634,7 @@ public class DXF
       writeString( out, 9, "$TEXTSTYLE" );   writeString( out, 7, standard );
       writeString( out, 9, "$CELTYPE" );     writeString( out, 6, "BYLAYER" ); // 
       writeString( out, 9, "$CELTSCALE" );   writeInt( out, 40, 1 ); // 
-      writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, 256 ); // 
+      writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, BY_LAYER ); // 
 
       writeString( out, 9, "$MEASUREMENT" ); writeInt( out, 70, 1 ); // drawing units 1=metric
       writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty drawing units 0=unitless 4=mm

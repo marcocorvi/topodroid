@@ -58,14 +58,14 @@ public class Archiver
     data = new byte[ BUF_SIZE ];
   }
 
-  private boolean addEntry( ZipOutputStream zos, File name )
+  private boolean addEntry( ZipOutputStream zos, File name, String filepath )
   {
     if ( name == null || ! name.exists() ) return false;
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
       // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
-      bis = new BufferedInputStream( TDFile.getFileInputStream( name ), BUF_SIZE );
+      bis = new BufferedInputStream( TDFile.getFileInputStream( filepath ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( name.getName() );
       int cnt;
       zos.putNextEntry( entry );
@@ -85,14 +85,14 @@ public class Archiver
     return ret;
   }
 
-  private void addOptionalEntry( ZipOutputStream zos, File name )
+  private void addOptionalEntry( ZipOutputStream zos, File name, String filepath )
   {
     if ( name == null || ! name.exists() ) return;
     // Log.v( "DistoX-ZIP", "zip optional file " + name.getPath() );
     BufferedInputStream bis = null;
     try { 
       // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
-      bis = new BufferedInputStream( TDFile.getFileInputStream( name ), BUF_SIZE );
+      bis = new BufferedInputStream( TDFile.getFileInputStream( filepath ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( name.getName() );
       int cnt;
       zos.putNextEntry( entry );
@@ -109,25 +109,25 @@ public class Archiver
     }
   }
 
-  private void addDirectory( ZipOutputStream zos, File dir )
+  private void addDirectory( ZipOutputStream zos, File dir, String dirname )
   {
     if ( ! dir.exists() ) return;
     // Log.v( "DistoX-ZIP", "zip add dir " + dir.getPath() );
     File[] files = dir.listFiles();
     if ( files != null ) {
       for ( File file : files ) { // listFiles MAY NullPointerException
-        if (file.isFile()) addOptionalEntry(zos, file); 
+        if (file.isFile()) addOptionalEntry(zos, file, file.getPath() ); 
       }
     }
   }
 
-  boolean compressFiles( String zipname, List< File > files )
+  public boolean compressFiles( String zipname, List< File > files )
   {
     ZipOutputStream zos = null;
     boolean ret = true;
     try {
       zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( zipname ) ) );
-      for ( File file : files ) ret &= addEntry( zos, file );
+      for ( File file : files ) ret &= addEntry( zos, file, file.getPath() );
       // for ( File file : files ) TDFile.deleteFile( file );
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
@@ -156,7 +156,8 @@ public class Archiver
         if ( symbol.mEnabled ) {
           String filename = symbol.getThName();
           if ( filename.startsWith( "u:" ) ) filename = filename.substring( 2 );
-          addOptionalEntry( zos, TDFile.getFile( dirpath + filename ) );
+          String filepath = dirpath + filename;
+          addOptionalEntry( zos, TDFile.getFile( filepath ), filepath );
         }
       }
     } catch ( FileNotFoundException e ) {
@@ -250,15 +251,15 @@ public class Archiver
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
         String filename = TDPath.getSymbolFile( "points.zip" );
         if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.getSymbolPointDir() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ) );
+          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
         filename = TDPath.getSymbolFile( "lines.zip" );
         if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.getSymbolLineDir() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ) );
+          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
         filename = TDPath.getSymbolFile( "areas.zip" );
         if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.getSymbolAreaDir() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ) );
+          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
       }
 
@@ -275,71 +276,113 @@ public class Archiver
 
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) ); // N.B. plot file CAN be missing
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTh2File( survey, plt.name ) ) );
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotDxfFile( survey, plt.name ) ) );
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotSvgFile( survey, plt.name ) ) );
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotXviFile( survey, plt.name ) ) );
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotPngFile( survey, plt.name ) ) );
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTnlFile( survey, plt.name ) ) );
+        pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotTh2File( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotDxfFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotSvgFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotXviFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotPngFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotTnlFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
         if ( plt.type == PlotType.PLOT_PLAN ) {
-          addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyCsxFile( survey, plt.name ) ) );
+          pathname = TDPath.getSurveyCsxFile( survey, plt.name );
+          addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
         }
-	addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotShzFile( survey, plt.name ) ) );
+        pathname = TDPath.getSurveyPlotShzFile( survey, plt.name );
+	addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
       }
 
       // try overview exports
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTh2File( survey, "p" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotDxfFile( survey, "p" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotSvgFile( survey, "p" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotXviFile( survey, "p" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotShzFile( survey, "p" ) ) ); // zipped shp
+        pathname = TDPath.getSurveyPlotTh2File( survey, "p" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotDxfFile( survey, "p" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotSvgFile( survey, "p" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotXviFile( survey, "p" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotShzFile( survey, "p" ); // zipped shp
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
 
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTh2File( survey, "s" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotDxfFile( survey, "s" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotSvgFile( survey, "s" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotXviFile( survey, "s" ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotShzFile( survey, "s" ) ) ); // zipped shp
+        pathname = TDPath.getSurveyPlotTh2File( survey, "s" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotDxfFile( survey, "s" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotSvgFile( survey, "s" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotXviFile( survey, "s" );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        pathname = TDPath.getSurveyPlotShzFile( survey, "s" ); // zipped shp
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
-        addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPlotTdrFile( survey, plt.name ) ) );
+        pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name );
+        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
       }
 
-      addDirectory( zos, TDFile.getFile( TDPath.getSurveyPhotoDir( survey ) ) );
+      pathname = TDPath.getSurveyPhotoDir( survey );
+      addDirectory( zos, TDFile.getFile( pathname ), pathname );
 
-      addDirectory( zos, TDFile.getFile( TDPath.getSurveyAudioDir( survey ) ) );
+      pathname = TDPath.getSurveyAudioDir( survey );
+      addDirectory( zos, TDFile.getFile( pathname ), pathname );
 
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyThFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyCsvFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyCsxFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyCaveFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyCavFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyDatFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyDxfFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyGrtFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyGtxFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyKmlFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyJsonFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyPltFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyShzFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveySrvFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveySurFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveySvxFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyTroFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyTrbFile( survey ) ) );
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyTopFile( survey ) ) );
+      pathname = TDPath.getSurveyThFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyCsvFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyCsxFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyCaveFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyCavFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyDatFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyDxfFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyGrtFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyGtxFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyKmlFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyJsonFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyPltFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyShzFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveySrvFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveySurFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveySvxFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyTroFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyTrbFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      pathname = TDPath.getSurveyTopFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
 
-      addOptionalEntry( zos, TDFile.getFile( TDPath.getSurveyNoteFile( survey ) ) );
+      pathname = TDPath.getSurveyNoteFile( survey );
+      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
  
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
-      ret &= addEntry( zos, TDFile.getFile(pathname) );
+      ret &= addEntry( zos, TDFile.getFile(pathname), pathname );
       // Log.v("DistoX-ZIP", "archive post-sqlite returns " + ret );
 
       pathname = TDPath.getManifestFile();
       mApp.writeManifestFile();
-      ret &= addEntry( zos, TDFile.getFile(pathname) );
+      ret &= addEntry( zos, TDFile.getFile(pathname), pathname );
       // Log.v("DistoX-ZIP", "archive post-manifest returns " + ret );
 
       // ret = true;

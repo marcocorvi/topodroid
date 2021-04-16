@@ -44,7 +44,7 @@ import java.io.DataOutputStream;
 
 // import java.util.Locale;
 
-class DrawingCommandManager
+public class DrawingCommandManager
 {
   // FIXED_ZOOM 
   private boolean mFixedZoom = false;
@@ -212,7 +212,7 @@ class DrawingCommandManager
   // ----------------------------------------------------------------
   // used by DrawingDxf and DrawingSvg, and exportAsCsx
   // return a copy of the drawing objects
-  List< DrawingPath > getCommands()
+  public List< DrawingPath > getCommands()
   { 
     ArrayList< DrawingPath > ret = new ArrayList<>();
     synchronized( mScraps ) {
@@ -222,12 +222,12 @@ class DrawingCommandManager
   }
 
   // accessors used by DrawingDxf and DrawingSvg
-  List< DrawingPath >        getLegs()         { return mLegsStack;    } 
-  List< DrawingPath >        getSplays()       { return mSplaysStack;  }
-  List< DrawingStationName > getStations()     { return mStations;     } 
+  public List< DrawingPath >        getLegs()         { return mLegsStack;    } 
+  public List< DrawingPath >        getSplays()       { return mSplaysStack;  }
+  public List< DrawingStationName > getStations()     { return mStations;     } 
   // List< DrawingFixedName >   getFixeds()       { return mFixeds;     } 
   // List< DrawingStationPath > getUserStations() { return mUserStations; }
-  List< DrawingStationPath > getUserStations() 
+  public List< DrawingStationPath > getUserStations() 
   {
     ArrayList< DrawingStationPath > ret = new ArrayList<>();
     synchronized( mScraps ) {
@@ -986,7 +986,7 @@ class DrawingCommandManager
   void deleteSectionPoint( String scrap_name, EraseCommand cmd ) { mCurrentScrap.deleteSectionPoint( scrap_name, cmd ); }
 
   // called by DrawingSurface.getBitmap()
-  RectF getBitmapBounds()
+  public RectF getBitmapBounds()
   {
     // Log.v("DistoX", "get bitmap bounds. splays " + mSplaysStack.size() 
     //               + " legs " + mLegsStack.size() 
@@ -1525,7 +1525,7 @@ class DrawingCommandManager
   // }
 
   // get the bounding box and have scraps save their bbox
-  RectF getBoundingBox( )
+  public RectF getBoundingBox( )
   {
     RectF bbox = new RectF( 0, 0, 0, 0 );
     synchronized( mScraps ) {

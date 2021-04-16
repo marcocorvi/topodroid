@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.shp;
+package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;

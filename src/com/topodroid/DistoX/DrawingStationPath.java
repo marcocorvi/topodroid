@@ -87,7 +87,7 @@ public class DrawingStationPath extends DrawingPath
     setBBox( cx - 1, cx + 1, cy - 1, cy + 1 );
   }
 
-  String name() { return mName; }
+  public String name() { return mName; }
 
   // @implements IDrawingLink
   public float getLinkX() { return cx; }
@@ -150,7 +150,7 @@ public class DrawingStationPath extends DrawingPath
     }
   }
 
-  static DrawingStationPath loadDataStream( int version, DataInputStream dis )
+  public static DrawingStationPath loadDataStream( int version, DataInputStream dis )
   {
     try {
       float x = dis.readFloat();

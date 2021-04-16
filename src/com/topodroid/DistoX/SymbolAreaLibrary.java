@@ -29,7 +29,7 @@ import android.content.res.Resources;
 
 // import android.util.Log;
 
-class SymbolAreaLibrary extends SymbolLibrary
+public class SymbolAreaLibrary extends SymbolLibrary
 {
   static final private String[] DefaultAreas = {
     "blocks", "clay", "debris", "sand"

@@ -36,7 +36,7 @@ public class TDInstance
 
   public static long sid   = -1;   // id of the current survey
   public static long cid   = -1;   // id of the current calib
-  static String survey;   // current survey name
+  public static String survey;   // current survey name
   static String calib;    // current calib name
   static long secondLastShotId = 0L;
 

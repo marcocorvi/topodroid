@@ -3783,7 +3783,7 @@ public class DrawingWindow extends ItemDrawer
                 }
               } else {
     	        if ( mLandscape ) {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, null, null, mDrawingSurface.scrapIndex() );
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, -ys, xs, mPointScale, mDrawingSurface.scrapIndex() );
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );
@@ -3794,7 +3794,7 @@ public class DrawingWindow extends ItemDrawer
     	          }
                   mDrawingSurface.addDrawingPath( point );
     	        } else {
-                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, null, null, mDrawingSurface.scrapIndex() ); // no text, no options
+                  DrawingPointPath point = new DrawingPointPath( mCurrentPoint, xs, ys, mPointScale, mDrawingSurface.scrapIndex() ); // no text, no options
     	          if ( BrushManager.isPointOrientable( mCurrentPoint ) ) {
 		    if ( shift > TDSetting.mPointingRadius ) {
 		      float angle = TDMath.atan2d( x_shift, -y_shift );

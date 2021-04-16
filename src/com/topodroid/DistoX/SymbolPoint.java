@@ -20,6 +20,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
+import com.topodroid.io.dxf.SymbolPointDxf;
 // import com.topodroid.dxf.SymbolPointDxf;
 
 import android.util.Log;
@@ -39,7 +40,7 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
-class SymbolPoint extends Symbol
+public class SymbolPoint extends Symbol
 {
   static final private float dxfScale = 0.05f; // 1 / 20 TopoDroid has 20 units = 1 m
   static final private float csxScale = 5.00f;
@@ -82,9 +83,9 @@ class SymbolPoint extends Symbol
   @Override public String getName( ) { return mName; }
   @Override public String getThName( ) { return mThName; }
 
-  SymbolPointDxf getDxf() { return mDxf; }
-  String getSvg( ) { return mSvg; }
-  String getXvi( ) { return mXvi; }
+  public SymbolPointDxf getDxf() { return mDxf; }
+  public String getSvg( ) { return mSvg; }
+  public String getXvi( ) { return mXvi; }
 
   @Override public Path getPath( ) { return mPath; }
 
@@ -178,6 +179,7 @@ class SymbolPoint extends Symbol
     int color      = 0;
     Paint.Style style = Paint.Style.STROKE;
     String path    = null;
+    String options = null;
     int cnt   = 0;
 
     try {
@@ -223,6 +225,16 @@ class SymbolPoint extends Symbol
               if ( k < s ) {
                 group = vals[k];
               }
+            } else if ( vals[k].equals("options") ) {
+              StringBuilder sb = new StringBuilder();
+              boolean space = false;
+              for ( ++k; k < s; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  if ( space ) { sb.append(" "); } else { space = true; }
+                  sb.append( vals[k] );
+                }
+              }
+              options = sb.toString();
             } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
@@ -303,6 +315,7 @@ class SymbolPoint extends Symbol
                   mPaint  = makePaint( color, style );
                   makePointPath( path );
                   mOrigPath = new Path( mPath );
+                  mDefaultOptions = options;
                   // Log.v("DistoX-POINT", "Name " + mName + " ThName " + mThName );
                   // mPoint1 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 // } else if ( cnt == 1 ) {

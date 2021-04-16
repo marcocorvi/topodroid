@@ -39,8 +39,8 @@ import com.topodroid.num.NumSplay;
 import com.topodroid.num.NumBranch;
 import com.topodroid.mag.Geodetic;
 import com.topodroid.ptopo.PTFile;
-import com.topodroid.shp.ShpPointz;
-import com.topodroid.shp.ShpPolylinez;
+import com.topodroid.io.shp.ShpPointz;
+import com.topodroid.io.shp.ShpPolylinez;
 import com.topodroid.trb.TRobotPoint;
 import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
@@ -103,15 +103,16 @@ class TDExporter
     }
   }
 
-  static byte[] readFileBytes( File file )
+  // used by DrawingAudioPath, DrawingPhotoPath DrawingPointPath
+  static byte[] readFileBytes( String filepath )
   {
-    int len = (int)file.length();
+    int len = (int)TDFile.getFileLength( filepath );
     if ( len > 0 ) {
       byte[] buf = new byte[ len ];
       int read = 0;
       try {
-        // TDLog.Log( TDLog.LOG_IO, "read file bytes: " + file.getPath() );
-        FileInputStream fis = TDFile.getFileInputStream( file );
+        // TDLog.Log( TDLog.LOG_IO, "read file bytes: " + filepath );
+        FileInputStream fis = TDFile.getFileInputStream( filepath );
         BufferedInputStream bis = new BufferedInputStream( fis );
         while ( read < len ) {
           read += bis.read( buf, read, len-read );
@@ -213,9 +214,10 @@ class TDExporter
     pw.format("      <attachments>\n");
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
-      File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString(bid) ) );
-      if ( audiofile.exists() ) {
-        byte[] buf = readFileBytes( audiofile );
+      String audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString(bid) );
+      // File audiofile = TDFile.getFile( audiofilename );
+      if ( TDFile.hasFile( audiofilename ) ) {
+        byte[] buf = readFileBytes( audiofilename );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ) );
@@ -224,9 +226,10 @@ class TDExporter
     }
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
-      File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) ) );
-      if ( photofile.exists() ) {
-        byte[] buf = readFileBytes( photofile );
+      String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) );
+      // File photofile = TDFile.getFile( photofilename );
+      if ( TDFile.hasFile( photofilename ) ) {
+        byte[] buf = readFileBytes( photofilename );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ), photo.mComment );

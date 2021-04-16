@@ -1,21 +1,26 @@
-/* @file ShpPoint.java
+/* @file ShpStation.java
  *
  * @author marco corvi
  * @date mar 2019
  *
- * @brief TopoDroid drawing: shapefile 2D point
+ * @brief TopoDroid drawing: shapefile 2D station
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.shp;
+package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
+import com.topodroid.DistoX.DrawingPath;
 import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingPointLinePath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+import com.topodroid.DistoX.DrawingStationName;
 import com.topodroid.DistoX.DrawingUtil;
 
 import java.io.File;
@@ -32,30 +37,24 @@ import java.util.List;
 
 import android.util.Log;
 
-public class ShpPoint extends ShpObject
+public class ShpStation extends ShpObject
 {
-  public ShpPoint( String path, List< File > files ) // throws IOException
+  public ShpStation( String path, List< File > files ) // throws IOException
   {
     super( SHP_POINT, path, files );
   }
 
   // write headers for POINT
-  public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
+  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
-    // Log.v("DistoX", "SHP write points " + n_pts );
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 6;
+    int n_fld = 1;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
-    fields[1] = "orient";
-    fields[2] = "scale";
-    fields[3] = "levels";
-    fields[4] = "scrap";
-    fields[5] = "text";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 16, 6, 6, 6, 6, 128 };
+    byte[]   ftypes = { BYTEC };
+    int[]    flens  = { 16 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -67,7 +66,7 @@ public class ShpPoint extends ShpObject
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
     setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POINT " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // Log.v("DistoX", "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
     open();
@@ -76,34 +75,26 @@ public class ShpPoint extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POINT, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POINT, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "POINT done headers - nr " + pts.size() );
+    // Log.v("DistoX", "POINTZ done headers");
 
     int cnt = 0;
-    for ( DrawingPointPath pt : pts ) {
+    for ( DrawingStationName st : pts ) {
       int offset = 50 + cnt * shpRecLen; 
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      // Log.v("DistoX", "POINT " + cnt + ": " + pt.cx + " " + pt.cy + " cd " + cd + " sd " + sd + " scale " + xscale + " " + yscale );
-      double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
-      double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+      NumStation nst = st.getNumStation();
+      double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+      double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );
       shpBuffer.putDouble( y0 - yscale * y );
 
       writeShxRecord( offset, shpRecLen );
-      fields[0] = pt.getThName( );
-      fields[1] = Integer.toString( (int)pt.mOrientation ); 
-      fields[2] = Integer.toString( pt.getScale() );
-      fields[3] = Integer.toString( pt.mLevel );
-      fields[4] = Integer.toString( pt.mScrap ); 
-      fields[5] = pt.getPointText(); 
-      if ( fields[3] == null ) fields[3] = "";
-      if ( fields[4] == null ) fields[4] = "";
-      if ( fields[5] == null ) fields[5] = "";
+      fields[0] = st.getName();
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINT done records");
+    // Log.v("DistoX", "POINT station done records");
     close();
     return true;
   }
@@ -112,20 +103,20 @@ public class ShpPoint extends ShpObject
   @Override protected int getShpRecordLength( ) { return 14; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
+  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
-    DrawingPointPath pt = pts.get(0);
-    double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
-    double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+    DrawingStationName st = pts.get(0);
+    double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+    double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
     initBBox( x0 + xscale * x, y0 - yscale * y );
     for ( int k=pts.size() - 1; k>0; --k ) {
-      pt = pts.get(k);
-      x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
-      y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
+      st = pts.get(k);
+      x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
+      y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
       updateBBox( x0 + xscale * x, y0 - yscale * y );
     }
   }

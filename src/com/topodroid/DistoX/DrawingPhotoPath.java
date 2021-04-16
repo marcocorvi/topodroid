@@ -27,7 +27,7 @@ import java.util.Locale;
 
 import android.util.Base64;
 
-class DrawingPhotoPath extends DrawingPointPath
+public class DrawingPhotoPath extends DrawingPointPath
 {
   long mId; // id of the photo 
   // private Paint paint;
@@ -58,7 +58,7 @@ class DrawingPhotoPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
   }
 
-  static DrawingPhotoPath loadDataStream( int version, DataInputStream dis, float x, float y )
+  public static DrawingPhotoPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     // Log.v("DistoX", "Drawing Photo Path load data stream");
     float ccx, ccy;
@@ -110,9 +110,10 @@ class DrawingPhotoPath extends DrawingPointPath
 //   @Override
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
-//     File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
-//     if ( photofile.exists() ) {
-//       byte[] buf = TDExporter.readFileBytes( photofile );
+//     String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(mId) );
+//     // File photofile = TDFile.getFile( photofilename );
+//     if ( TDFile.hasFile( photofilename ) ) {
+//       byte[] buf = TDExporter.readFileBytes( photofilename );
 //       if ( buf != null ) {
 //         pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
 //           cave, branch );
@@ -136,9 +137,10 @@ class DrawingPhotoPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    File photofile = TDFile.getFile( TDPath.getSurveyJpgFile( survey, Long.toString(mId) ) );
-    if ( photofile.exists() ) {
-      byte[] buf = TDExporter.readFileBytes( photofile );
+    String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(mId) );
+    // File photofile = TDFile.getFile( photofilename );
+    if ( TDFile.hasFile( photofilename ) ) {
+      byte[] buf = TDExporter.readFileBytes( photofilename );
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"photo\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
         if ( bind != null ) pw.format(" bind=\"%s\" ", bind );

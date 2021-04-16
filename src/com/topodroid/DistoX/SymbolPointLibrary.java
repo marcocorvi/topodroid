@@ -29,7 +29,7 @@ import android.graphics.Path;
 import android.content.Context;
 import android.content.res.Resources;
 
-class SymbolPointLibrary extends SymbolLibrary
+public class SymbolPointLibrary extends SymbolLibrary
 {
   static final private String[] DefaultPoints = {
     "air-draught", "blocks", "clay", "continuation", "danger", "debris", "dig", "entrance", "helictite", "ice", "pebbles", "pillar", "popcorn", "root", "sand", "section", "snow", "stalactite", "stalagmite", "water-flow"

@@ -11,6 +11,8 @@
  */
 package com.topodroid.utils;
 
+import com.topodroid.DistoX.TDInstance;
+
 import java.io.File;
 // import java.io.FileFilter;
 // import java.io.FilenameFilter;
@@ -22,68 +24,51 @@ import java.io.IOException;
 
 public class TDFile
 {
-  // public class FileFilter extends java.io.FileFilter { }
-  // public class FilenameFilter extends java.io.FilenameFilter { }
+  public static File getManDir( )    { return new File( TDInstance.context.getFilesDir(), "man" ); }
+  public static File getManFile( String name )    { return new File( getManDir(), name ); }
+  public static boolean hasManFile( String name ) { return getManFile( name ).exists(); }
+  public static FileReader getManFileReader( String name ) throws IOException { return new FileReader( getManFile(name) ); }
  
-  public static File getFile( String name )
-  {
-    return new File( name );
-  }
+  public static boolean hasFile( String name ) { return name != null && (new File( name )).exists(); }
 
-  public static File getFile( String dirname, String name )
-  {
-    return new File( dirname, name );
-  }
+  public static long getFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
-  public static File getFile( File dir, String name )
-  {
-    return new File( dir, name );
-  }
+  // @param name     absolute filename
+  public static File getExternalFile( String name ) { return new File( name ); }
 
-  public static FileInputStream getFileInputStream( String name ) throws IOException
-  {
-    return new FileInputStream( name );
-  }
+  // @param name     TopoDroid-relative filename
+  public static File getFile( String name ) { return new File( name ); }
 
-  public static FileInputStream getFileInputStream( File file ) throws IOException
-  {
-    return new FileInputStream( file );
-  }
+  public static File getFile( String dirname, String name ) { return new File( dirname, name ); }
 
-  public static FileOutputStream getFileOutputStream( String name ) throws IOException
-  {
-    return new FileOutputStream( name );
-  }
+  // public static File getFile( File dir, String name )
+  // {
+  //   return new File( dir, name );
+  // }
 
-  public static FileOutputStream getFileOutputStream( File file ) throws IOException
-  {
-    return new FileOutputStream( file );
-  }
+  public static FileInputStream getFileInputStream( String name ) throws IOException { return new FileInputStream( name ); }
 
-  public static FileWriter getFileWriter( String name, boolean append ) throws IOException
-  {
-    return new FileWriter( name, append );
-  }
+  // public static FileInputStream getFileInputStream( File file ) throws IOException { return new FileInputStream( file ); }
 
-  public static FileWriter getFileWriter( String name ) throws IOException
-  {
-    return new FileWriter( name );
-  }
+  public static FileOutputStream getFileOutputStream( String name ) throws IOException { return new FileOutputStream( name ); }
 
-  public static FileWriter getFileWriter( File file ) throws IOException
-  {
-    return new FileWriter( file );
-  }
+  public static FileOutputStream getFileOutputStream( File file ) throws IOException { return new FileOutputStream( file ); }
 
-  public static FileReader getFileReader( String name ) throws IOException
-  {
-    return new FileReader( name );
-  }
+  public static FileWriter getFileWriter( String name, boolean append ) throws IOException { return new FileWriter( name, append ); }
 
-  public static FileReader getFileReader( File file ) throws IOException
+  public static FileWriter getFileWriter( String name ) throws IOException { return new FileWriter( name ); }
+
+  public static FileWriter getFileWriter( File file ) throws IOException { return new FileWriter( file ); }
+
+  public static FileReader getExternalFileReader( String dirname, String filename ) throws IOException
   {
+    File file = new File( dirname, filename );
     return new FileReader( file );
   }
+
+  public static FileReader getFileReader( String name ) throws IOException { return new FileReader( name ); }
+
+  public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 
   public static void deleteFile( File f ) // DistoX-SAF
   {

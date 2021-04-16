@@ -27,7 +27,7 @@ import android.graphics.Paint;
 import android.graphics.DashPathEffect;
 import android.content.res.Resources;
 
-class SymbolLineLibrary extends SymbolLibrary
+public class SymbolLineLibrary extends SymbolLibrary
 {
   static final private String[] DefaultLines = {
     "arrow", "border", "chimney", "pit", "presumed", "rock-border", "slope"

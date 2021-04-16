@@ -28,7 +28,7 @@ import java.io.IOException;
 import android.graphics.Paint;
 import android.graphics.Path;
 
-class SymbolLibrary
+public class SymbolLibrary
 {
   String mPrefix;
 
@@ -48,7 +48,7 @@ class SymbolLibrary
   // ----------------------------------------------------
 
   // used by DrawingDxf and DrawingSurface (for the palette)
-  ArrayList< Symbol > getSymbols() { return mSymbols; }
+  public ArrayList< Symbol > getSymbols() { return mSymbols; }
 
   boolean addSymbol( Symbol v )
   {
@@ -134,6 +134,8 @@ class SymbolLibrary
 
   // ===============================================
   // SymbolInterface
+
+  String getSymbolDefaultOptions( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getDefaultOptions(); }
 
   // this is used only by PT Cmap
   boolean hasSymbolByThName( String th_name ) { return ( null != get( th_name ) ); }

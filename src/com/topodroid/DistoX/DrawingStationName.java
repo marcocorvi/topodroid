@@ -203,7 +203,7 @@ public class DrawingStationName extends DrawingPointPath
 
   // used to make therion file from binary file
   //
-  static DrawingStationName loadDataStream( int version, DataInputStream dis )
+  public static DrawingStationName loadDataStream( int version, DataInputStream dis )
   {
     float ccx, ccy;
     String name;

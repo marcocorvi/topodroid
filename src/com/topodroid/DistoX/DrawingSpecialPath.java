@@ -30,7 +30,7 @@ import java.io.IOException;
 
 import java.util.Locale;
  
-class DrawingSpecialPath extends DrawingPath
+public class DrawingSpecialPath extends DrawingPath
 {
   static final int SPECIAL_ANY = 0; // generic
   static final int SPECIAL_DOT = 1; // leg x-section dot reference
@@ -58,7 +58,7 @@ class DrawingSpecialPath extends DrawingPath
     resetPath();
   }
 
-  static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
+  public static DrawingSpecialPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     try {
       int t = dis.readInt();

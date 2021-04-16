@@ -1,26 +1,20 @@
-/* @file ShpStation.java
+/* @file ShpPointz.java
  *
  * @author marco corvi
  * @date mar 2019
  *
- * @brief TopoDroid drawing: shapefile 2D station
+ * @brief TopoDroid drawing: shapefile 3D point
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.shp;
+package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingStationName;
 import com.topodroid.DistoX.DrawingUtil;
 
 import java.io.File;
@@ -37,15 +31,15 @@ import java.util.List;
 
 import android.util.Log;
 
-public class ShpStation extends ShpObject
+public class ShpPointz extends ShpObject
 {
-  public ShpStation( String path, List< File > files ) // throws IOException
+  public ShpPointz( String path, List< File > files ) // throws IOException
   {
-    super( SHP_POINT, path, files );
+    super( SHP_POINTZ, path, files );
   }
 
-  // write headers for POINT
-  public boolean writeStations( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
+  // write headers for POINTZ
+  public boolean writeStations( List< NumStation > pts ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
     if ( n_pts == 0 ) return false;
@@ -65,59 +59,55 @@ public class ShpStation extends ShpObject
     int shxLength = 50 + n_pts * shxRecLen;
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
-    setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    setBoundsStations( pts );
+    // Log.v("DistoX", "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
     // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength+8, 2*shxLength+8, dbfLength );
 
-    shpBuffer = writeShapeHeader( shpBuffer, SHP_POINT, shpLength );
-    shxBuffer = writeShapeHeader( shxBuffer, SHP_POINT, shxLength );
+    shpBuffer = writeShapeHeader( shpBuffer, SHP_POINTZ, shpLength );
+    shxBuffer = writeShapeHeader( shxBuffer, SHP_POINTZ, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
     // Log.v("DistoX", "POINTZ done headers");
 
     int cnt = 0;
-    for ( DrawingStationName st : pts ) {
+    for ( NumStation pt : pts ) {
       int offset = 50 + cnt * shpRecLen; 
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
-      shpBuffer.putInt( SHP_POINT );
-      NumStation nst = st.getNumStation();
-      double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
-      double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
-      shpBuffer.putDouble( x0 + xscale * x );
-      shpBuffer.putDouble( y0 - yscale * y );
+      shpBuffer.putInt( SHP_POINTZ );
+      Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
+      shpBuffer.putDouble( pt.e );
+      shpBuffer.putDouble( pt.s );
+      shpBuffer.putDouble( pt.v );
+      shpBuffer.putDouble( 0.0 );
 
       writeShxRecord( offset, shpRecLen );
-      fields[0] = st.getName();
+      fields[0] = pt.name;
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINT station done records");
+    // Log.v("DistoX", "POINTZ done records");
     close();
     return true;
   }
 
-  // record length [words]: 4 + 20/2
-  @Override protected int getShpRecordLength( ) { return 14; }
+  // record length [word]: 4 + 36/2
+  @Override protected int getShpRecordLength( ) { return 22; }
     
   // Utility: set the bounding box of the set of geometries
-  private void setBoundsPoints( List< DrawingStationName > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
+  private void setBoundsStations( List< NumStation > pts ) 
   {
     if ( pts.size() == 0 ) {
       xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
       return;
     }
-    DrawingStationName st = pts.get(0);
-    double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
-    double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
-    initBBox( x0 + xscale * x, y0 - yscale * y );
+    NumStation pt = pts.get(0);
+    initBBox( pt.e, pt.s, pt.v );
     for ( int k=pts.size() - 1; k>0; --k ) {
-      st = pts.get(k);
-      x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
-      y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
-      updateBBox( x0 + xscale * x, y0 - yscale * y );
+      pt = pts.get(k);
+      updateBBox( pt.e, pt.s, pt.v );
     }
   }
 }

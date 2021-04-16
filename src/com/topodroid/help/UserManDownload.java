@@ -12,6 +12,7 @@
 package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDToast;
@@ -65,7 +66,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
         InputStream in = http.getInputStream();
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
-       	File dir = TDPath.getManPath();
+       	File dir = TDFile.getManDir();
         if ( /* (dir != null) && */ ( dir.exists() || dir.mkdirs() ) ) {
           while ( ( ze = zin.getNextEntry() ) != null ) {
             String name = ze.getName();
@@ -74,7 +75,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
 	      if ( ! name.startsWith("README") ) {
-                File file = TDPath.getManFile( name );
+                File file = TDFile.getManFile( name );
 	        FileOutputStream fos = new FileOutputStream( file );
 	        // FileOutputStream fos = TDInstance.context.openFileOutput( TDPath.getManFileName( name ), Context.MODE_PRIVATE );
                 // int size = 0;

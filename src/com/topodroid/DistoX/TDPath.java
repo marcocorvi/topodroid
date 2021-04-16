@@ -508,7 +508,7 @@ public class TDPath
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
   public static String getZipFile( String name )    { return PATH_ZIP + name; }
-  static String getTdrFile( String name )    { return PATH_TDR + name; }
+  public static String getTdrFile( String name )    { return PATH_TDR + name; }
   static String getTdr3File( String name )   { return PATH_TDR3 + name; }
 
   public static String getTdconfigDir( ) { return PATH_TDCONFIG; }
@@ -546,10 +546,6 @@ public class TDPath
   public static String getDumpFile( String name )   { return PATH_DUMP + name; }
   public static String getBinFile( String name )    { return PATH_BIN + name; }
   static String getCCsvFile( String name )   { return PATH_CCSV + name; }
-  // public static String getManFile( String name )    { return PATH_MAN + name; }
-  // public static String getManPath( )    { return PATH_MAN; }
-  public static File getManFile( String name )    { return TDFile.getFile( getManPath(), name ); }
-  public static File getManPath( )    { return TDFile.getFile( TDInstance.context.getFilesDir(), "man" ); }
   public static String getManFileName( String name )    { return "man/" + name; }
 
   static String getNoteFile( String name )   { return APP_NOTE_PATH + name; }

@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.dxf;
 
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
@@ -25,11 +25,8 @@ import java.io.BufferedWriter;
 import java.util.Locale;
 import java.util.ArrayList;
 
-class SymbolPointDxf
+public class SymbolPointDxf
 {
-  final static int BY_BLOCK = 0;
-  final static int BY_LAYER = 256;
-
   public void line( String layer, float x0, float y0, float x1, float y1 )
   {
     startLine( layer );
@@ -433,7 +430,7 @@ class SymbolPointDxf
   // -------------------------------------------
   private ArrayList< DxfToken > mDxfTokens; // PRIVATE
 
-  SymbolPointDxf( )
+  public SymbolPointDxf( )
   {
     mDxfTokens = new ArrayList< DxfToken >();
   }
@@ -506,7 +503,7 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
-    DXF.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, x0, y0, 0.0f, 0 ); // prev point
     DXF.printXYZ( pw, x1, y1, 0.0f, 1 ); // current point
     addToken( new NormalToken( TOKEN_LINE, DXF.ACAD_9, sw.toString() ) );
@@ -522,7 +519,7 @@ class SymbolPointDxf
   //   // DXF.printInt(  pw, 40, 1 ); // start width
   //   // DXF.printInt(  pw, 41, 1 ); // end width
   //   DXF.printInt( pw, 66, 1 ); // group 1
-  //   DXF.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
+  //   DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
   //   // DXF.printInt( pw, 75, 0 ); // 6 cubic spline, 5 quad spline, 0 is the default
 
   private void addPolylineColor( int color )
@@ -575,7 +572,7 @@ class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, x, y, 0.0f, 0 );
     DXF.printFloat( pw, 40, r );
     addToken( new NormalToken( TOKEN_CIRCLE, DXF.ACAD_9, sw.toString() ) );
@@ -601,7 +598,7 @@ class SymbolPointDxf
     float yc = (y0+y1)/2;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printInt( pw, 62, BY_LAYER ); // color 0: by_block, 256: by_layer
+    DXF.printInt( pw, 62, DXF.BY_LAYER ); // color 0: by_block, 256: by_layer
     DXF.printXYZ( pw, xc, yc, 0.0f, 0 ); // CENTER
     DXF.printXYZ( pw, x0, yc, 0.0f, 1 ); // LEFT VERTEX
     DXF.printFloat( pw, 40, r  );        // ASPECT_RATIO

@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.dxf;
 
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDFile;
@@ -17,13 +17,39 @@ import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
-
-import android.util.Log;
-
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
+import com.topodroid.DistoX.DBlock;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.ICanvasCommand;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.LinePoint;
+import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.DistoX.DrawingIO;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+import com.topodroid.DistoX.DrawingPointLinePath;
+import com.topodroid.DistoX.DrawingSpecialPath;
+import com.topodroid.DistoX.DrawingAudioPath;
+import com.topodroid.DistoX.DrawingPhotoPath;
+import com.topodroid.DistoX.DrawingStationPath;
+import com.topodroid.DistoX.DrawingStationName;
+import com.topodroid.DistoX.DrawingLabelPath;
+import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.Symbol;
+import com.topodroid.DistoX.SymbolPoint;
+import com.topodroid.DistoX.SymbolPointLibrary;
+import com.topodroid.DistoX.SymbolLineLibrary;
+import com.topodroid.DistoX.SymbolAreaLibrary;
+// import com.topodroid.DistoX.DrawingPath;
+
+import android.util.Log;
 
 import java.util.Locale;
 
@@ -38,7 +64,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-class DrawingDxf
+public class DrawingDxf
 {
   static final private float POINT_SCALE   = 10.0f; // scale of point icons: only ACAD_6
   // the next three are for text
@@ -61,7 +87,7 @@ class DrawingDxf
   {
     float bezier_step = TDSetting.getBezierStep();
     int npt = 0;
-    LinePoint p = line.mFirst;
+    LinePoint p = line.first();
     float x0 = p.x;
     float y0 = p.y;
     ++ npt;
@@ -90,7 +116,7 @@ class DrawingDxf
                                     String layer, boolean closed, float xoff, float yoff )
   {
     float bezier_step = TDSetting.getBezierStep();
-    LinePoint p = line.mFirst;
+    LinePoint p = line.first();
     float x0 = xoff + p.x;
     float y0 = yoff + p.y;
     if ( layer != null ) {
@@ -133,7 +159,7 @@ class DrawingDxf
       y0 = y3;
     }
     if ( closed ) {
-      p = line.mFirst;
+      p = line.first();
       if ( layer != null ) {
         handle = DXF.printLinePoint( pw, scale, handle, ref, layer, xoff+p.x, yoff+p.y );
       } else {
@@ -166,7 +192,7 @@ class DrawingDxf
   //   DXF.printInt( pw, 43, 1 ); // start width
   //   DXF.printInt( pw, 70, close ); // not closed
   //   DXF.printInt( pw, 90, line.size() ); // nr. of points
-  //   for (LinePoint p = line.mFirst; p != null; p = p.mNext ) { 
+  //   for (LinePoint p = line.first(); p != null; p = p.mNext ) { 
   //     DXF.printXY( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0 );
   //   }
   //   return handle;
@@ -175,7 +201,7 @@ class DrawingDxf
   static private boolean checkSpline( DrawingPointLinePath line )
   {
     if ( DXF.mVersion13_14 ) {
-      for ( LinePoint p = line.mFirst; p != null; p = p.mNext ) {
+      for ( LinePoint p = line.first(); p != null; p = p.mNext ) {
         if ( p.has_cp ) {
           return true;
         }
@@ -200,7 +226,7 @@ class DrawingDxf
 
     float xt=0, yt=0;
     int np = 2;
-    LinePoint p = line.mFirst; 
+    LinePoint p = line.first(); 
     LinePoint pn = p.mNext;
     if ( pn != null ) {
       if ( pn.has_cp ) {
@@ -255,7 +281,7 @@ class DrawingDxf
     }
     DXF.printInt( pw, 40, np-1 );
 
-    p = line.mFirst; 
+    p = line.first(); 
     xt = p.x;
     yt = p.y;
     DXF.printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );         // control points: 1 + 3 * (NP - 1) = 3 NP - 2
@@ -273,18 +299,18 @@ class DrawingDxf
     }
 /*
     if ( closed ) {
-      p = line.mFirst;
+      p = line.first();
       DXF.printXYZ( pw, (xt+xoff) * scale, -(yt+yoff) * scale, 0.0f, 0 );
       DXF.printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 0 );
     }
 */
 
-    for ( p = line.mFirst; p != null; p = p.mNext ) { 
+    for ( p = line.first(); p != null; p = p.mNext ) { 
       DXF.printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
     }
 /*
     if ( closed ) {
-      p = line.mFirst;
+      p = line.first();
       DXF.printXYZ( pw, (p.x+xoff) * scale, -(p.y+yoff) * scale, 0.0f, 1 );  // fit points: NP
     }
 */
@@ -292,7 +318,7 @@ class DrawingDxf
   }
 
 
-  static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  public static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     DXF.mVersion9  = (TDSetting.mAcadVersion == DXF.ACAD_9);
     DXF.mVersion13 = (TDSetting.mAcadVersion == DXF.ACAD_12);
@@ -362,7 +388,6 @@ class DrawingDxf
         handle = DXF.printLayer( pw2, handle, "AREA",    flag, color, DXF.lt_continuous ); ++color; // magenta
         handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
         
-        color = 10;
         if ( linelib != null ) { // always true
           for ( Symbol line : linelib.getSymbols() ) {
             String lname = "L_" + line.getThName().replace(':','-');
@@ -374,25 +399,23 @@ class DrawingDxf
                 ltype = DXF.lt_center;
               }
             }
+            color = DxfColor.rgbToIndex( line.getColor() );
             handle = DXF.printLayer( pw2, handle, lname, flag, color, ltype ); 
-            if ( ++color >= 256 ) color = 1;
           }
         }
 
-        color = 60;
         if ( arealib != null ) { // always true
-          for ( Symbol s : arealib.getSymbols() ) {
-            String aname = "A_" + s.getThName().replace(':','-');
+          for ( Symbol area : arealib.getSymbols() ) {
+            String aname = "A_" + area.getThName().replace(':','-');
+            color = DxfColor.rgbToIndex( area.getColor() );
             handle = DXF.printLayer( pw2, handle, aname, flag, color, DXF.lt_continuous ); 
-            if ( ++color >= 256 ) color = 1;
           }
         }
-        color = 80;
         if ( pointlib != null ) { // always true
           for ( Symbol point : pointlib.getSymbols() ) {
             String pname = "P_" + point.getThName().replace(':','-');
+            color = DxfColor.rgbToIndex( point.getColor() );
             handle = DXF.printLayer( pw2, handle, pname, flag, color, DXF.lt_continuous ); 
-            if ( ++color >= 256 ) color = 1;
           }
         }
         out.write( sw2.getBuffer().toString() );

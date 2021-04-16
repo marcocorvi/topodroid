@@ -75,7 +75,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     mLevel     = BrushManager.getLineLevel( mLineType );
   }
 
-  static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
+  public static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type;
     boolean closed, reversed;

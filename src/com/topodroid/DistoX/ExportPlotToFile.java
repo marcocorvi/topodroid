@@ -15,6 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.io.dxf.DrawingDxf;
+import com.topodroid.io.shp.DrawingShp;
 
 import android.util.Log;
 

@@ -118,7 +118,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
 
-  static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
+  public static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type, cnt;
     boolean visible;

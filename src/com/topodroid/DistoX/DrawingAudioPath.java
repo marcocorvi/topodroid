@@ -26,7 +26,7 @@ import java.util.Locale;
 // import android.util.Log;
 import android.util.Base64;
 
-class DrawingAudioPath extends DrawingPointPath
+public class DrawingAudioPath extends DrawingPointPath
 {
   long mId;
   // private Paint paint;
@@ -57,7 +57,7 @@ class DrawingAudioPath extends DrawingPointPath
     // paint.setStrokeWidth( WIDTH_CURRENT );
   }
 
-  static DrawingAudioPath loadDataStream( int version, DataInputStream dis, float x, float y )
+  public static DrawingAudioPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     // int type;
     try {
@@ -106,9 +106,10 @@ class DrawingAudioPath extends DrawingPointPath
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
 //     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
-//     File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
-//     if ( audiofile.exists() ) {
-//       byte[] buf = TDExporter.readFileBytes( audiofile );
+//     Struing audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString( mId ) );
+//     // File audiofile = TDFile.getFile( audiofilename );
+//     if ( TDFile.hasFile audiofilename ) ) {
+//       byte[] buf = TDExporter.readFileBytes( audiofilename );
 //       if ( buf != null ) {
 //         pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
 //           cave, branch );
@@ -130,9 +131,10 @@ class DrawingAudioPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    File audiofile = TDFile.getFile( TDPath.getSurveyAudioFile( survey, Long.toString( mId ) ) );
-    if ( audiofile.exists() ) {
-      byte[] buf = TDExporter.readFileBytes( audiofile );
+    String audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString( mId ) );
+    // File audiofile = TDFile.getFile( audiofilename );
+    if ( TDFile.hasFile( audiofilename ) ) {
+      byte[] buf = TDExporter.readFileBytes( audiofilename );
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"audio\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
         if ( bind != null ) pw.format(" bind=\"%s\" ", bind );

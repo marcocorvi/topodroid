@@ -592,7 +592,7 @@ public class DrawingIO
   // stations: U
   // E
 
-  static int skipTdrHeader( DataInputStream dis )
+  public static int skipTdrHeader( DataInputStream dis )
   {
     int what, type; // , dir;
     int version = 0;
@@ -1653,7 +1653,7 @@ public class DrawingIO
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
-        FileInputStream fis = TDFile.getFileInputStream( file );
+        FileInputStream fis = TDFile.getFileInputStream( file.getPath() );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
         while ( todo ) {
@@ -1804,8 +1804,7 @@ public class DrawingIO
 
   static private void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind /*, int format */ )
   {
-    File file = TDFile.getFile( filename );
-    if ( ! file.exists() ) return;
+    if ( ! TDFile.hasFile( filename ) ) return;
     int version = 0;
     // boolean in_scrap = false;
     // int scrap_index = 0;
@@ -1820,7 +1819,7 @@ public class DrawingIO
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
-        FileInputStream fis = TDFile.getFileInputStream( file );
+        FileInputStream fis = TDFile.getFileInputStream( filename );
         DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
         while ( todo ) {
