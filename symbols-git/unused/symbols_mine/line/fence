@@ -3,6 +3,7 @@ name fence
 name-pt cerca
 name-ru ограждение
 name-ro gard
+name-hu kerítés
 th_name u:fence
 group fence
 color 0xff00ff 
