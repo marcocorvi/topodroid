@@ -3,6 +3,7 @@ name pipe
 name-pt cano
 name-ru труба
 name-ro țeavă
+name-hu cső
 th_name u:pipe
 group pipe
 color 0x33ff66 0xff
