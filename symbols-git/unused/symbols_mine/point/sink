@@ -3,6 +3,7 @@ name sink
 name-pt sumidouro
 name-ru сток
 name-ro scurgere
+name-hu víznyelő
 th_name u:sink
 color 0x33ccff
 csurvey 0 0 0
