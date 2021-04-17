@@ -3,6 +3,7 @@ name fan
 name-pt ventilador
 name-ru вентилятор
 name-ro ventilator
+name-hu ventillátor
 th_name u:fan
 color 0xffffff
 csurvey 0 0 0 
