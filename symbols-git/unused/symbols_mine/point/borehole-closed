@@ -3,6 +3,7 @@ name borehole-closed
 name-pt sondagem_fechada
 name-ru скважина_закрытая
 name-ro foraj-închis
+name-hu fúrólyuk-lezárt
 th_name u:borehole-closed
 color 0xff9933
 csurvey 0 0 0
