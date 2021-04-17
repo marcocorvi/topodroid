@@ -158,7 +158,7 @@ public class DataHelper extends DataSetObservable
     };
 
   static final private String[] mPlotFieldsFull =
-    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap" };
+    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap", "intercept" };
   static final private String[] mPlotFields =
     { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap", "intercept" };
 
@@ -3934,7 +3934,7 @@ public class DataHelper extends DataSetObservable
 
   private ContentValues makePlotContentValues( long sid, long id, String name, long type, long status, String start, String view,
                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                          String hide, String nick, int orientation, int maxscrap )
+                          String hide, String nick, int orientation, int maxscrap, double intercept )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -3952,7 +3952,8 @@ public class DataHelper extends DataSetObservable
     cv.put( "hide",     hide );
     cv.put( "nick",     nick );
     cv.put( "orientation", orientation );
-    cv.put( "maxscrap", maxscrap );
+    cv.put( "maxscrap",    maxscrap );
+    cv.put( "intercept",   intercept );
     return cv;
   }
 
@@ -3968,7 +3969,7 @@ public class DataHelper extends DataSetObservable
     if ( view == null ) view = TDString.EMPTY;
     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
     // maxscrap = 0
-    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, 0 );
+    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, 0, -1 );
     if ( ! doInsert( PLOT_TABLE, cv, "plot insert" ) ) { // failed
       id = -1L;
     }
@@ -4582,7 +4583,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d, %.2f );\n",
              PLOT_TABLE,
              sid,
              cursor.getLong(0),    // plot id
@@ -4599,7 +4600,8 @@ public class DataHelper extends DataSetObservable
              TDString.escape( cursor.getString(11) ), // hide
              TDString.escape( cursor.getString(12) ), // nick
              cursor.getLong(13),   // orientation
-             cursor.getLong(14)    // maxscrap
+             cursor.getLong(14),   // maxscrap
+             cursor.getDouble(15)
            );
          } while (cursor.moveToNext());
        }
@@ -4875,8 +4877,9 @@ public class DataHelper extends DataSetObservable
                String nick  = ( db_version > 30 )? TDString.unescape( scanline1.stringValue( ) ) : TDString.EMPTY;
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue()) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
 	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue()) : 0; // default 0
+               double intercept = (db_version > 42)? scanline1.doubleValue() : 0;
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
-               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap );
+               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap, intercept );
                myDB.insert( PLOT_TABLE, null, cv ); 
                // TDLog.Log( TDLog.LOG_DB, "load from file plot " + sid + " " + id + " " + start + " " + name );
                // Log.v( "DistoX_DB", "load from file plot " + sid + " " + id + " " + start + " " + name + " success " + success );
