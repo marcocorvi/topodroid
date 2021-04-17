@@ -2,6 +2,7 @@ symbol point
 name overcast
 name-pt sobreposto
 name-ru обшивка
+name-hu átfedve
 th_name u:overcast
 color 0xffffff
 csurvey 0 0 0
