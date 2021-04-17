@@ -3554,6 +3554,7 @@ public class DrawingWindow extends ItemDrawer
                                                             mCurrentAreaPath.mPrefix, 
                                                             TDSetting.mAreaBorder, 
                                                             mDrawingSurface.scrapIndex() );
+                area.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                 if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
                   LinePoint lp = mCurrentAreaPath.mFirst; 
                   float yy = lp.y;
@@ -3616,6 +3617,8 @@ public class DrawingWindow extends ItemDrawer
                     Point2D p0 = c.getPoint(0);
                     if ( mSymbol == SymbolType.LINE ) {
                       DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+                      lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
+
                       lp1.addStartPoint( p0.x, p0.y );
                       for (int k=0; k<k0; ++k) {
                         c = curves.get(k);
@@ -3643,6 +3646,7 @@ public class DrawingWindow extends ItemDrawer
                     } else { //  mSymbol == SymbolType.AREA
                       DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
                                                                 mDrawingSurface.scrapIndex() ); 
+                      ap.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=0; k<k0; ++k) {
                         c = curves.get(k);
@@ -3677,6 +3681,7 @@ public class DrawingWindow extends ItemDrawer
                     Point2D p0 = points.get(0);
                     if ( mSymbol == SymbolType.LINE ) {
                       DrawingLinePath lp1 = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+                      lp1.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
                       lp1.addStartPoint( p0.x, p0.y );
                       for (int k=1; k<k0; ++k) {
                         p0 = points.get(k);
@@ -3701,6 +3706,7 @@ public class DrawingWindow extends ItemDrawer
                     } else { //  mSymbol == SymbolType.AREA
                       DrawingAreaPath ap = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, 
                                                                 mDrawingSurface.scrapIndex() ); 
+                      ap.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                       ap.addStartPoint( p0.x, p0.y );
                       for (int k=1; k<k0; ++k) {
                         p0 = points.get(k);
@@ -3931,12 +3937,13 @@ public class DrawingWindow extends ItemDrawer
       mPointCnt = 0;
       if ( mSymbol == SymbolType.LINE ) {
         mCurrentLinePath = new DrawingLinePath( mCurrentLine, mDrawingSurface.scrapIndex() );
+        // mCurrentLinePat.setOptions( BrushManager.getLineDefaultOptions( mCurrentLine ) );
         mCurrentLinePath.addStartPoint( xs, ys );
         mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
       } else if ( mSymbol == SymbolType.AREA ) {
         // TDLog.Log( TDLog.LOG_PLOT, "onTouch ACTION_DOWN area type " + mCurrentArea );
-        mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(),
-          mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() );
+        mCurrentAreaPath = new DrawingAreaPath( mCurrentArea, mDrawingSurface.getNextAreaIndex(), mName+"-a", TDSetting.mAreaBorder, mDrawingSurface.scrapIndex() );
+        // mCurrentAreaPat.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
         mCurrentAreaPath.addStartPoint( xs, ys );
         // Log.v("DistoX", "start area start " + xs + " " + ys );
         mCurrentBrush.mouseDown( mDrawingSurface.getPreviewPath(), xc, yc );
@@ -6959,7 +6966,10 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hpos.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
+      int idx = BrushManager.getLineWallIndex();
+      DrawingLinePath path = new DrawingLinePath( idx, mDrawingSurface.scrapIndex() );
+      path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
+
       path.addStartPoint( xx, yy );
       for ( DLNSideList hp : dln_wall.mPosHull ) {
         side = hp.side;
@@ -6978,7 +6988,10 @@ public class DrawingWindow extends ItemDrawer
       DLNSide side = hneg.side;
       float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
       float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
+      int idx = BrushManager.getLineWallIndex();
+      DrawingLinePath path = new DrawingLinePath( idx, mDrawingSurface.scrapIndex() );
+      path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
+
       path.addStartPoint( xx, yy );
       for ( DLNSideList hn : dln_wall.mNegHull ) {
         side = hn.side;
@@ -7004,6 +7017,7 @@ public class DrawingWindow extends ItemDrawer
     float xx = DrawingUtil.toSceneX( side.mP1.x, side.mP1.y );
     float yy = DrawingUtil.toSceneY( side.mP1.x, side.mP1.y );
     DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
+    path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
     path.addStartPoint( xx, yy );
     int size = dln_wall.hullSize();
     for ( int k=0; k<size; ++k ) {
@@ -7039,7 +7053,10 @@ public class DrawingWindow extends ItemDrawer
         y0 = DrawingUtil.toSceneY( x0, y0 );
         x1 = DrawingUtil.toSceneX( x1, y1 );
         y1 = DrawingUtil.toSceneY( x1, y1 );
-        DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
+        int idx = BrushManager.getLineWallIndex();
+        DrawingLinePath path = new DrawingLinePath( idx, mDrawingSurface.scrapIndex() );
+        path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
+
         path.addStartPoint( x0, y0 );
         addPointsToWallLine( path, x0, y0, xx, yy );
         addPointsToWallLine( path, xx, yy, x1, y1 );
@@ -7054,7 +7071,10 @@ public class DrawingWindow extends ItemDrawer
       float y2 = y0 + uu.y * p1.x + vv.y * p1.y;
       xx = DrawingUtil.toSceneX( x2, y2 );
       yy = DrawingUtil.toSceneY( x2, y2 );
-      DrawingLinePath path = new DrawingLinePath( BrushManager.getLineWallIndex(), mDrawingSurface.scrapIndex() );
+      int idx = BrushManager.getLineWallIndex();
+      DrawingLinePath path = new DrawingLinePath( idx, mDrawingSurface.scrapIndex() );
+      path.setOptions( BrushManager.getLineDefaultOptions( idx ) );
+
       path.addStartPoint( xx, yy );
       for ( int k=1; k<pts.size(); ++k ) {
         p1 = pts.get(k);

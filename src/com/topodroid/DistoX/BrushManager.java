@@ -111,6 +111,8 @@ public class BrushManager
   static String getLineWallGroup() { return (mLineLib == null)? "wall": getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
 
   static String getPointDefaultOptions( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolDefaultOptions(idx ); }
+  static String getLineDefaultOptions( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolDefaultOptions(idx ); }
+  static String getAreaDefaultOptions( int idx ) { return (mAreaLib == null)? null : mAreaLib.getSymbolDefaultOptions(idx ); }
 
   static boolean hasPoint( int idx ) { return mPointLib != null && idx < mPointLib.size(); }
   static boolean hasLine( int idx )  { return mLineLib  != null && idx < mLineLib.size(); }

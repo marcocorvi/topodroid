@@ -345,6 +345,9 @@ class Scrap
     boolean splitted = false;
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    line1.setOptions( line.getOptions() );
+    line2.setOptions( line.getOptions() );
+
     try {
       splitted = line.splitAt( lp, line1, line2, false );
     } catch ( OutOfMemoryError e ) {
@@ -427,6 +430,9 @@ class Scrap
   {
     DrawingLinePath line1 = new DrawingLinePath( line.mLineType, mScrapIdx );
     DrawingLinePath line2 = new DrawingLinePath( line.mLineType, mScrapIdx );
+    line1.setOptions( line.getOptions() );
+    line2.setOptions( line.getOptions() );
+
     boolean splitted = false;
     try {
       splitted = line.splitAt( lp, line1, line2, true );

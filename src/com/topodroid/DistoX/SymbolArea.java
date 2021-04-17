@@ -204,6 +204,7 @@ class SymbolArea extends Symbol
     mXMode = TileMode.REPEAT;
     mYMode = TileMode.REPEAT;
     int[] pxl = null;
+    String options = null;
 
     try {
       // FileReader fr = TDFile.getFileReader( filename );
@@ -245,6 +246,16 @@ class SymbolArea extends Symbol
   	      if ( k < s ) {
   	        group = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
   	      }
+            } else if ( vals[k].equals("options") ) {
+              StringBuilder sb = new StringBuilder();
+              boolean space = false;
+              for ( ++k; k < s; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  if ( space ) { sb.append(" "); } else { space = true; }
+                  sb.append( vals[k] );
+                }
+              }
+              options = sb.toString();
             } else if ( vals[k].equals("csurvey") ) {
               // csurvey <layer> <category> <pen_type> <brush_type>
             } else if ( vals[k].equals("level") ) {
@@ -335,6 +346,7 @@ class SymbolArea extends Symbol
                 mName   = name;
                 mThName = th_name;
                 mGroup  = group;
+                mDefaultOptions = options;
                 mPaint  = new Paint();
                 mPaint.setDither(true);
                 mColor = (alpha << 24) | color;

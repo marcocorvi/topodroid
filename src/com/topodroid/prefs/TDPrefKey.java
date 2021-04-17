@@ -111,7 +111,7 @@ public class TDPrefKey
     "DISTOX_STATION_NAMES", // station names: 0 alphanumeric, 1 numbers
     "DISTOX_INIT_STATION",      // 3 * // default initial station name
     "DISTOX_THUMBNAIL",                // size of photo thumbnails
-    "DISTOX_DATA_BACKUP", //
+    // "DISTOX_DATA_BACKUP", // export data when shot window is closed
     "DISTOX_EDITABLE_STATIONS",
     "DISTOX_FIXED_ORIGIN",
     "DISTOX_SHARED_XSECTIONS",  // 7 // whether at-station X-sections are shared among plots
@@ -128,7 +128,7 @@ public class TDPrefKey
     R.string.pref_station_names_title,
     R.string.pref_init_station_title,
     R.string.pref_thumbnail_title,
-    R.string.pref_data_backup_title,
+    // R.string.pref_data_backup_title,
     R.string.pref_editable_stations_title,
     R.string.pref_fixed_origin_title,
     R.string.pref_shared_xsections_title,
@@ -144,7 +144,7 @@ public class TDPrefKey
     R.string.pref_station_names_summary,
     R.string.pref_init_station_summary,
     R.string.pref_thumbnail_summary,  
-    R.string.pref_data_backup_summary,
+    // R.string.pref_data_backup_summary,
     R.string.pref_editable_stations_summary,
     R.string.pref_fixed_origin_summary,
     R.string.pref_shared_xsections_summary,
@@ -160,7 +160,7 @@ public class TDPrefKey
     "alpha",
     TDString.ZERO,
     "200",
-    FALSE,
+    // FALSE,
     FALSE,
     FALSE,
     FALSE,
@@ -379,8 +379,8 @@ public class TDPrefKey
 
   // ==============================================================================
   public static String[] EXPORT = { // [16] [32]
-    "DISTOX_EXPORT_SHOTS",    // 0 // default data export
-    "DISTOX_EXPORT_PLOT",          // default plot export
+    // "DISTOX_EXPORT_SHOTS",    // 0 // default data export
+    // "DISTOX_EXPORT_PLOT",          // default plot export
     "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
@@ -401,8 +401,8 @@ public class TDPrefKey
   };
 
   static int[] EXPORTtitle = {
-    R.string.pref_export_shots_title,
-    R.string.pref_export_plot_title,
+    // R.string.pref_export_shots_title,
+    // R.string.pref_export_plot_title,
     R.string.pref_ortho_lrud_title,
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
@@ -422,8 +422,8 @@ public class TDPrefKey
   };
 
   static int[] EXPORTdesc = {
-    R.string.pref_export_shots_summary,
-    R.string.pref_export_plot_summary,
+    // R.string.pref_export_shots_summary,
+    // R.string.pref_export_plot_summary,
     R.string.pref_ortho_lrud_summary,
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
@@ -443,8 +443,8 @@ public class TDPrefKey
   };
 
   public static String[] EXPORTdef = {
-    "-1",
-    "-1",
+    // "-1",
+    // "-1",
     TDString.ZERO,
     TDString.ZERO,
     TDString.NINETY,

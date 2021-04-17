@@ -175,6 +175,7 @@ class SymbolLine extends Symbol
     PathDashPathEffect rev_effect = null;
     float xmin=0, xmax=0;
     float ymin=0, ymax=0;
+    String options = null;
 
     try {
       // FileReader fr = TDFile.getFileReader( filename );
@@ -222,6 +223,16 @@ class SymbolLine extends Symbol
   	      if ( k < s ) {
   	        group = vals[k];
   	      }
+            } else if ( vals[k].equals("options") ) {
+              StringBuilder sb = new StringBuilder();
+              boolean space = false;
+              for ( ++k; k < s; ++k ) {
+                if ( vals[k].length() > 0 ) {
+                  if ( space ) { sb.append(" "); } else { space = true; }
+                  sb.append( vals[k] );
+                }
+              }
+              options = sb.toString();
             } else if ( vals[k].equals("level") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
@@ -453,6 +464,7 @@ class SymbolLine extends Symbol
                 mName   = name;
                 mThName = th_name;
                 mGroup  = group;
+                mDefaultOptions = options;
                 mPaint  = new Paint();
                 mPaint.setDither(true);
                 mPaint.setColor( color );

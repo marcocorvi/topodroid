@@ -380,6 +380,7 @@ public class TDPath
     APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
     APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
     APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+
     /* LOAD_MISSING
     APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save/";
     APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
@@ -427,16 +428,28 @@ public class TDPath
 
   public static void checkPath( String filename )
   {
-    if ( filename == null ) return;
+    if ( filename == null ) {
+      Log.v("DistoX", "check path: null string" );
+      return;
+    }
     checkPath( TDFile.getFile( filename ) ); // DistoX-SAF
   }
 
   static private void checkPath( File fp ) // DistoX-SAF
   {
-    if ( fp == null || fp.exists() ) return;
+    if ( fp == null || fp.exists() ) {
+      Log.v("DistoX", "check path: file null or exists" );
+      return;
+    }
     File fpp = fp.getParentFile();
-    if ( fpp.exists() ) return;
-    if ( ! fpp.mkdirs() ) TDLog.Error("mkdir error");
+    if ( fpp.exists() ) {
+      Log.v("DistoX", "check path: parent file exists" );
+      return;
+    }
+    if ( ! fpp.mkdirs() ) {
+      Log.v("DistoX", "check path: failed mkdirs" );
+      TDLog.Error("mkdirs error");
+    }
   }
 
   public static String getLogFilename()

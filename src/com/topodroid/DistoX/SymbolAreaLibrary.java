@@ -165,7 +165,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
     }
   }
 
-  /* LOAD_MISSING
+  /* LOAD_MISSING - APP_SAVE SYMBOLS
   boolean tryLoadMissingArea( String thname )
   {
     String locale = "name-" + Locale.getDefault().toString().substring(0,2);
@@ -173,7 +173,6 @@ public class SymbolAreaLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     Symbol symbol = getSymbolByThName( thname );
-    // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname; 
       File file = TDFile.getFile( TDPath.getSymbolSaveAreaPath( filename ) );

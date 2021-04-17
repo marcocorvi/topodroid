@@ -593,7 +593,7 @@ public class DrawingPath extends RectF
 
   void addOption( String option ) 
   {
-    // Log.v("DistoX", "add option <" + option +">" );
+    if ( option == null ) return;
     if ( mOptions == null ) {
       mOptions = option;
     } else {
@@ -617,6 +617,8 @@ public class DrawingPath extends RectF
   }
 
   public String getOptionString() { return ( mOptions == null )? "" : mOptions; }
+
+  public String getOptions() { return mOptions; }
 
   void setOptions( String options ) { mOptions = options; }
 

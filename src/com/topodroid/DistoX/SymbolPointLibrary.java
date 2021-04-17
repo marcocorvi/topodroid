@@ -184,7 +184,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     }
   }
 
-  /* LOAD_MISSING
+  /* LOAD_MISSING - APP_SAVE SYMBOLS
   // thname   symbol th-name
   boolean tryLoadMissingPoint( String thname )
   {
@@ -195,7 +195,6 @@ public class SymbolPointLibrary extends SymbolLibrary
 
     if ( isSymbolEnabled( thname ) ) return true;
     Symbol symbol = getSymbolByThName( thname );
-    // APP_SAVE SYMBOLS
     if ( symbol == null ) {
       String filename = thname.startsWith("u:")? thname.substring(2) : thname ;
       // Log.v( "DistoX", "load missing point " + thname + " filename " + filename );

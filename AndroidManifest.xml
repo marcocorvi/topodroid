@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="501036"
-      android:versionName="5.1.36"
+      android:versionCode="501039"
+      android:versionName="5.1.39"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -25,6 +25,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
+       android:maxSdkVersion="29"
        android:targetSdkVersion="29"
     />
 
@@ -36,6 +37,7 @@
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />

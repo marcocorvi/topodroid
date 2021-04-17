@@ -34,7 +34,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   @Override
   protected Boolean doInBackground( Void... arg )
   {
-    TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
+    // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
     return mArchiver.archive( mApp );
   }
 
