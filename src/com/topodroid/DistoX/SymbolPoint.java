@@ -583,7 +583,7 @@ public class SymbolPoint extends Symbol
             y2 = Float.parseFloat( vals[k] ); 
             mPath.arcTo( new RectF(x0*unit, y0*unit, x1*unit, y1*unit), x2, y2 );
 
-            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2+90, y2 );
+            mDxf.arc( pname, (x0+x1)/2*dxfScale, -(y0+y1)/2*dxfScale, x1*dxfScale, x2, y2 );
 
 	    // TODO arcTo for XVI
 
