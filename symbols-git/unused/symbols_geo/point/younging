@@ -1,6 +1,7 @@
 symbol point
 name younging
 name-ro tânăr
+name-hu fiatal
 th_name younging
 color 0xffffff
 csurvey 0 0 0

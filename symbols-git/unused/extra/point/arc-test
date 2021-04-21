@@ -2,6 +2,7 @@ symbol point
 name arc-test
 name-ru арк_тест
 name-ro arc-test
+name-hu ív-teszt
 th_name arc-test
 color 0xffffff
 csurvey 0 0 0

@@ -3,6 +3,7 @@ name switch
 name-pt troca
 name-ru переключатель
 name-ro întrerupător
+name-hu kapcsoló
 th_name u:switch
 color 0xffffff
 csurvey 0 0 0

@@ -3,6 +3,7 @@ name curtain
 name-pt cortina
 name-ru занавесь
 name-ro draperie
+name-hu függöny
 th_name u:curtain
 color 0xff0000
 csurvey 0 0 0

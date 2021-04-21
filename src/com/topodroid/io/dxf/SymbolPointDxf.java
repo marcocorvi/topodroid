@@ -582,8 +582,8 @@ public class SymbolPointDxf
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw ); // DXF writer
-    DXF.printFloat( pw, 50, 180+a1 );     // ANGLES
-    DXF.printFloat( pw, 51, 180+a1+a2 );
+    DXF.printFloat( pw, 50, -a1-a2 );     // ANGLES DXF negative direction
+    DXF.printFloat( pw, 51, -a1 );
     addToken( new NormalToken( TOKEN_ARC, DXF.ACAD_9, sw.toString() ) );
   }
 
