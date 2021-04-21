@@ -1242,14 +1242,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
+        (new SavePlotFileTask( mActivity, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + psd2.fname );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
+      (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.fname );
       -- mNrSaveTh2Task;
@@ -6027,13 +6027,17 @@ public class DrawingWindow extends ItemDrawer
     int suffix = PlotSave.EXPORT;
     int azimuth = 0;
     String name = null;
+    PlotInfo info = null;
     if ( type == PlotType.PLOT_PLAN ) {
       name = mFullName1;
+      info = mPlot1;
     } else if ( PlotType.isProfile( type ) ) {
       azimuth = (int)mPlot2.azimuth;
       name = mFullName2;
+      info = mPlot2;
     } else {
       name = mFullName3;
+      info = mPlot3;
     }
     final String filename = name;
     // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
@@ -6055,7 +6059,7 @@ public class DrawingWindow extends ItemDrawer
     }
     try { 
       // Log.v("DistoXX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
-      (new SavePlotFileTask( mActivity, this, th2Handler, mNum, manager, name, type, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( mActivity, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -7407,8 +7411,8 @@ public class DrawingWindow extends ItemDrawer
     String name = mSplitName + ( ( mType == PlotType.PLOT_PLAN )? "p" : "s" );
     String fullname = TDInstance.survey + "-" + name;
     // Log.v("DistoX-SPLIT", "Split Plot " + paths.size() + " paths: " + name );
-    // PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, fullname, mType, azimuth ) ).execute();
+    PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
+    (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, info, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager

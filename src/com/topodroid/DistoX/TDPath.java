@@ -106,17 +106,17 @@ public class TDPath
             : EXTERNAL_STORAGE_PATH_11;
 
   private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
-  private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + "/TopoDroid/";
-  private static String PATH_BASE     = PATH_BASEDIR + "/TopoDroid/";
+  private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + File.separator + "TopoDroid/";
+  private static String PATH_BASE     = PATH_BASEDIR + File.separator + "TopoDroid/";
 
-  private static String PATH_BIN  = PATH_DEFAULT + "bin/";    // Firmwares  
-  private static String PATH_CCSV = PATH_DEFAULT + "ccsv/";  // calib CSV text
+  private static String PATH_BIN  = PATH_DEFAULT + "bin" + File.separator;    // Firmwares  
+  private static String PATH_CCSV = PATH_DEFAULT + "ccsv" + File.separator;  // calib CSV text
   // private static String PATH_MAN  = TDInstance.context.getFileDir(); // PATH_DEFAULT + "man/"; // User Manual
 
-  private static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol/";
-  private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
-  private static String APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
-  private static String APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+  private static String APP_SYMBOL_PATH = PATH_DEFAULT + "symbol" + File.separator;
+  private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point" + File.separator;
+  private static String APP_LINE_PATH   = APP_SYMBOL_PATH + "line" + File.separator;
+  private static String APP_AREA_PATH   = APP_SYMBOL_PATH + "area" + File.separator;
 
   static String getSymbolPointDir() { return APP_POINT_PATH; }
   static String getSymbolLineDir()  { return APP_LINE_PATH; }
@@ -245,7 +245,7 @@ public class TDPath
   private static void setBaseDir( String basedir )
   {
     PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
-    PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
+    PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
     PATH_BASE    = PATH_DEFAULT;
     TDLog.Log( TDLog.LOG_PATH, "set basedir path " + PATH_BASEDIR );
     // Log.v("DistoX-PATH11", "basedir " + basedir + "has path11 " + hasPath11() + " " + PATH_BASEDIR );
@@ -253,7 +253,7 @@ public class TDPath
 
   private static void setDefault()
   {
-    PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
+    PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
     PATH_BASE    = PATH_DEFAULT;
     TDLog.Log( TDLog.LOG_PATH, "set default path " + PATH_DEFAULT );
   }
@@ -325,45 +325,45 @@ public class TDPath
 
     // Log.v("DistoX-PATH11", "[3] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
 
-    PATH_TDCONFIG = PATH_BASE + "thconfig/"; // FIXME checkDirs( PATH_TDCONFIG );
+    PATH_TDCONFIG = PATH_BASE + "thconfig" + File.separator; // FIXME checkDirs( PATH_TDCONFIG );
     PATH_THCONFIG = PATH_TDCONFIG;
 
-    PATH_C3D  = PATH_BASE + "c3d/";     // FIXME checkDirs( PATH_C3D );
-    PATH_CAV  = PATH_BASE + "cav/";     // FIXME checkDirs( PATH_CAV );
-    PATH_CAVE = PATH_BASE + "cave/";    // FIXME checkDirs( PATH_CAVE );
-    PATH_CSV  = PATH_BASE + "csv/";     // FIXME checkDirs( PATH_CSV );
-    PATH_CSX  = PATH_BASE + "csx/";     // FIXME checkDirs( PATH_CSX );
-    PATH_DAT  = PATH_BASE + "dat/";     // FIXME checkDirs( PATH_DAT );
-    PATH_DXF  = PATH_BASE + "dxf/";     // FIXME checkDirs( PATH_DXF );
-    PATH_GRT  = PATH_BASE + "grt/";     // FIXME checkDirs( PATH_GRT );
-    PATH_GTX  = PATH_BASE + "gtx/";     // FIXME checkDirs( PATH_GTX );
-    PATH_JSON = PATH_BASE + "json/";    // FIXME checkDirs( PATH_JSON );
-    PATH_KML  = PATH_BASE + "kml/";     // FIXME checkDirs( PATH_KML );
-    PATH_PLT  = PATH_BASE + "plt/";     // FIXME checkDirs( PATH_PLT );
-    PATH_PNG  = PATH_BASE + "png/";     // FIXME checkDirs( PATH_PNG );
-    PATH_SHP  = PATH_BASE + "shp/";     // FIXME checkDirs( PATH_SHP );
-    PATH_SRV  = PATH_BASE + "srv/";     // FIXME checkDirs( PATH_SRV );
-    PATH_SUR  = PATH_BASE + "sur/";     // FIXME checkDirs( PATH_SUR );
-    PATH_SVG  = PATH_BASE + "svg/";     // FIXME checkDirs( PATH_SVG );
-    PATH_SVX  = PATH_BASE + "svx/";     // FIXME checkDirs( PATH_SVX );
-    PATH_TDR  = PATH_BASE + "tdr/";     checkDirs( PATH_TDR );
-    PATH_TDR3 = PATH_BASE + "tdr3/";    checkDirs( PATH_TDR3 );
-    PATH_TH   = PATH_BASE + "th/";      // FIXME checkDirs( PATH_TH );
-    PATH_TH2  = PATH_BASE + "th2/";     checkDirs( PATH_TH2 );
-    PATH_TH3  = PATH_BASE + "th3/";     checkDirs( PATH_TH3 );
-    PATH_TNL  = PATH_BASE + "tnl/";     // FIXME checkDirs( PATH_TNL );
-    PATH_TOP  = PATH_BASE + "top/";     // FIXME checkDirs( PATH_TOP );
-    PATH_TRB  = PATH_BASE + "trb/";     // FIXME checkDirs( PATH_TRB );
-    PATH_TRO  = PATH_BASE + "tro/";     // FIXME checkDirs( PATH_TRO );
-    PATH_XVI  = PATH_BASE + "xvi/";     // FIXME checkDirs( PATH_XVI );
+    PATH_C3D  = PATH_BASE + "c3d"  + File.separator;    // FIXME checkDirs( PATH_C3D );
+    PATH_CAV  = PATH_BASE + "cav"  + File.separator;    // FIXME checkDirs( PATH_CAV );
+    PATH_CAVE = PATH_BASE + "cave" + File.separator;    // FIXME checkDirs( PATH_CAVE );
+    PATH_CSV  = PATH_BASE + "csv"  + File.separator;    // FIXME checkDirs( PATH_CSV );
+    PATH_CSX  = PATH_BASE + "csx"  + File.separator;    // FIXME checkDirs( PATH_CSX );
+    PATH_DAT  = PATH_BASE + "dat"  + File.separator;    // FIXME checkDirs( PATH_DAT );
+    PATH_DXF  = PATH_BASE + "dxf"  + File.separator;    // FIXME checkDirs( PATH_DXF );
+    PATH_GRT  = PATH_BASE + "grt"  + File.separator;    // FIXME checkDirs( PATH_GRT );
+    PATH_GTX  = PATH_BASE + "gtx"  + File.separator;    // FIXME checkDirs( PATH_GTX );
+    PATH_JSON = PATH_BASE + "json" + File.separator;    // FIXME checkDirs( PATH_JSON );
+    PATH_KML  = PATH_BASE + "kml"  + File.separator;    // FIXME checkDirs( PATH_KML );
+    PATH_PLT  = PATH_BASE + "plt"  + File.separator;    // FIXME checkDirs( PATH_PLT );
+    PATH_PNG  = PATH_BASE + "png"  + File.separator;    // FIXME checkDirs( PATH_PNG );
+    PATH_SHP  = PATH_BASE + "shp"  + File.separator;    // FIXME checkDirs( PATH_SHP );
+    PATH_SRV  = PATH_BASE + "srv"  + File.separator;    // FIXME checkDirs( PATH_SRV );
+    PATH_SUR  = PATH_BASE + "sur"  + File.separator;    // FIXME checkDirs( PATH_SUR );
+    PATH_SVG  = PATH_BASE + "svg"  + File.separator;    // FIXME checkDirs( PATH_SVG );
+    PATH_SVX  = PATH_BASE + "svx"  + File.separator;    // FIXME checkDirs( PATH_SVX );
+    PATH_TDR  = PATH_BASE + "tdr"  + File.separator;    checkDirs( PATH_TDR );
+    PATH_TDR3 = PATH_BASE + "tdr3" + File.separator;    checkDirs( PATH_TDR3 );
+    PATH_TH   = PATH_BASE + "th"   + File.separator;    // FIXME checkDirs( PATH_TH );
+    PATH_TH2  = PATH_BASE + "th2"  + File.separator;    checkDirs( PATH_TH2 );
+    PATH_TH3  = PATH_BASE + "th3"  + File.separator;    checkDirs( PATH_TH3 );
+    PATH_TNL  = PATH_BASE + "tnl"  + File.separator;    // FIXME checkDirs( PATH_TNL );
+    PATH_TOP  = PATH_BASE + "top"  + File.separator;    // FIXME checkDirs( PATH_TOP );
+    PATH_TRB  = PATH_BASE + "trb"  + File.separator;    // FIXME checkDirs( PATH_TRB );
+    PATH_TRO  = PATH_BASE + "tro"  + File.separator;    // FIXME checkDirs( PATH_TRO );
+    PATH_XVI  = PATH_BASE + "xvi"  + File.separator;    // FIXME checkDirs( PATH_XVI );
 
-    APP_TMP_PATH   = PATH_BASE + "tmp/";   checkDirs( APP_TMP_PATH );
-    APP_NOTE_PATH  = PATH_BASE + "note/";  checkDirs( APP_NOTE_PATH );
-    APP_FOTO_PATH  = PATH_BASE + "photo/"; checkDirs( APP_FOTO_PATH );
-    APP_AUDIO_PATH = PATH_BASE + "audio/"; checkDirs( APP_AUDIO_PATH );
+    APP_TMP_PATH   = PATH_BASE + "tmp"   + File.separator; checkDirs( APP_TMP_PATH );
+    APP_NOTE_PATH  = PATH_BASE + "note"  + File.separator; checkDirs( APP_NOTE_PATH );
+    APP_FOTO_PATH  = PATH_BASE + "photo" + File.separator; checkDirs( APP_FOTO_PATH );
+    APP_AUDIO_PATH = PATH_BASE + "audio" + File.separator; checkDirs( APP_AUDIO_PATH );
 
-    PATH_IMPORT = PATH_BASE + "import/";   checkDirs( PATH_IMPORT );
-    PATH_ZIP = PATH_BASE + "zip/";         checkDirs( PATH_ZIP );
+    PATH_IMPORT = PATH_BASE + "import" + File.separator;   checkDirs( PATH_IMPORT );
+    PATH_ZIP = PATH_BASE + "zip" + File.separator;         checkDirs( PATH_ZIP );
   }
 
   static void setDefaultPaths()
@@ -371,21 +371,21 @@ public class TDPath
     // Log.v("DistoX-SAF", "default path " + PATH_DEFAULT );
     // Log.v("DistoX-PATH11", "set default paths from " + PATH_DEFAULT );
 
-    PATH_BIN  = PATH_DEFAULT + "bin/";
-    // PATH_MAN  = PATH_DEFAULT + "man/";   
-    PATH_CCSV = PATH_DEFAULT + "ccsv/"; 
-    PATH_DUMP = PATH_DEFAULT + "dump/"; 
+    PATH_BIN  = PATH_DEFAULT + "bin" + File.separator;
+    // PATH_MAN  = PATH_DEFAULT + "man" + File.separator;   
+    PATH_CCSV = PATH_DEFAULT + "ccsv" + File.separator; 
+    PATH_DUMP = PATH_DEFAULT + "dump" + File.separator; 
 
-    APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol/";
-    APP_POINT_PATH  = APP_SYMBOL_PATH + "point/";
-    APP_LINE_PATH   = APP_SYMBOL_PATH + "line/";
-    APP_AREA_PATH   = APP_SYMBOL_PATH + "area/";
+    APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol" + File.separator;
+    APP_POINT_PATH  = APP_SYMBOL_PATH + "point" + File.separator;
+    APP_LINE_PATH   = APP_SYMBOL_PATH + "line" + File.separator;
+    APP_AREA_PATH   = APP_SYMBOL_PATH + "area" + File.separator;
 
     /* LOAD_MISSING
-    APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save/";
-    APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
-    APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
-    APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+    APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save" + File.separator;
+    APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point" + File.separator;
+    APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line" + File.separator;
+    APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area" + File.separator;
     */
 
     checkDefaultPaths();
@@ -700,14 +700,14 @@ public class TDPath
 
   static String getSurveyJpgFile( String survey, String id )
   {
-    TDFile.makeDir( APP_FOTO_PATH + survey + "/" );
-    return APP_FOTO_PATH + survey + "/" + id + ".jpg";
+    TDFile.makeDir( APP_FOTO_PATH + survey + File.separator );
+    return APP_FOTO_PATH + survey + File.separator + id + ".jpg";
   }
 
   static String getSurveyAudioFile( String survey, String id )
   {
-    TDFile.makeDir( APP_AUDIO_PATH + survey + "/" );
-    return APP_AUDIO_PATH + survey + "/" + id + ".wav";
+    TDFile.makeDir( APP_AUDIO_PATH + survey + File.separator );
+    return APP_AUDIO_PATH + survey + File.separator + id + ".wav";
   }
 
   static private void checkDirs( String path )

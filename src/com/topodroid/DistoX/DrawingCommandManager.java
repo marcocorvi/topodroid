@@ -1556,10 +1556,10 @@ public class DrawingCommandManager
     }
   }
    
-  void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir )
+  void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir )
   {
     RectF bbox = getBoundingBox( ); // global bbox
-    DrawingIO.exportDataStream( type, dos, scrap_name, proj_dir, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
+    DrawingIO.exportDataStream( type, dos, info, scrap_name, proj_dir, bbox, mNorthLine, mScraps, mStations /* , mFixeds */ );
                                 // mCurrentStack, mUserStations, mStations 
   }
 

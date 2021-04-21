@@ -47,6 +47,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private List< DrawingPath > mPaths;
   private String mFullName; // file fullname, or shp basepath
   private int mType;        // plot type
+  private PlotInfo mInfo;   // plot info (can be null for th2 export/overview)
   private int mProjDir;
   private int mSuffix;
   private int mRotate;  // nr. backups to rotate
@@ -57,7 +58,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    // DrawingUtil util, 
-		    DrawingCommandManager manager, 
+		    DrawingCommandManager manager, PlotInfo info,
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -67,6 +68,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mNum      = num;
      // mUtil     = util;
      mManager  = manager;
+     mInfo     = info;
      mPaths    = null;
      mFullName = fullname;
      mType     = (int)type;
@@ -87,7 +89,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
                     // TopoDroidApp app,
 		    TDNum num,
-		    List< DrawingPath > paths,
+		    List< DrawingPath > paths, PlotInfo info,
                     String fullname, long type, int proj_dir )
   {
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -97,6 +99,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mNum      = num;
      mManager  = null;
      mPaths    = paths;
+     mInfo     = info;
      mFullName = fullname;
      mType     = (int)type;
      mProjDir  = proj_dir;
@@ -195,6 +198,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       
       // second pass: save
       if ( mSuffix != PlotSave.EXPORT ) {
+        assert( mInfo != null );
 
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
 
@@ -219,10 +223,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // Log.v( "DistoX", "saving binary " + mFullName );
         if ( mSuffix == PlotSave.CREATE ) {
           // Log.v("DistoX-SPLIT", "Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
-          DrawingIO.exportDataStream( mPaths, mType, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
+          DrawingIO.exportDataStream( mPaths, mType, mInfo, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
         } else {
           if ( mManager != null ) {
-            DrawingIO.exportDataStream( mManager, mType, file1, mFullName, mProjDir );
+            DrawingIO.exportDataStream( mManager, mType, mInfo, file1, mFullName, mProjDir );
           }
         }
 

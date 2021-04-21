@@ -114,6 +114,23 @@ void readBBox( FILE * fp )
   }
 }
 
+void readPlotData( FILE * fp )
+{
+  long pos = ftell( fp );
+  char ch;
+  printf("%ld= PlotData: ", pos);
+  float xoff      = readFloat( fp );
+  float yoff      = readFloat( fp );
+  float azimuth   = readFloat( fp );
+  float clino     = readFloat( fp );
+  float intercept = readFloat( fp );
+  printf("  Offset %.2f %.2f Orientation %.2f %.2f Intercept %.2f\n", xoff, yoff, azimuth, clino, intercept );
+  readString( "  start ", fp );
+  readString( "  view  ", fp );
+  readString( "  hide  ", fp );
+  readString( "  nick  ", fp );
+}
+
 void readPoint( FILE * fp )
 {
   long pos = ftell( fp );
@@ -311,14 +328,30 @@ int main( int argc, char ** argv )
     printf("Section %d <%c>\n", pos, ch);
     // { char cc; scanf("%c\n", &cc); }
     switch ( ch ) {
-      case 'V':
-        readVersion( fp );
+      case 'A': // area
+        readArea( fp );
         break;
-      case 'S':
-        readScrap( fp );
+      case 'D': // pot data
+        readPlotData( fp );
+        break;
+      case 'E':
+        printf("%ld= E-CHAR %02x <%c>\n", pos, ch, ch );
+        // done = 1;
+        break;
+      case 'F':
+        printf("%ld= F-CHAR %02x <%c>\n", pos, ch, ch );
+        break;
+      case 'G':
+        readFixedPoint( fp );
         break;
       case 'I':
         readBBox( fp );
+        break;
+      case 'J': // special
+	readSpecial( fp );
+        break;
+      case 'L': // line
+        readLine( fp );
         break;
       case 'N': // scrap index
         readScrapIndex( fp );
@@ -326,26 +359,20 @@ int main( int argc, char ** argv )
       case 'P': // point
         readPoint( fp );
         break;
+      case 'S':
+        readScrap( fp );
+        break;
       case 'T': // text label
         readLabel( fp );
-        break;
-      case 'L': // line
-        readLine( fp );
-        break;
-      case 'A': // area
-        readArea( fp );
         break;
       case 'U': // user station
         readUserStation( fp );
         break;
+      case 'V':
+        readVersion( fp );
+        break;
       case 'X': // station name
         readAutoStation( fp );
-        break;
-      case 'G':
-        readFixedPoint( fp );
-        break;
-      case 'J': // special
-	readSpecial( fp );
         break;
       case 'Y': // photo
 	readSpecialPoint( fp, "Photo" );
@@ -353,13 +380,8 @@ int main( int argc, char ** argv )
       case 'Z': // audio
 	readSpecialPoint( fp, "Audio" );
 	break;
-      case 'F':
-        printf("%ld= F-CHAR %02x <%c>\n", pos, ch, ch );
-        break;
       default:
-      case 'E':
-        printf("%ld= E-CHAR %02x <%c>\n", pos, ch, ch );
-        // done = 1;
+        printf("%ld= Unexpected char %02x <%c>\n", pos, ch, ch );
         break;
     }
     pos = ftell( fp );

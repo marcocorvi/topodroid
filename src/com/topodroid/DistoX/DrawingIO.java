@@ -516,7 +516,7 @@ public class DrawingIO
   }
 
   // entry point to export data-stream
-  public static void exportDataStream( DrawingCommandManager manager, int type, File file, String fullname, int proj_dir )
+  public static void exportDataStream( DrawingCommandManager manager, int type, PlotInfo info, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = TDFile.getFileOutputStream( file );
@@ -524,7 +524,7 @@ public class DrawingIO
       // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
       DataOutputStream dos = new DataOutputStream( bfos );
-      manager.exportDataStream( type, dos, fullname, proj_dir );
+      manager.exportDataStream( type, dos, info, fullname, proj_dir );
       dos.close();
 
       // CACHE add filename/bos.toByteArray to cache
@@ -541,7 +541,7 @@ public class DrawingIO
   }
 
   // entry point to export a set of paths to data-stream
-  public static void exportDataStream( List< DrawingPath > paths, int type, File file, String fullname, int proj_dir, int scrap )
+  public static void exportDataStream( List< DrawingPath > paths, int type, PlotInfo info, File file, String fullname, int proj_dir, int scrap )
   {
     try {
       FileOutputStream fos = TDFile.getFileOutputStream( file );
@@ -561,7 +561,7 @@ public class DrawingIO
       RectF bbox = new RectF( xmin, ymin, xmax, ymax );
 
       // Log.v("DistoX-SPLIT", "export data stream: paths " + paths.size() );
-      exportDataStream( type, dos, fullname, proj_dir, bbox, paths, scrap );
+      exportDataStream( type, dos, info, fullname, proj_dir, bbox, paths, scrap );
 
       dos.close();
 
@@ -951,7 +951,7 @@ public class DrawingIO
   }
 
   // used by ParserPocketTopo
-  public static void exportDataStream( int type, DataOutputStream dos, String scrap_name, int proj_dir,
+  public static void exportDataStream( int type, DataOutputStream dos, PlotInfo info, String scrap_name, int proj_dir,
                                 RectF bbox, List< DrawingPath > paths, int scrap )
   {
     try { 
@@ -984,7 +984,25 @@ public class DrawingIO
       // }
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
 
-      // if ( TDSetting.mAutoStations ) {
+      // if ( info != null ) {
+      //   dos.write('D');
+      //   dos.writeFloat( info.xoffset );
+      //   dos.writeFloat( info.yoffset );
+      //   dos.writeFloat( info.azimuth );
+      //   dos.writeFloat( info.clino );
+      //   dos.writeFloat( info.intercept );
+      //   dos.writeUTF( info.start );
+      //   if ( PlotType.isSection( type ) ) {
+      //     dos.writeUTF( (info.view != null)? info.view : "" );
+      //     dos.writeUTF( (info.hide != null)? info.hide : "" );
+      //     dos.writeUTF( (info.nick != null)? info.nick : "" );
+      //   } else {
+      //     dos.writeUTF( "" ); // view = barrier
+      //     dos.writeUTF( "" ); // hide = hiding
+      //     dos.writeUTF( "" ); // nick unset
+      //   }
+      // }
+      // if ( TDSetting.mAutoStations && stations != null ) {
       //   synchronized( TDPath.mStationsLock ) {
       //     for ( DrawingStationName st : stations ) {
       //       NumStation station = st.getNumStation();
@@ -994,6 +1012,8 @@ public class DrawingIO
       //       st.toDataStream( dos, -1 );
       //     }
       //   }
+      // }
+      // if ( fixeds != null ) {
       //   synchronized( TDPath.mFixedsLock ) {
       //     for ( DrawingFixedName fx : fixeds ) {
       //       if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
@@ -1013,6 +1033,7 @@ public class DrawingIO
   public static void exportDataStream(
       int type,
       DataOutputStream dos,
+      PlotInfo info,
       String scrap_name,
       int proj_dir,
       RectF bbox,
@@ -1072,7 +1093,20 @@ public class DrawingIO
       }
       dos.write('F'); // final: bbox and autostations (reading can skip all that follows)
 
-      if ( TDSetting.mAutoStations ) {
+      if ( info != null ) {
+        dos.write('D');
+        dos.writeFloat( info.xoffset );
+        dos.writeFloat( info.yoffset );
+        dos.writeFloat( info.azimuth );
+        dos.writeFloat( info.clino );
+        dos.writeFloat( info.intercept );
+        dos.writeUTF( info.start );
+        dos.writeUTF( (info.view != null)? info.view : "" );
+        dos.writeUTF( (info.hide != null)? info.hide : "" );
+        dos.writeUTF( (info.nick != null)? info.nick : "" );
+      }
+
+      if ( TDSetting.mAutoStations && stations != null ) {
         synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : stations ) {
             NumStation station = st.getNumStation();
@@ -1082,14 +1116,16 @@ public class DrawingIO
             st.toDataStream( dos, -1 );
           }
         }
-        // synchronized( TDPath.mFixedsLock ) {
-        //   for ( DrawingFixedName fx : fixeds ) {
-        //     if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
-        //     if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
-        //     fx.toDataStream( dos, -1 );
-        //   }
-        // }
       }
+      // if ( fixeds != null ) {
+      //   synchronized( TDPath.mFixedsLock ) {
+      //     for ( DrawingFixedName fx : fixeds ) {
+      //       if ( bbox.left > fx.cx || bbox.right  < fx.cx ) continue;
+      //       if ( bbox.top  > fx.cy || bbox.bottom < fx.cy ) continue;
+      //       fx.toDataStream( dos, -1 );
+      //     }
+      //   }
+      // }
       dos.write('E'); // end
     } catch ( IOException e ) {
       e.printStackTrace();

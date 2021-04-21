@@ -659,7 +659,7 @@ public class OverviewWindow extends ItemDrawer
        // parent can be null because this is user-requested EXPORT
        // azimuth = 0
        // rotate  = 0
-       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
        GeoReference station = null;
        if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
