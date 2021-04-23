@@ -43,6 +43,7 @@ public class ShpObject
   final static int SHP_POLYLINEZ = 13;
 
   final static byte BYTE0  = (byte)0;
+  final static byte BYTE1  = (byte)1;
   final static byte BYTEC  = (byte)'C';
   final static byte BYTEN  = (byte)'N';
   final static short SHORT0 = (short)0;
