@@ -4186,40 +4186,61 @@ public class DataHelper extends DataSetObservable
 
   public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
 
+  public boolean hasSurveyPlotName( long sid, String name )  { return hasName( sid, name, PLOT_TABLE ); }
+
   private boolean hasName( String name, String table )
   {
-    boolean ret = false;
-    if ( myDB != null ) {
-      Cursor cursor = myDB.query( table, new String[]{ "id" },
-          "name=?",
-          new String[]{ name },
-          null, null, null );
-      if (cursor != null) {
-        if (cursor.moveToFirst()) {
-          ret = true;
-        }
-        if (!cursor.isClosed()) cursor.close();
-      }
+    if ( myDB == null ) {
+      TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
+      return false;
     }
+    boolean ret = false;
+    Cursor cursor = null;
+    try {
+      String query = String.format("SELECT name FROM %s WHERE name='%s' COLLATE NOCASE", table, name );
+      cursor = myDB.rawQuery( query, new String[] { } );
+      ret = ( cursor != null && cursor.moveToFirst() ); 
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
-   // @return positive ID on success
-   //         0 or -1 failure
-   long setSurvey( String name, int datamode )
-   {
-     myNextId = 0;
-     if ( myDB == null ) return 0L;
-     long sid = setName( SURVEY_TABLE, name, datamode );
-     Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "max(id)" },
-                          "surveyId=?", new String[] { Long.toString(sid) },
-                          null, null, null );
-     if (cursor.moveToFirst() ) {
-       myNextId = cursor.getLong(0);
-     }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return sid;
-   }
+  private boolean hasName( long sid, String name, String table )
+  {
+    if ( myDB == null ) {
+      TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
+      return false;
+    }
+    boolean ret = false;
+    Cursor cursor = null;
+    try {
+      String query = String.format(
+        "SELECT name FROM %s WHERE surveyId=%d AND ( name='%sp' COLLATE NOCASE OR name='%ss' COLLATE NOCASE)", 
+        table, sid, name, name );
+      cursor = myDB.rawQuery( query, new String[] { } );
+      ret = (cursor != null && cursor.moveToFirst() );
+      // Log.v("DistoX", query + " " + ret );
+    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
+    return ret;
+  }
+
+  // @return positive ID on success
+  //         0 or -1 failure
+  long setSurvey( String name, int datamode )
+  {
+    myNextId = 0;
+    if ( myDB == null ) return 0L;
+    long sid = setName( SURVEY_TABLE, name, datamode );
+    Cursor cursor = myDB.query( SHOT_TABLE, new String[] { "max(id)" },
+                         "surveyId=?", new String[] { Long.toString(sid) },
+                         null, null, null );
+    if (cursor.moveToFirst() ) {
+      myNextId = cursor.getLong(0);
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return sid;
+  }
    
   // get survey id (-1L on error)
   long getSurveyId( String name )

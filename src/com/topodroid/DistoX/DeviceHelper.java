@@ -45,7 +45,7 @@ public class DeviceHelper extends DataSetObservable
   // static final private int DEVICE_DATABASE_VERSION = 27;
   // static final private int DEVICE_DATABASE_VERSION_MIN = 21;
 
-  static final private String ERROR_NULL_DB = "null device DB ";
+  static final String ERROR_NULL_DB = "null device DB ";
 
   private static final String CONFIG_TABLE = "configs";
   private static final String CALIB_TABLE  = "calibs";
@@ -1062,13 +1062,9 @@ public class DeviceHelper extends DataSetObservable
     boolean ret = false;
     Cursor cursor = null;
     try {
-      cursor = myDB.query( table, new String[] { "id" },
-                          "name=?", 
-                          new String[] { name },
-                          null, null, null );
-      if (cursor != null && cursor.moveToFirst() ) {
-         ret = true;
-      }
+      String query = String.format("SELECT name FROM %s WHERE name='%s' COLLATE NOCASE", table, name );
+      cursor = myDB.rawQuery( query, new String[] { } );
+      ret = (cursor != null && cursor.moveToFirst() );
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
      return ret;

@@ -266,7 +266,7 @@ public class DrawingDxf
     }
 */
       
-    Log.v("DistoX", "Spline P " + np + " Cp " + ncp + " K " + nk );
+    // Log.v("DistoX", "Spline P " + np + " Cp " + ncp + " K " + nk );
     DXF.printInt( pw, 70, 8+(closed?1:0) ); // flags  1: closed, 2: periodic, 4: rational, 8: planar, 16 linear
     DXF.printInt( pw, 71, 3 );    // degree of the spline
     DXF.printInt( pw, 72, nk );   // nr. of knots
@@ -747,7 +747,7 @@ public class DrawingDxf
     if ( point == null ) return handle;
     if ( BrushManager.isPointLabel( point.mPointType ) ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      Log.v("DistoX", "LABEL PATH label <" + label.mPointText + ">" );
+      // Log.v("DistoX", "LABEL PATH label <" + label.mPointText + ">" );
       return DXF.printText( pw, handle, ref_handle, label.mPointText,
          (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
          LABEL_SCALE, "POINT", DXF.style_dejavu, xoff, yoff );

@@ -490,12 +490,10 @@ public class SymbolPoint extends Symbol
          //    // y0 = y3;
          //    //pw.printf("  0%sSEQEND%s", DrawingDxf.EOL, DrawingDxf.EOL );
          //    DrawingDxf.printString( pw, 0, "SEQEND" );
-         //    /*
          //    if ( TDSetting.mAcadVersion >= 13 ) {
          //        handle = DrawingDxf.inc(handle);
          //        DrawingDxf.printHex( pw, 5, handle );
          //    }
-         //    */
            int np = 8; // 8+1 points
            float[] xx = new float[ np+1 ];
            float[] yy = new float[ np+1 ];

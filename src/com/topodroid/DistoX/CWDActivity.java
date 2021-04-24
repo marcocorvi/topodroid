@@ -64,22 +64,26 @@ public class CWDActivity extends Activity
   
   private String mBaseName;
 
-  void setBasename( String basename ) 
-  { 
-    mBaseName = basename;
-    updateDisplay();
-  }
+  // void setBasename( String basename ) 
+  // { 
+  //   Log.v("DistoX", "set  base name " + basename );
+  //   mBaseName = basename;
+  //   updateDisplay();
+  // }
 
   private boolean setCwdPreference()
   {
     String dir_name  = mETcwd.getText().toString();
 
     String base_name = TDPath.getBaseDir();
+    /* BASE DIR CANNOT BE CHANGED
+    Log.v("DistoX", "set CWD " + dir_name + " base name " + base_name );
     if ( ! TDPath.hasPath11() ) {
       String b_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
       if ( b_name != null ) {
         b_name = b_name.trim();
         if ( b_name.length() > 0 ) base_name = b_name;
+        Log.v("DistoX", "CWD using base name " + base_name );
       }
     }
 
@@ -94,7 +98,9 @@ public class CWDActivity extends Activity
       TDToast.makeBad( R.string.bad_cbd );
       return false;
     }
+    */
 
+    // CURRENT WORK DIRECTORY
     // if ( dir_name == null ) { // always false
     //   TDToast.makeBad( R.string.empty_cwd );
     //   return false;
@@ -114,8 +120,9 @@ public class CWDActivity extends Activity
     } else { 
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
+    Log.v("DistoX", "CWD using dir name " + dir_name );
 
-    /*
+    // return the result to TDPrefActivuity
     if ( TDPath.checkBasePath( dir_name, base_name ) ) {
       TDLog.Log( TDLog.LOG_PATH, "dir name <" + dir_name + "> base dir <" + base_name + ">" );
       TopoDroidApp.setCWDPreference( dir_name, base_name );
@@ -125,7 +132,6 @@ public class CWDActivity extends Activity
     } else {
       setResult( RESULT_CANCELED );
     }
-    */
     return true;
   }
     

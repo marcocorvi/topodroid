@@ -575,7 +575,7 @@ public class DrawingWindow extends ItemDrawer
   private float mAzimuth = 0.0f;
   private float mClino   = 0.0f;
   private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections
-  private int   mSectionSkip = 0;       // number of splays to skip in section refresh
+  // private int   mSectionSkip = 0;       // number of splays to skip in section refresh
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
   private float mZoom  = 1.0f;
@@ -2437,19 +2437,20 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = null;
     if ( PlotType.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
-      // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
+      Log.v("DistoX-SPLAY", "Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
     } else if ( PlotType.isXSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
+      Log.v("DistoX-SPLAY", "Station-Xsection select all shots at " + mFrom + " : " + list.size() );
     }
-    if ( list != null && list.size() > mSectionSkip ) {
-      // Log.v("DistoX-GRID", "doRestart section T " + mIntersectionT + " " + mPlot3.intercept);
+    if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
+      Log.v("DistoX-GRID", "doRestart section T " + mIntersectionT + " " + mPlot3.intercept );
       if ( mIntersectionT != mPlot3.intercept ) {
         Log.v("DistoX", "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
         mPlot3.intercept = mIntersectionT;
         mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
       }
-      makeSectionReferences( list, mPlot3.intercept, mSectionSkip );
+      makeSectionReferences( list, mPlot3.intercept, 0 /* mSectionSkip */ );
     }
   }
 
@@ -2719,7 +2720,7 @@ public class DrawingWindow extends ItemDrawer
         addFixedSectionSplay( b, xto, yto, xto+x, yto+y, a, true );
       }
     }
-    mSectionSkip = cnt;
+    // mSectionSkip = cnt;
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
 
     mDrawingSurface.commitReferences();

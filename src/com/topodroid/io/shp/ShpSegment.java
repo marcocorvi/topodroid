@@ -57,7 +57,7 @@ public class ShpSegment extends ShpObject
     fields[2] = "to";
     fields[3] = "flag";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16, 16, 6 };
+    int[]    flens  = { SIZE_TYPE, SIZE_NAME, SIZE_NAME, SIZE_FLAG };
 
     int shpLength = 50 + nrs * getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );

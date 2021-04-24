@@ -17,9 +17,17 @@ Information for the new survey:
 </ul>
 <br><p>
 
-The <i>name</i> is mandatory. It must be unique in the database. The survey names are used to list surveys in the
+The <i>name</i> is mandatory. 
+The survey names are used to list surveys in the
 <u>main window</u> and TopoDroid distinguishes surveys by their name (although each survey has a unique numerical id in the database).<br>
-<b>The name of the survey cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
+The name must be unique in the database. Names that differ only by the characters case are not different because
+the filesystem is case insensitive. TopoDroid raises a warning if the new survey name coincide with the name of an existing survey
+except for the caratcters case.<br><p>
+
+<b>WARNING</b>.
+The name of the survey cannot contain the character '/' (slash), which is the pathname separator.
+Slashes are replaced with dashes '-'.<br><p>
+
 
 The <i>date</i> is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06". It is preset to the current date.<br><p>
 

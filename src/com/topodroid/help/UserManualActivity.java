@@ -83,14 +83,19 @@ public class UserManualActivity extends Activity
         } 
       }
     } else {
+      int pos = filename.lastIndexOf("/");
+      if ( pos >= 0 ) filename = filename.substring(pos+1);
       String pagename = TDPath.getManFileName( filename );
       File pagefile = TDFile.getManFile( filename );
       // Log.v("DistoX", "MAN-3 filename " + filename );
       // Log.v("DistoX", "MAN-3 pagename " + pagename );
+      // Log.v("DistoX", "MAN-3 pagefile path " + pagefile.getPath() );
       if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {
         String page = "/android_asset/man/" + filename;
+        // Log.v("DistoX", "MAN-4 assets page " + page );
         view.loadUrl( "file://" + page );
       } else {
+        // Log.v("DistoX", "MAN-4 local pagefile " + pagefile );
         loadLocal( view, pagefile );
       }
     }
@@ -103,7 +108,7 @@ public class UserManualActivity extends Activity
     String encoding = "UTF-8";
     String mime = "text/html";
     String baseurl = "file://" + pagefile.getPath();
-    // Log.v("DistoX", "MAN-4 baseurl " + baseurl );
+    // Log.v("DistoX", "MAN-5 baseurl " + baseurl );
     try {
       FileReader fr = new FileReader( pagefile );
       encoding = fr.getEncoding();
@@ -190,7 +195,7 @@ public class UserManualActivity extends Activity
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
         ++mCloseOnBack;
         // view.loadUrl( url );
-        // Log.v("DistoX", "Web client " + url );
+        // Log.v("DistoX", "MAN Web client " + url );
         load( view, url );
         return false;
       }
@@ -269,7 +274,8 @@ public class UserManualActivity extends Activity
   @Override
   public void onBackPressed()
   {
-    if ( (-- mCloseOnBack) == 0 ) finish();
+    mCloseOnBack -= 2;
+    if ( mCloseOnBack <= 0 ) finish();
     mTVtext.goBack();
   }
 

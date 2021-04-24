@@ -70,7 +70,7 @@ public class ShpPolyline extends ShpObject
     fields[2] = "levels";
     fields[3] = "scrap";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16, 6, 6 };
+    int[]    flens  = { SIZE_TYPE, SIZE_NAME, SIZE_LEVELS, SIZE_SCRAP };
 
     int shpLength = 50;
     for ( DrawingPointLinePath ln : lns ) {

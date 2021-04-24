@@ -274,6 +274,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_exists">Existing project</string>
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
+    <string name="error_name_duplicate">Duplicate name</string>
 
     <string name="error_dir_exists">Directory already exists</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->

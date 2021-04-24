@@ -21,7 +21,13 @@ the other for the profile. The filenames are obtained composing the survey name,
 ("p" for plan, "s" for profile). For example the sketch "2" of the survey "cave" is saved in the two files
 "cave-2p.tdr" and "cave-2s.tdr".<br><p>
 
-<b>WARNING. The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.</b><br><p>
+TopoDroid will give a warning if the name coincides with the name of an existing sketch.
+In particular it is not possible to have two sketches with names differing only by the characters case
+since the two sketches would have the same file because the filesystem is case insensitive.<br><p>
+
+<b>WARNING</b>.
+The name of the sketch cannot contain the character '/' (slash), which is the pathname separator.
+Slashes are replaced with dashes '-'.<br><p>
 
 <b>Reference station</b><br>
 The reference station (origin) defines how the sketch is translated with respect to the survey midline.

@@ -54,8 +54,8 @@ public class ShpPoint extends ShpObject
     fields[3] = "levels";
     fields[4] = "scrap";
     fields[5] = "text";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 16, 6, 6, 6, 6, 128 };
+    byte[]   ftypes = { BYTEC, BYTEN, BYTEN, BYTEC, BYTEC, BYTEC };
+    int[]    flens  = { SIZE_NAME, SIZE_ORIENT, SIZE_SCALE, SIZE_LEVELS, SIZE_SCRAP, SIZE_TEXT };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -90,10 +90,11 @@ public class ShpPoint extends ShpObject
       shpBuffer.putDouble( x0 + xscale * x );
       shpBuffer.putDouble( y0 - yscale * y );
 
+      // Log.v("DistoX", "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
-      fields[1] = Integer.toString( (int)pt.mOrientation ); 
-      fields[2] = Integer.toString( pt.getScale() );
+      fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
+      fields[2] = new String( blankPadded( pt.getScale(), SIZE_SCALE ) );
       fields[3] = Integer.toString( pt.mLevel );
       fields[4] = Integer.toString( pt.mScrap ); 
       fields[5] = pt.getPointText(); 

@@ -322,7 +322,7 @@ public class TdManagerActivity extends Activity
     switch ( request ) {
       case TDRequest.REQUEST_TDCONFIG:
         if ( result == TDRequest.RESULT_TDCONFIG_OK ) {
-          Log.v("DistoX-TdManager", "TdmConfig OK" );
+          // Log.v("DistoX-TdManager", "TdmConfig OK" );
           // nothing 
         } else if ( result == TDRequest.RESULT_TDCONFIG_DELETE ) {
           // get TdmConfig name and delete it
@@ -331,7 +331,7 @@ public class TdManagerActivity extends Activity
           mList.invalidate();
           // updateTdmConfigList();
         } else if ( result == TDRequest.RESULT_TDCONFIG_NONE ) {
-          Log.v("DistoX-TdManager", "TdmConfig NONE" );
+          Log.e("DistoX-TdManager", "TdmConfig NONE" );
           // nothing
         }
     }

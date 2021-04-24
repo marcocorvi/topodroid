@@ -48,6 +48,15 @@ public class ShpObject
   final static byte BYTEN  = (byte)'N';
   final static short SHORT0 = (short)0;
 
+  final static int SIZE_TYPE   =   8;
+  final static int SIZE_FLAG   =   8;
+  final static int SIZE_NAME   =  16; // name, from, to
+  final static int SIZE_ORIENT =   6;
+  final static int SIZE_SCALE  =   6;
+  final static int SIZE_LEVELS =   6;
+  final static int SIZE_SCRAP  =   6;
+  final static int SIZE_TEXT   = 128;
+
   public static final double SCALE = 1.0/DrawingUtil.SCALE_FIX; // TDSetting.mDxfScale; 
   // static double xWorld( double x ) { return (x-DrawingUtil.CENTER_X)*SCALE; }
   // static double yWorld( double y ) { return (y-DrawingUtil.CENTER_Y)*SCALE; }
@@ -82,6 +91,24 @@ public class ShpObject
     path  = pth;
     mFiles = files;
     setYYMMDD( TDUtil.currentDate() );
+  }
+
+  // left justified blank-padded to length
+  // if the numeric is larger than length it is truncated 
+  protected char[] blankPadded( int value, int len )
+  {
+    String res = Integer.toString( value );
+    char[] ret = new char[len];
+    int pad = len - res.length();
+    if ( pad >= 0 ) {
+      int k = 0;
+      for ( ; k < res.length(); ++ k ) ret[k] = res.charAt( k );
+      for ( ; k < len; ++ k ) ret[k] = ' ';
+    } else {
+      // keep only lowest significant digits 
+      for ( int k = -pad; k < res.length(); ++ k ) ret[pad+k] = res.charAt( k );
+    }
+    return ret;
   }
 
   protected void open( ) throws IOException

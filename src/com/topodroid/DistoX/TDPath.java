@@ -194,7 +194,7 @@ public class TDPath
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )
   {
-    // Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
+    Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
     setBaseDir( basedir );
     File dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {

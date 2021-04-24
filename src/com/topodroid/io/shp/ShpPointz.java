@@ -48,7 +48,7 @@ public class ShpPointz extends ShpObject
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     byte[]   ftypes = { BYTEC };
-    int[]    flens  = { 16 };
+    int[]    flens  = { SIZE_NAME };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -77,7 +77,7 @@ public class ShpPointz extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINTZ );
-      Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
+      // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
       shpBuffer.putDouble( pt.e );
       shpBuffer.putDouble( pt.s );
       shpBuffer.putDouble( pt.v );

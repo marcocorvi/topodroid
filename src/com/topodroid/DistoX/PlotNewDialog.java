@@ -173,7 +173,12 @@ class PlotNewDialog extends MyDialog
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;
-    } 
+    }
+    if ( mApp.hasSurveyPlotName( name ) ) {
+      mEditName.setError( mContext.getResources().getString( R.string.error_name_duplicate ) );
+      return false;
+    }
+
     // if ( start == null ) { // CANNOT HAPPEN
     //   mEditStart.setError( mContext.getResources().getString( R.string.error_start_required ) );
     //   return false;

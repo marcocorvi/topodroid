@@ -1253,12 +1253,18 @@ public class TopoDroidApp extends Application
 
   boolean hasSurveyName( String name )
   {
-    return ( mData == null ) || mData.hasSurveyName( name );
+    return ( mData != null ) && mData.hasSurveyName( name );
   }
+
+  boolean hasSurveyPlotName( String name )
+  {
+    return ( mData != null ) && mData.hasSurveyPlotName( TDInstance.sid, name );
+  }
+
 
   boolean hasCalibName( String name )
   {
-    return ( mDData == null ) || mDData.hasCalibName( name );
+    return ( mDData != null ) && mDData.hasCalibName( name );
   }
 
   void /*long*/ setCalibFromName( String calib ) // RETURN value not used

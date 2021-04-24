@@ -54,7 +54,7 @@ public class ShpStation extends ShpObject
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
     byte[]   ftypes = { BYTEC };
-    int[]    flens  = { 16 };
+    int[]    flens  = { SIZE_NAME };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );

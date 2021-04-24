@@ -279,25 +279,25 @@ public class TdmViewActivity extends Activity
     {
     }
 
-    private void dumpEvent( MotionEventWrap ev )
-    {
-      String[] name = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
-      StringBuilder sb = new StringBuilder();
-      int action = ev.getAction();
-      int actionCode = action & MotionEvent.ACTION_MASK;
-      sb.append( "Event action_").append( name[actionCode] );
-      if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
-        sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
-      }
-      sb.append( " [" );
-      for (int i=0; i<ev.getPointerCount(); ++i ) {
-        sb.append( "#" ).append( i );
-        sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
-        if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
-      }
-      sb.append( "]" );
-      Log.d("DistoX-TdManager", sb.toString() );
-    }
+    // private void dumpEvent( MotionEventWrap ev )
+    // {
+    //   String[] name = { "DOWN", "UP", "MOVE", "CANCEL", "OUTSIDE", "PTR_DOWN", "PTR_UP", "7?", "8?", "9?" };
+    //   StringBuilder sb = new StringBuilder();
+    //   int action = ev.getAction();
+    //   int actionCode = action & MotionEvent.ACTION_MASK;
+    //   sb.append( "Event action_").append( name[actionCode] );
+    //   if ( actionCode == MotionEvent.ACTION_POINTER_DOWN || actionCode == MotionEvent.ACTION_POINTER_UP ) {
+    //     sb.append( "(pid " ).append( action>>MotionEvent.ACTION_POINTER_ID_SHIFT ).append( ")" );
+    //   }
+    //   sb.append( " [" );
+    //   for (int i=0; i<ev.getPointerCount(); ++i ) {
+    //     sb.append( "#" ).append( i );
+    //     sb.append( "(pid " ).append( ev.getPointerId(i) ).append( ")=" ).append( (int)(ev.getX(i)) ).append( "." ).append( (int)(ev.getY(i)) );
+    //     if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
+    //   }
+    //   sb.append( "]" );
+    //   Log.d("DistoX-TdManager", sb.toString() );
+    // }
     
 
     float spacing( MotionEventWrap ev )
