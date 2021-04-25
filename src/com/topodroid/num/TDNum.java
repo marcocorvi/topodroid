@@ -535,6 +535,8 @@ public class TDNum
     return true;
   }
 
+  void addClosure( String closure ) { mClosures.add( closure ); }
+
   /** insert a leg shot
    * @param ts     leg shot
    * @param format loop closure report format
@@ -553,10 +555,11 @@ public class TDNum
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
         if ( format != null ) {
-          NumShortpath short_path = shortestPath( sf, st); 
-          if ( short_path != null ) {
-            mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-          }
+          (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+          // NumShortpath short_path = shortestPath( sf, st); 
+          // if ( short_path != null ) {
+          //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+          // }
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -831,10 +834,11 @@ public class TDNum
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
 	      if ( format != null ) {
-                NumShortpath short_path = shortestPath( sf, st); 
-                if ( short_path != null ) {
-                  mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-	        }
+                (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+                // NumShortpath short_path = shortestPath( sf, st); 
+                // if ( short_path != null ) {
+                //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	        // }
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -1510,7 +1514,7 @@ public class TDNum
    * @param b         closure azimuth
    * @param c         closure clino
    */
-  private String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, double length )
+  String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, double length )
   {
     // double tv =  - d * TDMath.sinDd( c );
     // double th =    d * TDMath.cosDd( c );
@@ -1665,7 +1669,7 @@ public class TDNum
    * FIXME this can take too long:
    * <init>:268 -- computeNum:1008 -- shortestPath:308, for ( NymShot e : mShots )
    */
-  private NumShortpath shortestPath( NumStation s1, NumStation s2 )
+  NumShortpath shortestPath( NumStation s1, NumStation s2 )
   {
     // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
     Stack< NumStation > stack = new Stack<NumStation>();
