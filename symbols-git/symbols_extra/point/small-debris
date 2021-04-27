@@ -1,0 +1,14 @@
+encoding utf-8
+symbol point
+name small-debris
+name-hu kis-törmelék
+th_name u:small-debris
+orientation no
+color 0xffcc66
+path
+  moveTo 0 0
+  lineTo 0.04 0.01
+  lineTo 0.02 -0.03
+  lineTo 0 0
+endpath
+endsymbol
