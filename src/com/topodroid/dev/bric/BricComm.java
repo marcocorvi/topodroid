@@ -181,10 +181,10 @@ public class BricComm extends TopoDroidComm
   public boolean setMemory( byte[] bytes )
   {
     if ( bytes == null ) { // CLEAR
-      Log.v("DistoX", "BRIC clear memory");
+      TDLog.Log( TDLog.LOG_BT, "BRIC clear memory");
       return sendCommand( BricConst.CMD_CLEAR );
     } else { // LAST TIME
-      Log.v("DistoX", "BRIC reset memory ... ");
+      TDLog.Log( TDLog.LOG_BT, "BRIC reset memory ... ");
       enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, bytes ) );
       clearPending();
       return true;
@@ -426,14 +426,14 @@ public class BricComm extends TopoDroidComm
   // from onMtuChanged
   public void changedMtu( int mtu )
   {
-    Log.v("DistoX", "BRIC comm changed MTU " + mtu );
+    TDLog.Log( TDLog.LOG_BT, "BRIC comm changed MTU " + mtu );
     clearPending();
   }
 
   // from onReadRemoteRssi
   public void readedRemoteRssi( int rssi )
   {
-    Log.v("DistoX", "BRIC comm readed RSSI " + rssi );
+    TDLog.Log( TDLog.LOG_BT, "BRIC comm readed RSSI " + rssi );
     clearPending();
   }
 
@@ -456,7 +456,7 @@ public class BricComm extends TopoDroidComm
       // Log.v("DistoX", "BRIC comm changed char ERR" ); 
       mQueue.put( DATA_ERR, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.LAST_TIME  ) ) {
-      Log.v("DistoX", "BRIC comm changed char TIME " + BleUtils.bytesToString( chrt.getValue() ) );
+      TDLog.Log( TDLog.LOG_BT, "BRIC comm changed char TIME " + BleUtils.bytesToString( chrt.getValue() ) );
       // mQueue.put( DATA_TIME, chrt.getValue() ); 
       // // Log.v("DistoX", "BRIC comm last time " + BleUtils.bytesToString( chrt.getValue() ) );
     } else {
@@ -633,7 +633,7 @@ public class BricComm extends TopoDroidComm
     if ( System.currentTimeMillis() < onData ) {
       if ( mBTConnected ) notifyStatus( ConnectionState.CONN_WAITING );
       if ( mTimer == null ) {
-        Log.v("DistoX", "schedule a disconnect Device" );
+        TDLog.Log( TDLog.LOG_BT, "schedule a disconnect Device" );
         mTimer = new Timer();
         mTimer.schedule(  new TimerTask() { @Override public void run() { disconnectDevice(); } }, 1000 );
       }
@@ -663,11 +663,11 @@ public class BricComm extends TopoDroidComm
       case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0,  9 ); break;
 /*
       case BricConst.CMD_SPLAY: 
-        Log.v("DistoX", "BRIC comm send cmd SPLAY");
+        TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd SPLAY");
         mPendingCommands += 1;
         break;
       case BricConst.CMD_LEG: 
-        Log.v("DistoX", "BRIC comm send cmd LEG");
+        TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd LEG");
         mPendingCommands += 3;
         break;
 */
@@ -686,12 +686,12 @@ public class BricComm extends TopoDroidComm
   {
     (new Thread() {
       public void run() {
-        Log.v("DistoX", "BRIC comm: enqueue LASER cmd");
+        TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue LASER cmd");
         byte[] cmd1 = Arrays.copyOfRange( BricConst.COMMAND_LASER, 0, 5 );
         enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd1 ) );
         doNextOp();
         TDUtil.slowDown( 600 );
-        Log.v("DistoX", "BRIC comm: enqueue SHOT cmd");
+        TDLog.Log( TDLog.LOG_BT, "BRIC comm: enqueue SHOT cmd");
         byte[] cmd2 = Arrays.copyOfRange( BricConst.COMMAND_SHOT, 0, 4 );
         enqueueOp( new BleOpChrtWrite( mContext, comm, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, cmd2 ) );
         doNextOp();
@@ -762,7 +762,7 @@ public class BricComm extends TopoDroidComm
     StringBuilder sb = new StringBuilder();
     sb.append( "BRIC comm Ops: ");
     for ( BleOperation op : mOps ) sb.append( op.name() ).append(" ");
-    Log.v("DistoX", sb.toString() );
+    TDLog.Log( TDLog.LOG_BT, sb.toString() );
   }
   */
     

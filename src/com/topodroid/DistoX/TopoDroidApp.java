@@ -658,16 +658,16 @@ public class TopoDroidApp extends Application
   {
     if ( TDLevel.overAdvanced ) {
       if ( TDInstance.isDeviceBric() ) {
-        Log.v("DistoX", "bt button over advanced : BRIC");
+        // Log.v("DistoX", "bt button over advanced : BRIC");
         if ( mComm != null && mComm.isConnected() ) { // FIXME BRIC_TESTER
           CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
           return;
         }
       } else if ( TDInstance.isDeviceSap() ) { // SAP5
-        Log.v("DistoX", "bt button over advanced : SAP");
+        // Log.v("DistoX", "bt button over advanced : SAP");
         /* nothing */
       } else { // DistoX
-        Log.v("DistoX", "bt button over advanced : DistoX");
+        // Log.v("DistoX", "bt button over advanced : DistoX");
         if ( ! mDataDownloader.isDownloading() ) {
           if ( TDInstance.hasDeviceRemoteControl() && ! TDSetting.isConnectionModeMulti()) {
             CutNPaste.showPopupBT( ctx, lister, this, b, false, (nr_shots == 0) );
@@ -678,7 +678,7 @@ public class TopoDroidApp extends Application
         }
       }
     }
-    Log.v("DistoX", "bt button not over advanced");
+    // Log.v("DistoX", "bt button not over advanced");
     doBluetoothReset( lister );
   }
 
@@ -2009,7 +2009,7 @@ public class TopoDroidApp extends Application
         info.getInfo( comm );
         if ( disconnect ) disconnectComm();
       } else {
-        TDLog.Error("Failed to connect BRIC");
+        TDLog.Error("get BRIC info: failed to connect");
       }
     }
     return false;
@@ -2017,7 +2017,7 @@ public class TopoDroidApp extends Application
 
   public boolean setBricMemory( byte[] bytes )
   {
-    Log.v("DistoX", "set BRIC memory - ... " + ( (bytes == null)? "clear" : bytes[4] + ":" + bytes[5] + ":" + bytes[6] ) );
+    // Log.v("DistoX", "set BRIC memory - ... " + ( (bytes == null)? "clear" : bytes[4] + ":" + bytes[5] + ":" + bytes[6] ) );
     boolean ret = false;
     if ( mComm != null && mComm instanceof BricComm ) {
       BricComm comm = (BricComm)mComm;
@@ -2030,7 +2030,7 @@ public class TopoDroidApp extends Application
         ret = comm.setMemory( bytes );
         if ( disconnect ) disconnectComm();
       } else {
-        Log.v("DistoX", "failed to connect BRIC");
+        TDLog.Error( "set BRIC memory: failed to connect");
       }
     }
     return ret;

@@ -5259,7 +5259,7 @@ public class DataHelper extends DataSetObservable
      {
         super(context, database_name, null, TDVersion.DATABASE_VERSION);
         TDLog.Log( TDLog.LOG_DB, "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
-        Log.v( "DistoX", "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
+        // Log.v( "DistoX", "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
      }
 
      @Override

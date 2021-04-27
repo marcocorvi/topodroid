@@ -15,6 +15,8 @@ import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.TDToast;
 
+import com.topodroid.utils.TDLog;
+
 import android.util.Log;
 
 import java.lang.ref.WeakReference;
@@ -47,7 +49,7 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
   protected Boolean doInBackground(Void... v)
   {
     if ( mApp.get() == null ) {
-      Log.v("DistoX", "BRIC memory - null app");
+      TDLog.Log( TDLog.LOG_BT, "BRIC memory - null app");
       return false;
     }
     // Log.v("DistoX", "BRIC memory - sending bytes " + ((bytes == null)? "null" : "non-null" ) );

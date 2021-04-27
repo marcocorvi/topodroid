@@ -294,7 +294,7 @@ public class BleCallback extends BluetoothGattCallback
   /*
   boolean enableNotify( UUID srvUuid, UUID chrtUuid )
   {
-    Log.v("DistoX", "BLE callback enable notify " + chrtUuid.toString() );
+    // Log.v("DistoX", "BLE callback enable notify " + chrtUuid.toString() );
     BluetoothGattCharacteristic chrt = getNotifyChrt( srvUuid, chrtUuid );
     return ( chrt != null ) && enableNotify( chrt );
   }

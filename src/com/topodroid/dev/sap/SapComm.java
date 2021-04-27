@@ -93,7 +93,7 @@ public class SapComm extends TopoDroidComm
 
   // void setRemoteDevice( BluetoothDevice device ) 
   // { 
-  //   Log.v("DistoX", "SAP comm: set remote " + device.getAddress() );
+  //   // Log.v("DistoX", "SAP comm: set remote " + device.getAddress() );
   //   mRemoteBtDevice = device;
   // }
 
@@ -343,7 +343,6 @@ public class SapComm extends TopoDroidComm
 
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX", "SAP comm: writtenChrt" );
     // Log.v("DistoX", "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str); return; }
     writeChrt( ); // try to write again
@@ -351,7 +350,7 @@ public class SapComm extends TopoDroidComm
 
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    Log.v("DistoX", "SAP comm: readedDesc" );
+    TDLog.Log( TDLog.LOG_BT, "SAP comm: readedDesc" );
   }
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
@@ -361,7 +360,7 @@ public class SapComm extends TopoDroidComm
 
   public void completedReliableWrite()
   {
-    Log.v("DistoX", "SAP comm: realiable write" );
+    TDLog.Log( TDLog.LOG_BT, "SAP comm: realiable write" );
   }
 
   public void disconnected()
@@ -438,13 +437,13 @@ public class SapComm extends TopoDroidComm
     TDLog.Error("SAP comm: failure " + status + " " + extra );
     switch ( status ) {
       case -1:
-        // Log.v("DistoX", "SAP comm: FAIL no R-desc CCCD ");
+        // TDLog.Error("SAP comm: FAIL no R-desc CCCD ");
         break;
       case -2:
-        // Log.v("DistoX", "SAP comm: FAIL no indicate/notify R-property ");
+        // TDLog.Error("SAP comm: FAIL no indicate/notify R-property ");
         break;
       case -3:
-        // Log.v("DistoX", "SAP comm: ERROR writing readDesc");
+        // TDLog.Error("SAP comm: ERROR writing readDesc");
         break;
       default:
     }
@@ -452,26 +451,26 @@ public class SapComm extends TopoDroidComm
 
   public boolean enablePNotify( UUID srcUuid, UUID chrtUuid )
   {
-    Log.v("DistoX", "SAP comm: enable P notify");
+    TDLog.Log( TDLog.LOG_BT, "SAP comm: enable P notify");
     return true;
   }
 
   public boolean enablePIndicate( UUID srcUuid, UUID chrtUuid )
   {
-    Log.v("DistoX", "SAP comm: enable P indicate");
+    TDLog.Log( TDLog.LOG_BT, "SAP comm: enable P indicate");
     return true;
   }
 
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
-    // Log.v("DistoX", "SAP connect Gatt" );
+    // TDLog.Log( TDLog.LOG_BT, "SAP connect Gatt" );
     closeChrt();
     mCallback.connectGatt( ctx, device );
   }
 
   public void disconnectGatt()
   {
-    // Log.v("DistoX", "SAP comm: disconnect Gatt" );
+    // TDLog.Log( TDLog.LOG_BT, "SAP comm: disconnect Gatt" );
     closeChrt();
     mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );

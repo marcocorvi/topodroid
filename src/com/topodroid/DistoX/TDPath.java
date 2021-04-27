@@ -194,7 +194,7 @@ public class TDPath
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )
   {
-    Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
+    // Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
     setBaseDir( basedir );
     File dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
@@ -429,7 +429,7 @@ public class TDPath
   public static void checkPath( String filename )
   {
     if ( filename == null ) {
-      Log.v("DistoX", "check path: null string" );
+      // Log.v("DistoX", "check path: null string" );
       return;
     }
     checkPath( TDFile.getFile( filename ) ); // DistoX-SAF
@@ -438,21 +438,20 @@ public class TDPath
   static private void checkPath( File fp ) // DistoX-SAF
   {
     if ( fp == null ) {
-      Log.v("DistoX", "check path: file null " );
+      // Log.v("DistoX", "check path: file null " );
       return;
     }
     if ( fp.exists() ) {
-      Log.v("DistoX", "check path: file exists " + fp.getPath() );
+      // Log.v("DistoX", "check path: file exists " + fp.getPath() );
       return;
     }
     File fpp = fp.getParentFile();
     if ( fpp.exists() ) {
-      Log.v("DistoX", "check path: parent file exists " + fpp.getPath() );
+      // Log.v("DistoX", "check path: parent file exists " + fpp.getPath() );
       return;
     }
     if ( ! fpp.mkdirs() ) {
-      Log.v("DistoX", "check path: failed mkdirs " + fpp.getPath() );
-      TDLog.Error("mkdirs error");
+      TDLog.Error("check path: failed mkdirs " + fpp.getPath() );
     }
   }
 

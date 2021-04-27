@@ -77,13 +77,13 @@ public class CWDActivity extends Activity
 
     String base_name = TDPath.getBaseDir();
     /* BASE DIR CANNOT BE CHANGED
-    Log.v("DistoX", "set CWD " + dir_name + " base name " + base_name );
+    // Log.v("DistoX", "set CWD " + dir_name + " base name " + base_name );
     if ( ! TDPath.hasPath11() ) {
       String b_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
       if ( b_name != null ) {
         b_name = b_name.trim();
         if ( b_name.length() > 0 ) base_name = b_name;
-        Log.v("DistoX", "CWD using base name " + base_name );
+        // Log.v("DistoX", "CWD using base name " + base_name );
       }
     }
 
@@ -120,7 +120,7 @@ public class CWDActivity extends Activity
     } else { 
       dir_name = "TopoDroid" + dir_name.substring(9);
     }
-    Log.v("DistoX", "CWD using dir name " + dir_name );
+    // Log.v("DistoX", "CWD using dir name " + dir_name );
 
     // return the result to TDPrefActivuity
     if ( TDPath.checkBasePath( dir_name, base_name ) ) {

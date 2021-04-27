@@ -43,7 +43,7 @@ class StationNameDefault extends StationName
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
 
     boolean ret = false;
-    Log.v("DistoX-DATA", "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
+    // Log.v("DistoX-DATA", "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
     ArrayList< DBlock > unassigned = new ArrayList<>();
     // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
@@ -166,7 +166,7 @@ class StationNameDefault extends StationName
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
-    Log.v( "DistoX-DATA", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
+    // Log.v( "DistoX-DATA", "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
 
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return false; // assign always false with no policy

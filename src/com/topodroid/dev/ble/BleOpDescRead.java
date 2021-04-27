@@ -29,6 +29,6 @@ public class BleOpDescRead extends BleOperation
   @Override 
   public void execute()
   {
-    Log.v("DistoX-BLE", "BleOp exec desc read");
+    TDLog.Log( TDLog.LOG_BT, "BleOp exec desc read");
   }
 }

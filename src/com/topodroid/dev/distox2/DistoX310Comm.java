@@ -94,7 +94,7 @@ public class DistoX310Comm extends DistoXComm
           TDUtil.slowDown( 100 );
         }
       // } else {
-      //   Log.v("DistoX-BLE", "DistoX310 comm: RF comm thread not null ");
+      //   TDLog.Log( TDLog.LOG_BT, "DistoX310 comm: RF comm thread not null ");
       }
     }
     destroySocket( );
@@ -198,7 +198,7 @@ public class DistoX310Comm extends DistoXComm
     if ( blk == 0 ) return null;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        Log.v("DistoX-FW", "comm firmware signature hw " + hw);
+       TDLog.Log( TDLog.LOG_BT, "comm firmware signature hw " + hw);
         ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( blk );
       }
     }
@@ -242,7 +242,7 @@ public class DistoX310Comm extends DistoXComm
         ret = -1;
       }
     } else {
-      Log.v("DistoX-FW", "Comm Firmware upoad socket failure");
+      TDLog.Log( TDLog.LOG_BT, "Comm Firmware upoad socket failure");
     }
     destroySocket( );
     return ret;
