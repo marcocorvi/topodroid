@@ -38,7 +38,7 @@ public class NumStation extends NumSurveyPoint
   public int     mHidden;  // whether the station is "hidden": 0 show, 1 hiding, 2 hidden
                     //                     or "barrier": -1 barrier, -2 behind
   public boolean mBarrierAndHidden;
-  NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
+  // NumShortpath mShortpathDist;  // loop closure distance (shortest-path algo)
 
   NumStation mParent; // parent station in the reduction tree
 

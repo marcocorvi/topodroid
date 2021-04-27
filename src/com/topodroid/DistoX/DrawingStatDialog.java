@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.num.TDNum;
+import com.topodroid.num.NumClosure;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
@@ -38,7 +39,7 @@ import android.widget.LinearLayout;
 // import android.widget.ArrayAdapter;
 
 class DrawingStatDialog extends MyDialog
-                       implements View.OnClickListener
+                        implements View.OnClickListener
 {
     private TDNum mNum;
     private String mOrigin;
@@ -126,7 +127,7 @@ class DrawingStatDialog extends MyDialog
             mNum.angleErrorMean() * TDMath.RAD2DEG, mNum.angleErrorStddev() * TDMath.RAD2DEG ) );
 
    
-        List< String > cls = mNum.getClosures();
+        List< NumClosure > cls = mNum.getClosures();
 	int nr_loop = cls.size();
         if ( nr_loop == 0 ) {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
@@ -134,9 +135,19 @@ class DrawingStatDialog extends MyDialog
           ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop ) );
 	  LinearLayout list = (LinearLayout) findViewById( R.id.list );
           LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
-	  for ( String cl : cls ) {
+	  for ( NumClosure cl : cls ) {
             TextView tv = new TextView( mContext );
-	    tv.setText( cl );
+	    tv.setText( cl.getDescription() );
+            tv.setHint( cl.getLoop() );
+            tv.setOnClickListener( new View.OnClickListener() {
+              public void onClick( View v ) {
+                TextView ttv = (TextView)v;
+                CharSequence text = ttv.getText();
+                CharSequence hint = ttv.getHint();
+                ttv.setText( hint );
+                ttv.setHint( text );
+              }
+            } );
 	    list.addView( tv, lp );
 	  }
         }

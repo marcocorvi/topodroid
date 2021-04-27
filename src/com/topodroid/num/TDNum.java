@@ -217,7 +217,7 @@ public class TDNum
   private ArrayList< NumStation > mClosureStations;
   private ArrayList< NumShot >    mShots;
   private ArrayList< NumSplay >   mSplays;
-  private ArrayList< String >     mClosures;
+  private ArrayList< NumClosure > mClosures;
   private ArrayList< NumNode >    mNodes;
   private ArrayList< DBlock >     mUnattachedShots;
 
@@ -231,7 +231,7 @@ public class TDNum
   public List< NumStation > getClosureStations() { return mClosureStations; }
   public List< NumShot >    getShots()    { return mShots; }
   public List< NumSplay >   getSplays()   { return mSplays; }
-  public List< String >     getClosures() { return mClosures; }
+  public List< NumClosure > getClosures() { return mClosures; }
   public List< DBlock >     getUnattached() { return mUnattachedShots; }
 
   public List< NumSplay >   getSplaysAt( NumStation st )
@@ -549,7 +549,7 @@ public class TDNum
     return true;
   }
 
-  void addClosure( String closure ) { mClosures.add( closure ); }
+  void addClosure( NumClosure closure ) { mClosures.add( closure ); }
 
   /** insert a leg shot
    * @param ts     leg shot
@@ -569,11 +569,10 @@ public class TDNum
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
         if ( format != null ) {
-          (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-          // NumShortpath short_path = shortestPath( sf, st); 
-          // if ( short_path != null ) {
-          //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-          // }
+          ArrayList< NumShot > shots = getShortestPathShots( sf, st );
+          ArrayList< NumShortpath > paths = new ArrayList<>();
+          mStations.initShortestPath( paths, 1000000.0f );
+          (new ClosureTask( this, format, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -850,12 +849,10 @@ public class TDNum
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
 	      if ( format != null ) {
-                (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-                // NumShortpath short_path = shortestPath( sf, st); 
-                // if ( short_path != null ) {
-                //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-	        // }
-
+                ArrayList< NumShot > shots = getShortestPathShots( sf, st );
+                ArrayList< NumShortpath > paths = new ArrayList<>();
+                mStations.initShortestPath( paths, 1000000.0f );
+                (new ClosureTask( this, format, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -1535,45 +1532,6 @@ public class TDNum
     }
   }
 
-  /** get the string description of the loop closure error(s) [need the loop length to compute the percent error]
-   * @param format    string format
-   * @param at        closed station (to)
-   * @param fr        closing station (from)
-   * @param d         closure distance
-   * @param b         closure azimuth
-   * @param c         closure clino
-   */
-  String getClosureError( String format, NumStation at, NumStation fr, float d, float b, float c, NumShortpath short_path, double length )
-  {
-    // double tv =  - d * TDMath.sinDd( c );
-    // double th =    d * TDMath.cosDd( c );
-    // double te =   th * TDMath.sinDd( b );
-    // double ts = - th * TDMath.cosDd( b );
-    // // FROM + T - AT
-    // Log.v("DistoX-LOOP", "closure at   " + at.name + " " + at.e + " " + at.s + " " + at.v );
-    // Log.v("DistoX-LOOP", "closure from " + fr.name + " " + fr.e + " " + fr.s + " " + fr.v );
-    // Log.v("DistoX-LOOP", "closure diff " + (fr.e-at.e) + " " + (fr.s-at.s) + " " + (fr.v-at.v) );
-    // Log.v("DistoX-LOOP", "closure " + te + " " + ts + " " + tv );
-
-    double dv = Math.abs( fr.v - d * TDMath.sinDd(c) - at.v );  // closure vertical error
-    double h0 = d * Math.abs( TDMath.cosDd(c) );
-    double ds = Math.abs( fr.s - h0 * TDMath.cosDd( b ) - at.s ); // closure south error
-    double de = Math.abs( fr.e + h0 * TDMath.sinDd( b ) - at.e ); // closure east error
-    double dh = ds*ds + de*de;
-    double dl = Math.sqrt( dh + dv*dv );
-    dh = Math.sqrt( dh );
-
-    int nr     = 1 + short_path.mNr;
-    double len  = length + short_path.mDist;
-    double len2 = length*length + short_path.mDist2;
-    double error = (dl*100) / len;
-    // double angle = dl / TDMath.sqrt( len2 ) * TDMath.RAD2DEG;
-    double angle = TDMath.sqrt( nr ) * dl / len * TDMath.RAD2DEG;
-
-    // return String.format(Locale.US, "%s-%s %.1f/%.1f m [%.1f %.1f] %.1f%% (%.2f &#00b0;)", fr.name, at.name,  dl, len, dh, dv, error, angle );
-    return String.format(Locale.US, format, fr.name, at.name, nr, dl, len, dh, dv, error, angle );
-  }
-
   // -------------------------------------------------------------
   // TRILATERATION 
 
@@ -1691,57 +1649,17 @@ public class TDNum
     return new TDVector( (float)( st1.e + (st2.e-st1.e)*s ), (float)( st1.s + (st2.s-st1.s)*s ), (float)( st1.v + ( st2.v - st1.v)*s ) );
   }
 
-  /** shortest-path algo
-   * @param s1  first station
-   * @param s2  second station
-   *
-   * FIXME this can take too long:
-   * <init>:268 -- computeNum:1008 -- shortestPath:308, for ( NymShot e : mShots )
-   */
-  NumShortpath shortestPath( NumStation s1, NumStation s2 )
+  
+  private ArrayList<NumShot> getShortestPathShots( NumStation s1, NumStation s2 )
   {
-    // Log.v("DistoX-LOOP", "shortest path " + s1.name + " " + s2.name );
-    Stack< NumStation > stack = new Stack<NumStation>();
-    mStations.initShortestPath( 100000.0f );
-
-    s1.mShortpathDist.resetShortpath( 0, 0, 0 ); // clear 
-    stack.push( s1 );
-    while ( ! stack.empty() ) {
-      NumStation s = stack.pop();
-      NumShortpath sp = s.mShortpathDist;
-      synchronized( mShots ) {
-        for ( NumShot e : mShots ) {
-          if ( e.from == null || e.to == null ) continue;
-          if ( e.from == s1   && e.to == s2   ) continue;
-          if ( e.from == s2   && e.to == s1   ) continue;
-          float len = e.length();
-          if ( e.from == s /* && e.to != null */ ) {
-            NumShortpath etp = e.to.mShortpathDist;
-            if ( etp != null ) {
-              float d = sp.mDist + len;
-              if ( d < etp.mDist - 0.001f ) { // at least 1 mm shorter
-                // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
-                etp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
-                // e.to.path = from;
-                stack.push( e.to );
-              }
-            }
-          } else if ( e.to == s /* && e.from != null */ ) {
-            NumShortpath efp = e.from.mShortpathDist;
-            if ( efp != null ) {
-              float d = sp.mDist + len;
-              if ( d < efp.mDist - 0.001f ) { // at least 1 mm shorter
-                // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
-                efp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
-                // e.from.path = from;
-                stack.push( e.from );
-              }
-            }
-          }
-        }
-      }
+    ArrayList< NumShot > ret = new ArrayList<>();
+    for ( NumShot e : mShots ) {
+      if ( e.from == null || e.to == null ) continue;
+      if ( e.from == s1   && e.to == s2   ) continue;
+      if ( e.from == s2   && e.to == s1   ) continue;
+      ret.add( e );
     }
-    return s2.mShortpathDist;
+    return ret;
   }
 
   /** matrix inverse: gauss pivoting method

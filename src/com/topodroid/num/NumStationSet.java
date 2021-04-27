@@ -111,11 +111,12 @@ class NumStationSet
 
 
     // initialize the subtree at this node with a distance value "p" (supposedly large)
-    void initShortPathDist( float p ) 
+    void initShortPathDist( ArrayList<NumShortpath> paths, float p ) 
     { 
-      value.mShortpathDist = new NumShortpath( 0, p, 0 );
-      if ( left  != null ) left.initShortPathDist( p );
-      if ( right != null ) right.initShortPathDist( p );
+      // value.mShortpathDist = new NumShortpath( 0, p, 0 );
+      paths.add( new NumShortpath( value, 0, p, 0 ) );
+      if ( left  != null ) left.initShortPathDist( paths, p );
+      if ( right != null ) right.initShortPathDist( paths, p );
     }
 
     // used to reset the flag "has 3D Coords" to stations in a station set
@@ -187,10 +188,10 @@ class NumStationSet
   }
   
   // initialize the tree with a distance value "p" (supposedly large)
-  void initShortestPath( float p ) 
+  void initShortestPath( ArrayList<NumShortpath> paths, float p ) 
   {
     if ( mRoot == null ) return;
-    mRoot.initShortPathDist( p );
+    mRoot.initShortPathDist( paths, p );
   }
 
   // reset the flag "has 3D Coords" in the stations of this set

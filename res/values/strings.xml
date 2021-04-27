@@ -355,7 +355,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_undelete">No item to recover</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string>
+    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f%% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">ABOUT</string>

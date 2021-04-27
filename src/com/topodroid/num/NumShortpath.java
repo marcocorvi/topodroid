@@ -17,38 +17,33 @@ package com.topodroid.num;
 
 class NumShortpath
 {
+  NumShortpath mFrom; // link to the previous shortpath
+  NumStation mStation;
   int     mNr;    // number of segments in this short path
   float   mDist;  // loop closure distance (shortest-path algo)
   float   mDist2; // loop closure squared distance (shortest-path algo)
 
-  NumShortpath()
+  // create a short path - when created the shortpath is unlinked
+  NumShortpath( NumStation station, int n, float d, float d2 )
   {
-    mNr    = 0;
-    mDist  = 0;
-    mDist2 = 0;
-  }
-
-  // start a short path 
-  NumShortpath( int n, float d, float d2 )
-  {
+    mFrom    = null;
+    mStation = station;
     mNr    = n;
     mDist  = d;
     mDist2 = d2;
   }
 
-  // create a new short path adding a segmentto this 
-  // @param length    segment length
-  NumShortpath addSegment( float len )
-  {
-    return new NumShortpath( mNr+1, mDist+len, mDist2+len*len );
-  }
+  // get the name of the station
+  String getName() { return (mStation == null)? "--" : mStation.name; }
 
   // reset the values of this short-path
+  // @param from previous link
   // @param n   number of segments
   // @param d   length = sum of segment lengths
   // @param d2  sum of segment square lengths
-  void resetShortpath( int n, float d, float d2 )
+  void resetShortpath( NumShortpath from, int n, float d, float d2 )
   {
+    mFrom  = from;
     mNr    = n;
     mDist  = d;
     mDist2 = d2;

@@ -294,8 +294,8 @@ public class PTFile
       // read ID and version
       byte[] bytes = new byte[4];
       read( fs, bytes, 4 );
-      // assert bytes == Top3
-      TDLog.Log( TDLog.LOG_PTOPO, "PT ID " + bytes[0] + bytes[1] + bytes[2] );
+      // assert bytes == Top3 ie 0x54 0x6F 0x70 ...
+      TDLog.Log( TDLog.LOG_PTOPO, "PT ID file " + String.format("%02X %02X %02X %02X", bytes[0], bytes[1], bytes[2], bytes[3] ) );
 
       int tc = PTFile.readInt( fs ); 
       // Log.v("PTDistoX", "trip count " + tc );
