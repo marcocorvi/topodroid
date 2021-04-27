@@ -4,7 +4,7 @@ name-pt linha_elétrica
 name-ru линия_электропередач
 name-ro linie-curent
 name-hu áram_vezeték
-th_name u:powerline
+th_name powerline
 group powerline
 color 0xff0000
 width 2

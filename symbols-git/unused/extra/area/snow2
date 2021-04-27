@@ -10,7 +10,7 @@ name-ru снег2
 name-bg сняг2
 name-hu hó2
 name-ro zăpadă
-th_name u:snow2
+th_name snow2
 color 0xffffff 0x96
 csurvey 1 48 0 1
 bitmap 50 50 R R

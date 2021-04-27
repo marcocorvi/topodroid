@@ -4,7 +4,7 @@ name-pt poço_fechado
 name-ru закрытый_ствол
 name-ro puț-închis
 name-hu akna_lezárt
-th_name u:shaft-closed
+th_name shaft-closed
 color 0xffffff
 csurvey 0 0 0
 path

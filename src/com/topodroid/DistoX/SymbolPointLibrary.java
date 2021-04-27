@@ -197,7 +197,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     if ( isSymbolEnabled( thname ) ) return true;
     Symbol symbol = getSymbolByThName( thname );
     if ( symbol == null ) {
-      String filename = thname.startsWith("u:")? thname.substring(2) : thname ;
+      String filename = thname; // THERION-U: thname.startsWith("u:")? thname.substring(2) : thname ;
       // Log.v( "DistoX", "load missing point " + thname + " filename " + filename );
       File file = TDFile.getFile( TDPath.getSymbolSavePointPath( filename ) );
       if ( ! file.exists() ) return false;

@@ -4,7 +4,7 @@ name-pt poço_óleo
 name-ru нефтяная_кважина
 name-ro lampă-ulei
 name-hu olajkút
-th_name u:oil-well
+th_name oil-well
 color 0x66ff99
 csurvey 0 0 0
 path

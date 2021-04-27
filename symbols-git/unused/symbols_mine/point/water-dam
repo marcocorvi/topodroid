@@ -4,7 +4,7 @@ name-pt barreira_água
 name-ru дамба
 name-ro baraj-apă
 name-hu vízgát
-th_name u:water-dam
+th_name water-dam
 color 0x00ccff
 csurvey 0 0 0
 path

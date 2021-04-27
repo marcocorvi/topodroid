@@ -4,7 +4,7 @@ name-pt poço_abandonado
 name-ru брошеная_шахта
 name-ro puț-abandonat
 name-hu akna_felhagyott
-th_name u:shaft-abandoned
+th_name shaft-abandoned
 color 0xcccccc
 csurvey 0 0 0
 path

@@ -1231,7 +1231,8 @@ public class DrawingIO
         // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
         // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
         if ( bbox == null || splay.intersects( bbox ) ) {
-          pw.format("line u:splay -visibility off\n");
+          // THERION-U: pw.format("line u:splay -visibility off\n");
+          pw.format("line splay -visibility off\n");
           pw.format( Locale.US, "  %.2f %.2f\n  %.2f %.2f\n", splay.x1*toTherion, -splay.y1*toTherion, splay.x2*toTherion, -splay.y2*toTherion );
           pw.format("endline\n");
         }

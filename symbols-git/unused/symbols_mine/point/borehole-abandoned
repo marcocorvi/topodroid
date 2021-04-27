@@ -4,7 +4,7 @@ name-pt sondagem_abandonada
 name-ru скважина_брошенная
 name-ro foraj-abandonat
 name-hu fúrólyuk-felhagyott
-th_name u:borehole-abandoned
+th_name borehole-abandoned
 color 0xff9933
 csurvey 0 0 0
 path

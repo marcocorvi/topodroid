@@ -8,7 +8,7 @@ name-de Schuttfläche2
 name-ru щебень2
 name-hu kőtörmelék2
 name-ro prăbușiri
-th_name u:debris2
+th_name debris2
 color 0xff6666 0x99
 csurvey 1 48 0 8
 bitmap 40 40 R M

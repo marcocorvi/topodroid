@@ -4,7 +4,7 @@ name-pt ar_vermelho
 name-ru воздух_красный
 name-ro aer-roșu
 name-hu levegő_vörös
-th_name u:air-red
+th_name air-red
 color 0xff0000
 csurvey 0 0 0 
 orientation yes

@@ -18,7 +18,11 @@ In particular symbol files contains information used in the Therion and cSurvey 
 
 Therion:
 therion name
-For symbols not supported by therion use the "u:name" syntax
+For symbols not supported by therion the "u:name" syntax must not be used any more.
+
+The therion name MUST coincide with the filename.
+The only catch is ':' in the therion name, which is replaced by '=' in the repo filename.
+This is then automatcially substituted with ':' when the file is compressed in the zip.
 
 cSurvey directives are no longer needed.
 

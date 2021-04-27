@@ -4,7 +4,7 @@ name-pt telefone
 name-ru телефон
 name-ro telefon
 name-hu telefon
-th_name u:phone
+th_name phone
 group phone
 color 0x33ff66 0xff
 width 1

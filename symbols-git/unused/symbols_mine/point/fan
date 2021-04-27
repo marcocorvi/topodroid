@@ -4,7 +4,7 @@ name-pt ventilador
 name-ru вентилятор
 name-ro ventilator
 name-hu ventillátor
-th_name u:fan
+th_name fan
 color 0xffffff
 csurvey 0 0 0 
 path

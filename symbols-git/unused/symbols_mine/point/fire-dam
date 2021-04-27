@@ -4,7 +4,7 @@ name-pt barreira_incêndio
 name-ru пожарная_дамба
 name-ro baraj-foc
 name-hu tűzgát
-th_name u:fire-dam
+th_name fire-dam
 color 0xff3333
 csurvey 0 0 0
 path

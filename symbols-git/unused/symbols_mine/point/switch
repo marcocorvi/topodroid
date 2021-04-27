@@ -4,7 +4,7 @@ name-pt troca
 name-ru переключатель
 name-ro întrerupător
 name-hu kapcsoló
-th_name u:switch
+th_name switch
 color 0xffffff
 csurvey 0 0 0
 path
