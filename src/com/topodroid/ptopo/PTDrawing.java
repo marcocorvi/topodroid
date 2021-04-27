@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 
-// import android.util.Log;
+import android.util.Log;
 
 public class PTDrawing
 {
@@ -67,13 +67,13 @@ public class PTDrawing
           // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id xsection" );
           el = new PTXSectionElement();
         } else if ( id == PTElement.ID_NO_ELEMENT ) {
-          // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id no element" );
+          //  TDLog.Log( TDLog.LOG_PTOPO, "PT drawing id no element" );
           break;
         }
         if ( el != null ) el.read( fs );
         _elements.add( el );
       }
-      // Log.v("PTDistoX", "drawing read " + _elements.size() + " elements " );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT drawing read " + _elements.size() + " elements " );
     }
 
     void write( FileOutputStream fs )

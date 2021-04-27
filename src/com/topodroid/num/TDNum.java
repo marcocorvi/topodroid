@@ -39,7 +39,7 @@ public class TDNum
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
-    // Log.v("DistoX-DATA", "num cstr: decl " + decl + " start " + start );
+    TDLog.Log( TDLog.LOG_NUM, "data reduction: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     surveyAttached = computeNum( data, start, format );
@@ -555,11 +555,11 @@ public class TDNum
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
         if ( format != null ) {
-          (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-          // NumShortpath short_path = shortestPath( sf, st); 
-          // if ( short_path != null ) {
-          //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-          // }
+          // (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+          NumShortpath short_path = shortestPath( sf, st); 
+          if ( short_path != null ) {
+            mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+          }
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -717,7 +717,7 @@ public class TDNum
     List< TriSplay > tmpsplays = new ArrayList<>();
 
     initShots( data, tmpshots, tmpsplays );
-    // Log.v("DistoX", "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
+    TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmpshots );
@@ -798,6 +798,7 @@ public class TDNum
       }
     }
 
+    // Log.v("DistoX-NUM", "compute leg error ...");
     computeInLegError();
 
     // ---------------------------------- DATA REDUCTION -------------------------------
@@ -809,6 +810,7 @@ public class TDNum
     // first-pass all shots with regular extends
     // second-pass any leftover shot
     for ( int pass = 0; pass < 2; ++ pass ) {
+      TDLog.Log( TDLog.LOG_NUM, "data reduction pass " + pass );
       boolean repeat = true;
       while ( repeat ) {
         repeat = false;
@@ -834,11 +836,12 @@ public class TDNum
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
 	      if ( format != null ) {
-                (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-                // NumShortpath short_path = shortestPath( sf, st); 
-                // if ( short_path != null ) {
-                //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-	        // }
+                // (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+                NumShortpath short_path = shortestPath( sf, st); 
+                if ( short_path != null ) {
+                  mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	        }
+
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -871,6 +874,7 @@ public class TDNum
 
     // ---------------------------------- LOOP CLOSURE -------------------------------
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) { // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
+      TDLog.Log( TDLog.LOG_NUM, "loop closure compensation");
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -921,6 +925,7 @@ public class TDNum
     }
 
     // ---------------------------------- INSERT SPLAYS -------------------------------
+    // Log.v("DistoX-NUM", "insert splays");
     mStations.setAzimuths();
     // for ( NumStation st : mStations ) st.setAzimuths();
     for ( TriSplay ts : tmpsplays ) {
@@ -936,7 +941,7 @@ public class TDNum
         mUnattachedLength += ts.blocks.get(0).mLength;
       }
     }
-    // Log.v("DistoXN", "unattached shot length " + mUnattachedLength );
+    TDLog.Log( TDLog.LOG_NUM, "unattached shot length " + mUnattachedLength );
     
     return (mShots.size() + nrSiblings == tmpshots.size() );
   }

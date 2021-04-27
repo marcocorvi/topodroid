@@ -1015,20 +1015,23 @@ public class TopoDroidApp extends Application
       
       if ( ! (    mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN
                && mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
-        TDLog.Log( TDLog.LOG_ZIP,
-                          "TopDroid DB version mismatch: found " + mManifestDbVersion + " expected " + 
-                          + TDVersion.DATABASE_VERSION_MIN + "-" + TDVersion.DATABASE_VERSION );
+        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " expected " + 
+                     + TDVersion.DATABASE_VERSION_MIN + "-" + TDVersion.DATABASE_VERSION );
         return -3;
       }
       surveyname = br.readLine().trim();
       // if ( ! line.equals( surveyname ) ) return -4;
       if ( mData.hasSurveyName( surveyname ) ) {
+        TDLog.Error( "TopoDroid survey exists already: <" + surveyname + ">" );
         return -1;
       }
       fr.close();
     } catch ( NumberFormatException e ) {
+      TDLog.Error( "Top0Droid check manifest error: " + e.getMessage() );
     } catch ( FileNotFoundException e ) {
+      TDLog.Error( "Top0Droid check manifest file not found: " + e.getMessage() );
     } catch ( IOException e ) {
+      TDLog.Error( "Top0Droid check manifest I/O error: " + e.getMessage() );
     }
     return ret;
   }
@@ -1072,7 +1075,7 @@ public class TopoDroidApp extends Application
              || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
              || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
           ) {
-          TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
+          TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
           return -2;
         }
         if (    ( major > TDVersion.MAJOR ) 
@@ -1093,11 +1096,11 @@ public class TopoDroidApp extends Application
         try {
           version_code = Integer.parseInt( ver[0] );
           if ( version_code < TDVersion.CODE_MIN ) {
-            TDLog.Log( TDLog.LOG_ZIP, "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
+            TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
             return -2;
           }
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "parse error: version code " + ver[0] );
+          TDLog.Error( "parse error: version code " + ver[0] + " " + e.getMessage() );
           return -2;
         }
         if ( version_code > TDVersion.VERSION_CODE ) ret = 1;

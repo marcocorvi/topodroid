@@ -19,7 +19,7 @@ import java.io.FileOutputStream;
 // import android.util.Log;
 
 
-class PTXSectionElement extends PTElement
+public class PTXSectionElement extends PTElement
 {
     private PTPoint _pos;
     private PTId _station;
@@ -33,19 +33,19 @@ class PTXSectionElement extends PTElement
       _direction = 0;
     }
 
-    PTPoint position() { return _pos; }
+    public PTPoint position() { return _pos; }
 
     void setPosition( int x, int y ) { _pos.set(x,y); }
 
-    PTId station() { return _station; }
+    public PTId station() { return _station; }
 
     /** get the direction (internal angle units)
      */
-    int direction() { return _direction; }
+    public int direction() { return _direction; }
 
     /** get the direction [in degrees]
      */
-    float getDirection() 
+    public float getDirection() 
     {
       if ( _direction == -1 ) return -1.0f;
       return (float)(_direction) * PTFile.INT16_2_DEG;

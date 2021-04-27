@@ -650,8 +650,7 @@ public class DrawingIO
 				   boolean complete,
 				   String plotName )
   {
-    // Log.v("DistoXX", "load data stream file " + filename );
-    // if ( plotName != null ) Log.v("DistoXX", "load data stream plot-name " + plotName );
+    Log.v("DistoXX", "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
 
     int version = 0;
     boolean in_scrap = false;
@@ -701,7 +700,7 @@ public class DrawingIO
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
-          // Log.v("DistoX", " read " + what );
+          Log.v("DistoXX", " read " + what );
           path = null;
           switch ( what ) {
             case 'V':

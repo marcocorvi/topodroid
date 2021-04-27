@@ -1881,7 +1881,7 @@ public class DrawingWindow extends ItemDrawer
     TDandroid.setScreenOrientation( this );
 
     // TDLog.TimeStart();
-    // Log.v("DistoX", "onCreate()" );
+    // Log.v("DistoX", "Drawing Window on create" );
 
     mApp  = (TopoDroidApp)getApplication();
     mActivity = this;
@@ -1995,6 +1995,7 @@ public class DrawingWindow extends ItemDrawer
       mFullName2 = TDInstance.survey + "-" + mName2;
       mFullName3 = null;
       mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
+      // Log.v("DistoXX", "name1 " + mName1 + " " + mFullName1 + " name2 " + mName2 + " " + mFullName2 );
 
       mName    = (mType == PlotType.PLOT_PLAN)? mName1 : mName2;
       mFrom    = extras.getString( TDTag.TOPODROID_PLOT_FROM );
@@ -2003,6 +2004,7 @@ public class DrawingWindow extends ItemDrawer
       mClino   = extras.getFloat( TDTag.TOPODROID_PLOT_CLINO );
       mMoveTo  = extras.getString( TDTag.TOPODROID_PLOT_MOVE_TO );
       mLandscape = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
+      // Log.v("DistoXX", "from " + mFrom );
     } 
     // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
     // mDrawingUtil = new DrawingUtilPortrait();
@@ -2437,16 +2439,16 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = null;
     if ( PlotType.isSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
-      Log.v("DistoX-SPLAY", "Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
+      // Log.v("DistoX-SPLAY", "Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
     } else if ( PlotType.isXSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
-      Log.v("DistoX-SPLAY", "Station-Xsection select all shots at " + mFrom + " : " + list.size() );
+      // Log.v("DistoX-SPLAY", "Station-Xsection select all shots at " + mFrom + " : " + list.size() );
     }
     if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
-      Log.v("DistoX-GRID", "doRestart section T " + mIntersectionT + " " + mPlot3.intercept );
+      // Log.v("DistoX-GRID", "doRestart section T " + mIntersectionT + " " + mPlot3.intercept );
       if ( mIntersectionT != mPlot3.intercept ) {
-        Log.v("DistoX", "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
+        // Log.v("DistoX", "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
         mPlot3.intercept = mIntersectionT;
         mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
       }
@@ -2459,10 +2461,10 @@ public class DrawingWindow extends ItemDrawer
   // called by onCreate, switchPlotType, onBackPressed and pushInfo
   private void doStart( boolean do_load, float tt )
   {
-    // Log.v("DistoX-C", "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // Log.v("DistoXX", "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
-    // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
+    TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
     mCurrentPoint = ( BrushManager.isPointEnabled( "label" ) )?  1 : 0;
     mCurrentLine  = ( BrushManager.isLineEnabled( "wall" ) )?  1 : 0;
     mCurrentArea  = ( BrushManager.isAreaEnabled( "water" ) )?  1 : 0;
@@ -2506,7 +2508,7 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotType.isAnySection( mType ) ) {
       // Log.v("DistoX-GRID", "do start section T " + tt + " " + mPlot3.intercept );
       if ( tt != mPlot3.intercept ) {
-        Log.v("DistoX", "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
+        // Log.v("DistoX", "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
         mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, tt );
         mPlot3.intercept = tt;
       }
@@ -2534,7 +2536,7 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null); // not needed - guaranteed by callers
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
-    Log.v("DistoX", "section list " + list.size() + " tt " + tt + " skip " + skip + " azimuth " + mAzimuth + " clino " + mClino );
+    // Log.v("DistoX", "section list " + list.size() + " tt " + tt + " skip " + skip + " azimuth " + mAzimuth + " clino " + mClino );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
     float xfrom=0;
@@ -2650,9 +2652,9 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
       }
     }
-    Log.v("DistoX", "From " + xfrom + " " + yfrom + " " + zfrom );
-    Log.v("DistoX", "To   " + xto + " " + yto + " " + zto );
-    Log.v("DistoX", "TT   " + xtt + " " + ytt + " " + ztt );
+    // Log.v("DistoX", "From " + xfrom + " " + yfrom + " " + zfrom );
+    // Log.v("DistoX", "To   " + xto + " " + yto + " " + zto );
+    // Log.v("DistoX", "TT   " + xtt + " " + ytt + " " + ztt );
 
     // using distance of splay endpoint from xsection plane
     // V0 = normal to the plane
@@ -2730,7 +2732,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // Log.v("DistoX-C", "load files " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null ); // guaranteed when called
-    // Log.v("DistoX", "load files()" );
+    // Log.v("DistoXX", "load files()" );
     
     // String filename1  = null;
     String filename1b = null;
@@ -2740,7 +2742,7 @@ public class DrawingWindow extends ItemDrawer
     String filename3b = null;
 
     if ( PlotType.isSketch2D( type ) ) {
-      // Log.v( "DistoX", "load files type " + type + " " + mName1 + " " + mName2 );
+      // Log.v( "DistoXX", "load files type " + type + " " + mName1 + " " + mName2 );
       mPlot1 = mApp_mData.getPlotInfo( mSid, mName1 );
       mPlot2 = mApp_mData.getPlotInfo( mSid, mName2 );
       if ( mPlot1 == null ) return false;
@@ -2753,6 +2755,7 @@ public class DrawingWindow extends ItemDrawer
       filename1b = TDPath.getTdrFileWithExt( mFullName1 );
       // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
       filename2b = TDPath.getTdrFileWithExt( mFullName2 );
+      TDLog.Log( TDLog.LOG_PLOT, "load files " + filename1b + " " + filename2b );
     } else {
       // Log.v( "DistoX", "load files type " + type + " " + mName3 );
       mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
@@ -2760,6 +2763,7 @@ public class DrawingWindow extends ItemDrawer
       mPid3  = mPlot3.id;
       // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
       filename3b = TDPath.getTdrFileWithExt( mFullName3 );
+      TDLog.Log( TDLog.LOG_PLOT, "load file " + filename3b );
     }
 
     // mAllSymbols  = true; // by default there are all the symbols
@@ -2772,6 +2776,7 @@ public class DrawingWindow extends ItemDrawer
 
     if ( PlotType.isSketch2D( type ) ) {
       if ( list.size() > 0 ) {
+        // Log.v("DistoXX", "data reduction " + list.size() + " start at " + mPlot1.start );
         mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       } else {
         mNum = null;
@@ -2782,11 +2787,13 @@ public class DrawingWindow extends ItemDrawer
       }
 
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
+        // Log.v("DistoXX", "modeload data stream 1");
         // mAllSymbols =
         mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ );
         // DrawingSurface.addManagerToCache( mFullName1 );
       }
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, mFullName2, PlotType.isExtended(mPlot2.type) ) ) {
+        // Log.v("DistoXX", "modeload data stream 2");
         // mAllSymbols = mAllSymbols &&
         mDrawingSurface.modeloadDataStream( filename2b, mFullName2, false /*, FIXME-MISSING missingSymbols */ );
         // DrawingSurface.addManagerToCache( mFullName2 );
@@ -4256,7 +4263,7 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.addDrawingPath( section_pt );
       }
 
-      Log.v("DistoX", "line section dialog TT " + tt );
+      // Log.v("DistoX", "line section dialog TT " + tt );
       new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
 
     } else { // many legs in profile view
@@ -5866,10 +5873,10 @@ public class DrawingWindow extends ItemDrawer
     void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
                           float azimuth, float clino, float tt )
     {
-      Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+      // Log.v("DistoX", "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
-        Log.v("DistoX", "push info: " + type + " <" + mSectionName + "> TT " + tt );
+        // Log.v("DistoX", "push info: " + type + " <" + mSectionName + "> TT " + tt );
         mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
         pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
         zoomFit( mDrawingSurface.getBitmapBounds() );
@@ -6599,7 +6606,7 @@ public class DrawingWindow extends ItemDrawer
         setPlotType3( );
         // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
         float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
-        Log.v("DistoX-GRID", "do section T " + tt );
+        // Log.v("DistoX-GRID", "do section T " + tt );
         makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), tt, 0 );
       } else {
         TDLog.Error("null Plot 3");

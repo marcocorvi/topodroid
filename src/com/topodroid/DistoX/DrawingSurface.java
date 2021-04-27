@@ -50,7 +50,7 @@ import java.io.PrintWriter;
 // import java.util.Timer;
 // import java.util.TimerTask;
 
-// import android.util.Log;
+import android.util.Log;
 
 /**
  */
@@ -821,12 +821,17 @@ class DrawingSurface extends SurfaceView
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (TDFile.getFile( tdr1 )).exists() ) {
+        // Log.v("DistoXX", "file " + tdr1 + " exists: loading ...");
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
           BrushManager.makeEnabledListFromPalette( localPalette, false );
           if ( link_sections ) linkSections();
           if ( fullname != null ) addManagerToCache( fullname );
+        } else {
+          TDLog.Error( "file " + tdr1 + " failedi to load" );
         }
+      } else {
+        TDLog.Error( "file " + tdr1 + " does not exists");
       }
     }
     return ret;

@@ -19,6 +19,8 @@ import com.topodroid.ptopo.PTFile;
 import com.topodroid.ptopo.PTTrip;
 import com.topodroid.ptopo.PTShot;
 import com.topodroid.ptopo.PTDrawing;
+import com.topodroid.ptopo.PTElement;
+import com.topodroid.ptopo.PTXSectionElement; // not handled
 import com.topodroid.ptopo.PTPolygonElement;
 import com.topodroid.ptopo.PTPoint;
 import com.topodroid.ptopo.PTMapping;
@@ -56,7 +58,7 @@ import java.util.Locale;
 
 import android.graphics.RectF;
 
-// import android.util.Log;
+import android.util.Log;
 
 class ParserPocketTopo extends ImportParser
 {
@@ -190,14 +192,17 @@ class ParserPocketTopo extends ImportParser
       String scrap_name1 = mName + "-1p";
       // String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
       String filename1 = TDPath.getTdrFileWithExt( scrap_name1 );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap p: " + filename1 );
       writeDrawing( filename1, scrap_name1, outline, PlotType.PLOT_PLAN, over_scale );
 
       PTDrawing sideview = ptfile.getSideview();
       String scrap_name2 = mName + "-1s";
       // String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
       String filename2 = TDPath.getTdrFileWithExt( scrap_name2 );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap s: " + filename2 );
       writeDrawing( filename2, scrap_name2, sideview, PlotType.PLOT_EXTENDED, over_scale );
       // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
+
     } else {
       TDLog.Error( "PT null StartFrom");
       // throw new ParserException();
@@ -214,7 +219,7 @@ class ParserPocketTopo extends ImportParser
     float yoff = DrawingUtil.CENTER_Y; // * 5;
 
     int elem_count = drawing.elementNumber();
-    // Log.v( "PTDistoX", "off " + xoff + " " + yoff );
+    TDLog.Log( TDLog.LOG_PTOPO, "PT drawing elems " + elem_count );
     // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elems " + elem_count );
 
     TDPath.checkPath( filename );
@@ -248,8 +253,9 @@ class ParserPocketTopo extends ImportParser
 
         if ( elem_count > 0 ) {
           for (int h=0; h<elem_count; ++h ) {
-            try {
-              PTPolygonElement elem = (PTPolygonElement)drawing.getElement(h);
+            PTElement element = drawing.getElement(h);
+            if ( element instanceof PTPolygonElement ) {
+              PTPolygonElement elem = (PTPolygonElement)element;
               int point_count = elem.pointCount();
               int col = elem.getColor();
               if ( point_count > 1 ) {
@@ -306,8 +312,6 @@ class ParserPocketTopo extends ImportParser
                 // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
 		paths.add( new DrawingPointPath( point_type, x, y, PointScale.SCALE_M, "", "", 0 ) ); // no text, no options
               }
-            } catch( ClassCastException e ) {
-              throw new ParserException();
             }
           }
         }

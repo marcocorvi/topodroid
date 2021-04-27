@@ -16,7 +16,7 @@ import java.io.FileOutputStream;
 
 // import android.util.Log;
 
-class PTElement
+public class PTElement
 {
   static final byte ID_NO_ELEMENT       = (byte)0; // pocket topo elements id
   static final byte ID_POLYGON_ELEMENT  = (byte)1;

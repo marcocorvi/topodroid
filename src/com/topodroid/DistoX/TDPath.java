@@ -437,17 +437,21 @@ public class TDPath
 
   static private void checkPath( File fp ) // DistoX-SAF
   {
-    if ( fp == null || fp.exists() ) {
-      Log.v("DistoX", "check path: file null or exists" );
+    if ( fp == null ) {
+      Log.v("DistoX", "check path: file null " );
+      return;
+    }
+    if ( fp.exists() ) {
+      Log.v("DistoX", "check path: file exists " + fp.getPath() );
       return;
     }
     File fpp = fp.getParentFile();
     if ( fpp.exists() ) {
-      Log.v("DistoX", "check path: parent file exists" );
+      Log.v("DistoX", "check path: parent file exists " + fpp.getPath() );
       return;
     }
     if ( ! fpp.mkdirs() ) {
-      Log.v("DistoX", "check path: failed mkdirs" );
+      Log.v("DistoX", "check path: failed mkdirs " + fpp.getPath() );
       TDLog.Error("mkdirs error");
     }
   }
