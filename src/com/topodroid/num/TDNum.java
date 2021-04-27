@@ -260,18 +260,24 @@ public class TDNum
 
   public NumShot getLastShot() 
   {
-    int sz = mShots.size();
-    return ( sz == 0 )? null : mShots.get( sz - 1 );
+    NumShot ret = null;
+    synchronized( mShots ) {
+      int sz = mShots.size();
+      if ( sz > 0 ) ret = mShots.get( sz - 1 );
+    }
+    return ret;
   }
 
   // get shots at station st, except shot [st,except]
   public List< NumShot > getShotsAt( NumStation st, NumStation except )
   {
     ArrayList< NumShot > ret = new ArrayList<>();
-    for ( NumShot shot : mShots ) {
-      if ( ( shot.from == st && shot.to   != except ) 
-        || ( shot.to   == st && shot.from != except ) ) {
-        ret.add( shot );
+    synchronized( mShots ) {
+      for ( NumShot shot : mShots ) {
+        if ( ( shot.from == st && shot.to   != except ) 
+          || ( shot.to   == st && shot.from != except ) ) {
+          ret.add( shot );
+        }
       }
     }
     return ret;
@@ -387,21 +393,26 @@ public class TDNum
   public NumShot getShot( String s1, String s2 )
   {
     if ( s1 == null || s2 == null ) return null;
-    for (NumShot sh : mShots ) {
-      if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) return sh;
-      if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) return sh;
+    NumShot ret = null;
+    synchronized( mShots ) {
+      for (NumShot sh : mShots ) {
+        if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) { ret = sh; break; }
+        if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) { ret = sh; break; }
+      }
     }
-    return null;
+    return ret;
   }
 
   public NumShot getShot( NumStation st1, NumStation st2 )
   {
     if ( st1 == null || st2 == null ) return null;
-    for (NumShot sh : mShots ) {
-      if ( ( st1 == sh.from && st2 == sh.to ) ||
-           ( st2 == sh.from && st1 == sh.to ) ) return sh;
+    NumShot ret = null;
+    synchronized( mShots ) {
+      for (NumShot sh : mShots ) {
+        if ( ( st1 == sh.from && st2 == sh.to ) || ( st2 == sh.from && st1 == sh.to ) ) { ret = sh; break; }
+      }
     }
-    return null;
+    return ret;
   }
 
   // return +1 if has shot s1-s2
@@ -410,11 +421,14 @@ public class TDNum
   private int hasShot( String s1, String s2 )
   {
     if ( s1 == null || s2 == null ) return 0;
-    for (NumShot sh : mShots ) {
-      if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) return sh.mDirection;
-      if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) return -sh.mDirection;
+    int dir = 0;
+    synchronized( mShots ) {
+      for (NumShot sh : mShots ) {
+        if ( s1.equals( sh.from.name ) && s2.equals( sh.to.name ) ) { dir =  sh.mDirection; break; }
+        if ( s2.equals( sh.from.name ) && s1.equals( sh.to.name ) ) { dir = -sh.mDirection; break; }
+      }
     }
-    return 0;
+    return dir;
   }
 
   // ==========================================================================
@@ -555,11 +569,11 @@ public class TDNum
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
         if ( format != null ) {
-          // (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-          NumShortpath short_path = shortestPath( sf, st); 
-          if ( short_path != null ) {
-            mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-          }
+          (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+          // NumShortpath short_path = shortestPath( sf, st); 
+          // if ( short_path != null ) {
+          //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+          // }
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -836,11 +850,11 @@ public class TDNum
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
 	      if ( format != null ) {
-                // (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
-                NumShortpath short_path = shortestPath( sf, st); 
-                if ( short_path != null ) {
-                  mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
-	        }
+                (new ClosureTask( this, format, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+                // NumShortpath short_path = shortestPath( sf, st); 
+                // if ( short_path != null ) {
+                //   mClosures.add( getClosureError( format, st, sf, ts.d(), ts.b(), ts.c(), short_path, Math.abs( ts.d() ) ) );
+	        // }
 
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
@@ -878,47 +892,51 @@ public class TDNum
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
-      for ( NumShot sh1 : mShots ) {
-        sh1.mUsed = false;
+      synchronized( mShots ) {
+        for ( NumShot sh1 : mShots ) {
+          sh1.mUsed = false;
+        }
       }
       mStations.reset3DCoords( );       // reset the stations "Has 3D Coords" to false
       mStartStation.setHas3DCoords( );  // except for the start station 
 
-      boolean repeat = true;
-      while ( repeat ) {
-        repeat = false;
-        for ( NumShot sh2 : mShots ) {
-          if ( sh2.mUsed ) continue;
-          NumStation s1 = sh2.from;
-          NumStation s2 = sh2.to;
-          float c2 = sh2.clino();
-          float b2 = sh2.bearing(); // 20200503 bearing() already has declination; was + mDecl;
-          if ( s1.has3DCoords() && ! s2.has3DCoords() ) { // reset s2 values from the shot
-            // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
-            float d = sh2.length();
-            double v = - d * TDMath.sinDd( c2 );
-            double h =   d * TDMath.cosDd( c2 );
-            double e =   h * TDMath.sinDd( b2 );
-            double s = - h * TDMath.cosDd( b2 );
-            s2.e = s1.e + e;
-            s2.s = s1.s + s;
-            s2.v = s1.v + v;
-            s2.setHas3DCoords( );
-            sh2.mUsed = true;
-            repeat = true;
-          } else if ( s2.has3DCoords() && ! s1.has3DCoords() ) { // reset s1 values from the shot
-            // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
-            float d = - sh2.length();
-            double v = - d * TDMath.sinDd( c2 );
-            double h =   d * TDMath.cosDd( c2 );
-            double e =   h * TDMath.sinDd( b2 );
-            double s = - h * TDMath.cosDd( b2 );
-            s1.e = s2.e + e;
-            s1.s = s2.s + s;
-            s1.v = s2.v + v;
-            s1.setHas3DCoords( );
-            sh2.mUsed = true;
-            repeat = true;
+      synchronized( mShots ) {
+        boolean repeat = true;
+        while ( repeat ) {
+          repeat = false;
+          for ( NumShot sh2 : mShots ) {
+            if ( sh2.mUsed ) continue;
+            NumStation s1 = sh2.from;
+            NumStation s2 = sh2.to;
+            float c2 = sh2.clino();
+            float b2 = sh2.bearing(); // 20200503 bearing() already has declination; was + mDecl;
+            if ( s1.has3DCoords() && ! s2.has3DCoords() ) { // reset s2 values from the shot
+              // float d = sh2.length() * sh2.mDirection; // FIXME DIRECTION
+              float d = sh2.length();
+              double v = - d * TDMath.sinDd( c2 );
+              double h =   d * TDMath.cosDd( c2 );
+              double e =   h * TDMath.sinDd( b2 );
+              double s = - h * TDMath.cosDd( b2 );
+              s2.e = s1.e + e;
+              s2.s = s1.s + s;
+              s2.v = s1.v + v;
+              s2.setHas3DCoords( );
+              sh2.mUsed = true;
+              repeat = true;
+            } else if ( s2.has3DCoords() && ! s1.has3DCoords() ) { // reset s1 values from the shot
+              // float d = - sh2.length() * sh2.mDirection; // FIXME DIRECTION
+              float d = - sh2.length();
+              double v = - d * TDMath.sinDd( c2 );
+              double h =   d * TDMath.cosDd( c2 );
+              double e =   h * TDMath.sinDd( b2 );
+              double s = - h * TDMath.cosDd( b2 );
+              s1.e = s2.e + e;
+              s1.s = s2.s + s;
+              s1.v = s2.v + v;
+              s1.setHas3DCoords( );
+              sh2.mUsed = true;
+              repeat = true;
+            }
           }
         }
       }
@@ -1082,7 +1100,9 @@ public class TDNum
   {
     addShotToStation( sh, st1 );
     addShotToStation( sh, st2 );
-    mShots.add( sh );
+    synchronized ( mShots ) {
+      mShots.add( sh );
+    }
   }
  
   // =========================================================================
@@ -1301,22 +1321,24 @@ public class TDNum
     boolean found = true;
     while ( found ) {
       found = false;
-      for ( NumShot shot1 : mShots ) {
-        if ( shot1.branch != null ) continue;
-        if ( shot1.from == st ) {
-          shot1.mBranchDir = after? 1 : -1;
-          st = shot1.to;
-          found = true;
-        } else if ( shot1.to == st ) {
-          shot1.mBranchDir = after? -1 : 1;
-          st = shot1.from;
-          found = true;
+      synchronized( mShots ) {
+        for ( NumShot shot1 : mShots ) {
+          if ( shot1.branch != null ) continue;
+          if ( shot1.from == st ) {
+            shot1.mBranchDir = after? 1 : -1;
+            st = shot1.to;
+            found = true;
+          } else if ( shot1.to == st ) {
+            shot1.mBranchDir = after? -1 : 1;
+            st = shot1.from;
+            found = true;
+          }
+          if ( found ) {
+            shot1.branch = br;
+            ret.add( shot1 );
+            break;
+          } 
         }
-        if ( found ) {
-          shot1.branch = br;
-          ret.add( shot1 );
-          break;
-        } 
       }
     }
     return ret;
@@ -1390,23 +1412,25 @@ public class TDNum
         }
       }
     } else if ( also_cross_end ) { // no nodes: only end-end lines
-      for ( NumShot shot : mShots ) {
-        if ( shot.branch != null ) continue;
-        NumBranch branch = new NumBranch( NumBranch.BRANCH_END_END, null );
-        shot.branch = branch;
+      synchronized ( mShots ) {
+        for ( NumShot shot : mShots ) {
+          if ( shot.branch != null ) continue;
+          NumBranch branch = new NumBranch( NumBranch.BRANCH_END_END, null );
+          shot.branch = branch;
 
-        ArrayList< NumShot > shots_after  = followShot( branch, shot.to,   true );
-        ArrayList< NumShot > shots_before = followShot( branch, shot.from, false );
-        for ( int k=shots_before.size() - 1; k>=0; --k ) {
-          NumShot sh = shots_before.get( k );
-          branch.addShot( sh );
+          ArrayList< NumShot > shots_after  = followShot( branch, shot.to,   true );
+          ArrayList< NumShot > shots_before = followShot( branch, shot.from, false );
+          for ( int k=shots_before.size() - 1; k>=0; --k ) {
+            NumShot sh = shots_before.get( k );
+            branch.addShot( sh );
+          }
+          branch.addShot( shot );
+          for ( NumShot sh : shots_after ) {
+            branch.addShot( sh );
+          }
+          branch.setLastNode( null );
+          branches.add( branch );
         }
-        branch.addShot( shot );
-        for ( NumShot sh : shots_after ) {
-          branch.addShot( sh );
-        }
-        branch.setLastNode( null );
-        branches.add( branch );
       }
     }
     return branches;
@@ -1685,33 +1709,35 @@ public class TDNum
     while ( ! stack.empty() ) {
       NumStation s = stack.pop();
       NumShortpath sp = s.mShortpathDist;
-
-      for ( NumShot e : mShots ) {
-        if ( e.from == s1 && e.to == s2 ) continue;
-        if ( e.from == s2 && e.to == s1 ) continue;
-        float len = e.length();
-        if ( e.from == s && e.to != null ) {
-          NumShortpath etp = e.to.mShortpathDist;
-          if ( etp != null ) {
-            float d = sp.mDist + len;
-            if ( d < etp.mDist - 0.001f ) { // at least 1 mm shorter
-	      // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
-              etp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
-              // e.to.path = from;
-              stack.push( e.to );
+      synchronized( mShots ) {
+        for ( NumShot e : mShots ) {
+          if ( e.from == null || e.to == null ) continue;
+          if ( e.from == s1   && e.to == s2   ) continue;
+          if ( e.from == s2   && e.to == s1   ) continue;
+          float len = e.length();
+          if ( e.from == s /* && e.to != null */ ) {
+            NumShortpath etp = e.to.mShortpathDist;
+            if ( etp != null ) {
+              float d = sp.mDist + len;
+              if ( d < etp.mDist - 0.001f ) { // at least 1 mm shorter
+                // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
+                etp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
+                // e.to.path = from;
+                stack.push( e.to );
+              }
             }
-	  }
-        } else if ( e.to == s && e.from != null ) {
-          NumShortpath efp = e.from.mShortpathDist;
-	  if ( efp != null ) {
-            float d = sp.mDist + len;
-            if ( d < efp.mDist - 0.001f ) { // at least 1 mm shorter
-	      // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
-              efp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
-              // e.from.path = from;
-              stack.push( e.from );
+          } else if ( e.to == s /* && e.from != null */ ) {
+            NumShortpath efp = e.from.mShortpathDist;
+            if ( efp != null ) {
+              float d = sp.mDist + len;
+              if ( d < efp.mDist - 0.001f ) { // at least 1 mm shorter
+                // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
+                efp.resetShortpath( sp.mNr+1, d, sp.mDist2 + len*len );
+                // e.from.path = from;
+                stack.push( e.from );
+              }
             }
-	  }
+          }
         }
       }
     }

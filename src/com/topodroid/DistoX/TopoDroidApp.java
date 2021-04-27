@@ -568,12 +568,12 @@ public class TopoDroidApp extends Application
   // @return HeadTail string, null on failure
   public String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
-    try {
+    if ( mComm instanceof DistoXA3Comm ) {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
       String ret = comm.readA3HeadTail( address, command, head_tail );
       resetComm();
       return ret;
-    } catch ( ClassCastException e ) {
+    } else {
       TDLog.Error("read A3 HeadTail: class cast exception");
     }
     return null;
@@ -583,13 +583,13 @@ public class TopoDroidApp extends Application
   // @return the number of bit that have been swapped
   public int swapA3HotBit( String address, int from, int to, boolean on_off ) 
   {
-    try {
+    if ( mComm instanceof DistoXA3Comm ) {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
       int ret = comm.swapA3HotBit( address, from, to, on_off ); // FIXME_A3
       resetComm();
       return ret;
-    } catch ( ClassCastException e ) {
-      TDLog.Error("swap A3 HeadTail: class cast exception");
+    } else {
+      TDLog.Error("swap A3 HeadTail: not A3 comm");
     }
     return -1; // failure
   }
@@ -926,13 +926,13 @@ public class TopoDroidApp extends Application
   public int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    try {
+    if ( mComm instanceof DistoX310Comm ) {
       DistoX310Comm comm = (DistoX310Comm)mComm;
       int ret = comm.readX310Memory( address, h0, h1, memory );
       resetComm();
       return ret;
-    } catch ( ClassCastException e ) {
-      TDLog.Error("read A3 memory: class cast exception");
+    } else {
+      TDLog.Error("read X310 memory: not X310 comm");
     }
     return -1;
   }
@@ -940,13 +940,13 @@ public class TopoDroidApp extends Application
   public int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
-    try {
+    if ( mComm instanceof DistoXA3Comm ) {
       DistoXA3Comm comm = (DistoXA3Comm)mComm;
       int ret = comm.readA3Memory( address, h0, h1, memory );
       resetComm();
       return ret;
-    } catch ( ClassCastException e ) {
-      TDLog.Error("read A3 memory: class cast exception");
+    } else {
+      TDLog.Error("read A3 memory: not A3 comm");
     }
     return -1;
   }
@@ -2045,11 +2045,11 @@ public class TopoDroidApp extends Application
   public void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return;
-    try { 
+    if ( mComm instanceof DistoX310Comm ) {
       DistoX310Comm comm = (DistoX310Comm)mComm;
       if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
-    } catch ( ClassCastException e ) {
-      TDLog.Error("read A3 memory: class cast exception");
+    } else {
+      TDLog.Error("set X310 laser: not X310 comm");
     }
   }
 

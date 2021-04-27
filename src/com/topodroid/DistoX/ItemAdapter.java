@@ -170,7 +170,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     // Log.v("DistoX", "--> ItemAdapter doClick()");
     long millis = System.currentTimeMillis();
     boolean doubleclick = false;
-    try {
+    if ( v instanceof CheckBox ) {
       CheckBox cb = (CheckBox)v;
       if ( cb != null ) {
         int pos = 0;
@@ -186,25 +186,23 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           ++ pos;
         }
       }
-    } catch ( ClassCastException e ) {
-      try {
-        ItemButton ib = (ItemButton)v;
-        int pos = 0;
-        for (ItemSymbol item : mItems) {
-          if (ib == item.mButton) {
-            if (mPos == pos && Math.abs( millis - mClickMillis ) < DOUBLE_CLICK_TIME)
-              doubleclick = true;
-            mPos = pos; // item.mIndex;
-            mParent.setTypeAndItem( mType, mPos );
-            item.setChecked( true );
-          } else {
-            item.setChecked( false );
-          }
-          ++pos;
+    } else if ( v instanceof ItemButton ) {
+      ItemButton ib = (ItemButton)v;
+      int pos = 0;
+      for (ItemSymbol item : mItems) {
+        if (ib == item.mButton) {
+          if (mPos == pos && Math.abs( millis - mClickMillis ) < DOUBLE_CLICK_TIME)
+            doubleclick = true;
+          mPos = pos; // item.mIndex;
+          mParent.setTypeAndItem( mType, mPos );
+          item.setChecked( true );
+        } else {
+          item.setChecked( false );
         }
-      } catch ( ClassCastException ee ) {
-        TDLog.Error("View is neither CheckBox nor ItemButton");
+        ++pos;
       }
+    } else {
+      TDLog.Error("View is neither CheckBox nor ItemButton");
     }
     if ( doubleclick ) mParent.closeDialog();
     mClickMillis = millis;

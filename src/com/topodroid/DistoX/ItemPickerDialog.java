@@ -710,7 +710,7 @@ class ItemPickerDialog extends MyDialog
     }
 
     // if ( mRecent != null ) { // this select the symbol and closes the dialog
-    //   try {
+    //   if ( view instanceof ItemButton) {
     //     ItemButton iv = (ItemButton)view;
     //     // if ( iv != null ) { // always true
     //       for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
@@ -721,7 +721,7 @@ class ItemPickerDialog extends MyDialog
     //         }
     //       }
     //     // }
-    //   } catch ( ClassCastException e ) {
+    //   } else {
     //     TDLog.Error("View is not ItemButton"); // it is ok
     //   }
     // }
