@@ -268,9 +268,9 @@ public class BrushManager
   static private void makeStationSymbol( Resources res )
   {
     if ( mStationSymbol == null ) {
-      String th_name = res.getString( R.string.p_station );
+      // String th_name = res.getString( R.string.p_station );
       String name    = res.getString( R.string.thp_station );
-      mStationSymbol = new SymbolPoint( name, th_name, null, th_name, 0xffff6633, 
+      mStationSymbol = new SymbolPoint( name, SymbolLibrary.STATION, null, SymbolLibrary.STATION, 0xffff6633, 
         "addCircle 0 0 0.4 moveTo -3.0 1.73 lineTo 3.0 1.73 lineTo 0.0 -3.46 lineTo -3.0 1.73", false, DrawingLevel.LEVEL_WALL, Symbol.W2D_WALLS_SYM );
     }
   }

@@ -10,7 +10,7 @@ name-sk prístrešok
 name-ro adăpost
 name-de Unterstand
 name-hu menedék
-th_name u:shelter
+th_name shelter
 color 0xffffff
 path
   addCircle 0 0 7.5

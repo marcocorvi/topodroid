@@ -9,7 +9,7 @@ name-sk most
 name-ro pod
 name-de Brücke
 name-hu híd
-th_name u:bridge
+th_name bridge
 group trail
 orientation no
 color 0xffffff

@@ -9,7 +9,7 @@ name-fr drainage
 name-sk odtok
 name-ro drenaj
 name-hu csatorna
-th_name u:drain
+th_name drain
 group water-flow
 color 0x3399ff
 width 2

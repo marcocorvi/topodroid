@@ -8,7 +8,7 @@ name-fr araignée
 name-ro arahnidă
 name-de Spinne
 name-hu pók
-th_name u:arachnid
+th_name arachnid
 color 0xffcc66
 path
   addCircle 0 -1 1

@@ -9,7 +9,7 @@ name-fr roche_magmatique
 name-ro rocă_eruptivă
 name-de Magmatisches_Gestein
 name-hu magmás_kőzet
-th_name u:ignous
+th_name ignous
 color 0xcc6633 0xcc
 orientable
 bitmap 40 30

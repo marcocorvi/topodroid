@@ -10,7 +10,7 @@ name-sk studňa
 name-ro fântână
 name-de Brunnen
 name-hu kút
-th_name u:well
+th_name well
 group water
 color 0x66ccff
 path

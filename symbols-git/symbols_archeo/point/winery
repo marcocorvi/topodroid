@@ -10,7 +10,7 @@ name-sk vináreň
 name-ro cramă
 name-de Weinkeller
 name-hu pincészet
-th_name u:winery
+th_name winery
 color 0x9933ff
 path
   moveTo -3 -6

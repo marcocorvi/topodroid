@@ -8,7 +8,7 @@ name-fr chevauchement
 name-ro şariaj
 name-de Überschiebung
 name-hu feltolódás
-th_name u:thrust
+th_name thrust
 group fault
 color 0x00cc33 0xff
 width 8

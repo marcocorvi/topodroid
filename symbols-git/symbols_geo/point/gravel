@@ -9,7 +9,7 @@ name-fr gravier
 name-ro pietriș
 name-de Schotter
 name-hu kavics
-th_name u:gravel
+th_name gravel
 color 0xcc9966
 path
   addCircle 0 0 6

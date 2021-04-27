@@ -6,7 +6,7 @@ name-pt peixe
 name-ru рыба
 name-ro pește
 name-hu hal
-th_name u:fish
+th_name fish
 color 0x66ccff
 path
   moveTo -9 -2

@@ -9,7 +9,7 @@ name-fr bloc
 name-ro bloc
 name-de Block
 name-hu tömb
-th_name u:block
+th_name block
 color 0xff6633
 path
   moveTo -9 3

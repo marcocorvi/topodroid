@@ -9,7 +9,7 @@ name-sk pramen_zdroj
 name-ro izvor
 name-de Quelle
 name-hu forrás
-th_name u:spring
+th_name spring
 group spring
 orientation no
 color 0x3399ff

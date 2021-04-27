@@ -8,7 +8,7 @@ name-fr minerai
 name-ro minereu
 name-de Mineral
 name-hu érc
-th_name u:ore
+th_name ore
 group mineral
 color 0x66ff99
 path

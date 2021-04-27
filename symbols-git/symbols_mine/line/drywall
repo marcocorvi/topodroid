@@ -10,7 +10,7 @@ name-sk suchý_múrik
 name-ro perete_sec
 name-de Trockenmauer
 name-hu száraz_kőfal
-th_name u:drywall
+th_name drywall
 group wall
 color 0xff0000 0xff
 width 1

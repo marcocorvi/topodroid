@@ -1,0 +1,25 @@
+encoding utf-8
+symbol line
+name doline_pit
+name-pt poço_de_dolina
+name-es pozo_de_dolina
+name-ru карстовый_провал
+name-fr doline_d'effondrement
+name-ro puț_dolină
+name-de Dolinenschacht
+name-hu dolina-gödör
+th_name doline:pit
+group doline
+color 0x66cc33 0xff
+width 8
+effect
+  moveTo 0 1
+  lineTo 15 1
+  lineTo 15 0
+  lineTo 7 0
+  lineTo 7 -12
+  lineTo 6 -12
+  lineTo 6 0
+  lineTo 0 0
+endeffect
+endsymbol

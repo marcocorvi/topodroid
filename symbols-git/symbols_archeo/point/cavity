@@ -10,7 +10,7 @@ name-fr cavité
 name-sk dutina
 name-ro cavitate
 name-de Hohlraum
-th_name u:cavity
+th_name cavity
 color 0xffffff
 path
   moveTo -8 5

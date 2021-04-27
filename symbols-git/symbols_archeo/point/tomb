@@ -10,7 +10,7 @@ name-ro mormânt
 name-fr tombe
 name-de Grab
 name-hu sír
-th_name u:tomb
+th_name tomb
 color 0xffff33
 path
   moveTo 3 -6

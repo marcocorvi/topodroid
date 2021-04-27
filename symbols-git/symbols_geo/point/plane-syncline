@@ -8,7 +8,7 @@ name-fr plan_synclinal
 name-ro plan-sinclinal
 name-de Synklinale_Fläche
 name-hu felület_szinklinális
-th_name u:plane-syncline
+th_name plane-syncline
 group plane
 color 0xcccccc
 path

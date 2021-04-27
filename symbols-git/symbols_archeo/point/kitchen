@@ -10,7 +10,7 @@ name-ro bucătărie
 name-fr cuisine
 name-de Küche
 name-hu konyha
-th_name u:kitchen
+th_name kitchen
 color 0xff9966
 path
   moveTo -7.5 -7.5

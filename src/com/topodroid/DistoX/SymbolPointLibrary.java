@@ -32,7 +32,8 @@ import android.content.res.Resources;
 public class SymbolPointLibrary extends SymbolLibrary
 {
   static final private String[] DefaultPoints = {
-    "air-draught", "blocks", "clay", "continuation", "danger", "debris", "dig", "entrance", "helictite", "ice", "pebbles", "pillar", "popcorn", "root", "sand", "section", "snow", "stalactite", "stalagmite", "water-flow"
+    AIR_DRAUGHT, BLOCKS, CLAY, CONTINUATION, DANGER, DEBRIS, DIG, ENTRANCE, HELICTITE, ICE, PEBBLES, PILLAR, POPCORN,
+    ROOT, SAND, SECTION, SNOW, STALACTITE, STALAGMITE, WATER_FLOW
   };
 
   // ArrayList< SymbolPoint > mPoint;    // enabled points
@@ -99,8 +100,8 @@ public class SymbolPointLibrary extends SymbolLibrary
 
   // ========================================================================
 
-  static final private String p_label = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
-  static final private String p_user = "addCircle 0 0 6";                                  // "o" shape
+  static final private String p_label   = "moveTo 0 3 lineTo 0 -6 lineTo -3 -6 lineTo 3 -6"; // "T" shape
+  static final private String p_user    = "addCircle 0 0 6";                                  // "o" shape
   static final private String p_section = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5"; // square
 
   private void loadSystemPoints( Resources res )
@@ -109,18 +110,18 @@ public class SymbolPointLibrary extends SymbolLibrary
     // Log.v(  TopoDroidApp.TAG, "SymbolPointLibrary::loadSystemPoints()" );
 
     mPointUserIndex = mSymbols.size(); // 0 = no-text, no-value. thname   group fname
-    String user = res.getString( R.string.p_user );
-    symbol = new SymbolPoint( res.getString(R.string.thp_user), "u:user", null, user, 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
+    // String user = res.getString( R.string.p_user );
+    symbol = new SymbolPoint( res.getString(R.string.thp_user), USER, null, USER, 0xffffffff, p_user, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
     addSymbol( symbol );
 
     mPointLabelIndex = mSymbols.size(); // 1 = text
-    String label = res.getString( R.string.p_label );
-    symbol = new SymbolPoint( res.getString(R.string.thp_label), label, null, label, 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL, Symbol.W2D_NONE );
+    // String label = res.getString( R.string.p_label );
+    symbol = new SymbolPoint( res.getString(R.string.thp_label), LABEL, null, LABEL, 0xffffffff, p_label, true, 1, DrawingLevel.LEVEL_LABEL, Symbol.W2D_NONE );
     addSymbol( symbol );
 
     mPointSectionIndex = mSymbols.size();
-    String section = res.getString( R.string.p_section );
-    symbol = new SymbolPoint( res.getString(R.string.thp_section), section, null, section, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
+    // String section = res.getString( R.string.p_section );
+    symbol = new SymbolPoint( res.getString(R.string.thp_section), SECTION, null, SECTION, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
     addSymbol( symbol );
   }
 
@@ -144,10 +145,10 @@ public class SymbolPointLibrary extends SymbolLibrary
       for ( File file : files ) { // there is a null-pointer exception here, but files cannot be null !!!
         String fname = file.getName();
 
-        if ( fname.equals("photo") && ! TDandroid.checkCamera( ctx ) ) continue;
-        if ( fname.equals("audio") && ! TDandroid.checkMicrophone( ctx ) ) continue;
+        if ( fname.equals( PHOTO ) && ! TDandroid.checkCamera( ctx ) ) continue;
+        if ( fname.equals( AUDIO ) && ! TDandroid.checkMicrophone( ctx ) ) continue;
 
-        // if ( fname.equals("user") || fname.equals("label") || fname.equals("section") ) continue;
+        // if ( fname.equals(USER) || fname.equals(LABEL) || fname.equals(SECTION) ) continue;
 
         SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
         if ( symbol.mThName == null ) {
@@ -160,7 +161,7 @@ public class SymbolPointLibrary extends SymbolLibrary
           String thname = symbol.mThName;
           String name = "p_" + thname;
           boolean enable = false;
-          if ( symbol.mThName.equals("section") ) { // FIXME_SECTION_POINT always enabled
+          if ( symbol.mThName.equals(SECTION) ) { // FIXME_SECTION_POINT always enabled
             enable = true;
 	  } else {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
@@ -220,12 +221,12 @@ public class SymbolPointLibrary extends SymbolLibrary
   protected void makeEnabledList()
   {
     super.makeEnabledList();
-    mPointUserIndex    = getSymbolIndexByThName( "user" );
-    mPointLabelIndex   = getSymbolIndexByThName( "label" );
-    mPointPhotoIndex   = getSymbolIndexByThName( "u:photo" );
-    mPointAudioIndex   = getSymbolIndexByThName( "u:audio" );
+    mPointUserIndex    = getSymbolIndexByThName( USER );
+    mPointLabelIndex   = getSymbolIndexByThName( LABEL );
+    mPointPhotoIndex   = getSymbolIndexByThName( PHOTO );
+    mPointAudioIndex   = getSymbolIndexByThName( AUDIO );
     // mPointDangerIndex  = getSymbolIndexByThName( "danger" );
-    mPointSectionIndex = getSymbolIndexByThName( "section" ); 
+    mPointSectionIndex = getSymbolIndexByThName( SECTION ); 
 
     // Log.v("DistoX", "Pt label " + mPointLabelIndex 
     //                 + " photo " + mPointPhotoIndex

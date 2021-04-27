@@ -1,0 +1,22 @@
+encoding utf-8
+symbol point
+name ponor_horizontal
+name-pt ponor_horizontal
+name-es ponor_horizontal
+name-ru понор_горизонтальный
+name-fr ponor_horizontal
+name-sk horizontálny_ponor
+name-ro ponor_orizontal
+name-de Horizontaler_Ponor
+name-hu víznyelő_barlang
+th_name ponor:horizontal
+group ponor
+orientation no
+color 0x999999
+path
+  moveTo -7 2
+  lineTo 7 2
+  moveTo -4 2
+  cubicTo -4 -4 4 -4 4 2
+endpath
+endsymbol

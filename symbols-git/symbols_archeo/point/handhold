@@ -10,7 +10,7 @@ name-sk zábradlie
 name-ro mâner
 name-de Handgriff
 name-hu fogás
-th_name u:handhold
+th_name handhold
 color 0xcccccc
 path
   moveTo -6 -6

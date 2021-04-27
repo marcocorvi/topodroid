@@ -10,7 +10,7 @@ name-sk otvor_pre_holuby
 name-ro volieră_porumbei
 name-de Taubenloch
 name-hu galamblyuk
-th_name u:pigeonhole
+th_name pigeonhole
 color 0xcccccc
 path
   moveTo 6 6

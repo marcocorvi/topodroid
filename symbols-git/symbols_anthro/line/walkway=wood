@@ -1,0 +1,24 @@
+encoding utf-8
+symbol line
+name walkway_wood
+name-pt passarela_de_madeira
+name-ru деревянный_настил
+name-ro trotuar-lemn
+name-hu fa_járda
+th_name walkway:wood
+group trail
+color 0x993300 0x66
+width 8
+effect
+  moveTo 0 0
+  lineTo 0 8
+  lineTo 2 10
+  lineTo 2 14
+  lineTo 8 14
+  lineTo 8 10
+  lineTo 6 8
+  lineTo 6 0
+  lineTo 0 0
+endeffect
+endsymbol
+

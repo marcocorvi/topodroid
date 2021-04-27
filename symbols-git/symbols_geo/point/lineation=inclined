@@ -1,0 +1,22 @@
+encoding utf-8
+symbol point
+name lineation_inclined
+name-pt lineação_oblíqua
+name-es lineación_inclinada
+name-ru наклонно_линейно
+name-fr linéation_inclinée
+name-de Schräge_Bänderung
+name-ro aliniere-înclinată
+name-hu vonalasság_ferde
+th_name lineation:inclined
+group lineation
+color 0xffffff
+orientation yes
+path
+  moveTo -4.5 -4.5
+  lineTo 0 -9
+  lineTo 4.5 -4.5
+  moveTo 0 -9
+  lineTo 0 9
+endpath
+endsymbol

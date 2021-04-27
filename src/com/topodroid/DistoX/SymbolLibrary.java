@@ -30,6 +30,43 @@ import android.graphics.Path;
 
 public class SymbolLibrary
 {
+  // Therion names (as well as filenames)
+  final static String USER    = "user";
+  final static String LABEL   = "label";
+  final static String STATION = "station";
+  final static String WALL    = "wall";
+  final static String SECTION = "section";
+  final static String SLOPE   = "slope";
+  final static String WATER   = "water";
+  final static String AUDIO   = "audio";
+  final static String PHOTO   = "photo";
+  final static String ARROW   = "arrow";
+  final static String BORDER  = "border";
+  final static String CHIMNEY = "chimney";
+  final static String CONTOUR = "contour";
+  final static String PIT     = "pit";
+  final static String PRESUMED    = "presumed";
+  final static String ROCK_BORDER = "rock-border";
+  final static String BLOCKS  = "blocks";
+  final static String CLAY    = "clay";
+  final static String DEBRIS  = "debris";
+  final static String SAND    = "sand";
+  final static String AIR_DRAUGHT  = "air-draught";
+  final static String CONTINUATION = "continuation";
+  final static String DANGER       = "danger";
+  final static String DIG          = "dig";
+  final static String ENTRANCE     = "entrance";
+  final static String HELICTITE    = "helictite";
+  final static String ICE          = "ice";
+  final static String PEBBLES      = "pebbles";
+  final static String PILLAR       = "pillar";
+  final static String POPCORN      = "popcorn";
+  final static String ROOT         = "root";
+  final static String SNOW         = "snow";
+  final static String STALACTITE   = "stalactite";
+  final static String STALAGMITE   = "stalagmite";
+  final static String WATER_FLOW   = "water-flow";
+
   String mPrefix;
 
   ArrayList< Symbol > mSymbols;

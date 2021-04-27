@@ -1,0 +1,25 @@
+encoding utf-8
+symbol point
+name joint_vertical
+name-it giunto_verticale
+name-es diaclasa_vertical
+name-pt diaclase_vertical
+name-ru вертикальное_сочленение
+name-fr diaclase_verticale
+name-de Vertikale_Kluft
+name-ro fisură-verticală
+name-hu kőzetrés_függőleges
+th_name joint:vertical
+group joint
+color 0xcccc99
+orientation yes
+path
+  moveTo -7 0
+  lineTo 7 0
+  moveTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
+endpath
+endsymbol

@@ -8,7 +8,7 @@ name-fr abri_de_chauves-souris
 name-ro colonie-de-lilieci
 name-de Fledermauskolonie
 name-hu denevér_kolónia
-th_name u:bat-rooster
+th_name bat-rooster
 group bat
 color 0xffffff
 path

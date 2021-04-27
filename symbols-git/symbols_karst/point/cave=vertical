@@ -1,0 +1,22 @@
+encoding utf-8
+symbol point
+name cave_vertical
+name-pt caverna_vertical
+name-es sima
+name-ru пещера_вертикальная
+name-fr cavité_verticale
+name-sk vertikálna_jaskyňa
+name-ro peșteră_verticală
+name-de Vertikale_Höhle
+name-hu aknabarlang
+th_name cave:vertical
+group cave
+orientation no
+color 0xffcc66
+path
+  moveTo 0 8
+  lineTo 7 -4
+  lineTo -7 -4
+  lineTo 0 8
+endpath
+endsymbol

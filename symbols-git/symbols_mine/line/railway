@@ -9,7 +9,7 @@ name-fr rails
 name-sk kolajnice
 name-ro linie_ferată
 name-hu vasút
-th_name u:railway
+th_name railway
 group trail
 color 0xcccccc
 width 2

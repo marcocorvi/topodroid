@@ -10,7 +10,7 @@ name-sk diera
 name-ro gaură
 name-de Loch
 name-hu lyuk
-th_name u:hole
+th_name hole
 color 0x66ffcc
 path
   addCircle 0 0 6

@@ -9,7 +9,7 @@ name-fr réfectoire
 name-ro cantină
 name-de Speisesaal
 name-hu reflektórium
-th_name u:refectory
+th_name refectory
 color 0xff9966
 path
   moveTo -7.5 -7.5

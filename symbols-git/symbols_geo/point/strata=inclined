@@ -1,0 +1,22 @@
+encoding utf-8
+symbol point
+name strata_inclined
+name-it strati_inclinati
+name-es estrato_inclinado
+name-pt estrato_oblíquo
+name-ru наклонная_слоистость
+name-fr strate_inclinée
+name-ro strat-înclinat
+name-de Schräge_Bank
+name-hu réteg_dőlt
+th_name strata:inclined
+group strata
+color 0xcccccc
+orientation yes
+path
+  moveTo 9 0
+  lineTo -9 0
+  moveTo 0 0
+  lineTo 0 -6
+endpath
+endsymbol

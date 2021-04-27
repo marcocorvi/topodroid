@@ -5,7 +5,7 @@ name-pt escada_de_mão
 name-ru лестница
 name-ro scară
 name-hu létra
-th_name fixed-ladder
+th_name ladder
 group trail
 color 0xff0000 0xff
 width 8

@@ -10,7 +10,7 @@ name-sk stopy_kopania
 name-ro urme_de_excavare
 name-de Schnittspuren
 name-hu metszetjel
-th_name u:cut-marks
+th_name cut-marks
 color 0xffffff
 orientation yes
 path

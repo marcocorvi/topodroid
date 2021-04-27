@@ -8,7 +8,7 @@ name-fr fissuration
 name-ro clivaj
 name-de Schieferung
 name-hu lemezesedés
-th_name u:cleavage
+th_name cleavage
 group cleavage
 color 0xcccc99
 orientation yes

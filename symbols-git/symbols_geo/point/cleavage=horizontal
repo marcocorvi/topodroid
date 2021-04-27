@@ -1,0 +1,21 @@
+encoding utf-8
+symbol point
+name cleavage_horizontal
+name-pt clivagem_horizontal
+name-es clivaje_horizontal
+name-ru горизонтальная_трещиноватость
+name-fr fissuration_horizontale
+name-ro clivaj-orizontal
+name-de Horizontale_Schieferung
+name-hu lemezesedés_vízszintes
+th_name cleavage:horizontal
+group cleavage
+color 0xcccc99
+path
+  moveTo -9 0
+  lineTo 9 0
+  moveTo 0 -9
+  lineTo 0 9
+  addCircle 0 0 5
+endpath
+endsymbol

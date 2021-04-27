@@ -1,0 +1,23 @@
+encoding utf-8
+symbol line
+name walkway_stone
+name-pt passarela_de_pedra
+name-ru каменная_дорожка
+name-ro trotuar-piatră
+name-hu kő_járda
+th_name walkway:stone
+group trail
+color 0x7f7f7f 0x66
+width 8
+effect
+  moveTo 0 0
+  lineTo 0 8
+  lineTo 2 10
+  lineTo 2 14
+  lineTo 8 14
+  lineTo 8 10
+  lineTo 6 8
+  lineTo 6 0
+  lineTo 0 0
+endeffect
+endsymbol

@@ -34,8 +34,24 @@ public class PtCmapActivity extends Activity
 {
   // private TopoDroidApp mApp;
 
-  static private String[] mCmapLine = { "wall", "border", "pit", "rock-border", "arrow", "contour", "user" };
-  static private String[] mCmapPoint = { "air-draught", "water-flow", "stalactite", "blocks", "debris", "pebbles", "clay" };
+  static private String[] mCmapLine = { 
+    SymbolLibrary.WALL, 
+    SymbolLibrary.BORDER, 
+    SymbolLibrary.PIT, 
+    SymbolLibrary.ROCK_BORDER,
+    SymbolLibrary.ARROW,
+    SymbolLibrary.CONTOUR, 
+    SymbolLibrary.SLOPE
+ };
+  static private String[] mCmapPoint = {
+    SymbolLibrary.AIR_DRAUGHT,
+    SymbolLibrary.WATER_FLOW,
+    SymbolLibrary.STALACTITE,
+    SymbolLibrary.BLOCKS,
+    SymbolLibrary.DEBRIS,
+    SymbolLibrary.PEBBLES,
+    SymbolLibrary.CLAY
+  };
 
   private EditText[] mETline;
   private EditText[] mETpoint;
@@ -44,13 +60,13 @@ public class PtCmapActivity extends Activity
 
   public static String getLineThName( int k ) 
   {
-    if ( k < 1 || k > 7 ) return "user";
+    if ( k < 1 || k > 7 ) return SymbolLibrary.USER;
     return mCmapLine[k-1];
   }
 
   public static String getPointThName( int k ) 
   {
-    if ( k < 1 || k > 7 ) return "user";
+    if ( k < 1 || k > 7 ) return SymbolLibrary.USER;
     return mCmapPoint[k-1];
   }
 

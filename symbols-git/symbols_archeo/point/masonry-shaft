@@ -10,7 +10,7 @@ name-sk murivo
 name-ro puț_zidit
 name-de Gemauerter_Schacht
 name-hu falazott_kút
-th_name u:masonry-shaft
+th_name masonry-shaft
 color 0xff6699
 path
   moveTo -7.5 -7.5

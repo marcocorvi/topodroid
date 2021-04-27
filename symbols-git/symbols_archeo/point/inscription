@@ -10,7 +10,7 @@ name-sk nápis
 name-ro inscripție
 name-de Inschrift
 name-hu felirat
-th_name u:inscription
+th_name inscription
 color 0xff00cc
 path
   moveTo 0 6

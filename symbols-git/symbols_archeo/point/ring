@@ -10,7 +10,7 @@ name-sk prsteň
 name-ro inel
 name-de Ring
 name-hu gyűrű
-th_name u:ring
+th_name ring
 color 0xcccccc
 path
   moveTo -4.5 -6

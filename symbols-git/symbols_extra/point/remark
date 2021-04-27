@@ -9,7 +9,7 @@ name-sk poznámka
 name-ro notă
 name-de Notiz
 name-hu jegyzet
-th_name u:remark
+th_name remark
 orientation no
 has_text yes
 color 0xcccccc

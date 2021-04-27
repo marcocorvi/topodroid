@@ -10,7 +10,7 @@ name-sk vetrací_komín
 name-ro horn_de_aerisire
 name-de Luftschacht
 name-hu szellőzőakna
-th_name u:ventilation-shaft
+th_name ventilation-shaft
 group ceiling
 color 0xff6699
 path

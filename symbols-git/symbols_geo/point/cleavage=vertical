@@ -1,0 +1,22 @@
+encoding utf-8
+symbol point
+name cleavage_vertical
+name-pt clivagem_vertical
+name-es clivage_vertical
+name-ru вертикальная_трещиноватсть
+name-fr fissuration-verticale
+name-ro clivaj-vertical
+name-de Vertikale_Schieferung
+name-hu lemezesedés_függőleges
+th_name cleavage:vertical
+group cleavage
+color 0xcccc99
+orientation yes
+path
+  moveTo -9 0
+  lineTo 9 0
+  addCircle 0 0 5
+  moveTo 0 -5
+  lineTo 0 5
+endpath
+endsymbol

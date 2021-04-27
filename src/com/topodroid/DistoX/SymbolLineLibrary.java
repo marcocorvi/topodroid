@@ -30,7 +30,7 @@ import android.content.res.Resources;
 public class SymbolLineLibrary extends SymbolLibrary
 {
   static final private String[] DefaultLines = {
-    "arrow", "border", "chimney", "pit", "presumed", "rock-border", "slope"
+    ARROW, BORDER, CHIMNEY, PIT, PRESUMED, ROCK_BORDER, SLOPE
   };
 
   int mLineUserIndex; // PRIVATE
@@ -60,7 +60,7 @@ public class SymbolLineLibrary extends SymbolLibrary
 
   // String getLineGroup( int k ) { return ( k < 0 || k >= size() )? null : ((SymbolLine)mSymbols.get(k)).mGroup; }
 
-  boolean isWall( int k ) { return k >= 0 && k < size() && "wall".equals(((SymbolLine)mSymbols.get(k)).mGroup); }
+  boolean isWall( int k ) { return k >= 0 && k < size() && WALL.equals(((SymbolLine)mSymbols.get(k)).mGroup); }
 
   boolean hasEffect( int k ) { return k >= 0  && k < size() && ((SymbolLine)mSymbols.get(k)).mHasEffect; }
 
@@ -76,20 +76,20 @@ public class SymbolLineLibrary extends SymbolLibrary
   private void loadSystemLines( Resources res )
   {
     if ( mSymbols.size() > 0 ) return;                                  //  th_name   group fname
-    String user = res.getString ( R.string.p_user );
-    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), "u:user", null, user, 0xffffffff, 1, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    // String user = res.getString ( R.string.p_user );
+    SymbolLine symbol = new SymbolLine( res.getString( R.string.thl_user ), USER, null, USER, 0xffffffff, 1, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
     addSymbol( symbol );
 
-    String wall = res.getString ( R.string.p_wall );
-    symbol = new SymbolLine( res.getString( R.string.thl_wall ), wall, wall, wall, 0xffff0000, 2, DrawingLevel.LEVEL_WALL, Symbol.W2D_WALLS_SHP );
+    // String wall = res.getString ( R.string.p_wall );
+    symbol = new SymbolLine( res.getString( R.string.thl_wall ), WALL, WALL, WALL, 0xffff0000, 2, DrawingLevel.LEVEL_WALL, Symbol.W2D_WALLS_SHP );
     addSymbol( symbol );
 
     float[] x = new float[2];
     x[0] = 5;
     x[1] = 10;
     DashPathEffect dash = new DashPathEffect( x, 0 );
-    String section = res.getString ( R.string.p_section );
-    symbol = new SymbolLine( res.getString( R.string.thl_section ),  section, null, section, 0xffcccccc, 1, dash, dash, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
+    // String section = res.getString ( R.string.p_section );
+    symbol = new SymbolLine( res.getString( R.string.thl_section ), SECTION, null, SECTION, 0xffcccccc, 1, dash, dash, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SHP );
     addSymbol( symbol );
 
     // mSymbolNr = mSymbols.size();
@@ -110,7 +110,7 @@ public class SymbolLineLibrary extends SymbolLibrary
       for ( File file : files ) {
         String fname = file.getName();
 
-        // if ( fname.equals("user") || fname.equals("wall") || fname.equals("section") ) continue;
+        // if ( fname.equals(USER) || fname.equals(WALL) || fname.equals(SECTION) ) continue;
 
         SymbolLine symbol = new SymbolLine( file.getPath(), fname, locale, iso );
         if ( symbol.mThName == null ) {
@@ -179,10 +179,10 @@ public class SymbolLineLibrary extends SymbolLibrary
   {
     // mLine.clear();
     super.makeEnabledList();
-    mLineUserIndex    = getSymbolIndexByThName( "user" );
-    mLineWallIndex    = getSymbolIndexByThName( "wall" );
-    mLineSlopeIndex   = getSymbolIndexByThName( "slope" );
-    mLineSectionIndex = getSymbolIndexByThName( "section" );
+    mLineUserIndex    = getSymbolIndexByThName( USER );
+    mLineWallIndex    = getSymbolIndexByThName( WALL );
+    mLineSlopeIndex   = getSymbolIndexByThName( SLOPE );
+    mLineSectionIndex = getSymbolIndexByThName( SECTION );
   }
 
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )

@@ -1,0 +1,24 @@
+encoding utf-8
+symbol point
+name fault_left
+name-it faglia_sinistra
+name-es falla_izquierda
+name-pt falha_esquerda
+name-ru нарушение_левостороннее
+name-fr faille_senestre
+name-ro falie-stânga
+name-de Linksverwerfung
+name-hu vető_bal
+th_name fault:left
+group fault
+color 0xff6666
+orientation yes
+path
+  moveTo 2 7
+  lineTo 2 -7
+  lineTo 6 -3
+  moveTo -2 -7
+  lineTo -2 7
+  lineTo -6 3
+endpath
+endsymbol

@@ -1,0 +1,23 @@
+encoding utf-8
+symbol line
+name walkway_metalic
+name-pt passarela_metálica
+name-ru металлический_настил
+name-ro pasarelă-metalică
+name-hu fém-járda
+th_name walkway:metalic
+group trail
+color 0xcccccc 0x66
+width 8
+effect
+  moveTo 0 0
+  lineTo 0 8
+  lineTo 2 10
+  lineTo 2 14
+  lineTo 8 14
+  lineTo 8 10
+  lineTo 6 8
+  lineTo 6 0
+  lineTo 0 0
+endeffect
+endsymbol

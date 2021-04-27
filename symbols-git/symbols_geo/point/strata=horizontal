@@ -1,0 +1,21 @@
+encoding utf-8
+symbol point
+name strata_horizontal
+name-it strati_orizzontali
+name-es estrato_horizontal
+name-pt estrato_horizontal
+name-ru горизонтальная_слоистость
+name-fr strate_horizontale
+name-ro strat-orizontal
+name-de Horizontale_Bank
+name-hu réteg_vízszintes
+th_name strata:horizontal
+group strata
+color 0xcccccc
+path
+  moveTo 0 9
+  lineTo 0 -9
+  moveTo 9 0
+  lineTo -9 0
+endpath
+endsymbol

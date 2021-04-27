@@ -10,7 +10,7 @@ name-sk základ_piliera
 name-ro bază_de_coloană
 name-de Säulenfuss
 name-hu oszloptalp
-th_name u:cut-pillar
+th_name cut-pillar
 color 0xcccccc
 path
   moveTo 6 6

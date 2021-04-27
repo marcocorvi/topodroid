@@ -1,0 +1,24 @@
+encoding utf-8
+symbol point
+name foliation_horizontal
+name-pt foliação_horizontal
+name-es foliación_orizontal
+name-ru сланцеватость_горизонтальная
+name-fr schistosité_horizontale
+name-de Blätterung
+name-ro şistozitate-orizontală
+name-hu foliáció_vízszintes
+th_name foliation:horizontal
+group foliation
+color 0xcccc99
+path
+  moveTo -7 2
+  lineTo 7 2
+  moveTo -7 -2
+  lineTo 7 -2
+  moveTo 2 -7
+  lineTo 2 7
+  moveTo -2 -7
+  lineTo -2 7
+endpath
+endsymbol

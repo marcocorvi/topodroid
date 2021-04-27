@@ -1,0 +1,28 @@
+encoding utf-8
+symbol line
+name slope_shallow
+name-es pendiente_suave
+name-pt rampa_suave
+name-ru склон_пологий
+name-fr pente_douce
+name-ro pantă_mică
+name-de Leichte_Steigung
+name-hu enyhe_lejtő
+th_name slope:shallow
+group slope
+color 0xfff5cc 0xff
+effect
+  moveTo 0 0
+  lineTo 0 -8
+  lineTo 1 -8
+  lineTo 1 0
+  lineTo 16 0
+  lineTo 16 -18
+  lineTo 17 -18
+  lineTo 17 0
+  lineTo 32 0
+  lineTo 32 1
+  lineTo 0 1
+  lineTo 0 0
+endeffect
+endsymbol

@@ -5,7 +5,7 @@ name-pt escavação_arqueológica
 name-ru археологические_раскопки
 name-ro săpătură-arheologică
 name-hu régészeti_ásatás
-th_name u:archeo-excavation
+th_name archeo-excavation
 group archeo
 orientation no
 color 0xc39953

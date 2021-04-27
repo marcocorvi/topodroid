@@ -1,0 +1,25 @@
+encoding utf-8
+symbol point
+name lineation_horizontal
+name-pt lineação_horizontal
+name-es lineación_horizontal
+name-ru горизонтально_линейно
+name-fr linéation_horizontale
+name-de Horizontale_Bänderung
+name-ro aliniere-orizontală
+name-hu vonalasság_vízszintes
+th_name lineation:horizontal
+group lineation
+color 0xffffff
+orientation yes
+path
+  moveTo -4.5 -4.5
+  lineTo 0 -9
+  lineTo 4.5 -4.5
+  moveTo -4.5 4.5
+  lineTo 0 9
+  lineTo 4.5 4.5
+  moveTo 0 -9
+  lineTo 0 9
+endpath
+endsymbol

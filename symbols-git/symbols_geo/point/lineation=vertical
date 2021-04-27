@@ -1,0 +1,24 @@
+encoding utf-8
+symbol point
+name lineation_vertical
+name-pt lineação_vertical
+name-es lineación_vertical
+name-ru вертикально_линейно
+name-fr linéation_verticale
+name-de Vertikale_Bänderung
+name-ro aliniere-verticală
+name-hu vonalasság_függőleges
+th_name lineation:vertical
+group lineation
+color 0xffffff
+path
+  moveTo -7.5 0
+  lineTo 0 -7.5
+  lineTo 7.5 0
+  lineTo 0 7.5
+  lineTo -7.5 0
+  lineTo 7.5 0
+  moveTo 0 -7.5
+  lineTo 0 7.5
+endpath
+endsymbol

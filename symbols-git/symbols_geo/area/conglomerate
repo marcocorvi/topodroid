@@ -2,7 +2,7 @@ encoding utf-8
 symbol area
 name conglomerate
 name-hu konglomerárum
-th_name u:conglomerate
+th_name conglomerate
 color 0x99ff00 0xcc
 bitmap 40 30
   0000000000000000000000000000000000000000

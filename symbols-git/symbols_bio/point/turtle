@@ -6,7 +6,7 @@ name-pt tartaruga
 name-ru черепаха
 name-ro broască țestoasă
 name-hu teknős
-th_name u:turtle
+th_name turtle
 color 0xffcc66
 path
   addCircle 0 0 1.5

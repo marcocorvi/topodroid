@@ -10,7 +10,7 @@ name-fr citerne
 name-sk citerna
 name-ro cisternă
 name-de Zisterne
-th_name u:cistern
+th_name cistern
 color 0x66ccff
 path
   moveTo -7.5 -4.5

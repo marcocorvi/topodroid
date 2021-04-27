@@ -1,0 +1,23 @@
+encoding utf-8
+symbol point
+name strata_overturned
+name-it strati_rovesciati
+name-es estrato_invertido
+name-pt estrato_invertido
+name-ru опрокинутая_слоистость
+name-fr strate_inversée
+name-ro strat-întors
+name-de Umgedrehte_Bank
+name-hu réteg_inverz
+th_name strata:overturned
+group strata
+color 0xcccccc
+orientation yes
+path
+  moveTo 9 0
+  lineTo -9 0
+  moveTo 4.5 0
+  cubicTo 4.5 4.5 -4.5 4.5 -4.5 0
+  lineTo -4.5 -6
+endpath
+endsymbol

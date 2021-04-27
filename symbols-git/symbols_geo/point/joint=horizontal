@@ -1,0 +1,26 @@
+encoding utf-8
+symbol point
+name joint_horizontal
+name-it giunto_orizzontale
+name-es diaclasa_horizontal
+name-pt diaclase_horizontal
+name-ru горизонтальное_несогласие
+name-fr diaclase_horizontale
+name-de Horizontale_Kluft
+name-ro fisură-orizontală
+name-hu kőzetrés_vízszintes
+th_name joint:horizontal
+group joint
+color 0xcccc99
+path
+  moveTo -7 0
+  lineTo 7 0
+  moveTo 0 -7
+  lineTo 0 7
+  moveTo 4 -4
+  lineTo 4 4
+  lineTo -4 4
+  lineTo -4 -4
+  lineTo 4 -4
+endpath
+endsymbol

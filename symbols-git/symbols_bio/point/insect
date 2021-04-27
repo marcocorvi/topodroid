@@ -8,7 +8,7 @@ name-fr insecte
 name-ro insectă
 name-de Insekt
 name-hu rovar
-th_name u:insect
+th_name insect
 color 0xffcc33
 path
   moveTo -2 -2

@@ -8,7 +8,7 @@ name-fr roche_moutonnée
 name-de Rundhöcker
 name-ro bloc-eroziune-galcială
 name-hu vásottszikla
-th_name u:rock-moutonnee
+th_name rock-moutonnee
 color 0xcccc99
 path
   moveTo 0 -9

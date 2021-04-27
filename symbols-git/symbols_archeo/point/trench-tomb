@@ -10,7 +10,7 @@ name-sk hromadný_hrob
 name-ro mormânt_colectiv
 name-de Schlitzgrab
 name-hu sírgödör
-th_name u:trench-tomb
+th_name trench-tomb
 color 0xffff33
 path
   moveTo 6 -3
