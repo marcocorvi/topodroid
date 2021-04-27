@@ -1,8 +1,8 @@
 encoding utf-8
 symbol point
-name small-debris
+name debris_small
 name-hu kis-törmelék
-th_name u:small-debris
+th_name debris:small
 orientation no
 color 0xffcc66
 path
