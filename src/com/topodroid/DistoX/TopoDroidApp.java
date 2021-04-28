@@ -1574,11 +1574,26 @@ public class TopoDroidApp extends Application
 
   static private void deleteObsoleteSymbols()
   {
-    String[] lines = { "blocks", "debris", "clay", "contour", "presumed", "sand", "ice", "section", "wall:sand" };
+    String[] lines = { 
+      SymbolLibrary.BLOCKS,
+      SymbolLibrary.DEBRIS,
+      SymbolLibrary.CLAY,
+      SymbolLibrary.CONTOUR,
+      SymbolLibrary.PRESUMED,
+      SymbolLibrary.SAND,
+      SymbolLibrary.ICE,
+      SymbolLibrary.SECTION,
+      "wall:sand"
+    };
     for ( String line : lines ) {
       TDFile.deleteFile( TDPath.getSymbolLinePath( line ) );
     }
-    String[] points = { "breakdown-choke", "low-end", "paleo-flow", "section" };
+    String[] points = {
+      "breakdown-choke",
+      "low-end",
+      "paleo-flow",
+      SymbolLibrary.SECTION
+    };
     for ( String point : points ) {
       TDFile.deleteFile( TDPath.getSymbolPointPath( point ) );
     }

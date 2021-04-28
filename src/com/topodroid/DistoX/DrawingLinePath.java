@@ -446,7 +446,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     String name  = getThName( );
     if ( name == null ) { // should not happen
       TDLog.Error("null line name");
-      name = "user";
+      name = SymbolLibrary.USER;
     }
     String group = BrushManager.getLineGroup( mLineType );
     try {

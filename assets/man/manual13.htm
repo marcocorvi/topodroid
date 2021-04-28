@@ -373,9 +373,12 @@ X-section Therion <i>scrap</i> names are composed of the survey name, a two lett
 When a sketch with section points is exported through the <u>export</u> dialog, the x-sections of the section points are
 also exported.<br><p>
 
+It the sketch contains symbols that are not included in the Therion set, you must prepend the
+prefix "u:" to the unsupported symbol names, before using the th2 file.<br><p>
+
 Settings:<ul style="margin-top=0">
 <li>automatic <u>station-points</u>. [default: yes].</li>
-<li>add <u>splays</u> to the scrap (as lines of type "u:splay") [default: no].</li>
+<li>add <u>splays</u> to the scrap (as lines of type "splay") [default: no].</li>
 <li>add a xtherion command to read the <u>XVI</u> image of the sketch [default: no].</li>
 <li>export <u>scale</u>. Default 1:100</li>
 <li><u>point spacing</u> minimum distance between points on polylines. Intermediate points are not exported. Default 20 cm</li>
@@ -542,7 +545,7 @@ otherwise only the user-chosen stations are included</li>
 <li><i>Default sketch export format</i>: defines the default format to which sketches are exported. These files are automatically generated whenever a sketch is closed. This puts some extra load on the system, so you may opt for explicitly exporting sketches after the survey session.</li>
 <li><b>Therion</b> <i>map commands</i> before or after the centerline block [after]</li>
 <li><b>Therion</b> <i>auto-stations</i>: automatically add station points to the therion sketch file(s) [yes]. If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
-<li><b>Therion</b> <i>u:splays</i> lines in Therion scraps [yes]</li>
+<li><b>Therion</b> <i>splays</i> lines in Therion scraps [yes]</li>
 <li><b>cSurvey/Compass</b> <i>survey prefix</i> to the stations [no]</li>
 <li><b>Compass/TopoRobot/WinKarst/Polygon/VisualTopo</b>
   <ul>

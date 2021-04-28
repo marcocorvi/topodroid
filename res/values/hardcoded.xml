@@ -48,7 +48,7 @@
   <string name="packet_x" translatable="false">X</string>
 
 <!--  
-  <string name="p_user" translatable="false">u:user</string>
+  <string name="p_user" translatable="false">user</string>
   <string name="p_label" translatable="false">label</string>
   <string name="p_station" translatable="false">station</string>
   <string name="p_section" translatable="false">section</string>

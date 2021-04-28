@@ -579,7 +579,7 @@ public class DrawingPointPath extends DrawingPath
   {
     String name  = getThName();
     if ( name == null ) {
-      name = "user";
+      name = SymbolLibrary.USER;
       TDLog.Error( "null point name" );
     }
     String group = BrushManager.getPointGroup(mPointType);

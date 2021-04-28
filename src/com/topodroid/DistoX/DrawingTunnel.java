@@ -301,25 +301,25 @@ class DrawingTunnel extends DrawingSvgBase
 
   private static String toTunnelPointName( String th_name ) 
   {
-    if ( th_name.equals("air-draught") ) return "breeze a";
-    if ( th_name.equals("archeo") ) return "humact";
-    if ( th_name.equals("blocks") ) return "boulders";
-    if ( th_name.equals("column") ) return "column";
-    if ( th_name.equals("curtain") ) return "curtain";
-    if ( th_name.equals("flowstone") ) return "flowstone";
-    if ( th_name.equals("gradient") ) return "slope";
-    if ( th_name.equals("guano") ) return "guano";
-    if ( th_name.equals("helictite") ) return "helictite";
-    if ( th_name.equals("mud") ) return "mud";
-    if ( th_name.equals("clay") ) return "mud";
-    if ( th_name.equals("pebbles") ) return "pebbles";
-    if ( th_name.equals("popcorn") ) return "popcorn";
-    if ( th_name.equals("sand") ) return "sand";
-    if ( th_name.equals("soda-straw") ) return "straws";
-    if ( th_name.equals("stalactite") ) return "stalactite";
-    if ( th_name.equals("stalagmite") ) return "stalagmite";
-    if ( th_name.equals("water-flow") ) return "stream";
-    if ( th_name.equals("water") ) return "puddle";
+    if ( th_name.equals(SymbolLibrary.AIR_DRAUGHT) ) return "breeze a";
+    if ( th_name.equals(SymbolLibrary.ARCHEO) ) return "humact";
+    if ( th_name.equals(SymbolLibrary.BLOCKS) ) return "boulders";
+    if ( th_name.equals(SymbolLibrary.COLUMN) ) return "column";
+    if ( th_name.equals(SymbolLibrary.CURTAIN) ) return "curtain";
+    if ( th_name.equals(SymbolLibrary.FLOWSTONE) ) return "flowstone";
+    if ( th_name.equals(SymbolLibrary.GRADIENT) ) return "slope";
+    if ( th_name.equals(SymbolLibrary.GUANO) ) return "guano";
+    if ( th_name.equals(SymbolLibrary.HELICTITE) ) return "helictite";
+    if ( th_name.equals(SymbolLibrary.MUD) ) return "mud";
+    if ( th_name.equals(SymbolLibrary.CLAY) ) return "mud";
+    if ( th_name.equals(SymbolLibrary.PEBBLES) ) return "pebbles";
+    if ( th_name.equals(SymbolLibrary.POPCORN) ) return "popcorn";
+    if ( th_name.equals(SymbolLibrary.SAND) ) return "sand";
+    if ( th_name.equals(SymbolLibrary.SODA_STRAW) ) return "straws";
+    if ( th_name.equals(SymbolLibrary.STALACTITE) ) return "stalactite";
+    if ( th_name.equals(SymbolLibrary.STALAGMITE) ) return "stalagmite";
+    if ( th_name.equals(SymbolLibrary.WATER_FLOW) ) return "stream";
+    if ( th_name.equals(SymbolLibrary.WATER) ) return "puddle";
     // if ( th_name.equals("") ) return "bigboulders";
     // if ( th_name.equals("") ) return "flowpara";
     // if ( th_name.equals("") ) return "flowperp";
@@ -336,11 +336,11 @@ class DrawingTunnel extends DrawingSvgBase
 
   private static String toTunnelLineName( String th_name ) 
   {
-    if ( th_name.equals("wall") )    return "wall";
-    if ( th_name.equals("presumed")) return "estwall";
-    if ( th_name.equals("pit") )     return "pitchbound";
-    if ( th_name.equals("chimney") ) return "ceilingbound";
-    if ( th_name.equals("slope") )   return "slope";
+    if ( th_name.equals(SymbolLibrary.WALL) )    return "wall";
+    if ( th_name.equals(SymbolLibrary.PRESUMED)) return "estwall";
+    if ( th_name.equals(SymbolLibrary.PIT) )     return "pitchbound";
+    if ( th_name.equals(SymbolLibrary.CHIMNEY) ) return "ceilingbound";
+    if ( th_name.equals(SymbolLibrary.SLOPE) )   return "slope";
     // return "invisible";
     return "detail";
   }

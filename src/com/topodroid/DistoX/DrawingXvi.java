@@ -422,7 +422,7 @@ class DrawingXvi
       }
     }
 
-    // if ( name.equals("label") ) {
+    // if ( name.equals( SymbolLibrary.LABEL ) ) {
     //   DrawingLabelPath label = (DrawingLabelPath)point;
     //   pw.format(Locale.US, "<text x=\"%.2f\" y=\"%.2f\" ", xoff+point.cx, yoff-point.cy );
     //   pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );

@@ -174,7 +174,7 @@ class DrawingSvgBase
   {
     String name = point.getThName();
     pw.format("<!-- point %s -->\n", name );
-    if ( name.equals("label") ) {
+    if ( name.equals( SymbolLibrary.LABEL ) ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
@@ -190,11 +190,11 @@ class DrawingSvgBase
   {
     String th_name = line.getThName( ); 
     pw.format(Locale.US, "  <path stroke=\"%s\" stroke-width=\"%.2f\" fill=\"none\" class=\"%s\"", color, TDSetting.mSvgLineStroke, th_name );
-    if ( th_name.equals( "arrow" ) ) pw.format(" marker-end=\"url(#Triangle)\"");
-    else if ( th_name.equals( "section" ) ) pw.format(" stroke-dasharray=\"5 3 \"");
-    else if ( th_name.equals( "fault" ) ) pw.format(" stroke-dasharray=\"8 4 \"");
-    else if ( th_name.equals( "floor-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
-    else if ( th_name.equals( "ceiling-meander" ) ) pw.format(" stroke-dasharray=\"6 2 \"");
+    if ( th_name.equals( SymbolLibrary.ARROW ) )                pw.format(" marker-end=\"url(#Triangle)\"");
+    else if ( th_name.equals( SymbolLibrary.SECTION ) )         pw.format(" stroke-dasharray=\"5 3 \"");
+    else if ( th_name.equals( SymbolLibrary.FAULT ) )           pw.format(" stroke-dasharray=\"8 4 \"");
+    else if ( th_name.equals( SymbolLibrary.FLOOR_MEANDER ) )   pw.format(" stroke-dasharray=\"6 2 \"");
+    else if ( th_name.equals( SymbolLibrary.CEILING_MEANDER ) ) pw.format(" stroke-dasharray=\"6 2 \"");
     toSvgPointLine( pw, line, xoff, yoff, line.isClosed() );
     if ( TDSetting.mSvgLineDirection ) {
       if ( BrushManager.hasLineEffect( line.mLineType ) ) {
@@ -275,7 +275,7 @@ class DrawingSvgBase
     float scale = point.getScaleValue();
     String name = point.getThName( );
     pw.format("<!-- point %s -->\n", name );
-    if ( name.equals("label") ) {
+    if ( name.equals( SymbolLibrary.LABEL ) ) {
       float o = (float)(point.mOrientation);
       float s = POINT_SCALE * TDMath.sind( o ) * scale;
       float c = POINT_SCALE * TDMath.cosd( o ) * scale;

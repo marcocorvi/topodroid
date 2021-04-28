@@ -95,7 +95,7 @@ public class PtCmapActivity extends Activity
     }
     for ( int k=0; k<7; ++k ) {
       String txt = mETpoint[k].getText().toString().trim();
-      if ( ! BrushManager.hasPointByThName( txt ) ) {
+      if ( SymbolLibrary.LABEL.equals( txt ) || ! BrushManager.hasPointByThName( txt ) ) {
         mETpoint[k].setError( getResources().getString( R.string.bad_point ) );
         return false;
       }

@@ -2465,9 +2465,9 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
     TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
-    mCurrentPoint = ( BrushManager.isPointEnabled( "label" ) )?  1 : 0;
-    mCurrentLine  = ( BrushManager.isLineEnabled( "wall" ) )?  1 : 0;
-    mCurrentArea  = ( BrushManager.isAreaEnabled( "water" ) )?  1 : 0;
+    mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
+    mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
@@ -5835,7 +5835,7 @@ public class DrawingWindow extends ItemDrawer
                                  String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.getLineWallIndex();
-      if ( ! BrushManager.isLineEnabled( "wall" ) ) mCurrentLine = 0;
+      if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
       // Log.v("DistoX-C", "prepareXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
       setTheTitle();

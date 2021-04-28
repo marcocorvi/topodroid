@@ -108,7 +108,7 @@ public class BrushManager
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }
-  static String getLineWallGroup() { return (mLineLib == null)? "wall": getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
+  static String getLineWallGroup() { return (mLineLib == null)? SymbolLibrary.WALL : getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
 
   static String getPointDefaultOptions( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolDefaultOptions(idx ); }
   static String getLineDefaultOptions( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolDefaultOptions(idx ); }
@@ -421,9 +421,9 @@ public class BrushManager
   {
     SymbolsPalette palette = new SymbolsPalette();
     // populate local palette with default symbols
-    palette.addPointFilename("user"); // make sure local palette contains "user" symnbols
-    palette.addLineFilename("user");
-    palette.addAreaFilename("user");
+    palette.addPointFilename( SymbolLibrary.USER ); // make sure local palette contains "user" symnbols
+    palette.addLineFilename( SymbolLibrary.USER );
+    palette.addAreaFilename( SymbolLibrary.USER );
     SymbolPointLibrary points = mPointLib;
     if ( points != null ) {
       for ( Symbol p : points.getSymbols() ) if ( p.isEnabled() ) {
@@ -432,7 +432,7 @@ public class BrushManager
           TDLog.Error("point symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
-          if ( ! "user".equals(fname) ) palette.addPointFilename( fname );
+          if ( !  SymbolLibrary.USER.equals(fname) ) palette.addPointFilename( fname );
         }
       }
     }
@@ -444,7 +444,7 @@ public class BrushManager
           TDLog.Error("line symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
-          if ( ! "user".equals(fname) ) palette.addLineFilename( fname );
+          if ( ! SymbolLibrary.USER.equals(fname) ) palette.addLineFilename( fname );
         }
       }
     }
@@ -456,7 +456,7 @@ public class BrushManager
           TDLog.Error("area symbol with null ThName" );
           p.setEnabled( false ); // disable
         } else {
-          if ( ! "user".equals(fname) ) palette.addAreaFilename( fname );
+          if ( ! SymbolLibrary.USER.equals(fname) ) palette.addAreaFilename( fname );
         }
       }
     }

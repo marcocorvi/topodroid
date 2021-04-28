@@ -39,7 +39,7 @@ class EnableSymbol implements View.OnClickListener
   @Override
   public void onClick( View v ) 
   {
-    if ( mSymbol.getThName().equals("user") ) {
+    if ( mSymbol.getThName().equals(SymbolLibrary.USER) ) {
       mEnabled = true;
       ((CheckBox)v).setChecked( true ); // true = mEnabled
     } else {

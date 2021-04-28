@@ -100,30 +100,30 @@ public class DrawingIO
   //           if ( line.startsWith( "#P " ) ) { // POINT PALETTE
   //             if ( localPalette != null ) {
   //               localPalette.mPalettePoint.clear();
-  //               localPalette.addPointFilename( "user" );
+  //               localPalette.addPointFilename( SymbolLibrary.USER );
   //               String[] syms = line.split( " " );
   //               for ( int k=1; k<syms.length; ++k ) {
-  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addPointFilename( syms[k] );
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals(SymbolLibrary.USER) ) localPalette.addPointFilename( syms[k] );
   //               }
   //               BrushManager.mPointLib.makeEnabledListFromPalette( localPalette );
   //             }
   //           } else if ( line.startsWith( "#L " ) ) { // LINE PALETTE
   //             if ( localPalette != null ) {
   //               localPalette.mPaletteLine.clear();
-  //               localPalette.addLineFilename("user");
+  //               localPalette.addLineFilename(SymbolLibrary.USER);
   //               String[] syms = line.split( " " );
   //               for ( int k=1; k<syms.length; ++k ) {
-  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addLineFilename( syms[k] );
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals(SymbolLibrary.USER) ) localPalette.addLineFilename( syms[k] );
   //               }
   //               BrushManager.mLineLib.makeEnabledListFromPalette( localPalette );
   //             }
   //           } else if ( line.startsWith( "#A " ) ) { // AREA PALETTE
   //             if ( localPalette != null ) {
   //               localPalette.mPaletteArea.clear();
-  //               localPalette.addAreaFilename("user");
+  //               localPalette.addAreaFilename(SymbolLibrary.USER);
   //               String[] syms = line.split( " " );
   //               for ( int k=1; k<syms.length; ++k ) {
-  //                 if ( syms[k].length() > 0 && ! syms[k].equals("user") ) localPalette.addAreaFilename( syms[k] );
+  //                 if ( syms[k].length() > 0 && ! syms[k].equals(SymbolLibrary.USER) ) localPalette.addAreaFilename( syms[k] );
   //               }
   //               BrushManager.mAreaLib.makeEnabledListFromPalette( localPalette );
   //             }
@@ -225,8 +225,6 @@ public class DrawingIO
   //             BrushManager.tryLoadMissingPoint( type );
   //             // map pre 3.1.1 thnames to 3.1.1 names
   //             String thname = type;
-  //             if ( thname.equals( "user" ) )        { thname = "u:user"; }
-  //             else if ( thname.equals( "danger" ) ) { thname = "u:danger"; }
   //             else if ( thname.equals( "archeo" ) ) { thname = "archeo-material"; }
   //             ptType = BrushManager.getPointIndexByThName( thname );
   //             // Log.v("DistoX", "type " + type + " thname " + thname + " " + ptType );
@@ -295,7 +293,6 @@ public class DrawingIO
   //                     if ( vals2.length >= 2 ) {
   //                       BrushManager.tryLoadMissingArea( vals2[1] );
   //                       String thname = vals2[1];
-  //                       if ( thname.equals( "user" ) ) { thname = "u:user"; }
   //                       arType = BrushManager.getAreaIndexByThName( thname );
   //                       if ( arType < 0 ) {
   //                         if ( missingSymbols != null ) missingSymbols.addAreaFilename( vals2[1] );
@@ -397,7 +394,6 @@ public class DrawingIO
   //               DrawingLinePath path = null;
   //               BrushManager.tryLoadMissingLine( type );
   //               String thname = type;
-  //               if ( thname.equals( "user" ) ) { thname = "u:user"; }
   //               lnType = BrushManager.getLineIndexByThName( thname );
   //               if ( lnType < 0 ) {
   //                 if ( missingSymbols != null ) missingSymbols.addLineFilename( type );
@@ -431,7 +427,7 @@ public class DrawingIO
   //                   if ( line.contains( "l-size" ) ) continue;
   //                   if ( line.equals( "endline" ) ) {
   //                     if ( path != null ) {
-  //                       if ( type.equals("section") ) { // section line only in non-section scraps
+  //                       if ( type.equals(SymbolLibrary.SECTION) ) { // section line only in non-section scraps
   //                         if ( is_not_section ) {
   //                           path.makeStraight( );
   //                         }

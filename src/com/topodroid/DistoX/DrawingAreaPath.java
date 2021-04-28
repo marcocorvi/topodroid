@@ -415,7 +415,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     String name  = getThName( );
     if ( name == null ) {
       TDLog.Error("null area name");
-      name = "user";
+      name = SymbolLibrary.USER;
     }
     String group = BrushManager.getAreaGroup( mAreaType );
     try {
