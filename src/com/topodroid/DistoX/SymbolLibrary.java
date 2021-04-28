@@ -82,6 +82,8 @@ public class SymbolLibrary
 
   int size() { return mSymbols.size(); }
 
+  private String toThName( String name ) {  return (name != null && name.startsWith("u:"))? name.substring(2) : name; }
+
   // ----------------------------------------------------
 
   // used by DrawingDxf and DrawingSurface (for the palette)
@@ -130,9 +132,9 @@ public class SymbolLibrary
     return ret;
   }
 
-  protected Symbol get( String th_name ) 
+  protected Symbol get( String name ) 
   {
-    return ( mRoot == null )? null : mRoot.get( th_name );
+    return ( mRoot == null )? null : mRoot.get( toThName(name) );
   }
 
   // ============================================================
@@ -146,15 +148,17 @@ public class SymbolLibrary
     return -1;
   }
 
-  int getSymbolIndexByThName( String th_name )
+  int getSymbolIndexByThName( String name )
   {
+    String th_name = toThName( name );
     int nr = mSymbols.size();
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
     return -1;
   }
 
-  int getSymbolIndexByThNameOrGroup( String th_name, String group )
+  int getSymbolIndexByThNameOrGroup( String name, String group )
   {
+    String th_name = toThName( name );
     int nr = mSymbols.size();
     // Log.v("DistoX-PLOT", "ThName <" + th_name + "> group <" + ( (group == null)? "null" : group ) + ">" );
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
@@ -175,13 +179,13 @@ public class SymbolLibrary
   String getSymbolDefaultOptions( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get(k).getDefaultOptions(); }
 
   // this is used only by PT Cmap
-  boolean hasSymbolByThName( String th_name ) { return ( null != get( th_name ) ); }
+  boolean hasSymbolByThName( String name ) { return ( null != get( name ) ); }
 
   // this is used by loadUserXXX 
   // boolean hasSymbolByFilename( String fname ) { return ( null != get( fname ) ); }
 
   // Symbol getSymbolByFilename( String fname ) { return get( fname ); }
-  Symbol getSymbolByThName( String th_name ) { return get( th_name ); }
+  Symbol getSymbolByThName( String name ) { return get( name ); }
 
   Symbol getSymbolByIndex( int k ) { return ( k < 0 || k >= mSymbols.size() )? null : mSymbols.get( k ); }
 
@@ -266,8 +270,8 @@ public class SymbolLibrary
     if ( clear ) {
       for ( Symbol symbol : mSymbols ) symbol.setEnabled( false );
     }
-    for ( String thname : symbols ) {
-      Symbol symbol = getSymbolByThName( thname );
+    for ( String name : symbols ) {
+      Symbol symbol = getSymbolByThName( name );
       if ( symbol != null ) symbol.setEnabled( true );
     }
     makeEnabledList( );
