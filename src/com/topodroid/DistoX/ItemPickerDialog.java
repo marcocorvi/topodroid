@@ -362,7 +362,7 @@ class ItemPickerDialog extends MyDialog
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
-        if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.mThName.equals("section") ) ) { // FIXME_SECTION_POINT 
+        if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.isThName( SymbolLibrary.SECTION ) ) ) { // FIXME_SECTION_POINT 
           mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p, use_text ) );
         }
       }
@@ -736,7 +736,7 @@ class ItemPickerDialog extends MyDialog
   //   if ( ib != null ) {
   //     for ( int k=0; k<TDSetting.mRecentNr; ++k ) {
   //       if ( mRecent[k] == ib ) {
-  //         // Log.v("DistoX", "long click view " + k + " " + ItemDrawer.mRecentPoint[k].mThName );
+  //         // Log.v("DistoX", "long click view " + k + " " + ItemDrawer.mRecentPoint[k].getThName() );
   //         if ( k > 0 ) {
   //           if ( mItemType == SymbolType.POINT ) {
   //             Symbol pt = ItemDrawer.mRecentPoint[k];

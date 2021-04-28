@@ -26,7 +26,7 @@ public class Symbol implements SymbolInterface
   static final int W2D_DETAIL_SYM = 4;
 
   boolean mEnabled;  //!< whether the symbol is enabled in the library
-  String  mThName;   // therion name
+  private String  mThName;   // therion name
   String  mGroup;    // group of this symbol (null if no group)
   // String  mFilename; // filename coincide with therion name
   protected String mDefaultOptions;
@@ -54,7 +54,7 @@ public class Symbol implements SymbolInterface
   Symbol( String th_name, String group, String filename, int rt ) 
   { 
     mEnabled  = true;
-    mThName   = th_name;
+    setThName( th_name );
     mGroup    = group;
     mDefaultOptions = null;
     // mFilename = filename;
@@ -76,13 +76,28 @@ public class Symbol implements SymbolInterface
     mRoundTrip = W2D_NONE;
   }
 
+  // ------------------------------------------------------------------------
+
   public String getDefaultOptions() { return mDefaultOptions; }
 
   // SymbolInterface methods
-  public String getThName()     { return mThName; }
+  protected void setThName( String name )
+  {
+    if ( name == null ) return;
+    if ( name.startsWith("u:") ) {
+      if ( name.length() == 2 ) return;
+      mThName = name.substring(2);
+    } else {
+      if ( name.length() == 0 ) return;
+      mThName = name;
+    }
+  }
+  public String getThName()           { return mThName; }
   boolean hasThName( String th_name ) { return mThName != null && mThName.equals( th_name ); } 
+  boolean isThName( String name )     { return (name == null && mThName == null) || mThName.equals( name ); }
+  boolean isThNameEmpty()             { return mThName == null || mThName.length() == 0; }
 
-  String getGroup()      { return mGroup; }
+  String getGroup()                { return mGroup; }
   boolean hasGroup( String group ) { return mGroup != null && mGroup.equals( group ); }
 
   // filename is not used - symbols are distinguished by their th_name

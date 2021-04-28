@@ -155,7 +155,7 @@ class DrawingSvgWalls extends DrawingSvgBase
         SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
         if (pt != null) {
           int block = 1 + n; // block_name = 1 + therion_code
-          out.write("    <symbol id=\"" + pt.mThName + "\">\n");
+          out.write("    <symbol id=\"" + pt.getThName() + "\">\n");
           out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
           out.write("    </symbol>\n");
         }

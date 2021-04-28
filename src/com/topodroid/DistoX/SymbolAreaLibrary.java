@@ -136,13 +136,13 @@ public class SymbolAreaLibrary extends SymbolLibrary
       if ( files == null ) return;
       for ( File file : files ) {
         SymbolArea symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );
-        if ( symbol.mThName == null ) {
+        if ( symbol.isThName( null ) ) {
           TDLog.Error( "area with null ThName " + file.getName() );
           continue;
         }
-        if ( ! hasSymbolByThName( symbol.mThName ) ) {
+        if ( ! hasSymbolByThName( symbol.getThName() ) ) {
           addSymbol( symbol );
-          String thname = symbol.mThName;
+          String thname = symbol.getThName();
           String name   = mPrefix + thname;
           boolean enable = false;
           if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
@@ -155,7 +155,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
           }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "area " + symbol.mThName + " already in library" );
+          TDLog.Error( "area " + symbol.getThName() + " already in library" );
         }
       }
       sortSymbolByName( systemNr );
@@ -181,7 +181,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
     }
     // if ( symbol == null ) return false; // ALWAYS false
     if ( ! symbol.isEnabled() ) {
-      symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( mPrefix + symbol.mThName ) );
+      symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( mPrefix + symbol.getThName() ) );
       makeEnabledList();
     }
     return true;

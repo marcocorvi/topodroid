@@ -97,7 +97,7 @@ public class SymbolLibrary
       mRoot.color = BLACK;
     } else {
       for ( SymbolNode n0 = mRoot; ; ) {
-        int c = compare( n0.value.mThName, v.mThName );
+        int c = compare( n0.value.getThName(), v.getThName() );
         if ( c < 0 ) {
           if ( n0.left == null ) {
             n0.left = n;
@@ -115,7 +115,7 @@ public class SymbolLibrary
             n0 = n0.right;
           }
         } else {
-          TDLog.Error( "Double insertion of symbol " + mPrefix + v.mThName );
+          TDLog.Error( "Double insertion of symbol " + mPrefix + v.getThName() );
           ret = false;
           break;
         }
@@ -165,7 +165,7 @@ public class SymbolLibrary
   // int getSymbolIndexByFilename( String fname )
   // {
   //   int nr = mSymbols.size();
-  //   for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).mThName.equals( fname) ) return k;
+  //   for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).isThName( fname ) ) return k;
   //   return -1;
   // }
 
@@ -243,7 +243,7 @@ public class SymbolLibrary
   //   }
   //   if ( symbol == null ) return false;
   //   // Log.v( TopoDroidApp.TAG, "enabling missing symbol " + prefix + th_name );
-  //   symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
+  //   symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.getThName() ) );
   //   makeEnabledList( );
   //   return true;
   // }
@@ -252,7 +252,7 @@ public class SymbolLibrary
   protected void makeEnabledList( )
   {
     for ( Symbol symbol : mSymbols ) {
-      TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.mThName, symbol.mEnabled );
+      TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.mEnabled );
       // if ( symbol.mEnabled ) {
         // TODO what ?
       // }
@@ -345,7 +345,7 @@ public class SymbolLibrary
     // @param name  query key (symbol filename)
     Symbol get( String name )
     {
-      int c = compare( value.mThName, name );
+      int c = compare( value.getThName(), name );
       if ( c == 0 ) return value;
       if ( c < 0 ) return ( left == null )? null : left.get( name );
       return ( right == null )? null : right.get( name );

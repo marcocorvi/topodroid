@@ -151,17 +151,17 @@ public class SymbolPointLibrary extends SymbolLibrary
         // if ( fname.equals(USER) || fname.equals(LABEL) || fname.equals(SECTION) ) continue;
 
         SymbolPoint symbol = new SymbolPoint( file.getPath(), fname, locale, iso );
-        if ( symbol.mThName == null ) {
+        if ( symbol.isThName( null ) ) {
           TDLog.Error( "point with null ThName " + fname );
           continue;
         }
-        // Log.v("DistoX-Pt", "Symbol point <" + fname + "> th_name <" + symbol.mThName + ">" );
-        if ( ! hasSymbolByThName( symbol.mThName ) ) {
+        // Log.v("DistoX-Pt", "Symbol point <" + fname + "> th_name <" + symbol.getThName() + ">" );
+        if ( ! hasSymbolByThName( symbol.getThName() ) ) {
           addSymbol( symbol );
-          String thname = symbol.mThName;
+          String thname = symbol.getThName();
           String name = "p_" + thname;
           boolean enable = false;
-          if ( symbol.mThName.equals(SECTION) ) { // FIXME_SECTION_POINT always enabled
+          if ( symbol.isThName( SECTION ) ) { // FIXME_SECTION_POINT always enabled
             enable = true;
 	  } else {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
@@ -175,7 +175,7 @@ public class SymbolPointLibrary extends SymbolLibrary
 	  }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "point " + symbol.mThName + " already in library" );
+          TDLog.Error( "point " + symbol.getThName() + " already in library" );
         }
       }
       sortSymbolByName( systemNr );
@@ -202,14 +202,14 @@ public class SymbolPointLibrary extends SymbolLibrary
       File file = TDFile.getFile( TDPath.getSymbolSavePointPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolPoint( file.getPath(), file.getName(), locale, iso );
-      if ( symbol.mThName == null || symbol.mThName.length() == 0 ) return false;
+      if ( symbol.isThName( null ) || symbol.getThName().length() == 0 ) return false;
       addSymbol( symbol );
     // } else {
     //   // Log.v( "DistoX", "enabling missing point " + thname );
     }
     // if ( symbol == null ) return false; // ALWAYS false
 
-    symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
+    symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.getThName() ) );
     makeEnabledList();
     return true;
   }

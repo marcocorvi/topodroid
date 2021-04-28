@@ -81,7 +81,7 @@ public class SymbolPoint extends Symbol
   @Override public int getAngle() { return (int)mOrientation; } // degrees
 
   @Override public String getName( ) { return mName; }
-  @Override public String getThName( ) { return mThName; }
+  // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
 
   public SymbolPointDxf getDxf() { return mDxf; }
   public String getSvg( ) { return mSvg; }
@@ -310,13 +310,13 @@ public class SymbolPoint extends Symbol
               } else {
                 if ( cnt == 0 ) {
                   mName   = name;
-                  mThName = th_name;
+                  setThName( th_name );
                   mGroup  = group;
                   mPaint  = makePaint( color, style );
                   makePointPath( path );
                   mOrigPath = new Path( mPath );
                   mDefaultOptions = options;
-                  // Log.v("DistoX-POINT", "Name " + mName + " ThName " + mThName );
+                  // Log.v("DistoX-POINT", "Name " + mName + " ThName " + getThName() );
                   // mPoint1 = new SymbolPointBasic( name, th_name, null, fname, color, path );
                 // } else if ( cnt == 1 ) {
                 //   if ( mOrientable == true ) {
@@ -346,7 +346,7 @@ public class SymbolPoint extends Symbol
   // {
   //   mPath = new Path();
   //   mPath.moveTo(0,0);
-  //   String pname = "P_" + mThName.replace(':', '-');
+  //   String pname = "P_" + getThName().replace(':', '-');
   //   mDxf  = "  0\nLINE\n  8\n" + pname + "\n" 
   //         + "  100\nAcDbEntity\n  100\nAcDbLine\n"
   //         + "  10\n0.0\n  20\n0.0\n  30\n0.0\n"
@@ -369,7 +369,7 @@ public class SymbolPoint extends Symbol
     if ( path == null ) {
       mPath = new Path();
       mPath.moveTo(0,0);
-      String pname = "P_" + mThName.replace(':', '-');
+      String pname = "P_" + getThName().replace(':', '-');
 
       mDxf.line( pname, 0, 0, 1, 0 );
 
@@ -389,7 +389,7 @@ public class SymbolPoint extends Symbol
     PrintWriter pv4  = new PrintWriter( sv4 ); // XVI writer: Lines / Cubics
 
     float x00=0, y00=0;  // last drawn point1
-    String pname = "P_" + mThName.replace(':', '-');
+    String pname = "P_" + getThName().replace(':', '-');
 
     float unit = TDSetting.mUnitIcons;
     mPath = new Path();

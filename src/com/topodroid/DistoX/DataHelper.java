@@ -5247,6 +5247,55 @@ public class DataHelper extends DataSetObservable
 
   public List< DBlock > getSurveyReducedData( long sid ) { return selectAllLegShotsReduced( sid, 0 ); }
 
+  static private void updateSymbolKeys( SQLiteDatabase db )
+  {
+    int pt = 0;
+    int ln = 0;
+    int ar = 0;
+    try {
+      db.beginTransaction();
+      Cursor cursor = db.rawQuery( "select key from configs where key like \"p_u:%%\" ", new String[] {} );
+      if ( cursor != null ) {
+        if ( cursor.moveToFirst() ) {
+          do {
+            String old_key = cursor.getString(0);
+            String new_key = old_key.replace("u:", "");
+            db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
+            ++ pt;
+          } while ( cursor.moveToNext() );
+        }
+        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      }
+      cursor = db.rawQuery( "select key from configs where key like \"l_u:%%\" ", new String[] {} );
+      if ( cursor != null ) {
+        if ( cursor.moveToFirst() ) {
+          do {
+            String old_key = cursor.getString(0);
+            String new_key = old_key.replace("u:", "");
+            db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
+            ++ ln;
+          } while ( cursor.moveToNext() );
+        }
+        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      }
+      cursor = db.rawQuery( "select key from configs where key like \"a_u:%%\" ", new String[] {} );
+      if ( cursor != null ) {
+        if ( cursor.moveToFirst() ) {
+          do {
+            String old_key = cursor.getString(0);
+            String new_key = old_key.replace("u:", "");
+            db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
+            ++ ar;
+          } while ( cursor.moveToNext() );
+        }
+        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+      }
+      db.setTransactionSuccessful();
+      db.endTransaction();
+      TDLog.Error( "Updated symbols: " + pt + " points, " + ln + " lines, " + ar + " areas");
+    } catch ( SQLException e ) { TDLog.Error( "updateSymbolKeys exception: " + e.getMessage() );
+    }
+  }
 
   // ----------------------------------------------------------------------
   // DATABASE TABLES
@@ -5559,6 +5608,8 @@ public class DataHelper extends DataSetObservable
 	   case 42:
              db.execSQL( "ALTER TABLE plots ADD COLUMN intercept REAL default -1" );
 	   case 43:
+             updateSymbolKeys( db );
+	   case 44:
              /* current version */
            default:
              break;

@@ -58,7 +58,7 @@ public class DrawingPath extends RectF
   Path mPath;
   Path mTransformedPath;
   Paint mPaint;          // drawing path paint
-  public int mType;             // path type
+  public int mType;      // path type
   String mOptions;       // therion options
   public float x1, y1, x2, y2;  // endpoint scene coords  (not private just to write the scrap scale using mNorthLine )
   // private int dir; // 0 x1 < x2, 1 y1 < y2, 2 x2 < x1, 3 y2 < y1

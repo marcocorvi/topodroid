@@ -45,8 +45,8 @@ public class DrawingPointPath extends DrawingPath
 {
   // float mXpos;        // scene coords
   // float mYpos;
-  public int mPointType;
-  protected int mScale;  //! symbol scale
+  public int mPointType; // symbol point type (index in symbol-point lib)
+  protected int mScale;  // symbol scale
   public double mOrientation;   // orientation [degrees]
   public String mPointText;
   IDrawingLink mLink;    // linked drawing item

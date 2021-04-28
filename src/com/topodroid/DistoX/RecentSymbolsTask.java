@@ -67,10 +67,10 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
         Symbol symbol = ItemDrawer.mRecentPoint[k];
         if ( symbol != null ) {
           if ( first ) {
-            points.append(" ").append( symbol.mThName);
+            points.append(" ").append( symbol.getThName());
           } else {
             first = true;
-            points.append( symbol.mThName );
+            points.append( symbol.getThName() );
           }
         }
       }
@@ -84,10 +84,10 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
         Symbol symbol = ItemDrawer.mRecentLine[k];
         if ( symbol != null ) {
           if ( first ) {
-            lines.append(" ").append(symbol.mThName);
+            lines.append(" ").append(symbol.getThName());
           } else {
             first = true;
-            lines.append( symbol.mThName );
+            lines.append( symbol.getThName() );
           }
         }
       }
@@ -101,10 +101,10 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
         Symbol symbol = ItemDrawer.mRecentArea[k];
         if ( symbol != null ) {
           if ( first ) {
-            areas.append(" ").append(symbol.mThName);
+            areas.append(" ").append(symbol.getThName());
           } else {
             first = true;
-            areas.append( symbol.mThName );
+            areas.append( symbol.getThName() );
           }
         }
       }

@@ -46,7 +46,7 @@ class SymbolLine extends Symbol
   int mStyleX;            // X times (one out of how many point to use)
 
   @Override public String getName()  { return mName; }
-  @Override public String getThName( ) { return mThName; }
+  // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
   @Override public Paint  getPaint() { return mPaint; }
   @Override public Path   getPath()  { return mPath; }
   // @Override public boolean isOrientable() { return false; }
@@ -214,9 +214,6 @@ class SymbolLine extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
   	        th_name = vals[k];
-                // Log.v("DistoX-SL", filename + " th_name " + th_name );
-              // } else {
-              //   Log.v("DistoX-SL", filename + " th_name " + k + " / " + s + " " + line );
   	      }
   	    } else if ( vals[k].equals("group") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -462,7 +459,7 @@ class SymbolLine extends Symbol
   	      if ( name != null && th_name != null ) { 
                 // Log.v("DistoX-SL", filename + " end-symbol is ok");
                 mName   = name;
-                mThName = th_name;
+                setThName( th_name );
                 mGroup  = group;
                 mDefaultOptions = options;
                 mPaint  = new Paint();

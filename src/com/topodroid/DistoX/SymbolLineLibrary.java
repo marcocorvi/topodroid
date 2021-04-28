@@ -113,14 +113,14 @@ public class SymbolLineLibrary extends SymbolLibrary
         // if ( fname.equals(USER) || fname.equals(WALL) || fname.equals(SECTION) ) continue;
 
         SymbolLine symbol = new SymbolLine( file.getPath(), fname, locale, iso );
-        if ( symbol.mThName == null ) {
+        if ( symbol.isThName( null ) ) {
           TDLog.Error( "line with null ThName " + fname );
           // Log.v( "DistoX-SL", "line with null ThName " + fname );
           continue;
         }
-        if ( ! hasSymbolByThName( symbol.mThName ) ) {
+        if ( ! hasSymbolByThName( symbol.getThName() ) ) {
           addSymbol( symbol );
-          String thname = symbol.mThName;
+          String thname = symbol.getThName();
           String name = mPrefix + thname;
           boolean enable = false;
           if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
@@ -133,8 +133,8 @@ public class SymbolLineLibrary extends SymbolLibrary
           }
           symbol.setEnabled( enable );
         } else {
-          TDLog.Error( "line " + symbol.mThName + " already in library" );
-          // Log.v( "DistoX-SL", "line " + symbol.mThName + " already in library" );
+          TDLog.Error( "line " + symbol.getThName() + " already in library" );
+          // Log.v( "DistoX-SL", "line " + symbol.getThname() + " already in library" );
         }
       }
       // mSymbolNr = mSymbols.size();
@@ -167,7 +167,7 @@ public class SymbolLineLibrary extends SymbolLibrary
     }
     // if ( symbol == null ) return false; // ALWAYS false
 
-    symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.mThName ) );
+    symbol.setEnabled( true ); // TopoDroidApp.mData.isSymbolEnabled( "a_" + symbol.getThname() ) );
     
     makeEnabledList();
     return true;

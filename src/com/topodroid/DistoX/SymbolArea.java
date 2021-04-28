@@ -239,7 +239,8 @@ class SymbolArea extends Symbol
   	    } else if ( vals[k].equals("th_name") ) {  // therion name must not have spaces
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        th_name = vals[k]; // should .trim(); for tab etc. ? no: require syntax without tabs etc.
+                // should .trim(); for tab etc. ? no: require syntax without tabs etc.
+  	        th_name = vals[k];
   	      }
   	    } else if ( vals[k].equals("group") ) {  
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -344,7 +345,7 @@ class SymbolArea extends Symbol
   	    } else if ( vals[k].equals("endsymbol") ) {
   	      if ( name != null && th_name != null ) { // at this point if both are not null, they have both positive length
                 mName   = name;
-                mThName = th_name;
+                setThName( th_name );
                 mGroup  = group;
                 mDefaultOptions = options;
                 mPaint  = new Paint();

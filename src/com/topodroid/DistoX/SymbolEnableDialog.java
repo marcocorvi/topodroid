@@ -121,7 +121,7 @@ class SymbolEnableDialog extends MyDialog
       int np = point_lib.size();
       for ( int i=0; i<np; ++i ) {
 	Symbol point = point_lib.getSymbolByIndex( i );
-	if ( ! point.mThName.equals("section") ) { // FIXME_SECTION_POINT always enabled
+	if ( ! point.isThName( SymbolLibrary.SECTION ) ) { // FIXME_SECTION_POINT always enabled
           mPointAdapter.add( new EnableSymbol( mContext, SymbolType.POINT, i, point ) );
         }
       }
