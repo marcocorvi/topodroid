@@ -667,7 +667,6 @@ public class DXF
         writeXY( out, (int)xmin, (int)ymin, 0 ); // lower-left cormer
         writeXY( out, (int)xmax, (int)ymax, 1 ); // upper-right corner
         writeXY( out, (int)(xmin+xmax)/2, (int)(ymin+ymax)/2, 2 ); // center point
-        writeXY( out, 286, 148, 2 );
         writeXY( out, 0, 0, 3 );   // snap base-point
         writeXY( out, 1, 1, 4 );   // snap-spacing
         writeXY( out, 1, 1, 5 );   // grid-spacing

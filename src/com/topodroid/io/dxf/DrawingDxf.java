@@ -359,7 +359,8 @@ public class DrawingDxf
 
       DXF.writeSection( out, "TABLES" );
 
-      handle = DXF.writeVportTable( out, handle, xmin, -ymax, xmax, -ymin );
+      // handle = DXF.writeVportTable( out, handle, xmin, -ymax, xmax, -ymin );
+      handle = DXF.writeVportTable( out, handle, 0, 0, 1, 1 ); // AutoCAD always uses 0,0 1,1
       handle = DXF.writeStylesTable( out, handle );
       handle = DXF.writeLTypesTable( out, handle );
 
