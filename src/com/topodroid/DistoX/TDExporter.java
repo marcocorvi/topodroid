@@ -214,7 +214,7 @@ class TDExporter
     pw.format("      <attachments>\n");
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
-      String audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString(bid) );
+      String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString(bid) );
       // File audiofile = TDFile.getFile( audiofilename );
       if ( TDFile.hasFile( audiofilename ) ) {
         byte[] buf = readFileBytes( audiofilename );

@@ -62,7 +62,7 @@ class MediaManager
     mShotId  = sid;
     mComment = comment;
     mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
-    mAudioFile = TDFile.getFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
+    mAudioFile = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
     return mAudioId;
   }
 

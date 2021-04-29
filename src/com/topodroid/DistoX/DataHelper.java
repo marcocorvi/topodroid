@@ -1655,8 +1655,8 @@ public class DataHelper extends DataSetObservable
         if ( audio != null ) {
           where[1] = Long.toString( audio.fileIdx );
           myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
-          String oldname = TDPath.getSurveyAudioFile( old_survey.name, Long.toString(audio.fileIdx) );
-          String newname = TDPath.getSurveyAudioFile( new_survey.name, Long.toString(audio.fileIdx) );
+          String oldname = TDPath.getSurveyWavFile( old_survey.name, Long.toString(audio.fileIdx) );
+          String newname = TDPath.getSurveyWavFile( new_survey.name, Long.toString(audio.fileIdx) );
           TDFile.renameFile( oldname, newname );
         }
 

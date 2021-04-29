@@ -3074,7 +3074,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
       DrawingAudioPath audio = (DrawingAudioPath)point;
       mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
-      TDFile.deleteFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.mId ) ) );
+      TDFile.deleteFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.mId ) ) );
     } else if ( BrushManager.isPointSection( point.mPointType ) ) {
       mDrawingSurface.clearXSectionOutline( TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) ) );
     }
@@ -4388,7 +4388,7 @@ public class DrawingWindow extends ItemDrawer
       }
       long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
       // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
-      // File file = TDFile.getFile( TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mMediaId) ) );
+      // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
       // TODO RECORD AUDIO
       new AudioDialog( mActivity, this, audio_id, null ).show();
     }

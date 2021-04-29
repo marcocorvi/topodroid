@@ -707,10 +707,20 @@ public class TDPath
     return APP_FOTO_PATH + survey + File.separator + id + ".jpg";
   }
 
-  static String getSurveyAudioFile( String survey, String id )
+  public static String getSurveyJpgFilename( String survey, String id )
+  {
+    return survey + File.separator + id + ".jpg";
+  }
+
+  static String getSurveyWavFile( String survey, String id )
   {
     TDFile.makeDir( APP_AUDIO_PATH + survey + File.separator );
     return APP_AUDIO_PATH + survey + File.separator + id + ".wav";
+  }
+  
+  public static String getSurveyWavFilename( String survey, String id )
+  {
+    return survey + File.separator + id + ".wav";
   }
 
   static private void checkDirs( String path )

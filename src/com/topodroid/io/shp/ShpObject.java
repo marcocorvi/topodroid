@@ -39,6 +39,7 @@ public class ShpObject
   final static int SHP_POINT     =  1;
   final static int SHP_POLYLINE  =  3;
   final static int SHP_POLYGON   =  5;
+  final static int SHP_EXTRA     =  7;
   final static int SHP_POINTZ    = 11;
   final static int SHP_POLYLINEZ = 13;
 

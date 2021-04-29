@@ -87,8 +87,10 @@ public class DrawingAudioPath extends DrawingPointPath
     return null;
   }
 
+  public long getId() { return mId; }
+
   @Override
-  String toTherion( )
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
@@ -106,7 +108,7 @@ public class DrawingAudioPath extends DrawingPointPath
 //   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
 //   { 
 //     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
-//     Struing audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString( mId ) );
+//     Struing audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
 //     // File audiofile = TDFile.getFile( audiofilename );
 //     if ( TDFile.hasFile audiofilename ) ) {
 //       byte[] buf = TDExporter.readFileBytes( audiofilename );
@@ -131,7 +133,7 @@ public class DrawingAudioPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    String audiofilename = TDPath.getSurveyAudioFile( survey, Long.toString( mId ) );
+    String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
     // File audiofile = TDFile.getFile( audiofilename );
     if ( TDFile.hasFile( audiofilename ) ) {
       byte[] buf = TDExporter.readFileBytes( audiofilename );

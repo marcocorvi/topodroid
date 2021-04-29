@@ -93,8 +93,10 @@ public class DrawingPhotoPath extends DrawingPointPath
     return null;
   }
 
+  public long getId() { return mId; }
+
   @Override
-  String toTherion( )
+  public String toTherion( )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);

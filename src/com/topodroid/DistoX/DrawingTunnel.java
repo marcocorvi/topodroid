@@ -337,7 +337,7 @@ class DrawingTunnel extends DrawingSvgBase
   private static String toTunnelLineName( String th_name ) 
   {
     if ( th_name.equals(SymbolLibrary.WALL) )    return "wall";
-    if ( th_name.equals(SymbolLibrary.PRESUMED)) return "estwall";
+    if ( th_name.equals(SymbolLibrary.WALL_PRESUMED)) return "estwall";
     if ( th_name.equals(SymbolLibrary.PIT) )     return "pitchbound";
     if ( th_name.equals(SymbolLibrary.CHIMNEY) ) return "ceilingbound";
     if ( th_name.equals(SymbolLibrary.SLOPE) )   return "slope";

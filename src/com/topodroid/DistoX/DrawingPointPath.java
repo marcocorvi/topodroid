@@ -402,7 +402,7 @@ public class DrawingPointPath extends DrawingPath
   // }
 
   // void setPointType( int t ) { mPointType = t; }
-  int pointType() { return mPointType; }
+  public int pointType() { return mPointType; }
 
   // double xpos() { return cx; }
   // double ypos() { return cy; }

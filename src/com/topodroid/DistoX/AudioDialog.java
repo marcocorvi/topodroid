@@ -76,7 +76,7 @@ class AudioDialog extends MyDialog
     mParent = parent;
     mBid = bid;
     // mAudio = mApp.mData.getAudio( TDInstance.sid, mBid );
-    mFilepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString(mBid) );
+    mFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mBid) );
     // Log.v("DistoX", "audio dialog " + bid + " file: " + mFilepath );
     hasFile = (TDFile.getFile( mFilepath )).exists();
     mBlk    = blk;

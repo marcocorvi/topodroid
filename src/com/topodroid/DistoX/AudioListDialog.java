@@ -136,7 +136,7 @@ class AudioListDialog extends MyDialog
   {
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
-      String filepath = TDPath.getSurveyAudioFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
+      String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
       File file = TDFile.getFile( filepath );
       // Log.v("DistoX", "play audio file " + file.getPath() );
       if ( file.exists() ) {

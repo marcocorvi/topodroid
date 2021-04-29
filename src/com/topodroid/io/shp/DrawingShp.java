@@ -22,11 +22,14 @@ import com.topodroid.DistoX.GeoReference;
 import com.topodroid.DistoX.ICanvasCommand;
 import com.topodroid.DistoX.DrawingPath;
 import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingAudioPath;
+import com.topodroid.DistoX.DrawingPhotoPath;
 import com.topodroid.DistoX.DrawingPointLinePath;
 import com.topodroid.DistoX.DrawingLinePath;
 import com.topodroid.DistoX.DrawingAreaPath;
 import com.topodroid.DistoX.DrawingCommandManager;
 import com.topodroid.DistoX.DrawingStationName;
+import com.topodroid.DistoX.BrushManager;
 
 import android.util.Log;
 
@@ -87,13 +90,25 @@ public class DrawingShp
 
       // points shapefile
       ArrayList< DrawingPointPath > points     = new ArrayList<>();
+      ArrayList< DrawingPointPath > extras     = new ArrayList<>();
       ArrayList< DrawingPointLinePath > lines  = new ArrayList<>();
       ArrayList< DrawingPointLinePath > areas  = new ArrayList<>();
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
         if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
-          points.add( (DrawingPointPath)path ); // xoff+cx, yoff+cy
+          DrawingPointPath point = (DrawingPointPath)path;
+          if ( point instanceof DrawingAudioPath ) {
+            extras.add( point );
+          } else if ( point instanceof DrawingPhotoPath ) {
+            extras.add( point );
+          } else {
+            if ( BrushManager.isPointSection( point.mPointType ) ) {
+              extras.add( point );
+            } else {
+              points.add( point ); // xoff+cx, yoff+cy
+            }
+          }
         } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
           lines.add( (DrawingLinePath)path );  // xoff+pt.x, yoff+pt.y
         } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -102,6 +117,8 @@ public class DrawingShp
       }
       ShpPoint shp_point = new ShpPoint( basepath + "/point", files );
       shp_point.writePoints( points, xoff, yoff, xscale, yscale, cd, sd );
+      ShpExtra shp_extra = new ShpExtra( basepath + "/extra", files );
+      shp_extra.writeExtras( extras, xoff, yoff, xscale, yscale, cd, sd );
       ShpPolyline shp_line = new ShpPolyline( basepath + "/line", DrawingPath.DRAWING_PATH_LINE, files );
       shp_line.writeLines( lines, xoff, yoff, xscale, yscale, cd, sd );
       ShpPolyline shp_area = new ShpPolyline( basepath + "/area", DrawingPath.DRAWING_PATH_AREA, files );
