@@ -1579,7 +1579,7 @@ public class TopoDroidApp extends Application
       SymbolLibrary.DEBRIS,
       SymbolLibrary.CLAY,
       SymbolLibrary.CONTOUR,
-      SymbolLibrary.PRESUMED,
+      SymbolLibrary.WALL_PRESUMED,
       SymbolLibrary.SAND,
       SymbolLibrary.ICE,
       SymbolLibrary.SECTION,

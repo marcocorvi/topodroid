@@ -16,7 +16,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -61,6 +61,7 @@ class PhotoEditDialog extends MyDialog
     // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
     mTdImage = new TDImage( mFilename );
     // Log.v("DistoX", "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
+    // Log.v("DistoX", "photo edit dialog: " + mFilename );
   }
 
 // -------------------------------------------------------------------
@@ -81,7 +82,7 @@ class PhotoEditDialog extends MyDialog
     float a = mTdImage.azimuth();
     float c = mTdImage.clino();
 
-    // Log.v("DistoXPHOTO", "photo edit dialog on create. Azimuth " + a + " Clino " + c );
+    // Log.v("DistoX", "photo edit dialog on create. Azimuth " + a + " Clino " + c );
 
     ((TextView) findViewById( R.id.photo_azimuth )).setText(
        String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), a, c ) );

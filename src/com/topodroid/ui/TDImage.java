@@ -14,7 +14,7 @@ package com.topodroid.ui;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.IOException;
 
@@ -83,9 +83,10 @@ public class TDImage
       String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
       String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
       mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
+      // Log.v("DistoX", "TD image bearing " + b + " clino " + c + " date " + mDate );
       if ( mDate == null ) mDate = "";
       if ( b == null || c == null ) { // FIXME-GPS_LATITUDE work-around for tag GPSLatitude not working
-        String u = exif.getAttribute( "UserComment" );
+        String u = exif.getAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION );
         // Log.v("DistoXPHOTO", "u " + u );
         if ( u != null ) {
           String[] vals = u.split(" ");
@@ -96,7 +97,7 @@ public class TDImage
         }
       }
       if ( b != null && c != null ) {
-        // Log.v("DistoXPHOTO", "b " + b + " c " + c );
+        // Log.v("DistoX", "b " + b + " c " + c );
         int k = b.indexOf('/');
 	if ( k >= 0 ) {
           try { mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
@@ -105,7 +106,7 @@ public class TDImage
 	if ( k >= 0 ) {
           try { mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
 	}
-        // Log.v("DistoX", "Long <" + bearing + "> Lat <" + clino + ">" );
+        // Log.v("DistoX", "Long <" + mAzimuth + "> Lat <" + mClino + ">" );
       }
     } catch ( IOException e ) {
       TDLog.Error("failed exif interface " + mFilename );

@@ -30,7 +30,7 @@ import android.content.res.Resources;
 public class SymbolLineLibrary extends SymbolLibrary
 {
   static final private String[] DefaultLines = {
-    ARROW, BORDER, CHIMNEY, PIT, PRESUMED, ROCK_BORDER, SLOPE
+    ARROW, BORDER, CHIMNEY, PIT, WALL_PRESUMED, ROCK_BORDER, SLOPE
   };
 
   int mLineUserIndex; // PRIVATE

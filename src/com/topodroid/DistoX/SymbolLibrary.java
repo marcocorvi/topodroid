@@ -48,7 +48,7 @@ public class SymbolLibrary
   final static String FAULT   = "fault";
   final static String FLOOR_MEANDER   = "floor-meander";
   final static String CEILING_MEANDER = "ceiling-meander";
-  final static String PRESUMED    = "presumed";
+  final static String WALL_PRESUMED   = "wall:presumed";
   final static String ROCK_BORDER = "rock-border";
   final static String BLOCKS  = "blocks";
   final static String CLAY    = "clay";

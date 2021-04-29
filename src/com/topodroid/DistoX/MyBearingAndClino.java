@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 
-// import android.util.Log;
+import android.util.Log;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -53,6 +53,7 @@ public class MyBearingAndClino implements IBearingAndClino
   // @param c0 clino
   public void setBearingAndClino( float b0, float c0, int o0 )
   {
+    // Log.v("DistoX", "BearingClino UI set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
     // Log.v("DistoX", "Bearing and Clino orientation " + o0 );
     // this is not good for photo because it might alter azimuth/clino of xsection sketch
     // mApp.mData.updatePlotAzimuthClino( TDInstance.sid, mPid, b0, c0 );
@@ -69,6 +70,7 @@ public class MyBearingAndClino implements IBearingAndClino
       fos.write( data );
       fos.flush();
       fos.close();
+      // Log.v("DistoX", "BearingClino UI saved JPEG file " + mFile.getPath() );
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
       return false;
@@ -79,7 +81,7 @@ public class MyBearingAndClino implements IBearingAndClino
 
   static void setExifBearingAndClino( File file, float b, float c, int o )
   {
-    // Log.v("DistoXPHOTO", "set exif " + b + " " + c + " file " + file.getPath() );
+    // Log.v("DistoX", "BearingClino UI set exif " + b + " " + c + " file " + file.getPath() );
     try {
       ExifInterface exif = new ExifInterface( file.getPath() );
       // String.format(Locale.US, "%.2f %.2f", b, c );
@@ -95,7 +97,7 @@ public class MyBearingAndClino implements IBearingAndClino
       exif.setAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION, String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
       exif.saveAttributes();
     } catch ( IOException e ) {
-      TDLog.Error( "IO exception " + e.getMessage() );
+      TDLog.Error( "Set exif: IO exception " + e.getMessage() );
       // Log.v( "DistoXPHOTO", "IO exception " + e.getMessage() );
     }
   }

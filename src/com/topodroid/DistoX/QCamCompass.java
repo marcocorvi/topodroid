@@ -165,10 +165,12 @@ class QCamCompass extends Dialog
   // implements
   public void setBearingAndClino( float b, float c, int o )
   {
+    // Log.v("DistoX", "QCam compass set orientation " + o + " bearing " + b + " clino " + c );
     mBearing = b;
     mClino   = c;
     mOrientation = MyBearingAndClino.getCameraOrientation( o );
     // Log.v("DistoX", "QCam compass orient " + o + " --> " + mOrientation );
+
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
 
@@ -209,7 +211,7 @@ class QCamCompass extends Dialog
     } else if ( b == buttonSave ) {
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
-          // Log.v("DistoX", "Orientation " + mOrientation );
+          // Log.v("DistoX", "Orientation " + mOrientation + " " + mBearing + " " + mClino );
           mCallback.setBearingAndClino( mBearing, mClino, mOrientation );
           mHasSaved = mCallback.setJpegData( mSurface.mJpegData );
         }

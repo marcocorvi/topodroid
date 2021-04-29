@@ -40,7 +40,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 import android.view.View;
 
-// import android.util.Log;
+import android.util.Log;
 
 
 class ShotNewDialog extends MyDialog
@@ -311,7 +311,7 @@ class ShotNewDialog extends MyDialog
   // implements
   public void setBearingAndClino( float b, float c, int o )
   {
-    // Log.v("DistoX", "ShotNewDialog set B " + b + " C " + c + " O " + o );
+    // Log.v("DistoX", "New shot dialog set orientation " + o + " bearing " + b + " clino " + c );
     mBearing = b;
     mClino   = c;
     mOrientation = o;

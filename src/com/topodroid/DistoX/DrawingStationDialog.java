@@ -398,6 +398,7 @@ class DrawingStationDialog extends MyDialog
 
     public void setBearingAndClino( float b, float c, int orientation )
     {
+      // Log.v("DistoX", "Station dialog set orientation " + orientation + " bearing " + b + " clino " + c );
       String nick = "";
       nick = (mETnick.getText() != null)? mETnick.getText().toString() : "";
       // if ( nick.length() == 0 ) {

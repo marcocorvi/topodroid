@@ -39,7 +39,7 @@ import android.graphics.Bitmap;
 import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
 
-// import android.util.Log;
+import android.util.Log;
 
 class AzimuthDialog extends MyDialog
                     implements View.OnClickListener
@@ -182,6 +182,7 @@ class AzimuthDialog extends MyDialog
 
   public void setBearingAndClino( float b0, float c0, int o0 )
   {
+    // Log.v("DistoX", "Azimuth dialog set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
     mAzimuth = b0;
     updateView();
     updateEditText();
