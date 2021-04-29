@@ -1045,7 +1045,7 @@ public class TDNum
     NumStation st = getStation( ts.from );
     if ( st != null ) {
       float cosine = st.computeExtend( ts.b( mDecl ), ts.extend );
-      mSplays.add( new NumSplay( st, ts.d(), ts.b( mDecl ), ts.c(), cosine, ts.block, mDecl ) );
+      mSplays.add( new NumSplay( st, ts.d(), ts.b( 0 ), ts.c(), cosine, ts.block, mDecl ) );
       return true;
     }
     return false;
