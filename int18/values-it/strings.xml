@@ -1469,7 +1469,9 @@ Tap <b>Chiudi</b> per fare nulla.
   <string name="pref_diving_mode_title">Modo Immersione</string>
   <string name="pref_diving_mode_summary">Abilita modo immersione</string>
   <string name="pref_splay_classes_title">Classi di splay</string>
-  <string name="pref_splay_classes_summary">Abilita classi e colorazione spla</string>
+  <string name="pref_splay_classes_summary">Abilita classi e colorazione splay</string>
+  <string name="pref_splay_as_dot_title">Finale di splay</string>
+  <string name="pref_splay_as_dot_summary">Mostra splay come finali</string>
   <string name="pref_splay_color_title">Colorazione splay</string>
   <string name="pref_splay_color_summary">Abilita colorazione splay</string>
   <string name="pref_plot_shift_title">Scala/Sposta disegno</string>
