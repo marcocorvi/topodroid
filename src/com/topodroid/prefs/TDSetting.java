@@ -2796,7 +2796,7 @@ public class TDSetting
           continue;
         }
         if ( line.startsWith("DXF") ) {
-          if ( vals.length > 4 ) {
+          if ( vals.length > 6 ) {
             mAcadVersion = getInt( vals, 2, 9 ); setPreference( editor, "DISTOX_ACAD_VERSION", mAcadVersion );
             mDxfBlocks   = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_DXF_BLOCKS", mDxfBlocks );
             mAcadSpline  = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_ACAD_SPLINE", mAcadSpline );
@@ -2873,7 +2873,7 @@ public class TDSetting
         }
         if ( line.startsWith("Communication") ) {
           if ( all ) {
-            if ( vals.length > 8 ) {
+            if ( vals.length > 6 ) {
               // mAutoReconnect = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_AUTO_RECONNECT", mAutoReconnect );
               mSecondDistoX  = getBoolean( vals, 2 );  setPreference( editor, "DISTOX_SECOND_DISTOX", mSecondDistoX );
               mCommRetry     = getInt( vals, 4, 1 );      setPreference( editor, "DISTOX_COMM_RETRY", mCommRetry );
@@ -3087,7 +3087,7 @@ public class TDSetting
           continue;
         }
         if ( line.startsWith("Plot: zoom") ) {
-          if ( vals.length > 12 ) {
+          if ( vals.length > 16 ) {
             if ( all ) {
               mZoomCtrl = getInt( vals, 2, 1 );
               setZoomControls( vals[2], TDandroid.checkMultitouch( TDInstance.context ) );

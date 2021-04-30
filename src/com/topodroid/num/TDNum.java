@@ -1218,10 +1218,22 @@ public class TDNum
   /** identifies independent cycles from the set of branches
    * @param cycles     list of cycles (output)
    * @param branches   list of branches
+   *
+   * checked with C++ test 
    */
   private void makeCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
   {
     int bs = branches.size();
+    // StringBuilder sb = new StringBuilder();
+    // for ( int k0 = 0; k0 < bs; ++k0 ) {
+    //   NumBranch b0 = branches.get(k0);
+    //   sb.append( b0.n1.station.name );
+    //   sb.append( "-" );
+    //   sb.append( b0.n2.station.name );
+    //   sb.append( "  " );
+    // }
+    // Log.v("DistoX", sb.toString() );
+    
     NumStack stack = new NumStack( bs );
     for ( int k0 = 0; k0 < bs; ++k0 ) {
       NumBranch b0 = branches.get(k0);
@@ -1237,7 +1249,8 @@ public class TDNum
         int k1 = s1.k;
         if ( n1 == n0 ) {
           cycles.add( buildCycle( stack ) );
-          s1.b.use = 0;
+          // Log.v("DistoX", "found cycle " + cycles.size() + " at " + n1.station.name );
+          s1.b.use = 2; // mark the last edge as no more usable
           s1.n.use = 0;
           stack.pop();
         } else {
@@ -1247,6 +1260,8 @@ public class TDNum
             if ( b2.use != 0 ) continue;
             NumNode n2 = b2.otherNode( n1 );
             if ( n2 != null && n2.use == 0 ) {
+              b2.use = 1;
+              n2.use = 1;
               stack.push( new NumStep( b2, n2, k0 ) );
               s1.k = k2;
               break;
@@ -1260,7 +1275,7 @@ public class TDNum
         }
       }
       b0.use = 2;
-      n0.use = 2;
+      // n0.use = 2;
     }
   }
 
@@ -1372,10 +1387,12 @@ public class TDNum
             sh0.mBranchDir = -1; // swap stations
             st0 = sh0.from;
           }
+          // Log.v("DistoX", "start branch at " + sf0.name + " - " + st0.name );
           while ( st0 != sf0 ) { // follow the shot 
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             if ( st0.node != null ) { // end-of-branch
+              // Log.v("DistoX", "end of branch at " + st0.node.station.name );
               branch.setLastNode( st0.node );
               branches.add( branch );
               break;
@@ -1397,6 +1414,7 @@ public class TDNum
               sh1.mBranchDir = -1; // swap
               st0 = sh1.from;
             }
+            // Log.v("DistoX", " move to " + st0.name );
             sh0 = sh1;
           }
           if ( st0 == sf0 ) { // closed-loop ???
@@ -1430,6 +1448,7 @@ public class TDNum
         }
       }
     }
+    // Log.v("DistoX", "found branches " + branches.size() );
     return branches;
   }
 
