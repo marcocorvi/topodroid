@@ -127,4 +127,6 @@ public class Symbol implements SymbolInterface
   static float sizeX( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 2.2f; }
   static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 1.7f; }
 
+  static String deprefix_u( String name ) { return (name == null)? null : (name.startsWith("u:"))? name.substring(2) : name; }
+
 }

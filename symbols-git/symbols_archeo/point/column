@@ -1,7 +1,7 @@
 encoding utf-8
 symbol point
-name pillar
-name-it pilastro
+name column
+name-it colonna
 name-es columna
 name-pt pilar
 name-ru колонна
@@ -10,8 +10,8 @@ name-sk stĺp
 name-ro coloană
 name-de Säule
 name-hu oszlop
-th_name pillar
-group pillar
+th_name column
+group column
 color 0xcccccc
 path
   moveTo 6 6

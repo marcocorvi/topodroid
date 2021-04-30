@@ -669,30 +669,37 @@ public class DrawingDxf
                 DXF.printString(pw5, 100, "AcDbText" );
               }
             } else {
-              if ( DXF.mVersion13_14 ) {
-                if ( BrushManager.isPointSection( point.mPointType ) ) {
-	          if ( TDSetting.mAutoXSections ) {
-                    // FIXME GET_OPTION
-                    // String scrapfile = point.mOptions.substring( 7 ) + ".tdr";
-                    String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-                    if ( scrapname != null ) {
-                      String scrapfile = scrapname + ".tdr";
-                      handle = tdrToDxf( pw5, handle, model_record_handle, model_record_handle, scrapfile, 
-                             scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-                    }
+              boolean done_point = false;
+              if ( BrushManager.isPointSection( point.mPointType ) && TDSetting.mAutoStations ) {
+                Log.v("DistoX", "Point is section : " + TDSetting.mAutoXSections );
+                String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
+                Log.v("DistoX", "Point is section : scrapname " + scrapname );
+                if ( scrapname != null ) {
+                  String scrapfile = scrapname + ".tdr";
+                  if ( DXF.mVersion13_14 ) {
+                    handle = tdrToDxf( pw5, handle, model_record_handle, model_record_handle, scrapfile, 
+                                       scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                    done_point = true;
+                  } else { // mVersion9 - TRY
+                    handle = tdrToDxf( pw5, handle, model_record_handle, model_record_handle, scrapfile, 
+                                       scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+                    done_point = true;
                   }
-                } else {
-                  handle = toDxf( pw5, handle, model_block_handle, model_record_handle, point, scale, xoff, yoff );
                 }
-              } else {
-                // String th_name = point.getThName().replace(':','-');
-                DXF.printString( pw5, 0, "INSERT" );
-                DXF.printString( pw5, 8, "P_" + th_name );
-                DXF.printString( pw5, 2, "B_" + th_name );
-                DXF.printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
-                DXF.printFloat( pw5, 42, point.getScaleValue()*1.4f );
-                DXF.printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
-                DXF.printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
+              } 
+              if ( ! done_point ) {
+                if ( DXF.mVersion13_14 ) {
+                  handle = toDxf( pw5, handle, model_block_handle, model_record_handle, point, scale, xoff, yoff );
+                } else {
+                  // String th_name = point.getThName().replace(':','-');
+                  DXF.printString( pw5, 0, "INSERT" );
+                  DXF.printString( pw5, 8, "P_" + th_name );
+                  DXF.printString( pw5, 2, "B_" + th_name );
+                  DXF.printFloat( pw5, 41, point.getScaleValue()*1.4f ); // FIX Asenov
+                  DXF.printFloat( pw5, 42, point.getScaleValue()*1.4f );
+                  DXF.printFloat( pw5, 50, 360.0f-(float)(point.mOrientation) );
+                  DXF.printXYZ( pw5, (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 0, 0 );
+                }
               }
             }
 	  }
@@ -865,6 +872,10 @@ public class DrawingDxf
             break;
           case 'J':
             /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
+            break;
+          case 'N': // scrap index
+            int scrap_index = dis.readInt();
+            Log.v("DistoX", "scrap index " + scrap_index );
             break;
           // case 'G':
           //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data

@@ -1,6 +1,6 @@
 encoding utf-8
 symbol area
-name sand
+name sand-area
 name-cn 沙子
 name-es arena
 name-pt areia
@@ -15,7 +15,7 @@ name-hu homok
 name-sk piesok
 name-ro nisip
 th_name sand
-group sand
+group sand-area
 color 0xcc9933 0xcc
 bitmap 40 15
   0000000000000000000000000000000000000000

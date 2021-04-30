@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name sand
+name sandstone
 name-it sabbia
 name-pt areia
 name-es arena
@@ -9,8 +9,8 @@ name-fr sable
 name-ro nisip
 name-de Sand
 name-hu homok
-th_name sand
-group sand
+th_name sandstone
+group sandstone
 color 0xff9900
 path
   moveTo -9 0

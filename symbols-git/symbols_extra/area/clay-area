@@ -1,6 +1,6 @@
 encoding utf-8
 symbol area
-name clay
+name clay-area
 name-cn 泥土
 name-es arcilla
 name-pt argila
@@ -13,7 +13,7 @@ name-fa خاک
 name-hu agyag
 name-sk hlina
 name-ro argilă
-th_name clay
+th_name clay-area
 group clay
 color 0xcc9933 0xcc
 bitmap 50 30

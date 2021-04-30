@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name arachnid
+name arachnid_fossil
 name-pt aracnídeo
 name-es arácnido
 name-ru арахнид
@@ -8,7 +8,7 @@ name-fr arachnide
 name-ro arahnid
 name-de Spinne
 name-hu pókféle
-th_name arachnid
+th_name arachnid:fossil
 group paleo
 color 0xffcc66
 path

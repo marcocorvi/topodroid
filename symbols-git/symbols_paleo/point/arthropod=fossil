@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name arthropod
+name arthropod_fossil
 name-pt artrópode
 name-es artrópodo
 name-ru членистоногое
@@ -8,7 +8,7 @@ name-fr arthropode
 name-ro artropod
 name-de Gliederfüßer
 name-hu ízeltlábú
-th_name arthropod
+th_name arthropod:fossil
 group paleo
 color 0xcc9933
 path

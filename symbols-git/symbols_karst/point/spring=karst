@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name spring
+name spring_karst
 name-pt nascente
 name-es surgencia
 name-ru источник
@@ -9,7 +9,7 @@ name-sk pramen_zdroj
 name-ro izvor
 name-de Quelle
 name-hu forrás
-th_name spring
+th_name spring:karst
 group spring
 orientation no
 color 0x3399ff

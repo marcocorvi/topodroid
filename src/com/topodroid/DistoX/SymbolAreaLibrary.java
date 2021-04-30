@@ -173,7 +173,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     Symbol symbol = getSymbolByThName( thname );
     if ( symbol == null ) {
-      String filename = thname; // THERION-U: thname.startsWith("u:")? thname.substring(2) : thname; 
+      String filename = Symbol.deprefix_u( thname ); 
       File file = TDFile.getFile( TDPath.getSymbolSaveAreaPath( filename ) );
       if ( ! file.exists() ) return false;
       symbol = new SymbolArea( file.getPath(), file.getName(), locale, iso );

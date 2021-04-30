@@ -217,7 +217,7 @@ public class SymbolPoint extends Symbol
             } else if ( vals[k].equals("th_name") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
-                th_name = vals[k];
+                th_name = deprefix_u( vals[k] );
                 // Log.v("DistoX-POINT", "symbol " + pathname + " th name " + k + " / " + s + " " + th_name );
               }
             } else if ( vals[k].equals("group") ) {

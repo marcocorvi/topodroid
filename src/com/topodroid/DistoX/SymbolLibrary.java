@@ -93,8 +93,6 @@ public class SymbolLibrary
 
   int size() { return mSymbols.size(); }
 
-  private String toThName( String name ) {  return (name != null && name.startsWith("u:"))? name.substring(2) : name; }
-
   // ----------------------------------------------------
 
   // used by DrawingDxf and DrawingSurface (for the palette)
@@ -145,7 +143,7 @@ public class SymbolLibrary
 
   protected Symbol get( String name ) 
   {
-    return ( mRoot == null )? null : mRoot.get( toThName(name) );
+    return ( mRoot == null )? null : mRoot.get( Symbol.deprefix_u(name) );
   }
 
   // ============================================================
@@ -161,7 +159,7 @@ public class SymbolLibrary
 
   int getSymbolIndexByThName( String name )
   {
-    String th_name = toThName( name );
+    String th_name = Symbol.deprefix_u( name );
     int nr = mSymbols.size();
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;
     return -1;
@@ -169,7 +167,7 @@ public class SymbolLibrary
 
   int getSymbolIndexByThNameOrGroup( String name, String group )
   {
-    String th_name = toThName( name );
+    String th_name = Symbol.deprefix_u( name );
     int nr = mSymbols.size();
     // Log.v("DistoX-PLOT", "ThName <" + th_name + "> group <" + ( (group == null)? "null" : group ) + ">" );
     for ( int k=0; k<nr; ++k ) if ( mSymbols.get(k).hasThName( th_name) ) return k;

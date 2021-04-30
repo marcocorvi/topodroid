@@ -240,7 +240,7 @@ class SymbolArea extends Symbol
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 // should .trim(); for tab etc. ? no: require syntax without tabs etc.
-  	        th_name = vals[k];
+  	        th_name = deprefix_u( vals[k] );
   	      }
   	    } else if ( vals[k].equals("group") ) {  
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;

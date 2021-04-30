@@ -213,7 +213,7 @@ class SymbolLine extends Symbol
   	    } else if ( vals[k].equals("th_name") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
-  	        th_name = vals[k];
+                th_name = deprefix_u( vals[k] );
   	      }
   	    } else if ( vals[k].equals("group") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;

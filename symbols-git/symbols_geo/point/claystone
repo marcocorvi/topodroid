@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name clay
+name claystone
 name-it argilla
 name-es arcilla
 name-pt lama/argila
@@ -9,8 +9,8 @@ name-fr argile
 name-ro argilă
 name-de Lehm
 name-hu agyag
-th_name clay
-group clay
+th_name claystone
+group claystone
 color 0xff9933
 path
   moveTo -4.5 -3

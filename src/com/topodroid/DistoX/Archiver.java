@@ -155,7 +155,7 @@ public class Archiver
       for ( Symbol symbol : symbols ) {
         if ( symbol.mEnabled ) {
           String filename = symbol.getThName();
-          // THERION-U: if ( filename.startsWith( "u:" ) ) filename = filename.substring( 2 );
+          // THERION-U: filename = Symbol.deprefix_u( filename );
           String filepath = dirpath + filename;
           addOptionalEntry( zos, TDFile.getFile( filepath ), filepath );
         }

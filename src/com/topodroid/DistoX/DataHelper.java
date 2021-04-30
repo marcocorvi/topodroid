@@ -5259,7 +5259,7 @@ public class DataHelper extends DataSetObservable
         if ( cursor.moveToFirst() ) {
           do {
             String old_key = cursor.getString(0);
-            String new_key = old_key.replace("u:", "");
+            String new_key = Symbol.deprefix_u( old_key );
             db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
             ++ pt;
           } while ( cursor.moveToNext() );
@@ -5271,7 +5271,7 @@ public class DataHelper extends DataSetObservable
         if ( cursor.moveToFirst() ) {
           do {
             String old_key = cursor.getString(0);
-            String new_key = old_key.replace("u:", "");
+            String new_key = Symbol.deprefix_u( old_key );
             db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
             ++ ln;
           } while ( cursor.moveToNext() );
@@ -5283,7 +5283,7 @@ public class DataHelper extends DataSetObservable
         if ( cursor.moveToFirst() ) {
           do {
             String old_key = cursor.getString(0);
-            String new_key = old_key.replace("u:", "");
+            String new_key = Symbol.deprefix_u( old_key );
             db.execSQL( String.format("update configs set key=\"%s\" where key=\"%s\" ", new_key, old_key ) );
             ++ ar;
           } while ( cursor.moveToNext() );

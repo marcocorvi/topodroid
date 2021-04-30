@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name fungi
+name fungi_fossil
 name-pt fungo
 name-es hongos
 name-ru грибы
@@ -8,7 +8,7 @@ name-fr champignon
 name-ro fungi
 name-de Pilz
 name-hu gomba
-th_name fungi
+th_name fungi:fossil
 group paleo
 color 0xffcc66
 path

@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name bridge
+name rock-bridge
 name-pt ponte
 name-es puente
 name-ru мост
@@ -9,8 +9,7 @@ name-sk most
 name-ro pod
 name-de Brücke
 name-hu híd
-th_name bridge
-group trail
+th_name rock-bridge
 orientation no
 color 0xffffff
 path

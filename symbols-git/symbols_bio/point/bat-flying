@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name bat
+name bat-flying
 name-es murciélago
 name-pt morcego
 name-ru летучая_мышь
@@ -9,7 +9,7 @@ name-ro liliac
 name-de Fledermaus
 name-hu denevér
 th_name bat
-group bat
+group bat-flying
 color 0xffcc33
 path
   addCircle 0 -2 2

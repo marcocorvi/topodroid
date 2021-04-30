@@ -1,6 +1,6 @@
 encoding utf-8
 symbol point
-name ladder
+name stairs
 name-de Leiter
 name-pt escada
 name-es escalera
@@ -9,7 +9,7 @@ name-fr échelle
 name-sk rebrík
 name-ro scară
 name-hu létra
-th_name ladder
+th_name stairs
 group trail
 color 0xcccccc
 path
