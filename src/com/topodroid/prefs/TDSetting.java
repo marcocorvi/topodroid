@@ -423,6 +423,7 @@ public class TDSetting
   public static boolean mFixedOrigin     = false; 
   public static boolean mSharedXSections = false; // default value
   public static boolean mAutoXSections   = true;  // auto save/export xsections with section points
+  public static boolean mDxfReference    = false;  // whether to include XY reference in the export 
   public static boolean mSavedStations   = false;
   // public static boolean mPlotCache       = true;  // default value
   public static float mDotRadius      = 5;

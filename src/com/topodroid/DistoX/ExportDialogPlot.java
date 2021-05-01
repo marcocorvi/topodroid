@@ -203,6 +203,7 @@ public class ExportDialogPlot extends MyDialog
         {
           // TDSetting.mDxfBlocks = ((CheckBox) findViewById( R.id.dxf_blocks )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.dxf_xsections )).isChecked();
+          TDSetting.mDxfReference = ((CheckBox) findViewById( R.id.dxf_reference )).isChecked();
           // TDSetting.mAcadVersion
           if ( ((RadioButton) findViewById( R.id.acad_12 )).isChecked() ) {
             TDSetting.mAcadVersion = 13;
@@ -252,6 +253,7 @@ public class ExportDialogPlot extends MyDialog
     
     // ((CheckBox) findViewById( R.id.dxf_blocks )).setChecked( TDSetting.mDxfBlocks );
     ((CheckBox) findViewById( R.id.dxf_xsections )).setChecked( TDSetting.mAutoXSections );
+    ((CheckBox) findViewById( R.id.dxf_reference )).setChecked( TDSetting.mDxfReference );
     // TDSetting.mAcadVersion
     
     ((CheckBox) findViewById( R.id.svg_roundtrip )).setChecked( TDSetting.mSvgRoundTrip );

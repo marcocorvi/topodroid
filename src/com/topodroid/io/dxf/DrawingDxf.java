@@ -496,44 +496,45 @@ public class DrawingDxf
         float sc1 = 20; // DrawingUtil.SCALE_FIX / 2 = 10;
 
         // reference
-        StringWriter sw9 = new StringWriter();
-        PrintWriter pw9  = new PrintWriter(sw9);
-	float sc2 = sc1 / 2;
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin+sc1,  -ymax );
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin,      -ymax+sc1 );
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin+sc2, -ymax,     xmin+sc2,  -ymax+0.5f ); // 10 m ticks
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc2, xmin+0.5f, -ymax+sc2 );
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin+sc1, -ymax,     xmin+sc1,  -ymax+0.5f ); // 20 m ticks
-        handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc1, xmin+0.5f, -ymax+sc1 );
-        // out.write( sw9.getBuffer().toString() );
-	
-        // DXF.printString( pw9, 0, "LINE" );
-        // handle = DXF.printAcDb( pw9, handle, DXF.AcDbEntity, DXF.AcDbLine );
-        // DXF.printString( pw9, 8, "REF" );
-        // // DXF.printInt(  pw9, 39, 0 );         // line thickness
-        // DXF.printXYZ( pw9, xmin, -ymax, 0.0f, 0 );
-        // DXF.printXYZ( pw9, (xmin+sc1), -ymax, 0.0f, 1 );
-        // out.write( sw9.getBuffer().toString() );
+        if ( TDSetting.mDxfReference ) {
+          StringWriter sw9 = new StringWriter();
+          PrintWriter pw9  = new PrintWriter(sw9);
+	  float sc2 = sc1 / 2;
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin+sc1,  -ymax );
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax,     xmin,      -ymax+sc1 );
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin+sc2, -ymax,     xmin+sc2,  -ymax+0.5f ); // 10 m ticks
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc2, xmin+0.5f, -ymax+sc2 );
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin+sc1, -ymax,     xmin+sc1,  -ymax+0.5f ); // 20 m ticks
+          handle = DXF.printLine( pw9, 1.0f, handle, "REF", xmin,     -ymax+sc1, xmin+0.5f, -ymax+sc1 );
+          // out.write( sw9.getBuffer().toString() );
+	  
+          // DXF.printString( pw9, 0, "LINE" );
+          // handle = DXF.printAcDb( pw9, handle, DXF.AcDbEntity, DXF.AcDbLine );
+          // DXF.printString( pw9, 8, "REF" );
+          // // DXF.printInt(  pw9, 39, 0 );         // line thickness
+          // DXF.printXYZ( pw9, xmin, -ymax, 0.0f, 0 );
+          // DXF.printXYZ( pw9, (xmin+sc1), -ymax, 0.0f, 1 );
+          // out.write( sw9.getBuffer().toString() );
 
-        // StringWriter sw8 = new StringWriter();
-        // PrintWriter pw8  = new PrintWriter(sw8);
-        // DXF.printString( pw8, 0, "LINE" );
-        // handle = DXF.printAcDb( pw8, handle, DXF.AcDbEntity, DXF.AcDbLine );
-        // DXF.printString( pw8, 8, "REF" );
-        // // DXF.printInt(  pw8, 39, 0 );         // line thickness
-        // DXF.printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
-        // DXF.printXYZ( pw8,  xmin, -ymax+sc1, 0.0f, 1 );
-        // out.write( sw8.getBuffer().toString() );
-        // out.flush();
-        
-	// offset axes legends by 1
-        // StringWriter sw7 = new StringWriter();
-        // PrintWriter pw7  = new PrintWriter(sw7);
-        handle = DXF.printText( pw9, handle, model_block_handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", DXF.style_dejavu, xoff, yoff );
-        handle = DXF.printText( pw9, handle, model_block_handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", DXF.style_dejavu, xoff, yoff );
-        out.write( sw9.getBuffer().toString() );
-       
-        out.flush();
+          // StringWriter sw8 = new StringWriter();
+          // PrintWriter pw8  = new PrintWriter(sw8);
+          // DXF.printString( pw8, 0, "LINE" );
+          // handle = DXF.printAcDb( pw8, handle, DXF.AcDbEntity, DXF.AcDbLine );
+          // DXF.printString( pw8, 8, "REF" );
+          // // DXF.printInt(  pw8, 39, 0 );         // line thickness
+          // DXF.printXYZ( pw8, xmin, -ymax, 0.0f, 0 );
+          // DXF.printXYZ( pw8,  xmin, -ymax+sc1, 0.0f, 1 );
+          // out.write( sw8.getBuffer().toString() );
+          // out.flush();
+          
+	  // offset axes legends by 1
+          // StringWriter sw7 = new StringWriter();
+          // PrintWriter pw7  = new PrintWriter(sw7);
+          handle = DXF.printText( pw9, handle, model_block_handle, scale_len, xmin+sc1, -ymax+1, 0, AXIS_SCALE, "REF", DXF.style_dejavu, xoff, yoff );
+          handle = DXF.printText( pw9, handle, model_block_handle, scale_len, xmin+1, -ymax+sc1, 0, AXIS_SCALE, "REF", DXF.style_dejavu, xoff, yoff );
+          out.write( sw9.getBuffer().toString() );
+          out.flush();
+        }
 
         // centerline data
         if ( PlotType.isSketch2D( type ) ) {

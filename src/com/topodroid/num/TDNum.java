@@ -1452,6 +1452,31 @@ public class TDNum
     return branches;
   }
 
+  // loop closure compensations
+  // 0) a cycle is a sequence of branches: C = { b1, b2, ... }
+  // 1) find a set of independent cycles, C1, C2, ... such than no linear combination of them vanishes
+  //    in the basis of the branches
+  //    With N nodes and B branches connecting them (ie, a connected graph)
+  //    the number of independent cycles is C = 1 + B - N
+  // 2) write the relation between branches and independent cycles with the incidence matrix
+  //      | A11 A12 A13 ... |  | B1 |      | C1 |
+  //      | A21 A22 A23 ... |  | B2 |   =  | C2 |
+  //      | A31 A32 ... ... |  | .. |      | .. |
+  //    this is C rows, B columns matrix.
+  // 3) compute the pseudo inverse. First compute A' = At * A which is BxB matrix
+  //    then the inverse A'-1 of A', 
+  //    Then  A" = A'-1 * At which is BxC (it is the product of BxB times BxC)  
+  // 4) The closure error compensation of the branches is 
+  //        dB = - A" dC
+  //    where dC are the closure error of the cycles. That is
+  //        dB(j) = - Sum A"(j,i) * dC(i)
+  // 
+  // Weighting the compensations.
+  // In the incidence matrix instead of the integers, 0, +1, -1, put the weight of the branch 
+  // (eg, the length) multiplied by the integer.
+  // Then the closure error of C(i) is distributed anong the branches with the weight,
+  //    dB'(j) = w(B(j)) * dB(j)
+  //
   private void compensateLoopClosure( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
   {
     ArrayList< NumBranch > branches = makeBranches( nodes, false );
