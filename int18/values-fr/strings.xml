@@ -16,7 +16,7 @@ WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists
 Tap "Move" to move your TopoDroid folder to Documents.\n\n
 Tap "Close" not to take any action.
 </string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
+    <string name="button_no_again">Ne plus me demander</string>
     <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
     <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
 
@@ -24,7 +24,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
+    <string name="new_survey_label">Nouveau relevé</string>
     <!-- TODO string name="distox_label">DistoX</string -->
 
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
@@ -81,7 +81,7 @@ Tap "Close" not to take any action.
     <string name="make_walls">Parois</string>
     <string name="missing_station">Station manquante</string>
     <string name="station_not_found">Station introuvable</string>
-    <!-- TODO string name="shot_not_found">No shot found</string -->
+    <string name="shot_not_found">Visée non trouvée</string>
     <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
@@ -96,7 +96,7 @@ Tap "Close" not to take any action.
     <string name="failed_snap_to_splays">Aucun cheminement assez proche pour attacher la ligne</string>
     <string name="failed_append_to_line">Échec de la jonction à une autre ligne</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
+    <string name="bric_device">Appareil %1$s</string>
     <!-- TODO string name="bric_ble">BLE %1$s</string -->
     <!-- TODO string name="bric_fw">Firmware %1$s</string -->
     <!-- TODO string name="bric_hw">Hardware %1$s</string -->
@@ -121,9 +121,9 @@ Tap "Close" not to take any action.
     <string name="calib_delete">Supprimer cet étalonnage</string>
     <string name="calib_device_mismatch">ATTENTION : Étalonnage et Appareil ne correspondent pas</string>
     <string name="calib_no_name">Vous devez nommer cet étalonnage</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">Coefficient d\'étalonnage non défini</string>
     <!-- REMOVE string name="calib_gm_policy">Politique</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_gm_policy">Politique de groupe</string>
     <string name="calib_gm_undelete">Récupérer ces données d\'étalonnage ?</string>
     <string name="calib_saved">Étalonnage enregistré</string>
     <string name="calib_updated">Étalonnage mis à jour</string>
@@ -158,7 +158,7 @@ Tap "Close" not to take any action.
     <string name="device_none">Aucun DistoX sélectionné</string>
     <!-- UNUSED string name="device_paired">le Disto est appairée</string -->
     <string name="device_reset">Vider et importer mémoire DistoX</string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">Effacer la mémoire du DistoX</string>
     <string name="device_code">DistoX code %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -170,62 +170,62 @@ Tap "Close" not to take any action.
     <string name="device_status_normal">Mode : normal</string>
     <string name="device_status_silent_on">Mode silencieux : on</string>
     <string name="device_status_silent_off">Mode silencieux : off</string>
-<string name="bt_reset">Redémarrer la connexion Bluetooth</string>
-<string name="save_as">Enregistrer sous</string>
-<string name="nickname">Alias ou pseudo</string>
+    <string name="bt_reset">Redémarrer la connexion Bluetooth</string>
+    <string name="save_as">Enregistrer sous</string>
+    <string name="nickname">Alias ou pseudo</string>
 
-<string name="comment">Commentaires</string>
-<!-- UNUSED string name="flag">Point Drapeau</string -->
-<!-- UNUSED string name="backshot">Visée Arrière</string -->
-<!-- UNUSED string name="duplicate">Double</string -->
-<!-- UNUSED string name="regular">régulier</string -->
-<!-- UNUSED string name="surface">surface</string -->
-<!-- UNUSED string name="extend">Etendre</string -->
-<!-- UNUSED string name="extend_ignore">Aucun</string -->
-<string name="extend_left">Gauche</string>
-<string name="extend_right">Droite</string>
-<string name="extend_vert">Vert.</string>
-<!-- UNUSED string name="external_prompt">Saisir mesure</string -->
-<string name="splay_at_to">GDHB à la station Vers</string>
+    <string name="comment">Commentaires</string>
+    <!-- UNUSED string name="flag">Point Drapeau</string -->
+    <!-- UNUSED string name="backshot">Visée Arrière</string -->
+    <!-- UNUSED string name="duplicate">Double</string -->
+    <!-- UNUSED string name="regular">régulier</string -->
+    <!-- UNUSED string name="surface">surface</string -->
+    <!-- UNUSED string name="extend">Etendre</string -->
+    <!-- UNUSED string name="extend_ignore">Aucun</string -->
+    <string name="extend_left">Gauche</string>
+    <string name="extend_right">Droite</string>
+    <string name="extend_vert">Vert.</string>
+    <!-- UNUSED string name="external_prompt">Saisir mesure</string -->
+    <string name="splay_at_to">GDHB à la station Vers</string>
     <string name="lrud">GDHB (LRUD)</string>
     <string name="strike_dip">Azimut %1$.0f Pendage %2$.0f</string>
 
-<string name="few_data">Pas assez de données</string>
+    <string name="few_data">Pas assez de données</string>
     <string name="few_iter">Échec de l\'itération</string>
     <string name="few_groups">Pas assez de données dans le groupe</string>
     <string name="found_groups">Trouvé %1$d groupes</string>
-    <!-- TODO string name="regroup">No regroup</string -->
-<!-- UNUSED string name="few_plots">Pas assez de Points</string -->
-<string name="few_calibs">Pas assez d\'étalonnage</string>
+    <string name="regroup">Pas de regrouprement</string>
+    <!-- UNUSED string name="few_plots">Pas assez de Points</string -->
+    <string name="few_calibs">Pas assez d\'étalonnage</string>
     <string name="getting_info">Obtenir des informations DistoX &#8230;</string>
 
-<string name="calib_import_title">Import de l\'étalonnage</string>
-<string name="import_title">Import fichier</string>
-<!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
-<string name="import_already">Relevé déjà importé</string>
-    <!-- TODO string name="import_bad">Invalid import file</string -->
-<string name="import_none">Aucun fichier à importer</string>
-<string name="import_failed">L\'import du fichier a échoué</string>
-<string name="file_not_found">Fichier inexistant</string>
+    <string name="calib_import_title">Import de l\'étalonnage</string>
+    <string name="import_title">Import fichier</string>
+    <!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
+    <string name="import_already">Relevé déjà importé</string>
+    <string name="import_bad">Fichier d\'import invalide</string>
+    <string name="import_none">Aucun fichier à importer</string>
+    <string name="import_failed">L\'import du fichier a échoué</string>
+    <string name="file_not_found">Fichier inexistant</string>
     <string name="import_calib_ok">Étalonnage importé avec succès</string>
     <string name="import_calib_no_header">Fichier d\'étalonnage : problème de relevé</string>
     <string name="import_calib_already">Étalonnage déja existant</string>
     <string name="import_calib_mismatch">Étalonnage du périphérique incorrect</string>
     <string name="import_calib_no_data">Fichier d\'étalonnage : aucune donnée</string>
     <string name="import_calib_io_error">Fichier d\'étalonnage : erreur de lecture</string>
-<string name="import_zip_ok">Fichier zip importé avec succès</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
-<!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
-<!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
-<string name="MT_points_none">Pas de point Mobile Topographer</string>
+    <string name="import_zip_ok">Fichier zip importé avec succès</string>
+    <string name="import_zip_newer">Fichier ZIP importé d\'une version plus récente</string>
+    <!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
+    <!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
+    <string name="MT_points_none">Pas de point Mobile Topographer</string>
 
     <string name="pleasewait">Attendre SVP</string>
     <string name="processing">Travail en cours &#8230;</string>
 
-<!-- UNUSED string name="head_tail">Mémoire : </string -->
-<string name="head_tail_failed">Échec de lecture de la mémoire du DistoX</string>
-<string name="head_tail_store_failed">Échec de l\'enregistrement des index de mémoire du DistoX</string>
-<!-- UNUSED string name="pairing_failed">Echec de connexion au DistoX</string -->
+    <!-- UNUSED string name="head_tail">Mémoire : </string -->
+    <string name="head_tail_failed">Échec de lecture de la mémoire du DistoX</string>
+    <string name="head_tail_store_failed">Échec de l\'enregistrement des index de mémoire du DistoX</string>
+    <!-- UNUSED string name="pairing_failed">Echec de connexion au DistoX</string -->
 
 <string name="illegal_data_value">Valeur de donnée incorrecte</string>
 <string name="photo_title">PHOTO</string>
@@ -266,8 +266,8 @@ Tap "Close" not to take any action.
 <string name="error_invalid_name">Nom invalide</string>
 <string name="error_lat_required">Latitude nécessaire</string>
 <string name="error_long_required">Longitude nécessaire</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Projet existant</string>
+    <string name="error_name_invalid">Nom de projet invelide</string>
 <string name="error_name_required">Nom nécessaire</string>
 <string name="error_dir_exists">Le répertoire existe déjà</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -300,7 +300,7 @@ Tap "Close" not to take any action.
 <!-- UNUSED string name="splays_toggle">Basculer les visées d\'habillage - Splays</string -->
     <string name="splays_on_off">Visées d\'habillage ON OFF</string>
 <string name="splays">Visées d\'habillage</string>
-    <!-- TODO string name="legs">Legs</string -->
+    <string name="legs">Jambes</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -317,7 +317,7 @@ Tap "Close" not to take any action.
 <string name="bad_line">Mauvais type de ligne</string>
 <string name="bad_point">Mauvais type de point</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Pas d\'enregistremen audio</string>
 <string name="no_bt">Pas de Bluetooth</string>
 <string name="no_calib">Pas d\'étalonnage</string>
 <string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
@@ -352,7 +352,7 @@ Tap "Close" not to take any action.
 <string name="menu_3d">3D</string>
 <string name="menu_about">A PROPOS</string>
 <string name="menu_area">ZONE</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
 <!-- UNUSED string name="menu_attach">CONNECTER</string -->
 <!-- UNUSED string name="menu_attached">Connecté</string -->
 <!-- UNUSED string name="menu_ready">Prêt</string -->
@@ -366,7 +366,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="menu_display">AFFICHAGE</string -->
     <string name="menu_show_deleted">MONTRER/SUPPR.</string>
     <string name="menu_hide_deleted">CACHER/SUPPR.</string>
-    <!-- TODO string name="menu_device">DEVICE</string -->
+    <string name="menu_device">APPAREIL</string>
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
@@ -381,13 +381,13 @@ Tap "Close" not to take any action.
     <string name="menu_manual_calibration">ÉTALONNAGE</string>
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">APERÇU</string>
-    <!-- TODO string name="menu_packets">PACKETS</string -->
+    <string name="menu_packets">PAQUETS</string>
     <string name="menu_pair">APPAIRER</string>
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">CAPTEUR</string>
     <string name="menu_scan">SCAN</string>
-    <!-- TODO string name="menu_scan_ble">SCAN BTLE</string -->
+    <string name="menu_scan_ble">SCAN BTLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">INFO RELEVÉ</string>
@@ -419,7 +419,7 @@ Tap "Close" not to take any action.
     <string name="popup_snap_ln">Attacher à la ligne la plus proche</string>
     <string name="popup_snap_to_splays">Attacher aux cheminements proches</string>
     <string name="popup_split_pt">Dupliquer le point</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Ajouter des points</string>
     <string name="popup_split_ln">Couper la ligne</string>
     <string name="popup_sharp_pt">Redresser le segment</string>
     <string name="popup_curve_pt">Lisser le segment</string>
@@ -444,8 +444,8 @@ Tap "Close" not to take any action.
     <string name="popup_cont_both">Les deux points</string>
     <string name="popup_cont_continue">Continue</string>
 
-    <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <string name="connection_error">Erreur de connexion</string>
+    <string name="connecting">Connecxion &#8230;</string>
     <!-- UNUSED string name="connected_none">Non connecté</string -->
     <!-- UNUSED string name="connected_already">Déjà Connecté</string -->
 
@@ -455,7 +455,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
     <string name="null_bitmap">Création image impossible</string>
     <!-- UNUSED string name="photo">photo</string -->
-    <!-- TODO string name="photo_camera">TopoDroid camera</string -->
+    <string name="photo_camera">Appareil photo TopoDroid</string>
     <string name="photo_comment_prompt">Saisissez un commentaire pour la photo</string>
     <string name="photo_azimuth_clino">Azimut: %1$.1f Clino %2$.1f</string>
     <!-- UNUSED string name="photo_name">station/nom</string -->
@@ -534,7 +534,7 @@ Tap "Close" not to take any action.
     <string name="survey_exists">Ce nom de relevé existe déjà.</string>
     <!-- UNUSED string name="survey_date">aaaa/mm/jj</string -->
     <string name="survey_delete">Supprimer le relevé ?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Déplacer les visées vers le relevé %1$s ?</string>
     <string name="survey_split">Diviser le relevé ?</string>
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définies !</string>
@@ -561,9 +561,9 @@ Tap "Close" not to take any action.
     <string name="description">Description</string>
     <string name="name">Nom</string>
     <string name="team">Équipe</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="second_device">second device</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">Station de départ</string>
+    <string name="second_device">deuxième appareil</string>
+    <string name="start_station">station de départ [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Mettre le périphérique en mode étalonnage</string -->
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
@@ -610,7 +610,7 @@ Tap "Close" not to take any action.
     <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
     <string name="shot_title">VISÉE %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
+    <string name="survey_split_move_title">Découper/déplacer le relevé</string>
 
     <string name="survey_stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Visées latérales d\'habillage %1$d</string>
@@ -655,13 +655,13 @@ Tap "Close" not to take any action.
     <string name="button_convert"   >Convertir   </string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
-    <!-- TODO string name="button_duplicate" >Duplicate </string -->
-    <!-- TODO string name="button_surface"   >Surface   </string -->
-    <!-- TODO string name="button_no_extend" >No extend </string -->
+    <string name="button_duplicate" >Dupliquer </string>
+    <string name="button_surface"   >Surface   </string>
+    <string name="button_no_extend" >Pas d\'extension</string>
     <string name="button_eval"      >Évaluation      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
+    <string name="button_evalroll"  >Roullis</string>
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -676,9 +676,9 @@ Tap "Close" not to take any action.
     <string name="button_more"    >Plus</string>
     <!-- TODO string name="button_move"    >Move</string -->
     <string name="button_next"    >Suivant</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
-    <string name="button_skip"    >Sauter</string>
+    <string name="button_prev"    >Précédent</string>
+    <string name="button_new"     >Nouveau fragment</string>
+    <string name="button_skip"    >Passer</string>
     <string name="button_done"    >Effectué</string>
     <string name="button_lrud"    >Ajouter GDHB LRUD</string>
     <string name="button_ok"        >OK        </string>
@@ -697,9 +697,9 @@ Tap "Close" not to take any action.
     <string name="button_left"      >GAUCHE</string>
     <string name="button_right"     >DROITE</string>
     <string name="button_clear"     >EFFACER     </string>
-    <!-- TODO string name="button_clear_day" >Clear 1d  </string -->
-    <!-- TODO string name="button_clear_week">Clear 7d  </string -->
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_day" >Effacer 1j  </string>
+    <string name="button_clear_week">Effacer 7j </string>
+    <string name="button_clear_memory">Effacer la mémoire</string>
     <string name="button_save"      >ENREGISTRER      </string>
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
     <string name="button_search"    >Chercher    </string>
@@ -732,13 +732,13 @@ Tap "Close" not to take any action.
     <string name="mode_outline">Bordure ext. uniquement</string>
     <string name="mode_scale_ref">Barre d\'échelle de réf.</string>
 
-    <!-- TODO string name="layer_floor">Floor</string -->
-    <!-- TODO string name="layer_fill">Fills</string -->
-    <!-- TODO string name="layer_ceil">Ceiling</string -->
+    <string name="layer_floor">Sol</string>
+    <string name="layer_fill">remplissages</string>
+    <string name="layer_ceil">Plafond</string>
     <!-- TODO string name="layer_arti">Artifacts</string -->
-    <!-- UNUSED string name="layer_form">Forms</string -->
-    <!-- UNUSED string name="layer_water">Water</string -->
-    <!-- UNUSED string name="layer_text">Text</string -->
+    <string name="layer_form">Formes</string>
+    <string name="layer_water">Eau</string>
+    <string name="layer_text">Texte</string>
 
 
     <!-- UNUSED string name="remote_title">Contrôle à distance</string -->
@@ -751,13 +751,13 @@ Tap "Close" not to take any action.
     <string name="popup_do_splay">Visée latérale</string>
     <string name="popup_do_leg">Cheminement auto</string>
     <string name="popup_do_gm_data">Visée d\'étalon.</string>
-    <!-- TODO string name="popup_do_laser">Laser</string -->
-    <!-- TODO string name="popup_do_scan">Scan</string -->
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
+    <string name="popup_do_laser">Laser</string>
+    <string name="popup_do_scan">Scan</string>
+    <string name="popup_do_shot">Visée</string>
+    <string name="popup_do_clear">Effacer</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Export</string>
     <string name="btn_import">Importer</string>
     <string name="btn_install">Installer</string>
 
@@ -814,7 +814,7 @@ Tap "Close" not to take any action.
     <string name="help_measure_type">Mode de mesure : point fixe ou polyligne</string>
     <string name="help_measure_undo">Abandonner le dernier point de la polyligne</string>
 
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Liste des enregistrements audio</string>
     <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string>
     <string name="help_calib_check">Visées de contrôle étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
