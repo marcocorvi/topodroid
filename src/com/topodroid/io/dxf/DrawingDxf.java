@@ -671,10 +671,10 @@ public class DrawingDxf
               }
             } else {
               boolean done_point = false;
-              if ( BrushManager.isPointSection( point.mPointType ) && TDSetting.mAutoStations ) {
-                Log.v("DistoX", "Point is section : " + TDSetting.mAutoXSections );
+              if ( BrushManager.isPointSection( point.mPointType ) && TDSetting.mAutoXSections ) {
+                // Log.v("DistoX", "Point is section : " + TDSetting.mAutoXSections );
                 String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-                Log.v("DistoX", "Point is section : scrapname " + scrapname );
+                // Log.v("DistoX", "Point is section : scrapname " + scrapname );
                 if ( scrapname != null ) {
                   String scrapfile = scrapname + ".tdr";
                   if ( DXF.mVersion13_14 ) {

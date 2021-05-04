@@ -1356,6 +1356,10 @@ Tap <b>Chiudi</b> per fare nulla.
   <string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string>
   <string name="pref_acad_version_title"> Versione di DXF</string>
   <string name="pref_acad_version_summary">Versione di DXF</string>
+  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
+  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
+  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
+  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
   <!-- UNUSED string name="pref_dxf_scale_title">Scala rilievo DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Fattore di scala rilievo DXF</string -->
   <string name="pref_dxf_blocks_title">splay endpoint DXF </string>

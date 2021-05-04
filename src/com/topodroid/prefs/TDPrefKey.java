@@ -550,7 +550,7 @@ public class TDPrefKey
   public static String[] EXPORT_TH = { // [8]
     "DISTOX_THERION_CONFIG",   // whether to write survey.thconfig file
     "DISTOX_THERION_MAPS",     // whether to put map commands before centerline in therion
-    "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
+    // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
     // "DISTOX_XTHERION_AREAS",    // save areas a-la xtherion
     "DISTOX_THERION_SPLAYS",   // whether to add u:splay lines to Therion th2 export
     "DISTOX_SURVEX_LRUD",      // whether to add LRUD to Survex export
@@ -560,7 +560,7 @@ public class TDPrefKey
   static int[] EXPORT_THtitle = {
     R.string.pref_therion_config_title,
     R.string.pref_therion_maps_title,
-    R.string.pref_autoStations_title,
+    // R.string.pref_autoStations_title,
     // R.string.pref_xtherion_areas_title,
     R.string.pref_therion_splays_title,
     R.string.pref_survex_lrud_title,
@@ -572,7 +572,7 @@ public class TDPrefKey
   static int[] EXPORT_THdesc = {
     R.string.pref_therion_config_summary,
     R.string.pref_therion_maps_summary,
-    R.string.pref_autoStations_summary,
+    // R.string.pref_autoStations_summary,
     // R.string.pref_xtherion_areas_summary,
     R.string.pref_therion_splays_summary,
     R.string.pref_survex_lrud_summary,
@@ -584,7 +584,7 @@ public class TDPrefKey
   public static String[] EXPORT_THdef = {
     FALSE,
     FALSE,
-    TRUE,
+    // TRUE,
     // FALSE,
     FALSE,
     FALSE,
@@ -718,14 +718,14 @@ public class TDPrefKey
     "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
     "DISTOX_SVG_GRID",
     "DISTOX_THERION_SPLAYS",
-    "DISTOX_AUTO_STATIONS",
+    // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
   };
   static int[] EXPORT_PNGtitle = {
     R.string.pref_bitmap_scale_title,
     R.string.pref_bitmap_bgcolor_title,
     R.string.pref_svg_grid_title,
     R.string.pref_therion_splays_title,
-    R.string.pref_autoStations_title,
+    // R.string.pref_autoStations_title,
     -1
   };
   static int[] EXPORT_PNGdesc = {
@@ -733,7 +733,7 @@ public class TDPrefKey
     R.string.pref_bitmap_bgcolor_summary,
     R.string.pref_svg_grid_summary,
     R.string.pref_therion_splays_summary,
-    R.string.pref_autoStations_summary,
+    // R.string.pref_autoStations_summary,
     -1
   };
   public static String[] EXPORT_PNGdef = {
@@ -741,7 +741,7 @@ public class TDPrefKey
     "0 0 0",
     FALSE,
     FALSE,
-    TRUE,
+    // TRUE,
     null
   };
 
@@ -751,24 +751,35 @@ public class TDPrefKey
     "DISTOX_DXF_BLOCKS",       // whether to export point items as Blocks in DXF export
     "DISTOX_ACAD_VERSION",     // 23 31 
     "DISTOX_ACAD_SPLINE",
+    "DISTOX_DXF_REFERENCE",
+    // "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
   };
   static int[] EXPORT_DXFtitle = {
     // R.string.pref_dxf_scale_title,
     R.string.pref_dxf_blocks_title,
     R.string.pref_acad_version_title,
     R.string.pref_acad_spline_title,
+    R.string.pref_dxf_reference_title,
+    // R.string.pref_autoStations_title,
+    -1
   };
   static int[] EXPORT_DXFdesc = {
     // R.string.pref_dxf_scale_summary,
     R.string.pref_dxf_blocks_summary,
     R.string.pref_acad_version_summary,
     R.string.pref_acad_spline_summary,
+    R.string.pref_dxf_reference_summary,
+    // R.string.pref_autoStations_summary,
+    -1
   };
   public static String[] EXPORT_DXFdef = {
     // "1.0",
     TRUE,
     "9",
     TRUE,
+    FALSE,
+    // TRUE,
+    null
   };
 
   // ------------------------------------------------------------------------------
@@ -1419,7 +1430,7 @@ public class TDPrefKey
     "DISTOX_BACKUP_NUMBER",   // number of plot backups
     "DISTOX_BACKUP_INTERVAL", // minimum interval between plot backups [60 s]
     // "DISTOX_BACKUPS_CLEAR",
-    "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
+    // "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_SAVED_STATIONS",  // whether to color saved stations
     "DISTOX_LEGONLY_UPDATE",  // whether to update drawing windows at every shot
     "DISTOX_FULL_AFFINE",     // whether to do full affine transform or shift+scale only
@@ -1435,7 +1446,7 @@ public class TDPrefKey
     R.string.pref_backup_number_title,
     R.string.pref_backup_interval_title,
     // R.string.pref_backups_clear_title,
-    R.string.pref_auto_xsections_title,
+    // R.string.pref_auto_xsections_title,
     R.string.pref_saved_stations_title,
     R.string.pref_legonly_update_title,
     R.string.pref_full_affine_title,
@@ -1451,7 +1462,7 @@ public class TDPrefKey
     R.string.pref_backup_number_summary,
     R.string.pref_backup_interval_summary,
     // R.string.pref_backups_clear_summary,
-    R.string.pref_auto_xsections_summary,
+    // R.string.pref_auto_xsections_summary,
     R.string.pref_saved_stations_summary,
     R.string.pref_legonly_update_summary,
     R.string.pref_full_affine_summary,
@@ -1467,7 +1478,7 @@ public class TDPrefKey
     TDString.FIVE,
     TDString.SIXTY,
     // FALSE,
-    TRUE,
+    // TRUE,
     FALSE,
     FALSE,
     FALSE,
@@ -1582,13 +1593,17 @@ public class TDPrefKey
   // -------------------------------------------------------------------------------
   public static String[] GEEKIMPORT = {
     "DISTOX_ZIP_WITH_SYMBOLS",
-    "DISTOX_IMPORT_DATAMODE"
+    "DISTOX_IMPORT_DATAMODE",
+    "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
+    "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
     // "DISTOX_TRANSFER_CSURVEY"
   };
  
   static int[] GEEKIMPORTtitle = {
     R.string.pref_zipped_symbols_title,
     R.string.pref_import_datamode_title,
+    R.string.pref_auto_xsections_title,
+    R.string.pref_autoStations_title,
     // R.string.pref_tcsx,
     -1
   };
@@ -1596,6 +1611,8 @@ public class TDPrefKey
   static int[] GEEKIMPORTdesc = {
     R.string.pref_zipped_symbols_summary,
     R.string.pref_import_datamode_summary,
+    R.string.pref_auto_xsections_summary,
+    R.string.pref_autoStations_summary,
     // R.string.pref_tcsx,
     -1
   };
@@ -1603,6 +1620,8 @@ public class TDPrefKey
   public static String[] GEEKIMPORTdef = {
     FALSE,
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
+    TRUE,
+    TRUE,
     // TRUE,
     null
   };

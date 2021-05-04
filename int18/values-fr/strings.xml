@@ -1334,6 +1334,10 @@ Tap "Close" not to take any action.
   <string name="pref_bitmap_bgcolor_summary">Couleur de fond du dessin PNG</string>
   <string name="pref_acad_version_title">Version de DXF</string>
   <string name="pref_acad_version_summary">Version de DXF</string>
+  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
+  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
+  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
+  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
   <!-- UNUSED string name="pref_dxf_scale_title">Échelle dessin DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Facteur de l\'échelle du dessin DXF</string -->
   <string name="pref_dxf_blocks_title">Fin des visées latérales d\'habillage DXF</string>

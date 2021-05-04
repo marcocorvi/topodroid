@@ -119,7 +119,7 @@ public class TDSetting
     }
   }
 
-  public static boolean mDxfBlocks = true; // DXF_BLOCKS
+  public static boolean mDxfBlocks = true; // DXF_BLOCKS data-eport
   public static boolean mShpGeoref = false;
 
   public static float mAlgoMinAlpha = 0.1f;
@@ -772,6 +772,7 @@ public class TDSetting
 
   public static void loadSecondaryPreferences( /* TopoDroidApp my_app, */ TDPrefHelper pref_hlp )
   {
+    // Log.v("DistoX", "load secondary");
     SharedPreferences prefs = pref_hlp.getSharedPrefs();
 
     String[] keySurvey = TDPrefKey.SURVEY;
@@ -783,6 +784,7 @@ public class TDSetting
     mEditableStations = prefs.getBoolean(keySurvey[5], bool(defSurvey[5]) ); // DISTOX_EDITABLE_STATIONS
     mFixedOrigin  = prefs.getBoolean(    keySurvey[6], bool(defSurvey[6]) ); // DISTOX_FIXED_ORIGIN
     mSharedXSections = prefs.getBoolean( keySurvey[7], bool(defSurvey[7]) ); // DISTOX_SHARED_XSECTIONS
+    // Log.v("DistoX", "load survey done");
 
     String[] keyPlot = TDPrefKey.PLOT;
     String[] defPlot = TDPrefKey.PLOTdef;
@@ -797,6 +799,7 @@ public class TDSetting
     mHThreshold    = tryFloat( prefs,  keyPlot[4],      defPlot[4] );  // DISTOX_HTHRESHOLD
     mCheckAttached = prefs.getBoolean( keyPlot[5], bool(defPlot[5]) ); // DISTOX_CHECK_ATTACHED
     mCheckExtend   = prefs.getBoolean( keyPlot[6], bool(defPlot[6]) ); // DISTOX_CHECK_EXTEND
+    // Log.v("DistoX", "load plot done");
 
     String[] keyCalib = TDPrefKey.CALIB;
     String[] defCalib = TDPrefKey.CALIBdef;
@@ -812,6 +815,7 @@ public class TDSetting
     mAlgoMinBeta   = tryFloat( prefs,      keyCalib[8],      defCalib[8] );  // DISTOX_ALGO_MIN_BETA
     mAlgoMinGamma  = tryFloat( prefs,      keyCalib[9],      defCalib[9] );  // DISTOX_ALGO_MIN_GAMMA
     mAlgoMinDelta  = tryFloat( prefs,      keyCalib[10],     defCalib[10] ); // DISTOX_ALGO_MIN_DELTA
+    // Log.v("DistoX", "load calib done");
 
     String[] keyDevice = TDPrefKey.DEVICE;
     String[] defDevice = TDPrefKey.DEVICEdef;
@@ -822,6 +826,7 @@ public class TDSetting
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
     mAutoPair       = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
     mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
+    // Log.v("DistoX", "load device done");
 
     String[] keyGDev = TDPrefKey.GEEKDEVICE;
     String[] defGDev = TDPrefKey.GEEKDEVICEdef;
@@ -833,48 +838,54 @@ public class TDSetting
     mWaitShot       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_SHOT
     mFirmwareSanity = prefs.getBoolean( keyGDev[ 6], bool(defGDev[ 6]) );  // DISTOX_FIRMWARE_SANITY
     mBricMode       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_BRIC_MODE
+    // Log.v("DistoX", "load geek device done");
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
     // keyImport[ 0 ] // DISTOX_PT_CMAP
     mLRExtend          = prefs.getBoolean(     keyImport[ 1], bool(defImport[ 1]) ); // DISTOX_SPLAY_EXTEND
-
+    // Log.v("DistoX", "load secondary export import done");
 
     String[] keyGeekImport = TDPrefKey.GEEKIMPORT;
     String[] defGeekImport = TDPrefKey.GEEKIMPORTdef;
-    mZipWithSymbols = prefs.getBoolean(     keyGeekImport[ 0], bool(defGeekImport[ 0]) ); // DISTOX_ZIP_WITH_SYMBOLS
-    mImportDatamode = tryInt(   prefs,      keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
+    mZipWithSymbols = prefs.getBoolean( keyGeekImport[ 0], bool(defGeekImport[ 0]) ); // DISTOX_ZIP_WITH_SYMBOLS
+    mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
+    mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
+    mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
+    // Log.v("DistoX", "load secondary GEEK import done");
 
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
     // mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
     // mExportPlotFormat  = tryInt(   prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-
     mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 0],      defExport[ 0] );  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
     mLRUDvertical      = tryFloat( prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_LRUD_VERTICAL
     mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 2],      defExport[ 2] );  // DISTOX_LRUD_HORIZONTAL
     mBezierStep        = tryFloat( prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_BEZIER_STEP
+    // Log.v("DistoX", "load secondary export done");
 
     String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
     String[] defExpSvx = TDPrefKey.EXPORT_SVXdef;
     mSurvexEol         = ( prefs.getString(    keyExpSvx[0],      defExpSvx[0] ).equals("LF") )? "\n" : "\r\n";  // DISTOX_SURVEX_EOL
     mSurvexSplay       =   prefs.getBoolean(   keyExpSvx[1], bool(defExpSvx[1]) ); // DISTOX_SURVEX_SPLAY
     mSurvexLRUD        =   prefs.getBoolean(   keyExpSvx[2], bool(defExpSvx[2]) ); // DISTOX_SURVEX_LRUD
+    // Log.v("DistoX", "load secondary export SVX done");
 
     String[] keyExpTh  = TDPrefKey.EXPORT_TH;
     String[] defExpTh  = TDPrefKey.EXPORT_THdef;
     mTherionConfig     = prefs.getBoolean( keyExpTh[0], bool(defExpTh[0]) ); // DISTOX_THERION_CONFIG
     mTherionMaps       = prefs.getBoolean( keyExpTh[1], bool(defExpTh[1]) ); // DISTOX_THERION_MAPS
-    mAutoStations      = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_AUTO_STATIONS 
+    // mAutoStations      = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_AUTO_STATIONS 
     // mXTherionAreas  = prefs.getBoolean( keyExpTh[ ], bool(defExpTh[ ]) ); // DISTOX_XTHERION_AREAS
-    mTherionSplays     = prefs.getBoolean( keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_THERION_SPLAYS
-    // mSurvexLRUD     =   prefs.getBoolean(   keyExpTh[4], bool(defExpTh[4]) ); // DISTOX_SURVEX_LRUD
-    mTherionScale = tryInt( prefs, keyExpTh[5], defExpTh[5] );  // DISTOX_TH2_SCALE
+    mTherionSplays     = prefs.getBoolean( keyExpTh[2], bool(defExpTh[2]) ); // DISTOX_THERION_SPLAYS
+    // mSurvexLRUD     =   prefs.getBoolean(   keyExpTh[3], bool(defExpTh[3]) ); // DISTOX_SURVEX_LRUD
+    mTherionScale = tryInt( prefs, keyExpTh[4], defExpTh[4] );  // DISTOX_TH2_SCALE
     mToTherion = THERION_SCALE / mTherionScale;
-    mTherionXvi        = prefs.getBoolean( keyExpTh[6], bool(defExpTh[6]) ); // DISTOX_TH2_XVI
+    mTherionXvi        = prefs.getBoolean( keyExpTh[5], bool(defExpTh[5]) ); // DISTOX_TH2_XVI
+    // Log.v("DistoX", "load secondary export TH done");
 
     String[] keyExpDat = TDPrefKey.EXPORT_DAT;
     String[] defExpDat = TDPrefKey.EXPORT_DATdef;
@@ -901,12 +912,13 @@ public class TDSetting
     mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_SHOT_STROKE
     mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[9],      defExpSvg[9] );  // DISTOX_SVG_LINEDIR_STROKE
     mSvgStationSize    = tryInt(   prefs,      keyExpSvg[10],     defExpSvg[10]);  // DISTOX_SVG_STATION_SIZE
-
+    // Log.v("DistoX", "load secondary export SVG done");
 
     String[] keyExpKml = TDPrefKey.EXPORT_KML;
     String[] defExpKml = TDPrefKey.EXPORT_KMLdef;
     mKmlStations       = prefs.getBoolean(     keyExpKml[0], bool(defExpKml[0]) ); // DISTOX_KML_STATIONS
     mKmlSplays         = prefs.getBoolean(     keyExpKml[1], bool(defExpKml[1]) ); // DISTOX_KML_SPLAYS
+    // Log.v("DistoX", "load secondary export KML done");
 
     // String[] keyExpCsx = TDPrefKey.EXPORT_CSX;
     // String[] defExpCsx = TDPrefKey.EXPORT_CSXdef;
@@ -921,17 +933,21 @@ public class TDSetting
     String[] defExpPng = TDPrefKey.EXPORT_PNGdef;
     mBitmapScale       = tryFloat( prefs,      keyExpPng[0], defExpPng[0] );  // DISTOX_BITMAP_SCALE 
     setBitmapBgcolor( prefs, keyExpPng[1], prefs.getString(keyExpPng[1], defExpPng[1]), defExpPng[1] );  // DISTOX_BITMAP_BGCOLOR
+    // Log.v("DistoX", "load secondary export PNG done");
 
     String[] keyExpDxf = TDPrefKey.EXPORT_DXF;
     String[] defExpDxf = TDPrefKey.EXPORT_DXFdef;
-    // mDxfScale    = tryFloat( prefs,    keyExpDxf[ ],      defExpDxf[ ] );  // DISTOX_DXF_SCALE
-    mDxfBlocks   =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
-    mAcadVersion = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
-    mAcadSpline  =  prefs.getBoolean(     keyExpDxf[2], bool(defExpDxf[2]) ); // DISTOX_ACAD_SPLINE
+    // mDxfScale     = tryFloat( prefs,    keyExpDxf[ ],      defExpDxf[ ] );  // DISTOX_DXF_SCALE
+    mDxfBlocks    =  prefs.getBoolean(     keyExpDxf[0], bool(defExpDxf[0]) ); // DISTOX_DXF_BLOCKS
+    mAcadVersion  = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
+    mAcadSpline   =  prefs.getBoolean(     keyExpDxf[2], bool(defExpDxf[2]) ); // DISTOX_ACAD_SPLINE
+    mDxfReference =  prefs.getBoolean(     keyExpDxf[3], bool(defExpDxf[3]) ); // DISTOX_DXF_REFERENCE
+    Log.v("DistoX", "load secondary export DXF done");
   
     String[] keyExpShp = TDPrefKey.EXPORT_SHP;
     String[] defExpShp = TDPrefKey.EXPORT_SHPdef;
     mShpGeoref   =  prefs.getBoolean(     keyExpShp[0], bool(defExpShp[0]) ); // DISTOX_SHP_GEOREF
+    Log.v("DistoX", "load secondary export SHP done");
 
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
@@ -971,11 +987,11 @@ public class TDSetting
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_BACKUP_INTERVAL
     // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
-    mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
-    mSavedStations  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_SAVED_STATIONS
-    mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_LEGONLY_UPDATE
-    mFullAffine     = prefs.getBoolean( keyGPlot[ 8], bool(defGPlot[ 8]) ); // DISTOX_FULL_UPDATE
-    mWithLevels     = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_WITH_LEVELS
+    // mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
+    mSavedStations  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_SAVED_STATIONS
+    mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
+    mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
+    mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
     String[] defGPlotSplay = TDPrefKey.GEEKsplaydef;
@@ -988,6 +1004,7 @@ public class TDSetting
     mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
     mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SECTION_SPLAY
+    Log.v("DistoX", "load splay geek done");
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1002,6 +1019,7 @@ public class TDSetting
     mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
     mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
+    Log.v("DistoX", "load line geek done");
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1021,7 +1039,7 @@ public class TDSetting
     }
     mUnitGrid       = tryFloat(  prefs, keyUnits[2], defUnits[2] );      // DISTOX_UNIT_GRID
     mUnitMeasure    = tryFloat(  prefs, keyUnits[3], defUnits[3] );      // DISTOX_UNIT_MEASURE
-    // Log.v("DistoX", "units grid " + mUnitGrid );
+    Log.v("DistoX", "units grid " + mUnitGrid );
   
     String[] keyAcc = TDPrefKey.ACCURACY;
     String[] defAcc = TDPrefKey.ACCURACYdef;
@@ -1423,16 +1441,16 @@ public class TDSetting
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
     // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR moved to GEEK
     //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_XSECTIONS
-      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SAVED_STATIONS
-      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[ 6 ]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LEGONLY_UPDATE
-      mLegOnlyUpdate = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_FULL_AFFINE
-      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[ 8 ]) );
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_WITH_LEVELS
-      mWithLevels    = tryIntValue( hlp, k, v, def[ 9 ] );
+    // } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_XSECTIONS
+    //   mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SAVED_STATIONS
+      mSavedStations = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_LEGONLY_UPDATE
+      mLegOnlyUpdate = tryBooleanValue( hlp, k, v, bool(def[ 6 ]) );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_FULL_AFFINE
+      mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_LEVELS
+      mWithLevels    = tryIntValue( hlp, k, v, def[ 8 ] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -1576,6 +1594,10 @@ public class TDSetting
       mZipWithSymbols = tryBooleanValue( hlp, k, v, bool(def[ 0]) ); 
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_IMPORT_DATAMODE (choice)
       mImportDatamode = tryIntValue( hlp, k, v, def[ 1] );
+    } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_AUTO_XSECTIONS
+      mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
+    } else if ( k.equals( key[ 3 ] ) ) {        // DISTOX_AUTO_STATIONS
+      mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
     // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
     //   mExportTcsx = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else {
@@ -1647,22 +1669,22 @@ public class TDSetting
       mTherionConfig    = tryBooleanValue( hlp, k, v, bool(def[ 0 ]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_THERION_MAPS (bool)
       mTherionMaps      = tryBooleanValue( hlp, k, v, bool(def[ 1 ]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_STATIONS (bool)
-      mAutoStations     = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
+    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_AUTO_STATIONS (bool)
+    //   mAutoStations     = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_XTHERION_AREAS (bool)
     //   mXTherionAreas = tryBooleanValue( hlp, k, v, bool(def[ ]) );   
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS (bool)
-      mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 3 ]) );   
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SURVEX_LRUD (bool)
-      mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[ 4 ]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TH2_SCALE
-      int scale = tryIntValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_THERION_SPLAYS (bool)
+      mTherionSplays    = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );   
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SURVEX_LRUD (bool)
+      mSurvexLRUD       = tryBooleanValue( hlp, k, v, bool(def[ 3 ]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_TH2_SCALE
+      int scale = tryIntValue( hlp, k, v, def[4] );
       if ( scale < 40 ) { scale = 40; ret = "40"; }
       if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
       mTherionScale = scale;
       mToTherion = THERION_SCALE / scale;
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TH2_XVI (bool)
-      mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[6]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TH2_XVI (bool)
+      mTherionXvi = tryBooleanValue( hlp, k, v, bool(def[5]) );
     } else {
       TDLog.Error("missing EXPORT TH key: " + k );
     }
@@ -1773,6 +1795,8 @@ public class TDSetting
       try { mAcadVersion = tryIntValue( hlp, k, v, def[ 1 ] ); } catch ( NumberFormatException e) { }
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ACAD_SPLINE (bool)
       mAcadSpline = tryBooleanValue( hlp, k, v, bool(def[ 2 ]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_DXF_REFERENCE (bool)
+      mDxfReference = tryBooleanValue( hlp, k, v, bool(def[ 3 ]) );
     } else {
       TDLog.Error("missing EXPORT DXF key: " + k );
     }
@@ -1795,8 +1819,8 @@ public class TDSetting
       mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
     } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS
       mTherionSplays = tryBooleanValue( hlp, k, v, bool(def[ 3]) );   
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
-      mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+    // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
+    //   mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
 
     } else {
       TDLog.Error("missing EXPORT PNG key: " + k );

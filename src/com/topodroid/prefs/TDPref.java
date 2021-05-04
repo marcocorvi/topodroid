@@ -611,6 +611,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],         ctx, hlp ),
       makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
+      makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ), // DISTOX_AUTO_XSECTIONS
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],         ctx, hlp ), // DISTOX_AUTO_STATIONS
       // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
     };
   }
@@ -652,13 +654,13 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
       makeCbx( cat, key[1], tit[1], dsc[1], A, def[1], ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp ),
+      // makeCbx( cat, key[2], tit[2], dsc[2], N, def[2], ctx, hlp ), // DISTOX_AUTO_STATIONS
       // makeCbx( cat, key[ ], tit[ ], dsc[ ], X, def[ ], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], A, def[2], ctx, hlp ),
       makeCbx( cat, key[3], tit[3], dsc[3], A, def[3], ctx, hlp ),
-      makeCbx( cat, key[4], tit[4], dsc[4], A, def[4], ctx, hlp ),
       // makeCbx( cat, key[4], tit[4], dsc[4], A, def[4], ctx, hlp ),
-      makeEdt( cat, key[5], tit[5], dsc[5], E, def[5], INTEGER,  ctx, hlp ),
-      makeCbx( cat, key[6], tit[6], dsc[6], E, def[6], ctx, hlp )
+      makeEdt( cat, key[4], tit[4], dsc[4], E, def[4], INTEGER,  ctx, hlp ),
+      makeCbx( cat, key[5], tit[5], dsc[5], E, def[5], ctx, hlp )
     };
   }
 
@@ -723,7 +725,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       // makeEdt( cat, key[ ]  tit[ ], dsc[ ], X, def[ ], FLOAT,  ctx, hlp ),
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],         ctx, hlp ),
       makeLst( cat, key[1], tit[1], dsc[1], E, def[1], R.array.acadVersion, R.array.acadVersionValue, ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp )
+      makeCbx( cat, key[2], tit[2], dsc[2], T, def[2],         ctx, hlp ),  // DISTOX_ACAD_SPLINE
+      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_DXF_REFERENCE
+      // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
     };
   }
 
@@ -738,8 +742,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, ctx, hlp ),
       makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],         ctx, hlp ),  // DISTOX_SVG_GRID
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp ),  // DISTOX_THEREION_SPLAYS
-      makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
+      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_THEREION_SPLAYS
+      // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
     };
   }
 
@@ -927,16 +931,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.DRAWdesc;
     String[] def = TDPrefKey.DRAWdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0],          ctx, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   ctx, hlp ),
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], N, def[ 0],          ctx, hlp ), // DISTOX_UNSCALED_POINTS  point
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], FLOAT,   ctx, hlp ), // DISTOX_DRAWING_UNITS
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], B, def[ 2], FLOAT,   ctx, hlp ), // DISTOX_LABEL_SIZE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], N, def[ 3], FLOAT,   ctx, hlp ), // DISTOX_LINE_THICKNESS line
       makeLst( cat, key[ 4], tit[ 4], dsc[ 4], N, def[ 4], R.array.lineStyle, R.array.lineStyleValue, ctx, hlp ),
-      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5], INTEGER, ctx, hlp ), // DISTOX_LINE_SEGMENT
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6], FLOAT,   ctx, hlp ), // DISTOX_ARROW_LENGTH
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], A, def[ 7],          ctx, hlp ), // DISTOX_AUTO_SECTION_PT
       makeLst( cat, key[ 8], tit[ 8], dsc[ 8], E, def[ 8], R.array.lineContinue, R.array.lineContinueValue, ctx, hlp ),
-      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ),
+      makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], N, def[ 9],          ctx, hlp ), // DISTOX_AREA_BORDER
       // makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], FLOAT,   ctx, hlp ),
       // makeEdt( cat, key[11], tit[11], dsc[11], N, def[11], FLOAT,   ctx, hlp ),
       // makeEdt( cat, key[12], tit[12], dsc[12], N, def[12], FLOAT,   ctx, hlp ) 
@@ -1048,17 +1052,17 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.GEEKPLOTdesc;
     String[] def = TDPrefKey.GEEKPLOTdef;
     return new TDPref[ ] {
-      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT SHIFT
-      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT SPLIT MERGE
-      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // STYLUS SIZE
+      makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // PLOT_SHIFT
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // PLOT_SPLIT_MERGE
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // STYLUS_SIZE
       makeLst( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], R.array.backupNumber, R.array.backupNumberValue, ctx, hlp ),
-      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ), // BACKUP INTERVAL
-      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS CLEAR
-      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // AUTO XSECTIONS on export/save
-      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // SAVED STATIONS
-      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // ALWAYS UPDATE
-      makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],          ctx, hlp ), // FULL AFFINE
-      makeLst( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], INTEGER, ctx, hlp ), // BACKUP_INTERVAL
+      // makeCbx( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9],          ctx, hlp ), // BACKUPS_CLEAR
+      // makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // AUTO_XSECTIONS on export/save
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // SAVED_STATIONS
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // ALWAYS_UPDATE
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // FULL_AFFINE
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
     };
   }
 

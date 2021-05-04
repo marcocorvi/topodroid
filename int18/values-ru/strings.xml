@@ -1341,6 +1341,10 @@
   <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов в RGB</string>
   <string name="pref_acad_version_title">Версия DXF</string>
   <string name="pref_acad_version_summary">Версия DXF</string>
+  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
+  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
+  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
+  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
   <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
   <string name="pref_dxf_blocks_title">Точки сплеев в DXF</string>

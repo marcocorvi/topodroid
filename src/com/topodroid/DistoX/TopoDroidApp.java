@@ -604,12 +604,15 @@ public class TopoDroidApp extends Application
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     // ***** LOG FRAMEWORK
     TDLog.loadLogPreferences( prefHlp );
+    Log.v("DistoX", "log load prefs done");
 
     // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
+    Log.v("DistoX", "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
+    Log.v("DistoX", "load secondary done");
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
