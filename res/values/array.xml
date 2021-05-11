@@ -116,11 +116,13 @@
   <string-array name="loopClosure">
      <item name="none">None</item>
      <item name="normal">Normal</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Triangles</item>
   </string-array>
   <string-array name="loopClosureValue" translatable="false">
      <item name="none">0</item>
      <item name="normal">1</item>
+     <item name="weighted">2</item>
      <item name="triangles">3</item>
   </string-array>
 

@@ -55,6 +55,7 @@
   <string-array name="loopClosure">
      <item name="none">Nincs</item>
      <item name="normal">Normál</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Háromszögek</item>
   </string-array>
 

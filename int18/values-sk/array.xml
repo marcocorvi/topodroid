@@ -54,6 +54,7 @@
   <string-array name="loopClosure">
      <item name="none">Žiadne</item>
      <item name="normal">Normálne</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Trilaterácia</item>
   </string-array>
 

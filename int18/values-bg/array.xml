@@ -54,6 +54,7 @@
   <string-array name="loopClosure">
      <item name="none">Изключено</item>
      <item name="normal">Нормално</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Триъгълници</item>
   </string-array>
 

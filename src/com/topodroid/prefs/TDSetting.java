@@ -328,9 +328,10 @@ public class TDSetting
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
   public static boolean mSplayAsDot    = false;    // draw splays as dots
 
-  public static final int LOOP_NONE      = 0;
-  public static final int LOOP_CYCLES    = 1;
-  public static final int LOOP_TRIANGLES = 3;
+  public static final int LOOP_NONE       = 0;
+  public static final int LOOP_CYCLES     = 1;
+  public static final int LOOP_TRIANGLES  = 3;
+  public static final int LOOP_WEIGHTED   = 4;
   public static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
   
   public static final  String UNIT_LENGTH         = "meters";
@@ -614,7 +615,7 @@ public class TDSetting
   private static void setLoopClosure( int loop_closure )
   {
     mLoopClosure = loop_closure;
-    if ( mLoopClosure == LOOP_CYCLES ) {
+    if ( mLoopClosure == LOOP_CYCLES || mLoopClosure == LOOP_WEIGHTED ) {
       if ( ! TDLevel.overAdvanced ) mLoopClosure = LOOP_NONE;
     } else if ( mLoopClosure == LOOP_TRIANGLES ) {
       if ( ! TDLevel.overExpert ) mLoopClosure = LOOP_NONE;

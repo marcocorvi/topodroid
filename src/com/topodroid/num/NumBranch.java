@@ -32,8 +32,9 @@ public class NumBranch
   NumNode n1;
   NumNode n2;
   public ArrayList< NumShot > shots;
-  public double e, s, v; // east, south, vert closure-error
-  public double len;     // branch length
+  public double e, s, v;    // east, south, vert closure-error
+  public double we, ws, wv; // east, south, vert closure weights
+  public double len;        // branch length
 
   // void dump()
   // {
@@ -63,12 +64,12 @@ public class NumBranch
     // len += d;
   }
 
+  // compute the displacement vector (e,s,v) of the branch
   void computeError()
   {
-    e = 0.0f;
-    s = 0.0f;
-    v = 0.0f;
-    len = 0.0f;
+    e  = 0.0;  s  = 0.0;  v  = 0.0;
+    we = 0.0;  ws = 0.0;  wv = 0.0;
+    len = 0.0;
     for ( NumShot sh : shots ) {
       float d = sh.length();
       float b = sh.bearing(); // degrees
@@ -76,13 +77,26 @@ public class NumBranch
       len += d;
       // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRCETION
       d *= sh.mBranchDir;
-      v -= d * TDMath.sinDd( c );
+      double v0 = d * TDMath.sinDd( c );
+      v -= v0;
       double h0 = d * Math.abs( TDMath.cosDd( c ) );
-      s -= h0 * TDMath.cosDd( b );
-      e += h0 * TDMath.sinDd( b );
+      double cb = TDMath.cosDd( b );
+      double sb = TDMath.sinDd( b );
+      double s0 = h0 * cb;
+      double e0 = h0 * sb;
+      s -= s0;
+      e += e0;
+
+      wv += Math.abs( h0 ); // FIXME use derivatives
+      ws += Math.sqrt( e0 * e0 + v0 * v0 * cb * cb );
+      we += Math.sqrt( s0 * s0 + v0 * v0 * sb * sb );
       // TDLog.Log( TDLog.LOG_NUM, "Br sh " + sh.from.name + "-" + sh.to.name + " Br Err " + e + " " + s );
     }
   }
+
+  double eWeight() { return we; }
+  double sWeight() { return ws; }
+  double vWeight() { return wv; }
 
   void compensateError( double e0, double s0, double v0 )
   {

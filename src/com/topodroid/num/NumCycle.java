@@ -71,7 +71,8 @@ class NumCycle
   //   return null;
   // }
 
-  // assumes that branches errors have been computed
+  // assumes that branches displacement-vector (e,s,v) have been computed
+  // computes the total displacement along the cycle (= loop misclosure)
   void computeError()
   {
     e = 0;
@@ -85,32 +86,7 @@ class NumCycle
       s += br.s * dir;
       v += br.v * dir;
     }
-    // NumNode nd = null;
-    // for ( NumBranch br : branches ) {
-    //   if ( nd == br.n2 ) {
-    //     e -= br.e;
-    //     s -= br.s;
-    //     v -= br.v;
-    //     nd = br.n1;
-    //   } else {
-    //     e += br.e;
-    //     s += br.s;
-    //     v += br.v;
-    //     nd = br.n2;
-    //   }
-    // }
   }
-
-  // @param br   num branch
-  // @return  the index of the branch or -1 if the branch is not in this cycle
-  // int getBranchIndex( NumBranch br )
-  // {
-  //   int sz = branches.size();
-  //   for (int k = 0; k<sz; ++k ) {
-  //     if ( br == branches.get(k).mBranch ) return k;
-  //   }
-  //   return -1;
-  // }
 
   // @param br   num branch
   // @return  the direction of the branch in this cycle or 0 if the branch is not in this cycle

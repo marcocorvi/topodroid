@@ -56,6 +56,7 @@
   <string-array name="loopClosure">
      <item name="none">Żaden</item>
      <item name="normal">Normalny</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Trójkąty</item>
   </string-array>
 

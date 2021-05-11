@@ -5,6 +5,12 @@
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation</string>
 
+    <string name="desc_user_man">User manual</string>
+    <string name="desc_points">Points</string>
+    <string name="desc_lines">Lines</string>
+    <string name="desc_areas">Areas</string>
+    <string name="desc_menu">Menu</string>
+
     <string name="path11_title">IMPORTANT - Android 11</string>
     <string name="path11_text">
 Starting with Android 11 the app folders must be under "Documents".\n

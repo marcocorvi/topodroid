@@ -884,7 +884,7 @@ public class TDNum
     }
 
     // ---------------------------------- LOOP CLOSURE -------------------------------
-    if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES ) { // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED ) { // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
       TDLog.Log( TDLog.LOG_NUM, "loop closure compensation");
       compensateLoopClosure( mNodes, mShots );
   
@@ -1221,7 +1221,7 @@ public class TDNum
    *
    * checked with C++ test 
    */
-  private void makeCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
+  private void makeIndependentCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
   {
     int bs = branches.size();
     // StringBuilder sb = new StringBuilder();
@@ -1486,31 +1486,43 @@ public class TDNum
     compensateSingleLoops( singleBranches );
 
     ArrayList< NumCycle > cycles = new ArrayList<>();
-    makeCycles( cycles, branches );
+    makeIndependentCycles( cycles, branches );
 
-    for ( NumBranch branch : branches ) { // compute branches and cycles errors
-      branch.computeError();
-    }
-    for ( NumCycle cycle : cycles ) {
-      cycle.computeError();
-    }
-
-    ArrayList< NumCycle > indep_cycles = new ArrayList<>(); // independent cycles
-    for ( NumCycle cycle : cycles ) {
-      if ( ! cycle.isBranchCovered( indep_cycles ) ) {
-        indep_cycles.add( cycle );
-      }
-    }
+    ArrayList< NumCycle > indep_cycles = cycles;
+    // This is not necessary as the cycles are already independent
+    // if ( TDSetting.mLoopClosure == ? ) {
+    //   indep_cycles = new ArrayList<>(); // independent cycles
+    //   for ( NumCycle cycle : cycles ) {
+    //     if ( ! cycle.isBranchCovered( indep_cycles ) ) {
+    //       indep_cycles.add( cycle );
+    //     }
+    //   }
+    // }
 
     int ls = indep_cycles.size();
     int bs = branches.size();
 
-    float[] alpha = new float[ bs * ls ]; // cycle = row-index, branch = col-index
-    float[] aa = new float[ ls * ls ];    // 
+    double[] CE = new double[ ls ]; // closure errors : mLoopClosure = NEW
+    double[] CS = new double[ ls ];
+    double[] CV = new double[ ls ];
+    for ( NumBranch branch : branches ) { // compute branches and cycles errors
+      branch.computeError();
+    }
+    for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
+      NumCycle cy = indep_cycles.get(y);
+      cy.computeError();
+      CE[y] = cy.e;
+      CS[y] = cy.s;
+      CV[y] = cy.v;
+    }
 
+    // cycle-branch incidence matrix
+    int[] alpha = new int[ bs * ls ]; // cycle = row-index, branch = col-index
     for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
       NumCycle cy = indep_cycles.get(y);
       for (int x=0; x<bs; ++x ) {
+        alpha[ y*bs + x] = cy.getBranchDir( branches.get(x) );
+        /* old way
         NumBranch bx = branches.get(x);
         alpha[ y*bs + x] = 0.0f;
         // int k = cy.getBranchIndex( bx );
@@ -1519,60 +1531,72 @@ public class TDNum
           // alpha[ y*bs + x] = ( bx.n2 == cy.getNode(k) )? 1.0f : -1.0f;
           alpha[ y*bs + x] = dir; // cy.dirs[k];
         }
+        */
       }
     }
 
-    for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
-      for (int y2=0; y2<ls; ++y2 ) {
-        float a = 0.0f;
-        for (int x=0; x<bs; ++x ) a += alpha[ y1*bs + x] * alpha[ y2*bs + x];
-        aa[ y1*ls + y2] = a;
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED ) {
+      double[] WE = new double[ bs ]; // branch coordinates weights 
+      double[] WS = new double[ bs ];
+      double[] WV = new double[ bs ];
+      for (int x=0; x<bs; ++x ) {
+        NumBranch br = branches.get( x );
+        WE[ x ] = br.eWeight();
+        WS[ x ] = br.sWeight();
+        WV[ x ] = br.vWeight();
       }
-    }
-    // for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
-    //   StringBuilder sb = new StringBuilder();
-    //   for (int y2=0; y2<ls; ++y2 ) {
-    //     sb.append( Float.toString(aa[ y1*ls + y2]) ).append("  ");
-    //   }
-    //   TDLog.Log( TDLog.LOG_NUM, "AA " + sb.toString() );
-    // }
 
-    float det = invertMatrix( aa, ls, ls, ls );
+      double[] DE = new double[ bs ]; // branch error compensation 
+      double[] DS = new double[ bs ];
+      double[] DV = new double[ bs ];
 
-    // for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
-    //   StringBuilder sb = new StringBuilder();
-    //   for (int y2=0; y2<ls; ++y2 ) {
-    //     sb.append( Float.toString(aa[ y1*ls + y2]) ).append("  ");
-    //   }
-    //   TDLog.Log( TDLog.LOG_NUM, "invAA " + sb.toString() );
-    // }
-
-
-    for (int y=0; y<ls; ++y ) { // compute the closure compensation values
-      NumCycle cy = indep_cycles.get(y);
-      cy.ce = 0; // corrections
-      cy.cs = 0;
-      cy.cv = 0;
-      for (int x=0; x<ls; ++x ) {
-        NumCycle cx = indep_cycles.get(x);
-        cy.ce += aa[ y*ls + x] * cx.e;
-        cy.cs += aa[ y*ls + x] * cx.s;
-        cy.cv += aa[ y*ls + x] * cx.v;
+      LoopUtil.correctCycles( alpha, CE, WE, DE, bs, ls );
+      LoopUtil.correctCycles( alpha, CS, WS, DS, bs, ls );
+      LoopUtil.correctCycles( alpha, CV, WV, DV, bs, ls );
+      
+      for (int x=0; x<bs; ++x ) { // correct branches
+        NumBranch bx = branches.get(x);
+        bx.compensateError( DE[x], DS[x], DV[x] );
       }
-    }
-    
-    for (int x=0; x<bs; ++x ) { // correct branches
-      NumBranch bx = branches.get(x);
-      double e = 0;
-      double s = 0;
-      double v = 0;
-      for (int y=0; y<ls; ++y ) {
+    } else { // TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
+      double[] aa = new double[ ls * ls ];    // 
+      for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
+        for (int y2=0; y2<ls; ++y2 ) {
+          double a = 0.0;
+          for (int x=0; x<bs; ++x ) a += alpha[ y1*bs + x] * alpha[ y2*bs + x];
+          aa[ y1*ls + y2] = a;
+        }
+      }
+
+      // float det = invertMatrix( aa, ls, ls, ls );
+      double det = LoopUtil.computeInverse( aa, ls, ls, ls );
+
+      for (int y=0; y<ls; ++y ) { // compute the closure compensation values
         NumCycle cy = indep_cycles.get(y);
-        e += alpha[ y*bs + x ] * cy.ce;
-        s += alpha[ y*bs + x ] * cy.cs;
-        v += alpha[ y*bs + x ] * cy.cv;
+        cy.ce = 0; // corrections
+        cy.cs = 0;
+        cy.cv = 0;
+        for (int x=0; x<ls; ++x ) {
+          NumCycle cx = indep_cycles.get(x);
+          cy.ce += aa[ y*ls + x] * cx.e;
+          cy.cs += aa[ y*ls + x] * cx.s;
+          cy.cv += aa[ y*ls + x] * cx.v;
+        }
       }
-      bx.compensateError( -e, -s, -v );
+      
+      for (int x=0; x<bs; ++x ) { // correct branches
+        NumBranch bx = branches.get(x);
+        double e = 0;
+        double s = 0;
+        double v = 0;
+        for (int y=0; y<ls; ++y ) {
+          NumCycle cy = indep_cycles.get(y);
+          e += alpha[ y*bs + x ] * cy.ce;
+          s += alpha[ y*bs + x ] * cy.cs;
+          v += alpha[ y*bs + x ] * cy.cv;
+        }
+        bx.compensateError( -e, -s, -v );
+      }
     }
   }
 
@@ -1704,57 +1728,6 @@ public class TDNum
       ret.add( e );
     }
     return ret;
-  }
-
-  /** matrix inverse: gauss pivoting method
-   * @param a    matrix
-   * @param nr   size of rows
-   * @param nc   size of columns
-   * @param nd   row-stride
-   */
-  static private float invertMatrix( float[] a, int nr, int nc, int nd)
-  {
-    float  det_val = 1.0f;                /* determinant value */
-    int     ij, jr, ki, kj;
-    int ii  = 0;                          /* index of diagonal */
-    int ir  = 0;                          /* index of row      */
-
-    for (int i = 0; i < nr; ++i, ir += nd, ii = ir + i) {
-      det_val *= a[ii];                 /* new value of determinant */
-      /* ------------------------------------ */
-      /* if value is zero, might be underflow */
-      /* ------------------------------------ */
-      if (det_val == 0.0f) {
-        if (a[ii] == 0.0f) {
-          break;                    /* error - exit now */
-        } else {                    /* must be underflow */
-          det_val = 1.0e-15f;
-        }
-      }
-      float r = 1.0f / a[ii];   /* Calculate Pivot --------------- */
-      a[ii] = 1.0f;
-      ij = ir;                          /* index of pivot row */
-      for (int j = 0; j < nc; ++j) {
-        a[ij] = r * a[ij];
-        ++ij;                         /* index of next row element */
-      }
-      ki = i;                           /* index of ith column */
-      jr = 0;                           /* index of jth row    */
-      for (int k = 0; k < nr; ++k, ki += nd, jr += nd) {
-        if (i != k && a[ki] != 0.0f) {
-          r = a[ki];                /* pivot target */
-          a[ki] = 0.0f;
-          ij = ir;                  /* index of pivot row */
-          kj = jr;                  /* index of jth row   */
-          for (int j = 0; j < nc; ++j) { /* subtract multiples of pivot row from jth row */
-            a[kj] -= r * a[ij];
-            ++ij;
-            ++kj;
-          }
-        }
-      }
-    }
-    return det_val;
   }
 
 }

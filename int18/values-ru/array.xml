@@ -55,6 +55,7 @@
   <string-array name="loopClosure">
      <item name="none">Выкл.</item>
      <item name="normal">Обычное</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Триангуляция</item>
   </string-array>
 

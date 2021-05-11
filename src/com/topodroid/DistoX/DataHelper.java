@@ -2718,6 +2718,7 @@ public class DataHelper extends DataSetObservable
     return block;
   }
 
+  // this is actually a "select the shot"
   DBlock selectLastShot( long id, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );

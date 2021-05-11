@@ -55,6 +55,7 @@
   <string-array name="loopClosure">
      <item name="none">Aucune</item>
      <item name="normal">Normale</item>
+     <item name="weighted">Weighted</item>
      <item name="triangles">Triangles</item>
   </string-array>
 
