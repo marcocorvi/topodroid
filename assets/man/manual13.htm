@@ -432,7 +432,7 @@ Sketches can be exported as 2D DXF files with layers for each point,
 line and area type in addition to the layers of the survey data.
 The sketch items in the 2D DXF lie in the Z=0 plane.<br><p>
 
-Sketches can be exported as DXF <i>9</i> ACAD1009, <i>12</i> (R13) ACAD1012, and <i>14</i> (R14) ACAD1014.
+Sketches can be exported as DXF <i>9</i> AC1009, <i>12</i> (R13) AC1012, and <i>14</i> (R14) AC1014.
 For DXF-9 areas are exported with only the border and are not colored inside.
 <br><p>
 
@@ -477,17 +477,27 @@ Otherwise the data are exported in local coordinates and the magnetic declinatio
 
 The "point" DBF contains the fields
 <ul style="margin-top=0">
-<li>point <i>type</i></li>
+<li>point <i>name</i></li>
 <li><i>orientation</i></li>
 <li><i>level</i></li>
 <li><i>scrap</i></li>
 <li>optional <i>text</i> (truncated to 128 characters)</li>
 </ul><br>
 
+The "extra" DBF contains the fields
+<ul style="margin-top=0">
+<li>point <i>name</i></li>
+<li><i>orientation</i></li>
+<li><i>level</i></li>
+<li><i>scrap</i></li>
+<li>optional <i>text</i> (truncated to 128 characters)</li>
+<li><i>file</i></li>
+</ul><br>
+
 The "line" and "area" DBF contain the fields
 <ul style="margin-top=0">
-<li><i>class</i> that distinguishes between line and area</li>
-<li>point <i>type</i></li>
+<li><i>type</i> that distinguishes between line and area</li>
+<li>line or area <i>name</i></li>
 <li><i>level</i></li>
 <li><i>scrap</i></li>
 </ul><br>
