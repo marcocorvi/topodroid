@@ -158,11 +158,16 @@ class FixedAddDialog extends MyDialog
     return true;
   }
 
-  void setCoords( double lng, double lat, double alt )
+  // set the cordinates 
+  // @param lng longitude
+  // @param lat latitude
+  // @param alt geoid altitude
+  void setCoordsGeo( double lng, double lat, double alt )
   {
     mETlng.setText(  FixedInfo.double2string( lng ) );
     mETlat.setText(  FixedInfo.double2string( lat ) );
-    mEThell.setText( String.format( Locale.US, "%.1f", alt ) );
+    // mEThell.setText( String.format( Locale.US, "%.1f", alt ) );
+    mEThgeo.setText( String.format( Locale.US, "%.1f", alt ) );
   }
 
   @Override

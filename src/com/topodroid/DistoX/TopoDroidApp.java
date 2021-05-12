@@ -604,15 +604,15 @@ public class TopoDroidApp extends Application
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     // ***** LOG FRAMEWORK
     TDLog.loadLogPreferences( prefHlp );
-    Log.v("DistoX", "log load prefs done");
+    // Log.v("DistoX", "log load prefs done");
 
     // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
-    Log.v("DistoX", "PCmap set map done");
+    // Log.v("DistoX", "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
-    Log.v("DistoX", "load secondary done");
+    // Log.v("DistoX", "load secondary done");
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -863,14 +863,17 @@ public class TopoDroidApp extends Application
   public static void setCWD( String cwd, String cbd )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
-    TDInstance.cwd = cwd;
+    // Log.v("DistoX", "App set CWD " + cwd + " CBD " + cbd );
 
-    if ( ! TDPath.hasPath11() ) {
+    if ( TDPath.hasPath11() ) {
+      cbd = TDInstance.cbd;
+    } else {
       if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
-      if ( cbd.equals( TDInstance.cbd ) && cwd.equals( TDInstance.cwd ) ) return;
-      TDInstance.cbd = cbd;
     }
-    TDLog.Log( TDLog.LOG_PATH, "set cwd " + cwd + " " + cbd );
+    if ( cbd.equals( TDInstance.cbd ) && cwd.equals( TDInstance.cwd ) ) return;
+    TDInstance.cbd = cbd;
+    TDInstance.cwd = cwd;
+    TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + "> cbd <" + cbd + ">");
     mData.closeDatabase();
 
     TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );

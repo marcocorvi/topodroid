@@ -291,7 +291,8 @@ public class FixedActivity extends Activity
       intent.putExtra( "cs_to", cs_to ); 
       intent.putExtra( "longitude", fxd.lng );
       intent.putExtra( "latitude",  fxd.lat );
-      intent.putExtra( "altitude",  fxd.alt );
+      // intent.putExtra( "altitude",  fxd.alt );
+      intent.putExtra( "altitude",  fxd.asl ); // geoid altitude
 
       mFixedDialog = dialog;
       TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
@@ -329,7 +330,7 @@ public class FixedActivity extends Activity
             String cs  = bundle.getString( "cs_to" );
             double lng = bundle.getDouble( "longitude");
             double lat = bundle.getDouble( "latitude");
-            double alt = bundle.getDouble( "altitude");
+            double alt = bundle.getDouble( "altitude"); // geoid altitude
 	    long   n_dec = bundle.containsKey( "decimals" )? bundle.getLong( "decimals" ) : 2;
             TopoDroidApp.mData.updateFixedCS(  mFixedDialog.getFixedId(), TDInstance.sid, cs, lng, lat, alt, n_dec );
             mFixedDialog.setConvertedCoords( cs, lng, lat, alt, n_dec );
@@ -340,10 +341,10 @@ public class FixedActivity extends Activity
         if ( mFixedAddDialog != null ) {
           Bundle bundle = intent.getExtras();
           if ( bundle != null ) {
-            mFixedAddDialog.setCoords(
+            mFixedAddDialog.setCoordsGeo(
               bundle.getDouble( "longitude"),
               bundle.getDouble( "latitude"),
-              bundle.getDouble( "altitude") );
+              bundle.getDouble( "altitude") ); // geoid altitude
           }
           mFixedAddDialog = null;
         }

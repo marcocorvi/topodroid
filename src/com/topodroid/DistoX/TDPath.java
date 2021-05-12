@@ -194,7 +194,6 @@ public class TDPath
   // when this is called basedir exists and is writable
   static boolean checkBasePath( String path, String basedir )
   {
-    // Log.v("DistoX-PATH11", "check base path: BASE " + PATH_BASEDIR + " basedir " + basedir + " path " + path );
     setBaseDir( basedir );
     File dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
     if ( ! dir.exists() ) {
@@ -205,6 +204,7 @@ public class TDPath
     try {
       ret = dir.exists() && dir.isDirectory() && dir.canWrite();
     } catch ( SecurityException e ) { }
+    // Log.v( "DistoX", "check base path: " + ret + ": base <" + PATH_BASEDIR + "> basedir <" + basedir + "> path <" + path + ">" );
     return ret;
   }
 
@@ -222,12 +222,17 @@ public class TDPath
   static boolean moveToPath11()
   { 
     if ( BELOW_ANDROID_4 ) return false;
-    // Log.v("DistoX-PATH11", "move to path11");
     File path11 = TDFile.getFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
-    if ( path11.exists() ) return false;
+    if ( path11.exists() ) {
+      // Log.v( "DistoX", "move to path11. File exists <" + path11.getPath() + ">" );
+      return false;
+    }
 
     File path = TDFile.getFile( PATH_BASE );
-    if ( ! path.exists() ) return false;
+    if ( ! path.exists() ) {
+      // Log.v( "DistoX", "move to path11. Base does not exists <" + PATH_BASE + ">" );
+      return false;
+    }
 
     File dir11 = TDFile.getFile( EXTERNAL_STORAGE_PATH_11 );
     if ( ! dir11.exists() ) dir11.mkdirs();
@@ -247,21 +252,20 @@ public class TDPath
     PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
     PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
     PATH_BASE    = PATH_DEFAULT;
-    TDLog.Log( TDLog.LOG_PATH, "set basedir path " + PATH_BASEDIR );
-    // Log.v("DistoX-PATH11", "basedir " + basedir + "has path11 " + hasPath11() + " " + PATH_BASEDIR );
+    // Log.v( "DistoX", "set basedir: basedir <" + basedir + "> pathbase <" + PATH_BASEDIR + ">" );
   }
 
   private static void setDefault()
   {
     PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
     PATH_BASE    = PATH_DEFAULT;
-    TDLog.Log( TDLog.LOG_PATH, "set default path " + PATH_DEFAULT );
+    // Log.v( "DistoX", "set default path <" + PATH_DEFAULT + ">" );
   }
 
   private static void setBase()
   {
     PATH_BASE    = PATH_DEFAULT;
-    TDLog.Log( TDLog.LOG_PATH, "set base path " + PATH_BASE );
+    // Log.v( "DistoX", "set base path <" + PATH_BASE + ">" );
   }
  
   public static String getBaseDir() { return PATH_BASEDIR; }
@@ -269,10 +273,11 @@ public class TDPath
  
   static void setPaths( String path, String base )
   {
+    // Log.v("DistoX", "set paths [0]: path " + path + " base " + base );
     if ( PATH_BASEDIR == null ) {
       // PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
       setBaseDir( TDInstance.context.getExternalFilesDir( null ).getPath() );
-      // Log.v("DistoX-PATH11", "set paths: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+      // Log.v("DistoX", "set paths [1]: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
       setDefaultPaths();
     }
 
@@ -287,7 +292,7 @@ public class TDPath
         if ( ! dir.exists() ) dir.mkdirs();
         if ( dir.exists() && dir.canWrite() ) {
           setBaseDir( base );
-          // Log.v("DistoX-PATH11", "[2] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+          // Log.v("DistoX", "set paths [2]: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
           setDefaultPaths();
         }
       } catch ( SecurityException e ) { }
@@ -295,10 +300,11 @@ public class TDPath
       // boolean b2 = android.os.Environment.isExternalStorageLegacy( dir );
       // Log.v("DistoX-PATH", "ext storage legacy base " + b2 );
     }
-    // TDLog.Log( TDLog.LOG_PATH, "set paths. path basedir " + PATH_BASEDIR );
+    // Log.v( "DistoX", "set paths [3]. BaseDir " + PATH_BASEDIR );
     if ( path != null ) {
       String cwd = PATH_BASEDIR + "/" + path;
       dir = TDFile.getFile( PATH_BASEDIR, path ); // DistoX-SAF
+      // Log.v( "DistoX", "set paths [4]. Dir " + dir.getPath()  );
       try {
         if ( ! dir.exists() ) dir.mkdirs();
         //   if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
@@ -308,11 +314,11 @@ public class TDPath
     }
 
     // DistoX-SAF comment this block
-    TDLog.Log( TDLog.LOG_PATH, "set paths. path base " + PATH_BASE );
+    // Log.v( "DistoX", "set paths [5]. path base " + PATH_BASE );
     // Log.v( "DistoX-SAF", "set paths. path base " + PATH_BASE );
     dir = TDFile.getFile( PATH_BASE );
     if ( ! dir.exists() ) {
-      // Log.v("DistoX-SAF", "path base " + PATH_BASE + " does not exist" );
+      // Log.v("DistoX", "set paths [6]. path base " + PATH_BASE + " does not exist" );
       if ( ! dir.mkdirs() ) {
         TDLog.Error( "failed mkdir " + PATH_BASE );
         setBase();
@@ -323,7 +329,7 @@ public class TDPath
     // APP_TLX_PATH = PATH_BASE + "tlx/";
     // checkDirs( APP_TLX_PATH );
 
-    // Log.v("DistoX-PATH11", "[3] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
+    // Log.v("DistoX", "Set paths [7] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
 
     PATH_TDCONFIG = PATH_BASE + "thconfig" + File.separator; // FIXME checkDirs( PATH_TDCONFIG );
     PATH_THCONFIG = PATH_TDCONFIG;
@@ -368,8 +374,7 @@ public class TDPath
 
   static void setDefaultPaths()
   {
-    // Log.v("DistoX-SAF", "default path " + PATH_DEFAULT );
-    // Log.v("DistoX-PATH11", "set default paths from " + PATH_DEFAULT );
+    // Log.v("DistoX", "set default paths under <" + PATH_DEFAULT + ">" );
 
     PATH_BIN  = PATH_DEFAULT + "bin" + File.separator;
     // PATH_MAN  = PATH_DEFAULT + "man" + File.separator;   
@@ -393,7 +398,7 @@ public class TDPath
 
   private static void checkDefaultPaths()
   {
-    // Log.v("DistoX", "check default paths from " + PATH_DEFAULT );
+    // Log.v("DistoX", "check default paths under " + PATH_DEFAULT );
     checkDirs( PATH_BIN );
     // checkDirs( PATH_MAN );
     checkDirs( PATH_CCSV );

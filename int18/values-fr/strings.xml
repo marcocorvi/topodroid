@@ -736,9 +736,9 @@ Tap "Close" not to take any action.
     <string name="layer_fill">remplissages</string>
     <string name="layer_ceil">Plafond</string>
     <!-- TODO string name="layer_arti">Artifacts</string -->
-    <string name="layer_form">Formes</string>
-    <string name="layer_water">Eau</string>
-    <string name="layer_text">Texte</string>
+    <!-- UNUSED string name="layer_form">Formes</string -->
+    <!-- UNUSED string name="layer_water">Eau</string -->
+    <!-- UNUSED string name="layer_text">Texte</string -->
 
 
     <!-- UNUSED string name="remote_title">Contrôle à distance</string -->

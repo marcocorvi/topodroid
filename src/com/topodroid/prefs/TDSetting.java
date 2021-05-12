@@ -943,12 +943,12 @@ public class TDSetting
     mAcadVersion  = tryInt(   prefs,       keyExpDxf[1],      defExpDxf[1] );  // DISTOX_ACAD_VERSION choice: 9, 13, 16
     mAcadSpline   =  prefs.getBoolean(     keyExpDxf[2], bool(defExpDxf[2]) ); // DISTOX_ACAD_SPLINE
     mDxfReference =  prefs.getBoolean(     keyExpDxf[3], bool(defExpDxf[3]) ); // DISTOX_DXF_REFERENCE
-    Log.v("DistoX", "load secondary export DXF done");
+    // Log.v("DistoX", "load secondary export DXF done");
   
     String[] keyExpShp = TDPrefKey.EXPORT_SHP;
     String[] defExpShp = TDPrefKey.EXPORT_SHPdef;
     mShpGeoref   =  prefs.getBoolean(     keyExpShp[0], bool(defExpShp[0]) ); // DISTOX_SHP_GEOREF
-    Log.v("DistoX", "load secondary export SHP done");
+    // Log.v("DistoX", "load secondary export SHP done");
 
     String[] keyData = TDPrefKey.DATA;
     String[] defData = TDPrefKey.DATAdef;
@@ -1005,7 +1005,7 @@ public class TDSetting
     mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
     mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SECTION_SPLAY
-    Log.v("DistoX", "load splay geek done");
+    // Log.v("DistoX", "load splay geek done");
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1020,7 +1020,7 @@ public class TDSetting
     mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
     mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
-    Log.v("DistoX", "load line geek done");
+    // Log.v("DistoX", "load line geek done");
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1040,7 +1040,7 @@ public class TDSetting
     }
     mUnitGrid       = tryFloat(  prefs, keyUnits[2], defUnits[2] );      // DISTOX_UNIT_GRID
     mUnitMeasure    = tryFloat(  prefs, keyUnits[3], defUnits[3] );      // DISTOX_UNIT_MEASURE
-    Log.v("DistoX", "units grid " + mUnitGrid );
+    // Log.v("DistoX", "units grid " + mUnitGrid );
   
     String[] keyAcc = TDPrefKey.ACCURACY;
     String[] defAcc = TDPrefKey.ACCURACYdef;
