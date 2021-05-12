@@ -55,7 +55,7 @@
   <string-array name="loopClosure">
      <item name="none">Nincs</item>
      <item name="normal">Normál</item>
-     <item name="weighted">Weighted</item>
+     <item name="weighted">Súlyozott</item>
      <item name="triangles">Háromszögek</item>
   </string-array>
 
@@ -67,7 +67,7 @@
   <string-array name="wallsType">
      <item name="none">Nincs</item>
      <item name="convex">Konvex</item>
-     <item name="delaunay">delaunay</item>
+     <item name="delaunay">Delaunay</item>
   </string-array>
 
   <string-array name="zoomCtrl">

@@ -1374,10 +1374,10 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_bitmap_bgcolor_summary">Vázlatok PNG képeinek háttérszíne</string>
   <string name="pref_acad_version_title">DXF verzió</string>
   <string name="pref_acad_version_summary">DXF verzió</string>
-  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
-  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
-  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
+  <string name="pref_acad_spline_title">DXF splineok</string>
+  <string name="pref_acad_spline_summary">DXF interpolált görbék</string>
+  <string name="pref_dxf_reference_title">DXF referencia</string>
+  <string name="pref_dxf_reference_summary">X-Y tengely exportálása a DXF vázlatba</string>
   <!-- UNUSED string name="pref_dxf_scale_title">DXF vázlat méretaránya</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">DXF vázlat méretarányának értéke</string -->
   <string name="pref_dxf_blocks_title">Segédmérés végpontjai</string>

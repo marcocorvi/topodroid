@@ -1341,11 +1341,11 @@
   <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов в RGB</string>
   <string name="pref_acad_version_title">Версия DXF</string>
   <string name="pref_acad_version_summary">Версия DXF</string>
-  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
-  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
-  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
-  <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
+  <string name="pref_acad_spline_title">DXF сплайны</string>
+  <string name="pref_acad_spline_summary">DXF кубическая интерполяция</string>
+  <string name="pref_dxf_reference_title">DXF ссылки</string>
+  <string name="pref_dxf_reference_summary">X-Y области DXF экспорт абрисов</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
   <string name="pref_dxf_blocks_title">Точки сплеев в DXF</string>
   <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
