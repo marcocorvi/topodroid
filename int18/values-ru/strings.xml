@@ -1345,7 +1345,7 @@
   <string name="pref_acad_spline_summary">DXF кубическая интерполяция</string>
   <string name="pref_dxf_reference_title">DXF ссылки</string>
   <string name="pref_dxf_reference_summary">X-Y области DXF экспорт абрисов</string>
-  <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">Масштаб абриса в DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Фактор масштаба абриса DXF</string -->
   <string name="pref_dxf_blocks_title">Точки сплеев в DXF</string>
   <string name="pref_dxf_blocks_summary">Точки окончаний боковых замеров в экскорте в DXF</string>
