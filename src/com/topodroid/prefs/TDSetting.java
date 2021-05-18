@@ -1401,9 +1401,7 @@ public class TDSetting
       mTimerWait        = tryIntValue( hlp, k, v, def[ 9] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      mBeepVolume       = tryIntValue( hlp, k, v, def[10] );
-      if ( mBeepVolume <   0 ) { mBeepVolume =   0; ret =   TDString.ZERO; }
-      if ( mBeepVolume > 100 ) { mBeepVolume = 100; ret = "100"; }
+      ret = setBeepVolume( tryIntValue( hlp, k, v, def[10] ) );
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
@@ -1418,6 +1416,14 @@ public class TDSetting
     }
     if ( ret != null ) hlp.update( k, ret );
     return ret;
+  }
+
+  private static String setBeepVolume( int volume )
+  {
+    if ( volume <   0 ) { mBeepVolume =   0; return TDString.ZERO; }
+    if ( volume > 100 ) { mBeepVolume = 100; return "100"; }
+    mBeepVolume = volume;
+    return null;
   }
 
   private static String updatePrefGeekPlot( TDPrefHelper hlp, String k, String v )
@@ -3036,7 +3042,7 @@ public class TDSetting
           if ( all ) {
             if ( vals.length > 4 ) {
               mTimerWait  = getInt( vals, 2, 10 ); setPreference( editor, "DISTOX_SHOT_TIMER",  mTimerWait );
-              mBeepVolume = getInt( vals, 4, 50 ); setPreference( editor, "DISTOX_BEEP_VOLUME", mBeepVolume );
+              setBeepVolume( getInt( vals, 4, 50 ) ); setPreference( editor, "DISTOX_BEEP_VOLUME", mBeepVolume );
             }
           }
           continue;

@@ -19,6 +19,8 @@ import android.os.Vibrator;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 
+import android.util.Log;
+
 public class TDFeedback
 {
   static boolean mFeedbackOn = false;
@@ -91,22 +93,23 @@ public class TDFeedback
 
   private static void ringTheBell( int duration )
   {
-    // Log.v("DistoXX", "bell ...");
-    // ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, ToneGenerator.MAX_VOLUME );
-    ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
-    // for ( int i=0; i<2; ++i ) {
+    try {
+      ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
       toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
-      // TDUtil.slowDown( duration );
-    // }
+    } catch ( RuntimeException e ) {
+      Log.e("DistoX", "ring the bell: exception " + e.getMessage() );
+    }
   }
 
   private static void vibrate( Context ctx, int duration )
   {
-    Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
     try {
+      Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
       vibrator.vibrate(duration);
     } catch ( NullPointerException e ) {
-      // TODO
+      Log.e("DistoX", "vibrate: null pointer " + e.getMessage() );
+    } catch ( RuntimeException e ) {
+      Log.e("DistoX", "vibrate: exception " + e.getMessage() );
     }
   }
 
