@@ -641,9 +641,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="hide_splay">Segéd mérések</string>
 
     <string name="plan">ALAPRAJZ</string>
-    <string name="extended">HOSSZMETSZET</string>
-    <string name="profile">VET. HOSSZMETSZET </string>
-    <string name="extended_profile">Kiterített Hosszmetszet</string>
+    <string name="extended">KIT.OLDALNÉZET</string>
+    <string name="profile">VET.OLDALNÉZET</string>
+    <string name="extended_profile">Kiterített Oldalnézet</string>
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <string name="h_section">Horizontális keresztszelvény</string>
     <!-- UNUSED string name="landscape">landscape</string -->
