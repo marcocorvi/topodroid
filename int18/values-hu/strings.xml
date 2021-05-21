@@ -331,7 +331,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
+    <string name="outdated_cave3d">Cave3D verzió túl régi</string>
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
