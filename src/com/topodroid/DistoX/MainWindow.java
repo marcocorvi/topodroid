@@ -277,11 +277,18 @@ public class MainWindow extends Activity
           TDLog.Error( "Td Manager activity not started" );
         }
       } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
-        try {
-          intent = new Intent( "Cave3D.intent.action.Launch" );
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
+        int check = TDandroid.checkCave3Dversion( this );
+        if ( check < 0 ) {
           TDToast.makeBad( R.string.no_cave3d );
+        } else if ( check == 0 ) {
+          try {
+            intent = new Intent( "Cave3D.intent.action.Launch" );
+            startActivity( intent );
+          } catch ( ActivityNotFoundException e ) {
+            TDToast.makeBad( R.string.no_cave3d );
+          }
+        } else {
+          TDToast.makeBad( R.string.outdated_cave3d );
         }
       }
     }

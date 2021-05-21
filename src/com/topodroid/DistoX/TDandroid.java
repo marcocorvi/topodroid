@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
@@ -25,6 +26,8 @@ import android.content.Context;
 import java.lang.reflect.Method;
 import android.os.Build;
 import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageInfo;
 
 import android.hardware.Sensor;
 import android.widget.Button;
@@ -121,6 +124,20 @@ public class TDandroid
       android.os.Process.killProcess( android.os.Process.myPid() );
       System.exit( 1 );
     }
+  }
+
+  // return: 0 ok, 1 no, <0 error
+  static int checkCave3Dversion( Context context )
+  {
+    PackageManager pm = context.getPackageManager();
+    try { 
+      PackageInfo info = pm.getPackageInfo( "com.topodroid.Cave3D", PackageManager.GET_META_DATA );
+      if ( info == null ) return -2;
+      return ( info.versionCode < TDVersion.MIN_CAVE3D_VERSION )? 1 : 0;
+    } catch ( NameNotFoundException e) {
+      // nothing
+    }
+    return -1;
   }
 
   static boolean canRun( Context context, Activity activity )

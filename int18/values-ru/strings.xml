@@ -326,6 +326,7 @@
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
     <string name="no_cave3d">Cave3D не установлен</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Нет сокращения данных</string>
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>

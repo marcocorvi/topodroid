@@ -326,6 +326,7 @@ Tap "Close" not to take any action.
     <string name="no_calibration">Не е избрана калибрация</string>
     <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>

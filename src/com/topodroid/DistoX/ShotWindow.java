@@ -805,13 +805,20 @@ public class ShotWindow extends Activity
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
     } else if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic && p++ == pos ) { // 3D
       // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
-        try {
-          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
-          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
-          mActivity.startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
+        int check = TDandroid.checkCave3Dversion( this );
+        if ( check < 0 ) {
           TDToast.makeBad( R.string.no_cave3d );
+        } else if ( check == 0 ) {
+          try {
+            Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+            intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
+            intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+            mActivity.startActivity( intent );
+          } catch ( ActivityNotFoundException e ) {
+            TDToast.makeBad( R.string.no_cave3d );
+          }
+        } else {
+          TDToast.makeBad( R.string.outdated_cave3d );
         }
       // }
     } else if ( TDLevel.overNormal && (! TDInstance.isDivingMode()) && p++ == pos ) { // DEVICE

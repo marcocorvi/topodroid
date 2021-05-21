@@ -331,6 +331,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calibration">bak wybranej kalibracji</string>
     <string name="no_capture_app">Brak apki do robienia zdjęć</string>
     <string name="no_cave3d">brak zainstalowanego Cave3D</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">brak redukcj danych</string>
     <string name="no_db">brak bazy danych</string>
     <string name="no_device_address">Urządzenie nie wybrane</string>

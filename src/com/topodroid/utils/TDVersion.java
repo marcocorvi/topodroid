@@ -40,6 +40,8 @@ public class TDVersion
   public static final int PACKET_DATABASE_VERSION = 1;
   public static final int PACKET_DATABASE_VERSION_MIN = 1; // was 14
 
+  public static final int MIN_CAVE3D_VERSION = 400040;
+
   // TopoDroid version: this is loaded from the Manifest
   public static String VERSION = "0.0.0"; 
   public static int VERSION_CODE = 0;

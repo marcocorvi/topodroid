@@ -329,6 +329,7 @@ Tap "Close" not to take any action.
     <string name="no_calibration">无选择校准</string>
     <string name="no_capture_app">无图像捕捉应用</string>
     <string name="no_cave3d">Cave3D 未安装</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>

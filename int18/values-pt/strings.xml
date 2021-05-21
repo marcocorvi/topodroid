@@ -327,6 +327,7 @@ Tap "Close" not to take any action.
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Nenhuma redução nos dados</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>

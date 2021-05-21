@@ -338,6 +338,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calibration">No calibration selected</string>
     <string name="no_capture_app">No image capture app</string>
     <string name="no_cave3d">Cave3D not installed</string>
+    <string name="outdated_cave3d">Cave3D version is too old</string>
     <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>

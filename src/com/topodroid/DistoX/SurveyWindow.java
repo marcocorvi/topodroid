@@ -406,19 +406,26 @@ public class SurveyWindow extends Activity
   private void do3D()
   {
     // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
-      try {
-        Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
-        intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
-          // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()
-          // Uri.Builder uri_builder = new Uri.Builder();
-          // uri_builder.path( TDPath.getPathBase() ); 
-          // Uri uri = uri_builder.build();
-          // Log.v("DistoX-URI", "TopoDroid " + uri.toString() );
-          // intent.putExtra( "BASE_URI", uri.toString() );
-        mActivity.startActivity( intent );
-      } catch ( ActivityNotFoundException e ) {
+      int check = TDandroid.checkCave3Dversion( this );
+      if ( check < 0 ) {
         TDToast.makeBad( R.string.no_cave3d );
+      } else if ( check == 0 ) {
+        try {
+          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
+          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+            // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()
+            // Uri.Builder uri_builder = new Uri.Builder();
+            // uri_builder.path( TDPath.getPathBase() ); 
+            // Uri uri = uri_builder.build();
+            // Log.v("DistoX-URI", "TopoDroid " + uri.toString() );
+            // intent.putExtra( "BASE_URI", uri.toString() );
+          mActivity.startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.makeBad( R.string.no_cave3d );
+        }
+      } else {
+        TDToast.makeBad( R.string.outdated_cave3d );
       }
     // }
   }

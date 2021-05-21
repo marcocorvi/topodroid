@@ -326,6 +326,7 @@ Tap "Close" not to take any action.
     <string name="no_calibration">Calibrare neselectată</string>
     <string name="no_capture_app">Lipsește aplicația de captură de imagine</string>
     <string name="no_cave3d">Cave3D nu este instalat</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>
     <string name="no_device_address">Dispoziv neselectat</string>

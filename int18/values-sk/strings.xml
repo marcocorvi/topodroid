@@ -332,6 +332,7 @@ Tap "Close" not to take any action.
     <string name="no_calibration">Nie je vybratá žiadna kalibrácia</string>
     <string name="no_capture_app">Žiadna aplikácia pre fotenie</string>
     <string name="no_cave3d">Cave3D nie je nainštalovaná</string>
+    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Žiadna redukcia dát</string>
     <string name="no_db">Žiadna databáza</string>
     <string name="no_device_address">Zariadenie nie je vybraté</string>
