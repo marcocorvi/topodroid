@@ -331,7 +331,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
+    <string name="outdated_cave3d">Cave3D verzió túl régi</string>
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
@@ -641,9 +641,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="hide_splay">Segéd mérések</string>
 
     <string name="plan">ALAPRAJZ</string>
-    <string name="extended">HOSSZMETSZET</string>
-    <string name="profile">VET. HOSSZMETSZET </string>
-    <string name="extended_profile">Kiterített Hosszmetszet</string>
+    <string name="extended">KIT.OLDALNÉZET</string>
+    <string name="profile">VET.OLDALNÉZET</string>
+    <string name="extended_profile">Kiterített Oldalnézet</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <!-- TODO string name="v_section">V-SECTION</string -->
     <string name="h_section">Horizontális keresztszelvény</string>
