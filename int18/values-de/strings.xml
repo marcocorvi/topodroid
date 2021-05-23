@@ -644,7 +644,8 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="extended">SEITENRISS</string>
     <string name="profile">PROJIZIEREN</string>
     <string name="extended_profile">Erweitertes Profil</string>
-    <!-- UNUSED string name="v_section">V-PROFIL</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">V-PROFIL</string>
     <string name="h_section">H-PROFIL</string>
     <!-- UNUSED string name="landscape">Querformat</string -->
 

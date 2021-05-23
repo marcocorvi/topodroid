@@ -45,6 +45,8 @@ import android.util.Log;
 
 public class TDFile
 {
+  public final static Object mFilesLock = new Object();
+
   public interface FileFilter 
   {
     public boolean accept( TDFile doc );
@@ -669,6 +671,30 @@ public class TDFile
     }
   }
 
+  public static void clearCache()
+  {
+    try {
+      File cache = TDInstance.context.getCacheDir();
+      recursiveDeleteDir( cache );
+    } catch ( Exception e ) {
+      // TODO
+    }
+  }
+
+  public static boolean recursiveDeleteDir( File dir )
+  {
+    if ( dir == null ) return false;
+    if ( dir.isFile() ) return dir.delete();
+    if ( dir.isDirectory() ) {
+      String[] children = dir.list();
+      for ( int i=0; i < children.length; ++i ) {
+        if ( ! recursiveDeleteDir( new File( dir, children[i] ) ) ) return false;
+      }
+      return dir.delete();
+    }
+    return false;
+  }
+
   public static void deleteFile( String pathname ) 
   { 
     deleteFile( getFile( pathname ) ); // DistoXFile;
@@ -710,6 +736,21 @@ public class TDFile
     if ( ! f.isDirectory() ) {
       if ( ! f.mkdirs() ) TDLog.Error("Mkdir failed " + pathname );
     }
+  }
+
+  public static boolean renameTempFile( File temp, File file )
+  {
+    boolean ret = false;
+    synchronized( mFilesLock ) {
+      if ( file.exists() ) file.delete();
+      ret = temp.renameTo( file );
+    }
+    return ret;
+  }
+
+  public static boolean renameTempFile( File temp, String pathname )
+  { 
+    return renameTempFile( temp, getFile( pathname ) );
   }
 
   // -----------------------------------------------------------------------------

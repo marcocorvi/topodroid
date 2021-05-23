@@ -240,11 +240,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
           File file0 = TDFile.getFile( filename1 );
           if ( file0.exists() ) {
-            if ( ! file0.renameTo( TDFile.getFile( filename1 + TDPath.BCK_SUFFIX ) ) ) {
+            if ( ! TDFile.renameTempFile( file0, filename1 + TDPath.BCK_SUFFIX ) ) {
               TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
             }
           }
-          if ( ! file1.renameTo( TDFile.getFile( filename1 ) ) ) {
+          if ( ! TDFile.renameTempFile( file1, filename1 ) ) {
             TDLog.Error("failed rename " + filename1 );
           }
         }

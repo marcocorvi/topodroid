@@ -642,7 +642,8 @@ Tap "Close" not to take any action.
     <string name="extended">延展的剖面图</string>
     <string name="profile">投影剖面图</string>
     <string name="extended_profile">延展剖面图</string>
-    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <!-- TODO string name="v_section">V-SECTION</string -->
     <string name="h_section">H-截面图</string>
     <!-- UNUSED string name="landscape">landscape</string -->
 

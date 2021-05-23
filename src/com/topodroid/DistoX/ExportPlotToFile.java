@@ -97,7 +97,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
             // FIXME too-big synch
-            synchronized ( TDPath.mFilesLock ) {
+            synchronized ( TDFile.mFilesLock ) {
 	      DrawingShp.writeShp( filename, mCommand, mType, mStation );
             }
 	  } else {
@@ -122,7 +122,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
             }
             bw.flush();
             bw.close();
-            synchronized( TDPath.mFilesLock ) { 
+            synchronized( TDFile.mFilesLock ) { 
               TDPath.checkPath( filename );
               File file = TDFile.getFile( filename );
               temp.renameTo( file );

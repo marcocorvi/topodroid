@@ -146,8 +146,8 @@ class PlotListDialog extends MyDialog
         if ( PlotType.isProfile( item.type ) )
         {
           String name = item.name.substring( 0, item.name.length() - 1 );
-          mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( (int)PlotType.PLOT_PLAN, res ) ) );
-          mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( item.type, res ) ) );
+          mArrayAdapter.add( PlotType.plotTypeString( name, (int)PlotType.PLOT_PLAN, res ) );
+          mArrayAdapter.add( PlotType.plotTypeString( name, item.type, res ) );
           mPlots += 2;
         }
       }
@@ -155,7 +155,7 @@ class PlotListDialog extends MyDialog
         if ( slist != null ) {
           for ( Sketch3dInfo sketch : slist ) {
             mArrayAdapter.add(
-              String.format("<%s> %s", sketch.name, PlotType.plotTypeString( (int)PlotType.PLOT_SKETCH_3D, res ) ) );
+              String.format( PlotType.plotTypeString( name, (int)PlotType.PLOT_SKETCH_3D, res ) );
           }
         }
        * END_SKETCH_3D */

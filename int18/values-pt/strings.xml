@@ -629,7 +629,8 @@ Tap "Close" not to take any action.
     <string name="extended">RETIFICADO</string>
     <string name="profile">LONGITUDINAL</string>
     <string name="extended_profile">Perfil retificado</string>
-    <!-- UNUSED string name="v_section">CORTE V</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">CORTE V</string>
     <string name="h_section">CORTE H</string>
     <!-- UNUSED string name="landscape">paisagem</string -->
 

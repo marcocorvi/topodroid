@@ -630,7 +630,8 @@ Tap "Close" not to take any action.
     <string name="extended">PROFIL</string>
     <string name="profile">PROIECȚIE</string>
     <string name="extended_profile">Profil extins</string>
-    <!-- UNUSED string name="v_section">SECȚIUNE-V</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">SECȚIUNE-V</string>
     <string name="h_section">SECȚIUNE-H</string>
     <!-- UNUSED string name="landscape">mod peisaj</string -->
 

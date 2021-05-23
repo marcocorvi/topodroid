@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 
+import android.util.Log;
+
 import java.io.File;
 import java.io.FileOutputStream;
 
@@ -41,6 +43,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        mFullName = name;
        mToast    = toast;
        // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
+       Log.v("DistoX", "Export Bitmap To File " + mFullName );
     }
 
     @Override
@@ -60,11 +63,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         out.close();
 
         filename = TDPath.getPngFileWithExt( mFullName );
-        synchronized( TDPath.mFilesLock ) {
-          TDPath.checkPath( filename );
-          File file = TDFile.getFile( filename );
-          temp.renameTo( file );
-        }
+        TDPath.checkPath( filename );
+        TDFile.renameTempFile( temp, filename );
         return true;
       } catch (Exception e) {
         e.printStackTrace();

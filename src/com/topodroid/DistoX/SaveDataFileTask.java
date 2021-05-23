@@ -71,7 +71,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     if ( mType == TDConst.DISTOX_EXPORT_SHP ) {
       pathname = TDPath.getShpPath( mSurvey );
       // FIXME too-big synch
-      synchronized ( TDPath.mFilesLock ) {
+      synchronized ( TDFile.mFilesLock ) {
         filename = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, pathname );
       }
     } else { 
@@ -250,10 +250,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
       } else if ( ret == 2 ) {
         filename = "";
       }
-      synchronized( TDPath.mFilesLock ) {
-        File file = TDFile.getFile( pathname );
-        temp.renameTo( file );
-      }
+      TDFile.renameTempFile( temp, pathname );
     }
     return filename;
   }

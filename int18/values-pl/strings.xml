@@ -640,7 +640,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="extended">PRZEKRÓJ</string>
     <string name="profile">PROJEKT.</string>
     <string name="extended_profile">Przejkrój rozwinięty</string>
-    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <!-- TODO string name="v_section">V-SECTION</string -->
     <string name="h_section">Przekrój poziomy</string>
     <!-- UNUSED string name="landscape">landscape</string -->
 

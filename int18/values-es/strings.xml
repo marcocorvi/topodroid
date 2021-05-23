@@ -634,7 +634,8 @@ Tap "Close" not to take any action.
     <string name="extended">Alzado</string>
     <string name="extended_profile">Alzado desarrollado</string>
     <string name="profile">PROYECTO</string>
-    <!-- UNUSED string name="v_section">V-sección</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">V-sección</string>
     <string name="h_section">H-sección</string>
     <!-- UNUSED string name="landscape">Paisaje</string -->
 

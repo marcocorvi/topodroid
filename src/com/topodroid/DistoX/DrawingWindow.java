@@ -1287,6 +1287,7 @@ public class DrawingWindow extends ItemDrawer
         // resetReference( mPlot1 );
         // mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         // return;
+        Log.v("DistoX", "PLAN offset at " + mOffset.x + " " + mOffset.y );
       } else if ( type == PlotType.PLOT_EXTENDED ) {
         mZoom     = mPlot2.zoom;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.h, st.v );
@@ -1294,6 +1295,7 @@ public class DrawingWindow extends ItemDrawer
         saveReference( mPlot2, mPid2 );
         // resetReference( mPlot2 );
         // return;
+        Log.v("DistoX", "EXT offset at " + mOffset.x + " " + mOffset.y );
       } else { // if ( type == PlotType.PLOT_PROJECTED ) 
         double cosp = TDMath.cosDd( mPlot2.azimuth );
         double sinp = TDMath.sinDd( mPlot2.azimuth );
@@ -1303,6 +1305,7 @@ public class DrawingWindow extends ItemDrawer
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( xx, st.v );
         saveReference( mPlot2, mPid2 );
         // return;
+        Log.v("DistoX", "PROJ offset at " + mOffset.x + " " + mOffset.y );
       }
     }
   }
@@ -6386,8 +6389,10 @@ public class DrawingWindow extends ItemDrawer
     if ( st == null ) {
       TDToast.makeBad( R.string.missing_station );
     } else {
-      moveTo( mPlot1.type, station );
-      moveTo( mPlot2.type, station );
+      Log.v("DistoX", "center at station " + station );
+      // moveTo( mPlot1.type, station );
+      // moveTo( mPlot2.type, station );
+      moveTo( (int)mType, station );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }

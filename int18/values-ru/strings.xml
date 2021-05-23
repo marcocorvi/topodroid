@@ -630,7 +630,8 @@
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
     <string name="extended_profile">Разрез-развертка</string>
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
-    <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">Верт-СЕЧЕНИЕ</string>
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
     <!-- UNUSED string name="landscape">альбомная</string -->
 

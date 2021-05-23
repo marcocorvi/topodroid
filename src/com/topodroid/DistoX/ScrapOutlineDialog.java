@@ -97,7 +97,7 @@ class ScrapOutlineDialog extends MyDialog
     mArrayAdapter.clear();
     for ( PlotInfo item : mPlots ) {
       String name = item.name.substring( 0, item.name.length() - 1 );
-      mArrayAdapter.add( String.format("<%s> %s", name, PlotType.plotTypeString( (int)PlotType.PLOT_PLAN, res ) ) );
+      mArrayAdapter.add( PlotType.plotTypeString( name, (int)PlotType.PLOT_PLAN, res ) );
     }
     mList.setAdapter( mArrayAdapter );
   }

@@ -13,6 +13,7 @@ package com.topodroid.prefs;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
@@ -2446,6 +2447,7 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
+    TDFile.clearCache();
     TDLocale.setLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {

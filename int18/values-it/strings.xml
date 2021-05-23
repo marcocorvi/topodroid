@@ -636,7 +636,8 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="extended">SEZIONE LONG.</string>
     <string name="profile">PROGETTO.</string>
     <string name="extended_profile">Profilo esteso</string>
-    <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">SEZIONE VERT.</string>
     <string name="h_section">SEZIONE ORIZZ.</string>
     <!-- UNUSED string name="landscape">panorama</string -->
 

@@ -628,7 +628,8 @@ Tap "Close" not to take any action.
     <string name="extended">Разг. разрез</string>
     <string name="profile">Проект. разр</string>
     <string name="extended_profile">Разгънат разрез</string>
-    <!-- UNUSED string name="v_section">Верт. сечение</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">Верт. сечение</string>
     <string name="h_section">Хор. сечение</string>
     <!-- UNUSED string name="landscape">Хоризонтално (landscape)</string -->
 

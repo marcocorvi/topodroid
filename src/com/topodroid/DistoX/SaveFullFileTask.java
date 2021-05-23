@@ -73,16 +73,10 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
 
     if ( temp == null ) return null;
     int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, temp );
-    if ( res == 1 ) {
-      synchronized( TDPath.mFilesLock ) {
-        // TDPath.checkDirs( TDPath.PATH_CSX ); // private
-        File file = TDFile.getFile( mFilename );
-        temp.renameTo( file );
-      }
+    if ( res == 1 && TDFile.renameTempFile( temp, mFilename ) ) {
       return mFilename;
-    } else {
-      return null;
     }
+    return null;
   }
 
   @Override

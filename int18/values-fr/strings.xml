@@ -627,7 +627,8 @@ Tap "Close" not to take any action.
     <string name="extended">DEVELOPPEE</string>
     <string name="profile">COUPE</string>
     <string name="extended_profile">COUPE Développée</string>
-    <!-- UNUSED string name="v_section">SECTION V</string -->
+    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="v_section">SECTION V</string>
     <string name="h_section">SECTION Transverse</string>
     <!-- UNUSED string name="landscape">Paysage</string -->
 

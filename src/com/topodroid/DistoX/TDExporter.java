@@ -1194,7 +1194,7 @@ class TDExporter
   static int exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, File file )
   {
     if ( TDSetting.mTherionConfig ) { // craete thconfig
-      synchronized( TDPath.mFilesLock ) {
+      synchronized( TDFile.mFilesLock ) {
         File dir = TDFile.getFile( TDPath.getThconfigDir() );
         if ( ! dir.exists() ) dir.mkdirs();
         try {

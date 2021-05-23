@@ -177,7 +177,6 @@ public class TDPath
   // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
 
   // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
-  final static Object mFilesLock     = new Object();
   final static Object mXSectionsLock = new Object();
   final static Object mSelectionLock = new Object();
   final static Object mCommandsLock  = new Object();

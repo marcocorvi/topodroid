@@ -61,31 +61,35 @@ public class PlotType
   //   "XH-SECTION"
   // };
 
-  public static String plotTypeString( int type, Resources res )
+  private static final String FORMAT = "%s: %s";
+
+  public static String plotTypeString( String name, int type, Resources res )
   {
     switch (type) {
       case 0:
-        return "X-SECTION";
+        // return "X-SECTION";
+        return String.format(FORMAT, name, res.getString( R.string.x_section ) );
       case 1:
-        return res.getString( R.string.plan );
+        return String.format(FORMAT, name, res.getString( R.string.plan ) );
       case 2:
-        return res.getString( R.string.extended );
+        return String.format(FORMAT, name, res.getString( R.string.extended ) );
       case 3:
         // return "H-SECTION";
-        return res.getString( R.string.h_section );
+        return String.format(FORMAT, name, res.getString( R.string.h_section ) );
       case 4:
         // return "PHOTO";
-        return res.getString( R.string.menu_photo );
+        return String.format(FORMAT, name, res.getString( R.string.menu_photo ) );
       case 5:
-        return "SECTION";
+        // return "SECTION";
+        return String.format(FORMAT, name, res.getString( R.string.v_section ) );
       case 6:
-        return "SKETCH-3D";
+        return String.format(FORMAT, name, "SKETCH-3D");
       case 7:
-        return "XH-SECTION";
+        return String.format(FORMAT, name, "XH-SECTION");
       case 8:
-        return res.getString( R.string.profile );
+        return String.format(FORMAT, name, res.getString( R.string.profile ) );
     }
-    return "Unknown type";
+    return String.format(FORMAT, name, "Unknown type");
   }
    
   // static long toPlotType( String type ) 
