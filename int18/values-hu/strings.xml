@@ -1159,7 +1159,7 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_therion_config_summary">Therion config file készítése</string>
   <string name="pref_therion_maps_title">Therion térképek elöl</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
-  <string name="pref_extra_buttons_title">>Engedélyezett funkciók</string>
+  <string name="pref_extra_buttons_title">Engedélyezett funkciók</string>
   <string name="pref_extra_buttons_summary">Engedélyezett funkciók beállítása</string>
   <string name="pref_size_buttons_title">Gombok mérete</string>
   <string name="pref_size_buttons_summary">Fejléc gombok mérete</string>
