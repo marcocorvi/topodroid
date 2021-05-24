@@ -77,7 +77,7 @@ class PlotListDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.plot_list_dialog );
+    initLayout( R.layout.plot_list_dialog, R.string.title_scraps );
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     // mArrayAdapter = new ListItemAdapter( mContext, R.layout.message );
 
@@ -119,7 +119,7 @@ class PlotListDialog extends MyDialog
   private void updateList()
   {
     if ( TopoDroidApp.mData != null && TDInstance.sid >= 0 ) {
-      setTitle( R.string.title_scraps );
+      // setTitle( R.string.title_scraps );
 
       Resources res = mApp.getResources();
 
@@ -223,22 +223,15 @@ class PlotListDialog extends MyDialog
     String value = ((TextView) view).getText().toString();
     // TDLog.Log(  TDLog.LOG_INPUT, "PlotList dialog item click() " + value );
 
-    int from = value.indexOf('<');
-    if ( from < 0 ) return;
-    int to = value.lastIndexOf('>');
+    // int from = value.indexOf('<');
+    // if ( from < 0 ) return;
+    int to = value.lastIndexOf(':');
     if ( position < mPlots ) {
-      String plot_name = value.substring( from+1, to );
+      // String plot_name = value.substring( from+1, to );
+      String plot_name = value.substring( 0, to );
       String type = value.substring( to+2 );
 
-      long plot_type = PlotType.PLOT_PLAN;
-      Resources res = mApp.getResources();
-      if ( res.getString( R.string.plan ).equals( type ) ) {
-        plot_type = PlotType.PLOT_PLAN; // already assigned
-      } else if ( res.getString( R.string.extended ).equals( type ) ) {
-        plot_type = PlotType.PLOT_EXTENDED;
-      } else if ( res.getString( R.string.profile ).equals( type ) ) {
-        plot_type = PlotType.PLOT_PROJECTED;
-      }
+      long plot_type = PlotType.stringToPlotType( type );
 
       // long plot_type = (( position % 2 ) == 0 )? PlotType.PLOT_PLAN : PlotType.PLOT_EXTENDED;
       if ( mParent != null ) {

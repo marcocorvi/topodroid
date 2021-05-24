@@ -634,7 +634,11 @@ Tap <b>Chiudi</b> per fare nulla.
 
     <string name="plan">PIANTA</string>
     <string name="extended">SEZIONE LONG.</string>
-    <string name="profile">PROGETTO.</string>
+    <string name="profile">PROJEZIONE</string>
+    <string name="fmt_plan">%1$s: PIANTA</string>
+    <string name="fmt_extended">%1$s: SEZIONE LONG.</string>
+    <string name="fmt_profile">%1$s: PROJEZIONE</string>
+
     <string name="extended_profile">Profilo esteso</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <string name="v_section">SEZIONE VERT.</string>

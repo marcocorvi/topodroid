@@ -12,6 +12,7 @@
 package com.topodroid.common;
 
 import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.TDInstance;
 
 import android.content.res.Resources;
 
@@ -61,35 +62,42 @@ public class PlotType
   //   "XH-SECTION"
   // };
 
-  private static final String FORMAT = "%s: %s";
-
   public static String plotTypeString( String name, int type, Resources res )
   {
     switch (type) {
-      case 0:
-        // return "X-SECTION";
-        return String.format(FORMAT, name, res.getString( R.string.x_section ) );
+      // case 0: // "X-SECTION";
+      //   return String.format(res.getString( R.string.fmt_x_section ), name );
       case 1:
-        return String.format(FORMAT, name, res.getString( R.string.plan ) );
+        return String.format(res.getString( R.string.fmt_plan ), name );
       case 2:
-        return String.format(FORMAT, name, res.getString( R.string.extended ) );
-      case 3:
-        // return "H-SECTION";
-        return String.format(FORMAT, name, res.getString( R.string.h_section ) );
-      case 4:
-        // return "PHOTO";
-        return String.format(FORMAT, name, res.getString( R.string.menu_photo ) );
-      case 5:
-        // return "SECTION";
-        return String.format(FORMAT, name, res.getString( R.string.v_section ) );
-      case 6:
-        return String.format(FORMAT, name, "SKETCH-3D");
-      case 7:
-        return String.format(FORMAT, name, "XH-SECTION");
+        return String.format(res.getString( R.string.fmt_extended ), name );
+      // case 3: // "H-SECTION";
+      //   return String.format(res.getString( R.string.fmt_h_section ), name );
+      // case 4: // "PHOTO";
+      //   return String.format(res.getString( R.string.fmt_photo ), name );
+      // case 5: // "SECTION";
+      //   return String.format(res.getString( R.string.fmt_v_section ), name );
+      // case 6:
+      //   return String.format(res.getString( R.string.fmt_sketch_3d ), name );
+      // case 7: // XH-SECTION
+      //   return String.format(res.getString( R.string.fmt_xh_section ), name );
       case 8:
-        return String.format(FORMAT, name, res.getString( R.string.profile ) );
+        return String.format(res.getString( R.string.fmt_profile ), name );
     }
-    return String.format(FORMAT, name, "Unknown type");
+    return null; // cause a throw
+  }
+
+  public static long stringToPlotType( String type )
+  {
+    Resources res = TDInstance.context.getResources();
+    if ( res.getString( R.string.extended ).equals( type ) ) {
+      return PLOT_EXTENDED;
+    } else if ( res.getString( R.string.profile ).equals( type ) ) {
+      return PLOT_PROJECTED;
+    // } else if ( res.getString( R.string.plan ).equals( type ) ) {
+    //   return PlotType.PLOT_PLAN; 
+    }
+    return PlotType.PLOT_PLAN;
   }
    
   // static long toPlotType( String type ) 

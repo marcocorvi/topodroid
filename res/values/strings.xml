@@ -648,9 +648,14 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="hide_ids">Shot IDs</string>
     <string name="hide_splay">Splay shots</string>
 
+    <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <string name="plan">PLAN</string>
     <string name="extended">PROFILE</string>
-    <string name="profile">PROJECT.</string>
+    <string name="profile">PROJECTED</string>
+    <string name="fmt_plan">%1$s: PLAN</string>
+    <string name="fmt_extended">%1$s: PROFILE</string>
+    <string name="fmt_profile">%1$s: PROJECTED</string>
+
     <string name="extended_profile">Extended profile</string>
     <string name="x_section">X-SECTION</string>
     <string name="v_section">V-SECTION</string>
