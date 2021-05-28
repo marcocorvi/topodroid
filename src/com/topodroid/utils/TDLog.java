@@ -235,7 +235,7 @@ public class TDLog
     }
     if ( mLog == null ) {
       try {
-        File log_file = TDPath.getLogFile();
+        File log_file = TDFile.getLogFile();
         mLogFile = new FileWriter( log_file, mLogAppend ); // true = append
         mLog = new PrintWriter( mLogFile, true ); // true = autoflush
         mLog.format( "TopoDroid version %s\n", TDVersion.string() );

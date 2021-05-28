@@ -134,7 +134,7 @@ public class SymbolPointLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Charset.forName("ISO-8859-1")
 
-    File dir = TDFile.getFile( TDPath.getSymbolPointDir() );
+    File dir = TDFile.getExternalDir( TDPath.getSymbolPointDirname() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();

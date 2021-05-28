@@ -288,17 +288,19 @@ public class DistoX310Protocol extends DistoXProtocol
 
   // DRY_RUN
   // public int uploadFirmwareDryRun( String filepath )
-  // {
-  //   File fp = new File( filepath );
-  //   int len = (int)( fp.length() );
-  //   Log.v("DistoX-FW", "Protocol Firmware upload: file " + filepath + " dry run - length " + len );
-  //   return len;
-  // }
+  public int uploadFirmwareDryRun( File fp )
+  {
+    int len = (int)( fp.length() );
+    Log.v("DistoX-FW", "Protocol Firmware upload: file " + fp.getPath() + " dry run - length " + len );
+    return len;
+  }
 
   // @Override
-  public int uploadFirmware( String filepath )
+  // public int uploadFirmware( String filepath )
+  public int uploadFirmware( File fp )
   {
-    TDLog.LogFile( "Firmware upload: protocol starts. file " + filepath );
+    // TDLog.LogFile( "Firmware upload: protocol starts. file " + fp.getPath() );
+    Log.v("DistoX-FW", "Firmware upload: protocol starts. file " + fp.getPath() );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
     buf[1] = (byte)0;
@@ -307,16 +309,16 @@ public class DistoX310Protocol extends DistoXProtocol
     boolean ok = true;
     int cnt = 0;
     try {
-      File fp = new File( filepath );
+      // File fp = new File( filepath );
       FileInputStream fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       // int end_addr = (fp.size() + 255)/256;
 
-      for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-        TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
-        // memset(buf+3, 0, 256)
-        for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
-        try {
+      try {
+        for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
+          TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
+          // memset(buf+3, 0, 256)
+          for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
           int nr = dis.read( buf, 3, 256 );
           if ( nr <= 0 ) {
             TDLog.LogFile( "Firmware upload: file read failure. Result " + nr );
@@ -345,14 +347,13 @@ public class DistoX310Protocol extends DistoXProtocol
           } else {
             TDLog.LogFile( "Firmware upload: skip address " + addr );
           }
-        } catch ( EOFException e ) { // OK
-          TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
-          break;
-        } catch ( IOException e ) { 
-          TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
-          ok = false;
-          break;
         }
+        fis.close();
+      } catch ( EOFException e ) { // OK
+        TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
+      } catch ( IOException e ) { 
+        TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
+        ok = false;
       }
     } catch ( FileNotFoundException e ) {
       TDLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
@@ -363,21 +364,23 @@ public class DistoX310Protocol extends DistoXProtocol
   }
 
   // @Override
-  public int dumpFirmware( String filepath )
+  // public int dumpFirmware( String filepath )
+  public int dumpFirmware( File fp )
   {
-    TDLog.LogFile( "Firmware dump: output filepath " + filepath );
+    // TDLog.LogFile( "Proto Firmware dump: output filepath " + fp.getPath() );
+    Log.v("DistoX-FW", "Proto Firmware dump: output filepath " + fp.getPath() );
     byte[] buf = new byte[256];
 
     boolean ok = true;
     int cnt = 0;
     try {
-      TDPath.checkPath( filepath );
-      File fp = new File( filepath );
+      // TDPath.checkPath( filepath );
+      // File fp = new File( filepath );
       FileOutputStream fos = new FileOutputStream( fp );
       DataOutputStream dos = new DataOutputStream( fos );
-      for ( int addr = 0; ; ++ addr ) {
+      try {
+        for ( int addr = 0; ; ++ addr ) {
         // TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
-        try {
           buf[0] = (byte)0x3a;
           buf[1] = (byte)( addr & 0xff );
           buf[2] = 0; // not necessary
@@ -390,7 +393,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-            TDLog.LogFile( "Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
+            TDLog.LogFile( "Proto Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
             ok = false;
             break;
           // } else {
@@ -414,17 +417,18 @@ public class DistoX310Protocol extends DistoXProtocol
 
           dos.write( buf, 0, 256 );
           cnt += 256;
-        } catch ( EOFException e ) { // OK
-          break;
-        } catch ( IOException e ) { 
-          ok = false;
-          break;
         }
+        fos.close();
+      } catch ( EOFException e ) {
+        // OK
+      } catch ( IOException e ) { 
+        ok = false;
       }
     } catch ( FileNotFoundException e ) {
       return 0;
     }
-    TDLog.LogFile( "Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    // TDLog.LogFile( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    Log.v("DistoX-FW", "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 

@@ -4199,12 +4199,13 @@ class TDExporter
   // CALIBRATION import/export
   // CCSV
 
-  static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String filename )
+  // static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String name )
+  static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, File file )
   {
     try {
-      // TDLog.Log( TDLog.LOG_IO, "export calibration " + filename );
-      TDPath.checkPath( filename );
-      FileWriter fw = TDFile.getFileWriter( filename );
+      // TDLog.Log( TDLog.LOG_IO, "export calibration " + name );
+      // TDPath.checkPath( filename );
+      FileWriter fw = new FileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -4252,7 +4253,7 @@ class TDExporter
       fw.flush();
        
       fw.close();
-      return filename;
+      return ci.name;
     } catch ( IOException e ) {
       TDLog.Error( "Failed CSV export: " + e.getMessage() );
       return null;
@@ -4279,13 +4280,15 @@ class TDExporter
   //   id, gx, gy, gz, mx, my, mz, group
   // data reading ends at end-of-file or at a line with fewer entries
   //
-  static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
+  // static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
+  static int importCalibFromCsv( DeviceHelper data, File file, String device_name )
   {
     int ret = 0;
     try {
-      // TDLog.Log( TDLog.LOG_IO, "import calibration file " + filename );
-      TDPath.checkPath( filename );
-      FileReader fr = TDFile.getFileReader( filename );
+      // TDPath.checkPath( filename );
+      // FileReader fr = TDFile.getFileReader( filename );
+      // TDLog.Log( TDLog.LOG_IO, "import calibration file " + file.getPath() );
+      FileReader fr = TDFile.getFileReader( file );
       BufferedReader br = new BufferedReader( fr );
     
       String line = br.readLine();

@@ -1043,13 +1043,14 @@ public class DeviceActivity extends Activity
 
   public void importCalibFile( String name )
   {
-    String filename = TDPath.getCCsvFile( name );
-    File file = TDFile.getFile( filename );
+    // String filename = TDPath.getCCsvFile( name );
+    // File file = TDFile.getFile( filename );
+    File file = TDFile.getExternalFile( "ccsv", name );
     if ( ! file.exists() ) {
       TDToast.makeBad(R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
-      switch ( TDExporter.importCalibFromCsv( mApp_mDData, filename, currDeviceA().getAddress() ) ) {
+      switch ( TDExporter.importCalibFromCsv( mApp_mDData, file, currDeviceA().getAddress() ) ) {
         case 0:
           TDToast.make(R.string.import_calib_ok );
           break;

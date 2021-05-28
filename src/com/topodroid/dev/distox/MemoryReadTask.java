@@ -14,6 +14,8 @@ package com.topodroid.dev.distox;
 import com.topodroid.dev.Device;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
+
 import com.topodroid.packetX.MemoryOctet;
 // import com.topodroid.dev.Device;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -25,6 +27,7 @@ import com.topodroid.DistoX.R;
 
 import java.lang.ref.WeakReference;
 
+import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.IOException;
@@ -95,10 +98,12 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     dumpfile = dumpfile.trim();
     if ( dumpfile.length() == 0 ) return;
     try { 
-      String dumppath = TDPath.getDumpFile( dumpfile );
       // TDLog.Log( TDLog.LOG_IO, "dump memory to file " + dumppath );
-      TDPath.checkPath( dumppath );
-      FileWriter fw = new FileWriter( dumppath );
+      // String dumppath = TDPath.getDumpFile( dumpfile );
+      // TDPath.checkPath( dumppath );
+      // FileWriter fw = new FileWriter( dumppath );
+      File file = TDFile.getExternalFile( "dump", dumpfile );
+      FileWriter fw = new FileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
       for ( MemoryOctet m : memory ) {
         m.printHexString( pw );

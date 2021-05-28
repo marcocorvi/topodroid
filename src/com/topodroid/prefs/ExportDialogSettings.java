@@ -12,7 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
@@ -80,7 +80,7 @@ public class ExportDialogSettings extends MyDialog
         protected void onPostExecute( Boolean v )
         {
           if ( v ) {
-            TDToast.make( String.format( mContext.getResources().getString( R.string.exported_settings ), TDPath.getSettingsPath() ) );
+            TDToast.make( String.format( mContext.getResources().getString( R.string.exported_settings ), TDFile.getSettingsFile().getPath() ) );
           } else {
             TDToast.makeWarn( R.string.export_settings_failed );
           }

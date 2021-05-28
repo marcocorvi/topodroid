@@ -14,6 +14,7 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -135,8 +136,11 @@ public class FirmwareDialog extends MyDialog
           return;
         }
         if ( mBtnDump.isChecked() ) {
-          TDLog.LogFile( "Firmware dump to " + filename );
-          File fp = new File( TDPath.getBinFile( filename ) );
+          if ( ! filename.endsWith(".bin") ) filename = filename + ".bin";
+          // TDLog.LogFile( "Firmware dump to " + filename );
+          Log.v("DistoX-FW", "Firmware dump to " + filename );
+          // File fp = new File( TDPath.getBinFile( filename ) );
+          File fp = TDFile.getExternalFile( "bin", filename );
           if ( fp.exists() ) {
             TDToast.makeBad( R.string.firmware_file_exists );
             return;
@@ -145,7 +149,8 @@ public class FirmwareDialog extends MyDialog
         } else if ( mBtnUpload.isChecked() ) {
           // TDLog.LogFile( "Firmware upload from " + filename );
           Log.v("DistoX-FW", "Firmware upload from " + filename );
-          File fp = new File( TDPath.getBinFile( filename ) );
+          // File fp = new File( TDPath.getBinFile( filename ) );
+          File fp = TDFile.getExternalFile( "bin", filename );
           if ( ! fp.exists() ) {
             TDLog.Error( "inexistent upload firmware file " + filename );
             return;    
@@ -160,19 +165,21 @@ public class FirmwareDialog extends MyDialog
     }
   }
 
+  // @param filename   file name including ".bin" extension
   private void askDump( final String filename )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mRes, R.string.ask_dump,
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          TDLog.LogFile( "Firmware dump to file " + filename );
+          // TDLog.LogFile( "Firmware dump to file " + filename );
+          Log.v("DistoX-FW", "Firmware dump to file " + filename );
           // FIXME ASYNC_FIRMWARE_TASK
           // TDToast.makeLong( R.string.firmware_wait_dump );
           // mApp.dumpFirmware( filename );
           int ret = mApp.dumpFirmware( filename );
-          TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
-          // Log.v("DistoX-FW", "Firmware dump to " + filename + " result: " + ret );
+          // TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
+          Log.v("DistoX-FW", "Firmware dump to " + filename + " result: " + ret );
           if ( ret > 0 ) {
             TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
           } else {
@@ -189,11 +196,11 @@ public class FirmwareDialog extends MyDialog
   private void askUpload( final String filename, int fw, boolean check )
   {
     // boolean compatible = (fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 );
-    final String pathname = TDPath.getBinFile( filename );
+    // final String pathname = TDPath.getBinFile( filename );
     int hw = FirmwareUtils.getHardware( fw );
     boolean compatible = FirmwareUtils.isCompatible( fw );
     // TDLog.LogFile( "FW/HW compatible " + compatible + " FW check " + check );
-    // Log.v("DistoX-FW", "FW " + fw + " compatible " + compatible + " check " + check );
+    Log.v("DistoX-FW", "FW " + fw + " compatible " + compatible + " check " + check );
     compatible = compatible && check;
 
     // get the hardware version from the signature of the firmware on the DistoX
@@ -215,11 +222,13 @@ public class FirmwareDialog extends MyDialog
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           // String pathname = TDPath.getBinFile( filename );
-          TDLog.LogFile( "Firmware uploading from path " + pathname );
           // FIXME ASYNC_FIRMWARE_TASK
           // TDToast.makeLong( R.string.firmware_wait_upload );
           // mApp.uploadFirmware( filename );
-          File file = new File( pathname ); // file must exists
+          // File file = new File( pathname ); // file must exists
+          File file = TDFile.getExternalFile( "bin", filename );
+          // TDLog.LogFile( "Firmware uploading from " + file.getPath() );
+          Log.v("DistoX-FW", "Firmware uploading from " + file.getPath() );
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
           // TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );

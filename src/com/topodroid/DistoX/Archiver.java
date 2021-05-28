@@ -147,7 +147,7 @@ public class Archiver
   private boolean compressSymbols( String zipname, SymbolLibrary lib, String dirpath )
   {
     if ( lib == null ) return false;
-    if ( ! (TDFile.getFile(dirpath)).exists() ) return false;
+    if ( ! (TDFile.getExternalDir( dirpath )).exists() ) return false;
     List< Symbol > symbols = lib.getSymbols();
     ZipOutputStream zos = null;
     try { 
@@ -157,7 +157,8 @@ public class Archiver
           String filename = symbol.getThName();
           // THERION-U: filename = Symbol.deprefix_u( filename );
           String filepath = dirpath + filename;
-          addOptionalEntry( zos, TDFile.getFile( filepath ), filepath );
+          Log.v("DistoX-ZIP", "compress " + dirpath + " " + filepath );
+          addOptionalEntry( zos, TDFile.getExternalFile( dirpath, filepath ), filepath );
         }
       }
     } catch ( FileNotFoundException e ) {
@@ -190,12 +191,14 @@ public class Archiver
       FileInputStream fis = TDFile.getFileInputStream( filename );
       ZipInputStream szin = new ZipInputStream( fis );
       while ( ( sze = szin.getNextEntry() ) != null ) {
-        String symbolfilename = dirpath + sze.getName();
-        // Log.v("DistoX-ZIP", "try to uncompress symbol " + symbolfilename );
-        File symbolfile = TDFile.getFile( symbolfilename );
+        // String symbolfilename = dirpath + sze.getName();
+        // File symbolfile = TDFile.getExternalFile( symbolfilename );
+        File symbolfile = TDFile.getExternalFile( dirpath, sze.getName() );
+        Log.v("DistoX-ZIP", "try to uncompress symbol " + dirpath + " " + sze.getName() );
         if ( ! symbolfile.exists() ) { // don't overwrite
-          // Log.v("DistoX-ZIP", "uncompress symbol " + symbolfilename );
-          FileOutputStream sfout = TDFile.getFileOutputStream( symbolfilename ); // uncompress symbols zip
+          Log.v("DistoX-ZIP", "uncompress symbol " + symbolfile.getPath() );
+          // FileOutputStream sfout = TDFile.getFileOutputStream( symbolfilename ); // uncompress symbols zip
+          FileOutputStream sfout = new FileOutputStream( symbolfile ); 
           while ( ( c = szin.read( sbuffer ) ) != -1 ) {
             sfout.write(sbuffer, 0, c);
           }
@@ -205,7 +208,8 @@ public class Archiver
         }
         szin.closeEntry();
         // need to get the thname from the file
-        FileInputStream sfis = TDFile.getFileInputStream( symbolfilename );
+        // FileInputStream sfis = TDFile.getFileInputStream( symbolfilename );
+        FileInputStream sfis = new FileInputStream( symbolfile );
         BufferedReader br = new BufferedReader( new InputStreamReader( sfis, "UTF-8" /* StandardCharsets.UTF_8 */ ) ); // String iso = "UTF-8";
         String line;
         while ( (line = br.readLine()) != null ) {
@@ -250,15 +254,15 @@ public class Archiver
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
         String filename = TDPath.getSymbolFile( "points.zip" );
-        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.getSymbolPointDir() ) )  {
+        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.getSymbolPointDirname() ) )  {
           addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
         filename = TDPath.getSymbolFile( "lines.zip" );
-        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.getSymbolLineDir() ) )  {
+        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.getSymbolLineDirname() ) )  {
           addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
         filename = TDPath.getSymbolFile( "areas.zip" );
-        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.getSymbolAreaDir() ) )  {
+        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.getSymbolAreaDirname() ) )  {
           addOptionalEntry( zos, TDFile.getFile( filename ), filename );
         }
       }
@@ -519,15 +523,15 @@ public class Archiver
             TDFile.makeDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
-            if ( uncompressSymbols( zin, TDPath.getSymbolPointDir(), "p_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
               BrushManager.reloadPointLibrary( mApp, mApp.getResources() );
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
-            if ( uncompressSymbols( zin, TDPath.getSymbolLineDir(), "l_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolLineDirname(), "l_" ) ) {
               BrushManager.reloadLineLibrary( mApp.getResources() );
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
-            if ( uncompressSymbols( zin, TDPath.getSymbolAreaDir(), "a_" ) ) {
+            if ( uncompressSymbols( zin, TDPath.getSymbolAreaDirname(), "a_" ) ) {
               BrushManager.reloadAreaLibrary( mApp.getResources() );
             }
           } else {

@@ -129,7 +129,7 @@ public class SymbolAreaLibrary extends SymbolLibrary
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
     // Log.v("DistoX", "area user symbols. locale <" + locale + ">");
 
-    File dir = TDFile.getFile( TDPath.getSymbolAreaDir() );
+    File dir = TDFile.getExternalDir( TDPath.getSymbolAreaDirname() );
     if ( dir.exists() ) {
       int systemNr = size();
       File[] files = dir.listFiles();

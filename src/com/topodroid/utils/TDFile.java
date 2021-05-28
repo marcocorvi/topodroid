@@ -158,7 +158,7 @@ public class TDFile
 
   public boolean exists() { return mDocFile != null && mDocFile.exists(); }
 
-  // URI -----------------------------------------------------------------------------
+  // URI =============================================================================
   static final String BASE = "/storage/emulated/0";
 
   private static final int PERMISSIONS = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
@@ -309,7 +309,7 @@ public class TDFile
 
   public static Uri filenameToUri( String mime, String filename, boolean create ) { return filenameToUri( getBaseDirTree(), mime, filename, create ); }
 
-  // ==================================================================
+  // -------------------------------------------------------------------------------
   private String filenameToPath( String filename )
   {
     int pos = filename.lastIndexOf('/');
@@ -586,7 +586,7 @@ public class TDFile
     return null;
   }
 
-  // ---------------------------------------------------------------------
+  // MIME ---------------------------------------------------------------------
 
   static String docMime( String filename )
   {
@@ -612,13 +612,63 @@ public class TDFile
 
   public static long getFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
-  // @param name     absolute filename
-  public static File getExternalFile( String name ) { return new File( name ); }
-
   // @param name     TopoDroid-relative filename
   public static File getFile( String name ) { return new File( name ); }
 
-  public static File getFile( String dirname, String name ) { return new File( dirname, name ); }
+  public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
+
+  // INTERNAL FILES --------------------------------------------------------------
+  // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
+
+  // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
+
+  public static File getSettingsFile() { return new File( TDInstance.context.getExternalFilesDir( null ), "settings.txt" ); }
+  public static File getLogFile()      { return new File( TDInstance.context.getExternalFilesDir( null ), "log.txt" ); }
+
+  public static File getExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ); }
+
+  public static File getExternalFile( String type, String name ) { return new File ( TDInstance.context.getExternalFilesDir( type ), name ); }
+
+  public static void deleteExternalFile( String type, String name ) 
+  {
+    File file = new File ( TDInstance.context.getExternalFilesDir( type ), name );
+    if ( file.exists() ) {
+      file.delete();
+    }
+  }
+
+  public static FileWriter getExternalFileWriter( String type, String name ) throws IOException
+  {
+    File file = getExternalFile( type, name );
+    return new FileWriter( file );
+  }
+
+  // @param name     absolute filename
+  // used by FixedImportDialog
+  public static File getGpsPointFile( String pathname ) { return new File( pathname ); }
+
+  public static FileReader getGpsPointFileReader( String dirname, String filename ) throws IOException
+  {
+    File file = new File( dirname, filename );
+    return new FileReader( file );
+  }
+
+  // CACHE FILES --------------------------------------------------------------
+
+  public static File getCacheFile( String filename ) { return new File ( TDInstance.context.getCacheDir(), filename ); }
+
+  public static void clearCache( long before )
+  {
+    long now  = System.currentTimeMillis();
+    long time = now - before; // clean the cache "before" minutes before now
+    File cacheDir = TDInstance.context.getCacheDir();
+    File[] files = cacheDir.listFiles();
+    if ( files != null ) for ( File f : files ) {
+      if ( f.lastModified() < time ) {
+        if ( ! f.delete() ) TDLog.Error("File delete error");
+      }
+    }
+  }
 
   // public static File getFile( File dir, String name )
   // {
@@ -639,16 +689,11 @@ public class TDFile
 
   public static FileWriter getFileWriter( File file ) throws IOException { return new FileWriter( file ); }
 
-  public static FileReader getExternalFileReader( String dirname, String filename ) throws IOException
-  {
-    File file = new File( dirname, filename );
-    return new FileReader( file );
-  }
-
   public static FileReader getFileReader( String name ) throws IOException { return new FileReader( name ); }
 
   public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 
+  // -----------------------------------------------------------------------------
   public static void deleteFile( File f ) // DistoX-SAF
   {
     if ( f != null && f.exists() ) {
@@ -729,18 +774,35 @@ public class TDFile
     }
   }
 
-  public static void makeDir( String pathname )
+  public static File makeDir( String pathname )
   {
-    File f = getFile( pathname ); // DistoX-SAF
-    if ( f.exists() ) return;
-    if ( ! f.isDirectory() ) {
-      if ( ! f.mkdirs() ) TDLog.Error("Mkdir failed " + pathname );
+    File f = getFile( pathname );
+    if ( ! f.exists() ) {
+      if ( ! f.mkdirs() ) {
+        TDLog.Error("mkdir failed " + pathname );
+        return null;
+      }
     }
+    return f;
   }
+
+  public static File makeExternalDir( String type )
+  {
+    File f = getExternalDir( type ); 
+    if ( ! f.exists() ) {
+      if ( ! f.mkdirs() ) {
+        TDLog.Error("mkdir external failed " + type );
+        return null;
+      }
+    }
+    return f;
+  }
+
 
   public static boolean renameTempFile( File temp, File file )
   {
     boolean ret = false;
+    // Log.v("DistoX", "rename " + temp.getPath() + " to " + file.getPath() );
     synchronized( mFilesLock ) {
       if ( file.exists() ) file.delete();
       ret = temp.renameTo( file );

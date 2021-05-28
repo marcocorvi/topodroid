@@ -143,6 +143,7 @@ public class QCamDrawingSurface extends SurfaceView
 
   boolean takePicture( int orientation )
   {
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface take picture. Orientation " + orientation );
     boolean ret = false;
     if ( mCamera != null ) {
       try {
@@ -180,6 +181,7 @@ public class QCamDrawingSurface extends SurfaceView
 
   void close()
   {
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       // Log.v( TAG, "close qcam" );
@@ -191,7 +193,7 @@ public class QCamDrawingSurface extends SurfaceView
 
   boolean open()
   {
-    // Log.v( TAG, "open qcam" );
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface open");
     close();
     try {
       mCamera = Camera.open();

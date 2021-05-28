@@ -206,12 +206,15 @@ public class DistoX310Comm extends DistoXComm
     return ret;
   }
 
-  public int dumpFirmware( String address, String filepath )
+  // public int dumpFirmware( String address, String filepath )
+  public int dumpFirmware( String address, File file )
   {
+    Log.v("DistoX-FW", "Comm dump firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-        ret = ((DistoX310Protocol)mProtocol).dumpFirmware( filepath );
+        // ret = ((DistoX310Protocol)mProtocol).dumpFirmware( filepath );
+        ret = ((DistoX310Protocol)mProtocol).dumpFirmware( file );
       } else {
         ret = -1;
       }
@@ -220,8 +223,12 @@ public class DistoX310Comm extends DistoXComm
     return ret;
   }
 
-  public int uploadFirmware( String address, String filepath )
+  final static private boolean DRY_RUN = false;
+
+  // public int uploadFirmware( String address, String filepath )
+  public int uploadFirmware( String address, File file )
   {
+    Log.v("DistoX-FW", "Comm upload firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
@@ -234,10 +241,14 @@ public class DistoX310Comm extends DistoXComm
         // }
 
         // FIXME DRY_RUN
-        // ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( filepath );
-        // Log.v("DistoX-FW", "Comm Firmware upoad dry run " + ret );
-        
-        ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
+        if ( DRY_RUN ) {
+          ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file );
+          Log.v("DistoX-FW", "Comm Firmware upoad dry run: " + ret );
+        } else {
+          // ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
+          ret = ((DistoX310Protocol)mProtocol).uploadFirmware( file );
+          Log.v("DistoX-FW", "Comm Firmware upoad: " + ret );
+        }
       } else {
         ret = -1;
       }

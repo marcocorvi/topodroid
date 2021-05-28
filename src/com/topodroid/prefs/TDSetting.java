@@ -2537,7 +2537,7 @@ public class TDSetting
   public static boolean exportSettings( )
   {
     // Log.v("DistoX", "TDSetting exports settings");
-    File file = TDPath.getSettingsFile();
+    File file = TDFile.getSettingsFile();
     try {
       FileWriter fw = new FileWriter( file, false ); // true = append
       PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
@@ -2684,7 +2684,7 @@ public class TDSetting
   {
     // Log.v("DistoX", "TDSetting import settings");
     Editor editor = prefs.edit();
-    File file = TDPath.getSettingsFile();
+    File file = TDFile.getSettingsFile();
     try {
       FileReader fr = new FileReader( file ); // true = append
       BufferedReader br = new BufferedReader( fr ); // true = autoflush

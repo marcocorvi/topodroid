@@ -1545,9 +1545,11 @@ public class TopoDroidApp extends Application
     if ( TDInstance.cid < 0 ) return null;
     CalibInfo ci = mDData.selectCalibInfo( TDInstance.cid );
     if ( ci == null ) return null;
-    TDPath.checkCCsvDir();
-    String filename = TDPath.getCCsvFile( ci.name );
-    return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, filename );
+    // TDPath.checkCCsvDir();
+    // String filename = TDPath.getCCsvFile( ci.name );
+    // return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, filename );
+    File file = TDFile.getExternalFile( "ccsv", ci.name + ".csv" );
+    return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, file );
   }
 
   // ----------------------------------------------
@@ -1592,7 +1594,7 @@ public class TopoDroidApp extends Application
       "wall:sand"
     };
     for ( String line : lines ) {
-      TDFile.deleteFile( TDPath.getSymbolLinePath( line ) );
+      TDFile.deleteExternalFile( "line", line );
     }
     String[] points = {
       "breakdown-choke",
@@ -1601,7 +1603,7 @@ public class TopoDroidApp extends Application
       SymbolLibrary.SECTION
     };
     for ( String point : points ) {
-      TDFile.deleteFile( TDPath.getSymbolPointPath( point ) );
+      TDFile.deleteExternalFile( "point", point );
     }
   }
 
@@ -1635,7 +1637,7 @@ public class TopoDroidApp extends Application
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
     // Log.v("DistoX-PATH", "uncompress symbols");
-    TDPath.symbolsCheckDirs();
+    // TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
       byte[] buffer = new byte[4096];
@@ -1645,21 +1647,28 @@ public class TopoDroidApp extends Application
         String filepath = ze.getName();
         if ( filepath.endsWith("README") ) continue;
         if ( ! ze.isDirectory() ) {
+          int pos = 0;
           if ( filepath.startsWith( "symbol" ) ) {
-            int pos  = 1 + filepath.indexOf('/');
-            filepath = filepath.substring( pos );
+            pos  = filepath.indexOf('/');
+            filepath = filepath.substring( pos+1 );
           }
-          String pathname = TDPath.getSymbolFile( filepath );
-          // Log.v("DistoX-PATH", "uncompress symbol " + pathname );
-          File file = TDFile.getFile( pathname );
+          pos  = filepath.indexOf('/');
+          String type = filepath.substring( 0, pos );
+          filepath = filepath.substring( pos+1 );
+          
+          // String pathname = TDPath.getSymbolFile( filepath );
+          // File file = TDFile.getFile( pathname );
+          File file = TDFile.getExternalFile( type, filepath );
+          Log.v("DistoX-PATH", "uncompress symbol " + type + " " + filepath + " " + file.getPath() );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {
             //   if ( ! file.renameTo( TDFile.getFile( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
             // }
 
-            TDPath.checkPath( pathname );
-            FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+            // TDPath.checkPath( pathname );
+            // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+            FileOutputStream fout = TDFile.getFileOutputStream( file );
             int c;
             while ( ( c = zin.read( buffer ) ) != -1 ) {
               fout.write(buffer, 0, c); // offset 0 in buffer
@@ -1680,7 +1689,7 @@ public class TopoDroidApp extends Application
   static private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
     // Log.v("DistoX-FW", "firmware uncompress ...");
-    TDPath.checkBinDir( );
+    // TDPath.checkBinDir( );
     try {
       // byte buffer[] = new byte[36768];
       byte[] buffer = new byte[4096];
@@ -1688,14 +1697,15 @@ public class TopoDroidApp extends Application
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
-        // Log.v("DistoX-FW", "firmware uncompress path " + filepath );
+        Log.v("DistoX", "firmware uncompress path " + filepath );
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith("bin") ) continue;
-        String pathname =  TDPath.getBinFile( filepath );
-        File file = TDFile.getFile( pathname );
+        // String pathname =  TDPath.getBinFile( filepath );
+        File file = TDFile.getExternalFile( "bin", filepath );
         if ( overwrite || ! file.exists() ) {
-          TDPath.checkPath( pathname );
-          FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+          // TDPath.checkPath( pathname );
+          // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+          FileOutputStream fout = new FileOutputStream( file );
           int c;
           while ( ( c = zin.read( buffer ) ) != -1 ) {
             fout.write(buffer, 0, c); // offset 0 in buffer
@@ -2082,6 +2092,7 @@ public class TopoDroidApp extends Application
   // @param hw expected device hardware
   public byte[] readFirmwareSignature( int hw )
   {
+    Log.v("DistoX-FW", "app read FW signature - HW " + hw );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2092,8 +2103,10 @@ public class TopoDroidApp extends Application
     return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
   }
 
-  public int dumpFirmware( String filename )
+  // @param name   filename including ".bin" extension
+  public int dumpFirmware( String name )
   {
+    Log.v("DistoX-FW", "app dump FW " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2101,25 +2114,30 @@ public class TopoDroidApp extends Application
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if ( ! (mComm instanceof DistoX310Comm) ) return -1;
-    return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(filename) );
+    // return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(name) );
+    return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDFile.getExternalFile( "bin", name ) );
   }
 
-  public int uploadFirmware( String filename )
+  public int uploadFirmware( String name )
   {
+    Log.v("DistoX-FW", "app upload FW " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
-    // String pathname = TDPath.getBinFile( filename );
+    // String pathname = TDPath.getBinFile( name );
     // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
     // TDLog.LogFile( "Firmware upload file " + pathname );
-    // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, filename )).execute( ); 
+    // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, name )).execute( ); 
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if ( ! (mComm instanceof DistoX310Comm) ) return -1;
-    String pathname = TDPath.getBinFile( filename );
+    // String pathname = TDPath.getBinFile( name );
+    File file = TDFile.getExternalFile( "bin", name );
     TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
-    TDLog.LogFile( "Firmware upload file " + pathname );
-    return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
+    // TDLog.LogFile( "Firmware upload file " + file.getPath() );
+    Log.v("DistoX-FW", "app Firmware upload file " + file.getPath() );
+    // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
+    return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
   }
 
   // ----------------------------------------------------------------------

@@ -43,7 +43,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        mFullName = name;
        mToast    = toast;
        // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
-       Log.v("DistoX", "Export Bitmap To File " + mFullName );
+       // Log.v("DistoX", "Export Bitmap To File " + mFullName );
     }
 
     @Override
@@ -55,8 +55,12 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     boolean exec()
     {
       try {
-        // File temp = File.createTempFile( "tmp", null, TDFile.getFile( TDPath.getPngFile("") ) );
-        File temp = File.createTempFile( "tmp", null );
+        // File temp = File.createTempFile( "tmp", ".png", TDFile.getFile( TDPath.getPngFile("") ) );
+        File dir = TDPath.getPngDir();
+        if ( dir == null ) return false;
+        File temp = File.createTempFile( "tmp", ".png", dir );
+        // File temp = File.createTempFile( "tmp", ".png" );
+        // Log.v("DistoX", "temp file <" + temp.getPath() + ">" );
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();

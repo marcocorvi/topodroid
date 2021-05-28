@@ -12,10 +12,11 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 // import com.topodroid.dev.distox2.DistoX310Comm;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
+// import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.R;
 
 import android.util.Log;
@@ -59,7 +60,9 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
   private int dumpFirmware( )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    return mComm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( mFilename ) );
+    // return mComm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( mFilename ) );
+    Log.v("DistoX-FW", "task dump file " + mFilename );
+    return mComm.dumpFirmware( TDInstance.deviceAddress(), TDFile.getExternalFile( "bin", mFilename ) );
   }
 
   private int uploadFirmware( )
@@ -68,15 +71,18 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
       TDLog.Error( "Comm or Device null");
       return -1;
     }
-    String pathname = TDPath.getBinFile( mFilename );
-    mLength = (new File( pathname )).length(); // file must exists
+    // String pathname = TDPath.getBinFile( mFilename );
+    // mLength = (new File( pathname )).length(); // file must exists
+    File file = TDFile.getExternalFile( "bin", mFilename );
+    mLength = file.length(); // file must exists
+    Log.v("DistoX-FW", "task upload file " + mFilename + " length " + mLength );
     // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
-    // TDLog.LogFile( "Firmware upload file " + pathname );
     // if ( ! pathname.endsWith( "bin" ) ) {
     //   TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
     //   return 0;
     // }
-    return mComm.uploadFirmware( TDInstance.deviceAddress(), pathname );
+    // return mComm.uploadFirmware( TDInstance.deviceAddress(), pathname );
+    return mComm.uploadFirmware( TDInstance.deviceAddress(), file );
   }
 
 // -------------------------------------------------------------------
@@ -103,12 +109,14 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
   {
     int ret = res.intValue();
     if ( mMode == FIRMWARE_READ ) {
-      TDLog.LogFile( "Firmware dump to " + mFilename + " result: " + ret );
+      // TDLog.LogFile( "Firmware dump to " + mFilename + " result: " + ret );
+      Log.v("DistoX-FW", "Task Firmware dump to " + mFilename + " result: " + ret );
       if ( ret > 0 ) { 
         TDToast.makeLong( String.format( TDInstance.getResources().getString(R.string.firmware_file_dumped), mFilename, ret ) );
       }
     } else if ( mMode == FIRMWARE_WRITE ) {
-      TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + mLength );
+      // TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + mLength );
+      Log.v("DistoX-FW", "Task Firmware upload result: written " + ret + " bytes of " + mLength );
       TDToast.makeLong( String.format( TDInstance.getResources().getString(R.string.firmware_file_uploaded), mFilename, ret, mLength ) );
     }
   }

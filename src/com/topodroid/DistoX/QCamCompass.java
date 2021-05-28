@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
@@ -88,10 +89,12 @@ class QCamCompass extends Dialog
     mWithDelay = with_delay;
     mHasSaved  = false;
     mHasShot   = false;
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
   }
 
   void enableButtons( boolean enable )
   {
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable buttons " + enable );
     buttonClick.setEnabled( enable );
     buttonCancel.setEnabled( enable );
     // if ( enable ) {
@@ -105,6 +108,7 @@ class QCamCompass extends Dialog
 
   private void enableButtonSave( boolean enable )
   {
+    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable save button " + enable );
     buttonSave.setEnabled( enable );
     // buttonSave.setVisibility( enable? View.VISIBLE : View.GONE );
     TDandroid.setButtonBackground( buttonSave, (enable? mBDsaveok : mBDsaveoff) );
@@ -165,7 +169,7 @@ class QCamCompass extends Dialog
   // implements
   public void setBearingAndClino( float b, float c, int o )
   {
-    // Log.v("DistoX", "QCam compass set orientation " + o + " bearing " + b + " clino " + c );
+    TDLog.Log( TDLog.LOG_PHOTO, "QCam compass set orientation " + o + " bearing " + b + " clino " + c );
     mBearing = b;
     mClino   = c;
     mOrientation = MyBearingAndClino.getCameraOrientation( o );
@@ -189,6 +193,7 @@ class QCamCompass extends Dialog
   {
     Button b = (Button)v;
     if ( b == buttonClick ) {
+      TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Click picture button");
       if ( mHasShot ) {
         mHasShot = false;
         TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
@@ -209,6 +214,7 @@ class QCamCompass extends Dialog
       }
       return;
     } else if ( b == buttonSave ) {
+      TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Click save button");
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
           // Log.v("DistoX", "Orientation " + mOrientation + " " + mBearing + " " + mClino );
@@ -216,8 +222,10 @@ class QCamCompass extends Dialog
           mHasSaved = mCallback.setJpegData( mSurface.mJpegData );
         }
       }
-    // } else if ( b == buttonCancel ) {
-      /* nothing */
+    } else if ( b == buttonCancel ) {
+      TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Click cancel button");
+    } else {
+      TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Click unexpected view");
     }
     mSurface.close();
     TDUtil.slowDown( 100 );
@@ -237,7 +245,7 @@ class QCamCompass extends Dialog
     int act = event.getAction();
     int action = act & MotionEvent.ACTION_MASK;
     boolean ret = false;
-    // Log.v("DistoX-QCAM", "on touch ptr " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
+    TDLog.Log( TDLog.LOG_PHOTO, "QCam compass. Touch ptrs " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
     if ( action == MotionEvent.ACTION_MOVE ) { 
       if (event.getPointerCount() == 2 ) {
         float x0 = event.getX(1) - event.getX(0);

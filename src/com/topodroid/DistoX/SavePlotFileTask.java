@@ -206,19 +206,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
 
         long now  = System.currentTimeMillis();
-        long time = now - 600000; // ten minutes before now
-        // TDPath.checkPath( tempname1 );
-        File tmpDir = TDPath.getTmpDir();
-        File[] files = tmpDir.listFiles();
-        if ( files != null ) for ( File f : files ) {
-          if ( f.getName().endsWith("tmp") && f.lastModified() < time ) {
-            // TDLog.Log( TDLog.LOG_PLOT, "delete temp file " + f.getAbsolutePath() );
-            if ( ! f.delete() ) TDLog.Error("File delete error");
-          }
-        }
+        TDFile.clearCache( 600000 ); // clean the cache ten minutes before now
 
-        String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
-        File file1 = TDFile.getFile( tempname1 );
+        // String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
+        // File file1 = TDFile.getFile( tempname1 );
+        File file1 = TDPath.getCacheFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
+
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
         // Log.v( "DistoX", "saving binary " + mFullName );
         if ( mSuffix == PlotSave.CREATE ) {
@@ -232,11 +225,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
         if ( isCancelled() ) {
           TDLog.Error( "binary save cancelled " + mFullName );
-          if ( ! file1.delete() ) TDLog.Error("File delete error");
+          // if ( ! file1.delete() ) TDLog.Error("File delete error"); // no need to delete cache file
           ret2 = false;
         } else {
           // TDLog.Log( TDLog.LOG_PLOT, "save binary completed" + mFullName );
           // Log.v( "DistoX", "save binary completed" + mFullName );
+
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
           File file0 = TDFile.getFile( filename1 );
           if ( file0.exists() ) {
