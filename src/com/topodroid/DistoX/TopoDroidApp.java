@@ -800,8 +800,8 @@ public class TopoDroidApp extends Application
 
     // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
+    // Log.v("DistoX-PATH", "version " + version + " " + TDVersion.string() );
     if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
-      // Log.v("DistoX-PATH", "version " + version + " " + TDVersion.string() );
       mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
       if ( mDData.getValue( "symbol_version" ) == null ) {

@@ -71,6 +71,17 @@ public class ImportDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
     ( (Button)findViewById( R.id.button_cancel ) ).setOnClickListener( this );
 
+    /*
+    ContentResolver resolver = context.getContentResolver();
+    Uri uri = MediaStore.Files.getContentUri("external");
+    String[] projection = null;
+    String selection = MediaStore.Files.FileColumns.MIME_TYPE + "=?";
+    String mimeZip = MimeTypeMap.getSingleton().getMimeTypeFromExtension("zip");
+    String[] selectionArgs = new String[]{ mimeZip };
+    String sortOrder = null;
+    Cursor allFiles = cr.query(uri, projection, selection, selectionArgs, sortOrder);
+    */
+
     ArrayList< String > names = new ArrayList<>();
     if ( mFiles != null ) {
       for ( File f : mFiles ) { 

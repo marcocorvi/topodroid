@@ -622,8 +622,10 @@ public class TDFile
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
 
-  public static File getSettingsFile() { return new File( TDInstance.context.getExternalFilesDir( null ), "settings.txt" ); }
-  public static File getLogFile()      { return new File( TDInstance.context.getExternalFilesDir( null ), "log.txt" ); }
+  public static File getSettingsFile()   { return new File( TDInstance.context.getExternalFilesDir( null ), "settings.txt" ); }
+  public static File getLogFile()        { return new File( TDInstance.context.getExternalFilesDir( null ), "log.txt" ); }
+  public static File getDeviceDatabase() { return new File( TDInstance.context.getExternalFilesDir( null ), "device10.sqlite" ); }
+  public static File getPacketDatabase() { return new File( TDInstance.context.getExternalFilesDir( null ), "packet10.sqlite" ); }
 
   public static File getExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ); }
 

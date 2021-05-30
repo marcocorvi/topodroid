@@ -1248,6 +1248,10 @@ Tap "Close" not to take any action.
   <string name="pref_crs_summary">Nome do CRS como no Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">MédiaGPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Utilizar a média para produzir coordenadas GPS</string -->
+  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
+  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
+  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
+  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
 
   <string name="pref_plot_screen_title">CROQUI</string>
   <string name="pref_tool_line_title">LINHAS</string>

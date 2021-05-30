@@ -1296,6 +1296,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_crs_summary">CRS name, as in Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
+  <string name="pref_bric_mode_title">BRIC mode</string>
+  <string name="pref_bric_mode_summary">BRIC operating mode</string>
+  <string name="pref_bric_zero_length_title">BRIC zero shot</string>
+  <string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string>
 
   <string name="pref_plot_screen_title">SKETCH</string>
   <string name="pref_tool_line_title">LINES</string>

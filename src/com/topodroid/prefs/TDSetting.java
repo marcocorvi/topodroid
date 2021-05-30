@@ -245,6 +245,7 @@ public class TDSetting
 
   public static boolean mFirmwareSanity = true; // enforce firmware sanity checks
   public static int mBricMode = BricMode.MODE_NO_INDEX;
+  public static boolean mBricZeroLength = false; // whether to handle 0-length data
 
   // public static final boolean CHECK_BT = true;
   public static int mCheckBT = 1;        // BT: 0 disabled, 1 check on start, 2 enabled
@@ -840,6 +841,7 @@ public class TDSetting
     mWaitShot       = tryInt( prefs,    keyGDev[ 5],      defGDev[ 5] );   // DISTOX_WAIT_SHOT
     mFirmwareSanity = prefs.getBoolean( keyGDev[ 6], bool(defGDev[ 6]) );  // DISTOX_FIRMWARE_SANITY
     mBricMode       = tryInt( prefs,    keyGDev[ 7],      defGDev[ 7] );   // DISTOX_BRIC_MODE
+    mBricZeroLength = prefs.getBoolean( keyGDev[ 8], bool(defGDev[ 8]) );  // DISTOX_BRIC_ZERO_LENGTH
     // Log.v("DistoX", "load geek device done");
 
     String[] keyImport = TDPrefKey.EXPORT_import;
@@ -1535,6 +1537,8 @@ public class TDSetting
       mFirmwareSanity = tryBooleanValue( hlp, k, v, bool(def[6]) );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_BRIC_MODE
       mBricMode = tryIntValue( hlp, k, v, def[7] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BRIC_ZERO_LENGTH
+      mBricZeroLength = tryBooleanValue( hlp, k, v, bool(def[8]) );
     } else {
       TDLog.Error("missing DEVICE key: " + k );
     }

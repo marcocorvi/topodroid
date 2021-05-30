@@ -16,6 +16,7 @@
 package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.DistoX.TDPath;
 
@@ -83,7 +84,7 @@ public class PacketLogger extends DataSetObservable
 
   void openDatabase()
   {
-    String database_name = TDPath.getPacketDatabase();
+    String database_name = TDFile.getPacketDatabase().getAbsolutePath();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {

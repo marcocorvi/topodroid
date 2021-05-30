@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <string name="pref_bric_mode_title">BRIC mode</string>
   <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>
      <!-- item name="sequence">Sequence</item -->

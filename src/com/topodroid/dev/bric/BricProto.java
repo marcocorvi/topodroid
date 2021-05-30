@@ -164,18 +164,21 @@ public class BricProto extends TopoDroidProtocol
   {
     // Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
-      TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
-      // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
-      int index = ( TDSetting.mBricMode == BricMode.MODE_NO_INDEX )? -1 : mIndex;
-      float clino = 0;
-      float azimuth = 0;
-      if ( mErr1 >= 14 || mErr2 >= 14 ) { 
-        clino   = ( mErr1 == 14 )? mErrVal1 : (mErr2 == 14)? mErrVal2 : 0;
-        azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
+      if ( TDSetting.mBricZeroLength || mDistance > 0.01 ) {
+        TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
+        // mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+        int index = ( TDSetting.mBricMode == BricMode.MODE_NO_INDEX )? -1 : mIndex;
+        float clino = 0;
+        float azimuth = 0;
+        if ( mErr1 >= 14 || mErr2 >= 14 ) { 
+          clino   = ( mErr1 == 14 )? mErrVal1 : (mErr2 == 14)? mErrVal2 : 0;
+          azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
+        }
+        int data_type = ( mType == 1 )? DataType.DATA_SCAN : DataType.DATA_SHOT;
+        mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment );
+      } else {
+        TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: skipping 0-length data");
       }
-
-      int data_type = ( mType == 1 )? DataType.DATA_SCAN : DataType.DATA_SHOT;
-      mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment );
       mPrimToDo = false;
       mLastIndex = mIndex;
     } else if ( mIndex == mLastIndex ) {
@@ -198,7 +201,11 @@ public class BricProto extends TopoDroidProtocol
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
       mClino    = BricConst.getClino( bytes );
-      mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+      if ( TDSetting.mBricZeroLength || mDistance > 0.01 ) { 
+        mComm.handleRegularPacket( DataType.PACKET_DATA, mLister, DataType.DATA_SHOT );
+      } else { 
+        TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: skipping 0-length data");
+      }
     } else {
       TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add & process - repeated prim: ... skip");
     }

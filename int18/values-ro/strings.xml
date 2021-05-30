@@ -1245,6 +1245,10 @@ Tap "Close" not to take any action.
   <string name="pref_crs_summary">Nume CRS ca în Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Medierea valorilor GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Activează medierea valorilor GPS</string -->
+  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
+  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
+  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
+  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
 
   <string name="pref_plot_screen_title">SCHIȚĂ</string>
   <string name="pref_tool_line_title">LINII</string>

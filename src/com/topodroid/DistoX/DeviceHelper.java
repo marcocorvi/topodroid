@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.dev.Device;
@@ -19,7 +20,7 @@ import com.topodroid.calib.CBlock;
 import com.topodroid.calib.CalibInfo;
 import com.topodroid.calib.CalibResult;
 
-// import android.util.Log;
+import android.util.Log;
 
 import android.content.Context;
 import android.content.ContentValues;
@@ -107,7 +108,8 @@ public class DeviceHelper extends DataSetObservable
 
   private void openDatabase()
   {
-    String database_name = TDPath.getDeviceDatabase();
+    String database_name = TDFile.getDeviceDatabase().getAbsolutePath();
+    Log.v("DistoX", "Device DB <" + database_name + ">");
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {

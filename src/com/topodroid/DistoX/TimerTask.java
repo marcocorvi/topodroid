@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
@@ -54,13 +55,14 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mWait    = wait;
     mCount   = count;
     mSensorManager = (SensorManager)TDInstance.context.getSystemService( Context.SENSOR_SERVICE );
-    // Log.v("DistoX", "timer task axis " + axis );
+    TDLog.Log( TDLog.LOG_PHOTO, "Timer task axis " + axis );
   }
 
   @Override
   protected Long doInBackground( String... str )
   {
     // Log.v("DistoX", "timer task in bkgr");
+    TDLog.Log( TDLog.LOG_PHOTO, "Timer task in background - run " + mRun );
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
@@ -74,6 +76,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
         break;
       }
     }
+    TDLog.Log( TDLog.LOG_PHOTO, "Timer task ready - run " + mRun );
     if ( mRun ) {
       int cnt = 3*mCount;
       mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
@@ -90,9 +93,11 @@ class TimerTask extends AsyncTask<String, Integer, Long >
             TDUtil.slowDown( 100 );
           }    
           mSensorManager.unregisterListener( this );
+        } else {
+          TDLog.Log( TDLog.LOG_PHOTO, "Timer task: no sensors" );
         }
-      // } else {
-      //   // FAILED
+      } else {
+        TDLog.Log( TDLog.LOG_PHOTO, "Timer task: no sensor manager" );
       }
     }
     // Log.v("DistoX", "timer task bkgr done");
@@ -107,7 +112,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
-    // Log.v("DistoX", "timer task post exec. Acc " + mCntAcc + " Mag " + mCntMag );
+    TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntAcc + " Mag " + mCntMag + " run " + mRun );
     if ( mCntAcc > 0 && mCntMag > 0 && mRun ) {
       mValAcc[0] /= mCntAcc;
       mValAcc[1] /= mCntAcc;
@@ -115,10 +120,16 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       mValMag[0] /= mCntMag;
       mValMag[1] /= mCntMag;
       mValMag[2] /= mCntMag;
-      computeBearingAndClino();
-    // } else {
-    //   TDToast.makeBad(R.string.insufficient_data );
+    } else {
+      mValAcc[0] = 0;
+      mValAcc[1] = 0;
+      mValAcc[2] = 0;
+      mValMag[0] = 0;
+      mValMag[1] = 0;
+      mValMag[2] = 0;
+      TDLog.Log( TDLog.LOG_PHOTO, "Timer task null direction. Acc. counts " + mCntAcc + " Mag. counts " + mCntMag );
     }
+    computeBearingAndClino();
   }
 
   @Override
@@ -146,7 +157,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
 
   private void computeBearingAndClino( )
   {
-    // Log.v("DistoX", "Timer Task compute B & C ");
+    TDLog.Log( TDLog.LOG_PHOTO, "Timer task compute B & C" );
     TDVector g = new TDVector( mValAcc[0], mValAcc[1], mValAcc[2] );
     TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] );
     g.normalize();

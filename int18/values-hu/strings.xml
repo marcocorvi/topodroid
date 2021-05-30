@@ -1281,6 +1281,10 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
+  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
+  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
+  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
+  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
 
   <string name="pref_plot_screen_title">VÁZLAT</string>
   <string name="pref_tool_line_title">VONALAK</string>

@@ -1258,6 +1258,10 @@ Tap "Close" not to take any action.
   <string name="pref_crs_summary">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
+  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
+  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
+  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
+  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
 
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
