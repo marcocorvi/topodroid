@@ -57,13 +57,13 @@ Tap <b>Bezár</b> nem változtat.
     <string name="vsplay">V</string>
 
     <string name="cut">VÁGÁS</string>
-    <string name="copy">MÁSOLÁS</string>
-    <string name="paste">BEILLESZTÉS</string>
+    <string name="copy">MÁSOL</string>
+    <string name="paste">BEILLESZT</string>
     <string name="copied">%1$s másolva a vágólapra</string>
 
     <string name="memoryA3">DistoX A3 memória </string>
     <string name="memoryX310">DistoX X310 memória</string>
-    <!-- UNUSED string name="memory_data">DistoX data</string -->
+    <!-- UNUSED string name="memory_data">DistoX adat</string -->
 
     <string name="thp_user">felhasználó</string>
     <string name="thp_label">felirat</string>
