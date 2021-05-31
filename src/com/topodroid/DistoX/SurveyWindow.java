@@ -378,16 +378,7 @@ public class SurveyWindow extends Activity
   private void doArchive()
   {
     while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
-
     (new ExportZipTask( getApplicationContext(), mApp )).execute();
-    // TopoDroidApp.doExportDataSync( TDSetting.mExportShotsFormat );
-    // Archiver archiver = new Archiver( );
-    // if ( archiver.archive( mApp ) ) {
-    //   String msg = getResources().getString( R.string.zip_saved ) + " " + archiver.zipname;
-    //   TDToast.make( msg );
-    // } else {
-    //   TDToast.makeBad( R.string.zip_failed );
-    // }
   }
 
   private void askDelete()

@@ -79,11 +79,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
      // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
 
-     // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
-     //   origin = parent.getOrigin();
-     //   psd1 = parent.makePlotSaveData( 1, suffix, rotate );
-     //   psd2 = parent.makePlotSaveData( 2, suffix, rotate );
-     // }
+     if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
+       origin = parent.getOrigin();
+       psd1 = parent.makePlotSaveData( 1, suffix, rotate );
+       psd2 = parent.makePlotSaveData( 2, suffix, rotate );
+     }
   }
 
   SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
@@ -129,66 +129,66 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
-        // switch ( TDSetting.mExportPlotFormat ) { // auto-export format
-        //   case TDConst.DISTOX_EXPORT_TH2:
-        //     if ( mManager != null ) {
-        //       File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-        //       DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
-        //     }
-        //     break;
-        //   case TDConst.DISTOX_EXPORT_DXF:
-	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "dxf", false );
-	//     }
-        //     break;
-        //   case TDConst.DISTOX_EXPORT_SVG:
-	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "svg", false );
-	//     }
-        //     break;
-        //   case TDConst.DISTOX_EXPORT_SHP:
-	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "shp", false );
-	//     }
-        //     break;
-        //   case TDConst.DISTOX_EXPORT_XVI:
-	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "xvi", false );
-	//     }
-        //     break;
-        //   // case TDConst.DISTOX_EXPORT_C3D:
-	//   //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //   //     mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "c3d", false );
-	//   //   }
-        //   //   break;
-        //   case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
-        //     if ( PlotType.isSketch2D( mType ) ) {
-	//       if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-        //         mParent.get().doSaveCsx( origin, psd1, psd2, false );
-	//       }
-        //       break;
-        //     } else { // X-Section cSurvey are exported as PNG
-        //       // fall-through
-        //     }
-        //   case TDConst.DISTOX_EXPORT_PNG:
-        //     if ( mManager != null ) {
-        //       Bitmap bitmap = mManager.getBitmap();
-        //       if (bitmap == null) {
-        //         TDLog.Error( "cannot save PNG: null bitmap" );
-        //         ret1 = false;
-        //       } else {
-        //         float scale = mManager.getBitmapScale();
-        //         if (scale > 0) {
-        //           // FIXME execute must be called from the main thread, current thread is working thread
-        //           (new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false )).exec();
-        //         } else {
-        //           TDLog.Error( "cannot save PNG: negative scale" );
-        //           ret1 = false;
-        //         }
-        //       }
-        //     }
-        //     break;
-        // }
+        switch ( TDSetting.mExportPlotFormat ) { // auto-export format
+          case TDConst.DISTOX_EXPORT_TH2:
+            if ( mManager != null ) {
+              File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
+              DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+            }
+            break;
+          case TDConst.DISTOX_EXPORT_DXF:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "dxf", false );
+	    }
+            break;
+          case TDConst.DISTOX_EXPORT_SVG:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "svg", false );
+	    }
+            break;
+          case TDConst.DISTOX_EXPORT_SHP:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "shp", false );
+	    }
+            break;
+          case TDConst.DISTOX_EXPORT_XVI:
+	    if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "xvi", false );
+	    }
+            break;
+          // case TDConst.DISTOX_EXPORT_C3D:
+	  //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+          //     mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "c3d", false );
+	  //   }
+          //   break;
+          case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
+            if ( PlotType.isSketch2D( mType ) ) {
+	      if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+                mParent.get().doSaveCsx( origin, psd1, psd2, false );
+	      }
+              break;
+            } else { // X-Section cSurvey are exported as PNG
+              // fall-through
+            }
+          case TDConst.DISTOX_EXPORT_PNG:
+            if ( mManager != null ) {
+              Bitmap bitmap = mManager.getBitmap();
+              if (bitmap == null) {
+                TDLog.Error( "cannot save PNG: null bitmap" );
+                ret1 = false;
+              } else {
+                float scale = mManager.getBitmapScale();
+                if (scale > 0) {
+                  // FIXME execute must be called from the main thread, current thread is working thread
+                  (new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false )).exec();
+                } else {
+                  TDLog.Error( "cannot save PNG: negative scale" );
+                  ret1 = false;
+                }
+              }
+            }
+            break;
+        }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
 	Log.v("DistoXX", "save plot Therion file OVERVIEW " + mFullName );
         File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );

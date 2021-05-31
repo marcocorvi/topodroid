@@ -478,14 +478,14 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.stationNames, R.array.stationNamesValue, ctx, hlp ),
       makeEdt( cat, key[ 3], tit[ 3], dsc[3], B, def[3], STRING, ctx, hlp ),
       makeEdt( cat, key[ 4], tit[ 4], dsc[4], A, def[4], INTEGER, ctx, hlp ),
-      // makeCbx( cat, key[ 5], tit[ 5], dsc[5], B, def[5], ctx, hlp ),
       makeCbx( cat, key[ 5], tit[ 5], dsc[5], E, def[5], ctx, hlp ),
       makeCbx( cat, key[ 6], tit[ 6], dsc[6], B, def[6], ctx, hlp ),
       makeCbx( cat, key[ 7], tit[ 7], dsc[7], B, def[7], ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp ),
+      makeCbx( cat, key[ 8], tit[ 8], dsc[8], B, def[8], ctx, hlp ),
       makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp ),
-      makeFwd( cat, key[10], tit[10],         N,         ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],         A,         ctx, hlp )
+      makeFwd( cat, key[10], tit[10],         B,         ctx, hlp ),
+      makeFwd( cat, key[11], tit[11],         N,         ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],         A,         ctx, hlp )
     };
   }
 

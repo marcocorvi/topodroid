@@ -184,7 +184,6 @@ public class QCamDrawingSurface extends SurfaceView
     TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
-      // Log.v( TAG, "close qcam" );
       mCamera.stopPreview();
       mCamera.release();
       mCamera = null;

@@ -89,12 +89,12 @@ class QCamCompass extends Dialog
     mWithDelay = with_delay;
     mHasSaved  = false;
     mHasShot   = false;
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
   }
 
   void enableButtons( boolean enable )
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable buttons " + enable );
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable buttons " + enable );
     buttonClick.setEnabled( enable );
     buttonCancel.setEnabled( enable );
     // if ( enable ) {
@@ -108,7 +108,7 @@ class QCamCompass extends Dialog
 
   private void enableButtonSave( boolean enable )
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable save button " + enable );
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass enable save button " + enable );
     buttonSave.setEnabled( enable );
     // buttonSave.setVisibility( enable? View.VISIBLE : View.GONE );
     TDandroid.setButtonBackground( buttonSave, (enable? mBDsaveok : mBDsaveoff) );
@@ -245,7 +245,7 @@ class QCamCompass extends Dialog
     int act = event.getAction();
     int action = act & MotionEvent.ACTION_MASK;
     boolean ret = false;
-    TDLog.Log( TDLog.LOG_PHOTO, "QCam compass. Touch ptrs " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCam compass. Touch ptrs " + event.getPointerCount() + " " + event.getX(0) + " " + event.getY(0) );
     if ( action == MotionEvent.ACTION_MOVE ) { 
       if (event.getPointerCount() == 2 ) {
         float x0 = event.getX(1) - event.getX(0);
