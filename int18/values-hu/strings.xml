@@ -57,13 +57,13 @@ Tap <b>Bezár</b> nem változtat.
     <string name="vsplay">V</string>
 
     <string name="cut">VÁGÁS</string>
-    <string name="copy">MÁSOLÁS</string>
-    <string name="paste">BEILLESZTÉS</string>
+    <string name="copy">MÁSOL</string>
+    <string name="paste">BEILLESZT</string>
     <string name="copied">%1$s másolva a vágólapra</string>
 
     <string name="memoryA3">DistoX A3 memória </string>
     <string name="memoryX310">DistoX X310 memória</string>
-    <!-- UNUSED string name="memory_data">DistoX data</string -->
+    <!-- UNUSED string name="memory_data">DistoX adat</string -->
 
     <string name="thp_user">felhasználó</string>
     <string name="thp_label">felirat</string>
@@ -644,10 +644,10 @@ Tap <b>Bezár</b> nem változtat.
     <string name="extended">KIT.OLDALNÉZET</string>
     <string name="profile">VET.OLDALNÉZET</string>
     <string name="extended_profile">Kiterített Oldalnézet</string>
-    <!-- TODO string name="x_section">X-SECTION</string -->
-    <!-- TODO string name="v_section">V-SECTION</string -->
+    <string name="x_section">KERESZTMETSZET</string>
+    <string name="v_section">V-METSZET</string>
     <string name="h_section">Horizontális keresztszelvény</string>
-    <!-- UNUSED string name="landscape">landscape</string -->
+    <!-- UNUSED string name="landscape">térkép</string -->
 
     <string name="display_view">Képernyő</string>
     <string name="plan_view">alaprajz</string>
@@ -659,9 +659,9 @@ Tap <b>Bezár</b> nem változtat.
     <string name="distox_err_headtail_eof">DA fájl sérült, vagy nem kompatibilis (EOF hiba)</string>
     <string name="distox_err_connected">A műszer már kapcsolatban</string>
 
-    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
+    <!-- UNUSED string name="ask_close">Bezárod a TopoDroid-ot?</string -->
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
-    <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
+    <!-- UNUSED string name="ask_close_survey">Bezárod a felmérést?</string -->
     <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
     <string name="ask_backups_clear">Törli a vázlat mentéseket?</string>
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
@@ -1279,12 +1279,12 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_firmware_sanity_summary">Firmware biztonsági ellenőrzés végrehajtva</string>
   <string name="pref_crs_title">Koordinátarendszer</string>
   <string name="pref_crs_summary">Írd be a koordinátarendszer nevét Proj.4 szerint</string>
-  <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Whether to use GPSAveraging</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+  <!-- UNUSED string name="pref_gps_averaging_title">GPS átlagolás</string -->
+  <!-- UNUSED string name="pref_gps_averaging_summary">GPSátlagolás használata</string -->
+  <string name="pref_bric_mode_title">BRIC mód</string>
+  <string name="pref_bric_mode_summary">BRIC működési mód</string>
+  <string name="pref_bric_zero_length_title">BRIC nulla mérés</string>
+  <string name="pref_bric_zero_length_summary">BRIC nulla-hossz mérés rögzítése</string>
 
   <string name="pref_plot_screen_title">VÁZLAT</string>
   <string name="pref_tool_line_title">VONALAK</string>
