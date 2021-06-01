@@ -173,7 +173,7 @@
      <item name="for">Segédpontok, előremérés</item>
      <item name="back">Segédpontok, hátramérés</item>
      <item name="backsight">Visszamérés</item>
-     <item name="tripod">Háromláb</item>
+     <item name="tripod">Állvány</item>
      <item name="anomaly">Mágn. anomália</item>
      <item name="for2">Előremérés, segédpontok</item>
      <item name="back2">Hátramérés, segédpontok</item>
@@ -198,14 +198,14 @@
      <item name="for">Segédpontok, előremérés</item>
      <item name="back">Segédpontok, hátrafelémérés</item>
      <item name="backsight">Visszamérés</item>
-     <item name="tripod">Háromláb</item>
+     <item name="tripod">Állvány</item>
   </string-array>
   <string-array name="surveyStationsE">
      <item name="no">Nincs</item>
      <item name="for">Segédpontok, előremérés</item>
      <item name="back">Segédpontok, hátrafelémérés</item>
      <item name="backsight">Visszamérés</item>
-     <item name="tripod">Háromláb</item>
+     <item name="tripod">Állvány</item>
      <item name="anomaly">Magn. anomaly</item>
      <item name="for2">Előremérés, segédpontok</item>
      <item name="back2">Hátrafelé mérés, segédpontok</item>
