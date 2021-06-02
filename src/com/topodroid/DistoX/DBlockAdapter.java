@@ -40,26 +40,27 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
                     implements OnLongClickListener
                     // , OnClickListener
 {
+  private static final int START = 0;
   // private Context mContext;
   private final ShotWindow mParent;
-  ArrayList< DBlock > mItems;
+  // ArrayList< DBlock > mItems;
   ArrayList< DBlock > mSelect;
   boolean show_ids;  //!< whether to show data ids
   private final LayoutInflater mLayoutInflater;
   private final boolean diving;
   private SearchResult mSearch;
 
-  // private ArrayList< View > mViews;
-
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
-    super( ctx, id, items );
+    super( ctx, id );
     // mContext = ctx;
     mParent  = parent;
-    mItems   = items;
+    // mItems   = items;
+    add( new DBlock() );
+    addAll( items );
+
     mSelect  = new ArrayList<>();
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
-    // mViews = new ArrayList<>();
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
     // Log.v("DistoX", "DBlock Adapter, diving " + diving );
     mSearch = new SearchResult();
@@ -69,14 +70,14 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     mSearch.reset( name );
     if ( name == null || name.length() == 0 ) return; // null;
-    for ( int pos=0; pos < mItems.size(); ++pos ) {
-      DBlock blk = mItems.get( pos );
-      if ( blk.isSplay() && splays && name.equals( blk.mFrom ) ) {
+    for ( int pos=START; pos < getCount(); ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
+      if ( b.isSplay() && splays && name.equals( b.mFrom ) ) {
         mSearch.add( pos );
-        blk.setBackgroundColor( TDColor.SEARCH );
-      } else if ( blk.isLeg() && ( name.equals( blk.mFrom ) || name.equals( blk.mTo ) ) ) {
+        b.setBackgroundColor( TDColor.SEARCH );
+      } else if ( b.isLeg() && ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) ) {
         mSearch.add( pos );
-        blk.setBackgroundColor( TDColor.SEARCH );
+        b.setBackgroundColor( TDColor.SEARCH );
       }
     }
     // Log.v("DistoX-SEARCH", " search station " + name + " results " + mSearch.size() );
@@ -87,19 +88,19 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     mSearch.reset( null );
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
-      for ( int pos=0; pos < mItems.size(); ++pos ) {
-        DBlock blk = mItems.get( pos );
-        if ( blk.getIntExtend( ) > 1 && blk.isLeg() ) {
+      for ( int pos=START; pos < getCount(); ++pos ) {
+        DBlock b = (DBlock)( getItem( pos ) );
+        if ( b.getIntExtend( ) > 1 && b.isLeg() ) {
           mSearch.add( pos );
-          blk.setBackgroundColor( TDColor.SEARCH );
+          b.setBackgroundColor( TDColor.SEARCH );
         }
       }
     } else { // real flag
-      for ( int pos=0; pos < mItems.size(); ++pos ) {
-        DBlock blk = mItems.get( pos );
-        if ( blk.hasFlag( flag ) ) {
+      for ( int pos=START; pos < getCount(); ++pos ) {
+        DBlock b = (DBlock)( getItem( pos ) );
+        if ( b.hasFlag( flag ) ) {
           mSearch.add( pos );
-          blk.setBackgroundColor( TDColor.SEARCH );
+          b.setBackgroundColor( TDColor.SEARCH );
         }
       }
     }
@@ -111,22 +112,22 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   boolean multiSelect(int pos ) 
   {
-    if ( pos >= 0 && pos < mItems.size() ) {
-      DBlock blk = mItems.get( pos );
-      if ( blk != null ) {
+    if ( pos >= START && pos < getCount() ) {
+      DBlock b = (DBlock)( getItem( pos ) );
+      if ( b != null ) {
         if ( mSelect.size() > 0 ) {
-          if ( mSelect.remove( blk ) ) {
-            blk.mMultiSelected = false;
-            blk.setBackgroundColor( TDColor.TRANSPARENT );
+          if ( mSelect.remove( b ) ) {
+            b.mMultiSelected = false;
+            b.setBackgroundColor( TDColor.TRANSPARENT );
           } else {
-            mSelect.add( blk );
-            blk.mMultiSelected = true;
-            blk.setBackgroundColor( TDColor.GRID );
+            mSelect.add( b );
+            b.mMultiSelected = true;
+            b.setBackgroundColor( TDColor.GRID );
           }
         } else {
-          mSelect.add( blk );
-          blk.mMultiSelected = true;
-          blk.setBackgroundColor( TDColor.GRID );
+          mSelect.add( b );
+          b.mMultiSelected = true;
+          b.setBackgroundColor( TDColor.GRID );
         }
       }
     // } else {
@@ -149,7 +150,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   { 
     for ( Integer pos : mSearch.getPositions() ) {
       try { 
-        DBlock b = mItems.get( pos.intValue()  );
+        DBlock b = (DBlock)( getItem( pos ) );
         b.setBackgroundColor( TDColor.TRANSPARENT );
       } catch ( IndexOutOfBoundsException e ) { /* nothing i can do */ }
     }
@@ -165,7 +166,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   boolean hasStation( String name ) 
   {
     if ( name == null ) return false;
-    for ( DBlock b : mItems ) {
+    for ( int pos=START; pos < getCount(); ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
       if ( ! b.isLeg() ) continue;
       if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
     }
@@ -178,20 +180,20 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
     ArrayList< DBlock > ret = new ArrayList<>();
-    for ( int k = 0; k < mItems.size(); ++k ) {
-      DBlock b = mItems.get( k );
+    for ( int k = START; k < getCount(); ++k ) {
+      DBlock b = (DBlock)( getItem( k ) );
       if ( b.mId == id ) {
         int k1 = k-1;
-        for ( ; k1 >= 0; --k1 ) {
-          DBlock b1 = mItems.get( k1 );
+        for ( ; k1 >= START; --k1 ) {
+          DBlock b1 = (DBlock)( getItem( k1 ) );
           if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
         }
         int k2 = k;
-        for ( ; k2 < mItems.size(); ++k2 ) {
-          DBlock b2 = mItems.get( k2 );
+        for ( ; k2 < getCount(); ++k2 ) {
+          DBlock b2 = (DBlock)( getItem( k2 ) );
           if ( ! b2.isSplay() || ! name.equals( b2.mFrom ) ) break;
         }
-        for ( ++k1; k1<k2; ++k1 ) ret.add( mItems.get(k1) );
+        for ( ++k1; k1<k2; ++k1 ) ret.add( (DBlock)( getItem( k1 ) ) );
         break;
       }
     }
@@ -201,10 +203,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // called only by ShotWindow updateDBlockList( blk )
   // this method changes the ArrayList of DistoxDBlock's
   //
-  boolean addDataBlock( DBlock blk ) 
+  boolean addDataBlock( DBlock b ) 
   {
-    if ( ! blk.isScan() && hasBlock( blk.mId ) ) return false;
-    mItems.add( blk );
+    if ( ! b.isScan() && hasBlock( b.mId ) ) return false;
+    add( b );
     // notifyDataSetChanged();
     return true;
   }
@@ -213,10 +215,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
-    for ( DBlock b : mItems ) b.mWithPhoto = false; 
-    for ( PhotoInfo p : photos ) {
-      // mark block with p.shotid
-      for ( DBlock b : mItems ) {
+    for ( int pos=START; pos < getCount(); ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
+      b.mWithPhoto = false; 
+      for ( PhotoInfo p : photos ) { // mark block with p.shotid
         if ( b.mId == p.shotid ) { 
           b.mWithPhoto = true;
           break;
@@ -228,11 +230,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // @return true if the block was already in the list
   private boolean hasBlock( long id )
   {
-    // Log.v("DistoX", "Data Adapter items size " + mItems.size() + " block id " + id );
-    if ( id < 0 ) return false;
-    int size = mItems.size();
+    // Log.v("DistoX", "Data Adapter items size " + getCount() + " block id " + id );
+    if ( id < START ) return false;
+    int size = getCount();
     if ( size == 0 ) return false;
-    DBlock last_blk = mItems.get( size-1 );
+    DBlock last_blk = (DBlock)( getItem( size-1 ) );
     // Log.v("DistoX", "Data Adapter ID " + id + " last_blk " + last_blk.mId + " scan " + last_blk.isScan() );
     if ( last_blk.isScan() ) return false;
     return ( id <= last_blk.mId )? true : false;
@@ -242,7 +244,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   void updateBlockName( long id, String from, String to ) 
   {
-    for ( DBlock b : mItems ) {
+    for ( int pos=START; pos < getCount(); ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == id ) {
         b.mFrom = from;
         b.mTo = to;
@@ -255,24 +258,24 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // called only by ShotWindow.updateDBlockList
   List< DBlock > getItemsForAssign()
   {
-    int size = mItems.size();
+    int size = getCount();
     int k = size-1;
-    for ( ; k > 0; --k ) { // scan from last backword until a leg is found
-      DBlock blk = mItems.get(k);
-      if ( blk.mFrom.length() > 0 && blk.mTo.length() > 0 ) break;
+    for ( ; k >= START; --k ) { // scan from last backword until a leg is found
+      DBlock b = (DBlock)( getItem( k ) );
+      if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) break;
     }
-    // List< DBlock > ret = new ArrayList<>();
-    // for ( ; k < size; ++k ) { // insert into return from the leg onward
-    //   ret.add( mItems.get(k) );
-    // }
-    // return ret; // REPLACED 20191002
-    return mItems.subList( k, size );
+    List< DBlock > ret = new ArrayList<>();
+    for ( ; k < size; ++k ) { // insert into return from the leg onward
+      ret.add( (DBlock)( getItem(k) ) );
+    }
+    return ret; // REPLACED 20191002
+    // return mItems.subList( k, size );
   }
 
   // return the block at the given position
   public DBlock get( int pos ) 
   { 
-    return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
+    return ( pos < START || pos >= getCount() )? null : (DBlock)( getItem( pos ) );
   }
 
   // public DBlock getBlockById( long id ) 
@@ -312,6 +315,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       @Override
       public void onClick( View v )
       {
+        if ( pos < START ) return;
         // Log.v("DistoX-EDIT", "onClick " + v.getId() );
         if ( (TextView)v == tvLength ) {
           mParent.itemClick( v, pos );
@@ -331,6 +335,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       @Override
       public boolean onEditorAction( TextView v, int action, KeyEvent event )
       {
+        if ( pos < START ) return false;
         // Log.v("DistoX-EDIT", "onEditor " + v.getId() );
         if ( (TextView)v == tvLength ) return false;
         // action EditorInfo.IME_NULL = 0
@@ -354,6 +359,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       @Override
       public boolean onLongClick( View v )
       {
+        if ( pos < START ) return false;
         // Log.v("DistoX-EDIT", "onLongClick " + v.getId() );
         if ( (TextView)v == tvLength ) {
           return mParent.itemLongClick( v, pos );
@@ -363,6 +369,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
     void setViewText( DBlock b, OnLongClickListener listener )
     {
+      if ( b == null ) return;
       tvId.setText( String.format(Locale.US, "%1$d", b.mId ) );
       tvFrom.setText( b.mFrom );
       tvTo.setText( b.mTo );
@@ -419,6 +426,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
    void setColor( DBlock b )
    {
+      if ( b == null ) return;
       int col = b.getColorByType();
       tvFrom.setTextColor( ( mParent.isCurrentStationName( b.mFrom ) )? TDColor.LIGHT_GREEN : col );
       tvTo.setTextColor(   ( mParent.isCurrentStationName( b.mTo   ) )? TDColor.LIGHT_GREEN : col );
@@ -472,7 +480,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    DBlock b = mItems.get( pos );
+    Log.v("DistoX", "get view at " + pos );
+    DBlock b = (DBlock)(getItem( pos ));
+
     ViewHolder holder; // = null;
     if ( convertView == null ) {
       if ( TDSetting.mEditableStations ) {
@@ -493,20 +503,25 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // if ( holder.mBlock != null ) holder.mBlock.mView = null; // REVISE_RECENT
     holder.mBlock = b;
     // holder.blkId = b.mId; // DistoX-EDIT
-    b.setView( convertView );
 
-    holder.setViewText( b, this );
-    if ( mSearch.contains( pos ) ) {
-      b.setBackgroundColor( TDColor.SEARCH );
-    } else {
-      b.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
+    if ( b != null ) {
+      b.setView( convertView );
+      holder.setViewText( b, this );
+      if ( mSearch.contains( pos ) ) {
+        b.setBackgroundColor( TDColor.SEARCH );
+      } else {
+        b.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
+      }
+      convertView.setVisibility( b.mVisible );
     }
-    convertView.setVisibility( b.mVisible );
     return convertView;
   }
 
-  @Override
-  public int getCount() { return mItems.size(); }
+  // @Override
+  // public int getCount() { 
+  //   Log.v("DistoX", "get count " + mItems.size() );
+  //   return mItems.size(); 
+  // }
 
   // replaced by getCount()
   // public int size() { return mItems.size(); }
@@ -518,12 +533,17 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //
   DBlock updateBlockView( long blk_id ) 
   {
-    for ( DBlock b : mItems ) {
+    for ( int pos=START; pos < getCount(); ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == blk_id ) { // use block id instead of block itself
         View v = b.getView();
+        // Log.v("DistoX", "DBlock adapter " + blk_id + " view is " + ((v == null)? "null" : "non-null") );
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
-          if ( holder != null ) holder.setViewText( b, this );
+          if ( holder != null ) {
+            // Log.v("DistoX", "holder set view text <" + b.mFrom + "> <" + b.mTo + ">" );
+            holder.setViewText( b, this );
+          }
           v.setVisibility( b.mVisible );
           v.invalidate();
         }
@@ -538,7 +558,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   private void updateBlocksName( boolean set )
   {
     if ( ! set ) {
-      for ( DBlock b : mItems ) {
+      for ( int pos=START; pos < getCount(); ++pos ) {
+        DBlock b = (DBlock)( getItem( pos ) );
         // if ( b.isLeg() ) {
           View v = b.getView();
           if ( v != null ) {
@@ -551,7 +572,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         // }
       }
     } else {
-      for ( DBlock b : mItems ) {
+      for ( int pos=START; pos < getCount(); ++pos ) {
+        DBlock b = (DBlock)( getItem( pos ) );
         // if ( b.isLeg() ) {
           View v = b.getView();
           if ( v != null ) {
@@ -602,7 +624,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // int reviseLatest()
   // {
   //   int revised = 0;
-  //   for ( DBlock blk : mItems ) {
+  //   for ( int pos=START; pos < getCount(); ++pos ) {
+  //     DBlock blk = (DBlock)( getItem( pos ) );
   //     if ( blk.getView() != null && blk.mWasRecent ) {
   //       if ( ! blk.isRecent() ) {
   //         blk.mWasRecent = false;

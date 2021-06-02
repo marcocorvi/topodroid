@@ -1820,6 +1820,7 @@ public class ShotWindow extends Activity
     //   blk.setTypeMainLeg();
     }
 
+    // Log.v("DistoX", "update block id " + blk.mId );
     DBlock blk3 = mDataAdapter.updateBlockView( blk.mId );
     if ( blk3 != blk && blk3 != null ) {
       blk3.setBlockName( from, to, (leg == LegType.BACK) );
@@ -1886,6 +1887,15 @@ public class ShotWindow extends Activity
   // no need to synchronize
   void renumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
+    if ( from.length() == 0 && to.length() == 0 ) {
+      for ( DBlock b : blks ) {
+        b.setBlockName( from, to );
+        updateShotName( b.mId, from, to );
+      }
+      updateDisplay();
+      return;
+    }
+
     DBlock blk = blks.get(0); // blk is guaranteed to exists
     if ( ! ( from.equals(blk.mFrom) && to.equals(blk.mTo) ) ) {
       blk.setBlockName( from, to, blk.isBackLeg() );

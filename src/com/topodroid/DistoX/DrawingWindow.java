@@ -3070,11 +3070,11 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null );
     mDrawingSurface.deletePath( point ); 
     // Log.v("DistoX", "delete point type " + point.mPointType );
-    if ( BrushManager.isPointPhoto( point.mPointType ) ) {
+    if ( point instanceof DrawingPhotoPath ) { 
       DrawingPhotoPath photo = (DrawingPhotoPath)point;
       mApp_mData.deletePhoto( TDInstance.sid, photo.mId );
       TDFile.deleteFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString( photo.mId ) ) );
-    } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
+    } else if ( point instanceof DrawingAudioPath ) { 
       DrawingAudioPath audio = (DrawingAudioPath)point;
       mApp_mData.deleteNegAudio( TDInstance.sid, audio.mId );
       TDFile.deleteFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.mId ) ) );
@@ -5704,9 +5704,9 @@ public class DrawingWindow extends ItemDrawer
           } else if ( sp.mItem instanceof DrawingPointPath ) {
             DrawingPointPath point = (DrawingPointPath)(sp.mItem);
             // Log.v("DistoX", "edit point type " + point.mPointType );
-            if ( BrushManager.isPointPhoto( point.mPointType ) ) {
-              new DrawingPhotoEditDialog( mActivity, /* this, mApp, */ (DrawingPhotoPath)point ).show();
-            } else if ( BrushManager.isPointAudio( point.mPointType ) ) {
+            if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
+              new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
+            } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
               if ( audioCheck ) {
                 DrawingAudioPath audio = (DrawingAudioPath)point;
                 new AudioDialog( mActivity, this, audio.mId, null ).show();

@@ -1897,7 +1897,7 @@ class Scrap
           DrawingPath path = (DrawingPath)cmd;
           if ( path.isPoint() ) { // path instanceof DrawingPointPath
             DrawingPointPath pt = (DrawingPointPath)path;
-            if ( BrushManager.isPointAudio( pt.mPointType ) ) {
+            if ( pt instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( pt.mPointType )
               DrawingAudioPath audio = (DrawingAudioPath)pt;
               if ( audio.mId == bid ) return audio;
             }

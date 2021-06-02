@@ -705,6 +705,7 @@ class ShotDialog extends MyDialog
         leg = LegType.BACK;
       }
       // Log.v("DistoXX", "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
+      // Log.v("DistoX-SPLAY", "from <" + shot_from + "> to <" + shot_to + ">" );
       mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
