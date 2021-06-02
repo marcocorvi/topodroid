@@ -445,7 +445,7 @@ public class ShotWindow extends Activity
       if ( ! scan ) { // normal data
         mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
-          ret = mApp.assignStationsAll( mDataAdapter.mItems );
+          ret = mApp.assignStationsAll( mDataAdapter.getItems() );
         } else {
           ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
         }
@@ -801,7 +801,7 @@ public class ShotWindow extends Activity
       }
     } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
-    } else if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic && p++ == pos ) { // 3D
+    } else if ( TDPath.BELOW_ANDROID_11 && TDLevel.overBasic && p++ == pos ) { // 3D
       // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
         int check = TDandroid.checkCave3Dversion( this );
         if ( check < 0 ) {
@@ -2116,7 +2116,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( /* TDPath.BELOW_ANDROID_11 && */ TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TDPath.BELOW_ANDROID_11 && TDLevel.overBasic ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
     if ( TDLevel.overNormal && ! TDInstance.isDivingMode() ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_device
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_options
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_help

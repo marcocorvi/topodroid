@@ -276,7 +276,7 @@ public class MainWindow extends Activity
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
         }
-      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
+      } else if ( TDPath.BELOW_ANDROID_11 && TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
         int check = TDandroid.checkCave3Dversion( this );
         if ( check < 0 ) {
           TDToast.makeBad( R.string.no_cave3d );
@@ -710,7 +710,10 @@ public class MainWindow extends Activity
 
     // FIXME THMANAGER
     mNrButton1 = 4;
-    if ( TDLevel.overExpert ) mNrButton1 += 2; // TH MANAGER and CAVE3D
+    if ( TDLevel.overExpert ) {
+      ++ mNrButton1; // TH MANAGER
+      if ( TDPath.BELOW_ANDROID_11 ) ++mNrButton1; // CAVE3D
+    }
     mButton1 = new Button[ mNrButton1 + 1 ];
 
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );

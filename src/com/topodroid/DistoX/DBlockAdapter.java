@@ -70,7 +70,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   {
     mSearch.reset( name );
     if ( name == null || name.length() == 0 ) return; // null;
-    for ( int pos=START; pos < getCount(); ++pos ) {
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.isSplay() && splays && name.equals( b.mFrom ) ) {
         mSearch.add( pos );
@@ -87,8 +88,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   void searchShot( long flag )
   {
     mSearch.reset( null );
+    int size = getCount();
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
-      for ( int pos=START; pos < getCount(); ++pos ) {
+      for ( int pos=START; pos < size; ++pos ) {
         DBlock b = (DBlock)( getItem( pos ) );
         if ( b.getIntExtend( ) > 1 && b.isLeg() ) {
           mSearch.add( pos );
@@ -96,7 +98,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         }
       }
     } else { // real flag
-      for ( int pos=START; pos < getCount(); ++pos ) {
+      for ( int pos=START; pos < size; ++pos ) {
         DBlock b = (DBlock)( getItem( pos ) );
         if ( b.hasFlag( flag ) ) {
           mSearch.add( pos );
@@ -166,7 +168,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   boolean hasStation( String name ) 
   {
     if ( name == null ) return false;
-    for ( int pos=START; pos < getCount(); ++pos ) {
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( ! b.isLeg() ) continue;
       if ( name.equals( b.mFrom ) || name.equals( b.mTo ) ) return true;
@@ -180,7 +183,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
     ArrayList< DBlock > ret = new ArrayList<>();
-    for ( int k = START; k < getCount(); ++k ) {
+    int size = getCount();
+    for ( int k = START; k < size; ++k ) {
       DBlock b = (DBlock)( getItem( k ) );
       if ( b.mId == id ) {
         int k1 = k-1;
@@ -189,7 +193,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
         }
         int k2 = k;
-        for ( ; k2 < getCount(); ++k2 ) {
+        for ( ; k2 < size; ++k2 ) {
           DBlock b2 = (DBlock)( getItem( k2 ) );
           if ( ! b2.isSplay() || ! name.equals( b2.mFrom ) ) break;
         }
@@ -215,7 +219,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
-    for ( int pos=START; pos < getCount(); ++pos ) {
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       b.mWithPhoto = false; 
       for ( PhotoInfo p : photos ) { // mark block with p.shotid
@@ -244,7 +249,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   void updateBlockName( long id, String from, String to ) 
   {
-    for ( int pos=START; pos < getCount(); ++pos ) {
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == id ) {
         b.mFrom = from;
@@ -252,6 +258,14 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         break;
       }
     }
+  }
+
+  List< DBlock > getItems() 
+  {
+    ArrayList<DBlock> ret = new ArrayList<>();
+    int size = getCount();
+    for ( int k=START; k<size; ++k ) ret.add( (DBlock) getItem(k) );
+    return ret;
   }
 
   // return the list of blocks to assign station names
@@ -533,7 +547,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //
   DBlock updateBlockView( long blk_id ) 
   {
-    for ( int pos=START; pos < getCount(); ++pos ) {
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == blk_id ) { // use block id instead of block itself
         View v = b.getView();
@@ -557,8 +572,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // @param set   whether to set green or normal color
   private void updateBlocksName( boolean set )
   {
+    int size = getCount();
     if ( ! set ) {
-      for ( int pos=START; pos < getCount(); ++pos ) {
+      for ( int pos=START; pos < size; ++pos ) {
         DBlock b = (DBlock)( getItem( pos ) );
         // if ( b.isLeg() ) {
           View v = b.getView();
@@ -572,7 +588,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         // }
       }
     } else {
-      for ( int pos=START; pos < getCount(); ++pos ) {
+      for ( int pos=START; pos < size; ++pos ) {
         DBlock b = (DBlock)( getItem( pos ) );
         // if ( b.isLeg() ) {
           View v = b.getView();
@@ -624,7 +640,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // int reviseLatest()
   // {
   //   int revised = 0;
-  //   for ( int pos=START; pos < getCount(); ++pos ) {
+  //   int size = getCount();
+  //   for ( int pos=START; pos < size; ++pos ) {
   //     DBlock blk = (DBlock)( getItem( pos ) );
   //     if ( blk.getView() != null && blk.mWasRecent ) {
   //       if ( ! blk.isRecent() ) {
