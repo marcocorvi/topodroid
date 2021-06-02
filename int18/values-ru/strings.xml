@@ -630,7 +630,7 @@
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
     <string name="extended_profile">Разрез-развертка</string>
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
-    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="x_section">Поперечное-СЕЧЕНИЕ</string>
     <string name="v_section">Верт-СЕЧЕНИЕ</string>
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
     <!-- UNUSED string name="landscape">альбомная</string -->
@@ -1249,10 +1249,10 @@
   <string name="pref_crs_summary">Введите название CRS точно также как в программе Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Осреднение данных GPS </string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Использовать GPSAveraging?</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+  <string name="pref_bric_mode_title">Режим BRIC</string>
+  <string name="pref_bric_mode_summary">Режим работы BRIC</string>
+  <string name="pref_bric_zero_length_title">Нулевой замер BRIC</string>
+  <string name="pref_bric_zero_length_summary">Записать замер нулевой длины BRIC</string>
 
   <string name="pref_plot_screen_title">НАСТРОЙКИ ЭКРАНА АБРИСОВ</string>
   <string name="pref_tool_line_title">НАСТРОЙКИ ЛИНИЙ</string>
