@@ -582,7 +582,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="start_station">induló pont [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
-    <string name="toggle_ok">DistoX átkapcsolva kalibrációs üzemmódba</string>
+    <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>
