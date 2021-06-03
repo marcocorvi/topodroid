@@ -1449,8 +1449,8 @@
   <string name="pref_th2_xvi_summary">Включить изображение xvi в th2 файл</string>
   <string name="pref_autoStations_title">Точки пикетов в абрисе Therion</string>
   <string name="pref_autoStations_summary">Добавлять точки пикетов в экспортированный абрис .th2</string>
-  <string name="pref_auto_xsections_title">Авто сечения</string>
-  <string name="pref_auto_xsections_summary">Автоматически добавлять поперечные сечения при экспорте [csx/svg/dxf/xvi]</string>
+  <string name="pref_auto_xsections_title">Сечения на абрисе</string>
+  <string name="pref_auto_xsections_summary">Автоматически добавлять поперечные сечения при экспорте [csx/svg/dxf/th2/xvi]</string>
   <string name="pref_saved_stations_title">Цвет реперов</string>
   <string name="pref_saved_stations_summary">Сохраненные пикеты оранжевого цвета</string>
   <string name="pref_legonly_update_title">Периодичность обновления нитки</string>
