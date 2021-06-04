@@ -58,6 +58,7 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutSvg;
   private LinearLayout mLayoutShp;
   private LinearLayout mLayoutPng;
+  private LinearLayout mLayoutPdf;
 
   public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type )
   {
@@ -88,6 +89,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutSvg     = (LinearLayout) findViewById( R.id.layout_svg );
     mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
     mLayoutPng     = (LinearLayout) findViewById( R.id.layout_png );
+    mLayoutPdf     = (LinearLayout) findViewById( R.id.layout_pdf );
 
     if ( ! TDLevel.overAdvanced ) {
       ((CheckBox) findViewById( R.id.therion_xvi )).setVisibility( View.GONE );
@@ -152,6 +154,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutSvg.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
     mLayoutPng.setVisibility( View.GONE );
+    mLayoutPdf.setVisibility( View.GONE );
     if ( mParentType == 0 ) { // SketchWindow
       switch ( mSelectedPos ) {
         case 0: mLayoutTherion.setVisibility( View.VISIBLE ); break;
@@ -160,6 +163,7 @@ public class ExportDialogPlot extends MyDialog
         case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
         case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
         case 5: mLayoutPng.setVisibility( View.VISIBLE ); break;
+        case 6: mLayoutPdf.setVisibility( View.VISIBLE ); break;
       }
     } else { // mParentType == 1 // OverviewWindow
       switch ( mSelectedPos ) {
@@ -168,6 +172,7 @@ public class ExportDialogPlot extends MyDialog
         case 1: mLayoutDxf.setVisibility( View.VISIBLE ); break;
         case 2: mLayoutSvg.setVisibility( View.VISIBLE ); break;
         case 3: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
+        case 4: mLayoutPdf.setVisibility( View.VISIBLE ); break;
         // case 4: mLayoutPng.setVisibility( View.VISIBLE ); break;
       }
     }
@@ -240,6 +245,8 @@ public class ExportDialogPlot extends MyDialog
           } catch ( NumberFormatException e ) { }
         }
         break;
+      case 6: // PDF
+        break;
     }
   }
 
@@ -268,9 +275,8 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.png_grid )).setChecked( TDSetting.mSvgGrid );
     ((CheckBox) findViewById( R.id.png_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) );
+
   }
-
-
 }
 
 

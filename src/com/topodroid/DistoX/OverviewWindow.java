@@ -61,6 +61,16 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import android.print.PrintAttributes;
+import android.print.pdf.PrintedPdfDocument;
+// import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfDocument.Page;
+// import android.graphics.pdf.PdfDocument.PageInfo;
+
+import java.io.FileOutputStream;
+// import java.io.OutputStream;
+import java.io.IOException;
+
 import java.util.List;
 import java.util.ArrayList;
 
@@ -675,6 +685,7 @@ public class OverviewWindow extends ItemDrawer
   // interface IExporter
   public void doExport( String export_type )
   {
+    Log.v("DistoX", "Overview export " + export_type );
     int index = TDConst.plotExportIndex( export_type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: saveWithExt( "th2" ); break;
@@ -682,6 +693,55 @@ public class OverviewWindow extends ItemDrawer
       case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
       case TDConst.DISTOX_EXPORT_SHP: saveWithExt( "shp" ); break;
       case TDConst.DISTOX_EXPORT_XVI: saveWithExt( "xvi" ); break;
+      case TDConst.DISTOX_EXPORT_PDF: savePdf(); break;
+    }
+  }
+
+  // PDF ------------------------------------------------------------------
+  private void savePdf( ) 
+  {
+    final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+    if ( fullname != null ) {
+      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
+      doSavePdf( manager, fullname );
+    }
+  }
+
+  // TODO with background task
+  private void doSavePdf( DrawingCommandManager manager, final String fullname )
+  {
+    if ( manager == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    TDPath.getPdfDir();
+    String filename = TDPath.getPdfFileWithExt( fullname );
+    Log.v("DistoX", "Overview PDF export <" + filename + ">");
+    try {
+      FileOutputStream fos = new FileOutputStream( filename );
+
+      PrintAttributes.Builder builder = new PrintAttributes.Builder();
+      builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
+      builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
+      builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
+      builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+      builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+
+      PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
+      Page page = pdf.startPage(0);
+      // must select the zoom to the plot size - however the zoom arg is not for this purpose
+      // RectF bnds = manager.getBitmapBounds();
+      // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
+      // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
+      // float zoom = 1.00f / ( (zw > zh)? zw : zh );
+      // Log.v("DistoX", "PDF export <" + filename + "> Zoom " + zw + " " + zh );
+      manager.executeAll( page.getCanvas(), mZoom, null );
+      pdf.finishPage( page );
+      pdf.writeTo( fos );
+      pdf.close();
+      fos.close();
+    } catch ( IOException e ) {
+      Log.v("DistoX", "failed file output " + e.getMessage() );
     }
   }
 

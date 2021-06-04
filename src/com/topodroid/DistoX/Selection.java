@@ -461,12 +461,16 @@ class Selection
             // if ( !splays && type == DrawingPath.DRAWING_PATH_SPLAY ) continue;
             if ( !stations && (    type == DrawingPath.DRAWING_PATH_STATION 
                                 || type == DrawingPath.DRAWING_PATH_NAME ) ) continue;
-            if ( type == DrawingPath.DRAWING_PATH_SPLAY && station_splay != null ) {
-              if ( splays ) {
-                if ( station_splay.isStationOFF( sp.mItem ) ) continue;
-	      } else {
-                if ( ! station_splay.isStationON( sp.mItem ) ) continue;
-	      }
+            if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
+              if ( station_splay == null ) {
+                if ( ! splays ) continue;
+              } else {
+                if ( splays ) {
+                  if ( station_splay.isStationOFF( sp.mItem ) ) continue;
+	        } else {
+                  if ( ! station_splay.isStationON( sp.mItem ) ) continue;
+	        }
+              }
 	    } else if ( type == DrawingPath.DRAWING_PATH_POINT
 	             || type == DrawingPath.DRAWING_PATH_LINE 
 	             || type == DrawingPath.DRAWING_PATH_AREA ) {

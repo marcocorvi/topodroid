@@ -1283,10 +1283,14 @@ class Scrap
     // nearby splays are the splays that get close enough (dthr) to the line
     ArrayList< NearbySplay > nearby_splays = new ArrayList<>();
     for ( DrawingPath fxd : splays_paths ) {
-      if ( splays ) {
-	if ( station_splay.isStationOFF( fxd ) ) continue;
+      if ( station_splay == null ) {
+        if ( ! splays ) continue;
       } else {
-	if ( ! ( station_splay.isStationON( fxd ) || ( latest && fxd.isBlockRecent() ) ) ) continue;
+        if ( splays ) {
+          if ( station_splay.isStationOFF( fxd ) ) continue;
+        } else {
+          if ( ! ( station_splay.isStationON( fxd ) || ( latest && fxd.isBlockRecent() ) ) ) continue;
+        }
       }
       float x = fxd.x2;
       float y = fxd.y2;
@@ -2219,8 +2223,8 @@ class Scrap
 
   // called under TDPath.mSelectionLock
   void displayPoints( Canvas canvas, Matrix matrix, RectF bbox, float dot_radius,
-                      boolean spoints, boolean slines, boolean sareas, boolean splays, boolean legs_sshots, boolean sstations,
-                      DrawingStationSplay station_splay )
+                      boolean spoints, boolean slines, boolean sareas, boolean splays, boolean legs_sshots, boolean sstations
+                      /* , DrawingStationSplay station_splay */ )
   {
     if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
       for ( SelectionBucket bucket: mSelection.mBuckets ) {

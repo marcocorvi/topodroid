@@ -62,6 +62,7 @@ public class TDPath
   final static String KML = ".kml";
   final static String PLT = ".plt"; // trackfile
   final static String PNG = ".png";
+  final static String PDF = ".pdf";
   final static String SHP = ".shp"; // shapefile
   final static String SHX = ".shx";
   final static String DBF = ".dbf";
@@ -159,6 +160,7 @@ public class TDPath
   private static String PATH_IMPORT; //  = PATH_BASE + "import/";
   private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
   private static String PATH_PNG;    //  = PATH_BASE + "png/";
+  private static String PATH_PDF;    //  = PATH_BASE + "pdf/";
   private static String PATH_SHP;    //  = PATH_BASE + "shp/";   // shapefile
   private static String PATH_SRV;    //  = PATH_BASE + "srv/";   // Walls
   private static String PATH_SUR;    //  = PATH_BASE + "sur/";   // WinKarst
@@ -349,6 +351,7 @@ public class TDPath
     PATH_KML  = PATH_BASE + "kml"  + File.separator;    // FIXME checkDirs( PATH_KML );
     PATH_PLT  = PATH_BASE + "plt"  + File.separator;    // FIXME checkDirs( PATH_PLT );
     PATH_PNG  = PATH_BASE + "png"  + File.separator;    // FIXME checkDirs( PATH_PNG );
+    PATH_PDF  = PATH_BASE + "pdf"  + File.separator;    // FIXME checkDirs( PATH_PDF );
     PATH_SHP  = PATH_BASE + "shp"  + File.separator;    // FIXME checkDirs( PATH_SHP );
     PATH_SRV  = PATH_BASE + "srv"  + File.separator;    // FIXME checkDirs( PATH_SRV );
     PATH_SUR  = PATH_BASE + "sur"  + File.separator;    // FIXME checkDirs( PATH_SUR );
@@ -498,6 +501,7 @@ public class TDPath
   static boolean hasTh2Dir() { return (TDFile.getFile( PATH_TH2 )).exists(); }
   // static boolean hasTh3Dir() { return (TDFile.getFile( PATH_TH3 )).exists(); }
   // static boolean hasPngDir() { return (TDFile.getFile( PATH_PNG )).exists(); }
+  // static boolean hasPdfDir() { return (TDFile.getFile( PATH_PDF )).exists(); }
   //static boolean hasDxfDir() { return (TDFile.getFile( PATH_DXF )).exists(); }
   // static boolean hasKmlDir() { return (TDFile.getFile( PATH_KML )).exists(); }
   // static boolean hasJsonDir() { return (TDFile.getFile( PATH_JSON )).exists(); }
@@ -507,6 +511,7 @@ public class TDPath
 
   static File getTdrDir() { return TDFile.makeDir( PATH_TDR ); } // DistoX-SAF
   static File getPngDir() { return TDFile.makeDir( PATH_PNG ); } 
+  static File getPdfDir() { return TDFile.makeDir( PATH_PDF ); } 
 
   static String getDirFile( String name )    { return PATH_BASE + name; }
   static String getImportFile( String name ) { return PATH_IMPORT + name; }
@@ -531,6 +536,7 @@ public class TDPath
   static String getJsonFile( String name )   { return PATH_JSON + name; }
   static String getPltFile( String name )    { return PATH_PLT + name; }
   static String getPngFile( String name )    { return PATH_PNG + name; }
+  static String getPdfFile( String name )    { return PATH_PDF + name; }
   static String getSrvFile( String name )    { return PATH_SRV + name; }
   static String getSurFile( String name )    { return PATH_SUR + name; }
   static String getSvgFile( String name )    { return PATH_SVG + name; }
@@ -566,6 +572,7 @@ public class TDPath
   static String getSurveyPlotTh2File( String survey, String name ) { return PATH_TH2 + survey + "-" + name + TH2 ; }
   static String getSurveyPlotTnlFile( String survey, String name ) { return PATH_TNL + survey + "-" + name + TNL ; }
   static String getSurveyPlotPngFile( String survey, String name ) { return PATH_PNG + survey + "-" + name + PNG ; }
+  static String getSurveyPlotPdfFile( String survey, String name ) { return PATH_PDF + survey + "-" + name + PDF ; }
   static String getSurveyPlotXviFile( String survey, String name ) { return PATH_XVI + survey + "-" + name + XVI ; }
   static String getSurveyPlotCsxFile( String survey, String name ) { return PATH_CSX + survey + "-" + name + CSX ; }
   static String getSurveyPlotC3dFile( String survey, String name ) { return PATH_C3D + survey + "-" + name + C3D ; }
@@ -602,6 +609,7 @@ public class TDPath
   static String getSvgFileWithExt( String name ) { return getPathname( PATH_SVG, name, SVG ); }
   static String getXviFileWithExt( String name ) { return getPathname( PATH_XVI, name, XVI ); }
   static String getPngFileWithExt( String name ) { return getPathname( PATH_PNG, name, PNG ); }
+  static String getPdfFileWithExt( String name ) { return getPathname( PATH_PDF, name, PDF ); }
   static String getC3dFileWithExt( String name ) { return getPathname( PATH_C3D, name, C3D ); }
 
   static String getShzFileWithExt( String name ) { return getPathname( PATH_SHP, name, SHZ ); }

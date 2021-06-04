@@ -55,6 +55,9 @@ import com.topodroid.common.PointScale;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileOutputStream;
+// import java.io.OutputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
@@ -97,6 +100,12 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import android.provider.MediaStore;
+
+import android.print.PrintAttributes;
+import android.print.pdf.PrintedPdfDocument;
+// import android.graphics.pdf.PdfDocument;
+import android.graphics.pdf.PdfDocument.Page;
+// import android.graphics.pdf.PdfDocument.PageInfo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -5907,41 +5916,96 @@ public class DrawingWindow extends ItemDrawer
 
     // --------------------------------------------------------------------------
 
-    private void savePng( long type ) // , boolean toast )
+    private void savePng( long type )
     {
       if ( PlotType.isAnySection( type ) ) { 
 	String fullname = mFullName3;
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        doSavePng( manager, type, fullname ); // , toast );
+        doSavePng( manager, type, fullname );
       } else {
 	String fullname1 = mFullName1;
 	String fullname2 = mFullName2;
         // Nota Bene OK for projected profile (to check)
         DrawingCommandManager manager1 = mDrawingSurface.getManager( PlotType.PLOT_PLAN );
         DrawingCommandManager manager2 = mDrawingSurface.getManager( PlotType.PLOT_EXTENDED );
-        doSavePng( manager1, (int)PlotType.PLOT_PLAN, fullname1 ); // , toast );
-        doSavePng( manager2, (int)PlotType.PLOT_EXTENDED, fullname2 ); // , toast );
+        doSavePng( manager1, (int)PlotType.PLOT_PLAN, fullname1 );
+        doSavePng( manager2, (int)PlotType.PLOT_EXTENDED, fullname2 );
       }
     }
 
-    private void doSavePng( DrawingCommandManager manager, long type, final String filename ) // , boolean toast )
+    private void doSavePng( DrawingCommandManager manager, long type, final String filename )
     {
       if ( manager == null ) {
-	// if ( toast ) 
-	  TDToast.makeBad( R.string.null_bitmap );
+	TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
       Bitmap bitmap = manager.getBitmap( );
       if ( bitmap == null ) {
-        // if ( toast )
-	  TDToast.makeBad( R.string.null_bitmap );
+	TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
-      new ExportBitmapToFile( format, bitmap, scale, filename, true /* toast */ ).execute();
+      new ExportBitmapToFile( format, bitmap, scale, filename, true ).execute();
     }
 
+    // PDF ------------------------------------------------------------------
+    private void savePdf( long type ) 
+    {
+      String fullname = null;
+      if ( PlotType.isAnySection( type ) ) { 
+	fullname = mFullName3;
+      } else if ( PlotType.isProfile( type ) ) { 
+	fullname = mFullName2;
+      } else {
+	fullname = mFullName1;
+      }
+
+      if ( fullname != null ) {
+        DrawingCommandManager manager = mDrawingSurface.getManager( type );
+        doSavePdf( manager, fullname );
+      }
+    }
+
+    // TODO with background task
+    private void doSavePdf( DrawingCommandManager manager, final String fullname )
+    {
+      if ( manager == null ) {
+	TDToast.makeBad( R.string.null_bitmap );
+	return;
+      }
+      TDPath.getPdfDir();
+      String filename = TDPath.getPdfFileWithExt( fullname );
+      // Log.v("DistoX", "PDF export <" + filename + ">");
+      try {
+        FileOutputStream fos = new FileOutputStream( filename );
+
+        PrintAttributes.Builder builder = new PrintAttributes.Builder();
+        builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
+        builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
+        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
+        builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+        builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+
+        PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
+        Page page = pdf.startPage(0);
+        // must select the zoom to the plot size - however the zoom arg is not for this purpose
+        // RectF bnds = manager.getBitmapBounds();
+        // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
+        // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
+        // float zoom = 1.00f / ( (zw > zh)? zw : zh );
+        // Log.v("DistoX", "PDF export <" + filename + "> Zoom " + zw + " " + zh );
+        manager.executeAll( page.getCanvas(), mZoom, null );
+        pdf.finishPage( page );
+        pdf.writeTo( fos );
+        pdf.close();
+        fos.close();
+      } catch ( IOException e ) {
+        Log.v("DistoX", "failed file output " + e.getMessage() );
+      }
+    }
+
+    // CSX ------------------------------------------------------------------
     // used also by SavePlotFileTask
     void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
@@ -6540,6 +6604,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void doExport( String export_type )
   {
+    Log.v("DistoX", "Drawing export " + export_type );
     int index = TDConst.plotExportIndex( export_type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;
@@ -6554,17 +6619,18 @@ public class DrawingWindow extends ItemDrawer
 	  }
           break;
         } // else fall-through and savePng
-      case TDConst.DISTOX_EXPORT_PNG: savePng( mType ); break; // , true ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf" ); break; // , true ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break; // , true ); break;
-      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break; // , true ); break;
-      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break; // , true ); break;
-      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break; // , true ); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng( mType ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf" ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break;
+      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break;
+      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break;
+      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break;
       case TDConst.DISTOX_EXPORT_C3D: 
         // Log.v("DistoX-C3D", "export c3d");
         // if ( ! PlotType.isAnySection( mType ) )
           saveWithExt( mType, "c3d" );
         break;
+      case TDConst.DISTOX_EXPORT_PDF: savePdf( mType ); break; 
     }
   }
 

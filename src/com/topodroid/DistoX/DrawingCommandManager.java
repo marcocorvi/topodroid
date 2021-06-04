@@ -1145,6 +1145,9 @@ public class DrawingCommandManager
   void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { mCurrentScrap.addLineToLine( line, line0 ); }
 
   // N.B. doneHandler is not used
+  // @param canvas where to draw
+  // @param zoom   used for scalebar and selection points
+  // @param station_splay
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
     if ( canvas == null ) {
@@ -1249,15 +1252,21 @@ public class DrawingCommandManager
         for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mMatrix, mScale, mBBox );
       }
       if ( mSplaysStack != null ) {
-        if ( splays ) { // draw all splays except the splays-off
-          for ( DrawingPath path : mSplaysStack ) {
-	    if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+        if ( station_splay == null ) {
+          if ( splays ) {
+            for ( DrawingPath path : mSplaysStack ) path.draw( canvas, mMatrix, mScale, mBBox );
+          }
+        } else {
+          if ( splays ) { // draw all splays except the splays-off
+            for ( DrawingPath path : mSplaysStack ) {
+	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	    }
+          } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
+            for ( DrawingPath path : mSplaysStack ) {
+              if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
+	    }
 	  }
-        } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
-          for ( DrawingPath path : mSplaysStack ) {
-            if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
-	  }
-	}
+        }
       }
     }
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {
@@ -1314,7 +1323,7 @@ public class DrawingCommandManager
         float dot_radius = TDSetting.mDotRadius/zoom;
         synchronized( TDPath.mSelectionLock ) {
           displayFixedPoints( canvas, mMatrix, mBBox, dot_radius, splays, (legs && sshots), sstations, station_splay );
-          mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations, station_splay );
+          mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations /* , station_splay */ );
 
           // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
           //   float x, y;
@@ -1364,10 +1373,14 @@ public class DrawingCommandManager
               if ( ! sstations ) continue;
             } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
               // FIXME_LATEST latest splays
-              if ( splays ) {
-                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+              if ( station_splay == null ) {
+                if ( ! splays ) continue;
               } else {
-                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                if ( splays ) {
+                  if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+                } else {
+                  if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                }
               }
             } else if ( DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
               // Log.v("DistoX-HIDE", "drawing type in selection fixed" );
@@ -1388,10 +1401,14 @@ public class DrawingCommandManager
               if ( ! (sstations) ) continue;
             } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
               // FIXME_LATEST latest splays
-              if ( splays ) {
-                if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+              if ( station_splay == null ) {
+                if ( ! splays ) continue;
               } else {
-                if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                if ( splays ) {
+                  if ( station_splay.isStationOFF( pt.mItem ) ) continue;
+                } else {
+                  if ( ! station_splay.isStationON( pt.mItem ) ) continue;
+                }
               }
             } else if ( DrawingPath.isDrawingType( type ) ) { // FIXME-HIDE should not happen
               // Log.v("DistoX-HIDE", "drawing type in selection fixed" );

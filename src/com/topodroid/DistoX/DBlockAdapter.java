@@ -494,7 +494,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
-    Log.v("DistoX", "get view at " + pos );
+    // Log.v("DistoX", "get view at " + pos );
     DBlock b = (DBlock)(getItem( pos ));
 
     ViewHolder holder; // = null;

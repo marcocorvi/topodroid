@@ -13,9 +13,13 @@ package com.topodroid.utils;
 
 import com.topodroid.DistoX.TDInstance;
 
+import android.os.ParcelFileDescriptor;
 // import android.app.Application;
 import android.app.Activity;
 import android.content.Context;
+import android.content.ContentValues;
+import android.content.ContentResolver;
+
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.res.Resources;
@@ -28,11 +32,15 @@ import java.util.ArrayList;
 import android.provider.DocumentsContract;
 import android.net.Uri;
 
+import android.provider.MediaStore;
+
 import androidx.documentfile.provider.DocumentFile;
 
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.InputStream;
+import java.io.OutputStream;
+import java.io.FileNotFoundException;
 // import java.io.FileFilter;
 // import java.io.FilenameFilter;
 import java.io.FileWriter;
@@ -815,6 +823,65 @@ public class TDFile
   public static boolean renameTempFile( File temp, String pathname )
   { 
     return renameTempFile( temp, getFile( pathname ) );
+  }
+ 
+  // =============================================================================
+  // MediaStore
+
+  public OutputStream getMSoutput( String filename, String mimetype )
+  {
+    OutputStream ret = null;
+    ContentValues cv = new ContentValues();
+    cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
+    cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
+    cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, "Documents/TopoDroid" );
+    cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
+
+    ContentResolver cr = TDInstance.context.getContentResolver();
+    try {
+      Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
+      if ( uri == null ) {
+        Log.v("DistoX", "Media Store failed resolving");
+      } else {
+        ret = cr.openOutputStream( uri );
+        cv.clear();
+        cv.put( MediaStore.Downloads.IS_PENDING, 0 );
+        cr.update( uri, cv, null, null );
+      }
+    } catch ( FileNotFoundException e ) {
+      Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
+    } catch ( RuntimeException e ) {
+      Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
+    }
+    return ret;
+  }
+
+  public InputStream getMSinput( String filename, String mimetype )
+  {
+    InputStream ret = null;
+    ContentValues cv = new ContentValues();
+    cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
+    cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
+    cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, "Documents/TopoDroid" );
+    cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
+
+    ContentResolver cr = TDInstance.context.getContentResolver();
+    try {
+      Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
+      if ( uri == null ) {
+        Log.v("DistoX", "Media Store failed resolving");
+      } else {
+        ret = cr.openInputStream( uri );
+        cv.clear();
+        cv.put( MediaStore.Downloads.IS_PENDING, 0 );
+        cr.update( uri, cv, null, null );
+      }
+    } catch ( FileNotFoundException e ) {
+      Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
+    } catch ( RuntimeException e ) {
+      Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
+    }
+    return ret;
   }
 
   // -----------------------------------------------------------------------------

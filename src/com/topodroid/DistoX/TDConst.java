@@ -45,6 +45,7 @@ public class TDConst
   public static final int DISTOX_EXPORT_XVI = 24; // xtherion  XviFile
   public static final int DISTOX_EXPORT_TNL = 25; // Tunnel    TnlFile
   public static final int DISTOX_EXPORT_C3D = 26; // Cave3D    C3dFile
+  public static final int DISTOX_EXPORT_PDF = 27; // PDF
 
   public static final int DISTOX_EXPORT_ZIP = 30;
 
@@ -121,6 +122,7 @@ public class TDConst
       "SVG",
       "SHP",
       "PNG",
+      "PDF",
       "XVI",
       "Tunnel",
       "Cave3D"
@@ -133,6 +135,7 @@ public class TDConst
     DISTOX_EXPORT_SVG,
     DISTOX_EXPORT_SHP,
     DISTOX_EXPORT_PNG,
+    DISTOX_EXPORT_PDF,
     DISTOX_EXPORT_XVI,
     DISTOX_EXPORT_TNL,
     DISTOX_EXPORT_C3D
@@ -143,6 +146,7 @@ public class TDConst
       "DXF",
       "SVG",
       "SHP",
+      "PDF",
       "XVI"
   };
   private static final int[] mOverviewExportIndex = {
@@ -150,6 +154,7 @@ public class TDConst
     DISTOX_EXPORT_DXF,
     DISTOX_EXPORT_SVG,
     DISTOX_EXPORT_SHP,
+    DISTOX_EXPORT_PDF,
     DISTOX_EXPORT_XVI
   };
 
