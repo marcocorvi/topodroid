@@ -410,7 +410,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="ble_connect">Connexion</string>
     <string name="ble_disconnect">Déconnexion</string>
     <string name="bric_scan">Scan</string>
-    <!string name="bric_shot">Visée</string>
+    <string name="bric_shot">Visée</string>
     <string name="bric_laser">Laser</string>
     <string name="bric_off">Off</string>
     <string name="bric_memory">Mémoire du BRIC</string>
@@ -1610,53 +1610,53 @@ Appuyez sur "Fermer" pour ne rien modifier.
    <string name="ask_dump">Sauvegarder le firmware ?</string>
    <string name="ask_upload">Envoyer le firmware ?</string>
    <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">Échec de la vérification du matériel DistoX</string>
+   <string name="firmware_upload_bad_sign">Matériel DistoX incompatible</string>
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <string name="firmware_file_dump_fail">Échec de l'installation du firmware</string>
+   <string name="firmware_file_upload_fail">Échec du téléchargement du firmware</string>
+   <string name="firmware_not_supported">L'appareil ne supporte pas les fonctions du firmware</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
+    <string name="project">Projet %1$s</string>
     <!-- TODO string name="no_editor">Editor not found</string -->
     <!-- TODO string name="no_file">File not found</string -->
     <!-- TODO string name="no_extra">Missing file extra</string -->
     <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="no_equate">Pas dégalité</string>
+    <string name="no_surveys">Pas de topographie</string>
+    <string name="no_tdconfig">Fichier tdconfig manquant</string>
+    <string name="no_th_file">Pas de fichier Therion</string>
+    <string name="file_exists">Le fichier existe déjà</string>
+    <string name="file_create_fail">Échec de la création du fichier</string>
+    <string name="oom">Attention. Mémoire épuisée</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
+    <string name="ask_remove_equate">Supprimer l'égalité %1$s ?</string>
+    <string name="equate_no_station">Aucune station sélectionnée</string>
+    <string name="equate_no_stations">Trop peu de stations</string>
+    <string name="equate_no_nearby">Pas de station à proximité</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">NOUVEAU</string>
+    <string name="menu_equate">AJOUT EGALITE</string>
+    <string name="menu_equates">EGALITES</string>
+    <string name="menu_save">ENREGISTRER</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">écraser</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
+    <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export_settings">Paramétrages d'import/export</string>
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
+    <string name="title_settings">Paramétrage de TdManager</string>
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
+    <string name="title_tdconfig">Entrer le nom du projet/string>
     <!-- TODO string name="title_surveys">Surveys</string -->
 
     <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="export_failed">Échec de l'exportation</string>
 
 </resources>
