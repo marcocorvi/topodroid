@@ -6,13 +6,13 @@
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel</string>
 
-    <string name="path11_title">IMPORTANT - Android 11</string -->
+    <string name="path11_title">IMPORTANT - Android 11</string>
     <string name="path11_text">
-À partir d'Android 11, les dossiers d'applications doivent se trouver dans le dossier "Documents".\n
-Il n'y a rien à faire sur une installation récente de l'application Android-11. \n
+À partir d\'Android 11, les dossiers d\'applications doivent se trouver dans le dossier "Documents".\n
+Il n\'y a rien à faire sur une installation récente de l\'application Android-11. \n
 Pour une installation plus ancienne, avant une mise à jour du système vers Android-11, faites une sauvegarde de vos données, 
 copiez votre dossier "TopoDroid" dans "Documents" et redémarrez TopoDroid.\n\n
-ATTENTION. A partir de la v. 5.0.60 "TopoDroid" utilise le dossier "Documents" s'il existe, même sur Android-10 et inférieur.\n\n
+ATTENTION. A partir de la v. 5.0.60 "TopoDroid" utilise le dossier "Documents" s\'il existe, même sur Android-10 et inférieur.\n\n
 Appuyez sur "Déplacer" pour déplacer votre dossier TopoDroid vers le dossier "Documents".\n\n
 Appuyez sur "Fermer" pour ne rien modifier.
 </string>
@@ -104,12 +104,12 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="bric_battery_wait">Batterie &#8230;</string>
     <string name="bric_reset_time">Remise à zéro</string>
     <string name="bric_clear_memory">Effacement de la mémoire</string>
-    <string name="bric_future_time">Refuser de réinitialiser à l'avenir</string>
+    <string name="bric_future_time">Refuser de réinitialiser à l\'avenir</string>
     <string name="bric_ask_memory_clear">Effacer la mémoire du BRIC ?</string>
     <string name="bric_reset_ok">Remise à zéro du temps</string>
     <string name="bric_reset_fail">Echec de la remise à zéro du temps</string>
     <string name="bric_clear_ok">Effacement de la mémoire</string>
-    <string name="bric_clear_fail">Échec de l'effacement de la mémoire</string>
+    <string name="bric_clear_fail">Échec de l\'effacement de la mémoire</string>
 
     <string name="calibration_title">Outil d\'étalonnage</string>
     <string name="calibration_length">Mètre</string>
@@ -374,7 +374,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
-    <string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">SCRAPS</string>
     <string name="menu_switch">BASCULER/FERMER</string>
     <string name="menu_help">AIDE</string>
     <!-- UNUSED string name="menu_join_survey">CO-RELEVÉ-TOPO</string -->
@@ -405,7 +405,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="title_scan">Scan BLE</string>
     <string name="ble_scan_failed">Echec du scan BLE</string>
     <string name="ble_gatt_failure">Défaillance du BLE</string>
-    <string name="ble_no_remote">Pas d'appareil distant détecté</string>
+    <string name="ble_no_remote">Pas d\'appareil distant détecté</string>
     <string name="ble_control">Contrôle</string>
     <string name="ble_connect">Connexion</string>
     <string name="ble_disconnect">Déconnexion</string>
@@ -552,7 +552,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Répartition des données brutes Raw : %1$.2f %%</string>
-    <string name="cover_calib">Répartition des données d'étalonnage %1$.2f %%</string>
+    <string name="cover_calib">Répartition des données d\'étalonnage %1$.2f %%</string>
     <string name="cover_g">G répartition: %1$.2f %%</string>
     <string name="cover_m">M répartition: %1$.2f %%</string>
     <string name="cover_r">Roulis répartition: %1$.2f %%</string>
@@ -644,7 +644,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string>
-    <string name="ask_manual_update">Mise à jour de la traduction du manuel d'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
+    <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
     <string name="button_apply"     >Appliquer</string>
@@ -676,7 +676,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
-    <string name="button_move"    >Déplacer/string>
+    <string name="button_move"    >Déplacer</string>
     <string name="button_next"    >Suivant</string>
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
@@ -878,13 +878,13 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="help_select_mode">Selection d\'outil</string>
     <string name="help_erase_mode">Type de gomme</string>
     <string name="help_erase_size">Taille de gomme [S/M/L]</string>
-    <string name="help_select_size">Sélectionner la taille de l'outil [S/M/L]</string>
+    <string name="help_select_size">Sélectionner la taille de l\'outil [S/M/L]</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
     <string name="help_recover">Récupérer dessin de la sauvegarde</string>
     <string name="help_reload_prev">Afficher une sauvegarde plus récente</string>
     <string name="help_reload_next">Afficher une sauvegarde plus ancienne</string>
-    <string name="help_reload_plot">Recharger la sauvegarde de l'esquisse</string>
+    <string name="help_reload_plot">Recharger la sauvegarde de l\'esquisse</string>
 
     <string name="help_line_point">Actions sur les points d\'une ligne : joindre, partager, couper, supprimer</string>
 <!--
@@ -1070,10 +1070,10 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">Options d'importation VisualTopo</string>
-    <string name="title_import_dat">Options d'importation Compass</string>
+    <string name="title_import_tro">Options d\'importation VisualTopo</string>
+    <string name="title_import_dat">Options d\'importation Compass</string>
 
-  <string name="pref_export_settings">Paramétrages d'Export</string>
+  <string name="pref_export_settings">Paramétrages d\'Export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">OPTIONS DU RELEVÉ</string>
@@ -1099,8 +1099,8 @@ Appuyez sur "Fermer" pour ne rien modifier.
 
   <string name="pref_locale_title">Langue</string>
   <string name="pref_locale_summary">Langue</string>
-  <string name="pref_orientation_title">Orientation de l'écran</string>
-  <string name="pref_orientation_summary">Orientation de l'écran de l'application</string>
+  <string name="pref_orientation_title">Orientation de l\'écran</string>
+  <string name="pref_orientation_summary">Orientation de l\'écran de l\'application</string>
 
   <string name="pref_raw_data_title">Données brutes</string>
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
@@ -1201,7 +1201,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_kml_splays_summary">Ajouter les visées latérales d\'habillage à l\'export KML</string>
   <string name="pref_csv_raw_title">Raw CSV</string>
   <string name="pref_csv_raw_summary">Export des données brutes en fichier CSV</string>
-  <TODO string name="pref_csv_sep_title">Séparateur CSV</string>
+  <string name="pref_csv_sep_title">Séparateur CSV</string>
   <string name="pref_csv_sep_summary">Séparateur des données du fichier CSV</string>
   <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
   <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
@@ -1227,8 +1227,8 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Reconnexion automatique</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Reconnecter quand la connexion est perdue</string -->
-  <string name="pref_second_distox_title">Topo Deux-DistoX</string -->
-  <tring name="pref_second_distox_summary">Topographier en utilisant deux DistoX disctincts</string>
+  <string name="pref_second_distox_title">Topo Deux-DistoX</string>
+  <string name="pref_second_distox_summary">Topographier en utilisant deux DistoX disctincts</string>
   <string name="pref_auto_pair_title">Auto association</string>
   <string name="pref_auto_pair_summary">Auto association après détection</string>
   <string name="pref_head_tail_title">Nombre de données nouvelles</string>
@@ -1614,9 +1614,9 @@ Appuyez sur "Fermer" pour ne rien modifier.
    <string name="firmware_upload_bad_sign">Matériel DistoX incompatible</string>
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
-   <string name="firmware_file_dump_fail">Échec de l'installation du firmware</string>
+   <string name="firmware_file_dump_fail">Échec de l\'installation du firmware</string>
    <string name="firmware_file_upload_fail">Échec du téléchargement du firmware</string>
-   <string name="firmware_not_supported">L'appareil ne supporte pas les fonctions du firmware</string>
+   <string name="firmware_not_supported">L\'appareil ne supporte pas les fonctions du firmware</string>
 
     <string name="project">Projet %1$s</string>
     <!-- TODO string name="no_editor">Editor not found</string -->
@@ -1632,7 +1632,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="oom">Attention. Mémoire épuisée</string>
 
     <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
-    <string name="ask_remove_equate">Supprimer l'égalité %1$s ?</string>
+    <string name="ask_remove_equate">Supprimer l\'égalité %1$s ?</string>
     <string name="equate_no_station">Aucune station sélectionnée</string>
     <string name="equate_no_stations">Trop peu de stations</string>
     <string name="equate_no_nearby">Pas de station à proximité</string>
@@ -1645,7 +1645,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="overwrite">écraser</string>
 
     <string name="title_help">TopoDroid Manager v. %1$s</string>
-    <string name="title_export_settings">Paramétrages d'import/export</string>
+    <string name="title_export_settings">Paramétrages d\'import/export</string>
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
@@ -1653,10 +1653,10 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
     <string name="title_settings">Paramétrage de TdManager</string>
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <string name="title_tdconfig">Entrer le nom du projet/string>
+    <string name="title_tdconfig">Entrer le nom du projeti</string>
     <!-- TODO string name="title_surveys">Surveys</string -->
 
     <!-- TODO string name="exported">Saved file %1$s</string -->
-    <string name="export_failed">Échec de l'exportation</string>
+    <string name="export_failed">Échec de l\'exportation</string>
 
 </resources>
