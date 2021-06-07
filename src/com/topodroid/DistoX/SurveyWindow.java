@@ -501,6 +501,7 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyExportIndex( type );
+    Log.v("DistoX", "export " + type + " " + index );
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {

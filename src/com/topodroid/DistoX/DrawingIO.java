@@ -500,6 +500,7 @@ public class DrawingIO
   static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
+    Log.v( "DistoX", "export Therion " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );

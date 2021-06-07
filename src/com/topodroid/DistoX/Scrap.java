@@ -29,7 +29,7 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.PointF;
 
-class Scrap
+public class Scrap
 {
   final List< ICanvasCommand >   mCurrentStack;
   List< DrawingStationPath >     mUserStations;  // user-inserted stations
@@ -40,8 +40,8 @@ class Scrap
   private List< DrawingPath > mMultiselected;
   boolean isMultiselection = false; 
   private int mMaxAreaIndex;             // max index of areas in this scrap
-  String mPlotName;              // name of the plot this scrap belongs to
-  int mScrapIdx;
+  public String mPlotName;              // name of the plot this scrap belongs to
+  public int mScrapIdx;
   private RectF mBBox;   // this scrap bbox
 
   Scrap( int idx, String plot_name ) 
@@ -965,7 +965,7 @@ class Scrap
   }
 
   // COMMAND STACK ---------------------------------------------
-  void addCommandsToList( ArrayList< DrawingPath > ret ) 
+  public void addCommandsToList( ArrayList< DrawingPath > ret ) 
   {
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {

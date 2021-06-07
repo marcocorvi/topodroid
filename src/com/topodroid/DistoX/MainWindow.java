@@ -50,7 +50,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;
@@ -251,8 +251,11 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
         startSurveyDialog();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
+        // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
+        // int len = filenames.size() + zipnames.size();
+
         File[] files = TDPath.getImportFiles();
-        File[] zips = TDPath.getZipFiles();
+        File[] zips  = TDPath.getZipFiles();
         int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
         if ( len > 0 ) {
           (new ImportDialog( mActivity, this, files, zips )).show();

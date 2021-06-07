@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.svg;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
@@ -18,6 +18,25 @@ import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+
+// import com.topodroid.DistoX.DrawingStationPath;
+// import com.topodroid.DistoX.DrawingStationName;
+import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+// import com.topodroid.DistoX.DrawingLabelPath;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.ICanvasCommand;
+import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.Scrap;
+import com.topodroid.DistoX.SymbolLibrary;
+import com.topodroid.DistoX.LinePoint;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.DBlock;
+import com.topodroid.DistoX.SurveyInfo;
 
 import android.util.Log;
 
@@ -33,7 +52,7 @@ import java.io.IOException;
 import android.graphics.RectF;
 
 // extends for XSection class
-class DrawingTunnel extends DrawingSvgBase
+public class DrawingTunnel extends DrawingSvgBase
 {
 
   static final private float FACTOR = DrawingUtil.SCALE_FIX;
@@ -54,7 +73,7 @@ class DrawingTunnel extends DrawingSvgBase
   float toWorldX( float x ) { return (x-DrawingUtil.CENTER_X); }
   float toWorldY( float y ) { return (y-DrawingUtil.CENTER_Y); }
 
-  void writeXml( BufferedWriter out, SurveyInfo info, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  public void writeXml( BufferedWriter out, SurveyInfo info, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
@@ -216,12 +235,12 @@ class DrawingTunnel extends DrawingSvgBase
           pw5.format(Locale.US, pctext, -1.0f, -1.0f );
           pw5.format(Locale.US, endPctext );
           pw5.format( endPathcodes );
-          for ( LinePoint lp = line.mFirst; lp != null; lp = lp.mNext ) {
+          for ( LinePoint lp = line.first(); lp != null; lp = lp.mNext ) {
             pw5.format(Locale.US, formatPTxy, toWorldX(xoff+lp.x), toWorldY(yoff+lp.y) );
           }
           pw5.format( endSkpath );
-          printConnective( pw5, n1, num, type, toWorldX(xoff+line.mFirst.x), toWorldY(yoff+line.mFirst.y), map );
-          printConnective( pw5, n2, num, type, toWorldX(xoff+line.mLast.x),  toWorldY(yoff+line.mLast.y),  map );
+          printConnective( pw5, n1, num, type, toWorldX(xoff+line.first().x), toWorldY(yoff+line.first().y), map );
+          printConnective( pw5, n2, num, type, toWorldX(xoff+line.last().x),  toWorldY(yoff+line.last().y),  map );
           out.write( sw5.getBuffer().toString() );
           out.flush();
         }
@@ -235,11 +254,11 @@ class DrawingTunnel extends DrawingSvgBase
           PrintWriter pw5  = new PrintWriter(sw5);
           int n1 = nr++;
           pw5.format(Locale.US, skpathFilled, n1, n1, 0 );
-          for ( LinePoint lp = area.mFirst; lp != null; lp = lp.mNext ) {
+          for ( LinePoint lp = area.first(); lp != null; lp = lp.mNext ) {
             pw5.format(Locale.US, formatPTxy, toWorldX(xoff+lp.x), toWorldY(yoff+lp.y) );
           }
           pw5.format( endSkpath );
-          printConnective( pw5, n1, num, type, toWorldX(xoff+area.mFirst.x), toWorldY(yoff+area.mFirst.y), map );
+          printConnective( pw5, n1, num, type, toWorldX(xoff+area.first().x), toWorldY(yoff+area.first().y), map );
           out.write( sw5.getBuffer().toString() );
           out.flush();
         }

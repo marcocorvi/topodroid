@@ -33,8 +33,8 @@ public class SurveyInfo
   public final static float DECLINATION_UNSET = 1080; // three times 360
 
   public long id;
-  String name;
-  String date;
+  public String name;
+  public String date;
   String team;
   float  declination;
   String comment;

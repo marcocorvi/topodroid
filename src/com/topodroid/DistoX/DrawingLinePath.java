@@ -335,9 +335,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     computeUnitNormal();
   }
 
-  boolean isReversed() { return mReversed; }
+  public boolean isReversed() { return mReversed; }
 
-  int lineType() { return mLineType; }
+  public int lineType() { return mLineType; }
 
   void setLineType( int type )
   {

@@ -55,8 +55,8 @@ import com.topodroid.common.PointScale;
 import android.util.Log;
 
 import java.io.File;
-import java.io.FileOutputStream;
-// import java.io.OutputStream;
+// import java.io.FileOutputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
@@ -5974,11 +5974,12 @@ public class DrawingWindow extends ItemDrawer
 	TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
-      TDPath.getPdfDir();
-      String filename = TDPath.getPdfFileWithExt( fullname );
+      // TDPath.getPdfDir();
+      // String filename = TDPath.getPdfFileWithExt( fullname );
       // Log.v("DistoX", "PDF export <" + filename + ">");
       try {
-        FileOutputStream fos = new FileOutputStream( filename );
+        // FileOutputStream fos = new FileOutputStream( filename );
+        OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
 
         PrintAttributes.Builder builder = new PrintAttributes.Builder();
         builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );

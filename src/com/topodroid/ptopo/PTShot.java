@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -160,7 +160,7 @@ public class PTShot
 
     // ------------------------------------------------------------
 
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       _from.read( fs );
       _to.read( fs );
@@ -175,7 +175,7 @@ public class PTShot
       }
     }
 
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       _from.write( fs );
       _to.write( fs );

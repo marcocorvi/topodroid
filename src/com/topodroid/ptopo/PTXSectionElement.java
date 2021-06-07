@@ -13,8 +13,8 @@ package com.topodroid.ptopo;
 
 import com.topodroid.utils.TDLog;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -63,7 +63,7 @@ public class PTXSectionElement extends PTElement
     // ---------------------------------------------------------
 
     @Override
-    void read( FileInputStream fs ) 
+    void read( InputStream fs ) 
     {
       _pos.read( fs );
       _station.read( fs );
@@ -73,7 +73,7 @@ public class PTXSectionElement extends PTElement
     }
 
     @Override
-    void write( FileOutputStream fs ) 
+    void write( OutputStream fs ) 
     {
       PTFile.writeInt( fs, _id );
       _pos.write( fs );

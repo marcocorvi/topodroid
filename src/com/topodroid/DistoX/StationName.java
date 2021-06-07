@@ -184,6 +184,7 @@ class StationName
 
   protected void setLegName( DBlock blk, String from, String to )
   {
+    // Log.v("DistoX", "set leg " + blk.mId + " " + from + " " + to );
     if ( blk.isDistoXBacksight() ) { // bs
       setBlockName( blk, to, from );
     } else {
@@ -193,15 +194,24 @@ class StationName
 
   protected void setLegName( DBlock blk, String from, String to, boolean is_backsight_shot )
   {
+    // Log.v("DistoX", "set leg " + from + " " + to + " bs " + is_backsight_shot );
     if ( blk.isDistoXBacksight() ) { // bs
       setBlockName( blk, to, from, is_backsight_shot );
     } else {
       setBlockName( blk, from, to, is_backsight_shot );
     }
   }
+ 
+  protected void setSecLegName( DBlock blk )
+  {
+    // Log.v("DistoX", "set sec leg " + blk.mId );
+    // setBlockName( blk, "", "" );
+    blk.setTypeSecLeg();
+  }
 
   protected void setSplayName( DBlock splay, String name ) 
   {
+    // Log.v("DistoX", "set splay " + splay.mId + " " + name );
     if ( splay.isDistoXBacksight() ) {
       setBlockName( splay, "", name );
     } else {

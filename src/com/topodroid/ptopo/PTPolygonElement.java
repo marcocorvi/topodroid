@@ -13,8 +13,8 @@ package com.topodroid.ptopo;
 
 import java.util.ArrayList;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -70,7 +70,7 @@ public class PTPolygonElement extends PTElement
 
 
     @Override
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       _points.clear();
       int pc = PTFile.readInt( fs );
@@ -83,7 +83,7 @@ public class PTPolygonElement extends PTElement
     }
  
     @Override
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       PTFile.writeByte( fs, _id );
       PTFile.writeInt( fs, _points.size() );
@@ -100,7 +100,7 @@ public class PTPolygonElement extends PTElement
 
 /*
 // void 
-// PTpolygon_element::printTherion( FileOutputStream fp, int x0, int y0, // int  scale )
+// PTpolygon_element::printTherion( OutputStream fp, int x0, int y0, // int  scale )
 // {
 //   if ( _point_count > 1 ) {
 //     fprintf(fp, "    line %s\n", PtCmapActivity.getLineThName(_color) );

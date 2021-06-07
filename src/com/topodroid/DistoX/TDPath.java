@@ -700,6 +700,8 @@ public class TDPath
     return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO, CSN, SVX } );
   }
 
+  static String[] getImportTypes() { return new String[] { TH, TOP, DAT, TRO, CSN, SVX }; }
+
   static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
 
   // static String getSurveyPhotoFile( String survey, String name ) { return APP_FOTO_PATH + survey + "/" + name; }

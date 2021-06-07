@@ -62,21 +62,23 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   protected String doInBackground(Void... arg0)
   {
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    File temp = null;
-    try {
-      temp = File.createTempFile( "tmp", null, TDFile.getFile( mDirname ) );
-    } catch ( IOException e ) { 
-      // Log.v("DistoX-SAVE", "cannot create temp file with " + mFullname );
-      TDLog.Error("cannot create temp file with " + mFullname );
-      return null;
-    }
-
-    if ( temp == null ) return null;
-    int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, temp );
-    if ( res == 1 && TDFile.renameTempFile( temp, mFilename ) ) {
-      return mFilename;
-    }
-    return null;
+    // File temp = null;
+    // try {
+    //   temp = File.createTempFile( "tmp", null, TDFile.getFile( mDirname ) );
+    // } catch ( IOException e ) { 
+    //   // Log.v("DistoX-SAVE", "cannot create temp file with " + mFullname );
+    //   TDLog.Error("cannot create temp file with " + mFullname );
+    //   return null;
+    // }
+    // if ( temp == null ) return null;
+    // int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, temp );
+    // if ( res == 1 && TDFile.renameTempFile( temp, mFilename ) ) {
+    //   return mFilename;
+    // }
+    // return null;
+    Log.v("DistoX", "save full file: " + mFullname );
+    int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFullname );
+    return (res == 1)? mFilename : null;
   }
 
   @Override

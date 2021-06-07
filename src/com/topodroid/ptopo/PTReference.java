@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -69,7 +69,7 @@ class PTReference
     // ---------------------------------------------------
 
 
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       _station.read( fs );
       _east     = PTFile.readLong( fs );
@@ -78,7 +78,7 @@ class PTReference
       _comment.read( fs );
     }
 
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       _station.write( fs );
       PTFile.writeLong( fs, _east );

@@ -13,8 +13,8 @@ package com.topodroid.ptopo;
 
 import com.topodroid.utils.TDLog;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import java.util.Locale;
 // import android.util.Log;
@@ -114,12 +114,12 @@ public class PTId
 
   // -----------------------------------------------------------
 
-  void read( FileInputStream fs )
+  void read( InputStream fs )
   { 
     _id = PTFile.readInt( fs );
   }
 
-  void write( FileOutputStream fs )
+  void write( OutputStream fs )
   {
     PTFile.writeInt( fs, _id );
   }

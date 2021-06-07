@@ -9,12 +9,28 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.svg;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
+
+import com.topodroid.DistoX.DrawingStationPath;
+import com.topodroid.DistoX.DrawingStationName;
+import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+import com.topodroid.DistoX.DrawingLabelPath;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.Symbol;
+import com.topodroid.DistoX.SymbolPoint;
+import com.topodroid.DistoX.TDExporter;
+import com.topodroid.DistoX.Scrap;
+import com.topodroid.DistoX.DBlock;
 
 import android.util.Log;
 
@@ -29,7 +45,7 @@ import java.io.IOException;
 
 import android.graphics.RectF;
 
-class DrawingSvgWalls extends DrawingSvgBase
+public class DrawingSvgWalls extends DrawingSvgBase
 {
 
   private void writePath( BufferedWriter out, DrawingPath path, float xoff, float yoff, int rt ) throws IOException
@@ -72,7 +88,7 @@ class DrawingSvgWalls extends DrawingSvgBase
     }
   }
 
-  void writeSvg( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
+  public void writeSvg( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 

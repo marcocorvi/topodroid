@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.io.svg;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
@@ -18,6 +18,28 @@ import com.topodroid.utils.TDString;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
+
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.DrawingStationPath;
+import com.topodroid.DistoX.DrawingStationName;
+import com.topodroid.DistoX.DrawingPointPath;
+import com.topodroid.DistoX.DrawingPointLinePath;
+import com.topodroid.DistoX.DrawingLinePath;
+import com.topodroid.DistoX.DrawingAreaPath;
+import com.topodroid.DistoX.DrawingLabelPath;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.DrawingAudioPath;
+import com.topodroid.DistoX.DrawingPhotoPath;
+import com.topodroid.DistoX.DrawingSpecialPath;
+import com.topodroid.DistoX.DrawingIO;
+import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.LinePoint;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.SymbolPoint;
+import com.topodroid.DistoX.SymbolLibrary;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.ICanvasCommand;
 
 // import android.util.Log;
 
@@ -56,7 +78,7 @@ import java.io.IOException;
  * has a CSS value of 96 pxl / inch ( 1 in = 25.4 mm )
  *
  */
-class DrawingSvgBase
+public class DrawingSvgBase
 {
   // FIXME station scale is 0.3
   static final protected int POINT_SCALE  = 10;
@@ -197,7 +219,7 @@ class DrawingSvgBase
     else if ( th_name.equals( SymbolLibrary.CEILING_MEANDER ) ) pw.format(" stroke-dasharray=\"6 2 \"");
     toSvgPointLine( pw, line, xoff, yoff, line.isClosed() );
     if ( TDSetting.mSvgLineDirection ) {
-      if ( BrushManager.hasLineEffect( line.mLineType ) ) {
+      if ( BrushManager.hasLineEffect( line.lineType() ) ) {
         if ( line.isReversed() ) {
           pw.format(" marker-start=\"url(#rev)\"");
         } else {
@@ -235,7 +257,7 @@ class DrawingSvgBase
   {
     float bezier_step = TDSetting.getBezierStep();
     pw.format(" d=\"");
-    LinePoint p = lp.mFirst;
+    LinePoint p = lp.first();
     float x0 = xoff+p.x;
     float y0 = yoff+p.y;
     printPoint( pw, "M", xoff+p.x, yoff+p.y );

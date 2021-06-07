@@ -31,7 +31,7 @@ import android.widget.TextView;
 
 import android.graphics.Paint; // custom paint
 
-// import android.util.Log;
+import android.util.Log;
 
 public class DBlock
 {

@@ -19,9 +19,11 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.ContentResolver;
+import android.database.Cursor;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ContentUris;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
@@ -39,7 +41,11 @@ import androidx.documentfile.provider.DocumentFile;
 import java.io.File;
 import java.io.FileDescriptor;
 import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
 import java.io.OutputStream;
+import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
 // import java.io.FileFilter;
 // import java.io.FilenameFilter;
@@ -48,6 +54,8 @@ import java.io.FileReader;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+
+import java.nio.charset.Charset;
 
 import android.util.Log;
 
@@ -63,6 +71,29 @@ public class TDFile
   public interface NameFilter 
   {
     public boolean accept( String name );
+  }
+
+  public class ExtensionFilter implements NameFilter
+  {
+    ArrayList<String> mExtensions;
+    public ExtensionFilter( String[] extensions )
+    {
+      mExtensions = new ArrayList<String>();
+      if ( extensions != null ) {
+        for ( int k = 0; k < extensions.length; ++k ) mExtensions.add( extensions[k].toLowerCase() );
+      }
+    }
+
+    public void addExtension( String ext ) { mExtensions.add( ext ); }
+
+    public boolean accept( String name ) 
+    {
+      name = name.toLowerCase();
+      for ( String ext : mExtensions ) {
+        if ( name.endsWith( ext ) ) return true;
+      }
+      return false;
+    }
   }
 
   private String         mFilename; // file name
@@ -827,63 +858,139 @@ public class TDFile
  
   // =============================================================================
   // MediaStore
+  // thanks to https://stackoverflow.com/questions/59511147/create-copy-file-in-android-q-using-mediastore/62879112#62879112
 
-  public OutputStream getMSoutput( String filename, String mimetype )
+  static public boolean isMSexists( String subdir, String filename )
+  {
+    String dir = "Documents/TopoDroid/" + subdir + "/";
+    ContentResolver cr = TDInstance.context.getContentResolver();
+    Uri content_uri = MediaStore.Files.getContentUri("external");
+    String where = MediaStore.MediaColumns.RELATIVE_PATH + "=? AND " + MediaStore.MediaColumns.DISPLAY_NAME + "=?";
+    String[] args = new String[]{ dir, filename };
+    Cursor cursor = cr.query( content_uri, null, where, args, null);
+    return ( cursor != null && cursor.getCount() > 0 );
+  }
+
+  // @note the returnet OutputStream must be closed after it has been written
+  static public OutputStream getMSoutput( String subdir, String filename, String mimetype )
   {
     OutputStream ret = null;
-    ContentValues cv = new ContentValues();
-    cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
-    cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
-    cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, "Documents/TopoDroid" );
-    cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
+    String dir = "Documents/TopoDroid/" + subdir + "/";
 
     ContentResolver cr = TDInstance.context.getContentResolver();
-    try {
-      Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
-      if ( uri == null ) {
-        Log.v("DistoX", "Media Store failed resolving");
-      } else {
-        ret = cr.openOutputStream( uri );
-        cv.clear();
+    Uri content_uri = MediaStore.Files.getContentUri("external");
+
+    Uri uri = null;
+    String where = MediaStore.MediaColumns.RELATIVE_PATH + "=? AND " + MediaStore.MediaColumns.DISPLAY_NAME + "=?";
+    String[] args = new String[]{ dir, filename };
+    Cursor cursor = cr.query( content_uri, null, where, args, null);
+    if ( cursor != null && cursor.getCount() > 0 ) {
+      // Log.v("DistoX", "Media store overwrite");
+      cursor.moveToNext();
+      long id = cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
+      uri = ContentUris.withAppendedId(content_uri, id);
+    } else {
+      // Log.v("DistoX", "Media store write anew");
+      ContentValues cv = new ContentValues();
+      cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
+      cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
+      cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, dir );
+      cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
+      uri = cr.insert( content_uri, cv );
+    }
+    if ( uri == null ) {
+      TDLog.Error("Media Store failed resolving");
+    } else {
+      try {
+        ret = cr.openOutputStream( uri, "rwt" );
+        ContentValues cv = new ContentValues();
         cv.put( MediaStore.Downloads.IS_PENDING, 0 );
         cr.update( uri, cv, null, null );
+      } catch ( FileNotFoundException e ) {
+        TDLog.Error("Media Store not found exception " + e.getMessage() );
+      } catch ( RuntimeException e ) {
+        TDLog.Error("Media Store failed exception " + e.getMessage() );
       }
-    } catch ( FileNotFoundException e ) {
-      Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
-    } catch ( RuntimeException e ) {
-      Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
     }
     return ret;
   }
 
-  public InputStream getMSinput( String filename, String mimetype )
+  // @note the returnet OutputStreamWriter must be closed after it has been written
+  static public BufferedWriter getMSwriter( String subdir, String filename, String mimetype )
+  {
+    OutputStream os = getMSoutput( subdir, filename, mimetype );
+    return ( os == null )? null : new BufferedWriter( new OutputStreamWriter( os ) );
+  }
+
+  static public InputStream getMSinput( String subdir, String filename, String mimetype )
   {
     InputStream ret = null;
+    String dir = "Documents/TopoDroid/" + subdir + "/";
     ContentValues cv = new ContentValues();
     cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
     cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
-    cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, "Documents/TopoDroid" );
+    cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, dir );
     cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
 
     ContentResolver cr = TDInstance.context.getContentResolver();
-    try {
-      Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
-      if ( uri == null ) {
-        Log.v("DistoX", "Media Store failed resolving");
-      } else {
+    Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
+    if ( uri == null ) {
+      Log.v("DistoX", "Media Store failed resolving");
+    } else {
+      try {
         ret = cr.openInputStream( uri );
         cv.clear();
         cv.put( MediaStore.Downloads.IS_PENDING, 0 );
         cr.update( uri, cv, null, null );
+      } catch ( FileNotFoundException e ) {
+        Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
+      } catch ( RuntimeException e ) {
+        Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
       }
-    } catch ( FileNotFoundException e ) {
-      Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
-    } catch ( RuntimeException e ) {
-      Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
     }
     return ret;
   }
 
+  // NOTE listing returns only items inserted with MediaStore
+  //
+  // @param subdir   topodroid subdirectory
+  // @param filter   filename filter
+  // static public ArrayList<String> getMSfilelist( String subdir )
+  // {
+  //   ArrayList<String> ret = new ArrayList<>();
+  //   String dir = "Documents/TopoDroid/" + subdir + "/";
+  //   ContentResolver cr = TDInstance.context.getContentResolver();
+  //   Uri content_uri = MediaStore.Files.getContentUri("external");
+  //   // Uri.Builder builder = content_uri.buildUpon();
+  //   // builder.appendPath( "/" + dir );
+  //   // Uri dir_uri = builder.build();
+  //   // cr.refresh( dir_uri, null, null );
+  //   String where = MediaStore.MediaColumns.RELATIVE_PATH + "=?";
+  //   String[] args = new String[]{ dir };
+  //   Cursor cursor = cr.query( content_uri, null, where, args, null);
+  //   Log.v("DistoX", "listing " + dir + " count " + cursor.getCount() );
+  //   if ( cursor != null && cursor.getCount() > 0 ) {
+  //     while ( cursor.moveToNext() ) {
+  //       String filename = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
+  //       ret.add( filename );
+  //       Log.v("DistoX", "  file " + filename );
+  //     }
+  //   } 
+  //   return ret;
+  // }
+
   // -----------------------------------------------------------------------------
+  static public void osWriteString( OutputStream os, String str ) throws IOException
+  {
+    os.write( str.getBytes( Charset.forName( "UTF-8" ) ) );
+  }
+
+  // get a reader for the InputStream
+  // then we can read  
+  static public BufferedReader getISReader( InputStream is )
+  {
+    InputStreamReader isr = new InputStreamReader( is, Charset.forName( "UTF-8" ) );
+    return new BufferedReader( isr );
+  }
 
 } 

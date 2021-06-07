@@ -189,7 +189,7 @@ public class DrawingCommandManager
   int scrapMaxIndex() { return mScraps.size(); }
 
   // for export classes
-  List< Scrap > getScraps() { return mScraps; }
+  public List< Scrap > getScraps() { return mScraps; }
   
   // ----------------------------------------------------------------
   // PATH_MULTISELECT
@@ -236,7 +236,7 @@ public class DrawingCommandManager
     return ret;
   }
 
-  boolean hasUserStations() 
+  public boolean hasUserStations() 
   {
     boolean ret = false;
     synchronized( mScraps ) {
@@ -246,9 +246,9 @@ public class DrawingCommandManager
   }
 
   // accessor for DrawingSvg
-  List< DrawingPath > getGrid1()   { return mGridStack1; }
-  List< DrawingPath > getGrid10()  { return mGridStack10; }
-  List< DrawingPath > getGrid100() { return mGridStack100; }
+  public List< DrawingPath > getGrid1()   { return mGridStack1; }
+  public List< DrawingPath > getGrid10()  { return mGridStack10; }
+  public List< DrawingPath > getGrid100() { return mGridStack100; }
 
   private int mSelectMode = Drawing.FILTER_ALL;
   void setSelectMode( int mode ) { mSelectMode = mode; }

@@ -213,7 +213,7 @@ public class DrawingPath extends RectF
   }
 
   // get the path color (or white)
-  int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }
+  public int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }
 
   // void log()
   // {

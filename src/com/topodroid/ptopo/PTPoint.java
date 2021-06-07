@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -35,14 +35,14 @@ public class PTPoint
 
   // ----------------------------------------------------------
 
-  void read( FileInputStream fs )
+  void read( InputStream fs )
   {
     _x = PTFile.readInt( fs );
     _y = PTFile.readInt( fs );
     // TODO return
   }
 
-  void write( FileOutputStream fs )
+  void write( OutputStream fs )
   {
     PTFile.writeInt( fs, _x );
     PTFile.writeInt( fs, _y );

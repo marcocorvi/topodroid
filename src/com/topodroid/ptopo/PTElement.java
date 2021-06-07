@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -31,17 +31,17 @@ public class PTElement
 
   byte id() { return _id; }
 
-  void read( FileInputStream fs ) 
+  void read( InputStream fs ) 
   {
   }
 
-  void write( FileOutputStream fs ) 
+  void write( OutputStream fs ) 
   { 
   }
   
   // void print( ) { }
 
-  void printTherion( FileOutputStream fp, int x0, int y0, int scale, 
+  void printTherion( OutputStream fp, int x0, int y0, int scale, 
                      String[] points,
                      String[] lines )
   {

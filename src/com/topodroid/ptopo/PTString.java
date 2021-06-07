@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 
 // import android.util.Log;
@@ -39,7 +39,7 @@ class PTString
   int size() { return _str.length(); }
   String value() { return _str; }
 
-  void read( FileInputStream fs )
+  void read( InputStream fs )
   {
     int len = 0;
     try {
@@ -63,7 +63,7 @@ class PTString
     }
   }
 
-  void write( FileOutputStream fs )
+  void write( OutputStream fs )
   {
     try {
       int len = _str.length();

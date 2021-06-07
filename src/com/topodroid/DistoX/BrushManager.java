@@ -63,11 +63,11 @@ public class BrushManager
   public static SymbolLineLibrary  getLineLib()  { return mLineLib; }
   public static SymbolAreaLibrary  getAreaLib()  { return mAreaLib; }
 
-  static boolean isPointRoundTrip( DrawingPointPath path, int rt )
+  public static boolean isPointRoundTrip( DrawingPointPath path, int rt )
   { return (mPointLib != null) && mPointLib.getSymbolByIndex( path.mPointType ).mRoundTrip == rt; }
-  static boolean isLineRoundTrip( DrawingLinePath path, int rt )
+  public static boolean isLineRoundTrip( DrawingLinePath path, int rt )
   { return (mLineLib != null) && mLineLib.getSymbolByIndex( path.mLineType ).mRoundTrip == rt; }
-  static boolean isAreaRoundTrip( DrawingAreaPath path, int rt )
+  public static boolean isAreaRoundTrip( DrawingAreaPath path, int rt )
   { return (mAreaLib != null) && mAreaLib.getSymbolByIndex( path.mAreaType ).mRoundTrip == rt; }
 
   static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNames(); }
@@ -108,7 +108,7 @@ public class BrushManager
   static String getPointGroup( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolGroup( idx ); }
   static String getLineGroup( int idx )  { return (mLineLib  == null)? null : mLineLib.getSymbolGroup( idx ); }
   static String getAreaGroup( int idx )  { return (mAreaLib  == null)? null : mAreaLib.getSymbolGroup( idx ); }
-  static String getLineWallGroup() { return (mLineLib == null)? SymbolLibrary.WALL : getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
+  public static String getLineWallGroup() { return (mLineLib == null)? SymbolLibrary.WALL : getLineGroup(BrushManager.mLineLib.mLineWallIndex); }
 
   static String getPointDefaultOptions( int idx ) { return (mPointLib == null)? null : mPointLib.getSymbolDefaultOptions(idx ); }
   static String getLineDefaultOptions( int idx ) { return (mLineLib == null)? null : mLineLib.getSymbolDefaultOptions(idx ); }
@@ -130,7 +130,7 @@ public class BrushManager
   public static int getLineLibSize()  { return ( mLineLib  == null )? 0 : mLineLib.size(); }
   public static int getAreaLibSize()  { return ( mAreaLib  == null )? 0 : mAreaLib.size(); }
 
-  static boolean hasLineEffect( int index ) { return mLineLib != null && mLineLib.hasEffect( index ); }
+  public static boolean hasLineEffect( int index ) { return mLineLib != null && mLineLib.hasEffect( index ); }
   static int getLineStyleX( int index ) { return (mLineLib == null)? 1 : mLineLib.getStyleX( index ); }
 
   static boolean isAreaCloseHorizontal( int index ) { return mAreaLib != null && mAreaLib.isCloseHorizontal( index ); }

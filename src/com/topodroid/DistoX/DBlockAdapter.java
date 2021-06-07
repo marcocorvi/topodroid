@@ -272,15 +272,18 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // called only by ShotWindow.updateDBlockList
   List< DBlock > getItemsForAssign()
   {
-    int size = getCount();
-    int k = size-1;
-    for ( ; k >= START; --k ) { // scan from last backword until a leg is found
-      DBlock b = (DBlock)( getItem( k ) );
-      if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) break;
-    }
     List< DBlock > ret = new ArrayList<>();
-    for ( ; k < size; ++k ) { // insert into return from the leg onward
-      ret.add( (DBlock)( getItem(k) ) );
+    int size = getCount();
+    if ( size > 0 ) {
+      int k = size-1;
+      for ( ; k >= START; --k ) { // scan from last backword until a leg is found
+        DBlock b = (DBlock)( getItem( k ) );
+        if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) break;
+      }
+      if ( k < START ) k = START;
+      for ( ; k < size; ++k ) { // insert into return from the leg onward
+        ret.add( (DBlock)( getItem(k) ) );
+      }
     }
     return ret; // REPLACED 20191002
     // return mItems.subList( k, size );
@@ -543,8 +546,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
  
-  // called by ShotWindow::updateShot()
-  //
+  /** called by ShotWindow::updateShot()
+   * @param blk_id  block id
+   */
   DBlock updateBlockView( long blk_id ) 
   {
     int size = getCount();

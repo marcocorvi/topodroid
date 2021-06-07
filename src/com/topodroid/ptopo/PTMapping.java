@@ -13,8 +13,8 @@ package com.topodroid.ptopo;
 
 import com.topodroid.utils.TDLog;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -43,14 +43,14 @@ public class PTMapping
       if ( s >= 50 && s <= 20000 ) _scale = s;
     }
 
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       _origin.read( fs );
       _scale = PTFile.readInt( fs );
       TDLog.Log( TDLog.LOG_PTOPO, "PT Mapping origin " + _origin._x + " " + _origin._y + " scale " + _scale );
     }
 
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       _origin.write( fs );
       PTFile.writeInt( fs, _scale );

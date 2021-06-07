@@ -15,8 +15,8 @@ import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 import android.util.Log;
 
@@ -53,7 +53,7 @@ public class PTDrawing
 
     // ---------------------------------------------------
 
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       clear();
       _mapping.read( fs );
@@ -76,7 +76,7 @@ public class PTDrawing
       TDLog.Log( TDLog.LOG_PTOPO, "PT drawing read " + _elements.size() + " elements " );
     }
 
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       _mapping.write( fs );
       // Log.v( "DistoX", "PT drawing write elements " + _elements.size() );
@@ -110,7 +110,7 @@ public class PTDrawing
 
     /*
     void 
-    PTdrawing::printTherion( FileOutputStream fp,
+    PTdrawing::printTherion( OutputStream fp,
                        String name,
                        String proj,
                        String[] points, 

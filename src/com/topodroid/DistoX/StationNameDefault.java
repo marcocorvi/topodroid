@@ -44,7 +44,7 @@ class StationNameDefault extends StationName
 
     boolean ret = false;
     // Log.v("DistoX-DATA", "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
-    ArrayList< DBlock > unassigned = new ArrayList<>();
+    ArrayList< DBlock > sec_legs = new ArrayList<>();
     // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
     boolean forward_shots = ( survey_stations == 1 );
@@ -128,13 +128,17 @@ class StationNameDefault extends StationName
 	main_from = main_to = null;
       } else {
         // Log.v( "DistoX-BLOCK", "blk is skipped " + blk.mId + " prev " + prev.mId );
-	if ( ! blk.isRelativeDistance( prev ) ) unassigned.add( blk );
+	if ( ! blk.isRelativeDistance( prev ) ) {
+          sec_legs.add( blk );
+        } else {
+          setSecLegName( blk );
+        }
       }
     }
    
     // processing skipped ahots ...
-    if ( unassigned.size() > 0 ) {
-      ret |= assignStations( unassigned, sts );
+    if ( sec_legs.size() > 0 ) {
+      ret |= assignStations( sec_legs, sts );
     } else {
       mCurrentStationName = null;
     }
@@ -161,6 +165,7 @@ class StationNameDefault extends StationName
    * @param list         list of dblock, including those to assign
    * @param sts          station names already in use
    * DistoX backshot-mode is handled separatedly
+   * @return true if a leg has been assigned
    */
   @Override
   boolean assignStations( List< DBlock > list, Set<String> sts )
@@ -196,6 +201,8 @@ class StationNameDefault extends StationName
 
     int nrLegShots = 0;
 
+    ArrayList< DBlock > sec_legs = new ArrayList<>();
+
     for ( DBlock blk : list ) {
       // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> F " + from + " T " + to + " S " + station );
       if ( blk.mFrom.length() == 0 ) {
@@ -214,6 +221,7 @@ class StationNameDefault extends StationName
             // TDLog.Log( TDLog.LOG_DATA, "set prev [1] " + blk.mId + " F<" + blk.mFrom + ">" );
           } else {
             if ( prev.isRelativeDistance( blk ) ) {
+              sec_legs.add( blk );
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
                 if ( current_station != null ) {
@@ -249,6 +257,10 @@ class StationNameDefault extends StationName
                   // logJump( blk, to, from, sts );
                 }
                 // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
+                for ( DBlock b : sec_legs ) setSecLegName( b );
+                sec_legs.clear();
+              } else {
+                setSecLegName( blk );
               }
             } else { // distance from prev > "closeness" setting
               nrLegShots = 0;

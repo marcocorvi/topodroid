@@ -1451,11 +1451,14 @@ public class TopoDroidApp extends Application
 
   // static long trobotmillis = 0L; // TROBOT_MILLIS
 
-  // called also by ShotWindow::updataBlockList
-  // this re-assign stations to shots with station(s) already set
-  // the list of stations is ordered by compare
-  //
-  // @param list list of shot to assign
+  /** called also by ShotWindow::updataBlockList
+   * this re-assign stations to shots with station(s) already set
+   * the list of stations is ordered by compare
+   *
+   * @param blk0 block after whcih to assign stations
+   * @param list list of shot to assign
+   * @return ???
+   */
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStationsBefore( blk0.mId, TDInstance.sid /*, TDStatus.NORMAL */ );
@@ -1477,10 +1480,10 @@ public class TopoDroidApp extends Application
     return new StationNameDefault( this, mData, TDInstance.sid ).assignStationsAfter( blk0, list, sts );
   }
 
-  // called also by ShotWindow::updataBlockList
-  // @param list blocks whose stations need to be set in the DB
-  // return true if a leg was assigned
-  //
+  /** called also by ShotWindow::updataBlockList
+   * @param list blocks whose stations need to be set in the DB
+   * @return true if a leg was assigned
+   */
   boolean assignStationsAll(  List< DBlock > list )
   { 
     Set<String> sts = mData.selectAllStations( TDInstance.sid );
@@ -1548,8 +1551,8 @@ public class TopoDroidApp extends Application
     // TDPath.checkCCsvDir();
     // String filename = TDPath.getCCsvFile( ci.name );
     // return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, filename );
-    File file = TDFile.getExternalFile( "ccsv", ci.name + ".csv" );
-    return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, file );
+    // File file = TDFile.getExternalFile( "ccsv", ci.name + ".csv" );
+    return TDExporter.exportCalibAsCsv( TDInstance.cid, mDData, ci, ci.name );
   }
 
   // ----------------------------------------------
@@ -2371,18 +2374,17 @@ public class TopoDroidApp extends Application
   // ==================================================================
   
   // called by ShotWindow and SurveyWindow on export
-  static void doExportDataAsync( Context context, int exportType, boolean warn )
+  static void doExportDataAsync( Context context, int exportType, boolean toast )
   {
-    if ( ! TDSetting.mDataBackup ) return;
     if ( exportType < 0 ) return;
     if ( TDInstance.sid < 0 ) {
-      if ( warn ) TDToast.makeBad( R.string.no_survey );
+      if ( toast ) TDToast.makeBad( R.string.no_survey );
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
       String saving = context.getResources().getString(R.string.saving_);
-      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, true )).execute();
+      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
     }
   }
 

@@ -17,6 +17,9 @@ import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.io.dxf.DrawingDxf;
 import com.topodroid.io.shp.DrawingShp;
+import com.topodroid.io.svg.DrawingSvg;
+import com.topodroid.io.svg.DrawingSvgWalls;
+import com.topodroid.io.svg.DrawingTunnel;
 
 import android.util.Log;
 
@@ -67,69 +70,74 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     protected Boolean doInBackground(Void... arg0)
     {
       // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
-      String dirname = null;
+      // String dirname = null;
       try {
         if ( mExt.equals("dxf") ) {
           filename = TDPath.getDxfFileWithExt( mFullName );
-          dirname  = TDPath.getDxfFile( "" );
+          // dirname  = TDPath.getDxfFile( "" );
         } else if ( mExt.equals("svg") ) {
           filename = TDPath.getSvgFileWithExt( mFullName );
-          dirname  = TDPath.getSvgFile( "" );
+          // dirname  = TDPath.getSvgFile( "" );
         } else if ( mExt.equals("shp") ) {
           filename = TDPath.getShpBasepath( mFullName );
-          dirname  = TDPath.getShzFile( "" );
+          // dirname  = TDPath.getShzFile( "" );
         } else if ( mExt.equals("xvi") ) {
           filename = TDPath.getXviFileWithExt( mFullName );
-          dirname  = TDPath.getXviFile( "" );
+          // dirname  = TDPath.getXviFile( "" );
         } else if ( mExt.equals("xml") ) {
           filename = TDPath.getTnlFileWithExt( mFullName );
-          dirname  = TDPath.getTnlFile( "" );
+          // dirname  = TDPath.getTnlFile( "" );
         } else if ( mExt.equals("c3d") ) {
           filename = TDPath.getC3dFileWithExt( mFullName );
-          dirname  = TDPath.getC3dFile( "" );
+          // dirname  = TDPath.getC3dFile( "" );
 	} else { // unexpected extension
 	  return false;
         }
         boolean ret = true;
-        // if ( filename != null ) { // always true
+        synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           // Log.v("DistoX-SAVE", "Export to File: " + filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
-            // FIXME too-big synch
-            synchronized ( TDFile.mFilesLock ) {
-	      DrawingShp.writeShp( filename, mCommand, mType, mStation );
-            }
+	    DrawingShp.writeShp( filename, mCommand, mType, mStation );
 	  } else {
-            File temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
-            final FileWriter fw = TDFile.getFileWriter( temp );
-            BufferedWriter bw = new BufferedWriter( fw );
+            // File temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
+            // final FileWriter fw = TDFile.getFileWriter( temp );
+            // BufferedWriter bw = new BufferedWriter( fw );
+            BufferedWriter bw = null;
             if ( mExt.equals("dxf") ) {
+              bw = TDFile.getMSwriter( "dxf", mFullName + ".dxf", "text/dxf" );
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
+              bw = TDFile.getMSwriter( "svg", mFullName + ".svg", "text/svg" );
               if ( TDSetting.mSvgRoundTrip ) {
                 (new DrawingSvgWalls()).writeSvg( filename, bw, mNum, mCommand, mType );
               } else {
                 (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
+              bw = TDFile.getMSwriter( "xvi", mFullName + ".xvi", "text/xvi" );
               DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
+              bw = TDFile.getMSwriter( "tnl", mFullName + ".xml", "text/xml" );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
               // Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
+              bw = TDFile.getMSwriter( "c3d", mFullName + ".c3d", "text/c3d" );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }
-            bw.flush();
-            bw.close();
-            synchronized( TDFile.mFilesLock ) { 
-              TDPath.checkPath( filename );
-              File file = TDFile.getFile( filename );
-              temp.renameTo( file );
+            if ( bw != null ) {
+              bw.flush();
+              bw.close();
             }
+            // synchronized( TDFile.mFilesLock ) { 
+            //   TDPath.checkPath( filename );
+            //   File file = TDFile.getFile( filename );
+            //   temp.renameTo( file );
+            // }
 	  }
-          return ret;
-        // }
+        }
+        return ret;
       } catch (Exception e) {
         e.printStackTrace();
       }

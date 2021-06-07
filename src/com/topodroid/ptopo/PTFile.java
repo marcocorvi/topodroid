@@ -21,8 +21,8 @@ import java.util.HashMap;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 
 // import android.util.Log;
@@ -82,7 +82,7 @@ public class PTFile
     return bb.array();
   }
 
-  private static void write( FileOutputStream fs, byte[] b, int n )
+  private static void write( OutputStream fs, byte[] b, int n )
   {
     try {
       fs.write( b, 0, n );
@@ -95,7 +95,7 @@ public class PTFile
   //  @param fs    input stream
   //  @param b     byte array to store read bytes (size n+1)
   //  @param n     total number of bytes to read
-  public static void read( FileInputStream fs, byte[] b, int n )
+  public static void read( InputStream fs, byte[] b, int n )
   {
     try {
       int nread  = 0; // number of bytes that have been read
@@ -110,14 +110,14 @@ public class PTFile
     }
   }
 
-  static byte readByte( FileInputStream fs )
+  static byte readByte( InputStream fs )
   {
     byte[] b = new byte[1];
     read( fs, b, 1 );
     return bytes2byte( b );
   }
 
-  static void writeByte( FileOutputStream fs, byte b )
+  static void writeByte( OutputStream fs, byte b )
   {
     try { 
       fs.write( b );
@@ -125,40 +125,40 @@ public class PTFile
     }
   }
 
-  static int readInt( FileInputStream fs )
+  static int readInt( InputStream fs )
   {
     byte[] b = new byte[4];
     read( fs, b, 4 );
     return bytes2int( b );
   }
 
-  static void writeInt( FileOutputStream fs, int i ) 
+  static void writeInt( OutputStream fs, int i ) 
   {
     byte[] b = int2bytes( i );
     write( fs, b, 4 );
   }
 
-  static short readShort( FileInputStream fs )
+  static short readShort( InputStream fs )
   {
     byte[] b = new byte[2];
     read( fs, b, 2 );
     return (short)bytes2short( b );
   }
 
-  static void writeShort( FileOutputStream fs, short i ) 
+  static void writeShort( OutputStream fs, short i ) 
   {
     byte[] b = short2bytes( i );
     write( fs, b, 2 );
   }
 
-  static long readLong( FileInputStream fs )
+  static long readLong( InputStream fs )
   {
     byte[] b = new byte[8];
     read( fs, b, 8 );
     return bytes2long( b );
   }
 
-  static void writeLong( FileOutputStream fs, long i ) 
+  static void writeLong( OutputStream fs, long i ) 
   {
     byte[] b = long2bytes( i );
     write( fs, b, 8 );
@@ -288,7 +288,7 @@ public class PTFile
 
 
 
-    public void read( FileInputStream fs )
+    public void read( InputStream fs )
     {
       clear();
       // read ID and version
@@ -329,7 +329,7 @@ public class PTFile
       _sideview.read( fs );
     }
 
-    public void write( FileOutputStream fs ) 
+    public void write( OutputStream fs ) 
     {
       try {
         byte[] header = { 'T', 'o', 'p', (byte)3 };
@@ -380,7 +380,7 @@ public class PTFile
 //   const char * sideviewfile = oss_ext.str().c_str();
 // 
 //   TDPath.checkPath( oss.str().c_str() );
-//   FileOutputStream fp = fopen( oss.str().c_str(), "w" );
+//   OutputStream fp = fopen( oss.str().c_str(), "w" );
 //   if ( fp == NULL ) return; // FIXME
 //   fprintf(fp, "encoding UTF-8\n");
 //   fprintf(fp, "survey survey_name\n\n");

@@ -19,11 +19,11 @@ import android.graphics.Path;
 
 public class Symbol implements SymbolInterface
 {
-  static final int W2D_NONE       = 0; // Walls roundtrip values
-  static final int W2D_WALLS_SHP  = 1;
-  static final int W2D_WALLS_SYM  = 2;
-  static final int W2D_DETAIL_SHP = 3;
-  static final int W2D_DETAIL_SYM = 4;
+  public static final int W2D_NONE       = 0; // Walls roundtrip values
+  public static final int W2D_WALLS_SHP  = 1;
+  public static final int W2D_WALLS_SYM  = 2;
+  public static final int W2D_DETAIL_SHP = 3;
+  public static final int W2D_DETAIL_SYM = 4;
 
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   private String  mThName;   // therion name

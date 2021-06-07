@@ -11,8 +11,8 @@
  */
 package com.topodroid.ptopo;
 
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 
 // import android.util.Log;
 
@@ -140,7 +140,7 @@ public class PTTrip
       // printf("Trip set date %d %d %d -- %llx\n", y, m, d, _time );
     }
 
-    void read( FileInputStream fs )
+    void read( InputStream fs )
     {
       _time = PTFile.readLong( fs );
       setDate();
@@ -148,7 +148,7 @@ public class PTTrip
       _declination = PTFile.readShort( fs );
     }
 
-    void write( FileOutputStream fs )
+    void write( OutputStream fs )
     {
       PTFile.writeLong( fs, _time );
       _comment.write( fs );
@@ -165,7 +165,7 @@ public class PTTrip
 
 /*
 void 
-PTtrip::printTherion( FileOutputStream fp )
+PTtrip::printTherion( OutputStream fp )
 {
   int y, m, d;
   getDate( y, m, d );
