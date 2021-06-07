@@ -6,26 +6,26 @@
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents.\n\n
-Tap "Close" not to take any action.
-</string -->
+    <string name="path11_title">IMPORTANT - Android 11</string -->
+    <string name="path11_text">
+À partir d'Android 11, les dossiers d'applications doivent se trouver dans le dossier "Documents".\n
+Il n'y a rien à faire sur une installation récente de l'application Android-11. \n
+Pour une installation plus ancienne, avant une mise à jour du système vers Android-11, faites une sauvegarde de vos données, 
+copiez votre dossier "TopoDroid" dans "Documents" et redémarrez TopoDroid.\n\n
+ATTENTION. A partir de la v. 5.0.60 "TopoDroid" utilise le dossier "Documents" s'il existe, même sur Android-10 et inférieur.\n\n
+Appuyez sur "Déplacer" pour déplacer votre dossier TopoDroid vers le dossier "Documents".\n\n
+Appuyez sur "Fermer" pour ne rien modifier.
+</string>
     <string name="button_no_again">Ne plus me demander</string>
-    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
-    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
+    <string name="path11_move">Déplacé dans le dossier Documents/TopoDroid.\nSVP redémarrez TopoDroid</string>
+	    <string name="path11_not_move">Échec du déplacement vers le dossier Documents/TopoDroid</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
     <string name="new_survey_label">Nouveau relevé</string>
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="distox_label">DistoX</string>
 
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
@@ -54,9 +54,9 @@ Tap "Close" not to take any action.
     <string name="UP">ASCENDANT</string>
     <string name="DOWN">DESCENDANT</string>
 
-    <!-- TODO string name="xsplay">X</string -->
-    <!-- TODO string name="hsplay">H</string -->
-    <!-- TODO string name="vsplay">V</string -->
+    <string name="xsplay">X</string>
+    <string name="hsplay">H</string>
+    <string name="vsplay">V</string>
 
     <string name="cut">COUPER</string>
     <string name="copy">COPIER</string>
@@ -69,12 +69,12 @@ Tap "Close" not to take any action.
 
     <string name="thp_user">Utilisateur</string>
     <string name="thp_label">Étiquette</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
-    <!-- string name="thp_danger">danger</string -->
+    <string name="thp_section">Section</string>
+    <string name="thp_station">Station</string>
+    <string name="thp_danger">Danger</string>
     <string name="thl_user">Utilisateur</string>
     <string name="thl_wall">Parois</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">Section</string>
     <string name="tha_user">Utilisateur</string>
     <string name="tha_water">Eau</string>
 
@@ -97,19 +97,19 @@ Tap "Close" not to take any action.
     <string name="failed_append_to_line">Échec de la jonction à une autre ligne</string>
 
     <string name="bric_device">Appareil %1$s</string>
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_battery">Batterie %1$d</string>
+    <string name="bric_battery_wait">Batterie &#8230;</string>
+    <string name="bric_reset_time">Remise à zéro</string>
+    <string name="bric_clear_memory">Effacement de la mémoire</string>
+    <string name="bric_future_time">Refuser de réinitialiser à l'avenir</string>
+    <string name="bric_ask_memory_clear">Effacer la mémoire du BRIC ?</string>
+    <string name="bric_reset_ok">Remise à zéro du temps</string>
+    <string name="bric_reset_fail">Echec de la remise à zéro du temps</string>
+    <string name="bric_clear_ok">Effacement de la mémoire</string>
+    <string name="bric_clear_fail">Échec de l'effacement de la mémoire</string>
 
     <string name="calibration_title">Outil d\'étalonnage</string>
     <string name="calibration_length">Mètre</string>
@@ -324,7 +324,7 @@ Tap "Close" not to take any action.
 <string name="no_calibration">Aucun étalonnage sélectionné</string>
 <string name="no_capture_app">Aucune application de capture d\'image</string>
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
+    <string name="outdated_cave3d">Version de Cave3D trop ancienne</string>
     <string name="no_data_reduction">Pas de réduction des données</string>
 <string name="no_db">Pas de base de données</string>
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
@@ -374,7 +374,7 @@ Tap "Close" not to take any action.
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">SCRAPS</string -->
     <string name="menu_switch">BASCULER/FERMER</string>
     <string name="menu_help">AIDE</string>
     <!-- UNUSED string name="menu_join_survey">CO-RELEVÉ-TOPO</string -->
@@ -398,22 +398,22 @@ Tap "Close" not to take any action.
     <string name="menu_zoom_fit">ZOOM</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Papier millimétré</string>
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
-    <!-- TODO string name="ble_no_remote">No remote device</string -->
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
+    <string name="start_scan">Lancer le scan</string>
+    <string name="stop_scan">Arrêter le scan</string>
+    <string name="title_scan">Scan BLE</string>
+    <string name="ble_scan_failed">Echec du scan BLE</string>
+    <string name="ble_gatt_failure">Défaillance du BLE</string>
+    <string name="ble_no_remote">Pas d'appareil distant détecté</string>
+    <string name="ble_control">Contrôle</string>
+    <string name="ble_connect">Connexion</string>
+    <string name="ble_disconnect">Déconnexion</string>
+    <string name="bric_scan">Scan</string>
+    <string name="bric_shot">Visée</string>
+    <string name="bric_laser">Laser</string>
+    <string name="bric_off">Off</string>
+    <string name="bric_memory">Mémoire du BRIC</string>
 
 
     <string name="popup_join_pt">Attacher au point le plus proche</string>
@@ -497,7 +497,7 @@ Tap "Close" not to take any action.
     <string name="section_area">Zone section : %1$.1f</string>
     <string name="section_name">Commentaires section</string>
     <string name="scrap_outline">Contour Esquisse</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>
@@ -551,11 +551,11 @@ Tap "Close" not to take any action.
     <!-- TODO string name="delta_warning">Average error above %1$.1f\nWrite coefficients?</string -->
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_data">Répartition des données brutes Raw : %1$.2f %%</string>
+    <string name="cover_calib">Répartition des données d'étalonnage %1$.2f %%</string>
+    <string name="cover_g">G répartition: %1$.2f %%</string>
+    <string name="cover_m">M répartition: %1$.2f %%</string>
+    <string name="cover_r">Roulis répartition: %1$.2f %%</string>
 
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
@@ -606,7 +606,7 @@ Tap "Close" not to take any action.
     <string name="stat_splay">Visées latérales d\'habillage %1$d # %2$d</string>
     <string name="stat_station">Stations %1$d # %2$d</string>
     <!-- TODO string name="stat_dangling">Dangling shots %1$d %2$.1f %3$s</string -->
-    <string name="stat_surface">Surface des visées %1$d # %2$d %3$.1f %4$s</string>
+    <string name="stat_surface">Visées de surface %1$d # %2$d %3$.1f %4$s</string>
     <string name="stat_wens">W %1$.0f  E %2$.0f  N %3$.0f  S %4$.0f [%5$s]"</string>
     <string name="stat_angle_error">Erreurs d\'angle %1$.2f ± %2$.2f</string>
     <string name="shot_title">VISÉE %1$s - %2$s"</string>
@@ -616,7 +616,7 @@ Tap "Close" not to take any action.
     <string name="survey_stat_duplicate">Visées dupliquées %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Visées latérales d\'habillage %1$d</string>
     <string name="survey_stat_station">Stations %1$d</string>
-    <string name="survey_stat_surface">Surface des visées %1$d %2$.1f %3$s</string>
+    <string name="survey_stat_surface">Visées de surface %1$d %2$.1f %3$s</string>
 
     <string name="hide_blank">Visées non définies</string>
     <string name="hide_leg">Visées de cheminement répétées</string>
@@ -627,9 +627,9 @@ Tap "Close" not to take any action.
     <string name="extended">DEVELOPPEE</string>
     <string name="profile">COUPE</string>
     <string name="extended_profile">COUPE Développée</string>
-    <!-- TODO string name="x_section">X-SECTION</string -->
+    <string name="x_section">SECTION Transverse</string>
     <string name="v_section">SECTION V</string>
-    <string name="h_section">SECTION Transverse</string>
+    <string name="h_section">SECTION H</string>
     <!-- UNUSED string name="landscape">Paysage</string -->
 
     <string name="distox_err_ok">OK</string>
@@ -644,16 +644,16 @@ Tap "Close" not to take any action.
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
     <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">Mise à jour de la traduction du manuel d'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Appliquer</string>
     <string name="button_back"      >Retour     </string>
     <string name="button_cancel"    >Annuler    </string>
     <string name="button_change"    >Changer    </string>
     <string name="button_close"     >Fermer     </string>
     <string name="button_create"    >Créer    </string>
-    <string name="button_color"     >Couleur</string>
+    <string name="button_color"     >Couleur  </string>
     <string name="button_convert"   >Convertir   </string>
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
@@ -663,7 +663,7 @@ Tap "Close" not to take any action.
     <string name="button_eval"      >Évaluation      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <string name="button_evalroll"  >Roullis</string>
+    <string name="button_evalroll"  >Roulis</string>
     <string name="button_eval_cal"  >Évaluation avec étalonnage</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -676,7 +676,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
     <string name="button_plot"    >Dessin</string>
     <string name="button_more"    >Plus</string>
-    <!-- TODO string name="button_move"    >Move</string -->
+    <string name="button_move"    >Déplacer/string>
     <string name="button_next"    >Suivant</string>
     <string name="button_prev"    >Précédent</string>
     <string name="button_new"     >Nouveau fragment</string>
@@ -706,7 +706,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="button_select"    >Sélectionner    </string -->
     <string name="button_search"    >Chercher    </string>
     <string name="button_merge"     >Fusionner     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Station sauvegardée</string>
     <string name="button_split"     >Diviser     </string>
     <string name="button_station"   >Centrer à</string>
     <string name="button_store"     >STOCKER     </string>
@@ -737,7 +737,7 @@ Tap "Close" not to take any action.
     <string name="layer_floor">Sol</string>
     <string name="layer_fill">remplissages</string>
     <string name="layer_ceil">Plafond</string>
-    <!-- TODO string name="layer_arti">Artifacts</string -->
+    <string name="layer_arti">Artéfacts</string>
     <!-- UNUSED string name="layer_form">Formes</string -->
     <!-- UNUSED string name="layer_water">Eau</string -->
     <!-- UNUSED string name="layer_text">Texte</string -->
@@ -764,7 +764,7 @@ Tap "Close" not to take any action.
     <string name="btn_install">Installer</string>
 
     <string name="symbol_archeo">Archéologie</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">Anthropique</string>
     <string name="symbol_bio">Biologie</string>
     <string name="symbol_geo">Géologie</string>
     <string name="symbol_karst">Karstologie</string>
@@ -830,7 +830,7 @@ Tap "Close" not to take any action.
     <string name="help_add_topodroid">Crée un nouveau relevé/étalonnage</string>
     <string name="help_import">Importe une archive Zip ou un fichier Therion</string>
     <string name="help_symbol">Active/désactive des symboles de dessin</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Cave project manager</string>
     <!-- UNUSED string name="help_database">Application Database viewer (SQliteViewer)</string -->
     <string name="help_prefs">Modifie les préférences</string>
     <string name="help_log">Active/désactive les options de journalisation</string>
@@ -860,7 +860,7 @@ Tap "Close" not to take any action.
     <string name="help_refs">Choix des références de dessin</string>
     <string name="help_rename">Change le nom de la topographie</string>
     <string name="help_plot_rename">Renommer/suppr croquis</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Scraps de croquis</string>
     <string name="help_plot_switch">Changer de croquis</string>
     <string name="help_search">Rechercher une station</string>
     <string name="help_stats">Statistiques du relevé</string>
@@ -878,13 +878,13 @@ Tap "Close" not to take any action.
     <string name="help_select_mode">Selection d\'outil</string>
     <string name="help_erase_mode">Type de gomme</string>
     <string name="help_erase_size">Taille de gomme [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <string name="help_select_size">Sélectionner la taille de l'outil [S/M/L]</string>
     <string name="help_previous">Sélectionne l\'élément précédent dans la sélection</string>
     <string name="help_next">Sélectionne l\'élément suivant dans la sélection</string>
     <string name="help_recover">Récupérer dessin de la sauvegarde</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Afficher une sauvegarde plus récente</string>
+    <string name="help_reload_next">Afficher une sauvegarde plus ancienne</string>
+    <string name="help_reload_plot">Recharger la sauvegarde de l'esquisse</string>
 
     <string name="help_line_point">Actions sur les points d\'une ligne : joindre, partager, couper, supprimer</string>
 <!--
@@ -908,7 +908,7 @@ Tap "Close" not to take any action.
     <string name="help_read">Lit les coefficients d\'étalonnage du DistoX</string>
     <string name="help_info_device">Information sur l\'appareil</string>
     <string name="help_scan">Recherche de nouveaux DistoX</string>
-    <!-- TODO string name="help_scan_ble">Scan for BTLE devices</string -->
+    <string name="help_scan_ble">Recherche de dispositifs BTLE</string>
     <string name="help_pair">Appairer le DistoX Actuel</string>
     <string name="help_open_calib">Ouvre l\'étalonnage</string>
     <string name="help_export_calib">Exporte l\'étalonnage</string>
@@ -917,8 +917,8 @@ Tap "Close" not to take any action.
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Écrit les coefficients d\'étalonnage sur le DistoX</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
+    <string name="help_add_project">Ajouter un projet</string>
+    <string name="help_add_surveys">Ajouter des topographies</string>
     <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
     <!-- TODO string name="help_view_surveys">Display surveys</string -->
     <!-- TODO string name="help_view_equates">List equates</string -->
@@ -972,7 +972,7 @@ Tap "Close" not to take any action.
 
     <string name="title_azimut">Référence extension</string>
     <string name="title_audio">Commentaire Audio</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Enregistrements audio</string>
     <string name="title_calib">Étalonnage</string>
     <string name="title_calib_check">Visée de contrôle étalonnage</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -983,7 +983,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="title_coord">Entrer les Coordonnées du point</string -->
     <string name="title_current_station">Stations sauvegardées</string>
     <!-- TODO string name="title_search">Station/Leg search</string -->
-    <!-- TODO string name="title_dangling">Unattached shots</string -->
+    <string name="title_dangling">Visée non reliée</string>
     <string name="title_device">Périphériques DistoX</string>
     <string name="title_device_select">Sélectionner le DistoX</string>
     <string name="title_discover">Recherche de nouveaux DistoX… Patientez</string>
@@ -1070,10 +1070,10 @@ Tap "Close" not to take any action.
     <string name="title_calib_export">Exporter l\'étalonnage sous</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <string name="title_import_tro">Options d'importation VisualTopo</string>
+    <string name="title_import_dat">Options d'importation Compass</string>
 
-  <!-- TODO string name="pref_export_settings">Export settings</string -->
+  <string name="pref_export_settings">Paramétrages d'Export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">OPTIONS DU RELEVÉ</string>
@@ -1099,8 +1099,8 @@ Tap "Close" not to take any action.
 
   <string name="pref_locale_title">Langue</string>
   <string name="pref_locale_summary">Langue</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientation de l'écran</string>
+  <string name="pref_orientation_summary">Orientation de l'écran de l'application</string>
 
   <string name="pref_raw_data_title">Données brutes</string>
   <string name="pref_raw_data_summary">Afficher les données brutes</string>
@@ -1119,21 +1119,21 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title">Format export dessins</string>
   <string name="pref_export_plot_summary">Format par défaut d\'exportation des dessins</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <string name="pref_therion_config_title">Fichier de config Therion</string>
+  <string name="pref_therion_config_summary">Créer un fichier de config Therion</string>
   <string name="pref_therion_maps_title">Topographies Therion en premier</string>
   <string name="pref_therion_maps_summary">Export des topographies Therion avant les données</string>
   <string name="pref_extra_buttons_title">Niveau d\'utilisation</string>
   <string name="pref_extra_buttons_summary">Active des options supplémentaires</string>
   <string name="pref_size_buttons_title">Taille des boutons</string>
   <string name="pref_size_buttons_summary">Taille de la barre d\'action des boutons [pixels]</string>
-  <!-- TODO string name="pref_with_sensors_title">Sensors</string -->
+  <string name="pref_with_sensors_title">Capteurs</string>
   <!-- TODO string name="pref_with_sensors_summary">Enable "sensors" data</string -->
-  <!-- TODO string name="pref_with_android_azimuth_title">Android compass</string -->
+  <string name="pref_with_android_azimuth_title">Boussole Android</string>
   <!-- TODO string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string -->
   <!-- TODO string name="pref_with_levels_title">Layers</string -->
   <!-- TODO string name="pref_with_levels_summary">Use canvas layers</string -->
-  <!-- TODO string name="pref_palettes_title">Palettes</string -->
+  <string name="pref_palettes_title">Palettes</string>
   <!-- TODO string name="pref_palettes_summary">Enable additional palettes</string -->
   <!-- TODO string name="pref_packet_logger_title">Packets log</string -->
   <!-- TODO string name="pref_packet_logger_summary">Enable packets logging</string -->
@@ -1154,7 +1154,7 @@ Tap "Close" not to take any action.
   <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>
   <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
   <!-- TODO string name="pref_vtopo_splays_title">VisualTopo splays</string -->
-  <!-- TODO string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string -->
+  <string name="pref_vtopo_splays_summary">Exporter les visées latérales dans le fichier VisualTopo</string>
   <!-- TODO string name="pref_vtopo_lrud_title">LRUD at From</string -->
   <!-- TODO string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string -->
   <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
@@ -1193,16 +1193,16 @@ Tap "Close" not to take any action.
   <string name="pref_svg_linedirstroke_summary">Largeur de la ligne d\'orientation en SVG</string>
   <string name="pref_svg_line_dir_title">Orientation ligne SVG</string>
   <string name="pref_svg_line_dir_summary">Ajouter des coches d\'orientation aux lignes pour l\'exportation SVG</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <string name="pref_svg_stationsize_title">Taille Station</string>
+  <string name="pref_svg_stationsize_summary">Taille du nom des stations</string>
   <string name="pref_kml_stations_title">Stations KML</string>
   <string name="pref_kml_stations_summary">Ajouter les stations à l\'export KML</string>
   <string name="pref_kml_splays_title">Visée latérales KML</string>
   <string name="pref_kml_splays_summary">Ajouter les visées latérales d\'habillage à l\'export KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
-  <!-- TODO string name="pref_csv_raw_summary">Export raw data to CSV</string -->
-  <!-- TODO string name="pref_csv_sep_title">CSV separator</string -->
-  <!-- TODO string name="pref_csv_sep_summary">CSV fields separator</string -->
+  <string name="pref_csv_raw_title">Raw CSV</string>
+  <string name="pref_csv_raw_summary">Export des données brutes en fichier CSV</string>
+  <TODO string name="pref_csv_sep_title">Séparateur CSV</string>
+  <string name="pref_csv_sep_summary">Séparateur des données du fichier CSV</string>
   <!-- TODO string name="pref_csv_eol_title">CSV eol</string -->
   <!-- TODO string name="pref_csv_eol_summary">CSV records separator</string -->
 
@@ -1227,8 +1227,8 @@ Tap "Close" not to take any action.
   <string name="pref_conn_mode_summary">Comment connecter le DistoX</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Reconnexion automatique</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Reconnecter quand la connexion est perdue</string -->
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Topo Deux-DistoX</string -->
+  <tring name="pref_second_distox_summary">Topographier en utilisant deux DistoX disctincts</string>
   <string name="pref_auto_pair_title">Auto association</string>
   <string name="pref_auto_pair_summary">Auto association après détection</string>
   <string name="pref_head_tail_title">Nombre de données nouvelles</string>
@@ -1237,8 +1237,8 @@ Tap "Close" not to take any action.
   <string name="pref_socket_delay_summary">Délai de connexion pour assoc. [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Contournement Z6</string>
   <string name="pref_z6_workaround_summary">Contournement Z6 téléchargement données</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Contrôle Firmware</string>
+  <string name="pref_firmware_sanity_summary">Appliquer les tests de validité du firmware</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">Nom du Système de Coordonnées de Référence (UTM, WGS84&#8230;)</string>
   <!-- FIXME string name="pref_crs_message">Saisissez le nom CRS tel que dans Proj4</string -->
@@ -1610,53 +1610,53 @@ Tap "Close" not to take any action.
    <string name="ask_dump">Sauvegarder le firmware ?</string>
    <string name="ask_upload">Envoyer le firmware ?</string>
    <string name="ask_upload_not_compatible">Le firmware semble incorrect.\nEnvoyer quand même ?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">Échec de la vérification du matériel DistoX</string>
+   <string name="firmware_upload_bad_sign">Matériel DistoX incompatible</string>
    <string name="firmware_file_dumped">Firmware sauvegardé dans : %1$s taille %2$d</string>
    <string name="firmware_file_uploaded">Firmware %1$s envoyé  %2$d / %3$d écrits</string>  
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
-   <!-- TODO string name="firmware_not_supported">Device does not support firmware functions</string -->
+   <string name="firmware_file_dump_fail">Échec de l'installation du firmware</string>
+   <string name="firmware_file_upload_fail">Échec du téléchargement du firmware</string>
+   <string name="firmware_not_supported">L'appareil ne supporte pas les fonctions du firmware</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
+    <string name="project">Projet %1$s</string>
     <!-- TODO string name="no_editor">Editor not found</string -->
     <!-- TODO string name="no_file">File not found</string -->
     <!-- TODO string name="no_extra">Missing file extra</string -->
     <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="no_equate">Pas dégalité</string>
+    <string name="no_surveys">Pas de topographie</string>
+    <string name="no_tdconfig">Fichier tdconfig manquant</string>
+    <string name="no_th_file">Pas de fichier Therion</string>
+    <string name="file_exists">Le fichier existe déjà</string>
+    <string name="file_create_fail">Échec de la création du fichier</string>
+    <string name="oom">Attention. Mémoire épuisée</string>
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Supprimer le fichier TdConfig</string>
+    <string name="ask_remove_equate">Supprimer l'égalité %1$s ?</string>
+    <string name="equate_no_station">Aucune station sélectionnée</string>
+    <string name="equate_no_stations">Trop peu de stations</string>
+    <string name="equate_no_nearby">Pas de station à proximité</string>
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <string name="menu_new">NOUVEAU</string>
+    <string name="menu_equate">AJOUT EGALITE</string>
+    <string name="menu_equates">EGALITES</string>
+    <string name="menu_save">ENREGISTRER</string>
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <string name="overwrite">écraser</string>
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
+    <string name="title_help">TopoDroid Manager v. %1$s</string>
+    <string name="title_export_settings">Paramétrages d'import/export</string>
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
+    <string name="title_settings">Paramétrage de TdManager</string>
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
+    <string name="title_tdconfig">Entrer le nom du projet/string>
     <!-- TODO string name="title_surveys">Surveys</string -->
 
     <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="export_failed">Échec de l'exportation</string>
 
 </resources>
