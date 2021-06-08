@@ -12,6 +12,7 @@
 package com.topodroid.utils;
 
 import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDPath;
 
 import android.os.ParcelFileDescriptor;
 // import android.app.Application;
@@ -61,6 +62,8 @@ import android.util.Log;
 
 public class TDFile
 {
+  // public static final String HOME_DIR = TDPath.getPathBase(); // "Documents/TopoDroid/"
+
   public final static Object mFilesLock = new Object();
 
   public interface FileFilter 
@@ -95,6 +98,9 @@ public class TDFile
       return false;
     }
   }
+
+  /* =========================================================================
+  // Storage Access Framework
 
   private String         mFilename; // file name
   private DocumentFile   mDocFile;  // file document
@@ -640,6 +646,8 @@ public class TDFile
     return "application/topodroid";
   }
 
+  =========================================================================== */
+
   // OLD FILE FUNCTIONS -----------------------------------------------------------------------------
 
   public static File getManDir( )    { return new File( TDInstance.context.getFilesDir(), "man" ); }
@@ -658,6 +666,23 @@ public class TDFile
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
+
+  // CACHE FILES --------------------------------------------------------------
+
+  public static File getCacheFile( String filename ) { return new File ( TDInstance.context.getCacheDir(), filename ); }
+
+  public static void clearCache( long before )
+  {
+    long now  = System.currentTimeMillis();
+    long time = now - before; // clean the cache "before" minutes before now
+    File cacheDir = TDInstance.context.getCacheDir();
+    File[] files = cacheDir.listFiles();
+    if ( files != null ) for ( File f : files ) {
+      if ( f.lastModified() < time ) {
+        if ( ! f.delete() ) TDLog.Error("File delete error");
+      }
+    }
+  }
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
 
@@ -684,6 +709,8 @@ public class TDFile
     return new FileWriter( file );
   }
 
+  // ----------------------------------------------------------------------------
+
   // @param name     absolute filename
   // used by FixedImportDialog
   public static File getGpsPointFile( String pathname ) { return new File( pathname ); }
@@ -692,23 +719,6 @@ public class TDFile
   {
     File file = new File( dirname, filename );
     return new FileReader( file );
-  }
-
-  // CACHE FILES --------------------------------------------------------------
-
-  public static File getCacheFile( String filename ) { return new File ( TDInstance.context.getCacheDir(), filename ); }
-
-  public static void clearCache( long before )
-  {
-    long now  = System.currentTimeMillis();
-    long time = now - before; // clean the cache "before" minutes before now
-    File cacheDir = TDInstance.context.getCacheDir();
-    File[] files = cacheDir.listFiles();
-    if ( files != null ) for ( File f : files ) {
-      if ( f.lastModified() < time ) {
-        if ( ! f.delete() ) TDLog.Error("File delete error");
-      }
-    }
   }
 
   // public static File getFile( File dir, String name )
@@ -735,14 +745,14 @@ public class TDFile
   public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 
   // -----------------------------------------------------------------------------
-  public static void deleteFile( File f ) // DistoX-SAF
+  public static void deleteFile( File f ) 
   {
     if ( f != null && f.exists() ) {
       if ( ! f.delete() ) TDLog.Error("file delete failed " + f.getName() );
     }
   }
 
-  public static void deleteDir( File dir ) // DistoX-SAF
+  public static void deleteDir( File dir ) 
   {
     if ( dir != null && dir.exists() ) {
       File[] files = dir.listFiles();
@@ -855,10 +865,91 @@ public class TDFile
   { 
     return renameTempFile( temp, getFile( pathname ) );
   }
+
+  // =========================================================================
+  // GENERIC INTERFACE
+
+  public static boolean hasMSdir( String subdir )
+  {
+    File dir = new File( TDPath.getPathBase() + subdir );
+    return ( dir.exists() );
+  }
+
+  public static boolean hasMSfile( String subdir, String name )
+  {
+    File dir = new File( TDPath.getPathBase() + subdir );
+    if ( ! dir.exists() ) return false;
+    File file = new File( dir, name );
+    return file.exists();
+  }
+
+  public static boolean hasMSfile( String pathname )
+  {
+    return (new File(pathname)).exists();
+  }
+
+  public static boolean makeMSdir( String subdir )
+  {
+    File dir = new File( TDPath.getPathBase() + subdir );
+    if ( dir.exists() ) return true;
+    return dir.mkdirs();
+  }
+
+  static public OutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException
+  {
+    if ( ! makeMSdir( subdir ) ) {
+      TDLog.Error("failed to create subdir " + subdir );
+      throw new IOException("failed to create subdir");
+    }
+    return new FileOutputStream( TDPath.getPathBase() + subdir + "/" + filename );
+  }
+
+  // @note the returnet OutputStreamWriter must be closed after it has been written
+  static public BufferedWriter getMSwriter( String subdir, String filename, String mimetype ) throws IOException
+  {
+    if ( ! makeMSdir( subdir ) ) {
+      TDLog.Error("failed to create subdir " + subdir );
+      throw new IOException("failed to create subdir");
+    }
+    OutputStream os = new FileOutputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    if ( os == null ) {
+      TDLog.Error("failed to create output stream " + filename );
+      throw new IOException( "failed to create file output stream ");
+    }
+    return new BufferedWriter( new OutputStreamWriter( os ) );
+  }
+
+  static public InputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
+  {
+    if ( ! hasMSdir( subdir ) ) {
+      TDLog.Error("failed: no subdir " + subdir );
+      throw new IOException("failed: no subdir");
+    }
+    return new FileInputStream( TDPath.getPathBase() + subdir + "/" + filename );
+  }
+
+  // get a reader for the InputStream
+  // then we can read  
+  static public BufferedReader getMSReader( String subdir, String filename, String mimetype ) throws IOException
+  {
+    if ( ! hasMSdir( subdir ) ) {
+      TDLog.Error("failed: no subdir " + subdir );
+      throw new IOException("failed: no subdir");
+    }
+    InputStream is = new FileInputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    if ( is == null ) {
+      TDLog.Error("failed to create input stream " + filename );
+      throw new IOException( "failed to create file input stream ");
+    }
+    return new BufferedReader( new InputStreamReader( is, Charset.forName( "UTF-8" ) ) );
+  }
  
-  // =============================================================================
+  /* =============================================================================
   // MediaStore
   // thanks to https://stackoverflow.com/questions/59511147/create-copy-file-in-android-q-using-mediastore/62879112#62879112
+  //
+  // MediaStore has an unrecoverable flaw: if the user adds a file without updating the MediaStore database
+  // this file is not seen by the MediaStore
 
   static public boolean isMSexists( String subdir, String filename )
   {
@@ -913,13 +1004,6 @@ public class TDFile
       }
     }
     return ret;
-  }
-
-  // @note the returnet OutputStreamWriter must be closed after it has been written
-  static public BufferedWriter getMSwriter( String subdir, String filename, String mimetype )
-  {
-    OutputStream os = getMSoutput( subdir, filename, mimetype );
-    return ( os == null )? null : new BufferedWriter( new OutputStreamWriter( os ) );
   }
 
   static public InputStream getMSinput( String subdir, String filename, String mimetype )
@@ -985,12 +1069,6 @@ public class TDFile
     os.write( str.getBytes( Charset.forName( "UTF-8" ) ) );
   }
 
-  // get a reader for the InputStream
-  // then we can read  
-  static public BufferedReader getISReader( InputStream is )
-  {
-    InputStreamReader isr = new InputStreamReader( is, Charset.forName( "UTF-8" ) );
-    return new BufferedReader( isr );
-  }
+  */
 
 } 

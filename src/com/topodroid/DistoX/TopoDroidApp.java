@@ -2383,8 +2383,8 @@ public class TopoDroidApp extends Application
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return;
       TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
-      String saving = context.getResources().getString(R.string.saving_);
-      (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
+      String format = context.getResources().getString(R.string.saved_file_1);
+      (new SaveDataFileTask( format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
     }
   }
 

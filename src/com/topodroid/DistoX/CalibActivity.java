@@ -495,7 +495,7 @@ public class CalibActivity extends Activity
         filename = mApp.exportCalibAsCsv();
       }
       if ( filename != null ) {
-        TDToast.make( getString(R.string.saving_) + filename );
+        TDToast.make( String.format( getString(R.string.saved_file_1), filename ) );
       } else {
         TDToast.makeBad( R.string.saving_file_failed );
       }

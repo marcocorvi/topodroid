@@ -30,7 +30,7 @@ import android.util.Log;
 
 class SaveDataFileTask extends AsyncTask<Void, Void, String >
 {
-  private String mSaving;   // for the toast
+  private String mFormat;   // for the toast
   private long  mSid;
   private DataHelper mData;
   private SurveyInfo mInfo;
@@ -39,9 +39,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private int mType;        // export type
   private boolean mToast;
 
-  SaveDataFileTask( String saving, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
+  SaveDataFileTask( String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
   {
-    mSaving  = saving;
+    mFormat  = format;
     mSid     = sid;
     mInfo    = info.copy();
     mData    = data;
@@ -66,102 +66,35 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   {
     // Log.v("DistoX", "save data file task - execute");
     int ret = 0;
-    // String filename = null;
     String pathname = null;
-    // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
-    if ( mType == TDConst.DISTOX_EXPORT_SHP ) {
-      pathname = TDPath.getShpPath( mSurvey );
-      Log.v("DistoX", "save data file task - export shp " + pathname );
-      synchronized ( TDFile.mFilesLock ) { // too-big synch
-        TDExporter.exportSurveyAsShp( mSid, mData, mInfo, pathname );
-      }
-    } else { 
+    synchronized ( TDFile.mFilesLock ) { // too-big synch
       switch ( mType ) {
         // case TDConst.DISTOX_EXPORT_TLX:
         //   filename = exportSurveyAsTlx();
         //   break;
         case TDConst.DISTOX_EXPORT_CSX: // cSurvey (only mInfo, no plot-data)
-          pathname = TDPath.getSurveyCsxFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_CSV:
-          pathname = TDPath.getSurveyCsvFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_CAV: // Topo
-          pathname = TDPath.getSurveyCavFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_DAT: // Compass
-          pathname = TDPath.getSurveyDatFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_DXF:
-          pathname = TDPath.getSurveyDxfFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_GRT: // Grottolf
-          pathname = TDPath.getSurveyGrtFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_GTX: // GHTopo
-          pathname = TDPath.getSurveyGtxFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_KML: // KML
-          pathname = TDPath.getSurveyKmlFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
-          pathname = TDPath.getSurveyJsonFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_SHP: // Shapefile
-          // pathname = TDPath.getShpPath( mSurvey );
-          return null; // cannot happen
-        case TDConst.DISTOX_EXPORT_PLT: // Track file
-          pathname = TDPath.getSurveyPltFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_PLG: // Polygon CAVE
-          pathname = TDPath.getSurveyCaveFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_SRV: // Walls
-          pathname = TDPath.getSurveySrvFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_SUR: // WinKarst
-          pathname = TDPath.getSurveySurFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_SVX: // Survex
-          pathname = TDPath.getSurveySvxFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_TRO: // VisualTopo
-          pathname = TDPath.getSurveyTroFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
-          pathname = TDPath.getSurveyTrbFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
-          pathname = TDPath.getSurveyTopFile( mSurvey );
-          break;
-        case TDConst.DISTOX_EXPORT_TH:
-          pathname = TDPath.getSurveyThFile( mSurvey );
-          break;
-        default:
-          return null;
-      }
-
-      switch ( mType ) {
-        // case TDConst.DISTOX_EXPORT_TLX:
-        //   filename = exportSurveyAsTlx();
-        //   break;
-        case TDConst.DISTOX_EXPORT_CSX: // cSurvey (only mInfo, no plot-data)
+          pathname = mSurvey + ".csx";
           ret = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, null, null, null, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_CSV:
-	  if ( TDSetting.mCsvRaw ) {
+          pathname = mSurvey + ".csv";
+          if ( TDSetting.mCsvRaw ) {
             ret = TDExporter.exportSurveyAsRawCsv( mSid, mData, mInfo, mSurvey );
           } else {
             ret = TDExporter.exportSurveyAsCsv( mSid, mData, mInfo, mSurvey );
-	  }
+          }
           break;
         case TDConst.DISTOX_EXPORT_CAV: // Topo
+          pathname = mSurvey + ".cav";
           ret = TDExporter.exportSurveyAsCav( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_DAT: // Compass
+          pathname = mSurvey + ".dat";
           ret = TDExporter.exportSurveyAsDat( mSid, mData, mInfo, mSurvey );
+          Log.v("DistoX", "save DAT " + ret );
           break;
         case TDConst.DISTOX_EXPORT_DXF:
+          pathname = mSurvey + ".dxf";
           List< DBlock > list = mData.selectAllShots( mSid, TDStatus.NORMAL );
           if ( list.size() > 0 ) {
             DBlock blk = list.get( 0 );
@@ -174,51 +107,65 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           }
           break;
         case TDConst.DISTOX_EXPORT_GRT: // Grottolf
+          pathname = mSurvey + ".grt";
           // TDToast.make( "WARNING Grottolf export is untested" );
           ret = TDExporter.exportSurveyAsGrt( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_GTX: // GHTopo
+          pathname = mSurvey + ".gtx";
           // TDToast.make( "WARNING GHTopo export is untested" );
           ret = TDExporter.exportSurveyAsGtx( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_KML: // KML
+          pathname = mSurvey + ".kml";
           ret = TDExporter.exportSurveyAsKml( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_JSON: // GeoJSON
+          pathname = mSurvey + ".json";
           ret = TDExporter.exportSurveyAsJson( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_SHP: // Shapefile
-          // ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, TDPath.getShpPath( mSurvey ) );
+          pathname = mSurvey + ".shz";
+          ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, TDPath.getShpPath( mSurvey ) );
+          // ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_PLT: // Track file
+          pathname = mSurvey + ".plt";
           ret = TDExporter.exportSurveyAsPlt( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_PLG: // Polygon CAVE
+          pathname = mSurvey + ".cave";
           ret = TDExporter.exportSurveyAsPlg( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_SRV: // Walls
+          pathname = mSurvey + ".srv";
           ret = TDExporter.exportSurveyAsSrv( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_SUR: // WinKarst
+          pathname = mSurvey + ".sur";
           // TDToast.make( "WARNING WinKarst export is untested" );
           ret = TDExporter.exportSurveyAsSur( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_SVX: // Survex
+          pathname = mSurvey + ".svx";
           ret = TDExporter.exportSurveyAsSvx( mSid, mData, mInfo, mDevice, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_TRO: // VisualTopo
+          pathname = mSurvey + ".tro";
           ret = TDExporter.exportSurveyAsTro( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
+          pathname = mSurvey + ".trb";
           // TDToast.make( "WARNING TopoRobot export is untested" );
           ret = TDExporter.exportSurveyAsTrb( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_TOP: // PocketTopo
+          pathname = mSurvey + ".top";
           ret = TDExporter.exportSurveyAsTop( mSid, mData, mInfo, null, null, mSurvey );
           break;
-
         case TDConst.DISTOX_EXPORT_TH:
         default:
+          pathname = mSurvey + ".th";
           ret = TDExporter.exportSurveyAsTh( mSid, mData, mInfo, mSurvey );
           break;
       }
@@ -235,7 +182,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
       } else if ( filename.length() == 0 ) {
         TDToast.makeBad( R.string.no_geo_station );
       } else {
-        TDToast.make( mSaving + filename ); // FIXME_FORMAT
+        TDToast.make( String.format(mFormat, filename) ); 
       }
     }
   }

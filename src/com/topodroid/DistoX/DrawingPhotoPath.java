@@ -114,7 +114,7 @@ public class DrawingPhotoPath extends DrawingPointPath
 //   { 
 //     String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(mId) );
 //     // File photofile = TDFile.getFile( photofilename );
-//     if ( TDFile.hasFile( photofilename ) ) {
+//     if ( TDFile.hasMSfile( photofilename ) ) {
 //       byte[] buf = TDExporter.readFileBytes( photofilename );
 //       if ( buf != null ) {
 //         pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
@@ -141,7 +141,7 @@ public class DrawingPhotoPath extends DrawingPointPath
   { 
     String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(mId) );
     // File photofile = TDFile.getFile( photofilename );
-    if ( TDFile.hasFile( photofilename ) ) {
+    if ( TDFile.hasMSfile( photofilename ) ) {
       byte[] buf = TDExporter.readFileBytes( photofilename );
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"photo\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );

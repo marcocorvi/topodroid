@@ -490,7 +490,7 @@ public class DrawingPointPath extends DrawingPath
       pw.format("    </crosssection>\n" );
       String imagefilename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
       // File imagefile = TDFile.getFile( imagefilename );
-      if ( TDFile.hasFile( imagefilename ) ) {
+      if ( TDFile.hasMSfile( imagefilename ) ) {
         byte[] buf = TDExporter.readFileBytes( imagefilename );
         if ( buf != null ) {
           pw.format("    <crosssectionfile>\n" );

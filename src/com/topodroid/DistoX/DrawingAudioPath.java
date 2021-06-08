@@ -110,7 +110,7 @@ public class DrawingAudioPath extends DrawingPointPath
 //     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
 //     Struing audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
 //     // File audiofile = TDFile.getFile( audiofilename );
-//     if ( TDFile.hasFile audiofilename ) ) {
+//     if ( TDFile.hasMSfile( audiofilename ) ) {
 //       byte[] buf = TDExporter.readFileBytes( audiofilename );
 //       if ( buf != null ) {
 //         pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
@@ -135,7 +135,7 @@ public class DrawingAudioPath extends DrawingPointPath
   { 
     String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
     // File audiofile = TDFile.getFile( audiofilename );
-    if ( TDFile.hasFile( audiofilename ) ) {
+    if ( TDFile.hasMSfile( audiofilename ) ) {
       byte[] buf = TDExporter.readFileBytes( audiofilename );
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"audio\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );

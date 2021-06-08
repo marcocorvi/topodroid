@@ -215,7 +215,7 @@ public class TDExporter
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
       String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString(bid) );
-      if ( TDFile.hasFile( audiofilename ) ) {
+      if ( TDFile.hasMSfile( audiofilename ) ) {
         byte[] buf = readFileBytes( audiofilename );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
@@ -226,7 +226,7 @@ public class TDExporter
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
       String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) );
-      if ( TDFile.hasFile( photofilename ) ) {
+      if ( TDFile.hasMSfile( photofilename ) ) {
         byte[] buf = readFileBytes( photofilename );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
@@ -816,13 +816,14 @@ public class TDExporter
   // @param sid      survey ID
   // @param data     database helper object
   // @param info     survey metadata
-  // @param filename filepath without extension 
-  static String exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
+  // @param filename file path  
+  // @return 1 success, 0 fail
+  static int exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
-      return "";
+      return 0;
     }
 
     boolean success = true;
@@ -831,7 +832,7 @@ public class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
       File dir = TDFile.getFile( filename );
-      if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) {
+      if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) { // if ( TDFile.makeMSdir( filename ) )
         ArrayList< File > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
@@ -860,7 +861,7 @@ public class TDExporter
         // if ( TDSetting.mKmlSplays ) {
         //   nr = 0;
         //   for ( TDNum num : nums ) {
-        //     String filepath = filename + "-splays-" + nr;
+        //     String filename = filename + "/splays-" + nr;
         //     ++ nr;
         //     List< NumSplay > splays = num.getSplays();
         //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
@@ -872,13 +873,14 @@ public class TDExporter
 
         Archiver zipper = new Archiver( );
         zipper.compressFiles( filename + ".shz", files );
-        TDFile.deleteDir( filename ); // delete temporary shapedir
       }
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
-      return null;
+      return 0;
+    } finally {
+      TDFile.deleteDir( filename ); // delete temporary shapedir
     }
-    return filename;
+    return 1;
   }
 
   // ===================================================================================================
@@ -1153,17 +1155,15 @@ public class TDExporter
   {
     if ( plots.size() == 0 ) return;
     for ( PlotInfo plt : plots ) {
-      File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
-      boolean exists = TDFile.isMSexists( "th2", info.name + "-" + plt.name + ".th2" );
-      if ( plot_file.exists() ) {
-        Log.v("DistoX", "Plot " + plt.name + " exists: " + exists );
+      boolean exists = TDFile.hasMSfile( "th2", info.name + "-" + plt.name + ".th2" );
+      // File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+      // assert( plot_file.exists() == exists );
+      if ( exists ) {
         if ( TDSetting.mTherionConfig ) {
           pw.format("  input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
         } else {
           pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
         }
-      } else {
-        Log.v("DistoX", "Plot " + plt.name + " does not exists: " + exists );
       }
     } 
     pw.format("\n");
@@ -1171,8 +1171,10 @@ public class TDExporter
       if ( PlotType.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
         // Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
-        File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
-        if ( plot_file.exists() ) {
+        boolean exists = TDFile.hasMSfile( "th2", info.name + "-" + plt.name + ".th2" );
+        // File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
+        // assert( plot_file.exists() == exists );
+        if ( exists ) {
           pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
           pw.format("  #   %s-%s\n", info.name, plt.name );
           for ( int k=1; k<=scrap_nr; ++k) {
@@ -2431,11 +2433,11 @@ public class TDExporter
 
   static int exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    // Log.v("DistoX", "export as compass: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
+    Log.v("DistoX", "export as compass: " + surveyname + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
-      // TDLog.Log( TDLog.LOG_IO, "export Compass " + file.getName() );
+      // TDLog.Log( TDLog.LOG_IO, "export Compass " + surveyname + ".dat");
       BufferedWriter bw = TDFile.getMSwriter( "dat", surveyname + ".dat", "text/dat" );
       PrintWriter pw = new PrintWriter( bw );
   
@@ -3506,7 +3508,7 @@ public class TDExporter
           m = Integer.parseInt( date.substring(5,7) );
           d = Integer.parseInt( date.substring(8,10) );
         } catch ( NumberFormatException e ) {
-          TDLog.Error( "export survey as SRV date parse error " + date );
+          TDLog.Error( "export survey as CAV date parse error " + date );
         }
       }
       pw.format("#survey ^%s%s", info.name, eol ); // NOTE "cav" has '^' in front of the cave name (?)
@@ -3592,7 +3594,7 @@ public class TDExporter
       bw.close();
       return 1;
     } catch ( IOException e ) {
-      TDLog.Error( "Failed Polygon export: " + e.getMessage() );
+      TDLog.Error( "Failed Topo (cav) export: " + e.getMessage() );
       return 0;
     }
   }
@@ -3639,7 +3641,7 @@ public class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Polygon " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "plg", surveyname + ".plg", "text/plg" );
+      BufferedWriter bw = TDFile.getMSwriter( "cave", surveyname + ".cave", "text/cave" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("POLYGON Cave Surveying Software"); printPolygonEOL( pw );

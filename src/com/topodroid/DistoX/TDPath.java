@@ -106,9 +106,9 @@ public class TDPath
           : ( BELOW_ANDROID_11  && TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
             : EXTERNAL_STORAGE_PATH_11;
 
-  private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
-  private static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + File.separator + "TopoDroid/";
-  private static String PATH_BASE     = PATH_BASEDIR + File.separator + "TopoDroid/";
+  public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+  public static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + File.separator + "TopoDroid/";
+  public static String PATH_BASE     = PATH_BASEDIR + File.separator + "TopoDroid/";
 
   // private static String PATH_BIN  = "bin" + File.separator;    // Firmwares  
   // private static String PATH_CCSV = "ccsv" + File.separator;  // calib CSV text
@@ -489,7 +489,7 @@ public class TDPath
 
   static String getSqlFile() { return PATH_BASE + "survey.sql"; }
 
-  static String getPathBase() { return PATH_BASE; }
+  public static String getPathBase() { return PATH_BASE; }
   static String getManifestFile() { return PATH_BASE + "manifest"; }
 
   static String getSymbolFile( String name ) { return "symbol/" + name; }
