@@ -1154,7 +1154,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_compass_splays_title">Visées latérales d\'habillage Compass</string>
   <string name="pref_compass_splays_summary">Exporter les visées latérales d\'habillage dans le fichier Compass</string>
   <string name="pref_vtopo_splays_title">Visées latérales VisualTopo</string>
-  <string name="pref_vtopo_splays_summary">Exporter les visées latérales d'habillage dans le fichier VisualTopo</string>
+  <string name="pref_vtopo_splays_summary">Exporter les visées latérales d\'habillage dans le fichier VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD à la station DEPUIS</string>
   <string name="pref_vtopo_lrud_summary">Visées LRUD associées à la sation DEPUIS dans VisualTopo</string>
   <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
