@@ -927,7 +927,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="help_add_equate">Ajouter des égalités</string>
     <string name="help_equates">Lister les égalités entre les topographies</string>
 
-    <string name="export_bgcolor">Couleur d'arrière-plan</string>
+    <string name="export_bgcolor">Couleur d\'arrière-plan</string>
     <string name="export_config">Fichier de configuration</string>
     <string name="export_csv_rawdata">Données brutes</string>
     <string name="export_dxf_blocks">Blocs DXF</string>
@@ -1011,7 +1011,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="title_plot_save">Enregistrer le croquis sous</string>
     <!-- UNUSED string name="title_plot_merge">Fusionner Esquisse</string -->
     <string name="title_plot_reload">Recharger le croquis</string>
-    <string name="title_plot_scraps">Scraps d'esquisses</string>
+    <string name="title_plot_scraps">Scraps d\'esquisses</string>
     <string name="title_profile_flip">Basculer la coupe ?</string>
     <string name="title_projection">Azimut coupe projetée %1$d</string>
     <string name="title_refs">Références du dessin</string>
@@ -1146,7 +1146,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_recent_timeout_title">Expiration données récentes</string>
   <string name="pref_recent_timeout_summary">Délai d\'expiration au-delà duquel une donnée n\'est plus considérée comme récente</string>
   <string name="pref_triple_shot_title">Bip visée de cheminement</string -->
-  <string name="pref_triple_shot_summary">Retour sonore lors de la reconnaissance d'une visée de cheminement</string>
+  <string name="pref_triple_shot_summary">Retour sonore lors de la reconnaissance d\'une visée de cheminement</string>
   <string name="pref_connect_feedback_title">Infos de connexion</string>
   <string name="pref_connect_feedback_summary">Retour d\'information sur la connexion du dispositif</string>
   <string name="pref_station_prefix_title">Préfixe station EcSurvey</string>
@@ -1204,7 +1204,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_csv_sep_title">Séparateur CSV</string>
   <string name="pref_csv_sep_summary">Séparateur des données du fichier CSV</string>
   <string name="pref_csv_eol_title">CSV fin de ligne</string>
-  <string name="pref_csv_eol_summary">Séparateur d'enregistrements CSV</string>
+  <string name="pref_csv_eol_summary">Séparateur d\'enregistrements CSV</string>
 
   <!-- UNUSED string name="pref_csv_length_title">Unité de long. CSV</string -->
   <!-- UNUSED string name="pref_csv_length_summary">Unité de long. export CSV</string -->
@@ -1374,11 +1374,11 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_lineacc_title">Précision Bézier</string>
   <string name="pref_lineacc_summary">Précision de l\'interpolation cubique des courbes de Bézier</string>
   <string name="pref_linecorner_title">Angle Bézier</string>
-  <string name="pref_linecorner_summary">Seuil de détection d'angle de courbe de Bézier</string>
+  <string name="pref_linecorner_summary">Seuil de détection d\'angle de courbe de Bézier</string>
   <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
   <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <!-- TODO string name="pref_weedlength_title">Point weeding segment length</string -->
-  <string name="pref_weedlength_summary">Longueur maximale d'un segment de ligne</string>
+  <string name="pref_weedlength_summary">Longueur maximale d\'un segment de ligne</string>
   <string name="pref_calib_algo_title">Algorithme</string>
   <string name="pref_calib_algo_summary">Algorithme d\'étalonnage</string>
   <string name="pref_group_by_title">Politique de groupage</string>
