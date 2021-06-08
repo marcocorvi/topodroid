@@ -388,7 +388,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">CAPTEUR</string>
     <string name="menu_scan">SCAN</string>
-    <string name="menu_scan_ble">SCAN BTLE</string>
+    <string name="menu_scan_ble">SCAN BLE</string>
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">INFO RELEVÉ</string>
