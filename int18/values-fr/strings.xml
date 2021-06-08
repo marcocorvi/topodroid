@@ -71,7 +71,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="thp_label">Étiquette</string>
     <string name="thp_section">Section</string>
     <string name="thp_station">Station</string>
-    <string name="thp_danger">Danger</string>
+    <!-- UNUSED string name="thp_danger">Danger</string -->
     <string name="thl_user">Utilisateur</string>
     <string name="thl_wall">Parois</string>
     <string name="thl_section">Section</string>
