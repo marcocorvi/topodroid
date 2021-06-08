@@ -1037,7 +1037,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
 
     <string name="title_settings_sketch">TopoDroid : paramétrage de l\'esquisse 3D</string>
     <string name="title_settings_survey">TopoDroid : paramétrage du relevé topo</string>
-    <string name="title_settings_splay">TopoDroid : paramétrage des visées latérales d'habillage</string>
+    <string name="title_settings_splay">TopoDroid : paramétrage des visées latérales d\'habillage</string>
     <string name="title_settings_shot">TopoDroid : paramétrage des visées</string>
     <string name="title_settings_units">TopoDroid : paramétrage des unités</string>
     <string name="title_settings_location">TopoDroid : paramétrage de la localisation</string>
@@ -1463,7 +1463,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_splay_color_summary">Activer les différentes couleurs de visées latérales d\'habillage</string>
   <string name="pref_plot_shift_title">Esquisse changement d\'échelle</string>
   <string name="pref_plot_shift_summary">Activer le changement d\'échelle de l\'esquisse</string>
-  <string name="pref_splay_alpha_title">Transparence des visées d'habillage</string>
+  <string name="pref_splay_alpha_title">Transparence des visées d\'habillage</string>
   <string name="pref_splay_alpha_summary">Transparence des visées d\'habillage [0: transparent, 100: opaque]</string>
 
   <string name="pref_picker_type_title">Sélectionneur de symbole</string>
