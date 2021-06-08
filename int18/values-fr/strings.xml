@@ -934,7 +934,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="export_georeference">Géoréférence</string>
     <string name="export_grid">Grille</string>
     <!-- TODO string name="export_linedir">Line direction</string -->
-    <tring name="export_lrud">LRUD</string>
+    <string name="export_lrud">LRUD</string>
     <string name="export_lrud_from">GDHB liées à la station DEPUIS</string>
     <string name="export_maps">Les cartes avant les données</string>
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
@@ -956,8 +956,8 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <string name="audio_id_shot">Enregistrement audio : visée %1$s %2$s</string -->
-    <string name="audio_id_plot">Enregistrement audio : croquis %1$d</string -->
+    <string name="audio_id_shot">Enregistrement audio : visée %1$s %2$s</string>
+    <string name="audio_id_plot">Enregistrement audio : croquis %1$d</string>
     <string name="audio_paused">Pause</string>
     <string name="audio_playing">Ecoute</string>
     <string name="audio_recording">Enregistrement</string>
@@ -1026,7 +1026,6 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="title_settings_svx">Paramètres d\'exportation Survex</string>
     <string name="title_settings_th">Paramètres d\'exportation Therion</string>
     <string name="title_settings_dat">Paramètres d\'exportation Compass</string>
-    <string name="title_settings_csx">Paramètres d\'exportation Compass</string>
     <string name="title_settings_csx">Paramètres d\'exportation cSurvey</string>
     <string name="title_settings_tro">Paramètres d\'exportation VisualTopo</string>
     <string name="title_settings_svg">Paramètres d\'exportation SVG</string>
@@ -1145,7 +1144,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_leg_shots_summary">Nombre minimum de visées successives pour identifier un cheminement</string>
   <string name="pref_recent_timeout_title">Expiration données récentes</string>
   <string name="pref_recent_timeout_summary">Délai d\'expiration au-delà duquel une donnée n\'est plus considérée comme récente</string>
-  <string name="pref_triple_shot_title">Bip visée de cheminement</string -->
+  <string name="pref_triple_shot_title">Bip visée de cheminement</string>
   <string name="pref_triple_shot_summary">Retour sonore lors de la reconnaissance d\'une visée de cheminement</string>
   <string name="pref_connect_feedback_title">Infos de connexion</string>
   <string name="pref_connect_feedback_summary">Retour d\'information sur la connexion du dispositif</string>
@@ -1408,7 +1407,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_path_multiselect_title">Chemin multisélection</string>
   <string name="pref_path_multiselect_summary">Active le chemin de multisélection</string>
   <string name="pref_composite_actions_title">Actions multiples</string>
-  <tring name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string>
+  <string name="pref_composite_actions_summary">Permettre des appuis longs sur les lignes et les zones.</string>
   <string name="pref_plane_interpolation_title">Interpolation de plan</string>
   <string name="pref_plane_interpolation_summary">Active l\'interpolation de plan</string>
   <string name="pref_plot_split_title">Esquisse fractionner / fusionner</string>
