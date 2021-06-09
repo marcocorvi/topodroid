@@ -338,6 +338,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">Zariadenie nie je vybraté</string>
     <string name="no_device_found">Zariadenie sa nenašlo</string>
     <string name="no_feature_audio">Audio nie je podporované</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Kalibrácia nemá žiade dáta \nPoužite tlačidlo Stiahnuť</string>
     <string name="no_geo_station">Chyba: Bod merania nie je geolokalizovaný</string>
     <string name="no_leg_first">Výber nezačína hlavnou zámerou</string>

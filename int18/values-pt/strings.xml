@@ -333,6 +333,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">Dispositivo não selecionado</string>
     <string name="no_device_found">Nenhum dispositivo encontrado</string>
     <string name="no_feature_audio">Sem suporte para áudio</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
     <string name="no_geo_station">Falha: nenhuma base geolocalizada</string>
     <string name="no_leg_first">Seleção não começa com uma visada</string>

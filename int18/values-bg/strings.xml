@@ -332,6 +332,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">Липсва избрано устройство</string>
     <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_feature_audio">Не се поддържа аудио</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
     <string name="no_geo_station">Грешка: няма георефериран репер</string>
     <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->

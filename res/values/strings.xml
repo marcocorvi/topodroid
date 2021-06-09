@@ -344,6 +344,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_device_address">Device not selected</string>
     <string name="no_device_found">Found no device</string>
     <string name="no_feature_audio">Audio not supported</string>
+    <string name="no_feature_pdf">PDF not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
     <string name="no_geo_station">Failed: no geolocalized station</string>
     <string name="no_leg_first">Selection does not start with a leg</string>

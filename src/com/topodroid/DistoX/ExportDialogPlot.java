@@ -246,6 +246,11 @@ public class ExportDialogPlot extends MyDialog
         }
         break;
       case 6: // PDF
+        {
+          // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mPdfBgcolor = 0;
+          if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
+          TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.png_splays )).isChecked();
+        }
         break;
     }
   }
@@ -276,6 +281,8 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.png_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) );
 
+    ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
+    ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
   }
 }
 

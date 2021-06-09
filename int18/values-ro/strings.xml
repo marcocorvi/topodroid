@@ -332,6 +332,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">Dispoziv neselectat</string>
     <string name="no_device_found">Nu a fost găsit nici un dispozitiv</string>
     <string name="no_feature_audio">Audio inexistent</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Calibrarea nu are măsurători.\nFolosește butonul Descarcă</string>
     <string name="no_geo_station">Eroare: lipsește stația geolocalizată</string>
     <string name="no_leg_first">Selecția nu începe cu o viză (segment de drumuire)</string>

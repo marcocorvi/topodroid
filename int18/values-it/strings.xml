@@ -334,6 +334,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="no_device_address">Dispositivo non selezionato</string>
     <string name="no_device_found">Dispositivo non trovato</string>
     <string name="no_feature_audio">Audio non supportato</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Calibrazione senza data.</string>
     <string name="no_geo_station">Errore: nessun caposaldo geolocalizzato</string>
     <string name="no_leg_first">La selezione non parte con una battuta</string>

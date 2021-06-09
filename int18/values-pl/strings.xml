@@ -337,6 +337,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_device_address">Urządzenie nie wybrane</string>
     <string name="no_device_found">Urządzenie nie znalezione</string>
     <string name="no_feature_audio">Audio nieobsługiwane</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Brak danych kalibracji\nPobierz</string>
     <string name="no_geo_station">Błąd: brak geolokalizacji stacji</string>
     <string name="no_leg_first">Wybór nie zaczyna się od pomiaru</string>

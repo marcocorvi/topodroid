@@ -329,6 +329,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">Dispositivo no seleccionado</string>
     <string name="no_device_found">No se encuentra dispositivos</string>
     <string name="no_feature_audio">Audio no compatible</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <string name="no_leg_first">La selección no comienza con un trayecto</string>

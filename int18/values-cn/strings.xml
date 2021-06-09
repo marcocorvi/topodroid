@@ -335,6 +335,7 @@ Tap "Close" not to take any action.
     <string name="no_device_address">设备未选定</string>
     <string name="no_device_found">未发现设备</string>
     <string name="no_feature_audio">音频不支持</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位测点</string>
     <string name="no_leg_first">选择未从主线开始</string>

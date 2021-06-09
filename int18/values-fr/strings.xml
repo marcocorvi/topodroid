@@ -330,6 +330,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
 <string name="no_device_found">Pas de périphérique trouvé</string>
 <string name="no_feature_audio">Audio non supporté</string>
+    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
 <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
 <string name="no_geo_station">Échec : pas de station géolocalisée</string>
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>

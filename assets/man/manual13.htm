@@ -452,30 +452,26 @@ the drawing of the section is inserted in the export, at the "section" point</li
 </ul><p>
 
 <b id="png">PNG</b> (.png)<br>
-Image file in PNG format is used only to export sketches.<br><p>
+Image file in PNG format is used only to export sketches.<br>
+The setting "levels" affects PNG exports: the export includes only the visible items.<br><p>
 
 Settings:<ul style="margin-top=0">
 <li><u>image resolution</u> (1 means that 1 m = 40 pixels). The PNG resolution that fits therion th2 export is 5.0.
 If the system does not have enough memory to create the image at the set resolution, TopoDroid uses a smaller resolution until the export succeeds (or it gets so small that the program gives up trying).</li>
-<li><u>background color</u>: three numbers between 0 (black) and 255 (saturated) for red, green, and blue, respectively.</li>
+<li><u>background color</u>: whether to set the background color white, temporarily.</li>
 <li><u>grid</u>: whether to include or not</li>
 <li><u>splays</u>: whether to include or not</li>
 <li><u>stations</u>: whether to include or not</li>
 </ul><p>
 
-Finally the setting "levels" affects PNG exports: if levels are used the export will include only visible items.
-<br><p>
-
 <b id="pdf">PDF</b> (.pdf)<br>
-Sketches can be exported as PDF files.<br>
-The file has a single A2 page.<br><p>
+Sketch screenshots can be exported as PDF files.<br>
+The file has a single A2 page, and includes only the items displayed on the screen.<br><p>
 
 Settings:<ul style="margin-top=0">
+<li><u>background color</u>: whether to set the background color white, temporarily.</li>
 <li><u>splays</u>: whether to include or not [unused]</li>
 </ul><p>
-
-
-This export is still experimental.<br><p>
 
 <b id="shp2">Shapefile</b> (.shp)<br>
 Sketches can be exported as shapefile, with stations, shots, and lines.

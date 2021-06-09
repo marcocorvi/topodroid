@@ -102,7 +102,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.provider.MediaStore;
 
 import android.print.PrintAttributes;
-import android.print.pdf.PrintedPdfDocument;
+import android.print.pdf.PrintedPdfDocument; // API-19
 // import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfDocument.Page;
 // import android.graphics.pdf.PdfDocument.PageInfo;
@@ -5974,9 +5974,13 @@ public class DrawingWindow extends ItemDrawer
 	TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
+      if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT ) { // pre API-19
+	TDToast.makeBad( R.string.no_feature_pdf );
+        return;
+      }
       // TDPath.getPdfDir();
       // String filename = TDPath.getPdfFileWithExt( fullname );
-      // Log.v("DistoX", "PDF export <" + filename + ">");
+      // Log.v("DistoX", "PDF export <" + fullname + ">");
       try {
         // FileOutputStream fos = new FileOutputStream( filename );
         OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
@@ -5986,6 +5990,7 @@ public class DrawingWindow extends ItemDrawer
         builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
         builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
         builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+        // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
         builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
 
         PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
@@ -5996,11 +6001,13 @@ public class DrawingWindow extends ItemDrawer
         // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
         // float zoom = 1.00f / ( (zw > zh)? zw : zh );
         // Log.v("DistoX", "PDF export <" + filename + "> Zoom " + zw + " " + zh );
+        page.getCanvas().drawColor( TDSetting.mBitmapBgcolor );
         manager.executeAll( page.getCanvas(), mZoom, null );
         pdf.finishPage( page );
         pdf.writeTo( fos );
         pdf.close();
         fos.close();
+        TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
       } catch ( IOException e ) {
         Log.v("DistoX", "failed file output " + e.getMessage() );
       }
