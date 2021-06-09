@@ -41,9 +41,9 @@ import android.util.Log;
 
 public class ShpExtra extends ShpObject
 {
-  public ShpExtra( String path, List< File > files ) // throws IOException
+  public ShpExtra( String subdir, String path, List< String > files ) // throws IOException
   {
-    super( SHP_EXTRA, path, files );
+    super( SHP_EXTRA, subdir, path, files );
   }
 
   // write headers for EXTRA

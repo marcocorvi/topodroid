@@ -12,13 +12,14 @@
 package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
 import com.topodroid.DistoX.DrawingUtil;
 import com.topodroid.DistoX.TDUtil;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
@@ -64,7 +65,9 @@ public class ShpObject
 
   int geomType; // geom type
   int nr;   // nuber of objects
-  String path; // file path 
+  String subdir;
+  String name; // file name
+  // String path; // file path 
   int year, month, day;
 
   double xmin, xmax, ymin, ymax, zmin, zmax; // bounding box
@@ -80,16 +83,19 @@ public class ShpObject
   FileOutputStream shxFos;
   FileOutputStream dbfFos;
 
-  List< File > mFiles; // list of files to which append my files
+  List< String > mFiles; // list of files to which append my files
 
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
-  public ShpObject( int typ, String pth, List< File > files ) // throws IOException
+  public ShpObject( int typ, String dir, String pth, List< String > files ) // throws IOException
   { 
     geomType  = typ;
     nr    = 0;
-    path  = pth;
+    subdir = dir;
+    name   = pth;
+    // int pos = path.lastIndexOf("/");
+    // name = path.substring( pos+1 );
     mFiles = files;
     setYYMMDD( TDUtil.currentDate() );
   }
@@ -115,16 +121,16 @@ public class ShpObject
   protected void open( ) throws IOException
   {
     try {
-      shpFos = new FileOutputStream( path + ".shp" );
-      shxFos = new FileOutputStream( path + ".shx" );
-      dbfFos = new FileOutputStream( path + ".dbf" );
+      shpFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".shp" ) );
+      shxFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".shx" ) );
+      dbfFos = new FileOutputStream( TDFile.getMSfile( subdir, name + ".dbf" ) );
       shpChannel = shpFos.getChannel();
       shxChannel = shxFos.getChannel();
       dbfChannel = dbfFos.getChannel();
       if ( mFiles != null ) {
-        mFiles.add( new File( path + ".shp" ) );
-        mFiles.add( new File( path + ".shx" ) );
-        mFiles.add( new File( path + ".dbf" ) );
+        mFiles.add( name + ".shp" );
+        mFiles.add( name + ".shx" );
+        mFiles.add( name + ".dbf" );
       }
     } catch ( IOException e ) {
       TDLog.Error("output streams " + e.getMessage() );

@@ -104,21 +104,22 @@ public class TDExporter
   }
 
   // used by DrawingAudioPath, DrawingPhotoPath DrawingPointPath
-  static byte[] readFileBytes( String filepath )
+  static byte[] readFileBytes( String subdir, String filename )
   {
-    int len = (int)TDFile.getFileLength( filepath );
+    // int len = (int)TDFile.getFileLength( filepath );
+    int len = (int)TDFile.getMSFileLength( subdir, filename );
     if ( len > 0 ) {
       byte[] buf = new byte[ len ];
       int read = 0;
       try {
         // TDLog.Log( TDLog.LOG_IO, "read file bytes: " + filepath );
-        FileInputStream fis = TDFile.getFileInputStream( filepath );
-        BufferedInputStream bis = new BufferedInputStream( fis );
+        // FileInputStream fis = TDFile.getFileInputStream( filepath );
+        // BufferedInputStream bis = new BufferedInputStream( fis );
+        BufferedInputStream bis = new BufferedInputStream( TDFile.getMSinput( subdir, filename, "application/octec-stream" ) );
         while ( read < len ) {
           read += bis.read( buf, read, len-read );
         }
         if ( bis != null ) bis.close();
-        if ( fis != null ) fis.close();
       } catch ( IOException e ) {
         // TODO
       }
@@ -214,9 +215,10 @@ public class TDExporter
     pw.format("      <attachments>\n");
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
-      String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString(bid) );
-      if ( TDFile.hasMSfile( audiofilename ) ) {
-        byte[] buf = readFileBytes( audiofilename );
+      String subdir = "audio/" + survey;
+      String name   = Long.toString(bid) + ".wav";
+      if ( TDFile.hasMSfile( subdir, name ) ) {
+        byte[] buf = readFileBytes( subdir, name );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ) );
@@ -225,9 +227,10 @@ public class TDExporter
     }
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
-      String photofilename = TDPath.getSurveyJpgFile( survey, Long.toString(photo.id) );
-      if ( TDFile.hasMSfile( photofilename ) ) {
-        byte[] buf = readFileBytes( photofilename );
+      String subdir = "photo/" + survey;
+      String name   = Long.toString(photo.id) + ".jpg";
+      if ( TDFile.hasMSfile( subdir, name ) ) {
+        byte[] buf = readFileBytes( subdir, name );
         if ( buf != null ) {
           pw.format("        <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n",
             Base64.encodeToString( buf, Base64.NO_WRAP ), photo.mComment );
@@ -818,7 +821,7 @@ public class TDExporter
   // @param info     survey metadata
   // @param filename file path  
   // @return 1 success, 0 fail
-  static int exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String filename )
+  static int exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String survey )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
@@ -827,20 +830,19 @@ public class TDExporter
     }
 
     boolean success = true;
-
+    String dirname = "shp/" + survey;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
-      File dir = TDFile.getFile( filename );
-      if ( (dir != null) && ( dir.exists() || dir.mkdirs() ) ) { // if ( TDFile.makeMSdir( filename ) )
-        ArrayList< File > files = new ArrayList<>();
+      if ( TDFile.makeMSdir( dirname ) ) {
+        ArrayList< String > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
           for ( TDNum num : nums ) {
-            String filepath = filename + "/stations-" + nr;
+            String filepath = "stations-" + nr;
             ++ nr;
             List< NumStation > stations = num.getStations();
-            ShpPointz shp = new ShpPointz( filepath, files );
+            ShpPointz shp = new ShpPointz( dirname, filepath, files );
             shp.setYYMMDD( info.date );
             success &= shp.writeStations( stations );
           }
@@ -848,12 +850,12 @@ public class TDExporter
 
         nr = 0;
         for ( TDNum num : nums ) {
-          String filepath = filename + "/shots-" + nr;
+          String filepath = "shots-" + nr;
           ++ nr;
           List< NumShot > shots = num.getShots();
           List< NumSplay > splays = ( TDSetting.mKmlSplays ? num.getSplays() : null );
           // Log.v("DistoX", "SHP export " + filepath + " shots " + shots.size() );
-          ShpPolylinez shp = new ShpPolylinez( filepath, files );
+          ShpPolylinez shp = new ShpPolylinez( dirname, filepath, files );
           shp.setYYMMDD( info.date );
           success &= shp.writeShots( shots, splays );
         }
@@ -861,24 +863,24 @@ public class TDExporter
         // if ( TDSetting.mKmlSplays ) {
         //   nr = 0;
         //   for ( TDNum num : nums ) {
-        //     String filename = filename + "/splays-" + nr;
+        //     String filepath = "splays-" + nr;
         //     ++ nr;
         //     List< NumSplay > splays = num.getSplays();
         //     // Log.v("DistoX", "SHP export " + filepath + " splays " + splays.size() );
-        //     ShpPolylinez shp = new ShpPolylinez( filepath, files );
+        //     ShpPolylinez shp = new ShpPolylinez( dirname, filepath, files );
         //     shp.setYYMMDD( info.date );
         //     shp.writeSplays( splays );
         //   }
         // }
 
-        Archiver zipper = new Archiver( );
-        zipper.compressFiles( filename + ".shz", files );
+        (new Archiver()).compressFiles( "shp", survey + ".shz", dirname, files );
       }
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
       return 0;
     } finally {
-      TDFile.deleteDir( filename ); // delete temporary shapedir
+      Log.v("DistoX", "delete dir " + dirname );
+      TDFile.deleteMSdir( dirname ); // delete temporary shapedir
     }
     return 1;
   }

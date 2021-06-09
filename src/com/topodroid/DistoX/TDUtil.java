@@ -28,8 +28,6 @@ import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
 
-import java.io.File;
-
 import android.content.Context;
 
 public class TDUtil

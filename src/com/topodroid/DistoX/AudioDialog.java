@@ -20,7 +20,7 @@ import com.topodroid.prefs.TDSetting;
 
 import android.util.Log;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 
 // import android.app.Dialog;

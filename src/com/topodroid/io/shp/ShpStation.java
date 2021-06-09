@@ -39,9 +39,9 @@ import android.util.Log;
 
 public class ShpStation extends ShpObject
 {
-  public ShpStation( String path, List< File > files ) // throws IOException
+  public ShpStation( String subdir, String path, List< String > files ) // throws IOException
   {
-    super( SHP_POINT, path, files );
+    super( SHP_POINT, subdir, path, files );
   }
 
   // write headers for POINT

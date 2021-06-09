@@ -15,7 +15,6 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.DataInputStream;
@@ -102,41 +101,13 @@ public class DrawingAudioPath extends DrawingPointPath
     return sw.getBuffer().toString();
   }
 
-  // FIXME_SYNC might be a problem with a long audio recording, but the method is called on export, 
-  // which runs on asynch task 
-//   @Override
-//   void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
-//   { 
-//     // Log.v("DistoX", "audio point " + mId + " survey " + survey );
-//     Struing audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
-//     // File audiofile = TDFile.getFile( audiofilename );
-//     if ( TDFile.hasMSfile( audiofilename ) ) {
-//       byte[] buf = TDExporter.readFileBytes( audiofilename );
-//       if ( buf != null ) {
-//         pw.format("<item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"12\" category=\"80\" transparency=\"0.00\"",
-//           cave, branch );
-//         pw.format(" text=\"%s\" textrotatemode=\"1\" >\n", ((mPointText==null)?"":mPointText) );
-//         if ( bind != null ) pw.format(" bind=\"%s\"", bind );
-//         // pw.format("  <pen type=\"10\" />\n");
-//         // pw.format("  <brush type=\"7\" />\n");
-//         pw.format(" <attachment dataformat\"0\" data=\"%s\" name=\"\" note=\"\" type=\"audio/x-wav\" />\n", 
-//           Base64.encodeToString( buf, Base64.NO_WRAP ) );
-//         float x = DrawingUtil.sceneToWorldX( cx, cy ); // convert to world coords.
-//         float y = DrawingUtil.sceneToWorldY( cx, cy );
-//         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
-//         // pw.format("  <font type=\"0\" />\n");
-//         pw.format("</item>\n");
-//       }
-//     }
-//   }
-
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    String audiofilename = TDPath.getSurveyWavFile( survey, Long.toString( mId ) );
-    // File audiofile = TDFile.getFile( audiofilename );
-    if ( TDFile.hasMSfile( audiofilename ) ) {
-      byte[] buf = TDExporter.readFileBytes( audiofilename );
+    String subdir = "audio/" + survey;
+    String name   = Long.toString( mId ) + ".wav";
+    if ( TDFile.hasMSfile( subdir, name ) ) {
+      byte[] buf = TDExporter.readFileBytes( subdir, name );
       if ( buf != null ) {
         pw.format("<item type=\"point\" name=\"audio\" cave=\"%s\" branch=\"%s\" text=\"%s\" ", cave, branch, ((mPointText == null)? "" : mPointText) );
         if ( bind != null ) pw.format(" bind=\"%s\" ", bind );

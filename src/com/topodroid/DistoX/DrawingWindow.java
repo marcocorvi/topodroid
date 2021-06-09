@@ -6806,7 +6806,8 @@ public class DrawingWindow extends ItemDrawer
   // {
   //   // String name = section.name; // binding name
   //   // open xsection file
-  //   String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+  //   // String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+  //   String filename = survey + "-" + section.name + ".tdr";
   //   DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
   // }
 

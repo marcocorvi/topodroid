@@ -21,9 +21,6 @@ import com.topodroid.dev.Device;
 
 import java.util.List;
 
-// import java.io.File;
-// import java.io.IOException;
-
 import android.os.AsyncTask;
 
 import android.util.Log;
@@ -126,7 +123,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           break;
         case TDConst.DISTOX_EXPORT_SHP: // Shapefile
           pathname = mSurvey + ".shz";
-          ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, TDPath.getShpPath( mSurvey ) );
+          ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, mSurvey );
           // ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, mSurvey );
           break;
         case TDConst.DISTOX_EXPORT_PLT: // Track file

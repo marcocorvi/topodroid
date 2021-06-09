@@ -31,9 +31,6 @@ import java.util.List;
 // import java.util.Calendar;
 // import java.util.ArrayList;
 
-// import java.io.File;
-// import java.io.IOException;
-
 import android.app.Activity;
 import android.app.DatePickerDialog;
 // import android.app.Dialog;
@@ -501,7 +498,7 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyExportIndex( type );
-    Log.v("DistoX", "export " + type + " " + index );
+    // Log.v("DistoX", "export " + type + " " + index );
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {

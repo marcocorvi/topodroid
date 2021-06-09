@@ -869,30 +869,45 @@ public class TDFile
   // =========================================================================
   // GENERIC INTERFACE
 
+  public static File getMSfile( String name ) { return new File( TDPath.getPathBase() + name ); }
+
+  public static File getMSfile( String subdir, String name ) { return new File( TDPath.getPathBase() + subdir + "/" + name ); }
+
+  public static long getMSFileLength( String subdir, String name ) 
+  { 
+    if ( name == null ) return 0;
+    File file = getMSfile( subdir, name );
+    return (file == null)? 0 : file.length();
+  }
+
   public static boolean hasMSdir( String subdir )
   {
-    File dir = new File( TDPath.getPathBase() + subdir );
-    return ( dir.exists() );
+    return getMSfile( subdir ).exists();
   }
 
   public static boolean hasMSfile( String subdir, String name )
   {
-    File dir = new File( TDPath.getPathBase() + subdir );
+    File dir = getMSfile( subdir );
     if ( ! dir.exists() ) return false;
     File file = new File( dir, name );
     return file.exists();
   }
 
-  public static boolean hasMSfile( String pathname )
+  public static boolean hasMSpath( String pathname )
   {
     return (new File(pathname)).exists();
   }
 
   public static boolean makeMSdir( String subdir )
   {
-    File dir = new File( TDPath.getPathBase() + subdir );
+    File dir = getMSfile( subdir );
     if ( dir.exists() ) return true;
     return dir.mkdirs();
+  }
+
+  public static void deleteMSdir( String subdir )
+  {
+    deleteDir( getMSfile( subdir ) );
   }
 
   static public OutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException
@@ -901,7 +916,7 @@ public class TDFile
       TDLog.Error("failed to create subdir " + subdir );
       throw new IOException("failed to create subdir");
     }
-    return new FileOutputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    return new FileOutputStream( getMSfile( subdir, filename ) );
   }
 
   // @note the returnet OutputStreamWriter must be closed after it has been written
@@ -911,7 +926,7 @@ public class TDFile
       TDLog.Error("failed to create subdir " + subdir );
       throw new IOException("failed to create subdir");
     }
-    OutputStream os = new FileOutputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    OutputStream os = new FileOutputStream( getMSfile( subdir, filename ) );
     if ( os == null ) {
       TDLog.Error("failed to create output stream " + filename );
       throw new IOException( "failed to create file output stream ");
@@ -925,7 +940,7 @@ public class TDFile
       TDLog.Error("failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
-    return new FileInputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    return new FileInputStream( getMSfile( subdir, filename ) );
   }
 
   // get a reader for the InputStream
@@ -936,7 +951,7 @@ public class TDFile
       TDLog.Error("failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
-    InputStream is = new FileInputStream( TDPath.getPathBase() + subdir + "/" + filename );
+    InputStream is = new FileInputStream( getMSfile( subdir, filename ) );
     if ( is == null ) {
       TDLog.Error("failed to create input stream " + filename );
       throw new IOException( "failed to create file input stream ");

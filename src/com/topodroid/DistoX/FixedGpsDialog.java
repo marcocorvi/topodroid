@@ -24,8 +24,6 @@ import com.topodroid.mag.WorldMagneticModel;
 
 import java.util.Iterator;
 
-// import java.io.File;
-
 // import java.util.List;
 import java.util.Locale;
 

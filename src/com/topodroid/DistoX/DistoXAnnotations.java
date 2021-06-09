@@ -15,7 +15,6 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 
-// import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;

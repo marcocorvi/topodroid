@@ -33,9 +33,9 @@ import java.util.List;
 
 public class ShpPolylinez extends ShpObject
 {
-  public ShpPolylinez( String path, List< File > files ) // throws IOException
+  public ShpPolylinez( String subdir, String path, List< String > files ) // throws IOException
   {
-    super( SHP_POLYLINEZ, path, files );
+    super( SHP_POLYLINEZ, subdir, path, files );
   }
 
   public boolean writeShots( List< NumShot > lns, List< NumSplay > lms ) throws IOException

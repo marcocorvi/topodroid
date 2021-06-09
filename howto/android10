@@ -1,0 +1,36 @@
+enable general storage access
+  adb shell cmd appops set com.topodroid.DistoX android:legacy_storage allow
+  adb shell am force-stop con.topodroid.DistoX
+
+disable
+  adb shell cmd appops set com.topodroid.DistoX android:legacy_storage default
+  adb shell am force-stop con.topodroid.DistoX
+
+----------------------------------------------------------------------------
+You can use these two methods from android.os.Environment:
+
+    isExternalStorageLegacy(File path)
+
+Returns whether the shared/external storage media at the given path is a legacy
+view that includes files not owned by the app.
+
+    isExternalStorageLegacy()
+
+Returns whether the primary shared/external storage media is a legacy view that
+includes files not owned by the app.
+
+This value may be different from the value requested by requestLegacyExternalStorage
+in the app's manifest, since an app may inherit its legacy state based on when it
+was first installed.
+
+Non-legacy apps can continue to discover and read media belonging to other apps via MediaStore.
+
+In case you discover that you have access to legacy storage, personally I think
+it's better to just migrate data over to scoped storage and use it instead since
+legacy storage may stop working without warning.
+
+----------------------------------------------------------------------------------
+Well, it will work on Android 10 now, if you use android:requestLegacyExternalStorage="true"
+in the manifest, but it's a temporary solution and may be disabled completely next year. 
+
+

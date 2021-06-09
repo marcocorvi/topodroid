@@ -33,9 +33,9 @@ import android.util.Log;
 
 public class ShpPointz extends ShpObject
 {
-  public ShpPointz( String path, List< File > files ) // throws IOException
+  public ShpPointz( String subdir, String path, List< String > files ) // throws IOException
   {
-    super( SHP_POINTZ, path, files );
+    super( SHP_POINTZ, subdir, path, files );
   }
 
   // write headers for POINTZ

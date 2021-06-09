@@ -161,9 +161,11 @@ class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
+      String subdir = "photo/" + TDInstance.survey;
+      String filename = mPlotInfo.name + ".jpg";
       mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
       File imagefile = TDFile.getFile( mFilename );
-      if ( imagefile.exists() ) {
+      if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( imagefile.exists() )
 	mTdImage = new TDImage( mFilename );
         tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );
         String date = mTdImage.date();

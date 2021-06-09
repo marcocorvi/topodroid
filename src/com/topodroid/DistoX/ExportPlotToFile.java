@@ -23,7 +23,7 @@ import com.topodroid.io.svg.DrawingTunnel;
 
 import android.util.Log;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 
@@ -96,7 +96,6 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
-          // Log.v("DistoX-SAVE", "Export to File: " + filename );
           TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
 	    DrawingShp.writeShp( filename, mCommand, mType, mStation );

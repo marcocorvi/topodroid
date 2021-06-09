@@ -34,7 +34,7 @@ import android.media.MediaPlayer;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 
 class AudioListDialog extends MyDialog
@@ -136,10 +136,11 @@ class AudioListDialog extends MyDialog
   {
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
+      String subdir = "audio/" + TDInstance.survey;
+      String name   = Long.toString( audio.fileIdx ) + ".wav";
       String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
-      File file = TDFile.getFile( filepath );
-      // Log.v("DistoX", "play audio file " + file.getPath() );
-      if ( file.exists() ) {
+      // File file = TDFile.getFile( filepath );
+      if ( TDFile.hasMSfile( subdir, name ) ) { // if ( file.exists() )
         startPlay( filepath );
       // } else {
       //   // TDLog.Error("audio file does not exist");

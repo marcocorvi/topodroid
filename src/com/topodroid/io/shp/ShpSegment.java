@@ -37,9 +37,9 @@ import android.util.Log;
 // This class handles shots: les and splays
 public class ShpSegment extends ShpObject
 {
-  public ShpSegment( String path, List< File > files ) // throws IOException
+  public ShpSegment( String subdir, String path, List< String > files ) // throws IOException
   {
-    super( SHP_POLYLINE, path, files );
+    super( SHP_POLYLINE, subdir, path, files );
   }
 
   // @param x0 x-offset

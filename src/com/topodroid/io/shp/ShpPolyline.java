@@ -42,9 +42,9 @@ public class ShpPolyline extends ShpObject
   // int mPathType; 
 
   // @param path_type   either DRAWING_PATH_LINE or DRAWING_PATH_AREA
-  public ShpPolyline( String path, int path_type, List< File > files ) // throws IOException
+  public ShpPolyline( String subdir, String path, int path_type, List< String > files ) // throws IOException
   {
-    super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), path, files );
+    super( ( (path_type == DrawingPath.DRAWING_PATH_LINE)? SHP_POLYLINE : SHP_POLYGON ), subdir, path, files );
     // mPathType = path_type;
   }
 

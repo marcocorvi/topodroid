@@ -21,9 +21,6 @@ import com.topodroid.prefs.TDSetting;
 
 //import java.util.List;
 
-// import java.io.File;
-// import java.io.IOException;
-
 // import android.app.Activity;
 // import android.app.Dialog;
 import android.os.Bundle;

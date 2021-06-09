@@ -31,7 +31,6 @@ import android.graphics.Path;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
-import java.io.File;
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.io.DataInputStream;
@@ -488,10 +487,10 @@ public class DrawingPointPath extends DrawingPath
       pw.format("    <crosssection>\n" );
       exportTCsxXSection( pw, section, survey, cave, branch );
       pw.format("    </crosssection>\n" );
-      String imagefilename = TDPath.getSurveyJpgFile( TDInstance.survey, section.name );
-      // File imagefile = TDFile.getFile( imagefilename );
-      if ( TDFile.hasMSfile( imagefilename ) ) {
-        byte[] buf = TDExporter.readFileBytes( imagefilename );
+      String subdir = "photo/" + TDInstance.survey;
+      String filename = section.name + ".jpg";
+      if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( TDFile.hasMSpath( imagefilename ) )
+        byte[] buf = TDExporter.readFileBytes( subdir, filename );
         if ( buf != null ) {
           pw.format("    <crosssectionfile>\n" );
           pw.format(" <attachment dataformat=\"0\" data=\"%s\" name=\"\" note=\"%s\" type=\"image/jpeg\" />\n", 
@@ -510,7 +509,8 @@ public class DrawingPointPath extends DrawingPath
   {
     if ( section == null ) return;
     // open xsection file
-    String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+    // String filename = TDPath.getSurveyPlotTdrFile( survey, section.name );
+    String filename = survey + "-" + section.name + ".tdr";
     DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
   }
 

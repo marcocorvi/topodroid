@@ -1837,7 +1837,7 @@ public class DrawingIO
 
   static private void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind /*, int format */ )
   {
-    if ( ! TDFile.hasMSfile( filename ) ) return;
+    if ( ! TDFile.hasMSfile( "tdr", filename ) ) return;
     int version = 0;
     // boolean in_scrap = false;
     // int scrap_index = 0;
@@ -1852,8 +1852,7 @@ public class DrawingIO
     {
       try {
         TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
-        FileInputStream fis = TDFile.getFileInputStream( filename );
-        DataInputStream dis = new DataInputStream( fis );
+        DataInputStream dis = new DataInputStream( TDFile.getMSinput( "tdr", filename, "application/octet-stream" ) );
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
@@ -1882,7 +1881,6 @@ public class DrawingIO
                 int type = dis.readInt();
                 if ( ! PlotType.isAnySection( type ) ) {
                   dis.close();
-                  fis.close();
                   return;
                 }
                 // project_dir = dis.readInt();
@@ -1937,7 +1935,6 @@ public class DrawingIO
           } 
         }
         dis.close();
-        fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {

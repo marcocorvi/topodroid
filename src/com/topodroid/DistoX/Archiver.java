@@ -85,6 +85,34 @@ public class Archiver
     return ret;
   }
 
+
+  private boolean addEntry( ZipOutputStream zos, String subdir, String filename )
+  {
+    Log.v( "DistoX-ZIP", "zip add entry: " + subdir + " " + filename );
+    boolean ret = false;
+    BufferedInputStream bis = null;
+    try { 
+      // TDLog.Log( TDLog.LOG_IO, "zip add file " + name.getPath() );
+      bis = new BufferedInputStream( TDFile.getMSinput( subdir, filename, "application/octet-stream" ), BUF_SIZE );
+      ZipEntry entry = new ZipEntry( filename );
+      int cnt;
+      zos.putNextEntry( entry );
+      while ( (cnt = bis.read( data, 0, BUF_SIZE )) != -1 ) {
+        zos.write( data, 0, cnt );
+      }
+      zos.closeEntry( );
+      ret = true;
+    } catch (FileNotFoundException e ) {
+      TDLog.Error( "File Not Found " + e.getMessage() );
+    } catch ( IOException e ) {
+      TDLog.Error( "IO exception " + e.getMessage() );
+    } finally {
+      if ( bis != null ) try { bis.close(); } catch (IOException e ) { /* ret = false; */ }
+    }
+    // Log.v( "DistoX-ZIP", "zip add file " + name.getPath() + " return " + ret );
+    return ret;
+  }
+
   private void addOptionalEntry( ZipOutputStream zos, File name, String filepath )
   {
     if ( name == null || ! name.exists() ) return;
@@ -121,13 +149,26 @@ public class Archiver
     }
   }
 
-  public boolean compressFiles( String zipname, List< File > files )
+  /** used to compress shapefiles
+   * @param zipdir    zip folder
+   * @param zipname   zip-filename
+   * @param subdir    files subdirectory
+   * @param filenames file names
+   * @return true if successful
+   */
+  public boolean compressFiles( String zipdir, String zipname, String subdir, List< String > filenames )
   {
+    // here zipname is the full absolute zipfile path
+    Log.v("DistoX", "ZIP-compress files to " + zipdir + " " + zipname );
     ZipOutputStream zos = null;
     boolean ret = true;
     try {
-      zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( zipname ) ) );
-      for ( File file : files ) ret &= addEntry( zos, file, file.getPath() );
+      zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getMSoutput( zipdir, zipname, "application/octet-stream" ) ) );
+      for ( String filename : filenames ) {
+        // the file.getPath() is the full absolute file path
+        // Log.v("DistoX", "ZIP-compress add file " + file.getPath() );
+        ret &= addEntry( zos, subdir, filename );
+      }
       // for ( File file : files ) TDFile.deleteFile( file );
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
@@ -148,6 +189,7 @@ public class Archiver
   {
     if ( lib == null ) return false;
     if ( ! (TDFile.getExternalDir( dirpath )).exists() ) return false;
+    Log.v("DistoX", "ZIP symbols zipname " + zipname );
     List< Symbol > symbols = lib.getSymbols();
     ZipOutputStream zos = null;
     try { 
@@ -157,7 +199,7 @@ public class Archiver
           String filename = symbol.getThName();
           // THERION-U: filename = Symbol.deprefix_u( filename );
           String filepath = dirpath + filename;
-          Log.v("DistoX-ZIP", "compress " + dirpath + " " + filepath );
+          Log.v("DistoX", "ZIP symbols compress " + dirpath + " " + filepath );
           addOptionalEntry( zos, TDFile.getExternalFile( dirpath, filepath ), filepath );
         }
       }
@@ -175,6 +217,7 @@ public class Archiver
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
+    Log.v("DistoX", "ZIP-uncompress symbol dirpath " + dirpath + " prefix " + prefix );
     String filename = TDPath.getSymbolFile( "tmp.zip" );
     FileOutputStream fout = null;
     int c;
@@ -194,9 +237,9 @@ public class Archiver
         // String symbolfilename = dirpath + sze.getName();
         // File symbolfile = TDFile.getExternalFile( symbolfilename );
         File symbolfile = TDFile.getExternalFile( dirpath, sze.getName() );
-        Log.v("DistoX-ZIP", "try to uncompress symbol " + dirpath + " " + sze.getName() );
+        Log.v("DistoX", "ZIP try to uncompress symbol " + dirpath + " " + sze.getName() );
         if ( ! symbolfile.exists() ) { // don't overwrite
-          Log.v("DistoX-ZIP", "uncompress symbol " + symbolfile.getPath() );
+          Log.v("DistoX", "ZIP-uncompress symbol " + symbolfile.getPath() );
           // FileOutputStream sfout = TDFile.getFileOutputStream( symbolfilename ); // uncompress symbols zip
           FileOutputStream sfout = new FileOutputStream( symbolfile ); 
           while ( ( c = szin.read( sbuffer ) ) != -1 ) {
