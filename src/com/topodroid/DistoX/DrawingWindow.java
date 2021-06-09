@@ -6041,12 +6041,15 @@ public class DrawingWindow extends ItemDrawer
             doSaveWithExt( num, manager, type, mFullName3, ext, true ); 
           }
         } else {
-	  DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
-	  DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
-	  String fullname1 = mFullName1;
-	  String fullname2 = mFullName2;
-          doSaveWithExt( num, manager1, mPlot1.type, fullname1, ext, true); 
-          doSaveWithExt( num, manager2, mPlot2.type, fullname2, ext, true); 
+          if ( PlotType.isProfile( type ) ) {
+	    DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
+	    String fullname2 = mFullName2;
+            doSaveWithExt( num, manager2, mPlot2.type, fullname2, ext, true); 
+          } else if ( type == PlotType.PLOT_PLAN ) {
+	    DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
+	    String fullname1 = mFullName1;
+            doSaveWithExt( num, manager1, mPlot1.type, fullname1, ext, true); 
+          }
         }
       }
     }

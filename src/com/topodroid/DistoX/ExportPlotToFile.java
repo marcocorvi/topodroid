@@ -40,7 +40,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final long mType;
     private final String mFullName; // "survey-plotX" name ;
     private final String mExt; // extension
-    private String filename = null;
+    // private String filename = null;
     private final boolean mToast;
     private final String mFormat;
     private final GeoReference mStation; // for shp
@@ -72,33 +72,34 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
       // String dirname = null;
       try {
-        if ( mExt.equals("dxf") ) {
-          filename = TDPath.getDxfFileWithExt( mFullName );
-          // dirname  = TDPath.getDxfFile( "" );
-        } else if ( mExt.equals("svg") ) {
-          filename = TDPath.getSvgFileWithExt( mFullName );
-          // dirname  = TDPath.getSvgFile( "" );
-        } else if ( mExt.equals("shp") ) {
-          filename = TDPath.getShpBasepath( mFullName );
-          // dirname  = TDPath.getShzFile( "" );
-        } else if ( mExt.equals("xvi") ) {
-          filename = TDPath.getXviFileWithExt( mFullName );
-          // dirname  = TDPath.getXviFile( "" );
-        } else if ( mExt.equals("xml") ) {
-          filename = TDPath.getTnlFileWithExt( mFullName );
-          // dirname  = TDPath.getTnlFile( "" );
-        } else if ( mExt.equals("c3d") ) {
-          filename = TDPath.getC3dFileWithExt( mFullName );
-          // dirname  = TDPath.getC3dFile( "" );
-	} else { // unexpected extension
-	  return false;
-        }
+        // if ( mExt.equals("dxf") ) {
+        //   filename = TDPath.getDxfFileWithExt( mFullName );
+        //   // dirname  = TDPath.getDxfFile( "" );
+        // } else if ( mExt.equals("svg") ) {
+        //   filename = TDPath.getSvgFileWithExt( mFullName );
+        //   // dirname  = TDPath.getSvgFile( "" );
+        // } else if ( mExt.equals("shp") ) {
+        //   filename = TDPath.getShpBasepath( mFullName );
+        //   // dirname  = TDPath.getShzFile( "" );
+        // } else if ( mExt.equals("xvi") ) {
+        //   filename = TDPath.getXviFileWithExt( mFullName );
+        //   // dirname  = TDPath.getXviFile( "" );
+        // } else if ( mExt.equals("xml") ) {
+        //   filename = TDPath.getTnlFileWithExt( mFullName );
+        //   // dirname  = TDPath.getTnlFile( "" );
+        // } else if ( mExt.equals("c3d") ) {
+        //   filename = TDPath.getC3dFileWithExt( mFullName );
+        //   // dirname  = TDPath.getC3dFile( "" );
+	// } else { // unexpected extension
+	//   return false;
+        // }
+        // Log.v("DistoX-EXPORT", "export plot to file " + filename );
+        // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
-          TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
           if ( mExt.equals("shp") ) { 
-	    DrawingShp.writeShp( filename, mCommand, mType, mStation );
+	    DrawingShp.writeShp( mFullName, mCommand, mType, mStation );
 	  } else {
             // File temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
             // final FileWriter fw = TDFile.getFileWriter( temp );
@@ -108,9 +109,10 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw = TDFile.getMSwriter( "dxf", mFullName + ".dxf", "text/dxf" );
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
-              bw = TDFile.getMSwriter( "svg", mFullName + ".svg", "text/svg" );
+              String name = mFullName + ".svg"; // file-name
+              bw = TDFile.getMSwriter( "svg", name, "text/svg" );
               if ( TDSetting.mSvgRoundTrip ) {
-                (new DrawingSvgWalls()).writeSvg( filename, bw, mNum, mCommand, mType );
+                (new DrawingSvgWalls()).writeSvg( name, bw, mNum, mCommand, mType );
               } else {
                 (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
               }
@@ -129,11 +131,6 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw.flush();
               bw.close();
             }
-            // synchronized( TDFile.mFilesLock ) { 
-            //   TDPath.checkPath( filename );
-            //   File file = TDFile.getFile( filename );
-            //   temp.renameTo( file );
-            // }
 	  }
         }
         return ret;
@@ -151,7 +148,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          TDToast.make( String.format( mFormat, filename ) );
+          TDToast.make( String.format( mFormat, mFullName + "." + mExt ) );
         } else {
           TDToast.makeBad( R.string.saving_file_failed );
         }
