@@ -138,7 +138,7 @@
      <item name="normal">Normál</item>
      <item name="advanced">Haladó</item>
      <item name="expert">Szakértő</item>
-     <item name="tester">Teszter</item>
+     <item name="tester">Tesztelő</item>
      <!-- item name="complete">Complete</item -->
   </string-array>
 
