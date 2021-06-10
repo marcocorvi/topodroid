@@ -685,7 +685,7 @@ public class OverviewWindow extends ItemDrawer
   // interface IExporter
   public void doExport( String export_type )
   {
-    Log.v("DistoX", "Overview export " + export_type );
+    // Log.v("DistoX", "Overview export " + export_type );
     int index = TDConst.plotExportIndex( export_type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: saveWithExt( "th2" ); break;
@@ -716,7 +716,7 @@ public class OverviewWindow extends ItemDrawer
     }
     TDPath.getPdfDir();
     String filename = TDPath.getPdfFileWithExt( fullname );
-    Log.v("DistoX", "Overview PDF export <" + filename + ">");
+    // Log.v("DistoX", "Overview PDF export <" + filename + ">");
     try {
       FileOutputStream fos = new FileOutputStream( filename );
 
@@ -741,7 +741,7 @@ public class OverviewWindow extends ItemDrawer
       pdf.close();
       fos.close();
     } catch ( IOException e ) {
-      Log.v("DistoX", "failed file output " + e.getMessage() );
+      TDLog.Error("Failed PDF export " + e.getMessage() );
     }
   }
 

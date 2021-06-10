@@ -667,23 +667,6 @@ public class TDFile
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
 
-  // CACHE FILES --------------------------------------------------------------
-
-  public static File getCacheFile( String filename ) { return new File ( TDInstance.context.getCacheDir(), filename ); }
-
-  public static void clearCache( long before )
-  {
-    long now  = System.currentTimeMillis();
-    long time = now - before; // clean the cache "before" minutes before now
-    File cacheDir = TDInstance.context.getCacheDir();
-    File[] files = cacheDir.listFiles();
-    if ( files != null ) for ( File f : files ) {
-      if ( f.lastModified() < time ) {
-        if ( ! f.delete() ) TDLog.Error("File delete error");
-      }
-    }
-  }
-
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
 
   public static File getSettingsFile()   { return new File( TDInstance.context.getExternalFilesDir( null ), "settings.txt" ); }
@@ -707,6 +690,23 @@ public class TDFile
   {
     File file = getExternalFile( type, name );
     return new FileWriter( file );
+  }
+
+  // TEMPORARY FILES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+
+  public static File getExternalTempFile( String filename ) { return getExternalFile( "tmp", filename ); }
+
+  public static void clearExternalTempDir( long before )
+  {
+    long now  = System.currentTimeMillis();
+    long time = now - before; // clean the cache "before" minutes before now
+    File dir = getExternalDir( "tmp" );
+    File[] files = dir.listFiles();
+    if ( files != null ) for ( File f : files ) {
+      if ( f.lastModified() < time ) {
+        if ( ! f.delete() ) TDLog.Error("File delete error: " + f.getPath() );
+      }
+    }
   }
 
   // ----------------------------------------------------------------------------
@@ -767,15 +767,15 @@ public class TDFile
     }
   }
 
-  public static void clearCache()
-  {
-    try {
-      File cache = TDInstance.context.getCacheDir();
-      recursiveDeleteDir( cache );
-    } catch ( Exception e ) {
-      // TODO
-    }
-  }
+  // public static void clearAppCache()
+  // {
+  //   try {
+  //     File cache = TDInstance.context.getCacheDir();
+  //     recursiveDeleteDir( cache );
+  //   } catch ( Exception e ) {
+  //     // TODO
+  //   }
+  // }
 
   public static boolean recursiveDeleteDir( File dir )
   {

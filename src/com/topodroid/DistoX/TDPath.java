@@ -597,7 +597,7 @@ public class TDPath
 
   // static File getTmpDir() { return TDFile.getFile( APP_TMP_PATH ); } // DistoX-SAF
   // static String getTmpFileWithExt( String name ) { return getPathname( APP_TMP_PATH, name, TMP ); }
-  static File getCacheFileWithExt( String name ) { return TDFile.getCacheFile( name + TMP ); }
+  // static File getCacheFileWithExt( String name ) { return TDFile.getAppCacheFile( name + TMP ); }
 
   static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
   public static String getTdrFileWithExt( String name ) { return getPathname( PATH_TDR, name, TDR ); }

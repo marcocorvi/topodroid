@@ -1297,7 +1297,7 @@ public class DrawingWindow extends ItemDrawer
         // resetReference( mPlot1 );
         // mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         // return;
-        Log.v("DistoX", "PLAN offset at " + mOffset.x + " " + mOffset.y );
+        // Log.v("DistoX", "PLAN offset at " + mOffset.x + " " + mOffset.y );
       } else if ( type == PlotType.PLOT_EXTENDED ) {
         mZoom     = mPlot2.zoom;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.h, st.v );
@@ -1305,7 +1305,7 @@ public class DrawingWindow extends ItemDrawer
         saveReference( mPlot2, mPid2 );
         // resetReference( mPlot2 );
         // return;
-        Log.v("DistoX", "EXT offset at " + mOffset.x + " " + mOffset.y );
+        // Log.v("DistoX", "EXT offset at " + mOffset.x + " " + mOffset.y );
       } else { // if ( type == PlotType.PLOT_PROJECTED ) 
         double cosp = TDMath.cosDd( mPlot2.azimuth );
         double sinp = TDMath.sinDd( mPlot2.azimuth );
@@ -1315,7 +1315,7 @@ public class DrawingWindow extends ItemDrawer
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( xx, st.v );
         saveReference( mPlot2, mPid2 );
         // return;
-        Log.v("DistoX", "PROJ offset at " + mOffset.x + " " + mOffset.y );
+        // Log.v("DistoX", "PROJ offset at " + mOffset.x + " " + mOffset.y );
       }
     }
   }
@@ -5999,7 +5999,7 @@ public class DrawingWindow extends ItemDrawer
         float zw = (bnds.right - bnds.left);
         float zh = (bnds.bottom - bnds.top);
         // Log.v("DistoX", "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
-        PageInfo.Builder builder = new PageInfo.Builder( 10 + (int)zw, 10 + (int)zh, 1 );
+        PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
         PageInfo info = builder.create();
 
         PdfDocument pdf = new PdfDocument( );
@@ -6009,7 +6009,7 @@ public class DrawingWindow extends ItemDrawer
         // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
         // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
         // float zoom = 1.00f / ( (zw > zh)? zw : zh );
-        page.getCanvas().drawColor( 0 ) // TDSetting.mBitmapBgcolor );
+        page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
         manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
         pdf.finishPage( page );
         pdf.writeTo( fos );
@@ -6017,7 +6017,7 @@ public class DrawingWindow extends ItemDrawer
         fos.close();
         TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
       } catch ( IOException e ) {
-        Log.v("DistoX", "failed file output " + e.getMessage() );
+        TDLog.Error("failed PDF export " + e.getMessage() );
       }
     }
 
@@ -6475,7 +6475,7 @@ public class DrawingWindow extends ItemDrawer
     if ( st == null ) {
       TDToast.makeBad( R.string.missing_station );
     } else {
-      Log.v("DistoX", "center at station " + station );
+      // Log.v("DistoX", "center at station " + station );
       // moveTo( mPlot1.type, station );
       // moveTo( mPlot2.type, station );
       moveTo( (int)mType, station );
@@ -6623,7 +6623,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void doExport( String export_type )
   {
-    Log.v("DistoX", "Drawing export " + export_type );
+    // Log.v("DistoX", "Drawing export " + export_type );
     int index = TDConst.plotExportIndex( export_type );
     switch ( index ) {
       case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;

@@ -1227,7 +1227,7 @@ public class TDExporter
     }
 
     // Log.v("DistoX", "export as therion: " + file.getName() );
-    Log.v("DistoX", "export " + info.name + " as therion: " + surveyname );
+    // Log.v("DistoX", "export " + info.name + " as therion: " + surveyname );
     float ul = TDSetting.mUnitLength;
     float ua = TDSetting.mUnitAngle;
 
@@ -1247,7 +1247,7 @@ public class TDExporter
       // TDLog.Log( TDLog.LOG_IO, "export Therion " + file.getName() );
       BufferedWriter bw = TDFile.getMSwriter( "th", surveyname + ".th", "text/th" );
       if ( bw == null ) {
-        Log.v("DistoX", "cannot get MS therion file");
+        TDLog.Error("cannot get MS therion file");
         return 0;
       }
       PrintWriter pw = new PrintWriter( bw );
@@ -1512,7 +1512,7 @@ public class TDExporter
       pw.format("endsurvey\n");
       bw.flush();
       bw.close();
-      Log.v("DistoX", "exported therion file");
+      // Log.v("DistoX", "exported therion file");
 
       return 1;
     } catch ( IOException e ) {
@@ -2435,7 +2435,7 @@ public class TDExporter
 
   static int exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    Log.v("DistoX", "export as compass: " + surveyname + " swap LR " + TDSetting.mSwapLR );
+    // Log.v("DistoX", "export as compass: " + surveyname + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {

@@ -88,7 +88,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         case TDConst.DISTOX_EXPORT_DAT: // Compass
           pathname = mSurvey + ".dat";
           ret = TDExporter.exportSurveyAsDat( mSid, mData, mInfo, mSurvey );
-          Log.v("DistoX", "save DAT " + ret );
+          // Log.v("DistoX", "save DAT " + ret );
           break;
         case TDConst.DISTOX_EXPORT_DXF:
           pathname = mSurvey + ".dxf";

@@ -76,10 +76,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = suffix;    // plot save mode
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
-     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
-     // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType );
+     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
+     // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
      if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
+       // Log.v("DistoX", "auto export CSX");
        origin = parent.getOrigin();
        psd1 = parent.makePlotSaveData( 1, suffix, rotate );
        psd2 = parent.makePlotSaveData( 2, suffix, rotate );
@@ -105,8 +106,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mProjDir  = proj_dir;
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
-     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task " + mFullName + " type " + mType );
-     // Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType );
+     // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [2] " + mFullName + " type " + mType );
+     // Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
   @Override
@@ -123,12 +124,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
-	Log.v("DistoXX", "save plot Therion file EXPORT " + mFullName );
+        // Log.v("DistoXX", "save plot Therion file EXPORT " + mFullName );
         if ( mManager != null ) {
           File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
+        // Log.v("DistoXX", "save plot Therion file SAVE " + mFullName );
         switch ( TDSetting.mExportPlotFormat ) { // auto-export format
           case TDConst.DISTOX_EXPORT_TH2:
             if ( mManager != null ) {
@@ -190,7 +192,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             break;
         }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
-	Log.v("DistoXX", "save plot Therion file OVERVIEW " + mFullName );
+        // Log.v("DistoXX", "save plot Therion file OVERVIEW " + mFullName );
         File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
 	return true;
@@ -198,6 +200,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       
       // second pass: save
       if ( mSuffix != PlotSave.EXPORT ) {
+        // Log.v("DistoXX", "save plot not-EXPORT");
         assert( mInfo != null );
 
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;
@@ -206,14 +209,14 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         TDPath.rotateBackups( filename, mRotate ); // does not do anything if mRotate <= 0
 
         long now  = System.currentTimeMillis();
-        TDFile.clearCache( 600000 ); // clean the cache ten minutes before now
+        TDFile.clearExternalTempDir( 600000 ); // clean the cache ten minutes before now
 
         // String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
         // File file1 = TDFile.getFile( tempname1 );
-        File file1 = TDPath.getCacheFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
+        File file1 = TDFile.getExternalTempFile( Integer.toString(mSuffix) + Long.toString(now) );
 
         // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
-        // Log.v( "DistoX", "saving binary " + mFullName );
+        // Log.v( "DistoX", "saving binary " + mFullName + " file " + file1.getPath() );
         if ( mSuffix == PlotSave.CREATE ) {
           // Log.v("DistoX-SPLIT", "Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
           DrawingIO.exportDataStream( mPaths, mType, mInfo, file1, mFullName, mProjDir, 0 ); // set path scrap to 0

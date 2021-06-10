@@ -500,7 +500,7 @@ public class DrawingIO
   static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
-    Log.v( "DistoX", "export Therion " + fullname + " file " + file.getPath() );
+    // Log.v( "DistoX", "export Therion " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -531,9 +531,9 @@ public class DrawingIO
 
       fos.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Export Data file: " + e.getMessage() );
+      TDLog.Error( "Export Data file [1]: " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "Export Data i/o: " + e.getMessage() );
+      TDLog.Error( "Export Data i/o [1]: " + e.getMessage() );
     }
   }
 
@@ -569,9 +569,9 @@ public class DrawingIO
 
       fos.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Export Data file: " + e.getMessage() );
+      TDLog.Error( "Export Data file [2]: " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "Export Data i/o: " + e.getMessage() );
+      TDLog.Error( "Export Data i/o [2]: " + e.getMessage() );
     }
   }
 

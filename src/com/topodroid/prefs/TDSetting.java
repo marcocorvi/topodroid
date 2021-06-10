@@ -2450,7 +2450,6 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    TDFile.clearCache();
     TDLocale.setLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {
