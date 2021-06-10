@@ -102,10 +102,10 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.provider.MediaStore;
 
 import android.print.PrintAttributes;
-import android.print.pdf.PrintedPdfDocument; // API-19
-// import android.graphics.pdf.PdfDocument;
+// import android.print.pdf.PrintedPdfDocument; // API-19
+import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfDocument.Page;
-// import android.graphics.pdf.PdfDocument.PageInfo;
+import android.graphics.pdf.PdfDocument.PageInfo;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -114,6 +114,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
+import android.graphics.Rect;
 import android.graphics.Path;
 
 import android.net.Uri;
@@ -5985,24 +5986,31 @@ public class DrawingWindow extends ItemDrawer
         // FileOutputStream fos = new FileOutputStream( filename );
         OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
 
-        PrintAttributes.Builder builder = new PrintAttributes.Builder();
-        builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-        builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
-        builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
-        builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
-        // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
-        builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+        // PrintAttributes.Builder builder = new PrintAttributes.Builder();
+        // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
+        // builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
+        // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
+        // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+        // // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
+        // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+        // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
-        PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
-        Page page = pdf.startPage(0);
+        RectF bnds = manager.getBitmapBounds();
+        float zw = (bnds.right - bnds.left);
+        float zh = (bnds.bottom - bnds.top);
+        // Log.v("DistoX", "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
+        PageInfo.Builder builder = new PageInfo.Builder( 10 + (int)zw, 10 + (int)zh, 1 );
+        PageInfo info = builder.create();
+
+        PdfDocument pdf = new PdfDocument( );
+        Page page = pdf.startPage( info );
         // must select the zoom to the plot size - however the zoom arg is not for this purpose
         // RectF bnds = manager.getBitmapBounds();
         // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
         // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
         // float zoom = 1.00f / ( (zw > zh)? zw : zh );
-        // Log.v("DistoX", "PDF export <" + filename + "> Zoom " + zw + " " + zh );
-        page.getCanvas().drawColor( TDSetting.mBitmapBgcolor );
-        manager.executeAll( page.getCanvas(), mZoom, null );
+        page.getCanvas().drawColor( 0 ) // TDSetting.mBitmapBgcolor );
+        manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
         pdf.finishPage( page );
         pdf.writeTo( fos );
         pdf.close();

@@ -1146,13 +1146,28 @@ public class DrawingCommandManager
 
   // N.B. doneHandler is not used
   // @param canvas where to draw
-  // @param zoom   used for scalebar and selection points
+  // @param zoom   used for scalebar and selection points (use < negative zoom for pdf print)
   // @param station_splay
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing execute all: null canvas");
       return;
+    }
+
+    Matrix mm    = mMatrix;
+    float  scale = mScale;
+    RectF  bbox  = mBBox;
+    boolean sidebars = true;
+    if ( zoom < 0 ) {
+      mm = new Matrix();
+      scale = 1.0f; // getBitmapScale();
+      bbox  = getBitmapBounds();
+      // float sca = 1 / scale
+      mm.postTranslate( 20 - bbox.left, 20 - bbox.top );
+      // mm.postScale( scale, scale );
+      zoom = -zoom;
+      sidebars = false; // do not draw sidebars
     }
 
     boolean legs     = (mDisplayMode & DisplayMode.DISPLAY_LEG     ) != 0;
@@ -1192,7 +1207,7 @@ public class DrawingCommandManager
         break;
     }
 
-    if ( TDSetting.mSideDrag ) {
+    if ( sidebars && TDSetting.mSideDrag ) {
       drawSideDrag( canvas );
     }
 
@@ -1234,36 +1249,42 @@ public class DrawingCommandManager
             dpath.draw( canvas );
           }
         } else {
-          if ( mScale < 1 ) {
-            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mMatrix, mScale, mBBox );
+          if ( scale < 1 ) {
+            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, scale, bbox );
           }
-          if ( mScale < 10 ) {
-            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mMatrix, mScale, mBBox );
+          if ( scale < 10 ) {
+            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, scale, bbox );
           }
-          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mMatrix, mScale, mBBox );
+          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, scale, bbox );
         }
-        if ( mNorthLine != null ) mNorthLine.draw( canvas, mMatrix, mScale, mBBox );
-        if ( scaleRef && (mScaleRef != null)) mScaleRef.draw(canvas, zoom, mLandscape);
+        if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, scale, bbox );
+        if ( scaleRef && (mScaleRef != null)) {
+          if ( sidebars ) {
+            mScaleRef.draw(canvas, zoom, mLandscape);
+          } else {
+            mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top );
+          }
+        }
       }
     }
 
     synchronized( TDPath.mShotsLock ) {
       if ( legs && mLegsStack != null ) {
-        for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mMatrix, mScale, mBBox );
+        for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, scale, bbox );
       }
       if ( mSplaysStack != null ) {
         if ( station_splay == null ) {
           if ( splays ) {
-            for ( DrawingPath path : mSplaysStack ) path.draw( canvas, mMatrix, mScale, mBBox );
+            for ( DrawingPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox );
           }
         } else {
           if ( splays ) { // draw all splays except the splays-off
             for ( DrawingPath path : mSplaysStack ) {
-	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mMatrix, mScale, mBBox );
+	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox );
 	    }
           } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
             for ( DrawingPath path : mSplaysStack ) {
-              if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mMatrix, mScale, mBBox );
+              if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox );
 	    }
 	  }
         }
@@ -1272,12 +1293,12 @@ public class DrawingCommandManager
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {
       if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
         synchronized( mPlotOutline )  {
-          for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+          for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, scale, null /* bbox */ );
         }
       }
       if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
         synchronized( TDPath.mXSectionsLock )  {
-          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mMatrix, mScale, null /* mBBox */ );
+          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, scale, null /* bbox */ );
         }
       }
     }
@@ -1285,45 +1306,45 @@ public class DrawingCommandManager
     if ( stations ) {
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
-          for ( DrawingStationName st : mStations ) st.draw( canvas, mMatrix, mScale, mBBox );
+          for ( DrawingStationName st : mStations ) st.draw( canvas, mm, scale, bbox );
         }
       }
       // if ( mFixeds != null ) {  
       //   synchronized( TDPath.mFixedsLock ) {
-      //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mMatrix, mScale, mBBox );
+      //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mm, scale, bbox );
       //   }
       // }
     }
     
     if ( ! TDSetting.mAutoStations ) {
-      mCurrentScrap.drawUserStations( canvas, mMatrix, mScale, mBBox );
+      mCurrentScrap.drawUserStations( canvas, mm, scale, bbox );
     }
 
     if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
       if ( outline ) {
         synchronized( mScraps ) {
-          for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mMatrix, mScale, mBBox );
+          for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mm, scale, bbox );
         }
       } else {
         synchronized( mScraps ) {
-          for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+          for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox );
         }
       }
     } else { // not DRAWING_OVERVIEW
       synchronized( mScraps ) {
         for ( Scrap scrap : mScraps ) {
           if ( scrap == mCurrentScrap ) {
-            scrap.drawAll( canvas, mMatrix, mScale, mBBox );
+            scrap.drawAll( canvas, mm, scale, bbox );
           } else {
-            scrap.drawGreyOutline( canvas, mMatrix, mScale, mBBox );
+            scrap.drawGreyOutline( canvas, mm, scale, bbox );
           }
         }
       }
-      if ( mDisplayPoints ) {
+      if ( sidebars && mDisplayPoints ) {
         float dot_radius = TDSetting.mDotRadius/zoom;
         synchronized( TDPath.mSelectionLock ) {
-          displayFixedPoints( canvas, mMatrix, mBBox, dot_radius, splays, (legs && sshots), sstations, station_splay );
-          mCurrentScrap.displayPoints( canvas, mMatrix, mBBox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations /* , station_splay */ );
+          displayFixedPoints( canvas, mm, bbox, dot_radius, splays, (legs && sshots), sstations, station_splay );
+          mCurrentScrap.displayPoints( canvas, mm, bbox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations /* , station_splay */ );
 
           // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
           //   float x, y;
@@ -1336,11 +1357,11 @@ public class DrawingCommandManager
           //   }
           //   Path path = new Path();
           //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
-          //   path.transform( mMatrix );
+          //   path.transform( mm );
           //   canvas.drawPath( path, BrushManager.highlightPaint2 );
           // }
 
-          mCurrentScrap.drawSelection( canvas, mMatrix, zoom, mScale, mIsExtended );
+          mCurrentScrap.drawSelection( canvas, mm, zoom, scale, mIsExtended );
 
         }  // synch( mSelectedLock ) mSelectionLock
       }
@@ -1348,8 +1369,8 @@ public class DrawingCommandManager
 
     if ( mGridStack1 != null ) {
       synchronized (TDPath.mGridsLock) {
-        if (mFirstReference != null) mFirstReference.draw(canvas, mMatrix, mScale, null);
-        if (mSecondReference != null) mSecondReference.draw(canvas, mMatrix, mScale, null);
+        if (mFirstReference != null) mFirstReference.draw(canvas, mm, scale, null);
+        if (mSecondReference != null) mSecondReference.draw(canvas, mm, scale, null);
       }
     }
 

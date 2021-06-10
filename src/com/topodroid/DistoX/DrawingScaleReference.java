@@ -115,12 +115,32 @@ class DrawingScaleReference
     if ( size > 0 ) mPaint.setTextSize( size );
   }
 
+  // Calculate reference scale
+  // @param width canvas width
+  private float getReferenceLength( float width, float units )
+  {
+    float refLen = width * mMaxWidthPercent / units;
+    // units 1:m 0.914:y 0.6096:2ft
+    if ( TDSetting.mUnitGrid < 0.2f )      { refLen *= 10; } // using m instead of dm
+    else if ( TDSetting.mUnitGrid < 0.8f ) { refLen *=  2; } // using ft instead of 2ft
+      
+    int k = mValues.length - 1;
+    while ( k > 0 && refLen < mValues[k] ) --k;
+    refLen = mValues[k];
+    return (k > 0)? refLen : -1; // neg. --> cannot draw
+  }
+
   /**
    * Draw the scale reference
    * @param canvas canvas to draw in
    * @param zoom zoom factor used
      */
   void draw( Canvas canvas, float zoom, boolean landscape )
+  {
+    draw( canvas, zoom, landscape, mLocation.x, mLocation.y );
+  }
+
+  void draw( Canvas canvas, float zoom, boolean landscape, float locx, float locy )
   {
     if (canvas != null)
     {
@@ -129,19 +149,11 @@ class DrawingScaleReference
       float arrowlen = (float)canvas.getWidth() / 10;
       float arrowtip = arrowlen / 5;
 
-
       /* Calculate reference scale */
-      float referenceLen = canvas.getWidth() * mMaxWidthPercent / canvasUnit;
-      // units 1:m 0.914:y 0.6096:2ft
-      if ( TDSetting.mUnitGrid < 0.2f )      { referenceLen *= 10; } // using m instead of dm
-      else if ( TDSetting.mUnitGrid < 0.8f ) { referenceLen *=  2; } // using ft instead of 2ft
-      
-      int k = mValues.length - 1;
-      while ( k > 0 && referenceLen < mValues[k] ) --k;
-      referenceLen = mValues[k];
+      float referenceLen = getReferenceLength( canvas.getWidth(), canvasUnit );
 
       /* Draw reference scale */
-      if ( k > 0 ) 
+      if ( referenceLen > 0 ) 
       {
         float canvasLen = canvasUnit * referenceLen;
         canvasLen *= TDSetting.mUnitGrid;
@@ -149,8 +161,8 @@ class DrawingScaleReference
 	    else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
 
         String refstr = (( referenceLen < 1 )?  Float.toString(referenceLen) : Integer.toString((int)referenceLen)) + mUnits;
-        float locX = (mLocation.x > 0) ? mLocation.x : canvas.getWidth() + mLocation.x - referenceLen;
-        float locY = (mLocation.y > 0) ? mLocation.y : canvas.getHeight() + mLocation.y;
+        float locX = (locx > 0) ? locx : canvas.getWidth()  + locx - referenceLen;
+        float locY = (locy > 0) ? locy : canvas.getHeight() + locy;
 	// Log.v("DistoX", "reference " + referenceLen + mUnits );
 
         canvas.drawLine( locX, locY, locX + canvasLen, locY, mPaint);
@@ -180,4 +192,5 @@ class DrawingScaleReference
       }
     }
   }
+
 }
