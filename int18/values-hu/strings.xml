@@ -337,7 +337,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="no_device_address">Nincs kiválasztott műszer</string>
     <string name="no_device_found">Nem talált műszert</string>
     <string name="no_feature_audio">Hang nem támogatott</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
     <string name="no_geo_station">Hiba: nincs geolokalizált mérésipont</string>
     <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>

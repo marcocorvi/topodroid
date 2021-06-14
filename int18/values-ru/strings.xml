@@ -332,7 +332,7 @@
     <string name="no_device_address">Прибор не выбран</string>
     <string name="no_device_found">Прибор не обнаружен</string>
     <string name="no_feature_audio">Аудио не поддерживается</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
     <string name="no_geo_station">Ошибка: отсутствует пикет с координатами</string>
     <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
