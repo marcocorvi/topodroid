@@ -5919,18 +5919,26 @@ public class DrawingWindow extends ItemDrawer
 
     private void savePng( long type )
     {
+      String fullname = null;
       if ( PlotType.isAnySection( type ) ) { 
-	String fullname = mFullName3;
-        DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        doSavePng( manager, type, fullname );
+	fullname = mFullName3;
+      } else if ( PlotType.isProfile( type ) ) { 
+	fullname = mFullName2;
       } else {
-	String fullname1 = mFullName1;
-	String fullname2 = mFullName2;
-        // Nota Bene OK for projected profile (to check)
-        DrawingCommandManager manager1 = mDrawingSurface.getManager( PlotType.PLOT_PLAN );
-        DrawingCommandManager manager2 = mDrawingSurface.getManager( PlotType.PLOT_EXTENDED );
-        doSavePng( manager1, (int)PlotType.PLOT_PLAN, fullname1 );
-        doSavePng( manager2, (int)PlotType.PLOT_EXTENDED, fullname2 );
+	fullname = mFullName1;
+      }
+
+      if ( fullname != null ) {
+        DrawingCommandManager manager = mDrawingSurface.getManager( type );
+        if ( PlotType.isAnySection( type ) ) { 
+          doSavePng( manager, type, fullname );
+        } else if ( PlotType.isProfile( type ) ) { 
+          // Nota Bene OK for projected profile (to check)
+          doSavePng( manager, (int)PlotType.PLOT_EXTENDED, fullname );
+        } else {
+          // doSavePng( manager, (int)PlotType.PLOT_PLAN, fullname );
+          doSavePng( manager, type, fullname );
+        }
       }
     }
 
@@ -6016,6 +6024,7 @@ public class DrawingWindow extends ItemDrawer
         pdf.close();
         fos.close();
         TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
+      // } catch ( NoSuchMethodException e ) {
       } catch ( IOException e ) {
         TDLog.Error("failed PDF export " + e.getMessage() );
       }

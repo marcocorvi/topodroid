@@ -285,24 +285,31 @@ public class DrawingPointLinePath extends DrawingPath
   // @param min_size     2: line, 3: area
   void makeReduce( int decimation, int min_size )
   {
-    while ( decimation > 0 ) {
-      if ( mSize > min_size ) {
-        int size = 1;  // keep first point 
-        LinePoint prev = mFirst;
-        LinePoint pt = prev.mNext;
-        while ( pt != mLast && pt != null ) {
-          LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
-          prev.mNext = next;
+    while ( decimation > 0 && mSize > min_size ) {
+      int size = 1;  // keep first point 
+      LinePoint prev = mFirst;
+      LinePoint pt = prev.mNext;
+      while ( pt != mLast && pt != null ) {
+        LinePoint next = pt.mNext; // pt.mNext != null because pt < mLast
+        prev.mNext = next;
+        prev = next;
+        if ( next == null ) { 
+          TDLog.Error("Line reduce. Something went wrong: null next at size " + size + " Interrupt");
+          pt = mLast;
+          decimation = 0; // no more decimation
+        } else {
           next.mPrev = prev; 
-          ++ size;
-          prev = next;
           pt = prev.mNext;
-        }
-        if ( pt == mLast ) ++ size; // for the mLast point
-        mSize = size;     
-      }    
+          ++ size;
+        } 
+      }
+      if ( pt == mLast ) ++ size; // for the mLast point
+      mSize = size;     
       -- decimation;
     }
+    if ( mSize < min_size ) {
+      throw new RuntimeException("PointLine makeRedude: small final size " + mSize );
+    } 
     retracePath();
   }
 

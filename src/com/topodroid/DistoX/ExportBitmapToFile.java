@@ -40,7 +40,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
-       mFullName = name;
+       mFullName = name;   // plot fullname
        mToast    = toast;
        // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
        // Log.v("DistoX", "Export Bitmap To File " + mFullName );
