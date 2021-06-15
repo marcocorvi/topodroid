@@ -801,6 +801,7 @@ public class TopoDroidApp extends Application
     // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
     // Log.v("DistoX-PATH", "version " + version + " " + TDVersion.string() );
+    Log.v("DistoX", "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
     if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
       mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
@@ -1560,7 +1561,7 @@ public class TopoDroidApp extends Application
 
   static private void installFirmware( boolean overwrite )
   {
-    // Log.v("DistoX-FW", "install firmware " + overwrite );
+    Log.v("DistoX-FW", "install firmware. overwrite: " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
@@ -1700,7 +1701,7 @@ public class TopoDroidApp extends Application
       ZipInputStream zin = new ZipInputStream( fis );
       while ( ( ze = zin.getNextEntry() ) != null ) {
         String filepath = ze.getName();
-        Log.v("DistoX", "firmware uncompress path " + filepath );
+        // Log.v("DistoX", "firmware uncompress path " + filepath );
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith("bin") ) continue;
         // String pathname =  TDPath.getBinFile( filepath );
