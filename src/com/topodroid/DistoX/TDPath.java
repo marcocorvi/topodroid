@@ -490,9 +490,10 @@ public class TDPath
   static String getSqlFile() { return PATH_BASE + "survey.sql"; }
 
   public static String getPathBase() { return PATH_BASE; }
-  static String getManifestFile() { return PATH_BASE + "manifest"; }
 
+  static String getManifestFile() { return PATH_BASE + "manifest"; }
   static String getSymbolFile( String name ) { return "symbol/" + name; }
+
   // LOAD_MISSING
   // static String getSymbolSaveFile( String name ) { return APP_SYMBOL_SAVE_PATH + name; }
 
@@ -695,10 +696,24 @@ public class TDPath
   //   return null;
   // }
 
+  // NOTA BENE extensions include the dot, eg, ".th"
+  static final String[] IMPORT_EXT = { TH, TOP, DAT, TRO, CSN, SVX };
+  static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
+  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, CSN, SVX };
+
   static File[] getImportFiles() // DistoX-SAF
   { 
-    return getFiles( PATH_IMPORT, new String[] { TH, TOP, DAT, TRO, CSN, SVX } );
+    return getFiles( PATH_IMPORT, IMPORT_EXT );
   }
+
+  private static String checkType( String ext, String[] exts )
+  {
+    for ( String e : exts ) if ( e.equals( ext ) ) return e;
+    return null;
+  }
+
+  static String checkImportTypeStream( String ext ) { return checkType( ext, IMPORT_EXT_STREAM ); }
+  static String checkImportTypeReader( String ext ) { return checkType( ext, IMPORT_EXT_READER ); }
 
   static String[] getImportTypes() { return new String[] { TH, TOP, DAT, TRO, CSN, SVX }; }
 

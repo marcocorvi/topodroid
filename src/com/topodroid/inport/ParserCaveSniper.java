@@ -22,6 +22,9 @@ import com.topodroid.common.ExtendType;
 // import java.io.File;
 import java.io.IOException;
 // import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 // import java.util.ArrayList;
 // import java.util.Stack;
@@ -34,10 +37,10 @@ class ParserCaveSniper extends ImportParser
   /** CaveSniper parser
    * @param filename name of the file to parse
    */
-  ParserCaveSniper( String filename ) throws ParserException
+  ParserCaveSniper( InputStreamReader isr, String filename ) throws ParserException
   {
     super( false );  // do not apply_declination
-    readFile( filename );
+    readFile( isr, filename );
     int pos = filename.lastIndexOf('/');
     if ( pos >= 0 ) { 
       mName = filename.substring(pos+1).replace(".csn", "");
@@ -53,14 +56,14 @@ class ParserCaveSniper extends ImportParser
   /** read input file
    * @param br   buffered reader on the input file
    */
-  @Override
-  void readFile( BufferedReader br ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mComment=null, mFrom=null, mTo=null;
 
     String line = "";
     try {
+      BufferedReader br = getBufferedReader( isr, filename );
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();

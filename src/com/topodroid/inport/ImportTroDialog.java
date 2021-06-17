@@ -16,7 +16,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.MainWindow;
 
-
+import java.io.InputStreamReader;
 
 // import java.util.List;
 // import java.util.ArrayList;
@@ -43,13 +43,15 @@ public class ImportTroDialog extends MyDialog
   private CheckBox mCBleg;
 
   private String mFilepath;
+  private InputStreamReader isr;
 
-  public ImportTroDialog( Context context, MainWindow parent, String filepath )
+  public ImportTroDialog( Context context, MainWindow parent, InputStreamReader isr, String filepath )
   {
     super( context, R.string.ImportTroDialog );
     mParent = parent;
     // mApp = app;
     mFilepath = filepath;
+    this.isr = isr;
   }
 
   @Override
@@ -81,7 +83,7 @@ public class ImportTroDialog extends MyDialog
     Button b = (Button) v;
     hide();
     if ( b == mBtnOK ) {
-      mParent.importTroFile( mFilepath, mCBlrud.isChecked(), mCBleg.isChecked() );
+      mParent.importTroFile( isr, mFilepath, mCBlrud.isChecked(), mCBleg.isChecked() );
     // } else if ( b == mBtnCancel ) {
     }
     dismiss();

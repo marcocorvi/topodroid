@@ -51,6 +51,7 @@ public class TDandroid
       android.Manifest.permission.ACCESS_FINE_LOCATION,
       android.Manifest.permission.CAMERA,
       android.Manifest.permission.RECORD_AUDIO
+      // android.Manifest.permission.ACCESS_MEDIA_LOCATION
   };
   static final String[] permNames = {
       "BLUETOOTH", 
@@ -61,6 +62,7 @@ public class TDandroid
       "ACCESS_FINE_LOCATION",
       "CAMERA",
       "RECORD_AUDIO"
+      // "ACCESS_MEDIA_LOCATION"
   };
 
   static final int NR_PERMS_D = 3;
@@ -105,7 +107,7 @@ public class TDandroid
     // sb.append("Not granted" );
 
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
-      // Log.v("DistoX-PERM", "Create permission " + permNames[k] );
+      Log.v("DistoX-PERM", "Create permission " + permNames[k] );
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] && k < NR_PERMS_D ) {
         MustRestart = true;
@@ -240,6 +242,7 @@ public class TDandroid
    *            1 FINE_LOCATION
    *            2 CAMERA
    *            4 AUDIO
+   *            8 MEDIA_LOCATION
    */
   static int checkPermissions( Context context )
   {

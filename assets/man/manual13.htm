@@ -23,7 +23,12 @@ When the default sketch export format is set, the sketches are exported in this 
 For cSurvey x-sections are saved as PNG images.<br><p>
 
 <h4>SURVEY IMPORT</h4>
-TopoDroid imports survey data from the following formats:
+TopoDroid imports survey data from TopoDroid zip archives or from external files.<br>
+Zip imports are selected with a tap on the "Import" button of the <i>Main Window</i>.<br>
+The import on an external file is initiated by a long-tap on the "Import" button.
+Survey external files are accessed through a system content-provider.<br><p>
+
+The following formats of external files are supported:
 <ul>
 <li>Compass</li>
 <li>Survex</li>
@@ -31,6 +36,7 @@ TopoDroid imports survey data from the following formats:
 <li>VisualTopo</li>
 <li>CaveSniper</li>
 <li>PocketTopo, including sketches</li>
+<li>TopoDroid zip archives</li>
 </ul>
 
 A file import fails if a survey with the same name is already in TopoDroid.<br><p>
@@ -39,6 +45,21 @@ Zip import fails if the zip has a database version that is too old or is newer t
 
 On import from file formats that have LRUD values, these are converted to x-splays (shown in green).<br><p>
 
+<b>Therion import</b><br>
+Only Therion survey files with data in "normal" datamode are importable.<br>
+TopoDroid does not import Therion scraps.<br><p>
+
+<b>PocketTopo import</b><br>
+TopoDroid imports both the survey data and the sketches.
+This import maps PocketTopo colors to TopoDroid drawing tools (points and lines).
+The mapping can be modified through a setting.<br><p>
+
+<b>Compass import</b><br>
+TopoDroid converts imported compass survey from <i>normal</i> datamode to <i>diving</i> datamode [T], if the reletive setting is enabled [G].<br><p>
+
+<b>N.B.</b>
+Import may fail (and crash the app) due to failure on the database that TopoDroid cannot intercept.
+If this happens delete the partially imported survey and retry to import it.<br><p>
 
 <h4>SURVEY DATA EXPORT</h4>
 TopoDroid exports survey data to the following cave-program formats:

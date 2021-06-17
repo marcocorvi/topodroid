@@ -42,6 +42,7 @@ import com.topodroid.DistoX.PtCmapActivity;
 import java.io.File;
 // import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 // import java.io.PrintWriter; // FIXME_TH2
@@ -68,27 +69,27 @@ class ParserPocketTopo extends ImportParser
 
   static final private float PT_SCALE = 0.1f; // 100/1000
 
-  ParserPocketTopo( String filename, String surveyname, boolean apply_declination )
+  ParserPocketTopo( InputStream fis, String filename, String surveyname, boolean apply_declination )
                            throws ParserException
   {
     super( apply_declination );
     String mStartFrom = null;
     // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
     mName     = surveyname.replace(".top", "");
-    readPocketTopoFile( filename );
+    readPocketTopoFile( fis, filename );
     checkValid();
   }
 
-  private void readPocketTopoFile( String filename ) throws ParserException
+  private void readPocketTopoFile( InputStream fis, String filename ) throws ParserException
   {
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
     TDLog.Log( TDLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
     // Log.v( "PTDistoX", "PT survey " + mName + " read file " + filename );
     try {
-      FileInputStream fs = new FileInputStream( filename );
-      ptfile.read( fs );
-      fs.close();
+      if ( fis == null ) fis = new FileInputStream( filename );
+      ptfile.read( fis );
+      fis.close();
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "File not found: " + filename );
       throw new ParserException();

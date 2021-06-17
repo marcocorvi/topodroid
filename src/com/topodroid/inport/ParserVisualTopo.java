@@ -25,6 +25,7 @@ import com.topodroid.DistoX.TDAzimuth;
 
 import java.io.IOException;
 import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 class ParserVisualTopo extends ImportParser
 {
@@ -40,13 +41,13 @@ class ParserVisualTopo extends ImportParser
    * @param filename name of the file to parse
    * @param apply_declination  whether to apply declination correction
    */
-  ParserVisualTopo( String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
+  ParserVisualTopo( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
     mName = extractName( filename );
     mLrud = lrud;
     mLegFirst = leg_first;
-    readFile( filename );
+    readFile( isr, filename );
     checkValid();
 
   }
@@ -76,10 +77,10 @@ class ParserVisualTopo extends ImportParser
       
 
   /** read input file
-   * @param br buffered reader on the input file
+   * @param isr iinput reader on the input file
+   * @param filename   filename, in case isr is null
    */
-  @Override
-  void readFile( BufferedReader br ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mFrom=null, mTo=null;
@@ -97,6 +98,7 @@ class ParserVisualTopo extends ImportParser
     final boolean surface   = false; // TODO ...
     final boolean backshot  = false;
 
+    BufferedReader br = getBufferedReader( isr, filename );
     String line = null;
     try {
       line = nextLine( br );

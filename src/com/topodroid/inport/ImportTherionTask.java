@@ -16,26 +16,31 @@ import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.MainWindow;
 
+import java.io.InputStreamReader;
+
 
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
 
+import android.util.Log;
+
   
 // NOTE survey name must be guaranteed not be in the db
 public class ImportTherionTask extends ImportTask
 {
-  public ImportTherionTask( MainWindow main )
-  {
-    super( main );
-  }
+  public ImportTherionTask( MainWindow main ) { super( main ); }
+
+  public ImportTherionTask( MainWindow main, InputStreamReader isr ) { super( main, isr ); }
 
   @Override
   protected Long doInBackground( String... str )
   {
+    Log.v("DistoX", "import Therion task: " + str[0] + " survey " + str[1] );
     long sid = 0;
     try {
-      ParserTherion parser = new ParserTherion( str[0], true ); // apply_declination = true
+      // if fr == null, str[0] is the filename, otherwoise it is the survey name
+      ParserTherion parser = new ParserTherion( isr, str[0], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

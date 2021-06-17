@@ -17,12 +17,13 @@ import com.topodroid.DistoX.SurveyInfo;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
+import java.io.InputStreamReader;
  
 public class ImportCaveSniperTask extends ImportTask
 {
-  public ImportCaveSniperTask( MainWindow main )
+  public ImportCaveSniperTask( MainWindow main, InputStreamReader isr )
   {
-    super( main );
+    super( main, isr );
   }
 
   @Override
@@ -30,7 +31,7 @@ public class ImportCaveSniperTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserCaveSniper parser = new ParserCaveSniper( str[0] ); 
+      ParserCaveSniper parser = new ParserCaveSniper( isr, str[0] ); 
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

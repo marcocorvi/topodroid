@@ -19,6 +19,8 @@ import com.topodroid.DistoX.SurveyInfo;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
+
+import java.io.InputStreamReader;
  
 public class ImportCompassTask extends ImportTask
 {
@@ -26,9 +28,9 @@ public class ImportCompassTask extends ImportTask
   private boolean mLrud;
   private boolean mLegFirst;
 
-  public ImportCompassTask( MainWindow main, int datamode, boolean lrud, boolean leg_first )
+  public ImportCompassTask( MainWindow main, InputStreamReader isr, int datamode, boolean lrud, boolean leg_first )
   {
-    super( main );
+    super( main, isr );
     mDatamode = datamode; 
     mLrud     = lrud;
     mLegFirst = leg_first;
@@ -39,7 +41,7 @@ public class ImportCompassTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserCompass parser = new ParserCompass( str[0], true, mLrud, mLegFirst ); // apply_declination = true
+      ParserCompass parser = new ParserCompass( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

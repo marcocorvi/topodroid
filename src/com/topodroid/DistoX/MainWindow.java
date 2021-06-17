@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsaf;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
@@ -43,6 +44,8 @@ import com.topodroid.mag.WorldMagneticModel;
 import android.util.Log;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -66,7 +69,7 @@ import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
-// import android.net.Uri;
+import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -92,6 +95,7 @@ public class MainWindow extends Activity
                         implements OnItemClickListener
                         , OnItemLongClickListener
                         , View.OnClickListener
+                        , View.OnLongClickListener
                         , OnCancelListener
                         , OnDismissListener
 {
@@ -220,6 +224,36 @@ public class MainWindow extends Activity
   }
 
   @Override
+  public boolean onLongClick( View view )
+  {
+    if ( view != mButton1[2] ) return false; // IMPORT
+    selectImportFromProvider();
+    return true;
+  }
+
+  private void selectImportFromDialog() // IMPORT
+  {
+    // File[] files = TDPath.getImportFiles();
+    File[] zips  = TDPath.getZipFiles();
+    // int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
+    int len = ( zips != null )? zips.length : 0;
+    if ( len > 0 ) {
+      // (new ImportDialog( mActivity, this, files, zips )).show();
+      (new ImportDialog( mActivity, this, zips )).show();
+    } else {
+      TDToast.makeWarn( R.string.import_none );
+    }
+  }
+
+  private void selectImportFromProvider() // IMPORT
+  {
+    Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker
+    intent.setType("*/*");
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_CONTENT );
+  }
+
+  @Override
   public void onClick(View view)
   { 
     // TDLog.Log( TDLog.LOG_INPUT, "MainWindow onClick() " + view.toString() );
@@ -253,15 +287,7 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
         // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
         // int len = filenames.size() + zipnames.size();
-
-        File[] files = TDPath.getImportFiles();
-        File[] zips  = TDPath.getZipFiles();
-        int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
-        if ( len > 0 ) {
-          (new ImportDialog( mActivity, this, files, zips )).show();
-        } else {
-          TDToast.makeWarn( R.string.import_none );
-        }
+        selectImportFromDialog();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
 	if ( mPaletteButtonEnabled ) {
           SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
@@ -399,22 +425,23 @@ public class MainWindow extends Activity
     mActivity.setTitleColor( TDColor.CONNECTED );
   }
 
-  public void importDatFile( String filepath, int datamode, boolean lrud, boolean leg_first )
+  public void importDatFile( InputStreamReader isr, String filepath, int datamode, boolean lrud, boolean leg_first )
   {
     setTitleImport();
-    new ImportCompassTask( this, datamode, lrud, leg_first ).execute( filepath );
+    new ImportCompassTask( this, isr, datamode, lrud, leg_first ).execute( filepath );
   }
 
-  public void importTroFile( String filepath, boolean lrud, boolean leg_first )
+  public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first )
   {
     setTitleImport();
-    new ImportVisualTopoTask( this, lrud, leg_first ).execute( filepath );
+    new ImportVisualTopoTask( this, isr, lrud, leg_first ).execute( filepath );
   }
 
   public void importFile( String filename )
   {
+    Log.v("DistoX", "import file " + filename );
     // FIXME connect-title string
-    if ( filename.endsWith(".th") || filename.endsWith(".TH") ) {
+    if ( filename.toLowerCase().endsWith(".th") ) {
       String filepath = TDPath.getImportFile( filename );
       String name = filename.replace(".th", "" ).replace(".TH", "");
       if ( mApp_mData.hasSurveyName( name ) ) {
@@ -423,30 +450,74 @@ public class MainWindow extends Activity
       }
       // TDToast.make( R.string.import_wait );
       setTitleImport();
-      new ImportTherionTask( this ).execute( filepath, name );
-    } else if ( filename.endsWith(".dat") || filename.endsWith(".DAT") ) {
+      new ImportTherionTask( this, null ).execute( filepath, name );  // null FileReader
+    } else if ( filename.toLowerCase().endsWith(".dat") ) {
       String filepath = TDPath.getImportFile( filename );
-      (new ImportDatDialog( this, this, filepath )).show();
+      (new ImportDatDialog( this, this, null, filepath )).show();
       // new ImportCompassTask( this ).execute( filepath );
-    } else if ( filename.endsWith(".top") || filename.endsWith(".TOP") ) {
+    } else if ( filename.toLowerCase().endsWith(".top") ) {
       String filepath = TDPath.getImportFile( filename );
       setTitleImport();
-      new ImportPocketTopoTask( this ).execute( filepath, filename ); // TODO pass the drawer as arg
-    } else if ( filename.endsWith(".tro") || filename.endsWith(".TRO") ) {
+      new ImportPocketTopoTask( this, null ).execute( filepath, filename ); // TODO pass the drawer as arg
+    } else if ( filename.toLowerCase().endsWith(".tro") ) {
       String filepath = TDPath.getImportFile( filename );
-      (new ImportTroDialog( this, this, filepath )).show();
-    } else if ( filename.endsWith(".svx") || filename.endsWith(".SVX") ) {
+      (new ImportTroDialog( this, this, null, filepath )).show();
+    } else if ( filename.toLowerCase().endsWith(".svx") ) {
       String filepath = TDPath.getImportFile( filename );
       setTitleImport();
-      new ImportSurvexTask( this ).execute( filepath ); 
-    } else if ( filename.endsWith(".csn") || filename.endsWith(".CSN") ) { // CaveSniper text file
+      new ImportSurvexTask( this, null ).execute( filepath ); 
+    } else if ( filename.toLowerCase().endsWith(".csn") ) { // CaveSniper text file
       String filepath = TDPath.getImportFile( filename );
-      new ImportCaveSniperTask( this ).execute( filepath ); 
+      new ImportCaveSniperTask( this, null ).execute( filepath ); 
       setTitleImport();
-    } else if ( filename.endsWith(".zip") ) {
+    } else if ( filename.toLowerCase().endsWith(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
       setTitleImport();
-      new ImportZipTask( this, false ) .execute( filename ); // force = true (skip version checks)
+      new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
+    // } else {
+    //   setTheTitle( );
+    }
+    // FIXME SYNC updateDisplay();
+  }
+ 
+  // @param fis    file input stream
+  // @paran name   file name
+  // @param type   file extension (including the dot)
+  public void importStream( FileInputStream fis, String name, String type )
+  {
+    Log.v("DistoX", "import with stream " + name + " " + type );
+    // FIXME connect-title string
+    if ( type.equals(".top") ) {
+      setTitleImport();
+      new ImportPocketTopoTask( this, fis ).execute( name ); // TODO pass the drawer as arg
+    } else if ( type.equals(".zip") ) {
+      // TDToast.makeLong( R.string.import_zip_wait );
+      setTitleImport();
+      new ImportZipTask( this, fis, false ) .execute( name ); // force = true (skip version checks)
+    // } else {
+    //   setTheTitle( );
+    }
+    // FIXME SYNC updateDisplay();
+  }
+  
+  public void importReader( InputStreamReader isr, String name, String type )
+  {
+    // FIXME connect-title string
+    Log.v("DistoX", "import with reader " + name + " " + type );
+    if ( type.equals(".th") ) {
+      setTitleImport();
+      new ImportTherionTask( this, isr ).execute( name, name );
+    } else if ( type.equals(".dat") ) {
+      (new ImportDatDialog( this, this, isr, name )).show();
+    } else if ( type.equals(".tro") ) {
+      setTitleImport();
+      (new ImportTroDialog( this, this, isr, name )).show();
+    } else if ( type.equals(".svx") ) {
+      setTitleImport();
+      new ImportSurvexTask( this, isr ).execute( name ); 
+    } else if ( type.equals(".csn") ) {
+      setTitleImport();
+      new ImportCaveSniperTask( this, isr ).execute( name ); 
     // } else {
     //   setTheTitle( );
     }
@@ -734,6 +805,9 @@ public class MainWindow extends Activity
     mButtonSap5    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_sap5 );
     mButtonBric4   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bric4 );
 
+    if ( TDLevel.overExpert ) {
+      mButton1[2].setOnLongClickListener( this );
+    }
     setButtonDevice();
     // mRelLayout.invalidate();
   }
@@ -983,6 +1057,75 @@ public class MainWindow extends Activity
         // setBTMenus( DeviceUtil.isAdapterEnabled() );
         updateDisplay( );
         break;
+      case TDRequest.REQUEST_GET_CONTENT:
+        if ( result == Activity.RESULT_OK ) {
+          String filename;
+          Uri uri = intent.getData();
+          String mimetype = TDsaf.getType( uri );
+          if ( mimetype == null ) {
+            String path = TDsaf.getPath(this, uri);
+            if (path == null) {
+              // filename = FilenameUtils.getName(uri.toString());
+              filename = uri.toString();
+              if ( filename != null ) {
+                int pos = filename.lastIndexOf("/");
+                filename = filename.substring( pos+1 );
+              }
+            } else {
+              File file = new File(path);
+              filename = file.getName();
+            }
+            Log.v("DistoX", "URI to import: " + uri.toString() + " null mime, filename " + filename );
+          } else {
+            filename = uri.toString();
+            int pos = filename.lastIndexOf(".");
+            int qos = filename.lastIndexOf("/");
+            String ext  = filename.substring( pos ).toLowerCase();
+            String name = filename.substring( qos+1, pos );
+            String surveyname = name;
+            Log.v("DistoX", "URI to import: " + uri.toString() + " mime " + mimetype + " name " + name + " ext " + ext );
+            if ( mimetype.equals("application/zip") ) {
+              FileInputStream fis = TDsaf.docFileInputStream( uri );
+              // if ( fis.markSupported() ) fis.mark();
+              int manifest_ok = Archiver.getOkManifest( fis, name, surveyname );
+              if ( manifest_ok >= 0 ) {
+                fis = TDsaf.docFileInputStream( uri );
+                Archiver.unArchive( mApp, fis, name );
+              }
+            } else {
+              String type = TDPath.checkImportTypeStream( ext );
+              if ( type != null ) {
+                Log.v("DistoX", "import stream");
+                FileInputStream fis = TDsaf.docFileInputStream( uri );
+                importStream( fis, name, type );
+              } else {
+                type = TDPath.checkImportTypeReader( ext );
+                if ( type != null ) {
+                  Log.v("DistoX", "import reader");
+                  try {
+                    InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+                    importReader( isr, name, type );
+                  } catch ( FileNotFoundException e ) {
+                    Log.v("DistoX", "File not found");
+                  }
+                } else {
+                  Log.v("DistoX", "import unsupported " + ext);
+                }
+              }
+            }
+            // Cursor returnCursor = getContentResolver().query(returnUri, null, null, null, null);
+            // int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
+            // int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
+            // returnCursor.moveToFirst();
+            // filename = returnCursor.getString(nameIndex);
+            // String size = Long.toString(returnCursor.getLong(sizeIndex));
+          }
+          // sample URI: content://com.mixplorer.file/509!s/TopoDroid-03/zip/580test.zip
+          // importFile( item );
+        } else {
+        }
+        break;
+   
 
     }
   }

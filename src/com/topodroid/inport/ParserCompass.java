@@ -21,9 +21,8 @@ import com.topodroid.DistoX.TDAzimuth;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 
-// import java.io.File;
 import java.io.IOException;
-// import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 // import java.util.ArrayList;
 // import java.util.Stack;
@@ -41,14 +40,14 @@ class ParserCompass extends ImportParser
    * @param filename name of the file to parse
    * @param apply_declination whether to aapply declination correction
    */
-  ParserCompass( String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
+  ParserCompass( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
     // Log.v("DistoX", "Parser Compass <" + filename + ">" );
     // mName = survey name is read from the file
     mLrud     = lrud;
     mLegFirst = leg_first;
-    readFile( filename );
+    readFile( isr, filename );
     checkValid();
   }
 
@@ -62,14 +61,14 @@ class ParserCompass extends ImportParser
   /** read input file
    * @param br buffered reader on the input file
    */
-  @Override
-  void readFile( BufferedReader br ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {
     // lengths in meters
     // angles  in degrees
     float mLength, mBearing, mClino, mLeft, mUp, mDown, mRight;
     String mFlag=null, mComment=null, mFrom=null, mTo=null;
 
+    BufferedReader br = getBufferedReader( isr, filename );
     String line = "";
     try {
       line = nextLine( br );

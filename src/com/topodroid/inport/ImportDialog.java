@@ -41,18 +41,19 @@ public class ImportDialog extends MyDialog
 { 
   // private final TopoDroidApp mApp;
   private final MainWindow mParent;
-  private File[] mFiles = null;
+  // private File[] mFiles = null;
   private File[] mZips = null;
 
   // private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
   private Button mBtnCancel;
 
-  public ImportDialog( Context context, MainWindow parent, File[] files, File[] zips )
+  // public ImportDialog( Context context, MainWindow parent, File[] files, File[] zips )
+  public ImportDialog( Context context, MainWindow parent, File[] zips )
   {
     super( context, R.string.ImportDialog );
     mParent  = parent;
-    mFiles = files;
+    // mFiles = files;
     mZips  = zips;
   }
 
@@ -83,11 +84,11 @@ public class ImportDialog extends MyDialog
     */
 
     ArrayList< String > names = new ArrayList<>();
-    if ( mFiles != null ) {
-      for ( File f : mFiles ) { 
-        names.add( f.getName() );
-      }
-    }
+    // if ( mFiles != null ) {
+    //   for ( File f : mFiles ) { 
+    //     names.add( f.getName() );
+    //   }
+    // }
     if ( mZips != null ) {
       for ( File f : mZips ) {
         names.add( f.getName() );

@@ -20,7 +20,10 @@ import com.topodroid.DistoX.DataHelper;
 
 // import java.io.File;
 import java.io.IOException;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
+// import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -110,7 +113,7 @@ class ImportParser
    
   /** read input file
    * @param filename name of the file to parse
-   */
+   *
   void readFile( String filename ) throws ParserException
   {
     // TDLog.Log( TDLog.LOG_IO, "import parse file <" + filename + ">" );
@@ -118,6 +121,7 @@ class ImportParser
       FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       readFile( br );
+      fr.close();
     } catch ( IOException e ) {
       TDLog.Error( "ERROR I/O " + e.toString() );
       throw new ParserException();
@@ -125,8 +129,33 @@ class ImportParser
     TDLog.Log( TDLog.LOG_THERION, "ImportParser shots "+ shots.size() +" splays "+ splays.size()  );
   }
 
+  void readFile( FileReader fr ) throws ParserException
+  {
+    try {
+      BufferedReader br = new BufferedReader( fr );
+      readFile( br );
+      fr.close();
+    } catch ( IOException e ) {
+      TDLog.Error( "ERROR I/O " + e.toString() );
+      throw new ParserException();
+    }
+  }
+
   void readFile( BufferedReader br ) throws ParserException
   {
+  }
+   */
+
+  BufferedReader getBufferedReader( InputStreamReader isr, String filename )
+  {
+    try {
+      if ( isr == null ) {
+        isr = new InputStreamReader( new FileInputStream( filename ) );
+      }
+      return new BufferedReader( isr );
+    } catch ( FileNotFoundException e ) {
+    }
+    return null;
   }
 
   protected String extractName( String filename )

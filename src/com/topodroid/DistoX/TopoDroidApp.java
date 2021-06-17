@@ -986,7 +986,7 @@ public class TopoDroidApp extends Application
     }
   }
 
-  int mManifestDbVersion = 0;
+  static int mManifestDbVersion = 0;
 
   // returns
   //  0 ok
@@ -996,7 +996,7 @@ public class TopoDroidApp extends Application
   // -4 survey name does not match filename
   //
   // @note surveyname is modified
-  public int checkManifestFile( String filename, String surveyname )
+  static public int checkManifestFile( String filename, String surveyname )
   {
     mManifestDbVersion = 0;
     String line;
@@ -1004,7 +1004,7 @@ public class TopoDroidApp extends Application
     //   return -1;
     // }
     int version_code = 0;
-    int ret = 0;
+    int ret = -1;
     try {
       FileReader fr = TDFile.getFileReader( filename );
       BufferedReader br = new BufferedReader( fr );
@@ -1034,11 +1034,14 @@ public class TopoDroidApp extends Application
       }
       fr.close();
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "Top0Droid check manifest error: " + e.getMessage() );
+      TDLog.Error( "TopoDroid check manifest error: " + e.getMessage() );
+      return -3;
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Top0Droid check manifest file not found: " + e.getMessage() );
+      TDLog.Error( "TopoDroid check manifest file not found: " + e.getMessage() );
+      return -3;
     } catch ( IOException e ) {
-      TDLog.Error( "Top0Droid check manifest I/O error: " + e.getMessage() );
+      TDLog.Error( "TopoDroid check manifest I/O error: " + e.getMessage() );
+      return -3;
     }
     return ret;
   }
@@ -1132,11 +1135,10 @@ public class TopoDroidApp extends Application
       { // rename plot/sketch files: th3
         List< PlotInfo > plots = mData.selectAllPlots( sid );
         for ( PlotInfo p : plots ) {
-          // Therion
-          TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           // Tdr
           TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
-          // rename exported plots: dxf png svg csx
+          // rename exported plots: th2 dxf png svg csx
+          TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           TDFile.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
           TDFile.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
           TDFile.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
@@ -1145,6 +1147,7 @@ public class TopoDroidApp extends Application
           TDFile.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
           TDFile.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
           TDFile.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
+          TDFile.renameFile( TDPath.getSurveyPlotC3dFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotC3dFile( name, p.name ) );
         }
       }
       /* FIXME_SKETCH_3D *

@@ -23,7 +23,9 @@ import com.topodroid.DistoX.TDUtil;
 // import android.util.Log;
 
 import java.io.IOException;
-import java.io.FileReader;
+import java.io.FileNotFoundException;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -101,7 +103,7 @@ class ParserSurvex extends ImportParser
   float surveyDeclination( ) { return mDeclination; }
   // ---------------------------------------------------------
 
-  ParserSurvex( String filename, boolean apply_declination ) throws ParserException
+  ParserSurvex( InputStreamReader isr, String filename, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
     mName = extractName( filename );
@@ -110,7 +112,7 @@ class ParserSurvex extends ImportParser
     aliases  = new HashMap<>();
     // mStates  = new Stack< ParserSurvexState >();
     ParserSurvexState state = new ParserSurvexState("."); // root of the linked list of states
-    readFile( filename, state );
+    readFile( isr, filename, state );
     checkValid();
   }
 
@@ -143,7 +145,7 @@ class ParserSurvex extends ImportParser
    * @param filename name of the file to parse
    * @param state    state of the parser
    */
-  private void readFile( String filename, ParserSurvexState state ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename, ParserSurvexState state ) throws ParserException
   {
     boolean in_station = true;
     String from = null;
@@ -166,8 +168,7 @@ class ParserSurvex extends ImportParser
       // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
       // TDLog.Log( TDLog.LOG_IO, "import read Survex file <" + filename + ">" );
 
-      FileReader fr = new FileReader( filename );
-      BufferedReader br = new BufferedReader( fr );
+      BufferedReader br = getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.Log( TDLog.LOG_THERION, "TH " + line );

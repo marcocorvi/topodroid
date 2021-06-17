@@ -6105,20 +6105,6 @@ public class DrawingWindow extends ItemDrawer
       new ExportPlotToFile( mActivity, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }
 
-    // private rotateBackups( String filename )
-    // {
-    //   String filename2 = filename + "4"; // last backup
-    //   File file2 = TDFile.getFile( filename2 );
-    //   for ( int i=3; i>=0; --i ) { 
-    //     File file1 = TDFile.getFile( filename + Integer.toString(i) );
-    //     if ( file1.exists() ) file1.renameTo( file2 );
-    //     file2 = file1;
-    //   }
-    //   File file = TDFile.getFile( filename );
-    //   if ( file.exists() ) file.renameTo( file2 );
-    // }
-
-
   // static private Handler th2Handler = null;
 
   // called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols

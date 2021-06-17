@@ -17,6 +17,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDsaf;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
@@ -202,18 +203,14 @@ public class DataHelper extends DataSetObservable
 
   void openDatabase( Context context )
   {
-    String database_name = TDPath.getDatabase(); // DistoX-SAF
-    File db_file = TDFile.getFile( database_name );
-    Log.v("DistoX", "DB file " + database_name + " " + db_file.getPath() );
-    // if ( Build.VERSION >=... ) { // API 27
-    //   SQLiteDatabase.OpenParams.Builder builder = new SQLiteDatabase.OpenParams.Builder();
-    //   builder.setOpenFlags( SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-    //   builder.setSynchronousMode( "NORMAL" ); // "OFF", "NORMAL", "FULL", "EXTRA"
-    //   SQLiteDatabase.OpenParam params = builder.Build();
-    // }
+    String db_name = TDPath.getDatabase(); // DistoX-SAF
+    File db_file = TDFile.getFile( db_name );
+    // TDsaf db_file = new TDsaf( db_name );
+    Log.v("DistoX", "DB file " + db_name + " " + db_file.getPath() );
+
     if ( db_file.exists() ) {
       try {
-        myDB = SQLiteDatabase.openDatabase( database_name, null, SQLiteDatabase.OPEN_READWRITE );
+        myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
         int oldVersion = myDB.getVersion();
         int newVersion = TDVersion.DATABASE_VERSION;
         Log.v("DistoX", "opened existing database: old version " + oldVersion + " current version " + newVersion );
@@ -226,7 +223,7 @@ public class DataHelper extends DataSetObservable
       }
     } else {
       try {
-        myDB = SQLiteDatabase.openDatabase( database_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
+        myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
         Log.v("DistoX", "created new database");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
@@ -236,7 +233,7 @@ public class DataHelper extends DataSetObservable
       }
     }
 
-    // DistoXOpenHelper openHelper = new DistoXOpenHelper( context, database_name );
+    // DistoXOpenHelper openHelper = new DistoXOpenHelper( context, db_name );
     // try {
     //   myDB = openHelper.getWritableDatabase();
     //   if ( myDB == null ) {
@@ -5337,11 +5334,11 @@ public class DataHelper extends DataSetObservable
   {
      private static final String create_table = "CREATE TABLE IF NOT EXISTS ";
 
-     // DistoXOpenHelper(Context context, String database_name ) 
+     // DistoXOpenHelper(Context context, String db_name ) 
      // {
-     //    super(context, database_name, null, TDVersion.DATABASE_VERSION );
-     //    TDLog.Log( TDLog.LOG_DB, "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
-     //    // Log.v( "DistoX", "DB open helper ... " + database_name + " version " + TDVersion.DATABASE_VERSION );
+     //    super(context, db_name, null, TDVersion.DATABASE_VERSION );
+     //    TDLog.Log( TDLog.LOG_DB, "DB open helper ... " + db_name + " version " + TDVersion.DATABASE_VERSION );
+     //    // Log.v( "DistoX", "DB open helper ... " + db_name + " version " + TDVersion.DATABASE_VERSION );
      // }
 
      // @Override

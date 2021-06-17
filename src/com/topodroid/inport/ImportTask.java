@@ -20,6 +20,9 @@ import com.topodroid.DistoX.TDToast;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
 import android.os.AsyncTask;
 
 import android.app.ProgressDialog;
@@ -30,9 +33,40 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   final WeakReference<TopoDroidApp> mApp; // FIXME LEAK used by inheriting classes
   ProgressDialog mProgress = null;
 
+  InputStream fis;
+  InputStreamReader isr;
+
   ImportTask( MainWindow main )
   {
     super();
+    this.fis = null;
+    this.isr = null;
+    mMain = new WeakReference<MainWindow>( main );
+    mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
+    mProgress = ProgressDialog.show( main,
+		    main.getResources().getString(R.string.pleasewait),
+		    main.getResources().getString(R.string.processing),
+		    true );
+  }
+
+  ImportTask( MainWindow main, InputStream fis )
+  {
+    super();
+    this.fis = fis;
+    this.isr = null;
+    mMain = new WeakReference<MainWindow>( main );
+    mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
+    mProgress = ProgressDialog.show( main,
+		    main.getResources().getString(R.string.pleasewait),
+		    main.getResources().getString(R.string.processing),
+		    true );
+  }
+
+  ImportTask( MainWindow main, InputStreamReader isr )
+  {
+    super();
+    this.fis = null;
+    this.isr = isr;
     mMain = new WeakReference<MainWindow>( main );
     mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
     mProgress = ProgressDialog.show( main,

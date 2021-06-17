@@ -19,12 +19,13 @@ import com.topodroid.DistoX.MainWindow;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
+import java.io.InputStream;
 
 public class ImportPocketTopoTask extends ImportTask
 {
-  public ImportPocketTopoTask( MainWindow main ) 
+  public ImportPocketTopoTask( MainWindow main, InputStream fis ) 
   {
-    super( main );
+    super( main, fis );
   }
 
   @Override
@@ -33,7 +34,7 @@ public class ImportPocketTopoTask extends ImportTask
     long sid = 0;
     try {
       // import PocketTopo (only data for the first trip)
-      ParserPocketTopo parser = new ParserPocketTopo( str[0], str[1], true ); // apply_declination = true
+      ParserPocketTopo parser = new ParserPocketTopo( fis, str[0], str[1], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

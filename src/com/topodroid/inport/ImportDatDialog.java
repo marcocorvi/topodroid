@@ -29,6 +29,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.CheckBox;
 
+import java.io.InputStreamReader;
+
 public class ImportDatDialog extends MyDialog
                       implements View.OnClickListener
 {
@@ -42,12 +44,15 @@ public class ImportDatDialog extends MyDialog
 
   private String mFilepath;
 
-  public ImportDatDialog( Context context, MainWindow parent, String filepath )
+  private InputStreamReader isr;
+
+  public ImportDatDialog( Context context, MainWindow parent, InputStreamReader isr, String filepath )
   {
     super( context, R.string.ImportDatDialog );
     mParent = parent;
     // mApp = app;
     mFilepath = filepath;
+    this.isr = isr;
   }
 
   @Override
@@ -88,7 +93,7 @@ public class ImportDatDialog extends MyDialog
     if ( b == mBtnOK ) {
       int datamode = SurveyInfo.DATAMODE_NORMAL;
       if ( TDLevel.overExpert && mCBdiving.isChecked() ) datamode = SurveyInfo.DATAMODE_DIVING;
-      mParent.importDatFile( mFilepath, datamode, mCBlrud.isChecked(), mCBleg.isChecked() );
+      mParent.importDatFile( isr, mFilepath, datamode, mCBlrud.isChecked(), mCBleg.isChecked() );
     // } else if ( b == mBtnCancel ) {
     }
     dismiss();

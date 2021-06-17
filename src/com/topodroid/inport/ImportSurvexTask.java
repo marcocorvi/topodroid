@@ -22,13 +22,14 @@ import com.topodroid.DistoX.MainWindow;
 
 import java.util.ArrayList;
 
+import java.io.InputStreamReader;
   
 // NOTE survey name must be guaranteed not be in the db
 public class ImportSurvexTask extends ImportTask
 {
-  public ImportSurvexTask( MainWindow main )
+  public ImportSurvexTask( MainWindow main, InputStreamReader isr )
   {
-    super( main );
+    super( main, isr );
   }
 
   @Override
@@ -36,7 +37,7 @@ public class ImportSurvexTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserSurvex parser = new ParserSurvex( str[0], true ); // apply_declination = true
+      ParserSurvex parser = new ParserSurvex( isr, str[0], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

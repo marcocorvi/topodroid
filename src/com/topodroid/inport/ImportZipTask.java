@@ -23,13 +23,17 @@ import com.topodroid.DistoX.MainWindow;
 
 // import java.util.ArrayList;
 
+import java.io.InputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+
 public class ImportZipTask extends ImportTask
 {
   boolean mForce;
 
-  public ImportZipTask( MainWindow main, boolean force )
+  public ImportZipTask( MainWindow main, InputStream fis, boolean force )
   { 
-    super(main);
+    super(main, fis );
     mForce = force;
   }
 
@@ -38,10 +42,17 @@ public class ImportZipTask extends ImportTask
   {
     String filename = str[0];
     TopoDroidApp app = mApp.get();
-    if ( app == null ) return -6L;
-    Archiver archiver = new Archiver( );
-    int ret = archiver.unArchive( app, TDPath.getZipFile( filename ), filename.replace(".zip", ""), mForce );
-    return (long)ret;
+    if ( app == null ) return -7L;
+    String name = filename.replace(".zip", "");
+    if ( fis == null ) {
+      // try { 
+      //   fis = new FileInputStream( TDPath.getZipFile( filename ) );
+      // } catch ( FileNotFoundException e ) { }
+      // if ( fis == null ) return -6L;
+      Archiver archiver = new Archiver( );
+      return (long)archiver.unArchive( app, TDPath.getZipFile( filename ), name, mForce );
+    }
+    return (long)Archiver.unArchive( app, fis, name );
   }
 
   // @Override

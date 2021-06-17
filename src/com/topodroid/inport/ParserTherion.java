@@ -22,7 +22,8 @@ import com.topodroid.common.LegType;
 import com.topodroid.DistoX.CurrentStation;
 
 import java.io.IOException;
-import java.io.FileReader;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
@@ -91,7 +92,7 @@ class ParserTherion extends ImportParser
   float surveyDeclination( ) { return mDeclination; }
   // ---------------------------------------------------------
 
-  ParserTherion( String filename, boolean apply_declination ) throws ParserException
+  ParserTherion( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
   {
     super( apply_declination );
     fixes    = new ArrayList<>();
@@ -101,7 +102,7 @@ class ParserTherion extends ImportParser
     // // mStates  = new Stack< ParserTherionState >();
     // mApplyDeclination = apply_declination;
     ParserTherionState state = new ParserTherionState(); // root of the linked list of states
-    readFile( filename, "", state );
+    readFile( isr, name, "", state );
     checkValid();
   }
 
@@ -134,7 +135,7 @@ class ParserTherion extends ImportParser
    * @param basepath survey pathname base
    * @param state    state of the parser
    */
-  private void readFile( String filename, String basepath, ParserTherionState state ) throws ParserException
+  private void readFile( InputStreamReader isr, String filename, String basepath, ParserTherionState state ) throws ParserException
   {
     String path = basepath;   // survey pathname(s)
     int ks = 0;               // survey index
@@ -162,8 +163,7 @@ class ParserTherion extends ImportParser
       // TDLog.Log( TDLog.LOG_THERION, "reading file " + filename + " dir " + dirname );
       // TDLog.Log( TDLog.LOG_IO, "import read Therion file <" + filename + ">" );
 
-      FileReader fr = new FileReader( filename );
-      BufferedReader br = new BufferedReader( fr );
+      BufferedReader br = getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.Log( TDLog.LOG_THERION, "TH " + line );

@@ -20,16 +20,16 @@ import com.topodroid.DistoX.MainWindow;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
-
+import java.io.InputStreamReader;
 
 public class ImportVisualTopoTask extends ImportTask
 {
   private boolean mLrud;
   private boolean mLegFirst;
 
-  public ImportVisualTopoTask( MainWindow main, boolean lrud, boolean leg_first )
+  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, boolean lrud, boolean leg_first )
   {
-    super( main );
+    super( main, isr );
     mLrud = lrud;
     mLegFirst = leg_first;
   }
@@ -39,7 +39,7 @@ public class ImportVisualTopoTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserVisualTopo parser = new ParserVisualTopo( str[0], true, mLrud, mLegFirst ); // apply_declination = true
+      ParserVisualTopo parser = new ParserVisualTopo( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {
