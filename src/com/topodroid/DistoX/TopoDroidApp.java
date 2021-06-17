@@ -2392,18 +2392,18 @@ public class TopoDroidApp extends Application
     }
   }
 
-  // called by zip archiver to export survey data before zip archive
-  static void doExportDataSync( int exportType )
-  {
-    if ( exportType < 0 ) return;
-    if ( TDInstance.sid >= 0 ) {
-      SurveyInfo info = getSurveyInfo( );
-      if ( info == null ) return;
-      TDLog.Log( TDLog.LOG_IO, "sync-export survey " + TDInstance.survey + " type " + exportType );
-      // String saving = null; // because toast is false
-      (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, false )).immed_exec();
-    }
-  }
+  // called by zip archiver to export survey data before zip archive if TDSetting.mExportShotFormat >= 0
+  // static void doExportDataSync( int exportType )
+  // {
+  //   if ( exportType < 0 ) return;
+  //   if ( TDInstance.sid >= 0 ) {
+  //     SurveyInfo info = getSurveyInfo( );
+  //     if ( info == null ) return;
+  //     TDLog.Log( TDLog.LOG_IO, "sync-export survey " + TDInstance.survey + " type " + exportType );
+  //     // String saving = null; // because toast is false
+  //     (new SaveDataFileTask( null, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, false )).immed_exec();
+  //   }
+  // }
 
   // ==================================================================
   // PATH_11
