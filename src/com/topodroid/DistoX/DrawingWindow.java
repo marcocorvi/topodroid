@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsaf;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDStatus;
@@ -1252,14 +1253,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
+        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + psd2.fname );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
+      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.fname );
       -- mNrSaveTh2Task;
@@ -5917,7 +5918,7 @@ public class DrawingWindow extends ItemDrawer
 
     // --------------------------------------------------------------------------
 
-    private void savePng( long type )
+    private void savePng( Uri uri, long type )
     {
       String fullname = null;
       if ( PlotType.isAnySection( type ) ) { 
@@ -5931,18 +5932,18 @@ public class DrawingWindow extends ItemDrawer
       if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
         if ( PlotType.isAnySection( type ) ) { 
-          doSavePng( manager, type, fullname );
+          doSavePng( uri, manager, type, fullname );
         } else if ( PlotType.isProfile( type ) ) { 
           // Nota Bene OK for projected profile (to check)
-          doSavePng( manager, (int)PlotType.PLOT_EXTENDED, fullname );
+          doSavePng( uri, manager, (int)PlotType.PLOT_EXTENDED, fullname );
         } else {
           // doSavePng( manager, (int)PlotType.PLOT_PLAN, fullname );
-          doSavePng( manager, type, fullname );
+          doSavePng( uri, manager, type, fullname );
         }
       }
     }
 
-    private void doSavePng( DrawingCommandManager manager, long type, final String filename )
+    private void doSavePng( Uri uri, DrawingCommandManager manager, long type, final String filename )
     {
       if ( manager == null ) {
 	TDToast.makeBad( R.string.null_bitmap );
@@ -5955,11 +5956,11 @@ public class DrawingWindow extends ItemDrawer
       }
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
-      new ExportBitmapToFile( format, bitmap, scale, filename, true ).execute();
+      new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
     }
 
     // PDF ------------------------------------------------------------------
-    private void savePdf( long type ) 
+    private void savePdf( Uri uri, long type ) 
     {
       String fullname = null;
       if ( PlotType.isAnySection( type ) ) { 
@@ -5972,12 +5973,12 @@ public class DrawingWindow extends ItemDrawer
 
       if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        doSavePdf( manager, fullname );
+        doSavePdf( uri, manager, fullname );
       }
     }
 
     // TODO with background task
-    private void doSavePdf( DrawingCommandManager manager, final String fullname )
+    private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
     {
       if ( manager == null ) {
 	TDToast.makeBad( R.string.null_bitmap );
@@ -5992,7 +5993,8 @@ public class DrawingWindow extends ItemDrawer
       // Log.v("DistoX", "PDF export <" + fullname + ">");
       try {
         // FileOutputStream fos = new FileOutputStream( filename );
-        OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
+        // OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
+        OutputStream fos = TDsaf.docFileOutputStream( uri );
 
         // PrintAttributes.Builder builder = new PrintAttributes.Builder();
         // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
@@ -6032,15 +6034,15 @@ public class DrawingWindow extends ItemDrawer
 
     // CSX ------------------------------------------------------------------
     // used also by SavePlotFileTask
-    void doSaveCsx( String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+    void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
       // Log.v("DistoX-SAVE", "save csx");
-      TopoDroidApp.exportSurveyAsCsxAsync( mActivity, origin, psd1, psd2, toast );
+      TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
     }
 
     // used to save "dxf", "svg"
     // called only by doExport
-    private void saveWithExt( long type, String ext ) 
+    private void saveWithExt( Uri uri, long type, String ext ) 
     {
       TDNum num = mNum;
       TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
@@ -6049,30 +6051,30 @@ public class DrawingWindow extends ItemDrawer
 	DrawingCommandManager manager = mDrawingSurface.getManager( type );
 	String fullname = mFullName3;
         if ( "csx".equals( ext ) ) {
-          doSavePng( manager, type, fullname ); 
+          doSavePng( uri, manager, type, fullname ); 
         } else {
-          doSaveWithExt( num, manager, type, fullname, ext, true ); 
+          doSaveWithExt( uri, num, manager, type, fullname, ext, true ); 
         }
       } else {
         if ( ext.equals("c3d") ) {
 	  DrawingCommandManager manager = mDrawingSurface.getManager( type );
           if ( PlotType.isProfile( type ) ) {
-            doSaveWithExt( num, manager, type, mFullName2, ext, true ); 
+            doSaveWithExt( uri, num, manager, type, mFullName2, ext, true ); 
           } else if ( type == PlotType.PLOT_PLAN ) {
-            doSaveWithExt( num, manager, type, mFullName1, ext, true ); 
+            doSaveWithExt( uri, num, manager, type, mFullName1, ext, true ); 
           } else {
             // Log.v("DistoX", "save xsection as c3d");
-            doSaveWithExt( num, manager, type, mFullName3, ext, true ); 
+            doSaveWithExt( uri, num, manager, type, mFullName3, ext, true ); 
           }
         } else {
           if ( PlotType.isProfile( type ) ) {
 	    DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
 	    String fullname2 = mFullName2;
-            doSaveWithExt( num, manager2, mPlot2.type, fullname2, ext, true); 
+            doSaveWithExt( uri, num, manager2, mPlot2.type, fullname2, ext, true); 
           } else if ( type == PlotType.PLOT_PLAN ) {
 	    DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
 	    String fullname1 = mFullName1;
-            doSaveWithExt( num, manager1, mPlot1.type, fullname1, ext, true); 
+            doSaveWithExt( uri, num, manager1, mPlot1.type, fullname1, ext, true); 
           }
         }
       }
@@ -6082,7 +6084,7 @@ public class DrawingWindow extends ItemDrawer
     // ext can be dxf, svg
     // FIXME OK PROFILE
     // used also by SavePlotFileTask
-    void doSaveWithExt( TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
+    void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
       // mActivity = context (only to toast)
@@ -6102,7 +6104,7 @@ public class DrawingWindow extends ItemDrawer
         // Log.v("DistoX-C3D", "saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
         if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0 );
       }
-      new ExportPlotToFile( mActivity, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
+      new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }
 
   // static private Handler th2Handler = null;
@@ -6110,7 +6112,7 @@ public class DrawingWindow extends ItemDrawer
   // called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
   // no backup_rotate (rotate = 0)
   //
-  private void doSaveTh2( long type, final boolean toast )
+  private void doSaveTh2( Uri uri, long type, final boolean toast )
   {
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
     if ( manager == null ) return;
@@ -6133,7 +6135,7 @@ public class DrawingWindow extends ItemDrawer
     }
     final String filename = name;
     // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    // Log.v( "DistoX-SAVE", "save th2: " + filename );
+    Log.v( "DistoX", "save th2: " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -6150,8 +6152,8 @@ public class DrawingWindow extends ItemDrawer
       };
     }
     try { 
-      // Log.v("DistoXX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
-      (new SavePlotFileTask( mActivity, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
+      Log.v("DistoX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
+      (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
   }
 
@@ -6613,15 +6615,30 @@ public class DrawingWindow extends ItemDrawer
       }
   }
 
+  static private int mExportIndex;
+
+  public void doExport( String export_type ) // EXPORT
+  {
+    if ( export_type == null ) return;
+    mExportIndex = TDConst.plotExportIndex( export_type );
+    Log.v("DistoX", "export type " + export_type + " index " + mExportIndex );
+    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    intent.setType("*/*");
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
+  }
+
   /** interface IExporter: export sketch
    * @param export_type    export format
    */
-  public void doExport( String export_type )
+  public void doUriExport( Uri uri ) 
   {
-    // Log.v("DistoX", "Drawing export " + export_type );
-    int index = TDConst.plotExportIndex( export_type );
-    switch ( index ) {
-      case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( mType, true ); break;
+    Log.v("DistoX", "Drawing export index " + mExportIndex );
+    // int mExportIndex = TDConst.plotExportIndex( export_type );
+    switch ( mExportIndex ) {
+      case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( uri, mType, true ); break;
       case TDConst.DISTOX_EXPORT_CSX: 
         if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
@@ -6629,22 +6646,22 @@ public class DrawingWindow extends ItemDrawer
 	    int suffix    = PlotSave.EXPORT;
 	    PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
 	    PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
-            doSaveCsx( origin, psd1, psd2, true );
+            doSaveCsx( uri, origin, psd1, psd2, true );
 	  }
           break;
         } // else fall-through and savePng
-      case TDConst.DISTOX_EXPORT_PNG: savePng( mType ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( mType, "dxf" ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( mType, "svg" ); break;
-      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( mType, "shp" ); break;
-      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( mType, "xvi" ); break;
-      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( mType, "xml" ); break;
+      case TDConst.DISTOX_EXPORT_PNG: savePng( uri, mType ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( uri, mType, "dxf" ); break;
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( uri, mType, "svg" ); break;
+      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( uri, mType, "shp" ); break;
+      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( uri, mType, "xvi" ); break;
+      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( uri, mType, "xml" ); break;
       case TDConst.DISTOX_EXPORT_C3D: 
         // Log.v("DistoX-C3D", "export c3d");
         // if ( ! PlotType.isAnySection( mType ) )
-          saveWithExt( mType, "c3d" );
+          saveWithExt( uri, mType, "c3d" );
         break;
-      case TDConst.DISTOX_EXPORT_PDF: savePdf( mType ); break; 
+      case TDConst.DISTOX_EXPORT_PDF: savePdf( uri, mType ); break; 
     }
   }
 
@@ -7294,6 +7311,14 @@ public class DrawingWindow extends ItemDrawer
           doRecover( filename, type );
         }
         break;
+      case TDRequest.REQUEST_GET_EXPORT:
+        if ( resCode == Activity.RESULT_OK ) {
+          // int index = intent.getIntExtra( "exporttype", -1 );
+          Uri uri = intent.getData();
+          Log.v("DistoX", "Export " + mExportIndex + " uri " + uri.toString() );
+          if ( uri != null ) doUriExport( uri );
+        }
+        break;
     }
   }
 
@@ -7509,7 +7534,7 @@ public class DrawingWindow extends ItemDrawer
     String fullname = TDInstance.survey + "-" + name;
     // Log.v("DistoX-SPLIT", "Split Plot " + paths.size() + " paths: " + name );
     PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, info, fullname, mType, azimuth ) ).execute();
+    (new SavePlotFileTask( mActivity, null, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, info, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager

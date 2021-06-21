@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -498,11 +499,45 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyExportIndex( type );
-    // Log.v("DistoX", "export " + type + " " + index );
+    Log.v("DistoX", "export " + type + " " + index );
     if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
-      TopoDroidApp.doExportDataAsync( getApplicationContext(), index, true );
+      if ( TDInstance.sid < 0 ) {
+        TDToast.makeBad( R.string.no_survey );
+      } else {
+        // TopoDroidApp.doExportDataAsync( getApplicationContext(), index, true );
+        selectExportFromProvider( index );
+      }
+    }
+  }
+
+  private static int mExportType;
+
+  private void selectExportFromProvider( int index ) // EXPORT
+  {
+    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    intent.setType("*/*");
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    mExportType = index;
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_data_title ) ), TDRequest.REQUEST_GET_EXPORT );
+  }
+
+  public void onActivityResult( int request, int result, Intent intent ) 
+  {
+    // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
+    if ( intent == null ) return;
+    // Bundle extras = intent.getExtras();
+    switch ( request ) {
+      case TDRequest.REQUEST_GET_EXPORT:
+        if ( result == Activity.RESULT_OK ) {
+          // int index = intent.getIntExtra( "exporttype", -1 );
+          Uri uri = intent.getData();
+          Log.v("DistoX", "Export " + mExportType + " uri " + uri.toString() );
+          TopoDroidApp.doExportDataAsync( getApplicationContext(), uri, mExportType, true );
+        }
     }
   }
 

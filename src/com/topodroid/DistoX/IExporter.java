@@ -11,8 +11,11 @@
  */
 package com.topodroid.DistoX;
 
+import android.net.Uri;
+
 public interface IExporter 
 {
   void doExport( String type );
+  // void doExport( Uri uri );
 }
 

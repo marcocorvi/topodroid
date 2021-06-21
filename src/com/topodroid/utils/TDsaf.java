@@ -559,7 +559,7 @@ public class TDsaf
   // -------------------------------------------------------------------------------------
   // private methods to get I/O streams or reader/writer from URI
   //
-  static private InputStream docInputStream( Uri uri ) 
+  static public InputStream docInputStream( Uri uri ) 
   {
     // if ( uri == null ) return null;
     try {
@@ -573,7 +573,7 @@ public class TDsaf
     return null;
   }
 
-  static private FileOutputStream docFileOutputStream( Uri uri ) 
+  static public FileOutputStream docFileOutputStream( Uri uri ) 
   {
     // if ( uri == null ) return null;
     try {
@@ -596,7 +596,7 @@ public class TDsaf
     return null;
   }
 
-  static private FileWriter docFileWriter( Uri uri ) 
+  static public FileWriter docFileWriter( Uri uri ) 
   {
     // if ( uri == null ) return null;
     try {

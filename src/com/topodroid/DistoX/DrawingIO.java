@@ -504,11 +504,19 @@ public class DrawingIO
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
+      exportTherion( manager, type, bw, fullname, projname, proj_dir, multisketch );
+    } catch ( IOException e ) {
+      TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
+    }
+  }
+
+  static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, boolean multisketch )
+  {
+    try {
       manager.exportTherion( type, bw, fullname, projname, proj_dir, multisketch );
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
-      TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
     }
   }
 

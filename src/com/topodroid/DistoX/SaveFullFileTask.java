@@ -26,6 +26,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 // import android.os.Bundle;
 // import android.os.Handler;
+import android.net.Uri;
 
 import android.util.Log;
 
@@ -42,10 +43,12 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private PlotSaveData mPsd2 = null;
   private boolean mToast;
   private String mFormat;
+  private Uri mUri;
 
-  SaveFullFileTask( Context context, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename,
+  SaveFullFileTask( Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename,
                     String fullname, String dirname, boolean toast )
   {
+    mUri      = uri;
     mSid      = sid;
     mData     = data;
     mInfo     = info.copy();
@@ -77,7 +80,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     // }
     // return null;
     Log.v("DistoX", "save full file: " + mFullname );
-    int res = TDExporter.exportSurveyAsCsx( mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFullname );
+    int res = TDExporter.exportSurveyAsCsx( mUri, mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFullname );
     return (res == 1)? mFilename : null;
   }
 

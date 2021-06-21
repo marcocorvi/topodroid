@@ -247,10 +247,11 @@ public class MainWindow extends Activity
 
   private void selectImportFromProvider() // IMPORT
   {
-    Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker
+    // Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker ACTION_OPEN_DOCUMENT
+    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
     intent.setType("*/*");
     intent.addCategory(Intent.CATEGORY_OPENABLE);
-    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_CONTENT );
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_IMPORT );
   }
 
   @Override
@@ -1057,7 +1058,7 @@ public class MainWindow extends Activity
         // setBTMenus( DeviceUtil.isAdapterEnabled() );
         updateDisplay( );
         break;
-      case TDRequest.REQUEST_GET_CONTENT:
+      case TDRequest.REQUEST_GET_IMPORT:
         if ( result == Activity.RESULT_OK ) {
           String filename;
           Uri uri = intent.getData();

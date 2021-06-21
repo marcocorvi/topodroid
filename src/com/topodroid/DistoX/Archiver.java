@@ -28,6 +28,7 @@ import java.io.FileInputStream;
 import java.io.BufferedInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
+import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.util.Enumeration;
@@ -182,6 +183,32 @@ public class Archiver
         // TDLog.Error("ZIP compress close error");
       }
     }
+    return ret;
+  }
+
+  public boolean compressFiles( OutputStream os, String subdir, List< String > filenames )
+  {
+    // here zipname is the full absolute zipfile path
+    // Log.v("DistoX", "ZIP-compress files to " + zipdir + " " + zipname );
+    ZipOutputStream zos = null;
+    boolean ret = true;
+    // try {
+      zos = new ZipOutputStream( new BufferedOutputStream( os ) );
+      for ( String filename : filenames ) {
+        // the file.getPath() is the full absolute file path
+        Log.v("DistoX", "ZIP-compress files: add " + subdir + " " + filename );
+        ret &= addEntry( zos, subdir, filename );
+      }
+      // for ( File file : files ) TDFile.deleteFile( file );
+    // } catch ( FileNotFoundException e ) {
+    // } catch ( IOException e ) {
+      // FIXME
+    // } finally {
+      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { 
+        ret = false;
+        // TDLog.Error("ZIP compress close error");
+      }
+    // }
     return ret;
   }
 

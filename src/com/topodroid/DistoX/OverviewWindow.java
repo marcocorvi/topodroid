@@ -14,6 +14,8 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDLocale;
@@ -49,6 +51,8 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 
+import android.app.Activity;
+
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.KeyEvent;
@@ -67,8 +71,10 @@ import android.print.pdf.PrintedPdfDocument;
 import android.graphics.pdf.PdfDocument.Page;
 // import android.graphics.pdf.PdfDocument.PageInfo;
 
+import android.net.Uri;
+
 import java.io.FileOutputStream;
-// import java.io.OutputStream;
+import java.io.OutputStream;
 import java.io.IOException;
 
 import java.util.List;
@@ -648,10 +654,10 @@ public class OverviewWindow extends ItemDrawer
    }
 
    // called only by export menu
-   private void saveWithExt( final String ext )
+   private void saveWithExt( Uri uri, final String ext )
    {
      TDNum num = mNum;
-     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+     // final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // Log.v( "DistoXX", "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
@@ -660,16 +666,17 @@ public class OverviewWindow extends ItemDrawer
        Handler th2Handler = new Handler() {
           @Override public void handleMessage(Message msg) {
             if (msg.what == 661 ) {
-              TDToast.make( String.format( getString(R.string.saved_file_1), (fullname + "." + ext) ) );
+              TDToast.make( String.format( getString(R.string.saved_file_1), "th2" ) );
             } else {
               TDToast.makeBad( R.string.saving_file_failed );
             }
           }
        };
-       // parent can be null because this is user-requested EXPORT
+       // parent is null because this is user-requested EXPORT
+       // fullname is null
        // azimuth = 0
        // rotate  = 0
-       (new SavePlotFileTask( this, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+       (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, "th2", mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
        GeoReference station = null;
        if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
@@ -677,48 +684,83 @@ public class OverviewWindow extends ItemDrawer
         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
        }
        SurveyInfo info = mData.selectSurveyInfo( mSid );
-       // null PlotInfo, null FixedInfo
-       (new ExportPlotToFile( this, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
+       String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+       // null PlotInfo, null FixedInfo, true toast
+       (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
      }
    }
 
+  private static int mExportIndex;
+
+  public void doExport( String export_type ) // EXPORT
+  {
+    if ( export_type == null ) return;
+    mExportIndex = TDConst.plotExportIndex( export_type );
+    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    intent.setType("*/*");
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
+  }
+
+  public void onActivityResult( int request, int result, Intent intent ) 
+  {
+    // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
+    if ( intent == null ) return;
+    // Bundle extras = intent.getExtras();
+    switch ( request ) {
+      case TDRequest.REQUEST_GET_EXPORT:
+        if ( result == Activity.RESULT_OK ) {
+          // int index = intent.getIntExtra( "exporttype", -1 );
+          Uri uri = intent.getData();
+          Log.v("DistoX", "Export " + mExportIndex + " uri " + uri.toString() );
+          doUriExport( uri );
+        }
+      // default:
+      //   super.onActivityResult( request, result, intent );
+    }
+  }
+
   // interface IExporter
-  public void doExport( String export_type )
+  public void doUriExport( Uri uri ) 
   {
     // Log.v("DistoX", "Overview export " + export_type );
-    int index = TDConst.plotExportIndex( export_type );
-    switch ( index ) {
-      case TDConst.DISTOX_EXPORT_TH2: saveWithExt( "th2" ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( "dxf" ); break; 
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( "svg" ); break;
-      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( "shp" ); break;
-      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( "xvi" ); break;
-      case TDConst.DISTOX_EXPORT_PDF: savePdf(); break;
+    // int index = TDConst.plotExportIndex( export_type );
+    switch ( mExportIndex ) {
+      case TDConst.DISTOX_EXPORT_TH2: saveWithExt( uri, "th2" ); break;
+      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( uri, "dxf" ); break; 
+      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( uri, "svg" ); break;
+      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( uri, "shp" ); break;
+      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( uri, "xvi" ); break;
+      case TDConst.DISTOX_EXPORT_PDF: savePdf( uri ); break;
     }
   }
 
   // PDF ------------------------------------------------------------------
-  private void savePdf( ) 
+  private void savePdf( Uri uri ) 
   {
-    final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+    String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
     if ( fullname != null ) {
       DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
-      doSavePdf( manager, fullname );
+      doSavePdf( uri, manager, fullname );
     }
   }
 
   // TODO with background task
-  private void doSavePdf( DrawingCommandManager manager, final String fullname )
+  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
   {
     if ( manager == null ) {
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    TDPath.getPdfDir();
-    String filename = TDPath.getPdfFileWithExt( fullname );
+
+    // TDPath.getPdfDir();
+    // String filename = TDPath.getPdfFileWithExt( fullname );
     // Log.v("DistoX", "Overview PDF export <" + filename + ">");
     try {
-      FileOutputStream fos = new FileOutputStream( filename );
+      // FileOutputStream fos = new FileOutputStream( filename );
+      OutputStream fos = TDsaf.docFileOutputStream( uri );
 
       PrintAttributes.Builder builder = new PrintAttributes.Builder();
       builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );

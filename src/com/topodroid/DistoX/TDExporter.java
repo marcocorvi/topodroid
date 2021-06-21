@@ -29,6 +29,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsaf;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.TDMatrix;
@@ -55,6 +56,8 @@ import com.topodroid.calib.CalibInfo;
 
 import android.util.Log;
 
+import android.net.Uri;
+
 import java.io.File;
 import java.io.StringWriter;
 // import java.io.FileOutputStream;
@@ -63,6 +66,7 @@ import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
 import java.io.PrintWriter;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.io.FileReader;
@@ -245,8 +249,21 @@ public class TDExporter
     return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos;"); 
   }
 
+  static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
+                                   String origin, String surveyname )
+  {
+    // try {
+      // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
+      BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( uri ) );
+      return exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
+    // } catch ( FileNotFoundException e ) {
+    // } catch ( IOException e ) {
+    // }
+    // return 0;
+  }
+
   // @return 1 on success or 0 on error
-  static int exportSurveyAsCsx( long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
+  static int exportSurveyAsCsx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String surveyname )
   {
     // Log.v("DistoX", "export as csurvey: " + file.getName() );
@@ -291,7 +308,7 @@ public class TDExporter
     }
 
     try {
-      BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
+      // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
       PrintWriter pw = new PrintWriter( bw );
       String date = TDUtil.getDateString( "yyyy-MM-dd" );
 
@@ -657,7 +674,7 @@ public class TDExporter
   // ====================================================================================================================================
   // KML export Keyhole Markup Language
   //   NOTE shot flags are ignored
-  static int exportSurveyAsKml( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsKml( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     final String name          = "<name>%s</name>\n";
     final String name2         = "  <name>%s</name>\n";
@@ -696,7 +713,7 @@ public class TDExporter
     // now write the KML
     try {
       // TDLog.Log( TDLog.LOG_IO, "export KML " + file );
-      BufferedWriter bw = TDFile.getMSwriter( "kml", surveyname + ".kml", "text/kml" );
+      // BufferedWriter bw = TDFile.getMSwriter( "kml", surveyname + ".kml", "text/kml" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
@@ -821,7 +838,7 @@ public class TDExporter
   // @param info     survey metadata
   // @param filename file path  
   // @return 1 success, 0 fail
-  static int exportSurveyAsShp( long sid, DataHelper data, SurveyInfo info, String survey )
+  static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
@@ -873,7 +890,9 @@ public class TDExporter
         //   }
         // }
 
-        (new Archiver()).compressFiles( "shp", survey + ".shz", dirname, files );
+        // FIXME
+        // (new Archiver()).compressFiles( "shp", survey + ".shz", dirname, files );
+        (new Archiver()).compressFiles( os, dirname, files );
       }
     } catch ( IOException e ) {
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
@@ -889,7 +908,7 @@ public class TDExporter
   // GEO JASON GeoJSON export
   //   NOTE shot flags are ignored
 
-  static int exportSurveyAsJson( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsJson( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     final String name    = "\"name\": ";
     final String type    = "\"type\": ";
@@ -907,7 +926,7 @@ public class TDExporter
     // now write the GeoJSON
     try {
       // TDLog.Log( TDLog.LOG_IO, "export GeoJSON " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "json", surveyname + ".json", "text/json" );
+      // BufferedWriter bw = TDFile.getMSwriter( "json", surveyname + ".json", "text/json" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("const geojsonObject = {\n");
@@ -977,7 +996,7 @@ public class TDExporter
   // TRACK FILE OZIEXPLORER
   //   NOTE shot flags are ignored
 
-  static int exportSurveyAsPlt( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX", "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false ); // false: ... 
@@ -989,7 +1008,7 @@ public class TDExporter
     // now write the PLT file
     try {
       // TDLog.Log( TDLog.LOG_IO, "export trackfile " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "plt", surveyname + ".plt", "text/plt" );
+      // BufferedWriter bw = TDFile.getMSwriter( "plt", surveyname + ".plt", "text/plt" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("OziExplorer Track Point File Version 2.1\r\n");
@@ -1051,7 +1070,7 @@ public class TDExporter
   // POCKETTOPO EXPORT PocketTopo
   //   NOTE shot flags are ignored
 
-  static int exportSurveyAsTop( long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String surveyname )
+  static int exportSurveyAsTop( OutputStream os, long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String surveyname )
   {
     // Log.v("DistoX", "export as pockettopo: " + file.getName() );
     PTFile ptfile = new PTFile();
@@ -1115,7 +1134,7 @@ public class TDExporter
 
     try {
       // FileOutputStream fos = TDFile.getFileOutputStream( file );
-      OutputStream os = TDFile.getMSoutput( "top", surveyname + ".top", "application/octet-stream" );
+      // OutputStream os = TDFile.getMSoutput( "top", surveyname + ".top", "application/octet-stream" );
       ptfile.write( os );
       os.close();
       return 1;
@@ -1198,9 +1217,9 @@ public class TDExporter
     }
   }
 
-  static int exportSurveyAsTh( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    if ( TDSetting.mTherionConfig ) { // craete thconfig
+    if ( false && TDSetting.mTherionConfig ) { // craete thconfig
       synchronized( TDFile.mFilesLock ) {
         // File dir = TDFile.getFile( TDPath.getThconfigDir() );
         // if ( ! dir.exists() ) dir.mkdirs();
@@ -1245,7 +1264,7 @@ public class TDExporter
     List< CurrentStation > stations = data.getStations( sid );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Therion " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "th", surveyname + ".th", "text/th" );
+      // BufferedWriter bw = TDFile.getMSwriter( "th", surveyname + ".th", "text/th" );
       if ( bw == null ) {
         TDLog.Error("cannot get MS therion file");
         return 0;
@@ -1616,7 +1635,7 @@ public class TDExporter
     writeSurvexEOL( pw );
   }
 
-  static int exportSurveyAsSvx( long sid, DataHelper data, SurveyInfo info, Device device, String surveyname )
+  static int exportSurveyAsSvx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, Device device, String surveyname )
   {
     // Log.v("DistoX", "export as survex: " + file.getName() );
 
@@ -1633,7 +1652,7 @@ public class TDExporter
     // float decl = info.getDeclination(); // DECLINATION not used
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Survex " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "svx", surveyname + ".svx", "text/svx" );
+      // BufferedWriter bw = TDFile.getMSwriter( "svx", surveyname + ".svx", "text/svx" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("; %s created by TopoDroid v %s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -1952,13 +1971,13 @@ public class TDExporter
     }
   }
 
-  static int exportSurveyAsRawCsv( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsRawCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     List< RawDBlock > list = data.selectAllShotsRawData( sid );
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
     try {
-      BufferedWriter bw = TDFile.getMSwriter( "csv", surveyname + ".csv", "text/csv" );
+      // BufferedWriter bw = TDFile.getMSwriter( "csv", surveyname + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
       pw.format("# %s [*] created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
       pw.format("# %s%s", info.name, newline );
@@ -1982,7 +2001,7 @@ public class TDExporter
     }
   }
 
-  static int exportSurveyAsCsv( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsCsv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     char sep = TDSetting.mCsvSeparator;
     String newline = TDSetting.mSurvexEol;
@@ -1996,7 +2015,7 @@ public class TDExporter
     String uas = ( ua < 1.01f )? "degrees" : "grads";
     try {
       // TDLog.Log( TDLog.LOG_IO, "export CSV " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "csv", surveyname + ".csv", "text/csv" );
+      // BufferedWriter bw = TDFile.getMSwriter( "csv", surveyname + ".csv", "text/csv" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s%s", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string(), newline );
@@ -2111,7 +2130,7 @@ public class TDExporter
   // TOPOLINUX EXPORT 
   // commented flag not supported 
 
-  // public String exportSurveyAsTlx( long sid, DataHelper data, SurveyInfo info, String surveyname ) // FIXME args
+  // public String exportSurveyAsTlx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname ) // FIXME args
   // {
   //   File dir = TDFile.getFile( TopoDroidApp.APP_TLX_PATH );
   //   if (!dir.exists()) {
@@ -2122,7 +2141,7 @@ public class TDExporter
   //   checkShotsClino( list );
   //   try {
   //     TDPath.checkPath( filename );
-  //     BufferedWriter bw = TDFile.getMSwriter( "tlx", surveyname + ".tlx", "text/tlx" );
+  //     // BufferedWriter bw = TDFile.getMSwriter( "tlx", surveyname + ".tlx", "text/tlx" );
   //     PrintWriter pw = new PrintWriter( bw );
   //     pw.format("tlx2\n");
   //     pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -2433,14 +2452,14 @@ public class TDExporter
     return ret;
   }
 
-  static int exportSurveyAsDat( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsDat( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX", "export as compass: " + surveyname + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Compass " + surveyname + ".dat");
-      BufferedWriter bw = TDFile.getMSwriter( "dat", surveyname + ".dat", "text/dat" );
+      // BufferedWriter bw = TDFile.getMSwriter( "dat", surveyname + ".dat", "text/dat" );
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
@@ -2584,7 +2603,7 @@ public class TDExporter
     return ret;
   }
 
-  static int exportSurveyAsTrb( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsTrb( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     int trip = 1;
     int code = 1;
@@ -2594,7 +2613,7 @@ public class TDExporter
     char[] line = new char[ TRB_LINE_LENGTH ];
     try {
       // TDLog.Log( TDLog.LOG_IO, "export TopoRobot " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "trb", surveyname + ".trb", "text/trb" );
+      // BufferedWriter bw = TDFile.getMSwriter( "trb", surveyname + ".trb", "text/trb" );
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
@@ -2824,14 +2843,14 @@ public class TDExporter
     }
   }
 
-  static int exportSurveyAsSur( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX", "export as winkarst: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export WinKarst " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "sur", surveyname + ".sur", "text/sur" );
+      // BufferedWriter bw = TDFile.getMSwriter( "sur", surveyname + ".sur", "text/sur" );
       PrintWriter pw = new PrintWriter( bw );
   
       // FIXME 
@@ -2954,12 +2973,12 @@ public class TDExporter
     return 5;
   }
 
-  static int exportSurveyAsGtx( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsGtx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     String date = info.date.replace( '.', '-' );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export GHTopo " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "gtx", surveyname + ".gtx", "text/gtx" );
+      // BufferedWriter bw = TDFile.getMSwriter( "gtx", surveyname + ".gtx", "text/gtx" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
@@ -3125,11 +3144,11 @@ public class TDExporter
     pw.format("0.00 0.00 0.00\n");
   }
 
-  static int exportSurveyAsGrt( long sid, DataHelper data, SurveyInfo info, String name )
+  static int exportSurveyAsGrt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Grottolf " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "grt", name + ".grt", "text/grt" );
+      // BufferedWriter bw = TDFile.getMSwriter( "grt", name + ".grt", "text/grt" );
       PrintWriter pw = new PrintWriter( bw );
   
       pw.format("%s\n", info.name );
@@ -3230,7 +3249,7 @@ public class TDExporter
     }
   }
  
-  static int exportSurveyAsSrv( long sid, DataHelper data, SurveyInfo info, String name )
+  static int exportSurveyAsSrv( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String name )
   {
     // Log.v("DistoX", "export as walls: " + file.getName() );
     float ul = TDSetting.mUnitLength;
@@ -3240,7 +3259,7 @@ public class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Walls " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "srv", name + ".srv", "text/srv" );
+      // BufferedWriter bw = TDFile.getMSwriter( "srv", name + ".srv", "text/srv" );
       PrintWriter pw = new PrintWriter( bw );
   
       pw.format("; %s\n", info.name );
@@ -3486,7 +3505,7 @@ public class TDExporter
     return extend;
   }
 
-  static int exportSurveyAsCav( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsCav( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX", "export as topo: " + file.getName() );
     String eol = TDSetting.mSurvexEol;
@@ -3494,7 +3513,7 @@ public class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Topo " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "cav", surveyname + ".cav", "text/cav" );
+      // BufferedWriter bw = TDFile.getMSwriter( "cav", surveyname + ".cav", "text/cav" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("#cave %s%s", info.name, eol );
@@ -3633,7 +3652,7 @@ public class TDExporter
     printPolygonEOL( pw );
   }
  
-  static int exportSurveyAsPlg( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsPlg( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX-POLYGON", "polygon " + file.getName() );
     float ul = 1; // TDSetting.mUnitLength;
@@ -3643,7 +3662,7 @@ public class TDExporter
 
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Polygon " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "cave", surveyname + ".cave", "text/cave" );
+      // BufferedWriter bw = TDFile.getMSwriter( "cave", surveyname + ".cave", "text/cave" );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("POLYGON Cave Surveying Software"); printPolygonEOL( pw );
@@ -3858,13 +3877,13 @@ public class TDExporter
   // NOTE declination is taken into account in DXF export (used to compute num)
   // NOTE shot flags are not supported
 
-  static int exportSurveyAsDxf( long sid, DataHelper data, SurveyInfo info, TDNum num, String surveyname )
+  static int exportSurveyAsDxf( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, TDNum num, String surveyname )
   {
     // Log.v("DistoX", "export as DXF: " + file.getName() );
     // Log.v( TAG, "export SurveyAsDxf " + file.getName() );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export DXF " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "dxf", surveyname + ".dxf", "text/dxf" );
+      // BufferedWriter bw = TDFile.getMSwriter( "dxf", surveyname + ".dxf", "text/dxf" );
       PrintWriter out = new PrintWriter( bw );
       // TODO
       out.printf(Locale.US, "999\nDXF created by TopoDroid v %s - %s ", TDVersion.string(), TDUtil.getDateString("yyyy.MM.dd") );
@@ -4081,7 +4100,7 @@ public class TDExporter
     // return true;
   }
 
-  static int exportSurveyAsTro( long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // Log.v("DistoX", "export as visualtopo: " + file.getName() );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -4089,7 +4108,7 @@ public class TDExporter
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export VisualTopo " + file.getName() );
-      BufferedWriter bw = TDFile.getMSwriter( "tro", surveyname + ".tro", "text/tro" );
+      // BufferedWriter bw = TDFile.getMSwriter( "tro", surveyname + ".tro", "text/tro" );
       PrintWriter pw = new PrintWriter( bw );
 
       StringWriter sw = new StringWriter();

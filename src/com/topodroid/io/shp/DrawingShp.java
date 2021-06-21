@@ -36,7 +36,8 @@ import android.util.Log;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.io.File;
+// import java.io.File;
+import java.io.OutputStream;
 import java.io.IOException;
 
 public class DrawingShp
@@ -46,7 +47,7 @@ public class DrawingShp
   // @param type       sketch type
   // @param station    WGS84 data of the sketch origin 
   // @return true if successful
-  public static boolean writeShp( String filename, DrawingCommandManager plot, long type, GeoReference station )
+  public static boolean writeShp( OutputStream fos, String filename, DrawingCommandManager plot, long type, GeoReference station )
   {
     Log.v("DistoX", "SHP write " + filename );
     double xoff = 0;
@@ -128,7 +129,8 @@ public class DrawingShp
       ShpStation shp_station = new ShpStation( dirname, "station", files );
       shp_station.writeStations( stations, xoff, yoff, xscale, yscale, cd, sd );
 
-      (new Archiver()).compressFiles( "shp", filename + ".shz", dirname, files );
+      // (new Archiver()).compressFiles( "shp", filename + ".shz", dirname, files );
+      (new Archiver()).compressFiles( fos, dirname, files );
 
     } catch ( IOException e ) {
       TDLog.Error( "SHP io-exception " + e.getMessage() );

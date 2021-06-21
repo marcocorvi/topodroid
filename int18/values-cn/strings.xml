@@ -201,6 +201,9 @@ Tap "Close" not to take any action.
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>
+    <!-- TODO string name="export_data_title">Data export</string -->
+    <!-- TODO string name="export_plot_title">Sketch export</string -->
+    <!-- TODO string name="export_overview_title">Overview export</string -->
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">测量已导入</string>
     <string name="import_bad">无效的输入文件</string>

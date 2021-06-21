@@ -20,7 +20,8 @@ public class TDRequest
   public static final int REQUEST_DEVICE    = 5; 
   // public static final int QCAM_COMPASS_DRAWWINDOW  = 6;
   public static final int PLOT_RELOAD = 7;
-  public static final int REQUEST_GET_CONTENT = 8;
+  public static final int REQUEST_GET_IMPORT = 8;
+  public static final int REQUEST_GET_EXPORT = 9;
 
   public static final int REQUEST_TDCONFIG = 10;
   public static final String TDCONFIG_PATH = "TdManagerConfig";

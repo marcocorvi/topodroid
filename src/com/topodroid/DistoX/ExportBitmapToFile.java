@@ -12,7 +12,8 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsaf;
 
 import android.util.Log;
 
@@ -25,6 +26,7 @@ import android.os.AsyncTask;
 // import android.os.Handler;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
+import android.net.Uri;
 
 class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean> 
 {
@@ -34,9 +36,11 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     private String filename = null;
     private boolean mToast;
     private String  mFormat;
+    private Uri     mUri;
 
-    ExportBitmapToFile( String format, Bitmap bitmap, float scale, String name, boolean toast )
+    ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
+       mUri      = uri;
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
@@ -55,6 +59,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     boolean exec()
     {
       try {
+        /*
         // File temp = File.createTempFile( "tmp", ".png", TDFile.getFile( TDPath.getPngFile("") ) );
         File dir = TDPath.getPngDir();
         if ( dir == null ) return false;
@@ -62,13 +67,17 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         // File temp = File.createTempFile( "tmp", ".png" );
         // Log.v("DistoX", "temp file <" + temp.getPath() + ">" );
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
+        */
+        FileOutputStream out = TDsaf.docFileOutputStream( mUri );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();
 
+        /*
         filename = TDPath.getPngFileWithExt( mFullName );
         TDPath.checkPath( filename );
         TDFile.renameTempFile( temp, filename );
+        */
         return true;
       } catch (Exception e) {
         e.printStackTrace();

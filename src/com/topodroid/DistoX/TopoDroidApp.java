@@ -87,7 +87,7 @@ import android.content.res.Configuration;
 
 // import android.content.Intent;
 // import android.content.ActivityNotFoundException;
-// import android.net.Uri;
+import android.net.Uri;
 
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -1515,7 +1515,7 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
-  static void exportSurveyAsCsxAsync( Context context, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+  static void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
     SurveyInfo info = getSurveyInfo();
     if ( info == null ) {
@@ -1528,7 +1528,7 @@ public class TopoDroidApp extends Application
     String filename = TDPath.getSurveyCsxFile( fullname );
     TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
     // Log.v("DistoX-SAVE", "exporting as CSX " + filename );
-    (new SaveFullFileTask( context, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, 
+    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, 
        TDPath.getCsxFile(""), toast )).execute();
   }
 
@@ -2377,19 +2377,16 @@ public class TopoDroidApp extends Application
 
   // ==================================================================
   
-  // called by ShotWindow and SurveyWindow on export
-  static void doExportDataAsync( Context context, int exportType, boolean toast )
+  // called by (ShotWindow and) SurveyWindow on export
+  static boolean doExportDataAsync( Context context, Uri uri, int exportType, boolean toast )
   {
-    if ( exportType < 0 ) return;
-    if ( TDInstance.sid < 0 ) {
-      if ( toast ) TDToast.makeBad( R.string.no_survey );
-    } else {
-      SurveyInfo info = getSurveyInfo( );
-      if ( info == null ) return;
-      TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
-      String format = context.getResources().getString(R.string.saved_file_1);
-      (new SaveDataFileTask( format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
-    }
+    if ( exportType < 0 ) return false; // extra safety
+    SurveyInfo info = getSurveyInfo( );
+    if ( info == null ) return false;
+    TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
+    String format = context.getResources().getString(R.string.saved_file_1);
+    (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
+    return true;
   }
 
   // called by zip archiver to export survey data before zip archive if TDSetting.mExportShotFormat >= 0

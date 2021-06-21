@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsaf;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -22,6 +23,7 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import java.io.File;
+import java.io.BufferedWriter;
 
 import java.util.List;
 
@@ -31,6 +33,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 // import android.os.Bundle;
 import android.os.Handler;
+import android.net.Uri;
 
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
@@ -54,13 +57,15 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private String origin = null;
   private PlotSaveData psd1 = null;
   private PlotSaveData psd2 = null;
+  private Uri mUri;
 
-  SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
+  SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    // DrawingUtil util, 
 		    DrawingCommandManager manager, PlotInfo info,
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
+     mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
@@ -77,7 +82,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
-     // Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
+     Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
      // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
      //   // Log.v("DistoX", "auto export CSX");
@@ -87,12 +92,13 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // }
   }
 
-  SavePlotFileTask( Context context, DrawingWindow parent, Handler handler,
+  SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
                     // TopoDroidApp app,
 		    TDNum num,
 		    List< DrawingPath > paths, PlotInfo info,
                     String fullname, long type, int proj_dir )
   {
+     mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
@@ -107,7 +113,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [2] " + mFullName + " type " + mType );
-     // Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
+     Log.v( "DistoX", "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
   @Override
@@ -120,14 +126,16 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     // Log.v( "DistoX", "save plot file task bkgr start");
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
-      // Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
+      Log.v("DistoX", "save scrap files " + mFullName + " suffix " + mSuffix );
 
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
-        // Log.v("DistoXX", "save plot Therion file EXPORT " + mFullName );
+        Log.v("DistoX", "save plot Therion file EXPORT " + mFullName );
         if ( mManager != null ) {
-          File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-          DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+          // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
+          // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+          BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+          DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         // // Log.v("DistoXX", "save plot Therion file SAVE " + mFullName );
@@ -192,15 +200,17 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         //     break;
         // }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
-        // Log.v("DistoXX", "save plot Therion file OVERVIEW " + mFullName );
-        File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-        DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+        Log.v("DistoX", "save plot Therion file OVERVIEW " + mFullName );
+        // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
+        // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+        BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
 	return true;
       }
       
       // second pass: save
       if ( mSuffix != PlotSave.EXPORT ) {
-        // Log.v("DistoXX", "save plot not-EXPORT");
+        Log.v("DistoX", "save plot not-EXPORT");
         assert( mInfo != null );
 
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;

@@ -397,7 +397,8 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
       int top = childPosition[1];
       int bottom = top + child.getHeight();
       viewRect.set(left, top, right, bottom);
-      return viewRect.contains((int) e.getRawX(), (int) e.getRawY());
+      // return viewRect.contains((int) e.getRawX(), (int) e.getRawY());
+      return viewRect.contains((int) e.getX(), (int) e.getY());
     }
   };
 }
