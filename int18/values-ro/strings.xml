@@ -951,6 +951,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <!-- TODO string name="export_stations">Stations</string -->
     <!-- TODO string name="export_swap_lr">Swap L/R</string -->
+    <!-- TODO string name="export_trox">Trox format</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
@@ -972,6 +973,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <!-- TODO string name="import_functional">Import only functional settings</string -->
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">Importă LRUD(măs. laterale)</string>
     <string name="import_leg_first">Viză înaintea radierilor LRUD</string>
     <string name="import_diving_datamode">Mod scufundare</string>
@@ -1166,6 +1168,8 @@ Tap "Close" not to take any action.
   <string name="pref_vtopo_splays_summary">Exportă radieri în fișiere VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD la punctul de stație</string>
   <string name="pref_vtopo_lrud_summary">LRUD VisualTopo la punctule de stație</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot nume stații</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Numele stațiilor sunt în stil TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Unghi radieri LRUD</string>

@@ -975,6 +975,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>
     <string name="export_swap_lr">Bal/Jobb megcserélése</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
 
@@ -996,6 +997,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="playing">Lejátszás %1$s</string -->
   
     <string name="import_functional">Csak a funkcionális beállítások betöltése</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">Import BJFL</string>
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
@@ -1201,6 +1203,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_vtopo_splays_summary">Segédmérések exportja a VisualTopo fájlokba</string>
   <string name="pref_vtopo_lrud_title">BJFL a kezdőpontnál</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo BJFL a kezdőpontnál</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot pontnevek</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>

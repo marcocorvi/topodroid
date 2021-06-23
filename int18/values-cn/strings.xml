@@ -966,6 +966,7 @@ Tap "Close" not to take any action.
     <string name="export_splays_named">辐测名称</string>
     <string name="export_stations">测量点</string>
     <string name="export_swap_lr">左右交换 L/R</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Xvi 图像</string>
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
@@ -987,6 +988,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">只导入功能设置</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">输入 左右上下</string>
     <string name="import_leg_first">主线在左右上下侧线之前</string>
     <string name="import_diving_datamode">潜水数据模式</string>
@@ -1186,6 +1188,8 @@ Tap "Close" not to take any action.
   <string name="pref_vtopo_splays_summary">在VisualTopo文件中输出侧线</string>
   <string name="pref_vtopo_lrud_title">左右上下 来自 &#8230;</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo的左右上下来自站点</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">左右上下辐测角度</string>

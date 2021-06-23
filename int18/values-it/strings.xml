@@ -970,6 +970,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="export_splays_named">Splay con nome</string>
     <string name="export_stations">Capisaldi</string>
     <string name="export_swap_lr">Scambia L/R</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
 
@@ -991,6 +992,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">Importa solo impostazioni funzionali</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">Importa LRUD</string>
     <string name="import_leg_first">Battuta prima degli LRUD</string>
     <string name="import_diving_datamode">Modo dati da immersione</string>
@@ -1191,6 +1193,8 @@ Tap <b>Chiudi</b> per fare nulla.
   <string name="pref_vtopo_splays_summary">Esporta splay in VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD al DA</string>
   <string name="pref_vtopo_lrud_summary">LRUD VisualTopo al caposaldo DA</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">Nomi capisaldi TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">I nomi capisaldi sono in stile TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angolo di splay di tipo LRUD</string>

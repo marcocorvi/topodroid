@@ -949,6 +949,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <string name="export_stations">Stations</string>
     <string name="export_swap_lr">Échanger G/D</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
 
@@ -970,6 +971,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <!-- UNUSED string name="playing">Ecouter %1$s</string -->
   
     <string name="import_functional">Importer uniquement les paramètres fonctionnels</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">Importer LRUD</string>
     <string name="import_leg_first">Import du cheminement avant les visées d\'habillage LRUD</string>
     <string name="import_diving_datamode">Mode de données plongée</string>
@@ -1160,6 +1162,8 @@ Appuyez sur "Fermer" pour ne rien modifier.
   <string name="pref_vtopo_splays_summary">Exporter les visées latérales d\'habillage dans le fichier VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD à la station DEPUIS</string>
   <string name="pref_vtopo_lrud_summary">Visées LRUD associées à la sation DEPUIS dans VisualTopo</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">Noms stations TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Les noms de station sont de style TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Angle visée chem. LRUD</string>

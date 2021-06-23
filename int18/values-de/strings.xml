@@ -967,6 +967,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="export_splays_named">Benannte Hilfslinien</string>
     <string name="export_stations">Messpunkte</string>
     <string name="export_swap_lr">L/R vertauschen</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Xvi Bilder</string>
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
@@ -988,6 +989,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">Importiere nur vorhandene Einstellungen</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">LRUD importieren</string>
     <string name="import_leg_first">Messzug vor LRUD</string>
     <string name="import_diving_datamode">Tauchmodus</string>
@@ -1182,6 +1184,8 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
   <string name="pref_vtopo_splays_summary">Hilfszüge exportieren (VisualTopo)</string>
   <string name="pref_vtopo_lrud_title">VisualTopo: LRUD von Quellstation</string>
   <string name="pref_vtopo_lrud_summary">LRUD exportieren (VisualTopo)</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Namen</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Stationen wie in TopoRobot benennen</string -->
   <string name="pref_ortho_lrud_title">Min. Winkel für LRUD</string>

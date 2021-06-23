@@ -973,6 +973,7 @@ Tap "Close" not to take any action.
     <string name="export_splays_named">Pomenované pomocné zámery</string>
     <string name="export_stations">Staničenia</string>
     <string name="export_swap_lr">Vymeniť L/R</string>
+    <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Xvi obrázky</string>
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
 
@@ -994,6 +995,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">Import - Iba Funkčné Nastavenia</string>
+    <!-- TODO string name="import_trox">Trox file format</string -->
     <string name="import_lrud">Importovanie LRUD</string>
     <string name="import_leg_first">Hlavné zámery pred LRUD pomocnými zámerami</string>
     <string name="import_diving_datamode">Potápačský mód</string>
@@ -1199,6 +1201,8 @@ Tap "Close" not to take any action.
   <string name="pref_vtopo_splays_summary">Exportuje pomocné zámery do programu VisualTopo</string>
   <string name="pref_vtopo_lrud_title">LRUD na Počiatočnom Bode</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo LRUD na Počiatočnom Bode (staničení)</string>
+  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
+  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD uhol pomocnej zámery</string>

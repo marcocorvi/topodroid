@@ -13,6 +13,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.MainWindow;
 
@@ -68,6 +69,7 @@ public class ImportTroDialog extends MyDialog
     mCBlrud = (CheckBox) findViewById( R.id.tro_lrud );
     mCBleg  = (CheckBox) findViewById( R.id.tro_leg_first );
     mCBtrox = (CheckBox) findViewById( R.id.tro_trox );
+    mCBtrox.setChecked( TDSetting.mVTopoTrox );
 
     mBtnOK     = (Button) findViewById(R.id.tro_ok);
     mBtnCancel = (Button) findViewById(R.id.tro_cancel);
