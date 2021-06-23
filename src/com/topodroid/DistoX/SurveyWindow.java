@@ -565,7 +565,7 @@ public class SurveyWindow extends Activity
     }
      * FIXME_SKETCH_3D */
 
-    TDPath.deleteSurveyOverviewFiles( survey );
+    // TDPath.deleteSurveyOverviewFiles( survey );
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id

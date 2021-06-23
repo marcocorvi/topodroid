@@ -26,12 +26,14 @@ public class ImportVisualTopoTask extends ImportTask
 {
   private boolean mLrud;
   private boolean mLegFirst;
+  private boolean mTrox;
 
-  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, boolean lrud, boolean leg_first )
+  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, boolean lrud, boolean leg_first, boolean trox )
   {
     super( main, isr );
     mLrud = lrud;
     mLegFirst = leg_first;
+    mTrox = trox;
   }
 
   @Override
@@ -39,7 +41,12 @@ public class ImportVisualTopoTask extends ImportTask
   {
     long sid = 0;
     try {
-      ParserVisualTopo parser = new ParserVisualTopo( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
+      ImportParser parser = null;
+      if ( mTrox ) {
+        parser = new ParserVisualTopoX( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
+      } else {
+        parser = new ParserVisualTopo( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
+      }
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {

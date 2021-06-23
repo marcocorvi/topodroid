@@ -17,6 +17,12 @@
     android:layout_marginTop="@dimen/margintiny"
   />
 
+  <CheckBox android:id="@+id/tro_trox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/import_trox"
+    />
+
   <CheckBox android:id="@+id/tro_lrud"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 

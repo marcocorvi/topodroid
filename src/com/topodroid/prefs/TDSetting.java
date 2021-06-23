@@ -177,6 +177,7 @@ public class TDSetting
   public static boolean mCompassSplays = true;  // whether to add splays to Compass export
   public static boolean mVTopoSplays = true;    // whether to add splays to VisualTopo export
   public static boolean mVTopoLrudAtFrom = false; 
+  public static boolean mVTopoTrox = false; 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
   public static float   mToSvg     = 0.94488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100
   public static float   mToTherion = THERION_SCALE / 100;
@@ -901,6 +902,7 @@ public class TDSetting
     String[] defExpTro = TDPrefKey.EXPORT_TROdef;
     mVTopoSplays       = prefs.getBoolean(     keyExpTro[0], bool(defExpTro[0]) ); // DISTOX_VTOPO_SPLAYS
     mVTopoLrudAtFrom   = prefs.getBoolean(     keyExpTro[1], bool(defExpTro[1]) ); // DISTOX_VTOPO_LRUD
+    mVTopoTrox         = prefs.getBoolean(     keyExpTro[2], bool(defExpTro[2]) ); // DISTOX_VTOPO_TROX
 
     String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
     String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
@@ -1727,9 +1729,11 @@ public class TDSetting
     String[] key = TDPrefKey.EXPORT_TRO;
     String[] def = TDPrefKey.EXPORT_TROdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_VTOPO_SPLAYS (bool)
-      mVTopoSplays        = tryBooleanValue( hlp, k, v, bool(def[ 0]) );   
+      mVTopoSplays     = tryBooleanValue( hlp, k, v, bool(def[ 0]) );   
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_VTOPO_LRUD (bool)
-      mVTopoLrudAtFrom    = tryBooleanValue( hlp, k, v, bool(def[ 1]) );   
+      mVTopoLrudAtFrom = tryBooleanValue( hlp, k, v, bool(def[ 1]) );   
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_VTOPO_TROX (bool)
+      mVTopoTrox       = tryBooleanValue( hlp, k, v, bool(def[ 2]) );   
     } else {
       TDLog.Error("missing EXPORT TRO key: " + k );
     }
@@ -2557,7 +2561,7 @@ public class TDSetting
       String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
-      pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom) ); 
+      pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c, trox %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom), tf(mVTopoTrox) ); 
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f, cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %.2f \n",
         tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mToTherion );
@@ -2798,8 +2802,9 @@ public class TDSetting
         }
         if ( line.startsWith("VisualTopo") ) {
           if ( vals.length > 4 ) {
-            mVTopoSplays = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_VTOPO_SPLAYS", mVTopoSplays );
-            mVTopoLrudAtFrom = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_VTOPO_LRUD", mVTopoLrudAtFrom );
+            mVTopoSplays     = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_VTOPO_SPLAYS", mVTopoSplays );
+            mVTopoLrudAtFrom = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_VTOPO_LRUD",   mVTopoLrudAtFrom );
+            mVTopoTrox       = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_VTOPO_TROX",   mVTopoTrox );
           }
           continue;
         }

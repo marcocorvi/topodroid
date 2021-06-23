@@ -601,8 +601,8 @@ public class Archiver
 	  // * END_SKETCH_3D */
           } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
             pathname = TDPath.getTdrFile( ze.getName() );
-          } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
-            pathname = TDPath.getTdr3File( ze.getName() );
+          // } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
+          //   pathname = TDPath.getTdr3File( ze.getName() );
 
           // } else if ( ze.getName().endsWith( TDPath.TRB ) ) {
           //   pathname = TDPath.getTrbFile( ze.getName() );
@@ -742,8 +742,8 @@ public class Archiver
             sql = true;
           } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
             pathname = TDPath.getTdrFile( ze.getName() );
-          } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
-            pathname = TDPath.getTdr3File( ze.getName() );
+          // } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
+          //   pathname = TDPath.getTdr3File( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
             pathname = TDPath.getNoteFile( ze.getName() );
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS

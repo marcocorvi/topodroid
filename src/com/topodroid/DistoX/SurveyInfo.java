@@ -34,7 +34,7 @@ public class SurveyInfo
 
   public long id;
   public String name;
-  public String date;
+  public String date;  // YYYY.MM.DD
   String team;
   float  declination;
   String comment;

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2015
  *
- * @brief TopoDroid VisualTopo parser
+ * @brief TopoDroid VisualTopo tro parser
  *
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later

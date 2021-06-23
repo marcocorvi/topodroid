@@ -432,53 +432,60 @@ public class MainWindow extends Activity
     new ImportCompassTask( this, isr, datamode, lrud, leg_first ).execute( filepath );
   }
 
-  public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first )
+  public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first, boolean trox )
   {
     setTitleImport();
-    new ImportVisualTopoTask( this, isr, lrud, leg_first ).execute( filepath );
+    new ImportVisualTopoTask( this, isr, lrud, leg_first, trox ).execute( filepath );
   }
 
-  public void importFile( String filename )
+  // public void importFile( String filename )
+  // {
+  //   Log.v("DistoX", "import file " + filename );
+  //   // FIXME connect-title string
+  //   if ( filename.toLowerCase().endsWith(".th") ) {
+  //     String filepath = TDPath.getImportFile( filename );
+  //     String name = filename.replace(".th", "" ).replace(".TH", "");
+  //     if ( mApp_mData.hasSurveyName( name ) ) {
+  //       TDToast.makeBad(R.string.import_already );
+  //       return;
+  //     }
+  //     // TDToast.make( R.string.import_wait );
+  //     setTitleImport();
+  //     new ImportTherionTask( this, null ).execute( filepath, name );  // null FileReader
+  //   } else if ( filename.toLowerCase().endsWith(".dat") ) {
+  //     String filepath = TDPath.getImportFile( filename );
+  //     (new ImportDatDialog( this, this, null, filepath )).show();
+  //     // new ImportCompassTask( this ).execute( filepath );
+  //   } else if ( filename.toLowerCase().endsWith(".top") ) {
+  //     String filepath = TDPath.getImportFile( filename );
+  //     setTitleImport();
+  //     new ImportPocketTopoTask( this, null ).execute( filepath, filename ); // TODO pass the drawer as arg
+  //   } else if ( filename.toLowerCase().endsWith(".tro") ) {
+  //     String filepath = TDPath.getImportFile( filename );
+  //     (new ImportTroDialog( this, this, null, filepath )).show();
+  //   } else if ( filename.toLowerCase().endsWith(".svx") ) {
+  //     String filepath = TDPath.getImportFile( filename );
+  //     setTitleImport();
+  //     new ImportSurvexTask( this, null ).execute( filepath ); 
+  //   } else if ( filename.toLowerCase().endsWith(".csn") ) { // CaveSniper text file
+  //     String filepath = TDPath.getImportFile( filename );
+  //     new ImportCaveSniperTask( this, null ).execute( filepath ); 
+  //     setTitleImport();
+  //   } else if ( filename.toLowerCase().endsWith(".zip") ) {
+  //     // TDToast.makeLong( R.string.import_zip_wait );
+  //     setTitleImport();
+  //     new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
+  //   // } else {
+  //   //   setTheTitle( );
+  //   }
+  //   // FIXME SYNC updateDisplay();
+  // }
+
+  public void importZipFile( String filename )
   {
-    Log.v("DistoX", "import file " + filename );
-    // FIXME connect-title string
-    if ( filename.toLowerCase().endsWith(".th") ) {
-      String filepath = TDPath.getImportFile( filename );
-      String name = filename.replace(".th", "" ).replace(".TH", "");
-      if ( mApp_mData.hasSurveyName( name ) ) {
-        TDToast.makeBad(R.string.import_already );
-        return;
-      }
-      // TDToast.make( R.string.import_wait );
-      setTitleImport();
-      new ImportTherionTask( this, null ).execute( filepath, name );  // null FileReader
-    } else if ( filename.toLowerCase().endsWith(".dat") ) {
-      String filepath = TDPath.getImportFile( filename );
-      (new ImportDatDialog( this, this, null, filepath )).show();
-      // new ImportCompassTask( this ).execute( filepath );
-    } else if ( filename.toLowerCase().endsWith(".top") ) {
-      String filepath = TDPath.getImportFile( filename );
-      setTitleImport();
-      new ImportPocketTopoTask( this, null ).execute( filepath, filename ); // TODO pass the drawer as arg
-    } else if ( filename.toLowerCase().endsWith(".tro") ) {
-      String filepath = TDPath.getImportFile( filename );
-      (new ImportTroDialog( this, this, null, filepath )).show();
-    } else if ( filename.toLowerCase().endsWith(".svx") ) {
-      String filepath = TDPath.getImportFile( filename );
-      setTitleImport();
-      new ImportSurvexTask( this, null ).execute( filepath ); 
-    } else if ( filename.toLowerCase().endsWith(".csn") ) { // CaveSniper text file
-      String filepath = TDPath.getImportFile( filename );
-      new ImportCaveSniperTask( this, null ).execute( filepath ); 
-      setTitleImport();
-    } else if ( filename.toLowerCase().endsWith(".zip") ) {
-      // TDToast.makeLong( R.string.import_zip_wait );
-      setTitleImport();
-      new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
-    // } else {
-    //   setTheTitle( );
-    }
-    // FIXME SYNC updateDisplay();
+    if ( ! filename.toLowerCase().endsWith(".zip") ) return;
+    setTitleImport();
+    new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
   }
  
   // @param fis    file input stream
@@ -510,7 +517,7 @@ public class MainWindow extends Activity
       new ImportTherionTask( this, isr ).execute( name, name );
     } else if ( type.equals(".dat") ) {
       (new ImportDatDialog( this, this, isr, name )).show();
-    } else if ( type.equals(".tro") ) {
+    } else if ( type.equals(".tro") || type.equals(".trox") ) {
       setTitleImport();
       (new ImportTroDialog( this, this, isr, name )).show();
     } else if ( type.equals(".svx") ) {

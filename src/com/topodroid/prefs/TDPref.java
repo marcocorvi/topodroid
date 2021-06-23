@@ -687,7 +687,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.EXPORT_TROdef;
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], A, def[0], ctx, hlp ),
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp )
+      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1], ctx, hlp ),
+      makeCbx( cat, key[2], tit[2], dsc[2], B, def[2], ctx, hlp )
     };
   }
 

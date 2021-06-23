@@ -35,9 +35,9 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private long mSid;
   private DataHelper mData;
   private SurveyInfo mInfo;
-  private String mFilename;
+  // private String mFilename;
   private String mFullname;
-  private String mDirname;
+  // private String mDirname;
   private String mOrigin = null;
   private PlotSaveData mPsd1 = null;
   private PlotSaveData mPsd2 = null;
@@ -45,16 +45,16 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private String mFormat;
   private Uri mUri;
 
-  SaveFullFileTask( Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String filename,
-                    String fullname, String dirname, boolean toast )
+  SaveFullFileTask( Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, // String filename,
+                    String fullname, /* String dirname, */ boolean toast )
   {
     mUri      = uri;
     mSid      = sid;
     mData     = data;
     mInfo     = info.copy();
-    mFilename = filename;
+    // mFilename = filename;
     mFullname = fullname;
-    mDirname  = dirname;
+    // mDirname  = dirname;
     mOrigin   = origin;
     mPsd1     = psd1;
     mPsd2     = psd2;
@@ -81,7 +81,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     // return null;
     Log.v("DistoX", "save full file: " + mFullname );
     int res = TDExporter.exportSurveyAsCsx( mUri, mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFullname );
-    return (res == 1)? mFilename : null;
+    return (res == 1)? mFullname : null;
   }
 
   @Override
@@ -89,7 +89,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   {
     // Log.v( "DistoX", "save plot file task post exec");
     if ( filename == null ) {
-      TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFilename );
+      TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFullname );
       if ( mToast ) TDToast.make( R.string.saving_file_failed );
     } else {
       TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );

@@ -1,12 +1,12 @@
-/* @file TDExporter.java
+/* @file tdexporter.java
  *
  * @author marco corvi
  * @date jan 2014
  *
- * @grief TopoDroid exports
+ * @grief topodroid exports
  * --------------------------------------------------------
- *  Copyright This software is distributed under GPL-3.0 or later
- *  See the file COPYING.
+ *  copyright this software is distributed under gpl-3.0 or later
+ *  see the file copying.
  * --------------------------------------------------------
  * formats
  *   cSurvey
@@ -4059,6 +4059,21 @@ public class TDExporter
     return true;
   }
 
+  static private boolean printStartShotToTrox( PrintWriter pw, DBlock item, List< DBlock > list ) // , int ref, int suiv )
+  {
+    if ( item == null ) return false;
+    LRUD lrud = computeLRUD( item, list, ! TDSetting.mVTopoLrudAtFrom ); // default: mVTopoLrudAtFrom = false
+    String station = TDSetting.mVTopoLrudAtFrom ? item.mTo : item.mFrom;
+    pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" Long=\"0.00\" Az=\"0.0\" Pte=\"0.0\" ", station, station );
+    pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
+    // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      // pw.format(" ;%s", item.mComment );
+    }
+    pw.format("/>\r\n");
+    return true;
+  }
+
   static private void printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud )
   {
     if ( item == null ) return; // false;
@@ -4073,7 +4088,24 @@ public class TDExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
-    // return true;
+  }
+
+  static private void printShotToTrox( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud ) // , int ref, int suiv )
+  {
+    if ( item == null ) return; // false;
+    // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
+    pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", leg.length(), leg.bearing(), leg.clino() );
+    leg.reset();
+    pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
+    // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
+    if ( item.isDuplicate() ) pw.format("Exc=\"E\" ");
+    // if ( surface ) pw.forma(" #|S#");
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format("/><Commentaire>%s</Commentaire></Visee>\r\n", item.mComment );
+    } else {
+      pw.format("/>\r\n");
+    }
   }
 
   static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct )
@@ -4097,7 +4129,31 @@ public class TDExporter
       pw.format(" ;%s", item.mComment );
     }
     pw.format("\r\n");
-    // return true;
+  }
+
+  static private void printSplayToTrox( PrintWriter pw, DBlock item, boolean direct ) // , int ref )
+  {
+    if ( ! TDSetting.mVTopoSplays ) return; // false;
+    if ( item == null ) return; // false;
+    // Log.v( TAG, "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    if ( direct ) {
+      pw.format("    <Visee Dep=\"%s\" ", item.mFrom );
+      pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, item.mBearing, item.mClino );
+    } else {
+      // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
+      float b = TDMath.add180( item.mBearing );
+      pw.format("    <Visee Dep=\"%s\" ", item.mTo );
+      pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, b, - item.mClino );
+    }
+    // pw.format(Locale.US, "Ref=\"%d\" ", ref );
+    if (item.isCommented() ) pw.format("Exc=\"E\" ");
+    // if ( duplicate ) pw.format(" #|L#");
+    // if ( surface ) pw.format(" #|S#");
+    if ( item.mComment != null && item.mComment.length() > 0 ) {
+      pw.format("/><Commentaire>%s</Commentaire></Visee>\r\n", item.mComment );
+    } else {
+      pw.format("/>\r\n");
+    }
   }
 
   static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
@@ -4111,7 +4167,7 @@ public class TDExporter
       // BufferedWriter bw = TDFile.getMSwriter( "tro", surveyname + ".tro", "text/tro" );
       PrintWriter pw = new PrintWriter( bw );
 
-      StringWriter sw = new StringWriter();
+      StringWriter sw  = new StringWriter();
       PrintWriter  psw = new PrintWriter( sw );
   
       pw.format("Version 5.02\r\n\r\n");
@@ -4214,6 +4270,203 @@ public class TDExporter
 	pw.format( sw.toString() );
       }
 
+      bw.flush();
+      bw.close();
+      return 1;
+    } catch ( IOException e ) {
+      TDLog.Error( "Failed VisualTopo export: " + e.getMessage() );
+      return 0;
+    }
+  }
+
+  static int countLignesTrox( List<DBlock> list )
+  {
+    int ret = 1; // for Param line
+    AverageLeg leg = new AverageLeg(0);
+    DBlock ref_item = null;
+   
+    boolean started   = false;
+    for ( DBlock item : list ) {
+      String from = item.mFrom;
+      String to   = item.mTo;
+      if ( from == null || from.length() == 0 ) {
+        if ( to == null || to.length() == 0 ) { // no station: not exported
+          if ( ref_item != null && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
+            // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
+            leg.add( item.mLength, item.mBearing, item.mClino );
+          }
+        } else { // only TO station
+          if ( leg.mCnt > 0 && ref_item != null ) {
+            if ( ! started ) {
+              started = true;
+              ++ret;
+            }
+            ++ret;
+            ref_item = null; 
+          }
+          ++ret;
+        }
+      } else { // with FROM station
+        if ( to == null || to.length() == 0 ) { // splay shot
+          if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+            if ( ! started ) {
+              started = true;
+              ++ret;
+            }
+            ++ret;
+            ref_item = null; 
+          }
+          ++ret;
+        } else {
+          if ( leg.mCnt > 0 && ref_item != null ) {
+            if ( ! started ) {
+              started = true;
+              ++ret;
+            }
+            ++ret;
+          }
+          ref_item = item;
+          leg.set( item.mLength, item.mBearing, item.mClino );
+        }
+      }
+    }
+    if ( leg.mCnt > 0 && ref_item != null ) {
+      if ( ! started ) {
+        started = true;
+        ++ret;
+      }
+      ++ret;
+    }
+    return ret;
+  }
+
+
+  static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  {
+    // Log.v("DistoX", "export as visualtopo: " + file.getName() );
+    List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
+    checkShotsClino( list );
+    int lignes = countLignesTrox( list );
+    List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
+    try {
+      // TDLog.Log( TDLog.LOG_IO, "export VisualTopo " + file.getName() );
+      // BufferedWriter bw = TDFile.getMSwriter( "tro", surveyname + ".tro", "text/tro" );
+      PrintWriter pw = new PrintWriter( bw );
+
+      StringWriter sw = new StringWriter(); // splays lines
+      PrintWriter  psw = new PrintWriter( sw );
+
+      pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n" );
+      pw.format("<!-- %s created by TopoDroid v %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("<VisualTopo>\r\n");
+      pw.format("  <Version>5.15</Version>\r\n");
+      pw.format("  <Lignes>%d</Lignes>\r\n", lignes );
+
+      pw.format("  <Cavite>\r\n");
+      pw.format("    <Nom>%s</Nom>\r\n", info.name );
+      if ( fixed.size() > 0 ) { 
+        FixedInfo fix = fixed.get(0);
+        pw.format(Locale.US, "    <Coordonnees X=\"%s,%.7f\" Y=\"%.7f\" Z=\"%.2f\" Projection=\"WGS84\" />\r\n", fix.lng, fix.lat, fix.asl );
+        pw.format("    <Entree>%s</Entree>\r\n", fix.name );
+      } else {
+        pw.format("    <Entree>%s</Entree>\r\n", list.get(0).mFrom );
+      }
+      if ( info.team != null && info.team.length() > 0 ) {
+        pw.format("    <Club>%s</Club>\r\n", info.team );
+      }
+      pw.format("    <TopoRobot>0</TopoRobot>\r\n");
+      pw.format("    <Couleur>0,0,0</Coleur>\r\n");
+      pw.format("  <Cavite>\r\n");
+      pw.format("  <Mesures>\r\n");
+      
+      // VISUALTOPO: use 0 if declination is undefined
+      pw.format("    <Param InstrDist=\"Deca\" UnitDir=\"Degd\" InstrPte=\"Clino\" UnitPte=\"Degd\" ");
+      pw.format(Locale.US, "Declin=\"%.4f\" SensDir=\"Dir\" SensPte=\"Dir\" SensLar=\"Dir\" DimPt=\"%s\" Coul=\"0,0,0\" ", info.getDeclination(), ( TDSetting.mVTopoLrudAtFrom ? "Dep" : "Arr" ) );
+      pw.format("Date=\"%s\" ", TDUtil.toVTopoDate( info.date ) );
+      if ( fixed.size() > 0 ) {
+        pw.format("DeclinAuto=\"A\">\r\n" );
+      } else {
+        pw.format("DeclinAuto=\"M\">\r\n" );
+      }
+
+      AverageLeg leg = new AverageLeg(0);
+      DBlock ref_item = null;
+
+      int extra_cnt = 0;
+      boolean in_splay  = false;
+      // boolean duplicate = false;
+      // boolean surface   = false;
+      boolean started   = false;
+      LRUD lrud;
+
+      // int ref  = 0;
+      // int suiv = 0;
+      for ( DBlock item : list ) {
+        String from = item.mFrom;
+        String to   = item.mTo;
+        if ( from == null || from.length() == 0 ) {
+          if ( to == null || to.length() == 0 ) { // no station: not exported
+            if ( ref_item != null && 
+               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
+              // Log.v( TAG, "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
+              leg.add( item.mLength, item.mBearing, item.mClino );
+            }
+          } else { // only TO station
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+              // duplicate = false;
+              // surface = false;
+              ref_item = null; 
+            }
+            printSplayToTrox( psw, item, false ); // , ref );
+          }
+        } else { // with FROM station
+          if ( to == null || to.length() == 0 ) { // splay shot
+            if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+              // duplicate = false;
+              // surface = false;
+              ref_item = null; 
+            }
+            printSplayToTrox( psw, item, true ); // , ref );
+          } else {
+            if ( leg.mCnt > 0 && ref_item != null ) {
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              pw.format( sw.toString() );
+              sw = new StringWriter();
+              psw = new PrintWriter( sw );
+              lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+            }
+            ref_item = item;
+            // duplicate = item.isDuplicate();
+            // surface = item.isSurface();
+            // Log.v( TAG, "first data " + item.mLength + " " + item.mBearing + " " + item.mClino );
+            leg.set( item.mLength, item.mBearing, item.mClino );
+          }
+        }
+      }
+      if ( leg.mCnt > 0 && ref_item != null ) {
+        if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+        pw.format( sw.toString() );
+        lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
+        printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+      } else {
+        pw.format( sw.toString() );
+      }
+      pw.format("    </Param>\r\n");
+      pw.format("  </Mesures>\r\n");
+      pw.format("</VisualTopo>\r\n");
       bw.flush();
       bw.close();
       return 1;

@@ -41,6 +41,7 @@ public class ImportTroDialog extends MyDialog
 
   private CheckBox mCBlrud;
   private CheckBox mCBleg;
+  private CheckBox mCBtrox;
 
   private String mFilepath;
   private InputStreamReader isr;
@@ -66,6 +67,7 @@ public class ImportTroDialog extends MyDialog
 
     mCBlrud = (CheckBox) findViewById( R.id.tro_lrud );
     mCBleg  = (CheckBox) findViewById( R.id.tro_leg_first );
+    mCBtrox = (CheckBox) findViewById( R.id.tro_trox );
 
     mBtnOK     = (Button) findViewById(R.id.tro_ok);
     mBtnCancel = (Button) findViewById(R.id.tro_cancel);
@@ -83,7 +85,7 @@ public class ImportTroDialog extends MyDialog
     Button b = (Button) v;
     hide();
     if ( b == mBtnOK ) {
-      mParent.importTroFile( isr, mFilepath, mCBlrud.isChecked(), mCBleg.isChecked() );
+      mParent.importTroFile( isr, mFilepath, mCBlrud.isChecked(), mCBleg.isChecked(), mCBtrox.isChecked() );
     // } else if ( b == mBtnCancel ) {
     }
     dismiss();

@@ -175,8 +175,13 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             break;
           case TDConst.DISTOX_EXPORT_TRO: // VisualTopo
             bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
-            pathname = mSurvey + ".tro";
-            ret = TDExporter.exportSurveyAsTro( bw, mSid, mData, mInfo, mSurvey );
+            if ( TDSetting.mVTopoTrox ) {
+              pathname = mSurvey + ".trox";
+              ret = TDExporter.exportSurveyAsTrox( bw, mSid, mData, mInfo, mSurvey );
+            } else {
+              pathname = mSurvey + ".tro";
+              ret = TDExporter.exportSurveyAsTro( bw, mSid, mData, mInfo, mSurvey );
+            }
             break;
           case TDConst.DISTOX_EXPORT_TRB: // TopoRobot
             bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );

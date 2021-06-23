@@ -1594,8 +1594,8 @@ public class DataHelper extends DataSetObservable
     List< PlotInfo > plots = selectPlotsAtStation( old_sid, station );
     for ( PlotInfo plot : plots ) {
       transferPlot( sid, old_sid, plot.id );
-      TDFile.renameFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
-                         TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
+      // TDFile.renameFile( TDPath.getTh2File( old_survey_name + "-" + plot.name + ".th2" ),
+      //                    TDPath.getTh2File( new_survey_name + "-" + plot.name + ".th2" ) );
 
       TDFile.renameFile( TDPath.getTdrFile( old_survey_name + "-" + plot.name + ".tdr" ),
                          TDPath.getTdrFile( new_survey_name + "-" + plot.name + ".tdr" ) );

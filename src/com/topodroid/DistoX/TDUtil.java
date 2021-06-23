@@ -175,7 +175,7 @@ public class TDUtil
     return days;
   }
 
-
+  // get the year from a topodroid date string
   public static int dateParseYear( String date )
   {
     if ( date != null && date.length() >= 4 ) {
@@ -186,6 +186,7 @@ public class TDUtil
     return 1970;
   }
 
+  // get the month from a topodroid date string
   public static int dateParseMonth( String date )
   {
     int ret = 0;
@@ -197,6 +198,7 @@ public class TDUtil
     return (ret > 0)? ret-1 : 0;
   }
 
+  // get the month-day from a topodroid date string
   public static int dateParseDay( String date )
   {
     int ret = 1;
@@ -212,6 +214,20 @@ public class TDUtil
   public static String composeDate( int y, int m, int d )
   {
     return String.format(Locale.US, "%04d.%02d.%02d", y, m+1, d );
+  }
+
+  // get the VTopo date string (DD/MM/YYYY) from a topodroid date string (YYYY.MM.DD)
+  // 
+  public static String toVTopoDate( String date )
+  {
+    return date.substring(8,10) + "/" + date.substring(5,7) + "/" + date.substring(0,4);
+  }
+
+  // @param date date in VTopo format DD/MM/YYYY
+  // @return date in TopoDroid format YYYY.MM.DD
+  public static String fromVTopoDate( String date )
+  {
+    return date.substring(6,10) + "." + date.substring(3,5) + "." + date.substring(0,2);
   }
 
   // NOTE month 0=Jan.

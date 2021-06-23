@@ -197,6 +197,7 @@ public class ExportDialogShot extends MyDialog
         break;
       case 11: // VTopo
         {
+          TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
           TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
         }
@@ -244,6 +245,7 @@ public class ExportDialogShot extends MyDialog
     ((CheckBox) findViewById( R.id.therion_maps )).setChecked( TDSetting.mTherionMaps );
     ((CheckBox) findViewById( R.id.therion_lrud )).setChecked( TDSetting.mSurvexLRUD );
 
+    ((CheckBox) findViewById( R.id.vtopo_trox )).setChecked( TDSetting.mVTopoTrox );
     ((CheckBox) findViewById( R.id.vtopo_splays )).setChecked( TDSetting.mVTopoSplays );
     ((CheckBox) findViewById( R.id.vtopo_lrud )).setChecked( TDSetting.mVTopoLrudAtFrom );
 

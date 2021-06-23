@@ -37,6 +37,7 @@ class ImportParser
   String mDate = null;  // survey date
   String mTeam = TDString.EMPTY;
   String mTitle = TDString.EMPTY;
+  String mDescr = TDString.EMPTY;
   float  mDeclination = SurveyInfo.DECLINATION_UNSET; // 0.0f; // one-survey declination
   protected boolean mApplyDeclination = false;
   protected boolean mValid = false;  // whether the parser is valid

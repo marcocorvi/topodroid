@@ -1138,16 +1138,16 @@ public class TopoDroidApp extends Application
           // Tdr
           TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
           // rename exported plots: th2 dxf png svg csx
-          TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
-          // TDFile.renameFile( TDPath.getSurveyPlotHtmFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
-          TDFile.renameFile( TDPath.getSurveyPlotC3dFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotC3dFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotShzFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotShzFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotSvgFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotSvgFile( name, p.name ) );
+          // // TDFile.renameFile( TDPath.getSurveyPlotHtmFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotHtmFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotTnlFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTnlFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotPngFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotPngFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotCsxFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotCsxFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotXviFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotXviFile( name, p.name ) );
+          // TDFile.renameFile( TDPath.getSurveyPlotC3dFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotC3dFile( name, p.name ) );
         }
       }
       /* FIXME_SKETCH_3D *
@@ -1159,25 +1159,25 @@ public class TopoDroidApp extends Application
       }
        * FIXME_SKETCH_3D */
       // rename exported files: csv csx dat dxf kml plt srv svx th top tro 
-        TDFile.renameFile( TDPath.getSurveyThFile( TDInstance.survey ), TDPath.getSurveyThFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyCsvFile( TDInstance.survey ), TDPath.getSurveyCsvFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyCsxFile( TDInstance.survey ), TDPath.getSurveyCsxFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyCavFile( TDInstance.survey ), TDPath.getSurveyCavFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyCaveFile( TDInstance.survey ), TDPath.getSurveyCaveFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyDatFile( TDInstance.survey ), TDPath.getSurveyDatFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyDxfFile( TDInstance.survey ), TDPath.getSurveyDxfFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyGrtFile( TDInstance.survey ), TDPath.getSurveyGrtFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyGtxFile( TDInstance.survey ), TDPath.getSurveyGtxFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyKmlFile( TDInstance.survey ), TDPath.getSurveyKmlFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyJsonFile( TDInstance.survey ), TDPath.getSurveyJsonFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyPltFile( TDInstance.survey ), TDPath.getSurveyPltFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyShzFile( TDInstance.survey ), TDPath.getSurveyShzFile( name ) );
-        TDFile.renameFile( TDPath.getSurveySrvFile( TDInstance.survey ), TDPath.getSurveySrvFile( name ) );
-        TDFile.renameFile( TDPath.getSurveySurFile( TDInstance.survey ), TDPath.getSurveySurFile( name ) );
-        TDFile.renameFile( TDPath.getSurveySvxFile( TDInstance.survey ), TDPath.getSurveySvxFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyTopFile( TDInstance.survey ), TDPath.getSurveyTopFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyTrbFile( TDInstance.survey ), TDPath.getSurveyTrbFile( name ) );
-        TDFile.renameFile( TDPath.getSurveyTroFile( TDInstance.survey ), TDPath.getSurveyTroFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyThFile( TDInstance.survey ), TDPath.getSurveyThFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyCsvFile( TDInstance.survey ), TDPath.getSurveyCsvFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyCsxFile( TDInstance.survey ), TDPath.getSurveyCsxFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyCavFile( TDInstance.survey ), TDPath.getSurveyCavFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyCaveFile( TDInstance.survey ), TDPath.getSurveyCaveFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyDatFile( TDInstance.survey ), TDPath.getSurveyDatFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyDxfFile( TDInstance.survey ), TDPath.getSurveyDxfFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyGrtFile( TDInstance.survey ), TDPath.getSurveyGrtFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyGtxFile( TDInstance.survey ), TDPath.getSurveyGtxFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyKmlFile( TDInstance.survey ), TDPath.getSurveyKmlFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyJsonFile( TDInstance.survey ), TDPath.getSurveyJsonFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyPltFile( TDInstance.survey ), TDPath.getSurveyPltFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyShzFile( TDInstance.survey ), TDPath.getSurveyShzFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveySrvFile( TDInstance.survey ), TDPath.getSurveySrvFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveySurFile( TDInstance.survey ), TDPath.getSurveySurFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveySvxFile( TDInstance.survey ), TDPath.getSurveySvxFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyTopFile( TDInstance.survey ), TDPath.getSurveyTopFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyTrbFile( TDInstance.survey ), TDPath.getSurveyTrbFile( name ) );
+        // TDFile.renameFile( TDPath.getSurveyTroFile( TDInstance.survey ), TDPath.getSurveyTroFile( name ) );
 
       { // rename note file: note
         TDFile.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
@@ -1525,11 +1525,11 @@ public class TopoDroidApp extends Application
     }
     String fullname = ( psd1 == null )? TDInstance.survey
                                       : TDInstance.survey + "-" + psd1.name;
-    String filename = TDPath.getSurveyCsxFile( fullname );
-    TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
-    // Log.v("DistoX-SAVE", "exporting as CSX " + filename );
-    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, info, psd1, psd2, origin, filename, fullname, 
-       TDPath.getCsxFile(""), toast )).execute();
+    // String filename = TDPath.getSurveyCsxFile( fullname );
+    // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
+    TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
+    (new SaveFullFileTask( context, uri, TDInstance.sid, mData, info, psd1, psd2, origin, /* filename, */ fullname, 
+       /* TDPath.getCsxFile(""), */ toast )).execute();
   }
 
   // FIXME_SYNC might be a problem with big surveys

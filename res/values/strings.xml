@@ -988,6 +988,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_splays_named">Named splays</string>
     <string name="export_stations">Stations</string>
     <string name="export_swap_lr">Swap L/R</string>
+    <string name="export_trox">Trox format</string>
     <string name="export_xvi">Xvi images</string>
     <string name="export_with_xsections">Include X-sections</string>
     <string name="export_with_reference">Include XY reference</string>
@@ -1010,6 +1011,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="playing">Playing %1$s</string -->
 
     <string name="import_functional">Import only functional settings</string>
+    <string name="import_trox">Trox file format</string>
     <string name="import_lrud">Import LRUD</string>
     <string name="import_leg_first">Leg before LRUD splays</string>
     <string name="import_diving_datamode">Diving datamode</string>
@@ -1216,6 +1218,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_vtopo_splays_summary">Export splays in VisualTopo files</string>
   <string name="pref_vtopo_lrud_title">LRUD at From</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo LRUD at From station</string>
+  <string name="pref_vtopo_trox_title">Trox format</string>
+  <string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">LRUD splay angle</string>

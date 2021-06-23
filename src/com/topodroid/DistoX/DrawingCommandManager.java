@@ -186,7 +186,7 @@ public class DrawingCommandManager
     // return mScrapIdx;
   }
 
-  int scrapMaxIndex() { return mScraps.size(); }
+  public int scrapMaxIndex() { return mScraps.size(); }
 
   // for export classes
   public List< Scrap > getScraps() { return mScraps; }

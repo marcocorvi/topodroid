@@ -680,17 +680,21 @@ public class TDPrefKey
   public static String[] EXPORT_TRO = {
     "DISTOX_VTOPO_SPLAYS",       // whether to add splays to VisualTopo tro export
     "DISTOX_VTOPO_LRUD",         // whether VisualTopo LRUD are at-from 
+    "DISTOX_VTOPO_TRIX",         // whether to write trox format
   };
   static int[] EXPORT_TROtitle = {
     R.string.pref_vtopo_splays_title,
     R.string.pref_vtopo_lrud_title,
+    R.string.pref_vtopo_trox_title,
   };
   static int[] EXPORT_TROdesc = {
     R.string.pref_vtopo_splays_summary,
-    R.string.pref_vtopo_lrud_title,
+    R.string.pref_vtopo_lrud_summary,
+    R.string.pref_vtopo_trox_summary,
   };
   public static String[] EXPORT_TROdef = {
     TRUE,
+    FALSE,
     FALSE,
   };
 

@@ -1,0 +1,21 @@
+﻿encoding utf-8
+symbol point
+name cheese-cave
+name-fr cave_bâtarde
+th_name cheese-cave
+group cave
+color 0xffcc33
+path
+  moveTo -8 8
+  lineTo 8 8  moveTo -8 8
+  lineTo -5 -3
+  cubicTo -5 -8 5 -8 5 -3
+  lineTo 8 8
+  moveTo 8 0
+  addCircle 0 -2 2
+  addCircle -2 2 2
+  addCircle 2 2 2
+  moveTo -5 4
+  lineTo 5 4
+endpath
+endsymbol

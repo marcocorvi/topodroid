@@ -3137,7 +3137,7 @@ public class DrawingWindow extends ItemDrawer
     String xs_id = line.getOption( "-id" );
     String scrap_name = TDInstance.survey + "-" + xs_id;
     mDrawingSurface.deleteSectionLine( line, scrap_name );
-    TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
+    // TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
     TDFile.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
     // section point is deleted automatically
@@ -4464,7 +4464,7 @@ public class DrawingWindow extends ItemDrawer
       mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
       // drop the files
       TDFile.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
-      TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
+      // TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
       // TODO delete backup files
 
       deleteSectionPoint( xs_id ); 

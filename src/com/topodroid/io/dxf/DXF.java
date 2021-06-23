@@ -343,7 +343,7 @@ public class DXF
   //   printString( pw, 7, style );
   //   printString( pw, 100, AcDbText );
   // }
-  static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y )
+  static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y, float z )
   {
     if ( mVersion14 ) {
       printXY( pw, x * scale, -y * scale, 0 );
@@ -353,7 +353,7 @@ public class DXF
       if ( mVersion13 ) {
         handle = printAcDb( pw, handle, ref, AcDbEntity, AcDbVertex, "AcDb3dPolylineVertex" );
       }
-      printXYZ( pw, x * scale, -y * scale, 0.0f, 0 );
+      printXYZ( pw, x * scale, -y * scale, z, 0 );
       if ( mVersion13 ) {
         printInt( pw, 70, 32 ); // flag 32 = 3D polyline vertex
       }
@@ -361,7 +361,7 @@ public class DXF
     return handle;
   }
 
-  static int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2)
+  static int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2, float z )
   {
     printString( pw, 0, "LINE" );
     if ( mVersion13_14 ) {
@@ -369,8 +369,8 @@ public class DXF
     }
     printString( pw, 8, layer );
     // printInt(  pw, 39, 0 );         // line thickness
-    printXYZ( pw, x1*scale, y1*scale, 0.0f, 0 );
-    printXYZ( pw, x2*scale, y2*scale, 0.0f, 1 );
+    printXYZ( pw, x1*scale, y1*scale, z, 0 );
+    printXYZ( pw, x2*scale, y2*scale, z, 1 );
     return handle;
   }
 
@@ -513,7 +513,7 @@ public class DXF
 
 
   static int printText( PrintWriter pw, int handle, int ref, String label, float x, float y, float angle, float scale,
-                        String layer, String style, float xoff, float yoff )
+                        String layer, String style, float xoff, float yoff, float z )
   {
     // if ( false && mVersion13_14 ) { // FIXME TEXT in AC1012
     //   // int idx = 1 + point.mPointType;
@@ -534,7 +534,7 @@ public class DXF
       
       // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s%s  0%s", "\"10\"", EOL, EOL );
-      printXYZ( pw, x, y, 0, 0 );
+      printXYZ( pw, x, y, z, 0 );
       // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
       // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
       // printFloat( pw, 39, 0 );      // thickness (optional 0) 
@@ -591,7 +591,7 @@ public class DXF
   }
 
   static int writeHeaderSection( BufferedWriter out, int handle,
-             float xmin, float ymin, float xmax, float ymax ) throws IOException
+             float xmin, float ymin, float zmin, float xmax, float ymax, float zmax ) throws IOException
   {
     writeSection( out, "HEADER" );
     // ACAD versions: 1006 (R10) 1009 (R11 R12) 1012 (R13) 1014 (R14)
@@ -610,8 +610,8 @@ public class DXF
       StringWriter sw1 = new StringWriter();
       PrintWriter pw1  = new PrintWriter(sw1);
       printXYZ( pw1, 0.0f, 0.0f, 0.0f, 0 ); // FIXME (0,0,0)
-      printString( pw1, 9, "$EXTMIN" ); printXYZ( pw1, xmin, ymin, 0.0f, 0 );
-      printString( pw1, 9, "$EXTMAX" ); printXYZ( pw1, xmax, ymax, 0.0f, 0 );
+      printString( pw1, 9, "$EXTMIN" ); printXYZ( pw1, xmin, ymin, zmin, 0 );
+      printString( pw1, 9, "$EXTMAX" ); printXYZ( pw1, xmax, ymax, zmax, 0 );
       if ( mVersion13_14 ) {
         printString( pw1, 9, "$LIMMIN" ); printXY( pw1, 0.0f, 0.0f, 0 );
         printString( pw1, 9, "$LIMMAX" ); printXY( pw1, 420.0f, 297.0f, 0 );

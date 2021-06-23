@@ -124,7 +124,8 @@ public class ImportDialog extends MyDialog
     // setTitle(" W A I T ");
     dismiss();
 
-    mParent.importFile( item );
+    // mParent.importFile( item );
+    mParent.importZipFile( item );
   }
 
 }
