@@ -1399,7 +1399,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
-      //      could use PlotType.isXSectionPrivate and PlotInfo.getXSectionParent
+      //      could use PlotType.isStationSectionPrivate and PlotInfo.getXSectionParent
       List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION, parent );
       List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
@@ -2030,12 +2030,12 @@ public class DrawingWindow extends ItemDrawer
     mContinueLine = TDSetting.mContinueLine;
     resetModified();
 
-    // if ( PlotType.isSection( mType ) ) { 
+    // if ( PlotType.isLegSection( mType ) ) { 
     //   mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );  // to station ( null for X-section)
     //   mAzimuth = (float)extras.getLong( TDTag.TOPODROID_PLOT_AZIMUTH );
     //   mClino   = (float)extras.getLong( TDTag.TOPODROID_PLOT_CLINO );
     //   // Log.v("DistoX", "X-Section " + mFrom + "-" + mTo + " azimuth " + mAzimuth + " clino " + mClino  );
-    // } else if ( PlotType.isXSection( mType ) ) {
+    // } else if ( PlotType.isStationSection( mType ) ) {
     //   mTo = null;
     //   mAzimuth = (float)extras.getLong( TDTag.TOPODROID_PLOT_AZIMUTH );
     //   mClino   = (float)extras.getLong( TDTag.TOPODROID_PLOT_CLINO );
@@ -2247,22 +2247,22 @@ public class DrawingWindow extends ItemDrawer
     switch ( mode ) {
       case 0:
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
-        if ( PlotType.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 1:
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
-        if ( PlotType.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.hideStationSplays( mFrom );
         break;
       case 2:
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
-        if ( PlotType.isSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
       case 3:
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
-        if ( PlotType.isSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
         mDrawingSurface.showStationSplays( mFrom );
         break;
     }
@@ -2451,10 +2451,10 @@ public class DrawingWindow extends ItemDrawer
     // Log.v("DistoX-C", "doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
     List< DBlock > list = null;
-    if ( PlotType.isSection( mType ) ) {
+    if ( PlotType.isLegSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       // Log.v("DistoX-SPLAY", "Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
-    } else if ( PlotType.isXSection( mType ) ) { 
+    } else if ( PlotType.isStationSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
       // Log.v("DistoX-SPLAY", "Station-Xsection select all shots at " + mFrom + " : " + list.size() );
@@ -2486,10 +2486,10 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
     List< DBlock > list = null;
-    if ( PlotType.isSection( mType ) ) {
+    if ( PlotType.isLegSection( mType ) ) {
       list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
       // Log.v("DistoX-SPLAY", "select all shots at " + mFrom + " " + mTo + " : " + list.size() );
-    } else if ( PlotType.isXSection( mType ) ) { 
+    } else if ( PlotType.isStationSection( mType ) ) { 
       // N.B. mTo can be null
       list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
     } else {
@@ -2596,7 +2596,7 @@ public class DrawingWindow extends ItemDrawer
     float ytt = 0;
     float ztt = 0;
     if ( skip == 0 ) {
-      if ( PlotType.isSection( mType ) ) {
+      if ( PlotType.isLegSection( mType ) ) {
         if ( mType == PlotType.PLOT_H_SECTION ) {
           if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
             // FIXME_VECTOR
@@ -2662,7 +2662,7 @@ public class DrawingWindow extends ItemDrawer
             mDrawingSurface.addDrawingDotPath( path );
           }
         }
-      } else { // if ( PlotType.isXSection( mType ) ) 
+      } else { // if ( PlotType.isStationSection( mType ) ) 
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
       }
     }
@@ -2828,7 +2828,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       mDrawingSurface.linkAllSections();
     } else { // X_SECTION
-      mTo = ( PlotType.isSection( type ) )? mPlot3.view : "";
+      mTo = ( PlotType.isLegSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
       mDrawingSurface.modeloadDataStream( filename3b, null, false /*, FIXME-MISSING missingSymbols */ );
@@ -4525,6 +4525,9 @@ public class DrawingWindow extends ItemDrawer
     // if plot type = PROFILE
     //    clino = -90, 0, +90  according to horiz
     //
+    // @param horiz  (?) whether the section is horizontal 
+    // @param nick   section name
+    //
     void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
     {
       // Log.v("DistoX-C", "openXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -5631,9 +5634,9 @@ public class DrawingWindow extends ItemDrawer
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
           // mDrawingSurface.clearDrawing();
           switchPlotType();
-        } else if ( PlotType.isSection( mType ) ) {
+        } else if ( PlotType.isLegSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 1)%4 );
-        } else if ( PlotType.isXSection( mType ) ) {
+        } else if ( PlotType.isStationSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
       } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
@@ -5872,7 +5875,7 @@ public class DrawingWindow extends ItemDrawer
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-        File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
+        File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
         // TODO TD_XSECTION_PHOTO
         doTakePointPhoto( imagefile, false, pid ); // without inserter
       }
@@ -6888,7 +6891,7 @@ public class DrawingWindow extends ItemDrawer
   // void drawWallsAt( float x0, float y0 )
   // {
   //   if ( TDSetting.mWallsType == TDSetting.WALLS_NONE ) return;
-  //   if ( ! PlotType.isSection( mType ) ) return;
+  //   if ( ! PlotType.isLegSection( mType ) ) return;
 
   //   ArrayList< DLNSite > sites = null;
   //   sites = new ArrayList<>();
@@ -7045,7 +7048,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
-    } else { // PlotType.isSection( mType )
+    } else { // PlotType.isLegSection( mType )
       return;
     }
     // (x0,y0) (x1,y1) are the segment endpoints

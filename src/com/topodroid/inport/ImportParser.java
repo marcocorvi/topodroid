@@ -147,7 +147,7 @@ class ImportParser
   }
    */
 
-  BufferedReader getBufferedReader( InputStreamReader isr, String filename )
+  static BufferedReader getBufferedReader( InputStreamReader isr, String filename )
   {
     try {
       if ( isr == null ) {
@@ -159,7 +159,7 @@ class ImportParser
     return null;
   }
 
-  protected String extractName( String filename )
+  static protected String extractName( String filename )
   {
     int pos = filename.lastIndexOf( '/' );
     if ( pos < 0 ) { pos = 0; } else { ++pos; }

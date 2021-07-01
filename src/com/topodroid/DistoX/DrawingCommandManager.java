@@ -1742,7 +1742,7 @@ public class DrawingCommandManager
     // Log.v("DistoX", "V0 " + V0.x + " " + V0.y + " " + V0.z );
     // Log.v("DistoX", "V1 " + V1.x + " " + V1.y + " " + V1.z );
     // Log.v("DistoX", "V2 " + V2.x + " " + V2.y + " " + V2.z );
-    if ( PlotType.isXSection( type ) ) { // station-XSection center at (xoff, yoff, zoff )
+    if ( PlotType.isStationSection( type ) ) { // station-XSection center at (xoff, yoff, zoff )
       scrap = mScraps.get( 0 );
     } else { // leg XSection 
       DrawingSpecialPath dot = null;

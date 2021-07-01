@@ -164,7 +164,7 @@ class DrawingLineSectionDialog extends MyDialog
       String subdir = "photo/" + TDInstance.survey;
       String filename = mPlotInfo.name + ".jpg";
       mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
-      File imagefile = TDFile.getFile( mFilename );
+      File imagefile = TDFile.getTopoDroidFile( mFilename );
       if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( imagefile.exists() )
 	mTdImage = new TDImage( mFilename );
         tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );

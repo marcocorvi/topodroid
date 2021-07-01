@@ -329,7 +329,7 @@ public class TDsaf
           final int flags = data.getFlags() & PERMISSIONS;
           try {
             // take perms persistable across reboots
-            TDInstance.context.getContentResolver().takePersistableUriPermission(mBaseDirUri, flags);
+            TDInstance.getContentResolver().takePersistableUriPermission(mBaseDirUri, flags);
           } catch ( SecurityException e ) {
             e.printStackTrace();
             Log.v("DistoX-SAF", "failed to take persistable URI permissions: flags " + flags );
@@ -563,7 +563,7 @@ public class TDsaf
   {
     // if ( uri == null ) return null;
     try {
-      InputStream is = TDInstance.context.getContentResolver().openInputStream(uri);
+      InputStream is = TDInstance.getContentResolver().openInputStream(uri);
       return is;
       // FIXME caller must close is
     } catch (IOException e) {
@@ -577,8 +577,8 @@ public class TDsaf
   {
     // if ( uri == null ) return null;
     try {
-      // AssetFileDescriptor pfd = TDInstance.context.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.context.getContentResolver().openFileDescriptor( uri, "w" );
+      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
       if ( pfd == null ) return null;
       FileDescriptor fd = pfd.getFileDescriptor();
       if (fd == null) {
@@ -600,8 +600,8 @@ public class TDsaf
   {
     // if ( uri == null ) return null;
     try {
-      // AssetFileDescriptor pfd = TDInstance.context.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.context.getContentResolver().openFileDescriptor( uri, "w" );
+      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
       if ( pfd == null ) return null;
       FileDescriptor fd = pfd.getFileDescriptor();
       if (fd == null) {
@@ -623,8 +623,8 @@ public class TDsaf
   {
     if ( uri == null ) return null;
     try {
-      // AssetFileDescriptor pfd = TDInstance.context.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.context.getContentResolver().openFileDescriptor( uri, "r" );
+      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
       if ( pfd == null ) return null;
       FileDescriptor fd = pfd.getFileDescriptor();
       if (fd == null) {
@@ -645,8 +645,8 @@ public class TDsaf
   {
     if ( uri == null ) return null;
     try {
-      // AssetFileDescriptor pfd = TDInstance.context.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.context.getContentResolver().openFileDescriptor( uri, "r" );
+      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
       if ( pfd == null ) return null;
       FileDescriptor fd = pfd.getFileDescriptor();
       if (fd == null) {
@@ -680,7 +680,7 @@ public class TDsaf
 
   public static String getType( Uri uri ) 
   {
-    return TDInstance.context.getContentResolver().getType( uri );
+    return TDInstance.getContentResolver().getType( uri );
   }
 
   // https://stackoverflow.com/questions/36128077/android-opening-a-file-with-action-get-content-results-into-different-uris

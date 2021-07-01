@@ -204,7 +204,7 @@ public class DataHelper extends DataSetObservable
   void openDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
-    File db_file = TDFile.getFile( db_name );
+    File db_file = TDFile.getTopoDroidFile( db_name );
     // TDsaf db_file = new TDsaf( db_name );
     Log.v("DistoX", "DB file " + db_name + " " + db_file.getPath() );
 

@@ -18,6 +18,7 @@ import com.topodroid.common.PlotType;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 
@@ -132,6 +133,8 @@ public class TDInstance
     deviceB = tmp;
     return true;
   }
+
+  public static ContentResolver getContentResolver() { return context.getContentResolver(); }
   
   static boolean isDivingMode() { return datamode == SurveyInfo.DATAMODE_DIVING; }
 

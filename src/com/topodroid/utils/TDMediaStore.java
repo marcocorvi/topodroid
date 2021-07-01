@@ -23,7 +23,7 @@ class TDMediaStore
   static public boolean isMSexists( String subdir, String filename )
   {
     String dir = "Documents/TopoDroid/" + subdir + "/";
-    ContentResolver cr = TDInstance.context.getContentResolver();
+    ContentResolver cr = TDInstance.getContentResolver();
     Uri content_uri = MediaStore.Files.getContentUri("external");
     String where = MediaStore.MediaColumns.RELATIVE_PATH + "=? AND " + MediaStore.MediaColumns.DISPLAY_NAME + "=?";
     String[] args = new String[]{ dir, filename };
@@ -37,7 +37,7 @@ class TDMediaStore
     OutputStream ret = null;
     String dir = "Documents/TopoDroid/" + subdir + "/";
 
-    ContentResolver cr = TDInstance.context.getContentResolver();
+    ContentResolver cr = TDInstance.getContentResolver();
     Uri content_uri = MediaStore.Files.getContentUri("external");
 
     Uri uri = null;
@@ -85,7 +85,7 @@ class TDMediaStore
     cv.put( MediaStore.Files.FileColumns.RELATIVE_PATH, dir );
     cv.put( MediaStore.Files.FileColumns.IS_PENDING,    1 );
 
-    ContentResolver cr = TDInstance.context.getContentResolver();
+    ContentResolver cr = TDInstance.getContentResolver();
     Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
     if ( uri == null ) {
       Log.v("DistoX", "Media Store failed resolving");
@@ -112,7 +112,7 @@ class TDMediaStore
   // {
   //   ArrayList<String> ret = new ArrayList<>();
   //   String dir = "Documents/TopoDroid/" + subdir + "/";
-  //   ContentResolver cr = TDInstance.context.getContentResolver();
+  //   ContentResolver cr = TDInstance.getContentResolver();
   //   Uri content_uri = MediaStore.Files.getContentUri("external");
   //   // Uri.Builder builder = content_uri.buildUpon();
   //   // builder.appendPath( "/" + dir );

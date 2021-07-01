@@ -34,8 +34,8 @@ public class PlotType
   public static boolean isVertical( long type ) 
   { return ( type == PLOT_EXTENDED || type == PLOT_PROJECTED || type == PLOT_SECTION || type == PLOT_X_SECTION ); }
 
-  public static boolean isSection( long t )  { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
-  public static boolean isXSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+  public static boolean isLegSection( long t )     { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
+  public static boolean isStationSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
   public static boolean isAnySection( long t ) { return t == PLOT_SECTION || t == PLOT_H_SECTION 
                                             || t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
   public static boolean isPhoto( long t )    { return t == PLOT_PHOTO; }

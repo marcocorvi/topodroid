@@ -212,54 +212,56 @@ public class Archiver
     return ret;
   }
 
-  // @param zipname    name of compressed zip
-  // @param lib        symbol library
-  // @param dirpath    directory of symbol files (must end with '/') eg, TDPath.APP_POINT_PATH
-  private boolean compressSymbols( String zipname, SymbolLibrary lib, String dirpath )
+  // @param zipname  compressed zip file
+  // @param lib      symbol library
+  // @param dirpath  (external files) folder for the symbol files
+  private boolean compressSymbols( File zipfile, SymbolLibrary lib, String dirpath )
   {
     if ( lib == null ) return false;
     if ( ! (TDFile.getExternalDir( dirpath )).exists() ) return false;
-    // Log.v("DistoX", "ZIP symbols zipname " + zipname );
+    // Log.v("DistoX", "ZIP symbols zip " + zipfile.getPath() );
     List< Symbol > symbols = lib.getSymbols();
     ZipOutputStream zos = null;
     try { 
-      zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( zipname ) ) );
+      zos = new ZipOutputStream( new BufferedOutputStream( new FileOutputStream( zipfile ) ) );
       for ( Symbol symbol : symbols ) {
         if ( symbol.mEnabled ) {
           String filename = symbol.getThName();
           // THERION-U: filename = Symbol.deprefix_u( filename );
-          String filepath = dirpath + filename;
+          String filepath = dirpath + "/" + filename;
           // Log.v("DistoX", "ZIP symbols compress " + dirpath + " " + filepath );
-          addOptionalEntry( zos, TDFile.getExternalFile( dirpath, filepath ), filepath );
+          addOptionalEntry( zos, TDFile.getExternalFile( dirpath, filename ), filepath );
         }
       }
     } catch ( FileNotFoundException e ) {
       return false;
-    } catch ( IOException e ) {
     } finally {
       if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP-symbol close error"); }
     }
     return true;
   }
 
-  // return true is a symbol has been uncompressed
+  // @param zin      compressed input stream
+  // @param dirpath  (external files) folder for the symbol files
+  // @param prefix   symbol prefix in the database config table
+  // @return true is a symbol has been uncompressed
   static private boolean uncompressSymbols( InputStream zin, String dirpath, String prefix )
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
     // Log.v("DistoX", "ZIP-uncompress symbol dirpath " + dirpath + " prefix " + prefix );
-    String filename = TDPath.getSymbolFile( "tmp.zip" );
+    File tempfile = TDFile.getExternalFile( null, "tmp.zip" );
     FileOutputStream fout = null;
     int c;
     byte[] sbuffer = new byte[4096];
     try { 
-      fout = TDFile.getFileOutputStream( filename );
+      fout = new FileOutputStream( tempfile );
       while ( ( c = zin.read( sbuffer ) ) != -1 ) fout.write(sbuffer, 0, c);
       fout.close();
       fout = null;
       // uncompress symbols zip
       ZipEntry sze;
-      FileInputStream fis = TDFile.getFileInputStream( filename );
+      FileInputStream fis = new FileInputStream( tempfile );
       ZipInputStream szin = new ZipInputStream( fis );
       while ( ( sze = szin.getNextEntry() ) != null ) {
         // String symbolfilename = dirpath + sze.getName();
@@ -292,10 +294,11 @@ public class Archiver
         }
         sfis.close();
       }
+      fis.close();
     } catch ( FileNotFoundException e1 ) { Log.v( "DistoX-ZIP", "File Not Found " + e1.getMessage() );
     } catch ( IOException e2 ) { Log.v( "DistoX-ZIP", "I/O exception " + e2.getMessage() );
     } finally {
-      if ( fout != null ) { try { fout.close(); } catch ( IOException e ) { } }
+      TDFile.deleteFile( tempfile );
     }
     return ret;
   }
@@ -323,140 +326,140 @@ public class Archiver
 
       pathname = TDPath.getManifestFile(); // The first entry must be the manifest 
       mApp.writeManifestFile();
-      ret &= addEntry( zos, TDFile.getFile(pathname), pathname );
+      ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // Log.v("DistoX-ZIP", "archive post-manifest returns " + ret );
 
       pathname = TDPath.getSqlFile( );
       app_data.dumpToFile( pathname, TDInstance.sid );
-      ret &= addEntry( zos, TDFile.getFile(pathname), pathname );
+      ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // Log.v("DistoX-ZIP", "archive post-sqlite returns " + ret );
 
       pathname = TDPath.getSurveyNoteFile( survey );
-      addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       if ( TDLevel.overExpert && TDSetting.mZipWithSymbols ) {
-        String filename = TDPath.getSymbolFile( "points.zip" );
-        if ( compressSymbols( filename, BrushManager.getPointLib(), TDPath.getSymbolPointDirname() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
+        File file = TDFile.getExternalFile( null, "points.zip" );
+        if ( compressSymbols( file, BrushManager.getPointLib(), TDPath.getSymbolPointDirname() ) )  {
+          addOptionalEntry( zos, file, "points.zip" );
         }
-        filename = TDPath.getSymbolFile( "lines.zip" );
-        if ( compressSymbols( filename, BrushManager.getLineLib(), TDPath.getSymbolLineDirname() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
+        file = TDFile.getExternalFile( null, "lines.zip" );
+        if ( compressSymbols( file, BrushManager.getLineLib(), TDPath.getSymbolLineDirname() ) )  {
+          addOptionalEntry( zos, file, "lines.zip" );
         }
-        filename = TDPath.getSymbolFile( "areas.zip" );
-        if ( compressSymbols( filename, BrushManager.getAreaLib(), TDPath.getSymbolAreaDirname() ) )  {
-          addOptionalEntry( zos, TDFile.getFile( filename ), filename );
+        file = TDFile.getExternalFile( null, "areas.zip" );
+        if ( compressSymbols( file, BrushManager.getAreaLib(), TDPath.getSymbolAreaDirname() ) )  {
+          addOptionalEntry( zos, file, "areas.zip" );
         }
       }
 
 /* FIXME_SKETCH_3D *
       List< Sketch3dInfo > sketches  = app_data.selectAllSketches( TDInstance.sid, TDStatus.NORMAL );
       for ( Sketch3dInfo skt : sketches ) {
-        ret &= addEntry( zos, TDFile.getFile( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
+        ret &= addEntry( zos, TDFile.getTopoDroidFile( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
       sketches  = app_data.selectAllSketches( TDInstance.sid, TDStatus.DELETED );
       for ( Sketch3dInfo skt : sketches ) {
-        ret &= addEntry( zos, TDFile.getFile( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
+        ret &= addEntry( zos, TDFile.getTopoDroidFile( TDPath.getSurveySketchOutFile( survey, skt.name ) ) );
       }
 /* END_SKETCH_3D */
 
       List< PlotInfo > plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.NORMAL );
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
-        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotTh2File( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotDxfFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotSvgFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotXviFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotPngFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // pathname = TDPath.getSurveyPlotTnlFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // if ( plt.type == PlotType.PLOT_PLAN ) {
         //   pathname = TDPath.getSurveyCsxFile( survey, plt.name );
-        //   addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        //   addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
         // }
         // pathname = TDPath.getSurveyPlotShzFile( survey, plt.name );
-	// addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+	// addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
 
       // try overview exports
       //   pathname = TDPath.getSurveyPlotTh2File( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotDxfFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotSvgFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotXviFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotShzFile( survey, "p" ); // zipped shp
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       //   pathname = TDPath.getSurveyPlotTh2File( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotDxfFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotSvgFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotXviFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       //   pathname = TDPath.getSurveyPlotShzFile( survey, "s" ); // zipped shp
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name );
-        addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+        addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
 
       pathname = TDPath.getSurveyPhotoDir( survey );
-      addDirectory( zos, TDFile.getFile( pathname ), pathname );
+      addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       pathname = TDPath.getSurveyAudioDir( survey );
-      addDirectory( zos, TDFile.getFile( pathname ), pathname );
+      addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       // pathname = TDPath.getSurveyThFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyCsvFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyCsxFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyCaveFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyCavFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyDatFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyDxfFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyGrtFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyGtxFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyKmlFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyJsonFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyPltFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyShzFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveySrvFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveySurFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveySvxFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyTroFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyTrbFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       // pathname = TDPath.getSurveyTopFile( survey );
-      // addOptionalEntry( zos, TDFile.getFile( pathname ), pathname );
+      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
 
       // ret = true;

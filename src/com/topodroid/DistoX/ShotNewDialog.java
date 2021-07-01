@@ -553,7 +553,7 @@ class ShotNewDialog extends MyDialog
         if ( mJpegData != null ) { 
           // Log.v("DistoX", "save Jpeg image size " + mJpegData.length );
           long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
-          File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
+          File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
           try {
             FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
             fos.write( mJpegData );

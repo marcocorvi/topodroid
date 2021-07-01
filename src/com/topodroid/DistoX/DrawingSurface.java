@@ -786,7 +786,7 @@ class DrawingSurface extends SurfaceView
   // boolean addloadTherion( String th2, float xdelta, float ydelta, SymbolsPalette missingSymbols )
   // {
   //   SymbolsPalette localPalette = BrushManager.preparePalette();
-  //   if ( (TDFile.getFile(th2)).exists() ) {
+  //   if ( (TDFile.getTopoDroidFile(th2)).exists() ) {
   //     return DrawingIO.doLoadTherion( this, th2, xdelta, ydelta, missingSymbols, localPalette );
   //   }
   //   return false;
@@ -806,7 +806,7 @@ class DrawingSurface extends SurfaceView
   {
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
-    if ( (TDFile.getFile(tdr)).exists() ) {
+    if ( (TDFile.getTopoDroidFile(tdr)).exists() ) {
       ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotName );
     }
     return ret;
@@ -819,7 +819,7 @@ class DrawingSurface extends SurfaceView
     SymbolsPalette localPalette = BrushManager.preparePalette();
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
-      if ( (TDFile.getFile( tdr1 )).exists() ) {
+      if ( (TDFile.getTopoDroidFile( tdr1 )).exists() ) {
         // Log.v("DistoXX", "file " + tdr1 + " exists: loading ...");
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {

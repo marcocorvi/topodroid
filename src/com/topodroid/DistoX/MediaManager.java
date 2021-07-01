@@ -50,7 +50,7 @@ class MediaManager
     mComment = comment;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
-    mImageFile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
+    mImageFile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
     return mPhotoId;
   }
 
@@ -62,7 +62,7 @@ class MediaManager
     mShotId  = sid;
     mComment = comment;
     mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
-    mAudioFile = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
+    mAudioFile = TDFile.getTopoDroidFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
     return mAudioId;
   }
 

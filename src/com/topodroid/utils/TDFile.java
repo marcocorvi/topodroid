@@ -24,12 +24,13 @@ import android.database.Cursor;
 
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
-import android.os.ParcelFileDescriptor;
+
 
 import java.util.ArrayList;
 import android.provider.DocumentsContract;
@@ -78,7 +79,7 @@ public class TDFile
   public static long getFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
   // @param name     TopoDroid-relative filename
-  public static File getFile( String name ) { return new File( name ); }
+  public static File getTopoDroidFile( String name ) { return new File( name ); }
 
   public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
 
@@ -111,8 +112,7 @@ public class TDFile
   }
 
   // TEMPORARY FILES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-
-  public static File getExternalTempFile( String filename ) { return getExternalFile( "tmp", filename ); }
+  public static File getExternalTempFile( String name ) { return getExternalFile( "tmp", name ); }
 
   public static void clearExternalTempDir( long before )
   {
@@ -211,19 +211,19 @@ public class TDFile
 
   public static void deleteFile( String pathname ) 
   { 
-    deleteFile( getFile( pathname ) ); // DistoXFile;
+    deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
   }
 
   public static void deleteDir( String dirname ) 
   { 
-    deleteDir( getFile( dirname ) ); // DistoX-SAF
+    deleteDir( getTopoDroidFile( dirname ) ); // DistoX-SAF
   }
 
   // @pre oldname exists && ! newname exists
   public static void renameFile( String oldname, String newname )
   {
-    File f1 = getFile( oldname ); // DistoX-SAF
-    File f2 = getFile( newname );
+    File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
+    File f2 = getTopoDroidFile( newname );
     if ( f1.exists() && ! f2.exists() ) {
       if ( ! f1.renameTo( f2 ) ) TDLog.Error("file rename: failed " + oldname + " to " + newname );
     } else {
@@ -234,8 +234,8 @@ public class TDFile
   // @pre oldname exists
   public static void moveFile( String oldname, String newname )
   {
-    File f1 = getFile( oldname ); // DistoX-SAF
-    File f2 = getFile( newname );
+    File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
+    File f2 = getTopoDroidFile( newname );
     if ( f1.exists() ) {
       if ( ! f1.renameTo( f2 ) ) TDLog.Error("file move: failed " + oldname + " to " + newname );
     } else {
@@ -245,7 +245,7 @@ public class TDFile
 
   public static File makeDir( String pathname )
   {
-    File f = getFile( pathname );
+    File f = getTopoDroidFile( pathname );
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
         TDLog.Error("mkdir failed " + pathname );
@@ -281,7 +281,7 @@ public class TDFile
 
   public static boolean renameTempFile( File temp, String pathname )
   { 
-    return renameTempFile( temp, getFile( pathname ) );
+    return renameTempFile( temp, getTopoDroidFile( pathname ) );
   }
 
   // =========================================================================
@@ -311,10 +311,10 @@ public class TDFile
     return file.exists();
   }
 
-  public static boolean hasMSpath( String pathname )
-  {
-    return (new File(pathname)).exists();
-  }
+  // public static boolean hasMSpath( String pathname )
+  // {
+  //   return (new File(pathname)).exists();
+  // }
 
   public static boolean makeMSdir( String subdir )
   {
@@ -395,5 +395,36 @@ public class TDFile
   // static public void osWriteString( OutputStream os, String str ) throws IOException
   //
   */
+
+  // -------------------------------------------------------------------------------
+
+  // get the file descriptor.
+  // After use must call close() on the file desriptor
+  static ParcelFileDescriptor getFileDescriptor( Uri uri, String mode )
+  {
+    try {
+      return TDInstance.getContentResolver().openFileDescriptor( uri, mode );
+    } catch ( FileNotFoundException e ) {
+      return null;
+    }
+  }
+
+  static InputStream getInputStream( Uri uri ) 
+  {
+    try {
+      return TDInstance.getContentResolver().openInputStream( uri );
+    } catch ( FileNotFoundException e ) {
+      return null;
+    }
+  }
+
+  static OutputStream getOutputStream( Uri uri ) 
+  {
+    try {
+      return TDInstance.getContentResolver().openOutputStream( uri );
+    } catch ( FileNotFoundException e ) {
+      return null;
+    }
+  }
 
 } 

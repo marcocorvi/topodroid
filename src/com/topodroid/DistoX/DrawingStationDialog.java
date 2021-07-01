@@ -127,7 +127,7 @@ class DrawingStationDialog extends MyDialog
       mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
-      mETnick = (EditText) findViewById( R.id.nick );
+      mETnick = (EditText) findViewById( R.id.nick );  // section name
 
       mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
       mComment = (EditText) findViewById( R.id.comment );

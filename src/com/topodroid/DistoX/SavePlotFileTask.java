@@ -245,7 +245,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           // Log.v( "DistoX", "save binary completed" + mFullName );
 
           String filename1 = TDPath.getTdrFileWithExt( mFullName );
-          File file0 = TDFile.getFile( filename1 );
+          File file0 = TDFile.getTopoDroidFile( filename1 );
           if ( file0.exists() ) {
             if ( ! TDFile.renameTempFile( file0, filename1 + TDPath.BCK_SUFFIX ) ) {
               TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );

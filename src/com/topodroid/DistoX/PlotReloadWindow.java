@@ -189,7 +189,7 @@ public class PlotReloadWindow extends ItemDrawer
     String filetdr = filename + ".tdr";
 
     long millis = System.currentTimeMillis();
-    File file = TDFile.getFile( tdr );
+    File file = TDFile.getTopoDroidFile( tdr );
     if ( file.exists() ) {
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] ()";
@@ -198,7 +198,7 @@ public class PlotReloadWindow extends ItemDrawer
     }
     tdr = tdr + TDPath.BCK_SUFFIX;
     filetdr = filetdr + TDPath.BCK_SUFFIX;
-    file = TDFile.getFile( tdr );
+    file = TDFile.getTopoDroidFile( tdr );
     if ( file.exists() ) {
       String age = TDUtil.getAge( millis - file.lastModified() );
       String name = age + " [" + Long.toString(file.length()) + "] (" + TDPath.BCK_SUFFIX + ")";
@@ -207,7 +207,7 @@ public class PlotReloadWindow extends ItemDrawer
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       String tdr1 = tdr + Integer.toString(i);
-      file = TDFile.getFile( tdr1 );
+      file = TDFile.getTopoDroidFile( tdr1 );
       if ( file.exists() ) {
         String age = TDUtil.getAge( millis - file.lastModified() );
         String name = age + " [" + Long.toString(file.length()) + "] (" +  TDPath.BCK_SUFFIX + Integer.toString(i) + ")";

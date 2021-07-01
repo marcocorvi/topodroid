@@ -665,7 +665,7 @@ public class DrawingIO
     // int project_dir = 0;
     // float north_x1, north_y1, north_x2, north_y2;
 
-    File file = TDFile.getFile( filename );
+    File file = TDFile.getTopoDroidFile( filename );
     if ( ! file.exists() ) return false;
 
     FileInputStream fis; // = null;
@@ -835,7 +835,7 @@ public class DrawingIO
     boolean in_scrap = false;
     // int scrap_index = 0;
 
-    File file = TDFile.getFile( filename );
+    File file = TDFile.getTopoDroidFile( filename );
     FileInputStream fis; // = null;
     DataInputStream dis; // = null;
 
@@ -1405,7 +1405,7 @@ public class DrawingIO
 
     // if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) { // xsections if not already auto exported
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-        File file = TDFile.getFile( TDPath.getTdrFileWithExt( xsection.name ) );
+        File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
         dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
       }
     // }
@@ -1575,7 +1575,7 @@ public class DrawingIO
 
     // Log.v("DistoXX", "multisketch sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-      File file = TDFile.getFile( TDPath.getTdrFileWithExt( xsection.name ) );
+      File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
       dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
     }
   }
