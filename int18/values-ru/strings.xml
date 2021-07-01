@@ -201,9 +201,9 @@
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <string name="export_data_title">Экспорт данных</string>
+    <string name="export_plot_title">Экспорт абрисов</string>
+    <string name="export_overview_title">Экспорт страницы обзора</string>
     <!-- UNUSED string name="import_wait">Импорт файла&#8230; обождите&#8230;</string -->
     <string name="import_already">съёмка уже импортирована</string>
     <string name="import_bad">Импортируемый файл поврежден</string>
@@ -952,7 +952,7 @@
     <string name="export_splays_named">Именованые сплеи</string>
     <string name="export_stations">Пикеты</string>
     <string name="export_swap_lr">Поменять местами расстояния ЛЕВО и ПРАВО</string>
-    <!-- TODO string name="export_trox">Trox format</string -->
+    <string name="export_trox">Формат Trox</string>
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
 
@@ -974,7 +974,7 @@
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">Импортировать только функциональные настройки</string>
-    <!-- TODO string name="import_trox">Trox file format</string -->
+    <string name="import_trox">Формат файла Trox</string>
     <string name="import_lrud">Импорт ЛПВН</string>
     <string name="import_leg_first">Замер перед ЛПВН сплеями</string>
     <string name="import_diving_datamode">Режим подводной съёмки</string>
@@ -1172,8 +1172,8 @@
   <string name="pref_vtopo_splays_summary">Экспорт сплеев в формат VisualTopo</string>
   <string name="pref_vtopo_lrud_title">ЛПВН на пикете ОТ</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo ЛПВН на пикете ОТ</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Формат Trox</string>
+  <string name="pref_vtopo_trox_summary">Экспорт VisualTopo в формат trox</string>
   <!-- UNUSED string name="pref_trobot_names_title">Номера пикетов TopoRobot</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Номера пикетов в стиле TopoRobot</string -->
   <string name="pref_ortho_lrud_title">Мин. угол сплея для расчета ЛПВН</string>

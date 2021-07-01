@@ -201,9 +201,9 @@ Tap <b>Bezár</b> nem változtat.
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <string name="export_data_title">Adat export</string>
+    <string name="export_plot_title">Vázlat export</string>
+    <string name="export_overview_title">Áttekintő export</string>
     <!-- UNUSED string name="import_wait">Fájl importálása &#8230; kérjük várjál &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
     <string name="import_bad">Hibás importálható fájl</string>
@@ -291,7 +291,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="group_policy_four">Négyesével csoportosítva</string>
     <string name="group_policy_sixteen">Négy csoport négyesével, a többi egyenként</string>
     <string name="group_policy_distance">Csoportosítás az irányszögek alapján</string>
-    <string name="group_reset">Újra csoportosítás</string>
+    <string name="group_reset">Csoportok törlése</string>
 
     <!-- UNUSED string name="scale">scale</string -->
     <!-- UNUSED string name="reversed">megfordított</string -->
@@ -760,7 +760,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
-    <string name="layer_floor">Alljat</string>
+    <string name="layer_floor">Talp</string>
     <string name="layer_fill">Kitöltés</string>
     <string name="layer_ceil">Plafon</string>
     <string name="layer_arti">Műtárgyak</string>
@@ -975,7 +975,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>
     <string name="export_swap_lr">Bal/Jobb megcserélése</string>
-    <!-- TODO string name="export_trox">Trox format</string -->
+    <string name="export_trox">Trox formátum</string>
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
 
@@ -997,7 +997,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="playing">Lejátszás %1$s</string -->
   
     <string name="import_functional">Csak a funkcionális beállítások betöltése</string>
-    <!-- TODO string name="import_trox">Trox file format</string -->
+    <string name="import_trox">Trox fájl formátum</string>
     <string name="import_lrud">Import BJFL</string>
     <string name="import_leg_first">Poligon mérés a BJFL előtt</string>
     <string name="import_diving_datamode">Merülési adatmód</string>
@@ -1203,8 +1203,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_vtopo_splays_summary">Segédmérések exportja a VisualTopo fájlokba</string>
   <string name="pref_vtopo_lrud_title">BJFL a kezdőpontnál</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo BJFL a kezdőpontnál</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Trox formátum</string>
+  <string name="pref_vtopo_trox_summary">Export VisualTopo trox formában</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot pontnevek</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Pontnevek a TopoRobot program stílusában</string -->
   <string name="pref_ortho_lrud_title">BJFL segédpontok szöge</string>
