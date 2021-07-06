@@ -645,7 +645,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">Eroare memorie EOF DistoX</string>
     <string name="distox_err_connected">Dispozivul este deja conectat</string>
 
-    <!-- UNUSED string name="ask_close">Închide TopoDroid?</string -->
+    <string name="ask_close_app">Închide TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Resetează memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
@@ -824,6 +824,7 @@ Tap "Close" not to take any action.
     <string name="help_backups">Șterge copiile de siguranță ale schiței</string>
     <string name="help_calib_check">Măsurători verificare-calibrare</string>
     <string name="help_close">Închide fereastra</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Arată coeficienții calibrării</string>
     <string name="help_color">Șterge culorile radierilor</string>
     <string name="help_continue">Continuă desenul unei linii</string>

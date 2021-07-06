@@ -659,7 +659,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="distox_err_headtail_eof">DistoX Speicher EOF Fehler</string>
     <string name="distox_err_connected">Gerät bereits verbunden</string>
 
-    <!-- UNUSED string name="ask_close">TopoDroid beenden?</string -->
+    <string name="ask_close_app">TopoDroid beenden?</string>
     <!-- UNUSED string name="ask_reset">DistoX zurücksetzen?</string -->
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
@@ -839,6 +839,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="help_backups">Skizzenbackups löschen</string>
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Kalibrierungs-Koeffizienten zeigen</string>
     <string name="help_color">Hilfszug-Farben löschen</string>
     <string name="help_continue">Linien fortsetzen</string>

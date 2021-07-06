@@ -644,7 +644,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">Erro de EOF na memória da DistoX</string>
     <string name="distox_err_connected">Dispositivo já conectado</string>
 
-    <!-- UNUSED string name="ask_close">Fechar TopoDroid?</string -->
+    <string name="ask_close_app">Fechar TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
@@ -825,6 +825,7 @@ Tap "Close" not to take any action.
     <string name="help_backups">Apagar backups dos croquis</string>
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Mostrar coeficientes de calibração</string>
     <string name="help_color">Voltar medidas auxiliares para cor padrão</string>
     <string name="help_continue">Continuar desenho de uma linha</string>

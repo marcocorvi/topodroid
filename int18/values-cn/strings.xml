@@ -657,7 +657,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">DistoX内存清除错误</string>
     <string name="distox_err_connected">设备已连接</string>
 
-    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
+    <!-- TODO string name="ask_close_app">Close TopoDroid?</string -->
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">设置GPS服务?</string>
@@ -838,6 +838,7 @@ Tap "Close" not to take any action.
     <string name="help_backups">删除草图备份</string>
     <string name="help_calib_check">校准检验测量</string>
     <string name="help_close">关闭窗口</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">显示校准系数</string>
     <string name="help_color">清除副线颜色</string>
     <string name="help_continue">继续画线</string>

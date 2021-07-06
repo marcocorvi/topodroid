@@ -645,7 +645,7 @@
     <string name="distox_err_headtail_eof">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_connected">Прибор уже подключен</string>
 
-    <!-- UNUSED string name="ask_close">Закрыть TopoDroid?</string -->
+    <string name="ask_close_app">Закрыть TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Сбросить память DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     <string name="ask_gps_service">Включить сервис GPS?</string>
@@ -825,6 +825,7 @@
     <string name="help_backups">Удалить резервные копии абрисов</string>
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Показать коэффициенты калибровки</string>
     <string name="help_color">Сбросить цвет сплеев</string>
     <string name="help_continue">Продолжить рисовать линию</string>

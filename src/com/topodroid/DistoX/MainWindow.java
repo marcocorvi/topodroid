@@ -134,6 +134,7 @@ public class MainWindow extends Activity
                           };
 
   private static final int[] menus = {
+                          R.string.menu_close,
                           R.string.menu_palette,
                           R.string.menu_logs,
 			  R.string.menu_backups,
@@ -153,6 +154,7 @@ public class MainWindow extends Activity
                           // R.string.help_database
                           };
   private static final int[] help_menus = {
+                          R.string.help_close_app,
                           R.string.help_symbol,
                           R.string.help_log,
 			  R.string.help_backups,
@@ -556,14 +558,15 @@ public class MainWindow extends Activity
     mWithLogs     = TDLevel.overAdvanced;
     mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
 
-    if ( mWithPalette ) menu_adapter.add( res.getString( menus[0] ) ); // PALETTE
-    if ( mWithLogs )    menu_adapter.add( res.getString( menus[1] ) ); // LOGS
-    if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[2] ) ); // CLEAR_BACKUPS
+    menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
+    if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
+    if ( mWithLogs )    menu_adapter.add( res.getString( menus[2] ) ); // LOGS
+    if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[5] ) ); // HELP
+    menu_adapter.add( res.getString( menus[4] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[5] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[6] ) ); // HELP
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
@@ -580,7 +583,13 @@ public class MainWindow extends Activity
     // TDToast.make(item.toString() );
     int p = 0;
       Intent intent;
-      if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
+      if ( p++ == pos ) { // CLOSE askClose
+        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_close_app,
+          new DialogInterface.OnClickListener() {
+            @Override public void onClick( DialogInterface dialog, int btn ) { doCloseApp(); }
+          }
+        );
+      } else if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // (new SymbolEnableDialog( mActivity )).show();
         (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
       } else if ( mWithLogs && p++ == pos ) { // LOGS
@@ -1033,6 +1042,11 @@ public class MainWindow extends Activity
     doubleBack = true;
     doubleBackToast = TDToast.makeToast( R.string.double_back );
     doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+  }
+
+  public void doCloseApp()
+  {
+    super.onBackPressed();
   }
 
   // ------------------------------------------------------------------

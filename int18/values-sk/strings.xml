@@ -664,7 +664,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">Chyba EOF pamäte DistoX</string>
     <string name="distox_err_connected">DistoX je už pripojené</string>
 
-    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
+    <!-- TODO string name="ask_close_app">Close TopoDroid?</string -->
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Nastaviť službu GPS?</string>
@@ -844,6 +844,7 @@ Tap "Close" not to take any action.
     <string name="help_backups">Vymazať zálohy Nákresov</string>
     <string name="help_calib_check">Kalibrácia - Kontrolné merania</string>
     <string name="help_close">Zavrieť okno</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Ukázať Kalibračné koeficienty vybranej kalibrácie</string>
     <string name="help_color">Vymazať užívateľsky definované farby pomocných zámer</string>
     <string name="help_continue">Vybrať možnosti nadpájania Čiar</string>

@@ -643,7 +643,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">Грешка в DistoX паметта: EOF</string>
     <string name="distox_err_connected">Устройството е вече свързано</string>
 
-    <!-- UNUSED string name="ask_close">Затваряне на TopoDroid?</string -->
+    <string name="ask_close_app">Затваряне на TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Изчистване на паметта на DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
@@ -823,6 +823,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Показване на коеф. на калибрация</string>
     <string name="help_color">Изчистване цвета на стран. изм.</string>
     <string name="help_continue">Продължаване на линия</string>

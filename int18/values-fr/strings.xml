@@ -643,7 +643,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="distox_err_headtail_eof">Erreur EOF mémoire DistoX</string>
     <string name="distox_err_connected">Périphérique déjà connecté</string>
 
-     <!-- UNUSED string name="ask_close">Quitter TopoDroid?</string -->
+     <string name="ask_close_app">Quitter TopoDroid?</string>
      <!-- UNUSED string name="ask_reset">Réinitialiser la mémoire du DistoX ?</string -->
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
@@ -824,6 +824,7 @@ Appuyez sur "Fermer" pour ne rien modifier.
     <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string>
     <string name="help_calib_check">Visées de contrôle d\'étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Montrer les coefficients d\'étalonnage</string>
     <string name="help_color">Efface la couleur des visées</string>
     <string name="help_continue">Continuer une ligne</string>

@@ -663,7 +663,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="distox_err_headtail_eof">DA fájl sérült, vagy nem kompatibilis (EOF hiba)</string>
     <string name="distox_err_connected">A műszer már kapcsolatban</string>
 
-    <!-- UNUSED string name="ask_close">Bezárod a TopoDroid-ot?</string -->
+    <string name="ask_close_app">Bezárod a TopoDroid-ot?</string>
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
     <!-- UNUSED string name="ask_close_survey">Bezárod a felmérést?</string -->
     <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
@@ -845,6 +845,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_backups">Vázlat mentések törlése</string>
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_color">Mérés szín törlése</string>
     <string name="help_continue">Vonal folytatása</string>

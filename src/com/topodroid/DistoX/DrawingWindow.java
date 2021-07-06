@@ -5707,60 +5707,63 @@ public class DrawingWindow extends ItemDrawer
       } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
-          int flag = 0;
-          if ( sp.mItem instanceof DrawingStationName ) {
-            DrawingStationName st = (DrawingStationName)(sp.mItem);
-            DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
-            boolean barrier = mNum.isBarrier( st.getName() );
-            boolean hidden  = mNum.isHidden( st.getName() );
-            List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-            new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
-          } else if ( sp.mItem instanceof DrawingPointPath ) {
-            DrawingPointPath point = (DrawingPointPath)(sp.mItem);
-            // Log.v("DistoX", "edit point type " + point.mPointType );
-            if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
-              new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
-            } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
-              if ( audioCheck ) {
-                DrawingAudioPath audio = (DrawingAudioPath)point;
-                new AudioDialog( mActivity, this, audio.mId, null ).show();
+          DrawingPath item = sp.mItem;
+          if ( item != null ) {
+            if ( item instanceof DrawingStationName ) {
+              DrawingStationName st = (DrawingStationName)(item);
+              DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
+              boolean barrier = mNum.isBarrier( st.getName() );
+              boolean hidden  = mNum.isHidden( st.getName() );
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+            } else if ( item instanceof DrawingPointPath ) {
+              DrawingPointPath point = (DrawingPointPath)(item);
+              // Log.v("DistoX", "edit point type " + point.mPointType );
+              if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
+                new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
+              } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
+                if ( audioCheck ) {
+                  DrawingAudioPath audio = (DrawingAudioPath)point;
+                  new AudioDialog( mActivity, this, audio.mId, null ).show();
+                } else {
+	          TDToast.makeWarn( R.string.no_feature_audio );
+                }
+              } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+                new DrawingPointSectionDialog( mActivity, this, point ).show();
               } else {
-	        TDToast.makeWarn( R.string.no_feature_audio );
+                new DrawingPointDialog( mActivity, this, point ).show();
               }
-            } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-              new DrawingPointSectionDialog( mActivity, this, point ).show();
-            } else {
-              new DrawingPointDialog( mActivity, this, point ).show();
-            }
-            // modified()
-          } else if ( sp.mItem instanceof DrawingLinePath ) {
-            DrawingLinePath line = (DrawingLinePath)(sp.mItem);
-            if ( BrushManager.isLineSection( line.mLineType ) ) {
-              // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
-              // cross-section exists already
-              boolean h_section = PlotType.isProfile( mType ); // not really necessary
-              String id = line.getOption( "-id" );
-              if ( id != null ) {
-                new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, true, id, line, null, null, 0, 0, -1 ).show();
-              } else {
-                TDLog.Error("edit section line with null id" );
-              }
-            } else {
-              new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
-            }
-            // modified()
-          } else if ( sp.mItem instanceof DrawingAreaPath ) {
-              new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(sp.mItem) ).show();
               // modified()
-          } else {
-            if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
-              DrawingPath p = sp.mItem;
-              if ( p != null && p.mBlock != null ) {
-                flag = mNum.canBarrierHidden( p.mBlock.mFrom, p.mBlock.mTo );
+            } else if ( item instanceof DrawingLinePath ) {
+              DrawingLinePath line = (DrawingLinePath)(item);
+              if ( BrushManager.isLineSection( line.mLineType ) ) {
+                // Log.v("DistoX", "edit section line " ); // default azimuth = 0 clino = 0
+                // cross-section exists already
+                boolean h_section = PlotType.isProfile( mType ); // not really necessary
+                String id = line.getOption( "-id" );
+                if ( id != null ) {
+                  new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, true, id, line, null, null, 0, 0, -1 ).show();
+                } else {
+                  TDLog.Error("edit section line with null id" );
+                }
+              } else {
+                new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
               }
-            } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
-              new DrawingShotDialog( mActivity, this, sp.mItem, flag ).show();
+              // modified()
+            } else if ( item instanceof DrawingAreaPath ) {
+                new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(item) ).show();
+                // modified()
+            } else {
+              // Log.v("DistoX", "centerline path type " + sp.type() );
+              if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
+                int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
+                new DrawingShotDialog( mActivity, this, item, flag ).show();
+              } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
+                new DrawingShotDialog( mActivity, this, item, 0 ).show();
+              }
             }
+          } else {
+            TDLog.Error("selected point has null item");
           }
         }
         clearSelected();

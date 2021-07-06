@@ -659,7 +659,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="distox_err_headtail_eof">Memoria DistoX EOF</string>
     <string name="distox_err_connected">DistoX già connesso</string>
 
-    <!-- UNUSED string name="ask_close">Uscire da TopoDroid?</string -->
+    <string name="ask_close_app">Uscire da TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Resettare memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Chiudere rilievo?</string -->
     <string name="ask_gps_service">Impostare il servizio GPS?</string>
@@ -841,6 +841,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="help_backups">Cancella backup disegni</string>
     <string name="help_calib_check">Tiri di controllo calib.</string>
     <string name="help_close">Chiusura finestra</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Coefficienti della calibrazione</string>
     <string name="help_color">Pulisci i colori degli splay</string>
     <string name="help_continue">Continuare il disegno di una linea</string>

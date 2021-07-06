@@ -649,7 +649,7 @@ Tap "Close" not to take any action.
     <string name="distox_err_headtail_eof">Fallo memoria EOF DistoX</string>
     <string name="distox_err_connected">Dispositivo conectado con éxito</string>
 
-    <!-- UNUSED string name="ask_close">¿Cerrar TopoDroid?</string -->
+    <string name="ask_close_app">¿Cerrar TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
@@ -830,6 +830,7 @@ Tap "Close" not to take any action.
     <string name="help_backups">Eliminar copia de seguridad de croquis</string>
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
+    <!-- TODO string name="help_close_app">Close app</string -->
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>

@@ -676,7 +676,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="distox_err_headtail_eof">DistoX memory EOF error</string>
     <string name="distox_err_connected">Device already connected</string>
 
-    <!-- UNUSED string name="ask_close">Close TopoDroid?</string -->
+    <string name="ask_close_app">Close TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
@@ -858,6 +858,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_backups">Delete sketch backups</string>
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
+    <string name="help_close_app">Close app</string>
     <string name="help_coeff">Show calibration coefficients</string>
     <string name="help_color">Clear splay colors</string>
     <string name="help_continue">Continue drawing a line</string>
