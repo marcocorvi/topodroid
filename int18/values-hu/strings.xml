@@ -1084,7 +1084,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_settings_edit">TopoDroid módosítás beállítások</string>
     <string name="title_settings_device">TopoDroid készülék beállítások</string>
     <string name="title_settings_calib">TopoDroid kalibrációs beállítások</string>
-    <string name="title_settings_geek">TopoDroid geek flags beállítások</string>
+    <string name="title_settings_geek">TopoDroid geek beállítások</string>
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
