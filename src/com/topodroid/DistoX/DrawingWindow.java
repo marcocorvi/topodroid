@@ -6630,7 +6630,7 @@ public class DrawingWindow extends ItemDrawer
     Log.v("DistoX", "export type " + export_type + " index " + mExportIndex );
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-    intent.setType("*/*");
+    intent.setType( TDConst.mMimeType[ mExportIndex] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
@@ -6644,8 +6644,8 @@ public class DrawingWindow extends ItemDrawer
     Log.v("DistoX", "Drawing export index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
-      case TDConst.DISTOX_EXPORT_TH2: doSaveTh2( uri, mType, true ); break;
-      case TDConst.DISTOX_EXPORT_CSX: 
+      case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, mType, true ); break;
+      case TDConst.SURVEY_FORMAT_CSX: 
         if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
             String origin = mPlot1.start;
@@ -6656,18 +6656,18 @@ public class DrawingWindow extends ItemDrawer
 	  }
           break;
         } // else fall-through and savePng
-      case TDConst.DISTOX_EXPORT_PNG: savePng( uri, mType ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( uri, mType, "dxf" ); break;
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( uri, mType, "svg" ); break;
-      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( uri, mType, "shp" ); break;
-      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( uri, mType, "xvi" ); break;
-      case TDConst.DISTOX_EXPORT_TNL: saveWithExt( uri, mType, "xml" ); break;
-      case TDConst.DISTOX_EXPORT_C3D: 
+      case TDConst.SURVEY_FORMAT_PNG: savePng( uri, mType ); break;
+      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, mType, "dxf" ); break;
+      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, mType, "svg" ); break;
+      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, mType, "shp" ); break;
+      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, mType, "xvi" ); break;
+      case TDConst.SURVEY_FORMAT_TNL: saveWithExt( uri, mType, "xml" ); break;
+      case TDConst.SURVEY_FORMAT_C3D: 
         // Log.v("DistoX-C3D", "export c3d");
         // if ( ! PlotType.isAnySection( mType ) )
           saveWithExt( uri, mType, "c3d" );
         break;
-      case TDConst.DISTOX_EXPORT_PDF: savePdf( uri, mType ); break; 
+      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri, mType ); break; 
     }
   }
 

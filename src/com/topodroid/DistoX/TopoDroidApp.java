@@ -1540,7 +1540,7 @@ public class TopoDroidApp extends Application
   //   if ( info == null ) return false;
   //   // if ( async ) {
   //   //   String saving = context.getResources().getString(R.string.saving_);
-  //   //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.DISTOX_EXPORT_TH, toast )).execute();
+  //   //   (new SaveDataFileTask( saving, TDInstance.sid, info, mData, TDInstance.survey, null, TDConst.SURVEY_FORMAT_TH, toast )).execute();
   //   //   return true;
   //   // }
   //   return ( TDExporter.exportSurveyAsTh( TDInstance.sid, mData, info, TDPath.getSurveyThFile( TDInstance.survey ) ) != null );

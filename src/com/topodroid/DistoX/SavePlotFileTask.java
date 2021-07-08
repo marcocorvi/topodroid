@@ -84,7 +84,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
      Log.v( "DistoX", "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
-     // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.DISTOX_EXPORT_CSX ) { // auto-export format cSurvey
+     // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
      //   // Log.v("DistoX", "auto export CSX");
      //   origin = parent.getOrigin();
      //   psd1 = parent.makePlotSaveData( 1, suffix, rotate );
@@ -140,38 +140,38 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       } else if ( mSuffix == PlotSave.SAVE ) {
         // // Log.v("DistoXX", "save plot Therion file SAVE " + mFullName );
         // switch ( TDSetting.mExportPlotFormat ) { // auto-export format
-        //   case TDConst.DISTOX_EXPORT_TH2:
+        //   case TDConst.SURVEY_FORMAT_TH2:
         //     if ( mManager != null ) {
         //       File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         //       DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         //     }
         //     break;
-        //   case TDConst.DISTOX_EXPORT_DXF:
+        //   case TDConst.SURVEY_FORMAT_DXF:
 	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "dxf", false );
 	//     }
         //     break;
-        //   case TDConst.DISTOX_EXPORT_SVG:
+        //   case TDConst.SURVEY_FORMAT_SVG:
 	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "svg", false );
 	//     }
         //     break;
-        //   case TDConst.DISTOX_EXPORT_SHP:
+        //   case TDConst.SURVEY_FORMAT_SHP:
 	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "shp", false );
 	//     }
         //     break;
-        //   case TDConst.DISTOX_EXPORT_XVI:
+        //   case TDConst.SURVEY_FORMAT_XVI:
 	//     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "xvi", false );
 	//     }
         //     break;
-        //   // case TDConst.DISTOX_EXPORT_C3D:
+        //   // case TDConst.SURVEY_FORMAT_C3D:
 	//   //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //   //     mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "c3d", false );
 	//   //   }
         //   //   break;
-        //   case TDConst.DISTOX_EXPORT_CSX: // IMPORTANT CSX must come before PNG
+        //   case TDConst.SURVEY_FORMAT_CSX: // IMPORTANT CSX must come before PNG
         //     if ( PlotType.isSketch2D( mType ) ) {
 	//       if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
         //         mParent.get().doSaveCsx( origin, psd1, psd2, false );
@@ -180,7 +180,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         //     } else { // X-Section cSurvey are exported as PNG
         //       // fall-through
         //     }
-        //   case TDConst.DISTOX_EXPORT_PNG:
+        //   case TDConst.SURVEY_FORMAT_PNG:
         //     if ( mManager != null ) {
         //       Bitmap bitmap = mManager.getBitmap();
         //       if (bitmap == null) {

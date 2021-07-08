@@ -28,12 +28,12 @@ public class ImportCompassTask extends ImportTask
   private boolean mLrud;
   private boolean mLegFirst;
 
-  public ImportCompassTask( MainWindow main, InputStreamReader isr, int datamode, boolean lrud, boolean leg_first )
+  public ImportCompassTask( MainWindow main, InputStreamReader isr, ImportData data )
   {
     super( main, isr );
-    mDatamode = datamode; 
-    mLrud     = lrud;
-    mLegFirst = leg_first;
+    mDatamode = data.mDatamode; 
+    mLrud     = data.mLrud;
+    mLegFirst = data.mLeg;
   }
 
   @Override

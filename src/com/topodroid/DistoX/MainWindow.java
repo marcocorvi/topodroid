@@ -28,6 +28,7 @@ import com.topodroid.help.UserManDownload;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.DeviceUtil;
+import com.topodroid.inport.ImportData;
 import com.topodroid.inport.ImportCompassTask;
 import com.topodroid.inport.ImportVisualTopoTask;
 import com.topodroid.inport.ImportTherionTask;
@@ -36,8 +37,8 @@ import com.topodroid.inport.ImportSurvexTask;
 import com.topodroid.inport.ImportCaveSniperTask;
 import com.topodroid.inport.ImportZipTask;
 import com.topodroid.inport.ImportDialog;
-import com.topodroid.inport.ImportDatDialog;
-import com.topodroid.inport.ImportTroDialog;
+// import com.topodroid.inport.ImportDatDialog;
+// import com.topodroid.inport.ImportTroDialog;
 
 import com.topodroid.mag.WorldMagneticModel;
 
@@ -229,7 +230,8 @@ public class MainWindow extends Activity
   public boolean onLongClick( View view )
   {
     if ( view != mButton1[2] ) return false; // IMPORT
-    selectImportFromProvider();
+    // selectImportFromProvider();
+    (new ImportDialogShot( this, this, TDConst.mSurveyImportTypes, R.string.title_import_shot )).show();
     return true;
   }
 
@@ -245,15 +247,6 @@ public class MainWindow extends Activity
     } else {
       TDToast.makeWarn( R.string.import_none );
     }
-  }
-
-  private void selectImportFromProvider() // IMPORT
-  {
-    // Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker ACTION_OPEN_DOCUMENT
-    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
-    intent.setType("*/*");
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_IMPORT );
   }
 
   @Override
@@ -428,17 +421,17 @@ public class MainWindow extends Activity
     mActivity.setTitleColor( TDColor.CONNECTED );
   }
 
-  public void importDatFile( InputStreamReader isr, String filepath, int datamode, boolean lrud, boolean leg_first )
-  {
-    setTitleImport();
-    new ImportCompassTask( this, isr, datamode, lrud, leg_first ).execute( filepath );
-  }
+  // public void importDatFile( InputStreamReader isr, String filepath, int datamode, boolean lrud, boolean leg_first )
+  // {
+  //   setTitleImport();
+  //   new ImportCompassTask( this, isr, datamode, lrud, leg_first ).execute( filepath );
+  // }
 
-  public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first, boolean trox )
-  {
-    setTitleImport();
-    new ImportVisualTopoTask( this, isr, lrud, leg_first, trox ).execute( filepath );
-  }
+  // public void importTroFile( InputStreamReader isr, String filepath, boolean lrud, boolean leg_first, boolean trox )
+  // {
+  //   setTitleImport();
+  //   new ImportVisualTopoTask( this, isr, lrud, leg_first, trox ).execute( filepath );
+  // }
 
   // public void importFile( String filename )
   // {
@@ -495,11 +488,11 @@ public class MainWindow extends Activity
   // @param type   file extension (including the dot)
   public void importStream( FileInputStream fis, String name, String type )
   {
-    Log.v("DistoX", "import with stream " + name + " " + type );
+    Log.v("DistoX", "import with stream <" + name + "> type <" + type + ">" );
     // FIXME connect-title string
     if ( type.equals(".top") ) {
       setTitleImport();
-      new ImportPocketTopoTask( this, fis ).execute( name ); // TODO pass the drawer as arg
+      new ImportPocketTopoTask( this, fis ).execute( null, name );  // null filename (use fis); name = surveyname
     } else if ( type.equals(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
       setTitleImport();
@@ -510,18 +503,21 @@ public class MainWindow extends Activity
     // FIXME SYNC updateDisplay();
   }
   
-  public void importReader( InputStreamReader isr, String name, String type )
+  public void importReader( InputStreamReader isr, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    Log.v("DistoX", "import with reader " + name + " " + type );
+    Log.v("DistoX", "import with reader <" + name + "> type <" + type + ">" );
     if ( type.equals(".th") ) {
       setTitleImport();
       new ImportTherionTask( this, isr ).execute( name, name );
     } else if ( type.equals(".dat") ) {
-      (new ImportDatDialog( this, this, isr, name )).show();
+      setTitleImport();
+      new ImportCompassTask( this, isr, data ).execute( name, name );
+      // (new ImportDatDialog( this, this, isr, name )).show();
     } else if ( type.equals(".tro") || type.equals(".trox") ) {
       setTitleImport();
-      (new ImportTroDialog( this, this, isr, name )).show();
+      new ImportVisualTopoTask( this, isr, data ).execute( name, name );
+      // (new ImportTroDialog( this, this, isr, name )).show();
     } else if ( type.equals(".svx") ) {
       setTitleImport();
       new ImportSurvexTask( this, isr ).execute( name ); 
@@ -1088,7 +1084,7 @@ public class MainWindow extends Activity
             String path = TDsaf.getPath(this, uri);
             if (path == null) {
               // filename = FilenameUtils.getName(uri.toString());
-              filename = uri.toString();
+              filename = uri.getLastPathSegment();
               if ( filename != null ) {
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
@@ -1097,15 +1093,15 @@ public class MainWindow extends Activity
               File file = new File(path);
               filename = file.getName();
             }
-            Log.v("DistoX", "URI to import: " + uri.toString() + " null mime, filename " + filename );
+            Log.v("DistoX", "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {
-            filename = uri.toString();
+            filename = uri.getLastPathSegment();
             int pos = filename.lastIndexOf(".");
             int qos = filename.lastIndexOf("/");
-            String ext  = filename.substring( pos ).toLowerCase();
+            String ext  = filename.substring( pos ).toLowerCase(); // extension with leadin '.'
             String name = filename.substring( qos+1, pos );
             String surveyname = name;
-            Log.v("DistoX", "URI to import: " + uri.toString() + " mime " + mimetype + " name " + name + " ext " + ext );
+            Log.v("DistoX", "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
               FileInputStream fis = TDsaf.docFileInputStream( uri );
               // if ( fis.markSupported() ) fis.mark();
@@ -1117,16 +1113,16 @@ public class MainWindow extends Activity
             } else {
               String type = TDPath.checkImportTypeStream( ext );
               if ( type != null ) {
-                Log.v("DistoX", "import stream");
+                Log.v("DistoX", "import stream type " + type + " name " + name );
                 FileInputStream fis = TDsaf.docFileInputStream( uri );
                 importStream( fis, name, type );
               } else {
                 type = TDPath.checkImportTypeReader( ext );
                 if ( type != null ) {
-                  Log.v("DistoX", "import reader");
+                  Log.v("DistoX", "import reader type " + type + " name " + name);
                   try {
                     InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
-                    importReader( isr, name, type );
+                    importReader( isr, name, type, mImportData );
                   } catch ( FileNotFoundException e ) {
                     Log.v("DistoX", "File not found");
                   }
@@ -1307,5 +1303,41 @@ public class MainWindow extends Activity
       }
     }
   }
+
+  private static int mImportType; 
+  private static ImportData mImportData;
+
+  public void doImport( String type, ImportData data )
+  {
+    int index = TDConst.surveyFormatIndex( type );
+    // Log.v("DistoX", "import " + type + " " + index );
+    if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
+      // TODO import index
+    } else if ( index >= 0 ) {
+      selectImportFromProvider( index, data );
+    }
+  }
+
+  private void selectImportFromProvider( int index, ImportData data ) // IMPORT
+  {
+    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
+    intent.setType( TDConst.mMimeType[ index ] );
+    Log.v("DistoX", "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.putExtra( "importtype", index ); // extra is not returned to the app
+    mImportData = data;
+    mImportData.mType = index;
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_shot ) ), TDRequest.REQUEST_GET_IMPORT );
+  }
+
+  // private void selectImportFromProvider() // IMPORT
+  // {
+  //   // Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker ACTION_OPEN_DOCUMENT
+  //   Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
+  //   intent.setType("*/*");
+  //   intent.addCategory(Intent.CATEGORY_OPENABLE);
+  //   startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_IMPORT );
+  // }
 
 }

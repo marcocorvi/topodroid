@@ -28,12 +28,12 @@ public class ImportVisualTopoTask extends ImportTask
   private boolean mLegFirst;
   private boolean mTrox;
 
-  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, boolean lrud, boolean leg_first, boolean trox )
+  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, ImportData data )
   {
     super( main, isr );
-    mLrud = lrud;
-    mLegFirst = leg_first;
-    mTrox = trox;
+    mLrud     = data.mLrud;
+    mLegFirst = data.mLeg;
+    mTrox     = data.mTrox;
   }
 
   @Override

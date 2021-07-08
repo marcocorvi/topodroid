@@ -698,7 +698,7 @@ public class OverviewWindow extends ItemDrawer
     mExportIndex = TDConst.plotExportIndex( export_type );
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-    intent.setType("*/*");
+    intent.setType( TDConst.mMimeType[ mExportIndex ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
@@ -728,12 +728,12 @@ public class OverviewWindow extends ItemDrawer
     // Log.v("DistoX", "Overview export " + export_type );
     // int index = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
-      case TDConst.DISTOX_EXPORT_TH2: saveWithExt( uri, "th2" ); break;
-      case TDConst.DISTOX_EXPORT_DXF: saveWithExt( uri, "dxf" ); break; 
-      case TDConst.DISTOX_EXPORT_SVG: saveWithExt( uri, "svg" ); break;
-      case TDConst.DISTOX_EXPORT_SHP: saveWithExt( uri, "shp" ); break;
-      case TDConst.DISTOX_EXPORT_XVI: saveWithExt( uri, "xvi" ); break;
-      case TDConst.DISTOX_EXPORT_PDF: savePdf( uri ); break;
+      case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
+      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
+      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, "svg" ); break;
+      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shp" ); break;
+      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
+      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
     }
   }
 

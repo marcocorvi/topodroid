@@ -491,7 +491,7 @@ public class CalibActivity extends Activity
       TDToast.makeBad( R.string.no_calibration );
     } else {
       String filename = null;
-      if ( exportType == TDConst.DISTOX_EXPORT_CSV ) {
+      if ( exportType == TDConst.SURVEY_FORMAT_CSV ) {
         filename = mApp.exportCalibAsCsv();
       }
       if ( filename != null ) {

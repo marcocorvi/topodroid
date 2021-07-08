@@ -498,9 +498,9 @@ public class SurveyWindow extends Activity
   public void doExport( String type )
   {
     saveSurvey();
-    int index = TDConst.surveyExportIndex( type );
+    int index = TDConst.surveyFormatIndex( type );
     Log.v("DistoX", "export " + type + " " + index );
-    if ( index == TDConst.DISTOX_EXPORT_ZIP ) {
+    if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
       if ( TDInstance.sid < 0 ) {
@@ -518,7 +518,7 @@ public class SurveyWindow extends Activity
   {
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-    intent.setType("*/*");
+    intent.setType( TDConst.mMimeType[index] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     mExportType = index;

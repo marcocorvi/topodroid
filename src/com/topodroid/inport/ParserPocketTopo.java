@@ -75,7 +75,8 @@ class ParserPocketTopo extends ImportParser
     super( apply_declination );
     String mStartFrom = null;
     // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
-    mName     = surveyname.replace(".top", "");
+    // mName     = surveyname.replace(".top", "");
+    mName     = surveyname;
     readPocketTopoFile( fis, filename );
     checkValid();
   }

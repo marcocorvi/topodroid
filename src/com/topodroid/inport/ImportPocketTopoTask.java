@@ -21,6 +21,8 @@ import com.topodroid.DistoX.MainWindow;
 import java.util.ArrayList;
 import java.io.InputStream;
 
+import android.util.Log;
+
 public class ImportPocketTopoTask extends ImportTask
 {
   public ImportPocketTopoTask( MainWindow main, InputStream fis ) 
@@ -33,6 +35,7 @@ public class ImportPocketTopoTask extends ImportTask
   {
     long sid = 0;
     try {
+      Log.v("DistoX", "import PocketTopo: survey " + str[1] );
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( fis, str[0], str[1], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;

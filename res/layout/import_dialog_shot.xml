@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="wrap_content"
+  android:orientation="vertical"
+  >
+
+  <Spinner android:id="@+id/spin"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:drawSelectorOnTop="true"
+  />
+
+  <!-- LinearLayout android:id="@+id/layout_zip"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/zip_symbols"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:text="@string/export_symbols"
+      />
+  </LinearLayout -->
+
+  <LinearLayout android:id="@+id/layout_compass"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/dat_lrud"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_lrud"
+      />
+    <CheckBox android:id="@+id/dat_leg_first"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_leg_first"
+      />
+    <CheckBox android:id="@+id/dat_diving"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_diving_datamode"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_cavesniper"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_survex"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_therion"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_vtopo"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+    <CheckBox android:id="@+id/tro_trox"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_trox"
+      />
+    <CheckBox android:id="@+id/tro_lrud"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_lrud"
+      />
+    <CheckBox android:id="@+id/tro_leg_first"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content" 
+      android:text="@string/import_leg_first"
+      />
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/layout_pockettopo"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    >
+  </LinearLayout>
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal" 
+    android:layout_marginTop="@dimen/marginvbig"
+    android:layout_marginBottom="@dimen/marginvbig"
+    android:gravity="left"
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="right"
+      >
+      <Button android:id="@+id/button_back"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+    </LinearLayout>
+  </LinearLayout>
+   		
+</LinearLayout>

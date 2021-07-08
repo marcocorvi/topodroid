@@ -1356,7 +1356,7 @@ public class DrawingIO
               if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
                 DrawingPointPath pp = (DrawingPointPath)p;
                 exportTherionPoint( out, pp );
-                // if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
+                // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
                   if ( BrushManager.isPointSection( pp.mPointType ) ) {
                     if ( TDSetting.mAutoXSections ) {
                       String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) ); // x-section name
@@ -1403,7 +1403,7 @@ public class DrawingIO
       e.printStackTrace();
     }
 
-    // if ( TDSetting.mExportPlotFormat != TDConst.DISTOX_EXPORT_TH2 ) { // xsections if not already auto exported
+    // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
         File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
         dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
