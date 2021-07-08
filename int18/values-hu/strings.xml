@@ -1085,7 +1085,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="title_settings_edit">TopoDroid módosítás beállítások</string>
     <string name="title_settings_device">TopoDroid készülék beállítások</string>
     <string name="title_settings_calib">TopoDroid kalibrációs beállítások</string>
-    <string name="title_settings_geek">TopoDroid geek flags beállítások</string>
+    <string name="title_settings_geek">TopoDroid geek beállítások</string>
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
@@ -1631,9 +1631,9 @@ Tap <b>Bezár</b> nem változtat.
 
     <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
-\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX-el történő barlangfelmérésre.
-\n\nNINCS GARANCIA: A SZOFTWER HASZNÁLATÁVAL ÖN ELFOGADJA AZT, HOGY A SZERZŐ NEM VÁLALL FELELŐSSÉGET A SZÁMÍTÓGÉPRENDSZERÉBEN VAGY MÁS ESZKÖZBEN KELETKEZŐ KÁRÉRT VAGY ADATVESZTÉSÉRT.
-\n\nSEGÍTSÉG: menü "súgó"
+\nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC4 és Sap5 műszerekkel történő barlangfelmérésre.
+\n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
+\n\nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: MENÜ gomb
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, hiba bejelentés, új funkció igények: marco.corvi@gmail.com
