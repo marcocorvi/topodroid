@@ -971,7 +971,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_equates">List surveys equates</string>
 
     <string name="export_bgcolor">White background</string>
-    <string name="export_config">Config file</string>
+    <string name="export_config">Config commands</string>
     <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">Splay endpoints</string>
     <string name="export_dxf_version">Version</string>
@@ -1179,8 +1179,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_export_plot_title">Default sketch export</string>
   <string name="pref_export_plot_summary">Default sketch export format</string>
 
-  <string name="pref_therion_config_title">Therion config file</string>
-  <string name="pref_therion_config_summary">Create Therion config file</string>
+  <string name="pref_therion_config_title">Therion config</string>
+  <string name="pref_therion_config_summary">Embed Therion config commands</string>
   <string name="pref_therion_maps_title">Therion maps first</string>
   <string name="pref_therion_maps_summary">Put Therion maps before survey data</string>
   <string name="pref_extra_buttons_title">Activity level</string>

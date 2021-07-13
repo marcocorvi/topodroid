@@ -512,7 +512,7 @@ public class SurveyWindow extends Activity
     }
   }
 
-  private static int mExportType;
+  private static int mExportType; // index of the export-type 
 
   private void selectExportFromProvider( int index ) // EXPORT
   {

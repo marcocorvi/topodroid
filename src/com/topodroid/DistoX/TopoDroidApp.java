@@ -2381,6 +2381,13 @@ public class TopoDroidApp extends Application
   static boolean doExportDataAsync( Context context, Uri uri, int exportType, boolean toast )
   {
     if ( exportType < 0 ) return false; // extra safety
+    // TODO EXPORT ZIP
+    // if ( exportType == 0 ) { // EXPORT ZIP
+    //   // this is SurveyWindow.doArchive
+    //   while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
+    //   (new ExportZipTask( this, this, uri )).execute();
+    //   return true;
+    // }
     SurveyInfo info = getSurveyInfo( );
     if ( info == null ) return false;
     TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );

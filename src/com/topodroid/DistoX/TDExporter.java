@@ -1272,6 +1272,19 @@ public class TDExporter
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+
+      if ( TDSetting.mTherionConfig ) { // embed thconfig
+        pw.format("layout topodroid\n");
+        pw.format("  legend on\n");
+        pw.format("  symbol-hide group centerline\n");
+        pw.format("  symbol-show point station\n");
+        pw.format("  debug station-names\n");
+        pw.format("endlayout\n");
+        pw.format("\n");
+        pw.format("source # \"../th/%s.th\"\n\n", info.name );
+        bw.flush();
+      }
+
       String title = info.name.replaceAll("_", " ");
       pw.format("survey %s -title \"%s\"\n", info.name, title );
       if ( info.comment != null && info.comment.length() > 0 ) {
@@ -1530,6 +1543,15 @@ public class TDExporter
 
       pw.format("endsurvey\n");
       bw.flush();
+
+      if ( TDSetting.mTherionConfig ) { // end embed thconfig
+        pw.format("endsource\n");
+        pw.format("\n");
+        pw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
+        pw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
+        bw.flush();
+      }
+
       bw.close();
       // Log.v("DistoX", "exported therion file");
 

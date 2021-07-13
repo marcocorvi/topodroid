@@ -194,7 +194,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             pathname = mSurvey + ".top";
             ret = TDExporter.exportSurveyAsTop( fos, mSid, mData, mInfo, null, null, mSurvey );
             break;
-          case TDConst.SURVEY_FORMAT_TH:
+          case TDConst.SURVEY_FORMAT_TH: // Therion
           default:
             bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
             pathname = mSurvey + ".th";
