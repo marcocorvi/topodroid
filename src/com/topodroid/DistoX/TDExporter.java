@@ -1221,7 +1221,7 @@ public class TDExporter
   {
     if ( false && TDSetting.mTherionConfig ) { // craete thconfig
       synchronized( TDFile.mFilesLock ) {
-        // File dir = TDFile.getFile( TDPath.getThconfigDir() );
+        // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
         // if ( ! dir.exists() ) dir.mkdirs();
         try {
           BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
