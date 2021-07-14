@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDRequest;
 // import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -37,15 +38,16 @@ import android.content.ActivityNotFoundException;
 // import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.widget.GridView;
-// import android.view.View.OnKeyListener;
-// import android.view.KeyEvent;
-// import android.inputmethodservice.KeyboardView;
 
-// import android.net.Uri;
+import android.net.Uri;
+
+import java.io.FileNotFoundException;
+import java.io.InputStreamReader;
+import java.io.BufferedReader;
+import java.io.IOException;
 
 import java.util.List;
+import java.util.ArrayList;
 
 import android.app.Activity;
 // import android.os.Bundle;
@@ -128,6 +130,8 @@ public class FixedActivity extends Activity
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlacholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
+
+    // MOBILE TOPOGRAPHER
     mNrButton1 = ( TDPath.BELOW_ANDROID_11 )? 2 : 1;
     if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 ];
@@ -224,15 +228,27 @@ public class FixedActivity extends Activity
       }
     } else if ( /* k < mNrButton1 && */ b == mButton1[k++] ) { // ADD
       new FixedAddDialog( mContext, this ).show();
-    } else if ( TDPath.BELOW_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
-      FixedImportDialog dialog = new FixedImportDialog( mContext, this );
-      if ( dialog.getNrPoints() > 0 ) {
-	dialog.show();
-      } else {
-        TDToast.makeBad( R.string.MT_points_none );
-      }
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) { // IMPORT MOBILE TOPOGRAPHER
+      // get the file with MediaStore
+      selectImportFromProvider();
+
+      // FixedImportDialog dialog = new FixedImportDialog( mContext, this );
+      // if ( dialog.getNrPoints() > 0 ) {
+      //   dialog.show();
+      // } else {
+      //   TDToast.makeBad( R.string.MT_points_none );
+      // }
     }
     // refreshList();
+  }
+
+  private void selectImportFromProvider( ) // GPS IMPORT
+  {
+    Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
+    intent.setType( "application/octet-stream" );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.putExtra( "importtype", index ); // extra is not returned to the app
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_gps ) ), TDRequest.REQUEST_GET_GPS_IMPORT );
   }
 
 
@@ -347,6 +363,42 @@ public class FixedActivity extends Activity
               bundle.getDouble( "altitude") ); // geoid altitude
           }
           mFixedAddDialog = null;
+        }
+      } else if ( reqCode == TDRequest.REQUEST_GET_GPS_IMPORT ) {
+        Uri uri = intent.getData();
+        ArrayList< String > gps_points = new ArrayList<>();
+        try {
+          boolean ok = true;
+          InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
+          BufferedReader br = new BufferedReader( isr );
+          while ( ok ) {
+            String line = br.readLine();
+            if ( line == null ) break;
+            // Log.v("DistoX", "read " + line );
+
+            // syntax: name, lat, lng, alt, asl
+            // units:        dec.degree meters
+            String[] vals = line.split(",");
+            int len = vals.length;
+            if ( len != 5 ) {
+              ok = false;
+              break;
+            }
+            gps_points.add( line.trim() ); // add the whole line - needed for item click processing
+          }
+          isr.close();
+          if ( ! ok ) {
+            TDToast.makeBad( R.string.MT_bad_file );
+          } else if ( gps_points.size() > 0 ) {
+            (new FixedImportDialog( mContext, this, gps_points )).show();
+          } else {
+            TDToast.makeBad( R.string.MT_points_none );
+          }
+        // } catch ( NumberFormatException e ) {
+        } catch ( FileNotFoundException e ) {
+          Log.v("DistoX", "File not found " + e.getMessage() );
+        } catch ( IOException e ) { 
+          Log.v("DistoX", "IO exception " + e.getMessage() );
         }
       }
     }

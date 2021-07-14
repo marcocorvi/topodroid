@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -134,7 +134,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         if ( mManager != null ) {
           // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
-          BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+          BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
           DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
@@ -203,7 +203,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         Log.v("DistoX", "save plot Therion file OVERVIEW " + mFullName );
         // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
-        BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+        BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
         DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
 	return true;
       }
@@ -229,10 +229,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // Log.v( "DistoX", "saving binary " + mFullName + " file " + file1.getPath() );
         if ( mSuffix == PlotSave.CREATE ) {
           // Log.v("DistoX-SPLIT", "Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
-          DrawingIO.exportDataStream( mPaths, mType, mInfo, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
+          DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
         } else {
           if ( mManager != null ) {
-            DrawingIO.exportDataStream( mManager, mType, mInfo, file1, mFullName, mProjDir );
+            DrawingIO.exportDataStreamFile( mManager, mType, mInfo, file1, mFullName, mProjDir );
           }
         }
 

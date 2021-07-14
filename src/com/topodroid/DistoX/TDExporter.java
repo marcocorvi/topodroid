@@ -29,7 +29,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.TDMatrix;
@@ -254,7 +254,7 @@ public class TDExporter
   {
     // try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      BufferedWriter bw = new BufferedWriter( TDsaf.docFileWriter( uri ) );
+      BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( uri ) );
       return exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
     // } catch ( FileNotFoundException e ) {
     // } catch ( IOException e ) {
@@ -3720,7 +3720,7 @@ public class TDExporter
       pw.format("*** Surveys ***");             printPolygonEOL( pw );
       pw.format("Survey name: %s", info.name ); printPolygonEOL( pw );
       pw.format("Survey team:");                printPolygonEOL( pw );
-      pw.format("%s", (info.team != null)? info.team : "" ); printPolygonEOL( pw );
+      pw.format("%s", (info.team != null)? info.team : "\t" ); printPolygonEOL( pw );
       printPolygonTabEOL( pw );
       printPolygonTabEOL( pw );
       printPolygonTabEOL( pw );
@@ -3854,12 +3854,12 @@ public class TDExporter
             for ( int n1 = 0; n1 < nr_data; ++n1 ) {
               PolygonData d1 = polygon_data[n1];
               if ( d1.used ) {
-                if ( from.equals( d1.to ) ) {
+                if ( from.equals( d1.to ) || from.equals( d1.from ) ) {
                   printPolygonData( pw, d2 );
                   d2.used = true;
                   break;
                 }
-                if ( to.equals( d1.to ) ) { // try reversed
+                if ( to.equals( d1.to ) || to.equals( d1.from ) ) { // try reversed
                   d2.reverse();
                   printPolygonData( pw, d2 );
                   d2.used = true;

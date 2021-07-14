@@ -546,7 +546,7 @@ public class Archiver
         ze = entries.nextElement();
         ++ nr_entry;
         if ( ze.isDirectory() ) {
-          TDFile.makeDir( TDPath.getDirFile( ze.getName() ) );
+          TDFile.makeTopoDroidDir( TDPath.getDirFile( ze.getName() ) );
         } else if ( ze.getName().equals( "manifest" ) ) {
           // skip
         } else {
@@ -621,12 +621,12 @@ public class Archiver
 
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
             pathname = TDPath.getAudioDir( surveyname );
-            TDFile.makeDir( pathname );
+            TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getAudioFile( surveyname, ze.getName() );
           } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
             // FIXME need survey dir
             pathname = TDPath.getJpgDir( surveyname );
-            TDFile.makeDir( pathname );
+            TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
@@ -733,7 +733,7 @@ public class Archiver
       while ( ( ze = zin.getNextEntry() ) != null ) {
         ++ nr_entry;
         if ( ze.isDirectory() ) {
-          TDFile.makeDir( TDPath.getDirFile( ze.getName() ) );
+          TDFile.makeTopoDroidDir( TDPath.getDirFile( ze.getName() ) );
         } else if ( ze.getName().equals( "manifest" ) ) {
           // skip
         } else {
@@ -751,12 +751,12 @@ public class Archiver
             pathname = TDPath.getNoteFile( ze.getName() );
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
             pathname = TDPath.getAudioDir( surveyname );
-            TDFile.makeDir( pathname );
+            TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getAudioFile( surveyname, ze.getName() );
           } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
             // FIXME need survey dir
             pathname = TDPath.getJpgDir( surveyname );
-            TDFile.makeDir( pathname );
+            TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getJpgFile( surveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {

@@ -17,7 +17,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDsaf;
+// import com.topodroid.utils.TDsaf;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
@@ -204,11 +204,8 @@ public class DataHelper extends DataSetObservable
   void openDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
-    File db_file = TDFile.getTopoDroidFile( db_name );
-    // TDsaf db_file = new TDsaf( db_name );
-    Log.v("DistoX", "DB file " + db_name + " " + db_file.getPath() );
-
-    if ( db_file.exists() ) {
+    if ( TopoDroidApp.hasTopoDroidDatabase() ) {
+      Log.v("DistoX", "DB file " + db_name + " exists");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
         int oldVersion = myDB.getVersion();
@@ -222,6 +219,7 @@ public class DataHelper extends DataSetObservable
         myDB = null;
       }
     } else {
+      Log.v("DistoX", "DB file " + db_name + " does not exists");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
         Log.v("DistoX", "created new database");
@@ -3366,7 +3364,7 @@ public class DataHelper extends DataSetObservable
   String getValue( String key )
   {
     if ( myDB == null ) {
-      TDLog.Error( "DataHelper::getValue null DB");
+      // TDLog.Error( "DataHelper::getValue null DB");
       return null;
     }
     if ( key == null || key.length() == 0 ) { // this is not an error
@@ -3394,7 +3392,7 @@ public class DataHelper extends DataSetObservable
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
-      TDLog.Error( "DataHelper::setValue null DB");
+      // TDLog.Error( "DataHelper::setValue null DB");
       return;
     }
     if ( key == null || key.length() == 0 ) {

@@ -22,9 +22,10 @@ public class TDRequest
   public static final int PLOT_RELOAD = 7;
   public static final int REQUEST_GET_IMPORT = 8;
   public static final int REQUEST_GET_EXPORT = 9;
+  public static final int REQUEST_GET_GPS_IMPORT = 10;
 
-  public static final int REQUEST_TDCONFIG = 10;
-  public static final String TDCONFIG_PATH = "TdManagerConfig";
+  public static final int REQUEST_TDCONFIG = 20;
+  public static final String TDCONFIG_PATH = "TdManagerConfig"; // request extra key
 
   public static final int CAPTURE_IMAGE_SHOTWINDOW = 100;
   public static final int CAPTURE_IMAGE_DRAWWINDOW = 101;

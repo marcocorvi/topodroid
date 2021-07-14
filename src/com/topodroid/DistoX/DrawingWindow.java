@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDStatus;
@@ -6000,7 +6000,7 @@ public class DrawingWindow extends ItemDrawer
       try {
         // FileOutputStream fos = new FileOutputStream( filename );
         // OutputStream fos = TDFile.getMSoutput( "pdf", fullname + ".pdf", "text/pdf" );
-        OutputStream fos = TDsaf.docFileOutputStream( uri );
+        OutputStream fos = TDsafUri.docFileOutputStream( uri );
 
         // PrintAttributes.Builder builder = new PrintAttributes.Builder();
         // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );

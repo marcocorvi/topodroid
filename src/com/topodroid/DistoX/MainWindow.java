@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
@@ -101,9 +101,8 @@ public class MainWindow extends Activity
                         , OnDismissListener
 {
   private TopoDroidApp mApp;
-  private DataHelper mApp_mData;
   // private boolean mApp_mCosurvey = false; // IF_COSURVEY
-  private int mApp_mCheckPerms;
+  // private int mApp_mCheckPerms;
 
   private Activity mActivity = null;
   private boolean onMenu; // whether menu is displaying
@@ -169,9 +168,10 @@ public class MainWindow extends Activity
   private static final int HELP_PAGE = R.string.MainWindow;
 
   // -------------------------------------------------------------
-  private boolean say_no_survey = true;
+  private boolean say_dialogR     = ! TopoDroidApp.hasTopoDroidDatabase();
+  private boolean say_no_survey   = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
-  private boolean do_check_bt = true;             // one-time bluetooth check sentinel
+  private boolean do_check_bt     = true;     // one-time bluetooth check sentinel
 
   private boolean mPaletteButtonEnabled = false;
   private void enablePaletteButton() { mPaletteButtonEnabled = true; }
@@ -182,11 +182,10 @@ public class MainWindow extends Activity
     
   public void updateDisplay( )
   {
-    // DataHelper data = mApp.mData;
-    if ( mApp_mData != null ) {
-      List< String > list = mApp_mData.selectAllSurveys();
+    if ( TopoDroidApp.mData != null ) {
+      List< String > list = TopoDroidApp.mData.selectAllSurveys();
       updateList( list );
-      if ( say_no_survey && list.size() == 0 ) {
+      if ( ! say_dialogR && say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
         TDToast.make( R.string.no_survey );
       } 
@@ -440,7 +439,7 @@ public class MainWindow extends Activity
   //   if ( filename.toLowerCase().endsWith(".th") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     String name = filename.replace(".th", "" ).replace(".TH", "");
-  //     if ( mApp_mData.hasSurveyName( name ) ) {
+  //     if ( TopoDroidApp.mData.hasSurveyName( name ) ) {
   //       TDToast.makeBad(R.string.import_already );
   //       return;
   //     }
@@ -627,7 +626,6 @@ public class MainWindow extends Activity
     mApp = (TopoDroidApp) getApplication();
     mActivity = this;
     TopoDroidApp.mMainActivity = this;
-    mApp_mData       = TopoDroidApp.mData;
     // mApp_mCosurvey   = TopoDroidApp.mCosurvey; // IF_COSURVEY
 
     // mArrayAdapter = new ArrayAdapter<>( this, R.layout.message );
@@ -673,30 +671,45 @@ public class MainWindow extends Activity
     //     } );
     // } 
 
-    mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
-    TDandroid.createPermissions( mApp, mActivity );
+    // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
+  }
 
-    if ( mApp_mCheckPerms != 0 ) {
-      // Log.v("DistoX-PERMS", "check perms " + mApp_mCheckPerms );
-      new TopoDroidPerms( this, mApp_mCheckPerms ).show();
-      if ( mApp_mCheckPerms < 0 ) finish();
-    } else {
-      if ( mApp.mWelcomeScreen ) {
-        TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
-        mApp.mWelcomeScreen = false;
-        if ( mApp.mSetupScreen ) {
-          TopoDroidApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
-          mApp.mSetupScreen = false;
-          doNextSetup( SETUP_WELCOME );
-        } else {
-          (new TopoDroidAbout( this, this, -2 )).show();
-          // TopoDroidAbout tda = new TopoDroidAbout( this, this, -2 );
-          // tda.setOnCancelListener( this );
-          // tda.setOnDismissListener( this );
-          // tda.show();
-        }
+  static boolean done_init_dialogs = false;
+
+  void showInitDialogs( int not_granted, boolean say_dialog_r )
+  {
+    if ( done_init_dialogs ) return;
+    String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
+    Log.v("DistoX", "show init dialogs: app_dir <" + app_dir + "> " + say_dialogR );
+    if ( not_granted > 0 ) {
+      Log.v("DistoX", "show init dialogs: perms not granted ");
+      return;
+    }
+    say_dialogR = say_dialog_r;
+    if ( say_dialogR ) {
+      Log.v("DistoX", "delaying init environment second");
+      (new DialogR( this, this)).show();
+      return;
+    } 
+    done_init_dialogs = true;
+    Log.v("DistoX", "init environment second");
+    TopoDroidApp.initEnvironmentSecond( say_dialogR );
+    if ( mApp.mWelcomeScreen ) {
+      TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
+      mApp.mWelcomeScreen = false;
+      if ( mApp.mSetupScreen ) {
+        TopoDroidApp.setBooleanPreference( "DISTOX_SETUP_SCREEN", false );
+        mApp.mSetupScreen = false;
+        doNextSetup( SETUP_WELCOME );
+      } else {
+        (new TopoDroidAbout( this, this, -2 )).show();
+        // TopoDroidAbout tda = new TopoDroidAbout( this, this, -2 );
+        // tda.setOnCancelListener( this );
+        // tda.setOnDismissListener( this );
+        // tda.show();
       }
     }
+    
 
     // FIXME INSTALL_SYMBOL
     // if ( mApp.askSymbolUpdate ) {
@@ -727,7 +740,8 @@ public class MainWindow extends Activity
     //   }
     // };
     // TDLog.Profile("TDActivity thread");
-    if ( mApp_mCheckPerms >= 0 ) {
+    // if ( mApp_mCheckPerms >= 0 )
+    {
       Thread loader = new Thread() {
         @Override
         public void run() {
@@ -791,7 +805,7 @@ public class MainWindow extends Activity
   void resetButtonBar()
   {
     int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    MyButton.resetCache( /* mApp, */ size );
+    MyButton.resetCache( size );
     // TDToast.make( "SIZE " + size );
     Resources res = getResources();
 
@@ -828,7 +842,7 @@ public class MainWindow extends Activity
   // FIXME TOOLBAR void resetToolbar()
   // {
   //   int size = TDSetting.mSizeButtons;
-  //   MyButton.resetCache( /* mApp, */ size );
+  //   MyButton.resetCache( size );
 
   //   LayoutParams params = new LayoutParams(LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT);
 
@@ -933,6 +947,7 @@ public class MainWindow extends Activity
 
     // THIS IS COMMENTED BECAUSE I'M NOT SURE IT IS A GOOD THING
     // if ( ! TDLevel.mDeveloper ) new TDVersionDownload( this ).execute(); 
+    showInitDialogs( TDandroid.createPermissions( mApp, mActivity ), ! TopoDroidApp.hasTopoDroidDatabase() );
   }
 
   @Override
@@ -954,25 +969,6 @@ public class MainWindow extends Activity
     if ( TopoDroidApp.mCheckManualTranslation ) {
       TopoDroidApp.mCheckManualTranslation = false;
       checkManualTranslation();
-    }
-    // TDToast.make( ( TDPath.hasPath11()? "Path 11 " : "No Path 11 " ) + TDPath.EXTERNAL_STORAGE_PATH );
-    if ( ( ! TDPath.BELOW_ANDROID_10 ) && TDPath.BELOW_ANDROID_11 ) { // only for Android 10
-      // Log.v( "DistoX-PATH11", "has path11 " + TDPath.hasPath11() + " no-again " + TopoDroidApp.hasPath11NoAgain() );
-      if ( ! TDPath.hasPath11() && ! TopoDroidApp.hasPath11NoAgain() && TDPath.hasPath10() ) {
-        ( new Path11Dialog( this, this, mApp )).show();
-      }
-    }
-  }
-
-
-  void moveToPath11()
-  { 
-    if ( TDPath.moveToPath11() ) {
-      TDToast.make(R.string.path11_move );
-      // finish();
-      // android.os.Process.killProcess( android.os.Process.myPid() );
-    } else {
-      TDToast.make(R.string.path11_not_move );
     }
   }
 
@@ -1065,7 +1061,7 @@ public class MainWindow extends Activity
         // TDLocale.resetLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT
-        } else if ( say_not_enabled ) {
+        } else if ( ! say_dialogR && say_not_enabled ) {
           say_not_enabled = false;
           TDToast.makeBad(R.string.not_enabled );
           // finish();
@@ -1079,9 +1075,9 @@ public class MainWindow extends Activity
         if ( result == Activity.RESULT_OK ) {
           String filename;
           Uri uri = intent.getData();
-          String mimetype = TDsaf.getType( uri );
+          String mimetype = TDsafUri.getType( uri );
           if ( mimetype == null ) {
-            String path = TDsaf.getPath(this, uri);
+            String path = TDsafUri.getPath(this, uri);
             if (path == null) {
               // filename = FilenameUtils.getName(uri.toString());
               filename = uri.getLastPathSegment();
@@ -1098,23 +1094,23 @@ public class MainWindow extends Activity
             filename = uri.getLastPathSegment();
             int pos = filename.lastIndexOf(".");
             int qos = filename.lastIndexOf("/");
-            String ext  = filename.substring( pos ).toLowerCase(); // extension with leadin '.'
+            String ext  = filename.substring( pos ).toLowerCase(); // extension with leading '.'
             String name = filename.substring( qos+1, pos );
             String surveyname = name;
             Log.v("DistoX", "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
-              FileInputStream fis = TDsaf.docFileInputStream( uri );
+              FileInputStream fis = TDsafUri.docFileInputStream( uri );
               // if ( fis.markSupported() ) fis.mark();
               int manifest_ok = Archiver.getOkManifest( fis, name, surveyname );
               if ( manifest_ok >= 0 ) {
-                fis = TDsaf.docFileInputStream( uri );
+                fis = TDsafUri.docFileInputStream( uri );
                 Archiver.unArchive( mApp, fis, name );
               }
             } else {
               String type = TDPath.checkImportTypeStream( ext );
               if ( type != null ) {
                 Log.v("DistoX", "import stream type " + type + " name " + name );
-                FileInputStream fis = TDsaf.docFileInputStream( uri );
+                FileInputStream fis = TDsafUri.docFileInputStream( uri );
                 importStream( fis, name, type );
               } else {
                 type = TDPath.checkImportTypeReader( ext );
@@ -1171,28 +1167,24 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    // Log.v("DistoX-PERM", "MAIN perm request result " + results.length );
+    Log.v("DistoX-PERM", "MAIN perm request result " + results.length );
     // TDLog.Log(TDLog.LOG_PERM, "MAIN req code " + code + " results length " + results.length );
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
+        int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  // Log.v("DistoX-PERM", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  Log.v("DistoX-PERM", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
+	Log.v("DistoX-PERM", "MAIN perm finish setup");
+        int not_granted = TDandroid.createPermissions( mApp, mActivity );
+        showInitDialogs( 0, say_dialogR );
+        if ( not_granted > 0 && ! say_dialogR ) {
+	  Log.v("DistoX-PERM", "MAIN perm not granted " + not_granted ); 
+          // TODO
+        }
       }
-      // if ( ! TDandroid.canRun( this, this ) ) {
-      //   // Log.v("DistoX-PERM", "MAIN perm cannot run");
-      //   // TELL THE USER TDToast.make("Cannot run");
-      // }
     }
-    // Log.v("DistoXX", "MAIN must restart " + TDandroid.MustRestart );
-    // if ( ! TDandroid.MustRestart ) {
-    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.perm_required,
-    //     new DialogInterface.OnClickListener() {
-    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
-    //     }
-    //   );
-    // }
   }
   /* */
   /* FIXME-16 FIXME-8 nothing */

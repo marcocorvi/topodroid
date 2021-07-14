@@ -16,15 +16,14 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 
-
 // import android.util.Log;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.IOException;
+// import java.io.File;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.IOException;
 
-// import java.util.ArrayList;
+import java.util.ArrayList;
 
 // import android.app.Activity;
 // import android.app.Dialog;
@@ -57,8 +56,8 @@ class FixedImportDialog extends MyDialog
                         , OnClickListener
                         , OnLongClickListener
 { 
-  static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
-  static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
+  // static final private String POINTLISTS = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographer/pointlists";
+  // static final private String POINTLISTS_PRO = Environment.getExternalStorageDirectory().getPath() + "/MobileTopographerPro/pointlists";
 
   private final FixedActivity mParent;
 
@@ -77,17 +76,18 @@ class FixedImportDialog extends MyDialog
   private boolean isSet;
 
   private MyKeyboard mKeyboard;
-  private int mNrPts; // number of geo points
+  private int mNrPoints;
 
-  FixedImportDialog( Context context, FixedActivity parent )
+  FixedImportDialog( Context context, FixedActivity parent, ArrayList<String> gps_points )
   {
     super( context, R.string.FixedImportDialog );
     mParent  = parent;
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
-    mNrPts = readPoints();
+    mNrPoints = gps_points.size();
+    for ( String pt : gps_points ) mArrayAdapter.add( pt );
   }
 
-  int getNrPoints() { return mNrPts; }
+  int getNrPoints() { return mNrPoints; }
 
   @Override
   public void onCreate(Bundle savedInstanceState)
@@ -137,6 +137,7 @@ class FixedImportDialog extends MyDialog
     isSet = false;
   }
 
+/*
   // @return number of read points
   private int readPoints() 
   {
@@ -191,6 +192,7 @@ class FixedImportDialog extends MyDialog
     }
     return ret;
   }
+*/
 
   @Override
   public boolean onLongClick(View v) 
@@ -210,7 +212,7 @@ class FixedImportDialog extends MyDialog
     boolean do_toast = false;
     if ( b == mBtnOk ) {
       String station = mETstation.getText().toString();
-      if ( /* station == null || */ station.length() == 0 ) {
+      if ( station.length() == 0 ) { // if ( station == null || station.length() == 0 )
         mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
         return;
       }
@@ -218,7 +220,7 @@ class FixedImportDialog extends MyDialog
       // if ( comment == null ) comment = "";
       if ( isSet ) {
         mParent.addFixedPoint( station, mLng, mLat, mHEll, mHGeo, comment, FixedInfo.SRC_MOBILE_TOP );
-      dismiss();
+        dismiss();
       } else {
         do_toast = true;
       }
@@ -248,19 +250,21 @@ class FixedImportDialog extends MyDialog
     String[] vals = item.split(",");
     int len = vals.length;
     if ( len >= 4 ) {
-      String lngstr = vals[len-3].trim();
-      String latstr = vals[len-4].trim();
-      String altstr = vals[len-2].trim();
-      String aslstr = vals[len-1].trim();
-      mLng  = Double.parseDouble( lngstr );
-      mLat  = Double.parseDouble( latstr );
-      mHEll = Double.parseDouble( altstr );
-      mHGeo = Double.parseDouble( aslstr );
-      mTVlat.setText( latstr );
-      mTVlng.setText( lngstr );
-      mTVhell.setText( altstr );
-      mTVhgeo.setText( aslstr );
-      isSet = true;
+      try {
+        String lngstr = vals[len-3].trim();
+        String latstr = vals[len-4].trim();
+        String altstr = vals[len-2].trim();
+        String aslstr = vals[len-1].trim();
+        mLng  = Double.parseDouble( lngstr );
+        mLat  = Double.parseDouble( latstr );
+        mHEll = Double.parseDouble( altstr );
+        mHGeo = Double.parseDouble( aslstr );
+        mTVlat.setText( latstr );
+        mTVlng.setText( lngstr );
+        mTVhell.setText( altstr );
+        mTVhgeo.setText( aslstr );
+        isSet = true;
+      } catch ( NumberFormatException e ) { }
     }
   }
 }

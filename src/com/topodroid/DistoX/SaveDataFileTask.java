@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
@@ -81,12 +81,12 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           //   filename = exportSurveyAsTlx();
           //   break;
           case TDConst.SURVEY_FORMAT_CSX: // cSurvey (only mInfo, no plot-data)
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".csx";
             ret = TDExporter.exportSurveyAsCsx( bw, mSid, mData, mInfo, null, null, null, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_CSV:
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".csv";
             if ( TDSetting.mCsvRaw ) {
               ret = TDExporter.exportSurveyAsRawCsv( bw, mSid, mData, mInfo, mSurvey );
@@ -95,18 +95,18 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             }
             break;
           case TDConst.SURVEY_FORMAT_CAV: // Topo
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".cav";
             ret = TDExporter.exportSurveyAsCav( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_DAT: // Compass
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".dat";
             ret = TDExporter.exportSurveyAsDat( bw, mSid, mData, mInfo, mSurvey );
             // Log.v("DistoX", "save DAT " + ret );
             break;
           case TDConst.SURVEY_FORMAT_DXF:
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             List< DBlock > list = mData.selectAllShots( mSid, TDStatus.NORMAL );
             if ( list.size() > 0 ) {
               DBlock blk = list.get( 0 );
@@ -120,61 +120,61 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             }
             break;
           case TDConst.SURVEY_FORMAT_GRT: // Grottolf
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".grt";
             // TDToast.make( "WARNING Grottolf export is untested" );
             ret = TDExporter.exportSurveyAsGrt( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_GTX: // GHTopo
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".gtx";
             // TDToast.make( "WARNING GHTopo export is untested" );
             ret = TDExporter.exportSurveyAsGtx( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_KML: // KML
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".kml";
             ret = TDExporter.exportSurveyAsKml( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_JSON: // GeoJSON
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".json";
             ret = TDExporter.exportSurveyAsJson( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_SHP: // Shapefile
-            fos = TDsaf.docFileOutputStream( mUri );
+            fos = TDsafUri.docFileOutputStream( mUri );
             pathname = mSurvey + ".shz";
             ret = TDExporter.exportSurveyAsShp( fos, mSid, mData, mInfo, mSurvey );
             // ret = TDExporter.exportSurveyAsShp( mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_PLT: // Track file
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".plt";
             ret = TDExporter.exportSurveyAsPlt( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_PLG: // Polygon CAVE
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".cave";
             ret = TDExporter.exportSurveyAsPlg( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_SRV: // Walls
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".srv";
             ret = TDExporter.exportSurveyAsSrv( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_SUR: // WinKarst
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".sur";
             // TDToast.make( "WARNING WinKarst export is untested" );
             ret = TDExporter.exportSurveyAsSur( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_SVX: // Survex
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".svx";
             ret = TDExporter.exportSurveyAsSvx( bw, mSid, mData, mInfo, mDevice, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_TRO: // VisualTopo
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             if ( TDSetting.mVTopoTrox ) {
               pathname = mSurvey + ".trox";
               ret = TDExporter.exportSurveyAsTrox( bw, mSid, mData, mInfo, mSurvey );
@@ -184,19 +184,19 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
             }
             break;
           case TDConst.SURVEY_FORMAT_TRB: // TopoRobot
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".trb";
             // TDToast.make( "WARNING TopoRobot export is untested" );
             ret = TDExporter.exportSurveyAsTrb( bw, mSid, mData, mInfo, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_TOP: // PocketTopo
-            fos = TDsaf.docFileOutputStream( mUri );
+            fos = TDsafUri.docFileOutputStream( mUri );
             pathname = mSurvey + ".top";
             ret = TDExporter.exportSurveyAsTop( fos, mSid, mData, mInfo, null, null, mSurvey );
             break;
           case TDConst.SURVEY_FORMAT_TH: // Therion
           default:
-            bw = new BufferedWriter( TDsaf.docFileWriter( mUri ) );
+            bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
             pathname = mSurvey + ".th";
             ret = TDExporter.exportSurveyAsTh( bw, mSid, mData, mInfo, mSurvey );
             break;

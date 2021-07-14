@@ -16,6 +16,13 @@ signed:
 install:
 	adb install -r bin/TopoDroid-debug.apk
 
+uninstall:
+	adb uninstall com.topodroid.DistoX
+
+reinstall:
+	adb uninstall com.topodroid.DistoX
+	adb install -r bin/TopoDroid-debug.apk
+
 rebuild:
 	ant clean
 	ant debug

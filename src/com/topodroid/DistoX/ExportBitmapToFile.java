@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDsaf;
+import com.topodroid.utils.TDsafUri;
 
 import android.util.Log;
 
@@ -68,7 +68,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         // Log.v("DistoX", "temp file <" + temp.getPath() + ">" );
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         */
-        FileOutputStream out = TDsaf.docFileOutputStream( mUri );
+        FileOutputStream out = TDsafUri.docFileOutputStream( mUri );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();

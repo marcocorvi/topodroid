@@ -1,400 +1,291 @@
-/* @file TDPath.java
- *
- * @author marco corvi
- * @date jan 2015 
- *
- * @brief TopoDroid application paths
- * --------------------------------------------------------
- *  Copyright This software is distributed under GPL-3.0 or later
- *  See the file COPYING.
- * --------------------------------------------------------
- */
-package com.topodroid.DistoX;
-
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
-
-import android.util.Log;
-
-import android.os.Build;
-// import android.provider.DocumentsContract;
-
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FilenameFilter;
-
-import java.util.List;
-import java.util.Locale;
-
-import android.content.Context;
-import android.os.Environment;
-
-public class TDPath
-{
-  // whether not having ANDROID 10
-  final static public boolean BELOW_ANDROID_4  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT ); // API_19
-  final static public boolean BELOW_ANDROID_5  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP ); // API_21
-  final static public boolean BELOW_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
-  final static public boolean BELOW_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
-
-  final static int NR_BACKUP = 5;
-  final static String BCK_SUFFIX = ".bck";
-
-  final static String C3D = ".c3d";
-  final static String CSN = ".csn";  // CaveSniper
-  final static String CSV = ".csv";
-  final static String DAT = ".dat";
-  final static String SVX = ".svx"; // Survex
-  final static String TDR = ".tdr";
-  final static private String TMP = ".tmp";
-
-  final static String TOP = ".top"; // PockeTopo
-  final static String TH  = ".th";
-  final static String TRO = ".tro"; // VisualTopo
-  final static String TROX = ".trox"; // VisualTopo
-  final static String TXT = ".txt";
-  final static String ZIP = ".zip";
-
-  final static String THCONFIG = ".thconfig";
-  // final static String TDCONFIG = ".tdconfig";
-
-  // ------------------------------------------------------------
-  // PATHS
-
-  // if BUILD
-  // If PATH_BASEDIR is left null the path is set in the method setPaths():
-  //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
-  //    because the path is Android/data/com.topodroid.DistoX/files
-  // With "/sdcard" they remain
-  static final String EXTERNAL_STORAGE_PATH_10 = Environment.getExternalStorageDirectory().getAbsolutePath();
-  static final String EXTERNAL_STORAGE_PATH_11 =
-    BELOW_ANDROID_4 ? null : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
-  static final String EXTERNAL_STORAGE_PATH =  // app base path
-    BELOW_ANDROID_4 ? EXTERNAL_STORAGE_PATH_10
-      : ( TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ).exists() )? EXTERNAL_STORAGE_PATH_11
-        : BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
-          : ( BELOW_ANDROID_11  && TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid").exists() )? EXTERNAL_STORAGE_PATH_10 
-            : EXTERNAL_STORAGE_PATH_11;
-
-  public static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
-  public static String PATH_DEFAULT  = EXTERNAL_STORAGE_PATH + File.separator + "TopoDroid/";
-  public static String PATH_BASE     = PATH_BASEDIR + File.separator + "TopoDroid/";
-
-  static String getSymbolPointDirname() { return "point"; } // "symbol/point"
-  static String getSymbolLineDirname()  { return "line"; }  // "symbol/line"
-  static String getSymbolAreaDirname()  { return "area"; }  // "symbol/area"
-
-  static String PATH_TDCONFIG; 
-  // static String PATH_THCONFIG; // UNUSED
-
-  private static String APP_FOTO_PATH;   //  = PATH_BASE + "photo/";
-  private static String APP_AUDIO_PATH;   //  = PATH_BASE + "audio/";
-  private static String APP_NOTE_PATH;   //  = PATH_BASE + "note/";
-  private static String PATH_TDR;    //  = PATH_BASE + "tdr/";
-  private static String PATH_ZIP;    //  = PATH_BASE + "zip/";
-
-  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
-  final static Object mXSectionsLock = new Object();
-  final static Object mSelectionLock = new Object();
-  final static Object mCommandsLock  = new Object();
-  final static Object mStationsLock  = new Object();
-  final static Object mShotsLock     = new Object();
-  final static Object mGridsLock     = new Object();
-  // final static Object mFixedsLock    = new Object();
-  // final static Object mSelectedLock  = new Object();
-
-  static String getDatabase() { return getDirFile( "distox14.sqlite" ); }
-
-  // static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
-  // public static String getPacketDatabase() { return PATH_DEFAULT + "packet10.sqlite"; }
-  
-  // when this is called basedir exists and is writable
-  static boolean checkBasePath( String path, String basedir )
-  {
-    setBaseDir( basedir );
-    File dir = TDFile.getTopoDroidFile( PATH_BASEDIR, path ); // DistoX-SAF
-    if ( ! dir.exists() ) {
-      if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
-    }
-
-    boolean ret = false;
-    try {
-      ret = dir.exists() && dir.isDirectory() && dir.canWrite();
-    } catch ( SecurityException e ) { }
-    // Log.v( "DistoX", "check base path: " + ret + ": base <" + PATH_BASEDIR + "> basedir <" + basedir + "> path <" + path + ">" );
-    return ret;
-  }
-
-  static boolean hasPath10() 
-  {
-    return (TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid" )).exists();
-  }
-
-  static boolean hasPath11() 
-  {
-    if ( BELOW_ANDROID_4 ) return false;
-    return ( TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" )).exists();
-  }
-
-  static boolean moveToPath11()
-  { 
-    if ( BELOW_ANDROID_4 ) return false;
-    File path11 = TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" );
-    if ( path11.exists() ) {
-      // Log.v( "DistoX", "move to path11. File exists <" + path11.getPath() + ">" );
-      return false;
-    }
-
-    File path = TDFile.getTopoDroidFile( PATH_BASE );
-    if ( ! path.exists() ) {
-      // Log.v( "DistoX", "move to path11. Base does not exists <" + PATH_BASE + ">" );
-      return false;
-    }
-
-    File dir11 = TDFile.getTopoDroidFile( EXTERNAL_STORAGE_PATH_11 );
-    if ( ! dir11.exists() ) dir11.mkdirs();
-    path.renameTo( path11 );
-
-    setBaseDir( EXTERNAL_STORAGE_PATH_11 );
-    TopoDroidApp.setCWDPreference( "TopoDroid", PATH_BASEDIR );
-    setDefaultPaths();  
-    return true;
-  }
- 
-  public static String getBaseDir() { return PATH_BASEDIR; }
-
- 
-  static void setPaths( String path, String base )
-  {
-    // Log.v("DistoX", "set paths [0]: path " + path + " base " + base );
-    if ( PATH_BASEDIR == null ) {
-      // PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : TDInstance.context.getExternalFilesDir( null ).getPath();
-      setBaseDir( TDInstance.context.getExternalFilesDir( null ).getPath() );
-      // Log.v("DistoX", "set paths [1]: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
-      setDefaultPaths();
-    }
-
-    // Log.v("DistoX-PATH", "Not Android 10 " + BELOW_ANDROID_10 + " 11 " + BELOW_ANDROID_11 + " SDK " + Build.VERSION.SDK_INT );
-    // Log.v("DistoX-PATH", "EXT. " + EXTERNAL_STORAGE_PATH );
-    // Log.v("DistoX-PATH", "BASE " + PATH_BASEDIR + " base " + base + " path " + path );
-
-    File dir = null; // DistoX-SAF
-    if ( base != null && ! hasPath11() ) {
-      dir = TDFile.getTopoDroidFile( base );
-      try {
-        if ( ! dir.exists() ) dir.mkdirs();
-        if ( dir.exists() && dir.canWrite() ) {
-          setBaseDir( base );
-          // Log.v("DistoX", "set paths [2]: BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
-          setDefaultPaths();
-        }
-      } catch ( SecurityException e ) { 
-        // boolean b1 = android.os.Environment.isExternalStorageLegacy();
-        // boolean b2 = android.os.Environment.isExternalStorageLegacy( dir );
-        Log.v("DistoX-PATH", "ext storage security error " + e.getMessage() );
-      }
-    }
-    // Log.v( "DistoX", "set paths [3]. BaseDir " + PATH_BASEDIR );
-    if ( path != null ) {
-      String cwd = PATH_BASEDIR + "/" + path;
-      dir = TDFile.getTopoDroidFile( PATH_BASEDIR, path ); // DistoX-SAF
-      // Log.v( "DistoX", "set paths [4]. Dir " + dir.getPath()  );
-      try {
-        if ( ! dir.exists() ) dir.mkdirs();
-        //   if ( ! dir.mkdirs() ) TDLog.Error("mkdir error");
-        // }
-        if ( dir.isDirectory() && dir.canWrite() ) PATH_BASE = cwd + "/";
-      } catch ( SecurityException e ) { 
-        Log.v("DistoX-PATH", "ext storage security error " + e.getMessage() );
-      }
-    }
-
-    // DistoX-SAF comment this block
-    // Log.v( "DistoX", "set paths [5]. path base " + PATH_BASE );
-    // Log.v( "DistoX-SAF", "set paths. path base " + PATH_BASE );
-    dir = TDFile.getTopoDroidFile( PATH_BASE );
-    if ( ! dir.exists() ) {
-      // Log.v("DistoX", "set paths [6]. path base " + PATH_BASE + " does not exist" );
-      if ( ! dir.mkdirs() ) {
-        TDLog.Error( "failed mkdir " + PATH_BASE );
-        setBase();
-      }
-    }
-    // Log.v(TAG, "Base Path \"" + PATH_BASE + "\"" );
-
-    // Log.v("DistoX", "Set paths [7] BaseDir " + PATH_BASEDIR + " Default " + PATH_DEFAULT + " hasPath11 " + hasPath11() );
-
-    PATH_TDCONFIG = PATH_BASE + "thconfig" + File.separator; // FIXME checkDirs( PATH_TDCONFIG );
-    // PATH_THCONFIG = PATH_TDCONFIG;
-
-    // setExportPaths();
-
-    PATH_TDR       = PATH_BASE + "tdr"   + File.separator; checkDirs( PATH_TDR );
-    APP_NOTE_PATH  = PATH_BASE + "note"  + File.separator; checkDirs( APP_NOTE_PATH );
-    APP_FOTO_PATH  = PATH_BASE + "photo" + File.separator; checkDirs( APP_FOTO_PATH );
-    APP_AUDIO_PATH = PATH_BASE + "audio" + File.separator; checkDirs( APP_AUDIO_PATH );
-    PATH_ZIP       = PATH_BASE + "zip"   + File.separator; checkDirs( PATH_ZIP );
-  }
-
-  static void setDefaultPaths()
-  {
-    // Log.v("DistoX", "set default paths under <" + PATH_DEFAULT + ">" );
-
-    // PATH_BIN  = PATH_DEFAULT + "bin" + File.separator;
-    // // PATH_MAN  = PATH_DEFAULT + "man" + File.separator;   
-    // PATH_CCSV = PATH_DEFAULT + "ccsv" + File.separator; 
-    // PATH_DUMP = PATH_DEFAULT + "dump" + File.separator; 
-
-    // APP_SYMBOL_PATH  = PATH_DEFAULT + "symbol" + File.separator;
-    // APP_POINT_PATH  = APP_SYMBOL_PATH + "point" + File.separator;
-    // APP_LINE_PATH   = APP_SYMBOL_PATH + "line" + File.separator;
-    // APP_AREA_PATH   = APP_SYMBOL_PATH + "area" + File.separator;
-
-    /* LOAD_MISSING
-    APP_SYMBOL_SAVE_PATH  = APP_SYMBOL_PATH + "save" + File.separator;
-    APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point" + File.separator;
-    APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line" + File.separator;
-    APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area" + File.separator;
-    */
-
-    checkDefaultPaths(); 
-  }
-    
-  static void clearSymbols( )
-  {
-    clearSymbolsDir( "point" );
-    clearSymbolsDir( "line" );
-    clearSymbolsDir( "area" );
-  }  
-
-  static String noSpaces( String s )
-  {
-    return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
-  }
-
-  public static void checkPath( String filename )
-  {
-    if ( filename == null ) {
-      // Log.v("DistoX", "check path: null string" );
-      return;
-    }
-    checkPath( TDFile.getTopoDroidFile( filename ) ); // DistoX-SAF
-  }
-
-  // ------------------------------------------------------------------
-
-  public static File[] scanTdconfigDir() // DistoX-SAF
-  {
-    File dir = TDFile.getTopoDroidFile( PATH_TDCONFIG );
-    if ( ! dir.exists() ) {
-      if ( ! dir.mkdirs() ) {
-        TDLog.Error("mkdir error");
-        return null;
-      }
-    }
-    FilenameFilter filter = new FilenameFilter() {
-       public boolean accept( File dir, String name ) {
-         return name.endsWith( "tdconfig" );
-       }
-    };
-    return dir.listFiles( filter );
-  }
-
-  // ------------------------------------------------------------------
-  // FILE NAMES
-
-  static String getSqlFile() { return PATH_BASE + "survey.sql"; }
-
-  public static String getPathBase() { return PATH_BASE; }
-
-  static String getManifestFile() { return PATH_BASE + "manifest"; }
-  // static String getSymbolFile( String name ) { return name; }
-
-  static boolean hasTdrDir() { return (TDFile.getTopoDroidFile( PATH_TDR )).exists(); } // DistoX-SAF
-
-  static File getTdrDir() { return TDFile.makeDir( PATH_TDR ); } // DistoX-SAF
-
-  static String getDirFile( String name )        { return PATH_BASE + name; }
-  public static String getZipFile( String name ) { return PATH_ZIP + name; }
-  public static String getTdrFile( String name ) { return PATH_TDR + name; }
-
-  public static String getTdconfigDir( ) { return PATH_TDCONFIG; }
-  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
-  // public static String getThconfigDir( ) { return PATH_THCONFIG; }
-  // public static String getSurveyThconfigFile( String survey ) { return PATH_THCONFIG + survey + THCONFIG; }
-
-  public static String getManFileName( String name ) { return "man/" + name; }
-
-  static String getNoteFile( String name )              { return APP_NOTE_PATH + name; }
-  static String getJpgDir( String dir )                 { return APP_FOTO_PATH + dir; }
-  static String getJpgFile( String dir, String name )   { return APP_FOTO_PATH + dir + "/" + name; }
-  static String getAudioDir( String dir )               { return APP_AUDIO_PATH + dir; }
-  static String getAudioFile( String dir, String name ) { return APP_AUDIO_PATH + dir + "/" + name; }
-
-  static String getSurveyPlotTdrFile( String survey, String name ) { return PATH_TDR + survey + "-" + name + TDR ; }
-
-  public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
-  public static String getTdrFileWithExt( String name )  { return getPathname( PATH_TDR, name, TDR ); }
-  public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
-
-  public static File[] getBinFiles() { return getExternalFiles( "bin" ); }
-
-  public static File[] getCalibFiles() { return getExternalFiles( "ccsv" ); } // DistoX-SAF
-
-  static File[] getTopoDroidFiles( String basename ) // DistoX-SAF
-  {
-    File dir = TDFile.getTopoDroidFile( basename );
-    return dir.listFiles( new FileFilter() {
-      public boolean accept( File pathname ) { 
-        if ( ! pathname.isDirectory() ) return false;
-        return ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) );
-      }
-    } );
-  }
-
-  // NOTA BENE extensions include the dot, eg, ".th"
-  static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX };
-  static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
-  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX };
-
-  // static File[] getImportFiles() // DistoX-SAF
-  // { 
-  //   return getFiles( PATH_IMPORT, IMPORT_EXT );
-  // }
-
-  static String checkImportTypeStream( String ext ) { return checkType( ext, IMPORT_EXT_STREAM ); }
-  static String checkImportTypeReader( String ext ) { return checkType( ext, IMPORT_EXT_READER ); }
-
-  static String[] getImportTypes() { return new String[] { TH, TOP, DAT, TRO, TROX, CSN, SVX }; }
-
-  static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
-
-  // static String getSurveyPhotoFile( String survey, String name ) { return APP_FOTO_PATH + survey + "/" + name; }
-
-  static String getSurveyPhotoDir( String survey ) { return APP_FOTO_PATH + survey; }
-  static String getSurveyAudioDir( String survey ) { return APP_AUDIO_PATH + survey; }
-
-  static String getSurveyJpgFile( String survey, String id )
-  {
-    TDFile.makeDir( APP_FOTO_PATH + survey + File.separator );
-    return APP_FOTO_PATH + survey + File.separator + id + ".jpg";
+	/* @file TDPath.java
+	 *
+	 * @author marco corvi
+	 * @date jan 2015 
+	 *
+	 * @brief TopoDroid application paths
+	 * --------------------------------------------------------
+	 *  Copyright This software is distributed under GPL-3.0 or later
+	 *  See the file COPYING.
+	 * --------------------------------------------------------
+	 */
+	package com.topodroid.DistoX;
+
+	import com.topodroid.utils.TDLog;
+	import com.topodroid.utils.TDFile;
+
+	import android.util.Log;
+
+	import android.os.Build;
+	// import android.provider.DocumentsContract;
+
+	import java.io.File;
+	import java.io.FileFilter;
+	import java.io.FilenameFilter;
+
+	import java.util.List;
+	import java.util.Locale;
+
+	import android.content.Context;
+	import android.os.Environment;
+
+	public class TDPath
+	{
+	  // whether not having ANDROID 10
+	  final static public boolean BELOW_ANDROID_4  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.KITKAT ); // API_19
+	  final static public boolean BELOW_ANDROID_5  = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.LOLLIPOP ); // API_21
+	  final static public boolean BELOW_ANDROID_10 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.P );
+	  final static public boolean BELOW_ANDROID_11 = ( Build.VERSION.SDK_INT <= Build.VERSION_CODES.Q );
+
+	  final static int NR_BACKUP = 5;
+	  final static String BCK_SUFFIX = ".bck";
+
+	  final static String C3D = ".c3d";
+	  final static String CSN = ".csn";  // CaveSniper
+	  final static String CSV = ".csv";
+	  final static String DAT = ".dat";
+	  final static String SVX = ".svx"; // Survex
+	  final static String TDR = ".tdr";
+	  final static private String TMP = ".tmp";
+
+	  final static String TOP = ".top"; // PockeTopo
+	  final static String TH  = ".th";
+	  final static String TRO = ".tro"; // VisualTopo
+	  final static String TROX = ".trox"; // VisualTopo
+	  final static String TXT = ".txt";
+	  final static String ZIP = ".zip";
+
+	  final static String THCONFIG = ".thconfig";
+	  // final static String TDCONFIG = ".tdconfig";
+
+	  static String getSymbolPointDirname() { return "point"; } // "symbol/point"
+	  static String getSymbolLineDirname()  { return "line"; }  // "symbol/line"
+	  static String getSymbolAreaDirname()  { return "area"; }  // "symbol/area"
+
+	  // ------------------------------------------------------------
+	  // PATHS
+
+	  // if BUILD
+	  // If PATH_BASEDIR is left null the path is set in the method setPaths():
+	  //    this works with Android-10 but the data are erased when TopoDroid is uninstalled
+	  //    because the path is Android/data/com.topodroid.DistoX/files
+	  // With "/sdcard" they remain
+          /*
+	  private static final String EXTERNAL_STORAGE_PATH_10 = Environment.getExternalStorageDirectory().getAbsolutePath();
+	  private static final String EXTERNAL_STORAGE_PATH_11 =
+	    BELOW_ANDROID_4 ? null : Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS).getAbsolutePath();
+	  private static final String EXTERNAL_STORAGE_PATH =  // app base path
+	    BELOW_ANDROID_4 ? EXTERNAL_STORAGE_PATH_10
+	      : ( TDFile.hasTopoDroidFile( EXTERNAL_STORAGE_PATH_11, "TopoDroid" ) )? EXTERNAL_STORAGE_PATH_11
+		: BELOW_ANDROID_10 ? EXTERNAL_STORAGE_PATH_10
+		  : ( BELOW_ANDROID_11  && TDFile.hasTopoDroidFile( EXTERNAL_STORAGE_PATH_10, "TopoDroid") )? EXTERNAL_STORAGE_PATH_10 
+		    : EXTERNAL_STORAGE_PATH_11;
+          */
+
+	  // private static String PATH_BASEDIR  = EXTERNAL_STORAGE_PATH;
+	  private static String PATH_BASEDIR  = TDFile.getExternalDir(null).getPath();
+	  private static String PATH_APPNAME  = "TopoDroid/";
+	  private static String PATH_APPBASE  = PATH_BASEDIR + "/TopoDroid";
+	  private static String PATH_DEFAULT  = PATH_APPBASE;
+	  private static String PATH_TDCONFIG; 
+	  // private static String PATH_THCONFIG; // UNUSED
+	  private static String APP_FOTO_PATH;  //  = PATH_APPBASE + "/photo/";
+	  private static String APP_AUDIO_PATH; //  = PATH_APPBASE + "/audio/";
+	  private static String APP_NOTE_PATH;  //  = PATH_APPBASE + "/note/";
+	  private static String PATH_TDR;       //  = PATH_APPBASE + "/tdr/";
+	  private static String PATH_ZIP;       //  = PATH_APPBASE + "/zip/";
+
+	  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
+	  final static Object mXSectionsLock = new Object();
+	  final static Object mSelectionLock = new Object();
+	  final static Object mCommandsLock  = new Object();
+	  final static Object mStationsLock  = new Object();
+	  final static Object mShotsLock     = new Object();
+	  final static Object mGridsLock     = new Object();
+	  // final static Object mFixedsLock    = new Object();
+	  // final static Object mSelectedLock  = new Object();
+
+	  static String getDatabase() { return PATH_APPBASE + "/distox14.sqlite"; }
+
+	  // static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
+	  // public static String getPacketDatabase() { return PATH_DEFAULT + "packet10.sqlite"; }
+	  
+	  // when this is called basedir exists and is writable
+	  static boolean checkBasePath( String path )
+	  {
+	    File dir = TDFile.getExternalDir( path ); 
+	    if ( ! dir.exists() ) {
+	      if ( ! dir.mkdirs() ) TDLog.Error("mkdir error " + path );
+	    }
+
+	    boolean ret = false;
+	    try {
+	      ret = dir.exists() && dir.isDirectory() && dir.canWrite();
+	    } catch ( SecurityException e ) { }
+	    Log.v( "DistoX", "check base path: <" + path + ">: " + ret );
+	    return ret;
+	  }
+
+	  public static String getBaseDir() { return PATH_BASEDIR; }
+	 
+	  static void setPaths( String path /*, String base */ )
+	  {
+	    // Log.v("DistoX", "set paths [0]: path " + path + " base " + base );
+
+	    if ( path == null || ! path.toLowerCase().startsWith( "topodroid" ) ) return;
+
+	    File dir = TDFile.getExternalDir( path ); // DistoX-SAF
+	    // Log.v( "DistoX", "set paths [4]. Dir " + dir.getPath()  );
+	    try {
+	      if ( dir.exists() || dir.mkdirs() ) {
+		if ( dir.isDirectory() && dir.canWrite() ) {
+		  PATH_APPBASE = PATH_BASEDIR + "/" + path;
+		  PATH_APPNAME = path;
+		  PATH_TDCONFIG  = PATH_APPBASE + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG );
+		  PATH_TDR       = PATH_APPBASE + "/tdr"     ; checkFilesystemDirs( PATH_TDR );
+		  APP_NOTE_PATH  = PATH_APPBASE + "/note"    ; checkFilesystemDirs( APP_NOTE_PATH );
+		  APP_FOTO_PATH  = PATH_APPBASE + "/photo"   ; checkFilesystemDirs( APP_FOTO_PATH );
+		  APP_AUDIO_PATH = PATH_APPBASE + "/audio"   ; checkFilesystemDirs( APP_AUDIO_PATH );
+		  PATH_ZIP       = PATH_APPBASE + "/zip"     ; checkFilesystemDirs( PATH_ZIP );
+		}
+	      }
+	    } catch ( SecurityException e ) { 
+	      Log.v("DistoX-PATH", "ext storage security error " + e.getMessage() );
+	    }
+	  }
+
+	  static void clearSymbols( )
+	  {
+	    clearSymbolsDir( "point" );
+	    clearSymbolsDir( "line" );
+	    clearSymbolsDir( "area" );
+	  }  
+
+	  public static void checkPath( String filename )
+	  {
+	    if ( filename == null ) {
+	      // Log.v("DistoX", "check path: null string" );
+	      return;
+	    }
+	    checkPath( TDFile.getTopoDroidFile( filename ) ); // DistoX-SAF
+	  }
+
+	  // ------------------------------------------------------------------
+
+	  public static File[] scanTdconfigDir() // DistoX-SAF
+	  {
+	    File dir = TDFile.getTopoDroidFile( PATH_TDCONFIG );
+	    if ( ! dir.exists() ) {
+	      if ( ! dir.mkdirs() ) {
+		TDLog.Error("mkdir error");
+		return null;
+	      }
+	    }
+	    FilenameFilter filter = new FilenameFilter() {
+	       public boolean accept( File dir, String name ) {
+		 return name.endsWith( "tdconfig" );
+	       }
+	    };
+	    return dir.listFiles( filter );
+	  }
+
+	  // ------------------------------------------------------------------
+	  // FILE NAMES
+
+	  static String getSqlFile() { return PATH_APPBASE + "/survey.sql"; }
+
+	  public static String getPathBase() { return PATH_APPBASE; }
+
+	  static String getManifestFile() { return PATH_APPBASE + "/manifest"; }
+	  // static String getSymbolFile( String name ) { return name; }
+
+	  static boolean hasTdrDir() { return TDFile.hasTopoDroidFile( PATH_TDR ); } // DistoX-SAF
+
+	  static File getTdrDir() { return TDFile.makeTopoDroidDir( PATH_TDR ); } // DistoX-SAF
+
+          // used by Archiver
+	  static String getDirFile( String name )        { return PATH_APPBASE + "/" + name; }
+
+	  public static String getZipFile( String name ) { return PATH_ZIP + "/" + name; }
+	  public static String getTdrFile( String name ) { return PATH_TDR + "/" + name; }
+
+	  public static String getTdconfigDir( ) { return PATH_TDCONFIG; }
+	  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + name; }
+	  // public static String getThconfigDir( ) { return PATH_THCONFIG; }
+	  // public static String getSurveyThconfigFile( String survey ) { return PATH_THCONFIG + survey + THCONFIG; }
+
+	  public static String getManFileName( String name ) { return "man/" + name; }
+
+	  static String getNoteFile( String name )              { return APP_NOTE_PATH  + "/" + name; }
+	  static String getJpgDir( String dir )                 { return APP_FOTO_PATH  + "/" + dir; }
+	  static String getJpgFile( String dir, String name )   { return APP_FOTO_PATH  + "/" + dir + "/" + name; }
+	  static String getAudioDir( String dir )               { return APP_AUDIO_PATH + "/" + dir; }
+	  static String getAudioFile( String dir, String name ) { return APP_AUDIO_PATH + "/" + dir + "/" + name; }
+
+	  static String getSurveyPlotTdrFile( String survey, String name ) { return PATH_TDR + "/" + survey + "-" + name + ".tdr" ; }
+
+	  public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
+	  public static String getTdrFileWithExt( String name )  { return getPathname( PATH_TDR, name, TDR ); }
+	  public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
+
+	  public static File[] getBinFiles() { return getExternalFiles( "bin" ); }
+
+	  public static File[] getCalibFiles() { return getExternalFiles( "ccsv" ); } // DistoX-SAF
+
+	  // used only by CWDActivity to list "topodroid" dirs
+	  static File[] getTopoDroidFiles( String basename ) // DistoX-SAF
+	  {
+	    File dir = TDFile.getTopoDroidFile( basename );
+	    return dir.listFiles( new FileFilter() {
+	      public boolean accept( File pathname ) { 
+		if ( ! pathname.isDirectory() ) return false;
+		return ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) );
+	      }
+	    } );
+	  }
+
+	  // NOTA BENE extensions include the dot, eg, ".th"
+	  static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX };
+	  static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
+	  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX };
+
+	  // static File[] getImportFiles() // DistoX-SAF
+	  // { 
+	  //   return getFiles( PATH_IMPORT, IMPORT_EXT );
+	  // }
+
+	  static String checkImportTypeStream( String ext ) { return checkType( ext, IMPORT_EXT_STREAM ); }
+	  static String checkImportTypeReader( String ext ) { return checkType( ext, IMPORT_EXT_READER ); }
+
+	  static String[] getImportTypes() { return new String[] { TH, TOP, DAT, TRO, TROX, CSN, SVX }; }
+
+	  static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
+
+	  // static String getSurveyPhotoFile( String survey, String name ) { return APP_FOTO_PATH + "/" + survey + "/" + name; }
+
+	  static String getSurveyPhotoDir( String survey ) { return APP_FOTO_PATH  + "/" + survey; }
+	  static String getSurveyAudioDir( String survey ) { return APP_AUDIO_PATH + "/" + survey; }
+
+	  static String getSurveyJpgFile( String survey, String id )
+	  {
+	    TDFile.makeTopoDroidDir( APP_FOTO_PATH + "/" + survey + "/" );
+	    return APP_FOTO_PATH + "/" + survey + "/" + id + ".jpg";
   }
 
   public static String getSurveyJpgFilename( String survey, String id )
   {
-    return survey + File.separator + id + ".jpg";
+    return survey + "/" + id + ".jpg";
   }
 
   static String getSurveyWavFile( String survey, String id )
   {
-    TDFile.makeDir( APP_AUDIO_PATH + survey + File.separator );
-    return APP_AUDIO_PATH + survey + File.separator + id + ".wav";
+    TDFile.makeTopoDroidDir( APP_AUDIO_PATH + "/" + survey );
+    return APP_AUDIO_PATH + "/" + survey + "/" + id + ".wav";
   }
   
   public static String getSurveyWavFilename( String survey, String id )
   {
-    return survey + File.separator + id + ".wav";
+    return survey + "/" + id + ".wav";
   }
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX
@@ -431,9 +322,7 @@ public class TDPath
       }
       if ( ! imagedir.delete() ) TDLog.Error("Dir delete error");
     }
-
     TDFile.deleteFile( getSurveyNoteFile( survey ) );
-
     // deleteSurveyExportFiles( survey )
   }
 
@@ -471,38 +360,18 @@ public class TDPath
 
   // -------------- PRIVATE ---------------------------------------------------------
 
-  // FIXME BASEPATH 
-  // remove comments when ready to swicth to new Android app path system
-  //
-  private static void setBaseDir( String basedir )
-  {
-    PATH_BASEDIR = hasPath11() ? EXTERNAL_STORAGE_PATH_11 : basedir;
-    PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
-    PATH_BASE    = PATH_DEFAULT;
-    // Log.v( "DistoX", "set basedir: basedir <" + basedir + "> pathbase <" + PATH_BASEDIR + ">" );
-  }
+  // private static String noSpaces( String s )
+  // {
+  //   return ( s == null )? null 
+  //     : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
+  // }
 
   private static void setDefault()
   {
-    PATH_DEFAULT = PATH_BASEDIR + File.separator + "TopoDroid/";
-    PATH_BASE    = PATH_DEFAULT;
+    PATH_DEFAULT = PATH_BASEDIR + "/TopoDroid/";
+    PATH_APPBASE = PATH_DEFAULT;
+    PATH_APPNAME = "TopoDroid";
     // Log.v( "DistoX", "set default path <" + PATH_DEFAULT + ">" );
-  }
-
-  private static void setBase()
-  {
-    PATH_BASE    = PATH_DEFAULT;
-    // Log.v( "DistoX", "set base path <" + PATH_BASE + ">" );
-  }
-
-  private static void checkDefaultPaths()
-  {
-    // // Log.v("DistoX", "check default paths under " + PATH_DEFAULT );
-    // checkExternalDirs( "bin" );
-    // // checkDirs( PATH_MAN );
-    // checkExternalDirs( "ccsv" );
-    // checkExternalDirs( "dump" );
-    // symbolsCheckDirs();
   }
 
   private static void clearSymbolsDir( String dirname )
@@ -550,14 +419,14 @@ public class TDPath
 
   private static String getPathname( String directory, String name, String ext ) 
   {
-    checkDirs( directory );
-    return directory + name + ext;
+    checkFilesystemDirs( directory );
+    return directory + "/" + name + ext;
   }
 
   private static String getPathname( String directory, String name ) 
   {
-    checkDirs( directory );
-    return directory + name;
+    checkFilesystemDirs( directory );
+    return directory + "/" + name;
   }
 
   private static File[] getFiles( String dirname, final String[] ext ) // DistoX-SAF
@@ -589,9 +458,9 @@ public class TDPath
     } );
   }
 
-  private static void checkDirs( String path )
+  private static void checkFilesystemDirs( String path )
   {
-    TDFile.makeDir( path );
+    TDFile.makeTopoDroidDir( path );
   }
 
   private static String checkType( String ext, String[] exts )
@@ -628,46 +497,46 @@ public class TDPath
   // final static String TH3 = ".th3";
   // final static String TRB = ".trb"; // TopoRobot
 
-  // private static String PATH_C3D;    //  = PATH_BASE + "c3d/";   // Cave3D
-  // private static String PATH_CAVE;   //  = PATH_BASE + "cave/";  // Polygon
-  // private static String PATH_CAV;    //  = PATH_BASE + "cav/";   // Topo
-  // private static String PATH_CSV;    //  = PATH_BASE + "csv/";   // CSV text
-  // private static String PATH_CSX;    //  = PATH_BASE + "csx/";   // cSurvey
-  // private static String PATH_DAT;    //  = PATH_BASE + "dat/";   // Compass
-  // private static String PATH_GRT;    //  = PATH_BASE + "grt/";   // Grottolf
-  // private static String PATH_GTX;    //  = PATH_BASE + "gtx/";   // GHTopo
-  // // private static String PATH_DUMP;   //  = PATH_BASE + "dump/";  // DistoX memory dumps
-  // private static String PATH_DXF;    //  = PATH_BASE + "dxf/";
-  // private static String PATH_KML;    //  = PATH_BASE + "kml/";
-  // private static String PATH_JSON;   //  = PATH_BASE + "json/";
-  // private static String PATH_PLT;    //  = PATH_BASE + "plt/";   // trackfile
-  // private static String PATH_IMPORT; //  = PATH_BASE + "import/";
-  // private static String PATH_PNG;    //  = PATH_BASE + "png/";
-  // private static String PATH_PDF;    //  = PATH_BASE + "pdf/";
-  // private static String PATH_SHP;    //  = PATH_BASE + "shp/";   // shapefile
-  // private static String PATH_SRV;    //  = PATH_BASE + "srv/";   // Walls
-  // private static String PATH_SUR;    //  = PATH_BASE + "sur/";   // WinKarst
-  // private static String PATH_SVG;    //  = PATH_BASE + "svg/";   
-  // private static String PATH_SVX;    //  = PATH_BASE + "svx/";   // Survex
-  // private static String PATH_TH;     //  = PATH_BASE + "th/";
-  // private static String PATH_TDR3;   //  = PATH_BASE + "tdr3/";
-  // private static String PATH_TH2;    //  = PATH_BASE + "th2/";
-  // private static String PATH_TH3;    //  = PATH_BASE + "th3/";
-  // // private static String APP_TMP_PATH;    //  = PATH_BASE + "tmp/";
-  // private static String PATH_TNL;    //  = PATH_BASE + "tnl/";   // Tunnel
-  // private static String PATH_TOP;    //  = PATH_BASE + "top/";   // PocketTopo
-  // private static String PATH_TRB;    //  = PATH_BASE + "trb/";   // TopoRobot
-  // private static String PATH_TRO;    //  = PATH_BASE + "tro/";   // VisualTopo
-  // private static String PATH_XVI;    //  = PATH_BASE + "xvi/";
-  // // private static String APP_TLX_PATH ; //  = PATH_BASE + "tlx/";
+  // private static String PATH_C3D;    //  = PATH_APPNAME + "/c3d/";   // Cave3D
+  // private static String PATH_CAVE;   //  = PATH_APPNAME + "/cave/";  // Polygon
+  // private static String PATH_CAV;    //  = PATH_APPNAME + "/cav/";   // Topo
+  // private static String PATH_CSV;    //  = PATH_APPNAME + "/csv/";   // CSV text
+  // private static String PATH_CSX;    //  = PATH_APPNAME + "/csx/";   // cSurvey
+  // private static String PATH_DAT;    //  = PATH_APPNAME + "/dat/";   // Compass
+  // private static String PATH_GRT;    //  = PATH_APPNAME + "/grt/";   // Grottolf
+  // private static String PATH_GTX;    //  = PATH_APPNAME + "/gtx/";   // GHTopo
+  // // private static String PATH_DUMP;   //  = PATH_APPNAME + "/dump/";  // DistoX memory dumps
+  // private static String PATH_DXF;    //  = PATH_APPNAME + "/dxf/";
+  // private static String PATH_KML;    //  = PATH_APPNAME + "/kml/";
+  // private static String PATH_JSON;   //  = PATH_APPNAME + "/json/";
+  // private static String PATH_PLT;    //  = PATH_APPNAME + "/plt/";   // trackfile
+  // private static String PATH_IMPORT; //  = PATH_APPNAME + "/import/";
+  // private static String PATH_PNG;    //  = PATH_APPNAME + "/png/";
+  // private static String PATH_PDF;    //  = PATH_APPNAME + "/pdf/";
+  // private static String PATH_SHP;    //  = PATH_APPNAME + "/shp/";   // shapefile
+  // private static String PATH_SRV;    //  = PATH_APPNAME + "/srv/";   // Walls
+  // private static String PATH_SUR;    //  = PATH_APPNAME + "/sur/";   // WinKarst
+  // private static String PATH_SVG;    //  = PATH_APPNAME + "/svg/";   
+  // private static String PATH_SVX;    //  = PATH_APPNAME + "/svx/";   // Survex
+  // private static String PATH_TH;     //  = PATH_APPNAME + "/th/";
+  // private static String PATH_TDR3;   //  = PATH_APPNAME + "/tdr3/";
+  // private static String PATH_TH2;    //  = PATH_APPNAME + "/th2/";
+  // private static String PATH_TH3;    //  = PATH_APPNAME + "/th3/";
+  // // private static String APP_TMP_PATH;    //  = PATH_APPNAME + "/tmp/";
+  // private static String PATH_TNL;    //  = PATH_APPNAME + "/tnl/";   // Tunnel
+  // private static String PATH_TOP;    //  = PATH_APPNAME + "/top/";   // PocketTopo
+  // private static String PATH_TRB;    //  = PATH_APPNAME + "/trb/";   // TopoRobot
+  // private static String PATH_TRO;    //  = PATH_APPNAME + "/tro/";   // VisualTopo
+  // private static String PATH_XVI;    //  = PATH_APPNAME + "/xvi/";
+  // // private static String APP_TLX_PATH ; //  = PATH_APPNAME + "/tlx/";
 
-  // private static String PATH_BIN  = "bin" + File.separator;    // Firmwares  
-  // private static String PATH_CCSV = "ccsv" + File.separator;  // calib CSV text
-  // private static String PATH_MAN  = TDInstance.context.getFileDir(); // PATH_DEFAULT + "man/"; // User Manual
-  // private static String APP_SYMBOL_PATH = "symbol" + File.separator;
-  // private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "point" + File.separator;
-  // private static String APP_LINE_PATH   = APP_SYMBOL_PATH + "line" + File.separator;
-  // private static String APP_AREA_PATH   = APP_SYMBOL_PATH + "area" + File.separator;
+  // private static String PATH_BIN  = "/bin/";    // Firmwares  
+  // private static String PATH_CCSV = "/ccsv/";  // calib CSV text
+  // private static String PATH_MAN  = TDInstance.context.getFileDir(); // PATH_DEFAULT + "/man/"; // User Manual
+  // private static String APP_SYMBOL_PATH = "/symbol";
+  // private static String APP_POINT_PATH  = APP_SYMBOL_PATH + "/point/";
+  // private static String APP_LINE_PATH   = APP_SYMBOL_PATH + "/line/";
+  // private static String APP_AREA_PATH   = APP_SYMBOL_PATH + "/area/";
 
   // static String getSymbolPointFilename( String name ) { return "symbol/point/" + name; }
   // static String getSymbolLineFilename( String name )  { return "symbol/line/"  + name; }
@@ -889,38 +758,38 @@ public class TDPath
 
   // private static void setExportPaths()
   // {
-  //   APP_TLX_PATH = PATH_BASE + "tlx/";
+  //   APP_TLX_PATH = PATH_APPBASE + "tlx/";
   //   checkDirs( APP_TLX_PATH );
-  //   PATH_C3D  = PATH_BASE + "c3d"  + File.separator;    // FIXME checkDirs( PATH_C3D );
-  //   PATH_CAV  = PATH_BASE + "cav"  + File.separator;    // FIXME checkDirs( PATH_CAV );
-  //   PATH_CAVE = PATH_BASE + "cave" + File.separator;    // FIXME checkDirs( PATH_CAVE );
-  //   PATH_CSV  = PATH_BASE + "csv"  + File.separator;    // FIXME checkDirs( PATH_CSV );
-  //   PATH_CSX  = PATH_BASE + "csx"  + File.separator;    // FIXME checkDirs( PATH_CSX );
-  //   PATH_DAT  = PATH_BASE + "dat"  + File.separator;    // FIXME checkDirs( PATH_DAT );
-  //   PATH_DXF  = PATH_BASE + "dxf"  + File.separator;    // FIXME checkDirs( PATH_DXF );
-  //   PATH_GRT  = PATH_BASE + "grt"  + File.separator;    // FIXME checkDirs( PATH_GRT );
-  //   PATH_GTX  = PATH_BASE + "gtx"  + File.separator;    // FIXME checkDirs( PATH_GTX );
-  //   PATH_JSON = PATH_BASE + "json" + File.separator;    // FIXME checkDirs( PATH_JSON );
-  //   PATH_KML  = PATH_BASE + "kml"  + File.separator;    // FIXME checkDirs( PATH_KML );
-  //   PATH_PLT  = PATH_BASE + "plt"  + File.separator;    // FIXME checkDirs( PATH_PLT );
-  //   PATH_PNG  = PATH_BASE + "png"  + File.separator;    // FIXME checkDirs( PATH_PNG );
-  //   PATH_PDF  = PATH_BASE + "pdf"  + File.separator;    // FIXME checkDirs( PATH_PDF );
-  //   PATH_SHP  = PATH_BASE + "shp"  + File.separator;    // FIXME checkDirs( PATH_SHP );
-  //   PATH_SRV  = PATH_BASE + "srv"  + File.separator;    // FIXME checkDirs( PATH_SRV );
-  //   PATH_SUR  = PATH_BASE + "sur"  + File.separator;    // FIXME checkDirs( PATH_SUR );
-  //   PATH_SVG  = PATH_BASE + "svg"  + File.separator;    // FIXME checkDirs( PATH_SVG );
-  //   PATH_SVX  = PATH_BASE + "svx"  + File.separator;    // FIXME checkDirs( PATH_SVX );
-  //   PATH_TDR3 = PATH_BASE + "tdr3" + File.separator;    checkDirs( PATH_TDR3 );
-  //   PATH_TH   = PATH_BASE + "th"   + File.separator;    // FIXME checkDirs( PATH_TH );
-  //   PATH_TH2  = PATH_BASE + "th2"  + File.separator;    checkDirs( PATH_TH2 );
-  //   PATH_TH3  = PATH_BASE + "th3"  + File.separator;    checkDirs( PATH_TH3 );
-  //   PATH_TNL  = PATH_BASE + "tnl"  + File.separator;    // FIXME checkDirs( PATH_TNL );
-  //   PATH_TOP  = PATH_BASE + "top"  + File.separator;    // FIXME checkDirs( PATH_TOP );
-  //   PATH_TRB  = PATH_BASE + "trb"  + File.separator;    // FIXME checkDirs( PATH_TRB );
-  //   PATH_TRO  = PATH_BASE + "tro"  + File.separator;    // FIXME checkDirs( PATH_TRO );
-  //   PATH_XVI  = PATH_BASE + "xvi"  + File.separator;    // FIXME checkDirs( PATH_XVI );
-  //   APP_TMP_PATH   = PATH_BASE + "tmp"   + File.separator; checkDirs( APP_TMP_PATH );
-  //   PATH_IMPORT = PATH_BASE + "import" + File.separator;   checkDirs( PATH_IMPORT );
+  //   PATH_C3D  = PATH_APPBASE + "c3d"  + File.separator;    // FIXME checkDirs( PATH_C3D );
+  //   PATH_CAV  = PATH_APPBASE + "cav"  + File.separator;    // FIXME checkDirs( PATH_CAV );
+  //   PATH_CAVE = PATH_APPBASE + "cave" + File.separator;    // FIXME checkDirs( PATH_CAVE );
+  //   PATH_CSV  = PATH_APPBASE + "csv"  + File.separator;    // FIXME checkDirs( PATH_CSV );
+  //   PATH_CSX  = PATH_APPBASE + "csx"  + File.separator;    // FIXME checkDirs( PATH_CSX );
+  //   PATH_DAT  = PATH_APPBASE + "dat"  + File.separator;    // FIXME checkDirs( PATH_DAT );
+  //   PATH_DXF  = PATH_APPBASE + "dxf"  + File.separator;    // FIXME checkDirs( PATH_DXF );
+  //   PATH_GRT  = PATH_APPBASE + "grt"  + File.separator;    // FIXME checkDirs( PATH_GRT );
+  //   PATH_GTX  = PATH_APPBASE + "gtx"  + File.separator;    // FIXME checkDirs( PATH_GTX );
+  //   PATH_JSON = PATH_APPBASE + "json" + File.separator;    // FIXME checkDirs( PATH_JSON );
+  //   PATH_KML  = PATH_APPBASE + "kml"  + File.separator;    // FIXME checkDirs( PATH_KML );
+  //   PATH_PLT  = PATH_APPBASE + "plt"  + File.separator;    // FIXME checkDirs( PATH_PLT );
+  //   PATH_PNG  = PATH_APPBASE + "png"  + File.separator;    // FIXME checkDirs( PATH_PNG );
+  //   PATH_PDF  = PATH_APPBASE + "pdf"  + File.separator;    // FIXME checkDirs( PATH_PDF );
+  //   PATH_SHP  = PATH_APPBASE + "shp"  + File.separator;    // FIXME checkDirs( PATH_SHP );
+  //   PATH_SRV  = PATH_APPBASE + "srv"  + File.separator;    // FIXME checkDirs( PATH_SRV );
+  //   PATH_SUR  = PATH_APPBASE + "sur"  + File.separator;    // FIXME checkDirs( PATH_SUR );
+  //   PATH_SVG  = PATH_APPBASE + "svg"  + File.separator;    // FIXME checkDirs( PATH_SVG );
+  //   PATH_SVX  = PATH_APPBASE + "svx"  + File.separator;    // FIXME checkDirs( PATH_SVX );
+  //   PATH_TDR3 = PATH_APPBASE + "tdr3" + File.separator;    checkDirs( PATH_TDR3 );
+  //   PATH_TH   = PATH_APPBASE + "th"   + File.separator;    // FIXME checkDirs( PATH_TH );
+  //   PATH_TH2  = PATH_APPBASE + "th2"  + File.separator;    checkDirs( PATH_TH2 );
+  //   PATH_TH3  = PATH_APPBASE + "th3"  + File.separator;    checkDirs( PATH_TH3 );
+  //   PATH_TNL  = PATH_APPBASE + "tnl"  + File.separator;    // FIXME checkDirs( PATH_TNL );
+  //   PATH_TOP  = PATH_APPBASE + "top"  + File.separator;    // FIXME checkDirs( PATH_TOP );
+  //   PATH_TRB  = PATH_APPBASE + "trb"  + File.separator;    // FIXME checkDirs( PATH_TRB );
+  //   PATH_TRO  = PATH_APPBASE + "tro"  + File.separator;    // FIXME checkDirs( PATH_TRO );
+  //   PATH_XVI  = PATH_APPBASE + "xvi"  + File.separator;    // FIXME checkDirs( PATH_XVI );
+  //   APP_TMP_PATH   = PATH_APPBASE + "tmp"   + File.separator; checkDirs( APP_TMP_PATH );
+  //   PATH_IMPORT = PATH_APPBASE + "import" + File.separator;   checkDirs( PATH_IMPORT );
   // }
 
   // static private void checkExternalDirs( String path )

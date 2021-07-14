@@ -60,4 +60,14 @@
   <string name="type_d" translatable="false">D</string>
   <string name="type_m" translatable="false">M</string>
 
+  <string name="r_title" translatable="false">Android R important notice</string>
+  <string name="r_dialog" translatable="false">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string>
+  <string name="r_checkboxes">You must confirm the checkboxes.</string>
+  <string name="r_i_understood" translatable="false">I fully understood this notice</string>
+  <string name="r_disclaimer" translatable="false">I agree that the app author(s) are not liable for any damage or loss of data.</string>
+  <string name="r_continue" translatable="false">CONTINUE</string>
+
 </resources>

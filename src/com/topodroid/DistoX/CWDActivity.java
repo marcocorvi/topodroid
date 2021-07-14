@@ -76,29 +76,6 @@ public class CWDActivity extends Activity
     String dir_name  = mETcwd.getText().toString();
 
     String base_name = TDPath.getBaseDir();
-    /* BASE DIR CANNOT BE CHANGED
-    // Log.v("DistoX", "set CWD " + dir_name + " base name " + base_name );
-    if ( ! TDPath.hasPath11() ) {
-      String b_name = TDLevel.overExpert ? mBaseName : TDInstance.cbd ;
-      if ( b_name != null ) {
-        b_name = b_name.trim();
-        if ( b_name.length() > 0 ) base_name = b_name;
-        // Log.v("DistoX", "CWD using base name " + base_name );
-      }
-    }
-
-    // make sure base_dir exists and is writable
-    File base_dir = TDFile.getFile( base_name );
-    try {
-      if ( ! ( base_dir.exists() && base_dir.canWrite() ) ) {
-        TDToast.makeBad( R.string.bad_cbd );
-        return false;
-      }
-    } catch ( SecurityException e ) { 
-      TDToast.makeBad( R.string.bad_cbd );
-      return false;
-    }
-    */
 
     // CURRENT WORK DIRECTORY
     // if ( dir_name == null ) { // always false
@@ -122,7 +99,7 @@ public class CWDActivity extends Activity
     }
 
     // return the result to TDPrefActivuity
-    if ( TDPath.checkBasePath( dir_name, base_name ) ) {
+    if ( TDPath.checkBasePath( dir_name /*, base_name */ ) ) {
       TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + "> base <" + base_name + ">" );
       TopoDroidApp.setCWDPreference( dir_name, base_name );
       Intent intent = new Intent();

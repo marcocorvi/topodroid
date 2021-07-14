@@ -117,12 +117,14 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
+  static boolean hasTopoDroidDatabase() { return ( TDFile.getTopoDroidFile( TDPath.getDatabase() ).exists() ); }
+
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
   static boolean mCheckManualTranslation = false;
   // static String mManual;  // manual url
 
-  static int mCheckPerms;
+  // static int mCheckPerms;
 
   static String mClipboardText = null; // text clipboard
 
@@ -747,48 +749,51 @@ public class TopoDroidApp extends Application
     // DrawingUtil.CENTER_X = mDisplayWidth  / 2;
     // DrawingUtil.CENTER_Y = mDisplayHeight / 2;
 
-    mCheckPerms = TDandroid.checkPermissions( this );
+    mListerSet = new ListerSetHandler();
+    mEnableZip = true;
+    initEnvironmentFirst( prefHlp ); // called by MainWindow.onStart
+    // mCheckPerms = TDandroid.checkPermissions( this );
+    // if ( mCheckPerms >= 0 ) {
+    //   initEnvironmentSecond( ); // called by MainWindow.onStart
+    // }
 
-    if ( mCheckPerms >= 0 ) {
-      mListerSet = new ListerSetHandler();
-      mEnableZip = true;
-
-      initEnvironment( prefHlp ); // called by SplashActivity
-
-    }
     // mManual = getResources().getString( R.string.topodroid_man );
 
     // Log.v("DistoX-MAIN", "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
   }
 
-  static void initEnvironment( TDPrefHelper prefHlp )
+  static int initEnvs = 0;
+
+  static void initEnvironmentSecond( boolean with_dialog_r )
   {
-    // TDLog.Profile("TDApp paths");
-    TDPath.setDefaultPaths();
+    Log.v("DistoX", "init env. second: " + initEnvs );
+    if ( (initEnvs & 0x02) == 0x02 ) return;
+    initEnvs |= 0x02;
+    TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
 
     // TDLog.Profile("TDApp cwd");
     TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
     TDInstance.cbd = TDPath.getBaseDir();
-    if ( ! TDPath.hasPath11() ) {
-      TDInstance.cbd = prefHlp.getString( "DISTOX_CBD", TDPath.getBaseDir() );
-    }
-    // Log.v("DistoX-PATH11", "cwd " + TDInstance.cwd + " cbd " + TDInstance.cbd );
-    TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
+
+    // TDLog.Profile("TDApp paths");
+    TDPath.setPaths( TDInstance.cwd /*, TDInstance.cbd */ );
 
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
-
-    // ---- IF_COSURVEY
-    // mDataListeners = new DataListenerSet( );
-    // mData  = new DataHelper( this, this, mDataListeners );
-    // mDData = new DeviceHelper( this, this, null ); 
-    //
-    // ---- ELSE ----
-    mData  = new DataHelper( thisApp /*, this */ ); 
-    mDData = new DeviceHelper( thisApp /*, this */ );
+    Log.v("DistoX", "Open TopoDroid Database");
+    if ( ! with_dialog_r ) {
+      mData = new DataHelper( thisApp /*, this */ ); 
+    }
 
     // mStationName = new StationName();
+  }
 
+  private static void initEnvironmentFirst( TDPrefHelper prefHlp )
+  {
+    Log.v("DistoX", "init env. first: " + initEnvs );
+    if ( (initEnvs & 0x01) == 0x01 ) return;
+    initEnvs |= 0x01;
+    mDData = new DeviceHelper( thisApp /*, this */ );
     // TDLog.Profile("TDApp prefs");
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
     TDSetting.loadPrimaryPreferences( /* this, */ TDInstance.getResources(),  prefHlp );
@@ -861,23 +866,20 @@ public class TopoDroidApp extends Application
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
   }
 
+  // @param cwd current work directory
+  // @param cbd current base directory (UNUSED)
   public static void setCWD( String cwd, String cbd )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
     // Log.v("DistoX", "App set CWD " + cwd + " CBD " + cbd );
 
-    if ( TDPath.hasPath11() ) {
-      cbd = TDInstance.cbd;
-    } else {
-      if ( cbd == null || cbd.length() == 0 ) cbd = TDInstance.cbd;
-    }
-    if ( cbd.equals( TDInstance.cbd ) && cwd.equals( TDInstance.cwd ) ) return;
-    TDInstance.cbd = cbd;
+    if ( cwd.equals( TDInstance.cwd ) ) return;
+    // TDInstance.cbd = cbd;
     TDInstance.cwd = cwd;
     TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + "> cbd <" + cbd + ">");
     mData.closeDatabase();
 
-    TDPath.setPaths( TDInstance.cwd, TDInstance.cbd );
+    TDPath.setPaths( TDInstance.cwd /*, TDInstance.cbd */ );
     mData.openDatabase( TDInstance.context );
 
     if ( mMainActivity != null ) mMainActivity.setTheTitle( );
@@ -1304,7 +1306,7 @@ public class TopoDroidApp extends Application
   static void setCWDPreference( String cwd, String cbd )
   { 
     if ( TDInstance.cwd.equals( cwd ) && TDInstance.cbd.equals( cbd ) ) return;
-    // Log.v("DistoX", "setCWDPreference " + cwd );
+    // Log.v("DistoX", "set CWD preference " + cwd );
     TDPrefHelper.update( "DISTOX_CWD", cwd, "DISTOX_CBD", cbd ); 
     setCWD( cwd, cbd ); 
   }
@@ -1666,7 +1668,7 @@ public class TopoDroidApp extends Application
           // String pathname = TDPath.getSymbolFile( filepath );
           // File file = TDFile.getFile( pathname );
           File file = TDFile.getExternalFile( type, filepath );
-          Log.v("DistoX-PATH", "uncompress symbol " + type + " " + filepath + " " + file.getPath() );
+          // Log.v("DistoX-PATH", "uncompress symbol " + type + " " + filepath + " " + file.getPath() );
           if ( overwrite || ! file.exists() ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {

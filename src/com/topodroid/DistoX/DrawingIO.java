@@ -494,10 +494,11 @@ public class DrawingIO
   // exportTherion calls DrawingSurface' exportTherion, 
   // which calls DrawingCommandManager's exportTherion,
   // which calls the full method exportTherion with the list of sketch items
-  //
+
+  /* UNUSED ( was exportTherion )
   // FIXME DataHelper and SID are necessary to export splays by the station
   // @param fullname  full scrap name ( filename without extension )
-  static void exportTherion( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
+  static void exportTherionFile( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
     TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
     // Log.v( "DistoX", "export Therion " + fullname + " file " + file.getPath() );
@@ -509,6 +510,7 @@ public class DrawingIO
       TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
     }
   }
+  */
 
   static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, boolean multisketch )
   {
@@ -521,7 +523,7 @@ public class DrawingIO
   }
 
   // entry point to export data-stream
-  public static void exportDataStream( DrawingCommandManager manager, int type, PlotInfo info, File file, String fullname, int proj_dir )
+  public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, File file, String fullname, int proj_dir )
   {
     try {
       FileOutputStream fos = TDFile.getFileOutputStream( file );
@@ -546,7 +548,7 @@ public class DrawingIO
   }
 
   // entry point to export a set of paths to data-stream
-  public static void exportDataStream( List< DrawingPath > paths, int type, PlotInfo info, File file, String fullname, int proj_dir, int scrap )
+  public static void exportDataStreamFile( List< DrawingPath > paths, int type, PlotInfo info, File file, String fullname, int proj_dir, int scrap )
   {
     try {
       FileOutputStream fos = TDFile.getFileOutputStream( file );
@@ -1668,6 +1670,7 @@ public class DrawingIO
   //   return scrap_index;
   // }
 
+  // used to write XSections to the output file
   // bbox != null  <==>  begeinheader true
   // @param file_name  filename without extension
   static private void dataStreamToTherion( File file, BufferedWriter out, String file_name, RectF bbox, 

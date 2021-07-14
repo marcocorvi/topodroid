@@ -74,41 +74,44 @@ public class TDFile
   public static boolean hasManFile( String name ) { return getManFile( name ).exists(); }
   public static FileReader getManFileReader( String name ) throws IOException { return new FileReader( getManFile(name) ); }
  
-  public static boolean hasFile( String name ) { return name != null && (new File( name )).exists(); }
+  public static boolean hasTopoDroidFile( String name ) { return name != null && (new File( name )).exists(); }
+  public static boolean hasTopoDroidFile( String dirpath, String name ) { return name != null && (new File( dirpath + "/" + name )).exists(); }
 
-  public static long getFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
+  public static long getTopoDroidFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
   // @param name     TopoDroid-relative filename
   public static File getTopoDroidFile( String name ) { return new File( name ); }
 
   public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
 
+
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
-
-  public static File getSettingsFile()   { return new File( TDInstance.context.getExternalFilesDir( null ), "settings.txt" ); }
-  public static File getLogFile()        { return new File( TDInstance.context.getExternalFilesDir( null ), "log.txt" ); }
-  public static File getDeviceDatabase() { return new File( TDInstance.context.getExternalFilesDir( null ), "device10.sqlite" ); }
-  public static File getPacketDatabase() { return new File( TDInstance.context.getExternalFilesDir( null ), "packet10.sqlite" ); }
-
   public static File getExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ); }
+  public static File getExternalFile( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ); }
 
-  public static File getExternalFile( String type, String name ) { return new File ( TDInstance.context.getExternalFilesDir( type ), name ); }
+  public static String getExternalPath( String type ) { return TDInstance.context.getExternalFilesDir( type ).getPath(); }
+  public static String getExternalPath( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ).getPath(); }
+
+  public static boolean hasExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ).exists(); }
+  public static boolean hasExternalFile( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ).exists(); }
+
+  public static File getSettingsFile()   { return getExternalFile( null, "settings.txt" ); }
+  public static File getLogFile()        { return getExternalFile( null, "log.txt" ); }
+  public static File getDeviceDatabase() { return getExternalFile( null, "device10.sqlite" ); }
+  public static File getPacketDatabase() { return getExternalFile( null, "packet10.sqlite" ); }
 
   public static void deleteExternalFile( String type, String name ) 
   {
-    File file = new File ( TDInstance.context.getExternalFilesDir( type ), name );
-    if ( file.exists() ) {
-      file.delete();
-    }
+    File file = getExternalFile( type, name );
+    if ( file.exists() ) file.delete();
   }
 
   public static FileWriter getExternalFileWriter( String type, String name ) throws IOException
   {
-    File file = getExternalFile( type, name );
-    return new FileWriter( file );
+    return new FileWriter( getExternalFile( type, name ) );
   }
 
   // TEMPORARY FILES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -129,6 +132,7 @@ public class TDFile
 
   // ----------------------------------------------------------------------------
 
+/*
   // @param name     absolute filename
   // used by FixedImportDialog
   public static File getGpsPointFile( String pathname ) { return new File( pathname ); }
@@ -138,6 +142,7 @@ public class TDFile
     File file = new File( dirname, filename );
     return new FileReader( file );
   }
+*/
 
   // public static File getFile( File dir, String name )
   // {
@@ -243,9 +248,9 @@ public class TDFile
     }
   }
 
-  public static File makeDir( String pathname )
+  public static File makeTopoDroidDir( String pathname )
   {
-    File f = getTopoDroidFile( pathname );
+    File f = new File( pathname );
     if ( ! f.exists() ) {
       if ( ! f.mkdirs() ) {
         TDLog.Error("mkdir failed " + pathname );
