@@ -845,7 +845,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_backups">Vázlat mentések törlése</string>
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
-    <!-- TODO string name="help_close_app">Close app</string -->
+    <string name="help_close_app">Program bezárása</string>
     <string name="help_coeff">Mutassa a kalibrációs együtthatókat</string>
     <string name="help_color">Mérés szín törlése</string>
     <string name="help_continue">Vonal folytatása</string>
