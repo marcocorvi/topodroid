@@ -223,6 +223,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="import_zip_wait">A importação do arquivo zip pode demorar. Aguarde &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">processando &#8230;</string>
@@ -936,7 +937,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
@@ -1082,6 +1083,8 @@ Tap "Close" not to take any action.
 
     <string name="title_import_tro">Opções importação VisualTopo</string>
     <string name="title_import_dat">Opções importação Compass</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
@@ -1133,8 +1136,8 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title">Exportação padrão de croqui</string>
   <string name="pref_export_plot_summary">Formato padrão para exportação de croqui</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Mapas Therion primeiro</string>
   <string name="pref_therion_maps_summary">Mapas de Therion antes dos dados da topo</string>
   <string name="pref_extra_buttons_title">Nível de recursos</string>

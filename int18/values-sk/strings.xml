@@ -222,6 +222,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Prosím čakajte</string>
     <string name="processing">Prebieha proces</string>
@@ -956,7 +957,7 @@ Tap "Close" not to take any action.
     <string name="help_equates">Zoznam porovnaní</string>
 
     <string name="export_bgcolor">Biele pozadie</string>
-    <string name="export_config">Config súbor</string>
+    <!-- TODO string name="export_config">Config commands</string -->
     <string name="export_csv_rawdata">Surové dáta</string>
     <string name="export_dxf_blocks">DXF blocks</string>
     <string name="export_dxf_version">Verzia</string>
@@ -1104,6 +1105,8 @@ Tap "Close" not to take any action.
 
     <string name="title_import_tro">VisualTopo možnosti Importu</string>
     <string name="title_import_dat">Compass možnosti Importu</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="exported_settings">Exportované Nastavenia %1$s</string>
   <string name="imported_settings">Importované Nastavenia</string>
@@ -1161,8 +1164,8 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title"> Formát exportu - nákresu</string>
   <string name="pref_export_plot_summary">Predvolený formát exportu nákresu</string>
 
-  <string name="pref_therion_config_title">Therion config súbor</string>
-  <string name="pref_therion_config_summary">Vytvoriť Therion config súbor</string>
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Therion mapy ako prvé</string>
   <string name="pref_therion_maps_summary">Therion mapy pred dátami</string>
   <string name="pref_extra_buttons_title">Úroveň príkazov</string>

@@ -223,6 +223,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <!-- UNUSED string name="import_zip_wait">Importiere Zip-Datei, bitte warten&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Skizze speichern, bitte warten&#8230;</string -->
     <string name="MT_points_none">Keine MobileTopographer Punkte</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Bitte warten</string>
     <string name="processing">bearbeite &#8230;</string>
@@ -951,7 +952,7 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
     <string name="help_equates">Verbindungspunkte</string>
 
     <string name="export_bgcolor">Hintergrundfarbe</string>
-    <string name="export_config">thconfig</string>
+    <!-- TODO string name="export_config">Config commands</string -->
     <string name="export_csv_rawdata">Rohdaten</string>
     <string name="export_dxf_blocks">DXF Blöcke</string>
     <string name="export_georeference">Georeferenzierung</string>
@@ -1098,6 +1099,8 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
 
     <string name="title_import_tro">VisualTopo-Import Optionen</string>
     <string name="title_import_dat">Compass-Import Optionen</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="pref_export_settings">Einstellungen exportieren</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1148,8 +1151,8 @@ WARNUNG. Ab v.5.0.60 wird ein "TopoDroid"-Ordner automatisch verwendet wenn es e
   <string name="pref_export_plot_title">Skizzenformat</string>
   <string name="pref_export_plot_summary">Standardformat für Skizzen-Exporte</string>
 
-  <string name="pref_therion_config_title">Therion Konfiguration</string>
-  <string name="pref_therion_config_summary">Therion Konfiguration erstellen (&lt;projekt&gt;.thconfig)</string>
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Therion: &quot;map&quot; vor Messzug</string>
   <string name="pref_therion_maps_summary">Therion map-Elemente vor den Messungen platzieren</string>
   <string name="pref_extra_buttons_title">Modus</string>

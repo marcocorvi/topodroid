@@ -776,7 +776,7 @@ public class TopoDroidApp extends Application
     TDInstance.cbd = TDPath.getBaseDir();
 
     // TDLog.Profile("TDApp paths");
-    TDPath.setPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
 
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
@@ -879,7 +879,7 @@ public class TopoDroidApp extends Application
     TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + "> cbd <" + cbd + ">");
     mData.closeDatabase();
 
-    TDPath.setPaths( TDInstance.cwd /*, TDInstance.cbd */ );
+    TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
     mData.openDatabase( TDInstance.context );
 
     if ( mMainActivity != null ) mMainActivity.setTheTitle( );
@@ -1228,9 +1228,11 @@ public class TopoDroidApp extends Application
       // Log.v( "DistoX", "set SurveyFromName <" + name + ">");
 
       TDInstance.sid = mData.setSurvey( name, datamode );
+
       // mFixed.clear();
       TDInstance.survey = null;
       if ( TDInstance.sid > 0 ) {
+        TDPath.setSurveyPaths( name );
         DistoXStationName.setInitialStation( mData.getSurveyInitStation( TDInstance.sid ) );
         TDInstance.survey = name;
 	TDInstance.datamode = mData.getSurveyDataMode( TDInstance.sid );

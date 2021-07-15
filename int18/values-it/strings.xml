@@ -221,6 +221,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <!-- UNUSED string name="import_zip_wait">Importare uno ZIP richiede tempo. Attendi&#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Attendere &#8230;</string>
     <string name="processing">elaborazione &#8230;</string>
@@ -953,7 +954,7 @@ Tap <b>Chiudi</b> per fare nulla.
     <string name="help_equates">Lista rilievi simili</string>
 
     <string name="export_bgcolor">Colore di sfondo</string>
-    <string name="export_config">File di configurazione</string>
+    <string name="export_config">Comandi di configurazione</string>
     <string name="export_csv_rawdata">Dati grezzi</string>
     <string name="export_dxf_blocks">Blocchi DXF</string>
     <string name="export_dxf_version">Versione</string>
@@ -1105,6 +1106,8 @@ Tap <b>Chiudi</b> per fare nulla.
 
     <string name="title_import_tro">VisualTopo: Imposta import</string>
     <string name="title_import_dat">Compass: Imposta import</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="exported_settings">Impostazioni esportate %1$s</string>
   <string name="imported_settings">Impostazioni importate</string>
@@ -1157,8 +1160,8 @@ Tap <b>Chiudi</b> per fare nulla.
   <string name="pref_export_plot_title">Default export disegno</string>
   <string name="pref_export_plot_summary">Formato di default export disegno</string>
 
-  <string name="pref_therion_config_title">File configurazione Therion</string>
-  <string name="pref_therion_config_summary">Crea file configurazione Therion</string>
+  <string name="pref_therion_config_title">Comandi configurazione Therion</string>
+  <string name="pref_therion_config_summary">Inserisci comandi configurazione Therion</string>
   <string name="pref_therion_maps_title">Mappe Therion per prime</string>
   <string name="pref_therion_maps_summary">Mappe Therion prima dei dati del rilievo</string>
   <string name="pref_extra_buttons_title">Livello di comandi</string>

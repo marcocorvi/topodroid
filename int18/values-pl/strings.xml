@@ -223,6 +223,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Brak mobilnego punktu topograficznego</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
  
     <string name="pleasewait">Czekaj</string>
     <string name="processing">przetwarzanie &#8230;</string>
@@ -947,7 +948,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
@@ -1093,6 +1094,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
     <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1148,8 +1151,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_export_plot_title">Domyślny eksport szkicu</string>
   <string name="pref_export_plot_summary">Domyślny format eksportu szkicu</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Najpierw mapy Theriona</string>
   <string name="pref_therion_maps_summary">Umieć mapy Theriona przed danymi ciągu</string>
   <string name="pref_extra_buttons_title">Poziom aktywności</string>

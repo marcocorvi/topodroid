@@ -1120,9 +1120,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_shot">Survey import</string>
     <string name="title_import_tro">VisualTopo import options</string>
     <string name="title_import_dat">Compass import options</string>
+    <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
 
   <string name="exported_settings">Exported settings %1$s</string>

@@ -221,6 +221,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="import_zip_wait">Importarea fișierului zip ar putea dura mult. Te rog așteaptă &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Se salvează schița &#8230; așteaptă &#8230;</string -->
     <string name="MT_points_none">Punct MobileTopographer lipsă</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
  
     <string name="pleasewait">Așteaptă te rog</string>
     <string name="processing">se procesează …</string>
@@ -935,7 +936,7 @@ Tap "Close" not to take any action.
     <string name="help_equates">Afișează vizele echivalente cartărilor</string>
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
@@ -1081,6 +1082,8 @@ Tap "Close" not to take any action.
 
     <string name="title_import_tro">Opțiuni importare VisualTopo</string>
     <string name="title_import_dat">Opțiuni importare Compass</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="pref_export_settings">Parametri exportare</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1131,8 +1134,8 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title">Export schiță implicit</string>
   <string name="pref_export_plot_summary">Formatul implicit pentru export de schiță</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Harțile Therion primele</string>
   <string name="pref_therion_maps_summary">Harțile Therion înaintea datelelor de calibrare</string>
   <string name="pref_extra_buttons_title">Nivel de funcții</string>

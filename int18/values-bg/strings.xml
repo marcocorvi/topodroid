@@ -222,6 +222,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="import_zip_wait">Импортирането може да отнеме време. Моля изчакайте …</string -->
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Моля изчакайте</string>
     <string name="processing">обработване &#8230;</string>
@@ -934,7 +935,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
@@ -1080,6 +1081,8 @@ Tap "Close" not to take any action.
 
     <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
     <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <!-- TODO string name="pref_export_settings">Export settings</string -->
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1129,8 +1132,8 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title">Експортиране на скици</string>
   <string name="pref_export_plot_summary">Формат на експортираните скици</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Therion дефиниции "maps"</string>
   <string name="pref_therion_maps_summary">Дефиниции "maps" преди антената в Therion</string>
   <string name="pref_extra_buttons_title">Ниво на функциите</string>

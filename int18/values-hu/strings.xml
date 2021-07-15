@@ -221,6 +221,7 @@ Tap <b>Bezár</b> nem változtat.
     <!-- UNUSED string name="import_zip_wait">A zip fájl importálása több időt vesz igénybe. Kérem várjon &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Nincs MobileTopographer pont</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
  
     <string name="pleasewait">Kérjük várjál</string>
     <string name="processing">feldolgozva &#8230;</string>
@@ -958,7 +959,7 @@ Tap <b>Bezár</b> nem változtat.
     <string name="help_equates">Kapcsolódó pontok listázása</string>
 
     <string name="export_bgcolor">Fehér háttér</string>
-    <string name="export_config">Konfigurációa állomány</string>
+    <!-- TODO string name="export_config">Config commands</string -->
     <string name="export_csv_rawdata">Nyers adat</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
 	<string name="export_dxf_version">Verzió</string>
@@ -1106,6 +1107,8 @@ Tap <b>Bezár</b> nem változtat.
 
     <string name="title_import_tro">VisualTopo import opciók</string>
     <string name="title_import_dat">Compass import opciók</string>
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="exported_settings">Beállítások exportálása %1$s</string>
   <string name="imported_settings">mportált beállítások</string>
@@ -1163,8 +1166,8 @@ Tap <b>Bezár</b> nem változtat.
   <string name="pref_export_plot_title">Vázlat export</string>
   <string name="pref_export_plot_summary">Vázlat Export formátum alapbeállítása</string>
 
-  <string name="pref_therion_config_title">Therion config file</string>
-  <string name="pref_therion_config_summary">Therion config file készítése</string>
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Therion térképek elöl</string>
   <string name="pref_therion_maps_summary">Therion térképek a felmérési adatok előtt</string>
   <string name="pref_extra_buttons_title">Engedélyezett funkciók</string>

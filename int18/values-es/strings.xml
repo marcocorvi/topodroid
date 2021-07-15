@@ -220,6 +220,7 @@ Tap "Close" not to take any action.
     <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
+    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
 
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">procesando &#8230;</string>
@@ -941,7 +942,7 @@ Tap "Close" not to take any action.
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
     <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config file</string -->
+    <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
     <!-- TODO string name="export_georeference">Georeference</string -->
@@ -1094,6 +1095,8 @@ Tap "Close" not to take any action.
 
     <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
     <!-- TODO string name="title_import_dat">Compass import options</string -->
+    <!-- TODO string name="title_import_shot">Survey import</string -->
+    <!-- TODO string name="title_import_gps">GPS point import</string -->
 
   <string name="pref_export_settings">Ajustes de exportación</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
@@ -1144,8 +1147,8 @@ Tap "Close" not to take any action.
   <string name="pref_export_plot_title">Exportación de dibujo por defecto</string>
   <string name="pref_export_plot_summary">Exportación formato de dibujo por defecto</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config file</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config file</string -->
+  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
+  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
   <string name="pref_therion_maps_title">Mapa Therion primero</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes de los datos de la topografía</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
