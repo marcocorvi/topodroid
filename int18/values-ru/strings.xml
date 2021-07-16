@@ -221,7 +221,7 @@
     <!-- UNUSED string name="import_zip_wait">Импорт zip файла может занять много времени. Обождите &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
-    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
  
     <string name="pleasewait">Пожалуйста подождите</string>
     <string name="processing">обработка &#8230;</string>
@@ -937,7 +937,7 @@
     <string name="help_equates">Список соединений съёмки</string>
 
     <string name="export_bgcolor">Цвет фона</string>
-    <!-- TODO string name="export_config">Config commands</string -->
+    <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
     <string name="export_georeference">Геопривязка</string>
@@ -1083,8 +1083,8 @@
 
     <string name="title_import_tro">Настройки импорта VisualTopo</string>
     <string name="title_import_dat">Настройки импорта Compass</string>
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
+    <string name="title_import_shot">Импорт съёмки</string>
+    <string name="title_import_gps">Импорт точки GPS</string>
 
   <string name="pref_export_settings">Экспорт настроек</string>
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
@@ -1138,8 +1138,8 @@
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
   <string name="pref_export_plot_summary">Формат экспорта абрисов по умолчанию</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
+  <string name="pref_therion_config_title">Команды конфигурации Therion</string>
+  <string name="pref_therion_config_summary">Создать конфиг файл Therion</string>
   <string name="pref_therion_maps_title"> Карты Therion до данных съёмки</string>
   <string name="pref_therion_maps_summary"> При экспорте ставить блок карт Therion (секция map) до данных съёмки</string>
   <string name="pref_extra_buttons_title">Уровень функционала</string>
