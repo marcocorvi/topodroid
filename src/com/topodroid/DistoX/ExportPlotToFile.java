@@ -77,48 +77,25 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
       // String dirname = null;
       try {
-        // if ( mExt.equals("dxf") ) {
-        //   filename = TDPath.getDxfFileWithExt( mFullName );
-        //   // dirname  = TDPath.getDxfFile( "" );
-        // } else if ( mExt.equals("svg") ) {
-        //   filename = TDPath.getSvgFileWithExt( mFullName );
-        //   // dirname  = TDPath.getSvgFile( "" );
-        // } else if ( mExt.equals("shp") ) {
-        //   filename = TDPath.getShpBasepath( mFullName );
-        //   // dirname  = TDPath.getShzFile( "" );
-        // } else if ( mExt.equals("xvi") ) {
-        //   filename = TDPath.getXviFileWithExt( mFullName );
-        //   // dirname  = TDPath.getXviFile( "" );
-        // } else if ( mExt.equals("xml") ) {
-        //   filename = TDPath.getTnlFileWithExt( mFullName );
-        //   // dirname  = TDPath.getTnlFile( "" );
-        // } else if ( mExt.equals("c3d") ) {
-        //   filename = TDPath.getC3dFileWithExt( mFullName );
-        //   // dirname  = TDPath.getC3dFile( "" );
-	// } else { // unexpected extension
-	//   return false;
-        // }
-        // Log.v("DistoX-EXPORT", "export plot to file " + filename );
+        Log.v("DistoX-EXPORT", "export plot to file: <" + mFullName + "> <" + mExt + ">" );
         // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           if ( mExt.equals("shp") ) { 
-            FileOutputStream fos = TDsafUri.docFileOutputStream( mUri );
-	    DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
+            FileOutputStream fos = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getShpFileWithExt( mFullName ) );
+            String dirpath = TDPath.getShpTempDir();
+	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
+	    // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
+            TDFile.deleteDir( dirpath );
 	  } else {
-            // File temp = File.createTempFile( "tmp", null, TDFile.getFile( dirname ) );
-            // final FileWriter fw = TDFile.getFileWriter( temp );
-            // BufferedWriter bw = new BufferedWriter( fw );
             BufferedWriter bw = null;
             if ( mExt.equals("dxf") ) {
-              // bw = TDFile.getMSwriter( "dxf", mFullName + ".dxf", "text/dxf" );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
+              bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getDxfFileWithExt( mFullName ) ) );
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
               String name = mFullName + ".svg"; // file-name
-              // bw = TDFile.getMSwriter( "svg", name, "text/svg" );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
+              bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getSvgFileWithExt( mFullName ) ) );
               if ( TDSetting.mSvgRoundTrip ) {
                 // List<String> segments = mUri.getPathSegments();
                 (new DrawingSvgWalls()).writeSvg( name, bw, mNum, mCommand, mType );
@@ -126,17 +103,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                 (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
-              // bw = TDFile.getMSwriter( "xvi", mFullName + ".xvi", "text/xvi" );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
+              bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getXviFileWithExt( mFullName ) ) );
               DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
-              // bw = TDFile.getMSwriter( "tnl", mFullName + ".xml", "text/xml" );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
+              bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTnlFileWithExt( mFullName ) ) );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
-              // Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
-              // bw = TDFile.getMSwriter( "c3d", mFullName + ".c3d", "text/c3d" );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
+              Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
+              bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getC3dFileWithExt( mFullName ) ) );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }
             if ( bw != null ) {

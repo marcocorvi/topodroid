@@ -36,11 +36,11 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     private String filename = null;
     private boolean mToast;
     private String  mFormat;
-    private Uri     mUri;
+    private Uri     mUri = null;
 
     ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
-       mUri      = uri;
+       // mUri      = uri; // FIXME_URI
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
@@ -68,7 +68,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         // Log.v("DistoX", "temp file <" + temp.getPath() + ">" );
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         */
-        FileOutputStream out = TDsafUri.docFileOutputStream( mUri );
+        Log.v("DistoX", "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
+        FileOutputStream out = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();
@@ -90,7 +91,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          TDToast.make( String.format( mFormat, filename, mScale) );
+          TDToast.make( String.format( mFormat, "png", mScale) );
         } else {
           TDToast.makeBad( R.string.saving_file_failed );
         }

@@ -52,6 +52,7 @@ public class ImportDialogShot extends MyDialog
   private final int mTitle;
   private int mSelectedPos;
 
+  private LinearLayout mLayoutZip;
   private LinearLayout mLayoutCompass;
   private LinearLayout mLayoutCaveSniper;
   private LinearLayout mLayoutSurvex;
@@ -93,6 +94,7 @@ public class ImportDialogShot extends MyDialog
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mTypes );
     spin.setAdapter( adapter );
 
+    mLayoutZip     = (LinearLayout) findViewById( R.id.layout_zip );
     mLayoutCompass = (LinearLayout) findViewById( R.id.layout_compass );
     mLayoutCaveSniper = (LinearLayout) findViewById( R.id.layout_cavesniper );
     mLayoutSurvex  = (LinearLayout) findViewById( R.id.layout_survex );
@@ -149,6 +151,7 @@ public class ImportDialogShot extends MyDialog
   private void updateLayouts()
   {
     // Log.v("DistoX", "update layout: selected " + mSelectedPos );
+    mLayoutZip.setVisibility( View.GONE );
     mLayoutCompass.setVisibility( View.GONE );
     mLayoutCaveSniper.setVisibility( View.GONE );
     mLayoutSurvex.setVisibility( View.GONE );
@@ -157,13 +160,14 @@ public class ImportDialogShot extends MyDialog
     // mLayoutVTopoX.setVisibility( View.GONE );
     mLayoutPTopo.setVisibility( View.GONE );
     switch ( mSelectedPos ) {
-      case 0: mLayoutCompass.setVisibility( View.VISIBLE );    break;
-      case 1: mLayoutCaveSniper.setVisibility( View.VISIBLE ); break;
-      case 2: mLayoutSurvex.setVisibility( View.VISIBLE );     break;
-      case 3: mLayoutTherion.setVisibility( View.VISIBLE );    break;
-      case 4: mLayoutVTopo.setVisibility( View.VISIBLE );      break;
+      case 0: mLayoutZip.setVisibility( View.VISIBLE );        break;
+      case 1: mLayoutCompass.setVisibility( View.VISIBLE );    break;
+      case 2: mLayoutCaveSniper.setVisibility( View.VISIBLE ); break;
+      case 3: mLayoutSurvex.setVisibility( View.VISIBLE );     break;
+      case 4: mLayoutTherion.setVisibility( View.VISIBLE );    break;
+      case 5: mLayoutVTopo.setVisibility( View.VISIBLE );      break;
       // case x: mLayoutVTopoX.setVisibility( View.VISIBLE );  break;
-      case 5: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
+      case 6: mLayoutPTopo.setVisibility( View.VISIBLE );      break;
     }
   }
 

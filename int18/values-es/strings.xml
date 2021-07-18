@@ -5,20 +5,6 @@
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
 
-    <!-- TODO string name="path11_title">IMPORTANT - Android 11</string -->
-    <!-- TODO string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap "Move" to move your TopoDroid folder to Documents.\n\n
-Tap "Close" not to take any action.
-</string -->
-    <!-- TODO string name="button_no_again">Don\'t ask again</string -->
-    <!-- TODO string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string -->
-    <!-- TODO string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string -->
-
     <!-- OK string name="app_name">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Haga doble click para salir</string>
@@ -26,6 +12,17 @@ Tap "Close" not to take any action.
     <!-- TODO string name="new_survey_label">New survey</string -->
     <!-- TODO string name="distox_label">DistoX</string -->
 
+  <!-- TODO string name="r_title">Android R important notice</string -->
+  <!-- TODO string name="r_dialog">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string -->
+  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
+  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
+  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+  <!-- TODO string name="r_continue">CONTINUE</string -->
+
+    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
 

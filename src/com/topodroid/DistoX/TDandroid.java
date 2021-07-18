@@ -114,10 +114,10 @@ public class TDandroid
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
         ++not_granted;
-        Log.v("DistoX", "Perm " + permNames[k] + " not granted ");
+        // Log.v("DistoX", "Perm " + permNames[k] + " not granted ");
         // if ( k < NR_PERMS_D ) MustRestart = true;
       } else {
-        Log.v("DistoX", "Perm " + permNames[k] + " granted ");
+        // Log.v("DistoX", "Perm " + permNames[k] + " granted ");
       }
     }
 

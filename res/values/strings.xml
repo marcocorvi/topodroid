@@ -11,19 +11,15 @@
     <string name="desc_areas">Areas</string>
     <string name="desc_menu">Menu</string>
 
-    <string name="path11_title">IMPORTANT - Android 11</string>
-    <string name="path11_text">
-Starting with Android 11 the app folders must be under "Documents".\n
-There is nothing to do for a new install of the app on Android-11.\n
-For an old install, before a system upgrade to Android-11, make a backup of your data, copy your "TopoDroid" folder under "Documents"
-and hard-restart TopoDroid.\n\n
-WARNING. From v. 5.0.60 "TopoDroid" uses the folder under Documents if it exists, even on Android-10 and below.\n\n
-Tap <b>Move</b> to move your TopoDroid folder to Documents.\n\n
-Tap <b>Close</b> not to take any action.
-</string>
-    <string name="button_no_again">Don\'t ask again</string>
-    <string name="path11_move">Moved to folder Documents/TopoDroid.\nPlease restart TopoDroid</string>
-    <string name="path11_not_move">Failed to move to folder Documents/TopoDroid</string>
+  <string name="r_title">Android R important notice</string>
+  <string name="r_dialog">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string>
+  <string name="r_checkboxes">You must confirm the checkboxes.</string>
+  <string name="r_i_understood">I fully understood this notice</string>
+  <string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string>
+  <string name="r_continue">CONTINUE</string>
 
     <string name="app_name" translatable="false">TopoDroid</string>
     <string name="tdm_title">TopoDroid Manager</string>

@@ -23,7 +23,10 @@ import android.util.Log;
 import java.lang.ref.WeakReference;
 
 import java.io.File;
+import java.io.FileDescriptor;
+import java.io.FileWriter;
 import java.io.BufferedWriter;
+import java.io.IOException;
 
 import java.util.List;
 
@@ -134,8 +137,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         if ( mManager != null ) {
           // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
-          BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
-          DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+          try {
+            BufferedWriter bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+            DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+            bw.flush();
+            bw.close();
+          } catch ( IOException e ) { Log.v("DistoX", e.getMessage() ); e.printStackTrace(); }
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         // // Log.v("DistoXX", "save plot Therion file SAVE " + mFullName );
@@ -203,8 +210,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         Log.v("DistoX", "save plot Therion file OVERVIEW " + mFullName );
         // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
-        BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( mUri ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+        try {
+          BufferedWriter bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+          DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+          bw.flush();
+          bw.close();
+        } catch ( IOException e ) { Log.v("DistoX", e.getMessage() ); e.printStackTrace(); }
 	return true;
       }
       

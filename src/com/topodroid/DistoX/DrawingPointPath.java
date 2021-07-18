@@ -174,7 +174,7 @@ public class DrawingPointPath extends DrawingPath
 
       type = BrushManager.getPointIndexByThNameOrGroup( name, group );
       // TDLog.Log( TDLog.LOG_PLOT, "P " + name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
-      Log.v( "DistoX-PLOT", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
+      // Log.v( "DistoX-PLOT", name + " " + type + " " + ccx + " " + ccy + " " + orientation + " " + scale + " options (" + options + ")" );
       if ( type < 0 ) {
         // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.addPointFilename( name ); 
         type = 0;

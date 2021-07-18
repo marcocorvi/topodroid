@@ -62,6 +62,7 @@ import java.io.File;
 import java.io.StringWriter;
 // import java.io.FileOutputStream;
 import java.io.OutputStream;
+import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
@@ -252,14 +253,14 @@ public class TDExporter
   static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String surveyname )
   {
-    // try {
+    try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( uri ) );
+      BufferedWriter bw = new BufferedWriter( (uri != null)? TDsafUri.docFileWriter( uri ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
       return exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
-    // } catch ( FileNotFoundException e ) {
-    // } catch ( IOException e ) {
-    // }
-    // return 0;
+    } catch ( FileNotFoundException e ) {
+    } catch ( IOException e ) {
+    }
+    return 0;
   }
 
   // @return 1 on success or 0 on error
@@ -838,7 +839,7 @@ public class TDExporter
   // @param info     survey metadata
   // @param filename file path  
   // @return 1 success, 0 fail
-  static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey )
+  static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
     if ( nums == null || nums.size() == 0 ) {
@@ -847,11 +848,10 @@ public class TDExporter
     }
 
     boolean success = true;
-    String dirname = "shp/" + survey;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
-      if ( TDFile.makeMSdir( dirname ) ) {
+      if ( TDFile.makeTopoDroidDir( dirname ) != null ) {
         ArrayList< String > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
@@ -899,7 +899,7 @@ public class TDExporter
       return 0;
     } finally {
       Log.v("DistoX", "delete dir " + dirname );
-      TDFile.deleteMSdir( dirname ); // delete temporary shapedir
+      TDFile.deleteDir( dirname ); // delete temporary shapedir
     }
     return 1;
   }

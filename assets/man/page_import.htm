@@ -2,14 +2,36 @@
 
 <h4>SURVEY IMPORT</h4>
 
-This dialog is opened from the <i>Import</i> button in the <u>main window</u>.<br><p>
+This dialog is opened with a tap on the <i>Import</i> button of the <u>main window</u>.<br><p>
 
-It displays the list of zip archives in the app zip folder.<br><p>
+It displays the list of zip archives in the app "zip" folder.<br><p>
 
-If the survey name of the file to import already exists in the database the file is not imported.<br><p>
+Tap on the zip name to import the survey.
+If the survey name exists already in the database the survey is not imported.<br><p>
 
 <b>N.B.</b>
 Import may fail (and crash the app) due to failure on the database that TopoDroid cannot intercept.
 If this happens delete the partially imported survey and retry to import it.<br><p>
+
+With a long-tap on the <i>Import</i> button of the <u>main window</u> you can import the survey data
+from a file in the following formats: dat (Compass), svx (Survex), th (Therion), tro and trox (VisualTopo),
+csn (CaveSniper), and top (PocketTopo). Furthermore, you can also import a survey from a TopoDroid zip
+archives.<br>
+The file to import is selected with the system content provider.<br><p>
+
+
+<b>Compass (dat) import options</b>
+<ul>
+<li><i>LRUD</i> if enabled LRUD values are imported and converted to splay shots</li>
+<li><i>Leg first</i> if enabled LRUD splays are placed after the leg</li>
+<li><i>Diving datamode</i> enable for data diving mode in the Compass file [T]</li>
+</ul><br><p>
+
+
+<b>VisualTopo (tro, trox) import options</b>
+<ul>
+<li><i>LRUD</i> if enabled LRUD values are imported and converted to splay shots</li>
+<li><i>Leg first</i> if enabled LRUD splays are placed after the leg</li>
+</ul>
 
 </body></html>

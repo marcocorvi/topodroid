@@ -290,11 +290,11 @@ public class TDFile
   }
 
   // =========================================================================
-  // GENERIC INTERFACE
+  // GENERIC INTERFACE relative to TDPath.getPathBase() (CWD)
 
-  public static File getMSfile( String name ) { return new File( TDPath.getPathBase() + name ); }
+  public static File getMSfile( String name ) { return new File( TDPath.getPathBase() + "/" + name ); }
 
-  public static File getMSfile( String subdir, String name ) { return new File( TDPath.getPathBase() + subdir + "/" + name ); }
+  public static File getMSfile( String subdir, String name ) { return new File( TDPath.getPathBase() + "/" + subdir + "/" + name ); }
 
   public static long getMSFileLength( String subdir, String name ) 
   { 

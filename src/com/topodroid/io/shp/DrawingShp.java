@@ -47,9 +47,9 @@ public class DrawingShp
   // @param type       sketch type
   // @param station    WGS84 data of the sketch origin 
   // @return true if successful
-  public static boolean writeShp( OutputStream fos, String filename, DrawingCommandManager plot, long type, GeoReference station )
+  public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station )
   {
-    Log.v("DistoX", "SHP write " + filename );
+    Log.v("DistoX", "SHP write dirpath " + dirname );
     double xoff = 0;
     double yoff = 0;
     double xscale = ShpObject.SCALE;
@@ -65,8 +65,7 @@ public class DrawingShp
       sd = TDMath.sind( station.declination );
     }
 
-    String dirname = "shp/" + filename;
-    if ( ! TDFile.makeMSdir( dirname ) ) {
+    if ( TDFile.makeTopoDroidDir( dirname ) != null ) {
       TDLog.Error("mkdir error");
       return false;
     }

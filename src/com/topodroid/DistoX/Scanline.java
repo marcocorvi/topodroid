@@ -65,9 +65,10 @@ class Scanline
     return ret;
   }
 
-  long longValue( )
+  // @param ret default return value
+  // returns the next item on the scanline as a long
+  long longValue( long ret )
   {
-    long ret = -1;
     int next_pos = nextCommaOrSpace( );
     // TDLog.Log( TDLog.LOG_DB, "longValue " + pos + " " + next_pos + " " + len + " <" + val.substring(pos,next_pos) + ">" );
     if ( pos < next_pos ) {
@@ -87,10 +88,11 @@ class Scanline
     return ret;
   }
 
-  double doubleValue( )
+  // @param ret default return value
+  // returns the next item on the scanline as a double
+  double doubleValue( double ret )
   {
     int next_pos = nextCommaOrSpace( );
-    double ret = 0.0;
     if ( pos < next_pos ) {
       try {
         ret = Double.parseDouble( val.substring(pos, next_pos ) );

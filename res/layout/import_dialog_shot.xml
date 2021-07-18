@@ -13,19 +13,14 @@
     android:drawSelectorOnTop="true"
   />
 
-  <!-- LinearLayout android:id="@+id/layout_zip"
+  <LinearLayout android:id="@+id/layout_zip"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical" 
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
     >
-    <CheckBox android:id="@+id/zip_symbols"
-      android:layout_width="match_parent" 
-      android:layout_height="wrap_content"
-      android:text="@string/export_symbols"
-      />
-  </LinearLayout -->
+  </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_compass"
     android:layout_width="match_parent" 

@@ -832,9 +832,7 @@ public class MainWindow extends Activity
     mButtonSap5    = MyButton.getButtonBackground( mApp, res, R.drawable.iz_sap5 );
     mButtonBric4   = MyButton.getButtonBackground( mApp, res, R.drawable.iz_bric4 );
 
-    if ( TDLevel.overExpert ) {
-      mButton1[2].setOnLongClickListener( this );
-    }
+    mButton1[2].setOnLongClickListener( this );
     setButtonDevice();
     // mRelLayout.invalidate();
   }
@@ -1105,6 +1103,9 @@ public class MainWindow extends Activity
               if ( manifest_ok >= 0 ) {
                 fis = TDsafUri.docFileInputStream( uri );
                 Archiver.unArchive( mApp, fis, name );
+              } else {
+                Log.v("DistoX", "import zip - failed manifest " + manifest_ok );
+                // TODO TDToast.make( R.string.bad_manifest );
               }
             } else {
               String type = TDPath.checkImportTypeStream( ext );
@@ -1303,11 +1304,7 @@ public class MainWindow extends Activity
   {
     int index = TDConst.surveyFormatIndex( type );
     // Log.v("DistoX", "import " + type + " " + index );
-    if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
-      // TODO import index
-    } else if ( index >= 0 ) {
-      selectImportFromProvider( index, data );
-    }
+    selectImportFromProvider( index, data );
   }
 
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT

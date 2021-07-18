@@ -89,7 +89,7 @@ public class TDConst
   };
 
   public static final String[] mSurveyImportTypes = { 
-    // "ZIP", 
+    "ZIP", 
     "Compass",
     "CaveSniper",
     "Survex",
@@ -100,7 +100,7 @@ public class TDConst
   };
 
   private static final int[] mSurveyImportIndex = {
-    // SURVEY_FORMAT_ZIP,
+    SURVEY_FORMAT_ZIP,
     SURVEY_FORMAT_DAT,
     SURVEY_FORMAT_SNP,
     SURVEY_FORMAT_SVX,
@@ -202,6 +202,19 @@ public class TDConst
     SURVEY_FORMAT_C3D
   };
 
+  private static final String[] mPlotExportExt = {
+    "th2",
+    "csx",
+    "dxf",
+    "svg",
+    "shz",
+    "png",
+    "pdf",
+    "xvi",
+    "xml",
+    "c3d"
+  };
+
   public static final String[] mOverviewExportTypes = {
       "Therion",
       "DXF",
@@ -219,11 +232,20 @@ public class TDConst
     SURVEY_FORMAT_XVI
   };
 
+  private static final String[] mOverviewExportExt = {
+    "th2",
+    "dxf",
+    "svg",
+    "shz",
+    "pdf",
+    "xvi"
+  };
+
   public static final String[] mCalibExportTypes = { "CSV" };
   private static final int[] mCalibExportIndex = { SURVEY_FORMAT_CSV };
 
-  public static final String[] mSketchExportTypes = { "Therion", "DXF" };
-  private static final int[] mSketchExportIndex = { SURVEY_FORMAT_TH3, SURVEY_FORMAT_DXF };
+  // public static final String[] mSketchExportTypes = { "Therion", "DXF" };
+  // private static final int[] mSketchExportIndex = { SURVEY_FORMAT_TH3, SURVEY_FORMAT_DXF };
 
   private static int exportIndex( String type, String[] types, int[] index )
   {
@@ -237,7 +259,18 @@ public class TDConst
   public static int plotExportIndex( String type ) { return exportIndex( type, mPlotExportTypes, mPlotExportIndex ); }
   public static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
   public static int calibExportIndex( String type ) { return exportIndex( type, mCalibExportTypes, mCalibExportIndex ); }
-  public static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
+  // public static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
+
+  private static String exportExt( String type, String[] types, String[] ext )
+  {
+    for ( int k=0; k<types.length; ++k ) {
+      if ( types[k].equals( type ) ) return ext[k];
+    }
+    return "txt";
+  }
+
+  public static String plotExportExt( String type ) { return exportExt( type, mPlotExportTypes, mPlotExportExt ); }
+  public static String overviewExportExt( String type ) { return exportExt( type, mOverviewExportTypes, mOverviewExportExt ); }
 
   public static final int NUMBER                 = InputType.TYPE_CLASS_NUMBER;
   public static final int NUMBER_DECIMAL         = NUMBER | InputType.TYPE_NUMBER_FLAG_DECIMAL;

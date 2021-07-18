@@ -5,20 +5,6 @@
     <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
     <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
 
-    <string name="path11_title">FONTOS - Android 11</string>
-    <string name="path11_text">
-Az Android 11-től kezdődően az alkalmazásmappáknak a "Documents" alatt kell lenniük.\n
-Nincs mit tenni az alkalmazás új telepítésével az Android-11 rendszeren.\n
-Régi telepítés esetén az Android-11 rendszerre történő frissítés előtt készítsen biztonsági másolatot az adatokról, másolja a "TopoDroid" mappát a "Documents" alá
-és indítsa újra a TopoDroid programot.\n\n
-FIGYELEM. 5.0.60-tól kezdődően a "TopoDroid" a Dokumentumok alatt lévő mappát használja, ha létezik, még az Android-10 és az alatti verziókon is.\n\n
-Tap <b>Mozgat</b> átteszi a TopoDroid könyvtárat a Documents alá.\n\n
-Tap <b>Bezár</b> nem változtat.
-</string>
-    <string name="button_no_again">Ne kérdezzen többet</string>
-    <string name="path11_move">Áthelyezi a mappát a Documents/TopoDroid helyre.\nIndítsd újra a TopoDroid-ot</string>
-    <string name="path11_not_move">Nem sikerült áthelyezni a Documents/TopoDroid helyre</string>
-
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
@@ -26,6 +12,17 @@ Tap <b>Bezár</b> nem változtat.
     <string name="new_survey_label">Új mérés</string>
     <string name="distox_label">DistoX</string>
 
+  <!-- TODO string name="r_title">Android R important notice</string -->
+  <!-- TODO string name="r_dialog">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string -->
+  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
+  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
+  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+  <!-- TODO string name="r_continue">CONTINUE</string -->
+
+    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
 

@@ -75,7 +75,7 @@ public class CWDActivity extends Activity
   {
     String dir_name  = mETcwd.getText().toString();
 
-    String base_name = TDPath.getBaseDir();
+    String base_name = TDPath.getCurrentBaseDir();
 
     // CURRENT WORK DIRECTORY
     // if ( dir_name == null ) { // always false

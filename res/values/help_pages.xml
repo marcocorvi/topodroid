@@ -113,9 +113,6 @@
   <string name="SetupDoneDialog" translatable="false">page_setup.htm</string>
   <string name="SetupDrawingUnitDialog" translatable="false">page_setup.htm</string>
 
-  <string name="ImportTroDialog" translatable="false">page_import_tro.htm</string>
-  <string name="ImportDatDialog" translatable="false">page_import_dat.htm</string>
-
   <string name="TdManager" translatable="false">manual14.htm</string>
   <string name="TdmConfigWindow" translatable="false">manual14.htm</string>
   <string name="TdmConfigDialog" translatable="false">page_tdm_config_dialog.htm</string>

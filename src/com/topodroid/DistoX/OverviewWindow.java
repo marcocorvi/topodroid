@@ -657,7 +657,7 @@ public class OverviewWindow extends ItemDrawer
    private void saveWithExt( Uri uri, final String ext )
    {
      TDNum num = mNum;
-     // final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // Log.v( "DistoXX", "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
@@ -676,7 +676,8 @@ public class OverviewWindow extends ItemDrawer
        // fullname is null
        // azimuth = 0
        // rotate  = 0
-       (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, "th2", mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+       uri = null; // FIXME_URI
+       (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
        GeoReference station = null;
        if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
@@ -684,26 +685,33 @@ public class OverviewWindow extends ItemDrawer
         station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
        }
        SurveyInfo info = mData.selectSurveyInfo( mSid );
-       String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
        // null PlotInfo, null FixedInfo, true toast
+       uri = null; // FIXME_URI
        (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
      }
    }
 
   private static int mExportIndex;
+  private static String mExportExt;
 
+  // called by the ExportPlotDialog
   public void doExport( String export_type ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
-    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    mExportExt   = TDConst.plotExportExt( export_type );
+    Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    saveWithExt( null, mExportExt );
+    /*
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
     intent.setType( TDConst.mMimeType[ mExportIndex ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
+    */
   }
 
+  /*
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
@@ -721,8 +729,10 @@ public class OverviewWindow extends ItemDrawer
       //   super.onActivityResult( request, result, intent );
     }
   }
+  */
 
   // interface IExporter
+  /*
   public void doUriExport( Uri uri ) 
   {
     // Log.v("DistoX", "Overview export " + export_type );
@@ -736,6 +746,7 @@ public class OverviewWindow extends ItemDrawer
       case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
     }
   }
+  */
 
   // PDF ------------------------------------------------------------------
   private void savePdf( Uri uri ) 
@@ -1287,7 +1298,6 @@ public class OverviewWindow extends ItemDrawer
       super.onBackPressed();
     } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
       new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, 1 ).show();
-      // saveWithExt( "th2" );
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );

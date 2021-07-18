@@ -506,14 +506,15 @@ public class SurveyWindow extends Activity
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
-        // TopoDroidApp.doExportDataAsync( getApplicationContext(), index, true );
-        selectExportFromProvider( index );
+        TopoDroidApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
+        // selectExportFromProvider( index );
       }
     }
   }
 
   private static int mExportType; // index of the export-type 
 
+  /*
   private void selectExportFromProvider( int index ) // EXPORT
   {
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
@@ -540,6 +541,7 @@ public class SurveyWindow extends Activity
         }
     }
   }
+  */
 
   private void doDelete()
   {

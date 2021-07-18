@@ -62,6 +62,25 @@ public class TDsafUri
   // -------------------------------------------------------------------------------------
   // private methods to get I/O streams or reader/writer from URI
   //
+  static public FileDescriptor docFileDescriptor( Uri uri )
+  {
+    try {
+      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
+      if ( pfd == null ) return null;
+      FileDescriptor fd = pfd.getFileDescriptor();
+      if (fd == null) {
+        pfd.close();
+        return null;
+      }
+      return fd;
+    } catch ( IOException e ) {
+      e.printStackTrace();
+      // Log.v("DistoX-SAF", "failed open output stream" );
+    }
+    return null;
+  }
+
   static public InputStream docInputStream( Uri uri ) 
   {
     // if ( uri == null ) return null;
@@ -97,6 +116,12 @@ public class TDsafUri
       // Log.v("DistoX-SAF", "failed open output stream" );
     }
     return null;
+  }
+
+  static public FileWriter docFileWriter( FileDescriptor fd )
+  {
+    // if ( uri == null ) return null;
+    return new FileWriter(fd);
   }
 
   static public FileWriter docFileWriter( Uri uri ) 

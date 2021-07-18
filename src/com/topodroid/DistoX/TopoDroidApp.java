@@ -773,7 +773,7 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp cwd");
     TDInstance.cwd = prefHlp.getString( "DISTOX_CWD", "TopoDroid" );
-    TDInstance.cbd = TDPath.getBaseDir();
+    TDInstance.cbd = TDPath.getCurrentBaseDir();
 
     // TDLog.Profile("TDApp paths");
     TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
@@ -963,16 +963,12 @@ public class TopoDroidApp extends Application
   // ------------------------------------------------------------------
   // FILE NAMES
 
-  // public static String getSqlFile() { return APP_BASE_PATH + "survey.sql"; }
-
-  // public static String getManifestFile() { return APP_BASE_PATH + "manifest"; }
-
   public void writeManifestFile()
   {
     SurveyInfo info = mData.selectSurveyInfo( TDInstance.sid );
     try {
       String filename = TDPath.getManifestFile();
-      TDPath.checkPath( filename );
+      // TDPath.checkPath( filename );
       FileWriter fw = TDFile.getFileWriter( filename );
       PrintWriter pw = new PrintWriter( fw );
       pw.format( "%s %d\n",  TDVersion.string(), TDVersion.code() );
@@ -2396,6 +2392,7 @@ public class TopoDroidApp extends Application
     if ( info == null ) return false;
     TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
     String format = context.getResources().getString(R.string.saved_file_1);
+    uri = null; // FIXME_URI
     (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
     return true;
   }

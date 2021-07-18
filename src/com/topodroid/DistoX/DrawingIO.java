@@ -1355,7 +1355,7 @@ public class DrawingIO
               if ( cmd.commandType() != 0 ) continue;
               DrawingPath p = (DrawingPath) cmd;
 
-              if ( p.mType == DrawingPath.DRAWING_PATH_POINT ) {
+              if ( p instanceof DrawingPointPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_POINT )
                 DrawingPointPath pp = (DrawingPointPath)p;
                 exportTherionPoint( out, pp );
                 // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
@@ -1367,7 +1367,11 @@ public class DrawingIO
                     }
                   }
                 // }
-              } else if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) { // should never happen
+              } else if ( p instanceof DrawingLinePath ) { // ( p.mType == DrawingPath.DRAWING_PATH_LINE ) 
+                exportTherionLine( out, (DrawingLinePath)p );
+              } else if ( p instanceof DrawingAreaPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
+                exportTherionArea( out, (DrawingAreaPath)p );
+              } else if ( p instanceof DrawingStationPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_STATION ) // should never happen
                 // if ( ! TDSetting.mAutoStations ) {
                 //   DrawingStationPath st = (DrawingStationPath)p;
                 //   String st_str = st.toTherion();
@@ -1376,14 +1380,11 @@ public class DrawingIO
                 //     out.newLine();
                 //   }
                 // }
-              } else if ( p.mType == DrawingPath.DRAWING_PATH_LINE ) {
-                exportTherionLine( out, (DrawingLinePath)p );
-              } else if ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
-                exportTherionArea( out, (DrawingAreaPath)p );
               }
             }
           }
           out.newLine();
+          out.flush();
 
           if ( TDSetting.mTherionSplays && scrap_nr == 0 ) { // splays only in the first scrap
             exportTherionSplays( out, splays, scrap_bbox );
@@ -2237,21 +2238,21 @@ public class DrawingIO
     float zoff = 0;
     String start_station = plot.start; // start station has "num" coords (0,0,0)
     String fixed_station = fix.name;
-    // Log.v("DistoX-C3D", "start " + start_station + " fix " + fixed_station );
+    // Log.v("DistoX", "start " + start_station + " fix " + fixed_station );
 
     NumStation fixed = num.getStation( fix.name );
     if ( fixed == null ) { // cannot export Cave3D
-      Log.e("DistoX-C3D", "cannot export: fixed null");
+      Log.e("DistoX", "cannot export: fixed null");
       return false;
     }
-    // Log.v("DistoX-C3D", "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
+    // Log.v("DistoX", "Fixed " + fixed.name + ": " + fixed.e + " " + fixed.s + " " + fixed.v );
     if ( fix.cs != null ) {
-      // Log.v("DistoX-C3D", "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
+      // Log.v("DistoX", "CS " + fix.cs_lng + " " + fix.cs_lat + " " + fix.cs_alt );
       xoff = (float)(fix.cs_lng - fixed.e);
       yoff = (float)(fix.cs_lat + fixed.s);
       zoff = (float)(fix.cs_alt + fixed.v);
     } else {
-      // Log.v("DistoX-C3D", "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
+      // Log.v("DistoX", "WGS84 " + fix.lng + " " + fix.lat + " " + fix.alt );
       xoff = (float)(fix.lng - fixed.e);
       yoff = (float)(fix.lat + fixed.s);
       zoff = (float)(fix.alt + fixed.v);
