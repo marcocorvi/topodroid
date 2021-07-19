@@ -48,7 +48,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
 
   SaveDataFileTask( Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
   {
-    // mUri     = uri; // FIXME_URI
+    // if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
     mFormat  = format;
     mSid     = sid;
     mInfo    = info.copy();

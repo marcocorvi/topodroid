@@ -60,7 +60,7 @@ import android.net.Uri;
 
 import java.io.File;
 import java.io.StringWriter;
-// import java.io.FileOutputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -1225,12 +1225,13 @@ public class TDExporter
 
   static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    if ( false && TDSetting.mTherionConfig ) { // craete thconfig
+    if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // craete thconfig file 
       synchronized( TDFile.mFilesLock ) {
         // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
         // if ( ! dir.exists() ) dir.mkdirs();
         try {
-          BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
+          // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
+          BufferedWriter bcw = new BufferedWriter( new FileWriter( TDPath.getThconfigFileWithExt( surveyname ) ) );
           PrintWriter pcw = new PrintWriter( bcw );
           pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
           pcw.format("source \"../th/%s.th\"\n\n", info.name );
@@ -1279,7 +1280,7 @@ public class TDExporter
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
 
-      if ( TDSetting.mTherionConfig ) { // embed thconfig
+      if ( TDSetting.mTherionConfig && TDSetting.mExportUri ) { // embed thconfig
         pw.format("layout topodroid\n");
         pw.format("  legend on\n");
         pw.format("  symbol-hide group centerline\n");
@@ -3726,7 +3727,7 @@ public class TDExporter
       pw.format("*** Surveys ***");             printPolygonEOL( pw );
       pw.format("Survey name: %s", info.name ); printPolygonEOL( pw );
       pw.format("Survey team:");                printPolygonEOL( pw );
-      pw.format("%s", (info.team != null)? info.team : "\t" ); printPolygonEOL( pw );
+      pw.format("\t%s", (info.team != null)? info.team : "" ); printPolygonEOL( pw );
       printPolygonTabEOL( pw );
       printPolygonTabEOL( pw );
       printPolygonTabEOL( pw );

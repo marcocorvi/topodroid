@@ -2392,7 +2392,7 @@ public class TopoDroidApp extends Application
     if ( info == null ) return false;
     TDLog.Log( TDLog.LOG_IO, "async-export survey " + TDInstance.survey + " type " + exportType );
     String format = context.getResources().getString(R.string.saved_file_1);
-    uri = null; // FIXME_URI
+    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportType, toast )).execute();
     return true;
   }

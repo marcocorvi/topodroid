@@ -65,7 +65,7 @@ public class DrawingShp
       sd = TDMath.sind( station.declination );
     }
 
-    if ( TDFile.makeTopoDroidDir( dirname ) != null ) {
+    if ( TDFile.makeMSdir( dirname ) ) {
       TDLog.Error("mkdir error");
       return false;
     }

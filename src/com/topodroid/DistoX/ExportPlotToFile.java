@@ -49,7 +49,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final GeoReference mStation; // for shp
     private final FixedInfo mFixedInfo;  // for c3d
     private final PlotInfo  mPlotInfo;
-    private final Uri mUri;
+    private Uri mUri = null;
 
     ExportPlotToFile( Context context, Uri uri, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
                       TDNum num, DrawingCommandManager command,
@@ -57,7 +57,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     {
       // Log.v("DistoX-C3D", "export plot to file cstr. " + type + " " + name + "  " + ((station == null)? "no geo" : station.toString() ) );
       // FIXME assert( ext != null );
-      mUri       = uri;
+      if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);
       mInfo      = info;
       mPlotInfo  = plot;

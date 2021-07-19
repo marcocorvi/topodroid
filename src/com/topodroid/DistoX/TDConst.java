@@ -207,7 +207,7 @@ public class TDConst
     "csx",
     "dxf",
     "svg",
-    "shz",
+    "shp",
     "png",
     "pdf",
     "xvi",
@@ -236,7 +236,7 @@ public class TDConst
     "th2",
     "dxf",
     "svg",
-    "shz",
+    "shp",
     "pdf",
     "xvi"
   };

@@ -661,6 +661,7 @@ public class OverviewWindow extends ItemDrawer
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // Log.v( "DistoXX", "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
+     if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
 
      if ( ext.equals("th2") ) {
        Handler th2Handler = new Handler() {
@@ -676,7 +677,6 @@ public class OverviewWindow extends ItemDrawer
        // fullname is null
        // azimuth = 0
        // rotate  = 0
-       uri = null; // FIXME_URI
        (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
      } else {
        GeoReference station = null;
@@ -686,7 +686,6 @@ public class OverviewWindow extends ItemDrawer
        }
        SurveyInfo info = mData.selectSurveyInfo( mSid );
        // null PlotInfo, null FixedInfo, true toast
-       uri = null; // FIXME_URI
        (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
      }
    }
@@ -701,20 +700,22 @@ public class OverviewWindow extends ItemDrawer
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
     Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
-    saveWithExt( null, mExportExt );
-    /*
-    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-    intent.setType( TDConst.mMimeType[ mExportIndex ] );
-    intent.addCategory(Intent.CATEGORY_OPENABLE);
-    // intent.putExtra( "exporttype", index ); // index is not returned to the app
-    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
-    */
+    if ( TDSetting.mExportUri ) { // FIXME_URI
+      Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+      intent.setType( TDConst.mMimeType[ mExportIndex ] );
+      intent.addCategory(Intent.CATEGORY_OPENABLE);
+      // intent.putExtra( "exporttype", index ); // index is not returned to the app
+      startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
+    } else {
+      saveWithExt( null, mExportExt );
+    }
   }
 
-  /*
+  // FIXME_URI
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
+    if ( ! TDSetting.mExportUri ) return;
     if ( intent == null ) return;
     // Bundle extras = intent.getExtras();
     switch ( request ) {
@@ -729,10 +730,8 @@ public class OverviewWindow extends ItemDrawer
       //   super.onActivityResult( request, result, intent );
     }
   }
-  */
 
-  // interface IExporter
-  /*
+  // interface IExporter FIXME_URI
   public void doUriExport( Uri uri ) 
   {
     // Log.v("DistoX", "Overview export " + export_type );
@@ -746,7 +745,6 @@ public class OverviewWindow extends ItemDrawer
       case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
     }
   }
-  */
 
   // PDF ------------------------------------------------------------------
   private void savePdf( Uri uri ) 
@@ -765,13 +763,13 @@ public class OverviewWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
+    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
 
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // Log.v("DistoX", "Overview PDF export <" + filename + ">");
     try {
-      // FileOutputStream fos = new FileOutputStream( filename );
-      OutputStream fos = TDsafUri.docFileOutputStream( uri );
+      OutputStream fos = ( uri != null )? TDsafUri.docFileOutputStream( uri ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
 
       PrintAttributes.Builder builder = new PrintAttributes.Builder();
       builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );

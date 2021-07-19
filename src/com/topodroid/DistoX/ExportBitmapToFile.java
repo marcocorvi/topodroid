@@ -40,7 +40,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 
     ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
-       // mUri      = uri; // FIXME_URI
+       // if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;

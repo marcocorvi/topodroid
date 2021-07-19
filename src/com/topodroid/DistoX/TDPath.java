@@ -90,7 +90,7 @@ public class TDPath
   private static String PATH_TDCONFIG = PATH_CW_DIR + "/thconfig";
 
   private static String APP_SURVEY_PATH   = null;
-  private static String APP_PHOTO_PATH     = null;
+  private static String APP_PHOTO_PATH    = null;
   private static String APP_AUDIO_PATH    = null;
   private static String APP_NOTE_PATH     = null;
   private static String APP_TDR_PATH      = null;
@@ -375,6 +375,7 @@ public class TDPath
   public static String getSvxFileWithExt(  String name ) { checkFilesystemDirs( APP_SVX_PATH );  return getPathname( APP_SVX_PATH,  name, ".svx"  ); }    
   public static String getThFileWithExt(   String name ) { checkFilesystemDirs( APP_TH_PATH );   return getPathname( APP_TH_PATH,   name, ".th"   ); }    
   public static String getTh2FileWithExt(  String name ) { checkFilesystemDirs( APP_TH_PATH );   return getPathname( APP_TH_PATH,   name, ".th2"  ); }    
+  public static String getThconfigFileWithExt(  String name ) { checkFilesystemDirs( APP_TH_PATH );   return getPathname( APP_TH_PATH,   name, ".thconfig"  ); }    
   public static String getTnlFileWithExt(  String name ) { checkFilesystemDirs( APP_TNL_PATH );  return getPathname( APP_TNL_PATH,  name, ".xml"  ); } // Tunnel
   public static String getTopFileWithExt(  String name ) { checkFilesystemDirs( APP_TOP_PATH );  return getPathname( APP_TOP_PATH,  name, ".top"  ); } // PocketTopo
   public static String getTrbFileWithExt(  String name ) { checkFilesystemDirs( APP_TRB_PATH );  return getPathname( APP_TRB_PATH,  name, ".trb"  ); } // TopoRobot
