@@ -147,7 +147,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
           case TDConst.SURVEY_FORMAT_SHP: // Shapefile
             fos = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getShpFileWithExt( mSurvey ) );
             pathname = mSurvey + ".shz";
-            ret = TDExporter.exportSurveyAsShp( fos, mSid, mData, mInfo, mSurvey, TDPath.getShpTempDir() );
+            ret = TDExporter.exportSurveyAsShp( fos, mSid, mData, mInfo, mSurvey, TDPath.getShpTempRelativeDir() );
             break;
           case TDConst.SURVEY_FORMAT_PLT: // Track file
             bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getPltFileWithExt( mSurvey ) ) );

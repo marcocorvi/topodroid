@@ -832,12 +832,13 @@ public class TDExporter
     }
   }
   // =====================================================================================================================
-  // SHP
+  // SHP SHAPEFILE 
 
   // @param sid      survey ID
   // @param data     database helper object
   // @param info     survey metadata
-  // @param filename file path  
+  // @param survey   survey name
+  // @param dirname  dirname relative to CWD
   // @return 1 success, 0 fail
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
@@ -847,14 +848,16 @@ public class TDExporter
       return 0;
     }
 
+    Log.v("DistoX", "SHP export. base " + dirname );
     boolean success = true;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
-      if ( TDFile.makeTopoDroidDir( dirname ) != null ) {
+      if ( TDFile.makeMSdir( dirname ) ) {
         ArrayList< String > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
+          Log.v("DistoX", "SHP export stations ");
           for ( TDNum num : nums ) {
             String filepath = "stations-" + nr;
             ++ nr;
@@ -865,6 +868,7 @@ public class TDExporter
           }
         }
 
+        Log.v("DistoX", "SHP export shots ");
         nr = 0;
         for ( TDNum num : nums ) {
           String filepath = "shots-" + nr;
@@ -890,6 +894,8 @@ public class TDExporter
         //   }
         // }
 
+        for ( String file : files ) Log.v("DistoX", "SHP export-file " + file );
+
         // FIXME
         // (new Archiver()).compressFiles( "shp", survey + ".shz", dirname, files );
         (new Archiver()).compressFiles( os, dirname, files );
@@ -899,7 +905,7 @@ public class TDExporter
       return 0;
     } finally {
       Log.v("DistoX", "delete dir " + dirname );
-      TDFile.deleteDir( dirname ); // delete temporary shapedir
+      TDFile.deleteMSdir( dirname ); // delete temporary shapedir
     }
     return 1;
   }
@@ -4365,7 +4371,7 @@ public class TDExporter
 
   static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    // Log.v("DistoX", "export as visualtopo: " + file.getName() );
+    Log.v("DistoX", "export as visualtopo-X " );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     int lignes = countLignesTrox( list );
@@ -4388,8 +4394,12 @@ public class TDExporter
       pw.format("    <Nom>%s</Nom>\r\n", info.name );
       if ( fixed.size() > 0 ) { 
         FixedInfo fix = fixed.get(0);
-        pw.format(Locale.US, "    <Coordonnees X=\"%s,%.7f\" Y=\"%.7f\" Z=\"%.2f\" Projection=\"WGS84\" />\r\n", fix.lng, fix.lat, fix.asl );
-        pw.format("    <Entree>%s</Entree>\r\n", fix.name );
+        if ( fix != null ) {
+          pw.format(Locale.US, "    <Coordonnees X=\"%.7f\" Y=\"%.7f\" Z=\"%.2f\" Projection=\"WGS84\" />\r\n", fix.lng, fix.lat, fix.asl );
+          pw.format("    <Entree>%s</Entree>\r\n", fix.name );
+        } else { // this should never happen
+          pw.format("    <Entree>%s</Entree>\r\n", list.get(0).mFrom );
+        }
       } else {
         pw.format("    <Entree>%s</Entree>\r\n", list.get(0).mFrom );
       }

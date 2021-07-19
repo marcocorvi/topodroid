@@ -110,6 +110,7 @@ public class TDPath
   private static String APP_PNG_PATH = null;    
   private static String APP_PDF_PATH = null;    
   private static String APP_SHP_PATH = null;    // shapefile
+  private static String RELATIVE_SHP_TEMP = null;
   private static String APP_SRV_PATH = null;    // Walls
   private static String APP_SUR_PATH = null;    // WinKarst
   private static String APP_SVG_PATH = null;    
@@ -148,6 +149,7 @@ public class TDPath
     APP_PNG_PATH = null;    
     APP_PDF_PATH = null;    
     APP_SHP_PATH = null;    // shapefile
+    RELATIVE_SHP_TEMP = null;
     APP_SRV_PATH = null;    // Walls
     APP_SUR_PATH = null;    // WinKarst
     APP_SVG_PATH = null;    
@@ -255,6 +257,7 @@ public class TDPath
       APP_PNG_PATH  = APP_SURVEY_PATH + "/png";    
       APP_PDF_PATH  = APP_SURVEY_PATH + "/pdf";    
       APP_SHP_PATH  = APP_SURVEY_PATH + "/shp";    // shapefile
+      RELATIVE_SHP_TEMP = survey + "/shp/tmp";
       APP_SRV_PATH  = APP_SURVEY_PATH + "/srv";    // Walls
       APP_SUR_PATH  = APP_SURVEY_PATH + "/sur";    // WinKarst
       APP_SVG_PATH  = APP_SURVEY_PATH + "/svg";    
@@ -379,12 +382,11 @@ public class TDPath
   public static String getTroxFileWithExt( String name ) { checkFilesystemDirs( APP_TRO_PATH );  return getPathname( APP_TRO_PATH,  name, ".trox" ); } // 
   public static String getXviFileWithExt(  String name ) { checkFilesystemDirs( APP_XVI_PATH );  return getPathname( APP_XVI_PATH,  name, ".xvi"  ); } // XTherion
 
-  public static String getShpTempDir( ) 
+  public static String getShpTempRelativeDir( ) 
   {
     checkFilesystemDirs( APP_SHP_PATH );
-    String path = APP_SHP_PATH + "/tmp/";
-    checkFilesystemDirs( path );
-    return path;
+    checkFilesystemDirs( APP_SHP_PATH + "/tmp/" );
+    return RELATIVE_SHP_TEMP;
   }
 
   public static File[] getBinFiles()   { return getExternalFiles( "bin" ); }

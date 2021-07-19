@@ -84,7 +84,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           if ( mExt.equals("shp") ) { 
             FileOutputStream fos = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getShpFileWithExt( mFullName ) );
-            String dirpath = TDPath.getShpTempDir();
+            String dirpath = TDPath.getShpTempRelativeDir();
 	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
 	    // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
             TDFile.deleteDir( dirpath );
