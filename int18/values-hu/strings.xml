@@ -12,15 +12,15 @@
     <string name="new_survey_label">Új mérés</string>
     <string name="distox_label">DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
-  </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_title">Android R fontos megjegyzés</string>
+  <string name="r_dialog">
+Android-R-nél a TopoDroid-nak az "Android/data" alatt található mappáját kell használnia. TopoDroid nem találta meg, és létrehozta a mappáját.\nA régi felmérések zip archívumait importálhatja.\n\nVigyázzon, a TopoDroid eltávolításakor az új TopoDroid mappában lévő fájlok törlődnek!\n\n
+A részletekért keresse fel a weboldalakat.\n
+  </string>
+  <string name="r_checkboxes">Nyugtáznod kell a jelölőnégyzettel.</string>
+  <string name="r_i_understood">Teljesen megértettem ezt az értesítést</string>
+  <string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string>
+  <string name="r_continue">FOLYTATÁS</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
