@@ -1,6 +1,7 @@
 encoding utf-8
 symbol point
 name plus-minus
+name-fr plus_moins
 name-pt mais-menos
 name-ru плюс_минус
 name-ro plus-minus
