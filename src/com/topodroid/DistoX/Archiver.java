@@ -481,7 +481,7 @@ public class Archiver
   {
     // int csize = (int)ze.getCompressedSize(); // cannot rely on sizes attributes
     // int dsize = (int)ze.getSize();
-    Log.v("DistoX", "decompress " + ze.getName() );
+    // Log.v("DistoX", "decompress entry: " + ze.getName() );
     byte[] data = new byte[ 4096 ];
     int size = 0;
     try {
@@ -496,10 +496,10 @@ public class Archiver
       // size = decompresser.inflate( buffer );
       // decompresser.end();
     } catch ( IOException e ) {
-      Log.v("DistoX", "exception " + e.getMessage() );
+      Log.e("DistoX", "decompress entry: " + e.getMessage() );
       return -1;
     }
-    Log.v("DistoX", "entry size " + size );
+    // Log.v("DistoX", "decompress entry: size " + size );
     return size;
   }
     
@@ -682,45 +682,49 @@ public class Archiver
 
   static public int getOkManifest( InputStream fis, String filename, String surveyname )
   {
+    Log.v("DistoX", "get OK manifest - file " + filename + " survey " + surveyname );
     int ok_manifest = -2;
     ZipEntry ze;
     try {
       ZipInputStream zin = new ZipInputStream( fis );
       int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {
-        Log.v("DistoX", "zentry name : " + ze.getName() );
-        if ( ! ze.getName().equals( "manifest" ) ) {
-          zin.closeEntry();
-          continue;
+        Log.v("DistoX", "get OK manifest: zentry name " + ze.getName() );
+        if ( ze.getName().equals( "manifest" ) ) {
+          String pathname = TDPath.getManifestFile( );
+          Log.v( "DistoX", "OK imanifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
+          FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+          int size = decompressEntry( zin, ze, fout );
+          // TDLog.Log( TDLog.LOG_ZIP, "Zip imanifest: \"" + ze.getName() + "\" size " + size );
+          if ( size > 0 ) {
+            ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
+            // Log.v( "DistoX", "Zip manifest: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest );
+          } else {
+            // Log.v( "DistoX", "Zip manifest: \"" + ze.getName() + "\" size " + size );
+          }
+          TDFile.deleteFile( pathname );
+          if ( ok_manifest < 0 ) return ok_manifest;
+          // TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
+          Log.v( "DistoX", "un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );
+          break;
         }
-        String pathname = TDPath.getManifestFile( );
-        FileOutputStream fout = TDFile.getFileOutputStream( pathname );
-        int size = decompressEntry( zin, ze, fout );
-        // TDLog.Log( TDLog.LOG_ZIP, "Zip imanifest: \"" + ze.getName() + "\" size " + size );
-        if ( size > 0 ) {
-          ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
-          Log.v( "DistoX", "Zip manifest: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest );
-        } else {
-          Log.v( "DistoX", "Zip manifest: \"" + ze.getName() + "\" size " + size );
-        }
-        TDFile.deleteFile( pathname );
-        if ( ok_manifest < 0 ) return ok_manifest;
-        // TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
-        Log.v( "DistoX", "un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );
-        break;
+        zin.closeEntry();
       }
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ERROR File: " + e.toString() );
+      TDLog.Error( "OK manifest ERROR File: " + e.toString() );
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR IO: " + e.toString() );
+      TDLog.Error( "OK manifest ERROR IO: " + e.toString() );
     }
     return ok_manifest;
   }
 
+  // un-archive from an imput stream
+  // @param app        TopoDroid
+  // @param fis        input stream
+  // @param surveyname name of the survey (= new folder)
   static public int unArchive( TopoDroidApp mApp, InputStream fis, String surveyname )
   {
-    boolean sql_success = false;
-    int ok_manifest = -2;
+    int ok_manifest = 0;
     String pathname;
     ZipEntry ze;
     DataHelper app_data = TopoDroidApp.mData;
@@ -739,13 +743,13 @@ public class Archiver
       while ( ( ze = zin.getNextEntry() ) != null ) {
         ++ nr_entry;
         if ( ze.isDirectory() ) {
-          Log.v( "DistoX", "Zip dir entry " + nr_entry + " \"" + ze.getName() + "\"");
+          // Log.v( "DistoX", "Zip dir entry " + nr_entry + " \"" + ze.getName() + "\"");
           TDFile.makeTopoDroidDir( TDPath.getDirFile( ze.getName() ) );
         } else if ( ze.getName().equals( "manifest" ) ) {
-          Log.v( "DistoX", "Zip dir entry " + nr_entry + " \"manifest\": skipping ...");
+          // Log.v( "DistoX", "Zip entry " + nr_entry + " \"manifest\": skipping ...");
           // skip
         } else {
-          Log.v( "DistoX", "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
+          // Log.v( "DistoX", "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
           TDLog.Log( TDLog.LOG_ZIP, "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
           boolean sql = false;
           pathname = null;
@@ -788,13 +792,13 @@ public class Archiver
             FileOutputStream fout = TDFile.getFileOutputStream( pathname );
             int size = decompressEntry( zin, ze, fout );
             TDLog.Log( TDLog.LOG_ZIP, "Unzip file \"" + pathname + "\" size " + size );
-            Log.v( "DistoX", "Unzip file \"" + pathname + "\" size " + size );
+            // Log.v( "DistoX", "Unzip file \"" + pathname + "\" size " + size );
             if ( size <= 0 ) {
               TDFile.deleteFile( pathname );
             } else {
               if ( sql ) {
                 TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
-                sql_success = ( app_data.loadFromFile( pathname, mApp.mManifestDbVersion ) >= 0 );
+                if ( app_data.loadFromFile( pathname, mApp.mManifestDbVersion ) < 0 ) ok_manifest = -5;
                 TDFile.deleteFile( pathname );
               }
             }
@@ -808,13 +812,11 @@ public class Archiver
     } catch ( IOException e ) {
       TDLog.Error( "ERROR IO: " + e.toString() );
     }
-    if ( ok_manifest == 0 && ! sql_success ) {
-      TDLog.Error( "ERROR SQL" );
-      // tell user that there was a problem
-      ok_manifest = -5;
+    if ( ok_manifest < 0 ) { // delete survey folder
+      // TODO
     }
     TDPath.setSurveyPaths( null );
-    Log.v("DistoX", "unarchive returns " + ok_manifest );
+    Log.v("DistoX", "unarchive stream returns " + ok_manifest );
     return ok_manifest; // return 0 or 1
   }
 

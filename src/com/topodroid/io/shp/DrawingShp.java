@@ -42,14 +42,15 @@ import java.io.IOException;
 
 public class DrawingShp
 {
-  // @param basepath   TopoDroid/shp/survey-plot
+  // @param fos        output stream
+  // @param dirname    shp temporary dir (should compose "survey/shp/tmp")
   // @param plot       sketch items
   // @param type       sketch type
   // @param station    WGS84 data of the sketch origin 
   // @return true if successful
   public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station )
   {
-    Log.v("DistoX", "SHP write dirpath " + dirname );
+    // Log.v("DistoX", "SHP sketch export dirname " + dirname );
     double xoff = 0;
     double yoff = 0;
     double xscale = ShpObject.SCALE;
@@ -65,10 +66,11 @@ public class DrawingShp
       sd = TDMath.sind( station.declination );
     }
 
-    if ( TDFile.makeMSdir( dirname ) ) {
-      TDLog.Error("mkdir error");
+    if ( ! TDFile.makeMSdir( dirname ) ) {
+      TDLog.Error("mkdir " + dirname + " error");
       return false;
     }
+    // Log.v("DistoX", "mkdir created MSdir " + dirname );
     ArrayList< String > files = new ArrayList<>();
 
     try {

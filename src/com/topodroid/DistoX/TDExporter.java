@@ -848,16 +848,17 @@ public class TDExporter
       return 0;
     }
 
-    Log.v("DistoX", "SHP export. base " + dirname );
+    // Log.v("DistoX", "SHP data export. base " + dirname );
     boolean success = true;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
       // TDPath.checkPath( filename );
       if ( TDFile.makeMSdir( dirname ) ) {
+        // Log.v("DistoX", "SHP created MSdir " + dirname );
         ArrayList< String > files = new ArrayList<>();
         int nr = 0;
         if ( TDSetting.mKmlStations ) {
-          Log.v("DistoX", "SHP export stations ");
+          // Log.v("DistoX", "SHP export stations ");
           for ( TDNum num : nums ) {
             String filepath = "stations-" + nr;
             ++ nr;
@@ -868,7 +869,7 @@ public class TDExporter
           }
         }
 
-        Log.v("DistoX", "SHP export shots ");
+        // Log.v("DistoX", "SHP export shots ");
         nr = 0;
         for ( TDNum num : nums ) {
           String filepath = "shots-" + nr;
@@ -894,7 +895,7 @@ public class TDExporter
         //   }
         // }
 
-        for ( String file : files ) Log.v("DistoX", "SHP export-file " + file );
+        // for ( String file : files ) Log.v("DistoX", "SHP export-file " + file );
 
         // FIXME
         // (new Archiver()).compressFiles( "shp", survey + ".shz", dirname, files );
@@ -904,7 +905,7 @@ public class TDExporter
       TDLog.Error( "Failed SHP export: " + e.getMessage() );
       return 0;
     } finally {
-      Log.v("DistoX", "delete dir " + dirname );
+      // Log.v("DistoX", "delete dir " + dirname );
       TDFile.deleteMSdir( dirname ); // delete temporary shapedir
     }
     return 1;
@@ -1961,10 +1962,11 @@ public class TDExporter
    *  NOTE declination exported in comment only in CSV
    *       handled flags: duplicate surface commented 
    */
-  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, char sep )
+  static private void writeCsvLeg( PrintWriter pw, AverageLeg leg, float ul, float ua, int leg_extend, char sep )
   {
-    pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua );
+    pw.format(Locale.US, "%c%.2f%c%.1f%c%.1f%c,%d", sep, leg.length() * ul, sep, leg.bearing() * ua, sep, leg.clino() * ua, sep, leg_extend );
     leg.reset();
+    // leg_extend is not to be reset
   }
 
   static private void writeCsvFlag( PrintWriter pw, boolean dup, boolean sur, boolean cmtd, char sep, String newline )
@@ -2056,9 +2058,9 @@ public class TDExporter
       //   }
       // }
       if ( info.hasDeclination() ) { // DECLINATION in CSV
-        pw.format(Locale.US, "# from to tape compass clino (declination %.4f)%s", info.declination, newline ); 
+        pw.format(Locale.US, "# from to tape compass clino extend (declination %.4f)%s", info.declination, newline ); 
       } else {
-        pw.format(Locale.US, "# from to tape compass clino (declination undefined)%s", newline );
+        pw.format(Locale.US, "# from to tape compass clino extend (declination undefined)%s", newline );
       }
       pw.format(Locale.US, "# units tape %s compass clino %s%s", uls, uas, newline );
       
@@ -2067,6 +2069,7 @@ public class TDExporter
       boolean duplicate = false;
       boolean surface   = false;
       boolean splays = false;
+      int leg_extend = 1; // RIGHT
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
@@ -2078,9 +2081,9 @@ public class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
               writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
-              duplicate = false;
+              duplicate = false; // reset flags
               surface   = false;
               ref_item = null; 
             }
@@ -2091,8 +2094,8 @@ public class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f",
-                      sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
+            pw.format(Locale.US, "-%c%s@%s%c%.2f%c%.1f%c%.1f%c%d",
+                      sep, to, info.name, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep, item.getIntExtend() );
             writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
 
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -2102,9 +2105,9 @@ public class TDExporter
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
               writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
-              duplicate = false;
+              duplicate = false; // reset flags
               surface   = false;
               ref_item = null; 
             }
@@ -2115,17 +2118,17 @@ public class TDExporter
             if ( ! splays ) {
               splays = true;
             }
-            pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f",
-                      from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua );
+            pw.format(Locale.US, "%s@%s%c-%c%.2f%c%.1f%c%.1f%c%d",
+                      from, info.name, sep, sep, item.mLength * ul, sep, item.mBearing * ua, sep, item.mClino * ua, sep, item.getIntExtend() );
             writeCsvFlag( pw, false, false, item.isCommented(), sep, newline );
             // if ( item.mComment != null && item.mComment.length() > 0 ) {
             //   pw.format(",\"%s\"\n", item.mComment );
             // }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              writeCsvLeg( pw, leg, ul, ua, sep );
+              writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
               writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
-              duplicate = false;
+              duplicate = false; // reset flags
               surface   = false;
               // n = 0;
             }
@@ -2134,16 +2137,17 @@ public class TDExporter
             }
             ref_item = item;
             if ( item.isDuplicate() ) duplicate = true;
-            if ( item.isSurface() ) surface = true;
+            if ( item.isSurface() )   surface = true;
+            leg_extend = item.getIntExtend();
             pw.format("%s@%s%c%s@%s", from, info.name, sep, to, info.name );
             leg.set( item.mLength, item.mBearing, item.mClino );
           }
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        writeCsvLeg( pw, leg, ul, ua, sep );
+        writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
         writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
-        // duplicate = false;
+        // duplicate = false; // reset flags
         // surface   = false;
       }
       bw.flush();
@@ -4372,7 +4376,7 @@ public class TDExporter
 
   static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    Log.v("DistoX", "export as visualtopo-X " );
+    // Log.v("DistoX", "export as visualtopo-X " );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
     checkShotsClino( list );
     int lignes = countLignesTrox( list );

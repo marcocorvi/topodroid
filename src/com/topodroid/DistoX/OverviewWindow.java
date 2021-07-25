@@ -699,7 +699,7 @@ public class OverviewWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    // Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
     if ( TDSetting.mExportUri ) { // FIXME_URI
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
       intent.setType( TDConst.mMimeType[ mExportIndex ] );
@@ -723,7 +723,7 @@ public class OverviewWindow extends ItemDrawer
         if ( result == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
-          Log.v("DistoX", "Export " + mExportIndex + " uri " + uri.toString() );
+          // Log.v("DistoX", "URI Export " + mExportIndex + " uri " + uri.toString() );
           doUriExport( uri );
         }
       // default:

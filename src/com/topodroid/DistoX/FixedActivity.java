@@ -132,7 +132,7 @@ public class FixedActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     // MOBILE TOPOGRAPHER
-    mNrButton1 = ( TDPath.BELOW_ANDROID_11 )? 2 : 1;
+    mNrButton1 = 2;
     if ( hasGps ) ++ mNrButton1;
     mButton1 = new Button[ mNrButton1 ];
     int kz = (hasGps)? 0 : 1; // index of izons

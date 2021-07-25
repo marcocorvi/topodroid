@@ -838,7 +838,7 @@ public class DrawingDxf
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "tdr to dxf. scrapfile " + scrapfile );
-      Log.v( "DistoX", "tdr to dxf. scrapfile " + scrapfile );
+      // Log.v( "DistoX", "tdr to dxf. scrapfile " + scrapfile );
       FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
@@ -883,7 +883,7 @@ public class DrawingDxf
             break;
           case 'N': // scrap index
             int scrap_index = dis.readInt();
-            Log.v("DistoX", "scrap index " + scrap_index );
+            // Log.v("DistoX", "scrap index " + scrap_index );
             break;
           // case 'G':
           //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data

@@ -15,30 +15,32 @@ import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDPath;
 
 import android.os.ParcelFileDescriptor;
+import android.os.Environment;
+
 // import android.app.Application;
 import android.app.Activity;
+
 import android.content.Context;
 import android.content.ContentValues;
 import android.content.ContentResolver;
-import android.database.Cursor;
-
 import android.content.Intent;
 import android.content.IntentFilter;
-import android.content.ContentResolver;
 import android.content.ContentUris;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 
+import android.database.Cursor;
 
-import java.util.ArrayList;
 import android.provider.DocumentsContract;
 import android.net.Uri;
 
 import android.provider.MediaStore;
 
 import androidx.documentfile.provider.DocumentFile;
+
+import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileDescriptor;
@@ -89,14 +91,33 @@ public class TDFile
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
-  public static File getExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ); }
-  public static File getExternalFile( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ); }
+  private static File getCBD( String type, boolean create )
+  {
+    /*
+    return TDInstance.context.getExternalFilesDir( type ); 
+    */
+    File ret = null;
+    if ( type == null ) {
+      ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX" );
+    } else {
+      ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX/" + type );
+    } 
+    if ( create && ret != null && ! ret.exists() ) {
+      Log.v("DistoX", "mkdirs " + ret.getPath() );
+      ret.mkdirs();
+    }
+    return ret;
+    //
+  }
 
-  public static String getExternalPath( String type ) { return TDInstance.context.getExternalFilesDir( type ).getPath(); }
-  public static String getExternalPath( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ).getPath(); }
+  public static File getExternalDir( String type ) { return getCBD( type, true ); }
+  public static File getExternalFile( String type, String name ) { return new File( getCBD( type, true ), name ); }
 
-  public static boolean hasExternalDir( String type ) { return TDInstance.context.getExternalFilesDir( type ).exists(); }
-  public static boolean hasExternalFile( String type, String name ) { return new File( TDInstance.context.getExternalFilesDir( type ), name ).exists(); }
+  public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
+  public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getPath(); }
+
+  public static boolean hasExternalDir( String type ) { return getCBD( type, false ).exists(); }
+  public static boolean hasExternalFile( String type, String name ) { return new File( getCBD( type, false ), name ).exists(); }
 
   public static File getSettingsFile()   { return getExternalFile( null, "settings.txt" ); }
   public static File getLogFile()        { return getExternalFile( null, "log.txt" ); }

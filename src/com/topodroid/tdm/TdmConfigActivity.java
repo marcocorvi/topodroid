@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -25,6 +26,7 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.ExportDialogTdm;
 import com.topodroid.DistoX.IExporter;
+import com.topodroid.DistoX.TDandroid;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -59,7 +61,7 @@ public class TdmConfigActivity extends Activity
                               , OnItemClickListener
                               , IExporter
 {
-  int mNrButton1 = TDPath.BELOW_ANDROID_11 ? 5 : 4; 
+  int mNrButton1 = 5; 
   private static int[] izons = { 
     R.drawable.iz_add,
     R.drawable.iz_drop,
@@ -398,14 +400,22 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( TDPath.BELOW_ANDROID_11 && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
-      try {
-        // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
-        Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        intent.putExtra( "INPUT_FILE", mTdmConfig.getFilepath() );
-        startActivity( intent );
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.make( R.string.no_cave3d );
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+      int check = TDVersion.checkCave3DVersion( this );
+      if ( check < 0 ) {
+        TDToast.makeBad( R.string.no_cave3d );
+      } else if ( check > 0 ) {
+        TDToast.makeBad( R.string.outdated_cave3d );
+      } else {
+        try {
+          // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
+          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
+          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          TDToast.make( R.string.no_cave3d );
+        }
       }
     }
   }

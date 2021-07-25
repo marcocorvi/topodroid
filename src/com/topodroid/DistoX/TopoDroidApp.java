@@ -557,7 +557,7 @@ public class TopoDroidApp extends Application
 
     // ret = readMemory( address, 0xc044 );
     // if ( ret != null ) {
-    //   Log.v("DistoX-APP", "X310 info C044 " + String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
+    //   // Log.v("DistoX-APP", "X310 info C044 " + String.format( getResources().getString( R.string.device_memory ), ret[0], ret[1] ) );
     // }
 
     resetComm();
@@ -751,7 +751,9 @@ public class TopoDroidApp extends Application
 
     mListerSet = new ListerSetHandler();
     mEnableZip = true;
-    initEnvironmentFirst( prefHlp ); // called by MainWindow.onStart
+
+    // initEnvironmentFirst( prefHlp ); // must be called after the permissions
+
     // mCheckPerms = TDandroid.checkPermissions( this );
     // if ( mCheckPerms >= 0 ) {
     //   initEnvironmentSecond( ); // called by MainWindow.onStart
@@ -762,13 +764,14 @@ public class TopoDroidApp extends Application
     // Log.v("DistoX-MAIN", "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
   }
 
-  static int initEnvs = 0;
+  static boolean done_init_env_second = false;
 
   static void initEnvironmentSecond( boolean with_dialog_r )
   {
-    Log.v("DistoX", "init env. second: " + initEnvs );
-    if ( (initEnvs & 0x02) == 0x02 ) return;
-    initEnvs |= 0x02;
+    if ( done_init_env_second ) return;
+    done_init_env_second = true;
+    Log.v("DistoX", "init env. second " );
+
     TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
 
     // TDLog.Profile("TDApp cwd");
@@ -780,23 +783,29 @@ public class TopoDroidApp extends Application
 
     // TDLog.Profile("TDApp DB"); 
     // ***** DATABASE MUST COME BEFORE PREFERENCES
-    Log.v("DistoX", "Open TopoDroid Database");
-    if ( ! with_dialog_r ) {
-      mData = new DataHelper( thisApp /*, this */ ); 
-    }
+    // if ( ! with_dialog_r ) {
+      // Log.v("DistoX", "Open TopoDroid Database");
+      mData = new DataHelper( thisApp ); 
+    // }
 
     // mStationName = new StationName();
   }
 
-  private static void initEnvironmentFirst( TDPrefHelper prefHlp )
+  // init env requires the device database, which requires having the permissions
+  //
+  static boolean done_init_env_first = false;
+
+  void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
-    Log.v("DistoX", "init env. first: " + initEnvs );
-    if ( (initEnvs & 0x01) == 0x01 ) return;
-    initEnvs |= 0x01;
-    mDData = new DeviceHelper( thisApp /*, this */ );
+    if ( done_init_env_first ) return;
+    done_init_env_first = true;
+
+    Log.v("DistoX", "init env. first " );
+    TDPrefHelper prefHlp = new TDPrefHelper( this );
+    mDData = new DeviceHelper( thisApp );
     // TDLog.Profile("TDApp prefs");
     // LOADING THE SETTINGS IS RATHER EXPENSIVE !!!
-    TDSetting.loadPrimaryPreferences( /* this, */ TDInstance.getResources(),  prefHlp );
+    TDSetting.loadPrimaryPreferences( TDInstance.getResources(),  prefHlp );
 
     thisApp.mDataDownloader = new DataDownloader( thisApp, thisApp );
 
@@ -806,7 +815,7 @@ public class TopoDroidApp extends Application
     // if one of the symbol dirs does not exists all of then are restored
     String version = mDData.getValue( "version" );
     // Log.v("DistoX-PATH", "version " + version + " " + TDVersion.string() );
-    Log.v("DistoX", "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
+    // Log.v("DistoX", "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );
     if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
       mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
@@ -1643,7 +1652,7 @@ public class TopoDroidApp extends Application
 
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
-    // Log.v("DistoX-PATH", "uncompress symbols");
+    // Log.v("DistoX-PATH", "uncompressing symbols - overwrite " + overwrite );
     // TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];

@@ -77,7 +77,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       // Log.v("DistoX-EXPORT", "export plot to file in bkgr. ext " + mExt );
       // String dirname = null;
       try {
-        Log.v("DistoX-EXPORT", "export plot to file: <" + mFullName + "> <" + mExt + ">" );
+        // Log.v("DistoX-EXPORT", "export plot to file: <" + mFullName + "> <" + mExt + ">" );
         // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
@@ -109,7 +109,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
               bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTnlFileWithExt( mFullName ) ) );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
-              Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
+              // Log.v("DistoX-C3D", "Export to Cave3D: " + mFullName );
               bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getC3dFileWithExt( mFullName ) ) );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }

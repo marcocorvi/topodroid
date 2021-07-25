@@ -5963,7 +5963,7 @@ public class DrawingWindow extends ItemDrawer
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      Log.v("DistoX", "export bitmap - filename " + filename );
+      // Log.v("DistoX", "export bitmap - filename " + filename );
       new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
     }
 
@@ -6101,7 +6101,7 @@ public class DrawingWindow extends ItemDrawer
     void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-      Log.v( "DistoX", "save with ext: filename " + filename + " ext " + ext );
+      // Log.v( "DistoX", "save with ext: filename " + filename + " ext " + ext );
       // mActivity = context (only to toast)
       SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
       PlotInfo   plot  = null;
@@ -6151,7 +6151,7 @@ public class DrawingWindow extends ItemDrawer
     }
     final String filename = name;
     // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    Log.v( "DistoX", "save th2: " + filename );
+    // Log.v( "DistoX", "save th2: " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -6168,7 +6168,7 @@ public class DrawingWindow extends ItemDrawer
       };
     }
     try { 
-      Log.v("DistoX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
+      // Log.v("DistoX", "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) { }
@@ -6640,7 +6640,7 @@ public class DrawingWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    Log.v("DistoX", "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    // Log.v("DistoX", "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
     if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
@@ -6676,7 +6676,7 @@ public class DrawingWindow extends ItemDrawer
   public void doUriExport( Uri uri ) 
   {
     if ( ! TDSetting.mExportUri ) return;
-    Log.v("DistoX", "Drawing export index " + mExportIndex );
+    // Log.v("DistoX", "Drawing URI export index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, mType, true ); break;
@@ -7356,7 +7356,7 @@ public class DrawingWindow extends ItemDrawer
         if ( TDSetting.mExportUri && resCode == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
-          Log.v("DistoX", "Export " + mExportIndex + " uri " + uri.toString() );
+          // Log.v("DistoX", "URI Export " + mExportIndex + " uri " + uri.toString() );
           if ( uri != null ) doUriExport( uri );
         }
         break;

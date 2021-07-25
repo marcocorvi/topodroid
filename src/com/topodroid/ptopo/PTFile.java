@@ -107,7 +107,7 @@ public class PTFile
       } while ( nread < n );
     } catch ( IOException e ) {
       TDLog.Error( "IO error on read " + n + " bytes: " + e.getMessage() );
-    }
+    } // RunTimeException from FileInputStream::read()
   }
 
   static byte readByte( InputStream fs )

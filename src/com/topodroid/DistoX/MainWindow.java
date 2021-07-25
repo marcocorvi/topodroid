@@ -18,6 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -104,6 +105,8 @@ public class MainWindow extends Activity
   // private boolean mApp_mCosurvey = false; // IF_COSURVEY
   // private int mApp_mCheckPerms;
 
+  private int mRequestPermissionTime = 0;
+
   private Activity mActivity = null;
   private boolean onMenu; // whether menu is displaying
 
@@ -185,7 +188,7 @@ public class MainWindow extends Activity
     if ( TopoDroidApp.mData != null ) {
       List< String > list = TopoDroidApp.mData.selectAllSurveys();
       updateList( list );
-      if ( ! say_dialogR && say_no_survey && list.size() == 0 ) {
+      if ( /* ! say_dialogR && */ say_no_survey && list.size() == 0 ) {
         say_no_survey = false;
         TDToast.make( R.string.no_survey );
       } 
@@ -300,19 +303,17 @@ public class MainWindow extends Activity
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
         }
-      } else if ( TDPath.BELOW_ANDROID_11 && TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
-        int check = TDandroid.checkCave3Dversion( this );
+      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
+        int check = TDVersion.checkCave3DVersion( this );
         if ( check < 0 ) {
           TDToast.makeBad( R.string.no_cave3d );
-        } else if ( check == 0 ) {
+        } else { // start Cave3D even if the version is below required mimimum
           try {
             intent = new Intent( "Cave3D.intent.action.Launch" );
             startActivity( intent );
           } catch ( ActivityNotFoundException e ) {
             TDToast.makeBad( R.string.no_cave3d );
           }
-        } else {
-          TDToast.makeBad( R.string.outdated_cave3d );
         }
       }
     }
@@ -434,7 +435,7 @@ public class MainWindow extends Activity
 
   // public void importFile( String filename )
   // {
-  //   Log.v("DistoX", "import file " + filename );
+  //   // Log.v("DistoX", "import file " + filename );
   //   // FIXME connect-title string
   //   if ( filename.toLowerCase().endsWith(".th") ) {
   //     String filepath = TDPath.getImportFile( filename );
@@ -487,7 +488,7 @@ public class MainWindow extends Activity
   // @param type   file extension (including the dot)
   public void importStream( FileInputStream fis, String name, String type )
   {
-    Log.v("DistoX", "import with stream <" + name + "> type <" + type + ">" );
+    // Log.v("DistoX", "import with stream <" + name + "> type <" + type + ">" );
     // FIXME connect-title string
     if ( type.equals(".top") ) {
       setTitleImport();
@@ -505,7 +506,7 @@ public class MainWindow extends Activity
   public void importReader( InputStreamReader isr, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    Log.v("DistoX", "import with reader <" + name + "> type <" + type + ">" );
+    // Log.v("DistoX", "import with reader <" + name + "> type <" + type + ">" );
     if ( type.equals(".th") ) {
       setTitleImport();
       new ImportTherionTask( this, isr ).execute( name, name );
@@ -653,20 +654,22 @@ public class MainWindow extends Activity
     // TDLog.Profile("TDActivity buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
-    resetButtonBar();
+
+    // resetButtonBar();
 
     // FIXME TOOLBAR mToolbar = (Toolbar) findViewById( R.id.toolbar );
     // setActionBar( mToolbar );
     // resetToolbar();
 
     // if ( ! TDandroid.canRun( this, this ) ) {
-    //   Log.v("DistoX-PERMS", "cannot run");
+    //   // Log.v("DistoX-PERMS", "cannot run");
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), "Required Permissions not granted", 
     //     new DialogInterface.OnClickListener() {
     //       @Override
     //       public void onClick( DialogInterface dialog, int btn ) { 
-    //         Log.v("DistoX-PERMS", "create perms");
-    //         TDandroid.createPermissions( mApp, mActivity );
+    //         // Log.v("DistoX-PERMS", "create perms");
+    //         ++ mRequestPermissionTime;
+    //         TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
     //       }
     //     } );
     // } 
@@ -676,18 +679,15 @@ public class MainWindow extends Activity
 
   static boolean done_init_dialogs = false;
 
-  void showInitDialogs( int not_granted, boolean say_dialog_r )
+  void showInitDialogs( boolean say_dialog_r )
   {
+    Log.v("DistoX", "show init dialogs - already done: " + done_init_dialogs );
     if ( done_init_dialogs ) return;
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
-    Log.v("DistoX", "show init dialogs: app_dir <" + app_dir + "> " + say_dialogR );
-    if ( not_granted > 0 ) {
-      Log.v("DistoX", "show init dialogs: perms not granted ");
-      return;
-    }
+    // Log.v("DistoX", "show init dialogs: app_dir <" + app_dir + ">" );
     say_dialogR = say_dialog_r;
-    if ( say_dialogR ) {
-      Log.v("DistoX", "delaying init environment second");
+    if ( false && say_dialogR ) { // FIXME_R
+      // Log.v("DistoX", "delaying init environment second");
       (new DialogR( this, this)).show();
       return;
     } 
@@ -813,7 +813,7 @@ public class MainWindow extends Activity
     mNrButton1 = 4;
     if ( TDLevel.overExpert ) {
       ++ mNrButton1; // TH MANAGER
-      if ( TDPath.BELOW_ANDROID_11 ) ++mNrButton1; // CAVE3D
+      ++mNrButton1; // CAVE3D
     }
     mButton1 = new Button[ mNrButton1 + 1 ];
 
@@ -945,7 +945,25 @@ public class MainWindow extends Activity
 
     // THIS IS COMMENTED BECAUSE I'M NOT SURE IT IS A GOOD THING
     // if ( ! TDLevel.mDeveloper ) new TDVersionDownload( this ).execute(); 
-    showInitDialogs( TDandroid.createPermissions( mApp, mActivity ), ! TopoDroidApp.hasTopoDroidDatabase() );
+
+    // ++ mRequestPermissionTime;
+    // int perms = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
+
+    if ( TDandroid.canRun( mApp, mActivity ) ) {
+      mApp.initEnvironmentFirst( );
+      showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
+      resetButtonBar();
+    } else {
+      ++ mRequestPermissionTime;
+      if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
+        mApp.initEnvironmentFirst( );
+        showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
+        resetButtonBar();
+      // } else {  // the followings are delayed after the permissions have been granted
+      //   mApp.initEnvironmentFirst( );
+      //   if ( perms == 0 ) showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
+      }
+    }
   }
 
   @Override
@@ -953,6 +971,7 @@ public class MainWindow extends Activity
   {
     super.onResume();
     if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale();
+    // Log.v("DistoX", "onResume runs on " + Thread.currentThread().getId() );
 
     // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
@@ -1052,6 +1071,7 @@ public class MainWindow extends Activity
 
   public void onActivityResult( int request, int result, Intent intent ) 
   {
+    // Log.v("DistoX", "onActivityResult runs on " + Thread.currentThread().getId() );
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
@@ -1087,7 +1107,7 @@ public class MainWindow extends Activity
               File file = new File(path);
               filename = file.getName();
             }
-            Log.v("DistoX", "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+            // Log.v("DistoX", "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {
             filename = uri.getLastPathSegment();
             int pos = filename.lastIndexOf(".");
@@ -1095,17 +1115,19 @@ public class MainWindow extends Activity
             String ext  = filename.substring( pos ).toLowerCase(); // extension with leading '.'
             String name = filename.substring( qos+1, pos );
             String surveyname = name;
-            Log.v("DistoX", "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
+            // Log.v("DistoX", "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
               FileInputStream fis = TDsafUri.docFileInputStream( uri );
               // if ( fis.markSupported() ) fis.mark();
               int manifest_ok = Archiver.getOkManifest( fis, name, surveyname );
+              try { fis.close(); } catch ( IOException e ) { }
               if ( manifest_ok >= 0 ) {
                 fis = TDsafUri.docFileInputStream( uri );
                 Archiver.unArchive( mApp, fis, name );
+                try { fis.close(); } catch ( IOException e ) { }
               } else {
-                Log.v("DistoX", "import zip - failed manifest " + manifest_ok );
-                // TODO TDToast.make( R.string.bad_manifest );
+                Log.e("DistoX", "import zip - failed manifest " + manifest_ok );
+                TDToast.makeBad( R.string.bad_manifest );
               }
             } else {
               String type = TDPath.checkImportTypeStream( ext );
@@ -1121,10 +1143,10 @@ public class MainWindow extends Activity
                     InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
                     importReader( isr, name, type, mImportData );
                   } catch ( FileNotFoundException e ) {
-                    Log.v("DistoX", "File not found");
+                    Log.e("DistoX", "File not found");
                   }
                 } else {
-                  Log.v("DistoX", "import unsupported " + ext);
+                  Log.e("DistoX", "import unsupported " + ext);
                 }
               }
             }
@@ -1168,21 +1190,26 @@ public class MainWindow extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    Log.v("DistoX-PERM", "MAIN perm request result " + results.length );
-    // TDLog.Log(TDLog.LOG_PERM, "MAIN req code " + code + " results length " + results.length );
+    // Log.v("DistoX-PERM", "MAIN perm request result " + results.length );
     if ( code == TDandroid.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
         int granted = 0;
 	for ( int k = 0; k < results.length; ++ k ) {
 	  TDandroid.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  Log.v("DistoX-PERM", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
+	  // Log.v("DistoX-PERM", "MAIN perm " + k + " perms " + perms[k] + " result " + results[k] );
 	}
-	Log.v("DistoX-PERM", "MAIN perm finish setup");
-        int not_granted = TDandroid.createPermissions( mApp, mActivity );
-        showInitDialogs( 0, say_dialogR );
-        if ( not_granted > 0 && ! say_dialogR ) {
-	  Log.v("DistoX-PERM", "MAIN perm not granted " + not_granted ); 
-          // TODO
+        ++ mRequestPermissionTime;
+        int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
+        // Log.v("DistoX-PERM", "MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
+        if ( ! TDandroid.canRun( mApp, this ) ) { // if ( not_granted > 0 /* && ! say_dialogR */ )
+          TDToast.makeLong( "Permissions not granted. Goodbye" );
+          if ( mRequestPermissionTime > 2 ) { 
+            finish();
+          }
+        } else {
+          mApp.initEnvironmentFirst( );
+          showInitDialogs( say_dialogR );
+          resetButtonBar();
         }
       }
     }
@@ -1309,10 +1336,10 @@ public class MainWindow extends Activity
 
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT
   {
-    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    // Log.v("DistoX", "selectImportFromProvider runs on " + Thread.currentThread().getId() );
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
     intent.setType( TDConst.mMimeType[ index ] );
-    Log.v("DistoX", "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
+    // Log.v("DistoX", "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     mImportData = data;
@@ -1320,13 +1347,5 @@ public class MainWindow extends Activity
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_shot ) ), TDRequest.REQUEST_GET_IMPORT );
   }
 
-  // private void selectImportFromProvider() // IMPORT
-  // {
-  //   // Intent intent = new Intent( Intent.ACTION_GET_CONTENT ); // using system picker ACTION_OPEN_DOCUMENT
-  //   Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
-  //   intent.setType("*/*");
-  //   intent.addCategory(Intent.CATEGORY_OPENABLE);
-  //   startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.import_title ) ), TDRequest.REQUEST_GET_IMPORT );
-  // }
 
 }

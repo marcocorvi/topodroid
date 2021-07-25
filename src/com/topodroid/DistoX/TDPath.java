@@ -218,9 +218,9 @@ public class TDPath
       if ( dir.exists() || dir.mkdirs() ) {
 	if ( dir.isDirectory() && dir.canWrite() ) {
 	  PATH_CW_DIR   = PATH_CB_DIR + "/" + path;
-          PATH_ZIP      = PATH_CW_DIR + "/zip";          checkFilesystemDirs( PATH_ZIP );
-          PATH_TMP      = PATH_CW_DIR + "/tmp";          checkFilesystemDirs( PATH_TMP );
-          PATH_TDCONFIG = APP_SURVEY_PATH + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG  );
+          PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
+          PATH_TMP      = PATH_CW_DIR + "/tmp";      checkFilesystemDirs( PATH_TMP );
+          PATH_TDCONFIG = PATH_CW_DIR + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG  );
           setSurveyPaths( null );
 	}
       }
@@ -335,9 +335,7 @@ public class TDPath
   public static String getC3dFile( String name ) { return APP_C3D_PATH + "/" + name; }
 
   public static String getTdconfigDir( ) { return PATH_TDCONFIG ; }
-  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG  + name; }
-  // public static String getThconfigDir( ) { return PATH_THCONFIG; }
-  // public static String getSurveyThconfigFile( String survey ) { return PATH_THCONFIG + survey + THCONFIG; }
+  public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + "/" + name; }
 
   public static String getManFileName( String name ) { return "man/" + name; }
 

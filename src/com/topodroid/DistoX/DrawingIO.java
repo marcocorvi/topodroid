@@ -1106,7 +1106,7 @@ public class DrawingIO
         dos.writeFloat( info.azimuth );
         dos.writeFloat( info.clino );
         dos.writeFloat( info.intercept );
-        dos.writeUTF( info.start );
+        dos.writeUTF( (info.start != null)? info.start : "" );
         dos.writeUTF( (info.view != null)? info.view : "" );
         dos.writeUTF( (info.hide != null)? info.hide : "" );
         dos.writeUTF( (info.nick != null)? info.nick : "" );

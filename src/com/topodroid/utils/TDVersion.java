@@ -22,6 +22,7 @@ import android.content.res.Configuration;
 
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.pm.PackageInfo;
 
 public class TDVersion 
 {
@@ -40,7 +41,10 @@ public class TDVersion
   public static final int PACKET_DATABASE_VERSION = 1;
   public static final int PACKET_DATABASE_VERSION_MIN = 1; // was 14
 
-  public static final int MIN_CAVE3D_VERSION = 400040;
+  // minimum Cave3D required version for TopoDroid
+  public static final int MIN_CAVE3D_VERSION = 401005;
+  // minimum TopoDroid required version for Cave3D
+  public static final int MIN_TOPODROID_VERSION = 501095;
 
   // TopoDroid version: this is loaded from the Manifest
   public static String VERSION = "0.0.0"; 
@@ -59,6 +63,23 @@ public class TDVersion
   public static String string()  { return VERSION; }
   public static int    code()    { return VERSION_CODE; }
   public static String symbols() { return SYMBOL_VERSION; }
+
+  // return: 0 ok, 1 no, <0 error
+  public static int checkPackageVersion( Context context, String package_name, int min_version )
+  {
+    PackageManager pm = context.getPackageManager();
+    try { 
+      PackageInfo info = pm.getPackageInfo( package_name, PackageManager.GET_META_DATA );
+      if ( info == null ) return -2;
+      return ( info.versionCode < min_version )? 1 : 0;
+    } catch ( NameNotFoundException e) {
+      // nothing
+    }
+    return -1;
+  }
+
+  public static int checkCave3DVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3D", MIN_CAVE3D_VERSION ); }
+  public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.DistoX", MIN_TOPODROID_VERSION ); }
 
   public static boolean setVersion( Context context )
   {

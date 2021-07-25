@@ -16,6 +16,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -284,9 +285,7 @@ public class SurveyWindow extends Activity
     mButton1 = new Button[ mNrButton1 + 1 ];
     int kb = 0;
     for ( int k=0; k < mNrButton1; ++k ) {
-      if ( k != 2 || TDPath.BELOW_ANDROID_11 ) {
-        mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
-      }
+      mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
     }
     mNrButton1 = kb;
     mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
@@ -352,7 +351,7 @@ public class SurveyWindow extends Activity
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( TDPath.BELOW_ANDROID_11 && k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
@@ -395,14 +394,15 @@ public class SurveyWindow extends Activity
   private void do3D()
   {
     // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
-      int check = TDandroid.checkCave3Dversion( this );
+      int check = TDVersion.checkCave3DVersion( this );
+      // Log.v("DistoX", "check Cave3D version: " + check );
       if ( check < 0 ) {
         TDToast.makeBad( R.string.no_cave3d );
       } else if ( check == 0 ) {
         try {
           Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
-          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
+          intent.putExtra( "INPUT_SURVEY", TDInstance.survey );   // survey name
+          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() ); // current work directory - full path
             // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()
             // Uri.Builder uri_builder = new Uri.Builder();
             // uri_builder.path( TDPath.getPathBase() ); 
@@ -499,7 +499,7 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
-    Log.v("DistoX", "export " + type + " " + index );
+    // Log.v("DistoX", "export " + type + " " + index );
     if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {

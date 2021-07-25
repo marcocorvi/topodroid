@@ -74,7 +74,7 @@ class DialogR extends MyDialog
       } else {
         Log.v("DistoX", "Dialog R accepted");
         // MainWindow.say_dialogR = false; // clear flag
-        mParent.showInitDialogs( 0, false );
+        mParent.showInitDialogs( false );
         dismiss();
       }
     }

@@ -46,7 +46,7 @@ public class TDandroid
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
       // android.Manifest.permission.INTERNET,
-      // android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
+      android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
       android.Manifest.permission.ACCESS_FINE_LOCATION,
       android.Manifest.permission.CAMERA,
@@ -57,7 +57,7 @@ public class TDandroid
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
       // "INTERNET",
-      // "WRITE_EXTERNAL_STORAGE",
+      "WRITE_EXTERNAL_STORAGE",
       // "READ_EXTERNAL_STORAGE",
       "ACCESS_FINE_LOCATION",
       "CAMERA",
@@ -65,8 +65,8 @@ public class TDandroid
       // "ACCESS_MEDIA_LOCATION"
   };
 
-  static final int NR_PERMS_D = 2;
-  static final int NR_PERMS   = 5;
+  static final int NR_PERMS_D = 3;
+  static final int NR_PERMS   = 6;
 
   /** app specific code - for callback in MainWindow
    */
@@ -94,19 +94,18 @@ public class TDandroid
   static boolean[] GrantedPermission = { false, false, false, false, false, false };
 
   // number of times permissions are requested
-  // private static int requestTimes = 0;
 
   // return the number of permissions that are not granted
-  static int createPermissions( Context context, Activity activity )
+  // @param time    time that the permissions are requested
+  static int createPermissions( Context context, Activity activity, int time )
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
-    // ++ requestTimes;
-    // Log.v("DistoX-PERMS", "create perms " + requestTimes );
+    // Log.v("DistoX-PERMS", "create perms " );
+
     MustRestart = false;
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return 0;
     // StringBuilder sb = new StringBuilder();
     // sb.append("Not granted" );
-    
 
     int not_granted = 0;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
@@ -116,12 +115,13 @@ public class TDandroid
         ++not_granted;
         // Log.v("DistoX", "Perm " + permNames[k] + " not granted ");
         // if ( k < NR_PERMS_D ) MustRestart = true;
-      } else {
-        // Log.v("DistoX", "Perm " + permNames[k] + " granted ");
+      // } else {
+      //   // Log.v("DistoX", "Perm " + permNames[k] + " granted ");
       }
     }
 
-    if ( not_granted > 0 ) {
+    if ( not_granted > 0 && time < 3 ) {
+      // Log.v("DistoX", "request perms time " + time );
       // String[] ask_perms = new String[ not_granted ];
       // int kk = 0;
       // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = parms[k];
@@ -132,7 +132,7 @@ public class TDandroid
     // if ( MustRestart ) { // if a permission has not been granted request it
     //   // TDToast.make( "TopoDroid cannot do anything useful without" + sb.toString() );
     //   activity.requestPermissions( perms, REQUEST_PERMISSIONS );
-    //   Log.v("DistoX-PERMS", "exit 1");
+    //   // Log.v("DistoX-PERMS", "exit 1");
     //   android.os.Process.killProcess( android.os.Process.myPid() );
     //   System.exit( 1 );
     // }
@@ -140,23 +140,8 @@ public class TDandroid
     return not_granted;
   }
 
-  // return: 0 ok, 1 no, <0 error
-  static int checkCave3Dversion( Context context )
-  {
-    PackageManager pm = context.getPackageManager();
-    try { 
-      PackageInfo info = pm.getPackageInfo( "com.topodroid.Cave3D", PackageManager.GET_META_DATA );
-      if ( info == null ) return -2;
-      return ( info.versionCode < TDVersion.MIN_CAVE3D_VERSION )? 1 : 0;
-    } catch ( NameNotFoundException e) {
-      // nothing
-    }
-    return -1;
-  }
-
   static boolean canRun( Context context, Activity activity )
   {
-    // if ( requestTimes < 3 ) return true;
     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
@@ -259,6 +244,7 @@ public class TDandroid
   static int checkPermissions( Context context )
   {
     // TDLog.Log( LOG_PERM, "check permissions" );
+    // Log.v( "DistoX", "check permissions" );
     int k;
     for ( k=0; k<NR_PERMS_D; ++k ) {
       int res = context.checkCallingOrSelfPermission( perms[k] );
@@ -284,7 +270,7 @@ public class TDandroid
       }
       flag *= 2;
     }
-    Log.v("DistoX-PERM", "Check permission returns " + ret );
+    // Log.v("DistoX-PERM", "Check permission returns " + ret );
     return ret;
   }
 

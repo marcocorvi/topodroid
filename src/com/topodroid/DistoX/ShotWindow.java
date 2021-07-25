@@ -20,6 +20,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -801,9 +802,10 @@ public class ShotWindow extends Activity
       }
     } else if ( TDSetting.mWithSensors && TDLevel.overNormal && p++ == pos ) { // SENSORS
       mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
-    } else if ( TDPath.BELOW_ANDROID_11 && TDLevel.overBasic && p++ == pos ) { // 3D
+    } else if ( TDLevel.overBasic && p++ == pos ) { // 3D
       // if ( TopoDroidApp.exportSurveyAsThSync( ) ) { // make sure to have survey exported as therion
-        int check = TDandroid.checkCave3Dversion( this );
+        int check = TDVersion.checkCave3DVersion( this );
+        // Log.v("DistoX", "check Cave3D version: " + check );
         if ( check < 0 ) {
           TDToast.makeBad( R.string.no_cave3d );
         } else if ( check == 0 ) {
@@ -2116,7 +2118,7 @@ public class ShotWindow extends Activity
     if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_sensor
-    if ( TDPath.BELOW_ANDROID_11 && TDLevel.overBasic ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
+    if ( TDLevel.overBasic ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_3d
     if ( TDLevel.overNormal && ! TDInstance.isDivingMode() ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_device
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_options
     menu_adapter.add( res.getString( menus[k++] ) );  // menu_help

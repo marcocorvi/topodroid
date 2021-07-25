@@ -234,7 +234,7 @@ public class TdManagerActivity extends Activity
     File[] tdconfigs = TDPath.scanTdconfigDir();
     if ( tdconfigs != null && tdconfigs.length > 0 ) {
       for ( File file : tdconfigs ) {
-        // Log.v("DistoX-TdManager", "activity update " + file.getAbsolutePath() );
+        Log.v("DistoX-TdManager", "activity update: path <" + file.getAbsolutePath() + "> name <" + file.getName() + ">" );
         mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath(), false ) ); // false: no save
       }
     } else {

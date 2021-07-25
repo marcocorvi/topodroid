@@ -28,6 +28,7 @@ class TdmFile
     } else {
       mName = surveyname;
     }
+    Log.v("DistoX", "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
   }
 
   public String getFilepath() { return mFilepath; }
