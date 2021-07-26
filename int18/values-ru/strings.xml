@@ -12,15 +12,15 @@
     <string name="new_survey_label">Новая съёмка</string>
     <string name="distox_label">Псевдоним DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
-  </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_title">Важное замечание по Android R</string>
+  <string name="r_dialog">
+В Android-R TopoDroid должен использовать свою папку в "Android/data". Если папкаTopoDroid не найдена она будет создана.\nВы можете импортировать zip-архивы своих старых съёмок.\n\nПомните, что файлы в новой папке TopoDroid удаляются при удалении программы TopoDroid.\n\n
+См. Подробности на веб сайте.\n
+  </string>
+  <string name="r_checkboxes">Вы должны подтвердить следующее:</string>
+  <string name="r_i_understood">Я полностью понял это уведомление.</string>
+  <string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string>
+  <string name="r_continue">ПРОДОЛЖИТЬ</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
