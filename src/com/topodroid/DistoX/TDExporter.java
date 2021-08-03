@@ -220,7 +220,7 @@ public class TDExporter
     pw.format("      <attachments>\n");
     if ( audio != null ) {
       // Log.v("DistoX", "audio " + audio.id + " " + audio.shotid + " blk " + bid );
-      String subdir = "audio/" + survey;
+      String subdir = survey + "/audio"; // "audio/" + survey;
       String name   = Long.toString(bid) + ".wav";
       if ( TDFile.hasMSfile( subdir, name ) ) {
         byte[] buf = readFileBytes( subdir, name );
@@ -232,7 +232,7 @@ public class TDExporter
     }
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
-      String subdir = "photo/" + survey;
+      String subdir = survey + "/photo"; // "photo/" + survey;
       String name   = Long.toString(photo.id) + ".jpg";
       if ( TDFile.hasMSfile( subdir, name ) ) {
         byte[] buf = readFileBytes( subdir, name );
@@ -1183,14 +1183,14 @@ public class TDExporter
   {
     if ( plots.size() == 0 ) return;
     for ( PlotInfo plt : plots ) {
-      boolean exists = TDFile.hasMSfile( "th2", info.name + "-" + plt.name + ".th2" );
-      // File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
-      // assert( plot_file.exists() == exists );
+      String subdir = TDInstance.survey + "/th"; // all THERION files in "th"
+      String filename =  info.name + "-" + plt.name + ".th2";
+      boolean exists = TDFile.hasMSfile( subdir, filename );
       if ( exists ) {
         if ( TDSetting.mTherionConfig ) {
-          pw.format("  input \"../th2/%s-%s.th2\"\n", info.name, plt.name );
+          pw.format("  input \"%s\"\n", filename );
         } else {
-          pw.format("  # input \"%s-%s.th2\"\n", info.name, plt.name );
+          pw.format("  # input \"%s\"\n", filename );
         }
       }
     } 
@@ -1198,15 +1198,15 @@ public class TDExporter
     for ( PlotInfo plt : plots ) {
       if ( PlotType.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
-        // Log.v("DistoX-EXP", plt.name + " is 2D sketch - scraps " + scrap_nr );
-        boolean exists = TDFile.hasMSfile( "th2", info.name + "-" + plt.name + ".th2" );
-        // File plot_file = TDFile.getFile( TDPath.getSurveyPlotTh2File( info.name, plt.name ) );
-        // assert( plot_file.exists() == exists );
+        String subdir = TDInstance.survey + "/th"; // all THERION files in "th"
+        String plotname =  info.name + "-" + plt.name;
+        String filename =  info.name + "-" + plt.name + ".th2";
+        boolean exists = TDFile.hasMSfile( subdir, filename );
         if ( exists ) {
           pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
-          pw.format("  #   %s-%s\n", info.name, plt.name );
+          pw.format("  #   %s\n", plotname );
           for ( int k=1; k<=scrap_nr; ++k) {
-            pw.format("  #   %s-%s%d\n", info.name, plt.name, scrap_nr );
+            pw.format("  #   %s%d\n", plotname, scrap_nr );
           }
           pw.format("  # endmap\n");
         } 
@@ -1552,7 +1552,7 @@ public class TDExporter
       pw.format("endsurvey\n");
       bw.flush();
 
-      if ( TDSetting.mTherionConfig ) { // end embed thconfig
+      if ( TDSetting.mTherionConfig && TDSetting.mExportUri ) { // end embed thconfig file 
         pw.format("endsource\n");
         pw.format("\n");
         pw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );

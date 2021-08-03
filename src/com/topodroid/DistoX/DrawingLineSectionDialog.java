@@ -161,7 +161,7 @@ class DrawingLineSectionDialog extends MyDialog
     mBtnDraw.setOnClickListener( this );
 
     if ( mPlotInfo != null ) { // check the photo
-      String subdir = "photo/" + TDInstance.survey;
+      String subdir = TDInstance.survey + "/photo"; // "photo/" + TDInstance.survey;
       String filename = mPlotInfo.name + ".jpg";
       mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
       File imagefile = TDFile.getTopoDroidFile( mFilename );

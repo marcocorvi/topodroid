@@ -3139,7 +3139,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.deleteSectionLine( line, scrap_name );
     // TDPath.deletePlotFileWithBackups( TDPath.getTh2File( scrap_name + ".th2" ) );
     TDPath.deletePlotFileWithBackups( TDPath.getTdrFile( scrap_name + ".tdr" ) );
-    TDFile.deleteFile( TDPath.getJpgFile( TDInstance.survey, xs_id + ".jpg" ) );
+    TDFile.deleteFile( TDPath.getJpgFile( xs_id + ".jpg" ) );
     // section point is deleted automatically
     // deleteSectionPoint( xs_id ); // delete section point and possibly clear section outline
     mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any

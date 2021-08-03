@@ -1849,7 +1849,8 @@ public class DrawingIO
 
   static private void doExportAnyCsxXSection( PrintWriter pw, String filename, String survey, String cave, String branch, /* String session, */ String bind /*, int format */ )
   {
-    if ( ! TDFile.hasMSfile( "tdr", filename ) ) return;
+    String subdir = survey + "/tdr";
+    if ( ! TDFile.hasMSfile( subdir, filename ) ) return;
     int version = 0;
     // boolean in_scrap = false;
     // int scrap_index = 0;

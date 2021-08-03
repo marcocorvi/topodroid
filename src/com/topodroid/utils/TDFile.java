@@ -324,11 +324,14 @@ public class TDFile
     return (file == null)? 0 : file.length();
   }
 
+  // @param subdir   folder, relative to CWD
   public static boolean hasMSdir( String subdir )
   {
     return getMSfile( subdir ).exists();
   }
 
+  // @param subdir   folder, relative to CWD
+  // @param name     filename, relarive to the folder
   public static boolean hasMSfile( String subdir, String name )
   {
     File dir = getMSfile( subdir );

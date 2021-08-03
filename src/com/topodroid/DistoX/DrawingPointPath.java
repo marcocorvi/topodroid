@@ -487,7 +487,7 @@ public class DrawingPointPath extends DrawingPath
       pw.format("    <crosssection>\n" );
       exportTCsxXSection( pw, section, survey, cave, branch );
       pw.format("    </crosssection>\n" );
-      String subdir = "photo/" + TDInstance.survey;
+      String subdir = TDInstance.survey + "/photo"; // "photo/" + TDInstance.survey;
       String filename = section.name + ".jpg";
       if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( TDFile.hasMSpath( imagefilename ) )
         byte[] buf = TDExporter.readFileBytes( subdir, filename );

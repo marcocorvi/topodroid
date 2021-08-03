@@ -58,6 +58,7 @@ public class TDPath
   final static String THCONFIG = ".thconfig";
   // final static String TDCONFIG = ".tdconfig";
 
+  // used by Archiver, and Symbol*Library (thru TDFile)
   static String getSymbolPointDirname() { return "point"; } // "symbol/point"
   static String getSymbolLineDirname()  { return "line"; }  // "symbol/line"
   static String getSymbolAreaDirname()  { return "area"; }  // "symbol/area"
@@ -237,40 +238,41 @@ public class TDPath
     } else {
       Log.v("DistoX", "set survey path " + survey + " base " + PATH_CW_DIR );
       APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;  checkFilesystemDirs( APP_SURVEY_PATH );
-      APP_TDR_PATH   = APP_SURVEY_PATH + "/tdr";     checkFilesystemDirs( APP_TDR_PATH );
-      APP_C3D_PATH   = APP_SURVEY_PATH + "/c3d";     checkFilesystemDirs( APP_C3D_PATH );
-      APP_NOTE_PATH  = APP_SURVEY_PATH + "/note";    checkFilesystemDirs( APP_NOTE_PATH );
-      APP_PHOTO_PATH = APP_SURVEY_PATH + "/photo";   checkFilesystemDirs( APP_PHOTO_PATH );
-      APP_AUDIO_PATH = APP_SURVEY_PATH + "/audio";   checkFilesystemDirs( APP_AUDIO_PATH );
+      String root = APP_SURVEY_PATH;
+      APP_TDR_PATH   = root + "/tdr";     checkFilesystemDirs( APP_TDR_PATH );
+      APP_C3D_PATH   = root + "/c3d";     checkFilesystemDirs( APP_C3D_PATH );
+      APP_NOTE_PATH  = root + "/note";    checkFilesystemDirs( APP_NOTE_PATH );
+      APP_PHOTO_PATH = root + "/photo";   checkFilesystemDirs( APP_PHOTO_PATH );
+      APP_AUDIO_PATH = root + "/audio";   checkFilesystemDirs( APP_AUDIO_PATH );
 
-      APP_CAVE_PATH = APP_SURVEY_PATH + "/cave";   // Polygon
-      APP_CAV_PATH  = APP_SURVEY_PATH + "/cav";    // Topo
-      APP_CSV_PATH  = APP_SURVEY_PATH + "/csv";    // CSV text
-      APP_CSX_PATH  = APP_SURVEY_PATH + "/csx";    // cSurvey
-      APP_DAT_PATH  = APP_SURVEY_PATH + "/dat";    // Compass
-      APP_GRT_PATH  = APP_SURVEY_PATH + "/grt";    // Grottolf
-      APP_GTX_PATH  = APP_SURVEY_PATH + "/gtx";    // GHTopo
-      APP_DXF_PATH  = APP_SURVEY_PATH + "/dxf";    
-      APP_KML_PATH  = APP_SURVEY_PATH + "/kml";    
-      APP_JSON_PATH = APP_SURVEY_PATH + "/json";   
-      APP_PLT_PATH  = APP_SURVEY_PATH + "/plt";    // trackfile
-      APP_PNG_PATH  = APP_SURVEY_PATH + "/png";    
-      APP_PDF_PATH  = APP_SURVEY_PATH + "/pdf";    
-      APP_SHP_PATH  = APP_SURVEY_PATH + "/shp";    // shapefile
+      APP_CAVE_PATH = root + "/cave";   // Polygon
+      APP_CAV_PATH  = root + "/cav";    // Topo
+      APP_CSV_PATH  = root + "/csv";    // CSV text
+      APP_CSX_PATH  = root + "/csx";    // cSurvey
+      APP_DAT_PATH  = root + "/dat";    // Compass
+      APP_GRT_PATH  = root + "/grt";    // Grottolf
+      APP_GTX_PATH  = root + "/gtx";    // GHTopo
+      APP_DXF_PATH  = root + "/dxf";    
+      APP_KML_PATH  = root + "/kml";    
+      APP_JSON_PATH = root + "/json";   
+      APP_PLT_PATH  = root + "/plt";    // trackfile
+      APP_PNG_PATH  = root + "/png";    
+      APP_PDF_PATH  = root + "/pdf";    
+      APP_SHP_PATH  = root + "/shp";    // shapefile
       RELATIVE_SHP_TEMP = survey + "/shp/tmp";
-      APP_SRV_PATH  = APP_SURVEY_PATH + "/srv";    // Walls
-      APP_SUR_PATH  = APP_SURVEY_PATH + "/sur";    // WinKarst
-      APP_SVG_PATH  = APP_SURVEY_PATH + "/svg";    
-      APP_SVX_PATH  = APP_SURVEY_PATH + "/svx";    // Survex
-      APP_TH_PATH   = APP_SURVEY_PATH + "/th";     // 
+      APP_SRV_PATH  = root + "/srv";    // Walls
+      APP_SUR_PATH  = root + "/sur";    // WinKarst
+      APP_SVG_PATH  = root + "/svg";    
+      APP_SVX_PATH  = root + "/svx";    // Survex
+      APP_TH_PATH   = root + "/th";     // 
       // APP_TDR3_PATH = null;  
-      // APP_TH2_PATH  = APP_SURVEY_PATH + "/th";     // 
+      // APP_TH2_PATH  = root + "/th";     // 
       // APP_TH3_PATH = null; 
-      APP_TNL_PATH  = APP_SURVEY_PATH + "/tnl";    // Tunnel
-      APP_TOP_PATH  = APP_SURVEY_PATH + "/top";    // PocketTopo
-      APP_TRB_PATH  = APP_SURVEY_PATH + "/trb";    // TopoRobot
-      APP_TRO_PATH  = APP_SURVEY_PATH + "/tro";    // VisualTopo
-      APP_XVI_PATH  = APP_SURVEY_PATH + "/xvi";    
+      APP_TNL_PATH  = root + "/tnl";    // Tunnel
+      APP_TOP_PATH  = root + "/top";    // PocketTopo
+      APP_TRB_PATH  = root + "/trb";    // TopoRobot
+      APP_TRO_PATH  = root + "/tro";    // VisualTopo
+      APP_XVI_PATH  = root + "/xvi";    
       // APP_TLX_PATH = null; 
     }
   }
@@ -313,11 +315,17 @@ public class TDPath
   // ------------------------------------------------------------------
   // FILE NAMES
 
-  static String getSqlFile() { return APP_SURVEY_PATH + "/survey.sql"; }
-
   public static String getPathBase() { return PATH_CW_DIR; }
 
+  // used by Archiver
+  static String getSqlFile() { return APP_SURVEY_PATH + "/survey.sql"; }
+
+  // used by Archiver, TopoDroidApp
   static String getManifestFile() { return PATH_TMP + "/manifest"; }
+
+  // used by Archiver
+  static String getDirFile( String name )        { return APP_SURVEY_PATH + "/" + name; }
+
   // static String getSymbolFile( String name ) { return name; }
 
   static boolean hasTdrDir() { return TDFile.hasTopoDroidFile( APP_TDR_PATH ); } // DistoX-SAF
@@ -326,11 +334,8 @@ public class TDPath
   static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
 
-  // used by Archiver
-  static String getDirFile( String name )        { return APP_SURVEY_PATH + "/" + name; }
-
-  public static String getZipFile( String name ) { return PATH_ZIP + "/" + name; }
-  public static String getTmpFile( String name ) { return PATH_TMP + "/" + name; }
+  public static String getZipFile( String name ) { return PATH_ZIP     + "/" + name; }
+  public static String getTmpFile( String name ) { return PATH_TMP     + "/" + name; }
   public static String getTdrFile( String name ) { return APP_TDR_PATH + "/" + name; }
   public static String getC3dFile( String name ) { return APP_C3D_PATH + "/" + name; }
 
@@ -339,12 +344,14 @@ public class TDPath
 
   public static String getManFileName( String name ) { return "man/" + name; }
 
-  static String getNoteFile( String name )              { return APP_NOTE_PATH  + "/" + name; }
-  static String getJpgDir( String dir )                 { return APP_PHOTO_PATH; }
-  static String getJpgFile( String dir, String name )   { return APP_PHOTO_PATH  + "/" + name; }
-  static String getAudioDir( String dir )               { return APP_AUDIO_PATH; }
-  static String getAudioFile( String dir, String name ) { return APP_AUDIO_PATH + "/" + name; }
+  // these are used to get files and folders for the current survey
+  static String getJpgDir( )                { return APP_PHOTO_PATH; }
+  static String getAudioDir( )              { return APP_AUDIO_PATH; }
+  static String getNoteFile( String name )  { return APP_NOTE_PATH  + "/" + name; }
+  static String getJpgFile( String name )   { return APP_PHOTO_PATH + "/" + name; }
+  static String getAudioFile( String name ) { return APP_AUDIO_PATH + "/" + name; }
 
+  // @parm name   (reduced) plot name
   static String getSurveyPlotTdrFile( String survey, String name ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr" ; }
   static String getSurveyPlotC3dFile( String survey, String name ) { return APP_C3D_PATH + "/" + survey + "-" + name + ".c3d" ; }
 
@@ -420,10 +427,13 @@ public class TDPath
 
   static File[] getZipFiles() { return getFiles( PATH_ZIP, new String[] { ZIP } ); } // DistoX-SAF
 
-  // static String getSurveyPhotoFile( String survey, String name ) { return APP_PHOTO_PATH + "/" + survey + "/" + name; }
 
+  // these are used to get the folders when the survey does not exist yet (on import)
   static String getSurveyPhotoDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/photo"; }
   static String getSurveyAudioDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/audio"; }
+
+  static String getSurveyPhotoFile( String survey, String name ) { return PATH_CW_DIR + "/" + survey + "/photo/" + name; }
+  static String getSurveyAudioFile( String survey, String name ) { return PATH_CW_DIR + "/" + survey + "/audio/" + name; }
 
   static String getSurveyJpgFile( String survey, String id )
   {

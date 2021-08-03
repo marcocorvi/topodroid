@@ -136,11 +136,10 @@ class AudioListDialog extends MyDialog
   {
     AudioInfo audio = mAudios.get( pos );
     if ( audio != null ) { 
-      String subdir = "audio/" + TDInstance.survey;
+      String subdir = TDInstance.survey + "/audio"; // "audio/" + TDInstance.survey;
       String name   = Long.toString( audio.fileIdx ) + ".wav";
-      String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
-      // File file = TDFile.getFile( filepath );
       if ( TDFile.hasMSfile( subdir, name ) ) { // if ( file.exists() )
+        String filepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString( audio.fileIdx ) );
         startPlay( filepath );
       // } else {
       //   // TDLog.Error("audio file does not exist");
