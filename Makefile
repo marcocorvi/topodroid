@@ -1,16 +1,22 @@
+ANT    = /home/programs/apache-ant-1.8.2/bin/ant
+CC     = gcc
+CPLUS  = g++
+AR     = ar
+CFLAGS = -g -O0 -Wall -DMAIN
+
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 
 default:
-	ant debug
+	$(ANT) debug
 
 release:
-	ant release
+	$(ANT) release
 	mv bin/TopoDroid-release.apk TopoDroid-$(VERSION).apk
 	ls -l TopoDroid-$(VERSION).apk
 	md5sum TopoDroid-$(VERSION).apk
 
 signed:
-	ant release
+	$(ANT) release
 	./howto/sign.sh
 
 install:
@@ -24,11 +30,11 @@ reinstall:
 	adb install -r bin/TopoDroid-debug.apk
 
 rebuild:
-	ant clean
-	ant debug
+	$(ANT) clean
+	$(ANT) debug
 
 less:
-	ant debug 2>&1 | less
+	$(ANT) debug 2>&1 | less
 
 pdf:
 	./howto/pdf.sh
@@ -37,7 +43,7 @@ manual:
 	./howto/pdf.sh
 
 clean:
-	ant clean
+	$(ANT) clean
 
 symbols:
 	./howto/symbols.sh

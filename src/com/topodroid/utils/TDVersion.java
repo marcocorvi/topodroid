@@ -70,9 +70,14 @@ public class TDVersion
     PackageManager pm = context.getPackageManager();
     try { 
       PackageInfo info = pm.getPackageInfo( package_name, PackageManager.GET_META_DATA );
-      if ( info == null ) return -2;
+      if ( info == null ) {
+        Log.e("DistoX-Cave3D", "null package info"); 
+        return -2;
+      }
+      Log.e("DistoX-Cave3D", "Version " + info.versionCode + " " + min_version );
       return ( info.versionCode < min_version )? 1 : 0;
     } catch ( NameNotFoundException e) {
+      Log.e("DistoX-Cave3D", "package name not found"); 
       // nothing
     }
     return -1;

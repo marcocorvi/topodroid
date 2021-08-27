@@ -50,6 +50,7 @@ import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.os.Build;
 import android.app.Activity;
 
 import android.content.res.Resources;
@@ -206,6 +207,10 @@ public class TdmConfigActivity extends Activity
       // lp.height = size;
 
       // FIXME TDMANAGER
+
+      // exclude 3D on Android-R and beyond
+      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) mNrButton1 --;
+
       mButton1 = new Button[mNrButton1];
 
       for (int k=0; k<mNrButton1; ++k ) {
@@ -400,7 +405,7 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+    } else if ( k1 < mNrButton1 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R && b0 == mButton1[k1++] ) {  // 3D
       int check = TDVersion.checkCave3DVersion( this );
       if ( check < 0 ) {
         TDToast.makeBad( R.string.no_cave3d );

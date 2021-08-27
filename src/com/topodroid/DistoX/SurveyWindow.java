@@ -69,6 +69,8 @@ import android.view.KeyEvent;
 // import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
+import android.os.Build;
+
 import android.net.Uri;
 import android.net.Uri.Builder;
 
@@ -86,6 +88,8 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_sensor,
 			R.drawable.iz_empty
                      };
+  private static final int INDEX_3D = 2; // index of button-3D if any
+
   private static final int[] menus = {
                         R.string.menu_close,
                         R.string.menu_export,
@@ -285,6 +289,7 @@ public class SurveyWindow extends Activity
     mButton1 = new Button[ mNrButton1 + 1 ];
     int kb = 0;
     for ( int k=0; k < mNrButton1; ++k ) {
+      if ( k == INDEX_3D && Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) continue;
       mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
     }
     mNrButton1 = kb;
@@ -351,7 +356,7 @@ public class SurveyWindow extends Activity
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+    } else if ( k < mNrButton1 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R && b == mButton1[k++] ) {  // 3D
       do3D();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
       mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
