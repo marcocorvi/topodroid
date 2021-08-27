@@ -671,7 +671,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="button_add"       >Hozzáad       </string -->
     <string name="button_apply"     >Alkalmaz</string>
     <string name="button_back"      >Vissza</string>
-    <string name="button_cancel"    >Kilép</string>
+    <string name="button_cancel"    >Mégse</string>
     <string name="button_change"    >Változtat</string>
     <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
@@ -683,7 +683,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
     <string name="button_surface"   >Felület</string>
-    <string name="button_no_extend" >Nincs kiterítés </string>
+    <string name="button_no_extend" >Nincs kiterítés</string>
     <string name="button_eval"      >Nyers</string>
     <string name="button_evalg"     >G</string>
     <string name="button_evalm"     >M</string>
