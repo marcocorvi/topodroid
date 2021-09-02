@@ -5060,7 +5060,7 @@ public class DrawingWindow extends ItemDrawer
         if ( mHotItemType == DrawingPath.DRAWING_PATH_LINE || mHotItemType == DrawingPath.DRAWING_PATH_AREA ) {
           // ----- DUPLICATE LINE/AREA POINT - INSERT LINE/AREA POINTS IN RANGE
           //
-          boolean pointwise = SelectionRange.isPoint( mDoEditRange );
+          final boolean pointwise = SelectionRange.isPoint( mDoEditRange );
           text = getString( pointwise? R.string.popup_split_pt : R.string.popup_split_pts );
           myTextView2 = CutNPaste.makePopupButton( mActivity, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {

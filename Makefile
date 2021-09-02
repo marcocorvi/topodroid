@@ -4,6 +4,9 @@ CPLUS  = g++
 AR     = ar
 CFLAGS = -g -O0 -Wall -DMAIN
 
+# verbose flag for ANT
+AFLAGS = -v 
+
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 
 default:
@@ -18,6 +21,10 @@ release:
 signed:
 	$(ANT) release
 	./howto/sign.sh
+
+bundle:
+	$(ANT) release
+	./bundle.sh
 
 install:
 	adb install -r bin/TopoDroid-debug.apk
@@ -45,6 +52,9 @@ manual:
 clean:
 	$(ANT) clean
 
+bclean:
+	rm -rf bbin
+
 symbols:
 	./howto/symbols.sh
 
@@ -62,6 +72,7 @@ SRC = \
   ./ant/* \
   ./studio/* \
   ./build.xml \
+  ./bundle.sh \
   ./LICENSE \
   ./COPYING \
   ./Makefile \
@@ -74,19 +85,39 @@ SRC = \
   ./firmware/* \
   ./int18/*/* \
   ./res/values/* \
-  ./res/layout/* \
-  ./res/drawable/* \
-  ./res/mipmap-*/* \
-  ./res/raw/* \
   ./res/values-normal/* \
   ./res/values-small/* \
   ./res/values-large/* \
-  ./res/xml/* \
+  ./res/layout/* \
+  ./res/layout-v22/* \
+  ./res/drawable/* \
+  ./res/mipmap-*/* \
+  ./res/raw/* \
+  ./res/xml-v22/* \
   ./symbols-git/*/*/* \
   ./save/* \
   ./utils/* \
-  ./unused/* \
-  ./src/com/topodroid/*/* 
+  ./unused/idea/* \
+  ./unused/TopoDroid-icon/* \
+  ./src/com/topodroid/common/*.java \
+  ./src/com/topodroid/calib/*.java \
+  ./src/com/topodroid/dev/*.java \
+  ./src/com/topodroid/dev/*/*.java \
+  ./src/com/topodroid/DistoX/*.java \
+  ./src/com/topodroid/dln/*.java \
+  ./src/com/topodroid/help/*.java \
+  ./src/com/topodroid/inport/*.java \
+  ./src/com/topodroid/io/*/*.java \
+  ./src/com/topodroid/mag/*.java \
+  ./src/com/topodroid/math/*.java \
+  ./src/com/topodroid/num/*.java \
+  ./src/com/topodroid/packetX/*.java \
+  ./src/com/topodroid/prefs/*.java \
+  ./src/com/topodroid/ptopo/*.java \
+  ./src/com/topodroid/tdm/*.java \
+  ./src/com/topodroid/trb/*.java \
+  ./src/com/topodroid/ui/*.java \
+  ./src/com/topodroid/utils/*.java
 
 version:
 	echo $(VERSION)

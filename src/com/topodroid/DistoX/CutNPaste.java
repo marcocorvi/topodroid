@@ -179,13 +179,13 @@ class CutNPaste
    */
   static PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data, boolean do_clear )
   {
+    final Resources res = context.getResources();
     final ListerHandler lister = new ListerHandler( ilister );
     LinearLayout popup_layout  = new LinearLayout( context );
     popup_layout.setOrientation(LinearLayout.VERTICAL);
     int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
     int lWidth = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-    Resources res = context.getResources();
     // ----- RESET BT
     //
     String text = res.getString(R.string.remote_reset);

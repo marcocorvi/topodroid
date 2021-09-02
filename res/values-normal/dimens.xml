@@ -1,1 +1,48 @@
-../values/dimens.xml
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+  <string name="default_textsize" translatable="false">22</string>
+  <string name="default_buttonsize" translatable="false">3</string>
+
+<!-- MATERIAL
+  <dimen name="activity_horizontal_margin">16dp</dimen>
+  <dimen name="activity_vertical_margin">16dp</dimen>
+  <dimen name="nav_drawer_width">260dp</dimen>
+-->
+  <!-- dimen name="size">14sp</dimen -->
+  <dimen name="sizeplus">16sp</dimen>
+
+  <dimen name="titlesize">18sp</dimen>
+
+  <!-- dimen name="textsizesmall">12sp</dimen -->
+  <dimen name="textsize">14sp</dimen>
+  <dimen name="textsizehead">16sp</dimen>
+  <dimen name="textsizebig">18sp</dimen>
+  <dimen name="textsizehuge">24sp</dimen>
+
+  <dimen name="padding">2dp</dimen>
+  <dimen name="paddingh">6dp</dimen>
+  <dimen name="paddingv">3dp</dimen>
+  <dimen name="paddingmedium">5dp</dimen>
+  <dimen name="paddingbig">10dp</dimen>
+
+  <dimen name="marginhsmall">9dp</dimen>
+  <dimen name="marginh">15dp</dimen>
+  <dimen name="marginv">10dp</dimen>
+  <dimen name="marginvbig">25dp</dimen>
+
+  <dimen name="margintiny">2dp</dimen>
+  <dimen name="marginsmall">5dp</dimen>
+  <dimen name="marginnormal">10dp</dimen>
+  <dimen name="marginhuge">40dp</dimen>
+
+  <dimen name="dividersmall">2dp</dimen>
+  <!-- dimen name="divider">5dp</dimen -->
+  <dimen name="dividerbig">10dp</dimen>
+
+  <string name="dimxp" translatable="false">1.6f</string>
+  <string name="dimxl" translatable="false">2.2f</string>
+  <string name="dimyl" translatable="false">1.9f</string>
+  <!-- string name="dimpd" translatable="false">2</string -->
+  <string name="dimmx" translatable="false">5</string>
+  <string name="dimmy" translatable="false">2</string>
+</resources>
