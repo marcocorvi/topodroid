@@ -699,7 +699,8 @@ public class OverviewWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    // Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    Log.v("DistoX", "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+
     if ( TDSetting.mExportUri ) { // FIXME_URI
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
       intent.setType( TDConst.mMimeType[ mExportIndex ] );
@@ -707,7 +708,8 @@ public class OverviewWindow extends ItemDrawer
       // intent.putExtra( "exporttype", index ); // index is not returned to the app
       startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
     } else {
-      saveWithExt( null, mExportExt );
+      // saveWithExt( null, mExportExt );
+      doUriExport( null );
     }
   }
 
@@ -734,8 +736,7 @@ public class OverviewWindow extends ItemDrawer
   // interface IExporter FIXME_URI
   public void doUriExport( Uri uri ) 
   {
-    // Log.v("DistoX", "Overview export " + export_type );
-    // int index = TDConst.plotExportIndex( export_type );
+    Log.v("DistoX", "Overview URI export " + mExportIndex );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
       case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
@@ -743,6 +744,9 @@ public class OverviewWindow extends ItemDrawer
       case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shp" ); break;
       case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
       case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
+      default:
+        Log.e("DistoX", "Unexpected export index " + mExportIndex );
+        break;
     }
   }
 
@@ -753,6 +757,8 @@ public class OverviewWindow extends ItemDrawer
     if ( fullname != null ) {
       DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
       doSavePdf( uri, manager, fullname );
+    } else {
+      Log.e("DistoX", "ERROR PDF fullname is null");
     }
   }
 
@@ -763,8 +769,13 @@ public class OverviewWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT ) { // pre API-19
+      TDToast.makeBad( R.string.no_feature_pdf );
+      return;
+    }
+    Log.v("DistoX", "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
 
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // Log.v("DistoX", "Overview PDF export <" + filename + ">");

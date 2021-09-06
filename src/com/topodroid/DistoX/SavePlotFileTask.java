@@ -213,7 +213,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         try {
           BufferedWriter bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
           DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
-          bw.flush();
+          // bw.flush(); // FIXME necessary ???
           bw.close();
         } catch ( IOException e ) { Log.v("DistoX", e.getMessage() ); e.printStackTrace(); }
 	return true;
