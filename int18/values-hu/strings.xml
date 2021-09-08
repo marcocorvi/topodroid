@@ -758,10 +758,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
-    <string name="layer_floor">Talp</string>
-    <string name="layer_fill">Kitöltés</string>
-    <string name="layer_ceil">Plafon</string>
-    <string name="layer_arti">Műtárgyak</string>
+    <string name="layer_floor">Talp F</string>
+    <string name="layer_fill">Kitöltés D</string>
+    <string name="layer_ceil">Plafon C</string>
+    <string name="layer_arti">Műtárgyak A</string>
     <!-- UNUSED string name="layer_form">Formák</string -->
     <!-- UNUSED string name="layer_water">Víz</string -->
     <!-- UNUSED string name="layer_text">Szöveg</string -->
