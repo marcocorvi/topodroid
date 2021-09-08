@@ -967,7 +967,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_lrud_from">JBFL a kezdő ponton</string>
     <string name="export_maps">Térkép az adatok előtt</string>
     <string name="export_prefix">Barlang-előtag a pont neveknél</string>
-    <string name="export_roundtrip">Körzárás</string><!--Roundtrip-->
+    <string name="export_roundtrip">Körvonal</string><!--Roundtrip-->
     <string name="export_scale_png">Felbontás</string>
     <string name="export_scale_th">Skála 1 :</string>
     <string name="export_splays">Segédmérések</string>
