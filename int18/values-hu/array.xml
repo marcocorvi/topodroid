@@ -33,7 +33,7 @@
   </string-array>
 
   <string-array name="lineContinue">
-     <item name="none">none</item>
+     <item name="none">nincs</item>
      <item name="start">kapcsolódás a kezdő ponthoz</item>
      <item name="end">kapcsolódás a végponthoz</item>
      <item name="both">kapcsolódás mindkét véghez</item>
@@ -48,15 +48,15 @@
 
   <string-array name="unitMeasure">
      <item name="grid_cell">háló méret</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
+     <item name="meter">méter</item>
+     <item name="tf">láb</item>
   </string-array>
 
   <string-array name="loopClosure">
-     <item name="none">Nincs</item>
-     <item name="normal">Normál</item>
-     <item name="weighted">Súlyozott</item>
-     <item name="triangles">Háromszögek</item>
+     <item name="none">nincs</item>
+     <item name="normal">normál</item>
+     <item name="weighted">súlyozott</item>
+     <item name="triangles">háromszögek</item>
   </string-array>
 
   <string-array name="survexEol">

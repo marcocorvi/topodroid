@@ -758,10 +758,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="mode_outline">Csak körvonal</string>
     <string name="mode_scale_ref">Vonalas lépték</string>
 
-    <string name="layer_floor">Talp</string>
-    <string name="layer_fill">Kitöltés</string>
-    <string name="layer_ceil">Plafon</string>
-    <string name="layer_arti">Műtárgyak</string>
+    <string name="layer_floor">Talp F</string>
+    <string name="layer_fill">Kitöltés D</string>
+    <string name="layer_ceil">Plafon C</string>
+    <string name="layer_arti">Műtárgyak A</string>
     <!-- UNUSED string name="layer_form">Formák</string -->
     <!-- UNUSED string name="layer_water">Víz</string -->
     <!-- UNUSED string name="layer_text">Szöveg</string -->
@@ -967,7 +967,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_lrud_from">JBFL a kezdő ponton</string>
     <string name="export_maps">Térkép az adatok előtt</string>
     <string name="export_prefix">Barlang-előtag a pont neveknél</string>
-    <string name="export_roundtrip">Körzárás</string><!--Roundtrip-->
+    <string name="export_roundtrip">Körvonal</string><!--Roundtrip-->
     <string name="export_scale_png">Felbontás</string>
     <string name="export_scale_th">Skála 1 :</string>
     <string name="export_splays">Segédmérések</string>
@@ -1518,7 +1518,7 @@ A részletekért keresse fel a weboldalakat.\n
   <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
   <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
   <string name="pref_plot_shift_title">Vázlat mozgatás/nagyítás</string>
-  <string name="pref_plot_shift_summary">Vázlat mosgatás és nagyítás engedélyezése</string>
+  <string name="pref_plot_shift_summary">Vázlat mozgatás és nagyítás engedélyezése</string>
   <string name="pref_splay_alpha_title">Segédmérés átlátszóság</string>
   <string name="pref_splay_alpha_summary">Segédmérés átlátszóság [0: átlátszó, 100: áttetsző]</string>
 
