@@ -309,7 +309,7 @@ public class MainWindow extends Activity
           TDToast.makeBad( R.string.no_cave3d );
         } else { // start Cave3D even if the version is below required mimimum
           try {
-            intent = new Intent( "Cave3D.intent.action.Launch" );
+            intent = new Intent( "Cave3D.intent.action.Launch" ); // FIXME CAVE3D
             startActivity( intent );
           } catch ( ActivityNotFoundException e ) {
             TDToast.makeBad( R.string.no_cave3d );

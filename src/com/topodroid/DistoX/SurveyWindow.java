@@ -405,7 +405,7 @@ public class SurveyWindow extends Activity
         TDToast.makeBad( R.string.no_cave3d );
       } else if ( check == 0 ) {
         try {
-          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          Intent intent = new Intent( "Cave3D.intent.action.Launch" ); // FIXME CAVE3D
           intent.putExtra( "INPUT_SURVEY", TDInstance.survey );   // survey name
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() ); // current work directory - full path
             // uri string is "/storage/emulated/0/TopoDroid" so the same string as from getPathBase()

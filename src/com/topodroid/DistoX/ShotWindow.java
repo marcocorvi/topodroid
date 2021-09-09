@@ -810,7 +810,7 @@ public class ShotWindow extends Activity
           TDToast.makeBad( R.string.no_cave3d );
         } else if ( check == 0 ) {
           try {
-            Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+            Intent intent = new Intent( "Cave3D.intent.action.Launch" ); // FIXME CAVE3D
             intent.putExtra( "INPUT_SURVEY", TDInstance.survey );
             intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );
             mActivity.startActivity( intent );

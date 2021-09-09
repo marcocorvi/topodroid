@@ -414,7 +414,7 @@ public class TdmConfigActivity extends Activity
       } else {
         try {
           // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
-          Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          Intent intent = new Intent( "Cave3D.intent.action.Launch" ); // FIXME CAVE3D
           intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
           startActivity( intent );
