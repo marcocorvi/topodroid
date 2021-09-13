@@ -953,6 +953,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_trox">Trox format</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
+    <!-- TODO string name="export_with_reference">Include XY reference</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->

@@ -954,6 +954,7 @@
     <string name="export_trox">Формат Trox</string>
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
+    <!-- TODO string name="export_with_reference">Include XY reference</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->

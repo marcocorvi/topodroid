@@ -972,6 +972,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_trox">Trox format</string -->
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
+    <!-- TODO string name="export_with_reference">Include XY reference</string -->
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
