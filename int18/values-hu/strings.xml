@@ -1358,7 +1358,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_backsight_title">Visszamérés</string>
   <string name="pref_backsight_summary">Visszamérés mező az új mérés párbeszéd ablakban</string>
   <string name="pref_backshot_title">DistoX visszamérés</string>
-  <string name="pref_backshot_summary">Megcsaeréli a pontokat DistoX visszamérésnél</string>
+  <string name="pref_backshot_summary">Megcseréli a pontokat DistoX visszamérésnél</string>
   <string name="pref_prev_next_title">Előző/Köv. gombok</string>
   <string name="pref_prev_next_summary">Előző/Köv. gombok a mérés párbeszéd ablakban</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Mágneses anomália</string -->
