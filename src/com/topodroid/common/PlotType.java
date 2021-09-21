@@ -11,8 +11,8 @@
  */
 package com.topodroid.common;
 
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDInstance;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.TDInstance;
 
 import android.content.res.Resources;
 

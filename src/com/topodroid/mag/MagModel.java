@@ -19,7 +19,8 @@
  */
 package com.topodroid.mag;
 
-import android.util.Log;
+import com.topodroid.utils.TDLog;
+
 import java.util.Locale;
 
 // MAGtype_MagneticModel;
@@ -47,14 +48,14 @@ class  MagModel
 
   void setCoeffs( WMMcoeff[] data )
   {
-    // Log.v("DistoX", "model set coeff nTerms " + nTerms  + " size " + data.length );
+    // TDLog.v( "model set coeff nTerms " + nTerms  + " size " + data.length );
     int len = data.length;
     for ( int k = 0; k<len; ++k ) {
       WMMcoeff wmm = data[k];
       if ( wmm == null ) continue;
       int index = wmm.index();
       if ( index > nTerms ) {
-    	Log.e("DistoX", ">>>> index > nTerms " + index  + " size " + data.length );
+    	TDLog.Error( ">>>> index > nTerms " + index  + " size " + data.length );
       }
       Main_Field_Coeff_G[ index ]  = wmm.v0;
       Main_Field_Coeff_H[ index ]  = wmm.v1;
@@ -73,20 +74,20 @@ class  MagModel
 
   // void debugCoeff( double[] coeff )
   // {
-  //   Log.v("DistoX", "MaG Model " + nTerms + " max " + nMax );
+  //   TDLog.v( "MaG Model " + nTerms + " max " + nMax );
   //   for ( int n=0; n<=nMax; ++n ) {
   //     StringBuilder sb = new StringBuilder();
   //     for ( int m=0; m<=n; ++m ) {
   //       int k = (n *(n+1))/2+m;
   //       sb.append( String.format(Locale.US, "%.8f ", coeff[k] ) );
   //     }
-  //     Log.v("DistoX", sb.toString() );
+  //     TDLog.v( sb.toString() );
   //   }
   // }
     
   MagModel( int nt, int nm, int nmsv )
   {
-    // Log.v("DistoX", "MaG Model cstr " + nt + " " + nm + " " + nmsv );
+    // TDLog.v( "MaG Model cstr " + nt + " " + nm + " " + nmsv );
     nTerms = nt;
     nMax   = nm;
     nMaxSecVar = nmsv;
@@ -113,7 +114,7 @@ class  MagModel
    * leaving the other coefficients untouched*/
   void assignCoeffs( MagModel Source, int nMax, int nMaxSecVar)
   {
-    // Log.v("DistoX", "MaG Model assign coeffs " + nMax + " " + nMaxSecVar );
+    // TDLog.v( "MaG Model assign coeffs " + nMax + " " + nMaxSecVar );
     // assert(nMax <= Source.nMax);
     // assert(nMax <= Assignee.nMax);
     // assert(nMaxSecVar <= Source.nMaxSecVar);
@@ -159,7 +160,7 @@ class  MagModel
   MagModel getTimelyModifyModel( MagDate date )
   {
     double dy = (date.DecimalYear - epoch);
-    // Log.v("DistoX", "MaG Model get time-modified model " + dy );
+    // TDLog.v( "MaG Model get time-modified model " + dy );
     // date.debugDate();
 
     MagModel ret = new MagModel( nTerms, nMax, nMaxSecVar );

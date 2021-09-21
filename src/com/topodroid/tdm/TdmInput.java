@@ -15,8 +15,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
-import android.util.Log;
-
 class TdmInput extends TdmSurvey
               implements View.OnClickListener
 {

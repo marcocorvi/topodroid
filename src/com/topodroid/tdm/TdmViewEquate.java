@@ -20,8 +20,6 @@ import android.graphics.Matrix;
 
 import android.widget.CheckBox;
 
-import android.util.Log;
-
 class TdmViewEquate
 {
   TdmEquate mEquate;
@@ -71,9 +69,9 @@ class TdmViewEquate
 
   // void dump()
   // {
-  //   Log.v("TdManager", "equate (size " + mStations.size() + ")" );
+  //   TDLog.v("equate (size " + mStations.size() + ")" );
   //   for ( TdmViewStation vst : mStations )
-  //     Log.v("TdManager", "  station: " + vst.mStation.mName + " " + vst.mCommand.name() );
+  //     TDLog.v("  station: " + vst.mStation.mName + " " + vst.mCommand.name() );
   // }
 
   void draw( Canvas canvas, Matrix matrix, Paint paint )

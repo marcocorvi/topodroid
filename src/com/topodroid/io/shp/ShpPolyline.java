@@ -15,12 +15,12 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.LinePoint;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.LinePoint;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,8 +33,6 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;   
 
 import java.util.List;
-
-// import android.util.Log;
 
 // This class handles lines and areas
 public class ShpPolyline extends ShpObject
@@ -86,8 +84,8 @@ public class ShpPolyline extends ShpObject
     int dbfLength = 33 + n_fld * 32 + nrs * dbfRecLen; // Bytes, 2 fields
 
     setBoundsLines( lns, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POLYLINEZ shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
+    // TDLog.v( "POLYLINEZ shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength, 2*shxLength, dbfLength );
@@ -95,7 +93,7 @@ public class ShpPolyline extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, geomType, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, geomType, shxLength );
     writeDBaseHeader( nrs, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "shots done headers" );
+    // TDLog.v( "shots done headers" );
 
     int cnt = 1;
     int offset = 50;
@@ -130,7 +128,7 @@ public class ShpPolyline extends ShpObject
         ++cnt;
       }
     }
-    // Log.v("DistoX", "shots done records" );
+    // TDLog.v( "shots done records" );
     close();
     return true;
   }

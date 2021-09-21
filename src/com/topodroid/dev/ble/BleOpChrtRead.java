@@ -17,8 +17,6 @@ import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
 
-import android.util.Log;
-
 import java.util.UUID;
 
 public class BleOpChrtRead extends BleOperation 
@@ -38,7 +36,7 @@ public class BleOpChrtRead extends BleOperation
   @Override 
   public void execute()
   {
-    // Log.v("DistoX-BLE", "BleOp exec read on chrt " + mChrtUuid.toString() );
+    // TDLog.v( "BleOp exec read on chrt " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.Error("BleOp chrt read: ERROR null pipe" );
       return;

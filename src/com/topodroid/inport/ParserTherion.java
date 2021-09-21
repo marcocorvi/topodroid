@@ -17,9 +17,9 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 // import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDUtil;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.CurrentStation;
+import com.topodroid.Cave3X.CurrentStation;
 
 import java.io.IOException;
 import java.io.FileInputStream;
@@ -27,8 +27,6 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
-
-import android.util.Log;
 
 // TODO this class can be made extend ImportParser
 //
@@ -167,7 +165,7 @@ class ParserTherion extends ImportParser
       String line = nextLine( br );
       while ( line != null ) {
         // TDLog.Log( TDLog.LOG_THERION, "TH " + line );
-        // Log.v( TopoDroidApp.TAG, "TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
+        // TDLog.v( "Parser TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
         line = line.trim();
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) {
@@ -182,7 +180,7 @@ class ParserTherion extends ImportParser
           //     ++ vals_len;
           //   }
           // }
-          // Log.v( TopoDroidApp.TAG, "vals " + vals.length + " " + vals_len );
+          // TDLog.v( "Parser TH vals " + vals.length + " " + vals_len );
           int vals_len = vals.length;
           if ( vals_len > 0 ) {
             String cmd = vals[0];
@@ -437,11 +435,11 @@ class ParserTherion extends ImportParser
                 } else if ( "fixed".equals( vals[ vals_len-1 ] ) ) {
                   flag = CurrentStation.STATION_FIXED;
                 }
-                // Log.v("DistoX", "Therion parser: mark flag " + flag + " " + flag_str );
+                // TDLog.v( "Therion parser: mark flag " + flag + " " + flag_str );
                 if ( flag != 0 ) {
                   for ( int k=1; k<vals_len-1; ++k ) {
                     String name = extractStationName( vals[k] );
-                    // Log.v("DistoX", "mark station " + name );
+                    // TDLog.v( "mark station " + name );
                     boolean must_add = true;
                     for ( Station st : stations ) if ( st.name.equals( name ) ) {
                       must_add = false;
@@ -475,7 +473,7 @@ class ParserTherion extends ImportParser
                       comment = sb.toString();
                     }
                   }
-                  // Log.v("DistoX", "Therion parser station " + name + " comment <" + comment + ">" );
+                  // TDLog.v( "Therion parser station " + name + " comment <" + comment + ">" );
                   if ( comment.length() > 0 ) {
                     boolean must_add = true;
                     for ( Station st : stations ) if ( st.name.equals( name ) ) { 
@@ -662,7 +660,7 @@ class ParserTherion extends ImportParser
                     } else {
                       // from = from + "@" + path;
                       // to   = to + "@" + path;
-                      // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
+                      // TDLog.v( "Parser TH add shot " + from + " -- " + to);
                       shots.add( new ParserShot( state.mPrefix + from + state.mSuffix, state.mPrefix + to + state.mSuffix,
                                            len, ber, cln, 0.0f,
                                            state.mExtend, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
@@ -704,7 +702,7 @@ class ParserTherion extends ImportParser
       mDate = TDUtil.currentDate();
     }
     TDLog.Log( TDLog.LOG_THERION, "Parser Therion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
-    // Log.v( TopoDroidApp.TAG, "Parser Therion shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
+    // TDLog.v( "Parser TH shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
 

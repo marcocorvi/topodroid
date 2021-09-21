@@ -12,7 +12,7 @@
 package com.topodroid.help;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 
@@ -25,8 +25,6 @@ import android.widget.ListView;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-
-// import android.util.Log;
 
 public class HelpDialog extends MyDialog
                  implements OnClickListener
@@ -56,7 +54,7 @@ public class HelpDialog extends MyDialog
     mNr0 = n0;
     mNr1 = n1; // offset of menus
     mPage = page;
-    // Log.v("DistoX", "HELP buttons " + mNr0 + " menus " + mNr1 );
+    // TDLog.v( "HELP buttons " + mNr0 + " menus " + mNr1 );
   }
 
   @Override
@@ -73,7 +71,7 @@ public class HelpDialog extends MyDialog
     // mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    // Log.v( TopoDroidApp.TAG, "HelpDialog ... createAdapters" );
+    // TDLog.v( "HelpDialog ... createAdapters" );
     createAdapter();
     mList.setAdapter( mAdapter );
     mList.invalidate();
@@ -81,7 +79,7 @@ public class HelpDialog extends MyDialog
 
   private void createAdapter()
   {
-    // Log.v("DistoX", "HELP create adapter mNr0 " + mNr0 );
+    // TDLog.v( "HELP create adapter mNr0 " + mNr0 );
     mAdapter = new HelpAdapter( mContext, /* this, */ R.layout.item, new ArrayList< HelpEntry >() );
     // int np = mIcons.length;
     for ( int i=0; i<mNr0; ++i ) {

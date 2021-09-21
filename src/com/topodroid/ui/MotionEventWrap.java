@@ -12,7 +12,6 @@ package com.topodroid.ui;
 
 import android.os.Build;
 import android.view.MotionEvent;
-// import android.util.Log;
 
 public class MotionEventWrap
 {
@@ -29,10 +28,10 @@ public class MotionEventWrap
 
       // Use Build.VERSION.SDK_INT if you don't have to support Cupcake
       if (Integer.parseInt(Build.VERSION.SDK) >= Build.VERSION_CODES.ECLAIR) { // DEPRECATED API-16
-         // Log.d("MotionEventWrap", "Using Eclair version");
+         // TDLog.d("MotionEventWrap using Eclair version");
          return new MotionEventEclair(event);
       } else {
-         // Log.d("MotionEventWrap", "Using Cupcake/Donut version");
+         // TDLog.d("MotionEventWrap using Cupcake/Donut version");
          return new MotionEventWrap(event);
       }
    }

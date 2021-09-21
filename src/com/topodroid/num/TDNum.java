@@ -16,12 +16,10 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.StationPolicy;
-import com.topodroid.DistoX.SurveyInfo;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.DBlock;
+import com.topodroid.Cave3X.StationPolicy;
+import com.topodroid.Cave3X.SurveyInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -295,18 +293,18 @@ public class TDNum
   // hide = +1 to hide, -1 to show
   public void setStationHidden( String name, int hide )
   {
-    // Log.v("DistoX", "Set Station Hidden: " + hide );
+    // TDLog.v( "Set Station Hidden: " + hide );
     NumStation st = getStation( name );
     if ( st == null ) return;
     st.mBarrierAndHidden = ( st.mHidden == -1 && hide == 1 );
     st.mHidden += hide;
-    // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+    // TDLog.v( "station " + st.name + " hide " + st.mHidden );
     hide *= 2;
     st = st.mParent;
     while ( st != null ) {
       st.mHidden += hide;
       if ( st.mHidden < 0 ) st.mHidden = 0;
-      // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+      // TDLog.v( "station " + st.name + " hide " + st.mHidden );
       st = st.mParent;
     }
   }
@@ -323,7 +321,7 @@ public class TDNum
   // barrier = +1 (set barrier), -1 (unset barrier)
   public void setStationBarrier( String name, int barrier )
   {
-    // Log.v("DistoX", "Set Station barrier: " + barrier );
+    // TDLog.v( "Set Station barrier: " + barrier );
     NumStation st = getStation( name );
     if ( st == null ) return;
     st.mBarrierAndHidden = ( st.mHidden == 1 && barrier == 1 );
@@ -333,7 +331,7 @@ public class TDNum
     stack.push( st );
     while ( ! stack.empty() ) {
       st = stack.pop();
-      // Log.v("DistoX", "station " + st.name + " hide " + st.mHidden );
+      // TDLog.v( "station " + st.name + " hide " + st.mHidden );
       mStations.updateHidden( st, -barrier, stack );
 
       // for ( NumStation s : mStations ) {
@@ -475,14 +473,14 @@ public class TDNum
     mBuffer.put( blk );
 
     if ( leg != null && mLastSplay != null ) {
-      // Log.v("DistoX-DATA", "num got_leg ");
+      // TDLog.v( "num got_leg ");
       removeSplay( mLastSplay );
       appendLeg( mLastSplay.block, leg, format );
       mLastSplay = null;
     } else {
       if ( blk.isSplay() ) {
         // if ( mLastLeg != null ) {
-        //   Log.v("DistoX-DATA", "num insert leg ");
+        //   TDLog.v( "num insert leg ");
         //   insertLeg( mLastLeg, format );
         // }
         mLastLeg = null;  // clear last-leg
@@ -494,15 +492,15 @@ public class TDNum
           splay = new TriSplay( blk, blk.mTo, blk.getIntExtend(), -1 );
           mLastSplay = splay;
         }
-        // Log.v("DistoX-DATA", "num append SPLAY " + blk.mId + " splays " + mSplays.size() );
+        // TDLog.v( "num append SPLAY " + blk.mId + " splays " + mSplays.size() );
         return insertSplay( splay ); // add splay to network (null is checked by the routine)
       } else if ( blk.isSecLeg() ) {
-        // Log.v("DistoX-DATA", "num append SEC-LEG " + blk.mId );
+        // TDLog.v( "num append SEC-LEG " + blk.mId );
         // if (mLastLeg == null) return false;
         // mLastLeg.addBlock( blk );
         return false;
       } else if ( blk.isTypeBlank() ) {
-        // Log.v("DistoX-DATA", "num append BLANK " + blk.mId );
+        // TDLog.v( "num append BLANK " + blk.mId );
         // if (mLastLeg == null || ! blk.isRelativeDistance( mLastLeg.getFirstBlock() ) ) return false;
         // mLastLeg.addBlock( blk );
         return false;
@@ -518,7 +516,7 @@ public class TDNum
   private boolean appendLeg( DBlock blk, DBlock leg, String format ) 
   {
     if ( leg.isMainLeg() ) {
-      // Log.v("DistoX-DATA", "num append with leg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      // TDLog.v( "num append with leg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
       mLastLeg = new TriShot( leg, leg.mFrom, leg.mTo, leg.getIntExtend(), leg.getStretch(), +1 );
       mLastLeg.duplicate = ( leg.isDuplicate() );
       mLastLeg.surface   = ( leg.isSurface() );
@@ -528,7 +526,7 @@ public class TDNum
       addToInLegError( mLastLeg );
       computeInLegError();
     } else if ( leg.isBackLeg() ) {
-      // Log.v("DistoX-DATA", "num append with backleg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
+      // TDLog.v( "num append with backleg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
       mLastLeg = new TriShot( leg, leg.mFrom, leg.mTo, leg.getIntExtend(), leg.getStretch(), +1 );
       mLastLeg.duplicate = true;
       mLastLeg.surface   = ( leg.isSurface() );
@@ -576,7 +574,7 @@ public class TDNum
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
-        } else { // Log.v("DistoXL", "close loop at " + sf.name + " " + st.name );
+        } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
           NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
           addShotToStations( sh, sf, st );
         }
@@ -606,7 +604,7 @@ public class TDNum
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
-    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
+    // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList< DBlock > blks = ts.getBlocks();
@@ -622,7 +620,7 @@ public class TDNum
       TDLog.Error( "making shot from reversed temp " + sf.name + " " + st.name );
     }
     DBlock blk = ts.getFirstBlock();
-    // Log.v("DistoX", "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
+    // TDLog.v( "make shot " + sf.name + "-" + st.name + " blocks " + ts.blocks.size() + " E " + blk.getIntExtend() + " S " + blk.getStretch() );
     // NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), 1, anomaly, mDecl ); // FIXME DIRECTION
     NumShot sh = new NumShot( sf, st, ts.getFirstBlock(), direction, anomaly, mDecl );
     ArrayList< DBlock > blks = ts.getBlocks();
@@ -642,7 +640,7 @@ public class TDNum
   {
     mLastLeg = null;
     for ( DBlock blk : data ) {
-      // Log.v("DistoX", "NUM blk type " + blk.mType );
+      // TDLog.v( "NUM blk type " + blk.mType );
       if ( blk.isSplay() ) {
         mLastLeg = null;  // clear last-leg
         if ( blk.mFrom != null && blk.mFrom.length() > 0 ) { // normal splay
@@ -690,7 +688,7 @@ public class TDNum
       HashMap< String, Float > depths = new HashMap< String, Float >();
       for ( DBlock blk : data ) { // prepare stations depths
 	if ( blk.mFrom != null && blk.mFrom.length() > 0 && blk.mTo != null && blk.mTo.length() > 0 ) {
-          // Log.v("DistoX", blk.mFrom + " depth " + blk.mDepth );
+          // TDLog.v( blk.mFrom + " depth " + blk.mDepth );
           // depths.putIfAbsent( blk.mFrom, new Float( blk.mDepth ) );
           if ( ! depths.containsKey(blk.mFrom) ) depths.put( blk.mFrom, Float.valueOf( blk.mDepth ) );
         }
@@ -756,12 +754,12 @@ public class TDNum
       TriShot ts1 = ts0; // last sibling (head = the shot itself)
       for ( int j=i+1; j < tmpshots.size(); ++j ) {
         TriShot ts2 = tmpshots.get( j );
-        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // Log.v("DistoX-NUM", "chain a positive sibling" );
+        if ( from.equals( ts2.from ) && to.equals( ts2.to ) ) { // TDLog.v( "chain a positive sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = +1;
 	  ++ nrSiblings;
-        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // Log.v("DistoX-NUM", "chain a negative sibling" );
+        } else if ( from.equals( ts2.to ) && to.equals( ts2.from ) ) { // TDLog.v( "chain a negative sibling" );
           ts1.sibling = ts2;
           ts1 = ts2;
           ts2.backshot = -1;
@@ -769,7 +767,7 @@ public class TDNum
         }
       }
 
-      if ( ts0.sibling != null ) { // Log.v("DistoX-NUM", "check sibling shots agreement" );
+      if ( ts0.sibling != null ) { // TDLog.v( "check sibling shots agreement" );
         float dmax = 0.0f;
         float cc = TDMath.cosd( blk0.mClino );
         float sc = TDMath.sind( blk0.mClino );
@@ -795,7 +793,7 @@ public class TDNum
         
         if ( ! StationPolicy.doMagAnomaly() ) { // (3) remove siblings
           ts1 = ts0.sibling;
-          while ( ts1 != null ) { // Log.v( "DistoXL", "removing sibling " + ts1.from + "-" + ts1.to + " : " + nrSiblings );
+          while ( ts1 != null ) { // TDLog.v( "NUM removing sibling " + ts1.from + "-" + ts1.to + " : " + nrSiblings );
             -- nrSiblings;
             TriShot ts2 = ts1.sibling;
             tmpshots.remove( ts1 );
@@ -805,13 +803,13 @@ public class TDNum
         // } else {
         //   for ( ts1 = ts0.sibling; ts1 != null; ts1 = ts1.sibling ) {
         //     assert ( ts1.backshot != 0 );
-        //     // Log.v("DistoX", from + "-" + to  + " zero backshot sibling " + ts1.from + "-" + ts1.to );
+        //     // TDLog.v( from + "-" + to  + " zero backshot sibling " + ts1.from + "-" + ts1.to );
         //   }
         }
       }
     }
 
-    // Log.v("DistoX-NUM", "compute leg error ...");
+    // TDLog.v( "compute leg error ...");
     computeInLegError();
 
     // ---------------------------------- DATA REDUCTION -------------------------------
@@ -856,7 +854,7 @@ public class TDNum
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
-              } else { // Log.v("DistoXL", "close loop at " + sf.name + " " + st.name );
+              } else { // TDLog.v( "close loop at " + sf.name + " " + st.name );
                 NumShot sh = makeShotFromTmp( sf, st, ts, 0, sf.mAnomaly, mDecl ); 
                 addShotToStations( sh, sf, st );
               }
@@ -940,18 +938,18 @@ public class TDNum
     }
 
     // ---------------------------------- INSERT SPLAYS -------------------------------
-    // Log.v("DistoX-NUM", "insert splays");
+    // TDLog.v( "insert splays");
     mStations.setAzimuths();
     // for ( NumStation st : mStations ) st.setAzimuths();
     for ( TriSplay ts : tmpsplays ) {
       insertSplay( ts );
     }
     // long millis_end = System.currentTimeMillis() - millis_start;
-    // Log.v("DistoX", "Data reduction " + millis_end + " msec" );
+    // TDLog.v( "Data reduction " + millis_end + " msec" );
     mUnattachedLength = 0;
     for ( TriShot ts : tmpshots ) {
       if ( ! ts.used ) {
-        // Log.v("DistoXN", "unattached shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
+        // TDLog.v( "unattached shot " + ts.from + " " + ts.to + " id " + ts.blocks.get(0).mId );
         mUnattachedShots.add( ts.blocks.get(0) );
         mUnattachedLength += ts.blocks.get(0).mLength;
       }
@@ -1058,7 +1056,7 @@ public class TDNum
     for ( int k = sz; k >= 0; --k ) {
       NumSplay sp = mSplays.get( k );
       if ( sp.getBlock() == ts.block ) {
-        // Log.v("DistoX-DATA", "removing splay " + sz + " for " + ts.block.mId );
+        // TDLog.v( "removing splay " + sz + " for " + ts.block.mId );
         mSplays.remove( k );
         break;
       }
@@ -1143,7 +1141,7 @@ public class TDNum
         anomaly = bbck/nbck - bfwd/nfwd - 180;  // station_anomaly = <backward> - <forward> - 180
         if ( anomaly < -180 ) anomaly += 360;
       }
-      // Log.v("DistoXX", "anomaly " + anomaly);
+      // TDLog.v( "anomaly " + anomaly);
 
       // A_north       B_north
       // |              \
@@ -1232,7 +1230,7 @@ public class TDNum
     //   sb.append( b0.n2.station.name );
     //   sb.append( "  " );
     // }
-    // Log.v("DistoX", sb.toString() );
+    // TDLog.v( sb.toString() );
     
     NumStack stack = new NumStack( bs );
     for ( int k0 = 0; k0 < bs; ++k0 ) {
@@ -1249,7 +1247,7 @@ public class TDNum
         int k1 = s1.k;
         if ( n1 == n0 ) {
           cycles.add( buildCycle( stack ) );
-          // Log.v("DistoX", "found cycle " + cycles.size() + " at " + n1.station.name );
+          // TDLog.v( "found cycle " + cycles.size() + " at " + n1.station.name );
           s1.b.use = 2; // mark the last edge as no more usable
           s1.n.use = 0;
           stack.pop();
@@ -1387,12 +1385,12 @@ public class TDNum
             sh0.mBranchDir = -1; // swap stations
             st0 = sh0.from;
           }
-          // Log.v("DistoX", "start branch at " + sf0.name + " - " + st0.name );
+          // TDLog.v( "start branch at " + sf0.name + " - " + st0.name );
           while ( st0 != sf0 ) { // follow the shot 
             branch.addShot( sh0 ); // add shot to branch and find next shot
             sh0.branch = branch;
             if ( st0.node != null ) { // end-of-branch
-              // Log.v("DistoX", "end of branch at " + st0.node.station.name );
+              // TDLog.v( "end of branch at " + st0.node.station.name );
               branch.setLastNode( st0.node );
               branches.add( branch );
               break;
@@ -1414,7 +1412,7 @@ public class TDNum
               sh1.mBranchDir = -1; // swap
               st0 = sh1.from;
             }
-            // Log.v("DistoX", " move to " + st0.name );
+            // TDLog.v( " move to " + st0.name );
             sh0 = sh1;
           }
           if ( st0 == sf0 ) { // closed-loop ???
@@ -1448,7 +1446,7 @@ public class TDNum
         }
       }
     }
-    // Log.v("DistoX", "found branches " + branches.size() );
+    // TDLog.v( "found branches " + branches.size() );
     return branches;
   }
 

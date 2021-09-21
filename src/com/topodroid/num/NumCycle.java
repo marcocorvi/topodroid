@@ -15,8 +15,6 @@ import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 
-// import android.util.Log;
-
 class NumCycle
 {
   class NumCycleBranch

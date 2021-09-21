@@ -13,9 +13,7 @@ package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDUtil;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDUtil;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -164,10 +162,10 @@ public class DeviceUtil
   // public static void bind2Device( Intent intent )
   // {
   //   BluetoothDevice device = intent.getParcelableExtra(EXTRA_DEVICE);
-  //   Log.v("DistoX", "PAIRING: " + device.getName() + " " + device.getAddress() );
+  //   TDLog.v( "PAIRING: " + device.getName() + " " + device.getAddress() );
   //   try { 
   //     device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
-  //     Log.v("DistoX", "done setPairingConfirmation");
+  //     TDLog.v( "done setPairingConfirmation");
   //     // device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
   //     byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
   //     // byte[] pinBytes = convertPinToBytes("0000");
@@ -175,17 +173,17 @@ public class DeviceUtil
   //     Method ms = device.getClass().getMethod("setPin", byte[].class);
   //     // Method ms = device.getClass().getMethod("setPasskey", int.class);
   //     ms.invoke( device, pin );
-  //     Log.v("DistoX", "done setPin");
+  //     TDLog.v( "done setPin");
   //     Class[] classes3 = new Class[ 0 ];
   //     Method m_createBond = device.getClass().getMethod( "createBond", classes3 );
   //     m_createBond.invoke( device );
-  //     Log.v("DistoX", "done createBond");
+  //     TDLog.v( "done createBond");
   //   } catch ( NoSuchMethodException e ) {
-  //     Log.v("DistoX", "No Such method: " + e.getMessage() );
+  //     TDLog.v( "No Such method: " + e.getMessage() );
   //   } catch ( IllegalAccessException e ) {
-  //     Log.v("DistoX", "Illegal access: " + e.getMessage() );
+  //     TDLog.v( "Illegal access: " + e.getMessage() );
   //   } catch ( InvocationTargetException e ) {
-  //     Log.v("DistoX", "Invocation target: " + e.getMessage() );
+  //     TDLog.v( "Invocation target: " + e.getMessage() );
   //   }
   // }
 

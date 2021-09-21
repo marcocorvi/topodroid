@@ -12,15 +12,13 @@
 package com.topodroid.trb;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.StationPolicy;
+import com.topodroid.Cave3X.DBlock;
+import com.topodroid.Cave3X.StationPolicy;
 
 import java.util.List;
 // import java.util.Locale;
 import java.util.ArrayList;
 // import java.util.Iterator;
-
-// import android.util.Log;
 
 public class TRobot
 {
@@ -194,9 +192,9 @@ public class TRobot
 
   // void dump()
   // {
-    // Log.v("DistoX", "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
+    // TDLog.v( "TRobot S: " + mSeries.size() + " P: " + mPoints.size() );
     // for ( TRobotSeries series : mSeries ) series.dump();
-    // Log.v("DistoX", "Points");
+    // TDLog.v( "Points");
     // for (TRobotPoint pt : mPoints ) pt.dump();
   // }
 

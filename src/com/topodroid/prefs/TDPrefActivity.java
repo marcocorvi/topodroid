@@ -14,16 +14,14 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.ui.TDLayout;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDLevel;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TopoDroidApp;
-// import com.topodroid.DistoX.CWDActivity;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDLevel;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TopoDroidApp;
+// import com.topodroid.Cave3X.CWDActivity;
+import com.topodroid.Cave3X.R;
 
 import android.content.Intent;
 import android.content.Context;
@@ -100,7 +98,7 @@ public class TDPrefActivity extends Activity
       }
     }
 
-    // Log.v("DistoX-PREF", "TDPrefActivity::onCreate category " + mPrefCategory );
+    // TDLog.v( "TDPrefActivity::onCreate category " + mPrefCategory );
     if ( loadPreferences() ) {
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll    = this; }
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
@@ -144,7 +142,7 @@ public class TDPrefActivity extends Activity
     // Resources res = getResources();
     TDPrefHelper hlp = new TDPrefHelper( mCtx ); // TopoDroidApp.mPrefHlp;
 
-    // Log.v("DistoX-PREF", "Load Pref create. category " + mPrefCategory );
+    // TDLog.v( "Load Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
       case TDPrefCat.PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
@@ -175,6 +173,9 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs(    this, hlp ); break;
       case TDPrefCat.PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs(     this, hlp ); break;
+      case TDPrefCat.PREF_CATEGORY_CAVE3D:    mPrefs = TDPref.makeCave3DPrefs(   this, hlp ); break;
+      case TDPrefCat.PREF_DEM3D:              mPrefs = TDPref.makeDem3DPrefs(    this, hlp ); break;
+      case TDPrefCat.PREF_WALLS3D:            mPrefs = TDPref.makeWalls3DPrefs(  this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_GEEK:      mPrefs = TDPref.makeGeekPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_GEEK_SHOT:          mPrefs = TDPref.makeGeekShotPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_SPLAY:         mPrefs = TDPref.makeGeekSplayPrefs( this, hlp ); break;
@@ -196,7 +197,7 @@ public class TDPrefActivity extends Activity
 	}
       }
     }
-    // Log.v("DistoX-PREF", "Level " + TDLevel.mLevel + " found " + cnt + " prefs" );
+    // TDLog.v( "Level " + TDLevel.mLevel + " found " + cnt + " prefs" );
     if ( cnt == 0 ) return false;
 
     if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) {
@@ -205,7 +206,7 @@ public class TDPrefActivity extends Activity
         mCwdPref.setValue( TDInstance.cwd );
         View v = mCwdPref.getView();
         if ( v != null ) {
-          final Intent cwd_intent = new Intent( mCtx, com.topodroid.DistoX.CWDActivity.class ); // this
+          final Intent cwd_intent = new Intent( mCtx, com.topodroid.Cave3X.CWDActivity.class ); // this
           v.setOnClickListener( new OnClickListener() {
             @Override
             public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
@@ -227,13 +228,14 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_PLOT_PREF",   TDPrefCat.PREF_CATEGORY_PLOT );
       linkPreference( "DISTOX_EXPORT_PREF", TDPrefCat.PREF_CATEGORY_EXPORT );
       linkPreference( "DISTOX_DEVICE_PREF", TDPrefCat.PREF_CATEGORY_DEVICE );
+      linkPreference( "DISTOX_CAVE3D_PREF", TDPrefCat.PREF_CATEGORY_CAVE3D );
       linkPreference( "DISTOX_GEEK_PREF",   TDPrefCat.PREF_CATEGORY_GEEK );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_IMPORT ) {
       mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
       if ( mPtCmapPref != null ) {
         View v = mPtCmapPref.getView();
 	if ( v != null ) {
-          final Intent pt_intent = new Intent( mCtx, com.topodroid.DistoX.PtCmapActivity.class ); // this
+          final Intent pt_intent = new Intent( mCtx, com.topodroid.Cave3X.PtCmapActivity.class ); // this
           v.setOnClickListener( 
             new OnClickListener() {
               @Override
@@ -266,6 +268,9 @@ public class TDPrefActivity extends Activity
       // linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_DEVICE ) {
       linkPreference( "DISTOX_CALIB_PREF",          TDPrefCat.PREF_CATEGORY_CALIB );
+    } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_CAVE3D ) {
+      linkPreference( "DISTOX_DEM3D_PREF",          TDPrefCat.PREF_DEM3D );
+      linkPreference( "DISTOX_WALLS3D_PREF",        TDPrefCat.PREF_WALLS3D );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_GEEK ) {
       linkPreference( "DISTOX_GEEK_SHOT",           TDPrefCat.PREF_GEEK_SHOT );
       linkPreference( "DISTOX_GEEK_SPLAY",          TDPrefCat.PREF_GEEK_SPLAY );
@@ -285,7 +290,7 @@ public class TDPrefActivity extends Activity
 
   private void doReloadPreferences()
   {
-    // Log.v("DistoXPref", "reload prefs. cat " + mPrefCategory );
+    // TDLog.v( "reload prefs. cat " + mPrefCategory );
     if ( mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) {
       if ( loadPreferences() ) {
         setTheTitle();
@@ -312,7 +317,7 @@ public class TDPrefActivity extends Activity
   private void linkPreference( String pref_name, int category )
   {
     // if ( pref_name == null ) return;
-    // Log.v("DistoX", "link pref " + pref_name );
+    // TDLog.v("link pref " + pref_name );
     final TDPref pref = findPreference( pref_name );
     if ( pref == null ) return;
     View v = pref.getView();
@@ -324,7 +329,7 @@ public class TDPrefActivity extends Activity
         @Override
         public void onClick( View v )
         {
-	  // Log.v("DistoX-PREF", "click on " + pref.name + " categoy " + category );
+	  // TDLog.v( "click on " + pref.name + " categoy " + category );
           startActivity( intent );
         }
     } );
@@ -338,7 +343,7 @@ public class TDPrefActivity extends Activity
         if ( result == RESULT_OK && extras != null ) {
           String cwd = extras.getString( TDTag.TOPODROID_CWD );
           mCwdPref.setButtonValue( cwd );
-          // Log.v("DistoX", "got CWD " + cwd );
+          // TDLog.v("got CWD " + cwd );
         } else if ( result == RESULT_CANCELED ) {
 	  TDLog.Error("could not set CWD");
 	}

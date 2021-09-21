@@ -13,8 +13,6 @@
  */
 package com.topodroid.num;
 
-// import android.util.Log;
-
 class NumShortpath
 {
   NumShortpath mFrom; // link to the previous shortpath

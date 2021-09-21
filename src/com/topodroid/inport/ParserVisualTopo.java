@@ -18,10 +18,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDAzimuth;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDAzimuth;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -104,7 +102,7 @@ class ParserVisualTopo extends ImportParser
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();
-        // Log.v("DistoX", "LINE: " + line );
+        // TDLog.v( "LINE: " + line );
         if ( line.startsWith("[Configuration]") ) break;
 
         int pos = line.indexOf(";");
@@ -202,7 +200,7 @@ class ParserVisualTopo extends ImportParser
                                              ExtendType.EXTEND_UNSET, LegType.NORMAL, false, false, false, "" ) );
 
                 } else {
-                  // Log.v("DistoX-VT", mFrom + " " + mTo + " " + mBearing + " DMB " + dmb + " UB " + ub );
+                  // TDLog.v( mFrom + " " + mTo + " " + mBearing + " DMB " + dmb + " UB " + ub );
                   mLeft = mRight = mUp = mDown = 0;
                   if ( mLrud ) {
                     if ( k < vals.length ) {
@@ -272,7 +270,7 @@ class ParserVisualTopo extends ImportParser
       throw new ParserException();
     }
     TDLog.Log( TDLog.LOG_THERION, "Parser VisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( "DistoX", "Parser VisualTopo shots "+ shots.size() + " splays "+ splays.size() );
+    // TDLog.v( "Parser VisualTopo shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   // float parseAngleUnit( String unit )

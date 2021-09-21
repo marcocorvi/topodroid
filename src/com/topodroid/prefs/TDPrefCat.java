@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 public class TDPrefCat
 {
@@ -46,14 +46,17 @@ public class TDPrefCat
   public static final int PREF_PLOT_DRAW          = 27; 
   public static final int PREF_PLOT_ERASE         = 28; 
   public static final int PREF_PLOT_EDIT          = 29; 
-  public static final int PREF_CATEGORY_GEEK      = 30; 
-  public static final int PREF_GEEK_SHOT          = 31; 
-  public static final int PREF_GEEK_SPLAY         = 32; 
-  public static final int PREF_GEEK_PLOT          = 33; 
-  public static final int PREF_GEEK_LINE          = 34; 
-  public static final int PREF_GEEK_DEVICE        = 35; 
-  public static final int PREF_GEEK_IMPORT        = 36; 
-  public static final int PREF_CATEGORY_LOG       = 37; // this must be the last
+  public static final int PREF_CATEGORY_CAVE3D    = 30;
+  public static final int PREF_DEM3D              = 31;
+  public static final int PREF_WALLS3D            = 32;
+  public static final int PREF_CATEGORY_GEEK      = 33; 
+  public static final int PREF_GEEK_SHOT          = 34; 
+  public static final int PREF_GEEK_SPLAY         = 35; 
+  public static final int PREF_GEEK_PLOT          = 36; 
+  public static final int PREF_GEEK_LINE          = 37; 
+  public static final int PREF_GEEK_DEVICE        = 38; 
+  public static final int PREF_GEEK_IMPORT        = 39; 
+  public static final int PREF_CATEGORY_LOG       = 40; // this must be the last
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0
@@ -86,6 +89,9 @@ public class TDPrefCat
     R.string.title_settings_draw,
     R.string.title_settings_erase,    // 28
     R.string.title_settings_edit,
+    R.string.title_settings_3d,
+    R.string.title_settings_dem,
+    R.string.title_settings_walls3d,
     R.string.title_settings_geek,
     R.string.title_settings_survey,   // 31
     R.string.title_settings_splay,    // 32

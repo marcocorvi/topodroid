@@ -11,11 +11,9 @@
  */
 package com.topodroid.dev.bric;
 
-import com.topodroid.DistoX.TopoDroidApp;
-// import com.topodroid.DistoX.R;
-// import com.topodroid.DistoX.TDToast;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TopoDroidApp;
+// import com.topodroid.Cave3X.R;
+// import com.topodroid.Cave3X.TDToast;
 
 import java.lang.ref.WeakReference;
 

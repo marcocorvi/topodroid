@@ -18,11 +18,9 @@ import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDAzimuth;
-import com.topodroid.DistoX.SurveyInfo;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDAzimuth;
+import com.topodroid.Cave3X.SurveyInfo;
 
 import java.io.IOException;
 import java.io.BufferedReader;
@@ -185,7 +183,7 @@ class ParserVisualTopoX extends ImportParser
 
     try {
       while ( (line = nextLine(br)) != null ) { // line is already trimmed
-        // Log.v("DistoX", "LINE: " + line );
+        // TDLog.v( "LINE: " + line );
 
         if ( line.startsWith("<Cavite>") )          { inCavite = true;
         } else if ( line.startsWith("</Cavite>") )  { inCavite = false;
@@ -312,7 +310,7 @@ class ParserVisualTopoX extends ImportParser
       throw new ParserException();
     }
     TDLog.Log( TDLog.LOG_THERION, "Parser VisualTopo shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( "DistoX", "Parser VisualTopo shots "+ shots.size() + " splays "+ splays.size() );
+    // TDLog.v( "Parser VisualTopo shots "+ shots.size() + " splays "+ splays.size() );
   }
 
 }

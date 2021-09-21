@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+  <!-- android.preference.EditTextPreference
+    android:key="CAVE3D_BASE_PATH"
+    android:title="@string/cpref_base_path_title"
+    android:summary="@string/cpref_base_path_summary"
+    android:dialogTitle="@string/cpref_base_path_title"
+    android:dialogMessage="@string/cpref_base_path_summary"
+    / -->
+
+  <!-- com.topodroid.Cave3X.MyListPreference
+    android:key="CAVE3D_BUTTON_SIZE"
+    android:title="@string/cpref_size_buttons_title"
+    android:summary="@string/cpref_size_buttons_summary"
+    android:defaultValue="1"
+    android:entries="@array/csizeButtons"
+    android:entryValues="@array/csizeButtonsValue"
+    / -->
+
+  <android.preference.CheckBoxPreference
+    android:key="CAVE3D_NEG_CLINO"
+    android:title="@string/cpref_neg_clino_title"
+    android:summary="@string/cpref_neg_clino_summary"
+    android:dialogTitle="@string/cpref_neg_clino_title"
+    />
+
+  <android.preference.EditTextPreference
+    android:key="CAVE3D_BLUETOOTH_DEVICE"
+    android:title="@string/cpref_bluetooth_title"
+    android:summary="@string/cpref_bluetooth_summary"
+    android:dialogTitle="@string/cpref_bluetooth_title"
+    android:dialogMessage="@string/cpref_bluetooth_summary"
+    android:defaultValue=""
+    />
+
+  <android.preference.PreferenceCategory
+    android:title="@string/category_stations"
+    >
+
+    <!-- android.preference.EditTextPreference
+      android:key="CAVE3D_TEXT_SIZE"
+      android:title="@string/cpref_text_size_title"
+      android:summary="@string/cpref_text_size_summary"
+      android:dialogTitle="@string/cpref_text_size_title"
+      android:dialogMessage="@string/cpref_text_size_summary"
+      / -->
+
+    <android.preference.CheckBoxPreference
+      android:key="CAVE3D_STATION_POINTS"
+      android:title="@string/cpref_station_points_title"
+      android:summary="@string/cpref_station_points_summary"
+      android:dialogTitle="@string/cpref_station_points_title"
+      />
+
+    <android.preference.EditTextPreference
+      android:key="CAVE3D_STATION_SIZE"
+      android:title="@string/cpref_station_size_title"
+      android:summary="@string/cpref_station_size_summary"
+      android:dialogTitle="@string/cpref_station_size_title"
+      android:dialogMessage="@string/cpref_station_size_summary"
+      />
+
+    <android.preference.EditTextPreference
+      android:key="CAVE3D_SELECTION_RADIUS"
+      android:title="@string/cpref_selection_radius_title"
+      android:summary="@string/cpref_selection_radius_summary"
+      android:dialogTitle="@string/cpref_selection_radius_title"
+      android:dialogMessage="@string/cpref_selection_radius_summary"
+      />
+
+    <android.preference.CheckBoxPreference
+      android:key="CAVE3D_MEASURE_DIALOG"
+      android:title="@string/cpref_measure_dialog_title"
+      android:summary="@string/cpref_measure_dialog_summary"
+      android:dialogTitle="@string/cpref_measure_dialog_title"
+      />
+
+    <android.preference.CheckBoxPreference
+      android:key="CAVE3D_STATION_TOAST"
+      android:title="@string/cpref_station_toast_title"
+      android:summary="@string/cpref_station_toast_summary"
+      android:dialogTitle="@string/cpref_station_toast_title"
+      />
+  </android.preference.PreferenceCategory>
+
+  <android.preference.PreferenceCategory
+    android:title="@string/category_grid"
+    >
+    <android.preference.CheckBoxPreference
+      android:key="CAVE3D_GRID_ABOVE"
+      android:title="@string/cpref_grid_above_title"
+      android:summary="@string/cpref_grid_above_summary"
+      android:dialogTitle="@string/cpref_grid_above_title"
+      />
+
+    <android.preference.EditTextPreference
+      android:key="CAVE3D_GRID_EXTENT"
+      android:title="@string/cpref_grid_extent_title"
+      android:summary="@string/cpref_grid_extent_summary"
+      android:dialogTitle="@string/cpref_grid_extent_title"
+      android:dialogMessage="@string/cpref_grid_extent_summary"
+      />
+  </android.preference.PreferenceCategory>
+
+  <android.preference.PreferenceCategory
+    android:title="@string/category_surface"
+    >
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_DEM_BUFFER"
+       android:title="@string/cpref_dem_buffer_title"
+       android:summary="@string/cpref_dem_buffer_summary"
+       android:dialogTitle="@string/cpref_dem_buffer_title"
+       android:dialogMessage="@string/cpref_dem_buffer_summary"
+       />
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_DEM_MAXSIZE"
+       android:title="@string/cpref_dem_maxsize_title"
+       android:summary="@string/cpref_dem_maxsize_summary"
+       android:dialogTitle="@string/cpref_dem_maxsize_title"
+       android:dialogMessage="@string/cpref_dem_maxsize_summary"
+       />
+
+    <com.topodroid.Cave3X.MyListPreference
+       android:key="CAVE3D_DEM_REDICE"
+       android:title="@string/cpref_dem_reduce_title"
+       android:summary="@string/cpref_dem_reduce_summary"
+       android:defaultValue="1"
+       android:entries="@array/demReduce"
+       android:entryValues="@array/demReduceValue"
+       />
+  </android.preference.PreferenceCategory>
+
+  <android.preference.PreferenceCategory
+    android:title="@string/category_walls"
+    >
+
+    <com.topodroid.Cave3X.MyListPreference
+       android:key="CAVE3D_SPLAY_USE"
+       android:title="@string/cpref_splay_use_title"
+       android:summary="@string/cpref_splay_use_summary"
+       android:defaultValue="1"
+       android:entries="@array/splayUse"
+       android:entryValues="@array/splayUseValue"
+       />
+
+    <android.preference.CheckBoxPreference
+       android:key="CAVE3D_ALL_SPLAY"
+       android:title="@string/cpref_all_splay_title"
+       android:summary="@string/cpref_all_splay_summary"
+       android:dialogTitle="@string/cpref_all_splay_title"
+       />
+
+    <android.preference.CheckBoxPreference
+       android:key="CAVE3D_SPLAY_PROJ"
+       android:title="@string/cpref_splay_proj_title"
+       android:summary="@string/cpref_splay_proj_summary"
+       android:dialogTitle="@string/cpref_splay_proj_title"
+       />
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_SPLAY_THR"
+       android:title="@string/cpref_splay_thr_title"
+       android:summary="@string/cpref_splay_thr_summary"
+       android:dialogTitle="@string/cpref_splay_thr_title"
+       android:dialogMessage="@string/cpref_splay_thr_summary"
+       android:inputType="numberDecimal|numberSigned"
+       />
+
+
+    <android.preference.CheckBoxPreference
+       android:key="CAVE3D_SPLIT_TRIANGLES"
+       android:title="@string/cpref_split_triangles_title"
+       android:summary="@string/cpref_split_triangles_summary"
+       android:dialogTitle="@string/cpref_split_triangles_title"
+       />
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_SPLIT_RANDOM"
+       android:title="@string/cpref_split_random_title"
+       android:summary="@string/cpref_split_random_summary"
+       android:dialogTitle="@string/cpref_split_random_title"
+       android:dialogMessage="@string/cpref_split_random_summary"
+       android:inputType="numberDecimal"
+       />
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_SPLIT_STRETCH"
+       android:title="@string/cpref_split_stretch_title"
+       android:summary="@string/cpref_split_stretch_summary"
+       android:dialogTitle="@string/cpref_split_stretch_title"
+       android:dialogMessage="@string/cpref_split_stretch_summary"
+       android:inputType="numberDecimal"
+       />
+
+    <android.preference.EditTextPreference
+       android:key="CAVE3D_POWERCRUST_DELTA"
+       android:title="@string/cpref_powercrust_delta_title"
+       android:summary="@string/cpref_powercrust_delta_summary"
+       android:dialogTitle="@string/cpref_powercrust_delta_title"
+       android:dialogMessage="@string/cpref_powercrust_delta_summary"
+       android:inputType="numberDecimal"
+       />
+
+  </android.preference.PreferenceCategory>
+
+<!--
+   <android.preference.CheckBoxPreference
+       android:key="CAVE3D_POWERCRUST"
+       android:title="@string/cpref_powercrust_title"
+       android:summary="@string/cpref_powercrust_summary"
+       android:dialogTitle="@string/cpref_powercrust_title"
+       />
+   <android.preference.CheckBoxPreference
+       android:key="CAVE3D_CONVEX_HULL"
+       android:title="@string/cpref_convex_hull_title"
+       android:summary="@string/cpref_convex_hull_summary"
+       android:dialogTitle="@string/cpref_convex_hull_title"
+       />
+   <android.preference.CheckBoxPreference
+       android:key="CAVE3D_DELAUNAY"
+       android:title="@string/cpref_delaunay_title"
+       android:summary="@string/cpref_delaunay_summary"
+       android:dialogTitle="@string/cpref_delaunay_title"
+       />
+   <android.preference.CheckBoxPreference
+       android:key="CAVE3D_HULL"
+       android:title="@string/cpref_hull_title"
+       android:summary="@string/cpref_hull_summary"
+       android:dialogTitle="@string/cpref_hull_title"
+       />
+-->
+
+</PreferenceScreen>

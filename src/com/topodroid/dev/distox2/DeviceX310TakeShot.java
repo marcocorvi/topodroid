@@ -13,16 +13,14 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
-import com.topodroid.DistoX.ILister;
-import com.topodroid.DistoX.ListerHandler;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.ILister;
+import com.topodroid.Cave3X.ListerHandler;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TDUtil;
 
 
 import android.os.AsyncTask;
  
-// import android.util.Log;
-
 public class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
 {
   private final ILister mILister;      // lister with BT button
@@ -50,7 +48,7 @@ public class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   {
     int i = mNr;
     for ( ; i>1; --i ) {
-      // Log.v("DistoX", "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
+      // TDLog.v( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       mApp.setX310Laser( Device.LASER_ON, 0, null, mDataType );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
       mApp.setX310Laser( Device.MEASURE, 0, null, mDataType );   

@@ -11,7 +11,7 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -32,8 +32,6 @@ import android.widget.ListView;
 import android.widget.CheckBox;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-
-import android.util.Log;
 
 class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
                            implements OnClickListener

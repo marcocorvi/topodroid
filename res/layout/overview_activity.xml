@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-    <com.topodroid.DistoX.DrawingSurface
+    <com.topodroid.Cave3X.DrawingSurface
       android:layout_width="match_parent"
       android:layout_height="match_parent"
       android:clickable="true"

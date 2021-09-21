@@ -18,9 +18,7 @@ import com.topodroid.utils.TDString;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.TDUtil;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDUtil;
 
 import java.io.IOException;
 import java.io.FileNotFoundException;
@@ -171,8 +169,7 @@ class ParserSurvex extends ImportParser
       BufferedReader br = getBufferedReader( isr, filename );
       String line = nextLine( br );
       while ( line != null ) {
-        // TDLog.Log( TDLog.LOG_THERION, "TH " + line );
-        // Log.v( TopoDroidApp.TAG, "TH " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
+        // TDLog.v( "Parser Survex " + state.in_survey + " " + state.in_centerline + " " + state.in_data + " : " + line );
         line = line.trim();
         int pos = line.indexOf( ';' );
         if ( pos >= 0 ) {
@@ -605,7 +602,7 @@ class ParserSurvex extends ImportParser
                                             len, ber, cln, 0.0f,
                                             ExtendType.EXTEND_UNSET, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
                     } else {
-                      // Log.v( TopoDroidApp.TAG, "add shot " + from + " -- " + to);
+                      // TDLog.v( "Parser Survex add shot " + from + " -- " + to);
                       shots.add( new ParserShot( from, to,
                                            len, ber, cln, 0.0f,
                                            ExtendType.EXTEND_RIGHT, LegType.NORMAL, state.mDuplicate, state.mSurface, false, "" ) );
@@ -628,7 +625,7 @@ class ParserSurvex extends ImportParser
     if ( mDate == null ) mDate = TDUtil.currentDate();
     if ( mTitle == null ) mTitle = TDString.EMPTY;
     TDLog.Log( TDLog.LOG_THERION, "Parser Survex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
-    // Log.v( TopoDroidApp.TAG, "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
+    // TDLog.v( "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 
   private boolean setJIndices(String[] vals, int vals_len)

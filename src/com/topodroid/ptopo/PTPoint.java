@@ -14,8 +14,6 @@ package com.topodroid.ptopo;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 
 public class PTPoint
 {
@@ -48,6 +46,6 @@ public class PTPoint
     PTFile.writeInt( fs, _y );
   }
 
-  // void print() { Log.v( TopoDroidApp.TAG, "Point " + _x + " " + _y ); }
+  // void print() { TDLog.v( "PT point " + _x + " " + _y ); }
 
 }

@@ -20,7 +20,6 @@
 package com.topodroid.mag;
 
 import java.util.Locale;
-import android.util.Log;
 
 // MAGtype_LegendreFunction;
 class MagLegendre
@@ -44,7 +43,7 @@ class MagLegendre
   //       int idx = (n * (n+1))/2 + m;
   //       sb.append( String.format(Locale.US, "%.8f ", Pcup[idx] ) );
   //     }
-  //     Log.v("DistoX", sb.toString() );
+  //     TDLog.v( sb.toString() );
   //   }
   // }
  
@@ -56,7 +55,7 @@ class MagLegendre
   //       int idx = (n * (n+1))/2 + m;
   //       sb.append( String.format(Locale.US, "%.8f ", dPcup[idx] ) );
   //     }
-  //     Log.v("DistoX", sb.toString() );
+  //     TDLog.v( sb.toString() );
   //   }
   // }
 

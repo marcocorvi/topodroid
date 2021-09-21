@@ -12,7 +12,7 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDUtil;
 import com.topodroid.common.ExtendType;
 
 class ParserUtil

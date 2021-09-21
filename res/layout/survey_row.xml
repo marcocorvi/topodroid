@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+  <CheckBox android:id="@+id/cb_survey"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="@dimen/padding"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:gravity="left"
+    android:textColor="#ffffffff"
+    android:singleLine="true"
+  />
+</LinearLayout>

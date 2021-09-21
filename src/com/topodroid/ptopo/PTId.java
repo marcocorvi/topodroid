@@ -17,7 +17,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 
 import java.util.Locale;
-// import android.util.Log;
 
 public class PTId
 {
@@ -127,11 +126,11 @@ public class PTId
   // void print() 
   // { 
   //   if ( (int)_id == ID_UNDEFINED ) {
-  //     Log.v( "DistoX-PT", "ID undef" );
+  //     TDLog.v( "ID undef" );
   //   } else if ( _id < 0 ) {
-  //     Log.v( "DistoX-PT", "ID number " + (_id + 0x80000001 ) );
+  //     TDLog.v( "ID number " + (_id + 0x80000001 ) );
   //   } else {
-  //     Log.v( "DistoX-PT", "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
+  //     TDLog.v( "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
   //   }
   // }
 

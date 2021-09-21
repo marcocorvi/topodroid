@@ -11,9 +11,10 @@
  */
 package com.topodroid.utils;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDPrefActivity;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.BrushManager;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.BrushManager;
 
 import android.os.Build;
 import android.content.Context;
@@ -21,8 +22,6 @@ import android.content.res.Resources;
 import android.content.res.Configuration;
 
 import android.util.DisplayMetrics;
-
-import android.util.Log;
 
 import java.util.Locale;
 
@@ -61,7 +60,7 @@ public class TDLocale
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    // Log.v("DistoX", "set locale str <" + mLocaleStr + "> " + mLocale.toString() );
+    // TDLog.v( "set locale str <" + mLocaleStr + "> " + mLocale.toString() );
     resetLocale( );
   }
 

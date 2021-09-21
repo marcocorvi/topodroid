@@ -14,8 +14,6 @@ package com.topodroid.dln;
 import com.topodroid.utils.TDLog;
 import com.topodroid.math.Point2D;
 
-// import android.util.Log;
-
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Stack;
@@ -52,7 +50,7 @@ public class DLNWall
   public void compute( List< DLNSite > pts )
   {
     int size = pts.size();
-    // Log.v("DistoX", "DLNWall sites " + size );
+    // TDLog.v( "DLNWall sites " + size );
     // try {
     //   FileWriter fw = new FileWriter( "/sdcard/test.txt" );
     //   PrintWriter pw = new PrintWriter( fw );
@@ -79,7 +77,7 @@ public class DLNWall
     Point2D c = new Point2D( (min.x+max.x)/2, (min.y+max.y)/2 ); // center
     float S0 = max.x - min.x;
     float s  = max.y - min.y; if ( s > S0 ) S0 = s;
-    // Log.v("DistoX", "center " + c.x + " " + c.y + " side " + S0 );
+    // TDLog.v( "center " + c.x + " " + c.y + " side " + S0 );
     s = 10*S0;
     Point2D A = new Point2D( c.x-s, c.y-s );
     Point2D B = new Point2D( c.x-s, c.y+s );
@@ -148,7 +146,7 @@ public class DLNWall
       doTriangle( t1, p );
       doTriangle( t2, p );
     }
-    // Log.v("DistoX", "DLNWall triangle " + mTri.size() );
+    // TDLog.v( "DLNWall triangle " + mTri.size() );
 
     // compute the convex hull
     ArrayList< DLNSide > tmp = new ArrayList<>();
@@ -171,7 +169,7 @@ public class DLNWall
         if ( ! t.hasPoint( D  ) && ! t.hasPoint( A  ) ) tmp.add( t.sideOf( DA ) );
       }
     }
-    // Log.v("DistoX", "DLNWall convex hull start " + tmp.size() );
+    // TDLog.v( "DLNWall convex hull start " + tmp.size() );
   
     int sz = tmp.size();
     DLNSide ts = tmp.get(0);
@@ -202,7 +200,7 @@ public class DLNWall
     }
     hs1.next = hs0;
     hs0.prev = hs1;
-    // Log.v("DistoX", "DLNWall convex hull done " + mHull.size() );
+    // TDLog.v( "DLNWall convex hull done " + mHull.size() );
   
     // compute sites poles
     for ( DLNSite it : pts ) {
@@ -239,7 +237,7 @@ public class DLNWall
         }
       }
     }
-    // Log.v("DistoX", "DLNWall convex hull final " + mHull.size() );
+    // TDLog.v( "DLNWall convex hull final " + mHull.size() );
     mPosHull = new ArrayList<>();
     mNegHull = new ArrayList<>();
 
@@ -271,7 +269,7 @@ public class DLNWall
         if ( hsp1 != null ) break;
       }
     }
-    // Log.v("DistoX", "Hull pos " + mPosHull.size() + " neg " + mNegHull.size() );
+    // TDLog.v( "Hull pos " + mPosHull.size() + " neg " + mNegHull.size() );
   }
 
   // void setSitePole( DLNSite site )

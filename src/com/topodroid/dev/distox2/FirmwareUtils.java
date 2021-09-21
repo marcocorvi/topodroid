@@ -13,8 +13,6 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 
-import android.util.Log;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
@@ -59,33 +57,33 @@ public class FirmwareUtils
     FileInputStream fis = null;
     try {
       // TDLog.Log( TDLog.LOG_IO, "read firmware file " + fp.getPath() );
-      Log.v( "DistoX-FW", "read firmware file " + fp.getPath() );
+      TDLog.v( "X310 read firmware file " + fp.getPath() );
       fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
       if ( dis.skipBytes( 2048 ) != 2048 ) {
-        Log.v("DistoX-FW", "failed skip 2048");
+        TDLog.v( "failed skip 2048");
         return 0; // skip 8 bootloader blocks
       }
       byte[] buf = new byte[SIGNATURE_SIZE];
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        Log.v("DistoX-FW", "failed read first block");
+        TDLog.v( "failed read first block");
         return 0;
       }
       if ( verifySignatureHeeb( buf ) == SIGNATURE_SIZE ) {
-        Log.v("DistoX-FW", "HEEB fw " + readFirmwareHeeb( buf ) );
+        TDLog.v( "HEEB fw " + readFirmwareHeeb( buf ) );
         return readFirmwareHeeb( buf );
       }
 
       if ( dis.skipBytes( 1984 ) != 1984 ) {
-        Log.v("DistoX-FW", "failed skip 1984");
+        TDLog.v( "failed skip 1984");
         return 0; // skip 8 bootloader blocks
       }
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        Log.v("DistoX-FW", "failed read second block");
+        TDLog.v( "failed read second block");
         return 0;
       }
       if ( verifySignatureLandolf( buf ) == SIGNATURE_SIZE ) {
-        Log.v("DistoX-FW", "LANDOLT fw " + readFirmwareLandolf( buf ) );
+        TDLog.v( "LANDOLT fw " + readFirmwareLandolf( buf ) );
         return readFirmwareLandolf( buf );
       }
     } catch ( IOException e ) {
@@ -128,10 +126,10 @@ public class FirmwareUtils
       }
       fis.close();
     } catch ( IOException e ) {
-      // Log.v("DistoX-FW", "check " + fw_version + ": IO exception " + e.getMessage() );
+      // TDLog.v( "check " + fw_version + ": IO exception " + e.getMessage() );
       return false;
     }
-    // Log.v("DistoX-FW", "check " + fw_version + ": " + String.format("%08x", checksum) );
+    // TDLog.v( "check " + fw_version + ": " + String.format("%08x", checksum) );
     switch ( fw_version ) {
       case 2100: return ( checksum == 0xf58b194b );
       case 2200: return ( checksum == 0x4d66d466 );
@@ -153,11 +151,11 @@ public class FirmwareUtils
   static int getDeviceHardware( byte[] signature )
   {
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
-      Log.v("DistoX-FW", "device hw HEEB" );
+      TDLog.v( "device hw HEEB" );
       return HW_HEEB;
     }
     if ( verifySignatureLandolf( signature ) == SIGNATURE_SIZE ) {
-      Log.v("DistoX-FW", "device hw LANDOLT" );
+      TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
     }
     return HW_NONE;
@@ -177,7 +175,7 @@ public class FirmwareUtils
   //     int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
   //     if ( mBuffer[0] == (byte)0x3a && addr == reply_addr ) {
   //       dis.readFully( buf, 0, 256 );
-  //       // Log.v("DistoX", "HARDWARE " + buf[0x40] + " " + buf[0x41] + " " + buf[0x42] + " " + buf[0x43] );
+  //       // TDLog.v( "HARDWARE " + buf[0x40] + " " + buf[0x41] + " " + buf[0x42] + " " + buf[0x43] );
   //       ret = (int)(buf[0x40]) + ((int)(buf[0x41])<<8); // major * 10 + minor
   //       // FIXME  ((int)(buf[0x42]))<<16 + ((int)(buf[0x43]))<<24;
   //     }

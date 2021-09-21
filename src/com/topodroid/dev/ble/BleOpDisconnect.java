@@ -15,8 +15,6 @@ import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
-import android.util.Log;
-
 public class BleOpDisconnect extends BleOperation 
 {
   public BleOpDisconnect( Context ctx, BleComm pipe )
@@ -29,7 +27,7 @@ public class BleOpDisconnect extends BleOperation
   @Override 
   public void execute()
   {
-    // Log.v("DistoX-BLE", "BleOp exec disconnect");
+    // TDLog.v( "BleOp exec disconnect");
     if ( mPipe == null ) { 
       TDLog.Error("BleOp disconnect error: null pipe" );
       return;

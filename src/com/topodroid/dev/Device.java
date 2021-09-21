@@ -13,8 +13,6 @@ package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 
-import android.util.Log;
-
 public class Device
 {
   // commands
@@ -120,7 +118,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, int h, int t, String name, String nickname )
   {
-    // Log.v("DistoX", "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
+    // TDLog.v( "[1] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -133,7 +131,7 @@ public class Device
   // nickname can be null
   public Device( String addr, String model, String name, String nickname )
   {
-    // Log.v("DistoX", "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
+    // TDLog.v( "[2] Device: " + addr + " " + model + " " + name + " addr " + addr );
     mAddress = addr;
     mModel = model;
     mType = modelToType( model );
@@ -146,14 +144,14 @@ public class Device
   /*
   public void dump()
   {
-    Log.v("DistoX", "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName 
+    TDLog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName 
       + " nick " + ((mNickname == null)? "null" : mNickname ) );
   }
   */
 
   private String fromName( String name )
   {
-    // Log.v("DistoX", "from name <" + name + "> model <" + mModel + ">" );
+    // TDLog.v( "from name <" + name + "> model <" + mModel + ">" );
     if ( name != null ) name = name.trim();
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
@@ -176,7 +174,7 @@ public class Device
 
   public String toString() 
   { 
-    // Log.v("DistoX", "to String <" + mName + "> type <" + mType + "> <" + typeString[ mType ] +">" );
+    // TDLog.v( "to String <" + mName + "> type <" + mType + "> <" + typeString[ mType ] +">" );
     if ( mNickname != null && mNickname.length() > 0 ) {
       return typeString[ mType ] + " " + mName + " " + mNickname;
     }

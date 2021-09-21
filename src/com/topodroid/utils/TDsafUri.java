@@ -11,8 +11,9 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDPath;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Build;
@@ -46,8 +47,6 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import android.util.Log;
-
 import android.provider.MediaStore;
 // import android.provider.MediaStore.Video;
 // import android.provider.MediaStore.Audio;
@@ -76,7 +75,7 @@ public class TDsafUri
       return fd;
     } catch ( IOException e ) {
       e.printStackTrace();
-      // Log.v("DistoX-SAF", "failed open output stream" );
+      // TDLog.v( "SAF failed open output stream" );
     }
     return null;
   }
@@ -90,7 +89,7 @@ public class TDsafUri
       // FIXME caller must close is
     } catch (IOException e) {
       e.printStackTrace();
-      // Log.v("DistoX-SAF", "failed open input stream" );
+      // TDLog.v( "SAF failed open input stream" );
     }
     return null;
   }
@@ -113,7 +112,7 @@ public class TDsafUri
       // FIXME fos must be closed(), but also pfd must be closed
     } catch ( IOException e ) {
       e.printStackTrace();
-      // Log.v("DistoX-SAF", "failed open output stream" );
+      // TDLog.v( "SAF failed open output stream" );
     }
     return null;
   }
@@ -142,7 +141,7 @@ public class TDsafUri
       // FIXME fos must be closed(), but also pfd must be closed
     } catch ( IOException e ) {
       e.printStackTrace();
-      // Log.v("DistoX-SAF", "failed open output stream" );
+      // TDLog.v( "SAF failed open output stream" );
     }
     return null;
   }

@@ -19,8 +19,6 @@ import java.util.ArrayList;
 import java.util.Stack;
 import java.util.Locale;
 
-import android.util.Log;
-
 class ClosureTask extends AsyncTask< Void, Void, Void >
 {
   TDNum  num;
@@ -75,7 +73,7 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
 
   void compute()
   {
-    // Log.v("DistoX", "shortest path " + sf.name + " " + st.name + " shots " + shots.size() + " stations " + paths.size() );
+    // TDLog.v( "shortest path " + sf.name + " " + st.name + " shots " + shots.size() + " stations " + paths.size() );
     Stack< NumShortpath > stack = new Stack<>();
     NumShortpath sp = getShortpath( sf );
     if ( sp == null ) return;
@@ -91,7 +89,7 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
           if ( etp != null ) {
             float d = sp.mDist + len;
             if ( d < etp.mDist - 0.001f ) { // at least 1 mm shorter
-              // Log.v("DistoX-LOOP", "set short dist T " + e.to.name + " : " + d );
+              // TDLog.v( "LOOP set short dist T " + e.to.name + " : " + d );
               etp.resetShortpath( sp, sp.mNr+1, d, sp.mDist2 + len*len );
               stack.push( etp );
             }
@@ -101,7 +99,7 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
           if ( efp != null ) {
             float d = sp.mDist + len;
             if ( d < efp.mDist - 0.001f ) { // at least 1 mm shorter
-              // Log.v("DistoX-LOOP", "set short dist F " + e.from.name + " : " + d );
+              // TDLog.v( "LOOP set short dist F " + e.from.name + " : " + d );
               efp.resetShortpath( sp, sp.mNr+1, d, sp.mDist2 + len*len );
               // e.from.path = from;
               stack.push( efp );
@@ -110,7 +108,7 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
         }
       }
     }
-    // Log.v("DistoX", "Loop closure done " + sfname + " " + stname );
+    // TDLog.v( "Loop closure done " + sfname + " " + stname );
     sp = getShortpath( st );
     if ( sp != null && sp.mNr > 0 ) {
       int nr = 1 + sp.mNr;                  // loop shots
@@ -124,12 +122,12 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
         sb.append( sp.getName() );
         -- k;
       }
-      // Log.v("DistoX", "Loop " + sb.toString() ); 
+      // TDLog.v( "Loop " + sb.toString() ); 
       if ( len > 0 ) {
         double error = (dl*100) / len;
         double angle = TDMath.sqrt( nr ) * dl / len * TDMath.RAD2DEG;
         String description = String.format(Locale.US, format, sfname, stname, nr, dl, len, dh, dv, error, angle );
-        // Log.v("DistoX", "Desc " + description );
+        // TDLog.v( "Desc " + description );
         num.addClosure( new NumClosure( description, sb.toString() ) );
       }
     }

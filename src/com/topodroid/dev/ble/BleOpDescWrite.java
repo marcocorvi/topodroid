@@ -15,8 +15,6 @@ import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
-import android.util.Log;
-
 import java.util.Arrays;
 
 public class BleOpDescWrite extends BleOperation 

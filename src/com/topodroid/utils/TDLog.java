@@ -13,7 +13,7 @@ package com.topodroid.utils;
 
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDPrefKey;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.Cave3X.TDPath;
 
 import java.io.File;
 import java.io.IOException;
@@ -31,7 +31,7 @@ public class TDLog
   // ---------------------------------------------------------
   // DEBUG: logcat flags
 
-  static final private String TAG = "DistoX";
+  static final public String TAG = "Cave3X";
 
   static private int mLogStream = 0;    // log stream
   static private boolean mLogAppend = false;
@@ -79,7 +79,7 @@ public class TDLog
 
   static public void exportLogSettings( PrintWriter pw )
   {
-    // Log.v("DistoX", "TDLog exports settings");
+    // Log.v( TAG, "TDLog exports settings");
     pw.printf("Log stream %d\n", mLogStream ); // THIS MUST BE THE FIRST LINE
     pw.printf("ERROR %c, DEBUG %c, MAIN %c, PREFS %c, PERM %c, DB %c \n",
       tf(LOG_ERR), tf(LOG_DEBUG), tf(LOG_MAIN), tf(LOG_PREFS), tf(LOG_PERM), tf(LOG_DB) );
@@ -138,7 +138,7 @@ public class TDLog
   // static void Profile( String msg )
   // {
   //   mMillis = System.currentTimeMillis() % 600000;
-  //   Log.v("DistoX", Long.toString(mMillis) + " PROFILE " + msg );
+  //   Log.v( TAG, Long.toString(mMillis) + " PROFILE " + msg );
   // }
 
   static public void TimeStart() { mMillis = System.currentTimeMillis(); }
@@ -211,6 +211,13 @@ public class TDLog
     }
   }
 
+  static public void v( String msg )
+  {
+    if ( msg != null ) {
+      Log.v( TAG, msg );
+    }
+  }
+
   static public void LogStackTrace( Exception e )
   {
     StackTraceElement[] trace = e.getStackTrace();
@@ -228,7 +235,7 @@ public class TDLog
       try {
         mLogFile.close();
       } catch ( IOException e ) {
-        Log.e("DistoX", "close log file error: " + e.getMessage() );
+        Log.e( TAG, "close log file error: " + e.getMessage() );
       }
       mLogFile = null;
       mLog = null;
@@ -240,7 +247,7 @@ public class TDLog
         mLog = new PrintWriter( mLogFile, true ); // true = autoflush
         mLog.format( "TopoDroid version %s\n", TDVersion.string() );
       } catch ( IOException e ) {
-        Log.e("DistoX", "create log file error: " + e.getMessage() );
+        Log.e( TAG, "create log file error: " + e.getMessage() );
       }
     }
   }
@@ -291,7 +298,7 @@ public class TDLog
     
   static public void checkLogPreferences( SharedPreferences sp, String k, String v )
   {
-    // Log.v("DistoX", "Log key " + k + " value " + v );
+    // Log.v( TAG, "Log key " + k + " value " + v );
     if ( k.equals( "DISTOX_LOG_STREAM" ) ) { // "DISTOX_LOG_STREAM",
       mLogStream = Integer.parseInt( v ); // ( sp.getString(k, "0") );
     }
@@ -299,7 +306,7 @@ public class TDLog
 
   static public void checkLogPreferences( SharedPreferences sp, String k, boolean b )
   {
-    // Log.v("DistoX", "Log key " + k + " value " + b );
+    // Log.v( TAG, "Log key " + k + " value " + b );
     final String[] log_key = TDPrefKey.LOG;
     int lk = 2;
     // b = sp.getBoolean( k, false );

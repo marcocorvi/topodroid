@@ -15,16 +15,14 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.Lister;
-// import com.topodroid.DistoX.DBlock;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.Lister;
+// import com.topodroid.Cave3X.DBlock;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 import com.topodroid.dev.distox.DistoX;
-
-import android.util.Log;
 
 import java.util.UUID;
 // import java.util.List;
@@ -74,8 +72,8 @@ public class TopoDroidComm
   // @param data_type bric datatype (0: normal, 1: scan )
   public void handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
-    // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
-    // Log.v("DistoX", "TD comm: packet DATA");
+    // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // TDLog.v( "TD comm: packet DATA");
     // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
     ++mNrPacketsRead;
     double d = mProtocol.mDistance;
@@ -102,14 +100,14 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      Log.v("DistoX", "TD comm: null Lister");
+      TDLog.v( "TD comm: null Lister");
     }
   }
 
   public void handleZeroPacket( long index, Handler lister, int data_type )
   {
-    // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
-    // Log.v("DistoX", "TD comm: packet DATA");
+    // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // TDLog.v( "TD comm: packet DATA");
     // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
     ++mNrPacketsRead;
     double r = mProtocol.mRoll;
@@ -125,7 +123,7 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      Log.v("DistoX", "TD comm: null Lister");
+      TDLog.v( "TD comm: null Lister");
     }
   }
 
@@ -134,9 +132,9 @@ public class TopoDroidComm
   // @param data_type unused
   public void handleRegularPacket( int res, Handler lister, int data_type )
   {
-    // Log.v( "DistoX", "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
+    // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     if ( res == DataType.PACKET_DATA ) {
-      // Log.v("DistoX", "TD comm: packet DATA");
+      // TDLog.v( "TD comm: packet DATA");
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       double d = mProtocol.mDistance;
@@ -146,7 +144,7 @@ public class TopoDroidComm
       // extend is unset to start
       // long extend = TDAzimuth.computeLegExtend( b ); // ExtendType.EXTEND_UNSET; FIXME_EXTEND 
       // TDLog.Log( TDLog.LOG_COMM, "Comm D PACKET " + d + " " + b + " " + c );
-      // Log.v("DistoX", "TD comm: D PACKET " + d + " " + b + " " + c );
+      // TDLog.v( "TD comm: D PACKET " + d + " " + b + " " + c );
       // NOTE type=0 shot is DistoX-type
       long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
       mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, -1L, d, b, c, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -160,7 +158,7 @@ public class TopoDroidComm
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       } else {
-        Log.v("DistoX", "TD comm: null Lister");
+        TDLog.v( "TD comm: null Lister");
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );
@@ -172,13 +170,13 @@ public class TopoDroidComm
       //   lister.updateBlockList( blk );
       // }
     } else if ( res == DataType.PACKET_G ) {
-      // Log.v("DistoX", "TD comm: packet G");
+      // TDLog.v( "TD comm: packet G");
       /// TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
       setHasG( true );
     } else if ( res == DataType.PACKET_M ) {
-      // Log.v("DistoX", "TD comm: packet M");
+      // TDLog.v( "TD comm: packet M");
       // TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
@@ -204,7 +202,7 @@ public class TopoDroidComm
       }
       setHasG( false );
     } else if ( res == DataType.PACKET_REPLY ) {
-      // Log.v("DistoX", "TD comm: packet REPLY");
+      // TDLog.v( "TD comm: packet REPLY");
       // TODO handle packet reply
       //
       // byte[] addr = mProtocol.getAddress();
@@ -229,7 +227,7 @@ public class TopoDroidComm
       //   // mTail = (int)( reply[2] | ( (int)(reply[3]) << 8 ) );
       // }
     } else if ( res == DataType.PACKET_VECTOR ) {
-      // Log.v("DistoX", "TD comm: packet VECTOR");
+      // TDLog.v( "TD comm: packet VECTOR");
       // vector packet do count
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
       ++mNrPacketsRead;
@@ -331,7 +329,7 @@ public class TopoDroidComm
       for (int k=0; k<3 && ! ret; ++k ) { // try three times
         ret = mProtocol.sendCommand( (byte)cmd ); // was ret |= ...
         // TDLog.Log( TDLog.LOG_COMM, "sendCommand " + cmd + " " + k + "-ret " + ret );
-        // Log.v( "DistoX", "sendCommand " + cmd + " " + k + "-ret " + ret );
+        // TDLog.v( "sendCommand " + cmd + " " + k + "-ret " + ret );
         TDUtil.slowDown( TDSetting.mWaitCommand, "send command sleep interrupted"); // it is ok to be interrupted
       }
     }
@@ -367,7 +365,7 @@ public class TopoDroidComm
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
     TDLog.Error("TD comm: generic download data always fails");
-    // Log.v("DistoX", "TD comm: generic download data always fails");
+    // TDLog.v( "TD comm: generic download data always fails");
     return -1;
   }
 

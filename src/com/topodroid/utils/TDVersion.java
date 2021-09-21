@@ -11,9 +11,7 @@
  */
 package com.topodroid.utils;
 
-// import com.topodroid.utils.TDLog;
-
-import android.util.Log;
+import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
@@ -65,26 +63,26 @@ public class TDVersion
   public static String symbols() { return SYMBOL_VERSION; }
 
   // return: 0 ok, 1 no, <0 error
-  public static int checkPackageVersion( Context context, String package_name, int min_version )
-  {
-    PackageManager pm = context.getPackageManager();
-    try { 
-      PackageInfo info = pm.getPackageInfo( package_name, PackageManager.GET_META_DATA );
-      if ( info == null ) {
-        Log.e("DistoX-Cave3D", "null package info"); 
-        return -2;
-      }
-      Log.e("DistoX-Cave3D", "Version " + info.versionCode + " " + min_version );
-      return ( info.versionCode < min_version )? 1 : 0;
-    } catch ( NameNotFoundException e) {
-      Log.e("DistoX-Cave3D", "package name not found"); 
-      // nothing
-    }
-    return -1;
-  }
+  // public static int checkPackageVersion( Context context, String package_name, int min_version )
+  // {
+  //   PackageManager pm = context.getPackageManager();
+  //   try { 
+  //     PackageInfo info = pm.getPackageInfo( package_name, PackageManager.GET_META_DATA );
+  //     if ( info == null ) {
+  //       TDLog.e("Cave3D null package info"); 
+  //       return -2;
+  //     }
+  //     TDLog.e("Cave3D Version " + info.versionCode + " " + min_version );
+  //     return ( info.versionCode < min_version )? 1 : 0;
+  //   } catch ( NameNotFoundException e) {
+  //     TDLog.e("Cave3D package name not found"); 
+  //     // nothing
+  //   }
+  //   return -1;
+  // }
 
-  public static int checkCave3DVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3D", MIN_CAVE3D_VERSION ); }
-  public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.DistoX", MIN_TOPODROID_VERSION ); }
+  // public static int checkCave3DVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3D", MIN_CAVE3D_VERSION ); }
+  // public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3X", MIN_TOPODROID_VERSION ); }
 
   public static boolean setVersion( Context context )
   {
@@ -100,7 +98,7 @@ public class TDVersion
           MINOR = Integer.parseInt( ver[1] );
         } catch ( NumberFormatException e ) {
           ApplicationInfo app_info = context.getApplicationInfo();
-          Log.e( app_info.processName, "parse error: major/minor " + ver[0] + " " + ver[1] );
+          TDLog.Error( app_info.processName + " parse error: major/minor " + ver[0] + " " + ver[1] );
         }
         int k = 0;
         SUB = 0;
@@ -119,7 +117,7 @@ public class TDVersion
         v -= SUB *         10;
         VCH = (char)('a' + v); // FIXME
       }
-      // Log.v("DistoX", "Major " + MAJOR + " minor " + MINOR + " sub " + SUB + VCH );
+      // TDLog.v( "Major " + MAJOR + " minor " + MINOR + " sub " + SUB + VCH );
       return true;
     } catch ( NameNotFoundException e ) {
       // FIXME

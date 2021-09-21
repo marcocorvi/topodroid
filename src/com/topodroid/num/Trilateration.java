@@ -16,8 +16,6 @@ import com.topodroid.math.Point2D;
 import java.util.ArrayList;
 // import java.util.List;
 
-// import android.util.Log;
-
 class Trilateration
 {
   ArrayList< TriLeg > legs;
@@ -180,7 +178,7 @@ class Trilateration
     int n_pts = points.size();
     eps *= n_pts; // 1 mm per point
     double err0 = computeError1( n_pts );
-    // Log.v("DistoX", "initial error " + err0 );
+    // TDLog.v( "initial error " + err0 );
     Point2D[] dp = new Point2D[ n_pts ]; // gradient of points (x,y)
     for ( iter =0 ; iter < iter_max; ++ iter ) {
       for ( int i=0; i<n_pts; ++i ) {
@@ -211,7 +209,7 @@ class Trilateration
       }   
       for ( int k=0; k<2; ++k ) {
         double err3 = computeError1( n_pts );
-        // Log.v("DistoX", "error " + err3 );
+        // TDLog.v( "error " + err3 );
         if ( err3 >= err0 ) {
           delta /= 2;
           for ( int i=0; i<n_pts; ++i ) {
@@ -226,7 +224,7 @@ class Trilateration
       }
       if ( err0 < eps || delta < 0.000001 ) break;
     }
-    // Log.v("DistoX", "minimize error " + err0 + " iter " + iter + " final delta " + delta );
+    // TDLog.v( "minimize error " + err0 + " iter " + iter + " final delta " + delta );
     return err0;
   }
 

@@ -39,8 +39,6 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
-import android.util.Log;
-
 /**
  */
 public class TdmViewSurface extends SurfaceView
@@ -120,7 +118,7 @@ public class TdmViewSurface extends SurfaceView
 
     void addEquates( ArrayList< TdmEquate > equates )
     {
-      // Log.v("TdManager", "add equates: size " + equates.size() );
+      // TDLog.v("View surface: add equates: size " + equates.size() );
       synchronized( mEquates ) {
         mEquates.clear();
         for ( TdmViewCommand command : mCommandManager ) {
@@ -172,12 +170,12 @@ public class TdmViewSurface extends SurfaceView
       for ( TdmEquate equate : equates ) {
         String station = equate.getSurveyStation( survey_name );
         if ( station != null ) {
-          // Log.v("TdManager", "equate station " + station + " survey <" + survey_name  + ">" );
+          // TDLog.v("View surface: equate station " + station + " survey <" + survey_name  + ">" );
           equate_stations.add( station );
         }
       }
-      // Log.v("TdManager", "Survey " + survey.mName + " equated stations " + equate_stations.size() );
-      // for ( String st : equate_stations ) Log.v("TdManager", "station " + st);
+      // TDLog.v("View surface Survey " + survey.mName + " equated stations " + equate_stations.size() );
+      // for ( String st : equate_stations ) TDLog.v("View surface station " + st);
 
       for ( TdmStation st : survey.mStations ) {
         boolean equated = false;
@@ -225,7 +223,7 @@ public class TdmViewSurface extends SurfaceView
         y = y / mZoom; // canvasToSceneY( y );
       } // else 
         // x,y are scene coords
-      // Log.v("TdManager", "get survey at " + x + " " + y );
+      // TDLog.v("View surface: get survey at " + x + " " + y );
       mCommand = null;
       double dmin = 100000; // FIXME a large number
       for ( TdmViewCommand command : mCommandManager ) {
@@ -329,7 +327,7 @@ public class TdmViewSurface extends SurfaceView
             refresh();
           } else {
             try {
-              // Log.v( TopoDroidApp.TAG, "drawing thread sleeps ..." );
+              // TDLog.v( "View surface: drawing thread sleeps ..." );
               sleep(100);
             } catch ( InterruptedException e ) { }
           }
@@ -349,7 +347,7 @@ public class TdmViewSurface extends SurfaceView
 
     public void surfaceCreated(SurfaceHolder mHolder) 
     {
-      // Log.v( "TdManager", "surface created " );
+      // TDLog.v( "View surface: created " );
       if (thread == null ) {
         thread = new DrawThread(mHolder);
       }
@@ -359,7 +357,7 @@ public class TdmViewSurface extends SurfaceView
 
     public void surfaceDestroyed(SurfaceHolder mHolder) 
     {
-      // Log.v( "TdManager", "surface destroyed " );
+      // TDLog.v( "View surface: destroyed " );
       boolean retry = true;
       thread.setRunning(false);
       while (retry) {

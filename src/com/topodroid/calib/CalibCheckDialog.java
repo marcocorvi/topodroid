@@ -17,9 +17,9 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.SurveyWindow;
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.SurveyWindow;
+import com.topodroid.Cave3X.DBlock;
 
 import java.util.List;
 
@@ -40,8 +40,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 // import android.graphics.Bitmap;
-
-import android.util.Log;
 
 public class CalibCheckDialog extends MyDialog
                        implements OnItemClickListener
@@ -107,7 +105,7 @@ public class CalibCheckDialog extends MyDialog
     String str = ((TextView) view).getText().toString();
     int len = str.indexOf(" ");
     int id = Integer.parseInt( str.substring(0, len) );
-    // Log.v("DistoX", "check item " + id );
+    // TDLog.v( "check item " + id );
     DBlock blk = null;
     float x=0, y=0, z=0; // vector sum of the data in the leg
     int n1 = 0;          // number of data in the leg
@@ -142,7 +140,7 @@ public class CalibCheckDialog extends MyDialog
     }
 
     if ( blk != null ) {
-      // Log.v("DistoX", "check block " + blk.mFrom + " " + blk.mTo + " n1 " + n1 );
+      // TDLog.v( "check block " + blk.mFrom + " " + blk.mTo + " n1 " + n1 );
       String b0 = blk.mFrom + "-" + blk.mTo;
       String b2 = null;
       TDVector v0 = new TDVector( x, y, z ); // unit vector along the leg
@@ -184,7 +182,7 @@ public class CalibCheckDialog extends MyDialog
       hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 50, TDColor.FIXED_ORANGE ) );
 
       if ( n2 > 0 ) {
-	// Log.v("DistoX", "found opposite block: n2 " + n2 );
+	// TDLog.v( "found opposite block: n2 " + n2 );
         float[] errors2 = new float[n2*n1];
         for ( k = 0; k<n1; ++k ) {
           DBlock bb = mShots.get( k1 + k );
@@ -202,7 +200,7 @@ public class CalibCheckDialog extends MyDialog
         hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 10, TDColor.LIGHT_GRAY ) );
         setTitle( b0 + " " + b2 );
       } else {
-	Log.v("DistoX", "search a triangle" );
+	TDLog.v( "search a triangle" );
 	// k2 = n2 = 0;
         int n3 = 0;
         int k3 = 0; // index of the opposite leg
@@ -261,7 +259,7 @@ public class CalibCheckDialog extends MyDialog
 	}
         String b3 = null;
 	if ( station != null ) {
-          // Log.v("DistoX", "found block2 " + blk2.mFrom + " " + blk2.mTo + " sign2 " + sign2 + " n2 " + n2 );
+          // TDLog.v( "found block2 " + blk2.mFrom + " " + blk2.mTo + " sign2 " + sign2 + " n2 " + n2 );
           b2 = blk2.mFrom + "-" + blk2.mTo;
           
 	  k = 0;
@@ -307,7 +305,7 @@ public class CalibCheckDialog extends MyDialog
 	  }
 	}
         if ( n2 > 0 && n3 > 0 ) {
-          // Log.v("DistoX", "found block3 k1 " + k1 + " k2 " + k2 + " k3 " + k3 );
+          // TDLog.v( "found block3 k1 " + k1 + " k2 " + k2 + " k3 " + k3 );
           float[] errors3 = new float[n3*n2*n1];
           for ( int h1 = 0; h1<n1; ++h1 ) {
             DBlock bb = mShots.get( k1 + h1 );
@@ -329,7 +327,7 @@ public class CalibCheckDialog extends MyDialog
 	    	// misclosure (percent of length), the factor 1 / (10*RAD2DEG) acoounts for the same in makeHistogramBitmap()
 		// 52 = 3*sqrt(3) * 100 / 10
                 errors3[(h1*n2+h2)*n3+h3] = 52 * w3.Length() / ( (l1+l2+l3)*TDMath.RAD2DEG);
-		// Log.v("DistoX", "error " + errors3[(h1*n2+h2)*n3+h3] + " " + l1 + " " + l2 + " " + l3 );
+		// TDLog.v( "error " + errors3[(h1*n2+h2)*n3+h3] + " " + l1 + " " + l2 + " " + l3 );
 	      }
 	    }
           }

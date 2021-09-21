@@ -18,8 +18,6 @@ package com.topodroid.dev.sap;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.TopoDroidProtocol;
 
-import android.util.Log;
-
 // import android.os.Handler;
 import android.content.Context;
 
@@ -44,7 +42,7 @@ class SapProtocol extends TopoDroidProtocol
     super( device, context );
     // mComm   = comm;
     mWriteBuffer = new ArrayList< byte[] >();
-    // Log.v("DistoX", "SAP proto: cstr");
+    // TDLog.v( "SAP proto: cstr");
   }
 
   public void addToWriteBuffer( byte[] bytes )
@@ -62,7 +60,7 @@ class SapProtocol extends TopoDroidProtocol
   // @return number of bytes set into the write characteristic
   public byte[] handleWrite( )
   {
-    // Log.v("DistoX", "SAP proto: write - pending " + mWriteBuffer.size() );
+    // TDLog.v( "SAP proto: write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
     synchronized ( mWriteBuffer ) {
       while ( ! mWriteBuffer.isEmpty() ) {
@@ -75,7 +73,7 @@ class SapProtocol extends TopoDroidProtocol
   // @param crtr   GATT read characteristic
   public int handleRead( byte[] bytes )
   {
-    // Log.v("DistoX", "SAP proto: read bytes " + bytes.length );
+    // TDLog.v( "SAP proto: read bytes " + bytes.length );
     byte[] buffer = new byte[8];
     System.arraycopy( bytes, 0, buffer, 0, 8 );
     // ACKNOWLEDGMENT

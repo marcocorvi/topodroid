@@ -16,8 +16,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDAzimuth;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDAzimuth;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 
@@ -28,8 +28,6 @@ import java.io.BufferedReader;
 // import java.util.Stack;
 import java.util.Locale;
 // import java.util.regex.Pattern;
-
-// import android.util.Log;
 
 class ParserCompass extends ImportParser
 {
@@ -43,7 +41,7 @@ class ParserCompass extends ImportParser
   ParserCompass( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
     super( apply_declination );
-    // Log.v("DistoX", "Parser Compass <" + filename + ">" );
+    // TDLog.v( "Parser Compass <" + filename + ">" );
     // mName = survey name is read from the file
     mLrud     = lrud;
     mLegFirst = leg_first;
@@ -74,7 +72,7 @@ class ParserCompass extends ImportParser
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();
-        // Log.v("DistoX", line );
+        // TDLog.v( line );
         if ( line.startsWith("SURVEY NAME") ) {
           if ( mName == null ) {
             int pos = line.indexOf( ':' );
@@ -214,7 +212,7 @@ class ParserCompass extends ImportParser
       mDate = TDUtil.currentDate();
     }
     TDLog.Log( TDLog.LOG_THERION, "Parser Compass shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "Parser Compass shots "+ shots.size() + " splays "+ splays.size() );
+    // TDLog.v( "Parser Compass shots "+ shots.size() + " splays "+ splays.size() );
   }
 
   float parseAngleUnit( String unit ) 

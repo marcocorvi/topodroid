@@ -17,8 +17,6 @@ import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 
-// import android.util.Log;
-
 public class NumBranch
 {
   public static final int BRANCH_UNKNOWN = 0; // branch types

@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal">
+
+
+  <CheckBox android:id="@+id/show"
+    android:layout_weight="20"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="right"
+    android:text=" # "
+    android:textColor="#ffffff00"
+  />
+
+  <CheckBox android:id="@+id/delete"
+    android:layout_weight="20"
+    android:layout_width="0dp"
+    android:layout_height="wrap_content"
+    android:singleLine="true"
+    android:textSize="@dimen/textsize"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="right"
+    android:text=" X "
+    android:textColor="#ffff3333"
+  />
+
+  <TextView android:id="@+id/name"
+    android:layout_width="0dp"
+    android:layout_weight="60"
+    android:layout_height="wrap_content"
+    android:textSize="@dimen/textsize"
+    android:singleLine="true"
+    android:typeface="monospace"
+    android:padding="@dimen/padding"
+    android:gravity="left"
+    android:textColor="#ffffffff"
+  />
+
+</LinearLayout>

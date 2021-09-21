@@ -13,15 +13,13 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TopoDroidApp;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.DistoXComm;
 import com.topodroid.dev.distox.DistoXProtocol;
-
-import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
@@ -88,7 +86,7 @@ public class DistoX310Comm extends DistoXComm
           break;
       }
       if ( mCommThread == null && to_read > 0 ) {
-        // Log.v("DistoX-BLE", "DistoX310 comm: RF comm thread start ... ");
+        // TDLog.v( "DistoX310 comm: RF comm thread start ... ");
         startCommThread( 2*to_read, lister, data_type );  // each data has two packets
         while ( mCommThread != null ) {
           TDUtil.slowDown( 100 );
@@ -209,7 +207,7 @@ public class DistoX310Comm extends DistoXComm
   // public int dumpFirmware( String address, String filepath )
   public int dumpFirmware( String address, File file )
   {
-    Log.v("DistoX-FW", "Comm dump firmware " + file.getPath() );
+    TDLog.v( "Comm dump firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
@@ -228,7 +226,7 @@ public class DistoX310Comm extends DistoXComm
   // public int uploadFirmware( String address, String filepath )
   public int uploadFirmware( String address, File file )
   {
-    Log.v("DistoX-FW", "Comm upload firmware " + file.getPath() );
+    TDLog.v( "Comm upload firmware " + file.getPath() );
     int ret = 0;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
@@ -243,11 +241,11 @@ public class DistoX310Comm extends DistoXComm
         // FIXME DRY_RUN
         if ( DRY_RUN ) {
           ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file );
-          Log.v("DistoX-FW", "Comm Firmware upoad dry run: " + ret );
+          TDLog.v( "Comm Firmware upoad dry run: " + ret );
         } else {
           // ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
           ret = ((DistoX310Protocol)mProtocol).uploadFirmware( file );
-          Log.v("DistoX-FW", "Comm Firmware upoad: " + ret );
+          TDLog.v( "Comm Firmware upoad: " + ret );
         }
       } else {
         ret = -1;

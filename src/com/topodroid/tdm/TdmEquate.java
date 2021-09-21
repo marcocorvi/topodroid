@@ -13,8 +13,6 @@ package com.topodroid.tdm;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 class TdmEquate
 {
   ArrayList< String > mStations; // full station names
@@ -36,9 +34,9 @@ class TdmEquate
   // return null if there is no ...@survey 
   String getSurveyStation( String survey )
   {
-    // Log.v("TdManager", "get survey station " + survey );
+    // TDLog.v("Equate: get survey station " + survey );
     for ( String name : mStations ) {
-      // Log.v("TdManager", "try name <" + name + ">" );
+      // TDLog.v("Equate: try name <" + name + ">" );
       String[] names = name.split("@");
       if ( names.length > 1 && survey.equals( names[1] ) ) return names[0];
     }
@@ -51,13 +49,13 @@ class TdmEquate
     for ( String name : mStations ) {
       String[] names = name.split("@");
       if ( names.length > 1 && survey.equals( names[1] ) ) {
-	// Log.v("TdManager", "equate drop station >" + name + "<" );
+	// TDLog.v("equate drop station >" + name + "<" );
       } else {
 	stations.add( name );
       }
     }
     mStations = stations;
-    // Log.v("TdManager", "equate " + stationsString() + " size " + size() );
+    // TDLog.v("equate " + stationsString() + " size " + size() );
     return mStations.size();
   }
 

@@ -13,8 +13,6 @@ package com.topodroid.dev.bric;
 
 import com.topodroid.dev.ble.BleUtils;
 
-import android.util.Log;
-
 import java.util.UUID; 
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -74,7 +72,7 @@ public class BricConst
     int MM = BleUtils.getChar( bytes, 5 );
     int SS = BleUtils.getChar( bytes, 6 );
     int CS = BleUtils.getChar( bytes, 7 ); // centiseconds
-    // Log.v("DistoX", "BRIC time " + String.format("%4d-%02d-%02d %2d:%02d:%02d.%02d", yy, mm, dd, HH, MM, SS, CS ) );
+    // TDLog.v( "BRIC time " + String.format("%4d-%02d-%02d %2d:%02d:%02d.%02d", yy, mm, dd, HH, MM, SS, CS ) );
     Calendar date = new GregorianCalendar();
     date.set( yy, mm, dd, HH, MM, SS );
     return date.getTimeInMillis() + 10 * CS;

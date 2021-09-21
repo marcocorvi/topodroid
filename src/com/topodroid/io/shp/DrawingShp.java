@@ -17,21 +17,19 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 import com.topodroid.num.NumStation;
-import com.topodroid.DistoX.Archiver;
-import com.topodroid.DistoX.GeoReference;
-import com.topodroid.DistoX.ICanvasCommand;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingAudioPath;
-import com.topodroid.DistoX.DrawingPhotoPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.BrushManager;
-
-import android.util.Log;
+import com.topodroid.Cave3X.Archiver;
+import com.topodroid.Cave3X.GeoReference;
+import com.topodroid.Cave3X.ICanvasCommand;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingAudioPath;
+import com.topodroid.Cave3X.DrawingPhotoPath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingCommandManager;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.BrushManager;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -50,7 +48,7 @@ public class DrawingShp
   // @return true if successful
   public static boolean writeShp( OutputStream fos, String dirname, DrawingCommandManager plot, long type, GeoReference station )
   {
-    // Log.v("DistoX", "SHP sketch export dirname " + dirname );
+    // TDLog.v( "SHP sketch export dirname " + dirname );
     double xoff = 0;
     double yoff = 0;
     double xscale = ShpObject.SCALE;
@@ -70,7 +68,7 @@ public class DrawingShp
       TDLog.Error("mkdir " + dirname + " error");
       return false;
     }
-    // Log.v("DistoX", "mkdir created MSdir " + dirname );
+    // TDLog.v( "mkdir created MSdir " + dirname );
     ArrayList< String > files = new ArrayList<>();
 
     try {

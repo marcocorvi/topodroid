@@ -11,7 +11,7 @@
  */
 package com.topodroid.tdm;
 
-import android.util.Log;
+import com.topodroid.utils.TDLog;
 
 class TdmFile 
 {
@@ -28,7 +28,7 @@ class TdmFile
     } else {
       mName = surveyname;
     }
-    Log.v("DistoX", "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
+    TDLog.v( "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
   }
 
   public String getFilepath() { return mFilepath; }

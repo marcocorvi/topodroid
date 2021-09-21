@@ -12,13 +12,11 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import android.content.Context;
 
 import android.bluetooth.BluetoothGattCharacteristic;
-
-import android.util.Log;
 
 import java.util.UUID;
 
@@ -52,7 +50,7 @@ public class BleOpNotify extends BleOperation
   @Override 
   public void execute()
   {
-    // Log.v("DistoX", "BleOp exec notify " + mEnable + " " + mChrtUuid.toString() );
+    // TDLog.v( "BleOp exec notify " + mEnable + " " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
       TDLog.Error("BleOp notify error: null pipe " + mChrtUuid.toString() );
       return;

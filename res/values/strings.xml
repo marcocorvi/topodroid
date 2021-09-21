@@ -21,7 +21,7 @@ Refer to the web pages for details.\n
   <string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string>
   <string name="r_continue">CONTINUE</string>
 
-    <string name="app_name" translatable="false">TopoDroid</string>
+    <string name="app_name" translatable="false">TopoDroid+</string>
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Click BACK again to exit</string>
 
@@ -1098,6 +1098,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_edit">TopoDroid editing settings</string>
     <string name="title_settings_device">TopoDroid device settings</string>
     <string name="title_settings_calib">TopoDroid calibration settings</string>
+    <string name="title_settings_3d">TopoDroid 3d viewer settings</string>
+    <string name="title_settings_dem">TopoDroid DEM settings</string>
+    <string name="title_settings_walls3d">TopoDroid 3d model settings</string>
     <string name="title_settings_geek">TopoDroid geek settings</string>
     <string name="title_settings_log">TopoDroid log settings</string>
 
@@ -1149,6 +1152,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">CALIBRATIONS</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">DEVICES</string>
+  <string name="pref_cat_cave3d">3D VIEWER</string>
   <string name="pref_cat_geek">CUSTOM SETTINGS</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -1259,6 +1263,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_svg_line_dir_summary">Add orientation-tick to orientable lines</string>
   <string name="pref_svg_stationsize_title">Station size</string>
   <string name="pref_svg_stationsize_summary">Station names text size</string>
+  <string name="pref_svg_labelsize_title">Label size</string>
+  <string name="pref_svg_labelsize_summary">Label text size</string>
   <string name="pref_kml_stations_title">KML/JSON stations</string>
   <string name="pref_kml_stations_summary">Add stations to KML/GeoJSON export</string>
   <string name="pref_kml_splays_title">KML/JSON splays</string>
@@ -1490,6 +1496,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_checkAttached_summary">Check if stations are attached</string>
   <string name="pref_checkExtend_title">Leg extend check</string>
   <string name="pref_checkExtend_summary">Check if leg extends are set</string>
+  <string name="pref_toolbarSize_title">Toolbar size</string>
+  <string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string>
   <string name="pref_backup_number_title">Backup number</string>
   <string name="pref_backup_number_summary">Number of sketch files backups</string>
   <string name="pref_backup_interval_title">Backup interval</string>

@@ -11,9 +11,10 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.io.File;
 import java.io.FileReader;
@@ -33,8 +34,6 @@ import android.widget.Button;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 
-import android.util.Log;
-
 public class TdmHelpDialog extends Dialog // Activity
 {
   private Context  mContext;
@@ -48,7 +47,7 @@ public class TdmHelpDialog extends Dialog // Activity
 
   private void load( )
   {
-    // Log.v( "DistoX-TdManager", "reading from file " + mFilename );
+    // TDLog.v( "reading from file " + mFilename );
     try {
       InputStreamReader fr = new InputStreamReader( mContext.getAssets().open( "tdm_help.txt" ) );
       BufferedReader br = new BufferedReader( fr );
@@ -59,7 +58,7 @@ public class TdmHelpDialog extends Dialog // Activity
       }
       fr.close();
     } catch ( IOException e ) {
-      Log.e("DistoX-TdManager",  "load IOexception " + e.toString() );
+      TDLog.Error("Tdm Help: error " + e.toString() );
     }
   }
 

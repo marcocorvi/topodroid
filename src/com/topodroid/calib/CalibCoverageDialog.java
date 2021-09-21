@@ -11,13 +11,12 @@
  */
 package com.topodroid.calib;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
-
-import android.util.Log;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.TDToast;
 
 import java.util.List;
 import java.util.Locale;
@@ -77,7 +76,7 @@ public class CalibCoverageDialog extends MyDialog
     // mDeviations = mCoverage.evalDeviations( list );
     // for ( int k= 180; k>=0; --k ) {
     //   if ( mDeviations[k] > 0 ) {
-    //     Log.v("DistoX-COVER", k + " " + mDeviations[k] );
+    //     TDLog.v("COVER" + k + " " + mDeviations[k] );
     //   }
     // }
 
@@ -119,7 +118,7 @@ public class CalibCoverageDialog extends MyDialog
     mImageUp.setImageBitmap( mBitmapUp );
     mImageDown.setImageBitmap( mBitmapDown );
     String format = mContext.getResources().getString(res);
-    // Log.v("DistoX-COVER", "res " + res + " format " + format );
+    // TDLog.v("COVER res " + res + " format " + format );
 
     mText.setText( String.format(Locale.US, mContext.getResources().getString(res), mCoverageValue ) );
   }
@@ -202,10 +201,10 @@ public class CalibCoverageDialog extends MyDialog
           float d1 = c1 - i11;
           float d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //        TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //         Log.v("DistoX-COVER", "OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //        TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           float v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
           float v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;
@@ -230,10 +229,10 @@ public class CalibCoverageDialog extends MyDialog
           d1 = c1 - i11;
           d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //         Log.v("DistoX-COVER", "OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //         TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
           v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;
@@ -246,8 +245,8 @@ public class CalibCoverageDialog extends MyDialog
         }
       }
     }
-    // Log.v("DistoX", " upperJ2min " + upperj2max + " belowJ2max " + belowj2min );
-    // Log.v("DistoX", " J1min " + j1min + " J1max " + j1max + " DIM_Y " + CalibCoverage.DIM_Y + " " + CalibCoverage.DIM_Y2 );
+    // TDLog.v( " upperJ2min " + upperj2max + " belowJ2max " + belowj2min );
+    // TDLog.v( " J1min " + j1min + " J1max " + j1max + " DIM_Y " + CalibCoverage.DIM_Y + " " + CalibCoverage.DIM_Y2 );
     // prints 0 18 37 18 
     // therefore upper hemisphere ranges [ 0, 1] [ 1, 2] ... [18,19]
     //           lower hemisphere ranges [36,35] [35,34] ... [18,17]

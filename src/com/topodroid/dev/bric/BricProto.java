@@ -17,8 +17,8 @@ import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleCallback;
 import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDToast;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TDToast;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
@@ -32,8 +32,6 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattCallback;
-
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -120,10 +118,10 @@ public class BricProto extends TopoDroidProtocol
       mErr1 = 0;
       mErr2 = 0;
       // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
-      Log.v("DistoX", "BRIC proto: meas_prim " +  mDistance + " " + mBearing + " " + mClino );
+      TDLog.v( "BRIC proto: meas_prim " +  mDistance + " " + mBearing + " " + mClino );
     } else {
       // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add Prim - repeated primary" );
-      Log.v( "DistoX", "BRIC proto: add Prim - repeated primary" );
+      TDLog.v( "BRIC proto: add Prim - repeated primary" );
     }
   }
 
@@ -135,7 +133,7 @@ public class BricProto extends TopoDroidProtocol
     mType    = BricConst.getType( bytes ); // 0: regular shot, 1: scan shot
     mSamples = BricConst.getSamples( bytes );
     // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex + " type " + mType );
-    Log.v( "DistoX", "BRIC proto: added Meta " + mIndex + "/" + mLastIndex + " type " + mType );
+    TDLog.v( "BRIC proto: added Meta " + mIndex + "/" + mLastIndex + " type " + mType );
     if ( mType == 0 ) { 
       if ( mIndex > mLastIndex+1 ) { // LOST SHOTS
         TDLog.Error("BRIC proto: missed data, last " + mLastIndex + " current " + mIndex );
@@ -152,7 +150,7 @@ public class BricProto extends TopoDroidProtocol
   void addMeasErr( byte[] bytes ) 
   {
     // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Err " );
-    Log.v( "DistoX", "BRIC proto: added Err " );
+    TDLog.v( "BRIC proto: added Err " );
     mErr1 = BricConst.firstErrorCode( bytes );
     mErr2 = BricConst.secondErrorCode( bytes );
     mErrVal1 = BricConst.firstErrorValue( bytes, mErr1 );
@@ -165,7 +163,7 @@ public class BricProto extends TopoDroidProtocol
   // TODO use mType
   void processData()
   {
-    Log.v("DistoX", "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
+    TDLog.v( "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
       if ( TDSetting.mBricZeroLength || mDistance > 0.01 ) {
         TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
@@ -199,7 +197,7 @@ public class BricProto extends TopoDroidProtocol
   void addMeasPrimAndProcess( byte[] bytes )
   {
     if ( checkPrim( bytes ) ) { // if Prim is new
-      Log.v("DistoX", "BRIC proto: add Prim and process" );
+      TDLog.v( "BRIC proto: add Prim and process" );
       mTime     = mThisTime;
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
@@ -216,7 +214,7 @@ public class BricProto extends TopoDroidProtocol
 
   void setLastTime( byte[] bytes )
   {
-    // Log.v("DistoX", "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
+    // TDLog.v( "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
     mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
   }
 

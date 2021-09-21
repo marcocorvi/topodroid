@@ -15,13 +15,13 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.DrawingUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -34,8 +34,6 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;   
 
 import java.util.List;
-
-import android.util.Log;
 
 public class ShpStation extends ShpObject
 {
@@ -66,8 +64,8 @@ public class ShpStation extends ShpObject
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
     setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
+    // TDLog.v( "POINT station " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength+8, 2*shxLength+8, dbfLength );
@@ -75,7 +73,7 @@ public class ShpStation extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POINT, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POINT, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "POINTZ done headers");
+    // TDLog.v( "POINTZ done headers");
 
     int cnt = 0;
     for ( DrawingStationName st : pts ) {
@@ -94,7 +92,7 @@ public class ShpStation extends ShpObject
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINT station done records");
+    // TDLog.v( "POINT station done records");
     close();
     return true;
   }

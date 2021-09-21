@@ -45,12 +45,12 @@ class TDMediaStore
     String[] args = new String[]{ dir, filename };
     Cursor cursor = cr.query( content_uri, null, where, args, null);
     if ( cursor != null && cursor.getCount() > 0 ) {
-      // Log.v("DistoX", "Media store overwrite");
+      // TDLog.v( "Media store overwrite");
       cursor.moveToNext();
       long id = cursor.getLong(cursor.getColumnIndex(MediaStore.MediaColumns._ID));
       uri = ContentUris.withAppendedId(content_uri, id);
     } else {
-      // Log.v("DistoX", "Media store write anew");
+      // TDLog.v( "Media store write anew");
       ContentValues cv = new ContentValues();
       cv.put( MediaStore.Files.FileColumns.DISPLAY_NAME,  filename );
       cv.put( MediaStore.Files.FileColumns.MIME_TYPE,     mimetype );
@@ -88,7 +88,7 @@ class TDMediaStore
     ContentResolver cr = TDInstance.getContentResolver();
     Uri uri = cr.insert( MediaStore.Files.getContentUri("external"), cv );
     if ( uri == null ) {
-      Log.v("DistoX", "Media Store failed resolving");
+      TDLog.v( "Media Store failed resolving");
     } else {
       try {
         ret = cr.openInputStream( uri );
@@ -96,9 +96,9 @@ class TDMediaStore
         cv.put( MediaStore.Downloads.IS_PENDING, 0 );
         cr.update( uri, cv, null, null );
       } catch ( FileNotFoundException e ) {
-        Log.v("DistoX", "Media Store not found exception " + e.getMessage() );
+        TDLog.v( "Media Store not found exception " + e.getMessage() );
       } catch ( RuntimeException e ) {
-        Log.v("DistoX", "Media Store failed exception " + e.getMessage() );
+        TDLog.v( "Media Store failed exception " + e.getMessage() );
       }
     }
     return ret;
@@ -121,12 +121,12 @@ class TDMediaStore
   //   String where = MediaStore.MediaColumns.RELATIVE_PATH + "=?";
   //   String[] args = new String[]{ dir };
   //   Cursor cursor = cr.query( content_uri, null, where, args, null);
-  //   Log.v("DistoX", "listing " + dir + " count " + cursor.getCount() );
+  //   TDLog.v( "listing " + dir + " count " + cursor.getCount() );
   //   if ( cursor != null && cursor.getCount() > 0 ) {
   //     while ( cursor.moveToNext() ) {
   //       String filename = cursor.getString(cursor.getColumnIndex(MediaStore.MediaColumns.DISPLAY_NAME));
   //       ret.add( filename );
-  //       Log.v("DistoX", "  file " + filename );
+  //       TDLog.v( "  file " + filename );
   //     }
   //   } 
   //   return ret;

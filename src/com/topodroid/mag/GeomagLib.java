@@ -22,8 +22,6 @@ package com.topodroid.mag;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 
-import android.util.Log;
-
 class GeomagLib
 {
   /* The main subroutine that calls a sequence of WMM sub-functions to calculate the magnetic
@@ -480,7 +478,7 @@ class GeomagLib
     double sin_phi = Math.sin( TDMath.DEG2RAD * spherical.phig ); // sin  (geocentric latitude)
 
     if (nMax <= 16 || (1 - Math.abs(sin_phi)) < 1.0e-10 ) { // If nMax is less tha 16 or at the poles
-      // Log.v("DistoX", "Legendre Pcup Low");
+      // TDLog.v( "Legendre Pcup Low");
       return MAG_PcupLow( sin_phi, nMax );
     } 
     return MAG_PcupHigh( sin_phi, nMax );
@@ -503,7 +501,7 @@ class GeomagLib
    */
   private MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
   {
-    // Log.v("DistoX", "N " + nMax + " " + spherical.r + " " + spherical.lambda + " " + spherical.phig );
+    // TDLog.v( "N " + nMax + " " + spherical.r + " " + spherical.lambda + " " + spherical.phig );
     MagHarmonic vars = new MagHarmonic( nMax );
     double cos_lambda = Math.cos(TDMath.DEG2RAD * spherical.lambda);
     double sin_lambda = Math.sin(TDMath.DEG2RAD * spherical.lambda);

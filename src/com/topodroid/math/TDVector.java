@@ -20,8 +20,6 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Locale;
 
-// import android.util.Log;
-
 public class TDVector
 {
   public float x,y,z;

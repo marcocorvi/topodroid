@@ -11,7 +11,7 @@
  */
 package com.topodroid.trb;
 
-// import android.util.Log;
+// import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 
@@ -45,7 +45,7 @@ public class TRobotSeries
 
   // void dump()
   // {
-    // Log.v("DistoX", "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
+    // TDLog.v( "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
     // for ( TRobotPoint pt : mPoints ) pt.dump();
   // }
 }

@@ -13,10 +13,10 @@ package com.topodroid.dev.distox;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.DataDownloader;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.Cave3X.DataDownloader;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TopoDroidApp;
 
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
@@ -28,8 +28,6 @@ import com.topodroid.dev.DataType;
 // import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox1.DeviceA3Details;
 import com.topodroid.dev.distox2.DeviceX310Details;
-
-import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
@@ -107,28 +105,28 @@ public class DistoXComm extends TopoDroidComm
 
        
         if ( device.equals(mAddress) ) {
-          // Log.v("DistoXDOWN", "on receive");
+          // TDLog.v( "on receive");
           if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
-            // Log.v("DistoX-BLE", "***** Disto comm: on Receive() CONNECTED" );
+            // TDLog.v( "***** Disto comm: on Receive() CONNECTED" );
             mApp.notifyStatus( ConnectionState.CONN_CONNECTED );
             mApp.mDataDownloader.updateConnected( true );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
-            // Log.v("DistoX-BLE", "***** Disto comm: on Receive() DISCONNECT REQUEST" );
+            // TDLog.v( "***** Disto comm: on Receive() DISCONNECT REQUEST" );
             mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
             mApp.mDataDownloader.updateConnected( false );
             closeSocket( );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
             // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
-            // Log.v("DistoX-BLE", "***** Disto comm: on Receive() DISCONNECTED" );
+            // TDLog.v( "***** Disto comm: on Receive() DISCONNECTED" );
             mApp.notifyStatus( ConnectionState.CONN_WAITING );
             mApp.mDataDownloader.updateConnected( false );
             closeSocket( );
             mApp.notifyDisconnected( data_type ); // run reconnect-task
           }
         } else if ( DeviceUtil.ACTION_BOND_STATE_CHANGED.equals( action ) ) { // NOT USED
-          // Log.v("DistoX-BLE", "***** Disto comm: on Receive() BOND STATE CHANGED" );
+          // TDLog.v( "***** Disto comm: on Receive() BOND STATE CHANGED" );
           final int state     = data.getIntExtra(DeviceUtil.EXTRA_BOND_STATE, DeviceUtil.ERROR);
           final int prevState = data.getIntExtra(DeviceUtil.EXTRA_PREVIOUS_BOND_STATE, DeviceUtil.ERROR);
           if (state == DeviceUtil.BOND_BONDED && prevState == DeviceUtil.BOND_BONDING) {
@@ -151,7 +149,7 @@ public class DistoXComm extends TopoDroidComm
 
           // DeviceUtil.bind2Device( data );
         // } else if ( DeviceUtil.ACTION_PAIRING_REQUEST.equals(action) ) {
-        //   Log.v("DistoX-COMM", "PAIRING REQUEST");
+        //   TDLog.v( "PAIRING REQUEST");
         //   // BluetoothDevice device = getDevice();
         //   // //To avoid the popup notification:
         //   // device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
@@ -210,7 +208,7 @@ public class DistoXComm extends TopoDroidComm
    */
   protected synchronized void closeSocket( )
   {
-    // Log.v( "DistoX-BLE", "Disto comm: close socket() address " + mAddress );
+    // TDLog.v( "Disto comm: close socket() address " + mAddress );
     
     if ( mBTSocket == null ) {
       // TDLog.Log( TDLog.LOG_COMM, "close socket() already null" );
@@ -261,7 +259,7 @@ public class DistoXComm extends TopoDroidComm
   private void createSocket( String address )
   {
     if ( address == null ) return;
-    // Log.v( "DistoX-BLE", "Disto comm: create socket() address " + mAddress );
+    // TDLog.v( "Disto comm: create socket() address " + mAddress );
     final int port = 1;
     // TDLog.Log( TDLog.LOG_COMM, "create Socket() addr " + address + " mAddress " + mAddress);
     if ( mProtocol == null || ! address.equals( mAddress ) ) {
@@ -319,7 +317,7 @@ public class DistoXComm extends TopoDroidComm
 
       if ( DeviceUtil.isPaired( mBTDevice ) ) {
         try {
-          // Log.v("DistoX-SOCKET", "create socket");
+          // TDLog.v( "create socket");
           Class[] classes1 = new Class[]{ int.class };
           Class[] classes2 = new Class[]{ UUID.class };
           if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
@@ -410,7 +408,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean connectSocket( String address, int data_type )
   {
     if ( address == null ) return false;
-    // Log.v( "DistoX-BLE", "Disto comm: connect socket() address " + mAddress );
+    // TDLog.v( "Disto comm: connect socket() address " + mAddress );
     // TDLog.Log( TDLog.LOG_COMM, "connect socket(): " + address );
     createSocket( address );
 
@@ -463,7 +461,7 @@ public class DistoXComm extends TopoDroidComm
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     // TDLog.Log( TDLog.LOG_COMM, "start RFcomm thread: to_read " + to_read );
-    // Log.v("DistoX-BLE", "DistoX comm: start comm thread: to read " + to_read );
+    // TDLog.v( "DistoX comm: start comm thread: to read " + to_read );
     if ( mBTSocket != null ) {
       if ( mCommThread == null ) {
         mCommThread = new CommThread( TopoDroidComm.COMM_RFCOMM, this, /* mProtocol, */ to_read, lister, data_type );
@@ -500,7 +498,7 @@ public class DistoXComm extends TopoDroidComm
   public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
-    // Log.v( "DistoX-BLE", "DistoX comm: disconnect remote device ");
+    // TDLog.v( "DistoX comm: disconnect remote device ");
     super.disconnectRemoteDevice();
     // cancelCommThread();
     // closeProtocol();
@@ -565,8 +563,7 @@ public class DistoXComm extends TopoDroidComm
 
         // int k;
         // for ( k=0; k<48; k+=8 ) {
-        //   Log.v( "DistoX-COMM"
-        //   String.format( "%02x %02x %02x %02x %02x %02x %02x %02x",
+        //   TDLog.v( "DistoX comm " + String.format( "%02x %02x %02x %02x %02x %02x %02x %02x",
         //     coeff[k+0], coeff[k+1], coeff[k+2], coeff[k+3], coeff[k+4], coeff[k+5], coeff[k+6], coeff[k+7] ) );
         // }
       }
@@ -602,15 +599,15 @@ public class DistoXComm extends TopoDroidComm
   {
     if ( mCommThread != null ) {
       // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
-      // Log.v( "DistoX-BLE", "DistoX comm: connect device - comm thread not null");
+      // TDLog.v( "DistoX comm: connect device - comm thread not null");
       return true;
     }
     if ( ! connectSocket( address, data_type ) ) {
       TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: failed");
-      // Log.v( "DistoX-BLE", "DistoX comm: connect device - failed socket");
+      // TDLog.v( "DistoX comm: connect device - failed socket");
       return false;
     }
-    // Log.v( "DistoX-BLE", "DistoX comm: connect device - start thread");
+    // TDLog.v( "DistoX comm: connect device - start thread");
     startCommThread( -2, lister, data_type );
     return true;
   }
@@ -619,7 +616,7 @@ public class DistoXComm extends TopoDroidComm
   public boolean disconnectDevice()
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
-    // Log.v( "DistoX-BLE", "DistoX comm: disconnect device ");
+    // TDLog.v( "DistoX comm: disconnect device ");
     cancelCommThread();
     destroySocket( );
     return true;
@@ -638,11 +635,11 @@ public class DistoXComm extends TopoDroidComm
   {
     if ( ! isCommThreadNull() ) {
       TDLog.Error( "download data: RFcomm thread not null");
-      // Log.v( "DistoX-BLE", "DistoX comm: download data: RFcomm thread not null");
+      // TDLog.v( "DistoX comm: download data: RFcomm thread not null");
       return DistoX.DISTOX_ERR_CONNECTED;
     }
     
-    // Log.v( "DistoX-BLE", "DistoX comm: download data: ok");
+    // TDLog.v( "DistoX comm: download data: ok");
     int ret = -1; // failure
     if ( connectSocket( address, data_type ) ) {
       DistoXProtocol protocol = (DistoXProtocol)mProtocol;
@@ -696,7 +693,7 @@ public class DistoXComm extends TopoDroidComm
       }
     } else {
       TDLog.Error( "download data: fail to connect socket");
-      // Log.v("DostoX-BLE", "DistoX comm: download data: fail to connect socket");
+      // TDLog.v("DistoX comm: download data: fail to connect socket");
     }
     destroySocket( );
     

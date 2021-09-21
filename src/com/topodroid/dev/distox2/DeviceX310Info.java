@@ -11,8 +11,6 @@
  */
 package com.topodroid.dev.distox2;
 
-// import android.util.Log;
-
 public class DeviceX310Info
 {
   public String mCode;     // device X310 code

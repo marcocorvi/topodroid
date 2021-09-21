@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
+  <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent" 
+    android:layout_height="fill_parent"
+    android:layout_gravity="top"
+    >
+  
+    <LinearLayout android:id="@+id/view_layout"
+      android:layout_width="fill_parent"
+      android:layout_height="fill_parent"
+    />
+  
+    <LinearLayout android:id="@+id/bar_layout"
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        >
+        <RelativeLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          >
+          <LinearLayout
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_toLeftOf="@+id/right"
+            >
+            <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
+              android:layout_width="fill_parent"
+              android:layout_height="50dp"
+              />
+          </LinearLayout>
+  
+          <LinearLayout android:id="@+id/right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:background="#111"
+            >
+            <Button android:id="@+id/handle"
+              android:layout_width="wrap_content"
+              android:layout_height="wrap_content"
+              android:background="@drawable/ic_menu"
+              android:contentDescription="@string/desc_menu"
+              />
+          </LinearLayout>
+        </RelativeLayout>
+  
+        <LinearLayout
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:orientation="horizontal"
+          android:gravity="right"
+          >
+          <ListView android:id="@+id/menu"
+            android:layout_width="150dp"
+            android:layout_height="wrap_content"
+            android:choiceMode="singleChoice"
+            android:divider="@android:color/transparent"
+            android:dividerHeight="10dp"
+            android:orientation="vertical"
+            android:layout_gravity="right"
+            android:gravity="right"
+            android:textSize="@dimen/textsize"
+            android:background="@color/edit_background"
+            />
+        </LinearLayout>
+    </LinearLayout>
+  </RelativeLayout>
+  <LinearLayout android:id="@+id/layout_station"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_gravity="bottom"
+    android:gravity="bottom"
+    android:orientation="horizontal"
+    android:background="#990099ff"
+    >
+    <Button android:id="@+id/current_station"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_gravity="left"
+      android:paddingLeft="10dp"
+      android:paddingRight="5dp"
+      android:gravity="left"
+      android:background="#990066cc"
+      android:textColor="#ffffffff"
+    />
+    <Button android:id="@+id/fix_station"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft="5dp"
+      android:paddingRight="5dp"
+      android:background="@drawable/iz_station_off"
+      /><!--
+      android:layout_gravity="right"
+      android:gravity="right"
+      android:text="@string/measure"
+      android:background="#990099ff"
+      android:textColor="#ffffffff"
+    / -->
+    <Button android:id="@+id/measure_station"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:paddingLeft="5dp"
+      android:paddingRight="10dp"
+      android:background="@drawable/iz_ruler_off"
+      /><!--
+      android:layout_gravity="right"
+      android:gravity="right"
+      android:text="@string/measure"
+      android:background="#990099ff"
+      android:textColor="#ffffffff"
+    / -->
+
+  </LinearLayout>
+
+</FrameLayout>

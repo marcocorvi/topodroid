@@ -2,18 +2,18 @@
  */
 package com.topodroid.dev.bric;
 
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.DeviceActivity;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.utils.TDLog;
+
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.DeviceActivity;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.content.res.Resources;
 import android.content.Context;
-
-import android.util.Log;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -53,7 +53,7 @@ public class BricMemoryDialog extends MyDialog
   public BricMemoryDialog( Context ctx, DeviceActivity parent, Resources res )
   {
     super( ctx, R.string.BricMemoryDialog );
-    // Log.v("DistoX", "Bric Memory Dialog cstr");
+    // TDLog.v( "Bric Memory Dialog cstr");
     mParent = parent;
     mRes    = res;
   }
@@ -63,7 +63,7 @@ public class BricMemoryDialog extends MyDialog
     mParent.runOnUiThread( new Runnable(){
       public void run() {
         String[] mmss = TDUtil.currentMinuteSecond().split(":");
-        // Log.v("DistoX", "timer tick " + mmss[0] + ":" + mmss[1] );
+        // TDLog.v( "timer tick " + mmss[0] + ":" + mmss[1] );
         if ( tv_minute != null ) tv_minute.setText( mmss[0] );
         if ( tv_second != null ) tv_second.setText( mmss[1] );
       }
@@ -111,7 +111,7 @@ public class BricMemoryDialog extends MyDialog
     };
     mTimer = new Timer();
     mTimer.schedule( mTask, 1100, 1000 );
-    // Log.v("DistoX", "Bric memory dialog created");
+    // TDLog.v( "Bric memory dialog created");
   }
 
   private int getText( EditText et, int min, int max )
@@ -124,12 +124,12 @@ public class BricMemoryDialog extends MyDialog
   {
     try { 
       int v = Integer.parseInt( s.trim() );
-      // Log.v("DistoX", "parser <" + v + "> " );
+      // TDLog.v( "parser <" + v + "> " );
       if ( v < min ) return min;
       if ( v > max ) return max;
       return v;
     } catch ( NumberFormatException e ) {
-      Log.e("DistoX", "parser Number Format Error <" + s + "> " );
+      TDLog.Error( "BRIC Memory: parser Number Format Error <" + s + "> " );
     }
     return min;
   }
@@ -139,15 +139,15 @@ public class BricMemoryDialog extends MyDialog
   {
     if ( view.getId() == R.id.button_reset ) {
       boolean ok = true;
-      // Log.v("DistoX", "BRIC memory dialog : reset ");
+      // TDLog.v( "BRIC memory dialog : reset ");
       int yy = getText( et_year, 0, 4000 );
       if ( yy > current_year ) {
-        // Log.v("DistoX", "BRIC memory dialog : fail year " + yy + " " + current_year);
+        // TDLog.v( "BRIC memory dialog : fail year " + yy + " " + current_year);
         ok = false;
       } else { 
         int mm = getText( et_month, 1, 12 );
         if ( yy == current_year && mm > current_month ) {
-          // Log.v("DistoX", "BRIC memory dialog : fail month " + mm + " " + current_month );
+          // TDLog.v( "BRIC memory dialog : fail month " + mm + " " + current_month );
           ok = false;
         } else {
           int md = 31; 
@@ -155,25 +155,25 @@ public class BricMemoryDialog extends MyDialog
           else if ( mm == 2 ) { md = ( ((yy % 4)==0) && ((yy%100)!=0) )? 29 : 28; }
           int dd = getText( et_day, 1, md );
           if ( yy == current_year && mm == current_month && dd > current_day ) {
-            // Log.v("DistoX", "BRIC memory dialog : fail day " + dd + " " + current_day );
+            // TDLog.v( "BRIC memory dialog : fail day " + dd + " " + current_day );
             ok = false;
           } else {
             int HH = getText( et_hour, 0, 23 );
             if ( yy == current_year && mm == current_month && dd == current_day && HH > current_hour ) {
-              // Log.v("DistoX", "BRIC memory dialog : fail hour : " + HH + " " + current_hour );
+              // TDLog.v( "BRIC memory dialog : fail hour : " + HH + " " + current_hour );
               ok = false;
             } else {
               int MM = getText( et_minute, 0, 59 );
               if ( yy == current_year && mm == current_month && dd == current_day && HH == current_hour && MM > current_minute ) {
-                // Log.v("DistoX", "BRIC memory dialog : fail minute : " + MM + " " + current_minute );
+                // TDLog.v( "BRIC memory dialog : fail minute : " + MM + " " + current_minute );
                 ok = false;
               } else {
                 int SS = getText( et_second, 0, 59 );
                 if ( yy == current_year && mm == current_month && dd == current_day && HH == current_hour && MM == current_minute && SS > current_second ) {
-                  // Log.v("DistoX", "BRIC memory dialog : fail second : " + SS + " " + current_second );
+                  // TDLog.v( "BRIC memory dialog : fail second : " + SS + " " + current_second );
                   ok = false;
                 } else {
-                  // Log.v("DistoX", "BRIC memory dialog : " + yy + " " + mm + " " + dd + " " + HH + " " + MM + " " + SS );
+                  // TDLog.v( "BRIC memory dialog : " + yy + " " + mm + " " + dd + " " + HH + " " + MM + " " + SS );
                   mParent.doBricMemoryReset( yy, mm, dd, HH, MM, SS );
                 }
               }
@@ -185,7 +185,7 @@ public class BricMemoryDialog extends MyDialog
         TDToast.makeWarn( R.string.bric_future_time );
       } 
     } else if ( view.getId() == R.id.button_clear ) {
-      // Log.v("DistoX", "BRIC memory dialog : clear ");
+      // TDLog.v( "BRIC memory dialog : clear ");
       mParent.doBricMemoryClear( );
     }
     onBackPressed();

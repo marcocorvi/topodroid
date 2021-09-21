@@ -19,8 +19,6 @@ import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;
 
-import android.util.Log;
-
 // import java.lang.ref.WeakReference;
 
 import java.io.IOException;
@@ -62,7 +60,7 @@ public class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // Log.v( "DistoX-DATA_TYPE", "swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)0x38 ) { 
         TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
@@ -70,7 +68,7 @@ public class DistoXA3Protocol extends DistoXProtocol
       }
 
       int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-      // Log.v( TopoDroidApp.TAG, "proto read ... addr " + addr + " reply addr " + reply_addr );
+      // TDLog.v( "A3 proto read ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
         TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
@@ -93,14 +91,14 @@ public class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // Log.v( "DistoX-DATA_TYPE", "swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)0x38 ) {
         TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
         return false;
       }
       reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
-      // Log.v( TopoDroidApp.TAG, "proto reset ... addr " + addr + " reply addr " + reply_addr );
+      // TDLog.v( "A3 proto reset ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
         TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
@@ -136,7 +134,7 @@ public class DistoXA3Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // Log.v( "DistoX-DATA_TYPE", "read A3 head-tail: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
       if ( mBuffer[1] != command[1] ) { return null; }

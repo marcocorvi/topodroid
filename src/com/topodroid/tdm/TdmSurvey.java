@@ -12,9 +12,9 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.Cave3X.DBlock;
+import com.topodroid.Cave3X.DataHelper;
+import com.topodroid.Cave3X.SurveyInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,7 +22,6 @@ import java.util.List;
 import java.io.BufferedReader;
 
 import android.util.FloatMath;
-import android.util.Log;
 
 public class TdmSurvey
 {

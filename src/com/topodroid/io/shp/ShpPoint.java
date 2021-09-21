@@ -15,8 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,8 +30,6 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-import android.util.Log;
-
 public class ShpPoint extends ShpObject
 {
   public ShpPoint( String subdir, String path, List< String > files ) // throws IOException
@@ -43,7 +41,7 @@ public class ShpPoint extends ShpObject
   public boolean writePoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
-    // Log.v("DistoX", "SHP write points " + n_pts );
+    // TDLog.v( "SHP write points " + n_pts );
     if ( n_pts == 0 ) return false;
 
     int n_fld = 6;
@@ -67,8 +65,8 @@ public class ShpPoint extends ShpObject
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
     setBoundsPoints( pts, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POINT " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
+    // TDLog.v( "POINT " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength+8, 2*shxLength+8, dbfLength );
@@ -76,7 +74,7 @@ public class ShpPoint extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POINT, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POINT, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "POINT done headers - nr " + pts.size() );
+    // TDLog.v( "POINT done headers - nr " + pts.size() );
 
     int cnt = 0;
     for ( DrawingPointPath pt : pts ) {
@@ -84,13 +82,13 @@ public class ShpPoint extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      // Log.v("DistoX", "POINT " + cnt + ": " + pt.cx + " " + pt.cy + " cd " + cd + " sd " + sd + " scale " + xscale + " " + yscale );
+      // TDLog.v( "POINT " + cnt + ": " + pt.cx + " " + pt.cy + " cd " + cd + " sd " + sd + " scale " + xscale + " " + yscale );
       double x = DrawingUtil.declinatedX( pt.cx, pt.cy, cd, sd );
       double y = DrawingUtil.declinatedY( pt.cx, pt.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );
       shpBuffer.putDouble( y0 - yscale * y );
 
-      // Log.v("DistoX", "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
+      // TDLog.v( "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
       fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
@@ -104,7 +102,7 @@ public class ShpPoint extends ShpObject
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINT done records");
+    // TDLog.v( "POINT done records");
     close();
     return true;
   }

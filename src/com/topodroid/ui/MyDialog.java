@@ -12,9 +12,7 @@
 package com.topodroid.ui;
 
 import com.topodroid.help.UserManualActivity;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.R;
 
 // import android.app.Activity;
 import android.app.Dialog;
@@ -65,7 +63,7 @@ public class MyDialog extends Dialog
     Button btn_help = (Button) findViewById( R.id.button_help );
     if ( btn_help != null ) {
       if ( mHelpPage != null ) {
-        // Log.v("DistoX", "set help page " + mHelpPage );
+        // TDLog.v( "set help page " + mHelpPage );
         btn_help.setOnClickListener( new android.view.View.OnClickListener() {
           @Override
           public void onClick( View v ) {
@@ -84,11 +82,11 @@ public class MyDialog extends Dialog
           // } );
         }
       } else {
-        // Log.v("DistoX", "no help page");
+        // TDLog.v( "no help page");
         btn_help.setVisibility( View.GONE );
       }
     // } else {
-    //   // Log.v("DistoX", "null button help");
+    //   // TDLog.v( "null button help");
     }
   }
 
@@ -136,7 +134,7 @@ public class MyDialog extends Dialog
   // public boolean onKeyLongPress( int code, KeyEvent ev )
   public boolean onKeyDown( int code, KeyEvent ev )
   {
-    // Log.v("DistoX-KEYCODE", "code " + code );
+    // TDLog.v( "Key code " + code );
     if ( code == KeyEvent.KEYCODE_BACK ) {
       onBackPressed();
       return true;

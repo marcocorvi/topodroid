@@ -11,15 +11,13 @@
  */
 package com.topodroid.dev.distox1;
 
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.Cave3X.TopoDroidApp;
 
 import java.lang.ref.WeakReference;
 
 // import android.app.Activity;
 import android.os.AsyncTask;
 // import android.content.Context;
-
-// import android.util.Log;
 
 public class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
 {

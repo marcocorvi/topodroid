@@ -14,8 +14,6 @@ package com.topodroid.ptopo;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 
 public class PTTrip
 {
@@ -159,7 +157,7 @@ public class PTTrip
     // {
     //   float declination = ((float)_declination) * PTFile.INT16_2_DEG;
     //   if ( declination > 180.0f ) declination -= 360.0f;
-    //   Log.v( "DistoX-PT", "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
+    //   TDLog.v( "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
     //   _comment.print();
     // }
 

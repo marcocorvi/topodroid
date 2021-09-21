@@ -27,8 +27,6 @@ import java.util.Arrays;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 
-import android.util.Log;
-
 public class BleUtils
 {
   // ------------------------------------------------------------------------------

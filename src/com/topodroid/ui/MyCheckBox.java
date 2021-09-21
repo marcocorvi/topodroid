@@ -11,9 +11,7 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.DistoX.TDandroid;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDandroid;
 
 import android.content.Context;
 
@@ -73,7 +71,7 @@ public class MyCheckBox extends CompoundButton
       @Override
       public void onClick( View v )
       {
-        // Log.v("DistoX", "MyCheckBox on click ");
+        // TDLog.v( "MyCheckBox on click ");
         toggleState();
         // setState( isChecked() );
       }

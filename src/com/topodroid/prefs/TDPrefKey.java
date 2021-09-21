@@ -12,7 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDString;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 public class TDPrefKey
 {
@@ -33,10 +33,11 @@ public class TDPrefKey
     "DISTOX_EXPORT_PREF",   // 9  FORWARD
     "DISTOX_SURVEY_PREF",   //    FORWARD
     "DISTOX_PLOT_PREF",     //    FORWARD
-    "DISTOX_DEVICE_PREF",   // 13 FORWARD
-    "DISTOX_GEEK_PREF",     // 13 FORWARD
+    "DISTOX_DEVICE_PREF",   // 12 FORWARD
+    "DISTOX_CAVE3D_PREF",   //    FORWARD
+    "DISTOX_GEEK_PREF",     //    FORWARD
     // "DISTOX_SKETCH_PREF",   //    FORWARD
-    "DISTOX_EXPORT_SETTINGS",
+    "DISTOX_EXPORT_SETTINGS", // 15
     null
   };
 
@@ -55,6 +56,7 @@ public class TDPrefKey
     R.string.pref_cat_survey,
     R.string.pref_cat_drawing,
     R.string.pref_cat_device,
+    R.string.pref_cat_cave3d,
     R.string.pref_cat_geek,
     // R.string.pref_cat_sketch,
     R.string.pref_export_settings,
@@ -72,6 +74,7 @@ public class TDPrefKey
     R.string.pref_locale_summary,
     R.string.pref_orientation_summary,
     // R.string.pref_cosurvey_summary, // IF_COSURVEY
+    -1,
     -1,
     -1,
     -1,
@@ -99,6 +102,7 @@ public class TDPrefKey
      "",
      "",
      // "",
+     "",
      "",
      null
   };
@@ -181,6 +185,7 @@ public class TDPrefKey
     "DISTOX_HTHRESHOLD",      // if clino is over thr, H_SECTION is horizontal (has north arrow)
     "DISTOX_CHECK_ATTACHED", // 4 // whether to check all shots are connected
     "DISTOX_CHECK_EXTEND",        // whether leg extends are all set
+    "DISTOX_TOOLBAR_SIZE",
     // "DISTOX_BACKUP_NUMBER",       // number of plot backups
     // "DISTOX_BACKUP_INTERVAL",// 7 // minimum interval between plot backups [60 s]
     "DISTOX_TOOL_POINT",     // 8  FORWARD
@@ -200,6 +205,7 @@ public class TDPrefKey
     R.string.pref_hthr_title,
     R.string.pref_checkAttached_title,
     R.string.pref_checkExtend_title,
+    R.string.pref_toolbarSize_title,
     // R.string.pref_backup_number_title,
     // R.string.pref_backup_interval_title,
     R.string.pref_tool_point_title,
@@ -219,6 +225,7 @@ public class TDPrefKey
     R.string.pref_hthr_summary,
     R.string.pref_checkAttached_summary,
     R.string.pref_checkExtend_summary,
+    R.string.pref_toolbarSize_summary,
     // R.string.pref_backup_number_summary,
     // R.string.pref_backup_interval_summary,
     -1,
@@ -238,6 +245,7 @@ public class TDPrefKey
     "70",
     FALSE,
     TRUE,
+    TDString.FIVE,
     // TDString.FIVE,
     // TDString.SIXTY,
     TDString.EMPTY,
@@ -368,7 +376,7 @@ public class TDPrefKey
     TDString.ZERO,
     // TRUE,
     FALSE,
-    TDString.ZERO,
+    TDString.ONE, // SOCK_TYPE: 1 = insecure, 0 = default (see TDSetting.java)
     // TDString.ONE,
     TRUE,
     FALSE,
@@ -607,6 +615,7 @@ public class TDPrefKey
     "DISTOX_SVG_SHOT_STROKE", 
     "DISTOX_SVG_LINEDIR_STROKE", 
     "DISTOX_SVG_STATION_SIZE",
+    "DISTOX_SVG_LABEL_SIZE",
     null
   };
   static int[] EXPORT_SVGtitle = {
@@ -622,6 +631,7 @@ public class TDPrefKey
     R.string.pref_svg_shotstroke_title,
     R.string.pref_svg_linedirstroke_title,
     R.string.pref_svg_stationsize_title,
+    R.string.pref_svg_labelsize_title,
     -1
   };
   static int[] EXPORT_SVGdesc = {
@@ -637,6 +647,7 @@ public class TDPrefKey
     R.string.pref_svg_shotstroke_summary,
     R.string.pref_svg_linedirstroke_summary,
     R.string.pref_svg_stationsize_summary,
+    R.string.pref_svg_labelsize_summary,
     -1
   };
   public static String[] EXPORT_SVGdef = {
@@ -652,6 +663,7 @@ public class TDPrefKey
     "0.5",
     "6.0",
     "20",
+    "30",
   };
 
   // ------------------------------------------------------------------------------
@@ -1534,6 +1546,133 @@ public class TDPrefKey
     TDString.SIXTY,
   };
 
+  // ----------------------------------- 3D ----------------------------------
+  public static String[] CAVE3D = {
+    "CAVE3D_NEG_CLINO",
+    // "CAVE3D_BLUETOOTH_DEVICE",
+    "CAVE3D_STATION_POINTS",
+    "CAVE3D_STATION_SIZE",
+    "CAVE3D_SELECTION_RADIUS",
+    "CAVE3D_MEASURE_DIALOG",
+    "CAVE3D_STATION_TOAST",
+    "CAVE3D_GRID_ABOVE",
+    "CAVE3D_GRID_EXTENT",
+    "DISTOX_DEM3D_PREF",      // FORWARD
+    "DISTOX_WALLS3D_PREF",
+  };
+
+  public static int[] CAVE3Dtitle = {
+    R.string.cpref_neg_clino_title,
+    // R.string.cpref_bluetooth_title,
+    R.string.cpref_station_points_title,
+    R.string.cpref_station_size_title,
+    R.string.cpref_selection_radius_title,
+    R.string.cpref_measure_dialog_title,
+    R.string.cpref_station_toast_title,
+    R.string.cpref_grid_above_title,
+    R.string.cpref_grid_extent_title,
+    R.string.cpref_dem3d,
+    R.string.cpref_walls3d,
+  };
+
+  public static int[] CAVE3Ddesc = {
+    R.string.cpref_neg_clino_summary,
+    // R.string.cpref_bluetooth_summary,
+    R.string.cpref_station_points_summary,
+    R.string.cpref_station_size_summary,
+    R.string.cpref_selection_radius_summary,
+    R.string.cpref_measure_dialog_summary,
+    R.string.cpref_station_toast_summary,
+    R.string.cpref_grid_above_summary,
+    R.string.cpref_grid_extent_summary,
+    -1,
+    -1,
+  };
+
+  public static String[] CAVE3Ddef = {
+    FALSE,
+    // ?,
+    FALSE,
+    "10",
+    "50",
+    FALSE,
+    FALSE,
+    FALSE,
+    "10",
+    "",
+    "",
+    null,
+  };
+
+  public static String[] DEM3D = { // category DEM3D
+    "CAVE3D_DEM_BUFFER",
+    "CAVE3D_DEM_MAXSIZE",
+    "CAVE3D_DEM_REDUCE",
+  };
+
+  public static int[] DEM3Dtitle = {
+    R.string.cpref_dem_buffer_title,
+    R.string.cpref_dem_maxsize_title,
+    R.string.cpref_dem_reduce_title,
+  };
+
+  public static int[] DEM3Ddesc = {
+    R.string.cpref_dem_buffer_summary,
+    R.string.cpref_dem_maxsize_summary,
+    R.string.cpref_dem_reduce_summary,
+  };
+
+  public static String[] DEM3Ddef = {
+    "200",
+    "400",
+    "1"
+  };
+
+  public static String[] WALLS3D = { // category WALLS3D
+    "CAVE3D_SPLAY_USE",
+    "CAVE3D_ALL_SPLAY",
+    "CAVE3D_SPLAY_PROJ",
+    "CAVE3D_SPLAY_THR",
+    "CAVE3D_SPLIT_TRIANGLES",
+    "CAVE3D_SPLIT_RANDOM",
+    "CAVE3D_SPLIT_STRETCH",
+    "CAVE3D_POWERCRUST_DELTA"
+  };
+
+  public static int[] WALLS3Dtitle = {
+    R.string.cpref_splay_use_title,
+    R.string.cpref_all_splay_title,
+    R.string.cpref_splay_proj_title,
+    R.string.cpref_splay_thr_title,
+    R.string.cpref_split_triangles_title,
+    R.string.cpref_split_random_title,
+    R.string.cpref_split_stretch_title,
+    R.string.cpref_powercrust_delta_title,
+  };
+
+  public static int[] WALLS3Ddesc = {
+    R.string.cpref_splay_use_summary,
+    R.string.cpref_all_splay_summary,
+    R.string.cpref_splay_proj_summary,
+    R.string.cpref_splay_thr_summary,
+    R.string.cpref_split_triangles_summary,
+    R.string.cpref_split_random_summary,
+    R.string.cpref_split_stretch_summary,
+    R.string.cpref_powercrust_delta_summary,
+  };
+
+  public static String[] WALLS3Ddef = {
+    "1",
+    TRUE,
+    FALSE,
+    "0.5",
+    TRUE,
+    "0.1",
+    "0.1",
+    "0.1",
+  };
+
+  // ------------------------------------------------------------------------
 
   public static String[] GEEK = {
     "DISTOX_PALETTES",
@@ -1750,7 +1889,7 @@ public class TDPrefKey
     "DISTOX_LOG_UNITS",   // 15
     "DISTOX_LOG_DATA",
     "DISTOX_LOG_SHOT",
-    "DistoX_LOG_NAME",
+    "DISTOX_LOG_NAME",
     "DISTOX_LOG_SURVEY",
     "DISTOX_LOG_NOTE",
     "DISTOX_LOG_STATS",

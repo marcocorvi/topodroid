@@ -17,7 +17,7 @@ package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDColor;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 // import android.content.Context;
 import android.content.res.Resources;
@@ -25,8 +25,6 @@ import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
-
-// import android.util.Log;
 
 public class MyTurnBitmap 
 {
@@ -58,7 +56,7 @@ public class MyTurnBitmap
   // @param w       button size [pxl]
   public Bitmap getBitmap( float azimuth, int w )
   {
-    // Log.v("DistoX", "get rotated bitmap Angle " + azimuth + " size " + w );
+    // TDLog.v( "get rotated bitmap Angle " + azimuth + " size " + w );
     rotatedBitmap( azimuth );
     Bitmap bm1 = Bitmap.createBitmap( mPxlSize, mPxlSize, Bitmap.Config.ARGB_8888 );
     for (int j=0; j<mPxlSize; ++j ) for ( int i=0; i<mPxlSize; ++i ) {
@@ -83,7 +81,7 @@ public class MyTurnBitmap
       }
       mPxl = new int[mPxlSize * mPxlSize];
     // }
-    // Log.v("DistoX", "Pxl Size " + mPxlSize + " " + dial.getHeight() );
+    // TDLog.v( "Pxl Size " + mPxlSize + " " + dial.getHeight() );
   }
 
   // rotate the pixmap to the given azimuth

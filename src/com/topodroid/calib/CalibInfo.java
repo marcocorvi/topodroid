@@ -11,7 +11,7 @@
  */
 package com.topodroid.calib;
 
-// import android.util.Log;
+// import com.topodroid.utils.TDLog;
 
 public class CalibInfo
 {
@@ -39,6 +39,6 @@ public class CalibInfo
 
   // void debug()
   // {
-  //   Log.v("DistoX-CALIB", id + " " + name + " " + date + " " + device ); // this is DEBUG
+  //   TDLog.v("CALIB " + id + " " + name + " " + date + " " + device ); // this is DEBUG
   // }
 }

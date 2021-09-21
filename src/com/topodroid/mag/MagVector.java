@@ -19,8 +19,6 @@
  */
 package com.topodroid.mag;
 
-import android.util.Log;
-
 class MagVector
 {
   double x, y, z;
@@ -39,6 +37,6 @@ class MagVector
 
   // void debugVector( String msg )
   // {
-  //   Log.v("DistoX", msg + " " + x + " " + y + " " + z );
+  //   TDLog.v( msg + " " + x + " " + y + " " + z );
   // }
 }

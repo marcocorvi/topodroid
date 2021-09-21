@@ -12,6 +12,7 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
@@ -33,8 +34,8 @@ public class ItemButton extends Button
   private Path  mPath;
   // private Rect  mClip;
   
-  private static final int WW = 25;
-  private static final int HH = 20;
+  private static final int W5  = 5;
+  private static final int H4  = 4;
   private static final int PAD = 4;
 
   public ItemButton( Context context )
@@ -92,8 +93,8 @@ public class ItemButton extends Button
 
   public void resetPaintPath(Paint paint, Path path, float sx, float sy )
   {
-    setMinimumWidth( (int)(2*WW*sx) );
-    setMinimumHeight( (int)(2*HH*sy) );
+    setMinimumWidth( (int)(2*W5*TDSetting.mItemButtonSize*sx) );
+    setMinimumHeight( (int)(2*H4*TDSetting.mItemButtonSize*sy) );
     mPaint = paint;
     resetPath( path, sx, sy );
     // mClip = new Rect( 0, 0, (int)(40*sx), (int)(30*sy) );
@@ -105,7 +106,7 @@ public class ItemButton extends Button
     Matrix m = new Matrix();
     m.setScale( sx, sy );
     mPath.transform( m );
-    mPath.offset( WW*sx, HH*sy );
+    mPath.offset( W5*TDSetting.mItemButtonSize*sx, H4*TDSetting.mItemButtonSize*sy );
   }
 
   public void onDraw(Canvas canvas) 

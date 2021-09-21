@@ -16,8 +16,6 @@ import com.topodroid.utils.TDLog;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 
 public class PTXSectionElement extends PTElement
 {
@@ -84,7 +82,7 @@ public class PTXSectionElement extends PTElement
     // @Override
     // void print() 
     // {
-    //   Log.v( "DistoX-PT", "xsection: dir " + _direction );
+    //   TDLog.v( "xsection: dir " + _direction );
     //   _pos.print();
     //   _station.print();
     // }

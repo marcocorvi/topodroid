@@ -12,9 +12,9 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -31,8 +31,6 @@ import android.view.ViewGroup.LayoutParams;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.util.Log;
 
 class TdmSourcesDialog extends MyDialog
                        implements OnClickListener
@@ -73,7 +71,7 @@ class TdmSourcesDialog extends MyDialog
     List< String > surveys = TopoDroidApp.mData.selectAllSurveys(); 
     for ( String name : surveys ) {
       if ( ! mParent.hasSource( name ) ) {
-        // Log.v("TdManager", "source name " + name + " path " + path );
+        // TDLog.v("source name " + name + " path " + path );
         mTdmSourceAdapter.addTdmSource( new TdmSource( name ) );
       }
     }

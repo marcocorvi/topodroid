@@ -5,15 +5,14 @@ package com.topodroid.dev.bric;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.ble.BleConst;
 import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.R;
 
 import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.content.res.Resources;
 import android.content.Context;
-import android.util.Log;
 import android.widget.TextView;
 import android.widget.Button;
 import android.view.View;
@@ -58,7 +57,7 @@ public class BricInfoDialog extends MyDialog
     tv_battery.setText(  mRes.getString( R.string.bric_battery_wait ) );
 
     ((Button)findViewById( R.id.button_cancel )).setOnClickListener( this );
-    // Log.v("DistoX", "Bric info dialog created");
+    // TDLog.v( "Bric info dialog created");
   }
 
   @Override
@@ -75,7 +74,7 @@ public class BricInfoDialog extends MyDialog
 
   public void getInfo( BricComm comm )
   {
-    // Log.v("DistoX", "BricInfo read - srv: " + BleConst.INFO_SRV_UUID.toString() );
+    // TDLog.v( "BricInfo read - srv: " + BleConst.INFO_SRV_UUID.toString() );
     // comm.enlistRead( BleConst.INFO_SRV_UUID, BleConst.INFO_23_UUID ); // manufacturer
     // comm.enlistRead( BleConst.INFO_SRV_UUID, BleConst.INFO_24_UUID );
     // comm.enlistRead( BleConst.INFO_SRV_UUID, BleConst.INFO_25_UUID );
@@ -94,23 +93,23 @@ public class BricInfoDialog extends MyDialog
   {
     switch (type) {
       case BricComm.DATA_DEVICE_00:
-        // Log.v("DistoX", "BricInfo Device " + BleUtils.bytesToAscii( bytes ) );
+        // TDLog.v( "BricInfo Device " + BleUtils.bytesToAscii( bytes ) );
         tv_device.setText( String.format( mRes.getString( R.string.bric_device ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_INFO_26:
-        // Log.v("DistoX", "BricInfo Fw " + BleUtils.bytesToAscii( bytes ) );
+        // TDLog.v( "BricInfo Fw " + BleUtils.bytesToAscii( bytes ) );
         tv_ble.setText( String.format( mRes.getString( R.string.bric_ble ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_INFO_27:
-        // Log.v("DistoX", "BricInfo Hardware " + BleUtils.bytesToAscii( bytes ) );
+        // TDLog.v( "BricInfo Hardware " + BleUtils.bytesToAscii( bytes ) );
         tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_INFO_28:
-        // Log.v("DistoX", "BricInfo Fiwrmware " + BleUtils.bytesToAscii( bytes ) );
+        // TDLog.v( "BricInfo Fiwrmware " + BleUtils.bytesToAscii( bytes ) );
         tv_hw.setText( String.format( mRes.getString( R.string.bric_hw ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_BATTERY_LVL:
-        // Log.v("DistoX", "BricInfo Battery " + (int)(bytes[0]) );
+        // TDLog.v( "BricInfo Battery " + (int)(bytes[0]) );
         tv_battery.setText( String.format( mRes.getString( R.string.bric_battery ), (int)(bytes[0]) ) );
         break;
       default:

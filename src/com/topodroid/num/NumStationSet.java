@@ -17,8 +17,6 @@ import java.util.Stack;
 import java.util.List;
 import java.util.ArrayList;
 
-// import android.util.Log;
-
 class NumStationSet
 {
 // -------------------------------------------------------------
@@ -101,7 +99,7 @@ class NumStationSet
     NumStation get( String name )
     {
       int c = compare( value.name, name );
-      // Log.v("DistoX", value.name + " get " + name + " " + c + " left " + ((left==null)? "null" : left.value.name) +
+      // TDLog.v( value.name + " get " + name + " " + c + " left " + ((left==null)? "null" : left.value.name) +
       //          " right " + ((right==null)? "null" : right.value.name ) );
 
       if ( c == 0 ) return value;
@@ -142,11 +140,11 @@ class NumStationSet
     void updateHidden( NumStation st, int dh, Stack<NumStation> stack )
     {
       if ( value.mParent == st ) {
-	// Log.v("DistoXX", "hide station " + value.name );
+	// TDLog.v( "hide station " + value.name );
         value.mHidden += dh;
         stack.push( value );
       // } else {
-      // Log.v("DistoXX", "show station " + value.name );
+      // TDLog.v( "show station " + value.name );
       }
       if ( left != null ) left.updateHidden( st, dh, stack );
       if ( right != null ) right.updateHidden( st, dh, stack );
@@ -216,7 +214,7 @@ class NumStationSet
 
   boolean addStation( NumStation v )
   {
-    // Log.v("DistoX", "add station " + v.name + " root " + ((mRoot != null)? mRoot.value.name : "null") );
+    // TDLog.v( "add station " + v.name + " root " + ((mRoot != null)? mRoot.value.name : "null") );
     boolean ret = true;
     NumStationNode n = new NumStationNode( v );
     if ( mRoot == null ) {
@@ -244,7 +242,7 @@ class NumStationSet
             n0 = n0.right;
           }
         } else { 
-          // Log.v("DistoX", "Double insertion of station " + v.name );
+          // TDLog.v( "Double insertion of station " + v.name );
           ret = false;
           break;
         }
@@ -253,13 +251,13 @@ class NumStationSet
       if ( ret ) insert_case1( n );
     }
     if ( ret ) mStations.add( v );
-    // Log.v("DistoX", "added station " + v.name + " root " + mRoot.value.name );
+    // TDLog.v( "added station " + v.name + " root " + mRoot.value.name );
     return ret;
   }
 
   NumStation getStation( String name ) 
   {
-    // Log.v("DistoX", "stations set size " + size() );
+    // TDLog.v( "stations set size " + size() );
     return ( mRoot == null )? null : mRoot.get( name );
   }
 

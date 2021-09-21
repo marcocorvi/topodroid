@@ -12,9 +12,7 @@
 package com.topodroid.packetX;
 
 import com.topodroid.utils.TDColor;
-import com.topodroid.DistoX.TDUtil;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDUtil;
 
 // import java.text.SimpleDateFormat;
 import java.util.Locale;
@@ -132,7 +130,7 @@ class PacketData
   {
     // SimpleDateFormat df = new SimpleDateFormat("yyyy.mm.dd HH:mm:ss");
     // String date = df.format( millis );
-    // // Log.v("DistoXP", date + " type " + type );
+    // // TDLog.v( "P " + date + " type " + type );
     // // return String.format("%s: %s (%d %c) %s", address, date, dir, mTypes[type], dataToString() );
     // return String.format("%s", dataToString() );
     return dataToString();

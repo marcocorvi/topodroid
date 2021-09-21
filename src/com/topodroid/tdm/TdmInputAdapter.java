@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -26,8 +26,6 @@ import android.widget.LinearLayout;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
-
-// import android.util.Log;
 
 class TdmInputAdapter extends ArrayAdapter< TdmInput >
 {

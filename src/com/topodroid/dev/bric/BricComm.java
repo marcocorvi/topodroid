@@ -28,11 +28,11 @@ import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.ble.BleConst;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
@@ -46,8 +46,6 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 import android.bluetooth.BluetoothGattCallback;
-
-import android.util.Log;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -99,7 +97,7 @@ public class BricComm extends TopoDroidComm
   public BricComm( Context ctx, TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );
-    Log.v("DistoX", "BRIC comm cstr - mode " + TDSetting.mBricMode );
+    TDLog.v( "BRIC comm cstr - mode " + TDSetting.mBricMode );
     mContext  = ctx;
     mRemoteAddress = address;
     mRemoteBtDevice = bt_device;
@@ -109,13 +107,13 @@ public class BricComm extends TopoDroidComm
       public void run()
       {
         for ( ; ; ) {
-          Log.v("DistoX", "BRIC comm: Queue size " + mQueue.size );
+          TDLog.v( "BRIC comm: Queue size " + mQueue.size );
           BricBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
-          Log.v("DistoX", "BRIC comm: Queue buffer type " + buffer.type );
+          TDLog.v( "BRIC comm: Queue buffer type " + buffer.type );
           switch ( buffer.type ) {
             case DATA_PRIM:
-              Log.v("DistoX", "BRIC comm: Queue buffer PRIM");
+              TDLog.v( "BRIC comm: Queue buffer PRIM");
               // BricDebug.logMeasPrim( buffer.data );
               if ( TDSetting.mBricMode == BricMode.MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
@@ -124,14 +122,14 @@ public class BricComm extends TopoDroidComm
               }
               break;
             case DATA_META:
-              Log.v("DistoX", "BRIC comm: Queue buffer META");
+              TDLog.v( "BRIC comm: Queue buffer META");
               // BricDebug.logMeasMeta( buffer.data );
               if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
-              Log.v("DistoX", "BRIC comm: Queue buffer ERR");
+              TDLog.v( "BRIC comm: Queue buffer ERR");
               // BricDebug.logMeasErr( buffer.data );
               if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
@@ -139,7 +137,7 @@ public class BricComm extends TopoDroidComm
               }
               break;
             // case DATA_INFO_24:
-            //   // Log.v("DistoX", "BRIC comm: Queue buffer INFO");
+            //   // TDLog.v( "BRIC comm: Queue buffer INFO");
             //   // BricDebug.logAscii( buffer.data );
             //   if ( mBricInfoDialog != null ) mBricInfoDialog.setValue( DATA_INFO_24, buffer.data );
             //   break;
@@ -156,11 +154,11 @@ public class BricComm extends TopoDroidComm
               if ( mBricInfoDialog != null ) mBricInfoDialog.setValue( DATA_INFO_28, buffer.data );
               break;
             case DATA_DEVICE_00:
-              // Log.v("DistoX", "BRIC comm: Queue buffer DEVICE 00");
+              // TDLog.v( "BRIC comm: Queue buffer DEVICE 00");
               if ( mBricInfoDialog != null ) mBricInfoDialog.setValue( DATA_DEVICE_00, buffer.data );
               break;
             case DATA_BATTERY_LVL:
-              // Log.v("DistoX", "BRIC comm: Queue buffer BATTERY LVL");
+              // TDLog.v( "BRIC comm: Queue buffer BATTERY LVL");
               // BricDebug.logString( buffer.data );
               if ( mBricInfoDialog != null ) mBricInfoDialog.setValue( DATA_BATTERY_LVL, buffer.data );
               registerInfo( null ); // battery level is the last info
@@ -218,7 +216,7 @@ public class BricComm extends TopoDroidComm
       TDLog.Error("BRIC comm enlist read: chrt not permission readable");
       // return false;
     }
-    // Log.v("DistoX", "BRIC comm: enlist chrt read " + chrtUuid.toString() );
+    // TDLog.v( "BRIC comm: enlist chrt read " + chrtUuid.toString() );
     enqueueOp( new BleOpChrtRead( mContext, this, srvUuid, chrtUuid ) );
     doNextOp();
     return true;
@@ -236,7 +234,7 @@ public class BricComm extends TopoDroidComm
   //     TDLog.Error("BRIC comm enlist write: cannot write chrt");
   //     return false;
   //   }
-  //   // Log.v("DistoX", "BRIC comm: enlist chrt write " + chrtUuid.toString() );
+  //   // TDLog.v( "BRIC comm: enlist chrt write " + chrtUuid.toString() );
   //   enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
   //   doNextOp();
   //   return true;
@@ -254,7 +252,7 @@ public class BricComm extends TopoDroidComm
   private void addService( BluetoothGattService srv ) 
   { 
     String srv_uuid = srv.getUuid().toString();
-    // Log.v("DistoX", "Bric comm add S: " + srv_uuid );
+    // TDLog.v( "Bric comm add S: " + srv_uuid );
   }
   */
 
@@ -266,7 +264,7 @@ public class BricComm extends TopoDroidComm
     int ret;
     UUID chrtUuid = chrt.getUuid();
     String chrt_uuid = chrtUuid.toString();
-    // Log.v("DistoX", "Bric comm ***** add chrt " + chrtUuid );
+    // TDLog.v( "Bric comm ***** add chrt " + chrtUuid );
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
       ret = enqueueOp( new BleOpNotify( mContext, this, srvUuid, chrt, true ) );
     } else if ( chrt_uuid.equals( BricConst.MEAS_META ) ) {
@@ -276,7 +274,7 @@ public class BricComm extends TopoDroidComm
     } else if ( chrt_uuid.equals( BricConst.LAST_TIME ) ) { // LAST_TIME is not notified
       ret = enqueueOp( new BleOpNotify( mContext, this, srvUuid, chrt, true ) );
     } else {
-      // Log.v("DistoX", "Bric comm add: unknown chrt " + chrt_uuid );
+      // TDLog.v( "Bric comm add: unknown chrt " + chrt_uuid );
     }
   }
   */
@@ -285,7 +283,7 @@ public class BricComm extends TopoDroidComm
   private void addDesc( UUID srv_uuid, UUID chrt_uuid, BluetoothGattDescriptor desc ) 
   {
     String desc_uuid = desc.getUuid().toString();
-    // Log.v("DistoX", "Bric comm add     +D: " + desc_uuid );
+    // TDLog.v( "Bric comm add     +D: " + desc_uuid );
   }
   */
 
@@ -310,18 +308,18 @@ public class BricComm extends TopoDroidComm
           // addService() does not do anything
           // addService( service );
           UUID srv_uuid = service.getUuid();
-          // Log.v("DistoX", "BRIC comm Srv  " + srv_uuid.toString() );
+          // TDLog.v( "BRIC comm Srv  " + srv_uuid.toString() );
           List< BluetoothGattCharacteristic> chrts = service.getCharacteristics();
           for ( BluetoothGattCharacteristic chrt : chrts ) {
             addChrt( srv_uuid, chrt );
 
             // addDesc() does not do anything
             // UUID chrt_uuid = chrt.getUuid();
-            // // Log.v("DistoX", "BRIC comm Chrt " + chrt_uuid.toString() + BleUtils.chrtPermString(chrt) + BleUtils.chrtPropString(chrt) );
+            // // TDLog.v( "BRIC comm Chrt " + chrt_uuid.toString() + BleUtils.chrtPermString(chrt) + BleUtils.chrtPropString(chrt) );
             // List< BluetoothGattDescriptor> descs = chrt.getDescriptors();
             // for ( BluetoothGattDescriptor desc : descs ) {
             //   addDesc( srv_uuid, chrt_uuid, desc );
-            //   // Log.v("DistoX", "BRIC comm Desc " + desc.getUuid().toString() + BleUtils.descPermString( desc ) );
+            //   // TDLog.v( "BRIC comm Desc " + desc.getUuid().toString() + BleUtils.descPermString( desc ) );
             // }
           }
         }
@@ -349,7 +347,7 @@ public class BricComm extends TopoDroidComm
     // clearPending();
 
     mBTConnected = true;
-    Log.v("DistoX", "BRIC comm discovered services status CONNECTED" );
+    TDLog.v( "BRIC comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED ); 
 
     return 0;
@@ -446,19 +444,19 @@ public class BricComm extends TopoDroidComm
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm changed chrt " + chrt_uuid );
     // delay closing one second after a characteristic change
     if ( chrt_uuid.equals( BricConst.MEAS_PRIM ) ) {
-      Log.v("DistoX", "BRIC comm changed char PRIM" );
+      TDLog.v( "BRIC comm changed char PRIM" );
       onData = System.currentTimeMillis() + 1000;
       mQueue.put( DATA_PRIM, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.MEAS_META ) ) { 
-      Log.v("DistoX", "BRIC comm changed char META" ); 
+      TDLog.v( "BRIC comm changed char META" ); 
       mQueue.put( DATA_META, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.MEAS_ERR  ) ) {
-      Log.v("DistoX", "BRIC comm changed char ERR" ); 
+      TDLog.v( "BRIC comm changed char ERR" ); 
       mQueue.put( DATA_ERR, chrt.getValue() );
     } else if ( chrt_uuid.equals( BricConst.LAST_TIME  ) ) {
       // TDLog.Log( TDLog.LOG_BT, "BRIC comm changed char TIME " + BleUtils.bytesToString( chrt.getValue() ) );
       // mQueue.put( DATA_TIME, chrt.getValue() ); 
-      // // Log.v("DistoX", "BRIC comm last time " + BleUtils.bytesToString( chrt.getValue() ) );
+      // // TDLog.v( "BRIC comm last time " + BleUtils.bytesToString( chrt.getValue() ) );
     } else {
       TDLog.Error("Bric comm UNKNOWN chrt changed " + chrt_uuid );
     }
@@ -470,7 +468,7 @@ public class BricComm extends TopoDroidComm
   // from onReliableWriteCompleted
   public void completedReliableWrite() 
   { 
-    // Log.v("DistoX", "BRUC comm: reliable write" );
+    // TDLog.v( "BRUC comm: reliable write" );
     clearPending();
   }
 
@@ -496,7 +494,7 @@ public class BricComm extends TopoDroidComm
         break;
       case BleCallback.CONNECTION_TIMEOUT:
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        // Log.v("DistoX", "BRIC comm: connection timeout or 133");
+        // TDLog.v( "BRIC comm: connection timeout or 133");
         // notifyStatus( ConnectionState.CONN_WAITING );
         reconnectDevice();
         break;
@@ -511,7 +509,7 @@ public class BricComm extends TopoDroidComm
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    // Log.v("DistoX", "BRIC comm Failure: disconnecting ...");
+    // TDLog.v( "BRIC comm Failure: disconnecting ...");
     closeDevice();
   }
     
@@ -537,9 +535,9 @@ public class BricComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    Log.v("DistoX", "BRIC comm ***** connect Device = [3a] status WAITING" );
+    TDLog.v( "BRIC comm ***** connect Device = [3a] status WAITING" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-    Log.v("DistoX", "BRIC comm connects ... " + ret);
+    TDLog.v( "BRIC comm connects ... " + ret);
     clearPending();
     // doNextOp();
     return true;
@@ -570,13 +568,13 @@ public class BricComm extends TopoDroidComm
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
-      Log.v("DistoX", "BRIC comm ***** reconnect yes Device = [4a] status WAITING" );
+      TDLog.v( "BRIC comm ***** reconnect yes Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
       int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {
-      Log.v("DistoX", "BRIC comm ***** reconnect no Device = [4b] status DISCONNECTED" );
+      TDLog.v( "BRIC comm ***** reconnect no Device = [4b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
@@ -588,7 +586,7 @@ public class BricComm extends TopoDroidComm
   public void disconnected()
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** disconnected" );
-    Log.v( "DistoX", "BRIC comm ***** disconnected" );
+    TDLog.v( "BRIC comm ***** disconnected" );
     clearPending();
     mOps.clear(); 
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
@@ -646,7 +644,7 @@ public class BricComm extends TopoDroidComm
       // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** close device");
       int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
       doNextOp();
-      Log.v("DistoX", "BRIC comm: close Device - disconnect ... ops " + ret );
+      TDLog.v( "BRIC comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
@@ -674,7 +672,7 @@ public class BricComm extends TopoDroidComm
 */
     }
     if ( command != null ) {
-      // Log.v("DistoX", "BRIC comm send cmd " + cmd );
+      // TDLog.v( "BRIC comm send cmd " + cmd );
       enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.CTRL_SRV_UUID, BricConst.CTRL_CHRT_UUID, command ) );
       doNextOp();
     // } else { // FIXME COMPOSITE_COMMANDS
@@ -704,7 +702,7 @@ public class BricComm extends TopoDroidComm
   private boolean sendLastTime( )
   {
     byte[] last_time = ((BricProto)mProtocol).getLastTime();
-    // Log.v("DistoX", "BRIC comm send last time: " + BleUtils.bytesToString( last_time ) );
+    // TDLog.v( "BRIC comm send last time: " + BleUtils.bytesToString( last_time ) );
     if ( last_time == null ) return false;
     enqueueOp( new BleOpChrtWrite( mContext, this, BricConst.MEAS_SRV_UUID, BricConst.LAST_TIME_UUID, last_time ) );
     doNextOp();
@@ -733,11 +731,11 @@ public class BricComm extends TopoDroidComm
   private void doNextOp() 
   {
     if ( mPendingOp != null ) {
-      // Log.v("DistoX", "BRIC comm: next op with pending not null, ops " + mOps.size() ); 
+      // TDLog.v( "BRIC comm: next op with pending not null, ops " + mOps.size() ); 
       return;
     }
     mPendingOp = mOps.poll();
-    // Log.v("DistoX", "BRIC comm: polled, ops " + mOps.size() );
+    // TDLog.v( "BRIC comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
       mPendingOp.execute();
     } 

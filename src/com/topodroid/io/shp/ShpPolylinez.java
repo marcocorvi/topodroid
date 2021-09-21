@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.Cave3X.DrawingUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,8 +28,6 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;   
 
 import java.util.List;
-
-// import android.util.Log;
 
 public class ShpPolylinez extends ShpObject
 {
@@ -66,8 +64,8 @@ public class ShpPolylinez extends ShpObject
     int dbfLength = 33 + n_fld * 32 + nr * dbfRecLen; // Bytes, 3 fields
 
     setBoundsShots( lns, lms );
-    // Log.v("DistoX", "POLYLINEZ shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
+    // TDLog.v( "POLYLINEZ shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength, 2*shxLength, dbfLength );
@@ -75,7 +73,7 @@ public class ShpPolylinez extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POLYLINEZ, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POLYLINEZ, shxLength );
     writeDBaseHeader( nr, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "shots done headers" );
+    // TDLog.v( "shots done headers" );
 
     int cnt = 0;
     if ( lns != null && nrs > 0 ) {
@@ -115,7 +113,7 @@ public class ShpPolylinez extends ShpObject
         writeDBaseRecord( n_fld, fields, flens );
       }
     }
-    // Log.v("DistoX", "shots done records" );
+    // TDLog.v( "shots done records" );
     close();
     return true;
   }

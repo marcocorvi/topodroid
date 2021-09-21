@@ -26,8 +26,6 @@ import java.util.List;
 import java.util.Collections;
 import java.util.ArrayList;
 
-import android.util.Log;
-
 /**
  */
 public class TdmViewCommand 
@@ -142,7 +140,7 @@ public class TdmViewCommand
   // x,y canvas point
   public double getStationAt( float x, float y )
   {
-    // Log.v("TdManager", "scale " + mScale );
+    // TDLog.v("get station at: scale " + mScale );
 
     x = (x - mXoff); // /mScale;
     y = (y - mYoff); // /mScale;
@@ -150,10 +148,10 @@ public class TdmViewCommand
     mSelected = null;
     double dmin = 100000; // FIXME a very large number
 
-    // Log.v("TdManager", name() + " get station at " + x + " " + y );
+    // TDLog.v("get station at: " + name() + " get station at " + x + " " + y );
     synchronized ( mStations ) {
       for ( TdmViewStation st : mStations ) {
-        // Log.v("TdManager", name() + " station " + st.mStation.mName + " " + st.x + " " + st.y );
+        // TDLog.v("get station at " + name() + " station " + st.mStation.mName + " " + st.x + " " + st.y );
         double d = Math.abs( st.x - x ) + Math.abs( st.y - y );
         if ( d < d0 ) {
           if ( mSelected == null || d < dmin ) {

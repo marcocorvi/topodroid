@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+
+    <!-- DEM file -->
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:orientation="horizontal"
+      >
+      <Button android:id="@+id/dem_load"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        android:text="@string/dem_load"
+        />
+      <TextView android:id="@+id/dem_file"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        />
+    </LinearLayout>
+
+    <!-- texture file -->
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="25dp"
+      android:orientation="horizontal"
+      >
+      <Button android:id="@+id/texture_load"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        android:text="@string/texture_load"
+        />
+      <TextView android:id="@+id/texture_file"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        />
+    </LinearLayout>
+   					  
+
+    <SeekBar android:id="@+id/alpha"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:layout_marginBottom="10dp"
+      android:layout_marginLeft="10dp"
+      android:layout_marginRight="10dp"
+      android:layout_marginTop="25dp"
+      android:padding="10dp"
+      android:max="255"
+      android:background="#666666"
+    />
+
+    <CheckBox android:id="@+id/projection"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/surface_projection"
+      />
+
+    <CheckBox android:id="@+id/texture"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/surface_texture"
+      />
+
+    <!-- WITH-GPS -->
+    <CheckBox android:id="@+id/gps"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/surface_gps"
+      />
+
+    <LinearLayout
+      android:layout_width="fill_parent"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:orientation="horizontal"
+      >
+      <EditText android:id="@+id/east"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:hint="@string/surface_east"
+        android:inputType="numberSigned|numberDecimal"
+        />
+      <EditText android:id="@+id/north"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:layout_marginRight="10dp"
+        android:hint="@string/surface_north"
+        android:inputType="numberSigned|numberDecimal"
+        />
+    </LinearLayout>
+
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="10dp"
+      >
+      <Button android:id="@+id/button_ok"
+        style="@style/button_default"
+        android:layout_width="0dp" 
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/cbtn_ok"
+        />
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:layout_width="0dp" 
+        android:layout_height="wrap_content"
+        android:layout_weight="50"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/cbtn_cancel"
+        />
+     </LinearLayout>
+
+</LinearLayout>

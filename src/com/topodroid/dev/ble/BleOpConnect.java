@@ -17,8 +17,6 @@ import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
 
-import android.util.Log;
-
 public class BleOpConnect extends BleOperation 
 {
   BluetoothDevice mDevice;
@@ -34,7 +32,7 @@ public class BleOpConnect extends BleOperation
   @Override 
   public void execute()
   {
-    // Log.v("DistoX-BLE", "BleOp exec connect");
+    // TDLog.v( "BleOp exec connect");
     if ( mPipe == null ) { 
       TDLog.Error("BleOp connect error: null pipe" );
       return;

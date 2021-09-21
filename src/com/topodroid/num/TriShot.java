@@ -12,12 +12,10 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.AverageLeg;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.SurveyInfo;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.AverageLeg;
+import com.topodroid.Cave3X.DBlock;
+import com.topodroid.Cave3X.SurveyInfo;
 
 import java.util.ArrayList;
 // import java.util.List;
@@ -44,7 +42,7 @@ class TriShot
 
   // void dump()
   // {
-  //   Log.v("DistoX-TRI", from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
+  //   TDLog.v( from + "-" + to + " " + (used?"u":"-") + (duplicate?"d":"-") + (surface?"s":"-") + (commented?"c ":"- ") + backshot
   //       	    + " blks " + blocks.size() );
   // }
 
@@ -101,7 +99,7 @@ class TriShot
   {
     double hh = mAvgLeg.length() * TDMath.cosDd( mAvgLeg.clino() );
     // if ( hh < 0 ) {
-    //   Log.v("DistoX-TRI", "block " + blocks.get(0).mId + " neg H " + hh );
+    //   TDLog.v( "TRI block " + blocks.get(0).mId + " neg H " + hh );
     // }
     return hh;
     // return mAvgLeg.length() * TDMath.cosd( mAvgLeg.clino() );
@@ -160,9 +158,9 @@ class TriShot
 
   // void Dump()
   // {
-  //   // Log.v( TDLog.TAG, "Shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
+  //   // TDLog.v( "TRI shot " + from + "-" + to + " " + d() + " " + b() + " " + c() );
   //   // for ( DBlock b : blocks ) {
-  //   //   // Log.v( TDLog.TAG, b.mLength + " " + b.mBearing + " " + b.mClino );
+  //   //   // TDLog.v( b.mLength + " " + b.mBearing + " " + b.mClino );
   //   // }
   // }
 }

@@ -13,8 +13,6 @@ package com.topodroid.dev.distox;
 
 // import com.topodroid.utils.TDLog;
 
-// import android.util.Log;
-
 public class DistoX
 {
   // commands

@@ -17,12 +17,12 @@ import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.MyKeyboard;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.GMActivity;
-import com.topodroid.DistoX.TDLevel;
-import com.topodroid.DistoX.TDConst;
-import com.topodroid.DistoX.MyKeyboard;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.GMActivity;
+import com.topodroid.Cave3X.TDLevel;
+import com.topodroid.Cave3X.TDConst;
 
 import java.util.Locale;
 import java.lang.ref.WeakReference;

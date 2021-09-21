@@ -16,8 +16,6 @@ import com.topodroid.utils.TDLog;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 public class PTMapping
 {
   static final private int XTHERION_FACTOR = 25;
@@ -56,7 +54,7 @@ public class PTMapping
       PTFile.writeInt( fs, _scale );
     }
 
-    // void print() { Log.v( TopoDroidApp.TAG, "mapping: scale " + _scale ); _origin.print(); }
+    // void print() { TDLog.v( "PT mapping: scale " + _scale ); _origin.print(); }
 
     void clear()
     {

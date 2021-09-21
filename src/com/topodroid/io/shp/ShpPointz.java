@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.Cave3X.DrawingUtil;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -28,8 +28,6 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;   
 
 import java.util.List;
-
-import android.util.Log;
 
 public class ShpPointz extends ShpObject
 {
@@ -60,8 +58,8 @@ public class ShpPointz extends ShpObject
     int dbfLength = 33 + n_fld * 32 + n_pts * dbfRecLen; // [Bytes]
 
     setBoundsStations( pts );
-    // Log.v("DistoX", "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "bbox X " + xmin + " " + xmax );
+    // TDLog.v( "POINTZ " + pts.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "bbox X " + xmin + " " + xmax );
 
     open();
     resetChannels( 2*shpLength+8, 2*shxLength+8, dbfLength );
@@ -69,7 +67,7 @@ public class ShpPointz extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, SHP_POINTZ, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, SHP_POINTZ, shxLength );
     writeDBaseHeader( n_pts, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "POINTZ done headers");
+    // TDLog.v( "POINTZ done headers");
 
     int cnt = 0;
     for ( NumStation pt : pts ) {
@@ -77,7 +75,7 @@ public class ShpPointz extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINTZ );
-      // Log.v("DistoX", "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
+      // TDLog.v( "POINTZ " + cnt + ": " + pt.e + " " + pt.s + " " + pt.v + " offset " + offset );
       shpBuffer.putDouble( pt.e );
       shpBuffer.putDouble( pt.s );
       shpBuffer.putDouble( pt.v );
@@ -88,7 +86,7 @@ public class ShpPointz extends ShpObject
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
-    // Log.v("DistoX", "POINTZ done records");
+    // TDLog.v( "POINTZ done records");
     close();
     return true;
   }

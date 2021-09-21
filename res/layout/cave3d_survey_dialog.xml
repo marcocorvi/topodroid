@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+   					  
+    <TextView android:id="@+id/survey_name" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content" 
+      android:gravity="left"
+      />
+
+    <TableLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      >
+
+      <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:gravity="left"
+          android:text="@string/survey_legs"
+          />
+        <TextView android:id="@+id/survey_legs"
+          android:layout_width="100dip" 
+          android:layout_height="wrap_content" 
+          android:gravity="right"
+          android:text="0"
+          />
+      </TableRow>
+
+      <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:gravity="left"
+          android:text="@string/survey_legs_length"
+          />
+        <TextView android:id="@+id/survey_legs_length"
+          android:layout_width="100dip" 
+          android:layout_height="wrap_content" 
+          android:gravity="right"
+          android:text="0.0"
+          />
+      </TableRow>
+
+      <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:gravity="left"
+          android:text="@string/survey_splays"
+          />
+        <TextView android:id="@+id/survey_splays"
+          android:layout_width="100dip" 
+          android:layout_height="wrap_content" 
+          android:gravity="right"
+          android:text="0"
+          />
+      </TableRow>
+
+      <TableRow xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        >
+        <TextView 
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:gravity="left"
+          android:text="@string/survey_splays_length"
+          />
+        <TextView android:id="@+id/survey_splays_length"
+          android:layout_width="100dip" 
+          android:layout_height="wrap_content" 
+          android:gravity="right"
+          android:text="0.0"
+          />
+      </TableRow>
+
+    </TableLayout>
+
+    <Button android:id="@+id/btn_close"
+       android:layout_width="wrap_content" 
+       android:layout_height="wrap_content" 
+       android:layout_marginTop="25sp"
+       android:text="@string/cbtn_close"
+       />
+      
+
+
+</LinearLayout>

@@ -14,8 +14,6 @@ package com.topodroid.ptopo;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 
 public class PTShot
 {
@@ -197,7 +195,7 @@ public class PTShot
     //   float roll = (((int)_roll) * 360.0f) / (1<<8);
 
     //   if ( inclination > 180.0f ) inclination -= 360.0f;
-    //   Log.v( "DistoX-PT", "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
+    //   TDLog.v( "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
     //   _from.print();
     //   _to.print();
     //   if ( (_flags & (byte)0x02) != 0 ) _comment.print();

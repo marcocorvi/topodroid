@@ -28,8 +28,6 @@ import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
-// import android.util.Log;
-
 import java.lang.Math;
 
 // import java.util.Locale;
@@ -127,7 +125,7 @@ public class CalibAlgoBH extends CalibAlgo
   {
     int max_it = TDSetting.mCalibMaxIt;
     float eps  = TDSetting.mCalibEps;
-    // Log.v("DistoX", "Calib Algo BH eps " + eps + " iter " + max_it );
+    // TDLog.v( "Calib Algo BH eps " + eps + " iter " + max_it );
 
     // int num = g.Length();
     TDVector[] gr = new TDVector[nn];
@@ -341,7 +339,7 @@ public class CalibAlgoBH extends CalibAlgo
     }
     if ( cnt_bh > 0 ) {
       mDeltaBH = TDMath.sqrt( mDeltaBH / cnt_bh ) * 100;
-      // Log.v("DistoXAlgoBH", "delta BH " + mDeltaBH + " cnt " + cnt_bh );
+      // TDLog.v("delta BH " + mDeltaBH + " cnt " + cnt_bh );
     }
 
     for ( int i=0; i<nn; ++i ) {
@@ -359,7 +357,7 @@ public class CalibAlgoBH extends CalibAlgo
     mDelta    = 0.0f;
     mDelta2   = 0.0f;
     mMaxError = 0.0f;
-    // Log.v("DistoX", "compute errors...");
+    // TDLog.v( "compute errors...");
     for ( int i=0; i<nn; ) {
       if ( group[i] <= 0 ) {
         ++i;
@@ -379,7 +377,7 @@ public class CalibAlgoBH extends CalibAlgo
         OptVectors( grp, mrp, s, c );
         computeBearingAndClinoRad( gxp, mxp );
         TDVector v0 = new TDVector( b0, c0 );
-        // Log.v("DistoX", "group V " + v0.x + " " + v0.y + " " + v0.z );
+        // TDLog.v( "group V " + v0.x + " " + v0.y + " " + v0.z );
         int cnt_gr = 0;
         float delta_gr = 0.0f;
         float delta2_gr = 0.0f;
@@ -390,7 +388,7 @@ public class CalibAlgoBH extends CalibAlgo
             computeBearingAndClinoRad( gr[j], mr[j] );
             TDVector v = new TDVector( b0, c0 );
             err[j] = v0.minus(v).Length(); // approx angle with 2*tan(alpha/2)
-            // Log.v("DistoX", "Err" + err[j] + " V " + v.x + " " + v.y + " " + v.z );
+            // TDLog.v( "Err" + err[j] + " V " + v.x + " " + v.y + " " + v.z );
             if ( err[j] > mMaxError ) mMaxError = err[j];
             delta_gr  += err[j];
             delta2_gr += err[j] * err[j];
@@ -409,7 +407,7 @@ public class CalibAlgoBH extends CalibAlgo
     mDelta    *= TDMath.RAD2DEG; // convert avg and std0-dev from radians to degrees
     mDelta2   *= TDMath.RAD2DEG;
     mMaxError *= TDMath.RAD2DEG;
-    // Log.v("DistoXAlgoBH", "nn " + nn + " Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
+    // TDLog.v("nn " + nn + " Delta " + mDelta + " " + mDelta2 + " cnt " + cnt + " max " + mMaxError );
 
     EnforceMax2( bG, aG );
     EnforceMax2( bM, aM );
@@ -450,7 +448,7 @@ public class CalibAlgoBH extends CalibAlgo
       g[k] = scaledVector( g1[k] );
       m[k] = scaledVector( m1[k] );
     }
-    // Log.v("DistoX", "add stat errors: size " + size );
+    // TDLog.v( "add stat errors: size " + size );
     if ( mNonLinear ) {
       TDMatrix gs = new TDMatrix();
       for ( int k=0; k<size; ++k ) {
@@ -492,7 +490,7 @@ public class CalibAlgoBH extends CalibAlgo
       //                         (float)Math.sin(c0) );
       double e = v1.minus(v0).Length();
       if ( errors != null ) errors[i] = (float)e;
-      // Log.v("DistoX", e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
+      // TDLog.v( e + " " + g[i].x + " " + g[i].y + " " + g[i].z );
       mSumCount += 1;
       mSumErrors += e;
       mSumErrorSquared += e*e;

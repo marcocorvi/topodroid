@@ -17,8 +17,6 @@ import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
 
-import android.util.Log;
-
 import java.util.UUID;
 import java.util.Arrays;
 
@@ -47,6 +45,6 @@ public class BleOpChrtWrite extends BleOperation
     }
     // boolean ret = 
       mPipe.writeChrt( mSrvUuid, mChrtUuid, bytes );
-    // Log.v("DistoX-BLE", "BleOp exec chrt write: ret " + ret );
+    // TDLog.v( "BleOp exec chrt write: ret " + ret );
   }
 }

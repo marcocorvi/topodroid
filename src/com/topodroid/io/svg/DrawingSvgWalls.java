@@ -16,23 +16,21 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.DrawingStationPath;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingLabelPath;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.BrushManager;
-import com.topodroid.DistoX.Symbol;
-import com.topodroid.DistoX.SymbolPoint;
-import com.topodroid.DistoX.TDExporter;
-import com.topodroid.DistoX.Scrap;
-import com.topodroid.DistoX.DBlock;
-
-import android.util.Log;
+import com.topodroid.Cave3X.DrawingStationPath;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingLabelPath;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.DrawingCommandManager;
+import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.Cave3X.Symbol;
+import com.topodroid.Cave3X.SymbolPoint;
+import com.topodroid.Cave3X.TDExporter;
+import com.topodroid.Cave3X.Scrap;
+import com.topodroid.Cave3X.DBlock;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -112,7 +110,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
     xoff = - xmin;
     yoff = - ymin;
 
-    // Log.v( "DistoX-SVGWALLS", "X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " W " + width + " H " + height ); 
+    // TDLog.v( "SvgWalls X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " W " + width + " H " + height ); 
 
     ArrayList< XSection > xsections = getXSections( plot, xoff, yoff );
 
@@ -121,7 +119,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       //   out.write("<!DOCTYPE html>\n<html>\n<body>\n");
       // }
       // String vbox = Integer.toString( (int)xmin ) + " " + Integer.toString( -(int)ymax ) + " " + Integer.toString( (int)xmax ) + " " + Integer.toString( -(int)ymin );
-      // Log.v( "DistoX-SVGWALLS", "Xoff " + xoff + " Yoff " + yoff + " vbox " + vbox );
+      // TDLog.v( "SvgWalls Xoff " + xoff + " Yoff " + yoff + " vbox " + vbox );
 
       // header
       out.write( xml_header ); 
@@ -150,7 +148,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write( "      <path d=\"M 0 0 L 10 5 L 0 10 z\" />\n");
       out.write( "    </marker>\n"); 
       // if ( TDSetting.mSvgLineDirection ) {
-        // Log.v("DistoXsvg", "SVG line direction");
+        // TDLog.v( "SVG line direction");
       StringWriter swD = new StringWriter();
       PrintWriter pwD  = new PrintWriter(swD);
       pwD.format("    <marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");

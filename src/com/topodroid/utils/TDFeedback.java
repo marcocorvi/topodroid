@@ -19,7 +19,7 @@ import android.os.Vibrator;
 import android.media.AudioManager;
 import android.media.ToneGenerator;
 
-import android.util.Log;
+import com.topodroid.utils.TDLog;
 
 public class TDFeedback
 {
@@ -97,7 +97,7 @@ public class TDFeedback
       ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
       toneG.startTone( ToneGenerator.TONE_PROP_PROMPT, duration ); 
     } catch ( RuntimeException e ) {
-      Log.e("DistoX", "ring the bell: exception " + e.getMessage() );
+      TDLog.Error("ring the bell: exception " + e.getMessage() );
     }
   }
 
@@ -107,9 +107,9 @@ public class TDFeedback
       Vibrator vibrator = (Vibrator)ctx.getSystemService( Context.VIBRATOR_SERVICE );
       vibrator.vibrate(duration);
     } catch ( NullPointerException e ) {
-      Log.e("DistoX", "vibrate: null pointer " + e.getMessage() );
+      TDLog.Error("vibrate: null pointer " + e.getMessage() );
     } catch ( RuntimeException e ) {
-      Log.e("DistoX", "vibrate: exception " + e.getMessage() );
+      TDLog.Error("vibrate: exception " + e.getMessage() );
     }
   }
 

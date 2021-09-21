@@ -16,8 +16,8 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.TDUtil;
 
 // import java.io.File;
 import java.io.FileOutputStream;
@@ -31,8 +31,6 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-// import android.util.Log;
-   
 public class ShpObject
 {
   final static int SHP_MAGIC = 9994;
@@ -191,7 +189,7 @@ public class ShpObject
 
   private void drain( ByteBuffer buffer, FileChannel channel )  throws IOException
   {  
-    // Log.v("DistoX", "drain buffer pos " + buffer.position() );
+    // TDLog.v( "drain buffer pos " + buffer.position() );
     try { 
       buffer.flip();  // set limit to current-pos and pos to 0
       while (buffer.remaining() > 0) channel.write(buffer);   
@@ -204,7 +202,7 @@ public class ShpObject
 
   protected void close() throws IOException
   {
-    // Log.v("DistoX", "drain and close" );
+    // TDLog.v( "drain and close" );
     shpBuffer.putInt( 0 );
     shpBuffer.putInt( 0 );
     shxBuffer.putInt( 0 );
@@ -242,7 +240,7 @@ public class ShpObject
     shpBuffer = null;   
     shxBuffer = null;   
     dbfBuffer = null;   
-    // Log.v("DistoX", "drain and close DONE" );
+    // TDLog.v( "drain and close DONE" );
   }
 
   // Write the headers for this shapefile including the bounds, shape type,

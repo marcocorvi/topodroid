@@ -13,10 +13,8 @@
 package com.topodroid.inport;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TDLevel;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.SurveyInfo;
+import com.topodroid.Cave3X.TDLevel;
 
 public class ImportData
 {

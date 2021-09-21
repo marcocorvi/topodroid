@@ -19,29 +19,27 @@ import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.DrawingStationPath;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingLabelPath;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingAudioPath;
-import com.topodroid.DistoX.DrawingPhotoPath;
-import com.topodroid.DistoX.DrawingSpecialPath;
-import com.topodroid.DistoX.DrawingIO;
-import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.LinePoint;
-import com.topodroid.DistoX.BrushManager;
-import com.topodroid.DistoX.SymbolPoint;
-import com.topodroid.DistoX.SymbolLibrary;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.ICanvasCommand;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.DrawingStationPath;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingLabelPath;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingAudioPath;
+import com.topodroid.Cave3X.DrawingPhotoPath;
+import com.topodroid.Cave3X.DrawingSpecialPath;
+import com.topodroid.Cave3X.DrawingIO;
+import com.topodroid.Cave3X.DrawingCommandManager;
+import com.topodroid.Cave3X.LinePoint;
+import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.Cave3X.SymbolPoint;
+import com.topodroid.Cave3X.SymbolLibrary;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.ICanvasCommand;
 
 import java.util.Locale;
 import java.util.List;
@@ -195,10 +193,12 @@ public class DrawingSvgBase
   static protected void toSvgLabel( PrintWriter pw, DrawingLabelPath point, String color, float xoff, float yoff )
   {
     String name = point.getThName();
+    float scale = point.getScaleValue();
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
       printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
+      pw.format(Locale.US, " font-size=\"%d\"", TDSetting.mSvgLabelSize * scale );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
     }
   }
@@ -304,6 +304,7 @@ public class DrawingSvgBase
       DrawingLabelPath label = (DrawingLabelPath)point;
       // printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       printPointWithXY( pw, "<text", 0, 0 );
+      pw.format(Locale.US, " font-size=\"%d\"", TDSetting.mSvgLabelSize * scale );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\"", TDSetting.mSvgLabelStroke * scale );
       pw.format(Locale.US, " transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">", c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
       pw.format( "%s</text>\n", label.mPointText );
@@ -348,7 +349,7 @@ public class DrawingSvgBase
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );
-      // Log.v("DistoXsvg", "tdr to svg " + scrapfile + " delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+      // TDLog.v( "tdr to svg " + scrapfile + " delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
       DrawingPath path; // = null;
       boolean done = false;

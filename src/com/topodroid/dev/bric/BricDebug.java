@@ -14,8 +14,6 @@ package com.topodroid.dev.bric;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.utils.TDLog;
 
-import android.util.Log;
-
 class BricDebug
 {
 
@@ -42,7 +40,7 @@ class BricDebug
 
   static void logMeasErr( byte[] bytes )
   {
-    // Log.v("DistoX", "BRIC debug MeasErr: " + bytes.length + " Err1 " 
+    // TDLog.v( "BRIC debug MeasErr: " + bytes.length + " Err1 " 
     //   + BleUtils.getChar( bytes, 0 ) + ": " + BleUtils.getFloat( bytes, 1 ) + " " + BleUtils.getFloat( bytes, 5 ) + " Err2 " 
     //   + BleUtils.getChar( bytes, 9 ) + ": " + BleUtils.getFloat( bytes, 10 ) + " " + BleUtils.getFloat( bytes, 14 ) 
     // );

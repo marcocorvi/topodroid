@@ -15,7 +15,7 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDUtil;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 
@@ -29,8 +29,6 @@ import java.io.BufferedReader;
 // import java.util.ArrayList;
 // import java.util.Stack;
 // import java.util.regex.Pattern;
-
-// import android.util.Log;
 
 class ParserCaveSniper extends ImportParser
 {
@@ -67,7 +65,7 @@ class ParserCaveSniper extends ImportParser
       line = nextLine( br );
       while ( line != null ) {
         line = line.trim();
-        // Log.v("DistoX", line );
+        // TDLog.v( line );
         if ( line.startsWith("Unit=") ) {
 	  if ( ! line.substring(5).startsWith("Meter") ) {
             TDLog.Error("unhandled unit line: " + line );
@@ -113,7 +111,7 @@ class ParserCaveSniper extends ImportParser
       throw new ParserException();
     }
     TDLog.Log( TDLog.LOG_THERION, "Parser CaveSniper shots "+ shots.size() +" splays "+ splays.size()  );
-    // Log.v( TopoDroidApp.TAG, "Parser CaveSniper shots "+ shots.size() + " splays "+ splays.size() );
+    // TDLog.v( "Parser CaveSniper shots "+ shots.size() + " splays "+ splays.size() );
   }
 
 }

@@ -19,8 +19,6 @@
  */
 package com.topodroid.mag;
 
-import android.util.Log;
-
 // MAGtype_Date;
 class MagDate
 {
@@ -32,7 +30,7 @@ class MagDate
 
   // void debugDate()
   // {
-  //   Log.v("DistoX", "Date " + Year + " " + Month + " " + Day + " " + DecimalYear );
+  //   TDLog.v( "Date " + Year + " " + Month + " " + Day + " " + DecimalYear );
   // }
 
   MagDate( int y, int m, int d )

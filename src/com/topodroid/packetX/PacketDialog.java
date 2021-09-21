@@ -13,9 +13,7 @@ package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.R;
 
 import java.util.List;
 

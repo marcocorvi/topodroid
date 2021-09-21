@@ -11,8 +11,6 @@
  */
 package com.topodroid.dev.distox1;
 
-// import android.util.Log;
-
 public class DeviceA3Info
 {
   public String mCode;    // device A3 code

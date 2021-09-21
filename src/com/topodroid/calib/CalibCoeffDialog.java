@@ -19,10 +19,8 @@ import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.GMActivity;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.GMActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
@@ -168,7 +166,7 @@ public class CalibCoeffDialog extends MyDialog
       for ( x = 5; x < ioff; ++x ) bitmap.setPixel( x, y, red );
     }
       
-    // Log.v("DistoX", "fill image done");
+    // TDLog.v( "fill image done");
     return bitmap;
   }
 

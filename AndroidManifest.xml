@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.topodroid.DistoX"
+      package="com.topodroid.Cave3X"
       android:installLocation="auto"
-      android:versionCode="501097"
-      android:versionName="5.1.97"
+      android:versionCode="600003"
+      android:versionName="6.0.3"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -30,7 +30,7 @@
     <!-- android:maxSdkVersion="29" -->
 
     <queries>
-      <package android:name="com.topodroid.Cave3D" />
+      <!-- package android:name="com.topodroid.Cave3D" / -->
       <package android:name="com.topodroid.proj4" />
     </queries>
 
@@ -94,6 +94,7 @@
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+	  android:requestLegacyExternalStorage="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -273,6 +274,28 @@
           android:process=":td_distox_process"
           >
         </service -->
+
+      <activity android:name=".TopoGL"
+                android:screenOrientation="portrait"
+                android:theme="@style/Theme.FullScreen"
+                android:label="@string/app_name"
+	        android:requestLegacyExternalStorage="true"
+        >
+        <!-- intent-filter>
+              <action android:name="android.intent.action.MAIN" />
+              <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter -->
+        <!-- intent-filter>
+              <action android:name="Cave3X.intent.action.Launch" />
+              <category android:name="android.intent.category.DEFAULT" />
+        </intent-filter -->
+      </activity>
+
+      <!-- activity android:name=".TopoGLPreferences"
+                android:screenOrientation="portrait"
+                android:label="@string/app_name">
+      </activity -->
+
 
     </application>
 </manifest> 

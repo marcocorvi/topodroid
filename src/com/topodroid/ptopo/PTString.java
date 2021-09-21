@@ -15,8 +15,6 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
-// import android.util.Log;
-
 class PTString 
 {
   private String _str; //!< UTF-8 encoded zero terminated (size=length+1)
@@ -83,7 +81,7 @@ class PTString
     }
   }
 
-  // void print() { Log.v( TopoDroidApp.TAG, "PTString " + _str ); }
+  // void print() { TDLog.v( "PT string " + _str ); }
 
   void set( String val ) { _str = (val == null)? "" : val; }
 

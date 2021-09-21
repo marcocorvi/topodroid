@@ -13,13 +13,11 @@ package com.topodroid.dev.distox1;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TopoDroidApp;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXComm;
 import com.topodroid.dev.distox.DistoXProtocol;
-
-import android.util.Log;
 
 // import java.nio.ByteBuffer;
 
@@ -163,7 +161,7 @@ public class DistoXA3Comm extends DistoXComm
             } else {
               to -= 8;
             }
-            // Log.v( "DistoX-HT", "comm swap hot bit at addr " + to );
+            // YDLog.v( "A3 comm swap hot bit at addr " + to );
             if ( ! protocol.swapA3HotBit( to, on_off ) ) break;
             ++ n;
           } while ( to != from );

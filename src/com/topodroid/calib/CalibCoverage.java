@@ -11,12 +11,11 @@
  */
 package com.topodroid.calib;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDUtil;
-
-import android.util.Log;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.TDUtil;
 
 import java.util.List;
 
@@ -150,10 +149,10 @@ public class CalibCoverage
     t_offset[0] = 0;
     for ( i=1; i<DIM_Y; ++i ) {
       t_offset[i] = t_offset[i-1] + t_size[i-1];
-      // Log.v("DistoX", "J " + i + " off " + t_offset[i] + " size " + t_size[i] );
+      // TDLog.v( "J " + i + " off " + t_offset[i] + " size " + t_size[i] );
     }
     t_dim = t_offset[DIM_Y-1] + t_size[DIM_Y-1]; // size of the table
-    // Log.v("DistoX", "dim " + t_dim );
+    // TDLog.v( "dim " + t_dim );
 
     angles = new Direction [ t_dim ]; // table
 
@@ -243,7 +242,7 @@ public class CalibCoverage
   //       ++ cnt;
   //     }
   //   }
-  //   Log.v("DistoX-COVER", "size " + sz + " count " + cnt );
+  //   TDLog.v("COVER size " + sz + " count " + cnt );
   //   return error;
   // }
 
@@ -286,7 +285,7 @@ public class CalibCoverage
   //     b1.setOffGroup( ( cnt > 0 && dev/cnt > thr ) );
   //     if ( b1.isOffGroup() ) ++ ret;
   //   }
-  //   Log.v("DistoX-COVER", "off-group " + ret );
+  //   TDLog.v("COVER off-group " + ret );
   //   return ret;
   // }
 

@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+
+    <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        >
+      <LinearLayout
+        android:layout_width="0dp" 
+        android:layout_weight="20"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="right"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        >
+        <TextView android:id="@+id/tv_focal"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+        />
+        <!-- TextView android:id="@+id/tv_near"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+        />
+        <TextView android:id="@+id/tv_far"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text=""
+        / -->
+      </LinearLayout>
+      <LinearLayout
+        android:layout_width="0dp" 
+        android:layout_weight="80"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_gravity="right"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        >
+        <SeekBar android:id="@+id/focal"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="S"
+          android:max="1000"
+          android:background="#666666"
+        />
+        <!-- SeekBar android:id="@+id/near"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="N"
+          android:max="1000"
+          android:background="#666666"
+        />
+        <SeekBar android:id="@+id/far"
+          android:layout_width="fill_parent"
+          android:layout_height="wrap_content"
+          android:text="F"
+          android:max="1000"
+          android:background="#666666"
+        / -->
+      </LinearLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        >
+        <Button android:id="@+id/btn_ok"
+          style="@style/button_default"
+          android:layout_width="0dp" 
+          android:layout_height="wrap_content"
+          android:layout_weight="50"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:text="@string/cbtn_ok"
+        />
+        <Button android:id="@+id/btn_cancel"
+          style="@style/button_default"
+          android:layout_width="0dp" 
+          android:layout_height="wrap_content"
+          android:layout_weight="50"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:text="@string/cbtn_cancel"
+        />
+      </LinearLayout>
+
+</LinearLayout>

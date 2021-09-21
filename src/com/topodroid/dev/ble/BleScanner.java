@@ -15,8 +15,6 @@ package com.topodroid.dev.ble;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 
-import android.util.Log;
-
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
 import android.bluetooth.le.ScanFilter;
@@ -58,7 +56,7 @@ public class BleScanner
   {
     mParent    = parent;
     mBTAdapter = adapter;
-    // Log.v("DistoX-BLE", "BLE scanner cstr");
+    // TDLog.v( "BLE scanner cstr");
   }
 
   /** 
@@ -77,7 +75,7 @@ public class BleScanner
       return true; // already scanning
     }
     mScanning = true;
-    // Log.v("DistoX-BLE", "BLE scanner start scan");
+    // TDLog.v( "BLE scanner start scan");
 
     // FIXME mParent.disconnectGatt();
     if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
@@ -86,7 +84,7 @@ public class BleScanner
       mScanCallback = new ScanCallback() {
         @Override public void onScanResult( int type, ScanResult result ) 
         {
-          // Log.v("DistoX-BLE", "BLE scanner on scan result");
+          // TDLog.v( "BLE scanner on scan result");
           BluetoothDevice device = getDevice( result );
           if ( device != null ) setRemoteDevice( device );
           stopScan();
@@ -94,7 +92,7 @@ public class BleScanner
 
         @Override public void onBatchScanResults( List< ScanResult > results )
         {
-          // Log.v("DistoX-BLE", "BLE scanner on batch scan result");
+          // TDLog.v( "BLE scanner on batch scan result");
           for ( ScanResult result : results ) {
             BluetoothDevice device = getDevice( result );
             if ( device != null ) setRemoteDevice( device );
@@ -145,13 +143,13 @@ public class BleScanner
   private BluetoothDevice getDevice( ScanResult result )
   {
     int rssi = result.getRssi();
-    // Log.v("DistoX-BLE", "BLE scanner device RSSI " + rssi );
+    // TDLog.v( "BLE scanner device RSSI " + rssi );
     ScanRecord record = result.getScanRecord();
     if ( record != null ) {
-      // Log.v("DistoX-BLE", "BLE scanner device name " + record.getDeviceName() );
+      // TDLog.v( "BLE scanner device name " + record.getDeviceName() );
       List< ParcelUuid > uuids = record.getServiceUuids();
       if ( uuids != null ) {
-        for ( ParcelUuid uuid : uuids ) Log.v("DistoX-BLE", "BLE scanner uuid " + uuid.toString() );
+        for ( ParcelUuid uuid : uuids ) TDLog.v( "BLE scanner uuid " + uuid.toString() );
       }
     }
     return result.getDevice();
@@ -159,7 +157,7 @@ public class BleScanner
 
   void stopScan()
   {
-    // Log.v("DistoX-BLE", "BLE scanner stop scan");
+    // TDLog.v( "BLE scanner stop scan");
     if ( mScanHandler != null && mScanHandlerRunnable != null ) {
       mScanHandler.removeCallbacks( mScanHandlerRunnable );
     }
@@ -181,7 +179,7 @@ public class BleScanner
 
   private void setRemoteDevice( final BluetoothDevice device )
   {
-    // Log.v("DistoX-BLE", "BLE scanner set remote device " + device.getName() );
+    // TDLog.v( "BLE scanner set remote device " + device.getName() );
     mParent.notifyBleScan( device );
   }
 

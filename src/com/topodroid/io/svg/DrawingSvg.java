@@ -19,23 +19,21 @@ import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-import com.topodroid.DistoX.DrawingStationPath;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.BrushManager;
-// import com.topodroid.DistoX.SymbolPoint;
-import com.topodroid.DistoX.Scrap;
-import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.DBlock;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.DrawingStationPath;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.DrawingCommandManager;
+import com.topodroid.Cave3X.BrushManager;
+// import com.topodroid.Cave3X.SymbolPoint;
+import com.topodroid.Cave3X.Scrap;
+import com.topodroid.Cave3X.SurveyInfo;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.DBlock;
 
 import java.util.Locale;
 import java.util.ArrayList;
@@ -129,7 +127,7 @@ public class DrawingSvg extends DrawingSvgBase
           // }
             
           if ( TDSetting.mSvgGrid ) {
-            // Log.v("DistoXsvg", "SVG grid");
+            // TDLog.v( "SVG grid");
             out.write("<g id=\"grid\"\n" );
             out.write("  style=\"fill:none;stroke-opacity:0.4\" >\n");
             printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
@@ -139,7 +137,7 @@ public class DrawingSvg extends DrawingSvgBase
           }
           // FIXME OK PROFILE
 
-          // Log.v("DistoXsvg", "SVG legs");
+          // TDLog.v( "SVG legs");
           out.write("<g id=\"legs\"\n" );
           out.write("  style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
@@ -174,7 +172,7 @@ public class DrawingSvg extends DrawingSvgBase
           }
           out.write( end_grp );
 
-          // Log.v("DistoXsvg", "SVG splays " + plot.getSplays().size() );
+          // TDLog.v( "SVG splays " + plot.getSplays().size() );
           if ( TDSetting.mSvgSplays ) {
             ArrayList< DrawingPath > normal = new ArrayList<>();
             if ( TDSetting.mSplayClasses ) {
@@ -211,7 +209,7 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         if ( TDSetting.mSvgLineDirection ) {
-          // Log.v("DistoXsvg", "SVG line direction");
+          // TDLog.v( "SVG line direction");
           StringWriter swD = new StringWriter();
           PrintWriter pwD  = new PrintWriter(swD);
           pwD.format("<marker id=\"dir\" viewBox=\"0 0 10 30\"  orient=\"auto\"");
@@ -230,7 +228,7 @@ public class DrawingSvg extends DrawingSvgBase
 
 	ArrayList< XSection > xsections = new ArrayList<>();
 
-        // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+        // TDLog.v( "SVG commands " + plot.getCommands().size() );
         for ( Scrap scrap : plot.getScraps() ) {
           ArrayList< DrawingPath > paths = new ArrayList<>();
           scrap.addCommandsToList( paths );
@@ -256,7 +254,7 @@ public class DrawingSvg extends DrawingSvgBase
                   // String color_str = pathToColor( path );
                   // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
                   // pw5.format(Locale.US, " style=\"fill:none;stroke:%s;stroke-width:0.1\" >\n", color_str );
-                  // Log.v("DistoX", "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
+                  // TDLog.v( "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
                   // option: -scrap survey-xx#
                   // FIXME GET_OPTION
                   String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
@@ -302,7 +300,7 @@ public class DrawingSvg extends DrawingSvgBase
           }
           out.write( end_grp ); // lines
 
-          // Log.v("DistoXsvg", "SVG commands " + plot.getCommands().size() );
+          // TDLog.v( "SVG commands " + plot.getCommands().size() );
           out.write( "<g id=\"areas\">\n" );
 /*
           for ( ICanvasCommand cmd : plot.getCommands() ) {
@@ -324,10 +322,10 @@ public class DrawingSvg extends DrawingSvgBase
         }
 
         // xsections
-        // Log.v("DistoXsvg", "SVG xsections " + xsections.size() );
+        // TDLog.v( "SVG xsections " + xsections.size() );
         out.write("<g id=\"xsections\">\n");
         for ( XSection xsection : xsections ) {
-          // Log.v("DistoXsvg", "SVG xsection " + xsection.mFilename );
+          // TDLog.v( "SVG xsection " + xsection.mFilename );
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
           pw7.format("<g id=\"%s\">\n", xsection.mFilename );
@@ -339,7 +337,7 @@ public class DrawingSvg extends DrawingSvgBase
         out.write( end_grp );
 
         // stations
-        // Log.v("DistoXsvg", "SVG statioons " + plot.getStations().size() );
+        // TDLog.v( "SVG statioons " + plot.getStations().size() );
         out.write("<g id=\"stations\">\n");
         StringWriter sw6 = new StringWriter();
         PrintWriter pw6  = new PrintWriter(sw6);

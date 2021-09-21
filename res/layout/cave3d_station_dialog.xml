@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+   					  
+    <TextView android:id="@+id/st_name"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginBottom="25dp"
+      android:gravity="left"
+      />
+
+    <TextView android:id="@+id/st.east"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_north"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10dp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_vert"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10dp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_surface"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:gravity="left"
+        android:layout_marginBottom="10dp"
+        android:text="Depth"
+        />
+
+  <!-- LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+
+    <Button android:id="@+id/st_distance"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="@string/DISTANCE"
+    />
+    <Button android:id="@+id/st_center"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:text="@string/CENTER"
+    />
+
+  </LinearLayout -->
+
+    <Button android:id="@+id/btn_close"
+        style="@style/button_default"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content" 
+        android:layout_marginTop="25sp"
+        android:text="@string/cbtn_close"
+    />
+
+</LinearLayout>

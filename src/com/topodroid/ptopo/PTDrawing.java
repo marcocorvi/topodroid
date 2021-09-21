@@ -18,8 +18,6 @@ import java.util.ArrayList;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-import android.util.Log;
-
 public class PTDrawing
 {
     private PTMapping _mapping;
@@ -79,7 +77,7 @@ public class PTDrawing
     void write( OutputStream fs )
     {
       _mapping.write( fs );
-      // Log.v( "DistoX", "PT drawing write elements " + _elements.size() );
+      // TDLog.v( "PT drawing write elements " + _elements.size() );
       for ( PTElement e : _elements ) e.write( fs );
       byte id = PTElement.ID_NO_ELEMENT;
       PTFile.writeByte( fs, id );
@@ -87,7 +85,7 @@ public class PTDrawing
 
     // void print()
     // {
-    //   // Log.v( TopoDroidApp.TAG,  "drawing: size " + _elements.size() );
+    //   // TDLog.v( "PT drawing: size " + _elements.size() );
     //   _mapping.print();
     //   for ( PTElement el : _elements ) el.print();
     // }

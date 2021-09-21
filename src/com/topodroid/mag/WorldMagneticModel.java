@@ -28,8 +28,6 @@ import java.io.IOException;
 
 import android.content.Context;
 
-import android.util.Log;
-
 public class WorldMagneticModel
 {
   // private int nMax;
@@ -43,7 +41,7 @@ public class WorldMagneticModel
 
   public WorldMagneticModel( Context context )
   {
-    // Log.v("DistoX", "WMM cstr" );
+    // TDLog.v( "WMM cstr" );
     int n_max = 12;
     int n_terms = MagUtil.CALCULATE_NUMTERMS( n_max );
     loadWMM( context, n_terms );
@@ -60,14 +58,14 @@ public class WorldMagneticModel
 
   public MagElement computeMagElement( double latitude, double longitude, double height, int year, int month, int day )
   {
-    // Log.v("DistoX", "Mag date " + year + " " + month + " " + day );
+    // TDLog.v( "Mag date " + year + " " + month + " " + day );
     MagDate date = new MagDate( year, month, day );
     return doComputeMagElement( latitude, longitude, height, date );
   }
 
   public MagElement computeMagElement( double latitude, double longitude, double height, double dec_year )
   {
-    Log.v("DistoX", "Mag date " + dec_year );
+    TDLog.v( "Mag date " + dec_year );
     MagDate date = new MagDate( dec_year );
     return doComputeMagElement( latitude, longitude, height, date );
   }
@@ -81,7 +79,7 @@ public class WorldMagneticModel
     geodetic.HeightAboveGeoid = height / 1000; // KM
     geodetic.HeightAboveEllipsoid = -9999;
     mGeoid.convertGeoidToEllipsoidHeight( geodetic );
-    // Log.v("DistoX", "Geoid To Ellipsoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
+    // TDLog.v( "Geoid To Ellipsoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
     return geodetic.HeightAboveEllipsoid * 1000; // M
   }
 
@@ -94,7 +92,7 @@ public class WorldMagneticModel
     geodetic.HeightAboveGeoid = -9999;
     geodetic.HeightAboveEllipsoid = height / 1000; // KM
     mGeoid.convertEllipsoidToGeoidHeight( geodetic ); 
-    // Log.v("DistoX", "Ellipsoid to Geoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
+    // TDLog.v( "Ellipsoid to Geoid G " + geodetic.HeightAboveGeoid + " E " + geodetic.HeightAboveEllipsoid );
     return geodetic.HeightAboveGeoid * 1000; // M
   }
 
@@ -200,7 +198,7 @@ public class WorldMagneticModel
 
   static public void loadEGM9615( Context context )
   {
-    // Log.v("DistoX", "load EGM9615");
+    // TDLog.v( "load EGM9615");
     {
       if ( mGeoidHeightBuffer != null ) return;
       mGeoidHeightBuffer = new float[ N ];
@@ -270,12 +268,12 @@ public class WorldMagneticModel
       }
       // System.out.println("loaded EGM9615");
     }
-    // Log.v("DistoX", "load EGM9615 done");
+    // TDLog.v( "load EGM9615 done");
   }
 
   static private void loadWMM( Context context, int num_terms )
   {
-    // Log.v("DistoX", "WMM load WMM coeff " + num_terms );
+    // TDLog.v( "WMM load WMM coeff " + num_terms );
     {
       if ( mWmmCoeff != null ) return;
       mWmmCoeff = new WMMcoeff[ num_terms ];
@@ -307,7 +305,7 @@ public class WorldMagneticModel
           double v3 = Double.parseDouble( vals[j] );
           int index = WMMcoeff.index( n, m );
           mWmmCoeff[index] = new WMMcoeff( n, m, v0, v1, v2, v3 );
-          // Log.v("DistoX", "WMM N,M " + n + " " + m + " " + v0 + " " + v1 + " " + v2 + " " + v3 );
+          // TDLog.v( "WMM N,M " + n + " " + m + " " + v0 + " " + v1 + " " + v2 + " " + v3 );
         }
         fr.close();
       } catch( IOException e ) {

@@ -28,16 +28,16 @@ import com.topodroid.ptopo.PTMapping;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.PointScale;
-import com.topodroid.DistoX.DrawingIO;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.BrushManager;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.PtCmapActivity;
+import com.topodroid.Cave3X.DrawingIO;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.PtCmapActivity;
 
 import java.io.File;
 // import java.io.FileWriter;
@@ -58,8 +58,6 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 import android.graphics.RectF;
-
-import android.util.Log;
 
 class ParserPocketTopo extends ImportParser
 {
@@ -86,7 +84,7 @@ class ParserPocketTopo extends ImportParser
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
     TDLog.Log( TDLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
-    // Log.v( "PTDistoX", "PT survey " + mName + " read file " + filename );
+    // TDLog.v( "Parser PT survey " + mName + " read file " + filename );
     try {
       if ( fis == null ) fis = new FileInputStream( filename );
       ptfile.read( fis );
@@ -133,7 +131,7 @@ class ParserPocketTopo extends ImportParser
       float ba = TDMath.in360( shot.azimuth() );
       float ca = shot.inclination();
       float ra = shot.roll();
-      // Log.v("PTDistoX", "shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
+      // TDLog.v("Parser PT shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
       from = from.replaceAll( "^0+", "" );
       to   = to.replaceAll( "^0+", "" );
       if ( from.equals("-") ) from = "";
@@ -174,10 +172,10 @@ class ParserPocketTopo extends ImportParser
     }
     TDLog.Log( TDLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
 
-    // Log.v("PTDistoX", "start from " + mStartFrom );
+    // TDLog.v("Parser PT start from " + mStartFrom );
     // float declination = mData.getSurveyDeclination( mSid );
     // TDNum num = new TDNum( data, mStartFrom, null, null, declination, null ); // null formatClosure
-    // Log.v("DistoX", "Num E " + (20*num.surveyEmin()) + " " + (20*num.surveyEmax()) +
+    // TDLog.v( "Num E " + (20*num.surveyEmin()) + " " + (20*num.surveyEmax()) +
     //                 " S " + (20*num.surveySmin()) + " " + (20*num.surveySmax()) +
     //                 " H " + (20*num.surveyHmin()) + " " + (20*num.surveyHmax()) +
     //                 " V " + (20*num.surveyVmin()) + " " + (20*num.surveyVmax()) );
@@ -186,7 +184,7 @@ class ParserPocketTopo extends ImportParser
     // FIXME PT parser uses therion scrap syntax
     if ( mStartFrom != null ) {
       // NumStation st = num.getStation( mStartFrom );
-      // Log.v("PTDistoX", " start " + st.e + " " + st.s );
+      // TDLog.v("Parser PT start " + st.e + " " + st.s );
 
       int over_scale = ptfile.getOverview().scale();
 
@@ -203,7 +201,7 @@ class ParserPocketTopo extends ImportParser
       String filename2 = TDPath.getTdrFileWithExt( scrap_name2 );
       TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap s: " + filename2 );
       writeDrawing( filename2, scrap_name2, sideview, PlotType.PLOT_EXTENDED, over_scale );
-      // Log.v("DistoX", "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
+      // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
 
     } else {
       TDLog.Error( "PT null StartFrom");
@@ -244,11 +242,11 @@ class ParserPocketTopo extends ImportParser
         float map_scale = drawing.mapping().scale();
         float scale = 0.02f;
         // float scale = 2.0f / map_scale;
-	// Log.v("PTDistoXX", "map scale " + scale + " outline_scale " + map_scale );
+	// TDLog.v("Parser PT map scale " + scale + " outline_scale " + map_scale );
 
         float x0 = 0; // (mapping.origin().x());
         float y0 = 0; // (mapping.origin().y());
-        // Log.v("PTDistoX", "map origin " + x0 + " " + y0 + " elements " + elem_count );
+        // TDLog.v("Parser PT map origin " + x0 + " " + y0 + " elements " + elem_count );
 
         float xmin=1000000f, xmax=-1000000f, 
               ymin=1000000f, ymax=-1000000f;
@@ -278,7 +276,7 @@ class ParserPocketTopo extends ImportParser
                 // FIXME drawer->insertLinePoint( x1, y1, type, canvas );
                 // pw.format("  %d %d \n", x1, -y1 ); FIXME_TH2
 		line.addStartPoint( x1, y1 );
-                // Log.v("PTDistoX", "elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+                // TDLog.v("Parser PT elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
 
                 for (++k; k<point_count; ++k ) {
                   point = elem.point(k);
@@ -291,7 +289,7 @@ class ParserPocketTopo extends ImportParser
                   //   y1 = y;
                   //   // FIXME drawer->insertLinePoint( x, y, type, canvas );
                   //   pw.format("  %d %d \n", x1, -y1 );
-                  //   // Log.v("PTDistoX", "elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+                  //   // TDLog.v("Parser PT elem " + h + ":" + k + " " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
                   // } 
 		  line.addPoint( x, y );
                 }
@@ -311,7 +309,7 @@ class ParserPocketTopo extends ImportParser
 		if ( y < ymin ) { ymin = y; } if ( y > ymax ) { ymax = y; }
                 // FIXME drawer->insertPoint(x, y, type, canvas );
                 // pw.format("point %d %d %s \n", x, -y, th_name ); // FIXME_TH2
-                // Log.v("PTDistoX", "elem " + h + " single " + x + " " + y );
+                // TDLog.v("Parser PT elem " + h + " single " + x + " " + y );
 		paths.add( new DrawingPointPath( point_type, x, y, PointScale.SCALE_M, "", "", 0 ) ); // no text, no options
               }
             }

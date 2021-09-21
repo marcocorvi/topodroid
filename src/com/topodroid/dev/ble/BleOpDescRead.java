@@ -15,8 +15,6 @@ import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
-import android.util.Log;
-
 public class BleOpDescRead extends BleOperation 
 {
   public BleOpDescRead( Context ctx, BleComm pipe )

@@ -14,8 +14,6 @@ package com.topodroid.ui;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-import android.util.Log;
-
 import java.io.IOException;
 
 import android.widget.ImageView;
@@ -43,7 +41,7 @@ public class TDImage
     mFilename = filename;
     readExif();
     decodeImage();
-    // Log.v("DistoX", "TD image " + filename );
+    // TDLog.v( "TD image " + filename );
   }
 
   public float azimuth() { return mAzimuth; }
@@ -58,7 +56,7 @@ public class TDImage
     bfo.inJustDecodeBounds = true;
     BitmapFactory.decodeFile( mFilename, bfo );
     int required_size = TDSetting.mThumbSize;
-    // Log.v("DistoX", "photo: file " + mFilename + " " + bfo.outWidth + "x" + bfo.outHeight + " req. size " + required_size );
+    // TDLog.v( "photo: file " + mFilename + " " + bfo.outWidth + "x" + bfo.outHeight + " req. size " + required_size );
     int scale = 1;
     while ( bfo.outWidth/scale > required_size || bfo.outHeight/scale > required_size ) {
       scale *= 2;
@@ -70,7 +68,7 @@ public class TDImage
       mImageWidth   = mImage.getWidth();
       mImageHeight  = mImage.getHeight();
     }  
-    // Log.v("DistoX", "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
+    // TDLog.v( "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
   }
 
   private void readExif()
@@ -79,15 +77,15 @@ public class TDImage
       ExifInterface exif = new ExifInterface( mFilename );
       // mAzimuth = exif.getAttribute( "GPSImgDirection" );
       mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
-      // Log.v("DistoX", "Photo edit orientation " + mOrientation );
+      // TDLog.v( "Photo edit orientation " + mOrientation );
       String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
       String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
       mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
-      // Log.v("DistoX", "TD image bearing " + b + " clino " + c + " date " + mDate );
+      // TDLog.v( "TD image bearing " + b + " clino " + c + " date " + mDate );
       if ( mDate == null ) mDate = "";
       if ( b == null || c == null ) { // FIXME-GPS_LATITUDE work-around for tag GPSLatitude not working
         String u = exif.getAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION );
-        // Log.v("DistoXPHOTO", "u " + u );
+        // TDLog.v( "Photo desc " + u );
         if ( u != null ) {
           String[] vals = u.split(" ");
           if ( vals.length > 1 ) {
@@ -97,7 +95,7 @@ public class TDImage
         }
       }
       if ( b != null && c != null ) {
-        // Log.v("DistoX", "b " + b + " c " + c );
+        // TDLog.v( "b " + b + " c " + c );
         int k = b.indexOf('/');
 	if ( k >= 0 ) {
           try { mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
@@ -106,7 +104,7 @@ public class TDImage
 	if ( k >= 0 ) {
           try { mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
 	}
-        // Log.v("DistoX", "Long <" + mAzimuth + "> Lat <" + mClino + ">" );
+        // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + ">" );
       }
     } catch ( IOException e ) {
       TDLog.Error("failed exif interface " + mFilename );
@@ -140,7 +138,7 @@ public class TDImage
     //   ww = (int)( mImageWidth * hh / mImageHeight );
     // }
       
-    // Log.v("DistoX", "fill image view w " + ww + " h " + hh + " orientation " + mOrientation );
+    // TDLog.v( "fill image view w " + ww + " h " + hh + " orientation " + mOrientation );
     if ( ww <= 0 || hh <= 0 ) return false;
     if ( mImage2 != null ) mImage2.recycle();
     mImage2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );

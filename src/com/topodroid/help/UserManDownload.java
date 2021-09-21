@@ -13,10 +13,10 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -33,8 +33,6 @@ import java.util.zip.ZipEntry;
 
 import android.os.AsyncTask;
 import android.content.Context;
-
-import android.util.Log;
 
 public class UserManDownload extends AsyncTask< String, Integer, Integer >
 {
@@ -85,7 +83,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
                   // size += c;
                 }
                 fos.close();
-                // if ( file.getPath().endsWith("png") ) Log.v("DistoX", "File " + file.getPath() + " " + size );
+                // if ( file.getPath().endsWith("png") ) TDLog.v( "File " + file.getPath() + " " + size );
 	      }
             } else { // ze directory: not really an error
               TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );

@@ -21,35 +21,33 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.ICanvasCommand;
-import com.topodroid.DistoX.BrushManager;
-import com.topodroid.DistoX.LinePoint;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DrawingIO;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingAreaPath;
-import com.topodroid.DistoX.DrawingPointLinePath;
-import com.topodroid.DistoX.DrawingSpecialPath;
-import com.topodroid.DistoX.DrawingAudioPath;
-import com.topodroid.DistoX.DrawingPhotoPath;
-import com.topodroid.DistoX.DrawingStationPath;
-import com.topodroid.DistoX.DrawingStationName;
-import com.topodroid.DistoX.DrawingLabelPath;
-import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.Symbol;
-import com.topodroid.DistoX.SymbolPoint;
-import com.topodroid.DistoX.SymbolPointLibrary;
-import com.topodroid.DistoX.SymbolLineLibrary;
-import com.topodroid.DistoX.SymbolAreaLibrary;
-// import com.topodroid.DistoX.DrawingPath;
-
-import android.util.Log;
+import com.topodroid.Cave3X.DBlock;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.ICanvasCommand;
+import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.Cave3X.LinePoint;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.DrawingIO;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingPointPath;
+import com.topodroid.Cave3X.DrawingLinePath;
+import com.topodroid.Cave3X.DrawingAreaPath;
+import com.topodroid.Cave3X.DrawingPointLinePath;
+import com.topodroid.Cave3X.DrawingSpecialPath;
+import com.topodroid.Cave3X.DrawingAudioPath;
+import com.topodroid.Cave3X.DrawingPhotoPath;
+import com.topodroid.Cave3X.DrawingStationPath;
+import com.topodroid.Cave3X.DrawingStationName;
+import com.topodroid.Cave3X.DrawingLabelPath;
+import com.topodroid.Cave3X.DrawingCommandManager;
+import com.topodroid.Cave3X.Symbol;
+import com.topodroid.Cave3X.SymbolPoint;
+import com.topodroid.Cave3X.SymbolPointLibrary;
+import com.topodroid.Cave3X.SymbolLineLibrary;
+import com.topodroid.Cave3X.SymbolAreaLibrary;
+// import com.topodroid.Cave3X.DrawingPath;
 
 import java.util.Locale;
 
@@ -213,7 +211,7 @@ public class DrawingDxf
   static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                           float xoff, float yoff, float z )
   {
-    // Log.v("DistoXdxf", "print spline");
+    // TDLog.v( "print spline");
     DXF.printString( pw, 0, "SPLINE" );
     handle = DXF.printAcDb( pw, handle, DXF.AcDbEntity, "AcDbSpline" );
     DXF.printString( pw, 8, layer );
@@ -266,7 +264,7 @@ public class DrawingDxf
     }
 */
       
-    // Log.v("DistoX", "Spline P " + np + " Cp " + ncp + " K " + nk );
+    // TDLog.v( "Spline P " + np + " Cp " + ncp + " K " + nk );
     DXF.printInt( pw, 70, 8+(closed?1:0) ); // flags  1: closed, 2: periodic, 4: rational, 8: planar, 16 linear
     DXF.printInt( pw, 71, 3 );    // degree of the spline
     DXF.printInt( pw, 72, nk );   // nr. of knots
@@ -346,7 +344,7 @@ public class DrawingDxf
 
     int[] point_record_handle = new int[ BrushManager.getPointLibSize() ];
 
-    // Log.v("DistoX", "DXF X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
+    // TDLog.v( "DXF X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
 
     try {
       // header
@@ -457,7 +455,7 @@ public class DrawingDxf
           handle = DXF.writeSpaceBlock( out, "*Model_Space", handle );
           model_block_handle = handle - 1; // spaceblock increase handle by 2
           handle = DXF.writeSpaceBlock( out, "*Paper_Space", handle );
-          // Log.v("DistoX", "model handle " + String.format("%X", model_block_handle ) );
+          // TDLog.v( "model handle " + String.format("%X", model_block_handle ) );
         }
 
         // // 8 layer (0), 2 block name,
@@ -540,7 +538,8 @@ public class DrawingDxf
         }
 
         // centerline data
-        if ( PlotType.isSketch2D( type ) ) {
+        // if ( PlotType.isSketch2D( type ) )
+        {
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -676,9 +675,9 @@ public class DrawingDxf
             } else {
               boolean done_point = false;
               if ( BrushManager.isPointSection( point.mPointType ) && TDSetting.mAutoXSections ) {
-                // Log.v("DistoX", "Point is section : " + TDSetting.mAutoXSections );
+                // TDLog.v( "Point is section : " + TDSetting.mAutoXSections );
                 String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
-                // Log.v("DistoX", "Point is section : scrapname " + scrapname );
+                // TDLog.v( "Point is section : scrapname " + scrapname );
                 if ( scrapname != null ) {
                   String scrapfile = scrapname + ".tdr";
                   if ( DXF.mVersion13_14 ) {
@@ -762,14 +761,14 @@ public class DrawingDxf
     if ( point == null ) return handle;
     if ( BrushManager.isPointLabel( point.mPointType ) ) {
       DrawingLabelPath label = (DrawingLabelPath)point;
-      // Log.v("DistoX", "LABEL PATH label <" + label.mPointText + ">" );
+      // TDLog.v( "LABEL PATH label <" + label.mPointText + ">" );
       return DXF.printText( pw, handle, ref_handle, label.mPointText,
          (point.cx+xoff)*scale, -(point.cy+yoff)*scale, 360.0f-(float)label.mOrientation,
          LABEL_SCALE, "POINT", DXF.style_dejavu, xoff, yoff, z );
     }
 
     String th_name = point.getThName().replace(':','-');
-    // Log.v("DistoX", "POINT PATH <" + th_name + "> " + String.format("%X %X", ref_handle, model_record_handle) );
+    // TDLog.v( "POINT PATH <" + th_name + "> " + String.format("%X %X", ref_handle, model_record_handle) );
     // int idx = 1 + point.mPointType;
     DXF.printString( pw, 0, "INSERT" );
     handle = DXF.printAcDbModelSpace( pw, handle, model_record_handle, ("P_"+th_name), "AcDbBlockReference" );
@@ -807,7 +806,7 @@ public class DrawingDxf
   {
     if ( area == null ) return handle;
     float bezier_step = TDSetting.getBezierStep();
-    // Log.v("DistoX", "area size " + area.size() );
+    // TDLog.v( "area size " + area.size() );
     String layer = "A_" + area.getThName( ).replace(':','-');
     if ( DXF.mVersion13_14 && checkSpline( area ) ) {
       if ( TDSetting.mAcadSpline ) {
@@ -838,12 +837,12 @@ public class DrawingDxf
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "tdr to dxf. scrapfile " + scrapfile );
-      // Log.v( "DistoX", "tdr to dxf. scrapfile " + scrapfile );
+      // TDLog.v( "tdr to dxf. scrapfile " + scrapfile );
       FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
       BufferedInputStream bfis = new BufferedInputStream( fis );
       DataInputStream dis = new DataInputStream( bfis );
       int version = DrawingIO.skipTdrHeader( dis );
-      // Log.v("DistoX", "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
+      // TDLog.v( "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
       DrawingPath path; // = null;
       boolean done = false;
@@ -883,7 +882,7 @@ public class DrawingDxf
             break;
           case 'N': // scrap index
             int scrap_index = dis.readInt();
-            // Log.v("DistoX", "scrap index " + scrap_index );
+            // TDLog.v( "scrap index " + scrap_index );
             break;
           // case 'G':
           //   path = DrawingFixedName.loadDataStream( version, dis ); // consume DrawingFixedName data

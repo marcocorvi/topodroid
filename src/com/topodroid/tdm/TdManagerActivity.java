@@ -22,13 +22,11 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.io.File;
 import java.io.IOException;
@@ -161,7 +159,7 @@ public class TdManagerActivity extends Activity
       for (int k=0; k<mNrButton1; ++k ) {
         mButton1[k] = MyButton.getButton( this, this, izons[k] );
         // layout.addView( mButton1[k], lp );
-	// Log.v("DistoX-TdManager", "button size " + mButton1[k].getWidth() + "x" + mButton1[k].getHeight() );
+	// TDLog.v( "button size " + mButton1[k].getWidth() + "x" + mButton1[k].getHeight() );
       }
 
       mButtonView1 = new MyHorizontalButtonView( mButton1 );
@@ -209,7 +207,7 @@ public class TdManagerActivity extends Activity
   public void onStart()
   {
     super.onStart();
-    // Log.v("DistoX-TdManager", "TdManager on resume");
+    // TDLog.v( "TdManager on resume");
     updateTdmConfigList();
   }
 
@@ -226,7 +224,7 @@ public class TdManagerActivity extends Activity
         @Override
         public void onClick( View v ) {
           String survey = ((TextView)v).getText().toString();
-	  // Log.v("DistoX-TdManager", "on click " + survey );
+	  // TDLog.v( "on click " + survey );
           TdmConfig tdconfig = mTdmConfigAdapter.get( survey );
 	  if ( tdconfig != null ) startTdmConfigActivity( tdconfig );
 	}
@@ -235,14 +233,14 @@ public class TdManagerActivity extends Activity
     File[] tdconfigs = TDPath.scanTdconfigDir();
     if ( tdconfigs != null && tdconfigs.length > 0 ) {
       for ( File file : tdconfigs ) {
-        Log.v("DistoX-TdManager", "activity update: path <" + file.getAbsolutePath() + "> name <" + file.getName() + ">" );
+        TDLog.v( "activity update: path <" + file.getAbsolutePath() + "> name <" + file.getName() + ">" );
         mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath(), false ) ); // false: no save
       }
     } else {
       mTdmConfigAdapter.add( new TdmConfig( TDPath.getTdconfigFile( "test.tdconfig" ), false ) ); // false: no save
     }
     mList.setAdapter( mTdmConfigAdapter );
-    // Log.v("DistoX-TdManager", "set adapter: size " + mTdmConfigAdapter.size() );
+    // TDLog.v( "set adapter: size " + mTdmConfigAdapter.size() );
   }
 
   // @Override
@@ -266,7 +264,7 @@ public class TdManagerActivity extends Activity
     }
 
     TdmConfig tdconfig = mTdmConfigAdapter.getItem( pos );
-    // Log.v("DistoX-TdManager", "On Item Click: pos " + pos + " TdmConfig " + tdconfig.mFilepath );
+    // TDLog.v( "On Item Click: pos " + pos + " TdmConfig " + tdconfig.mFilepath );
     // TODO start TdmConfigActivity or Dialog
     startTdmConfigActivity( tdconfig );
   }
@@ -302,7 +300,7 @@ public class TdManagerActivity extends Activity
     TdmConfig tdconfig = new TdmConfig( path, true ); // true: save
     // updateTdmConfigList();
     mTdmConfigAdapter.add( tdconfig );
-    // Log.v("DistoX-TdManager", "path >" + path + "< size " + mTdmConfigAdapter.size() );
+    // TDLog.v( "path >" + path + "< size " + mTdmConfigAdapter.size() );
     // mList.setAdapter( mTdmConfigAdapter );
     mList.invalidate();
   }
@@ -323,7 +321,7 @@ public class TdManagerActivity extends Activity
     switch ( request ) {
       case TDRequest.REQUEST_TDCONFIG:
         if ( result == TDRequest.RESULT_TDCONFIG_OK ) {
-          // Log.v("DistoX-TdManager", "TdmConfig OK" );
+          // TDLog.v( "TdmConfig OK" );
           // nothing 
         } else if ( result == TDRequest.RESULT_TDCONFIG_DELETE ) {
           // get TdmConfig name and delete it
@@ -332,7 +330,7 @@ public class TdManagerActivity extends Activity
           mList.invalidate();
           // updateTdmConfigList();
         } else if ( result == TDRequest.RESULT_TDCONFIG_NONE ) {
-          Log.e("DistoX-TdManager", "TdmConfig NONE" );
+          TDLog.Error( "TdmConfig NONE" );
           // nothing
         }
     }

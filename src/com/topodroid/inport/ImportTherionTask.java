@@ -11,10 +11,12 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.MainWindow;
+import com.topodroid.utils.TDLog;
+
+import com.topodroid.Cave3X.DataHelper;
+import com.topodroid.Cave3X.SurveyInfo;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.MainWindow;
 
 import java.io.InputStreamReader;
 
@@ -22,8 +24,6 @@ import java.io.InputStreamReader;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
-
-import android.util.Log;
 
   
 // NOTE survey name must be guaranteed not be in the db
@@ -36,7 +36,7 @@ public class ImportTherionTask extends ImportTask
   @Override
   protected Long doInBackground( String... str )
   {
-    Log.v("DistoX", "import Therion task: " + str[0] + " survey " + str[1] );
+    TDLog.v( "import Therion task: " + str[0] + " survey " + str[1] );
     long sid = 0;
     try {
       // if fr == null, str[0] is the filename, otherwoise it is the survey name

@@ -18,9 +18,7 @@ package com.topodroid.packetX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
-import com.topodroid.DistoX.TDPath;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDPath;
 
 // import java.io.File;
 // import java.io.FileNotFoundException;
@@ -187,7 +185,7 @@ public class PacketLogger extends DataSetObservable
   public long insertPacket( long millis, long dir, String addr, int type, String data )
   {
     // TDLog.Log( TDLog.LOG_DB, "...) );
-    // Log.v("DistoXX", "...");
+    // TDLog.v( "...");
     if ( myDB == null ) return -1L;
     if ( data == null ) return -2L;
     if (addr == null) addr = "";
@@ -270,7 +268,7 @@ public class PacketLogger extends DataSetObservable
       DistoXOpenHelper(Context context, String database_name ) 
       {
          super(context, database_name, null, TDVersion.PACKET_DATABASE_VERSION);
-         // Log.v("DistoX", "PACKET DB NAME " + database_name );
+         // TDLog.v( "PACKET DB NAME " + database_name );
          // TDLog.Log( TDLog.LOG_DB, "createTables ... " + database_name + " version " + TDVersion.PACKET_DATABASE_VERSION );
       }
 

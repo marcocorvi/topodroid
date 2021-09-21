@@ -18,9 +18,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDPath;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDPath;
 
 // import java.lang.ref.WeakReference;
 
@@ -127,7 +125,7 @@ public class DistoX310Protocol extends DistoXProtocol
   // @Override
   public int readX310Memory( int start, int end, List< MemoryOctet > data )
   {
-    // Log.v( "DistoX-PROTO", "memory start " + start + " end " + end );
+    // TDLog.v( "X310 memory start " + start + " end " + end );
     int cnt = 0;
     while ( start < end ) {
       MemoryOctet result = new MemoryOctet( start );
@@ -136,7 +134,7 @@ public class DistoX310Protocol extends DistoXProtocol
       int k = 0;
       int addr = index2addrX310( start );
       int endaddr = addr + BYTE_PER_DATA;
-      // Log.v( "DistoX", start + " addr " + addr + " end " + endaddr );
+      // TDLog.v( start + " addr " + addr + " end " + endaddr );
       for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
@@ -147,7 +145,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -175,7 +173,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -206,7 +204,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
           TDLog.Error( "readmemory() IO failed" );
           break;
@@ -216,7 +214,7 @@ public class DistoX310Protocol extends DistoXProtocol
         data.add( result );
         // if ( mBuffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
         // data.add( result2 );
-        // Log.v( "DistoX-PROTO", "memory " + result.toString() + " " + mBuffer[3] );
+        // TDLog.v( "X310 memory " + result.toString() + " " + mBuffer[3] );
         ++ cnt;
       } else {
         break;
@@ -291,7 +289,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int uploadFirmwareDryRun( File fp )
   {
     int len = (int)( fp.length() );
-    Log.v("DistoX-FW", "Protocol Firmware upload: file " + fp.getPath() + " dry run - length " + len );
+    TDLog.v( "Protocol Firmware upload: file " + fp.getPath() + " dry run - length " + len );
     return len;
   }
 
@@ -300,7 +298,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int uploadFirmware( File fp )
   {
     // TDLog.LogFile( "Firmware upload: protocol starts. file " + fp.getPath() );
-    Log.v("DistoX-FW", "Firmware upload: protocol starts. file " + fp.getPath() );
+    TDLog.v( "Firmware upload: protocol starts. file " + fp.getPath() );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
     buf[1] = (byte)0;
@@ -334,7 +332,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
             mIn.readFully( mBuffer, 0, 8 );
             // if ( TDSetting.mPacketLog ) logPacket( 0L );
-            // Log.v( "DistoX-DATA_TYPE", "upload firmware: " + String.format(" %02x", mBuffer[0] ) );
+            // TDLog.v( "X310 upload firmware: " + String.format(" %02x", mBuffer[0] ) );
 
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
@@ -368,7 +366,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public int dumpFirmware( File fp )
   {
     // TDLog.LogFile( "Proto Firmware dump: output filepath " + fp.getPath() );
-    Log.v("DistoX-FW", "Proto Firmware dump: output filepath " + fp.getPath() );
+    TDLog.v( "Proto Firmware dump: output filepath " + fp.getPath() );
     byte[] buf = new byte[256];
 
     boolean ok = true;
@@ -389,7 +387,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( mBuffer, 0, 8 );
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
-          // Log.v( "DistoX-DATA_TYPE", "dump firmware: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
@@ -402,7 +400,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
           mIn.readFully( buf, 0, 256 );
           // if ( TDSetting.mPacketLog ) logPacket8( 0L, buf );
-          // Log.v( "DistoX-DATA_TYPE", "dump firmware[2]: " + String.format(" %02x", mBuffer[0] ) );
+          // TDLog.v( "X310 dump firmware[2]: " + String.format(" %02x", mBuffer[0] ) );
 
           // boolean last = true;
           // for ( int k=0; last && k<256; ++k ) {
@@ -428,7 +426,7 @@ public class DistoX310Protocol extends DistoXProtocol
       return 0;
     }
     // TDLog.LogFile( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
-    Log.v("DistoX-FW", "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    TDLog.v( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 
@@ -449,7 +447,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
       mIn.readFully( mBuffer, 0, 8 );
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
-      // Log.v( "DistoX-DATA_TYPE", "dump firmware: " + String.format(" %02x", mBuffer[0] ) );
+      // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
       if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {

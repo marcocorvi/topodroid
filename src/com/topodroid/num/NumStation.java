@@ -16,8 +16,6 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.common.ExtendType;
 
 
-import android.util.Log;
-
 import java.util.ArrayList;
 
 public class NumStation extends NumSurveyPoint
@@ -97,14 +95,14 @@ public class NumStation extends NumSurveyPoint
     mBarrierAndHidden = false;
     mParent  = from;
     mLegs = new ArrayList<>();
-    // Log.v( "DistoX-EXTEND", "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
+    // TDLog.v( "NumStation cstr " + id + " from " + from.name + " has coords " + mHasExtend + " " + from.mHasExtend );
   }
 
   // azimuth [degrees]
   // extend  [-1,0,+1]
   void addAzimuth( float azimuth, float extend ) 
   {
-    // Log.v("DistoX-SPLAY", "Station " + name + " add azimuth " + azimuth + " extend " + extend );
+    // TDLog.v( "Station " + name + " add azimuth " + azimuth + " extend " + extend );
     if ( extend > 1 ) return;
     NumAzimuth leg = new NumAzimuth( azimuth, extend );
     for ( int k=0; k<mLegs.size(); ++k ) {
@@ -176,7 +174,7 @@ public class NumStation extends NumSurveyPoint
     }
     mLegs = temp;
     // for ( NumAzimuth a : mLegs ) {
-    //   Log.v("DistoX-NUM", "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
+    //   TDLog.v( "Station " + name + " Azimuth " + a.mAzimuth + " extend " + a.mExtend );
     // }
   }
 
@@ -201,7 +199,7 @@ public class NumStation extends NumSurveyPoint
     // if ( mLegs.size() == 1 ) {
     //   if ( ! Float.isNaN( a1.mExtend ) ) {
     //     float ret = TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
-    //     Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
+    //     TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
     //     return ret;
     //   } 
     //   return e;
@@ -211,11 +209,11 @@ public class NumStation extends NumSurveyPoint
       if ( b >= a1.mAzimuth && b < a2.mAzimuth ) {
         if ( ! Float.isNaN( a2.mExtend ) ) {
           return TDMath.cosd( a2.mAzimuth - b ) * a2.mExtend;
-          // Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a2.mAzimuth + " ext " + a2.mExtend + " = " + ret );
+          // TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a2.mAzimuth + " ext " + a2.mExtend + " = " + ret );
           // return ret;
         } else if ( ! Float.isNaN( a1.mExtend ) ) {
           return TDMath.cosd( b - a1.mAzimuth ) * a1.mExtend;
-          // Log.v("DistoX-SPLAY", name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
+          // TDLog.v( name + " compute cosine: legs " + mLegs.size() + " " + b + " " + a1.mAzimuth + " ext " + a1.mExtend + " = " + ret );
           // return ret;
         } else {
           break;

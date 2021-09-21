@@ -11,8 +11,9 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDPath;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
@@ -61,8 +62,6 @@ import java.io.IOException;
 
 import java.nio.charset.Charset;
 
-import android.util.Log;
-
 public class TDFile
 {
   // public static final String HOME_DIR = TDPath.getPathBase(); // "Documents/TopoDroid/"
@@ -88,7 +87,7 @@ public class TDFile
 
 
   // INTERNAL FILES --------------------------------------------------------------
-  // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
+  // context.getFilesDir --> /data/user/0/com.topodroid.Cave3X/files
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
   private static File getCBD( String type, boolean create )
@@ -103,7 +102,7 @@ public class TDFile
       ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX/" + type );
     } 
     if ( create && ret != null && ! ret.exists() ) {
-      Log.v("DistoX", "mkdirs " + ret.getPath() );
+      TDLog.v( "mkdirs " + ret.getPath() );
       ret.mkdirs();
     }
     return ret;
@@ -297,7 +296,7 @@ public class TDFile
   public static boolean renameTempFile( File temp, File file )
   {
     boolean ret = false;
-    // Log.v("DistoX", "rename " + temp.getPath() + " to " + file.getPath() );
+    // TDLog.v( "rename " + temp.getPath() + " to " + file.getPath() );
     synchronized( mFilesLock ) {
       if ( file.exists() ) file.delete();
       ret = temp.renameTo( file );

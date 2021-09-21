@@ -12,9 +12,9 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TopoDroidAlertDialog;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -34,8 +34,6 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
-
-import android.util.Log;
 
 class TdmEquatesDialog extends MyDialog
                       implements OnItemClickListener
@@ -59,7 +57,7 @@ class TdmEquatesDialog extends MyDialog
     } else {
       mEquates = new ArrayList< TdmEquate >();
     }
-    // Log.v("TdManager", "TdmEquatesDialog equates " + mEquates.size() );
+    // TDLog.v("Equates Dialog size " + mEquates.size() );
   }
 
   @Override

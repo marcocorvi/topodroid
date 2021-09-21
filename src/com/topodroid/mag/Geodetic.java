@@ -13,8 +13,6 @@
  */
 package com.topodroid.mag;
 
-// import android.util.Log;
-
 public class Geodetic
 {
   static public  final double EARTH_A  = 6378137.0;          // a - semimajor axis [meter]

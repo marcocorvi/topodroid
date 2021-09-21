@@ -12,7 +12,7 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -28,8 +28,6 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
-
-import android.util.Log;
 
 class TdmEquateAdapter extends ArrayAdapter< TdmEquate >
 {

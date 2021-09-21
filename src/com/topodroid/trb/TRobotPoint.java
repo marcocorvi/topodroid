@@ -11,9 +11,9 @@
  */
 package com.topodroid.trb;
 
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.Cave3X.DBlock;
 
-// import android.util.Log;
+// import com.topodroid.utils.TDLog;
 
 public class TRobotPoint
 {
@@ -36,6 +36,6 @@ public class TRobotPoint
 
   // void dump()
   // {
-    // Log.v("DistoX", "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
+    // TDLog.v( "P " + mSeries.mNumber + "." + mNumber + " <" + mName + ">" );
   // }
 }

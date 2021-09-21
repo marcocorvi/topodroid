@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+
+    <CheckBox android:id="@+id/surface"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/legs_surface"
+    />
+
+    <CheckBox android:id="@+id/duplicate"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/legs_duplicate"
+    />
+
+    <CheckBox android:id="@+id/commented"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_margin="10dp"
+      android:text="@string/legs_commented"
+    />
+
+    <LinearLayout
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="right"
+        android:layout_marginTop="20dp"
+        >
+        <Button android:id="@+id/button_ok"
+          style="@style/button_default"
+          android:layout_width="0dp" 
+          android:layout_height="wrap_content"
+          android:layout_weight="50"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:text="@string/cbtn_ok"
+        />
+        <Button android:id="@+id/button_cancel"
+          style="@style/button_default"
+          android:layout_width="0dp" 
+          android:layout_height="wrap_content"
+          android:layout_weight="50"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:text="@string/cbtn_cancel"
+        />
+      </LinearLayout>
+
+</LinearLayout>

@@ -13,8 +13,6 @@ package com.topodroid.tdm;
 
 import android.widget.TextView;
 
-import android.util.Log;
-
 class TdmEquateViewHolder
 { 
   TextView textView;

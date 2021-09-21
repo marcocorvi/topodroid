@@ -16,11 +16,11 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TopoDroidAlertDialog;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -61,8 +61,6 @@ import android.util.FloatMath;
 
 import java.util.List;
 import java.util.ArrayList;
-
-import android.util.Log;
 
 /**
  */
@@ -258,7 +256,7 @@ public class TdmViewActivity extends Activity
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
 
-      // Log.v( "DistoX-TdManager", "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
+      // TDLog.v( "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
       int[] color = new int[6];
       color[0] = 0xffffffff;
@@ -296,7 +294,7 @@ public class TdmViewActivity extends Activity
     //     if ( i+1 < ev.getPointerCount() ) sb.append( ":" );
     //   }
     //   sb.append( "]" );
-    //   Log.d("DistoX-TdManager", sb.toString() );
+    //   TDLog.v( "Tdm View " + sb.toString() );
     // }
     
 
@@ -375,10 +373,10 @@ public class TdmViewActivity extends Activity
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
       }
-      // Log.v("DistoX-TdManager", "touch canvas " + x_canvas + " " + y_canvas ); 
+      // TDLog.v( "touch canvas " + x_canvas + " " + y_canvas ); 
       // float x_scene = mDrawingSurface.canvasToSceneX( x_canvas );
       // float y_scene = mDrawingSurface.canvasToSceneY( y_canvas );
-      // Log.v("DistoX-TdManager", "touch scene " + x_scene + " " + y_scene );
+      // TDLog.v( "touch scene " + x_scene + " " + y_scene );
 
       int action = event.getAction() & MotionEvent.ACTION_MASK;
 
@@ -386,7 +384,7 @@ public class TdmViewActivity extends Activity
         mTouchMode = MODE_ZOOM;
         oldDist = spacing( event );
         saveEventPoint( event );
-        // Log.v("DistoX-TdManager", "POINTER DOWN old dist " + oldDist );
+        // TDLog.v( "POINTER DOWN old dist " + oldDist );
         doMove = false;
 
       } else if ( action == MotionEvent.ACTION_POINTER_UP) {
@@ -395,7 +393,7 @@ public class TdmViewActivity extends Activity
         doMove = false;
         mSaveX = x_canvas;
         mSaveY = y_canvas;
-        // Log.v("DistoX-TdManager", "POINTER UP " + mSaveX + " " + mSaveY );
+        // TDLog.v( "POINTER UP " + mSaveX + " " + mSaveY );
 
       // ---------------------------------------- DOWN
       } else if (action == MotionEvent.ACTION_DOWN) {
@@ -405,7 +403,7 @@ public class TdmViewActivity extends Activity
         doMove = true;
         if ( mWithStation == 0 ) {
           boolean ret = mDrawingSurface.getSurveyAt( mSaveX, mSaveY, null );
-          // Log.v("DistoX-TdManager", "DOWN at " + mSaveX + " " + mSaveY + " at " + ret );
+          // TDLog.v( "DOWN at " + mSaveX + " " + mSaveY + " at " + ret );
           if ( ret ) {
             mWithStation = 1;
             mSelectedCommand = mDrawingSurface.selectedCommand();
@@ -420,7 +418,7 @@ public class TdmViewActivity extends Activity
       // ---------------------------------------- MOVE
       } else if ( action == MotionEvent.ACTION_MOVE ) {
         if ( mTouchMode == MODE_MOVE) {
-          // Log.v("DistoX-TdManager", "MOVE (move) to " + x_canvas + " " + y_canvas );
+          // TDLog.v( "MOVE (move) to " + x_canvas + " " + y_canvas );
           float x_shift = x_canvas - mSaveX; // compute shift
           float y_shift = y_canvas - mSaveY;
           if ( doMove ) {
@@ -437,7 +435,7 @@ public class TdmViewActivity extends Activity
           doMove = true;
         } else { // mTouchMode == MODE_ZOOM
           float newDist = spacing( event );
-          // Log.v("DistoX-TdManager", "MOVE (zoom) dist " + newDist );
+          // TDLog.v( "MOVE (zoom) dist " + newDist );
           if ( newDist > 16.0f && oldDist > 16.0f ) {
             float factor = newDist/oldDist;
             if ( factor > 0.05f && factor < 4.0f ) {
@@ -450,7 +448,7 @@ public class TdmViewActivity extends Activity
 
       // ---------------------------------------- UP
       } else if (action == MotionEvent.ACTION_UP) {
-        // Log.v("DistoX-TdManager", "UP");
+        // TDLog.v( "UP");
         if ( mWithStation == 2 ) {
           mDrawingSurface.resetStation();
           mWithStation = 0;
@@ -563,7 +561,7 @@ public class TdmViewActivity extends Activity
       // TdmStation stn1 = vts1.mStation;
       float x = vst1.x + mSelectedCommand.mXoff;
       float y = vst1.y + mSelectedCommand.mYoff;
-      // Log.v("DistoX-TdManager", "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y );
+      // TDLog.v( "selected station " + vst1.x + " " + vst1.y + " point " + x + " " + y );
 
       String st = mDrawingSurface.selectedStationName() + "@" + mDrawingSurface.selectedCommandName();
       int len = st.length();
@@ -598,7 +596,7 @@ public class TdmViewActivity extends Activity
     TdmEquate equate = new TdmEquate();
     equate.addStation( st1 );
     equate.addStation( st2 );
-    // Log.v("DistoX-TdManager", "add equate: " + equate.stationsString() );
+    // TDLog.v( "add equate: " + equate.stationsString() );
     TdmConfigActivity.mTdmConfig.addEquate( equate );
     updateViewEquates();
   }
@@ -611,7 +609,7 @@ public class TdmViewActivity extends Activity
     }
     TdmEquate equate = new TdmEquate();
     for ( String st : sts ) equate.addStation( st );
-    // Log.v("DistoX-TdManager", "add equate: " + equate.stationsString() );
+    // TDLog.v( "add equate: " + equate.stationsString() );
     TdmConfigActivity.mTdmConfig.addEquate( equate );
     updateViewEquates();
   }

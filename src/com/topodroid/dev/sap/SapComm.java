@@ -19,9 +19,9 @@ package com.topodroid.dev.sap;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.DataDownloader;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.DataDownloader;
+import com.topodroid.Cave3X.TopoDroidApp;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
@@ -34,8 +34,6 @@ import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpChrtRead;
-
-import android.util.Log;
 
 import android.os.Handler;
 import android.os.Looper;
@@ -86,14 +84,14 @@ public class SapComm extends TopoDroidComm
     super( app );
     mRemoteAddress = address;
     mRemoteBtDevice  = bt_device;
-    // Log.v("DistoX", "SAP comm: cstr, addr " + address );
+    // TDLog.v( "SAP comm: cstr, addr " + address );
     mOps = new ConcurrentLinkedQueue< BleOperation >();
     clearPending();
   }
 
   // void setRemoteDevice( BluetoothDevice device ) 
   // { 
-  //   // Log.v("DistoX", "SAP comm: set remote " + device.getAddress() );
+  //   // TDLog.v( "SAP comm: set remote " + device.getAddress() );
   //   mRemoteBtDevice = device;
   // }
 
@@ -113,7 +111,7 @@ public class SapComm extends TopoDroidComm
       TDLog.Error("SAP comm: error: null remote device");
     } else {
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
-      // Log.v("DistoX", "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
+      // TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
       notifyStatus( ConnectionState.CONN_WAITING );
       mSapProto = new SapProtocol( this, device, context );
       mCallback = new BleCallback( this, true ); // auto_connect true
@@ -134,7 +132,7 @@ public class SapComm extends TopoDroidComm
 
   void doDisconnectGatt()
   {
-    // Log.v("DistoX", "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
+    // TDLog.v( "SAP comm: do disconnect GATT - disconnecting " + mDisconnecting );
     if ( mDisconnecting ) return;
     mDisconnecting = true;
     enqueueOp( new BleOpDisconnect( mContext, this ) );
@@ -147,7 +145,7 @@ public class SapComm extends TopoDroidComm
 
   void doConnectGatt()
   {
-    // Log.v("DistoX", "SAP comm: do connect GATT");
+    // TDLog.v( "SAP comm: do connect GATT");
     notifyStatus( ConnectionState.CONN_WAITING );
     enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) );
     doNextOp();
@@ -155,7 +153,7 @@ public class SapComm extends TopoDroidComm
 
   void connected( boolean is_connected )
   {
-    // Log.v("DistoX", "SAP comm: connected ...");
+    // TDLog.v( "SAP comm: connected ...");
     mBTConnected = is_connected;
     if (is_connected ) {
       notifyStatus( ConnectionState.CONN_CONNECTED );
@@ -169,7 +167,7 @@ public class SapComm extends TopoDroidComm
 
   void reconnectDevice()
   {
-    // Log.v("DistoX", "SAP comm: reconnect ...");
+    // TDLog.v( "SAP comm: reconnect ...");
     doDisconnectGatt();
     doConnectGatt();
     // mCallback.connectGatt( mContext, mRemoteBtDevice );
@@ -177,7 +175,7 @@ public class SapComm extends TopoDroidComm
 
   private boolean readSapPacket( )
   { 
-    // Log.v("DistoX", "SAP comm: reading packet");
+    // TDLog.v( "SAP comm: reading packet");
     // BluetoothGattService srv = mGatt.getService( SapConst.SAP5_SERVICE_UUID );
     // BluetoothGattCharacteristic chrt = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
     // return mGatt.readCharacteristic( chrt );
@@ -195,7 +193,7 @@ public class SapComm extends TopoDroidComm
   @Override
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
-    // Log.v("DistoX", "SAP comm: connect device (continuous data download)");
+    // TDLog.v( "SAP comm: connect device (continuous data download)");
     mLister = lister;
     mDataType = data_type;
     mConnectionMode = 1;
@@ -207,7 +205,7 @@ public class SapComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice() 
   {
-    // Log.v("DistoX", "SAP comm: disconnect device");
+    // TDLog.v( "SAP comm: disconnect device");
     if ( mDisconnecting ) return true;
     if ( ! mBTConnected ) return true;
     mDisconnecting = true;
@@ -238,7 +236,7 @@ public class SapComm extends TopoDroidComm
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
-    // Log.v("DistoX", "SAP comm: batch data downlaod");
+    // TDLog.v( "SAP comm: batch data downlaod");
     mConnectionMode = 0;
     mLister = lister;
     mNrPacketsRead = 0;
@@ -253,7 +251,7 @@ public class SapComm extends TopoDroidComm
   //   if ( mCommThread != null ) {
   //     TDLog.Error( "SAP comm start Comm Thread already running");
   //   }
-  //   // Log.v("DistoX-S", "SAP comm start comm thread");
+  //   // TDLog.v( "SAP comm start comm thread");
   //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister, data_type );
   //   mCommThread.start();
   //   return true;
@@ -293,11 +291,11 @@ public class SapComm extends TopoDroidComm
   private void doNextOp() 
   {
     if ( mPendingOp != null ) {
-      // Log.v("DistoX", "SAP comm: next op with pending not null, ops " + mOps.size() ); 
+      // TDLog.v( "SAP comm: next op with pending not null, ops " + mOps.size() ); 
       return;
     }
     mPendingOp = mOps.poll();
-    // Log.v("DistoX", "SAP comm: polled, ops " + mOps.size() );
+    // TDLog.v( "SAP comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
       mPendingOp.execute();
     } 
@@ -312,7 +310,7 @@ public class SapComm extends TopoDroidComm
 
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    // Log.v("DistoX", "SAP comm: changedChrt" );
+    // TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) {
       int res = mSapProto.handleReadNotify( chrt );
@@ -332,7 +330,7 @@ public class SapComm extends TopoDroidComm
   // @param uuid_str short UUID string
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX", "SAP comm: readedChrt" );
+    // TDLog.v( "SAP comm: readedChrt" );
     if ( ! mReadInitialized ) { error(-1, uuid_str); return; }
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str); return; }
     int res = mSapProto.handleRead( bytes ); 
@@ -343,7 +341,7 @@ public class SapComm extends TopoDroidComm
 
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
-    // Log.v("DistoX", "SAP comm: written chrt ...");
+    // TDLog.v( "SAP comm: written chrt ...");
     if ( ! mWriteInitialized ) { error(-4, uuid_str); return; }
     writeChrt( ); // try to write again
   }
@@ -354,7 +352,7 @@ public class SapComm extends TopoDroidComm
   }
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // Log.v("DistoX", "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
+    // TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
     connected( true );
   }
 
@@ -365,7 +363,7 @@ public class SapComm extends TopoDroidComm
 
   public void disconnected()
   {
-    // Log.v("DistoX", "SAP comm: disconnected ...");
+    // TDLog.v( "SAP comm: disconnected ...");
     // if ( mDisconnecting ) return;
     mDisconnecting = false;
     mConnectionMode = -1;
@@ -375,7 +373,7 @@ public class SapComm extends TopoDroidComm
 
   public int servicesDiscovered( BluetoothGatt gatt )
   {
-    // Log.v("DistoX", "SAP comm: service discovered" );
+    // TDLog.v( "SAP comm: service discovered" );
     BluetoothGattService srv = gatt.getService( SapConst.SAP5_SERVICE_UUID );
 
     mReadChrt  = srv.getCharacteristic( SapConst.SAP5_CHRT_READ_UUID );
@@ -383,7 +381,7 @@ public class SapComm extends TopoDroidComm
 
     // boolean write_has_write = BleUtils.isChrtRWrite( mWriteChrt.getProperties() );
     // boolean write_has_write_no_response = BleUtils.isChrtRWriteNoResp( mWriteChrt.getProperties() );
-    // Log.v("DistoX", "SAP callback W-chrt has write " + write_has_write );
+    // TDLog.v( "SAP callback W-chrt has write " + write_has_write );
 
     mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
     mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
@@ -397,7 +395,7 @@ public class SapComm extends TopoDroidComm
     }
 
     // boolean read_has_write  = BleUtils.isChrtPWrite( mReadChrt.getProperties() );
-     // Log.v("DistoX", "SAP callback R-chrt has write " + read_has_write );
+     // TDLog.v( "SAP callback R-chrt has write " + read_has_write );
 
     byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
     if ( notify == null ) {
@@ -415,14 +413,14 @@ public class SapComm extends TopoDroidComm
 
   public boolean writeChrt( UUID srv_uuid, UUID chrt_uuid, byte[] bytes )
   {
-    // Log.v("DistoX", "SAP comm: ##### writeChrt TODO ..." );
+    // TDLog.v( "SAP comm: ##### writeChrt TODO ..." );
     // return mCallback.writeCharacteristic( mWriteChrt );
     return mCallback.writeChrt( srv_uuid, chrt_uuid, bytes );
   }
 
   public boolean readChrt( UUID srv_uuid, UUID chrt_uuid )
   {
-    // Log.v("DistoX", "SAP comm: ##### readChrt" );
+    // TDLog.v( "SAP comm: ##### readChrt" );
     // return mCallback.readCharacteristic( mReadChrt );
     return mCallback.readChrt( srv_uuid, chrt_uuid );
   }

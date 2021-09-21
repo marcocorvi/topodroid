@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="fill_parent" 
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    android:paddingLeft="6dip"
+    android:paddingRight="6dip"
+    android:paddingBottom="3dip">
+   					  
+    <TextView android:id="@+id/st_name"
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content" 
+      android:layout_marginBottom="20sp"
+      android:gravity="left"
+      />
+
+    <TextView android:id="@+id/st.east"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_north"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_vert"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_dist"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_horz"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_angle"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+    <TextView android:id="@+id/st_cave_pathlength"
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content" 
+        android:layout_marginBottom="10sp"
+        android:gravity="left"
+        />
+
+    <Button android:id="@+id/btn_close"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="25sp"
+        android:text="@string/cbtn_close"
+        />
+
+</LinearLayout>

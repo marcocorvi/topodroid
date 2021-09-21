@@ -17,16 +17,16 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.ExportDialogTdm;
-import com.topodroid.DistoX.IExporter;
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.TopoDroidAlertDialog;
+import com.topodroid.Cave3X.DataHelper;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.R;
+import com.topodroid.Cave3X.ExportDialogTdm;
+import com.topodroid.Cave3X.IExporter;
+import com.topodroid.Cave3X.TDandroid;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -54,8 +54,6 @@ import android.os.Build;
 import android.app.Activity;
 
 import android.content.res.Resources;
-
-import android.util.Log;
 
 public class TdmConfigActivity extends Activity
                               implements OnClickListener
@@ -132,7 +130,7 @@ public class TdmConfigActivity extends Activity
           TDToast.make( R.string.no_file );
         }
       } else {
-        // Log.v("DistoX-TdManager", "TdmConfig activity missing TdmConfig path");
+        // TDLog.v( "TdmConfig activity missing TdmConfig path");
         TDToast.make( R.string.no_path );
       }
     }
@@ -167,7 +165,7 @@ public class TdmConfigActivity extends Activity
   protected void onPause()
   {
     super.onPause();
-    // Log.v("DistoX-MANAGER", "TdmConfig activity on pause");
+    // TDLog.v( "TdmConfig activity on pause");
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
   }
 
@@ -181,7 +179,7 @@ public class TdmConfigActivity extends Activity
   void updateList()
   {
     if ( mTdmConfig != null ) {
-      // Log.v("DistoX-MANAGER", "TdmConfig update list input nr. " + mTdmConfig.getInputsSize() );
+      // TDLog.v( "TdmConfig update list input nr. " + mTdmConfig.getInputsSize() );
       mTdmInputAdapter = new TdmInputAdapter( this, R.layout.row, mTdmConfig.getInputs() );
       mList.setAdapter( mTdmInputAdapter );
       mList.invalidate();
@@ -209,7 +207,7 @@ public class TdmConfigActivity extends Activity
       // FIXME TDMANAGER
 
       // exclude 3D on Android-R and beyond
-      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) mNrButton1 --;
+      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) mNrButton1 --;
 
       mButton1 = new Button[mNrButton1];
 
@@ -261,13 +259,13 @@ public class TdmConfigActivity extends Activity
   {
     TdmSurvey mySurvey = new TdmSurvey( "." );
 
-    // Log.v("DistoX-MANAGER", "start Config activity. inputs " + mTdmConfig.getInputsSize() );
+    // TDLog.v( "start Config activity. inputs " + mTdmConfig.getInputsSize() );
     for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
         // DataHelper mAppData = TopoDroidApp.mData;
         input.loadSurveyData ( TopoDroidApp.mData );
         mySurvey.addSurvey( input );
-        // Log.v("DistoX-TdManager", "parse file " + input.getSurveyName() );
+        // TDLog.v( "parse file " + input.getSurveyName() );
         // TdParser parser = new TdParser( mAppData, input.getSurveyName(), mySurvey );
       }
     }
@@ -289,7 +287,7 @@ public class TdmConfigActivity extends Activity
   void addSources( List< String > surveynames )
   {
     for ( String name : surveynames ) {
-      // Log.v("DistoX-MANAGER", "add source " + name );
+      // TDLog.v( "add source " + name );
       TdmInput input = new TdmInput( name );
       // mTdmConfig.addInput( input );
       mTdmConfig.setSave();
@@ -346,7 +344,7 @@ public class TdmConfigActivity extends Activity
               inputs.add( input );
             } else {
               String survey = input.getSurveyName();
-              // Log.v("DistoX-TdManager", "drop survey >" + survey + "<" );
+              // TDLog.v( "drop survey >" + survey + "<" );
               mTdmConfig.dropEquates( survey );
             }
           }
@@ -361,7 +359,7 @@ public class TdmConfigActivity extends Activity
   @Override
   public void onBackPressed()
   {
-    // Log.v("DistoX-TdManager", "TdmConfig activity back pressed");
+    // TDLog.v( "TdmConfig activity back pressed");
     // if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false ); // already done by onPause
     doFinish( TDRequest.RESULT_TDCONFIG_OK );
   }
@@ -405,23 +403,24 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( k1 < mNrButton1 && Build.VERSION.SDK_INT < Build.VERSION_CODES.R && b0 == mButton1[k1++] ) {  // 3D
-      int check = TDVersion.checkCave3DVersion( this );
-      if ( check < 0 ) {
-        TDToast.makeBad( R.string.no_cave3d );
-      } else if ( check > 0 ) {
-        TDToast.makeBad( R.string.outdated_cave3d );
-      } else {
+    } else if ( k1 < mNrButton1 /* && Build.VERSION.SDK_INT < Build.VERSION_CODES.R */ && b0 == mButton1[k1++] ) {  // 3D
+      // int check = TDVersion.checkCave3DVersion( this );
+      // if ( check < 0 ) {
+      //   TDToast.makeBad( R.string.no_cave3d );
+      // } else if ( check > 0 ) {
+      //   TDToast.makeBad( R.string.outdated_cave3d );
+      // } else {
         try {
-          // Log.v("DistoX-TdManager", "Cave3D of " + mTdmConfig.getFilepath() );
-          Intent intent = new Intent( "Cave3D.intent.action.Launch" ); // FIXME CAVE3D
+          // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
+          // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+          Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.Cave3X.TopoGL.class );
           intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
           startActivity( intent );
         } catch ( ActivityNotFoundException e ) {
           TDToast.make( R.string.no_cave3d );
         }
-      }
+      // }
     }
   }
 

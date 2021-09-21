@@ -19,8 +19,6 @@ import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattDescriptor;
 
-import android.util.Log;
-
 import java.util.UUID;
 
 public interface BleComm // extends BleChrtChanged

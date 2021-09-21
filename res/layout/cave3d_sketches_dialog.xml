@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:layout_width="fill_parent" 
+  android:layout_height="fill_parent"
+  android:orientation="vertical"
+  >
+  <!-- FIXME-28 
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+
+    androidx.recyclerview.widget.RecyclerView
+    android:id="@+id/recycler_view"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:ignore="PrivateResource" / -->
+
+  <LinearLayout
+    android:layout_width="fill_parent"
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp"
+    android:orientation="horizontal"
+    >
+    <!-- Button android:id="@+id/btn_close"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/cbtn_close"
+      / -->
+    <Button android:id="@+id/btn_bind"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/cbtn_bind"
+      />
+    <Button android:id="@+id/btn_load"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/sketch_load"
+      />
+    <Button android:id="@+id/btn_ok"
+      android:layout_width="0dp"
+      android:layout_weight="1"
+      android:layout_height="wrap_content"
+      android:gravity="center"
+      android:text="@string/cbtn_ok"
+      />
+  </LinearLayout>
+
+  <ListView android:id="@+id/list"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+  />  
+
+  
+
+</LinearLayout>

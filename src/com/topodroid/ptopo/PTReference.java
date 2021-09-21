@@ -14,8 +14,6 @@ package com.topodroid.ptopo;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 
 class PTReference
 {
@@ -89,7 +87,7 @@ class PTReference
 
     // void print()
     // { 
-    //   Log.v( "DistoX-PT", "reference: east " + _east + " north " + _north + " alt " + _altitude );
+    //   TDLog.v( "reference: east " + _east + " north " + _north + " alt " + _altitude );
     //   _station.print();
     //   _comment.print();
     // }

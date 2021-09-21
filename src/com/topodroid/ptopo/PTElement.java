@@ -14,8 +14,6 @@ package com.topodroid.ptopo;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 public class PTElement
 {
   static final byte ID_NO_ELEMENT       = (byte)0; // pocket topo elements id

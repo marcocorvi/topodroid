@@ -14,8 +14,6 @@ package com.topodroid.io.dxf;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.Point2D;
 
-import android.util.Log;
-
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.StringWriter;

@@ -16,14 +16,12 @@ package com.topodroid.dev.distox;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDUtil;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.TopoDroidProtocol;
 // import com.topodroid.dev.distox.DistoX;
-
-import android.util.Log;
 
 // import java.lang.ref.WeakReference;
 
@@ -116,7 +114,7 @@ public class DistoXProtocol extends TopoDroidProtocol
   // private void checkDataType( byte b, int data_type )
   // {
   //   // if ( DataType.of( b ) != data_type ) { // CHECK_DATA_TYPE 
-  //   //   Log.v( "DistoX-DATA_TYPE", "read-available: " + String.format(" %02x", b ) + " data_type " + data_type + "/" + DataType.of( b ) );
+  //   //   TDLog.v( "DistoX proto read-available: " + String.format(" %02x", b ) + " data_type " + data_type + "/" + DataType.of( b ) );
   //   // }
   // }
 
@@ -140,7 +138,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           // synchronized( dataRead ) 
           {
             count[0] = mIn.read( mBuffer, dataRead[0], toRead[0] );
-            // if ( TDSetting.mPacketLog ) LogPacket( 0L );
+            // if ( TDSetting.mPacketLog ) DoLogPacket( 0L );
             // checkDataType( mBuffer[0], data_type );
 
             toRead[0]   -= count[0];
@@ -157,14 +155,14 @@ public class DistoXProtocol extends TopoDroidProtocol
     reader.start();
 
     for ( int k=0; k<mMaxTimeout; ++k) {
-      // Log.v("DistoX", "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
+      // TDLog.v( "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
       try {
         reader.join( timeout );
       } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
       {
         Thread interruptor = new Thread() { public void run() {
-          // Log.v("DistoX", "interruptor run " + dataRead[0] );
+          // TDLog.v( "interruptor run " + dataRead[0] );
           for ( ; ; ) {
             // synchronized ( dataRead ) 
             {
@@ -176,7 +174,7 @@ public class DistoXProtocol extends TopoDroidProtocol
               }
             }
           }
-          // Log.v("DistoX", "interruptor done " + dataRead[0] );
+          // TDLog.v( "interruptor done " + dataRead[0] );
         } };
         interruptor.start(); // TODO catch ( OutOfmemoryError e ) { }
 
@@ -205,7 +203,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     int min_available = 1; // FIXME 8 should work in every case
 
     // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"true":"false") );
-    // Log.v( "DistoX-BLE", "DistoX proto: read packet no-timeout " + (no_timeout?"true":"false") );
+    // TDLog.v( "DistoX proto: read packet no-timeout " + (no_timeout?"true":"false") );
     try {
       final int maxtimeout = 8;
       int timeout = 0;
@@ -226,7 +224,7 @@ public class DistoXProtocol extends TopoDroidProtocol
         }
       }
       // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet available " + available );
-      // Log.v( "DistoX-BLE", "DistoX proto: read packet available " + available );
+      // TDLog.v( "DistoX proto: read packet available " + available );
       // if ( available > 0 ) 
       if ( available >= min_available ) {
         if ( no_timeout || ! TDSetting.mZ6Workaround ) {
@@ -237,7 +235,7 @@ public class DistoXProtocol extends TopoDroidProtocol
 
         // DistoX packets have a sequence bit that flips between 0 and 1
         byte seq  = (byte)(mBuffer[0] & 0x80); 
-        // Log.v( "DistoX", "VD read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
+        // TDLog.v( "VD read packet seq bit " + String.format("%02x %02x %02x", mBuffer[0], seq, mSeqBit ) );
         boolean ok = ( seq != mSeqBit );
         mSeqBit = seq;
         // if ( (mBuffer[0] & 0x0f) != 0 ) // ack every packet
@@ -271,7 +269,7 @@ public class DistoXProtocol extends TopoDroidProtocol
   public boolean sendCommand( byte cmd )
   {
     // TDLog.Log( TDLog.LOG_PROTO, String.format("send command %02x", cmd ) );
-    // Log.v( "DistoX", String.format("send command %02x", cmd ) );
+    // TDLog.v( String.format("send command %02x", cmd ) );
     byte[] buffer = new byte[8];  // request buffer
 
     try {
@@ -314,7 +312,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       int head = MemoryOctet.toInt( mBuffer[4], mBuffer[3] );
       int tail = MemoryOctet.toInt( mBuffer[6], mBuffer[5] );
       ret = getHeadMinusTail( head, tail );
-      // Log.v("DistoX-PROTO", "read to-read: H " + head + " T " + tail + " ret " + ret );
+      // TDLog.v( "read to-read: H " + head + " T " + tail + " ret " + ret );
 
       // DEBUG
       // if ( TDLog.LOG_PROTO ) {
@@ -447,7 +445,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       }
       if ( k == 8 ) {
         data.add( result );
-        // Log.v( TopoDroidApp.TAG, "memory " + result.toString() );
+        // TDLog.v( "DistoX proto memory " + result.toString() );
         ++ cnt;
       } else {
         break;
@@ -465,7 +463,7 @@ public class DistoXProtocol extends TopoDroidProtocol
   { 
     if ( calib == null ) return false;
     int  len  = calib.length;
-    // Log.v("DistoX", "writeCalibration length " + len );
+    // TDLog.v( "writeCalibration length " + len );
     long addr = 0x8010;
     // long end  = addr + len;
     try {

@@ -15,9 +15,9 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.Cave3X.DrawingPath;
+import com.topodroid.Cave3X.DrawingUtil;
+import com.topodroid.Cave3X.DBlock;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,8 +30,6 @@ import java.nio.ByteOrder;
 import java.nio.channels.FileChannel;   
 
 import java.util.List;
-
-import android.util.Log;
 
 
 // This class handles shots: les and splays
@@ -48,7 +46,7 @@ public class ShpSegment extends ShpObject
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
     if ( nrs == 0 ) return false;
-    // Log.v("DistoX", "SHOT cd " + cd + " sd " + sd + " Xscale " + xscale + " Yscale " + yscale );
+    // TDLog.v( "SHOT cd " + cd + " sd " + sd + " Xscale " + xscale + " Yscale " + yscale );
 
     int n_fld = 4; // type from to flag comment
     String[] fields = new String[ n_fld ];
@@ -68,8 +66,8 @@ public class ShpSegment extends ShpObject
     int dbfLength = 33 + n_fld * 32 + nrs * dbfRecLen; // Bytes, 3 fields
 
     setBoundsLines( sgms, x0, y0, xscale, yscale, cd, sd );
-    // Log.v("DistoX", "POLYLINE shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
-    // Log.v("DistoX", "SHOTS bbox X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
+    // TDLog.v( "POLYLINE shots " + lns.size() + " len " + shpLength + " / " + shxLength + " / " + dbfLength );
+    // TDLog.v( "SHOTS bbox X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
 
     open();
     resetChannels( 2*shpLength, 2*shxLength, dbfLength );
@@ -77,7 +75,7 @@ public class ShpSegment extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, geomType, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, geomType, shxLength );
     writeDBaseHeader( nrs, dbfRecLen, n_fld, fields, ftypes, flens );
-    // Log.v("DistoX", "shots done headers" );
+    // TDLog.v( "shots done headers" );
 
     int cnt = 1;
     int offset = 50;
@@ -110,7 +108,7 @@ public class ShpSegment extends ShpObject
         }
       }
     }
-    // Log.v("DistoX", "shots done records" );
+    // TDLog.v( "shots done records" );
     close();
     return true;
   }
@@ -133,7 +131,7 @@ public class ShpSegment extends ShpObject
     xmax = x0 + xscale * xmax;
     ymin = y0 + yscale * ymin;
     ymax = y0 + yscale * ymax;
-    // Log.v("DistoX", "SHOT record bbox X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
+    // TDLog.v( "SHOT record bbox X " + xmin + " " + xmax + " Y " + ymin + " " + ymax );
 
     writeShpRecordHeader( cnt, len );
     shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
@@ -147,11 +145,11 @@ public class ShpSegment extends ShpObject
     shpBuffer.putInt( 0 ); // part 0 starts with point 0 
     shpBuffer.putDouble( x0 + xscale*x1 );
     shpBuffer.putDouble( y0 - yscale*y1 );
-    // Log.v("DistoX", "SHOT record [1] " + (x0 + xscale*x1) + " " + (y0 - yscale*y1 ) );
+    // TDLog.v( "SHOT record [1] " + (x0 + xscale*x1) + " " + (y0 - yscale*y1 ) );
 
     shpBuffer.putDouble( x0 + xscale*x2 );
     shpBuffer.putDouble( y0 - yscale*y2 );
-    // Log.v("DistoX", "SHOT record [2] " + (x0 + xscale*x2) + " " + (y0 - yscale*y2 ) );
+    // TDLog.v( "SHOT record [2] " + (x0 + xscale*x2) + " " + (y0 - yscale*y2 ) );
   }
 
   // segment record length [word]: 4 + (48 + npt * 16)/2   [npt = 2]

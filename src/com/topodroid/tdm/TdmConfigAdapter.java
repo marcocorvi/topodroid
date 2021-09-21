@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 import java.util.ArrayList;
 import java.io.File;
@@ -24,8 +24,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
-
-import android.util.Log;
 
 class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
 {
@@ -39,17 +37,17 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     mContext = ctx;
     mItems = items;
     mOnClick = onClick;
-    // Log.v( TdManagerApp.TAG, "TdmConfigAdapter nr. items " + items.size() );
+    // TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
   }
 
   public TdmConfig get( int pos ) { return mItems.get(pos); }
 
   public TdmConfig get( String survey ) 
   {
-    // Log.v("TdManager", "TdmConfig get survey >" + survey + "< size " + mItems.size() );
+    // TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
     if ( survey == null || survey.length() == 0 ) return null;
     for ( TdmConfig tdconfig : mItems ) {
-      // Log.v("TdManager", "TdmConfig item >" + tdconfig.mName + "<" );
+      // TDLog.v("TdmConfig item >" + tdconfig.mName + "<" );
       if ( tdconfig.getSurveyName().equals( survey ) ) return tdconfig;
     }
     return null;

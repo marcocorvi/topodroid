@@ -16,8 +16,6 @@ import java.util.ArrayList;
 import java.io.InputStream;
 import java.io.OutputStream;
 
-// import android.util.Log;
-
 public class PTPolygonElement extends PTElement
 {
     // int _point_count;  //!< number of points
@@ -94,7 +92,7 @@ public class PTPolygonElement extends PTElement
     // @Override
     // void print()
     // {
-    //   Log.v( "DistoX-PT", "polygon: count " + _points.size() + " color " + _color );
+    //   TDLog.v( "polygon: count " + _points.size() + " color " + _color );
     //   for ( PTPoint p : _points ) p.print();
     // }
 

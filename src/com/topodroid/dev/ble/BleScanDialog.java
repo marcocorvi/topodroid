@@ -13,8 +13,8 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DeviceActivity;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.DeviceActivity;
+import com.topodroid.Cave3X.R;
 
 // import android.app.Dialog;
 
@@ -39,8 +39,6 @@ import android.bluetooth.BluetoothAdapter;
 
 import java.util.ArrayList;
 
-import android.util.Log;
-
 public class BleScanDialog extends MyDialog
                  implements OnItemClickListener,
                  View.OnClickListener
@@ -64,7 +62,7 @@ public class BleScanDialog extends MyDialog
     mBTadapter = adapter;
     uuid_str   = uuid;
     mDevices   = new ArrayList< BluetoothDevice >();
-    // Log.v("DistoX-BLE", "BLE scan cstr");
+    // TDLog.v( "BLE scan cstr");
   }  
 
   @Override
@@ -94,14 +92,14 @@ public class BleScanDialog extends MyDialog
     }
     dismiss();
     BluetoothDevice device = mDevices.get( pos );
-    // Log.v( "DistoX-BLE", "BLE scan on item click: " + BleUtils.deviceToString( device ) );
+    // TDLog.v( "BLE scan on item click: " + BleUtils.deviceToString( device ) );
     mActivity.setBLEDevice( device );
   }
 
   @Override
   public void onClick( View v )
   {
-    // Log.v( "DistoX-BLE", "BLE scan on click" );
+    // TDLog.v( "BLE scan on click" );
     if ( v.getId() == R.id.stop_scan ) {
       if ( mBleScanner != null ) { 
         stopScan();
@@ -125,7 +123,7 @@ public class BleScanDialog extends MyDialog
 
   private void startScan( )
   {
-    // Log.v( "DistoX-BLE", "BLE scan ==== start");
+    // TDLog.v( "BLE scan ==== start");
     mAdapter.clear();
     mDevices.clear();
     // mList.invalidate();
@@ -137,7 +135,7 @@ public class BleScanDialog extends MyDialog
 
   private void stopScan()
   {
-    // Log.v( "DistoX-BLE", "BLE scan ==== stop");
+    // TDLog.v( "BLE scan ==== stop");
     mBtnStop.setText( mContext.getResources().getString( R.string.start_scan ) );
     if ( mBleScanner != null ) {
       mBleScanner.stopScan();

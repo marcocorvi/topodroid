@@ -12,11 +12,9 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.TDConst;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDConst;
+import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.Cave3X.R;
 
 import android.content.Context;
 // import android.content.res.Resources;
@@ -177,15 +175,15 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   
   void commitValueString()
   {
-    // Log.v( "DistoXPref", "[*] " + name + " value " + value + " commit " + commit );
+    // TDLog.v( "Pref [*] " + name + " value " + value + " commit " + commit );
     if ( commit && mEdittext != null ) {
       String val = mEdittext.getText().toString();
       if ( ! value.equals( val ) ) {
         setValue( val );
         String text = TDSetting.updatePreference( helper, category, name, value );
-        // Log.v( "DistoXPref", "[commitValueStrring] " + name + " value " + val + " text " + text );
+        // TDLog.v( "Pref [commitValueStrring] " + name + " value " + val + " text " + text );
 	if ( text != null ) {
-	  // Log.v("DistoX", "commit value <" + text + ">" );
+	  // TDLog.v("commit value <" + text + ">" );
 	  mEdittext.setText( text );
 	}
       }
@@ -196,7 +194,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   @Override
   public void onFocusChange( View v, boolean has_focus )
   {
-    // Log.v("DistoXPref", "focus change " + name + " focus " + has_focus + " commit " + commit );
+    // TDLog.v( "Pref focus change " + name + " focus " + has_focus + " commit " + commit );
     if ( (! has_focus) /* && ( v == mEdittext ) */ ) commitValueString();
   }
 
@@ -207,11 +205,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       case R.id.checkbox: // click always switches the checkbox
 	bvalue = ((CheckBox)v).isChecked();
 	value  = ( bvalue? "true" : "false" );
-        // Log.v("DistoX-PREF", "[onClick] checkbox: " + name + " val " + value );
+        // TDLog.v( "Pref [onClick] checkbox: " + name + " val " + value );
 	TDSetting.updatePreference( helper, category, name, value );
         break;
       case R.id.title:
-        // Log.v("DistoXPref", "TODO title click tell TDSetting " + title );
+        // TDLog.v( "Pref TODO title click tell TDSetting " + title );
         break;
     }
   }
@@ -221,7 +219,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   {
     value  = options[pos];
     if ( ivalue != pos ) {
-      // Log.v("DistoXPref", "[onItemSelected]: " + name + " index " + ivalue + "->" + pos + " val " + values[pos] );
+      // TDLog.v( "Pref [onItemSelected]: " + name + " index " + ivalue + "->" + pos + " val " + values[pos] );
       ivalue = pos;
       TDSetting.updatePreference( helper, category, name, values[ ivalue ] ); // options store the selected value
     }
@@ -232,7 +230,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   {
     ivalue = Integer.parseInt( value );
     value  = options[ivalue];
-    // Log.v("DistoXPref", "TODO nothing Selected: " + name + " index " + ivalue + " val " + value );
+    // TDLog.v( "Pref TODO nothing Selected: " + name + " index " + ivalue + " val " + value );
   }
 
   @Override
@@ -240,7 +238,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   {
     if ( view == mEdittext ) {
       // commit = true;
-      // Log.v("DistoXPref", "on key " + keyCode + " commit " + commit );
+      // TDLog.v( "Pref on key " + keyCode + " commit " + commit );
       if ( keyCode == 66 ) commitValueString();
     }
     return false;
@@ -316,7 +314,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   // { 
   //   String val = hlp.getString( nm, ctx.getString(idef) );
   //   TDPref ret = new TDPref( cat, nm, EDITTEXT, tit, sum, lvl, pt, val, ctx, hlp );
-  //   // Log.v("DistoX", "EditText value " + ret.value );
+  //   // TDLog.v("EditText value " + ret.value );
   //   if ( pt == INTEGER ) {
   //     ret.ivalue = Integer.parseInt( ret.value );
   //   } else if ( pt == FLOAT ) {
@@ -335,7 +333,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
-    // Log.v("DistoXPref", "make list [1] " + nm + " val <" + val + "> index " + idx );
+    // TDLog.v( "Pref make list [1] " + nm + " val <" + val + "> index " + idx );
     return ret;
   }
 
@@ -349,7 +347,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     ret.options = options;
     ret.values  = values;
     int idx = ret.makeLstIndex( );
-    // Log.v("DistoXPref", "make list [2] " + nm + " val <" + val + "> index " + idx );
+    // TDLog.v( "Pref make list [2] " + nm + " val <" + val + "> index " + idx );
     return ret;
   }
 
@@ -357,7 +355,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   private int makeLstIndex( )
   {
-    // Log.v("DistoXPref", "make list index: val <" + value + "> opts size " + options.length );
+    // TDLog.v( "Pref make list index: val <" + value + "> opts size " + options.length );
     if ( value == null || value.length() == 0 ) {
       for ( int k=0; k< values.length; ++k ) { 
         if ( values[k].length() == 0 ) {
@@ -460,8 +458,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
       makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
       makeFwd( cat, key[12], tit[12],          B,          ctx, hlp ),
-      makeFwd( cat, key[13], tit[13],          A,          ctx, hlp ),    // GEEK
-      makeFwd( cat, key[14], tit[14],          E,          ctx, hlp ),    // EXPORT SETTINGS
+      makeFwd( cat, key[13], tit[13],          N,          ctx, hlp ),    // CAVE3D
+      makeFwd( cat, key[14], tit[14],          A,          ctx, hlp ),    // GEEK
+      makeFwd( cat, key[15], tit[15],          E,          ctx, hlp ),    // EXPORT SETTINGS
     };
   }
 
@@ -506,9 +505,10 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 4], tit[ 4], dsc[4], T, def[4], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
       makeCbx( cat, key[ 5], tit[ 5], dsc[5], A, def[5], ctx, hlp ), // CHECK-MIDLINE
       makeCbx( cat, key[ 6], tit[ 6], dsc[6], A, def[6], ctx, hlp ), // CHECK-EXTEND
-      makeFwd( cat, key[ 7], tit[ 7],         B,         ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         N,         ctx, hlp ),
-      makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp )
+      makeEdt( cat, key[ 7], tit[ 7], dsc[7], T, def[7], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
+      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],         N,         ctx, hlp ),
+      makeFwd( cat, key[10], tit[10],         B,         ctx, hlp )
       // makeFwd( cat, key[11], tit[11],         T,         ctx, hlp ), // PLOT_WALLS
     };
   }
@@ -711,7 +711,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[7],  tit[7],  dsc[7],  A,  def[7], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[8],  tit[8],  dsc[8],  A,  def[8], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[9],  tit[9],  dsc[9],  A,  def[9], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER,  ctx, hlp )
+      makeEdt( cat, key[10], tit[10], dsc[10], A, def[10], INTEGER,  ctx, hlp ),
+      makeEdt( cat, key[11], tit[11], dsc[11], A, def[11], INTEGER,  ctx, hlp )
     };
   }
 
@@ -1089,7 +1090,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
-    // Log.v("DistoX", "make Geek Prefs");
+    // TDLog.v("make Geek Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_GEEK;
     String[] key = TDPrefKey.GEEK;
     int[] tit    = TDPrefKey.GEEKtitle;
@@ -1107,6 +1108,64 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_DEVICE
       makeFwd( cat, key[9], tit[9],          T,          ctx, hlp )  // GEEK_IMPORT
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
+    };
+  }
+
+  public static TDPref[] makeCave3DPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    // TDLog.v("make Cave3D Prefs");
+    int cat = TDPrefCat.PREF_CATEGORY_CAVE3D;
+    String[] key = TDPrefKey.CAVE3D;
+    int[] tit    = TDPrefKey.CAVE3Dtitle;
+    int[] dsc    = TDPrefKey.CAVE3Ddesc;
+    String[] def = TDPrefKey.CAVE3Ddef;
+    return new TDPref[ ] {
+      makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],  ctx, hlp ), // NEG-CLINO
+      // BT DEVICE
+      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1],            ctx, hlp ), // STATION-POINT SUMMARY
+      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], INTEGER,   ctx, hlp ), // STATION SIZE
+      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,     ctx, hlp ), // SELECT RADIUS
+      makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],            ctx, hlp ), // MEASURE DIALOG
+      makeCbx( cat, key[5], tit[5], dsc[5], N, def[5],            ctx, hlp ), // STATION TOAST 
+      makeCbx( cat, key[6], tit[6], dsc[6], N, def[6],            ctx, hlp ), // GRID ABOVE
+      makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], INTEGER,   ctx, hlp ), // GRID SIZE
+      makeFwd( cat, key[8], tit[8],         N,                    ctx, hlp ), // DEM3D
+      makeFwd( cat, key[9], tit[9],         A,                    ctx, hlp )  // WALLS3D
+    };
+  }
+
+  public static TDPref[] makeDem3DPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    // TDLog.v("make Cave3D Prefs");
+    int cat = TDPrefCat.PREF_DEM3D;
+    String[] key = TDPrefKey.DEM3D;
+    int[] tit    = TDPrefKey.DEM3Dtitle;
+    int[] dsc    = TDPrefKey.DEM3Ddesc;
+    String[] def = TDPrefKey.DEM3Ddef;
+    return new TDPref[ ] {
+      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,   ctx, hlp ), // CAVE3D_DEM_BUFFER
+      makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], INTEGER, ctx, hlp ), // CAVE3D_DEM_MAXSIZE
+      makeEdt( cat, key[2], tit[2], dsc[2], N, def[2], INTEGER, ctx, hlp ), // CAVE3D_DEM_REDUCE
+    };
+  }
+
+  public static TDPref[] makeWalls3DPrefs( Context ctx, TDPrefHelper hlp )
+  {
+    // TDLog.v("make Cave3D Prefs");
+    int cat = TDPrefCat.PREF_WALLS3D;
+    String[] key = TDPrefKey.WALLS3D;
+    int[] tit    = TDPrefKey.WALLS3Dtitle;
+    int[] dsc    = TDPrefKey.WALLS3Ddesc;
+    String[] def = TDPrefKey.WALLS3Ddef;
+    return new TDPref[ ] {
+      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], INTEGER, ctx, hlp ), // CAVE3D_SPLAY_USE
+      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1],          ctx, hlp ), // CAVE3D_ALL_SPLAY
+      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],          ctx, hlp ), // CAVE3D_SPLAY_PROJ
+      makeEdt( cat, key[3], tit[3], dsc[3], N, def[3], FLOAT,   ctx, hlp ), // CAVE3D_SPLAY_THR
+      makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],          ctx, hlp ), // CAVE3D_SPLIT_TRIANGLES
+      makeEdt( cat, key[5], tit[5], dsc[5], N, def[4], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_RANDOM
+      makeEdt( cat, key[6], tit[6], dsc[6], N, def[6], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_STRETCH
+      makeEdt( cat, key[7], tit[7], dsc[7], N, def[7], FLOAT,   ctx, hlp ), // CAVE3D_POWERCRUST_DELTA
     };
   }
 

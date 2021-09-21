@@ -13,7 +13,7 @@ package com.topodroid.calib;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
+import com.topodroid.Cave3X.R;
 
 // import android.app.Dialog;
 import android.os.Bundle;
@@ -27,8 +27,6 @@ import android.view.View;
 import android.view.View.OnClickListener;
 
 // import android.graphics.Bitmap;
-
-// import android.util.Log;
 
 public class CalibValidateResultDialog extends MyDialog
                                 implements OnClickListener

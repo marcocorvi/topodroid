@@ -19,14 +19,13 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.Cave3X.TDUtil;
 
 import java.lang.Math;
 
 import java.util.Locale;
 
 // used by logCoeff
-// import android.util.Log;
 
 public class CalibAlgo
 {
@@ -140,18 +139,18 @@ public class CalibAlgo
 
   // void dump()
   // {
-  //   // Log.v("DistoX", String.format(Locale.US, "G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
-  //   // Log.v("DistoX", "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
-  //   // Log.v("DistoX", "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
-  //   // Log.v("DistoX", "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
+  //   // TDLog.v( String.format(Locale.US, "G %8.4f %8.4f %8.4f", bG.x, bG.y, bG.z ) );
+  //   // TDLog.v( "aG " + aG.x.x + " " + aG.x.y + " " + aG.x.z );
+  //   // TDLog.v( "   " + aG.y.x + " " + aG.y.y + " " + aG.y.z );
+  //   // TDLog.v( "   " + aG.z.x + " " + aG.z.y + " " + aG.z.z );
   //
-  //   // Log.v("DistoX", String.format(Locale.US, "M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
+  //   // TDLog.v( String.format(Locale.US, "M %8.4f %8.4f %8.4f", bM.x, bM.y, bM.z ) );
   //   // 
-  //   // Log.v("DistoX", "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
-  //   // Log.v("DistoX", "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
-  //   // Log.v("DistoX", "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
+  //   // TDLog.v( "aM " + aM.x.x + " " + aM.x.y + " " + aM.x.z );
+  //   // TDLog.v( "   " + aM.y.x + " " + aM.y.y + " " + aM.y.z );
+  //   // TDLog.v( "   " + aM.z.x + " " + aM.z.y + " " + aM.z.z );
   //
-  //   // Log.v("DistoX", String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
+  //   // TDLog.v( String.format(Locale.US, "NL %8.4f %8.4f %8.4f", nL.x, nL.y, nL.z ) );
   // }
 
   // @param N         number of data
@@ -281,7 +280,7 @@ public class CalibAlgo
       coeff[48] = floatToByteNL( nL.x );
       coeff[49] = floatToByteNL( nL.y );
       coeff[50] = floatToByteNL( nL.z );
-      // Log.v("DistoX", "NL to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nL.x + " " + nL.y + " " + nL.z );
+      // TDLog.v( "NL to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nL.x + " " + nL.y + " " + nL.z );
     } else {
       coeff[48] = (byte)( 0xff );
       coeff[49] = (byte)( 0xff );
@@ -299,21 +298,21 @@ public class CalibAlgo
     for ( int k=0; k<kk; ++k ) {
       cs.insert(k, (char)(coeff[k]) );
     }
-    // Log.v( "DistoX", "coeff to string " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
+    // TDLog.v( "coeff to string " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     return cs.toString();
   }
 
   // static void logCoeff( byte[] coeff )  // DEBUG METHOD
   // {
-  //   // Log.v( "DistoX", coeff[ 0] + " " + coeff[ 1] + " " + coeff[ 2] + " " + coeff[ 3] + " " + coeff[ 4] + " " + coeff[ 5] );
-  //   // Log.v( "DistoX", coeff[ 6] + " " + coeff[ 7] + " " + coeff[ 8] + " " + coeff[ 9] + " " + coeff[10] + " " + coeff[11] );
-  //   // Log.v( "DistoX", coeff[12] + " " + coeff[13] + " " + coeff[14] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
-  //   // Log.v( "DistoX", coeff[18] + " " + coeff[19] + " " + coeff[20] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
-  //   // Log.v( "DistoX", coeff[24] + " " + coeff[25] + " " + coeff[26] + " " + coeff[27] + " " + coeff[28] + " " + coeff[29] );
-  //   // Log.v( "DistoX", coeff[30] + " " + coeff[31] + " " + coeff[32] + " " + coeff[33] + " " + coeff[34] + " " + coeff[35] );
-  //   // Log.v( "DistoX", coeff[36] + " " + coeff[37] + " " + coeff[38] + " " + coeff[39] + " " + coeff[40] + " " + coeff[41] );
-  //   // Log.v( "DistoX", coeff[42] + " " + coeff[43] + " " + coeff[44] + " " + coeff[45] + " " + coeff[46] + " " + coeff[47] );
-  //   // Log.v( "DistoX", coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
+  //   // TDLog.v( coeff[ 0] + " " + coeff[ 1] + " " + coeff[ 2] + " " + coeff[ 3] + " " + coeff[ 4] + " " + coeff[ 5] );
+  //   // TDLog.v( coeff[ 6] + " " + coeff[ 7] + " " + coeff[ 8] + " " + coeff[ 9] + " " + coeff[10] + " " + coeff[11] );
+  //   // TDLog.v( coeff[12] + " " + coeff[13] + " " + coeff[14] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
+  //   // TDLog.v( coeff[18] + " " + coeff[19] + " " + coeff[20] + " " + coeff[15] + " " + coeff[16] + " " + coeff[17] );
+  //   // TDLog.v( coeff[24] + " " + coeff[25] + " " + coeff[26] + " " + coeff[27] + " " + coeff[28] + " " + coeff[29] );
+  //   // TDLog.v( coeff[30] + " " + coeff[31] + " " + coeff[32] + " " + coeff[33] + " " + coeff[34] + " " + coeff[35] );
+  //   // TDLog.v( coeff[36] + " " + coeff[37] + " " + coeff[38] + " " + coeff[39] + " " + coeff[40] + " " + coeff[41] );
+  //   // TDLog.v( coeff[42] + " " + coeff[43] + " " + coeff[44] + " " + coeff[45] + " " + coeff[46] + " " + coeff[47] );
+  //   // TDLog.v( coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
   // }
 
   public static byte[] stringToCoeff( String cs )
@@ -325,7 +324,7 @@ public class CalibAlgo
     } else {
       int kk = cs.length();
       for ( int k=0; k<kk; ++k ) coeff[k] = (byte)( cs.charAt(k) );
-      // Log.v( "DistoX", "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
+      // TDLog.v( "string to coeff " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + coeff[51] );
     }
     return coeff;
   }
@@ -411,13 +410,13 @@ public class CalibAlgo
   public static void coeffToG( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 0 );
-    // Log.v("DistoX", "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
+    // TDLog.v( "G " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
   public static void coeffToM( byte[] coeff, TDVector b, TDMatrix a )
   {
     coeffToBA( coeff, b, a, 24 );
-    // Log.v("DistoX", "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
+    // TDLog.v( "M " + b.x + " " + b.y + " " + b.z + " " + a.x.x + " " + a.x.y + " " + a.x.z );
   }
 
   // N.B. map coeff <--> NL
@@ -465,7 +464,7 @@ public class CalibAlgo
       nl.x = byteToFloatNL( coeff[48] );
       nl.y = byteToFloatNL( coeff[49] );
       nl.z = byteToFloatNL( coeff[50] );
-      // Log.v("DistoX", "coeff to NL " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nl.x + " " + nl.y + " " + nl.z );
+      // TDLog.v( "coeff to NL " + coeff[48] + " " + coeff[49] + " " + coeff[50] + " " + nl.x + " " + nl.y + " " + nl.z );
     } else {
       nl.x = 0;
       nl.y = 0;

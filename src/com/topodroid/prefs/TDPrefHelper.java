@@ -11,10 +11,8 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDandroid;
-
-// import android.util.Log;
+import com.topodroid.Cave3X.TDInstance;
+import com.topodroid.Cave3X.TDandroid;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
@@ -39,7 +37,7 @@ public class TDPrefHelper
 
   public static void update( String name, String value )
   {
-    // Log.v("DistoXPref", "TDPrefHelper set pref " + name + " " + value );
+    // TDLog.v( "TDPrefHelper set pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name, value );
     TDandroid.applyEditor( editor );
@@ -47,7 +45,7 @@ public class TDPrefHelper
 
   public static void update( String name1, String value1, String name2, String value2 )
   {
-    // Log.v("DistoXPref", "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 );
+    // TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
@@ -56,7 +54,7 @@ public class TDPrefHelper
 
   public static void update( String name1, String value1, String name2, String value2, String name3, String value3 )
   {
-    // Log.v("DistoXPref", "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 + "   " + name3 + " " + value3 );
+    // TDLog.v( "TDPrefHelper set pref " + name1 + " " + value1 + "   " + name2 + " " + value2 + "   " + name3 + " " + value3 );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putString( name1, value1 );
     editor.putString( name2, value2 );
@@ -67,7 +65,7 @@ public class TDPrefHelper
   // unused
   // public static void update( String[] name, String[] value )
   // {
-  //   Log.v("DistoX-PREF", "TDPrefHelper set pref " + name[0] + " " + value[0] + " ... ");
+  //   TDLog.v( "TDPrefHelper set pref " + name[0] + " " + value[0] + " ... ");
   //   SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
   //   for ( int k = 0; k < name.length; ++k ) {
   //     editor.putString( name[k], value[k] );
@@ -77,7 +75,7 @@ public class TDPrefHelper
 
   public static void update( String name, boolean value )
   {
-    // Log.v("DistoXPref", "TDPrefHelper set b-pref " + name + " " + value );
+    // TDLog.v( "TDPrefHelper set b-pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putBoolean( name, value );
     TDandroid.applyEditor( editor );
@@ -85,7 +83,7 @@ public class TDPrefHelper
 
   public static void update( String name, long value )
   {
-    // Log.v("DistoXPref", "TDPrefHelper set l-pref " + name + " " + value );
+    // TDLog.v( "TDPrefHelper set l-pref " + name + " " + value );
     SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
     editor.putLong( name, value );
     TDandroid.applyEditor( editor );

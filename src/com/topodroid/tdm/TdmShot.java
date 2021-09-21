@@ -11,8 +11,6 @@
  */
 package com.topodroid.tdm;
 
-import android.util.Log;
-
 public class TdmShot
 {
   private static final float DEG2RAD = (float)(Math.PI/180);

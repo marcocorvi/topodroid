@@ -13,7 +13,7 @@ package com.topodroid.utils;
 
 import java.lang.Math;
 
-// import android.util.Log;
+// import com.topodroid.utils.TDLog;
 
 public class TDMath
 {

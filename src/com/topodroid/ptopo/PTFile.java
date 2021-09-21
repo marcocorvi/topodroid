@@ -12,8 +12,8 @@
 package com.topodroid.ptopo;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DistoXStationName;
-import com.topodroid.DistoX.StationPolicy;
+import com.topodroid.Cave3X.DistoXStationName;
+import com.topodroid.Cave3X.StationPolicy;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -24,8 +24,6 @@ import java.nio.ByteOrder;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.IOException;
-
-// import android.util.Log;
 
 public class PTFile
 {
@@ -298,7 +296,7 @@ public class PTFile
       TDLog.Log( TDLog.LOG_PTOPO, "PT ID file " + String.format("%02X %02X %02X %02X", bytes[0], bytes[1], bytes[2], bytes[3] ) );
 
       int tc = PTFile.readInt( fs ); 
-      // Log.v("PTDistoX", "trip count " + tc );
+      // TDLog.v("PT trip count " + tc );
 
       for (int k=0; k<tc; ++k ) {
         PTTrip trip = new PTTrip();
@@ -307,7 +305,7 @@ public class PTFile
       }
     
       int sc = PTFile.readInt( fs );
-      // Log.v("PTDistoX", "shot count " + sc );
+      // TDLog.v("PT shot count " + sc );
 
       for ( int k=0; k<sc; ++k ) {
         PTShot shot = new PTShot();
@@ -317,7 +315,7 @@ public class PTFile
     
       int rc = PTFile.readInt( fs );
       TDLog.Log( TDLog.LOG_PTOPO, "PT trips " + tc + " shots " + sc + " refs " + rc );
-      // Log.v( "PTDistoX", "PT trips " + tc + " shots " + sc + " refs " + rc );
+      // TDLog.v( "PT trips " + tc + " shots " + sc + " refs " + rc );
       for ( int k=0; k<rc; ++k ) {
         PTReference ref = new PTReference();
         ref.read( fs );
@@ -349,18 +347,18 @@ public class PTFile
 
     // void print()
     // { 
-    //   Log.v( "DistoX-PT", "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
-    //   Log.v( "DistoX-PT", "TRIPS");
+    //   TDLog.v( "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
+    //   TDLog.v( "TRIPS");
     //   for ( PTTrip t : _trips ) t.print();
-    //   Log.v( "DistoX-PT", "SHOTS");
+    //   TDLog.v( "SHOTS");
     //   for ( PTShot s : _shots ) s.print();
-    //   Log.v( "DistoX-PT", "REFERENCES");
+    //   TDLog.v( "REFERENCES");
     //   for ( PTReference r : _references ) r.print();
-    //   Log.v( "DistoX-PT", "OVERVIEW");
+    //   TDLog.v( "OVERVIEW");
     //   _overview.print();
-    //   Log.v( "DistoX-PT", "OUTLINE");
+    //   TDLog.v( "OUTLINE");
     //   _outline.print();
-    //   Log.v( "DistoX-PT", "SIDEVIEW");
+    //   TDLog.v( "SIDEVIEW");
     //   _sideview.print();
     // }
 

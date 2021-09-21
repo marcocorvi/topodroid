@@ -12,14 +12,13 @@
 package com.topodroid.help;
 
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.Cave3X.TDPath;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -67,18 +66,18 @@ public class UserManualActivity extends Activity
     // String filepath = TDPath.getManFile( filename );
     // view.loadUrl( filepath );
     // setWebViewSettings( mTVtext );
-    // Log.v("DistoX", "MAN-0 filename " + filename );
+    // TDLog.v( "MAN-0 filename " + filename );
 
     if ( filename.startsWith("file:///data" ) ) {
       if ( TDSetting.mLocalManPages ) {
         int pos = filename.indexOf( NEEDLE );
-        // Log.v("DistoX", "MAN-1 filename " + filename + " index " + pos );
+        // TDLog.v( "MAN-1 filename " + filename + " index " + pos );
         if ( pos > 0 ) {
           String name = filename.substring( pos + NEEDLE.length() );
           String pagename = TDPath.getManFileName( name );
           File pagefile = TDFile.getManFile( name );
-          // Log.v("DistoX", "MAN-2 pagefile " + pagefile.getPath() );
-          // Log.v("DistoX", "MAN-2 pagename " + pagename );
+          // TDLog.v( "MAN-2 pagefile " + pagefile.getPath() );
+          // TDLog.v( "MAN-2 pagename " + pagename );
           loadLocal( view, pagefile );
         } 
       }
@@ -87,15 +86,15 @@ public class UserManualActivity extends Activity
       if ( pos >= 0 ) filename = filename.substring(pos+1);
       String pagename = TDPath.getManFileName( filename );
       File pagefile = TDFile.getManFile( filename );
-      // Log.v("DistoX", "MAN-3 filename " + filename );
-      // Log.v("DistoX", "MAN-3 pagename " + pagename );
-      // Log.v("DistoX", "MAN-3 pagefile path " + pagefile.getPath() );
+      // TDLog.v( "MAN-3 filename " + filename );
+      // TDLog.v( "MAN-3 pagename " + pagename );
+      // TDLog.v( "MAN-3 pagefile path " + pagefile.getPath() );
       if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {
         String page = "/android_asset/man/" + filename;
-        // Log.v("DistoX", "MAN-4 assets page " + page );
+        // TDLog.v( "MAN-4 assets page " + page );
         view.loadUrl( "file://" + page );
       } else {
-        // Log.v("DistoX", "MAN-4 local pagefile " + pagefile );
+        // TDLog.v( "MAN-4 local pagefile " + pagefile );
         loadLocal( view, pagefile );
       }
     }
@@ -108,7 +107,7 @@ public class UserManualActivity extends Activity
     String encoding = "UTF-8";
     String mime = "text/html";
     String baseurl = "file://" + pagefile.getPath();
-    // Log.v("DistoX", "MAN-5 baseurl " + baseurl );
+    // TDLog.v( "MAN-5 baseurl " + baseurl );
     try {
       FileReader fr = new FileReader( pagefile );
       encoding = fr.getEncoding();
@@ -123,10 +122,10 @@ public class UserManualActivity extends Activity
 
     // try { 
     //   URI pageuri = pagefile.toURI();
-    //   Log.v("DistoX", "MAN url " +  pageuri.toURL().toString() );
+    //   TDLog.v( "MAN url " +  pageuri.toURL().toString() );
     //   view.loadUrl( pageuri.toURL().toString() );
     // } catch ( MalformedURLException e ) {
-    //   Log.v("DistoX", "MAN error " + e.getMessage() );
+    //   TDLog.v( "MAN error " + e.getMessage() );
     // }
   }
 
@@ -195,7 +194,7 @@ public class UserManualActivity extends Activity
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
         ++mCloseOnBack;
         // view.loadUrl( url );
-        // Log.v("DistoX", "MAN Web client " + url );
+        // TDLog.v( "MAN Web client " + url );
         load( view, url );
         return false;
       }
@@ -203,7 +202,7 @@ public class UserManualActivity extends Activity
       @Override
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
       {
-        Log.e("DistoX", "Load Error: " + description + " url " + failingUrl );
+        TDLog.Error( "UserMan Load Error: " + description + " url " + failingUrl );
       }
     } );
 
@@ -260,7 +259,7 @@ public class UserManualActivity extends Activity
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     CharSequence item = ((TextView) view).getText();
-    // Log.v("DistoX", "click " + item + " pos " + pos);
+    // TDLog.v( "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
     if ( pos <= 16 ) {
       mCloseOnBack = 0;

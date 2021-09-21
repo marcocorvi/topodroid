@@ -11,12 +11,11 @@
  */
 package com.topodroid.prefs;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
-
-import android.util.Log;
+import com.topodroid.Cave3X.TDToast;
+import com.topodroid.Cave3X.R;
 
 import android.os.Bundle;
 import android.os.AsyncTask;
@@ -66,14 +65,14 @@ public class ExportDialogSettings extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // Log.v("DistoX-C3D", "Selected " + mSelected );
+    // TDLog.v( "CWD Selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnExport ) {
       ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
         @Override
         protected Boolean doInBackground(Void... v)
         {
-          // Log.v("DistoX", "export settings");
+          // TDLog.v("export settings");
           return TDSetting.exportSettings();
         }
         @Override
@@ -97,7 +96,7 @@ public class ExportDialogSettings extends MyDialog
         @Override
         protected Boolean doInBackground(Void... v)
         {
-          // Log.v("DistoX", "import settings - functional " + functional );
+          // TDLog.v("import settings - functional " + functional );
           return TDSetting.importSettings( prefs, all );
         }
         @Override
