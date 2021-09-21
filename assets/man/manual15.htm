@@ -1,85 +1,199 @@
 <html><body>
 <h3>[15] 3D VIEWER</h3>
 
-<b>Cave3D</b> is a 3d viewer for Therion projects, Loch files, Compass files or projects, and VisualTopo files.<br>
-Up to <u>Android-10</u>, TopoDroid displays the 3D model of the survey using Cave3D.
-<br>
-On <u>Android-11</u> and later apps cannot directly access files created by other apps,
-and Cave3D cannot access TopoDroid files.
-To display the 3D you must export the survey data in a supported format (eg, Therion),
-and open the exported file from Cave3D, thru your Android "media store" (ie, file manager).
-Beware that some file managers list only certain categories of files, and will not show the
-exported file.
-<br><p>
+TopoDroid 3D viewer is designed for use in cave and it does not require internet connection.<br>
+It can load also other file formats: Therion (th, thconfig), Loch, Compass (dat, mak), and VisualTopo.<br><p>
 
 The 3D model can be opened either from a menu in the <i>Data Window</i>, or a button in the
 <i>Survey Info Window</i>.<br>
 The 3D model of a cave project can be opened from a button in the <i>Project Window</i>.
-<br><p>
-
+<br>
 The model is shown with a reference grid (blue north, green east) or triplet (pink upward).
 <br><p>
 
+
+
 <h4>BUTTONS</h4>
 <ul style="margin-top:0">
-<li><i>Tilt - Move</i>: green arrow switches the view between rotation and move modes.</li>
-<li><i>Stations</i>: button displays and hides station numbers.</li>
-<li><i>Splays</i>: button will display and hide splay shots. Splays are shown as lines or as endpoints.</li>
-<li><i>Walls</i>: button will display or hide wall models if there is any.</li>
-<li><i>Projections</i>: display the plan view built from the wall 3D reconstruction, projected on the grid plane, and/or the profile curtain</li>
-<li><i>Surface</i>: button will display surface.  Works only if ASCII surface data is specified in .th file.</li>
-<li><i>Color</i>: button will change color-coding of centreline from all grey to survey and depth.</li>
-<li><i>Grid</i>: button will switch between underlying grid or X, Y, Z axis.</li>
-</ul><br><p>
+<li><i>Move - Light</i>: Either move the model or the light. Two-finger always scale and translate the model.</li>
+<li><i>View</i>: Either perspective or orthographic.</li>
+<li><i>Stations</i>: Show/hide station. Green points or names.</li>
+<li><i>Splays</i>: Show/hide splays. Lines or endpoints.</li>
+<li><i>Walls</i>: Show/hide walls (if created).</li>
+<li><i>Surface</i>: Show/hide surface DEM (if present).</li>
+<li><i>Color</i>: Centerline color-coding. White, by-survey, or depth.</li>
+<li><i>Frame</i>: Switch between grid and XYZ axis.</li>
+</ul><br>
+The button icons are adjusted to the state of the program.
+<br><p>
+
+A few buttons have long-tap actions:
+<ul>
+<li><i>View</i>: Adjust the focal parameter of the perspective.</li>
+<li><i>Stations</i>: Toggle station selection on/off.</li>
+<li><i>Splays</i>: Manually insert a leg.</li>
+<li><i>Color</i>: Select the surveys to show or hide.</li>
+<li><i>Frame</i>: Select the display of surface/duplicate/commented legs.</li>
+</ul>
+<br><p>
 
 <h4>MENU</h4>
 <ul style="margin-top:0">
-<li><i>Open file</i>: opens a dialogue to select a .th file from th subfolder in TopoDroid working directory.</li>
-<li><i>Export</i>: opens the export dialogue. Model can be exported into Therion, KML, STL or STL-bin formats, CGAL and LAS.
-There are options to include splays, walls, stations and surface in export. The model can be also serialized in a text file.</li>
-<li><i>Info</i>: will display survey statistics</li>
-<li><i>Rose diagram</i>: displays 2D azimuth rose diagram</li>
-<li><i>3D rose diagram</i>: displays 3D direction diagram</li>
-<li><i>Reset</i>: center the 3D model in top-view and zoom to fit it in the screen</li>
-<li><i>Viewpoint</i>: will let you select a point of view</li>
-<li><i>DEM</i> Digital Terrain Model: opacity, overlay, file-load</li>
-<li><i>Wall models</i>: create or clear a wall 3D reconstruction.</li>
+<li><i>Open file</i>: Select a survey file from the working folder.</li>
+<li><i>Export</i>: Export dialog.</li>
+<li><i>Info</i>: Survey statistics.</li>
+<li><i>3D-Rose diagram</i>: Distribution of 3D directions.</li>
+<li><i>Rose diagram</i>: Distribution of azimuth directions.</li>
+<li><i>Reset</i>: Reset to orthogonal top view, at zoom one.<li>
+<li><i>Viewpoint</i>: Select a point of view among top, north, east, south, and west. For example "south" means looking at the cave from the South.</li>
+<li><i>Surface</i>: Transparency and DEM file. Centreline projection on surface.</li>
+<li><i>Wall models</i>: Create or clear a wall 3D reconstruction. Toggle plan/profile projections of walls</li>
+<li><i>Sketches</i></li>
 <li><i>Options</i></li>
 <li><i>Help</i></li>
 </ul><br><p>
 
 <h4>OPTIONS</h4>
 <ul style="margin-top:0">
-  <li><i>Base path</i>: Directory containing the Therion/Loch files</li>
-  <li><i>Text size</i>: Station label text size</li>
-  <li><i>Buttons size</i>: Buttons size</li>
-  <li><i>Selection radius</i>: Radius of selection</li>
-  <li><i>Top grid</i>: Show the grid on the top</li>
-  <li><i>DEM extent</i> around the survey</li>
-  <li><i>Projections</i>: Whether to use precompute projections</li>
-  <li><i>All splay</i>: Whether to use all the splays for the walls</li>
-  <li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
-  <li><i>Randomize points</i>: Add a small random vector to splays</li>
-  <li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
+<li><i>Base path</i>: Folder containing the survey files</li>
+<li><i>Selection radius</i>: Radius of selection for stations [1.0]</li>
+<li><i>Station dialog</i>: whether to open the station dialog for the selected station [n].</li>
+<li><i>Station points</i>: whether to always display station points (green) [n].</li>
+<li><i>Top grid</i>: Show the grid on the top [n].</li>
+<li><i>Grid extent</i>: amount of grid extent around the survey [10 cells].</li>
+<li><i>Below horizon view</i>: whether to allow viewpoints below the horizon [n].</li>
+<li><i>DEM buffer</i>: Extent of surface model around the survey on loading the surface model from a DEM file.</li>
+<li><i>DEM max size</i>: maximum size of surface DEM in each direction [400 cells].</li>
+<li><i>DEM reduction</i>: how to reduce the DEM if too large (subsample or clip) [subsample].</li>
+<li><i>All splay</i>: Whether to use all the splays for the walls</li>
+<li><i>Split triangles</i>: Whether to split intersecting wall triangles</li>
+<li><i>Randomize points</i>: Add a small random vector to splays</li>
+<li><i>Stretch walls</i>: Shift wall points by a small quantity along the leg</li>
+<li><i>Powercrust</i>: Algorithm "delta" parameter</li>
+<li><i>Bluetooth device</i>: name of the Bluetooth device.</li>
 </ul><br><p>
 
-<b>Wall model</b><br>
-The wall envelope is not computed automatically when the file is opened, but it must be
-requested by the user thru the <i>Wall models</i> menu.
-There are two models: pseudo conevx-hull, and powercrust. The first is good when the splay are not dense. The second is for dense splays.<br>
-After the wall has been computed it can be displayed with the "wall" button.<br><p>
+<b>TITLE LINE</b><br>
+The title bar shows the viewing parameters:
+<ul>
+<li><i>C</i> and <i>A</i> and clino and azimuth of the viewpoint.</li>
+<li><i>S</i> is the zoom factor.</li>
+<li><i>T</i> are the X-Y translations of the model.</li>
+<li><i>L</i> are the clino and azimuth of the light.</li>
+</ul>
+<br><p>
 
-<b>Station actions</b><br>
-When the stations are displayed, they can be selected tapping on the station.
-The selected station can be set as origin of the model ("center"), or the distance from 
-another station can be measured.<br>
-If the model as a DEM the depth below surface is shown.<br><p>
+<b>EXPORTS</b><br>
+Model can be exported into DXF, KML, STL or STL-binary, CGAL, LAS-binary, and shapefile.
+There are options to include splays, walls, stations and surface in export.<br>
+The model can be also serialized in a text file.
+<br><p>
 
-<b>DEM (Digital Elevation Model)</b><br>
-Cave3D handles DEM included in Therion or loch files.<br>
-If the TopoDroid survey has a georeferenced station, a DEM can be added to the model by loading from 
-an external file (supported formats: ascii and therion grid). The georefenced station must have also the coordinates
-transformed in the DEM Coordinate Reference System through the app Proj4.<br><p>
+<b>GRID/FRAME</b><br>
+The grid/frame lines are green (west-east), blue (south-north), and red (vertical).<br>
+In perspective the grid looks greenish to the north/south because the green lines stack together closer.
+And it looks blueish to the west/east.
+To help distinguish the for cardinal directions, the grid gets slightly reddish at the west-south corner.<br>
+By default the grid is below the survey, but it can be set above it (optionally).
+<br><p>
+
+<b>SURVEY</b><br>
+The survey splays can be hidden, displayed as lines or endpoints.<br>
+The survey legs can be uncolored or colored by survey, by depth (red-to-blue) or by
+the depth beneath the surface (blue-to-red).<br>
+
+When uncolored the survey legs are white, the surface legs green, the duplicate legs orange, 
+and the commented legs light blue.<br>
+
+The "surface", "duplictae", and "commented" legs can be turned on/off with the "legs" dialog which
+is opened by a long-tap on the fourth button.
+<br><p>
+
+<b>WALLS</b><br>
+The wall model is not computed automatically when the file is opened, but it must be
+requested by the user through the "wall" menu.
+There are three models: <i>simple hull</i>, <i>pseudo conevx-hull</i>, and <i>powercrust</i>.
+The first two are suitable when the splay are not dense. The third one is for dense splays.<br>
+
+The wall model depends on the number and the quality of the splays.
+Poor splays will result in a poor model.<br>
+
+The computation is done in background.
+When done the wall can be displayed with the "wall" button.<br><p>
+
+The powercrust model includes also the projection of the walls on the horizontal plane (plan view), and on a vertical curtain
+along the survey (profile view). Their display is enabled through the "walls" menu.
+<br><p>
+
+<b>SURFACE</b><br>
+If the (Therion or Loch) model contains surface data (Digital Elevation Model), the surface can be dislayed either gray or
+with the texture (if available).<br>
+The surface dialog has a button to load a DEM from a file. The supported formats are ascii (.asc or .ascii) and Therion grid (.grid). 
+Only the relevant portion of the DEM file is loaded.<br>
+The survey and the DEM data file must be in the same Cartographic Coordinate Reference System.
+If the survey fixed point coordinates have been transformed into another reference system,
+the transformed coordinates are used to reference the model.
+if it has only long-lat (WGS84) coordinates, the WGS-84 system is used.<br><p>
+
+The transparency of the surface is adjustable. If fully opaque the portions of surface behind others are hidden.<br>
+The projection of the survey centerline on the surface can be displayed (blue).<br>
+When the model has a surface, it can be colored by the depth beneath the surface.
+<br><p>
+
+If the model has a surface DEM, the surface texture can be loaded from a file.
+The supported file formats are GeoTiff and OSM.<br>
+The GeoTiff file must be in the same Cartographic Coordinate Reference System of the survey.
+[Tech note: if the file is 24-bit non-compressed or uses a colormap Cave3D tries to read only the portion
+covering the DEM area, otherwise the whole image
+is read in and portion area is extracted.]<br>
+The OSM texture (WGS84) can be loaded only for surveys and cave projects opened from TopoDroid.
+The texture displays the OSM lines.
+<br><p>
+
+It is possible to visualize a point (yellow dot) on the surface by entering the East/North coordinates in the CRS of the model.<br>
+
+Models loaded from TopoDroid can get also GPS points.
+If the app has permission to use the "Location" service, and this service is enabled, it is possible to
+get surface point with the Android GPS.<br>
+given permissions to use it.<br>
+The app displays the last 10 points.
+<br><p> 
+
+<b>STATION ACTIONS</b><br>
+By default, when the stations are displayed, they can be selected tapping on the station point or name.<br>
+Station selection can be turned on/off with a long tap on the "station" button. When the stations are selectable
+the button has a red dot.<br><p>
+
+The selected station is highlighted red, and its coordinates are shown in a blue bar at the bottom.
+If the model has a DEM, the depth of the station below the surface is included.<br>
+To unselect the station tap on the station again or on the bar.<br><p>
+
+To measure distances between the selected station and another station, check the "measure" button in the bottom bar,
+and tap on the other station.
+The 3D distance between the two stations, its East, North, and vertical components, and the plane 2D distance are
+displayed in a dialog.
+If the two stations are connected along the centerline the "cave" distance is also shown
+and the cave-path between them is highlighted green.<br>
+Optioally, the values can be displayed in a brief message box instead of a dialog.  <br><p>
+
+When the "station" button in the bottom bar is checked, the station position on the screen 
+if fixed under rotations and the
+selected station is highlighted orange.
+<br><p>
+
+<b>SKETCH LIFTING</b><br>
+With surveys and cave-projects opened from TopoDroid it is possible to "lift" 2D sketches to the 3D model.
+The sketch must be exported (in TopoDroid) in "Cave3D" format. The exported file is in the "c3d" folder
+of TopoDroid. Next a sketch file can be loaded from Cave3D, and the sketch is lifted to adapt to the
+3D model.<br>
+
+The sketch dialog displays the list of opened sketches.<br>
+Each item has two checkboxes: the first to swithch on/off
+the display of the sketch, the second to remove the sketch. The choices must be confirmed with the "OK" button.<br>
+There is a button to load a new sketch.<br>
+Finally there is a button to rebind the point icons, if they go black.
+<br><p>
+
 
 <a href="manual14.htm">&lt; Cave Projects</a> |
 <a href="manual16.htm">Index &gt;</a> 

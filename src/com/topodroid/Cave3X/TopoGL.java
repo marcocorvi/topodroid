@@ -13,7 +13,6 @@ package com.topodroid.Cave3X;
 
 import com.topodroid.utils.TDLog;
 
-// import com.topodroid.Cave3X.R;
 // import com.topodroid.Cave3X.TDandroid;
 
 // import com.topodroid.c3bt.ConnectionState;
@@ -40,6 +39,7 @@ import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.help.HelpDialog;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyMenuAdapter;
@@ -180,6 +180,7 @@ public class TopoGL extends Activity
 
   // private static final int REQUEST_OPEN_FILE = 1;
 
+  private static final int HELP_PAGE = R.string.TopoGL;
 
   boolean doSketches = false;
 
@@ -559,6 +560,24 @@ public class TopoGL extends Activity
     R.string.cmenu_help
   };
 
+  private static final int[] help_menus = {
+                          R.string.help_open_3d,
+                          R.string.help_export_3d,
+                          R.string.help_info_3d,
+                          R.string.help_ico_3d,
+                          R.string.help_rose_3d,
+                          R.string.help_reset_3d,
+                          R.string.help_viewpoint_3d,
+                          R.string.help_alpha_3d,
+                          R.string.help_wall_3d,
+                          // R.string.help_temperature,
+                          R.string.help_sketch_3d,
+                          R.string.help_prefs,
+                          // R.string.help_fractal,
+                          R.string.help_help
+  };
+
+
   void setMenuAdapter( Resources res )
   {
     Cave3DFile.hasC3dDir();
@@ -672,7 +691,8 @@ public class TopoGL extends Activity
     // } else if ( p++ == pos ) { // FRACTAL
     //   new FractalDialog( this, this, mRenderer ).show();
     } else if ( p++ == pos ) { // HELP
-      new DialogHelp(this).show();	    
+      // new DialogHelp(this).show();	    
+      new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
 
@@ -714,6 +734,17 @@ public class TopoGL extends Activity
     // R.drawable.iz_bt_scan,
     // R.drawable.iz_view
   };
+
+  private static final int[] help_icons = { R.string.help_light_3d,
+                          R.string.help_projection_3d,
+                          R.string.help_stations_3d,
+                          R.string.help_splays_3d,
+                          R.string.help_walls_3d,
+                          R.string.help_surface_3d,
+                          R.string.help_color_3d,
+                          R.string.help_frame_3d
+  };
+
   int BTN_MOVE     = 0;
   int BTN_PROJECT  = 1;
   int BTN_STATION  = 2;

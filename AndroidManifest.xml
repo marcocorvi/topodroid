@@ -23,6 +23,12 @@
 	     item_picker2_dialog.xml
              symbol_enable_dialog.xml
     -->
+    <!-- API-18 = Android 4.3
+         API-19 = Android 4.4
+         API-21 = Android 5.0
+         API-29 = Android 10
+         API-30 = Android 11
+    -->
     <uses-sdk
        android:minSdkVersion="18"
        android:targetSdkVersion="30"

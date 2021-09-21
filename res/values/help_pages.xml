@@ -18,6 +18,7 @@
   <string name="ShotWindow" translatable="false">manual06.htm</string>
   <string name="DrawingWindow" translatable="false">manual09.htm</string>
   <string name="OverviewWindow" translatable="false">manual12.htm</string>
+  <string name="TopoGL" translatable="false">manual15.htm</string>
   <string name="PlotReloadWindow" translatable="false">page_backup.htm</string>
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>
   <string name="CBDdialog" translatable="false">page_cwd.htm</string>
