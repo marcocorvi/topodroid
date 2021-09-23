@@ -5,6 +5,12 @@
     <string name="user_man_ok">Zainstalowane tłumaczenie podręcznika użytkownika</string>
     <string name="user_man_fail">Nie można zainstalować tłumaczenia instrukcji obsługi</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Kliknij ponownie aby zakończyć</string>
@@ -122,6 +128,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- REMOVE string name="calib_gm_policy">Polityka</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Przywrócić dane kalibracyjne?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Kalibracja zapisana</string>
     <string name="calib_updated">Kalibracja zaktualizowana</string>
     <string name="calib_compute_groups">Obliczanie danych kalibracyjnych &#8230;</string>
@@ -221,6 +228,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Brak mobilnego punktu topograficznego</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
  
     <string name="pleasewait">Czekaj</string>
     <string name="processing">przetwarzanie &#8230;</string>
@@ -276,6 +284,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="error_name_exists">Existing project</string -->
     <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Wymagana nazwa</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Katalog już istnieje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Wymagany punkt referencyjny</string>
@@ -436,6 +446,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_curve_pt">Wygładź segment</string>
     <string name="popup_remove_pt">Usuń punkt</string>
     <!-- TODO string name="popup_append_line">Append to line</string -->
+    <!-- TODO string name="popup_multiselect">Multiselection</string -->
+    <!-- TODO string name="popup_finish">Finish</string -->
+    <!-- TODO string name="popup_delete">Delete</string -->
+    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <!-- TODO string name="popup_join">Join</string -->
 
     <string name="popup_erase_all">Wyczyść wszystko</string>
     <string name="popup_erase_point">Wyczyść punkty</string>
@@ -641,6 +656,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="plan">PLAN</string>
     <string name="extended">PRZEKRÓJ</string>
     <string name="profile">PROJEKT.</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">Przejkrój rozwinięty</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <!-- TODO string name="v_section">V-SECTION</string -->
@@ -771,6 +790,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- TODO string name="btn_export">Export</string -->
@@ -1028,6 +1048,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Więcej edycji strzałów</string>
     <string name="title_photo_comment">Komentarz zdjęcia</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Eksport szkicu</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">Ponownie załaduj szkic</string>
@@ -1071,6 +1092,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_edit">Ustawienia edycji TopoDroid</string>
     <string name="title_settings_device">Ustawienia urządzenia TopoDroid</string>
     <string name="title_settings_calib">Ustawienia kalibracji TopoDroid</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <string name="title_settings_log">Ustawienia dziennika TopoDroid</string>
 
@@ -1119,6 +1143,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_calib">KALIBRACJE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">URZĄDZENIA</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <!-- UNUSED string name="pref_cat_sketch">MODELE 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
@@ -1227,6 +1252,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_svg_line_dir_summary">Dodaj znacznik orientacji lini w eksporcie SVG</string>
   <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
   <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">stacje KML/JSON</string>
   <string name="pref_kml_stations_summary">Dodaj stacje do eksportu KML/GeoJSON</string>
   <string name="pref_kml_splays_title">domiary KML/JSON</string>
@@ -1455,6 +1482,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_checkAttached_summary">Sprawdź czy stacje są podłączone</string>
   <string name="pref_checkExtend_title">Sprawdzenie przedłużenia strzału</string>
   <string name="pref_checkExtend_summary">Sprawdź, czy wydłużone strzały są ustawione</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Numer kopii zapasowej</string>
   <string name="pref_backup_number_summary">Liczba kopii zapasowych szkicu</string>
   <string name="pref_backup_interval_title">Częstość wykonywania kopi zapasowej</string>

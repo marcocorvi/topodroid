@@ -296,15 +296,18 @@ public class DrawingSvgBase
     int idx = point.mPointType;
     float scale = point.getScaleValue();
     String name = point.getThName( );
+    // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
+      assert( point instanceof DrawingLabelPath );
       float o = (float)(point.mOrientation);
       float s = POINT_SCALE * TDMath.sind( o ) * scale / 10.0f;
       float c = POINT_SCALE * TDMath.cosd( o ) * scale / 10.0f;
       DrawingLabelPath label = (DrawingLabelPath)point;
+      // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy + " text " + label.mPointText );
       // printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
       printPointWithXY( pw, "<text", 0, 0 );
-      pw.format(Locale.US, " font-size=\"%d\"", TDSetting.mSvgLabelSize * scale );
+      pw.format(Locale.US, " font-size=\"%.2f\"", TDSetting.mSvgLabelSize * scale );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\"", TDSetting.mSvgLabelStroke * scale );
       pw.format(Locale.US, " transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">", c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
       pw.format( "%s</text>\n", label.mPointText );
@@ -330,7 +333,7 @@ public class DrawingSvgBase
         pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
           c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
 
-        pw.format("%s\n", sp.getSvg() );
+        pw.format( "%s\n", sp.getSvg() );
         pw.format( end_grp );
         pw.format( end_grp );
       } else {

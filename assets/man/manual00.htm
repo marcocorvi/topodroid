@@ -12,7 +12,7 @@ task more pleasant, not to produce the final map of the cave. For that purpose g
 Nevertheless TopoDroid includes a <i>Cave project Manager</i> that can be used to compose surveys into a cave/karst project.<br><p>
 
 TopoDroid is specifically designed to work with the DistoX, SAP5, and BRIC4. However, survey data can be manually entered.<br>
-<b>Warning</b> Android devices (and acive stlus) can influence the measuments taken with an electronic device, if they are too close.<br><p>
+<b>Warning</b> Android devices (and active stlus) can influence the measuments taken with an electronic device, if they get too close.<br><p>
 
 <b><a href="page_quick.htm">TopoDroid quick guide</a></b><br><p>
 
@@ -22,10 +22,18 @@ TopoDroid is specifically designed to work with the DistoX, SAP5, and BRIC4. How
 <i>TopoDroid is an open-source free app and it is ad-free. It comes with no warranty: by using it you agree that the authors are not responsible for any loss of data you might incur or damage whatsoever, in particular to the DistoX, SAP5, BRIC4. While the authors do their best to provide a bug-free app, this is not guaranteed.</i>
 <hr><br><p>
 
+<h4>TopoDroid base folder</h4>
+The TopoDroid base directory is "TDX", and is under Documents.
+It contains the folders of the drawing tools, "point", "line", and "area", and the 
+device database "device10.sqlite" with the calibration data.
+<br><p>
+
 <h4>Survey data</h4>
-Survey data and sketches are saved in the "TopoDroid" folder.
-This folder is under the private files "Android/data/com.topodroid.DistoX/files",
-and it is <b>deleted</b> when the app is <b>uninstalled</b>.<br><p>
+Survey data and sketches are saved in the "TopoDroid" subfolder of TDX.<br>
+Each survey has a subfolder under "TopoDroid".
+The survey folders are not deleted when a survey is deleted from TopoDroid.<br>
+The "TopoDroid" folder contains the database, "distox14.sqlite", the folder of 
+the exported zip archives, "zip", and that of the cave projects, "thconfig",<br><p>
 
 <h4>Hardware features</h4>
 TopoDroid uses the following hardware features: "bluetooth", "camera", "microphone", "GPS", "multitouch".

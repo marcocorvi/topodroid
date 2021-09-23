@@ -112,8 +112,8 @@
     <string name="ctitle_surface_alpha">Surface transparency</string>
     <string name="ctitle_sketches">Sketches</string>
     <string name="ctitle_legs">Legs visibility</string>
-    <string name="ctitle_manual_leg">New leg</string>
-    <string name="ctitle_bluetooth">Bluetooth</string>
+    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
     <string name="length">length</string>
     <string name="azimuth">azimuth</string>
@@ -304,8 +304,8 @@
 
     <string name="TopoGLPerms">Permissions</string>
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
-    <!-- string name="cperms_optional">Cave3D not fully-functional without:</string -->
-    <!-- string name="cwelcome_title">Cave3D %1$s</string -->
+    <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
+    <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
     <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>

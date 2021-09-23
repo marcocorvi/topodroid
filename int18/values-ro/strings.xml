@@ -5,6 +5,12 @@
     <string name="user_man_ok">Manualul de utilizare tradus a fost instalat</string>
     <string name="user_man_fail">Manualul de utilizare tradus nu a putut fi instalat</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Apasă încă odată BACK pentru a ieși</string>
@@ -121,6 +127,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Metoda</string -->
     <string name="calib_gm_policy">Metodă de grupare</string>
     <string name="calib_gm_undelete">Restaurează datele de calibrare șterse?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Calibrare salvată</string>
     <string name="calib_updated">Calibrare actualizată</string>
     <string name="calib_compute_groups">Se calculează grupurile de date de calibrare …</string>
@@ -219,6 +226,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Se salvează schița &#8230; așteaptă &#8230;</string -->
     <string name="MT_points_none">Punct MobileTopographer lipsă</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
  
     <string name="pleasewait">Așteaptă te rog</string>
     <string name="processing">se procesează …</string>
@@ -271,6 +279,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">Proiectul există</string>
     <string name="error_name_invalid">Numele proiectului e invalid</string>
     <string name="error_name_required">Numele este obligatoriu</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Directorul deja există</string>
     <!-- UNUSED string name="error_nick_required">Numele Secțiunii-X este obligatoriu</string -->
     <string name="error_start_required">Stație de referință este obligatorie</string>
@@ -430,6 +440,11 @@ Refer to the web pages for details.\n
     <string name="popup_curve_pt">Netezește segmentul</string>
     <string name="popup_remove_pt">Șterge punctul</string>
     <string name="popup_append_line">Atașează la linie</string>
+    <!-- TODO string name="popup_multiselect">Multiselection</string -->
+    <!-- TODO string name="popup_finish">Finish</string -->
+    <!-- TODO string name="popup_delete">Delete</string -->
+    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <!-- TODO string name="popup_join">Join</string -->
 
     <string name="popup_erase_all">Șterge tot</string>
     <string name="popup_erase_point">Șterge punctele</string>
@@ -631,6 +646,10 @@ Refer to the web pages for details.\n
     <string name="plan">PLAN</string>
     <string name="extended">PROFIL</string>
     <string name="profile">PROIECȚIE</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">Profil extins</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <string name="v_section">SECȚIUNE-V</string>
@@ -760,6 +779,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- TODO string name="btn_export">Export</string -->
@@ -1016,6 +1036,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">Pachete</string>
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Exportă schița</string>
     <!-- UNUSED string name="title_plot_merge">Îmbină schița</string -->
     <string name="title_plot_reload">Reîncarcă schița</string>
@@ -1059,6 +1080,9 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">Parametri editare</string>
     <string name="title_settings_device">Parametri dispozitiv</string>
     <string name="title_settings_calib">Parametri calibrare</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">Parametri indicatori</string>
     <string name="title_settings_log">Parametri înregistrare jurnal</string>
 
@@ -1104,6 +1128,7 @@ Refer to the web pages for details.\n
   <string name="pref_cat_calib">CALIBRĂRI</string>
   <!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
   <string name="pref_cat_device">Dispozitive</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">FANIOANE</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELE 3D</string -->
   <!-- UNUSED string name="pref_cat_log">JURNALE</string -->
@@ -1210,6 +1235,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">Adaugă semne pentru orientatarea liniilor la exportul SVG</string>
   <string name="pref_svg_stationsize_title">Mărime punct viză</string>
   <string name="pref_svg_stationsize_summary">Mărime text nume viză</string>
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">Stații KML</string>
   <string name="pref_kml_stations_summary">Adaugă stații la exportul KML</string>
   <string name="pref_kml_splays_title">Radieri KML</string>
@@ -1436,6 +1463,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">Verifică dacă punctele de stație sunt atașate (continuitate)</string>
   <string name="pref_checkExtend_title">Verificare extensii viză</string>
   <string name="pref_checkExtend_summary">Verificare dacă extensiile vizei sunt definite</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Număr copii de rezervă</string>
   <string name="pref_backup_number_summary">Numărul de copii de rezervă pentru schițe</string>
   <string name="pref_backup_interval_title">Interval de efectuare copii de rezervă(backup)</string>

@@ -9,6 +9,12 @@
     <string name="user_man_ok">Manual traduzido instalado</string>
     <string name="user_man_fail">Instalação do manual traduzido falhou</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
@@ -124,6 +130,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Regra</string -->
     <string name="calib_gm_policy">Regra de agrupamento</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Calibração salva</string>
     <string name="calib_updated">Calibração atualizada</string>
     <string name="calib_compute_groups">Calculando grupos de dados de calibração &#8230;</string>
@@ -221,6 +228,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Salvando croqui &#8230; por favor espere &#8230;</string -->
     <string name="MT_points_none">Nenhum ponto MobileTopographer</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
 
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">processando &#8230;</string>
@@ -273,6 +281,8 @@ Refer to the web pages for details.\n
     <!-- TODO string name="error_name_exists">Existing project</string -->
     <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Nome exigido</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Diretório já existe</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Estação de referência exigida</string>
@@ -431,6 +441,11 @@ Refer to the web pages for details.\n
     <string name="popup_curve_pt">Suavizar segmento</string>
     <string name="popup_remove_pt">Apagar ponto</string>
     <string name="popup_append_line">Ligar à linha</string>
+    <!-- TODO string name="popup_multiselect">Multiselection</string -->
+    <!-- TODO string name="popup_finish">Finish</string -->
+    <!-- TODO string name="popup_delete">Delete</string -->
+    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <!-- TODO string name="popup_join">Join</string -->
 
     <string name="popup_erase_all">Apagar tudo</string>
     <string name="popup_erase_point">Apagar pontos</string>
@@ -630,6 +645,10 @@ Refer to the web pages for details.\n
     <string name="plan">PLANTA</string>
     <string name="extended">RETIFICADO</string>
     <string name="profile">LONGITUDINAL</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">Perfil retificado</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <string name="v_section">CORTE V</string>
@@ -761,6 +780,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- TODO string name="btn_export">Export</string -->
@@ -1017,6 +1037,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">Pacotes</string>
     <string name="title_photo">Foto/Medições</string>
     <string name="title_photo_comment">Comentário da foto</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Exportar croqui</string>
     <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
     <string name="title_plot_reload">Recarregar croqui</string>
@@ -1060,6 +1081,9 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
     <string name="title_settings_device">Configurações de dispositivo do TopoDroid</string>
     <string name="title_settings_calib">Configurações de calibração do TopoDroid</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">Configurações GEEK do TopoDroid</string>
     <string name="title_settings_log">Configurações de log do TopoDroid</string>
 
@@ -1104,6 +1128,7 @@ Refer to the web pages for details.\n
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">CONFIGURAÇÕES GEEK</string>
   <!-- UNUSED string name="pref_cat_sketch">MODELOS 3D</string -->
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
@@ -1213,6 +1238,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">Incluir indicadores de orientação de linha nos arquivos SVG exportados</string>
   <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
   <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">Bases KML</string>
   <string name="pref_kml_stations_summary">Incluir bases nos arquivos KML exportados</string>
   <string name="pref_kml_splays_title">Medidas auxiliares KML</string>
@@ -1438,6 +1465,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">Verificar se as bases estão conectadas</string>
   <string name="pref_checkExtend_title">Verificar medidas auxiliares de visada</string>
   <string name="pref_checkExtend_summary">Verificar se a visada tem medidas auxiliares definidas</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Quantidade backup</string>
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>

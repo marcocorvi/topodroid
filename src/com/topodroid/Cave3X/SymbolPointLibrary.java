@@ -121,6 +121,8 @@ public class SymbolPointLibrary extends SymbolLibrary
     // String section = res.getString( R.string.p_section );
     symbol = new SymbolPoint( res.getString(R.string.thp_section), SECTION, null, SECTION, 0xffcccccc, p_section, false, 0, DrawingLevel.LEVEL_USER, Symbol.W2D_DETAIL_SYM );
     addSymbol( symbol );
+
+    // TDLog.v("PointLibrary user " + mPointUserIndex + " label " + mPointLabelIndex + " section " + mPointSectionIndex );
   }
 
   void loadUserPoints( Context ctx )

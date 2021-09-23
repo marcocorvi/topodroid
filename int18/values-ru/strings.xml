@@ -5,6 +5,12 @@
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
@@ -219,6 +225,7 @@
     <!-- UNUSED string name="sketch_saving">Сохранение абриса &#8230; обождите&#8230;</string -->
     <string name="MT_points_none">Нет точки MobileTopographer</string>
     <string name="MT_bad_file">Плохойй файл MobileTopographer</string>
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
  
     <string name="pleasewait">Пожалуйста подождите</string>
     <string name="processing">обработка &#8230;</string>
@@ -272,6 +279,8 @@
     <string name="error_name_exists">Такой проект уже существует</string>
     <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Директория уже существует</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Требуется привязка к пикету</string>
@@ -430,6 +439,11 @@
     <string name="popup_curve_pt">Сгладить сегмент</string>
     <string name="popup_remove_pt">Удалить точку</string>
     <string name="popup_append_line">Добавить к линии</string>
+    <!-- TODO string name="popup_multiselect">Multiselection</string -->
+    <!-- TODO string name="popup_finish">Finish</string -->
+    <!-- TODO string name="popup_delete">Delete</string -->
+    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <!-- TODO string name="popup_join">Join</string -->
 
     <string name="popup_erase_all">Стереть все</string>
     <string name="popup_erase_point">Стереть точки</string>
@@ -630,8 +644,12 @@
 
     <string name="plan">ПЛАН</string>
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
-    <string name="extended_profile">Разрез-развертка</string>
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
+    <string name="extended_profile">Разрез-развертка</string>
     <string name="x_section">Поперечное-СЕЧЕНИЕ</string>
     <string name="v_section">Верт-СЕЧЕНИЕ</string>
     <string name="h_section">Гор-СЕЧЕНИЕ</string>
@@ -761,6 +779,7 @@
     <string name="popup_do_scan">Сканировать</string>
     <string name="popup_do_shot">Замер</string>
     <string name="popup_do_clear">Очистить</string>
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Экспорт</string>
@@ -1017,6 +1036,7 @@
     <string name="title_packet_dialog">Пакеты</string>
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Сохранить абрис как</string>
     <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
     <string name="title_plot_reload">Перезагрузить абрис</string>
@@ -1060,6 +1080,9 @@
     <string name="title_settings_edit">TopoDroid  настройки редактирования</string>
     <string name="title_settings_device">TopoDroid  настройки приборов DistoX</string>
     <string name="title_settings_calib">TopoDroid  настройки калибровки</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">TopoDroid Спец настройки программы</string>
     <string name="title_settings_log">TopoDroid  настройки журнала</string>
 
@@ -1105,6 +1128,7 @@
   <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
   <!-- UNUSED string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string -->
   <string name="pref_cat_device">НАСТРОЙКИ УСТРОЙСТВ DistoX</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
   <!-- UNUSED string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string -->
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
@@ -1214,6 +1238,8 @@
   <string name="pref_svg_line_dir_summary">Добавить штрихи направления линии в SVG экспорт</string>
   <string name="pref_svg_stationsize_title">Размер пикетов</string>
   <string name="pref_svg_stationsize_summary">Размер текста подписи пикетов</string>
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">Экспорт пикетов в KML</string>
   <string name="pref_kml_stations_summary">Добавить пикеты в экспорт KML</string>
   <string name="pref_kml_splays_title">Экспорт сплеев в KML</string>
@@ -1443,6 +1469,8 @@
   <string name="pref_checkAttached_summary">Проверять принадлежность пикетов к нитке хода</string>
   <string name="pref_checkExtend_title">Проверка развертки замеров</string>
   <string name="pref_checkExtend_summary">Проверить выставлено ли направление развертки замеров</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Кол-во резервных копий</string>
   <string name="pref_backup_number_summary">Количество резервных копий абрисов</string>
   <string name="pref_backup_interval_title">Интервал сохранения</string>

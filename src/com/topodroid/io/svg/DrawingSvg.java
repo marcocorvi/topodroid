@@ -137,7 +137,7 @@ public class DrawingSvg extends DrawingSvgBase
           }
           // FIXME OK PROFILE
 
-          // TDLog.v( "SVG legs");
+          // TDLog.v( "SVG legs " + plot.getLegs().size() );
           out.write("<g id=\"legs\"\n" );
           out.write("  style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
@@ -166,7 +166,7 @@ public class DrawingSvg extends DrawingSvgBase
             //   }
             // // }
             printSegmentWithClose( pw4, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-            // pw4.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+            pw4.format("\n");
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
@@ -228,26 +228,26 @@ public class DrawingSvg extends DrawingSvgBase
 
 	ArrayList< XSection > xsections = new ArrayList<>();
 
-        // TDLog.v( "SVG commands " + plot.getCommands().size() );
+        // TDLog.v( "SVG scraps " + plot.getScraps().size() );
         for ( Scrap scrap : plot.getScraps() ) {
           ArrayList< DrawingPath > paths = new ArrayList<>();
           scrap.addCommandsToList( paths );
           out.write( "<g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
 
+          // TDLog.v( "SVG paths " + paths.size() + " points" );
+
           out.write("<g id=\"points\">\n");
-/*
-          for ( ICanvasCommand cmd : plot.getCommands() ) {
-            if ( cmd.commandType() != 0 ) continue;
-            DrawingPath path = (DrawingPath)cmd;
-*/
           for ( DrawingPath path : paths ) {
-            StringWriter sw5 = new StringWriter();
-            PrintWriter pw5  = new PrintWriter(sw5);
             if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
-              toSvg( pw5, (DrawingStationPath)path, xoff, yoff );
+              // TDLog.v( "SVG point station");
+              StringWriter sw51 = new StringWriter();
+              PrintWriter pw51  = new PrintWriter(sw51);
+              toSvg( pw51, (DrawingStationPath)path, xoff, yoff );
+              out.write( sw51.getBuffer().toString() );
             } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
               DrawingPointPath point = (DrawingPointPath)path;
               if ( BrushManager.isPointSection( point.mPointType ) ) {
+                // TDLog.v( "SVG point xsection");
                 float xx = xoff+point.cx;
                 float yy = yoff+point.cy;
   	        if ( TDSetting.mAutoXSections ) {
@@ -268,51 +268,48 @@ public class DrawingSvg extends DrawingSvgBase
                   }
                   // pw5.format( end_grp );
   	        } else {
-                  printPointWithCXCY( pw5, "<circle", xx, yy );
-                  pw5.format(Locale.US, " r=\"%d\" ", RADIUS );
-                  // pw5.format(Locale.US, "<circle cx=\"%.2f\" cy=\"%.2f\" r=\"%d\" ", xx, yy, RADIUS );
-                  pw5.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+                  StringWriter sw52 = new StringWriter();
+                  PrintWriter pw52  = new PrintWriter(sw52);
+                  printPointWithCXCY( pw52, "<circle", xx, yy );
+                  pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
+                  pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+                  out.write( sw52.getBuffer().toString() );
   	        }
               } else {
                 String color_str = pathToColor( path );
-                toSvg( pw5, point, color_str, xoff, yoff );
+                StringWriter sw53 = new StringWriter();
+                PrintWriter pw53  = new PrintWriter(sw53);
+                toSvg( pw53, point, color_str, xoff, yoff );
+                out.write( sw53.getBuffer().toString() );
               }
             }
-            out.write( sw5.getBuffer().toString() );
             out.flush();
           }
           out.write( end_grp ); // point
 
+          // TDLog.v( "SVG paths lines" );
+
           out.write( "<g id=\"lines\">\n" );
-/*
-          for ( ICanvasCommand cmd : plot.getCommands() ) {
-            if ( cmd.commandType() != 0 ) continue;
-            DrawingPath path = (DrawingPath)cmd;
-*/
           for ( DrawingPath path : paths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
-              StringWriter sw5 = new StringWriter();
-              PrintWriter pw5  = new PrintWriter(sw5);
-              toSvg( pw5, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
-              out.write( sw5.getBuffer().toString() );
+              StringWriter sw54 = new StringWriter();
+              PrintWriter pw54  = new PrintWriter(sw54);
+              toSvg( pw54, (DrawingLinePath)path, pathToColor(path), xoff, yoff );
+              out.write( sw54.getBuffer().toString() );
             }
             out.flush();
           }
           out.write( end_grp ); // lines
 
-          // TDLog.v( "SVG commands " + plot.getCommands().size() );
+          // TDLog.v( "SVG paths areas" );
+
           out.write( "<g id=\"areas\">\n" );
-/*
-          for ( ICanvasCommand cmd : plot.getCommands() ) {
-            if ( cmd.commandType() != 0 ) continue;
-            DrawingPath path = (DrawingPath)cmd;
-*/
           for ( DrawingPath path : paths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
-              StringWriter sw5 = new StringWriter();
-              PrintWriter pw5  = new PrintWriter(sw5);
-              toSvg( pw5, (DrawingAreaPath) path, pathToColor(path), xoff, yoff );
-              out.write( sw5.getBuffer().toString() );
+              StringWriter sw55 = new StringWriter();
+              PrintWriter pw55  = new PrintWriter(sw55);
+              toSvg( pw55, (DrawingAreaPath) path, pathToColor(path), xoff, yoff );
+              out.write( sw55.getBuffer().toString() );
             } 
             out.flush();
           }
@@ -339,18 +336,21 @@ public class DrawingSvg extends DrawingSvgBase
         // stations
         // TDLog.v( "SVG statioons " + plot.getStations().size() );
         out.write("<g id=\"stations\">\n");
-        StringWriter sw6 = new StringWriter();
-        PrintWriter pw6  = new PrintWriter(sw6);
         if ( TDSetting.mAutoStations ) {
           for ( DrawingStationName name : plot.getStations() ) { // auto-stations
-            toSvg( pw6, name, xoff, yoff );
+            StringWriter sw61 = new StringWriter();
+            PrintWriter pw61  = new PrintWriter(sw61);
+            toSvg( pw61, name, xoff, yoff );
+            out.write( sw61.getBuffer().toString() );
           }
         } else {
           for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
-            toSvg( pw6, st_path, xoff, yoff );
+            StringWriter sw62 = new StringWriter();
+            PrintWriter pw62  = new PrintWriter(sw62);
+            toSvg( pw62, st_path, xoff, yoff );
+            out.write( sw62.getBuffer().toString() );
           }
         }
-        out.write( sw6.getBuffer().toString() );
         out.flush();
         
         out.write( end_grp );
@@ -379,7 +379,7 @@ public class DrawingSvg extends DrawingSvgBase
         PrintWriter pw41x  = new PrintWriter(sw41x);
         pw41x.format(Locale.US, "  <path stroke-width=\"%.2f\" stroke=\"%s\" d=\"", TDSetting.mSvgShotStroke, color );
         printSegmentWithClose( pw41x, xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
-        // pw41x.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />\n", xoff+sh.x1, yoff+sh.y1, xoff+sh.x2, yoff+sh.y2 );
+        pw41x.format("\n");
         out.write( sw41x.getBuffer().toString() );
         out.flush();
       }

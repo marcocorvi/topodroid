@@ -6,6 +6,12 @@
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
     <string name="user_man_fail">Inštalácia prekladu používateľského manuálu zlyhala</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Pre návrat Opätovne stlačte tlačidlo SPÄŤ</string>
@@ -220,6 +226,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">Chýbajúci bod MobileTopographer</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
 
     <string name="pleasewait">Prosím čakajte</string>
     <string name="processing">Prebieha proces</string>
@@ -276,6 +283,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">Existujúci projekt</string>
     <string name="error_name_invalid">Nevhodné meno projektu</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
 	
     <string name="error_dir_exists">Adresár už existuje</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -438,6 +447,7 @@ Refer to the web pages for details.\n
     <string name="popup_remove_pt">Odstrániť bod</string>
     <string name="popup_append_line">Pripojiť ku Čiare</string>
     <string name="popup_multiselect">Viacnásobný výber</string>
+    <!-- TODO string name="popup_finish">Finish</string -->
     <string name="popup_delete">Vymazať</string>
     <string name="popup_decimate">Desatiny</string>
     <string name="popup_join">Spojiť</string>
@@ -646,6 +656,10 @@ Refer to the web pages for details.\n
     <string name="plan">Pôdorys</string>
     <string name="extended">Rozvinutý rez</string>
     <string name="profile">Priemet</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">Zaškrtnuté=Rozvinutý rez Nezaškrtnuté=Priemet</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <!-- TODO string name="v_section">V-SECTION</string -->
@@ -780,6 +794,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Export</string>
@@ -1038,6 +1053,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">Pakety</string>
     <string name="title_photo">Rozšírené možnosti</string>
     <string name="title_photo_comment">Foto poznámka</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_photo_view">Fotografia</string>
     <string name="title_plot_save">Exportovať nákres </string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
@@ -1082,6 +1098,9 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">TopoDroid nastavenia Editácie</string>
     <string name="title_settings_device">TopoDroid nastavenia DistoX</string>
     <string name="title_settings_calib">TopoDroid nastavenia Kalibrácie</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">TopoDroid Špeciálne nastavenia</string>
     <string name="title_settings_log">TopoDroid nastavenia Log-u</string>
 
@@ -1133,6 +1152,7 @@ Refer to the web pages for details.\n
   <string name="pref_cat_calib">NASTAVENIA KALIBRÁCIE</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->  
   <string name="pref_cat_device">NASTAVENIA DISTOX</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">ŠPECIÁLNE NASTAVENIA</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
   
@@ -1243,6 +1263,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">Pridá značku k "orientovaným" Čiarám</string>
   <string name="pref_svg_stationsize_title">Veľkosť staničenia</string>
   <string name="pref_svg_stationsize_summary">Veľkosť názvu Staničení</string>
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">KML staničenia</string>
   <string name="pref_kml_stations_summary">Pridanie staničení do exportu KML</string>
   <string name="pref_kml_splays_title">KML pomocné zámery</string>
@@ -1474,6 +1496,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">Skontroluje, či sú pripojené všetky meračské body k polygónu</string>
   <string name="pref_checkExtend_title">Kontrola Smerovej orientácie</string>
   <string name="pref_checkExtend_summary">Skontroluje, či je definovaná Smerová orientácia na všetkých hlavných zámerách</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Počet záloh dát programu</string>
   <string name="pref_backup_number_summary">Výber počtu záloh dát programu</string>
   <string name="pref_backup_interval_title">Čas intervalu zálohovania dát</string>

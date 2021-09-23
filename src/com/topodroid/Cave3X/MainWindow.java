@@ -169,7 +169,8 @@ public class MainWindow extends Activity
   private static final int HELP_PAGE = R.string.MainWindow;
 
   // -------------------------------------------------------------
-  private boolean say_dialogR     = ! TopoDroidApp.hasTopoDroidDatabase();
+  private boolean say_dialogR     = ! TopoDroidApp.hasTopoDroidDatabase(); // updated by showInitDialogs
+
   private boolean say_no_survey   = true;
   private boolean say_not_enabled = true; // whether to say that BT is not enabled
   private boolean do_check_bt     = true;     // one-time bluetooth check sentinel
@@ -676,8 +677,9 @@ public class MainWindow extends Activity
     // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
   }
 
-  static boolean done_init_dialogs = false;
+  static private boolean done_init_dialogs = false;
 
+  // called also by DialogR
   void showInitDialogs( boolean say_dialog_r )
   {
     TDLog.v( "show init dialogs - already done: " + done_init_dialogs );
@@ -1207,7 +1209,7 @@ public class MainWindow extends Activity
           }
         } else {
           mApp.initEnvironmentFirst( );
-          showInitDialogs( say_dialogR );
+          showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
           resetButtonBar();
         }
       }

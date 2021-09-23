@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<resources>
+
+  <string-array name="csizeButtons">
+     <item name="small1">Pequeno</item>
+     <item name="large">Grande</item>
+  </string-array>
+
+
+  <!-- TODO string-array name="demReduce">
+     <item name="shrink">Subsample</item>
+     <item name="cut">Clip</item>
+  </string-array -->
+</resources>

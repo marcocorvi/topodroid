@@ -5,6 +5,12 @@
     <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">Gestione TopoDroid</string>
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
@@ -119,6 +125,7 @@ Refer to the web pages for details.\n
     <string name="calib_no_coeff">Coefficienti di calibrazione non impostati</string>
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_offgroup_data">Possibili %1$d dati non raggruppati</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
@@ -219,6 +226,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Salvataggio disegno &#8230; attendi &#8230;</string -->
     <string name="MT_points_none">Punto GPS mancante</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
 
     <string name="pleasewait">Attendere &#8230;</string>
     <string name="processing">elaborazione &#8230;</string>
@@ -274,6 +282,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">Progetto esistente</string>
     <string name="error_name_invalid">Nome progetto non valido</string>
     <string name="error_name_required">Nome mancante</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Directory già esistente</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Caposaldo di riferimento mancante</string>
@@ -432,6 +442,7 @@ Refer to the web pages for details.\n
     <string name="popup_remove_pt">Elimina punto</string>
     <string name="popup_append_line">Collega alla linea</string>
     <string name="popup_multiselect">Selezione multipla</string>
+    <!-- TODO string name="popup_finish">Finish</string -->
     <string name="popup_finish">Fine</string>
     <string name="popup_delete">Cancella</string>
     <string name="popup_decimate">Decima</string>
@@ -777,6 +788,7 @@ Refer to the web pages for details.\n
     <string name="popup_do_scan">Scansione</string>
     <string name="popup_do_shot">Tiro</string>
     <string name="popup_do_clear">Pulisci</string>
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">Esporta</string>
@@ -1035,6 +1047,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">Pacchetti</string>
     <string name="title_photo">Foto/Misurazione</string>
     <string name="title_photo_comment">Commento foto</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
     <string name="title_plot_reload">Ricarica disegno</string>
@@ -1078,6 +1091,9 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">Impostazione editing</string>
     <string name="title_settings_device">Impostazione device</string>
     <string name="title_settings_calib">Impostazione calibrazione</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">Flag impostazioni principianti</string>
     <string name="title_settings_log">Impostazione log</string>
 
@@ -1131,6 +1147,7 @@ Refer to the web pages for details.\n
 
   <string name="pref_cat_calib">OPZIONI CALIBRAZIONE</string>
   <string name="pref_cat_device">OPZIONI DISTOX</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">FLAG PRINCIPIANTI</string>
   <!-- UNUSED string name="pref_cat_log">Opzioni log</string -->
 
@@ -1235,6 +1252,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">Aggiungi spunte orientamento linea alla export SVG</string>
   <string name="pref_svg_stationsize_title">Grandezza caposaldo</string>
   <string name="pref_svg_stationsize_summary">Grandezza testo nomi capisaldi</string>
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">Capisaldi KML</string>
   <string name="pref_kml_stations_summary">Capisaldi nell\'export KML</string>
   <string name="pref_kml_splays_title">Splays KML</string>
@@ -1460,6 +1479,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">Controlla se ci sono capisaldi scollegati</string>
   <string name="pref_checkExtend_title">Controllo extend battuta</string>
   <string name="pref_checkExtend_summary">Controlla se gli extend di battuta sono impostati</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Numero Backup</string>
   <string name="pref_backup_number_summary">Numero di backup di sketch file</string>
   <string name="pref_backup_interval_title">Intervallo di backup</string>

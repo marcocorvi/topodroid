@@ -5,6 +5,12 @@
     <string name="user_man_ok">已安装用户手册译本</string>
     <string name="user_man_fail">无法安装用户手册译本</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
+
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
     <string name="double_back">再次点击返回键退出</string>
@@ -120,6 +126,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">原则</string -->
     <string name="calib_gm_policy">组策略</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">保存校准数据</string>
     <string name="calib_updated">更新校准数据</string>
     <string name="calib_compute_groups">计算校准数据组 &#8230;</string>
@@ -219,6 +226,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">无GPS坐标点</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
  
     <string name="pleasewait">请稍后</string>
     <string name="processing">处理 &#8230;</string>
@@ -274,6 +282,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">项目已存在</string>
     <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">目录已经存在</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">输入参考测点</string>
@@ -435,6 +445,7 @@ Refer to the web pages for details.\n
     <string name="popup_remove_pt">删除点</string>
     <string name="popup_append_line">贴到线上</string>
     <string name="popup_multiselect">单击多选</string>
+    <!-- TODO string name="popup_finish">Finish</string -->
     <string name="popup_delete">删除</string>
     <string name="popup_decimate">抽取</string>
     <string name="popup_join">结合</string>
@@ -643,6 +654,10 @@ Refer to the web pages for details.\n
     <string name="plan">平面图</string>
     <string name="extended">延展的剖面图</string>
     <string name="profile">投影剖面图</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">延展剖面图</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <!-- TODO string name="v_section">V-SECTION</string -->
@@ -774,6 +789,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">输出</string>
@@ -1031,6 +1047,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">数据包</string>
     <string name="title_photo">更多测线编辑</string>
     <string name="title_photo_comment">照片注释</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <string name="title_plot_reload">重新导入草图</string>
@@ -1074,6 +1091,9 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">TopoDroid编辑设置</string>
     <string name="title_settings_device">TopoDroid设备设置</string>
     <string name="title_settings_calib">TopoDroid校准设置</string>
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <string name="title_settings_geek">TopoDroid高级设置</string>
     <string name="title_settings_log">TopoDroid日志设置</string>
 
@@ -1122,6 +1142,7 @@ Refer to the web pages for details.\n
   <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">设备</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <string name="pref_cat_geek">高级设置</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -1230,6 +1251,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">添加方向标记到线方向</string>
   <string name="pref_svg_stationsize_title">测量点大小</string>
   <string name="pref_svg_stationsize_summary">测量点名称文本大小</string>
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">KML/JSON 测点</string>
   <string name="pref_kml_stations_summary">添加测点到KML/GeoJSON输出</string>
   <string name="pref_kml_splays_title">KML/JSON 辐测</string>
@@ -1459,6 +1482,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">检测如果测点有附加项</string>
   <string name="pref_checkExtend_title">主线延展检测</string>
   <string name="pref_checkExtend_summary">检测如果已经设置了主线延展</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">备份数</string>
   <string name="pref_backup_number_summary">草图文件备份数</string>
   <string name="pref_backup_interval_title">备份间隔</string>

@@ -48,6 +48,7 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.Build;
 
 import android.app.Activity;
 
@@ -63,11 +64,12 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
+import android.graphics.RectF;
 import android.print.PrintAttributes;
-import android.print.pdf.PrintedPdfDocument;
-// import android.graphics.pdf.PdfDocument;
+// import android.print.pdf.PrintedPdfDocument;
+import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfDocument.Page;
-// import android.graphics.pdf.PdfDocument.PageInfo;
+import android.graphics.pdf.PdfDocument.PageInfo;
 
 import android.net.Uri;
 
@@ -734,7 +736,7 @@ public class OverviewWindow extends ItemDrawer
   // interface IExporter FIXME_URI
   public void doUriExport( Uri uri ) 
   {
-    TDLog.v( "Overview URI export " + mExportIndex );
+    TDLog.v( "Overview URI export: index " + mExportIndex );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
       case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
@@ -767,62 +769,73 @@ public class OverviewWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    if ( android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.KITKAT ) { // pre API-19
+    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ) { // pre API-19
       TDToast.makeBad( R.string.no_feature_pdf );
       return;
     }
-    TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
 
     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // TDLog.v( "Overview PDF export <" + filename + ">");
     try {
-      OutputStream fos = ( uri != null )? TDsafUri.docFileOutputStream( uri ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+      OutputStream fos = null;
+      if ( uri != null ) {
+        TDLog.v( "Export overview PDF: uri " + uri.toString() );
+        fos = TDsafUri.docFileOutputStream( uri );
+      } else {
+        TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
+        fos = new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+      }
 
-      PrintAttributes.Builder builder = new PrintAttributes.Builder();
-      builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-      builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
-      builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
-      builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
-      builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+      // PrintAttributes.Builder builder = new PrintAttributes.Builder();
+      // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
+      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // at least API-23
+      // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
+      // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+      // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+      // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
-      PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
-      Page page = pdf.startPage(0);
-      // must select the zoom to the plot size - however the zoom arg is not for this purpose
-      // RectF bnds = manager.getBitmapBounds();
-      // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
-      // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
-      // float zoom = 1.00f / ( (zw > zh)? zw : zh );
-      // TDLog.v( "PDF export <" + filename + "> Zoom " + zw + " " + zh );
-      manager.executeAll( page.getCanvas(), mZoom, null );
+      RectF bnds = manager.getBitmapBounds();
+      float zw = (bnds.right - bnds.left);
+      float zh = (bnds.bottom - bnds.top);
+      // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
+      PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
+      PageInfo info = builder.create();
+
+      PdfDocument pdf = new PdfDocument( );
+      Page page = pdf.startPage( info );
+
+      page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
+      manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
       pdf.finishPage( page );
       pdf.writeTo( fos );
       pdf.close();
-      fos.close();
+      if ( fos != null ) fos.close();
+      // TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
     } catch ( IOException e ) {
       TDLog.Error("Failed PDF export " + e.getMessage() );
     }
   }
 
-   // private void saveReference( PlotInfo plot, long pid )
-   // {
-   //   // TDLog.v( "save ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-   //   plot.xoffset = mOffset.x;
-   //   plot.yoffset = mOffset.y;
-   //   plot.zoom    = mZoom;
-   //   mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
-   // }
+  // private void saveReference( PlotInfo plot, long pid )
+  // {
+  //   // TDLog.v( "save ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+  //   plot.xoffset = mOffset.x;
+  //   plot.yoffset = mOffset.y;
+  //   plot.zoom    = mZoom;
+  //   mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
+  // }
 
-   // private void resetReference( PlotInfo plot )
-   // {
-   //   mOffset.x = plot.xoffset; 
-   //   mOffset.y = plot.yoffset; 
-   //   mZoom     = plot.zoom;    
-   //   // TDLog.v( "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
-   //   mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
-   //   // mOverviewSurface.refresh();
-   // }
+  // private void resetReference( PlotInfo plot )
+  // {
+  //   mOffset.x = plot.xoffset; 
+  //   mOffset.y = plot.yoffset; 
+  //   mZoom     = plot.zoom;    
+  //   // TDLog.v( "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+  //   mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+  //   // mOverviewSurface.refresh();
+  // }
 
   private float mSave0X, mSave0Y;
   private float mSave1X, mSave1Y;

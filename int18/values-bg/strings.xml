@@ -5,6 +5,11 @@
     <string name="user_man_ok">Инсталирано е преведеното ръководство</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
 
+    <!-- TODO string name="desc_user_man">User manual</string -->
+    <!-- TODO string name="desc_points">Points</string -->
+    <!-- TODO string name="desc_lines">Lines</string -->
+    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
@@ -122,6 +127,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Правила</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
+    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Калибрацията е записана</string>
     <string name="calib_updated">Калибрацията е обновена</string>
     <string name="calib_compute_groups">Изчисляване на калибр. групи…</string>
@@ -220,6 +226,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="sketch_saving">Записване на скица… Моля изчакайте…</string -->
     <string name="MT_points_none">Няма точки на MobileTopographer</string>
     <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
+    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
 
     <string name="pleasewait">Моля изчакайте</string>
     <string name="processing">обработване &#8230;</string>
@@ -272,6 +279,8 @@ Refer to the web pages for details.\n
     <!-- TODO string name="error_name_exists">Existing project</string -->
     <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Необходимо име</string>
+    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+
     <string name="error_dir_exists">Директорията вече съществува</string>
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Необходим репер</string>
@@ -429,6 +438,11 @@ Refer to the web pages for details.\n
     <string name="popup_curve_pt">Изглаждане (с Безие)</string>
     <string name="popup_remove_pt">Изтриване на точката</string>
     <!-- TODO string name="popup_append_line">Append to line</string -->
+    <!-- TODO string name="popup_multiselect">Multiselection</string -->
+    <!-- TODO string name="popup_finish">Finish</string -->
+    <!-- TODO string name="popup_delete">Delete</string -->
+    <!-- TODO string name="popup_decimate">Decimate</string -->
+    <!-- TODO string name="popup_join">Join</string -->
 
     <string name="popup_erase_all">Изтрива всичко</string>
     <string name="popup_erase_point">Изтрива точки</string>
@@ -629,6 +643,10 @@ Refer to the web pages for details.\n
     <string name="plan">План</string>
     <string name="extended">Разг. разрез</string>
     <string name="profile">Проект. разр</string>
+    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
+    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+
     <string name="extended_profile">Разгънат разрез</string>
     <!-- TODO string name="x_section">X-SECTION</string -->
     <string name="v_section">Верт. сечение</string>
@@ -758,6 +776,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
     <!-- TODO string name="popup_do_clear">Clear</string -->
+    <!-- TODO string name="popup_do_off">Off</string -->
 
 
     <!-- UNUSED string name="btn_3d">3D</string -->
@@ -1015,6 +1034,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_packet_dialog">Packets</string -->
     <string name="title_photo">Снимки/Измервания</string>
     <string name="title_photo_comment">Коментар за снимка</string>
+    <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Запис на скица като</string>
     <!-- UNUSED string name="title_plot_merge">Сливане на скици</string -->
     <string name="title_plot_reload">Препрочитане на скица</string>
@@ -1058,6 +1078,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
     <!-- TODO string name="title_settings_device">TopoDroid device settings</string -->
     <!-- TODO string name="title_settings_calib">TopoDroid calibration settings</string -->
+    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
+    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
+    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
     <!-- TODO string name="title_settings_log">TopoDroid log settings</string -->
 
@@ -1102,6 +1125,7 @@ Refer to the web pages for details.\n
 
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
+  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
   <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
   <!-- UNUSED string name="pref_cat_sketch">Настройки 3D модел</string -->
   <!-- UNUSED string name="pref_cat_log">Настройки Лог файл</string -->
@@ -1203,6 +1227,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">Добавяне на помощни черти за посока на линия в SVG експорт</string>
   <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
   <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
+  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
+  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
   <string name="pref_kml_stations_title">KML репери</string>
   <string name="pref_kml_stations_summary">Добавяне на реперите в KML експорт</string>
   <string name="pref_kml_splays_title">KML странични измервания</string>
@@ -1434,6 +1460,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">Проверка дали всички репери са свързани</string>
   <string name="pref_checkExtend_title">Проверка на разгъване</string>
   <string name="pref_checkExtend_summary">Проверка дали всички отсечки са разгънати</string>
+  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
+  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
   <string name="pref_backup_number_title">Брой архиви</string>
   <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
   <string name="pref_backup_interval_title">Интервал на архивиране</string>

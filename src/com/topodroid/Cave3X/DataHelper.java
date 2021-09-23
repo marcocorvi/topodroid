@@ -183,6 +183,7 @@ public class DataHelper extends DataSetObservable
   // UNUSED
   // public SQLiteDatabase getDb() { return myDB; }
 
+  public boolean hasDB() { return myDB != null; }
 
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
   public DataHelper( Context context /* , TopoDroidApp app */ )

@@ -115,7 +115,11 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
-  static boolean hasTopoDroidDatabase() { return ( TDFile.getTopoDroidFile( TDPath.getDatabase() ).exists() ); }
+  static boolean hasTopoDroidDatabase() 
+  { 
+    // return ( TDFile.getTopoDroidFile( TDPath.getDatabase() ).exists() );
+    return mData != null && mData.hasDB();
+  }
 
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
