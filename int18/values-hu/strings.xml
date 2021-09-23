@@ -993,7 +993,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_trox">Trox formátum</string>
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
-    <!-- TODO string name="export_with_reference">Include XY reference</string -->
+    <string name="export_with_reference">XY skála</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
