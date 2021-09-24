@@ -122,6 +122,9 @@
   <string name="TdmSourcesDialog" translatable="false">page_tdm_sources.htm</string>
   <!-- string name="TdmViewEquatesDialog" translatable="false">page_view_equates.htm</string -->
 
+  <string name="DialogIco" translatable="false">page_ico.htm</string>
+  <string name="DialogView" translatable="false">page_3d_view.htm</string>
+
   <string name="PageTodo" translatable="false">page_todo.htm</string>
   <string name="DialogR" translatable="false">page_dialog_r.htm</string>
 </resources>

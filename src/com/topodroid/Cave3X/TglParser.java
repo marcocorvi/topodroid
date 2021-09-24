@@ -75,7 +75,7 @@ public class TglParser
 
   boolean do_render; // whether ready to render
   protected TopoGL mApp;
-  boolean has_temperature = false;
+  // boolean has_temperature = false; // TEMPERATURE
 
   protected ArrayList< Cave3DSurvey >   surveys;
   protected ArrayList< Cave3DFix >      fixes;
@@ -1037,88 +1037,90 @@ public class TglParser
 
   /** compute the stations temperature, by relaxing from the temperature at a set of stations
    *  @param filename   pathname of file with (station_name, temp) pairs
+   *  called by TopoGL when a temperature file is read
    */
-  boolean computeTemperature( InputStreamReader isr, String filename )
-  {
-    has_temperature = false;
-    int sz = stations.size();
-    if ( sz <= 0 ) return false;
-    boolean[] kfix = new boolean[ sz ];
+  // TEMPERATURE
+  // boolean computeTemperature( InputStreamReader isr, String filename )
+  // {
+  //   has_temperature = false; 
+  //   int sz = stations.size();
+  //   if ( sz <= 0 ) return false;
+  //   boolean[] kfix = new boolean[ sz ];
 
-    for ( int k = 0; k < sz; ++k ) {
-      kfix[ k ] = false;
-      stations.get( k ).temp = -1000;
-      // TDLog.v("station " + stations.get( k ).getName() );
-    }
+  //   for ( int k = 0; k < sz; ++k ) {
+  //     kfix[ k ] = false;
+  //     stations.get( k ).temp = -1000;
+  //     // TDLog.v("station " + stations.get( k ).getName() );
+  //   }
  
-    double sum = 0;
-    int nr_fix = 0;
-    try {
-      TDLog.v("filename: " + filename );
-      BufferedReader br = getBufferedReader( isr, filename );
-      String line;
-      while ( (line = br.readLine() ) != null ) {
-        String[] vals = line.trim().split(" ");
-        // fullname = vals[0]   temp = vals[1]
-        int idx = getStationIndex( vals[0] );
-        if ( idx < 0 ) {
-          TDLog.v("missing station " + vals[0] );
-        } else {
-          kfix[idx] = true;
-          double t = Double.parseDouble( vals[1] );
-          stations.get( idx ).temp = t;
-          sum += t;
-          nr_fix ++;
-        }
-      }
-    } catch ( IOException e ) {
-      return false;
-    }
-    if ( nr_fix < 2 ) return false;
-    double t_ave = sum / nr_fix;
-    for ( Cave3DStation st : stations ) {
-      if ( st.temp < -999 ) st.temp = t_ave;
-    }
-         
-    double delta = 0;
-    int iter = 0;
-    do {
-      delta = 0;
-      for ( int k = 0; k < sz; ++k ) {
-        Cave3DStation s1 = stations.get( k );
-        if ( ! kfix[k] ) {
-          double tn = 0;
-          double td = 0;
-          for ( Cave3DShot leg : getLegsAtFrom( s1 ) ) {
-            Cave3DStation s2 = leg.to_station;
-            double w = temperature_weight( leg.len, leg.cln ); 
-            // TDLog.v("t." + s2.name + " " + s2.temp + " " + w );
-            tn += (s2.temp - s1.temp) * w;
-            td += w;
-          }
-          for ( Cave3DShot leg : getLegsAtTo( s1 ) ) {
-            Cave3DStation s2 = leg.from_station;
-            double w = temperature_weight( leg.len, - leg.cln ); 
-            // TDLog.v("f." + s2.name + " " + s2.temp + " " + w );
-            tn += (s2.temp - s1.temp) * w;
-            td += w;
-          }
-          if ( td > 0 ) {
-            double dt = tn / td;
-            if ( Math.abs(dt) > delta ) delta = Math.abs(dt);
-            s1.temp += dt;
-            // TDLog.v("set " + s1.name + " " + s1.temp );
-          }
-        // } else {
-          // TDLog.v("Fix " + s1.name + " " + s1.temp );
-        }
-      }
-      ++ iter;
-      if ( iter % 10 == 0 ) TDLog.v("Temp-relax " + iter + " delta " + delta );
-    } while ( delta > 0.01 && iter < 1000 );
-    TDLog.v("Temp-relax final delta " + delta + " iter " + iter );
-    has_temperature = true;
-    return true;
-  }
+  //   double sum = 0;
+  //   int nr_fix = 0;
+  //   try {
+  //     TDLog.v("filename: " + filename );
+  //     BufferedReader br = getBufferedReader( isr, filename );
+  //     String line;
+  //     while ( (line = br.readLine() ) != null ) {
+  //       String[] vals = line.trim().split(" ");
+  //       // fullname = vals[0]   temp = vals[1]
+  //       int idx = getStationIndex( vals[0] );
+  //       if ( idx < 0 ) {
+  //         TDLog.v("missing station " + vals[0] );
+  //       } else {
+  //         kfix[idx] = true;
+  //         double t = Double.parseDouble( vals[1] );
+  //         stations.get( idx ).temp = t;
+  //         sum += t;
+  //         nr_fix ++;
+  //       }
+  //     }
+  //   } catch ( IOException e ) {
+  //     return false;
+  //   }
+  //   if ( nr_fix < 2 ) return false;
+  //   double t_ave = sum / nr_fix;
+  //   for ( Cave3DStation st : stations ) {
+  //     if ( st.temp < -999 ) st.temp = t_ave;
+  //   }
+  //        
+  //   double delta = 0;
+  //   int iter = 0;
+  //   do {
+  //     delta = 0;
+  //     for ( int k = 0; k < sz; ++k ) {
+  //       Cave3DStation s1 = stations.get( k );
+  //       if ( ! kfix[k] ) {
+  //         double tn = 0;
+  //         double td = 0;
+  //         for ( Cave3DShot leg : getLegsAtFrom( s1 ) ) {
+  //           Cave3DStation s2 = leg.to_station;
+  //           double w = temperature_weight( leg.len, leg.cln ); 
+  //           // TDLog.v("t." + s2.name + " " + s2.temp + " " + w );
+  //           tn += (s2.temp - s1.temp) * w;
+  //           td += w;
+  //         }
+  //         for ( Cave3DShot leg : getLegsAtTo( s1 ) ) {
+  //           Cave3DStation s2 = leg.from_station;
+  //           double w = temperature_weight( leg.len, - leg.cln ); 
+  //           // TDLog.v("f." + s2.name + " " + s2.temp + " " + w );
+  //           tn += (s2.temp - s1.temp) * w;
+  //           td += w;
+  //         }
+  //         if ( td > 0 ) {
+  //           double dt = tn / td;
+  //           if ( Math.abs(dt) > delta ) delta = Math.abs(dt);
+  //           s1.temp += dt;
+  //           // TDLog.v("set " + s1.name + " " + s1.temp );
+  //         }
+  //       // } else {
+  //         // TDLog.v("Fix " + s1.name + " " + s1.temp );
+  //       }
+  //     }
+  //     ++ iter;
+  //     if ( iter % 10 == 0 ) TDLog.v("Temp-relax " + iter + " delta " + delta );
+  //   } while ( delta > 0.01 && iter < 1000 );
+  //   TDLog.v("Temp-relax final delta " + delta + " iter " + iter );
+  //   has_temperature = true;
+  //   return true;
+  // }
 
 }

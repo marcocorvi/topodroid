@@ -288,7 +288,7 @@ public class GlLines extends GlShape
   }
 
   // TEMPERATURE
-  // void prepareTempBuffer( List<Cave3DShot> legs )
+  // void prepareTemperatureBuffer( List<Cave3DShot> legs )
   // {
   //   int count = 2 * legs.size();
   //   if ( count == 0 ) return;

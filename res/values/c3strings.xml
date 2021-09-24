@@ -238,6 +238,8 @@
     <!-- string name="cno_file">No file %1$s\n</string -->
     <string name="empty_survey">Empty survey %1$s\n</string>
 
+    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
+
     <string name="category_surface">SURFACE</string>
     <string name="category_walls">WALLS</string>
     <string name="category_stations">STATIONS</string>

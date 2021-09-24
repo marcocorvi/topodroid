@@ -34,7 +34,7 @@ public class Cave3DStation extends Vector3D
   public String short_name;
   public String name;
 
-  double temp;          // station tempertaure [Celcius]
+  // double temp;          // station tempertaure [Celcius] TEMPERATURE
   double depth;         // depth from Zmax: positive and scaled in [0,1] : 1.0 deepest
   double surface_depth; // depth beneath the surface
   int flag;       // station flag (not used)
@@ -131,7 +131,7 @@ public class Cave3DStation extends Vector3D
     pathlength = Float.MAX_VALUE;
     pathprev = null;
     surface_depth = 0;
-    temp = 0;
+    // temp = 0; // TEMPERATURE
   }
 
   public void setName( String nm )

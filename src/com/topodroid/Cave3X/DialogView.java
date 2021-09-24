@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -25,12 +25,11 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 
-class DialogView extends Dialog 
+class DialogView extends MyDialog 
                  implements View.OnClickListener
 {
   private Button mBtnOk;
 
-  // private Context mContext;
   private TopoGL  mApp;
   private GlRenderer mRenderer;
 
@@ -45,8 +44,7 @@ class DialogView extends Dialog
 
   public DialogView( Context context, TopoGL app, GlRenderer renderer )
   {
-    super( context );
-    // mContext  = context;
+    super( context, R.string.DialogView );
     mApp      = app;
     mRenderer = renderer;
   }
@@ -55,8 +53,7 @@ class DialogView extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_view_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_view_dialog, R.string.view_title );
 
     mButtonOK = (Button) findViewById( R.id.button_ok );
     mButtonCancel = (Button) findViewById( R.id.button_cancel );
@@ -77,7 +74,6 @@ class DialogView extends Dialog
     mCBzoom  = (CheckBox) findViewById( R.id.view_zoom  );
     mCBzoom.setChecked( true );
 
-    setTitle( R.string.view_title );
   }
 
   @Override

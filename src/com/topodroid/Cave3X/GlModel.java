@@ -243,8 +243,10 @@ public class GlModel
 
   synchronized void toggleColorMode() { 
     if ( glLegs != null ) {
-      int max = ( mParser.has_temperature )? GlLines.COLOR_MAX : GlLines.COLOR_MAX - 1;
-      TDLog.v("max color " + max );
+      // int max = ( mParser.has_temperature )? GlLines.COLOR_MAX : GlLines.COLOR_MAX - 1; // TEMPERATURE
+      // TDLog.v("max color " + max );
+      int max = GlLines.COLOR_MAX;
+
       glLegs.toggleColorMode( max );
       if ( glLegsS  != null ) glLegsS.toggleColorMode( max );
       if ( glLegsD  != null ) glLegsD.toggleColorMode( max );
@@ -598,10 +600,10 @@ public class GlModel
   // {
   //   double inv_temp_zmax = prepareStationTemperatureDepth( mParser );
   //   TDLog.v("Model prepare tempertures - inv zmax " + inv_temp_zmax );
-  //   glLegs.prepareTempBuffer(  legsSurvey );
-  //   glLegsS.prepareTempBuffer( legsSurface );
-  //   glLegsD.prepareTempBuffer( legsDuplicate );
-  //   glLegsC.prepareTempBuffer( legsCommented );
+  //   glLegs.prepareTemperatureBuffer(  legsSurvey );
+  //   glLegsS.prepareTemperatureBuffer( legsSurface );
+  //   glLegsD.prepareTemperatureBuffer( legsDuplicate );
+  //   glLegsC.prepareTemperatureBuffer( legsCommented );
   // }
 
   // called by GlRenderer notifyDEM
@@ -1064,22 +1066,23 @@ public class GlModel
     return zmax;
   }
 
+  // TEMPERATURE
   // return inverse of max temperature depth
-  private double prepareStationTemperatureDepth( TglParser parser )
-  {
-    double zmin =  10000;
-    double zmax = -10000;
-    for ( Cave3DStation st : parser.getStations() ) {
-      if ( st.temp < zmin ) zmin = st.temp;
-      if ( st.temp > zmax ) zmax = st.temp;
-    }
-    if ( zmax <= zmin ) return 1.0;
-    zmax = 1.0 / ( zmax - zmin );
-    for ( Cave3DStation st : parser.getStations() ) {
-      st.temp = ( st.temp - zmin ) * zmax;
-    }
-    return zmax;
-  }
+  // private double prepareStationTemperatureDepth( TglParser parser )
+  // {
+  //   double zmin =  10000;
+  //   double zmax = -10000;
+  //   for ( Cave3DStation st : parser.getStations() ) {
+  //     if ( st.temp < zmin ) zmin = st.temp;
+  //     if ( st.temp > zmax ) zmax = st.temp;
+  //   }
+  //   if ( zmax <= zmin ) return 1.0;
+  //   zmax = 1.0 / ( zmax - zmin );
+  //   for ( Cave3DStation st : parser.getStations() ) {
+  //     st.temp = ( st.temp - zmin ) * zmax;
+  //   }
+  //   return zmax;
+  // }
 
   void createModel( )
   {

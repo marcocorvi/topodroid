@@ -553,7 +553,7 @@ public class TopoGL extends Activity
     R.string.cmenu_viewpoint,  // 7
     R.string.cmenu_alpha,
     R.string.cmenu_wall,       // 9
-    // R.string.cmenu_temp,       // 10
+    // R.string.cmenu_temp,       // 10 TEMPERATURE
     R.string.cmenu_sketch,     // 11
     R.string.cmenu_options,
     // R.string.cmenu_fractal, // FRACTAL
@@ -570,10 +570,10 @@ public class TopoGL extends Activity
                           R.string.help_viewpoint_3d,
                           R.string.help_alpha_3d,
                           R.string.help_wall_3d,
-                          // R.string.help_temperature,
+                          // R.string.help_temperature, // TEMPERATURE
                           R.string.help_sketch_3d,
                           R.string.help_prefs,
-                          // R.string.help_fractal,
+                          // R.string.help_fractal, // FRACTAL
                           R.string.help_help
   };
 
@@ -860,7 +860,7 @@ public class TopoGL extends Activity
       mBMcolorSurvey = MyButton.getButtonBackground( this, size, R.drawable.iz_color_survey );
       mBMcolorDepth  = MyButton.getButtonBackground( this, size, R.drawable.iz_color_depth );
       mBMcolorSurface= MyButton.getButtonBackground( this, size, R.drawable.iz_color_surface );
-      // mBMcolorTemp   = MyButton.getButtonBackground( this, size, R.drawable.iz_color_temp );
+      // mBMcolorTemp   = MyButton.getButtonBackground( this, size, R.drawable.iz_color_temp ); // TEMPERATURE
 
       mBMframeGrid   = mButton1[ BTN_FRAME   ].getBitmap();
       mBMframeNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_no );
@@ -1391,41 +1391,41 @@ public class TopoGL extends Activity
     }
   }
 
-  /* TEMPERATURE
-  void openTemperature( Uri uri )
-  {
-    if ( mRenderer == null ) return;
-    String pathname = uri.getPath();
-    try {
-      InputStream is = this.getContentResolver().openInputStream( uri );
-      InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
-      loadTemperature( isr, pathname );
-    } catch ( FileNotFoundException e ) {
-    }
-  }
+  // TEMPERATURE
+  // void openTemperature( Uri uri )
+  // {
+  //   if ( mRenderer == null ) return;
+  //   String pathname = uri.getPath();
+  //   try {
+  //     InputStream is = this.getContentResolver().openInputStream( uri );
+  //     InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
+  //     loadTemperature( isr, pathname );
+  //   } catch ( FileNotFoundException e ) {
+  //   }
+  // }
 
-  private void loadTemperature( final InputStreamReader isr, final String pathname )
-  {
-    (new AsyncTask<String, Void, Boolean>() {
-      public Boolean doInBackground( String ... files ) {
-        // String file = files[0];
-        boolean ret = ( mParser == null )? false : mParser.computeTemperature( isr, pathname );
-        if ( ret && mRenderer != null ) mRenderer.prepareTemperatures();
-        return ret;
-      }
+  // private void loadTemperature( final InputStreamReader isr, final String pathname )
+  // {
+  //   (new AsyncTask<String, Void, Boolean>() {
+  //     public Boolean doInBackground( String ... files ) {
+  //       // String file = files[0];
+  //       boolean ret = ( mParser == null )? false : mParser.computeTemperature( isr, pathname );
+  //       if ( ret && mRenderer != null ) mRenderer.prepareTemperatures();
+  //       return ret;
+  //     }
 
-      public void onPostExecute( Boolean b )
-      {
-        if ( b ) {
-        
-          toast( R.string.temperature_ok, true );
-        } else {
-          toast( R.string.temperature_failed, true );
-        }
-      }
-    }).execute( pathname );
-  }
-  */
+  //     public void onPostExecute( Boolean b )
+  //     {
+  //       if ( b ) {
+  //       
+  //         toast( R.string.temperature_ok, true );
+  //       } else {
+  //         toast( R.string.temperature_failed, true );
+  //       }
+  //     }
+  //   }).execute( pathname );
+  // }
+  // END TEMPERATURE
 
   // load a texture file (either GeoTIFF or OSM)
   // void openTexture( String pathname, String filename )

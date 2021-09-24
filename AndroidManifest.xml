@@ -297,11 +297,5 @@
         </intent-filter -->
       </activity>
 
-      <!-- activity android:name=".TopoGLPreferences"
-                android:screenOrientation="portrait"
-                android:label="@string/app_name">
-      </activity -->
-
-
     </application>
 </manifest> 

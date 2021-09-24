@@ -12,7 +12,8 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.TDLayout;
 
 import java.util.Locale;
 
@@ -42,7 +43,7 @@ import android.view.MotionEvent;
 
 import android.util.DisplayMetrics;
 
-class DialogIco extends Dialog
+class DialogIco extends MyDialog
                 implements OnTouchListener
 {
   private static int SIDE  = 180;
@@ -51,12 +52,11 @@ class DialogIco extends Dialog
   private static int RADIUS = SIDE/2 - 10;
 
   int mNr;
-  private double mTheta; // clino: theta=0 --> +90, theta=PI --> -90
+  private double mTheta; // clino: theta=0 --> +90, theta=PI/2 --> 0, theta=PI --> -90
   private double mPhi;   // azimuth: phi=0 --> North, phi=PI/2 --> East
 
   private ImageView mImage;
   private TextView mText;
-  private Context mContext;
   private IcoDiagram diagram;
   private double mMax;
 
@@ -64,10 +64,11 @@ class DialogIco extends Dialog
   double n2x, n2y, n2z;
   double n3x, n3y, n3z;
 
+  Paint green, cyan, red;
+
   public DialogIco( Context context, TglParser parser )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DialogIco );
 
     DisplayMetrics dm = context.getResources().getDisplayMetrics();
     // double density  = dm.density;
@@ -78,9 +79,22 @@ class DialogIco extends Dialog
     CY = SIDE/2;
     RADIUS = (SIDE - 20)/2;
 
-    mTheta  = 0.0;
+    mTheta  = Math.PI/2.0;
     mPhi    = 0.0;
     prepareIcoDiagram( parser );
+
+    green = new Paint();
+    green.setARGB( 0xff, 0, 0xff, 0 );
+    green.setStyle( Paint.Style.FILL_AND_STROKE );
+    green.setStrokeWidth( 4 );
+    cyan = new Paint();
+    cyan.setARGB( 0xff, 0, 0xff, 0xff );
+    cyan.setStyle( Paint.Style.FILL_AND_STROKE );
+    cyan.setStrokeWidth( 4 );
+    red = new Paint();
+    red.setARGB( 0xff, 0xff, 0, 0xff );
+    red.setStyle( Paint.Style.FILL_AND_STROKE );
+    red.setStrokeWidth( 4 );
   }
 
   private void computeNVectors( )
@@ -97,10 +111,13 @@ class DialogIco extends Dialog
     n2x = -ct*sp; n2y = -ct*cp; n2z = st;  // V2 = V1 ^ V3 = ( cp, -sp, 0 ) ^ ( sp*st, cp*st, ct ) = ( -sp*ct, -(cp*ct), cp*cp*st - (-sp)*sp*st )
     n3x = st*sp;  n3y = st*cp;  n3z = ct;  // V3  
                                            // East = (1,0,0) projects to (n1x, n2x)
+                                           // North = (0,1,0) projects to (n1x, n2y)
+                                           // Vert = (0,0,1) projects to (n1z, n2z)
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
-    pw.format(Locale.US, "Viewing at clino %.0f azimuth %.0f",
+    pw.format(Locale.US, 
+      mContext.getResources().getString( R.string.viewing_at ), // "Viewing at clino %.0f azimuth %.0f",
       90 - mTheta*180/Math.PI, 
       mPhi*180/Math.PI );
     mText.setText( sw.getBuffer().toString() );
@@ -118,8 +135,7 @@ class DialogIco extends Dialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    requestWindowFeature( Window.FEATURE_NO_TITLE );
-    setContentView( R.layout.cave3d_diagram );
+    initLayout( R.layout.cave3d_diagram, -1 ); // -1 = Window.FEATURE_NO_TITLE
 
     mText  = (TextView) findViewById( R.id.viewpoint );
     mImage = (ImageView) findViewById( R.id.image );
@@ -167,23 +183,21 @@ class DialogIco extends Dialog
       paint.setStrokeWidth( 2 );
       canvas.drawPath( path, paint );
     } 
-    Paint green = new Paint();
-    green.setARGB( 0xff, 0, 0xff, 0 );
-    green.setStyle( Paint.Style.FILL_AND_STROKE );
-    green.setStrokeWidth( 4 );
     Path east = new Path();
     east.moveTo( CX, CY );
     east.lineTo( CX + (float)(n1x*400), CY - (float)(n2x*400) );
     canvas.drawPath( east, green );
 
-    Paint cyan = new Paint();
-    cyan.setARGB( 0xff, 0, 0xff, 0xff );
-    cyan.setStyle( Paint.Style.FILL_AND_STROKE );
-    cyan.setStrokeWidth( 4 );
     Path north = new Path();
     north.moveTo( CX, CY );
     north.lineTo( CX + (float)(n1y*400), CY - (float)(n2y*400) );
     canvas.drawPath( north, cyan );
+
+    Path vert = new Path();
+    vert.moveTo( CX, CY );
+    vert.lineTo( CX + (float)(n1z*400), CY - (float)(n2z*400) );
+    canvas.drawPath( vert, red );
+    
     
   }
 
@@ -211,7 +225,7 @@ class DialogIco extends Dialog
   private void changeThetaPhi( double x, double y )
   {
     mTheta += y;
-    if ( mTheta < 0 ) mTheta = 0;
+    if ( mTheta < Math.PI/2 ) mTheta = Math.PI/2;
     if ( mTheta > Math.PI ) mTheta = Math.PI;
     mPhi += x;
     if ( mPhi < 0 ) mPhi += 2*Math.PI;
