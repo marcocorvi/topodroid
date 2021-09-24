@@ -1,8 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO string name="btn_ok">OK</string -->
-    <!-- TODO string name="cbtn_cancel">Cancel</string -->
-    <!-- TODO string name="cbtn_close">Close</string -->
     <!-- TODO string name="cbtn_compute">Compute</string -->
 
     <string name="cbtn_move">Mover</string>

@@ -126,7 +126,7 @@
         android:layout_weight="50"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/cbtn_ok"
+        android:text="@string/button_ok"
         />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
@@ -135,7 +135,7 @@
         android:layout_weight="50"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/cbtn_cancel"
+        android:text="@string/button_cancel"
         />
      </LinearLayout>
 

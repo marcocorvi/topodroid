@@ -25,7 +25,7 @@
       android:layout_weight="1"
       android:layout_height="wrap_content"
       android:gravity="center"
-      android:text="@string/cbtn_close"
+      android:text="@string/button_close"
       / -->
     <Button android:id="@+id/btn_bind"
       android:layout_width="0dp"
@@ -46,7 +46,7 @@
       android:layout_weight="1"
       android:layout_height="wrap_content"
       android:gravity="center"
-      android:text="@string/cbtn_ok"
+      android:text="@string/button_ok"
       />
   </LinearLayout>
 

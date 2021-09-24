@@ -10,7 +10,7 @@
  */
 package com.topodroid.Cave3X;
 
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -25,11 +25,10 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.SeekBar;
 
-class DialogProjection extends Dialog 
-                    implements View.OnClickListener
+class DialogProjection extends MyDialog 
+                       implements View.OnClickListener
 {
   private GlRenderer mRenderer;
-  private Context mContext;
 
   private SeekBar mFocal; // focal / size
   // private SeekBar mNear;
@@ -37,8 +36,7 @@ class DialogProjection extends Dialog
 
   public DialogProjection( Context context, GlRenderer renderer )
   {
-    super( context );
-    mContext  = context;
+    super( context, R.string.DialogProjection );
     mRenderer = renderer;
   }
 
@@ -66,8 +64,9 @@ class DialogProjection extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_projection_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_projection_dialog,
+      ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? R.string.proj_perspective : R.string.proj_orthographic
+    );
 
     mFocal = (SeekBar) findViewById( R.id.focal );
     // mNear  = (SeekBar) findViewById( R.id.near );
@@ -78,13 +77,11 @@ class DialogProjection extends Dialog
     // TextView tvFar   = (TextView) findViewById( R.id.tv_far   );
 
     if ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
-      setTitle( R.string.proj_perspective );
       setProgressLog( mFocal, GlRenderer.FOCAL,  GlRenderer.FOCAL_MIN,  GlRenderer.FOCAL_MAX );
       // setProgress( mNear,  GlRenderer.NEAR_P, GlRenderer.NEAR_P_MIN, GlRenderer.NEAR_P_MAX );
       // setProgress( mFar,   GlRenderer.FAR_P,  GlRenderer.FAR_P_MIN,  GlRenderer.FAR_P_MAX );
       tvFocal.setText( R.string.proj_focal );
     } else {
-      setTitle( R.string.proj_orthographic );
       setProgress( mFocal, GlRenderer.SIDE,   GlRenderer.SIDE_MIN,   GlRenderer.SIDE_MAX );
       // setProgress( mNear,  GlRenderer.NEAR_O, GlRenderer.NEAR_O_MIN, GlRenderer.NEAR_O_MAX );
       // setProgress( mFar,   GlRenderer.FAR_O,  GlRenderer.FAR_O_MIN,  GlRenderer.FAR_O_MAX );
@@ -93,9 +90,9 @@ class DialogProjection extends Dialog
     // tvNear.setText( R.string.proj_near );
     // tvFar.setText( R.string.proj_far );
 
-    Button btn = (Button) findViewById( R.id.btn_ok );
+    Button btn = (Button) findViewById( R.id.button_ok );
     btn.setOnClickListener( this );
-    btn = (Button) findViewById( R.id.btn_cancel );
+    btn = (Button) findViewById( R.id.button_cancel );
     btn.setOnClickListener( this );
 
   }
@@ -103,7 +100,7 @@ class DialogProjection extends Dialog
   @Override
   public void onClick(View view)
   {
-    if ( view.getId() == R.id.btn_ok ) {
+    if ( view.getId() == R.id.button_ok ) {
       if ( mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE ) {
         GlRenderer.FOCAL  = getProgressLog( mFocal, GlRenderer.FOCAL_MIN,  GlRenderer.FOCAL_MAX );
         // GlRenderer.NEAR_P = getProgress( mNear,  GlRenderer.NEAR_P_MIN, GlRenderer.NEAR_P_MAX );

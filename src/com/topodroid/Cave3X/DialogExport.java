@@ -12,9 +12,9 @@
 package com.topodroid.Cave3X;
 
 import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
 // import com.topodroid.c3out.ExportTask;
 import com.topodroid.c3out.ExportData;
+import com.topodroid.ui.MyDialog;
 
 import java.io.File;
 import java.io.FileFilter;
@@ -39,13 +39,12 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.CheckBox;
 
-public class DialogExport extends Dialog 
+public class DialogExport extends MyDialog 
                           implements View.OnClickListener
                           // , AdapterView.OnItemClickListener
 {
   private Button mBtnOk;
 
-  private Context mContext;
   private TopoGL  mApp;
   private TglParser mParser;
 
@@ -75,8 +74,7 @@ public class DialogExport extends Dialog
 
   public DialogExport( Context context, TopoGL app, TglParser parser )
   {
-    super( context );
-    mContext  = context;
+    super( context, R.string.DialogExport );
     mApp      = app;
     mParser   = parser;
     // mDirname  = Cave3DFile.mAppBasePath;
@@ -86,8 +84,7 @@ public class DialogExport extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_export_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_export_dialog, R.string.EXPORT );
 
     // mTVdir      = (TextView) findViewById( R.id.dirname );
     // mETfilename = (EditText) findViewById( R.id.filename );
@@ -140,7 +137,6 @@ public class DialogExport extends Dialog
     // mSurface.setVisibility( View.GONE );
 
     // updateList( mDirname );
-    setTitle( R.string.EXPORT );
   }
 
   // private void updateList( String dirname )

@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -25,27 +25,23 @@ import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
 
-class DialogLegs extends Dialog 
-                  implements View.OnClickListener
+class DialogLegs extends MyDialog 
+                 implements View.OnClickListener
 {
-  private Context mContext;
-
   private CheckBox mCBsurface;
   private CheckBox mCBduplicate;
   private CheckBox mCBcommented;
 
   public DialogLegs( Context context )
   {
-    super( context );
-    mContext  = context;
+    super( context, R.string.DialogLegs );
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_legs_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    super.onCreate( savedInstanceState );
+    initLayout( R.layout.cave3d_legs_dialog, R.string.ctitle_legs );
 
     Button buttonOK     = (Button) findViewById( R.id.button_ok );
     Button buttonCancel = (Button) findViewById( R.id.button_cancel );
@@ -59,8 +55,6 @@ class DialogLegs extends Dialog
     mCBsurface.setChecked(   GlModel.showLegsSurface );
     mCBduplicate.setChecked( GlModel.showLegsDuplicate );
     mCBcommented.setChecked( GlModel.showLegsCommented );
-
-    setTitle( R.string.ctitle_legs );
   }
 
   @Override

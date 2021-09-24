@@ -61,7 +61,7 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:layout_marginTop="25sp"
-        android:text="@string/cbtn_close"
+        android:text="@string/button_close"
         />
 
 </LinearLayout>

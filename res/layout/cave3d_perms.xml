@@ -25,7 +25,7 @@
     <Button android:id="@+id/btn_ok"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content"
-      android:text="@string/cbtn_ok"
+      android:text="@string/button_ok"
       android:layout_marginRight="10dp"
     />
   </LinearLayout>

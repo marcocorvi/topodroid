@@ -28,6 +28,19 @@
       android:text="@string/legs_commented"
     />
 
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_below="@id/commented"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    > 
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
     <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
@@ -42,7 +55,7 @@
           android:layout_weight="50"
           android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
-          android:text="@string/cbtn_ok"
+          android:text="@string/button_ok"
         />
         <Button android:id="@+id/button_cancel"
           style="@style/button_default"
@@ -51,8 +64,9 @@
           android:layout_weight="50"
           android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
-          android:text="@string/cbtn_cancel"
+          android:text="@string/button_cancel"
         />
       </LinearLayout>
+    </LinearLayout>
 
 </LinearLayout>

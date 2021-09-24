@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -23,18 +23,18 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
-
-import java.util.ArrayList;
-import java.util.Locale;
-
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-class DialogInfo extends Dialog 
+import java.util.ArrayList;
+import java.util.Locale;
+
+
+class DialogInfo extends MyDialog 
                  implements OnItemClickListener
-                 // , View.OnClickListener
+                 , View.OnClickListener
 {
   // private Button mBtnOk;
 
@@ -44,11 +44,12 @@ class DialogInfo extends Dialog
 
   private ArrayAdapter<String> mArrayAdapter;
   private ListView mList;
+  private Button   mBTclose;
 
 
   public DialogInfo( TopoGL app, TglParser parser, GlRenderer renderer )
   {
-    super( app );
+    super( app, R.string.DialogInfo );
     mApp   = app;
     mParser = parser;
     mRenderer = renderer;
@@ -58,8 +59,8 @@ class DialogInfo extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_info_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_info_dialog, R.string.INFO );
+
 
     Resources res = mApp.getResources();
 
@@ -109,18 +110,16 @@ class DialogInfo extends Dialog
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
-    setTitle( R.string.INFO );
-
-    // mBtnOk = (Button) findViewById( R.id.button_ok );
-    // mBtnOk.setOnClickListener( this );
+    mBTclose = (Button) findViewById( R.id.button_close );
+    mBTclose.setOnClickListener( this );
   }
 
-  // @Override
-  // public void onClick(View view)
-  // {
-  //   // TDLog.v( "Info onClick()" );
-  //   dismiss();
-  // }
+  @Override
+  public void onClick(View view)
+  {
+    // TDLog.v( "Info onClick()" );
+    dismiss();
+  }
 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)

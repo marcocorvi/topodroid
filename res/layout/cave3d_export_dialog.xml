@@ -21,7 +21,7 @@
       android:hint="filename"
       / -->
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/layout7"
       android:layout_width="fill_parent" 
       android:layout_height="fill_parent"
       android:orientation="horizontal"
@@ -29,7 +29,7 @@
       >
       <LinearLayout
         android:layout_width="0dp"
-        android:layout_weight="70"
+        android:layout_weight="30"
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:layout_marginLeft="10dp"
@@ -104,13 +104,24 @@
           android:text="glTF"
         />
       </LinearLayout>
-    </LinearLayout>
+  </LinearLayout>
 
+  <LinearLayout android:id="@+id/help"
+    android:layout_below="@id/layout7"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    > 
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
     <LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_marginTop="10dp"
       >
         <!-- RadioButton android:id="@+id/debug"
           android:layout_width="0dp"
@@ -132,7 +143,15 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="10dp"
         android:layout_marginRight="10dp"
-        android:text="@string/cbtn_ok"
+        android:text="@string/button_ok"
+        />
+      <Button android:id="@+id/button_cancel"
+        style="@style/button_default"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/button_cancel"
         />
      </LinearLayout>
 
@@ -142,6 +161,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
        / -->
+  </LinearLayout>
 
 
 </LinearLayout>

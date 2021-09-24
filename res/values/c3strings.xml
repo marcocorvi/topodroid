@@ -2,10 +2,6 @@
 <resources>
     <string name="capp_name" translatable="false">Cave3D</string>
 
-    <string name="cbtn_ok">OK</string>
-    <string name="cbtn_cancel">Cancel</string>
-    <string name="cbtn_close">Close</string>
-    <string name="cbtn_save">Save</string>
     <string name="cbtn_bind">Rebind</string>
     <string name="cbtn_compute">Compute</string>
 
