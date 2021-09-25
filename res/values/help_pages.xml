@@ -122,12 +122,21 @@
   <string name="TdmSourcesDialog" translatable="false">page_tdm_sources.htm</string>
   <!-- string name="TdmViewEquatesDialog" translatable="false">page_view_equates.htm</string -->
 
-  <string name="DialogIco" translatable="false">page_ico.htm</string>
+  <string name="DialogIco" translatable="false">page_3d_ico.htm</string>
   <string name="DialogView" translatable="false">page_3d_view.htm</string>
   <string name="DialogExport" translatable="false">page_3d_export.htm</string>
   <string name="DialogInfo" translatable="false">page_3d_info.htm</string>
   <string name="DialogLegs" translatable="false">page_3d_legs.htm</string>
   <string name="DialogProjection" translatable="false">page_3d_proj.htm</string>
+  <string name="DialogFractal" translatable="false">page_3d_fractal.htm</string>
+  <string name="DialogMeasure" translatable="false">page_3d_measure.htm</string>
+  <string name="DialogSketches" translatable="false">page_3d_sketches.htm</string>
+  <string name="DialogSketch" translatable="false">page_3d_sketch.htm</string>
+  <string name="DialogStation" translatable="false">page_3d_station.htm</string>
+  <string name="DialogSurface" translatable="false">page_3d_surface.htm</string>
+  <string name="DialogSurvey" translatable="false">page_3d_survey.htm</string>
+  <string name="DialogSurveys" translatable="false">page_3d_surveys.htm</string>
+  <string name="DialogWalls" translatable="false">page_3d_walls.htm</string>
 
   <string name="PageTodo" translatable="false">page_todo.htm</string>
   <string name="DialogR" translatable="false">page_dialog_r.htm</string>

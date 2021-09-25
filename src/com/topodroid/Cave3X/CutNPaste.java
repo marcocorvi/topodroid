@@ -248,6 +248,22 @@ public class CutNPaste
         ww = textview3.getPaint().measureText( text );
         if ( ww > w ) w = ww;
 
+        if ( TDSetting.isConnectionModeContinuous() ) {
+          // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
+          //
+          text = res.getString( R.string.popup_do_gm_group );
+          textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+            new View.OnClickListener( ) {
+              public void onClick(View v) {
+                // ilister.enableBluetoothButton(false);
+                new DeviceX310TakeShot( ilister, lister, app, 4, DataType.DATA_CALIB ).execute();
+                dismissPopupBT();
+              }
+            } );
+          ww = textview3.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
+        }
+
       } else {
         // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
         //

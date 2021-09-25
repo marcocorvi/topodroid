@@ -11,7 +11,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -30,13 +30,11 @@ import android.widget.ImageView;
 import android.widget.CheckBox;
 import android.widget.RadioButton;
 
-class DialogFractal extends Dialog 
+class DialogFractal extends MyDialog 
                     implements View.OnClickListener
 {
   private TopoGL   mApp;
-  private Context  mContext;
   private CheckBox mCBsplays;
-  private Button mBtnOk;
   private ImageView mImage;
   // private Button mBtnClose;
   private EditText mCell;
@@ -48,8 +46,7 @@ class DialogFractal extends Dialog
 
   public DialogFractal( Context context, TopoGL app, TglParser parser )
   {
-    super( context );
-    mContext  = context;
+    super( context, R.string.DialogFractal );
     mApp    = app;
     mParser = parser;
   }
@@ -58,8 +55,7 @@ class DialogFractal extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.fractal_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout(R.layout.fractal_dialog, R.string.fractal_title );
 
     TextView tv = ( TextView ) findViewById(R.id.fractal_count);
     tv.setText( FractalResult.countsString() );
@@ -67,8 +63,8 @@ class DialogFractal extends Dialog
     tv = (TextView) findViewById( R.id.fractal_computer );
     tv.setText( (FractalResult.computer != null)? "fractal computer is running" : "fractal computer is idle" );
 
-    mBtnOk = (Button) findViewById( R.id.fractal_ok );
-    mBtnOk.setOnClickListener( this );
+    ((Button) findViewById( R.id.fractal_ok )).setOnClickListener( this );
+    ((Button) findViewById( R.id.button_cancel )).setOnClickListener( this );
 
     mCell = (EditText) findViewById( R.id.fractal_cell );
     mCell.setText( Integer.toString( mCellSide ) );
@@ -81,17 +77,20 @@ class DialogFractal extends Dialog
     mRBtotal = (RadioButton) findViewById( R.id.fractal_count_total );
     mRBnghb  = (RadioButton) findViewById( R.id.fractal_count_nghb  );
 
-    setTitle( R.string.fractal_title );
   }
 
   @Override
-  public void onClick(View view)
+  public void onClick( View v )
   {
     // TDLog.v( "Fractal onClick()" );
-    mCellSide = Integer.parseInt( mCell.getText().toString() );
-    int mode = FractalComputer.COUNT_TOTAL;
-    if ( mRBnghb.isChecked() ) mode = FractalComputer.COUNT_NGHB;
-    int ret = FractalResult.compute( mContext, mApp, mParser, mCBsplays.isChecked(), mCellSide, mode );
+    if ( v.getId() == R.id.fractal_ok ) {
+      mCellSide = Integer.parseInt( mCell.getText().toString() );
+      int mode = FractalComputer.COUNT_TOTAL;
+      if ( mRBnghb.isChecked() ) mode = FractalComputer.COUNT_NGHB;
+      int ret = FractalResult.compute( mContext, mApp, mParser, mCBsplays.isChecked(), mCellSide, mode );
+    // } else if ( v.getId() == R.id.button_cancel ) {
+    //   // nothing
+    }
     dismiss();
   }
 

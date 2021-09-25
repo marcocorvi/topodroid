@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import java.io.File;
 import java.io.FilenameFilter;
@@ -23,21 +23,23 @@ import android.content.Context;
 import android.app.Dialog;
 import android.os.Bundle;
 
+import android.view.View.OnClickListener;;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.TextView;
+import android.widget.Button;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
 import android.view.ViewGroup.LayoutParams;
 
 
-class DialogSketch extends Dialog
+class DialogSketch extends MyDialog
                    implements OnItemClickListener
+                   , OnClickListener
 {
-  private Context mContext;
   private TopoGL  mApp;
   private String  mBaseDir;
 
@@ -62,10 +64,9 @@ class DialogSketch extends Dialog
     }
   }
 
-  DialogSketch( Context ctx, TopoGL app )
+  DialogSketch( Context context, TopoGL app )
   {
-    super( ctx );
-    mContext = ctx;
+    super( context, R.string.DialogSketch );
     mApp  = app;
     // mBaseDir = Cave3DFile.mAppBasePath + "/TopoDroid/c3d";
     mBaseDir = Cave3DFile.C3D_PATH;
@@ -77,12 +78,9 @@ class DialogSketch extends Dialog
   {
     super.onCreate( savedInstanceState );
 
-    setContentView(R.layout.cave3d_openfile);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_openfile, R.string.select_sketch_file );
 
-    setTitle( R.string.select_sketch_file );
-    mList = (ListView) findViewById( R.id.list );
-
+    mList = (ListView) findViewById( R.id.sketch_list );
     // mArrayAdapter = new ArrayAdapter<String>( this, R.layout.message );
     mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
@@ -91,6 +89,8 @@ class DialogSketch extends Dialog
     mArrayAdapter = new MyFileAdapter( mContext, this, mList, R.layout.message, mItems );
     updateList( mBaseDir );
     mList.setAdapter( mArrayAdapter );
+
+    ((Button)findViewById( R.id.button_cancel )).setOnClickListener( this );
   }
 
   private void updateList( String basedir )
@@ -147,4 +147,10 @@ class DialogSketch extends Dialog
     dismiss();
   }
 
+  @Override
+  public void onClick( View v ) 
+  {
+    // only for button_cancel
+    dismiss();
+  }
 }

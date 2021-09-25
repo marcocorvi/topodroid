@@ -13,6 +13,7 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
+import com.topodroid.dev.DataType;
 import com.topodroid.Cave3X.ILister;
 import com.topodroid.Cave3X.ListerHandler;
 import com.topodroid.Cave3X.TopoDroidApp;
@@ -47,6 +48,9 @@ public class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   protected Integer doInBackground( Integer... ii )
   {
     int i = mNr;
+    if ( mNr > 1 && mDataType == DataType.DATA_CALIB ) {
+      TDUtil.slowDown( TDSetting.mWaitShot );
+    }
     for ( ; i>1; --i ) {
       // TDLog.v( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
       mApp.setX310Laser( Device.LASER_ON, 0, null, mDataType );

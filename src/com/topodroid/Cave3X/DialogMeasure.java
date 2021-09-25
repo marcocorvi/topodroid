@@ -11,7 +11,7 @@
  */
 package com.topodroid.Cave3X;
 
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -27,17 +27,15 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
-class DialogMeasure extends Dialog 
+class DialogMeasure extends MyDialog 
                     implements View.OnClickListener
 {
     // private Cave3DView mCave3Dview;
-    private Context mContext;
     private TglMeasure mMeasure;
 
     public DialogMeasure( Context context, TglMeasure measure )
     {
-      super(context);
-      mContext   = context;
+      super( context, R.string.DialogMeasure );
       mMeasure   = measure;
     }
 
@@ -45,11 +43,9 @@ class DialogMeasure extends Dialog
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.cave3d_station_distance_dialog);
-        getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+        initLayout( R.layout.cave3d_station_distance_dialog, R.string.STATIONS_DISTANCE );
 
-        Button btn = (Button) findViewById( R.id.btn_close );
-        btn.setOnClickListener( this );
+        ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 
         TextView tv = ( TextView ) findViewById(R.id.st_name);
         tv.setText( mMeasure.st1.name + " - " + mMeasure.st2.name );
@@ -74,11 +70,11 @@ class DialogMeasure extends Dialog
           tv.setVisibility( View.GONE );
         }
 
-        setTitle( R.string.STATIONS_DISTANCE );
     }
 
+    // only button_close
     @Override
-    public void onClick(View v)
+    public void onClick( View v )
     {
       // TDLog.v( "Measure onClick()" );
       dismiss();

@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
@@ -28,7 +28,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
-class DialogStation extends Dialog 
+class DialogStation extends MyDialog 
                     implements View.OnClickListener
 {
   private Button mBtDistance;
@@ -37,15 +37,13 @@ class DialogStation extends Dialog
 
   private TopoGL     mApp;
   private TglParser  mParser;
-  // private GlRenderer mRenderer;
   private Cave3DStation  mStation;
   private DEMsurface  mSurface;
 
   public DialogStation( Context context, TopoGL app, TglParser parser, String fullname, DEMsurface surface )
   {
-    super(context);
+    super(context, R.string.DialogStation );
     mApp     = app;
-    // mRenderer = renderer;
     mParser  = parser;
     mStation = mParser.getStation( fullname );
     mSurface = ( surface != null )? surface : parser.getSurface();
@@ -55,8 +53,7 @@ class DialogStation extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
       super.onCreate(savedInstanceState);
-      setContentView(R.layout.cave3d_station_dialog);
-      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+      initLayout( R.layout.cave3d_station_dialog, R.string.STATIONS );
 
       TextView tv = ( TextView ) findViewById(R.id.st_name);
       tv.setText( mStation.name );
@@ -78,13 +75,7 @@ class DialogStation extends Dialog
       tv = ( TextView ) findViewById(R.id.st_vert);
       tv.setText( sw3.getBuffer().toString() );
 
-      // Button btCenter = (Button) findViewById( R.id.st_center );
-      // btCenter.setOnClickListener( this );
-      // Button btDistance = (Button) findViewById( R.id.st_distance );
-      // btDistance.setOnClickListener( this );
-
-      Button btn_close = (Button) findViewById( R.id.btn_close );
-      btn_close.setOnClickListener( this );
+      ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 
       mTvSurface  = (TextView) findViewById( R.id.st_surface );
       if ( mSurface != null ) {
@@ -98,18 +89,12 @@ class DialogStation extends Dialog
         mTvSurface.setVisibility( View.GONE );
       }
 
-      setTitle( R.string.STATIONS );
   }
 
   @Override
   public void onClick(View v)
   {
-  //   if ( v.getId() == R.id.st_distance ) {
-  //     // mRenderer.toggleStationDistance( true );
-  //     mParser.startStationDistance( mStation );
-  //   // } else if ( v.getId() == R.id.st_center ) {
-  //   //   mRenderer.centerStation( mStation );
-  //   }  
+    // only for button_close
     mApp.closeCurrentStation();
     dismiss();
   }

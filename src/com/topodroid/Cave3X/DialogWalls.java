@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
 import android.app.Dialog;
@@ -27,10 +27,9 @@ import android.widget.CheckBox;
 import android.widget.SeekBar;
 import android.widget.RadioButton;
 
-class DialogWalls extends Dialog 
+class DialogWalls extends MyDialog 
                   implements View.OnClickListener
 {
-  private Context mContext;
   private TopoGL  mApp;
   private TglParser mParser;
 
@@ -55,8 +54,7 @@ class DialogWalls extends Dialog
 
   public DialogWalls( Context context, TopoGL app, TglParser parser )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DialogWalls );
     mApp     = app;
     mParser  = parser;
   }
@@ -65,8 +63,7 @@ class DialogWalls extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_walls_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_walls_dialog, R.string.walls_title );
 
     mETalpha = ( SeekBar ) findViewById(R.id.alpha);
     mETalpha.setProgress( (int)(GlWalls.getAlpha() * 255) );
@@ -134,7 +131,6 @@ class DialogWalls extends Dialog
     mCBconvexhull.setOnClickListener( this );
 
 
-    setTitle( R.string.walls_title );
   }
 
   @Override

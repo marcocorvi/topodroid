@@ -11,8 +11,8 @@
  */
 package com.topodroid.Cave3X;
 
+import com.topodroid.ui.MyDialog;
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
 // import com.topodroid.Cave3X.TDandroid;
 
 import android.os.Bundle;
@@ -28,11 +28,9 @@ import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.graphics.Paint;
 
-class DialogSurface extends Dialog 
+class DialogSurface extends MyDialog 
                     implements View.OnClickListener
 {
-  private Context mContext;
-
   private SeekBar mETalpha;
   // private Button mBtnLoadDEM;
   // private Button mBtnLoadTexture;
@@ -49,21 +47,19 @@ class DialogSurface extends Dialog
   private EditText mNorth;
 
 
-  public DialogSurface( Context ctx, TopoGL app )
+  public DialogSurface( Context context, TopoGL app )
   {
-    super( ctx );
-    mContext = ctx;
+    super( context, R.string.DialogSurface );
     mApp  = app;
-    // mHasLocation = FeatureChecker.checkLocation( ctx ); // WITH-GPS
-    mHasLocation = TDandroid.checkLocation( ctx ); // WITH-GPS
+    // mHasLocation = FeatureChecker.checkLocation( mContext ); // WITH-GPS
+    mHasLocation = TDandroid.checkLocation( mContext ); // WITH-GPS
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_surface_alpha_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_surface_alpha_dialog, R.string.ctitle_surface_alpha );
 
     mETalpha = ( SeekBar ) findViewById(R.id.alpha);
     mETalpha.setProgress( (int)(GlSurface.mAlpha * 255) );
@@ -112,7 +108,6 @@ class DialogSurface extends Dialog
     findViewById( R.id.button_cancel ).setOnClickListener( this );
     findViewById( R.id.dem_load ).setOnClickListener( this );
 
-    setTitle( R.string.ctitle_surface_alpha );
   }
 
   public void onClick(View view)

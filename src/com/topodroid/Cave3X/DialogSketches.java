@@ -11,7 +11,7 @@
  */
 package com.topodroid.Cave3X;
 
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
 
 import java.util.List;
@@ -30,21 +30,19 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-class DialogSketches extends Dialog 
+class DialogSketches extends MyDialog 
                      implements View.OnClickListener
                      // , OnItemClickListener
 {
   // private Button mBtnOk;
 
-  private Context mContext;
   private TopoGL mApp;
   private GlRenderer mRenderer;
   // private List< GlSketch > sketches;
 
-  public DialogSketches( Context ctx, TopoGL app, GlRenderer renderer )
+  public DialogSketches( Context context, TopoGL app, GlRenderer renderer )
   {
-    super( ctx );
-    mContext  = ctx;
+    super( context, R.string.DialogSketches );
     mApp      = app;
     mRenderer = renderer;
     // sketches = renderer.getSketches();
@@ -54,9 +52,8 @@ class DialogSketches extends Dialog
   @Override
   protected void onCreate(Bundle savedInstanceState)
   {
-    super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_sketches_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    super.onCreate(savedInstanceState );
+    initLayout( R.layout.cave3d_sketches_dialog, R.string.ctitle_sketches );
 
     Button mLoad  = (Button) findViewById( R.id.btn_load );
     Button mBind  = (Button) findViewById( R.id.btn_bind );
@@ -80,7 +77,6 @@ class DialogSketches extends Dialog
       sketchAdapter.addSketch( sketch );
     }
 
-    setTitle( R.string.ctitle_sketches );
   }
 
   @Override

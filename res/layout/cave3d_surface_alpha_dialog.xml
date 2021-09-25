@@ -89,7 +89,7 @@
       android:text="@string/surface_gps"
       />
 
-    <LinearLayout
+    <LinearLayout android:id="@+id/layout7"
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_margin="10dp"
@@ -113,11 +113,22 @@
         />
     </LinearLayout>
 
+  <LinearLayout android:id="@+id/help"
+    android:layout_below="@id/layout7"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    > 
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
     <LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_marginTop="10dp"
       >
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
@@ -138,5 +149,6 @@
         android:text="@string/button_cancel"
         />
      </LinearLayout>
+   </LinearLayout>
 
 </LinearLayout>

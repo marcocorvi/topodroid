@@ -14,46 +14,62 @@
     android:layout_height="match_parent"
     tools:ignore="PrivateResource" / -->
 
-  <LinearLayout
-    android:layout_width="fill_parent"
-    android:layout_height="wrap_content"
-    android:layout_margin="10dp"
-    android:orientation="horizontal"
-    >
-    <!-- Button android:id="@+id/btn_close"
-      android:layout_width="0dp"
-      android:layout_weight="1"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/button_close"
-      / -->
-    <Button android:id="@+id/btn_bind"
-      android:layout_width="0dp"
-      android:layout_weight="1"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/cbtn_bind"
-      />
-    <Button android:id="@+id/btn_load"
-      android:layout_width="0dp"
-      android:layout_weight="1"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/sketch_load"
-      />
-    <Button android:id="@+id/btn_ok"
-      android:layout_width="0dp"
-      android:layout_weight="1"
-      android:layout_height="wrap_content"
-      android:gravity="center"
-      android:text="@string/button_ok"
-      />
-  </LinearLayout>
-
   <ListView android:id="@+id/list"
     android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
+    android:layout_height="match_parent"
+    android:layout_marginLeft="15dp" 
+    android:layout_weight="1"
   />  
+
+  <LinearLayout android:id="@+id/help"
+    android:layout_below="@id/list"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginvbig"
+    android:gravity="left"
+    > 
+    <Button android:id="@+id/button_help"
+      style="@style/button_empty"
+      android:text="@string/button_help"
+    />
+    <LinearLayout
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_margin="10dp"
+      >
+      <!-- Button android:id="@+id/btn_close"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/button_close"
+        / -->
+      <Button android:id="@+id/btn_bind"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/cbtn_bind"
+        />
+      <Button android:id="@+id/btn_load"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/sketch_load"
+        />
+      <Button android:id="@+id/btn_ok"
+        android:layout_width="0dp"
+        android:layout_weight="1"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:text="@string/button_ok"
+        />
+    </LinearLayout>
+  </LinearLayout>
+
 
   
 

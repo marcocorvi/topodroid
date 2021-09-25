@@ -12,7 +12,7 @@
 package com.topodroid.Cave3X;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.ui.MyDialog;
 
 import java.util.ArrayList;
 
@@ -25,7 +25,7 @@ import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 
-class DialogSurvey extends Dialog 
+class DialogSurvey extends MyDialog 
                    implements View.OnClickListener
 {
   // private Button mBtnOk;
@@ -35,7 +35,7 @@ class DialogSurvey extends Dialog
 
   public DialogSurvey( TopoGL app, Cave3DSurvey survey )
   {
-    super( app );
+    super( app, R.string.DialogSurvey );
     mApp    = app;
     mSurvey = survey;
   }
@@ -44,8 +44,7 @@ class DialogSurvey extends Dialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
-    setContentView(R.layout.cave3d_survey_dialog);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
+    initLayout( R.layout.cave3d_survey_dialog, mSurvey.name );
 
     TextView tv;
     tv = (TextView) findViewById( R.id.survey_legs );
@@ -57,10 +56,8 @@ class DialogSurvey extends Dialog
     tv = (TextView) findViewById( R.id.survey_splays_length );
     tv.setText( Integer.toString( (int)(mSurvey.mLenSplays) ) );
 
-    Button btn_close = (Button) findViewById( R.id.btn_close );
-    btn_close.setOnClickListener( this );
+    ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 
-    setTitle( mSurvey.name );
   }
 
   @Override
