@@ -22,7 +22,7 @@
   <string name="r_dialog">
 Con Android-R TopoDroid deve usare la propria cartella in "Android/data". TopoDroid non l\'ha trovata e quindi l\'ha creata.\nPuoi copiare in questa cartella i file zip dei tuoi vecchi rilievi.\n\nAttenzione: i file nella nuova cartella verranno cancellati se disinstalli TopoDroid.\n\n
 Fai riferimento alle pagine web per i dettagli.\n
-  </string -->
+  </string>
   <string name="r_checkboxes">Devi confermare tramite le checkbox.</string>
   <string name="r_i_understood">Ho compreso appieno questo avviso</string>
   <string name="r_disclaimer">Sono convinto che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string>
@@ -126,7 +126,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
     <string name="calib_offgroup_data">Possibili %1$d dati fuori gruppo</string>
-    <string name="calib_offgroup_data">Possibili %1$d dati non raggruppati</string>
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
     <string name="calib_compute_groups">Raggruppamento dati in corso</string>
