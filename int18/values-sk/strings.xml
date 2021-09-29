@@ -1736,4 +1736,250 @@ DO NOT REMOVE THIS LINE -->
     <string name="exported">Uložený súbor %1$s</string>
     <string name="export_failed">Export zlyhal</string>
 
+    <!-- 3D VIEWER strings -->
+    <string name="cbtn_compute">Vypočítať</string>
+
+    <string name="cbtn_move">Posun</string>
+    <string name="cbtn_rotate">Otáčanie</string>
+    <string name="cbtn_station">Staničenie</string>
+    <string name="cbtn_splay">Pomocná zámera</string>
+    <string name="cbtn_zoom_in">Zoom +</string>
+    <string name="cbtn_zoom_out">Zoom -</string>
+
+    <string name="cmenu_open">Otvoriť súbor</string>
+    <string name="cmenu_options">Nastavenia</string>
+    <string name="cmenu_reset">Reset</string>
+    <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
+
+    <string name="cmenu_alpha">DEM nepriehľadnosť</string>
+    <string name="cmenu_viewpoint">Pohľad z ...</string>
+    <string name="cmenu_files">Jaskyne</string>
+    <string name="cmenu_export">Export</string>
+    <string name="cmenu_frame">Rám</string>
+    <string name="cmenu_color">Farba</string>
+    <string name="cmenu_info">Info</string>
+    <string name="cmenu_ico">Ico diagram</string>
+    <string name="cmenu_rose">Ružicový diagram</string>
+    <string name="cmenu_wall">Modely Stien</string>
+    <string name="cmenu_fractal">Fraktálne výpočty</string>
+    <string name="cmenu_help">Pomoc</string>
+
+    <string name="fractal_title">Fraktálne výpočty</string>
+    <string name="info_title">INFO</string>
+    <string name="info_surveys">MAPOVANIA</string>
+    <string name="info_axes">Osi: modrá = Sever, zelená = Východ</string>
+    <string name="info_grid">Rám mriežky [m]</string>
+    <string name="info_view">Pohľad z</string>
+    <string name="info_survey">Jaskyne</string>
+    <string name="info_shot">Zámery</string>
+    <string name="info_station">Staničenia</string>
+    <string name="info_length">Dĺžka</string>
+    <string name="info_depth">Hĺbka</string>
+    <string name="info_volume">Objem</string>
+
+    <string name="info_east">Východ</string>
+    <string name="info_north">Sever</string>
+    <string name="info_z">Nadmrská výška</string>
+    <string name="info_grid_value">%1$.0f m</string>
+    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
+    <string name="info_survey_value">%1$d</string>
+    <string name="info_shot_value">Hlavné zámery %1$d, Pomocné zámery %2$d</string>
+    <string name="info_station_value">%1$d</string>
+    <string name="info_length_value">%1$.1f m</string>
+    <string name="info_depth_value">%1$.1f m</string>
+    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_east_value">W %1$.1f E %2$.1f</string>
+    <string name="info_north_value">S %1$.1f N %2$.1f</string>
+    <string name="info_z_value">%1$.1f  %2$.1f</string>
+
+    <string name="query" formatted="false">Jaskyne: %d Zámery: %d Staničenia: %d\nDĺžka: %d Hĺbka: %d</string>
+    <string name="cno_files">Žiadne súbory</string>
+    <string name="reading_file">Číta súbor %1$s</string>
+    <string name="clear">Vyčistiť</string>
+
+    <string name="plan_proj">Pôdorys</string>
+    <string name="profile_proj">Rez</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
+    <string name="measure">Meranie</string>
+
+    <string name="style_stroke">Stroke</string>
+    <string name="style_stroke_fill">Fill &amp; Stroke</string>
+    <string name="style_fill">Fill</string>
+    <string name="surface_projection">Projekcia na DEM</string>
+    <string name="surface_texture">Štruktúra povrchu</string>
+    <string name="dem_file">DEM %1$s</string>
+    <string name="dem_load">Načítať</string>
+
+    <string name="dem_failed">Načítanie DEM zlyhalo</string>
+    <string name="dem_ok">Čítať DEM dáta</string>
+    <string name="texture_file">%1$s</string>
+    <string name="texture_load">Načítať štruktúru</string>
+    <string name="texture_failed">Načítanie štruktúry zlyhalo</string>
+    <string name="texture_ok">Čítať súbor štruktúry</string>
+    <string name="sketch_load">Načítať</string>
+    <string name="sketch_failed">Načítanie Nákresu zlyhalo</string>
+    <string name="sketch_ok">Čítať dáta Nákresu</string>
+
+    <string name="ctitle">%1$s  Uhol: %2$.0f  Azimut: %3$.0f</string>
+    <string name="ctitle_clino"> Uhol: </string>
+    <string name="ctitle_azimuth"> Azimut: </string>
+    <string name="ctitle_surface_alpha">Povrchová nepriehľadnosť</string>
+    <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
+    <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
+    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
+
+    <string name="survey_legs"> Hlavné zámery: </string>
+    <string name="survey_legs_length"> Dĺžka hlavných zámer: </string>
+    <string name="survey_splays"> Pomocné zámery: </string>
+    <string name="survey_splays_length"> Dĺžka pomocných zámer: </string>
+
+    <string name="cave_east"> E: %1$.1f</string>
+    <string name="cave_north"> N: %1$.1f</string>
+    <string name="cave_vert"> Z: %1$.1f</string>
+
+    <string name="cave_distance"> 3D vzdialenosť: %1$.2f</string>
+    <string name="horz_distance"> 2D horizontálna vzdialenosť: %1$.1f</string>
+    <string name="cave_length"> Dĺžka jaskyne: %1$.2f</string>
+    <string name="cave_angle"> Azimut: %1$.0f  Uhol: %2$.0f</string>
+
+    <string name="SURVEYS">JASKYNE</string>
+    <string name="INFO">INFO</string>
+    <string name="EXPORT">EXPORT</string>
+    <string name="STATIONS">MERAČSKÝ BOD</string>
+    <string name="STATIONS_DISTANCE">VZDIALENOSŤ MERAČSKÝCH BODOV</string>
+    <string name="DISTANCE">VZDIALENOSŤ</string>
+    <string name="CENTER">CENTROVANIE</string>
+    <string name="select_survey_file">Cave3D - Vybrať súbor:</string>
+    <string name="select_dem_file">Vyber DEM súbor:</string>
+    <string name="select_texture_file">Vyber súbor:</string>
+    <string name="Wall">Steny</string>
+    <string name="Surface">Povrch</string>
+
+    <string name="view_title">POHĽAD Z</string>
+    <string name="view_top">Vrchu</string>
+    <string name="view_east">Východu</string>
+    <string name="view_north">Severu</string>
+    <string name="view_west">Západu</string>
+    <string name="view_south">Juhu</string>
+    <string name="view_point">Pohľad z</string>
+    <string name="view_zoom">Zoom 1</string>
+
+    <string name="walls_title">STENY</string>
+    <string name="walls_convexhull">Convex Hull</string>
+    <string name="walls_powercrust">Powercrust</string>
+    <string name="walls_hull">Hull</string>
+    <string name="walls_delaunay">Delaunay</string>
+
+    <string name="powercrust_few_splays">Powercrust: príliš málo pomocných zámer</string>
+    <string name="powercrust_failed">Powercrust zlyhanie</string>
+    <string name="powercrust_successful">Powercrust úspešný: %1$d / %2$d</string>
+    <string name="powercrust_dxf_not_supported">powercrust dxf export nie je podporovaný</string>
+
+    <string name="ok_export">OK. Export dokončený %1$s</string>
+
+    <string name="no_planview">Žiadny pôdorys</string>
+    <string name="no_surface">Žiadny povrchový DEM</string>
+
+    <string name="error_file_not_found">Error: súbor nenájdený</string>
+    <string name="error_file_not_readable">Error: súbor nečitateľný</string>
+    <string name="error_io_exception">Error: IO výnimka</string>
+    <string name="error_parser_error">Error: chyba syntaktického analyzátora %1$s</string>
+    <string name="error_export_failed">Error: export zlyhal %1$s</string>
+
+    <string name="warning_not_overwrite">Varovanie: Existujúci súbor neprepísaný %1$s</string>
+    <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
+    <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
+    <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
+    <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
+    <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
+    <string name="warning_no_cwd">Varovanie: Chybná cesta k adresáru</string>
+    <!-- TODO string name="warning_no_file">Warning: no 3d file found</string -->
+    <!-- TODO string name="warning_empty_cwd">Warning: empty base path</string -->
+    <string name="warning_no_parent">Varovanie: Nedá sa ísť do nadradeného priečinka</string>
+    <!-- TODO string name="no_permissions">The app cannot run without the required permissions</string -->
+
+    <string name="done_fractals">Dokončené fraktály</string>
+    <string name="done_convexhull">Dokončené convex-hull walls</string>
+    <string name="fail_convexhull">Zlyhanie - convex-hull walls</string>
+    <string name="done_powercrust">Dokončené powercrust walls</string>
+    <string name="fail_powercrust">Zlyhanie - powercrust walls</string>
+    <string name="done_hull">Dokončené simple-hull walls</string>
+    <string name="fail_hull">Zlyhanie - simple-hull walls</string>
+
+    <string name="no_database">Žiadna databáza\n</string>
+    <string name="cno_survey">Žiadne Mapovanie %1$s\n</string>
+    <!-- UNUSED string name="cno_file">Žiadny súbor %1$s\n</string -->
+    <string name="empty_survey">Prázdny súbor %1$s\n</string>
+
+    <string name="category_surface">POVRCH</string>
+    <string name="category_walls">STENY</string>
+    <string name="category_stations">STANIČENIA</string>
+    <string name="category_grid">MRIEŽKA</string>
+    
+    <!-- UNUSED string name="cpref_base_path_title">Základný adresár</string -->
+    <!-- UNUSED string name="cpref_base_path_summary">Základný adresár/cesta k súborom</string -->
+    <!-- UNUSED string name="cpref_text_size_title">Veľkosť meračských bodov</string -->
+    <!-- UNUSED string name="cpref_text_size_summary">Veľkosť meračských bodov - Staničenia</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Veľkosť ikoniek</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Veľkosť ikoniek na obrazovke</string -->
+    <string name="cpref_selection_radius_title">Rozsah výberu</string>
+    <string name="cpref_selection_radius_summary">Rozsah výberu</string>
+
+    <string name="cpref_station_toast_title">Dialóg Staničenia</string>
+    <string name="cpref_station_toast_summary">Dialóg dát Staničenia namiesto boxu [n]</string>
+    <string name="cpref_station_points_title">Staničenia</string>
+    <string name="cpref_station_points_summary">)Vždy zobrazí body Staničenia [n]</string>
+    <string name="cpref_station_size_title">Veľkosť bodov Staničenia</string>
+    <string name="cpref_station_size_summary">Veľkosť bodov Staničenia [8 pxl]</string>
+    <string name="cpref_measure_dialog_title">Správa o vzdialenosti</string>
+    <string name="cpref_measure_dialog_summary">Správa o vzdialenosti namiesto boxu [n]</string>
+ 
+    <string name="cpref_grid_above_title">Mriežka navrchu</string>
+    <string name="cpref_grid_above_summary">Zaškrtnuté = mriežka hore</string>
+    <string name="cpref_grid_extent_title">Mriežka - rozsah</string>
+    <string name="cpref_grid_extent_summary">Rozsah mriežky okolo Mapovania</string>
+    <string name="cpref_neg_clino_title">Pohľady spod horizontu</string>
+    <string name="cpref_neg_clino_summary">Dovoliť pohľady aj spod horizontu</string>
+    <string name="cpref_dem_buffer_title">DEM buffer</string>
+    <string name="cpref_dem_buffer_summary">DEM rozsah okolo Mapovania</string>
+   
+    <string name="cpref_dem_maxsize_title">DEM max. veľkosť</string>
+    <string name="cpref_dem_maxsize_summary">Maximálny počet buniek [400]</string>
+    <string name="cpref_dem_reduce_title">DEM redukcia</string>
+    <string name="cpref_dem_reduce_summary">DEM v redukčnom móde [shrink]</string>
+  
+    <string name="cpref_all_splay_title">Všetky pomocné zámery</string>
+    <string name="cpref_all_splay_summary">Použiť všetky pomocné zámery pre zobrazenie stien</string>
+    <string name="cpref_splay_proj_title">Pomocné zámery z rezu</string>
+    <string name="cpref_splay_proj_summary">Či sa majú použiť pomocné zámery z rozvinutého rezu na pôdorys [n]</string>
+    <string name="cpref_splay_thr_title">Prah pomocných zámer</string>
+    <string name="cpref_splay_thr_summary">Prah kedy sa nebudú zobrazovať pomocné zámery [0.5]</string>
+
+    <string name="cpref_split_triangles_title">Rozdeliť trojuholníky</string>
+    <string name="cpref_split_triangles_summary">Rozdeliť pretínajúce sa stenové trojuholníky</string>
+    <string name="cpref_split_random_title">Náhodné body</string>
+    <string name="cpref_split_random_summary">Náhodné body na stenách</string>
+    <string name="cpref_split_stretch_title">Roztiahnuť steny</string>
+    <string name="cpref_split_stretch_summary">Roztiahnuť body na stenách pozdĺž hlavných zámer</string>
+
+    <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
+    <string name="cpref_powercrust_delta_summary">Filtrovanie pomocných zámer</string>
+<!--
+    <string name="cpref_convex_hull_title">Convex hull</string>
+    <string name="cpref_convex_hull_summary">Convex hull walls</string>
+    <string name="cpref_delaunay_title">Delaunay</string>
+    <string name="cpref_delaunay_summary">Delaunay walls</string>
+    <string name="cpref_hull_title">Hull</string>
+    <string name="cpref_hull_summary">Hull walls</string>
+-->
+
+    <string name="TopoGLPerms">Povolenia</string>
+    <string name="cperms_mandatory">Cave3D nemôže fungovať bez týchto povolení:</string>
+    <!-- UNUSED string name="cperms_optional">Cave3D môže zlyhať bez týchto povolení:</string -->
+    <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
+    <string name="chelp_title">Cave3D %1$s Pomoc</string>
+
 </resources>

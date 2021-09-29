@@ -1703,4 +1703,246 @@ Refer to the web pages for details.\n
   <!-- TODO string name="imported_settings">Imported settings</string -->
     <!-- TODO string name="export_failed">Failed export</string -->
 
+    <!-- 3D VIEWER strings -->
+    <!-- TODO string name="cbtn_compute">Compute</string -->
+
+    <string name="cbtn_move">Mover</string>
+    <string name="cbtn_rotate">Girar</string>
+    <string name="cbtn_station">Base</string>
+    <string name="cbtn_splay">Medida Auxiliar</string>
+    <string name="cbtn_zoom_in">Zoom +</string>
+    <string name="cbtn_zoom_out">Zoom -</string>
+
+    <string name="cmenu_open">Abrir arquivo</string>
+    <string name="cmenu_options">Opções</string>
+    <string name="cmenu_reset">Reiniciar</string>
+    <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
+
+    <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
+    <string name="cmenu_viewpoint">Ponto de vista</string>
+    <string name="cmenu_files">Topos</string>
+    <string name="cmenu_export">Exportar</string>
+    <string name="cmenu_frame">Quadro</string>
+    <string name="cmenu_color">Cor</string>
+    <string name="cmenu_info">Info</string>
+    <string name="cmenu_ico">Diagrama Ico</string>
+    <string name="cmenu_rose">Diagrama Rose</string>
+    <string name="cmenu_wall">Modo parede</string>
+    <!-- TODO string name="cmenu_fractal">Fractal counts</string -->
+    <!-- TODO string name="cmenu_help">Help</string -->
+
+    <!-- TODO string name="fractal_title">Fractal counts</string -->
+
+    <string name="info_title">INFO</string>
+    <!-- TODO string name="info_surveys">SURVEYS</string -->
+    <string name="info_axes">Eixos: azul Norte, verde Leste</string>
+    <string name="info_grid">Grade quadro [m]</string>
+    <string name="info_view">Ponto de vista</string>
+    <string name="info_surveys">Topos</string>
+    <!-- TODO string name="info_shot">Shots</string -->
+    <!-- TODO string name="info_station">Stations</string -->
+    <string name="info_length">Comprimento</string>
+    <string name="info_depth">Profundidade</string>
+    <string name="info_volume">Volume</string>
+
+    <!-- TODO string name="info_east">East</string -->
+    <!-- TODO string name="info_north">North</string -->
+    <!-- TODO string name="info_z">Altitude</string -->
+    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
+    <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
+    <!-- TODO string name="info_survey_value">%1$d</string -->
+    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
+    <!-- TODO string name="info_station_value">%1$d</string -->
+    <!-- TODO string name="info_length_value">%1$.1f m</string -->
+    <!-- TODO string name="info_depth_value">%1$.1f m</string -->
+    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+    <!-- TODO string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string -->
+    <!-- TODO string name="info_east_value">W %1$.1f E %2$.1f</string -->
+    <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
+    <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
+
+    <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
+    <string name="cno_files">Nenhum arquivo</string>
+    <!-- TODO string name="reading_file">Reading file %1$s</string -->
+    <!-- TODO string name="clear">Clear</string -->
+
+    <!-- TODO string name="plan_proj">Plan</string -->
+    <!-- TODO string name="profile_proj">Profile</string -->
+    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string -->
+    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
+    <!-- TODO string name="measure">measure</string -->
+
+    <!-- TODO string name="style_stroke">Stroke</string -->
+    <!-- TODO string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- TODO string name="style_fill">Fill</string -->
+    <!-- TODO string name="surface_projection">Projection on DEM</string -->
+    <!-- TODO string name="surface_texture">Surface texture</string -->
+    <!-- TODO string name="dem_file">DEM %1$s</string -->
+    <!-- TODO string name="dem_load">load</string -->
+
+    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
+    <!-- TODO string name="dem_ok">Read DEM data</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_load">load texture</string -->
+    <!-- TODO string name="texture_failed">Failed texture loading</string -->
+    <!-- TODO string name="texture_ok">Read texture file</string -->
+    <!-- TODO string name="sketch_load">Load</string -->
+    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
+    <!-- TODO string name="sketch_ok">Read sketch data</string -->
+
+    <string name="ctitle">%1$s  inclinação: %2$.0f  Azimute: %3$.0f</string>
+    <string name="ctitle_clino"> Inclinação: </string>
+    <string name="ctitle_azimuth"> Azimute: </string>
+    <!-- TODO string name="ctitle_surface_alpha">Surface opacity</string -->
+    <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
+    <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
+    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
+
+    <string name="survey_legs"> Visadas: </string>
+    <string name="survey_legs_length"> Comprimento das visadas: </string>
+    <string name="survey_splays"> Medidas auxiliares: </string>
+    <string name="survey_splays_length"> Comprimento das medidas auxiliares: </string>
+
+    <!-- TODO string name="cave_east"> E: %1$.1f</string -->
+    <!-- TODO string name="cave_north"> N: %1$.1f</string -->
+    <!-- TODO string name="cave_vert"> Z: %1$.1f</string -->
+
+    <string name="cave_distance"> Distância 3D: %1$.2f</string>
+    <!-- TODO string name="horz_distance"> 2D horizontal distance: %1$.1f</string -->
+    <string name="cave_length"> Comprimento da caverna: %1$.2f</string>
+    <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
+
+    <string name="SURVEYS">T O P O S</string>
+    <string name="INFO">I N F O</string>
+    <string name="EXPORT">E X P O R T A R</string>
+    <string name="STATIONS">B A S E</string>
+    <string name="STATIONS_DISTANCE">DISTÂNCIA BASES</string>
+    <string name="DISTANCE">DISTÂNCIA</string>
+    <!-- TODO string name="CENTER">CENTER</string -->
+    <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
+    <!-- TODO string name="select_texture_file">Select a texture file:</string -->
+    <string name="Wall">Paredes</string>
+    <string name="Surface">Superfície</string>
+
+    <string name="view_title">PONTOS DE VISTA</string>
+    <string name="view_top">Topo</string>
+    <string name="view_east">Leste</string>
+    <string name="view_north">Norte</string>
+    <string name="view_west">Oeste</string>
+    <string name="view_south">Sul</string>
+    <string name="view_point">Ponto de vista</string>
+    <string name="view_zoom">Zoom 1</string>
+
+    <!-- TODO string name="walls_title">WALLS</string -->
+    <!-- TODO string name="walls_convexhull">Convex Hull</string -->
+    <!-- TODO string name="walls_powercrust">Powercrust</string -->
+    <!-- TODO string name="walls_hull">Hull</string -->
+    <!-- TODO string name="walls_delaunay">Delaunay</string -->
+
+    <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
+    <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
+    <!-- TODO string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
+    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
+
+    <!-- TODO string name="ok_export">OK. Exported %1$s</string -->
+
+    <!-- TODO string name="no_planview">No plan view</string -->
+    <!-- TODO string name="no_surface">No surface DEM</string -->
+
+    <!-- TODO string name="error_file_not_found">Error: file not found</string -->
+    <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->
+    <!-- TODO string name="error_io_exception">Error: IO exception</string -->
+    <!-- TODO string name="error_parser_error">Error: parser error %1$s</string -->
+    <!-- TODO string name="error_export_failed">Error: failed export %1$s</string -->
+
+    <!-- TODO string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
+    <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
+    <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
+    <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
+    <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
+    <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
+    <!-- TODO string name="warning_no_cwd">Warning: missing initial directory</string -->
+    <!-- TODO string name="warning_no_parent">Warning: cannot go to parent folder</string -->
+
+    <!-- TODO string name="done_fractals">Done fractals dims</string -->
+    <!-- TODO string name="done_convexhull">Done convex-hull walls</string -->
+    <!-- TODO string name="fail_convexhull">Failed convex-hull walls</string -->
+    <!-- TODO string name="done_powercrust">Done powercrust walls</string -->
+    <!-- TODO string name="fail_powercrust">Failed powercrust walls</string -->
+    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
+    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
+
+    <!-- TODO string name="no_database">No database\n</string -->
+    <!-- TODO string name="no_survey">No survey %1$s\n</string -->
+    <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
+    <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
+
+    <!-- TODO string name="category_surface">SURFACE</string -->
+    <!-- TODO string name="category_walls">WALLS</string -->
+    <!-- TODO string name="category_stations">STATIONS</string -->
+    <!-- TODO string name="category_grid">GRID</string -->
+    
+    <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->
+    <!-- UNUSED string name="cpref_base_path_summary">Diretório base da app</string -->
+    <!-- UNUSED string name="cpref_text_size_title">Tamanho do texto</string -->
+    <!-- UNUSED string name="cpref_text_size_summary">Tamanho rótulo base</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Tamanho botões</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Tamanho dos botões</string -->
+    <string name="cpref_selection_radius_title">Raio seleção</string>
+    <string name="cpref_selection_radius_summary">Raio da seleção</string>
+
+    <!-- TODO string name="cpref_station_toast_title">Station dialog</string -->
+    <!-- TODO string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string -->
+    <!-- TODO string name="cpref_station_points_title">Station points</string -->
+    <!-- TODO string name="cpref_station_points_summary">Display stations always [n]</string -->
+    <!-- TODO string name="cpref_station_size_title">Station point size</string -->
+    <!-- TODO string name="cpref_station_size_summary">Size of station points [8 pxl]</string -->
+    <!-- TODO string name="cpref_measure_dialog_title">Distance message</string -->
+    <!-- TODO string name="cpref_measure_dialog_summary">Distance message instead of doalog [n]</string -->
+ 
+    <string name="cpref_grid_above_title">Grade topo</string>
+    <string name="cpref_grid_above_summary">Grade no topo</string>
+    <!-- TODO string name="cpref_grid_extent_title">Grid extent</string -->
+    <!-- TODO string name="cpref_grid_extend_summary">Grid extent arond the survey</string -->
+    <!-- TODO string name="cpref_neg_clino_title">Below-horizon views</string -->
+    <!-- TODO string name="cpref_neg_clino_summary">Allow below-horizon viewpoints</string -->
+    <!-- TODO string name="cpref_dem_buffer_title">DEM buffer</string -->
+    <!-- TODO string name="cpref_dem_buffer_summary">DEM extent around survey</string -->
+   
+    <!-- TODO string name="cpref_dem_maxsize_title">DEM max size</string -->
+    <!-- TODO string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string -->
+    <!-- TODO string name="cpref_dem_reduce_title">DEM reduce</string -->
+    <!-- TODO string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string -->
+  
+    <string name="cpref_all_splay_title">Todas medidas auxiliares</string>
+    <string name="cpref_all_splay_summary">Todas as medidas auxialires</string>
+    <!-- TODO string name="cpref_splay_proj_title">Projected splays</string -->
+    <!-- TODO string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string -->
+    <!-- TODO string name="cpref_splay_thr_title">Splay threshold</string -->
+    <!-- TODO string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string -->
+
+    <string name="cpref_split_triangles_title">Partir triângulos</string>
+    <string name="cpref_split_triangles_summary">Partir triângulos das paredes</string>
+    <string name="cpref_split_random_title">Ruído pontos</string>
+    <string name="cpref_split_random_summary">Ruído pontos paredes</string>
+    <string name="cpref_split_stretch_title">Alongar paredes</string>
+    <string name="cpref_split_stretch_summary">Alongar pontos das paredes na direção da visada</string>
+    <!-- TODO string name="cpref_powercrust_delta_title">Powercrust Delta</string -->
+    <!-- TODO string name="cpref_powercrust_delta_summary">Splay filtering</string -->
+<!--
+    <string name="cpref_convex_hull_title">Convex hull</string>
+    <string name="cpref_convex_hull_summary">Convex hull walls</string>
+    <string name="cpref_delaunay_title">Delaunay</string>
+    <string name="cpref_delaunay_summary">Delaunay walls</string>
+    <string name="cpref_hull_title">Hull</string>
+    <string name="cpref_hull_summary">Hull walls</string>
+-->
+
+    <!-- TODO string name="TopoGLPerms">Permissions</string -->
+    <!-- TODO string name="cperms_mandatory">Cave3D cannot run without these permissions:</string -->
+    <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
+    <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
+    <!-- TODO string name="chelp_title">Cave3D %1$s Help</string -->
+
 </resources>

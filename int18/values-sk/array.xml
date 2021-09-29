@@ -275,4 +275,21 @@
      <item name="hexm">M Hex</item>
   </string-array -->
 
+  <!-- 3D VIEWER array strings -->
+  <!-- UNUSED string-array name="csizeButtons">
+     <item name="small1">Malé</item>
+     <item name="large">Veľké</item>
+  </string-array -->
+
+  <string-array name="demReduce">
+     <item name="shrink">Podvzorka</item>
+     <item name="cut">Strih</item>
+  </string-array>
+
+  <!-- TODO string-array name="splayUse">
+     <item name="skip">Skip</item>
+     <item name="normal">Normal</item>
+     <item name="xsection">X-Section</item>
+  </string-array -->
+
 </resources>

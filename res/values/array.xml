@@ -657,4 +657,34 @@
      <item name="powercrust">2</item>
   </string-array -->
 
+  <!-- 3D VIEWER array strings -->
+  <!-- UNUSED string-array name="csizeButtons">
+     <item name="small1">Small</item>
+     <item name="large">Large</item>
+  </string-array>
+  <string-array name="csizeButtonsValue" translatable="false">
+     <item name="small">1</item>
+     <item name="large">2</item>
+  </string-array -->
+
+  <string-array name="demReduce">
+     <item name="shrink">Subsample</item>
+     <item name="cut">Clip</item>
+  </string-array>
+  <string-array name="demReduceValue" translatable="false">
+     <item name="shrink">1</item>
+     <item name="cut">2</item>
+  </string-array>
+
+  <string-array name="splayUse">
+     <item name="skip">Skip</item>
+     <item name="normal">Normal</item>
+     <item name="xsection">X-Section</item>
+  </string-array>
+  <string-array name="splayUseValue" translatable="false">
+     <item name="skip">0</item>
+     <item name="normal">1</item>
+     <item name="xsection">2</item>
+  </string-array>
+
 </resources>
