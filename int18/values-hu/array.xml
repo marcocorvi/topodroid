@@ -298,22 +298,20 @@
      <item name="hexm">M Hexa</item>
   </string-array>
 
-  <!-- TODO  3D VIEWER array strings 
   <string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
+     <item name="small1">Kicsi</item>
+     <item name="large">Nagy</item>
   </string-array>
 
   <string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
+     <item name="shrink">Ritkítás</item>
+     <item name="cut">Vágás</item>
   </string-array>
 
   <string-array name="splayUse">
-     <item name="skip">Skip</item>
-     <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
+     <item name="skip">Kihagy</item>
+     <item name="normal">Normális</item>
+     <item name="xsection">Keresztmetszet</item>
   </string-array>
-  -->
 
 </resources>
