@@ -283,7 +283,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Nome exigido</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Diretório já existe</string>
+    <!-- UNUSED string name="error_dir_exists">Diretório já existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Estação de referência exigida</string>
     <!-- UNUSED string name="error_station_already_fixed">Base já tem coordenadas</string -->
@@ -323,10 +323,10 @@ Refer to the web pages for details.\n
     <string name="fixed">fixa</string>
     <string name="painted">pintada</string>
 
-    <string name="cbd_title">Diretório base</string>
+    <!-- UNUSED string name="cbd_title">Diretório base</string -->
     <string name="cwd">Diretório de projetos do TopoDroid</string>
     <string name="empty_cwd">Nome de projeto vazio</string>
-    <string name="bad_cbd">Diretório base inexistente ou não liberado para escrita</string>
+    <!-- UNUSED string name="bad_cbd">Diretório base inexistente ou não liberado para escrita</string -->
     <string name="bad_cwd">O nome do projeto não pode incluir um diretório</string>
     <string name="bad_line">Tipo de linha inválido</string>
     <string name="bad_point">Tipo de ponto inválido</string>
@@ -1075,7 +1075,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">Configurações de tela de desenho do TopoDroid</string>
     <string name="title_settings_point">Configurações de pontos do TopoDroid</string>
     <string name="title_settings_line">Configurações de linhas do TopoDroid</string>
-    <string name="title_settings_walls">Configurações de paredes automáticas do TopoDroid</string>
+    <!-- UNUSED string name="title_settings_walls">Configurações de paredes automáticas do TopoDroid</string -->
     <string name="title_settings_draw">Configurações de desenho do TopoDroid</string>
     <string name="title_settings_erase">Configurações da borracha do TopoDroid</string>
     <string name="title_settings_edit">Configurações de edição do TopoDroid</string>
@@ -1538,6 +1538,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Unidade coordenadas</string>
   <string name="pref_unit_location_summary">Unidade para visualização de coordenadas</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">PAREDES AUTOMÁTICAS</string>
   <string name="pref_walls_type_title">Tipo paredes</string>
   <string name="pref_walls_type_summary">Tipo das paredes</string>
@@ -1551,6 +1552,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Concavidade máxima [percentual]</string>
   <string name="pref_walls_xstep_title">Passo</string>
   <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">ator de correção para min-algo (em [0,1])</string>
@@ -1681,7 +1683,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="menu_new">NEW</string -->
     <!-- TODO string name="menu_equate">ADD EQUATE</string -->
     <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
 

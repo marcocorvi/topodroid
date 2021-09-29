@@ -12,8 +12,8 @@
 package com.topodroid.ptopo;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.DistoXStationName;
-import com.topodroid.Cave3X.StationPolicy;
+import com.topodroid.DistoX.DistoXStationName;
+import com.topodroid.DistoX.StationPolicy;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -286,7 +286,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_required">Wymagana nazwa</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Katalog już istnieje</string>
+    <!-- UNUSED string name="error_dir_exists">Katalog już istnieje</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Wymagany punkt referencyjny</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -327,10 +327,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fixed">stały</string>
     <string name="painted">pomalowany</string>
 
-    <string name="cbd_title">Katalog główny</string>
+    <!-- UNUSED string name="cbd_title">Katalog główny</string -->
     <string name="cwd">katalog projektu TopoDroid</string>
     <string name="empty_cwd">Pusta nazwa projektu</string>
-    <string name="bad_cbd">Katalog główny nie istnieje lub nie można go zapisywać</string>
+    <!-- UNUSED string name="bad_cbd">Katalog główny nie istnieje lub nie można go zapisywać</string -->
     <string name="bad_cwd">Nazwa projektu nie może być ścieżką</string>
     <string name="bad_line">Zły typ lini</string>
     <string name="bad_point">Zły typ punktu</string>
@@ -1086,7 +1086,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_screen">Ustawienia ekranu TopoDroid</string>
     <string name="title_settings_point">Ustawienia punktu TopoDroid</string>
     <string name="title_settings_line">Ustawienia lini TopoDroid</string>
-    <string name="title_settings_walls">Ustawienia automatycznych ścian TopoDroid</string>
+    <!-- UNUSED string name="title_settings_walls">Ustawienia automatycznych ścian TopoDroid</string -->
     <string name="title_settings_draw">Ustawienia rysunku TopoDroid</string>
     <string name="title_settings_erase">Ustawienia usuwania TopoDroid</string>
     <string name="title_settings_edit">Ustawienia edycji TopoDroid</string>
@@ -1555,6 +1555,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_unit_location_title">Jednostki lokalizacji</string>
   <string name="pref_unit_location_summary">Jednostki wyświetlania dla lokalizacji</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">AUTO ŚCIANY</string>
   <string name="pref_walls_type_title">Typy ścian</string>
   <string name="pref_walls_type_summary">Typy ścian</string>
@@ -1568,6 +1569,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_walls_concave_summary">Max wklęsłośc [procenty]</string>
   <string name="pref_walls_xstep_title">Krok</string>
   <string name="pref_walls_xstep_summary">Rozdzielenie puntków wzdłuż ściany [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo współczynnik dopasowania (in [0,1])</string>
@@ -1697,7 +1699,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="menu_new">NEW</string -->
     <!-- TODO string name="menu_equate">ADD EQUATE</string -->
     <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
 

@@ -13,8 +13,8 @@ package com.topodroid.dev.distox1;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.Cave3X.DeviceActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.DistoX.R;
 // import com.topodroid.dev.DeviceA3Details;
 import com.topodroid.dev.distox.IMemoryDialog;
 

@@ -11,7 +11,7 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.DistoX.TDandroid;
 
 public class TDColor
 {
@@ -80,7 +80,7 @@ public class TDColor
   public static final int CONNECTED    = FIXED_RED;
   public static final int COMPUTE      = VIOLET;
   public static final int NAME_COLOR   = 0xff66cc99;
-  // public static final int PREF_TEXT    = 0xff33ccff;
+  // public static final int PREF_TEXT    = 0xff66a8dd;
   public static final int SYMBOL_TAB   = 0xff80cbc4;
   public static final int SYMBOL_ON    = 0xffb6dbff; // LIGHT_BLUE
 

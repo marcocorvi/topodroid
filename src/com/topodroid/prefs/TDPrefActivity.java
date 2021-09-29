@@ -14,14 +14,14 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.ui.TDLayout;
-import com.topodroid.Cave3X.TDandroid;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.TDLevel;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.TDPath;
-import com.topodroid.Cave3X.TopoDroidApp;
-// import com.topodroid.Cave3X.CWDActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDandroid;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDLevel;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TopoDroidApp;
+// import com.topodroid.DistoX.CWDActivity;
+import com.topodroid.DistoX.R;
 
 import android.content.Intent;
 import android.content.Context;
@@ -169,7 +169,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_PLOT_SCREEN:        mPrefs = TDPref.makeScreenPrefs(   this, hlp ); break;
       case TDPrefCat.PREF_TOOL_LINE:          mPrefs = TDPref.makeLinePrefs(     this, hlp ); break;
       case TDPrefCat.PREF_TOOL_POINT:         mPrefs = TDPref.makePointPrefs(    this, hlp ); break;
-      case TDPrefCat.PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs(    this, hlp ); break;
+      // case TDPrefCat.PREF_PLOT_WALLS:         mPrefs = TDPref.makeWallsPrefs(    this, hlp ); break; // AUTOWALLS
       case TDPrefCat.PREF_PLOT_DRAW:          mPrefs = TDPref.makeDrawPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_PLOT_ERASE:         mPrefs = TDPref.makeErasePrefs(    this, hlp ); break;
       case TDPrefCat.PREF_PLOT_EDIT:          mPrefs = TDPref.makeEditPrefs(     this, hlp ); break;
@@ -206,7 +206,7 @@ public class TDPrefActivity extends Activity
         mCwdPref.setValue( TDInstance.cwd );
         View v = mCwdPref.getView();
         if ( v != null ) {
-          final Intent cwd_intent = new Intent( mCtx, com.topodroid.Cave3X.CWDActivity.class ); // this
+          final Intent cwd_intent = new Intent( mCtx, com.topodroid.DistoX.CWDActivity.class ); // this
           v.setOnClickListener( new OnClickListener() {
             @Override
             public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
@@ -235,7 +235,7 @@ public class TDPrefActivity extends Activity
       if ( mPtCmapPref != null ) {
         View v = mPtCmapPref.getView();
 	if ( v != null ) {
-          final Intent pt_intent = new Intent( mCtx, com.topodroid.Cave3X.PtCmapActivity.class ); // this
+          final Intent pt_intent = new Intent( mCtx, com.topodroid.DistoX.PtCmapActivity.class ); // this
           v.setOnClickListener( 
             new OnClickListener() {
               @Override
@@ -265,7 +265,6 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_PLOT_SCREEN",         TDPrefCat.PREF_PLOT_SCREEN );
       linkPreference( "DISTOX_TOOL_LINE",           TDPrefCat.PREF_TOOL_LINE );
       linkPreference( "DISTOX_TOOL_POINT",          TDPrefCat.PREF_TOOL_POINT );
-      // linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_DEVICE ) {
       linkPreference( "DISTOX_CALIB_PREF",          TDPrefCat.PREF_CATEGORY_CALIB );
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_CAVE3D ) {
@@ -276,7 +275,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_SPLAY",          TDPrefCat.PREF_GEEK_SPLAY );
       linkPreference( "DISTOX_GEEK_PLOT",           TDPrefCat.PREF_GEEK_PLOT );
       linkPreference( "DISTOX_GEEK_LINE",           TDPrefCat.PREF_GEEK_LINE );
-      linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS );
+      // linkPreference( "DISTOX_PLOT_WALLS",          TDPrefCat.PREF_PLOT_WALLS ); // AUTOWALLS
       linkPreference( "DISTOX_GEEK_DEVICE",         TDPrefCat.PREF_GEEK_DEVICE );
       linkPreference( "DISTOX_GEEK_IMPORT",         TDPrefCat.PREF_GEEK_IMPORT );
       // linkPreference( "DISTOX_SKETCH_PREF",         TDPrefCat.PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D

@@ -281,7 +281,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Необходимо име</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Директорията вече съществува</string>
+    <!-- UNUSED string name="error_dir_exists">Директорията вече съществува</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Необходим репер</string>
     <!-- UNUSED string name="error_station_already_fixed">Репера вече има координати</string -->
@@ -321,10 +321,10 @@ Refer to the web pages for details.\n
     <string name="fixed">Фиксиран</string>
     <string name="painted">Боядисан</string>
 
-    <string name="cbd_title">Базова директория</string>
+    <!-- UNUSED string name="cbd_title">Базова директория</string -->
     <string name="cwd">TopoDroid директория за картировки</string>
     <string name="empty_cwd">Празно име на проект/картировка</string>
-    <string name="bad_cbd">Базовата директория не съществува или е само за четене</string>
+    <!-- UNUSED string name="bad_cbd">Базовата директория не съществува или е само за четене</string -->
     <string name="bad_cwd">Името на проекта не може да бъде директория</string>
     <string name="bad_line">Невалиден тип линия</string>
     <string name="bad_point">Невалиден тип точка</string>
@@ -1072,7 +1072,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_settings_screen">TopoDroid canvas settings</string -->
     <!-- TODO string name="title_settings_point">TopoDroid point settings</string -->
     <!-- TODO string name="title_settings_line">TopoDroid line settings</string -->
-    <!-- TODO string name="title_settings_walls">TopoDroid autowalls settings</string -->
+    <!-- UNUSED string name="title_settings_walls">TopoDroid autowalls settings</string -->
     <!-- TODO string name="title_settings_draw">TopoDroid drawing settings</string -->
     <!-- TODO string name="title_settings_erase">TopoDroid erasing settings</string -->
     <!-- TODO string name="title_settings_edit">TopoDroid editing settings</string -->
@@ -1533,6 +1533,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Формат на координати</string>
   <string name="pref_unit_location_summary">Формат на координати</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">Автоматични стени</string>
   <string name="pref_walls_type_title">Тип стени</string>
   <string name="pref_walls_type_summary">Тип стени</string>
@@ -1546,6 +1547,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Максимална вдлъбнатост [процент]</string>
   <string name="pref_walls_xstep_title">Максимално разстояние</string>
   <string name="pref_walls_xstep_summary">Максимално разстояние м/у точки на стената [m]</string>
+-->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -1673,7 +1675,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="menu_new">NEW</string -->
     <!-- TODO string name="menu_equate">ADD EQUATE</string -->
     <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
 

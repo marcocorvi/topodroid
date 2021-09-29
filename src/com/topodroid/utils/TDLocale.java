@@ -13,8 +13,8 @@ package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDPrefActivity;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.BrushManager;
 
 import android.os.Build;
 import android.content.Context;

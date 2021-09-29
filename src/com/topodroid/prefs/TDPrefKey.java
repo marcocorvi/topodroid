@@ -12,7 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDString;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 public class TDPrefKey
 {
@@ -191,7 +191,6 @@ public class TDPrefKey
     "DISTOX_TOOL_POINT",     // 8  FORWARD
     "DISTOX_TOOL_LINE",      //    FORWARD
     "DISTOX_PLOT_SCREEN",    //    FORWARD
-    // "DISTOX_PLOT_WALLS",     // 11 FORWARD
     null
   };
 
@@ -211,7 +210,6 @@ public class TDPrefKey
     R.string.pref_tool_point_title,
     R.string.pref_tool_line_title,
     R.string.pref_plot_screen_title,
-    // R.string.pref_plot_walls_title,
     -1
   };
 
@@ -231,7 +229,6 @@ public class TDPrefKey
     -1,
     -1,
     -1,
-    // -1,
     -1
   };
 
@@ -251,7 +248,6 @@ public class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
-    // TDString.EMPTY,
     null
   };
 
@@ -1140,42 +1136,43 @@ public class TDPrefKey
 
 
   // ------------------------------------------------------------------------------
-  public static String[] WALLS = { // [6]
-    "DISTOX_WALLS_TYPE",         // 
-    "DISTOX_WALLS_PLAN_THR",     // clino threshold for splays to contrinute to walls in plan view
-    "DISTOX_WALLS_EXTENDED_THR", // clino threshold for splays to contribute to walls in profile view
-    "DISTOX_WALLS_XCLOSE",       // 
-    "DISTOX_WALLS_CONCAVE",      // allowed "concavity"
-    "DISTOX_WALLS_XSTEP",        // 
-    null
-  };
+  // AUTOWALLS
+  // public static String[] WALLS = { // [6]
+  //   "DISTOX_WALLS_TYPE",         // 
+  //   "DISTOX_WALLS_PLAN_THR",     // clino threshold for splays to contrinute to walls in plan view
+  //   "DISTOX_WALLS_EXTENDED_THR", // clino threshold for splays to contribute to walls in profile view
+  //   "DISTOX_WALLS_XCLOSE",       // 
+  //   "DISTOX_WALLS_CONCAVE",      // allowed "concavity"
+  //   "DISTOX_WALLS_XSTEP",        // 
+  //   null
+  // };
 
-  static int[] WALLStitle = {
-    R.string.pref_walls_type_title,
-    R.string.pref_walls_plan_thr_title,
-    R.string.pref_walls_extended_thr_title,
-    R.string.pref_walls_xclose_title,
-    R.string.pref_walls_concave_title,
-    R.string.pref_walls_xstep_title
-  };
+  // static int[] WALLStitle = {
+  //   R.string.pref_walls_type_title,
+  //   R.string.pref_walls_plan_thr_title,
+  //   R.string.pref_walls_extended_thr_title,
+  //   R.string.pref_walls_xclose_title,
+  //   R.string.pref_walls_concave_title,
+  //   R.string.pref_walls_xstep_title
+  // };
 
-  static int[] WALLSdesc = {
-    R.string.pref_walls_type_summary,
-    R.string.pref_walls_plan_thr_summary,
-    R.string.pref_walls_extended_thr_summary,
-    R.string.pref_walls_xclose_summary,
-    R.string.pref_walls_concave_summary,
-    R.string.pref_walls_xstep_summary
-  };
+  // static int[] WALLSdesc = {
+  //   R.string.pref_walls_type_summary,
+  //   R.string.pref_walls_plan_thr_summary,
+  //   R.string.pref_walls_extended_thr_summary,
+  //   R.string.pref_walls_xclose_summary,
+  //   R.string.pref_walls_concave_summary,
+  //   R.string.pref_walls_xstep_summary
+  // };
 
-  public static String[] WALLSdef = {
-    TDString.ZERO,
-    "70",
-    "45",
-    "0.1",
-    "0.1",
-    "1.0"
-  };
+  // public static String[] WALLSdef = {
+  //   TDString.ZERO,
+  //   "70",
+  //   "45",
+  //   "0.1",
+  //   "0.1",
+  //   "1.0"
+  // };
 
   // ------------------------------------------------------------------------------
   public static String[] DRAW = { // [13]
@@ -1682,7 +1679,7 @@ public class TDPrefKey
     "DISTOX_GEEK_SPLAY",      // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
     "DISTOX_GEEK_LINE",       // FORWARD
-    "DISTOX_PLOT_WALLS",      // FORWARD
+    // "DISTOX_PLOT_WALLS",      // FORWARD // AUTOWALLS
     "DISTOX_GEEK_DEVICE",     // FORWARD
     "DISTOX_GEEK_IMPORT",     // FORWARD
     // "DISTOX_SKETCH_PREF",     // FORWARD FIXME_SKETCH_3D
@@ -1697,7 +1694,7 @@ public class TDPrefKey
     R.string.pref_cat_splay,
     R.string.pref_cat_drawing,
     R.string.pref_tool_line_title,
-    R.string.pref_plot_walls_title,
+    // R.string.pref_plot_walls_title, // AUTOWALLS
     R.string.pref_cat_device,
     R.string.pref_cat_import_export,
     // R.string.pref_cat_sketch,
@@ -1712,10 +1709,10 @@ public class TDPrefKey
     -1,
     -1,
     -1,
+    // -1, // AUTOWALLS
     -1,
-    -1,
-    // -1,
     -1
+    // -1, // SKETCH
   };
 
   public static String[] GEEKdef = {
@@ -1726,7 +1723,7 @@ public class TDPrefKey
     TDString.EMPTY,
     TDString.EMPTY,
     TDString.EMPTY,
-    TDString.EMPTY,
+    // TDString.EMPTY, // AUTOWALLS
     TDString.EMPTY,
     TDString.EMPTY,
     // TDString.EMPTY,

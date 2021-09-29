@@ -12,7 +12,7 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.Cave3X.DBlock;
+import com.topodroid.DistoX.DBlock;
 
 /** a splay has the coordinates of the endpoint
  */

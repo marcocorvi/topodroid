@@ -13,8 +13,8 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.DeviceActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.DistoX.R;
 
 // import android.app.Dialog;
 

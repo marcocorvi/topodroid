@@ -284,7 +284,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">输入名称</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">目录已经存在</string>
+    <!-- UNUSED string name="error_dir_exists">目录已经存在</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">输入参考测点</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -325,10 +325,10 @@ Refer to the web pages for details.\n
     <string name="fixed">修复</string>
     <string name="painted">画图</string>
 
-    <string name="cbd_title">基本目录</string>
+    <!-- UNUSED string name="cbd_title">基本目录</string -->
     <string name="cwd">TopoDroid 项目目录</string>
     <string name="empty_cwd">空的项目名称</string>
-    <string name="bad_cbd">基本目录不存在或不可写</string>
+    <!-- UNUSED string name="bad_cbd">基本目录不存在或不可写</string -->
     <string name="bad_cwd">项目名称不能是路径</string>
     <string name="bad_line">错误的线型</string>
     <string name="bad_point">错误的点型</string>
@@ -1085,7 +1085,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">TopoDroid画布设置</string>
     <string name="title_settings_point">TopoDroid点设置</string>
     <string name="title_settings_line">TopoDroid线设置</string>
-    <string name="title_settings_walls">TopoDroid自动洞壁设置</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid自动洞壁设置</string -->
     <string name="title_settings_draw">TopoDroid绘画设置</string>
     <string name="title_settings_erase">TopoDroid擦除设置</string>
     <string name="title_settings_edit">TopoDroid编辑设置</string>
@@ -1557,6 +1557,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">位置单位</string>
   <string name="pref_unit_location_summary">显示位置单位</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">自动洞壁</string>
   <string name="pref_walls_type_title">洞壁类型</string>
   <string name="pref_walls_type_summary">洞壁类型</string>
@@ -1570,6 +1571,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">最大凹度 [百分比]</string>
   <string name="pref_walls_xstep_title">步骤</string>
   <string name="pref_walls_xstep_summary">沿着洞壁的点的分离 [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string>
@@ -1700,7 +1702,7 @@ Refer to the web pages for details.\n
     <string name="menu_new">新建</string>
     <string name="menu_equate">添加相同</string>
     <string name="menu_equates">相同</string>
-    <string name="menu_save">保存</string>
+    <!-- UNUSED string name="menu_save">保存</string -->
 
     <string name="overwrite">重写</string>
 

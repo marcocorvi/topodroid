@@ -286,7 +286,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
 	
-    <string name="error_dir_exists">Adresár už existuje</string>
+    <!-- UNUSED string name="error_dir_exists">Adresár už existuje</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Vyžaduje sa referenčný bod</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -327,10 +327,10 @@ Refer to the web pages for details.\n
     <string name="fixed">Fixný príznak</string>
     <string name="painted">Iný príznak</string>
 
-    <string name="cbd_title">Hlavný adresár</string>
+    <!-- UNUSED string name="cbd_title">Hlavný adresár</string -->
     <string name="cwd">Adresár projektu TopoDroid</string>
     <string name="empty_cwd">Prázdny názov projektu</string>
-    <string name="bad_cbd">Hlavný adresár neexistuje, alebo je nečitateľný</string>
+    <!-- UNUSED string name="bad_cbd">Hlavný adresár neexistuje, alebo je nečitateľný</string -->
     <string name="bad_cwd">Názov projektu nemôže byť cestou</string>
     <string name="bad_line">Nesprávny typ riadku</string>
     <string name="bad_point">Nesprávny typ bodu</string>
@@ -1092,7 +1092,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">TopoDroid nastavenia Kreslenia</string>
     <string name="title_settings_point">TopoDroid nastavenia Bodov</string>
     <string name="title_settings_line">TopoDroid nastavenia Čiar</string>
-    <string name="title_settings_walls">TopoDroid nastavenia Automatického kreslenia</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid nastavenia Automatického kreslenia</string -->
     <string name="title_settings_draw">TopoDroid nastavenia Kreslenia</string>
     <string name="title_settings_erase">TopoDroid nastavenia Mazania</string>
     <string name="title_settings_edit">TopoDroid nastavenia Editácie</string>
@@ -1575,6 +1575,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Jednotky polohy</string>
   <string name="pref_unit_location_summary">Výber Jednotiek polohy</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">NASTAVENIA AUTOMATICKÉHO KRESLENIA</string>
   <string name="pref_walls_type_title">Typ stien</string>
   <string name="pref_walls_type_summary">Typ stien</string>
@@ -1588,6 +1589,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Maximálna konkávnosť [percent]</string>
   <string name="pref_walls_xstep_title">Správa priestoru - maximum</string>
   <string name="pref_walls_xstep_summary">Maximálna vzdialenosť bodov na kreslenie stien [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo nastaviteľný faktor (in [0,1])</string>
@@ -1715,7 +1717,7 @@ DO NOT REMOVE THIS LINE -->
     <string name="menu_new">NOVÝ</string>
     <string name="menu_equate">PRIDAJ POROVNANIE</string>
     <string name="menu_equates">POROVNANIA</string>
-    <string name="menu_save">ULOŽIŤ</string>
+    <!-- UNUSED string name="menu_save">ULOŽIŤ</string -->
 
     <string name="overwrite">Prepísať</string>
 

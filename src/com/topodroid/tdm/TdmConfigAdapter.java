@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 import java.util.ArrayList;
 import java.io.File;

@@ -15,9 +15,9 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.Cave3X.DrawingPath;
-import com.topodroid.Cave3X.DrawingUtil;
-import com.topodroid.Cave3X.DBlock;
+import com.topodroid.DistoX.DrawingPath;
+import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.DistoX.DBlock;
 
 import java.io.File;
 import java.io.FileOutputStream;

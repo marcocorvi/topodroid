@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
@@ -19,17 +19,17 @@ import com.topodroid.c3db.DataHelper;
 import com.topodroid.c3db.SurveyFixed;
 import com.topodroid.c3db.SurveyInfo;
 import com.topodroid.c3db.DBlock;
-import com.topodroid.Cave3X.TopoGL;
-import com.topodroid.Cave3X.TglParser;
-import com.topodroid.Cave3X.Cave3DCS;
-import com.topodroid.Cave3X.Cave3DShot;
-import com.topodroid.Cave3X.Cave3DStation;
-import com.topodroid.Cave3X.Cave3DSurvey;
-import com.topodroid.Cave3X.Cave3DFix;
-import com.topodroid.Cave3X.Cave3DXSection;
-import com.topodroid.Cave3X.Geodetic;
-import com.topodroid.Cave3X.DEMsurface;
-import com.topodroid.Cave3X.Vector3D;
+import com.topodroid.DistoX.TopoGL;
+import com.topodroid.DistoX.TglParser;
+import com.topodroid.DistoX.Cave3DCS;
+import com.topodroid.DistoX.Cave3DShot;
+import com.topodroid.DistoX.Cave3DStation;
+import com.topodroid.DistoX.Cave3DSurvey;
+import com.topodroid.DistoX.Cave3DFix;
+import com.topodroid.DistoX.Cave3DXSection;
+import com.topodroid.DistoX.Geodetic;
+import com.topodroid.DistoX.DEMsurface;
+import com.topodroid.DistoX.Vector3D;
 
 
 import java.io.File;

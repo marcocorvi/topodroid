@@ -17,16 +17,16 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.Cave3X.TDandroid;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.TopoDroidAlertDialog;
-import com.topodroid.Cave3X.DataHelper;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.TDPath;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.ExportDialogTdm;
-import com.topodroid.Cave3X.IExporter;
-import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.DistoX.TDandroid;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.TopoDroidAlertDialog;
+import com.topodroid.DistoX.DataHelper;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.ExportDialogTdm;
+import com.topodroid.DistoX.IExporter;
+import com.topodroid.DistoX.TDandroid;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -413,7 +413,7 @@ public class TdmConfigActivity extends Activity
         try {
           // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
           // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.Cave3X.TopoGL.class );
+          Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.DistoX.TopoGL.class );
           intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
           intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
           startActivity( intent );

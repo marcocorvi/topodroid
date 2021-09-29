@@ -12,8 +12,8 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.Cave3X.BrushManager;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.R;
 
 import android.app.Dialog;
 

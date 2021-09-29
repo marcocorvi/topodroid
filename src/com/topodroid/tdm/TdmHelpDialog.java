@@ -13,8 +13,8 @@ package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.R;
 
 import java.io.File;
 import java.io.FileReader;

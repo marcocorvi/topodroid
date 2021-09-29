@@ -22,11 +22,11 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.TDandroid;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.TDPath;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDandroid;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.R;
 
 import java.io.File;
 import java.io.IOException;

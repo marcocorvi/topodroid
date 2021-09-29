@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.pcrust;
 
-import com.topodroid.Cave3X.Triangle3D;
+import com.topodroid.DistoX.Triangle3D;
 
 import com.topodroid.utils.TDLog;
 

@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.cw;
 
-import com.topodroid.Cave3X.Vector3D;
+import com.topodroid.DistoX.Vector3D;
 
 import java.util.List;
 import java.io.PrintWriter;

@@ -13,9 +13,9 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.MainWindow;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.MainWindow;
 
 
 import java.io.File;

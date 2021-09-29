@@ -11,8 +11,8 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.Cave3X.Vector3D;
-import com.topodroid.Cave3X.GlSketch;
+import com.topodroid.DistoX.Vector3D;
+import com.topodroid.DistoX.GlSketch;
 
 import com.topodroid.utils.TDLog;
 

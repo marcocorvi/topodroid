@@ -13,8 +13,8 @@ package com.topodroid.c3walls.bubble;
 
 import com.topodroid.utils.TDLog;
 
-import com.topodroid.Cave3X.Vector3D;
-import com.topodroid.Cave3X.Cave3DStation;
+import com.topodroid.DistoX.Vector3D;
+import com.topodroid.DistoX.Cave3DStation;
 
 import java.util.ArrayList;
 

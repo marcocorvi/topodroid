@@ -281,7 +281,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Numele este obligatoriu</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Directorul deja există</string>
+    <!-- UNUSED string name="error_dir_exists">Directorul deja există</string -->
     <!-- UNUSED string name="error_nick_required">Numele Secțiunii-X este obligatoriu</string -->
     <string name="error_start_required">Stație de referință este obligatorie</string>
     <!-- UNUSED string name="error_station_already_fixed">Stația deja are coordonate</string -->
@@ -322,10 +322,10 @@ Refer to the web pages for details.\n
     <string name="fixed">fix</string>
     <string name="painted">pictat</string>
 
-    <string name="cbd_title">Director principal</string>
+    <!-- UNUSED string name="cbd_title">Director principal</string -->
     <string name="cwd">Director de proiect TopoDroid</string>
     <string name="empty_cwd">Nume nedefinit</string>
-    <string name="bad_cbd">Directorul principal este inexistent sau nu poate fi scris</string>
+    <!-- UNUSED string name="bad_cbd">Directorul principal este inexistent sau nu poate fi scris</string -->
     <string name="bad_cwd">Nume proiectului nu poate fi o cale</string>
     <string name="bad_line">Tip de linie invalid</string>
     <string name="bad_point">Tip de punct invalid</string>
@@ -1074,7 +1074,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">Parametri desen schiță</string>
     <string name="title_settings_point">Parametri simboluri punct</string>
     <string name="title_settings_line">Parametri simboluri linie</string>
-    <string name="title_settings_walls">Parametri pereți \'auto\'</string>
+    <!-- UNUSED string name="title_settings_walls">Parametri pereți \'auto\'</string -->
     <string name="title_settings_draw">Parametri desenare</string>
     <string name="title_settings_erase">Parametri ștergere</string>
     <string name="title_settings_edit">Parametri editare</string>
@@ -1536,6 +1536,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Unități locație</string>
   <string name="pref_unit_location_summary">Afișează unități pentru locații</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">PEREȚI AUTO</string>
   <string name="pref_walls_type_title">Tip pereți</string>
   <string name="pref_walls_type_summary">Tip pereți</string>
@@ -1549,6 +1550,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Concavitate maximă [percent]</string>
   <string name="pref_walls_xstep_title">Pas</string>
   <string name="pref_walls_xstep_summary">Separarea punctelor de-a lungul peretelui [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Alpha min-algo</string>
   <string name="pref_algo_min_alpha_summary">Factor ajustare min-algo (in [0,1])</string>
@@ -1678,7 +1680,7 @@ Refer to the web pages for details.\n
     <string name="menu_new">NOU</string>
     <string name="menu_equate">ADAUGĂ VIZĂ ECHIVALENTĂ</string>
     <string name="menu_equates">VIZE ECHIVALENTE</string>
-    <string name="menu_save">SALVEAZĂ</string>
+    <!-- UNUSED string name="menu_save">SALVEAZĂ</string -->
 
     <string name="overwrite">suprascrie</string>
 

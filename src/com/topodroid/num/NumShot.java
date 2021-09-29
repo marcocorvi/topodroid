@@ -12,9 +12,9 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.Cave3X.SurveyInfo;
-import com.topodroid.Cave3X.DBlock;
-import com.topodroid.Cave3X.AverageLeg;
+import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.DistoX.DBlock;
+import com.topodroid.DistoX.AverageLeg;
 
 import java.util.ArrayList;
 

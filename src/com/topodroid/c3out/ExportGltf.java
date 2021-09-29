@@ -12,10 +12,10 @@
 package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.GlModel;
-import com.topodroid.Cave3X.GlNames;
-import com.topodroid.Cave3X.GlLines;
-import com.topodroid.Cave3X.GlSurface;
+import com.topodroid.DistoX.GlModel;
+import com.topodroid.DistoX.GlNames;
+import com.topodroid.DistoX.GlLines;
+import com.topodroid.DistoX.GlSurface;
 
 import android.util.Base64;
 import android.util.Base64OutputStream;

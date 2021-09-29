@@ -28,11 +28,11 @@ import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.ble.BleConst;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 

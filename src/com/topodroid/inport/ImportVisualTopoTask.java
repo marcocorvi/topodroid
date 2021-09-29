@@ -11,10 +11,10 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.Cave3X.SurveyInfo;
-import com.topodroid.Cave3X.DataHelper;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.MainWindow;
+import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.DistoX.DataHelper;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.MainWindow;
 
 
 // import java.lang.ref.WeakReference;

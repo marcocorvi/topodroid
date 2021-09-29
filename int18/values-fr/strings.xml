@@ -280,7 +280,7 @@ Refer to the web pages for details.\n
 <string name="error_name_required">Nom nécessaire</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-<string name="error_dir_exists">Le répertoire existe déjà</string>
+<!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
 <string name="error_start_required">Station de référence nécessaire</string>
 <!-- UNUSED string name="error_station_already_fixed">cette Station a deja des coordonées</string -->
@@ -320,10 +320,10 @@ Refer to the web pages for details.\n
 <string name="fixed">Fixé</string>
 <string name="painted">Dessiné</string>
 
-<string name="cbd_title">Répertoire de base</string>
+<!-- UNUSED string name="cbd_title">Répertoire de base</string -->
 <string name="cwd">Répertoire du projet TopoDroid</string>
 <string name="empty_cwd">Nom du projet vide</string>
-<string name="bad_cbd">Répertoire de base inexistant ou impossible à créer</string>
+<!-- UNUSED string name="bad_cbd">Répertoire de base inexistant ou impossible à créer</string -->
 <string name="bad_cwd">Le nom du projet ne peut être son propre chemin d\'accès</string>
 <string name="bad_line">Mauvais type de ligne</string>
 <string name="bad_point">Mauvais type de point</string>
@@ -1072,7 +1072,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">TopoDroid : paramétrage de l\'écran</string>
     <string name="title_settings_point">TopoDroid : paramétrage des points</string>
     <string name="title_settings_line">TopoDroid : paramétrage des lignes</string>
-    <string name="title_settings_walls">TopoDroid : paramétrage des parois autos</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid : paramétrage des parois autos</string -->
     <string name="title_settings_draw">TopoDroid : paramétrage des dessins</string>
     <string name="title_settings_erase">TopoDroid : paramétrage de l\'effacement</string>
     <string name="title_settings_edit">TopoDroid : paramétrage de l\'édition</string>
@@ -1534,6 +1534,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Unité de géolocalisation</string>
   <string name="pref_unit_location_summary">Afficher les unités de géolocalisation</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">PAROIS AUTO</string>
   <string name="pref_walls_type_title">Type paroi</string>
   <string name="pref_walls_type_summary">Type de paroi</string>
@@ -1547,6 +1548,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Concavité maximale [pourcents]</string>
   <string name="pref_walls_xstep_title">Espac. points paroi</string>
   <string name="pref_walls_xstep_summary">Distance minimum entres les points formant une ligne de paroi [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo facteur d\'ajustment (par[0,1])</string>
@@ -1678,7 +1680,7 @@ Refer to the web pages for details.\n
     <string name="menu_new">NOUVEAU</string>
     <string name="menu_equate">AJOUT EGALITE</string>
     <string name="menu_equates">EGALITES</string>
-    <string name="menu_save">ENREGISTRER</string>
+    <!-- UNUSED string name="menu_save">ENREGISTRER</string -->
 
     <string name="overwrite">écraser</string>
 

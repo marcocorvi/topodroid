@@ -4,10 +4,10 @@ package com.topodroid.dev.bric;
 
 import com.topodroid.utils.TDLog;
 
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.DeviceActivity;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.R;
 
 import com.topodroid.ui.MyDialog;
 

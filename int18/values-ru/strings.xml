@@ -281,7 +281,7 @@
     <string name="error_name_required">Требуется название</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Директория уже существует</string>
+    <!-- UNUSED string name="error_dir_exists">Директория уже существует</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Требуется привязка к пикету</string>
     <!-- UNUSED string name="error_station_already_fixed">Пикет уже имеет координаты</string -->
@@ -321,10 +321,10 @@
     <string name="fixed">фиксированный репер</string>
     <string name="painted">нарисованный</string>
 
-    <string name="cbd_title">Базовый каталог</string>
+    <!-- UNUSED string name="cbd_title">Базовый каталог</string -->
     <string name="cwd">Каталог проектов TopoDroid</string>
     <string name="empty_cwd">Название проекта не задано</string>
-    <string name="bad_cbd">Базовая директория отсутствует либо не доступна для записи</string>
+    <!-- UNUSED string name="bad_cbd">Базовая директория отсутствует либо не доступна для записи</string -->
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
@@ -1074,7 +1074,7 @@
     <string name="title_settings_screen">TopoDroid настройки экрана абрисов</string>
     <string name="title_settings_point">TopoDroid точек</string>
     <string name="title_settings_line">TopoDroid настройки линий</string>
-    <string name="title_settings_walls">TopoDroid  настройки авто-стен</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid  настройки авто-стен</string -->
     <string name="title_settings_draw">TopoDroid  настройки рисования</string>
     <string name="title_settings_erase">TopoDroid  настройки стирания</string>
     <string name="title_settings_edit">TopoDroid  настройки редактирования</string>
@@ -1542,6 +1542,7 @@
   <string name="pref_unit_location_title">Формат координат</string>
   <string name="pref_unit_location_summary">Формат отображения координат</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">АВТО СТЕНЫ</string>
   <string name="pref_walls_type_title">Тип стен</string>
   <string name="pref_walls_type_summary">Способ рисования авто стен</string>
@@ -1555,6 +1556,7 @@
   <string name="pref_walls_concave_summary">Максимальная вогнутость [проценты]</string>
   <string name="pref_walls_xstep_title">Шаг</string>
   <string name="pref_walls_xstep_summary">Интервал между точками вдоль стены [м]</string>
+-->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -1683,7 +1685,7 @@
     <string name="menu_new">НОВЫЙ</string>
     <string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string>
     <string name="menu_equates">СОЕДИНЕНИЯ</string>
-    <string name="menu_save">СОХРАНИТЬ</string>
+    <!-- UNUSED string name="menu_save">СОХРАНИТЬ</string -->
 
     <string name="overwrite">перезаписать</string>
 

@@ -285,7 +285,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Name erforderlich</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Verzeichnis existiert bereits</string>
+    <!-- UNUSED string name="error_dir_exists">Verzeichnis existiert bereits</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referenzmesspunkt erforderlich</string>
     <!-- UNUSED string name="error_station_already_fixed">Dauerhafter Messpunkt</string -->
@@ -325,10 +325,10 @@ Refer to the web pages for details.\n
     <string name="fixed">fixiert</string>
     <string name="painted">gezeichnet</string>
 
-    <string name="cbd_title">Basisverzeichnis</string>
+    <!-- UNUSED string name="cbd_title">Basisverzeichnis</string -->
     <string name="cwd">TopoDroid Projektverzeichnis</string>
     <string name="empty_cwd">Leerer Projektname</string>
-    <string name="bad_cbd">Basisverzeichnis existiert nicht oder nicht beschreibbar</string>
+    <!-- UNUSED string name="bad_cbd">Basisverzeichnis existiert nicht oder nicht beschreibbar</string -->
     <string name="bad_cwd">Der Projektname kann nicht der Pfad sein</string>
     <string name="bad_line">Ungültiger Linientyp</string>
     <string name="bad_point">Ungültiger Punkttyp</string>
@@ -1092,7 +1092,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">Einstellungen: Hintergrund</string>
     <string name="title_settings_point">Einstellungen: Punkte</string>
     <string name="title_settings_line">Einstellungen: Linien</string>
-    <string name="title_settings_walls">Einstellungen: Automatische Wände</string>
+    <!-- UNUSED string name="title_settings_walls">Einstellungen: Automatische Wände</string -->
     <string name="title_settings_draw">Einstellungen: Zeichnung</string>
     <string name="title_settings_erase">Einstellungen: Elemente Löschen</string>
     <string name="title_settings_edit">Einstellungen: Elemente Bearbeiten</string>
@@ -1566,6 +1566,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Format</string>
   <string name="pref_unit_location_summary">Koordinatenformat</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">Automatische Wände</string>
   <string name="pref_walls_type_title">Wandtyp</string>
   <string name="pref_walls_type_summary">Wandtyp</string>
@@ -1579,6 +1580,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Maximale Konkavität [%]</string>
   <string name="pref_walls_xstep_title">Abstand Zwischenpunkte</string>
   <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo Factor (in [0,1])</string>
@@ -1707,7 +1709,7 @@ Refer to the web pages for details.\n
     <string name="menu_new">NEU</string>
     <string name="menu_equate">NEUE ÜBERSCHNEIDUNG</string>
     <string name="menu_equates">ÜBERSCHNEIDUNGEN</string>
-    <string name="menu_save">SPEICHERN</string>
+    <!-- UNUSED string name="menu_save">SPEICHERN</string -->
 
     <string name="overwrite">überschreiben</string>
 

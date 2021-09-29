@@ -11,11 +11,11 @@
  */
 package com.topodroid.c3walls.cw;
 
-import com.topodroid.Cave3X.Vector3D;
-import com.topodroid.Cave3X.TopoGL;
-import com.topodroid.Cave3X.GlModel;
-import com.topodroid.Cave3X.Cave3DShot;
-import com.topodroid.Cave3X.Cave3DStation;
+import com.topodroid.DistoX.Vector3D;
+import com.topodroid.DistoX.TopoGL;
+import com.topodroid.DistoX.GlModel;
+import com.topodroid.DistoX.Cave3DShot;
+import com.topodroid.DistoX.Cave3DStation;
 
 import java.util.ArrayList;
 import java.util.List;

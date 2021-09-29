@@ -10,7 +10,7 @@
     android:dialogMessage="@string/cpref_base_path_summary"
     / -->
 
-  <!-- com.topodroid.Cave3X.MyListPreference
+  <!-- com.topodroid.DistoX.MyListPreference
     android:key="CAVE3D_BUTTON_SIZE"
     android:title="@string/cpref_size_buttons_title"
     android:summary="@string/cpref_size_buttons_summary"
@@ -124,7 +124,7 @@
        android:dialogMessage="@string/cpref_dem_maxsize_summary"
        />
 
-    <com.topodroid.Cave3X.MyListPreference
+    <com.topodroid.DistoX.MyListPreference
        android:key="CAVE3D_DEM_REDICE"
        android:title="@string/cpref_dem_reduce_title"
        android:summary="@string/cpref_dem_reduce_summary"
@@ -138,7 +138,7 @@
     android:title="@string/category_walls"
     >
 
-    <com.topodroid.Cave3X.MyListPreference
+    <com.topodroid.DistoX.MyListPreference
        android:key="CAVE3D_SPLAY_USE"
        android:title="@string/cpref_splay_use_title"
        android:summary="@string/cpref_splay_use_summary"

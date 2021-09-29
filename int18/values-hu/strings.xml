@@ -286,7 +286,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_duplicate">Duplikált név</string>
 
 	
-    <string name="error_dir_exists">A konyvtár már létezik</string>
+    <!-- UNUSED string name="error_dir_exists">A konyvtár már létezik</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Referencia állomás szükséges</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -327,10 +327,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fixed">csavar</string>
     <string name="painted">festett</string>
 
-    <string name="cbd_title">Kezdő könyvtár</string>
+    <!-- UNUSED string name="cbd_title">Kezdő könyvtár</string -->
     <string name="cwd">TopoDroid projekt könyvtár</string>
     <string name="empty_cwd">Hiányzó projekt név</string>
-    <string name="bad_cbd">Kezdő könyvtár nem létezik vagy nem írható</string>
+    <!-- UNUSED string name="bad_cbd">Kezdő könyvtár nem létezik vagy nem írható</string -->
     <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
     <string name="bad_line">Rossz vonaltípus</string>
     <string name="bad_point">Rossz pont típus</string>
@@ -1095,7 +1095,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_settings_screen">TopoDroid rajzlap beállítások</string>
     <string name="title_settings_point">TopoDroid pont beállítások</string>
     <string name="title_settings_line">TopoDroid vonal beállítások</string>
-    <string name="title_settings_walls">TopoDroid autofal beállítások</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid autofal beállítások</string -->
     <string name="title_settings_draw">TopoDroid rajzolás beállítások</string>
     <string name="title_settings_erase">TopoDroid törlés beállítások</string>
     <string name="title_settings_edit">TopoDroid módosítás beállítások</string>
@@ -1578,6 +1578,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_unit_location_title">Koordináta egységek</string>
   <string name="pref_unit_location_summary">Koordináták megjelenítési egysége</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">AUTOMATA Kontúr</string>
   <string name="pref_walls_type_title">Kontúr típusa</string>
   <string name="pref_walls_type_summary">Kontúr típusa</string>
@@ -1591,6 +1592,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_walls_concave_summary">Maximális homorúság [percent]</string>
   <string name="pref_walls_xstep_title">Osztásköz</string>
   <string name="pref_walls_xstep_summary">SPontok maximális távolsága a kontúr mentén [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alfa</string>
   <string name="pref_algo_min_alpha_summary">Min-algo illesztési tényezője ([0,1])</string>
@@ -1721,7 +1723,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_new">ÚJ</string>
     <string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string>
     <string name="menu_equates">KAPCSOLÓDÓ PONTOK</string>
-    <string name="menu_save">MENTÉS</string>
+    <!-- UNUSED string name="menu_save">MENTÉS</string -->
 
     <string name="overwrite">felülírja</string>
 

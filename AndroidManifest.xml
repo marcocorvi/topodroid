@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-      package="com.topodroid.Cave3X"
+      package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600006"
-      android:versionName="6.0.6"
+      android:versionCode="600007"
+      android:versionName="6.0.7"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 

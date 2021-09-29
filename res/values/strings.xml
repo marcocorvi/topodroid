@@ -283,7 +283,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_required">Name required</string>
     <string name="error_name_duplicate">Duplicate name</string>
 
-    <string name="error_dir_exists">Directory already exists</string>
+    <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Reference station required</string>
     <!-- UNUSED string name="error_station_already_fixed">Station already with coordinates</string -->
@@ -324,10 +324,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fixed">fixed</string>
     <string name="painted">painted</string>
 
-    <string name="cbd_title">Base directory</string>
+    <!-- UNUSED string name="cbd_title">Base directory</string -->
     <string name="cwd">TopoDroid project directory</string>
     <string name="empty_cwd">Empty project name</string>
-    <string name="bad_cbd">Base directory inexistent or not writable</string>
+    <!-- UNUSED string name="bad_cbd">Base directory inexistent or not writable</string -->
     <string name="bad_cwd">Project name cannot be path</string>
     <string name="bad_line">Bad line type</string>
     <string name="bad_point">Bad point type</string>
@@ -1093,7 +1093,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_settings_screen">TopoDroid canvas settings</string>
     <string name="title_settings_point">TopoDroid point settings</string>
     <string name="title_settings_line">TopoDroid line settings</string>
-    <string name="title_settings_walls">TopoDroid autowalls settings</string>
+    <!-- UNUSED string name="title_settings_walls">TopoDroid autowalls settings</string -->
     <string name="title_settings_draw">TopoDroid drawing settings</string>
     <string name="title_settings_erase">TopoDroid erasing settings</string>
     <string name="title_settings_edit">TopoDroid editing settings</string>
@@ -1576,6 +1576,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_unit_location_title">Location units</string>
   <string name="pref_unit_location_summary">Display units for locations</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">AUTO WALLS</string>
   <string name="pref_walls_type_title">Walls type</string>
   <string name="pref_walls_type_summary">Walls type</string>
@@ -1589,6 +1590,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_walls_concave_summary">Maximum concavity [percent]</string>
   <string name="pref_walls_xstep_title">Step</string>
   <string name="pref_walls_xstep_summary">Separation of points along the wall [m]</string>
+-->
 
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string>
@@ -1725,7 +1727,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="menu_new">NEW</string>
     <string name="menu_equate">ADD EQUATE</string>
     <string name="menu_equates">EQUATES</string>
-    <string name="menu_save">SAVE</string>
+    <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <string name="overwrite">overwrite</string>
 

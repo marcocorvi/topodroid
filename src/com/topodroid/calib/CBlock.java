@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.DistoX.TDUtil;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;

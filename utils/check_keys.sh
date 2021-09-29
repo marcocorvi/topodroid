@@ -13,7 +13,7 @@ cd utils
 cat "keys.txt" |
 while read line
 do
-  grep -q $line ../res/layout/* ../src/com/topodroid/DistoX/*.java ../res/xml/*
+  grep -q $line ../res/layout/* ../src/com/topodroid/*/*.java  ../src/com/topodroid/*/*/*.java ../res/xml/*
   if [ $? = 0 ]; then
     # echo "found $line"
     . 

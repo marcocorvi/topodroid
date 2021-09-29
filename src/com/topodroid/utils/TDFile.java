@@ -12,8 +12,8 @@
 package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.TDPath;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDPath;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
@@ -87,7 +87,7 @@ public class TDFile
 
 
   // INTERNAL FILES --------------------------------------------------------------
-  // context.getFilesDir --> /data/user/0/com.topodroid.Cave3X/files
+  // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
   private static File getCBD( String type, boolean create )

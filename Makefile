@@ -9,6 +9,10 @@ AFLAGS = -v
 
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 
+APPNAME = DistoX
+LOGNAME = $(APPNAME)
+PACKAGE = com.topodroid.$(APPNAME)
+
 default:
 	$(ANT) debug
 
@@ -30,10 +34,10 @@ install:
 	adb install -r bin/TopoDroid-debug.apk
 
 uninstall:
-	adb uninstall com.topodroid.DistoX
+	adb uninstall $(PACKAGE)
 
 reinstall:
-	adb uninstall com.topodroid.DistoX
+	adb uninstall $(PACKAGE)
 	adb install -r bin/TopoDroid-debug.apk
 
 rebuild:
@@ -59,7 +63,7 @@ symbols:
 	./howto/symbols.sh
 
 log:
-	adb logcat | grep DistoX
+	adb logcat | grep $(LOGNAME)
 
 git-add:
 	yes | git add -p
@@ -70,7 +74,6 @@ git-pull:
 SRC = \
   ./AndroidManifest.xml \
   ./ant/* \
-  ./studio/* \
   ./build.xml \
   ./bundle.sh \
   ./LICENSE \
@@ -80,7 +83,6 @@ SRC = \
   ./project.properties \
   ./README.md \
   ./regression-test.txt \
-  ./howto/* \
   ./assets/*/* \
   ./firmware/* \
   ./int18/*/* \
@@ -89,21 +91,24 @@ SRC = \
   ./res/values-small/* \
   ./res/values-large/* \
   ./res/layout/* \
-  ./res/layout-v22/* \
   ./res/drawable/* \
   ./res/mipmap-*/* \
   ./res/raw/* \
-  ./res/xml-v22/* \
+  ./res/xml/* \
   ./symbols-git/*/*/* \
-  ./save/* \
+  ./howto/* \
   ./utils/* \
   ./unused/idea/* \
   ./unused/TopoDroid-icon/* \
+  ./src/com/topodroid/c3db/*.java \
+  ./src/com/topodroid/c3in/*.java \
+  ./src/com/topodroid/c3out/*.java \
+  ./src/com/topodroid/c3walls/*/*.java \
   ./src/com/topodroid/common/*.java \
   ./src/com/topodroid/calib/*.java \
   ./src/com/topodroid/dev/*.java \
   ./src/com/topodroid/dev/*/*.java \
-  ./src/com/topodroid/DistoX/*.java \
+  ./src/com/topodroid/$(APPNAME)/*.java \
   ./src/com/topodroid/dln/*.java \
   ./src/com/topodroid/help/*.java \
   ./src/com/topodroid/inport/*.java \
@@ -118,6 +123,10 @@ SRC = \
   ./src/com/topodroid/trb/*.java \
   ./src/com/topodroid/ui/*.java \
   ./src/com/topodroid/utils/*.java
+
+EXTRA_SRC = \
+  ./studio/* \
+  ./save/* 
 
 version:
 	echo $(VERSION)

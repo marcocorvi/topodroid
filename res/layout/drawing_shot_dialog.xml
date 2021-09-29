@@ -179,10 +179,10 @@
         android:text="@string/button_save"
         android:layout_marginRight="@dimen/marginh"
       />
-      <Button android:id="@+id/walls"
+      <!-- AUTOWALLS Button android:id="@+id/walls"
         style="@style/button_default"
         android:text="@string/make_walls"
-      />
+      / -->
     </LinearLayout>
   </LinearLayout>
 

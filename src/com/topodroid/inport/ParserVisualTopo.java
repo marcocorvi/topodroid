@@ -18,8 +18,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.TDAzimuth;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDAzimuth;
 
 import java.io.IOException;
 import java.io.BufferedReader;

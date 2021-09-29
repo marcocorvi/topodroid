@@ -12,7 +12,7 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 import android.content.Context;
 

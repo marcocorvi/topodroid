@@ -12,8 +12,8 @@
 package com.topodroid.trb;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.DBlock;
-import com.topodroid.Cave3X.StationPolicy;
+import com.topodroid.DistoX.DBlock;
+import com.topodroid.DistoX.StationPolicy;
 
 import java.util.List;
 // import java.util.Locale;

@@ -13,8 +13,8 @@ package com.topodroid.calib;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.GMActivity;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.GMActivity;
 
 // import android.app.Dialog;
 import android.os.Bundle;

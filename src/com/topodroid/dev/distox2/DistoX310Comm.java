@@ -13,9 +13,9 @@ package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.dev.distox.DistoXComm;

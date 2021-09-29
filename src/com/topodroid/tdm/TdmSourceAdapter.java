@@ -11,7 +11,7 @@
  */
 package com.topodroid.tdm;
 
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 import java.util.ArrayList;
 import java.util.Iterator;

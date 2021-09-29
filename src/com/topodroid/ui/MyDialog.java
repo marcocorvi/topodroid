@@ -12,7 +12,7 @@
 package com.topodroid.ui;
 
 import com.topodroid.help.UserManualActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 // import android.app.Activity;
 import android.app.Dialog;

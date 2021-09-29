@@ -17,9 +17,9 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 // import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.Cave3X.TDUtil;
+import com.topodroid.DistoX.TDUtil;
 import com.topodroid.common.LegType;
-import com.topodroid.Cave3X.CurrentStation;
+import com.topodroid.DistoX.CurrentStation;
 
 import java.io.IOException;
 import java.io.FileInputStream;

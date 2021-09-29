@@ -13,7 +13,7 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyButton;
-import com.topodroid.Cave3X.TDandroid;
+import com.topodroid.DistoX.TDandroid;
 
 import android.content.Context;
 import android.widget.Button;
@@ -39,7 +39,7 @@ class HelpEntry
     if ( is_text ) {
       mButton.setText( icon );
       mButton.setBackgroundColor( TDColor.TRANSPARENT );
-      mButton.setTextColor( 0xff33ccff ); // FIXME color/menu_foreground
+      mButton.setTextColor( 0xff66a8dd ); // FIXME color/menu_foreground
     } else {
       // int size = TopoDroidApp.getDefaultSize( context );
       TDandroid.setButtonBackground( mButton, MyButton.getButtonBackground( context, context.getResources(), icon ) );

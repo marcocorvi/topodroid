@@ -21,7 +21,7 @@
     android:layout_height="fill_parent"
     android:layout_gravity="top"
     >
-    <com.topodroid.Cave3X.DrawingSurface
+    <com.topodroid.DistoX.DrawingSurface
       android:id="@+id/drawingSurface"
       android:layout_width="match_parent"
       android:layout_height="match_parent"

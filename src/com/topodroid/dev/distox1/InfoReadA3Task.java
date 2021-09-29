@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.distox1;
 
-import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.DistoX.TopoDroidApp;
 
 import java.lang.ref.WeakReference;
 

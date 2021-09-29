@@ -19,8 +19,8 @@ import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.GMActivity;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.GMActivity;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;

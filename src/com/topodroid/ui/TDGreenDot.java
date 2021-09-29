@@ -11,8 +11,8 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.Cave3X.SelectionPoint;
-import com.topodroid.Cave3X.BrushManager;
+import com.topodroid.DistoX.SelectionPoint;
+import com.topodroid.DistoX.BrushManager;
 
 import android.graphics.Path;
 import android.graphics.Canvas;

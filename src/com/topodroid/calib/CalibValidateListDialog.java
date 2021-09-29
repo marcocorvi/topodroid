@@ -13,8 +13,8 @@ package com.topodroid.calib;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.Cave3X.GMActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.GMActivity;
+import com.topodroid.DistoX.R;
 
 import java.util.List;
 // import java.util.ArrayList;

@@ -14,11 +14,11 @@ package com.topodroid.calib;
 import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.DeviceActivity;
-import com.topodroid.Cave3X.GMActivity;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.DistoX.GMActivity;
+import com.topodroid.DistoX.R;
 
 import java.lang.ref.WeakReference;
 // import java.util.List;

@@ -13,9 +13,9 @@ package com.topodroid.dev.distox1;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.dev.Device;
-import com.topodroid.Cave3X.DeviceActivity;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.TopoDroidAlertDialog;
+import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.TopoDroidAlertDialog;
 
 import android.os.Bundle;
 // import android.app.Dialog;

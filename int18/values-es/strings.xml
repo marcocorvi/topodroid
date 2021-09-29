@@ -279,7 +279,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Introducir nombre</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">El directorio ya existe</string>
+    <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Introducir referencia de estación</string>
     <!-- UNUSED string name="error_station_already_fixed">La estación ya tiene coordenadas</string -->
@@ -319,10 +319,10 @@ Refer to the web pages for details.\n
     <string name="fixed">Fijo</string>
     <string name="painted">Dibujado</string>
 
-    <string name="cbd_title">Directorio principal</string>
+    <!-- UNUSED string name="cbd_title">Directorio principal</string -->
     <string name="cwd">Directorio de proyectos TopoDroid</string>
     <string name="empty_cwd">Nombre del proyecto vacío</string>
-    <string name="bad_cbd">Directorio base inexistente o no editable</string>
+    <!-- UNUSED string name="bad_cbd">Directorio base inexistente o no editable</string -->
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
@@ -814,7 +814,6 @@ Refer to the web pages for details.\n
 
     <string name="btn_horizontal">Horizontal</string>
 
-    <!-- UNUSED string name="menu_save_th2">GUARDAR TH2</string -->
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
     <string name="copy_items">Copiar elementos</string>
@@ -1081,7 +1080,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">Ajustes del dibujo en TopoDroid</string>
     <string name="title_settings_point">Ajustes de puntos en TopoDroid</string>
     <string name="title_settings_line">Ajustes de línea en TopoDroid</string>
-    <string name="title_settings_walls">Ajustes de paredes automáticas en TopoDroid</string>
+    <!-- UNUSED string name="title_settings_walls">Ajustes de paredes automáticas en TopoDroid</string -->
     <string name="title_settings_draw">Ajustes de dibujo en TopoDroid</string>
     <string name="title_settings_erase">Ajustes de borrado en TopoDroid</string>
     <string name="title_settings_edit">Ajustes de edición en TopoDroid</string>
@@ -1550,6 +1549,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Unidades de Posicionamiento</string>
   <string name="pref_unit_location_summary">Visualizar unidades de Posicionamiento</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">Ajustes paredes automáticas</string>
   <string name="pref_walls_type_title">Tipo de pared</string>
   <string name="pref_walls_type_summary">Tipo de paredes</string>
@@ -1563,6 +1563,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Concavidad máxima [porciento]</string>
   <string name="pref_walls_xstep_title">Media</string>
   <string name="pref_walls_xstep_summary">La separación de los puntos a lo largo de la pared [m]</string>
+-->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -1685,7 +1686,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="menu_new">NEW</string -->
     <!-- TODO string name="menu_equate">ADD EQUATE</string -->
     <!-- TODO string name="menu_equates">EQUATES</string -->
-    <!-- TODO string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
 

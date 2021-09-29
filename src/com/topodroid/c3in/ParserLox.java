@@ -11,12 +11,12 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.Cave3X.TopoGL;
-import com.topodroid.Cave3X.TglParser;
-import com.topodroid.Cave3X.Cave3DStation;
-import com.topodroid.Cave3X.Cave3DShot;
-import com.topodroid.Cave3X.Cave3DSurvey;
-import com.topodroid.Cave3X.DEMsurface;
+import com.topodroid.DistoX.TopoGL;
+import com.topodroid.DistoX.TglParser;
+import com.topodroid.DistoX.Cave3DStation;
+import com.topodroid.DistoX.Cave3DShot;
+import com.topodroid.DistoX.Cave3DSurvey;
+import com.topodroid.DistoX.DEMsurface;
 
 import com.topodroid.utils.TDLog;
 

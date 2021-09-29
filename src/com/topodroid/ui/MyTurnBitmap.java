@@ -17,7 +17,7 @@ package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDColor;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 // import android.content.Context;
 import android.content.res.Resources;

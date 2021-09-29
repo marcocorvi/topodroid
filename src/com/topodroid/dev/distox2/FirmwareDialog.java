@@ -17,11 +17,11 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.TopoDroidAlertDialog;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.TDPath;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.TopoDroidAlertDialog;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.R;
 
 import java.io.File;
 // import java.io.FileInputStream;

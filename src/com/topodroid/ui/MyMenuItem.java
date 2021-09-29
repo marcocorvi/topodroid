@@ -43,7 +43,7 @@ public class MyMenuItem extends TextView
   public MyMenuItem( Context context, OnClickListener listener, String text )
   {  
     super( context );
-    setTextColor( 0xff33ccff );
+    setTextColor( 0xff66a8dd );
     setBackgroundColor( 0xff333333 );
     setTextSize( 16 );
     setText( text );

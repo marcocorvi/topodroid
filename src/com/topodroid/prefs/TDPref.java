@@ -12,9 +12,9 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.TDConst;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDConst;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.R;
 
 import android.content.Context;
 // import android.content.res.Resources;
@@ -908,22 +908,23 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-  public static TDPref[] makeWallsPrefs( Context ctx, TDPrefHelper hlp )
-  {
-    int cat = TDPrefCat.PREF_PLOT_WALLS;
-    String[] key = TDPrefKey.WALLS;
-    int[] tit    = TDPrefKey.WALLStitle;
-    int[] dsc    = TDPrefKey.WALLSdesc;
-    String[] def = TDPrefKey.WALLSdef;
-    return new TDPref[ ] {
-      makeLst( cat, key[0], tit[0],  dsc[0], T, def[0], R.array.wallsType, R.array.wallsTypeValue, ctx, hlp ),
-      makeEdt( cat, key[1], tit[1],  dsc[1], T, def[1], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[2], tit[2],  dsc[2], T, def[2], INTEGER, ctx, hlp ),
-      makeEdt( cat, key[3], tit[3],  dsc[3], T, def[3], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[4], tit[4],  dsc[4], T, def[4], FLOAT,   ctx, hlp ),
-      makeEdt( cat, key[5], tit[5],  dsc[5], T, def[5], FLOAT,   ctx, hlp )
-    };
-  }
+  // AUTOWALLS
+  // public static TDPref[] makeWallsPrefs( Context ctx, TDPrefHelper hlp )
+  // {
+  //   int cat = TDPrefCat.PREF_PLOT_WALLS;
+  //   String[] key = TDPrefKey.WALLS;
+  //   int[] tit    = TDPrefKey.WALLStitle;
+  //   int[] dsc    = TDPrefKey.WALLSdesc;
+  //   String[] def = TDPrefKey.WALLSdef;
+  //   return new TDPref[ ] {
+  //     makeLst( cat, key[0], tit[0],  dsc[0], T, def[0], R.array.wallsType, R.array.wallsTypeValue, ctx, hlp ),
+  //     makeEdt( cat, key[1], tit[1],  dsc[1], T, def[1], INTEGER, ctx, hlp ),
+  //     makeEdt( cat, key[2], tit[2],  dsc[2], T, def[2], INTEGER, ctx, hlp ),
+  //     makeEdt( cat, key[3], tit[3],  dsc[3], T, def[3], FLOAT,   ctx, hlp ),
+  //     makeEdt( cat, key[4], tit[4],  dsc[4], T, def[4], FLOAT,   ctx, hlp ),
+  //     makeEdt( cat, key[5], tit[5],  dsc[5], T, def[5], FLOAT,   ctx, hlp )
+  //   };
+  // }
 
   public static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )
   {

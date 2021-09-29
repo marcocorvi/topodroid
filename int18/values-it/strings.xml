@@ -284,7 +284,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Nome mancante</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
 
-    <string name="error_dir_exists">Directory già esistente</string>
+    <!-- UNUSED string name="error_dir_exists">Directory già esistente</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
     <string name="error_start_required">Caposaldo di riferimento mancante</string>
     <!-- UNUSED string name="error_station_already_fixed">Caposaldo già con coordinate</string -->
@@ -324,10 +324,10 @@ Refer to the web pages for details.\n
     <string name="fixed">fisso</string>
     <string name="painted">colorato</string>
 
-    <string name="cbd_title">Directory base</string>
+    <!-- UNUSED string name="cbd_title">Directory base</string -->
     <string name="cwd">Directory del progetto TopoDroid</string>
     <string name="empty_cwd">Nome progetto vuoto</string>
-    <string name="bad_cbd">Directory base inesistente o non scrivibile</string>
+    <!-- UNUSED string name="bad_cbd">Directory base inesistente o non scrivibile</string -->
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
@@ -1085,7 +1085,7 @@ Refer to the web pages for details.\n
     <string name="title_settings_screen">Impostazione canvas</string>
     <string name="title_settings_point">Impostazione punti</string>
     <string name="title_settings_line">Impostazione linee</string>
-    <string name="title_settings_walls">Impostazione autowalls</string>
+    <!-- UNUSED string name="title_settings_walls">Impostazione autowalls</string -->
     <string name="title_settings_draw">Impostazione disegni</string>
     <string name="title_settings_erase">Impostazione cancellazione</string>
     <string name="title_settings_edit">Impostazione editing</string>
@@ -1554,6 +1554,7 @@ Refer to the web pages for details.\n
   <string name="pref_unit_location_title">Unità posizioni</string>
   <string name="pref_unit_location_summary">Unità posizioni</string>
 
+<!-- UNUSED
   <string name="pref_plot_walls_title">OPZIONI AUTO-PARETI</string>
   <string name="pref_walls_type_title">Tipo pareti</string>
   <string name="pref_walls_type_summary">Tipo pareti</string>
@@ -1567,6 +1568,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_concave_summary">Massima concavita\' [percent]</string>
   <string name="pref_walls_xstep_title">Passo</string>
   <string name="pref_walls_xstep_summary">Distanza tra punti lungo il tiro [m]</string>
+-->
 
   <!-- NO string name="pref_algo_min_alpha_title">Min-algo alpha</string -->
   <!-- NO string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string -->
@@ -1696,7 +1698,7 @@ Refer to the web pages for details.\n
     <string name="menu_new">NUOVO</string>
     <string name="menu_equate">AGGIUNGI EQUIVALENTE</string>
     <string name="menu_equates">EQUIVALENTE</string>
-    <string name="menu_save">SALVA</string>
+    <!-- UNUSED string name="menu_save">SALVA</string -->
 
     <string name="overwrite">Sovrascrivi</string>
 

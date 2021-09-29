@@ -19,9 +19,9 @@ package com.topodroid.dev.sap;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.DataDownloader;
-import com.topodroid.Cave3X.TopoDroidApp;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.DataDownloader;
+import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;

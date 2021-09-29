@@ -21,7 +21,7 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
 
 import android.os.Bundle;
 // import android.app.Dialog;

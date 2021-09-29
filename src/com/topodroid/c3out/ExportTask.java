@@ -12,13 +12,13 @@
  */
 package com.topodroid.c3out;
 
-import com.topodroid.Cave3X.R;
-// import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.R;
+// import com.topodroid.DistoX.R;
 
-import com.topodroid.Cave3X.ModelType;
-import com.topodroid.Cave3X.TglParser;
-import com.topodroid.Cave3X.TopoGL;
-import com.topodroid.Cave3X.Cave3DFile;
+import com.topodroid.DistoX.ModelType;
+import com.topodroid.DistoX.TglParser;
+import com.topodroid.DistoX.TopoGL;
+import com.topodroid.DistoX.Cave3DFile;
 
 import com.topodroid.utils.TDLog;
 

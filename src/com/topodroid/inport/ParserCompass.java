@@ -16,8 +16,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.TDAzimuth;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDAzimuth;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 

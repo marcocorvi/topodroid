@@ -12,8 +12,8 @@
 package com.topodroid.inport;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.Cave3X.SurveyInfo;
-import com.topodroid.Cave3X.MainWindow;
+import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.DistoX.MainWindow;
 
 
 // import java.lang.ref.WeakReference;

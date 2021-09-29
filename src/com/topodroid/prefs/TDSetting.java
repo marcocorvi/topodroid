@@ -19,25 +19,25 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.help.UserManDownload;
-import com.topodroid.Cave3X.TDLevel;
-import com.topodroid.Cave3X.TDandroid;
-import com.topodroid.Cave3X.TDUtil;
-import com.topodroid.Cave3X.TDPath;
-import com.topodroid.Cave3X.TDAzimuth;
-import com.topodroid.Cave3X.TDInstance;
-import com.topodroid.Cave3X.TopoDroidApp;
-import com.topodroid.Cave3X.BrushManager;
-import com.topodroid.Cave3X.DrawingWindow;
-import com.topodroid.Cave3X.DistoXStationName;
-import com.topodroid.Cave3X.StationPolicy;
-import com.topodroid.Cave3X.SurveyInfo;
-import com.topodroid.Cave3X.TDToast;
-import com.topodroid.Cave3X.TopoGL;
-import com.topodroid.Cave3X.GlRenderer;
-import com.topodroid.Cave3X.GlModel;
-import com.topodroid.Cave3X.GlNames;
-import com.topodroid.Cave3X.TglParser;
-import com.topodroid.Cave3X.R;
+import com.topodroid.DistoX.TDLevel;
+import com.topodroid.DistoX.TDandroid;
+import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDAzimuth;
+import com.topodroid.DistoX.TDInstance;
+import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.DrawingWindow;
+import com.topodroid.DistoX.DistoXStationName;
+import com.topodroid.DistoX.StationPolicy;
+import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TopoGL;
+import com.topodroid.DistoX.GlRenderer;
+import com.topodroid.DistoX.GlModel;
+import com.topodroid.DistoX.GlNames;
+import com.topodroid.DistoX.TglParser;
+import com.topodroid.DistoX.R;
 import com.topodroid.dev.bric.BricMode; // MODE
 
 import java.util.Locale;
@@ -484,18 +484,17 @@ public class TDSetting
   public static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot)
   public static float mMinLegLength    = 0; // min length of a leg (if shorter it is undershoot)
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
-  // WALLS
-
-  public static final int WALLS_NONE    = 0;
-  public static final int WALLS_CONVEX  = 1;
-  public static final int WALLS_DLN     = 2;
-  public static final int WALLS_LAST    = 2; // placeholder
-  public static int   mWallsType        = WALLS_NONE;
-  public static float mWallsPlanThr     = 70;
-  public static float mWallsExtendedThr = 45;
-  public static float mWallsXClose      = 0.1f;
-  public static float mWallsXStep       = 1.0f;
-  public static float mWallsConcave     = 0.1f;
+  // AUTOWALLS
+  // public static final int WALLS_NONE    = 0;
+  // public static final int WALLS_CONVEX  = 1;
+  // public static final int WALLS_DLN     = 2;
+  // public static final int WALLS_LAST    = 2; // placeholder
+  // public static int   mWallsType        = WALLS_NONE;
+  // public static float mWallsPlanThr     = 70;
+  // public static float mWallsExtendedThr = 45;
+  // public static float mWallsXClose      = 0.1f;
+  // public static float mWallsXStep       = 1.0f;
+  // public static float mWallsConcave     = 0.1f;
 
   // ------------------------------------------------------------------
   // public static void setZoomControls( boolean ctrl )
@@ -854,15 +853,44 @@ public class TDSetting
 
     String[] keyCave3D = TDPrefKey.CAVE3D;
     String[] defCave3D = TDPrefKey.CAVE3Ddef;
-    // TODO
+    boolean b = prefs.getBoolean( keyCave3D[0], bool(defCave3D[0]) );
+    GlRenderer.mMinClino = b ? 90 : 0;
+    GlModel.mStationPoints  = prefs.getBoolean( keyCave3D[1], bool(defCave3D[1]) );
+    GlNames.setPointSize( tryInt(   prefs,  keyCave3D[2], defCave3D[2] ) );
+    TopoGL.mSelectionRadius = tryFloat( prefs,  keyCave3D[3], defCave3D[3] );
+    TopoGL.mMeasureToast    = prefs.getBoolean( keyCave3D[4], bool(defCave3D[4]) );
+    TopoGL.mStationDialog   = prefs.getBoolean( keyCave3D[5], bool(defCave3D[5]) );
+    GlModel.mGridAbove      = prefs.getBoolean( keyCave3D[6], bool(defCave3D[6]) );
+    GlModel.mGridExtent     = tryInt(   prefs,  keyCave3D[7], defCave3D[7] );
 
     String[] keyDem3D = TDPrefKey.DEM3D;
     String[] defDem3D = TDPrefKey.DEM3Ddef;
-    // TODO
+    TopoGL.mDEMbuffer   = tryFloat( prefs, keyDem3D[0], defDem3D[0] );
+    TopoGL.mDEMmaxsize  = tryInt(   prefs, keyDem3D[1], defDem3D[1] );
+    TopoGL.mDEMreduce   = tryInt(   prefs, keyDem3D[2], defDem3D[2] );
 
     String[] keyWalls3D = TDPrefKey.WALLS3D;
     String[] defWalls3D = TDPrefKey.WALLS3Ddef;
-    // TODO
+    TglParser.mSplayUse = tryInt(   prefs,  keyWalls3D[0], defWalls3D[0] );
+    GlModel.mAllSplay   = prefs.getBoolean( keyWalls3D[1], bool(defWalls3D[1]) );
+    TopoGL.mSplayProj   = prefs.getBoolean( keyWalls3D[2], bool(defWalls3D[2]) );
+    TopoGL.mSplayThr    = tryFloat( prefs,  keyWalls3D[3], defWalls3D[3] );
+    GlModel.mSplitTriangles = prefs.getBoolean( keyWalls3D[4], bool(defWalls3D[4]) );
+    float r = tryFloat( prefs,  keyWalls3D[5], defWalls3D[5] );
+    if ( r > 0.0001f ) {
+      GlModel.mSplitRandomizeDelta = r;
+      GlModel.mSplitRandomize = true;
+    } else {
+      GlModel.mSplitRandomize = false;
+    }
+    r = tryFloat( prefs,  keyWalls3D[6], defWalls3D[6] );
+    if ( r > 0.0001f ) {
+      GlModel.mSplitStretchDelta = r;
+      GlModel.mSplitStretch = true;
+    } else {
+      GlModel.mSplitStretch = false;
+    }
+    GlModel.mPowercrustDelta = tryFloat( prefs,  keyWalls3D[7], defWalls3D[7] );
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -1109,14 +1137,15 @@ public class TDSetting
     mLabelSize     = tryFloat( prefs,   keyPoint[2], defPoint[2] );       // DISTOX_LABEL_SIZE
     // mPlotCache  = prefs.getBoolean( keyPoint[], bool(defPoint[]) );    // DISTOX_PLOT_CACHE
 
-    String[] keyWalls = TDPrefKey.WALLS;
-    String[] defWalls = TDPrefKey.WALLSdef;
-    mWallsType        = tryInt(   prefs, keyWalls[0], defWalls[0] ); // DISTOX_WALLS_TYPE choice: 0, 1
-    mWallsPlanThr     = tryFloat( prefs, keyWalls[1], defWalls[1] ); // DISTOX_WALLS_PLAN_THR
-    mWallsExtendedThr = tryFloat( prefs, keyWalls[2], defWalls[2] ); // DISTOX_WALLS_EXTENDED_THR
-    mWallsXClose      = tryFloat( prefs, keyWalls[3], defWalls[3] ); // DISTOX_WALLS_XCLOSE
-    mWallsXStep       = tryFloat( prefs, keyWalls[4], defWalls[4] ); // DISTOX_WALLS_XSTEP
-    mWallsConcave     = tryFloat( prefs, keyWalls[5], defWalls[5] ); // DISTOX_WALLS_CONCAVE
+    // AUTOWALLS
+    // String[] keyWalls = TDPrefKey.WALLS;
+    // String[] defWalls = TDPrefKey.WALLSdef;
+    // mWallsType        = tryInt(   prefs, keyWalls[0], defWalls[0] ); // DISTOX_WALLS_TYPE choice: 0, 1
+    // mWallsPlanThr     = tryFloat( prefs, keyWalls[1], defWalls[1] ); // DISTOX_WALLS_PLAN_THR
+    // mWallsExtendedThr = tryFloat( prefs, keyWalls[2], defWalls[2] ); // DISTOX_WALLS_EXTENDED_THR
+    // mWallsXClose      = tryFloat( prefs, keyWalls[3], defWalls[3] ); // DISTOX_WALLS_XCLOSE
+    // mWallsXStep       = tryFloat( prefs, keyWalls[4], defWalls[4] ); // DISTOX_WALLS_XSTEP
+    // mWallsConcave     = tryFloat( prefs, keyWalls[5], defWalls[5] ); // DISTOX_WALLS_CONCAVE
 
     /* FIXME_SKETCH_3D *
     String[] keySketch = TDPrefKey.SKETCH;
@@ -1144,7 +1173,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_PLOT:   return updatePrefPlot( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_CALIB:  return updatePrefCalib( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DEVICE: return updatePrefDevice( hlp, k, v );
-      // case TDPrefCat.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // FIXME_SKETCH_3D
+      // case TDPrefCat.PREF_CATEGORY_SKETCH: return updatePrefSketch( hlp, k, v ); // SKETCH_3D
       case TDPrefCat.PREF_CATEGORY_EXPORT: return updatePrefExport( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_IMPORT: return updatePrefImport( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SVX:    return updatePrefSvx( hlp, k, v );
@@ -1164,7 +1193,7 @@ public class TDSetting
       case TDPrefCat.PREF_PLOT_SCREEN:     return updatePrefScreen( hlp, k, v );
       case TDPrefCat.PREF_TOOL_LINE:       return updatePrefLine( hlp, k, v );
       case TDPrefCat.PREF_TOOL_POINT:      return updatePrefPoint( hlp, k, v );
-      case TDPrefCat.PREF_PLOT_WALLS:      return updatePrefWalls( hlp, k, v );
+      // case TDPrefCat.PREF_PLOT_WALLS:      return updatePrefWalls( hlp, k, v ); // AUTOWALLS
       case TDPrefCat.PREF_PLOT_DRAW:       return updatePrefDraw( hlp, k, v );
       case TDPrefCat.PREF_PLOT_ERASE:      return updatePrefErase( hlp, k, v );
       case TDPrefCat.PREF_PLOT_EDIT:       return updatePrefEdit( hlp, k, v );
@@ -1397,8 +1426,7 @@ public class TDSetting
     } else if ( k.equals( key[1] ) ) { // CAVE3D_STATION_POINTS
       GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(def[1]) );
     } else if ( k.equals( key[2] ) ) { // CAVE3D_STATION_SIZE def=8
-      int size = tryIntValue( hlp, k, v, def[2] ); 
-      GlNames.setPointSize( size );
+      GlNames.setPointSize( tryIntValue( hlp, k, v, def[2] ) );
     } else if ( k.equals( key[3] ) ) { // CAVE3D_SELECTION_RADIUS
       float radius = tryFloatValue( hlp, k, v, def[3] );
       if ( radius > 10.0f ) TopoGL.mSelectionRadius = radius;
@@ -2231,37 +2259,38 @@ public class TDSetting
     return ret;
   }
 
-  private static String updatePrefWalls( TDPrefHelper hlp, String k, String v )
-  {
-    String ret = null;
-    // TDLog.v("update pref walls: " + k );
-    String[] key = TDPrefKey.WALLS;
-    String[] def = TDPrefKey.WALLSdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_WALLS_TYPE (choice)
-      mWallsType = tryIntValue(hlp, k, v, def[0] );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_PLAN_THR
-      mWallsPlanThr = tryFloatValue( hlp, k, v, def[1] );
-      if ( mWallsPlanThr < 0 ) { mWallsPlanThr  =  0; ret = TDString.ZERO; }
-      if ( mWallsPlanThr > 90 ) { mWallsPlanThr = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WALLS_EXTENDED_THR
-      mWallsExtendedThr = tryFloatValue( hlp, k, v, def[2] );
-      if ( mWallsExtendedThr < 0 ) { mWallsExtendedThr = 0; ret = TDString.ZERO; }
-      if ( mWallsExtendedThr > 90 ) { mWallsExtendedThr = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WALLS_XCLOSE
-      mWallsXClose = tryFloatValue( hlp, k, v, def[3] );
-      if ( mWallsXClose < 0 ) { mWallsXClose = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WALLS_CONCAVE
-      mWallsConcave = tryFloatValue( hlp, k, v, def[4] );
-      if ( mWallsConcave < 0 ) { mWallsConcave = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WALLS_XSTEP
-      mWallsXStep = tryFloatValue( hlp, k, v, def[5] );
-      if ( mWallsXStep < 0 ) { mWallsXStep = 0; ret = TDString.ZERO; }
-    } else {
-      TDLog.Error("missing WALLS key: " + k );
-    }
-    if ( ret != null ) hlp.update( k, ret );
-    return ret;
-  }
+  // AUTOWALLS
+  // private static String updatePrefWalls( TDPrefHelper hlp, String k, String v )
+  // {
+  //   String ret = null;
+  //   // TDLog.v("update pref walls: " + k );
+  //   String[] key = TDPrefKey.WALLS;
+  //   String[] def = TDPrefKey.WALLSdef;
+  //   if ( k.equals( key[ 0 ] ) ) {        // DISTOX_WALLS_TYPE (choice)
+  //     mWallsType = tryIntValue(hlp, k, v, def[0] );
+  //   } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_WALLS_PLAN_THR
+  //     mWallsPlanThr = tryFloatValue( hlp, k, v, def[1] );
+  //     if ( mWallsPlanThr < 0 ) { mWallsPlanThr  =  0; ret = TDString.ZERO; }
+  //     if ( mWallsPlanThr > 90 ) { mWallsPlanThr = 90; ret = TDString.NINETY; }
+  //   } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_WALLS_EXTENDED_THR
+  //     mWallsExtendedThr = tryFloatValue( hlp, k, v, def[2] );
+  //     if ( mWallsExtendedThr < 0 ) { mWallsExtendedThr = 0; ret = TDString.ZERO; }
+  //     if ( mWallsExtendedThr > 90 ) { mWallsExtendedThr = 90; ret = TDString.NINETY; }
+  //   } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_WALLS_XCLOSE
+  //     mWallsXClose = tryFloatValue( hlp, k, v, def[3] );
+  //     if ( mWallsXClose < 0 ) { mWallsXClose = 0; ret = TDString.ZERO; }
+  //   } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_WALLS_CONCAVE
+  //     mWallsConcave = tryFloatValue( hlp, k, v, def[4] );
+  //     if ( mWallsConcave < 0 ) { mWallsConcave = 0; ret = TDString.ZERO; }
+  //   } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_WALLS_XSTEP
+  //     mWallsXStep = tryFloatValue( hlp, k, v, def[5] );
+  //     if ( mWallsXStep < 0 ) { mWallsXStep = 0; ret = TDString.ZERO; }
+  //   } else {
+  //     TDLog.Error("missing WALLS key: " + k );
+  //   }
+  //   if ( ret != null ) hlp.update( k, ret );
+  //   return ret;
+  // }
 
   private static String updatePrefDraw( TDPrefHelper hlp, String k, String v )
   {
@@ -2756,8 +2785,9 @@ public class TDSetting
         mSplayAlpha, tf(mSplayColor), mDashSplay, mVertSplay, mHorizSplay, mSectionSplay );
       pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f\n", mAccelerationThr, mMagneticThr, mDipThr );
       // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
-      pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",
-        mWallsType, mWallsPlanThr, mWallsExtendedThr, mWallsXClose, mWallsXStep, mWallsConcave );
+      // AUTOWALLS
+      // pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",
+      //   mWallsType, mWallsPlanThr, mWallsExtendedThr, mWallsXClose, mWallsXStep, mWallsConcave );
 
       TDLog.exportLogSettings( pw );
 
@@ -3412,17 +3442,18 @@ public class TDSetting
           continue;
         }
         // pw.printf(Locale.US, "Sketch: type %d, length %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
-        if ( line.startsWith("Walls: type") ) {
-          if ( vals.length > 13 ) {
-            mWallsType        = getInt( vals, 2, 0 );    setPreference( editor, "DISTOX_WALLS_TYPE",         mWallsType );
-            mWallsPlanThr     = getFloat( vals, 5, 70.0f );  setPreference( editor, "DISTOX_WALLS_PLAN_THR",     mWallsPlanThr );
-            mWallsExtendedThr = getFloat( vals, 7, 45.0f );  setPreference( editor, "DISTOX_WALLS_EXTENDED_THR", mWallsExtendedThr );
-            mWallsXClose      = getFloat( vals, 9, 0.1f );  setPreference( editor, "DISTOX_WALLS_XCLOSE",       mWallsXClose );
-            mWallsXStep       = getFloat( vals, 11, 0.1f ); setPreference( editor, "DISTOX_WALLS_XSTEP",        mWallsXStep );
-            mWallsConcave     = getFloat( vals, 13, 1.0f ); setPreference( editor, "DISTOX_WALLS_CONCAVE",      mWallsConcave );
-          }
-          continue;
-        }
+        // AUTOWALLS
+        // if ( line.startsWith("Walls: type") ) {
+        //   if ( vals.length > 13 ) {
+        //     mWallsType        = getInt( vals, 2, 0 );    setPreference( editor, "DISTOX_WALLS_TYPE",         mWallsType );
+        //     mWallsPlanThr     = getFloat( vals, 5, 70.0f );  setPreference( editor, "DISTOX_WALLS_PLAN_THR",     mWallsPlanThr );
+        //     mWallsExtendedThr = getFloat( vals, 7, 45.0f );  setPreference( editor, "DISTOX_WALLS_EXTENDED_THR", mWallsExtendedThr );
+        //     mWallsXClose      = getFloat( vals, 9, 0.1f );  setPreference( editor, "DISTOX_WALLS_XCLOSE",       mWallsXClose );
+        //     mWallsXStep       = getFloat( vals, 11, 0.1f ); setPreference( editor, "DISTOX_WALLS_XSTEP",        mWallsXStep );
+        //     mWallsConcave     = getFloat( vals, 13, 1.0f ); setPreference( editor, "DISTOX_WALLS_CONCAVE",      mWallsConcave );
+        //   }
+        //   continue;
+        // }
         if ( line.startsWith("Log stream") ) break; 
       }
       fr.close();

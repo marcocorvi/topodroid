@@ -15,8 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.TDToast;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.TDToast;
 
 import java.util.List;
 import java.util.Locale;

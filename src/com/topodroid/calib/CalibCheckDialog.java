@@ -17,9 +17,9 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.Cave3X.R;
-import com.topodroid.Cave3X.SurveyWindow;
-import com.topodroid.Cave3X.DBlock;
+import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.SurveyWindow;
+import com.topodroid.DistoX.DBlock;
 
 import java.util.List;
 
