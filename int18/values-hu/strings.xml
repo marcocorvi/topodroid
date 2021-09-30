@@ -178,7 +178,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="save_as">mentés mint</string>
     <string name="nickname">Becenév</string>
 
-    <string name="comment">jegyzet</string> <!-- jegyzet, megjegyzés -->
+    <string name="comment">megjegyzés</string> <!-- KÉRDÉS jegyzet, megjegyzés, magyarázat-->
     <!-- UNUSED string name="flag">Flag</string -->
     <!-- UNUSED string name="backshot">backshot</string -->
     <!-- UNUSED string name="duplicate">duplicate</string -->
@@ -241,7 +241,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="illegal_data_value">Helytelen adat érték</string>
 
     <string name="photo_title">FÉNYKÉP</string>
-    <string name="photo_text">Írd be a fénykép jegyzetét</string>
+    <string name="photo_text">Írd be a fénykép megjegyzését</string>
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
