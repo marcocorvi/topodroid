@@ -59,11 +59,11 @@ public class Parser3d extends TglParser
   private void setShotsNames()
   {
     for (Cave3DShot sp : splays ) {
-      sp.from = sp.from_station.name;
+      sp.from = sp.from_station.getFullName();
     }
     for (Cave3DShot sh : shots ) {
-      sh.from = sh.from_station.name;
-      sh.to   = sh.to_station.name;
+      sh.from = sh.from_station.getFullName();
+      sh.to   = sh.to_station.getFullName();
     }
   }
 

@@ -99,7 +99,7 @@ public class ExportSHP
     }
     deleteDir( path ); // delete temporary shapedir
 
-    return true;
+    return ret;
   }
 
   private boolean exportStations( String filepath, List<File> files, List< Cave3DStation> stations )

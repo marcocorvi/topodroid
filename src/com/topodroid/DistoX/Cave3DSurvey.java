@@ -101,7 +101,7 @@ public class Cave3DSurvey
   {
     if ( name == null || name.length() == 0 ) return null;
     if ( name.equals("-") || name.equals(".") ) return null;
-    for ( Cave3DStation st : mStations ) if ( st.name.equals( name ) ) return st;
+    for ( Cave3DStation st : mStations ) if ( name.equals( st.getFullName() ) ) return st;
     return null;
   }
 
@@ -167,7 +167,7 @@ public class Cave3DSurvey
     if ( name.equals("-") || name.equals(".") ) return null;
     for ( ; idx < mStations.size(); ++idx ) {
       Cave3DStation st = mStations.get(idx);
-      if ( st.name.equals( name ) ) return st;
+      if ( name.equals( st.getFullName() ) ) return st;
     }
     return null;
   }

@@ -117,8 +117,8 @@ public class Cave3DShot
   // b,c radians
   public Cave3DShot( Cave3DStation f, Cave3DStation t, double l, double b, double c, long flag, long millis )
   {
-    from = (f!=null)? f.name : null;
-    to   = (t!=null)? t.name : null;
+    from = (f!=null)? f.getFullName() : null;
+    to   = (t!=null)? t.getFullName() : null;
     len = l;
     ber = b;
     cln = c;
@@ -148,13 +148,13 @@ public class Cave3DShot
   void setFromStation( Cave3DStation st )
   { 
     from_station = st; 
-    from = (st!=null)? st.name : null;
+    from = (st!=null)? st.getFullName() : null;
   }
 
   void setToStation( Cave3DStation st )
   { 
     to_station = st; 
-    to = (st!=null)? st.name : null;
+    to = (st!=null)? st.getFullName() : null;
   }
 
   /* dot product 
@@ -174,14 +174,14 @@ public class Cave3DShot
 
   public Cave3DStation getStationFromStation( Cave3DStation st ) 
   {
-    if ( st.name.equals( from ) ) {
+    if ( st.getFullName().equals( from ) ) {
       double dz = len * Math.sin( cln );
       double dh = len * Math.cos( cln );
       return new Cave3DStation( to, 
                           st.x + (dh * Math.sin(ber)),
                           st.y + (dh * Math.cos(ber)),
                           st.z + (dz) );
-    } else if ( st.name.equals( to ) ) {
+    } else if ( st.getFullName().equals( to ) ) {
       double dz = len * Math.sin( cln );
       double dh = len * Math.cos( cln );
       return new Cave3DStation( from,

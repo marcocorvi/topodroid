@@ -68,7 +68,7 @@ public class ExportCGAL
         for ( Cave3DShot sp : splays ) {
           if ( st == sp.from_station ) ++cnt;
         }
-        pw.format(Locale.US, "# %s %d\n", st.name, cnt );
+        pw.format(Locale.US, "# %s %d\n", st.getFullName(), cnt );
         pw.format(Locale.US, "%.2f %.2f %.2f\n", e, n, z );
         for ( Cave3DShot sp : splays ) {
           if ( st == sp.from_station ) {

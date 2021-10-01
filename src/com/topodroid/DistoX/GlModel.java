@@ -884,10 +884,10 @@ public class GlModel
     // splays.logMinMax();
 
     for ( Cave3DStation st : parser.getStations() ) {
-      String name = st.short_name;
+      String name = st.getShortName();
       if ( name != null && name.length() > 0 && ( ! name.equals("-") ) && ( ! name.equals(".") ) ) {
         // TDLog.v("Model name add " + st.short_name + " " + st.name );
-        names.addName( st, st.short_name, st.name, mXmed, mYmed, mZmed );
+        names.addName( st, st.getShortName(), st.getFullName(), mXmed, mYmed, mZmed );
       }
     }
     // names.logMinMax();

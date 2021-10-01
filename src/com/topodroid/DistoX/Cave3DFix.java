@@ -86,8 +86,10 @@ public class Cave3DFix extends Vector3D
     hasWGS84  = false;
   }
 
+  // the "name" for a fix is the full-name
   public boolean hasName( String nm ) { return name != null && name.equals( nm ); }
-  public String getName( ) { return name; }
+
+  public String getFullName( ) { return name; }
 
   public boolean isWGS84() { return cs.isWGS84(); }
 

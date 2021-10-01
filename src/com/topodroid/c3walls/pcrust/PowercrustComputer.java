@@ -275,7 +275,7 @@ public class PowercrustComputer
         // B[k] = new Point2D( dy1/d1, -dx1/d1 );
         B[k] = new Point2D( dy1, -dx1 ); // orthogonal: no need to normalize
       } else { // ERROR unattached station
-        TDLog.Error( "PCrust Error: missing station shots at " + st.name );
+        TDLog.Error( "PCrust Error: missing station shots at " + st.getFullName() );
         B[k] = new Point2D( 0, 0 ); // ERROR
       }
     }

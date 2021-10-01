@@ -71,7 +71,7 @@ public class ExportKML
       // if ( fix.cs == null ) continue;
       // if ( ! fix.cs.name.equals("long-lat") ) continue;
       for ( Cave3DStation st : data.getStations() ) {
-        if ( st.name.equals( fix.getName() ) ) {
+        if ( st.getFullName().equals( fix.getFullName() ) ) {
           origin = fix;
           zero   = st;
           break;
@@ -183,10 +183,10 @@ public class ExportKML
           double n = lat + (st.y - zero.y) * s_radius;
           double z = asl + (st.z - zero.z);
           pw.format(Locale.US, "<Placemark>\n");
-          pw.format(Locale.US, "  <name>%s</name>\n", st.name );
+          pw.format(Locale.US, "  <name>%s</name>\n", st.getFullName() );
           pw.format(Locale.US, "  <styleUrl>#station</styleUrl>\n");
           pw.format(Locale.US, "  <MultiGeometry>\n");
-            pw.format(Locale.US, "  <Point id=\"%s\">\n", st.name );
+            pw.format(Locale.US, "  <Point id=\"%s\">\n", st.getFullName() );
             pw.format(Locale.US, "    <coordinates>%f,%f,%f</coordinates>\n", e, n, z );
             pw.format(Locale.US, "  </Point>\n");
           pw.format(Locale.US, "  </MultiGeometry>\n");
@@ -209,7 +209,7 @@ public class ExportKML
         double et = lng + (st.x - zero.x) * e_radius;
         double nt = lat + (st.y - zero.y) * s_radius;
         double zt = asl + (st.z - zero.z);
-        pw.format(Locale.US, "    <LineString id=\"%s-%s\"> <coordinates>\n", sf.name, st.name );
+        pw.format(Locale.US, "    <LineString id=\"%s-%s\"> <coordinates>\n", sf.getFullName(), st.getFullName() );
         // pw.format(Locale.US, "      <tessellate>1</tessellate>\n"); //   breaks the line up in small chunks
         // pw.format(Locale.US, "      <extrude>1</extrude>\n"); // extends the line down to the ground
         pw.format(Locale.US, "        %f,%f,%f %f,%f,%f\n", ef, nf, zf, et, nt, zt );

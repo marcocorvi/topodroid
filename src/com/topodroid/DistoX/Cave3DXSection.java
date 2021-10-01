@@ -33,7 +33,7 @@ public class Cave3DXSection
 
   public int size() { return splays.length; }
 
-  public String name() { return (station != null)? station.name : "none"; }
+  public String name() { return (station != null)? station.getFullName() : "none"; }
    
   // get the k-th splay point (3D world frame)
   // @param k    index - must be between 0 and splays.length

@@ -31,8 +31,9 @@ public class Cave3DStation extends Vector3D
   Cave3DSurvey mSurvey;
 
   // double e, n, z;  // north east, vertical (upwards) : e=x, n=y, z=z
-  public String short_name;
-  public String name;
+  private String short_name;
+  private String survey_name;
+  private String full_name;
 
   // double temp;          // station tempertaure [Celcius] TEMPERATURE
   double depth;         // depth from Zmax: positive and scaled in [0,1] : 1.0 deepest
@@ -48,25 +49,25 @@ public class Cave3DStation extends Vector3D
   {
     dos.writeInt( mId );
     dos.writeInt( mSid );
-    dos.writeUTF( name );
+    dos.writeUTF( full_name );
     dos.writeInt( flag );
     dos.writeDouble( x );
     dos.writeDouble( y );
     dos.writeDouble( z );
-    TDLog.v("ser. station " + mId + " " + mSid + " <" + name + "> " + x + " " + y + " " + z );
+    TDLog.v("ser. station " + mId + " " + mSid + " <" + full_name + "> " + x + " " + y + " " + z );
   }
 
   static Cave3DStation deserialize( DataInputStream dis, int version ) throws IOException 
   {
     int id  = dis.readInt();
     int sid = dis.readInt();
-    String name  = dis.readUTF();
+    String full_name  = dis.readUTF();
     int flag = dis.readInt();
     double x = dis.readDouble();
     double y = dis.readDouble();
     double z = dis.readDouble();
-    TDLog.v("deser. station " + id + " " + sid + " <" + name + "> " + x + " " + y + " " + z );
-    return new Cave3DStation( name, x, y, z, id, sid, flag, "" );
+    TDLog.v("deser. station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
+    return new Cave3DStation( full_name, x, y, z, id, sid, flag, "" );
   }
 
   // -------------------------------------------------------------------------
@@ -102,8 +103,10 @@ public class Cave3DStation extends Vector3D
     mSid    = survey.mId;
   }
 
-  public boolean hasName( String nm ) { return name != null && name.equals( nm ); }
-  public String  getName() { return name; }
+  public boolean hasName( String nm ) { return full_name != null && full_name.equals( nm ); }
+  public String  getFullName()  { return full_name; }
+  public String  getShortName() { return short_name; }
+  public String  getSurvey()    { return survey_name; }
   public void setFlag( int fl ) { flag = fl; }
 
   void setPathlength( double len, Cave3DStation prev ) { pathlength = len; pathprev = prev; }
@@ -136,17 +139,27 @@ public class Cave3DStation extends Vector3D
 
   public void setName( String nm )
   {
-    name = nm;
-    if ( name != null ) {
-      int index = name.indexOf("@");
+    full_name = nm;
+    if ( full_name != null ) {
+      int index = full_name.indexOf("@");
       if ( index > 0 ) {
-        short_name = name.substring( 0, index );
+        short_name  = full_name.substring( 0, index );
+        survey_name = full_name.substring( index+1 );
       } else {
-        short_name = name;
+        short_name  = full_name;
+        survey_name = "";
       }
     } else {
       short_name = "";
+      survey_name = "";
     }
+  }
+
+  // add a discriminating number to the station name
+  public void addToName( int number )
+  {
+    short_name = short_name + "-" + number;
+    full_name  = short_name + "@" + survey_name;
   }
 
 }

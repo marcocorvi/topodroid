@@ -248,14 +248,14 @@ public class TglParser
   public Cave3DStation getStation( String fullname ) // get station by the FULL_NAME
   {
     if ( fullname == null ) return null;
-    for ( Cave3DStation s : stations ) if ( fullname.equals( s.name ) ) return s;
+    for ( Cave3DStation s : stations ) if ( fullname.equals( s.getFullName() ) ) return s;
     return null;
   }
 
   private int getStationIndex( String fullname ) // get station index by the FULL_NAME
   {
     if ( fullname == null ) return -1;
-    for ( int k = 0; k < stations.size(); ++k ) if ( fullname.equals( stations.get(k).name ) ) return k;
+    for ( int k = 0; k < stations.size(); ++k ) if ( fullname.equals( stations.get(k).getFullName() ) ) return k;
     return -1;
   }
 

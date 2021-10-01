@@ -399,14 +399,14 @@ public class ParserDat extends TglParser
       boolean found = false;
       // TDLog.v( "checking fix " + fix.name );
       for ( Cave3DStation s1 : stations ) {
-        if ( fix.hasName( s1.name ) ) { found = true; break; }
+        if ( fix.hasName( s1.getFullName() ) ) { found = true; break; }
       }
       if ( found ) { // skip fixed stations that are already included in the model
         // TDLog.v( "found fix " + fix.name );
         continue;
       }
       // TDLog.v( "start station " + fix.name + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
-      stations.add( new Cave3DStation( fix.getName(), fix.x, fix.y, fix.z ) );
+      stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
       // sh.from_station = s0;
     
       boolean repeat = true;
@@ -421,12 +421,12 @@ public class ParserDat extends TglParser
           Cave3DStation sf = null;
           Cave3DStation st = null;
           for ( Cave3DStation s : stations ) {
-            if ( sh.from.equals(s.name) ) {
+            if ( sh.from.equals(s.getFullName() ) ) {
               sf = s;
               if (  sh.from_station == null ) sh.from_station = s;
               else if ( sh.from_station != s ) TDLog.Error( "shot " + sh.from + " " + sh.to + " from-station mismatch ");
             } 
-            if ( sh.to.equals(s.name) )   {
+            if ( sh.to.equals( s.getFullName() ) )   {
               st = s;
               if (  sh.to_station == null ) sh.to_station = s;
               else if ( sh.to_station != s ) TDLog.Error( "shot " + sh.from + " " + sh.to + " to-station mismatch ");
@@ -440,7 +440,7 @@ public class ParserDat extends TglParser
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
-            s.name = s.name + "-" + mLoopCnt;
+            s.addToName( mLoopCnt ); // s.name = s.name + "-" + mLoopCnt;
             ++ mLoopCnt;
             sh.to_station = s;
           } else if ( sf != null && st == null ) {
@@ -475,7 +475,7 @@ public class ParserDat extends TglParser
         if (  sh.from_station != null ) continue;
         // TDLog.v( "check shot " + sh.from + " " + sh.to );
         for ( Cave3DStation s : stations ) {
-          if ( sh.from.equals(s.name) ) {
+          if ( sh.from.equals( s.getFullName() ) ) {
             sh.from_station = s;
             sh.setUsed( );
             sh.to_station = sh.getStationFromStation( s );

@@ -37,6 +37,10 @@ import java.util.GregorianCalendar;
 
 class ShpObject
 {
+  final static int AREA_SIZE_LENGTH    = 16;
+  final static int STATION_NAME_LENGTH = 16;
+  final static int SURVEY_NAME_LENGTH  = 64;
+
   final static int SHP_MAGIC = 9994;
   final static int SHP_VERSION = 1000;
   final static int SHP_POINT     =  1;
@@ -448,11 +452,12 @@ class ShpPointz extends ShpObject
     int n_pts = (pts != null)? pts.size() : 0;
     if ( n_pts == 0 ) return false;
 
-    int n_fld = 1;
+    int n_fld = 2;
     String[] fields = new String[ n_fld ];
     fields[0] = "name";
-    byte[]   ftypes = { BYTEC };
-    int[]    flens  = { 16 };
+    fields[1] = "survey";
+    byte[]   ftypes = { BYTEC, BYTEC };
+    int[]    flens  = { STATION_NAME_LENGTH, SURVEY_NAME_LENGTH };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -489,7 +494,8 @@ class ShpPointz extends ShpObject
       shpBuffer.putDouble( 0.0 );
 
       writeShxRecord( offset, shpRecLen );
-      fields[0] = pt.name;
+      fields[0] = pt.getFullName();
+      fields[1] = pt.getSurvey();
       writeDBaseRecord( n_fld, fields, flens );
       ++cnt;
     }
@@ -537,15 +543,16 @@ class ShpPolylinez extends ShpObject
     int nr = lns.size();
     if ( nr == 0 ) return false;
 
-    int n_fld = 3; // type from to // flag comment
+    int n_fld = 4; // type from to // flag comment
     String[] fields = new String[ n_fld ];
     fields[0] = "type";
     fields[1] = "from";
     fields[2] = "to";
+    fields[3] = "survey"; // survey name of FROM
     // fields[3] = "flag";
     // fields[4] = "comment";
-    byte[]   ftypes = { BYTEC, BYTEC, BYTEC }; // , BYTEC, BYTEC }; // use only strings
-    int[]    flens  = { 8, 16, 16 }; // , 8, 32 };
+    byte[]   ftypes = { BYTEC, BYTEC, BYTEC, BYTEC }; // , BYTEC, BYTEC }; // use only strings
+    int[]    flens  = { 8, STATION_NAME_LENGTH, STATION_NAME_LENGTH, SURVEY_NAME_LENGTH }; // , 8, 32 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -579,8 +586,9 @@ class ShpPolylinez extends ShpObject
       writeShpRecord( cnt, shpRecLen, p1, p2 );
       writeShxRecord( offset, shpRecLen );
       fields[0] = name;
-      fields[1] = p1.short_name; // p1.name;
-      fields[2] = p2.short_name; // p2.name;
+      fields[1] = p1.getFullName(); 
+      fields[2] = p2.getFullName();
+      fields[3] = p1.getSurvey();
       // fields[3] = String.format("0x%02x", ln.getReducedFlag() ); // flag
       // fields[4] = ln.getComment();
       writeDBaseRecord( n_fld, fields, flens );
@@ -725,7 +733,7 @@ class ShpPolygonz extends ShpObject
     fields[1] = "area";
     fields[2] = "Z";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 8, 16, 8 };
+    int[]    flens  = { 8, AREA_SIZE_LENGTH, 8 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );
@@ -869,7 +877,7 @@ class ShpPolygonz extends ShpObject
     fields[1] = "area";
     fields[2] = "Z";
     byte[]   ftypes = { BYTEC, BYTEC, BYTEC };
-    int[]    flens  = { 8, 16, 8 };
+    int[]    flens  = { 8, AREA_SIZE_LENGTH, 8 };
 
     int shpRecLen = getShpRecordLength( );
     int shxRecLen = getShxRecordLength( );

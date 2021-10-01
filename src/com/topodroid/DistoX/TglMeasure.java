@@ -46,10 +46,10 @@ class TglMeasure
   {
     if ( dcave < Float.MAX_VALUE-1 ) {
       String format = mRes.getString( R.string.dist_path );
-      return String.format(Locale.US, format, st1.short_name, st2.short_name, d3, de, dn, dz, dcave );
+      return String.format(Locale.US, format, st1.getShortName(), st2.getShortName(), d3, de, dn, dz, dcave );
     } 
     String format = mRes.getString( R.string.dist_no_path );
-    return String.format(Locale.US, format, st1.short_name, st2.short_name, d3, de, dn, dz );
+    return String.format(Locale.US, format, st1.getShortName(), st2.getShortName(), d3, de, dn, dz );
   }
 }
 

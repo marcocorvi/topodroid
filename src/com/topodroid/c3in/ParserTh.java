@@ -841,14 +841,14 @@ public class ParserTh extends TglParser
       // TDLog.v( "Th checking fix " + f.name );
       boolean found = false;
       for ( Cave3DStation s1 : stations ) {
-        if ( f.hasName( s1.getName() ) ) { found = true; break; }
+        if ( f.hasName( s1.getFullName() ) ) { found = true; break; }
       }
       if ( found ) { // skip fixed stations that are already included in the model
         // TDLog.v( "Th fix " + f.name + " already used" );
         continue;
       }
       // TDLog.v( "Th start station " + f.name + " N " + f.y + " E " + f.x + " Z " + f.z );
-      stations.add( new Cave3DStation( f.getName(), f.x, f.y, f.z ) );
+      stations.add( new Cave3DStation( f.getFullName(), f.x, f.y, f.z ) );
       // sh.from_station = s0;
 
       boolean repeat = true;
@@ -883,7 +883,7 @@ public class ParserTh extends TglParser
             // make a fake station
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
-            s.name = s.name + "-" + mLoopCnt;
+            s.addToName( mLoopCnt ); // s.name = s.name + "-" + mLoopCnt;
             ++ mLoopCnt;
             sh.to_station = s;
             repeat = true; // unnecessary

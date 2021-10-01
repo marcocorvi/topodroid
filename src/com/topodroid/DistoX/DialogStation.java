@@ -56,7 +56,7 @@ class DialogStation extends MyDialog
       initLayout( R.layout.cave3d_station_dialog, R.string.STATIONS );
 
       TextView tv = ( TextView ) findViewById(R.id.st_name);
-      tv.setText( mStation.name );
+      tv.setText( mStation.getFullName() );
 
       StringWriter sw1 = new StringWriter();
       PrintWriter  pw1 = new PrintWriter( sw1 );
