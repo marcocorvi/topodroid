@@ -2023,7 +2023,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_all_splay_title">All splays</string>
     <string name="cpref_all_splay_summary">Whether to use all the splays for the walls [y]</string>
     <string name="cpref_splay_use_title">Splay usage</string>
-    <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [nornal]</string>
+    <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string>
     <string name="cpref_splay_proj_title">Projected splays</string>
     <string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string>
     <string name="cpref_splay_thr_title">Splay threshold</string>
