@@ -1797,7 +1797,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string ->
+    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">Ny %1$.1f K %2$.1f</string>
     <string name="info_north_value">D %1$.1f É %2$.1f</string>
@@ -1811,8 +1811,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="proj_orthographic">Merőleges parameterek</string>
     <string name="proj_focal">Fókusz</string>
     <string name="proj_side">Oldal</string>
-    <!- UNUSED string name="proj_near">Közel</string ->
-    <!- UNUSED string name="proj_far">Távol</string ->
+    <!-- UNUSED string name="proj_near">Közel</string -->
+    <!-- UNUSED string name="proj_far">Távol</string -->
 
     <string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\n Hossz: %d Mélység: %d</string>
     <string name="cno_files">Nincsenek fájlok</string>
@@ -1851,8 +1851,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="ctitle_surface_alpha">Felszín átlátszóság</string>
     <string name="ctitle_sketches">Vázlatok</string>
     <string name="ctitle_legs">Poligon láthatóság</string>
-    <!- UNUSED string name="ctitle_manual_leg">Új poligon</string ->
-    <!- UNUSED string name="ctitle_bluetooth">Bluetooth</string ->
+    <!-- UNUSED string name="ctitle_manual_leg">Új poligon</string -->
+    <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
     <string name="length">hossz</string>
     <string name="azimuth">irány</string>
@@ -1949,11 +1949,11 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="coverwrite">Felülír</string>
     <string name="warning_not_overwrite">Figyelem: nem írja felül a meglévő fájlt %1$s</string>
-    <!- UNUSED string name="warning_not_txt">Figyelem: nem txt fájl %1$s</string ->
-    <!- UNUSED string name="warning_not_kml">Figyelem: nem kml fájl %1$s</string ->
-    <!- UNUSED string name="warning_not_las">Figyelem: nem las fájl %1$s</string ->
-    <!- UNUSED string name="warning_not_cgal">Figyelem: nem CGAL text fájl %1$s</string ->
-    <!- UNUSED string name="warning_not_stl">Figyelem: nem stl fájl %1$s</string ->
+    <!-- UNUSED string name="warning_not_txt">Figyelem: nem txt fájl %1$s</string -->
+    <!-- UNUSED string name="warning_not_kml">Figyelem: nem kml fájl %1$s</string -->
+    <!-- UNUSED string name="warning_not_las">Figyelem: nem las fájl %1$s</string -->
+    <!-- UNUSED string name="warning_not_cgal">Figyelem: nem CGAL text fájl %1$s</string -->
+    <!-- UNUSED string name="warning_not_stl">Figyelem: nem stl fájl %1$s</string -->
     <string name="warning_no_cwd">Figyelem: nincs alap könyvtár</string>
     <string name="warning_no_file">Figyelem: nem talál 3d fájlt</string>
     <string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string>
@@ -1974,7 +1974,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="no_database">Nincs adatbázis\n</string>
     <string name="cno_survey">Nincs %1$s mérés\n</string>
-    <!- UNUSED string name="cno_file">Nincs %1$s fájl\n</string ->
+    <!-- UNUSED string name="cno_file">Nincs %1$s fájl\n</string -->
     <string name="empty_survey">Üres mérés %1$s\n</string>
 
     <string name="viewing_at">Nézet dőlés %1$.0f irány %2$.0f</string>
@@ -1988,12 +1988,12 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cpref_walls3d">FAL MODELL</string>
     <string name="cpref_bluetooth_title">Bluetooth eszköz</string>
     <string name="cpref_bluetooth_summary">Bluetooth távoli eszköz</string>
-    <!- UNUSED string name="cpref_base_path_title">Alkalmazás alap könyvtár</string ->
-    <!- UNUSED string name="cpref_base_path_summary">Könyvtár tartalmaz mérési fájlokat</string ->
-    <!- UNUSED string name="cpref_text_size_title">Címke méret</string ->
-    <!- UNUSED string name="cpref_text_size_summary">Pont név méret [10 pt]</string ->
-    <!- UNUSED string name="cpref_size_buttons_title">Gomb méret</string ->
-    <!- UNUSED string name="cpref_size_buttons_summary">Gomb méret</string ->
+    <!-- UNUSED string name="cpref_base_path_title">Alkalmazás alap könyvtár</string -->
+    <!-- UNUSED string name="cpref_base_path_summary">Könyvtár tartalmaz mérési fájlokat</string -->
+    <!-- UNUSED string name="cpref_text_size_title">Címke méret</string -->
+    <!-- UNUSED string name="cpref_text_size_summary">Pont név méret [10 pt]</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Gomb méret</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Gomb méret</string -->
     <string name="cpref_selection_radius_title">Kiválasztási sugár</string>
     <string name="cpref_selection_radius_summary">Kiválasztási sugár [20 pxl]</string>
     <string name="cpref_station_toast_title">Pont párbeszéd ablak</string>
@@ -2034,19 +2034,19 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Zárja ki a közeli túlságosan eltérő sünöket [0.1]</string>
-<!- UNUSED
+<!-- UNUSED
     <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull falak</string>
     <string name="cpref_delaunay_title">Delaunay</string>
     <string name="cpref_delaunay_summary">Delaunay falak</string>
     <string name="cpref_hull_title">Hull</string>
     <string name="cpref_hull_summary">Hull falak</string>
-->
+-->
 
     <string name="TopoGLPerms">Engedélyek</string>
     <string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string>
-    <!- UNUSED string name="cperms_optional">Cave3D nem teljes funkciójú enélkül:</string ->
-    <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
+    <!-- UNUSED string name="cperms_optional">Cave3D nem teljes funkciójú enélkül:</string -->
+    <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
     <string name="chelp_title">Cave3D %1$s Súgó</string>
 
     <string name="help_open_3d">3D fájl megnyitás</string>
@@ -2058,9 +2058,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_viewpoint_3d">3D nézőpont</string>
     <string name="help_alpha_3d">D.E.M.</string>
     <string name="help_wall_3d">3D modell</string>
-    <!- UNUSED string name="help_temperature">Hőmérséklet</string ->
+    <!-- UNUSED string name="help_temperature">Hőmérséklet</string -->
     <string name="help_sketch_3d">3D vázlat felemelés</string>
-    <!- UNUSED string name="help_fractal">Fraktál analízis</string ->
+    <!-- UNUSED string name="help_fractal">Fraktál analízis</string -->
 
     <string name="help_light_3d">Eltolás és fény</string>
     <string name="help_projection_3d">3D vetítés</string>
