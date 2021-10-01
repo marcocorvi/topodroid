@@ -2013,8 +2013,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cpref_dem_buffer_title">DEM puffer</string>
     <string name="cpref_dem_buffer_summary">A DEM körüli felmérés kiterjesztése [200]</string>
     <string name="cpref_dem_maxsize_title">DEM max méret</string>
-    <string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string>
-    <string name="cpref_dem_reduce_title">DEM reduce</string>
+    <string name="cpref_dem_maxsize_summary">Cellák maximális száma [400]</string>
+    <string name="cpref_dem_reduce_title">DEM redukálás</string>
     <string name="cpref_dem_reduce_summary">DEM redukálás mód [ritkítás]</string>
     <string name="cpref_all_splay_title">Minden sün</string>
     <string name="cpref_all_splay_summary">Függetlenül attól, hogy a falakat használja-e [i]</string>
