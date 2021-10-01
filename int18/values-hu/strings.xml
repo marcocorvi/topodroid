@@ -1762,7 +1762,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="cmenu_alpha">Felület</string>
     <string name="cmenu_ble">BT mérések</string>
-    <string name="cmenu_viewpoint">Viewpoint</string>
+    <string name="cmenu_viewpoint">Nézőpont</string>
     <string name="cmenu_files">Mérések</string>
     <string name="cmenu_export">Export</string>
     <string name="cmenu_frame">Keret</string>
@@ -1814,7 +1814,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="proj_near">Közel</string -->
     <!-- UNUSED string name="proj_far">Távol</string -->
 
-    <string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\n Hossz: %d Mélység: %d</string>
+    <string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\nHossz: %d Mélység: %d</string>
     <string name="cno_files">Nincsenek fájlok</string>
     <string name="reading_file">Fájl beolvasás %1$s</string>
     <string name="read_survey">Mérés beolvasás %1$s\n</string>
