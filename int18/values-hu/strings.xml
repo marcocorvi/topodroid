@@ -1862,15 +1862,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cave_length"> Barlang hossza: %1$.1f</string>
     <string name="cave_angle"> Irány: %1$.0f  Lejtés: %2$.0f</string>
 
-    <string name="bt_disconnect">BEZÁR</string>
-    <string name="bt_laser">LÉZER</string>
-    <string name="bt_shot">MÉR</string>
-    <string name="bt_scan">KERES</string> <!-- scan=keres?szkennel -->
-
-    <string name="bt_not_started">Bluetooth kikapcsolva</string>
-    <string name="bt_no_comm">Bluetooth eszköz nem található</string>
-    <string name="bt_no_survey">Bluetooth mérés nincs megnyitva</string>
-    <string name="bt_survey_edit">Bluetooth Mérés Módosítás</string>
 
     <string name="SURVEYS">M É R É S E K</string>
     <string name="INFO">I N F ó</string>
@@ -1916,7 +1907,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_surface">Nincs felszín DEM</string>
     <string name="no_model">Nincs 3D modell</string>
     <string name="no_topodroid_model">Nen egy TopoDroid modell</string>
-    <string name="bad_topodroid">Rossz TopoDroid verzió</string>
 
     <string name="error_file_not_found">Hiba: %1$s fájl nem található</string>
     <string name="error_file_not_readable">Hiba: %1$s fájl nem olvasható</string>
@@ -1939,8 +1929,8 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="warning_not_cgal">Figyelem: nem CGAL text fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Figyelem: nem stl fájl %1$s</string -->
     <string name="warning_no_cwd">Figyelem: nincs alap könyvtár</string>
-    <string name="warning_no_file">Figyelem: nem talál 3d fájlt</string>
-    <string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string>
+    <!-- UNUSED string name="warning_no_file">Figyelem: nem talál 3d fájlt</string -->
+    <!-- UNUSED string name="warning_empty_cwd">Figyelem: üres alap könyvtár</string -->
     <string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
@@ -1970,8 +1960,6 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="cpref_dem3d">DEM</string>
     <string name="cpref_walls3d">FAL MODELL</string>
-    <string name="cpref_bluetooth_title">Bluetooth eszköz</string>
-    <string name="cpref_bluetooth_summary">Bluetooth távoli eszköz</string>
     <!-- UNUSED string name="cpref_base_path_title">Alkalmazás alap könyvtár</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Könyvtár tartalmaz mérési fájlokat</string -->
     <!-- UNUSED string name="cpref_text_size_title">Címke méret</string -->

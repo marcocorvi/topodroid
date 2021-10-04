@@ -1865,8 +1865,8 @@
     <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
     <string name="warning_no_cwd">Внимание: отсутствует начальная директория</string>
-    <string name="warning_no_file">Внимание: 3d файл не обнаружен</string>
-    <string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string>
+    <!-- UNUSED string name="warning_no_file">Внимание: 3d файл не обнаружен</string -->
+    <!-- UNUSED string name="warning_empty_cwd">Внимание: не задан рабочий каталог</string -->
     <string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 

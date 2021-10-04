@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-  <string name="a3" translatable="false">A3</string>
-  <string name="x310" translatable="false">X310</string>
+  <!-- UNUSED string name="a3" translatable="false">A3</string -->
+  <!-- UNUSED string name="x310" translatable="false">X310</string -->
   <string name="east" translatable="false">E</string>
   <string name="north" translatable="false">N</string>
   <string name="west" translatable="false">W</string>

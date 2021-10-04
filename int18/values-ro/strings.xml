@@ -1820,15 +1820,6 @@ Refer to the web pages for details.\n
     <string name="cave_length"> Cave length: %1$.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
 
-    <string name="bt_disconnect">CLOSE</string>
-    <string name="bt_laser">LASER</string>
-    <string name="bt_shot">SHOT</string>
-    <string name="bt_scan">SCAN</string>
-
-    <string name="bt_not_started">Bluetooth is down</string>
-    <string name="bt_no_comm">Bluetooth device not found</string>
-    <string name="bt_no_survey">Bluetooth survey not opened</string>
-    <string name="bt_survey_edit">Bluetooth Survey Edit</string>
 
     <string name="SURVEYS">S U R V E Y S</string>
     <string name="INFO">I N F O</string>
@@ -1874,7 +1865,6 @@ Refer to the web pages for details.\n
     <string name="no_surface">No surface DEM</string>
     <string name="no_model">No 3D model</string>
     <string name="no_topodroid_model">Not a TopoDroid model</string>
-    <string name="bad_topodroid">Bad TopoDroid version</string>
 
     <string name="error_file_not_found">Error: file %1$s not found</string>
     <string name="error_file_not_readable">Error: file %1$s not readable</string>
@@ -1897,8 +1887,8 @@ Refer to the web pages for details.\n
     <!- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string ->
     <!- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string ->
     <string name="warning_no_cwd">Warning: no base path</string>
-    <string name="warning_no_file">Warning: no 3d file found</string>
-    <string name="warning_empty_cwd">Warning: empty base path</string>
+    < UNUSED string name="warning_no_file">Warning: no 3d file found</string>
+    < UNUSED string name="warning_empty_cwd">Warning: empty base path</string>
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
@@ -1928,8 +1918,6 @@ Refer to the web pages for details.\n
 
     <string name="cpref_dem3d">DEM</string>
     <string name="cpref_walls3d">WALL MODEL</string>
-    <string name="cpref_bluetooth_title">Bluetooth device</string>
-    <string name="cpref_bluetooth_summary">Bluetooth remote device</string>
     <!- UNUSED string name="cpref_base_path_title">App base path</string ->
     <!- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string ->
     <!- UNUSED string name="cpref_text_size_title">Label size</string ->
