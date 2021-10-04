@@ -61,24 +61,26 @@ public class TDsafUri
   // -------------------------------------------------------------------------------------
   // private methods to get I/O streams or reader/writer from URI
   //
-  static public FileDescriptor docFileDescriptor( Uri uri )
-  {
-    try {
-      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
-      if ( pfd == null ) return null;
-      FileDescriptor fd = pfd.getFileDescriptor();
-      if (fd == null) {
-        pfd.close();
-        return null;
-      }
-      return fd;
-    } catch ( IOException e ) {
-      e.printStackTrace();
-      // TDLog.v( "SAF failed open output stream" );
-    }
-    return null;
-  }
+
+  // UNUSED
+  // static public FileDescriptor docFileDescriptor( Uri uri )
+  // {
+  //   try {
+  //     // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
+  //     ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
+  //     if ( pfd == null ) return null;
+  //     FileDescriptor fd = pfd.getFileDescriptor();
+  //     if (fd == null) {
+  //       pfd.close();
+  //       return null;
+  //     }
+  //     return fd;
+  //   } catch ( IOException e ) {
+  //     e.printStackTrace();
+  //     // TDLog.v( "SAF failed open output stream" );
+  //   }
+  //   return null;
+  // }
 
   static public InputStream docInputStream( Uri uri ) 
   {
@@ -192,26 +194,27 @@ public class TDsafUri
 
   // MIME ---------------------------------------------------------------------
 
-  public static String docMime( String filename )
-  {
-    int pos = filename.lastIndexOf('.');
-    if ( pos > 0 ) {
-      String ext = filename.substring( pos+1 );
-      return "application/" + ext;
-    }
-    if ( filename.endsWith("/") ) {
-      return DocumentsContract.Document.MIME_TYPE_DIR;
-    }
-    return "application/topodroid";
-  }
+  // UNUSED
+  // public static String getFilenameMime( String filename )
+  // {
+  //   int pos = filename.lastIndexOf('.');
+  //   if ( pos > 0 ) {
+  //     String ext = filename.substring( pos+1 );
+  //     return "application/" + ext;
+  //   }
+  //   if ( filename.endsWith("/") ) {
+  //     return DocumentsContract.Document.MIME_TYPE_DIR;
+  //   }
+  //   return "application/topodroid";
+  // }
 
-  public static String getType( Uri uri ) 
+  public static String getDocumentType( Uri uri ) 
   {
     return TDInstance.getContentResolver().getType( uri );
   }
 
   // https://stackoverflow.com/questions/36128077/android-opening-a-file-with-action-get-content-results-into-different-uris
-  public static String getPath( Context context, Uri uri )
+  public static String getDocumentPath( Context context, Uri uri )
   {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
       // DocumentProvider
@@ -257,7 +260,10 @@ public class TDsafUri
     return null;
   }
 
-  public static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs)
+  // ------------------------------------------------------------------------
+  // utils
+
+  private static String getDataColumn(Context context, Uri uri, String selection, String[] selectionArgs)
   {
     Cursor cursor = null;
     final String column = "_data";
@@ -274,7 +280,7 @@ public class TDsafUri
     return null;
   }
 
-  public static boolean isExternalStorageDocument(Uri uri) {
+  private static boolean isExternalStorageDocument(Uri uri) {
       return "com.android.externalstorage.documents".equals(uri.getAuthority());
   }
   
@@ -282,7 +288,7 @@ public class TDsafUri
    * @param uri The Uri to check.
    * @return Whether the Uri authority is DownloadsProvider.
    */
-  public static boolean isDownloadsDocument(Uri uri) {
+  private static boolean isDownloadsDocument(Uri uri) {
       return "com.android.providers.downloads.documents".equals(uri.getAuthority());
   }
   
@@ -290,7 +296,7 @@ public class TDsafUri
    * @param uri The Uri to check.
    * @return Whether the Uri authority is MediaProvider.
    */
-  public static boolean isMediaDocument(Uri uri) {
+  private static boolean isMediaDocument(Uri uri) {
       return "com.android.providers.media.documents".equals(uri.getAuthority());
   }
   
@@ -298,7 +304,7 @@ public class TDsafUri
    * @param uri The Uri to check.
    * @return Whether the Uri authority is Google Photos.
    */
-  public static boolean isGooglePhotosUri(Uri uri) {
+  private static boolean isGooglePhotosUri(Uri uri) {
       return "com.google.android.apps.photos.content".equals(uri.getAuthority());
   }
 

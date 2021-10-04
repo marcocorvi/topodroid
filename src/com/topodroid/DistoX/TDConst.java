@@ -131,6 +131,7 @@ public class TDConst
     "GeoJSON",
     "Shapefile"
   };
+
   public static final String[] mSurveyExportTypesNoGeo = { "ZIP", 
     "Compass",
     "cSurvey",
@@ -255,10 +256,10 @@ public class TDConst
     return SURVEY_FORMAT_NONE;
   }
 
-  public static int surveyFormatIndex( String type ) { return exportIndex( type, mSurveyExportTypes, mSurveyExportIndex ); }
-  public static int plotExportIndex( String type ) { return exportIndex( type, mPlotExportTypes, mPlotExportIndex ); }
+  public static int surveyFormatIndex( String type )   { return exportIndex( type, mSurveyExportTypes,   mSurveyExportIndex ); }
+  public static int plotExportIndex( String type )     { return exportIndex( type, mPlotExportTypes,     mPlotExportIndex ); }
   public static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
-  public static int calibExportIndex( String type ) { return exportIndex( type, mCalibExportTypes, mCalibExportIndex ); }
+  public static int calibExportIndex( String type )    { return exportIndex( type, mCalibExportTypes,    mCalibExportIndex ); }
   // public static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
 
   private static String exportExt( String type, String[] types, String[] ext )

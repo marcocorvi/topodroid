@@ -170,7 +170,8 @@ public class TDSetting
   public static float mOrthogonalLRUDAngle  = 0;     // angle
   public static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
-  public static boolean mExportUri = false;
+  public static final boolean mExportUri = true;
+
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
 

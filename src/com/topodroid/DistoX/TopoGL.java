@@ -193,11 +193,11 @@ public class TopoGL extends Activity
 
   // ---------------------------------
   String mFilename;    // opened filename
-  private static boolean mExportUri = false;
+  // private static boolean mExportUri = false; // from TDSetting
 
-  public static float mScaleFactor   = 1.0f;
-  public static float mDisplayWidth  = 200f;
-  public static float mDisplayHeight = 320f;
+  // public static float mScaleFactor   = 1.0f; // from TopoDroidApp
+  // public static float mDisplayWidth  = 200f;
+  // public static float mDisplayHeight = 320f;
 
   private boolean mIsNotMultitouch;
 
@@ -302,14 +302,14 @@ public class TopoGL extends Activity
     mLayout = (LinearLayout) findViewById( R.id.view_layout );
     // mText   = (TextView) findViewById( R.id.text );
 
-    DisplayMetrics dm = getResources().getDisplayMetrics();
-    float density  = dm.density;
-    mDisplayWidth  = dm.widthPixels;
-    mDisplayHeight = dm.heightPixels;
-    mScaleFactor   = (mDisplayHeight / 320.0f) * density;
-    // TDLog.v( "display " + mDisplayWidth + " " + mDisplayHeight + " scale " + mScaleFactor + " density " + density );
+    // DisplayMetrics dm = getResources().getDisplayMetrics(); // from TopoDroidApp
+    // float density  = dm.density;
+    // mDisplayWidth  = dm.widthPixels;
+    // mDisplayHeight = dm.heightPixels;
+    // mScaleFactor   = (mDisplayHeight / 320.0f) * density;
+    // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight + " scale " + TopoDroiaApp.mScaleFactor + " density " + density );
 
-    GlModel.setWidthAndHeight( mDisplayWidth, mDisplayHeight );
+    GlModel.setWidthAndHeight( TopoDroidApp.mDisplayWidth, TopoDroidApp.mDisplayHeight );
     
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     int size = resetButtonBar();
@@ -2706,7 +2706,7 @@ public class TopoGL extends Activity
   void selectExportFile( ExportData export )
   {
     mExport = export;
-    if ( mExportUri ) {
+    if ( TDSetting.mExportUri ) {
       TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file );
     } else {
@@ -2742,7 +2742,7 @@ public class TopoGL extends Activity
         if ( uri != null ) importSurvey( uri );
         break;
       case REQUEST_EXPORT_FILE:
-        if ( mExportUri ) {
+        if ( TDSetting.mExportUri ) {
           if ( uri != null && mExport != null ) {
             exportSurvey( uri );
           }

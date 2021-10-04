@@ -231,24 +231,27 @@ public class MainWindow extends Activity
   public boolean onLongClick( View view )
   {
     if ( view != mButton1[2] ) return false; // IMPORT
-    // selectImportFromProvider();
-    (new ImportDialogShot( this, this, TDConst.mSurveyImportTypes, R.string.title_import_shot )).show();
+    // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
+    // int len = filenames.size() + zipnames.size();
+    // selectImportFromDialog();
+    ImportData import_data = new ImportData();
+    doImport( TDConst.mSurveyImportTypes[0], import_data ); // ZIP
     return true;
   }
 
-  private void selectImportFromDialog() // IMPORT
-  {
-    // File[] files = TDPath.getImportFiles();
-    File[] zips  = TDPath.getZipFiles();
-    // int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
-    int len = ( zips != null )? zips.length : 0;
-    if ( len > 0 ) {
-      // (new ImportDialog( mActivity, this, files, zips )).show();
-      (new ImportDialog( mActivity, this, zips )).show();
-    } else {
-      TDToast.makeWarn( R.string.import_none );
-    }
-  }
+  // private void selectImportFromDialog() // IMPORT directly from dialog
+  // {
+  //   // File[] files = TDPath.getImportFiles();
+  //   File[] zips  = TDPath.getZipFiles();
+  //   // int len = ( ( files != null )? files.length : 0 ) + ( ( zips != null )? zips.length : 0 );
+  //   int len = ( zips != null )? zips.length : 0;
+  //   if ( len > 0 ) {
+  //     // (new ImportDialog( mActivity, this, files, zips )).show();
+  //     (new ImportDialog( mActivity, this, zips )).show();
+  //   } else {
+  //     TDToast.makeWarn( R.string.import_none );
+  //   }
+  // }
 
   @Override
   public void onClick(View view)
@@ -282,9 +285,8 @@ public class MainWindow extends Activity
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // NEW SURVEY
         startSurveyDialog();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // IMPORT
-        // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
-        // int len = filenames.size() + zipnames.size();
-        selectImportFromDialog();
+        // select Import From Provider();
+        (new ImportDialogShot( this, this, TDConst.mSurveyImportTypes, R.string.title_import_shot )).show();
       } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // PALETTE
 	if ( mPaletteButtonEnabled ) {
           SymbolEnableDialog dlg = new SymbolEnableDialog( mActivity );
@@ -1094,9 +1096,9 @@ public class MainWindow extends Activity
         if ( result == Activity.RESULT_OK ) {
           String filename;
           Uri uri = intent.getData();
-          String mimetype = TDsafUri.getType( uri );
+          String mimetype = TDsafUri.getDocumentType( uri );
           if ( mimetype == null ) {
-            String path = TDsafUri.getPath(this, uri);
+            String path = TDsafUri.getDocumentPath(this, uri);
             if (path == null) {
               // filename = FilenameUtils.getName(uri.toString());
               filename = uri.getLastPathSegment();
