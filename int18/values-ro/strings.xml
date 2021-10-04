@@ -1,14 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Manualul de utilizare nu a putut fi descărcat de pe internet</string>
     <string name="user_man_ok">Manualul de utilizare tradus a fost instalat</string>
     <string name="user_man_fail">Manualul de utilizare tradus nu a putut fi instalat</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -80,7 +80,7 @@ Refer to the web pages for details.\n
     <string name="tha_user">utilizator</string>
     <string name="tha_water">apă</string>
 
-    <string name="make_walls">Pereți</string>
+    <!-- UNUSED string name="make_walls">Pereți</string -->
     <string name="missing_station">Stație lipsă</string>
     <string name="station_not_found">Stație negăsită</string>
     <string name="shot_not_found">Nu există măsurători</string>
@@ -127,7 +127,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Metoda</string -->
     <string name="calib_gm_policy">Metodă de grupare</string>
     <string name="calib_gm_undelete">Restaurează datele de calibrare șterse?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Calibrare salvată</string>
     <string name="calib_updated">Calibrare actualizată</string>
     <string name="calib_compute_groups">Se calculează grupurile de date de calibrare …</string>
@@ -158,7 +158,7 @@ Refer to the web pages for details.\n
     <string name="device_illegal_addr">Adresă de memorie ilegală</string>
     <string name="device_info">Informații dispozitiv</string>
     <!-- UNUSED string name="device_model_set">Chiar vrei să schimbi modelul dispozitivului?</string -->
-    <string name="device_none">Nici un DistoX selectat</string>
+    <!-- UNUSED string name="device_none">Nici un DistoX selectat</string -->
     <!-- UNUSED string name="device_paired">Dispozivul este împerecheat</string -->
     <string name="device_reset">Resetează memoria DistoX</string>
     <string name="device_clear">Șterge memoria DistoX</string>
@@ -273,7 +273,7 @@ Refer to the web pages for details.\n
     <string name="error_group_non_integer">Grupul trebuie să fie un număr întreg</string>
     <string name="error_alt_required">Altitudinea este obligatorie</string>
     <string name="error_invalid_number">Număr invalid</string>
-    <string name="error_invalid_name">Nume invalid</string>
+    <!-- UNUSED string name="error_invalid_name">Nume invalid</string -->
     <string name="error_lat_required">Latitudinea este obligatorie</string>
     <string name="error_long_required">Longitudinea este obligatorie</string>
     <string name="error_name_exists">Proiectul există</string>
@@ -291,9 +291,9 @@ Refer to the web pages for details.\n
     <string name="error_value_required">Valoarea este obligatorie</string>
 
     <string name="group_title">Grupuri date de calibrare</string>
-    <string name="group_policy_four">Metodă: grupate câte 4</string>
-    <string name="group_policy_sixteen">Metodă: 4 grupuri de câte 4, celelalte individual</string>
-    <string name="group_policy_distance">Metodă: grupate după distanța angulară</string>
+    <!-- UNUSED string name="group_policy_four">Metodă: grupate câte 4</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Metodă: 4 grupuri de câte 4, celelalte individual</string -->
+    <!-- UNUSED string name="group_policy_distance">Metodă: grupate după distanța angulară</string -->
     <string name="group_reset">Resetează groupurile</string>
 
     <!-- UNUSED string name="scale">scară</string -->
@@ -337,7 +337,6 @@ Refer to the web pages for details.\n
     <string name="no_calibration">Calibrare neselectată</string>
     <string name="no_capture_app">Lipsește aplicația de captură de imagine</string>
     <string name="no_cave3d">Cave3D nu este instalat</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>
     <string name="no_device_address">Dispoziv neselectat</string>
@@ -417,16 +416,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <string name="ble_scan_failed">Scanare BLE eșuată</string>
-    <string name="ble_gatt_failure">Eșec BLE GATT</string>
+    <!-- UNUSED string name="ble_scan_failed">Scanare BLE eșuată</string -->
+    <!-- UNUSED string name="ble_gatt_failure">Eșec BLE GATT</string -->
     <string name="ble_no_remote">Nici un dispozitiv BLE extern</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
@@ -505,7 +504,7 @@ Refer to the web pages for details.\n
 
     <string name="saved_file_1">Fișier salvat %1$s</string>
     <string name="saved_file_2">Fișier salvat %1$s Scara %2$.2f</string>
-    <string name="saving_">În curs de salvare </string>
+    <!-- UNUSED string name="saving_">În curs de salvare </string -->
     <string name="saving_file_failed">Eroare la salvarea fișierului</string>
     <!-- UNUSED string name="scrap_name">Numele schiței</string -->
     <string name="splay">radiere</string>
@@ -675,7 +674,7 @@ Refer to the web pages for details.\n
     <string name="button_cancel"    >Anulează  </string>
     <string name="button_change"    >Schimbă   </string>
     <string name="button_close"     >Închide   </string>
-    <string name="button_create"    >Crează    </string>
+    <!-- UNUSED string name="button_create"    >Crează    </string -->
     <string name="button_color"     >Culoare   </string>
     <string name="button_convert"   >Conversie </string>
     <string name="button_current"   >Activ     </string>
@@ -712,7 +711,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_redo"      >Refă      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrupează</string -->
     <string name="button_dump"      >Descarcă~  </string>
-    <string name="button_rename"    >Redenumește</string>
+    <!-- UNUSED string name="button_rename"    >Redenumește</string -->
     <string name="button_renumber"  >Renumerotează</string>
     <string name="button_bedding"   >Strat geologic</string>
     <string name="button_replace"   >Înlocuiește</string>
@@ -1039,7 +1038,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Exportă schița</string>
     <!-- UNUSED string name="title_plot_merge">Îmbină schița</string -->
-    <string name="title_plot_reload">Reîncarcă schița</string>
+    <!-- UNUSED string name="title_plot_reload">Reîncarcă schița</string -->
     <string name="title_plot_scraps">Desenele schiței</string>
     <string name="title_profile_flip">Întoarce schița profil ?</string>
     <string name="title_projection"> Azimutul profilului proiectat %1$d</string>
@@ -1102,8 +1101,6 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">Exportă calibrare</string>
     <!-- UNUSED string name="title_zoom">Redimensionează</string -->
 
-    <string name="title_import_tro">Opțiuni importare VisualTopo</string>
-    <string name="title_import_dat">Opțiuni importare Compass</string>
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1152,10 +1149,6 @@ Refer to the web pages for details.\n
   <string name="pref_local_help_summary">Activează manualul tradus</string>
   <!-- UNUSED string name="pref_cosurvey_title">Serviciu de co-cartare</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activează serviciul de co-cartare</string -->
-  <string name="pref_export_shots_title">Export de date implicit</string>
-  <string name="pref_export_shots_summary">Formatul implicit pentru export de date</string>
-  <string name="pref_export_plot_title">Export schiță implicit</string>
-  <string name="pref_export_plot_summary">Formatul implicit pentru export de schiță</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1316,8 +1309,8 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Radierile cu azimutul mai mare ca acesta sunt marcate cu linie întreruptă</string>
   <string name="pref_section_splay_title">Limită unghi linie întreruptă radieri</string>
   <string name="pref_section_splay_message">Radierile peste acest unghi făcut cu secțiunea plana sunt desenate cu linie întreruptă</string>
-  <string name="pref_data_backup_title">Export automat date</string>
-  <string name="pref_data_backup_summary">Export datelor se face automat (e nevoie de format implicit definit)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Export automat date</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Export datelor se face automat (e nevoie de format implicit definit)</string -->
   <string name="pref_zipped_symbols_title">Fișiere cu simboluri arhivate (ZIP)</string>
   <string name="pref_zipped_symbols_summary">Salvează/încarcă fișiere cu simboluri în/din fișiere arhivă ZIP</string>
   <string name="pref_fixed_origin_title">Origine schiță</string>
@@ -1677,9 +1670,9 @@ Refer to the web pages for details.\n
     <string name="equate_no_stations">Prea puține stații/vize</string>
     <string name="equate_no_nearby">Nici o stație/viză apropiată</string>
 
-    <string name="menu_new">NOU</string>
-    <string name="menu_equate">ADAUGĂ VIZĂ ECHIVALENTĂ</string>
-    <string name="menu_equates">VIZE ECHIVALENTE</string>
+    <!-- UNUSED string name="menu_new">NOU</string -->
+    <!-- UNUSED string name="menu_equate">ADAUGĂ VIZĂ ECHIVALENTĂ</string -->
+    <!-- UNUSED string name="menu_equates">VIZE ECHIVALENTE</string -->
     <!-- UNUSED string name="menu_save">SALVEAZĂ</string -->
 
     <string name="overwrite">suprascrie</string>
@@ -1704,33 +1697,24 @@ Refer to the web pages for details.\n
     VERY IMPORTANT Fix the "UNUSED" commented strings
 
     <string name="cbtn_bind">Rebind</string>
-    <string name="cbtn_compute">Compute</string>
-
-    <string name="cbtn_new">New</string>
-    <string name="cbtn_move">Move</string>
-    <string name="cbtn_rotate">Turn</string>
-    <string name="cbtn_station">Station</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Open file</string>
     <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
-    <string name="cmenu_ble">BT surveys</string>
+    < UNUSED string name="cmenu_ble">BT surveys</string>
     <string name="cmenu_viewpoint">Viewpoint</string>
-    <string name="cmenu_files">Surveys</string>
+    < UNUSED string name="cmenu_files">Surveys</string>
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Frame</string>
-    <string name="cmenu_color">Color</string>
+    < UNUSED string name="cmenu_frame">Frame</string>
+    < UNUSED string name="cmenu_color">Color</string>
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">3D-Rose diagram</string>
     <string name="cmenu_rose">Rose diagram</string>
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
-    <string name="cmenu_fractal">Fractal counts</string>
+    < UNUSED string name="cmenu_fractal">Fractal counts</string>
     <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
@@ -1816,11 +1800,11 @@ Refer to the web pages for details.\n
     <string name="azimuth">azimuth</string>
     <string name="clino">clino</string>
 
-    <string name="cbtn_laser">Laser</string>
-    <string name="cbtn_scan">Scan</string>
-    <string name="cbtn_shot">Shot</string>
-    <string name="cbtn_start">Start</string>
-    <string name="cbtn_stop">Stop</string>
+    < UNUSED string name="cbtn_laser">Laser</string>
+    < UNUSED string name="cbtn_scan">Scan</string>
+    < UNUSED string name="cbtn_shot">Shot</string>
+    < UNUSED string name="cbtn_start">Start</string>
+    < UNUSED string name="cbtn_stop">Stop</string>
 
     <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
@@ -2001,11 +1985,10 @@ Refer to the web pages for details.\n
     <string name="cpref_hull_summary">Hull walls</string>
 ->
 
-    <string name="TopoGLPerms">Permissions</string>
+    < UNUSED string name="TopoGLPerms">Permissions</string>
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
     <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
     <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
-    <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>

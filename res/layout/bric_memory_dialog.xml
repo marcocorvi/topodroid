@@ -19,6 +19,8 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
+
     />
     <EditText android:id="@+id/bric_month" 
       android:layout_marginLeft="@dimen/marginhsmall"
@@ -27,6 +29,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
     />
     <EditText android:id="@+id/bric_day" 
       android:layout_marginLeft="@dimen/marginhsmall"
@@ -35,6 +38,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
     />
     <EditText android:id="@+id/bric_hour" 
       android:layout_marginLeft="@dimen/marginhsmall"
@@ -43,6 +47,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
     />
     <EditText android:id="@+id/bric_minute" 
       android:layout_marginLeft="@dimen/marginhsmall"
@@ -51,6 +56,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
     />
     <EditText android:id="@+id/bric_second" 
       android:layout_marginLeft="@dimen/marginhsmall"
@@ -59,6 +65,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+        android:inputType="number"
     />
 
     <!-- EditText android:id="@+id/bric_centisecond" 

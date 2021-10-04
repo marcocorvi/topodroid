@@ -9,13 +9,14 @@
         android:layout_marginTop="10dp"
         android:padding="10dp"
         android:layout_width="fill_parent"
-        android:layout_height="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1"
         android:transcriptMode="alwaysScroll"
         android:fastScrollEnabled="true"
         android:scrollingCache="true"
-        android:layout_weight="1"
         android:textSize="18sp"
     />  
+    <!-- android:layout_height="fill_parent" -->
 
     <LinearLayout android:id="@+id/help"
       android:layout_width="fill_parent" 

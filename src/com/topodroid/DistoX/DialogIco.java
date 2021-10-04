@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.ui.TDLayout;
+// import com.topodroid.ui.TDLayout;
 
 import java.util.Locale;
 
@@ -21,20 +21,16 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 
-import android.app.Dialog;
 import android.os.Bundle;
 
 // import android.widget.Toast;
 
 import android.content.Context;
 
-import android.view.Window;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.view.View.OnTouchListener;

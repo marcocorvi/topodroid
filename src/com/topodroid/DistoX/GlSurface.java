@@ -40,7 +40,7 @@ public class GlSurface extends GlShape
   final static int OFFSET_TEXEL  = COORDS_PER_VERTEX + COORDS_PER_NORMAL;
 
   final static int STRIDE = COORDS_PER_VERTEX + COORDS_PER_NORMAL + COORDS_PER_TEXEL;
-  final static int BYTE_STRIDE = STRIDE * Float.BYTES;
+  final static int BYTE_STRIDE = STRIDE * 4; // 4 = Float.BYTES;
 
   private int mTexId = -1; // loaded texture id (neg. for gray)
 

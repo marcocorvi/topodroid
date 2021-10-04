@@ -16,7 +16,6 @@ import com.topodroid.ui.MyDialog;
 // import com.topodroid.DistoX.TDandroid;
 
 import android.os.Bundle;
-import android.app.Dialog;
 import android.content.Context;
 
 import android.widget.Button;
@@ -25,8 +24,6 @@ import android.widget.SeekBar;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.graphics.Paint;
 
 class DialogSurface extends MyDialog 
                     implements View.OnClickListener

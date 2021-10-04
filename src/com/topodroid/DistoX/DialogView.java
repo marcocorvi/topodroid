@@ -15,15 +15,11 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
-import android.app.Dialog;
 import android.content.Context;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnClickListener;
 import android.widget.Button;
 import android.widget.CheckBox;
-import android.widget.RadioButton;
 
 class DialogView extends MyDialog 
                  implements View.OnClickListener

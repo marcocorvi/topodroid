@@ -36,9 +36,9 @@ class Cave3DHull
   HullAngle ato;
   int color; // DEBUG
 
-  /** get the size of the projections
-   * @param k    proj index: 0 at FROM, 1 at TO
-   */
+  // /** get the size of the projections
+  //  * @param k    proj index: 0 at FROM, 1 at TO
+  //  */
   // int projSize( int k ) { return (k==0)? projs1.size() : projs2.size(); }
 
   int size() { return triangles == null ? 0 : triangles.size(); }

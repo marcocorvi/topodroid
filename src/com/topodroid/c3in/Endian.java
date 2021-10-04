@@ -85,14 +85,14 @@ class Endian
 
   static int toIntLEndian( byte[] val, int off ) 
   {
-    byte tmp[] = new byte[4];
+    byte[] tmp = new byte[4];
     for (int k=0; k<4; ++k ) tmp[k] = val[off+k];
     return toIntLEndian( tmp );
   }
 
   static double toDoubleLEndian( byte[] val, int off ) 
   {
-    byte tmp[] = new byte[8];
+    byte[] tmp = new byte[8];
     for (int k=0; k<8; ++k ) tmp[k] = val[off+k];
     return toDoubleLEndian( tmp );
   }

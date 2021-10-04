@@ -203,9 +203,9 @@ public class SymbolPointDxf
     int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
     {
       if  ( version == DXF.ACAD_14 ) {
-        out.write( String.format( "  70%s%d%s", DXF.EOL, isClosed, DXF.EOL ) );
+        out.write( String.format(Locale.US, "  70%s%d%s", DXF.EOL, isClosed, DXF.EOL ) );
       } else {
-        out.write( String.format( "  70%s%d%s", DXF.EOL, (is3D+isClosed), DXF.EOL ) );
+        out.write( String.format(Locale.US, "  70%s%d%s", DXF.EOL, (is3D+isClosed), DXF.EOL ) );
       }
       return handle;
     }
@@ -312,7 +312,7 @@ public class SymbolPointDxf
     {
       if ( version == DXF.ACAD_14 ) {
         // DXF.printInt( pw, 43, 0 ); 
-        out.write( String.format( "  90%s%d%s", DXF.EOL, npt, DXF.EOL ) );
+        out.write( String.format(Locale.US, "  90%s%d%s", DXF.EOL, npt, DXF.EOL ) );
       }
       return handle;
     }
@@ -485,10 +485,10 @@ public class SymbolPointDxf
   // used only for VERTEX
   private void addLayer( int version, String layer ) 
   {
-    if ( layer != null ) addToken( new NormalToken( TOKEN_VERTEX, version, String.format( "  8%s%s%s", DXF.EOL, layer, DXF.EOL ) ) );;
+    if ( layer != null ) addToken( new NormalToken( TOKEN_VERTEX, version, String.format( "  8%s%s%s", DXF.EOL, layer, DXF.EOL ) ) );
   }
 
-  private void addVertexFlag( int version, int flag ) { addToken( new NormalToken( TOKEN_VERTEX, version, String.format( "  70%s%d%s", DXF.EOL, flag, DXF.EOL ) ) ); }
+  private void addVertexFlag( int version, int flag ) { addToken( new NormalToken( TOKEN_VERTEX, version, String.format(Locale.US, "  70%s%d%s", DXF.EOL, flag, DXF.EOL ) ) ); }
 
 
   private void addColor( String color ) { addToken( new NormalToken( TOKEN_COLOR, DXF.ACAD_9, String.format("  6%s%s%s", DXF.EOL, color, DXF.EOL ) ) ); }
@@ -522,12 +522,12 @@ public class SymbolPointDxf
 
   private void addPolylineColor( int color )
   {
-    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_9, String.format("  62%s%d%s", DXF.EOL, color, DXF.EOL ) ) );
+    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_9, String.format(Locale.US, "  62%s%d%s", DXF.EOL, color, DXF.EOL ) ) );
   }
 
   private void addPolylineGroup( int group )
   {
-    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_9, String.format("  66%s%d%s", DXF.EOL, group, DXF.EOL ) ) );
+    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_9, String.format(Locale.US, "  66%s%d%s", DXF.EOL, group, DXF.EOL ) ) );
   }
 
   private void addPolylinePosition( float x, float y, float z )
@@ -542,7 +542,7 @@ public class SymbolPointDxf
 
   private void addPolylineLineWidth( int width )
   {
-    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_14, String.format("  43%s%d%s", DXF.EOL, width, DXF.EOL ) ) );
+    addToken( new NormalToken( TOKEN_POLYLINE, DXF.ACAD_14, String.format(Locale.US, "  43%s%d%s", DXF.EOL, width, DXF.EOL ) ) );
   }
 
   private void addPolylineClosed( boolean closed )

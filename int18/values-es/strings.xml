@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -80,7 +80,7 @@ Refer to the web pages for details.\n
     <string name="tha_user">Usuario</string>
     <string name="tha_water">Agua</string>
 
-    <string name="make_walls">Paredes</string>
+    <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
@@ -127,7 +127,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Política</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
     <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos &#8230;</string>
@@ -158,7 +158,7 @@ Refer to the web pages for details.\n
     <string name="device_illegal_addr">Dirección de memoria no válida</string>
     <string name="device_info">Información del dispositivo</string>
     <!-- UNUSED string name="device_model_set">¿Quiere cambiar de dispositivo?</string -->
-    <string name="device_none">DistoX no seleccionado</string>
+    <!-- UNUSED string name="device_none">DistoX no seleccionado</string -->
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
     <!-- TODO string name="device_clear">Clear DistoX memory</string -->
@@ -271,7 +271,7 @@ Refer to the web pages for details.\n
     <string name="error_group_non_integer">El grupo debe ser el número entero</string>
     <string name="error_alt_required">Se requiere Altitud</string>
     <string name="error_invalid_number">Número invalido</string>
-    <string name="error_invalid_name">Nombre no válido</string>
+    <!-- UNUSED string name="error_invalid_name">Nombre no válido</string -->
     <string name="error_lat_required">Se requiere Latitud</string>
     <string name="error_long_required">Se requiere Longitud</string>
     <!-- TODO string name="error_name_exists">Existing project</string -->
@@ -289,9 +289,9 @@ Refer to the web pages for details.\n
     <string name="error_value_required">Introducir valor</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
-    <string name="group_policy_four">Política: Grupo de cuatro</string>
-    <string name="group_policy_sixteen">Política: cuatro grupos de cuatro, otro solo</string>
-    <string name="group_policy_distance">Política: Grupo según la distancia angular</string>
+    <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Política: cuatro grupos de cuatro, otro solo</string -->
+    <!-- UNUSED string name="group_policy_distance">Política: Grupo según la distancia angular</string -->
     <string name="group_reset">Resetear grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
@@ -334,7 +334,6 @@ Refer to the web pages for details.\n
     <string name="no_calibration">Calibración no seleccionada</string>
     <string name="no_capture_app">No hay aplicación para capturar imagen</string>
     <string name="no_cave3d">Cave3D No instalado</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
@@ -414,16 +413,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <string name="ble_scan_failed">Fallo escaneo BLE</string>
-    <string name="ble_gatt_failure">Fallo BLE</string>
+    <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
+    <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
     <string name="ble_no_remote">Sin dispositivo remoto</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
@@ -501,7 +500,7 @@ Refer to the web pages for details.\n
 
     <string name="saved_file_1">Guardar archivo %1$s</string>
     <string name="saved_file_2">Guardar archivo %1$s escala %2$.2f</string>
-    <string name="saving_">Guardar</string>
+    <!-- UNUSED string name="saving_">Guardar</string -->
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <!-- UNUSED string name="scrap_name">Nombre de dibujo</string -->
     <string name="splay">Toma Lateral</string>
@@ -679,7 +678,7 @@ Refer to the web pages for details.\n
     <string name="button_cancel"    >Cancelar  </string>
     <string name="button_change"    >Cambio    </string>
     <string name="button_close"     >Cerrar     </string>
-    <string name="button_create"    >Crear    </string>
+    <!-- UNUSED string name="button_create"    >Crear    </string -->
     <string name="button_color"     >Color  </string>
     <string name="button_convert"   >Convertir </string>
     <string name="button_current"   >Corriente   </string>
@@ -718,7 +717,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
-    <string name="button_rename"    >Renombrar </string>
+    <!-- UNUSED string name="button_rename"    >Renombrar </string -->
     <string name="button_renumber"  >Renumerar</string>
     <string name="button_bedding"   >plano de estratificación</string>
     <string name="button_replace"   >Reemplazar</string>
@@ -1045,7 +1044,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Guardar dibujo como</string>
     <!-- UNUSED string name="title_plot_merge">Combinar dibujo</string -->
-    <string name="title_plot_reload">Actualizar dibujo</string>
+    <!-- UNUSED string name="title_plot_reload">Actualizar dibujo</string -->
     <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
@@ -1114,8 +1113,6 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1164,10 +1161,6 @@ Refer to the web pages for details.\n
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
   <!-- UNUSED string name="pref_cosurvey_title">Cosurvey</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string -->
-  <string name="pref_export_shots_title">Formato de exportación de datos</string>
-  <string name="pref_export_shots_summary">Formato de exportación de datos por defecto</string>
-  <string name="pref_export_plot_title">Exportación de dibujo por defecto</string>
-  <string name="pref_export_plot_summary">Exportación formato de dibujo por defecto</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1328,8 +1321,8 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Separe el rumbo más de lo que esta discontínuo</string>
   <string name="pref_section_splay_title">Umbral del ángulo del tablero de separación</string>
   <string name="pref_section_splay_message">Sobre este ángulo con el plano de sección,los guiones se puntean</string>
-  <string name="pref_data_backup_title">Autoexportación de datos</string>
-  <string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Autoexportación de datos</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string -->
   <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
   <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <string name="pref_fixed_origin_title">Origen del dibujo</string>
@@ -1683,9 +1676,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="equate_no_stations">Too few stations</string -->
     <!-- TODO string name="equate_no_nearby">No station nearby</string -->
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
+    <!-- UNUSED string name="menu_new">NEW</string -->
+    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
+    <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
@@ -1706,14 +1699,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="export_failed">Failed export</string -->
 
     <!-- TODO 3D VIEWER strings-->
-    <!-- TODO string name="cbtn_compute">Compute</string -->
-
-    <string name="cbtn_move">Mover</string>
-    <string name="cbtn_rotate">Giro</string>
-    <string name="cbtn_station">Estación</string>
-    <string name="cbtn_splay">Tomas laterales</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Abrir Archivo</string>
     <string name="cmenu_options">Opciones</string>
@@ -1722,15 +1707,15 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
     <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
-    <string name="cmenu_files">Proyecto</string>
+    <!-- UNUSED string name="cmenu_files">Proyecto</string -->
     <string name="cmenu_export">Exportar</string>
-    <string name="cmenu_frame">Encuadre</string>
-    <string name="cmenu_color">Color</string>
+    <!-- UNUSED string name="cmenu_frame">Encuadre</string -->
+    <!-- UNUSED string name="cmenu_color">Color</string -->
     <string name="cmenu_info">Información</string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
-    <!-- TODO string name="cmenu_fractal">Fractal counts</string -->
+    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     <!-- TODO string name="cmenu_help">Help</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
@@ -1940,10 +1925,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="cpref_hull_summary">Hull walls</string>
 -->
 
-    <!-- TODO string name="TopoGLPerms">Permissions</string -->
+    <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
     <!-- TODO string name="cperms_mandatory">Cave3D cannot run without these permissions:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <!-- TODO string name="chelp_title">Cave3D %1$s Help</string -->
 
 </resources>

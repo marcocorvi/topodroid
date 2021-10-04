@@ -16,6 +16,7 @@ import com.topodroid.prefs.TDSetting;
 
 import java.io.IOException;
 
+import android.os.Build;
 import android.widget.ImageView;
 
 import android.graphics.Matrix;
@@ -84,13 +85,15 @@ public class TDImage
       // TDLog.v( "TD image bearing " + b + " clino " + c + " date " + mDate );
       if ( mDate == null ) mDate = "";
       if ( b == null || c == null ) { // FIXME-GPS_LATITUDE work-around for tag GPSLatitude not working
-        String u = exif.getAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION );
-        // TDLog.v( "Photo desc " + u );
-        if ( u != null ) {
-          String[] vals = u.split(" ");
-          if ( vals.length > 1 ) {
-            if ( b == null ) b = vals[0] + "/100";
-            if ( c == null ) c = vals[1] + "/100";
+        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
+          String u = exif.getAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION );
+          // TDLog.v( "Photo desc " + u );
+          if ( u != null ) {
+            String[] vals = u.split(" ");
+            if (vals.length > 1) {
+              if (b == null) b = vals[0] + "/100";
+              if (c == null) c = vals[1] + "/100";
+            }
           }
         }
       }

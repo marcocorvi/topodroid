@@ -52,7 +52,8 @@ class ParserCaveSniper extends ImportParser
   }
 
   /** read input file
-   * @param br   buffered reader on the input file
+   * @param isr      imput stream reader
+   * @param filename input filename
    */
   private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {

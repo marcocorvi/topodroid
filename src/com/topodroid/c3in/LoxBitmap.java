@@ -21,8 +21,8 @@ public class LoxBitmap
   int sid; // surface
   int type;
   int size;
-  double calib[];
-  double calib_inv[];
+  double[] calib;
+  double[] calib_inv;
   double det; // calib det
   byte[] data;
   int data_offset;

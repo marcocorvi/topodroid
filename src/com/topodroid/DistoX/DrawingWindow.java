@@ -6699,7 +6699,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** interface IExporter: export sketch
-   * @param export_type    export format
+   * @param uri export URI
    */
   public void doUriExport( Uri uri ) 
   {

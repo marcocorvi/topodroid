@@ -299,7 +299,7 @@ public class DrawingSvgBase
     // TDLog.v( "SVG point " + name + " at " + point.cx + " " + point.cy );
     pw.format("<!-- point %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
-      assert( point instanceof DrawingLabelPath );
+      // assert( point instanceof DrawingLabelPath );
       float o = (float)(point.mOrientation);
       float s = POINT_SCALE * TDMath.sind( o ) * scale / 10.0f;
       float c = POINT_SCALE * TDMath.cosd( o ) * scale / 10.0f;

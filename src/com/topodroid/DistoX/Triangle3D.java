@@ -68,7 +68,7 @@ public class Triangle3D
 
   public void dump()
   {
-    TDLog.v("Cave3D " + String.format( "%6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f",
+    TDLog.v("Cave3D " + String.format(Locale.US, "%6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f",
       vertex[0].x, vertex[0].y, vertex[0].z, 
       vertex[1].x, vertex[1].y, vertex[1].z, 
       vertex[2].x, vertex[2].y, vertex[2].z ) );

@@ -186,7 +186,7 @@ public class TopoGL extends Activity
 
   private BitmapDrawable mBMmeasureOn;
   private BitmapDrawable mBMmeasureOff;
-  private BitmapDrawable mBMfixOn;;
+  private BitmapDrawable mBMfixOn;
   private BitmapDrawable mBMfixOff;
 
   static int mCheckPerms = -1;
@@ -543,7 +543,7 @@ public class TopoGL extends Activity
   MyMenuAdapter mMenuAdapter = null;
   boolean    onMenu = false;
 
-  int menus[] = {
+  private static final int[] menus = {
     R.string.cmenu_open,       // 0
     R.string.cmenu_export,
     // R.string.cmenu_ble, // FIXME BLUETOOTH  MENU
@@ -713,9 +713,9 @@ public class TopoGL extends Activity
 
   MyHorizontalListView mListView = null;
   MyHorizontalButtonView mButtonView1;
-  MyButton mButton1[] = null;
+  MyButton[] mButton1 = null;
   static int mNrButton1 = 8;
-  static int izons[] = {
+  private static final int[] izons = {
     R.drawable.iz_light,
     R.drawable.iz_orthogonal,
     R.drawable.iz_station_no_dot,

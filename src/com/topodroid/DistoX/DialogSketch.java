@@ -20,11 +20,10 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import android.content.Context;
-import android.app.Dialog;
 import android.os.Bundle;
 
-import android.view.View.OnClickListener;;
-import android.widget.ArrayAdapter;
+import android.view.View.OnClickListener;
+// import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -33,7 +32,6 @@ import android.widget.Button;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 
 
 class DialogSketch extends MyDialog

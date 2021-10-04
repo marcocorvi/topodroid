@@ -82,6 +82,7 @@ public class BricComm extends TopoDroidComm
   // final static int DATA_DEVICE_01   = 301;
   // final static int DATA_DEVICE_04   = 304;
   // final static int DATA_DEVICE_06   = 306;
+  final static int DATA_QUIT = -1;
 
   private Context mContext;
   BleCallback mCallback;
@@ -106,7 +107,8 @@ public class BricComm extends TopoDroidComm
     Thread consumer = new Thread(){
       public void run()
       {
-        for ( ; ; ) {
+        boolean do_consume = true;
+        while ( do_consume ) {
           TDLog.v( "BRIC comm: Queue size " + mQueue.size );
           BricBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
@@ -162,6 +164,9 @@ public class BricComm extends TopoDroidComm
               // BricDebug.logString( buffer.data );
               if ( mBricInfoDialog != null ) mBricInfoDialog.setValue( DATA_BATTERY_LVL, buffer.data );
               registerInfo( null ); // battery level is the last info
+              break;
+            case DATA_QUIT:
+              do_consume = false;
               break;
             default:
               TDLog.Error("BRIC comm: Queue - unknown buffer type " + buffer.type );

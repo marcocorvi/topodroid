@@ -13,12 +13,12 @@ package com.topodroid.c3walls.cw;
 
 import com.topodroid.DistoX.Vector3D;
 
-import java.util.List;
+// import java.util.List;
 import java.util.Locale;
 
 import java.io.PrintWriter;
 // import java.io.PrintStream;
-import java.io.DataInputStream;
+// import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 

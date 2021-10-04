@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nie można pobrać podręcznika użytkownika z Internetu</string>
     <string name="user_man_ok">Zainstalowane tłumaczenie podręcznika użytkownika</string>
     <string name="user_man_fail">Nie można zainstalować tłumaczenia instrukcji obsługi</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -79,7 +79,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="tha_user">użytkownik</string>
     <string name="tha_water">woda</string>
 
-    <string name="make_walls">Walls</string>
+    <!-- UNUSED string name="make_walls">Walls</string -->
     <string name="missing_station">Brakująca stacja</string>
     <string name="station_not_found">Stacja nieznaleziona</string>
     <!-- TODO string name="shot_not_found">No shot found</string -->
@@ -128,7 +128,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- REMOVE string name="calib_gm_policy">Polityka</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Przywrócić dane kalibracyjne?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Kalibracja zapisana</string>
     <string name="calib_updated">Kalibracja zaktualizowana</string>
     <string name="calib_compute_groups">Obliczanie danych kalibracyjnych &#8230;</string>
@@ -160,7 +160,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="device_illegal_addr">Niedozwolony adres pamięci</string>
     <string name="device_info">Informacje o urządzeniu</string>
     <!-- UNUSED string name="device_model_set">Na pewno zmienić model urządzenia</string -->
-    <string name="device_none">Nie wybrano DistoX</string>
+    <!-- UNUSED string name="device_none">Nie wybrano DistoX</string -->
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset pamięci DistoX</string>
     <!-- TODO string name="device_clear">Clear DistoX memory</string -->
@@ -278,7 +278,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_group_non_integer">Grupa musi być liczbą stałą</string>
     <string name="error_alt_required">Wymagana wysokość</string>
     <string name="error_invalid_number">Zły numer</string>
-    <string name="error_invalid_name">Zła nazwa</string>
+    <!-- UNUSED string name="error_invalid_name">Zła nazwa</string -->
     <string name="error_lat_required">Wymagana szer. geogr.</string>
     <string name="error_long_required">Wymagana dł. geogr.</string>
     <!-- TODO string name="error_name_exists">Existing project</string -->
@@ -296,9 +296,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_value_required">Wartość wymagana</string>
 
     <string name="group_title">Grupy danych kalibracji</string>
-    <string name="group_policy_four">Zasady: grupuj 4</string>
-    <string name="group_policy_sixteen">Zasady: 4 grupy po 4, inne pojedyncze</string>
-    <string name="group_policy_distance">Zasady: grupuj wg. kąta</string>
+    <!-- UNUSED string name="group_policy_four">Zasady: grupuj 4</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Zasady: 4 grupy po 4, inne pojedyncze</string -->
+    <!-- UNUSED string name="group_policy_distance">Zasady: grupuj wg. kąta</string -->
     <string name="group_reset">Resetuj grupy</string>
 
     <!-- UNUSED string name="scale">scale</string -->
@@ -342,7 +342,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calibration">bak wybranej kalibracji</string>
     <string name="no_capture_app">Brak apki do robienia zdjęć</string>
     <string name="no_cave3d">brak zainstalowanego Cave3D</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">brak redukcj danych</string>
     <string name="no_db">brak bazy danych</string>
     <string name="no_device_address">Urządzenie nie wybrane</string>
@@ -423,16 +422,16 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- UNUSED string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <!-- TODO string name="ble_no_remote">No remote device</string -->
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
@@ -512,7 +511,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="saved_file_1">Zapisano plik %1$s</string>
     <string name="saved_file_2">Zapisano plik %1$s Skala %2$.2f</string>
-    <string name="saving_">Zapisywanie </string>
+    <!-- UNUSED string name="saving_">Zapisywanie </string -->
     <string name="saving_file_failed">Błąd zapisu pliku</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">domiar</string>
@@ -685,7 +684,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_cancel"    >Anuluj    </string>
     <string name="button_change"    >Zmień    </string>
     <string name="button_close"     >Zamknij     </string>
-    <string name="button_create"    >Stwórz    </string>
+    <!-- UNUSED string name="button_create"    >Stwórz    </string -->
     <string name="button_color"     >Kolor</string>
     <string name="button_convert"   >Konwertuj   </string>
     <string name="button_current"   >Aktywuj    </string>
@@ -724,7 +723,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump      </string>
-    <string name="button_rename"    >Zmień nazwę    </string>
+    <!-- UNUSED string name="button_rename"    >Zmień nazwę    </string -->
     <string name="button_renumber"  >Przenumeruj</string>
     <string name="button_bedding"   >Osadź płąszczyznę</string>
     <string name="button_replace"   >Przenieś   </string>
@@ -1051,7 +1050,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Eksport szkicu</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
-    <string name="title_plot_reload">Ponownie załaduj szkic</string>
+    <!-- UNUSED string name="title_plot_reload">Ponownie załaduj szkic</string -->
     <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Odwrócić szkic profilu ?</string>
     <string name="title_projection">Azymut profilu rzutowanego %1$d</string>
@@ -1114,8 +1113,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_calib_export">Eksportuj kalibrację</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1169,10 +1166,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
   <string name="pref_import_datamode_title">Importuj tryb danych</string>
   <string name="pref_import_datamode_summary">Tryb danych dla importowanego ciągu</string>
-  <string name="pref_export_shots_title">Domyślny eksport danych</string>
-  <string name="pref_export_shots_summary">Domyślny format eksportu danych</string>
-  <string name="pref_export_plot_title">Domyślny eksport szkicu</string>
-  <string name="pref_export_plot_summary">Domyślny format eksportu szkicu</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1334,8 +1327,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
   <!-- TODO string name="pref_section_splay_title">Splay dash angle-threshold</string -->
   <string name="pref_section_splay_message">Domiary nad katem w płaszczyznie przekroju kreskowane</string>
-  <string name="pref_data_backup_title">Automatyczny eksport danych</string>
-  <string name="pref_data_backup_summary">Automatyczny eksport danych (wymagany domyślny format)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Automatyczny eksport danych</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Automatyczny eksport danych (wymagany domyślny format)</string -->
   <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
   <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
@@ -1696,9 +1689,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="equate_no_stations">Too few stations</string -->
     <!-- TODO string name="equate_no_nearby">No station nearby</string -->
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
+    <!-- UNUSED string name="menu_new">NEW</string -->
+    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
+    <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
@@ -1722,33 +1715,24 @@ There are other settings for the presentation of the sketchs (icon size, label s
     VERY IMPORTANT Fix the "UNUSED" commented strings
 
     <string name="cbtn_bind">Rebind</string>
-    <string name="cbtn_compute">Compute</string>
-
-    <string name="cbtn_new">New</string>
-    <string name="cbtn_move">Move</string>
-    <string name="cbtn_rotate">Turn</string>
-    <string name="cbtn_station">Station</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Open file</string>
     <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
-    <string name="cmenu_ble">BT surveys</string>
+    < UNUSED string name="cmenu_ble">BT surveys</string>
     <string name="cmenu_viewpoint">Viewpoint</string>
-    <string name="cmenu_files">Surveys</string>
+    < UNUSED string name="cmenu_files">Surveys</string>
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Frame</string>
-    <string name="cmenu_color">Color</string>
+    < UNUSED string name="cmenu_frame">Frame</string>
+    < UNUSED string name="cmenu_color">Color</string>
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">3D-Rose diagram</string>
     <string name="cmenu_rose">Rose diagram</string>
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
-    <string name="cmenu_fractal">Fractal counts</string>
+    < UNUSED string name="cmenu_fractal">Fractal counts</string>
     <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
@@ -1834,11 +1818,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="azimuth">azimuth</string>
     <string name="clino">clino</string>
 
-    <string name="cbtn_laser">Laser</string>
-    <string name="cbtn_scan">Scan</string>
-    <string name="cbtn_shot">Shot</string>
-    <string name="cbtn_start">Start</string>
-    <string name="cbtn_stop">Stop</string>
+    < UNUSED string name="cbtn_laser">Laser</string>
+    < UNUSED string name="cbtn_scan">Scan</string>
+    < UNUSED string name="cbtn_shot">Shot</string>
+    < UNUSED string name="cbtn_start">Start</string>
+    < UNUSED string name="cbtn_stop">Stop</string>
 
     <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
@@ -2019,11 +2003,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="cpref_hull_summary">Hull walls</string>
 ->
 
-    <string name="TopoGLPerms">Permissions</string>
+    < UNUSED string name="TopoGLPerms">Permissions</string>
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
     <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
     <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
-    <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>

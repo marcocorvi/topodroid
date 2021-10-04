@@ -15,5 +15,5 @@ import java.util.ArrayList;
 
 public interface WallComputer
 {
-  public ArrayList< Triangle3D > getTriangles();
+  ArrayList< Triangle3D > getTriangles();
 }

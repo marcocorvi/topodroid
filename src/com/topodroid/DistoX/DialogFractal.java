@@ -14,14 +14,10 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
-import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 
-import android.graphics.*;
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.EditText;
@@ -57,7 +53,7 @@ class DialogFractal extends MyDialog
     super.onCreate(savedInstanceState);
     initLayout(R.layout.fractal_dialog, R.string.fractal_title );
 
-    TextView tv = ( TextView ) findViewById(R.id.fractal_count);
+    TextView tv = ( TextView ) findViewById(R.id.fractal_count_text);
     tv.setText( FractalResult.countsString() );
 
     tv = (TextView) findViewById( R.id.fractal_computer );

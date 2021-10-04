@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
     <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
     <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
 
-    <string name="desc_user_man">Felhasználói kézikönyv</string>
-    <string name="desc_points">Pontok</string>
-    <string name="desc_lines">Vonalak</string>
-    <string name="desc_areas">Területek</string>
+    <!-- UNUSED string name="desc_user_man">Felhasználói kézikönyv</string -->
+    <!-- UNUSED string name="desc_points">Pontok</string -->
+    <!-- UNUSED string name="desc_lines">Vonalak</string -->
+    <!-- UNUSED string name="desc_areas">Területek</string -->
     <string name="desc_menu">Menü</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -79,7 +79,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="tha_user">felhasználó</string>
     <string name="tha_water">víz</string>
 
-    <string name="make_walls">Falak</string>
+    <!-- UNUSED string name="make_walls">Falak</string -->
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
     <string name="shot_not_found">Mérés nem található</string>
@@ -126,7 +126,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- REMOVE string name="calib_gm_policy">Eljárás</string -->
     <string name="calib_gm_policy">Csoportosítási szabály</string>
     <string name="calib_gm_undelete">Helyreállítja a kalibrációs adatokat?</string>
-    <string name="calib_offgroup_data">Esetleg %1$d csoporton kívüli adat</string>
+    <!-- UNUSED string name="calib_offgroup_data">Esetleg %1$d csoporton kívüli adat</string -->
     <string name="calib_saved">Mentett kalibráció</string>
     <string name="calib_updated">A műszer kalibrációja frissítve</string>
     <string name="calib_compute_groups">Kalibrációs mérések csoportosítása &#8230;</string>
@@ -158,7 +158,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="device_illegal_addr">Helytelen memória cím</string>
     <string name="device_info">Műszer információ</string>
     <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni a műszer típusát?</string -->
-    <string name="device_none">Nincs kiválasztva DistoX</string>
+    <!-- UNUSED string name="device_none">Nincs kiválasztva DistoX</string -->
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">DistoX memóriájának újraindítása</string>
     <string name="device_clear">DistoX memóriájának törlése</string>
@@ -277,7 +277,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_group_non_integer">A csoport számnak egész számnak kell lennie</string>
     <string name="error_alt_required">Magassági adat szükséges</string>
     <string name="error_invalid_number">Érvénytelen szám</string>
-    <string name="error_invalid_name">Érvénytelen név</string>
+    <!-- UNUSED string name="error_invalid_name">Érvénytelen név</string -->
     <string name="error_lat_required">Szélességi adat szükséges</string>
     <string name="error_long_required">Hosszúsági adat szükséges</string>
     <string name="error_name_exists">Létező projekt</string>
@@ -296,9 +296,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_value_required">Érték szükséges</string>
     
     <string name="group_title">Kalibrációs adat csoportok</string>
-    <string name="group_policy_four">Négyesével csoportosítva</string>
-    <string name="group_policy_sixteen">Négy csoport négyesével, a többi egyenként</string>
-    <string name="group_policy_distance">Csoportosítás az irányszögek alapján</string>
+    <!-- UNUSED string name="group_policy_four">Négyesével csoportosítva</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Négy csoport négyesével, a többi egyenként</string -->
+    <!-- UNUSED string name="group_policy_distance">Csoportosítás az irányszögek alapján</string -->
     <string name="group_reset">Csoportok törlése</string>
 
     <!-- UNUSED string name="scale">scale</string -->
@@ -342,7 +342,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_calibration">Nincs kalibráció kiválasztva</string>
     <string name="no_capture_app">Nincs app fénykép készítéshez</string>
     <string name="no_cave3d">Cave3D nincs telepítve</string>
-    <string name="outdated_cave3d">Cave3D verzió túl régi</string>
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
@@ -423,16 +422,16 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="start_scan">Keresés indítás</string>
     <string name="stop_scan">Keresés leállítás</string>
     <string name="title_scan">BTLE keresés</string>
-    <string name="ble_scan_failed">BTLE keresés eredménytelen</string>
-    <string name="ble_gatt_failure">BTLE hiba</string>
+    <!-- UNUSED string name="ble_scan_failed">BTLE keresés eredménytelen</string -->
+    <!-- UNUSED string name="ble_gatt_failure">BTLE hiba</string -->
     <string name="ble_no_remote">Nincs távoli műszer</string>
-    <string name="ble_control">Ellenőrzés</string>
-    <string name="ble_connect">Kapcsolódás</string>
-    <string name="ble_disconnect">Szétkapcsolás</string>
-    <string name="bric_scan">Keresés</string>
-    <string name="bric_shot">Mérés</string>
-    <string name="bric_laser">Lézer</string>
-    <string name="bric_off">Ki</string>
+    <!-- UNUSED string name="ble_control">Ellenőrzés</string -->
+    <!-- UNUSED string name="ble_connect">Kapcsolódás</string -->
+    <!-- UNUSED string name="ble_disconnect">Szétkapcsolás</string -->
+    <!-- UNUSED string name="bric_scan">Keresés</string -->
+    <!-- UNUSED string name="bric_shot">Mérés</string -->
+    <!-- UNUSED string name="bric_laser">Lézer</string -->
+    <!-- UNUSED string name="bric_off">Ki</string -->
     <string name="bric_memory">BRIC memória</string>
 
     <string name="popup_join_pt">Kapcsolás pontra</string>
@@ -511,7 +510,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="saved_file_1">Mentett fájl %1$s</string>
     <string name="saved_file_2">Mentett fájl %1$s Méretarány %2$.2f</string>
-    <string name="saving_">Mentés</string>
+    <!-- UNUSED string name="saving_">Mentés</string -->
     <string name="saving_file_failed">Fájl mentése nem sikerült</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">segédmérés</string>
@@ -690,7 +689,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_change"    >Változtat</string>
     <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
-    <string name="button_create"    >Létrehoz</string>
+    <!-- UNUSED string name="button_create"    >Létrehoz</string -->
     <string name="button_color"     >Szín</string>
     <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
@@ -730,7 +729,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="button_redo"      >Újra      </string -->
     <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
     <string name="button_dump"      >Letöltés</string>
-    <string name="button_rename"    >Átnevez    </string>
+    <!-- UNUSED string name="button_rename"    >Átnevez    </string -->
     <string name="button_renumber"  >Átszámoz</string>
     <string name="button_bedding"   >Alap sík</string>
     <string name="button_replace"   >Cserél   </string>
@@ -1060,7 +1059,7 @@ A részletekért keresse fel a weboldalakat.\n
 	<string name="title_photo_view">Fénykép</string>
     <string name="title_plot_save">Vázlat exportálása</string>
     <!-- UNUSED string name="title_plot_merge">Vázlatban egyesít</string -->
-    <string name="title_plot_reload">Vázlat újratöltése</string>
+    <!-- UNUSED string name="title_plot_reload">Vázlat újratöltése</string -->
     <string name="title_plot_scraps">Vázlat szintek</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
@@ -1123,8 +1122,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_calib_export">Kalibráció exportálása</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">VisualTopo import opciók</string>
-    <string name="title_import_dat">Compass import opciók</string>
     <string name="title_import_shot">Felmérés import</string>
     <string name="title_import_gps">GPS pont import</string>
 
@@ -1180,10 +1177,6 @@ A részletekért keresse fel a weboldalakat.\n
   <!-- UNUSED string name="pref_cosurvey_summary">Együttes felmérés engedélyezése</string -->
   <string name="pref_import_datamode_title">Import adatmód</string>
   <string name="pref_import_datamode_summary">Adatmód a mérés importáláshoz</string>
-  <string name="pref_export_shots_title">Adat export</string>
-  <string name="pref_export_shots_summary">Adat export formátum alapbeállítása</string>
-  <string name="pref_export_plot_title">Vázlat export</string>
-  <string name="pref_export_plot_summary">Vázlat Export formátum alapbeállítása</string>
 
   <string name="pref_therion_config_title">Therion konfig parancs</string>
   <string name="pref_therion_config_summary">Therion konfig parancs készítés</string>
@@ -1348,8 +1341,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_horiz_splay_message">Segédmérés iránya ami felett szaggatott</string>
   <string name="pref_section_splay_title">Sün metszet irány</string>
   <string name="pref_section_splay_message">Ha nagyobb ennél a szögnél a metszet sikban akkor a segédmérések szaggatottak</string>
-  <string name="pref_data_backup_title">Adat autómatikus export</string>
-  <string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Adat autómatikus export</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string -->
   <string name="pref_editable_stations_title">Átírható pontszám</string>
   <string name="pref_editable_stations_summary">Módosíthatók a pont nevek a jegyzőkönyvben</string>
   <string name="pref_zipped_symbols_title">Tömörített szimbólum</string>
@@ -1720,9 +1713,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="equate_no_stations">Túl kevés pont</string>
     <string name="equate_no_nearby">Nincs közelben pont</string>
 
-    <string name="menu_new">ÚJ</string>
-    <string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string>
-    <string name="menu_equates">KAPCSOLÓDÓ PONTOK</string>
+    <!-- UNUSED string name="menu_new">ÚJ</string -->
+    <!-- UNUSED string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string -->
+    <!-- UNUSED string name="menu_equates">KAPCSOLÓDÓ PONTOK</string -->
     <!-- UNUSED string name="menu_save">MENTÉS</string -->
 
     <string name="overwrite">felülírja</string>
@@ -1746,33 +1739,24 @@ A részletekért keresse fel a weboldalakat.\n
     VERY IMPORTANT Fix the "UNUSED" commented strings -->
 
     <string name="cbtn_bind">Újraköt</string>
-    <string name="cbtn_compute">Számol</string>
-
-    <string name="cbtn_new">Új</string>
-    <string name="cbtn_move">Mozgat</string>
-    <string name="cbtn_rotate">Forgat</string>
-    <string name="cbtn_station">Pont</string>
-    <string name="cbtn_splay">Sün</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Fájl megnyitás</string>
     <string name="cmenu_options">Opciók</string>
     <string name="cmenu_reset">Visszaállít</string>
 
     <string name="cmenu_alpha">Felület</string>
-    <string name="cmenu_ble">BT mérések</string>
+    <!-- UNUSED string name="cmenu_ble">BT mérések</string -->
     <string name="cmenu_viewpoint">Nézőpont</string>
-    <string name="cmenu_files">Mérések</string>
+    <!-- UNUSED string name="cmenu_files">Mérések</string -->
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Keret</string>
-    <string name="cmenu_color">Szín</string>
+    <!-- UNUSED string name="cmenu_frame">Keret</string -->
+    <!-- UNUSED string name="cmenu_color">Szín</string -->
     <string name="cmenu_info">Infó</string>
     <string name="cmenu_ico">3D-Rózsa diagramm</string>
     <string name="cmenu_rose">Rózsa diagramm</string>
     <string name="cmenu_wall">Fal modellek</string>
     <string name="cmenu_sketch">Vázlatok</string>
-    <string name="cmenu_fractal">Fraktál számítás</string>
+    <!-- UNUSED string name="cmenu_fractal">Fraktál számítás</string -->
     <string name="cmenu_help">Súgó</string>
 
     <string name="fractal_title">Fraktál számítás</string>
@@ -1858,11 +1842,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="azimuth">irány</string>
     <string name="clino">lejtés</string>
 
-    <string name="cbtn_laser">Lézer</string>
-    <string name="cbtn_scan">Keresés</string>
-    <string name="cbtn_shot">Mérés</string>
-    <string name="cbtn_start">Indítás</string>
-    <string name="cbtn_stop">Leállítás</string>
+    <!-- UNUSED string name="cbtn_laser">Lézer</string -->
+    <!-- UNUSED string name="cbtn_scan">Keresés</string -->
+    <!-- UNUSED string name="cbtn_shot">Mérés</string -->
+    <!-- UNUSED string name="cbtn_start">Indítás</string -->
+    <!-- UNUSED string name="cbtn_stop">Leállítás</string -->
 
     <string name="survey_edit">Felmérés Tulajdonságok</string>
     <string name="survey_list">FELMÉRÉSEK</string>
@@ -2043,11 +2027,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cpref_hull_summary">Hull falak</string>
 -->
 
-    <string name="TopoGLPerms">Engedélyek</string>
+    <!-- UNUSED string name="TopoGLPerms">Engedélyek</string -->
     <string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string>
     <!-- UNUSED string name="cperms_optional">Cave3D nem teljes funkciójú enélkül:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <string name="chelp_title">Cave3D %1$s Súgó</string>
 
     <string name="help_open_3d">3D fájl megnyitás</string>
     <string name="help_export_3d">3D fájl export</string>

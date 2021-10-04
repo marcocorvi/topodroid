@@ -9,9 +9,12 @@
     style="@style/list_bottom"
     android:background="@color/edit_background"
     android:layout_width="fill_parent"
-    android:layout_height="match_parent"
-    android:layout_marginLeft="15dp" 
+    android:layout_height="0dp"
     android:layout_weight="1"
+    android:layout_marginLeft="15dp" 
+    android:transcriptMode="alwaysScroll"
+    android:fastScrollEnabled="true"
+    android:scrollingCache="true"
   />  
 
 

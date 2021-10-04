@@ -45,6 +45,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+          android:inputType="number"
         />
     </LinearLayout>
   </LinearLayout>
@@ -323,6 +324,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+          android:inputType="numberDecimal"
         />
     </LinearLayout>
     <!-- LinearLayout 

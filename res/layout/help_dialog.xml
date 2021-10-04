@@ -15,8 +15,8 @@
     android:background="@drawable/ic_manual"
     android:layout_gravity="right"
     android:gravity="right"
-    android:contextDescription="@string/desc_user_man"
   />
+  <!-- android:contextDescription="@string/desc_user_man" -->
 
 </FrameLayout>
 

@@ -32,7 +32,7 @@ class GPS implements LocationListener
           , GpsStatus.Listener
 {
   private LocationManager locManager = null;
-  private GpsStatus mStatus;
+  private GpsStatus mStatus = null;
 
   boolean mIsLocating;
   // boolean mHasLocation;
@@ -53,7 +53,7 @@ class GPS implements LocationListener
 
   interface GPSListener
   {
-    public void notifyLocation( double lng, double lat, double alt );
+    void notifyLocation( double lng, double lat, double alt );
   }
 
   private GPSListener mListener = null;
@@ -81,7 +81,14 @@ class GPS implements LocationListener
     if ( checkLocation( ctx ) ) { // CHECK_PERMISSIONS
       locManager = (LocationManager) ctx.getSystemService( Context.LOCATION_SERVICE );
       if ( locManager != null ) {
-        mStatus = locManager.getGpsStatus( null );
+        try { 
+          mStatus = locManager.getGpsStatus( null );
+        } catch ( SecurityException e ) {
+          mStatus = null;
+          // setGPSoff();
+          locManager = null;
+          // TDLog.Error( TODO );
+        }
       }
     }
     // mHasLocation = false;
@@ -132,8 +139,10 @@ class GPS implements LocationListener
   void setGPSoff()
   {
     if ( locManager != null ) {
-      locManager.removeUpdates( this );
-      locManager.removeGpsStatusListener( this );
+      try {
+        locManager.removeUpdates( this );
+        locManager.removeGpsStatusListener( this );
+      } catch ( SecurityException e ) { }
     }
     mIsLocating = false;
     // mHasLocation = false;
@@ -146,9 +155,11 @@ class GPS implements LocationListener
     // mErr2 = -1; // restart location averaging
     resetSums();
     if ( locManager == null ) return false;
-    locManager.addGpsStatusListener( this );
-    locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
-    mIsLocating = true;
+    try {
+      locManager.addGpsStatusListener( this );
+      locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+      mIsLocating = true;
+    } catch ( SecurityException e ) { }
     mNrSatellites = 0;
     return true;
   }

@@ -849,8 +849,8 @@ public class CWConvexHull
   boolean isPointInside( Vector3D p, double eps ) { return solidAngle(p, eps) > 0.4f; }
 
   /** check if a point is on the surface of this CW (ie, inside a face)
-   * @param p   point
-   * @param eps
+   * @param v   3D point
+   * @param eps tolerance
    */
   boolean isOnSurface( Vector3D v, double eps )
   {
@@ -861,7 +861,10 @@ public class CWConvexHull
   }
  
  
-  // points of the other CW that are inside this CW 
+  /* points of the other CW that are inside this CW 
+   * @param cv  the other CW
+   * @param eps tolerance
+   */
   List<CWPoint> computeInsidePoints( CWConvexHull cv, double eps )
   { 
     ArrayList<CWPoint> ret = new ArrayList<CWPoint>();
@@ -932,12 +935,12 @@ public class CWConvexHull
   
   //**********************************************************************
 
-  /** shrink a bit the convex hull by moving inside points that are on the surface on another cv
-   *  
-   * @param cv the other cw
-   * @param delta   amount to move towards the center
-   * @return true if at least one point has moved
-   */
+  // /** shrink a bit the convex hull by moving inside points that are on the surface on another cv
+  //  *  
+  //  * @param cv the other cw
+  //  * @param delta   amount to move towards the center
+  //  * @return true if at least one point has moved
+  //  */
 /*
   private boolean regularizePoints( CWConvexHull cv, double delta, double eps )
   {
@@ -1019,6 +1022,9 @@ public class CWConvexHull
     for ( CWSide s : mSide ) s.computeU12();
   }
 
+  /** compute the volume of this CW
+   * @return volume
+   */
   private double computeVolume()
   {
     if ( mVertex.size() < 4 ) return 0.0f;
@@ -1035,6 +1041,8 @@ public class CWConvexHull
   // the two end-point for the piece of border inside a triangle are not shared
   // with adjacent triangles
   // @param index index of the cw
+  // @param ints
+  // @param pts
   synchronized void splitTriangles( int index, List< CWIntersection > ints, List< CWPoint > pts )
   {
     int ns = ints.size();

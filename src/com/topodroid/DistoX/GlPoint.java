@@ -36,8 +36,8 @@ class GlPoint extends GlShape
   final static int STRIDE_VERTEX = COORDS_PER_VERTEX;
   final static int STRIDE_COLOR  = COORDS_PER_COLOR;
   
-  final static int BYTE_STRIDE_VERTEX = STRIDE_VERTEX * Float.BYTES;
-  final static int BYTE_STRIDE_COLOR  = STRIDE_COLOR  * Float.BYTES;
+  final static int BYTE_STRIDE_VERTEX = STRIDE_VERTEX * 4; // 4 = Float.BYTES;
+  final static int BYTE_STRIDE_COLOR  = STRIDE_COLOR  * 4; // 4 = Float.BYTES;
 
   final static int MAX_COUNT = 10;
 

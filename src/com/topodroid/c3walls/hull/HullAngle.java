@@ -144,7 +144,7 @@ class HullAngle
         updateA1( a+Math.PI );
       } else {                 // 0 < b < ber < PI
         choice = 13;
-        double a = (b + ber)/2 - Math.PI;;
+        double a = (b + ber)/2 - Math.PI;
         updateA2( a );
         updateA1( a+Math.PI );
       }

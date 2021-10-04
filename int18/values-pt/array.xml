@@ -62,11 +62,12 @@
      <item name="lf">Linux</item>
      <item name="lfcr">Windows</item>
   </string-array>
-  <string-array name="wallsType">
+  
+  <!-- UNUSED string-array name="wallsType">
      <item name="none">Nenhum</item>
      <item name="convex">Convexo</item>
      <item name="delaunay">Delaunay</item>
-  </string-array>
+  </string-array -->
   
   <string-array name="zoomCtrl">
      <item name="0">Off</item>
@@ -79,7 +80,7 @@
   </string-array>
 
 
-  <string-array name="exportShots">
+  <!-- UNUSED string-array name="exportShots">
      <item name="none">Nenhum</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -96,8 +97,9 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array>
-  <string-array name="exportPlot">
+  </string-array-->
+
+  <!-- UNUSED string-array name="exportPlot">
      <item name="none">Nenhum</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -105,7 +107,7 @@
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
      <item name="png">PNG</item>
-  </string-array>
+  </string-array -->
   <!-- UNUSED string-array name="exportSketch">
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>

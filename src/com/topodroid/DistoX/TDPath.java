@@ -99,14 +99,14 @@ public class TDPath
   private static String APP_C3D_PATH      = null;
 
   private static String APP_CAVE_PATH = null;   // Polygon
-  private static String APP_CAV_PATH = null;;    // Topo
-  private static String APP_CSV_PATH = null;;    // CSV text
-  private static String APP_CSX_PATH = null;;    // cSurvey
-  private static String APP_DAT_PATH = null;;    // Compass
-  private static String APP_GRT_PATH = null;;    // Grottolf
-  private static String APP_GTX_PATH = null;;    // GHTopo
-  private static String APP_DXF_PATH = null;;    
-  private static String APP_KML_PATH = null;;    
+  private static String APP_CAV_PATH = null;    // Topo
+  private static String APP_CSV_PATH = null;    // CSV text
+  private static String APP_CSX_PATH = null;    // cSurvey
+  private static String APP_DAT_PATH = null;    // Compass
+  private static String APP_GRT_PATH = null;    // Grottolf
+  private static String APP_GTX_PATH = null;    // GHTopo
+  private static String APP_DXF_PATH = null;    
+  private static String APP_KML_PATH = null;    
   private static String APP_JSON_PATH = null;   
   private static String APP_PLT_PATH = null;    // trackfile
   private static String APP_PNG_PATH = null;    
@@ -138,14 +138,14 @@ public class TDPath
     APP_C3D_PATH      = null;
 
     APP_CAVE_PATH = null;   // Polygon
-    APP_CAV_PATH = null;;    // Topo
-    APP_CSV_PATH = null;;    // CSV text
-    APP_CSX_PATH = null;;    // cSurvey
-    APP_DAT_PATH = null;;    // Compass
-    APP_GRT_PATH = null;;    // Grottolf
-    APP_GTX_PATH = null;;    // GHTopo
-    APP_DXF_PATH = null;;    
-    APP_KML_PATH = null;;    
+    APP_CAV_PATH = null;    // Topo
+    APP_CSV_PATH = null;    // CSV text
+    APP_CSX_PATH = null;    // cSurvey
+    APP_DAT_PATH = null;    // Compass
+    APP_GRT_PATH = null;    // Grottolf
+    APP_GTX_PATH = null;    // GHTopo
+    APP_DXF_PATH = null;    
+    APP_KML_PATH = null;    
     APP_JSON_PATH = null;   
     APP_PLT_PATH = null;    // trackfile
     APP_PNG_PATH = null;    

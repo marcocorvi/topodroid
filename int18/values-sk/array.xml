@@ -58,11 +58,11 @@
      <item name="triangles">Trilaterácia</item>
   </string-array>
 
-  <string-array name="wallsType">
+  <!-- UNUSED string-array name="wallsType">
      <item name="none">Žiadne</item>
      <item name="convex">Konvexné</item>
      <item name="delaunay">Delaunay</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">Vypnuté</item>
@@ -87,7 +87,7 @@
      <item name="diving">Potápanie</item>
   </string-array>
     
-  <string-array name="exportShots">
+  <!-- UNUSED string-array name="exportShots">
      <item name="none">Žiadny</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -104,9 +104,9 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="exportPlot">
+  <!-- UNUSED string-array name="exportPlot">
      <item name="none">Žiadny</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -114,7 +114,7 @@
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
      <item name="png">PNG</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">Základné</item>

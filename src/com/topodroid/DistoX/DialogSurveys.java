@@ -18,17 +18,16 @@ import java.util.List;
 
 // import android.app.Dialog;
 import android.os.Bundle;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.Context;
 
-import android.widget.ArrayAdapter;
+// import android.widget.ArrayAdapter;
+// import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.AdapterView;
 import android.widget.Button;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
 
 class DialogSurveys extends MyDialog
                     implements OnClickListener

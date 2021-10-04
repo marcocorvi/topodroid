@@ -107,7 +107,7 @@ class LoxFile
   {
     // TDLog.v(  "LOX read chunks " + filename );
     int type;
-    byte int32[] = new byte[ Endian.SIZE32 ];
+    byte[] int32 = new byte[ Endian.SIZE32 ];
     try {
       boolean done = false;
       while ( ! done ) {
@@ -296,12 +296,12 @@ class LoxFile
       // assert( na * 3 * Endian.SIZE32 == as );
 
       // double * ptr = (double *)( data + pp );
-      double ptr[] = new double[ 3*np ];
+      double[] ptr = new double[ 3*np ];
       for ( int j=0; j<3*np; ++j) {
         ptr[j] = Endian.toDoubleLEndian( data, pp + j*Endian.SIZEDBL );
       }
       // uint32_t * itr = (uint32_t *)( data + ap );
-      int itr[] = new int[ 3*na ];
+      int[] itr = new int[ 3*na ];
       for ( int k=0; k<3*na; ++k ) {
         itr[k] = Endian.toIntLEndian( data, ap + k*Endian.SIZE32 );
       }
@@ -323,7 +323,7 @@ class LoxFile
     int hh = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
     int dp = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
     int ds = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;  // size in bytes = ww * hh * 8 (8 bytes/double)
-    double c[] = new double[6];
+    double[] c = new double[6];
     c[0]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // e0
     c[1]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // n0
     c[2]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // e = e0 + C2 * i + C3 * j // not sure abot c3/c4
@@ -335,7 +335,7 @@ class LoxFile
     int npts = ww * hh;
     // assert( ds == npts * sizeof(double) );
     // double * ptr = (double *)( data + dp );
-    double ptr[] = new double[ npts ];
+    double[] ptr = new double[ npts ];
     for ( int i=0; i< npts; ++i ) {
       ptr[i] = Endian.toDoubleLEndian( data, dp + i*Endian.SIZEDBL );
     }
@@ -353,7 +353,7 @@ class LoxFile
     int tp = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32; // type: JPEG PNG
     int dp = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
     int ds = Endian.toIntLEndian( recs, off ); off += Endian.SIZE32;
-    double c[] = new double[6];
+    double[] c = new double[6];
     c[0] = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL;
     c[1] = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL;
     c[2] = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL;

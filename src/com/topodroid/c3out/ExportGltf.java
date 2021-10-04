@@ -745,7 +745,7 @@ public class ExportGltf
    */
   private int getNextChunkPN( byte[] buf, int clen, float[] array, int flen, int offset, int len, int stride, MinMax minMaxP, MinMax minMaxN )
   {
-    assert( len == 6 );
+    // assert( len == 6 );
     // StringBuilder sb = new StringBuilder();
     int bpos = 0;
     int klen = clen / (4*len);

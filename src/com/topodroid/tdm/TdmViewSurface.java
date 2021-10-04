@@ -323,7 +323,7 @@ public class TdmViewSurface extends SurfaceView
       public void run() 
       {
         while ( _run ) {
-          if ( isDrawing == true ) {
+          if ( isDrawing ) {
             refresh();
           } else {
             try {

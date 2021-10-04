@@ -14,7 +14,7 @@ package com.topodroid.c3walls.cw;
 import com.topodroid.DistoX.Vector3D;
 
 import java.util.List;
-import java.io.PrintWriter;
+// import java.io.PrintWriter;
 // import java.io.PrintStream;
 // import java.io.IOException;
 
@@ -259,10 +259,9 @@ public class CWFacet
    * therefore
    *    alpha    U*U  U*N        (VV-V)*N
    *    beta  =  U*N  N*N times -(VV-V)*U divided (N*N * U*U - U*n * U*N)
-   * @param v
-   * @param n
-   * @param u
-   * @param vv
+   * @param n   see above eq.
+   * @param u   see above eq.
+   * @param vv  see above eq.
    * @return value of beta (if in [0,1] the intersection point is on the triangle side] 
    */
   private double beta( Vector3D n, Vector3D u, Vector3D vv )

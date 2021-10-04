@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">无法从网络检索用户手册</string>
     <string name="user_man_ok">已安装用户手册译本</string>
     <string name="user_man_fail">无法安装用户手册译本</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -79,7 +79,7 @@ Refer to the web pages for details.\n
     <string name="tha_user">用户</string>
     <string name="tha_water">水</string>
 
-    <string name="make_walls">洞壁</string>
+    <!-- UNUSED string name="make_walls">洞壁</string -->
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
     <string name="shot_not_found">未发现测线数据</string>
@@ -126,7 +126,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">原则</string -->
     <string name="calib_gm_policy">组策略</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">保存校准数据</string>
     <string name="calib_updated">更新校准数据</string>
     <string name="calib_compute_groups">计算校准数据组 &#8230;</string>
@@ -158,7 +158,7 @@ Refer to the web pages for details.\n
     <string name="device_illegal_addr">非法的存储地址</string>
     <string name="device_info">设备信息</string>
     <!-- UNUSED string name="device_model_set">你是否想要切换设备</string -->
-    <string name="device_none">无可供选择DistoX设备</string>
+    <!-- UNUSED string name="device_none">无可供选择DistoX设备</string -->
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">重置 DistoX 内存</string>
     <string name="device_clear">清除DistoX内存</string>
@@ -276,7 +276,7 @@ Refer to the web pages for details.\n
     <string name="error_group_non_integer">组编号必须是整数</string>
     <string name="error_alt_required">输入海拔高度</string>
     <string name="error_invalid_number">无效数字</string>
-    <string name="error_invalid_name">无效名</string>
+    <!-- UNUSED string name="error_invalid_name">无效名</string -->
     <string name="error_lat_required">输入纬度</string>
     <string name="error_long_required">输入经度</string>
     <string name="error_name_exists">项目已存在</string>
@@ -294,9 +294,9 @@ Refer to the web pages for details.\n
     <string name="error_value_required">输入赋值</string>
 
     <string name="group_title">校准数据组</string>
-    <string name="group_policy_four">原则: 四个一组</string>
-    <string name="group_policy_sixteen">原则: 四组四个,其他单组</string>
-    <string name="group_policy_distance">Policy: 按角度距离分组</string>
+    <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->
+    <!-- UNUSED string name="group_policy_sixteen">原则: 四组四个,其他单组</string -->
+    <!-- UNUSED string name="group_policy_distance">Policy: 按角度距离分组</string -->
     <string name="group_reset">复位组</string>
 
     <!-- UNUSED string name="scale">scale</string -->
@@ -340,7 +340,6 @@ Refer to the web pages for details.\n
     <string name="no_calibration">无选择校准</string>
     <string name="no_capture_app">无图像捕捉应用</string>
     <string name="no_cave3d">Cave3D 未安装</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
@@ -421,16 +420,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <string name="ble_scan_failed">蓝牙设备扫描失败</string>
-    <string name="ble_gatt_failure">蓝牙故障</string>
+    <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->
+    <!-- UNUSED string name="ble_gatt_failure">蓝牙故障</string -->
     <string name="ble_no_remote">无远程设备</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
@@ -510,7 +509,7 @@ Refer to the web pages for details.\n
 
     <string name="saved_file_1">保存文件 %1$s</string>
     <string name="saved_file_2">保存文件 %1$s Scale %2$.2f</string>
-    <string name="saving_">保存中 </string>
+    <!-- UNUSED string name="saving_">保存中 </string -->
     <string name="saving_file_failed">文件保存失败</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">辐测</string>
@@ -684,7 +683,7 @@ Refer to the web pages for details.\n
     <string name="button_change"    >更换    </string>
     <string name="button_clipboard" >剪贴板 </string>
     <string name="button_close"     >关闭     </string>
-    <string name="button_create"    >创建    </string>
+    <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
     <string name="button_convert"   >转换   </string>
     <string name="button_current"   >激活    </string>
@@ -723,7 +722,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >回收站      </string>
-    <string name="button_rename"    >重命名    </string>
+    <!-- UNUSED string name="button_rename"    >重命名    </string -->
     <string name="button_renumber"  >重编号</string>
     <string name="button_bedding"   >层理平面</string>
     <string name="button_replace"   >置换   </string>
@@ -1050,7 +1049,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
-    <string name="title_plot_reload">重新导入草图</string>
+    <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
     <string name="title_plot_scraps">草图层</string>
     <string name="title_profile_flip">翻转剖面草图 ?</string>
     <string name="title_projection">投影剖面方位 %1$d</string>
@@ -1113,8 +1112,6 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">VisualTopo输入选项</string>
-    <string name="title_import_dat">Compass输入选项</string>
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1167,10 +1164,6 @@ Refer to the web pages for details.\n
   <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
   <string name="pref_import_datamode_title">输入数据传输方式</string>
   <string name="pref_import_datamode_summary">导入测量的数据传输方式</string>
-  <string name="pref_export_shots_title">默认数据输出</string>
-  <string name="pref_export_shots_summary">默认数据输出格式</string>
-  <string name="pref_export_plot_title">默认草图输出</string>
-  <string name="pref_export_plot_summary">默认草图输出格式</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1333,8 +1326,8 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">最小辐测虚线方位角度</string>
   <string name="pref_section_splay_title">辐测虚线仰角临界值</string>
   <string name="pref_section_splay_message">f辐测虚线剖面最小角度</string>
-  <string name="pref_data_backup_title">数据自动输出</string>
-  <string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string>
+  <!-- UNUSED string name="pref_data_backup_title">数据自动输出</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string -->
   <string name="pref_zipped_symbols_title">压缩符号文件</string>
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
@@ -1699,9 +1692,9 @@ Refer to the web pages for details.\n
     <string name="equate_no_stations">测量点太少</string>
     <string name="equate_no_nearby">无附近测量点</string>
 
-    <string name="menu_new">新建</string>
-    <string name="menu_equate">添加相同</string>
-    <string name="menu_equates">相同</string>
+    <!-- UNUSED string name="menu_new">新建</string -->
+    <!-- UNUSED string name="menu_equate">添加相同</string -->
+    <!-- UNUSED string name="menu_equates">相同</string -->
     <!-- UNUSED string name="menu_save">保存</string -->
 
     <string name="overwrite">重写</string>
@@ -1726,33 +1719,24 @@ Refer to the web pages for details.\n
     VERY IMPORTANT Fix the "UNUSED" commented strings
 
     <string name="cbtn_bind">Rebind</string>
-    <string name="cbtn_compute">Compute</string>
-
-    <string name="cbtn_new">New</string>
-    <string name="cbtn_move">Move</string>
-    <string name="cbtn_rotate">Turn</string>
-    <string name="cbtn_station">Station</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Open file</string>
     <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
-    <string name="cmenu_ble">BT surveys</string>
+    < UNUSED string name="cmenu_ble">BT surveys</string>
     <string name="cmenu_viewpoint">Viewpoint</string>
-    <string name="cmenu_files">Surveys</string>
+    < UNUSED string name="cmenu_files">Surveys</string>
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Frame</string>
-    <string name="cmenu_color">Color</string>
+    < UNUSED string name="cmenu_frame">Frame</string>
+    < UNUSED string name="cmenu_color">Color</string>
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">3D-Rose diagram</string>
     <string name="cmenu_rose">Rose diagram</string>
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
-    <string name="cmenu_fractal">Fractal counts</string>
+    < UNUSED string name="cmenu_fractal">Fractal counts</string>
     <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
@@ -1838,11 +1822,11 @@ Refer to the web pages for details.\n
     <string name="azimuth">azimuth</string>
     <string name="clino">clino</string>
 
-    <string name="cbtn_laser">Laser</string>
-    <string name="cbtn_scan">Scan</string>
-    <string name="cbtn_shot">Shot</string>
-    <string name="cbtn_start">Start</string>
-    <string name="cbtn_stop">Stop</string>
+    < UNUSED string name="cbtn_laser">Laser</string>
+    < UNUSED string name="cbtn_scan">Scan</string>
+    < UNUSED string name="cbtn_shot">Shot</string>
+    < UNUSED string name="cbtn_start">Start</string>
+    < UNUSED string name="cbtn_stop">Stop</string>
 
     <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
@@ -2023,11 +2007,10 @@ Refer to the web pages for details.\n
     <string name="cpref_hull_summary">Hull walls</string>
 ->
 
-    <string name="TopoGLPerms">Permissions</string>
+    < UNUSED string name="TopoGLPerms">Permissions</string>
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
     <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
     <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
-    <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>

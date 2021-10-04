@@ -21,7 +21,7 @@
         android:contentDescription="dimensions"
         />
    					  
-    <TextView android:id="@+id/fractal_count"
+    <TextView android:id="@+id/fractal_count_text"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content" 
       android:layout_marginTop="10dp"
@@ -58,7 +58,7 @@
 	/>
     </LinearLayout>
 
-    <RadioGroup android:id="@+id/fractal_count"
+    <RadioGroup android:id="@+id/fractal_count_group"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
@@ -84,7 +84,7 @@
     </RadioGroup>
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/fractal_count"
+    android:layout_below="@id/fractal_count_group"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"

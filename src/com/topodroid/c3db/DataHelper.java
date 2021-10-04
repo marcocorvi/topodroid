@@ -13,27 +13,24 @@ package com.topodroid.c3db;
 
 import com.topodroid.utils.TDLog;
 
-import java.util.List;
-import java.util.ArrayList;
-
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.FileReader;
-import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.StringWriter;
+// import java.io.File;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
+// import java.io.FileWriter;
+// import java.io.PrintWriter;
+// import java.io.StringWriter;
 
 import android.content.Context;
-import android.content.ContentValues;
+// import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.SQLException;
+// import android.database.SQLException;
 import android.database.DataSetObservable;
-import android.database.DatabaseUtils.InsertHelper;
+// import android.database.DatabaseUtils.InsertHelper;
 import android.database.sqlite.SQLiteDatabase;
 // import android.database.sqlite.SQLiteOpenHelper;
-import android.database.sqlite.SQLiteStatement;
+// import android.database.sqlite.SQLiteStatement;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteDiskIOException;
 
@@ -41,7 +38,7 @@ import android.database.sqlite.SQLiteDiskIOException;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Locale;
+// import java.util.Locale;
 
 @SuppressWarnings("SyntaxError")
 public class DataHelper extends DataSetObservable

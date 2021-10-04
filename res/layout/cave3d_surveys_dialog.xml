@@ -7,9 +7,13 @@
     <ListView android:id="@+id/surveys_list"
         style="@style/list_bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="0dp"
         android:layout_weight="1"
+        android:transcriptMode="alwaysScroll"
+        android:fastScrollEnabled="true"
+        android:scrollingCache="true"
     />  
+    <!-- android:layout_height="match_parent" -->
 
   <LinearLayout android:id="@+id/help"
     android:layout_below="@id/surveys_list"

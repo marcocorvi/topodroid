@@ -32,8 +32,8 @@ class LoxShot
   int sid;
   int flag;
   int type;
-  double fLRUD[];
-  double tLRUD[];
+  double[] fLRUD;
+  double[] tLRUD;
   double vthr;
 
   LoxShot( int f, int t, int _sid, int fl, int tp, double thr,

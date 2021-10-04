@@ -19,10 +19,16 @@
       android:layout_height="wrap_content" 
       android:text="@string/calib_gm_policy"
       >
-      <RadioButton android:id="@+id/gm_policy_td "
+      <RadioButton android:id="@+id/gm_policy_td"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:layout_weight="50"
         android:text="TopoDroid"
         />
       <RadioButton android:id="@+id/gm_policy_pt"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content" 
+        android:layout_weight="50"
         android:text="PocketTopo"
         />
     </RadioGroup>

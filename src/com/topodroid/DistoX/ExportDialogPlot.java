@@ -238,7 +238,7 @@ public class ExportDialogPlot extends MyDialog
           TDSetting.mSvgGrid   = ((CheckBox) findViewById( R.id.png_grid )).isChecked();
           if ( ((CheckBox) findViewById( R.id.png_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
           try { 
-            float sc = Float.parseFloat( ((EditText) findViewById( R.id.therion_scale )).getText().toString() );
+            float sc = Float.parseFloat( ((EditText) findViewById( R.id.png_scale )).getText().toString() );
             if ( sc > 0 ) TDSetting.mBitmapScale = sc;
           } catch ( NumberFormatException e ) { }
         }

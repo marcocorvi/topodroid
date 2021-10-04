@@ -237,14 +237,14 @@
      android:layout_marginLeft="15dp" 
      android:gravity="left"
      android:text="@string/info_surveys"
-     android:textSize="20dp"
+     android:textSize="20sp"
      />
     
     
     <ListView android:id="@+id/surveys_list"
       style="@style/list_bottom"
       android:layout_width="fill_parent"
-      android:layout_height="match_parent"
+      android:layout_height="0dp"
       android:layout_marginLeft="15dp" 
       android:layout_weight="1"
       />  

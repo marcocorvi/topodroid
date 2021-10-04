@@ -106,7 +106,7 @@ public class Delaunay3S
         }
       }
     }
-    assert( hsd2.get( sz-1 ).p2 == hs0.p1 ); // check border is closed
+    // assert( hsd2.get( sz-1 ).p2 == hs0.p1 ); // check border is closed
     return hsd2;
   }
 
@@ -126,7 +126,7 @@ public class Delaunay3S
       hs.tr.setNghb( hs.p2, hs.p1, tr );
       trs3.add( tr );
     }
-    assert( trs3.size() == sz );
+    // assert( trs3.size() == sz );
     return trs3;
   }
 

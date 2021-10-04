@@ -15,12 +15,10 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 
 import android.os.Bundle;
-import android.app.Dialog;
-import android.content.Context;
+// import android.content.Context;
 import android.content.res.Resources;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.ArrayAdapter;

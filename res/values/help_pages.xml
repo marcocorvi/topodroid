@@ -21,7 +21,7 @@
   <string name="TopoGL" translatable="false">manual15.htm</string>
   <string name="PlotReloadWindow" translatable="false">page_backup.htm</string>
   <string name="CWDActivity" translatable="false">page_cwd.htm</string>
-  <string name="CBDdialog" translatable="false">page_cwd.htm</string>
+  <!-- string name="CBDdialog" translatable="false">page_cwd.htm</string -->
 
   <string name="AzimuthDialog" translatable="false">page_azimuth.htm</string>
   <string name="AudioDialog" translatable="false">page_audio.htm</string>

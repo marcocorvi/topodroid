@@ -60,8 +60,8 @@ class GlWalls extends GlShape
   final static int STRIDE_SIDE       = COORDS_PER_VERTEX;
   final static int OFFSET_VERTEX     = 0;
   final static int OFFSET_NORMAL     = COORDS_PER_VERTEX;
-  final static int DATA_STRIDE_FACE  = STRIDE_FACE * Float.BYTES;
-  final static int DATA_STRIDE_SIDE  = STRIDE_SIDE * Float.BYTES;
+  final static int DATA_STRIDE_FACE  = STRIDE_FACE * 4; // 4 = Float.BYTES;
+  final static int DATA_STRIDE_SIDE  = STRIDE_SIDE * 4; // 4 = Float.BYTES;
 
   // vertex data: ( X Y Z Nx, Ny, Nz )
   GlWalls( Context ctx, int mode ) 

@@ -226,11 +226,11 @@ public class PowercrustComputer
     mProfilearcs = null;
     int nst = mStations.size();
     int nsh = mShots.size();
-    Point2D F[] = new Point2D[ nsh ]; // P - from point of shot k
-    Point2D T[] = new Point2D[ nsh ]; // P - to point of shot k
-    Point2D P[] = new Point2D[ nsh ]; // point on intersection of bisecants
-    Point2D B[] = new Point2D[ nst ]; // bisecant at station j
-    Point2D M[] = new Point2D[ nsh ]; // midpoint of shot k
+    Point2D[] F = new Point2D[ nsh ]; // P - from point of shot k
+    Point2D[] T = new Point2D[ nsh ]; // P - to point of shot k
+    Point2D[] P = new Point2D[ nsh ]; // point on intersection of bisecants
+    Point2D[] B = new Point2D[ nst ]; // bisecant at station j
+    Point2D[] M = new Point2D[ nsh ]; // midpoint of shot k
 
     // find bisecant of shots at st:
     //      ... -- sh1 ----(st)--- sh2 -- ...

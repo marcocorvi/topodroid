@@ -4,15 +4,15 @@
          DO NOT FORGET THAT APOSTROPHE MUST BE PRECEEDED BY BACKSLASH
      -->
 
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Não é possível obter o manual do usuário da internet</string>
     <string name="user_man_ok">Manual traduzido instalado</string>
     <string name="user_man_fail">Instalação do manual traduzido falhou</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -83,7 +83,7 @@ Refer to the web pages for details.\n
     <string name="tha_user">usuário</string>
     <string name="tha_water">água</string>
 
-    <string name="make_walls">Paredes</string>
+    <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Base inexistente</string>
     <string name="station_not_found">Base não encontrada</string>
     <string name="shot_not_found">Medida não encontrada</string>
@@ -130,7 +130,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Regra</string -->
     <string name="calib_gm_policy">Regra de agrupamento</string>
     <string name="calib_gm_undelete">Restaurar os dados de calibração?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Calibração salva</string>
     <string name="calib_updated">Calibração atualizada</string>
     <string name="calib_compute_groups">Calculando grupos de dados de calibração &#8230;</string>
@@ -161,7 +161,7 @@ Refer to the web pages for details.\n
     <string name="device_illegal_addr">Endereço de memória inválido</string>
     <string name="device_info">Tipo de dispositivo</string>
     <!-- UNUSED string name="device_model_set">Quer realmente mudar o modelo do dispositivo</string -->
-    <string name="device_none">Nenhuma DistoX selecionada</string>
+    <!-- UNUSED string name="device_none">Nenhuma DistoX selecionada</string -->
     <!-- UNUSED string name="device_paired">Dispositivo pareado</string -->
     <string name="device_reset">Reiniciar memória da DistoX</string>
     <string name="device_clear">Limpar memória da DistoX</string>
@@ -275,7 +275,7 @@ Refer to the web pages for details.\n
     <string name="error_group_non_integer">O grupo deve ser um número inteiro</string>
     <string name="error_alt_required">Altitude exigida</string>
     <string name="error_invalid_number">Número inválido</string>
-    <string name="error_invalid_name">Nome inválido</string>
+    <!-- UNUSED string name="error_invalid_name">Nome inválido</string -->
     <string name="error_lat_required">Latitude exigida</string>
     <string name="error_long_required">Longitude exigida</string>
     <!-- TODO string name="error_name_exists">Existing project</string -->
@@ -293,9 +293,9 @@ Refer to the web pages for details.\n
     <string name="error_value_required">Valor exigido</string>
 
     <string name="group_title">Grupos dados calibração</string>
-    <string name="group_policy_four">Regra: agrupar 4 a 4</string>
-    <string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string>
-    <string name="group_policy_distance">Regra: agrupar por distância angular</string>
+    <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Regra: 4 grupos de 4, o restante isolados</string -->
+    <!-- UNUSED string name="group_policy_distance">Regra: agrupar por distância angular</string -->
     <string name="group_reset">Reiniciar grupos</string>
 
     <!-- UNUSED string name="scale">Escala</string -->
@@ -338,7 +338,6 @@ Refer to the web pages for details.\n
     <string name="no_calibration">Nenhuma calibração selecionada</string>
     <string name="no_capture_app">Nenhum aplicativo de captura de imagem</string>
     <string name="no_cave3d">Cave3D não instalado</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <string name="no_data_reduction">Nenhuma redução nos dados</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
@@ -418,16 +417,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <string name="ble_scan_failed">Busca por dispositivos BLE falhou</string>
-    <string name="ble_gatt_failure">Falha no dispositivo BLE</string>
+    <!-- UNUSED string name="ble_scan_failed">Busca por dispositivos BLE falhou</string -->
+    <!-- UNUSED string name="ble_gatt_failure">Falha no dispositivo BLE</string -->
     <string name="ble_no_remote">Nenhum dispositivo remoto</string>
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
 
@@ -505,7 +504,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="reading_file_failed">Falha leitura do arquivo</string -->
     <string name="saved_file_1">Arquivo salvo %1$s</string>
     <string name="saved_file_2">Arquivo salvo %1$s Escala %2$.2f</string>
-    <string name="saving_">Salvando </string>
+    <!-- UNUSED string name="saving_">Salvando </string -->
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
     <string name="splay">visada auxiliar</string>
@@ -674,7 +673,7 @@ Refer to the web pages for details.\n
     <string name="button_cancel"    >Cancelar   </string>
     <string name="button_change"    >Alterar    </string>
     <string name="button_close"     >Fechar     </string>
-    <string name="button_create"    >Criar      </string>
+    <!-- UNUSED string name="button_create"    >Criar      </string -->
     <string name="button_color"     >Cor        </string>
     <string name="button_convert"   >Converter  </string>
     <string name="button_current"   >Atual      </string>
@@ -713,7 +712,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_redo"      >Refazer   </string -->
     <!-- UNUSED string name="button_regroup"   >Reagrupar   </string -->
     <string name="button_dump"      >Baixar    </string>
-    <string name="button_rename"    >Renomear  </string>
+    <!-- UNUSED string name="button_rename"    >Renomear  </string -->
     <string name="button_renumber"  >Renumerar </string>
     <string name="button_bedding"   >Plano de acamamento</string>
     <string name="button_replace"   >Substituir</string>
@@ -1040,7 +1039,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Exportar croqui</string>
     <!-- UNUSED string name="title_plot_merge">Mesclar croqui</string -->
-    <string name="title_plot_reload">Recarregar croqui</string>
+    <!-- UNUSED string name="title_plot_reload">Recarregar croqui</string -->
     <string name="title_plot_scraps">Trechos do croqui</string>
     <string name="title_profile_flip">Virar o corte?</string>
     <string name="title_projection">Azimute do corte projetado %1$d</string>
@@ -1103,8 +1102,6 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">Exportar calibração</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">Opções importação VisualTopo</string>
-    <string name="title_import_dat">Opções importação Compass</string>
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1154,10 +1151,6 @@ Refer to the web pages for details.\n
   <!-- UNUSED string name="pref_cosurvey_summary">Habilitar topo colaborativa</string -->
   <string name="pref_import_datamode_title">Formato de dados importação</string>
   <string name="pref_import_datamode_summary">Formato de dados para importação de topos</string>
-  <string name="pref_export_shots_title">Exportação padrão de dados</string>
-  <string name="pref_export_shots_summary">Formato padrão para exportação de dados</string>
-  <string name="pref_export_plot_title">Exportação padrão de croqui</string>
-  <string name="pref_export_plot_summary">Formato padrão para exportação de croqui</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1319,8 +1312,8 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
   <string name="pref_section_splay_title">Limite pontilhamento de med. aux. X plano corte</string>
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
-  <string name="pref_data_backup_title">Exportação automática</string>
-  <string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string -->
   <string name="pref_zipped_symbols_title">Arquivos de símbolos zipados</string>
   <string name="pref_zipped_symbols_summary">Armazenar/carregar arquivos de símbolos em/de arquivo zip</string>
   <string name="pref_fixed_origin_title">Origem do croqui</string>
@@ -1680,9 +1673,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="equate_no_stations">Too few stations</string -->
     <!-- TODO string name="equate_no_nearby">No station nearby</string -->
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
+    <!-- UNUSED string name="menu_new">NEW</string -->
+    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
+    <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
@@ -1704,14 +1697,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_failed">Failed export</string -->
 
     <!-- 3D VIEWER strings -->
-    <!-- TODO string name="cbtn_compute">Compute</string -->
-
-    <string name="cbtn_move">Mover</string>
-    <string name="cbtn_rotate">Girar</string>
-    <string name="cbtn_station">Base</string>
-    <string name="cbtn_splay">Medida Auxiliar</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Abrir arquivo</string>
     <string name="cmenu_options">Opções</string>
@@ -1720,15 +1705,15 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
     <string name="cmenu_viewpoint">Ponto de vista</string>
-    <string name="cmenu_files">Topos</string>
+    <!-- UNUSED string name="cmenu_files">Topos</string -->
     <string name="cmenu_export">Exportar</string>
-    <string name="cmenu_frame">Quadro</string>
-    <string name="cmenu_color">Cor</string>
+    <!-- UNUSED string name="cmenu_frame">Quadro</string -->
+    <!-- UNUSED string name="cmenu_color">Cor</string -->
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">Diagrama Ico</string>
     <string name="cmenu_rose">Diagrama Rose</string>
     <string name="cmenu_wall">Modo parede</string>
-    <!-- TODO string name="cmenu_fractal">Fractal counts</string -->
+    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     <!-- TODO string name="cmenu_help">Help</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
@@ -1939,10 +1924,9 @@ Refer to the web pages for details.\n
     <string name="cpref_hull_summary">Hull walls</string>
 -->
 
-    <!-- TODO string name="TopoGLPerms">Permissions</string -->
+    <!--  UNUSED string name="TopoGLPerms">Permissions</string -->
     <!-- TODO string name="cperms_mandatory">Cave3D cannot run without these permissions:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <!-- TODO string name="chelp_title">Cave3D %1$s Help</string -->
 
 </resources>

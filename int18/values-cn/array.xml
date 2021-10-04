@@ -68,11 +68,11 @@
      <item name="lfcr">Windows</item>
   </string-array>
 
-  <string-array name="wallsType">
+  <!-- UNUSED string-array name="wallsType">
      <item name="none">无样式</item>
      <item name="convex">凸样</item>
      <item name="delaunay">狄洛尼型</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">关闭</item>
@@ -127,7 +127,7 @@
 
   <!-- shot default export -->
   <!-- number values must agree with TopoDroidConst constants DISTOX_EXPORT_XXX -->
-  <string-array name="exportShots">
+  <!-- UNUSED string-array name="exportShots">
      <item name="none">none</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -143,15 +143,15 @@
      <item name="walls">Walls</item>
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
-     <item name="dxf">DXF</item>
+     <item name="dxf">DXF</item -->
      <!-- item name="kml">KML</item -->
      <!-- item name="track">Track file</item -->
      <!-- item name="json">GeoJSON</item -->
      <!-- item name="shp">Shapefile</item -->
-  </string-array>
+  <!-- /string-array -->
 
   <!-- plot default export -->
-  <string-array name="exportPlot">
+  <!-- UNUSED string-array name="exportPlot">
      <item name="none">无</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -159,7 +159,7 @@
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
      <item name="png">PNG</item>
-  </string-array>
+  </string-array -->
 
    
 

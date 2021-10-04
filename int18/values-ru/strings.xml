@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Невозможно скачать руководство из интернета.</string>
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
-    <string name="desc_user_man">Руководство пользователя</string>
-    <string name="desc_points">Точки</string>
-    <string name="desc_lines">Линии</string>
-    <string name="desc_areas">Области</string>
+    <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
+    <!-- UNUSED string name="desc_points">Точки</string -->
+    <!-- UNUSED string name="desc_lines">Линии</string -->
+    <!-- UNUSED string name="desc_areas">Области</string -->
     <string name="desc_menu">Меню</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -80,7 +80,7 @@
     <string name="tha_user">пользовательский</string>
     <string name="tha_water">вода</string>
 
-    <string name="make_walls">Стены</string>
+    <!-- UNUSED string name="make_walls">Стены</string -->
     <string name="missing_station">Отсутствует пикет</string>
     <string name="station_not_found">Пикет не обнаружен</string>
     <string name="shot_not_found">Замеры не найдены</string>
@@ -126,7 +126,7 @@
     <string name="calib_no_coeff">Калибровочные коэффициенты не установлены</string>
     <string name="calib_gm_policy">Правила группирования</string>
     <string name="calib_gm_undelete">Восстановить калибровчные данные?</string>
-    <string name="calib_offgroup_data">Возможно отклонение %1$d от данных в группе</string>
+    <!-- UNUSED string name="calib_offgroup_data">Возможно отклонение %1$d от данных в группе</string -->
     <string name="calib_saved">Сохранить калибровку</string>
     <string name="calib_updated">Обновить калибровку</string>
     <string name="calib_compute_groups">Вычисление групп данных калибровки &#8230;</string>
@@ -157,7 +157,7 @@
     <string name="device_illegal_addr">Недопустимый адрес памяти</string>
     <string name="device_info">Информация об устройстве</string>
     <!-- UNUSED string name="device_model_set">Вы уверенны что хотите сменить модель прибора</string -->
-    <string name="device_none">DistoX не выбран</string>
+    <!-- UNUSED string name="device_none">DistoX не выбран</string -->
     <!-- UNUSED string name="device_paired">Прибор сопряжен</string -->
     <string name="device_reset">Сброс памяти DistoX</string>
     <string name="device_clear">Очистить память DistoX</string>
@@ -273,7 +273,7 @@
     <string name="error_group_non_integer">Номер группы должен быть целым числом</string>
     <string name="error_alt_required">Требуется высота над уровнем моря</string>
     <string name="error_invalid_number">Недопустимое значение</string>
-    <string name="error_invalid_name">Недопустимое название</string>
+    <!-- UNUSED string name="error_invalid_name">Недопустимое название</string -->
     <string name="error_lat_required">Требуется широта</string>
     <string name="error_long_required">Требуется долгота</string>
     <string name="error_name_exists">Такой проект уже существует</string>
@@ -291,9 +291,9 @@
     <string name="error_value_required">Требуется значение</string>
     
     <string name="group_title">Присвоить номера групп калибровочным измерениям</string>
-    <string name="group_policy_four">Правило: группировать по четыре</string>
-    <string name="group_policy_sixteen">Правило: четыре группы по четыре, остальные по одному</string>
-    <string name="group_policy_distance">Правило: группировать по угловому расстоянию</string>
+    <!-- UNUSED string name="group_policy_four">Правило: группировать по четыре</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Правило: четыре группы по четыре, остальные по одному</string -->
+    <!-- UNUSED string name="group_policy_distance">Правило: группировать по угловому расстоянию</string -->
     <string name="group_reset">Сбросить группы</string>
 
     <!-- UNUSED string name="scale">масштаб</string -->
@@ -336,7 +336,6 @@
     <string name="no_calibration">Калибровка не выбрана</string>
     <string name="no_capture_app">Отсутствует приложение для фото</string>
     <string name="no_cave3d">Cave3D не установлен</string>
-    <string name="outdated_cave3d">Установленная версия Cave3D устарела</string>
     <string name="no_data_reduction">Нет сокращения данных</string>
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
@@ -416,16 +415,16 @@
     <string name="start_scan">Начать сканирование</string>
     <string name="stop_scan">Остановить сканирование</string>
     <string name="title_scan">Сканировать BLE</string>
-    <string name="ble_scan_failed">Сбой сканирования BLE</string>
-    <string name="ble_gatt_failure">Сбой BLE</string>
+    <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
+    <!-- UNUSED string name="ble_gatt_failure">Сбой BLE</string -->
     <string name="ble_no_remote">Нет беспроводного устройства</string>
-    <string name="ble_control">Управление</string>
-    <string name="ble_connect">Подключить</string>
-    <string name="ble_disconnect">Отключить</string>
-    <string name="bric_scan">Сканировать</string>
-    <string name="bric_shot">Измерить</string>
-    <string name="bric_laser">Лазер</string>
-    <string name="bric_off">Выкл</string>
+    <!-- UNUSED string name="ble_control">Управление</string -->
+    <!-- UNUSED string name="ble_connect">Подключить</string -->
+    <!-- UNUSED string name="ble_disconnect">Отключить</string -->
+    <!-- UNUSED string name="bric_scan">Сканировать</string -->
+    <!-- UNUSED string name="bric_shot">Измерить</string -->
+    <!-- UNUSED string name="bric_laser">Лазер</string -->
+    <!-- UNUSED string name="bric_off">Выкл</string -->
     <string name="bric_memory">Памятьт BRIC</string>
 
 
@@ -504,7 +503,7 @@
 
     <string name="saved_file_1">Сохраненный файл %1$s</string>
     <string name="saved_file_2">Масштаб %2$.2f Сохраненного файла %1$s</string>
-    <string name="saving_">Сохранение </string>
+    <!-- UNUSED string name="saving_">Сохранение </string -->
     <string name="saving_file_failed">Ошибка сохранения файла</string>
     <!-- UNUSED string name="scrap_name">название абриса</string -->
     <string name="splay">боковой замер</string>
@@ -674,7 +673,7 @@
     <string name="button_cancel"    >Отмена    </string>
     <string name="button_change"    >Изменить    </string>
     <string name="button_close"     >Закрыть   </string>
-    <string name="button_create"    >Создать    </string>
+    <!-- UNUSED string name="button_create"    >Создать    </string -->
     <string name="button_color"     >Цвет	</string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_current"   >Текущий   </string>
@@ -713,7 +712,7 @@
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
-    <string name="button_rename"    >Переименовать    </string>
+    <!-- UNUSED string name="button_rename"    >Переименовать    </string -->
     <string name="button_renumber"  >Перенумеровать</string>
     <string name="button_bedding"   >Плоскость падения</string>
     <string name="button_replace"   >Замена   </string>
@@ -1039,7 +1038,7 @@
     <string name="title_photo_list">Фото</string>
     <string name="title_plot_save">Сохранить абрис как</string>
     <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
-    <string name="title_plot_reload">Перезагрузить абрис</string>
+    <!-- UNUSED string name="title_plot_reload">Перезагрузить абрис</string -->
     <string name="title_plot_scraps">Скрапы в абрисе</string>
     <string name="title_profile_flip">Развернуть разрез ?</string>
     <string name="title_projection">Проекция разреза на вертикальную плоскость Аз. %1$d</string>
@@ -1102,8 +1101,6 @@
     <string name="title_calib_export">Экспорт калибровки как</string>
     <!-- UNUSED string name="title_zoom">Зум</string -->
 
-    <string name="title_import_tro">Настройки импорта VisualTopo</string>
-    <string name="title_import_dat">Настройки импорта Compass</string>
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
 
@@ -1155,10 +1152,6 @@
   <!-- UNUSED string name="pref_cosurvey_summary">Вкл/Выкл Совместную съёмку</string -->
   <string name="pref_import_datamode_title">Импортируемый формат</string>
   <string name="pref_import_datamode_summary">Формат данных импортируемой съёмки</string>
-  <string name="pref_export_shots_title">Формат экспорта данных</string>
-  <string name="pref_export_shots_summary">Формат экспорта данных топосъёмки по умолчанию</string>
-  <string name="pref_export_plot_title">Формат экспорта абрисов</string>
-  <string name="pref_export_plot_summary">Формат экспорта абрисов по умолчанию</string>
 
   <string name="pref_therion_config_title">Команды конфигурации Therion</string>
   <string name="pref_therion_config_summary">Создать конфиг файл Therion</string>
@@ -1319,8 +1312,8 @@
   <string name="pref_horiz_splay_message">Боковые замеры с разницей азимута к нитке хода больше заданого значения показаны пунктиром</string>
   <string name="pref_section_splay_title">Порог угла сплеев пунктиром на сечении</string>
   <string name="pref_section_splay_message">Боковые замеры с углом к плоскости сечения больше заданого значения показаны пунктиром</string>
-  <string name="pref_data_backup_title">Авто-экспорт данных</string>
-  <string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Авто-экспорт данных</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string -->
   <string name="pref_zipped_symbols_title">Архив условных обозначений</string>
   <string name="pref_zipped_symbols_summary">Добавить/извлечь файлы условных обозначений в/из zip архив</string>
   <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>
@@ -1682,9 +1675,9 @@
     <string name="equate_no_stations">Слишком мало пикетов</string>
     <string name="equate_no_nearby">Нет пикета поблизости</string>
 
-    <string name="menu_new">НОВЫЙ</string>
-    <string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string>
-    <string name="menu_equates">СОЕДИНЕНИЯ</string>
+    <!-- UNUSED string name="menu_new">НОВЫЙ</string -->
+    <!-- UNUSED string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string -->
+    <!-- UNUSED string name="menu_equates">СОЕДИНЕНИЯ</string -->
     <!-- UNUSED string name="menu_save">СОХРАНИТЬ</string -->
 
     <string name="overwrite">перезаписать</string>
@@ -1706,14 +1699,6 @@
     <string name="export_failed">Ошибка экспорта</string>
    
     <!-- 3D VIEWER strings -->
-    <string name="cbtn_compute">Расчитать</string>
-
-    <string name="cbtn_move">Перемещение</string>
-    <string name="cbtn_rotate">Поворот</string>
-    <string name="cbtn_station">Пикет</string>
-    <string name="cbtn_splay">Сплей</string>
-    <string name="cbtn_zoom_in">Зум +</string>
-    <string name="cbtn_zoom_out">Зум -</string>
 
     <string name="cmenu_open">Открыть файл</string>
     <string name="cmenu_options">Настройки</string>
@@ -1722,15 +1707,15 @@
 
     <string name="cmenu_alpha">Параметры рельефа DEM</string>
     <string name="cmenu_viewpoint">Точка просмотра</string>
-    <string name="cmenu_files">Съёмки</string>
+    <!-- UNUSED string name="cmenu_files">Съёмки</string -->
     <string name="cmenu_export">Экспорт</string>
-    <string name="cmenu_frame">Рамка</string>
-    <string name="cmenu_color">Цвет</string>
+    <!-- UNUSED string name="cmenu_frame">Рамка</string -->
+    <!-- UNUSED string name="cmenu_color">Цвет</string -->
     <string name="cmenu_info">Инфо.</string>
     <string name="cmenu_ico">Ico диаграмма</string>
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
-    <string name="cmenu_fractal">Кол-во фракталофф</string>
+    <!-- UNUSED string name="cmenu_fractal">Кол-во фракталофф</string -->
     <string name="cmenu_help">Помощь</string>
 
     <string name="fractal_title">Кол-во фракталов</string>
@@ -1958,10 +1943,9 @@
     <string name="cpref_hull_summary">Hull walls</string>
 -->
 
-    <string name="TopoGLPerms">Разрешения</string>
+    <!-- UNUSED string name="TopoGLPerms">Разрешения</string -->
     <string name="cperms_mandatory">Cave3D не может работать без этих разрешений:</string>
     <!-- UNUSED string name="cperms_optional">В Cave3D может произойти сбой без этих разрешений:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <string name="chelp_title">Cave3D %1$s Помощь</string>
 
 </resources>

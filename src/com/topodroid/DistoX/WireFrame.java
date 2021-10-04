@@ -43,8 +43,8 @@ public class WireFrame
   {
     int np = mPoint.size();
     double max1 = max + 0.01;
-    Cave3DStation min[] = new Cave3DStation[n];
-    double dist[] = new double[ n ];
+    Cave3DStation[] min = new Cave3DStation[n];
+    double[] dist = new double[ n ];
     for ( int k1 = 0; k1 < np; ++k1 ) {
       Cave3DStation s1 = mPoint.get(k1);
       if ( s1 == null ) continue;

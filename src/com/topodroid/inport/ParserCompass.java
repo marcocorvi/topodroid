@@ -57,7 +57,8 @@ class ParserCompass extends ImportParser
   private boolean isBackshot( String flag ) { return false; }
 
   /** read input file
-   * @param br buffered reader on the input file
+   * @param isr input stream reader
+   * @param filename input filename
    */
   private void readFile( InputStreamReader isr, String filename ) throws ParserException
   {

@@ -18,7 +18,7 @@ import android.graphics.RectF;
 /* interface for the canvas commands
  */
 public interface ICanvasCommand {
-    public int  commandType(); // command type: 0 DrawingPath, 1 EraseCommand
+    int  commandType(); // command type: 0 DrawingPath, 1 EraseCommand
     void draw(Canvas canvas, RectF bbox );
     void draw(Canvas canvas, Matrix mat, float scale, RectF bbox );
 
@@ -28,6 +28,6 @@ public interface ICanvasCommand {
     void shiftPathBy( float x, float y );
     void scalePathBy( float z, Matrix m );
     void affineTransformPathBy( float[] mm, Matrix m );
-    public void computeBounds( RectF bounds, boolean b );
+    void computeBounds( RectF bounds, boolean b );
 
 }

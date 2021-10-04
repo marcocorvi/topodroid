@@ -171,7 +171,7 @@ public class CWBorder
   private double computeVolumeOf( List<CWTriangle> t21, List<CWPoint> p21, Vector3D cc )
   {
     double vol =0;
-    CWPoint pts[] = new CWPoint[3];
+    CWPoint[] pts = new CWPoint[3];
     for ( CWTriangle t2 : t21 ) {
       switch ( t2.countVertexIn( p21, pts ) ) {
         case 0: break;

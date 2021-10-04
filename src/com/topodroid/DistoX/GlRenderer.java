@@ -36,6 +36,7 @@ import android.net.Uri;
 
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class GlRenderer implements Renderer 
 {
@@ -253,11 +254,11 @@ public class GlRenderer implements Renderer
       if ( mParser.hasSurface() ) {
         float xlight = 90 - mXLight;
         float ylight = 90 - mYLight; if ( ylight < 0 ) ylight += 360;
-        light = String.format("L %.0f %.0f ", xlight, ylight );
+        light = String.format(Locale.US, "L %.0f %.0f ", xlight, ylight );
       }
       // if ( mParser.mStartStation != null ) station = mParser.mStartStation.short_name;
     }
-    return String.format("C %.0f A %.0f S %.2f T %.2f %.2f %s", clino, azimuth, scale, dx, dy, light );
+    return String.format(Locale.US, "C %.0f A %.0f S %.2f T %.2f %.2f %s", clino, azimuth, scale, dx, dy, light );
   }
  
   @Override

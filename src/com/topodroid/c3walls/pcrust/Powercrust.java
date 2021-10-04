@@ -67,7 +67,7 @@ class Powercrust
     double x, y, z;
     np = nrPoles();
     // TDLog.v( "Powercrust Nr. poles " + np + " Creating vertices ...");
-    PCSite poles[] = new PCSite[ np ];
+    PCSite[] poles = new PCSite[ np ];
     for ( int k=0; k<np; ++k ) {
       x = poleX();
       y = poleY();

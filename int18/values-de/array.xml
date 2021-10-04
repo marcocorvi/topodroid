@@ -59,11 +59,11 @@
      <item name="triangles">Dreiecke</item>
   </string-array>
 
-  <string-array name="wallsType">
+  <!-- UNUSED string-array name="wallsType">
      <item name="none">Keine automatischen Wände</item>
      <item name="convex">Konvex</item>
      <item name="delaunay">Delaunay-Triangulierung</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="zoomCtrl">
      <item name="0">Aus</item>
@@ -84,7 +84,7 @@
      <item>Kein</item>
   </string-array -->
 
-  <string-array name="exportShots">
+  <!-- UNUSED string-array name="exportShots">
      <item name="none">keine</item>
      <item name="therion">Therion</item>
      <item name="compass">Compass</item>
@@ -101,9 +101,9 @@
      <item name="winkarst">Winkarst</item>
      <item name="csv">CSV</item>
      <item name="dxf">DXF</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="exportPlot">
+  <!-- UNUSED string-array name="exportPlot">
      <item name="none">keine</item>
      <item name="therion">Therion</item>
      <item name="csurvey">cSurvey</item>
@@ -111,7 +111,7 @@
      <item name="svg">SVG</item>
      <item name="shp">SHP</item>
      <item name="png">PNG</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="extraButtons">
      <item name="basic">Einfach</item>

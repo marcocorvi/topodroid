@@ -265,7 +265,7 @@ public class TglParser
 
   public double[] getStationVertices()
   {
-    double v[] = new double[ 3 * stations.size() ];
+    double[] v = new double[ 3 * stations.size() ];
     int k = 0;
     int k3 = 0;
     for ( Cave3DStation s : stations ) {
@@ -279,7 +279,7 @@ public class TglParser
 
   public double[] getSplaysEndpoints()
   {
-    double v[] = new double[ 3 * splays.size() ];
+    double[] v = new double[ 3 * splays.size() ];
     int k3=0;
     for ( Cave3DShot sp : splays ) {
       Vector3D vv = sp.toPoint3D();

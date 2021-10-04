@@ -13,6 +13,7 @@
         android:orientation="horizontal"
         android:layout_gravity="right"
         android:layout_marginTop="20dp"
+        android:baselineAligned="false"
         >
       <LinearLayout
         android:layout_width="0dp" 

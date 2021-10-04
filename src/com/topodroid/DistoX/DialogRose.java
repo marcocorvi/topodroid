@@ -16,11 +16,9 @@ package com.topodroid.DistoX;
 // import java.util.List;
 
 import android.graphics.Bitmap;
-import android.graphics.Bitmap.Config;
 import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Paint;
-import android.graphics.Paint.Style;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -96,7 +94,7 @@ class DialogRose extends Dialog
     }
     double max = rd.maxValue();
     for ( int k=0; k<mNr; ++k ) {
-      double a = k * Math.PI / (mNr/2);
+      double a = k * Math.PI / (mNr/2.0);
       double a1 = a - del;
       double a2 = a + del;
       double ca1 = Math.cos( a1 );

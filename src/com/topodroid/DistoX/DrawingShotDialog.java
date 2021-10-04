@@ -57,7 +57,7 @@ class DrawingShotDialog extends MyDialog
   private EditText mETto;
   private EditText mETcomment;
 
-  private boolean hideColorBtn   = true;;
+  private boolean hideColorBtn   = true;
   private boolean hideStretchBar = true;
 
   private CheckBox mRBleft;

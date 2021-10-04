@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
+    <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation</string>
 
-    <string name="desc_user_man">User manual</string>
-    <string name="desc_points">Points</string>
-    <string name="desc_lines">Lines</string>
-    <string name="desc_areas">Areas</string>
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
 
   <string name="r_title">Android R important notice</string>
@@ -78,7 +78,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="tha_user">user</string>
     <string name="tha_water">water</string>
 
-    <string name="make_walls">Walls</string>
+    <!-- UNUSED string name="make_walls">Walls</string -->
     <string name="missing_station">Missing station</string>
     <string name="station_not_found">Station not found</string>
     <string name="shot_not_found">No shot found</string>
@@ -124,7 +124,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_no_coeff">Calibration coefficients not set</string>
     <string name="calib_gm_policy">Group policy</string>
     <string name="calib_gm_undelete">Undelete calibration data?</string>
-    <string name="calib_offgroup_data">Possibly %1$d off-group data</string>
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Saved calibration</string>
     <string name="calib_updated">Updated calibration</string>
     <string name="calib_compute_groups">Computing calibration data groups &#8230;</string>
@@ -156,7 +156,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="device_illegal_addr">Illegal memory address</string>
     <string name="device_info">Device info</string>
     <!-- UNUSED string name="device_model_set">DO YOU REALLY WANT TO CHANGE THE MODEL OF THE DEVICE</string -->
-    <string name="device_none">No DistoX selected</string>
+    <!-- UNUSED string name="device_none">No DistoX selected</string -->
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Reset DistoX memory ?</string>
     <string name="device_clear">Clear DistoX memory</string>
@@ -275,7 +275,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_group_non_integer">Group must be integer number</string>
     <string name="error_alt_required">Altitude required</string>
     <string name="error_invalid_number">Invalid number</string>
-    <string name="error_invalid_name">Invalid name</string>
+    <!-- UNUSED string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Latitude required</string>
     <string name="error_long_required">Longitude required</string>
     <string name="error_name_exists">Existing project</string>
@@ -293,9 +293,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_value_required">Value required</string>
 
     <string name="group_title">Calibration data groups</string>
-    <string name="group_policy_four">Policy: group by four</string>
-    <string name="group_policy_sixteen">Policy: four groups of four, other single</string>
-    <string name="group_policy_distance">Policy: group by angular distance</string>
+    <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Policy: four groups of four, other single</string -->
+    <!-- UNUSED string name="group_policy_distance">Policy: group by angular distance</string -->
     <string name="group_reset">Reset groups</string>
 
     <!-- UNUSED string name="scale">scale</string -->
@@ -339,7 +339,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calibration">No calibration selected</string>
     <string name="no_capture_app">No image capture app</string>
     <string name="no_cave3d">Cave3D not installed</string>
-    <string name="outdated_cave3d">Cave3D version is too old</string>
     <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
@@ -420,16 +419,16 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="start_scan">Start scan</string>
     <string name="stop_scan">Stop scan</string>
     <string name="title_scan">BLE scan</string>
-    <string name="ble_scan_failed">Failed BLE scan</string>
-    <string name="ble_gatt_failure">BLE failure</string>
+    <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
+    <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <string name="ble_no_remote">No remote device</string>
-    <string name="ble_control">Control</string>
-    <string name="ble_connect">Connect</string>
-    <string name="ble_disconnect">Disconnect</string>
-    <string name="bric_scan">Scan</string>
-    <string name="bric_shot">Shot</string>
-    <string name="bric_laser">Laser</string>
-    <string name="bric_off">Off</string>
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <string name="bric_memory">BRIC memory</string>
 
     <string name="popup_join_pt">Snap to point</string>
@@ -508,7 +507,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="saved_file_1">Saved file %1$s</string>
     <string name="saved_file_2">Saved file %1$s Scale %2$.2f</string>
-    <string name="saving_">Saving </string>
+    <!-- UNUSED string name="saving_">Saving </string -->
     <string name="saving_file_failed">Failed file-save</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
     <string name="splay">splay</string>
@@ -688,7 +687,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_change"    >Change</string>
     <string name="button_clipboard" >Clipboard</string>
     <string name="button_close"     >Close</string>
-    <string name="button_create"    >Create</string>
+    <!-- UNUSED string name="button_create"    >Create</string -->
     <string name="button_color"     >Color</string>
     <string name="button_clear_convert">Clear convert</string>
     <string name="button_convert"   >Convert</string>
@@ -728,7 +727,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump</string>
-    <string name="button_rename"    >Rename</string>
+    <!-- UNUSED string name="button_rename"    >Rename</string -->
     <string name="button_renumber"  >Renumber</string>
     <string name="button_bedding"   >Fitting plane</string>
     <string name="button_replace"   >Replace</string>
@@ -1058,7 +1057,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_photo_view">Photo</string>
     <string name="title_plot_save">Export sketch</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
-    <string name="title_plot_reload">Reload sketch</string>
+    <!-- UNUSED string name="title_plot_reload">Reload sketch</string -->
     <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>
@@ -1121,8 +1120,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_calib_export">Export calibration</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">VisualTopo import options</string>
-    <string name="title_import_dat">Compass import options</string>
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
 
@@ -1178,10 +1175,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_cosurvey_summary">Enable co-surveying service</string -->
   <string name="pref_import_datamode_title">Import datamode</string>
   <string name="pref_import_datamode_summary">Datamode for importing surveys</string>
-  <string name="pref_export_shots_title">Default data export</string>
-  <string name="pref_export_shots_summary">Default data export format</string>
-  <string name="pref_export_plot_title">Default sketch export</string>
-  <string name="pref_export_plot_summary">Default sketch export format</string>
 
   <string name="pref_therion_config_title">Therion config</string>
   <string name="pref_therion_config_summary">Embed Therion config commands</string>
@@ -1346,8 +1339,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_horiz_splay_message">Minimum off azimuth for dashed splays</string>
   <string name="pref_section_splay_title">Splay dash angle-threshold</string>
   <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
-  <string name="pref_data_backup_title">Data auto-export</string>
-  <string name="pref_data_backup_summary">Automatic data export (need default format)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Data auto-export</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_editable_stations_title">Editable stations</string>
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
   <string name="pref_zipped_symbols_title">Zipped symbols files</string>
@@ -1724,9 +1717,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="equate_no_stations">Too few stations</string>
     <string name="equate_no_nearby">No station nearby</string>
 
-    <string name="menu_new">NEW</string>
-    <string name="menu_equate">ADD EQUATE</string>
-    <string name="menu_equates">EQUATES</string>
+    <!-- UNUSED string name="menu_new">NEW</string -->
+    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
+    <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <string name="overwrite">overwrite</string>
@@ -1750,33 +1743,24 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
 
     <string name="cbtn_bind">Rebind</string>
-    <string name="cbtn_compute">Compute</string>
-
-    <string name="cbtn_new">New</string>
-    <string name="cbtn_move">Move</string>
-    <string name="cbtn_rotate">Turn</string>
-    <string name="cbtn_station">Station</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Open file</string>
     <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
-    <string name="cmenu_ble">BT surveys</string>
+    <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
     <string name="cmenu_viewpoint">Viewpoint</string>
-    <string name="cmenu_files">Surveys</string>
+    <!-- UNUSED string name="cmenu_files">Surveys</string -->
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Frame</string>
-    <string name="cmenu_color">Color</string>
+    <!-- UNUSED string name="cmenu_frame">Frame</string -->
+    <!-- UNUSED string name="cmenu_color">Color</string -->
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">3D-Rose diagram</string>
     <string name="cmenu_rose">Rose diagram</string>
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
-    <string name="cmenu_fractal">Fractal counts</string>
+    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
     <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
@@ -1862,11 +1846,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="azimuth">azimuth</string>
     <string name="clino">clino</string>
 
-    <string name="cbtn_laser">Laser</string>
-    <string name="cbtn_scan">Scan</string>
-    <string name="cbtn_shot">Shot</string>
-    <string name="cbtn_start">Start</string>
-    <string name="cbtn_stop">Stop</string>
+    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_scan">Scan</string -->
+    <!-- UNUSED string name="cbtn_shot">Shot</string -->
+    <!-- UNUSED string name="cbtn_start">Start</string -->
+    <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
     <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
@@ -2047,11 +2031,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_hull_summary">Hull walls</string>
 -->
 
-    <string name="TopoGLPerms">Permissions</string>
+    <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
     <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>

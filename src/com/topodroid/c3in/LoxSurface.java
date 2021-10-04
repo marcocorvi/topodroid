@@ -16,7 +16,7 @@ class LoxSurface
   int id;
   private int ww;
   private int hh;
-  private double calib[];
+  private double[] calib;
   private double[] grid;
 
   double East1()    { return (calib[0]); }

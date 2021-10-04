@@ -28,7 +28,7 @@ import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.FileReader;
@@ -4241,7 +4241,7 @@ public class DataHelper extends DataSetObservable
     boolean ret = false;
     Cursor cursor = null;
     try {
-      String query = String.format(
+      String query = String.format( Locale.US,
         "SELECT name FROM %s WHERE surveyId=%d AND ( name='%sp' COLLATE NOCASE OR name='%ss' COLLATE NOCASE)", 
         table, sid, name, name );
       cursor = myDB.rawQuery( query, new String[] { } );

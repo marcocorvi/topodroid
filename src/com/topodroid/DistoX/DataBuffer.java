@@ -53,7 +53,7 @@ class DataBuffer
   // append a float value to the buffer
   FloatBuffer addFloat( float value ) 
   {
-    assert( mType == FLOAT );
+    // assert( mType == FLOAT );
     extend( mType );
     mData.putFloat( mPos, value );
     mPos += mType;
@@ -63,7 +63,7 @@ class DataBuffer
 
   FloatBuffer addFloats( float[] values )
   {
-    assert( mType == FLOAT );
+    // assert( mType == FLOAT );
     extend( mType * values.length );
     // TDLog.v("Data Buffer add floats: cap " + mCapacity + "/" + mData.capacity() + " limit " + mData.limit() + " pos " + mPos + "/" + mData.position() + " len " + values.length );
     for ( int k=0; k<values.length; ++k ) {
@@ -77,7 +77,7 @@ class DataBuffer
   // append a short value to the buffer
   ShortBuffer addShort( short value ) 
   {
-    assert( mType == SHORT );
+    // assert( mType == SHORT );
     extend( mType );
     mData.putShort( mPos, value );
     mPos += mType;
@@ -87,7 +87,7 @@ class DataBuffer
 
   ShortBuffer addShorts( short[] values )
   {
-    assert( mType == SHORT );
+    // assert( mType == SHORT );
     extend( mType * values.length );
     for ( int k=0; k<values.length; ++k ) {
       mData.putShort( mPos, values[k] );

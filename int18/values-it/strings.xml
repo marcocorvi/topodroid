@@ -5,10 +5,10 @@
     <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
-    <string name="desc_user_man">Manuale utente</string>
-    <string name="desc_points">Punti</string>
-    <string name="desc_lines">Linee</string>
-    <string name="desc_areas">Aree</string>
+    <!-- UNUSED string name="desc_user_man">Manuale utente</string -->
+    <!-- UNUSED string name="desc_points">Punti</string -->
+    <!-- UNUSED string name="desc_lines">Linee</string -->
+    <!-- UNUSED string name="desc_areas">Aree</string -->
     <string name="desc_menu">Menu</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -79,7 +79,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="tha_user">utente</string>
     <string name="tha_water">acqua</string>
 
-    <string name="make_walls">Pareti</string>
+    <!-- UNUSED string name="make_walls">Pareti</string -->
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
@@ -125,7 +125,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_no_coeff">Coefficienti di calibrazione non impostati</string>
     <string name="calib_gm_policy">Metodo di raggruppamento dati</string>
     <string name="calib_gm_undelete">Ripristina dato calibrazione?</string>
-    <string name="calib_offgroup_data">Possibili %1$d dati fuori gruppo</string>
+    <!-- UNUSED string name="calib_offgroup_data">Possibili %1$d dati fuori gruppo</string -->
     <string name="calib_saved">Salvata calibrazione</string>
     <string name="calib_updated">Aggiornata calibrazione</string>
     <string name="calib_compute_groups">Raggruppamento dati in corso</string>
@@ -157,7 +157,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="device_illegal_addr">Indirizzo di memoria illegale</string>
     <string name="device_info">Dati dispositivo</string>
     <!-- UNUSED string name="device_model_set">Vuoi davvero cambiare il modello del dispositivo</string -->
-    <string name="device_none">Nessun DistoX selezionato</string>
+    <!-- UNUSED string name="device_none">Nessun DistoX selezionato</string -->
     <!-- UNUSED string name="device_paired">Device is paired</string -->
     <string name="device_reset">Resettare la memoria del DistoX</string>
     <string name="device_clear">Ripulisci la memoria del DistoX</string>
@@ -275,7 +275,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_group_non_integer">Il gruppo deve essere un numero intero</string>
     <string name="error_alt_required">Altezza mancante</string>
     <string name="error_invalid_number">Valore non numerico</string>
-    <string name="error_invalid_name">Nome non valido</string>
+    <!-- UNUSED string name="error_invalid_name">Nome non valido</string -->
     <string name="error_lat_required">Latitudine mancante</string>
     <string name="error_long_required">Longitudine mancante</string>
     <string name="error_name_exists">Progetto esistente</string>
@@ -293,9 +293,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_value_required">Valore mancante</string>
     
     <string name="group_title">Assegna i gruppi ai dati della calibrazione</string>
-    <string name="group_policy_four">Metodo: gruppi di quattro</string>
-    <string name="group_policy_sixteen">Metodo: quattro gruppi di quattro, poi singoli</string>
-    <string name="group_policy_distance">Metodo: in base alla distanza angolare</string>
+    <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Metodo: quattro gruppi di quattro, poi singoli</string -->
+    <!-- UNUSED string name="group_policy_distance">Metodo: in base alla distanza angolare</string -->
     <string name="group_reset">Cancella i gruppi</string>
 
     <!-- UNUSED string name="scale">scala</string -->
@@ -338,7 +338,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
     <string name="no_capture_app">Nessuna app per foto</string>
     <string name="no_cave3d">Cave3D non installato</string>
-    <string name="outdated_cave3d">La versione di Cave3D è troppo vecchia</string>
     <string name="no_data_reduction">Nessuna riduzione dei dati</string>
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
@@ -418,16 +417,16 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="start_scan">Inizia scansione</string>
     <string name="stop_scan">Termina scansione</string>
     <string name="title_scan">Scansione BLE</string>
-    <string name="ble_scan_failed">Scansione BLE fallita</string>
-    <string name="ble_gatt_failure">Guasto BLE</string>
+    <!-- UNUSED string name="ble_scan_failed">Scansione BLE fallita</string -->
+    <!-- UNUSED string name="ble_gatt_failure">Guasto BLE</string -->
     <string name="ble_no_remote">No dispositivo remoto</string>
-    <string name="ble_control">Controllo</string>
-    <string name="ble_connect">Connessione</string>
-    <string name="ble_disconnect">Disconnessione</string>
-    <string name="bric_scan">Scansione</string>
-    <string name="bric_shot">Tiro</string>
-    <string name="bric_laser">Laser</string>
-    <string name="bric_off">Spegni</string>
+    <!-- UNUSED string name="ble_control">Controllo</string -->
+    <!-- UNUSED string name="ble_connect">Connessione</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnessione</string -->
+    <!-- UNUSED string name="bric_scan">Scansione</string -->
+    <!-- UNUSED string name="bric_shot">Tiro</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Spegni</string -->
     <string name="bric_memory">Memoria interna BRIC</string>
 
     <string name="popup_join_pt">Sposta al punto vicino</string>
@@ -506,7 +505,7 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="saved_file_1">Salvato file %1$s</string>
     <string name="saved_file_2">Salvato file %1$s Scala %2$.2f</string>
-    <string name="saving_">Salvando </string>
+    <!-- UNUSED string name="saving_">Salvando </string -->
     <string name="saving_file_failed">Salvataggio file fallito</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
     <!-- OK string name="splay">splay</string -->
@@ -681,7 +680,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_change"    >Cambia    </string>
     <string name="button_clipboard" >Appunti</string>
     <string name="button_close"     >Chiudi    </string>
-    <string name="button_create"    >Crea      </string>
+    <!-- UNUSED string name="button_create"    >Crea      </string -->
     <string name="button_color"     >Colore</string>
     <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
@@ -721,7 +720,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
-    <string name="button_rename"    >Rinomina    </string>
+    <!-- UNUSED string name="button_rename"    >Rinomina    </string -->
     <string name="button_renumber"  >Rinumera</string>
     <string name="button_bedding"   >Piano base</string>
     <string name="button_replace"   >Sostituisci</string>
@@ -1049,7 +1048,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_photo_list">Foto</string>
     <string name="title_plot_save">Salva disegno come </string>
     <!-- UNUSED string name="title_plot_merge">Fondere disegno</string -->
-    <string name="title_plot_reload">Ricarica disegno</string>
+    <!-- UNUSED string name="title_plot_reload">Ricarica disegno</string -->
     <string name="title_plot_scraps">Scarti di disegno</string>
     <string name="title_profile_flip">Capovolgo il profilo del disegno?</string>
     <string name="title_projection">Proiezione azimutale profilo %1$d</string>
@@ -1117,8 +1116,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_calib_export">Esporta calibrazione come </string>
     <!-- OK ENGLISH string name="title_zoom">Zoom</string -->
 
-    <string name="title_import_tro">VisualTopo: Imposta import</string>
-    <string name="title_import_dat">Compass: Imposta import</string>
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
 
@@ -1169,10 +1166,6 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_local_help_summary">Abilita manuale tradotto</string>
   <!-- OK string name="pref_cosurvey_title">Co-surveying</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Attiva/disattiva il servizio co-surveying</string -->
-  <string name="pref_export_shots_title">Formato esportazione dati</string>
-  <string name="pref_export_shots_summary">Formato esportazione dati preferenziale</string>
-  <string name="pref_export_plot_title">Default export disegno</string>
-  <string name="pref_export_plot_summary">Formato di default export disegno</string>
 
   <string name="pref_therion_config_title">Comandi configurazione Therion</string>
   <string name="pref_therion_config_summary">Inserisci comandi configurazione Therion</string>
@@ -1331,8 +1324,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
   <string name="pref_section_splay_title">Angolo di soglia tratteggio splay</string>
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
-  <string name="pref_data_backup_title">Auto-esporta dati</string>
-  <string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Auto-esporta dati</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string -->
   <string name="pref_zipped_symbols_title">File simboli formato ZIP</string>
   <string name="pref_zipped_symbols_summary">Salva/Carica simboli a/da archivio ZIP</string>
   <string name="pref_fixed_origin_title">Origine disegno</string>
@@ -1694,9 +1687,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="equate_no_stations">Troppo pochi capisaldi</string>
     <string name="equate_no_nearby">Nessun caposaldo vicino</string>
 
-    <string name="menu_new">NUOVO</string>
-    <string name="menu_equate">AGGIUNGI EQUIVALENTE</string>
-    <string name="menu_equates">EQUIVALENTE</string>
+    <!-- UNUSED string name="menu_new">NUOVO</string -->
+    <!-- UNUSED string name="menu_equate">AGGIUNGI EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
     <!-- UNUSED string name="menu_save">SALVA</string -->
 
     <string name="overwrite">Sovrascrivi</string>
@@ -1717,14 +1710,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_failed">Esportazione fallita</string>
 
     <!-- 3D VIEWER strings -->
-    <string name="cbtn_compute">Calcola</string>
-
-    <string name="cbtn_move">Muovi</string>
-    <string name="cbtn_rotate">Ruota</string>
-    <string name="cbtn_station">Caposaldo</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Apri file</string>
     <string name="cmenu_options">Impostazioni</string>
@@ -1733,15 +1718,15 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="cmenu_alpha">Trasparenza DEM</string>
     <string name="cmenu_viewpoint">Punto di vista</string>
-    <string name="cmenu_files">Rilievi</string>
+    <!-- UNUSED string name="cmenu_files">Rilievi</string -->
     <string name="cmenu_export">Esportazione</string>
-    <string name="cmenu_frame">Riferimento</string>
-    <string name="cmenu_color">Colori</string>
+    <!-- UNUSED string name="cmenu_frame">Riferimento</string -->
+    <!-- UNUSED string name="cmenu_color">Colori</string -->
     <string name="cmenu_info">Informazioni</string>
     <string name="cmenu_ico">Ico-diagramma</string>
     <string name="cmenu_rose">Diagramma a rosa</string>
     <string name="cmenu_wall">Modello pareti</string>
-    <string name="cmenu_fractal">Dim. frattale</string>
+    <!-- UNUSED string name="cmenu_fractal">Dim. frattale</string -->
     <string name="cmenu_help">Aiuto</string>
 
     <string name="fractal_title">Computo frattale</string>
@@ -1952,10 +1937,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cpref_hull_summary">Hull walls</string>
 -->
 
-    <string name="TopoGLPerms">Permessi</string>
+    <!-- UNUSED string name="TopoGLPerms">Permessi</string -->
     <string name="cperms_mandatory">Cave3D può non funzionare senza questi permessi:</string>
     <!-- UNUSED string name="cperms_optional">Cave3D può non funzionare senza questi permessi:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <!-- TODO string name="chelp_title">Cave3D %1$s Help</string -->
 
 </resources>

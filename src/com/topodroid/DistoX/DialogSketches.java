@@ -14,21 +14,19 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 import android.os.Bundle;
-import android.app.Dialog;
 import android.content.Context;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
 
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.ArrayAdapter;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+// import android.widget.ArrayAdapter;
+// import android.widget.AdapterView;
+// import android.widget.AdapterView.OnItemClickListener;
 
 class DialogSketches extends MyDialog 
                      implements View.OnClickListener

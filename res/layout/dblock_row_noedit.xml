@@ -25,8 +25,8 @@
     android:typeface="monospace"
     android:padding="@dimen/padding"
     android:gravity="right"
-    android:editable="false"
-  />
+      android:inputType="none"
+      /> <!-- android:editable="false" -->
   <!-- 
     android:inputType="text"
     android:imeOptions="actionDone"
@@ -46,8 +46,8 @@
     android:typeface="monospace"
     android:padding="@dimen/padding"
     android:gravity="right"
-    android:editable="false"
-  />
+      android:inputType="none"
+  /> <!-- android:editable="false" -->
   <!-- 
     android:inputType="text"
     android:imeOptions="actionDone"

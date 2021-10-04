@@ -35,7 +35,7 @@ import android.content.Context;
 // import android.content.DialogInterface;
 import android.inputmethodservice.KeyboardView;
 
-import android.text.method.KeyListener;
+// import android.text.method.KeyListener;
 // import android.text.InputType;
 
 import android.widget.TextView;

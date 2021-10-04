@@ -112,13 +112,13 @@ public class Cave3DXSection
 
     // roots of f'(L) = 0
     double det1 = b2 * b2 - 3 * b1;
-    assert( det1 >= 0 );
+    // assert( det1 >= 0 );
     double L2 = ( - b2 + Math.sqrt(det1) )/3;
     double L1 = 0;
     double F1 = L1 * L1 * L1 + b2 * L1 * L1 + b1 * L1 + b0;
     double F2 = L2 * L2 * L2 + b2 * L2 * L2 + b1 * L2 + b0;
-    assert( F1 <= 0 );
-    assert( F2 >= 0 );
+    // assert( F1 <= 0 );
+    // assert( F2 >= 0 );
     double L = L1;
     do {
       L= (L1 + L2)/2;

@@ -5,10 +5,10 @@
     <string name="user_man_ok">Инсталирано е преведеното ръководство</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
 
-    <!-- TODO string name="desc_user_man">User manual</string -->
-    <!-- TODO string name="desc_points">Points</string -->
-    <!-- TODO string name="desc_lines">Lines</string -->
-    <!-- TODO string name="desc_areas">Areas</string -->
+    <!-- UNUSED string name="desc_user_man">User manual</string -->
+    <!-- UNUSED string name="desc_points">Points</string -->
+    <!-- UNUSED string name="desc_lines">Lines</string -->
+    <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
     <!-- OK string name="app_name">TopoDroid</string -->
@@ -80,7 +80,7 @@ Refer to the web pages for details.\n
     <string name="tha_user">друго</string>
     <string name="tha_water">вода</string>
 
-    <string name="make_walls">Стени</string>
+    <!-- UNUSED string name="make_walls">Стени</string -->
     <string name="missing_station">Липсващ репер</string>
     <string name="station_not_found">Реперът не е намерен</string>
     <!-- TODO string name="shot_not_found">No shot found</string -->
@@ -127,7 +127,7 @@ Refer to the web pages for details.\n
     <!-- REMOVE string name="calib_gm_policy">Правила</string -->
     <!-- TODO string name="calib_gm_policy">Group policy</string -->
     <string name="calib_gm_undelete">Възстановяване на данни за калибрацията?</string>
-    <!-- TODO string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
+    <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Калибрацията е записана</string>
     <string name="calib_updated">Калибрацията е обновена</string>
     <string name="calib_compute_groups">Изчисляване на калибр. групи…</string>
@@ -159,7 +159,7 @@ Refer to the web pages for details.\n
     <string name="device_illegal_addr">Грешен адрес в паметта</string>
     <string name="device_info">Информация за устройството</string>
     <!-- UNUSED string name="device_model_set">Наистина ли искате да промените модела на устройството?</string -->
-    <string name="device_none">Не е избрано DistoX устройство</string>
+    <!-- UNUSED string name="device_none">Не е избрано DistoX устройство</string -->
     <!-- UNUSED string name="device_paired">Устройството е свързано</string -->
     <string name="device_reset">Изчистване на DistoX паметта</string>
     <!-- TODO string name="device_clear">Clear DistoX memory</string -->
@@ -273,7 +273,7 @@ Refer to the web pages for details.\n
     <string name="error_group_non_integer">Номерът на група трябва да е цяло число</string>
     <string name="error_alt_required">Необходима височина</string>
     <string name="error_invalid_number">Грешно число</string>
-    <string name="error_invalid_name">Грешно име</string>
+    <!-- UNUSED string name="error_invalid_name">Грешно име</string -->
     <string name="error_lat_required">Необходима геогр. широчина</string>
     <string name="error_long_required">Необходима геогр. дължина</string>
     <!-- TODO string name="error_name_exists">Existing project</string -->
@@ -291,9 +291,9 @@ Refer to the web pages for details.\n
     <string name="error_value_required">Необходима стойност</string>
 
     <string name="group_title">Групиране на данните за калибрация</string>
-    <string name="group_policy_four">Вид групиране: по четворки</string>
-    <string name="group_policy_sixteen">Вид групиране: четири групи по четири, останалите единични</string>
-    <string name="group_policy_distance">Вид групиране: групиране по ъглово разстояние</string>
+    <!-- UNUSED string name="group_policy_four">Вид групиране: по четворки</string -->
+    <!-- UNUSED string name="group_policy_sixteen">Вид групиране: четири групи по четири, останалите единични</string -->
+    <!-- UNUSED string name="group_policy_distance">Вид групиране: групиране по ъглово разстояние</string -->
     <string name="group_reset">Изчистване на групите</string>
 
     <!-- UNUSED string name="scale">мащаб</string -->
@@ -336,7 +336,6 @@ Refer to the web pages for details.\n
     <string name="no_calibration">Не е избрана калибрация</string>
     <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
-    <!-- TODO string name="outdated_cave3d">Cave3D version is too old</string -->
     <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
@@ -416,16 +415,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="start_scan">Start scan</string -->
     <!-- TODO string name="stop_scan">Stop scan</string -->
     <!-- TODO string name="title_scan">BLE scan</string -->
-    <!-- TODO string name="ble_scan_failed">BLE scan failed</string -->
-    <!-- TODO string name="ble_gatt_failure">BLE failure</string -->
+    <!-- UNUSED string name="ble_scan_failed">BLE scan failed</string -->
+    <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <!-- TODO string name="ble_no_remote">No remote device</string -->
-    <!-- TODO string name="ble_control">Control</string -->
-    <!-- TODO string name="ble_connect">Connect</string -->
-    <!-- TODO string name="ble_disconnect">Disconnect</string -->
-    <!-- TODO string name="bric_scan">Scan</string -->
-    <!-- TODO string name="bric_shot">Shot</string -->
-    <!-- TODO string name="bric_laser">Laser</string -->
-    <!-- TODO string name="bric_off">Off</string -->
+    <!-- UNUSED string name="ble_control">Control</string -->
+    <!-- UNUSED string name="ble_connect">Connect</string -->
+    <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
+    <!-- UNUSED string name="bric_scan">Scan</string -->
+    <!-- UNUSED string name="bric_shot">Shot</string -->
+    <!-- UNUSED string name="bric_laser">Laser</string -->
+    <!-- UNUSED string name="bric_off">Off</string -->
     <!-- TODO string name="bric_memory">BRIC memory</string -->
 
     <string name="popup_join_pt">Прикачване към близка точка</string>
@@ -503,7 +502,7 @@ Refer to the web pages for details.\n
 
     <string name="saved_file_1">Файлът е записан %1$s</string>
     <string name="saved_file_2">Файлът е записан %1$s Мащаб %2$.2f</string>
-    <string name="saving_">Записване</string>
+    <!-- UNUSED string name="saving_">Записване</string -->
     <string name="saving_file_failed">Грешка при запис на файл</string>
     <!-- UNUSED string name="scrap_name">Име на скица</string -->
     <string name="splay">странично измервание</string>
@@ -672,7 +671,7 @@ Refer to the web pages for details.\n
     <string name="button_cancel"    >Отказ     </string>
     <string name="button_change"    >Промяна   </string>
     <string name="button_close"     >Затваряне </string>
-    <string name="button_create"    >Създаване </string>
+    <!-- UNUSED string name="button_create"    >Създаване </string -->
     <string name="button_color"     >Цвят</string>
     <string name="button_convert"   >Конверт.  </string>
     <string name="button_current"   >Направи текущ</string>
@@ -711,7 +710,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
-    <string name="button_rename"    >Преименуване</string>
+    <!-- UNUSED string name="button_rename"    >Преименуване</string -->
     <string name="button_renumber"  >Преномериране</string>
     <!-- TODO string name="button_bedding"   >Bedding plane</string -->
     <string name="button_replace"   >Подмяна   </string>
@@ -1037,7 +1036,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_photo_list">Photos</string -->
     <string name="title_plot_save">Запис на скица като</string>
     <!-- UNUSED string name="title_plot_merge">Сливане на скици</string -->
-    <string name="title_plot_reload">Препрочитане на скица</string>
+    <!-- UNUSED string name="title_plot_reload">Препрочитане на скица</string -->
     <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
     <string name="title_profile_flip">Обръщане на разреза?</string>
     <string name="title_projection">Азимут на проектиран разрез %1$d</string>
@@ -1100,8 +1099,6 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">Експортиране на калибрация като</string>
     <!-- string name="title_zoom">Приближаване</string -->
 
-    <!-- TODO string name="title_import_tro">VisualTopo import options</string -->
-    <!-- TODO string name="title_import_dat">Compass import options</string -->
     <!-- TODO string name="title_import_shot">Survey import</string -->
     <!-- TODO string name="title_import_gps">GPS point import</string -->
 
@@ -1149,10 +1146,6 @@ Refer to the web pages for details.\n
   <string name="pref_local_help_summary">Включване на преведено ръководство</string>
   <!-- UNUSED string name="pref_cosurvey_title">Ко-картиране</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Разрешаване на едновременно картиране</string -->
-  <string name="pref_export_shots_title">Експортиране на измервания</string>
-  <string name="pref_export_shots_summary">Формат на експортираните измервания</string>
-  <string name="pref_export_plot_title">Експортиране на скици</string>
-  <string name="pref_export_plot_summary">Формат на експортираните скици</string>
 
   <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
   <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
@@ -1308,8 +1301,8 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Стр. изм. с по-голямо отклонение от антената са пунктирани</string>
   <string name="pref_section_splay_title">Граница от равнината за пункт. стр. изм.</string>
   <string name="pref_section_splay_message">Пунктирани, ако ъгъла от равнината е по-голям</string>
-  <string name="pref_data_backup_title">Автоматично експортиране на измервания</string>
-  <string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string>
+  <!-- UNUSED string name="pref_data_backup_title">Автоматично експортиране на измервания</string -->
+  <!-- UNUSED string name="pref_data_backup_summary">Автоматично експортиране на измервания (необходим е зададен формат)</string -->
   <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
   <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
   <!-- TODO string name="pref_fixed_origin_title">Sketch origin</string -->
@@ -1672,9 +1665,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="equate_no_stations">Too few stations</string -->
     <!-- TODO string name="equate_no_nearby">No station nearby</string -->
 
-    <!-- TODO string name="menu_new">NEW</string -->
-    <!-- TODO string name="menu_equate">ADD EQUATE</string -->
-    <!-- TODO string name="menu_equates">EQUATES</string -->
+    <!-- UNUSED string name="menu_new">NEW</string -->
+    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
+    <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
     <!-- TODO string name="overwrite">overwrite</string -->
@@ -1699,33 +1692,24 @@ Refer to the web pages for details.\n
     VERY IMPORTANT Fix the "UNUSED" commented strings
 
     <string name="cbtn_bind">Rebind</string>
-    <string name="cbtn_compute">Compute</string>
-
-    <string name="cbtn_new">New</string>
-    <string name="cbtn_move">Move</string>
-    <string name="cbtn_rotate">Turn</string>
-    <string name="cbtn_station">Station</string>
-    <string name="cbtn_splay">Splay</string>
-    <string name="cbtn_zoom_in">Zoom +</string>
-    <string name="cbtn_zoom_out">Zoom -</string>
 
     <string name="cmenu_open">Open file</string>
     <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
-    <string name="cmenu_ble">BT surveys</string>
+    < UNUSED string name="cmenu_ble">BT surveys</string>
     <string name="cmenu_viewpoint">Viewpoint</string>
-    <string name="cmenu_files">Surveys</string>
+    < UNUSED string name="cmenu_files">Surveys</string>
     <string name="cmenu_export">Export</string>
-    <string name="cmenu_frame">Frame</string>
-    <string name="cmenu_color">Color</string>
+    < UNUSED string name="cmenu_frame">Frame</string>
+    < UNUSED string name="cmenu_color">Color</string>
     <string name="cmenu_info">Info</string>
     <string name="cmenu_ico">3D-Rose diagram</string>
     <string name="cmenu_rose">Rose diagram</string>
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
-    <string name="cmenu_fractal">Fractal counts</string>
+    < UNUSED string name="cmenu_fractal">Fractal counts</string>
     <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
@@ -1811,11 +1795,11 @@ Refer to the web pages for details.\n
     <string name="azimuth">azimuth</string>
     <string name="clino">clino</string>
 
-    <string name="cbtn_laser">Laser</string>
-    <string name="cbtn_scan">Scan</string>
-    <string name="cbtn_shot">Shot</string>
-    <string name="cbtn_start">Start</string>
-    <string name="cbtn_stop">Stop</string>
+    < UNUSED string name="cbtn_laser">Laser</string>
+    < UNUSED string name="cbtn_scan">Scan</string>
+    < UNUSED string name="cbtn_shot">Shot</string>
+    < UNUSED string name="cbtn_start">Start</string>
+    < UNUSED string name="cbtn_stop">Stop</string>
 
     <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
@@ -1996,11 +1980,10 @@ Refer to the web pages for details.\n
     <string name="cpref_hull_summary">Hull walls</string>
 ->
 
-    <string name="TopoGLPerms">Permissions</string>
+    < UNUSED string name="TopoGLPerms">Permissions</string>
     <string name="cperms_mandatory">Cave3D cannot run without:</string>
     <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
     <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
-    <string name="chelp_title">Cave3D %1$s Help</string>
 
     <string name="help_open_3d">Open 3D file</string>
     <string name="help_export_3d">Export 3D file</string>
