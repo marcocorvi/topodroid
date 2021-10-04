@@ -68,8 +68,7 @@ class DialogSketch extends MyDialog
   {
     super( context, R.string.DialogSketch );
     mApp  = app;
-    // mBaseDir = Cave3DFile.mAppBasePath + "/TopoDroid/c3d";
-    mBaseDir = Cave3DFile.C3D_PATH;
+    mBaseDir = TDPath.getC3dPath(); // Cave3DFile.C3D_PATH;
     // TDLog.v("TopoGL sketch base dir " + mBaseDir );
   } 
 

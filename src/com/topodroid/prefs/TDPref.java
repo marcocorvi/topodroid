@@ -454,10 +454,10 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7], R.array.locale, R.array.localeValue, ctx, hlp ),
       makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.orientation, R.array.orientationValue, ctx, hlp ),
       // makeCbx( cat, key[ 8], tit[ 8], dsc[ 8], D, def[ 8], ctx, hlp ), // IF_COSURVEY
-      makeFwd( cat, key[ 9], tit[ 9],          B,          ctx, hlp ),
-      makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),
-      makeFwd( cat, key[12], tit[12],          B,          ctx, hlp ),
+      makeFwd( cat, key[ 9], tit[ 9],          B,          ctx, hlp ),    // IMPORT EXPORT
+      makeFwd( cat, key[10], tit[10],          B,          ctx, hlp ),    // SURVEY DATA
+      makeFwd( cat, key[11], tit[11],          B,          ctx, hlp ),    // SKETCHING
+      makeFwd( cat, key[12], tit[12],          B,          ctx, hlp ),    // DEVICES
       makeFwd( cat, key[13], tit[13],          N,          ctx, hlp ),    // CAVE3D
       makeFwd( cat, key[14], tit[14],          A,          ctx, hlp ),    // GEEK
       makeFwd( cat, key[15], tit[15],          E,          ctx, hlp ),    // EXPORT SETTINGS
@@ -1091,7 +1091,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
-    // TDLog.v("make Geek Prefs");
+    TDLog.v("make Geek Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_GEEK;
     String[] key = TDPrefKey.GEEK;
     int[] tit    = TDPrefKey.GEEKtitle;
@@ -1105,9 +1105,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[4], tit[4],          T,          ctx, hlp ), // GEEK_SPLAY
       makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_PLOT
       makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_LINE
-      makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS
-      makeFwd( cat, key[8], tit[8],          A,          ctx, hlp ), // GEEK_DEVICE
-      makeFwd( cat, key[9], tit[9],          T,          ctx, hlp )  // GEEK_IMPORT
+      // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTPWALLS
+      makeFwd( cat, key[7], tit[7],          A,          ctx, hlp ), // GEEK_DEVICE
+      makeFwd( cat, key[8], tit[8],          T,          ctx, hlp )  // GEEK_IMPORT
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D
     };
   }
@@ -1159,7 +1159,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc    = TDPrefKey.WALLS3Ddesc;
     String[] def = TDPrefKey.WALLS3Ddef;
     return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], INTEGER, ctx, hlp ), // CAVE3D_SPLAY_USE
+      makeLst( cat, key[0], tit[0], dsc[0], N, def[0], R.array.splayUse, R.array.splayUseValue,       ctx, hlp ), // CAVE3D_SPLAY_USE
       makeCbx( cat, key[1], tit[1], dsc[1], N, def[1],          ctx, hlp ), // CAVE3D_ALL_SPLAY
       makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],          ctx, hlp ), // CAVE3D_SPLAY_PROJ
       makeEdt( cat, key[3], tit[3], dsc[3], N, def[3], FLOAT,   ctx, hlp ), // CAVE3D_SPLAY_THR

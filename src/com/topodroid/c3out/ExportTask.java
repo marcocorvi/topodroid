@@ -18,7 +18,8 @@ import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.ModelType;
 import com.topodroid.DistoX.TglParser;
 import com.topodroid.DistoX.TopoGL;
-import com.topodroid.DistoX.Cave3DFile;
+// import com.topodroid.DistoX.Cave3DFile;
+import com.topodroid.DistoX.TDPath;
 
 import com.topodroid.utils.TDLog;
 
@@ -51,7 +52,8 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
   @Override
   public Boolean doInBackground( Void ... args )
   {
-    String pathname = Cave3DFile.getFilepath( mExport.mName );
+    // String pathname = Cave3DFile.getExportFilepath( mExport.mName );
+    String pathname = TDPath.getC3exportFile( mExport.mName );
     if ( mExport.mType == ModelType.GLTF ) { 
       // TDLog.v( "export model GLTF " + pathname );
       return mApp.exportGltfModel( mExport.mType, pathname + ".gltf", mExport );
@@ -90,9 +92,13 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
           break;
       }
       if ( dos != null ) {
+        // TDLog.v("export binary model");
         return mParser.exportModelBinary( mExport.mType, dos, mExport );
       } else if ( osw != null ) {
+        // TDLog.v("export ascii model");
         return mParser.exportModelAscii( mExport.mType, osw, mExport );
+      } else {
+        TDLog.Error("Failed export - null stream"); 
       }
     } catch ( OutOfMemoryError e ) {
       TDLog.Error("Export task: Out of memory error" );

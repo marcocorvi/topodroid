@@ -574,7 +574,7 @@ class ShpPolylinez extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, mShpType, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, mShpType, shxLength );
     writeDBaseHeader( nr, dbfRecLen, n_fld, fields, ftypes, flens );
-    // TDLog.v( "SHP shots done headers" );
+    TDLog.v( "SHP shots done headers" );
 
     int cnt = 0;
     for ( Cave3DShot ln : lns ) {
@@ -586,9 +586,10 @@ class ShpPolylinez extends ShpObject
       writeShpRecord( cnt, shpRecLen, p1, p2 );
       writeShxRecord( offset, shpRecLen );
       fields[0] = name;
-      fields[1] = p1.getFullName(); 
-      fields[2] = p2.getFullName();
+      fields[1] = p1.getShortName(); 
+      fields[2] = p2.getShortName();
       fields[3] = p1.getSurvey();
+      TDLog.v( "SHP shots fields " + fields[1] + " " + fields[2] + " " + fields[3] );
       // fields[3] = String.format("0x%02x", ln.getReducedFlag() ); // flag
       // fields[4] = ln.getComment();
       writeDBaseRecord( n_fld, fields, flens );

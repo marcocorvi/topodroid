@@ -252,7 +252,8 @@ public class TopoGL extends Activity
       // if ( mVersionCheck >= 0 ) {
         if ( mSurveyBase != null && mSurveyBase.length() > 0 ) {
           // TDLog.v("Survey mSurveyBase <" + mSurveyBase + ">" );
-          Cave3DFile.setTopoDroidPaths( mSurveyBase );
+          // Cave3DFile.setTopoDroidPaths( mSurveyBase ); // BLUETOOTH
+
           if ( mThconfigName != null ) { // used by TdManager
             // TDLog.v("TdManager input tdconfig " + mThconfigName );
             mFileDialog = false;
@@ -580,7 +581,8 @@ public class TopoGL extends Activity
 
   void setMenuAdapter( Resources res )
   {
-    Cave3DFile.hasC3dDir();
+    // TDPath.hasC3dDir(); // this was useless because it only checks if the path exists (was Cave3DFile)
+
     // if ( mMenuImage != null ) { // not neceessary
     //   int size = TopoDroidApp.getScaledSize( this );
     //   MyButton.setButtonBackground( this, mMenuImage, size, R.drawable.iz_menu );
@@ -1230,7 +1232,8 @@ public class TopoGL extends Activity
 
     if ( uri == null ) {
       // TDLog.v("input stream from tdconfig " + pathname );
-      String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
+      // String path = Cave3DFile.THCONFIG_PATH + "/" + pathname + ".tdconfig";
+      String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
       Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
       try {
         final InputStream is = new FileInputStream( path );
@@ -1320,6 +1323,7 @@ public class TopoGL extends Activity
     // TDLog.v("DEM " + pathname );
     if ( ! pathname.toLowerCase().endsWith( ".c3d" ) ) return;
     ParserSketch sketch = new ParserSketch( pathname );
+
     // final double dd = mDEMbuffer;
     (new AsyncTask<ParserSketch, Void, Boolean>() {
       ParserSketch my_sketch = null;
@@ -1769,7 +1773,7 @@ public class TopoGL extends Activity
   private void loadPreferences( SharedPreferences sp )
   {
     float r;
-    Cave3DFile.checkAppBasePath( this );
+    // Cave3DFile.checkAppBasePath( this ); // BLUETOOTH
     // Cave3DFile.setAppBasePath( sp.getString( CAVE3D_BASE_PATH, Cave3DFile.HOME_PATH ) );
     // try {
     //   int size = Integer.parseInt( sp.getString( CAVE3D_TEXT_SIZE, "10" ) );
@@ -1972,8 +1976,8 @@ public class TopoGL extends Activity
   private boolean initRendering2( InputStream is, String filepath, String surveyname )
   {
     doSketches = false;
-    String ext = Cave3DFile.getExtension( filepath );
-    String name = Cave3DFile.getMainname( filepath );
+    String ext  = TDPath.getExtension( filepath );
+    String name = TDPath.getMainname( filepath );
     // TDLog.v("init rendering (2) file " + filepath + " survey " + surveyname + " name " + name + " ext " + ext );
     try {
       mParser = null;
@@ -2703,14 +2707,17 @@ public class TopoGL extends Activity
   {
     mExport = export;
     if ( mExportUri ) {
+      TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file );
     } else {
+      TDLog.v( "export with task - survey " + mSurveyName );
       (new ExportTask( this, mParser, null, mSurveyName, mExport )).execute();
     }
   }
 
   void selectFile( int request, String action, String mime, int res )
   {
+    // TDLog.v("TopoGL select file");
     Intent intent = new Intent( action );
     intent.setType( (mime==null)? "*/*" : mime );
     intent.addCategory( Intent.CATEGORY_OPENABLE );
@@ -2772,7 +2779,7 @@ public class TopoGL extends Activity
     pos = pathname.lastIndexOf("/");
     if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
     for ( int trial = 0; trial < 2; ++ trial ) { 
-      TDLog.v("Try " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
+      TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
       if ( pathname.toLowerCase().endsWith( ".th" ) 
         || pathname.toLowerCase().endsWith( "thconfig" )
         || pathname.toLowerCase().endsWith( "tdconfig" )

@@ -142,7 +142,7 @@ public class TDPrefActivity extends Activity
     // Resources res = getResources();
     TDPrefHelper hlp = new TDPrefHelper( mCtx ); // TopoDroidApp.mPrefHlp;
 
-    // TDLog.v( "Load Pref create. category " + mPrefCategory );
+    TDLog.v( "Load Pref create. category " + mPrefCategory );
     switch ( mPrefCategory ) {
       case TDPrefCat.PREF_CATEGORY_ALL:       mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
       case TDPrefCat.PREF_CATEGORY_SURVEY:    mPrefs = TDPref.makeSurveyPrefs(   this, hlp ); break;
@@ -230,6 +230,7 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_DEVICE_PREF", TDPrefCat.PREF_CATEGORY_DEVICE );
       linkPreference( "DISTOX_CAVE3D_PREF", TDPrefCat.PREF_CATEGORY_CAVE3D );
       linkPreference( "DISTOX_GEEK_PREF",   TDPrefCat.PREF_CATEGORY_GEEK );
+      TDLog.v( "category ALL done");
     } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_IMPORT ) {
       mPtCmapPref = findPreference( "DISTOX_PT_CMAP" );
       if ( mPtCmapPref != null ) {
@@ -328,7 +329,7 @@ public class TDPrefActivity extends Activity
         @Override
         public void onClick( View v )
         {
-	  // TDLog.v( "click on " + pref.name + " categoy " + category );
+	  TDLog.v( "click on " + pref.name + " categoy " + category );
           startActivity( intent );
         }
     } );

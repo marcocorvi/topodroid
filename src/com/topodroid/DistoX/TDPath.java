@@ -84,9 +84,12 @@ public class TDPath
   // private static String PATH_CB_DIR  = EXTERNAL_STORAGE_PATH;
   private static String PATH_CB_DIR   = TDFile.getExternalDir(null).getPath();
   private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";
+  private static String PATH_SYMBOL_POINT = PATH_CB_DIR + "/point";
+
   private static String PATH_ZIP      = PATH_CW_DIR + "/zip";
   private static String PATH_TMP      = PATH_CW_DIR + "/tmp";
   private static String PATH_TDCONFIG = PATH_CW_DIR + "/thconfig";
+  private static String PATH_C3EXPORT = PATH_CW_DIR + "/c3export";
 
   private static String APP_SURVEY_PATH   = null;
   private static String APP_PHOTO_PATH    = null;
@@ -220,6 +223,7 @@ public class TDPath
           PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
           PATH_TMP      = PATH_CW_DIR + "/tmp";      checkFilesystemDirs( PATH_TMP );
           PATH_TDCONFIG = PATH_CW_DIR + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG  );
+          PATH_C3EXPORT = PATH_CW_DIR + "/c3export"; checkFilesystemDirs( PATH_C3EXPORT  );
           setSurveyPaths( null );
 	}
       }
@@ -331,6 +335,9 @@ public class TDPath
 
   static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
+  static String getC3dPath() { return APP_C3D_PATH; } // DistoX-SAF
+
+  public static String getSymbolPointDir() { return PATH_SYMBOL_POINT; }
 
   public static String getZipFile( String name ) { return PATH_ZIP     + "/" + name; }
   public static String getTmpFile( String name ) { return PATH_TMP     + "/" + name; }
@@ -339,6 +346,10 @@ public class TDPath
 
   public static String getTdconfigDir( ) { return PATH_TDCONFIG ; }
   public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + "/" + name; }
+
+  public static String getC3exportDir( ) { return PATH_C3EXPORT ; }
+  public static String getC3exportFile( String name ) { return PATH_C3EXPORT + "/" + name; }
+  public static String getC3exportFile( String name, String ext ) { return PATH_C3EXPORT + "/" + name + "." + ext; }
 
   public static String getManFileName( String name ) { return "man/" + name; }
 
@@ -700,17 +711,15 @@ public class TDPath
   // static String getSymbolAreaFilename( String name )  { return "symbol/area/"  + name; }
 
   /* LOAD_MISSING
-  private static String APP_SYMBOL_SAVE_PATH = APP_SYMBOL_PATH + "save/";
-  private static String APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
-  private static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
-  private static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
-  
-  static String getSymbolSavePointPath( String filename ) { return APP_SAVE_POINT_PATH + filename; }
-  static String getSymbolSaveLinePath( String filename )  { return APP_SAVE_LINE_PATH + filename; }
-  static String getSymbolSaveAreaPath( String filename )  { return APP_SAVE_AREA_PATH + filename; }
+  // private static String APP_SYMBOL_SAVE_PATH = APP_SYMBOL_PATH + "save/";
+  // private static String APP_SAVE_POINT_PATH  = APP_SYMBOL_SAVE_PATH + "point/";
+  // private static String APP_SAVE_LINE_PATH   = APP_SYMBOL_SAVE_PATH + "line/";
+  // private static String APP_SAVE_AREA_PATH   = APP_SYMBOL_SAVE_PATH + "area/";
+  // 
+  // static String getSymbolSavePointPath( String filename ) { return APP_SAVE_POINT_PATH + filename; }
+  // static String getSymbolSaveLinePath( String filename )  { return APP_SAVE_LINE_PATH + filename; }
+  // static String getSymbolSaveAreaPath( String filename )  { return APP_SAVE_AREA_PATH + filename; }
   */
-
-
 
   /* FIXME_SKETCH_3D *
   static void deleteSurvey3dFiles( String survey, List< Sketch3dInfo > sketches )
@@ -971,5 +980,43 @@ public class TDPath
   // public static void checkBinDir()  { checkExternalDirs( "bin" ); }
 
   // static void checkManDir() { checkDirs( PATH_MAN ); }
+
+  // -----------------------------------------------------------------
+  // utils
+
+  public static String getExtension( String filename )
+  {
+    int pos = filename.lastIndexOf(".");
+    if ( pos < 0 ) return null;
+    return filename.substring( pos+1 ).toLowerCase();
+  }
+
+  public static String getFilename( String filename )
+  {
+    int pos = filename.lastIndexOf("/");
+    if ( pos >= 0 ) {
+      return filename.substring( pos + 1 );
+    }
+    return filename;
+  }
+
+  public static String getMainname( String filename )
+  {
+    int pos = filename.lastIndexOf("/");
+    int qos = filename.lastIndexOf(".");
+    if ( pos >= 0 ) {
+      if ( qos > pos ) {
+        return filename.substring( pos + 1, qos );
+      } else {
+        return filename.substring( pos + 1 );
+      }
+    } else {
+      if ( qos >= 0 ) {
+        return filename.substring( 0, qos );
+      } else {
+        return filename;
+      }
+    }
+  }
 
 }

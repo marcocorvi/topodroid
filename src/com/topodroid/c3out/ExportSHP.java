@@ -17,7 +17,8 @@ import com.topodroid.DistoX.Triangle3D;
 import com.topodroid.DistoX.Vector3D;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Cave3DFile;
+// import com.topodroid.DistoX.Cave3DFile;
+import com.topodroid.DistoX.TDPath;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
 
@@ -76,9 +77,10 @@ public class ExportSHP
     boolean ret = true;
     ArrayList<File> files = new ArrayList<File>();
 
-    String filepath = Cave3DFile.getFilepath( name ); // export temporary folder for shp files
+    // String filepath = Cave3DFile.getExportFilepath( name );
+    String filepath = TDPath.getC3exportFile( name ); // export temporary folder for shp files
     String filename = filepath + ".shz";              // export shp file (zipped)
-    // TDLog.v( "export SHP: L " + b_legs + " S " + b_splays + " W " + b_walls + "> " + filename ); 
+    TDLog.v( "export SHP: L " + b_legs + " S " + b_splays + " W " + b_walls + "> " + filename ); 
 
     File path = new File(filepath);
     if ( ! path.exists() ) {
@@ -90,21 +92,25 @@ public class ExportSHP
     if ( ret && b_splays ) ret &= exportShots( filepath, files, data.getSplays(), "splay" );
     if ( ret && b_walls ) {
       ret &= exportFacets( filepath, files, mFacets );
-      if ( ret && mTriangles != null ) ret &= exportTriangles( filepath, files, mTriangles );
+      if ( ret ) ret &= exportTriangles( filepath, files, mTriangles );
     }
 
+    if ( files.size() == 0 ) ret = false;
     if ( ret ) {
+      TDLog.v( "export SHP: make zip " + filename + " " + files.size() );
       Archiver zipper = new Archiver( );
       zipper.compressFiles( filename, files );
     }
     deleteDir( path ); // delete temporary shapedir
 
+    TDLog.v( "export SHP: returns " + ret );
     return ret;
   }
 
   private boolean exportStations( String filepath, List<File> files, List< Cave3DStation> stations )
   {
-    // TDLog.v( "SHP Export stations " + stations.size() );
+    if ( stations == null || stations.size() == 0 ) return true;
+    TDLog.v( "SHP Export stations " + stations.size() );
     boolean ret = false;
     try {
       ShpPointz shp = new ShpPointz( filepath + "/station",  files );
@@ -118,7 +124,8 @@ public class ExportSHP
     
   private boolean exportShots( String filepath, List<File> files, List< Cave3DShot> shots, String name )
   {
-    // TDLog.v( "SHP Export " + name + " shots " + shots.size() );
+    if ( shots == null || shots.size() == 0 ) return true;
+    TDLog.v( "SHP Export " + name + " shots " + shots.size() );
     boolean ret = false;
     try {
       ShpPolylinez shp = new ShpPolylinez( filepath + "/" + name, files );
@@ -132,7 +139,8 @@ public class ExportSHP
 
   private boolean exportFacets( String filepath, List<File> files, List< CWFacet > facets )
   {
-    // TDLog.v( "SHP Export facets " + facets.size() );
+    if ( facets == null || facets.size() == 0 ) return true;
+    TDLog.v( "SHP Export facets " + facets.size() );
     boolean ret = false;
     try {
       ShpPolygonz shp = new ShpPolygonz( filepath + "/facet", files );
@@ -146,7 +154,8 @@ public class ExportSHP
 
   private boolean exportTriangles( String filepath, List<File> files, List< Triangle3D > triangles )
   {
-    // TDLog.v( "SHP Export triangles " + triangles.size() );
+    if ( triangles == null || triangles.size() == 0 ) return true;
+    TDLog.v( "SHP Export triangles " + triangles.size() );
     boolean ret = false;
     try {
       ShpPolygonz shp = new ShpPolygonz( filepath + "/triangle", files );

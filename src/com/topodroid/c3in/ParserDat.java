@@ -20,7 +20,7 @@ import com.topodroid.DistoX.Cave3DSurvey;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DFix;
-import com.topodroid.DistoX.Cave3DFile;
+import com.topodroid.DistoX.TDPath;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -120,7 +120,7 @@ public class ParserDat extends TglParser
 	      double y = Double.parseDouble( vals[idx] );
               idx = nextIndex( vals, idx );
 	      double z = Double.parseDouble( vals[idx] );
-              String survey = Cave3DFile.getMainname( file );
+              String survey = TDPath.getMainname( file );
               InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filename0 ) );
 	      readFileDat( isr0, survey, station, x, y, z ); // FIXME
 	    } catch ( FileNotFoundException e ) {

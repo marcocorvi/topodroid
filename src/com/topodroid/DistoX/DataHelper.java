@@ -218,10 +218,10 @@ public class DataHelper extends DataSetObservable
         myDB = null;
       }
     } else {
-      TDLog.v( "DB file " + db_name + " does not exists");
+      TDLog.v( "App does not have DB file " + db_name + " - trying to open it");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-        TDLog.v( "created new database");
+        // TDLog.v( "open and create new database if necessary");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } catch ( SQLiteException e ) {

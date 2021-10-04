@@ -150,7 +150,8 @@ public class Cave3DStation extends Vector3D
         survey_name = "";
       }
     } else {
-      short_name = "";
+      full_name   = "";
+      short_name  = "";
       survey_name = "";
     }
   }

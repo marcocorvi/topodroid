@@ -222,7 +222,7 @@ public class GlModel
     showLegsSurface   = true;
     showLegsDuplicate = true;
     showLegsCommented = true;
-    // GlSketch.reloadSymbols( TopoGL.SYMBOL_PATH );
+    // GlSketch.reloadSymbols( TDPath.PATH_SYMBOL_POINT );
   }
 
   void resetColorMode()
@@ -268,7 +268,8 @@ public class GlModel
   GlModel ( Context ctx )
   { 
     mContext = ctx;
-    GlSketch.loadSymbols( Cave3DFile.SYMBOL_PATH );
+    // GlSketch.loadSymbols( Cave3DFile.SYMBOL_PATH );
+    GlSketch.loadSymbols( TDPath.getSymbolPointDir() );
     glSketches = Collections.synchronizedList(new ArrayList< GlSketch >());
   }
 
