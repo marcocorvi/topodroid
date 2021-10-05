@@ -982,6 +982,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_cover">Angle distribution of calibration data</string>
     <string name="help_compute">Compute calibration</string>
     <string name="help_write">Write calibration coefficients to the DistoX</string>
+    <string name="help_splays">Segment/point splays</string>
 
     <string name="help_add_project">Add cave project</string>
     <string name="help_add_surveys">Add surveys</string>
@@ -1555,8 +1556,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_splay_classes_summary">Enable splay classes</string>
   <string name="pref_splay_color_title">Splay coloring</string>
   <string name="pref_splay_color_summary">Enable splay coloring</string>
-  <string name="pref_splay_as_dot_title">Splay endpoint</string>
-  <string name="pref_splay_as_dot_summary">Display splays as endpoints</string>
+  <!-- UNUSED string name="pref_splay_as_dot_title">Splay endpoint</string -->
+  <!-- UNUSED string name="pref_splay_as_dot_summary">Display splays as endpoints</string -->
   <!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
   <!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
   <string name="pref_plot_shift_title">Sketch shift/scale</string>

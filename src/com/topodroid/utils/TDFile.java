@@ -314,7 +314,11 @@ public class TDFile
 
   public static File getMSfile( String name ) { return new File( TDPath.getPathBase() + "/" + name ); }
 
-  public static File getMSfile( String subdir, String name ) { return new File( TDPath.getPathBase() + "/" + subdir + "/" + name ); }
+  public static File getMSfile( String subdir, String name ) 
+  { 
+    // TDLog.v("MSfile: " + TDPath.getPathBase() + "/" + subdir + "/" + name );
+    return new File( TDPath.getPathBase() + "/" + subdir + "/" + name ); 
+  }
 
   public static long getMSFileLength( String subdir, String name ) 
   { 
@@ -380,6 +384,11 @@ public class TDFile
     return new BufferedWriter( new OutputStreamWriter( os ) );
   }
 
+  /**
+   * @param subdir    subdir relative to app base
+   * @param filename  file name
+   * @param mimetype  not used
+   */
   static public InputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {

@@ -1226,13 +1226,13 @@ public class DrawingIO
     out.newLine();
   }
 
-  static private void exportTherionSplays( BufferedWriter out, List< DrawingPath > splays, RectF bbox ) throws IOException
+  static private void exportTherionSplays( BufferedWriter out, List< DrawingSplayPath > splays, RectF bbox ) throws IOException
   {
     float toTherion = TDSetting.mToTherion;
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     synchronized( TDPath.mShotsLock ) {
-      for ( DrawingPath splay : splays ) {
+      for ( DrawingSplayPath splay : splays ) {
         // if ( bbox.left > splay.right  || bbox.right  < splay.left ) continue;
         // if ( bbox.top  > splay.bottom || bbox.bottom < splay.top  ) continue;
         if ( bbox == null || splay.intersects( bbox ) ) {
@@ -1327,7 +1327,7 @@ public class DrawingIO
         DrawingPath north,
         List< Scrap > scraps,
         List< DrawingStationName > stations,
-        List< DrawingPath > splays )
+        List< DrawingSplayPath > splays )
   {
     ArrayList< XSectionScrap> xsections = new ArrayList<>();
     // int scraps,
@@ -1426,7 +1426,7 @@ public class DrawingIO
         // List< DrawingStationPath > userstations,
         List< Scrap > scraps,
         List< DrawingStationName > stations,
-        List< DrawingPath > splays )
+        List< DrawingSplayPath > splays )
   {
     // TDLog.v( "export multisketch type " + type + " proj " + proj_name );
     class PlotExport

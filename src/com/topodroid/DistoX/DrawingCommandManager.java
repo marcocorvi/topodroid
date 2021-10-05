@@ -63,7 +63,7 @@ public class DrawingCommandManager
   private List< DrawingPath >        mGridStack10;
   private List< DrawingPath >        mGridStack100;
   private List< DrawingPath >        mLegsStack;
-  private List< DrawingPath >        mSplaysStack;
+  private List< DrawingSplayPath >   mSplaysStack;
   // private List< DrawingPath >     mHighlight;  // highlighted path
   private List< DrawingStationName > mStations;    // survey stations
   // private List< DrawingFixedName >   mFixeds;      // survey stations
@@ -76,7 +76,7 @@ public class DrawingCommandManager
   private List< DrawingPath >        mTmpGridStack10  = null;
   private List< DrawingPath >        mTmpGridStack100 = null;
   private List< DrawingPath >        mTmpLegsStack    = null;
-  private List< DrawingPath >        mTmpSplaysStack  = null;
+  private List< DrawingSplayPath >   mTmpSplaysStack  = null;
   private List< DrawingStationName > mTmpStations     = null;    // survey stations
   // private List< DrawingLinePath >    mTmpPlotOutline; // scrap outline
   // private List< DrawingOutlinePath > mTmpXSectionOutlines;  // xsections outlines
@@ -115,7 +115,7 @@ public class DrawingCommandManager
     mGridStack10  = Collections.synchronizedList(new ArrayList< DrawingPath >());
     mGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
     mLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
-    mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingSplayPath >());
     mStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
     mPlotOutline  = Collections.synchronizedList(new ArrayList< DrawingLinePath >());
     mXSectionOutlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());
@@ -221,7 +221,7 @@ public class DrawingCommandManager
 
   // accessors used by DrawingDxf and DrawingSvg
   public List< DrawingPath >        getLegs()         { return mLegsStack;    } 
-  public List< DrawingPath >        getSplays()       { return mSplaysStack;  }
+  public List< DrawingSplayPath >   getSplays()       { return mSplaysStack;  }
   public List< DrawingStationName > getStations()     { return mStations;     } 
   // List< DrawingFixedName >   getFixeds()       { return mFixeds;     } 
   // List< DrawingStationPath > getUserStations() { return mUserStations; }
@@ -313,7 +313,7 @@ public class DrawingCommandManager
 
   private void highlightsSplays( TopoDroidApp app )
   {
-    for ( DrawingPath path : mSplaysStack ) {
+    for ( DrawingSplayPath path : mSplaysStack ) {
       if ( app.hasHighlightedId( path.mBlock.mId ) ) { 
         path.setPathPaint( BrushManager.errorPaint );
       }
@@ -332,7 +332,7 @@ public class DrawingCommandManager
 
   void setSplayAlpha( boolean on ) 
   {
-    for ( DrawingPath p : mSplaysStack ) {
+    for ( DrawingSplayPath p : mSplaysStack ) {
       if ( p.getCosine() > TDSetting.mSectionSplay || p.getCosine() < -TDSetting.mSectionSplay ) p.setPaintAlpha( on );
     }
   }
@@ -353,6 +353,14 @@ public class DrawingCommandManager
     }
   }
 
+  private void flipSplayXAxes( List< DrawingSplayPath > paths )
+  {
+    final float z = 1/mScale;
+    for ( DrawingSplayPath path : paths ) {
+      ((DrawingPath)path).flipXAxis( z ); // IS THIS OK ???
+    }
+  }
+
   // from ICanvasCommand
   public void flipXAxis( float z )
   {
@@ -364,7 +372,7 @@ public class DrawingCommandManager
     }
     synchronized( TDPath.mShotsLock ) { 
       flipXAxes( mLegsStack );
-      flipXAxes( mSplaysStack );
+      flipSplayXAxes( mSplaysStack );
     }
     // FIXME 
     synchronized( mPlotOutline ) { mPlotOutline.clear(); }
@@ -505,7 +513,7 @@ public class DrawingCommandManager
     mTmpGridStack100 = Collections.synchronizedList(new ArrayList< DrawingPath >());
 
     mTmpLegsStack    = Collections.synchronizedList(new ArrayList< DrawingPath >());
-    mTmpSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingPath >());
+    mTmpSplaysStack  = Collections.synchronizedList(new ArrayList< DrawingSplayPath >());
 
     mTmpStations     = Collections.synchronizedList(new ArrayList< DrawingStationName >());
 
@@ -761,9 +769,8 @@ public class DrawingCommandManager
     
 
   // p is the path of sp
-  void deleteSplay( DrawingPath p, SelectionPoint sp )
+  void deleteSplay( DrawingSplayPath p, SelectionPoint sp )
   {
-    if ( TDSetting.mSplayAsDot ) return; // FIXME-SPLAY_AS_DOT
     synchronized( TDPath.mShotsLock ) {
       mSplaysStack.remove( p );
     }
@@ -804,7 +811,7 @@ public class DrawingCommandManager
     }
     if( mSplaysStack != null ) { 
       synchronized( TDPath.mShotsLock ) {
-        for ( DrawingPath path : mSplaysStack ) {
+        for ( DrawingSplayPath path : mSplaysStack ) {
           if ( path.mBlock == null /* || ( ! path.mBlock.isMultiBad() ) */ ) { // splays cannot be multibad
             // path.setPathPaint( paint );
             if ( profile ) {
@@ -834,7 +841,7 @@ public class DrawingCommandManager
   //   for ( DrawingPath leg : mLegsStack ) {
   //     scrap.insertPathInSelection( leg );
   //   }
-  //   for ( DrawingPath splay : mSplaysStack ) {
+  //   for ( DrawingSplayPath splay : mSplaysStack ) {
   //     scrap.insertPathInSelection( splay );
   //   }
   //   for ( DrawingStationName station : mStations ) {
@@ -854,11 +861,10 @@ public class DrawingCommandManager
     }
   }  
 
-  void addTmpSplayPath( DrawingPath path, boolean selectable )
+  void addTmpSplayPath( DrawingSplayPath path, boolean selectable )
   {
     // if ( mTmpSplaysStack == null ) return;
     mTmpSplaysStack.add( path );
-    if ( TDSetting.mSplayAsDot ) return;  // FIXME-SPLAY_AS_DOT
     if ( selectable ) {
       synchronized( TDPath.mSelectionLock ) {
         mSelectionFixed.insertPath( path );
@@ -893,7 +899,7 @@ public class DrawingCommandManager
     }
   }
 
-  void appendSplayPath( DrawingPath path, boolean selectable )
+  void appendSplayPath( DrawingSplayPath path, boolean selectable )
   {
     synchronized( TDPath.mShotsLock ) {
       mSplaysStack.add( path );
@@ -993,7 +999,7 @@ public class DrawingCommandManager
     RectF b = new RectF();
     synchronized( TDPath.mShotsLock ) {
       if( mSplaysStack != null ) { 
-        for ( DrawingPath path : mSplaysStack ) {
+        for ( DrawingSplayPath path : mSplaysStack ) {
           path.computeBounds( b, true );
           // bounds.union( b );
           Scrap.union( bounds, b );
@@ -1088,7 +1094,7 @@ public class DrawingCommandManager
     synchronized( TDPath.mShotsLock ) {
       if ( TDSetting.mTherionSplays ) {
         if ( mSplaysStack != null ) {
-          for ( DrawingPath path : mSplaysStack ) {
+          for ( DrawingSplayPath path : mSplaysStack ) {
             path.draw( c, mat, sca, null );
           }
         }
@@ -1273,15 +1279,15 @@ public class DrawingCommandManager
       if ( mSplaysStack != null ) {
         if ( station_splay == null ) {
           if ( splays ) {
-            for ( DrawingPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox );
+            for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox );
           }
         } else {
           if ( splays ) { // draw all splays except the splays-off
-            for ( DrawingPath path : mSplaysStack ) {
+            for ( DrawingSplayPath path : mSplaysStack ) {
 	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox );
 	    }
           } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
-            for ( DrawingPath path : mSplaysStack ) {
+            for ( DrawingSplayPath path : mSplaysStack ) {
               if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox );
 	    }
 	  }

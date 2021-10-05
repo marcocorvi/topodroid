@@ -53,8 +53,23 @@ public class DrawingPath extends RectF
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
   public static final int DRAWING_PATH_GEO     = 9; // georeferenced point
 
-  Path mPath;
-  Path mTransformedPath;
+  static final int SPLAY_MODE_LINE  = 1;
+  static final int SPLAY_MODE_POINT = 2;
+  static int mSplayMode = SPLAY_MODE_LINE;
+
+  static int toggleSplayMode()
+  {
+    if ( mSplayMode == SPLAY_MODE_LINE ) {
+      mSplayMode = SPLAY_MODE_POINT;
+    } else {
+      mSplayMode = SPLAY_MODE_LINE;
+    }
+    return mSplayMode;
+  }
+
+  protected Path mPath;
+  protected Path mTransformedPath;
+
   Paint mPaint;          // drawing path paint
   public int mType;      // path type
   String mOptions;       // therion options
@@ -226,6 +241,7 @@ public class DrawingPath extends RectF
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
   {
+    TDLog.v("make offset path - type " + mType + " at " + x1 + " " + y1 );
     if ( path != null ) {
       mPath = new Path( path );
       mPath.transform( m );
@@ -241,6 +257,14 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
   }
 
+  void makePath( float x1, float y1, float x2, float y2 )
+  {
+    TDLog.v("make endpoint path - type " + mType + " at " + x1 + " " + y1 );
+    mPath = new Path( );
+    mPath.moveTo( x1, y1 );
+    mPath.lineTo( x2, y2 );
+  }
+
   // implemented in DrawingUtil
   // void makeDotPath( float x2, float y2, float off_x, float off_y )
   // {
@@ -252,6 +276,7 @@ public class DrawingPath extends RectF
 
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )
   {
+    TDLog.v("make straight path - type " + mType + " at " + x1 + " " + y1 );
     mPath = new Path();
     mPath.moveTo( x1, y1 );
     mPath.lineTo( x2, y2 );
@@ -458,88 +483,10 @@ public class DrawingPath extends RectF
   // setSplayExtend is used for the plan view
   // cosine = cos(angle_splay-leg)
   // called by DrawingCommandManager
-  void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
-  {
-    if ( blk == null ) {
-      mPaint = BrushManager.paintSplayXB;
-      return;
-    }
-    // if ( blk.isHighlighted() ) {
-    //   mPaint = BrushManager.highlightPaint;
-    //   return;
-    // }
-    if ( TDLevel.overAdvanced ) {
-      if ( blk.isCommented() ) { // FIXME_COMMENTED
-        mPaint = BrushManager.paintSplayComment;
-        return;
-      } 
-      if ( TDLevel.overAdvanced && blk.isXSplay() ) {
-        mPaint = BrushManager.paintSplayLRUD;
-        return;
-      } 
-      if ( blk.isHSplay() ) {
-        mPaint = h_paint;
-        return;
-      } 
-      if ( blk.isVSplay() ) {
-        mPaint = v_paint;
-        return;
-      } 
-    }
-    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
-      mPaint = BrushManager.paintSplayXB;
-    } else {
-      if (cosine >= 0 && cosine < TDSetting.mCosHorizSplay) {
-        mPaint = BrushManager.paintSplayXBdot;
-      } else if (cosine < 0 && cosine > -TDSetting.mCosHorizSplay) {
-        mPaint = BrushManager.paintSplayXBdash;
-      } else {
-        mPaint = BrushManager.paintSplayXB;
-      }
-    }
-  }
+  void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint ) { }
   
   // setSplayClino is used for the profile view
-  void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
-  {
-    if ( blk == null ) {
-      mPaint= BrushManager.paintSplayXB;
-      return;
-    } 
-    // if ( blk.isHighlighted() ) {
-    //   mPaint = BrushManager.highlightPaint;
-    //   return;
-    // } 
-    if ( TDLevel.overAdvanced ) {
-      if ( blk.isCommented() ) { // FIXME_COMMENTED
-        mPaint= BrushManager.paintSplayComment;
-        return;
-      }
-      if ( blk.isXSplay() ) {
-        mPaint= BrushManager.paintSplayLRUD;
-        return;
-      }
-      if ( blk.isHSplay() ) {
-        mPaint = h_paint;
-        return;
-      }
-      if ( blk.isVSplay() ) {
-        mPaint = v_paint;
-	return;
-      } 
-    }
-    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
-      mPaint = BrushManager.paintSplayXB;
-    } else {
-      if (blk.mClino > TDSetting.mVertSplay) {
-        mPaint= BrushManager.paintSplayXBdot;
-      } else if (blk.mClino < -TDSetting.mVertSplay) {
-        mPaint= BrushManager.paintSplayXBdash;
-      } else {
-        mPaint= BrushManager.paintSplayXB;
-      }
-    }
-  }
+  void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint ) { }
 
   /* FIXME apparently this can be called when mPaint is still null
    *        and when fixedBluePaint is null

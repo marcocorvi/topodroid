@@ -141,13 +141,14 @@ public class ProjectionSurface extends SurfaceView
     }
 
     // called by DarwingActivity::addFixedLine
-    void addFixedPath( DrawingPath path, boolean splay )
+    void addFixedSplayPath( DrawingSplayPath path )
     {
-      if ( splay ) {
-        mCommandManager.addSplayPath( path );
-      } else {
-        mCommandManager.addLegPath( path );
-      }
+      mCommandManager.addSplayPath( path );
+    }
+
+    void addFixedLegPath( DrawingPath path )
+    {
+      mCommandManager.addLegPath( path );
     }
 
     // k : grid type 1, 10, 100

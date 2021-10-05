@@ -90,11 +90,11 @@ public class Archiver
 
   private boolean addEntry( ZipOutputStream zos, String subdir, String filename )
   {
-    // TDLog.v( "ZIP add entry: " + subdir + " " + filename );
+    // TDLog.v( "ZIP add entry. subdir: " + subdir + " filename: " + filename );
     boolean ret = false;
     BufferedInputStream bis = null;
     try { 
-      // TDLog.Log( TDLog.LOG_IO, "ZIP add file " + name.getPath() );
+      // TDLog.Log( TDLog.LOG_IO, "ZIP add file " + file.getPath() );
       bis = new BufferedInputStream( TDFile.getMSinput( subdir, filename, "application/octet-stream" ), BUF_SIZE );
       ZipEntry entry = new ZipEntry( filename );
       int cnt;
@@ -111,7 +111,6 @@ public class Archiver
     } finally {
       if ( bis != null ) try { bis.close(); } catch (IOException e ) { /* ret = false; */ }
     }
-    // TDLog.v( "ZIP add file " + name.getPath() + " return " + ret );
     return ret;
   }
 

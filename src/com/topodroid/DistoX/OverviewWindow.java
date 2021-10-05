@@ -262,27 +262,29 @@ public class OverviewWindow extends ItemDrawer
 
     // splay = false
     // selectable = false
-    private void addFixedLine( DBlock blk, double x1, double y1, double x2, double y2, 
-                               // float xoff, float yoff,
-                               boolean splay )
+    private void addFixedSplayLine( DBlock blk, double x1, double y1, double x2, double y2 ) // float xoff, float yoff,
+    {
+      DrawingSplayPath dpath = null;
+      dpath = new DrawingSplayPath( blk, mOverviewSurface.scrapIndex() );
+      if ( blk.mClino > TDSetting.mVertSplay ) {
+        dpath.setPathPaint( BrushManager.paintSplayXBdot );
+      } else if ( blk.mClino < -TDSetting.mVertSplay ) {
+        dpath.setPathPaint( BrushManager.paintSplayXBdash );
+      } else {
+        dpath.setPathPaint( BrushManager.paintSplayXB );
+      }
+      DrawingUtil.makeDrawingSplayPath( dpath, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mOverviewSurface.addFixedSplayPath( dpath, false ); // false: non-selectable
+    }
+      
+    private void addFixedLine( DBlock blk, double x1, double y1, double x2, double y2 ) // float xoff, float yoff,
     {
       DrawingPath dpath = null;
-      if ( splay ) {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mOverviewSurface.scrapIndex() );
-        if ( blk.mClino > TDSetting.mVertSplay ) {
-          dpath.setPathPaint( BrushManager.paintSplayXBdot );
-        } else if ( blk.mClino < -TDSetting.mVertSplay ) {
-          dpath.setPathPaint( BrushManager.paintSplayXBdash );
-        } else {
-          dpath.setPathPaint( BrushManager.paintSplayXB );
-        }
-      } else {
-        dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mOverviewSurface.scrapIndex() );
-        dpath.setPathPaint( BrushManager.fixedShotPaint );
-      }
+      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mOverviewSurface.scrapIndex() );
+      dpath.setPathPaint( BrushManager.fixedShotPaint );
       // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-      DrawingUtil.makeDrawingPath( dpath, (float)x1, (float)y1, (float)x2, (float)y2, splay );
-      mOverviewSurface.addFixedPath( dpath, splay, false ); // false: non-selectable
+      DrawingUtil.makeDrawingPath( dpath, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mOverviewSurface.addFixedLegPath( dpath, false ); // false: non-selectable
     }
 
     // --------------------------------------------------------------------------------------
@@ -324,14 +326,12 @@ public class OverviewWindow extends ItemDrawer
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
         NumStation st2 = sh.to;
-        addFixedLine( sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s, false );
-                      // xoff, yoff, false );
+        addFixedLine( sh.getFirstBlock(), st1.e, st1.s, st2.e, st2.s ); // xoff, yoff
       }
       for ( NumSplay sp : splays ) {
         if ( Math.abs( sp.getBlock().mClino ) < TDSetting.mSplayVertThrs ) {
           NumStation st = sp.from;
-          addFixedLine( sp.getBlock(), st.e, st.s, sp.e, sp.s, true );
-                        // xoff, yoff, true );
+          addFixedSplayLine( sp.getBlock(), st.e, st.s, sp.e, sp.s ); // xoff, yoff
         }
       }
       for ( NumStation st : stations ) {
@@ -345,14 +345,12 @@ public class OverviewWindow extends ItemDrawer
         if  ( ! sh.mIgnoreExtend ) {
           NumStation st1 = sh.from;
           NumStation st2 = sh.to;
-          addFixedLine( sh.getFirstBlock(), st1.h, st1.v, st2.h, st2.v, false );
-                        // xoff, yoff, false );
+          addFixedLine( sh.getFirstBlock(), st1.h, st1.v, st2.h, st2.v ); // xoff, yoff
         }
       } 
       for ( NumSplay sp : splays ) {
         NumStation st = sp.from;
-        addFixedLine( sp.getBlock(), st.h, st.v, sp.h, sp.v, true );
-                      // xoff, yoff, true );
+        addFixedSplayLine( sp.getBlock(), st.h, st.v, sp.h, sp.v ); // xoff, yoff
       }
       for ( NumStation st : stations ) {
         DrawingStationName dst;

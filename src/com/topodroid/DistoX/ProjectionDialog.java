@@ -155,21 +155,23 @@ class ProjectionDialog extends MyDialog
 
   // -----------------------------------------------------------------
 
-  private void addFixedLine( DBlock blk, float x1, float y1, float x2, float y2, boolean splay )
+  private void addFixedSplayLine( DBlock blk, float x1, float y1, float x2, float y2 )
+  {
+    DrawingSplayPath dpath = null;
+    dpath = new DrawingSplayPath( blk, 0 );
+    dpath.setPathPaint( BrushManager.fixedShotPaint );
+    dpath.makePath( x1, y1, x2, y2 );
+    mProjectionSurface.addFixedSplayPath( dpath );
+  }
+    
+  private void addFixedLegLine( DBlock blk, float x1, float y1, float x2, float y2 )
   {
     DrawingPath dpath = null;
-    if ( splay ) {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, 0 );
-      dpath.setPathPaint( BrushManager.fixedShotPaint );
-    } else {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, 0 );
-      dpath.setPathPaint( BrushManager.labelPaint );
-    }
+    dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, 0 );
+    dpath.setPathPaint( BrushManager.labelPaint );
     // mDrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, mOffset.x, mOffset.y );
-    dpath.mPath = new Path();
-    dpath.mPath.moveTo( x1, y1 );
-    dpath.mPath.lineTo( x2, y2 );
-    mProjectionSurface.addFixedPath( dpath, splay );
+    dpath.makePath( x1, y1, x2, y2 );
+    mProjectionSurface.addFixedLegPath( dpath );
   }
 
   // --------------------------------------------------------------------------------------
@@ -203,7 +205,7 @@ class ProjectionDialog extends MyDialog
         h2 = DrawingUtil.toSceneX( x2, y2 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
         v2 = DrawingUtil.toSceneY( x2, y2 );
-        addFixedLine( sh.getFirstBlock(), h1, v1, h2, v2, false );
+        addFixedLegLine( sh.getFirstBlock(), h1, v1, h2, v2 );
       }
     } 
     for ( NumSplay sp : splays ) {
@@ -217,7 +219,7 @@ class ProjectionDialog extends MyDialog
         h2 = DrawingUtil.toSceneX( x2, y2 );
         v1 = DrawingUtil.toSceneY( x1, y1 );
         v2 = DrawingUtil.toSceneY( x2, y2 );
-        addFixedLine( sp.getBlock(), h1, v1, h2, v2, true );
+        addFixedSplayLine( sp.getBlock(), h1, v1, h2, v2 );
       }
     }
     for ( NumStation st : stations ) {

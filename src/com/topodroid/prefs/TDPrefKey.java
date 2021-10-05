@@ -1502,7 +1502,7 @@ public class TDPrefKey
   public static String[] GEEKsplay = {
     "DISTOX_SPLAY_CLASSES",   // splay classes
     "DISTOX_SPLAY_COLOR",     // splay color
-    "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
+    // "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
     "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
@@ -1513,7 +1513,7 @@ public class TDPrefKey
   public static int[] GEEKsplaytitle = {
     R.string.pref_splay_classes_title,
     R.string.pref_splay_color_title,
-    R.string.pref_splay_as_dot_title,
+    // R.string.pref_splay_as_dot_title,
     R.string.pref_plan_vthr_title,
     R.string.pref_dash_splay_title,
     R.string.pref_vert_splay_title,
@@ -1524,7 +1524,7 @@ public class TDPrefKey
   public static int[] GEEKsplaydesc = {
     R.string.pref_splay_classes_summary,
     R.string.pref_splay_color_summary,
-    R.string.pref_splay_as_dot_summary,
+    // R.string.pref_splay_as_dot_summary,
     R.string.pref_plan_vthr_summary,      
     R.string.pref_dash_splay_message, 
     R.string.pref_vert_splay_message,  
@@ -1535,7 +1535,7 @@ public class TDPrefKey
   public static String[] GEEKsplaydef = {
     FALSE,
     FALSE,
-    FALSE,
+    // FALSE,
     "80",
     TDString.ZERO,
     TDString.FIFTY,

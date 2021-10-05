@@ -285,7 +285,7 @@ class DrawingSurface extends SurfaceView
 
   // N.B. this must be called only by plan or profile
   // p is the path of sp
-  void deleteSplay( DrawingPath p, SelectionPoint sp )
+  void deleteSplay( DrawingSplayPath p, SelectionPoint sp )
   {
     mCommandManager1.deleteSplay( p, sp );
     if ( mCommandManager2 != null ) {
@@ -541,27 +541,29 @@ class DrawingSurface extends SurfaceView
   void setFixedZoom( boolean fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
 
   // only for X-Sections autowalls
-  List< DrawingPath > getSplays() { return commandManager.getSplays(); }
+  List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }
 
   // called by DarwingActivity::addFixedLine
-  void addFixedPath( DrawingPath path, boolean splay, boolean selectable )
+  void addFixedSplayPath( DrawingSplayPath path, boolean selectable )
   {
-    if ( splay ) {
-      commandManager.addTmpSplayPath( path, selectable );
-    } else {
-      commandManager.addTmpLegPath( path, selectable );
-    }
-    // commandManager.addFixedPath( path, selectable );
+    commandManager.addTmpSplayPath( path, selectable );
   }
 
-  void appendFixedPath( int type, DrawingPath path, boolean splay, boolean selectable )
+  void addFixedLegPath( DrawingPath path, boolean selectable )
+  {
+    commandManager.addTmpLegPath( path, selectable );
+  }
+
+  void appendFixedSplayPath( int type, DrawingSplayPath path, boolean selectable )
   {
     DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
-    if ( splay ) {
-      cmd.appendSplayPath( path, selectable );
-    } else {
-      cmd.appendLegPath( path, selectable );
-    }
+    cmd.appendSplayPath( path, selectable );
+  }
+
+  void appendFixedLegPath( int type, DrawingPath path, boolean selectable )
+  {
+    DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
+    cmd.appendLegPath( path, selectable );
   }
 
   void dropLastSplayPath( int type )

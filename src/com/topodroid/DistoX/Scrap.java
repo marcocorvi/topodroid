@@ -1269,7 +1269,7 @@ public class Scrap
   //       -1 no hot item
   //       -2 not line
   //       -3 no splay
-  int snapHotItemToNearestSplays( float dthr, DrawingStationSplay station_splay, List< DrawingPath > splays_paths, boolean splays, boolean latest )
+  int snapHotItemToNearestSplays( float dthr, DrawingStationSplay station_splay, List< DrawingSplayPath > splays_paths, boolean splays, boolean latest )
   {
     SelectionPoint sp = mSelected.mHotItem;
     if ( sp == null ) return -1;
@@ -1280,7 +1280,7 @@ public class Scrap
 
     // nearby splays are the splays that get close enough (dthr) to the line
     ArrayList< NearbySplay > nearby_splays = new ArrayList<>();
-    for ( DrawingPath fxd : splays_paths ) {
+    for ( DrawingSplayPath fxd : splays_paths ) {
       if ( station_splay == null ) {
         if ( ! splays ) continue;
       } else {

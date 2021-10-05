@@ -86,6 +86,13 @@ public class ShpObject
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
+
+  /** cstr
+   * @param typ
+   * @param dir    dirname (relative to the CWD)
+   * @param pth    filename
+   * @param files  array of file names for the files that must be included in the ZIP
+   */
   public ShpObject( int typ, String dir, String pth, List< String > files ) // throws IOException
   { 
     geomType  = typ;
@@ -98,8 +105,12 @@ public class ShpObject
     setYYMMDD( TDUtil.currentDate() );
   }
 
-  // left justified blank-padded to length
-  // if the numeric is larger than length it is truncated 
+  /** left justified blank-padded to length
+   * if the numeric is larger than length it is truncated 
+   * @param value   numeric value
+   * @param len     length of output chars
+   * @return char-string of the digits of the numeric value
+   */
   protected char[] blankPadded( int value, int len )
   {
     String res = Integer.toString( value );

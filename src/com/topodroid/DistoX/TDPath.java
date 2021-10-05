@@ -326,7 +326,7 @@ public class TDPath
   static String getManifestFile() { return PATH_TMP + "/manifest"; }
 
   // used by Archiver
-  static String getDirFile( String name )        { return APP_SURVEY_PATH + "/" + name; }
+  static String getDirFile( String name ) { return APP_SURVEY_PATH + "/" + name; }
 
   // static String getSymbolFile( String name ) { return name; }
 

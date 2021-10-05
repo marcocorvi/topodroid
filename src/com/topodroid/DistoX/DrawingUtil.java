@@ -56,33 +56,36 @@ public class DrawingUtil
   private static int toBoundY( float x, float y ) { return Math.round(y); }
 
   static
-  void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, boolean is_splay )
+  void makeDrawingSplayPath( DrawingSplayPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
-    dpath.mPath = new Path();
     float x1 = toSceneX( xx1, yy1 );
     float y1 = toSceneY( xx1, yy1 );
     float x2 = toSceneX( xx2, yy2 );
     float y2 = toSceneY( xx2, yy2 );
     dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
-    if ( is_splay && TDSetting.mSplayAsDot ) {
-      dpath.mPath.addCircle( x2, y2, TDSetting.mLineThickness/4, Path.Direction.CCW );
-    } else {
-      dpath.mPath.moveTo( x1, y1 );
-      dpath.mPath.lineTo( x2, y2 );
-    }
+    dpath.makePath( x1, y1, x2, y2 );
+  }
+
+  static
+  void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
+  {
+    float x1 = toSceneX( xx1, yy1 );
+    float y1 = toSceneY( xx1, yy1 );
+    float x2 = toSceneX( xx2, yy2 );
+    float y2 = toSceneY( xx2, yy2 );
+    dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
+    dpath.makePath( x1, y1, x2, y2 ); // this sets the midpoint only
   }
 
   static
   void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
   {
-    dpath.mPath = new Path();
     float x1 = toSceneX( xx1, yy1 );
     float y1 = toSceneY( xx1, yy1 );
     float x2 = toSceneX( xx2, yy2 );
     float y2 = toSceneY( xx2, yy2 );
     dpath.setEndPoints( x1, y1, x2, y2 ); // this sets the midpoint only
-    dpath.mPath.moveTo( x1 - xoff, y1 - yoff );
-    dpath.mPath.lineTo( x2 - xoff, y2 - yoff );
+    dpath.makePath( x1 - xoff, y1 - yoff, x2 - xoff, y2 - yoff );
   }
 
   private static void addGridLine( int z, float x1, float x2, float y1, float y2, DrawingSurface surface )

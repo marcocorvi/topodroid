@@ -832,12 +832,14 @@ public class TDExporter
   // =====================================================================================================================
   // SHP SHAPEFILE 
 
-  // @param sid      survey ID
-  // @param data     database helper object
-  // @param info     survey metadata
-  // @param survey   survey name
-  // @param dirname  dirname relative to CWD
-  // @return 1 success, 0 fail
+  /** export zipped shapefiles
+   * @param os       output stream
+   * @param data     database helper object
+   * @param info     survey metadata
+   * @param survey   survey name
+   * @param dirname  dirname (relative to CWD) for temporary files
+   * @return 1 success, 0 fail
+   */
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
@@ -846,7 +848,7 @@ public class TDExporter
       return 0;
     }
 
-    // TDLog.v( "SHP data export. base " + dirname );
+    TDLog.v( "SHP data export. base " + dirname );
     boolean success = true;
     try {
       // TDLog.Log( TDLog.LOG_IO, "export SHP " + filename );
@@ -913,6 +915,14 @@ public class TDExporter
   // GEO JASON GeoJSON export
   //   NOTE shot flags are ignored
 
+  /** export data json file
+   * @param br    buffered output stream
+   * @param sid   survey ID
+   * @param data  database helper object
+   * @param info  survey info
+   * @param surveyname survey name
+   * @return 1 success, 0 fail, 2 no geopoint
+   */
   static int exportSurveyAsJson( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     final String name    = "\"name\": ";
@@ -1001,6 +1011,13 @@ public class TDExporter
   // TRACK FILE OZIEXPLORER
   //   NOTE shot flags are ignored
 
+  /** export data track-file
+   * @param br    buffered output stream
+   * @param data  database helper object
+   * @param info  survey info
+   * @param surveyname survey name
+   * @return 1 success, 0 fail, 2 no geopoint
+   */
   static int exportSurveyAsPlt( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
     // TDLog.v( "export as trackfile: " + file.getName() );
@@ -1075,6 +1092,15 @@ public class TDExporter
   // POCKETTOPO EXPORT PocketTopo
   //   NOTE shot flags are ignored
 
+  /** export data in PockeTopo format (.top)
+   * @param os    output stream
+   * @param sid   survey ID
+   * @param data  database helper object
+   * @param info  survey info
+   * @param sketch     sketching window (not used: sketches are not exported)
+   * @param surveyname survey name
+   * @return 1 success, 0 fail
+   */
   static int exportSurveyAsTop( OutputStream os, long sid, DataHelper data, SurveyInfo info, DrawingWindow sketch, String origin, String surveyname )
   {
     // TDLog.v( "export as pockettopo: " + file.getName() );
@@ -1152,14 +1178,27 @@ public class TDExporter
   // THERION EXPORT Therion
   //   NOTE handled flags: duplicate surface
 
+  /** write a leg in therion format
+   * @param pw    print stream
+   * @param leg   average leg
+   * @param ul    length unit factor
+   * @param ua    angle unit factor
+   */
   static private void writeThLeg( PrintWriter pw, AverageLeg leg, float ul, float ua )
   {
     pw.format(Locale.US, "%.2f %.1f %.1f\n", leg.length() * ul, leg.bearing() * ua, leg.clino() * ua );
     leg.reset();
   }
 
-  // if this return 1, the variable extend must be updated
-  // if this return 0 or 1, splay_extend must be updated false or true, respectively
+  /** write the extend of a splay
+   * @param pw    print stream
+   * @param item  splay data-block
+   * @param splay_extend
+   * @param extend  current extend value
+   * @return if this return 1, the variable extend must be updated
+   *         if this return 0 or 1, splay_extend must be updated false or true, respectively
+   * note extend values start from -1
+   */
   static private int writeSplayExtend( PrintWriter pw, DBlock item, boolean splay_extend, int extend )
   {
     int item_extend = item.getIntExtend();

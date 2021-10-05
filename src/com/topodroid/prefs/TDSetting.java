@@ -335,7 +335,7 @@ public class TDSetting
   public static float   mSectionSplay  = 60;
   public static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
-  public static boolean mSplayAsDot    = false;    // draw splays as dots
+  // public static boolean mSplayAsDot    = false;    // draw splays as dots
 
   public static final int LOOP_NONE       = 0;
   public static final int LOOP_CYCLES     = 1;
@@ -1052,13 +1052,13 @@ public class TDSetting
     String[] defGPlotSplay = TDPrefKey.GEEKsplaydef;
     mSplayClasses  = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_CLASSES
     mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
-    mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 2], bool(defGPlotSplay[ 2]) ); // DISTOX_SPLAY_AS_DOT
-    mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 3],      defGPlotSplay[ 3]  ); // DISTOX_SPLAY_VERT_THRS
-    mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 4],      defGPlotSplay[ 4] );  // DISTOX_SPLAY_DASH
-    mVertSplay      = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_VERT_SPLAY
-    mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_HORIZ_SPLAY
+    // mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 2], bool(defGPlotSplay[ 2]) ); // DISTOX_SPLAY_AS_DOT
+    mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 2],      defGPlotSplay[ 2]  ); // DISTOX_SPLAY_VERT_THRS
+    mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 3],      defGPlotSplay[ 3] );  // DISTOX_SPLAY_DASH
+    mVertSplay      = tryFloat( prefs, keyGPlotSplay[ 4],      defGPlotSplay[ 4] );  // DISTOX_VERT_SPLAY
+    mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
-    mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SECTION_SPLAY
+    mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_SECTION_SPLAY
     // TDLog.v("SETTING load splay geek done");
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
@@ -1632,25 +1632,25 @@ public class TDSetting
       mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_COLOR
       mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
-      mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_VERT_THRS
-      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 3] );
+    // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
+    //   mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_VERT_THRS
+      mSplayVertThrs = tryFloatValue( hlp, k, v, def[ 2] );
       if ( mSplayVertThrs <  0 ) { mSplayVertThrs =  0; ret = TDString.ZERO; }
       if ( mSplayVertThrs > 91 ) { mSplayVertThrs = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
-      mDashSplay = tryIntValue( hlp, k, v, def[ 4] );      
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_VERT_SPLAY
-      mVertSplay   = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SPLAY_DASH (0,1,2)
+      mDashSplay = tryIntValue( hlp, k, v, def[ 3] );      
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_VERT_SPLAY
+      mVertSplay   = tryFloatValue( hlp, k, v, def[ 4] );
       if ( mVertSplay <  0 ) { mVertSplay =  0; ret = TDString.ZERO; }
       if ( mVertSplay > 91 ) { mVertSplay = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_HORIZ_SPLAY
-      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 6] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_HORIZ_SPLAY
+      mHorizSplay  = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mHorizSplay <  0 ) { mHorizSplay =  0; ret = TDString.ZERO; }
       if ( mHorizSplay > 91 ) { mHorizSplay = 91; ret = TDString.NINETYONE; }
       mCosHorizSplay = TDMath.cosd( mHorizSplay );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SECTION_SPLAY
-      mSectionSplay = tryFloatValue( hlp, k, v, def[ 7] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SECTION_SPLAY
+      mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else {
@@ -2757,7 +2757,7 @@ public class TDSetting
       pw.printf(Locale.US, "Recent data %c, timeout %d\n", tf(mShotRecent), mRecentTimeout );
       pw.printf(Locale.US, "Leg: closeness %.2f, nr %d, triple-shot %d, max %.2f, min %.2f\n",
         mCloseDistance, mMinNrLegShots, mTripleShot, mMaxShotLength, mMinLegLength );
-      pw.printf(Locale.US, "Splay: vthr %.1f, classes %c, as_dot %c\n", mSplayVertThrs, tf(mSplayClasses), tf(mSplayAsDot) );
+      pw.printf(Locale.US, "Splay: vthr %.1f, classes %c\n", mSplayVertThrs, tf(mSplayClasses) );
       pw.printf(Locale.US, "Stations: names %d, init \"%s\"\n", mStationNames, mInitStation );
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
       pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
@@ -3238,7 +3238,7 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mSplayVertThrs = getFloat( vals, 2, 80.0f ); setPreference( editor, "DISTOX_SPLAY_VERT_THRS", mSplayVertThrs );
             mSplayClasses  = getBoolean( vals, 4 );      setPreference( editor, "DISTOX_SPLAY_CLASSES", mSplayClasses );
-            mSplayAsDot    = getBoolean( vals, 6 );      setPreference( editor, "DISTOX_SPLAY_AS_DOT", mSplayAsDot );
+            // mSplayAsDot    = getBoolean( vals, 6 );      setPreference( editor, "DISTOX_SPLAY_AS_DOT", mSplayAsDot );
           }
           continue;
         }

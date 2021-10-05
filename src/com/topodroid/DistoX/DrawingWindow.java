@@ -149,14 +149,15 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_BLUETOOTH  = 4;
   private static final int IC_PLAN       = 7;
   private static final int IC_DIAL       = 8;
-  private static final int IC_CONT_NONE  = 13;  // index of continue-no icon
-  private static final int IC_PREV       = 14;
-  private static final int IC_NEXT       = 15;
-  private static final int IC_JOIN       = 16;
-  private static final int IC_DELETE_OFF = 18;
-  private static final int IC_RANGE_NO   = 19;
-  private static final int IC_ERASE_ALL  = 21;
-  private static final int IC_MEDIUM     = 22;
+  private static final int IC_SPLAYS_LINE  = 13;
+  private static final int IC_CONT_NONE    = 14;  // index of continue-no icon
+  private static final int IC_PREV         = 15;
+  private static final int IC_NEXT         = 16;
+  private static final int IC_JOIN         = 17;
+  private static final int IC_DELETE_OFF   = 19;
+  private static final int IC_RANGE_NO     = 20;
+  private static final int IC_ERASE_ALL    = 22;
+  private static final int IC_MEDIUM       = 23;
 
   private static final int IC_MENU          = IC_MEDIUM+1;
   private static final int IC_EXTEND        = IC_MEDIUM+2;
@@ -182,15 +183,17 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_SELECT_STATION= IC_MEDIUM+22;
   private static final int IC_CONT_OFF      = IC_MEDIUM+23;
   private static final int IC_DELETE_ON     = IC_MEDIUM+24;
+  private static final int IC_SPLAYS_POINT  = IC_MEDIUM+26;
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
-  private static final int BTN_PLOT = 7;      // index of mButton1 plot button
-  private static final int BTN_DIAL = 8;      // index of mButton1 azimuth button (level > normal)
+  private static final int BTN_PLOT   = 7;    // index of mButton1 plot button
+  private static final int BTN_DIAL   = 8;    // index of mButton1 azimuth button (level > normal)
 
-  private static final int BTN_TOOL = 5;      // index of mButton2 tools
-  private static final int BTN_CONT = 6;      // index of mButton2 continue button (level > normal)
-  private static final int BTN_JOIN = 5;      // index of mButton3 join button
+  private static final int BTN_TOOL   = 5;    // index of mButton2 tools
+  private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
+  private static final int BTN_CONT   = 7;    // index of mButton2 continue button (level > normal)
+  private static final int BTN_JOIN   = 5;    // index of mButton3 join button
   private static final int BTN_REMOVE = 7;    // index of mButton3 remove
   private static final int BTN_BORDER = 8;    // line border-editing (level > advanced)
 
@@ -215,47 +218,49 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_dial,          // 8
                         R.drawable.iz_refresh,       // 9
 
-                        R.drawable.iz_undo,          // 10 DRAW Nr 3+4
+                        R.drawable.iz_undo,          // 10 DRAW Nr 3+5
                         R.drawable.iz_redo,          // 11
                         R.drawable.iz_tools,         // 12
-                        R.drawable.iz_cont_none,     // 13
+                        R.drawable.iz_splays_line,  
+                        R.drawable.iz_cont_none,     // 14
 
-                        R.drawable.iz_back,          // 14 EDIT Nr 3+6
+                        R.drawable.iz_back,          // 15 EDIT Nr 3+6
                         R.drawable.iz_forw,
                         R.drawable.iz_join,
                         R.drawable.iz_attrib,          
-                        R.drawable.iz_delete_off,    // 18
-                        R.drawable.iz_range_no,      // 19
+                        R.drawable.iz_delete_off,    // 19
+                        R.drawable.iz_range_no,      // 20
 
                         R.drawable.iz_select_all,    // only for help
-                        R.drawable.iz_erase_all,     // 21 ERASE Nr 3+2
-                        R.drawable.iz_medium,        // 22
+                        R.drawable.iz_erase_all,     // 22 ERASE Nr 3+2
+                        R.drawable.iz_medium,        // 23
 
-                        R.drawable.iz_menu,          // 22+1
-                        R.drawable.iz_extended,      // 22+2
-                        R.drawable.iz_join_no,       // 22+3
-                        R.drawable.iz_cont_start,    // 22+4
-                        R.drawable.iz_cont_end,      // 22+5
+                        R.drawable.iz_menu,          // 23+1
+                        R.drawable.iz_extended,      // 23+2
+                        R.drawable.iz_join_no,       // 23+3
+                        R.drawable.iz_cont_start,    // 23+4
+                        R.drawable.iz_cont_end,      // 23+5
                         R.drawable.iz_cont_both,
                         R.drawable.iz_cont_continue,
-                        R.drawable.iz_plus,           // 22+8
-                        R.drawable.iz_range_ok,       // 22+9
-                        R.drawable.iz_range_box,      // 22+10
-                        R.drawable.iz_range_item,     // 22+11
-                        R.drawable.iz_erase_point,    // 22+12
-                        R.drawable.iz_erase_line,     // 22+13
-                        R.drawable.iz_erase_area,     // 22+14
-                        R.drawable.iz_small,          // 22+15
-                        R.drawable.iz_large,          // 22+16
-                        R.drawable.iz_select_all,     // 22+17 all
-                        R.drawable.iz_select_point,   // 22+18 point
-                        R.drawable.iz_select_line,    // 22+19 line
-                        R.drawable.iz_select_area,    // 22+20 area
-                        R.drawable.iz_select_shot,    // 22+21 shot
-                        R.drawable.iz_select_station, // 22+22 station
-                        R.drawable.iz_cont_off,       // 22+23 continuation off
-			R.drawable.iz_delete,         // 22+24 do delete
-                        R.drawable.iz_dial_on,        // 22+25 set dial
+                        R.drawable.iz_plus,           // 23+8
+                        R.drawable.iz_range_ok,       // 23+9
+                        R.drawable.iz_range_box,      // 23+10
+                        R.drawable.iz_range_item,     // 23+11
+                        R.drawable.iz_erase_point,    // 23+12
+                        R.drawable.iz_erase_line,     // 23+13
+                        R.drawable.iz_erase_area,     // 23+14
+                        R.drawable.iz_small,          // 23+15
+                        R.drawable.iz_large,          // 23+16
+                        R.drawable.iz_select_all,     // 23+17 all
+                        R.drawable.iz_select_point,   // 23+18 point
+                        R.drawable.iz_select_line,    // 23+19 line
+                        R.drawable.iz_select_area,    // 23+20 area
+                        R.drawable.iz_select_shot,    // 23+21 shot
+                        R.drawable.iz_select_station, // 23+22 station
+                        R.drawable.iz_cont_off,       // 23+23 continuation off
+			R.drawable.iz_delete,         // 23+24 do delete
+                        R.drawable.iz_dial_on,        // 23+25 set dial
+                        R.drawable.iz_splays_point,   // 23+26
                       };
   private static final int[] menus = {
                         R.string.menu_switch,     // 0
@@ -336,6 +341,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_undo,          // 9 DRAW Nr 3+4
                         R.drawable.iz_redo,          // 10
                         R.drawable.iz_tools,         // 11
+                        R.drawable.iz_splays_line,
                         R.drawable.iz_cont_none
   };
   private static final int[] help_icons_draw = {
@@ -345,6 +351,7 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_undo,
                         R.string.help_redo,
                         R.string.help_symbol_plot,
+                        R.string.help_splays, // TODO
                         R.string.help_continue
                       };
 
@@ -608,7 +615,7 @@ public class DrawingWindow extends ItemDrawer
   private Button[] mButton3; // edit
   private Button[] mButton5; // eraser
   private static final int NR_BUTTON1 = 10;
-  private static final int NR_BUTTON2 = 7;
+  private static final int NR_BUTTON2 = 8;
   private static final int NR_BUTTON3 = 9;
   private static final int NR_BUTTON5 = 7;
   private int mNrButton1 = NR_BUTTON1; // main-primary [8: if level <= normal]
@@ -639,6 +646,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMcont_both;
   private BitmapDrawable mBMcont_continue;
   private BitmapDrawable mBMcont_off;
+  private BitmapDrawable mBMsplays_line;
+  private BitmapDrawable mBMsplays_point;
   private BitmapDrawable mBMdelete_off;
   private BitmapDrawable mBMdelete_on;
   private BitmapDrawable mBMadd;
@@ -879,7 +888,7 @@ public class DrawingWindow extends ItemDrawer
   {
     DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
     dpath.setPathPaint( BrushManager.highlightPaint );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, false ); // xoff, yoff );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // xoff, yoff ); // LEG PATH
     mDrawingSurface.setNorthPath( dpath );
     // mLastLinePath = null;
   }
@@ -896,54 +905,69 @@ public class DrawingWindow extends ItemDrawer
   private void addFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                              float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath dpath = makeFixedLine( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine, splay );
-    mDrawingSurface.addFixedPath( dpath, splay, selectable );
+    if ( splay ) {
+      DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
+      mDrawingSurface.addFixedSplayPath( dpath, selectable );
+    } else {
+      DrawingPath dpath = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mDrawingSurface.addFixedLegPath( dpath, selectable );
+    }
   }
 
   private void appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                                 float cosine, boolean splay, boolean selectable )
   {
-    DrawingPath dpath = makeFixedLine( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine, splay );
     int typ = PlotType.isPlan( type )? DrawingSurface.DRAWING_PLAN : DrawingSurface.DRAWING_PROFILE;
-    mDrawingSurface.appendFixedPath( typ, dpath, splay, selectable );
+    if ( splay ) {
+      DrawingSplayPath dpath = makeFixedSplay( type, blk, (float)x1, (float)y1, (float)x2, (float)y2, cosine );
+      mDrawingSurface.appendFixedSplayPath( typ, dpath, selectable );
+    } else {
+      DrawingPath dpath = makeFixedLeg( type, blk, (float)x1, (float)y1, (float)x2, (float)y2 );
+      mDrawingSurface.appendFixedLegPath( typ, dpath, selectable );
+    }
   }
 
 
-  private DrawingPath makeFixedLine( long type, DBlock blk, float x1, float y1, float x2, float y2, float cosine, boolean splay )
+  private DrawingSplayPath makeFixedSplay( long type, DBlock blk, float x1, float y1, float x2, float y2, float cosine )
   {
-    DrawingPath dpath = null;
-    if ( splay ) {
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
-      dpath.setCosine( cosine ); // save cosine into path
-      if ( PlotType.isProfile( type ) ) {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-          dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        }
+    DrawingSplayPath dpath = null;
+    dpath = new DrawingSplayPath( blk, mDrawingSurface.scrapIndex() );
+    dpath.setCosine( cosine ); // save cosine into path
+    if ( PlotType.isProfile( type ) ) {
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
+        dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
       } else {
-        if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-          dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-        }
+        dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
       }
     } else {
-      // TDLog.v("DATA " + "make fixed path " + blk.mId + " <" + blk.mFrom + "-" + blk.mTo + ">" );
-      dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mDrawingSurface.scrapIndex() );
-      dpath.setPathPaint( BrushManager.fixedShotPaint );
-      if ( blk != null ) {
-	if ( blk.isMultiBad() ) {
-          dpath.setPathPaint( BrushManager.fixedOrangePaint );
-        } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
-          dpath.setPathPaint( BrushManager.fixedRedPaint );
-        } else if ( /* TDSetting.mSplayColor && */ blk.isRecent( ) ) { 
-          dpath.setPathPaint( BrushManager.fixedBluePaint );
-	}
+      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
+        dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+      } else {
+        dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
+      }
+    }
+    DrawingUtil.makeDrawingSplayPath( dpath, x1, y1, x2, y2 );
+    return dpath;
+  }
+    
+
+  private DrawingPath makeFixedLeg( long type, DBlock blk, float x1, float y1, float x2, float y2 )
+  {
+    DrawingPath dpath = null;
+    // TDLog.v("DATA " + "make fixed path " + blk.mId + " <" + blk.mFrom + "-" + blk.mTo + ">" );
+    dpath = new DrawingPath( DrawingPath.DRAWING_PATH_FIXED, blk, mDrawingSurface.scrapIndex() );
+    dpath.setPathPaint( BrushManager.fixedShotPaint );
+    if ( blk != null ) {
+      if ( blk.isMultiBad() ) {
+        dpath.setPathPaint( BrushManager.fixedOrangePaint );
+      } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
+        dpath.setPathPaint( BrushManager.fixedRedPaint );
+      } else if ( /* TDSetting.mSplayColor && */ blk.isRecent( ) ) { 
+        dpath.setPathPaint( BrushManager.fixedBluePaint );
       }
     }
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, splay );
+    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // LEG PATH
     return dpath;
   }
 
@@ -962,7 +986,7 @@ public class DrawingWindow extends ItemDrawer
                                      boolean blue )
   {
     // TDLog.v("add fixed section splay " + blue );
-    DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_SPLAY, blk, mDrawingSurface.scrapIndex() );
+    DrawingSplayPath dpath = new DrawingSplayPath( blk, mDrawingSurface.scrapIndex() );
     dpath.setCosine( angle ); 
     Paint paint = blk.getPaint();
     if ( paint != null ) {
@@ -990,8 +1014,8 @@ public class DrawingWindow extends ItemDrawer
     }
     // dpath.setPathPaint( blue? BrushManager.paintSplayXViewed : BrushManager.paintSplayXB );
     // DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, xoff, yoff );
-    DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2, true );
-    mDrawingSurface.addFixedPath( dpath, true, false ); // true SPLAY false SELECTABLE
+    DrawingUtil.makeDrawingSplayPath( dpath, x1, y1, x2, y2 );
+    mDrawingSurface.addFixedSplayPath( dpath, false ); // false SELECTABLE
   }
 
   // --------------------------------------------------------------------------------------
@@ -1828,6 +1852,8 @@ public class DrawingWindow extends ItemDrawer
     mBMcont_off   = MyButton.getButtonBackground( this, res, izons[IC_CONT_OFF] );
     mBMdelete_off = MyButton.getButtonBackground( this, res, izons[IC_DELETE_OFF] );
     mBMdelete_on  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_ON] );
+    mBMsplays_line  = MyButton.getButtonBackground( this, res, izons[IC_SPLAYS_LINE] );
+    mBMsplays_point = MyButton.getButtonBackground( this, res, izons[IC_SPLAYS_POINT] );
 
     if ( ! TDLevel.overExpert ) -- mNrButton3;
     mButton3 = new Button[ mNrButton3 + 1 ];      // EDIT
@@ -3086,7 +3112,7 @@ public class DrawingWindow extends ItemDrawer
     } 
   }
 
-  private void deleteSplay( DrawingPath p, SelectionPoint sp, DBlock blk )
+  private void deleteSplay( DrawingSplayPath p, SelectionPoint sp, DBlock blk )
   {
     mDrawingSurface.deleteSplay( p, sp ); 
     mApp_mData.deleteShot( blk.mId, TDInstance.sid, TDStatus.DELETED );
@@ -5691,12 +5717,14 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.redo();
           mLastLinePath = null;
         }
-      } else if ( b == mButton2[k2++] ) { // pointBtn
+      } else if ( b == mButton2[k2++] ) { // TOOLS
         if ( ! TDSetting.mTripleToolbar ) {
           rotateRecentToolset();
         } else {
           new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         }
+      } else if ( b == mButton2[k2++] ) { // SPLAYS
+        toggleSplayMode();
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
@@ -5815,8 +5843,8 @@ public class DrawingWindow extends ItemDrawer
             }
             askDeleteItem( p, t, name );
           } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
-            if ( PlotType.isSketch2D( mType ) ) { 
-              DrawingPath p = sp.mItem;
+            if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
+              DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
               DBlock blk = p.mBlock;
               if ( blk != null ) {
                 askDeleteSplay( p, sp, blk );
@@ -5831,6 +5859,15 @@ public class DrawingWindow extends ItemDrawer
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
       } else if ( b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
+      }
+    }
+
+    private void toggleSplayMode()
+    {
+      if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
+        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
+      } else {
+        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
       }
     }
 
@@ -5866,7 +5903,7 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-    private void askDeleteSplay( final DrawingPath p, final SelectionPoint sp, final DBlock blk )
+    private void askDeleteSplay( final DrawingSplayPath p, final SelectionPoint sp, final DBlock blk )
     {
       TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
                                 String.format( getResources().getString( R.string.splay_delete ), blk.Name() ), 
