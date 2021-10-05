@@ -31,7 +31,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="30"
+       android:targetSdkVersion="31"
     />
     <!-- android:maxSdkVersion="29" -->
 

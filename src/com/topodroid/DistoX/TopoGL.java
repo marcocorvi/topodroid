@@ -713,7 +713,7 @@ public class TopoGL extends Activity
 
   MyHorizontalListView mListView = null;
   MyHorizontalButtonView mButtonView1;
-  MyButton[] mButton1 = null;
+  Button[] mButton1 = null;
   static int mNrButton1 = 8;
   private static final int[] izons = {
     R.drawable.iz_light,
@@ -812,16 +812,16 @@ public class TopoGL extends Activity
       size = TopoDroidApp.setListViewHeight( this, mListView );
 
       // if ( BLUETOOTH )  ++mNrButton1; 
-      mButton1 = new MyButton[ mNrButton1 ];
-      mButton1[0] = new MyButton( this, this, size, izons[0] );
-      mButton1[1] = new MyButton( this, this, size, izons[1] );
-      mButton1[2] = new MyButton( this, this, size, izons[2] );
-      mButton1[3] = new MyButton( this, this, size, izons[3] );
-      mButton1[4] = new MyButton( this, this, size, izons[4] );
-      mButton1[5] = new MyButton( this, this, size, izons[5] );
-      mButton1[6] = new MyButton( this, this, size, izons[6] );
-      mButton1[7] = new MyButton( this, this, size, izons[7] );
-      // if ( BLUETOOTH ) mButton1[8] = new MyButton( this, this, size, izons[8] );
+      mButton1 = new Button[ mNrButton1 ];
+      mButton1[0] = MyButton.getButton( this, this, izons[0] );
+      mButton1[1] = MyButton.getButton( this, this, izons[1] );
+      mButton1[2] = MyButton.getButton( this, this, izons[2] );
+      mButton1[3] = MyButton.getButton( this, this, izons[3] );
+      mButton1[4] = MyButton.getButton( this, this, izons[4] );
+      mButton1[5] = MyButton.getButton( this, this, izons[5] );
+      mButton1[6] = MyButton.getButton( this, this, izons[6] );
+      mButton1[7] = MyButton.getButton( this, this, izons[7] );
+      // if ( BLUETOOTH ) mButton1[8] = MyButtoni.getButton( this, this, izons[8] );
 
       // mButton1[ 0 ].setOnLongClickListener( this );
       mButton1[ 1 ].setOnLongClickListener( this ); // projection params
@@ -830,15 +830,15 @@ public class TopoGL extends Activity
       mButton1[ 6 ].setOnLongClickListener( this ); // surveys
       mButton1[ 7 ].setOnLongClickListener( this ); // frame: leg-visibility
 
-      mBMlight = mButton1[BTN_MOVE].getBitmap();
-      mBMturn = MyButton.getButtonBackground( this, size, R.drawable.iz_turn );
-      mBMmove = MyButton.getButtonBackground( this, size, R.drawable.iz_move );
+      mBMlight = MyButton.getButtonBackground( this, size, R.drawable.iz_light );
+      mBMturn  = MyButton.getButtonBackground( this, size, R.drawable.iz_turn );
+      mBMmove  = MyButton.getButtonBackground( this, size, R.drawable.iz_move );
       // mBMconvex = mButton1[BTN_WALL].getBitmap();
 
-      mBMorthogonal  = mButton1[ BTN_PROJECT  ].getBitmap();
+      mBMorthogonal  = MyButton.getButtonBackground( this, size, R.drawable.iz_orthogonal);
       mBMperspective = MyButton.getButtonBackground( this, size, R.drawable.iz_perspective);
 
-      mBMstationNoDot   = mButton1[ BTN_STATION ].getBitmap();
+      mBMstationNoDot   = MyButton.getButtonBackground( this, size, R.drawable.iz_station_no_dot );
       mBMstationPointDot= MyButton.getButtonBackground( this, size, R.drawable.iz_station_point_dot );
       mBMstationNameDot = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name_dot );
       // mBMstationDot     = MyButton.getButtonBackground( this, size, R.drawable.iz_station_dot );
@@ -848,28 +848,28 @@ public class TopoGL extends Activity
       mBMstationName = MyButton.getButtonBackground( this, size, R.drawable.iz_station_name );
       // mBMstation     = MyButton.getButtonBackground( this, size, R.drawable.iz_station );
 
-      mBMsplaysNo    = mButton1[ BTN_SPLAYS  ].getBitmap();
+      mBMsplaysNo    = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_none );
       mBMsplaysLine  = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_line );
       mBMsplaysPoint = MyButton.getButtonBackground( this, size, R.drawable.iz_splays_point );
 
-      mBMwallNo      = mButton1[ BTN_WALL     ].getBitmap();
+      mBMwallNo      = MyButton.getButtonBackground( this, size, R.drawable.iz_wall_no );
       mBMwall        = MyButton.getButtonBackground( this, size, R.drawable.iz_wall );
 
-      mBMsurfaceNo   = mButton1[ BTN_SURFACE  ].getBitmap();
+      mBMsurfaceNo   = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_off );
       mBMsurface     = MyButton.getButtonBackground( this, size, R.drawable.iz_surface_on );
 
-      mBMcolorNo     = mButton1[ BTN_COLOR   ].getBitmap();
+      mBMcolorNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_color );
       mBMcolorSurvey = MyButton.getButtonBackground( this, size, R.drawable.iz_color_survey );
       mBMcolorDepth  = MyButton.getButtonBackground( this, size, R.drawable.iz_color_depth );
       mBMcolorSurface= MyButton.getButtonBackground( this, size, R.drawable.iz_color_surface );
       // mBMcolorTemp   = MyButton.getButtonBackground( this, size, R.drawable.iz_color_temp ); // TEMPERATURE
 
-      mBMframeGrid   = mButton1[ BTN_FRAME   ].getBitmap();
+      mBMframeGrid   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_grid );
       mBMframeNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_no );
       mBMframeAxes   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_axes );
 
       // if ( BLUETOOTH ) {
-      //   mBMbleDown  = mButton1[ BTN_BLE ].getBitmap();
+      //   mBMbleDown  = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_down );
       //   mBMbleOff   = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_off );
       //   mBMbleOn    = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_on  );
       //   mBMbleWait  = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_wait  );
