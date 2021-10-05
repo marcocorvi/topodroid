@@ -1138,6 +1138,11 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------
   // SURVEY AND CALIBRATION
 
+  /** rename the survey
+   * @param sid   survey ID
+   * @param name  new survey name
+   * @return true if success
+   */
   boolean renameCurrentSurvey( long sid, String name )
   {
     if ( name == null || name.length() == 0 ) return false;
@@ -1193,15 +1198,15 @@ public class TopoDroidApp extends Application
         // TDFile.renameFile( TDPath.getSurveyTrbFile( TDInstance.survey ), TDPath.getSurveyTrbFile( name ) );
         // TDFile.renameFile( TDPath.getSurveyTroFile( TDInstance.survey ), TDPath.getSurveyTroFile( name ) );
 
-      { // rename note file: note
-        TDFile.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
-      }
-      { // rename photo folder: photo
-        TDFile.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
-      }
-      { // rename audio folder: audio
-        TDFile.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
-      }
+      // rename note file: note
+      TDFile.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
+      // rename photo folder: photo
+      TDFile.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
+      // rename audio folder: audio
+      TDFile.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
+      // rename survey folder
+      TDFile.renameFile( TDPath.getSurveyDir( TDInstance.survey ), TDPath.getSurveyDir( name ) );
+
       TDInstance.survey = name;
       return true;
     }
@@ -1225,6 +1230,8 @@ public class TopoDroidApp extends Application
   /**
    * @param name      survey name
    * @param datamode  survey datamode
+   * @param update    whether to call a display update
+   * @return survey ID
    */
   public long setSurveyFromName( String name, int datamode, boolean update )
   { 
@@ -1271,6 +1278,12 @@ public class TopoDroidApp extends Application
     return 0;
   }
 
+  /** move survey data to a new survey
+   * @param old_sid    old survey ID
+   * @param old_id     old ID of start data to move to new survey
+   * @param new_survey new survey name
+   * @return true if success
+   */
   boolean moveSurveyData( long old_sid, long old_id, String new_survey )
   {
     if ( mData == null ) return false;
@@ -1280,17 +1293,29 @@ public class TopoDroidApp extends Application
     return mData.moveShotsBetweenSurveys( old_sid, old_id, new_sid );
   }
 
+  /** check if there exists a survey
+   * @param name   survey name
+   * @return true if the survey exists
+   */
   boolean hasSurveyName( String name )
   {
     return ( mData != null ) && mData.hasSurveyName( name );
   }
 
+  /** check if there exists a survey plot (for the current survey)
+   * @param name   plot name
+   * @return true if the plot exists
+   */
   boolean hasSurveyPlotName( String name )
   {
     return ( mData != null ) && mData.hasSurveyPlotName( TDInstance.sid, name );
   }
 
 
+  /** check if there exists a calibration
+   * @param name   calibration name
+   * @return true if the calibration exists
+   */
   boolean hasCalibName( String name )
   {
     return ( mDData != null ) && mDData.hasCalibName( name );
@@ -1369,6 +1394,12 @@ public class TopoDroidApp extends Application
   static void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
+  /** set the prinmary device
+   * @param address   prinmary device address
+   * @param model     device model
+   * @param name      device name
+   * @param bt_device bluetooth device of the device
+   */
   void setDevicePrimary( String address, String model, String name, BluetoothDevice bt_device )
   { 
     deleteComm();
@@ -1407,6 +1438,9 @@ public class TopoDroidApp extends Application
   }
 
   // TODO BLE for the second DistoX
+  /** set the address of the alternate device
+   * @param address   alternate device address
+   */
   void setDeviceB( String address )
   {
     if ( address == null ) {
@@ -1418,6 +1452,9 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** switch to the alternate device
+   * @return true if success
+   */
   boolean switchSecondDevice()
   {
     return TDInstance.switchDevice();

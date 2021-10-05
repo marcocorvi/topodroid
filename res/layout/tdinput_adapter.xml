@@ -4,7 +4,7 @@
       android:layout_width="fill_parent"
       android:layout_height="fill_parent"
       android:background="#333"
-      >
+      > <!-- background is necessary -->
       <CheckBox android:id="@+id/tdinput_checked"
         android:textColor="#fff"
         android:background="#333"

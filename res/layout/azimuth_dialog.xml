@@ -69,6 +69,7 @@
         android:layout_width="100dp" 
         android:layout_marginRight="@dimen/marginh"
         android:imeOptions="actionDone"
+        android:hint="@string/hint_azimuth"
       />    
       <!-- Button android:id="@+id/btn_sensor"
         style="@style/button_default"

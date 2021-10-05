@@ -15,12 +15,13 @@
     />
       				  
   <EditText android:id="@+id/photo_comment"
-      style="@style/edit_text"
+    style="@style/edit_text"
     android:layout_marginTop="@dimen/margintiny"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:singleLine="true"
     android:inputType="text"
+    android:hint="@string/hint_comment"
     />
       	
   <LinearLayout android:id="@+id/help"

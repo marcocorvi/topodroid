@@ -402,8 +402,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
-    <string name="menu_scan">SCAN</string>
-    <string name="menu_scan_ble">SCAN BTLE</string>
+    <!-- UNUSED string name="menu_scan">SCAN</string -->
+    <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATS</string>
     <string name="menu_survey">SURVEY INFO</string>
@@ -600,7 +600,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="delete_whole_leg">Delete whole leg</string>
     <string name="visible_border">visible border</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
-    <string name="wait_scan">Scanning: wait &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Scanning: wait &#8230;</string -->
     <string name="write_failed">Failed DistoX-write</string>
     <string name="write_ok">Written calibration to DistoX</string>
     <string name="zip_saved">Saved </string>
@@ -650,7 +650,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="hide_splay">Splay shots</string>
 
     <!-- THESE MUST AGREE WITH THE FMT STRINGS -->
-    <string name="plan">PLAN</string>
+    <!-- UNUSED string name="plan">PLAN</string -->
     <string name="extended">PROFILE</string>
     <string name="profile">PROJECTED</string>
     <string name="fmt_plan">%1$s: PLAN</string>
@@ -658,9 +658,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_profile">%1$s: PROJECTED</string>
 
     <string name="extended_profile">Extended profile</string>
-    <string name="x_section">X-SECTION</string>
-    <string name="v_section">V-SECTION</string>
-    <string name="h_section">H-SECTION</string>
+    <!-- UNUSED string name="x_section">X-SECTION</string -->
+    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- UNUSED string name="h_section">H-SECTION</string -->
     <!-- UNUSED string name="landscape">landscape</string -->
 
     <string name="display_view">Display</string>
@@ -816,6 +816,31 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+    <string name="hint_notes">notes</string>
+    <string name="hint_label">label</string>
+    <string name="hint_comment">comment</string>
+    <string name="hint_text">text</string>
+    <string name="hint_options">options</string>
+    <string name="hint_name">name</string>
+    <string name="hint_from">from</string>
+    <string name="hint_to">to</string>
+    <string name="hint_azimuth">azimuth</string>
+    <string name="hint_clino">clino</string>
+    <string name="hint_scale">scale</string>
+    <string name="hint_roll">roll</string>
+    <string name="hint_year">year</string>
+    <string name="hint_month">month</string>
+    <string name="hint_day">day</string>
+    <string name="hint_hour">hour</string>
+    <string name="hint_minute">minute</string>
+    <string name="hint_second">second</string>
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <string name="hint_station">station</string>
+
     <string name="orientation">orientation</string>
     <string name="contents">contents</string>
     <string name="error_distribution">error distribution</string>
@@ -948,9 +973,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_sdcard">DistoX memory functions</string>
     <string name="help_read">Read and display DistoX calibration coefficients</string>
     <string name="help_info_device">Device info</string>
-    <string name="help_scan">Scan for new DistoX devices</string>
-    <string name="help_scan_ble">Scan for BTLE devices</string>
-    <string name="help_pair">Pair the active DistoX device</string>
+    <!-- UNUSED string name="help_scan">Scan for new DistoX devices</string -->
+    <!-- UNUSED string name="help_scan_ble">Scan for BTLE devices</string -->
+    <!-- UNUSED string name="help_pair">Pair the active DistoX device</string -->
     <string name="help_open_calib">Open calibration</string>
     <string name="help_export_calib">Export calibration</string>
     <string name="help_group">Assign group numbers automatically</string>
@@ -1031,7 +1056,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>
-    <string name="title_discover">Scanning for DistoX devices &#8230; wait</string>
+    <!-- UNUSED string name="title_discover">Scanning for DistoX devices &#8230; wait</string -->
     <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINE %1$s</string>
@@ -1730,8 +1755,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="title_equates">Project Equates</string>
     <string name="title_equate_new">Add equate &#8230;</string>
     <string name="title_equate_with">Equate %1$s and %2$s</string>
-    <string name="title_cwd">Current Work Directory</string>
-    <string name="title_settings">TdManager Settings</string>
+    <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <string name="title_drop">Drop surveys ?</string>
     <string name="title_tdconfig">Enter project name</string>
     <string name="title_surveys">Surveys</string>
@@ -1803,7 +1827,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="proj_far">Far</string -->
 
     <string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string>
-    <string name="cno_files">No files</string>
+    <!-- UNUSED string name="cno_files">No files</string -->
     <string name="reading_file">Reading file %1$s</string>
     <string name="read_survey">Read survey %1$s\n</string>
     <string name="clear">Clear</string>
@@ -1834,8 +1858,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="sketch_ok">Read sketch data</string>
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
-    <string name="ctitle_clino"> Clino: </string>
-    <string name="ctitle_azimuth"> Azimuth: </string>
     <string name="ctitle_surface_alpha">Surface transparency</string>
     <string name="ctitle_sketches">Sketches</string>
     <string name="ctitle_legs">Legs visibility</string>
@@ -1867,13 +1889,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
 
 
-    <string name="SURVEYS">S U R V E Y S</string>
+    <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
     <string name="INFO">I N F O</string>
     <string name="EXPORT">E X P O R T</string>
     <string name="STATIONS">S T A T I O N</string>
     <string name="STATIONS_DISTANCE">STATIONS DISTANCE</string>
-    <string name="DISTANCE">DISTANCE</string>
-    <string name="CENTER">CENTER</string>
+    <!-- UNUSED string name="DISTANCE">DISTANCE</string -->
+    <!-- UNUSED string name="CENTER">CENTER</string -->
     <string name="select_survey_file">Select a survey file</string>
     <string name="select_export_file">Select export file</string>
     <string name="select_dem_file">Select a DEM file</string>
@@ -1956,11 +1978,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="empty_survey">Empty survey %1$s\n</string>
 
     <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
-
-    <string name="category_surface">SURFACE</string>
-    <string name="category_walls">WALLS</string>
-    <string name="category_stations">STATIONS</string>
-    <string name="category_grid">GRID</string>
 
     <string name="cpref_dem3d">DEM</string>
     <string name="cpref_walls3d">WALL MODEL</string>

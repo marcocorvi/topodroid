@@ -40,8 +40,9 @@
         android:layout_weight="50" 
         android:layout_height="wrap_content"
         android:text="@string/export_scale_th"
+        android:labelFor="@+id/therion_scale"
         />
-      <EditText android:id="@+id/therion_scale"
+      <EditText android:id="@id/therion_scale"
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
@@ -314,13 +315,13 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       >
-      <TextView 
+      <TextView android:labelFor="@+id/png_scale"
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
         android:text="@string/export_scale_png"
         />
-      <EditText android:id="@+id/png_scale"
+      <EditText android:id="@id/png_scale"
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"

@@ -401,8 +401,8 @@ Refer to the web pages for details.\n
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
-    <string name="menu_scan">PROCURAR</string>
-    <string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string>
+    <!-- UNUSED string name="menu_scan">PROCURAR</string -->
+    <!-- UNUSED string name="menu_scan_ble">PROCURAR DISPOSITIVOS BLE</string -->
     <!-- UNUSED string name="menu_station">BASES</string -->
     <string name="menu_stats">ESTATÍSTICAS</string>
     <string name="menu_survey">INFO TOPO</string>
@@ -594,7 +594,7 @@ Refer to the web pages for details.\n
     <string name="delete_whole_leg">Apague esta visada inteira</string>
     <string name="visible_border">borda visível</string>
     <!-- UNUSED string name="vthreshold">limite vertical</string -->
-    <string name="wait_scan">Procurando: espere &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Procurando: espere &#8230;</string -->
     <string name="write_failed">Falha ao gravar na DistoX</string>
     <string name="write_ok">Calibração gravada na DistoX</string>
     <string name="zip_saved">Salvo</string>
@@ -641,7 +641,7 @@ Refer to the web pages for details.\n
     <string name="hide_ids">IDs das medidas</string>
     <string name="hide_splay">Medidas auxiliares</string>
 
-    <string name="plan">PLANTA</string>
+    <!-- UNUSED string name="plan">PLANTA</string -->
     <string name="extended">RETIFICADO</string>
     <string name="profile">LONGITUDINAL</string>
     <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
@@ -649,9 +649,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
 
     <string name="extended_profile">Perfil retificado</string>
-    <!-- TODO string name="x_section">X-SECTION</string -->
-    <string name="v_section">CORTE V</string>
-    <string name="h_section">CORTE H</string>
+    <!-- UNUSED string name="x_section">X-SECTION</string -->
+    <!-- UNUSED string name="v_section">CORTE V</string -->
+    <!-- UNUSED string name="h_section">CORTE H</string -->
     <!-- UNUSED string name="landscape">paisagem</string -->
 
     <string name="distox_err_ok">OK</string>
@@ -802,6 +802,31 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="azimuth">Azimute [deg]</string -->
     <!-- UNUSED string name="clino">Inclinação [deg]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">orientação</string>
     <string name="contents">conteúdos</string>
     <string name="error_distribution">distribuição do erro</string>
@@ -932,9 +957,9 @@ Refer to the web pages for details.\n
     <string name="help_sdcard">Funções de memória da DistoX</string>
     <string name="help_read">Ler e mostrar os coeficientes de calibração da DistoX</string>
     <string name="help_info_device">Informações do dispositivo</string>
-    <string name="help_scan">Procurar por novos dispositivos DistoX</string>
-    <string name="help_scan_ble">Procurar por dispositivos BLE</string>
-    <string name="help_pair">Parear o dispositivo DistoX selecionado</string>
+    <!-- UNUSED string name="help_scan">Procurar por novos dispositivos DistoX</string -->
+    <!-- UNUSED string name="help_scan_ble">Procurar por dispositivos BLE</string -->
+    <!-- UNUSED string name="help_pair">Parear o dispositivo DistoX selecionado</string -->
     <string name="help_open_calib">Abrir calibração</string>
     <string name="help_export_calib">Exportar calibração</string>
     <string name="help_group">Definir agrupamento dos números automaticamente</string>
@@ -1014,7 +1039,7 @@ Refer to the web pages for details.\n
     <string name="title_dangling">Medidas desconectadas</string>
     <string name="title_device">Dispositivos DistoX</string>
     <string name="title_device_select">Selecionar o dispositivo DistoX</string>
-    <string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string>
+    <!-- UNUSED string name="title_discover">Procurando dispositivos DistoX &#8230; Aguardar</string -->
     <!-- UNUSED string name="title_draw">Desenhar</string -->
     <string name="title_draw_area">ÁREA %1$s</string>
     <string name="title_draw_line">LINHA %1$s</string>
@@ -1686,8 +1711,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
+    <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
     <!-- TODO string name="title_tdconfig">Enter project name</string -->
     <!-- TODO string name="title_surveys">Surveys</string -->
@@ -1747,7 +1771,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
     <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
-    <string name="cno_files">Nenhum arquivo</string>
+    <!-- UNUSED string name="cno_files">Nenhum arquivo</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <!-- TODO string name="clear">Clear</string -->
 
@@ -1776,8 +1800,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="sketch_ok">Read sketch data</string -->
 
     <string name="ctitle">%1$s  inclinação: %2$.0f  Azimute: %3$.0f</string>
-    <string name="ctitle_clino"> Inclinação: </string>
-    <string name="ctitle_azimuth"> Azimute: </string>
     <!-- TODO string name="ctitle_surface_alpha">Surface opacity</string -->
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
@@ -1798,13 +1820,13 @@ Refer to the web pages for details.\n
     <string name="cave_length"> Comprimento da caverna: %1$.2f</string>
     <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
 
-    <string name="SURVEYS">T O P O S</string>
+    <!-- UNUSED string name="SURVEYS">T O P O S</string -->
     <string name="INFO">I N F O</string>
     <string name="EXPORT">E X P O R T A R</string>
     <string name="STATIONS">B A S E</string>
     <string name="STATIONS_DISTANCE">DISTÂNCIA BASES</string>
-    <string name="DISTANCE">DISTÂNCIA</string>
-    <!-- TODO string name="CENTER">CENTER</string -->
+    <!-- UNUSED string name="DISTANCE">DISTÂNCIA</string -->
+    <!-- UNUSED string name="CENTER">CENTER</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
     <string name="Wall">Paredes</string>
@@ -1863,11 +1885,6 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
     <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
 
-    <!-- TODO string name="category_surface">SURFACE</string -->
-    <!-- TODO string name="category_walls">WALLS</string -->
-    <!-- TODO string name="category_stations">STATIONS</string -->
-    <!-- TODO string name="category_grid">GRID</string -->
-    
     <!-- UNUSED string name="cpref_base_path_title">Diretório base</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Diretório base da app</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamanho do texto</string -->

@@ -25,6 +25,7 @@
     android:gravity="right"
     android:inputType="text"
     android:imeOptions="actionDone"
+    android:hint="@string/hint_from"
   />
   <!--
     style="?android:attr/textViewStyle"
@@ -42,6 +43,7 @@
     android:gravity="right"
     android:inputType="text"
     android:imeOptions="actionDone"
+    android:hint="@string/hint_to"
   />
 
   <TextView android:id="@+id/length"

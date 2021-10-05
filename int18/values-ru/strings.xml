@@ -399,8 +399,8 @@
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
-    <string name="menu_scan">Сканировать</string>
-    <string name="menu_scan_ble">СКАН BT окружение</string>
+    <!-- UNUSED string name="menu_scan">Сканировать</string -->
+    <!-- UNUSED string name="menu_scan_ble">СКАН BT окружение</string -->
     <!-- UNUSED string name="menu_station">ПИКЕТЫ</string -->
     <string name="menu_stats">СТАТИСТИКА</string>
     <string name="menu_survey">Свойства съёмки</string>
@@ -593,7 +593,7 @@
     <string name="delete_whole_leg">Удалить все замеры</string>
     <string name="visible_border">видимая граница</string>
     <!-- UNUSED string name="vthreshold">верт. порог</string -->
-    <string name="wait_scan">Сканирование: ждите &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Сканирование: ждите &#8230;</string -->
     <string name="write_failed">Ошибка записи DistoX</string>
     <string name="write_ok">Запись калибровки в DistoX</string>
     <string name="zip_saved">Сохранено </string>
@@ -641,7 +641,7 @@
     <string name="hide_ids">ID замеров</string>
     <string name="hide_splay">Боковые замеры</string>
 
-    <string name="plan">ПЛАН</string>
+    <!-- UNUSED string name="plan">ПЛАН</string -->
     <string name="extended">РАЗРЕЗ-РАЗВЕРТКА</string>
     <string name="profile">РАЗРЕЗ-ПРОЕКЦИЯ</string>
     <string name="fmt_plan">%1$s: ПЛАН</string>
@@ -649,9 +649,9 @@
     <string name="fmt_profile">%1$s: ПРОЕКЦИЯ</string>
 
     <string name="extended_profile">Разрез-развертка</string>
-    <string name="x_section">Поперечное-СЕЧЕНИЕ</string>
-    <string name="v_section">Верт-СЕЧЕНИЕ</string>
-    <string name="h_section">Гор-СЕЧЕНИЕ</string>
+    <!-- UNUSED string name="x_section">Поперечное-СЕЧЕНИЕ</string -->
+    <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
+    <!-- UNUSED string name="h_section">Гор-СЕЧЕНИЕ</string -->
     <!-- UNUSED string name="landscape">альбомная</string -->
 
     <!-- OK string name="distox_err_ok">OK</string -->
@@ -801,6 +801,31 @@
     <!-- UNUSED string name="azimuth">Азимут [грд]</string -->
     <!-- UNUSED string name="clino">Угол [грд]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">ориентация</string>
     <string name="contents">содержимое</string>
     <string name="error_distribution">распределение ошибки</string>
@@ -931,9 +956,9 @@
     <string name="help_sdcard">DistoX управление памятью</string>
     <string name="help_read">Загрузить и показать текущие коэффициенты калибровки DistoX</string>
     <string name="help_info_device">Информация об устройстве</string>
-    <string name="help_scan">Найти новые устройства DistoX</string>
-    <string name="help_scan_ble">Сканирование BT окружения </string>
-    <string name="help_pair">Сопряжение текущего устройства DistoX</string>
+    <!-- UNUSED string name="help_scan">Найти новые устройства DistoX</string -->
+    <!-- UNUSED string name="help_scan_ble">Сканирование BT окружения </string -->
+    <!-- UNUSED string name="help_pair">Сопряжение текущего устройства DistoX</string -->
     <string name="help_open_calib">Открыть окно данных калибровки</string>
     <string name="help_export_calib">Экспорт калибровки</string>
     <string name="help_group">Присвоить номер группы калибровочным замерам</string>
@@ -1013,7 +1038,7 @@
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
-    <string name="title_discover">Поиск устройств DistoX &#8230; подождите</string>
+    <!-- UNUSED string name="title_discover">Поиск устройств DistoX &#8230; подождите</string -->
     <!-- UNUSED string name="title_draw">Рисовать</string -->
     <string name="title_draw_area">ОБЛАСТЬ %1$s</string>
     <string name="title_draw_line">ЛИНИЯ %1$s</string>
@@ -1688,8 +1713,7 @@
     <string name="title_equates">Соединения в проекте</string>
     <string name="title_equate_new">Добавить соединение &#8230;</string>
     <string name="title_equate_with">Соединить %1$s с %2$s</string>
-    <string name="title_cwd">Текущий рабочий каталог</string>
-    <string name="title_settings">Настройки TdManager</string>
+    <!-- UNUSED string name="title_cwd">Текущий рабочий каталог</string -->
     <string name="title_drop">Удалить съёмки ?</string>
     <string name="title_tdconfig">Введине название проекта</string>
     <string name="title_surveys">Съёмки</string>
@@ -1758,7 +1782,7 @@
     <!-- UNUSED string name="proj_far">Вдали</string -->
 
     <string name="query" formatted="false">Съёмки: %d Замеры: %d Пикеты: %d\nДлина: %d Глубина: %d</string>
-    <string name="cno_files">Нет файлов</string>
+    <!-- UNUSED string name="cno_files">Нет файлов</string -->
     <string name="reading_file">Считывание файла %1$s</string>
     <string name="clear">Очистить</string>
 
@@ -1789,8 +1813,6 @@
     <string name="sketch_ok">Прочитаны данные абрисов</string>
 
     <string name="ctitle">%1$s  Наклон: %2$.0f  Азимут: %3$.0f</string>
-    <string name="ctitle_clino"> Наклон: </string>
-    <string name="ctitle_azimuth"> Азимут: </string>
     <string name="ctitle_surface_alpha">Прозрачность поверхности</string>
     <!-- UNUSED string name="ctitle_sketches">Абрисы</string -->
     <!-- UNUSED string name="ctitle_legs">Видимость нитки хода</string -->
@@ -1811,13 +1833,13 @@
     <string name="cave_length"> Длина пещеры: %1$.2f</string>
     <string name="cave_angle"> Азимут: %1$.0f  Уклон: %2$.0f</string>
 
-    <string name="SURVEYS">С Ъ Ё М К И</string>
+    <!-- UNUSED string name="SURVEYS">С Ъ Ё М К И</string -->
     <string name="INFO">И Н Ф О Р М А Ц И Я</string>
     <string name="EXPORT">Э К С П О Р Т</string>
     <string name="STATIONS">П И К Е Т</string>
     <string name="STATIONS_DISTANCE">УДАЛЁННОСТЬ ПИКЕТОВ</string>
-    <string name="DISTANCE">РАССТОЯНИЕ</string>
-    <string name="CENTER">ЦЕНТР</string>
+    <!-- UNUSED string name="DISTANCE">РАССТОЯНИЕ</string -->
+    <!-- UNUSED string name="CENTER">ЦЕНТР</string -->
     <string name="select_dem_file">Выбрать файл DEM:</string>
     <string name="select_texture_file">Выбрать файл текстуры:</string>
     <string name="Wall">Стены</string>
@@ -1882,10 +1904,6 @@
     <string name="cno_survey">Отсутсвует съёмка %1$s\n</string>
     <!-- UNUSED string name="cno_file">Отсутсвует фал %1$s\n</string -->
     <string name="empty_survey">Пустая съёмка %1$s\n</string>
-    <string name="category_surface">ПОВЕРХНОСТЬ</string>
-    <string name="category_walls">СТЕНЫ</string>
-    <string name="category_stations">ПИКЕТЫ</string>
-    <string name="category_grid">СЕТКА</string>
     
     <!-- UNUSED string name="cpref_base_path_title">Рабочий каталог</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Путь к файлам съёмок</string -->

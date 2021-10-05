@@ -158,6 +158,9 @@ public class SurveyWindow extends Activity
 
   // String getSurveyName() { return TDInstance.survey; }
 
+  /** rename the current survey
+   * @param name   new survey name
+   */
   void renameSurvey( String name ) 
   {
     name = TDUtil.noSpaces( name );

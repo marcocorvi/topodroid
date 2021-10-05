@@ -18,6 +18,7 @@
       android:layout_weight="30"
       android:singleLine="true"
       android:inputType="text"
+      android:hint="@string/hint_name"
     />
     <CheckBox android:id="@+id/button_fixed"
       android:layout_width="0dp"

@@ -401,8 +401,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- OK string name="menu_palette">PALETTE</string -->
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORI</string>
-    <string name="menu_scan">CERCA</string>
-    <string name="menu_scan_ble">SCAN BTLE</string>
+    <!-- UNUSED string name="menu_scan">CERCA</string -->
+    <!-- UNUSED string name="menu_scan_ble">SCAN BTLE</string -->
     <!-- UNUSED string name="menu_station">CAPISALDI</string -->
     <string name="menu_stats">STATISTICHE</string>
     <string name="menu_survey">INFORMAZIONI</string>
@@ -596,7 +596,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="delete_whole_leg">Cancella l\'intera battuta</string>
     <string name="visible_border">bordo visibile</string>
     <!-- UNUSED string name="vthreshold">soglia vert.</string -->
-    <string name="wait_scan">Scanning: attendi &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Scanning: attendi &#8230;</string -->
     <string name="write_failed">Scrittura su DistoX fallita</string>
     <string name="write_ok">Calibrazione scritta sul DistoX</string>
     <string name="zip_saved">Salvato </string>
@@ -643,7 +643,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="hide_ids">ID misure</string>
     <string name="hide_splay">Misure laterali</string>
 
-    <string name="plan">PIANTA</string>
+    <!-- UNUSED string name="plan">PIANTA</string -->
     <string name="extended">SEZIONE LONG.</string>
     <string name="profile">PROJEZIONE</string>
     <string name="fmt_plan">%1$s: PIANTA</string>
@@ -651,9 +651,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="fmt_profile">%1$s: PROJEZIONE</string>
 
     <string name="extended_profile">Profilo esteso</string>
-    <string name="x_section">SEZIONE-X</string>
-    <string name="v_section">SEZIONE VERT.</string>
-    <string name="h_section">SEZIONE ORIZZ.</string>
+    <!-- UNUSED string name="x_section">SEZIONE-X</string -->
+    <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
+    <!-- UNUSED string name="h_section">SEZIONE ORIZZ.</string -->
     <!-- UNUSED string name="landscape">panorama</string -->
 
     <string name="display_view">visualizza</string>
@@ -809,6 +809,31 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">orientamento</string>
     <string name="contents">contenuti</string>
     <string name="error_distribution">distribuzione degli errori</string>
@@ -940,9 +965,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_sdcard">Funzioni memoria DistoX</string>
     <string name="help_read">Leggi la calibrazione dal DistoX</string>
     <string name="help_info_device">Dati dispositivo DistoX</string>
-    <string name="help_scan">Cerca dispositivi DistoX</string>
-    <string name="help_scan_ble">Ricerca dispositivi BTLE</string>
-    <string name="help_pair">Associa il DistoX</string>
+    <!-- UNUSED string name="help_scan">Cerca dispositivi DistoX</string -->
+    <!-- UNUSED string name="help_scan_ble">Ricerca dispositivi BTLE</string -->
+    <!-- UNUSED string name="help_pair">Associa il DistoX</string -->
     <string name="help_open_calib">Apri calibrazione</string>
     <string name="help_export_calib">Esporta calibrazione</string>
     <string name="help_group">Assegna gruppi automaticamente</string>
@@ -1023,7 +1048,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_dangling">Tiri non collegati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>
-    <string name="title_discover">Ricerca DistoX &#8230; attendi</string>
+    <!-- UNUSED string name="title_discover">Ricerca DistoX &#8230; attendi</string -->
     <!-- UNUSED string name="title_draw">Disegno</string -->
     <string name="title_draw_area">AREA %1$s</string>
     <string name="title_draw_line">LINEA %1$s</string>
@@ -1700,8 +1725,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_equates">Collegamenti</string>
     <string name="title_equate_new">Aggiungi collegamento &#8230;</string>
     <string name="title_equate_with">Collega %1$s e %2$s</string>
-    <string name="title_cwd">Cartella di lavoro corrente</string>
-    <string name="title_settings">Impostazioni TdManager</string>
+    <!-- UNUSED string name="title_cwd">Cartella di lavoro corrente</string -->
     <string name="title_drop">Cancello rilievi ?</string>
     <string name="title_tdconfig">Inserisci nome progetto</string>
     <string name="title_surveys">Rilievi</string>
@@ -1759,7 +1783,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
     <string name="query" formatted="false">Rilievi: %d Battute: %d Capisaldi: %d\nSviluppo: %d Profondità: %d</string>
-    <string name="cno_files">Nessun file</string>
+    <!-- UNUSED string name="cno_files">Nessun file</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <string name="clear">Pulisci</string>
 
@@ -1788,8 +1812,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="sketch_ok">Read sketch data</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
-    <string name="ctitle_clino"> Clino: </string>
-    <string name="ctitle_azimuth"> Azimut: </string>
     <string name="ctitle_surface_alpha">Trasparenza DEM</string>
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
@@ -1810,13 +1832,13 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cave_length"> Sviluppo totale: %1$.2f</string>
     <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
 
-    <string name="SURVEYS">R I L I E V I</string>
+    <!-- UNUSED string name="SURVEYS">R I L I E V I</string -->
     <string name="INFO">I N F O</string>
     <string name="EXPORT">E S P O R T A Z I O N E</string>
     <string name="STATIONS">C A P I S A L D I</string>
     <string name="STATIONS_DISTANCE">DISTANZA CAPISALDI</string>
-    <string name="DISTANCE">DISTANZA</string>
-    <string name="CENTER">CENTRA</string>
+    <!-- UNUSED string name="DISTANCE">DISTANZA</string -->
+    <!-- UNUSED string name="CENTER">CENTRA</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
     <string name="Wall">Pareti</string>
@@ -1875,11 +1897,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="cno_file">File %1$s non trovato\n</string -->
     <string name="empty_survey">Rilievo %1$s vuoto\n</string>
 
-    <!-- TODO string name="category_surface">SURFACE</string -->
-    <!-- TODO string name="category_walls">WALLS</string -->
-    <!-- TODO string name="category_stations">STATIONS</string -->
-    <!-- TODO string name="category_grid">GRID</string -->
-    
     <!-- UNUSED string name="cpref_base_path_title">Folder di base</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Folder di base dell\'app</string -->
     <!-- UNUSED string name="cpref_text_size_title">Dimensione testi</string -->

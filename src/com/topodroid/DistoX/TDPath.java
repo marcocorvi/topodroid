@@ -438,6 +438,8 @@ public class TDPath
 
 
   // these are used to get the folders when the survey does not exist yet (on import)
+  static String getSurveyDir( String survey ) { return PATH_CW_DIR + "/" + survey; }
+
   static String getSurveyPhotoDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/photo"; }
   static String getSurveyAudioDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/audio"; }
 

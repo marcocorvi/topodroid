@@ -20,6 +20,7 @@
     android:layout_height="wrap_content" 
     android:singleLine="true"
     android:inputType="text"
+    android:hint="@string/hint_label"
     />
 
   <LinearLayout android:id="@+id/layer_layout"

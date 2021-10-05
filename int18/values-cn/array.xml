@@ -282,13 +282,6 @@
      <item name="to">In front</item>
   </string-array -->
 
-  <!-- DO NOT TRANSLATE string-array name="recentNr" translatable="false">
-     <item name="3">3</item>
-     <item name="4">4</item>
-     <item name="5">5</item>
-     <item name="6">6</item>
-  </string-array -->
-
   <!-- string-array name="deviceType">
      <item name="none">None</item>
      <item name="A3">A3</item>
@@ -365,22 +358,21 @@
      <item name="powercrust">Powercrust算法</item>
   </string-array -->
 
-  <!-- TODO  3D VIEWER array strings 
-  <string-array name="csizeButtons">
+  <!-- 3D VIEWER array strings -->
+  <!-- TODO string-array name="csizeButtons">
      <item name="small1">Small</item>
      <item name="large">Large</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="demReduce">
+  <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="splayUse">
+  <!-- TODO string-array name="splayUse">
      <item name="skip">Skip</item>
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
-  </string-array>
-  -->
+  </string-array -->
 
 </resources>

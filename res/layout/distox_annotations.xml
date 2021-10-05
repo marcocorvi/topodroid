@@ -30,6 +30,7 @@
         android:maxWidth="5.0sp" 
       	android:ems="25"
         android:scrollHorizontally="true"
+        android:hint="@string/hint_notes"
         />
     </ScrollView>
    					  

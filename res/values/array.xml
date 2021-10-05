@@ -515,12 +515,12 @@
      <item name="to">2</item>
   </string-array -->
 
-  <string-array name="recentNr" translatable="false">
+  <!-- string-array name="recentNr" translatable="false">
      <item name="3">3</item>
      <item name="4">4</item>
      <item name="5">5</item>
      <item name="6">6</item>
-  </string-array>
+  </string-array -->
 
   <!-- string-array name="deviceType">
      <item name="none">None</item>
@@ -667,14 +667,14 @@
      <item name="large">2</item>
   </string-array -->
 
-  <string-array name="demReduce">
+  <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
   </string-array>
   <string-array name="demReduceValue" translatable="false">
      <item name="shrink">1</item>
      <item name="cut">2</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="splayUse">
      <item name="skip">Skip</item>

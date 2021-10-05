@@ -15,7 +15,7 @@
     android:paddingBottom="@dimen/paddingv"
     >
 
-    <TextView 
+    <TextView android:labelFor="@+id/fix_lng"
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -23,7 +23,7 @@
       android:layout_gravity="left"
       android:text="@string/longitude"
     />
-    <EditText android:id="@+id/fix_lng" 
+    <EditText android:id="@id/fix_lng" 
       style="@style/edit_decimal_light"
       android:layout_width="0dp"
       android:layout_weight="40"
@@ -41,7 +41,7 @@
     android:paddingBottom="@dimen/paddingv"
     >
 
-    <TextView 
+    <TextView android:labelFor="@id/fix_lat"
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -66,7 +66,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
     >
-    <TextView 
+    <TextView android:labelFor="@id/fix_alt"
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -91,7 +91,7 @@
     android:orientation="horizontal"
     android:paddingBottom="@dimen/paddingv"
     >
-    <TextView
+    <TextView android:labelFor="@id/fix_asl"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
@@ -123,6 +123,7 @@
       android:layout_height="wrap_content"
       android:layout_marginRight="@dimen/marginh"
       android:inputType="text"
+      android:hint="@string/hint_station"
     />
     <EditText android:id="@id/fix_comment" 
       style="@style/edit_text"
@@ -132,6 +133,7 @@
       android:nextFocusDown="@+id/fix_decl"
       android:singleLine="true"
       android:inputType="text"
+      android:hint="@string/hint_comment"
     />
   </LinearLayout>
    					  
@@ -143,6 +145,7 @@
     android:paddingBottom="@dimen/paddingv"
     >
     <TextView android:id="@+id/fix_empty" 
+      android:labelFor="@id/fix_decl"
       android:layout_width="0dp"
       android:layout_weight="50"
       android:layout_height="wrap_content"

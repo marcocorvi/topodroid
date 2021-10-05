@@ -124,12 +124,12 @@
        <item name="android:layout_height">wrap_content</item>
     </style>
 
-    <style name="list_horiz">
+    <!-- UNUSED style name="list_horiz">
        <item name="android:fastScrollEnabled">true</item>
        <item name="android:scrollingCache">true</item>
        <item name="android:smoothScrollbar">false</item>
        <item name="android:background">#333</item>
-    </style>
+    </style -->
 
     <style name="list_top">
        <item name="android:stackFromBottom">false</item>
@@ -252,7 +252,7 @@
     </style>
 
 
-    <style name="item_text">
+    <!-- UNUSED style name="item_text">
       <item name="android:ems">25</item>
       <item name="android:layout_height">wrap_content</item>
       <item name="android:singleLine">true</item>
@@ -263,7 +263,7 @@
       <item name="android:paddingRight">@dimen/paddingh</item>
       <item name="android:paddingBottom">@dimen/paddingv</item>
       <item name="android:paddingTop">@dimen/paddingv</item>
-    </style>
+    </style -->
 
     <style name="base_padding">
       <item name="android:paddingLeft">@dimen/paddingh</item>

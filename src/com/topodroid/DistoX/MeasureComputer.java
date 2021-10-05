@@ -55,25 +55,25 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   @Override
   protected Integer doInBackground( Void ... v ) 
   {
-    if ( mModel == null || mParser == null ) return new Integer( MEASURE_NO_MODEL );
+    if ( mModel == null || mParser == null ) return MEASURE_NO_MODEL; // new Integer( MEASURE_NO_MODEL );
 
     mFullname = mModel.checkNames( mX, mY, mMVPMatrix, TopoGL.mSelectionRadius, (mParser.mStartStation == null) );
-    if ( mFullname == null ) return new Integer( MEASURE_NO_NAME );
+    if ( mFullname == null ) return MEASURE_NO_NAME; // new Integer( MEASURE_NO_NAME );
 
     // TDLog.v("Measure computer - station: " + mFullname + " start: " + ((mParser.mStartStation==null)?"null":"non-null") );
     if ( mParser.mStartStation == null ) {
       mModel.clearPath( );
       mParser.setStartStation( mFullname );
-      return new Integer( MEASURE_NO_START );
+      return MEASURE_NO_START; // new Integer( MEASURE_NO_START );
     }
 
-    // if ( ! mApp.mMeasureStation.isChecked() ) return new Integer( MEASURE_SKIP ); // do not measure
-    if ( ! mApp.isMeasuring ) return new Integer( MEASURE_SKIP ); // do not measure
+    // if ( ! mApp.mMeasureStation.isChecked() ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
+    if ( ! mApp.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
 
     Cave3DStation station = mParser.getStation( mFullname );
-    if ( station == null ) return new Integer( MEASURE_NO_STATION ); // null station
+    if ( station == null ) return MEASURE_NO_STATION; new Integer( MEASURE_NO_STATION ); // null station
 
-    if ( station == mParser.mStartStation ) return new Integer( MEASURE_SAME_STATION );
+    if ( station == mParser.mStartStation ) return MEASURE_SAME_STATION; // new Integer( MEASURE_SAME_STATION );
 
     mMeasure = mParser.computeCavePathlength( station );
     if ( mMeasure.dcave > 0 && station.getPathPrevious() != null ) {
@@ -86,9 +86,9 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
       // FIXME INCREMENTAL mModel.clearPath( );
       mModel.setPath( path, false ); // mModel.setPath( path, mApp.hasBluetoothName() );
 	  
-      return new Integer( MEASURE_OK );
+      return MEASURE_OK; // new Integer( MEASURE_OK );
     }
-    return new Integer( MEASURE_NO_PATH );
+    return MEASURE_NO_PATH; // new Integer( MEASURE_NO_PATH );
   }
 
   @Override

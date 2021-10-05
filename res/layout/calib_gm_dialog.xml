@@ -18,6 +18,7 @@
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
       android:layout_marginRight="@dimen/marginh"
+      android:hint="@string/hint_azimuth"
     />
     <EditText android:id="@+id/gm_clino"
       style="@style/edit_signeddecimal"
@@ -25,12 +26,14 @@
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
       android:layout_marginRight="@dimen/marginh"
+      android:hint="@string/hint_clino"
     />
     <EditText android:id="@+id/gm_roll"
       style="@style/edit_decimal"
       android:layout_width="0dp"
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
+      android:hint="@string/hint_roll"
     />
   </LinearLayout>
 
@@ -48,6 +51,7 @@
     android:maxLines="1" 
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/margintiny"
+    android:hint="@string/hint_name"
   />
    		
   <LinearLayout android:id="@+id/layout2"

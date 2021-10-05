@@ -22,13 +22,13 @@
       style="@style/edit_text"
       android:layout_width="0sp"
       android:layout_weight="50"
-      android:text=""
+      android:hint="@string/hint_from"
       />
     <EditText android:id="@id/shot_to" 
       style="@style/edit_text"
       android:layout_width="0sp"
       android:layout_weight="50"
-      android:text=""
+      android:hint="@string/hint_to"
       />
   </LinearLayout>
 

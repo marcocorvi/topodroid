@@ -405,8 +405,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
     <string name="menu_sensor">SZENZOR</string>
-    <string name="menu_scan">KERESÉS</string>
-    <string name="menu_scan_ble">BTLE KERESÉS</string>
+    <!-- UNUSED string name="menu_scan">KERESÉS</string -->
+    <!-- UNUSED string name="menu_scan_ble">BTLE KERESÉS</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">STATISZTIKA</string>
     <string name="menu_survey">FELMÉRÉSI INFORMÁCIÓK</string>
@@ -603,7 +603,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="delete_whole_leg">Mérés törlése</string>
     <string name="visible_border">látható határ</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
-    <string name="wait_scan">Keresés: várj &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Keresés: várj &#8230;</string -->
     <string name="write_failed">Nem sikerült felülírni a kalibrációt</string>
     <string name="write_ok">DistoX kalibrációja felülírva</string>
     <string name="zip_saved">Mentve</string>
@@ -652,7 +652,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="hide_ids">Mérés azonosítók</string>
     <string name="hide_splay">Segéd mérések</string>
 
-    <string name="plan">ALAPRAJZ</string>
+    <!-- UNUSED string name="plan">ALAPRAJZ</string -->
     <string name="extended">KIT.OLDALNÉZET</string>
     <string name="profile">VET.OLDALNÉZET</string>
     <string name="fmt_plan">%1$s: ALAPRAJZ</string>
@@ -660,9 +660,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fmt_profile">%1$s: VET.OLDALNÉZET</string>
 
     <string name="extended_profile">Kiterített Oldalnézet</string>
-    <string name="x_section">KERESZTMETSZET</string>
-    <string name="v_section">V-METSZET</string>
-    <string name="h_section">Horizontális keresztszelvény</string>
+    <!-- UNUSED string name="x_section">KERESZTMETSZET</string -->
+    <!-- UNUSED string name="v_section">V-METSZET</string -->
+    <!-- UNUSED string name="h_section">Horizontális keresztszelvény</string -->
     <!-- UNUSED string name="landscape">térkép</string -->
 
     <string name="display_view">Képernyő</string>
@@ -818,6 +818,31 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">irány</string>
     <string name="contents">tartalom</string>
     <string name="error_distribution">hiba eloszlás</string>
@@ -950,9 +975,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_sdcard">DistoX memória funkciók</string>
     <string name="help_read">DistoX kalibrációs együtthatójának kiolvasása és megjelenítése</string>
     <string name="help_info_device">Műszer információ</string>
-    <string name="help_scan">Újabb DistoX-ek keresése</string>
-    <string name="help_scan_ble">BTLE műszer keresése</string>
-    <string name="help_pair">Párosítás a kiválasztott DistoX-el</string>
+    <!-- UNUSED string name="help_scan">Újabb DistoX-ek keresése</string -->
+    <!-- UNUSED string name="help_scan_ble">BTLE műszer keresése</string -->
+    <!-- UNUSED string name="help_pair">Párosítás a kiválasztott DistoX-el</string -->
     <string name="help_open_calib">Kalibráció megnyitása</string>
     <string name="help_export_calib">Kalibráció exportálása</string>
     <string name="help_group">Csoportok-számok automatikus hozzárendelése</string>
@@ -1033,7 +1058,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
-    <string name="title_discover">DistoX műszerek keresése &#8230; várj!</string>
+    <!-- UNUSED string name="title_discover">DistoX műszerek keresése &#8230; várj!</string -->
     <!-- UNUSED string name="title_draw">Rajzolás</string -->
     <string name="title_draw_area">TERÜLET %1$s</string>
     <string name="title_draw_line">VONAL %1$s</string>
@@ -1726,8 +1751,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_equates">Projekt kapcsolódó pontok</string>
     <string name="title_equate_new">Kapcsolódó pont hozzáadás &#8230;</string>
     <string name="title_equate_with">Kapcsolódik %1$s és %2$s</string>
-    <string name="title_cwd">Jelenlegi munka könyvtár</string>
-    <string name="title_settings">TdManager beállítások</string>
+    <!-- UNUSED string name="title_cwd">Jelenlegi munka könyvtár</string -->
     <string name="title_drop">Eldobja a mérést?</string>
     <string name="title_tdconfig">Adja meg a projekt nevét</string>
     <string name="title_surveys">Mérések</string>
@@ -1799,7 +1823,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="proj_far">Távol</string -->
 
     <string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\nHossz: %d Mélység: %d</string>
-    <string name="cno_files">Nincsenek fájlok</string>
+    <!-- UNUSED string name="cno_files">Nincsenek fájlok</string -->
     <string name="reading_file">Fájl beolvasás %1$s</string>
     <string name="read_survey">Mérés beolvasás %1$s\n</string>
     <string name="clear">Törlés</string>
@@ -1830,8 +1854,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="sketch_ok">Vázlat adat olvasás</string>
 
     <string name="ctitle">%1$s  Lejtés: %2$.0f  Irány: %3$.0f</string>
-    <string name="ctitle_clino"> Lejtés: </string>
-    <string name="ctitle_azimuth"> Irány: </string>
     <string name="ctitle_surface_alpha">Felszín átlátszóság</string>
     <string name="ctitle_sketches">Vázlatok</string>
     <string name="ctitle_legs">Poligon láthatóság</string>
@@ -1863,13 +1885,13 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cave_angle"> Irány: %1$.0f  Lejtés: %2$.0f</string>
 
 
-    <string name="SURVEYS">M É R É S E K</string>
+    <!-- UNUSED string name="SURVEYS">M É R É S E K</string -->
     <string name="INFO">I N F ó</string>
     <string name="EXPORT">E X P O R T</string>
     <string name="STATIONS">P O N T O K</string>
     <string name="STATIONS_DISTANCE">PONT TÁVOLSÁG</string>
-    <string name="DISTANCE">TÁVOLSÁG</string>
-    <string name="CENTER">KÖZÉPPONT</string>
+    <!-- UNUSED string name="DISTANCE">TÁVOLSÁG</string -->
+    <!-- UNUSED string name="CENTER">KÖZÉPPONT</string -->
     <string name="select_survey_file">Válassz felmérés fájlt</string>
     <string name="select_export_file">Válassz export fájlt</string>
     <string name="select_dem_file">Válassz egy DEM fájlt</string>
@@ -1952,11 +1974,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="empty_survey">Üres mérés %1$s\n</string>
 
     <string name="viewing_at">Nézet dőlés %1$.0f irány %2$.0f</string>
-
-    <string name="category_surface">FELSZÍN</string>
-    <string name="category_walls">FALAK</string>
-    <string name="category_stations">PONTOK</string>
-    <string name="category_grid">HÁLÓ</string>
 
     <string name="cpref_dem3d">DEM</string>
     <string name="cpref_walls3d">FAL MODELL</string>

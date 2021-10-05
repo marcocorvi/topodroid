@@ -271,22 +271,21 @@
      <item name="hexm">M esadecimali</item>
   </string-array>
 
-  <!-- TODO  3D VIEWER array strings 
-  <string-array name="csizeButtons">
+  <!-- 3D VIEWER array strings -->
+  <!-- TODO string-array name="csizeButtons">
      <item name="small1">Small</item>
      <item name="large">Large</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="demReduce">
+  <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
-  </string-array>
+  </string-array -->
 
-  <string-array name="splayUse">
+  <!-- TODO string-array name="splayUse">
      <item name="skip">Skip</item>
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
-  </string-array>
-  -->
+  </string-array -->
 
 </resources>

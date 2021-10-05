@@ -405,8 +405,8 @@ Refer to the web pages for details.\n
     <string name="menu_palette">PALETA</string> 
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENZOR</string>
-    <string name="menu_scan">SKENOVAŤ</string>
-    <string name="menu_scan_ble">SKEN BTLE</string>
+    <!-- UNUSED string name="menu_scan">SKENOVAŤ</string -->
+    <!-- UNUSED string name="menu_scan_ble">SKEN BTLE</string -->
     <!-- UNUSED string name="menu_station">STATIONS</string -->
     <string name="menu_stats">ŠTATISTIKA</string>
     <string name="menu_survey">JASKYŇA</string>
@@ -603,7 +603,7 @@ Refer to the web pages for details.\n
     <string name="delete_whole_leg">Odstráňte celú hlavnú zámeru</string>
     <string name="visible_border">Viditeľná hranica Oblasti (Therion)</string>
     <!-- UNUSED string name="vthreshold">vert. threshold</string -->
-    <string name="wait_scan">Skenovanie: čakajte &#8230;</string>
+    <!-- UNUSED string name="wait_scan">Skenovanie: čakajte &#8230;</string -->
     <string name="write_failed">Zapísanie do DistaX bolo neuspešné</string>
     <string name="write_ok">Kalibrácia zapísaná do DistaX</string>
     <string name="zip_saved">Uložený </string>
@@ -652,7 +652,7 @@ Refer to the web pages for details.\n
     <string name="hide_ids">Identifikačné číslo zámery</string>
     <string name="hide_splay">Pomocné zámery</string>
 
-    <string name="plan">Pôdorys</string>
+    <!-- UNUSED string name="plan">Pôdorys</string -->
     <string name="extended">Rozvinutý rez</string>
     <string name="profile">Priemet</string>
     <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
@@ -660,9 +660,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
 
     <string name="extended_profile">Zaškrtnuté=Rozvinutý rez Nezaškrtnuté=Priemet</string>
-    <!-- TODO string name="x_section">X-SECTION</string -->
-    <!-- TODO string name="v_section">V-SECTION</string -->
-    <string name="h_section">HORIZONTÁLNY</string>
+    <!-- UNUSED string name="x_section">X-SECTION</string -->
+    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- UNUSED string name="h_section">HORIZONTÁLNY</string -->
     <!-- UNUSED string name="landscape">landscape</string -->
 	
     <string name="display_view">Zobrazenie</string>
@@ -816,6 +816,31 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">Orientácia</string>
     <string name="contents">Obsah</string>
     <string name="error_distribution">Chyba distribúcie</string>
@@ -947,9 +972,9 @@ Refer to the web pages for details.\n
     <string name="help_sdcard">Informácie z pamäte DistaX</string>
     <string name="help_read">Načítať a Zobraziť kalibračné koeficienty z DistaX</string>
     <string name="help_info_device">Informácie o DistoX</string>
-    <string name="help_scan">Vyhľadať zariadenia DistoX</string>
-    <string name="help_scan_ble">Vyhľadá zariadenia BTLE</string>
-    <string name="help_pair">Vytvoriť spojenie s DistoX</string>
+    <!-- UNUSED string name="help_scan">Vyhľadať zariadenia DistoX</string -->
+    <!-- UNUSED string name="help_scan_ble">Vyhľadá zariadenia BTLE</string -->
+    <!-- UNUSED string name="help_pair">Vytvoriť spojenie s DistoX</string -->
     <string name="help_open_calib">Otvoriť kalibračné okno</string>
     <string name="help_export_calib">Exportovať kalibráciu</string>
     <string name="help_group">Automaticky zoskupiť skupiny meraní</string>
@@ -1030,7 +1055,7 @@ Refer to the web pages for details.\n
     <string name="title_dangling">Nepripojené zámery</string>
     <string name="title_device">DistoX</string>
     <string name="title_device_select">Zvoľte DistoX</string>
-    <string name="title_discover">Vyhladávanie DistaX &#8230; prosím čakajte</string>
+    <!-- UNUSED string name="title_discover">Vyhladávanie DistaX &#8230; prosím čakajte</string -->
     <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">OBLASŤ %1$s</string>
     <string name="title_draw_line">ČIARA %1$s</string>
@@ -1720,8 +1745,7 @@ DO NOT REMOVE THIS LINE -->
     <string name="title_equates">Projekt Porovnanie</string>
     <string name="title_equate_new">Pridaj Porovnanie &#8230;</string>
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
-    <string name="title_cwd">Aktuálny Pracovný Adresár</string>
-    <string name="title_settings">TdManager Nastavenia</string>
+    <!-- UNUSED string name="title_cwd">Aktuálny Pracovný Adresár</string -->
     <string name="title_drop">Zahodiť Mapovania ?</string>
     <string name="title_tdconfig">Zadaj Meno projektu</string>
     <string name="title_surveys">)Mapovania</string>
@@ -1779,7 +1803,7 @@ DO NOT REMOVE THIS LINE -->
     <string name="info_z_value">%1$.1f  %2$.1f</string>
 
     <string name="query" formatted="false">Jaskyne: %d Zámery: %d Staničenia: %d\nDĺžka: %d Hĺbka: %d</string>
-    <string name="cno_files">Žiadne súbory</string>
+    <!-- UNUSED string name="cno_files">Žiadne súbory</string -->
     <string name="reading_file">Číta súbor %1$s</string>
     <string name="clear">Vyčistiť</string>
 
@@ -1808,8 +1832,6 @@ DO NOT REMOVE THIS LINE -->
     <string name="sketch_ok">Čítať dáta Nákresu</string>
 
     <string name="ctitle">%1$s  Uhol: %2$.0f  Azimut: %3$.0f</string>
-    <string name="ctitle_clino"> Uhol: </string>
-    <string name="ctitle_azimuth"> Azimut: </string>
     <string name="ctitle_surface_alpha">Povrchová nepriehľadnosť</string>
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
@@ -1830,13 +1852,13 @@ DO NOT REMOVE THIS LINE -->
     <string name="cave_length"> Dĺžka jaskyne: %1$.2f</string>
     <string name="cave_angle"> Azimut: %1$.0f  Uhol: %2$.0f</string>
 
-    <string name="SURVEYS">JASKYNE</string>
+    <!-- UNUSED string name="SURVEYS">JASKYNE</string -->
     <string name="INFO">INFO</string>
     <string name="EXPORT">EXPORT</string>
     <string name="STATIONS">MERAČSKÝ BOD</string>
     <string name="STATIONS_DISTANCE">VZDIALENOSŤ MERAČSKÝCH BODOV</string>
-    <string name="DISTANCE">VZDIALENOSŤ</string>
-    <string name="CENTER">CENTROVANIE</string>
+    <!-- UNUSED string name="DISTANCE">VZDIALENOSŤ</string -->
+    <!-- UNUSED string name="CENTER">CENTROVANIE</string -->
     <string name="select_survey_file">Cave3D - Vybrať súbor:</string>
     <string name="select_dem_file">Vyber DEM súbor:</string>
     <string name="select_texture_file">Vyber súbor:</string>
@@ -1899,11 +1921,6 @@ DO NOT REMOVE THIS LINE -->
     <!-- UNUSED string name="cno_file">Žiadny súbor %1$s\n</string -->
     <string name="empty_survey">Prázdny súbor %1$s\n</string>
 
-    <string name="category_surface">POVRCH</string>
-    <string name="category_walls">STENY</string>
-    <string name="category_stations">STANIČENIA</string>
-    <string name="category_grid">MRIEŽKA</string>
-    
     <!-- UNUSED string name="cpref_base_path_title">Základný adresár</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Základný adresár/cesta k súborom</string -->
     <!-- UNUSED string name="cpref_text_size_title">Veľkosť meračských bodov</string -->

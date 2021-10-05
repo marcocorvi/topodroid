@@ -281,10 +281,10 @@
      <item name="large">Veľké</item>
   </string-array -->
 
-  <string-array name="demReduce">
+  <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Podvzorka</item>
      <item name="cut">Strih</item>
-  </string-array>
+  </string-array -->
 
   <!-- TODO string-array name="splayUse">
      <item name="skip">Skip</item>

@@ -397,8 +397,8 @@ Refer to the web pages for details.\n
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
-    <string name="menu_scan">Escanear</string>
-    <string name="menu_scan_ble">ESCANEAR BTLE</string>
+    <!-- UNUSED string name="menu_scan">Escanear</string -->
+    <!-- UNUSED string name="menu_scan_ble">ESCANEAR BTLE</string -->
     <!-- UNUSED string name="menu_station">Estación</string -->
     <string name="menu_stats">Estadísticas</string>
     <string name="menu_survey">Info. topografía</string>
@@ -599,7 +599,7 @@ Refer to the web pages for details.\n
     <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
     <!-- UNUSED string name="vthreshold">Precisión</string -->
-    <string name="wait_scan">Buscando: espere&#8230;</string>
+    <!-- UNUSED string name="wait_scan">Buscando: espere&#8230;</string -->
     <string name="write_failed">Error al escribir en DistoX</string>
     <string name="write_ok">Calibración Escrita en DistoX</string>
     <string name="zip_saved">Guardar</string>
@@ -646,7 +646,7 @@ Refer to the web pages for details.\n
     <string name="hide_ids">Visualizar enumeración de las tomas</string>
     <string name="hide_splay">Visualizar las tomas radiales</string>
 
-    <string name="plan">Planta</string>
+    <!-- UNUSED string name="plan">Planta</string -->
     <string name="extended">Alzado</string>
     <string name="extended_profile">Alzado desarrollado</string>
     <string name="profile">PROYECTO</string>
@@ -654,9 +654,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
     <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
 
-    <!-- TODO string name="x_section">X-SECTION</string -->
-    <string name="v_section">V-sección</string>
-    <string name="h_section">H-sección</string>
+    <!-- UNUSED string name="x_section">X-SECTION</string -->
+    <!-- UNUSED string name="v_section">V-sección</string -->
+    <!-- UNUSED string name="h_section">H-sección</string -->
     <!-- UNUSED string name="landscape">Paisaje</string -->
 
     <string name="distox_err_ok">OK</string>
@@ -806,6 +806,31 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+    <!-- TODO string name="hint_notes">notes</string -->
+    <!-- TODO string name="hint_label">label</string -->
+    <!-- TODO string name="hint_comment">comment</string -->
+    <!-- TODO string name="hint_text">text</string -->
+    <!-- TODO string name="hint_options">options</string -->
+    <!-- TODO string name="hint_name">name</string -->
+    <!-- TODO string name="hint_from">from</string -->
+    <!-- TODO string name="hint_to">to</string -->
+    <!-- TODO string name="hint_azimuth">azimuth</string -->
+    <!-- TODO string name="hint_clino">clino</string -->
+    <!-- TODO string name="hint_scale">scale</string -->
+    <!-- TODO string name="hint_roll">roll</string -->
+    <!-- TODO string name="hint_year">year</string -->
+    <!-- TODO string name="hint_month">month</string -->
+    <!-- TODO string name="hint_day">day</string -->
+    <!-- TODO string name="hint_hour">hour</string -->
+    <!-- TODO string name="hint_minute">minute</string -->
+    <!-- TODO string name="hint_second">second</string -->
+    <!-- UNUSED string name="hint_latitude">latitude</string -->
+    <!-- UNUSED string name="hint_longitude">longitude</string -->
+    <!-- UNUSED string name="hint_altitude">altitude</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declination</string -->
+    <!-- TODO string name="hint_station">station</string -->
+
     <string name="orientation">Orientación</string>
     <string name="contents">Contenido</string>
     <string name="error_distribution">Error distribucción</string>
@@ -936,9 +961,9 @@ Refer to the web pages for details.\n
     <string name="help_sdcard">Funciones de memoria DistoX</string>
     <string name="help_read">Descargar calibración de DistoX</string>
     <string name="help_info_device">Información del dispositivo</string>
-    <string name="help_scan">Buscando nuevos dispositivos DistoX</string>
-    <string name="help_scan_ble">Escanear en busca de dispositivos BTLE</string>
-    <string name="help_pair">Emparejar el dispositivo DistoX actual</string>
+    <!-- UNUSED string name="help_scan">Buscando nuevos dispositivos DistoX</string -->
+    <!-- UNUSED string name="help_scan_ble">Escanear en busca de dispositivos BTLE</string -->
+    <!-- UNUSED string name="help_pair">Emparejar el dispositivo DistoX actual</string -->
     <string name="help_open_calib">Abrir la calibración</string>
     <string name="help_export_calib">Exportar calibración</string>
     <string name="help_group">Asignar automáticamente números grupo</string>
@@ -1019,7 +1044,7 @@ Refer to the web pages for details.\n
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <!-- TODO string name="title_device_select">Select DistoX device</string -->
-    <string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string>
+    <!-- UNUSED string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string -->
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
     <string name="title_draw_line">Línea %1$s</string>
@@ -1689,8 +1714,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="title_equates">Project Equates</string -->
     <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
-    <!-- TODO string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_settings">TdManager Settings</string -->
+    <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
     <!-- TODO string name="title_drop">Drop surveys ?</string -->
     <!-- TODO string name="title_tdconfig">Enter project name</string -->
     <!-- TODO string name="title_surveys">Surveys</string -->
@@ -1748,7 +1772,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
     <string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string>
-    <string name="cno_files">No hay archivos</string>
+    <!-- UNUSED string name="cno_files">No hay archivos</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <string name="clear">Limpiar</string>
 
@@ -1777,8 +1801,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="sketch_ok">Read sketch data</string -->
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Rumbo: %3$.0f</string>
-    <string name="ctitle_clino"> Clino: </string>
-    <string name="ctitle_azimuth"> Rumbo: </string>
     <!-- TODO string name="ctitle_surface_alpha">Surface opacity</string -->
     <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
     <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
@@ -1799,13 +1821,13 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="cave_length"> Longitud de la cueva: %1$.2f</string>
     <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
 
-    <string name="SURVEYS">P r o y e c t o</string>
+    <!-- UNUSED string name="SURVEYS">P r o y e c t o</string -->
     <string name="INFO">I n f o r m a c i ó n</string>
     <string name="EXPORT">E x p o r t a r</string>
     <string name="STATIONS">E s t a c i ó n</string>
     <string name="STATIONS_DISTANCE">Distancia estación</string>
-    <string name="DISTANCE">Distancia</string>
-    <!-- TODO string name="CENTER">CENTER</string -->
+    <!-- UNUSED string name="DISTANCE">Distancia</string -->
+    <!-- UNUSED string name="CENTER">CENTER</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
     <string name="Wall">Paredes</string>
@@ -1864,11 +1886,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="no_file">No file %1$s\n</string -->
     <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
 
-    <!-- TODO string name="category_surface">SURFACE</string -->
-    <!-- TODO string name="category_walls">WALLS</string -->
-    <!-- TODO string name="category_stations">STATIONS</string -->
-    <!-- TODO string name="category_grid">GRID</string -->
-    
     <!-- UNUSED string name="cpref_base_path_title">Directorio de la base de datos</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamaño Texto</string -->

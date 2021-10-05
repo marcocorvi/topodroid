@@ -10,3 +10,4 @@
     android:padding="@dimen/paddingmedium"
     android:background="@color/menu_background"
 />
+<!-- background is important, otherwise the menu get confused with the window background -->
