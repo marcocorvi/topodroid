@@ -1756,14 +1756,12 @@ DO NOT REMOVE THIS LINE -->
     <!-- 3D VIEWER strings -->
 
     <string name="cmenu_open">Otvoriť súbor</string>
-    <string name="cmenu_options">Nastavenia</string>
     <string name="cmenu_reset">Reset</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <string name="cmenu_alpha">DEM nepriehľadnosť</string>
     <string name="cmenu_viewpoint">Pohľad z ...</string>
     <!-- UNUSED string name="cmenu_files">Jaskyne</string -->
-    <string name="cmenu_export">Export</string>
     <!-- UNUSED string name="cmenu_frame">Rám</string -->
     <!-- UNUSED string name="cmenu_color">Farba</string -->
     <string name="cmenu_info">Info</string>
@@ -1771,7 +1769,6 @@ DO NOT REMOVE THIS LINE -->
     <string name="cmenu_rose">Ružicový diagram</string>
     <string name="cmenu_wall">Modely Stien</string>
     <!-- UNUSED string name="cmenu_fractal">Fraktálne výpočty</string -->
-    <string name="cmenu_help">Pomoc</string>
 
     <string name="fractal_title">Fraktálne výpočty</string>
     <string name="info_title">INFO</string>

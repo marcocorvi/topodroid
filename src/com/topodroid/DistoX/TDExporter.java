@@ -1216,6 +1216,12 @@ public class TDExporter
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // Therion scraps and maps
+
+  /** write the map commands 
+   * @param pw     output writer
+   * @param info   survey info
+   * @param plots  list of survey sketch files
+   */
   static private void doTherionMaps( PrintWriter pw, SurveyInfo info, List< PlotInfo > plots )
   {
     if ( plots.size() == 0 ) return;
@@ -1252,6 +1258,12 @@ public class TDExporter
     pw.format("\n");
   }
 
+  /** output the survey stations of a data line
+   * @param pw     output writer
+   * @param from   FROM station
+   * @param to     TO station
+   * @param cmtd   whether prepend a comment on the data line
+   */
   static private void writeThStations( PrintWriter pw, String from, String to, boolean cmtd )
   {
     if ( cmtd ) {
@@ -1261,9 +1273,17 @@ public class TDExporter
     }
   }
 
+  /** export survey data in Therion format (.th)
+   * @param bw      output writer
+   * @param sid     survey ID
+   * @param data    database object
+   * @param info    survey info
+   * @param surveyname survey name
+   * @return ???
+   */
   static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // craete thconfig file 
+    if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // create thconfig file 
       synchronized( TDFile.mFilesLock ) {
         // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
         // if ( ! dir.exists() ) dir.mkdirs();
@@ -1654,16 +1674,33 @@ public class TDExporter
     }
   }
 
+  /** write a line in the survex file
+   * @param pw     output writer
+   * @param str    line
+   */
   static private void writeSurvexLine( PrintWriter pw, String str )
   {
     pw.format("%s%s", str, TDSetting.mSurvexEol );
   }
 
+  /** write an end-of-line in the survex file
+   * @param pw     output writer
+   */
   static private void writeSurvexEOL( PrintWriter pw )
   {
     pw.format("%s", TDSetting.mSurvexEol );
   }
 
+  /** write an data line in the survex file
+   * @param pw     output writer
+   * @param first
+   * @param dup    
+   * @param leg    leg average values
+   * @param blk    data block
+   * @param ul     unit of length
+   * @param ua     unit of angle
+   * @return always false
+   */
   static private boolean writeSurvexLeg( PrintWriter pw, boolean first, boolean dup, AverageLeg leg, DBlock blk, float ul, float ua )
   {
     if ( first ) {
@@ -1681,6 +1718,12 @@ public class TDExporter
     return false;
   }
 
+  /** write the LRUD in the survex file
+   * @param pw     output writer
+   * @param st     string to prepend to the LRUD values
+   * @param lrud   LRUD
+   * @param ul     unit of length
+   */
   static private void writeSurvexLRUD( PrintWriter pw, String st, LRUD lrud, float ul )
   {
     if ( lrud != null ) {

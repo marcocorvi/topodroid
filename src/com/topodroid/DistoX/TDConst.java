@@ -52,6 +52,13 @@ public class TDConst
 
   public static final int SURVEY_FORMAT_ZIP = 30;
 
+  public static final int SURVEY_FORMAT_GLTF    = 41;
+  public static final int SURVEY_FORMAT_CGAL    = 42;
+  public static final int SURVEY_FORMAT_STL     = 43;
+  public static final int SURVEY_FORMAT_STL_BIN = 44;
+  public static final int SURVEY_FORMAT_LAS_BIN = 45;
+  public static final int SURVEY_FORMAT_serial  = 46;
+
   public static final String[] mMimeType = {
     "application/octet-stream",  // 0 // Therion
     "application/tlx", // unused
@@ -109,7 +116,40 @@ public class TDConst
     // SURVEY_FORMAT_TROX,
     SURVEY_FORMAT_TOP
   };
-   
+
+  public static final String[] mModelExportTypes = {
+    "gLTF",
+    "CGAL",
+    "STL",
+    "STL-bin",
+    "LAS-bin",
+    "DXF",
+    "KML",
+    "Shapefile"
+  };
+
+  public static final String[] mModelExportTypesNoGeo = {
+    "gLTF",
+    "CGAL",
+    "STL",
+    "STL-bin",
+    "LAS-bin",
+    "DXF"
+    // "KML",
+    // "Shapefile"
+  };
+
+  private static final int[] mModelExportIndex = {
+    SURVEY_FORMAT_GLTF,
+    SURVEY_FORMAT_CGAL,
+    SURVEY_FORMAT_STL,
+    SURVEY_FORMAT_STL_BIN,
+    SURVEY_FORMAT_LAS_BIN,
+    SURVEY_FORMAT_DXF,
+    SURVEY_FORMAT_KML,
+    SURVEY_FORMAT_SHP
+  };
+
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
     "cSurvey",
@@ -182,7 +222,7 @@ public class TDConst
       "cSurvey",
       "DXF",
       "SVG",
-      "SHP",
+      "Shapefile",
       "PNG",
       "PDF",
       "XVI",

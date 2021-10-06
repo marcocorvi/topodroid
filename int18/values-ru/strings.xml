@@ -1725,14 +1725,12 @@
     <!-- 3D VIEWER strings -->
 
     <string name="cmenu_open">Открыть файл</string>
-    <string name="cmenu_options">Настройки</string>
     <string name="cmenu_reset">Сброс</string>
     <!-- UNUSED string name="menu_zoom_one">Зум 1</string -->
 
     <string name="cmenu_alpha">Параметры рельефа DEM</string>
     <string name="cmenu_viewpoint">Точка просмотра</string>
     <!-- UNUSED string name="cmenu_files">Съёмки</string -->
-    <string name="cmenu_export">Экспорт</string>
     <!-- UNUSED string name="cmenu_frame">Рамка</string -->
     <!-- UNUSED string name="cmenu_color">Цвет</string -->
     <string name="cmenu_info">Инфо.</string>
@@ -1740,7 +1738,6 @@
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
     <!-- UNUSED string name="cmenu_fractal">Кол-во фракталофф</string -->
-    <string name="cmenu_help">Помощь</string>
 
     <string name="fractal_title">Кол-во фракталов</string>
     <string name="info_title">ИНФО</string>

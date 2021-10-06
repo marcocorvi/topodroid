@@ -1718,14 +1718,12 @@ Refer to the web pages for details.\n
     <!-- 3D VIEWER strings -->
 
     <string name="cmenu_open">Ouvrir archive</string>
-    <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
     <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
     <!-- UNUSED string name="cmenu_files">Fichier</string -->
-    <string name="cmenu_export">Exporter</string>
     <!-- UNUSED string name="cmenu_frame">Fenêtre</string -->
     <!-- UNUSED string name="cmenu_color">Couleur</string -->
     <string name="cmenu_info">Information</string>
@@ -1733,7 +1731,6 @@ Refer to the web pages for details.\n
     <string name="cmenu_rose">Diagramme rosace</string>
     <string name="cmenu_wall">Menu parois</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
-    <!-- TODO string name="cmenu_help">Help</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
     <string name="info_title">Information</string>

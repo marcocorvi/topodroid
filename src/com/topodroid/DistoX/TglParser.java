@@ -164,7 +164,10 @@ public class TglParser
 
   public DEMsurface getSurface() { return mSurface; }
   public boolean hasSurface() { return mSurface != null; }
-  public boolean hasWall() { return convexhullcomputer != null || ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ); }
+  public boolean hasWall() 
+  { return convexhullcomputer != null
+        || ( powercrustcomputer != null && powercrustcomputer.hasTriangles() );
+  }
   public boolean hasPlanview() { return powercrustcomputer != null && powercrustcomputer.hasPlanview(); }
 
   double getConvexHullVolume() { return ( convexhullcomputer == null )? 0 : convexhullcomputer.getVolume(); }
@@ -556,6 +559,8 @@ public class TglParser
         } else if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
           stl.mTriangles = powercrustcomputer.getTriangles();
           stl.mVertex    = powercrustcomputer.getVertices();
+        } else { 
+          TDLog.v("TODO other walls models"); // TODO
         }
       }
       ret = stl.exportBinary( dos, export.mSplays, export.mWalls, export.mSurface );
@@ -893,6 +898,8 @@ public class TglParser
   // add a fix. The following fix fields are assumed initialized:
   //   name, longitude, latitude, altitude 
   public void addFix( Cave3DFix fix ) { fixes.add( fix ); }
+
+  public boolean hasFixes() { return fixes != null && fixes.size() > 0; }
 
   // add a shot. The following shot fields are assumed initialized:
   //     surveyId, from, to, len, ber, cln, flags, millis

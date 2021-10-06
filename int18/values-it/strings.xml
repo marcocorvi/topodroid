@@ -1736,14 +1736,12 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- 3D VIEWER strings -->
 
     <string name="cmenu_open">Apri file</string>
-    <string name="cmenu_options">Impostazioni</string>
     <string name="cmenu_reset">Reset</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <string name="cmenu_alpha">Trasparenza DEM</string>
     <string name="cmenu_viewpoint">Punto di vista</string>
     <!-- UNUSED string name="cmenu_files">Rilievi</string -->
-    <string name="cmenu_export">Esportazione</string>
     <!-- UNUSED string name="cmenu_frame">Riferimento</string -->
     <!-- UNUSED string name="cmenu_color">Colori</string -->
     <string name="cmenu_info">Informazioni</string>
@@ -1751,7 +1749,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cmenu_rose">Diagramma a rosa</string>
     <string name="cmenu_wall">Modello pareti</string>
     <!-- UNUSED string name="cmenu_fractal">Dim. frattale</string -->
-    <string name="cmenu_help">Aiuto</string>
 
     <string name="fractal_title">Computo frattale</string>
     <string name="info_title">INFO</string>

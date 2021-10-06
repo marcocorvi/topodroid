@@ -1725,14 +1725,12 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO 3D VIEWER strings-->
 
     <string name="cmenu_open">Abrir Archivo</string>
-    <string name="cmenu_options">Opciones</string>
     <string name="cmenu_reset">Resetear</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
     <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
     <!-- UNUSED string name="cmenu_files">Proyecto</string -->
-    <string name="cmenu_export">Exportar</string>
     <!-- UNUSED string name="cmenu_frame">Encuadre</string -->
     <!-- UNUSED string name="cmenu_color">Color</string -->
     <string name="cmenu_info">Información</string>
@@ -1740,7 +1738,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
-    <!-- TODO string name="cmenu_help">Help</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
     <string name="info_title">Información</string>

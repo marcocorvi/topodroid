@@ -1765,14 +1765,12 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cbtn_bind">Újraköt</string>
 
     <string name="cmenu_open">Fájl megnyitás</string>
-    <string name="cmenu_options">Opciók</string>
     <string name="cmenu_reset">Visszaállít</string>
 
     <string name="cmenu_alpha">Felület</string>
     <!-- UNUSED string name="cmenu_ble">BT mérések</string -->
     <string name="cmenu_viewpoint">Nézőpont</string>
     <!-- UNUSED string name="cmenu_files">Mérések</string -->
-    <string name="cmenu_export">Export</string>
     <!-- UNUSED string name="cmenu_frame">Keret</string -->
     <!-- UNUSED string name="cmenu_color">Szín</string -->
     <string name="cmenu_info">Infó</string>
@@ -1781,7 +1779,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cmenu_wall">Fal modellek</string>
     <string name="cmenu_sketch">Vázlatok</string>
     <!-- UNUSED string name="cmenu_fractal">Fraktál számítás</string -->
-    <string name="cmenu_help">Súgó</string>
 
     <string name="fractal_title">Fraktál számítás</string>
     <string name="info_title">INFO</string>

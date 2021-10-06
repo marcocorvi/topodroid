@@ -1723,14 +1723,12 @@ Refer to the web pages for details.\n
     <!-- 3D VIEWER strings -->
 
     <string name="cmenu_open">Abrir arquivo</string>
-    <string name="cmenu_options">Opções</string>
     <string name="cmenu_reset">Reiniciar</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
     <string name="cmenu_viewpoint">Ponto de vista</string>
     <!-- UNUSED string name="cmenu_files">Topos</string -->
-    <string name="cmenu_export">Exportar</string>
     <!-- UNUSED string name="cmenu_frame">Quadro</string -->
     <!-- UNUSED string name="cmenu_color">Cor</string -->
     <string name="cmenu_info">Info</string>
@@ -1738,7 +1736,6 @@ Refer to the web pages for details.\n
     <string name="cmenu_rose">Diagrama Rose</string>
     <string name="cmenu_wall">Modo parede</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
-    <!-- TODO string name="cmenu_help">Help</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
 

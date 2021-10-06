@@ -1741,14 +1741,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="cbtn_bind">Rebind</string>
 
     <string name="cmenu_open">Open file</string>
-    <string name="cmenu_options">Options</string>
     <string name="cmenu_reset">Reset</string>
 
     <string name="cmenu_alpha">Surface</string>
     < UNUSED string name="cmenu_ble">BT surveys</string>
     <string name="cmenu_viewpoint">Viewpoint</string>
     < UNUSED string name="cmenu_files">Surveys</string>
-    <string name="cmenu_export">Export</string>
     < UNUSED string name="cmenu_frame">Frame</string>
     < UNUSED string name="cmenu_color">Color</string>
     <string name="cmenu_info">Info</string>
@@ -1757,7 +1755,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="cmenu_wall">Wall models</string>
     <string name="cmenu_sketch">Sketches</string>
     < UNUSED string name="cmenu_fractal">Fractal counts</string>
-    <string name="cmenu_help">Help</string>
 
     <string name="fractal_title">Fractal counts</string>
     <string name="info_title">INFO</string>

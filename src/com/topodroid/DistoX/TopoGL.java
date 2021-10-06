@@ -298,7 +298,7 @@ public class TopoGL extends Activity
     // TDLog.v("on create");
     checkPreferences();
 
-    setContentView( R.layout.cave3d_main );
+    setContentView( R.layout.cave3d_activity );
     mLayout = (LinearLayout) findViewById( R.id.view_layout );
     // mText   = (TextView) findViewById( R.id.text );
 
@@ -545,7 +545,7 @@ public class TopoGL extends Activity
 
   private static final int[] menus = {
     R.string.cmenu_open,       // 0
-    R.string.cmenu_export,
+    R.string.menu_export,
     // R.string.cmenu_ble, // FIXME BLUETOOTH  MENU
     R.string.cmenu_info,       // 3
     R.string.cmenu_ico,
@@ -556,9 +556,9 @@ public class TopoGL extends Activity
     R.string.cmenu_wall,       // 9
     // R.string.cmenu_temp,       // 10 TEMPERATURE
     R.string.cmenu_sketch,     // 11
-    R.string.cmenu_options,
+    R.string.menu_options,
     // R.string.cmenu_fractal, // FRACTAL
-    R.string.cmenu_help
+    R.string.menu_help
   };
 
   private static final int[] help_menus = {
@@ -618,7 +618,12 @@ public class TopoGL extends Activity
       selectImportFile();
     } else if ( p++ == pos ) { // EXPORT
       if ( mParser != null ) {
-        (new DialogExport( this, this, mParser )).show(); // this calls selectExportFile( export );
+        // (new DialogExport( this, this, mParser )).show(); // this calls selectExportFile( export );
+        if ( mParser.hasFixes() ) { // this calls selectExportFile( export );
+          (new ExportDialogModel( this, this, mParser, TDConst.mModelExportTypes, R.string.export_model_title)).show();
+        } else {
+          (new ExportDialogModel( this, this, mParser, TDConst.mModelExportTypesNoGeo, R.string.export_model_title)).show();
+        }
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }

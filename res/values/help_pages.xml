@@ -124,7 +124,6 @@
 
   <string name="DialogIco" translatable="false">page_3d_ico.htm</string>
   <string name="DialogView" translatable="false">page_3d_view.htm</string>
-  <string name="DialogExport" translatable="false">page_3d_export.htm</string>
   <string name="DialogInfo" translatable="false">page_3d_info.htm</string>
   <string name="DialogLegs" translatable="false">page_3d_legs.htm</string>
   <string name="DialogProjection" translatable="false">page_3d_proj.htm</string>
