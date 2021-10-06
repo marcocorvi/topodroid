@@ -42,8 +42,8 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.help.HelpDialog;
 
 import com.topodroid.ui.MyButton;
-import com.topodroid.ui.MyMenuAdapter;
-import com.topodroid.ui.MyMenuItem;
+// import com.topodroid.ui.MyMenuAdapter;
+// import com.topodroid.ui.MyMenuItem;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 
@@ -109,6 +109,7 @@ import android.widget.ListView;
 import android.widget.CheckBox;
 // import android.widget.TextView;
 import android.widget.LinearLayout;
+import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
@@ -335,7 +336,6 @@ public class TopoGL extends Activity
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    mMenuAdapter = null;
     setMenuAdapter( getResources() );
     closeMenu();
 
@@ -541,7 +541,6 @@ public class TopoGL extends Activity
 
   Button     mMenuImage = null;
   ListView   mMenu = null;
-  MyMenuAdapter mMenuAdapter = null;
   boolean    onMenu = false;
 
   private static final int[] menus = {
@@ -582,30 +581,22 @@ public class TopoGL extends Activity
 
   void setMenuAdapter( Resources res )
   {
-    // TDPath.hasC3dDir(); // this was useless because it only checks if the path exists (was Cave3DFile)
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>( this, R.layout.menu );
 
-    // if ( mMenuImage != null ) { // not neceessary
-    //   int size = TopoDroidApp.getScaledSize( this );
-    //   MyButton.setButtonBackground( this, mMenuImage, size, R.drawable.iz_menu );
-    // }
-    if ( mMenu != null ) {
-      mMenuAdapter = new MyMenuAdapter( this, this, mMenu, R.layout.menu, new ArrayList< MyMenuItem >() );
-      for ( int k=0; k<menus.length; ++k ) {
-        // if ( k == MENU_BT  && ! ( mWithBluetooth && hasBluetoothName() ) ) continue; // FIXME BLUETOOTH  MENU
-        if ( k == MENU_C3D && ! mHasC3d ) continue;
+    for ( int k=0; k<menus.length; ++k ) {
+      // if ( k == MENU_BT  && ! ( mWithBluetooth && hasBluetoothName() ) ) continue; // FIXME BLUETOOTH  MENU
+      if ( k == MENU_C3D && ! mHasC3d ) continue;
             
-        mMenuAdapter.add( res.getString( menus[k] ) );
-      }
-      mMenu.setAdapter( mMenuAdapter );
-      mMenu.invalidate();
+      menu_adapter.add( res.getString( menus[k] ) );
     }
+    mMenu.setAdapter( menu_adapter );
+    mMenu.invalidate();
   }
 
   // used by GlSurfaceView
   void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
-    mMenuAdapter.resetBgColor();
     onMenu = false;
   }
 

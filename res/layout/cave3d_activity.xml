@@ -53,16 +53,7 @@
           android:gravity="right"
           >
           <ListView android:id="@+id/menu"
-            android:layout_width="150dp"
-            android:layout_height="wrap_content"
-            android:choiceMode="singleChoice"
-            android:divider="@android:color/transparent"
-            android:dividerHeight="10dp"
-            android:orientation="vertical"
-            android:layout_gravity="right"
-            android:gravity="right"
-            android:textSize="@dimen/textsize"
-            android:background="@color/edit_background"
+            style="@style/menu_default"
             />
         </LinearLayout>
     </LinearLayout>
