@@ -37,6 +37,7 @@ import android.net.Uri;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.io.DataOutputStream;
 
 public class GlRenderer implements Renderer 
 {
@@ -740,11 +741,11 @@ public class GlRenderer implements Renderer
   // @param pathname export path - can be filepath ending in gltf, or a folder name
   //     filepath.gltf:   additional files saved as filepath-XXX
   //     folder:          additional files saved as folder/XXX, gltf file saved as "folder.gltf"
-  boolean exportGltf( String pathname, ExportData export )
+  boolean exportGltf( DataOutputStream fos, String pathname, ExportData export )
   {
     if ( mModel == null ) return false;
     ExportGltf gltf = new ExportGltf( mModel );
-    return gltf.write( pathname );
+    return gltf.write( fos, pathname, export.mName );
   }
 
   // FIXME BLUETOOTH INCREMENTAL

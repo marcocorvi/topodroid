@@ -1003,11 +1003,15 @@ public class TopoDroidApp extends Application
   static int mManifestDbVersion = 0;
 
   // returns
-  //  0 ok
+  //  >=0 ok
   // -1 survey already present
   // -2 TopoDroid version mismatch
-  // -3 database version mismatch
-  // -4 survey name does not match filename
+  // -3 database version mismatch: manifest_DB_version < min_DB_version
+  // -4 database version mismatch: manifest_DB_version > current DB_version
+  // -5 survey name does not match filename
+  // -10 number format error
+  // -11 file not found
+  // -12 IO error
   //
   // @note surveyname is modified
   static public int checkManifestFile( String filename, String surveyname )
@@ -1032,13 +1036,16 @@ public class TopoDroidApp extends Application
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
         TDLog.Error( "parse error: db version " + line );
+        return -10;
       }
       
-      if ( ! (    mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN
-               && mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
-        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " expected " + 
-                     + TDVersion.DATABASE_VERSION_MIN + "-" + TDVersion.DATABASE_VERSION );
+      if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
+        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " min " + + TDVersion.DATABASE_VERSION_MIN );
         return -3;
+      }
+      if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
+        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
+        return -4;
       }
       surveyname = br.readLine().trim();
       // if ( ! line.equals( surveyname ) ) return -4;
@@ -1049,17 +1056,22 @@ public class TopoDroidApp extends Application
       fr.close();
     } catch ( NumberFormatException e ) {
       TDLog.Error( "TopoDroid check manifest error: " + e.getMessage() );
-      return -3;
+      return -10;
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "TopoDroid check manifest file not found: " + e.getMessage() );
-      return -3;
+      return -11;
     } catch ( IOException e ) {
       TDLog.Error( "TopoDroid check manifest I/O error: " + e.getMessage() );
-      return -3;
+      return -12;
     }
     return ret;
   }
 
+  // returns
+  //   -10 number format error
+  //   -2  version is too old
+  //   0   version is in acceptable range
+  //   1   version is newer than this app
   private static int checkVersionLine( String version_line )
   {
     int ret = 0;
@@ -1070,7 +1082,9 @@ public class TopoDroidApp extends Application
         try {
           version_code = Integer.parseInt( vers[k] );
           break;
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { 
+          // this is OK
+        }
       }
     }
     if ( version_code == 0 ) {
@@ -1085,7 +1099,7 @@ public class TopoDroidApp extends Application
           minor = Integer.parseInt( ver[1] );
         } catch ( NumberFormatException e ) {
           TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
-          return -2;
+          return -10;
         }
         int k = 0;
         while ( k < ver[2].length() ) {
@@ -1125,7 +1139,7 @@ public class TopoDroidApp extends Application
           }
         } catch ( NumberFormatException e ) {
           TDLog.Error( "parse error: version code " + ver[0] + " " + e.getMessage() );
-          return -2;
+          return -10;
         }
         if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
       }

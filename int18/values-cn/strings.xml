@@ -1004,8 +1004,10 @@ Refer to the web pages for details.\n
     <string name="export_splays">辐测</string>
     <string name="export_splays_named">辐测名称</string>
     <string name="export_stations">测量点</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">左右交换 L/R</string>
     <!-- TODO string name="export_trox">Trox format</string -->
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Xvi 图像</string>
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
     <!-- TODO string name="export_with_reference">Include XY reference</string -->
@@ -1874,8 +1876,6 @@ Refer to the web pages for details.\n
     <string name="select_dem_file">Select a DEM file</string>
     <string name="select_texture_file">Select a texture file</string>
     <string name="select_sketch_file">Select a sketch file</string>
-    <string name="Wall">Walls</string>
-    <string name="Surface">Surface</string>
 
     <string name="view_title">VIEWPOINTS</string>
     <string name="view_top">Top</string>

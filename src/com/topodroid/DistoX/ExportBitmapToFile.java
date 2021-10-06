@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
+import com.topodroid.prefs.TDSetting;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +39,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 
     ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
-       // if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
+       if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
@@ -67,6 +68,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         */
         TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
+        TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
         FileOutputStream out = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();

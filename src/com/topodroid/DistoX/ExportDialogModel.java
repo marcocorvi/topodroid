@@ -121,7 +121,18 @@ public class ExportDialogModel extends MyDialog
         ((CheckBox) findViewById( R.id.model_walls )).isChecked( ),
         ((CheckBox) findViewById( R.id.model_surface )).isChecked( ),
         true ); // overwrite
-      mParent.selectExportFile( export );
+      switch ( mSelectedPos ) {
+        case 0: export.mType = ModelType.GLTF; break;
+        case 1: export.mType = ModelType.CGAL_ASCII; break;
+        case 2: export.mType = ModelType.STL_ASCII; break;
+        case 3: export.mType = ModelType.STL_BINARY; break;
+        case 4: export.mType = ModelType.LAS_BINARY; break;
+        case 5: export.mType = ModelType.DXF_ASCII; break;
+        case 6: export.mType = ModelType.KML_ASCII; break;
+        case 7: export.mType = ModelType.SHP_ASCII; break;
+        case 8: export.mType = ModelType.SERIAL; break; // TODO 
+      }
+      if ( export.mType > 0 ) mParent.selectExportFile( export );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

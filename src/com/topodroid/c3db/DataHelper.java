@@ -63,7 +63,7 @@ public class DataHelper extends DataSetObservable
 
   public DataHelper( Context context, String db_name, int db_version )
   {
-    TDLog.v( "data helper cstr - database " + db_name + " version " + db_version );
+    // TDLog.v( "data helper cstr - database " + db_name + " version " + db_version );
     openDatabase( context, db_name, db_version );
   }
 
@@ -77,7 +77,7 @@ public class DataHelper extends DataSetObservable
   private void openDatabase( Context context, String database_name, int db_version )
   {
     // String database_name = TDPath.getDatabase();
-    TDLog.v( "open database ");
+    // TDLog.v( "open database ");
     try {
         // DistoXOpenHelper openHelper = new DistoXOpenHelper( context, database_name, db_version );
         // myDB = openHelper.getWritableDatabase();
@@ -87,7 +87,7 @@ public class DataHelper extends DataSetObservable
           TDLog.Error("DB failed get readable database" );
           return;
         } 
-        TDLog.v("DB opened database");
+        // TDLog.v("DB opened database");
 
         // while ( myDB.isDbLockedByOtherThreads() ) {
         //   TDUtil.slowDown( 200 );
@@ -169,7 +169,7 @@ public class DataHelper extends DataSetObservable
 
   public SurveyInfo getSurveyInfo( String name )
   {
-    TDLog.v("DB get survey " + name );
+    // TDLog.v("DB get survey " + name );
     if ( myDB == null ) return null;
     SurveyInfo info = null;
     Cursor cursor = myDB.query( SURVEY_TABLE,
@@ -183,7 +183,7 @@ public class DataHelper extends DataSetObservable
       info.date    = cursor.getString( 2 );
       info.team    = cursor.getString( 3 );
       info.declination = cursor.getDouble( 4 );
-      TDLog.v("DB got survey " + name );
+      // TDLog.v("DB got survey " + name );
     }
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return info;
@@ -191,7 +191,7 @@ public class DataHelper extends DataSetObservable
 
   public List<SurveyFixed> getSurveyFixeds( long sid )
   {
-    TDLog.v("DB get fixed stations" );
+    // TDLog.v("DB get fixed stations" );
     if ( myDB == null ) return null;
     List<SurveyFixed> ret = new ArrayList<SurveyFixed>();
     Cursor cursor = myDB.query( "fixeds", // FIXED_TABLE,

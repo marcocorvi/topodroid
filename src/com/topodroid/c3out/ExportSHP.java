@@ -12,11 +12,13 @@
 package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.TglParser;
 import com.topodroid.DistoX.Triangle3D;
 import com.topodroid.DistoX.Vector3D;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DShot;
+import com.topodroid.DistoX.Archiver;
 // import com.topodroid.DistoX.Cave3DFile;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.c3walls.cw.CWFacet;
@@ -27,7 +29,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import java.io.File;
+// import java.io.File;
+import java.io.OutputStream;
 import java.io.IOException;
 
 
@@ -70,22 +73,21 @@ public class ExportSHP
   // ---------------------------------------------------------------------------
 
   // @param name survey/model name
-  public boolean exportASCII( String name, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls )
+  public boolean exportASCII( OutputStream zos, String filepath, String name, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls )
   {
-    if ( data == null ) return false;
+    // if ( data == null ) return false;
+    if ( ! TDFile.makeMSdir( filepath ) ) {
+      TDLog.Error("mkdir " + filepath + " error");
+      return false;
+    }
+    // TDLog.v("shp export. dirname " + filepath + " name " + name );
 
     boolean ret = true;
-    ArrayList<File> files = new ArrayList<File>();
+    ArrayList< String > files = new ArrayList<>();
 
-    // String filepath = Cave3DFile.getExportFilepath( name );
-    String filepath = TDPath.getC3exportFile( name ); // export temporary folder for shp files
-    String filename = filepath + ".shz";              // export shp file (zipped)
-    TDLog.v( "export SHP: L " + b_legs + " S " + b_splays + " W " + b_walls + "> " + filename ); 
-
-    File path = new File(filepath);
-    if ( ! path.exists() ) {
-      path.mkdirs();
-    }
+    String subname  = "c3export/" + name;
+    // this is dirname
+    // String filepath = TDPath.getC3exportFile( name ); // export temporary folder for shp files - fullpath
 
     if ( ret )             ret &= exportStations( filepath, files, data.getStations() );
     if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg" );
@@ -97,89 +99,79 @@ public class ExportSHP
 
     if ( files.size() == 0 ) ret = false;
     if ( ret ) {
-      TDLog.v( "export SHP: make zip " + filename + " " + files.size() );
+      // TDLog.v( "export SHP: make zip. files " + files.size() );
       Archiver zipper = new Archiver( );
-      zipper.compressFiles( filename, files );
+      zipper.compressFiles( zos, subname, files );
+      try {
+        zos.close();
+      } catch ( IOException e ) {
+        // TODO
+      }
     }
-    deleteDir( path ); // delete temporary shapedir
+    TDFile.deleteMSdir( filepath ); // delete temporary dir
 
-    TDLog.v( "export SHP: returns " + ret );
+    // TDLog.v( "export SHP: returns " + ret );
     return ret;
   }
 
-  private boolean exportStations( String filepath, List<File> files, List< Cave3DStation> stations )
+  private boolean exportStations( String filepath, List<String> files, List< Cave3DStation> stations )
   {
     if ( stations == null || stations.size() == 0 ) return true;
-    TDLog.v( "SHP Export stations " + stations.size() );
+    // TDLog.v( "SHP Export stations " + stations.size() + " path " + filepath );
     boolean ret = false;
     try {
-      ShpPointz shp = new ShpPointz( filepath + "/station",  files );
+      ShpPointz shp = new ShpPointz( filepath + "/station", "station",  files );
       // shp.setYYMMDD( info.date );
       ret = shp.writeStations( stations );
     } catch ( IOException e ) {
-      TDLog.v( "SHP Failed station export: " + e.getMessage() );
+      TDLog.Error( "SHP Failed station export: " + e.getMessage() );
     }
     return ret;
   }
     
-  private boolean exportShots( String filepath, List<File> files, List< Cave3DShot> shots, String name )
+  private boolean exportShots( String filepath, List<String> files, List< Cave3DShot> shots, String name )
   {
     if ( shots == null || shots.size() == 0 ) return true;
-    TDLog.v( "SHP Export " + name + " shots " + shots.size() );
+    // TDLog.v( "SHP Export " + name + " shots " + shots.size() );
     boolean ret = false;
     try {
-      ShpPolylinez shp = new ShpPolylinez( filepath + "/" + name, files );
+      ShpPolylinez shp = new ShpPolylinez( filepath + "/" + name, name, files );
       // shp.setYYMMDD( info.date );
       ret = shp.writeShots( shots, name );
     } catch ( IOException e ) {
-      TDLog.v( "SHP Failed " + name + " export: " + e.getMessage() );
+      TDLog.Error( "SHP Failed " + name + " export: " + e.getMessage() );
     }
     return ret;
   }
 
-  private boolean exportFacets( String filepath, List<File> files, List< CWFacet > facets )
+  private boolean exportFacets( String filepath, List<String> files, List< CWFacet > facets )
   {
     if ( facets == null || facets.size() == 0 ) return true;
-    TDLog.v( "SHP Export facets " + facets.size() );
+    // TDLog.v( "SHP Export facets " + facets.size() );
     boolean ret = false;
     try {
-      ShpPolygonz shp = new ShpPolygonz( filepath + "/facet", files );
+      ShpPolygonz shp = new ShpPolygonz( filepath + "/facet", "facet", files );
       // shp.setYYMMDD( info.date );
       ret = shp.writeFacets( facets );
     } catch ( IOException e ) {
-      TDLog.v( "SHP Failed facet export: " + e.getMessage() );
+      TDLog.Error( "SHP Failed facet export: " + e.getMessage() );
     }
     return ret;
   }
 
-  private boolean exportTriangles( String filepath, List<File> files, List< Triangle3D > triangles )
+  private boolean exportTriangles( String filepath, List<String> files, List< Triangle3D > triangles )
   {
     if ( triangles == null || triangles.size() == 0 ) return true;
-    TDLog.v( "SHP Export triangles " + triangles.size() );
+    // TDLog.v( "SHP Export triangles " + triangles.size() );
     boolean ret = false;
     try {
-      ShpPolygonz shp = new ShpPolygonz( filepath + "/triangle", files );
+      ShpPolygonz shp = new ShpPolygonz( filepath + "/triangle", "triangle", files );
       // shp.setYYMMDD( info.date );
       ret = shp.writeTriangles( mTriangles );
     } catch ( IOException e ) {
-      TDLog.v( "SHP Failed triangle export: " + e.getMessage() );
+      TDLog.Error( "SHP Failed triangle export: " + e.getMessage() );
     }
     return ret;
-  }
-
-  static void deleteDir( File dir )
-  {
-    if ( dir != null && dir.exists() ) {
-      File[] files = dir.listFiles();
-      if ( files != null ) {
-        for (File file : files ) {
-          if (file.isFile()) {
-            if ( ! file.delete() ) TDLog.v( "SHP File delete failed " + file.getName() ); 
-          }
-        }
-      }
-      if ( ! dir.delete() ) TDLog.v( "SHP Dir delete failed " + dir.getName() );
-    }
   }
 
 }

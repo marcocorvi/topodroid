@@ -186,14 +186,14 @@ public class Archiver
   public boolean compressFiles( OutputStream os, String subdir, List< String > filenames )
   {
     // here zipname is the full absolute zipfile path
-    // TDLog.v( "ZIP-compress files to " + zipdir + " " + zipname );
+    // TDLog.v( "ZIP-compress files. subdir " + subdir );
     ZipOutputStream zos = null;
     boolean ret = true;
     // try {
       zos = new ZipOutputStream( new BufferedOutputStream( os ) );
       for ( String filename : filenames ) {
         // the file.getPath() is the full absolute file path
-        TDLog.v( "ZIP-compress files: add " + subdir + " " + filename );
+        // TDLog.v( "ZIP-compress files: add file " + filename );
         ret &= addEntry( zos, subdir, filename );
       }
       // for ( File file : files ) TDFile.deleteFile( file );
@@ -646,12 +646,12 @@ public class Archiver
             fout = TDFile.getFileOutputStream( pathname );
             int size = decompressEntry( zin, ze, fout );
             // TDLog.Log( TDLog.LOG_ZIP, "Unzip file \"" + pathname + "\" size " + size );
-            TDLog.v( "Unzip file \"" + pathname + "\" size " + size );
+            // TDLog.v( "Unzip file \"" + pathname + "\" size " + size );
             fout.close();
             if ( size > 0 ) {
               if ( sql ) {
                 // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
-                TDLog.v( "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
+                // TDLog.v( "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
                 sql_success = ( app_data.loadFromFile( pathname, mApp.mManifestDbVersion ) >= 0 );
                 TDFile.deleteFile( pathname );
               }
@@ -686,10 +686,10 @@ public class Archiver
       ZipInputStream zin = new ZipInputStream( fis );
       int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {
-        TDLog.v( "get OK manifest: zentry name " + ze.getName() );
+        // TDLog.v( "get OK manifest: zentry name " + ze.getName() );
         if ( ze.getName().equals( "manifest" ) ) {
           String pathname = TDPath.getManifestFile( );
-          TDLog.v( "OK imanifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
+          // TDLog.v( "OK imanifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
           FileOutputStream fout = TDFile.getFileOutputStream( pathname );
           int size = decompressEntry( zin, ze, fout );
           // TDLog.Log( TDLog.LOG_ZIP, "Zip imanifest: \"" + ze.getName() + "\" size " + size );
@@ -702,7 +702,7 @@ public class Archiver
           TDFile.deleteFile( pathname );
           if ( ok_manifest < 0 ) return ok_manifest;
           // TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
-          TDLog.v( "un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );
+          // TDLog.v( "un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );
           break;
         }
         zin.closeEntry();

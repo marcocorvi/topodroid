@@ -490,7 +490,7 @@ public class MainWindow extends Activity
   // @param type   file extension (including the dot)
   public void importStream( FileInputStream fis, String name, String type )
   {
-    // TDLog.v( "import with stream <" + name + "> type <" + type + ">" );
+    TDLog.v( "import with stream <" + name + "> type <" + type + ">" );
     // FIXME connect-title string
     if ( type.equals(".top") ) {
       setTitleImport();
@@ -1110,7 +1110,7 @@ public class MainWindow extends Activity
               File file = new File(path);
               filename = file.getName();
             }
-            // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+            TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {
             filename = uri.getLastPathSegment();
             int pos = filename.lastIndexOf(".");
@@ -1118,7 +1118,7 @@ public class MainWindow extends Activity
             String ext  = filename.substring( pos ).toLowerCase(); // extension with leading '.'
             String name = filename.substring( qos+1, pos );
             String surveyname = name;
-            // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
+            TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
               FileInputStream fis = TDsafUri.docFileInputStream( uri );
               // if ( fis.markSupported() ) fis.mark();

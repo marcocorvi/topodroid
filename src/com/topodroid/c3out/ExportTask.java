@@ -21,6 +21,7 @@ import com.topodroid.DistoX.TopoGL;
 // import com.topodroid.DistoX.Cave3DFile;
 import com.topodroid.DistoX.TDPath;
 
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 
 import android.os.AsyncTask;
@@ -38,32 +39,47 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
 {
   private TopoGL mApp;
   private TglParser mParser;
-  private Uri mUri;
+  private Uri mUri = null;
   private ExportData mExport;
 
-  public ExportTask( TopoGL app, TglParser parser, Uri uri, String surveyname, ExportData export )
+  public ExportTask( TopoGL app, TglParser parser, Uri uri, ExportData export )
   {
     mApp    = app;
     mParser = parser;
-    mUri    = uri;
-    mExport = new ExportData( surveyname, export );
+    if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
+    mExport = export; // new ExportData( surveyname, export );
   }
 
   @Override
   public Boolean doInBackground( Void ... args )
   {
+    OutputStreamWriter osw = null;
+    DataOutputStream dos = null;
+
+    TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType );
+
     // String pathname = Cave3DFile.getExportFilepath( mExport.mName );
     String pathname = TDPath.getC3exportFile( mExport.mName );
     if ( mExport.mType == ModelType.GLTF ) { 
-      // TDLog.v( "export model GLTF " + pathname );
-      return mApp.exportGltfModel( mExport.mType, pathname + ".gltf", mExport );
+      try {
+        // TDLog.v( "export model GLTF. path " + pathname + " uri " + ((mUri!=null)? mUri.toString() : "null" ) );
+        dos = new DataOutputStream( (mUri != null)? mApp.getContentResolver().openOutputStream( mUri ) : new FileOutputStream( pathname + ".glz" ) );
+        return mApp.exportGltfModel( mExport.mType, dos, pathname, mExport );
+      } catch ( IOException e ) {
+       TDLog.Error("IO error " + e.getMessage() );
+      }
+      return false;
     } else if ( mExport.mType == ModelType.SHP_ASCII ) { // SHP export is only with its file and folder
-      // TDLog.v( "export model SHP " + pathname );
-      return mParser.exportModelAscii( mExport.mType, null, mExport );
+      try {
+        // TDLog.v( "export model SHP " + pathname );
+        dos = new DataOutputStream( (mUri != null)? mApp.getContentResolver().openOutputStream( mUri ) : new FileOutputStream( pathname + ".shz" ) );
+        return mApp.exportShpModel( mExport.mType, dos, pathname, mExport );
+      } catch ( IOException e ) {
+       TDLog.Error("IO error " + e.getMessage() );
+      }
+      return false;
     }
     
-    OutputStreamWriter osw = null;
-    DataOutputStream dos = null;
     try {
       // TDLog.v( "try export model type " + mExport.mType + " " + pathname );
       switch ( mExport.mType ) {
@@ -92,10 +108,10 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
           break;
       }
       if ( dos != null ) {
-        // TDLog.v("export binary model");
+        TDLog.v("export binary model. type " + mExport.mType );
         return mParser.exportModelBinary( mExport.mType, dos, mExport );
       } else if ( osw != null ) {
-        // TDLog.v("export ascii model");
+        TDLog.v("export ascii model. type " + mExport.mType );
         return mParser.exportModelAscii( mExport.mType, osw, mExport );
       } else {
         TDLog.Error("Failed export - null stream"); 

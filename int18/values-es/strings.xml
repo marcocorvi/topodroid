@@ -998,8 +998,10 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_splays">Splays</string -->
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <!-- TODO string name="export_stations">Stations</string -->
+    <!-- TODO string name="export_surface">Surface</string -->
     <!-- TODO string name="export_swap_lr">Swap L/R</string -->
     <!-- TODO string name="export_trox">Trox format</string -->
+    <!-- TODO string name="export_walls">Walls</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
     <!-- TODO string name="export_with_reference">Include XY reference</string -->
@@ -1827,8 +1829,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="CENTER">CENTER</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
-    <string name="Wall">Paredes</string>
-    <string name="Surface">Superficie</string>
 
     <string name="view_title">PUNTOS DE VISTA</string>
     <string name="view_top">Parte superior</string>

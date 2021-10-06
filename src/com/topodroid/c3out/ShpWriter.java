@@ -19,7 +19,7 @@ import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
    
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
@@ -58,6 +58,7 @@ class ShpObject
   int mGeomType; // geom type
   int nr;   // nuber of objects
   String path; // file path 
+  String name; // file name 
   int year, month, day;
 
   double xmin, xmax, ymin, ymax, zmin, zmax; // bounding box
@@ -73,18 +74,20 @@ class ShpObject
   FileOutputStream shxFos;
   FileOutputStream dbfFos;
 
-  List<File> mFiles; // list of files to which append my files
+  List<String> mFiles; // list of files to which append my files
 
   // @param yy year [four digit]
   // @param mm month [1..12]
   // @param dd day [1..31]
-  ShpObject( int typ, String pth, List<File> files ) // throws IOException
+  ShpObject( int typ, String pth, String nam, List<String> files ) // throws IOException
   { 
     mGeomType  = typ;
     nr    = 0;
     path  = pth;
+    name  = nam;
     mFiles = files;
     setYYMMDD( );
+    TDLog.v("SHP object. path " + path + " name " + name );
   }
 
   protected void open( ) throws IOException
@@ -97,9 +100,9 @@ class ShpObject
       shxChannel = shxFos.getChannel();
       dbfChannel = dbfFos.getChannel();
       if ( mFiles != null ) {
-        mFiles.add( new File( path + ".shp" ) );
-        mFiles.add( new File( path + ".shx" ) );
-        mFiles.add( new File( path + ".dbf" ) );
+        mFiles.add( name + ".shp" );
+        mFiles.add( name + ".shx" );
+        mFiles.add( name + ".dbf" );
       }
     } catch ( IOException e ) {
       TDLog.Error( "SHP output streams " + e.getMessage() );
@@ -441,9 +444,9 @@ class ShpPointz extends ShpObject
 {
   private static int mShpType = SHP_POINTZ;
 
-  ShpPointz( String path, List<File> files ) // throws IOException
+  ShpPointz( String path, String name, List<String> files ) // throws IOException
   {
-    super( mShpType, path, files );
+    super( mShpType, path, name, files );
   }
 
   // write headers for POINTZ
@@ -525,9 +528,9 @@ class ShpPolylinez extends ShpObject
 {
   static final int mShpType = SHP_POLYLINEZ;
 
-  ShpPolylinez( String path, List<File> files ) // throws IOException
+  ShpPolylinez( String path, String name, List<String> files ) // throws IOException
   {
-    super( mShpType, path, files );
+    super( mShpType, path, name, files );
   }
 
   boolean writeShots( List< Cave3DShot > lns0, String name ) throws IOException
@@ -574,7 +577,7 @@ class ShpPolylinez extends ShpObject
     shpBuffer = writeShapeHeader( shpBuffer, mShpType, shpLength );
     shxBuffer = writeShapeHeader( shxBuffer, mShpType, shxLength );
     writeDBaseHeader( nr, dbfRecLen, n_fld, fields, ftypes, flens );
-    TDLog.v( "SHP shots done headers" );
+    // TDLog.v( "SHP shots done headers" );
 
     int cnt = 0;
     for ( Cave3DShot ln : lns ) {
@@ -589,7 +592,7 @@ class ShpPolylinez extends ShpObject
       fields[1] = p1.getShortName(); 
       fields[2] = p2.getShortName();
       fields[3] = p1.getSurvey();
-      TDLog.v( "SHP shots fields " + fields[1] + " " + fields[2] + " " + fields[3] );
+      // TDLog.v( "SHP shots fields " + fields[1] + " " + fields[2] + " " + fields[3] );
       // fields[3] = String.format("0x%02x", ln.getReducedFlag() ); // flag
       // fields[4] = ln.getComment();
       writeDBaseRecord( n_fld, fields, flens );
@@ -689,9 +692,9 @@ class ShpPolygonz extends ShpObject
 {
   static final int mShpType = SHP_POLYGONZ; // SHP_POLYLINEZ
 
-  ShpPolygonz( String path, List<File> files ) // throws IOException
+  ShpPolygonz( String path, String name, List<String> files ) // throws IOException
   {
-    super( mShpType, path, files );
+    super( mShpType, path, name, files );
   }
 
   @Override protected int getShpRecordLength( ) { return 108; } // POLIGONZ 76 + 4*8/2 + 4*8/2

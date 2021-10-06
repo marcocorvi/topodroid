@@ -1005,8 +1005,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="export_splays">Splays</string -->
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <!-- TODO string name="export_stations">Stations</string -->
+    <!-- TODO string name="export_surface">Surface</string -->
     <!-- TODO string name="export_swap_lr">Swap L/R</string -->
     <!-- TODO string name="export_trox">Trox format</string -->
+    <!-- TODO string name="export_walls">Walls</string -->
     <!-- TODO string name="export_xvi">Xvi images</string -->
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
     <!-- TODO string name="export_with_reference">Include XY reference</string -->
@@ -1870,8 +1872,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="select_dem_file">Select a DEM file</string>
     <string name="select_texture_file">Select a texture file</string>
     <string name="select_sketch_file">Select a sketch file</string>
-    <string name="Wall">Walls</string>
-    <string name="Surface">Surface</string>
 
     <string name="view_title">VIEWPOINTS</string>
     <string name="view_top">Top</string>

@@ -1013,8 +1013,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_splays">Segédmérések</string>
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">Bal/Jobb megcserélése</string>
     <string name="export_trox">Trox formátum</string>
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
     <string name="export_with_reference">XY skála</string>
@@ -1894,8 +1896,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="select_dem_file">Válassz egy DEM fájlt</string>
     <string name="select_texture_file">Válassz egy textúra fájlt</string>
     <string name="select_sketch_file">Válassz egy vázlat fájlt</string>
-    <string name="Wall">Falak</string>
-    <string name="Surface">Felszín</string>
 
     <string name="view_title">NÉZŐPONTOK</string>
     <string name="view_top">Felső</string>

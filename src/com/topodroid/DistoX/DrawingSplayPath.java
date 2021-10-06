@@ -52,7 +52,7 @@ public class DrawingSplayPath extends DrawingPath
     } else {
       mSplayMode = SPLAY_MODE_LINE;
     }
-    TDLog.v("Splay mode: " + mSplayMode );
+    // TDLog.v("Splay mode: " + mSplayMode );
     return mSplayMode;
   }
 

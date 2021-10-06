@@ -561,27 +561,27 @@ public class SurveyWindow extends Activity
   {
     if ( TDInstance.sid < 0 ) return;
     String survey = TDInstance.survey;
-    // TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
-    TDPath.deleteSurveyFiles( survey );
 
-    for ( int status = 0; status < 2; ++status ) {
-      List< PlotInfo > plots = mApp_mData.selectAllPlots( TDInstance.sid, status );
-      if ( plots.size() > 0 ) {
-        TDPath.deleteSurveyPlotFiles( survey, plots );
-      }
-    }
+    // // TDPath.deleteShpDirs( survey, mApp_mData.selectPlotNames( TDInstance.sid ) );
+    // TDPath.deleteSurveyFiles( survey );
+    // for ( int status = 0; status < 2; ++status ) {
+    //   List< PlotInfo > plots = mApp_mData.selectAllPlots( TDInstance.sid, status );
+    //   if ( plots.size() > 0 ) {
+    //     TDPath.deleteSurveyPlotFiles( survey, plots );
+    //   }
+    // }
+    // /* FIXME_SKETCH_3D *
+    // // delete 3D files
+    // for ( int status = 0; status < 2; ++status ) {
+    //   List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( TDInstance.sid, status );
+    //   if ( sketches.size() > 0 ) {
+    //     TDPath.deleteSurvey3dFiles( survey, sketches );
+    //   }
+    // }
+    //  * FIXME_SKETCH_3D */
+    // // TDPath.deleteSurveyOverviewFiles( survey );
 
-    /* FIXME_SKETCH_3D *
-    // delete 3D files
-    for ( int status = 0; status < 2; ++status ) {
-      List< Sketch3dInfo > sketches = mApp_mData.selectAllSketches( TDInstance.sid, status );
-      if ( sketches.size() > 0 ) {
-        TDPath.deleteSurvey3dFiles( survey, sketches );
-      }
-    }
-     * FIXME_SKETCH_3D */
-
-    // TDPath.deleteSurveyOverviewFiles( survey );
+    TDPath.deleteSurveyDir( survey );
 
     mApp_mData.doDeleteSurvey( TDInstance.sid );
     mApp.setSurveyFromName( null, SurveyInfo.DATAMODE_NORMAL, false ); // tell app to clear survey name and id

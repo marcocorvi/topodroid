@@ -55,6 +55,7 @@ import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.DataInputStream;
 import java.io.InputStreamReader;
+import java.io.DataOutputStream;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -2197,23 +2198,18 @@ public class TopoGL extends Activity
   // export model as GLTF works only with pathname, not with URI 
   // @param type      must be GLTF
   // @param pathname  export file path 
-  public boolean exportGltfModel( int type, final String pathname, ExportData export )
+  public boolean exportGltfModel( int type, DataOutputStream fos, final String pathname, ExportData export )
   { 
     if ( type == ModelType.GLTF ) {
-      return mRenderer.exportGltf( pathname, export );
-      // (new AsyncTask<Void, Void, Boolean>() {
-      //   @Override public Boolean doInBackground(Void ... v ) {
-      //     return mRenderer.exportGltf( pathname );
-      //   }
-      //   @Override public void onPostExecute( Boolean b )
-      //   {
-      //     if ( b ) {
-      //       toast( R.string.export_gltf_ok, false );
-      //     } else {
-      //       toast( R.string.export_gltf_fail, false );
-      //     }
-      //   }
-      // } ).execute();
+      return mRenderer.exportGltf( fos, pathname, export );
+    }
+    return false;
+  }
+
+  public boolean exportShpModel( int type, DataOutputStream fos, final String pathname, ExportData export )
+  { 
+    if ( type == ModelType.SHP_ASCII ) {
+      return mParser.exportShp( fos, pathname, export );
     }
     return false;
   }
@@ -2711,12 +2707,13 @@ public class TopoGL extends Activity
   void selectExportFile( ExportData export )
   {
     mExport = export;
+    mExport.mName = mSurveyName; 
     if ( TDSetting.mExportUri ) {
       TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file );
     } else {
       TDLog.v( "export with task - survey " + mSurveyName );
-      (new ExportTask( this, mParser, null, mSurveyName, mExport )).execute();
+      (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
     }
   }
 
@@ -2749,17 +2746,13 @@ public class TopoGL extends Activity
       case REQUEST_EXPORT_FILE:
         if ( TDSetting.mExportUri ) {
           if ( uri != null && mExport != null ) {
-            exportSurvey( uri );
+            TDLog.v("export survey. uri " + uri.toString() );
+            (new ExportTask( this, mParser, uri, mExport )).execute(); 
           }
         }
         mExport = null;
         break;
     }
-  }
-
-  private void exportSurvey( Uri uri ) 
-  {
-    (new ExportTask( this, mParser, uri, null, mExport )).execute();
   }
 
   private String getPathFromUri( Context ctx, Uri uri )

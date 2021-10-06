@@ -8,14 +8,24 @@
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
+ *
+ * The glTF exporter writes five files
+ *   filename.gltf
+ *   filename_stations.bin
+ *   filename_legs.bin
+ *   filename_splays.bin
+ *   filename_surface.bin
  */
 package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.GlModel;
 import com.topodroid.DistoX.GlNames;
 import com.topodroid.DistoX.GlLines;
 import com.topodroid.DistoX.GlSurface;
+import com.topodroid.DistoX.Archiver;
+import com.topodroid.DistoX.TDPath;
 
 import android.util.Base64;
 import android.util.Base64OutputStream;
@@ -26,6 +36,7 @@ import java.util.ArrayList;
 
 import java.nio.ByteBuffer;
 
+// import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
@@ -74,30 +85,44 @@ public class ExportGltf
   }
 
   /** export model to a file
-   * @param pathname file pathname
+   * @param zos      zip output stream
+   * @param dirname  dir pathname
+   * @param name     survey name (glTF filename = name.gltf)
    * @return true if success
    */
-  public boolean write( String pathname )
+  public boolean write( OutputStream zos, String dirname, String name )
   {
     if ( mModel == null ) return false;
-    String filepath = pathname.toLowerCase().endsWith( ".gltf" )? pathname : pathname + ".gltf";
+
+    if ( ! TDFile.makeMSdir( dirname ) ) {
+      TDLog.Error("mkdir " + dirname + " error");
+      return false;
+    }
+    // TDLog.v( "mkdir created MSdir " + dirname );
+
+    ArrayList< String > files = new ArrayList<>();
+    String pathname = dirname + "/" + name + ".gltf"; // full pathname
+    String subdir   = "c3export/" + name;
+    // TDLog.v( "filepath " + pathname + " subdir " + subdir );
     try {
       // FileOutputStream fos = new FileOutputStream( filepath );
       // DataOutputStream dos = new DataOutputStream( fos );
-      FileWriter fw = new FileWriter( filepath );
+      files.add( name + ".gltf" ); 
+      TDPath.checkPath( pathname );
+      FileWriter fw = TDFile.getFileWriter( pathname ); // DistoX-SAF
       PrintWriter pw = new PrintWriter( fw );
-      doExport( pw, filepath );
+      doExport( pw, dirname, subdir, files );
       pw.flush();
-      pw.close();
       fw.close();
+      // compress files in the data output stream
+      (new Archiver()).compressFiles( zos, subdir, files );
+
     } catch ( IOException e ) {
       TDLog.Error("TopoGL glTF export error " + e );
-      StackTraceElement[] st = e.getStackTrace();
-      for ( StackTraceElement ste : st ) {
-        TDLog.Error(ste.toString() );
-      }
-
+      for ( StackTraceElement ste : e.getStackTrace() ) TDLog.Error(ste.toString() );
       return false;
+    } finally {
+      TDFile.deleteMSdir( dirname ); // delete temporary dir
     }
     return true;
   }
@@ -120,7 +145,7 @@ public class ExportGltf
     String formatMin() { return String.format(Locale.US, "[ %f, %f, %f ]", xmin, ymin, zmin ); }
   }
 
-  private void doExport( PrintWriter pw, String filepath ) throws IOException
+  private void doExport( PrintWriter pw, String rootpath, String subdir, ArrayList<String> files ) throws IOException
   {
     int count_stations = (mModel.glNames  == null)? 0 : mModel.glNames.size();
     int count_legs     = (mModel.glLegs   == null)? 0 : mModel.glLegs.size()   * 2;
@@ -155,13 +180,10 @@ public class ExportGltf
     // String max_splays   = String.format(Locale.US, "[  1.0,  1.0,  1.0 ]", mModel.glSplays.getXmax(), mModel.glSplays.getYmax(), mModel.glSplays.getZmax() );
     // String min_splays   = String.format(Locale.US, "[ -1.0, -1.0, -1.0 ]", mModel.glSplays.getXmin(), mModel.glSplays.getYmin(), mModel.glSplays.getZmin() );
 
-
-    int ext = filepath.lastIndexOf(".gltf");
-    String root = ( ext > 0 )? filepath.substring(0, ext) : filepath;
-    String buffer_stations = root + "_stations.bin"; // buffer pathnames are always prepared
-    String buffer_legs     = root     + "_legs.bin";
-    String buffer_splays   = root   + "_splays.bin";
-    String buffer_surface  = root  + "_surface.bin";
+    String buffer_stations = rootpath + "/stations.bin"; // buffer pathnames are always prepared
+    String buffer_legs     = rootpath + "/legs.bin";
+    String buffer_splays   = rootpath + "/splays.bin";
+    String buffer_surface  = rootpath + "/surface.bin";
 
     int bytelen_stations = 0;
     String max_stations  = null;
@@ -171,6 +193,7 @@ public class ExportGltf
       bytelen_stations = doExportNames( buffer_stations, mModel.glNames,  minMax1 );
       max_stations = minMax1.formatMax();
       min_stations = minMax1.formatMin();
+      files.add( "stations.bin" );
     }
 
     int bytelen_legs = 0;
@@ -181,6 +204,7 @@ public class ExportGltf
       bytelen_legs     = doExportLines( buffer_legs, mModel.glLegs, minMax2 );
       max_legs = minMax2.formatMax();
       min_legs = minMax2.formatMin();
+      files.add( "legs.bin" );
     }
 
     int bytelen_splays = 0;
@@ -192,6 +216,7 @@ public class ExportGltf
       if ( bytelen_splays == 0 ) has_splays = false;
       max_splays = minMax3.formatMax();
       min_splays = minMax3.formatMin();
+      files.add( "splays.bin" );
     }
 
     int bytelen_surface = 0;
@@ -210,7 +235,11 @@ public class ExportGltf
       min_surface_normals = minMax5.formatMin();
       // TDLog.v("Gltf minmax_P " + min_surface + " " + max_surface );
       // TDLog.v("Gltf minmax_N " + min_surface_normals + " " + max_surface_normals );
-      if ( bytelen_surface == 0 ) has_surface = false;
+      if ( bytelen_surface == 0 ) {
+        has_surface = false;
+      } else {
+        files.add( "surface.bin" );
+      }
     }
 
     // ByteArrayOutputStream baos1 = new ByteArrayOutputStream();
@@ -220,7 +249,7 @@ public class ExportGltf
     // int bytelen_legs     = printBufferData( baos2, mModel.glLegs,   min, max );
     // int bytelen_splays   = printBufferData( baos3, mModel.glSplays, min, max );
 
-    int sep = root.lastIndexOf('/');
+    int sep = rootpath.lastIndexOf('/');
     if ( sep >= 0 ) {
       buffer_stations = buffer_stations.substring( sep+1 );
       buffer_legs     = buffer_legs.substring( sep+1 );
@@ -598,9 +627,9 @@ public class ExportGltf
       dos.flush();
       dos.close();
     } catch ( FileNotFoundException e ) { 
-      TDLog.Error("Gltf File " + filepath + " not found");
+      TDLog.Error("Gltf file " + filepath + " not found");
     } catch ( IOException e ) {
-      TDLog.Error("Gltf File " + filepath + " write failed");
+      TDLog.Error("Gltf file " + filepath + " write failed");
     }
     return len;
   }

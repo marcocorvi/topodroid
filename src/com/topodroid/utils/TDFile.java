@@ -81,8 +81,17 @@ public class TDFile
   public static long getTopoDroidFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
   // @param name     TopoDroid-relative filename
+  /** get a File from the path
+   * @param name   full pathname
+   * @return a File for the pathname
+   */
   public static File getTopoDroidFile( String name ) { return new File( name ); }
 
+  /** get a File from the directory path and the file name
+   * @param dirname full directory pathname
+   * @param name    file name
+   * @return a File for the full file pathname
+   */
   public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
 
 

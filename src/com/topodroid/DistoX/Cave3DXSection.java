@@ -13,8 +13,8 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

@@ -1003,8 +1003,10 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_splays">Splay</string>
     <string name="export_splays_named">Splay con nome</string>
     <string name="export_stations">Capisaldi</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">Scambia L/R</string>
     <string name="export_trox">Formato Trox</string>
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
     <string name="export_with_reference">Includere riferimenti XY</string>
@@ -1838,8 +1840,6 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="CENTER">CENTRA</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
-    <string name="Wall">Pareti</string>
-    <string name="Surface">Modello DEM</string>
 
     <string name="view_title">PUNTI DI VISTA</string>
     <string name="view_top">Sopra</string>

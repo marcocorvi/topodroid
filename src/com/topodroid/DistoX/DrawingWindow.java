@@ -2233,7 +2233,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // TODO save plot offset and zoom
     if ( mPid3 >= 0 ) {
-      TDLog.v( "update xsection pid " + mPid3 + " X " + mOffset.x + " Y " + mOffset.y + " zoom " + mZoom );
+      // TDLog.v( "update xsection pid " + mPid3 + " X " + mOffset.x + " Y " + mOffset.y + " zoom " + mZoom );
       try {
         mApp_mData.updatePlot( mPid3, mSid, mOffset.x, mOffset.y, mZoom );
       } catch ( IllegalStateException e ) {
@@ -2819,7 +2819,7 @@ public class DrawingWindow extends ItemDrawer
       mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
       if ( mPlot3 == null ) return false;
       mPid3  = mPlot3.id;
-      TDLog.v( "load files type " + type + " " + mName3 + " pid " + mPid3 );
+      // TDLog.v( "load files type " + type + " " + mName3 + " pid " + mPid3 );
       // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
       filename3b = TDPath.getTdrFileWithExt( mFullName3 );
       TDLog.Log( TDLog.LOG_PLOT, "load file " + filename3b );
@@ -2935,7 +2935,7 @@ public class DrawingWindow extends ItemDrawer
     mOffset.x = plot.xoffset; 
     mOffset.y = plot.yoffset; 
     mZoom     = plot.zoom;    
-    TDLog.v( "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
@@ -5388,13 +5388,13 @@ public class DrawingWindow extends ItemDrawer
     {
       assert( mLastLinePath == null);
       if ( mPlot3 == null ) {
-        TDLog.v( "set plot xsection: null plot" );
+        TDLog.Error( "set plot xsection: null plot" );
         return;
       }
       mPid  = mPid3;
       mName = mName3;
       mType = mPlot3.type;
-      TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
+      // TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
       // TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3 );
@@ -5959,7 +5959,7 @@ public class DrawingWindow extends ItemDrawer
     void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
                           float azimuth, float clino, float tt )
     {
-      TDLog.v( "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+      // TDLog.v( "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
       Boolean fit = Boolean.FALSE;
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino, fit );
       if ( pid >= 0 ) {
@@ -5977,7 +5977,7 @@ public class DrawingWindow extends ItemDrawer
     { 
       // remove survey name from scrap-name (if necessary)
       String name = scrapname.replace( TDInstance.survey + "-", "" );
-      TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
+      // TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
 
       PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
       if ( pi != null ) {
@@ -5998,6 +5998,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
 	fullname = mFullName1;
       }
+      TDLog.v("save PNG. uri " + ( (uri!=null)? uri.toString() : "null" ) );
 
       if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -6027,7 +6028,7 @@ public class DrawingWindow extends ItemDrawer
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      // TDLog.v( "export bitmap - filename " + filename );
+      TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
       new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
     }
 
@@ -6116,8 +6117,8 @@ public class DrawingWindow extends ItemDrawer
     private void saveWithExt( Uri uri, long type, String ext ) 
     {
       TDNum num = mNum;
-      TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
-      // TDLog.v( "C3D export plot type " + type + " with extension " + ext );
+      // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
+      TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( "png".equals( ext ) ) {
         savePng( uri, type );
@@ -6423,7 +6424,7 @@ public class DrawingWindow extends ItemDrawer
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
     }
     // TDLog.v( "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
-    TDLog.v( "zoom fit " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "zoom fit " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
@@ -6741,7 +6742,7 @@ public class DrawingWindow extends ItemDrawer
   public void doUriExport( Uri uri ) 
   {
     if ( ! TDSetting.mExportUri ) return;
-    // TDLog.v( "Drawing URI export index " + mExportIndex );
+    TDLog.v( "do URI export. index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, mType, true ); break;

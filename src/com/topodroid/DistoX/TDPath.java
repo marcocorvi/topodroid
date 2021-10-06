@@ -232,6 +232,18 @@ public class TDPath
     }
   }
 
+  public static void createSurveyPaths( String survey )
+  {
+    TDLog.v( "create survey path " + survey + " base " + PATH_CW_DIR );
+    String root = PATH_CW_DIR + "/" + survey; 
+    checkFilesystemDirs( root );
+    checkFilesystemDirs( root + "/tdr" );
+    checkFilesystemDirs( root + "/c3d" );
+    checkFilesystemDirs( root + "/note" );
+    checkFilesystemDirs( root + "/photo" );
+    checkFilesystemDirs( root + "/audio" );
+  }
+
   static void setSurveyPaths( String survey )
   {
     if ( survey == null || survey.length() == 0 ) {
@@ -286,13 +298,16 @@ public class TDPath
     clearSymbolsDir( "area" );
   }  
 
-  public static void checkPath( String filename )
+  /** 
+   * @param pathname   full pathname
+   */
+  public static void checkPath( String pathname )
   {
-    if ( filename == null ) {
+    if ( pathname == null ) {
       // TDLog.v( "check path: null string" );
       return;
     }
-    checkPath( TDFile.getTopoDroidFile( filename ) ); // DistoX-SAF
+    checkPath( TDFile.getTopoDroidFile( pathname ) ); // DistoX-SAF
   }
 
   // ------------------------------------------------------------------
@@ -366,7 +381,18 @@ public class TDPath
 
   public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
   public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
-  public static String getTdrFileWithExt( String name )  { return getPathname( APP_TDR_PATH, name, TDR ); }
+  public static String getTdrFileWithExt( String name )  {
+    // TDLog.v( "APP_TDR_PATH " + APP_TDR_PATH + " name " + name );
+    return getPathname( APP_TDR_PATH, name, TDR );
+  }
+
+  // @param dirname   survey dirname
+  // @param name      tdr name (without extension
+  public static String getTdrFileWithExt( String dirname, String name )  {
+    TDLog.v( "dirname " + dirname + " name " + name );
+    return getPathname( PATH_CW_DIR, dirname + "/" + name, TDR );
+  }
+
   public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_PATH, name, C3D ); }
 
   public static String getCaveFileWithExt( String name ) { checkFilesystemDirs( APP_CAVE_PATH ); return getPathname( APP_CAVE_PATH, name, ".cave" ); } // Polygon
@@ -438,7 +464,7 @@ public class TDPath
 
 
   // these are used to get the folders when the survey does not exist yet (on import)
-  static String getSurveyDir( String survey ) { return PATH_CW_DIR + "/" + survey; }
+  static String getSurveyDir( String survey ) { return PATH_CW_DIR + "/" + survey; } // : /.../emulated/0/Documents/TDX/TopoDroid/survey
 
   static String getSurveyPhotoDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/photo"; }
   static String getSurveyAudioDir( String survey ) { return PATH_CW_DIR + "/" + survey + "/audio"; }
@@ -504,6 +530,14 @@ public class TDPath
     // deleteSurveyExportFiles( survey )
   }
 
+  static void deleteSurveyDir( String survey )
+  {
+    String dirpath = getSurveyDir( survey );
+    // TDLog.v("delete path " + dirpath );
+    File dir = TDFile.getTopoDroidFile( dirpath );
+    TDFile.recursiveDeleteDir( dir );
+  }
+
   static void deleteBackups( String filename ) // filename has suffix BCK_SUFFIX
   {
     TDFile.deleteFile( filename );
@@ -567,6 +601,9 @@ public class TDPath
   //   return null;
   // }
 
+  /** make sure the file parent directory exists
+   * @param fp   file
+   */
   private static void checkPath( File fp ) // DistoX-SAF
   {
     if ( fp == null ) {
@@ -587,12 +624,23 @@ public class TDPath
     }
   }
 
+  /** compose a file pathname: directory/name extension
+   * @param directory    directory pathname
+   * @param name         file name
+   * @param ext          file extension (including the dot)
+   * @return the file pathname
+   */
   private static String getPathname( String directory, String name, String ext ) 
   {
     checkFilesystemDirs( directory );
     return directory + "/" + name + ext;
   }
 
+  /** compose a file pathname: directory/name
+   * @param directory    directory pathname
+   * @param name         file name (includin extension)
+   * @return the file pathname
+   */
   private static String getPathname( String directory, String name ) 
   {
     checkFilesystemDirs( directory );
@@ -630,6 +678,7 @@ public class TDPath
 
   private static void checkFilesystemDirs( String path )
   {
+    // TDLog.v("check filesystem dir " + path );
     TDFile.makeTopoDroidDir( path );
   }
 

@@ -772,7 +772,7 @@ public class OverviewWindow extends ItemDrawer
       return;
     }
 
-    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // TDLog.v( "Overview PDF export <" + filename + ">");

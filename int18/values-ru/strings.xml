@@ -993,8 +993,10 @@
     <string name="export_splays">Сплеи</string>
     <string name="export_splays_named">Именованые сплеи</string>
     <string name="export_stations">Пикеты</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">Поменять местами расстояния ЛЕВО и ПРАВО</string>
     <string name="export_trox">Формат Trox</string>
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Xvi изображение</string>
     <string name="export_with_xsections">Экспортировать поперечные сечения</string>
     <string name="export_with_reference">Включить XY точки отсчета</string>
@@ -1839,8 +1841,6 @@
     <!-- UNUSED string name="CENTER">ЦЕНТР</string -->
     <string name="select_dem_file">Выбрать файл DEM:</string>
     <string name="select_texture_file">Выбрать файл текстуры:</string>
-    <string name="Wall">Стены</string>
-    <string name="Surface">Поверхность</string>
 
     <string name="view_title">ТОЧКИ ПРОСМОТРА</string>
     <string name="view_top">Сверху</string>

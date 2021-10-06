@@ -990,8 +990,10 @@ Refer to the web pages for details.\n
     <string name="export_splays">Visées latérales d\'habillage</string>
     <!-- TODO string name="export_splays_named">Named splays</string -->
     <string name="export_stations">Stations</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">Échanger G/D</string>
     <!-- TODO string name="export_trox">Trox format</string -->
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Images Xvi</string>
     <string name="export_with_xsections">Inclure les sections transverses</string>
     <!-- TODO string name="export_with_reference">Include XY reference</string -->
@@ -1818,8 +1820,6 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="CENTER">CENTER</string -->
     <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
     <!-- TODO string name="select_texture_file">Select a texture file:</string -->
-    <string name="Wall">Parois</string>
-    <string name="Surface">Superficie</string>
 
     <string name="view_title">POINTS DE VUE</string>
     <string name="view_top">Partie supérieure</string>

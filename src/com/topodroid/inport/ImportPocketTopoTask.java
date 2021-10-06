@@ -14,7 +14,7 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDLog;
 import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.MainWindow;
-
+import com.topodroid.DistoX.TDPath;
 
 // import java.lang.ref.WeakReference;
 
@@ -41,6 +41,8 @@ public class ImportPocketTopoTask extends ImportTask
       if ( hasSurveyName( parser.mName ) ) {
         return -1L;
       }
+
+      TDPath.createSurveyPaths( parser.mName );
 
       sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false ); // no update
 

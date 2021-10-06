@@ -1010,8 +1010,10 @@ Refer to the web pages for details.\n
     <string name="export_splays">Pomocné zámery</string>
     <string name="export_splays_named">Pomenované pomocné zámery</string>
     <string name="export_stations">Staničenia</string>
+    <!-- TODO string name="export_surface">Surface</string -->
     <string name="export_swap_lr">Vymeniť L/R</string>
     <!-- TODO string name="export_trox">Trox format</string -->
+    <!-- TODO string name="export_walls">Walls</string -->
     <string name="export_xvi">Xvi obrázky</string>
     <!-- TODO string name="export_with_xsections">Include X-sections</string -->
     <!-- TODO string name="export_with_reference">Include XY reference</string -->
@@ -1859,8 +1861,6 @@ DO NOT REMOVE THIS LINE -->
     <string name="select_survey_file">Cave3D - Vybrať súbor:</string>
     <string name="select_dem_file">Vyber DEM súbor:</string>
     <string name="select_texture_file">Vyber súbor:</string>
-    <string name="Wall">Steny</string>
-    <string name="Surface">Povrch</string>
 
     <string name="view_title">POHĽAD Z</string>
     <string name="view_top">Vrchu</string>

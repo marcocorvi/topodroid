@@ -492,7 +492,7 @@ public class TglParser
   //        in the first case the name is the part after the last '/' and before the '.'
   public TglParser( TopoGL app, String filename )
   {
-    TDLog.v("TglParser parsing " + filename );
+    // TDLog.v("TglParser parsing " + filename );
     int pos = filename.lastIndexOf('/');
     if ( pos > 0 ) {
       mName = filename.substring(pos+1);
@@ -506,7 +506,7 @@ public class TglParser
 
   private void init( TopoGL app, String name )
   {
-    TDLog.v("TglParser init " + name );
+    // TDLog.v("TglParser init " + name );
     mApp      = app;
     do_render = false;
     mOrigin   = null;
@@ -542,6 +542,26 @@ public class TglParser
 
   // ---------------------------------------- EXPORT
   // This is executed in ExportTask
+  public boolean exportShp( DataOutputStream zos, String pathname, ExportData export )
+  {
+    ExportSHP shp = new ExportSHP();
+    if ( export.mWalls ) {
+      if ( convexhullcomputer != null ) {
+        for ( CWConvexHull cw : convexhullcomputer.getWalls() ) {
+          synchronized( cw ) {
+            for ( CWTriangle f : cw.mFace ) shp.add( f );
+          }
+        }
+      } 
+      if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
+        shp.mTriangles = powercrustcomputer.getTriangles();
+        shp.mVertex    = powercrustcomputer.getVertices();
+      }
+    }
+    String filepath = TDPath.getC3exportFile( export.mName ); // export temporary folder for shp files - fullpath
+    return shp.exportASCII( zos, filepath, export.mName, this, true, export.mSplays, export.mWalls );
+  }
+
   public boolean exportModelBinary( int type, DataOutputStream dos, ExportData export ) // , boolean overwrite )
   { 
     boolean ret = false;
@@ -560,7 +580,7 @@ public class TglParser
           stl.mTriangles = powercrustcomputer.getTriangles();
           stl.mVertex    = powercrustcomputer.getVertices();
         } else { 
-          TDLog.v("TODO other walls models"); // TODO
+          // TDLog.v("TODO other walls models"); // TODO
         }
       }
       ret = stl.exportBinary( dos, export.mSplays, export.mWalls, export.mSurface );
@@ -611,22 +631,22 @@ public class TglParser
           }
         }
         ret = dxf.exportASCII( osw, this, true, export.mSplays, export.mWalls, true ); // true = version13
-      } else if ( type == ModelType.SHP_ASCII ) { // SHP
-        ExportSHP shp = new ExportSHP();
-        if ( export.mWalls ) {
-          if ( convexhullcomputer != null ) {
-            for ( CWConvexHull cw : convexhullcomputer.getWalls() ) {
-              synchronized( cw ) {
-                for ( CWTriangle f : cw.mFace ) shp.add( f );
-              }
-            }
-          } 
-          if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
-            shp.mTriangles = powercrustcomputer.getTriangles();
-            shp.mVertex    = powercrustcomputer.getVertices();
-          }
-        }
-        ret = shp.exportASCII( export.mName, this, true, export.mSplays, export.mWalls );
+      // } else if ( type == ModelType.SHP_ASCII ) { // SHP
+      //   ExportSHP shp = new ExportSHP();
+      //   if ( export.mWalls ) {
+      //     if ( convexhullcomputer != null ) {
+      //       for ( CWConvexHull cw : convexhullcomputer.getWalls() ) {
+      //         synchronized( cw ) {
+      //           for ( CWTriangle f : cw.mFace ) shp.add( f );
+      //         }
+      //       }
+      //     } 
+      //     if ( powercrustcomputer != null && powercrustcomputer.hasTriangles() ) {
+      //       shp.mTriangles = powercrustcomputer.getTriangles();
+      //       shp.mVertex    = powercrustcomputer.getVertices();
+      //     }
+      //   }
+      //   ret = shp.exportASCII( data_output_stream?, filepath?, export.mName, this, true, export.mSplays, export.mWalls );
       } else if ( type == ModelType.STL_ASCII ) {
         ExportSTL stl = new ExportSTL();
         if ( export.mWalls ) {

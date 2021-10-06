@@ -241,7 +241,7 @@ public class DrawingPath extends RectF
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
   {
-    TDLog.v("make offset path - type " + mType + " at " + x1 + " " + y1 );
+    // TDLog.v("make offset path - type " + mType + " at " + x1 + " " + y1 );
     if ( path != null ) {
       mPath = new Path( path );
       mPath.transform( m );
@@ -259,7 +259,7 @@ public class DrawingPath extends RectF
 
   void makePath( float x1, float y1, float x2, float y2 )
   {
-    TDLog.v("make endpoint path - type " + mType + " at " + x1 + " " + y1 );
+    // TDLog.v("make endpoint path - type " + mType + " at " + x1 + " " + y1 );
     mPath = new Path( );
     mPath.moveTo( x1, y1 );
     mPath.lineTo( x2, y2 );
@@ -276,7 +276,7 @@ public class DrawingPath extends RectF
 
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )
   {
-    TDLog.v("make straight path - type " + mType + " at " + x1 + " " + y1 );
+    // TDLog.v("make straight path - type " + mType + " at " + x1 + " " + y1 );
     mPath = new Path();
     mPath.moveTo( x1, y1 );
     mPath.lineTo( x2, y2 );

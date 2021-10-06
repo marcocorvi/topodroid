@@ -75,11 +75,11 @@ class ParserPocketTopo extends ImportParser
     // TDLog.Log( TDLog.LOG_PTOPO, "PocketTopo parser " + surveyname );
     // mName     = surveyname.replace(".top", "");
     mName     = surveyname;
-    readPocketTopoFile( fis, filename );
+    readPocketTopoFile( fis, filename, surveyname + "/tdr" );
     checkValid();
   }
 
-  private void readPocketTopoFile( InputStream fis, String filename ) throws ParserException
+  private void readPocketTopoFile( InputStream fis, String filename, String tdrdir ) throws ParserException
   {
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
@@ -191,14 +191,14 @@ class ParserPocketTopo extends ImportParser
       PTDrawing outline = ptfile.getOutline();
       String scrap_name1 = mName + "-1p";
       // String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
-      String filename1 = TDPath.getTdrFileWithExt( scrap_name1 );
+      String filename1 = TDPath.getTdrFileWithExt( tdrdir, scrap_name1 );
       TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap p: " + filename1 );
       writeDrawing( filename1, scrap_name1, outline, PlotType.PLOT_PLAN, over_scale );
 
       PTDrawing sideview = ptfile.getSideview();
       String scrap_name2 = mName + "-1s";
       // String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
-      String filename2 = TDPath.getTdrFileWithExt( scrap_name2 );
+      String filename2 = TDPath.getTdrFileWithExt( tdrdir, scrap_name2 );
       TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap s: " + filename2 );
       writeDrawing( filename2, scrap_name2, sideview, PlotType.PLOT_EXTENDED, over_scale );
       // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 

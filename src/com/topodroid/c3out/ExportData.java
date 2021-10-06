@@ -36,17 +36,17 @@ public class ExportData
     mMime     = "application/octet-stream";
   }
 
-  public ExportData( String name, ExportData export ) // copy cstr
-  {
-    mName     = name;
-    mType     = export.mType;
-    mExt      = export.mExt;
-    mSplays   = export.mSplays;
-    mWalls    = export.mWalls;
-    mStation  = export.mStation;
-    mSurface  = export.mSurface;
-    mOverwrite = export.mOverwrite;
-    mMime     = export.mMime;
-  }
+  // public ExportData( String name, ExportData export ) // copy cstr
+  // {
+  //   if ( name != null ) mName = name;
+  //   mType     = export.mType;
+  //   mExt      = export.mExt;
+  //   mSplays   = export.mSplays;
+  //   mWalls    = export.mWalls;
+  //   mStation  = export.mStation;
+  //   mSurface  = export.mSurface;
+  //   mOverwrite = export.mOverwrite;
+  //   mMime     = export.mMime;
+  // }
 
 }

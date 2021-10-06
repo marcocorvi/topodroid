@@ -30,22 +30,22 @@
   <CheckBox android:id="@+id/model_stations"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:text="@string/export_roundtrip"
+    android:text="@string/export_stations"
     />
   <CheckBox android:id="@+id/model_splays"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:text="@string/export_grid"
+    android:text="@string/export_splays"
     />
   <CheckBox android:id="@+id/model_walls"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:text="@string/export_linedir"
+    android:text="@string/export_walls"
     />
   <CheckBox android:id="@+id/model_surface"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:text="@string/export_splays"
+    android:text="@string/export_surface"
     />
 
   <LinearLayout android:id="@+id/help"
