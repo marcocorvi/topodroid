@@ -54,6 +54,7 @@ import com.topodroid.calib.CalibAlgo;
 import com.topodroid.calib.CalibResult;
 import com.topodroid.calib.CalibInfo;
 
+import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
 import java.io.File;
@@ -251,12 +252,17 @@ public class TDExporter
   static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String surveyname )
   {
+    ParcelFileDescriptor pfd = null;
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      BufferedWriter bw = new BufferedWriter( (uri != null)? TDsafUri.docFileWriter( uri ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
-      return exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
+      pfd = TDsafUri.docWriteFileDescriptor( uri );
+      BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
+      int ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
+      bw.close();
     } catch ( FileNotFoundException e ) {
     } catch ( IOException e ) {
+    } finally {
+      TDsafUri.closeFileDescriptor( pfd );
     }
     return 0;
   }

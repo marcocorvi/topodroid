@@ -49,6 +49,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
 import android.os.Build;
+import android.os.ParcelFileDescriptor;
 
 import android.app.Activity;
 
@@ -697,7 +698,11 @@ public class OverviewWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    TDLog.v( "overview export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    if ( mExportIndex < 0 ) { 
+      TDLog.Error("Error. Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+      return;
+    }
+    TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
 
     if ( TDSetting.mExportUri ) { // FIXME_URI
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
@@ -776,11 +781,13 @@ public class OverviewWindow extends ItemDrawer
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // TDLog.v( "Overview PDF export <" + filename + ">");
+    ParcelFileDescriptor pfd = null;
     try {
+      pfd = TDsafUri.docWriteFileDescriptor( uri );
       OutputStream fos = null;
       if ( uri != null ) {
         TDLog.v( "Export overview PDF: uri " + uri.toString() );
-        fos = TDsafUri.docFileOutputStream( uri );
+        fos = TDsafUri.docFileOutputStream( pfd );
       } else {
         TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
         fos = new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
@@ -813,6 +820,8 @@ public class OverviewWindow extends ItemDrawer
       // TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
     } catch ( IOException e ) {
       TDLog.Error("Failed PDF export " + e.getMessage() );
+    } finally {
+      TDsafUri.closeFileDescriptor( pfd );
     }
   }
 

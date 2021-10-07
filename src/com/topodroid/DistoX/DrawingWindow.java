@@ -77,6 +77,7 @@ import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
+import android.os.ParcelFileDescriptor;
 // import android.os.AsyncTask;
 // /* fixme-23 */
 import android.os.Build;
@@ -6064,8 +6065,10 @@ public class DrawingWindow extends ItemDrawer
       }
       // TDPath.getPdfDir();
       // TDLog.v( "PDF export <" + fullname + ">");
+      ParcelFileDescriptor pfd = null;
       try {
-        OutputStream fos = (uri != null)? TDsafUri.docFileOutputStream( uri ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+        pfd = TDsafUri.docWriteFileDescriptor( uri );
+        OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
 
         // PrintAttributes.Builder builder = new PrintAttributes.Builder();
         // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
@@ -6100,6 +6103,8 @@ public class DrawingWindow extends ItemDrawer
       // } catch ( NoSuchMethodException e ) {
       } catch ( IOException e ) {
         TDLog.Error("failed PDF export " + e.getMessage() );
+      } finally {
+        TDsafUri.closeFileDescriptor( pfd );
       }
     }
 

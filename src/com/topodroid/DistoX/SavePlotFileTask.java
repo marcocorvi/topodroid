@@ -34,6 +34,7 @@ import android.content.Context;
 import android.os.AsyncTask;
 // import android.os.Bundle;
 import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
 import android.graphics.Bitmap;
@@ -135,12 +136,19 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         if ( mManager != null ) {
           // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+          ParcelFileDescriptor pfd = null;
           try {
-            BufferedWriter bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+            pfd = TDsafUri.docWriteFileDescriptor( mUri );
+            BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
             DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
             bw.flush();
             bw.close();
-          } catch ( IOException e ) { TDLog.v( e.getMessage() ); e.printStackTrace(); }
+          } catch ( IOException e ) {
+            TDLog.v( e.getMessage() );
+            e.printStackTrace(); 
+          } finally {
+            TDsafUri.closeFileDescriptor( pfd );
+          }
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
         // // TDLog.v( "save plot Therion file SAVE " + mFullName );
@@ -208,12 +216,19 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         TDLog.v( "save plot Therion file OVERVIEW " + mFullName );
         // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+        ParcelFileDescriptor pfd = null;
         try {
-          BufferedWriter bw = new BufferedWriter( (mUri != null)? TDsafUri.docFileWriter( mUri ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+          pfd = TDsafUri.docWriteFileDescriptor( mUri );
+          BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
           DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
           // bw.flush(); // FIXME necessary ???
           bw.close();
-        } catch ( IOException e ) { TDLog.v( e.getMessage() ); e.printStackTrace(); }
+        } catch ( IOException e ) {
+          TDLog.v( e.getMessage() );
+          e.printStackTrace(); 
+        } finally {
+          TDsafUri.closeFileDescriptor( pfd );
+        }
 	return true;
       }
       

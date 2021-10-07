@@ -52,12 +52,12 @@ public class TDConst
 
   public static final int SURVEY_FORMAT_ZIP = 30;
 
-  public static final int SURVEY_FORMAT_GLTF    = 41;
-  public static final int SURVEY_FORMAT_CGAL    = 42;
-  public static final int SURVEY_FORMAT_STL     = 43;
-  public static final int SURVEY_FORMAT_STL_BIN = 44;
-  public static final int SURVEY_FORMAT_LAS_BIN = 45;
-  public static final int SURVEY_FORMAT_serial  = 46;
+  public static final int SURVEY_FORMAT_GLTF    = 31;
+  public static final int SURVEY_FORMAT_CGAL    = 32;
+  public static final int SURVEY_FORMAT_STL     = 33;
+  public static final int SURVEY_FORMAT_STL_BIN = 34;
+  public static final int SURVEY_FORMAT_LAS_BIN = 35;
+  public static final int SURVEY_FORMAT_SERIAL  = 36;
 
   public static final String[] mMimeType = {
     "application/octet-stream",  // 0 // Therion
@@ -87,14 +87,21 @@ public class TDConst
     "application/json",       // *Json
     "application/shp",
     "application/xvi",
-    "application/xml",        // *Tunnel
-    "application/c3d", // 26
-    "application/pdf",        // *PDF
-    "application/octet-stream",       // CaveSniper
-    "application/octet_stream",       // *trox
-    "application/zip"  // 30
+    "application/xml",          // 25 *Tunnel
+    "application/c3d",          // 26
+    "application/pdf",          // *PDF
+    "application/octet-stream", // CaveSniper
+    "application/octet_stream", // *trox
+    "application/zip", // 30
+    "application/gltf", // 31 glTF
+    "application/cgal", // 32 CGAL
+    "application/stl",  // 33 STL
+    "application/octet-stream", // STL binary
+    "application/octet-stream", // LAS binary
+    "test/plain"                // 36 serialized
   };
 
+  // ======= IMPORT ======
   public static final String[] mSurveyImportTypes = { 
     "ZIP", 
     "Compass",
@@ -117,6 +124,7 @@ public class TDConst
     SURVEY_FORMAT_TOP
   };
 
+  // ======= MODEL EXPORT  ======
   public static final String[] mModelExportTypes = {
     "gLTF",
     "CGAL",
@@ -150,6 +158,7 @@ public class TDConst
     SURVEY_FORMAT_SHP
   };
 
+  // ======= DATA EXPORT  ======
   public static final String[] mSurveyExportTypes = { "ZIP", 
     "Compass",
     "cSurvey",
@@ -217,6 +226,7 @@ public class TDConst
     SURVEY_FORMAT_SHP
   };
 
+  // ======= PLOT EXPORT  ======
   public static final String[] mPlotExportTypes = {
       "Therion",
       "cSurvey",
@@ -256,11 +266,12 @@ public class TDConst
     "c3d"
   };
 
+  // ======= OVERVIEW EXPORT  ======
   public static final String[] mOverviewExportTypes = {
       "Therion",
       "DXF",
       "SVG",
-      "SHP",
+      "Shapefile",
       "PDF",
       "XVI"
   };

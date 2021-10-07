@@ -45,10 +45,10 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.InputStream;
+import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.OutputStream;
+import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -369,7 +369,7 @@ public class TDFile
     deleteDir( getMSfile( subdir ) );
   }
 
-  static public OutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException
+  static public FileOutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! makeMSdir( subdir ) ) {
       TDLog.Error("failed to create subdir " + subdir );
@@ -385,7 +385,7 @@ public class TDFile
       TDLog.Error("failed to create subdir " + subdir );
       throw new IOException("failed to create subdir");
     }
-    OutputStream os = new FileOutputStream( getMSfile( subdir, filename ) );
+    FileOutputStream os = new FileOutputStream( getMSfile( subdir, filename ) );
     if ( os == null ) {
       TDLog.Error("failed to create output stream " + filename );
       throw new IOException( "failed to create file output stream ");
@@ -398,7 +398,7 @@ public class TDFile
    * @param filename  file name
    * @param mimetype  not used
    */
-  static public InputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
+  static public FileInputStream getMSinput( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! hasMSdir( subdir ) ) {
       TDLog.Error("failed: no subdir " + subdir );
@@ -407,7 +407,7 @@ public class TDFile
     return new FileInputStream( getMSfile( subdir, filename ) );
   }
 
-  // get a reader for the InputStream
+  // get a reader for the FileInputStream
   // then we can read  
   static public BufferedReader getMSReader( String subdir, String filename, String mimetype ) throws IOException
   {
@@ -415,7 +415,7 @@ public class TDFile
       TDLog.Error("failed: no subdir " + subdir );
       throw new IOException("failed: no subdir");
     }
-    InputStream is = new FileInputStream( getMSfile( subdir, filename ) );
+    FileInputStream is = new FileInputStream( getMSfile( subdir, filename ) );
     if ( is == null ) {
       TDLog.Error("failed to create input stream " + filename );
       throw new IOException( "failed to create file input stream ");
@@ -428,17 +428,17 @@ public class TDFile
   //
   // static public boolean isMSexists( String subdir, String filename )
   //
-  // @note the returned OutputStream must be closed after it has been written
-  // static public OutputStream getMSoutput( String subdir, String filename, String mimetype )
+  // @note the returned FileOutputStream must be closed after it has been written
+  // static public FileOutputStream getMSoutput( String subdir, String filename, String mimetype )
   //
-  // static public InputStream getMSinput( String subdir, String filename, String mimetype )
+  // static public FileInputStream getMSinput( String subdir, String filename, String mimetype )
   //
   // NOTE listing returns only items inserted with MediaStore
   // @param subdir   topodroid subdirectory
   // @param filter   filename filter
   // static public ArrayList<String> getMSfilelist( String subdir )
   // 
-  // static public void osWriteString( OutputStream os, String str ) throws IOException
+  // static public void osWriteString( FileOutputStream os, String str ) throws IOException
   //
   */
 
@@ -455,22 +455,32 @@ public class TDFile
     }
   }
 
-  static InputStream getInputStream( Uri uri ) 
+  static void closeFileDescriptor( ParcelFileDescriptor pfd ) 
   {
-    try {
-      return TDInstance.getContentResolver().openInputStream( uri );
-    } catch ( FileNotFoundException e ) {
-      return null;
+    if ( pfd != null ) {
+      try {
+        pfd.close();
+      } catch ( IOException e ) {
+      }
     }
   }
 
-  static OutputStream getOutputStream( Uri uri ) 
+  static FileInputStream getFileInputStream( ParcelFileDescriptor pfd )
   {
-    try {
-      return TDInstance.getContentResolver().openOutputStream( uri );
-    } catch ( FileNotFoundException e ) {
-      return null;
+    if ( pfd != null ) {
+      // return TDInstance.getContentResolver().openInputStream( uri );
+      return new FileInputStream( pfd.getFileDescriptor() );
     }
+    return null;
+  }
+
+  static FileOutputStream getFileOutputStream( ParcelFileDescriptor pfd )
+  {
+    if ( pfd != null ) {
+      // return TDInstance.getContentResolver().openOutputStream( uri );
+      return new FileOutputStream( pfd.getFileDescriptor() );
+    }
+    return null;
   }
 
 } 

@@ -22,6 +22,7 @@ import java.io.FileOutputStream;
 // import android.content.Context;
 
 import android.os.AsyncTask;
+import android.os.ParcelFileDescriptor;
 // import android.os.Handler;
 import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
@@ -57,6 +58,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 
     boolean exec()
     {
+      ParcelFileDescriptor pfd = null;
       try {
         /*
         // File temp = File.createTempFile( "tmp", ".png", TDFile.getFile( TDPath.getPngFile("") ) );
@@ -69,11 +71,11 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         */
         TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
         TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
-        FileOutputStream out = (mUri != null)? TDsafUri.docFileOutputStream( mUri ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
+        pfd = TDsafUri.docWriteFileDescriptor( mUri );
+        FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();
-
         /*
         filename = TDPath.getPngFileWithExt( mFullName );
         TDPath.checkPath( filename );
@@ -82,6 +84,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         return true;
       } catch (Exception e) {
         e.printStackTrace();
+      } finally {
+        TDsafUri.closeFileDescriptor( pfd );
       }
       return false;
     }

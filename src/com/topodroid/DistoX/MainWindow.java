@@ -61,6 +61,7 @@ import android.app.Dialog;
 import android.content.ActivityNotFoundException;
 import android.os.Bundle;
 import android.os.Handler;
+import android.os.ParcelFileDescriptor;
 
 import android.content.Context;
 import android.content.Intent;
@@ -485,13 +486,17 @@ public class MainWindow extends Activity
     new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
   }
  
-  // @param fis    file input stream
-  // @paran name   file name
-  // @param type   file extension (including the dot)
-  public void importStream( FileInputStream fis, String name, String type )
+  /** import survey data from a URI
+   * @param uri    input stream uri
+   * @param name   file name
+   * @param type   file extension (including the dot)
+   */
+  public void importStream( Uri uri, String name, String type )
   {
-    TDLog.v( "import with stream <" + name + "> type <" + type + ">" );
     // FIXME connect-title string
+    TDLog.v( "import with uri stream <" + name + "> type <" + type + ">" );
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    FileInputStream fis = TDsafUri.docFileInputStream( pfd );
     if ( type.equals(".top") ) {
       setTitleImport();
       new ImportPocketTopoTask( this, fis ).execute( null, name );  // null filename (use fis); name = surveyname
@@ -502,13 +507,17 @@ public class MainWindow extends Activity
     // } else {
     //   setTheTitle( );
     }
+    try { fis.close(); } catch ( IOException e ) { }
+    TDsafUri.closeFileDescriptor( pfd );
     // FIXME SYNC updateDisplay();
   }
   
-  public void importReader( InputStreamReader isr, String name, String type, ImportData data )
+  public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
     // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals(".th") ) {
       setTitleImport();
       new ImportTherionTask( this, isr ).execute( name, name );
@@ -1120,14 +1129,18 @@ public class MainWindow extends Activity
             String surveyname = name;
             TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
-              FileInputStream fis = TDsafUri.docFileInputStream( uri );
+              ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+              FileInputStream fis = TDsafUri.docFileInputStream( pfd );
               // if ( fis.markSupported() ) fis.mark();
               int manifest_ok = Archiver.getOkManifest( fis, name, surveyname );
               try { fis.close(); } catch ( IOException e ) { }
+              TDsafUri.closeFileDescriptor( pfd );
               if ( manifest_ok >= 0 ) {
-                fis = TDsafUri.docFileInputStream( uri );
-                Archiver.unArchive( mApp, fis, name );
-                try { fis.close(); } catch ( IOException e ) { }
+                ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
+                FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
+                Archiver.unArchive( mApp, fis2, name );
+                try { fis2.close(); } catch ( IOException e ) { }
+                TDsafUri.closeFileDescriptor( pfd2 );
               } else {
                 TDLog.Error("import zip - failed manifest " + manifest_ok );
                 TDToast.makeBad( R.string.bad_manifest );
@@ -1135,19 +1148,12 @@ public class MainWindow extends Activity
             } else {
               String type = TDPath.checkImportTypeStream( ext );
               if ( type != null ) {
-                TDLog.v( "import stream type " + type + " name " + name );
-                FileInputStream fis = TDsafUri.docFileInputStream( uri );
-                importStream( fis, name, type );
+                importStream( uri, name, type );
               } else {
                 type = TDPath.checkImportTypeReader( ext );
                 if ( type != null ) {
+                  importReader( uri, name, type, mImportData );
                   TDLog.v( "import reader type " + type + " name " + name);
-                  try {
-                    InputStreamReader isr = new InputStreamReader( this.getContentResolver().openInputStream( uri ) );
-                    importReader( isr, name, type, mImportData );
-                  } catch ( FileNotFoundException e ) {
-                    TDLog.Error("File not found");
-                  }
                 } else {
                   TDLog.Error("import unsupported " + ext);
                 }

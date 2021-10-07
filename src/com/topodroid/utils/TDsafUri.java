@@ -63,133 +63,59 @@ public class TDsafUri
   //
 
   // UNUSED
-  // static public FileDescriptor docFileDescriptor( Uri uri )
-  // {
-  //   try {
-  //     // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-  //     ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
-  //     if ( pfd == null ) return null;
-  //     FileDescriptor fd = pfd.getFileDescriptor();
-  //     if (fd == null) {
-  //       pfd.close();
-  //       return null;
-  //     }
-  //     return fd;
-  //   } catch ( IOException e ) {
-  //     e.printStackTrace();
-  //     // TDLog.v( "SAF failed open output stream" );
-  //   }
-  //   return null;
-  // }
-
-  static public InputStream docInputStream( Uri uri ) 
+  static public ParcelFileDescriptor docWriteFileDescriptor( Uri uri )
   {
-    // if ( uri == null ) return null;
-    try {
-      InputStream is = TDInstance.getContentResolver().openInputStream(uri);
-      return is;
-      // FIXME caller must close is
-    } catch (IOException e) {
-      e.printStackTrace();
-      // TDLog.v( "SAF failed open input stream" );
-    }
-    return null;
-  }
-
-  static public FileOutputStream docFileOutputStream( Uri uri ) 
-  {
-    // if ( uri == null ) return null;
-    try {
-      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
-      if ( pfd == null ) return null;
-      FileDescriptor fd = pfd.getFileDescriptor();
-      if (fd == null) {
-        pfd.close();
-        return null;
+    if ( uri != null ) {
+      try {
+        return TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
+      } catch ( IOException e ) {
+        e.printStackTrace();
       }
-      FileOutputStream fos = new FileOutputStream(fd);
-      fos.getChannel().truncate(0);
-      return fos;
-      // FIXME fos must be closed(), but also pfd must be closed
-    } catch ( IOException e ) {
-      e.printStackTrace();
-      // TDLog.v( "SAF failed open output stream" );
     }
     return null;
   }
 
-  static public FileWriter docFileWriter( FileDescriptor fd )
+  static public ParcelFileDescriptor docReadFileDescriptor( Uri uri )
   {
-    // if ( uri == null ) return null;
-    return new FileWriter(fd);
-  }
-
-  static public FileWriter docFileWriter( Uri uri ) 
-  {
-    // if ( uri == null ) return null;
-    try {
-      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
-      if ( pfd == null ) return null;
-      FileDescriptor fd = pfd.getFileDescriptor();
-      if (fd == null) {
-        pfd.close();
-        return null;
+    if ( uri != null ) {
+      try {
+        return TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
+      } catch ( IOException e ) {
+        e.printStackTrace();
       }
-      FileWriter fw = new FileWriter(fd);
-      // fos.getChannel().truncate(0);
-      return fw;
-      // FIXME fos must be closed(), but also pfd must be closed
-    } catch ( IOException e ) {
-      e.printStackTrace();
-      // TDLog.v( "SAF failed open output stream" );
     }
     return null;
   }
 
-  static public FileInputStream docFileInputStream( Uri uri ) 
+  static public void closeFileDescriptor( ParcelFileDescriptor pfd )
   {
-    if ( uri == null ) return null;
-    try {
-      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
-      if ( pfd == null ) return null;
-      FileDescriptor fd = pfd.getFileDescriptor();
-      if (fd == null) {
+    if ( pfd != null ) {
+      try {
         pfd.close();
-        return null;
+      } catch ( IOException e ) {
+        e.printStackTrace();
       }
-      FileInputStream fis = new FileInputStream(fd);
-      // fis.getChannel(). ???
-      return fis;
-      // FIXME fos must be closed(), but also pfd must be closed
-    } catch ( IOException e ) {
-      e.printStackTrace();
     }
-    return null;
   }
 
-  static public FileReader docFileReader( Uri uri ) 
+  static public FileInputStream docFileInputStream( ParcelFileDescriptor pfd )
   {
-    if ( uri == null ) return null;
-    try {
-      // AssetFileDescriptor pfd = TDInstance.getContentResolver().openAssetFileDescriptor( uri, "w" );
-      ParcelFileDescriptor pfd = TDInstance.getContentResolver().openFileDescriptor( uri, "r" );
-      if ( pfd == null ) return null;
-      FileDescriptor fd = pfd.getFileDescriptor();
-      if (fd == null) {
-        pfd.close();
-        return null;
-      }
-      FileReader fr = new FileReader(fd);
-      // fis.getChannel(). ???
-      return fr;
-      // FIXME fos must be closed(), but also pfd must be closed
-    } catch ( IOException e ) {
-      e.printStackTrace();
-    }
-    return null;
+    return (pfd == null)? null : new FileInputStream( pfd.getFileDescriptor() );
+  }
+
+  static public FileOutputStream docFileOutputStream( ParcelFileDescriptor pfd )
+  {
+    return (pfd == null)? null : new FileOutputStream( pfd.getFileDescriptor() );
+  }
+
+  static public FileWriter docFileWriter( ParcelFileDescriptor pfd )
+  {
+    return (pfd == null)? null : new FileWriter( pfd.getFileDescriptor() );
+  }
+
+  static public FileReader docFileReader( ParcelFileDescriptor pfd )
+  {
+    return (pfd == null)? null : new FileReader( pfd.getFileDescriptor() );
   }
 
   // MIME ---------------------------------------------------------------------
