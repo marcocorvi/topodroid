@@ -1013,10 +1013,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_splays">Segédmérések</string>
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>
-    <!-- TODO string name="export_surface">Surface</string -->
+    <string name="export_surface">Felszín</string>
     <string name="export_swap_lr">Bal/Jobb megcserélése</string>
     <string name="export_trox">Trox formátum</string>
-    <!-- TODO string name="export_walls">Walls</string -->
+    <string name="export_walls">Falak</string>
     <string name="export_xvi">Xvi képek</string>
     <string name="export_with_xsections">Metszetekkel együtt</string>
     <string name="export_with_reference">XY skála</string>
