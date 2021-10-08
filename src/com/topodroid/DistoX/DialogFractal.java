@@ -29,7 +29,6 @@ import android.widget.RadioButton;
 class DialogFractal extends MyDialog 
                     implements View.OnClickListener
 {
-  private TopoGL   mApp;
   private CheckBox mCBsplays;
   private ImageView mImage;
   // private Button mBtnClose;
@@ -40,10 +39,9 @@ class DialogFractal extends MyDialog
   private RadioButton mRBtotal;
   private RadioButton mRBnghb;
 
-  public DialogFractal( Context context, TopoGL app, TglParser parser )
+  public DialogFractal( Context context, TglParser parser )
   {
     super( context, R.string.DialogFractal );
-    mApp    = app;
     mParser = parser;
   }
 
@@ -83,7 +81,7 @@ class DialogFractal extends MyDialog
       mCellSide = Integer.parseInt( mCell.getText().toString() );
       int mode = FractalComputer.COUNT_TOTAL;
       if ( mRBnghb.isChecked() ) mode = FractalComputer.COUNT_NGHB;
-      int ret = FractalResult.compute( mContext, mApp, mParser, mCBsplays.isChecked(), mCellSide, mode );
+      int ret = FractalResult.compute( mParser, mCBsplays.isChecked(), mCellSide, mode );
     // } else if ( v.getId() == R.id.button_cancel ) {
     //   // nothing
     }

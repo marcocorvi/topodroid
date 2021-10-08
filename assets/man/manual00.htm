@@ -22,10 +22,25 @@ TopoDroid is specifically designed to work with the DistoX, SAP5, and BRIC4. How
 <i>TopoDroid is an open-source free app and it is ad-free. It comes with no warranty: by using it you agree that the authors are not responsible for any loss of data you might incur or damage whatsoever, in particular to the DistoX, SAP5, BRIC4. While the authors do their best to provide a bug-free app, this is not guaranteed.</i>
 <hr><br><p>
 
-<h4>TopoDroid base folder</h4>
-The TopoDroid base directory is "TDX", and is under Documents.
-It contains the folders of the drawing tools, "point", "line", and "area", and the 
-device database "device10.sqlite" with the calibration data.
+<h4>TopoDroid private folder</h4>
+The TopoDroid private folder, "Android/data/com.topodroid.DistoX/files",
+contains the folders of the drawing tools, "point", "line", and "area", and the 
+device database "device10.sqlite" with the calibration data,
+the exported calibration files (folder "ccsv"), the DistoX2 firmware files (folder "bin"),
+and the DistoX memory dumps (folder "dump").
+<br><p>
+
+This folder, and its content, is deleted when the app is uninstalled.
+<br><p>
+
+<h4>TopoDroid survey folder</h4>
+The TopoDroid base directory is "Documents/TDX", in the external primary storage.
+It contains the survey folder "TopoDroid". The survey folder contains the
+database "distox14.sqlite", the "zip" folder, a folder "tmp" for temporary files ,
+and is populated with a folder for each survey that is created.
+<br><p>
+
+This folder is not deleted when the app is uninstalled.
 <br><p>
 
 <h4>Survey data</h4>

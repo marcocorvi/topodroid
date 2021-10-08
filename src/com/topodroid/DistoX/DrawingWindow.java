@@ -6170,8 +6170,8 @@ public class DrawingWindow extends ItemDrawer
     // used also by SavePlotFileTask
     void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
-      TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-      // TDLog.v( "save with ext: filename " + filename + " ext " + ext );
+      // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
+      TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
       // mActivity = context (only to toast)
       SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
       PlotInfo   plot  = null;

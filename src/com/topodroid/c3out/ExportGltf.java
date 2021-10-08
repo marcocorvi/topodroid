@@ -42,8 +42,8 @@ import java.io.PrintWriter;
 // import java.io.PrintStream;
 import java.io.OutputStream;
 import java.io.ByteArrayOutputStream;
-import java.io.DataOutputStream;
 import java.io.FileOutputStream;
+import java.io.DataOutputStream;
 // import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -105,8 +105,7 @@ public class ExportGltf
     String subdir   = "c3export/" + name;
     // TDLog.v( "filepath " + pathname + " subdir " + subdir );
     try {
-      // FileOutputStream fos = new FileOutputStream( filepath );
-      // DataOutputStream dos = new DataOutputStream( fos );
+      // FileOutputStream dos = new FileOutputStream( filepath );
       files.add( name + ".gltf" ); 
       TDPath.checkPath( pathname );
       FileWriter fw = TDFile.getFileWriter( pathname ); // DistoX-SAF
@@ -145,7 +144,7 @@ public class ExportGltf
     String formatMin() { return String.format(Locale.US, "[ %f, %f, %f ]", xmin, ymin, zmin ); }
   }
 
-  private void doExport( PrintWriter pw, String rootpath, String subdir, ArrayList<String> files ) throws IOException
+  private void doExport( PrintWriter pw, String rootpath, String subdir, ArrayList<String> files ) // throws IOException
   {
     int count_stations = (mModel.glNames  == null)? 0 : mModel.glNames.size();
     int count_legs     = (mModel.glLegs   == null)? 0 : mModel.glLegs.size()   * 2;
@@ -280,10 +279,10 @@ public class ExportGltf
       StringBuilder children = new StringBuilder();
       children.append("1, 2");
       int child = 2;
-      if ( has_splays ) { ++child; children.append(", " + child); } 
+      if ( has_splays ) { ++child; children.append(", ").append(child); }
       if ( has_surface ) {
-        ++child; children.append(", " + child);
-        // for ( int k=0; k<3; ++k ) { ++child; children.append(", " + child); }
+        ++child; children.append(", ").append(child);
+        // for ( int k=0; k<3; ++k ) { ++child; children.append(", ").append(child); }
       }
       openElement(  pw, 2 ); // root node "0"
       printArrayTag( pw, 3, "children", children.toString() );
@@ -603,7 +602,8 @@ public class ExportGltf
   {
     int len = 0;
     try {
-      FileOutputStream dos = new FileOutputStream( filepath );
+      FileOutputStream fos = new FileOutputStream( filepath );
+      DataOutputStream dos = new DataOutputStream( fos );
       if ( names != null && names.getVertexData() != null ) {
         int fstride = GlNames.getVertexStride(); 
         int fcoords = GlNames.getVertexSize(); 
@@ -644,7 +644,8 @@ public class ExportGltf
   {
     int len = 0;
     try {
-      FileOutputStream dos = new FileOutputStream( filepath );
+      FileOutputStream fos = new FileOutputStream( filepath );
+      DataOutputStream dos = new DataOutputStream( fos );
       if ( lines != null && lines.getVertexData() != null ) {
         int fstride = GlLines.getVertexStride(); 
         int fcoords = GlLines.getVertexSize(); 
@@ -687,7 +688,8 @@ public class ExportGltf
     // TDLog.v("Gltf export triangles file " + filepath );
     int len = 0;
     try {
-      FileOutputStream dos = new FileOutputStream( filepath );
+      FileOutputStream fos = new FileOutputStream( filepath );
+      DataOutputStream dos = new DataOutputStream( fos );
       if ( surface != null && surface.getSurfaceData() != null ) {
         int fstride = GlSurface.getVertexStride(); 
         int fcoords = GlSurface.getVertexSize(); // position + normal

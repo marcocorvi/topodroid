@@ -97,13 +97,33 @@ public class TDFile
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
+  public static File getPrivateBaseDir( ) 
+  {
+    return TDInstance.context.getExternalFilesDir( null );
+  }
+
+  public static File getPrivateDir( String subdir ) 
+  { 
+    return TDInstance.context.getExternalFilesDir( subdir );
+  }
+
+  public static File getPrivateFile( String subdir, String filename ) 
+  { 
+    return new File( TDInstance.context.getExternalFilesDir( subdir ), filename );
+  }
+
+  public static void deletePrivateFile( String type, String name ) 
+  {
+    File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
+    if ( file.exists() ) file.delete();
+  }
+
+  public static File getDeviceDatabase() { return getPrivateFile( null, "device10.sqlite" ); }
+  public static File getPacketDatabase() { return getPrivateFile( null, "packet10.sqlite" ); }
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
   private static File getCBD( String type, boolean create )
   {
-    /*
-    return TDInstance.context.getExternalFilesDir( type ); 
-    */
     File ret = null;
     if ( type == null ) {
       ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX" );
@@ -121,16 +141,14 @@ public class TDFile
   public static File getExternalDir( String type ) { return getCBD( type, true ); }
   public static File getExternalFile( String type, String name ) { return new File( getCBD( type, true ), name ); }
 
-  public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
-  public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getPath(); }
+  // public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
+  // public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getPath(); }
 
-  public static boolean hasExternalDir( String type ) { return getCBD( type, false ).exists(); }
-  public static boolean hasExternalFile( String type, String name ) { return new File( getCBD( type, false ), name ).exists(); }
+  // public static boolean hasExternalDir( String type ) { return getCBD( type, false ).exists(); }
+  // public static boolean hasExternalFile( String type, String name ) { return new File( getCBD( type, false ), name ).exists(); }
 
   public static File getSettingsFile()   { return getExternalFile( null, "settings.txt" ); }
   public static File getLogFile()        { return getExternalFile( null, "log.txt" ); }
-  public static File getDeviceDatabase() { return getExternalFile( null, "device10.sqlite" ); }
-  public static File getPacketDatabase() { return getExternalFile( null, "packet10.sqlite" ); }
 
   public static void deleteExternalFile( String type, String name ) 
   {

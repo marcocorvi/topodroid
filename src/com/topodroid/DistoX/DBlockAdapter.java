@@ -31,6 +31,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.view.inputmethod.EditorInfo;
 import android.view.KeyEvent;
 
+// import androidx.annotation.RecentlyNonNull;
+
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
@@ -493,6 +495,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {

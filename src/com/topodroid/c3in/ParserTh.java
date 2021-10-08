@@ -30,7 +30,8 @@ import com.topodroid.DistoX.Cave3DXSection;
 import com.topodroid.DistoX.Geodetic;
 import com.topodroid.DistoX.DEMsurface;
 import com.topodroid.DistoX.Vector3D;
-
+import com.topodroid.DistoX.TDToast;
+import com.topodroid.DistoX.TDInstance;
 
 import java.io.File;
 import java.io.IOException;
@@ -125,7 +126,7 @@ public class ParserTh extends TglParser
     pw.printf( String.format( mApp.getResources().getString( R.string.read_survey ), surveyname ) );
 
     int res = readSurvey( surveyname, "", false, 0, pw );
-    if ( mApp != null && sw != null ) mApp.uiToast( sw.toString(), false );
+    if ( sw != null ) TDToast.make( sw.toString() );
 
     if ( res == SUCCESS ) {
       processShots();
@@ -180,7 +181,7 @@ public class ParserTh extends TglParser
       //   TDLog.v( "fix " + f.name + " " + f.e + " " + f.n );
       // }
     } else {
-      if ( mApp != null && sw != null ) mApp.uiToast( sw.toString(), false );
+      if ( sw != null ) TDToast.make( sw.toString() );
     }
   }
 
@@ -194,7 +195,7 @@ public class ParserTh extends TglParser
     }
   }
 
-  private int readSurvey( String surveyname, String basepath, boolean usd, double sd, PrintWriter pw ) throws ParserException
+  private int readSurvey( String surveyname, String basepath, boolean usd, double sd, PrintWriter pw ) // throws ParserException
   {
     if ( mData == null ) {
       if ( pw != null ) pw.printf( mApp.getResources().getString( R.string.no_database ) );
@@ -672,7 +673,7 @@ public class ParserTh extends TglParser
                                    units_len, units_ber, units_cln, pw );
                   if ( res != SUCCESS ) {
                     TDLog.Error( "Th read file " + filename + " failed. Error code " + res );
-                    if ( mApp != null ) mApp.uiToast( R.string.error_file_read, filename, true );
+                    TDToast.makeBad( TDInstance.formatString( R.string.error_file_read, filename ) );
                   }
                 } else {
                   TDLog.Error( "Th Input file <" + filename + "> has no .th extension");
@@ -702,7 +703,7 @@ public class ParserTh extends TglParser
                 int res = readSurvey( filename, path, use_survey_declination, survey_declination, pw );
                 if ( res != SUCCESS ) {
                   TDLog.Error( "Th read survey " + filename + " failed. Error code " + res );
-                  if ( mApp != null ) mApp.uiToast( R.string.error_survey_read, filename, true );
+                  TDToast.makeBad( TDInstance.formatString( R.string.error_survey_read, filename ) );
                 }
               }
             } else if ( cmd.equals("equate") ) {

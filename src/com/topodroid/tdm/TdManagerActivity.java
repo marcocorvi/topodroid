@@ -196,7 +196,6 @@ public class TdManagerActivity extends Activity
     if ( p++ == pos ) { // CLOSE
       finish();
     } else if ( p++ == pos ) { // HELP
-      // new TdmHelpDialog( this ).show();
       new HelpDialog( this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
     }
   }
@@ -383,8 +382,6 @@ public class TdManagerActivity extends Activity
     // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // OPTIONS
     //   Intent intent = new Intent( this, TdManagerPreferences.class );
     //   startActivity( intent );
-    // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) { // HELP
-    //   new TdmHelpDialog( this ).show();
     // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EXIT
     //   finish();
     }

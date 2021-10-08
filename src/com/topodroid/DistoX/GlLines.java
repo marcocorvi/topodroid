@@ -122,9 +122,9 @@ public class GlLines extends GlShape
   String getBBoxString() // LOG
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( " X " + xmin + " " + xmax );
-    sb.append( " Y " + ymin + " " + ymax );
-    sb.append( " Z " + zmin + " " + zmax );
+    sb.append( " X ").append(xmin).append(" ").append(xmax)
+      .append( " Y ").append(ymin).append(" ").append(ymax)
+      .append( " Z ").append(zmin).append(" ").append(zmax);
     return sb.toString();
   }
 

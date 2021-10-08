@@ -100,7 +100,7 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
       // String dumppath = TDPath.getDumpFile( dumpfile );
       // TDPath.checkPath( dumppath );
       // FileWriter fw = new FileWriter( dumppath );
-      File file = TDFile.getExternalFile( "dump", dumpfile );
+      File file = TDPath.getDumpFile( dumpfile );
       FileWriter fw = new FileWriter( file );
       PrintWriter pw = new PrintWriter( fw );
       for ( MemoryOctet m : memory ) {

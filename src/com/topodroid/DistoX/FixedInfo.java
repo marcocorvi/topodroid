@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import androidx.annotation.RecentlyNonNull;
+
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
@@ -124,6 +126,7 @@ class FixedInfo extends MagLatLong
   String csName() { return cs; }
 
 
+  // @RecentlyNonNull
   public String toString()
   {
     return name + " " + double2string( lng ) + " " + double2string( lat ) + " " + (int)(asl) + " [wgs " + (int)(alt) + "]";

@@ -99,8 +99,8 @@ import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnTouchListener;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
-import android.view.Menu;
-import android.view.MenuItem;
+// import android.view.Menu;
+// import android.view.MenuItem;
 // import android.view.MotionEvent;
 
 import android.widget.Toast;
@@ -330,14 +330,14 @@ public class TopoGL extends Activity
     
     // setWallButton( mRenderer.wall_mode );
 
+
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
-    // TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, getResources(), R.drawable.iz_menu ) );
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
-
     mMenu = (ListView) findViewById( R.id.menu );
     setMenuAdapter( getResources() );
     closeMenu();
+    mMenu.setOnItemClickListener( this );
 
     // glSurfaceView = (GLSurfaceView) findViewById( R.id.view );
 
@@ -500,7 +500,7 @@ public class TopoGL extends Activity
               || Build.MODEL.contains("Android SDK built for x86")));
 
     if (supportsEs2) {
-        // toast("This device supports OpenGL ES 2.0.", true );
+        // TDToast.make("This device supports OpenGL ES 2.0." );
         // Request an OpenGL ES 2.0 compatible context.
         glSurfaceView.setEGLContextClientVersion(2);
 
@@ -527,7 +527,7 @@ public class TopoGL extends Activity
          * This hides our app from those devices which don't support OpenGL
          * ES 2.0.
          */
-        toast("This device does not support OpenGL ES 2.0.", true );
+        TDToast.make( "This device does not support OpenGL ES 2.0." );
         return;
     }
   }
@@ -603,7 +603,7 @@ public class TopoGL extends Activity
   private void handleMenu( int pos ) 
   {
     closeMenu();
-    // toast(item.toString() );
+    // TDToast.make( item.toString() );
     int p = 0;
     if ( p++ == pos ) { // OPEN
       // (new DialogOpenFile( this, this )).show();
@@ -688,7 +688,7 @@ public class TopoGL extends Activity
       startActivity( intent );
       // startActivity( new Intent( this, TopoGLPreferences.class ) );
     // } else if ( p++ == pos ) { // FRACTAL
-    //   new FractalDialog( this, this, mRenderer ).show();
+    //   new FractalDialog( this, mRenderer ).show();
     } else if ( p++ == pos ) { // HELP
       // new DialogHelp(this).show();	    
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
@@ -1288,27 +1288,27 @@ public class TopoGL extends Activity
 /*
     switch ( wall_mode ) {
       case TglParser.WALL_NONE:
-        toast( "wall mode NONE" );
+        TDToast.make( "wall mode NONE" );
         // mButton1[BTN_WALL].setBackgroundDrawable( mBMnone );
         break;
       case TglParser.WALL_CW:
-        toast( "wall mode CONVEX_HULL" );
+        TDToast.make( "wall mode CONVEX_HULL" );
         // mButton1[BTN_WALL].setBackgroundDrawable( mBMconvex );
         break;
       case TglParser.WALL_POWERCRUST:
-        toast( "wall mode POWERCRUST" );
+        TDToast.make( "wall mode POWERCRUST" );
         // mButton1[BTN_WALL].setBackgroundDrawable( mBMpowercrust );
         break;
       case TglParser.WALL_DELAUNAY:
-        toast( "wall mode DELAUNAY" );
+        TDToast.make( "wall mode DELAUNAY" );
         // mButton1[BTN_WALL].setBackgroundDrawable( mBMdelaunay );
         break;
       case TglParser.WALL_HULL:
-        toast( "wall mode HULL" );
+        TDToast.make( "wall mode HULL" );
         // mButton1[BTN_WALL].setBackgroundDrawable( mBMhull );
         break;
       default:
-        toast( "wall mode NONE" );
+        TDToast.make( "wall mode NONE" );
     }
 */
   }
@@ -1337,9 +1337,9 @@ public class TopoGL extends Activity
         // my_sketch.log();
         if ( b ) {
           if ( mRenderer != null ) mRenderer.notifySketch( my_sketch );
-          toast( R.string.sketch_ok, true );
+          TDToast.make( R.string.sketch_ok );
         } else {
-          toast( R.string.sketch_failed, true );
+          TDToast.make( R.string.sketch_failed );
         }
       }
     }).execute( sketch );
@@ -1382,9 +1382,9 @@ public class TopoGL extends Activity
         {
           if ( b ) {
             if ( mRenderer != null ) mRenderer.notifyDEM( my_dem );
-            toast( R.string.dem_ok, true );
+            TDToast.make( R.string.dem_ok );
           } else {
-            toast( R.string.dem_failed, true );
+            TDToast.make( R.string.dem_failed );
           }
         }
       }).execute( dem );
@@ -1418,10 +1418,9 @@ public class TopoGL extends Activity
   //     public void onPostExecute( Boolean b )
   //     {
   //       if ( b ) {
-  //       
-  //         toast( R.string.temperature_ok, true );
+  //         TDToast.make( R.string.temperature_ok );
   //       } else {
-  //         toast( R.string.temperature_failed, true );
+  //         TDToast.make( R.string.temperature_failed );
   //       }
   //     }
   //   }).execute( pathname );
@@ -1469,9 +1468,9 @@ public class TopoGL extends Activity
       {
         if ( b ) {
           if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
-          toast( R.string.texture_ok, true );
+          TDToast.make( R.string.texture_ok );
         } else {
-          toast( R.string.texture_failed, true );
+          TDToast.make( R.string.texture_failed );
         }
       }
     }).execute( pathname );
@@ -1503,9 +1502,9 @@ public class TopoGL extends Activity
       {
         if ( b ) {
           if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
-          toast( R.string.texture_ok, true );
+          TDToast.make( R.string.texture_ok );
         } else {
-          toast( R.string.texture_failed, true );
+          TDToast.make( R.string.texture_failed );
         }
       }
     }).execute( pathname );
@@ -1553,10 +1552,10 @@ public class TopoGL extends Activity
     // if ( ! TDandroid.canRun( mApp, this ) ) 
     if ( FeatureChecker.checkPermissions( this ) < 0 ) {
       if ( mRequestPermissionTime > 2 ) { 
-        toast( "Permissions not granted. Goodbye" );
+        TDToast.make( "Permissions not granted. Goodbye" );
         finish();
       } else {
-        toast( "Permissions not granted. Retry" );
+        TDToast.make( "Permissions not granted. Retry" );
       }
     } else {
       handleExtra();
@@ -1853,96 +1852,6 @@ public class TopoGL extends Activity
   }
 
   // ---------------------------------------------------------------
-  // TOAST
-
-  public void toast( String r, boolean loong )
-  {
-    if ( loong ) { Toast.makeText( this, r, Toast.LENGTH_LONG).show(); } else { Toast.makeText( this, r, Toast.LENGTH_SHORT).show(); }
-  }
-
-  public void toast( int r, boolean loong )
-  {
-    if ( loong ) { Toast.makeText( this, r, Toast.LENGTH_LONG).show(); } else { Toast.makeText( this, r, Toast.LENGTH_SHORT).show(); }
-  }
-
-  public void toast( int r ) { toast( r, false ); }
-  public void toast( String r ) { toast( r, false ); }
-
-  public void toast( int r, String str, boolean loong )
-  {
-    String msg = String.format( getResources().getString( r ), str );
-    // TDLog.v("TopoGL toast " + msg );
-    if ( loong ) { Toast.makeText( this, msg, Toast.LENGTH_LONG).show(); } else { Toast.makeText( this, msg, Toast.LENGTH_SHORT).show(); }
-  }
-
-  public void toast( int r, String str ) { toast( r, str, false ); }
-
-  public void toast( int r, int n1, int n2 )
-  {
-    String msg = String.format( getResources().getString( r ), n1, n2 );
-    Toast.makeText( this, msg, Toast.LENGTH_SHORT).show();
-  }
-
-  public void uiToast( final String r, final boolean loong ) 
-  {
-    final Context ctx = this;
-    runOnUiThread( new Runnable() {
-        public void run() {
-          if ( loong ) {
-            Toast.makeText( ctx, r, Toast.LENGTH_LONG ).show();
-          } else {
-            Toast.makeText( ctx, r, Toast.LENGTH_SHORT ).show();
-          }
-        }
-    } );
-  }
-
-  public void uiToast( final int r, final boolean loong ) 
-  {
-    final Context ctx = this;
-    runOnUiThread( new Runnable() {
-        public void run() {
-          if ( loong ) {
-            Toast.makeText( ctx, r, Toast.LENGTH_LONG ).show();
-          } else {
-            Toast.makeText( ctx, r, Toast.LENGTH_SHORT ).show();
-          }
-        }
-    } );
-  }
-
-  public void uiToast( final int r, final String str, final boolean loong ) 
-  {
-    final Context ctx = this;
-    final String msg = String.format( getResources().getString( r ), str );
-    runOnUiThread( new Runnable() {
-        public void run() {
-          if ( loong ) {
-            Toast.makeText( ctx, msg, Toast.LENGTH_LONG ).show();
-          } else {
-            Toast.makeText( ctx, msg, Toast.LENGTH_SHORT ).show();
-          }
-        }
-    } );
-  }
-
-  public void uiToast( final String r, final String str, final boolean loong ) 
-  {
-    final Context ctx = this;
-    final String msg = String.format( r, str );
-    runOnUiThread( new Runnable() {
-        public void run() {
-          if ( loong ) {
-            Toast.makeText( ctx, msg, Toast.LENGTH_LONG ).show();
-          } else {
-            Toast.makeText( ctx, msg, Toast.LENGTH_SHORT ).show();
-          }
-        }
-    } );
-  }
-
-
-  // ------------------------------------------------------------------
 
   // first "init rendering"
   // FIXME isr == null
@@ -1961,7 +1870,7 @@ public class TopoGL extends Activity
       doSketches = true;
       // TDLog.v( "Station " + mParser.getStationNumber() + " shot " + mParser.getShotNumber() );
     } catch ( ParserException e ) {
-      toast(R.string.error_parser_error, survey + " " + e.msg(), true );
+      TDToast.makeBad( TDInstance.formatString( R.string.error_parser_error, survey + " " + e.msg() ) );
       mParser = null;
       // TDLog.Error( "parser exception " + filename );
     }
@@ -2018,18 +1927,18 @@ public class TopoGL extends Activity
       // TDLog.v("Station " + mParser.getStationNumber() + " shot " + mParser.getShotNumber() + " splay " + mParser.getSplayNumber() + " surveys " + mParser.getSurveyNumber() );
     } catch ( ParserException e ) {
       // TDLog.Error("parser exception " + e.msg() );
-      uiToast(R.string.error_parser_error, e.msg(), true );
+      TDToast.makeBad( TDInstance.formatString( R.string.error_parser_error, e.msg() ) );
       mParser = null;
     }
     return (mParser != null);
   }
 
-  private void notify( boolean res, int ok, int no, boolean what )
+  private void notify( boolean res, int ok, int no )
   {
     if ( res ) {
-      toast( ok );
+      TDToast.make( ok );
     } else {
-      toast( no, what );
+      TDToast.make( no );
     }
   }
 
@@ -2038,15 +1947,15 @@ public class TopoGL extends Activity
   {
     // TDLog.v("TopoGL app notify wall " + type );
     if (type == TglParser.WALL_CW ) {
-      notify( result, R.string.done_convexhull, R.string.fail_convexhull, true );
+      notify( result, R.string.done_convexhull, R.string.fail_convexhull );
     } else if ( type == TglParser.WALL_POWERCRUST ) {
-      notify ( result, R.string.done_powercrust, R.string.fail_powercrust, true );
+      notify ( result, R.string.done_powercrust, R.string.fail_powercrust );
     } else if ( type == TglParser.WALL_HULL ) {
-      notify ( result, R.string.done_hull, R.string.fail_hull, true );
+      notify ( result, R.string.done_hull, R.string.fail_hull );
     } else if ( type == TglParser.WALL_TUBE ) {
-      notify ( result, R.string.done_tube, R.string.fail_tube, true );
+      notify ( result, R.string.done_tube, R.string.fail_tube );
     } else if ( type == TglParser.WALL_BUBBLE ) {
-      notify ( result, R.string.done_bubble, R.string.fail_bubble, true );
+      notify ( result, R.string.done_bubble, R.string.fail_bubble );
     }
     if ( mRenderer != null ) mRenderer.notifyWall( type, result );
   }
@@ -2782,7 +2691,7 @@ public class TopoGL extends Activity
       } else {
         pathname = ( trial == 0 )? getPathFromUri( this, uri ) : null;
         if ( pathname == null ) {
-          uiToast( R.string.unsupported_format, true );
+          TDToast.makeBad( R.string.unsupported_format );
         }
       }
     }

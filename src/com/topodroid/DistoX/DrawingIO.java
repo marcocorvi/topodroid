@@ -146,7 +146,7 @@ public class DrawingIO
   //             // skip "-projection" vals[2]
   //             is_not_section = ! vals[3].equals("none");
   //           }
-  //         } else if ( vals[0].equals( "point" ) ) {
+  //         } else if ( vals[0].equals( TDPath.DIR_POINT ) ) {
   //           // ****** THERION POINT ********************************** point X Y type [options]
   //           if ( vals.length < 4 ) {
   //             TDLog.Error( "bad point cmd: " + line );
@@ -257,7 +257,7 @@ public class DrawingIO
   //               surface.addDrawingPath( path );
   //             }
   //           }
-  //         } else if ( vals[0].equals( "line" ) ) {
+  //         } else if ( vals[0].equals( TDPath.DIR_LINE ) ) {
   //           // ********* THERION LINES ************************************************************
   //           if ( vals.length < 2 ) {
   //             TDLog.Error( "bad line cmd: " + line );

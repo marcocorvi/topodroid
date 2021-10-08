@@ -22,7 +22,7 @@ public class Cave3DCS
 
   public boolean hasName() { return ( name != null ) && ( name.length() > 0 ); }
 
-  public boolean equals( Cave3DCS cs ) { return (cs != null) && equals( cs.name ); }
+  // public boolean equals( Cave3DCS cs ) { return (cs != null) && equals( cs.name ); }
   public boolean equals( String cs_name ) { return (cs_name != null) && ( cs_name.length() > 0 ) && name.equals( cs_name ); }
 
   public boolean isWGS84() { return name.equals( WGS84 ); }

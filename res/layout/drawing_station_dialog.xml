@@ -198,14 +198,14 @@
         android:layout_height="wrap_content"
         android:gravity="right"
         >
-        <Button android:id="@+id/btn_saved"
-          style="@style/button_default"
-          android:text="@string/button_saved"
-          android:layout_gravity="left"
-          />
         <Button android:id="@+id/btn_cancel"
           style="@style/button_default"
           android:text="@string/button_cancel"
+          android:layout_gravity="left"
+          />
+        <Button android:id="@+id/btn_saved"
+          style="@style/button_default"
+          android:text="@string/button_saved"
           android:layout_gravity="right"
           />
       </LinearLayout>

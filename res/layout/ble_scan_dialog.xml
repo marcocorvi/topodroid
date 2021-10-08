@@ -9,13 +9,13 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <Button android:id="@+id/stop_scan"
-      style="@style/button_default"
-      android:text="@string/start_scan"
-    />
     <Button android:id="@+id/cancel"
       style="@style/button_default"
       android:text="@string/button_cancel"
+    />
+    <Button android:id="@+id/stop_scan"
+      style="@style/button_default"
+      android:text="@string/start_scan"
     />
   </LinearLayout>
 

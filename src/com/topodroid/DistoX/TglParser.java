@@ -40,9 +40,9 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
-import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.FileInputStream;
-import java.io.FileOutputStream;
+// import java.io.FileOutputStream;
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
 
@@ -186,11 +186,11 @@ public class TglParser
   //   if ( path == null ) return false;
   //   File file = new File( path );
   //   if ( ! file.exists() ) {
-  //     if ( mApp != null ) mApp.uiToast( R.string.error_file_not_found, path, true );
+  //     TDToasti.makeBad( R.string.error_file_not_found, path );
   //     return false;
   //   }
   //   if ( ! file.canRead() ) {
-  //     if ( mApp != null ) mApp.uiToast( R.string.error_file_not_readable, path, true );
+  //     TDToasti.makeBad( R.string.error_file_not_readable, path );
   //     return false;
   //   }
   //   return true;
@@ -594,7 +594,7 @@ public class TglParser
     return ret;
   }
 
-  public boolean exportModelAscii( int type, OutputStreamWriter osw, ExportData export ) // , boolean overwrite )
+  public boolean exportModelAscii( int type, BufferedWriter osw, ExportData export ) // , boolean overwrite )
   { 
     boolean ret = false;
     if ( type == ModelType.SERIAL ) { // serialization
@@ -626,7 +626,7 @@ public class TglParser
               }
             }
           } else if ( powercrustcomputer == null || ! powercrustcomputer.hasTriangles() ) {
-            if ( mApp != null ) mApp.uiToast(R.string.powercrust_dxf_not_supported, export.mName, true );
+            TDToast.makeWarn (R.string.powercrust_dxf_not_supported );
             return false;
           }
         }
@@ -673,7 +673,7 @@ public class TglParser
     return ret;
   }
 
-  private boolean writeWalls( OutputStreamWriter fw )
+  private boolean writeWalls( BufferedWriter fw )
   {
     // if ( Cave3D.mWallConvexHull ) {
     boolean ret = false;
@@ -697,7 +697,7 @@ public class TglParser
   {
     // TDLog.v( "Check file " + pathname + " overwrite " + overwrite );
     if ( (new File(pathname)).exists() && ! overwrite ) {
-      if ( mApp != null ) mApp.uiToast(R.string.warning_not_overwrite, pathname, false);
+      TDToast.makeWarn( TDInstance.formatString( R.string.warning_not_overwrite, pathname ) );
       return false;
     }
     return true;
@@ -739,10 +739,10 @@ public class TglParser
           }
         }).execute();
       } else {
-        // if ( mApp != null ) mApp.uiToast( "failed to create convex hull object" );
+        // TDToast.makeBad( "failed to create convex hull object" );
       }
     }
-    // if ( mApp != null ) mApp.uiToast( "computing convex hull walls" );
+    // TDToast.make( "computing convex hull walls" );
   }
 
   // FIXME skip -------------------------- WALL_TUBE triangles
@@ -762,7 +762,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // if ( mApp != null ) mApp.uiToast( "failed to create hull object" );
+        // TDToast.makeBad( "failed to create hull object" );
       }
     }
   }
@@ -791,7 +791,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // if ( mApp != null ) mApp.uiToast( "failed to create hull object" );
+        // TDToast.makeBad( "failed to create hull object" );
       }
     }
   }
@@ -813,7 +813,7 @@ public class TglParser
           }
         }).execute();
       } else {
-        // if ( mApp != null ) mApp.uiToast( "failed to create hull object" );
+        // TDToast.makeBad( "failed to create hull object" );
       }
     }
   }

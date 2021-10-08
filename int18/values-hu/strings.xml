@@ -513,7 +513,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="saving_">Mentés</string -->
     <string name="saving_file_failed">Fájl mentése nem sikerült</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
-    <string name="splay">segédmérés</string>
+    <!-- UNUSED string name="splay">segédmérés</string -->
     <string name="too_many_leg_intersection">A szelvényrajz több poligonmérést keresztez</string>
     <!-- UNUSED string name="too_many_legs_xsection">Túl sok a poligonmérés a keresztszelvényhez</string -->
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
@@ -1832,9 +1832,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Barlang %7$.1f</string>
     <string name="measure">mérés</string>
 
-    <string name="style_stroke">Simítás</string>
-    <string name="style_stroke_fill">Kitöltés &amp; Simítás</string>
-    <string name="style_fill">Kitöltés</string>
+    <!-- UNUSED string name="style_stroke">Simítás</string -->
+    <!-- UNUSED string name="style_stroke_fill">Kitöltés &amp; Simítás</string -->
+    <!-- UNUSED string name="style_fill">Kitöltés</string -->
     <string name="surface_projection">Felszínre vetítés</string>
     <string name="surface_texture">Felszín textúra</string>
     <string name="surface_gps">GPS nyomvonal</string>
@@ -1859,17 +1859,12 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="ctitle_manual_leg">Új poligon</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
-    <string name="length">hossz</string>
-    <string name="azimuth">irány</string>
-    <string name="clino">lejtés</string>
-
     <!-- UNUSED string name="cbtn_laser">Lézer</string -->
     <!-- UNUSED string name="cbtn_scan">Keresés</string -->
     <!-- UNUSED string name="cbtn_shot">Mérés</string -->
     <!-- UNUSED string name="cbtn_start">Indítás</string -->
     <!-- UNUSED string name="cbtn_stop">Leállítás</string -->
 
-    <string name="survey_edit">Felmérés Tulajdonságok</string>
     <string name="survey_list">FELMÉRÉSEK</string>
     <string name="survey_legs"> Poligonok: </string>
     <string name="survey_legs_length"> Poligonok hossza: </string>
@@ -1886,7 +1881,6 @@ A részletekért keresse fel a weboldalakat.\n
 
     <!-- UNUSED string name="SURVEYS">M É R É S E K</string -->
     <string name="INFO">I N F ó</string>
-    <string name="EXPORT">E X P O R T</string>
     <string name="STATIONS">P O N T O K</string>
     <string name="STATIONS_DISTANCE">PONT TÁVOLSÁG</string>
     <!-- UNUSED string name="DISTANCE">TÁVOLSÁG</string -->
@@ -1920,10 +1914,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="powercrust_dxf_not_supported">powercrust dxf export nem támogatott</string>
 
     <string name="ok_export">Rendben, Exportálva %1$s</string>
-    <string name="cdouble_back">Nyomj még egy VISSZÁT a kilépéshez</string>
 
-    <string name="no_planview">Nincs alaprajz nézet</string>
-    <string name="no_surface">Nincs felszín DEM</string>
+    <!-- UNUSED string name="no_planview">Nincs alaprajz nézet</string -->
+    <!-- UNUSED string name="no_surface">Nincs felszín DEM</string -->
     <string name="no_model">Nincs 3D modell</string>
     <string name="no_topodroid_model">Nen egy TopoDroid modell</string>
 
@@ -1940,7 +1933,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_gltf_ok">Exportált glTF file</string>
     <string name="export_gltf_fail">Hibás glTf export</string>
 
-    <string name="coverwrite">Felülír</string>
     <string name="warning_not_overwrite">Figyelem: nem írja felül a meglévő fájlt %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Figyelem: nem txt fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Figyelem: nem kml fájl %1$s</string -->

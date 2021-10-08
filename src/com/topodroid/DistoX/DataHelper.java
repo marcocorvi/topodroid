@@ -73,11 +73,11 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_ID          = "id=?";
   private final static String WHERE_SID         = "surveyId=?";
   private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
-  private final static String WHERE_SID_ID_LEGTYPE = "surveyId=? AND id=? AND leg=?";
+  // private final static String WHERE_SID_ID_LEGTYPE = "surveyId=? AND id=? AND leg=?";
   private final static String WHERE_SID_ID_MORE = "surveyId=? AND id>=?";
   private final static String WHERE_SID_NAME    = "surveyId=? AND name=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
-  private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
+  // private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_ID_SID_LEG  = "id<=? AND surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";

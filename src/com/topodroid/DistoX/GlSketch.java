@@ -629,15 +629,14 @@ public class GlSketch extends GlShape
   //   loadSymbols( dirpath );
   // }
 
-  static void loadSymbols( String dirpath )
+  static void loadSymbols( File dir )
   {
     if ( mBitmap != null ) return;
+    if ( ! dir.exists() ) return;
     mSymbols = new ArrayList< String >();
     mBitmap  = Bitmap.createBitmap( WIDTH, HEIGHT, Bitmap.Config.ARGB_8888 );
     Canvas canvas = new Canvas(mBitmap); // get a canvas to paint over the bitmap
     canvas.drawColor( 0x00000000 );
-    File dir = new File( dirpath );
-    if ( ! dir.exists() ) return;
     File[] files = dir.listFiles();
     if ( files == null ) return;
     for ( File file : files ) addSymbol( file, canvas );
@@ -673,6 +672,7 @@ public class GlSketch extends GlShape
           } else if ( vals[k].equals("path") ) {
             line = br.readLine();
             if ( line != null ) {
+              // FIXME with StringBuilder sb = new StringBuilder();
               path_str = line.trim().replaceAll("\\s+", " ");
               while ( ( line = br.readLine() ) != null ) {
                 line = line.trim().replaceAll("\\s+", " ");

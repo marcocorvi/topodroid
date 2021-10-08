@@ -22,7 +22,7 @@ import com.topodroid.utils.TDLog;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
 import java.io.DataOutputStream;
@@ -91,7 +91,7 @@ public class ExportSTL
   }
   
   // splays, walls, surface   NOT USED
-  public boolean exportASCII( OutputStreamWriter osw, boolean splays, boolean walls, boolean surface )
+  public boolean exportASCII( BufferedWriter osw, boolean splays, boolean walls, boolean surface )
   {
     makePositiveCoords();
     String name = "Cave3D";

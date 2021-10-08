@@ -27,7 +27,7 @@ import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
 // import java.io.FileOutputStream;
@@ -98,7 +98,7 @@ public class ExportKML
     return true;
   }
 
-  public boolean exportASCII( OutputStreamWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
+  public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
   {
     String name = "TopoGL";
     boolean ret = true;

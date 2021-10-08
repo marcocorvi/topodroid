@@ -57,12 +57,12 @@ public class Cave3DFix extends Vector3D
   }
     
 
-  public boolean hasCS() { return cs != null && cs.hasName(); }
+  // public boolean hasCS() { return cs != null && cs.hasName(); }
 
-  void log()
-  {
-    TDLog.v("origin " + name + " CS " + cs.name + " " + longitude + " " + latitude );
-  }
+  // void log()
+  // {
+  //   TDLog.v("origin " + name + " CS " + cs.name + " " + longitude + " " + latitude );
+  // }
 
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double alt )
   {

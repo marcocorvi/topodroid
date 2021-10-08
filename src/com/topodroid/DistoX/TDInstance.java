@@ -30,6 +30,12 @@ public class TDInstance
 {
   public static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
 
+  public static String getResourceString( int r ) { return context.getResources().getString( r ); }
+  public static String formatString( int r, String arg ) 
+  {
+    return String.format( context.getResources().getString( r ), arg );
+  }
+
   public static String cwd;  // current work directory
   public static String cbd;  // current base directory
 

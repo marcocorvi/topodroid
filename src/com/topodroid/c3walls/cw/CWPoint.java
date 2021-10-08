@@ -57,7 +57,7 @@ public class CWPoint extends Vector3D
   }
   
   // the triangles are ordered rightward around the outward direction
-  public boolean orderTriangles()
+  public void orderTriangles()
   {
     int k = 0;
     CWTriangle t0 = mTriangle.get(0);
@@ -65,22 +65,22 @@ public class CWPoint extends Vector3D
     CWSide s1 = t0.rightSideOf( this );
     ++k;
     while ( k<mTriangle.size() ) {
-      int j=k;
-      for ( ; j<mTriangle.size(); ++j ) {
-        if ( mTriangle.get(j).contains( s1 ) ) break;
-      } 
-      if ( j == mTriangle.size() ) return false;
+      int j = k;
+      for (; j < mTriangle.size(); ++j) {
+        if (mTriangle.get(j).contains(s1)) break;
+      }
+      if (j == mTriangle.size()) return; // return false;
       // assert ( j < mTriangle.size() );
       CWTriangle tj = mTriangle.get(j);
-      if ( j > k ) {
+      if (j > k) {
         CWTriangle tk = mTriangle.get(k);
-        mTriangle.set(j, tk );
-        mTriangle.set(k, tj );
+        mTriangle.set(j, tk);
+        mTriangle.set(k, tj);
       }
-      s1 = tj.rightSideOf( this );
+      s1 = tj.rightSideOf(this);
       ++k;
     }
-    return true;
+    // return true;
   }
   
   public CWTriangle rightTriangleOf( CWSide s )

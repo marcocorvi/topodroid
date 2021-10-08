@@ -26,10 +26,8 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
 
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
 // import java.io.PrintStream;
-import java.io.FileOutputStream;
+// import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -400,7 +398,7 @@ public class ExportDXF
     return handle;
   }
 
-  public boolean exportASCII( OutputStreamWriter osw, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls, boolean version13 )
+  public boolean exportASCII( BufferedWriter osw, TglParser data, boolean b_legs, boolean b_splays, boolean b_walls, boolean version13 )
   {
     if ( data == null ) return false;
     List< Cave3DStation> stations = data.getStations();

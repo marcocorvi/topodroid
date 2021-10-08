@@ -508,7 +508,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="saving_">Salvando </string -->
     <string name="saving_file_failed">Salvataggio file fallito</string>
     <!-- UNUSED string name="scrap_name">nome del disegno</string -->
-    <!-- OK string name="splay">splay</string -->
+    <!-- UNUSED string name="splay">splay</string -->
     <string name="too_many_leg_intersection">La sezione interseca piú battute</string>
     <!-- UNUSED string name="too_many_legs_xsection">Troppe battute per una Cross-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Convertito disegno da formato binario a th2</string -->
@@ -1792,9 +1792,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
     <!-- TODO string name="measure">measure</string -->
 
-    <string name="style_stroke">Tratto</string>
-    <string name="style_stroke_fill">Tratto &amp; area</string>
-    <string name="style_fill">Area</string>
+    <!-- UNUSED string name="style_stroke">Tratto</string -->
+    <!-- UNUSED string name="style_stroke_fill">Tratto &amp; area</string -->
+    <!-- UNUSED string name="style_fill">Area</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
     <!-- TODO string name="dem_file">DEM %1$s</string -->
@@ -1833,7 +1833,6 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <!-- UNUSED string name="SURVEYS">R I L I E V I</string -->
     <string name="INFO">I N F O</string>
-    <string name="EXPORT">E S P O R T A Z I O N E</string>
     <string name="STATIONS">C A P I S A L D I</string>
     <string name="STATIONS_DISTANCE">DISTANZA CAPISALDI</string>
     <!-- UNUSED string name="DISTANCE">DISTANZA</string -->
@@ -1863,8 +1862,8 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="ok_export">OK. Esportato %1$s</string>
 
-    <string name="no_planview">Nessuna vista in pianta</string>
-    <string name="no_surface">Nessun modello DEM</string>
+    <!-- UNUSED string name="no_planview">Nessuna vista in pianta</string -->
+    <!-- UNUSED string name="no_surface">Nessun modello DEM</string -->
 
     <string name="error_file_not_found">Errore: file non trovato</string>
     <string name="error_file_not_readable">Errore: file non leggibile</string>

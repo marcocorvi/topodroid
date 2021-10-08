@@ -27,7 +27,7 @@ class Cave3DDelaunay
   // normalized 3D vector
   class DelaunayPoint extends Vector3D
   {
-    int index; // debug
+    // int index; // debug
     Vector3D orig; // original vector
     // Vector3D v;    // normalized vector
     boolean used;
@@ -36,7 +36,7 @@ class Cave3DDelaunay
     {
       super( vv );
       orig  = vv;
-      index = kk;
+      // index = kk;
       // v = new Vector3D( vv.x, vv.y, vv.z );
       // v.normalized();
       this.normalized();
@@ -62,15 +62,9 @@ class Cave3DDelaunay
       t = null;
     }
 
-    boolean coincide( DelaunayPoint i0, DelaunayPoint j0 ) 
-    {
-      return ( p1==i0 && p2==j0 );
-    }
+    // boolean coincide( DelaunayPoint i0, DelaunayPoint j0 ) { return ( p1==i0 && p2==j0 ); }
 
-    boolean opposite( DelaunayPoint i0, DelaunayPoint j0 )
-    {
-      return ( p2==i0 && p1==j0 );
-    }
+    // boolean opposite( DelaunayPoint i0, DelaunayPoint j0 ) { return ( p2==i0 && p1==j0 ); }
 
     boolean isPositive( Vector3D v, double eps ) { return n.dotProduct( v ) > eps; }
 
@@ -78,7 +72,7 @@ class Cave3DDelaunay
 
     // boolean contains( Vector3D v, double eps ) { return Math.abs( n.dotProduct( v ) ) < eps; } 
 
-    double dot( Vector3D v ) { return n.dotProduct( v ); }
+    // double dot( Vector3D v ) { return n.dotProduct( v ); }
   }
 
   class DelaunayTriangle
@@ -165,19 +159,19 @@ class Cave3DDelaunay
   // @param triangles   array of triangles
   // @param st          base station (e,n,z)
   //
-  void insertTrianglesIn( ArrayList<Triangle3D> triangles, Cave3DStation st )
-  {
-    Vector3D p0 = new Vector3D( st.x, st.y, st.z );
-    for ( DelaunayTriangle t : mTri ) {
-      if ( t.s1.p1.orig != null && t.s2.p1.orig != null && t.s3.p1.orig != null ) {
-        Vector3D v1 = p0.sum( t.s1.p1.orig );
-        Vector3D v2 = p0.sum( t.s2.p1.orig );
-        Vector3D v3 = p0.sum( t.s3.p1.orig );
-        Triangle3D t0 = new Triangle3D( v1, v2, v3, color );
-        triangles.add( t0 );
-      }
-    }
-  }
+  // void insertTrianglesIn( ArrayList<Triangle3D> triangles, Cave3DStation st )
+  // {
+  //   Vector3D p0 = new Vector3D( st.x, st.y, st.z );
+  //   for ( DelaunayTriangle t : mTri ) {
+  //     if ( t.s1.p1.orig != null && t.s2.p1.orig != null && t.s3.p1.orig != null ) {
+  //       Vector3D v1 = p0.sum( t.s1.p1.orig );
+  //       Vector3D v2 = p0.sum( t.s2.p1.orig );
+  //       Vector3D v3 = p0.sum( t.s3.p1.orig );
+  //       Triangle3D t0 = new Triangle3D( v1, v2, v3, color );
+  //       triangles.add( t0 );
+  //     }
+  //   }
+  // }
 
   // cross-product of two Vector3D
   // Vector3D cross_product( Vector3D p1, Vector3D p2 )
@@ -364,43 +358,43 @@ class Cave3DDelaunay
     handle( s3, p );
   }
 
-  private void handleSide( DelaunaySide s0, DelaunayPoint p )
-  {
-    DelaunaySide sh = s0.otherHalf;
-    DelaunayTriangle t0 = s0.t;
-    DelaunayTriangle th = sh.t;
-    DelaunayPoint p0 = t0.vertexOf( s0 );
-    DelaunayPoint ph = th.vertexOf( sh );
-
-    DelaunaySide pp0   = addSide( p, p0 );
-    DelaunaySide p0p   = addSide( p0, p );
-    setOpposite( pp0, p0p );
-    DelaunaySide pph   = addSide( p, ph );
-    DelaunaySide php   = addSide( ph, p );
-    setOpposite( pph, php );
-    DelaunaySide s0p1p = addSide( s0.p1, p     ); 
-    DelaunaySide ps0p2 = addSide( p,     s0.p2 ); 
-    DelaunaySide shp1p = addSide( sh.p1, p     ); 
-    DelaunaySide pshp2 = addSide( p,     sh.p2 ); 
-    setOpposite( s0p1p, pshp2 );
-    setOpposite( ps0p2, shp1p );
-
-    DelaunaySide t0next = t0.next( s0 ); 
-    DelaunaySide t0prev = t0.prev( s0 ); 
-    DelaunaySide thnext = th.next( sh ); 
-    DelaunaySide thprev = th.prev( sh ); 
-    // remove t0, th, 
-    // remove s0, sh
-    mTri.remove( t0 );
-    mTri.remove( th );
-    mSide.remove( s0 );
-    mSide.remove( sh );
-    // insert four triangles
-    addTriangle( t0prev, s0p1p, pp0 );
-    addTriangle( t0next, p0p,   ps0p2 );
-    addTriangle( thprev, shp1p, pph );
-    addTriangle( thnext, php,   pshp2 );
-  }
+  // private void handleSide( DelaunaySide s0, DelaunayPoint p )
+  // {
+  //   DelaunaySide sh = s0.otherHalf;
+  //   DelaunayTriangle t0 = s0.t;
+  //   DelaunayTriangle th = sh.t;
+  //   DelaunayPoint p0 = t0.vertexOf( s0 );
+  //   DelaunayPoint ph = th.vertexOf( sh );
+  //
+  //   DelaunaySide pp0   = addSide( p, p0 );
+  //   DelaunaySide p0p   = addSide( p0, p );
+  //   setOpposite( pp0, p0p );
+  //   DelaunaySide pph   = addSide( p, ph );
+  //   DelaunaySide php   = addSide( ph, p );
+  //   setOpposite( pph, php );
+  //   DelaunaySide s0p1p = addSide( s0.p1, p     ); 
+  //   DelaunaySide ps0p2 = addSide( p,     s0.p2 ); 
+  //   DelaunaySide shp1p = addSide( sh.p1, p     ); 
+  //   DelaunaySide pshp2 = addSide( p,     sh.p2 ); 
+  //   setOpposite( s0p1p, pshp2 );
+  //   setOpposite( ps0p2, shp1p );
+  //
+  //   DelaunaySide t0next = t0.next( s0 ); 
+  //   DelaunaySide t0prev = t0.prev( s0 ); 
+  //   DelaunaySide thnext = th.next( sh ); 
+  //   DelaunaySide thprev = th.prev( sh ); 
+  //   // remove t0, th, 
+  //   // remove s0, sh
+  //   mTri.remove( t0 );
+  //   mTri.remove( th );
+  //   mSide.remove( s0 );
+  //   mSide.remove( sh );
+  //   // insert four triangles
+  //   addTriangle( t0prev, s0p1p, pp0 );
+  //   addTriangle( t0next, p0p,   ps0p2 );
+  //   addTriangle( thprev, shp1p, pph );
+  //   addTriangle( thnext, php,   pshp2 );
+  // }
     
   // n is the third vertex of the triangle
 

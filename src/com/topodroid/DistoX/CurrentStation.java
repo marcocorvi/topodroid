@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import androidx.annotation.RecentlyNonNull;
+
 import com.topodroid.utils.TDString;
 
 public class CurrentStation
@@ -32,7 +34,8 @@ public class CurrentStation
     mFlag    = (int)flag;
   }
 
-  public String toString() 
+  // @RecentlyNonNull
+  public String toString()
   { 
     return mName + flag_str[mFlag] + mComment;
   }

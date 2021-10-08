@@ -507,7 +507,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="saving_">Salvando </string -->
     <string name="saving_file_failed">Falha ao salvar o arquivo</string>
     <!-- UNUSED string name="scrap_name">nome do croqui</string -->
-    <string name="splay">visada auxiliar</string>
+    <!-- UNUSED string name="splay">visada auxiliar</string -->
     <string name="too_many_leg_intersection">Linha de corte cruza mais de uma visada.</string>
     <!-- UNUSED string name="too_many_legs_xsection">Corte X em bases com visadas para mais de 2 outras bases não é suportado.</string -->
     <!-- UNUSED string name="converted_tdr2th2">Arquivos binários dos croquis convertidos para th2</string -->
@@ -1780,9 +1780,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
     <!-- TODO string name="measure">measure</string -->
 
-    <!-- TODO string name="style_stroke">Stroke</string -->
-    <!-- TODO string name="style_stroke_fill">Fill &amp; Stroke</string -->
-    <!-- TODO string name="style_fill">Fill</string -->
+    <!-- UNUSED string name="style_stroke">Stroke</string -->
+    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
     <!-- TODO string name="dem_file">DEM %1$s</string -->
@@ -1821,7 +1821,6 @@ Refer to the web pages for details.\n
 
     <!-- UNUSED string name="SURVEYS">T O P O S</string -->
     <string name="INFO">I N F O</string>
-    <string name="EXPORT">E X P O R T A R</string>
     <string name="STATIONS">B A S E</string>
     <string name="STATIONS_DISTANCE">DISTÂNCIA BASES</string>
     <!-- UNUSED string name="DISTANCE">DISTÂNCIA</string -->
@@ -1851,8 +1850,8 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="ok_export">OK. Exported %1$s</string -->
 
-    <!-- TODO string name="no_planview">No plan view</string -->
-    <!-- TODO string name="no_surface">No surface DEM</string -->
+    <!-- UNUSED string name="no_planview">No plan view</string -->
+    <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
     <!-- TODO string name="error_file_not_found">Error: file not found</string -->
     <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->

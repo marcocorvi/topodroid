@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+// import androidx.annotation.RecentlyNonNull;
+
 public class GeoReference
 {
   public final double ge;  // data-reduced East value
@@ -31,13 +33,14 @@ public class GeoReference
   }
 
   // DEBUG method
+  // @RecentlyNonNull
   public String toString()
   {
     StringBuilder sb = new StringBuilder();
-    sb.append( "Geo: E " + ge );
-    sb.append( " S " + gs );
-    sb.append( " V " + gv );
-    sb.append( " d " + declination );
+    sb.append("Geo: E ").append( ge )
+      .append( " S ").append( gs )
+      .append( " V ").append( gv )
+      .append( " d ").append( declination );
     return sb.toString();
   }
 }

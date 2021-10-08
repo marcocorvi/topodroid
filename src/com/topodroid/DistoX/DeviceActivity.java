@@ -1043,7 +1043,7 @@ public class DeviceActivity extends Activity
   {
     // String filename = TDPath.getCCsvFile( name );
     // File file = TDFile.getFile( filename );
-    File file = TDFile.getExternalFile( "ccsv", name );
+    File file = TDPath.getCcsvFile( name );
     if ( ! file.exists() ) {
       TDToast.makeBad(R.string.file_not_found );
     } else {

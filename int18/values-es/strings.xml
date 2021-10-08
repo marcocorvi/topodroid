@@ -503,7 +503,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="saving_">Guardar</string -->
     <string name="saving_file_failed">Fallo al guardar archivo</string>
     <!-- UNUSED string name="scrap_name">Nombre de dibujo</string -->
-    <string name="splay">Toma Lateral</string>
+    <!-- UNUSED string name="splay">Toma Lateral</string -->
     <string name="too_many_leg_intersection">La línea de la sección abarca más de una visual</string>
     <!-- UNUSED string name="too_many_legs_xsection">Hay demasiadas tomas de sección</string -->
     <!-- UNUSED string name="converted_tdr2th2">Archivos binarios de dibujo convertidos a Th2</string -->
@@ -1781,9 +1781,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
     <!-- TODO string name="measure">measure</string -->
 
-    <!-- TODO string name="style_stroke">Stroke</string -->
-    <!-- TODO string name="style_stroke_fill">Fill &amp; Stroke</string -->
-    <!-- TODO string name="style_fill">Fill</string -->
+    <!-- UNUSED string name="style_stroke">Stroke</string -->
+    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
     <!-- TODO string name="dem_file">DEM %1$s</string -->
@@ -1822,7 +1822,6 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <!-- UNUSED string name="SURVEYS">P r o y e c t o</string -->
     <string name="INFO">I n f o r m a c i ó n</string>
-    <string name="EXPORT">E x p o r t a r</string>
     <string name="STATIONS">E s t a c i ó n</string>
     <string name="STATIONS_DISTANCE">Distancia estación</string>
     <!-- UNUSED string name="DISTANCE">Distancia</string -->
@@ -1852,8 +1851,8 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <string name="ok_export">OK. Exportado %1$s</string>
 
-    <!-- TODO string name="no_planview">No plan view</string -->
-    <!-- TODO string name="no_surface">No surface DEM</string -->
+    <!-- UNUSED string name="no_planview">No plan view</string -->
+    <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
     <string name="error_file_not_found">Error: archivo no encontrado</string>
     <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->

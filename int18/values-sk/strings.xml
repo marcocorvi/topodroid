@@ -514,7 +514,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="saving_">Ukladanie </string -->
     <string name="saving_file_failed">Neúspešné uloženie súboru</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
-    <string name="splay">Pomocné zámery</string>
+    <!-- UNUSED string name="splay">Pomocné zámery</string -->
     <string name="too_many_leg_intersection">Čiara priečneho rezu pretína veľa hlavných zámer</string>
     <!-- UNUSED string name="too_many_legs_xsection">Too many legs for X-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
@@ -1812,9 +1812,9 @@ DO NOT REMOVE THIS LINE -->
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
     <string name="measure">Meranie</string>
 
-    <string name="style_stroke">Stroke</string>
-    <string name="style_stroke_fill">Fill &amp; Stroke</string>
-    <string name="style_fill">Fill</string>
+    <!-- UNUSED string name="style_stroke">Stroke</string -->
+    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- UNUSED string name="style_fill">Fill</string -->
     <string name="surface_projection">Projekcia na DEM</string>
     <string name="surface_texture">Štruktúra povrchu</string>
     <string name="dem_file">DEM %1$s</string>
@@ -1853,7 +1853,6 @@ DO NOT REMOVE THIS LINE -->
 
     <!-- UNUSED string name="SURVEYS">JASKYNE</string -->
     <string name="INFO">INFO</string>
-    <string name="EXPORT">EXPORT</string>
     <string name="STATIONS">MERAČSKÝ BOD</string>
     <string name="STATIONS_DISTANCE">VZDIALENOSŤ MERAČSKÝCH BODOV</string>
     <!-- UNUSED string name="DISTANCE">VZDIALENOSŤ</string -->
@@ -1884,8 +1883,8 @@ DO NOT REMOVE THIS LINE -->
 
     <string name="ok_export">OK. Export dokončený %1$s</string>
 
-    <string name="no_planview">Žiadny pôdorys</string>
-    <string name="no_surface">Žiadny povrchový DEM</string>
+    <!-- UNUSED string name="no_planview">Žiadny pôdorys</string -->
+    <!-- UNUSED string name="no_surface">Žiadny povrchový DEM</string -->
 
     <string name="error_file_not_found">Error: súbor nenájdený</string>
     <string name="error_file_not_readable">Error: súbor nečitateľný</string>

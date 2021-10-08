@@ -73,20 +73,20 @@ class Cave3DHull
     computeHull();
   }
 
-  void dumpHull()
-  {
-    int s1 = projs1.size();
-    int s2 = projs2.size();
-    TDLog.v("Hull at station " + mStationFrom.getFullName() + " size " + s1 + " " + mStationTo.getFullName() + " " + s2 );
-    // for (int k=0; k<s1; ++k ) {
-    //   HullProjection p = projs1.get(k);
-    //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
-    // }
-    // for (int k=0; k<s2; ++k ) {
-    //   HullProjection p = projs2.get(k);
-    //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
-    // }
-  }
+  // void dumpHull()
+  // {
+  //   int s1 = projs1.size();
+  //   int s2 = projs2.size();
+  //   TDLog.v("Hull at station " + mStationFrom.getFullName() + " size " + s1 + " " + mStationTo.getFullName() + " " + s2 );
+  //   // for (int k=0; k<s1; ++k ) {
+  //   //   HullProjection p = projs1.get(k);
+  //   //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
+  //   // }
+  //   // for (int k=0; k<s2; ++k ) {
+  //   //   HullProjection p = projs2.get(k);
+  //   //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
+  //   // }
+  // }
 
   private void addTriangle( HullProjection p1, HullProjection p2, HullProjection p3 )
   {

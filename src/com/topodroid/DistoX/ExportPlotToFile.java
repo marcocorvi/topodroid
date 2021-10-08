@@ -75,13 +75,12 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     {
       // TDLog.v("export plot to file in bkgr. ext " + mExt );
       // String dirname = null;
-      ParcelFileDescriptor pfd = null;
+      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
       try {
         // TDLog.v("export plot to file: <" + mFullName + "> <" + mExt + ">" );
         // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
-          pfd = TDsafUri.docWriteFileDescriptor( mUri );
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           if ( mExt.equals("shp") ) { 
             FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getShpFileWithExt( mFullName ) );

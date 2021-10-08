@@ -18,6 +18,8 @@ import android.widget.ArrayAdapter;
 import android.view.View;
 import android.view.ViewGroup;
 
+// import androidx.annotation.RecentlyNonNull;
+
 class HelpAdapter extends ArrayAdapter< HelpEntry >
 {
   private final ArrayList< HelpEntry > mItems;
@@ -41,6 +43,7 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
     mItems.add( item );
   }
 
+  // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {

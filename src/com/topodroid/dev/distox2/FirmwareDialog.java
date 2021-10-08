@@ -14,7 +14,6 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -138,7 +137,7 @@ public class FirmwareDialog extends MyDialog
           // TDLog.LogFile( "Firmware dump to " + filename );
           TDLog.v( "Firmware dump to " + filename );
           // File fp = new File( TDPath.getBinFile( filename ) );
-          File fp = TDFile.getExternalFile( "bin", filename );
+          File fp = TDPath.getBinFile( filename );
           if ( fp.exists() ) {
             TDToast.makeBad( R.string.firmware_file_exists );
             return;
@@ -148,7 +147,7 @@ public class FirmwareDialog extends MyDialog
           // TDLog.LogFile( "Firmware upload from " + filename );
           TDLog.v( "Firmware upload from " + filename );
           // File fp = new File( TDPath.getBinFile( filename ) );
-          File fp = TDFile.getExternalFile( "bin", filename );
+          File fp = TDPath.getBinFile( filename );
           if ( ! fp.exists() ) {
             TDLog.Error( "inexistent upload firmware file " + filename );
             return;    
@@ -224,7 +223,7 @@ public class FirmwareDialog extends MyDialog
           // TDToast.makeLong( R.string.firmware_wait_upload );
           // mApp.uploadFirmware( filename );
           // File file = new File( pathname ); // file must exists
-          File file = TDFile.getExternalFile( "bin", filename );
+          File file = TDPath.getBinFile( filename );
           // TDLog.LogFile( "Firmware uploading from " + file.getPath() );
           TDLog.v( "Firmware uploading from " + file.getPath() );
           long len = file.length();

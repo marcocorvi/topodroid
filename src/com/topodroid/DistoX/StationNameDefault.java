@@ -152,7 +152,7 @@ class StationNameDefault extends StationName
         int i2 = Integer.parseInt( to );
         if ( Math.abs(i2-i1) != 1 ) {
           StringBuilder sb = new StringBuilder();
-          for ( String st : sts ) sb.append(st + "," );
+          for ( String st : sts ) sb.append(st).append("," );
           TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
         }
       } catch ( NumberFormatException e ) { }

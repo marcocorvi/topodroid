@@ -14,109 +14,58 @@
       android:layout_marginBottom="10dp"
       android:layout_marginLeft="10dp"
       android:layout_marginRight="10dp"
-      android:layout_marginTop="25dp"
+      android:layout_marginTop="20dp"
       android:padding="10dp"
       android:max="255"
       android:background="#666666"
     />
 
     <LinearLayout
-        android:layout_width="fill_parent" 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="vertical"
+      android:layout_gravity="right"
+      android:layout_marginTop="20dp"
+      android:layout_marginLeft="20dp"
+      >
+      <CheckBox android:id="@+id/bubble"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_gravity="right"
-        android:layout_marginTop="20dp"
-        >
-      <LinearLayout
-        android:layout_width="wrap_content" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/walls_bubble"
+      />
+      <CheckBox android:id="@+id/tube"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="right"
-        android:layout_marginLeft="20dp"
-        >
-        <CheckBox android:id="@+id/bubble"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/walls_bubble"
-        />
-        <CheckBox android:id="@+id/tube"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/walls_tube"
-        />
-        <CheckBox android:id="@+id/hull"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/walls_hull"
-        />
-        <CheckBox android:id="@+id/convexhull"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/walls_convexhull"
-        />
-        <CheckBox android:id="@+id/powercrust"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/walls_powercrust"
-        />
-      </LinearLayout>
-      <!-- LinearLayout
-        android:layout_width="fill_parent" 
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/walls_tube"
+      />
+      <CheckBox android:id="@+id/hull"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_gravity="right"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
-        >
-        <CheckBox android:id="@+id/bubble_no"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/clear"
-        />
-        <CheckBox android:id="@+id/tube_no"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/clear"
-        />
-        <CheckBox android:id="@+id/hull_no"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/clear"
-        />
-        <CheckBox android:id="@+id/convexhull_no"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/clear"
-        />
-        <CheckBox android:id="@+id/powercrust_no"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/clear"
-        />
-      </LinearLayout -->
-    </LinearLayout>
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/walls_hull"
+      />
+      <CheckBox android:id="@+id/convexhull"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/walls_convexhull"
+      />
+      <CheckBox android:id="@+id/powercrust"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp"
+        android:text="@string/walls_powercrust"
+      />
+  </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout7"
+  <LinearLayout android:id="@+id/layout7"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:orientation="horizontal"
@@ -140,7 +89,7 @@
           android:layout_marginRight="10dp"
           android:text="@string/profile_proj"
         />
-    </LinearLayout>
+  </LinearLayout>
 
 
   <LinearLayout android:id="@+id/help"
@@ -161,15 +110,6 @@
         android:orientation="horizontal"
         android:layout_gravity="right"
         >
-        <Button android:id="@+id/button_ok"
-          style="@style/button_default"
-          android:layout_width="0dp" 
-          android:layout_height="wrap_content"
-          android:layout_weight="50"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
-          android:text="@string/button_ok"
-        />
         <Button android:id="@+id/button_cancel"
           style="@style/button_default"
           android:layout_width="0dp" 
@@ -178,6 +118,15 @@
           android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
           android:text="@string/button_cancel"
+        />
+        <Button android:id="@+id/button_ok"
+          style="@style/button_default"
+          android:layout_width="0dp" 
+          android:layout_height="wrap_content"
+          android:layout_weight="50"
+          android:layout_marginLeft="10dp"
+          android:layout_marginRight="10dp"
+          android:text="@string/button_ok"
         />
       </LinearLayout>
   </LinearLayout>

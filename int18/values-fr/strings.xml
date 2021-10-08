@@ -504,7 +504,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="saving_">Enregistrement</string -->
     <string name="saving_file_failed">Échec de l\'enregistrement du fichier</string>
     <!-- UNUSED string name="scrap_name">Nom du croquis</string -->
-    <string name="splay">Visée latérale</string>
+    <!-- UNUSED string name="splay">Visée latérale</string -->
     <string name="too_many_leg_intersection">La ligne de section croise plus d\'une ligne de cheminement.</string>
     <!-- UNUSED string name="too_many_legs_xsection">Trop de visées pour la section X</string -->
     <!-- UNUSED string name="converted_tdr2th2">Fichier de dessin binaire convertis vers th2</string -->
@@ -1773,9 +1773,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
     <!-- TODO string name="measure">measure</string -->
 
-    <!-- TODO string name="style_stroke">Stroke</string -->
-    <!-- TODO string name="style_stroke_fill">Fill &amp; Stroke</string -->
-    <!-- TODO string name="style_fill">Fill</string -->
+    <!-- UNUSED string name="style_stroke">Stroke</string -->
+    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
@@ -1813,7 +1813,6 @@ Refer to the web pages for details.\n
 
     <!-- UNUSED string name="SURVEYS">T o p o g r a p h i e</string -->
     <string name="INFO">I n f o r m a t i o n</string>
-    <string name="EXPORT">E x p o r t e r</string>
     <string name="STATIONS">S t a t i o n</string>
     <string name="STATIONS_DISTANCE">Distance station</string>
     <!-- UNUSED string name="DISTANCE">Distance</string -->
@@ -1843,8 +1842,8 @@ Refer to the web pages for details.\n
 
     <string name="ok_export">OK. Exporté %1$s</string>
 
-    <!-- TODO string name="no_planview">No plan view</string -->
-    <!-- TODO string name="no_surface">No surface DEM</string -->
+    <!-- UNUSED string name="no_planview">No plan view</string -->
+    <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
     <string name="error_file_not_found">Erreur : archive  non trouvée</string>
     <!-- TODO string name="error_file_not_readable">Erreur : fichier illisible</string -->

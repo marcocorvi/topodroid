@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-  style="@style/base_padding"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    style="@style/base_padding"
   android:layout_width="match_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
@@ -32,7 +33,7 @@
       android:text="@string/dash"
       android:nextFocusDown="@+id/shot_to"
       android:hint="@string/hint_from"
-    />
+        tools:ignore="Autofill" />
     <EditText android:id="@+id/shot_to"
       style="@style/edit_text"
       android:layout_marginTop="@dimen/margintiny"

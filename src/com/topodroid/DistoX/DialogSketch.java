@@ -111,7 +111,7 @@ class DialogSketch extends MyDialog
       }
     } else {
       // should never comes here
-      if ( mApp != null ) mApp.uiToast( R.string.warning_no_cwd, true );
+      TDToast.makeWarn( R.string.warning_no_cwd );
     }
   }
 
@@ -130,7 +130,7 @@ class DialogSketch extends MyDialog
         mBaseDir = parent_dir;
         updateList( mBaseDir );
       } else {
-        if ( mApp != null ) mApp.uiToast( R.string.warning_no_parent, true );
+        TDToast.makeWarn( R.string.warning_no_parent );
       }
       return;
     }

@@ -84,20 +84,20 @@ public class CWSide
     return null;
   }
 
-  // return the old triangle
-  public CWTriangle setTriangle( CWTriangle t )
+  // WAS return the old triangle
+  public void setTriangle( CWTriangle t )
   {
-    CWTriangle ret = null;
+    //  CWTriangle ret = null;
     if ( ( t.v1 == p1 && t.v2 == p2 ) || ( t.v2 == p1 && t.v3 == p2 ) || ( t.v3 == p1 && t.v1 == p2 ) ) {
       // triangle oriented as side
-      ret = t2;
+      // ret = t2;
       t2 = t;
     } else if ( ( t.v1 == p2 && t.v2 == p1 ) || ( t.v2 == p2 && t.v3 == p1 ) || ( t.v3 == p2 && t.v1 == p1 ) ) {
       // triangle oriented opposite to side
-      ret = t1;
+      // ret = t1;
       t1 = t;
     }
-    return ret;
+    // return ret;
   }
 
   public void removeTriangle( CWTriangle t )
@@ -106,18 +106,18 @@ public class CWSide
     if ( t == t2 ) t2 = null;
   }
 
-  public boolean replacePoint( CWPoint pold, CWPoint pnew )
+  public void replacePoint( CWPoint pold, CWPoint pnew )
   {
     if ( p1 == pold ) { 
       p1 = pnew; 
     } else if ( p2 == pold ) {
       p2 = pnew;
-    } else {
-      return false;
+    // } else {
+    //   return false;
     }
     // FIXME recompute direction ?
     // u12 = p2.minus( p1 );
-    return true;
+    // return true;
   }
   
   public boolean contains( CWPoint p ) { return p == p1 || p == p2; }

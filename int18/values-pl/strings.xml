@@ -514,7 +514,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="saving_">Zapisywanie </string -->
     <string name="saving_file_failed">Błąd zapisu pliku</string>
     <!-- UNUSED string name="scrap_name">sketch name</string -->
-    <string name="splay">domiar</string>
+    <!-- UNUSED string name="splay">domiar</string -->
     <string name="too_many_leg_intersection">Linia przekroju przecina wiele pomiarów</string>
     <!-- UNUSED string name="too_many_legs_xsection">Too many legs for X-section</string -->
     <!-- UNUSED string name="converted_tdr2th2">Converted sketches binary files to th2</string -->
@@ -1808,9 +1808,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
     <string name="measure">measure</string>
 
-    <string name="style_stroke">Stroke</string>
-    <string name="style_stroke_fill">Fill &amp; Stroke</string>
-    <string name="style_fill">Fill</string>
+    < UNUSED string name="style_stroke">Stroke</string>
+    < UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string>
+    < UNUSED string name="style_fill">Fill</string>
     <string name="surface_projection">Projection on surface</string>
     <string name="surface_texture">Surface texture</string>
     <string name="surface_gps">GPS track</string>
@@ -1835,17 +1835,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!- UNUSED string name="ctitle_manual_leg">New leg</string ->
     <!- UNUSED string name="ctitle_bluetooth">Bluetooth</string ->
 
-    <string name="length">length</string>
-    <string name="azimuth">azimuth</string>
-    <string name="clino">clino</string>
-
     < UNUSED string name="cbtn_laser">Laser</string>
     < UNUSED string name="cbtn_scan">Scan</string>
     < UNUSED string name="cbtn_shot">Shot</string>
     < UNUSED string name="cbtn_start">Start</string>
     < UNUSED string name="cbtn_stop">Stop</string>
 
-    <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
     <string name="survey_legs"> Legs: </string>
     <string name="survey_legs_length"> Legs length: </string>
@@ -1862,7 +1857,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     < UNUSED string name="SURVEYS">S U R V E Y S</string>
     <string name="INFO">I N F O</string>
-    <string name="EXPORT">E X P O R T</string>
     <string name="STATIONS">S T A T I O N</string>
     <string name="STATIONS_DISTANCE">STATIONS DISTANCE</string>
     < UNUSED string name="DISTANCE">DISTANCE</string>
@@ -1896,10 +1890,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string>
 
     <string name="ok_export">OK. Exported %1$s</string>
-    <string name="cdouble_back">Click BACK again to exit</string>
 
-    <string name="no_planview">No plan view</string>
-    <string name="no_surface">No surface DEM</string>
+    < UNUSED string name="no_planview">No plan view</string>
+    < UNUSED string name="no_surface">No surface DEM</string>
     <string name="no_model">No 3D model</string>
     <string name="no_topodroid_model">Not a TopoDroid model</string>
 
@@ -1916,7 +1909,6 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_gltf_ok">Exported glTF file</string>
     <string name="export_gltf_fail">Failed glTf export</string>
 
-    <string name="coverwrite">Overwrite</string>
     <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
     <!- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string ->
     <!- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string ->

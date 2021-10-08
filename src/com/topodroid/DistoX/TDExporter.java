@@ -4607,7 +4607,8 @@ public class TDExporter
     try {
       // TDLog.Log( TDLog.LOG_IO, "export calibration " + name );
       // TDPath.checkPath( filename );
-      BufferedWriter bw = TDFile.getMSwriter( "ccsv", calibname + ".csv", "text/csv" );
+      // BufferedWriter bw = TDFile.getMSwriter( "ccsv", calibname + ".csv", "text/csv" );
+      BufferedWriter bw = new BufferedWriter( new FileWriter( TDPath.getCcsvFile( calibname + ".csv" ) ) );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );

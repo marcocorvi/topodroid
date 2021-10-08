@@ -12,11 +12,10 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
 // import com.topodroid.dev.distox2.DistoX310Comm;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDInstance;
-// import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.R;
 
 // import java.lang.ref.WeakReference;
@@ -60,7 +59,7 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     // return mComm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( mFilename ) );
     TDLog.v( "task dump file " + mFilename );
-    return mComm.dumpFirmware( TDInstance.deviceAddress(), TDFile.getExternalFile( "bin", mFilename ) );
+    return mComm.dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( mFilename ) );
   }
 
   private int uploadFirmware( )
@@ -71,11 +70,11 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
     }
     // String pathname = TDPath.getBinFile( mFilename );
     // mLength = (new File( pathname )).length(); // file must exists
-    File file = TDFile.getExternalFile( "bin", mFilename );
+    File file = TDPath.getBinFile( mFilename );
     mLength = file.length(); // file must exists
     TDLog.v( "task upload file " + mFilename + " length " + mLength );
     // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
-    // if ( ! pathname.endsWith( "bin" ) ) {
+    // if ( ! pathname.endsWith( TDPath.DIR_BIN ) ) {
     //   TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
     //   return 0;
     // }

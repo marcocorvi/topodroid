@@ -211,11 +211,11 @@ public class Archiver
 
   // @param zipname  compressed zip file
   // @param lib      symbol library
-  // @param dirpath  (external files) folder for the symbol files
-  private boolean compressSymbols( File zipfile, SymbolLibrary lib, String dirpath )
+  // @param type     symbols type
+  private boolean compressSymbols( File zipfile, SymbolLibrary lib, String type )
   {
     if ( lib == null ) return false;
-    if ( ! (TDFile.getExternalDir( dirpath )).exists() ) return false;
+    if ( ! (TDFile.getPrivateDir( type )).exists() ) return false;
     // TDLog.v( "ZIP symbols zip " + zipfile.getPath() );
     List< Symbol > symbols = lib.getSymbols();
     ZipOutputStream zos = null;
@@ -225,9 +225,9 @@ public class Archiver
         if ( symbol.mEnabled ) {
           String filename = symbol.getThName();
           // THERION-U: filename = Symbol.deprefix_u( filename );
-          String filepath = dirpath + "/" + filename;
-          // TDLog.v( "ZIP symbols compress " + dirpath + " " + filepath );
-          addOptionalEntry( zos, TDFile.getExternalFile( dirpath, filename ), filepath );
+          String filepath = type + "/" + filename;
+          // TDLog.v( "ZIP symbols compress " + type + " " + filepath );
+          addOptionalEntry( zos, TDFile.getPrivateFile( type, filename ), filepath );
         }
       }
     } catch ( FileNotFoundException e ) {
@@ -239,14 +239,14 @@ public class Archiver
   }
 
   // @param zin      compressed input stream
-  // @param dirpath  (external files) folder for the symbol files
+  // @param type     symbols type
   // @param prefix   symbol prefix in the database config table
   // @return true is a symbol has been uncompressed
-  static private boolean uncompressSymbols( InputStream zin, String dirpath, String prefix )
+  static private boolean uncompressSymbols( InputStream zin, String type, String prefix )
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
     boolean ret = false;
-    // TDLog.v( "ZIP-uncompress symbol dirpath " + dirpath + " prefix " + prefix );
+    // TDLog.v( "ZIP-uncompress symbol type " + type + " prefix " + prefix );
     File tempfile = TDFile.getExternalFile( null, "tmp.zip" );
     FileOutputStream fout = null;
     int c;
@@ -261,10 +261,8 @@ public class Archiver
       FileInputStream fis = new FileInputStream( tempfile );
       ZipInputStream szin = new ZipInputStream( fis );
       while ( ( sze = szin.getNextEntry() ) != null ) {
-        // String symbolfilename = dirpath + sze.getName();
-        // File symbolfile = TDFile.getExternalFile( symbolfilename );
-        File symbolfile = TDFile.getExternalFile( dirpath, sze.getName() );
-        // TDLog.v( "ZIP try to uncompress symbol " + dirpath + " " + sze.getName() );
+        File symbolfile = TDFile.getPrivateFile( type, sze.getName() );
+        TDLog.v( "ZIP try to uncompress symbol " + type + " " + sze.getName() );
         if ( ! symbolfile.exists() ) { // don't overwrite
           // TDLog.v( "ZIP-uncompress symbol " + symbolfile.getPath() );
           // FileOutputStream sfout = TDFile.getFileOutputStream( symbolfilename ); // uncompress symbols zip

@@ -11,6 +11,8 @@
  */
 package com.topodroid.dev;
 
+// import androidx.annotation.RecentlyNonNull;
+
 import com.topodroid.utils.TDLog;
 
 public class Device
@@ -172,7 +174,8 @@ public class Device
   public boolean hasFirmwareSupport() { return mType == DISTO_X310; }
 
 
-  public String toString() 
+  // @RecentlyNonNull
+  public String toString()
   { 
     // TDLog.v( "to String <" + mName + "> type <" + mType + "> <" + typeString[ mType ] +">" );
     if ( mNickname != null && mNickname.length() > 0 ) {

@@ -76,7 +76,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     int ret = 0;
     String pathname   = null;
     BufferedWriter bw = null;
-    OutputStream fos  = null;
+    FileOutputStream fos  = null;
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri ); // mUri null handled by TDsafUri
     synchronized ( TDFile.mFilesLock ) { // too-big synch
       try {
@@ -208,6 +208,7 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
         if ( bw != null ) bw.close();
         if ( fos != null ) fos.close();
       } catch ( IOException e ) { 
+        TDLog.Error("IO error " + e.getMessage() );
       } finally {
         TDsafUri.closeFileDescriptor( pfd );
       }

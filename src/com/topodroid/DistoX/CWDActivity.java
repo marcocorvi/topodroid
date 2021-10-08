@@ -50,8 +50,7 @@ public class CWDActivity extends Activity
                                   , OnClickListener
 
 {
-  private TopoDroidApp mApp;
-
+  // private TopoDroidApp mApp;
   private ListView mList;
   private EditText mETcwd;
   private TextView mTVcbd;
@@ -167,7 +166,7 @@ public class CWDActivity extends Activity
     TDandroid.setScreenOrientation( this );
 
     setContentView(R.layout.cwd_activity);
-    mApp = (TopoDroidApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
     mBaseName = TDInstance.cbd;
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );

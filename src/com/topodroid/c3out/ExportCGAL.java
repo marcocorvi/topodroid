@@ -22,10 +22,10 @@ import java.util.Locale;
 import java.util.List;
 import java.util.ArrayList;
 
-import java.io.OutputStreamWriter;
+import java.io.BufferedWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
-import java.io.FileOutputStream;
+// import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -40,7 +40,7 @@ public class ExportCGAL
 
   // ExportCGAL() { }
 
-  public boolean exportASCII( OutputStreamWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
+  public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
   {
     // String name = "Cave3D";
     // Log.v( "Cave3D-CGAL, "export as CGAL " + filename );

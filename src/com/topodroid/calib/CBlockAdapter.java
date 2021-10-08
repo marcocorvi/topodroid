@@ -33,7 +33,7 @@ import java.util.ArrayList;
 public class CBlockAdapter extends ArrayAdapter< CBlock >
 {
   private ArrayList< CBlock > items;  // list if calibration data
-  private final Context context;                 // context
+  // private final Context context;
   private final LayoutInflater mLayoutInflater;
 
   // @param ctx    context
@@ -42,16 +42,16 @@ public class CBlockAdapter extends ArrayAdapter< CBlock >
   public CBlockAdapter( Context ctx, int id, ArrayList< CBlock > items )
   {
     super( ctx, id, items );
-    this.context = ctx;
+    // this.context = ctx;
     this.items = items;
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
   // @return the CBlock item at the gival position in the array
   public CBlock get( int pos ) { return items.get(pos); }
- 
-  @Override
+
   // @NonNull
+  @Override
   public View getView( int pos, View convertView, /* @NonNull */ ViewGroup parent )
   {
     View v = convertView;

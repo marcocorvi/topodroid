@@ -269,7 +269,7 @@ public class GlModel
   { 
     mContext = ctx;
     // GlSketch.loadSymbols( Cave3DFile.SYMBOL_PATH );
-    GlSketch.loadSymbols( TDPath.getSymbolPointDir() );
+    GlSketch.loadSymbols( TDPath.getPointDir() );
     glSketches = Collections.synchronizedList(new ArrayList< GlSketch >());
   }
 

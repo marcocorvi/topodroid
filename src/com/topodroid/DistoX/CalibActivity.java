@@ -470,10 +470,19 @@ public class CalibActivity extends Activity
     }
   }
 
+  /**
+   * @param type    export type (string)
+   */
   public void doExport( String type )
   {
     int index = TDConst.calibExportIndex( type );
-    if ( index >= 0 ) doExport( index );
+    if ( index >= 0 ) {
+      // if ( TDSetting.mExportUri ) {
+      //   selectExportFromProvider( index ); // TODO
+      // } else {
+        doExport( index );
+      // }
+    }
   }
 
   @Override 
@@ -485,6 +494,9 @@ public class CalibActivity extends Activity
     }
   }
 
+  /**
+   * @param exportType  integer export index 
+   */
   private void doExport( int exportType )
   {
     if ( TDInstance.cid < 0 ) {

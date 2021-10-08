@@ -516,7 +516,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="saving_">Speichern </string -->
     <string name="saving_file_failed">Datei konnten nicht gespeichert werden</string>
     <!-- UNUSED string name="scrap_name">Name der Skizze</string -->
-    <string name="splay">Hilfszug</string>
+    <!-- UNUSED string name="splay">Hilfszug</string -->
     <string name="too_many_leg_intersection">Schnittlinie durchquert zu viele Messstrecken</string>
     <!-- UNUSED string name="too_many_legs_xsection">Zu viele Messstrecken für Querschnitt</string -->
     <!-- UNUSED string name="converted_tdr2th2">Skizzen konvertiert zu th2.</string -->
@@ -1819,9 +1819,9 @@ Refer to the web pages for details.\n
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
     <string name="measure">measure</string>
 
-    <string name="style_stroke">Stroke</string>
-    <string name="style_stroke_fill">Fill &amp; Stroke</string>
-    <string name="style_fill">Fill</string>
+    < UNUSED string name="style_stroke">Stroke</string>
+    < UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string>
+    < UNUSED string name="style_fill">Fill</string>
     <string name="surface_projection">Projection on surface</string>
     <string name="surface_texture">Surface texture</string>
     <string name="surface_gps">GPS track</string>
@@ -1846,17 +1846,12 @@ Refer to the web pages for details.\n
     <!- UNUSED string name="ctitle_manual_leg">New leg</string ->
     <!- UNUSED string name="ctitle_bluetooth">Bluetooth</string ->
 
-    <string name="length">length</string>
-    <string name="azimuth">azimuth</string>
-    <string name="clino">clino</string>
-
     < UNUSED string name="cbtn_laser">Laser</string>
     < UNUSED string name="cbtn_scan">Scan</string>
     < UNUSED string name="cbtn_shot">Shot</string>
     < UNUSED string name="cbtn_start">Start</string>
     < UNUSED string name="cbtn_stop">Stop</string>
 
-    <string name="survey_edit">Survey Properties</string>
     <string name="survey_list">SURVEYS</string>
     <string name="survey_legs"> Legs: </string>
     <string name="survey_legs_length"> Legs length: </string>
@@ -1873,7 +1868,6 @@ Refer to the web pages for details.\n
 
     < UNUSED string name="SURVEYS">S U R V E Y S</string>
     <string name="INFO">I N F O</string>
-    <string name="EXPORT">E X P O R T</string>
     <string name="STATIONS">S T A T I O N</string>
     <string name="STATIONS_DISTANCE">STATIONS DISTANCE</string>
     < UNUSED string name="DISTANCE">DISTANCE</string>
@@ -1907,10 +1901,9 @@ Refer to the web pages for details.\n
     <string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string>
 
     <string name="ok_export">OK. Exported %1$s</string>
-    <string name="cdouble_back">Click BACK again to exit</string>
 
-    <string name="no_planview">No plan view</string>
-    <string name="no_surface">No surface DEM</string>
+    < UNUSED string name="no_planview">No plan view</string>
+    < UNUSED string name="no_surface">No surface DEM</string>
     <string name="no_model">No 3D model</string>
     <string name="no_topodroid_model">Not a TopoDroid model</string>
 
@@ -1927,7 +1920,6 @@ Refer to the web pages for details.\n
     <string name="export_gltf_ok">Exported glTF file</string>
     <string name="export_gltf_fail">Failed glTf export</string>
 
-    <string name="coverwrite">Overwrite</string>
     <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
     <!- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string ->
     <!- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string ->

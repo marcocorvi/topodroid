@@ -152,15 +152,15 @@ public class CWIntersection
   //     // if ( mV2 != null ) mV2.dump( out );
   // }
 
-  void dump()
-  {
-    CWTriangle t1 = mV1.mSide.otherTriangle( mV1.mTri );
-    CWTriangle t2 = mV2.mSide.otherTriangle( mV2.mTri );
-    TDLog.v( "CW: I " + mCnt + " [" + mType + ": tri " + mTriA.mCnt + " " + mTriB.mCnt
-                   + " ] " + t1.mCnt + "/" + mV1.mSide.mCnt + "/" + mV1.mTri.mCnt
-                   + " -- " + mV2.mTri.mCnt + "/" + mV2.mSide.mCnt + "/" + t2.mCnt 
-                   + " next " + ( (mNext != null)? mNext.mCnt : -1 ) );
-  }
+  // void dump()
+  // {
+  //   CWTriangle t1 = mV1.mSide.otherTriangle( mV1.mTri );
+  //   CWTriangle t2 = mV2.mSide.otherTriangle( mV2.mTri );
+  //   TDLog.v( "CW: I " + mCnt + " [" + mType + ": tri " + mTriA.mCnt + " " + mTriB.mCnt
+  //                  + " ] " + t1.mCnt + "/" + mV1.mSide.mCnt + "/" + mV1.mTri.mCnt
+  //                  + " -- " + mV2.mTri.mCnt + "/" + mV2.mSide.mCnt + "/" + t2.mCnt 
+  //                  + " next " + ( (mNext != null)? mNext.mCnt : -1 ) );
+  // }
   
   void writeIntersection( PrintWriter out )
   {

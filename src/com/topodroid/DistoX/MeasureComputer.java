@@ -71,7 +71,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
     if ( ! mApp.isMeasuring ) return MEASURE_SKIP; // new Integer( MEASURE_SKIP ); // do not measure
 
     Cave3DStation station = mParser.getStation( mFullname );
-    if ( station == null ) return MEASURE_NO_STATION; new Integer( MEASURE_NO_STATION ); // null station
+    if ( station == null ) return MEASURE_NO_STATION; // new Integer( MEASURE_NO_STATION ); // null station
 
     if ( station == mParser.mStartStation ) return MEASURE_SAME_STATION; // new Integer( MEASURE_SAME_STATION );
 
@@ -101,9 +101,9 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
       case MEASURE_OK:
       case MEASURE_NO_PATH:
         if ( TopoGL.mMeasureToast ) {
-          if ( mApp != null ) mApp.uiToast( mMeasure.getString(), false );
+          TDToast.make( mMeasure.getString() );
         } else {
-          (new DialogMeasure( mApp, mMeasure )).show();
+          (new DialogMeasure( mApp, mMeasure )).show(); // mApp = context
         }
         mApp.refresh();
         break;
@@ -130,7 +130,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
               }
             }
             mApp.showCurrentStation( msg );
-            // if ( mApp != null ) mApp.uiToast( msg, false );
+            // TDToast.make( msg );
           }
         }
         break;

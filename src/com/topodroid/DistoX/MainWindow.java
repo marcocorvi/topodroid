@@ -657,7 +657,6 @@ public class MainWindow extends Activity
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
-
     setMenuAdapter( getResources() );
     closeMenu();
     mMenu.setOnItemClickListener( this );

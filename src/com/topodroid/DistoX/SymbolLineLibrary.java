@@ -100,7 +100,7 @@ public class SymbolLineLibrary extends SymbolLibrary
     // String iso = "UTF-8";
     // if ( locale.equals( "name-es" ) ) iso = "ISO-8859-1";
 
-    File dir = TDFile.getExternalDir( TDPath.getSymbolLineDirname() );
+    File dir = TDFile.getPrivateDir( TDPath.getSymbolLineDirname() );
     if ( dir.exists() ) {
       int systemNr = mSymbols.size();
       File[] files = dir.listFiles();

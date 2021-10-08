@@ -170,7 +170,7 @@ public class TdmViewActivity extends Activity
       mDrawingSurface.setActivity( this );
       mDrawingSurface.setOnTouchListener(this);
       // mDrawingSurface.setBuiltInZoomControls(true);
-      mDrawingSurface.setDisplayCenter( width/2, height/2 );
+      mDrawingSurface.setDisplayCenter( width/2.0f, height/2.0f );
 
       if ( mIsNotMultitouch ) {
         mZoomView = (View) findViewById(R.id.zoomView );
@@ -201,7 +201,7 @@ public class TdmViewActivity extends Activity
 
 
       doStart();
-      mDrawingSurface.transform( width/2, height/2, 1 );
+      mDrawingSurface.transform( width/2.0f, height/2.0f, 1 );
     }
 
     @Override

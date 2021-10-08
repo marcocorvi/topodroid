@@ -22,16 +22,12 @@ import android.graphics.Bitmap;
 class FractalResult
 {
   static FractalComputer computer = null;
-  static TopoGL  mApp = null;
-  static Context mContext;
 
   static double[] mCount = new double[ FractalComputer.SIZE ];
 
-  static int compute( Context context, TopoGL app, final TglParser r, boolean do_splays, int cell, int mode )
+  static int compute( final TglParser r, boolean do_splays, int cell, int mode )
   {
     if ( computer != null ) return -1;
-    mContext = context;
-    mApp  = app;
     computer = new FractalComputer( r.emin, r.emax, r.nmin, r.nmax, r.zmin, r.zmax, do_splays, cell, mode );
     (new AsyncTask<Void, Void, Void>() {
 	public Void doInBackground( Void ... v ) {
@@ -41,7 +37,7 @@ class FractalResult
 
         public void onPostExecute( Void v )
         {
-          if ( mApp != null ) mApp.toast( R.string.done_fractals, false );
+          TDToast.make( R.string.done_fractals );
         }
     }).execute();
     return 0;
@@ -50,7 +46,7 @@ class FractalResult
   static void releaseComputer()
   {
     computer = null;
-    if ( mApp != null ) mApp.uiToast( "Fractal compute finished", false );
+    // TDToast.make( R.string.done_fractal );
   }
 
   static void setCount(int k, double val) { mCount[k] = val; }

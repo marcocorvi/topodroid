@@ -27,6 +27,8 @@ import android.view.ViewGroup;
 
 import android.view.View.OnClickListener;
 
+// import androidx.annotation.RecentlyNonNull;
+
 // import android.widget.LinearLayout;
 
 class ItemAdapter extends ArrayAdapter< ItemSymbol >
@@ -146,6 +148,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     item.setOnClickListener( this );
   }
 
+  // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {

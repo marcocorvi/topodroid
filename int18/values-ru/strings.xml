@@ -506,7 +506,7 @@
     <!-- UNUSED string name="saving_">Сохранение </string -->
     <string name="saving_file_failed">Ошибка сохранения файла</string>
     <!-- UNUSED string name="scrap_name">название абриса</string -->
-    <string name="splay">боковой замер</string>
+    <!-- UNUSED string name="splay">боковой замер</string -->
     <string name="too_many_leg_intersection">Линия разреза пересекает много отрезков</string>
     <!-- UNUSED string name="too_many_legs_xsection">Слишком много лучей для разреза</string -->
     <!-- UNUSED string name="converted_tdr2th2">Конвертировать бинарные файлы абрисов в формат th2</string -->
@@ -1791,9 +1791,9 @@
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
     <string name="measure">измерить</string>
 
-    <string name="style_stroke">Линия</string>
-    <string name="style_stroke_fill">Заливка &amp; Линии</string>
-    <string name="style_fill">Заливка</string>
+    <!-- UNUSED string name="style_stroke">Линия</string -->
+    <!-- UNUSED string name="style_stroke_fill">Заливка &amp; Линии</string -->
+    <!-- UNUSED string name="style_fill">Заливка</string -->
     <string name="surface_projection">Проекция на DEM</string>
     <string name="surface_texture">Текстура поверхности</string>
     <string name="surface_gps">GPS трек</string>
@@ -1834,7 +1834,6 @@
 
     <!-- UNUSED string name="SURVEYS">С Ъ Ё М К И</string -->
     <string name="INFO">И Н Ф О Р М А Ц И Я</string>
-    <string name="EXPORT">Э К С П О Р Т</string>
     <string name="STATIONS">П И К Е Т</string>
     <string name="STATIONS_DISTANCE">УДАЛЁННОСТЬ ПИКЕТОВ</string>
     <!-- UNUSED string name="DISTANCE">РАССТОЯНИЕ</string -->
@@ -1864,8 +1863,8 @@
 
     <string name="ok_export">OK. Экспортировано %1$s</string>
 
-    <string name="no_planview">Нет проекции плана</string>
-    <string name="no_surface">Нет DEM поверхности</string>
+    <!-- UNUSED string name="no_planview">Нет проекции плана</string -->
+    <!-- UNUSED string name="no_surface">Нет DEM поверхности</string -->
     <string name="no_model">Нет 3D модели</string>
     <string name="no_topodroid_model">Модель не из TopoDroid</string>
 
