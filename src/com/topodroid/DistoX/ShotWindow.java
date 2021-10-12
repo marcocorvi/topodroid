@@ -1323,6 +1323,7 @@ public class ShotWindow extends Activity
   private void restoreInstanceFromData()
   { 
     // TDLog.v("restore from data");
+    if ( mApp_mData == null ) return;
     String shots = mApp_mData.getValue( "DISTOX_SHOTS" );
     if ( shots != null ) {
       String[] vals = shots.split( " " );
@@ -1330,7 +1331,6 @@ public class ShotWindow extends Activity
       mFlagLeg    = ( vals.length > 1 ) && vals[1].equals( TDString.ONE );
       mFlagBlank  = ( vals.length > 2 ) && vals[2].equals( TDString.ONE );
       mDataAdapter.show_ids = ( vals.length > 3 ) && vals[3].equals( TDString.ONE );
-      // setShowIds(   ( vals.length > 3 ) && vals[3].equals( TDString.ONE ) );
       mFlagLatest = ( vals.length > 4 ) && vals[4].equals( TDString.ONE );
     } else {
       TDLog.Error("no saved data");

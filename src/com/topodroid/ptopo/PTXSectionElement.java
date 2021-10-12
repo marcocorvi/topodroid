@@ -66,8 +66,7 @@ public class PTXSectionElement extends PTElement
       _pos.read( fs );
       _station.read( fs );
       _direction = PTFile.readInt( fs );
-      TDLog.Log( TDLog.LOG_PTOPO,
-         "PT XSection pos " + _pos._x + " " + _pos._y + " id " + _station._id + " dir " + _direction );
+      TDLog.Log( TDLog.LOG_PTOPO, "PT XSection pos " + _pos._x + " " + _pos._y + " id " + _station._id + " dir " + _direction );
     }
 
     @Override

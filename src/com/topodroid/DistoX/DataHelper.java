@@ -4746,14 +4746,14 @@ public class DataHelper extends DataSetObservable
              cursor.getDouble(4),
              cursor.getDouble(5),
              TDString.escape( cursor.getString(6) ),
-             cursor.getLong(7),   // status
-             cursor.getLong(8),   // source
+             cursor.getLong(7),    // status
+             cursor.getLong(8),    // source
              TDString.escape( cursor.getString(9) ), // cs_name
-             cursor.getDouble(10),
-             cursor.getDouble(11),
-             cursor.getDouble(12),
-             cursor.getLong(8),   // source type
-             cursor.getLong(13)   // cs decimals
+             cursor.getDouble(10), // cs longitude
+             cursor.getDouble(11), // cs latitude
+             cursor.getDouble(12), // cs altitude
+             cursor.getLong(8),    // source type
+             cursor.getLong(13)    // cs decimals
            );
          } while (cursor.moveToNext());
        }

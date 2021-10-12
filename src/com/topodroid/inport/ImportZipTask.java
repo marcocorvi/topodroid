@@ -11,6 +11,7 @@
  */
 package com.topodroid.inport;
 
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDPath;
@@ -23,36 +24,52 @@ import com.topodroid.DistoX.MainWindow;
 
 // import java.util.ArrayList;
 
-import java.io.InputStream;
+// import java.io.InputStream;
 import java.io.FileInputStream;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
+import java.io.IOException;
+
+import android.os.ParcelFileDescriptor;
+
+import android.net.Uri;
 
 public class ImportZipTask extends ImportTask
 {
   boolean mForce;
+  Uri mUri;
 
-  public ImportZipTask( MainWindow main, InputStream fis, boolean force )
+  public ImportZipTask( MainWindow main, Uri uri, boolean force )
   { 
-    super(main, fis );
+    super(main );
+    mUri = uri;
     mForce = force;
   }
 
   @Override
   protected Long doInBackground( String... str )
   {
+
     String filename = str[0];
     TopoDroidApp app = mApp.get();
     if ( app == null ) return -7L;
     String name = filename.replace(".zip", "");
-    if ( fis == null ) {
-      // try { 
-      //   fis = new FileInputStream( TDPath.getZipFile( filename ) );
-      // } catch ( FileNotFoundException e ) { }
-      // if ( fis == null ) return -6L;
+
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( mUri );
+    if ( pfd == null ) {
       Archiver archiver = new Archiver( );
       return (long)archiver.unArchive( app, TDPath.getZipFile( filename ), name, mForce );
+    } else {
+      long ret = -1L;
+      try {
+        fis = TDsafUri.docFileInputStream( pfd ); // super.fis
+        ret = (long)Archiver.unArchive( app, fis, name );
+        fis.close(); 
+      } catch ( IOException e ) { 
+      } finally {
+        TDsafUri.closeFileDescriptor( pfd );
+      }
+      return ret;
     }
-    return (long)Archiver.unArchive( app, fis, name );
   }
 
   // @Override

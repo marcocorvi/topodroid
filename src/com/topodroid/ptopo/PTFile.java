@@ -296,7 +296,6 @@ public class PTFile
       TDLog.Log( TDLog.LOG_PTOPO, "PT ID file " + String.format("%02X %02X %02X %02X", bytes[0], bytes[1], bytes[2], bytes[3] ) );
 
       int tc = PTFile.readInt( fs ); 
-      // TDLog.v("PT trip count " + tc );
 
       for (int k=0; k<tc; ++k ) {
         PTTrip trip = new PTTrip();
@@ -305,7 +304,6 @@ public class PTFile
       }
     
       int sc = PTFile.readInt( fs );
-      // TDLog.v("PT shot count " + sc );
 
       for ( int k=0; k<sc; ++k ) {
         PTShot shot = new PTShot();
@@ -315,7 +313,6 @@ public class PTFile
     
       int rc = PTFile.readInt( fs );
       TDLog.Log( TDLog.LOG_PTOPO, "PT trips " + tc + " shots " + sc + " refs " + rc );
-      // TDLog.v( "PT trips " + tc + " shots " + sc + " refs " + rc );
       for ( int k=0; k<rc; ++k ) {
         PTReference ref = new PTReference();
         ref.read( fs );
@@ -476,8 +473,7 @@ public class PTFile
                  int extend,         // -1 left, +1 right
                  String comment )
     {
-      TDLog.Log( TDLog.LOG_DEBUG,
-                 "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
+      TDLog.Log( TDLog.LOG_DEBUG, "PT file add shot " + from + " " + to + " " + distance + " " + azimuth + " " + inclination );
       PTShot shot = new PTShot( distance, azimuth, inclination, roll, (extend == -1), trip );
       int id;
       if ( from.length() == 0 || from.equals("-") ) {

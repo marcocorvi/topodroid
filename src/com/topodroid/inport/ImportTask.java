@@ -33,8 +33,8 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   final WeakReference<TopoDroidApp> mApp; // FIXME LEAK used by inheriting classes
   ProgressDialog mProgress = null;
 
-  InputStream fis;
-  InputStreamReader isr;
+  protected InputStream fis;
+  protected InputStreamReader isr;
 
   ImportTask( MainWindow main )
   {
@@ -49,18 +49,18 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
 		    true );
   }
 
-  ImportTask( MainWindow main, InputStream fis )
-  {
-    super();
-    this.fis = fis;
-    this.isr = null;
-    mMain = new WeakReference<MainWindow>( main );
-    mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
-    mProgress = ProgressDialog.show( main,
-		    main.getResources().getString(R.string.pleasewait),
-		    main.getResources().getString(R.string.processing),
-		    true );
-  }
+  // ImportTask( MainWindow main, InputStream fis )
+  // {
+  //   super();
+  //   this.fis = fis;
+  //   this.isr = null;
+  //   mMain = new WeakReference<MainWindow>( main );
+  //   mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
+  //   mProgress = ProgressDialog.show( main,
+  //       	    main.getResources().getString(R.string.pleasewait),
+  //       	    main.getResources().getString(R.string.processing),
+  //       	    true );
+  // }
 
   ImportTask( MainWindow main, InputStreamReader isr )
   {

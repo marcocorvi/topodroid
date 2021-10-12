@@ -12,6 +12,7 @@
 package com.topodroid.inport;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.MainWindow;
 import com.topodroid.DistoX.TDPath;
@@ -19,21 +20,32 @@ import com.topodroid.DistoX.TDPath;
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
-import java.io.InputStream;
+// import java.io.InputStream;
+
+import java.io.IOException;
+
+import android.net.Uri;
+
+import android.os.ParcelFileDescriptor;
 
 public class ImportPocketTopoTask extends ImportTask
 {
-  public ImportPocketTopoTask( MainWindow main, InputStream fis ) 
+  Uri mUri = null;
+  public ImportPocketTopoTask( MainWindow main, Uri uri )
   {
-    super( main, fis );
+    super( main );
+    mUri = uri;
   }
 
   @Override
   protected Long doInBackground( String... str )
   {
     long sid = 0;
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( mUri );
+    if ( pfd == null ) return -1L;
     try {
       TDLog.v( "import PocketTopo: survey " + str[1] );
+      fis = TDsafUri.docFileInputStream( pfd ); // super.fis
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( fis, str[0], str[1], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
@@ -89,8 +101,12 @@ public class ImportPocketTopoTask extends ImportTask
       //   }
       // }
       
+      fis.close(); 
+    } catch ( IOException e ) { 
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );
+    } finally {
+      TDsafUri.closeFileDescriptor( pfd );
     }
     return sid;
   }

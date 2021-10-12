@@ -495,20 +495,16 @@ public class MainWindow extends Activity
   {
     // FIXME connect-title string
     TDLog.v( "import with uri stream <" + name + "> type <" + type + ">" );
-    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-    FileInputStream fis = TDsafUri.docFileInputStream( pfd );
     if ( type.equals(".top") ) {
       setTitleImport();
-      new ImportPocketTopoTask( this, fis ).execute( null, name );  // null filename (use fis); name = surveyname
+      new ImportPocketTopoTask( this, uri ).execute( null, name );  // null filename (use fis); name = surveyname
     } else if ( type.equals(".zip") ) {
       // TDToast.makeLong( R.string.import_zip_wait );
       setTitleImport();
-      new ImportZipTask( this, fis, false ) .execute( name ); // force = true (skip version checks)
+      new ImportZipTask( this, uri, false ) .execute( name ); // force = true (skip version checks)
     // } else {
     //   setTheTitle( );
     }
-    try { fis.close(); } catch ( IOException e ) { }
-    TDsafUri.closeFileDescriptor( pfd );
     // FIXME SYNC updateDisplay();
   }
   
