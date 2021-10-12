@@ -88,6 +88,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
 
   public void writeSvg( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
+    // TDLog.v("SvgWalls write " + filename + " type " + type );
     String wall_group = BrushManager.getLineWallGroup( );
 
     int handle = 0;
@@ -316,7 +317,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write( "      " + end_grp ); // markers
       out.write(       flags ); out.write( group_mode_close );
 
-      // survey: LABELS
+      // TDLog.v("survey: LABELS");
       out.write(       labels ); out.write( group_mode_open );
       if ( TDSetting.mAutoStations ) {
         StringWriter sw6s = new StringWriter();
@@ -346,25 +347,28 @@ public class DrawingSvgWalls extends DrawingSvgBase
         // }
       }
       out.flush();
+      // TDLog.v("survey: LABELS stations done");
 
       for ( Scrap scrap : plot.getScraps() ) {
         ArrayList<DrawingPath> paths = new ArrayList<>();
         scrap.addCommandsToList( paths );
+        // TDLog.v("survey: SCRAP " + scrap.mScrapIdx + " paths " + paths.size() );
         out.write( "        <g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
         for ( DrawingPath path : paths ) {
-          if ( path.mType != DrawingPath.DRAWING_PATH_POINT ) continue;
-          DrawingPointPath point = (DrawingPointPath)path;
-          if ( ! BrushManager.isPointLabel( point.mPointType ) ) continue;
-          StringWriter sw5l = new StringWriter();
-          PrintWriter pw5l  = new PrintWriter( sw5l );
-          toSvgLabel( pw5l, (DrawingLabelPath)point, pathToColor( path ), xoff, yoff );
-          out.write( sw5l.getBuffer().toString() );
+          if ( path instanceof DrawingLabelPath ) {
+            DrawingLabelPath label = (DrawingLabelPath)path;
+            StringWriter sw5l = new StringWriter();
+            PrintWriter pw5l  = new PrintWriter( sw5l );
+            toSvgLabel( pw5l, label, pathToColor( path ), xoff, yoff );
+            out.write( sw5l.getBuffer().toString() );
+          }
         }
         out.write( "      " + end_grp ); // scrap
       }
       out.write( "      " + end_grp ); // labels
       out.write( "    " + end_grp ); // survey
       out.flush();
+      // TDLog.v("survey: SURVEY done");
 
       // NOTES, GRID, LEGEND (SCALEBAR, NORTH), FRAME
       out.write(      notes ); out.write( group_mode_close );

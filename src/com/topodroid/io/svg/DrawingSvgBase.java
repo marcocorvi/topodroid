@@ -190,15 +190,15 @@ public class DrawingSvgBase
     }
   }
 
-  static protected void toSvgLabel( PrintWriter pw, DrawingLabelPath point, String color, float xoff, float yoff )
+  static protected void toSvgLabel( PrintWriter pw, DrawingLabelPath label, String color, float xoff, float yoff )
   {
-    String name = point.getThName();
-    float scale = point.getScaleValue();
-    pw.format("<!-- point %s -->\n", name );
+    String name = label.getThName();
+    float scale = label.getScaleValue();
+    // TDLog.v("label: " + name + " " + scale + " text " + label.mPointText );
+    pw.format("<!-- label %s -->\n", name );
     if ( name.equals( SymbolLibrary.LABEL ) ) {
-      DrawingLabelPath label = (DrawingLabelPath)point;
-      printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
-      pw.format(Locale.US, " font-size=\"%d\"", TDSetting.mSvgLabelSize * scale );
+      printPointWithXY( pw, "<text", xoff+label.cx, yoff+label.cy );
+      pw.format(Locale.US, " font-size=\"%.1f\"", TDSetting.mSvgLabelSize * scale );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\">%s</text>\n", TDSetting.mSvgLabelStroke, label.mPointText );
     }
   }
