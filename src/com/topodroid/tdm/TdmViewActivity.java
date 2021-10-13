@@ -24,39 +24,39 @@ import com.topodroid.DistoX.R;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.content.Context;
-import android.content.Intent;
+// import android.content.Context;
+// import android.content.Intent;
 import android.content.res.Resources;
 import android.content.pm.PackageManager;
 import android.content.DialogInterface;
 
-import android.graphics.Paint;
-import android.graphics.Paint.FontMetrics;
+// import android.graphics.Paint;
+// import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
-import android.graphics.Path;
-import android.view.Menu;
-import android.view.MenuItem;
+// import android.graphics.Path;
+// import android.view.Menu;
+// import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 // import android.view.ViewGroup.LayoutParams;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+// import android.widget.LinearLayout;
+// import android.widget.LinearLayout.LayoutParams;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.TextView;
-import android.view.ViewGroup;
-import android.view.Display;
+// import android.widget.TextView;
+// import android.view.ViewGroup;
+// import android.view.Display;
 
 import android.widget.ZoomControls;
-import android.widget.ZoomButton;
+// import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
 import android.widget.ZoomButtonsController.OnZoomListener;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.util.FloatMath;
+// import android.util.FloatMath;
 // import android.util.DisplayMetrics;
 
 import java.util.List;

@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -27,7 +27,7 @@ import java.util.ArrayList;
 // import android.app.Activity;
 // import android.app.Dialog;
 import android.os.Bundle;
-import android.os.Environment;
+// import android.os.Environment;
 
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -263,7 +263,9 @@ class FixedImportDialog extends MyDialog
         mTVhell.setText( altstr );
         mTVhgeo.setText( aslstr );
         isSet = true;
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error("Non-number input");
+      }
     }
   }
 }

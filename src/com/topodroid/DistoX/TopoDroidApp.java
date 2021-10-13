@@ -1830,6 +1830,7 @@ public class TopoDroidApp extends Application
     // TDLog.v( "[2] dupl.-shot Data " + distance + " " + bearing + " " + clino );
     long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1 );
     if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+      TDLog.v("app: insert duplicate leg detect bad sibling");
       TDToast.makeWarn( R.string.bad_sibling );
     }
     mData.updateShotName( id, TDInstance.sid, from, to );
@@ -2029,6 +2030,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
           if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
+            TDLog.v("app: insert manual shot detect bad sibling");
             TDToast.makeWarn( R.string.bad_sibling );
           }
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
@@ -2044,9 +2046,6 @@ public class TopoDroidApp extends Application
           }
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
-          if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
-            TDToast.makeWarn( R.string.bad_sibling );
-          }
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
           // mData.updateShotExtend( id, TDInstance.sid, ExtendType.EXTEND_IGNORE, 1 );  // FIXME WHY ???
           // FIXME updateDisplay( );

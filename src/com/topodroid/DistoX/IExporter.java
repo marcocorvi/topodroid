@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 public interface IExporter 
 {

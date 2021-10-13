@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.dev.ConnectionState;
+// import com.topodroid.dev.ConnectionState;
 
 import android.os.AsyncTask;
 

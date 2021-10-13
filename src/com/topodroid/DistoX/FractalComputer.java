@@ -86,12 +86,23 @@ class FractalComputer
   
     boolean contains( Cave3DStation p ) { return contains( p.x, p.y, p.z); }
   
+    /** check if this box intersects another box
+     * @param box   the other box
+     * @return true if this box intersects or touches the other box
+     *
+     *    x0 --------- x1
+     * - - - - - - - -          b.x0 must be on this half-line
+     *       - - - - - - - - -  b.x1 must be on this half-line
+     */
     boolean intersects( Box b ) 
     {
-      if ( x1 < b.x0 || x0 > b.x1 ) return false;
-      if ( y1 < b.y0 || y0 > b.y1 ) return false;
-      if ( z1 < b.z0 || z0 > b.z1 ) return false;
-      return true;
+      // if ( x1 < b.x0 || x0 > b.x1 ) return false;
+      // if ( y1 < b.y0 || y0 > b.y1 ) return false;
+      // if ( z1 < b.z0 || z0 > b.z1 ) return false;
+      // return true;
+      return ( x1 >= b.x0 && x0 <= b.x1 )
+          && ( y1 >= b.y0 && y0 <= b.y1 ) 
+          && ( z1 >= b.z0 && z0 <= b.z1 );
     }
   }
 
@@ -393,11 +404,12 @@ class FractalComputer
 
   private boolean intersection( Box b, Line ln )
   {
-    // if ( ! b.intersects( ln.mBBox ) ) return false;
-    if ( b.contains( ln.p0 ) ) return true;
-    if ( b.contains( ln.p1 ) ) return true;
-    if ( ln.intersects( b ) )  return true;
-    return false;
+    // // if ( ! b.intersects( ln.mBBox ) ) return false;
+    // if ( b.contains( ln.p0 ) ) return true;
+    // if ( b.contains( ln.p1 ) ) return true;
+    // if ( ln.intersects( b ) )  return true;
+    // return false;
+    return b.contains( ln.p0 ) || b.contains( ln.p1 ) || ln.intersects( b );
   }
 
   // @param bs base scale

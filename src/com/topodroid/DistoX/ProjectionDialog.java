@@ -25,7 +25,7 @@ import com.topodroid.prefs.TDSetting;
 import android.content.Context;
 
 import android.graphics.PointF;
-import android.graphics.Path;
+// import android.graphics.Path;
 
 import android.os.Bundle;
 import android.view.MotionEvent;
@@ -360,7 +360,9 @@ class ProjectionDialog extends MyDialog
           setAzimuth( azimuth, false );
           // updateSeekBar();
           // updateView();
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error("Non-integer azimuth");
+        }
       }
     } );
 

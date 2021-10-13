@@ -20,7 +20,7 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 /**
  * oriented side (as seen from outside)
@@ -72,9 +72,10 @@ public class CWSide
 
   public boolean areTrianglesOutside()
   {
-    if ( t1 != null && ! t1.isOutside() ) return false;
-    if ( t2 != null && ! t2.isOutside() ) return false;
-    return true;
+    // if ( t1 != null && ! t1.isOutside() ) return false;
+    // if ( t2 != null && ! t2.isOutside() ) return false;
+    // return true;
+    return ( t1 == null || t1.isOutside() ) && ( t2 == null || t2.isOutside() );
   }
   
   public CWTriangle otherTriangle( CWTriangle t )

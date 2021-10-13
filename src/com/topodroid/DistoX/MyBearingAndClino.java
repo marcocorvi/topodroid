@@ -21,10 +21,10 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-import android.widget.ImageView;
+// import android.widget.ImageView;
 
-import android.graphics.Matrix;
-import android.graphics.Bitmap;
+// import android.graphics.Matrix;
+// import android.graphics.Bitmap;
 
 import android.media.ExifInterface; // REQUIRES android.support
 import android.os.Build;

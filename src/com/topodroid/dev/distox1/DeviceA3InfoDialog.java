@@ -30,7 +30,7 @@ import android.content.res.Resources;
 import android.view.View;
 
 import android.widget.TextView;
-import android.widget.RadioButton;
+// import android.widget.RadioButton;
 import android.widget.Button;
 
 public class DeviceA3InfoDialog extends MyDialog

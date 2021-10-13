@@ -13,12 +13,11 @@ package com.topodroid.c3walls.pcrust;
 
 import com.topodroid.DistoX.Triangle3D;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 //  import android.util.FloatMath;
 
-import java.io.*;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 class Powercrust

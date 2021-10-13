@@ -16,18 +16,18 @@ import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Vector3D;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.util.Locale;
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import java.io.BufferedWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
 // import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
+// import java.io.BufferedOutputStream;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 public class ExportCGAL

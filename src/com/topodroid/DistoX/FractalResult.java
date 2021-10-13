@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 // import java.util.List;
 
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
 import android.graphics.Bitmap;
 
@@ -54,10 +54,10 @@ class FractalResult
   static String countsString()
   {
     StringBuilder counts = new StringBuilder();
-    counts.append( Integer.toString( (int)(mCount[0]*100) ) );
+    counts.append( (int)(mCount[0]*100) );
     for ( int s=1; s<FractalComputer.SIZE; ++s ) {
       counts.append(" ");
-      counts.append( Integer.toString( (int)(mCount[s]*100) ) );
+      counts.append( (int)(mCount[s]*100) );
     }
     return counts.toString();
   }

@@ -29,7 +29,7 @@ import com.topodroid.utils.TDsafUri;
 
 import android.os.AsyncTask;
 import android.os.ParcelFileDescriptor;
-import android.content.Context;
+// import android.content.Context;
 
 import android.net.Uri;
 

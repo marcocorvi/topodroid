@@ -15,7 +15,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDTag;
+// import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.math.BezierCurve;
@@ -238,14 +238,18 @@ public class SymbolPoint extends Symbol
               if ( k < s ) {
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer level");
+                }
               }
             } else if ( vals[k].equals("roundtrip") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer roundtrip");
+                }
               }
             } else if ( vals[k].equals("orientation") ) {
               if ( cnt == 0 ) {
@@ -286,7 +290,9 @@ public class SymbolPoint extends Symbol
               if ( k < s ) {
                 try {
                   color = Integer.decode( vals[k] ) | 0xff000000;
-                } catch ( NumberFormatException e ) { }
+                } catch ( NumberFormatException e ) {
+                  TDLog.Error("Non-integer color");
+                }
               }
             } else if ( vals[k].equals("csurvey") ) {
               // ignore

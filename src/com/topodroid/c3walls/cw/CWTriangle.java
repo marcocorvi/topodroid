@@ -22,7 +22,7 @@ import java.io.PrintWriter;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 public class CWTriangle extends CWFacet
 {

@@ -12,11 +12,11 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.R;
+// import com.topodroid.DistoX.R;
 
 import android.content.Context;
 
-import android.bluetooth.BluetoothGattCharacteristic;
+// import android.bluetooth.BluetoothGattCharacteristic;
 
 import java.util.UUID;
 

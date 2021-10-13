@@ -67,10 +67,9 @@ public class CalibAlgo
   //
   public boolean hasSaturatedCoeff()
   {
-    if ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) return true;
-    if ( Math.abs( aM.y.y ) >= MAX_M_VALUE ) return true;
-    if ( Math.abs( aM.z.z ) >= MAX_M_VALUE ) return true;
-    return false;
+    return ( ( Math.abs( aM.x.x ) >= MAX_M_VALUE ) 
+          || ( Math.abs( aM.y.y ) >= MAX_M_VALUE )
+          || ( Math.abs( aM.z.z ) >= MAX_M_VALUE ) );
   }
 
   // void checkCoeffOverflow()

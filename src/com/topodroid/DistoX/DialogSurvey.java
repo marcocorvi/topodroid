@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.os.Bundle;
 // import android.content.Context;

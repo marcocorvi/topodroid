@@ -26,7 +26,7 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.media.MediaPlayer;
 
 import java.util.List;

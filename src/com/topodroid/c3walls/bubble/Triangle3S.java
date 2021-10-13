@@ -79,10 +79,11 @@ public class Triangle3S
     Vector3D v1 = p1.v.difference(c);
     Vector3D v2 = p2.v.difference(c);
     Vector3D v3 = p3.v.difference(c);
-    if ( v0.dotProduct( v2.crossProduct(v1) ) > 0 ) return false;
-    if ( v0.dotProduct( v3.crossProduct(v2) ) > 0 ) return false;
-    if ( v0.dotProduct( v1.crossProduct(v3) ) > 0 ) return false;
-    return true;
+    // if ( v0.dotProduct( v2.crossProduct(v1) ) > 0 ) return false;
+    // if ( v0.dotProduct( v3.crossProduct(v2) ) > 0 ) return false;
+    // if ( v0.dotProduct( v1.crossProduct(v3) ) > 0 ) return false;
+    // return true;
+    return ( v0.dotProduct( v2.crossProduct(v1) ) <= 0 ) && ( v0.dotProduct( v3.crossProduct(v2) ) <= 0 ) && ( v0.dotProduct( v1.crossProduct(v3) ) <= 0 ); 
   }
 
 

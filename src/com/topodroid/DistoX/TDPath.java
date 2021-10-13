@@ -514,7 +514,7 @@ public class TDPath
   {
     if ( rotate <= 0 ) return;
     for ( int i=rotate-1; i>0; --i ) {
-      TDFile.moveFile( filename + Integer.toString(i-1), filename + Integer.toString(i) );
+      TDFile.moveFile( filename + (i-1), filename + i );
     }
     TDFile.moveFile( filename, filename + "0"  );
   }
@@ -527,8 +527,8 @@ public class TDPath
     old_tdr = old_tdr + TDPath.BCK_SUFFIX;
     new_tdr = new_tdr + TDPath.BCK_SUFFIX;
     for ( int i=0; ; ++i ) {
-      File file1 = TDFile.getTopoDroidFile( old_tdr + Integer.toString(i) ); // DistoX-SAF
-      File file2 = TDFile.getTopoDroidFile( new_tdr + Integer.toString(i) );
+      File file1 = TDFile.getTopoDroidFile( old_tdr + i ); // DistoX-SAF
+      File file2 = TDFile.getTopoDroidFile( new_tdr + i );
       if ( ( ! file1.exists() ) || file2.exists() ) break;
       if ( ! file1.renameTo( file2 ) ) TDLog.Error("file rename failed");
     }
@@ -560,7 +560,7 @@ public class TDPath
   {
     TDFile.deleteFile( filename );
     for ( int i=NR_BACKUP-1; i>=0; --i ) {
-      TDFile.deleteFile( filename + Integer.toString(i) );
+      TDFile.deleteFile( filename + i );
     }
   }
 
@@ -570,7 +570,7 @@ public class TDPath
     String filepath = filename + TDPath.BCK_SUFFIX;
     TDFile.deleteFile( filepath );
     for ( int i = 0; i < NR_BACKUP; ++i ) {
-      filepath = filename + TDPath.BCK_SUFFIX + Integer.toString(i);
+      filepath = filename + TDPath.BCK_SUFFIX + i;
       TDFile.deleteFile( filepath );
     }
   }

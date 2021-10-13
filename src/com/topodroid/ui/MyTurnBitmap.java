@@ -15,7 +15,7 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.utils.TDMath;
+// import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDColor;
 import com.topodroid.DistoX.R;
 

@@ -12,14 +12,14 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.ui.MyCheckBox;
-import com.topodroid.ui.MyButton;
-import com.topodroid.ui.MyColorPicker;
+// import com.topodroid.ui.MyCheckBox;
+// import com.topodroid.ui.MyButton;
+// import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.ui.TDLayout;
-import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.ExtendType;
-import com.topodroid.common.PlotType;
+// import com.topodroid.ui.TDLayout;
+// import com.topodroid.prefs.TDSetting;
+// import com.topodroid.common.ExtendType;
+// import com.topodroid.common.PlotType;
 
 import android.os.Bundle;
 import android.content.Context;
@@ -28,10 +28,10 @@ import android.content.Context;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.TextView;
+// import android.widget.TextView;
 // import android.widget.RadioButton;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 class DialogR extends MyDialog
               implements View.OnClickListener

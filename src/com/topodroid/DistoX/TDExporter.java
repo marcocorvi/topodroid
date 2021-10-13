@@ -220,7 +220,7 @@ public class TDExporter
     if ( audio != null ) {
       // TDLog.v( "audio " + audio.id + " " + audio.shotid + " blk " + bid );
       String subdir = survey + "/audio"; // "audio/" + survey;
-      String name   = Long.toString(bid) + ".wav";
+      String name   = bid  + ".wav"; // Long.toString(bid) + ".wav";
       if ( TDFile.hasMSfile( subdir, name ) ) {
         byte[] buf = readFileBytes( subdir, name );
         if ( buf != null ) {
@@ -232,7 +232,7 @@ public class TDExporter
     String photodir = TDPath.getSurveyPhotoDir( survey );
     for ( PhotoInfo photo : photos ) {
       String subdir = survey + "/photo"; // "photo/" + survey;
-      String name   = Long.toString(photo.id) + ".jpg";
+      String name   = photo.id + ".jpg"; // Long.toString(photo.id) + ".jpg";
       if ( TDFile.hasMSfile( subdir, name ) ) {
         byte[] buf = readFileBytes( subdir, name );
         if ( buf != null ) {
@@ -260,7 +260,9 @@ public class TDExporter
       int ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
       bw.close();
     } catch ( FileNotFoundException e ) {
+      TDLog.Error("File not found");
     } catch ( IOException e ) {
+      TDLog.Error( "IO error " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }

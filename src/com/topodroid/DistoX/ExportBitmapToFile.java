@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.prefs.TDSetting;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 
 // import android.content.Context;

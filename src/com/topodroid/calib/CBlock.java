@@ -14,7 +14,7 @@ package com.topodroid.calib;
 // import androidx.annotation.RecentlyNonNull;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;

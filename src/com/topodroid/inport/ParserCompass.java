@@ -87,7 +87,9 @@ class ParserCompass extends ImportParser
             try {
               mDate = String.format(Locale.US, "%04d.%02d.%02d",
                 Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
-            } catch ( NumberFormatException e ) { }
+            } catch ( NumberFormatException e ) {
+              TDLog.Error("Non-iteger date value");
+            }
             if ( vals.length >= 6 ) {
               int com = line.indexOf("COMMENT:");
               mComment = line.substring( com+8 ).trim();

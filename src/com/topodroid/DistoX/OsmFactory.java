@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;

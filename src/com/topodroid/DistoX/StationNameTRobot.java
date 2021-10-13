@@ -32,7 +32,7 @@ class StationNameTRobot extends StationName
 
   private static String getTRobotStation( int sr, int pt )
   {
-    return Integer.toString( sr ) + "." + Integer.toString( pt );
+    return sr + "." + pt; // Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
   private static int getMaxTRobotSeries( List< DBlock > list )

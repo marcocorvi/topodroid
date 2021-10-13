@@ -16,27 +16,27 @@ import com.topodroid.dev.DataType;
 import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleCallback;
-import com.topodroid.dev.ble.BleUtils;
+// import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-import android.os.Looper;
+// import android.os.Looper;
 import android.os.Handler;
 import android.content.Context;
 
-import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattService;
-import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattCallback;
+// import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothGatt;
+// import android.bluetooth.BluetoothGattService;
+// import android.bluetooth.BluetoothGattCharacteristic;
+// import android.bluetooth.BluetoothGattDescriptor;
+// import android.bluetooth.BluetoothGattCallback;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
-import java.util.UUID;
+// import java.util.List;
+// import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 public class BricProto extends TopoDroidProtocol

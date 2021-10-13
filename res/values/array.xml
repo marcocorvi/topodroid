@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
+<!--suppress CheckTagEmptyBody -->
 <resources>
   <string-array name="bricMode">
      <item name="prim_only">Prim. only</item>

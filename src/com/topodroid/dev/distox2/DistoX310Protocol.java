@@ -18,7 +18,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.distox.DistoXProtocol;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDPath;
+// import com.topodroid.DistoX.TDPath;
 
 // import java.lang.ref.WeakReference;
 

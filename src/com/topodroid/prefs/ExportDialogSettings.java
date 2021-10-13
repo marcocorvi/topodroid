@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.TDToast;

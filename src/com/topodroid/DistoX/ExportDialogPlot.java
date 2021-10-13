@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDLog;
 
 // import android.app.Dialog;
 // import android.app.Activity;
@@ -194,7 +195,9 @@ public class ExportDialogPlot extends MyDialog
             if ( scale > 2000 ) { scale = 2000; }
             TDSetting.mTherionScale = scale;
             TDSetting.mToTherion = TDSetting.THERION_SCALE / scale;
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("Not integer export scale");
+          }
         }
         break;
       case 1: // CSurvey
@@ -240,7 +243,9 @@ public class ExportDialogPlot extends MyDialog
           try { 
             float sc = Float.parseFloat( ((EditText) findViewById( R.id.png_scale )).getText().toString() );
             if ( sc > 0 ) TDSetting.mBitmapScale = sc;
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("Non-number PNG scale");
+          }
         }
         break;
       case 6: // PDF

@@ -816,7 +816,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="hint_to">to</string -->
     <!-- TODO string name="hint_azimuth">azimuth</string -->
     <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_scale">scale</string -->
     <!-- TODO string name="hint_roll">roll</string -->
     <!-- TODO string name="hint_year">year</string -->
     <!-- TODO string name="hint_month">month</string -->
@@ -1687,7 +1686,6 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="project">Project %1$s</string -->
     <!-- TODO string name="no_editor">Editor not found</string -->
     <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_extra">Missing file extra</string -->
     <!-- TODO string name="no_path">Missing filepath</string -->
     <!-- TODO string name="no_equate">No equate</string -->
     <!-- TODO string name="no_surveys">No surveys</string -->
@@ -1710,7 +1708,6 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <!-- TODO string name="overwrite">overwrite</string -->
 
-    <!-- TODO string name="title_help">TopoDroid Manager v. %1$s</string -->
     <!-- TODO string name="title_export_settings">Settings import/export</string -->
     <!-- TODO string name="title_export">Export project as &#8230;</string -->
     <!-- TODO string name="title_equates">Project Equates</string -->

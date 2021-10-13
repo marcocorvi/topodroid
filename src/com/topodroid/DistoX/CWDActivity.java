@@ -13,8 +13,8 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDFile;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.utils.TDFile;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
 import java.io.File;

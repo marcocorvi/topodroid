@@ -11,7 +11,7 @@
  */
 package com.topodroid.dev.bric;
 
-import com.topodroid.dev.ble.BleUtils;
+// import com.topodroid.dev.ble.BleUtils;
 
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;

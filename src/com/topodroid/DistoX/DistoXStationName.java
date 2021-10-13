@@ -167,15 +167,21 @@ public class DistoXStationName
         if ( pos > 0 ) {
           try {
             pre = Integer.parseInt( name.substring( 0, pos ) );
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error( "Non-integer value");
+          }
         }
         try {
           return pre * 1000 + Integer.parseInt( name.substring( pos+1 ) );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "Non-integer value");
+        }
       } else {   
         try {
           return Integer.parseInt( name );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "Non-integer value");
+        }
       }
     }
     int ret = 0;

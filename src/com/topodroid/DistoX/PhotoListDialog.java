@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
@@ -27,8 +27,8 @@ import android.os.Bundle;
 import android.content.Context;
 
 import android.view.View;
-import android.view.View.OnClickListener;
-import android.view.KeyEvent;
+// import android.view.View.OnClickListener;
+// import android.view.KeyEvent;
 
 // import android.widget.ArrayAdapter;
 import android.widget.TextView;

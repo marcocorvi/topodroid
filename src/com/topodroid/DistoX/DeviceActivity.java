@@ -12,9 +12,9 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDString;
+// import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.math.TDMatrix;
@@ -89,10 +89,10 @@ import android.widget.AdapterView.OnItemLongClickListener;
 // import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 
 public class DeviceActivity extends Activity
                             implements View.OnClickListener

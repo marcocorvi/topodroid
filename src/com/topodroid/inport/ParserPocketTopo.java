@@ -14,16 +14,16 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
-import com.topodroid.num.TDNum;
+// import com.topodroid.num.TDNum;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.ptopo.PTTrip;
 import com.topodroid.ptopo.PTShot;
 import com.topodroid.ptopo.PTDrawing;
 import com.topodroid.ptopo.PTElement;
-import com.topodroid.ptopo.PTXSectionElement; // not handled
+// import com.topodroid.ptopo.PTXSectionElement; // not handled
 import com.topodroid.ptopo.PTPolygonElement;
 import com.topodroid.ptopo.PTPoint;
-import com.topodroid.ptopo.PTMapping;
+// import com.topodroid.ptopo.PTMapping;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
@@ -33,7 +33,7 @@ import com.topodroid.DistoX.DrawingUtil;
 import com.topodroid.DistoX.DrawingPath;
 import com.topodroid.DistoX.DrawingPointPath;
 import com.topodroid.DistoX.DrawingLinePath;
-import com.topodroid.DistoX.DrawingPointLinePath;
+// import com.topodroid.DistoX.DrawingPointLinePath;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDUtil;

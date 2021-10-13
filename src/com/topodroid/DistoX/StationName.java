@@ -137,6 +137,7 @@ class StationName
     TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " bckleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
+    //   TDLog.v("station name detect bad sibling (1)");
     //   TDToast.makeWarn( R.string.bad_sibling );
     // }
     mData.updateShotName( blk.mId, mSid, from, to );
@@ -148,6 +149,7 @@ class StationName
     TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
+    //   TDLog.v("station name detect bad sibling (2)");
     //   TDToast.makeWarn( R.string.bad_sibling );
     // }
     mData.updateShotName( blk.mId, mSid, from, to );

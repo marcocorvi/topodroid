@@ -14,9 +14,9 @@ package com.topodroid.c3db;
 import com.topodroid.utils.TDLog;
 
 // import java.lang.Long;
-import java.io.StringWriter;
-import java.io.PrintWriter;
-import java.util.Locale;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
+// import java.util.Locale;
 
 public class DBlock
 {

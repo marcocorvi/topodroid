@@ -12,28 +12,28 @@
 package com.topodroid.io.dxf;
 
 import com.topodroid.utils.TDString;
-import com.topodroid.math.Point2D;
-import com.topodroid.math.BezierCurve;
-import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+// import com.topodroid.math.Point2D;
+// import com.topodroid.math.BezierCurve;
+// import com.topodroid.prefs.TDSetting;
+// import com.topodroid.common.PlotType;
 
-import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDVersion;
-import com.topodroid.num.TDNum;
+// import com.topodroid.utils.TDMath;
+// import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDVersion;
+// import com.topodroid.num.TDNum;
 
 import java.util.Locale;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.BufferedWriter;
-import java.io.FileInputStream;
-import java.io.BufferedInputStream;
-import java.io.DataInputStream;
-import java.io.FileNotFoundException;
+// import java.io.FileInputStream;
+// import java.io.BufferedInputStream;
+// import java.io.DataInputStream;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import android.graphics.RectF;
+// import android.graphics.RectF;
 
 public class DXF
 {

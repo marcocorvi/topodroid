@@ -21,7 +21,7 @@ package com.topodroid.mag;
 
 import com.topodroid.utils.TDLog;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // MAGtype_MagneticModel;
 class  MagModel

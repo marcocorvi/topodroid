@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
@@ -25,7 +25,7 @@ import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 class SketchAdapter extends ArrayAdapter< GlSketch >
 {

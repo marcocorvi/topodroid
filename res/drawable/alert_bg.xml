@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" ?>
-<shape xmlns:android="http://schemas.android.com/apk/res/android"
+<shape xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="rectangle"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xsi:schemaLocation="http://schemas.android.com/apk/res/android ">
    <solid android:color="#ff999999" />
    <stroke

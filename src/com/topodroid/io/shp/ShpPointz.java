@@ -11,21 +11,21 @@
  */
 package com.topodroid.io.shp;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
-import com.topodroid.num.NumShot;
-import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingUtil;
+// import com.topodroid.num.NumShot;
+// import com.topodroid.num.NumSplay;
+// import com.topodroid.DistoX.DrawingUtil;
 
-import java.io.File;
-import java.io.FileOutputStream;
+// import java.io.File;
+// import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
 
-import java.nio.ByteBuffer;   
-import java.nio.MappedByteBuffer;   
+// import java.nio.ByteBuffer;
+// import java.nio.MappedByteBuffer;
 import java.nio.ByteOrder;   
-import java.nio.channels.FileChannel;   
+// import java.nio.channels.FileChannel;
 
 import java.util.List;
 

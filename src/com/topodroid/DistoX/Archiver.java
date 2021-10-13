@@ -662,12 +662,14 @@ public class Archiver
       zin.close();
       
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ERROR File: " + e.toString() );
+      TDLog.Error( "File not found " + e.toString() );
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR IO: " + e.toString() );
+      TDLog.Error( "IO error: " + e.toString() );
+    } catch ( ClassCastException e ) {
+      TDLog.Error( "Cast error: " + e.toString() );
     }
     if ( ok_manifest == 0 && ! sql_success ) {
-      TDLog.Error( "ERROR SQL" );
+      TDLog.Error( "SQL error" );
       // tell user that there was a problem
       return -5;
     }

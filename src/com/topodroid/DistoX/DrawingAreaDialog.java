@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyStateBox;
 import com.topodroid.ui.MyOrientationWidget;
 import com.topodroid.ui.TDLayout;

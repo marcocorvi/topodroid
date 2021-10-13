@@ -13,7 +13,7 @@ package com.topodroid.dev;
 
 // import androidx.annotation.RecentlyNonNull;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 public class Device
 {

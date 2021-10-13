@@ -262,33 +262,43 @@ class SymbolArea extends Symbol
               if ( k < s ) {
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer level");
+                }
               }
             } else if ( vals[k].equals("roundtrip") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer roundtrip");
+                }
               }
   	    } else if ( vals[k].equals("color") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 try {
   	          color = Integer.decode( vals[k] );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer color");
+                }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 try {
   	          alpha = Integer.decode( vals[k] );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer alpha");
+                }
   	      }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 try {
   	          alpha_bg = Integer.decode( vals[k] );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer alpha-bg");
+                }
   	      }
   	    } else if ( vals[k].equals("bitmap") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;

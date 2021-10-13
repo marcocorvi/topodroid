@@ -13,8 +13,8 @@ package com.topodroid.c3walls.pcrust;
 
 import com.topodroid.DistoX.Vector3D;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
 
 import java.util.ArrayList;
 

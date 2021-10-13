@@ -25,15 +25,15 @@ import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
 import com.topodroid.num.NumSplay;
-import com.topodroid.mag.Geodetic;
+// import com.topodroid.mag.Geodetic;
 import com.topodroid.math.TDVector;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.math.BezierInterpolator;
-import com.topodroid.dln.DLNWall;
-import com.topodroid.dln.DLNSide;
-import com.topodroid.dln.DLNSite;
-import com.topodroid.dln.DLNSideList;
+// import com.topodroid.dln.DLNWall;
+// import com.topodroid.dln.DLNSide;
+// import com.topodroid.dln.DLNSite;
+// import com.topodroid.dln.DLNSideList;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -46,7 +46,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
-import com.topodroid.dev.ConnectionState;
+// import com.topodroid.dev.ConnectionState;
 import com.topodroid.common.PlotType;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
@@ -99,9 +99,9 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import android.provider.MediaStore;
+// import android.provider.MediaStore;
 
-import android.print.PrintAttributes;
+// import android.print.PrintAttributes;
 // import android.print.pdf.PrintedPdfDocument; // API-19
 import android.graphics.pdf.PdfDocument;
 import android.graphics.pdf.PdfDocument.Page;
@@ -114,7 +114,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.FontMetrics;
 import android.graphics.PointF;
 import android.graphics.RectF;
-import android.graphics.Rect;
+// import android.graphics.Rect;
 import android.graphics.Path;
 
 import android.net.Uri;
@@ -6241,7 +6241,9 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v( "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
-    } catch ( RejectedExecutionException e ) { }
+    } catch ( RejectedExecutionException e ) {
+      TDLog.Error("Sketch saving exec rejected");
+    }
   }
 
   

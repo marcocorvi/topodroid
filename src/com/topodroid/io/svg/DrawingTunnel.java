@@ -30,7 +30,7 @@ import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.ICanvasCommand;
 import com.topodroid.DistoX.DrawingUtil;
 import com.topodroid.DistoX.DrawingCommandManager;
-import com.topodroid.DistoX.Scrap;
+// import com.topodroid.DistoX.Scrap;
 import com.topodroid.DistoX.SymbolLibrary;
 import com.topodroid.DistoX.LinePoint;
 import com.topodroid.DistoX.TDUtil;

@@ -20,7 +20,7 @@ import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -28,8 +28,8 @@ import java.util.Locale;
 
 // import java.io.PrintStream;
 // import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileNotFoundException;
+// import java.io.BufferedOutputStream;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 // import java.io.FileWriter;

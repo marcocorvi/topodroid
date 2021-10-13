@@ -13,7 +13,7 @@ package com.topodroid.dev.distox;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.DataDownloader;
+// import com.topodroid.DistoX.DataDownloader;
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -22,7 +22,7 @@ import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.dev.CommThread;
 import com.topodroid.dev.TopoDroidComm;
-import com.topodroid.dev.TopoDroidProtocol;
+// import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 // import com.topodroid.dev.distox.DistoX;
@@ -49,7 +49,7 @@ import android.os.Handler;
 // import android.os.Message;
 
 // import android.os.Parcelable;
-import android.os.ParcelUuid;
+// import android.os.ParcelUuid;
 // import android.os.AsyncTask;
 
 import android.bluetooth.BluetoothDevice;

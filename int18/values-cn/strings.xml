@@ -821,7 +821,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="hint_to">to</string -->
     <!-- TODO string name="hint_azimuth">azimuth</string -->
     <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_scale">scale</string -->
     <!-- TODO string name="hint_roll">roll</string -->
     <!-- TODO string name="hint_year">year</string -->
     <!-- TODO string name="hint_month">month</string -->
@@ -1703,7 +1702,6 @@ Refer to the web pages for details.\n
     <string name="project">项目 %1$s</string>
     <string name="no_editor">编者未发现</string>
     <string name="no_file">文件未发现</string>
-    <string name="no_extra">额外文件丢失</string>
     <string name="no_path">文件路径丢失</string>
     <string name="no_equate">无相同</string>
     <string name="no_surveys">无测量</string>
@@ -1726,7 +1724,6 @@ Refer to the web pages for details.\n
 
     <string name="overwrite">重写</string>
 
-    <string name="title_help">TopoDroid 管理 v. %1$s</string>
     <string name="title_export_settings">设置 输入/输出</string>
     <string name="title_export">项目输出 &#8230;</string>
     <string name="title_equates">相同项目</string>

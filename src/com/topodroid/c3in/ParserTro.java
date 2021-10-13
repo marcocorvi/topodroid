@@ -20,14 +20,14 @@ import com.topodroid.DistoX.Cave3DFix;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
-import java.io.FileReader;
+// import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.StringWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
+// import java.util.ArrayList;
 
 
 public class ParserTro extends TglParser
@@ -98,7 +98,9 @@ public class ParserTro extends TglParser
         String vt_cs = params[4]; // ccords system: must be present in VisualTopo registry
         fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( vt_cs ) ) ); // FIXME
         return true;
-      } catch ( NumberFormatException e ) { }
+      } catch ( NumberFormatException e ) {
+        TDLog.Error("Non-number param");
+      }
     }
     return false;
   }
@@ -198,7 +200,9 @@ public class ParserTro extends TglParser
             } else if ( k == 5 ) {
               try {
                 declination = angle( Double.parseDouble( vals[k] ), 1, true );
-              } catch ( NumberFormatException e ) { }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error("Non-number declination");
+              }
             } else {
               // ignore colors
             }

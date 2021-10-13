@@ -19,9 +19,9 @@ import com.topodroid.DistoX.SurveyInfo;
 import java.util.ArrayList;
 import java.util.List;
 
-import java.io.BufferedReader;
+// import java.io.BufferedReader;
 
-import android.util.FloatMath;
+// import android.util.FloatMath;
 
 public class TdmSurvey
 {

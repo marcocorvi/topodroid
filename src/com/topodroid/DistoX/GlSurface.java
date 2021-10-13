@@ -11,12 +11,12 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+// import java.nio.FloatBuffer;
+// import java.nio.ShortBuffer;
 // import java.lang.System;
 
 import android.opengl.GLES20;

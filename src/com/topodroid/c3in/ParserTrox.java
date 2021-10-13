@@ -21,16 +21,14 @@ import com.topodroid.DistoX.Cave3DFix;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 // import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.StringWriter;
-import java.io.PrintWriter;
-import java.util.ArrayList;
-
-import com.topodroid.utils.TDLog;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
+// import java.util.ArrayList;
 
 public class ParserTrox extends TglParser
 {
@@ -109,7 +107,9 @@ public class ParserTrox extends TglParser
     if ( qos <= pos ) return val;
     try {
       return Float.parseFloat( line.substring( pos, qos ) );
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error("Non-number value");
+    }
     return val;
   }
 

@@ -16,13 +16,13 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
-import com.topodroid.num.TDNum;
-import com.topodroid.math.TDVector;
+// import com.topodroid.utils.TDLog;
+// import com.topodroid.num.TDNum;
+// import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
-import java.io.PrintWriter;
-import java.io.DataOutputStream;
+// import java.io.PrintWriter;
+// import java.io.DataOutputStream;
 
 import android.graphics.Canvas;
 import android.graphics.Paint;

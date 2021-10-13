@@ -526,7 +526,7 @@ public class TDSetting
         if ( r > 255 ) r = 255; if ( r < 0 ) r = 0;
         if ( g > 255 ) g = 255; if ( g < 0 ) g = 0;
         if ( b > 255 ) b = 255; if ( b < 0 ) b = 0;
-        color = Integer.toString(r) + " " + Integer.toString(g) + " " + Integer.toString(b);
+        color = r + " " + g + " " + b; // Integer.toString(r) + " " + Integer.toString(g) + " " + Integer.toString(b);
       } catch ( NumberFormatException e ) {
 	r = g = b = 0;
       }

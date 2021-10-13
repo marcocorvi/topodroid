@@ -27,7 +27,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 
 import android.view.View;
-import android.widget.TextView;
+// import android.widget.TextView;
 
 import android.graphics.Paint; // custom paint
 

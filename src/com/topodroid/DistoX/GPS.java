@@ -142,7 +142,9 @@ class GPS implements LocationListener
       try {
         locManager.removeUpdates( this );
         locManager.removeGpsStatusListener( this );
-      } catch ( SecurityException e ) { }
+      } catch ( SecurityException e ) {
+        TDLog.Error( "Location manager error-1 " + e.getMessage() );
+      }
     }
     mIsLocating = false;
     // mHasLocation = false;
@@ -159,7 +161,9 @@ class GPS implements LocationListener
       locManager.addGpsStatusListener( this );
       locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
       mIsLocating = true;
-    } catch ( SecurityException e ) { }
+    } catch ( SecurityException e ) {
+      TDLog.Error( "Location manager error-2 " + e.getMessage() );
+    }
     mNrSatellites = 0;
     return true;
   }

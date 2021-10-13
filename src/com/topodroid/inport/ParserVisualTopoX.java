@@ -94,7 +94,9 @@ class ParserVisualTopoX extends ImportParser
     if ( qos <= pos ) return val;
     try {
       return Float.parseFloat( line.substring( pos, qos ) );
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      TDLog.Error("Non-number value");
+    }
     return val;
   }
 

@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import java.nio.ByteOrder;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+// import java.nio.ShortBuffer;
 
 import android.graphics.Bitmap;
 
@@ -27,13 +27,13 @@ import android.opengl.Matrix;
 
 import android.content.Context;
 
-import javax.microedition.khronos.egl.EGLConfig;
-import javax.microedition.khronos.opengles.GL10;
+// import javax.microedition.khronos.egl.EGLConfig;
+// import javax.microedition.khronos.opengles.GL10;
 
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+// import java.nio.FloatBuffer;
+// import java.nio.ShortBuffer;
 
-import java.util.List;
+// import java.util.List;
 
 class GL
 {
@@ -441,7 +441,9 @@ class GL
       ByteBuffer ob = ByteBuffer.allocateDirect( count * 4 ); // 4 bytes / float
       ob.order( ByteOrder.nativeOrder() );
       return ob.asFloatBuffer();
-    } catch ( OutOfMemoryError e ) { }
+    } catch ( OutOfMemoryError e ) {
+      TDLog.Error("Out of memory" );
+    }
     return null;
   }
 

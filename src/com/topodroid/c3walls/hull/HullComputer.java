@@ -13,7 +13,7 @@ package com.topodroid.c3walls.hull;
 
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
-import com.topodroid.DistoX.Vector3D;
+// import com.topodroid.DistoX.Vector3D;
 import com.topodroid.DistoX.Triangle3D;
 import com.topodroid.DistoX.TglParser;
 import com.topodroid.DistoX.WallComputer;

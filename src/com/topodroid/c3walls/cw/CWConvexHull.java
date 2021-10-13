@@ -12,14 +12,15 @@
 package com.topodroid.c3walls.cw;
 
 import com.topodroid.DistoX.Vector3D;
-import com.topodroid.DistoX.TopoGL;
+// import com.topodroid.DistoX.TopoGL;
 import com.topodroid.DistoX.GlModel;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
+import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.Locale;
 // import java.util.Collection;
 // import static java.util.stream.Collectors.toList;
@@ -29,8 +30,6 @@ import java.io.PrintWriter;
 // import java.io.FileNotFoundException;
 import java.io.DataOutputStream;
 import java.io.IOException;
-
-import com.topodroid.utils.TDLog;
 
 public class CWConvexHull 
 {
@@ -189,7 +188,7 @@ public class CWConvexHull
       // for ( Cave3DShot s2 : splays2 ) {
       //   vt.sum( s2.toVector3D() ).dump();
       // }
-      // TDLog.e( "CW-HUll error " + e.getMessage() );
+      TDLog.Error( "CW-HUll error " + e.getMessage() );
       throw e;
     }
     // TDLog.v( "CW-Hull " + sf.short_name + "-" + st.short_name 

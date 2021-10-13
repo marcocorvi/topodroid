@@ -115,7 +115,9 @@ public class ParserSketch
         }
       }
       fr.close();
-    } catch ( IOException e ) { }
+    } catch ( IOException e ) {
+      TDLog.Error("IO error " + e.getMessage() );
+    }
     mValid = true;
     return true;
   }

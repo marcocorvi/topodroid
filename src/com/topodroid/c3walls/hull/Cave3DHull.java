@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.hull;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;

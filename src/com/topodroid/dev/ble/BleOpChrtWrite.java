@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothDevice;
 
 import java.util.UUID;
 import java.util.Arrays;

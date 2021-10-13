@@ -135,7 +135,9 @@ class SymbolLine extends Symbol
     if ( kval < s ) {
       try {
         return Integer.parseInt( vals[kval] );
-      } catch( NumberFormatException e ) { }
+      } catch( NumberFormatException e ) {
+        TDLog.Error("Non-integer value");
+      }
     }
     throw new NumberFormatException();
   }
@@ -233,14 +235,18 @@ class SymbolLine extends Symbol
               if ( k < s ) {
                 try {
                   mLevel = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer level");
+                }
               }
             } else if ( vals[k].equals("roundtrip") ) {
               ++k; while ( k < s && vals[k].length() == 0 ) ++k;
               if ( k < s ) {
                 try {
                   mRoundTrip = ( Integer.parseInt( vals[k] ) );
-                } catch( NumberFormatException e ) { }
+                } catch( NumberFormatException e ) {
+                  TDLog.Error("Non-integer roundtrip");
+                }
               }
   	    } else if ( vals[k].equals("closed") ) {
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
@@ -254,13 +260,17 @@ class SymbolLine extends Symbol
   	      if ( k < s ) {
                 try {
   	          color = Integer.decode( vals[k] );
-                } catch ( NumberFormatException e ) { }
+                } catch ( NumberFormatException e ) {
+                  TDLog.Error("Non-integer color");
+                }
               }
   	      ++k; while ( k < s && vals[k].length() == 0 ) ++k;
   	      if ( k < s ) {
                 try {
   	          alpha = Integer.decode( vals[k] );
-                } catch ( NumberFormatException e ) { }
+                } catch ( NumberFormatException e ) {
+                  TDLog.Error("Non-integer alpha");
+                }
   	      }
   	    } else if ( vals[k].equals("width") ) {
               try {
@@ -309,7 +319,9 @@ class SymbolLine extends Symbol
                   try {
                     mStyleX = Integer.parseInt( vals[k].substring(1) );
                     if ( mStyleX <= 0 ) mStyleX = ItemDrawer.POINT_MAX; // FIXME INT_MAX
-                  } catch ( NumberFormatException e ) { }
+                  } catch ( NumberFormatException e ) {
+                    TDLog.Error("Non-integer style X");
+                  }
                 }
               }
   	    } else if ( vals[k].equals("effect") ) {

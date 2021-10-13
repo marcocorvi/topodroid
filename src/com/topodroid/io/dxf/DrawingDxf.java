@@ -16,7 +16,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+// import com.topodroid.common.PlotType;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
@@ -49,7 +49,7 @@ import com.topodroid.DistoX.SymbolLineLibrary;
 import com.topodroid.DistoX.SymbolAreaLibrary;
 // import com.topodroid.DistoX.DrawingPath;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;

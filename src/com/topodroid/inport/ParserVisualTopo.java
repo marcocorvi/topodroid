@@ -18,7 +18,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.TDUtil;
+// import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDAzimuth;
 
 import java.io.IOException;
@@ -168,7 +168,9 @@ class ParserVisualTopo extends ImportParser
               } else if ( k == 5 ) {
                 try {
                   mDeclination = angle( Float.parseFloat( vals[k] ), 1, true ); // declination is in degrees.minutes
-                } catch ( NumberFormatException e ) { }
+                } catch ( NumberFormatException e ) {
+                  TDLog.Error("Non-number declination");
+                }
               // } else {
                 // ignore colors
               }

@@ -26,7 +26,7 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import java.util.Locale;
+// import java.util.Locale;
  
 public class DrawingSpecialPath extends DrawingPath
 {

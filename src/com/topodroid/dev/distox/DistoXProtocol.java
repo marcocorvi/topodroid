@@ -16,7 +16,7 @@ package com.topodroid.dev.distox;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
-import com.topodroid.DistoX.TDPath;
+// import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;

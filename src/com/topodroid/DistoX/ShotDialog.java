@@ -45,7 +45,7 @@ import android.widget.CheckBox;
 import android.widget.LinearLayout;
 
 import android.view.View;
-import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.drawable.BitmapDrawable;
 
 class ShotDialog extends MyDialog
                  implements View.OnClickListener

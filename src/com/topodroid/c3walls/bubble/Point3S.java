@@ -13,7 +13,7 @@ package com.topodroid.c3walls.bubble;
 
 import com.topodroid.DistoX.Vector3D;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 // normalized vector
 public class Point3S extends Vector3D

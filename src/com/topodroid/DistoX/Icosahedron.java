@@ -12,10 +12,10 @@
  */
 package com.topodroid.DistoX;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
 
 class Icosahedron
 {

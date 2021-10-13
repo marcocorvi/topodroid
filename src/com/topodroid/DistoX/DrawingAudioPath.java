@@ -104,7 +104,7 @@ public class DrawingAudioPath extends DrawingPointPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     String subdir = survey + "/audio"; // "audio/" + survey;
-    String name   = Long.toString( mId ) + ".wav";
+    String name   = mId + ".wav"; // Long.toString( mId ) + ".wav";
     if ( TDFile.hasMSfile( subdir, name ) ) {
       byte[] buf = TDExporter.readFileBytes( subdir, name );
       if ( buf != null ) {

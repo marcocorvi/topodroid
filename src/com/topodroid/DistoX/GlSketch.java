@@ -22,7 +22,7 @@ import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
 
 import android.opengl.GLES20;
-import android.opengl.Matrix;
+// import android.opengl.Matrix;
 import android.content.Context;
 
 import android.graphics.Paint;
@@ -667,7 +667,9 @@ public class GlSketch extends GlShape
             if ( k < s ) {
               try {
                 color = Integer.decode( vals[k] ) | 0xff000000;
-              } catch ( NumberFormatException e ) { }
+              } catch ( NumberFormatException e ) {
+                TDLog.Error( "Non-integer color value");
+              }
             }
           } else if ( vals[k].equals("path") ) {
             line = br.readLine();
@@ -684,6 +686,7 @@ public class GlSketch extends GlShape
         }
       }
     } catch ( IOException e ) {
+      TDLog.Error("IO error " + e.getMessage() );
     }
     if ( th_name != null && path_str != null ) {
       int index = mSymbols.size();

@@ -102,9 +102,11 @@ public class ImportPocketTopoTask extends ImportTask
       // }
       
       fis.close(); 
-    } catch ( IOException e ) { 
+    } catch ( IOException e ) {
+      TDLog.Error( "IO error " + e.getMessage() );
     } catch ( ParserException e ) {
       // TDToast.makeBad( R.string.file_parse_fail );
+      TDLog.Error( "Parser error " + e.getMessage() );
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }

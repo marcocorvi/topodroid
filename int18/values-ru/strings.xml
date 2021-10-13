@@ -811,7 +811,6 @@
     <string name="hint_to">до</string>
     <string name="hint_azimuth">азимут</string>
     <string name="hint_clino">уклон</string>
-    <string name="hint_scale">масштаб</string>
     <string name="hint_roll">разворот</string>
     <string name="hint_year">год</string>
     <string name="hint_month">месяц</string>
@@ -1686,7 +1685,6 @@
     <string name="project">Проект %1$s</string>
     <string name="no_editor">Редактор не найден</string>
     <string name="no_file">Файл не найден</string>
-    <string name="no_extra">Отсутсвует extra файла</string>
     <string name="no_path">Отсутствует путь к файлу</string>
     <string name="no_equate">Нет соединеия</string>
     <string name="no_surveys">Нет съёмок</string>
@@ -1709,7 +1707,6 @@
 
     <string name="overwrite">перезаписать</string>
 
-    <string name="title_help">TopoDroid Manager v. %1$s</string>
     <string name="title_export_settings">Импорт/Экспорт настроек</string>
     <string name="title_export">Экспортировать проект как &#8230;</string>
     <string name="title_equates">Соединения в проекте</string>

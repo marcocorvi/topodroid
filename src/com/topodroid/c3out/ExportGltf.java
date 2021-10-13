@@ -27,21 +27,21 @@ import com.topodroid.DistoX.GlSurface;
 import com.topodroid.DistoX.Archiver;
 import com.topodroid.DistoX.TDPath;
 
-import android.util.Base64;
-import android.util.Base64OutputStream;
+// import android.util.Base64;
+// import android.util.Base64OutputStream;
 
 import java.util.Locale;
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
-import java.nio.ByteBuffer;
+// import java.nio.ByteBuffer;
 
 // import java.io.File;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 // import java.io.PrintStream;
 import java.io.OutputStream;
-import java.io.ByteArrayOutputStream;
+// import java.io.ByteArrayOutputStream;
 import java.io.FileOutputStream;
 import java.io.DataOutputStream;
 // import java.io.BufferedOutputStream;

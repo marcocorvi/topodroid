@@ -19,8 +19,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.dev.ConnectionState;
 
 import android.os.Build;
-import android.os.Looper;
-import android.os.Handler;
+// import android.os.Looper;
+// import android.os.Handler;
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
@@ -31,7 +31,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 import android.bluetooth.BluetoothGattCallback;
 import android.bluetooth.BluetoothGattService;
 
-import java.util.List;
+// import java.util.List;
 import java.util.UUID;
 
 public class BleCallback extends BluetoothGattCallback

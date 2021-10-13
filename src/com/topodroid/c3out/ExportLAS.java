@@ -14,18 +14,18 @@ package com.topodroid.c3out;
 
 import com.topodroid.DistoX.TglParser;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
-import java.util.Locale;
-import java.util.List;
-import java.util.ArrayList;
+// import java.util.Locale;
+// import java.util.List;
+// import java.util.ArrayList;
 import java.util.Calendar;
 
-import java.io.FileWriter;
-import java.io.PrintWriter;
+// import java.io.FileWriter;
+// import java.io.PrintWriter;
 // import java.io.PrintStream;
 import java.io.DataOutputStream;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.nio.ByteBuffer;

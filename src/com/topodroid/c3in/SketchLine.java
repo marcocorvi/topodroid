@@ -13,7 +13,7 @@ package com.topodroid.c3in;
 
 import com.topodroid.DistoX.Vector3D;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.util.ArrayList;
 

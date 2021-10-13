@@ -30,7 +30,7 @@ import android.view.SurfaceView;
 // import android.view.MotionEvent;
 
 import android.graphics.Canvas;
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 import android.graphics.Path;
 import android.graphics.Paint;
 import android.graphics.RectF;

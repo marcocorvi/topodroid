@@ -15,13 +15,13 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.num.TDNum;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
 import java.lang.ref.WeakReference;
 
 import java.io.File;
-import java.io.FileDescriptor;
+// import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
@@ -37,7 +37,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>

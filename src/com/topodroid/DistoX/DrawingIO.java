@@ -24,7 +24,7 @@ import com.topodroid.math.TDVector;
 // import com.topodroid.common.PointScale;
 
 import java.io.File;
-import java.io.FileWriter;
+// import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.BufferedInputStream;
@@ -517,6 +517,7 @@ public class DrawingIO
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
+      TDLog.Error( "IO error " + e.getMessage() );
     }
   }
 

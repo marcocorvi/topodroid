@@ -15,9 +15,9 @@ import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattService;
+// import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
+// import android.bluetooth.BluetoothGattDescriptor;
 
 import java.util.UUID;
 

@@ -12,11 +12,11 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDTag;
+// import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -67,10 +67,10 @@ import android.view.KeyEvent;
 // import android.graphics.BitmapFactory;
 // import android.graphics.drawable.BitmapDrawable;
 
-import android.os.Build;
+// import android.os.Build;
 
 import android.net.Uri;
-import android.net.Uri.Builder;
+// import android.net.Uri.Builder;
 
 public class SurveyWindow extends Activity
                             implements IExporter

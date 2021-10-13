@@ -73,18 +73,20 @@ public class Vector3D
   // ------------------- "EQUALITY"
   public boolean coincide( Vector3D v, double eps )
   {
-    if ( Math.abs(x - v.x) > eps ) return false;
-    if ( Math.abs(y - v.y) > eps ) return false;
-    if ( Math.abs(z - v.z) > eps ) return false;
-    return true;
+    // if ( Math.abs(x - v.x) > eps ) return false;
+    // if ( Math.abs(y - v.y) > eps ) return false;
+    // if ( Math.abs(z - v.z) > eps ) return false;
+    // return true;
+    return ( Math.abs(x - v.x) < eps ) && ( Math.abs(y - v.y) < eps ) && ( Math.abs(z - v.z) < eps );
   }
     
   public boolean coincide( double x0, double y0, double z0, double eps )
   {
-    if ( Math.abs(x - x0) > eps ) return false;
-    if ( Math.abs(y - y0) > eps ) return false;
-    if ( Math.abs(z - z0) > eps ) return false;
-    return true;
+    // if ( Math.abs(x - x0) > eps ) return false;
+    // if ( Math.abs(y - y0) > eps ) return false;
+    // if ( Math.abs(z - z0) > eps ) return false;
+    // return true;
+    return ( Math.abs(x - x0) < eps ) && ( Math.abs(y - y0) < eps ) && ( Math.abs(z - z0) < eps );
   }
 
   // ------------------- LENGTH 

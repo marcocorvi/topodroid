@@ -16,12 +16,12 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 
-import java.nio.ByteOrder;
-import java.nio.ByteBuffer;
+// import java.nio.ByteOrder;
+// import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+// import java.nio.ShortBuffer;
 
-import android.opengl.GLES20;
+// import android.opengl.GLES20;
 import android.content.Context;
 
 import java.util.ArrayList;

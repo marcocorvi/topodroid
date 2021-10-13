@@ -18,7 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -37,7 +37,7 @@ import com.topodroid.inport.ImportPocketTopoTask;
 import com.topodroid.inport.ImportSurvexTask;
 import com.topodroid.inport.ImportCaveSniperTask;
 import com.topodroid.inport.ImportZipTask;
-import com.topodroid.inport.ImportDialog;
+// import com.topodroid.inport.ImportDialog;
 // import com.topodroid.inport.ImportDatDialog;
 // import com.topodroid.inport.ImportTroDialog;
 
@@ -53,7 +53,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Dialog;

@@ -28,7 +28,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.CheckBox;
-import android.widget.EditText;
+// import android.widget.EditText;
 
 import android.view.View;
 // import android.view.View.OnKeyListener;

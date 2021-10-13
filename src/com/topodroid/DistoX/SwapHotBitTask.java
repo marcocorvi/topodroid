@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.dev.Device;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.lang.ref.WeakReference;
 

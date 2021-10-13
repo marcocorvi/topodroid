@@ -109,7 +109,7 @@ public class DrawingPhotoPath extends DrawingPointPath
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
     String subdir = survey + "/photo"; // "phpto/" + survey;
-    String name   = Long.toString(mId) + ".jpg";
+    String name   = mId + ".jpg"; // Long.toString(mId) + ".jpg";
     if ( TDFile.hasMSfile( subdir, name ) ) {
       byte[] buf = TDExporter.readFileBytes( subdir, name );
       if ( buf != null ) {

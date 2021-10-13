@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 
 import java.io.IOException;
 import java.util.List;

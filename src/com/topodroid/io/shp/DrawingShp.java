@@ -16,7 +16,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDMath;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
-import com.topodroid.num.NumStation;
+// import com.topodroid.num.NumStation;
 import com.topodroid.DistoX.Archiver;
 import com.topodroid.DistoX.GeoReference;
 import com.topodroid.DistoX.ICanvasCommand;

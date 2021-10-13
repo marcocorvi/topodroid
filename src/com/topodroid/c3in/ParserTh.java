@@ -26,7 +26,7 @@ import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DSurvey;
 import com.topodroid.DistoX.Cave3DFix;
-import com.topodroid.DistoX.Cave3DXSection;
+// import com.topodroid.DistoX.Cave3DXSection;
 import com.topodroid.DistoX.Geodetic;
 import com.topodroid.DistoX.DEMsurface;
 import com.topodroid.DistoX.Vector3D;
@@ -46,8 +46,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
-
-import android.widget.Toast;
 
 public class ParserTh extends TglParser
 {

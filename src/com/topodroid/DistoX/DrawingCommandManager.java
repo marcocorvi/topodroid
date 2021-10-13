@@ -19,7 +19,7 @@ import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-import android.content.res.Configuration;
+// import android.content.res.Configuration;
 import android.app.Activity;
 import android.os.Build;
 

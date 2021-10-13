@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 
 import java.io.File;
@@ -48,8 +48,7 @@ class DialogSketch extends MyDialog
   class MyFilenameFilter implements FilenameFilter
   {
     public boolean accept( File dir, String name ) {
-      if ( name.toLowerCase().endsWith( ".c3d" ) ) return true;  // Cave3D sketch file
-      return false;
+      return ( name.toLowerCase().endsWith( ".c3d" ) );  // Cave3D sketch file
     }
   }
 
@@ -57,8 +56,7 @@ class DialogSketch extends MyDialog
   {
     public boolean accept( File dir, String name ) {
       File file = new File( dir, name );
-      if ( file.isDirectory() && ! name.startsWith(".") ) return true;
-      return false;
+      return ( file.isDirectory() && ! name.startsWith(".") );
     }
   }
 

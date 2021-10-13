@@ -16,7 +16,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.io.FileReader;
 import java.io.BufferedReader;

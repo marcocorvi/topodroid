@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 
 // import java.util.Locale;
 // import java.util.Stack;

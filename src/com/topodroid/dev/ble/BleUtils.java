@@ -22,7 +22,7 @@ import android.bluetooth.BluetoothGattCharacteristic;
 // import android.bluetooth.BluetoothGattService;
 
 import java.util.UUID;
-import java.util.Arrays;
+// import java.util.Arrays;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

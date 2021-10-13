@@ -13,7 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
 import android.graphics.*; // Bitmap
@@ -124,7 +124,9 @@ public class ProjectionSurface extends SurfaceView
           } else {
             try {
               sleep(100);
-            } catch ( InterruptedException e ) { }
+            } catch ( InterruptedException e ) {
+                // TDLog.Error( "Interrupt");
+            }
           }
         }
         // TDLog.v( "drawing thread exit");

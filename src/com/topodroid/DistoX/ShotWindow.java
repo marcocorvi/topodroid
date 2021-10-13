@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
@@ -20,7 +20,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -32,7 +32,7 @@ import com.topodroid.help.UserManualActivity;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.dev.ConnectionState;
-import com.topodroid.dev.Device;
+// import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
 import com.topodroid.dev.DataType;
 import com.topodroid.common.PlotType;
@@ -49,7 +49,7 @@ import android.os.Bundle;
 import android.os.Handler;
 // /* fixme-23 */
 // import java.lang.reflect.Method;
-import android.os.Build;
+// import android.os.Build;
 
 import android.app.Activity;
 
@@ -60,7 +60,7 @@ import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 
 import android.view.View;
-import android.view.ViewGroup;
+// import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 import android.view.KeyEvent;
@@ -78,14 +78,14 @@ import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 
 
-import android.provider.MediaStore;
+// import android.provider.MediaStore;
 // import android.provider.Settings.System;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 // FIXME-28
 // import androidx.recyclerview.widget.RecyclerView;
@@ -1877,6 +1877,7 @@ public class ShotWindow extends Activity
   {
     if ( ! blk.isLeg() ) return;
     if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
+      TDLog.v("shot window detect bad sibling");
       TDToast.makeWarn( R.string.bad_sibling );
     }
   }

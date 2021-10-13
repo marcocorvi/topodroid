@@ -12,25 +12,25 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import android.content.Context;
 // import android.app.Dialog;
 
-import android.graphics.Color;
-import android.graphics.Rect;
-import android.graphics.Typeface;
+// import android.graphics.Color;
+// import android.graphics.Rect;
+// import android.graphics.Typeface;
 
 import android.widget.TextView;
-import android.widget.Button;
+// import android.widget.Button;
 
-import android.view.LayoutInflater;
-import android.view.MotionEvent;
-import android.view.View;
+// import android.view.LayoutInflater;
+// import android.view.MotionEvent;
+// import android.view.View;
 // import android.view.View.OnTouchListener;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 // import android.text.Layout;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 class MyFileItem extends TextView
 {

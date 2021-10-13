@@ -13,7 +13,7 @@ package com.topodroid.c3walls.pcrust;
 
 import com.topodroid.DistoX.Vector3D;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 class PCSite extends Vector3D
 {

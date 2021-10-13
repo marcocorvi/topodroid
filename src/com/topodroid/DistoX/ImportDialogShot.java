@@ -11,9 +11,9 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.inport.ImportData;
 // import com.topodroid.DistoX.TDLevel;
 
@@ -31,7 +31,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.CheckBox;
-import android.widget.EditText;
+// import android.widget.EditText;
 
 import android.view.View;
 // import android.view.View.OnKeyListener;

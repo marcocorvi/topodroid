@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 import com.topodroid.c3in.ParserSketch;
 import com.topodroid.c3out.ExportGltf;
@@ -23,19 +23,19 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLSurfaceView.Renderer;
 import android.opengl.Matrix;
 
-import android.os.SystemClock;
-import android.content.Context;
-import android.app.Activity;
+// import android.os.SystemClock;
+// import android.content.Context;
+// import android.app.Activity;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.graphics.Bitmap;
 import android.graphics.RectF;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 import java.util.List;
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Locale;
 import java.io.DataOutputStream;
 

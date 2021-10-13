@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.c3out.ExportData;
 
 // import android.app.Dialog;
@@ -27,10 +27,10 @@ import android.widget.Button;
 import android.widget.Spinner;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 import android.widget.CheckBox;
-import android.widget.EditText;
-import android.widget.RadioButton;
+// import android.widget.EditText;
+// import android.widget.RadioButton;
 
 import android.view.View;
 // import android.view.View.OnKeyListener;

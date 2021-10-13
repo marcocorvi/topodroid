@@ -12,7 +12,7 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.DistoX.DeviceActivity;
 import com.topodroid.DistoX.R;
 
@@ -22,11 +22,11 @@ import android.content.Context;
 import android.os.Bundle;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
-import android.view.Gravity;
-import android.view.Window;
-import android.view.WindowManager;
+// import android.view.Gravity;
+// import android.view.Window;
+// import android.view.WindowManager;
 
 import android.widget.ListView;
 import android.widget.ArrayAdapter;

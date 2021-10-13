@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
@@ -19,7 +19,7 @@ import android.content.Context;
 
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
-import android.widget.TextView.OnEditorActionListener;
+// import android.widget.TextView.OnEditorActionListener;
 import android.widget.EditText;
 import android.widget.AdapterView;
 import android.view.View;

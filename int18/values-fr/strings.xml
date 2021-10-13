@@ -810,7 +810,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="hint_to">to</string -->
     <!-- TODO string name="hint_azimuth">azimuth</string -->
     <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_scale">scale</string -->
     <!-- TODO string name="hint_roll">roll</string -->
     <!-- TODO string name="hint_year">year</string -->
     <!-- TODO string name="hint_month">month</string -->
@@ -1680,7 +1679,6 @@ Refer to the web pages for details.\n
     <string name="project">Projet %1$s</string>
     <string name="no_editor">Éditeur non trouvé</string>
     <string name="no_file">Fichier introuvable</string>
-    <string name="no_extra">Fichier supplémentaire manquant</string>
     <string name="no_path">Chemin de fichier manquant</string>
     <string name="no_equate">Pas dégalité</string>
     <string name="no_surveys">Pas de topographie</string>
@@ -1703,7 +1701,6 @@ Refer to the web pages for details.\n
 
     <string name="overwrite">écraser</string>
 
-    <string name="title_help">TopoDroid Manager v. %1$s</string>
     <string name="title_export_settings">Paramétrages d\'import/export</string>
     <string name="title_export">Exporter le projet sous &#8230;</string>
     <string name="title_equates">Points de concordance ou égalités du projet</string>

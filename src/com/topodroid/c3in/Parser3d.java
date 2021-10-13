@@ -19,13 +19,11 @@ import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DSurvey;
 
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 import java.io.DataInputStream;
-import java.io.BufferedInputStream;
-
-
-import java.util.ArrayList;
+// import java.io.BufferedInputStream;
+// import java.util.ArrayList;
 
 public class Parser3d extends TglParser
 {

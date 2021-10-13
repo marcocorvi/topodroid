@@ -11,11 +11,11 @@
  */
 package com.topodroid.io.shp;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-import com.topodroid.num.NumStation;
-import com.topodroid.num.NumShot;
-import com.topodroid.num.NumSplay;
+// import com.topodroid.num.NumStation;
+// import com.topodroid.num.NumShot;
+//  import com.topodroid.num.NumSplay;
 import com.topodroid.DistoX.DrawingPointPath;
 import com.topodroid.DistoX.DrawingAudioPath;
 import com.topodroid.DistoX.DrawingPhotoPath;
@@ -25,15 +25,15 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDUtil;
 
-import java.io.File;
-import java.io.FileOutputStream;
+// import java.io.File;
+// import java.io.FileOutputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;   
 
-import java.nio.ByteBuffer;   
-import java.nio.MappedByteBuffer;   
+// import java.nio.ByteBuffer;
+// import java.nio.MappedByteBuffer;
 import java.nio.ByteOrder;   
-import java.nio.channels.FileChannel;   
+// import java.nio.channels.FileChannel;
 
 import java.util.List;
 

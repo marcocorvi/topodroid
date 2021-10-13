@@ -236,15 +236,15 @@ public class TDUtil
   public static String getAge( long age )
   {
     age /= 60000;
-    if ( age < 120 ) return Long.toString(age) + "\'";
+    if ( age < 120 ) return age + "\'"; // Long.toString(age) + "\'";
     age /= 60;
-    if ( age < 24 ) return Long.toString(age) + "h";
+    if ( age < 24 ) return age + "h"; // Long.toString(age) + "h";
     age /= 24;
-    if ( age < 60 ) return Long.toString(age) + "d";
+    if ( age < 60 ) return age + "d"; // Long.toString(age) + "d";
     age /= 30;
-    if ( age < 24 ) return Long.toString(age) + "m";
+    if ( age < 24 ) return age + "m"; // Long.toString(age) + "m";
     age /= 12;
-    return Long.toString(age) + "y";
+    return age + "y"; // Long.toString(age) + "y";
   }
 
   // SLOW ----------------------------------------------------

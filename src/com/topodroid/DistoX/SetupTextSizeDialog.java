@@ -28,8 +28,8 @@ import android.widget.Button;
 import android.widget.EditText;
 // import android.widget.SeekBar;
 // import android.widget.SeekBar.OnSeekBarChangeListener;
-import android.text.TextWatcher;
-import android.text.Editable;
+// import android.text.TextWatcher;
+// import android.text.Editable;
 
 import java.util.Locale;
 

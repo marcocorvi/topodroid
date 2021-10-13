@@ -25,7 +25,7 @@ import com.topodroid.DistoX.MainWindow;
 // import java.util.ArrayList;
 
 // import java.io.InputStream;
-import java.io.FileInputStream;
+// import java.io.FileInputStream;
 // import java.io.FileNotFoundException;
 import java.io.IOException;
 

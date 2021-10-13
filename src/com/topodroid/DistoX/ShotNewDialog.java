@@ -402,7 +402,6 @@ class ShotNewDialog extends MyDialog
         return;
       }
 
-      notDone = false;
       // TDLog.v( "data " + distance + " " + bearing + " " + clino );
 
       long shot_extend = ExtendType.EXTEND_RIGHT; // ExtendType.EXTEND_UNSET; // FIXME_EXTEND
@@ -414,7 +413,11 @@ class ShotNewDialog extends MyDialog
           float bx = Float.parseFloat( bearing.replace(',','.') );
           if ( diving ) { bx = 360 - bx; if ( bx >= 360 ) bx -= 360; } // DIVING_BEARING
           shot_extend = TDAzimuth.computeLegExtend( bx );
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { 
+          // TDLog.Error("Non-number bearing");
+          mETbearing.setError( mContext.getResources().getString( R.string.error_invalid_number ) );
+          return;
+        }
       }
 
       long back_extend = - shot_extend;
@@ -549,6 +552,7 @@ class ShotNewDialog extends MyDialog
         TDLog.Error( "parse Float error: distance " + distance + " bearing " + bearing + " clino " + clino );
       }
       if ( blk != null ) {
+        notDone = false;
         if ( mJpegData != null ) { 
           // TDLog.v( "save Jpeg image size " + mJpegData.length );
           long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
@@ -573,6 +577,9 @@ class ShotNewDialog extends MyDialog
           mLister.refreshDisplay( 1, false );
         }
         notDone = true;
+      } else {
+        TDLog.Error("failed insert manual data block");
+        return;
       }
       
       if ( b == mBtnOk ) {

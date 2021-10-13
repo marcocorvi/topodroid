@@ -23,7 +23,7 @@ import java.io.IOException;
 
 import java.util.Locale;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 public class CWIntersection
 {

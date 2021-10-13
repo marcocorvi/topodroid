@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
 import com.topodroid.num.TDNum;
-import com.topodroid.num.NumStation;
+// import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.common.PlotType;
 
@@ -31,7 +31,7 @@ import java.io.DataInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
-import android.graphics.RectF;
+// import android.graphics.RectF;
 
 class DrawingXvi
 {

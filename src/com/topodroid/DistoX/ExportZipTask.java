@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
 

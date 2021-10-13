@@ -153,6 +153,7 @@ class ImportParser
       }
       return new BufferedReader( isr );
     } catch ( FileNotFoundException e ) {
+      TDLog.Error("File not found");
     }
     return null;
   }

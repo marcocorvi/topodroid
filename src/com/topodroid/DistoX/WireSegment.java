@@ -23,9 +23,10 @@ public class WireSegment
 
   boolean coincide( WireSegment s, double eps )
   {
-    if ( wp1.coincide( s.wp1, eps ) && wp2.coincide( s.wp2, eps ) ) return true;
-    if ( wp1.coincide( s.wp2, eps ) && wp2.coincide( s.wp1, eps ) ) return true;
-    return false;
+    // if ( wp1.coincide( s.wp1, eps ) && wp2.coincide( s.wp2, eps ) ) return true;
+    // if ( wp1.coincide( s.wp2, eps ) && wp2.coincide( s.wp1, eps ) ) return true;
+    // return false;
+    return ( wp1.coincide( s.wp1, eps ) && wp2.coincide( s.wp2, eps ) ) || ( wp1.coincide( s.wp2, eps ) && wp2.coincide( s.wp1, eps ) );
   }
 
 }

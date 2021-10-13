@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.common.PlotType;
 
-import android.content.res.Resources;
+// import android.content.res.Resources;
 
 public class PlotInfo
 {

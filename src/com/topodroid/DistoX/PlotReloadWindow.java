@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDLocale;
@@ -29,16 +29,16 @@ import android.content.Intent;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 
-import android.util.TypedValue;
+// import android.util.TypedValue;
 
 import android.graphics.PointF;
-import android.graphics.Path;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.Matrix;
+// import android.graphics.Path;
+// import android.graphics.drawable.BitmapDrawable;
+// import android.graphics.Matrix;
 
 import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
+// import android.os.Handler;
+// import android.os.Message;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -189,8 +189,9 @@ public class PlotReloadWindow extends ItemDrawer
     long millis = System.currentTimeMillis();
     File file = TDFile.getTopoDroidFile( tdr );
     if ( file.exists() ) {
+      long len = file.length();
       String age = TDUtil.getAge( millis - file.lastModified() );
-      String name = age + " [" + Long.toString(file.length()) + "] ()";
+      String name = age + " [" + len + "] ()";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
       //  TDLog.v("Reload file " + filetdr );
     }
@@ -198,18 +199,20 @@ public class PlotReloadWindow extends ItemDrawer
     filetdr = filetdr + TDPath.BCK_SUFFIX;
     file = TDFile.getTopoDroidFile( tdr );
     if ( file.exists() ) {
+      long len = file.length();
       String age = TDUtil.getAge( millis - file.lastModified() );
-      String name = age + " [" + Long.toString(file.length()) + "] (" + TDPath.BCK_SUFFIX + ")";
+      String name = age + " [" + len + "] (" + TDPath.BCK_SUFFIX + ")";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
       //  TDLog.v("Reload file " + filetdr );
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
-      String tdr1 = tdr + Integer.toString(i);
+      String tdr1 = tdr + i;
       file = TDFile.getTopoDroidFile( tdr1 );
       if ( file.exists() ) {
+        long len = file.length();
         String age = TDUtil.getAge( millis - file.lastModified() );
-        String name = age + " [" + Long.toString(file.length()) + "] (" +  TDPath.BCK_SUFFIX + Integer.toString(i) + ")";
-        String filetdr1 = filetdr + Integer.toString(i);
+        String name = age + " [" + len + "] (" +  TDPath.BCK_SUFFIX + i + ")";
+        String filetdr1 = filetdr + i;
         mBackups.add( new PlotBackup( tdr1, name, filetdr1 ) );
         //  TDLog.v("Reload file " + filetdr1 );
       }

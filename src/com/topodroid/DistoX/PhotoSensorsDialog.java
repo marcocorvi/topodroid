@@ -257,7 +257,9 @@ class PhotoSensorsDialog extends MyDialog
         station = mBlk.mFrom;
       } else { 
 	String dstr = mETat.getText().toString().replace(',','.');
-	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) { }
+	try { d = Float.parseFloat( dstr ); } catch ( NumberFormatException e ) {
+      TDLog.Error("Non-number value");
+    }
         // add a duplicate leg d, mBlk.mBearing, mBlk.mClino
 	from = mBlk.mFrom;
 	station = from + "-" + dstr;

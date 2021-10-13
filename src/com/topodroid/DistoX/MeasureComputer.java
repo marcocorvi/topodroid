@@ -11,12 +11,10 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.os.AsyncTask;
 // import android.content.Context;
-
-import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Locale;

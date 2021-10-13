@@ -14,7 +14,7 @@ package com.topodroid.dev;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TDUtil;
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import android.os.Handler;
 

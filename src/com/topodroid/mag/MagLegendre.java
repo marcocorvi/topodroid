@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // MAGtype_LegendreFunction;
 class MagLegendre

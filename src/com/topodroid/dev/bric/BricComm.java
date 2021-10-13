@@ -23,7 +23,7 @@ import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpNotify;
-import com.topodroid.dev.ble.BleOpIndicate;
+// import com.topodroid.dev.ble.BleOpIndicate;
 import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleUtils;
@@ -36,20 +36,20 @@ import com.topodroid.DistoX.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-import android.os.Looper;
+// import android.os.Looper;
 import android.os.Handler;
 import android.content.Context;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothGatt;
-import android.bluetooth.BluetoothGattService;
+// import android.bluetooth.BluetoothGattService;
 import android.bluetooth.BluetoothGattCharacteristic;
-import android.bluetooth.BluetoothGattDescriptor;
-import android.bluetooth.BluetoothGattCallback;
+// import android.bluetooth.BluetoothGattDescriptor;
+// import android.bluetooth.BluetoothGattCallback;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
+// import java.util.List;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
 

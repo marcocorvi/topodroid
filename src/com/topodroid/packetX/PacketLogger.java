@@ -18,7 +18,7 @@ package com.topodroid.packetX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
-import com.topodroid.DistoX.TDPath;
+// import com.topodroid.DistoX.TDPath;
 
 // import java.io.File;
 // import java.io.FileNotFoundException;

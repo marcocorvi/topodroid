@@ -12,7 +12,7 @@
 package com.topodroid.num;
 
 import com.topodroid.utils.TDMath;
-import com.topodroid.DistoX.SurveyInfo;
+// import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.DBlock;
 import com.topodroid.DistoX.AverageLeg;
 

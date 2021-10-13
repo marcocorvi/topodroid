@@ -828,7 +828,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="hint_to">végpont</string>
     <string name="hint_azimuth">irány</string>
     <string name="hint_clino">lejtés</string>
-    <string name="hint_scale">skála</string>
     <string name="hint_roll">forgatás</string>
     <string name="hint_year">év</string>
     <string name="hint_month">hónap</string>
@@ -1724,7 +1723,6 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="project">Projekt %1$s</string>
     <string name="no_editor">Nincs szövegszerkesztő</string>
     <string name="no_file">A fájl nem található</string>
-    <string name="no_extra">Hiányzó extra fájl</string>
     <string name="no_path">Hiányzó elérési út</string>
     <string name="no_equate">Nincs kapcsolódás</string>
     <string name="no_surveys">Nincs mérés</string>
@@ -1747,7 +1745,6 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="overwrite">felülírja</string>
 
-    <!-- OK string name="title_help">TopoDroid Manager v. %1$s</string -->
     <string name="title_export_settings">Import/export beállítások</string>
     <string name="title_export">Projekt exportálása a &#8230;</string>
     <string name="title_equates">Projekt kapcsolódó pontok</string>

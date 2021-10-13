@@ -11,14 +11,14 @@
  */
 package com.topodroid.DistoX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
-import java.nio.ByteOrder;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.ShortBuffer;
+// import java.nio.ByteOrder;
+// import java.nio.ByteBuffer;
+// import java.nio.FloatBuffer;
+// import java.nio.ShortBuffer;
 
 import android.content.Context;
 

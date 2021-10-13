@@ -24,8 +24,8 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.EditText;
 
-import android.text.TextWatcher;
-import android.text.Editable;
+// import android.text.TextWatcher;
+// import android.text.Editable;
 
 import android.graphics.Path;
 import android.graphics.Paint;

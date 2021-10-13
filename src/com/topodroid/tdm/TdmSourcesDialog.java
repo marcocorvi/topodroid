@@ -18,18 +18,18 @@ import com.topodroid.DistoX.R;
 
 import java.util.List;
 import java.util.ArrayList;
-import java.io.File;
+// import java.io.File;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.widget.ListView;
 import android.widget.Button;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.os.Bundle;
 
 class TdmSourcesDialog extends MyDialog
