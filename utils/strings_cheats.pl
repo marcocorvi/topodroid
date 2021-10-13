@@ -27,6 +27,7 @@ while ( $line = <XX> ) {
 }
 close XX;
 
+$cheats = 0;
 while ( $line = <EN> ) {
   chop $line;
   next if ( $line =~ /translatable="false"/ );
@@ -52,7 +53,8 @@ while ( $line = <EN> ) {
 
   $xx = $xx_line{ $name };
   if ( $xx eq $en ) {
-    print "  $line $xx\n";
+    $cheats ++;
+    print "$cheats:  $line $xx\n";
   }
 
   if ( $in_comment == 3 ) {

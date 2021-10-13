@@ -1814,12 +1814,12 @@ DO NOT REMOVE THIS LINE -->
     <!-- UNUSED string name="style_fill">Fill</string -->
     <string name="surface_projection">Projekcia na DEM</string>
     <string name="surface_texture">Štruktúra povrchu</string>
-    <string name="dem_file">DEM %1$s</string>
+    <!-- OK string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">Načítať</string>
 
     <string name="dem_failed">Načítanie DEM zlyhalo</string>
     <string name="dem_ok">Čítať DEM dáta</string>
-    <string name="texture_file">%1$s</string>
+    <!-- OK string name="texture_file">%1$s</string -->
     <string name="texture_load">Načítať štruktúru</string>
     <string name="texture_failed">Načítanie štruktúry zlyhalo</string>
     <string name="texture_ok">Čítať súbor štruktúry</string>
@@ -1869,9 +1869,11 @@ DO NOT REMOVE THIS LINE -->
 
     <string name="walls_title">STENY</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <string name="walls_powercrust">Powercrust</string>
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
-    <string name="walls_delaunay">Delaunay</string>
+    <!-- TODO string name="walls_bubble">Bubble</string -->
+    <!-- TODO string name="walls_tube">Tube</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Powercrust: príliš málo pomocných zámer</string>
     <string name="powercrust_failed">Powercrust zlyhanie</string>

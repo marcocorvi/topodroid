@@ -1837,11 +1837,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="surface_gps">GPS nyomvonal</string>
     <string name="surface_east">Kelet</string>
     <string name="surface_north">Észak</string>
-    <string name="dem_file">%1$s</string>
+    <!-- OK string name="dem_file">%1$s</string -->
     <string name="dem_load">DEM betöltés</string>
     <string name="dem_failed">DEM betöltés hiba</string>
     <string name="dem_ok">DEM adat olvasás</string>
-    <string name="texture_file">%1$s</string>
+    <!-- OK string name="texture_file">%1$s</string -->
     <string name="texture_load">Textúra betöltés</string>
     <string name="texture_failed">Textúra betöltés hiba</string>
     <string name="texture_ok">Textúra fájl olvasás</string>
@@ -1899,11 +1899,11 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="walls_title">FALAK</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <string name="walls_powercrust">Powercrust</string>
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
     <string name="walls_bubble">Bubble</string>
     <string name="walls_tube">Tube</string>
-    <string name="walls_delaunay">Delaunay</string>
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Powercrust: túl kevés sün</string>
     <string name="powercrust_failed">Powercrust hibás</string>

@@ -1782,12 +1782,12 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- TODO string name="dem_file">DEM %1$s</string -->
+    <!-- OK string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
 
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- OK string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1836,9 +1836,11 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="walls_title">WALLS</string -->
     <!-- TODO string name="walls_convexhull">Convex Hull</string -->
-    <!-- TODO string name="walls_powercrust">Powercrust</string -->
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <!-- TODO string name="walls_hull">Hull</string -->
-    <!-- TODO string name="walls_delaunay">Delaunay</string -->
+    <!-- TODO string name="walls_bubble">Bubble</string -->
+    <!-- TODO string name="walls_tube">Tube</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
     <!-- TODO string name="powercrust_failed">Powercrust failed</string -->

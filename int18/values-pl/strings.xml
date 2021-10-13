@@ -1813,11 +1813,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="surface_gps">GPS track</string>
     <string name="surface_east">East</string>
     <string name="surface_north">North</string>
-    <string name="dem_file">%1$s</string>
+    < OK string name="dem_file">%1$s</string>
     <string name="dem_load">Load DEM</string>
     <string name="dem_failed">Failed DEM loading</string>
     <string name="dem_ok">Read DEM data</string>
-    <string name="texture_file">%1$s</string>
+    < OK string name="texture_file">%1$s</string>
     <string name="texture_load">Load texture</string>
     <string name="texture_failed">Failed texture loading</string>
     <string name="texture_ok">Read texture file</string>
@@ -1875,11 +1875,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="walls_title">WALLS</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <string name="walls_powercrust">Powercrust</string>
+    < OK string name="walls_powercrust">Powercrust</string>
     <string name="walls_hull">Hull</string>
     <string name="walls_bubble">Bubble</string>
     <string name="walls_tube">Tube</string>
-    <string name="walls_delaunay">Delaunay</string>
+    < OK string name="walls_delaunay">Delaunay</string>
 
     <string name="powercrust_few_splays">Powercrust: too few splays</string>
     <string name="powercrust_failed">Powercrust failed</string>

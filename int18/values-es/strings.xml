@@ -1783,12 +1783,12 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- TODO string name="dem_file">DEM %1$s</string -->
+    <!-- OK string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
 
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- OK string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1837,9 +1837,11 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <string name="walls_title">Paredes</string>
     <string name="walls_convexhull">Recubrimiento Convexo</string>
-    <string name="walls_powercrust">Recubrimiento fuerte</string>
+    <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
     <string name="walls_hull">Recubrimiento</string>
-    <string name="walls_delaunay">Delaunay</string>
+    <!-- TODO string name="walls_bubble">Bubble</string -->
+    <!-- TODO string name="walls_tube">Tube</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string>
     <string name="powercrust_failed">Recubrimiento fuerte falló</string>

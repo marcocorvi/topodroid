@@ -1796,11 +1796,11 @@
     <string name="surface_gps">GPS трек</string>
     <string name="surface_east">Восток</string>
     <string name="surface_north">Север</string>
-    <string name="dem_file">DEM %1$s</string>
+    <!-- OK string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">загрузить</string>
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
-    <string name="texture_file">%1$s</string>
+    <!-- OK string name="texture_file">%1$s</string -->
     <string name="texture_load">загрузить текстуру</string>
     <string name="texture_failed">Ошибка загрузки текстуры</string>
     <string name="texture_ok">Прочитать файл текстуры</string>
@@ -1849,9 +1849,11 @@
 
     <string name="walls_title">СТЕНЫ</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <string name="walls_powercrust">Powercrust</string>
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
-    <string name="walls_delaunay">Delaunay</string>
+    <!-- TODO string name="walls_bubble">Bubble</string -->
+    <!-- TODO string name="walls_tube">Tube</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Powercrust: недостаточно боковых замеров</string>
     <string name="powercrust_failed">Powercrust ошибка</string>
