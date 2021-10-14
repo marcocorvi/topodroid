@@ -2,9 +2,9 @@
 
 <resources>
   <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
+     <item name="unspecified">Sin especificar</item>
+     <item name="portrait">Retrato</item>
+     <item name="landscape">Paisaje</item>
   </string-array -->
 
   <string-array name="splayDash">
@@ -47,15 +47,15 @@
   </string-array>
 
   <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
+     <item name="grid_cell">Cuadrícula</item>
+     <item name="meter">metros</item>
+     <item name="tf">pies</item>
   </string-array -->
 
   <string-array name="loopClosure">
      <item name="none">Nada</item>
      <item name="normal">Normal</item>
-     <item name="weighted">Weighted</item>
+     <item name="weighted">ponderado</item>
      <item name="triangles">Triángulos</item>
   </string-array>
 
@@ -188,7 +188,7 @@
      <item name="back">Radiales destino + visual inversa</item>
      <item name="backsight">Directa e inversa con verificación</item>
      <item name="tripod">Teodolito o Tripode</item>
-     <item name="anomaly">Magn. anomala</item>
+     <item name="anomaly">Magn. anómala</item>
      <item name="for2">Visual directa + radiales origen</item>
      <item name="back2">Visual inversa + radiales destino</item>
   </string-array>
