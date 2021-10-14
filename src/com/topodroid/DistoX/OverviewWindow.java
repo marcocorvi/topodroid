@@ -666,7 +666,7 @@ public class OverviewWindow extends ItemDrawer
        Handler th2Handler = new Handler() {
           @Override public void handleMessage(Message msg) {
             if (msg.what == 661 ) {
-              TDToast.make( String.format( getString(R.string.saved_file_1), "th2" ) );
+              TDToast.make( String.format( getString(R.string.saved_file_1), fullname ) ); 
             } else {
               TDToast.makeBad( R.string.saving_file_failed );
             }
@@ -693,7 +693,7 @@ public class OverviewWindow extends ItemDrawer
   private static String mExportExt;
 
   // called by the ExportPlotDialog
-  public void doExport( String export_type ) // EXPORT
+  public void doExport( String export_type, String filename ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
@@ -709,6 +709,7 @@ public class OverviewWindow extends ItemDrawer
       intent.setType( TDConst.mMimeType[ mExportIndex ] );
       intent.addCategory(Intent.CATEGORY_OPENABLE);
       // intent.putExtra( "exporttype", index ); // index is not returned to the app
+      intent.putExtra( Intent.EXTRA_TITLE, filename );
       startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
     } else {
       // saveWithExt( null, mExportExt );
@@ -817,7 +818,7 @@ public class OverviewWindow extends ItemDrawer
       pdf.writeTo( fos );
       pdf.close();
       if ( fos != null ) fos.close();
-      // TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
+      TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) ); // PDF
     } catch ( IOException e ) {
       TDLog.Error("Failed PDF export " + e.getMessage() );
     } finally {
@@ -1324,7 +1325,8 @@ public class OverviewWindow extends ItemDrawer
     if ( p++ == pos ) { // CLOSE
       super.onBackPressed();
     } else if ( TDLevel.overExpert && p++ == pos ) { // EXPORT THERION
-      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, 1 ).show();
+      String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+      new ExportDialogPlot( mActivity, this, TDConst.mOverviewExportTypes, R.string.title_plot_save, 1, fullname ).show();
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_PLOT );

@@ -1640,7 +1640,7 @@
     <string name="perm_microphone">\nМикрофон</string>
 
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер с использованием прибора DistoX, BRIC4 или Sap5.
 \n\nОтсутствие гарантий: используя данное ПО вы соглашаетесть с тем что автор не несёт ответственность за возможную потерю данных.

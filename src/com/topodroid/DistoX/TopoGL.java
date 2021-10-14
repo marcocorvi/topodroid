@@ -2599,10 +2599,10 @@ public class TopoGL extends Activity
 
   private ExportData mExport = null; // type; FLAGS: splays, walls, surface, station; mime
 
-  void selectDEMFile( )     { selectFile( REQUEST_DEM_FILE,     Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file ); }
-  void selectTextureFile( ) { selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file ); }
-  void selectImportFile( )  { selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file ); }
-  // void selectTemperatureFile( ) { selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file ); }
+  void selectDEMFile( )     { selectFile( REQUEST_DEM_FILE,     Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file,     null ); }
+  void selectTextureFile( ) { selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); }
+  void selectImportFile( )  { selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null ); }
+  // void selectTemperatureFile( ) { selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file, null ); }
 
   void selectExportFile( ExportData export )
   {
@@ -2610,19 +2610,20 @@ public class TopoGL extends Activity
     mExport.mName = mSurveyName; 
     if ( TDSetting.mExportUri ) {
       TDLog.v( "export with URI - survey " + mSurveyName );
-      selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file );
+      selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
     } else {
       TDLog.v( "export with task - survey " + mSurveyName );
       (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
     }
   }
 
-  void selectFile( int request, String action, String mime, int res )
+  void selectFile( int request, String action, String mime, int res, String filename )
   {
     // TDLog.v("TopoGL select file");
     Intent intent = new Intent( action );
     intent.setType( (mime==null)? "*/*" : mime );
     intent.addCategory( Intent.CATEGORY_OPENABLE );
+    if ( filename != null ) intent.putExtra( Intent.EXTRA_TITLE, filename );
     startActivityForResult( Intent.createChooser(intent, getResources().getString( res ) ), request );
   }
 

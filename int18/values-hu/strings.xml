@@ -1676,7 +1676,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC4 és Sap5 műszerekkel történő barlangfelmérésre.
 \n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.

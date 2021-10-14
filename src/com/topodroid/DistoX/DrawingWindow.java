@@ -6099,7 +6099,7 @@ public class DrawingWindow extends ItemDrawer
         pdf.writeTo( fos );
         pdf.close();
         fos.close();
-        TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname + ".pdf" ) );
+        TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
       // } catch ( NoSuchMethodException e ) {
       } catch ( IOException e ) {
         TDLog.Error("failed PDF export " + e.getMessage() );
@@ -6226,7 +6226,7 @@ public class DrawingWindow extends ItemDrawer
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
           if (msg.what == 661 ) {
-            TDToast.make( String.format( getString(R.string.saved_file_1), (filename + ".th2") ) );
+            TDToast.make( String.format( getString(R.string.saved_file_1), filename ) ); 
           } else {
             TDToast.makeBad( R.string.saving_file_failed );
           }
@@ -6607,7 +6607,8 @@ public class DrawingWindow extends ItemDrawer
           super.onBackPressed();
         }
       } else if ( p++ == pos ) { // EXPORT
-        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0 ).show();
+        String plotname = TDInstance.survey + "-" + mName;
+        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0, plotname ).show();
       } else if ( p++ == pos ) { // INFO / AREA
         if ( PlotType.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
@@ -6708,7 +6709,7 @@ public class DrawingWindow extends ItemDrawer
   static private int mExportIndex;
   static private String mExportExt;
 
-  public void doExport( String export_type ) // EXPORT
+  public void doExport( String export_type, String filename ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
@@ -6722,6 +6723,7 @@ public class DrawingWindow extends ItemDrawer
         intent.setType( TDConst.mMimeType[ mExportIndex] );
         intent.addCategory(Intent.CATEGORY_OPENABLE);
         // intent.putExtra( "exporttype", index ); // index is not returned to the app
+        intent.putExtra( Intent.EXTRA_TITLE, filename );
         startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
       }
     } else {

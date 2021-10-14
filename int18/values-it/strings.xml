@@ -1651,7 +1651,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="perm_camera">\nFotocamera</string>
     <string name="perm_microphone">\nMicrofono</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid è una app Android open-source per fare rilievi di grotta con il DistoX
 \nNessuna garanzia: usandola sollevi l\'autore da ogni responsabilità per qualsiasi perdita di dati o danno che ne possano conseguire.

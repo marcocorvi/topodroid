@@ -1656,7 +1656,7 @@ Refer to the web pages for details.\n
     <string name="perm_microphone">\n话筒</string>
 
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.
 \n\n免责声明: 要使用这个软件您必须同意作者将不对可能引起的的数据丢失或者损坏负责.

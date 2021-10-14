@@ -51,6 +51,8 @@ class TdmConfig extends TdmFile
     mSave      = save;
   }
 
+  public String getSurveyName() { return mSurveyName; }
+
   void populateViewSurveys( ArrayList< TdmSurvey > surveys )
   {
     mViewSurveys = new ArrayList< TdmSurvey >(); // current view surveys

@@ -472,15 +472,16 @@ public class CalibActivity extends Activity
 
   /**
    * @param type    export type (string)
+   * @param name    calib name (not used)
    */
-  public void doExport( String type )
+  public void doExport( String type, String name )
   {
     int index = TDConst.calibExportIndex( type );
     if ( index >= 0 ) {
       // if ( TDSetting.mExportUri ) {
       //   selectExportFromProvider( index ); // TODO
       // } else {
-        doExport( index );
+        doExport( index, name );
       // }
     }
   }
@@ -496,8 +497,9 @@ public class CalibActivity extends Activity
 
   /**
    * @param exportType  integer export index 
+   * @param name        calib name (not used)
    */
-  private void doExport( int exportType )
+  private void doExport( int exportType, String name )
   {
     if ( TDInstance.cid < 0 ) {
       TDToast.makeBad( R.string.no_calibration );
@@ -507,7 +509,7 @@ public class CalibActivity extends Activity
         filename = mApp.exportCalibAsCsv();
       }
       if ( filename != null ) {
-        TDToast.make( String.format( getString(R.string.saved_file_1), filename ) );
+        TDToast.make( String.format( getString(R.string.saved_file_1), filename ) ); 
       } else {
         TDToast.makeBad( R.string.saving_file_failed );
       }

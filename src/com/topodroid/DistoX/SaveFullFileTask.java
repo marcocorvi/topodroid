@@ -91,7 +91,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
       if ( mToast ) TDToast.make( R.string.saving_file_failed );
     } else {
       TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
-      if ( mToast ) TDToast.make( String.format( mFormat, filename ) );
+      if ( mToast ) TDToast.make( String.format( mFormat, "csx" ) ); // was filename
     }
   }
 }

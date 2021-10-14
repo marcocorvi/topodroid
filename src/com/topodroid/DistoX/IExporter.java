@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 
 public interface IExporter 
 {
-  void doExport( String type );
+  void doExport( String type, String filename );
   // void doExport( Uri uri );
 }
 

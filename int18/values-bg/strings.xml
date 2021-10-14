@@ -1630,7 +1630,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="perm_camera">\nCamera</string -->
     <!-- TODO string name="perm_microphone">\nMicrophone</string -->
 
-    <string name="welcome_title">Добре дошли в TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">Добре дошли в TopoDroid %1$s</string -->
 
     <string name="welcome_text">
 \nTopoDroid е Андроид приложение с отворен код за картиране на пещери с помощта на на DistoX лазерна рулетка.

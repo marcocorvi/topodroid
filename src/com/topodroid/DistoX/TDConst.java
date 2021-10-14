@@ -124,7 +124,7 @@ public class TDConst
     SURVEY_FORMAT_TOP
   };
 
-  // ======= MODEL EXPORT  ======
+  // ======= MODEL EXPORT  ====== see TopoGL::getFilename()
   public static final String[] mModelExportTypes = {
     "gLTF",
     "CGAL",
@@ -157,6 +157,22 @@ public class TDConst
     SURVEY_FORMAT_KML,
     SURVEY_FORMAT_SHP
   };
+
+  public static String getModelFilename( int type, String name )
+  {
+    switch( type ) {
+      case 0: return name + ".gltf";
+      case 1: return name + ".cgal";
+      case 2: return name + ".stl";
+      case 3: return name + ".stl";
+      case 4: return name + ".las";
+      case 5: return name + ".dxf";
+      case 6: return name + ".kml";
+      case 7: return name + ".shz";
+      // case 8: return name + ".txt";
+    }
+    return name;
+  }
 
   // ======= DATA EXPORT  ======
   public static final String[] mSurveyExportTypes = { "ZIP", 
@@ -226,6 +242,33 @@ public class TDConst
     SURVEY_FORMAT_SHP
   };
 
+  public static String getSurveyFilename( int type, String survey )
+  {
+    switch ( type ) {
+      case  0: return survey + ".zip";
+      case  1: return survey + ".dat";
+      case  2: return survey + ".csx";
+      case  3: return survey + ".gtx";
+      case  4: return survey + ".grt";
+      case  5: return survey + ".top";
+      case  6: return survey + ".plg";
+      case  7: return survey + ".svx";
+      case  8: return survey + ".th";
+      case  9: return survey + ".cav";
+      case 10: return survey + ".trb";
+      case 11: return survey + ".tro";
+      case 12: return survey + ".srv";
+      case 13: return survey + ".sur";
+      case 14: return survey + ".csv";
+      case 15: return survey + ".dxf";
+      case 16: return survey + ".kml";
+      case 17: return survey + ".plt";
+      case 18: return survey + ".json";
+      case 19: return survey + ".shz";
+    }
+    return survey;
+  }
+
   // ======= PLOT EXPORT  ======
   public static final String[] mPlotExportTypes = {
       "Therion",
@@ -266,6 +309,23 @@ public class TDConst
     "c3d"
   };
 
+  public static String getPlotFilename( int type, String name )
+  {
+    switch ( type ) { 
+      case 0: return name + ".th2";
+      case 1: return name + ".csx";
+      case 2: return name + ".dxf";
+      case 3: return name + ".svg";
+      case 4: return name + ".shz";
+      case 5: return name + ".png";
+      case 6: return name + ".pdf";
+      case 7: return name + ".xvi";
+      case 8: return name + ".tnl"; // Tunnel
+      case 9: return name + ".c3d";
+    }
+    return name;
+  }
+
   // ======= OVERVIEW EXPORT  ======
   public static final String[] mOverviewExportTypes = {
       "Therion",
@@ -292,6 +352,18 @@ public class TDConst
     "pdf",
     "xvi"
   };
+
+  public static String getOverviewFilename( int type, String name )
+  { 
+    switch( type ) {
+      case 0: return name + ".th2";
+      case 1: return name + ".dxf";
+      case 2: return name + ".svg";
+      case 3: return name + ".pdf";
+      case 5: return name + ".xvi";
+    }
+    return name;
+  }
 
   public static final String[] mCalibExportTypes = { "CSV" };
   private static final int[] mCalibExportIndex = { SURVEY_FORMAT_CSV };

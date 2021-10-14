@@ -1635,7 +1635,7 @@ Refer to the web pages for details.\n
     <string name="perm_camera">\nCâmera</string>
     <string name="perm_microphone">\nMicrofone</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.

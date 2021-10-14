@@ -245,7 +245,7 @@ public class TdmConfigActivity extends Activity
       onBackPressed();
     } else if ( p++ == pos ) {  // EXPORT
       if ( mTdmConfig != null ) {
-        new ExportDialogTdm( this, this, mExportTypes, R.string.title_export ).show();
+        new ExportDialogTdm( this, this, mExportTypes, R.string.title_export, mTdmConfig.getSurveyName() ).show();
       }
     } else if ( p++ == pos ) { // DELETE
       askDelete();
@@ -425,7 +425,8 @@ public class TdmConfigActivity extends Activity
   }
 
   // @implements IExporter
-  public void doExport( String type )
+  // @note surveyname is not used (TdmConfig already has it)
+  public void doExport( String type, String surveyname )
   {
     boolean overwrite = true;
     String filepath = null;

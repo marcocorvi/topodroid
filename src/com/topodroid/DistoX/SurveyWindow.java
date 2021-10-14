@@ -502,7 +502,7 @@ public class SurveyWindow extends Activity
   }
 
   // interface IExporter
-  public void doExport( String type )
+  public void doExport( String type, String filename )
   {
     saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
@@ -514,7 +514,7 @@ public class SurveyWindow extends Activity
         TDToast.makeBad( R.string.no_survey );
       } else {
         if ( TDSetting.mExportUri ) {
-          selectExportFromProvider( index );
+          selectExportFromProvider( index, filename );
         } else {
           TopoDroidApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
         }
@@ -527,7 +527,7 @@ public class SurveyWindow extends Activity
   private static int mExportIndex; // index of the export-type 
 
   // FIXME_URI
-  private void selectExportFromProvider( int index ) // EXPORT
+  private void selectExportFromProvider( int index, String filename ) // EXPORT
   {
     if ( ! TDSetting.mExportUri ) return;
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
@@ -535,6 +535,7 @@ public class SurveyWindow extends Activity
     intent.setType( TDConst.mMimeType[index] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    intent.putExtra( Intent.EXTRA_TITLE, filename );
     mExportIndex = index;
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_data_title ) ), TDRequest.REQUEST_GET_EXPORT );
   }
@@ -648,9 +649,9 @@ public class SurveyWindow extends Activity
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT
       if ( mApp_mData.hasFixed( TDInstance.sid, TDStatus.NORMAL) ) {
-        new ExportDialogShot( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export ).show();
+        new ExportDialogShot( mActivity, this, TDConst.mSurveyExportTypes, R.string.title_survey_export, TDInstance.survey ).show();
       } else {
-        new ExportDialogShot( mActivity, this, TDConst.mSurveyExportTypesNoGeo, R.string.title_survey_export ).show();
+        new ExportDialogShot( mActivity, this, TDConst.mSurveyExportTypesNoGeo, R.string.title_survey_export, TDInstance.survey ).show();
       }
     } else if ( TDLevel.overExpert && p++ == pos ) { // RENAME
       new SurveyRenameDialog( mActivity, this ).show();

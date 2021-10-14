@@ -137,8 +137,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       super.onPostExecute(bool);
       if ( mToast ) {
         if ( bool ) {
-          // TDToast.make( String.format( mFormat, mFullName + "." + mExt ) );
-          TDToast.make( String.format( mFormat, mExt ) );
+          TDToast.make( String.format( mFormat, mFullName ) ); // mExt ) );
         } else {
           TDToast.makeBad( R.string.saving_file_failed );
         }

@@ -1631,7 +1631,7 @@ Refer to the web pages for details.\n
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone">\nMicrophone</string>
 
-    <string name="welcome_title">Bienvenue dans TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">Bienvenue dans TopoDroid %1$s</string -->
 
     <string name="welcome_text">
 \nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX.

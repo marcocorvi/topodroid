@@ -1664,7 +1664,7 @@ Refer to the web pages for details.\n
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
-    <string name="welcome_title">Willkommen in TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">Willkommen in TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.
 \n\nKeine Garantie: Der Autor ist nicht verantwortlich für jeglichen Datenverlust oder andere Schäden.

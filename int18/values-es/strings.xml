@@ -1640,9 +1640,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="perm_camera">\nCámara</string>
     <string name="perm_microphone">\nMicrófono</string>
 
-    <string name="welcome_title">Bienvenido a TopoDroid %1$s</string>
-
-
+    <!-- OK string name="welcome_title">Bienvenido a TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.

@@ -1672,7 +1672,7 @@ DO NOT REMOVE THIS LINE -->
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofón</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid je open-source aplikácia pre Android, ktorá umožňuje mapovanie jaskýň pomocou DistaX
 \nUpozornenie pre použivateľa: používaním programu zbavujete autora akejkoľvek zodpovednosti za akúkoľvek stratu dát alebo poškodenie, ktoré z neho vyplývajú.

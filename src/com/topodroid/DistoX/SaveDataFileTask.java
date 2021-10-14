@@ -46,6 +46,17 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
   private boolean mToast;
   private Uri mUri = null;
 
+  /**
+   * @param uri         output URI
+   * @param format      format for the toast
+   * @param sid         survey ID
+   * @param info        survey info
+   * @param data        DB helper class
+   * @param survey      survey name
+   * @param device      active device (A) - only for SVX
+   * @param type        export type (index)
+   * @param toast       whether to toast
+   */
   SaveDataFileTask( Uri uri, String format, long sid, SurveyInfo info, DataHelper data, String survey, Device device, int type, boolean toast )
   {
     if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
@@ -216,6 +227,9 @@ class SaveDataFileTask extends AsyncTask<Void, Void, String >
     return ( ret == 1 )? pathname : "";
   }
 
+  /**
+   * @param filename   survey_name + extension
+   */
   @Override
   protected void onPostExecute( String filename )
   {

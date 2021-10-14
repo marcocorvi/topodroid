@@ -47,6 +47,7 @@ public class ExportDialogShot extends MyDialog
   private String    mSelected;
   private final int mTitle;
   private int mSelectedPos;
+  private String    mSurvey;
 
   private LinearLayout mLayoutCompass;
   private LinearLayout mLayoutCSurvey;
@@ -58,13 +59,14 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
 
-  public ExportDialogShot( Context context, IExporter parent, String[] types, int title )
+  public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey )
   {
     super( context, R.string.ExportDialog );
     mParent = parent;
     mTypes  = types;
     mSelected = null;
     mTitle = title;
+    mSurvey = survey;
   }
 
 // -------------------------------------------------------------------
@@ -128,7 +130,7 @@ public class ExportDialogShot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      mParent.doExport( mSelected );
+      mParent.doExport( mSelected, TDConst.getSurveyFilename( mSelectedPos, mSurvey ) );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

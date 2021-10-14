@@ -249,15 +249,17 @@ public class TDExporter
     return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos;"); 
   }
 
+  // @return 1 on success
   static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String surveyname )
   {
+    int ret = 0; // 0 = failure
     ParcelFileDescriptor pfd = null;
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
       pfd = TDsafUri.docWriteFileDescriptor( uri );
       BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
-      int ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
+      ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
       bw.close();
     } catch ( FileNotFoundException e ) {
       TDLog.Error("File not found");
@@ -266,13 +268,14 @@ public class TDExporter
     } finally {
       TDsafUri.closeFileDescriptor( pfd );
     }
-    return 0;
+    return ret;
   }
 
   // @return 1 on success or 0 on error
   static int exportSurveyAsCsx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
                                    String origin, String surveyname )
   {
+    int ret = 0; // 0 = failure
     // TDLog.v( "export as csurvey: " + file.getName() );
     String cave   = toXml( info.name.toUpperCase(Locale.US) );
     String survey = toXml( info.name );
@@ -597,11 +600,11 @@ public class TDExporter
 
       bw.flush();
       bw.close();
-      return 1;
+      ret = 1;
     } catch ( IOException e ) {
       TDLog.Error( "Failed cSurvey export: " + e.getMessage() );
-      return 0;
     }
+    return ret;
   }
 
   // ####################################################################################################################################
@@ -1234,31 +1237,22 @@ public class TDExporter
   {
     if ( plots.size() == 0 ) return;
     for ( PlotInfo plt : plots ) {
-      String subdir = TDInstance.survey + "/th"; // all THERION files in "th"
-      String filename =  info.name + "-" + plt.name + ".th2";
-      boolean exists = TDFile.hasMSfile( subdir, filename );
-      if ( exists ) {
-        if ( TDSetting.mTherionConfig ) {
-          pw.format("  input \"%s\"\n", filename );
-        } else {
-          pw.format("  # input \"%s\"\n", filename );
-        }
+      String subdir = TDInstance.survey + "/tdr"; // plot files
+      String plotname =  info.name + "-" + plt.name;
+      if (  TDFile.hasMSfile( subdir, plotname + ".tdr" ) ) {
+        pw.format("  # input \"%s.th2\"\n", plotname );
       }
     } 
     pw.format("\n");
     for ( PlotInfo plt : plots ) {
       if ( PlotType.isSketch2D( plt.type ) ) {
         int scrap_nr = plt.maxscrap;
-        String subdir = TDInstance.survey + "/th"; // all THERION files in "th"
+        String subdir = TDInstance.survey + "/tdr"; // plot files
         String plotname =  info.name + "-" + plt.name;
-        String filename =  info.name + "-" + plt.name + ".th2";
-        boolean exists = TDFile.hasMSfile( subdir, filename );
-        if ( exists ) {
+        if ( TDFile.hasMSfile( subdir, plotname + ".tdr" ) ) {
           pw.format("  # map m%s -projection %s\n", plt.name, PlotType.projName( plt.type ) );
           pw.format("  #   %s\n", plotname );
-          for ( int k=1; k<=scrap_nr; ++k) {
-            pw.format("  #   %s%d\n", plotname, scrap_nr );
-          }
+          for ( int k=1; k<=scrap_nr; ++k) pw.format("  #   %s%d\n", plotname, scrap_nr );
           pw.format("  # endmap\n");
         } 
       }

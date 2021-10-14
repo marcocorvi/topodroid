@@ -1680,7 +1680,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone">\nMicrophone</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nThankyou for choosing TopoDroid.
 \n\nTopoDroid is an Open Source Android app for surveying caves with DistoX, BRIC4, or Sap5.

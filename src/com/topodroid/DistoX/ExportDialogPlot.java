@@ -50,6 +50,7 @@ public class ExportDialogPlot extends MyDialog
   private final int mTitle;
   private int mSelectedPos;
   private int mParentType;
+  private String mPlotName;
 
   private LinearLayout mLayoutTherion;
   private LinearLayout mLayoutCSurvey;
@@ -59,7 +60,7 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutPng;
   private LinearLayout mLayoutPdf;
 
-  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type )
+  public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type, String plotname )
   {
     super( context, R.string.ExportDialog );
     mParent = parent;
@@ -67,6 +68,7 @@ public class ExportDialogPlot extends MyDialog
     mSelected = null;
     mTitle = title;
     mParentType = parent_type;
+    mPlotName = plotname;
   }
 
 // -------------------------------------------------------------------
@@ -138,7 +140,7 @@ public class ExportDialogPlot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      mParent.doExport( mSelected );
+      mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ) );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

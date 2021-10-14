@@ -1634,7 +1634,7 @@ Refer to the web pages for details.\n
     <string name="perm_microphone">\nMicrofon</string>
 
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid este o aplicație Android Open Source pentru cartarea peșterilor cu DistoX-ul.
 \n\nNici o garanție: prin folosirea acestei aplicații ești de acord că autorul nu este resposabil pentru nici o pierdere de date ce ar putea apărea și nici pentru alte pagube.
