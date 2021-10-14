@@ -188,7 +188,7 @@
      <item name="back">Radiales destino + visual inversa</item>
      <item name="backsight">Directa e inversa con verificación</item>
      <item name="tripod">Teodolito o Tripode</item>
-     <item name="anomaly">Magn. anomaly</item>
+     <item name="anomaly">Magn. anomala</item>
      <item name="for2">Visual directa + radiales origen</item>
      <item name="back2">Visual inversa + radiales destino</item>
   </string-array>
@@ -231,7 +231,7 @@
      <item name="two">Normal</item>
      <item name="two">Pocos</item>
      <item name="bezier">Bezier</item>
-     <item name="simplified">Simplified</item> <!-- TODO -->
+     <item name="simplified">Simplificado</item> <!-- TODO -->
   </string-array>
 
   <string-array name="groupBy">
@@ -273,17 +273,17 @@
 
   <!-- 3D VIEWER array strings -->
   <!-- TODO string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
+     <item name="small1">Pequeño</item>
+     <item name="large">Grande</item>
   </string-array -->
 
   <!-- UNUSED string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
+     <item name="shrink">Submuestra</item>
+     <item name="cut">Cortar</item>
   </string-array -->
 
   <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
+     <item name="skip">Saltar</item>
      <item name="normal">Normal</item>
      <item name="xsection">X-Section</item>
   </string-array -->
