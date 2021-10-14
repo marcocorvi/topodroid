@@ -1851,9 +1851,9 @@
     <string name="walls_convexhull">Convex Hull</string>
     <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <string name="walls_bubble">Пузырь</string>
+    <string name="walls_tube">Труба</string>
+    <!-- OK string name="walls_delaunay">Делане</string -->
 
     <string name="powercrust_few_splays">Powercrust: недостаточно боковых замеров</string>
     <string name="powercrust_failed">Powercrust ошибка</string>
