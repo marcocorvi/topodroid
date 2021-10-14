@@ -355,7 +355,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_location_data">Nincs hely adat</string>
     <string name="no_paired_device">Nincs párosított műszer.\nKeress és párosíts egy DistoX-et</string>
     <string name="no_photos">A felméréshez nincsen fotó</string>
-    <string name="no_plots">A felméréshez nincsen vázlat.\nHasználd a Hozzáad gombot, hogy létrehozz egyet</string>
+    <string name="no_plots">A felméréshez nincsen vázlat.\nHasználd az Új vázlat gombot, hogy létrehozz egyet</string>
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
     <string name="no_proj4">Proj4 nincs telepítve</string>
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
