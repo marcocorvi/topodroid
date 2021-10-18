@@ -18,7 +18,7 @@ import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 class TdmSource extends TdmFile
-               implements View.OnClickListener
+                implements View.OnClickListener
 {
   boolean mChecked;
 

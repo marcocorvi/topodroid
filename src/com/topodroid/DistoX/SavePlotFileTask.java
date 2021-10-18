@@ -63,7 +63,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
-		    // DrawingUtil util, 
 		    DrawingCommandManager manager, PlotInfo info,
                     String fullname, long type, int proj_dir, int suffix, int rotate )
   {
@@ -71,9 +70,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
-     // mApp      = app;
      mNum      = num;
-     // mUtil     = util;
      mManager  = manager;
      mInfo     = info;
      mPaths    = null;
@@ -95,7 +92,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   }
 
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
-                    // TopoDroidApp app,
 		    TDNum num,
 		    List< DrawingPath > paths, PlotInfo info,
                     String fullname, long type, int proj_dir )
@@ -104,7 +100,6 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mFormat   = context.getResources().getString(R.string.saved_file_2);
      mParent   = new WeakReference<DrawingWindow>( parent );
      mHandler  = handler;
-     // mApp      = app;
      mNum      = num;
      mManager  = null;
      mPaths    = paths;
@@ -146,6 +141,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           } catch ( IOException e ) {
             TDLog.v( e.getMessage() );
             e.printStackTrace(); 
+            return false;
           } finally {
             TDsafUri.closeFileDescriptor( pfd );
           }
@@ -226,6 +222,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         } catch ( IOException e ) {
           TDLog.v( e.getMessage() );
           e.printStackTrace(); 
+          return false;
         } finally {
           TDsafUri.closeFileDescriptor( pfd );
         }
@@ -289,7 +286,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   protected void onPostExecute(Boolean bool)
   {
     super.onPostExecute(bool);
-    // TDLog.v( "save plot file task post exec");
+    // TDLog.v( "save plot file task post exec " + bool );
     if ( mHandler != null ) {
       mHandler.sendEmptyMessage( bool? 661 : 660 );
     }

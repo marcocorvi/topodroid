@@ -11,6 +11,7 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.R;
 
@@ -35,19 +36,23 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
   {
     super( ctx, id, items );
     mContext = ctx;
-    mItems = items;
+    mItems   = items;
     mOnClick = onClick;
-    // TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
+    TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
   }
 
-  public TdmConfig get( int pos ) { return mItems.get(pos); }
+  public TdmConfig get( int pos ) 
+  { 
+    TDLog.v("TdmConfig get item at pos " + pos );
+    return mItems.get(pos);
+  }
 
-  public TdmConfig get( String survey ) 
+  public TdmConfig getTdmConfig( String survey ) 
   {
-    // TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
+    TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
     if ( survey == null || survey.length() == 0 ) return null;
     for ( TdmConfig tdconfig : mItems ) {
-      // TDLog.v("TdmConfig item >" + tdconfig.mName + "<" );
+      TDLog.v("TdmConfig item >" + tdconfig.getSurveyName() + "<" );
       if ( tdconfig.getSurveyName().equals( survey ) ) return tdconfig;
     }
     return null;

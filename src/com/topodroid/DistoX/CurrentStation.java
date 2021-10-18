@@ -39,4 +39,16 @@ public class CurrentStation
   { 
     return mName + flag_str[mFlag] + mComment;
   }
+
+  public String getFlagCode() 
+  {
+    switch ( mFlag ) {
+      case 0: return " ";
+      case 1: return "F";
+      case 2: return "P";
+      default: return "?";
+    }
+  }
+
+  public String getComment() { return mComment; }
 }

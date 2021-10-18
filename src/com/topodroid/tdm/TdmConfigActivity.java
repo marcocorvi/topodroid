@@ -13,6 +13,7 @@ package com.topodroid.tdm;
 
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -130,13 +131,14 @@ public class TdmConfigActivity extends Activity
           TDToast.make( R.string.no_file );
         }
       } else {
-        // TDLog.v( "TdmConfig activity missing TdmConfig path");
+        TDLog.Error( "TdmConfig activity missing TdmConfig path");
         TDToast.make( R.string.no_path );
       }
     }
     if ( mTdmConfig == null ) {
       doFinish( TDRequest.RESULT_TDCONFIG_NONE );
     } else {
+      TDLog.v( "TdmConfig " + mTdmConfig.toString() );
       setContentView(R.layout.tdconfig_activity);
       // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 

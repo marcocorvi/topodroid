@@ -49,6 +49,7 @@ class TdmConfig extends TdmFile
     mEquates   = new ArrayList< TdmEquate >();
     mRead      = false;
     mSave      = save;
+    mSurveyName = getNameFromFilepath( filepath );
   }
 
   public String getSurveyName() { return mSurveyName; }
@@ -191,6 +192,7 @@ class TdmConfig extends TdmFile
 
   private void writeTd( String filepath )
   {
+    TDLog.v("save config " + mSurveyName + " " + filepath );
     try {
       FileWriter fw = new FileWriter( filepath );
       PrintWriter pw = new PrintWriter( fw );
@@ -217,13 +219,22 @@ class TdmConfig extends TdmFile
     }
   }
 
+  private String getNameFromFilepath( String filepath )
+  {
+    int start = filepath.lastIndexOf('/') + 1;
+    int end   = filepath.lastIndexOf('.');
+    return ( end > start )? filepath.substring( start, end ) : filepath.substring( start );
+  }
+
   private void readFile( )
   {
     // if the file does not exists creates it and write an empty tdconfig file
-    // TDLog.v( "read file path " + getFilepath() );
-    File file = new File( getFilepath() );
+    String filepath = getFilepath();
+    TDLog.v( "read config " + filepath );
+    File file = new File( filepath );
     if ( ! file.exists() ) {
       // TDLog.v("file does not exist");
+      mSurveyName = getNameFromFilepath( filepath );
       writeTdmConfig( true );
       return;
     }

@@ -136,11 +136,11 @@ public class ExportDialogPlot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v("C3D selected " + mSelected );
+    TDLog.v("Export plot: " + mPlotName + " selected " + mSelected + " pos " + mSelectedPos  );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ) );
+      mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ) );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

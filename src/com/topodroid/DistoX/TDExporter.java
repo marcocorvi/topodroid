@@ -42,6 +42,7 @@ import com.topodroid.mag.Geodetic;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.io.shp.ShpPointz;
 import com.topodroid.io.shp.ShpPolylinez;
+import com.topodroid.io.shp.ShpNamez;
 import com.topodroid.trb.TRobotPoint;
 import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
@@ -905,6 +906,26 @@ public class TDExporter
         //     shp.writeSplays( splays );
         //   }
         // }
+
+        List< CurrentStation > cst = data.getStations( TDInstance.sid );
+        if ( cst.size() > 0 ) {
+          ArrayList< SavedStation > sst = new ArrayList<>();
+          for ( CurrentStation cs : cst ) {
+            for ( TDNum num : nums ) {
+              NumStation ns = num.getStation( cs.mName );
+              if ( ns != null ) {
+                sst.add( new SavedStation( cs, ns ) );
+                break;
+              }
+            }
+          }
+          if ( sst.size() > 0 ) {
+            String filepath = "names";
+            ShpNamez shp = new ShpNamez( dirname, filepath, files );
+            shp.setYYMMDD( info.date );
+            shp.writeNames( sst );
+          }
+        }   
 
         // for ( String file : files ) TDLog.v( "SHP export-file " + file );
 

@@ -24,7 +24,7 @@ public class TDRequest
   public static final int REQUEST_GET_EXPORT = 9;
   public static final int REQUEST_GET_GPS_IMPORT = 10;
 
-  public static final int REQUEST_TDCONFIG = 20;
+  public static final int REQUEST_TDCONFIG = 200;
   public static final String TDCONFIG_PATH = "TdManagerConfig"; // request extra key
 
   public static final int CAPTURE_IMAGE_SHOTWINDOW = 100;

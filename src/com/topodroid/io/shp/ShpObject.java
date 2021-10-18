@@ -31,7 +31,7 @@ import java.nio.channels.FileChannel;
 
 import java.util.List;
 
-public class ShpObject
+class ShpObject
 {
   final static int SHP_MAGIC = 9994;
   final static int SHP_VERSION = 1000;
@@ -93,7 +93,7 @@ public class ShpObject
    * @param pth    filename
    * @param files  array of file names for the files that must be included in the ZIP
    */
-  public ShpObject( int typ, String dir, String pth, List< String > files ) // throws IOException
+  protected ShpObject( int typ, String dir, String pth, List< String > files ) // throws IOException
   { 
     geomType  = typ;
     nr    = 0;
@@ -147,6 +147,11 @@ public class ShpObject
     }
   }
 
+  /** set the date 
+   * @param y  year
+   * @param m  month [1 .. 12]
+   * @param d  day of the month [1 ..31]
+   */
   public void setYYMMDD( int y, int m, int d )
   {
     year  = y;
@@ -154,6 +159,9 @@ public class ShpObject
     day   = d;
   }
 
+  /** set the date 
+   * @param date    date string (10 char string yyyy.mm.dd, separator can be any character)
+   */
   public void setYYMMDD( String date )
   {
     year  = TDUtil.dateParseYear( date );
