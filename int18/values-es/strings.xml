@@ -9,26 +9,24 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <!-- TODO string name="desc_menu">Menu</string -->
+    <string name="desc_menu">Menu</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
-    <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
+    <string name="app_name">TopoDroid</string>
+    <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Haga doble click para salir</string>
 
-    <!-- TODO string name="new_survey_label">New survey</string -->
-    <!-- TODO string name="distox_label">DistoX</string -->
+    <string name="new_survey_label">Nueva topografía</string>
+    <string name="distox_label">DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
-  </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_title">Aviso importante sobre Android R</string>
+  <string name="r_dialog">Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\NConsulte las páginas web para más detalles..\n
+  </string>
+  <string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
+  <string name="r_i_understood">He entendido perfectamente este aviso</string>
+  <string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string>
+  <string name="r_continue">CONTINUAR</string>
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
+    <string name="app_name" translatable="false">TopoDroid</string>
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
 
@@ -46,7 +44,7 @@ Refer to the web pages for details.\n
 	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
 	    you should set them to your needs./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <string name="lorem_ipsum">Lorem ipsum dolor sit amet</string>
 
     <string name="POINT">Punto</string>
     <string name="LINE">Línea</string>
@@ -71,12 +69,12 @@ Refer to the web pages for details.\n
 
     <string name="thp_user">Usuario</string>
     <string name="thp_label">Texto</string>
-    <!-- TODO string name="thp_section">section</string -->
-    <!-- TODO string name="thp_station">station</string -->
+    <string name="thp_section">sección</string>
+    <string name="thp_station">estación</string>
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
     <string name="thl_wall">Pared</string>
-    <!-- TODO string name="thl_section">section</string -->
+    <string name="thl_section">sección</string>
     <string name="tha_user">Usuario</string>
     <string name="tha_water">Agua</string>
 
@@ -84,7 +82,7 @@ Refer to the web pages for details.\n
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">Toma mala</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -98,20 +96,20 @@ Refer to the web pages for details.\n
     <string name="failed_snap_to_splays">No se puede cerrar la línea</string>
     <string name="failed_append_to_line">No se puede agregar a otra línea</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_device">Dispositivo %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
+    <string name="bric_battery">Bateria %1$d</string>
+    <string name="bric_battery_wait">Bateria &#8230;</string>
+    <string name="bric_reset_time">Resetear hora</string>
+    <string name="bric_clear_memory">limpiar memoria</string>
+    <string name="bric_future_time">No resetear a un hora futura</string>
+    <string name="bric_ask_memory_clear">¿Borrar la memoria BRIC?</string>
+    <string name="bric_reset_ok">Hora reseteada</string>
+    <string name="bric_reset_fail">Error al restablecer la hora</string>
+    <string name="bric_clear_ok">Memoria limpiada</string>
+    <string name="bric_clear_fail">Error al borrar la memoria</string>
 
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
@@ -123,9 +121,9 @@ Refer to the web pages for details.\n
     <string name="calib_delete">Eliminar calibración </string>
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
-    <!-- REMOVE string name="calib_gm_policy">Política</string -->
-    <!-- TODO string name="calib_gm_policy">Group policy</string -->
+    <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
+    <!-- REMOVE string name="calib_gm_policy">Política</string-->
+    <string name="calib_gm_policy">Politica de grupo</string>
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
@@ -161,7 +159,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="device_none">DistoX no seleccionado</string -->
     <!-- UNUSED string name="device_paired">El dispositivo está emparejado</string -->
     <string name="device_reset">Reseteo memoria de DistoX </string>
-    <!-- TODO string name="device_clear">Clear DistoX memory</string -->
+    <string name="device_clear">limpiar memoria del DistoX</string>
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
@@ -191,22 +189,22 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
     <string name="splay_at_to">LRUD en la estación</string>
     <string name="lrud">LRUD</string>
-    <!-- TODO string name="strike_dip">Strike %1$.0f Dip %2$.0f</string -->
+    <string name="strike_dip">Paro %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
     <string name="found_groups">Se encontraron %1$d grupos</string>
-    <!-- TODO string name="regroup">No regroup</string -->
+    <string name="regroup">No reagrupar</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <string name="export_data_title">Exportación de datos</string>
+    <string name="export_plot_title">Exportación de croquis</string>
+    <string name="export_overview_title">Exportación de todo</string>
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
     <string name="import_bad">Archivo de importación no válido</string>
@@ -220,12 +218,12 @@ Refer to the web pages for details.\n
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
     <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <!-- TODO string name="import_zip_newer">Imported zip from more recent version</string -->
+    <string name="import_zip_newer">Zip importado de una versión más reciente</string>
     <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
-    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
-    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
+    <string name="MT_bad_file">Archivo de topografía del movil incorrecto</string>
+    <string name="bad_manifest">Archivo de manifiesto incorrecto</string>
 
     <string name="pleasewait">Por favor espere</string>
     <string name="processing">procesando &#8230;</string>
@@ -363,7 +361,7 @@ Refer to the web pages for details.\n
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
     <string name="menu_area">Área</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
@@ -377,7 +375,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="menu_display">Pantalla</string -->
     <string name="menu_show_deleted">MOSTRAR ELIMINADOS</string>
     <string name="menu_hide_deleted">OCULTAR ELIMINADO</string>
-    <!-- TODO string name="menu_device">Device</string -->
+    <string name="menu_device">Dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
@@ -410,8 +408,8 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
+    <string name="start_scan">Inicio escaneo</string>
+    <string name="stop_scan">Fin de escaneo</string>
     <!-- TODO string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
@@ -430,7 +428,7 @@ Refer to the web pages for details.\n
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
     <string name="popup_snap_to_splays">Ajustar a anchuras cercanas</string>
     <string name="popup_split_pt">Añadir punto</string>
-    <!-- TODO string name="popup_split_pts">Adds points</string -->
+    <string name="popup_split_pts">Añadir Puntos</string>
     <string name="popup_split_ln">Separar línea</string>
     <string name="popup_sharp_pt">Segmento recto</string>
     <string name="popup_curve_pt">Segmento curvo</string>
@@ -1936,7 +1934,7 @@ it is correct but i need to use english to tell a user which log to enable when 
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <!-- TODO string name="cperms_mandatory">Cave3D cannot run without these permissions:</string -->
+    <string name="cperms_mandatory">Cave3D no puede ejecutarse sin estos permisos:</string>
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
