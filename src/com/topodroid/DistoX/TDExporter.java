@@ -43,6 +43,7 @@ import com.topodroid.ptopo.PTFile;
 import com.topodroid.io.shp.ShpPointz;
 import com.topodroid.io.shp.ShpPolylinez;
 import com.topodroid.io.shp.ShpNamez;
+import com.topodroid.io.shp.ShpFixedz;
 import com.topodroid.trb.TRobotPoint;
 import com.topodroid.trb.TRobotSeries;
 import com.topodroid.trb.TRobot;
@@ -907,7 +908,7 @@ public class TDExporter
         //   }
         // }
 
-        List< CurrentStation > cst = data.getStations( TDInstance.sid );
+        List< CurrentStation > cst = data.getStations( sid );
         if ( cst.size() > 0 ) {
           ArrayList< SavedStation > sst = new ArrayList<>();
           for ( CurrentStation cs : cst ) {
@@ -924,6 +925,26 @@ public class TDExporter
             ShpNamez shp = new ShpNamez( dirname, filepath, files );
             shp.setYYMMDD( info.date );
             shp.writeNames( sst );
+          }
+        }
+
+        List< FixedInfo > fis = data.selectAllFixed( sid, TDStatus.NORMAL );
+        if ( fis.size() > 0 ) {
+          ArrayList< FixedStation > fst = new ArrayList<>();
+          for ( FixedInfo fi : fis ) {
+            for ( TDNum num : nums ) {
+              NumStation ns = num.getStation( fi.name );
+              if ( ns != null ) {
+                fst.add( new FixedStation( fi, ns ) );
+                break;
+              }
+            }
+          }
+          if ( fst.size() > 0 ) {
+            String filepath = "fixeds";
+            ShpFixedz shp = new ShpFixedz( dirname, filepath, files );
+            shp.setYYMMDD( info.date );
+            shp.writeFixeds( fst );
           }
         }   
 

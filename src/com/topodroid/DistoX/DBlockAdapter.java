@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 
@@ -334,7 +334,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       public void onClick( View v )
       {
         if ( pos < START ) return;
-        // TDLog.v( "onClick " + v.getId() );
+        TDLog.v( "onClick " + v.getId() );
         if ( (TextView)v == tvLength ) {
           mParent.itemClick( v, pos );
         } else {
@@ -354,7 +354,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       public boolean onEditorAction( TextView v, int action, KeyEvent event )
       {
         if ( pos < START ) return false;
-        // TDLog.v( "onEditor " + v.getId() );
+        TDLog.v( "onEditor " + v.getId() + " F " + tvFrom.getId() + " T " + tvTo.getId() );
         if ( (TextView)v == tvLength ) return false;
         // action EditorInfo.IME_NULL = 0
         // TDLog.v( "FROM action " + action + " event " + ( (event == null)? "null": event.toString()) );
@@ -368,6 +368,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             setColor( mBlock );
             InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow( v.getWindowToken(), 0);
+          } else {
+            if ( v == tvFrom ) {
+              tvFrom.setText( mBlock.mFrom );
+            } else if ( v == tvTo ) {
+              tvTo.setText( mBlock.mTo );
+            }
           }
         }
         editing = false;
@@ -422,6 +428,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       if ( TDSetting.mEditableStations ) {
         tvFrom.setOnEditorActionListener( this );
         tvTo.setOnEditorActionListener( this );
+      } else {
+        tvFrom.setOnEditorActionListener( null );
+        tvTo.setOnEditorActionListener( null );
       }
 
       int text_size = TDSetting.mTextSize;

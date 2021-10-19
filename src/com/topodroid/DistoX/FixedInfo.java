@@ -23,7 +23,7 @@ import java.util.Locale;
 /** fixed (GPS) point
  * Note the order of data: LONGITUDE - LATITUDE - ALTITUDE
  */
-class FixedInfo extends MagLatLong
+public class FixedInfo extends MagLatLong
 {
   final static long SRC_UNKNOWN    = 0L;
   final static long SRC_TOPODROID  = 1L;
@@ -124,6 +124,18 @@ class FixedInfo extends MagLatLong
   }
 
   String csName() { return cs; }
+
+  public String getComment() { return comment; }
+
+  public String getSource() 
+  {
+    switch ( (int)source ) {
+      case 1: return "TopoDroid";
+      case 2: return "manual";
+      case 3: return "Mobile-Topogra[her";
+    }
+    return "unknown";
+  }
 
 
   // @RecentlyNonNull
