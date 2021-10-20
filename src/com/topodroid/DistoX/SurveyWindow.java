@@ -534,6 +534,7 @@ public class SurveyWindow extends Activity
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
     intent.setType( TDConst.mMimeType[index] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     // intent.putExtra( "exporttype", index ); // index is not returned to the app
     intent.putExtra( Intent.EXTRA_TITLE, filename );
     mExportIndex = index;

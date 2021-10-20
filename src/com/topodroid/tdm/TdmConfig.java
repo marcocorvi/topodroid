@@ -168,6 +168,9 @@ class TdmConfig extends TdmFile
   // ---------------------------------------------------------------
 
   // this is called by the TdmConfigActivity when it goes on pause
+  /** write the cave project info to the tdconfig file
+   * @param force    whether to force to writing
+   */
   void writeTdmConfig( boolean force )
   {
     // TDLog.v( "save tdconfig " + this + " " + mSave );
@@ -177,19 +180,23 @@ class TdmConfig extends TdmFile
     }
   }
 
+  /** read the cave project info from the tdconfig file
+   * @note the file is read only once - if already read it is skipped
+   */
   void readTdmConfig()
   {
     // TDLog.v( "read tdconfig " + this + " " + mRead );
     if ( mRead ) return;
-    // TDLog.v( "readTdmConfig() for file " + mName );
     readFile();
-    // TDLog.v( "TdmC_onfig() inputs " + mInputs.size() + " equates " + mEquates.size() );
     mRead = true;
   }
 
   // ---------------------------------------------------------
   // READ and WRITE
 
+  /** write the cave project info to a tdconfig file
+   * @param filepath    file pathname
+   */
   private void writeTd( String filepath )
   {
     TDLog.v("save config " + mSurveyName + " " + filepath );
@@ -219,6 +226,10 @@ class TdmConfig extends TdmFile
     }
   }
 
+  /** extract the project name from a filepath
+   * @param filepath    file pathname
+   * @return the project name, ie, the name before the extension (namely ".tdconfig")
+   */
   private String getNameFromFilepath( String filepath )
   {
     int start = filepath.lastIndexOf('/') + 1;
@@ -226,9 +237,11 @@ class TdmConfig extends TdmFile
     return ( end > start )? filepath.substring( start, end ) : filepath.substring( start );
   }
 
+  /** read the config file
+   * @note if the file does not exists creates it and write an empty tdconfig file
+   */
   private void readFile( )
   {
-    // if the file does not exists creates it and write an empty tdconfig file
     String filepath = getFilepath();
     TDLog.v( "read config " + filepath );
     File file = new File( filepath );
@@ -293,6 +306,10 @@ class TdmConfig extends TdmFile
   // ---------------------------------------------------------
   // EXPORT
 
+  /** export the project to therion format
+   * @param overwrite  whether to overwrite the output file (if it exists)
+   * @return ...
+   */
   String exportTherion( boolean overwrite )
   {
     String filepath = getFilepath().replace(".tdconfig", ".th").replace("/tdconfig/", "/th/");
@@ -307,6 +324,9 @@ class TdmConfig extends TdmFile
     return filepath;
   }
 
+  /** write the project to therion format
+   * @param filepath    file pathname
+   */
   void writeTherion( String filepath )
   {
     try {
@@ -335,6 +355,10 @@ class TdmConfig extends TdmFile
     }
   }
 
+  /** export the project to survex format
+   * @param overwrite  whether to overwrite the output file (if it exists)
+   * @return filepath of the output
+   */
   String exportSurvex( boolean overwrite )
   {
     String filepath = getFilepath().replace(".tdconfig", ".svx").replace("/tdconfig/", "/svx/");
@@ -349,12 +373,19 @@ class TdmConfig extends TdmFile
     return filepath;
   }
 
+  /** convert a station name from therion to survex syntax
+   * @param st   therion name of the station
+   * @return survex name of the station
+   */
   private String toSvxStation( String st )
   {
     int pos = st.indexOf('@');
     return st.substring(pos+1) + "." + st.substring(0,pos);
   }
 
+  /** write the project to survex format
+   * @param filepath    file pathname
+   */
   void writeSurvex( String filepath )
   {
     try {

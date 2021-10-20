@@ -1275,7 +1275,7 @@ public class DrawingWindow extends ItemDrawer
     resetModified();
     // TDUtil.slowDown( 10 );
 
-    // TDLog.v( "saving ... ");
+    // TDLog.v( "saving plot(s) ... ");
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
@@ -5999,7 +5999,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
 	fullname = mFullName1;
       }
-      TDLog.v("save PNG. uri " + ( (uri!=null)? uri.toString() : "null" ) );
+      // TDLog.v("save PNG. uri " + ( (uri!=null)? uri.toString() : "null" ) );
 
       if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -6029,11 +6029,15 @@ public class DrawingWindow extends ItemDrawer
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
+      // TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
       new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
     }
 
     // PDF ------------------------------------------------------------------
+    /** save as PDF file
+     * @param uri      export URI
+     * @param type     plot ttype
+     */
     private void savePdf( Uri uri, long type ) 
     {
       String fullname = null;
@@ -6053,6 +6057,11 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // TODO with background task
+    /** save as PDF file
+     * @param uri      export URI
+     * @param manager  drawing items
+     * @param fullname plot fullname, for the toast and for filesystem-based export
+     */
     private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
     {
       if ( manager == null ) {
@@ -6109,7 +6118,13 @@ public class DrawingWindow extends ItemDrawer
     }
 
     // CSX ------------------------------------------------------------------
-    // used also by SavePlotFileTask
+    /** save as cSurvey - used also by SavePlotFileTask
+     * @param uri     export URI
+     * @param origin
+     * @param psd1    plan plot save-data
+     * @param psd2    profile plot save-data
+     * @param toast   whether to toast
+     */
     private void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
       // TDLog.v( "save csx");
@@ -6117,13 +6132,16 @@ public class DrawingWindow extends ItemDrawer
       TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
     }
 
-    // used to save "dxf", "svg"
-    // called only by doExport
+    /** used to save "dxf", "svg" - called only by doExport
+     * @param uri   export URI
+     * @param type  export type
+     * @param ext   extension
+     */
     private void saveWithExt( Uri uri, long type, String ext ) 
     {
       TDNum num = mNum;
       // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
-      TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
+      // TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
       if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( "png".equals( ext ) ) {
         savePng( uri, type );
@@ -6221,7 +6239,7 @@ public class DrawingWindow extends ItemDrawer
     }
     final String filename = name;
     // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    // TDLog.v( "save th2: " + filename );
+    TDLog.v( "save th2: " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -6714,7 +6732,7 @@ public class DrawingWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    // TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
     if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
@@ -6722,6 +6740,7 @@ public class DrawingWindow extends ItemDrawer
         Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
         intent.setType( TDConst.mMimeType[ mExportIndex] );
         intent.addCategory(Intent.CATEGORY_OPENABLE);
+        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
         // intent.putExtra( "exporttype", index ); // index is not returned to the app
         intent.putExtra( Intent.EXTRA_TITLE, filename );
         startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );

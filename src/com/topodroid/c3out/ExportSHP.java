@@ -80,14 +80,18 @@ public class ExportSHP
       TDLog.Error("mkdir " + filepath + " error");
       return false;
     }
-    // TDLog.v("shp export. dirname " + filepath + " name " + name );
 
-    boolean ret = true;
-    ArrayList< String > files = new ArrayList<>();
+    boolean ret = TDFile.hasMSdir( filepath );
+    if ( ! ret ) {
+      TDLog.Error("no dir " + filepath + " name " + name );
+      return false;
+    }
+    // TDLog.v("shp export. dirname " + filepath + " name " + name );
+    ArrayList< String > files = new ArrayList<>(); // will contain strings "stations.shp" ...
 
     String subname  = "c3export/" + name;
     // this is dirname
-    // String filepath = TDPath.getC3exportFile( name ); // export temporary folder for shp files - fullpath
+    // String filepath = TDPath.getC3exportPath( name ); // export temporary folder for shp files - fullpath
 
     if ( ret )             ret &= exportStations( filepath, files, data.getStations() );
     if ( ret && b_legs )   ret &= exportShots( filepath, files, data.getShots(), "leg" );
@@ -96,6 +100,7 @@ public class ExportSHP
       ret &= exportFacets( filepath, files, mFacets );
       if ( ret ) ret &= exportTriangles( filepath, files, mTriangles );
     }
+
 
     if ( files.size() == 0 ) ret = false;
     if ( ret ) {

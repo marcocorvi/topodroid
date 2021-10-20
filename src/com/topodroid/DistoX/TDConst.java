@@ -161,15 +161,15 @@ public class TDConst
   public static String getModelFilename( int type, String name )
   {
     switch( type ) {
-      case 0: return name + ".gltf";
-      case 1: return name + ".cgal";
-      case 2: return name + ".stl";
-      case 3: return name + ".stl";
-      case 4: return name + ".las";
-      case 5: return name + ".dxf";
-      case 6: return name + ".kml";
-      case 7: return name + ".shz";
-      // case 8: return name + ".txt";
+      case ModelType.GLTF:       return name + ".gltf";
+      case ModelType.CGAL_ASCII: return name + ".cgal";
+      case ModelType.STL_ASCII:  return name + ".stl";
+      case ModelType.STL_BINARY: return name + ".stl";
+      case ModelType.LAS_BINARY: return name + ".las";
+      case ModelType.DXF_ASCII:  return name + ".dxf";
+      case ModelType.KML_ASCII:  return name + ".kml";
+      case ModelType.SHP_ASCII:  return name + ".shz";
+      // case ModelType.SERIAL: return name + ".txt";
     }
     return name;
   }
@@ -251,7 +251,7 @@ public class TDConst
       case  3: return survey + ".gtx";
       case  4: return survey + ".grt";
       case  5: return survey + ".top";
-      case  6: return survey + ".plg";
+      case  6: return survey + ".cave";
       case  7: return survey + ".svx";
       case  8: return survey + ".th";
       case  9: return survey + ".cav";
@@ -301,7 +301,7 @@ public class TDConst
     "csx",
     "dxf",
     "svg",
-    "shp",
+    "shz",
     "png",
     "pdf",
     "xvi",
@@ -320,7 +320,7 @@ public class TDConst
       case 5: return name + ".png";
       case 6: return name + ".pdf";
       case 7: return name + ".xvi";
-      case 8: return name + ".tnl"; // Tunnel
+      case 8: return name + ".xml"; // Tunnel
       case 9: return name + ".c3d";
     }
     return name;
@@ -359,7 +359,8 @@ public class TDConst
       case 0: return name + ".th2";
       case 1: return name + ".dxf";
       case 2: return name + ".svg";
-      case 3: return name + ".pdf";
+      case 3: return name + ".shz";
+      case 4: return name + ".pdf";
       case 5: return name + ".xvi";
     }
     return name;

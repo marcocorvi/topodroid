@@ -81,7 +81,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mRotate   = rotate;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
-     TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
+     // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
      // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
      //   // TDLog.v( "auto export CSX");
@@ -110,7 +110,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [2] " + mFullName + " type " + mType );
-     TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
+     // TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
   @Override
@@ -123,11 +123,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
     // TDLog.v( "save plot file task bkgr start");
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
-      TDLog.v( "save scrap files " + mFullName + " suffix " + mSuffix );
+      // TDLog.v( "save scrap files " + mFullName + " suffix " + mSuffix );
 
       // first pass: export
       if ( mSuffix == PlotSave.EXPORT ) {
-        TDLog.v( "save plot Therion file EXPORT " + mFullName );
+       //  TDLog.v( "save plot Therion file EXPORT " + mFullName );
         if ( mManager != null ) {
           // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
           // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
@@ -139,7 +139,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             bw.flush();
             bw.close();
           } catch ( IOException e ) {
-            TDLog.v( e.getMessage() );
+            TDLog.Error( e.getMessage() );
             e.printStackTrace(); 
             return false;
           } finally {
@@ -147,6 +147,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           }
         }
       } else if ( mSuffix == PlotSave.SAVE ) {
+        // TDLog.v( "save plot SAVE (no action) " + mFullName );
         // // TDLog.v( "save plot Therion file SAVE " + mFullName );
         // switch ( TDSetting.mExportPlotFormat ) { // auto-export format
         //   case TDConst.SURVEY_FORMAT_TH2:
@@ -209,7 +210,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         //     break;
         // }
       } else if ( mSuffix == PlotSave.OVERVIEW ) {
-        TDLog.v( "save plot Therion file OVERVIEW " + mFullName );
+        // TDLog.v( "save plot OVERVIEW " + mFullName );
         // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
         // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
         ParcelFileDescriptor pfd = null;
@@ -220,7 +221,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           // bw.flush(); // FIXME necessary ???
           bw.close();
         } catch ( IOException e ) {
-          TDLog.v( e.getMessage() );
+          TDLog.Error( e.getMessage() );
           e.printStackTrace(); 
           return false;
         } finally {
@@ -231,7 +232,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       
       // second pass: save
       if ( mSuffix != PlotSave.EXPORT ) {
-        TDLog.v( "save plot not-EXPORT");
+        // TDLog.v( "save plot not-EXPORT");
         assert( mInfo != null );
 
         String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;

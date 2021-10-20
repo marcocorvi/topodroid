@@ -246,6 +246,7 @@ public class FixedActivity extends Activity
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
     intent.setType( "application/octet-stream" );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_gps ) ), TDRequest.REQUEST_GET_GPS_IMPORT );
   }

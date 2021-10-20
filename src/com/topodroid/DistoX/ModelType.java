@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief export model types
+ * @brief export 3D model types
  *
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later

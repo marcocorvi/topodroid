@@ -708,6 +708,7 @@ public class OverviewWindow extends ItemDrawer
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
       intent.setType( TDConst.mMimeType[ mExportIndex ] );
       intent.addCategory(Intent.CATEGORY_OPENABLE);
+      intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
       // intent.putExtra( "exporttype", index ); // index is not returned to the app
       intent.putExtra( Intent.EXTRA_TITLE, filename );
       startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );

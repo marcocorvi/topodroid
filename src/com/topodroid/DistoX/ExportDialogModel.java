@@ -48,12 +48,19 @@ public class ExportDialogModel extends MyDialog
   private TopoGL    mParent;
   private TglParser mParser;
   private String[]  mTypes;
-  private String    mSelected;
   private final int mTitle;
-  private int mSelectedPos;
+  private String    mSelected; // selected value
+  private int mSelectedPos;    // selected position
 
   // private LinearLayout mLayoutGltf;
 
+  /** dialog that selects the export type of the 3D model
+   * @param context
+   * @param parent     3D viewer acivity
+   * @param parser     3D model parser
+   * @param types      supported 3D export types
+   * @param title      dialog title
+   */
   public ExportDialogModel( Context context, TopoGL parent, TglParser parser, String[] types, int title )
   {
     super( context, R.string.ExportDialog );
@@ -132,7 +139,7 @@ public class ExportDialogModel extends MyDialog
         case 7: export.mType = ModelType.SHP_ASCII; break;
         case 8: export.mType = ModelType.SERIAL; break; // TODO 
       }
-      if ( export.mType > 0 ) mParent.selectExportFile( export );
+      if ( export.mType >= 0 ) mParent.selectExportFile( export );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

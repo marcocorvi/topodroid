@@ -70,11 +70,17 @@ public class TDFile
 
   // OLD FILE FUNCTIONS -----------------------------------------------------------------------------
 
-  public static File getManDir( )                 { return new File( TDInstance.context.getFilesDir(), "man" ); }
+  public static File getManDir( )                 { return TDInstance.context.getExternalFilesDir( "man" ); }
   public static File getManFile( String name )    { return new File( getManDir(), name ); }
   public static boolean hasManFile( String name ) { return getManFile( name ).exists(); }
   public static FileReader getManFileReader( String name ) throws IOException { return new FileReader( getManFile(name) ); }
  
+  // private static File getC3exportDir( )                { return TDInstance.context.getExternalFilesDir( "c3export" ); }
+  // private static File getC3exportFile( String name )   { return new File( TDInstance.context.getExternalFilesDir( "c3export" ),  name ); }
+  // private static String getC3exportPath( )             { return getC3exportDir().getPath(); }
+  // public  static String getC3exportPath( String name ) { return getC3exportDir( ).getPath(); }
+  // private static String getC3exportPath( String name, String ext ) { return getC3exportFile( name + "." + ext ).getPath(); }
+
   public static boolean hasTopoDroidFile( String name ) { return name != null && (new File( name )).exists(); }
   public static boolean hasTopoDroidFile( String dirpath, String name ) { return name != null && (new File( dirpath + "/" + name )).exists(); }
 
@@ -97,6 +103,7 @@ public class TDFile
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
+  // context.getExternalFilesDir --> /storage/emulated/0/Android/data/com.topodroid.DistoX/files
   public static File getPrivateBaseDir( ) 
   {
     return TDInstance.context.getExternalFilesDir( null );
@@ -379,6 +386,7 @@ public class TDFile
   {
     File dir = getMSfile( subdir );
     if ( dir.exists() ) return true;
+    TDLog.v("make MS dir " + subdir );
     return dir.mkdirs();
   }
 

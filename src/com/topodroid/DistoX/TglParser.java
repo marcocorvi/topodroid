@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.c3out.ExportData;
 import com.topodroid.c3out.ExportKML;
 import com.topodroid.c3out.ExportCGAL;
@@ -558,7 +559,8 @@ public class TglParser
         shp.mVertex    = powercrustcomputer.getVertices();
       }
     }
-    String filepath = TDPath.getC3exportFile( export.mName ); // export temporary folder for shp files - fullpath
+    String filepath = TDPath.getC3exportPath( export.mName ); // export temporary folder for shp files - fullpath
+    TDLog.v("export SHP: name " + export.mName + " path " + filepath );
     return shp.exportASCII( zos, filepath, export.mName, this, true, export.mSplays, export.mWalls );
   }
 

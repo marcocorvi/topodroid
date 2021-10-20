@@ -17,16 +17,40 @@ import com.topodroid.utils.TDString;
 
 public class CurrentStation
 {
-  final String mName;
-  final String mComment;
-  final int mFlag;
+  final String mName;    // name
+  final String mComment; // comment / description
+  final int mFlag;       // flags
 
-  public static final int STATION_NONE    = 0;
-  public static final int STATION_FIXED   = 1;
-  public static final int STATION_PAINTED = 2;
+  public static final int STATION_NONE    = 0;  // no flag
+  public static final int STATION_FIXED   = 1;  // fixed station
+  public static final int STATION_PAINTED = 2;  // painted station
+  // public static final int STATION_GEO     = 4;  // geolocalized station
 
   static final private String[] flag_str = { " ", " [F] ", " [P] " };
 
+  // flag tests
+  private boolean isFlagFixed()   { return (mFlag & STATION_FIXED)   == STATION_FIXED; }
+  private boolean isFlagPainted() { return (mFlag & STATION_PAINTED) == STATION_PAINTED; }
+  private boolean isFlagGeo()     { return (mFlag & STATION_GEO)     == STATION_GEO; }
+
+  /**
+   * @return the string presentation of the flags
+   */
+  public String getFlagCode() 
+  {
+    if ( mFlag == 0 ) return " ";
+    StringBuilder sb = new StringBuilder();
+    if ( isFlagFixed() )   sb.append("F");
+    if ( isFlagPainted() ) sb.append("P");
+    if ( isFlagGeo() )     sb.append("G");
+    return sb.toString();
+  }
+
+  /** cstr
+   * @param name     name
+   * @param comment  comments (can be null)
+   * @param flag     flag
+   */
   CurrentStation( String name, String comment, long flag )
   {
     mName    = name;
@@ -37,18 +61,14 @@ public class CurrentStation
   // @RecentlyNonNull
   public String toString()
   { 
-    return mName + flag_str[mFlag] + mComment;
+    StringBuilder sb = new StringBuilder();
+    sb.append( mname ).append("[").append( getFlagCode() ).append("]");
+    if ( mComment != null ) sb.append( mComment );
+    return sb.toString();
   }
 
-  public String getFlagCode() 
-  {
-    switch ( mFlag ) {
-      case 0: return " ";
-      case 1: return "F";
-      case 2: return "P";
-      default: return "?";
-    }
-  }
-
+  /** get the current station comment
+   * @return comment
+   */
   public String getComment() { return mComment; }
 }

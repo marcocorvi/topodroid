@@ -2106,6 +2106,12 @@ public class TopoGL extends Activity
     return false;
   }
 
+  /**
+   * @param type       export type (SHP_ASCII)
+   * @param fos        output stream
+   * @param pathname   
+   * @param export     export data struct
+   */
   public boolean exportShpModel( int type, DataOutputStream fos, final String pathname, ExportData export )
   { 
     if ( type == ModelType.SHP_ASCII ) {
@@ -2623,6 +2629,7 @@ public class TopoGL extends Activity
     Intent intent = new Intent( action );
     intent.setType( (mime==null)? "*/*" : mime );
     intent.addCategory( Intent.CATEGORY_OPENABLE );
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     if ( filename != null ) intent.putExtra( Intent.EXTRA_TITLE, filename );
     startActivityForResult( Intent.createChooser(intent, getResources().getString( res ) ), request );
   }

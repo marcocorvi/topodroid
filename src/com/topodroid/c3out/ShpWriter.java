@@ -87,7 +87,7 @@ class ShpObject
     name  = nam;
     mFiles = files;
     setYYMMDD( );
-    TDLog.v("SHP object. path " + path + " name " + name );
+    // TDLog.v("SHP object. path " + path + " name " + name );
   }
 
   protected void open( ) throws IOException
@@ -105,7 +105,7 @@ class ShpObject
         mFiles.add( name + ".dbf" );
       }
     } catch ( IOException e ) {
-      TDLog.Error( "SHP output streams " + e.getMessage() );
+      TDLog.Error( "SHP output streams error " + e.getMessage() );
       throw e;
     }
   }

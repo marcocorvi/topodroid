@@ -25,6 +25,9 @@ release:
 signed:
 	$(ANT) release
 	./howto/sign.sh
+	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION)-gp.apk
+	ls -l TopoDroid-$(VERSION)-gp.apk
+	md5sum TopoDroid-$(VERSION)-gp.apk
 
 bundle:
 	$(ANT) release

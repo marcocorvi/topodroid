@@ -1345,6 +1345,7 @@ public class MainWindow extends Activity
     intent.setType( TDConst.mMimeType[ index ] );
     // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
     intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
     // intent.putExtra( "importtype", index ); // extra is not returned to the app
     mImportData = data;
     mImportData.mType = index;

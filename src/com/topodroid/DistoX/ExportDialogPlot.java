@@ -60,6 +60,12 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutPng;
   private LinearLayout mLayoutPdf;
 
+  // @param context
+  // @param parent      parent window
+  // @param types       export types, for the options
+  // @param title       dialog title (resource)
+  // @param parent_type 0: drawing, 1: overview
+  // @param plotname    name of the plot
   public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type, String plotname )
   {
     super( context, R.string.ExportDialog );
@@ -140,7 +146,11 @@ public class ExportDialogPlot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ) );
+      if ( mParentType == 0 ) { // plot
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ) ); 
+      } else { // overview
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ) ); 
+      }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

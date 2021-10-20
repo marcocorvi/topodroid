@@ -13,7 +13,6 @@
 package com.topodroid.c3out;
 
 import com.topodroid.DistoX.R;
-// import com.topodroid.DistoX.R;
 
 import com.topodroid.DistoX.ModelType;
 import com.topodroid.DistoX.TglParser;
@@ -25,6 +24,7 @@ import com.topodroid.DistoX.TDToast;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 
 import android.os.AsyncTask;
@@ -61,10 +61,11 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
     BufferedWriter bw = null;
     DataOutputStream dos = null;
 
-    TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType );
+    String pathname = TDPath.getC3exportPath( mExport.mName ); // .../TDX/TopoDroid/c3export/name
+    TDFile.makeTopoDroidDir( pathname );
 
-    // String pathname = Cave3DFile.getExportFilepath( mExport.mName );
-    String pathname = TDPath.getC3exportFile( mExport.mName );
+    TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType + " pathname " + pathname );
+
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
     boolean ret = false;
     try {

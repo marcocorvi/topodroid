@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.num.TDNum;
@@ -50,11 +50,25 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private final PlotInfo  mPlotInfo;
     private Uri mUri = null;
 
+    /** constructor
+     * @param content context, for the resources
+     * @param uri     export URI
+     * @param info    survey info
+     * @param plot    plot info
+     * @param fixed   fixed info, for georeference
+     * @param num     data reduction
+     * @param command plot drawing items
+     * @param type
+     * @param name    full filename
+     * @param ext     extension, used to decide how to export the plot data
+     * @param toast   whether to toast
+     * @param station georeference station
+     */
     ExportPlotToFile( Context context, Uri uri, SurveyInfo info, PlotInfo plot, FixedInfo fixed,
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      // TDLog.v("C3D export plot to file cstr. " + type + " " + name + "  " + ((station == null)? "no geo" : station.toString() ) );
+      TDLog.v("export plot to file cstr. Type " + type + " fullname " + name + " ext " + ext );
       // FIXME assert( ext != null );
       if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);

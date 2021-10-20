@@ -203,7 +203,7 @@ public class TDPath
     try {
       ret = dir.exists() && dir.isDirectory() && dir.canWrite();
     } catch ( SecurityException e ) { }
-    TDLog.v( "check base path: <" + path + ">: " + ret );
+    // TDLog.v( "check base path: <" + path + ">: " + ret );
     return ret;
   }
 
@@ -235,13 +235,13 @@ public class TDPath
 	}
       }
     } catch ( SecurityException e ) { 
-      TDLog.v("PATH " + "ext storage security error " + e.getMessage() );
+      TDLog.Error("PATH " + "ext storage security error " + e.getMessage() );
     }
   }
 
   public static void createSurveyPaths( String survey )
   {
-    TDLog.v( "create survey path " + survey + " base " + PATH_CW_DIR );
+    // TDLog.v( "create survey path " + survey + " base " + PATH_CW_DIR );
     String root = PATH_CW_DIR + "/" + survey; 
     checkFilesystemDirs( root );
     checkFilesystemDirs( root + "/tdr" );
@@ -257,7 +257,7 @@ public class TDPath
       TDLog.v( "set survey path NULL");
       clearAppPaths();
     } else {
-      TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
+      // TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
       APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;  checkFilesystemDirs( APP_SURVEY_PATH );
       String root = APP_SURVEY_PATH;
       APP_TDR_PATH   = root + "/tdr";     checkFilesystemDirs( APP_TDR_PATH );
@@ -367,9 +367,10 @@ public class TDPath
   public static String getTdconfigDir( ) { return PATH_TDCONFIG ; }
   public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + "/" + name; }
 
-  public static String getC3exportDir( ) { return PATH_C3EXPORT ; }
-  public static String getC3exportFile( String name ) { return PATH_C3EXPORT + "/" + name; }
-  public static String getC3exportFile( String name, String ext ) { return PATH_C3EXPORT + "/" + name + "." + ext; }
+  // replaced with TDFile functions
+  // public static String getC3exportDir( ) { return PATH_C3EXPORT ; }
+  public static String getC3exportPath( String name ) { return PATH_C3EXPORT + "/" + name; }
+  // public static String getC3exportPath( String name, String ext ) { return PATH_C3EXPORT + "/" + name + "." + ext; }
 
   public static String getManFileName( String name ) { return "man/" + name; }
 
@@ -394,7 +395,7 @@ public class TDPath
   // @param dirname   survey dirname
   // @param name      tdr name (without extension
   public static String getTdrFileWithExt( String dirname, String name )  {
-    TDLog.v( "dirname " + dirname + " name " + name );
+    // TDLog.v( "dirname " + dirname + " name " + name );
     return getPathname( PATH_CW_DIR, dirname + "/" + name, TDR );
   }
 
