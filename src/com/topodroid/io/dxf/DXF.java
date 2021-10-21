@@ -599,7 +599,8 @@ public class DXF
     // writeString( out, 9, "$ACADMAINTVER" ); writeInt( out, 70, 105 ); // ignored
     if ( mVersion13_14 ) {
       writeString( out, 9, "$HANDSEED" );    writeHex( out, 5, 0xffff );
-      writeString( out, 9, "$DWGCODEPAGE" ); writeString( out, 3, "ANSI_1251" );
+    //  writeString( out, 9, "$DWGCODEPAGE" ); writeString( out, 3, "ANSI_1251" ); //Cyrill
+      writeString( out, 9, "$DWGCODEPAGE" ); writeString( out, 3, "ANSI_1250" ); //Central and Eastern European
     }
     // writeString( out, 9, "$REQUIREDVERSIONS" ); writeInt( out, 160, 0 );
 
