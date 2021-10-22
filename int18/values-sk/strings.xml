@@ -1564,8 +1564,8 @@ Refer to the web pages for details.\n
 
   <string name="pref_picker_type_title">Paleta v režime kreslenia</string>
   <string name="pref_picker_type_summary">Spôsob zobrazenia výberu z Palety v režime kreslenia</string>
-  <string name="pref_triple_toolbar_title">Tri Mriežky na Ploche</string>
-  <string name="pref_triple_toolbar_summary">Zobrazí zjednodušené tri mriežky (Body, Čiary, Plochy) priamo na pracovnej ploche v režime kreslenia</string>
+  <!-- UNUSED string name="pref_triple_toolbar_title">Tri Mriežky na Ploche</string -->
+  <!-- UNUSED string name="pref_triple_toolbar_summary">Zobrazí zjednodušené tri mriežky (Body, Čiary, Plochy) priamo na pracovnej ploche v režime kreslenia</string -->
   <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->
   <!-- UNUSED string name="pref_section_stations_summary">X-Section reference stations</string -->
   <string name="pref_station_size_title">Veľkosť názvu meračského bodu</string>

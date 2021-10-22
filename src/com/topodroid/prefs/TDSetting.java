@@ -800,16 +800,16 @@ public class TDSetting
     String[] defPlot = TDPrefKey.PLOTdef;
     mPickerType = tryInt( prefs,       keyPlot[0],      defPlot[0] );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
     if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
-    mTripleToolbar   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_TRIPLE_TOOLBAR
+    // mTripleToolbar   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_TRIPLE_TOOLBAR
     // mRecentNr   = tryInt( prefs,       keyPlot[ ],      defPlot[ ] );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
-    mSideDrag   = prefs.getBoolean(    keyPlot[2], bool(defPlot[2]) ); // DISTOX_SIDE_DRAG
+    mSideDrag   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_SIDE_DRAG
     // setZoomControls( prefs.getBoolean( keyPlot[ ], bool(defPlot[ ]) ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString(  keyPlot[3],      defPlot[3] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+    setZoomControls( prefs.getString(  keyPlot[2],      defPlot[2] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
     // mSectionStations  = tryInt( prefs, keyPlot[ ], "3");      // DISTOX_SECTION_STATIONS
-    mHThreshold    = tryFloat( prefs,  keyPlot[4],      defPlot[4] );  // DISTOX_HTHRESHOLD
-    mCheckAttached = prefs.getBoolean( keyPlot[5], bool(defPlot[5]) ); // DISTOX_CHECK_ATTACHED
-    mCheckExtend   = prefs.getBoolean( keyPlot[6], bool(defPlot[6]) ); // DISTOX_CHECK_EXTEND
-    mItemButtonSize= tryFloat( prefs,  keyPlot[7],      defPlot[7] );  // DISTOX_TOOLBAR_SIZE
+    mHThreshold    = tryFloat( prefs,  keyPlot[3],      defPlot[3] );  // DISTOX_HTHRESHOLD
+    mCheckAttached = prefs.getBoolean( keyPlot[4], bool(defPlot[4]) ); // DISTOX_CHECK_ATTACHED
+    mCheckExtend   = prefs.getBoolean( keyPlot[5], bool(defPlot[5]) ); // DISTOX_CHECK_EXTEND
+    mItemButtonSize= tryFloat( prefs,  keyPlot[6],      defPlot[6] );  // DISTOX_TOOLBAR_SIZE
     // TDLog.v("SETTING load plot done");
 
     String[] keyCalib = TDPrefKey.CALIB;
@@ -1311,26 +1311,26 @@ public class TDSetting
       if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
     // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_RECENT_NR (choice)
     //   mRecentNr = tryIntValue( hlp, k, v, def[1] );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
-      mTripleToolbar = tryBooleanValue( hlp, k, v, bool(def[1]) );
-      TopoDroidApp.setToolsToolbars();
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SIDE_DRAG (bool)
-      mSideDrag = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
-      // setZoomControls( tryBooleanValue( hlp, k, bool(def[3]) ) );
-      setZoomControls( tryStringValue( hlp, k, v, def[3] ), TDandroid.checkMultitouch( TDInstance.context ) );
+    // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
+    //   mTripleToolbar = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    //   TopoDroidApp.setToolsToolbars();
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SIDE_DRAG (bool)
+      mSideDrag = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
+      // setZoomControls( tryBooleanValue( hlp, k, bool(def[2]) ) );
+      setZoomControls( tryStringValue( hlp, k, v, def[2] ), TDandroid.checkMultitouch( TDInstance.context ) );
     // } else if ( k.equals( key[ ? ] ) ) {  // DISTOX_SECTION_STATIONS
     //   mSectionStations = tryIntValue( hlp, k, v, def[ ] );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_HTHRESHOLD
-      mHThreshold = tryFloatValue( hlp, k, v, def[4] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_HTHRESHOLD
+      mHThreshold = tryFloatValue( hlp, k, v, def[3] );
       if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
       if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_CHECK_ATTACHED (bool)
-      mCheckAttached = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_CHECK_EXTEND (bool)
-      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(def[6]) );
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_TOOLBAR_SIZE
-      mItemButtonSize = tryFloatValue( hlp, k, v, def[7] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CHECK_ATTACHED (bool)
+      mCheckAttached = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_CHECK_EXTEND (bool)
+      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(def[5]) );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TOOLBAR_SIZE
+      mItemButtonSize = tryFloatValue( hlp, k, v, def[6] );
       TopoDroidApp.setToolsToolbarParams();
     } else {
       TDLog.Error("missing PLOT key: " + k );

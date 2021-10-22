@@ -1544,8 +1544,8 @@ Refer to the web pages for details.\n
 
   <string name="pref_picker_type_title">Zeichenwerkzeuge</string>
   <string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string>
-  <string name="pref_triple_toolbar_title">Drei Zeichenwerkzeugreihen</string>
-  <string name="pref_triple_toolbar_summary">Drei Reihen von Zeichenwerkzeugen am unteren Bildrand</string>
+  <!-- UNUSED string name="pref_triple_toolbar_title">Drei Zeichenwerkzeugreihen</string -->
+  <!-- UNUSED string name="pref_triple_toolbar_summary">Drei Reihen von Zeichenwerkzeugen am unteren Bildrand</string -->
   <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Querschnitts-Referenz-Stationen</string -->
   <string name="pref_station_size_title">Messpunkt Schriftgröße</string>

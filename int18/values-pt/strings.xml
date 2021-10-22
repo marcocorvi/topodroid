@@ -1529,8 +1529,8 @@ Refer to the web pages for details.\n
 
   <string name="pref_picker_type_title">Janela símbolos</string>
   <string name="pref_picker_type_summary">Forma de apresentação da seleção de símbolos</string>
-  <!-- TODO string name="pref_triple_toolbar_title">Triple bottom bar</string -->
-  <!-- TODO string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
+  <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
+  <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">Bases corte X</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Bases de referência cortes X</string -->
   <string name="pref_station_size_title">Tamanho nome bases</string>

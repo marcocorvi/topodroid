@@ -31,7 +31,7 @@ public class CurrentStation
   // flag tests
   private boolean isFlagFixed()   { return (mFlag & STATION_FIXED)   == STATION_FIXED; }
   private boolean isFlagPainted() { return (mFlag & STATION_PAINTED) == STATION_PAINTED; }
-  private boolean isFlagGeo()     { return (mFlag & STATION_GEO)     == STATION_GEO; }
+  // private boolean isFlagGeo()     { return (mFlag & STATION_GEO)     == STATION_GEO; }
 
   /**
    * @return the string presentation of the flags
@@ -42,7 +42,7 @@ public class CurrentStation
     StringBuilder sb = new StringBuilder();
     if ( isFlagFixed() )   sb.append("F");
     if ( isFlagPainted() ) sb.append("P");
-    if ( isFlagGeo() )     sb.append("G");
+    // if ( isFlagGeo() )     sb.append("G");
     return sb.toString();
   }
 
@@ -62,7 +62,7 @@ public class CurrentStation
   public String toString()
   { 
     StringBuilder sb = new StringBuilder();
-    sb.append( mname ).append("[").append( getFlagCode() ).append("]");
+    sb.append( mName ).append("[").append( getFlagCode() ).append("]");
     if ( mComment != null ) sb.append( mComment );
     return sb.toString();
   }

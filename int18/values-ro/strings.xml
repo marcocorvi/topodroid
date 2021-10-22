@@ -1527,8 +1527,8 @@ Refer to the web pages for details.\n
 
   <string name="pref_picker_type_title">Selecție unealtă desen</string>
   <string name="pref_picker_type_summary">Tip selecție unealtă desentype</string>
-  <string name="pref_triple_toolbar_title">Bară inferioară triplă</string>
-  <string name="pref_triple_toolbar_summary">Bară triplă pt. unelte desenare</string>
+  <!-- UNUSED string name="pref_triple_toolbar_title">Bară inferioară triplă</string -->
+  <!-- UNUSED string name="pref_triple_toolbar_summary">Bară triplă pt. unelte desenare</string -->
   <!-- UNUSED string name="pref_section_stations_title">Stații Secțiuni-X (transversale)</string -->
   <!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transversale)</string -->
   <string name="pref_station_size_title">Mărime nume stații</string>

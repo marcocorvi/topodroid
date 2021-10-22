@@ -1023,6 +1023,10 @@ public class DrawingWindow extends ItemDrawer
   // final static String titleLandscape = " L ";
   // final static String titlePortrait  = " P ";
 
+  /**
+   * @param k       index of selected line-tool
+   * @param update_recent ...
+   */
   @Override
   public void lineSelected( int k, boolean update_recent )
   {
@@ -1970,13 +1974,6 @@ public class DrawingWindow extends ItemDrawer
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     mPointScale = PointScale.SCALE_M;
 
-    // Display display = getWindowManager().getDefaultDisplay();
-    // DisplayMetrics dm = new DisplayMetrics();
-    // display.getMetrics( dm );
-    // int width = dm widthPixels;
-    // int width = getResources().getDisplayMetrics().widthPixels; // 20190930 unused
-    // TDLog.v( "width " + w );
-
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
     setContentView(R.layout.drawing_activity);
@@ -1996,11 +1993,11 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setBuiltInZoomControls(true);
 
     mZoomView = (View) findViewById(R.id.zoomView );
-    if ( TDSetting.mTripleToolbar ) {
-      ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
-    } else {
+    // if ( TDSetting.mTripleToolbar ) {
+    //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
+    // } else {
       ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
-    }
+    // }
     mZoomView.setTranslationY( ZOOM_TRANSLATION );
 
     mZoomBtnsCtrl = new ZoomButtonsController( mZoomView );
@@ -2106,7 +2103,7 @@ public class DrawingWindow extends ItemDrawer
     setMenuAdapter( getResources(), mType );
     closeMenu();
 
-    mLayoutTools = (LinearLayout) findViewById( R.id.layout_tools );
+    mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
     mLayoutToolsL = (LinearLayout) findViewById( R.id.layout_tool_l );
     mLayoutToolsA = (LinearLayout) findViewById( R.id.layout_tool_a );
@@ -2157,29 +2154,29 @@ public class DrawingWindow extends ItemDrawer
     mBtnRecentL[NR_RECENT] = new ItemButton( this );
     mBtnRecentA[NR_RECENT] = new ItemButton( this );
 
-    mBtnRecentP[NR_RECENT].setText( ">>" );
-    mBtnRecentL[NR_RECENT].setText( ">>" );
-    mBtnRecentA[NR_RECENT].setText( ">>" );
+    // mBtnRecentP[NR_RECENT].setText( ">>" );
+    // mBtnRecentL[NR_RECENT].setText( ">>" );
+    // mBtnRecentA[NR_RECENT].setText( ">>" );
 
-    Path path = new Path();
+    Path path = new Path(); // double-arrow ">>"
     path.moveTo( 0, 8 ); path.lineTo(  8, 0 ); path.lineTo( 0, -8 );
     path.moveTo( 8, 8 ); path.lineTo( 16, 0 ); path.lineTo( 8, -8 );
 
-    mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); // TDSetting.mItemPathScale, TDSetting.mItemPathScale );
+    mBtnRecentP[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); 
     mBtnRecentP[NR_RECENT].invalidate();
     mBtnRecentP[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
         @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.POINT ); }
       }
     );
-    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); // TDSetting.mItemPathScale, TDSetting.mItemPathScale );
+    mBtnRecentL[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
     mBtnRecentL[NR_RECENT].invalidate();
     mBtnRecentL[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
         @Override public void onClick( View v ) { startItemPickerDialog( SymbolType.LINE ); }
       }
     );
-    mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 ); // TDSetting.mItemPathScale, TDSetting.mItemPathScale );
+    mBtnRecentA[NR_RECENT].resetPaintPath( BrushManager.labelPaint, path, 2, 2 );
     mBtnRecentA[NR_RECENT].invalidate();
     mBtnRecentA[NR_RECENT].setOnClickListener(
       new View.OnClickListener() {
@@ -2190,10 +2187,8 @@ public class DrawingWindow extends ItemDrawer
 
     setToolsToolbarParams();
     
-    mRecentTools = mRecentLine;
-    // rotateRecentToolset();
     setBtnRecentAll();
-    setToolsToolbars();
+    mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
@@ -2415,6 +2410,9 @@ public class DrawingWindow extends ItemDrawer
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
+    if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    // setLine( mCurrentLine, false );
+    setToolsToolbars();
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
   }
 
@@ -4472,7 +4470,11 @@ public class DrawingWindow extends ItemDrawer
     //   // nothing
     // }
 
-    // @from IAudioInserter
+    /** stop recording an audio 
+     * @param audio_id    ID of the recording audio
+     *
+     * @from IAudioInserter
+     */
     public void stopRecordAudio( long audio_id )
     {
       DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
@@ -5553,14 +5555,9 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
         updateSplays( mApp.mSplayMode );
       }
-    } else if ( b == mButton2[ BTN_TOOL ] && ! TDSetting.mTripleToolbar ) {
-      // if ( TDSetting.mPickerType == TDSetting.PICKER_RECENT ) { 
-      //   new ItemRecentDialog(mActivity, this, mType ).show();
-      // } else {
-        // new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-        mRecentToolsForward = ! mRecentToolsForward;
-        rotateRecentToolset();
-      // }
+    } else if ( b == mButton2[ BTN_TOOL ] /* && ! TDSetting.mTripleToolbar */ ) {
+      mRecentToolsForward = ! mRecentToolsForward;
+      rotateRecentToolset();
 
     } else if ( TDLevel.overBasic && b == mButton3[ BTN_REMOVE ] ) {
       SelectionPoint sp = mDrawingSurface.hotItem();
@@ -5719,11 +5716,11 @@ public class DrawingWindow extends ItemDrawer
           mLastLinePath = null;
         }
       } else if ( b == mButton2[k2++] ) { // TOOLS
-        if ( ! TDSetting.mTripleToolbar ) {
+        // if ( ! TDSetting.mTripleToolbar ) {
           rotateRecentToolset();
-        } else {
-          new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-        }
+        // } else {
+        //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+        // }
       } else if ( b == mButton2[k2++] ) { // SPLAYS
         toggleSplayMode();
       } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
@@ -6189,7 +6186,7 @@ public class DrawingWindow extends ItemDrawer
     void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
     {
       // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-      TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
+      // TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
       // mActivity = context (only to toast)
       SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
       PlotInfo   plot  = null;
@@ -6213,9 +6210,14 @@ public class DrawingWindow extends ItemDrawer
 
   // static private Handler th2Handler = null;
 
-  // called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
-  // no backup_rotate (rotate = 0)
-  //
+  /** save in therion format (.th2)
+   * @param uri     output URI
+   * @param type
+   * @param toast   whether to toast
+   *
+   * called (indirectly) only by ExportDialogPlot: save as th2 even if there are missing symbols
+   * no backup_rotate (rotate = 0)
+   */
   private void doSaveTh2( Uri uri, long type, final boolean toast )
   {
     DrawingCommandManager manager = mDrawingSurface.getManager( type );
@@ -6239,7 +6241,7 @@ public class DrawingWindow extends ItemDrawer
     }
     final String filename = name;
     // TDLog.Log( TDLog.LOG_IO, "save th2: " + filename );
-    TDLog.v( "save th2: " + filename );
+    // TDLog.v( "save th2: " + filename );
     if ( toast ) {
       th2Handler = new Handler(){
         @Override public void handleMessage(Message msg) {
@@ -6732,7 +6734,7 @@ public class DrawingWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
+    // TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
     if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
@@ -6770,7 +6772,7 @@ public class DrawingWindow extends ItemDrawer
   public void doUriExport( Uri uri ) 
   {
     if ( ! TDSetting.mExportUri ) return;
-    TDLog.v( "do URI export. index " + mExportIndex );
+    // TDLog.v( "do URI export. index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: doSaveTh2( uri, mType, true ); break;
@@ -7685,6 +7687,8 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------
   // TOOLSET 
 
+  /** rotate the toolset in the bar of the recent tools
+   */
   void rotateRecentToolset( )
   { 
     if ( mRecentToolsForward ) {
@@ -7720,32 +7724,45 @@ public class DrawingWindow extends ItemDrawer
     setToolsToolbars();
   }
 
+  /** switch to the current toolbar
+   */
   void setToolsToolbars()
   {
-    // TDLog.v("set Tools Toolbar " + TDSetting.mTripleToolbar );
-    if ( TDSetting.mTripleToolbar ) {
-      ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
-      mZoomView.setTranslationY( ZOOM_TRANSLATION );
-      mLayoutToolsP.setVisibility( View.VISIBLE );
-      mLayoutToolsL.setVisibility( View.VISIBLE );
-      mLayoutToolsA.setVisibility( View.VISIBLE );
-    } else {
+    // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
+    // if ( TDSetting.mTripleToolbar ) {
+    //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
+    //   mZoomView.setTranslationY( ZOOM_TRANSLATION );
+    //   mLayoutToolsP.setVisibility( View.VISIBLE );
+    //   mLayoutToolsL.setVisibility( View.VISIBLE );
+    //   mLayoutToolsA.setVisibility( View.VISIBLE );
+    // } else {
+      int k = -1;
       ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
       mZoomView.setTranslationY( ZOOM_TRANSLATION );
       if ( mRecentTools == mRecentPoint ) {
         mLayoutToolsP.setVisibility( View.VISIBLE );
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.GONE );
+        k = getCurrentPointIndex();
+        pointSelected( k, false );
+        setHighlight( SymbolType.POINT, k );
       } else if ( mRecentTools == mRecentLine ) {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
         mLayoutToolsA.setVisibility( View.GONE );
+        k = getCurrentLineIndex();
+        // TDLog.v("Current line index " + k );
+        lineSelected( k, false );
+        setHighlight( SymbolType.LINE, k );
       } else {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.VISIBLE );
+        k = getCurrentAreaIndex();
+        areaSelected( k, false );
+        setHighlight( SymbolType.AREA, k );
       }
-    }
+    // }
     mLayoutTools.invalidate();
   }
 
@@ -7772,6 +7789,9 @@ public class DrawingWindow extends ItemDrawer
     setHighlight( symbol, index );
   }
 
+  /** get the index of the current point tool
+   * @return index of the current point tool
+   */
   private int getCurrentPointIndex()
   {
     for ( int k=0; k < NR_RECENT; ++k ) {
@@ -7780,14 +7800,21 @@ public class DrawingWindow extends ItemDrawer
     return -1;
   }
 
+  /** get the index of the current line tool
+   * @return index of the current line tool
+   */
   private int getCurrentLineIndex()
   {
+    // TDLog.v("get current line index: current line " + mCurrentLine );
     for ( int k=0; k < NR_RECENT; ++k ) {
       if ( mCurrentLine == BrushManager.getLineIndex( mRecentLine[k] ) ) return k;
     }
     return -1;
   }
 
+  /** get the index of the current area tool
+   * @return index of the current area tool
+   */
   private int getCurrentAreaIndex()
   {
     for ( int k=0; k < NR_RECENT; ++k ) {
@@ -7797,6 +7824,8 @@ public class DrawingWindow extends ItemDrawer
   }
 
 
+  /** set all the recent tools buttons
+   */
   private void setBtnRecentAll()
   {
     setButtonRecent( mBtnRecentP, mRecentPoint );
@@ -7804,6 +7833,10 @@ public class DrawingWindow extends ItemDrawer
     setButtonRecent( mBtnRecentA, mRecentArea  );
   }
 
+  /** set the recent tools buttons
+   * @param buttons   array of buttons
+   * @param recents   array of recent tools
+   */
   private void setButtonRecent( ItemButton[] buttons, Symbol[] recents )
   {
     for ( int k=0; k<NR_RECENT; ++k ) {
@@ -7819,9 +7852,13 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  private int highlightType = SymbolType.UNDEF;
-  private int highlightIndex = -1;
+  private int highlightType = SymbolType.UNDEF; // type of current symbol highlighted
+  private int highlightIndex = -1;              // index of current symbol highlighted
 
+  /** highlight a symbol in the tools-bar
+   * @param type  tools type to highlight
+   * @param index index of the tool button to highlight
+   */
   private void setHighlight( int type, int index )
   {
     if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
@@ -7857,8 +7894,6 @@ public class DrawingWindow extends ItemDrawer
     }
   }
    
-
-
   @Override
   public void setPoint( int k, boolean update_recent )
   {
