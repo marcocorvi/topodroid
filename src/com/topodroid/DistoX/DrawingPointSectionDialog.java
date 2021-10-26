@@ -21,6 +21,7 @@ import com.topodroid.common.PointScale;
 import android.os.Bundle;
 import android.content.Context;
 
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -40,6 +41,7 @@ class DrawingPointSectionDialog extends MyDialog
   // GUI widgets
   // private TextView mTVtype;
   private TextView mEToptions;
+  // private EditText mEToptions;
   private RadioButton mBtnScaleXS;
   private RadioButton mBtnScaleS;
   private RadioButton mBtnScaleM;
@@ -82,6 +84,7 @@ class DrawingPointSectionDialog extends MyDialog
 
     // mTVtype = (TextView) findViewById( R.id.point_type );
     mEToptions = (TextView) findViewById( R.id.point_options );
+    // mEToptions = (EditText) findViewById( R.id.point_options );
     if ( mPoint.mOptions != null ) mEToptions.setText( mPoint.mOptions );
 
     mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
@@ -181,6 +184,8 @@ class DrawingPointSectionDialog extends MyDialog
       else if ( mBtnScaleM.isChecked() )  mPoint.setScale( PointScale.SCALE_M  );
       else if ( mBtnScaleL.isChecked() )  mPoint.setScale( PointScale.SCALE_L  );
       else if ( mBtnScaleXL.isChecked() ) mPoint.setScale( PointScale.SCALE_XL );
+
+      // mPoint.mOptions = mEToptions.getText().toString();
 
       if ( mXSectionName != null ) {
         if ( TDLevel.overAdvanced && mHasXSectionOutline != mCBxsection.isChecked() ) {

@@ -94,16 +94,17 @@ class DrawingPointDialog extends MyDialog
     } else {
       mEToptions.setVisibility( View.GONE );
     }
-    mETtext    = (EditText) findViewById( R.id.point_text );
 
     // mCBxsection = (CheckBox) findViewById( R.id.point_xsection );
     // mBTdraw     = (Button) findViewById( R.id.button_draw );
     
+    mETtext    = (EditText) findViewById( R.id.point_text );
     if ( BrushManager.pointHasTextOrValue( mPoint.mPointType ) ) {
       String text = mPoint.getPointText();
       mETtext.setText( (text == null)? "" : text );
     } else {
-      mETtext.setEnabled( false );
+      // mETtext.setEnabled( false );
+      mETtext.setVisibility( View.GONE );
     }
 
     mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation );

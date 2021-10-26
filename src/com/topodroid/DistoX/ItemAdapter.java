@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.ItemButton;
+import com.topodroid.common.SymbolType;
 
 import java.util.ArrayList;
 
@@ -40,7 +41,15 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private int mPos;    
   private int mType;
   private boolean mShowSelected;
+  // private int mNonClick = -1;
 
+  /** cstr
+   * @param ctx
+   * @param parent  parent dialog
+   * @param type    symbol type (POINT, LINE, AREA)
+   * @param id      layout resource id
+   * @param items
+   */
   ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
   {
     super( ctx, id, items );
@@ -48,10 +57,16 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     mPos    = -1;
     mType   = type;
     mShowSelected = true;
+    // mNonClick = -1;
 
     if ( items != null ) { // always true
       mItems = items;
-      for ( ItemSymbol item : items ) {
+      for ( int k=0; k<items.size(); ++k ) {
+        ItemSymbol item = items.get( k );
+        // if ( mType == SymbolType.POINT && BrushManager.isPointSection( item.mIndex ) ) {
+        //   mNonClick = k;
+        //   continue;
+        // }
         item.setOnClickListener( this );
       }
     } else {
@@ -71,7 +86,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //   }
   // }
   
-  private boolean isValid( int p ) { return p >= 0 && p < mItems.size(); }
+  private boolean isValid( int p ) { return p >= 0 && p < mItems.size() /* && p != mNonClick */ ; }
 
   void setItemOrientation( int pos, int angle ) { if ( isValid(pos) ) { mItems.get( pos ).setAngle( angle ); } }
 
@@ -84,11 +99,19 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   }
 
   // get the item at a certain position in the list of symbols 
-  ItemSymbol get( int k ) { return ( k < mItems.size() ) ? mItems.get(k) : null ; }
+  ItemSymbol get( int k ) 
+  { 
+    TDLog.v("Get item at " + k + " of " + mItems.size() );
+    return ( k < mItems.size() ) ? mItems.get(k) : null ; 
+  }
 
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
   
-  int getSelectedPos() { return mPos; }
+  int getSelectedPos() 
+  {
+    TDLog.v("Selected position " + mPos );
+    return mPos;
+  }
 
   ItemSymbol getSelectedItem() { return ( isValid(mPos) )? mItems.get(mPos) : null; }
 
@@ -97,6 +120,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   {
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
+      // if ( k == mNonClick ) continue;
       ItemSymbol item = mItems.get(k);
       if ( index == item.mIndex ) {
         mPos = k;
@@ -109,6 +133,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       mPos = ( mItems.size() > 1 )? 1 : 0; // user symbols cannot be disabled: are always present
       mItems.get( mPos ).setChecked( true );
     }
+    TDLog.v("set selected at index " + index + " pos " + mPos );
   }
 
   /** set selected position from the item symbol
@@ -119,6 +144,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   {
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
+      // if ( k == mNonClick ) continue;
       ItemSymbol item = mItems.get(k);
       if ( symbol == item.mSymbol ) {
         mPos = k;
@@ -144,6 +170,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
 
   public void add( ItemSymbol item ) 
   {
+    // if ( mType == SymbolType.POINT && BrushManager.isPointSection( item.mIndex ) ) mNonClick = mItems.size();
     mItems.add( item );
     item.setOnClickListener( this );
   }
@@ -159,7 +186,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   @Override
   public void onClick( View v )
   {
-    // TDLog.v( "ItemAdapter onClick()");
+    // TDLog.v( "Item Adapter onClick()");
     doClick( v );
   }
 
@@ -168,7 +195,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
 
   private void doClick( View v )
   {
-    // TDLog.v( "--> ItemAdapter doClick()");
+    // TDLog.v( "--> Item Adapter doClick()");
     long millis = System.currentTimeMillis();
     boolean doubleclick = false;
     if ( v instanceof CheckBox ) {
@@ -179,6 +206,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           if ( cb == item.mCheckBox ) {
             if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
             mPos = pos; // item.mIndex;
+            TDLog.v("set type and item [1]: pos " + mPos + " index " + item.mIndex );
             mParent.setTypeAndItem( mType, mPos );
             item.setChecked( true );
           } else {
@@ -195,6 +223,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           if (mPos == pos && Math.abs( millis - mClickMillis ) < DOUBLE_CLICK_TIME)
             doubleclick = true;
           mPos = pos; // item.mIndex;
+          TDLog.v("set type and item [2]: pos " + mPos + " index " + item.mIndex );
           mParent.setTypeAndItem( mType, mPos );
           item.setChecked( true );
         } else {

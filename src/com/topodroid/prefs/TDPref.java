@@ -496,19 +496,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.PLOTdesc;
     String[] def = TDPrefKey.PLOTdef;
     return new TDPref[ ] {
-      makeLst( cat, key[ 0], tit[ 0], dsc[0], B, def[0], R.array.pickerType, R.array.pickerTypeValue, ctx, hlp ),
+      // makeLst( cat, key[ 0], tit[ 0], dsc[0], B, def[0], R.array.pickerType, R.array.pickerTypeValue, ctx, hlp ),
       // makeCbx( cat, key[ 1], tit[ 1], dsc[1], B, def[1], ctx, hlp ),
       // makeLst( cat, key[ 1], tit[ 1], dsc[1], N, def[1], R.array.recentNr, R.array.recentNr, ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 1], dsc[1], B, def[1], ctx, hlp ),
-      makeLst( cat, key[ 2], tit[ 2], dsc[2], B, def[2], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
+      makeCbx( cat, key[ 0], tit[ 0], dsc[0], B, def[0], ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[1], B, def[1], R.array.zoomCtrl, R.array.zoomCtrlValue, ctx, hlp ),
       // makeLst( cat, key[  ], tit[  ], dsc[ ], X, def[ ], R.array.sectionStations, R.array.sectionStationsValue, ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[3], T, def[3], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
-      makeCbx( cat, key[ 4], tit[ 4], dsc[4], A, def[4], ctx, hlp ), // CHECK-MIDLINE
-      makeCbx( cat, key[ 5], tit[ 5], dsc[5], A, def[5], ctx, hlp ), // CHECK-EXTEND
-      makeEdt( cat, key[ 6], tit[ 6], dsc[6], T, def[6], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
-      makeFwd( cat, key[ 7], tit[ 7],         B,         ctx, hlp ),
-      makeFwd( cat, key[ 8], tit[ 8],         N,         ctx, hlp ),
-      makeFwd( cat, key[ 9], tit[ 9],         B,         ctx, hlp )
+      makeEdt( cat, key[ 2], tit[ 2], dsc[2], T, def[2], FLOAT,   ctx, hlp ), // X-SECTION H-THRESHOLD
+      makeCbx( cat, key[ 3], tit[ 3], dsc[3], A, def[3], ctx, hlp ), // CHECK-MIDLINE
+      makeCbx( cat, key[ 4], tit[ 4], dsc[4], A, def[4], ctx, hlp ), // CHECK-EXTEND
+      makeEdt( cat, key[ 5], tit[ 5], dsc[5], T, def[5], FLOAT, ctx, hlp ), // DISTOX_TOOLBAR_SIZE
+      makeFwd( cat, key[ 6], tit[ 6],         B,         ctx, hlp ),
+      makeFwd( cat, key[ 7], tit[ 7],         N,         ctx, hlp ),
+      makeFwd( cat, key[ 8], tit[ 8],         B,         ctx, hlp )
       // makeFwd( cat, key[11], tit[11],         T,         ctx, hlp ), // PLOT_WALLS
     };
   }

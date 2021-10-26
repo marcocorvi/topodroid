@@ -391,10 +391,10 @@ public class TDSetting
   public static float mUnitMeasure = -1;        // -1: grid-cell
 
   // public static final int PICKER_RECENT = 0; // Drawing-tools picker type
-  public static final int PICKER_LIST   = 1; 
-  public static final int PICKER_GRID   = 2;
-  public static final int PICKER_GRID_3 = 3;
-  public static int mPickerType = PICKER_LIST;
+  // public static final int PICKER_LIST   = 1; 
+  // public static final int PICKER_GRID   = 2;
+  // public static final int PICKER_GRID_3 = 3;
+  // public static int mPickerType = PICKER_LIST;
   // public static int mRecentNr     = 4;        // nr. most recent symbols
   public static boolean mPalettes = false;   // extra tools palettes
 
@@ -798,18 +798,18 @@ public class TDSetting
 
     String[] keyPlot = TDPrefKey.PLOT;
     String[] defPlot = TDPrefKey.PLOTdef;
-    mPickerType = tryInt( prefs,       keyPlot[0],      defPlot[0] );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
-    if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
+    // mPickerType = tryInt( prefs,       keyPlot[0],      defPlot[0] );  // DISTOX_PICKER_TYPE choice: 0, 1, 2
+    // if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
     // mTripleToolbar   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_TRIPLE_TOOLBAR
     // mRecentNr   = tryInt( prefs,       keyPlot[ ],      defPlot[ ] );  // DISTOX_RECENT_NR choice: 3, 4, 5, 6
-    mSideDrag   = prefs.getBoolean(    keyPlot[1], bool(defPlot[1]) ); // DISTOX_SIDE_DRAG
+    mSideDrag   = prefs.getBoolean(    keyPlot[0], bool(defPlot[0]) ); // DISTOX_SIDE_DRAG
     // setZoomControls( prefs.getBoolean( keyPlot[ ], bool(defPlot[ ]) ) ); // DISTOX_ZOOM_CONTROLS
-    setZoomControls( prefs.getString(  keyPlot[2],      defPlot[2] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
+    setZoomControls( prefs.getString(  keyPlot[1],      defPlot[1] ), TDandroid.checkMultitouch( TDInstance.context ) ); // DISTOX_ZOOM_CTRL
     // mSectionStations  = tryInt( prefs, keyPlot[ ], "3");      // DISTOX_SECTION_STATIONS
-    mHThreshold    = tryFloat( prefs,  keyPlot[3],      defPlot[3] );  // DISTOX_HTHRESHOLD
-    mCheckAttached = prefs.getBoolean( keyPlot[4], bool(defPlot[4]) ); // DISTOX_CHECK_ATTACHED
-    mCheckExtend   = prefs.getBoolean( keyPlot[5], bool(defPlot[5]) ); // DISTOX_CHECK_EXTEND
-    mItemButtonSize= tryFloat( prefs,  keyPlot[6],      defPlot[6] );  // DISTOX_TOOLBAR_SIZE
+    mHThreshold    = tryFloat( prefs,  keyPlot[2],      defPlot[2] );  // DISTOX_HTHRESHOLD
+    mCheckAttached = prefs.getBoolean( keyPlot[3], bool(defPlot[3]) ); // DISTOX_CHECK_ATTACHED
+    mCheckExtend   = prefs.getBoolean( keyPlot[4], bool(defPlot[4]) ); // DISTOX_CHECK_EXTEND
+    mItemButtonSize= tryFloat( prefs,  keyPlot[5],      defPlot[5] );  // DISTOX_TOOLBAR_SIZE
     // TDLog.v("SETTING load plot done");
 
     String[] keyCalib = TDPrefKey.CALIB;
@@ -1306,31 +1306,32 @@ public class TDSetting
     // TDLog.v("update pref plot: " + k );
     String[] key = TDPrefKey.PLOT;
     String[] def = TDPrefKey.PLOTdef;
-    if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PICKER_TYPE (choice)
-      mPickerType = tryIntValue(   hlp, k, v, def[0] );
-      if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
+    // if ( k.equals( key[ 0 ] ) ) {        // DISTOX_PICKER_TYPE (choice)
+    //   mPickerType = tryIntValue(   hlp, k, v, def[0] );
+    //   if ( mPickerType < PICKER_LIST ) mPickerType = PICKER_LIST;
     // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_RECENT_NR (choice)
     //   mRecentNr = tryIntValue( hlp, k, v, def[1] );
     // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_TRIPLE_TOOLBAR (bool)
     //   mTripleToolbar = tryBooleanValue( hlp, k, v, bool(def[1]) );
     //   TopoDroidApp.setToolsToolbars();
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SIDE_DRAG (bool)
-      mSideDrag = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
-      // setZoomControls( tryBooleanValue( hlp, k, bool(def[2]) ) );
-      setZoomControls( tryStringValue( hlp, k, v, def[2] ), TDandroid.checkMultitouch( TDInstance.context ) );
+    // } else 
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SIDE_DRAG (bool)
+      mSideDrag = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_ZOOM_CTRL (choice)
+      // setZoomControls( tryBooleanValue( hlp, k, bool(def[1]) ) );
+      setZoomControls( tryStringValue( hlp, k, v, def[1] ), TDandroid.checkMultitouch( TDInstance.context ) );
     // } else if ( k.equals( key[ ? ] ) ) {  // DISTOX_SECTION_STATIONS
     //   mSectionStations = tryIntValue( hlp, k, v, def[ ] );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_HTHRESHOLD
-      mHThreshold = tryFloatValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_HTHRESHOLD
+      mHThreshold = tryFloatValue( hlp, k, v, def[2] );
       if ( mHThreshold <  0 ) { mHThreshold =  0; ret = TDString.ZERO; }
       if ( mHThreshold > 90 ) { mHThreshold = 90; ret = TDString.NINETY; }
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CHECK_ATTACHED (bool)
-      mCheckAttached = tryBooleanValue( hlp, k, v, bool(def[4]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_CHECK_EXTEND (bool)
-      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(def[5]) );
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_TOOLBAR_SIZE
-      mItemButtonSize = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_CHECK_ATTACHED (bool)
+      mCheckAttached = tryBooleanValue( hlp, k, v, bool(def[3]) );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_CHECK_EXTEND (bool)
+      mCheckExtend   = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_TOOLBAR_SIZE
+      mItemButtonSize = tryFloatValue( hlp, k, v, def[5] );
       TopoDroidApp.setToolsToolbarParams();
     } else {
       TDLog.Error("missing PLOT key: " + k );
@@ -2772,7 +2773,7 @@ public class TDSetting
       pw.printf(Locale.US, "Select: radius %.2f, pointing %d, shift %d, dot %.1f, multiple %c \n",
         mSelectness, mPointingRadius, mMinShift, mDotRadius, tf(mPathMultiselect) );
       pw.printf(Locale.US, "Erase: radius %.2f\n", mEraseness );
-      pw.printf(Locale.US, "Picker: type %d\n", mPickerType );
+      // pw.printf(Locale.US, "Picker: type %d\n", mPickerType );
       pw.printf(Locale.US, "Point: unscaled %c\n", tf(mUnscaledPoints) );
       pw.printf(Locale.US, "Line: style %d, type %d, segment %d, continue %d, arrow %.1f\n",
         mLineStyle, mLineType, mLineSegment, mContinueLine, mArrowLength );
@@ -3345,14 +3346,14 @@ public class TDSetting
           }
           continue;
         }
-        if ( line.startsWith("Picker:") ) {
-          if ( all ) {
-            if ( vals.length > 2 ) {
-              mPickerType = getInt( vals, 2, 1 ); setPreference( editor, "DISTOX_PICKER_TYPE", mPickerType );
-            }
-          }
-          continue;
-        }
+        // if ( line.startsWith("Picker:") ) {
+        //   if ( all ) {
+        //     if ( vals.length > 2 ) {
+        //       mPickerType = getInt( vals, 2, 1 ); setPreference( editor, "DISTOX_PICKER_TYPE", mPickerType );
+        //     }
+        //   }
+        //   continue;
+        // }
         if ( line.startsWith("Point:") ) {
           if ( all ) {
             if ( vals.length > 2 ) {

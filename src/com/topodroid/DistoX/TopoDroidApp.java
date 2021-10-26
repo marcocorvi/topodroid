@@ -232,10 +232,10 @@ public class TopoDroidApp extends Application
     if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay( blk_id, got_leg );
   }
 
-  public static void setToolsToolbars()
-  {
-    if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbars();
-  }
+  // public static void setToolsToolbars()
+  // {
+  //   if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbars();
+  // }
 
   public static void setToolsToolbarParams()
   {
@@ -2229,13 +2229,28 @@ public class TopoDroidApp extends Application
     return pid_p;
   }
   
-  // @param azimuth clino : projected profile azimuth / section plane direction 
-  // @param parent parent plot name
-  // NOTE field "hide" is overloaded for x_sections with the parent plot name
+  /** insert a new X-Section
+   * @param sid      survey ID
+   * @param name     section name
+   * @param type     X-section type
+   * @param from     viewing station
+   * @param to       viewed station
+   * @param azimuth  projected profile azimuth / section plane direction 
+   * @param clino    projected profile clino / section plane direction 
+   * @param parent   name of parent plot
+   * @param nickname
+   * 
+   * @note the database field "hide" is overloaded for x_sections with the parent plot name
+   */
   public long insert2dSection( long sid, String name, long type, String from, String to, float azimuth, float clino, String parent, String nickname )
   {
     // FIXME COSURVEY 2d sections are not forwarded
-    // 0 0 mScaleFactor : offset and zoom
+    // pid = -1L   assign new PID
+    // status = 0  normal
+    // X,Y offset  0,0
+    // zoom        mScaleFactor
+    // orientation 0
+    TDLog.v("app insert 2D section from <" + from + "> to <" + to + ">" );
     String hide = ( parent == null )? TDString.EMPTY : parent;
     String nick = ( nickname == null )? TDString.EMPTY : nickname;
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0 );

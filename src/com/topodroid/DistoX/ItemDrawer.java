@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
@@ -147,17 +147,20 @@ abstract class ItemDrawer extends Activity
 
   public void lineSelected( int k, boolean update_recent ) 
   {
+    TDLog.v("Item drawer line selected " + k + " update recent " + update_recent );
     mSymbol = SymbolType.LINE;
     if ( k >= 0 && k < BrushManager.getLineLibSize() ) {
       mCurrentLine = k;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
+          TDLog.v("Item drawer line selected " + k + " is not visible");
           mCurrentLine = 0; // BrushManager.mLineLib.mLineUserIndex;
         }
       }
     }
     setTheTitle();
     if ( update_recent ) {
+      TDLog.v("Item drawer update recent: current line " + mCurrentLine );
       updateRecentLine( mCurrentLine );
       setBtnRecent( SymbolType.LINE );
     }

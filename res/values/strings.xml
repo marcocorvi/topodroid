@@ -16,7 +16,7 @@
 With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
 Refer to the web pages for details.\n
   </string>
-  <string name="r_checkboxes">You must confirm the checkboxes.</string>
+  <string name="r_checkboxes">You must confirm the checkboxes to continue.</string>
   <string name="r_i_understood">I fully understood this notice</string>
   <string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string>
   <string name="r_continue">CONTINUE</string>
@@ -106,10 +106,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bric_clear_memory">Clear memory</string>
     <string name="bric_future_time">Refusing to reset to a future time</string>
     <string name="bric_ask_memory_clear">Clear BRIC memory ?</string>
-    <string name="bric_reset_ok">Resetted time</string>
-    <string name="bric_reset_fail">Time reset failed</string>
-    <string name="bric_clear_ok">Cleared memory </string>
-    <string name="bric_clear_fail">Memory clear failed</string>
+    <string name="bric_reset_ok">Time resetted</string>
+    <string name="bric_reset_fail">Failed: time reset</string>
+    <string name="bric_clear_ok">Memory cleared</string>
+    <string name="bric_clear_fail">Failed: memory clear</string>
 
     <string name="calibration_title">Instruments calibration</string>
     <string name="calibration_length">Tape</string>
@@ -117,9 +117,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calibration_clino">Clino</string>
 
     <string name="calib_new">New calibration</string>
-    <string name="calib_exists">Calibration already exists</string>
+    <string name="calib_exists">Calibration name already used</string>
     <string name="calib_delete">Delete calibration </string>
-    <string name="calib_device_mismatch">WARNING: Calibration-Device mismatch</string>
+    <string name="calib_device_mismatch">Warning: Calibration-Device mismatch</string>
     <string name="calib_no_name">Name is mandatory</string>
     <string name="calib_no_coeff">Calibration coefficients not set</string>
     <string name="calib_gm_policy">Group policy</string>
@@ -135,11 +135,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">Using %1$s</string>
-    <string name="calib_error">Average error: %1$.2f degrees (BH delta %2$.3f)</string>
-    <string name="calib_validate_error">Average error: %1$.2f degrees</string>
-    <string name="calib_stddev">Error stddev: %1$.2f degrees</string>
-    <string name="calib_max_error">Max. error: %1$.2f degrees</string>
-    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f degrees</string>
+    <string name="calib_error">Average error: %1$.2f &#0080; (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
+    <string name="calib_stddev">Error stddev: %1$.2f &#0080;</string>
+    <string name="calib_max_error">Max. error: %1$.2f &#0080;</string>
+    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f &#0080;</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
@@ -192,7 +192,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="lrud">LRUD</string>
     <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
-    <string name="few_data">Not enough data</string>
+    <string name="few_data">Too few calibration data</string>
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>
     <string name="found_groups">Found %1$d groups</string>
@@ -208,22 +208,22 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_overview_title">Overview export</string>
     <string name="export_model_title">3D model export</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
-    <string name="import_already">Survey already imported</string>
+    <string name="import_already">Survey name already present</string>
     <string name="import_bad">Invalid import file</string>
     <string name="import_none">No file to import</string>
-    <string name="import_failed">Failed file import</string>
+    <string name="import_failed">Failed: file import</string>
     <string name="file_not_found">File not found</string>
-    <string name="import_calib_ok">Successfully imported calibration</string>
+    <string name="import_calib_ok">Calibration imported</string>
     <string name="import_calib_no_header">Calibration file: bad header</string>
-    <string name="import_calib_already">Calibration already exists</string>
+    <string name="import_calib_already">Calibration name already present</string>
     <string name="import_calib_mismatch">Calibration-device mismatch</string>
     <string name="import_calib_no_data">Calibration file: no data</string>
     <string name="import_calib_io_error">Calibration file: read error</string>
-    <string name="import_zip_ok">Successfully imported zip file</string>
+    <string name="import_zip_ok">ZIP file imported</string>
     <string name="import_zip_newer">Imported zip from more recent version</string>
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
-    <string name="MT_points_none">No MobileTopographer point</string>
+    <string name="MT_points_none">No MobileTopographer point file</string>
     <string name="MT_bad_file">Bad MobileTopographer file</string>
     <string name="bad_manifest">Bad manifest file</string>
  
@@ -239,9 +239,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="datamode_diving">Diving data-mode</string>
     <string name="illegal_data_value">Illegal data value</string>
 
-    <string name="photo_title">PHOTO</string>
+    <string name="photo_title">Photo</string>
     <string name="photo_text">Enter photo comment</string>
-    <string name="label_title">LABEL</string>
+    <string name="label_title">Label</string>
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
     <string name="h_ellipsoid">H ellipsoid </string>
@@ -279,7 +279,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="error_invalid_name">Invalid name</string -->
     <string name="error_lat_required">Latitude required</string>
     <string name="error_long_required">Longitude required</string>
-    <string name="error_name_exists">Existing project</string>
+    <string name="error_name_exists">Project name already used</string>
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
     <string name="error_name_duplicate">Duplicate name</string>
@@ -1567,8 +1567,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_splay_alpha_title">Splay transparency</string>
   <string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string>
 
-  <string name="pref_picker_type_title">Drawing tool picker</string>
-  <string name="pref_picker_type_summary">Drawing tool picker type</string>
+  <!-- UNUSED string name="pref_picker_type_title">Drawing tool picker</string -->
+  <!-- UNUSED string name="pref_picker_type_summary">Drawing tool picker type</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">X-Section stations</string -->

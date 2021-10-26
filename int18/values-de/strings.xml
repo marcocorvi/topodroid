@@ -1542,8 +1542,8 @@ Refer to the web pages for details.\n
   <string name="pref_splay_alpha_title">Hilfszug-Transparent</string>
   <string name="pref_splay_alpha_summary">Transparenz der Hilfszüge [0: transparent, 100: Opak]</string>
 
-  <string name="pref_picker_type_title">Zeichenwerkzeuge</string>
-  <string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string>
+  <!-- UNUSED string name="pref_picker_type_title">Zeichenwerkzeuge</string -->
+  <!-- UNUSED string name="pref_picker_type_summary">Darstellung der Zeichenwerkzeuge</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Drei Zeichenwerkzeugreihen</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Drei Reihen von Zeichenwerkzeugen am unteren Bildrand</string -->
   <!-- UNUSED string name="pref_section_stations_title">Querschnitts-Stationen</string -->

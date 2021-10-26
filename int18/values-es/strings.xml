@@ -1535,8 +1535,8 @@
   <string name="pref_splay_alpha_title">Transparencia de tomas secundarias</string>
   <string name="pref_splay_alpha_summary">Transparencia de tomas secundarias [0: transparencia, 100: opaco]</string>
 
-  <string name="pref_picker_type_title">Selector de simbología</string>
-  <string name="pref_picker_type_summary">Tipo de selector de simbología</string>
+  <!-- UNUSED string name="pref_picker_type_title">Selector de simbología</string -->
+  <!-- UNUSED string name="pref_picker_type_summary">Tipo de selector de simbología</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">X-Sección estaciones</string -->

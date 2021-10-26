@@ -1522,8 +1522,8 @@ Refer to the web pages for details.\n
   <!-- TODO string name="pref_splay_alpha_title">Splay transparency</string -->
   <!-- TODO string name="pref_splay_alpha_summary">Splay transparency [0: transparent, 100: opaque]</string -->
 
-  <string name="pref_picker_type_title">Избор на инструмент за рисуване</string>
-  <string name="pref_picker_type_summary">Избор на инструмент за рисуване</string>
+  <!-- UNUSED string name="pref_picker_type_title">Избор на инструмент за рисуване</string -->
+  <!-- UNUSED string name="pref_picker_type_summary">Избор на инструмент за рисуване</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Triple bottom bar</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Triple drawing tools bar</string -->
   <!-- UNUSED string name="pref_section_stations_title">Измервания/репери в сечение</string -->

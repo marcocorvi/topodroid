@@ -14,12 +14,12 @@
       android:layout_marginTop="@dimen/marginv"
       >
 
-      <Button android:id="@+id/button_change"
+      <!-- Button android:id="@+id/button_change"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           style="@style/button_default"
           android:text="@string/button_change"
-       />
+       / -->
       <TextView android:id="@+id/cbd_text"
          android:layout_width="match_parent"
          android:layout_height="wrap_content"

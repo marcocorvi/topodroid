@@ -1531,8 +1531,8 @@
   <string name="pref_splay_alpha_title">Прозрачность сплеев</string>
   <string name="pref_splay_alpha_summary">Прозрачность сплеев [0: прозрачные, 100: видимые]</string>
 
-  <string name="pref_picker_type_title">Вид меню инструментов рисования</string>
-  <string name="pref_picker_type_summary">Тип меню инструментов рисования</string>
+  <!-- UNUSED string name="pref_picker_type_title">Вид меню инструментов рисования</string -->
+  <!-- UNUSED string name="pref_picker_type_summary">Тип меню инструментов рисования</string -->
   <!-- UNUSED string name="pref_triple_toolbar_title">Тройная панель инструментов</string -->
   <!-- UNUSED string name="pref_triple_toolbar_summary">Показывать все три типа инструментов рисования одновременно</string -->
   <!-- UNUSED string name="pref_section_stations_title">Пикеты на поперечных сечениях</string -->

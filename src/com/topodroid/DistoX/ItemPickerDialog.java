@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ItemButton;
@@ -133,35 +133,37 @@ class ItemPickerDialog extends MyDialog
       TDToast.makeWarn( "Symbols not ready" );
       return;
     }
+    TDLog.v("Dims " + DIMXP + " " + DIMXL + " " + DIMYL + " " + DIMMX + " " + DIMMY );
 
-    createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST /* || TDSetting.mPickerType == TDSetting.PICKER_RECENT */ ) );
+    // createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST /* || TDSetting.mPickerType == TDSetting.PICKER_RECENT */ ) );
+    createAdapters( true );
     
-    if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
-      setContentView(R.layout.item_picker2_dialog);
-      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
+    // if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
+    //   setContentView(R.layout.item_picker2_dialog);
+    //   getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
 
-      mGrid  = (GridView) findViewById(R.id.item_grid);
-      mGridL = (GridView) findViewById(R.id.item_grid_line);
-      mGridA = (GridView) findViewById(R.id.item_grid_area);
-      if ( TDSetting.mPickerType == TDSetting.PICKER_GRID ) {
-        mGridL.setVisibility( View.GONE );
-        mGridA.setVisibility( View.GONE );
-      } else {
-        LinearLayout.LayoutParams params;
-        params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
-        params.weight = 10 + mPointAdapter.size();
-        mGrid.setLayoutParams(  params );
-        params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
-        params.weight = 10 + mLineAdapter.size();
-        mGridL.setLayoutParams( params );
-        params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
-        params.weight = 10 + mAreaAdapter.size();
-        mGridA.setLayoutParams( params );
-      }
-      // mGrid.setOnItemClickListener( this );
-      // mGrid.setDividerHeight( 2 );
-      mList = null;
-    } else { // PICKER_LIST || PICKER_RECENT
+    //   mGrid  = (GridView) findViewById(R.id.item_grid);
+    //   mGridL = (GridView) findViewById(R.id.item_grid_line);
+    //   mGridA = (GridView) findViewById(R.id.item_grid_area);
+    //   if ( TDSetting.mPickerType == TDSetting.PICKER_GRID ) {
+    //     mGridL.setVisibility( View.GONE );
+    //     mGridA.setVisibility( View.GONE );
+    //   } else {
+    //     LinearLayout.LayoutParams params;
+    //     params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
+    //     params.weight = 10 + mPointAdapter.size();
+    //     mGrid.setLayoutParams(  params );
+    //     params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
+    //     params.weight = 10 + mLineAdapter.size();
+    //     mGridL.setLayoutParams( params );
+    //     params = new LinearLayout.LayoutParams( LayoutParams.MATCH_PARENT, 0 );
+    //     params.weight = 10 + mAreaAdapter.size();
+    //     mGridA.setLayoutParams( params );
+    //   }
+    //   // mGrid.setOnItemClickListener( this );
+    //   // mGrid.setDividerHeight( 2 );
+    //   mList = null;
+    // } else { // PICKER_LIST || PICKER_RECENT
       setContentView(R.layout.item_picker_dialog);
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT ); // NullPointerException
 
@@ -185,7 +187,7 @@ class ItemPickerDialog extends MyDialog
       //   // mRecent[k].setOnLongClickListener( this );
       //   recent_layout.addView( mRecent[k], lllp );
       // }
-    }
+    // }
     
     mBTpoint = (Button) findViewById(R.id.item_point);
     mBTline  = (Button) findViewById(R.id.item_line );
@@ -197,15 +199,15 @@ class ItemPickerDialog extends MyDialog
     // mBTcancel  = (Button) findViewById(R.id.item_cancel );
     // mBTok    = (Button) findViewById(R.id.item_ok   );
 
-    if ( TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
-      mBTpoint.setVisibility( View.GONE );
-      mBTline.setVisibility( View.GONE );
-      mBTarea.setVisibility( View.GONE );
-    } else {
+    // if ( TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
+    //   mBTpoint.setVisibility( View.GONE );
+    //   mBTline.setVisibility( View.GONE );
+    //   mBTarea.setVisibility( View.GONE );
+    // } else {
       mBTpoint.setOnClickListener( this );
       mBTline.setOnClickListener( this );
       mBTarea.setOnClickListener( this );
-    }
+    // }
     mBTsize.setOnClickListener( this );
     // mBTsize.setOnLongClickListener( new View.OnLongClickListener() {
     //   @Override
@@ -355,19 +357,17 @@ class ItemPickerDialog extends MyDialog
   {
     // if ( TDLevel.overBasic ) 
     {
-      mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, 
-                                       R.layout.item, new ArrayList< ItemSymbol >() );
+      mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, R.layout.item, new ArrayList< ItemSymbol >() );
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
-        if ( p.isEnabled() && ( TDLevel.overAdvanced || ! p.isThName( SymbolLibrary.SECTION ) ) ) { // FIXME_SECTION_POINT 
+        if ( p.isEnabled() && ( /* TDLevel.overAdvanced || */ ! p.isThName( SymbolLibrary.SECTION ) ) ) { // FIXME_SECTION_POINT 
           mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p, use_text ) );
         }
       }
     }
 
-    mLineAdapter  = new ItemAdapter( mContext, this, SymbolType.LINE,
-                                     R.layout.item, new ArrayList< ItemSymbol >() );
+    mLineAdapter  = new ItemAdapter( mContext, this, SymbolType.LINE, R.layout.item, new ArrayList< ItemSymbol >() );
     int nl = mLineLib.size();
     for ( int j=0; j<nl; ++j ) {
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
@@ -378,8 +378,7 @@ class ItemPickerDialog extends MyDialog
 
     // if ( TDLevel.overBasic )
     {
-      mAreaAdapter  = new ItemAdapter( mContext, this, SymbolType.AREA,
-                                       R.layout.item, new ArrayList< ItemSymbol >() );
+      mAreaAdapter  = new ItemAdapter( mContext, this, SymbolType.AREA, R.layout.item, new ArrayList< ItemSymbol >() );
       int na = mAreaLib.size();
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
@@ -396,7 +395,7 @@ class ItemPickerDialog extends MyDialog
   private void updateList()
   {
     // TDLog.v( "ItemPickerDialog ... update List type " + mItemType );
-    if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
+    // if ( TDSetting.mPickerType != TDSetting.PICKER_GRID_3 ) {
       switch ( mItemType ) {
         case SymbolType.POINT:
           // if ( TDLevel.overBasic )
@@ -436,15 +435,15 @@ class ItemPickerDialog extends MyDialog
           mGrid.invalidate();
         }
       }
-    } else {
-      setShowSelected();
-      mGrid.setAdapter( mPointAdapter );
-      mGrid.invalidate();
-      mGridL.setAdapter( mLineAdapter );
-      mGridL.invalidate();
-      mGridA.setAdapter( mAreaAdapter );
-      mGridA.invalidate();
-    }
+    // } else {
+    //   setShowSelected();
+    //   mGrid.setAdapter( mPointAdapter );
+    //   mGrid.invalidate();
+    //   mGridL.setAdapter( mLineAdapter );
+    //   mGridL.invalidate();
+    //   mGridA.setAdapter( mAreaAdapter );
+    //   mGridA.invalidate();
+    // }
   }
  
   // used by triple grid GRID_3
@@ -518,7 +517,7 @@ class ItemPickerDialog extends MyDialog
       case SymbolType.LINE: 
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
-          // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex );
+          TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
           if ( mPlotType != PlotType.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
@@ -641,20 +640,20 @@ class ItemPickerDialog extends MyDialog
       case SymbolType.POINT: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          // TDLog.v( "selected point " + mSelectedPoint );
+          TDLog.v( "item picker selected point " + mSelectedPoint );
           mParent.get().pointSelected( mSelectedPoint, true );
         }
         break;
       case SymbolType.LINE: 
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          // TDLog.v( "selected line " + mSelectedLine );
+          TDLog.v( "item picker selected line " + mSelectedLine );
           mParent.get().lineSelected( mSelectedLine, true ); 
 	}
         break;
       case SymbolType.AREA: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          // TDLog.v( "selected area " + mSelectedArea );
+          TDLog.v( "item picker selected area " + mSelectedArea );
           mParent.get().areaSelected( mSelectedArea, true );
         }
         break;

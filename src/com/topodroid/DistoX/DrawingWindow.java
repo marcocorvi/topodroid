@@ -1024,7 +1024,7 @@ public class DrawingWindow extends ItemDrawer
   // final static String titlePortrait  = " P ";
 
   /**
-   * @param k       index of selected line-tool
+   * @param k       index of selected line-tool in the symbol-library array
    * @param update_recent ...
    */
   @Override
@@ -1467,8 +1467,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("EXTEND station " + st.name + " has extend " + st.hasExtend() );
         if ( st.hasExtend() && st.show() ) {
           // DrawingStationName dst =
-          mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
+          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
       }
     } 
@@ -1502,8 +1501,7 @@ public class DrawingWindow extends ItemDrawer
         if ( st.show() ) {
           h1 = st.e * cosp + st.s * sinp;
           // DrawingStationName dst =
-          mDrawingSurface.addDrawingStationName( name, st,
-                  DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
+          mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
         // } else {
         //   TDLog.v("PLOT station not showing " + st.name );
         }
@@ -4584,7 +4582,7 @@ public class DrawingWindow extends ItemDrawer
     {
       // TDLog.v("openXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
-      // TDLog.v( "XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
+      // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
       // parent plot name = mName
       String xs_id = getXSectionName( st_name, type );
       if ( xs_id == null ) return;
@@ -5915,7 +5913,7 @@ public class DrawingWindow extends ItemDrawer
     }
 
 
-    private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino, Boolean fit )
+    private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.getLineWallIndex();
       if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
@@ -5929,14 +5927,23 @@ public class DrawingWindow extends ItemDrawer
       if ( pid < 0 ) { 
         // TDLog.v( "prepare xsection <" + mSectionName + "> nick <" + nick + ">" );
         pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
-        if ( fit != null ) fit = Boolean.TRUE;
       }
       return pid;
     }
 
+    /** make a photo X-Section from a section-line
+     * @param line    "section" line
+     * @param id      section ID, eg "xx0"
+     * @param type    either PLOT_SECTION or PLOT_H_SECTION
+     * @param from    from station, eg "1"
+     * @param to      to station, eg "2"
+     * @param nick
+     * @param azimuth section azimuth
+     * @param clino   section clino
+     */
     void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
     {
-      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino, null );
+      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
         File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
@@ -5945,27 +5952,26 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    // X-Section from a section-line
-    // @param line    "section" line
-    // @param id      section ID, eg "xx0"
-    // @param type    either PLOT_SECTION or PLOT_H_SECTION
-    // @param from    from station, eg "1"
-    // @param to      to station, eg "2"
-    // @param azimuth section azimuth
-    // @param clino   section clino
-    // @param tt      intersection abscissa
-    void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick,
-                          float azimuth, float clino, float tt )
+    /** make a X-Section from a section-line
+     * @param line    "section" line
+     * @param id      section ID, eg "xx0"
+     * @param type    either PLOT_SECTION or PLOT_H_SECTION
+     * @param from    from station, eg "1"
+     * @param to      to station, eg "2"
+     * @param azimuth section azimuth
+     * @param clino   section clino
+     * @param tt      intersection abscissa
+     */
+    void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt )
     {
       // TDLog.v( "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
-      Boolean fit = Boolean.FALSE;
-      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino, fit );
+      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
         mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
         pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
       } 
-      if ( fit ) zoomFit( mDrawingSurface.getBitmapBounds() );
+      zoomFit( mDrawingSurface.getBitmapBounds() );
     }
 
     // @param scrapname fullname of the scrap
@@ -7691,6 +7697,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void rotateRecentToolset( )
   { 
+    // TDLog.v("rotate recent toolset");
     if ( mRecentToolsForward ) {
       if ( mRecentTools == mRecentPoint ) {
         mRecentTools = mRecentLine;
@@ -7726,7 +7733,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** switch to the current toolbar
    */
-  void setToolsToolbars()
+  private void setToolsToolbars()
   {
     // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
     // if ( TDSetting.mTripleToolbar ) {
@@ -7744,22 +7751,22 @@ public class DrawingWindow extends ItemDrawer
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.GONE );
         k = getCurrentPointIndex();
-        pointSelected( k, false );
+        pointSelected( mCurrentPoint, false );
         setHighlight( SymbolType.POINT, k );
       } else if ( mRecentTools == mRecentLine ) {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
         mLayoutToolsA.setVisibility( View.GONE );
         k = getCurrentLineIndex();
-        // TDLog.v("Current line index " + k );
-        lineSelected( k, false );
+        // TDLog.v("Set tools toolbars: Current line index " + k );
+        lineSelected( mCurrentLine, false );
         setHighlight( SymbolType.LINE, k );
       } else {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
         mLayoutToolsA.setVisibility( View.VISIBLE );
         k = getCurrentAreaIndex();
-        areaSelected( k, false );
+        areaSelected( mCurrentArea, false );
         setHighlight( SymbolType.AREA, k );
       }
     // }
@@ -7770,6 +7777,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
   {
+    // TDLog.v("set btn recent " + symbol );
     int index = -1;
     switch ( symbol ) {
       case SymbolType.POINT: 
@@ -7779,6 +7787,7 @@ public class DrawingWindow extends ItemDrawer
       case SymbolType.LINE: 
         setButtonRecent( mBtnRecentL, mRecentLine  );
         index = getCurrentLineIndex();
+        // TDLog.v("set btn recent line: current " + mCurrentLine + " index " + index );
         break;
       case SymbolType.AREA: 
         setButtonRecent( mBtnRecentA, mRecentArea  );
@@ -7801,7 +7810,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** get the index of the current line tool
-   * @return index of the current line tool
+   * @return index of the current line tool in the recent array
    */
   private int getCurrentLineIndex()
   {
@@ -7905,14 +7914,15 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  // @param k    index in the recent array
   @Override
   public void setLine( int k, boolean update_recent )
   {
-    // TDLog.v("AGE set line " + k + " update " + update_recent );
-    int index = BrushManager.getLineIndex( mRecentLine[k] );
-    if ( index >= 0 ) {
-      mCurrentLine = index;
-      lineSelected( index, update_recent );
+    int current = BrushManager.getLineIndex( mRecentLine[k] );
+    // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
+    if ( current >= 0 ) {
+      mCurrentLine = current;
+      lineSelected( current, update_recent );
       updateAge( k, mRecentLineAge );
     }
   }
