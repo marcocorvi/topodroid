@@ -62,40 +62,40 @@ public class TDConst
   public static final String[] mMimeType = {
     "application/octet-stream",  // 0 // Therion
     "application/tlx", // unused
-    "application/octet-stream",       // Compass
-    "application/octet-stream",       // Survex
-    "application/octet-stream",       // VisualTopo
+    "application/octet-stream", // Compass
+    "application/octet-stream", // Survex
+    "application/octet-stream", // VisualTopo
     "text/csv", // 5            // *CSV
     "application/dxf",          // *DXF
-    "application/xml",          // *cSurvey
-    "application/octet-stream",       // PocketTopo
-    "application/srv",
-    "application/vnd", // 10    // *KML
-    "application/plt",
+    "application/octet-stream", // *cSurvey
+    "application/octet-stream", // PocketTopo
+    "application/octet-stream", // Walls
+    "application/vnd",          // *KML
+    "application/octet-stream", // trackfile (.plt)
 
-    "image/png",        // 12   // *PNG
+    "image/png",                // 12 *PNG
     "image/svg+kml",            // *SVG
-    "application/th2",
-    "application/th3", // 15
+    "application/octet-stream", // Therion-2
+    "application/octet-stream", // Therion-3
 
-    "application/plg", // 16
-    "application/cav",
-    "application/grt",
-    "application/gtx",
-    "application/sur", // 20
-    "application/trb", // 21
-    "application/json",       // *Json
+    "application/octet-stream", // 16 Polygon (.cave)
+    "application/octet-stream", // Topo (.cav)
+    "application/octet-stream", // Grottolf
+    "application/octet-stream", // GhTopo
+    "application/octet-stream", // 20 WinKarst
+    "application/octet-stream", // 21 TopoRobot
+    "application/json",         // 22 *Json
     "application/shp",
     "application/xvi",
     "application/xml",          // 25 *Tunnel
-    "application/c3d",          // 26
+    "application/octet-stream", // 26
     "application/pdf",          // *PDF
     "application/octet-stream", // CaveSniper
     "application/octet_stream", // *trox
-    "application/zip", // 30
-    "application/gltf", // 31 glTF
-    "application/cgal", // 32 CGAL
-    "application/stl",  // 33 STL
+    "application/zip",          // 30
+    "application/octet-stream", // 31 glTF
+    "application/octet-stream", // 32 CGAL
+    "application/octet-stream", // 33 STL
     "application/octet-stream", // STL binary
     "application/octet-stream", // LAS binary
     "test/plain"                // 36 serialized

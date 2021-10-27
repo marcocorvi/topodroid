@@ -75,9 +75,9 @@ class ItemPickerDialog extends MyDialog
 
   //* private ListView    mList = null;
   private GridView    mList = null;
-  private GridView    mGrid  = null;
-  private GridView    mGridL = null;
-  private GridView    mGridA = null;
+  // private GridView    mGrid  = null;
+  // private GridView    mGridL = null;
+  // private GridView    mGridA = null;
   private ItemAdapter mPointAdapter = null;
   private ItemAdapter mLineAdapter  = null;
   private ItemAdapter mAreaAdapter  = null;
@@ -171,9 +171,9 @@ class ItemPickerDialog extends MyDialog
       mList = (GridView) findViewById(R.id.item_list);
       // mList.setOnItemClickListener( this );
       // * mList.setDividerHeight( 1 );
-      mGrid  = null;
-      mGridL = null;
-      mGridA = null;
+      // mGrid  = null;
+      // mGridL = null;
+      // mGridA = null;
 
       // LinearLayout recent_layout = (LinearLayout) findViewById( R.id.layout2 );
       // mRecent = new ItemButton[ TDSetting.mRecentNr ];
@@ -430,9 +430,9 @@ class ItemPickerDialog extends MyDialog
         if ( mList != null ) {
           mList.setAdapter( mAdapter );
           mList.invalidate();
-        } else if ( mGrid != null ) {
-          mGrid.setAdapter( mAdapter );
-          mGrid.invalidate();
+        // } else if ( mGrid != null ) {
+        //   mGrid.setAdapter( mAdapter );
+        //   mGrid.invalidate();
         }
       }
     // } else {
@@ -641,7 +641,7 @@ class ItemPickerDialog extends MyDialog
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
           TDLog.v( "item picker selected point " + mSelectedPoint );
-          mParent.get().pointSelected( mSelectedPoint, true );
+          mParent.get().pointSelected( mSelectedPoint, true ); // true = update tools toolbar
         }
         break;
       case SymbolType.LINE: 

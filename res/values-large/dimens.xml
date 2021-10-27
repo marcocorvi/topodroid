@@ -35,10 +35,10 @@
   <!-- UNUSED dimen name="divider">8dp</dimen -->
   <dimen name="dividerbig">15dp</dimen>
 
-  <string name="dimxp">2.4f</string>
-  <string name="dimxl">3.3f</string>
-  <string name="dimyl">2.9f</string>
+  <string name="dimxp">1.0f</string>
+  <string name="dimxl">1.3f</string>
+  <string name="dimyl">1.1f</string>
   <!-- string name="dimpd">3</string -->
-  <string name="dimmx">8</string>
-  <string name="dimmy">3</string>
+  <string name="dimmx">3</string> <!-- integer -->
+  <string name="dimmy">1</string>
 </resources>

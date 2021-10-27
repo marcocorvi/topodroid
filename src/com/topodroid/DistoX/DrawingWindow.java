@@ -146,10 +146,11 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_eraser_ok,
                         R.drawable.iz_select_ok };
 
-  private static final int IC_DOWNLOAD   = 3;
-  private static final int IC_BLUETOOTH  = 4;
-  private static final int IC_PLAN       = 7;
-  private static final int IC_DIAL       = 8;
+  private static final int IC_DOWNLOAD     =  3;
+  private static final int IC_BLUETOOTH    =  4;
+  private static final int IC_PLAN         =  7;
+  private static final int IC_DIAL         =  8;
+  private static final int IC_TOOLS_LINE   = 12;
   private static final int IC_SPLAYS_LINE  = 13;
   private static final int IC_CONT_NONE    = 14;  // index of continue-no icon
   private static final int IC_PREV         = 15;
@@ -185,6 +186,8 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_CONT_OFF      = IC_MEDIUM+23;
   private static final int IC_DELETE_ON     = IC_MEDIUM+24;
   private static final int IC_SPLAYS_POINT  = IC_MEDIUM+26;
+  private static final int IC_TOOLS_POINT   = IC_MEDIUM+27;
+  private static final int IC_TOOLS_AREA    = IC_MEDIUM+28;
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -221,7 +224,7 @@ public class DrawingWindow extends ItemDrawer
 
                         R.drawable.iz_undo,          // 10 DRAW Nr 3+5
                         R.drawable.iz_redo,          // 11
-                        R.drawable.iz_tools,         // 12
+                        R.drawable.iz_tools_line,    // 12
                         R.drawable.iz_splays_line,  
                         R.drawable.iz_cont_none,     // 14
 
@@ -262,6 +265,8 @@ public class DrawingWindow extends ItemDrawer
 			R.drawable.iz_delete,         // 23+24 do delete
                         R.drawable.iz_dial_on,        // 23+25 set dial
                         R.drawable.iz_splays_point,   // 23+26
+                        R.drawable.iz_tools_point,    // 23+27
+                        R.drawable.iz_tools_area,     // 23+28
                       };
   private static final int[] menus = {
                         R.string.menu_switch,     // 0
@@ -677,6 +682,9 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMselectArea;
   private BitmapDrawable mBMselectShot;
   private BitmapDrawable mBMselectStation;
+  private BitmapDrawable mBMtoolsPoint;
+  private BitmapDrawable mBMtoolsLine;
+  private BitmapDrawable mBMtoolsArea;
   // FIXME_AZIMUTH_DIAL 1,2
   private Bitmap mBMdial;
   private Bitmap mDialOn;
@@ -1857,6 +1865,9 @@ public class DrawingWindow extends ItemDrawer
     mBMdelete_on  = MyButton.getButtonBackground( this, res, izons[IC_DELETE_ON] );
     mBMsplays_line  = MyButton.getButtonBackground( this, res, izons[IC_SPLAYS_LINE] );
     mBMsplays_point = MyButton.getButtonBackground( this, res, izons[IC_SPLAYS_POINT] );
+    mBMtoolsPoint   = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_POINT] );
+    mBMtoolsLine    = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_LINE] );
+    mBMtoolsArea    = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_AREA] );
 
     if ( ! TDLevel.overExpert ) -- mNrButton3;
     mButton3 = new Button[ mNrButton3 + 1 ];      // EDIT
@@ -2184,9 +2195,8 @@ public class DrawingWindow extends ItemDrawer
 
 
     setToolsToolbarParams();
-    
-    setBtnRecentAll();
-    mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
+    // setBtnRecentAll(); done onStart
+    // mRecentTools = mRecentLine; // done onStart
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
@@ -2404,13 +2414,11 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // TDLog.v("Drawing Activity onStart " );
+    TDLog.v("Drawing Activity onStart " );
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
-    if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
-    // setLine( mCurrentLine, false );
-    setToolsToolbars();
+    setBtnRecentAll(); 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
   }
 
@@ -7697,7 +7705,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void rotateRecentToolset( )
   { 
-    // TDLog.v("rotate recent toolset");
+    TDLog.v("rotate recent toolset");
     if ( mRecentToolsForward ) {
       if ( mRecentTools == mRecentPoint ) {
         mRecentTools = mRecentLine;
@@ -7735,6 +7743,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setToolsToolbars()
   {
+    TDLog.v("set tools toolbars");
     // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
     // if ( TDSetting.mTripleToolbar ) {
     //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
@@ -7753,6 +7762,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentPointIndex();
         pointSelected( mCurrentPoint, false );
         setHighlight( SymbolType.POINT, k );
+        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsPoint );
       } else if ( mRecentTools == mRecentLine ) {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
@@ -7761,6 +7771,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("Set tools toolbars: Current line index " + k );
         lineSelected( mCurrentLine, false );
         setHighlight( SymbolType.LINE, k );
+        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsLine );
       } else {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
@@ -7768,6 +7779,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentAreaIndex();
         areaSelected( mCurrentArea, false );
         setHighlight( SymbolType.AREA, k );
+        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsArea );
       }
     // }
     mLayoutTools.invalidate();
@@ -7777,25 +7789,31 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
   {
-    // TDLog.v("set btn recent " + symbol );
+    TDLog.v("set btn recent " + symbol );
     int index = -1;
     switch ( symbol ) {
       case SymbolType.POINT: 
+        mRecentTools = mRecentPoint;
+        mSymbol = symbol;
         setButtonRecent( mBtnRecentP, mRecentPoint );
         index = getCurrentPointIndex();
         break;
       case SymbolType.LINE: 
+        mRecentTools = mRecentLine;
+        mSymbol = symbol;
         setButtonRecent( mBtnRecentL, mRecentLine  );
         index = getCurrentLineIndex();
         // TDLog.v("set btn recent line: current " + mCurrentLine + " index " + index );
         break;
       case SymbolType.AREA: 
+        mRecentTools = mRecentArea;
+        mSymbol = symbol;
         setButtonRecent( mBtnRecentA, mRecentArea  );
         index = getCurrentAreaIndex();
         break;
     }
     setToolsToolbars();
-    setHighlight( symbol, index );
+    // setHighlight( symbol, index ); // already done in setToolsToolbars
   }
 
   /** get the index of the current point tool
@@ -7840,6 +7858,10 @@ public class DrawingWindow extends ItemDrawer
     setButtonRecent( mBtnRecentP, mRecentPoint );
     setButtonRecent( mBtnRecentL, mRecentLine  );
     setButtonRecent( mBtnRecentA, mRecentArea  );
+
+    mRecentTools = mRecentLine; // by default the drawing tool is the wall-line
+    if ( mCurrentLine < 0 ) mCurrentLine = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    setToolsToolbars();
   }
 
   /** set the recent tools buttons
@@ -7871,7 +7893,7 @@ public class DrawingWindow extends ItemDrawer
   private void setHighlight( int type, int index )
   {
     if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
-      switch ( highlightType ) {
+      switch ( highlightType ) { // switch off highlighted symbol
         case SymbolType.POINT:
           mBtnRecentP[ highlightIndex ].highlight( false );
           break;
@@ -7919,7 +7941,7 @@ public class DrawingWindow extends ItemDrawer
   public void setLine( int k, boolean update_recent )
   {
     int current = BrushManager.getLineIndex( mRecentLine[k] );
-    // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
+    TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
     if ( current >= 0 ) {
       mCurrentLine = current;
       lineSelected( current, update_recent );
