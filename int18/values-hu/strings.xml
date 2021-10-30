@@ -1766,7 +1766,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cmenu_open">FÁJL MEGNYITÁS</string>
     <string name="cmenu_reset">VISSZAÁLLÍT</string>
 
-    <string name="cmenu_alpha">FELÜLET</string>
+    <string name="cmenu_alpha">FELSZÍN</string>
     <!-- UNUSED string name="cmenu_ble">BT MÉRÉSEK</string -->
     <string name="cmenu_viewpoint">NÉZŐPONT</string>
     <!-- UNUSED string name="cmenu_files">MÉRÉSEK</string -->
