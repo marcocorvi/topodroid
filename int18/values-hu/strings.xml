@@ -1763,21 +1763,21 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="cbtn_bind">Újraköt</string>
 
-    <string name="cmenu_open">Fájl megnyitás</string>
-    <string name="cmenu_reset">Visszaállít</string>
+    <string name="cmenu_open">FÁJL MEGNYITÁS</string>
+    <string name="cmenu_reset">VISSZAÁLLÍT</string>
 
-    <string name="cmenu_alpha">Felület</string>
-    <!-- UNUSED string name="cmenu_ble">BT mérések</string -->
-    <string name="cmenu_viewpoint">Nézőpont</string>
-    <!-- UNUSED string name="cmenu_files">Mérések</string -->
-    <!-- UNUSED string name="cmenu_frame">Keret</string -->
-    <!-- UNUSED string name="cmenu_color">Szín</string -->
-    <string name="cmenu_info">Infó</string>
-    <string name="cmenu_ico">3D-Rózsa diagramm</string>
-    <string name="cmenu_rose">Rózsa diagramm</string>
-    <string name="cmenu_wall">Fal modellek</string>
-    <string name="cmenu_sketch">Vázlatok</string>
-    <!-- UNUSED string name="cmenu_fractal">Fraktál számítás</string -->
+    <string name="cmenu_alpha">FELSZÍN</string>
+    <!-- UNUSED string name="cmenu_ble">BT MÉRÉSEK</string -->
+    <string name="cmenu_viewpoint">NÉZŐPONT</string>
+    <!-- UNUSED string name="cmenu_files">MÉRÉSEK</string -->
+    <!-- UNUSED string name="cmenu_frame">KERET</string -->
+    <!-- UNUSED string name="cmenu_color">SZÍN</string -->
+    <string name="cmenu_info">INFÓ</string>
+    <string name="cmenu_ico">3D-RÓZSA DIAGRAMM</string>
+    <string name="cmenu_rose">RÓZSA DIAGRAMM</string>
+    <string name="cmenu_wall">FALAK</string>
+    <string name="cmenu_sketch">VÁZLATOK</string>
+    <!-- UNUSED string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 
     <string name="fractal_title">Fraktál számítás</string>
     <string name="info_title">INFO</string>
