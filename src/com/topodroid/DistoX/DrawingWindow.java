@@ -137,8 +137,8 @@ public class DrawingWindow extends ItemDrawer
                                     , IPhotoInserter
                                     , IAudioInserter
 {
-  private static final int ZOOM_TRANSLATION_1 = -50; // was -42
-  private static final int ZOOM_TRANSLATION_3 = -200;
+  public static final int ZOOM_TRANSLATION_1 = -50; // was -42
+  // public static final int ZOOM_TRANSLATION_3 = -200;
   private static int ZOOM_TRANSLATION   = ZOOM_TRANSLATION_1;
  
   private static final int[] izons_ok = {
@@ -765,17 +765,27 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** change the origuin of the plot
+   * @param station   name of the new origin
+   */
   void setPlotOrigin( String station )
   {
     if ( PlotType.isAnySection( mType ) ) return;
     mApp_mData.updatePlotOrigin( TDInstance.sid, mPid1, station );
     mApp_mData.updatePlotOrigin( TDInstance.sid, mPid2, station );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+    String old_station = mPlot1.start;
     mPlot1.start = station;
     mPlot2.start = station;
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
     computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
+    NumStation st = mNum.getStation( old_station );
+    if ( st != null ) {
+      mDrawingSurface.shiftXSections( st );
+    // } else {
+    //   TDLog.v("not found old station " + old_station + " new " + station );
+    }
   }
 
   long getPlotType()   { return mType; }
@@ -2005,7 +2015,7 @@ public class DrawingWindow extends ItemDrawer
     // if ( TDSetting.mTripleToolbar ) {
     //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
     // } else {
-      ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
+    //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
     // }
     mZoomView.setTranslationY( ZOOM_TRANSLATION );
 
@@ -3982,21 +3992,20 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "on touch down. mode " + mMode + " " + mTouchMode );
 
     // TDLog.Log( TDLog.LOG_PLOT, "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " 
-    // TDLog.v( "Config DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " + yc + " / " + mBorderBottom );
-    // if ( mMode == MODE_DRAW ) border_ from -= mZoomTranslate;
+    // TDLog.v( "DOWN at X " + xc + " [" +TopoDroidApp.mBorderInnerLeft + " " + TopoDroidApp.mBorderInnerRight + "] Y " + yc + " [" + TopoDroidApp.mBorderTop + " " + TopoDroidApp.mBorderBottom + "]" );
 
-    float bottom = TopoDroidApp.mBorderBottom - mZoomTranslate;
-    if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
+    // float bottom = TopoDroidApp.mBorderBottom - mZoomTranslate;
+    // if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
 
-    if ( yc > bottom ) {
+    if ( yc > TopoDroidApp.mBorderBottom ) {
       if ( (mFixedZoom == 0) && mZoomBtnsCtrlOn && xc > TopoDroidApp.mBorderInnerLeft && xc < TopoDroidApp.mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
-      } else if ( TDSetting.mSideDrag ) {
+      } else if ( TDSetting.mSideDrag && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
         mTouchMode = MODE_ZOOM;
       }
-    } else if ( TDSetting.mSideDrag && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
+    } else if ( TDSetting.mSideDrag && (yc < TopoDroidApp.mBorderTop) && ( xc > TopoDroidApp.mBorderRight || xc < TopoDroidApp.mBorderLeft ) ) {
       mTouchMode = MODE_ZOOM;
       SelectionPoint sp = mDrawingSurface.hotItem();
       if ( sp != null && sp.type() == DrawingPath.DRAWING_PATH_POINT ) {
@@ -7753,7 +7762,7 @@ public class DrawingWindow extends ItemDrawer
     //   mLayoutToolsA.setVisibility( View.VISIBLE );
     // } else {
       int k = -1;
-      ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
+      // ZOOM_TRANSLATION = ZOOM_TRANSLATION_1;
       mZoomView.setTranslationY( ZOOM_TRANSLATION );
       if ( mRecentTools == mRecentPoint ) {
         mLayoutToolsP.setVisibility( View.VISIBLE );

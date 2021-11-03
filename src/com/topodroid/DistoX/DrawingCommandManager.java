@@ -287,16 +287,28 @@ public class DrawingCommandManager
     float xr = TopoDroidApp.mBorderRight;
     float ww = TopoDroidApp.mDisplayWidth;
     float hh = TopoDroidApp.mDisplayHeight;
-    path.moveTo( 0, 0);
-    path.lineTo( xl, 0 );
-    path.lineTo( xl, hh );
-    path.lineTo( 0,  hh );
-    path.lineTo( 0, 0);
-    path.moveTo( xr, 0);
-    path.lineTo( ww, 0 );
-    path.lineTo( ww, hh );
-    path.lineTo( xr,  hh );
-    path.lineTo( xr, 0);
+    float h8 = TopoDroidApp.mBorderTop;    // hh / 8;
+    float h7 = TopoDroidApp.mBorderBottom; // hh - h8;
+    path.moveTo(  0,  0);
+    path.lineTo( xl,  0);
+    path.lineTo( xl, h8);
+    path.lineTo(  0, h8);
+    path.lineTo(  0,  0);
+    path.moveTo(  0, h7);
+    path.lineTo( xl, h7);
+    path.lineTo( xl, hh);
+    path.lineTo(  0, hh);
+    path.lineTo(  0, h7);
+    path.moveTo( xr,  0);
+    path.lineTo( ww,  0);
+    path.lineTo( ww, h8);
+    path.lineTo( xr, h8);
+    path.lineTo( xr,  0);
+    path.moveTo( xr, h7);
+    path.lineTo( ww, h7);
+    path.lineTo( ww, hh);
+    path.lineTo( xr, hh);
+    path.lineTo( xr, h7);
     canvas.drawPath( path, BrushManager.sideDragPaint );
   }
 
@@ -1777,6 +1789,11 @@ public class DrawingCommandManager
     if ( scrap == null ) return false;
     DrawingIO.exportCave3DXSection( type, pw, scrap_name, azimuth, clino, scrap, center, V1, V2 );
     return true;
+  }
+
+  void shiftXSections( float x, float y )
+  {
+    for ( Scrap scrap : mScraps ) scrap.shiftXSections( x, y );
   }
 
 }

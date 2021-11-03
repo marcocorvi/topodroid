@@ -81,7 +81,7 @@ The <u>sketch window</u> has four interaction modes:
 </ul><br><p>
 
 Shift and zoom are possible even in <b>draw</b> and in <b>erase</b> mode using two fingers.
-If "side-drag" is enabled, the sketch can be shifted by "dragging" it from the left, right and bottom sides of the canvas.
+If "corner-drag" is enabled, the sketch can be shifted by "dragging" it from the corners of the canvas.
 Side bands are displayed as transparent gray.<br>
 Zoom controls can be enabled (either temporarily or permanently). If temporary, they show up when you tap at the bottom
 of the canvas in the middle.<br><p>
@@ -181,7 +181,7 @@ All exports generate two files, one for plan the other for profile, except <i>cS
 <ul style="margin-top=0">
   <!-- li><i>Drawing tool picker</i>: list, grid, or triple-grid view [default: list]</li -->
   <!-- li><i>Bottom toolbar</i>: single or triple [default: single]</li -->
-  <li><i>Side drag</i>: enable panning by side-drag</li>
+  <li><i>Corner drag</i>: enable panning by corner-drag</li>
   <li><i>Zoom controls</i>: specifies how zoom controls are displayed on multitouch devices [B]. The zoom controls can be hidden, displayed only for a short interval when the user tap the lower part of the screen in the middle, or shown all the time</li>
   <li><i>Horizontal x-sections</i> leg-clino threshold for horizontal x-sections (profile view).</li>
   <li><i>Midline check</i>: check if all the legs are attached to the midline [disabled]</li>
@@ -273,7 +273,9 @@ you should move one point to coincide with the other.<br>
 </ul>
 <br>
 
-When the joining is set to "continue" the last line that has been drawn can be modified as in Adobe Illustrator, ie, redrawing a piece of the line.
+When the joining is set to "continue" the last line that has been drawn can be modified as in Adobe Illustrator, ie,
+redrawing a piece of the line.<br>
+"Continue" affects the undo-stack, because the continued line can be moved to the top of the stack.
 <br><p>
 
 <div style="font-size:90%">

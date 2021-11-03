@@ -41,4 +41,6 @@
   <!-- string name="dimpd">1</string -->
   <string name="dimmx">3</string>
   <string name="dimmy">1</string>
+
+  <string name="dimorientation" translatable="false">60</string>
 </resources>

@@ -443,8 +443,7 @@ class ShotDialog extends MyDialog
     }
 
     if ( TDLevel.overExpert && TDSetting.mSplayClasses ) {
-      mRBsplay = new MyStateBox( mContext, 
-        R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended, R.drawable.iz_none );
+      mRBsplay = new MyStateBox( mContext, R.drawable.iz_plan_profile, R.drawable.iz_plan, R.drawable.iz_extended, R.drawable.iz_none );
       mRBsplay.setOnClickListener( this );
       nr_buttons ++;
     } // else mRBsplay = null;

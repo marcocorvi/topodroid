@@ -1535,8 +1535,8 @@ Refer to the web pages for details.\n
   <string name="pref_station_size_summary">Mărimea numelor stațiilor</string>
   <string name="pref_zoom_controls_title">Comenzi redimensionare</string>
   <string name="pref_zoom_controls_summary">Comenzi redimensionare(zoom) pe ecran multiatingere(multitouch)</string>
-  <string name="pref_side_drag_title">Tragere pe margini</string>
-  <string name="pref_side_drag_summary">Activează tragerea pe marginile ferestrei de schițare</string>
+  <!-- FIXME string name="pref_side_drag_title">Tragere pe margini</string -->
+  <!-- FIXME string name="pref_side_drag_summary">Activează tragerea pe marginile ferestrei de schițare</string -->
   <string name="pref_unit_grid_title">Unități schițare</string>
   <string name="pref_unit_grid_summary">Mărime celule ale caroiajului schiței</string>
   <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->

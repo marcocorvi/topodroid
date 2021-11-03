@@ -69,7 +69,9 @@ class PlotRenameDialog extends MyDialog
 
     mEtOrigin = (EditText) findViewById( R.id.et_station );
     mEtOrigin.setText( mStation );
-    if ( ! TDLevel.overExpert ) mEtOrigin.setInputType( 0 ); // 0 = not editable
+    // if ( ! TDLevel.overExpert ) {
+      mEtOrigin.setInputType( 0 ); // 0 = not editable
+    // }
 
     mBtnRename.setOnClickListener( this );
     mBtnBack.setOnClickListener( this );
@@ -104,12 +106,12 @@ class PlotRenameDialog extends MyDialog
         mParent.renamePlot( name );
       }
 
-      if ( TDLevel.overExpert ) {
-        String station = mEtOrigin.getText().toString();
-        if ( ! mStation.equals( station ) ) { // change origin name
-          mParent.setPlotOrigin( station );
-        }
-      }
+      // if ( TDLevel.overExpert ) {
+      //   String station = mEtOrigin.getText().toString();
+      //   if ( ! mStation.equals( station ) ) { // change origin name
+      //     mParent.setPlotOrigin( station );
+      //   }
+      // }
     } else if ( b == mBtnDelete ) {
       mParent.askDelete();
     } else if ( TDSetting.mPlotSplit && b == mBtnSplit ) {

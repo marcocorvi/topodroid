@@ -970,4 +970,12 @@ class DrawingSurface extends SurfaceView
     commandManager.clearXSectionOutline( name );
   }
 
+  // shift X-Sections in the plan and in the profile
+  void shiftXSections( NumStation st )
+  {
+    TDLog.v("shift X-Sections: " + st.e + " " + st.s + " " + st.h + " " + st.v );
+    mCommandManager1.shiftXSections( 20*(float)st.e, 20*(float)st.s );
+    mCommandManager2.shiftXSections( 20*(float)st.h, 20*(float)st.v );
+  }
+
 }

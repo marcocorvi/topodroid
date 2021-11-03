@@ -1572,8 +1572,8 @@ Refer to the web pages for details.\n
   <string name="pref_station_size_summary">Veľkosť názvu meračského bodu</string>
   <string name="pref_zoom_controls_title">Nastavenie tlačidla Zoom-u</string>
   <string name="pref_zoom_controls_summary">Nastavenia tlačidla zoomu</string>
-  <string name="pref_side_drag_title">Posun krezby v nákrese</string>
-  <string name="pref_side_drag_summary">Povolí bočný presun krezby v nákrese - po povolení voľby Bočný Posun v režime Kreslenia</string>
+  <!-- FIXME string name="pref_side_drag_title">Posun krezby v nákrese</string -->
+  <!-- FIXME string name="pref_side_drag_summary">Povolí bočný presun krezby v nákrese - po povolení voľby Bočný Posun v režime Kreslenia</string -->
   <string name="pref_unit_grid_title">Jednotky nákresu</string>
   <string name="pref_unit_grid_summary">Výber Jednotiek mriežky pri kreslení</string>
   <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->

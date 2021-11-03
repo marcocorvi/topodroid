@@ -32,6 +32,9 @@ public class MyOrientationWidget
   private ImageView mIVorientation;
   private Bitmap mBitmap = null;
   private Canvas mCanvas = null;
+  private static int mSide = 40;
+  private static int d2 = mSide/2;
+  private static int d4 = mSide/4;
 
   public int mOrient;
 
@@ -42,8 +45,12 @@ public class MyOrientationWidget
     SeekBar seekBar  = (SeekBar) parent.findViewById( R.id.seekbar );
     mIVorientation = (ImageView) parent.findViewById( R.id.image );
 
+    mSide = Integer.parseInt( parent.getContext().getResources().getString( R.string.dimorientation ) );
+    d2 = mSide/2;
+    d4 = mSide/4;
+
     if ( orientable ) {
-      mBitmap = Bitmap.createBitmap( 40, 40, Bitmap.Config.ARGB_8888);
+      mBitmap = Bitmap.createBitmap( mSide, mSide, Bitmap.Config.ARGB_8888);
       mCanvas = new Canvas( mBitmap );
       mIVorientation.setImageBitmap( mBitmap );
       drawOrientation();
@@ -70,7 +77,6 @@ public class MyOrientationWidget
 
   private void drawOrientation()
   {
-    int d = 20;
     // mTVorientation.setText( Integer.toString(mOrient) );
     mCanvas.drawColor( 0xff000000 );
     float c = TDMath.cosd( mOrient );
@@ -79,12 +85,12 @@ public class MyOrientationWidget
     float s135 = TDMath.sind( (mOrient+135) );
     float c225 = TDMath.cosd( (mOrient+225) );
     float s225 = TDMath.sind( (mOrient+225) );
-    float x1 = d+d*s;
-    float y1 = d-d*c;
+    float x1 = d2+d2*s;
+    float y1 = d2-d2*c;
     Paint paint = BrushManager.fixedBluePaint;
-    mCanvas.drawLine( d-d*s, d+d*c, x1, y1, paint );
-    mCanvas.drawLine( x1, y1, x1+10*s135, y1-10*c135, paint );
-    mCanvas.drawLine( x1, y1, x1+10*s225, y1-10*c225, paint );
+    mCanvas.drawLine( d2-d2*s, d2+d2*c, x1, y1, paint );
+    mCanvas.drawLine( x1, y1, x1+d4*s135, y1-d4*c135, paint );
+    mCanvas.drawLine( x1, y1, x1+d4*s225, y1-d4*c225, paint );
     mIVorientation.setImageBitmap( mBitmap );
     mIVorientation.invalidate();
   }

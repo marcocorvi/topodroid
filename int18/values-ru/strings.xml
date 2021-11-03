@@ -1541,8 +1541,8 @@
   <string name="pref_station_size_summary">Размер шрифта номеров пикетов</string>
   <string name="pref_zoom_controls_title">Отображение кнопки зума</string>
   <string name="pref_zoom_controls_summary">Управление отображением кнопки зум на абрисах</string>
-  <string name="pref_side_drag_title">Перетаскивание за край</string>
-  <string name="pref_side_drag_summary">Включить перетаскивание за край в окне абриса</string>
+  <!-- FIXME string name="pref_side_drag_title">Перетаскивание за край</string -->
+  <!-- FIXME string name="pref_side_drag_summary">Включить перетаскивание за край в окне абриса</string -->
   <string name="pref_unit_grid_title">Единицы изм. сетки на абрисах</string>
   <string name="pref_unit_grid_summary">Единицы измерения шага сетки на абрисах</string>
   <string name="pref_unit_measure_title">Ед. изм. линейки</string>

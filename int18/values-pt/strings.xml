@@ -1537,8 +1537,8 @@ Refer to the web pages for details.\n
   <string name="pref_station_size_summary">Tamanho do nome das bases</string>
   <string name="pref_zoom_controls_title">Controle zoom</string>
   <string name="pref_zoom_controls_summary">Controle do zoom em telas multitoque</string>
-  <string name="pref_side_drag_title">Arrasto lateral</string>
-  <string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string>
+  <!-- FIXME string name="pref_side_drag_title">Arrasto lateral</string -->
+  <!-- FIXME string name="pref_side_drag_summary">Habilitar o arrastamento lateral na área de desenho do croqui</string -->
   <string name="pref_unit_grid_title">Unidades croqui</string>
   <string name="pref_unit_grid_summary">Tamanho dos intervalos na grade do croqui</string>
   <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->

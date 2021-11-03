@@ -137,6 +137,7 @@ public class TopoDroidApp extends Application
   public static float mBorderLeft       = 0;
   public static float mBorderInnerRight = 4096;
   public static float mBorderInnerLeft  = 0;
+  public static float mBorderTop        = 0;
   public static float mBorderBottom     = 4096; // in DrawingWindow
 
   // static boolean isTracing = false;
@@ -713,7 +714,8 @@ public class TopoDroidApp extends Application
     mBorderLeft       = dim / 16;
     mBorderInnerRight = dim * 3 / 4;
     mBorderInnerLeft  = dim / 4;
-    mBorderBottom     = (dm.heightPixels * 7) / 8;
+    mBorderTop        = dm.heightPixels / 8;
+    mBorderBottom     = (dm.heightPixels * 7) / 8 + DrawingWindow.ZOOM_TRANSLATION_1;
     mDisplayWidth  = dm.widthPixels;
     mDisplayHeight = dm.heightPixels;
     // TDLog.v("ConfigChange set display params " + mDisplayWidth + " " + mDisplayHeight + " landscape " + landscape + " dim " + dim );

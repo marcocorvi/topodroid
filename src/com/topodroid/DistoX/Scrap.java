@@ -2587,4 +2587,17 @@ public class Scrap
     return null;
   }
 
+  void shiftXSections( float x, float y )
+  {
+    for ( ICanvasCommand cmd : mCurrentStack ) {
+      if ( cmd instanceof DrawingLinePath ) {
+        DrawingLinePath line = (DrawingLinePath)cmd;
+        if ( BrushManager.isLineSection( line.mLineType ) ) line.shiftBy( x, y );
+      } else if ( cmd instanceof DrawingPointPath ) {
+        DrawingPointPath point = (DrawingPointPath)cmd;
+        if ( BrushManager.isPointSection( point.mPointType ) ) point.shiftBy( x, y );
+      }
+    }
+  }
+
 }

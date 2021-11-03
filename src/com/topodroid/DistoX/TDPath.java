@@ -527,11 +527,21 @@ public class TDPath
     TDFile.renameFile( old_tdr, new_tdr );
     old_tdr = old_tdr + TDPath.BCK_SUFFIX;
     new_tdr = new_tdr + TDPath.BCK_SUFFIX;
+    File file1 = TDFile.getTopoDroidFile( old_tdr ); // DistoX-SAF
+    File file2 = TDFile.getTopoDroidFile( new_tdr );
+    if ( ( ! file1.exists() ) || file2.exists() ) return;
+    if ( ! file1.renameTo( file2 ) ) {
+      TDLog.Error("bck file rename failed");
+      return;
+    }
     for ( int i=0; ; ++i ) {
-      File file1 = TDFile.getTopoDroidFile( old_tdr + i ); // DistoX-SAF
-      File file2 = TDFile.getTopoDroidFile( new_tdr + i );
+      file1 = TDFile.getTopoDroidFile( old_tdr + i ); // DistoX-SAF
+      file2 = TDFile.getTopoDroidFile( new_tdr + i );
       if ( ( ! file1.exists() ) || file2.exists() ) break;
-      if ( ! file1.renameTo( file2 ) ) TDLog.Error("file rename failed");
+      if ( ! file1.renameTo( file2 ) ) {
+        TDLog.Error("bck" + i + " file rename failed");
+        break;
+      }
     }
   }
 

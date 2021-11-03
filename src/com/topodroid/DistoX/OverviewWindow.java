@@ -1024,11 +1024,11 @@ public class OverviewWindow extends ItemDrawer
           mZoomBtnsCtrl.setVisible( true );
           // mZoomCtrl.show( );
           return true;
-        } else if ( TDSetting.mSideDrag ) {
+        } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
           mTouchMode = MODE_ZOOM;
           return true;
         }
-      } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
+      } else if ( TDSetting.mSideDrag && (y_canvas < TopoDroidApp.mBorderTop) && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
         mTouchMode = MODE_ZOOM;
         return true;
       }
