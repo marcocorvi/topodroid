@@ -734,6 +734,14 @@ public class TopoDroidApp extends Application
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
 
     // TDLog.Profile("TDApp onCreate");
+    boolean hasTopoDroidDir = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid" ).exists();
+    boolean hasTDXDir =  TDFile.hasExternalDir(null);
+    TDLog.v( "Has external dir: " + hasTDXDir + " " + TDFile.hasExternalDir("TopoDroid") );
+    TDLog.v( "Has old TopoDroid dir: " + hasTopoDroidDir );
+    if ( hasTopoDroidDir && ! hasTDXDir ) {
+      TDPath.moveTo6( this );
+    }
+
     TDVersion.setVersion( this );
     TDPrefHelper prefHlp = new TDPrefHelper( this );
 
@@ -773,8 +781,6 @@ public class TopoDroidApp extends Application
 
     // TDLog.v( "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
 
-    mHasTDX = TDFile.hasCBD();
-    TDLog.v("Has TDX " + mHasTDX );
   }
 
   static boolean done_init_env_second = false;
