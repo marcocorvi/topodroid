@@ -12,6 +12,8 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.R;
 
@@ -45,7 +47,10 @@ public class MyOrientationWidget
     SeekBar seekBar  = (SeekBar) parent.findViewById( R.id.seekbar );
     mIVorientation = (ImageView) parent.findViewById( R.id.image );
 
-    mSide = Integer.parseInt( parent.getContext().getResources().getString( R.string.dimorientation ) );
+    // mSide = Integer.parseInt( parent.getContext().getResources().getString( R.string.dimorientation ) );
+    // mSide = seekBar.getHeight(); seekbar height is 0 at this point
+    mSide = TopoDroidApp.getDisplayDensityDpi() / 8;
+    // TDLog.v("Side " + mSide );
     d2 = mSide/2;
     d4 = mSide/4;
 

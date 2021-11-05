@@ -2531,6 +2531,27 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   public List< String > selectAllPlotNames( String survey )
+   {
+     List< String > list = new ArrayList<>();
+     if ( myDB == null ) return list;
+
+     Cursor cursor = myDB.query( SURVEY_TABLE, new String[] { "id" }, "name=?", new String[] { survey }, null, null, "id" );
+     if ( ! cursor.moveToFirst()) return list;
+     String sid = Long.toString( cursor.getLong(0) );
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+
+     cursor = myDB.query( PLOT_TABLE, new String[] { "name" }, "sid=?", new String[] { sid }, null, null, "id" );
+     if (cursor.moveToFirst()) {
+       do {
+         list.add( cursor.getString(0) );
+       } while (cursor.moveToNext());
+     }
+     // TDLog.Log( TDLog.LOG_DB, "select All Plots list size " + list.size() );
+     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     return list;
+   }
+
    List< PlotInfo > selectAllPlots( long sid )
    {
      return doSelectAllPlots( sid, 
@@ -2538,7 +2559,6 @@ public class DataHelper extends DataSetObservable
                               new String[] { Long.toString(sid) }
      );
    }
-
 
    List< PlotInfo > selectAllPlots( long sid, long status )
    {

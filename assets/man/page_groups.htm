@@ -13,12 +13,18 @@ Deleted data have negative group number, therefore setting group number -1 amoun
 
 You can assign the group number to each calibration data by hand (with the <i>Calibration data edit</i> dialog),
 or let TopoDroid assign the group numbers for you.
+<br><p>
+
 There are two automatic group assignment policies:
 <ol>
 <li><i>TopoDroid</i>: four data at a time for each group;</li>
 <li><i>PocketTopo</i>: four-at-a-time for the first 16 data (four groups), then each data is a group by itself;</li>
 <!-- li>groups based on the relative angle distance (direction difference).</li -->
 </ol>
+<br>
+The two policies gives equivalent calibrations, but
+with <i>TopoDroid</i> policy the app can compute the deviation of the calibrated data from the expected values, 
+on more data, and create a more populated histogram of residual errors.
 <br><p>
 
 Actions:

@@ -26,6 +26,7 @@ import java.util.Locale;
 
 import android.content.Context;
 import android.os.Environment;
+import android.widget.TextView;
 
 public class TDPath
 {
@@ -1093,6 +1094,75 @@ public class TDPath
         return filename;
       }
     }
+  }
+
+  // ---------------------------------------------------------------
+  // transfer from 5.1.40 to 60.1.xx
+  public static void moveTo6( Context context, TextView tv )
+  {
+    if ( TDFile.hasCBD() ) return;
+
+    File cbd = TDFile.getCBD( null, true );
+    if ( ! cbd.exists() ) {
+      TDLog.Error("failed create CBD");
+      tv.setText("failed to create TDX folder");
+      return;
+    }
+    tv.setText("moving app files to /sdcard/Android/data/com.topodroid.DistoX");
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/device10.sqlite", "/sdcard/Android/data/com.topodroid.DistoX/files/device10.sqlite" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/symbol/point", "/sdcard/Android/data/com.topodroid.DistoX/files/point" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/symbol/line", "/sdcard/Android/data/com.topodroid.DistoX/files/line" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/symbol/area", "/sdcard/Android/data/com.topodroid.DistoX/files/area" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/symbol/bin", "/sdcard/Android/data/com.topodroid.DistoX/files/bin" );
+    // TDFile.renameFile( "/sdcard/Documents/TopoDroid/symbol/man", "/sdcard/Android/data/com.topodroid.DistoX/files/man" );
+
+    File cwd = TDFile.getCBD( "TopoDroid", true );
+    if ( ! cwd.exists() ) {
+      TDLog.Error("failed create CWD");
+      tv.setText("failed to create TopoDroid subfolder");
+      return;
+    }
+    tv.setText("moving project files to /sdcard/Documents/TDX/TopoDroid");
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/distox14.sqlite", "/sdcard/Documents/TDX/TopoDroid/distox14.sqlite" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/zip", "/sdcard/Documents/TDX/TopoDroid/zip" );
+    TDFile.renameFile( "/sdcard/Documents/TopoDroid/thconfig", "/sdcard/Documents/TDX/TopoDroid/thconfig" );
+
+    // open database and create survey folders, and move survey files
+    DataHelper db = new DataHelper( context );
+    List<String> surveys = db.selectAllSurveys( );
+    for ( String survey : surveys ) {
+      tv.setText("moving survey " + survey );
+      File tdrs2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/tdr" );
+      tdrs2.mkdirs();
+      // move all tdr files of the survey
+      List<String> plots = db.selectAllPlotNames( survey );
+      for ( String plot : plots ) {
+        File tdr1 =  TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/tdr/" + survey + "-" + plot + ".tdr" );
+        if ( tdr1.exists() ) {
+          File tdr2 =  TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/tdr/" + survey + "-" + plot + ".tdr" );
+          tdr1.renameTo( tdr2 );
+        }
+      }
+
+      File audio1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/audio/" + survey );
+      if ( audio1.exists() ) {
+        File audio2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/audio" );
+        audio1.renameTo( audio2 );
+      }
+
+      File photo1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/photo/" + survey );
+      if ( photo1.exists() ) {
+        File photo2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/photo" );
+        photo1.renameTo( photo2 );
+      }
+
+      File note1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/note/" + survey + ".txt" );
+      if ( note1.exists() ) {
+        File note2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + ".txt" );
+        note1.renameTo( note2 );
+      }
+    }
+    tv.setText("done");
   }
 
 }

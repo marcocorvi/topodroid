@@ -29,30 +29,30 @@ public class TDLocale
 {
   public static final boolean FIXME_LOCALE = true;
 
-  static Locale mLocale;
-  static String mLocaleStr;
+  static Locale mLocale = null;
+  static String mLocaleStr = null;
 
   public static Locale getLocale() { return mLocale; }
 
   public static String getLocaleCode() { return mLocale.toString().substring(0,2); }
 
   // called by MainWindow
-  public static void /* Context */ resetLocale( )
+  public static void resetLocale( )
   {
+    TDLog.v( "reset locale str <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
-    if ( android.os.Build.VERSION.SDK_INT >= 17 ) {
+    // if ( android.os.Build.VERSION.SDK_INT >= 17 ) { // minSdkVersion is 18
       Configuration conf = new Configuration( res.getConfiguration() );
       conf.setLocale( mLocale );
       // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
       res.updateConfiguration( conf, dm );
-    } else {
-      Configuration conf = res.getConfiguration();
-      conf.locale = mLocale; 
-      res.updateConfiguration( conf, dm );
-    }
-    // return TDInstance.context;
+    // } else {
+    //   Configuration conf = res.getConfiguration();
+    //   conf.locale = mLocale; 
+    //   res.updateConfiguration( conf, dm );
+    // }
   }
 
   // called by TDSetting

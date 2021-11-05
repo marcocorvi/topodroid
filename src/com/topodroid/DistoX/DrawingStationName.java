@@ -167,8 +167,8 @@ public class DrawingStationName extends DrawingPointPath
   String getCoordsString()
   {
     if ( mStation == null ) return null;
-    // east north vertical (downward)
-    return String.format(Locale.US, "E %.2f N %.2f V %.2f", mStation.e, -mStation.s, mStation.v );
+    // east north Z-vertical (upward)
+    return String.format(Locale.US, "E %.2f N %.2f Z %.2f", mStation.e, -mStation.s, -mStation.v );
   }
 
   @Override

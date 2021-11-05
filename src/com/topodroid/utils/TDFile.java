@@ -129,7 +129,7 @@ public class TDFile
   public static File getPacketDatabase() { return getPrivateFile( null, "packet10.sqlite" ); }
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
-  private static File getCBD( String type, boolean create )
+  public static File getCBD( String type, boolean create )
   {
     File ret = null;
     if ( type == null ) {
@@ -143,6 +143,12 @@ public class TDFile
     }
     return ret;
     //
+  }
+
+  public static boolean hasCBD() 
+  {
+    File ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX" );
+    return ret != null && ret.exists();
   }
 
   public static File getExternalDir( String type ) { return getCBD( type, true ); }

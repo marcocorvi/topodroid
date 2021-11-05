@@ -61,7 +61,7 @@ class DrawingPointDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
-  private MyOrientationWidget mOrientationWidget;
+  private MyOrientationWidget mOrientationWidget = null;
  
   private Button   mBtnOk;
   private Button   mBtnCancel;
@@ -108,7 +108,6 @@ class DrawingPointDialog extends MyDialog
     }
 
     mOrientationWidget = new MyOrientationWidget( this, mOrientable, mPoint.mOrientation );
-
 
     // if ( BrushManager.isPointSection( mPoint.mPointType ) ) {
     //   // FIXME SECTION_RENAME
@@ -214,7 +213,7 @@ class DrawingPointDialog extends MyDialog
       //   }
       // }
 
-      if ( mOrientable ) {
+      if ( mOrientable ) { // if ( mOrientationWidget != null ) 
         mPoint.setOrientation( mOrientationWidget.mOrient );
         // TDLog.v( "Point type " + mPoint.mPointType + " orientation " + mPoint.mOrientation );
       }

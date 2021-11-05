@@ -123,6 +123,7 @@ public class TopoDroidApp extends Application
 
   boolean mWelcomeScreen;  // whether to show the welcome screen (used by MainWindow)
   boolean mSetupScreen;    // whether to show the welcome screen (used by MainWindow)
+  boolean mHasTDX;         // whether there is TDX folder
   static boolean mCheckManualTranslation = false;
   // static String mManual;  // manual url
 
@@ -771,6 +772,9 @@ public class TopoDroidApp extends Application
     // mManual = getResources().getString( R.string.topodroid_man );
 
     // TDLog.v( "W " + mDisplayWidth + " H " + mDisplayHeight + " D " + density );
+
+    mHasTDX = TDFile.hasCBD();
+    TDLog.v("Has TDX " + mHasTDX );
   }
 
   static boolean done_init_env_second = false;
@@ -1352,8 +1356,9 @@ public class TopoDroidApp extends Application
 
   private void setDefaultSocketType( )
   {
-    String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
-    TDPrefHelper.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
+    // String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
+    // TDPrefHelper.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
+    TDPrefHelper.update( "DISTOX_SOCK_TYPE", 1 ); // UNSECURE
   }
 
   static void setCWDPreference( String cwd, String cbd )
@@ -1840,6 +1845,17 @@ public class TopoDroidApp extends Application
     return id;
   }
 
+  /**
+   * @param at       station where to add (?)
+   * @param splay_station station of the splays (?)
+   * @param left     left splay 
+   * @param right    right splay 
+   * @param up       up splay 
+   * @param down     down splay 
+   * @param bearing       leg azimuth
+   * @param horizontal    whether WENS or LRUD
+   * @param ret_success   ...
+   */
   private long addManualSplays( long at, String splay_station, String left, String right, String up, String down,
                                 float bearing, boolean horizontal, boolean ret_success )
   {
@@ -1983,6 +1999,18 @@ public class TopoDroidApp extends Application
 
   /** insert manual-data shot
    * @param at   id of the shot before which to insert the new shot (and LRUD)
+   * @param from     from station
+   * @param to       to station
+   * @param distance shot length
+   * @param bearing  shot aimuth
+   * @param clino    shot clino
+   * @param extend0  extend
+   * @param flag0    flags
+   * @param left     left splay 
+   * @param right    right splay 
+   * @param up       up splay 
+   * @param down     down splay 
+   * @param splay_station station of splay shots
    * 
    * NOTE manual shots take into account the instruents calibrations
    *      LRUD are not affected
@@ -2215,6 +2243,14 @@ public class TopoDroidApp extends Application
 
   // ----------------------------------------------------------------------
 
+  /** insert a new 2D plot
+   * @param sid      survey ID
+   * @param name     plot name
+   * @param start    plot base station (origin)
+   * @param extended whether the plot is extended profile
+   * @param project  projection angle (for profile)
+   * @return plot ID
+   */
   public long insert2dPlot( long sid , String name, String start, boolean extended, int project )
   {
     // PlotInfo.ORIENTATION_PORTRAIT = 0
@@ -2241,6 +2277,7 @@ public class TopoDroidApp extends Application
    * @param clino    projected profile clino / section plane direction 
    * @param parent   name of parent plot
    * @param nickname
+   * @return XSection plot ID
    * 
    * @note the database field "hide" is overloaded for x_sections with the parent plot name
    */
@@ -2423,6 +2460,7 @@ public class TopoDroidApp extends Application
   // DISTOX PAIRING
   // cannot be static because register/unregister are not static
 
+  // active pairing request
   static PairingRequest mPairingRequest = null;
 
   public static void checkAutoPairing()
@@ -2435,6 +2473,8 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** terminate a pairing request, if any
+   */
   void stopPairingRequest()
   {
     if ( mPairingRequest != null ) {
@@ -2444,6 +2484,8 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** start a pairing request, if none is ongoing
+   */
   private void startPairingRequest()
   {
     if ( mPairingRequest == null ) {
@@ -2494,18 +2536,18 @@ public class TopoDroidApp extends Application
   // ==================================================================
   // PATH_11
 
-  static void setPath11NoAgain()
-  {
-    if ( mDData != null ) mDData.setValue( "Path11", "1" );
-  }
+  // static void setPath11NoAgain()
+  // {
+  //   if ( mDData != null ) mDData.setValue( "Path11", "1" );
+  // }
 
-  static boolean hasPath11NoAgain()
-  {
-    if ( mDData != null ) {
-      String no_again = mDData.getValue( "Path11" );
-      return ( no_again != null && no_again.equals("1") );
-    }
-    return false;
-  }
+  // static boolean hasPath11NoAgain()
+  // {
+  //   if ( mDData != null ) {
+  //     String no_again = mDData.getValue( "Path11" );
+  //     return ( no_again != null && no_again.equals("1") );
+  //   }
+  //   return false;
+  // }
 
 }
