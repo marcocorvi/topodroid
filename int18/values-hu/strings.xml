@@ -1577,8 +1577,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_station_size_summary">Mérési pontok nevének betűmérete</string>
   <string name="pref_zoom_controls_title">Nagyítás</string>
   <string name="pref_zoom_controls_summary">Nagyítás multi-touch-nál </string>
-  <!-- FIXME string name="pref_side_drag_title">Vonszolás</string -->
-  <!-- FIXME string name="pref_side_drag_summary">Vonszolás engedélyezése a vázlat nézetben</string -->
+  <string name="pref_side_drag_title">Sarok vonszolás</string>
+  <string name="pref_side_drag_summary">Sarok vonszolás engedélyezése a vázlat nézetben</string>
   <string name="pref_unit_grid_title">Vázlat rácsegységei</string>
   <string name="pref_unit_grid_summary">Vázlat rácshálójának méretezése</string>
   <string name="pref_unit_measure_title">Vonalzó egység</string>
