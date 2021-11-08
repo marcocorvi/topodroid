@@ -32,19 +32,18 @@ public class FixedInfo extends MagLatLong
   long   id;       // fixed id
   long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
   String name;     // station name, or whatever
-  // double lat;      // latitude [decimal deg]
-  // double lng;      // longitude [decimal deg]
+  // double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
+  // double lng;      // wgs84 longitude [decimal deg]
   double alt;      // wgs84 altitude [m]
   double asl;      // geoid altitude [m] 
   String comment;
-  String cs;
-  double cs_lng;
-  double cs_lat;
-  double cs_alt;
-  long   cs_n_dec;
+  String cs;       // coordinate system
+  double cs_lng;   // longitude / east
+  double cs_lat;   // latitude / north
+  double cs_alt;   // altitude
+  long   cs_n_dec; // number of decimals in lng/lat
 
-  FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
-                    String cmt, long src )
+  FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src )
   {
     id = _id;
     name = n;
@@ -58,8 +57,7 @@ public class FixedInfo extends MagLatLong
   }
 
   FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid,
-                    String cmt, long src,
-                    String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
+                    String cmt, long src, String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
   {
     id = _id;
     name = n;
@@ -76,6 +74,13 @@ public class FixedInfo extends MagLatLong
     cs_n_dec = (n_dec >= 0)? n_dec : 0;
   }
 
+  /** set converted coordinates
+   * @param name_cs   coordinate system
+   * @param lng_cs    longitude / east
+   * @param lat_cs    latitude / north
+   * @param alt_cs    altitude
+   * @param n_dec     number of decimals in lng/lat
+   */
   void setCSCoords( String name_cs, double lng_cs, double lat_cs, double alt_cs, long n_dec )
   {
     cs = name_cs;
@@ -87,6 +92,8 @@ public class FixedInfo extends MagLatLong
     }
   }
 
+  /** reset converted coordinates
+   */
   void clearConverted()
   {
     cs = null;
@@ -96,6 +103,9 @@ public class FixedInfo extends MagLatLong
     cs_n_dec = 2L;
   }
 
+  /** test if this fixed has converted coordinates
+   * @return true if converted coord system is not null
+   */
   boolean hasCSCoords() { return ( cs != null && cs.length() > 0 ); }
 
   // public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid )

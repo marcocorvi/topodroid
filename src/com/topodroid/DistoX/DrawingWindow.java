@@ -3538,7 +3538,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
-        // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id )  );
+        TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id ) + " " + TDSetting.mStylusSize );
         if ( rawEvent.getToolMajor( id ) < TDSetting.mStylusSize ) {
           break;
         }

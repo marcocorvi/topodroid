@@ -13,10 +13,18 @@ package com.topodroid.tdm;
 
 class TdmStation
 {
-  String mName;
-  float e, s, h, v;
+  String mName;      // name
+  float e, s, h, v;  // 3D+H coordinates
   TdmSurvey mSurvey; // survey this station belongs to
 
+  /** cstr
+   * @param name     station name
+   * @param e0       east coord
+   * @param s0       south coord 
+   * @param h0       horizontal
+   * @param v0       vertical (downwards)
+   * @param survey   parent survey
+   */
   TdmStation( String name, float e0, float s0, float h0, float v0, TdmSurvey survey )
   {
     mName = name;
@@ -27,6 +35,9 @@ class TdmStation
     mSurvey = survey;
   }
 
+  /** get the station full-name
+   * @return the station fullname
+   */
   String getFullName() 
   {
     if ( mName.indexOf('@') > 0 ) {
@@ -35,6 +46,9 @@ class TdmStation
     return mName + '@' + mSurvey.getFullName();
   }
 
+  /** get the station name
+   * @return the station name
+   */
   String getName()
   {
     return mName; 

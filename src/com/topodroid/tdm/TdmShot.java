@@ -23,6 +23,15 @@ public class TdmShot
   int mExtend;
   TdmSurvey mSurvey;  // survey this shot belongs to
 
+  /** cstr
+   * @param f       FROM station name
+   * @param t       TO station name
+   * @param l       length
+   * @param b       bearing (azimuth)
+   * @param c       clino
+   * @param e       extend
+   * @param survey  the survey of this shot
+   */
   public TdmShot( String f, String t, float l, float b, float c, int e, TdmSurvey survey )
   {
     mFrom = f;
@@ -36,6 +45,13 @@ public class TdmShot
     mSurvey = survey;
   }
 
+  /** cstr (FROM and TO stations are set null)
+   * @param l       length
+   * @param b       bearing (azimuth)
+   * @param c       clino
+   * @param e       extend
+   * @param survey  the survey of this shot
+   */
   public TdmShot( float l, float b, float c, int e, TdmSurvey survey )
   {
     mFrom = null;
@@ -49,10 +65,16 @@ public class TdmShot
     mSurvey = survey;
   }
 
+  /** set stations
+   * @param fs FROM station 
+   * @param ts TO station
+   */
   void setStations( TdmStation fs, TdmStation ts )
   {
     mFromStation = fs;
     mToStation   = ts;
+    mFrom = (fs == null)? null : fs.mName;
+    mTo   = (ts == null)? null : ts.mName;
   }
 
 }

@@ -88,6 +88,10 @@ class GPS implements LocationListener
           // setGPSoff();
           locManager = null;
           // TDLog.Error( TODO );
+        } catch ( UnsupportedOperationException e ) {
+          mStatus = null;
+          locManager = null;
+          // TDLog.Error( TODO );
         }
       }
     }

@@ -1117,10 +1117,10 @@ public class MainWindow extends Activity
             TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {
             filename = uri.getLastPathSegment();
-            int pos = filename.lastIndexOf(".");
+            int pos = filename.lastIndexOf("."); 
             int qos = filename.lastIndexOf("/");
-            String ext  = filename.substring( pos ).toLowerCase(); // extension with leading '.'
-            String name = filename.substring( qos+1, pos );
+            String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase() : ""; // extension with leading '.'
+            String name = (pos > qos )? filename.substring( qos+1, pos ) : filename.substring( qos+1 );
             String surveyname = name;
             TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {

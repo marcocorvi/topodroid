@@ -1506,8 +1506,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_plane_interpolation_summary">Enable plane interpolation action</string>
   <string name="pref_plot_split_title">Sketch split/merge</string>
   <string name="pref_plot_split_summary">Enable sketch split and merge actions</string>
-  <string name="pref_stylus_size_title">Stylus size</string>
-  <string name="pref_stylus_size_summary">Stylus size [0: ignore]</string>
+  <string name="pref_stylus_size_title">Stylus only drawing</string>
+  <string name="pref_stylus_size_summary">Stylus maximum size [0: ignore]</string>
   <string name="pref_fixed_thickness_title">Survey line width</string>
   <string name="pref_fixed_thickness_summary">Survey line width</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->

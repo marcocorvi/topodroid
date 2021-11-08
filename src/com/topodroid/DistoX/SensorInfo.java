@@ -16,16 +16,15 @@ class SensorInfo
   long sid;       // survey id
   long id;        // photo id
   long shotid;    // shot id
-  String mTitle;   // sensor title
+  String mTitle;     // sensor title
   String mShotName; // shot name
-  String mDate;
-  String mComment;
-  String mType;    // sensor type
-  String mValue;   // sensor value
+  String mDate;     // data
+  String mComment;  // comment
+  String mType;     // sensor type
+  String mValue;    // sensor value
   // public String mUnit;
 
-  SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment,
-                     String type, String value )
+  SensorInfo( long _sid, long _id, long _shotid, String title, String shotname, String date, String comment, String type, String value )
   {
     sid    = _sid;
     id     = _id;

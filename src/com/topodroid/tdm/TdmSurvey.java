@@ -30,6 +30,7 @@ public class TdmSurvey
   TdmStation mStartStation;
   SurveyInfo mInfo = null;
   boolean    mLoadedData = false;
+  float      mDeclination;
 
   ArrayList< TdmShot >    mShots;
   ArrayList< TdmStation > mStations;
@@ -37,6 +38,9 @@ public class TdmSurvey
   ArrayList< TdmEquate >  mEquates;
   // ArrayList< TdFix >     mFixes;
 
+  /** cstr
+   * @param name    survey name
+   */
   TdmSurvey( String name )
   {
     mName   = name;
@@ -46,8 +50,13 @@ public class TdmSurvey
     mSurveys  = new ArrayList< TdmSurvey >();
     mEquates  = new ArrayList< TdmEquate >();
     // mFixes    = new ArrayList< TdFix >();
+    mDeclination = 0;
   }
 
+  /** cstr
+   * @param name    survey name
+   * @param parent  survey parent
+   */
   TdmSurvey( String name, TdmSurvey parent )
   {
     mName   = name;
@@ -57,8 +66,15 @@ public class TdmSurvey
     mSurveys  = new ArrayList< TdmSurvey >();
     mEquates  = new ArrayList< TdmEquate >();
     // mFixes    = new ArrayList< TdFix >();
+    mDeclination = 0;
   }
 
+  /** get a child survey
+   * @param ns     survey namespace
+   * @param pos    survey position in the namespace (0 = immediate child)
+   * @return the child survey, or null if not found
+   * @note recursive
+   */
   TdmSurvey getSurvey( String[] ns, int pos )
   {
     String name = ns[pos];
@@ -71,6 +87,13 @@ public class TdmSurvey
     return null;
   }
 
+  /** load survey from the database
+   * @param data    database helper
+   *
+   * @note declination is saved in a class field - it could be added to the shot bearing here
+   *       however it is added when the stations coords are computed 
+   *       @see computeStations()
+   */
   void loadSurveyData( DataHelper data ) 
   {
     if ( mLoadedData ) return;
@@ -78,6 +101,7 @@ public class TdmSurvey
       mInfo = data.getSurveyInfo( mName );
     }
     if ( mInfo != null ) {
+      mDeclination = mInfo.declination;
       List< DBlock > blks = data.getSurveyReducedData( mInfo.id );
       for ( DBlock blk : blks ) {
         addShot( blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino, blk.getIntExtend() );
@@ -90,16 +114,28 @@ public class TdmSurvey
 
   // void addFix( TdFix fix ) { mFixes.add( fix ); }
 
+  /** add an equate to the survey
+   * @param equate   equate to add
+   */
   void addEquate( TdmEquate equate ) { mEquates.add( equate ); }
 
+  /** add a sub-survey to the survey
+   * @param survey   sub-survey to add
+   */
   void addSurvey( TdmSurvey survey )
   {
     mSurveys.add( survey );
     survey.mParent = this;
   }
 
+  /** get the last-name of the survey
+   * @return the survey name
+   */
   String getName()   { return mName; }
 
+  /** get the full name of the survey: "last_name.parent_full_name"
+   * @return the survey full-name
+   */
   String getFullName() 
   { 
     if ( mParent != null ) {
@@ -108,6 +144,9 @@ public class TdmSurvey
     return mName;
   }
 
+  /** get survey id
+   * @return the survey id in the database table, or -1 if the survey is not from the database
+   */
   long getId() 
   {
     if ( mInfo == null ) return -1;
@@ -126,6 +165,14 @@ public class TdmSurvey
 
   // void addShot( TdmShot shot ) { mShots.add( shot ); }
 
+  /** add a shot to the survey
+   * @param from     FROM station
+   * @param to       TO station
+   * @param d        length
+   * @param b        bearing (azimuth)
+   * @param c        clino
+   * @param e        extend (integer)
+   */
   void addShot( String from, String to, float d, float b, float c, int e )
   {
     mShots.add( new TdmShot( from, to, d, b, c, e, this ) );
@@ -166,8 +213,8 @@ public class TdmSurvey
           // angles are already in radians
           float h = (float)Math.cos( sh.mClino ) * sh.mLength;
           float v = (float)Math.sin( sh.mClino ) * sh.mLength;
-          float e =   h * (float)Math.sin( sh.mBearing );
-          float s = - h * (float)Math.cos( sh.mBearing );
+          float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
+          float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
           ts = new TdmStation( sh.mTo, e, s, h*sh.mExtend, v, this );
           mStations.add( ts );
           sh.setStations( fs, ts );
@@ -179,8 +226,8 @@ public class TdmSurvey
             if ( ts == null ) {  // FROM --> TO 
               float h = (float)Math.cos( sh.mClino ) * sh.mLength;
               float v = (float)Math.sin( sh.mClino ) * sh.mLength;
-              float e =   h * (float)Math.sin( sh.mBearing );
-              float s = - h * (float)Math.cos( sh.mBearing );
+              float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
+              float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
               ts = new TdmStation( sh.mTo, fs.e+e, fs.s+s, fs.h+h*sh.mExtend, fs.v+v, this );
               mStations.add( ts );
               repeat = true;
@@ -191,8 +238,8 @@ public class TdmSurvey
           } else if ( ts != null ) {
             float h = (float)Math.cos( sh.mClino ) * sh.mLength;
             float v = (float)Math.sin( sh.mClino ) * sh.mLength;
-            float e =   h * (float)Math.sin( sh.mBearing );
-            float s = - h * (float)Math.cos( sh.mBearing );
+            float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
+            float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
             fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
             mStations.add( fs );
             sh.setStations( fs, ts );
@@ -207,8 +254,8 @@ public class TdmSurvey
 		  if ( ( fs = getStation( st ) ) != null ) {
                     float h = (float)Math.cos( sh.mClino ) * sh.mLength;
                     float v = (float)Math.sin( sh.mClino ) * sh.mLength;
-                    float e =   h * (float)Math.sin( sh.mBearing );
-                    float s = - h * (float)Math.cos( sh.mBearing );
+                    float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
+                    float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
                     ts = new TdmStation( sh.mTo, fs.e+e, fs.s+s, fs.h+h*sh.mExtend, fs.v+v, this );
                     mStations.add( ts );
                     sh.setStations( fs, ts );
@@ -221,8 +268,8 @@ public class TdmSurvey
 		  if ( ( ts = getStation( st ) ) != null ) {
                     float h = (float)Math.cos( sh.mClino ) * sh.mLength;
                     float v = (float)Math.sin( sh.mClino ) * sh.mLength;
-                    float e =   h * (float)Math.sin( sh.mBearing );
-                    float s = - h * (float)Math.cos( sh.mBearing );
+                    float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
+                    float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
                     fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
                     mStations.add( fs );
                     sh.setStations( fs, ts );
