@@ -138,7 +138,7 @@ public class TDFile
       ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX/" + type );
     } 
     if ( create && ret != null && ! ret.exists() ) {
-      TDLog.v( "mkdirs " + ret.getPath() );
+      TDLog.v( "mkdirs " + ret.getPath() + " type: " + ((type == null)? "null" : type) + " create: " + create );
       ret.mkdirs();
     }
     return ret;

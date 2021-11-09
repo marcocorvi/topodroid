@@ -3642,6 +3642,7 @@ public class DrawingWindow extends ItemDrawer
                                                             mDrawingSurface.scrapIndex() );
                 area.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                 if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
+                  TDLog.v("CLOSE BOTTOM " + (ys - mCurrentAreaPath.mFirst.y) );
                   LinePoint lp = mCurrentAreaPath.mFirst; 
                   float yy = lp.y;
                   mCurrentAreaPath.addPoint( xs, yy-0.001f );
@@ -3656,6 +3657,7 @@ public class DrawingWindow extends ItemDrawer
                   }
                   mCurrentAreaPath = area; // area is empty if not recreated
                 } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
+                  TDLog.v("CLOSE TOP " + (ys - mCurrentAreaPath.mFirst.y) );
                   LinePoint lp = mCurrentAreaPath.mFirst; 
                   float yy = lp.y;
                   mCurrentAreaPath.addPoint( xs, yy-0.001f );
@@ -3669,8 +3671,11 @@ public class DrawingWindow extends ItemDrawer
                     }
                   }
                   mCurrentAreaPath = area; // area is empty if not recreated
+                } else {
+                  TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) + " " + (xs - mCurrentAreaPath.mFirst.x) );
                 }
               } else {  
+                TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) );
                 if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
                   mCurrentAreaPath.addPoint( xs, ys );
                 }

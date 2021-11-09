@@ -43,4 +43,9 @@
   <string name="dimmy">1</string>
 
   <string name="dimorientation" translatable="false">60</string>
+
+  <string name="size_factor_xp" translatable="false">1.5</string>
+  <string name="size_factor_yp" translatable="false">1.5</string>
+  <string name="size_factor_xl" translatable="false">2.2</string>
+  <string name="size_factor_yl" translatable="false">1.7</string>
 </resources>

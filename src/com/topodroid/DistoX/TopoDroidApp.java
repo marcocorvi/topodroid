@@ -115,6 +115,9 @@ public class TopoDroidApp extends Application
   // static final String EMPTY = "";
   static private TopoDroidApp thisApp = null;
 
+  /** check if the app has the database helper
+   * @return true if the app has the database helper
+   */
   static boolean hasTopoDroidDatabase() 
   { 
     // return ( TDFile.getTopoDroidFile( TDPath.getDatabase() ).exists() );
@@ -739,6 +742,7 @@ public class TopoDroidApp extends Application
     TDLog.v( "Has external dir: " + hasTDXDir + " " + TDFile.hasExternalDir("TopoDroid") );
     TDLog.v( "Has old TopoDroid dir: " + hasTopoDroidDir );
     if ( hasTopoDroidDir && ! hasTDXDir ) {
+      TDLog.v("move to 6");
       TDPath.moveTo6( this );
     }
 

@@ -13,12 +13,33 @@ package com.topodroid.DistoX;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.SymbolType;
+import com.topodroid.utils.TDLog;
 
 import android.graphics.Paint;
 import android.graphics.Path;
 
 public class Symbol implements SymbolInterface
 {
+  private static boolean hasSizeFactors = false;
+  private static float sizeFactorXP = 1.5f;
+  private static float sizeFactorYP = 1.5f;
+  private static float sizeFactorXL = 2.2f;
+  private static float sizeFactorYL = 1.7f;
+
+  static void setSizeFactors()
+  { 
+    if ( hasSizeFactors ) return;
+    try {
+      sizeFactorXP = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_xp ) );
+      sizeFactorYP = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_yp ) );
+      sizeFactorXL = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_xl ) );
+      sizeFactorYL = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_yl ) );
+    } catch ( NumberFormatException e ) {
+      TDLog.v("SIZE FACTORS exception " + e.getMessage() );
+    }
+    hasSizeFactors = true;
+  }
+
   public static final int W2D_NONE       = 0; // Walls roundtrip values
   public static final int W2D_WALLS_SHP  = 1;
   public static final int W2D_WALLS_SYM  = 2;
@@ -124,8 +145,8 @@ public class Symbol implements SymbolInterface
   public boolean setAngle( float angle ) { return false; }
   public int getAngle() { return 0; }
 
-  static float sizeX( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 2.2f; }
-  static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * 1.5f : TDSetting.mUnitIcons * 1.7f; }
+  static float sizeX( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * sizeFactorXP : TDSetting.mUnitIcons * sizeFactorXL; }
+  static float sizeY( int type ) { return ( type == SymbolType.POINT )? TDSetting.mUnitIcons * sizeFactorYP : TDSetting.mUnitIcons * sizeFactorYL; }
 
   static String deprefix_u( String name ) { return (name == null)? null : (name.startsWith("u:"))? name.substring(2) : name; }
 

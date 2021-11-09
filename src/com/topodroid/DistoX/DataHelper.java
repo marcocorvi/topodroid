@@ -185,12 +185,24 @@ public class DataHelper extends DataSetObservable
 
   public boolean hasDB() { return myDB != null; }
 
+  /** cstr: open default database (in the current work directory)
+   * @param context context
+   */
   // public DataHelper( Context context, TopoDroidApp app, DataListenerSet listeners ) // IF_COSURVEY
   public DataHelper( Context context /* , TopoDroidApp app */ )
   {
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     openDatabase( context );
+  }
+
+  /** cstr
+   * @param context context
+   * @param db_path database pathname
+   */
+  public DataHelper( Context context, String db_path )
+  {
+    openDatabase( context, db_path ); // true = readonly
   }
 
   void closeDatabase()
@@ -200,119 +212,147 @@ public class DataHelper extends DataSetObservable
     myDB = null;
   }
 
+  /** open default database
+   * @param context context
+   */
   void openDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( TopoDroidApp.hasTopoDroidDatabase() ) {
-      TDLog.v( "DB file " + db_name + " exists");
+      TDLog.v( "App has database helper " + db_name );
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
-        int oldVersion = myDB.getVersion();
-        int newVersion = TDVersion.DATABASE_VERSION;
-        TDLog.v( "opened existing database: old version " + oldVersion + " current version " + newVersion );
-        if ( oldVersion != newVersion ) {
-          DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-          myDB.setVersion( TDVersion.DATABASE_VERSION );
+        if ( myDB != null ) {
+          int oldVersion = myDB.getVersion();
+          int newVersion = TDVersion.DATABASE_VERSION;
+          TDLog.v( "opened existing database: old version " + oldVersion + " current version " + newVersion );
+          if ( oldVersion < newVersion ) {
+            DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+            myDB.setVersion( TDVersion.DATABASE_VERSION );
+          }
         }
       } catch ( SQLiteException e ) {
+        TDLog.Error( "opened database error: " + e.getMessage() );
         myDB = null;
       }
     } else {
-      TDLog.v( "App does not have DB file " + db_name + " - trying to open it");
+      TDLog.v( "App does not have database helper " + db_name + " - trying to open it");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-        // TDLog.v( "open and create new database if necessary");
-        DistoXOpenHelper.createTables( myDB );
-        myDB.setVersion( TDVersion.DATABASE_VERSION );
+        if ( myDB != null ) {
+          TDLog.v( "open and create new database if necessary");
+          DistoXOpenHelper.createTables( myDB );
+          myDB.setVersion( TDVersion.DATABASE_VERSION );
+        }
       } catch ( SQLiteException e ) {
+        TDLog.Error( "opened database error: " + e.getMessage() );
         myDB = null;
-        logError( "DataHelper cstr failed to get DB", e );
       }
     }
-
-    // DistoXOpenHelper openHelper = new DistoXOpenHelper( context, db_name );
-    // try {
-    //   myDB = openHelper.getWritableDatabase();
-    //   if ( myDB == null ) {
-    //     TDLog.Error( "failed get writable database" );
-    //     // return;
-    //   }
-
-    //   // while ( myDB.isDbLockedByOtherThreads() ) {
-    //   //   TDUtil.slowDown( 200 );
-    //   // }
-
-    //   // updateConfig = myDB.compileStatement( "UPDATE configs SET value=? WHERE key=?" );
-
-    // } catch ( SQLiteException e ) {
-    //   myDB = null;
-    //   logError( "DataHelper cstr failed to get DB", e );
-    // }
   }
 
-   private void fillBlockRawData( long sid, RawDBlock blk, Cursor cursor )
-   {
-     blk.mId           = cursor.getLong(0);
-     blk.mSurveyId     = sid;
-     blk.mFrom         = cursor.getString(1);
-     blk.mTo           = cursor.getString(2);
-     blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
-     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
-     blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
-     blk.mRoll         = (float)( cursor.getDouble(6) );  // clino [degrees], or depth [meters]
-     blk.mAcceleration = (float)( cursor.getDouble(7) );
-     blk.mMagnetic     = (float)( cursor.getDouble(8) );
-     blk.mDip          = (float)( cursor.getDouble(9) );
-     blk.mShotType     = (int)(  cursor.getLong(10) );
-     blk.mTime         = (long)( cursor.getLong(11) );
-     blk.mAddress      = cursor.getString(12);
-     blk.mExtend       = (int)(  cursor.getLong(13) );
-     blk.mFlag         = cursor.getLong(14);
-     blk.mLeg          = (int)(  cursor.getLong(15) );
-     blk.mStatus       = (int)(  cursor.getLong(16) );
-     blk.mComment      = cursor.getString( 17 );
-   }
+  /** open a given database file
+   * @param context    context
+   * @param db_name    database path
+   */
+  private void openDatabase( Context context, String db_name )
+  {
+    try {
+      TDLog.v( "opened database, skip check");
+      myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
+      if ( myDB != null ) {
+        int oldVersion = myDB.getVersion();
+        int newVersion = TDVersion.DATABASE_VERSION;
+        TDLog.v( "opened readonly database: old version " + oldVersion + " current version " + newVersion );
+        if ( oldVersion < newVersion ) {
+          DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+          myDB.setVersion( TDVersion.DATABASE_VERSION );
+        }
+      }
+    } catch ( SQLiteException e ) {
+      TDLog.Error( "opened database error: " + e.getMessage() );
+      myDB = null;
+    }
+  }
 
-   private void fillBlock( long sid, DBlock blk, Cursor cursor )
-   {
-     long leg = cursor.getLong(11);
-     blk.setId( cursor.getLong(0), sid );
-     blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
-     blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
-     // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
-     blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
-     float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
-     blk.mAcceleration = (float)( cursor.getDouble(6) );
-     blk.mMagnetic     = (float)( cursor.getDouble(7) );
-     blk.mDip          = (float)( cursor.getDouble(8) );
+  /** fill a raw data block with values from the cursor
+   * @param sid     survey ID
+   * @param blk     raw data block
+   * @param cursor  values cursor
+   */
+  private void fillBlockRawData( long sid, RawDBlock blk, Cursor cursor )
+  {
+    blk.mId           = cursor.getLong(0);
+    blk.mSurveyId     = sid;
+    blk.mFrom         = cursor.getString(1);
+    blk.mTo           = cursor.getString(2);
+    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+    blk.mClino        = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
+    blk.mRoll         = (float)( cursor.getDouble(6) );  // clino [degrees], or depth [meters]
+    blk.mAcceleration = (float)( cursor.getDouble(7) );
+    blk.mMagnetic     = (float)( cursor.getDouble(8) );
+    blk.mDip          = (float)( cursor.getDouble(9) );
+    blk.mShotType     = (int)(  cursor.getLong(10) );
+    blk.mTime         = (long)( cursor.getLong(11) );
+    blk.mAddress      = cursor.getString(12);
+    blk.mExtend       = (int)(  cursor.getLong(13) );
+    blk.mFlag         = cursor.getLong(14);
+    blk.mLeg          = (int)(  cursor.getLong(15) );
+    blk.mStatus       = (int)(  cursor.getLong(16) );
+    blk.mComment      = cursor.getString( 17 );
+  }
 
-     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
-       blk.mClino = clino;
-       blk.mDepth = 0;
-     } else { // DATAMODE_DIVING
-       blk.mClino = 0;
-       blk.mDepth = clino;
-     }
-     
-     blk.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
-     blk.resetFlag( cursor.getLong(10) );
-     blk.setBlockType( (int)leg );
-     blk.mComment  = cursor.getString(12);
-     blk.setShotType( (int)cursor.getLong(13) );
-     blk.mTime     = cursor.getLong(14);
-     blk.setPaintColor( (int)cursor.getLong(15) ); // color
-     // blk.setStretch( (float)cursor.getDouble(16) ); // already set above
-     // blk.setAddress( null ); 
-   }
-   
-   private void fullFillBlock( long sid, DBlock blk, Cursor cursor )
-   {
-     fillBlock( sid, blk, cursor );
-     blk.setAddress( cursor.getString(17) );
-   }
+  /** fill a data block with values from the cursor
+   * @param sid     survey ID
+   * @param blk     data block
+   * @param cursor  values cursor
+   */
+  private void fillBlock( long sid, DBlock blk, Cursor cursor )
+  {
+    long leg = cursor.getLong(11);
+    blk.setId( cursor.getLong(0), sid );
+    blk.setBlockName( cursor.getString(1), cursor.getString(2), (leg == LegType.BACK) );  // from - to
+    blk.mLength       = (float)( cursor.getDouble(3) );  // length [meters]
+    // blk.setBearing( (float)( cursor.getDouble(4) ) ); 
+    blk.mBearing      = (float)( cursor.getDouble(4) );  // bearing [degrees]
+    float clino       = (float)( cursor.getDouble(5) );  // clino [degrees], or depth [meters]
+    blk.mAcceleration = (float)( cursor.getDouble(6) );
+    blk.mMagnetic     = (float)( cursor.getDouble(7) );
+    blk.mDip          = (float)( cursor.getDouble(8) );
 
-   // ----------------------------------------------------------------------
-   // SURVEY DATA
+    if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
+      blk.mClino = clino;
+      blk.mDepth = 0;
+    } else { // DATAMODE_DIVING
+      blk.mClino = 0;
+      blk.mDepth = clino;
+    }
+    
+    blk.setExtend( (int)(cursor.getLong(9) ), (float)( cursor.getDouble(16) ) );
+    blk.resetFlag( cursor.getLong(10) );
+    blk.setBlockType( (int)leg );
+    blk.mComment  = cursor.getString(12);
+    blk.setShotType( (int)cursor.getLong(13) );
+    blk.mTime     = cursor.getLong(14);
+    blk.setPaintColor( (int)cursor.getLong(15) ); // color
+    // blk.setStretch( (float)cursor.getDouble(16) ); // already set above
+    // blk.setAddress( null ); 
+  }
+  
+  /** fill a data block with values from the cursor - including the address
+   * @param sid     survey ID
+   * @param blk     data block
+   * @param cursor  values cursor
+   */
+  private void fullFillBlock( long sid, DBlock blk, Cursor cursor )
+  {
+    fillBlock( sid, blk, cursor );
+    blk.setAddress( cursor.getString(17) );
+  }
+
+  // ----------------------------------------------------------------------
+  // SURVEY DATA
 
   // private static String qInitStation  = "select init_station from surveys where id=?";
   // private static String qXSections    = "select xsections from surveys where id=?";
@@ -2541,7 +2581,7 @@ public class DataHelper extends DataSetObservable
      String sid = Long.toString( cursor.getLong(0) );
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-     cursor = myDB.query( PLOT_TABLE, new String[] { "name" }, "sid=?", new String[] { sid }, null, null, "id" );
+     cursor = myDB.query( PLOT_TABLE, new String[] { "name" }, "surveyId=?", new String[] { sid }, null, null, "id" );
      if (cursor.moveToFirst()) {
        do {
          list.add( cursor.getString(0) );
@@ -3383,7 +3423,7 @@ public class DataHelper extends DataSetObservable
   String getValue( String key )
   {
     if ( myDB == null ) {
-      // TDLog.Error( "DataHelper::getValue null DB");
+      // TDLog.Error( "Data Helper::getValue null DB");
       return null;
     }
     if ( key == null || key.length() == 0 ) { // this is not an error
@@ -3411,15 +3451,15 @@ public class DataHelper extends DataSetObservable
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
-      // TDLog.Error( "DataHelper::setValue null DB");
+      // TDLog.Error( "Data Helper::setValue null DB");
       return;
     }
     if ( key == null || key.length() == 0 ) {
-      TDLog.Error( "DataHelper::setValue null key");
+      TDLog.Error( "Data Helper::setValue null key");
       return;
     }
     if ( value == null || value.length() == 0 ) {
-      TDLog.Error( "DataHelper::setValue null value");
+      TDLog.Error( "Data Helper::setValue null value");
       return;
     }
 

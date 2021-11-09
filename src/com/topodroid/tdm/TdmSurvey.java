@@ -101,7 +101,7 @@ public class TdmSurvey
       mInfo = data.getSurveyInfo( mName );
     }
     if ( mInfo != null ) {
-      mDeclination = mInfo.declination;
+      mDeclination = mInfo.getDeclination();
       List< DBlock > blks = data.getSurveyReducedData( mInfo.id );
       for ( DBlock blk : blks ) {
         addShot( blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino, blk.getIntExtend() );

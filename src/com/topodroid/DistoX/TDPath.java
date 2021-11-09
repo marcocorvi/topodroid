@@ -18,8 +18,12 @@ import android.os.Build;
 // import android.provider.DocumentsContract;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 
 import java.util.List;
 import java.util.Locale;
@@ -1097,49 +1101,68 @@ public class TDPath
   }
 
   // ---------------------------------------------------------------
-  // transfer from 5.1.40 to 60.1.xx
+  /** transfer from 5.1.40 to 6.1.xx
+   * @param context    context
+   * @note when this function is called the external TDX dir does not exists
+   */
   public static void moveTo6( Context context /* , TextView tv */ )
   {
-    if ( TDFile.hasExternalDir(null) ) return;
+    // if ( TDFile.hasExternalDir(null) ) {
+    //   TDLog.v("MOVE TO 6 has already external dir CBD");
+    //   return;
+    // }
+    final boolean dry_run = false;
 
+    TDLog.v("MOVE TO 6 create CBD");
     File cbd = TDFile.getExternalDir( null );
     if ( ! cbd.exists() ) {
-      TDLog.Error("failed create CBD");
+      TDLog.Error("MOVE TO 6 failed create CBD");
       // if ( tv != null) tv.setText("failed to create TDX folder");
       return;
     }
 
+    TDLog.v("MOVE TO 6");
     // if ( tv != null ) tv.setText("moving app files to /sdcard/Android/data/com.topodroid.DistoX");
     File priv_dir = TDFile.getPrivateDir( null );
     File f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/device10.sqlite" );
-    if ( f.exists() ) f.renameTo( new File( priv_dir, "device10.sqlite" ) );
+    copyFile( f, new File( priv_dir, "device10.sqlite" ), dry_run );
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/symbol/point" );
-    if ( f.exists() ) f.renameTo( new File( priv_dir, "point" ) );
+    copyDir( f, new File( priv_dir, "point" ), dry_run );
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/symbol/line" );
-    if ( f.exists() ) f.renameTo( new File( priv_dir,  "line" ) );
+    copyDir( f, new File( priv_dir,  "line" ), dry_run );
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/symbol/area" );
-    if ( f.exists() ) f.renameTo( new File( priv_dir,  "area" ) );
-    f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/symbol/bin" );
-    if ( f.exists() ) f.renameTo( new File( priv_dir,  "bin" ) );
+    copyDir( f, new File( priv_dir,  "area" ), dry_run );
+
+    f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/bin" );
+    copyDir( f, new File( priv_dir,  "bin" ), dry_run );
+
     // f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/symbol/man" );
-    // if ( f.exists() ) f.renameTo( new File( priv_dir,  "man" ) );
+    // copyDir( f, new File( priv_dir,  "man" ), dry_run );
 
     File cwd = TDFile.getExternalDir( "TopoDroid" );
     if ( ! cwd.exists() ) {
-      TDLog.Error("failed create TopoDroid subfolder");
+      TDLog.Error("MOVE TO 6: failed create TopoDroid subfolderi CWD");
       // if ( tv != null) tv.setText("failed to create TopoDroid subfolder");
       return;
     }
     // if ( tv != null ) tv.setText("moving project files to /sdcard/Documents/TDX/TopoDroid");
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/distox14.sqlite" );
-    if ( f.exists() ) f.renameTo( new File( cwd, "distox14.sqlite" ) );
+    File f2 = new File( cwd, "distox14.sqlite" );
+    copyFile( f, f2, dry_run );
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/zip" );
-    if ( f.exists() ) f.renameTo( new File( cwd, "zip" ) );
+    copyDir( f, new File( cwd, "zip" ), dry_run );
+
     f = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/thconfig" );
-    if ( f.exists() ) f.renameTo( new File( cwd, "thconfig" ) );
+    copyDir( f, new File( cwd, "thconfig" ), dry_run );
 
     // open database and create survey folders, and move survey files
-    DataHelper db = new DataHelper( context );
+    TDLog.v("MOVE TO 6: database " + f2.getAbsolutePath() );
+    DataHelper db = new DataHelper( context, f2.getAbsolutePath() );
     List<String> surveys = db.selectAllSurveys( );
     for ( String survey : surveys ) {
       // if ( tv != null ) tv.setText("moving survey " + survey );
@@ -1150,30 +1173,104 @@ public class TDPath
       for ( String plot : plots ) {
         String plot_name = survey + "-" + plot + ".tdr";
         f =  TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/tdr/" + plot_name );
-        if ( f.exists() ) {
-          f.renameTo( new File( tdr, plot_name ));
-        }
+        copyFile( f, new File( tdr, plot_name ), dry_run );
       }
 
       File audio1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/audio/" + survey );
       if ( audio1.exists() ) {
         File audio2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/audio" );
-        audio1.renameTo( audio2 );
+        copyDir( audio1, audio2, dry_run );
       }
 
       File photo1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/photo/" + survey );
       if ( photo1.exists() ) {
         File photo2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/photo" );
-        photo1.renameTo( photo2 );
+        copyDir( photo1, photo2, dry_run );
       }
 
       File note1 = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid/note/" + survey + ".txt" );
       if ( note1.exists() ) {
         File note2 = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + ".txt" );
-        note1.renameTo( note2 );
+        copyFile( note1, note2, dry_run );
       }
     }
     // if ( tv != null ) tv.setText("done");
   }
+
+  /** copy a directory or create it (if not dry_run)
+   * @param in    input directory
+   * @param out   output directory
+   */
+  private static boolean copyDir( File in, File out, boolean dry_run )
+  {
+    if ( ! in.exists() ) {
+      TDLog.v("Dir " + in.getPath() + " does not exist");
+      return true;
+    }
+    if ( ! in.isDirectory() ) {
+      TDLog.v("Dir " + in.getPath() + " is not directory");
+      return true;
+    }
+    if ( ! dry_run ) {
+      if ( ! out.exists() ) {
+        if ( ! out.mkdirs() ) return false;
+      }
+      if ( ! out.isDirectory() ) return false;
+    } else {
+      TDLog.v("Copy Dir " + in.getName() + " -> " + out.getName() + " dry run");
+    }
+    boolean ret = true;
+    for ( File file1 : in.listFiles() ) {
+      File file2 = new File( out, file1.getName() );
+      ret &= copyFile( file1, file2, dry_run );
+    }
+    return ret;
+  }
+
+  private static boolean copyFile( File in, File out, boolean dry_run )
+  {
+    if ( !in.exists() ) {
+      TDLog.v("File " + in.getPath() + " does not exist");
+      return true;
+    }
+    if ( !in.isFile() ) {
+      TDLog.v("File " + in.getPath() + " is not regular");
+      return true;
+    }
+    if ( dry_run ) {
+      TDLog.v("Copy File " + in.getName() + " -> " + out.getName() + " dry run");
+      return true;
+    }
+
+    byte[] buf = new byte[4096];
+    if ( buf == null ) {
+      TDLog.v("failed alloc buffer");
+      return false;
+    }
+    int len;
+    int tot_len = 0;
+    try {
+      FileInputStream fis = new FileInputStream( in );
+      FileOutputStream fos = new FileOutputStream( out );
+      while ( (len = fis.read( buf, 0, 4096 )) > 0 ) {
+        tot_len += len;
+        fos.write( buf, 0, len );
+      }
+      fos.flush();
+      fos.close();
+      fis.close();
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error("File error " + e.getMessage() );
+      return false;
+    } catch ( IOException e ) {
+      TDLog.Error("IO error " + e.getMessage() );
+      return false;
+    }
+    TDLog.v("Copied File " + in.getName() + " -> " + out.getName() + " length " + tot_len );
+    return true;
+  }
+ 
+
+
 
 }

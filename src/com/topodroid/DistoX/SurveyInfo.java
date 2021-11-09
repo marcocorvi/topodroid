@@ -68,16 +68,16 @@ public class SurveyInfo
   void setExtend( int extend ) { mExtend = TDMath.in360( extend ); }
 
 
-  boolean hasDeclination() { return declination < DECLINATION_MAX; }
+  public boolean hasDeclination() { return declination < DECLINATION_MAX; }
 
   // get the declination or 0 if not-defined
-  float getDeclination()
+  public float getDeclination()
   {
     if ( declination < DECLINATION_MAX ) return declination;
     return 0;
   }
 
-  static float declination( EditText et )
+  public static float declination( EditText et )
   {
     float decl = DECLINATION_UNSET;
     if ( et != null && et.getText() != null ) {
