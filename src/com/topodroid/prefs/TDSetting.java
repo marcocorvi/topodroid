@@ -436,7 +436,7 @@ public class TDSetting
   public static boolean mDxfReference    = false;  // whether to include XY reference in the export 
   public static boolean mSavedStations   = false;
   // public static boolean mPlotCache       = true;  // default value
-  public static float mDotRadius      = 5;
+  public static float mDotRadius      = 5;  // radius of selection dots - splay dots are 1.5 as big
   public static float mArrowLength    = 8;
 
   // NOTE not used, but could set a default for section splays

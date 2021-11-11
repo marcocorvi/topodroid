@@ -15,11 +15,22 @@ import com.topodroid.DistoX.SelectionPoint;
 import com.topodroid.DistoX.BrushManager;
 
 import android.graphics.Path;
+import android.graphics.Paint;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 
 public class TDGreenDot
 {
+  /** draw a selection point, as a green dot
+   * @param canvas     canvas
+   * @param matrix     transform matrix
+   * @param pt         selection point
+   * @param dot_radius circle radius
+   *
+   * @note this function could be a forward to
+   *       draw( canvas, matrix, pt.mPoint.x, pt.mPoint.y, dot_radius, BrushManager.highlightPaint2 );
+   *       or pt.mItem.x etc.
+   */
   public static void draw( Canvas canvas, Matrix matrix, SelectionPoint pt, float dot_radius )
   {
     Path path = new Path();
@@ -30,6 +41,36 @@ public class TDGreenDot
     }
     path.transform( matrix );
     canvas.drawPath( path, BrushManager.highlightPaint2 );
+  }
+
+  /** draw a point, as a dot with the given paint
+   * @param canvas     canvas
+   * @param matrix     transform matrix
+   * @param x          X coordinate
+   * @param y          Y coordinate
+   * @param dot_radius circle radius
+   * @param paint      dot paint
+   */
+  public static void draw( Canvas canvas, Matrix matrix, float scale, float x, float y, float dot_radius, Paint paint )
+  {
+    Path path = new Path();
+    path.addCircle( x, y, dot_radius*scale, Path.Direction.CCW );
+    path.transform( matrix );
+    canvas.drawPath( path, paint );
+  }
+
+  /** draw a point, as a dot with the given paint
+   * @param canvas     canvas
+   * @param x          X coordinate
+   * @param y          Y coordinate
+   * @param dot_radius circle radius
+   * @param paint      dot paint
+   */
+  public static void draw( Canvas canvas, float scale, float x, float y, float dot_radius, Paint paint )
+  {
+    Path path = new Path();
+    path.addCircle( x, y, dot_radius*scale, Path.Direction.CCW );
+    canvas.drawPath( path, paint );
   }
 
 }

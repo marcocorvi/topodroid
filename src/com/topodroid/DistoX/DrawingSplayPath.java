@@ -20,6 +20,7 @@ package com.topodroid.DistoX;
 // import com.topodroid.num.TDNum;
 // import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.ui.TDGreenDot;
 
 // import java.io.PrintWriter;
 // import java.io.DataOutputStream;
@@ -43,8 +44,12 @@ public class DrawingSplayPath extends DrawingPath
 {
   static final int SPLAY_MODE_LINE  = 1;
   static final int SPLAY_MODE_POINT = 2;
-  static int mSplayMode = SPLAY_MODE_LINE;
+  static int mSplayMode = SPLAY_MODE_LINE; // splay display mode
 
+  float cx, cy; // drawing center = endpoint
+
+  /** toggle the display mode of splays , between LINE and POINT
+   */
   static int toggleSplayMode()
   {
     if ( mSplayMode == SPLAY_MODE_LINE ) {
@@ -56,11 +61,17 @@ public class DrawingSplayPath extends DrawingPath
     return mSplayMode;
   }
 
-  Path mPathB = null;
+  // Path mPathB = null;
 
+  /** cstr
+   * @param blk     splay data-block
+   * @param scrap   scrap index
+   */
   DrawingSplayPath( DBlock blk, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_SPLAY, blk, scrap );
+    cx = x2;
+    cy = y2;
   }
 
   /** make the path copying from another path
@@ -72,18 +83,28 @@ public class DrawingSplayPath extends DrawingPath
   void makePath( Path path, Matrix m, float off_x, float off_y )
   {
     super.makePath( path, m, off_x, off_y );
-    mPathB = new Path();
-    mPathB.addCircle( x2, y2, TDSetting.mLineThickness*2, Path.Direction.CCW );
-    mPathB.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
+    // mPathB = new Path();
+    // mPathB.addCircle( x2, y2, TDSetting.mDotRadius*1.5f, Path.Direction.CCW );
+    // mPathB.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
     // TDLog.v("splay make path with offset " + x1 + " " + y1 + " - " + x2 + " " + y2);
+    cx = x2 + off_x;
+    cy = y2 + off_y;
   }
 
+  /** make the path a straight line between the two endpoints
+   * @param x1   first endpoint X coord
+   * @param y1   first endpoint Y coord
+   * @param x2   second endpoint X coord
+   * @param y2   second endpoint Y coord
+   */
   void makePath( float x1, float y1, float x2, float y2 )
   {
     super.makePath( x1, y1, x2, y2 );
-    mPathB = new Path();
-    mPathB.addCircle( x2, y2, TDSetting.mLineThickness*2, Path.Direction.CCW );
+    // mPathB = new Path();
+    // mPathB.addCircle( x2, y2, TDSetting.mDotRadius*1.5f, Path.Direction.CCW );
     // TDLog.v("splay make path with endpoints " + x1 + " " + y1 + " - " + x2 + " " + y2);
+    cx = x2;
+    cy = y2;
   }
 
   // from ICanvasCommand
@@ -108,28 +129,51 @@ public class DrawingSplayPath extends DrawingPath
   //   mPathB.transform( m );
   // }
 
+  /** draw the splay on the canvas
+   * @param canvas   canvas
+   * @note the circle radius increases with the zoom
+   */
   @Override
   public void draw( Canvas canvas )
   {
-    drawPath( (mSplayMode == SPLAY_MODE_LINE )? mPath : mPathB, canvas );
-  }
-
-  @Override
-  public void draw( Canvas canvas, RectF bbox )
-  {
-    if ( intersects( bbox ) ) {
-      drawPath( (mSplayMode == SPLAY_MODE_LINE )? mPath : mPathB, canvas );
+    // drawPath( (mSplayMode == SPLAY_MODE_LINE )? mPath : mPathB, canvas );
+    if (mSplayMode == SPLAY_MODE_LINE ) {
+      drawPath( mPath, canvas );
+    } else {
+      TDGreenDot.draw( canvas, 1.0f, cx, cy, TDSetting.mDotRadius*1.5f, mPaint );
     }
   }
 
-  // N.B. canvas is guaranteed ! null
+  /** draw the splay on the canvas
+   * @param canvas   canvas
+   * @param bbox     clipping bounding box
+   */
+  @Override
+  public void draw( Canvas canvas, RectF bbox )
+  {
+    if ( intersects( bbox ) ) draw( canvas );
+  }
+
+  /** draw the splay on the canvas
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping bounding box
+   * 
+   * @note the circle radius is fixed and does not increase with the zoom
+   * @note canvas is guaranteed ! null
+   */
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      mTransformedPath = new Path( (mSplayMode == SPLAY_MODE_LINE )? mPath : mPathB );
-      mTransformedPath.transform( matrix );
-      drawPath( mTransformedPath, canvas );
+      if (mSplayMode == SPLAY_MODE_LINE ) {
+        mTransformedPath = new Path( mPath );
+        mTransformedPath.transform( matrix );
+        drawPath( mTransformedPath, canvas );
+      } else {
+        TDGreenDot.draw( canvas, matrix, scale, cx, cy, TDSetting.mDotRadius*1.5f, mPaint );
+      }
     }
   }
 
