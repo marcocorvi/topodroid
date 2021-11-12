@@ -46,6 +46,8 @@ public class LinePoint extends Point2D
   public LinePoint mPrev; // previous LinePoint on the line
   public LinePoint mNext; // next LinePoint on the line
 
+  /** change presentation from landscape to portrai
+   */
   void landscapeToPortrait()
   {
     float t;
@@ -54,8 +56,10 @@ public class LinePoint extends Point2D
     t =x2;  x2=-y2;  y2= t;
   }
 
-  // from ICanvasCommand
-  // @param z   unused
+  /** flip horizontally
+   * @param z   unused
+   * @note from ICanvasCommand
+   */
   public void flipXAxis(float z)
   {
     float dx = 2 * DrawingUtil.CENTER_X;
@@ -64,25 +68,30 @@ public class LinePoint extends Point2D
     x  = dx - x;
   }
 
-  // shift first control-point
-  // @param dx,dy   shift vector
+  /** shift first control-point
+   * @param dx   X shift coord
+   * @param dy   Y shift coord
+   */
   void shiftCP1By( float dx, float dy )
   {
      x1 += dx;
      y1 += dy;
   }
 
-  // shift second control-point
-  // @param dx,dy   shift vector
+  /** shift second control-point
+   * @param dx   X shift coord
+   * @param dy   Y shift coord
+   */
   void shiftCP2By( float dx, float dy )
   {
      x2 += dx;
      y2 += dy;
   }
 
-  // shift the point, and the second control-point
-  // if the next point has control-points shift also its first control-point
-  // @param dx,dy   shift vector
+  /** shift the point, and the second control-point, if the next point has control-points shift also its first control-point
+   * @param dx   X shift coord
+   * @param dy   Y shift coord
+   */
   void shiftBy( float dx, float dy )
   {
     x += dx;
@@ -99,9 +108,10 @@ public class LinePoint extends Point2D
     }
   }
 
-  // scale by Z
-  // @param z   scale factor
-  // @param m   unused
+  /** scale by Z
+   * @param z   scale factor
+   * @param m   unused
+   */
   void scaleBy( float z, Matrix m )
   {
     x *= z;
@@ -118,6 +128,10 @@ public class LinePoint extends Point2D
     }
   }
 
+  /** affine tranform
+   * @param mm  transform 3x3 array
+   * @param m   transform matrix
+   */
   void affineTransformBy( float[] mm, Matrix m )
   {
     float xx = mm[0] * x + mm[1] * y + mm[2];
@@ -135,7 +149,9 @@ public class LinePoint extends Point2D
     }
   }
 
-  // make isolated line-point copying coords from another
+  /** make an isolated line-point copying coords from another
+   * @param lp   line point to copy
+   */
   LinePoint( LinePoint lp )
   { 
     x  = lp.x;
@@ -149,9 +165,10 @@ public class LinePoint extends Point2D
     mPrev = null;
   }
 
-  // make a copy LinePoint and append to another point
-  // @param lp   line-point to copy from
-  // @param prev point to append to
+  /** make a copy LinePoint and append to another point
+   * @param lp   line-point to copy from
+   * @param prev point to append to
+   */
   LinePoint( LinePoint lp, LinePoint prev )
   { 
     x  = lp.x;
@@ -166,9 +183,11 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
   
-  // make a linepoint and append to another one
-  // @param x0,y0   linepoint coords (no control-points)
-  // @param prev    point to append to
+  /** make a linepoint and append to another one
+   * @param x0   linepoint X coords (no control-points)
+   * @param y0   linepoint Y coords (no control-points)
+   * @param prev point to append to
+   */
   LinePoint( float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );
@@ -180,10 +199,15 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
 
-  // make a linepoint and append to another one
-  // @param x10,y10, x20,y20  control-points coords
-  // @param x0,y0   linepoint coords 
-  // @param prev    point to append to
+  /** make a linepoint and append to another one
+   * @param x10  first control-points X coords
+   * @param y10  first control-points Y coords
+   * @param x20  second control-points X coords
+   * @param y20  second control-points Y coords
+   * @param x0   linepoint X coords 
+   * @param y0   linepoint Y coords 
+   * @param prev    point to append to
+   */
   LinePoint( float x10, float y10, float x20, float y20, float x0, float y0, LinePoint prev )
   {
     super( x0, y0 );

@@ -246,7 +246,10 @@ public class DrawingStationName extends DrawingPointPath
   //   } catch ( IOException e ) { }
   // }
 
-  // from ICanvasCommand
+  /** flip horizontally
+   * @param z   ???
+   * @note from ICanvasCommand
+   */
   @Override
   public void flipXAxis( float z )
   {

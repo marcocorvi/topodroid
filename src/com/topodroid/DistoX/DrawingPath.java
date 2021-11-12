@@ -185,7 +185,10 @@ public class DrawingPath extends RectF
             && (bbox.bottom >= top);
   }
   
-  // from ICanvasCommand
+  /** flip horizontally
+   * @param z   unused
+   * @note from ICanvasCommand
+   */
   public void flipXAxis( float z )
   {
     float dx = 2 * DrawingUtil.CENTER_X;
@@ -225,7 +228,9 @@ public class DrawingPath extends RectF
     }
   }
 
-  // get the path color (or white)
+  /** get the path color (or white)
+   * @return the color of the path
+   */
   public int color() { return ( mPaint != null )? mPaint.getColor() : 0xffffffff; }
 
   // void log()

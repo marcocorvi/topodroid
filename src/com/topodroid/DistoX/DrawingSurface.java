@@ -81,20 +81,37 @@ class DrawingSurface extends SurfaceView
 
   private DrawingStationSplay mStationSplay; // splays on/off at stations
 
+  /** check if the surface is drawing
+   * @return true if the surface is drawing
+   */
   public boolean isDrawing() { return isDrawing; }
 
   // -----------------------------------------------------
   // SCRAPS 
 
+  /** get the current scrap index
+   */
   int scrapIndex()              { return ( commandManager == null )? 0 : commandManager.scrapIndex(); }
+
+  /** get the maximum scrap index
+   */
   int scrapMaxIndex()           { return ( commandManager == null )? 0 : commandManager.scrapMaxIndex(); }
+
+  /** get a new scrap index 
+   */
   int newScrapIndex( )          { return ( commandManager == null )? 0 : commandManager.newScrapIndex( ); }
+
+  /** toggle the scrap index
+   * @param k  ...
+   */
   int toggleScrapIndex( int k ) { return ( commandManager == null )? 0 : commandManager.toggleScrapIndex( k ); }
 
   // -----------------------------------------------------
   // MANAGER CACHE
   static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
+  /** clear the cache of managers
+   */
   static void clearManagersCache()
   {
     mCache.clear();
@@ -106,6 +123,9 @@ class DrawingSurface extends SurfaceView
   //   for ( String key : mCache.keySet() ) TDLog.Log( TDLog.LOG_IO, "Key: " + key );
   // }
 
+  /** add a manager to the cache
+   * @param fullname    fullname of the plot (of the manager)
+   */
   private static void addManagerToCache( String fullname ) 
   { 
     if ( commandManager != null ) {
@@ -119,10 +139,12 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  // @param mode     command-manager mode (plot type)
-  // @param fullname 
-  // @param is-extended
-  // return true if saved manager can be used
+  /** reset a manager
+   * @param mode        command-manager mode (plot type)
+   * @param fullname    ...
+   * @param is_extended whether it is an extended profile
+   * @return true if saved manager can be used
+   */
   boolean resetManager( int mode, String fullname, boolean is_extended )
   {
     boolean ret = false;
@@ -166,11 +188,18 @@ class DrawingSurface extends SurfaceView
 
   // -----------------------------------------------------
 
+  /** set the mode of selection
+   * @param mode   selection mode
+   */
   void setSelectMode( int mode )
   { 
     if ( commandManager != null ) commandManager.setSelectMode( mode );
   }
 
+  /** set the manager
+   * @param mode    manager mode
+   * @param type    plot type
+   */
   void setManager( int mode, int type )
   {
     mType = type;
@@ -184,12 +213,18 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** start to create the reference of a manager (and set the manager)
+   * @param mode    manager mode
+   * @param type    plot type
+   */
   void newReferences( int mode, int type )
   {
     setManager( mode, type );
     commandManager.newReferences();
   }
 
+  /** commit the reference
+   */
   void commitReferences()
   {
     commandManager.commitReferences();
@@ -198,16 +233,31 @@ class DrawingSurface extends SurfaceView
 
   // -----------------------------------------------------
 
+  /** get the canvas width
+   */
   public int width()  { return mWidth; }
+
+  /** get the canvas height
+   */
   public int height() { return mHeight; }
 
   // private Timer mTimer;
   // private TimerTask mTask;
 
+  /** test if the surface is selectable
+   * @return true if the surface items are selectable
+   */
   boolean isSelectable() { return commandManager != null && commandManager.isSelectable(); }
 
+  /** set the zoomer
+   * @param zoomer   zoomer
+   */
   void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
 
+  /** cstr
+   * @param context context
+   * @param attrs   attributes
+   */
   public DrawingSurface(Context context, AttributeSet attrs) 
   {
     super(context, attrs);
@@ -228,6 +278,9 @@ class DrawingSurface extends SurfaceView
 
   // -------------------------------------------------------------------
 
+  /** set whether to display points, in the current manager
+   * @param display  wheter to display the points
+   */
   void setDisplayPoints( boolean display ) 
   { 
     commandManager.setDisplayPoints( display );
@@ -237,6 +290,9 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** get the index for the next area item, in the current manager
+   * @return index for the next area item
+   */
   int getNextAreaIndex() { return commandManager.getNextAreaIndex(); }
 
   // void setScaleBar( float x0, float y0 ) 
@@ -244,6 +300,11 @@ class DrawingSurface extends SurfaceView
   //   commandManager.setScaleBar(x0,y0);
   // }
   
+  /** get the shots that intersect a line portion, in the current manager
+   * @param p1 first point of the line portion
+   * @param p2 second point of the line portion
+   * @return the list of shots that intesect the segment (p1--p2)
+   */
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     return commandManager.getIntersectionShot(p1, p2);
@@ -261,11 +322,24 @@ class DrawingSurface extends SurfaceView
 
   // -----------------------------------------------------------
 
+  /** set the global display mode
+   * @param mode   display mode
+   */
   public void setDisplayMode( int mode ) { DrawingCommandManager.setDisplayMode(mode); }
 
+  /** get the global display mode
+   * @return the gloabal display mode
+   */
   public int getDisplayMode( ) { return DrawingCommandManager.getDisplayMode(); }
 
-  /** apply
+  /** set the transform in the current manager
+   * @param act    activity
+   * @param dx     X shift
+   * @param dy     Y shift
+   * @param s      scale
+   * @param landscape whether landscape-presentation
+   * 
+   * the transformation is
    *  X -> (x+dx)*s = x*s + dx*s
    *  Y -> (y+dy)*s = y*s + dy*s
    */
@@ -275,16 +349,35 @@ class DrawingSurface extends SurfaceView
       commandManager.setTransform( act, dx, dy, s, landscape );
   }
 
+  /** split a line at a point, in the current manager
+   * @param line   line
+   * @param lp     line point where to split
+   */
   void splitLine( DrawingLinePath line, LinePoint lp ) { commandManager.splitLine( line, lp ); }
 
+  /** remove a line point, in the current manager
+   * @param line   line
+   * @param point  line point
+   * @param sp     selection point
+   * @return true if the point was removed
+   */
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
   { return commandManager.removeLinePoint(line, point, sp); }
 
+  /** remove a line point from the selection, in the current manager
+   * @param line   line
+   * @param point  line point
+   * @return true if the point was removed
+   */
   boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point ) 
   { return commandManager.removeLinePointFromSelection( line, point ); }
 
-  // N.B. this must be called only by plan or profile
-  // p is the path of sp
+  /** remove a splay path, in the plan and profile manager
+   * @param p   splay path
+   * @param sp  selection point for the path p
+   *
+   * @note this must be called only by plan or profile
+   */
   void deleteSplay( DrawingSplayPath p, SelectionPoint sp )
   {
     mCommandManager1.deleteSplay( p, sp );
@@ -293,6 +386,9 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** remove a path, from the current manager
+   * @param path   path to remove
+   */
   void deletePath( DrawingPath path ) 
   { 
     isDrawing = true;
@@ -312,17 +408,52 @@ class DrawingSurface extends SurfaceView
   void decimateMultiselection() { commandManager.decimateMultiselection(); }
   // end PATH_MULTISELECTION
 
+  /** sharpen a line, in the current manager
+   * @param line   line
+   */
   void sharpenPointLine( DrawingPointLinePath line ) { commandManager.sharpenPointLine( line ); }
+
+  /** decimate a line, in the current manager
+   * @param line   line
+   * @param decimation   log-decimation 
+   */
   void reducePointLine( DrawingPointLinePath line, int decimation ) { commandManager.reducePointLine( line, decimation ); }
+
+  /** make a line rock-like, in the current manager
+   * @param line   line
+   */
   void rockPointLine( DrawingPointLinePath line ) { commandManager.rockPointLine( line ); }
+
+  /** close a line, in the current manager
+   * @param line   line
+   */
   void closePointLine( DrawingPointLinePath line ) { commandManager.closePointLine( line ); }
 
+  /** finosh an erase command, in the current manager
+   */
   void endEraser() { commandManager.endEraser(); }
+
+  /** set the eraser circle, in the current manager
+   * @param x    X canvas coords
+   * @param y    Y canvas coords
+   * @param r    circle radius
+   */
   void setEraser( float x, float y, float r ) { commandManager.setEraser(x, y, r); } // canvas x,y, r
 
+  /** erase at a position, in the current manager
+   * @param x    X scene coords
+   * @param y    Y scene coords
+   * @param zoom current zoom
+   * @param cmd  erase command
+   * @param erase_mode  erasing mode
+   * @param erase_size  eraser size
+   */
   void eraseAt( float x, float y, float zoom, EraseCommand cmd, int erase_mode, float erase_size ) 
   { commandManager.eraseAt( x, y, zoom, cmd, erase_mode, erase_size ); }
   
+  /** add an erase command in the current manager
+   * @param cmd   erase command
+   */
   void addEraseCommand( EraseCommand cmd )
   {
     isDrawing = true;
@@ -347,6 +478,9 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** clear shots and stations - only extended profile
+   * @param type   plot type
+   */
   void clearShotsAndStations( int type ) 
   {
     if ( PlotType.isExtended( type ) ) {
@@ -354,12 +488,17 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** clear shots and stations - both plan and profile
+   */
   void clearShotsAndStations( )
   {
     mCommandManager1.clearShotsAndStations();
     mCommandManager2.clearShotsAndStations();
   }
 
+  /** clear the reference
+   * @param type   plot type
+   */
   void clearReferences( int type ) 
   {
     if ( PlotType.isProfile( type ) ) {
@@ -371,6 +510,9 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** flip the profile - only profile manager
+   * @param z   ???
+   */
   void flipProfile( float z )
   {
     if ( mCommandManager2 == null ) return;
@@ -387,9 +529,15 @@ class DrawingSurface extends SurfaceView
 
   // synchronized void clearPreviewPath() { mPreviewPath = null; }
 
-  // also called by DrawingWindow on split
+  /** reset the preview path: if null create an empty path
+   * @note also called by DrawingWindow on split
+   */
   synchronized void resetPreviewPath() { if ( mPreviewPath != null ) mPreviewPath.mPath = new Path(); }
 
+  /** create the preview path
+   * @param type   path type
+   * @param paint  path paint
+   */
   synchronized void makePreviewPath( int type, Paint paint ) // type = kind of the path
   {
     mPreviewPath = new DrawingPath( type, null, -1 );
@@ -397,9 +545,14 @@ class DrawingSurface extends SurfaceView
     mPreviewPath.setPathPaint( paint );
   }
 
+  /** get the preview path
+   * @return the preview path, or null
+   */
   Path getPreviewPath() { return (mPreviewPath != null)? mPreviewPath.mPath : null; }
 
- 
+  /** refresh the surface
+   * @param holder   surface holder
+   */
   public void refresh( SurfaceHolder holder )
   {
     // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
@@ -421,7 +574,11 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-
+  /** split the plot, in the current manager
+   * @param border    splitting border
+   * @param remove    whether to remove splitted items
+   * @return the list of (a copy of the) splitted items
+   */
   List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove )
   {
     return commandManager.splitPlot( border, remove );

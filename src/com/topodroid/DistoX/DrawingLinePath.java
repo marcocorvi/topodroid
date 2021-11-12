@@ -40,6 +40,9 @@ public class DrawingLinePath extends DrawingPointLinePath
   static final int OUTLINE_NONE = 0;
   static final int OUTLINE_UNDEF = -2;
 
+  /** test whether the line has the outline
+   * @return true if the line has either outline OUT or IN
+   */
   boolean hasOutline() { return mOutline == OUTLINE_OUT || mOutline == OUTLINE_IN; }
 
   // static int mCount = 0;
@@ -59,6 +62,10 @@ public class DrawingLinePath extends DrawingPointLinePath
   //   return ret;
   // }
 
+  /** cstr
+   * @param line_type   type of the line
+   * @param scrap       index of the scrap of this line
+   */
   public DrawingLinePath( int line_type, int scrap )
   {
     // visible = true,  closed = false
@@ -73,6 +80,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     mLevel     = BrushManager.getLineLevel( mLineType );
   }
 
+  /** factory: deserialize a line from a data stream
+   * @param version   serialized version
+   * @param dis       data inut stream
+   * @param x         X coord
+   * @param y         Y coord
+   */
   public static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type;
@@ -192,6 +205,8 @@ public class DrawingLinePath extends DrawingPointLinePath
   //   }
   // }
 
+  /** compute the unit normal
+   */
   @Override
   void computeUnitNormal()
   {
@@ -210,8 +225,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
-  /** 
-   * @param exclude whether to exclude splitting-point
+  /** split the line at a point
+   * @param lp0   splitting point
+   * @param line1 first part 
+   * @param line2 second part 
+   * @param exclude whether to exclude the splitting-point
+   * @return true if successful
    */
   boolean splitAt( LinePoint lp0, DrawingLinePath line1, DrawingLinePath line2, boolean exclude ) // x,y scene point
   {
@@ -281,6 +300,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     return true;
   }
 
+  /** append the points of a line to this line
+   * @param line   line to append
+   */
   void appendLinePoints( DrawingLinePath line )
   {
     if ( line == null ) return;
@@ -295,6 +317,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  /** append the points of a line to this line, in reversed order (from last to first)
+   * @param line   line to append
+   */
   void appendReversedLinePoints( DrawingLinePath line )
   {
     if ( line == null ) return;
@@ -315,6 +340,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  /** set the reversed attriobute
+   * @param reversed   new reversed attribute
+   */
   void setReversed( boolean reversed )
   {
     if ( reversed != mReversed ) {
@@ -325,6 +353,8 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  /** flip the reversed attriobute
+   */
   void flipReversed() 
   {
     mReversed = ! mReversed;
@@ -333,19 +363,38 @@ public class DrawingLinePath extends DrawingPointLinePath
     computeUnitNormal();
   }
 
+  /** check the reversed attribute
+   * @return true if reversed
+   */
   public boolean isReversed() { return mReversed; }
 
+  /** get the line type
+   * @return the type of the line
+   */
   public int lineType() { return mLineType; }
 
+  /** set the line type
+   * @param type   type of the line
+   */
   void setLineType( int type )
   {
     mLineType = type;
     setPathPaint( BrushManager.getLinePaint( mLineType, mReversed ) );
   }
   
+  /** get the therion name
+   * @return the therion name of this line type
+   */
   public String getThName() { return BrushManager.getLineThName( mLineType ); }
 
-  // N.B. canvas is guaranteed ! null
+  /** draw the line with the specified paint
+   * @param canvas   canvas
+   * @praam matrix   transform matrix
+   * @param bbox     clipping rectangle
+   * @param paint    paint
+   *
+   * @note canvas is guaranteed ! null
+   */
   public void drawWithPaint( Canvas canvas, Matrix matrix, RectF bbox, Paint paint )
   {
     if ( intersects( bbox ) ) 
@@ -374,6 +423,13 @@ public class DrawingLinePath extends DrawingPointLinePath
 //     pw.format("          </item>\n");
 //   }
 
+  /** export in cSurvey format
+   * @param pw     output writer
+   * @param survey survey name
+   * @param cave   cave name
+   * @param branch branch name
+   * @param bind   cSurvey binding
+   */
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   {
@@ -389,6 +445,9 @@ public class DrawingLinePath extends DrawingPointLinePath
     pw.format("          </item>\n");
   }
 
+  /** get the therion representation of the line
+   * @return the therion format of this line
+   */
   @Override
   String toTherion( )
   {
@@ -438,6 +497,10 @@ public class DrawingLinePath extends DrawingPointLinePath
     return sw.getBuffer().toString();
   }
 
+  /** serialize to a data stream
+   * @param dos    data output stream,
+   * @param scrap  index of the scrap to output (neg. to use the line scrap)
+   */
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
@@ -473,6 +536,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
+  /** export in Cav3D format
+   * @param pw     output writer
+   * @param type   line type
+   * @param cmd    command manager
+   * @param num    data reduction
+   */
   @Override
   void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
@@ -492,6 +561,12 @@ public class DrawingLinePath extends DrawingPointLinePath
     pw.format( Locale.US, "ENDLINE\n" );
   }
 
+  /** export in Cav3D format
+   * @param pw     output writer
+   * @param type   line type
+   * @param V1     ...
+   * @param V2     ...
+   */
   @Override
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
   {

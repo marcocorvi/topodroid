@@ -1020,6 +1020,9 @@ public class Scrap
     }
   }
 
+  /** flip horizontally
+   * @param z   ???
+   */
   void flipXAxis( float z )
   {
     if ( mCurrentStack != null ) {
@@ -1047,6 +1050,10 @@ public class Scrap
     }
   }
 
+  /** shift the sketch
+   * @param x   X shift
+   * @param y   Y shift
+   */
   void shiftDrawing( float x, float y )
   {
     if ( mCurrentStack != null ) {

@@ -42,11 +42,11 @@ public class DrawingPointPath extends DrawingPath
 {
   // float mXpos;        // scene coords
   // float mYpos;
-  public int mPointType; // symbol point type (index in symbol-point lib)
-  protected int mScale;  // symbol scale
-  public double mOrientation;   // orientation [degrees]
-  public String mPointText;
-  IDrawingLink mLink;    // linked drawing item
+  public int mPointType;      // symbol point type (index in symbol-point lib)
+  protected int mScale;       // symbol scale
+  public double mOrientation; // orientation [degrees]
+  public String mPointText;   // point text value (if any)
+  IDrawingLink mLink;         // linked drawing item
 
   // FIXME-COPYPATH
   // @Override
@@ -58,6 +58,11 @@ public class DrawingPointPath extends DrawingPath
   // }
 
   // FIXME SECTION_RENAME
+  /** fix the scrap name in the option string repracing the survey-prefix
+   * @param survey_name   name of the new survey
+   * @return this point path
+   * @note only for section point
+   */
   public DrawingPointPath fixScrap( String survey_name )
   {
     if ( survey_name != null && BrushManager.isPointSection( mPointType ) ) {
@@ -102,6 +107,13 @@ public class DrawingPointPath extends DrawingPath
   //   return null;
   // }
 
+  /** cstr
+   * @param type    point type
+   * @param x       X coord
+   * @param y       Y coord
+   * @param scale   symbol scale
+   * @param scrap   scrap index
+   */
   public DrawingPointPath( int type, float x, float y, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
@@ -123,6 +135,15 @@ public class DrawingPointPath extends DrawingPath
     mLink = null;
   }
 
+  /** cstr
+   * @param type    point type
+   * @param x       X coord
+   * @param y       Y coord
+   * @param scale   symbol scale
+   * @param text    text string
+   * @param options options string
+   * @param scrap   scrap index
+   */
   public DrawingPointPath( int type, float x, float y, int scale, String text, String options, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_POINT, null, scrap );
@@ -145,6 +166,13 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.v( "Point cstr " + type + " orientation " + mOrientation );
   }
 
+  /** factory: create a point path from the data stream
+   * @param version     serialize version
+   * @param dis         input data stream
+   * @param x       X coord
+   * @param y       Y coord
+   * @return the deserialized point path
+   */
   public static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y /* , SymbolsPalette missingSymbols */ ) 
   {
     float ccx, ccy, orientation;
@@ -221,6 +249,10 @@ public class DrawingPointPath extends DrawingPath
   //   }
   // }
 
+  /** set the point center - move the point to a new center
+   * @param x       X coord
+   * @param y       Y coord
+   */
   void setCenter( float x, float y )
   {
     cx = x;
@@ -231,15 +263,22 @@ public class DrawingPointPath extends DrawingPath
     bottom = y+1;
   }
 
+  /** rotate the point orientation
+   * @param dt   rotation angle
+   * @return true if the point can be rotated
+   */
   @Override
-  boolean rotateBy( float dy )
+  boolean rotateBy( float dt )
   {
     if ( ! BrushManager.isPointOrientable( mPointType ) ) return false;
-    setOrientation ( mOrientation + dy );
+    setOrientation ( mOrientation + dt );
     return true;
   }
 
-
+  /** shift the pointposition
+   * @param dx       X coord shift
+   * @param dy       Y coord shift
+   */
   @Override
   void shiftBy( float dx, float dy )
   {
@@ -252,6 +291,10 @@ public class DrawingPointPath extends DrawingPath
     bottom += dy;
   }
 
+  /** scale the point symbol - with respect to the scene
+   * @param z   scale factor
+   * @param m   scaling matrix
+   */
   @Override
   void scaleBy( float z, Matrix m )
   {
@@ -264,6 +307,10 @@ public class DrawingPointPath extends DrawingPath
     bottom *= z;
   }
 
+  /** affine transform the point symbol - with respect to the scene
+   * @param mm   affine matrix (to tranform the center)
+   * @param m    tranform matrix
+   */
   @Override
   void affineTransformBy( float[] mm, Matrix m )
   {
@@ -278,6 +325,10 @@ public class DrawingPointPath extends DrawingPath
   }
 
   // from ICanvasCommand
+  /** shift the symbol path
+   * @param dx       X shift
+   * @param dy       Y shift
+   */
   @Override
   public void shiftPathBy( float dx, float dy ) 
   {
@@ -296,6 +347,10 @@ public class DrawingPointPath extends DrawingPath
 
   // from ICanvasCommand
   // FIXME SCALE
+  /** scale the symbol path
+   * @param z   scale factor
+   * @param m   scaling matrix
+   */
   @Override
   public void scalePathBy( float z, Matrix m )
   {
@@ -312,16 +367,32 @@ public class DrawingPointPath extends DrawingPath
     // bottom *= z;
   }
 
+  /** Affine transform the symbol path (empty method)
+   * @param mm   affine matrix 
+   * @param m    tranform matrix
+   */
   @Override // empty
   public void affineTransformPathBy( float[] mm, Matrix m )
   {
   }
 
+  /** set the link
+   * @param link   new link
+   */
   void setLink( IDrawingLink link ) { mLink = link; }
 
+  /** get the therion name 
+   * @return the point type
+   */
   public String getThName() { return  BrushManager.getPointThName( mPointType ); }
 
-  // N.B. canvas is guaranteed ! null
+  /** draw the point on the canvas
+   * @param canvas    canvas
+   * @param matrix    transform matrix
+   * @param scale     scale factor
+   * @param bbox      clipping rectangle
+   * @note canvas is guaranteed not null
+   */
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
@@ -352,6 +423,9 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** set the scale index
+   * @param scale   new scale index
+   */
   void setScale( int scale )
   {
     if ( scale != mScale ) {
@@ -360,8 +434,14 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** get the scale index
+   * @return the scale index
+   */
   public int getScale() { return mScale; }
 
+  /** get the scale value
+   * @return the scale value
+   */
   public float getScaleValue() // FIX Asenov
   {
     switch ( mScale ) {
@@ -373,7 +453,9 @@ public class DrawingPointPath extends DrawingPath
     return 1;
   }
       
-
+  /** recreate the symbol path
+   * @param f   post-scale factor
+   */
   private void resetPath( float f )
   {
     // TDLog.v( "Reset path " + mOrientation + " scale " + mScale );
@@ -399,6 +481,10 @@ public class DrawingPointPath extends DrawingPath
   // }
 
   // void setPointType( int t ) { mPointType = t; }
+
+  /** get the type of the point
+   * @return the point type
+   */
   public int pointType() { return mPointType; }
 
   // double xpos() { return cx; }
@@ -406,6 +492,9 @@ public class DrawingPointPath extends DrawingPath
 
   // double orientation() { return mOrientation; }
 
+  /** set the point orientation
+   * @param angle  orientation angle [degrees]
+   */
   @Override
   void setOrientation( double angle ) 
   { 
@@ -415,13 +504,23 @@ public class DrawingPointPath extends DrawingPath
     resetPath( 1.0f );
   }
 
+  /** get the text of the point
+   * @return the point text
+   */
   public String getPointText() { return mPointText; }
 
+  /** set the text of the point
+   * @param text    the point text
+   */
   void setPointText( String text )
   {
     mPointText = text;
   }
 
+  /** move the point to a new position
+   * @param x   X coord (in the scene)
+   * @param y   Y coord (in the scene)
+   */
   void shiftTo( float x, float y ) // x,y scene coords
   {
     mPath.offset( x-cx, y-cy );
@@ -455,6 +554,13 @@ public class DrawingPointPath extends DrawingPath
 //     // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
 //   }
 
+  /** export the point path in cSurvey format
+   * @param pw      export writer
+   * @param survey  survey name
+   * @param cave    cave name
+   * @param branch  branch name
+   * @param bind    cSurvey binding
+   */
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
@@ -469,6 +575,15 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   }
 
+  /** export the point path in cSurvey format
+   * @param pw      export writer
+   * @param survey  survey name
+   * @param cave    cave name
+   * @param branch  branch name
+   * @param bind    cSurvey binding
+   * @param extra   ...
+   * @param section X-Section info
+   */
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind, String extra, PlotInfo section )
   { 
     String name = getThName( );
@@ -503,6 +618,13 @@ public class DrawingPointPath extends DrawingPath
     // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   }
 
+  /** export the X-Section in cSurvey format
+   * @param pw      export writer
+   * @param section X-Section info
+   * @param survey  survey name
+   * @param cave    cave name
+   * @param branch  branch name
+   */
   private static void exportTCsxXSection( PrintWriter pw, PlotInfo section, String survey, String cave, String branch /* , String session */ )
   {
     if ( section == null ) return;
@@ -512,7 +634,9 @@ public class DrawingPointPath extends DrawingPath
     DrawingIO.doExportTCsxXSection( pw, filename, survey, cave, branch, /* session, */ section.name /* , drawingUtil */ ); // bind=section.name
   }
 
-
+  /** serialize point path to therion format
+   * @return therion representation of the point
+   */ 
   @Override
   String toTherion( )
   {
@@ -531,6 +655,9 @@ public class DrawingPointPath extends DrawingPath
     return sw.getBuffer().toString();
   }
 
+  /** write orientation in therion format
+   * @param pw   output writer
+   */
   void toTherionOrientation( PrintWriter pw )
   {
     if ( mOrientation != 0.0 ) {
@@ -538,6 +665,9 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** write text/value in therion format
+   * @param pw   output writer
+   */
   private void toTherionTextOrValue( PrintWriter pw )
   {
     if ( mPointText != null && mPointText.length() > 0 ) {
@@ -549,6 +679,9 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** write options in therion format
+   * @param pw   output writer
+   */
   void toTherionOptions( PrintWriter pw )
   {
     if ( mScale != PointScale.SCALE_M ) {
@@ -572,6 +705,10 @@ public class DrawingPointPath extends DrawingPath
   }
 
   // override mScrap with scrap
+  /** export point to data stream
+   * @param dos    output stream
+   * @param scrap  scrap index
+   */
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
@@ -603,6 +740,12 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** write point in Cave3D format
+   * @param pw    writer
+   * @param type  ...
+   * @param cmd   command manager
+   * @param num   data reduction
+   */
   @Override
   void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
@@ -622,6 +765,12 @@ public class DrawingPointPath extends DrawingPath
     pw.format( Locale.US, "POINT %s %.1f %f %f %f\n", name, mOrientation, x, -y, -v );
   }
 
+  /** write point in Cave3D format
+   * @param pw    writer
+   * @param type  ...
+   * @param V1    ...
+   * @param V2    ...
+   */
   @Override
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
   {

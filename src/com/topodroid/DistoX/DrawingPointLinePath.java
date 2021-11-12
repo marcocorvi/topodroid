@@ -29,16 +29,22 @@ public class DrawingPointLinePath extends DrawingPath
                            implements IDrawingLink
 {
   private boolean mVisible; // visible line
-  private boolean mClosed;
+  private boolean mClosed;  // closed path
   // ArrayList< LinePoint > mPoints;      // points (scene coordinates)
   private LinePoint mPrevPoint = null; // previous point while constructing the line
-  protected LinePoint mFirst;
-  protected LinePoint mLast;
-  private int mSize;  // number of points
+  protected LinePoint mFirst;  // first point of the path
+  protected LinePoint mLast;   // last point of the path
+  private int mSize;           // number of points of the path
 
   float mDx, mDy; // unit vector in the direction of this line
 
 
+  /** cstr
+   * @param path_type  type of the path (DRAWING_PATH_LINE or DRAWING_PATH_AREA)
+   * @param visible    whether the path is visible
+   * @param closed     whether the path is closed
+   * @param scrap      scrap the pat belongs to
+   */
   DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap )
   {
     super( path_type, null, scrap ); // DrawingPath.DRAWING_PATH_AREA );
@@ -52,12 +58,26 @@ public class DrawingPointLinePath extends DrawingPath
     mDx = mDy = 0;
   }
 
+  /** path size
+   * @return the number of points of the path
+   */
   public int size() { return mSize; }
 
-  // access to mFirst mLast is used only by Selection
+  /** first point of the path
+   * @return the first point of the path
+   * @note access to mFirst mLast is used only by Selection
+   */
+
   public LinePoint first() { return mFirst; }
+  /** last point of the path
+   * @return the last point of the path
+   */
   public LinePoint last()  { return mLast; }
 
+  /** check if a point is not the first nor the last point of the path
+   * @param lp   line point
+   * @return true if the line point is not an endpoint of the path
+   */
   boolean isNotEndpoint( LinePoint lp ) { return lp != mFirst && lp != mLast; }
 
   // FIXME-COPYPATH
@@ -77,8 +97,9 @@ public class DrawingPointLinePath extends DrawingPath
   //   path.append( this );
   // }
 
-  /* DEBUG
-   * counts how many points this line overlaps with another line
+  /** DEBUG: counts how many points this line overlaps with another line
+   * @param other   another line path
+   * @return the number of points that are "close" to a point of the other path
    */
   int overlap( DrawingPointLinePath other ) 
   {
@@ -95,13 +116,26 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
   // @implements IDrawingLink
+  /** X-coord of the last point
+   * @return X-coord of the last point
+   */
   public float getLinkX( ) { return mLast.x; }
+
+  /** Y-coord of the last point
+   * @return Y-coord of the last point
+   */
   public float getLinkY( ) { return mLast.y; }
   // public Point2D getLink() { return mLast; }
 
+  /** X coordinate of the "center"
+   * @return mid-X of the bounding box
+   */
   @Override
   float getX() { return (left+right)/2; }
 
+  /** Y coordinate of the "center"
+   * @return mid-Y of the bounding box
+   */
   @Override
   float getY() { return (top+bottom)/2; }
 
@@ -117,6 +151,10 @@ public class DrawingPointLinePath extends DrawingPath
   //   }
   // }
 
+  /** shift the path point
+   * @param dx   shift of X-coord
+   * @param dy   shift of Y-coord
+   */
   @Override
   void shiftBy( float dx, float dy )
   {
@@ -134,6 +172,10 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  /** move the first point to the specified position
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void moveFirstTo( float x, float y )
   {
     mFirst.x = x;
@@ -141,6 +183,10 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
     
+  /** move the last point to the specified position
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void moveLastTo( float x, float y )
   {
     mLast.x = x;
@@ -148,6 +194,9 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  /** flip the path horizontally
+   * @param z   actually unused
+   */
   // from ICanvasCommand
   @Override
   public void flipXAxis( float z )
@@ -157,6 +206,8 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  /** count the number of points of the path
+   */
   void recount() // throws Exception
   {
     if ( mFirst == null ) {
@@ -199,12 +250,17 @@ public class DrawingPointLinePath extends DrawingPath
     // }
   }
 
+  /** "rotate" the path from landscape-presentation to portrait presentation
+   */
   void landscapeToPortrait()
   {
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) lp.landscapeToPortrait();
     retracePath();
   }
 
+  /** set the closed attribute
+   * @param closed   new value of the closed attribute
+   */
   void setClosed( boolean closed ) 
   { 
     if ( closed != mClosed ) {
@@ -213,14 +269,27 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
+  /** check if the path is closed
+   * @return true if the path is closed
+   */
   public boolean isClosed() { return mClosed; }
 
+  /** set the visible attribute
+   * @param visible   new value of the visible attribute
+   */
   void setVisible( boolean visible ) { mVisible = visible; }
+
+  /** check if the path is visible
+   * @return true if the path is visible
+   */
   public boolean isVisible() { return mVisible; }
 
+  /** compute the unit normal to the path - by default there is no normal
+   */
   void computeUnitNormal() { mDx = mDy = 0; }
 
   /** unlink a line_point
+   * @param lp line point to unlink
    */
   void remove( LinePoint lp )
   {
@@ -241,19 +310,30 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
 
+  /** get the line point after a gival line point
+   * @param lp  given line point
+   * @return the line point after the given line point, or null
+   * @note not static because DrawingAreaPath
+   */
   LinePoint next( LinePoint lp )
   {
     if ( lp == null ) return null;
     return lp.mNext;
   }
 
+  /** get the line point before a gival line point
+   * @param lp  given line point
+   * @return the line point before the given line point, or null
+   * @note not static because DrawingAreaPath
+   */
   LinePoint prev( LinePoint lp )
   {
     if ( lp == null ) return null;
     return lp.mPrev;
   }
 
-
+  /** clear the path
+   */
   private void clear()
   {
     mFirst = null;
@@ -268,6 +348,8 @@ public class DrawingPointLinePath extends DrawingPath
     mDy = 0;
   }
 
+  /** make the path "sharp" (no control points)
+   */
   void makeSharp( )
   {
     // FIXME this was here: retracePath();
@@ -277,10 +359,12 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
-  // @param decimation   log-decimation (must be >= 1)
-  //                     1: keep one point every 2
-  //                     2: keep one point every 4
-  // @param min_size     2: line, 3: area
+  /** decimate the path points
+   * @param decimation   log-decimation (must be at least 1)
+   *                     1: keep one point every 2
+   *                     2: keep one point every 4
+   * @param min_size     2: line, 3: area
+   */
   void makeReduce( int decimation, int min_size )
   {
     while ( decimation > 0 && mSize > min_size ) {
@@ -311,6 +395,8 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  /** make the path "rock"-like
+   */
   void makeRock()
   {
     if ( mSize > 2 ) {
@@ -339,6 +425,8 @@ public class DrawingPointLinePath extends DrawingPath
     retracePath();
   }
 
+  /** make the path close
+   */
   void makeClose( )
   {
     if ( mSize > 2 ) {
@@ -358,6 +446,8 @@ public class DrawingPointLinePath extends DrawingPath
     }    
   }
 
+  /** make the path a straight-segment joinin the first and the last points
+   */
   void makeStraight( )
   {
     // if ( mPoints.size() < 2 ) return;
@@ -373,7 +463,11 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
     // TDLog.v( "make straight final size " + mPoints.size() );
   }
-    
+  
+  /** add the starting point
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   public void addStartPoint( float x, float y ) 
   {
     // mPrevPoint = new LinePoint(x,y, null);
@@ -386,6 +480,10 @@ public class DrawingPointLinePath extends DrawingPath
     top  = bottom = y;
   }
 
+  /** add a point (without control-points)
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   public void addPoint( float x, float y ) 
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
@@ -402,6 +500,14 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
+  /** add a point with control points, ie, prev-point .. CP1 .. CP2 .. point
+   * @param x1  X-coord of the first control-point
+   * @param y1  Y-coord of the first control-point
+   * @param x2  X-coord of the second control-point
+   * @param y2  Y-coord of the second control-point
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void addPoint3( float x1, float y1, float x2, float y2, float x, float y ) 
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
@@ -425,6 +531,10 @@ public class DrawingPointLinePath extends DrawingPath
   }
 
   // ----------------------------------------------
+  /** add the starting point without tracing the path
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void addStartPointNoPath( float x, float y ) 
   {
     mFirst = mLast = new LinePoint(x,y, null);
@@ -433,6 +543,10 @@ public class DrawingPointLinePath extends DrawingPath
     top  = bottom = y;
   }
 
+  /** add a point without tracing the path
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void addPointNoPath( float x, float y ) 
   {
     mLast = new LinePoint(x, y, mLast);
@@ -441,6 +555,14 @@ public class DrawingPointLinePath extends DrawingPath
     if ( y < top  ) { top  = y; } else if ( y > bottom ) { bottom = y; }
   }
 
+  /** add a point with control-points without tracing the path
+   * @param x1  X-coord of the first control-point
+   * @param y1  Y-coord of the first control-point
+   * @param x2  X-coord of the second control-point
+   * @param y2  Y-coord of the second control-point
+   * @param x   X-coord
+   * @param y   Y-coord
+   */
   void addPoint3NoPath( float x1, float y1, float x2, float y2, float x, float y ) 
   {
     mLast = new LinePoint( x1,y1, x2,y2, x,y, mLast );
@@ -450,6 +572,9 @@ public class DrawingPointLinePath extends DrawingPath
   }
   // ----------------------------------------------
 
+  /** append another path to this path
+   * @param line   path to append
+   */
   void append( DrawingPointLinePath line )
   {
     if ( line.mSize ==  0 ) return;
@@ -465,6 +590,9 @@ public class DrawingPointLinePath extends DrawingPath
     // computeUnitNormal();
   }
 
+  /** reset the path from the given list of points
+   * @param pts   list of points
+   */
   void resetPath( ArrayList< LinePoint > pts )
   {
     clear();
@@ -484,7 +612,12 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
      
-
+  /** insert a point after another
+   * @param x   X-coord of the new point
+   * @param y   Y-coord of the new point
+   * @param lp  point after which to insert the new point
+   * @return the newly inserted point
+   */
   LinePoint insertPointAfter( float x, float y, LinePoint lp )
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return null;
@@ -500,12 +633,16 @@ public class DrawingPointLinePath extends DrawingPath
     return pp;
   }
 
+  /** compute te size of the path
+   */
   void recomputeSize()
   {
     mSize = 0;
     for ( LinePoint lp = mFirst; lp != null; lp = lp.mNext ) ++ mSize;
   }
 
+  /** retrace the path
+   */
   void retracePath()
   {
     // int size = mPoints.size();
@@ -545,6 +682,8 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
 
+  /** reverse the path
+   */
   void reversePath()
   {
     if ( mSize == 0 ) return;
@@ -570,6 +709,11 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal(); // FIXME 
   }
 
+  /** computet the distance from the path to a point
+   * @param x   X-coord of the point
+   * @param y   Y-coord of the point
+   * @return the distance from the path to the point
+   */
   @Override
   float distanceToPoint( float x, float y )
   {
@@ -586,6 +730,8 @@ public class DrawingPointLinePath extends DrawingPath
     return (dist > 0 )? TDMath.sqrt(dist) : 0;
   }
 
+  /** close the path
+   */
   void closePath() 
   {
     mPath.close();
@@ -623,6 +769,10 @@ public class DrawingPointLinePath extends DrawingPath
   //   // }
   // }
 
+  /** export the path in therion format
+   * @param pw    export writer
+   * @param close whether to close the exported line
+   */
   protected void toTherionPoints( PrintWriter pw, boolean close )
   {
     // TDLog.v( "Th2: rectF X " + left + " " + right + " Y " + bottom + " " + top );
@@ -661,6 +811,11 @@ public class DrawingPointLinePath extends DrawingPath
     }
   }
 
+  /** export the path in cSurvey format
+   * @param pw    export writer
+   * @param close whether to close the exported line
+   * @param reversed whether to export the point from the last to the first
+   */
   protected void toCsurveyPoints( PrintWriter pw, boolean close, boolean reversed )
   {
     float bezier_step = TDSetting.getBezierStep();

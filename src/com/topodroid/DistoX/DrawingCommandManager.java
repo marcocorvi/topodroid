@@ -258,8 +258,11 @@ public class DrawingCommandManager
   private float mEraserY = 0;
   private float mEraserR = 0; // eraser radius
 
-  // set the eraser circle
-  // x, y canvas coords
+  /** set the eraser circle
+   * @param x    X canvas coords
+   * @param y    Y canvas coords
+   * @param r    circle radius
+   */
   void setEraser( float x, float y, float r )
   {
     // TDLog.v("set eraser " + x + " " + y + " " + r );
@@ -269,9 +272,14 @@ public class DrawingCommandManager
     hasEraser = true;
   }
 
+  /** finosh an erase command
+   */
   void endEraser() { hasEraser = false; }
 
-  // called only if hasEraser is true
+  /** draw the erased circle
+   * @param canvas   canvas
+   * @note called only if hasEraser is true
+   */
   private void drawEraser( Canvas canvas )
   {
     Path path = new Path();
@@ -342,6 +350,9 @@ public class DrawingCommandManager
   }
   */
 
+  /** set the alpha flag for the splays
+   * @param on   whether to se the flag
+   */
   void setSplayAlpha( boolean on ) 
   {
     for ( DrawingSplayPath p : mSplaysStack ) {
@@ -349,13 +360,13 @@ public class DrawingCommandManager
     }
   }
 
-  /* Check if any line overlaps another of the same type
-   * In case of overlap the overlapped line is removed
+  /** Check if any line overlaps another of the same type - in the current scrap
+   * @note in case of overlap the overlapped line is removed
    */
   void checkLines() { mCurrentScrap.checkLines(); }
 
-  /* Flip the X-axis
-   * flip the drawing about the vertical direction
+  /** Flip the X-axis: flip the sketch horizontally)
+   * @param paths    list of sketch items
    */
   private void flipXAxes( List< DrawingPath > paths )
   {
@@ -365,6 +376,9 @@ public class DrawingCommandManager
     }
   }
 
+  /** flip splays horizontally
+   * @param paths    list of splays
+   */
   private void flipSplayXAxes( List< DrawingSplayPath > paths )
   {
     final float z = 1/mScale;
@@ -373,7 +387,10 @@ public class DrawingCommandManager
     }
   }
 
-  // from ICanvasCommand
+  /** flip the sketch horizontally
+   * @param z   current zoom
+   * @note from ICanvasCommand
+   */
   public void flipXAxis( float z )
   {
     synchronized( TDPath.mGridsLock ) {
@@ -399,8 +416,9 @@ public class DrawingCommandManager
     }
   }
 
-  /* Shift the drawing
-   * translate the drawing by (x,y)
+  /** Shift the drawing: translate the drawing by (x,y)
+   * @param x   X shift
+   * @param y   Y shift
    */
   void shiftDrawing( float x, float y )
   {
@@ -415,8 +433,8 @@ public class DrawingCommandManager
     }
   }
 
-  /* Scale the drawing
-   * scale the drawing by z
+  /** Scale the drawing (by z)
+   * @param z    scale factor
    */
   void scaleDrawing( float z )
   {
@@ -433,6 +451,18 @@ public class DrawingCommandManager
     }
   }
 
+  /** affine transform the drawing
+   * @param a    transform A coeff
+   * @param b    transform B coeff
+   * @param c    transform C coeff
+   * @param d    transform D coeff
+   * @param e    transform E coeff
+   * @param f    transform F coeff
+   *
+   * the transformation is
+   *   x' = a x + b y + c
+   *   y' = d x + e y + f
+   */
   void affineTransformDrawing( float a, float b, float c, float d, float e, float f ) 
   {
     Matrix m = new Matrix();
@@ -599,7 +629,10 @@ public class DrawingCommandManager
    */
   int getNextAreaIndex() { return mCurrentScrap.getNextAreaIndex(); }
 
-  /* return the list of shots that intesect the segment (p1--p2)
+  /** get the shots that intersect a line portion
+   * @param p1 first point of the line portion
+   * @param p2 second point of the line portion
+   * @return the list of shots that intesect the segment (p1--p2)
    */
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
@@ -667,7 +700,17 @@ public class DrawingCommandManager
   // }
 
   /* Set the transform matrix for the canvas rendering of the drawing
+   * @param act    activity
+   * @param dx     X shift
+   * @param dy     Y shift
+   * @param s      scale
+   * @param landscape whether landscape-presentation
+   * 
    * The matrix is diag(s*dx, s*dy)
+   *  X -> (x+dx)*s = x*s + dx*s
+   *  Y -> (y+dy)*s = y*s + dy*s
+   * 
+   * @note the clipping rectangle is updated, according to the set presentation
    */
   void setTransform( Activity act, float dx, float dy, float s, boolean landscape )
   {
@@ -735,6 +778,9 @@ public class DrawingCommandManager
 
   // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
 
+  /** add an erase command in the current scrap
+   * @param cmd   erase command
+   */
   void addEraseCommand( EraseCommand cmd ) { mCurrentScrap.addEraseCommand( cmd ); }
 
   final static String remove_line = "remove line completely";
@@ -745,7 +791,14 @@ public class DrawingCommandManager
   final static String remove_area_point = "remove area point";
   final static String remove_area = "remove area completely";
 
-  /** 
+  /** erase at a position, in the current scrap
+   * @param x    X scene coords
+   * @param y    Y scene coords
+   * @param zoom current canvas display zoom
+   * @param cmd  erase command
+   * @param erase_mode  erasing mode
+   * @param erase_size  eraser size
+   *
    * return result code:
    *    0  no erasing
    *    1  point erased
@@ -755,32 +808,45 @@ public class DrawingCommandManager
    *    5  line split
    *    6  area complete erase
    *    7  area point erase
-   *
-   * x    X scene
-   * y    Y scene
-   * zoom canvas display zoom
    */
   void eraseAt( float x, float y, float zoom, EraseCommand eraseCmd, int erase_mode, float erase_size ) 
   {
     mCurrentScrap.eraseAt(x, y, zoom, eraseCmd, erase_mode, erase_size ); 
   }
 
-  /* Split the line at the point lp
-   * The erase command is updated with the removal of the original line and the insert
-   * of the two new pieces
-   // called from synchronized( CurrentStack ) context
-   // called only by eraseAt
+  /** split a line at a point
+   * @param line   line
+   * @param lp     line point where to split
+   * 
+   * The erase command is updated with the removal of the original line and the insert of the two new pieces
+   *
+   * @note called from synchronized( CurrentStack ) context
+   *       called only by eraseAt
    */
   void splitLine( DrawingLinePath line, LinePoint lp ) { mCurrentScrap.splitLine( line, lp ); }
 
+  /** remove a line point, in the current scrap
+   * @param line   line
+   * @param point  line point
+   * @param sp     selection point
+   * @return true if the point was removed
+   */
   boolean removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) { return mCurrentScrap.removeLinePoint( line, point, sp ); }
 
+  /** remove a line point from the selection, in the current scrap 
+   * @param line   line
+   * @param point  line point
+   * @return true if the point was removed
+   */
   boolean removeLinePointFromSelection( DrawingLinePath line, LinePoint point ) { return mCurrentScrap.removeLinePointFromSelection( line, point ); }
 
   List< DrawingPath > splitPlot( ArrayList< PointF > border, boolean remove ) { return mCurrentScrap.splitPlot( border, remove ); }
     
 
-  // p is the path of sp
+  /** remove a splay path
+   * @param p   splay path (thsi is the path of the selection point)
+   * @param sp  selection point for the path p
+   */
   void deleteSplay( DrawingSplayPath p, SelectionPoint sp )
   {
     synchronized( TDPath.mShotsLock ) {
@@ -792,18 +858,37 @@ public class DrawingCommandManager
     }
   }
 
+  /** remove a path, from the current scrap
+   * @param path   path to remove
+   */
   void deletePath( DrawingPath path, EraseCommand eraseCmd ) { mCurrentScrap.deletePath( path, eraseCmd ); }
 
-  // deleting a section line automatically deletes the associated section point(s)
+  /** delete a section line and automatically delete the associated section point(s)
+   * @param line    section line
+   * @param scrap   section scrap
+   * @param cmd     erase command
+   */
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd ) { mCurrentScrap.deleteSectionLine( line, scrap, cmd ); }
 
+  /** sharpen a line, in the current scrap
+   * @param line   line
+   */
   void sharpenPointLine( DrawingPointLinePath line ) { mCurrentScrap.sharpenPointLine( line ); }
 
-  // @param decimation   log-decimation 
+  /** decimate a line, in the current scrap
+   * @param line   line
+   * @param decimation   log-decimation 
+   */
   void reducePointLine( DrawingPointLinePath line, int decimation ) { mCurrentScrap.reducePointLine( line, decimation ); }
 
+  /** make a line rock-like, in the current scrap
+   * @param line   line
+   */
   void rockPointLine( DrawingPointLinePath line ) { mCurrentScrap.rockPointLine( line ); }
 
+  /** close a line, in the current scrap
+   * @param line   line
+   */
   void closePointLine( DrawingPointLinePath line ) { mCurrentScrap.closePointLine( line ); }
 
   // ooooooooooooooooooooooooooooooooooooooooooooooooooooo
