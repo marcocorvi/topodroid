@@ -46,7 +46,7 @@ public class DrawingSplayPath extends DrawingPath
   static final int SPLAY_MODE_POINT = 2;
   static int mSplayMode = SPLAY_MODE_LINE; // splay display mode
 
-  float cx, cy; // drawing center = endpoint
+  public float xEnd, yEnd; // drawing circle center = endpoint
 
   /** toggle the display mode of splays , between LINE and POINT
    */
@@ -61,6 +61,11 @@ public class DrawingSplayPath extends DrawingPath
     return mSplayMode;
   }
 
+  /** test whether to display splays as dots
+   * @return true if splays as dots
+   */
+  static public boolean splaysAsDots() { return mSplayMode == SPLAY_MODE_POINT; }
+
   // Path mPathB = null;
 
   /** cstr
@@ -70,8 +75,8 @@ public class DrawingSplayPath extends DrawingPath
   DrawingSplayPath( DBlock blk, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_SPLAY, blk, scrap );
-    cx = x2;
-    cy = y2;
+    xEnd= x2;
+    yEnd = y2;
   }
 
   /** make the path copying from another path
@@ -87,8 +92,8 @@ public class DrawingSplayPath extends DrawingPath
     // mPathB.addCircle( x2, y2, TDSetting.mDotRadius*1.5f, Path.Direction.CCW );
     // mPathB.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
     // TDLog.v("splay make path with offset " + x1 + " " + y1 + " - " + x2 + " " + y2);
-    cx = x2 + off_x;
-    cy = y2 + off_y;
+    xEnd = x2 + off_x;
+    yEnd = y2 + off_y;
   }
 
   /** make the path a straight line between the two endpoints
@@ -103,8 +108,8 @@ public class DrawingSplayPath extends DrawingPath
     // mPathB = new Path();
     // mPathB.addCircle( x2, y2, TDSetting.mDotRadius*1.5f, Path.Direction.CCW );
     // TDLog.v("splay make path with endpoints " + x1 + " " + y1 + " - " + x2 + " " + y2);
-    cx = x2;
-    cy = y2;
+    xEnd = x2;
+    yEnd = y2;
   }
 
   // from ICanvasCommand
@@ -136,12 +141,11 @@ public class DrawingSplayPath extends DrawingPath
   @Override
   public void draw( Canvas canvas )
   {
-    // drawPath( (mSplayMode == SPLAY_MODE_LINE )? mPath : mPathB, canvas );
-    if (mSplayMode == SPLAY_MODE_LINE ) {
+    // if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
+    //   TDGreenDot.draw( canvas, 1.0f, xEnd, yEnd, TDSetting.mDotRadius*1.5f, mPaint );
+    // } else {
       drawPath( mPath, canvas );
-    } else {
-      TDGreenDot.draw( canvas, 1.0f, cx, cy, TDSetting.mDotRadius*1.5f, mPaint );
-    }
+    // }
   }
 
   /** draw the splay on the canvas
@@ -166,13 +170,18 @@ public class DrawingSplayPath extends DrawingPath
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
+    draw( canvas, matrix, scale, bbox, true );
+  }
+
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, boolean not_edit )
+  {
     if ( intersects( bbox ) ) {
-      if (mSplayMode == SPLAY_MODE_LINE ) {
+      if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
+        TDGreenDot.draw( canvas, matrix, scale, xEnd, yEnd, TDSetting.mDotRadius*1.5f, mPaint );
+      } else {
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
         drawPath( mTransformedPath, canvas );
-      } else {
-        TDGreenDot.draw( canvas, matrix, scale, cx, cy, TDSetting.mDotRadius*1.5f, mPaint );
       }
     }
   }

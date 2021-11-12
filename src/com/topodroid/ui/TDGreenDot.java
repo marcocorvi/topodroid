@@ -13,6 +13,7 @@ package com.topodroid.ui;
 
 import com.topodroid.DistoX.SelectionPoint;
 import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.DrawingSplayPath;
 
 import android.graphics.Path;
 import android.graphics.Paint;

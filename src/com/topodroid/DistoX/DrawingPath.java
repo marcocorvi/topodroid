@@ -53,19 +53,25 @@ public class DrawingPath extends RectF
   public static final int DRAWING_PATH_NORTH   = 8; // north line (5m long)
   public static final int DRAWING_PATH_GEO     = 9; // georeferenced point
 
-  static final int SPLAY_MODE_LINE  = 1;
-  static final int SPLAY_MODE_POINT = 2;
-  static int mSplayMode = SPLAY_MODE_LINE;
+  // static final int SPLAY_MODE_LINE  = 1;
+  // static final int SPLAY_MODE_POINT = 2;
+  // static int mSplayMode = SPLAY_MODE_LINE;
 
-  static int toggleSplayMode()
-  {
-    if ( mSplayMode == SPLAY_MODE_LINE ) {
-      mSplayMode = SPLAY_MODE_POINT;
-    } else {
-      mSplayMode = SPLAY_MODE_LINE;
-    }
-    return mSplayMode;
-  }
+  // static int toggleSplayMode()
+  // {
+  //   if ( mSplayMode == SPLAY_MODE_LINE ) {
+  //     mSplayMode = SPLAY_MODE_POINT;
+  //   } else {
+  //     mSplayMode = SPLAY_MODE_LINE;
+  //   }
+  //   TDLog.v("SPLAY MODE " + mSplayMode );
+  //   return mSplayMode;
+  // }
+
+  // /** test whether to display splays as dots
+  //  * @return true if splays as dots
+  //  */
+  // static public boolean splaysAsDots() { return mSplayMode == SPLAY_MODE_POINT; }
 
   protected Path mPath;
   protected Path mTransformedPath;

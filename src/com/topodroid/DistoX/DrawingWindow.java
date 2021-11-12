@@ -204,6 +204,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_SELECT_MODE = 3; // select-mode button
   private static final int BTN_SELECT_PREV = 3; // select-mode button
   private static final int BTN_SELECT_NEXT = 4; // select-mode button
+  private static final int BTN_ITEM_EDIT   = 6; // select button item-edit properties
   // private static final int BTN_DELETE      = 7; // select-mode button
 
   private static final int BTN_ERASE_MODE = 5; // erase-mode button
@@ -698,6 +699,11 @@ public class DrawingWindow extends ItemDrawer
   private int mNrSaveTh2Task = 0; // current number of save tasks
 
   Set<String> getStationNames() { return mApp_mData.selectAllStations( TDInstance.sid ); }
+
+  /** test if the drawing window is in draw_edit
+   * @return ...
+   */
+  boolean isNotModeEdit() { return mMode != MODE_EDIT; }
 
   // ----------------------------------------------------------
   // PLOT NAME(S)
@@ -2056,6 +2062,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overAdvanced ) {
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
       mButton1[BTN_DIAL].setOnLongClickListener( this );
+      mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
     }
     if ( TDLevel.overBasic ) {
       if ( BTN_PLOT   < mButton1.length ) mButton1[BTN_PLOT].setOnLongClickListener( this );
@@ -5607,6 +5614,28 @@ public class DrawingWindow extends ItemDrawer
           }
         }
       }
+    } else if ( TDLevel.overAdvanced && b == mButton3[ BTN_ITEM_EDIT ] ) { // item edit dialog
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null ) {
+        DrawingPath item = sp.mItem;
+        if ( item != null ) {
+          if ( item instanceof DrawingPointPath ) {
+            DrawingPointPath point = (DrawingPointPath)item;
+            if ( BrushManager.isPointSection( point.mPointType ) ) {
+              String section_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) );
+              if ( section_name != null ) {
+                openSectionDraw( section_name );
+              } else {
+                onClick( view ); 
+              }
+            } else {
+              onClick( view ); 
+            }
+          } else {
+            onClick( view ); 
+          } 
+        }
+      }
     } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_DRAW );
@@ -5996,9 +6025,11 @@ public class DrawingWindow extends ItemDrawer
       zoomFit( mDrawingSurface.getBitmapBounds() );
     }
 
-    // @param scrapname fullname of the scrap
-    // name can be the scrap-name or the section-name (plot name)
-    // called only by DrawingPointDialog 
+    /** open the xsection scrap in the window
+     * @param scrapname fullname of the scrap
+     * the name can be the scrap-name or the section-name (plot name)
+     * @note called only by DrawingPointDialog and myself
+     */
     void openSectionDraw( String scrapname )
     { 
       // remove survey name from scrap-name (if necessary)

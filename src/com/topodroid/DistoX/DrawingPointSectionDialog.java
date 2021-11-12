@@ -63,6 +63,11 @@ class DrawingPointSectionDialog extends MyDialog
   private Button   mBtnOk;
   private Button   mBtnCancel;
 
+  /** cstr
+   * @param context context
+   * @param parent  sketch window
+   * @param point   section point
+   */
   DrawingPointSectionDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
     super( context, R.string.DrawingPointSectionDialog );
@@ -138,6 +143,8 @@ class DrawingPointSectionDialog extends MyDialog
     mBtnCancel.setOnClickListener( this );
   }
 
+  /** sel the layer checkboxes
+   */
   private void setCBlayers()
   {
     mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
@@ -159,6 +166,8 @@ class DrawingPointSectionDialog extends MyDialog
     // mCBtext .setChecked( ( level & DrawingLevel.LEVEL_TEXT  ) == DrawingLevel.LEVEL_TEXT  );
   }
 
+  /** set the leyers from the checkboxes
+   */
   private void setLevel()
   {
     int level = 0;
@@ -173,6 +182,9 @@ class DrawingPointSectionDialog extends MyDialog
     mPoint.mLevel = level;
   }
 
+  /** perform user tap
+   * @param v   tapped view
+   */
   public void onClick(View v) 
   {
     Button b = (Button)v;

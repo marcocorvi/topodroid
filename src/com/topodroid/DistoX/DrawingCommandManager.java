@@ -1192,7 +1192,7 @@ public class DrawingCommandManager
       if ( TDSetting.mTherionSplays ) {
         if ( mSplaysStack != null ) {
           for ( DrawingSplayPath path : mSplaysStack ) {
-            path.draw( c, mat, sca, null );
+            path.draw( c, mat, sca, null, true ); // true = not_edit
           }
         }
       }
@@ -1376,16 +1376,16 @@ public class DrawingCommandManager
       if ( mSplaysStack != null ) {
         if ( station_splay == null ) {
           if ( splays ) {
-            for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox );
+            for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
           }
         } else {
           if ( splays ) { // draw all splays except the splays-off
             for ( DrawingSplayPath path : mSplaysStack ) {
-	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox );
+	      if ( ! station_splay.isStationOFF( path ) ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
 	    }
           } else if ( latest || station_splay.hasSplaysON() ) { // draw the splays-on and/or the lastest
             for ( DrawingSplayPath path : mSplaysStack ) {
-              if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox );
+              if ( station_splay.isStationON( path ) || path.isBlockRecent() ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
 	    }
 	  }
         }
