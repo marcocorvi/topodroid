@@ -55,6 +55,10 @@ public class PhotoListDialog extends MyDialog
   String mPhotoComment;
   long   mPhotoId;
 
+  /** cstr
+   * @param ctx         context
+   * @param data_helper database class
+   */
   public PhotoListDialog( Context ctx, DataHelper data_helper )
   {
     super( ctx, R.string.PhotoListDialog );
@@ -85,6 +89,8 @@ public class PhotoListDialog extends MyDialog
 
   // ----------------------------------------------------------------------
 
+  /** update the list
+   */
   private void updateDisplay( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updateDisplay() status: " + StatusName() + " forcing: " + force_update );
@@ -100,6 +106,9 @@ public class PhotoListDialog extends MyDialog
 
   // -------------------------------------------------------------------
 
+  /** update the list og photos
+   * @param list  list of photos
+   */
   private void updatePhotoList( List< PhotoInfo > list )
   {
     // TDLog.Log(TDLog.LOG_PHOTO, "updatePhotoList size " + list.size() );
@@ -114,9 +123,12 @@ public class PhotoListDialog extends MyDialog
     // mList.setAdapter( mDataAdapter );
   }
 
-  // ---------------------------------------------------------------
-  // list items click
-
+  /** implements item click listener
+   * @param parent  view parent container
+   * @param view    clicked item view
+   * @param pos     position of the item in the container
+   * @param id      item id (?)
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -128,9 +140,6 @@ public class PhotoListDialog extends MyDialog
     // TDLog.v( "photo activity started photo edit dialog");
   }
 
-
-  // ---------------------------------------------------------------
-  
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
@@ -160,6 +169,9 @@ public class PhotoListDialog extends MyDialog
 
   // ------------------------------------------------------------------
 
+  /** remove a photo - delete the photo file
+   * @param photo    info of the photo to remove
+   */
   public void dropPhoto( PhotoInfo photo )
   {
     mApp_mData.deletePhoto( photo.sid, photo.id );
@@ -167,6 +179,10 @@ public class PhotoListDialog extends MyDialog
     updateDisplay( ); // FIXME
   }
 
+  /** update a photo comment in the photo info
+   * @param photo    info of the photo
+   * @param comment  photo comment
+   */
   public void updatePhoto( PhotoInfo photo, String comment )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "updatePhoto comment " + comment );
@@ -181,6 +197,8 @@ public class PhotoListDialog extends MyDialog
   // {
   // }
 
+  /** implements enable-bluetooth - nothing to do
+   */
   public void enableBluetoothButton( boolean enable ) { } 
 
 }

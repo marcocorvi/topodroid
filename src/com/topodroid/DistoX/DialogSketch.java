@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.ui.MyFileItem;
 
 import java.io.File;
 import java.io.FilenameFilter;

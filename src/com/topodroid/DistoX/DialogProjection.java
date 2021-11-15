@@ -31,27 +31,55 @@ class DialogProjection extends MyDialog
   // private SeekBar mNear;
   // private SeekBar mFar;
 
+  /** cstr
+   * @param context   context
+   * @param renderer  GL renderer
+   */
   public DialogProjection( Context context, GlRenderer renderer )
   {
     super( context, R.string.DialogProjection );
     mRenderer = renderer;
   }
 
+  /** set the progress bar
+   * @param sb   progress bar
+   * @param val  progress value
+   * @param min  progress minimum value
+   * @param max  progress maximum value
+   */
   private void setProgress( SeekBar sb, float val, float min, float max )
   {
     sb.setProgress( (int)( 1000*(val-min)/(max-min) ) );
   }
  
+  /** get the progress value
+   * @param sb   progress bar
+   * @param min  progress minimum value
+   * @param max  progress maximum value
+   * @return the progress value
+   */
   private float getProgress( SeekBar sb, float min, float max )
   {
     return min + sb.getProgress()/1000.0f * ( max - min );
   }
 
+  /** set the progress bar - log scale
+   * @param sb   progress bar
+   * @param val  progress value
+   * @param min  progress minimum value
+   * @param max  progress maximum value
+   */
   private void setProgressLog( SeekBar sb, float val, float min, float max )
   {
     sb.setProgress( (int)(1000*(Math.log(val)-Math.log(min))/( Math.log(max)-Math.log(min) ) ) );
   }
  
+  /** get the progress value - log scale
+   * @param sb   progress bar
+   * @param min  progress minimum value
+   * @param max  progress maximum value
+   * @return the progress value
+   */
   private float getProgressLog( SeekBar sb, float min, float max )
   {
     return (float)Math.exp( Math.log(min) + sb.getProgress()/1000.0f * ( Math.log(max) - Math.log(min) ) );
@@ -94,6 +122,9 @@ class DialogProjection extends MyDialog
 
   }
 
+  /** implement click listener
+   * @param view   tapped view
+   */
   @Override
   public void onClick(View view)
   {

@@ -44,7 +44,11 @@ class DialogInfo extends MyDialog
   private ListView mList;
   private Button   mBTclose;
 
-
+  /** cstr
+   * @param app        Cave3D activity
+   * @param parser     3D model parser
+   * @param renderer   GL renderer
+   */
   public DialogInfo( TopoGL app, TglParser parser, GlRenderer renderer )
   {
     super( app, R.string.DialogInfo );
@@ -112,6 +116,9 @@ class DialogInfo extends MyDialog
     mBTclose.setOnClickListener( this );
   }
 
+  /** implements click listener
+   * @param view  tapped view (unused)
+   */
   @Override
   public void onClick(View view)
   {
@@ -119,6 +126,12 @@ class DialogInfo extends MyDialog
     dismiss();
   }
 
+  /** implements item click listener
+   * @param parent    view parent container
+   * @param view      clicked item view
+   * @param position  position of the item in the container
+   * @param id        item id (?)
+   */
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {

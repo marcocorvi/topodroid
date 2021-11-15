@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.ui;
 
 // import com.topodroid.utils.TDLog;
 // import java.util.ArrayList;
@@ -32,7 +32,7 @@ import android.widget.TextView;
 // import android.text.Layout;
 // import android.widget.LinearLayout;
 
-class MyFileItem extends TextView
+public class MyFileItem extends TextView
 {
   // TextView     mTextView = null;
   // LinearLayout mView;
@@ -43,6 +43,9 @@ class MyFileItem extends TextView
 
   // private Context mContext;
 
+  /** cstr
+   * @param context context
+   */
   public MyFileItem( Context context )
   {  
     super( context );
@@ -56,6 +59,12 @@ class MyFileItem extends TextView
     mIsDirectory = false;
   }
 
+  /** cstr
+   * @param context context
+   * @param listenr click listener
+   * @param text    display text
+   * @param is_dir  whether this file item is a directory
+   */
   public MyFileItem( Context context, OnClickListener listener, String text, boolean is_dir )
   {  
     super( context );
@@ -78,7 +87,10 @@ class MyFileItem extends TextView
 
   // void resetBgColor() { setBackgroundColor( 0xff333333 ); }
 
-  void setListener( OnClickListener listener ) { mListener = listener; }
+  /** set the click listener
+   * @param listenr click listener
+   */
+  public void setListener( OnClickListener listener ) { mListener = listener; }
 
   // @Override
   // public boolean onTouchEvent( MotionEvent ev )

@@ -31,7 +31,7 @@ class PhotoDialog extends MyDialog
   private ImageView mView2;
   // private Button   mButtonCancel;
 
-  /**
+  /** cstr
    * @param context   context
    * @param photo     photo info
    */
@@ -44,6 +44,10 @@ class PhotoDialog extends MyDialog
     mTdImage = new TDImage( filename );
   }
 
+  /** cstr
+   * @param context   context
+   * @param filename  file path
+   */
   PhotoDialog( Context context, String filename )
   {
     super( context, R.string.PhotoDialog );
@@ -71,6 +75,9 @@ class PhotoDialog extends MyDialog
     ( (Button) findViewById(R.id.photo_back ) ).setOnClickListener( this );
   }
 
+  /** implements click listener
+   * @param v   tapped view
+   */
   @Override
   public void onClick(View v) 
   {

@@ -45,7 +45,7 @@ class PlotListDialog extends MyDialog
 {
   private final ShotWindow    mParent;
   private final DrawingWindow mParent2;
-  private final TopoDroidApp mApp;
+  private final TopoDroidApp mApp;   // TopoDroid app - for PlotNewDialog
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnPlotNew;
@@ -62,6 +62,12 @@ class PlotListDialog extends MyDialog
   // private ListView mList;
   // private GridView mList;
 
+  /** cstr
+   * @param content   context
+   * @param parent    survey data window parent
+   * @param app       TopoDroid app
+   * @param parent2   plot window (second) parent
+   */
   PlotListDialog( Context context, ShotWindow parent, TopoDroidApp app, DrawingWindow parent2 )
   {
     super( context, R.string.PlotListDialog );
@@ -114,12 +120,14 @@ class PlotListDialog extends MyDialog
     updateList();
   }
 
+  /** update/populate the list of plots
+   */
   private void updateList()
   {
     if ( TopoDroidApp.mData != null && TDInstance.sid >= 0 ) {
       // setTitle( R.string.title_scraps );
 
-      Resources res = mApp.getResources();
+      Resources res = TDInstance.getResources();
 
       List< PlotInfo > list = TopoDroidApp.mData.selectAllPlots( TDInstance.sid, TDStatus.NORMAL ); 
       /* FIXME_SKETCH_3D *
@@ -162,6 +170,9 @@ class PlotListDialog extends MyDialog
     }
   }
  
+  /** implements click listener
+   * @param v tapped view
+   */
   // @Override
   public void onClick(View v) 
   {
@@ -211,6 +222,12 @@ class PlotListDialog extends MyDialog
   //   return true;
   // }
 
+  /** implements item click listener
+   * @param parent    view parent container
+   * @param view      clicked item view
+   * @param position  position of the item in the container
+   * @param id        item id (?)
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {

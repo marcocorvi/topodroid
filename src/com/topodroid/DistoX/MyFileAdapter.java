@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyFileItem;
 import java.util.ArrayList;
 
 import android.content.Context;
@@ -34,6 +35,8 @@ class MyFileAdapter extends ArrayAdapter< MyFileItem >
   private ListView mParent;
 
   /** get the item at a certain position in the list of symbols 
+   * @param k   position
+   * @return    file-item at the given position
    */
   MyFileItem get( int k )
   { 
@@ -41,6 +44,13 @@ class MyFileAdapter extends ArrayAdapter< MyFileItem >
     return ( k < mItems.size() ) ? mItems.get(k) : null ;
   }
 
+  /** cstr
+   * @param context        context
+   * @param click_listener click listener
+   * @param parent         list parent-view
+   * @param id             item resource id
+   * @param items          list of items
+   */
   public MyFileAdapter( Context context, OnItemClickListener click_listener, ListView parent, 
                         int id, ArrayList< MyFileItem > items )
   {
@@ -56,6 +66,10 @@ class MyFileAdapter extends ArrayAdapter< MyFileItem >
     }
   }
 
+  /** add a new item to the list
+   * @param text   item display text
+   * @param is_dir whether the item is a directory
+   */
   public void add( String text, boolean is_dir )
   {
     mItems.add( new MyFileItem( mContext, this, text, is_dir ) );
@@ -66,6 +80,11 @@ class MyFileAdapter extends ArrayAdapter< MyFileItem >
   //   for ( MyFileItem item : mItems ) item.resetBgColor();
   // }
 
+  /** get the view at a given position
+   * @param pos    position
+   * @param convertView conevrt view
+   * @param parent  ...
+   */
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
