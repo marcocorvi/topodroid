@@ -2704,6 +2704,8 @@ public class TDSetting
   // export current settings
   private static char tf( boolean b ) { return b? 'T' : 'F'; }
 
+  /** export settings to the file
+   */
   public static boolean exportSettings( )
   {
     // TDLog.v("Setting exports settings");
@@ -2850,7 +2852,11 @@ public class TDSetting
     return fail;
   }
 
-  // returb true on success
+  /** import the settings from the settings file
+   * @param prefs   shared prefernces
+   * @param all     whether to import all settings
+   * @return true on success
+   */
   public static boolean importSettings( SharedPreferences prefs, boolean all )
   {
     // TDLog.v("Setting import settings");

@@ -36,6 +36,10 @@ public class ExportDialogSettings extends MyDialog
   private CheckBox mCBfunctional;
   private int mTitle;
 
+  /** cstr
+   * @param context context
+   * @param title   title resource index
+   */
   public ExportDialogSettings( Context context, int title )
   {
     super( context, R.string.ExportSettings );
@@ -62,6 +66,9 @@ public class ExportDialogSettings extends MyDialog
     ( (Button) findViewById(R.id.button_back ) ).setOnClickListener( this );
   }
 
+  /** implements click listener
+   * @param v tapped view
+   */
   @Override
   public void onClick(View v) 
   {

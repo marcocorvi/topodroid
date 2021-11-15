@@ -104,31 +104,71 @@ public class TDFile
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
   // context.getExternalFilesDir --> /storage/emulated/0/Android/data/com.topodroid.DistoX/files
+
+  /** get the private base folder
+   * @return the file of the private base folder
+   */
   public static File getPrivateBaseDir( ) 
   {
     return TDInstance.context.getExternalFilesDir( null );
   }
 
+  /** get the private folder
+   * @param type   folder name
+   * @return the file of the specified folder
+   */
   public static File getPrivateDir( String subdir ) 
   { 
     return TDInstance.context.getExternalFilesDir( subdir );
   }
 
+  /** get the private file
+   * @param type   folder name
+   * @param name   filename
+   * @return the specified file
+   */
   public static File getPrivateFile( String subdir, String filename ) 
   { 
     return new File( TDInstance.context.getExternalFilesDir( subdir ), filename );
   }
 
+  /** delete the private file
+   * @param type   folder name
+   * @param name   filename
+   */
   public static void deletePrivateFile( String type, String name ) 
   {
     File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
     if ( file.exists() ) file.delete();
   }
 
+  /** get the device database
+   * @return the device database file, in the private folder
+   */
   public static File getDeviceDatabase() { return getPrivateFile( null, "device10.sqlite" ); }
+
+  /** get the packet database
+   * @return the packet database file, in the private folder
+   */
   public static File getPacketDatabase() { return getPrivateFile( null, "packet10.sqlite" ); }
 
+  /** get the settings file 
+   * @return the settings file, in the private folder
+   */
+  public static File getSettingsFile()   { return getPrivateFile( null, "settings.txt" ); }
+
+  /** get the log file 
+   * @return the log file, in the private folder
+   */
+  public static File getLogFile()        { return getPrivateFile( null, "log.txt" ); }
+
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
+
+  /** get the current base directory
+   * @param type ...
+   * @param create whether to create the directory if it does not exists
+   * @return the current base directory
+   */
   private static File getCBD( String type, boolean create )
   {
     File ret = null;
@@ -145,13 +185,27 @@ public class TDFile
     //
   }
 
+  /** check if there is the external directory
+   * @param type ...
+   * @return true if the directory exists
+   */
   public static boolean hasExternalDir( String type ) 
   {
     File ret = getCBD( type, false );
     return ret != null && ret.exists();
   }
 
+  /** get an external folder, in the current work directory
+   * @param type   folder name
+   * @return file of the specified folder
+   */
   public static File getExternalDir( String type ) { return getCBD( type, true ); }
+
+  /** get an external file, under the current work directory
+   * @param type   folder name
+   * @param name   file name
+   * @return the specified file
+   */
   public static File getExternalFile( String type, String name ) { return new File( getCBD( type, true ), name ); }
 
   // public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
@@ -160,23 +214,36 @@ public class TDFile
   // public static boolean hasExternalDir( String type ) { return getCBD( type, false ).exists(); }
   // public static boolean hasExternalFile( String type, String name ) { return new File( getCBD( type, false ), name ).exists(); }
 
-  public static File getSettingsFile()   { return getExternalFile( null, "settings.txt" ); }
-  public static File getLogFile()        { return getExternalFile( null, "log.txt" ); }
-
+  /** delete an external file, under the current work directory
+   * @param type   folder name
+   * @param name   file name
+   */
   public static void deleteExternalFile( String type, String name ) 
   {
     File file = getExternalFile( type, name );
     if ( file.exists() ) file.delete();
   }
 
+  /** get an external file writer
+   * @param type   folder name
+   * @param name   file name
+   * @return writer of the specified file
+   */
   public static FileWriter getExternalFileWriter( String type, String name ) throws IOException
   {
     return new FileWriter( getExternalFile( type, name ) );
   }
 
   // TEMPORARY FILES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  /** get an external temporary file, under the current work directory
+   * @param name   file name
+   * @return temporary file
+   */
   public static File getExternalTempFile( String name ) { return getExternalFile( "tmp", name ); }
 
+  /** clear istale files in the external temporary folder, in the current work directory
+   * @param before  timestamp
+   */
   public static void clearExternalTempDir( long before )
   {
     long now  = System.currentTimeMillis();
