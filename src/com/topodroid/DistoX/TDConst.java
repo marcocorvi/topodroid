@@ -265,6 +265,7 @@ public class TDConst
       case 17: return survey + ".plt";
       case 18: return survey + ".json";
       case 19: return survey + ".shz";
+      case -11: return survey + ".trox";
     }
     return survey;
   }

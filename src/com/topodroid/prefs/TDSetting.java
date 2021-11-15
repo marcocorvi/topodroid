@@ -263,7 +263,7 @@ public class TDSetting
   public static final int TD_SOCK_INSEC_PORT   = 3;
   // public static final int TD_SOCK_INSEC_INVOKE = 4;
   // public static int mDefaultSockType = (android.os.Build.MANUFACTURER.equals("samsung") ) ? TD_SOCK_INSEC : TD_SOCK_DEFAULT;
-  public static String mDefaultSockStrType = TDString.ONE; // (android.os.Build.MANUFACTURER.equals("samsung") ) ? TDString.ONE : TDString.ZERO;
+  // public static String mDefaultSockStrType = "1"; // TDString.ONE; // (android.os.Build.MANUFACTURER.equals("samsung") ) ? TDString.ONE : TDString.ZERO;
   public static int mSockType = TD_SOCK_INSEC; // TD_SOCK_DEFAULT;
 
   public static int mCommRetry = 1; 
@@ -553,6 +553,9 @@ public class TDSetting
   private static int tryInt( SharedPreferences prefs, String key, String def_value )
   {
     int i = 0;
+    // TDLog.v(key + ": " + def_value );
+    String value = prefs.getString( key, def_value );
+    // TDLog.v(key + "= " + value );
     try { i = Integer.parseInt( prefs.getString( key, def_value ) ); }
     catch( NumberFormatException e ) { 
       TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
@@ -833,9 +836,12 @@ public class TDSetting
     mConnectionMode = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
     // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
     mHeadTail       = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
-    mSockType       = tryInt( prefs,    keyDevice[ 3], mDefaultSockStrType );  // DISTOX_SOCK_TYPE choice: 0, 1, (2, 3)
+    TDLog.v("SETTING load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
+    mSockType       = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
+    // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
     mAutoPair       = prefs.getBoolean( keyDevice[ 5], bool(defDevice[ 5]) );  // DISTOX_AUTO_PAIR
+    // TDLog.v("SETTING load device next " + keyDevice[6] + " " + defDevice[6] );
     mConnectFeedback = tryInt( prefs,   keyDevice[ 6],      defDevice[ 6] );   // DISTOX_CONNECT_FEEDBACK
     // TDLog.v("SETTING load device done");
 
@@ -1399,8 +1405,8 @@ public class TDSetting
     //   mAutoReconnect = tryBooleanValue( hlp, k, v, bool(def[2]) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_HEAD_TAIL (bool)
       mHeadTail = tryBooleanValue( hlp, k, v, bool(def[2]) ); 
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SOCK_TYPE (choice)
-      mSockType = tryIntValue( hlp, k, v, mDefaultSockStrType ); 
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SOCKET_TYPE (choice)
+      mSockType = tryIntValue( hlp, k, v, def[3] ); // mDefaultSockStrType ); 
     } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_Z6_WORKAROUND (bool)
       mZ6Workaround = tryBooleanValue( hlp, k, v, bool(def[4]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_PAIR (bool)
@@ -2732,7 +2738,7 @@ public class TDSetting
       pw.printf(Locale.US, "CSV: raw %c, separator \'%c\' \n", tf(mCsvRaw), mCsvSeparator );
 
       pw.printf(Locale.US, "BT: check %d, autopair %c \n", mCheckBT, tf(mAutoPair) );
-      pw.printf(Locale.US, "Socket: type \"%s\" %d, delay %d\n", mDefaultSockStrType, mSockType, mConnectSocketDelay );
+      pw.printf(Locale.US, "Socket: type %d, delay %d\n", mSockType, mConnectSocketDelay );
       pw.printf(Locale.US, "Connection mode %d Z6 %c, feedback %d\n", mConnectionMode, tf(mZ6Workaround), mConnectFeedback );
       // pw.printf(Locale.US, "Communication autoreconnect %c, DistoX-B %c, retry %d, head/tail %c\n", tf(mAutoReconnect), tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
       pw.printf(Locale.US, "Communication DistoX-B %c, retry %d, head/tail %c\n", tf(mSecondDistoX), mCommRetry, tf(mHeadTail) );
@@ -3056,8 +3062,8 @@ public class TDSetting
           if ( all ) {
             if ( vals.length > 5 ) {
               // mDefaultSockStrType = getQuotedString( line ); setPreference( editor, DISTOX_ );
-              mSockType = getInt( vals, 3, 0 ); setPreference( editor, "DISTOX_SOCK_TYPE", mSockType );
-              mConnectSocketDelay = getInt( vals, 5, 0 ); setPreference( editor, "DISTOX_SOCKET_DELAY", mConnectSocketDelay );
+              mSockType = getInt( vals, 2, 0 ); setPreference( editor, "DISTOX_SOCKET_TYPE", mSockType );
+              mConnectSocketDelay = getInt( vals, 4, 0 ); setPreference( editor, "DISTOX_SOCKET_DELAY", mConnectSocketDelay );
             }
           }
           continue;

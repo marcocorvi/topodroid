@@ -320,14 +320,14 @@ public class TDPrefKey
     "DISTOX_BLUETOOTH",       // 0 * // whether to check bluetooth on start
     "DISTOX_CONN_MODE",              // data download mode [on-demand, continuous]
     // "DISTOX_AUTO_RECONNECT",         // whether to try to reconnect if DistoX is lost [continuos mode]
-    "DISTOX_HEAD_TAIL",       // 3 // whether to read head-tail to get the number of packets to download
-    "DISTOX_SOCK_TYPE",            // socket type
+    "DISTOX_HEAD_TAIL",       // 2 // whether to read head-tail to get the number of packets to download
+    "DISTOX_SOCKET_TYPE",          // socket type
     // "DISTOX_COMM_RETRY",        // number of socket connection attempts
-    "DISTOX_Z6_WORKAROUND",   // 5 // whether to enable Z6 workaround
-    "DISTOX_AUTO_PAIR",       // 6 // whether to auto-pair the discovered DistoX
-    "DISTOX_CONNECT_FEEDBACK",   
+    "DISTOX_Z6_WORKAROUND",   // 4 // whether to enable Z6 workaround
+    "DISTOX_AUTO_PAIR",       // 5 // whether to auto-pair the discovered DistoX
+    "DISTOX_CONNECT_FEEDBACK", // 6
     // "DISTOX_SOCKET_DELAY",         // delay before a socket-connection attempt
-    "DISTOX_CALIB_PREF",      // 12 FORWARD
+    "DISTOX_CALIB_PREF",      // FORWARD
     null
   };
 

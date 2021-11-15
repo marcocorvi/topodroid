@@ -130,7 +130,8 @@ public class ExportDialogShot extends MyDialog
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
-      mParent.doExport( mSelected, TDConst.getSurveyFilename( mSelectedPos, mSurvey ) );
+      int selected_pos = ( mSelectedPos == 11 && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
+      mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ) );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

@@ -750,9 +750,9 @@ public class TopoDroidApp extends Application
     TDPrefHelper prefHlp = new TDPrefHelper( this );
 
     mWelcomeScreen = prefHlp.getBoolean( "DISTOX_WELCOME_SCREEN", true ); // default: WelcomeScreen = true
-    if ( mWelcomeScreen ) {
-      setDefaultSocketType( );
-    }
+    // if ( mWelcomeScreen ) {
+    //   setDefaultSocketType( );
+    // }
     mSetupScreen = prefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
 
     DistoXConnectionError = new String[5];
@@ -1364,12 +1364,12 @@ public class TopoDroidApp extends Application
   // -----------------------------------------------------------------
   // PREFERENCES
 
-  private void setDefaultSocketType( )
-  {
-    // String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
-    // TDPrefHelper.update( "DISTOX_SOCK_TYPE", defaultSockType ); 
-    TDPrefHelper.update( "DISTOX_SOCK_TYPE", 1 ); // UNSECURE
-  }
+  // private void setDefaultSocketType( )
+  // {
+  //   // String defaultSockType = ( android.os.Build.MANUFACTURER.equals("samsung") ) ? "1" : "0";
+  //   // TDPrefHelper.update( "DISTOX_SOCKET_TYPE", defaultSockType ); 
+  //   TDPrefHelper.update( "DISTOX_SOCKET_TYPE", 1 ); // UNSECURE
+  // }
 
   static void setCWDPreference( String cwd, String cbd )
   { 
