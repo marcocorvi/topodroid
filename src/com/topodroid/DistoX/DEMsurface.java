@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.c3in.ParserException;
 import com.topodroid.c3in.ParserTh;
 
@@ -31,13 +32,22 @@ public class DEMsurface
   double mDim1, mDim2; // spacing between grid centers
   // float mNormal[];    // normal vectors (3 float per vertex)
 
-  // lefttop right bottom
+  /** get the bounding box: left top right bottom
+   * @return bounding rectangle
+   */
   RectF getBounds( )
   {
     return new RectF( (float)(mEast1-mDim1/2), (float)(mNorth2+mDim2/2), (float)(mEast2+mDim1/2), (float)(mNorth1-mDim2/2) );
   }
 
-  /**
+  /** cstr
+   * @param e1   east coord of cell (0,0) lower-left corner
+   * @param n1   north coord of cell (0,0) lower-left corner
+   * @param delta_e  cell east-size 
+   * @param delta_n  cell north-size 
+   * @param d1 number of cells in the east direction
+   * @param d2 number of cells in the north direction
+   *
    *        ^
    * d2 = 2 |-----------+P2 = (e2,n2)
    *        |   |   |   |
@@ -71,8 +81,15 @@ public class DEMsurface
     // TDLog.v("Surface E " + mEast1 + " " + mEast2 + " " + mNr1 + " " + mDim1 + " N " + mNorth1 + " " + mNorth2 + " " + mNr2 + " " + mDim2 );
   }
 
+  /** empty cstr
+   */
   protected DEMsurface( ) { }
 
+  /** compute a Z value 
+   * @param e   east
+   * @param n   north
+   * @return z value of the DEM at (e,n)
+   */ 
   float computeZ( double e, double n )
   {
     if ( e < mEast1 || n < mNorth1 || e > mEast2 || n > mNorth2 ) return -9999.0f;
@@ -116,18 +133,25 @@ public class DEMsurface
   //   }
   // }
 
-  // the DEM is stored as
-  //    (e1,n1)   (e1+1,n1)   ... (e2,n1) 
-  //    (e1,n1+1) (e1+1,n1+1) ... (e2,n1+1)
-  //    ...
-  // with no flip the storing is straightforward
-  // with flip horizontal storing is by-row but
-  //   each row is filled from e2 to e1 backward
-  // with flip vertical the rows of the matrix are filled
-  //   from the bottom (n2) to the top (n1)
-  //   each row being filled left (e1) to right (e2)
-  //
-  // called only by ParserTh
+  /** read the grid data
+   * @param units    (unused)
+   * @param flip     flip flag
+   * @param br       buffered reader
+   * @param filename file fullpath (DEM name)
+   *
+   * the DEM is stored as
+   *    (e1,n1)   (e1+1,n1)   ... (e2,n1) 
+   *    (e1,n1+1) (e1+1,n1+1) ... (e2,n1+1)
+   *    ...
+   * with no flip the storing is straightforward
+   * with flip horizontal storing is by-row but
+   *   each row is filled from e2 to e1 backward
+   * with flip vertical the rows of the matrix are filled
+   *   from the bottom (n2) to the top (n1)
+   *   each row being filled left (e1) to right (e2)
+   *
+   * @note called only by ParserTh
+   */
   public void readGridData( double units, int flip, BufferedReader br, String filename ) throws ParserException
   {
     int linenr = 0;
@@ -215,7 +239,15 @@ public class DEMsurface
     // TDLog.v("surface data: final row " + y );
   }
 
-  // used to set the grid data to the LoxSurface grid
+  /** set the grid data
+   * @param grid      array of grid data 
+   * @param xoff      DEM surface X offset
+   * @param yoff      DEM surface Y offset
+   * @param step      cell size
+   * @param d1_grid   horiz. dimension of the grid
+   * @param d2_grid   vert. dimension of the grid
+   * @note used to set the grid data to the LoxSurface grid
+   */
   public void setGridData( double[] grid, int xoff, int yoff, int step, int d1_grid, int d2_grid )
   { 
     // TDLog.v("SURFACE offset " + xoff + " " + yoff + " size " + mNr1 + " " + mNr2 + " dim_grid " + d1_grid + " " + d2_grid );
@@ -244,14 +276,16 @@ public class DEMsurface
     // }
   }
 
-  private void logZMinMax()
-  { 
-    float zmin, zmax;
-    zmin = zmax = mZ[0];
-    for ( int k=1; k<mNr1*mNr2; ++k ) {
-      if ( mZ[k] < zmin ) { zmin = mZ[k]; } else if ( mZ[k] > zmax ) { zmax = mZ[k]; }
-    }
-    // TDLog.v("DEM Z " + zmin + " " + zmax );
-  }
+  // /** DEBUG compute Z min and max
+  //  */
+  // private void logZMinMax()
+  // { 
+  //   float zmin, zmax;
+  //   zmin = zmax = mZ[0];
+  //   for ( int k=1; k<mNr1*mNr2; ++k ) {
+  //     if ( mZ[k] < zmin ) { zmin = mZ[k]; } else if ( mZ[k] > zmax ) { zmax = mZ[k]; }
+  //   }
+  //   // TDLog.v("DEM Z " + zmin + " " + zmax );
+  // }
 }
 

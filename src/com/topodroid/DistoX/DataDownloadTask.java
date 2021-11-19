@@ -25,18 +25,17 @@ import android.os.AsyncTask;
 class DataDownloadTask extends AsyncTask< String, Integer, Integer >
 {
   private final WeakReference<TopoDroidApp> mApp; // FIXME LEAK
-  private static DataDownloadTask running = null;
-  // private ILister mLister;
+  private final WeakReference<GMActivity> mGMactivity; // can be null
+  private static DataDownloadTask running = null; // static reference to this class - to lock/unlock
   private final ListerHandler mLister; // FIXME_LISTER
-  private final WeakReference<GMActivity> mGMactivity;
   private int mDataType;
 
-  /**
+  /** cstr
    * @param app       TopoDroid app
    * @param lister    data lister
    * @param data_type packet datatype
    */
-  DataDownloadTask( TopoDroidApp app, ListerHandler /* ILister */ lister, GMActivity gm_activity, int data_type ) // FIXME_LISTER
+  DataDownloadTask( TopoDroidApp app, ListerHandler lister, GMActivity gm_activity, int data_type ) // FIXME_LISTER
   {
     // TDLog.Error( "Data Download Task cstr" );
     // TDLog.v( "data download task cstr");
@@ -47,6 +46,10 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   }
 
 // -------------------------------------------------------------------
+  /** task bakground execution
+   * @param statuses   (unused)
+   * @return the number of downloaded packets - ( 0 if there is no app )
+   */
   @Override
   protected Integer doInBackground( String... statuses )
   {
@@ -56,7 +59,7 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
       int algo = gm.getAlgo();
       if ( algo == CalibInfo.ALGO_AUTO ) { 
         algo = app.getCalibAlgoFromDevice();
-        if ( algo < CalibInfo.ALGO_AUTO ) {
+        if ( algo < CalibInfo.ALGO_AUTO ) { // could not get the algo from the devuice type
           algo = CalibInfo.ALGO_LINEAR; 
         }
         app.updateCalibAlgo( algo );
@@ -74,6 +77,9 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
   //   // TDLog.Log( TDLog.LOG_COMM, "onProgressUpdate " + values );
   // }
 
+  /** post-execution: forward the result to the lister and some housekeeping
+   * @param res   result of the background execution
+   */
   @Override
   protected void onPostExecute( Integer res )
   {
@@ -91,6 +97,9 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     }
   }
 
+  /** lock the static reference
+   * @return true if successfull, false if already locked
+   */
   private synchronized boolean lock()
   {
     // TDLog.v("DATA " + "data download task lock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );
@@ -99,6 +108,8 @@ class DataDownloadTask extends AsyncTask< String, Integer, Integer >
     return true;
   }
 
+  /** unlock the static reference
+   */
   private synchronized void unlock()
   {
     // TDLog.v("DATA " + "data download task unlock: running is " + ( (running == null )? "null" : (running == this)? "this" : "other") );

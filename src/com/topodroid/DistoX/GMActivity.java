@@ -186,13 +186,20 @@ public class GMActivity extends Activity
 
   // -------------------------------------------------------------
 
+  /** get the calibration algorithm
+   * @return the index of the calibration algoritm
+   */
   public int getAlgo() { return mAlgo; }
 
+  /** set the calibration algorithm
+   * @param algo   index of the calibration algorithm
+   */
   public void setAlgo( int algo ) { mAlgo = algo; }
 
-  /** called by CalibComputer Task
+  /** compute the calibration map
    * @return nr of iterations (neg. error)
-   * note run on an AsyncTask
+   * @note run on an AsyncTask
+   *       called by CalibComputer Task
    */
   public int computeCalib()
   {
@@ -217,7 +224,10 @@ public class GMActivity extends Activity
     return doComputeCalib( list );
   }
 
-
+  /** computation of the calibration map
+   * @param list     list of calib data
+   * @return nr of iterations (neg. error)
+   */
   private int doComputeCalib( List< CBlock > list )
   {    
     long cid = TDInstance.cid;
@@ -270,6 +280,7 @@ public class GMActivity extends Activity
   }
 
   /** validate this calibration against another calibration
+   * @param name   name of the other calibration
    * *-0 vars are computed on list0 using calib1, ie, the other calib on the data of this calib
    * *-1 vars are computed on list1 using calib0, iw, this calib on the data of the other calib
    */
@@ -372,8 +383,7 @@ public class GMActivity extends Activity
                                    ave0, std0, ave1, std1, err1, err2, errmax, name, TDInstance.calib ).show();
   }
 
-  /** compute the error stats of the data of this calibration using the 
-   * coeffiecients of another calibration
+  /** compute the error stats of the data of this calibration using the coeffiecients of another calibration
    * @param  calib    calibration (algorithm)
    * @param  list     calibration data
    * @param  errors   [output] errors 
@@ -437,7 +447,10 @@ public class GMActivity extends Activity
     return ke;
   }
 
-
+  /** handle the result of a computation
+   * @param job     computation task 
+   * @param result  result of the computation
+   */
   public void handleComputeCalibResult( int job, int result )
   {
     if ( ! mGMActivityVisible ) return;
@@ -498,9 +511,10 @@ public class GMActivity extends Activity
 
   }
 
-  /** called by CalibComputer Task
+  /** reset the group numbers
    * @param start_id id of the GM-data to start with
-   * note run on an AsyncTask
+   * @note run on an AsyncTask
+   *       called by CalibComputer Task
    */
   public void doResetGroups( long start_id )
   {
@@ -508,9 +522,11 @@ public class GMActivity extends Activity
     mApp_mDData.resetAllGMs( TDInstance.cid, start_id ); // reset all groups where status=0, and id >= start_id
   }
 
-  /** called by CalibComputer Task
-   * @param start_id  data id from whcih to start
-   * note run on an AsyncTask
+  /** assign group numbers to the calibration data
+   * @param start_id  data id from which to start
+   * @param policy    index of the group policy
+   * @note run on an AsyncTask
+   *       called by CalibComputer Task
    */
   public int doComputeGroups( long start_id, int policy )
   {
@@ -585,6 +601,11 @@ public class GMActivity extends Activity
 
   // -----------------------------------------------------------
   // ILister interface
+
+  /** refresh the display
+   * @param nr    calibration result
+   * @param toast wheter to toast a message
+   */
   @Override
   public void refreshDisplay( int nr, boolean toast )
   {
@@ -607,22 +628,35 @@ public class GMActivity extends Activity
     // mButton1[BTN_TOGGLE].setEnabled( true );
     enableButtons( true );
   }
-    
+
+  /** update the list of calibration data adding a new data
+   * @param blk    new calibration data
+   */
   private void updateCBlockList( CBlock blk ) 
   { 
     if ( blk == null ) return;
     mDataAdapter.add( blk );
   }
   
+  /** update the list of calibration data adding a new data
+   * @param blk_id    ID of the new calibration data
+   */
   @Override
   public void updateBlockList( long blk_id ) 
   {
     updateCBlockList( mApp_mDData.selectGM( blk_id, TDInstance.cid ) );
   }
 
+  /** set the reference azimuth for survey data - empty method
+   * @param azimuth      azimuth
+   * @param fixed_extend whether the extend is kept fixed
+   */
   @Override
   public void setRefAzimuth( float azimuth, long fixed_extend ) { }
 
+  /** set the bluetooth connection status
+   * @param status   connection status
+   */
   @Override
   public void setConnectionStatus( int status )
   {
@@ -631,6 +665,8 @@ public class GMActivity extends Activity
 
   // --------------------------------------------------------------
 
+  /** update the display
+   */
   private void updateDisplay( )
   {
     // TDLog.v( "update Display CID " + TDInstance.cid );
@@ -644,6 +680,9 @@ public class GMActivity extends Activity
     }
   }
 
+  /** update the list of calibration data
+   * @param list   list of calibration data
+   */
   private void updateGMList( List< CBlock > list )
   {
     int n_saturated = 0;
@@ -714,7 +753,12 @@ public class GMActivity extends Activity
   // ---------------------------------------------------------------
   // list items click
 
-
+  /** implements item click listener
+   * @param parent container
+   * @param view   clicked view
+   * @param pos    index of the clicked view
+   * @param id     ...
+   */ 
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -829,6 +873,8 @@ public class GMActivity extends Activity
     mMenu.setOnItemClickListener( this );
   }
 
+  /** reset the window title
+   */
   private void resetTitle()
   {
     setTitle( mCalibName );
@@ -839,6 +885,9 @@ public class GMActivity extends Activity
     }
   }
 
+  /** enable or disable the button to write the calibration coefficients
+   * @param enable   whether to enable or disable
+   */
   private void enableWrite( boolean enable ) 
   {
     mEnableWrite = enable;
@@ -852,17 +901,26 @@ public class GMActivity extends Activity
     }
   }
 
-  // interface ICoeffDisplayer
-  // @Implements
+  /** check if the activity is finisshing - from interface ICoeffDisplayer
+   * @return true if this activity is finishing
+   */
   public boolean isActivityFinishing() { return this.isFinishing(); }
 
-  // @Implements
+  /** display the calibration coefficients
+   * @param bg    G offset coeff
+   * @param ag    G matrix coeff
+   * @param bm    M offset coeff
+   * @param am    M matrix coeff
+   * @param nL    non-linear coefficients
+   */
   public void displayCoeff( TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nL )
   {
     (new CalibCoeffDialog( this, null, bg, ag, bm, am, nL, null, 0.0f, 0.0f, 0.0f, 0.0f, 0, null /*, false */ ) ).show();
   }
 
-  // @Implements
+  /** enable or disable the buttons
+   * @param enable whether to enable
+   */
   public void enableButtons( boolean enable )
   {
     boolean enable2 = enable && mEnableWrite;
@@ -890,6 +948,9 @@ public class GMActivity extends Activity
     }
   }
 
+  /** bluetooth button action
+   * @param b   bluetooth button
+   */
   private void doBluetooth( Button b )
   {
     if ( TDLevel.overAdvanced && TDInstance.hasDeviceRemoteControl() ) {
@@ -900,7 +961,10 @@ public class GMActivity extends Activity
     }
   }
 
-  // no GMActivity for BLE devices
+  /** enable or disable the bluetooth button
+   * @param enable whether to enable
+   * @note no GMActivity for BLE devices
+   */
   public void enableBluetoothButton( boolean enable )
   {
     // if ( diving ) return;
@@ -909,6 +973,10 @@ public class GMActivity extends Activity
     mButton1[BTN_BT].setEnabled( enable );
   }
 
+  /** implements the long tap listener
+   * @param view tapped view
+   * @return true if the long-tap has been consumed
+   */
   @Override 
   public boolean onLongClick( View view )
   {
@@ -925,6 +993,9 @@ public class GMActivity extends Activity
     return false;
   }
 
+  /** implements the tap listener
+   * @param view tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -1033,6 +1104,12 @@ public class GMActivity extends Activity
     }
   }
 
+  /** upload the caibration coeffs
+   * @param delta   maximum calibration data angle error
+   * @param coeff   calibration coefficients
+   * @param mode    ...
+   * @param b       ...
+   */
   public void uploadCoefficients( float delta, final byte[] coeff, final boolean mode, final Button b )
   {
     String warning = null;
@@ -1058,6 +1135,10 @@ public class GMActivity extends Activity
     }
   }
 
+  /** compute the groups of the calibration data
+   * @param start_id   ID of the starting data
+   * @param policy     group policy
+   */
   public void computeGroups( long start_id, int policy )
   {
     setTitle( R.string.calib_compute_groups );
@@ -1065,11 +1146,18 @@ public class GMActivity extends Activity
     new CalibComputer( this, start_id, policy, CalibComputer.CALIB_COMPUTE_GROUPS ).execute();
   }
 
+  /** reset the groups of the calibration data
+   * @param start_id   ID of the starting data
+   */
   public void resetGroups( long start_id )
   {
     new CalibComputer( this, start_id, 0, CalibComputer.CALIB_RESET_GROUPS ).execute();
   }
 
+  /** reset and compute the groups of the calibration data
+   * @param start_id   ID of the starting data
+   * @param policy     group policy
+   */
   public void resetAndComputeGroups( long start_id, int policy )
   {
     // if ( ! mGMActivityVisible ) return;
@@ -1148,6 +1236,10 @@ public class GMActivity extends Activity
   //   }
   // }
  
+  /** update a calibration data
+   * @param value data group, as integer
+   * @param name  data group, as string
+   */
   public void updateGM( long value, String name )
   {
     mApp_mDData.updateGMName( mGMid, TDInstance.cid, name );
@@ -1165,13 +1257,20 @@ public class GMActivity extends Activity
     // }
   }
 
+  /** mark a calibration data "deleted"
+   * @param delete whether to mark the date "deleted" or "normal"
+   */
   public void deleteGM( boolean delete )
   {
     mApp_mDData.deleteGM( TDInstance.cid, mGMid, delete );
     updateDisplay( );
   }
 
-
+  /** handle key DOWN event
+   * @param code   key-event code
+   * @param event  key event
+   * @return true if event has been consumed
+   */
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
@@ -1192,6 +1291,9 @@ public class GMActivity extends Activity
 
   // ---------------------------------------------------------
 
+  /** create the menu adapter
+   * @param res  resources
+   */
   private void setMenuAdapter( Resources res )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
@@ -1205,6 +1307,8 @@ public class GMActivity extends Activity
     mMenu.invalidate();
   }
 
+  /** close menu drop-down
+   */
   private boolean closeMenu()
   {
     if ( onMenu ) {
@@ -1215,6 +1319,9 @@ public class GMActivity extends Activity
     return false;
   }
 
+  /** handle menu tap
+   * @param pos   index of submenu
+   */
   private void handleMenu( int pos )
   {
     closeMenu();

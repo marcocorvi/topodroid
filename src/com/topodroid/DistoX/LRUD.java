@@ -15,6 +15,8 @@ class LRUD
 {
   float l, r, u, d;
 
+  /** default cstr
+   */
   LRUD() 
   {
     l = 0.0f; // left
@@ -23,7 +25,9 @@ class LRUD
     d = 0.0f; // down
   }
 
-  LRUD( LRUD lrud ) // copy cstr
+  /** copy cstr
+   */
+  LRUD( LRUD lrud ) 
   {
     l = lrud.l;
     r = lrud.r;

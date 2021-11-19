@@ -17,6 +17,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -29,11 +30,22 @@ class DEMgridParser extends ParserDEM
   private boolean flip_vert; // flip_vert: rows are south-to-north
   private boolean flip_horz; // flip_horz: columns are east-to-west
 
-  DEMgridParser( String filename, int maxsize )
+  /** cstr
+   * @param filename   file fullpath
+   * @param maxsize    ...
+   */
+  DEMgridParser( String filename, int maxsize ) // FIXME DEM_URI
   {
     super( filename, maxsize );
   }
 
+  /** read the DEM data
+   * @param xwest    X west border
+   * @param xeast    X east border
+   * @param ysouth   Y south border
+   * @param ynorth   Y north border
+   * @return true if the DEM in memory is valid
+   */
   @Override
   boolean readData( double xwest, double xeast, double ysouth, double ynorth ) 
   {
@@ -107,7 +119,8 @@ class DEMgridParser extends ParserDEM
 
     FileReader fr = null;
     try {
-      fr = new FileReader( mFilename );
+      // fr = new FileReader( mFilename );
+      fr = TDFile.getFileReader( mFilename );
       BufferedReader br = new BufferedReader( fr );
       String line = null;
       boolean ready = false;
@@ -151,14 +164,19 @@ class DEMgridParser extends ParserDEM
     return mValid;
   }
 
+  /** read tthe header info
+   * @param filename file fullpath
+   * @return true if successful
+   */
   @Override
-  protected boolean readHeader( String filename )
+  protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
     // TDLog.v("DEM read header " + filename );
     flip_vert = false;
     flip_horz = false;
     try {
-      FileReader fr = new FileReader( filename );
+      // FileReader fr = new FileReader( filename );
+      FileReader fr = TDFile.getFileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       String line;
       while ( ( line = br.readLine() ) != null ) {

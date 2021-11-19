@@ -16,7 +16,8 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -27,23 +28,38 @@ import java.io.IOException;
  */
 class DEMasciiParser extends ParserDEM
 {
-  private double  xll,  yll; // Lower-left corner of lower-left cell
-  private int     cols, rows;
-  private boolean flip_horz; // whether to flip lines horizontally
+  private double  xll,  yll;  // Lower-left corner of lower-left cell
+  private int     cols, rows; // columns, rows
+  private boolean flip_horz;  // whether to flip lines horizontally
 
-  DEMasciiParser( String filename, int maxsize, boolean hflip, double xu, double yu )
+  /** cstr
+   * @param filename   fullpath of the DEM file
+   * @param maxsize    ...
+   * @param hflip      flip horizontally
+   * @param xu         X unit factor
+   * @param yu         Y unit factor
+   */
+  DEMasciiParser( String filename, int maxsize, boolean hflip, double xu, double yu ) // FIXME DEM_URI
   {
     super( filename, maxsize, xu, yu );
     flip_horz = hflip;
   }
 
+  /** read the DEM data
+   * @param xwest    X west border
+   * @param xeast    X east border
+   * @param ysouth   Y south border
+   * @param ynorth   Y north border
+   * @return true if the DEM in memory is valid
+   */
   @Override
   boolean readData( double xwest, double xeast, double ysouth, double ynorth )
   {
     if ( ! mValid ) return mValid;
     FileReader fr = null;
     try {
-      fr = new FileReader( mFilename );
+      // fr = new FileReader( mFilename );
+      fr = TDFile.getFileReader( mFilename );
       BufferedReader br = new BufferedReader( fr );
       for ( int k=0; k<6; ++k) br.readLine();
 
@@ -115,11 +131,16 @@ class DEMasciiParser extends ParserDEM
     return mValid;
   }
 
+  /** read tthe header info
+   * @param filename file fullpath
+   * @return true if successful
+   */
   @Override
-  protected boolean readHeader( String filename )
+  protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
     try {
-      FileReader fr = new FileReader( filename );
+      // FileReader fr = new FileReader( filename );
+      FileReader fr = TDFile.getFileReader( filename );
       BufferedReader br = new BufferedReader( fr );
       String line = br.readLine();
       String[] vals = line.replaceAll("\\s+", " ").split(" ");

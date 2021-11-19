@@ -88,6 +88,9 @@ public class DeviceHelper extends DataSetObservable
   SQLiteDatabase getDb() { return myDB; }
 
   // DeviceHelper( Context context, TopoDroidApp app, ArrayList< DataListener > listeners ) // IF_COSURVEY
+  /** cstr
+   * @param context context
+   */
   DeviceHelper( Context context /* , TopoDroidApp app */ )
   {
     mContext = context;
@@ -96,6 +99,8 @@ public class DeviceHelper extends DataSetObservable
     openDatabase();
   }
 
+  /** close the database
+   */
   void closeDatabase()
   {
     if ( myDB == null ) return;
@@ -103,7 +108,8 @@ public class DeviceHelper extends DataSetObservable
     myDB = null;
   }
 
-
+  /** open the "devuice10" database
+   */
   private void openDatabase()
   {
     String database_name = TDFile.getDeviceDatabase().getAbsolutePath();
@@ -129,12 +135,18 @@ public class DeviceHelper extends DataSetObservable
     }
   }
   
+  /** log an error message
+   * @param msg    message
+   * @param e      error
+   */
   private void logError( String msg, SQLiteException e )
   {
     TDLog.Error("DB " + msg + ": " + e.getMessage() );
   }
 
-
+  /** handle disk I/O error
+   * @param e  disk error
+   */
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     TDLog.Error("DB disk error " + e.getMessage() );
@@ -165,6 +177,11 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // CALIBRATION DATA
 
+  /** mark a calibration data "deleted"
+   * @param cid    calibration ID
+   * @param id     data ID
+   * @param delete whether to mark the date "deleted" or "normal"
+   */
   void deleteGM( long cid, long id, boolean delete )
   {
     if ( myDB == null ) {
@@ -182,6 +199,9 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "delete GM " + cid + "/" + id, e ); }
   }
 
+  /** delete a calibration and its data
+   * @param cid    calibration ID
+   */
   void doDeleteCalib( long cid )
   {
     if ( myDB == null ) {
@@ -201,6 +221,11 @@ public class DeviceHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError( "delete calib", e ); }
   }
 
+  /** update the group of a calibration data
+   * @param gid    data ID
+   * @param cid    calibration ID
+   * @param grp   data group, as string
+   */
   void updateGMName( long gid, long cid, String grp )
   {
     ContentValues cv = new ContentValues();
@@ -219,6 +244,11 @@ public class DeviceHelper extends DataSetObservable
     // // return 0;
   }
 
+  /** update the error of a calibration data
+   * @param gid    data ID
+   * @param cid    calibration ID
+   * @param error  data error value
+   */
   void updateGMError( long gid, long cid, double error )
   {
     ContentValues cv = new ContentValues();
@@ -237,6 +267,16 @@ public class DeviceHelper extends DataSetObservable
     // // return 0;
   }
 
+  /** insert a calibration data
+   * @param cid     calibration ID
+   * @param gx      G X-component
+   * @param gy      G Y-component
+   * @param gz      G Z-component
+   * @param mx      M X-component
+   * @param my      M Y-component
+   * @param mz      M Z-component
+   * @return the new data ID
+   */
   public long insertGM( long cid, long gx, long gy, long gz, long mx, long my, long mz )
   {
     if ( myDB == null ) {
@@ -267,7 +307,6 @@ public class DeviceHelper extends DataSetObservable
     
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
-
 
   void resetAllGMs( long cid, long start_id )
   {

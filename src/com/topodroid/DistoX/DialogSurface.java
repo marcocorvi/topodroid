@@ -43,7 +43,10 @@ class DialogSurface extends MyDialog
   private EditText mEast;
   private EditText mNorth;
 
-
+  /** cstr
+   * @param context  context
+   * @param app      3D activity
+   */
   public DialogSurface( Context context, TopoGL app )
   {
     super( context, R.string.DialogSurface );
@@ -107,6 +110,9 @@ class DialogSurface extends MyDialog
 
   }
 
+  /** implement view tap listener
+   * @param view tapped view
+   */
   public void onClick(View view)
   {
     if ( view.getId() == R.id.dem_load ) {

@@ -82,7 +82,12 @@ public class DBlock
 
   static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
 
+  /** test if a flag is set
+   * @param flag     flag to test
+   * @return true if the flag is set
+   */
          boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+
   public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
   public boolean isDuplicate() { return (mFlag & FLAG_DUPLICATE)  == FLAG_DUPLICATE; }
@@ -102,10 +107,26 @@ public class DBlock
   // static boolean isBackshot(int flag) { return (flag & FLAG_BACKSHOT) == FLAG_BACKSHOT; }
 
   // void resetFlag() { mFlag = FLAG_SURVEY; }
+
+  /** set the block flag to a given bitstring 
+   * @param flag    new flag bitstring
+   */
   void resetFlag( long flag ) { mFlag = flag; }
+
+  /** set a flag value(s)
+   * @param flag    flag value(s) to set
+   */
   void setFlag( long flag ) { mFlag |= flag; }
+
+  // /** clear a flag value(s)
+  //  * @param flag   flag value(s) to clear
+  //  */
   // void clearFlag( long flag ) { mFlag &= ~flag; }
   public long getFlag() { return mFlag; }
+
+  /** get the reduced flag (lowest three bits)
+   * @return the reduced flag
+   */
   public int  getReducedFlag() { return (int)(0x07 & mFlag); } // survey-surface-duplicate-commented part of the flag
 
   // ------------------------------------------------------------------
@@ -123,7 +144,8 @@ public class DBlock
   private static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
   private static final int BLOCK_SCAN       = 9; // FIXME_S_SPLAY scan splay
 
-  // block type to leg type table
+  /** block-type to leg-type table
+   */
   private static final long[] legOfBlockType = {
     LegType.NORMAL, // 0 BLANK
     LegType.NORMAL, // 0 LEG
@@ -137,6 +159,8 @@ public class DBlock
     LegType.SCAN,   // 6
   };
 
+  /** array of block-type of splays
+   */
   static final int[] blockOfSplayLegType = {
     BLOCK_SPLAY,
     -1, // BLOCK_SEC_LEG, // should never occor
@@ -147,7 +171,8 @@ public class DBlock
     BLOCK_SCAN,
   };
 
-  // block type to color table
+  /** block-type to color-table
+   */
   private static final int[] colors = {
     TDColor.LIGHT_PINK,   // 0 blank
     TDColor.WHITE,        // 1 midline
@@ -162,33 +187,100 @@ public class DBlock
     TDColor.GREEN
   };
 
+  /** get the type of this block
+   * @return the block type
+   */
   int getBlockType() { return mBlockType; }
 
+  /** set the type "BALNK_LEG" - only if the type was BLANK
+   */
   void setTypeBlankLeg( ) { if ( mBlockType == BLOCK_BLANK ) mBlockType = BLOCK_BLANK_LEG; }
+
+  /** set the type SEC_LEG
+   */
   void setTypeSecLeg()  { mBlockType = BLOCK_SEC_LEG; }
+
+  /** set the type BACK_LEG
+   */
   void setTypeBackLeg() { mBlockType = BLOCK_BACK_LEG; }
+
+  // /** set the type MAIN_LEG
+  //  */
   // void setTypeMainLeg()  { mBlockType = BLOCK_MAIN_LEG; }
+
+  /** set the type generic SPLAY
+   */
   void setTypeSplay()   { mBlockType = BLOCK_SPLAY; }
   
+  /** set the block type
+   * @param type   new block type
+   */
   void resetBlockType( int type ) { mBlockType = type; }
 
+  /** return true if the block type is BLANK or BLANK_LEG
+   */
   public boolean isTypeBlank() { return mBlockType == BLOCK_BLANK || mBlockType == BLOCK_BLANK_LEG; }
+
+  /** return true if the given type is BLANK or BLANK_LEG
+   * @param t   given type
+   */
   public static boolean isTypeBlank( int t ) { return t == BLOCK_BLANK || t == BLOCK_BLANK_LEG; }
+
+  /** return true if the block type is BLANK
+   */
   public boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
+
+  /** return true if the block type is MAIN_LEG or BACK_LEG
+   */
   public boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+
+  /** return true if the block type is MAIN_LEG
+   */
   public boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
+
+  /** return true if the block type is BACK_LEG
+   */
   public boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
+
+  /** return true if the block type is SEC_LEG
+   */
   public boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
 
+  /** return true if the given type is (any) SPLAY
+   * @param t   given type
+   */
   public static boolean isSplay( int t ) { return t >= BLOCK_SPLAY; }
+
+  /** return true if the block type is (any) SPLAY
+   */
   public boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
+
+  /** return true if the block type is a special SPLAY
+   */
   public boolean isOtherSplay() { return mBlockType >  BLOCK_SPLAY; }
+
+  /** return true if the block type is a generic SPLAY
+   */
   public boolean isPlainSplay() { return mBlockType == BLOCK_SPLAY; }
+
+  /** return true if the block type is a cross SPLAY
+   */
   public boolean isXSplay()     { return mBlockType == BLOCK_X_SPLAY; }
+
+  /** return true if the block type is a horizontal SPLAY
+   */
   public boolean isHSplay()     { return mBlockType == BLOCK_H_SPLAY; }
+
+  /** return true if the block type is a vertical SPLAY
+   */
   public boolean isVSplay()     { return mBlockType == BLOCK_V_SPLAY; }
+
+  /** return true if the block type is a scan SPLAY
+   */
   public boolean isScan()       { return mBlockType == BLOCK_SCAN; }
 
+  /** return the block leg-type
+   */
   long getLegType() { return legOfBlockType[ mBlockType ]; }
   // {
   //   if ( mBlockType == BLOCK_SEC_LEG )  return LegType.EXTRA;
@@ -200,6 +292,9 @@ public class DBlock
   //   return LegType.NORMAL;
   // }
 
+  /** set the block type from the leg-type
+   * @param leg_type    leg type
+   */
   void setBlockType( int leg_type )
   {
      switch ( leg_type ) {
@@ -213,6 +308,8 @@ public class DBlock
      }
   }
   
+  /** return the color (from the block-type)
+   */
   int getColorByType() { 
     // TDLog.v( "Block " + mId + " color() block type " + mBlockType );
     return colors[ mBlockType ];
@@ -221,7 +318,13 @@ public class DBlock
   // ---------------------------------------------------------------
   // ADDRESS
 
+  /** set the device address
+   * @param address   device address
+   */
   void setAddress( String address ) { mAddress = address; } // used by DataHelper
+
+  /** @return the device address of this block
+   */
   String getAddress() { return mAddress; } // used by the data exported
 
   // ---------------------------------------------------------------
@@ -326,7 +429,18 @@ public class DBlock
 
   // ----------------------------------------------------------------
 
-  // used by PocketTopo parser only
+  /** cstr
+   * @param f      FROM station
+   * @param t      TO station
+   * @param d      distance [m]
+   * @param b      azimuth [deg]
+   * @param c      clino [deg]
+   * @param r      roll
+   * @param e      extend
+   * @param t      block type
+   * @param shot_tyoe shot type
+   * @note used by PocketTopo parser only
+   */
   DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )
   {
     // assert( f != null && t != null );
@@ -360,6 +474,8 @@ public class DBlock
     mAddress   = null;
   }
 
+  /** default cstr
+   */
   DBlock()
   {
     // ( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )

@@ -4534,9 +4534,9 @@ public class TDExporter
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format("    <Club>%s</Club>\r\n", info.team );
       }
-      pw.format("    <TopoRobot>0</TopoRobot>\r\n");
-      pw.format("    <Couleur>0,0,0</Coleur>\r\n");
-      pw.format("  <Cavite>\r\n");
+      pw.format("    <Toporobot>0</Toporobot>\r\n");
+      pw.format("    <Coleur>0,0,0</Coleur>\r\n");
+      pw.format("  </Cavite>\r\n");
       pw.format("  <Mesures>\r\n");
       
       // VISUALTOPO: use 0 if declination is undefined

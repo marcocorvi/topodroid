@@ -1351,9 +1351,10 @@ public class TopoGL extends Activity
   {
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
-    // TDLog.v("DEM Path " + pathname + " File " + filename );
+    TDLog.v("DEM Path " + pathname + " File " + filename );
     ParserDEM dem = null;
     if ( pathname.toLowerCase().endsWith( ".grid" ) ) {
+      // FIXME DEM_URI
       dem = new DEMgridParser( pathname, mDEMmaxsize );
     } else if ( pathname.toLowerCase().endsWith( ".asc" ) || pathname.toLowerCase().endsWith(".ascii") ) {
       Cave3DFix origin = mParser.getOrigin();
@@ -1361,6 +1362,7 @@ public class TopoGL extends Activity
       double xunit = mParser.getWEradius(); // radius * PI/180
       double yunit = mParser.getSNradius(); // radius * PI/180
       // TDLog.v("xunit " + xunit + " yunit " + yunit );
+      // FIXME DEM_URI
       dem = new DEMasciiParser( pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
     } else { 
       return;
@@ -2610,6 +2612,9 @@ public class TopoGL extends Activity
   void selectImportFile( )  { selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null ); }
   // void selectTemperatureFile( ) { selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file, null ); }
 
+  /** export file selection
+   * @param export   export data-struct
+   */
   void selectExportFile( ExportData export )
   {
     mExport = export;
@@ -2623,6 +2628,13 @@ public class TopoGL extends Activity
     }
   }
 
+  /** file selection
+   * @param request   selection request type (code)
+   * @param action    unused
+   * @param mime      file mime type (unused)
+   * @param res       dialog title resource
+   * @param filename  suggested filename (optional)
+   */
   void selectFile( int request, String action, String mime, int res, String filename )
   {
     // TDLog.v("TopoGL select file");
@@ -2634,6 +2646,11 @@ public class TopoGL extends Activity
     startActivityForResult( Intent.createChooser(intent, getResources().getString( res ) ), request );
   }
 
+  /** callback to activity requests
+   * @param request   request code
+   * @param result    result code
+   * @param intent    result intent
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     if ( result != Activity.RESULT_OK ) return;

@@ -86,7 +86,6 @@ public class TDFile
 
   public static long getTopoDroidFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
 
-  // @param name     TopoDroid-relative filename
   /** get a File from the path
    * @param name   full pathname
    * @return a File for the pathname
@@ -99,7 +98,6 @@ public class TDFile
    * @return a File for the full file pathname
    */
   public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
-
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
@@ -276,22 +274,55 @@ public class TDFile
   //   return new File( dir, name );
   // }
 
+  /** get a file input stream
+   * @param name  file fullpath
+   * @return file input stream
+   */
   public static FileInputStream getFileInputStream( String name ) throws IOException { return new FileInputStream( name ); }
 
   // public static FileInputStream getFileInputStream( File file ) throws IOException { return new FileInputStream( file ); }
 
+  /** get a file output stream
+   * @param name  file fullpath
+   * @return file output stream
+   */
   public static FileOutputStream getFileOutputStream( String name ) throws IOException { return new FileOutputStream( name ); }
 
+  /** get a file output stream
+   * @param file  file
+   * @return file output stream
+   */
   public static FileOutputStream getFileOutputStream( File file ) throws IOException { return new FileOutputStream( file ); }
 
+  /** get a file writer
+   * @param name    file fullpath
+   * @param append  whther to open the file in append mode
+   * @return file writer
+   */
   public static FileWriter getFileWriter( String name, boolean append ) throws IOException { return new FileWriter( name, append ); }
 
+  /** get a file writer
+   * @param name    file fullpath
+   * @return file writer
+   */
   public static FileWriter getFileWriter( String name ) throws IOException { return new FileWriter( name ); }
 
+  /** get a file writer
+   * @param file    file 
+   * @return file writer
+   */
   public static FileWriter getFileWriter( File file ) throws IOException { return new FileWriter( file ); }
 
+  /** get a file reader
+   * @param name    file fullpath
+   * @return file reader
+   */
   public static FileReader getFileReader( String name ) throws IOException { return new FileReader( name ); }
 
+  /** get a file reader
+   * @param file    file 
+   * @return file reader
+   */
   public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 
   // -----------------------------------------------------------------------------
@@ -543,8 +574,12 @@ public class TDFile
 
   // -------------------------------------------------------------------------------
 
-  // get the file descriptor.
-  // After use must call close() on the file desriptor
+  /** get the file descriptor.
+   * @param uri    file uri
+   * @param mode   open mode
+   * @return file descriptor
+   * @note After use must call close() on the file desriptor
+   */
   static ParcelFileDescriptor getFileDescriptor( Uri uri, String mode )
   {
     try {
