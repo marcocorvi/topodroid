@@ -1152,7 +1152,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_import_gps">GPS pont import</string>
 
   <string name="exported_settings">Beállítások exportálása %1$s</string>
-  <string name="imported_settings">mportált beállítások</string>
+  <string name="imported_settings">Importált beállítások</string>
   <string name="imported_settings_failed">Nem sikerült a beállítások importálása</string>
   <string name="export_settings_failed">Nem sikerült a beállítások exportálása</string>
   <string name="pref_export_settings">Beállítások exportálása fájlba</string>
