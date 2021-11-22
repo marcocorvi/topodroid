@@ -176,7 +176,9 @@ public class BricProto extends TopoDroidProtocol
           azimuth = ( mErr1 == 15 )? mErrVal1 : (mErr2 == 15)? mErrVal2 : 0;
         }
         int data_type = ( mType == 1 )? DataType.DATA_SCAN : DataType.DATA_SHOT;
-        mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment );
+        if ( ! mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment ) ) {
+          TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: skipped existing index " + index );
+        }
       } else {
         TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: skipping 0-length data");
       }

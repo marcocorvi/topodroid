@@ -70,9 +70,8 @@ public class TopoDroidComm
   // @param index      bric shot index
   // @param lister
   // @param data_type bric datatype (0: normal, 1: scan )
-  public void handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
+  public boolean handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
-    // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     // TDLog.v( "TD comm: packet DATA");
     // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
     ++mNrPacketsRead;
@@ -84,6 +83,11 @@ public class TopoDroidComm
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
     // TODO split the data insert in three places: one for each data packet
 
+    TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
+    if ( index >= 0 && TopoDroidApp.mData.hasShotId( TDInstance.sid, index ) ) {
+      TDLog.Error("BRIC4 Repeated shot id " + index + " " + d + " " + b + " " + c + " " + r );
+      return false;
+    }
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
     mLastShotId = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
@@ -102,6 +106,7 @@ public class TopoDroidComm
     } else {
       TDLog.v( "TD comm: null Lister");
     }
+    return true;
   }
 
   public void handleZeroPacket( long index, Handler lister, int data_type )

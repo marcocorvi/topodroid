@@ -1746,7 +1746,7 @@ public class DataHelper extends DataSetObservable
 		     long extend, double stretch, long leg, long type )
   {
     if ( myDB == null ) return -1L;
-    // TDLog.v( "A4 insert sht at " + at + " leg " + leg );
+    // TDLog.v("DB manual insert shot at " + at + " d " + d + " b " + b + " c " + c );
     shiftShotsId( sid, at );
     ++ myNextId;
     ContentValues cv = new ContentValues();
@@ -1856,7 +1856,7 @@ public class DataHelper extends DataSetObservable
                           long extend, double stretch, long leg, long status, long shot_type, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    // TDLog.v("SHOT " + "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -1867,7 +1867,7 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, 0.0, 0.0, 0.0,
 		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, "", addr );
-    doInsert( SHOT_TABLE, cv, "insert" );
+    doInsert( SHOT_TABLE, cv, "simple insert" );
     return id;
   }
 
@@ -1876,7 +1876,7 @@ public class DataHelper extends DataSetObservable
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    // TDLog.v("SHOT " + "do insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -1887,7 +1887,7 @@ public class DataHelper extends DataSetObservable
     if (addr == null) addr = "";
     ContentValues cv = makeShotContentValues( sid, id, millis, color, "", "", d, b, c, r, mag, acc, dip,
 		    extend, stretch, DBlock.FLAG_SURVEY, leg, status, shot_type, comment, addr );
-    doInsert( SHOT_TABLE, cv, "insert" );
+    doInsert( SHOT_TABLE, cv, "complete insert" );
     return id;
   }
 
@@ -2080,6 +2080,7 @@ public class DataHelper extends DataSetObservable
   private static final String qHasPlot      = "select id, name from plots where surveyId=? AND name=? order by id ";
   private static final String qMaxPlotIndex = "select id, name from plots where surveyId=? AND type=? order by id ";
   private static final String qHasShot      = "select fStation, tStation from shots where surveyId=? AND ( ( fStation=? AND tStation=? ) OR ( fStation=? AND tStation=? ) )";
+  private static final String qHasShotId    = "select surveyId, id from shots where surveyId=? AND id=?";
   private static final String qNextStation  = "select tStation from shots where surveyId=? AND fStation=? ";
   private static final String qLastStation  = "select fStation, tStation from shots where surveyId=? order by id DESC ";
   private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
@@ -2685,6 +2686,15 @@ public class DataHelper extends DataSetObservable
     if ( cursor.moveToFirst() ) {
       ret = cursor.getString( 0 );
     }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
+
+  public boolean hasShotId( long sid, long id )
+  {
+    if ( myDB == null ) return false;
+    Cursor cursor = myDB.rawQuery( qHasShotId, new String[] { Long.toString(sid), Long.toString(id) } );
+    boolean ret = cursor.moveToFirst();
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
