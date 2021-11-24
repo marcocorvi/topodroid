@@ -15,6 +15,8 @@ import com.topodroid.utils.TDLog;
 
 import android.graphics.Bitmap;
 
+// import java.io.InputStreamReader;
+
 public class TiffFactory
 {
   static {

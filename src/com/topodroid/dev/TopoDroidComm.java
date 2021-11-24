@@ -84,10 +84,6 @@ public class TopoDroidComm
     // TODO split the data insert in three places: one for each data packet
 
     TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
-    if ( index >= 0 && TopoDroidApp.mData.hasShotId( TDInstance.sid, index ) ) {
-      TDLog.Error("BRIC4 Repeated shot id " + index + " " + d + " " + b + " " + c + " " + r );
-      return false;
-    }
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
     mLastShotId = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );

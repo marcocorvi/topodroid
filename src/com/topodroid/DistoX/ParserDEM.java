@@ -18,6 +18,10 @@ package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
 
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+
 class ParserDEM extends DEMsurface
 {
   protected boolean mValid;    // header is valid
@@ -34,12 +38,18 @@ class ParserDEM extends DEMsurface
   String mFilename; // DEM filename
   protected double xunit, yunit;
 
+  protected InputStreamReader mIsr = null;
+  protected BufferedReader mBr = null;
+
   /** cstr
+   * @param isr        input reader
    * @param filename   file fullpath
    * @param size       max DEM size
    */
-  ParserDEM( String filename, int size ) // FIXME DEM_URI 
+  ParserDEM( InputStreamReader isr, String filename, int size ) // FIXME DEM_URI 
   {
+    mIsr      = isr;
+    mBr       = new BufferedReader( mIsr );
     mFilename = filename;
     mMaxSize  = size;
     xunit = 1.0f;
@@ -53,8 +63,10 @@ class ParserDEM extends DEMsurface
    * @param xu         X units
    * @param yu         Y units
    */
-  ParserDEM( String filename, int size, double xu, double yu )
+  ParserDEM( InputStreamReader isr, String filename, int size, double xu, double yu )
   {
+    mIsr      = isr;
+    mBr       = new BufferedReader( mIsr );
     mFilename = filename;
     mMaxSize  = size;
     xunit = xu;
@@ -123,6 +135,15 @@ class ParserDEM extends DEMsurface
   //     initNormal();
   //   }
   // }
+
+  protected void tryCloseStream()
+  {
+    if ( mIsr != null ) try { 
+      mIsr.close(); 
+      mIsr = null;
+      mBr  = null;
+    } catch ( IOException e ) {}
+  }
 
 }
 

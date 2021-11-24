@@ -20,11 +20,15 @@ the connection is maintained and the data are downloaded (and displayed in the s
 
 For the <i>SAP5</i> and <i>BRIC4</i> data are always downloaded in <i>continuous</i> mode.<br><p>
 
+<b>BRIC4</b><br>
+
 The data download from the <i>BRIC4</i> can be limited to only the essential values (distance, azimuth, cllino, and little more), or 
 complete, with all the information transferred by the BRIC4 protocol.<br>
 The complete protocol includes the "index" of the shot. By default TopoDroid uses the <i>BRIC4</i> index as data index
 in the database table, if it receives it. Since the data index must be unique, if TopoDroid receives a shot with an index that
-is already in the database, the shot is discarded, and a warning is logged.<br>
+is already in the database, a novel value is used instead of the <i>BRIC4</i> index.<br>
 It is possible to disable the use of the <i>BRIC4</i> index [G], and let TopoDroid assign incremental values to the data index.<br><p> 
+
+<u>WARNING</u>. The first shot after a BRIC4 "memory clear" does not arrive to TopoDroid.<br><p>
 
 </body></html>

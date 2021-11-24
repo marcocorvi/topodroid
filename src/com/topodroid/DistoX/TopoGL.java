@@ -39,6 +39,7 @@ import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.help.HelpDialog;
 
 import com.topodroid.ui.MyButton;
@@ -56,6 +57,7 @@ import java.io.FileInputStream;
 import java.io.DataInputStream;
 import java.io.InputStreamReader;
 import java.io.DataOutputStream;
+import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,6 +70,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.os.AsyncTask;
 import android.os.Message;
+import android.os.ParcelFileDescriptor;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -1315,6 +1318,10 @@ public class TopoGL extends Activity
 
 
   // ------------------------------ SKETCH
+  /** open a sketch file (in Cave3D format)
+   * @param pathname    file full pathname
+   * @param filename    ...
+   */
   void openSketch( String pathname, String filename ) 
   {
     // TDLog.v("DEM " + pathname );
@@ -1346,16 +1353,22 @@ public class TopoGL extends Activity
   }
 
   // ------------------------------ DEM
-  // void openDEM( String pathname, String filename ) 
+
+  /** open a DEM file
+   * @param uri   file URI
+   */
   void openDEM( Uri uri )
   {
+    InputStreamReader isr = null;
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
     TDLog.v("DEM Path " + pathname + " File " + filename );
     ParserDEM dem = null;
     if ( pathname.toLowerCase().endsWith( ".grid" ) ) {
+      isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
       // FIXME DEM_URI
-      dem = new DEMgridParser( pathname, mDEMmaxsize );
+      dem = new DEMgridParser( isr, pathname, mDEMmaxsize );
     } else if ( pathname.toLowerCase().endsWith( ".asc" ) || pathname.toLowerCase().endsWith(".ascii") ) {
       Cave3DFix origin = mParser.getOrigin();
       // origin.log();
@@ -1363,7 +1376,8 @@ public class TopoGL extends Activity
       double yunit = mParser.getSNradius(); // radius * PI/180
       // TDLog.v("xunit " + xunit + " yunit " + yunit );
       // FIXME DEM_URI
-      dem = new DEMasciiParser( pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
+      isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+      dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
     } else { 
       return;
     }
@@ -1429,8 +1443,9 @@ public class TopoGL extends Activity
   // }
   // END TEMPERATURE
 
-  // load a texture file (either GeoTIFF or OSM)
-  // void openTexture( String pathname, String filename )
+  /** load a texture file (either GeoTIFF or OSM)
+   * @param uri   texture-file uri
+   */
   void openTexture( Uri uri )
   {
     if ( mRenderer == null ) return;
@@ -1440,18 +1455,24 @@ public class TopoGL extends Activity
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
     // TDLog.v("Texture Path " + pathname + " File " + filename );
-
     // TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
 
     mTextureName = filename;
     if ( filename.toLowerCase().endsWith( ".osm" ) ) {
-      loadTextureOSM( pathname, bounds );
+      loadTextureOSM( isr, pathname, bounds );
     } else {
-      loadTextureGeotiff( pathname, bounds );
+      loadTextureGeotiff( isr, pathname, bounds );
     }
   }
 
-  private void loadTextureGeotiff( final String pathname, final RectF bounds )
+  /** load a geotiff texture from file
+   * @param isr      the input-stream reader is not used
+   * @param pathname TIFF file full pathname
+   * @param bounds   ...
+   */
+  private void loadTextureGeotiff( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
     (new AsyncTask<String, Void, Boolean>() {
       Bitmap bitmap = null;
@@ -1478,7 +1499,7 @@ public class TopoGL extends Activity
     }).execute( pathname );
   }
 
-  private void loadTextureOSM( final String pathname, final RectF bounds )
+  private void loadTextureOSM( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
     (new AsyncTask<String, Void, Boolean>() {
       Bitmap bitmap = null;
@@ -1492,7 +1513,7 @@ public class TopoGL extends Activity
         } 
 
         OsmFactory osm = new OsmFactory( bounds.left, bounds.bottom, bounds.right, bounds.top, origin );
-        bitmap = osm.getBitmap( pathname );
+        bitmap = osm.getBitmap( isr, pathname );
         // if ( bitmap != null ) {
         //   TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
         // }
@@ -1502,6 +1523,11 @@ public class TopoGL extends Activity
 
       public void onPostExecute( Boolean b )
       {
+        if ( isr != null ) {
+          try {
+            isr.close();
+          } catch ( IOException e ) { }
+        }
         if ( b ) {
           if ( mRenderer != null ) mRenderer.notifyTexture( bitmap ); // FIXME do in doInBackground
           TDToast.make( R.string.texture_ok );

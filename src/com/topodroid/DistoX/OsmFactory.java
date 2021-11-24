@@ -23,7 +23,8 @@ import android.graphics.Canvas;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import java.io.FileReader;
+// import java.io.FileReader;
+import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
@@ -106,6 +107,13 @@ public class OsmFactory
   int height;
   double mXres, mYres;
 
+  /** cstr
+   * @param xx1    left bound
+   * @param yy1    bottom bound
+   * @param xx2    right bound
+   * @param yy2    top bound
+   * @param origin cartographic/geographic coords of the origin
+   */
   OsmFactory( double xx1, double yy1, double xx2, double yy2, Cave3DFix origin )
   {
     x1 = xx1;
@@ -134,12 +142,20 @@ public class OsmFactory
   private double x2m( double x ) { return (mOrigin.longitude + ( x - mOrigin.x ) / e_radius); }
   private double y2p( double y ) { return (mOrigin.latitude  + ( y - mOrigin.y ) / s_radius); }
 
+  /** @return the value substring (enclosed by double-quotes)
+   * @param line  input line
+   * @param pos   start position (of the value substring)
+   */
   private String getValue( String line, int pos )
   {
     int end = line.indexOf( '"', pos );
     return line.substring( pos, end );
   }
 
+  /** @return the double value (enclosed by double-quotes)
+   * @param line  input line
+   * @param pos   start position (of the double-value substring)
+   */
   private double getDouble( String line, int pos )
   {
     try {
@@ -148,7 +164,12 @@ public class OsmFactory
     return 0;
   }
 
-  public Bitmap getBitmap( String path )
+  /** read a bitmap and return it
+   * @param isr     input stream reader 
+   * @param path    input pathname
+   * @return input stream reader
+   */
+  public Bitmap getBitmap( InputStreamReader isr, String path )
   {
     Bitmap bitmap = null;
     double m1 = x2m( x1 );
@@ -178,8 +199,9 @@ public class OsmFactory
     HashMap<String, Point2D> nodes = new HashMap<>();
 
     try {
-      FileReader fis = new FileReader( path );
-      BufferedReader br = new BufferedReader( fis );
+      // FileReader fis = new FileReader( path );
+      // BufferedReader br = new BufferedReader( fis );
+      BufferedReader br = new BufferedReader( isr );
       String line;
       while ( ( line = br.readLine().trim() ) != null ) {
         if ( line.startsWith( "<?xml" ) ) continue;
@@ -256,6 +278,10 @@ public class OsmFactory
         }
       }
     } catch ( IOException e ) { 
+    } finally {
+      if ( isr != null ) {
+        try { isr.close(); } catch ( IOException e ) { }
+      }
     }
     return bitmap;
   }

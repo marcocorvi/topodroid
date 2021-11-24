@@ -20,6 +20,7 @@ import com.topodroid.common.PlotType;
 import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
+import java.io.ByteArrayOutputStream;
 
 import java.io.InputStream;
 import java.io.FileInputStream;
@@ -497,7 +498,23 @@ public class Archiver
     // TDLog.v( "decompress entry: size " + size );
     return size;
   }
-    
+
+  private static int decompressEntry( InputStream zin, ZipEntry ze, ByteArrayOutputStream bout )
+  {
+    byte[] data = new byte[ 4096 ];
+    int size = 0;
+    try {
+      int c;
+      while ( ( c = zin.read( data ) ) != -1 ) {
+        bout.write(data, 0, c);
+        size += c;
+      }
+    } catch ( IOException e ) {
+      TDLog.Error("ZIP decompress entry to byte array error: " + e.getMessage() );
+      return -1;
+    }
+    return size;
+  }
 
   public int unArchive( TopoDroidApp mApp, String filename, String surveyname, boolean force )
   {
@@ -514,17 +531,19 @@ public class Archiver
       ZipFile zip = new ZipFile( filename );
       ze = zip.getEntry( "manifest" );
       if ( ze == null ) return -2;
-      pathname = TDPath.getManifestFile( );
+      // pathname = TDPath.getManifestFile( );
       // TDPath.checkPath( pathname );
-      FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+      // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+      ByteArrayOutputStream bout = new ByteArrayOutputStream();
       InputStream zin = zip.getInputStream( ze );
-      int msize = decompressEntry( zin, ze, fout );
-      fout.close();
+      int msize = decompressEntry( zin, ze, bout );
+      // fout.close();
       if ( msize > 0 ) {
         // int c; while ( ( c = is.read( mbuffer ) ) != -1 ) fout.write(mbuffer, 0, c);
-        ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
+        // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
+        ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
       }
-      TDFile.deleteFile( pathname );
+      // TDFile.deleteFile( pathname );
       TDLog.Log( TDLog.LOG_ZIP, "un-archived manifest " + ok_manifest );
       if ( ok_manifest < 0 ) {
         if ( ! force ) {
@@ -641,7 +660,7 @@ public class Archiver
           }
           if ( pathname != null ) {
             TDPath.checkPath( pathname );
-            fout = TDFile.getFileOutputStream( pathname );
+            FileOutputStream fout = TDFile.getFileOutputStream( pathname );
             int size = decompressEntry( zin, ze, fout );
             // TDLog.Log( TDLog.LOG_ZIP, "Unzip file \"" + pathname + "\" size " + size );
             // TDLog.v( "Unzip file \"" + pathname + "\" size " + size );
@@ -688,18 +707,20 @@ public class Archiver
       while ( ( ze = zin.getNextEntry() ) != null ) {
         // TDLog.v( "get OK manifest: zentry name " + ze.getName() );
         if ( ze.getName().equals( "manifest" ) ) {
-          String pathname = TDPath.getManifestFile( );
+          // String pathname = TDPath.getManifestFile( );
           // TDLog.v( "OK imanifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
-          FileOutputStream fout = TDFile.getFileOutputStream( pathname );
-          int size = decompressEntry( zin, ze, fout );
+          // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
+          ByteArrayOutputStream bout = new ByteArrayOutputStream();
+          int size = decompressEntry( zin, ze, bout );
           // TDLog.Log( TDLog.LOG_ZIP, "Zip imanifest: \"" + ze.getName() + "\" size " + size );
           if ( size > 0 ) {
-            ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
+            // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
+            ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
             // TDLog.v( "Zip manifest: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest );
           } else {
             // TDLog.v( "Zip manifest: \"" + ze.getName() + "\" size " + size );
           }
-          TDFile.deleteFile( pathname );
+          // TDFile.deleteFile( pathname );
           if ( ok_manifest < 0 ) return ok_manifest;
           // TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
           // TDLog.v( "un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );

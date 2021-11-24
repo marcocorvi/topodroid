@@ -51,6 +51,7 @@ import java.io.FileWriter;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.StringReader;
 
 import java.io.InputStream;
 import java.io.FileOutputStream;
@@ -1030,7 +1031,8 @@ public class TopoDroidApp extends Application
   // -12 IO error
   //
   // @note surveyname is modified
-  static public int checkManifestFile( String filename, String surveyname )
+  // static public int checkManifestFile( String filename, String surveyname )
+  static public int checkManifestFile( String manifest, String surveyname )
   {
     mManifestDbVersion = 0;
     String line;
@@ -1040,7 +1042,8 @@ public class TopoDroidApp extends Application
     int version_code = 0;
     int ret = -1;
     try {
-      FileReader fr = TDFile.getFileReader( filename );
+      // FileReader fr = TDFile.getFileReader( filename );
+      StringReader fr = new StringReader( manifest );
       BufferedReader br = new BufferedReader( fr );
       // first line is version
       line = br.readLine().trim();
@@ -1069,7 +1072,7 @@ public class TopoDroidApp extends Application
         TDLog.Error( "TopoDroid survey exists already: <" + surveyname + ">" );
         return -1;
       }
-      fr.close();
+      // fr.close();
     } catch ( NumberFormatException e ) {
       TDLog.Error( "TopoDroid check manifest error: " + e.getMessage() );
       return -10;

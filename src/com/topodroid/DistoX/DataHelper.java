@@ -1511,6 +1511,9 @@ public class DataHelper extends DataSetObservable
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
+    if ( id >= 0 && hasShotId( sid, id ) ) { // if shot ID is already present, use a new ID
+      id = -1L;
+    }
     return doCompleteInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
   }
 
@@ -2690,7 +2693,7 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  public boolean hasShotId( long sid, long id )
+  private boolean hasShotId( long sid, long id )
   {
     if ( myDB == null ) return false;
     Cursor cursor = myDB.rawQuery( qHasShotId, new String[] { Long.toString(sid), Long.toString(id) } );

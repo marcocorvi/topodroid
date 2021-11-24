@@ -19,9 +19,10 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 
-import java.io.FileReader;
-import java.io.BufferedReader;
+// import java.io.FileReader;
+// import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 class DEMgridParser extends ParserDEM
 {
@@ -34,9 +35,9 @@ class DEMgridParser extends ParserDEM
    * @param filename   file fullpath
    * @param maxsize    ...
    */
-  DEMgridParser( String filename, int maxsize ) // FIXME DEM_URI
+  DEMgridParser( InputStreamReader isr, String filename, int maxsize ) // FIXME DEM_URI
   {
-    super( filename, maxsize );
+    super( isr, filename, maxsize );
   }
 
   /** read the DEM data
@@ -51,6 +52,7 @@ class DEMgridParser extends ParserDEM
   {
     // TDLog.v("DEM read data dim " + cols + "x" + rows + " LLcorner " + xll + " " + yll + " cell " + mDim1 + " " + mDim2 + " flip " + flip_vert + " " + flip_horz );
     if ( ! mValid ) return mValid;
+    if ( mBr == null ) return false;
     int dj = (flip_vert ? 1 : -1);
     int di = (flip_horz ? -1 : 1);
 
@@ -117,15 +119,15 @@ class DEMgridParser extends ParserDEM
     }
     mZ = new float[ mNr1 * mNr2 ];
 
-    FileReader fr = null;
+    // FileReader fr = null;
     try {
       // fr = new FileReader( mFilename );
-      fr = TDFile.getFileReader( mFilename );
-      BufferedReader br = new BufferedReader( fr );
+      // fr = TDFile.getFileReader( mFilename );
+      // BufferedReader mBr = new BufferedReader( fr );
       String line = null;
       boolean ready = false;
       while ( ! ready ) {
-        line = br.readLine().trim();
+        line = mBr.readLine().trim();
         if ( line.length() == 0 ) continue;
         if ( line.startsWith("#") || line.startsWith("grid") ) continue;
         try { 
@@ -137,7 +139,7 @@ class DEMgridParser extends ParserDEM
       int j = flip_vert ? 0 : mNr2-1;
       int k = 0; // grid-line number
       for ( ; k < yoff; ++k ) {
-        line = br.readLine();
+        line = mBr.readLine();
       }
       for ( ; k < mNr2; ++ k ) {
         line = line.trim();
@@ -152,13 +154,14 @@ class DEMgridParser extends ParserDEM
         } catch ( NumberFormatException e ) { mValid = false; break; }
         if ( k < mNr2-1 ) {
           j += dj;
-          line = br.readLine();
+          line = mBr.readLine();
         }
       }
     } catch ( IOException e1 ) {
       mValid = false;
     } finally {
-      if ( fr != null ) try { fr.close(); } catch ( IOException e ) {}
+      // if ( fr != null ) try { fr.close(); } catch ( IOException e ) {}
+      tryCloseStream();
     }
     // makeNormal();
     return mValid;
@@ -172,14 +175,15 @@ class DEMgridParser extends ParserDEM
   protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
     // TDLog.v("DEM read header " + filename );
+    if ( mBr == null ) return false;
     flip_vert = false;
     flip_horz = false;
     try {
       // FileReader fr = new FileReader( filename );
-      FileReader fr = TDFile.getFileReader( filename );
-      BufferedReader br = new BufferedReader( fr );
+      // FileReader fr = TDFile.getFileReader( filename );
+      // BufferedReader mBr = new BufferedReader( fr );
       String line;
-      while ( ( line = br.readLine() ) != null ) {
+      while ( ( line = mBr.readLine() ) != null ) {
         line = line.trim();
         if ( line.length() == 0 ) continue;    // empty line
         if ( line.startsWith("#" ) ) continue; // comment line
@@ -211,7 +215,7 @@ class DEMgridParser extends ParserDEM
         } catch ( NumberFormatException e ) { // ok
         }
       }
-      fr.close();
+      // fr.close();
       // TDLog.v("DEM dim " + cols + "x" + rows + " LLcorner " + xll + " " + yll + " cell " + mDim1 + " " + mDim2 + " flip " + flip_vert + " " + flip_horz );
     } catch ( IOException e1 ) { 
       return false;
