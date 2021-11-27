@@ -4,7 +4,7 @@
   <string name="user_man_it" translatable="false">https://github.com/fato63/TopoItMan/raw/master/TopodroidItManual.zip</string>
   <string name="user_man_ru" translatable="false">https://github.com/akozhenkov/TD_manual_RU/archive/master.zip</string>
   <string name="user_man_hu" translatable="false">https://github.com/BalazsHoll/TopoDroid_manual_hu/raw/main/man.zip</string>
-  <string name="user_man_fr" translatable="false">http://souterweb.free.fr/topographie/topodroid_travaux/fr.zip</string>
+  <string name="user_man_fr" translatable="false">https://souterweb.pagesperso-orange.fr/topographie/topodroid_travaux/fr.zip</string>
 
   <string name="man_version_es" translatable="false">0</string>
   <string name="man_version_it" translatable="false">14</string>
