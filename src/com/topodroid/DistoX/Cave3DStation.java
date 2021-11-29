@@ -42,7 +42,9 @@ public class Cave3DStation extends Vector3D
   String comment; // not used
 
   double pathlength; // path length
-  Cave3DStation pathprev;
+  private double pathdistpos;
+  private double pathdistneg;
+  Cave3DStation pathprev; // previous station on shortest path
 
   // -------------------------------------------------------------------------
   void serialize( DataOutputStream dos ) throws IOException
@@ -72,12 +74,25 @@ public class Cave3DStation extends Vector3D
 
   // -------------------------------------------------------------------------
 
+  /** cstr
+   * @param nm   name
+   * @param e0   east
+   * @param n0   north
+   * @param z0   vertical
+   */
   public Cave3DStation( String nm, double e0, double n0, double z0 )
   {
     super( e0, n0, z0 );
     init( nm, -1, -1, null, FLAG_NONE, null );
   }
 
+  /** cstr
+   * @param nm   name
+   * @param e0   east
+   * @param n0   north
+   * @param z0   vertical
+   * @param survey  Cave3D survey
+   */
   public Cave3DStation( String nm, double e0, double n0, double z0, Cave3DSurvey survey )
   {
     super( e0, n0, z0 );
@@ -91,28 +106,87 @@ public class Cave3DStation extends Vector3D
   //   init ( nm, survey, fl, cmt );
   // }
 
+  /** cstr
+   * @param nm   name
+   * @param e0   east
+   * @param n0   north
+   * @param z0   vertical
+   * @param id   leg id
+   * @param sid  survey id
+   * @param cmt  comment
+   */
   public Cave3DStation( String nm, double e0, double n0, double z0, int id, int sid, int fl, String cmt )
   {
     super( e0, n0, z0 );
     init( nm, id, sid, null, fl, cmt );
   }
 
+  /** set the station survey
+   * @param survey   Cave3D survey
+   */
   void setSurvey( Cave3DSurvey survey )
   {
     mSurvey = survey;
     mSid    = survey.mId;
   }
 
+  /** @return true if the station has the specified name
+   * @param nm  given name
+   */
   public boolean hasName( String nm ) { return full_name != null && full_name.equals( nm ); }
+
+  /** @return station full-name
+   */
   public String  getFullName()  { return full_name; }
+
+  /** @return station short-name
+   */
   public String  getShortName() { return short_name; }
+
+  /** @return station survey
+   */
   public String  getSurvey()    { return survey_name; }
+
+  /** set the station flag
+   * @param fl   flag
+   */
   public void setFlag( int fl ) { flag = fl; }
 
-  void setPathlength( double len, Cave3DStation prev ) { pathlength = len; pathprev = prev; }
+  /** set the pathlength
+   * @param len    path-length value
+   * @param prev   previous station
+   */
+  void setPathlength( double len, Cave3DStation prev, double dpos, double dneg ) 
+  {
+    pathlength = len;
+    pathprev = prev;
+    if ( prev == null ) {
+      pathdistpos = 0;
+      pathdistneg = 0;
+    } else {
+      pathdistpos = dpos;
+      pathdistneg = dneg;
+    }
+  }
 
+  /** @return positive denivel 
+   */
+  double getPathDistPos() { return pathdistpos; }
+
+  /** @return negative denivel 
+   */
+  double getPathDistNeg() { return pathdistneg; }
+
+  /** @return path length
+   */
   double getPathlength() { return pathlength; }
+
+  /** @return final path length
+   */
   double getFinalPathlength() { return (pathprev == null)? -1.0 : pathlength; }
+
+  /** @return previous station on the shortest path
+   */
   Cave3DStation getPathPrevious() { return pathprev; }
 
   Vector3D toVector3D() { return new Vector3D( x, y, z ); }
@@ -137,6 +211,9 @@ public class Cave3DStation extends Vector3D
     // temp = 0; // TEMPERATURE
   }
 
+  /** set the station name
+   * @param nm   name
+   */
   public void setName( String nm )
   {
     full_name = nm;
@@ -156,7 +233,9 @@ public class Cave3DStation extends Vector3D
     }
   }
 
-  // add a discriminating number to the station name
+  /** add a discriminating number to the station name
+   * @param number   discriminating number
+   */
   public void addToName( int number )
   {
     short_name = short_name + "-" + number;

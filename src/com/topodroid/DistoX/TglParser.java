@@ -199,7 +199,7 @@ public class TglParser
 
   private void initStationsPathlength()
   {
-    for ( Cave3DStation st : stations ) st.setPathlength( Float.MAX_VALUE, null );
+    for ( Cave3DStation st : stations ) st.setPathlength( Float.MAX_VALUE, null, 0, 0 );
   }
 
   TglMeasure computeCavePathlength( Cave3DStation s2 )
@@ -208,7 +208,7 @@ public class TglParser
     if ( s1 == null ) return null;
     if ( s2 == null || s2 == s1 ) return null;
     initStationsPathlength( );
-    s1.setPathlength( 0, null );
+    s1.setPathlength( 0, null, 0, 0 );
     Stack<Cave3DStation> stack = new Stack<Cave3DStation>();
     stack.push( s1 );
     while ( ! stack.empty() ) {
@@ -219,13 +219,27 @@ public class TglParser
         if ( s3 != null ) {
           double d = s0.getPathlength() + leg.len;
           if ( s3.getPathlength() > d ) {
-            s3.setPathlength( d, s0 );
+            // compute dpos and dneg
+            double dpos = s0.getPathDistPos();
+            double dneg = s0.getPathDistNeg();
+            double cln  = Math.abs(leg.cln) * 180.0 / Math.PI; // degrees
+            if ( cln > 10.0 ) {
+              double dz = leg.len * Math.sin( leg.cln );
+              if ( cln < 30.0 ) dz *= ( 30.0 - cln )/20.0;
+              if ( s0 == leg.to_station ) dz = -dz; // if leg = s3--s0 reverse dz
+              if ( dz < 0 ) {
+                dneg += dz;
+              } else {
+                dpos += dz;
+              }
+            }
+            s3.setPathlength( d, s0, dpos, dneg );
             stack.push( s3 );
           }
         }
       }
     }
-    return new TglMeasure( mApp.getResources(), s1, s2, s2.getFinalPathlength() );
+    return new TglMeasure( mApp.getResources(), s1, s2, s2.getFinalPathlength(), s2.getPathDistPos(), s2.getPathDistNeg() );
   }
 
   public Cave3DSurvey getSurvey( String name ) // get survey by the NAME

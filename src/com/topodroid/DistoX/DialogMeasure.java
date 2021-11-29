@@ -63,7 +63,7 @@ class DialogMeasure extends MyDialog
 
         tv = ( TextView ) findViewById(R.id.st_cave_pathlength);
         if ( mMeasure.dcave > 0 ) {
-          tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_length), mMeasure.dcave ));
+          tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_length), mMeasure.dcave, mMeasure.getDistPos(), mMeasure.getDistNeg() ));
         } else {
           tv.setVisibility( View.GONE );
         }

@@ -31,8 +31,8 @@ public class Cave3DShot
 
   public double len, ber, cln;      // radians
   boolean used = false;
-  long mFlag;
-  long mMillis;
+  long mFlag;    // shot flag
+  long mMillis;  // timestamp [msec]
 
   public String from;
   public String to;
@@ -95,7 +95,15 @@ public class Cave3DShot
   }
 
 
-  // b/c in degrees
+  /** cstr - b/c in degrees
+   * @param f    from station name
+   * @param t    to station name
+   * @param l    length
+   * @param b    azimuth
+   * @param c    clino
+   * @param flag flag
+   * @param millis timestamp
+   */
   public Cave3DShot( String f, String t, double l, double b, double c, long flag, long millis )
   {
     from = f;
@@ -113,8 +121,15 @@ public class Cave3DShot
     mMillis = millis;
   }
 
-  // used for cave pathlength between stations
-  // b,c radians
+  /** cstr, used for cave pathlength between stations - b,c radians
+   * @param f    from station
+   * @param t    to station
+   * @param l    length
+   * @param b    azimuth
+   * @param c    clino
+   * @param flag flag
+   * @param millis timestamp
+   */
   public Cave3DShot( Cave3DStation f, Cave3DStation t, double l, double b, double c, long flag, long millis )
   {
     from = (f!=null)? f.getFullName() : null;
@@ -132,8 +147,13 @@ public class Cave3DShot
     mMillis = millis;
   }
 
+  /** @return true if the station has a survey
+   */
   boolean hasSurvey() { return mSurvey != null; }
 
+  /** set the station survey
+   * @param survey   survey
+   */
   void setSurvey( Cave3DSurvey survey ) 
   { 
     mSurvey   = survey;
@@ -141,16 +161,26 @@ public class Cave3DShot
     mSurveyId = survey.mId;
   }
 
+  /** @return the station survey (or null)
+   */
   Cave3DSurvey getSurvey() { return mSurvey; }
 
+  /** @return the ID of the station survey 
+   */
   int getSurveyId() { return mSurveyId; }
 
+  /** set the FROM station
+   * @param st   station
+   */
   void setFromStation( Cave3DStation st )
   { 
     from_station = st; 
     from = (st!=null)? st.getFullName() : null;
   }
 
+  /** set the TO station
+   * @param st   station
+   */
   void setToStation( Cave3DStation st )
   { 
     to_station = st; 

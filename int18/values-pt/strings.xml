@@ -1773,8 +1773,8 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="plan_proj">Plan</string -->
     <!-- TODO string name="profile_proj">Profile</string -->
-    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string -->
-    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string -->
+    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string -->
+    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string -->
     <!-- TODO string name="measure">measure</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
@@ -1813,7 +1813,7 @@ Refer to the web pages for details.\n
 
     <string name="cave_distance"> Distância 3D: %1$.2f</string>
     <!-- TODO string name="horz_distance"> 2D horizontal distance: %1$.1f</string -->
-    <string name="cave_length"> Comprimento da caverna: %1$.2f</string>
+    <string name="cave_length"> Comprimento da caverna: %1$.2f %2$.1f %3$.1f</string>
     <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
 
     <!-- UNUSED string name="SURVEYS">T O P O S</string -->

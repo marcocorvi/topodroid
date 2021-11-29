@@ -1805,8 +1805,8 @@ DO NOT REMOVE THIS LINE -->
 
     <string name="plan_proj">Pôdorys</string>
     <string name="profile_proj">Rez</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
     <string name="measure">Meranie</string>
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
@@ -1845,7 +1845,7 @@ DO NOT REMOVE THIS LINE -->
 
     <string name="cave_distance"> 3D vzdialenosť: %1$.2f</string>
     <string name="horz_distance"> 2D horizontálna vzdialenosť: %1$.1f</string>
-    <string name="cave_length"> Dĺžka jaskyne: %1$.2f</string>
+    <string name="cave_length"> Dĺžka jaskyne: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Azimut: %1$.0f  Uhol: %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">JASKYNE</string -->

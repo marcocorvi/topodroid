@@ -1825,8 +1825,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="clear">Törlés</string>
     <string name="plan_proj">Alaprajz</string>
     <string name="profile_proj">Oldalnézet</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Barlang %7$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Barlang %9$.1f</string>
     <string name="measure">mérés</string>
 
     <!-- UNUSED string name="style_stroke">Simítás</string -->
@@ -1872,7 +1872,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cave_vert"> Z: %1$.1f</string>
     <string name="cave_distance"> 3D távolság: %1$.1f</string>
     <string name="horz_distance"> 2D vízszintes távolság: %1$.1f</string>
-    <string name="cave_length"> Barlang hossza: %1$.1f</string>
+    <string name="cave_length"> Barlang hossza: %1$.1f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Irány: %1$.0f  Lejtés: %2$.0f</string>
 
 

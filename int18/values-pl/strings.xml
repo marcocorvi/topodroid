@@ -1801,8 +1801,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="clear">Clear</string>
     <string name="plan_proj">Plan</string>
     <string name="profile_proj">Profile</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
     <string name="measure">measure</string>
 
     < UNUSED string name="style_stroke">Stroke</string>
@@ -1848,7 +1848,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="cave_vert"> Z: %1$.1f</string>
     <string name="cave_distance"> 3D distance: %1$.1f</string>
     <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
-    <string name="cave_length"> Cave length: %1$.1f</string>
+    <string name="cave_length"> Cave length: %1$.1f %2$.1f %$3.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
 
 

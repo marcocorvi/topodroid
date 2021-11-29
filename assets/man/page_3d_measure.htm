@@ -17,8 +17,14 @@ The measure dialog show the distance between the fixed station and another one.<
 <li>the 3D distance</li>
 <li>the distance in the horizontal plane</li>
 <li>the azimuth and inclination of the straight line between the two stations</li>
-<li>the length of the shortest path in the cave between the two stations (if it exists)</li>
+<li>if it exists, the length of the shortest path in the cave between the two stations, and the positive and negative denivelations</li>
 </ul><br><p> 
+
+<b>Denivelations</b><br>
+The positive and negative denivelation are computed summing the vertical components of upwards and downwards legs, respectively.
+Only legs with inclination over 10&deg; are considered.
+Above 30&deg; the leg vertical component is fully taken into account.
+Between 10 and 30&deg; the vertical component is linearly interpolated, ie, multiplied by (clino-10)/20.<br><p>
 
 
 </body></html>

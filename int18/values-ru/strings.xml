@@ -1784,8 +1784,8 @@
 
     <string name="plan_proj">План</string>
     <string name="profile_proj">Разрез</string>
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f)</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) Cave %7$.1f</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
     <string name="measure">измерить</string>
 
     <!-- UNUSED string name="style_stroke">Линия</string -->
@@ -1826,7 +1826,7 @@
 
     <string name="cave_distance"> 3D расстояние: %1$.2f</string>
     <string name="horz_distance"> 2D гоизонтальное проложение: %1$.1f</string>
-    <string name="cave_length"> Длина пещеры: %1$.2f</string>
+    <string name="cave_length"> Длина пещеры: %1$.2f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Азимут: %1$.0f  Уклон: %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">С Ъ Ё М К И</string -->
