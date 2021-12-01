@@ -30,19 +30,32 @@ import java.io.IOException;
 
 public class OsmFactory
 {
+  /** a 2D line path
+   */
   class Path
   {
-    ArrayList< Point2D > nodes;
+    ArrayList< Point2D > nodes;  // nodes of the path
     
+    /** cstr
+     */
     Path()
     {
       nodes = new ArrayList< Point2D >();
     }
     
+    /** @return the number of nodes
+     */
     int size() { return nodes.size(); }
 
+    /** add a point to the nodes
+     * @param pt    point to add
+     */
     void add( Point2D pt ) { nodes.add( pt ); }
 
+    /** draw the path on a canvas
+     * @param canvas    canvas
+     * @param point     drawing paint
+     */
     void draw( Canvas canvas, Paint paint )
     {
       if ( size() < 2 ) return;
@@ -56,12 +69,16 @@ public class OsmFactory
     }
   }
 
+  /** a 2D way, a collection of paths
+   */
   class Way
   {
     int color;
     ArrayList< Path > paths;
-    Path path; 
+    Path path;  // work-path
     
+    /** cstr
+     */
     Way()
     {
       color = 0xffff00ff; // violet
@@ -69,6 +86,8 @@ public class OsmFactory
       path  = null;
     }
 
+    /** @return the total number of nodes on the paths
+     */
     int size()
     {
       int ret = 0;
@@ -76,6 +95,10 @@ public class OsmFactory
       return ret;
     }
 
+    /** append a point to the work-path
+     * @param pt   point to add
+     * @note the work-path is created if needed, and added to the array of paths
+     */
     void append( Point2D pt )
     {
       if ( path == null ) {
@@ -85,8 +108,13 @@ public class OsmFactory
       path.add( pt );
     }
 
+    /** finish the work-path
+     */
     void closePath() { path = null; }
 
+    /** draw the paths on a canvas
+     * @param canvas   canvas
+     */
     void draw( Canvas canvas ) 
     {
       Paint paint = new Paint();
@@ -137,9 +165,24 @@ public class OsmFactory
     // TDLog.v("OSM bitmap " + width + "x" + height );
   }
 
+  /** @return X coord from WGS84 longitude
+   * @param m   longitude
+   */
   private double m2x( double m ) { return (mOrigin.x + ( m - mOrigin.longitude ) * e_radius); }
+
+  /** @return Y coord from WGS84 latitude
+   * @param p   latitude
+   */
   private double p2y( double p ) { return (mOrigin.y + ( p - mOrigin.latitude  ) * s_radius); }
+
+  /** @return WGS84 longitude from X coord
+   * @param x   X coord
+   */
   private double x2m( double x ) { return (mOrigin.longitude + ( x - mOrigin.x ) / e_radius); }
+
+  /** @return WGS84 latitude from Y coord
+   * @param y   Y coord
+   */
   private double y2p( double y ) { return (mOrigin.latitude  + ( y - mOrigin.y ) / s_radius); }
 
   /** @return the value substring (enclosed by double-quotes)

@@ -39,19 +39,23 @@ import android.view.View;
 class DistoXAnnotations extends MyDialog // Activity
                         implements View.OnClickListener
 {
-  // private TextView mTVtitle;
-  private EditText mETtext;
-  private Button   mButtonOK;
-  // private Button   mButtonCancel;
-  private String   mFilename;
-  private final String   mTitle;
+  // private TextView mTVtitle;   // dialog title
+  private EditText mETtext;       // annotation text
+  private String       mFilename; // annotation file
+  private final String mName;     // survey name 
 
-  DistoXAnnotations( Context context, String title )
+  /** cstr
+   * @param context   context
+   * @param name      survey name
+   */
+  DistoXAnnotations( Context context, String name )
   {
     super( context, R.string.DistoXAnnotations );
-    mTitle = title;
+    mName = name;
   }
 
+  /** load the content of the annotation from the file
+   */
   private void load( )
   {
     // TDLog.Log( TDLog.LOG_IO, "annotations read from file " + mFilename );
@@ -69,6 +73,8 @@ class DistoXAnnotations extends MyDialog // Activity
     }
   }
 
+  /** save the content of the annotation to the file
+   */
   private void save( )
   {
     // TDLog.Log( TDLog.LOG_IO, "annotations save to file " + mFilename );
@@ -84,9 +90,13 @@ class DistoXAnnotations extends MyDialog // Activity
     }
   }
 
-  public static void append( String title, String text )
+  /** append a text to the annotation
+   * @param name    survey name
+   * @param text    text to append
+   */
+  public static void append( String name, String text )
   {
-    String filename = TDPath.getSurveyNoteFile( title );
+    String filename = TDPath.getSurveyNoteFile( name );
     // TDLog.Log( TDLog.LOG_IO, "annotations append to file " + filename );
     try {
       TDPath.checkPath( filename );
@@ -109,32 +119,32 @@ class DistoXAnnotations extends MyDialog // Activity
 
     // mTVtitle  = (TextView) findViewById(R.id.note_title );
     mETtext   = (EditText) findViewById(R.id.note_text );
-    mButtonOK = (Button) findViewById(R.id.button_ok );
     // mButtonCancel = (Button) findViewById(R.id.button_cancel );
 
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
-    mFilename = TDPath.getSurveyNoteFile( mTitle );
-    // mTVtitle.setText( mTitle );
+    mFilename = TDPath.getSurveyNoteFile( mName );
+    // mTVtitle.setText( mName );
     setTitle( R.string.title_note );
 
     load();
 
-    mButtonOK.setOnClickListener( this );
-    // mButtonCancel.setOnClickListener( this );
+    ( (Button) findViewById(R.id.button_ok ) ).setOnClickListener( this );
     ( (Button) findViewById(R.id.button_cancel ) ).setOnClickListener( this );
   }
 
+  /** implement response to user tap action
+   * @param v    tapped view
+   */
   @Override
   public void onClick(View v) 
   {
     // When the user clicks, just finish this activity.
     // onPause will be called, and we save our data there.
-    Button b = (Button) v;
-    if ( b == mButtonOK ) {
+    if ( v.getId() == R.id.button_ok ) {
       save();
     }
-    // mButtonCancel dismiss
+    // R.id.button_cancel dismiss
     dismiss();
   }
 
