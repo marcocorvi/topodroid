@@ -55,7 +55,7 @@
   <string-array name="loopClosure">
      <item name="none">Keine</item>
      <item name="normal">Normal</item>
-     <item name="weighted">Weighted</item>
+     <item name="weighted">Gewichtet</item>
      <item name="triangles">Dreiecke</item>
   </string-array>
 
@@ -262,32 +262,32 @@
      <item name="nonlinear">Nicht-linear</item>
   </string-array>
 
-  <!-- FIXME string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Keine</item>
      <item name="dec">Dezimal</item>
      <item name="hex">Hex</item>
-     <item name="decg">G Decimal</item>
+     <item name="decg">G Dezimal</item>
      <item name="hexg">G Hex</item>
-     <item name="decm">M Decimal</item>
+     <item name="decm">M Dezimal</item>
      <item name="hexm">M Hex</item>
-  </string-array -->
+  </string-array>
 
 
   <!-- 3D VIEWER array strings -->
-  <!-- TODO string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
-  </string-array -->
+  <string-array name="csizeButtons">
+     <item name="small1">Klein</item>
+     <item name="large">Gross</item>
+  </string-array>
 
   <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
   </string-array -->
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
+  <string-array name="splayUse">
+     <item name="skip">Ignorieren</item>
      <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+     <item name="xsection">Querschnitte</item>
+  </string-array>
 
 </resources>
