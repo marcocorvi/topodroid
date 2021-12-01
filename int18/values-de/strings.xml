@@ -1664,7 +1664,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.
 \n\nKeine Garantie: Der Autor ist nicht verantwortlich für jeglichen Datenverlust oder andere Schäden.
@@ -1860,7 +1860,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="cave_vert"> Z: %1$.1f</string>
     <string name="cave_distance"> 3D distance: %1$.1f</string>
     <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
-    <string name="cave_length"> Cave length: %1$.1f %2$.1f %$3.1f</string>
+    <string name="cave_length"> Cave length: %1$.1f %2$.1f %3$.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
 
 
