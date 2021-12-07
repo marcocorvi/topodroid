@@ -26,6 +26,11 @@ public class DataDownloader
 {
   // int mStatus = 0; // 0 disconnected, 1 connected, 2 connecting
 
+  // private Context mContext; // UNUSED
+  // private BroadcastReceiver mBTReceiver = null;
+  private final TopoDroidApp mApp;
+
+
   private int mConnected = ConnectionState.CONN_DISCONNECTED;  // whether it is "connected": 0 unconnected, 1 connecting, 2 connected
   private boolean mDownload  = false;  // whether it is "downloading"
 
@@ -35,6 +40,9 @@ public class DataDownloader
   public void setConnected( int connected ) { mConnected = connected; }
   void setDownload( boolean download ) { mDownload = download; }
 
+  /** update the "connected" state
+   * @param on_off   whether the downloader is connected
+   */
   public void updateConnected( boolean on_off )
   {
     if ( on_off ) {
@@ -49,6 +57,8 @@ public class DataDownloader
     }
   }
 
+  /** @return the status of the downloader
+   */
   int getStatus()
   {
     if ( ! mDownload ) return ConnectionState.CONN_DISCONNECTED;
@@ -62,10 +72,10 @@ public class DataDownloader
     // return ConnectionState.CONN_CONNECTED;
   }
 
-  // private Context mContext; // UNUSED
-  private final TopoDroidApp mApp;
-  // private BroadcastReceiver mBTReceiver = null;
-
+  /** cstr
+   * @param context   context (unused)
+   * @param app       application
+   */
   DataDownloader( Context context, TopoDroidApp app )
   {
     // mContext = context;
@@ -73,6 +83,9 @@ public class DataDownloader
     // mBTReceiver = null;
   }
 
+  /** toggle the "download" status
+   * @return the new download status
+   */
   boolean toggleDownload()
   {
     mDownload = ! mDownload;
@@ -81,6 +94,9 @@ public class DataDownloader
     // TDLog.v( "toggle download to " + mDownload );
   }
 
+  /** download data
+   * @param data_type    expected type of the data
+   */
   void doDataDownload( int data_type )
   {
     // TDLog.v( "Data Downloader: do Data Download() - nr " + mDownload + " connected " + mConnected );
@@ -91,7 +107,9 @@ public class DataDownloader
     }
   }
 
-  /** called with mDownload == true
+  /** start to download data
+   * @param data_type    expected type of the data
+   * @note called with mDownload == true
    */
   private void startDownloadData( int data_type )
   {
@@ -112,6 +130,8 @@ public class DataDownloader
     }
   }
 
+  /** stop to download data
+   */
   void stopDownloadData()
   {
     // TDLog.v( "stop Download Data() connected " + mConnected );
@@ -123,8 +143,10 @@ public class DataDownloader
     // }
   }
 
-  // called also by ReconnectTask
-  // @param data_type ...
+  /** try to connect to data device
+   * @param data_type    expected type of the data
+   * @note called also by ReconnectTask
+   */
   void tryConnect( int data_type )
   {
     // TDLog.v( "Data Downloader: try Connect() download " + mDownload + " connected " + mConnected );
@@ -155,22 +177,28 @@ public class DataDownloader
     }
   }
 
+  /** set the "connected" status and notify the UI 
+   * @param connected  new connected status
+   */
   private void notifyUiThreadConnectionStatus( int connected )
   {
     mConnected = connected;
     mApp.notifyStatus( getStatus() ); // this is run on UI thread
   }
 
-  // this must be called on UI thread (onPostExecute)
+  /** set the "connected" status and notify the UI 
+   * @param connected  new connected status
+   * @note this must be called on UI thread (onPostExecute)
+   */
   void notifyConnectionStatus( int connected )
   {
     mConnected = connected;
     mApp.notifyStatus( getStatus() ); // this is run on UI thread
   }
 
-  // BATCH ON-DEMAND DOWNLOAD
-  // non-private to allow the DistoX select dialog
-  // @param data_type   packet datatype
+  /** batch on-demand download
+   * @param data_type   packet datatype
+   */
   private void tryDownloadData( int data_type )
   {
     TDInstance.secondLastShotId = TopoDroidApp.lastShotId( ); // FIXME-LATEST
@@ -194,6 +222,8 @@ public class DataDownloader
 
   // static boolean mConnectedSave = false;
 
+  /** lifecycle: on stop
+   */
   void onStop()
   {
     // TDLog.v( "DataDownloader onStop()");
@@ -204,6 +234,8 @@ public class DataDownloader
     }
   }
 
+  /** lifecycle: on resume (empty method)
+   */
   void onResume()
   {
     // TDLog.v( "Data Downloader onResume()");

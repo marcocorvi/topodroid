@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2020
  *
- * @brief Cave3D fixed station
+ * @brief 3D: fixed station
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -33,6 +33,9 @@ public class Cave3DFix extends Vector3D
   public double altitude = 0.0; // FIXME ellipsoidic altitude
   public boolean hasWGS84;
 
+  /** serialize the 3D fix
+   * @param dos    output stream
+   */
   void serialize( DataOutputStream dos ) throws IOException
   {
     dos.writeUTF( name );
@@ -44,6 +47,11 @@ public class Cave3DFix extends Vector3D
     dos.writeDouble( altitude );
   }
 
+  /** deserialize a 3D fix
+   * @param dis     input stream
+   * @param version stream version
+   * @return the deserialized 3D fix
+   */
   static Cave3DFix deserialize( DataInputStream dis, int version ) throws IOException
   {
     String name = dis.readUTF( );
@@ -64,6 +72,16 @@ public class Cave3DFix extends Vector3D
   //   TDLog.v("origin " + name + " CS " + cs.name + " " + longitude + " " + latitude );
   // }
 
+  /** cstr
+   * @param nm   name
+   * @param e0   east coord
+   * @param n0   north coord
+   * @param z0   vertical coord
+   * @param cs0  coord reference system
+   * @param lng  WGS84 longitude
+   * @param lat  WGS84 latitude
+   * @param alt  WGS84 altitude (ellissoidic)
+   */
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double alt )
   {
     super( e0, n0, z0 );
@@ -75,6 +93,13 @@ public class Cave3DFix extends Vector3D
     hasWGS84  = true;
   }
 
+  /** cstr
+   * @param nm   name
+   * @param e0   east coord
+   * @param n0   north coord
+   * @param z0   vertical coord
+   * @param cs0  coord reference system
+   */
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0 )
   {
     super( e0, n0, z0 );
@@ -86,32 +111,52 @@ public class Cave3DFix extends Vector3D
     hasWGS84  = false;
   }
 
-  // the "name" for a fix is the full-name
+  /** @return true if the 3D fix has a name
+   * @note the "name" for a fix is the full-name
+   */
   public boolean hasName( String nm ) { return name != null && name.equals( nm ); }
 
+  /** @return the 3D fix fullname
+   */
   public String getFullName( ) { return name; }
 
+  /** @return true if the coord system is WGS84
+   */
   public boolean isWGS84() { return cs.isWGS84(); }
 
+  /** @return the south-north redius
+   */
   public double getSNradius() 
   { 
     return isWGS84()? Geodetic.meridianRadiusExact( latitude, altitude ) : 1.0;
   }
 
+  /** @return the west-east redius
+   */
   public double getWEradius() 
   { 
     return isWGS84()? Geodetic.parallelRadiusExact( latitude, altitude ) : 1.0;
   }
 
+  /** @return true if the 3D fix has WGS84 coords
+   */
   boolean hasWGS84() { return hasWGS84; }
 
-  // lat WGS84 latitude
+  /** @return north coord from the latitude
+   * @param lat WGS84 latitude
+   * @param alt WGS84 altitude
+   */
   public double latToNorth( double lat, double alt ) 
   {
     double s_radius = Geodetic.meridianRadiusExact( lat, alt ); // this is the radius * PI/180
     return hasWGS84()? y + (lat - latitude) * s_radius : 0.0;
   }
 
+  /** @return east coord from the longitude
+   * @param lng WGS84 longitude
+   * @param lat WGS84 latitude
+   * @param alt WGS84 altitude
+   */
   public double lngToEast( double lng, double lat, double alt )
   {
     double e_radius = Geodetic.parallelRadiusExact( lat, alt ); // this is the radius * PI/180

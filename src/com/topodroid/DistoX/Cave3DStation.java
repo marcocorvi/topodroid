@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mav 2020
  *
- * @brief Cave3D station
+ * @brief 3D: station
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -47,6 +47,9 @@ public class Cave3DStation extends Vector3D
   Cave3DStation pathprev; // previous station on shortest path
 
   // -------------------------------------------------------------------------
+  /** serialize the 3D station
+   * @param dos   output stream
+   */
   void serialize( DataOutputStream dos ) throws IOException
   {
     dos.writeInt( mId );
@@ -59,6 +62,11 @@ public class Cave3DStation extends Vector3D
     TDLog.v("ser. station " + mId + " " + mSid + " <" + full_name + "> " + x + " " + y + " " + z );
   }
 
+  /** serialize a 3D station
+   * @param dis   input stream
+   * @param version  stream version
+   * @return deserialized 3D station
+   */
   static Cave3DStation deserialize( DataInputStream dis, int version ) throws IOException 
   {
     int id  = dis.readInt();

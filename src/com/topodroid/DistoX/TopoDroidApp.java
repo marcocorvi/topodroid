@@ -789,10 +789,13 @@ public class TopoDroidApp extends Application
   }
 
   static boolean done_init_env_second = false;
-
-  static void initEnvironmentSecond( boolean with_dialog_r )
+  /** second step of environment initailization
+   * @param with_dialog_r
+   * @return true if successful - can fail if cannot open the database
+   */
+  static  boolean initEnvironmentSecond( boolean with_dialog_r )
   {
-    if ( done_init_env_second ) return;
+    if ( done_init_env_second ) return true;
     done_init_env_second = true;
     TDLog.v( "init env. second " );
 
@@ -813,6 +816,7 @@ public class TopoDroidApp extends Application
     // }
 
     // mStationName = new StationName();
+    return mData.hasDB();
   }
 
   // init env requires the device database, which requires having the permissions
@@ -899,9 +903,11 @@ public class TopoDroidApp extends Application
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
   }
 
-  // @param cwd current work directory
-  // @param cbd current base directory (UNUSED)
-  public static void setCWD( String cwd, String cbd )
+  /** set the current work directoty
+   * @param cwd current work directory
+   * @param cbd current base directory (UNUSED)
+   */
+  public static void setCWD( String cwd /* , String cbd */ )
   {
     if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
     // TDLog.v( "App set CWD " + cwd + " CBD " + cbd );
@@ -909,7 +915,7 @@ public class TopoDroidApp extends Application
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
     TDInstance.cwd = cwd;
-    TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + "> cbd <" + cbd + ">");
+    TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
     mData.closeDatabase();
 
     TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
@@ -1374,12 +1380,12 @@ public class TopoDroidApp extends Application
   //   TDPrefHelper.update( "DISTOX_SOCKET_TYPE", 1 ); // UNSECURE
   // }
 
-  static void setCWDPreference( String cwd, String cbd )
+  static void setCWDPreference( String cwd /*, String cbd */ )
   { 
-    if ( TDInstance.cwd.equals( cwd ) && TDInstance.cbd.equals( cbd ) ) return;
+    if ( TDInstance.cwd.equals( cwd ) /* && TDInstance.cbd.equals( cbd ) */ ) return;
     // TDLog.v( "set CWD preference " + cwd );
-    TDPrefHelper.update( "DISTOX_CWD", cwd, "DISTOX_CBD", cbd ); 
-    setCWD( cwd, cbd ); 
+    TDPrefHelper.update( "DISTOX_CWD", cwd /* , "DISTOX_CBD", cbd */ ); 
+    setCWD( cwd /*, cbd */ ); 
   }
 
   static void setPtCmapPreference( String cmap )

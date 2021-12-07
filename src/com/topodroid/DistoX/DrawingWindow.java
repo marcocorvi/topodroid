@@ -5725,7 +5725,7 @@ public class DrawingWindow extends ItemDrawer
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
 
       } else if ( b == mButton1[k1++] ) { //  NOTE
-        (new DistoXAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
+        (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
 
       } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( PlotType.isSketch2D( mType ) ) { 

@@ -29,6 +29,11 @@ signed:
 	ls -l TopoDroid-$(VERSION)-gp.apk
 	md5sum TopoDroid-$(VERSION)-gp.apk
 
+debug-signed:
+	$(ANT) debug
+	./howto/sign-debug.sh
+	mv TopoDroid-debug-keysigned.apk TopoDroid-$(VERSION)-debug.apk
+
 bundle:
 	$(ANT) release
 	./bundle.sh

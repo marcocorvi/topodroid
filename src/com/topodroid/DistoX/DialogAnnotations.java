@@ -1,4 +1,4 @@
-/* @file DistoXAnnotations.java
+/* @file DialogAnnotations.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -36,7 +36,7 @@ import android.view.View;
 // import android.view.KeyEvent;
 
 
-class DistoXAnnotations extends MyDialog // Activity
+class DialogAnnotations extends MyDialog // Activity
                         implements View.OnClickListener
 {
   // private TextView mTVtitle;   // dialog title
@@ -48,9 +48,9 @@ class DistoXAnnotations extends MyDialog // Activity
    * @param context   context
    * @param name      survey name
    */
-  DistoXAnnotations( Context context, String name )
+  DialogAnnotations( Context context, String name )
   {
-    super( context, R.string.DistoXAnnotations );
+    super( context, R.string.DialogAnnotations );
     mName = name;
   }
 

@@ -1468,7 +1468,7 @@ public class ShotWindow extends Activity
         new PlotListDialog( mActivity, this, mApp, null ).show();
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // NOTE
         if ( TDInstance.survey != null ) {
-          (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
+          (new DialogAnnotations( mActivity, TDInstance.survey )).show();
         }
 
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT

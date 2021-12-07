@@ -67,13 +67,13 @@ public class CalibActivity extends Activity
                            , View.OnClickListener
                            , IExporter
 {
-  private static final int[] izonsno = {
+  private static final int[] izonsno = { // icons when the calibration is not yet in the database 
                         0, // R.drawable.iz_save_no,
                         R.drawable.iz_open_no,
                         R.drawable.iz_read_no
                         // R.drawable.iz_export0_no
                      };
-  private static final int[] izons = {
+  private static final int[] izons = { // icons when the calibration is in the database
                         R.drawable.iz_save,
                         R.drawable.iz_open,
                         R.drawable.iz_read,
@@ -123,6 +123,8 @@ public class CalibActivity extends Activity
   private TopoDroidApp mApp;
   private boolean isSaved;
 
+  /** set the buttons icon
+   */
   private void setButtons( )
   {
     mButton1[1].setEnabled( isSaved );   // OPEN
@@ -246,6 +248,9 @@ public class CalibActivity extends Activity
 
   // ---------------------------------------------------------------
 
+  /** respond to a user tap on a view
+   * @param view   tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -292,6 +297,8 @@ public class CalibActivity extends Activity
     }
   }
 
+  /** open a dialog showing the calibration coefficients
+   */
   private void showCoeffs()
   {
     String coeff_str = TopoDroidApp.mDData.selectCalibCoeff( TDInstance.cid );
@@ -315,10 +322,11 @@ public class CalibActivity extends Activity
     }
   }
 
+  /** ask confirmation to delete this calibration
+   */
   private void askDelete()
   {
-    TopoDroidAlertDialog.makeAlert( this, getResources(), 
-                              getResources().getString( R.string.calib_delete ) + " " + TDInstance.calib + " ?",
+    TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.calib_delete ) + " " + TDInstance.calib + " ?",
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -329,12 +337,16 @@ public class CalibActivity extends Activity
     );
   }
 
+  /** open the calibration data - start the GM activity
+   */
   private void doOpen()
   {
     Intent openIntent = new Intent( this, GMActivity.class );
     startActivity( openIntent );
   }
 
+  /** save the calibration metadata
+   */
   private void doSave( )
   {
     String name = mEditName.getText().toString().trim();
@@ -386,6 +398,9 @@ public class CalibActivity extends Activity
     setButtons();
   }
   
+  /** make the name field editable
+   * @param saved  whether the calibration is in the database
+   */
   private void setNameEditable( boolean saved )
   {
     isSaved = saved;
@@ -399,6 +414,8 @@ public class CalibActivity extends Activity
     }
   }
 
+  /** delete this calibration
+   */
   private void doDelete()
   {
     if ( TDInstance.cid < 0 ) return;
@@ -407,6 +424,11 @@ public class CalibActivity extends Activity
     finish();
   }
 
+  /** respond to a key event
+   * @param code   key code
+   * @param event  key event
+   * @return true if the event has been consumed
+   */
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
@@ -427,6 +449,9 @@ public class CalibActivity extends Activity
 
   // ---------------------------------------------------------
 
+  /** initialize the menu
+   * @param res   resources
+   */
   private void setMenuAdapter( Resources res )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(this, R.layout.menu );
@@ -439,12 +464,17 @@ public class CalibActivity extends Activity
     mMenu.invalidate();
   }
 
+  /** close the menu
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** handle a tap on a menu
+   * @param pos   menu position
+   */
   private void handleMenu( int pos )
   {
     closeMenu();
@@ -470,7 +500,7 @@ public class CalibActivity extends Activity
     }
   }
 
-  /**
+  /** export this caibration
    * @param type    export type (string)
    * @param name    calib name (not used)
    */
@@ -486,16 +516,7 @@ public class CalibActivity extends Activity
     }
   }
 
-  @Override 
-  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
-  {
-    // CharSequence item = ((TextView) view).getText();
-    if ( mMenu == (ListView)parent ) {
-      handleMenu( pos );
-    }
-  }
-
-  /**
+  /** export this calibration
    * @param exportType  integer export index 
    * @param name        calib name (not used)
    */
@@ -515,4 +536,20 @@ public class CalibActivity extends Activity
       }
     }
   }
+
+  /** respond to a tap on an item
+   * @param perent   parent container
+   * @param view     item
+   * @param pos      item posiztion
+   * @param id       ...
+   */
+  @Override 
+  public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
+  {
+    // CharSequence item = ((TextView) view).getText();
+    if ( mMenu == (ListView)parent ) {
+      handleMenu( pos );
+    }
+  }
+
 }

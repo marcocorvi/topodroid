@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date apr 2021
  *
- * @brief tube walls between two XSections
+ * @brief 3D: a tubular wall between two XSections
  *
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
@@ -28,17 +28,21 @@ class Cave3DTube
   //  */
   // int projSize( int k ) { return (k==0)? projs1.size() : projs2.size(); }
 
+  /** @return number of triangles
+   */
   int size() { return triangles == null ? 0 : triangles.size(); }
 
-  Cave3DTube( Cave3DShot sh,                   // shot
-              Cave3DXSection sf,                // shot FROM station
-              Cave3DXSection st )               // shot TO station
+  /** cstr
+   * @param sh    shot
+   * @param sf    shot FROM station
+   * @param st    shot TO station
+   */
+  Cave3DTube( Cave3DShot sh, Cave3DXSection sf, Cave3DXSection st )
   {
     // TDLog.v("Hull at station " + st.name + " shot " + sh.from_station.name + "-" + sh.to_station.name );
     shot = sh;
     xs1  = sf;
     xs2  = st;
-
     triangles = new ArrayList< Triangle3D >();
     computeTube();
   }
@@ -48,12 +52,18 @@ class Cave3DTube
   //   TDLog.v("Tube " + xs1.name() + "--" + xs2.name() + " triangles " + triangles.size() );
   // }
 
+  /** add a triangle
+   * @param p1   first vertex
+   * @param p2   second vertex
+   * @param p3   third vertex
+   */
   private void addTriangle( Vector3D p1, Vector3D p2, Vector3D p3 )
   {
     triangles.add( new Triangle3D( p1, p2, p3, color ) );
   }
 
-
+  /** compute the tube
+   */
   private void computeTube()
   {
     // TODO

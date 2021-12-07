@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief Cave3D Delaunay-style triangulation
+ * @brief 3D: Delaunay-style triangulation
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.

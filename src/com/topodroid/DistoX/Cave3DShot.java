@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2020
  *
- * @brief Cave3D shot
+ * @brief 3D: shot
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.

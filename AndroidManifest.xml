@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600027"
-      android:versionName="6.0.27"
+      android:versionCode="600028"
+      android:versionName="6.0.28"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -31,7 +31,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="31"
+       android:targetSdkVersion="29"
     />
     <!-- android:maxSdkVersion="29" -->
 
@@ -45,7 +45,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <!-- uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" / -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <!-- uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" / -->
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -87,6 +87,8 @@
 	  android:roundIcon="@drawable/icon4"
                 FIXME-29
 	  -->
+	  <!-- android:preserveLegacyExternalStorage="true" -->
+
 	  <!-- android:screenOrientation="portrait" -->
       
 	  <!-- android:extractNativeLibs="false" -->
@@ -102,7 +104,6 @@
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
-	  android:requestLegacyExternalStorage="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />

@@ -18,7 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
-// import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -681,6 +681,8 @@ public class MainWindow extends Activity
     // } 
 
     // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
+
+    TDLog.v("VERSION " + TDVersion.string() );
   }
 
   static private boolean done_init_dialogs = false;
@@ -700,7 +702,14 @@ public class MainWindow extends Activity
     } 
     done_init_dialogs = true;
     TDLog.v( "init environment second");
-    TopoDroidApp.initEnvironmentSecond( say_dialogR );
+    if ( ! TopoDroidApp.initEnvironmentSecond( say_dialogR ) ) {
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.tdx_stale, 
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+        }
+      );
+
+    }
     if ( mApp.mWelcomeScreen ) {
       TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;

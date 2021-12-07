@@ -48,7 +48,7 @@
   <string name="BricMemoryDialog" translatable="false">page_bric_memory.htm</string>
   <string name="DanglingShotsDialog" translatable="false">page_dangling.htm</string>
   <string name="DrawingStatDialog" translatable="false">page_stat2.htm</string>
-  <string name="DistoXAnnotations" translatable="false">page_survey_notes.htm</string>
+  <string name="DialogAnnotations" translatable="false">page_survey_notes.htm</string>
   <string name="DrawingAreaDialog" translatable="false">page_area_dialog.htm</string>
   <string name="DrawingLabelDialog" translatable="false">page_label_dialog.htm</string>
   <string name="DrawingPhotoDialog" translatable="false">page_photo_dialog.htm</string>

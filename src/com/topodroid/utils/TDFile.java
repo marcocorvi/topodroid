@@ -81,56 +81,67 @@ public class TDFile
   // public  static String getC3exportPath( String name ) { return getC3exportDir( ).getPath(); }
   // private static String getC3exportPath( String name, String ext ) { return getC3exportFile( name + "." + ext ).getPath(); }
 
-  public static boolean hasTopoDroidFile( String name ) { return name != null && (new File( name )).exists(); }
-  public static boolean hasTopoDroidFile( String dirpath, String name ) { return name != null && (new File( dirpath + "/" + name )).exists(); }
-
-  public static long getTopoDroidFileLength( String name ) { return (name == null)? 0 : (new File(name)).length(); }
-
-  /** get a File from the path
-   * @param name   full pathname
-   * @return a File for the pathname
+  /** @return true if the given file exists 
+   * @param name   filename
    */
-  public static File getTopoDroidFile( String name ) { return new File( name ); }
+  public static boolean hasTopoDroidFile( String name )
+  { return name != null && (new File( name )).exists(); }
 
-  /** get a File from the directory path and the file name
+  /** @return true if the given file exists 
+   * @param dirpath   filename folder
+   * @param name      filename
+   */
+  public static boolean hasTopoDroidFile( String dirpath, String name )
+  { return name != null && (new File( dirpath + "/" + name )).exists(); }
+
+  /** @return length of the given file (0 if the file does not exists)
+   * @param name   filename
+   */
+  public static long getTopoDroidFileLength( String name )
+  { return (name == null)? 0 : (new File(name)).length(); }
+
+  /** @return a File for the pathname
+   * @param name   full pathname
+   */
+  public static File getTopoDroidFile( String name )
+  { return new File( name ); }
+
+  /** @return a File for the full file pathname
    * @param dirname full directory pathname
    * @param name    file name
-   * @return a File for the full file pathname
    */
-  public static File getTopoDroidFile( String dirname, String name ) { return new File( dirname, name ); }
+  public static File getTopoDroidFile( String dirname, String name )
+  { return new File( dirname, name ); }
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
   // context.getExternalFilesDir --> /storage/emulated/0/Android/data/com.topodroid.DistoX/files
 
-  /** get the private base folder
-   * @return the file of the private base folder
+  /** @return the file of the private base folder
    */
   public static File getPrivateBaseDir( ) 
   {
     return TDInstance.context.getExternalFilesDir( null );
   }
 
-  /** get the private folder
+  /** @return the file of the specified folder
    * @param type   folder name
-   * @return the file of the specified folder
    */
   public static File getPrivateDir( String subdir ) 
   { 
     return TDInstance.context.getExternalFilesDir( subdir );
   }
 
-  /** get the private file
+  /** @return a private file
    * @param type   folder name
    * @param name   filename
-   * @return the specified file
    */
   public static File getPrivateFile( String subdir, String filename ) 
   { 
     return new File( TDInstance.context.getExternalFilesDir( subdir ), filename );
   }
 
-  /** delete the private file
+  /** delete a private file
    * @param type   folder name
    * @param name   filename
    */
@@ -140,32 +151,27 @@ public class TDFile
     if ( file.exists() ) file.delete();
   }
 
-  /** get the device database
-   * @return the device database file, in the private folder
+  /** @return the device database file, in the private folder
    */
   public static File getDeviceDatabase() { return getPrivateFile( null, "device10.sqlite" ); }
 
-  /** get the packet database
-   * @return the packet database file, in the private folder
+  /** @return the packet database file, in the private folder
    */
   public static File getPacketDatabase() { return getPrivateFile( null, "packet10.sqlite" ); }
 
-  /** get the settings file 
-   * @return the settings file, in the private folder
+  /** @return the settings file, in the private folder
    */
   public static File getSettingsFile()   { return getPrivateFile( null, "settings.txt" ); }
 
-  /** get the log file 
-   * @return the log file, in the private folder
+  /** @return the log file, in the private folder
    */
   public static File getLogFile()        { return getPrivateFile( null, "log.txt" ); }
 
   // APP-SPECIFIC EXTERNAL FILES --------------------------------------------------------------
 
-  /** get the current base directory
+  /** @return the current base directory
    * @param type ...
    * @param create whether to create the directory if it does not exists
-   * @return the current base directory
    */
   private static File getCBD( String type, boolean create )
   {
@@ -183,26 +189,23 @@ public class TDFile
     //
   }
 
-  /** check if there is the external directory
+  /** @return true if the directory exists and is read-writable
    * @param type ...
-   * @return true if the directory exists
    */
   public static boolean hasExternalDir( String type ) 
   {
     File ret = getCBD( type, false );
-    return ret != null && ret.exists();
+    return ret != null && ret.exists() && ret.canRead() && ret.canWrite();
   }
 
-  /** get an external folder, in the current work directory
+  /** @return an external folder, in the current work directory
    * @param type   folder name
-   * @return file of the specified folder
    */
   public static File getExternalDir( String type ) { return getCBD( type, true ); }
 
-  /** get an external file, under the current work directory
+  /** @return an external file, under the current work directory
    * @param type   folder name
    * @param name   file name
-   * @return the specified file
    */
   public static File getExternalFile( String type, String name ) { return new File( getCBD( type, true ), name ); }
 
@@ -222,10 +225,9 @@ public class TDFile
     if ( file.exists() ) file.delete();
   }
 
-  /** get an external file writer
+  /** @return writer to an external file writer
    * @param type   folder name
    * @param name   file name
-   * @return writer of the specified file
    */
   public static FileWriter getExternalFileWriter( String type, String name ) throws IOException
   {
@@ -326,6 +328,9 @@ public class TDFile
   public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 
   // -----------------------------------------------------------------------------
+  /** delete a file
+   * @param f   file to delete
+   */
   public static void deleteFile( File f ) 
   {
     if ( f != null && f.exists() ) {
@@ -333,6 +338,9 @@ public class TDFile
     }
   }
 
+  /** delete a folder and its files
+   * @param dir   folder to delete
+   */
   public static void deleteDir( File dir ) 
   {
     if ( dir != null && dir.exists() ) {
@@ -358,6 +366,9 @@ public class TDFile
   //   }
   // }
 
+  /** recursively delete a folder
+   * @param dir   folder to delete
+   */
   public static boolean recursiveDeleteDir( File dir )
   {
     if ( dir == null ) return false;
@@ -372,17 +383,27 @@ public class TDFile
     return false;
   }
 
+  /** delete a file
+   * @param pathname   pathname of the file to delete
+   */
   public static void deleteFile( String pathname ) 
   { 
     deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
   }
 
+  /** delete a folder
+   * @param pathname   pathname of the folder to delete
+   */
   public static void deleteDir( String dirname ) 
   { 
     deleteDir( getTopoDroidFile( dirname ) ); // DistoX-SAF
   }
 
-  // @pre oldname exists && ! newname exists
+  /** rename a file
+   * @param oldname   old pathname of the existing file
+   * @param newname   new pathname
+   * @pre oldname exists AND ! newname exists
+   */
   public static void renameFile( String oldname, String newname )
   {
     File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
@@ -394,7 +415,11 @@ public class TDFile
     }
   }
 
-  // @pre oldname exists
+  /** rename a file
+   * @param oldname   old pathname of the existing file
+   * @param newname   new pathname
+   * @pre oldname exists
+   */
   public static void moveFile( String oldname, String newname )
   {
     File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
@@ -406,6 +431,9 @@ public class TDFile
     }
   }
 
+  /** creates a "topodroid" folder
+   * @param pathname    folder pathname
+   */
   public static File makeTopoDroidDir( String pathname )
   {
     File f = new File( pathname );
@@ -418,6 +446,9 @@ public class TDFile
     return f;
   }
 
+  /** creates an "extrenal" folder
+   * @param pathname    folder pathname
+   */
   public static File makeExternalDir( String type )
   {
     File f = getExternalDir( type ); 
@@ -430,7 +461,10 @@ public class TDFile
     return f;
   }
 
-
+  /** rename a temporary file
+   * @param temp   temporary file
+   * @param file   target file
+   */
   public static boolean renameTempFile( File temp, File file )
   {
     boolean ret = false;
@@ -442,6 +476,10 @@ public class TDFile
     return ret;
   }
 
+  /** rename a temporary file
+   * @param temp       temporary file
+   * @param pathname   pathname of the target file 
+   */
   public static boolean renameTempFile( File temp, String pathname )
   { 
     return renameTempFile( temp, getTopoDroidFile( pathname ) );
@@ -589,6 +627,9 @@ public class TDFile
     }
   }
 
+  /** close a file descriptor
+   * @param pfd    parcel file descriptor
+   */
   static void closeFileDescriptor( ParcelFileDescriptor pfd ) 
   {
     if ( pfd != null ) {
@@ -599,6 +640,9 @@ public class TDFile
     }
   }
 
+  /** @return input stream of a file descriptor
+   * @param pfd    parcel file descriptor
+   */
   static FileInputStream getFileInputStream( ParcelFileDescriptor pfd )
   {
     if ( pfd != null ) {
@@ -608,6 +652,9 @@ public class TDFile
     return null;
   }
 
+  /** @return output stream of a file descriptor
+   * @param pfd    parcel file descriptor
+   */
   static FileOutputStream getFileOutputStream( ParcelFileDescriptor pfd )
   {
     if ( pfd != null ) {

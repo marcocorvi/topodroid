@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mav 2020
  *
- * @brief Cave3D coordinate system
+ * @brief 3D: coordinate system
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.

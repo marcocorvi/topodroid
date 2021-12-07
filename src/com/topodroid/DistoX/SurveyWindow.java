@@ -438,7 +438,7 @@ public class SurveyWindow extends Activity
   private void doNotes()
   {
     if ( TDInstance.survey != null ) {
-      (new DistoXAnnotations( mActivity, TDInstance.survey )).show();
+      (new DialogAnnotations( mActivity, TDInstance.survey )).show();
     } else { // SHOULD NEVER HAPPEN
       TDToast.makeWarn( R.string.no_survey );
     }

@@ -4,11 +4,13 @@
 
 Here is some background about how the survey data, the calibration data, and the sketches are stored.<br><p>
 
-The app creates its default base directory, named "TopoDroid", in the primary external memory (usually /sdcard),
-or, since Android 11, in the primary public external memory (usually /sdcard/Documents).
-This directory is not removed when you uninstall the app. In this directory the app creates the SQLite database "distox14.sqlite", with the survey data, and stores the sketch and other survey files.<br><p>
+The app creates its default base directory in the primary public external memory, "Documents/TDX".
+This directory is not removed when you uninstall the app. 
+In this directory the app creates the surveys folder "TopoDroid" with the SQLite database "distox14.sqlite" that storesthe survey data, 
+the surveys sketch files, and other surveys files.<br><p>
 
-The app also creates subdirectories for the different types of files. These subdirectories are created only in the app private directory, that is
+The app also creates subdirectories for the different types of files.<br>
+The following subdirectories are created only in the app private directory, that is
 "Android/data/com.topodroid.DistoX/files" in the primary external memory.
 <ul style="margin-top: 0">
 <li><b>bin</b>: firmware files (DistoX2 only)</li>
@@ -20,38 +22,14 @@ The app also creates subdirectories for the different types of files. These subd
 "bin" is used to store firmware files, both the factory files included in TopoDroid and the firmware dumps read from a DistoX2.<br>
 The database "device10.sqlite", with the calibration data, and the devices informations is in this directory.<br><p>
 
-The following subdirectories can be created in each working directory (in bold those that are always created):
+A <b>zip</b> folder is created in the work directory "TDX/TopoDroid".
+For each survey a survey-folder (named after the survey name) is created, with the survey annotation file and 
+the following folders:
 <ul style="margin-top: 0">
 <li><b>audio</b>: <i>audio</i> comments</li>
-<li>cave: <i>Polygon</i> files</li>
-<li>cav: <i>Topo</i> files</li>
-<li>csv: CSV text files of exported surveys</li>
-<li>csx: <i>cSurvey</i> files (exported surveys and sketches)</li>
-<li>dat: <i>Compass</i> files (exported surveys)</li>
-<li>dxf: DXF (<i>LibreCAD</i>) files (exported surveys and sketches)</li>
-<li>grt: <i>Grottolf</i> files (exported surveys)</li>
-<li>gtx: <i>GHTopo</i> files (exported surveys)</li>
-<li><b>import</b>: survey files to import (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>Survex</i>, <i>PocketTopo</i>, and <i>CaveSniper</i> format)</li>
-<li>kml: <i>GoogleEarth</i> exports [A]</li>
 <li><b>note</b>: survey annotations text files</li>
 <li><b>photo</b>: survey pictures (each survey with its own subdirectory)</li>
-<li>plt: <i>OziExplorer</i> track file exports [A]</li>
-<li>png: PNG image files (exported sketches)</li>
-<li>shp: <i>shapefile</i> exports [T]</li>
-<li>srv: <i>Walls</i> files (exported surveys)</li>
-<li>svg: SVG files (exported sketches)</li>
-<li>sur: <i>WinKarst</i> files (exported surveys)</li>
-<li>svx: <i>Survex</i> files (exported surveys)</li>
 <li><b>tdr</b>: binary sketch files</li>
-<li>th: <i>Therion</i> files (exported surveys)</li>
-<li>th2 for <i>Therion</i> scrap files (saved sketches)</li>
-<!-- li>th3 for 3D model files</li -->
-<li>tmp: for temporary files. Any file leftover in this directory can be safely deleted.</li>
-<li>top: <i>PocketTopo</i> files (exported surveys)</li>
-<li>tro: <i>VisualTopo</i> files (exported surveys)</li>
-<li><b>zip</b>: survey ZIP archives (exported and importable)</li>
 </ul>
-Some of these subdirectories are used only to store exported files (cav, cave, csx, dat, dxf, png, svx, th, th2, top, tro). Others are used to store data (tdr, th3, note, photo). 
-The subdirectory "zip" is used to store zipped archives as well to read them and uncompress in TopoDroid. When you want to import a survey made with another program (<i>Therion</i>, <i>Compass</i>, <i>VisualTopo</i>, <i>Survex</i>, <i>PocketTopo</i>, <i>CaveSniper</i>) you must place it in the subdirectory "import".<br><p>
 
 </body></html>

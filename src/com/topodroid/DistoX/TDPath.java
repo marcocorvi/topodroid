@@ -32,6 +32,8 @@ import android.content.Context;
 import android.os.Environment;
 import android.widget.TextView;
 
+import android.net.Uri;
+
 public class TDPath
 {
   
@@ -203,12 +205,13 @@ public class TDPath
     if ( ! dir.exists() ) {
       if ( ! dir.mkdirs() ) TDLog.Error("mkdir error " + path );
     }
+    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
 
     boolean ret = false;
     try {
       ret = dir.exists() && dir.isDirectory() && dir.canWrite();
     } catch ( SecurityException e ) { }
-    // TDLog.v( "check base path: <" + path + ">: " + ret );
+    TDLog.v( "check base path: <" + path + ">: " + ret );
     return ret;
   }
 
@@ -218,8 +221,9 @@ public class TDPath
   // return the current work directory
   public static String getCurrentWorkDir() { return PATH_CW_DIR; }
  
-  // set the Current Work Directory
-  // @param path current work directory
+  /** set the Current Work Directory
+   * @param path current work directory
+   */
   static void setTdPaths( String path /*, String base */ )
   {
     // TDLog.v( "set paths [0]: path " + path + " base " + base );
@@ -228,8 +232,10 @@ public class TDPath
 
     File dir = TDFile.getExternalDir( path ); // DistoX-SAF
     // TDLog.v( "set paths [4]. Dir " + dir.getPath()  );
+
     try {
       if ( dir.exists() || dir.mkdirs() ) {
+        // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
 	if ( dir.isDirectory() && dir.canWrite() ) {
 	  PATH_CW_DIR   = PATH_CB_DIR + "/" + path;
           PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
@@ -333,6 +339,7 @@ public class TDPath
 	return null;
       }
     }
+    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
     FilenameFilter filter = new FilenameFilter() {
        public boolean accept( File dir, String name ) {
 	 return name.endsWith( "tdconfig" );
@@ -1168,6 +1175,7 @@ public class TDPath
       // if ( tv != null ) tv.setText("moving survey " + survey );
       File tdr = TDFile.getTopoDroidFile( "/sdcard/Documents/TDX/TopoDroid/" + survey + "/tdr" );
       tdr.mkdirs();
+      // TDInstance.takePersistentPermissions( Uri.fromFile( tdr ) ); // FIXME_PESISTENT
       // move all tdr files of the survey
       List<String> plots = db.selectAllPlotNames( survey );
       for ( String plot : plots ) {
@@ -1214,6 +1222,7 @@ public class TDPath
     if ( ! dry_run ) {
       if ( ! out.exists() ) {
         if ( ! out.mkdirs() ) return false;
+        // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PESISTENT
       }
       if ( ! out.isDirectory() ) return false;
     } else {

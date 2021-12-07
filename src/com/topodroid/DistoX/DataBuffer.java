@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2020
  *
- * @brief directly allocated data buffer with memory management
+ * @brief 3D: directly allocated data buffer with memory management
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -33,24 +33,44 @@ class DataBuffer
   // ===========================================================
   // static creators
 
+  /** create a float data buffer
+   * @param cap      capacity
+   * @param delta    ...
+   */
   static DataBuffer createFloatBuffer( int cap, int delta ) { return createDataBuffer( FLOAT, cap, delta ); }
 
+  /** create a float data buffer
+   * @param cap      capacity
+   */
   static DataBuffer createFloatBuffer( int cap ) { return createDataBuffer( FLOAT, cap, cap ); }
 
+  /** create an integer (short) data buffer
+   * @param cap      capacity
+   * @param delta    ...
+   */
   static DataBuffer createShortBuffer( int cap, int delta ) { return createDataBuffer( SHORT, cap, delta ); }
 
+  /** create an integer (short) data buffer
+   * @param cap      capacity
+   */
   static DataBuffer createShortBuffer( int cap ) { return createDataBuffer( SHORT, cap, cap ); }
 
-  // get the underlying buffer as bytes
+  /** #return the underlying buffer as bytes
+   */
   ByteBuffer asByte() { return mData; }
 
-  // get the buffer as floats
+  /** @return the buffer as floats
+   */
   FloatBuffer asFloat() { mData.rewind(); return mData.asFloatBuffer( ); }
 
-  // get the buffer as shorts
+  /** @return the buffer as shorts
+   */
   ShortBuffer asShort() { mData.rewind(); return mData.asShortBuffer( ); }
 
-  // append a float value to the buffer
+  /** append a float value to the buffer
+   * @param value   float value to append
+   * @return the data buffer as float
+   */
   FloatBuffer addFloat( float value ) 
   {
     // assert( mType == FLOAT );
@@ -61,6 +81,10 @@ class DataBuffer
     return mData.asFloatBuffer();
   }
 
+  /** append an array of float values to the buffer
+   * @param values   float values to append
+   * @return the data buffer as float
+   */
   FloatBuffer addFloats( float[] values )
   {
     // assert( mType == FLOAT );
@@ -74,7 +98,10 @@ class DataBuffer
     return mData.asFloatBuffer();
   }
 
-  // append a short value to the buffer
+  /** append a short value to the buffer
+   * @param value   short value to add
+   * @return the data buffer as short
+   */
   ShortBuffer addShort( short value ) 
   {
     // assert( mType == SHORT );
@@ -85,6 +112,10 @@ class DataBuffer
     return mData.asShortBuffer();
   }
 
+  /** append an array of short values to the buffer
+   * @param values   short values to add
+   * @return the data buffer as short
+   */
   ShortBuffer addShorts( short[] values )
   {
     // assert( mType == SHORT );
@@ -97,13 +128,17 @@ class DataBuffer
     return mData.asShortBuffer();
   }
 
-  // get the number of values stored in the buffer
+  /** @return the number of values stored in the buffer
+   */
   int size() { return mPos / mType; }
 
-  // get the buffer capacity for the type of the values
+  /** @return the buffer capacity for the type of the values
+   */
   int capacity() { return mCapacity / mType; }
 
-
+  /** @return a float data buffer of given size
+   * @param count   number of floats in the buffer
+   */ 
   static FloatBuffer getFloatBuffer( int count )
   {
     try {
@@ -115,6 +150,12 @@ class DataBuffer
 
   // ----------------------------------------------------------------
 
+  /** createa a data buffer
+   * @param type  data type
+   * @param cap   capacity
+   * @param delta ...
+   * @return the newly created data buffer
+   */
   private static DataBuffer createDataBuffer( int type, int cap, int delta )
   {
     try {
@@ -123,6 +164,11 @@ class DataBuffer
     return null;
   }
 
+  /** createa a data buffer
+   * @param type  data type
+   * @param cap   capacity
+   * @return the newly created data buffer
+   */
   private static DataBuffer createDataBuffer( int type, int cap )
   {
     try {
@@ -131,7 +177,8 @@ class DataBuffer
     return null;
   }
 
-  /*
+  /** cstr
+   * @param type  data type
    * @param cap     initial capacity
    * @param delta   capacity increment
    */
@@ -146,6 +193,8 @@ class DataBuffer
     // TDLog.v("Data Buffer cstr cap " + mCapacity + " pos " + mPos );
   }
 
+  /** reallocate the data buffer
+   */
   private void realloc()
   {
     ByteBuffer buf = mData;

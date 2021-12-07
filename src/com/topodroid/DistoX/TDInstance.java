@@ -20,21 +20,18 @@ import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.content.ContentResolver;
 import android.content.Context;
+import android.content.Intent;
 import android.content.res.Resources;
 
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 
+import android.net.Uri;
+
 // static class (singleton) with instance data
 public class TDInstance
 {
   public static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
-
-  public static String getResourceString( int r ) { return context.getResources().getString( r ); }
-  public static String formatString( int r, String arg ) 
-  {
-    return String.format( context.getResources().getString( r ), arg );
-  }
 
   public static String cwd;  // current work directory
   public static String cbd;  // current base directory
@@ -52,6 +49,48 @@ public class TDInstance
   private static Device  deviceA = null;
   private static Device  deviceB = null; // second-DistoX
 
+  // the bluetooth device is necessary for the cstr of SAP/BRIC comm
+  private static BluetoothDevice mBleDevice = null; 
+
+  /** @return the type of the primary device (or 0 if not set)
+   */
+  public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
+
+  /** @return the address of the primary device (or null if not set)
+   */
+  public static String deviceAddress() { return (deviceA == null)? null : deviceA.getAddress(); }
+
+  /** @return the nickname of the primary device (or "-" if not set)
+   */
+  public static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
+
+  /** @return true if the primary device is set and has the given address
+   * @param addr   address
+   */
+  public static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.getAddress().equals( addr ); }
+
+  /** @return true if the primary device is set and is of type A3
+   */
+  static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
+
+  /** @return true if the primary device is set and is of type X310
+   */
+  static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
+
+  /** @return true if the primary device is set and is of type DistoX
+   */
+  static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
+
+  /** @return true if the primary device is set and is of type SAP5
+   */
+  static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
+
+  /** @return true if the primary device is set and is of type BRIC4
+   */
+  static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
+
+  /** @return primary bluetooth device
+   */
   public static Device getDeviceA() 
   { 
     // if ( TDLevel.overExpert ) return deviceA;
@@ -59,6 +98,8 @@ public class TDInstance
     return deviceA;
   }
 
+  /** @return secondary bluetooth device
+   */
   public static Device getDeviceB() 
   { 
     // if ( TDLevel.overExpert ) return deviceB;
@@ -66,12 +107,18 @@ public class TDInstance
     return deviceB;
   }
 
+  /** set primary bluetooth device
+   * @param bluetooth device
+   */
   public static void setDeviceA( Device device ) { deviceA = device; }
+
+  /** set secondary bluetooth device
+   * @param bluetooth device
+   */
   public static void setDeviceB( Device device ) { deviceB = device; }
 
-  // the bluetooth device is necessary for the cstr of SAP/BRIC comm
-  private static BluetoothDevice mBleDevice = null; 
-
+  /** @return bluetooth LE device
+   */
   static BluetoothDevice getBleDevice()
   {
     if ( mBleDevice == null ) initBleDevice();
@@ -79,39 +126,45 @@ public class TDInstance
     return mBleDevice;
   }
 
+  /** initialize the bluetooth LE device
+   */
   static void initBleDevice( )
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     mBleDevice = adapter.getRemoteDevice( TDInstance.deviceAddress() );
   }
 
+  /** set the bluetooth LE device
+   * @param dev   bluetooth LE device
+   */
   static void setBleDevice( BluetoothDevice dev ) 
   { 
     mBleDevice = dev;
     // TDLog.v("BLE " + "TD Instance: set ble device " + ( (dev==null)? "null" : dev.getName() ) );
   }
 
+  /** @return true if the bluetooth LE device is set
+   */
   static boolean hasBleDevice() { return mBleDevice != null; }
 
-  public static int deviceType() { return (deviceA == null)? 0 : deviceA.mType; }
-  public static String deviceAddress() { return (deviceA == null)? null : deviceA.getAddress(); }
-  public static String deviceNickname() { return (deviceA == null)? "- - -" : deviceA.getNickname(); }
-  public static boolean isDeviceAddress( String addr ) { return deviceA != null && deviceA.getAddress().equals( addr ); }
-
-  static boolean isDeviceA3()     { return deviceA != null && deviceA.isA3(); }
-  static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
-  static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
-  static boolean isDeviceSap()    { return deviceA != null && deviceA.isSap(); }
-  static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
-
+  /** @return true if the primary device is LE
+   */
   static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() ); }
+
+  /** @return true if the device is LE
+   * @param device   bluetooth device
+   */
   private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() ); }
 
+  /** @return true if the connection is set in continuous mode
+   */
   static boolean isContinuousMode() 
   {
     return TDSetting.isConnectionModeContinuous() || isDeviceBLE();
   }
 
+  /** @return true if the bluetooth device has remote control
+   */
   static boolean hasDeviceRemoteControl() 
   {
     return deviceA != null && ( deviceA.isX310() || deviceA.isBric() ); 
@@ -119,16 +172,31 @@ public class TDInstance
 
   // FIXME VitualDistoX
   // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.getAddress().equals( Device.ZERO_ADDRESS ) ); }
+
+  /** @return true if the primary device is set
+   */
   static boolean isDeviceZeroAddress( ) { return ( deviceA == null ); }
 
   // FIXME second-DistoX
+  /** @return the type of the secondary device (or 0if not set)
+   */
   static int secondDeviceType() { return (deviceB == null)? 0 : deviceB.mType; }
+
+  /** @return the address of the secondary device (or null if not set)
+   */
   static String secondDeviceAddress() { return (deviceB == null)? null : deviceB.getAddress(); }
+
+  /** @return true if the secondary device is set and has the given address
+   * @param addr   device address
+   */
   static boolean isSecondDeviceAddress( String addr ) { return deviceB != null && deviceB.getAddress().equals( addr ); }
 
   static String recentPlot = null;
   static long   recentPlotType = PlotType.PLOT_PLAN;
 
+  /** switch device
+   * @return true if successfully switched
+   */
   static boolean switchDevice()
   {
     if ( deviceB == null ) return false;
@@ -138,17 +206,13 @@ public class TDInstance
     return true;
   }
 
-  public static ContentResolver getContentResolver() { return context.getContentResolver(); }
-  
-  static boolean isDivingMode() { return datamode == SurveyInfo.DATAMODE_DIVING; }
-
-  public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }
-
+  /** @return a bundle containing TopoDroid status
+   */
   static Bundle toBundle()
   {
     Bundle b = new Bundle();
     b.putString(  "TOPODROID_CWD", cwd );
-    b.putString(  "TOPODROID_CBD", cbd );
+    // b.putString(  "TOPODROID_CBD", cbd );
     b.putLong(    "TOPODROID_SID", sid );
     b.putLong(    "TOPODROID_CID", cid );
     b.putString(  "TOPODROID_SURVEY", survey );
@@ -160,12 +224,15 @@ public class TDInstance
     return b;
   }
 
-  // @param ctx must be the application context
+  /** restore TopoDroid status from a bundle
+   * @param ctx context - must be the application context
+   * @param b   bundle
+   */
   static void fromBundle( Context ctx, Bundle b )
   {
     context = ctx;
     cwd = b.getString( "TOPODROID_CWD" );
-    cbd = b.getString( "TOPODROID_CBD" );
+    // cbd = b.getString( "TOPODROID_CBD" );
     sid = b.getLong( "TOPODROID_SID" );
     cid = b.getLong( "TOPODROID_CID" );
     survey = b.getString( "TOPODROID_SURVEY" );
@@ -188,14 +255,58 @@ public class TDInstance
     recentPlotType = PlotType.PLOT_PLAN;
   }
 
+  /** set the application context
+   * @param ctx   context
+   */
   static void setContext( Context ctx ) { context = ctx; }
 
+  /** @return the content resolver of the application context
+   */
+  public static ContentResolver getContentResolver() { return context.getContentResolver(); }
+  
+  /** @return the application resources
+   */
   public static Resources getResources() { return context.getResources(); }
 
+  /** @return resource string
+   * @param r   resource index
+   */
+  public static String getResourceString( int r ) { return context.getResources().getString( r ); }
+
+  /** @return string formatted with a resource
+   * @param r   resource index
+   * @param arg argument
+   */
+  public static String formatString( int r, String arg ) 
+  {
+    return String.format( context.getResources().getString( r ), arg );
+  }
+
+  // /** take persitent permissions for a given uri
+  //  * @param uri   uri
+  //  */
+  // static void takePersistentPermissions( Uri uri )
+  // {
+  //   int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+  //   getContentResolver().takePersistableUriPermission( uri, flags );
+  // }
+
+  /** @return the application shared preferences
+   */
+  public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }
+
+  /** set the "recent" plot
+   * @param name   plot name
+   * @param type   plot type
+   */
   static void setRecentPlot( String name, long type )
   {
     recentPlot     = name;
     recentPlotType = type;
   }
+
+  /** @return true if survey data are set to "diving mode"
+   */
+  static boolean isDivingMode() { return datamode == SurveyInfo.DATAMODE_DIVING; }
 
 }

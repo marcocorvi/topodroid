@@ -59,7 +59,7 @@ public class CWDActivity extends Activity
   private Button mBtnCancel;
   private LinearLayout mLayoutcbd;
   
-  private String mBaseName;
+  // private String mBaseName;
 
   // void setBasename( String basename ) 
   // { 
@@ -71,8 +71,7 @@ public class CWDActivity extends Activity
   private boolean setCwdPreference()
   {
     String dir_name  = mETcwd.getText().toString();
-
-    String base_name = TDPath.getCurrentBaseDir();
+    // String base_name = TDPath.getCurrentBaseDir();
 
     // CURRENT WORK DIRECTORY
     // if ( dir_name == null ) { // always false
@@ -97,13 +96,13 @@ public class CWDActivity extends Activity
 
     // return the result to TDPrefActivuity
     if ( TDPath.checkBasePath( dir_name /*, base_name */ ) ) {
-      TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + "> base <" + base_name + ">" );
-      TopoDroidApp.setCWDPreference( dir_name, base_name );
+      TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
+      TopoDroidApp.setCWDPreference( dir_name /* , base_name */ );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
       setResult( RESULT_OK, intent );
     } else {
-      TDLog.Log( TDLog.LOG_PATH, "CWD Failed to set dir <" + dir_name + "> base <" + base_name + ">" );
+      TDLog.Log( TDLog.LOG_PATH, "CWD Failed to set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
       setResult( RESULT_CANCELED );
     }
     return true;
@@ -111,7 +110,8 @@ public class CWDActivity extends Activity
     
   private void updateDisplay()
   {
-    File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
+    // File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
+    File[] dirs = TDPath.getTopoDroidFiles( TDInstance.cbd );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
     if ( dirs != null ) {
       for ( File item : dirs ) {
@@ -123,11 +123,11 @@ public class CWDActivity extends Activity
     mList.setDividerHeight( 2 );
 
     mETcwd.setText( TDInstance.cwd );
-    if ( TDLevel.overExpert ) {
-      mTVcbd.setText( mBaseName );
-    } else{
+    // if ( TDLevel.overExpert ) {
+    //   mTVcbd.setText( mBaseName );
+    // } else{
       mLayoutcbd.setVisibility( View.GONE );
-    }
+    // }
   }
 
   // ---------------------------------------------------------------
@@ -167,7 +167,7 @@ public class CWDActivity extends Activity
 
     setContentView(R.layout.cwd_activity);
     // mApp = (TopoDroidApp) getApplication();
-    mBaseName = TDInstance.cbd;
+    // mBaseName = TDInstance.cbd;
 
     getWindow().setSoftInputMode( WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN );
 

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2021
  *
- * @brief x-section, roughly in a plane
+ * @brief 3D: XSection, roughly in a plane
  * --------------------------------------------------------
  *  Copyright This sowftare is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -31,27 +31,53 @@ public class Cave3DXSection
   Vector3D normal;         // normal to the x-section plane
   Vector3D ref;            // reference from which to measure the angles
 
+  /** @return the number of splay shots
+   */
   public int size() { return splays.length; }
 
+  /** @return the xsection name
+   */
   public String name() { return (station != null)? station.getFullName() : "none"; }
    
-  // get the k-th splay point (3D world frame)
-  // @param k    index - must be between 0 and splays.length
+  /** @return  the k-th splay point (3D world frame)
+   * @param k       index - must be between 0 and splays.length
+   * @param reverse whether to count splays from the end
+   */
   Vector3D point( int k, boolean reverse ) { return  (k < 0 || k >= splays.length )? null : reverse ? reversePoint(k) : directPoint(k); }
 
+  /** @return  the forward k-th splay point (3D world frame)
+   * @param k       index - must be between 0 and splays.length
+   */
   private Vector3D directPoint( int k ) { return center.sum( splays[ k ] ); }
+
+  /** @return  the backward k-th splay point (3D world frame)
+   * @param k       index - must be between 0 and splays.length
+   */
   private Vector3D reversePoint( int k ) { return center.sum( splays[ splays.length-1-k ] ); }
 
-  // get the k-th splay angle
-  // @param k        splay index
-  // @param reversed whether to count splays in reversed order (and angles complemented to 2PI)
+  /** @return  the k-th splay angle
+   * @param k        splay index
+   * @param reversed whether to count splays in reversed order (and angles complemented to 2PI)
+   */
   double angle( int k, boolean reversed ) { return reversed ? reverseAngle(k) : directAngle(k); }
 
+  /** @return  the forward k-th splay angle
+   * @param k        splay index
+   */
   private double directAngle( int k ) { return splays[ k ].angle; }
 
-  // return the complement to 2*PI of the angle of the splays in reversed order
+  /** @return return the complement to 2*PI of the angle of the splays in reversed order
+   * @param k        splay index
+   */
   private double reverseAngle( int k ) { return Math.PI*2 - splays[ splays.length-1-k ].angle; }
 
+  /** cstr
+   * @param st   xsection station
+   * @param c    center
+   * @param n    normal to the xsection plane
+   * @param r    angle reference direction
+   * @param nxs  number of xsplays (to expect)
+   */
   private Cave3DXSection( Cave3DStation st, Vector3D c, Vector3D n, Vector3D r, int nxs )
   {
     station = st;
@@ -61,12 +87,15 @@ public class Cave3DXSection
     splays  = new XSplay[ nxs ];
   }
 
-  // @param c     center station
-  // @param r     angle reference direction
-  // @param shots splay shots
-  public Cave3DXSection( Cave3DStation s, Vector3D c, Vector3D r, List< Vector3D > shots )
+  /** cstr
+   * @param st    xsection station
+   * @param c     center station
+   * @param r     angle reference direction
+   * @param shots splay shots
+   */
+  public Cave3DXSection( Cave3DStation st, Vector3D c, Vector3D r, List< Vector3D > shots )
   {
-    station = s;
+    station = st;
     center  = c;
     ref     = r;
     ArrayList< Vector3D > points = new ArrayList<>();
@@ -83,6 +112,9 @@ public class Cave3DXSection
   //}
 
   // --------------------------------------------------------------------
+  /** compute the normal, from a set of 3D points
+   * @param points   3D points
+   */
   private void recomputeNormal( List< Vector3D > points )
   {
     double[] A = new double[9];
@@ -182,9 +214,11 @@ public class Cave3DXSection
     // normal.normalized();
   }
 
-  // compute the renormalized 3D vector projection of the 3D point P on the x-section plane
-  // @param v0  normal
-  // @param p   3D point
+  /** compute the renormalized 3D vector projection of the 3D point P on the x-section plane
+   * @param v0  normal
+   * @param p   3D point
+   * @return  renormalized 3D vector projection 
+   */
   private Vector3D projection( Vector3D v0, Vector3D p )
   {
     // Vector3D ret = p.difference( normal.scaledBy( normal.dotProduct(p) ) );
@@ -194,10 +228,11 @@ public class Cave3DXSection
     return ret;
   }
 
-  // angle between two 3D vectors, in [0, 2 PI)
-  // @param v0   normal
-  // @param v1   zero-refrence
-  // @param v2   test vector
+  /** @return the angle between two 3D vectors, in [0, 2 PI)
+   * @param v0   normal
+   * @param v1   zero-refrence
+   * @param v2   test vector
+   */
   private double computeAngle( Vector3D v0, Vector3D v1, Vector3D v2 ) 
   {
     double c = v1.dotProduct( v2 );
@@ -207,8 +242,11 @@ public class Cave3DXSection
     return a;
   }
 
-  // @param r   reference direction
-  // @param points 3D points relative to the center
+  /** reorder the points in a list
+   * @param n   normal to the plane where the order is done
+   * @param r   reference direction
+   * @param points 3D points relative to the center
+   */
   private void orderPoints( Vector3D n, Vector3D r, List< Vector3D > points )
   {
     Vector3D w = projection( n, r );
@@ -227,6 +265,9 @@ public class Cave3DXSection
     }
   }  
 
+  /** serialize the 3D XSection
+   * @param dos   output stream
+   */
   void serialize( DataOutputStream dos ) throws IOException
   {
     dos.write('x');
@@ -244,6 +285,12 @@ public class Cave3DXSection
     for ( XSplay splay : splays ) splay.serialize(dos );
   }
 
+  /** deserialize a 3D XSection
+   * @param dis      input stream
+   * @param version  serialization version
+   * @param stations list of 3D stations
+   * @return the deserialized 3D XSection
+   */
   static Cave3DXSection deserialize( DataInputStream dis, int version, List<Cave3DStation> stations ) throws IOException
   {
     int ch = dis.read(); // 'x'
