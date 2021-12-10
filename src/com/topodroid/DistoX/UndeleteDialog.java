@@ -25,6 +25,7 @@ import android.content.Context;
 // import android.content.Intent;
 
 import android.widget.TextView;
+import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.AdapterView;
@@ -41,10 +42,10 @@ class UndeleteDialog extends MyDialog
   private long mSid;
   private final DataHelper mData;
   private final ShotWindow mParent;
+  private DBlockBuffer mDBlockBuffer;
 
   // private Button mBtnCancel;
   private Button mBtnStatus;
-  private Button mBtnOk;
 
   private UndeleteAdapter mArrayAdapter0 = null;
   private UndeleteAdapter mArrayAdapter1 = null;
@@ -61,12 +62,13 @@ class UndeleteDialog extends MyDialog
 
   UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3,
-                         List< PlotInfo > plots )
+                         List< PlotInfo > plots, DBlockBuffer buffer )
   {
     super( context, R.string.UndeleteDialog );
     mParent = parent;
     mData   = data;
     mSid    = sid;
+    mDBlockBuffer = buffer;
     if ( shots1.size() > 0 ) {
       mShots1 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots1 ) {
@@ -96,12 +98,13 @@ class UndeleteDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    Button b = (Button)v;
-    if ( b == mBtnStatus ) {
+    if ( v.getId() == R.id.button_status ) {
       incrementStatus( );
       return;
-    } else if ( b == mBtnOk ) {
+    } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
+    } else if ( TDLevel.overExpert && v.getId() == R.id.button_buffer ) {
+      appendBuffer();
     } else {
       // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
     }
@@ -128,6 +131,21 @@ class UndeleteDialog extends MyDialog
   //   updateList();
   // }
 
+  /** move the data from the buffer to the survey - the buffer is left empty
+   */
+  private void appendBuffer()
+  {
+    TDLog.v("Append buffer " + mDBlockBuffer.size() );
+    if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
+    for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
+      mData.insertDBlockShot( mSid, blk );
+    }
+    mDBlockBuffer.clear();
+    mParent.updateDisplay(); // this recomputes DistoX accuracy
+  }
+
+  /** recover a shot or a plot
+   */
   private void recoverData()
   {
     boolean update = false;
@@ -190,8 +208,17 @@ class UndeleteDialog extends MyDialog
 
     mBtnStatus = (Button) findViewById( R.id.button_status );
     mBtnStatus.setOnClickListener( this );
-    mBtnOk = (Button) findViewById( R.id.button_ok );
-    mBtnOk.setOnClickListener( this );
+    ((Button) findViewById( R.id.button_ok )).setOnClickListener( this );
+
+    LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
+    int buffer_size = mDBlockBuffer.size();
+    if ( TDLevel.overExpert && buffer_size > 0 ) {
+      TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
+      text_buffer.setText( String.format( mContext.getResources().getString( R.string.buffer_size ), buffer_size ) );
+      ((Button) findViewById( R.id.button_buffer )).setOnClickListener( this );
+    } else {
+      layout_buffer.setVisibility( View.GONE );
+    }
 
     setTitle( R.string.undelete_text );
 

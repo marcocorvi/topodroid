@@ -143,7 +143,8 @@ public class ShotWindow extends Activity
                           // R.drawable.iz_highlight,  // highlight in sketch
 			  // R.drawable.iz_numbers_no, // renumber shots (first must be leg)
                           // R.drawable.iz_bedding,    // compute bedding
-                        R.drawable.iz_delete,     // delete shots
+                        R.drawable.iz_delete,     // cut shots 
+                        R.drawable.iz_copy,       // copy shots 
                         R.drawable.iz_cancel,     // cancel
 			R.drawable.iz_empty
                       };
@@ -193,6 +194,7 @@ public class ShotWindow extends Activity
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
   private SurveyAccuracy mSurveyAccuracy;
+  private DBlockBuffer   mDBlockBuffer;
 
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
@@ -261,7 +263,7 @@ public class ShotWindow extends Activity
   // ConnHandler mHandler;
 
   private Button[] mButtonF;
-  private int mNrButtonF = 6; // 8;
+  private int mNrButtonF = 7; // 8;
 
   // private Button mButtonHelp;
   private MyHorizontalListView mListView;
@@ -781,10 +783,10 @@ public class ShotWindow extends Activity
       List< DBlock > shots2 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
-      if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
+      if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 && mDBlockBuffer.size() == 0 ) {
         TDToast.makeWarn( R.string.no_undelete );
       } else {
-        (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots ) ).show();
+        (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, mDBlockBuffer ) ).show();
       }
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
@@ -1063,8 +1065,8 @@ public class ShotWindow extends Activity
     mActivity = this;
     mOnOpenDialog = false;
     mSurveyAccuracy = new SurveyAccuracy( ); 
-
-    mMediaManager = new MediaManager( mApp_mData );
+    mDBlockBuffer   = new DBlockBuffer();
+    mMediaManager   = new MediaManager( mApp_mData );
 
     // FIXME-28
     // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );
@@ -1539,8 +1541,10 @@ public class ShotWindow extends Activity
       //   mList.invalidate();
       // } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // BEDDING
       //   computeBedding( mDataAdapter.mSelect );
-      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // DELETE - CUT
         askMultiDelete();
+      } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // COPY
+        doMultiCopy();
       } else if ( kf < mNrButtonF && b == mButtonF[kf++] ) { // CANCEL
         clearMultiSelect( );
         mList.invalidate();
@@ -1590,6 +1594,8 @@ public class ShotWindow extends Activity
   }
    
   // ----------------------------------------------------------------
+  /** ask whether to cut (delete) a set of shots
+   */
   private void askMultiDelete()
   {
     Resources res = getResources();
@@ -1610,9 +1616,13 @@ public class ShotWindow extends Activity
     );
   }
 
+  /** cut (delete) a set of shots and put them in the buffer
+   */
   void doMultiDelete()
   {
+    mDBlockBuffer.clear();
     for ( DBlock blk : mDataAdapter.mSelect ) {
+      mDBlockBuffer.add( blk );
       long id = blk.mId;
       mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
       // mSurveyAccuracy.removeBlockAMD( blk ); // not necessary: done by updateDisplay
@@ -1632,6 +1642,29 @@ public class ShotWindow extends Activity
           if ( b != null && b.isSecLeg() ) { // DBlock.BLOCK_SEC_LEG --> leg-flag 0
             mApp_mData.updateShotNameAndDataStatus( id, TDInstance.sid, blk.mFrom, blk.mTo, blk.getIntExtend(), blk.getFlag(), 0, blk.mComment, 0 );
             // mApp_mData.updateShotStatus( id, TDInstance.sid, 0 ); // status normal
+          }
+        }
+      }
+    }
+    clearMultiSelect( );
+    updateDisplay( ); 
+  }
+
+  /** copy a set of shots to the buffer
+   */
+  void doMultiCopy()
+  {
+    mDBlockBuffer.clear();
+    for ( DBlock blk : mDataAdapter.mSelect ) {
+      mDBlockBuffer.add( blk );
+      if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
+        if ( mFlagLeg ) {
+          for ( long id = blk.mId+1; ; ++id ) {
+            DBlock b = mApp_mData.selectShot( id, TDInstance.sid );
+            if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
+              break;
+	    }
+            mDBlockBuffer.add( b );
           }
         }
       }

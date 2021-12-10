@@ -685,6 +685,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_apply"     >Apply</string>
+    <string name="button_append"    >Append</string>
     <string name="button_back"      >Back</string>
     <string name="button_cancel"    >Cancel</string>
     <string name="button_change"    >Change</string>
@@ -727,6 +728,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_on"        >on</string>
     <string name="button_open"      >Open</string>
     <string name="button_read"      >Read</string>
+    <string name="button_recover"   >Recover</string>
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump</string>
@@ -763,6 +765,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">X-Section</string>
+    <string name="buffer_size">Buffer: %1$d data</string>
 
     <string name="mode_leg">Legs</string>
     <string name="mode_splay">Splays</string>

@@ -1507,6 +1507,23 @@ public class DataHelper extends DataSetObservable
     return insertImportShots( sid, id, shots );
   }
 
+  /** insert a BRIC4 shot
+   * @param sid     survey ID
+   * @param id      shot ID or -1
+   * @param d       distance
+   * @param b       azimuth
+   * @param c       clino
+   * @param r       roll
+   * @param mag     magnetic abs. value
+   * @param acc     acceleration abs. value
+   * @param dip     dip angle
+   * @param extend  extend (int)
+   * @param leg     leg-type
+   * @param status  status
+   * @param comment shot comment
+   * @param addr    BRIC4 address
+   * @return inserted shot ID
+   */
   public long insertBricShot( long sid, long id, double d, double b, double c, double r, double mag, double acc, double dip, long extend, int leg, long status, String comment, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
@@ -1517,11 +1534,40 @@ public class DataHelper extends DataSetObservable
     return doCompleteInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, mag, acc, dip, extend, 0.0, leg, status, comment, 0L, addr );
   }
 
+  /** insert a DistoX shot
+   * @param sid    survey ID
+   * @param id     shot ID or -1
+   * @param d      distance
+   * @param b      azimuth
+   * @param c      clino
+   * @param r      roll
+   * @param extend extend (int)
+   * @param status status
+   * @param addr   DistoX address
+   * @return inserted shot ID
+   */
   public long insertDistoXShot( long sid, long id, double d, double b, double c, double r, long extend, long status, String addr )
   { // 0L=leg, status, 0L=type DISTOX
     // stretch = 0.0;
     // return doInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, "", "",  d, b, c, r, extend, 0.0, DBlock.FLAG_SURVEY, 0L, status, 0L, "", addr );
     return doSimpleInsertShot( sid, id, System.currentTimeMillis()/1000, 0L, d, b, c, r, extend, 0.0, 0L, status, 0L, addr );
+  }
+
+  /** insert a shot copying from a dblock (except surveyId and Id)
+   * @param sid    survey ID
+   * @param blk    dblock
+   * @return inserted shot ID
+   */
+  public long insertDBlockShot( long sid, DBlock blk )
+  {
+    if ( myDB == null ) return -1L;
+    ++ myNextId;
+    // 0L = color, 0 = status
+    ContentValues cv = makeShotContentValues( sid, myNextId, blk.mTime, 0L, blk.mFrom, blk.mTo, 
+                         blk.mLength, blk.mBearing, blk.mClino, blk.mRoll, blk.mMagnetic, blk.mAcceleration, blk.mDip, 
+                         blk.mExtend, blk.getStretch(), blk.mFlag, blk.getLegType(), 0, blk.mShotType, blk.mComment, blk.getAddress() );
+    doInsert( SHOT_TABLE, cv, "dblock insert" );
+    return myNextId;
   }
 
   public long insertShot( long sid, long id, long millis, long color, double d, double b, double c, double r,
@@ -1781,8 +1827,7 @@ public class DataHelper extends DataSetObservable
 
   private ContentValues makeShotContentValues( long sid, long id, long millis, long color, String from, String to, 
                           double d, double b, double c, double r, double acc, double mag, double dip,
-                          long extend, double stretch, long flag, long leg, long status, long shot_type,
-                          String comment, String addr )
+                          long extend, double stretch, long flag, long leg, long status, long shot_type, String comment, String addr )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -5062,8 +5107,7 @@ public class DataHelper extends DataSetObservable
 	       // } else {
 	       //   success = false;
 	       // }
-               cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, acc, mag, dip, extend, stretch, flag, leg, status,
-		      type, comment, addr );
+               cv = makeShotContentValues( sid, id, millis, color, from, to, d, b, c, r, acc, mag, dip, extend, stretch, flag, leg, status, type, comment, addr );
                myDB.insert( SHOT_TABLE, null, cv ); 
 
                // TDLog.v( "DB insert shot " + from + "-" + to + ": " + success );

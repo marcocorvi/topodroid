@@ -11,11 +11,28 @@
         android:text="@string/undelete_text"
       / -->
 
+    <LinearLayout android:id="@+id/buffer"
+      android:layout_width="match_parent"
+      android:layout_height="wrap_content"
+      android:orientation="horizontal"
+      android:layout_marginTop="@dimen/marginv"
+      >
+      <Button android:id="@+id/button_buffer"
+        style="@style/button_default"
+        android:text="@string/button_append"
+        android:gravity="right"
+      />
+      <TextView android:id="@+id/text_buffer"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content" 
+      />
+    </LinearLayout>
+
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:layout_marginTop="@dimen/marginvbig"
+      android:layout_marginTop="@dimen/marginv"
       android:gravity="left"
       >
       <Button android:id="@+id/button_help"
@@ -35,13 +52,14 @@
         <Button android:id="@+id/button_status"
           style="@style/button_default"
           android:text="@string/undelete_shot"
-        />
+          />
         <Button android:id="@+id/button_ok"
           style="@style/button_default"
-          android:text="@string/button_ok"
+          android:text="@string/button_recover"
         />
       </LinearLayout>
     </LinearLayout>
+
 
     <ListView android:id="@+id/list_undelete"
       style="@style/list_bottom"

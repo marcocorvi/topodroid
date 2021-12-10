@@ -86,7 +86,7 @@ public class DBlock
    * @param flag     flag to test
    * @return true if the flag is set
    */
-         boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
+  boolean hasFlag( long flag )    { return (mFlag & flag) == flag; }
 
   public boolean isSurvey()    { return mFlag == FLAG_SURVEY; }
   public boolean isSurface()   { return (mFlag & FLAG_SURFACE)    == FLAG_SURFACE; }
