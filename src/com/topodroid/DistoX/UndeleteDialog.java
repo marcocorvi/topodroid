@@ -98,6 +98,7 @@ class UndeleteDialog extends MyDialog
   @Override
   public void onClick(View v) 
   {
+    TDLog.v( "UndeleteDialog onClick() " + v.getId() + " " + R.id.button_buffer);
     if ( v.getId() == R.id.button_status ) {
       incrementStatus( );
       return;
@@ -137,6 +138,7 @@ class UndeleteDialog extends MyDialog
   {
     TDLog.v("Append buffer " + mDBlockBuffer.size() );
     if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
+    mDBlockBuffer.sort();
     for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
       mData.insertDBlockShot( mSid, blk );
     }

@@ -21,6 +21,7 @@ import android.content.Context;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Locale;
+import java.util.Comparator;
 
 class DBlockBuffer
 {
@@ -60,6 +61,15 @@ class DBlockBuffer
   List< DBlock > getBuffer()
   {
     return mBuffer;
+  }
+
+  /** sort the data in te buffer by increasing ID
+   */
+  void sort()
+  {
+    mBuffer.sort( new Comparator<DBlock>() {
+      public int compare( DBlock b1, DBlock b2 ) { return (b1.mId < b2.mId)? -1 : (b1.mId == b2.mId)? 0 : 1; }
+    } );
   }
 
 }

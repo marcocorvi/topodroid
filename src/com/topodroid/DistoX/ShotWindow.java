@@ -149,6 +149,7 @@ public class ShotWindow extends Activity
 			R.drawable.iz_empty
                       };
   private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
+  private static final int BTN_COPY      = 5; // index of iz_copy
 
   private static final int[] menus = {
                         R.string.menu_close,
@@ -1129,11 +1130,12 @@ public class ShotWindow extends Activity
       }
     }
 
-    if ( ! TDLevel.overExpert ) mNrButtonF --;
+    if ( ! TDLevel.overExpert ) mNrButtonF -= 2;
     mButtonF = new Button[ mNrButtonF + 1 ];
     int k0 = 0;
     for ( int k=0; k < mNrButtonF; ++k ) {
       if ( k == BTN_HIGHLIGHT && ! TDLevel.overExpert ) continue; 
+      if ( k == BTN_COPY      && ! TDLevel.overExpert ) continue; 
       mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
       ++k0;
     }
