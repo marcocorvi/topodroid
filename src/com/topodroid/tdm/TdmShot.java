@@ -65,16 +65,15 @@ public class TdmShot
     mSurvey = survey;
   }
 
-  /** set stations
+  /** set TDM stations
    * @param fs FROM station 
    * @param ts TO station
+   * @note DO NOT change the FROM/TO strings
    */
-  void setStations( TdmStation fs, TdmStation ts )
+  void setTdmStations( TdmStation fs, TdmStation ts )
   {
     mFromStation = fs;
     mToStation   = ts;
-    mFrom = (fs == null)? null : fs.mName;
-    mTo   = (ts == null)? null : ts.mName;
   }
 
 }

@@ -1359,53 +1359,51 @@ public class TopoGL extends Activity
    */
   void openDEM( Uri uri )
   {
-    InputStreamReader isr = null;
-    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    // InputStreamReader isr = null;
+    // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
-    TDLog.v("DEM Path " + pathname + " File " + filename );
-    ParserDEM dem = null;
-    if ( pathname.toLowerCase().endsWith( ".grid" ) ) {
-      isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-      // FIXME DEM_URI
-      dem = new DEMgridParser( isr, pathname, mDEMmaxsize );
-    } else if ( pathname.toLowerCase().endsWith( ".asc" ) || pathname.toLowerCase().endsWith(".ascii") ) {
-      Cave3DFix origin = mParser.getOrigin();
-      // origin.log();
-      double xunit = mParser.getWEradius(); // radius * PI/180
-      double yunit = mParser.getSNradius(); // radius * PI/180
-      // TDLog.v("xunit " + xunit + " yunit " + yunit );
-      // FIXME DEM_URI
-      isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
-      dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
-    } else { 
-      return;
-    }
-    if ( dem.valid() ) {
-      mDEMname = filename;
-      final double dd = mDEMbuffer;
-      // TDLog.v("BBox X " + mParser.emin + " " + mParser.emax + " Y " + mParser.nmin + " " + mParser.nmax + " Z " + mParser.zmin + " " + mParser.zmax );
-      (new AsyncTask<ParserDEM, Void, Boolean>() {
-        ParserDEM my_dem = null;
-
-        public Boolean doInBackground( ParserDEM ... dem ) {
-          my_dem = dem[0];
-          my_dem.readData( mParser.emin - dd, mParser.emax + dd, mParser.nmin - dd, mParser.nmax + dd );
-          return my_dem.valid();
+    // TDLog.v("DEM Path " + pathname + " File " + filename );
+    mDEMname = filename;
+    (new AsyncTask< Uri, Void, Boolean>() {
+      ParserDEM dem = null;
+      public Boolean doInBackground( Uri ... uri ) 
+      {
+        ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri[0] );
+        InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+        String pathname = uri[0].getPath();
+        if ( pathname.toLowerCase().endsWith( ".grid" ) ) {
+          dem = new DEMgridParser( isr, pathname, mDEMmaxsize );
+        } else if ( pathname.toLowerCase().endsWith( ".asc" ) || pathname.toLowerCase().endsWith(".ascii") ) {
+          Cave3DFix origin = mParser.getOrigin();
+          // origin.log();
+          double xunit = mParser.getWEradius(); // radius * PI/180
+          double yunit = mParser.getSNradius(); // radius * PI/180
+          // TDLog.v("xunit " + xunit + " yunit " + yunit );
+          isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+          dem = new DEMasciiParser( isr, pathname, mDEMmaxsize, false, xunit, yunit ); // false: flip horz
+        } else { 
+          return false;
         }
+        if ( ! dem.valid() ) return false;
+        final double dd = mDEMbuffer;
+        // mParser = survey data parser
+        // TDLog.v("BBox X " + mParser.emin + " " + mParser.emax + " Y " + mParser.nmin + " " + mParser.nmax + " Z " + mParser.zmin + " " + mParser.zmax );
+        dem.readData( mParser.emin - dd, mParser.emax + dd, mParser.nmin - dd, mParser.nmax + dd );
+        return dem.valid();
+      }
 
-        public void onPostExecute( Boolean b )
-        {
-          if ( b ) {
-            if ( mRenderer != null ) mRenderer.notifyDEM( my_dem );
-            TDToast.make( R.string.dem_ok );
-          } else {
-            TDToast.make( R.string.dem_failed );
-          }
+      public void onPostExecute( Boolean b )
+      {
+        if ( b ) {
+          if ( mRenderer != null ) mRenderer.notifyDEM( dem );
+          TDToast.make( R.string.dem_ok );
+        } else {
+          mDEMname = null; // failed
+          TDToast.make( R.string.dem_failed );
         }
-      }).execute( dem );
-
-    }
+      }
+    }).execute( uri );
   }
 
   // TEMPERATURE

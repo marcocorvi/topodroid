@@ -1211,6 +1211,10 @@ public class TDPath
    */
   private static boolean copyDir( File in, File out, boolean dry_run )
   {
+    if ( in == null ) {
+      TDLog.v("Input dir is null"); 
+      return true;
+    }
     if ( ! in.exists() ) {
       TDLog.v("Dir " + in.getPath() + " does not exist");
       return true;
@@ -1229,15 +1233,22 @@ public class TDPath
       TDLog.v("Copy Dir " + in.getName() + " -> " + out.getName() + " dry run");
     }
     boolean ret = true;
-    for ( File file1 : in.listFiles() ) {
-      File file2 = new File( out, file1.getName() );
-      ret &= copyFile( file1, file2, dry_run );
+    File[] files = in.listFiles();
+    if ( files != null ) {
+      for ( File file1 : files ) {
+        File file2 = new File( out, file1.getName() );
+        ret &= copyFile( file1, file2, dry_run );
+      }
     }
     return ret;
   }
 
   private static boolean copyFile( File in, File out, boolean dry_run )
   {
+    if ( in == null ) {
+      TDLog.v("Input file is null"); 
+      return true;
+    }
     if ( !in.exists() ) {
       TDLog.v("File " + in.getPath() + " does not exist");
       return true;

@@ -107,6 +107,7 @@ public class TdmSurvey
         addShot( blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino, blk.getIntExtend() );
       }
       mLoadedData = true;
+      // TDLog.v("Survey " + mName + " loaded data " + mShots.size() );
     } else {
       TDLog.Error("TdManager Survey " + mName + ": unable to get survey info");
     }
@@ -172,9 +173,11 @@ public class TdmSurvey
    * @param b        bearing (azimuth)
    * @param c        clino
    * @param e        extend (integer)
+   * @note if either FROM or TO is null the shot is not inserted in the survey
    */
   void addShot( String from, String to, float d, float b, float c, int e )
   {
+    if ( from == null || to == null ) return;
     mShots.add( new TdmShot( from, to, d, b, c, e, this ) );
   }
 
@@ -183,6 +186,7 @@ public class TdmSurvey
    */
   TdmStation getStation( String name )
   {
+    if ( name == null || name.equals("") ) return null;
     for ( TdmStation st : mStations ) {
       if ( st.mName.equals( name ) ) return st;
     }
@@ -198,7 +202,7 @@ public class TdmSurvey
     if ( mShots.size() == 0 ) return;
 
     // reset shots stations
-    for ( TdmShot sh : mShots ) sh.setStations( null, null );
+    for ( TdmShot sh : mShots ) sh.setTdmStations( null, null );
 
     TdmStation fs=null, ts=null;
     boolean repeat = true;
@@ -217,13 +221,14 @@ public class TdmSurvey
           float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
           ts = new TdmStation( sh.mTo, e, s, h*sh.mExtend, v, this );
           mStations.add( ts );
-          sh.setStations( fs, ts );
+          sh.setTdmStations( fs, ts );
           repeat = true;
         } else {
+          // TDLog.v("Shot " + sh.mFrom + " " + ( ( sh.mTo == null )? "-" : sh.mTo ) );
           fs = getStation( sh.mFrom );
           ts = getStation( sh.mTo );
           if ( fs != null ) {
-            if ( ts == null ) {  // FROM --> TO 
+            if ( ts == null ) {  // FROM exists and TO does not exists
               float h = (float)Math.cos( sh.mClino ) * sh.mLength;
               float v = (float)Math.sin( sh.mClino ) * sh.mLength;
               float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
@@ -234,18 +239,17 @@ public class TdmSurvey
             } else {
 	      // skip: both shot stations exist
 	    }
-            sh.setStations( fs, ts );
-          } else if ( ts != null ) {
+            sh.setTdmStations( fs, ts );
+          } else if ( ts != null ) { // FROM does not exists, but TO exists
             float h = (float)Math.cos( sh.mClino ) * sh.mLength;
             float v = (float)Math.sin( sh.mClino ) * sh.mLength;
             float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
             float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
             fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
             mStations.add( fs );
-            sh.setStations( fs, ts );
+            sh.setTdmStations( fs, ts );
             repeat = true;
-          } else { 
-	    // the two shot stations do not exist: check equates
+          } else { // the two shot stations do not exist: check equates
 	    boolean skip_equate = false;
 	    for ( TdmEquate eq : mEquates ) {
 	      if ( skip_equate ) break;
@@ -258,7 +262,7 @@ public class TdmSurvey
                     float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
                     ts = new TdmStation( sh.mTo, fs.e+e, fs.s+s, fs.h+h*sh.mExtend, fs.v+v, this );
                     mStations.add( ts );
-                    sh.setStations( fs, ts );
+                    sh.setTdmStations( fs, ts );
 		    skip_equate = true;
 		    break;
 		  }
@@ -272,7 +276,7 @@ public class TdmSurvey
                     float s = - h * (float)Math.cos( sh.mBearing + mDeclination );
                     fs = new TdmStation( sh.mFrom, ts.e-e, ts.s-s, ts.h-h*sh.mExtend, ts.v-v, this );
                     mStations.add( fs );
-                    sh.setStations( fs, ts );
+                    sh.setTdmStations( fs, ts );
 		    skip_equate = true;
 		    break;
                   }

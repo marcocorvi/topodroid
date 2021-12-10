@@ -57,8 +57,15 @@ class DEMasciiParser extends ParserDEM
   @Override
   boolean readData( double xwest, double xeast, double ysouth, double ynorth )
   {
-    if ( ! mValid ) return mValid;
-    if ( mBr == null ) return false;
+    // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
+    if ( ! mValid ) {
+      TDLog.v("DEM acsii parser read data. Not valid" );
+      return mValid;
+    }
+    if ( mBr == null ) {
+      TDLog.v("DEM acsii parser read data. Null buffered reader" );
+      return false;
+    }
     // FileReader fr = null;
     try {
       // fr = new FileReader( mFilename );
@@ -66,7 +73,8 @@ class DEMasciiParser extends ParserDEM
       // BufferedReader mBr = new BufferedReader( mIsr );
       // for ( int k=0; k<6; ++k) mBr.readLine(); // header MUST have been read already
 
-      double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint
+      double y = yll + mDim2/2 + mDim2 * (rows-1); // upper-row midpoint - mDim2 = Y-cellsize
+      // TDLog.v("DEM upper-row midpoint " + y + " " + ynorth + " rows " + rows );
       int k = 0;
       for ( ; k < rows && y > ynorth; ++k ) {
         mBr.readLine();
@@ -74,6 +82,7 @@ class DEMasciiParser extends ParserDEM
       }
       mNorth2 = y;
       // int yoff = k
+      // TDLog.v("DEM north " + mNorth2 + " " + ynorth );
       
       double x = xll + mDim1/2; // left-column midpoint
       int i = 0;
@@ -83,6 +92,7 @@ class DEMasciiParser extends ParserDEM
       mNr1 = 0;
       for ( ; i < cols && x <= xeast; ++i ) { x += mDim1; ++mNr1; }
       mEast2 = x - mDim1;
+      // TDLog.v("DEM east " + mEast1 + " " + mEast2 );
 
       if ( mNr1 > mMaxSize ) {
         int d = (mNr1 - mMaxSize)/2;
@@ -106,6 +116,7 @@ class DEMasciiParser extends ParserDEM
       }
 
       if ( mNr1 <= 1 || mNr2 <= 1 ) {
+        TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
         mValid = false;
       } else {
         // TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 );
@@ -122,8 +133,10 @@ class DEMasciiParser extends ParserDEM
         }
       }
     } catch ( IOException e1 ) {
+      TDLog.Error("DEM ascii IO error " + e1.getMessage() );
       mValid = false;
     } catch ( NumberFormatException e2 ) {
+      TDLog.Error("DEM ascii number error " + e2.getMessage() );
       mValid = false;
     } finally {
       tryCloseStream();
@@ -135,12 +148,13 @@ class DEMasciiParser extends ParserDEM
   }
 
   /** read tthe header info
-   * @param filename file fullpath
+   * @param filename file fullpath - not used
    * @return true if successful
    */
   @Override
   protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
+    // TDLog.v("DEM acsii parser read header " + filename );
     if ( mBr == null ) return false;
     try {
       // FileReader fr = new FileReader( filename );

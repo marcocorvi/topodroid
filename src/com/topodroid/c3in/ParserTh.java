@@ -73,6 +73,10 @@ public class ParserTh extends TglParser
 
   private Cave3DCS cs1 = null;
 
+  /** handle the command "flip"
+   * @param flip   command argument
+   * @return int-value of the flip
+   */
   public static int parseFlip( String flip )
   {
     if ( flip.equals("horizontal") ) return FLIP_HORIZONTAL;
@@ -80,6 +84,8 @@ public class ParserTh extends TglParser
     return FLIP_NONE;
   }
 
+  /** handle the command "mark"
+   */
   private void processMarks()
   {
     for ( String mark : mMarks ) {
@@ -99,6 +105,9 @@ public class ParserTh extends TglParser
     }
   }
 
+  /** @return int-flag parsed from a string
+   * @param string-flag
+   */
   private int parseFlag( String str ) // parse Therion flag name
   {
     if ( str.equals( "fixed" ) ) {
@@ -110,13 +119,19 @@ public class ParserTh extends TglParser
   }
 
   // FIXME isr not used
+  /** cstr - parse a survey from the database
+   * @param app        the 3D activity
+   * @param isr        input stream (not used)
+   * @param surveyname survey name
+   * @param base       database folder base
+   */
   public ParserTh( TopoGL app, InputStreamReader isr, String surveyname, String base ) throws ParserException
   {
     super( app, surveyname );
     mMarks = new ArrayList< String >();
 
     String path = base + "/distox14.sqlite";
-    TDLog.v( "Th parser DB " + path + " survey " + surveyname );
+    // TDLog.v( "Th parser DB " + path + " survey " + surveyname );
     mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
 
     StringWriter sw = new StringWriter();
@@ -132,21 +147,26 @@ public class ParserTh extends TglParser
       setSplaySurveys();
       setStationDepths();
       processMarks();
-      TDLog.v( "Th read survey " + surveyname );
+      // TDLog.v( "Th read survey " + surveyname );
     }
   }
 
-  // FIXME isr not used
+  /** cstr - parse a Therion file
+   * @param app      the 3D activity
+   * @param isr      input stream 
+   * @param filename input file path
+   * @param type     not used
+   */
   public ParserTh( TopoGL app, InputStreamReader isr, String filename, int type ) throws ParserException
   {
     super( app, filename );
 
-    TDLog.v( "Th parser, file: " + filename + " type " + type );
+    // TDLog.v( "Th parser, file: " + filename + " type " + type );
     mMarks = new ArrayList< String >();
     int pos = filename.indexOf("thconfig");
     if ( pos >= 0 ) {
       String path = filename.substring(0, pos) + "/distox14.sqlite";
-      TDLog.v( "Th DB " + path );
+      // TDLog.v( "Th DB " + path );
       mData = new DataHelper( app, path, TDVersion.DATABASE_VERSION );
     } else {
       mData = null;
@@ -183,6 +203,10 @@ public class ParserTh extends TglParser
     }
   }
 
+  /** compose the name of a station interposing a pathname
+   * @param in     parent 
+   * @param path   pathname
+   */
   private String makeName( String in, String path )
   {
     int index = in.indexOf('@');
@@ -193,6 +217,14 @@ public class ParserTh extends TglParser
     }
   }
 
+  /** read a survey
+   * @param surveyname    name of the survey
+   * @param basepath      base folder pathname
+   * @param usd           whether to use the given declination
+   * @param sd            specified declination
+   * @param pw            error message writer
+   * @return success (0) or error code
+   */
   private int readSurvey( String surveyname, String basepath, boolean usd, double sd, PrintWriter pw ) // throws ParserException
   {
     if ( mData == null ) {
@@ -317,11 +349,12 @@ public class ParserTh extends TglParser
   }
   
   /** read input file
-   * @param usd
-   * @param sd
+   * @param usd   whether to use given declination
+   * @param sd    declination
    * @param ul units of length (as multiple of 1 meter)
    * @param ub units of bearing (as multiple of 1 degree)
    * @param uc units of clino
+   * @return success (0) or error code
    */
   private int readFile( InputStreamReader isr, String filename, String basepath,
                         boolean usd, double sd,
@@ -756,6 +789,8 @@ public class ParserTh extends TglParser
     return SUCCESS;
   }
 
+  /** assign the surveys to the leg shots
+   */
   private void setShotSurveys()
   {
     for ( Cave3DShot sh : shots ) {
@@ -787,6 +822,8 @@ public class ParserTh extends TglParser
     }
   }
 
+  /** assign the surveys to the splay shots
+   */
   private void setSplaySurveys()
   {
     if ( mSplayUse == SPLAY_USE_SKIP ) return;
@@ -814,6 +851,8 @@ public class ParserTh extends TglParser
     }
   }
 
+  /** process the shots
+   */
   private void processShots()
   {
     if ( shots.size() == 0 ) return;
@@ -946,6 +985,10 @@ public class ParserTh extends TglParser
     // TDLog.v("Th bbox E " + emin + " " + emax + " N " + nmin + " " + nmax );
   }
 
+  /** @return the next index of non-empty string in an array
+   * @param vals   string array
+   * @param idx    start from the index after this
+   */
   public static int nextIndex( String[] vals, int idx )
   {
     ++idx;
@@ -953,6 +996,10 @@ public class ParserTh extends TglParser
     return idx;
   }
 
+  /** @return the previous index of non-empty string in an array
+   * @param vals   string array
+   * @param idx    start from the index before this
+   */
   public static int prevIndex( String[] vals, int idx )
   {
     --idx;

@@ -31,7 +31,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="29"
+       android:targetSdkVersion="30"
     />
     <!-- android:maxSdkVersion="29" -->
 
@@ -60,8 +60,8 @@
 
     <uses-feature android:name="android.hardware.screen.portrait"      android:required="true" />
     <uses-feature android:name="android.hardware.bluetooth"            android:required="true" />
+    <uses-feature android:name="android.hardware.touchscreen"          android:required="true" />
 
-    <uses-feature android:name="android.hardware.touchscreen"          android:required="false" />
     <uses-feature android:name="android.hardware.camera"               android:required="false" />
     <uses-feature android:name="android.hardware.camera.autofocus"     android:required="false" />
     <uses-feature android:name="android.hardware.location"             android:required="false" />
@@ -71,7 +71,6 @@
     <uses-feature android:name="android.hardware.sensor.accelerometer" android:required="false" />
     <uses-feature android:name="android.hardware.sensor.compass"       android:required="false" />
 
-
     <application 
           android:name=".TopoDroidApp"
           android:label="@string/app_name"
@@ -80,9 +79,12 @@
 	  android:largeHeap="true"
           android:hasFragileUserData="true"
 	  android:requestLegacyExternalStorage="true"
-	  ><!-- FIXME-23 android:largeHeap="true"
-                FIXME-16 android:largeHeap="true"
-                FIXME-8 nothing
+	  android:preserveLegacyExternalStorage="true"
+	  >
+          <!-- android:largeHeap="true"  post Gingerbread large memory 
+               FIXME-23 android:largeHeap="true"
+               FIXME-16 android:largeHeap="true"
+               FIXME-8 nothing
 	  android:icon="@drawable/icon4"
 	  android:roundIcon="@drawable/icon4"
                 FIXME-29
@@ -90,16 +92,8 @@
 	  <!-- android:preserveLegacyExternalStorage="true" -->
 
 	  <!-- android:screenOrientation="portrait" -->
-      
 	  <!-- android:extractNativeLibs="false" -->
-          <!-- android:largeHeap="true"  post Gingerbread large memory -->
           <!-- android:debuggable="false" -->
-
-        <!-- activity android:name=".SplashActivity"
-	  android:theme="@style/Theme.FullScreen"
-          android:configChanges="orientation|screenSize"
-          >
-        </activity -->
 
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"
@@ -257,8 +251,6 @@
           android:configChanges="orientation|screenSize"
           >
         </activity>
-
-
 
         <!-- receiver android:name=".PairingRequest">
           <intent-filter>

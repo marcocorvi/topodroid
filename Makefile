@@ -24,6 +24,7 @@ release:
 
 signed:
 	$(ANT) release
+	echo "Version $(VERSION)"
 	./howto/sign.sh
 	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION)-gp.apk
 	ls -l TopoDroid-$(VERSION)-gp.apk

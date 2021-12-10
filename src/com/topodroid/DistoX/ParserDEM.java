@@ -121,10 +121,15 @@ class ParserDEM extends DEMsurface
   float[] data() { return mZ; }
 
   /** read DEM data - default no read
+   * @param xwest     West X coord
+   * @param xeast     East X coord
+   * @param ysouth    South Y coord
+   * @param ynouth    Nouth Y coord
    */
   boolean readData( double xwest, double xeast, double ysouth, double ynorth ) { return false; }
 
   /** read DEM header - default no read
+   * @param filename    pathname of the file 
    */
   protected  boolean readHeader( String filename ) { mValid = false; return false; }
 
@@ -136,6 +141,8 @@ class ParserDEM extends DEMsurface
   //   }
   // }
 
+  /** close the input stream 
+   */
   protected void tryCloseStream()
   {
     if ( mIsr != null ) try { 

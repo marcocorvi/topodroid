@@ -58,6 +58,7 @@ class TdmConfig extends TdmFile
   {
     mViewSurveys = new ArrayList< TdmSurvey >(); // current view surveys
     for ( TdmSurvey survey : surveys ) {
+      // TDLog.v("Populate survey " + survey.getName() );
       survey.reduce();
       mViewSurveys.add( survey );
     }
