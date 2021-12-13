@@ -33,11 +33,15 @@ public class MyBearingAndClino implements IBearingAndClino
 {
   private final TopoDroidApp mApp;
   private File  mFile;
-  // long  mPid;
+  // long  mPid;             // plot id
   private float mBearing;
   private float mClino;
   private int   mOrientation; // camera orientation in degrees
 
+  /** cstr
+   * @param app         application
+   * @param imagefile   image file
+   */
   MyBearingAndClino( TopoDroidApp app, File imagefile /*, long pid */ )
   {
     mApp  = app; 
@@ -48,8 +52,11 @@ public class MyBearingAndClino implements IBearingAndClino
     mOrientation = 0;
   }
 
-  // @param b0 bearing
-  // @param c0 clino
+  /** set azimuth/clino and orientation index 
+   * @param b0 azimuth [degrees]
+   * @param c0 clino [degrees]
+   * @param o  camera orientation [degrres]
+   */
   public void setBearingAndClino( float b0, float c0, int o0 )
   {
     // TDLog.v( "BearingClino UI set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
@@ -61,6 +68,10 @@ public class MyBearingAndClino implements IBearingAndClino
     mOrientation = o0;
   }
 
+  /** write the image data to the (output) file - and stores azimuth/clino as well
+   * @param data    image data
+   * @return true on success
+   */
   public boolean setJpegData( byte[] data )
   {
     if ( data == null ) return false; // FIXME crash 2020-08-09
@@ -78,6 +89,16 @@ public class MyBearingAndClino implements IBearingAndClino
     return true;
   }
 
+  // ANDROID-11
+  // ExifInterface can be instantiated from a filename (String), a file descriptor, or an input_stream
+  // In the last case it does not support attributes write
+  //
+  /** set the values of azimuth and clino in the file exif tags
+   * @param file   image file
+   * @param b      azimuth [degrees]
+   * @param c      clino [degrees]
+   * @param o      camera orientation [degrees]
+   */
   static void setExifBearingAndClino( File file, float b, float c, int o )
   {
     // TDLog.v( "BearingClino UI set exif " + b + " " + c + " file " + file.getPath() );
@@ -103,13 +124,16 @@ public class MyBearingAndClino implements IBearingAndClino
     }
   }
 
-  // jpegexiforient man page has
-  //   up              down                     left               right
-  // 1 xxxx  2 xxxx  3    x  4 x    5 xxxxxx  6 x      7      x  8 xxxxxx
-  //   x          x      xx    xx     x  x      x  x       x  x      x  x
-  //   xx        xx       x    x      x         xxxxxx   xxxxxx         x
-  //   x          x    xxxx    xxxx   
-  //
+  /** @return EXIF orientation index from the orientation
+   * @param orientation   orientation [degrees]
+   *
+   * jpegexiforient man page has
+   *   up              down                     left               right
+   * 1 xxxx  2 xxxx  3    x  4 x    5 xxxxxx  6 x      7      x  8 xxxxxx
+   *   x          x      xx    xx     x  x      x  x       x  x      x  x
+   *   xx        xx       x    x      x         xxxxxx   xxxxxx         x
+   *   x          x    xxxx    xxxx   
+   */
   static private int getExifOrientation( int orientation )
   {
     if ( orientation <  45 ) return 6; // up
@@ -119,10 +143,13 @@ public class MyBearingAndClino implements IBearingAndClino
     return 6; // up
   }
 
+  /** @return camera orientation [degrees] from the orientation
+   * @param orientation   orientation [degrees]
+   */
   static int getCameraOrientation( int orientation )
   {
-    if ( orientation <  45 ) return 0;
-    if ( orientation < 135 ) return 90; // right
+    if ( orientation <  45 ) return 0;   // up
+    if ( orientation < 135 ) return 90;  // right
     if ( orientation < 225 ) return 180; // down
     if ( orientation < 315 ) return 270; // left
     return 0; // up

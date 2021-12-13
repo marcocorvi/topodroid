@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.prefs.TDSetting;
 
-// import java.io.File;
+// import java.io.File; // ONLY TEMP_FILE
 import java.io.FileOutputStream;
 
 // import android.content.Context;
@@ -46,8 +46,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        mScale    = scale;
        mFullName = name;   // plot fullname
        mToast    = toast;
-       // TDLog.Log( TDLog.LOG_PLOT, "Export Bitmap To File " + mFullName );
-       // TDLog.v( "Export Bitmap To File " + mFullName );
+       // TDLog.Log( TDLog.LOG_PLOT, "Export bitmap to file " + mFullName );
+       // TDLog.v( "Export bitmap to file " + mFullName );
     }
 
     @Override

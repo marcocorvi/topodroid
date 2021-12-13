@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyFileItem;
 
-import java.io.File;
+import java.io.File; // FIXME-FILE
 import java.io.FilenameFilter;
 
 import java.util.ArrayList;

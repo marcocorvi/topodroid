@@ -43,9 +43,9 @@ import android.view.View;
 
 
 class ShotNewDialog extends MyDialog
-                           implements View.OnClickListener
-                           , View.OnLongClickListener
-                           , IBearingAndClino
+                    implements View.OnClickListener
+                    , View.OnLongClickListener
+                    , IBearingAndClino
 {
   // private ShotWindow mParent;
   private final TopoDroidApp mApp;
@@ -91,6 +91,13 @@ class ShotNewDialog extends MyDialog
   private MyKeyboard mKeyboard = null;
   private boolean diving;
 
+  /** cstr
+   * @param context    context
+   * @param app        application
+   * @param lister     data lister
+   * @param last_blk   last data block
+   * @param at         ID where to insert the new data
+   */
   ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
     super( context, R.string.ShotNewDialog );
@@ -287,6 +294,10 @@ class ShotNewDialog extends MyDialog
     mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
+  /** reset UI data
+   * @param from    FROM station
+   * @note TO station is obtained by incrementing FROM station
+   */
   private void resetData( String from )
   {
     String to = DistoXStationName.incrementName( from, mApp.getStationNames() );
@@ -307,7 +318,11 @@ class ShotNewDialog extends MyDialog
     mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
-  // implements
+  /** implements: set azimuth/clino and orientation
+   * @param b      azimuth [degrees]
+   * @param c      clino [degrees]
+   * @param o      camera orientation [degrees]
+   */
   public void setBearingAndClino( float b, float c, int o )
   {
     // TDLog.v( "New shot dialog set orientation " + o + " bearing " + b + " clino " + c );
@@ -317,13 +332,20 @@ class ShotNewDialog extends MyDialog
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
-
+ 
+  /** implements: set image data
+   * @param data   image data
+   */
   public boolean setJpegData( byte[] data )
   {
     mJpegData = data;
     return mJpegData != null;
   }
 
+  /** implements user long-taps
+   * @param v    tapped view
+   * @return true if tap has been handled 
+   */
   @Override
   public boolean onLongClick( View v )
   {
@@ -331,6 +353,10 @@ class ShotNewDialog extends MyDialog
     return true;
   }
 
+  /** convert a diving azimuth to normal azimuth
+   * @param b    diving azimuth
+   * @return normal azimuth
+   */
   private float divingBearing( String b )
   {
     float bx = 0;
@@ -343,7 +369,9 @@ class ShotNewDialog extends MyDialog
     return bx;
   }
 
-  // FIXME synchronized ?
+  /** implements user taps // FIXME synchronized ?
+   * @param v    tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -596,6 +624,8 @@ class ShotNewDialog extends MyDialog
     }
   }
 
+  /** implements user back-press
+   */
   @Override
   public void onBackPressed()
   {

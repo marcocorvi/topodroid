@@ -32,7 +32,6 @@ import android.media.MediaPlayer;
 import java.util.List;
 import java.util.ArrayList;
 
-// import java.io.File;
 import java.io.IOException;
 
 class AudioListDialog extends MyDialog
@@ -49,8 +48,11 @@ class AudioListDialog extends MyDialog
   private List< DBlock > mShots;
   private MediaPlayer mMP = null;
 
-  /**
+  /** cstr
    * @param context   context
+   * @param perent    parent window
+   * @param audios    audio list
+   * @param shots     data list
    */
   AudioListDialog( Context context, ShotWindow parent, List< AudioInfo > audios, List< DBlock > shots )
   {
@@ -61,6 +63,9 @@ class AudioListDialog extends MyDialog
   }
 
 
+  /** @return description from an audio info
+   * @param info   audio info
+   */
   private String getAudioDescription( AudioInfo audio )
   {
     if ( audio.fileIdx >= 0 ) {
@@ -72,6 +77,9 @@ class AudioListDialog extends MyDialog
     return null;
   }
 
+  /** @return data block from an audio info
+   * @param info   audio info
+   */
   private DBlock getAudioBlock( AudioInfo audio )
   {
     if ( audio.fileIdx >= 0 ) {
@@ -114,6 +122,12 @@ class AudioListDialog extends MyDialog
     } );
   }
 
+  /** implements user tap on an item
+   * @param parent    parent view
+   * @param view      tapped view
+   * @param pos       item position in the list
+   * @param id        ...
+   */
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -121,6 +135,13 @@ class AudioListDialog extends MyDialog
     playAudio( pos );
   }
 
+  /** implements user long-tap on an item
+   * @param parent    parent view
+   * @param view      tapped view
+   * @param pos       item position in the list
+   * @param id        ...
+   * @return true if tap has been handled
+   */
   @Override
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -130,6 +151,9 @@ class AudioListDialog extends MyDialog
     return true;
   }
 
+  /** play an audio file
+   * @param pos   position of the audio in the list
+   */
   private void playAudio( int pos )
   {
     AudioInfo audio = mAudios.get( pos );
@@ -147,6 +171,9 @@ class AudioListDialog extends MyDialog
     }
   }
 
+  /** start playing audio
+   * @param filepath   file pathname
+   */
   private void startPlay( String filepath )
   {
     // TDToast.make( String.format( mContext.getResources().getString( R.string.playing ), filepath ) );
@@ -170,6 +197,8 @@ class AudioListDialog extends MyDialog
     }
   }
 
+  /** implements user back-press
+   */
   @Override
   public void onBackPressed()
   {
@@ -177,6 +206,8 @@ class AudioListDialog extends MyDialog
     super.onBackPressed();
   }
 
+  /** release the media player
+   */
   private void releaseMP()
   {
     if ( mMP != null ) {

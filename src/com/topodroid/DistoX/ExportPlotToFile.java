@@ -22,7 +22,6 @@ import com.topodroid.io.svg.DrawingSvg;
 import com.topodroid.io.svg.DrawingSvgWalls;
 import com.topodroid.io.svg.DrawingTunnel;
 
-// import java.io.File;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;

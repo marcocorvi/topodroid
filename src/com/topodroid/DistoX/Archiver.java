@@ -55,12 +55,20 @@ public class Archiver
 
   String zipname;
 
+  /** cstr
+   */
   public Archiver( ) // TopoDroidApp app
   {
     // mApp = app;
     data = new byte[ BUF_SIZE ];
   }
 
+  /** add an entry to the ZIP archive
+   * @param zos       zip output stream
+   * @param name      zip-entry file
+   * @param filepath  zip-entry pathname
+   * @return true if successful
+   */
   private boolean addEntry( ZipOutputStream zos, File name, String filepath )
   {
     if ( name == null || ! name.exists() ) return false;
@@ -88,7 +96,12 @@ public class Archiver
     return ret;
   }
 
-
+  /** add an entry to the ZIP archive
+   * @param zos       zip output stream
+   * @param subdir    entry-file subdirectory 
+   * @param filename  zip-entry filename
+   * @return true if successful
+   */
   private boolean addEntry( ZipOutputStream zos, String subdir, String filename )
   {
     // TDLog.v( "ZIP add entry. subdir: " + subdir + " filename: " + filename );
@@ -115,6 +128,11 @@ public class Archiver
     return ret;
   }
 
+  /** add an optional entry to the ZIP archive
+   * @param zos       zip output stream
+   * @param name      entry name
+   * @param filepath  zip-entry pathname
+   */
   private void addOptionalEntry( ZipOutputStream zos, File name, String filepath )
   {
     if ( name == null || ! name.exists() ) return;
@@ -139,6 +157,11 @@ public class Archiver
     }
   }
 
+  /** add a directory to the ZIP archive
+   * @param zos       zip output stream
+   * @param dir       directory
+   * @param dirname   directory name
+   */
   private void addDirectory( ZipOutputStream zos, File dir, String dirname )
   {
     if ( ! dir.exists() ) return;
@@ -184,6 +207,12 @@ public class Archiver
     return ret;
   }
 
+  /** compress a set of files from a subdirectory
+   * @param os        output stream
+   * @param subdir    subdirectory
+   * @param filenames files to compress
+   * @return true if successful
+   */
   public boolean compressFiles( OutputStream os, String subdir, List< String > filenames )
   {
     // here zipname is the full absolute zipfile path
@@ -210,9 +239,12 @@ public class Archiver
     return ret;
   }
 
-  // @param zipname  compressed zip file
-  // @param lib      symbol library
-  // @param type     symbols type
+  /** compress symbol files
+   * @param zipname  compressed zip file
+   * @param lib      symbol library
+   * @param type     symbols type
+   * @return true if successful
+   */
   private boolean compressSymbols( File zipfile, SymbolLibrary lib, String type )
   {
     if ( lib == null ) return false;
@@ -239,10 +271,12 @@ public class Archiver
     return true;
   }
 
-  // @param zin      compressed input stream
-  // @param type     symbols type
-  // @param prefix   symbol prefix in the database config table
-  // @return true is a symbol has been uncompressed
+  /** uncompress symbol files
+   * @param zin      compressed input stream
+   * @param type     symbols type
+   * @param prefix   symbol prefix in the database config table
+   * @return true is a symbol has been uncompressed
+   */
   static private boolean uncompressSymbols( InputStream zin, String type, String prefix )
   {
     if ( ! (TDLevel.overExpert && TDSetting.mZipWithSymbols ) ) return false;
@@ -299,7 +333,10 @@ public class Archiver
     return ret;
   }
 
-
+  /** archive the current syrvey - compress to the default zip file
+   * @param app   application
+   * @return true if successful
+   */
   boolean archive( TopoDroidApp mApp )
   {
     if ( TDInstance.sid < 0 ) return false;
@@ -472,7 +509,13 @@ public class Archiver
     return ret;
   }
 
-  // the zip inputstream must be aligned to the entry
+  /** decompresss a zip entry
+   * @param zin    zip input stream
+   * @param ze     zip entry
+   * @param fout   entry output stream
+   * @note the zip inputstream must be aligned to the entry
+   * @return ...
+   */
   private static int decompressEntry( InputStream zin, ZipEntry ze, FileOutputStream fout )
   {
     // int csize = (int)ze.getCompressedSize(); // cannot rely on sizes attributes

@@ -77,6 +77,11 @@ class FixedImportDialog extends MyDialog
   private MyKeyboard mKeyboard;
   private int mNrPoints;
 
+  /** cstr
+   * @param context     context
+   * @param parent      parent window
+   * @param gps_points  list of GPS points
+   */
   FixedImportDialog( Context context, FixedActivity parent, ArrayList<String> gps_points )
   {
     super( context, R.string.FixedImportDialog );
@@ -86,6 +91,8 @@ class FixedImportDialog extends MyDialog
     for ( String pt : gps_points ) mArrayAdapter.add( pt );
   }
 
+  /** @return number of GPS points
+   */
   int getNrPoints() { return mNrPoints; }
 
   @Override
@@ -193,6 +200,10 @@ class FixedImportDialog extends MyDialog
   }
 */
 
+  /** implements user long-taps
+   * @param v   tapped view
+   * @return true if tap has been handled
+   */
   @Override
   public boolean onLongClick(View v) 
   {
@@ -200,6 +211,9 @@ class FixedImportDialog extends MyDialog
     return true;
   }
 
+  /** implements user taps
+   * @param v   tapped view
+   */
   @Override
   public void onClick( View v ) 
   {
@@ -238,6 +252,12 @@ class FixedImportDialog extends MyDialog
     }
   }
 
+  /** implements user item taps
+   * @param parent     parent view
+   * @param view       tapped view
+   * @param position   item position in the list
+   * @param id         ...
+   */
   @Override
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {

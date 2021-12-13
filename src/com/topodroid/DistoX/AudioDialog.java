@@ -18,7 +18,6 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.prefs.TDSetting;
 
-// import java.io.File;
 import java.io.IOException;
 
 // import android.app.Dialog;
@@ -58,15 +57,20 @@ class AudioDialog extends MyDialog
   // private Button mBtnClose;
 
   private final IAudioInserter mParent;
-  private final long mBid;
-  private final String mFilepath;
+  private final long mBid;        // data block ID - each block has only one audio file
+  private final String mFilepath; // pathname of audio-file - 
   private boolean hasFile;
   private boolean canRec;
   private boolean canPlay;
   private DBlock  mBlk;
   // AudioInfo mAudio;
 
-  // @param bid    block Id
+  /** cstr
+   * @param ctx    context
+   * @param parent parent window
+   * @param bid    block Id
+   * @param blk    data block
+   */
   AudioDialog( Context ctx, IAudioInserter parent, long bid, DBlock blk )
   {
     super( ctx, R.string.AudioDialog );
@@ -127,6 +131,9 @@ class AudioDialog extends MyDialog
     layout2.invalidate();
   }
 
+  /** implements user taps
+   * @param v   tapped view
+   */
   public void onClick(View v) 
   {
     try {
@@ -137,9 +144,6 @@ class AudioDialog extends MyDialog
           mAction = ACTION_DELETE;
           mBtnConfirm.setText(  R.string.audio_delete );
           return;
-          // File file = TDFile.getFile( mFilepath );
-          // file.delete();
-          // mApp.mData.dropAudio( TDInstance.sid, mBid );
         }
 	// TDLog.v( "audio delete has no file");
       } else if ( b == mBtnPlay ) {
@@ -199,6 +203,8 @@ class AudioDialog extends MyDialog
     dismiss();
   }
 
+  /** delete audio file
+   */
   private void deleteAudio()
   {
     TDFile.deleteFile( mFilepath );
@@ -206,6 +212,8 @@ class AudioDialog extends MyDialog
     if ( mParent != null ) mParent.deletedAudio( mBid );
   }
 
+  /** start recording audio
+   */
   private void startRec()
   {
     try {
@@ -229,6 +237,8 @@ class AudioDialog extends MyDialog
     }
   }
 
+  /** stop recording audio
+   */
   private void stopRec()
   {
     try {
@@ -250,6 +260,8 @@ class AudioDialog extends MyDialog
     }
   }
 
+  /** start playing audio
+   */
   private void startPlay()
   {
     try {
@@ -278,6 +290,8 @@ class AudioDialog extends MyDialog
     }
   }
 
+  /** stop playing audio
+   */
   private void stopPlay()
   {
     try {

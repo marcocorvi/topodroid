@@ -6,8 +6,8 @@
 #
 # WARNING use zipalign BEFORE apksigner
 # BUILD_TOOLDIR="../../../build-tools/29.0.3"
-BUILD_TOOLDIR="../../../build-tools/30.0.2"
-# BUILD_TOOLDIR="../../../build-tools/31.0.0"
+# BUILD_TOOLDIR="../../../build-tools/30.0.2"
+BUILD_TOOLDIR="../../../build-tools/31.0.0"
 
 $BUILD_TOOLDIR/zipalign -f 4  bin/TopoDroid-release-unsigned.apk  bin/TopoDroid-release-aligned.apk
 

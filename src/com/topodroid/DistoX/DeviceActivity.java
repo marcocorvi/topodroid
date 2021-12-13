@@ -56,7 +56,7 @@ import java.util.Set;
 // import java.util.List;
 // import java.util.ArrayList;
 
-import java.io.File; // external app files (ccsv)
+import java.io.File; // private app files (ccsv)
 
 // import java.lang.reflect.Method;
 // import java.lang.reflect.InvocationTargetException;
@@ -1043,7 +1043,7 @@ public class DeviceActivity extends Activity
   {
     // String filename = TDPath.getCCsvFile( name );
     // File file = TDFile.getFile( filename );
-    File file = TDPath.getCcsvFile( name );
+    File file = TDPath.getCcsvFile( name ); // PRIVATE FILE
     if ( ! file.exists() ) {
       TDToast.makeBad(R.string.file_not_found );
     } else {
