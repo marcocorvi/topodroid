@@ -51,6 +51,10 @@ class ImportParser
 
   protected void checkValid() 
   {
+    if ( mName == null ) TDLog.v("invalid: null name"); 
+    if ( mName.length() == 0 ) TDLog.v("invalid: empty name"); 
+    if ( mDate == null ) TDLog.v("invalid: null date"); 
+    if ( shots.size() == 0 ) TDLog.v("invalid: no shots" );
     mValid =  ( mName != null && mName.length() > 0 ) && ( mDate != null ) && ( shots.size() > 0 );
   }
 

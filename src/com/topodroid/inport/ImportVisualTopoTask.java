@@ -11,6 +11,8 @@
  */
 package com.topodroid.inport;
 
+import com.topodroid.utils.TDLog;
+
 import com.topodroid.DistoX.SurveyInfo;
 import com.topodroid.DistoX.DataHelper;
 import com.topodroid.DistoX.TopoDroidApp;
@@ -34,6 +36,7 @@ public class ImportVisualTopoTask extends ImportTask
     mLrud     = data.mLrud;
     mLegFirst = data.mLeg;
     mTrox     = data.mTrox;
+    // TDLog.v("Import VTopo " + mTrox );
   }
 
   @Override
@@ -47,9 +50,13 @@ public class ImportVisualTopoTask extends ImportTask
       } else {
         parser = new ParserVisualTopo( isr, str[0], true, mLrud, mLegFirst ); // apply_declination = true
       }
-      if ( ! parser.isValid() ) return -2L;
+      if ( ! parser.isValid() ) {
+        TDLog.v("invalid parser");
+        return -2L;
+      }
       if ( mApp.get() == null ) return -1L;
       if ( hasSurveyName( parser.mName ) ) {
+        TDLog.v("survey " + parser.mName + " already present");
         return -1L;
       }
 

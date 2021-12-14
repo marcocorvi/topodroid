@@ -235,8 +235,9 @@ public class MainWindow extends Activity
     // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
     // int len = filenames.size() + zipnames.size();
     // selectImportFromDialog();
-    ImportData import_data = new ImportData();
-    doImport( TDConst.mSurveyImportTypes[0], import_data ); // ZIP
+    // ImportData import_data = new ImportData();
+    mImportData = new ImportData();
+    doImport( TDConst.mSurveyImportTypes[0], mImportData ); // ZIP
     return true;
   }
 
@@ -511,7 +512,7 @@ public class MainWindow extends Activity
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
+    TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals(".th") ) {
@@ -523,6 +524,7 @@ public class MainWindow extends Activity
       // (new ImportDatDialog( this, this, isr, name )).show();
     } else if ( type.equals(".tro") || type.equals(".trox") ) {
       setTitleImport();
+      // TDLog.v("type " + type + " data.trox " + data.mTrox );
       new ImportVisualTopoTask( this, isr, data ).execute( name, name );
       // (new ImportTroDialog( this, this, isr, name )).show();
     } else if ( type.equals(".svx") ) {
@@ -1156,8 +1158,8 @@ public class MainWindow extends Activity
               } else {
                 type = TDPath.checkImportTypeReader( ext );
                 if ( type != null ) {
+                  // TDLog.v( "import reader type " + type + " name " + name);
                   importReader( uri, name, type, mImportData );
-                  TDLog.v( "import reader type " + type + " name " + name);
                 } else {
                   TDLog.Error("import unsupported " + ext);
                 }
@@ -1338,7 +1340,9 @@ public class MainWindow extends Activity
   }
 
   private static int mImportType; 
-  private static ImportData mImportData;
+  private static ImportData mImportData = new ImportData();
+
+  ImportData getImportData() { return mImportData; }
 
   public void doImport( String type, ImportData data )
   {

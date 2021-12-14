@@ -181,7 +181,7 @@ public class ParserTrox extends TglParser
         } else if ( line.startsWith("</Cavite>") )  { inCavite = false;
         } else if ( line.startsWith("<Mesures>") )  { inMesures = true;
         } else if ( line.startsWith("</Mesures>") ) { inMesures = false; 
-        } else if ( line.startsWith("<Visee>") && inMesures ) {
+        } else if ( line.startsWith("<Visee") && inMesures ) {
           if ( ! line.endsWith( "/>" ) ) inVisee = true;
           comment = "";
           mFrom = getValue( "Dep=\"", line );
@@ -304,7 +304,7 @@ public class ParserTrox extends TglParser
         } else if ( line.startsWith("<Nom>") && inCavite ) { 
           String name = getValue("<Nom>", "</Nom>", line );
           if ( name != null ) mName = name;
-        } else if ( line.startsWith("<Coordonnees>" ) && inCavite ) {
+        } else if ( line.startsWith("<Coordonnees" ) && inCavite ) {
           mLng = getFloatValue( "X=\"", line, 0 );
           mLat = getFloatValue( "Y=\"", line, 0 );
           mAlt = getFloatValue( "Z=\"", line, 0 );

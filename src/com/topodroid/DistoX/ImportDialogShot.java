@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.inport.ImportData;
@@ -69,7 +69,6 @@ public class ImportDialogShot extends MyDialog
 
   private ImportData mImportData;
 
-
   public ImportDialogShot( Context context, MainWindow parent, String[] types, int title )
   {
     super( context, R.string.ImportDialogShot );
@@ -77,7 +76,8 @@ public class ImportDialogShot extends MyDialog
     mTypes  = types;
     mSelected = null;
     mTitle = title;
-    mImportData = new ImportData();
+    // mImportData = new ImportData();
+    mImportData = mParent.getImportData();
   }
 
 // -------------------------------------------------------------------
@@ -136,7 +136,7 @@ public class ImportDialogShot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    // TDLog.v( "Selected " + mSelected );
+    // TDLog.v( "Selected " + mSelected + " pos " + mSelectedPos );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
@@ -172,41 +172,37 @@ public class ImportDialogShot extends MyDialog
 
   private void setOptions()
   {
+    // TDLog.v("set options - pos " + mSelectedPos );
     switch ( mSelectedPos ) {
       // case 0: // Zip GEEK
       //   {
       //     TDSetting.mZipWithSymbols = ((CheckBox) findViewById( R.id.zip_symbols )).isChecked();
       //   }
       //   break;
-      case TDConst.SURVEY_FORMAT_DAT: // Compass
+      case 1: // Compass
         {
           mImportData.mLrud   = mCBlrudDat.isChecked();
           mImportData.mLeg    = mCBlegDat.isChecked();
           if ( TDLevel.overExpert ) mImportData.setDiving( mCBdivingDat.isChecked() );
         }
         break;
-      case TDConst.SURVEY_FORMAT_SNP: // CaveSniper
-        {
-        }
+      case 2: // CaveSniper
         break;
-      case TDConst.SURVEY_FORMAT_SVX: // Survex
-        {
-        }
+      case 3: // Survex
         break;
-      case TDConst.SURVEY_FORMAT_TH: // Therion
-        {
-        }
+      case 4: // Therion
         break;
-      case TDConst.SURVEY_FORMAT_TRO: // VTopo
+      case 5: // VTopo
         {
+          // TDLog.v("set VTopo options");
           mImportData.mLrud = mCBlrudTro.isChecked();
           mImportData.mLeg  = mCBlegTro.isChecked();
           mImportData.mTrox = mCBtroxTro.isChecked();
         }
         break;
-      case TDConst.SURVEY_FORMAT_TOP: // PTopo
-        {
-        }
+      case 6: // PTopo
+        break;
+      default:
         break;
     }
   }
