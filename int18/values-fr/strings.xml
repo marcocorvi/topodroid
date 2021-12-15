@@ -356,6 +356,7 @@ Refer to the web pages for details.\n
 <!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
 <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
 <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
 <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -381,6 +382,7 @@ Refer to the web pages for details.\n
     <string name="menu_export">EXPORTER</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPÉRER</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">RECHARGER</string>
     <string name="menu_rename_delete">RENOMMER/SUPPR.</string>
     <string name="menu_rename">RENOMMER</string>
@@ -584,6 +586,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">Échec du changement de mode du DistoX</string>
     <string name="toggle_ok">DistoX en mode étalonnage</string>
     <string name="undelete_text">Sélectionner un élément pour le récupérer</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Visées</string>
     <string name="undelete_overshoot">Dépassements</string>
     <string name="undelete_check">Contrôles</string>
@@ -674,6 +677,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_create"    >Créer    </string -->
     <string name="button_color"     >Couleur  </string>
     <string name="button_convert"   >Convertir   </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Courant   </string>
     <string name="button_delete"    >Supprimer    </string>
     <string name="button_duplicate" >Dupliquer </string>
@@ -743,6 +747,8 @@ Refer to the web pages for details.\n
     <string name="button_write"     >Uploader</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">Section Transverse</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Cheminements</string>
     <string name="mode_splay">Visées latérales d\'habillage</string>

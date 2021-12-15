@@ -151,7 +151,7 @@ public class ShotWindow extends Activity
   private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
   private static final int BTN_COPY      = 5; // index of iz_copy
 
-  private static final int[] menus = {
+  private static final int[] menus = { // menu labels
                         R.string.menu_close,
                         R.string.menu_survey,
                         R.string.menu_recover,
@@ -161,7 +161,8 @@ public class ShotWindow extends Activity
                         R.string.menu_3d,
                         R.string.menu_device,
                         R.string.menu_options,
-                        R.string.menu_help
+                        R.string.menu_help,
+                        R.string.menu_recover_paste  // 10: extra labels
                      };
 
   private static final int[] help_icons = {
@@ -195,7 +196,8 @@ public class ShotWindow extends Activity
   private Activity       mActivity;
   private DataDownloader mDataDownloader;
   private SurveyAccuracy mSurveyAccuracy;
-  private DBlockBuffer   mDBlockBuffer;
+
+  private static DBlockBuffer mDBlockBuffer = null; // survey-data buffer (created on first call)
 
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
@@ -784,10 +786,18 @@ public class ShotWindow extends Activity
       List< DBlock > shots2 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
       List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
-      if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 && mDBlockBuffer.size() == 0 ) {
-        TDToast.makeWarn( R.string.no_undelete );
+      if (  TDLevel.overAdvanced ) {
+        if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 && mDBlockBuffer.size() == 0 ) {
+          TDToast.makeWarn( R.string.no_undelete_paste );
+        } else {
+          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, mDBlockBuffer ) ).show();
+        }
       } else {
-        (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, mDBlockBuffer ) ).show();
+        if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
+          TDToast.makeWarn( R.string.no_undelete );
+        } else {
+          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, null ) ).show();
+        }
       }
       // updateDisplay( );
     } else if ( TDLevel.overNormal && p++ == pos ) { // PHOTO
@@ -1066,8 +1076,8 @@ public class ShotWindow extends Activity
     mActivity = this;
     mOnOpenDialog = false;
     mSurveyAccuracy = new SurveyAccuracy( ); 
-    mDBlockBuffer   = new DBlockBuffer();
     mMediaManager   = new MediaManager( mApp_mData );
+    if ( mDBlockBuffer == null ) mDBlockBuffer = new DBlockBuffer();
 
     // FIXME-28
     // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );
@@ -1622,9 +1632,9 @@ public class ShotWindow extends Activity
    */
   void doMultiDelete()
   {
-    mDBlockBuffer.clear();
+    if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
     for ( DBlock blk : mDataAdapter.mSelect ) {
-      mDBlockBuffer.add( blk );
+      if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
       long id = blk.mId;
       mApp_mData.deleteShot( id, TDInstance.sid, TDStatus.DELETED );
       // mSurveyAccuracy.removeBlockAMD( blk ); // not necessary: done by updateDisplay
@@ -1656,9 +1666,9 @@ public class ShotWindow extends Activity
    */
   void doMultiCopy()
   {
-    mDBlockBuffer.clear();
+    if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
     for ( DBlock blk : mDataAdapter.mSelect ) {
-      mDBlockBuffer.add( blk );
+      if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
       if ( /* blk != null && */ blk.isMainLeg() ) { // == DBlock.BLOCK_MAIN_LEG 
         if ( mFlagLeg ) {
           for ( long id = blk.mId+1; ; ++id ) {
@@ -1666,7 +1676,7 @@ public class ShotWindow extends Activity
             if ( b == null || ! b.isSecLeg() ) { // != DBlock.BLOCK_SEC_LEG
               break;
 	    }
-            mDBlockBuffer.add( b );
+            if ( TDLevel.overAdvanced ) mDBlockBuffer.add( b );
           }
         }
       }
@@ -2147,9 +2157,16 @@ public class ShotWindow extends Activity
     int k = 0;
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
 
-    menu_adapter.add( res.getString( menus[k++] ) );                                      // menu_survey
-    menu_adapter.add( res.getString( menus[k++] ) );                                      // menu_close
-    if ( TDLevel.overBasic  ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_recover
+    menu_adapter.add( res.getString( menus[k++] ) );                // menu_survey
+    menu_adapter.add( res.getString( menus[k++] ) );                // menu_close
+    if ( TDLevel.overBasic  ) {                                     // menu_recover
+      if ( TDLevel.overAdvanced ) {
+        menu_adapter.add( res.getString( menus[10] ) ); // k + 8
+      } else {
+        menu_adapter.add( res.getString( menus[k] ) );
+      }
+      k++;
+    }
     if ( TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_photo  
     if ( TDLevel.overExpert ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_audio  
     if ( TDSetting.mWithSensors && TDLevel.overNormal ) menu_adapter.add( res.getString( menus[k] ) ); k++; // menu_sensor

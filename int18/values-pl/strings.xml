@@ -364,6 +364,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="no_thmanager">ThManager nie jest zainstalowany</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Brak elementu od odzyskania</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -389,6 +390,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_export">EKSPORT</string>
     <string name="menu_firmware">OPROGRAMOWANIE</string>
     <string name="menu_recover">ODZYSKIWANIE</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">PRZEŁADUJ</string>
     <string name="menu_rename_delete">ZMIEŃ/USUŃ</string>
     <string name="menu_rename">ZMIEŃ NAZWĘ</string>
@@ -596,6 +598,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="toggle_failed">Nie można przełączyć DistoX</string>
     <string name="toggle_ok">Przełączono tryb kalibracji DistoX</string>
     <!-- TODO string name="undelete_text">Tap item to recover</string -->
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Pomiary</string>
     <string name="undelete_overshoot">Niecelne pomiary</string>
     <string name="undelete_check">Sprawdzenie</string>
@@ -687,6 +690,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_create"    >Stwórz    </string -->
     <string name="button_color"     >Kolor</string>
     <string name="button_convert"   >Konwertuj   </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Aktywuj    </string>
     <string name="button_delete"    >Usuń    </string>
     <!-- TODO string name="button_duplicate" >Duplicate </string -->
@@ -756,6 +760,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_write"     >Załaduj</string>
     <string name="button_xsection"  >Przekój na X</string>
     <string name="xsection">Przekój na X</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Pomiary</string>
     <string name="mode_splay">Domiary</string>

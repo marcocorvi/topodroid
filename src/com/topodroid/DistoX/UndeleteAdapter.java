@@ -32,7 +32,7 @@ import java.util.ArrayList;
 import java.util.Locale;
 
 class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
-                    // , OnClickListener
+                      // , OnClickListener
 {
   // private Context mContext;
   private final UndeleteDialog mParent;
@@ -42,6 +42,12 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
 
   // private ArrayList< View > mViews;
 
+  /** cstr
+   * @param ctx    context
+   * @param perent parent window
+   * @param id     ...
+   * @param items  list of items that can be recovered
+   */
   UndeleteAdapter( Context ctx, UndeleteDialog parent, int id, ArrayList< UndeleteItem > items )
   {
     super( ctx, id, items );
@@ -50,12 +56,16 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
-  // return the item at the given position
+  /** @return the item at a given position
+   * @param pos   position
+   */
   public UndeleteItem get( int pos ) 
   { 
     return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
   }
 
+  /** inner class holding the view for the items
+   */
   private class ViewHolder implements OnClickListener
   { 
     int      pos;
@@ -80,7 +90,11 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
     }
   }
 
-
+  /** @return the view for an item
+   * @param pos         item position
+   * @param convertView convertible view
+   * @param parent      ...
+   */
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
@@ -104,11 +118,17 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
     return convertView;
   }
 
+  /** @return the number of items
+   */
   @Override
   public int getCount() { return mItems.size(); }
 
+  /** @return the number of items
+   */
   public int size() { return mItems.size(); }
 
+  /** @return the item view-type (always "ignore")
+   */
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
  

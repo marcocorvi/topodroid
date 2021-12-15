@@ -364,6 +364,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_thmanager">ThManager app nie je nainštalovaná</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -389,6 +390,7 @@ Refer to the web pages for details.\n
     <string name="menu_export">EXPORTOVAŤ</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">OBNOVIŤ</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">NAČÍTAŤ</string>
     <string name="menu_rename_delete">PREMENOVAŤ/VYMAZAŤ</string>
     <string name="menu_rename">PREMENOVAŤ</string>
@@ -596,6 +598,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">Zlyhalo prepnutie režimu DistaX kalibrácia/meranie</string>
     <string name="toggle_ok">DistoX prepnuté do režimu kalibrácie alebo merania</string>
     <string name="undelete_text">Vyberte položku, ktorá sa má obnoviť</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Zámery</string>
     <string name="undelete_overshoot">Príliš dlhé zámery</string>
     <string name="undelete_check">Kontrolné</string>
@@ -692,6 +695,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_create"    >Vytvoriť     </string -->
     <string name="button_color"     >Farba</string>
     <string name="button_convert"   >Konvertovať  </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Aktivovať  </string>
     <string name="button_delete"    >Vymazať  </string>
     <string name="button_duplicate" >Duplikovať </string>
@@ -761,6 +765,8 @@ Refer to the web pages for details.\n
     <string name="button_write"     >Nahrať koeficienty do DistaX</string>
     <string name="button_xsection"  >Priečny rez</string>
     <string name="xsection">Priečny rez</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Hlavné zámery</string>
     <string name="mode_splay">Pomocné zámery</string>

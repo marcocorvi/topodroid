@@ -27,6 +27,7 @@ import android.content.Context;
 import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ListView;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
@@ -42,7 +43,8 @@ class UndeleteDialog extends MyDialog
   private long mSid;
   private final DataHelper mData;
   private final ShotWindow mParent;
-  private DBlockBuffer mDBlockBuffer;
+  private DBlockBuffer mDBlockBuffer = null;
+  private CheckBox     mCBbufferUnsort;
 
   // private Button mBtnCancel;
   private Button mBtnStatus;
@@ -60,6 +62,17 @@ class UndeleteDialog extends MyDialog
 
   private int mStatus;
 
+  /** cstr
+   * @param context   context
+   * @param parent    parent window
+   * @param data      data database
+   * @param sid       survey ID
+   * @param shots1    ... 
+   * @param shots2    ... 
+   * @param shots3    ... 
+   * @param plots     deleted plots
+   * @param buffer    data-block buffer (copy/cut and paste)
+   */
   UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3,
                          List< PlotInfo > plots, DBlockBuffer buffer )
@@ -95,17 +108,25 @@ class UndeleteDialog extends MyDialog
     }
   }
 
+  /** implements user taps
+   * @param v   tapped view
+   */
   @Override
   public void onClick(View v) 
   {
-    TDLog.v( "UndeleteDialog onClick() " + v.getId() + " " + R.id.button_buffer);
+    // TDLog.v( "UndeleteDialog onClick() " + v.getId() );
     if ( v.getId() == R.id.button_status ) {
       incrementStatus( );
       return;
     } else if ( v.getId() == R.id.button_ok ) {
       recoverData();
-    } else if ( TDLevel.overExpert && v.getId() == R.id.button_buffer ) {
-      appendBuffer();
+    } else if ( mDBlockBuffer != null ) { 
+      if ( v.getId() == R.id.button_buffer_copy ) {
+        appendBuffer( );
+      } else if ( v.getId() == R.id.button_buffer_move ) {
+        appendBuffer( );
+        mDBlockBuffer.clear();
+      }
     } else {
       // TDLog.Log( TDLog.LOG_INPUT, "UndeleteDialog onClick()" );
     }
@@ -132,17 +153,16 @@ class UndeleteDialog extends MyDialog
   //   updateList();
   // }
 
-  /** move the data from the buffer to the survey - the buffer is left empty
+  /** move the data from the buffer to the survey - the buffer is not cleared 
    */
-  private void appendBuffer()
+  private void appendBuffer( )
   {
-    TDLog.v("Append buffer " + mDBlockBuffer.size() );
+    // TDLog.v("Append buffer " + mDBlockBuffer.size() );
     if ( mDBlockBuffer == null || mDBlockBuffer.size() == 0 ) return;
-    mDBlockBuffer.sort();
+    if ( ! mCBbufferUnsort.isChecked() ) mDBlockBuffer.sort();
     for ( DBlock blk : mDBlockBuffer.getBuffer() ) {
       mData.insertDBlockShot( mSid, blk );
     }
-    mDBlockBuffer.clear();
     mParent.updateDisplay(); // this recomputes DistoX accuracy
   }
 
@@ -189,6 +209,7 @@ class UndeleteDialog extends MyDialog
     }
   }
 
+  @Override
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
@@ -212,17 +233,25 @@ class UndeleteDialog extends MyDialog
     mBtnStatus.setOnClickListener( this );
     ((Button) findViewById( R.id.button_ok )).setOnClickListener( this );
 
+    mCBbufferUnsort = (CheckBox) findViewById( R.id.buffer_unsort );
     LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
-    int buffer_size = mDBlockBuffer.size();
-    if ( TDLevel.overExpert && buffer_size > 0 ) {
-      TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
-      text_buffer.setText( String.format( mContext.getResources().getString( R.string.buffer_size ), buffer_size ) );
-      ((Button) findViewById( R.id.button_buffer )).setOnClickListener( this );
+    if ( mDBlockBuffer != null ) {
+      int buffer_size = mDBlockBuffer.size();
+      TDLog.v("non-null buffer: size " + buffer_size );
+      if ( buffer_size > 0 ) {
+        TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
+        text_buffer.setText( String.format( mContext.getResources().getString( R.string.buffer_size ), buffer_size ) );
+        ((Button) findViewById( R.id.button_buffer_copy )).setOnClickListener( this );
+        ((Button) findViewById( R.id.button_buffer_move )).setOnClickListener( this );
+      } else {
+        layout_buffer.setVisibility( View.GONE );
+      }
+      setTitle( R.string.undelete_paste_text );
     } else {
+      TDLog.v("null buffer" );
       layout_buffer.setVisibility( View.GONE );
+      setTitle( R.string.undelete_text );
     }
-
-    setTitle( R.string.undelete_text );
 
     mStatus = 0;
     incrementStatus(); // calls updateList();

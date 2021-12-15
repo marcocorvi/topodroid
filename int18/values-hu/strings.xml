@@ -364,6 +364,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string -->
     <!-- UNUSED string name="no_db_viewer">A DB_viewer alkalmazás nem található</string -->
     <string name="no_undelete">Nincs helyreállítható részlet</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Irány %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Lejtés %5$.1f</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -389,6 +390,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_export">EXPORTÁLÁS</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">HELYREÁLLÍT</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">ÚJRATÖLT</string>
     <string name="menu_rename_delete">ÁTNEVEZ/TÖRÖL</string>
     <string name="menu_rename">ÁTNEVEZ</string>
@@ -596,6 +598,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>
     <string name="undelete_check">Ellenőrző mérések</string>
@@ -693,6 +696,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_color"     >Szín</string>
     <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Aktív</string>
     <string name="button_delete"    >Töröl</string>
     <string name="button_duplicate" >Megdupláz </string>
@@ -762,6 +766,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_write"     >Feltölt</string>
     <string name="button_xsection"  >Keresztmetszet</string>
     <string name="xsection">Kereszmetszetek</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Poligonok</string>
     <string name="mode_splay">Sünök</string>

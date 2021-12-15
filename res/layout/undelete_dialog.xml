@@ -14,18 +14,41 @@
     <LinearLayout android:id="@+id/buffer"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
+      android:orientation="vertical"
       android:layout_marginTop="@dimen/marginv"
       >
-      <Button android:id="@+id/button_buffer"
-        style="@style/button_default"
-        android:text="@string/button_append"
-        android:gravity="right"
-      />
       <TextView android:id="@+id/text_buffer"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content" 
       />
+      <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="@dimen/marginsmall"
+        android:gravity="left"
+        >
+        <CheckBox android:id="@+id/buffer_unsort"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/buffer_unsorted"
+        />
+        <LinearLayout
+          android:layout_width="fill_parent" 
+          android:layout_height="wrap_content"
+          android:gravity="right"
+          >
+          <Button android:id="@+id/button_buffer_copy"
+            style="@style/button_default"
+            android:layout_marginRight="@dimen/marginh"
+            android:text="@string/button_copy"
+          />
+          <Button android:id="@+id/button_buffer_move"
+            style="@style/button_default"
+            android:text="@string/button_move"
+          />
+        </LinearLayout>
+      </LinearLayout>
     </LinearLayout>
 
     <LinearLayout android:id="@+id/help"
@@ -39,6 +62,10 @@
           style="@style/button_empty"
           android:text="@string/button_help"
       />
+      <Button android:id="@+id/button_status"
+        style="@style/button_empty"
+        android:text="@string/undelete_shot"
+      />
       <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
@@ -49,10 +76,6 @@
           android:text="@string/button_cancel"
           android:layout_marginRight="@dimen/marginh"
         />  
-        <Button android:id="@+id/button_status"
-          style="@style/button_default"
-          android:text="@string/undelete_shot"
-          />
         <Button android:id="@+id/button_ok"
           style="@style/button_default"
           android:text="@string/button_recover"

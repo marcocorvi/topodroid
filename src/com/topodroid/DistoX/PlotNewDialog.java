@@ -29,8 +29,8 @@ import android.widget.CheckBox;
 import android.view.View;
 
 class PlotNewDialog extends MyDialog
-                           implements View.OnClickListener
-                           , View.OnLongClickListener
+                    implements View.OnClickListener
+                    , View.OnLongClickListener
 {
   private final TopoDroidApp mApp;
   private INewPlot mMaker;
@@ -47,6 +47,12 @@ class PlotNewDialog extends MyDialog
   private int mIndex;
   private MyKeyboard mKeyboard = null;
 
+  /** cstr
+   * @param context    context
+   * @param app        application
+   * @param maker      ...
+   * @param index      ...
+   */
   PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
   {
     super( context, R.string.PlotNewDialog );
@@ -123,7 +129,10 @@ class PlotNewDialog extends MyDialog
     }
   }
 
- 
+  /** implements user long-tap
+   * @param v tapped view
+   * @return true if the tap has been handled
+   */
   @Override
   public boolean onLongClick(View v) 
   {
@@ -134,7 +143,9 @@ class PlotNewDialog extends MyDialog
     return false;
   }
 
-  // FIXME synchronized ?
+  /** implements user tap - FIXME synchronized ?
+   * @param v tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -157,6 +168,9 @@ class PlotNewDialog extends MyDialog
     dismiss();
   }
 
+  /** handle a press of the button "ok"
+   * @return true if the tap has been handled
+   */
   private boolean handleOK( )
   {
     String name  = mEditName.getText().toString().trim();
@@ -218,6 +232,8 @@ class PlotNewDialog extends MyDialog
     return true;
   }
 
+  /** handle a press on the BACK button
+   */
   @Override
   public void onBackPressed()
   {

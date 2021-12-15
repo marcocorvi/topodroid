@@ -358,6 +358,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_thmanager">ThManager не е инсталирана</string -->
     <!-- UNUSED string name="no_db_viewer">Програмата SQliteViewer не е инсталирана</string -->
     <string name="no_undelete">Няма елементи за възстановяване</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Наклон %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -383,6 +384,7 @@ Refer to the web pages for details.\n
     <string name="menu_export">Експортиране</string>
     <string name="menu_firmware">Фърмуер</string>
     <string name="menu_recover">Възстановяване</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">Препрочитане</string>
     <string name="menu_rename_delete">Преименуване/Изтриване</string>
     <string name="menu_rename">Преименуване</string>
@@ -585,6 +587,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">Грешка при превключване на DistoX</string>
     <string name="toggle_ok">Включен/изключен режим на калибрация на DistoX</string>
     <string name="undelete_text">Изберете какво искате да възстановите</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Измервания</string>
     <string name="undelete_overshoot">Дълги измервания</string>
     <string name="undelete_check">Проверки</string>
@@ -674,6 +677,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_create"    >Създаване </string -->
     <string name="button_color"     >Цвят</string>
     <string name="button_convert"   >Конверт.  </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Направи текущ</string>
     <string name="button_delete"    >Изтриване </string>
     <!-- TODO string name="button_duplicate" >Duplicate </string -->
@@ -743,6 +747,8 @@ Refer to the web pages for details.\n
     <string name="button_write"     >Качване</string>
     <string name="button_xsection"  >Сечение</string>
     <string name="xsection">Сечение</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Отсечки</string>
     <string name="mode_splay">Странични</string>

@@ -39,8 +39,8 @@ import android.widget.AdapterView.OnItemClickListener;
 // import android.preference.PreferenceManager;
 
 public class PhotoListDialog extends MyDialog
-                           implements OnItemClickListener
-                           // , ILister
+                             implements OnItemClickListener
+                             // , ILister
 {
   private DataHelper mApp_mData;
 

@@ -32,7 +32,7 @@ import android.graphics.RectF;
 import android.graphics.Matrix;
 
 public class DrawingStationName extends DrawingPointPath
-                         implements IDrawingLink
+                                implements IDrawingLink
 {
   private String mName; // station name
   private NumStation mStation;
@@ -49,6 +49,12 @@ public class DrawingStationName extends DrawingPointPath
   float getXSectionX( float r ) { return cx - ((mXSectionType == PlotType.PLOT_NULL)? 0 : r * mDY); }
   float getXSectionY( float r ) { return cy + ((mXSectionType == PlotType.PLOT_NULL)? 0 : r * mDX); }
 
+  /** cstr
+   * @param name   station name
+   * @param x      X position (scene coord)
+   * @param y      Y position (scene coord)
+   * @param scrap  scrap index
+   */
   public DrawingStationName( String name, float x, float y, int scrap )
   {
     super( BrushManager.getPointLabelIndex(),
@@ -68,6 +74,12 @@ public class DrawingStationName extends DrawingPointPath
     mPaint = BrushManager.fixedStationPaint;
   }
 
+  /** cstr
+   * @param num_st data-reduction station
+   * @param x      X position (scene coord)
+   * @param y      Y position (scene coord)
+   * @param scrap  scrap index
+   */
   public DrawingStationName( NumStation num_st, float x, float y, int scrap )
   {
     super( BrushManager.getPointLabelIndex(),
@@ -88,15 +100,30 @@ public class DrawingStationName extends DrawingPointPath
     makeStraightPath( 0, 0, 2*TDSetting.mStationSize*mName.length(), 0, cx, cy );
   }
 
+  /** @return the station name
+   */
   public String getName() { return mName; }
+
+  /** @return the data-reduction station (or null)
+   */
   public NumStation getNumStation() { return mStation; }
 
-  // @implements IDrawingLink
+  /** @return X scene coord 
+   * @implements IDrawingLink
+   */
   public float getLinkX() { return cx; }
+
+  /** @return Y scene coord 
+   * @implements IDrawingLink
+   */
   public float getLinkY() { return cy; }
   // public Point2D getLink() { return new Point2D(cx,cy); }
 
-  // FIXME OK PROFILE
+  /** set the XSection - FIXME OK PROFILE
+   * @param azimuth    XSection azimuth
+   * @param clino      XSection clino
+   * @param type       XSection type
+   */
   void setXSection( float azimuth, float clino, long type )
   {
     mXSectionType = type;
@@ -119,6 +146,8 @@ public class DrawingStationName extends DrawingPointPath
     }
   }
 
+  /** clear the XXection
+   */
   void resetXSection( ) { mXSectionType = PlotType.PLOT_NULL; }
 
   // defined in DrawingPointPath
@@ -129,6 +158,10 @@ public class DrawingStationName extends DrawingPointPath
   //   return Math.sqrt( dx*dx + dy*dy );
   // }
 
+  /** draw the station on the screen
+   * @param canvas   canvas
+   * @param bbox     clipping box
+   */
   @Override
   public void draw( Canvas canvas, RectF bbox )
   {
@@ -144,6 +177,12 @@ public class DrawingStationName extends DrawingPointPath
     }
   }
 
+  /** draw the station on the screen
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping box
+   */
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
@@ -164,6 +203,8 @@ public class DrawingStationName extends DrawingPointPath
     }
   }
   
+  /** @return the coordinates (E,N,Z) as a string
+   */
   String getCoordsString()
   {
     if ( mStation == null ) return null;
@@ -171,6 +212,8 @@ public class DrawingStationName extends DrawingPointPath
     return String.format(Locale.US, "E %.2f N %.2f Z %.2f", mStation.e, -mStation.s, -mStation.v );
   }
 
+  /** @return Therion representation
+   */
   @Override
   public String toTherion( )
   {
@@ -179,6 +222,10 @@ public class DrawingStationName extends DrawingPointPath
     return String.format(Locale.US, "point %.2f %.2f station -name \"%s\"", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mName );
   }
 
+  /** serialize 
+   * @param dos   output stream
+   * @param scrap scrap index
+   */
   @Override
   public void toDataStream( DataOutputStream dos, int scrap )
   {
@@ -199,8 +246,11 @@ public class DrawingStationName extends DrawingPointPath
     } catch ( IOException e ) { }
   }
 
-  // used to make therion file from binary file
-  //
+  /** deserialize - used to make therion file from binary file
+   * @param version   file version
+   * @param dis       input stream
+   * @return deserialized station-name
+   */
   public static DrawingStationName loadDataStream( int version, DataInputStream dis )
   {
     float ccx, ccy;

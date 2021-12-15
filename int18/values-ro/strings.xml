@@ -359,6 +359,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_thmanager">Aplicația ThManager nu este instalată</string -->
     <!-- UNUSED string name="no_db_viewer">Aplicația DB_viewer nu a fost gasită</string -->
     <string name="no_undelete">Nici un element de recuperat</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -384,6 +385,7 @@ Refer to the web pages for details.\n
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPERARE</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">REÎNCĂRCARE</string>
     <string name="menu_rename_delete">REDENUMEȘTE/ȘTERGE</string>
     <string name="menu_rename">REDENUMEȘTE</string>
@@ -587,6 +589,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">Nu a putut fi comutat DistoX-ul</string>
     <string name="toggle_ok">DistoX-ul a fost comutat în modul calibrare</string>
     <string name="undelete_text">Atinge elementul pentru recuperare</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Măsurători</string>
     <string name="undelete_overshoot">Măsurători depășite</string>
     <string name="undelete_check">Verificări</string>
@@ -677,6 +680,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_create"    >Crează    </string -->
     <string name="button_color"     >Culoare   </string>
     <string name="button_convert"   >Conversie </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Activ     </string>
     <string name="button_delete"    >Șterge    </string>
     <string name="button_duplicate" >Duplică   </string>
@@ -744,6 +748,8 @@ Refer to the web pages for details.\n
     <string name="button_write"     >Încarcă</string>
     <string name="button_xsection"  >Secțiune-X</string>
     <string name="xsection">Secțiune-X</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
 
     <string name="mode_leg">Vize</string>

@@ -353,6 +353,7 @@
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -378,6 +379,7 @@
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
@@ -589,6 +591,7 @@
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Toma</string>
     <string name="undelete_overshoot">Exceso</string>
     <string name="undelete_check">Verificar</string>
@@ -678,6 +681,7 @@
     <!-- UNUSED string name="button_create"    >Crear    </string -->
     <string name="button_color"     >Color  </string>
     <string name="button_convert"   >Convertir </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
@@ -747,6 +751,8 @@
     <string name="button_write"     >Enviar calibración a distoX</string>
     <string name="button_xsection"  >Secciones</string>
     <string name="xsection">Secciones</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Radiales</string>

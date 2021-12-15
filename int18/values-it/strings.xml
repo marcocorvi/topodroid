@@ -360,6 +360,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
+    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -385,6 +386,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
+    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
     <string name="menu_rename">RINOMINA</string>
@@ -589,6 +591,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
+    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
     <string name="undelete_shot">Tiri</string>
     <string name="undelete_overshoot">Tiri troppo lunghi</string>
     <string name="undelete_check">Controlli</string>
@@ -684,6 +687,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_color"     >Colore</string>
     <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
+    <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_duplicate" >Duplicato   </string>
@@ -753,6 +757,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
+    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
+    <!-- TODO string name="buffer_unsorted">unsorted</string -->
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
