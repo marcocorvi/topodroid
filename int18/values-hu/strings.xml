@@ -598,7 +598,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
-    <string name="undelete_paste_text">Elem visszaállít/beilleszt</string -->
+    <string name="undelete_paste_text">Elem visszaállít/beilleszt</string>
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>
     <string name="undelete_check">Ellenőrző mérések</string>
