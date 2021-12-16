@@ -31,7 +31,9 @@ import android.widget.EditText;
 import android.widget.Button;
 import android.view.View;
 
-import android.text.ClipboardManager;
+// import android.text.ClipboardManager; // deprecated API-11
+import android.content.ClipboardManager;
+import android.content.ClipData;
 
 import android.inputmethodservice.KeyboardView;
 
@@ -193,18 +195,22 @@ class FixedAddDialog extends MyDialog
         mContext.startActivity( new Intent( Intent.ACTION_VIEW, uri ) );
       }
     } else if ( b == mBtnClipboard ) {
-      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE ); // DEPRECAED API-11
+      ClipboardManager cm = (ClipboardManager)mContext.getSystemService( Context.CLIPBOARD_SERVICE ); 
       boolean toast = true;
-      if ( cm != null ) {
-        CharSequence text = cm.getText();
-        if ( text != null ) {
-          String str = text.toString();
-          String[] val = str.split(",");
-          if ( val.length > 1 ) {
-            toast = false;
-            mETlng.setText( val[0] );
-            mETlat.setText( val[1] );
-            if ( val.length > 2 ) mEThell.setText( val[2] );
+      if ( cm != null && cm.hasPrimaryClip() ) {
+        // CharSequence text = cm.getText();
+        ClipData clip = cm.getPrimaryClip();
+        if ( clip.getItemCount() > 0 ) {
+          CharSequence text = clip.getItemAt(0).coerceToText( mContext );
+          if ( text != null ) {
+            String str = text.toString();
+            String[] val = str.split(",");
+            if ( val.length > 1 ) {
+              toast = false;
+              mETlng.setText( val[0] );
+              mETlat.setText( val[1] );
+              if ( val.length > 2 ) mEThell.setText( val[2] );
+            }
           }
         }
       }

@@ -76,8 +76,18 @@ public class TDPath
   static String getSymbolLineDirname()  { return DIR_LINE; }  // "symbol/line"
   static String getSymbolAreaDirname()  { return DIR_AREA; }  // "symbol/area"
 
-  // ------------------------------------------------------------
-  // PATHS
+  // LOCKS --------------------------------------------------------
+  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
+  final static Object mXSectionsLock = new Object();
+  final static Object mSelectionLock = new Object();
+  final static Object mCommandsLock  = new Object();
+  final static Object mStationsLock  = new Object();
+  final static Object mShotsLock     = new Object();
+  final static Object mGridsLock     = new Object();
+  // final static Object mFixedsLock    = new Object();
+  // final static Object mSelectedLock  = new Object();
+
+  // PATHS ------------------------------------------------------------
 
   // if BUILD
   // If PATH_CB_DIR is left null the path is set in the method setPaths():
@@ -97,8 +107,8 @@ public class TDPath
   */
 
   // private static String PATH_CB_DIR  = EXTERNAL_STORAGE_PATH;
-  private static String PATH_CB_DIR   = TDFile.getExternalDir(null).getPath();
-  private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";
+  private static String PATH_CB_DIR   = TDFile.getExternalDir(null).getPath(); // fullpath
+  private static String PATH_CW_DIR   = PATH_CB_DIR + "/TopoDroid";            // fullpath
 
   private static String PATH_ZIP      = PATH_CW_DIR + "/zip";
   private static String PATH_TMP      = PATH_CW_DIR + "/tmp";
@@ -112,6 +122,7 @@ public class TDPath
   private static String APP_TDR_PATH      = null;
   private static String APP_C3D_PATH      = null;
 
+  /* UNUSED
   private static String APP_CAVE_PATH = null;   // Polygon
   private static String APP_CAV_PATH = null;    // Topo
   private static String APP_CSV_PATH = null;    // CSV text
@@ -141,16 +152,22 @@ public class TDPath
   private static String APP_TRO_PATH = null;    // VisualTopo
   private static String APP_XVI_PATH = null;    
   // private static String APP_TLX_PATH = null; 
+  */
+  private static String RELATIVE_TMP = null;
+  private static String APP_TMP_PATH = null;
 
+  /** clear the surveys pathnames
+   */
   private static void clearAppPaths()
   {
     APP_SURVEY_PATH   = null;
-    APP_PHOTO_PATH     = null;
+    APP_PHOTO_PATH    = null;
     APP_AUDIO_PATH    = null;
     APP_NOTE_PATH     = null;
     APP_TDR_PATH      = null;
     APP_C3D_PATH      = null;
 
+    /* UNUSED
     APP_CAVE_PATH = null;   // Polygon
     APP_CAV_PATH = null;    // Topo
     APP_CSV_PATH = null;    // CSV text
@@ -180,30 +197,28 @@ public class TDPath
     APP_TRO_PATH = null;    // VisualTopo
     APP_XVI_PATH = null;    
     // APP_TLX_PATH = null; 
+    */
+    APP_TMP_PATH = null;
+    RELATIVE_TMP = null;
   }
 
-  // final static Object mTherionLock   = new Object(); // FIXME-THREAD_SAFE
-  final static Object mXSectionsLock = new Object();
-  final static Object mSelectionLock = new Object();
-  final static Object mCommandsLock  = new Object();
-  final static Object mStationsLock  = new Object();
-  final static Object mShotsLock     = new Object();
-  final static Object mGridsLock     = new Object();
-  // final static Object mFixedsLock    = new Object();
-  // final static Object mSelectedLock  = new Object();
-
+  /** @return the fullpath of the survey database
+   */
   static String getDatabase() { return PATH_CW_DIR + "/distox14.sqlite"; }
 
   // private static String PATH_DEFAULT  = PATH_CW_DIR;
   // static String getDeviceDatabase() { return PATH_DEFAULT + "device10.sqlite"; }
   // public static String getPacketDatabase() { return PATH_DEFAULT + "packet10.sqlite"; }
   
-  // when this is called basedir exists and is writable
-  static boolean checkBasePath( String path )
+  /** @return true if the base-directory can be used
+   * @param name   base-directory name relative to "TDX"
+   * @note when this is called basedir exists and is writable
+   */
+  static boolean checkBasePath( String name )
   {
-    File dir = TDFile.getExternalDir( path ); 
+    File dir = TDFile.getExternalDir( name ); 
     if ( ! dir.exists() ) {
-      if ( ! dir.mkdirs() ) TDLog.Error("mkdir error " + path );
+      if ( ! dir.mkdirs() ) TDLog.Error("mkdir error " + name );
     }
     // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
 
@@ -211,33 +226,34 @@ public class TDPath
     try {
       ret = dir.exists() && dir.isDirectory() && dir.canWrite();
     } catch ( SecurityException e ) { }
-    TDLog.v( "check base path: <" + path + ">: " + ret );
+    TDLog.v( "check base <" + name + ">: " + ret );
     return ret;
   }
 
-  // returns the current base directory (which is unchangeable )
+  /** @return the current base directory fullpath (which is unchangeable )
+   */
   public static String getCurrentBaseDir() { return PATH_CB_DIR; }
 
-  // return the current work directory
+  /** @return the current work directory fullpath
+   */
   public static String getCurrentWorkDir() { return PATH_CW_DIR; }
  
   /** set the Current Work Directory
-   * @param path current work directory
+   * @param name   current work directory name, eg, "TopoDroid"
    */
-  static void setTdPaths( String path /*, String base */ )
+  static void setTdPaths( String name /*, String base */ )
   {
-    // TDLog.v( "set paths [0]: path " + path + " base " + base );
+    // TDLog.v( "set paths [0]: name " + name + " base " + base );
+    if ( name == null || ! name.toLowerCase().startsWith( "topodroid" ) ) return;
 
-    if ( path == null || ! path.toLowerCase().startsWith( "topodroid" ) ) return;
-
-    File dir = TDFile.getExternalDir( path ); // DistoX-SAF
+    File dir = TDFile.getExternalDir( name ); // DistoX-SAF
     // TDLog.v( "set paths [4]. Dir " + dir.getPath()  );
 
     try {
       if ( dir.exists() || dir.mkdirs() ) {
         // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
 	if ( dir.isDirectory() && dir.canWrite() ) {
-	  PATH_CW_DIR   = PATH_CB_DIR + "/" + path;
+	  PATH_CW_DIR   = PATH_CB_DIR + "/" + name;
           PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
           PATH_TMP      = PATH_CW_DIR + "/tmp";      checkFilesystemDirs( PATH_TMP );
           PATH_TDCONFIG = PATH_CW_DIR + "/thconfig"; checkFilesystemDirs( PATH_TDCONFIG  );
@@ -250,10 +266,13 @@ public class TDPath
     }
   }
 
+  /** create survey folder, if it does not exist, and subfolders
+   * @param survey    survey name
+   */
   public static void createSurveyPaths( String survey )
   {
     // TDLog.v( "create survey path " + survey + " base " + PATH_CW_DIR );
-    String root = PATH_CW_DIR + "/" + survey; 
+    String root = PATH_CW_DIR + "/" + survey; // fullpath
     checkFilesystemDirs( root );
     checkFilesystemDirs( root + "/tdr" );
     checkFilesystemDirs( root + "/c3d" );
@@ -262,6 +281,9 @@ public class TDPath
     checkFilesystemDirs( root + "/audio" );
   }
 
+  /** set the survey paths
+   * @param survey   survey name
+   */
   static void setSurveyPaths( String survey )
   {
     if ( survey == null || survey.length() == 0 ) {
@@ -269,7 +291,7 @@ public class TDPath
       clearAppPaths();
     } else {
       // TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
-      APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;  checkFilesystemDirs( APP_SURVEY_PATH );
+      APP_SURVEY_PATH = PATH_CW_DIR + "/" + survey;  checkFilesystemDirs( APP_SURVEY_PATH ); // fullpath
       String root = APP_SURVEY_PATH;
       APP_TDR_PATH   = root + "/tdr";     checkFilesystemDirs( APP_TDR_PATH );
       APP_C3D_PATH   = root + "/c3d";     checkFilesystemDirs( APP_C3D_PATH );
@@ -277,6 +299,7 @@ public class TDPath
       APP_PHOTO_PATH = root + "/photo";   checkFilesystemDirs( APP_PHOTO_PATH );
       APP_AUDIO_PATH = root + "/audio";   checkFilesystemDirs( APP_AUDIO_PATH );
 
+      /* UNUSED
       APP_CAVE_PATH = root + "/cave";   // Polygon
       APP_CAV_PATH  = root + "/cav";    // Topo
       APP_CSV_PATH  = root + "/csv";    // CSV text
@@ -306,6 +329,9 @@ public class TDPath
       APP_TRO_PATH  = root + "/tro";    // VisualTopo
       APP_XVI_PATH  = root + "/xvi";    
       // APP_TLX_PATH = null; 
+      */
+      APP_TMP_PATH = root + "/tmp";    // CWD/survey/tmp
+      RELATIVE_TMP = survey + "/tmp";
     }
   }
 
@@ -413,6 +439,7 @@ public class TDPath
 
   public static String getC3dFileWithExt( String name )  { return getPathname( APP_C3D_PATH, name, C3D ); }
 
+  /* UNUSED
   public static String getCaveFileWithExt( String name ) { checkFilesystemDirs( APP_CAVE_PATH ); return getPathname( APP_CAVE_PATH, name, ".cave" ); } // Polygon
   public static String getCavFileWithExt(  String name ) { checkFilesystemDirs( APP_CAV_PATH );  return getPathname( APP_CAV_PATH,  name, ".cav"  ); } // Topo
   public static String getCsvFileWithExt(  String name ) { checkFilesystemDirs( APP_CSV_PATH );  return getPathname( APP_CSV_PATH,  name, ".csv"  ); }
@@ -447,6 +474,13 @@ public class TDPath
     checkFilesystemDirs( APP_SHP_PATH + "/tmp/" );
     return RELATIVE_SHP_TEMP;
   }
+  */
+  public static String getShpTempRelativeDir( ) 
+  {
+    checkFilesystemDirs( APP_TMP_PATH );
+    return RELATIVE_TMP;
+  }
+
 
   public static File[] getBinFiles()   { return getInternalFiles( DIR_BIN ); }
   public static File[] getCalibFiles() { return getInternalFiles( DIR_CCSV  ); } // DistoX-SAF

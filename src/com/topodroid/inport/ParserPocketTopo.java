@@ -90,7 +90,7 @@ class ParserPocketTopo extends ImportParser
       ptfile.read( fis );
       fis.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "File not found: " + filename );
+      TDLog.Error( "file not found: " + filename );
       throw new ParserException();
     } catch ( IOException e ) { // on close
       TDLog.Error( "IO exception: " + e );
@@ -337,7 +337,7 @@ class ParserPocketTopo extends ImportParser
         ret = true;
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );
-        if ( ! file.delete() ) TDLog.Error("File delete error");
+        if ( ! file.delete() ) TDLog.Error("file delete error");
         throw new ParserException();
       }
     }

@@ -197,7 +197,7 @@ public class ShotWindow extends Activity
   private DataDownloader mDataDownloader;
   private SurveyAccuracy mSurveyAccuracy;
 
-  private static DBlockBuffer mDBlockBuffer = null; // survey-data buffer (created on first call)
+  private static DBlockBuffer mDBlockBuffer = new DBlockBuffer(); // survey-data buffer (created on first call)
 
   // TODO replace flags with DisplayMode-flag 
   //      N.B. id is in the data adapter
@@ -1077,7 +1077,6 @@ public class ShotWindow extends Activity
     mOnOpenDialog = false;
     mSurveyAccuracy = new SurveyAccuracy( ); 
     mMediaManager   = new MediaManager( mApp_mData );
-    if ( mDBlockBuffer == null ) mDBlockBuffer = new DBlockBuffer();
 
     // FIXME-28
     // RecyclerView rv = (RecyclerView) findViewById( R.id.recycler_view );

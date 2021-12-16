@@ -23,7 +23,7 @@ import com.topodroid.common.ExtendType;
 
 import java.util.Locale;
 
-import java.io.File;
+import java.io.File; // JPEG FILE
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -584,7 +584,7 @@ class ShotNewDialog extends MyDialog
         if ( mJpegData != null ) { 
           // TDLog.v( "save Jpeg image size " + mJpegData.length );
           long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
-          File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) );
+          File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) ); // JPEG FILE
           try {
             FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
             fos.write( mJpegData );

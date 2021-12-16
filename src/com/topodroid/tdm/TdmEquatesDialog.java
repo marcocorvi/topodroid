@@ -17,7 +17,7 @@ import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
 import java.util.ArrayList;
-import java.io.File;
+// import java.io.File;
 
 import android.content.DialogInterface;
 import android.app.Dialog;

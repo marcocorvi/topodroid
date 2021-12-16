@@ -660,7 +660,9 @@ public class OverviewWindow extends ItemDrawer
      // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
      // TDLog.v( "export th2 file " + fullname );
      DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
-     if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+
+     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+     if ( uri == null ) return;
 
      if ( ext.equals("th2") ) {
        Handler th2Handler = new Handler() {
@@ -704,7 +706,7 @@ public class OverviewWindow extends ItemDrawer
     }
     TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
 
-    if ( TDSetting.mExportUri ) { // FIXME_URI
+    // if ( TDSetting.mExportUri ) { // FIXME_URI
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
       intent.setType( TDConst.mMimeType[ mExportIndex ] );
       intent.addCategory(Intent.CATEGORY_OPENABLE);
@@ -712,17 +714,17 @@ public class OverviewWindow extends ItemDrawer
       // intent.putExtra( "exporttype", index ); // index is not returned to the app
       intent.putExtra( Intent.EXTRA_TITLE, filename );
       startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
-    } else {
-      // saveWithExt( null, mExportExt );
-      doUriExport( null );
-    }
+    // } else {
+    //   // saveWithExt( null, mExportExt );
+    //   doUriExport( null );
+    // }
   }
 
   // FIXME_URI
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
-    if ( ! TDSetting.mExportUri ) return;
+    // if ( ! TDSetting.mExportUri ) return;
     if ( intent == null ) return;
     // Bundle extras = intent.getExtras();
     switch ( request ) {
@@ -779,21 +781,22 @@ public class OverviewWindow extends ItemDrawer
       return;
     }
 
-    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+
     // TDPath.getPdfDir();
     // String filename = TDPath.getPdfFileWithExt( fullname );
     // TDLog.v( "Overview PDF export <" + filename + ">");
-    ParcelFileDescriptor pfd = null;
+    ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
+    if ( pfd == null ) return;
     try {
-      pfd = TDsafUri.docWriteFileDescriptor( uri );
       OutputStream fos = null;
-      if ( uri != null ) {
+      // if ( uri != null ) {
         TDLog.v( "Export overview PDF: uri " + uri.toString() );
         fos = TDsafUri.docFileOutputStream( pfd );
-      } else {
-        TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
-        fos = new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
-      }
+      // } else {
+      //   TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
+      //   fos = new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+      // }
 
       // PrintAttributes.Builder builder = new PrintAttributes.Builder();
       // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );

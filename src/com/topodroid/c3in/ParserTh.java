@@ -33,7 +33,7 @@ import com.topodroid.DistoX.Vector3D;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDInstance;
 
-import java.io.File;
+import java.io.File; // DB FILE
 import java.io.IOException;
 // import java.io.FileReader;
 import java.io.FileInputStream;
@@ -727,7 +727,7 @@ public class ParserTh extends TglParser
                   }
                   String db_path = base + "/distox14.sqlite";
                   // TDLog.v( "Th DB " + db_path );
-                  if ( (new File(db_path)).exists() ) {
+                  if ( (new File(db_path)).exists() ) { // DB FILE
                     mData = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
                   }
                 }

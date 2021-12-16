@@ -40,7 +40,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 
     ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
-       if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
+       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
        mFormat   = format;
        mBitmap   = bitmap;
        mScale    = scale;
@@ -58,7 +58,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
 
     boolean exec()
     {
-      ParcelFileDescriptor pfd = null;
+      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
+      if ( pfd == null ) return false;
       try {
         /*
         // File temp = File.createTempFile( "tmp", ".png", TDFile.getFile( TDPath.getPngFile("") ) );
@@ -69,10 +70,10 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         // TDLog.v( "temp file <" + temp.getPath() + ">" );
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         */
-        TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
+        // TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
         TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
-        pfd = TDsafUri.docWriteFileDescriptor( mUri );
-        FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
+        // FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
+        FileOutputStream out = TDsafUri.docFileOutputStream( pfd );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();

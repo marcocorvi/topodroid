@@ -92,6 +92,12 @@ class DrawingShotDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
+  /** cstr
+   * @param context  context
+   * @param parent   parent window
+   * @param shot     drawing path of this dialog
+   * @param flag     ...
+   */
   DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
   {
     super(context, R.string.DrawingShotDialog );
@@ -332,16 +338,11 @@ class DrawingShotDialog extends MyDialog
         mETto.setInputType( TDConst.NUMBER_DECIMAL );
       }
     }
-
   }
 
-  @Override
-  public boolean onLongClick(View view)
-  {
-    CutNPaste.makePopup( mContext, (EditText)view );
-    return true;
-  }
-
+  /** update after a color change
+   * @param color    new color
+   */
   @Override
   public void colorChanged( int color )
   {
@@ -351,6 +352,20 @@ class DrawingShotDialog extends MyDialog
     mBtnColor.setBackgroundColor( mColor );
   }
 
+  /** implements user long-tapps
+   * @param view   tapped view
+   * @return true if the tap has been handled
+   */
+  @Override
+  public boolean onLongClick(View view)
+  {
+    CutNPaste.makePopup( mContext, (EditText)view );
+    return true;
+  }
+
+  /** implements user tapps
+   * @param view   tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -481,6 +496,8 @@ class DrawingShotDialog extends MyDialog
     }
   }
 
+  /** implements a user BACK press
+   */
   @Override
   public void onBackPressed()
   {

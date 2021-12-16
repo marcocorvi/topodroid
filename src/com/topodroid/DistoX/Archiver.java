@@ -599,7 +599,8 @@ public class Archiver
       // byte[] buffer = new byte[4096];
 
       int nr_entry = 0;
-      for ( Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); entries.hasMoreElements(); ) {
+      Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FUXME "unchecked cast"
+      for ( ; entries.hasMoreElements(); ) {
         ze = entries.nextElement();
         ++ nr_entry;
         if ( ze.isDirectory() ) {
@@ -722,7 +723,6 @@ public class Archiver
         }
       }
       zin.close();
-      
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "File not found " + e.toString() );
     } catch ( IOException e ) {

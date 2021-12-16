@@ -132,11 +132,14 @@ public class TdManagerActivity extends Activity
     // R.string.menu_options,
     R.string.menu_help,
   };
+
   private static final int[] help_menus = {
     R.string.help_close,
     R.string.help_help,
   };
 
+  /** reset the buttons bar
+   */
   private void resetButtonBar()
   {
     // mImage.setBackgroundDrawable( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
@@ -167,6 +170,9 @@ public class TdManagerActivity extends Activity
     }
   }
 
+  /** set the adapter of the menus
+   * @param res    resources
+   */
   private void setMenuAdapter( Resources res )
   {
     mMenuAdapter = new ArrayAdapter<String>( this, R.layout.menu );
@@ -177,12 +183,17 @@ public class TdManagerActivity extends Activity
     mMenu.invalidate();
   }
 
+  /** close the menus
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** implements a menu press
+   * @param pos    menu index
+   */
   private void handleMenu( int pos ) 
   {
     closeMenu();
@@ -216,6 +227,8 @@ public class TdManagerActivity extends Activity
   //   super.onResume();
   // }
     
+  /** update the list of projects configuration
+   */
   void updateTdmConfigList()
   {
     mTdmConfigAdapter = new TdmConfigAdapter( this, R.layout.row, new ArrayList< TdmConfig >(),
@@ -244,32 +257,9 @@ public class TdManagerActivity extends Activity
     // TDLog.v( "set adapter: size " + mTdmConfigAdapter.size() );
   }
 
-  // @Override
-  // public boolean onItemLongClick( AdapterView<?> parent, View view, int pos, long id )
-  // {
-  //   onItemClick( parent, view, pos, id );
-  //   return true;
-  // }
-
-  @Override
-  public void onItemClick( AdapterView<?> parent, View view, int pos, long id )
-  {
-    // CharSequence item = ((TextView) view).getText();
-    if ( mMenu == (ListView)parent ) {
-      handleMenu( pos );
-      return;
-    }
-    if ( onMenu ) {
-      closeMenu();
-      return;
-    }
-
-    TdmConfig tdconfig = mTdmConfigAdapter.getItem( pos );
-    TDLog.v( "On Item Click: pos " + pos + " TdmConfig " + tdconfig.getFilepath() );
-    // TODO start TdmConfigActivity or Dialog
-    startTdmConfigActivity( tdconfig );
-  }
-
+  /** start the activity for a project
+   * @param tdconfig  project
+   */
   void startTdmConfigActivity( TdmConfig tdconfig )
   {
     TDLog.v( "start tdconfig activity for " + tdconfig.toString() );
@@ -317,6 +307,11 @@ public class TdManagerActivity extends Activity
   //   updateTdmConfigList();
   // }
     
+  /** handle the response to a request
+   * @param request   request
+   * @param result    result
+   * @param intent    result data
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     Bundle extras = (intent != null )? intent.getExtras() : null;
@@ -363,6 +358,9 @@ public class TdManagerActivity extends Activity
 
   // ---------------------------------------------------------------
 
+  /** implements user taps 
+   * @param view   tapped view
+   */
   @Override
   public void onClick(View view)
   { 
@@ -392,6 +390,44 @@ public class TdManagerActivity extends Activity
     // } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EXIT
     //   finish();
     }
+  }
+
+  // /** implements user long-taps on items
+  //  * @param parent ...
+  //  * @param view   tapped view
+  //  * @param pos    tapped iten index
+  //  * @param id     ...
+  //  */
+  // @Override
+  // public boolean onItemLongClick( AdapterView<?> parent, View view, int pos, long id )
+  // {
+  //   onItemClick( parent, view, pos, id );
+  //   return true;
+  // }
+
+  /** implements user taps on items
+   * @param parent ...
+   * @param view   tapped view
+   * @param pos    tapped iten index
+   * @param id     ...
+   */
+  @Override
+  public void onItemClick( AdapterView<?> parent, View view, int pos, long id )
+  {
+    // CharSequence item = ((TextView) view).getText();
+    if ( mMenu == (ListView)parent ) {
+      handleMenu( pos );
+      return;
+    }
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+
+    TdmConfig tdconfig = mTdmConfigAdapter.getItem( pos );
+    TDLog.v( "On Item Click: pos " + pos + " TdmConfig " + tdconfig.getFilepath() );
+    // TODO start TdmConfigActivity or Dialog
+    startTdmConfigActivity( tdconfig );
   }
 
 }

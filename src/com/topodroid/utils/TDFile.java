@@ -48,7 +48,6 @@ import java.io.FileDescriptor;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.FileOutputStream;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
 import java.io.FileNotFoundException;
@@ -127,18 +126,48 @@ public class TDFile
   /** @return the file of the specified folder
    * @param type   folder name
    */
-  public static File getPrivateDir( String subdir ) 
+  public static File getPrivateDir( String type ) 
   { 
-    return TDInstance.context.getExternalFilesDir( subdir );
+    return TDInstance.context.getExternalFilesDir( type );
   }
 
   /** @return a private file
    * @param type   folder name
    * @param name   filename
    */
-  public static File getPrivateFile( String subdir, String filename ) 
+  public static File getPrivateFile( String type, String name ) 
   { 
-    return new File( TDInstance.context.getExternalFilesDir( subdir ), filename );
+    return new File( TDInstance.context.getExternalFilesDir( type ), name );
+  }
+
+  /** @return true if the private file exists
+   * @param type   folder name
+   * @param name   filename
+   */
+  public static boolean existPrivateFile( String type, String name )
+  {
+    File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
+    return file.exists();
+  }
+
+  /** @return private file output stream
+   * @param type   folder name
+   * @param name   filename
+   */
+  public static FileOutputStream getPrivateFileOutputStream( String type, String name ) throws IOException
+  {
+    File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
+    return getFileOutputStream( file );
+  }
+
+  /** @return private file input stream
+   * @param type   folder name
+   * @param name   filename
+   */
+  public static FileInputStream getPrivateFileInputStream( String type, String name ) throws IOException
+  {
+    File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
+    return file.exists() ? getFileInputStream( file ) : null;
   }
 
   /** delete a private file
@@ -276,54 +305,49 @@ public class TDFile
   //   return new File( dir, name );
   // }
 
-  /** get a file input stream
+  /** @return file input stream
    * @param name  file fullpath
-   * @return file input stream
    */
   public static FileInputStream getFileInputStream( String name ) throws IOException { return new FileInputStream( name ); }
 
-  // public static FileInputStream getFileInputStream( File file ) throws IOException { return new FileInputStream( file ); }
+  /** @return file input stream
+   * @param file  file
+   */
+  public static FileInputStream getFileInputStream( File file ) throws IOException { return new FileInputStream( file ); }
 
-  /** get a file output stream
+  /** @return file output stream
    * @param name  file fullpath
-   * @return file output stream
    */
   public static FileOutputStream getFileOutputStream( String name ) throws IOException { return new FileOutputStream( name ); }
 
-  /** get a file output stream
+  /** @return file output stream
    * @param file  file
-   * @return file output stream
    */
   public static FileOutputStream getFileOutputStream( File file ) throws IOException { return new FileOutputStream( file ); }
 
-  /** get a file writer
+  /** @return a file writer
    * @param name    file fullpath
    * @param append  whther to open the file in append mode
-   * @return file writer
    */
   public static FileWriter getFileWriter( String name, boolean append ) throws IOException { return new FileWriter( name, append ); }
 
-  /** get a file writer
+  /** @return file writer
    * @param name    file fullpath
-   * @return file writer
    */
   public static FileWriter getFileWriter( String name ) throws IOException { return new FileWriter( name ); }
 
-  /** get a file writer
+  /** @return file writer
    * @param file    file 
-   * @return file writer
    */
   public static FileWriter getFileWriter( File file ) throws IOException { return new FileWriter( file ); }
 
-  /** get a file reader
+  /** @return file reader
    * @param name    file fullpath
-   * @return file reader
    */
   public static FileReader getFileReader( String name ) throws IOException { return new FileReader( name ); }
 
-  /** get a file reader
+  /** @return file reader
    * @param file    file 
-   * @return file reader
    */
   public static FileReader getFileReader( File file ) throws IOException { return new FileReader( file ); }
 

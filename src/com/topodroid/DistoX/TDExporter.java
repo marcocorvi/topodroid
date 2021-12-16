@@ -59,7 +59,7 @@ import com.topodroid.calib.CalibInfo;
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
-import java.io.File;
+import java.io.File; // PRIVATE FILE
 import java.io.StringWriter;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
@@ -251,16 +251,26 @@ public class TDExporter
     return s.replaceAll("&", "&amp;").replaceAll("\"", "&quot;").replaceAll(">", "&gt;").replaceAll("<", "&lt;").replaceAll("\'", "&apos;"); 
   }
 
-  // @return 1 on success
-  static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
-                                   String origin, String surveyname )
+  /** export survey in cSurvey format
+   * @param uri     output stream uri
+   * @param sid     survey ID
+   * @param data    surveys database
+   * @param info    survey info
+   * @param psd1    first plot-data of the survey (plan)
+   * @param psd2    second plot-data of the survey (profile)
+   * @param origin  plot origin station
+   * @param surveyname survey name (...)
+   * @return 1 on success
+   */
+  static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String surveyname )
   {
     int ret = 0; // 0 = failure
-    ParcelFileDescriptor pfd = null;
+    ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
+    if ( pfd == null ) return 0;
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      pfd = TDsafUri.docWriteFileDescriptor( uri );
-      BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
+      // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
+      BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
       ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
       bw.close();
     } catch ( FileNotFoundException e ) {
@@ -273,9 +283,18 @@ public class TDExporter
     return ret;
   }
 
-  // @return 1 on success or 0 on error
-  static int exportSurveyAsCsx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2,
-                                   String origin, String surveyname )
+  /** export survey in cSurvey format
+   * @param bw      output writer
+   * @param sid     survey ID
+   * @param data    surveys database
+   * @param info    survey info
+   * @param psd1    first plot-data of the survey (plan)
+   * @param psd2    second plot-data of the survey (profile)
+   * @param origin  plot origin station
+   * @param surveyname survey name (...)
+   * @return 1 on success or 0 on error
+   */
+  static int exportSurveyAsCsx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String surveyname )
   {
     int ret = 0; // 0 = failure
     // TDLog.v( "export as csurvey: " + file.getName() );
@@ -1327,32 +1346,32 @@ public class TDExporter
    */
   static int exportSurveyAsTh( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // create thconfig file 
-      synchronized( TDFile.mFilesLock ) {
-        // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
-        // if ( ! dir.exists() ) dir.mkdirs();
-        try {
-          // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
-          BufferedWriter bcw = new BufferedWriter( new FileWriter( TDPath.getThconfigFileWithExt( surveyname ) ) );
-          PrintWriter pcw = new PrintWriter( bcw );
-          pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-          pcw.format("source \"../th/%s.th\"\n\n", info.name );
-          pcw.format("layout topodroid\n");
-          pcw.format("  legend on\n");
-          pcw.format("  symbol-hide group centerline\n");
-          pcw.format("  symbol-show point station\n");
-          pcw.format("  debug station-names\n");
-          pcw.format("endlayout\n");
-          pcw.format("\n");
-          pcw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
-          pcw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
-          bcw.flush();
-          bcw.close();
-        } catch ( IOException e ) {
-          TDLog.Error( "Failed Therion config export: " + e.getMessage() );
-        }
-      }
-    }
+    // if ( TDSetting.mTherionConfig && ! TDSetting.mExportUri ) { // create thconfig file 
+    //   synchronized( TDFile.mFilesLock ) {
+    //     // File dir = TDFile.getFile( TDPath.getTdconfigDir() );
+    //     // if ( ! dir.exists() ) dir.mkdirs();
+    //     try {
+    //       // BufferedWriter bcw = TDFile.getMSwriter( "thconfig", surveyname + ".thconfig", "text/thconfig" );
+    //       BufferedWriter bcw = new BufferedWriter( new FileWriter( TDPath.getThconfigFileWithExt( surveyname ) ) );
+    //       PrintWriter pcw = new PrintWriter( bcw );
+    //       pcw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+    //       pcw.format("source \"../th/%s.th\"\n\n", info.name );
+    //       pcw.format("layout topodroid\n");
+    //       pcw.format("  legend on\n");
+    //       pcw.format("  symbol-hide group centerline\n");
+    //       pcw.format("  symbol-show point station\n");
+    //       pcw.format("  debug station-names\n");
+    //       pcw.format("endlayout\n");
+    //       pcw.format("\n");
+    //       pcw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
+    //       pcw.format("export map -layout topodroid -o %s-s.pdf -proj extended \n\n", info.name );
+    //       bcw.flush();
+    //       bcw.close();
+    //     } catch ( IOException e ) {
+    //       TDLog.Error( "Failed Therion config export: " + e.getMessage() );
+    //     }
+    //   }
+    // }
 
     // TDLog.v( "export as therion: " + file.getName() );
     // TDLog.v( "export " + info.name + " as therion: " + surveyname );
@@ -1382,7 +1401,7 @@ public class TDExporter
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
 
-      if ( TDSetting.mTherionConfig && TDSetting.mExportUri ) { // embed thconfig
+      if ( TDSetting.mTherionConfig /* && TDSetting.mExportUri */ ) { // embed thconfig
         pw.format("layout topodroid\n");
         pw.format("  legend on\n");
         pw.format("  symbol-hide group centerline\n");
@@ -1653,7 +1672,7 @@ public class TDExporter
       pw.format("endsurvey\n");
       bw.flush();
 
-      if ( TDSetting.mTherionConfig && TDSetting.mExportUri ) { // end embed thconfig file 
+      if ( TDSetting.mTherionConfig /* && TDSetting.mExportUri */ ) { // end embed thconfig file 
         pw.format("endsource\n");
         pw.format("\n");
         pw.format("export map -layout topodroid -o %s-p.pdf -proj plan \n\n", info.name );
@@ -4707,20 +4726,26 @@ public class TDExporter
     return line.substring( pos );
   }
 
-  // calib file
-  // line-1 must contain string "TopoDroid"
-  // line-2 skipped
-  // line-3 contains name at pos 2: must not match any calib name already in the db
-  // line-4 contains date at pos 2 format yyyy.mm.dd
-  // line-5 containd device MAC at pos 2: must match current device
-  // line-6 contains comment starting at pos 2
-  // line-7 contains algo at pos 2: 0 unset, 1 linear, 2 non-linear
-  // next data lines follow, each with at least 8 entries:
-  //   id, gx, gy, gz, mx, my, mz, group
-  // data reading ends at end-of-file or at a line with fewer entries
-  //
+  /** import calibration from a file
+   * @param data database
+   * @param file calibration file (private storage)
+   * @param device_name  name of the device - for consistency check
+   * @return erroir-code (0: success)
+   *
+   * Calib file format
+   * line-1 must contain string "TopoDroid"
+   * line-2 skipped
+   * line-3 contains name at pos 2: must not match any calib name already in the db
+   * line-4 contains date at pos 2 format yyyy.mm.dd
+   * line-5 containd device MAC at pos 2: must match current device
+   * line-6 contains comment starting at pos 2
+   * line-7 contains algo at pos 2: 0 unset, 1 linear, 2 non-linear
+   * next data lines follow, each with at least 8 entries:
+   *   id, gx, gy, gz, mx, my, mz, group
+   * data reading ends at end-of-file or at a line with fewer entries
+   */
   // static int importCalibFromCsv( DeviceHelper data, String filename, String device_name )
-  static int importCalibFromCsv( DeviceHelper data, File file, String device_name )
+  static int importCalibFromCsv( DeviceHelper data, File file, String device_name ) // PRIVATE FILE
   {
     int ret = 0;
     try {

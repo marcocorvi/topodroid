@@ -42,7 +42,7 @@ import com.topodroid.dev.bric.BricMode; // MODE
 
 import java.util.Locale;
 
-import java.io.File;
+import java.io.File; // PRIVATE FILE
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
@@ -170,7 +170,7 @@ public class TDSetting
   public static float mOrthogonalLRUDAngle  = 0;     // angle
   public static float mOrthogonalLRUDCosine = 1;     // cosine of the angle
 
-  public static final boolean mExportUri = true;
+  // public static final boolean mExportUri = true;
 
   public static boolean mExportStationsPrefix = false;  // whether to prepend cave name to station in cSurvey/compass export
   public static boolean mZipWithSymbols       = false;  // whether to add/load symbols to/from archive
@@ -2709,7 +2709,7 @@ public class TDSetting
   public static boolean exportSettings( )
   {
     // TDLog.v("Setting exports settings");
-    File file = TDFile.getSettingsFile();
+    File file = TDFile.getSettingsFile(); // PRIVATE FILE
     try {
       FileWriter fw = new FileWriter( file, false ); // true = append
       PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
@@ -2861,7 +2861,7 @@ public class TDSetting
   {
     // TDLog.v("Setting import settings");
     Editor editor = prefs.edit();
-    File file = TDFile.getSettingsFile();
+    File file = TDFile.getSettingsFile(); // PRIVATE FILE
     try {
       FileReader fr = new FileReader( file ); // true = append
       BufferedReader br = new BufferedReader( fr ); // true = autoflush

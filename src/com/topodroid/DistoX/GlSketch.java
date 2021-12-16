@@ -34,7 +34,7 @@ import android.graphics.Bitmap;
 import java.util.ArrayList;
 // import java.util.HashMap;
 
-import java.io.File;
+import java.io.File;  // POINT SYMBOL FILE
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -98,6 +98,8 @@ public class GlSketch extends GlShape
   public boolean mDelete = false; // whether to drop this sketch
   private boolean mEmpty = true;
 
+  /** reset size and symbol-flag
+   */
   void reset()
   {
     mShow = true;
@@ -105,8 +107,13 @@ public class GlSketch extends GlShape
     mSymbolSizeO = 0.6f;
   }
 
+  /** toggle display of~ symbols (symbol-flag)
+   */
   void toggleShowSymbols() { mShow = ! mShow; }
 
+  /** set the size of the symbols
+   * @param size   new size
+   */
   static void setSymbolSize( int size ) 
   { 
     if ( size <= 1 ) return;
@@ -114,6 +121,14 @@ public class GlSketch extends GlShape
     mSymbolSizeO = size / 20.0f;  // half size
   }
 
+  /** cstr
+   * @param ctx     context
+   * @param name    ...
+   * @param type    either plan or profile
+   * @param pts     points
+   * @param lns     lines
+   * @param areas   areas
+   */
   public GlSketch( Context ctx, String name, int type, ArrayList< SketchPoint > pts, ArrayList< SketchLine > lns, ArrayList< SketchLine > areas  )
   {
     super( ctx );
@@ -124,6 +139,9 @@ public class GlSketch extends GlShape
     mAreas  = areas;
   }
  
+  /** @return the point index from the Therion name
+   * @param th_name   Therion name
+   */
   public static int getPointIndex( String th_name ) 
   {
     for ( int k=0; k<mSymbols.size(); ++k ) if ( th_name.equals( mSymbols.get(k) ) ) return k;
@@ -133,6 +151,8 @@ public class GlSketch extends GlShape
   // --------------------------------------------------------
   // LOG
 
+  /** log - debug
+   */
   void logMinMax()
   {
     if ( mPoints.size() == 0 ) return;
@@ -165,11 +185,20 @@ public class GlSketch extends GlShape
   // ----------------------------------------------------
   // PROGRAM
 
-  // (X,Y,Z)med = Xmed - sketch.Xoff
-  //              Ymed - sketch.Zoff
-  //              Zmed + sketch.Yoff
-  // MED: model midpoint
-  // OFF: sketch offset
+  /** initialize the data
+   * @param xmed    X coord of center
+   * @param ymed    Y coord of center
+   * @param zmed    Z coord of center
+   * @param xoff    X offset
+   * @param yoff    Y offset
+   * @param zoff    Z offset
+   *
+   * (X,Y,Z)med = Xmed - sketch.Xoff
+   *              Ymed - sketch.Zoff
+   *              Zmed + sketch.Yoff
+   * MED: model midpoint
+   * OFF: sketch offset
+   */
   void initData( double xmed, double ymed, double zmed, double xoff, double yoff, double zoff )
   {
     pointCount = mPoints.size();
@@ -196,7 +225,9 @@ public class GlSketch extends GlShape
   // ------------------------------------------------------
   // DRAW
 
-  // never unbind texture
+  /** unbind the texture - empty method
+   * @note never unbind texture
+   */
   static void unbindTexture() 
   {
     // if ( mSymbols.size() == 0 ) return;
@@ -205,8 +236,13 @@ public class GlSketch extends GlShape
     // mTexId = -1;
   }
 
+  /** rebind the texture - clear the texture index
+   */
   static void rebindTexture() { mTexId = -1; }
 
+  /** draw the sketch
+   * @param mvpMatrix   model-view-projection matrix
+   */
   void draw( float[] mvpMatrix ) // , float[] inverseScaleMatrix )
   {
     if ( mEmpty ) return;
@@ -247,6 +283,9 @@ public class GlSketch extends GlShape
     }
   }
 
+  /** bind the data of the data buffer
+   * @param mvpMatrix   model-view-projection matrix
+   */
   private void bindData( float[] mvpMatrix )
   {
     if ( dataBuffer != null ) {
@@ -281,6 +320,9 @@ public class GlSketch extends GlShape
   //   GL.setUniformMatrix( mpUMVPMatrix, mvpMatrix );
   // }
 
+  /** bind the data of the line buffer
+   * @param mvpMatrix   model-view-projection matrix
+   */
   private void bindDataLine( float[] mvpMatrix )
   {
     if ( lineBuffer != null ) {
@@ -292,6 +334,9 @@ public class GlSketch extends GlShape
     GL.setUniformMatrix( mlUMVPMatrix, mvpMatrix );
   }
 
+  /** bind the data of the area buffer
+   * @param mvpMatrix   model-view-projection matrix
+   */
   private void bindDataArea( float[] mvpMatrix )
   {
     if ( areaBuffer != null ) {
@@ -310,6 +355,8 @@ public class GlSketch extends GlShape
   //   GLES20.glActiveTexture( 0 );
   // }
   // ------------------------------------------------------------------------------
+  /** 2D point
+   */
   class Point2D
   {
     double x, y;
@@ -317,26 +364,51 @@ public class GlSketch extends GlShape
     Point2D( Vector3D v, int i ) { x = v.x; y = v.y; idx = i; }
   }
 
+  /** return true if (V1,V2,V#) is left-handed - ie the Z-comp of (V2-V1) x (V3-V1) is negative
+   * @param v1   first point
+   * @param v2   second point
+   * @param v3   third point
+   */
   private boolean isRightHanded( Point2D v1, Point2D v2, Point2D v3 )
   {
     return ( v2.x - v1.x ) * ( v3.y - v1.y ) - ( v3.x - v1.x ) * ( v2.y - v1.y ) < 0;
   }
 
+  /** @return true if a point is inside a triangle right-hand-wise
+   * @param v0   point
+   * @param v1   first triangle vertex 
+   * @param v2   second triangle vertex 
+   * @param v3   third triangle vertex 
+   */
   private boolean isRightInside( Point2D v0, Point2D v1, Point2D v2, Point2D v3 )
   {
     return isRightHanded( v1, v2, v0 ) && isRightHanded( v2, v3, v0 ) && isRightHanded( v3, v1, v0 );
   }
 
+  /** return true if (V1,V2,V#) is left-handed - ie the Z-comp of (V2-V1) x (V3-V1) is positive
+   * @param v1   first point
+   * @param v2   second point
+   * @param v3   third point
+   */
   private boolean isLeftHanded( Point2D v1, Point2D v2, Point2D v3 )
   {
     return ( v2.x - v1.x ) * ( v3.y - v1.y ) - ( v3.x - v1.x ) * ( v2.y - v1.y ) > 0;
   }
 
+  /** @return true if a point is inside a triangle left-hand-wise
+   * @param v0   point
+   * @param v1   first triangle vertex 
+   * @param v2   second triangle vertex 
+   * @param v3   third triangle vertex 
+   */
   private boolean isLeftInside( Point2D v0, Point2D v1, Point2D v2, Point2D v3 )
   {
     return isLeftHanded( v1, v2, v0 ) && isLeftHanded( v2, v3, v0 ) && isLeftHanded( v3, v1, v0 );
   }
 
+  /** @return array of indices of area triuangulation
+   * @param area    area
+   */
   private int[] triangulate( SketchLine area )
   {
     int sz = area.size();
@@ -427,6 +499,11 @@ public class GlSketch extends GlShape
   // ------------------------------------------------------------------------------
   // point Vector3D NOT in GL orientation (Y upward)
 
+  /** initialize GL vertex buffer
+   * @param xmed   X coord of center (reference point)
+   * @param ymed   Y coord of center
+   * @param zmed   Z coord of center
+   */
   private void initBuffer( double xmed, double ymed, double zmed )
   {
     float x2 = 144.0f / GlModel.mWidth;
@@ -570,6 +647,9 @@ public class GlSketch extends GlShape
   // private static int maUPointSize;
   private static int maAColor;
 
+  /** initialize GL
+   * @param ctx  context
+   */
   static void initGL( Context ctx ) 
   {
     mProgram = GL.makeProgram( ctx, R.raw.name_vertex, R.raw.name_fragment );
@@ -582,6 +662,9 @@ public class GlSketch extends GlShape
     setLocationsArea( mProgramArea );
   }
 
+  /** set OpenGL locations
+   * @param program   program handle
+   */
   private static void setLocations( int program ) 
   {
     mAPosition  = GL.getAttribute( program, GL.aPosition );
@@ -600,6 +683,9 @@ public class GlSketch extends GlShape
   //   mpUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
   // }
 
+  /** set OpenGL locations for line
+   * @param program   program handle
+   */
   private static void setLocationsLine( int program ) 
   {
     mlAPosition  = GL.getAttribute( program, GL.aPosition );
@@ -610,6 +696,9 @@ public class GlSketch extends GlShape
     // TDLog.v("SKETCH line locs " + mlAPosition + " " + mlAColor + " " + mlUMVPMatrix + " " + mProgramLine );
   }
 
+  /** set OpenGL locations for area
+   * @param program   program handle
+   */
   private static void setLocationsArea( int program ) 
   {
     maAPosition  = GL.getAttribute( program, GL.aPosition );
@@ -629,6 +718,9 @@ public class GlSketch extends GlShape
   //   loadSymbols( dirpath );
   // }
 
+  /** load a set of drawing symbols - used for points
+   * @param dir  folder with the drawing symbols
+   */
   static void loadSymbols( File dir )
   {
     if ( mBitmap != null ) return;
@@ -642,7 +734,11 @@ public class GlSketch extends GlShape
     for ( File file : files ) addSymbol( file, canvas );
   }
 
-  // XYZ-med in OpenGL
+  /** load a symbol 
+   * @param file   symbol file
+   * @param canvas canvas with the bitmap for the symbols
+   * @note XYZ-med in OpenGL
+   */
   private static void addSymbol( File file, Canvas canvas )
   {
     String th_name = null;
@@ -697,6 +793,13 @@ public class GlSketch extends GlShape
     }
   }
 
+  /** draw a symbol
+   * @param path_str  symbol path-string
+   * @param color     paint color
+   * @param canvas    canvas
+   * @param index     index of the symbol - it determines where to draw on the canvas
+   * @return true if success
+   */
   private static boolean drawSymbol( String path_str, int color, Canvas canvas, int index )
   {
     Paint paint = new Paint();
@@ -716,6 +819,9 @@ public class GlSketch extends GlShape
     return true;
   }
     
+  /** @return path built from a path-string
+   * @param path_str   path-string
+   */
   private static Path makePointPath( String path_str )
   {
     if ( path_str == null ) return null;

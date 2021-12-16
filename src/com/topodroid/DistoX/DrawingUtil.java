@@ -55,6 +55,13 @@ public class DrawingUtil
   private static int toBoundX( float x, float y ) { return Math.round(x); }
   private static int toBoundY( float x, float y ) { return Math.round(y); }
 
+  /** make a splay path
+   * @param dpath   splay path
+   * @param xx1     first point X coord [world]
+   * @param yy1     first point Y coord [world]
+   * @param xx2     second point X coord [world]
+   * @param yy2     second point Y coord [world]
+   */
   static
   void makeDrawingSplayPath( DrawingSplayPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
@@ -66,6 +73,13 @@ public class DrawingUtil
     dpath.makePath( x1, y1, x2, y2 );
   }
 
+  /** make a straight path
+   * @param dpath   path
+   * @param xx1     first point X coord [world]
+   * @param yy1     first point Y coord [world]
+   * @param xx2     second point X coord [world]
+   * @param yy2     second point Y coord [world]
+   */
   static
   void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2 )
   {
@@ -77,6 +91,15 @@ public class DrawingUtil
     dpath.makePath( x1, y1, x2, y2 ); // this sets the midpoint only
   }
 
+  /** make a straight path
+   * @param dpath   path
+   * @param xx1     first point X coord [world]
+   * @param yy1     first point Y coord [world]
+   * @param xx2     second point X coord [world]
+   * @param yy2     second point Y coord [world]
+   * @param xoff    X offset [scene] 
+   * @param yoff    Y offset [scene] 
+   */
   static
   void makeDrawingPath( DrawingPath dpath, float xx1, float yy1, float xx2, float yy2, float xoff, float yoff )
   {
@@ -88,6 +111,14 @@ public class DrawingUtil
     dpath.makePath( x1 - xoff, y1 - yoff, x2 - xoff, y2 - yoff );
   }
 
+  /** make a straight path
+   * @param z       grid line index - gray-color goes with the index 
+   * @param x1      first point X coord [scene]
+   * @param y1      first point Y coord [scene]
+   * @param x2      second point X coord [scene]
+   * @param y2      second point Y coord [scene]
+   * @param surface drawing surface
+   */
   private static void addGridLine( int z, float x1, float x2, float y1, float y2, DrawingSurface surface )
   { 
     // TDLog.v("add grid-line Z " + z + " X " + x1 + " " + x2 + " Y " + y1 + " " + y2 );
@@ -113,7 +144,13 @@ public class DrawingUtil
     surface.addGridPath( dpath, k );
   }
 
-  // used for plan/profile
+  /** make a straight path - used for plan/profile
+   * @param xmin    first point X coord [world]
+   * @param xmax    second point X coord [world]
+   * @param ymin    first point Y coord [world]
+   * @param ymax    second point Y coord [world]
+   * @param surface drawing surface
+   */
   static
   void addGrid( float xmin, float xmax, float ymin, float ymax, DrawingSurface surface )
   {
@@ -152,7 +189,15 @@ public class DrawingUtil
     }
   }
 
-  // used for x-sections
+  /** make a straight path - used for x-sections
+   * @param xmin    first point X coord [world]
+   * @param xmax    second point X coord [world]
+   * @param ymin    first point Y coord [world]
+   * @param ymax    second point Y coord [world]
+   * @param xoff    X offset [scene]
+   * @param yoff    Y offset [scene]
+   * @param surface drawing surface
+   */
   static
   void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
@@ -194,15 +239,26 @@ public class DrawingUtil
     // TDLog.v("grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
   }
 
+  /** @return X coord corrected with the declination: x' = cos(d) * x - sin(d) * y
+   * @param x   X coord [canvas]
+   * @param y   Y coord [canvas]
+   * @param cd  cos( declination )
+   * @param sd  sin( declination )
+   */
   public static double declinatedX( double x, double y, double cd, double sd ) 
   {
     return cd * ( x - DrawingUtil.CENTER_X ) - sd * ( y - DrawingUtil.CENTER_Y );
   }
 
+  /** @return Y coord corrected with the declination: y' = sin(d) * x + cos(d) * y
+   * @param x   X coord [canvas]
+   * @param y   Y coord [canvas]
+   * @param cd  cos( declination )
+   * @param sd  sin( declination )
+   */
   public static double declinatedY( double x, double y, double cd, double sd ) 
   {
     return cd * ( y - DrawingUtil.CENTER_Y ) + sd * ( x - DrawingUtil.CENTER_X );
   }
-
 
 }

@@ -44,7 +44,7 @@ import com.topodroid.common.PlotType;
 import com.topodroid.calib.CalibInfo;
 
 
-import java.io.File;
+import java.io.File; // PRIVATE FILE
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
@@ -1756,9 +1756,9 @@ public class TopoDroidApp extends Application
           
           // String pathname = TDPath.getSymbolFile( filepath );
           // File file = TDFile.getFile( pathname );
-          File file = TDFile.getPrivateFile( type, filepath );
-          TDLog.v("PATH " + "uncompress symbol " + type + " " + filepath + " " + file.getPath() );
-          if ( overwrite || ! file.exists() ) {
+          // File file = TDFile.getPrivateFile( type, filepath );
+          TDLog.v("PATH " + "uncompress symbol " + type + " " + filepath );
+          if ( overwrite || ! TDFile.existPrivateFile( type, filepath ) ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {
             //   if ( ! file.renameTo( TDFile.getFile( TDPath.getSymbolSaveFile( filepath ) ) ) ) TDLog.Error("File rename error");
@@ -1766,7 +1766,7 @@ public class TopoDroidApp extends Application
 
             // TDPath.checkPath( pathname );
             // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
-            FileOutputStream fout = TDFile.getFileOutputStream( file );
+            FileOutputStream fout = TDFile.getPrivateFileOutputStream( type, filepath );
             int c;
             while ( ( c = zin.read( buffer ) ) != -1 ) {
               fout.write(buffer, 0, c); // offset 0 in buffer
@@ -1799,7 +1799,7 @@ public class TopoDroidApp extends Application
         if ( ze.isDirectory() ) continue;
         if ( ! filepath.endsWith( TDPath.DIR_BIN ) ) continue;
         // String pathname =  TDPath.getBinFilename( filepath );
-        File file = TDPath.getBinFile( filepath );
+        File file = TDPath.getBinFile( filepath ); // PRIVATE FILE
         if ( overwrite || ! file.exists() ) {
           // TDPath.checkPath( pathname );
           // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
@@ -2240,7 +2240,7 @@ public class TopoDroidApp extends Application
 
   public int uploadFirmware( String name )
   {
-    TDLog.v("FW " + "app upload FW " + name );
+    TDLog.v("App - upload FW " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2251,11 +2251,10 @@ public class TopoDroidApp extends Application
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if ( ! (mComm instanceof DistoX310Comm) ) return -1;
-    // String pathname = TDPath.getBinFilename( name );
-    File file = TDPath.getBinFile( name );
-    TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
+    File file = TDPath.getBinFile( name ); // PRIVATE FILE
+    TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
     // TDLog.LogFile( "Firmware upload file " + file.getPath() );
-    TDLog.v("FW " + "app Firmware upload file " + file.getPath() );
+    TDLog.v("App - firmware upload file " + file.getPath() );
     // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
     return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
   }
@@ -2534,7 +2533,7 @@ public class TopoDroidApp extends Application
     if ( info == null ) return false;
     TDLog.v( "async-export survey " + TDInstance.survey + " Index " + exportIndex );
     String format = context.getResources().getString(R.string.saved_file_1);
-    if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
     (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, toast )).execute();
     return true;
   }

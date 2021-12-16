@@ -513,11 +513,11 @@ public class SurveyWindow extends Activity
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
-        if ( TDSetting.mExportUri ) {
+        // if ( TDSetting.mExportUri ) { // FIXME-URI
           selectExportFromProvider( index, filename );
-        } else {
-          TopoDroidApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
-        }
+        // } else {
+        //   TopoDroidApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
+        // }
       }
     } else {
       TDLog.Error("Do export - negative index " + index );
@@ -529,7 +529,7 @@ public class SurveyWindow extends Activity
   // FIXME_URI
   private void selectExportFromProvider( int index, String filename ) // EXPORT
   {
-    if ( ! TDSetting.mExportUri ) return;
+    // if ( ! TDSetting.mExportUri ) return; // FIXME-URI
     // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
     Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
     intent.setType( TDConst.mMimeType[index] );
@@ -544,7 +544,7 @@ public class SurveyWindow extends Activity
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
-    if ( ! TDSetting.mExportUri ) return;
+    // if ( ! TDSetting.mExportUri ) return; // FIXME-URI
     if ( intent == null ) return;
     // Bundle extras = intent.getExtras();
     switch ( request ) {

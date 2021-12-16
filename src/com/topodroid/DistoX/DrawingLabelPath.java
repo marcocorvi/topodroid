@@ -33,6 +33,14 @@ import java.util.Locale;
 
 public class DrawingLabelPath extends DrawingPointPath
 {
+  /** cstr
+   * @param text     label text
+   * @param off_x    X coord
+   * @param off_y    Y coord
+   * @param scale    text scale (Therion point scale)
+   * @param options  additional Therion point options
+   * @param scrap    point scrap index
+   */
   DrawingLabelPath( String text, float off_x, float off_y, int scale, String options, int scrap )
   {
     super( BrushManager.getPointLabelIndex(), off_x, off_y, scale, text, options, scrap );
@@ -51,6 +59,12 @@ public class DrawingLabelPath extends DrawingPointPath
     doSetScale( mScale );
   }
 
+  /** deserialize from an input stream
+   * @param version   stream version
+   * @param dis       input stream
+   * @param x         ...
+   * @param y         ...
+   */
   public static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {
     float ccx, ccy;
@@ -102,6 +116,10 @@ public class DrawingLabelPath extends DrawingPointPath
   //   }
   // }
 
+  /** draw the label on the screen
+   * @param canvas   canvas
+   * @param bbox     clipping rectangle
+   */
   @Override
   public void draw( Canvas canvas, RectF bbox )
   {
@@ -111,6 +129,12 @@ public class DrawingLabelPath extends DrawingPointPath
     }
   }
 
+  /** draw the label on the screen
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping rectangle
+   */
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
@@ -128,6 +152,8 @@ public class DrawingLabelPath extends DrawingPointPath
     }
   }
 
+  /** @return the font-size factor according to the point scale
+   */
   private float fontSize( )
   {
     switch ( mScale ) {
@@ -139,6 +165,8 @@ public class DrawingLabelPath extends DrawingPointPath
     return 1;
   }
 
+  /** create the path for the label text
+   */
   private void makeLabelPath( /* float f */ )
   {
     Rect r = new Rect();
@@ -152,12 +180,18 @@ public class DrawingLabelPath extends DrawingPointPath
     makeStraightPath( 0, 0, ca, sa, cx, cy );
   }
 
+  /** set the point scale
+   * @param scale   (Therion) scale
+   */
   @Override
   void setScale( int scale )
   {
     if ( scale != mScale ) doSetScale( scale );
   }
 
+  /** set the point scale and make the label path
+   * @param scale   (Therion) scale
+   */
   private void doSetScale( int scale )
   {
     mScale = scale;
@@ -167,6 +201,9 @@ public class DrawingLabelPath extends DrawingPointPath
     makeLabelPath( /* f */ );
   }
 
+  /** set the orientation
+   * @param angle   orientation [degrees] - 0 = vertical
+   */
   @Override
   void setOrientation( double angle ) 
   { 
@@ -174,7 +211,8 @@ public class DrawingLabelPath extends DrawingPointPath
     makeLabelPath( /* fontSize() */ );
   }
 
-
+  /** set the size of the text accrding to the point scale
+   */ 
   private void setTextSize()
   {
     float f = 1.0f;
@@ -187,6 +225,8 @@ public class DrawingLabelPath extends DrawingPointPath
     mPaint.setTextSize( TDSetting.mLabelSize * f );
   }
 
+  /** @return Therion string representation of the label point
+   */
   @Override
   String toTherion( )
   {
@@ -219,6 +259,13 @@ public class DrawingLabelPath extends DrawingPointPath
 //     pw.format("</item>\n");
 //   }
 
+  /** write the label point in cSurvey format
+   * @param pw        output writer
+   * @param survey    (cSurvey) survey name
+   * @param cave      cSurvey cave name
+   * @param branch    cSurvey branch name
+   * @param bind      cSurvey binding
+   */
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
@@ -233,6 +280,10 @@ public class DrawingLabelPath extends DrawingPointPath
     pw.format("</item>\n");
   }
 
+  /** serialize the label point
+   * @param dos    output stream
+   * @param scrap  scrap index
+   */
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {

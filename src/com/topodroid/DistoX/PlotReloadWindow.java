@@ -52,7 +52,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import java.io.File;
+import java.io.File; // TDR FILE
 import java.util.ArrayList;
 
 public class PlotReloadWindow extends ItemDrawer
@@ -187,7 +187,7 @@ public class PlotReloadWindow extends ItemDrawer
     String filetdr = filename + ".tdr";
 
     long millis = System.currentTimeMillis();
-    File file = TDFile.getTopoDroidFile( tdr );
+    File file = TDFile.getTopoDroidFile( tdr ); // TDR FILE
     if ( file.exists() ) {
       long len = file.length();
       String age = TDUtil.getAge( millis - file.lastModified() );

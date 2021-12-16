@@ -43,8 +43,7 @@ class DrawingScaleReference
   private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
 
 
-  /**
-   * Costructor
+  /** cstr
    * @param loc bottom-right location of the scale reference on the screen
    *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
    * @param widthPercent maximum width of scale reference in percentage of screen width
@@ -55,8 +54,7 @@ class DrawingScaleReference
     this( null, loc, widthPercent ); //  with_azimuth 
   }
 
-  /**
-   * Costructor
+  /** cstr
    * @param p   paint used to draw the scale reference. If null, a default painter will be used
    * @param loc bottom-right location of the scale reference on the screen
    *            (negative values are allowed with the meaning of negative offset from screen bottom-right)
@@ -88,15 +86,11 @@ class DrawingScaleReference
     // mExtendAzimuth = with_azimuth;
   }
 
-  /**
-   * Get the current color (or white)
-   * @return scale reference color
+  /** @return scale reference current color (or white)
    */
   int color() { return mPaint.getColor(); }
 
-  /**
-   * Set new paint to be used to draw the scale reference.
-   *
+  /** * Set new paint to be used to draw the scale reference.
    * @param paint the new paint to be used. If null, the setting is ignored.
    */
   void setPaint( Paint paint ) {
@@ -128,16 +122,22 @@ class DrawingScaleReference
     return (k > 0)? refLen : -1; // neg. --> cannot draw
   }
 
-  /**
-   * Draw the scale reference
+  /** draw the scale reference
    * @param canvas canvas to draw in
    * @param zoom zoom factor used
-     */
+   */
   void draw( Canvas canvas, float zoom, boolean landscape )
   {
     draw( canvas, zoom, landscape, mLocation.x, mLocation.y );
   }
 
+  /** draw the scale reference
+   * @param canvas     canvas to draw in
+   * @param zoom       zoom factor used
+   * @param landscape  whether in landscape presentation
+   * @param locx       X coord of the point where to draw the scale-reference
+   * @param locy       Y coord of the point where to draw the scale-reference
+   */
   void draw( Canvas canvas, float zoom, boolean landscape, float locx, float locy )
   {
     if (canvas != null)

@@ -96,7 +96,7 @@ public class MainWindow extends Activity
                         implements OnItemClickListener
                         , OnItemLongClickListener
                         , View.OnClickListener
-                        , View.OnLongClickListener
+                        // , View.OnLongClickListener
                         , OnCancelListener
                         , OnDismissListener
 {
@@ -228,18 +228,18 @@ public class MainWindow extends Activity
     (new SurveyNewDialog( mActivity, this, -1, -1 )).show(); 
   }
 
-  @Override
-  public boolean onLongClick( View view )
-  {
-    if ( view != mButton1[2] ) return false; // IMPORT
-    // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
-    // int len = filenames.size() + zipnames.size();
-    // selectImportFromDialog();
-    // ImportData import_data = new ImportData();
-    mImportData = new ImportData();
-    doImport( TDConst.mSurveyImportTypes[0], mImportData ); // ZIP
-    return true;
-  }
+  // @Override
+  // public boolean onLongClick( View view )
+  // {
+  //   if ( view != mButton1[2] ) return false; // IMPORT ZIP
+  //   // TDFile.ExtensionFilter ext_filter = new TDFile.ExtensionFilter( TDPath.getImportTypes() );
+  //   // int len = filenames.size() + zipnames.size();
+  //   // selectImportFromDialog();
+  //   // ImportData import_data = new ImportData();
+  //   mImportData = new ImportData();
+  //   doImport( TDConst.mSurveyImportTypes[0], mImportData ); // ZIP
+  //   return true;
+  // }
 
   // private void selectImportFromDialog() // IMPORT directly from dialog
   // {
@@ -850,7 +850,7 @@ public class MainWindow extends Activity
     mButtonSap5    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap5 );
     mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
 
-    mButton1[2].setOnLongClickListener( this );
+    // mButton1[2].setOnLongClickListener( this ); // IMPORT ZIP
     setButtonDevice();
     // mRelLayout.invalidate();
   }
@@ -1122,8 +1122,7 @@ public class MainWindow extends Activity
                 filename = filename.substring( pos+1 );
               }
             } else {
-              File file = new File(path);
-              filename = file.getName();
+              filename = (new File(path)).getName(); // FILE to get the survey name
             }
             TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {

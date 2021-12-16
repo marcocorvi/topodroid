@@ -21,6 +21,7 @@ import android.content.Context;
 
 import android.graphics.ImageFormat;
 
+// API-21 use android.hardware.camera2 clases
 import android.hardware.Camera;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;

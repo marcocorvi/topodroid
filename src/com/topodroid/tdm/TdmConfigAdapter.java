@@ -32,6 +32,12 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
   private Context mContext;
   private OnClickListener mOnClick;
 
+  /** cstr
+   * @param ctx     context
+   * @param id      resource id
+   * @param items   list of configurations
+   * @param onClick listener for taps on the items
+   */
   public TdmConfigAdapter( Context ctx, int id, ArrayList< TdmConfig > items, OnClickListener onClick )
   {
     super( ctx, id, items );
@@ -41,12 +47,18 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
   }
 
+  /** @return the configuration at a given index
+   * @param pos   index
+   */
   public TdmConfig get( int pos ) 
   { 
     TDLog.v("TdmConfig get item at pos " + pos );
     return mItems.get(pos);
   }
 
+  /** @return the configuration of a survey
+   * @param survey  survey name
+   */
   public TdmConfig getTdmConfig( String survey ) 
   {
     TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
@@ -58,6 +70,10 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     return null;
   }
 
+  /** delete a project config file
+   * @param filepath  file path
+   * @return true if success
+   */
   boolean deleteTdmConfig( String filepath )
   {
     File file = new File( filepath );
@@ -71,6 +87,11 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     return ret;
   }
 
+  /** @return the view for a configuration 
+   * @param pos         configuration index
+   * @param convertView convertible (reusable) view
+   * @param parent      ...
+   */
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
@@ -91,6 +112,8 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     return v;
   }
 
+  /** @return number of configurations
+   */
   public int size()
   {
     return mItems.size();

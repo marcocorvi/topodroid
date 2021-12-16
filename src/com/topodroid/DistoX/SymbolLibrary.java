@@ -212,6 +212,17 @@ public class SymbolLibrary
     return ret;
   }
 
+  ArrayList< String > getSymbolNamesExcept( String skip )
+  {
+    ArrayList< String > ret = new ArrayList<>();
+    for ( Symbol s : mSymbols ) {
+      if ( s.getThName().equals( skip ) ) continue;
+      ret.add( s.getName() );
+    }
+    return ret;
+  }
+
+
   boolean isSymbolEnabled( String th_name ) 
   {
     Symbol a = get( th_name );

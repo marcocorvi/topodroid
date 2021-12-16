@@ -20,7 +20,7 @@ import com.topodroid.common.PlotType;
 
 import java.lang.ref.WeakReference;
 
-import java.io.File;
+import java.io.File; // TDR/BACKUP FILE
 // import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -141,10 +141,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       TDLog.v( "save plot Therion file EXPORT " + mFullName );
       // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
       // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
-      ParcelFileDescriptor pfd = null;
+      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
+      if ( pfd == null ) return false;
       try {
-        pfd = TDsafUri.docWriteFileDescriptor( mUri );
-        BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+        // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+        BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
         DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
         // bw.flush(); // FIXME system error
         bw.close();
@@ -160,10 +161,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // TDLog.v( "save plot OVERVIEW " + mFullName );
       // File file = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
       // DrawingIO.exportTherion( mManager, mType, file, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
-      ParcelFileDescriptor pfd = null;
+      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
+      if ( pfd == null ) return false;
       try {
-        pfd = TDsafUri.docWriteFileDescriptor( mUri );
-        BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+        // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
+        BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
         DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
         // bw.flush(); // FIXME necessary ???
         bw.close();
@@ -255,7 +257,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
       // String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
       // File file1 = TDFile.getFile( tempname1 );
-      File file1 = TDFile.getExternalTempFile( Integer.toString(mSuffix) + Long.toString(now) );
+      File file1 = TDFile.getExternalTempFile( Integer.toString(mSuffix) + Long.toString(now) ); // TDR/BACKUP FILE
 
       // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
       // TDLog.v( "saving binary " + mFullName + " file " + file1.getPath() );
@@ -275,7 +277,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // TDLog.v( "save binary completed" + mFullName );
 
         String filename1 = TDPath.getTdrFileWithExt( mFullName );
-        File file0 = TDFile.getTopoDroidFile( filename1 );
+        File file0 = TDFile.getTopoDroidFile( filename1 ); // TDR/BACKUP FILE
         if ( file0.exists() ) {
           if ( ! TDFile.renameTempFile( file0, filename1 + TDPath.BCK_SUFFIX ) ) {
             TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );

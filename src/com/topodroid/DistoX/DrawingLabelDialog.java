@@ -44,6 +44,12 @@ class DrawingLabelDialog extends MyDialog
   // private CheckBox mCBwater = null;
   // private CheckBox mCBtext  = null;
 
+  /** cstr 
+   * @param context   context
+   * @param activity  ...
+   * @param x         X coord
+   * @param y         Y coord
+   */
   DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
   {
     super(context, R.string.DrawingLabelDialog );
@@ -73,6 +79,8 @@ class DrawingLabelDialog extends MyDialog
     }
   }
 
+  /** reset (clear) levels chcekboxes
+   */
   private void setCBlayers()
   {
     mCBbase  = (CheckBox) findViewById( R.id.cb_layer_base  );
@@ -93,6 +101,8 @@ class DrawingLabelDialog extends MyDialog
     // mCBtext .setChecked( true );
   }
 
+  /** @return the levels flag
+   */
   private int getLevel()
   {
     if ( TDSetting.mWithLevels < 2 ) return DrawingLevel.LEVEL_DEFAULT;
@@ -108,6 +118,9 @@ class DrawingLabelDialog extends MyDialog
     return level;
   }
 
+  /** implements user taps
+   * @param view   tapped view 
+   */
   @Override
   public void onClick(View view)
   {

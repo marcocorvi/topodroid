@@ -29,7 +29,7 @@ import com.topodroid.c3walls.cw.CWConvexHull;
 import com.topodroid.c3walls.cw.ConvexHullComputer;
 import com.topodroid.c3walls.pcrust.PowercrustComputer;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 // import java.io.FileReader;
 import java.io.InputStreamReader;
@@ -37,7 +37,6 @@ import java.io.BufferedReader;
 import java.io.FileWriter;
 import java.io.StringWriter;
 import java.io.PrintWriter;
-import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -714,15 +713,15 @@ public class TglParser
     return ret;
   }
 
-  boolean checkFile( String pathname, boolean overwrite )
-  {
-    // TDLog.v( "Check file " + pathname + " overwrite " + overwrite );
-    if ( (new File(pathname)).exists() && ! overwrite ) {
-      TDToast.makeWarn( TDInstance.formatString( R.string.warning_not_overwrite, pathname ) );
-      return false;
-    }
-    return true;
-  }
+  // private boolean checkFile( String pathname, boolean overwrite )
+  // {
+  //   // TDLog.v( "Check file " + pathname + " overwrite " + overwrite );
+  //   if ( (new File(pathname)).exists() && ! overwrite ) {
+  //     TDToast.makeWarn( TDInstance.formatString( R.string.warning_not_overwrite, pathname ) );
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   protected double getGridSize()
   {

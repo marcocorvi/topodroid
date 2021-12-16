@@ -20,7 +20,7 @@ import com.topodroid.ui.TDImage;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-import java.io.File;
+import java.io.File; // JPEG FILE
 // import java.io.IOException;
 
 import android.os.Bundle;
@@ -162,7 +162,7 @@ class DrawingLineSectionDialog extends MyDialog
       String subdir = TDInstance.survey + "/photo"; // "photo/" + TDInstance.survey;
       String filename = mPlotInfo.name + ".jpg";
       mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, mPlotInfo.name );
-      File imagefile = TDFile.getTopoDroidFile( mFilename );
+      File imagefile = TDFile.getTopoDroidFile( mFilename ); // JPEG FILE
       if ( TDFile.hasMSfile( subdir, filename ) ) { // if ( imagefile.exists() )
 	mTdImage = new TDImage( mFilename );
         tv_azimuth.setText( String.format( mContext.getResources().getString( R.string.photo_azimuth_clino ), mTdImage.azimuth(), mTdImage.clino() ) );

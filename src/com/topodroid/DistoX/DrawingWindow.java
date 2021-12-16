@@ -698,6 +698,10 @@ public class DrawingWindow extends ItemDrawer
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
 
+  // ----------------------------------------------------------
+
+  /** @return the set of station names
+   */
   Set<String> getStationNames() { return mApp_mData.selectAllStations( TDInstance.sid ); }
 
   /** test if the drawing window is in draw_edit
@@ -705,11 +709,14 @@ public class DrawingWindow extends ItemDrawer
    */
   boolean isNotModeEdit() { return mMode != MODE_EDIT; }
 
-  // ----------------------------------------------------------
-  // PLOT NAME(S)
+  // PLOT NAME(S) ----------------------------------------------------------
 
+  /** @return the active plot name
+   */
   String getName() { return (mName != null)? mName : ""; }
 
+  /** @return the plot name (by the active type)
+   */
   String getPlotName() 
   {
     if ( PlotType.isAnySection( mType ) ) {
@@ -722,6 +729,8 @@ public class DrawingWindow extends ItemDrawer
     return "";
   }
 
+  /** @return the plot origin (by the active type)
+   */
   String getPlotStation()
   {
     if ( PlotType.isProfile( mType ) ) {
@@ -732,6 +741,9 @@ public class DrawingWindow extends ItemDrawer
     return mPlot3.start; // FIXME or should it be null ?
   }
 
+  /** rename a plot
+   * @param name   new plot name
+   */
   void renamePlot( String name ) 
   {
     if ( name == null || name.length() == 0 ) {
@@ -794,18 +806,29 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** @return the active plot type
+   */
   long getPlotType()   { return mType; }
 
+  /** @return true if the active plot is extended profile
+   */
   boolean isExtendedProfile() { return mType == PlotType.PLOT_EXTENDED; }
 
+  /** @return true if the active plot is an xsection
+   */
   boolean isAnySection() { return PlotType.isAnySection( mType ); }
 
+  /** @return true if in landscape presentation
+   */
   boolean isLandscape() { return mLandscape; }
 
+  /** @return zoom value
+   */
   public float zoom() { return mZoom; }
 
   // ----------------------------------------------------------------
   private Handler saveHandler = new Handler();
+
   private final Runnable saveRunnable = new Runnable() {
     @Override 
     public void run() {
@@ -814,6 +837,8 @@ public class DrawingWindow extends ItemDrawer
     }
   };
 
+  /** mark the plot "modified"
+   */
   private void modified()
   {
     if ( ! mModified ) {
@@ -822,6 +847,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** clear the "modified" flag
+   */
   private void resetModified()
   {
     mModified = false;
@@ -6084,7 +6111,7 @@ public class DrawingWindow extends ItemDrawer
       }
       float scale = manager.getBitmapScale();
       String format = getResources().getString( R.string.saved_file_2 );
-      if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       // TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
       new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
     }
@@ -6107,7 +6134,7 @@ public class DrawingWindow extends ItemDrawer
 
       if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+        // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
         doSavePdf( uri, manager, fullname );
       }
     }
@@ -6130,10 +6157,11 @@ public class DrawingWindow extends ItemDrawer
       }
       // TDPath.getPdfDir();
       // TDLog.v( "PDF export <" + fullname + ">");
-      ParcelFileDescriptor pfd = null;
+      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
+      if ( pfd == null ) return;
       try {
-        pfd = TDsafUri.docWriteFileDescriptor( uri );
-        OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+        // OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+        OutputStream fos = TDsafUri.docFileOutputStream( pfd );
 
         // PrintAttributes.Builder builder = new PrintAttributes.Builder();
         // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
@@ -6184,7 +6212,7 @@ public class DrawingWindow extends ItemDrawer
     private void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
       // TDLog.v( "save csx");
-      if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
     }
 
@@ -6198,7 +6226,7 @@ public class DrawingWindow extends ItemDrawer
       TDNum num = mNum;
       // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
       // TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
-      if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       if ( "png".equals( ext ) ) {
         savePng( uri, type );
       } else if ( "pdf".equals( ext ) ) {
@@ -6263,7 +6291,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
         if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0 );
       }
-      if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
     }
 
@@ -6318,7 +6346,7 @@ public class DrawingWindow extends ItemDrawer
     }
     try { 
       // TDLog.v( "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
-      if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
     } catch ( RejectedExecutionException e ) {
       TDLog.Error("Sketch saving exec rejected");
@@ -6794,7 +6822,7 @@ public class DrawingWindow extends ItemDrawer
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
     // TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
-    if ( TDSetting.mExportUri ) {
+    // if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
       } else {
@@ -6806,23 +6834,23 @@ public class DrawingWindow extends ItemDrawer
         intent.putExtra( Intent.EXTRA_TITLE, filename );
         startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
       }
-    } else {
-      if ( mExportIndex == TDConst.SURVEY_FORMAT_TH2 ) {
-        doSaveTh2( null, mType, true );
-      } else if (mExportIndex == TDConst.SURVEY_FORMAT_CSX ) {
-        if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
-          if ( mPlot1 != null ) {
-            String origin = mPlot1.start;
-            int suffix    = PlotSave.EXPORT;
-            PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
-            PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
-            doSaveCsx( null, origin, psd1, psd2, true );
-          }
-        }
-      } else {
-        saveWithExt( null, mType, mExportExt );
-      }
-    }
+    // } else {
+    //   if ( mExportIndex == TDConst.SURVEY_FORMAT_TH2 ) {
+    //     doSaveTh2( null, mType, true );
+    //   } else if (mExportIndex == TDConst.SURVEY_FORMAT_CSX ) {
+    //     if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
+    //       if ( mPlot1 != null ) {
+    //         String origin = mPlot1.start;
+    //         int suffix    = PlotSave.EXPORT;
+    //         PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
+    //         PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
+    //         doSaveCsx( null, origin, psd1, psd2, true );
+    //       }
+    //     }
+    //   } else {
+    //     saveWithExt( null, mType, mExportExt );
+    //   }
+    // }
   }
 
   /** interface IExporter: export sketch
@@ -6830,7 +6858,7 @@ public class DrawingWindow extends ItemDrawer
    */
   public void doUriExport( Uri uri ) 
   {
-    if ( ! TDSetting.mExportUri ) return;
+    // if ( ! TDSetting.mExportUri ) return;
     // TDLog.v( "do URI export. index " + mExportIndex );
     // int mExportIndex = TDConst.plotExportIndex( export_type );
     switch ( mExportIndex ) {
@@ -7515,7 +7543,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case TDRequest.REQUEST_GET_EXPORT:
-        if ( TDSetting.mExportUri && resCode == Activity.RESULT_OK ) {
+        if ( /* TDSetting.mExportUri && */ resCode == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
           // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );

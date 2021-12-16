@@ -2643,13 +2643,13 @@ public class TopoGL extends Activity
   {
     mExport = export;
     mExport.mName = mSurveyName; 
-    if ( TDSetting.mExportUri ) {
+    // if ( TDSetting.mExportUri ) {
       TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
-    } else {
-      TDLog.v( "export with task - survey " + mSurveyName );
-      (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
-    }
+    //} else {
+    //  TDLog.v( "export with task - survey " + mSurveyName );
+    //  (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
+    //}
   }
 
   /** file selection
@@ -2693,12 +2693,12 @@ public class TopoGL extends Activity
         if ( uri != null ) importSurvey( uri );
         break;
       case REQUEST_EXPORT_FILE:
-        if ( TDSetting.mExportUri ) {
+        // if ( TDSetting.mExportUri ) {
           if ( uri != null && mExport != null ) {
             TDLog.v("export survey. uri " + uri.toString() );
             (new ExportTask( this, mParser, uri, mExport )).execute(); 
           }
-        }
+        // }
         mExport = null;
         break;
     }

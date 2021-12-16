@@ -69,6 +69,7 @@ public class BrushManager
   { return (mAreaLib != null) && mAreaLib.getSymbolByIndex( path.mAreaType ).mRoundTrip == rt; }
 
   static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNames(); }
+  static ArrayList< String > getLineNamesNoSection() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNamesExcept( SymbolLibrary.SECTION ); }
   static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList< String >()) : mAreaLib.getSymbolNames(); }
 
   static int getPointIndex( Symbol point ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndex( point ); }

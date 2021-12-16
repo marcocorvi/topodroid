@@ -47,12 +47,18 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
   private Uri mUri = null;
   private ExportData mExport;
 
+  /** cstr
+   * @param app     3D viewer
+   * @param parser  data parser
+   * @param uri     output uri
+   * @param export  export flags
+   */
   public ExportTask( TopoGL app, TglParser parser, Uri uri, ExportData export )
   {
     mApp    = app;
     mParser = parser;
-    if ( TDSetting.mExportUri ) mUri = uri; // FIXME_URI
-    mExport = export; // new ExportData( surveyname, export );
+    /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
+    mExport = new ExportData( export.mName, export ); // save a copy
   }
 
   @Override
@@ -67,43 +73,53 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
     TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType + " pathname " + pathname );
 
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
+    if ( pfd == null ) return false;
     boolean ret = false;
     try {
       switch ( mExport.mType ) {
         case ModelType.GLTF:
-          dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".glz" ) );
+          // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".glz" ) );
+          dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mApp.exportGltfModel( mExport.mType, dos, pathname, mExport );
           break;
         case ModelType.SHP_ASCII: // SHP export is only with its file and folder
-          dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".shz" ) );
+          // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".shz" ) );
+          dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mApp.exportShpModel( mExport.mType, dos, pathname, mExport );
           break;
         case ModelType.STL_BINARY:
-          dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".stl" ) );
+          // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".stl" ) );
+          dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mParser.exportModelBinary( mExport.mType, dos, mExport );
           break;
         case ModelType.STL_ASCII:
-          bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".stl" ) );
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".stl" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.KML_ASCII:
-          bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".kml" ) );
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".kml" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.CGAL_ASCII:
-          bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".cgal" ) );
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".cgal" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.LAS_BINARY:
-          dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".las" ) );
+          // dos = new DataOutputStream( (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( pathname + ".las" ) );
+          dos = new DataOutputStream( TDsafUri.docFileOutputStream( pfd ) );
           ret = mParser.exportModelBinary( mExport.mType, dos, mExport );
           break;
         case ModelType.DXF_ASCII:
-          bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".dxf" ) );
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".dxf" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         case ModelType.SERIAL:
-          bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".txt" ) );
+          // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( pathname + ".txt" ) );
+          bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
           ret = mParser.exportModelAscii( mExport.mType, bw, mExport );
           break;
         default:
