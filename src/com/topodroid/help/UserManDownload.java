@@ -18,7 +18,6 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
-import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.IOException;
@@ -64,8 +63,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
         InputStream in = http.getInputStream();
         ZipInputStream zin = new ZipInputStream( in );
         ZipEntry ze = null;
-       	File dir = TDFile.getManDir();
-        if ( /* (dir != null) && */ ( dir.exists() || dir.mkdirs() ) ) {
+        if ( TDFile.checkManDir() ) {
           while ( ( ze = zin.getNextEntry() ) != null ) {
             String name = ze.getName();
             if ( ! ze.isDirectory() ) { // normal file
@@ -73,8 +71,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
 	      if ( ! name.startsWith("README") ) {
-                File file = TDFile.getManFile( name );
-	        FileOutputStream fos = new FileOutputStream( file );
+	        FileOutputStream fos = TDFile.getManFileOutputStream( name );
 	        // FileOutputStream fos = TDInstance.context.openFileOutput( TDPath.getManFileName( name ), Context.MODE_PRIVATE );
                 // int size = 0;
                 int c;
@@ -83,7 +80,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
                   // size += c;
                 }
                 fos.close();
-                // if ( file.getPath().endsWith("png") ) TDLog.v( "File " + file.getPath() + " " + size );
+                // if ( file.getPath().endsWith("png") ) TDLog.v( "file " + file.getPath() + " " + size );
 	      }
             } else { // ze directory: not really an error
               TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );

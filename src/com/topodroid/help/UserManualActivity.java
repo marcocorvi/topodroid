@@ -60,7 +60,7 @@ public class UserManualActivity extends Activity
   private WebView mTVtext;
   private int mCloseOnBack = 0;
 
-  private void load( WebView view, String filename )
+  private void load( WebView view, String filename ) throws IOException
   {
     ++mCloseOnBack;
     // String filepath = TDPath.getManFile( filename );
@@ -75,49 +75,47 @@ public class UserManualActivity extends Activity
         if ( pos > 0 ) {
           String name = filename.substring( pos + NEEDLE.length() );
           String pagename = TDPath.getManFileName( name );
-          File pagefile = TDFile.getManFile( name );
+          // File pagefile = TDFile.getManFile( name );
           // TDLog.v( "MAN-2 pagefile " + pagefile.getPath() );
           // TDLog.v( "MAN-2 pagename " + pagename );
-          loadLocal( view, pagefile );
+          loadLocal( view, TDFile.getManFileReader( name ), TDFile.getManFilePath( name ) );
         } 
       }
     } else {
       int pos = filename.lastIndexOf("/");
       if ( pos >= 0 ) filename = filename.substring(pos+1);
       String pagename = TDPath.getManFileName( filename );
-      File pagefile = TDFile.getManFile( filename );
+      // File pagefile = TDFile.getManFile( filename );
       // TDLog.v( "MAN-3 filename " + filename );
       // TDLog.v( "MAN-3 pagename " + pagename );
       // TDLog.v( "MAN-3 pagefile path " + pagefile.getPath() );
-      if ( ! ( TDSetting.mLocalManPages && pagefile.exists() ) ) {
+      if ( ! ( TDSetting.mLocalManPages && TDFile.hasManFile( filename ) ) ) { // pagefile.exists()
         String page = "/android_asset/man/" + filename;
         // TDLog.v( "MAN-4 assets page " + page );
         view.loadUrl( "file://" + page );
       } else {
         // TDLog.v( "MAN-4 local pagefile " + pagefile );
-        loadLocal( view, pagefile );
+        loadLocal( view, TDFile.getManFileReader( filename ), TDFile.getManFilePath( filename ) );
       }
     }
   }
    
-  private void loadLocal( WebView view, File pagefile )
+  private void loadLocal( WebView view, FileReader fr, String pagepath ) throws IOException
   {
     // view.loadUrl( "file://" + page );
     StringBuilder pagedata = new StringBuilder();
     String encoding = "UTF-8";
     String mime = "text/html";
-    String baseurl = "file://" + pagefile.getPath();
+    String baseurl = "file://" + pagepath;
     // TDLog.v( "MAN-5 baseurl " + baseurl );
-    try {
-      FileReader fr = new FileReader( pagefile );
-      encoding = fr.getEncoding();
-      BufferedReader br = new BufferedReader( fr );
-      String line;
-      while ( ( line = br.readLine() ) != null ) {
-        pagedata.append( line );
-      }
-      fr.close();
-    } catch (IOException e ) {}
+    // FileReader fr = new FileReader( pagefile );
+    encoding = fr.getEncoding();
+    BufferedReader br = new BufferedReader( fr );
+    String line;
+    while ( ( line = br.readLine() ) != null ) {
+      pagedata.append( line );
+    }
+    fr.close();
     view.loadDataWithBaseURL( baseurl, pagedata.toString(), mime, encoding, null );
 
     // try { 
@@ -195,19 +193,27 @@ public class UserManualActivity extends Activity
         ++mCloseOnBack;
         // view.loadUrl( url );
         // TDLog.v( "MAN Web client " + url );
-        load( view, url );
+        try {
+          load( view, url );
+        } catch ( IOException e ) {
+          TDLog.Error( "UserMan load " + url.toString() + " Error: " + e.getMessage() );
+        }
         return false;
       }
 
       @Override
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
       {
-        TDLog.Error( "UserMan Load Error: " + description + " url " + failingUrl );
+        TDLog.Error( "UserMan load error: " + description + " url " + failingUrl );
       }
     } );
 
     setTitle( R.string.title_manual );
-    load( mTVtext, page );
+    try {
+      load( mTVtext, page );
+    } catch ( IOException e ) { 
+      TDLog.Error( "UserMan load " + page + " Error: " + e.getMessage() );
+    }
 
     mImage  = (ImageView) findViewById( R.id.handle );
     mImage.setOnClickListener( this );
@@ -263,7 +269,11 @@ public class UserManualActivity extends Activity
     mList.setVisibility( View.GONE );
     if ( pos <= 16 ) {
       mCloseOnBack = 0;
-      load( mTVtext, String.format(Locale.US, "manual%02d.htm", pos ) );
+      try { 
+        load( mTVtext, String.format(Locale.US, "manual%02d.htm", pos ) );
+      } catch ( IOException e ) {
+        TDLog.Error("Userman pos " + pos + " error " + e.getMessage() );
+      }
     } else {
       // getManualFromWeb();
       TDToast.makeBad( R.string.no_manual );

@@ -69,10 +69,53 @@ public class TDFile
 
   // OLD FILE FUNCTIONS -----------------------------------------------------------------------------
 
-  public static File getManDir( )                 { return TDInstance.context.getExternalFilesDir( "man" ); }
-  public static File getManFile( String name )    { return new File( getManDir(), name ); }
+  /** @return the man-dir file
+   */
+  private static File getManDir( )                 { return TDInstance.context.getExternalFilesDir( "man" ); }
+
+  /** @return man-file
+   * @param name   man-file name
+   */
+  private static File getManFile( String name )    { return new File( getManDir(), name ); }
+
+  /** @return man-file path
+   * @param name   man-file name
+   */
+  public static String getManFilePath( String name )
+  { 
+    File file = new File( getManDir(), name );
+    return (file == null)? "" : file.getPath();
+  }
+
+  /** ensure that man-dir exists and is writable
+   * @return true if success, false if man-dir does not exists
+   */
+  public static boolean checkManDir( )
+  { 
+    File dir = TDInstance.context.getExternalFilesDir( "man" );
+    return ( dir.exists() || dir.mkdirs() ) && dir.canWrite();
+  }
+
+  /** @return man-file output stream
+   * @param name   man-file name
+   */
+  public static FileOutputStream getManFileOutputStream( String name ) throws IOException
+  {
+    return new FileOutputStream( getManFile( name ) );
+  }
+
+  /** @return true if a man-file exists
+   * @param name   man-file name
+   */
   public static boolean hasManFile( String name ) { return getManFile( name ).exists(); }
-  public static FileReader getManFileReader( String name ) throws IOException { return new FileReader( getManFile(name) ); }
+
+  /** @return man-file reader
+   * @param name   man-file name
+   */
+  public static FileReader getManFileReader( String name ) throws IOException
+  {
+    return new FileReader( getManFile(name) );
+  }
  
   // private static File getC3exportDir( )                { return TDInstance.context.getExternalFilesDir( "c3export" ); }
   // private static File getC3exportFile( String name )   { return new File( TDInstance.context.getExternalFilesDir( "c3export" ),  name ); }
