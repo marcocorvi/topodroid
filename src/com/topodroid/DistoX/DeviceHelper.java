@@ -226,7 +226,7 @@ public class DeviceHelper extends DataSetObservable
    * @param cid    calibration ID
    * @param grp   data group, as string
    */
-  void updateGMName( long gid, long cid, String grp )
+  public void updateGMName( long gid, long cid, String grp )
   {
     ContentValues cv = new ContentValues();
     cv.put( "grp", grp );
@@ -326,7 +326,7 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
-  List< CBlock > selectAllGMs( long cid, int status, boolean negative_too )
+  public List< CBlock > selectAllGMs( long cid, int status, boolean negative_too )
   {
     List< CBlock > list = new ArrayList<>();
     if ( myDB == null ) {
@@ -511,7 +511,7 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
-  String selectCalibCoeff( long cid )
+  public String selectCalibCoeff( long cid )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "select calib coeff");
@@ -757,7 +757,7 @@ public class DeviceHelper extends DataSetObservable
   // }
 
   // this must be called when the calib name is not yet in the db
-  long insertCalibInfo( String name, String date, String device, String comment, long algo )
+  public long insertCalibInfo( String name, String date, String device, String comment, long algo )
   {
     if ( myDB == null ) {
       TDLog.Error( ERROR_NULL_DB + "insert calib info");
@@ -1090,7 +1090,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
 
-  boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
+  public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
   private boolean hasName( String name, String table )
   {

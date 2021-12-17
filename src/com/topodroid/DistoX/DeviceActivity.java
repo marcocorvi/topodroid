@@ -51,6 +51,7 @@ import com.topodroid.calib.CalibToggleTask;
 import com.topodroid.calib.CalibReadTask;
 import com.topodroid.calib.CalibAlgo;
 import com.topodroid.calib.ICoeffDisplayer;
+import com.topodroid.calib.CalibExport;
 
 import java.util.Set;
 // import java.util.List;
@@ -1048,7 +1049,7 @@ public class DeviceActivity extends Activity
       TDToast.makeBad(R.string.file_not_found );
     } else {
       // FIXME_SYNC this is sync ... ok because calib file is small
-      switch ( TDExporter.importCalibFromCsv( mApp_mDData, file, currDeviceA().getAddress() ) ) {
+      switch ( CalibExport.importCalibFromCsv( mApp_mDData, file, currDeviceA().getAddress() ) ) {
         case 0:
           TDToast.make(R.string.import_calib_ok );
           break;
