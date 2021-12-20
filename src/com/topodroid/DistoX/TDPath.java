@@ -393,7 +393,7 @@ public class TDPath
   static boolean hasTdrDir() { return TDFile.hasTopoDroidFile( APP_TDR_PATH ); } // DistoX-SAF
   static boolean hasC3dDir() { return TDFile.hasTopoDroidFile( APP_C3D_PATH ); } // DistoX-SAF
 
-  static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF
+  // static File getTdrDir() { return TDFile.makeTopoDroidDir( APP_TDR_PATH ); } // DistoX-SAF // CLEAR_BACKUPS
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
   static String getC3dPath() { return APP_C3D_PATH; } // DistoX-SAF
 

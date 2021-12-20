@@ -429,7 +429,7 @@ public class TDSetting
   public static boolean mAutoSectionPt = false;
   public static int   mBackupNumber   = 5;
   public static int   mBackupInterval = 60;
-  public static boolean mBackupsClear = false;
+  // public static boolean mBackupsClear = false; // CLEAR_BACKUPS
   public static boolean mFixedOrigin     = false; 
   public static boolean mSharedXSections = false; // default value
   public static boolean mAutoXSections   = true;  // auto save/export xsections with section points
@@ -746,12 +746,11 @@ public class TDSetting
     String[] keyGeek = TDPrefKey.GEEK;
     String[] defGeek = TDPrefKey.GEEKdef;
     setPalettes(  prefs.getBoolean( keyGeek[0], bool(defGeek[0]) ) ); // DISTOX_PALETTES
-    setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    mPacketLog = prefs.getBoolean( keyGeek[2], bool(defGeek[2]) ); // DISTOX_PACKET_LOGGER
+    // setBackupsClear( prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ) ); // DISTOX_BACKUPS_CLEAR CLEAR_BACKUPS
+    mPacketLog = prefs.getBoolean( keyGeek[1], bool(defGeek[1]) ); // DISTOX_PACKET_LOGGER
 
     // String[] keyGPlot = TDPrefKey.GEEKPLOT;
     // String[] defGPlot = TDPrefKey.GEEKPLOTdef;
-    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR
 
     setTextSize( tryInt(    prefs,     keyMain[1], defMain[1] ) );      // DISTOX_TEXT_SIZE
     setSizeButtons( tryInt( prefs,     keyMain[2], defMain[2] ) );      // DISTOX_SIZE_BUTTONS
@@ -1047,7 +1046,6 @@ public class TDSetting
     setStylusSize(    tryInt( prefs,   keyGPlot[ 2],      defGPlot[ 2] ) );  // DISTOX_STYLUS_SIZE
     mBackupNumber   = tryInt( prefs,   keyGPlot[ 3],      defGPlot[ 3] );  // DISTOX_BACKUP_NUMBER
     mBackupInterval = tryInt( prefs,   keyGPlot[ 4],      defGPlot[ 4] );  // DISTOX_BACKUP_INTERVAL
-    // setBackupsClear( prefs.getBoolean( keyGPlot[ 9], bool(defGPlot[ 9]) ) ); // DISTOX_BACKUPS_CLEAR moved to GEEK
     // mAutoXSections  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_AUTO_XSECTIONS
     mSavedStations  = prefs.getBoolean( keyGPlot[ 5], bool(defGPlot[ 5]) ); // DISTOX_SAVED_STATIONS
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
@@ -1526,10 +1524,10 @@ public class TDSetting
     String[] def = TDPrefKey.GEEKdef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_PALETTES
       setPalettes( tryBooleanValue( hlp, k, v, bool(def[0]) ) );
+    // } else if ( k.equals( key[1] ) ) { // CLEAR_BACKUPS
+    //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
     } else if ( k.equals( key[1] ) ) {
-      setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[1]) ) ); // DISTOX_BACKUPS_CLEAR
-    } else if ( k.equals( key[2] ) ) {
-      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[2]) ); // DISTOX_PACKET_LOGGER
+      mPacketLog = tryBooleanValue( hlp, k, v, bool(def[1]) ); // DISTOX_PACKET_LOGGER
     } else {
       TDLog.Error("missing GEEK key: " + k );
     }
@@ -1610,8 +1608,6 @@ public class TDSetting
       mBackupInterval = tryIntValue( hlp, k, v, def[ 4 ] );  
       if ( mBackupInterval <  10 ) { mBackupInterval =  10; ret = Integer.toString( mBackupInterval ); }
       if ( mBackupInterval > 600 ) { mBackupInterval = 600; ret = Integer.toString( mBackupInterval ); }
-    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_BACKUPS_CLEAR moved to GEEK
-    //   setBackupsClear( tryBooleanValue( hlp, k, v, bool(def[ 9]) ) );
     // } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_AUTO_XSECTIONS
     //   mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 5 ]) );
     } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SAVED_STATIONS
@@ -2540,14 +2536,14 @@ public class TDSetting
     return ret;
   }
 
-  private static void setBackupsClear( boolean b )
-  {
-    if ( mBackupsClear != b ) {
-      mBackupsClear = b;
-      TopoDroidApp.resetButtonBar();
-      TopoDroidApp.setMenuAdapter();
-    }
-  }
+  // private static void setBackupsClear( boolean b ) // CLEAR_BACKUPS
+  // {
+  //   if ( mBackupsClear != b ) {
+  //     mBackupsClear = b;
+  //     TopoDroidApp.resetButtonBar();
+  //     TopoDroidApp.setMenuAdapter();
+  //   }
+  // }
 
   private static void setPalettes( boolean b )
   {
@@ -2788,7 +2784,8 @@ public class TDSetting
       pw.printf(Locale.US, "Bezier: step %.2f, accuracy %.2f, corner %.2f\n", mBezierStep, mLineAccuracy, mLineCorner );
       pw.printf(Locale.US, "Weed: distance %.2f, length %.2f, buffer %.2f\n", mWeedDistance, mWeedLength, mWeedBuffer );
       pw.printf(Locale.US, "Area: border %c\n", tf(mAreaBorder) );
-      pw.printf(Locale.US, "Backup: nr %d, interval %d, clear %c\n", mBackupNumber, mBackupInterval, tf(mBackupsClear) );
+      // pw.printf(Locale.US, "Backup: nr %d, interval %d, clear %c\n", mBackupNumber, mBackupInterval, tf(mBackupsClear) ); // CLEAR_BACKUPS
+      pw.printf(Locale.US, "Backup: nr %d, interval %d\n", mBackupNumber, mBackupInterval );
       pw.printf(Locale.US, "XSections: shared %c, auto-export %c, point %c\n", tf(mSharedXSections), tf(mAutoXSections), tf(mAutoSectionPt) );
       pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
       pw.printf(Locale.US, "Splay: alpha %d, color %c, splay-dash %d, vert %.1f, horiz %.1f, section %.1f\n",
@@ -3412,7 +3409,7 @@ public class TDSetting
           if ( vals.length > 6 ) {
             mBackupNumber = getInt( vals, 2, 5 );   setPreference( editor, "DISTOX_BACKUP_NUMBER", mBackupNumber );
             mBackupInterval = getInt( vals, 4, 60 ); setPreference( editor, "DISTOX_BACKUP_INTERVAL", mBackupInterval );
-            if ( all ) mBackupsClear = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_BACKUPS_CLEAR", mBackupsClear );
+            // if ( all ) mBackupsClear = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_BACKUPS_CLEAR", mBackupsClear ); // CLEAR_BACKUPS
           }
           continue;
         }

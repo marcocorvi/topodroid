@@ -1127,6 +1127,12 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
     <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
     <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string -->
+    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
+    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
+    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
+    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
+    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
+    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
     <string name="title_settings_log">Ustawienia dziennika TopoDroid</string>
 
     <string name="title_shift">Przesunięcie</string>

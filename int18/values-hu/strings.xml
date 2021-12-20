@@ -1136,6 +1136,12 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_settings_dem">TopoDroid DEM beállítások</string>
     <string name="title_settings_walls3d">TopoDroid 3D modell beállítások</string>
     <string name="title_settings_geek">TopoDroid geek beállítások</string>
+    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
+    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
+    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
+    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
+    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
+    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>

@@ -93,12 +93,12 @@ public class TDPrefCat
     R.string.title_settings_dem,
     R.string.title_settings_walls3d,
     R.string.title_settings_geek,
-    R.string.title_settings_survey,   // 33
-    R.string.title_settings_splay,    // 34
-    R.string.title_settings_plot,
-    R.string.title_settings_line,     // 36
-    R.string.title_settings_device,   // 37
-    R.string.title_settings_import,   // 38
+    R.string.title_settings_geek_survey,   // 33
+    R.string.title_settings_geek_splay,    // 34
+    R.string.title_settings_geek_plot,
+    R.string.title_settings_geek_line,     // 36
+    R.string.title_settings_geek_device,   // 37
+    R.string.title_settings_geek_import,   // 38
     R.string.title_settings_log       // 39
   };
 }

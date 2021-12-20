@@ -351,8 +351,9 @@ public class TDExporter
       
 
    // ============== SESSIONS
+      String info_date = info.date.replaceAll("[\\.,-,/]", "");
       pw.format("    <sessions>\n");
-      pw.format("      <session date=\"%s\" ", info.date); // FIXME yyyy-mm-dd
+      pw.format("      <session date=\"%s\" ", info.date); // yyyy-mm-dd or any other format is ok
       pw.format(         "description=\"%s\" ", cave ); // title
       if ( info.team != null && info.team.length() > 0 ) {
         pw.format(" team=\"%s\" ", toXml(info.team) );
@@ -367,7 +368,7 @@ public class TDExporter
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
 
-      String session = info.date.replaceAll("\\.", "") + "_" +  cave.replaceAll(" ", "_");
+      String session = info_date + "_" +  cave.replaceAll(" ", "_");
       session = session.toLowerCase(Locale.US);
 
    // ============== CAVE INFOS and BRANCHES
@@ -729,8 +730,6 @@ public class TDExporter
       return 2;
     }
 
-    String date = info.date.replaceAll("\\.", "-");
-
     // now write the KML
     try {
       // TDLog.Log( TDLog.LOG_IO, "export KML " + file );
@@ -743,7 +742,7 @@ public class TDExporter
 
       pw.format(name, info.name );
       pw.format("<description>%s - TopoDroid v %s</description>\n",  TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
-      pw.format("<TimeStamp><when>%s</when></TimeStamp>\n", date );
+      pw.format("<TimeStamp><when>%s</when></TimeStamp>\n", info.date );
 
       pw.format(style, "centerline");
       pw.format(linestyle);

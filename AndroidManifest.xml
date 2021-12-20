@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600030"
-      android:versionName="6.0.30"
+      android:versionCode="600031"
+      android:versionName="6.0.31"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -31,7 +31,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="29"
+       android:targetSdkVersion="30"
     />
     <!-- android:maxSdkVersion="29" -->
 
@@ -45,9 +45,9 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
+    <!-- uses-permission android:name="a`ndroid.permission.MANAGE_EXTERNAL_STORAGE" / -->
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
-    <!-- uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" / -->
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <!-- uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" / -->
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

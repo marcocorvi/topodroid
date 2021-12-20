@@ -45,7 +45,7 @@ import com.topodroid.calib.CalibInfo;
 import com.topodroid.calib.CalibExport;
 
 
-import java.io.File; // PRIVATE FILE
+import java.io.File; // PRIVATE FILE firmware-bin
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
@@ -1756,7 +1756,6 @@ public class TopoDroidApp extends Application
           filepath = filepath.substring( pos+1 );
           
           // String pathname = TDPath.getSymbolFile( filepath );
-          // File file = TDFile.getFile( pathname );
           // File file = TDFile.getPrivateFile( type, filepath );
           TDLog.v("PATH " + "uncompress symbol " + type + " " + filepath );
           if ( overwrite || ! TDFile.existPrivateFile( type, filepath ) ) {

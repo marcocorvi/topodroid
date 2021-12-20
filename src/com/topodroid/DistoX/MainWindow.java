@@ -43,7 +43,7 @@ import com.topodroid.inport.ImportZipTask;
 
 import com.topodroid.mag.WorldMagneticModel;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.FileFilter;
@@ -139,7 +139,7 @@ public class MainWindow extends Activity
                           R.string.menu_close,
                           R.string.menu_palette,
                           R.string.menu_logs,
-			  R.string.menu_backups,
+			  // R.string.menu_backups, // CLEAR_BACKUPS
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
                           R.string.menu_about,
@@ -159,7 +159,7 @@ public class MainWindow extends Activity
                           R.string.help_close_app,
                           R.string.help_symbol,
                           R.string.help_log,
-			  R.string.help_backups,
+			  // R.string.help_backups, // CLEAR_BACKUPS
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
                           R.string.help_info_topodroid,
@@ -552,7 +552,7 @@ public class MainWindow extends Activity
   private boolean mWithPalette  = false;
   private boolean mWithPalettes = false;
   private boolean mWithLogs     = false;
-  private boolean mWithBackupsClear = false;
+  // private boolean mWithBackupsClear = false; // CLEAR_BACKUPS
 
   void setMenuAdapter( Resources res )
   {
@@ -561,17 +561,17 @@ public class MainWindow extends Activity
     mWithPalette  = TDLevel.overNormal;
     mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
     mWithLogs     = TDLevel.overAdvanced;
-    mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear;
+    // mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear; // CLEAR_BACKUPS
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
     if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
     if ( mWithLogs )    menu_adapter.add( res.getString( menus[2] ) ); // LOGS
-    if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
+    // if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    menu_adapter.add( res.getString( menus[4] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[5] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[6] ) ); // HELP
+    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[5] ) ); // HELP
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
@@ -601,12 +601,12 @@ public class MainWindow extends Activity
         intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
         intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_LOG );
         startActivity( intent );
-      } else if ( mWithBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
-        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
-          new DialogInterface.OnClickListener() {
-            @Override public void onClick( DialogInterface dialog, int btn ) { doBackupsClear(); }
-          }
-        );
+      // } else if ( mWithBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
+      //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
+      //     new DialogInterface.OnClickListener() {
+      //       @Override public void onClick( DialogInterface dialog, int btn ) { doBackupsClear(); }
+      //     }
+      //   );
       // } else if ( TDLevel.overExpert && mApp_mCosurvey && p++ == pos ) {  // IF_COSURVEY
       //   (new ConnectDialog( mActivity, mApp )).show();
       // } else if ( TDLevel.overExpert && p++ == pos ) {  // UPDATES
@@ -795,28 +795,30 @@ public class MainWindow extends Activity
     }
   }
 
-  private void doBackupsClear()
-  {
-    Thread cleaner = new Thread() {
-      @Override
-      public void run() { 
-        File dir = TDPath.getTdrDir();
-	// TDLog.v( "clear tdr backups from " + dir.getPath() );
-        File[] files = dir.listFiles( new FileFilter() { 
-          public boolean accept( File f ) { 
-              return f.getName().matches( ".*tdr.bck.?" );
-          }
-        } );
-        if ( files != null ) {
-          for (File f : files) {
-            TDFile.deleteFile( f );
-          }
-        }
-      }
-    };
-    // cleaner.setPriority( Thread.MIN_PRIORITY );
-    cleaner.start();
-  }
+  // /** delete tdr backup files --> CLEAR_BACKUPS MOVE TO SurveyWindow
+  //  */
+  // private void doBackupsClear()
+  // {
+  //   Thread cleaner = new Thread() {
+  //     @Override
+  //     public void run() { 
+  //       File dir = TDPath.getTdrDir();
+  //       // TDLog.v( "clear tdr backups from " + dir.getPath() );
+  //       File[] files = dir.listFiles( new FileFilter() { 
+  //         public boolean accept( File f ) { 
+  //             return f.getName().matches( ".*tdr.bck.?" );
+  //         }
+  //       } );
+  //       if ( files != null ) {
+  //         for (File f : files) {
+  //           TDFile.deleteFile( f );
+  //         }
+  //       }
+  //     }
+  //   };
+  //   // cleaner.setPriority( Thread.MIN_PRIORITY );
+  //   cleaner.start();
+  // }
 
   private int mNrButton1 = 5;
 
@@ -1121,10 +1123,13 @@ public class MainWindow extends Activity
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
               }
+              TDLog.Error( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
             } else {
-              filename = (new File(path)).getName(); // FILE to get the survey name
+              // filename = (new File(path)).getName(); // FILE to get the survey name
+              int pos = path.lastIndexOf('/');
+              filename = ( pos >= 0 )? path.substring(pos+1) : path;
+              TDLog.Error( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
             }
-            TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
           } else {
             filename = uri.getLastPathSegment();
             int pos = filename.lastIndexOf("."); 

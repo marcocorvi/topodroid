@@ -1115,6 +1115,12 @@
     <string name="title_settings_dem">Настройки TopoDroid DEM</string>
     <string name="title_settings_walls3d">Настройки 3D модели TopoDroid</string>
     <string name="title_settings_geek">TopoDroid Спец настройки программы</string>
+    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
+    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
+    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
+    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
+    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
+    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
     <string name="title_settings_log">TopoDroid  настройки журнала</string>
 
     <string name="title_shift">Сдвиг</string>

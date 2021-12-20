@@ -23,7 +23,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 // import com.topodroid.common.PointScale;
 
-import java.io.File;
+// import java.io.File;
 // import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
@@ -522,39 +522,39 @@ public class DrawingIO
   }
 
   // entry point to export data-stream
-  public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, File file, String fullname, int proj_dir )
+  public static void exportDataStreamFile( DrawingCommandManager manager, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir )
+    throws IOException
   {
-    try {
-      FileOutputStream fos = TDFile.getFileOutputStream( file );
-
-      // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
-      BufferedOutputStream bfos = new BufferedOutputStream( fos );
-      DataOutputStream dos = new DataOutputStream( bfos );
+    // try {
+      // FileOutputStream fos = TDFile.getFileOutputStream( file );
+      // // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
+      // BufferedOutputStream bfos = new BufferedOutputStream( fos );
+      // DataOutputStream dos = new DataOutputStream( bfos );
       manager.exportDataStream( type, dos, info, fullname, proj_dir );
-      dos.close();
+      // dos.close();
 
       // CACHE add filename/bos.toByteArray to cache
       // mTdrCache.put( fullname + ".tdr", bos );
       // byte[] bytes = bos.toByteArray();
       // fos.write( bytes, 0, bos.size() );
 
-      fos.close();
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Export Data file [1]: " + e.getMessage() );
-    } catch ( IOException e ) {
-      TDLog.Error( "Export Data i/o [1]: " + e.getMessage() );
-    }
+      // fos.close();
+    // } catch ( FileNotFoundException e ) {
+    //   TDLog.Error( "Export Data file [1]: " + e.getMessage() );
+    // } catch ( IOException e ) {
+    //   TDLog.Error( "Export Data i/o [1]: " + e.getMessage() );
+    // }
   }
 
   // entry point to export a set of paths to data-stream
-  public static void exportDataStreamFile( List< DrawingPath > paths, int type, PlotInfo info, File file, String fullname, int proj_dir, int scrap )
+  public static void exportDataStreamFile( List< DrawingPath > paths, int type, PlotInfo info, DataOutputStream dos, String fullname, int proj_dir, int scrap )
+    throws IOException
   {
-    try {
-      FileOutputStream fos = TDFile.getFileOutputStream( file );
-
-      // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
-      BufferedOutputStream bfos = new BufferedOutputStream( fos );
-      DataOutputStream dos = new DataOutputStream( bfos );
+    // try {
+      // FileOutputStream fos = TDFile.getFileOutputStream( file );
+      // // ByteArrayOutputStream bos = new ByteArrayOutputStream( 4096 );
+      // BufferedOutputStream bfos = new BufferedOutputStream( fos );
+      // DataOutputStream dos = new DataOutputStream( bfos );
 
       float xmin=1000000f, xmax=-1000000f, 
             ymin=1000000f, ymax=-1000000f;
@@ -569,19 +569,13 @@ public class DrawingIO
       // TDLog.v("export data stream: paths " + paths.size() );
       exportDataStream( type, dos, info, fullname, proj_dir, bbox, paths, scrap );
 
-      dos.close();
-
-      // CACHE add filename/bos.toByteArray to cache
-      // mTdrCache.put( fullname + ".tdr", bos );
-      // byte[] bytes = bos.toByteArray();
-      // fos.write( bytes, 0, bos.size() );
-
-      fos.close();
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error( "Export Data file [2]: " + e.getMessage() );
-    } catch ( IOException e ) {
-      TDLog.Error( "Export Data i/o [2]: " + e.getMessage() );
-    }
+      // dos.close();
+      // fos.close();
+    // } catch ( FileNotFoundException e ) {
+    //   TDLog.Error( "Export Data file [2]: " + e.getMessage() );
+    // } catch ( IOException e ) {
+    //   TDLog.Error( "Export Data i/o [2]: " + e.getMessage() );
+    // }
   }
 
   // tdr files CACHE
@@ -656,7 +650,7 @@ public class DrawingIO
 				   boolean complete,
 				   String plotName )
   {
-    // TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
+    TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
 
     int version = 0;
     boolean in_scrap = false;
@@ -666,11 +660,15 @@ public class DrawingIO
     // int project_dir = 0;
     // float north_x1, north_y1, north_x2, north_y2;
 
-    File file = TDFile.getTopoDroidFile( filename );
-    if ( ! file.exists() ) return false;
-
-    FileInputStream fis; // = null;
-    DataInputStream dis; // = null;
+    // File file = TDFile.getTopoDroidFile( filename );
+    // if ( ! file.exists() ) {
+    //   TDLog.Error("no file " + filename );
+    //   return false;
+    // }
+    // if ( ! file.canRead() ) {
+    //   TDLog.Error("cannot read file " + filename );
+    //   return false;
+    // }
 
     // FIXME SECTION_RENAME
     int pos = filename.lastIndexOf('/');
@@ -685,24 +683,16 @@ public class DrawingIO
       if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
     // }
 
-    // TDLog.v( "drawing I/O load stream " + filename );
+    TDLog.v( "drawing I/O load stream " + filename );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
-        // CACHE check if filename is in the cache: if so use the cache byte array
-        // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
-        // if ( bos == null ) {
-          TDLog.Log( TDLog.LOG_IO, "load tdr file " + filename );
-          fis = TDFile.getFileInputStream( filename );
-          BufferedInputStream bfis = new BufferedInputStream( fis );
-          dis = new DataInputStream( bfis );
+        // FileInputStream fis = TDFile.getFileInputStream( filename );
+        // BufferedInputStream bfis = new BufferedInputStream( fis );
+        // DataInputStream dis = new DataInputStream( bfis );
+        DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
+        if ( dis == null ) return false;
 
-          // FileChannel channel = fis.getChannel();
-        // } else {
-        //   // TDLog.v("cache hit " + filename );
-        //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
-        //   dis = new DataInputStream( bis );
-        // }
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
@@ -816,7 +806,7 @@ public class DrawingIO
           }
         }
         dis.close();
-        /* if ( fis != null ) */ fis.close();
+        // if ( fis != null ) fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {
@@ -836,26 +826,17 @@ public class DrawingIO
     boolean in_scrap = false;
     // int scrap_index = 0;
 
-    File file = TDFile.getTopoDroidFile( filename );
-    FileInputStream fis; // = null;
-    DataInputStream dis; // = null;
-
-    // TDLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
+    TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
+    // TLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
-        // CACHE check if filename is in the cache: if so use the cache byte array
-        // ByteArrayOutputStream bos = mTdrCache.get( file.getName() );
-        // if ( bos == null ) {
-          TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
-          fis = TDFile.getFileInputStream( filename );
-          BufferedInputStream bfis = new BufferedInputStream( fis );
-          dis = new DataInputStream( bfis );
-        // } else {
-        //   // TDLog.v("IO cache hit " + filename );
-        //   ByteArrayInputStream bis = new ByteArrayInputStream( bos.toByteArray() );
-        //   dis = new DataInputStream( bis );
-        // }
+        // File file = TDFile.getTopoDroidFile( filename );
+        // FileInputStream fis = new FileInputStream( file );
+        // BufferedInputStream bfis = new BufferedInputStream( fis );
+        // DataInputStream dis = new DataInputStream( bfis );
+        DataInputStream dis = TDFile.getTopoDroidFileInputStream( filename );
+        if ( dis == null ) return;
         boolean todo = true;
         while ( todo ) {
           DrawingLinePath path = null;
@@ -945,7 +926,7 @@ public class DrawingIO
           }
         }
         dis.close();
-        /* if ( fis != null ) */ fis.close();
+        // if ( fis != null ) fis.close();
       } catch ( FileNotFoundException e ) {
         // this is OK
       } catch ( IOException e ) {
@@ -1407,8 +1388,16 @@ public class DrawingIO
 
     // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-        File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
-        dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
+        // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
+        try { 
+          DataInputStream dis = TDFile.getTopoDroidFileInputStream( TDPath.getTdrFileWithExt( xsection.name ) );
+          if ( dis != null ) {
+            dataStreamToTherion( dis, out, null, null, false, true, xsection.x, xsection.y );
+          }
+          dis.close();
+        } catch ( IOException e ) { 
+          e.printStackTrace();
+        }
       }
     // }
   }
@@ -1577,16 +1566,18 @@ public class DrawingIO
 
     // TDLog.v( "multisketch sections " + xsections.size() );
     for ( XSectionScrap xsection : xsections ) { // write xsection scraps
-      File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
-      dataStreamToTherion( file, out, null, null, false, true, xsection.x, xsection.y );
+      // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
+      try {
+        DataInputStream dis = TDFile.getTopoDroidFileInputStream( TDPath.getTdrFileWithExt( xsection.name ) );
+        if ( dis != null ) {
+          dataStreamToTherion( dis, out, null, null, false, true, xsection.x, xsection.y );
+        }
+        dis.close();
+      } catch ( IOException e ) { 
+        e.printStackTrace();
+      }
     }
   }
-
-  // @param fullname  file name without extension (= scrap name)
-  // static public void dataStreamToTherion( File file, BufferedWriter out, String fullname, RectF bbox, boolean endscrap )
-  // {
-  //   dataStreamToTherion( file, out, fullname, bbox, true, endscrap, 0, 0 ); // true = beginheader
-  // }
 
   // return maximum scrap index, or 0
   // static int dataStreamScrapNumber( File file )
@@ -1670,12 +1661,22 @@ public class DrawingIO
   //   return scrap_index;
   // }
 
-  // used to write XSections to the output file
-  // bbox != null  <==>  begeinheader true
-  // @param file_name  filename without extension
-  static private void dataStreamToTherion( File file, BufferedWriter out, String file_name, RectF bbox, 
+  /** write a sketch directly from a tdr file to the therion output 
+   * @param dis         tdr data input
+   * @param out         therion output writer
+   * @param file_name   filename without extension
+   * @param bbox        clipping rectanggle (read in if not null)
+   * @param beginheader whether to write the initial header
+   * @param endscrap    whether to write the scrap termination
+   * @param xoff        X offset
+   * @param yoff        Y offset
+   *
+   * @note used to write XSections to the output file
+   * @note bbox != null  <==>  beginheader true
+   */
+  static private void dataStreamToTherion( DataInputStream dis, BufferedWriter out, String file_name, RectF bbox, 
                                           boolean beginheader, boolean endscrap,
-                                          float xoff, float yoff )
+                                          float xoff, float yoff ) throws IOException 
   {
     int version = 0;
     // boolean in_scrap = false;
@@ -1695,10 +1696,10 @@ public class DrawingIO
 
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
-      try {
-        TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
-        FileInputStream fis = TDFile.getFileInputStream( file.getPath() );
-        DataInputStream dis = new DataInputStream( fis );
+      // try {
+        // TDLog.Log( TDLog.LOG_IO, "tdr to Therion. file " + file.getPath() );
+        // FileInputStream fis = TDFile.getFileInputStream( file.getPath() );
+        // DataInputStream dis = new DataInputStream( fis );
         boolean todo = true;
         while ( todo ) {
           int what = dis.read();
@@ -1819,18 +1820,17 @@ public class DrawingIO
               break;
             default:
               todo = false;
-              TDLog.Error( "ERROR " + file.getName() + " bad input (2) " + what );
+              TDLog.Error( "ERROR bad input (2) " + what );
               break;
           } 
         }
         if (endscrap ) exportTherionScrapEnd( out );
-        dis.close();
-        fis.close();
-      } catch ( FileNotFoundException e ) {
-        // this is OK
-      } catch ( IOException e ) {
-        e.printStackTrace();
-      }
+        // fis.close();
+      // } catch ( FileNotFoundException e ) {
+      //   // this is OK
+      // } catch ( IOException e ) {
+      //   e.printStackTrace();
+      // }
     }
   }
   

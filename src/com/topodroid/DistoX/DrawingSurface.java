@@ -984,7 +984,7 @@ class DrawingSurface extends SurfaceView
           if ( link_sections ) linkSections();
           if ( fullname != null ) addManagerToCache( fullname );
         } else {
-          TDLog.Error( "file " + tdr1 + " failedi to load" );
+          TDLog.Error( "file " + tdr1 + " failed to load" );
         }
       } else {
         TDLog.Error( "file " + tdr1 + " does not exists");

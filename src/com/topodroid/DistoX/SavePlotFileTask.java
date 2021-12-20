@@ -20,11 +20,12 @@ import com.topodroid.common.PlotType;
 
 import java.lang.ref.WeakReference;
 
-import java.io.File; // TDR/BACKUP FILE
+// import java.io.File; // TDR/BACKUP FILE
 // import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
+import java.io.DataOutputStream;
 
 import java.util.List;
 
@@ -255,17 +256,25 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       long now  = System.currentTimeMillis();
       TDFile.clearExternalTempDir( 600000 ); // clean the cache ten minutes before now
 
-      // String tempname1 = TDPath.getTmpFileWithExt( Integer.toString(mSuffix) + Long.toString(now) );
-      // File file1 = TDFile.getFile( tempname1 );
-      File file1 = TDFile.getExternalTempFile( Integer.toString(mSuffix) + Long.toString(now) ); // TDR/BACKUP FILE
-
       // TDLog.Log( TDLog.LOG_PLOT, "saving binary " + mFullName );
       // TDLog.v( "saving binary " + mFullName + " file " + file1.getPath() );
-      if ( mSuffix == PlotSave.CREATE ) {
-        // TDLog.v("Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
-        DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, file1, mFullName, mProjDir, 0 ); // set path scrap to 0
-      } else {
-        DrawingIO.exportDataStreamFile( mManager, mType, mInfo, file1, mFullName, mProjDir );
+      String tempname1 = Integer.toString(mSuffix) + Long.toString(now);
+      // File file1 = TDFile.getExternalTempFile( Integer.toString(mSuffix) + Long.toString(now) );
+      try { 
+        // File file1 = TDFile.getExternalTempFile( tempname1 );
+        // FileOutputStream fos = new FileOutputStream( file1 );
+        // BufferedOutputStream bos = new BufferedOutputStream( fos );
+        // DataOutputStream dos = new DataOutputStream( bos );
+        DataOutputStream dos = TDFile.getExternalTempFileOutputStream( tempname1 );
+        if ( mSuffix == PlotSave.CREATE ) {
+          // TDLog.v("Save Plot CREATE file " + file1 + " paths " + mPaths.size() );
+          DrawingIO.exportDataStreamFile( mPaths, mType, mInfo, dos, mFullName, mProjDir, 0 ); // set path scrap to 0
+        } else {
+          DrawingIO.exportDataStreamFile( mManager, mType, mInfo, dos, mFullName, mProjDir );
+        }
+        dos.close();
+      } catch ( IOException e ) {
+        e.printStackTrace();
       }
 
       if ( isCancelled() ) {
@@ -277,13 +286,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         // TDLog.v( "save binary completed" + mFullName );
 
         String filename1 = TDPath.getTdrFileWithExt( mFullName );
-        File file0 = TDFile.getTopoDroidFile( filename1 ); // TDR/BACKUP FILE
-        if ( file0.exists() ) {
-          if ( ! TDFile.renameTempFile( file0, filename1 + TDPath.BCK_SUFFIX ) ) {
-            TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
-          }
+        if ( ! TDFile.renameTopoDroidFile( filename1, filename1 + TDPath.BCK_SUFFIX ) ) {
+          TDLog.Error("failed rename " + filename1 + TDPath.BCK_SUFFIX );
         }
-        if ( ! TDFile.renameTempFile( file1, filename1 ) ) {
+        if ( ! TDFile.renameExternalTempFile( tempname1, filename1 ) ) {
           TDLog.Error("failed rename " + filename1 );
         }
         return true;

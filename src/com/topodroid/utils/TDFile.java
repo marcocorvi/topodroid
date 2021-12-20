@@ -50,14 +50,18 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.OutputStreamWriter;
 import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
 // import java.io.FileFilter;
 // import java.io.FilenameFilter;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.FileInputStream;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
 import java.io.FileOutputStream;
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 
 import java.nio.charset.Charset;
 
@@ -154,6 +158,53 @@ public class TDFile
    */
   public static File getTopoDroidFile( String dirname, String name )
   { return new File( dirname, name ); }
+
+  /** @return the input-stream for the pathname
+   * @param name   full pathname
+   */
+  public static DataInputStream getTopoDroidFileInputStream( String name ) throws IOException
+  { 
+    File file = new File( name ); 
+    if ( ! file.exists() ) {
+      TDLog.Error("no file " + name );
+      return null;
+    }
+    if ( ! file.canRead() ) {
+      TDLog.Error("cannot read file " + name );
+      return null;
+    }
+    try {
+      FileInputStream fis = new FileInputStream( file );
+      BufferedInputStream bfis = new BufferedInputStream( fis );
+      return new DataInputStream( bfis );
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error("file not found " + name );
+    }
+    return null;
+  }
+
+  /** @return the output-stream for the pathname
+   * @param name   full pathname
+   */
+  public static DataOutputStream getTopoDroidFileOutputStream( String name ) throws IOException
+  { 
+    File file = new File( name ); 
+    if ( file.exists() ) {
+      if ( ! file.canWrite() ) {
+        TDLog.Error("cannot read file " + name );
+        return null;
+      }
+    }
+    try {
+      FileOutputStream fos = new FileOutputStream( file );
+      BufferedOutputStream bfos = new BufferedOutputStream( fos );
+      return new DataOutputStream( bfos );
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error("file not found " + name );
+    }
+    return null;
+  }
+    
 
   // INTERNAL FILES --------------------------------------------------------------
   // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
@@ -306,6 +357,23 @@ public class TDFile
     return new FileWriter( getExternalFile( type, name ) );
   }
 
+  /** @return an external file output stream
+   * @param type   folder name
+   * @param name   file name
+   */
+  public static DataOutputStream getExternalFileOutputStream( String type, String name ) throws IOException
+  {
+    try {
+      File file =  getExternalFile( type, name );
+      FileOutputStream fos = new FileOutputStream( file );
+      BufferedOutputStream bos = new BufferedOutputStream( fos );
+      return new DataOutputStream( bos );
+    } catch ( FileNotFoundException e ) {
+      e.printStackTrace();
+    }
+    return null;
+  }
+
   // TEMPORARY FILES - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
   /** get an external temporary file, under the current work directory
    * @param name   file name
@@ -327,6 +395,22 @@ public class TDFile
         if ( ! f.delete() ) TDLog.Error("File delete error: " + f.getPath() );
       }
     }
+  }
+
+  /** @return an external temporary file output stream
+   * @param name   file name
+   */
+  public static DataOutputStream getExternalTempFileOutputStream( String name ) throws IOException
+  {
+    try {
+      File file =  getExternalTempFile( name );
+      FileOutputStream fos = new FileOutputStream( file );
+      BufferedOutputStream bos = new BufferedOutputStream( fos );
+      return new DataOutputStream( bos );
+    } catch ( FileNotFoundException e ) {
+      e.printStackTrace();
+    }
+    return null;
   }
 
   // ----------------------------------------------------------------------------
@@ -551,6 +635,29 @@ public class TDFile
   { 
     return renameTempFile( temp, getTopoDroidFile( pathname ) );
   }
+
+  /** rename a TopoDroid file to another TopoDroid file
+   * @param oldname  pathname of TopoDroid file
+   * @param nename   pathname of the target file 
+   */
+  public static boolean renameTopoDroidFile( String oldname, String newname )
+  { 
+    File oldfile = getTopoDroidFile( oldname );
+    if ( ! oldfile.exists() ) return true;
+    return renameTempFile( oldfile, getTopoDroidFile( newname ) );
+  }
+
+  /** rename a temporary file to a TopoDroid filE
+   * @param oldname  pathname of temporary file
+   * @param nename   pathname of the target file 
+   */
+  public static boolean renameExternalTempFile( String oldname, String newname )
+  { 
+    File oldfile = getExternalTempFile( oldname );
+    if ( ! oldfile.exists() ) return true;
+    return renameTempFile( oldfile, getTopoDroidFile( newname ) );
+  }
+  
 
   // =========================================================================
   // GENERIC INTERFACE relative to TDPath.getPathBase() (CWD)
