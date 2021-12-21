@@ -5,7 +5,7 @@
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation</string>
 
-    <string name="tdx_stale" translatable="false">Stale TDX folder detected.\nForce-stop TopoDroid.\nRename the folder and restart the app.</string>
+    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected.\nForce-stop the app.\nRename the folder and restart the app.</string>
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -209,6 +209,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_plot_title">Sketch export</string>
     <string name="export_overview_title">Overview export</string>
     <string name="export_model_title">3D model export</string>
+    <string name="export_tdconfig_title">Project export</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">Survey name already present</string>
     <string name="import_bad">Invalid import file</string>

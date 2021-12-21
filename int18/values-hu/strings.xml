@@ -208,6 +208,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_data_title">Adat export</string>
     <string name="export_plot_title">Vázlat export</string>
     <string name="export_overview_title">Áttekintő export</string>
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Fájl importálása &#8230; kérjük várjál &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
     <string name="import_bad">Hibás importálható fájl</string>

@@ -208,6 +208,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_data_title">Data export</string -->
     <!-- TODO string name="export_plot_title">Sketch export</string -->
     <!-- TODO string name="export_overview_title">Overview export</string -->
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Se importează fișierul &#8230; te rog așteaptă &#8230;</string -->
     <string name="import_already">Cartarea este deja importată</string>
     <string name="import_bad">Fișier importat invalid</string>

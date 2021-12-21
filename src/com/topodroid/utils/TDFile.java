@@ -14,6 +14,7 @@ package com.topodroid.utils;
 import com.topodroid.utils.TDLog;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDPath;
+import com.topodroid.DistoX.TDUtil;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
@@ -45,7 +46,6 @@ import java.util.ArrayList;
 
 import java.io.File;
 import java.io.FileDescriptor;
-import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.OutputStreamWriter;
@@ -140,11 +140,29 @@ public class TDFile
   public static boolean hasTopoDroidFile( String dirpath, String name )
   { return name != null && (new File( dirpath + "/" + name )).exists(); }
 
-  /** @return length of the given file (0 if the file does not exists)
+  /** @return length of the given file (negative if name is null, 0 if the file does not exists)
    * @param name   filename
    */
   public static long getTopoDroidFileLength( String name )
-  { return (name == null)? 0 : (new File(name)).length(); }
+  { 
+    if ( name == null ) return -2L;
+    File file = new File(name);
+    if ( ! file.exists() ) return 0L;
+    return file.length();
+  }
+
+  /** @return file age and length
+   * @param name   filename
+   * @param millis reference time [msec]
+   * @note for tdr plot recovery
+   */
+  public static String getTopoDroidFileAgeLength( String name, long millis )
+  { 
+    if ( name == null ) return null;
+    File file = new File(name);
+    if ( ! file.exists() ) return null;
+    return TDUtil.getAge( millis - file.lastModified() ) + " [" + file.length() + "]";
+  }
 
   /** @return a File for the pathname
    * @param name   full pathname
@@ -327,10 +345,14 @@ public class TDFile
   public static File getExternalDir( String type ) { return getCBD( type, true ); }
 
   /** @return an external file, under the current work directory
-   * @param type   folder name
+   * @param type   subfolder name (null for base folder TDX)
    * @param name   file name
    */
-  public static File getExternalFile( String type, String name ) { return new File( getCBD( type, true ), name ); }
+  public static File getExternalFile( String type, String name ) 
+  { 
+    if ( name == null ) return null;
+    return new File( getCBD( type, true ), name );
+  }
 
   // public static String getExternalPath( String type ) { return getCBD( type, false ).getPath(); }
   // public static String getExternalPath( String type, String name ) { return new File( getCBD( type, false ), name ).getPath(); }
@@ -344,6 +366,7 @@ public class TDFile
    */
   public static void deleteExternalFile( String type, String name ) 
   {
+    if ( name == null ) return;
     File file = getExternalFile( type, name );
     if ( file.exists() ) file.delete();
   }
@@ -354,6 +377,7 @@ public class TDFile
    */
   public static FileWriter getExternalFileWriter( String type, String name ) throws IOException
   {
+    if ( name == null ) return null;
     return new FileWriter( getExternalFile( type, name ) );
   }
 
@@ -363,6 +387,7 @@ public class TDFile
    */
   public static DataOutputStream getExternalFileOutputStream( String type, String name ) throws IOException
   {
+    if ( name == null ) return null;
     try {
       File file =  getExternalFile( type, name );
       FileOutputStream fos = new FileOutputStream( file );

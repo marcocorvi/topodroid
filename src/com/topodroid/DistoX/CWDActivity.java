@@ -17,7 +17,7 @@ import com.topodroid.utils.TDTag;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.help.UserManualActivity;
 
-import java.io.File;
+// import java.io.File;
 import java.util.Locale;
 // import java.util.List;
 // import java.util.ArrayList;
@@ -111,11 +111,11 @@ public class CWDActivity extends Activity
   private void updateDisplay()
   {
     // File[] dirs = TDPath.getTopoDroidFiles( mBaseName );
-    File[] dirs = TDPath.getTopoDroidFiles( TDInstance.cbd );
+    String[] dirs = TDPath.getTopoDroidFiles( TDInstance.cbd );
     ArrayAdapter<String> adapter = new ArrayAdapter<>( this, R.layout.menu );
     if ( dirs != null ) {
-      for ( File item : dirs ) {
-        adapter.add( item.getName() );
+      for ( String item : dirs ) {
+        adapter.add( item );
       }
     }
     mList.setAdapter( adapter );

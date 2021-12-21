@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
@@ -32,7 +32,8 @@ import android.os.Build;
 public class MyBearingAndClino implements IBearingAndClino
 {
   private final TopoDroidApp mApp;
-  private File  mFile;
+  // private File  mFile;
+  private String mFilepath;  // file full pathname
   // long  mPid;             // plot id
   private float mBearing;
   private float mClino;
@@ -40,12 +41,13 @@ public class MyBearingAndClino implements IBearingAndClino
 
   /** cstr
    * @param app         application
-   * @param imagefile   image file
+   * @param imagefile   image file full path
    */
-  MyBearingAndClino( TopoDroidApp app, File imagefile /*, long pid */ )
+  MyBearingAndClino( TopoDroidApp app, String imagefile /*, long pid */ )
   {
     mApp  = app; 
-    mFile = imagefile;
+    // mFile = imagefile;
+    mFilepath = imagefile; // mFile.getPath();
     // mPid  = pid;
     mBearing = 0;
     mClino = 0;
@@ -76,7 +78,7 @@ public class MyBearingAndClino implements IBearingAndClino
   {
     if ( data == null ) return false; // FIXME crash 2020-08-09
     try {
-      FileOutputStream fos = TDFile.getFileOutputStream( mFile );
+      FileOutputStream fos = TDFile.getFileOutputStream( mFilepath );
       fos.write( data );
       fos.flush();
       fos.close();
@@ -85,7 +87,7 @@ public class MyBearingAndClino implements IBearingAndClino
       TDLog.Error( "IO exception " + e.getMessage() );
       return false;
     }
-    setExifBearingAndClino( mFile, mBearing, mClino, mOrientation );
+    setExifBearingAndClino( mFilepath, mBearing, mClino, mOrientation );
     return true;
   }
 
@@ -94,16 +96,16 @@ public class MyBearingAndClino implements IBearingAndClino
   // In the last case it does not support attributes write
   //
   /** set the values of azimuth and clino in the file exif tags
-   * @param file   image file
-   * @param b      azimuth [degrees]
-   * @param c      clino [degrees]
-   * @param o      camera orientation [degrees]
+   * @param filepath   image filepath (file.getPath())
+   * @param b          azimuth [degrees]
+   * @param c          clino [degrees]
+   * @param o          camera orientation [degrees]
    */
-  static void setExifBearingAndClino( File file, float b, float c, int o )
+  static void setExifBearingAndClino( String filepath, float b, float c, int o )
   {
-    // TDLog.v( "BearingClino UI set exif " + b + " " + c + " file " + file.getPath() );
+    // TDLog.v( "BearingClino UI set exif " + b + " " + c + " file " + filepath );
     try {
-      ExifInterface exif = new ExifInterface( file.getPath() );
+      ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
       if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N )

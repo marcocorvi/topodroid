@@ -869,7 +869,7 @@ public class ShotWindow extends Activity
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
     if ( mMediaManager.isTopoDroidCamera() ) {
-      new QCamCompass( this, (new MyBearingAndClino( mApp, mMediaManager.getImagefile()) ), this, false, false).show();  // false = with_box, false=with_delay
+      new QCamCompass( this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
     } else {
       try {
         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );

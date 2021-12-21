@@ -204,6 +204,9 @@
     <string name="export_data_title">Exportación de datos</string>
     <string name="export_plot_title">Exportación de croquis</string>
     <string name="export_overview_title">Exportación de todo</string>
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
     <string name="import_bad">Archivo de importación no válido</string>

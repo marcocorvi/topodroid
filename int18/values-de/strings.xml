@@ -211,6 +211,9 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="export_data_title">Datenexport</string>
     <string name="export_plot_title">Skizzenexport</string>
     <string name="export_overview_title">Übersichtexport</string>
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Importieren&#8230; bitte warten&#8230;</string -->
     <string name="import_already">Vermessung bereits importiert</string>
     <string name="import_bad">Ungültiges Importfile</string>

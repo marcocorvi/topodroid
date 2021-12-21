@@ -14,6 +14,8 @@ package com.topodroid.tdm;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDsafUri;
+
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -28,10 +30,18 @@ import com.topodroid.DistoX.R;
 import com.topodroid.DistoX.ExportDialogTdm;
 import com.topodroid.DistoX.IExporter;
 import com.topodroid.DistoX.TDandroid;
+import com.topodroid.DistoX.TDConst;
 
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Iterator;
+
+import java.io.IOException;
+import java.io.BufferedWriter;
+import java.io.PrintWriter;
+
+import android.net.Uri;
+import android.os.ParcelFileDescriptor;
 
 import android.widget.TextView;
 import android.widget.ListView;
@@ -426,16 +436,50 @@ public class TdmConfigActivity extends Activity
     }
   }
 
+  private int mExportIndex = -1;
+
   // @implements IExporter
   // @note surveyname is not used (TdmConfig already has it)
   public void doExport( String type, String surveyname )
   {
-    boolean overwrite = true;
-    String filepath = null;
+    String filename = null;
+    int index = -1;
     if ( type.equals("Therion") ) {
-       filepath = mTdmConfig.exportTherion( overwrite );
+      filename = surveyname + ".thconfig";
+      index = TDConst.SURVEY_FORMAT_TH;
     } else if ( type.equals("Survex") ) {
-       filepath = mTdmConfig.exportSurvex( overwrite );
+      filename = surveyname + ".svx";
+      index = TDConst.SURVEY_FORMAT_SVX;
+    }
+    if ( filename != null ) {
+      selectExportFromProvider( index, filename );
+    }
+  }
+
+  private void doRealExport( Uri uri )
+  {
+    if ( mExportIndex < 0 ) return;
+    ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri ); // mUri null handled by TDsafUri
+    if ( pfd == null ) return;
+    String filepath = null;
+    BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+    if ( bw != null ) {
+      try {
+        PrintWriter pw = new PrintWriter( bw );
+        boolean overwrite = true;
+        switch (mExportIndex) {
+          case TDConst.SURVEY_FORMAT_TH:
+            filepath = mTdmConfig.exportTherion( overwrite, pw );
+            break;
+          case TDConst.SURVEY_FORMAT_SVX:
+            filepath = mTdmConfig.exportSurvex( overwrite, pw );
+            break;
+        }
+        bw.flush();
+        bw.close();
+      } catch ( IOException e ) {
+        TDLog.Error("Tdm Config write file - I/O error " + e.getMessage() );
+      }
     }
     if ( filepath != null ) {
       TDToast.make( String.format( getResources().getString(R.string.exported), filepath ) );
@@ -443,6 +487,37 @@ public class TdmConfigActivity extends Activity
       TDToast.make( R.string.export_failed );
     }
   }
+
+  // FIXME_URI
+  private void selectExportFromProvider( int index, String filename ) // EXPORT
+  {
+    // if ( ! TDSetting.mExportUri ) return; // FIXME-URI
+    // Intent intent = new Intent( Intent.ACTION_INSERT_OR_EDIT );
+    Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    intent.setType( TDConst.mMimeType[index] );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    intent.putExtra( Intent.EXTRA_TITLE, filename );
+    mExportIndex = index;
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_tdconfig_title ) ), TDRequest.REQUEST_GET_EXPORT );
+  }
+
+  public void onActivityResult( int request, int result, Intent intent ) 
+  {
+    if ( intent == null ) return;
+    // Bundle extras = intent.getExtras();
+    switch ( request ) {
+      case TDRequest.REQUEST_GET_EXPORT:
+        if ( result == Activity.RESULT_OK ) {
+          // int index = intent.getIntExtra( "exporttype", -1 );
+          Uri uri = intent.getData();
+          TDLog.v( "Export: index " + mExportIndex + " uri " + uri.toString() );
+          doRealExport( uri );
+        }
+    }
+  }
+  //
 
 
   @Override

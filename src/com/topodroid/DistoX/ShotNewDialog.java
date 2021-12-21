@@ -23,8 +23,9 @@ import com.topodroid.common.ExtendType;
 
 import java.util.Locale;
 
-import java.io.File; // JPEG FILE
-import java.io.FileOutputStream;
+// import java.io.File; // JPEG FILE
+// import java.io.FileOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 
 import android.os.Bundle;
@@ -584,13 +585,15 @@ class ShotNewDialog extends MyDialog
         if ( mJpegData != null ) { 
           // TDLog.v( "save Jpeg image size " + mJpegData.length );
           long photo_id = TopoDroidApp.mData.nextPhotoId( TDInstance.sid );
-          File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ) ); // JPEG FILE
+          String filepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo_id ) ); // JPEG FILE
           try {
-            FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
+            // File imagefile = TDFile.getTopoDroidFile( filepath );
+            // FileOutputStream fos = TDFile.getFileOutputStream( imagefile );
+            DataOutputStream fos = TDFile.getTopoDroidFileOutputStream( filepath );
             fos.write( mJpegData );
-            fos.flush();
+            // fos.flush();
             fos.close();
-	    MyBearingAndClino.setExifBearingAndClino( imagefile, mBearing, mClino, mOrientation );
+	    MyBearingAndClino.setExifBearingAndClino( filepath, mBearing, mClino, mOrientation );
             TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TDUtil.currentDate(),

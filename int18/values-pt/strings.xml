@@ -210,6 +210,9 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_data_title">Data export</string -->
     <!-- TODO string name="export_plot_title">Sketch export</string -->
     <!-- TODO string name="export_overview_title">Overview export</string -->
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Importando arquivo &#8230; Por favor aguarde &#8230;</string -->
     <string name="import_already">Topo já importada</string>
     <string name="import_bad">Arquivo de importação inválido</string>

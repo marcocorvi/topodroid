@@ -52,7 +52,7 @@ import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
-import java.io.File; // TDR FILE
+// import java.io.File; // TDR FILE
 import java.util.ArrayList;
 
 public class PlotReloadWindow extends ItemDrawer
@@ -187,34 +187,25 @@ public class PlotReloadWindow extends ItemDrawer
     String filetdr = filename + ".tdr";
 
     long millis = System.currentTimeMillis();
-    File file = TDFile.getTopoDroidFile( tdr ); // TDR FILE
-    if ( file.exists() ) {
-      long len = file.length();
-      String age = TDUtil.getAge( millis - file.lastModified() );
-      String name = age + " [" + len + "] ()";
+    String age = TDFile.getTopoDroidFileAgeLength( tdr, millis );
+    if ( age != null ) {
+      String name = age + " ()";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
-      //  TDLog.v("Reload file " + filetdr );
     }
     tdr = tdr + TDPath.BCK_SUFFIX;
     filetdr = filetdr + TDPath.BCK_SUFFIX;
-    file = TDFile.getTopoDroidFile( tdr );
-    if ( file.exists() ) {
-      long len = file.length();
-      String age = TDUtil.getAge( millis - file.lastModified() );
-      String name = age + " [" + len + "] (" + TDPath.BCK_SUFFIX + ")";
+    age = TDFile.getTopoDroidFileAgeLength( tdr, millis );
+    if ( age != null ) {
+      String name = age + " (" + TDPath.BCK_SUFFIX + ")";
       mBackups.add( new PlotBackup( tdr, name, filetdr ) );
-      //  TDLog.v("Reload file " + filetdr );
     }
     for ( int i=0; i< TDPath.NR_BACKUP; ++i ) {
       String tdr1 = tdr + i;
-      file = TDFile.getTopoDroidFile( tdr1 );
-      if ( file.exists() ) {
-        long len = file.length();
-        String age = TDUtil.getAge( millis - file.lastModified() );
-        String name = age + " [" + len + "] (" +  TDPath.BCK_SUFFIX + i + ")";
+      age = TDFile.getTopoDroidFileAgeLength( tdr1, millis );
+      if ( age != null ) {
+        String name = age + " (" +  TDPath.BCK_SUFFIX + i + ")";
         String filetdr1 = filetdr + i;
         mBackups.add( new PlotBackup( tdr1, name, filetdr1 ) );
-        //  TDLog.v("Reload file " + filetdr1 );
       }
     }
   }

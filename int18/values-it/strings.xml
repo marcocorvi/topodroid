@@ -207,6 +207,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_data_title">File esportazione dati</string>
     <string name="export_plot_title">File esportazione disegno</string>
     <string name="export_overview_title">File esportazione panoramica</string>
+    <!-- TODO string name="export_model_title">3D model export</string -->
+    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+
     <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
     <string name="import_bad">File di Import non valido</string>

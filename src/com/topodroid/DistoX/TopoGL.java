@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 
 // import com.topodroid.DistoX.TDandroid;
 
@@ -50,7 +51,7 @@ import com.topodroid.ui.MyHorizontalButtonView;
 
 import java.io.StringWriter;
 import java.io.PrintWriter;
-import java.io.File;
+// import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.io.FileInputStream;
@@ -1236,7 +1237,8 @@ public class TopoGL extends Activity
       String path = TDPath.getTdconfigDir() + "/" + pathname + ".tdconfig";
       Toast.makeText( this, String.format( getResources().getString( R.string.reading_file ), path ), Toast.LENGTH_SHORT ).show();
       try {
-        final InputStream is = new FileInputStream( path );
+        // final InputStream is = new FileInputStream( path );
+        InputStream is = TDFile.getTopoDroidFileInputStream( path );
         // if ( asynch ) {
         //   (new AsyncTask<Void, Void, Boolean>() {
         //     @Override public Boolean doInBackground(Void ... v ) {
@@ -1262,7 +1264,9 @@ public class TopoGL extends Activity
         // }
         return ( mFilename != null );
       } catch ( FileNotFoundException e ) {
-        TDLog.Error("File not found: " + e.getMessage() );
+        TDLog.Error("file not found: " + e.getMessage() );
+      } catch ( IOException e ) {
+        TDLog.Error("io error: " + e.getMessage() );
       }
     } else {
       String path = pathname; // uri.getPath();
@@ -1363,7 +1367,7 @@ public class TopoGL extends Activity
     // ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
-    // TDLog.v("DEM Path " + pathname + " File " + filename );
+    // TDLog.v("DEM Path " + pathname + " file " + filename );
     mDEMname = filename;
     (new AsyncTask< Uri, Void, Boolean>() {
       ParserDEM dem = null;
@@ -1452,7 +1456,7 @@ public class TopoGL extends Activity
 
     String pathname = uri.getPath();
     String filename = uri.getLastPathSegment();
-    // TDLog.v("Texture Path " + pathname + " File " + filename );
+    // TDLog.v("Texture Path " + pathname + " file " + filename );
     // TDLog.v("texture " + pathname + " bbox " + bounds.left + " " + bounds.bottom + "  " + bounds.right + " " + bounds.top );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );

@@ -377,15 +377,24 @@ public class TDPath
   // ------------------------------------------------------------------
   // FILE NAMES
 
+  /** @return the ful pathname of the current work dircetory
+   */
   public static String getPathBase() { return PATH_CW_DIR; }
 
-  // used by Archiver
+  /** @return the sqlite script pathname, ie, <survey>/survey.sql
+   * @note used by Archiver
+   */
   static String getSqlFile() { return APP_SURVEY_PATH + "/survey.sql"; }
 
-  // used by Archiver, TopoDroidApp
+  /** @return the manifest file pathname, ie, <tmp>/manifest
+   * @note used by Archiver, TopoDroidApp
+   */
   static String getManifestFile() { return PATH_TMP + "/manifest"; }
 
-  // used by Archiver
+  /** @return survey subfolder full pathname, is, <survey>/<subfolder>
+   * @param name   subfolder name
+   * @note used by Archiver
+   */
   static String getDirFile( String name ) { return APP_SURVEY_PATH + "/" + name; }
 
   // static String getSymbolFile( String name ) { return name; }
@@ -397,12 +406,34 @@ public class TDPath
   static File getC3dDir() { return TDFile.makeTopoDroidDir( APP_C3D_PATH ); } // DistoX-SAF
   static String getC3dPath() { return APP_C3D_PATH; } // DistoX-SAF
 
+  /** @return full pathname of a zip file, in the zip folder
+   * @param name   zip-file name
+   * @note used by ImportZipTask.unArchive
+   */
   public static String getZipFile( String name ) { return PATH_ZIP     + "/" + name; }
-  public static String getTmpFile( String name ) { return PATH_TMP     + "/" + name; }
+
+  // /** @return full pathname of a temporary file, in the tmp folder
+  //  * @param name   temp-file name
+  //  */
+  // public static String getTmpFile( String name ) { return PATH_TMP     + "/" + name; }
+
+  /** @return full pathname of a tdr file, in the tdr folder
+   * @param name   tdr-file name
+   */
   public static String getTdrFile( String name ) { return APP_TDR_PATH + "/" + name; }
+
+  /** @return full pathname of a c3d file, in the c3d folder
+   * @param name   c3d-file name
+   */
   public static String getC3dFile( String name ) { return APP_C3D_PATH + "/" + name; }
 
+  /** @return full pathname of a Tdconfig folder, in the "TopoDroid" folder
+   */
   public static String getTdconfigDir( ) { return PATH_TDCONFIG ; }
+
+  /** @return full pathname of a tdconfig file, in the tdconfig folder
+   * @param name   tdconfig-file name
+   */
   public static String getTdconfigFile( String name ) { return PATH_TDCONFIG + "/" + name; }
 
   // replaced with TDFile functions
@@ -412,28 +443,60 @@ public class TDPath
 
   public static String getManFileName( String name ) { return "man/" + name; }
 
-  // these are used to get files and folders for the current survey
-  static String getJpgDir( )                { return APP_PHOTO_PATH; }
-  static String getAudioDir( )              { return APP_AUDIO_PATH; }
+  // /** @return the current survey photo folder full pathname
+  //  */
+  // static String getJpgDir( )                { return APP_PHOTO_PATH; }
+
+  // /** @return the current survey audio folder full pathname
+  //  */
+  // static String getAudioDir( )              { return APP_AUDIO_PATH; }
+
+  /** @return the current survey note file full pathname
+   * @param name note filename, ie, <survey>.txt
+   * @note used only by Archiver
+   */
   static String getNoteFile( String name )  { return APP_NOTE_PATH  + "/" + name; }
+
+  /** @return the current survey photo file full pathname
+   * @param name photo filename, ie, <index>.jpg
+   * @note used by Archiver and DrawingWindow
+   */
   static String getJpgFile( String name )   { return APP_PHOTO_PATH + "/" + name; }
+
+  /** @return the current survey audio file full pathname
+   * @param name audio filename, ie, <index>.wav
+   * @note used only by Archiver
+   */
   static String getAudioFile( String name ) { return APP_AUDIO_PATH + "/" + name; }
 
   // @parm name   (reduced) plot name
   static String getSurveyPlotTdrFile( String survey, String name ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr" ; }
   static String getSurveyPlotC3dFile( String survey, String name ) { return APP_C3D_PATH + "/" + survey + "-" + name + ".c3d" ; }
 
+  /** @return survey zip-archive full pathname
+   * @param survey   survey name
+   */
   public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
+
+  /** @return survey note-file full pathname
+   * @param survey   survey name
+   */
   public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
-  public static String getTdrFileWithExt( String name )  {
-    // TDLog.v( "APP_TDR_PATH " + APP_TDR_PATH + " name " + name );
+
+  /** @return survey tdr file full pathname
+   * @param name   tdr-file name ,ie, <survey>-<plot>.tdr
+   */
+  public static String getTdrFileWithExt( String name )
+  {
     return getPathname( APP_TDR_PATH, name, TDR );
   }
 
-  // @param dirname   survey dirname
-  // @param name      tdr name (without extension
-  public static String getTdrFileWithExt( String dirname, String name )  {
-    // TDLog.v( "dirname " + dirname + " name " + name );
+  /** @return a tdr file full pathname
+   * @param dirname   survey dirname
+   * @param name      tdr name (without extension
+   */
+  public static String getTdrFileWithExt( String dirname, String name )
+  {
     return getPathname( PATH_CW_DIR, dirname + "/" + name, TDR );
   }
 
@@ -481,33 +544,85 @@ public class TDPath
     return RELATIVE_TMP;
   }
 
+  // ---------------------------------------------------------------------------------------
 
+  /** @return array of firmware files
+   */
   public static File[] getBinFiles()   { return getInternalFiles( DIR_BIN ); }
+
+  /** @return array of callibration export files
+   */
   public static File[] getCalibFiles() { return getInternalFiles( DIR_CCSV  ); } // DistoX-SAF
 
+  /** @return firmware file
+   * @param filename  file name
+   */
   public static File getBinFile( String filename )   { return TDFile.getPrivateFile( DIR_BIN, filename ); }
+
+  /** @return calibration export file
+   * @param filename  file name
+   */
   public static File getCcsvFile( String filename )  { return TDFile.getPrivateFile( DIR_CCSV, filename ); }
+
+  /** @return memory dump file
+   * @param filename  file name
+   */
   public static File getDumpFile( String filename )  { return TDFile.getPrivateFile( DIR_DUMP, filename ); }
+
+  /** @return point symbol file
+   * @param filename  file name
+   */
   public static File getPointFile( String filename ) { return TDFile.getPrivateFile( DIR_POINT, filename ); }
+
+  /** @return line symbol file
+   * @param filename  file name
+   */
   public static File getLineFile( String filename )  { return TDFile.getPrivateFile( DIR_LINE, filename ); }
+
+  /** @return area symbol file
+   * @param filename  file name
+   */
   public static File getAreaFile( String filename )  { return TDFile.getPrivateFile( DIR_AREA, filename ); }
 
+  /** @return the point stmbol folder
+   */
   public static File getPointDir( ) { return TDFile.getPrivateDir( DIR_POINT ); }
 
-  public static  void deletePointFile( String filename ) { TDFile.deletePrivateFile( DIR_POINT, filename ); }
-  public static  void deleteLineFile( String filename )  { TDFile.deletePrivateFile( DIR_LINE,  filename ); }
+  /** delete a point symbol file
+   * @param name  point name (ie, filename)
+   */
+  public static  void deletePointFile( String name ) { TDFile.deletePrivateFile( DIR_POINT, name ); }
 
+  /** delete a line symbol file
+   * @param name  line name (ie, filename)
+   */
+  public static  void deleteLineFile( String name )  { TDFile.deletePrivateFile( DIR_LINE,  name ); }
 
-  // used only by CWDActivity to list "topodroid" dirs
-  static File[] getTopoDroidFiles( String basename ) // DistoX-SAF
+  /** delete a area symbol file
+   * @param name  area name (ie, filename)
+   */
+  public static  void deleteAreaFile( String name )  { TDFile.deletePrivateFile( DIR_AREA,  name ); }
+
+  // ---------------------------------------------------------------------------------------
+
+  /** get the list of "topodroid" folders
+   * @param basename   base folder
+   * @return array of dirnames that begin with "topodroid"
+   * @note used only by CWDActivity to list "topodroid" dirs
+   */
+  static String[] getTopoDroidFiles( String basename ) // DistoX-SAF
   {
     File dir = TDFile.getTopoDroidFile( basename );
-    return dir.listFiles( new FileFilter() {
+    File[] files = dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
 	if ( ! pathname.isDirectory() ) return false;
 	return ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) );
       }
     } );
+    int len = files.length;
+    String[] dirnames = new String[ len ];
+    for ( int k=0; k<len; ++ k ) dirnames[k] = files[k].getName();
+    return dirnames;
   }
 
   // NOTA BENE extensions include the dot, eg, ".th"
@@ -537,24 +652,40 @@ public class TDPath
   static String getSurveyPhotoFile( String survey, String name ) { return PATH_CW_DIR + "/" + survey + "/photo/" + name; }
   static String getSurveyAudioFile( String survey, String name ) { return PATH_CW_DIR + "/" + survey + "/audio/" + name; }
 
-  static String getSurveyJpgFile( String survey, String id )
+  /** @return full pathname of a survey photo (JPG) file 
+   * @param survey   survey name
+   * @param idx      photo index
+   */
+  static String getSurveyJpgFile( String survey, String idx )
   {
     String dirpath = PATH_CW_DIR + "/" + survey + "/photo";
     TDFile.makeTopoDroidDir( dirpath );
-    return dirpath + "/" + id + ".jpg";
+    return dirpath + "/" + idx + ".jpg";
   }
 
-  static String getSurveyWavFile( String survey, String id )
+  /** @return full pathname of a survey audio (WAV) file 
+   * @param survey   survey name
+   * @param idx      audio index
+   */
+  static String getSurveyWavFile( String survey, String idx )
   {
     String dirpath = PATH_CW_DIR + "/" + survey + "/audio";
     TDFile.makeTopoDroidDir( dirpath );
-    return dirpath + "/" + id + ".wav";
+    return dirpath + "/" + idx + ".wav";
   }
   
-  // used by SHP export
-  public static String getSurveyJpgFilename( String survey, String id ) { return survey + "/photo/" + id + ".jpg"; }
+  /** @return reduced filename of a survey photo (JPG) file 
+   * @param survey   survey name
+   * @param idx      photo index
+   * @note used by SHP export
+   */
+  public static String getSurveyJpgFilename( String survey, String idx ) { return survey + "/photo/" + idx + ".jpg"; }
 
-  // used by SHP export
+  /** @return reduced filename of a survey audio (WAV) file 
+   * @param survey   survey name
+   * @param idx      audio index
+   * @note used by SHP export
+   */
   public static String getSurveyWavFilename( String survey, String id ) { return survey + "/audio/" + id + ".wav"; }
 
   static void rotateBackups( String filename, int rotate ) // filename has suffix BCK_SUFFIX

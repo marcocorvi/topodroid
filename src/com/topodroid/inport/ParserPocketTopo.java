@@ -14,6 +14,7 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 // import com.topodroid.num.TDNum;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.ptopo.PTTrip;
@@ -39,7 +40,7 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.PtCmapActivity;
 
-import java.io.File;
+// import java.io.File;
 // import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
@@ -229,7 +230,7 @@ class ParserPocketTopo extends ImportParser
     // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elems " + elem_count );
 
     TDPath.checkPath( filename );
-    File file = new File( filename );
+    // File file = new File( filename );
     boolean ret = false;
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     List< DrawingPath > paths = new ArrayList<>();
@@ -327,17 +328,20 @@ class ParserPocketTopo extends ImportParser
 
 	RectF bbox = new RectF( xmin, ymin, xmax, ymax );
 
-        FileOutputStream fos = new FileOutputStream( file );
-        BufferedOutputStream bfos = new BufferedOutputStream( fos );
-        DataOutputStream dos = new DataOutputStream( bfos );
+        // File file = new File( filename );
+        // FileOutputStream fos = new FileOutputStream( file );
+        // BufferedOutputStream bfos = new BufferedOutputStream( fos );
+        // DataOutputStream dos = new DataOutputStream( bfos );
+        DataOutputStream dos = TDFile.getTopoDroidFileOutputStream( filename );
 	DrawingIO.exportDataStream( (int)type, dos, null, scrap_name, 0, bbox, paths, 0 ); // proj_dir not used, scrap = 0
         dos.close();
-        fos.close();
+        // fos.close();
 
         ret = true;
       } catch ( IOException e ) {
         TDLog.Error( mName + " scraps IO error " + e );
-        if ( ! file.delete() ) TDLog.Error("file delete error");
+        // if ( ! file.delete() ) TDLog.Error("file delete error");
+        TDFile.deleteFile( filename );
         throw new ParserException();
       }
     }

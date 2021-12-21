@@ -17,10 +17,12 @@ import com.topodroid.DistoX.TDUtil;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.FileNotFoundException;
 import java.io.FileWriter;
 import java.io.PrintWriter;
 import java.io.FileReader;
 import java.io.BufferedReader;
+import java.io.BufferedWriter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -170,13 +172,24 @@ class TdmConfig extends TdmFile
 
   // this is called by the TdmConfigActivity when it goes on pause
   /** write the cave project info to the tdconfig file
-   * @param force    whether to force to writing
+   * @param force    whether to force writing
    */
   void writeTdmConfig( boolean force )
   {
     // TDLog.v( "save tdconfig " + this + " " + mSave );
     if ( mSave || force ) { // was mRead || force
-      writeTd( getFilepath() );
+      String filepath = getFilepath();
+      try {
+        FileWriter fw = new FileWriter( filepath );
+        PrintWriter pw = new PrintWriter( fw );
+        writeTd( pw );
+        fw.flush();
+        fw.close();
+      } catch ( FileNotFoundException e ) { 
+        TDLog.Error("Tdm Config file " + filepath + " not found" );
+      } catch ( IOException e ) { 
+        TDLog.Error("Tdm Config write file " + filepath + " I/O error " + e.getMessage() );
+      }
       mSave = false;
     }
   }
@@ -196,35 +209,27 @@ class TdmConfig extends TdmFile
   // READ and WRITE
 
   /** write the cave project info to a tdconfig file
-   * @param filepath    file pathname
+   * @param pw   file writer
    */
-  private void writeTd( String filepath )
+  private void writeTd( PrintWriter pw ) throws IOException
   {
-    TDLog.v("save config " + mSurveyName + " " + filepath );
-    try {
-      FileWriter fw = new FileWriter( filepath );
-      PrintWriter pw = new PrintWriter( fw );
-      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
-      pw.format("source\n");
-      pw.format("  survey %s\n", mSurveyName );
-      for ( TdmInput input : mInputs ) {
-        // FIXME path
-        String path = input.getSurveyName();
-        // TDLog.v("config write add survey " + path );
-        pw.format("    load %s\n", path );
-      }
-      for ( TdmEquate equate : mEquates ) {
-        pw.format("    equate");
-        for ( String st : equate.mStations ) pw.format(" %s", st );
-        pw.format("\n");
-      }
-      pw.format("  endsurvey\n");
-      pw.format("endsource\n");
-      fw.flush();
-      fw.close();
-    } catch ( IOException e ) { 
-      TDLog.Error("TdManager write file " + getFilepath() + " I/O error " + e.getMessage() );
+    // TDLog.v("save config " + mSurveyName + " " + filepath );
+    pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    pw.format("source\n");
+    pw.format("  survey %s\n", mSurveyName );
+    for ( TdmInput input : mInputs ) {
+      // FIXME path
+      String path = input.getSurveyName();
+      // TDLog.v("config write add survey " + path );
+      pw.format("    load %s\n", path );
     }
+    for ( TdmEquate equate : mEquates ) {
+      pw.format("    equate");
+      for ( String st : equate.mStations ) pw.format(" %s", st );
+      pw.format("\n");
+    }
+    pw.format("  endsurvey\n");
+    pw.format("endsource\n");
   }
 
   /** extract the project name from a filepath
@@ -309,69 +314,49 @@ class TdmConfig extends TdmFile
 
   /** export the project to therion format
    * @param overwrite  whether to overwrite the output file (if it exists)
-   * @return ...
+   * @param bw         buffered writer
+   * @return non-null string if success
    */
-  String exportTherion( boolean overwrite )
+  String exportTherion( boolean overwrite, PrintWriter bw ) throws IOException
   {
-    String filepath = getFilepath().replace(".tdconfig", ".th").replace("/tdconfig/", "/th/");
-    File file = new File( filepath );
-    if ( file.exists() ) {
-      if ( ! overwrite ) return null;
-    } else {
-      File dir = file.getParentFile();
-      if ( dir != null ) dir.mkdirs();
+    bw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    bw.format("source\n");
+    bw.format("  survey %s\n", mSurveyName );
+    for ( TdmInput input : mInputs ) {
+      // FIXME path
+      String path = "../th/" + input.getSurveyName() + ".th";
+      // TDLog.v("config write add survey " + path );
+      bw.format("    input %s\n", path );
     }
-    writeTherion( filepath );
-    return filepath;
-  }
-
-  /** write the project to therion format
-   * @param filepath    file pathname
-   */
-  void writeTherion( String filepath )
-  {
-    try {
-      FileWriter fw = new FileWriter( filepath );
-      PrintWriter pw = new PrintWriter( fw );
-      pw.format("# created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
-      pw.format("source\n");
-      pw.format("  survey %s\n", mSurveyName );
-      for ( TdmInput input : mInputs ) {
-        // FIXME path
-        String path = "../th/" + input.getSurveyName() + ".th";
-        // TDLog.v("config write add survey " + path );
-        pw.format("    input %s\n", path );
-      }
-      for ( TdmEquate equate : mEquates ) {
-        pw.format("    equate");
-        for ( String st : equate.mStations ) pw.format(" %s", st );
-        pw.format("\n");
-      }
-      pw.format("  endsurvey\n");
-      pw.format("endsource\n");
-      fw.flush();
-      fw.close();
-    } catch ( IOException e ) { 
-      TDLog.Error("TdManager write file " + getFilepath() + " I/O error " + e.getMessage() );
+    for ( TdmEquate equate : mEquates ) {
+      bw.format("    equate");
+      for ( String st : equate.mStations ) bw.format(" %s", st );
+      bw.format("\n");
     }
+    bw.format("  endsurvey\n");
+    bw.format("endsource\n");
+    return "thconfig";
   }
 
   /** export the project to survex format
    * @param overwrite  whether to overwrite the output file (if it exists)
-   * @return filepath of the output
+   * @param bw         buffered writer
+   * @return non-null string if success
    */
-  String exportSurvex( boolean overwrite )
+  String exportSurvex( boolean overwrite, PrintWriter bw ) throws IOException
   {
-    String filepath = getFilepath().replace(".tdconfig", ".svx").replace("/tdconfig/", "/svx/");
-    File file = new File( filepath );
-    if ( file.exists() ) {
-      if ( ! overwrite ) return null;
-    } else {
-      File dir = file.getParentFile();
-      if ( dir != null ) dir.mkdirs();
+    bw.format("; created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
+    // TODO EXPORT
+    for ( TdmInput s : mInputs ) {
+      String path = "../svx/" + s.getSurveyName() + ".svx";
+      bw.format("*include %s\n", path );
     }
-    writeSurvex( filepath );
-    return filepath;
+    for ( TdmEquate equate : mEquates ) {
+      bw.format("*equate");
+      for ( String st : equate.mStations ) bw.format(" %s", toSvxStation( st ) );
+      bw.format("\n");
+    }
+    return "survex";
   }
 
   /** convert a station name from therion to survex syntax
@@ -382,33 +367,6 @@ class TdmConfig extends TdmFile
   {
     int pos = st.indexOf('@');
     return st.substring(pos+1) + "." + st.substring(0,pos);
-  }
-
-  /** write the project to survex format
-   * @param filepath    file pathname
-   */
-  void writeSurvex( String filepath )
-  {
-    try {
-      FileWriter fw = new FileWriter( filepath );
-      PrintWriter pw = new PrintWriter( fw );
-      pw.format("; created by TopoDroid Manager %s - %s\n", TDVersion.string(), TDUtil.currentDate() );
-      // TODO EXPORT
-      for ( TdmInput s : mInputs ) {
-        String path = "../svx/" + s.getSurveyName() + ".svx";
-        pw.format("*include %s\n", path );
-      }
-      for ( TdmEquate equate : mEquates ) {
-        pw.format("*equate");
-        for ( String st : equate.mStations ) pw.format(" %s", toSvxStation( st ) );
-        pw.format("\n");
-      }
-
-      fw.flush();
-      fw.close();
-    } catch ( IOException e ) { 
-      TDLog.Error("TdManager write file " + getFilepath() + " I/O error " + e.getMessage() );
-    }
   }
 
 }

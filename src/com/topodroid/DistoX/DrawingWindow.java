@@ -53,7 +53,7 @@ import com.topodroid.common.LegType;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -4447,7 +4447,7 @@ public class DrawingWindow extends ItemDrawer
   //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
   // }
 
-  private void doTakePointPhoto( File imagefile, boolean insert, long pid )
+  private void doTakePointPhoto( String imagefile, boolean insert, long pid )
   {
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
@@ -4485,7 +4485,7 @@ public class DrawingWindow extends ItemDrawer
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
     // TODO TD_XSECTION_PHOTO
-    doTakePointPhoto( mMediaManager.getImagefile(), true, -1L ); // with inserter, no pid
+    doTakePointPhoto( mMediaManager.getImageFilepath(), true, -1L ); // with inserter, no pid
   }
 
     private void addAudioPoint( float x, float y )
@@ -6024,9 +6024,10 @@ public class DrawingWindow extends ItemDrawer
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-        File imagefile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, id ) );
+        String imagefilepath = TDPath.getSurveyJpgFile( TDInstance.survey, id );
+        // File imagefile = TDFile.getTopoDroidFile( imagefilepath );
         // TODO TD_XSECTION_PHOTO
-        doTakePointPhoto( imagefile, false, pid ); // without inserter
+        doTakePointPhoto( imagefilepath, false, pid ); // without inserter
       }
     }
 

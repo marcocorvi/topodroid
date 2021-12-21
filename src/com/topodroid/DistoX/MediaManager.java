@@ -14,7 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 
-import java.io.File;
+// import java.io.File;
 import java.io.FileOutputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -31,15 +31,17 @@ class MediaManager
   private String  mComment;
   private int     mCamera = PhotoInfo.CAMERA_UNDEFINED;
   private long    mShotId;   // photo/sensor shot id
-  private File    mImageFile;
-  private File    mAudioFile;
+  // private File    mImageFile;
+  // private File    mAudioFile;
+  private String  mImageFilepath;
+  private String  mAudioFilepath;
   private float   mMediaX, mMediaY;
 
   MediaManager( DataHelper data )
   {
     mData = data;
-    mImageFile = null;
-    mAudioFile = null;
+    mImageFilepath = null;
+    mAudioFilepath = null;
   }
 
   long prepareNextPhoto( long sid, String comment, int camera )
@@ -48,45 +50,85 @@ class MediaManager
     mComment = comment;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );
-    mImageFile = TDFile.getTopoDroidFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ) ); // photo file is "survey/id.jpg"
+    mImageFilepath = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhotoId) ); // photo file is "survey/id.jpg"
+    // mImageFile = TDFile.getTopoDroidFile( mImageFilepath );
     return mPhotoId;
   }
 
-  // @param sid        shot id
-  // @param comment    
-  // @return the next audio negative ID
+  /** return the next negative audio index (ID)
+   * @param sid        shot id
+   * @param comment    
+   */
   long prepareNextAudioNeg( long sid, String comment )
   {
     mShotId  = sid;
     mComment = comment;
     mAudioId = mData.nextAudioNegId( TDInstance.sid ); // negative id's are for sketch audios
-    mAudioFile = TDFile.getTopoDroidFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ) ); // audio file is "survey/id.wav"
+    mAudioFilepath = TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mAudioId) ); // audio file is "survey/id.wav"
+    // mAudioFile = TDFile.getTopoDroidFile( mAudioFilepath );
     return mAudioId;
   }
 
+  /** @return true if the photos are taken by TopoDroid
+   */
   boolean isTopoDroidCamera() { return (mCamera == PhotoInfo.CAMERA_TOPODROID); }
 
+  /** set the camera
+   * @param camera   camera index
+   */
   void setCamera( int camera ) { mCamera = camera; }
-  void setPoint( float x, float y ) { mMediaX = x; mMediaY = y; }
 
-  String getComment() { return mComment; }
+  /** @return media camera index
+   */
   int getCamera()  { return mCamera; }
 
+  /** @return shot ID
+   */
   long getShotId()  { return mShotId; }
+
+  /** @return media comment
+   */
+  String getComment() { return mComment; }
+
+  /** @return photo ID
+   */
   long getPhotoId() { return mPhotoId; }
+
+  /** @return audio ID
+   */
   long getAudioId() { return mAudioId; }
 
-  File getImagefile() { return mImageFile; }
+  // File getImageFile() { return mImageFile; }
 
+  /** @return the photo file full path
+   */
+  String getImageFilepath() { return mImageFilepath; } 
+
+  /** set the media point coordinates
+   * @param x   X coordinate
+   * @param y   Y coordinate
+   */
+  void setPoint( float x, float y ) { mMediaX = x; mMediaY = y; }
+
+  /** @return media point X coordinate
+   */
   float getX() { return mMediaX; }
+
+  /** @return media point Y coordinate
+   */
   float getY() { return mMediaY; }
 
+  /** store the photo - and clear the photo filepath
+   * @param bitmap      ...
+   * @param compression compression mode
+   * @return true if successful
+   */
   boolean savePhoto( Bitmap bitmap, int compression )
   { 
     boolean ret = false;
-    if ( mImageFile != null ) {
+    if ( mImageFilepath != null ) {
       try {
-        FileOutputStream fos = TDFile.getFileOutputStream( mImageFile );
+        FileOutputStream fos = TDFile.getFileOutputStream( mImageFilepath );
         bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
         fos.flush();
         fos.close();
@@ -100,7 +142,7 @@ class MediaManager
     } else {
       TDLog.Error("cannot save photo: null file" );
     }
-    mImageFile = null;
+    mImageFilepath = null;
     return ret;
   }
 

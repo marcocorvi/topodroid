@@ -86,7 +86,7 @@ public class Archiver
       zos.closeEntry( );
       ret = true;
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "File Not Found " + e.getMessage() );
+      TDLog.Error( "file Not Found " + e.getMessage() );
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
     } finally {
@@ -119,7 +119,7 @@ public class Archiver
       zos.closeEntry( );
       ret = true;
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "File Not Found " + e.getMessage() );
+      TDLog.Error( "file Not Found " + e.getMessage() );
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
     } finally {
@@ -149,7 +149,7 @@ public class Archiver
       }
       zos.closeEntry( );
     } catch (FileNotFoundException e ) {
-      TDLog.Error( "File Not Found " + e.getMessage() );
+      TDLog.Error( "file Not Found " + e.getMessage() );
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
     } finally {
@@ -400,48 +400,7 @@ public class Archiver
       for ( PlotInfo plt : plots ) {
         pathname = TDPath.getSurveyPlotTdrFile( survey, plt.name ); // N.B. plot file CAN be missing
         addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotTh2File( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotDxfFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotSvgFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotXviFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotPngFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // pathname = TDPath.getSurveyPlotTnlFile( survey, plt.name );
-        // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // if ( plt.type == PlotType.PLOT_PLAN ) {
-        //   pathname = TDPath.getSurveyCsxFile( survey, plt.name );
-        //   addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-        // }
-        // pathname = TDPath.getSurveyPlotShzFile( survey, plt.name );
-	// addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
       }
-
-      // try overview exports
-      //   pathname = TDPath.getSurveyPlotTh2File( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotDxfFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotSvgFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotXviFile( survey, "p" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotShzFile( survey, "p" ); // zipped shp
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-
-      //   pathname = TDPath.getSurveyPlotTh2File( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotDxfFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotSvgFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotXviFile( survey, "s" );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      //   pathname = TDPath.getSurveyPlotShzFile( survey, "s" ); // zipped shp
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
 
       plots  = app_data.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       for ( PlotInfo plt : plots ) {
@@ -454,46 +413,6 @@ public class Archiver
 
       pathname = TDPath.getSurveyAudioDir( survey );
       addDirectory( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-
-      // pathname = TDPath.getSurveyThFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyCsvFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyCsxFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyCaveFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyCavFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyDatFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyDxfFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyGrtFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyGtxFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyKmlFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyJsonFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyPltFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyShzFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveySrvFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveySurFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveySvxFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyTroFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyTrbFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-      // pathname = TDPath.getSurveyTopFile( survey );
-      // addOptionalEntry( zos, TDFile.getTopoDroidFile( pathname ), pathname );
-
 
       // ret = true;
     } catch ( FileNotFoundException e ) {
@@ -615,68 +534,14 @@ public class Archiver
           if ( ze.getName().equals( "survey.sql" ) ) {
             pathname = TDPath.getSqlFile();
             sql = true;
-          // } else if ( ze.getName().endsWith( TDPath.CSV ) ) {
-          //   pathname = TDPath.getCsvFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.CSX ) ) {
-          //   pathname = TDPath.getCsxFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.CAVE ) ) {
-          //   pathname = TDPath.getCaveFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.CAV ) ) {
-          //   pathname = TDPath.getCavFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.DAT ) ) {
-          //   pathname = TDPath.getDatFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.GRT ) ) {
-          //   pathname = TDPath.getGrtFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.GTX ) ) {
-          //   pathname = TDPath.getGtxFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.DXF ) ) {
-          //   pathname = TDPath.getDxfFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.KML ) ) {
-          //   pathname = TDPath.getKmlFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.JSON ) ) {
-          //   pathname = TDPath.getJsonFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.PLT ) ) {
-          //   pathname = TDPath.getPltFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.PNG ) ) {
-          //   pathname = TDPath.getPngFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.SRV ) ) {
-          //   pathname = TDPath.getSrvFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.SVG ) ) {
-          //   pathname = TDPath.getSvgFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.SUR ) ) {
-          //   pathname = TDPath.getSurFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.SVX ) ) {
-          //   pathname = TDPath.getSvxFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.SHZ ) ) {
-          //   pathname = TDPath.getShzFile( ze.getName() );
-
-          // } else if ( ze.getName().endsWith( TDPath.TH ) ) {
-          //   pathname = TDPath.getThFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.TH2 ) ) {
-          //   pathname = TDPath.getTh2File( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.TNL ) ) {
-          //   pathname = TDPath.getTnlFile( ze.getName() );
 	  // /* FIXME_SKETCH_3D *
           // } else if ( ze.getName().endsWith( TDPath.TH3 ) ) {
           //   pathname = TDPath.getTh3File( ze.getName() );
 	  // * END_SKETCH_3D */
-          } else if ( ze.getName().endsWith( TDPath.TDR ) ) {
+          } else if ( ze.getName().endsWith( TDPath.TDR ) ) { // PLOTS
             pathname = TDPath.getTdrFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.TDR3 ) ) {
-          //   pathname = TDPath.getTdr3File( ze.getName() );
-
-          // } else if ( ze.getName().endsWith( TDPath.TRB ) ) {
-          //   pathname = TDPath.getTrbFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.TRO ) ) {
-          //   pathname = TDPath.getTroFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.TOP ) ) {
-          //   pathname = TDPath.getTopFile( ze.getName() );
-          // } else if ( ze.getName().endsWith( TDPath.XVI ) ) {
-          //   pathname = TDPath.getXviFile( ze.getName() );
-
-          } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
+          } else if ( ze.getName().endsWith( TDPath.TXT ) ) { // NOTES
             pathname = TDPath.getNoteFile( ze.getName() );
-
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
             pathname = TDPath.getSurveyAudioDir( surveyname );
             TDFile.makeTopoDroidDir( pathname );
