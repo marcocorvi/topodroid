@@ -12,11 +12,11 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.R;
 
 import java.util.ArrayList;
-import java.io.File;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
@@ -76,10 +76,9 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
    */
   boolean deleteTdmConfig( String filepath )
   {
-    File file = new File( filepath );
-    boolean ret = file.delete();
+    boolean ret = TDFile.deleteFile( filepath );
     for ( TdmConfig tdconfig : mItems ) {
-      if ( tdconfig.getFilepath().equals( filepath ) ) {
+      if ( tdconfig.hasFilepath( filepath ) ) {
         mItems.remove( tdconfig );
         break;
       }

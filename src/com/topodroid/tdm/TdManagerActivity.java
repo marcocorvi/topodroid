@@ -16,6 +16,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -28,7 +29,7 @@ import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 import java.io.FilenameFilter;
 
@@ -244,11 +245,11 @@ public class TdManagerActivity extends Activity
 	}
       }
     );
-    File[] tdconfigs = TDPath.scanTdconfigDir();
-    if ( tdconfigs != null && tdconfigs.length > 0 ) {
-      for ( File file : tdconfigs ) {
-        TDLog.v( "activity update: path <" + file.getAbsolutePath() + "> name <" + file.getName() + ">" );
-        mTdmConfigAdapter.add( new TdmConfig( file.getAbsolutePath(), false ) ); // false: no save
+    String[] tdconfigs = TDPath.scanTdconfigDir(); // full pathnames
+    if ( tdconfigs != null ) {
+      for ( String tdconfig : tdconfigs ) {
+        TDLog.v( "activity update: path <" + tdconfig + ">" );
+        mTdmConfigAdapter.add( new TdmConfig( tdconfig, false ) ); // false: no save
       }
     } else {
       mTdmConfigAdapter.add( new TdmConfig( TDPath.getTdconfigFile( "test.tdconfig" ), false ) ); // false: no save
@@ -285,7 +286,8 @@ public class TdManagerActivity extends Activity
     }
     if ( ! filename.endsWith(".tdconfig") ) filename = filename + ".tdconfig";
     String path = TDPath.getTdconfigFile( filename );
-    if ( (new File(path)).exists() ) {
+    // if ( (new File(path)).exists() )
+    if ( TDFile.hasTopoDroidFile( path ) ) {
       TDToast.make( R.string.error_name_exists );
       return;
     }

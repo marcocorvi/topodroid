@@ -12,17 +12,18 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.DistoX.TDUtil;
 
-import java.io.File;
+// import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
-import java.io.FileWriter;
-import java.io.PrintWriter;
-import java.io.FileReader;
+// import java.io.FileWriter;
+// import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -32,7 +33,7 @@ import java.util.Iterator;
 
 class TdmConfig extends TdmFile
 {
-  String mParentDir;            // parent directory
+  // String mParentDir;            // parent directory
   String mSurveyName;
   TdmSurvey mSurvey;             // inline survey in the tdconfig file
   private ArrayList< TdmSurvey > mViewSurveys = null; // current view surveys
@@ -45,7 +46,7 @@ class TdmConfig extends TdmFile
   {
     super( filepath, null );
     // TDLog.v("Tdm_Config cstr filepath " + filepath );
-    mParentDir = (new File( filepath )).getParentFile().getName() + "/";
+    // mParentDir = (new File( filepath )).getParentFile().getName() + "/";
     mSurvey    = null;
     mInputs    = new ArrayList< TdmInput >();
     mEquates   = new ArrayList< TdmEquate >();
@@ -180,13 +181,10 @@ class TdmConfig extends TdmFile
     if ( mSave || force ) { // was mRead || force
       String filepath = getFilepath();
       try {
-        FileWriter fw = new FileWriter( filepath );
-        PrintWriter pw = new PrintWriter( fw );
+        BufferedWriter bw = TDFile.getTopoDroidFileWriter( filepath );
+        PrintWriter pw = new PrintWriter( bw );
         writeTd( pw );
-        fw.flush();
-        fw.close();
-      } catch ( FileNotFoundException e ) { 
-        TDLog.Error("Tdm Config file " + filepath + " not found" );
+        bw.close();
       } catch ( IOException e ) { 
         TDLog.Error("Tdm Config write file " + filepath + " I/O error " + e.getMessage() );
       }
@@ -250,8 +248,8 @@ class TdmConfig extends TdmFile
   {
     String filepath = getFilepath();
     TDLog.v( "read config " + filepath );
-    File file = new File( filepath );
-    if ( ! file.exists() ) {
+    // File file = new File( filepath );
+    if ( TDFile.hasTopoDroidFile( filepath ) ) {
       // TDLog.v("file does not exist");
       mSurveyName = getNameFromFilepath( filepath );
       writeTdmConfig( true );
@@ -259,8 +257,9 @@ class TdmConfig extends TdmFile
     }
 
     try {
-      FileReader fr = new FileReader( file );
-      BufferedReader br = new BufferedReader( fr );
+      // FileReader fr = new FileReader( file );
+      // BufferedReader br = new BufferedReader( fr );
+      BufferedReader br = TDFile.getTopoDroidFileReader( filepath );
       String line = br.readLine();
       int cnt = 1;
       // TDLog.v( Integer.toString(cnt) + ":" + line );
@@ -301,7 +300,7 @@ class TdmConfig extends TdmFile
         line = br.readLine();
         ++ cnt;
       }
-      fr.close();
+      br.close();
     } catch ( IOException e ) {
       // TODO
       TDLog.Error( "TdManager exception " + e.getMessage() );

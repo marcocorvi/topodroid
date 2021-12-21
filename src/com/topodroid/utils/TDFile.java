@@ -128,7 +128,7 @@ public class TDFile
   // private static String getC3exportPath( String name, String ext ) { return getC3exportFile( name + "." + ext ).getPath(); }
 
   /** @return true if the given file exists 
-   * @param name   filename
+   * @param name   file full pathname
    */
   public static boolean hasTopoDroidFile( String name )
   { return name != null && (new File( name )).exists(); }
@@ -209,7 +209,7 @@ public class TDFile
     File file = new File( name ); 
     if ( file.exists() ) {
       if ( ! file.canWrite() ) {
-        TDLog.Error("cannot read file " + name );
+        TDLog.Error("file exists and cannot write file " + name );
         return null;
       }
     }
@@ -217,6 +217,46 @@ public class TDFile
       FileOutputStream fos = new FileOutputStream( file );
       BufferedOutputStream bfos = new BufferedOutputStream( fos );
       return new DataOutputStream( bfos );
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error("file not found " + name );
+    }
+    return null;
+  }
+
+  /** @return TopoDroid file buffered reader (null on failure)
+   * @param name   file full pathname
+   */
+  public static BufferedReader getTopoDroidFileReader( String name ) throws IOException
+  {
+    File file = new File( name ); 
+    if ( ! file.exists() || ! file.canRead() ) {
+      TDLog.Error("file does not exists or cannot read file " + name );
+      return null;
+    }
+    try {
+      FileReader fr = new FileReader( file );
+      return new BufferedReader( fr );
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error("file not found " + name );
+    }
+    return null;
+  }
+
+  /** @return TopoDroid file buffered writer (null on failure)
+   * @param name   file full pathname
+   */
+  public static BufferedWriter getTopoDroidFileWriter( String name ) throws IOException
+  {
+    File file = new File( name ); 
+    if ( file.exists() ) {
+      if ( ! file.canWrite() ) {
+        TDLog.Error("file exists and cannot write file " + name );
+        return null;
+      }
+    }
+    try {
+      FileWriter fr = new FileWriter( file );
+      return new BufferedWriter( fr );
     } catch ( FileNotFoundException e ) {
       TDLog.Error("file not found " + name );
     }
@@ -506,30 +546,46 @@ public class TDFile
   // -----------------------------------------------------------------------------
   /** delete a file
    * @param f   file to delete
+   * @return true if success
    */
-  public static void deleteFile( File f ) 
+  public static boolean deleteFile( File f ) 
   {
+    boolean ret = false;
     if ( f != null && f.exists() ) {
-      if ( ! f.delete() ) TDLog.Error("file delete failed " + f.getName() );
+      ret = f.delete();
+      if ( ! ret ) TDLog.Error("file delete failed " + f.getName() );
     }
+    return ret;
   }
 
   /** delete a folder and its files
    * @param dir   folder to delete
+   * @return true if the folder has been deleted
    */
-  public static void deleteDir( File dir ) 
+  public static boolean deleteDir( File dir ) 
   {
-    if ( dir != null && dir.exists() ) {
-      File[] files = dir.listFiles();
-      if ( files != null ) {
-        for ( File file : files ) {
-          if (file.isFile()) {
-            if ( ! file.delete() ) TDLog.Error("file delete failed " + file.getName() ); 
+    if ( dir == null || ! dir.exists() ) return false;
+    boolean ret = false;
+    boolean ok = true; // if could delete files in the folder
+    File[] files = dir.listFiles();
+    if ( files != null ) {
+      for ( File file : files ) {
+        if (file.isFile()) {
+          if ( ! file.delete() ) {
+            ok = false;
+            TDLog.Error("file delete failed " + file.getName() ); 
           }
+        } else {
+          ok = false;
+          TDLog.Error("file not regular " + file.getName() ); 
         }
       }
-      if ( ! dir.delete() ) TDLog.Error("dir delete failed " + dir.getName() );
     }
+    if ( ok ) {
+      ret = dir.delete();
+      if ( ! ret )  TDLog.Error("dir delete failed " + dir.getName() );
+    }
+    return ret;
   }
 
   // public static void clearAppCache()
@@ -559,20 +615,22 @@ public class TDFile
     return false;
   }
 
-  /** delete a file
-   * @param pathname   pathname of the file to delete
+  /** delete a TopoDroid file
+   * @param pathname   full pathname of the file to delete
+   * @return true if success
    */
-  public static void deleteFile( String pathname ) 
+  public static boolean deleteFile( String pathname ) 
   { 
-    deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
+    return deleteFile( getTopoDroidFile( pathname ) ); // DistoXFile;
   }
 
-  /** delete a folder
-   * @param pathname   pathname of the folder to delete
+  /** delete a TopoDroid folder
+   * @param pathname   full pathname of the folder to delete
+   * @return true if the folder has been deleted
    */
-  public static void deleteDir( String dirname ) 
+  public static boolean deleteDir( String dirname ) 
   { 
-    deleteDir( getTopoDroidFile( dirname ) ); // DistoX-SAF
+    return deleteDir( getTopoDroidFile( dirname ) ); // DistoX-SAF
   }
 
   /** rename a file
@@ -723,6 +781,10 @@ public class TDFile
   //   return (new File(pathname)).exists();
   // }
 
+  /** create a MS folder
+   * @param subdir   folder name
+   * @return true if the folder has been created
+   */
   public static boolean makeMSdir( String subdir )
   {
     File dir = getMSfile( subdir );
@@ -731,9 +793,13 @@ public class TDFile
     return dir.mkdirs();
   }
 
-  public static void deleteMSdir( String subdir )
+  /** delete a MS folder
+   * @param subdir   folder name
+   * @return true if the folder has been deleted
+   */
+  public static boolean deleteMSdir( String subdir )
   {
-    deleteDir( getMSfile( subdir ) );
+    return deleteDir( getMSfile( subdir ) );
   }
 
   static public FileOutputStream getMSoutput( String subdir, String filename, String mimetype ) throws IOException

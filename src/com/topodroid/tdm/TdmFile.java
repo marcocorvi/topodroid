@@ -18,6 +18,10 @@ class TdmFile
   private String mName;                // filename without extension (for display purposes) or surveyname (TD database)
   private String mFilepath;            // tdconfig file (fullpath) or null
 
+  /** cstr
+   * @param filepath   file full patname
+   * @param surveyname presentation name: survey name or filename
+   */
   public TdmFile( String filepath, String surveyname )
   {
     mFilepath = filepath;
@@ -31,10 +35,21 @@ class TdmFile
     TDLog.v( "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
   }
 
+  /** @return true is this TDM file has a specified filepath
+   * @param filepath  file pathname
+   */
+  public boolean hasFilepath( String filepath ) { return mFilepath.equals( filepath ); }
+
+  /** @return the file full pathname
+   */
   public String getFilepath() { return mFilepath; }
 
+  /** @return the survey name
+   */
   public String getSurveyName() { return mName; }
 
+  /** @return the string presentation (ie, survey name)
+   */
   public String toString() { return mName; }
 
 }

@@ -356,7 +356,10 @@ public class TDPath
 
   // ------------------------------------------------------------------
 
-  public static File[] scanTdconfigDir() // DistoX-SAF
+  /** @return array of tdconfig files full patnames
+   * @note used only be TdManagerActivity
+   */
+  public static String[] scanTdconfigDir() // DistoX-SAF
   {
     File dir = TDFile.getTopoDroidFile( PATH_TDCONFIG  );
     if ( ! dir.exists() ) {
@@ -371,7 +374,11 @@ public class TDPath
 	 return name.endsWith( "tdconfig" );
        }
     };
-    return dir.listFiles( filter );
+    File[] files = dir.listFiles( filter );
+    if ( files == null || files.length == 0 ) return null;
+    String[] filenames = new String[ files.length ];
+    for ( int k=0; k<files.length; ++k ) filenames[k] = files[k].getAbsolutePath();
+    return filenames;
   }
 
   // ------------------------------------------------------------------
