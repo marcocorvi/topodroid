@@ -159,7 +159,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="device_info">Műszer információ</string>
     <!-- UNUSED string name="device_model_set">Valóban meg akarja változtatni a műszer típusát?</string -->
     <!-- UNUSED string name="device_none">Nincs kiválasztva DistoX</string -->
-    <!-- UNUSED string name="device_paired">Device is paired</string -->
+    <!-- UNUSED string name="device_paired">Műszer párosítva</string -->
     <string name="device_reset">DistoX memóriájának újraindítása</string>
     <string name="device_clear">DistoX memóriájának törlése</string>
     <string name="device_code">DistoX kódja %1$4d</string>
@@ -208,8 +208,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_data_title">Adat export</string>
     <string name="export_plot_title">Vázlat export</string>
     <string name="export_overview_title">Áttekintő export</string>
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <string name="export_model_title">3D modell export</string>
+    <string name="export_tdconfig_title">Projekt export</string>
 
     <!-- UNUSED string name="import_wait">Fájl importálása &#8230; kérjük várjál &#8230;</string -->
     <string name="import_already">A felmérés már importálva</string>
@@ -597,7 +597,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="init_station">induló pont</string>
     <string name="second_device">második műszer</string>
     <string name="start_station">induló pont [%1$s]</string>
-    <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
+    <!-- UNUSED string name="toggle_device">Műszer kalibrációs mód váltás</string -->
     <string name="toggle_failed">Nem sikerült átkapcsolni a DistoX-et</string>
     <string name="toggle_ok">DistoX kalibrációs üzemmód váltás</string>
     <string name="undelete_text">Érintse meg az elemet a visszaálításhoz</string>
@@ -789,7 +789,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="layer_water">Víz</string -->
     <!-- UNUSED string name="layer_text">Szöveg</string -->
 
-    <!-- UNUSED string name="remote_title">Device Remote Control</string -->
+    <!-- UNUSED string name="remote_title">Műszer távirányítás</string -->
     <string name="remote_on">Lézer BE</string>
     <string name="remote_off">Lézer KI</string>
     <!-- UNUSED string name="remote_measure">Measure</string -->
@@ -1133,18 +1133,18 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_settings_draw">TopoDroid rajzolás beállítások</string>
     <string name="title_settings_erase">TopoDroid törlés beállítások</string>
     <string name="title_settings_edit">TopoDroid módosítás beállítások</string>
-    <string name="title_settings_device">TopoDroid készülék beállítások</string>
+    <string name="title_settings_device">TopoDroid műszer beállítások</string>
     <string name="title_settings_calib">TopoDroid kalibrációs beállítások</string>
     <string name="title_settings_3d">TopoDroid 3D néző beállítások</string>
     <string name="title_settings_dem">TopoDroid DEM beállítások</string>
     <string name="title_settings_walls3d">TopoDroid 3D modell beállítások</string>
     <string name="title_settings_geek">TopoDroid geek beállítások</string>
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_geek_survey">Geek mérés beállítások</string>
+    <string name="title_settings_geek_splay">Geek sün beállítások</string>
+    <string name="title_settings_geek_plot">Geek vázlat beállítások</string>
+    <string name="title_settings_geek_line">Geek vonal beállítások</string>
+    <string name="title_settings_geek_device">Geek műszer beállítások</string>
+    <string name="title_settings_geek_import">Geek import beállítások</string>
     <string name="title_settings_log">TopoDroid naplózás beállítások</string>
 
     <string name="title_shift">Váltás</string>
@@ -1315,11 +1315,11 @@ A részletekért keresse fel a weboldalakat.\n
 
   <string name="pref_sock_type_title">Csatlakozás</string>
   <string name="pref_sock_type_summary">Csatlakozás létrehozása</string>
-  <!-- UNUSED string name="pref_device_type_title">Disto type</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Model of the DistoX</string -->
-  <!-- UNUSED string name="pref_comm_retry_title">Connection retry</string -->
-  <!-- UNUSED string name="pref_comm_retry_summary">Connection retries number</string -->
-  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Connection retries number</string -->
+  <!-- UNUSED string name="pref_device_type_title">Disto típus</string -->
+  <!-- UNUSED string name="pref_device_type_summary">DistoX modell</string -->
+  <!-- UNUSED string name="pref_comm_retry_title">Kapcsolódás ismétlés</string -->
+  <!-- UNUSED string name="pref_comm_retry_summary">Kapcsolódás ismétlés szám</string -->
+  <!-- UNUSED string name="pref_comm_retry_dialogtitle">Kapcsolódás ismétlés szám</string -->
   <string name="pref_wait_laser_title">Lézer szünet[ms]</string>
   <string name="pref_wait_laser_summary">Szünet a lézer bekapcsolása után [ms]</string>
   <string name="pref_wait_shot_title">Mérési szünet [ms]</string>
@@ -1525,8 +1525,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_stylus_size_summary">Toll méret [0: nincs]</string>
   <string name="pref_fixed_thickness_title">Poligonvonal vastagsága</string>
   <string name="pref_fixed_thickness_summary">Poligonvonal vastagsága</string>
-  <!-- UNUSED string name="pref_device_title">Device</string -->
-  <!-- UNUSED string name="pref_device_summary">DistoX address name</string -->
+  <!-- UNUSED string name="pref_device_title">Műszer</string -->
+  <!-- UNUSED string name="pref_device_summary">DistoX cím név</string -->
   <string name="pref_checkBT_title">Bluetooth</string>
   <string name="pref_checkBT_summary">Ellenőrzi a Bluetooth-t indításkor</string>
   <string name="pref_checkAttached_title">Poligon ellenőrzése</string>
