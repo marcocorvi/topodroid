@@ -60,8 +60,14 @@ class DialogIco extends MyDialog
   double n2x, n2y, n2z;
   double n3x, n3y, n3z;
 
-  Paint green, cyan, red;
+  Paint green; // East paints
+  Paint cyan;  // North paints
+  Paint red;   // Upward paints
 
+  /** cstr
+   * @param context  context
+   * @param parser   3D parser with model data
+   */
   public DialogIco( Context context, TglParser parser )
   {
     super( context, R.string.DialogIco );
@@ -93,6 +99,8 @@ class DialogIco extends MyDialog
     red.setStrokeWidth( 4 );
   }
 
+  /** compute vectors N1, N2, N3 from Theta, Phi
+   */
   private void computeNVectors( )
   {
     double ct = Math.cos(mTheta);
@@ -119,6 +127,8 @@ class DialogIco extends MyDialog
     mText.setText( sw.getBuffer().toString() );
   }
 
+  /** wrapper to compute (and show) the ICO diagram
+   */
   private void render()
   { 
     Bitmap bitmap = Bitmap.createBitmap( SIDE, SIDE, Bitmap.Config.ARGB_8888 );
@@ -139,7 +149,9 @@ class DialogIco extends MyDialog
     render();
   }
 
-
+  /** prepare the data for the ICO diagram
+   * @param parser   3D model data
+   */
   private void prepareIcoDiagram( TglParser parser )
   { 
     mNr = 8;
@@ -155,6 +167,9 @@ class DialogIco extends MyDialog
     // TDLog.v( "TopoGL eps " + eps + " max " + mMax );
   }
 
+  /** compute and show the ICO diagram
+   * @param canvas  display canvas
+   */
   private void evalIcoDiagram( Canvas canvas )
   { 
     for ( int k=0; k<diagram.mPointNr; ++k ) {
@@ -199,6 +214,10 @@ class DialogIco extends MyDialog
 
   double mSaveX, mSaveY;
 
+  /** respond to user touch 
+   * @param v   tapped view
+   * @param e   motion event
+   */
   @Override
   public boolean onTouch( View v, MotionEvent e )
   {
@@ -218,6 +237,10 @@ class DialogIco extends MyDialog
     return false;
   }
 
+  /** change (Theta, Phi)
+   * @param x   variation of Phi
+   * @param y   variation of Theta
+   */
   private void changeThetaPhi( double x, double y )
   {
     mTheta += y;

@@ -37,8 +37,13 @@ class DialogFractal extends MyDialog
 
   private TglParser   mParser;
   private RadioButton mRBtotal;
-  private RadioButton mRBnghb;
+  private RadioButton mRBnghb6;
+  private RadioButton mRBnghb26;
 
+  /** cstr
+   * @param context context
+   * @param parser  3D model data
+   */
   public DialogFractal( Context context, TglParser parser )
   {
     super( context, R.string.DialogFractal );
@@ -68,11 +73,14 @@ class DialogFractal extends MyDialog
 
     mImage.setImageBitmap( FractalResult.makeImage() );
 
-    mRBtotal = (RadioButton) findViewById( R.id.fractal_count_total );
-    mRBnghb  = (RadioButton) findViewById( R.id.fractal_count_nghb  );
-
+    mRBtotal  = (RadioButton) findViewById( R.id.fractal_cnt_total );
+    mRBnghb6  = (RadioButton) findViewById( R.id.fractal_cnt_six );
+    mRBnghb26 = (RadioButton) findViewById( R.id.fractal_cnt_twentysix );
   }
 
+  /** respond to user taps
+   * @param v tapped view
+   */
   @Override
   public void onClick( View v )
   {
@@ -80,7 +88,11 @@ class DialogFractal extends MyDialog
     if ( v.getId() == R.id.fractal_ok ) {
       mCellSide = Integer.parseInt( mCell.getText().toString() );
       int mode = FractalComputer.COUNT_TOTAL;
-      if ( mRBnghb.isChecked() ) mode = FractalComputer.COUNT_NGHB;
+      if ( mRBnghb6.isChecked() ) {
+        mode = FractalComputer.COUNT_NGHB_6;
+      } else if ( mRBnghb26.isChecked() ) {
+        mode = FractalComputer.COUNT_NGHB_26;
+      }
       int ret = FractalResult.compute( mParser, mCBsplays.isChecked(), mCellSide, mode );
     // } else if ( v.getId() == R.id.button_cancel ) {
     //   // nothing

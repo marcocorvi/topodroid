@@ -23,8 +23,16 @@ class FractalResult
 {
   static FractalComputer computer = null;
 
+  /** @return the array of computed dimensions
+   */
   static double[] mCount = new double[ FractalComputer.SIZE ];
 
+  /** compute the dimensions
+   * @param r        3D model data
+   * @param do_splay whether to use splays
+   * @param cell     initial cell size
+   * @param mode     computation mode
+   */
   static int compute( final TglParser r, boolean do_splays, int cell, int mode )
   {
     if ( computer != null ) return -1;
@@ -43,12 +51,18 @@ class FractalResult
     return 0;
   }
 
+  /** relese the fractal computer
+   */
   static void releaseComputer()
   {
     computer = null;
     // TDToast.make( R.string.done_fractal );
   }
 
+  /** set a dimension
+   * @param k   index in the result array
+   * @param val result value
+   */
   static void setCount(int k, double val) { mCount[k] = val; }
 
   static String countsString()
@@ -62,6 +76,9 @@ class FractalResult
     return counts.toString();
   }
 
+  /** create the image of the resulting graph
+   * @return the graph bitmap
+   */
   static Bitmap makeImage()
   {
     int ww = 100 * FractalComputer.DIM_ONE + 100;

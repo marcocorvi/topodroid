@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600031"
-      android:versionName="6.0.31"
+      android:versionCode="600032"
+      android:versionName="6.0.32"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
@@ -23,11 +23,19 @@
 	     item_picker2_dialog.xml
              symbol_enable_dialog.xml
     -->
-    <!-- API-18 = Android 4.3
-         API-19 = Android 4.4
-         API-21 = Android 5.0
+    <!-- API-18 = Android 4.3   JellyBeans
+         API-19 = Android 4.4   KitKat
+         API-21 = Android 5.0   Lollipop
+         API-22 = Android 5.1 
+         API-23 = Android 6     Marshmellow
+         API-24 = Android 7.0   Nougat
+         API-25 = Android 7.1
+         API-26 = Android 8.0.0 Oreo
+         API-27 = Android 8.0.1
+         API-28 = Android 9     Pie
          API-29 = Android 10
          API-30 = Android 11
+         API-31 = Android 12
     -->
     <uses-sdk
        android:minSdkVersion="18"
@@ -40,23 +48,25 @@
       <package android:name="com.topodroid.proj4" />
     </queries>
 
-    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.BLUETOOTH" />
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
-    <!-- uses-permission android:name="a`ndroid.permission.MANAGE_EXTERNAL_STORAGE" / -->
+    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
-    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
-    <!-- uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" / -->
+
+    <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <!-- uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" / -->
     <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->
     <!-- uses-permission android:name="android.permission.WRITE_SETTINGS"/ -->
-    <uses-permission android:name="android.permission.INTERNET"/>
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
-    <uses-permission android:name="android.permission.VIBRATE" />
 
     <uses-feature android:name="android.hardware.screen.portrait"      android:required="true" />
     <uses-feature android:name="android.hardware.bluetooth"            android:required="true" />

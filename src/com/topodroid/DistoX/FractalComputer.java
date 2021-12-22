@@ -25,8 +25,9 @@ class FractalComputer
   static int DIM  = DIM_ONE + DIM_TWO;
   static int SIZE = DIM - 1; 
 
-  static int COUNT_TOTAL = 0;
-  static int COUNT_NGHB  = 1;
+  static int COUNT_TOTAL   = 0;
+  static int COUNT_NGHB_6  = 1;
+  static int COUNT_NGHB_26 = 2;
 
   int xmin, xmax;
   int ymin, ymax;
@@ -35,8 +36,21 @@ class FractalComputer
   double  mCell;    // unit-cell size
   int     mMode;    // counting mode: 0 total, 1 nghb
 
+  /** @return the dimension of ...
+   */
   static int getDim() { return DIM_ONE+DIM_TWO-1; }
 
+  /** cstr
+   * @param x1      min X coordinate
+   * @param x2      max X coordinate
+   * @param y1      min Y coordinate
+   * @param y2      max Y coordinate
+   * @param z1      min Z coordinate
+   * @param z2      max Z coordinate
+   * @param splay   ...
+   * @param cell    ...
+   * @param mode    ...
+   */
   FractalComputer( /* Context context, */ double x1, double x2, double y1, double y2, double z1, double z2, boolean splay, double cell, int mode )
   {
     // mContext = context;
@@ -54,11 +68,19 @@ class FractalComputer
   // class Point == Cave3DStationn
   //
   //
+  /** box
+   */
   class Box
   {
     double x0, y0, z0;
     double x1, y1, z1;
   
+    /** cstr
+     * @param x  min x
+     * @param y  min y
+     * @param z  min z
+     * @param s  cube side
+     */
     Box( double x, double y, double z, double s )
     {
       x0 = x;
@@ -69,6 +91,14 @@ class FractalComputer
       z1 = z+s;
     }
 
+    /** cstr
+     * @param x   min x
+     * @param y   min y
+     * @param z   min z
+     * @param xx  max x
+     * @param yy  max y
+     * @param zz  max z
+     */
     Box( double x, double y, double z, double xx, double yy, double zz )
     {
       x0 = x;
@@ -79,11 +109,19 @@ class FractalComputer
       z1 = zz;
     }
   
+    /** @return true if the box contains a point
+     * @param x   point x
+     * @param y   point y
+     * @param z   point z
+     */
     boolean contains( double x, double y, double z )
     {
       return ( x >= x0 && y >= y0 && z >= z0 && x <= x1 && y <= y1 && z <= z1 );
     }
   
+    /** @return true if the box contains a point
+     * @param p   point
+     */
     boolean contains( Cave3DStation p ) { return contains( p.x, p.y, p.z); }
   
     /** check if this box intersects another box
@@ -106,6 +144,8 @@ class FractalComputer
     }
   }
 
+  /** segment
+   */
   class Line 
   {
     Cave3DShot shot;
@@ -114,6 +154,9 @@ class FractalComputer
     private double dx, dy, dz;
     Box    mBBox;
 
+    /** cstr
+     * @param sh   shot
+     */
     Line( Cave3DShot sh )
     {
       shot = sh;
@@ -134,6 +177,9 @@ class FractalComputer
       mBBox = new Box( x0, y0, z0, x1, y1, z1 );
     }
 
+    /** @return true if the segment intersect a box
+     * @param b   box
+     */
     boolean intersects( Box b )
     {
       double t;
@@ -155,7 +201,8 @@ class FractalComputer
 
 
 
-  // array of boxes all of the same side
+  /** array of boxes all of the same side
+   */
   class SingleBox
   {
     int nx, ny, nz; // number of boxes in direction X, Y, and Z
@@ -165,6 +212,13 @@ class FractalComputer
     double side;     // boxes side
     int scale;      // boxes scale
 
+    /** cstr
+     * @param nnx   number of boxes in X direction
+     * @param nny   number of boxes in Y direction
+     * @param nnz   number of boxes in Z direction
+     * @param sd    boxes side
+     * @param sc    boxes scale
+     */
     SingleBox( int nnx, int nny, int nnz, double sd, int sc )
     {
       nx = nnx;
@@ -179,6 +233,11 @@ class FractalComputer
       scale = sc;
     }
 
+   /** add an index to the box tree-set, ie, set te corresponding box filled
+     * @param x   box index x
+     * @param y   box index y
+     * @param z   box index z
+     */
     void set( int x, int y, int z )
     {
       if ( x < 0 || x >= nx ) TDLog.v( "FRACTAL X:X " + x + "/" + nx + " Y " + y + "/" + ny + " Z " + z + "/" + nz );
@@ -188,6 +247,11 @@ class FractalComputer
       box.add( (z*ny + y)*nx + x );
     }
 
+    /** @return true is an index is in the box tree-set, ie, the corresponding box is filled
+     * @param x   box index x
+     * @param y   box index y
+     * @param z   box index z
+     */
     boolean isSet( int x, int y, int z ) { 
       // return box[ z*nyx + y*nx + x ]; 
       return box.contains( z*nyx + y*nx + x );
@@ -203,7 +267,7 @@ class FractalComputer
     // }
 
     // // neighbor-number counter
-    // int countNghb()
+    // int countNghb6()
     // {
     //   int ret = 0;
     //   for (int k=1; k<nn; ++k ) {
@@ -223,12 +287,26 @@ class FractalComputer
     //   return ret;
     // }
 
+    /** @return 1 if a box in the tree-set is filled, zero otherwise
+     * @param x   box index x
+     * @param y   box index y
+     * @param z   box index z
+     *
+     * counts the number of set boxes
+     */
     int countTotal( int x, int y, int z ) { 
       // return ( box[ z*nyx + y*nx + x ] )? 1 : 0;
       return ( box.contains( z*nyx + y*nx + x ) )? 1 : 0;
     }
 
-    int countNghb( int x, int y, int z )
+    /** @return the number of left-neighbor of a box that are filled
+     * @param x   box index x
+     * @param y   box index y
+     * @param z   box index z
+     *
+     * counts the number of 6-neighbors, is pair of set boxes nearby in XX, or YY, or ZZ
+     */
+    int countNghb6( int x, int y, int z )
     {
       int ret = 0;
       int off = z*nyx + y*nx + x;
@@ -240,9 +318,67 @@ class FractalComputer
       if ( z > 0 && box.contains( off - nyx ) ) ++ ret;
       return ret;
     }
+
+    /** @return the number of leftside-neighbor of a box that are filled
+     * @param x   box index x
+     * @param y   box index y
+     * @param z   box index z
+     *
+     * counts the number of 14-neighbors, is pair of set boxes nearby in XX, or YY, or ZZ
+     */
+    int countNghb26( int x, int y, int z )
+    {
+      int ret = 0;
+      int off = z*nyx + y*nx + x; // box offset
+      // if ( x > 0 && box[ off - 1 ] ) ++ ret;
+      // if ( y > 0 && box[ off - nx ] ) ++ ret;
+      // if ( z > 0 && box[ off - nyx ] ) ++ ret;
+      if ( x > 0 ) {
+        if ( box.contains( off - 1 ) ) ++ ret;                // -..  X
+        if ( y > 0 ) {
+          int nx1 = 1 + nx;
+          if ( box.contains( off - nx1 ) ) ++ ret;            // --.  ZY
+          if ( z > 0 ) {
+            if ( box.contains( off - nx1 - nyx ) ) ++ ret;    // ---  XYZ
+          }
+          if ( z < nz-1 ) {
+            if ( box.contains( off - nx1 + nyx ) ) ++ ret;    // --+  XYz
+          }
+        }
+        if ( y < ny-1 ) {
+          int nx1 = 1 - nx;
+          if ( box.contains( off - nx1 ) ) ++ ret;            // -+.  Xy
+          if ( z > 0 ) {
+            if ( box.contains( off - nx1 - nyx ) ) ++ ret;    // -+-  XyZ
+          }
+          if ( z < nz-1 ) {
+            if ( box.contains( off - nx1 + nyx ) ) ++ ret;    // -++  Xyz
+          }
+        }
+        if ( z > 0 ) {
+          if ( box.contains( off - 1 - nyx ) ) ++ ret;        // -.-  XZ
+        }
+        if ( z < nz-1 ) {
+          if ( box.contains( off - 1 + nyx ) ) ++ ret;        // -.+  Xz
+        }
+      }
+      if ( y > 0 ) {
+        if ( box.contains( off - nx ) ) ++ ret;               // .-.  Y
+        if ( z > 0 ) {
+          if ( box.contains( off - nx - nyx ) ) ++ ret;       // .--  YZ
+        }
+        if ( z < nz-1 ) {
+          if ( box.contains( off - nx + nyx ) ) ++ ret;       // .-+  Yz
+        }
+      }
+      if ( z > 0 && box.contains( off - nyx ) ) ++ ret;       // ..-  Z
+      return ret;
+    }
+
   }
 
-  // array of single boxes, each scaled by two in two
+  /** array of single boxes, each scaled by two in two
+   */
   class MultiBox
   {
     int DIM;
@@ -292,10 +428,17 @@ class FractalComputer
             if ( k > 0 ) subcount( k-1, counter, off, step, x*2, y*2, z*2 );
           }
         }
-      } else { // if ( mMode == COUNT_NGHB )
+      } else if ( mMode == COUNT_NGHB_6 ) {
         for ( int x=x0; x<x0+2; ++x ) for ( int y=y0; y<y0+2; ++y ) for ( int z=z0; z<z0+2; ++z ) {
           if ( box[k].isSet( x, y, z ) ) {
-            counter[ off + k*step ] += box[k].countNghb( x, y, z );
+            counter[ off + k*step ] += box[k].countNghb6( x, y, z );
+            if ( k > 0 ) subcount( k-1, counter, off, step, x*2, y*2, z*2 );
+          }
+        }
+      } else if ( mMode == COUNT_NGHB_26 ) {
+        for ( int x=x0; x<x0+2; ++x ) for ( int y=y0; y<y0+2; ++y ) for ( int z=z0; z<z0+2; ++z ) {
+          if ( box[k].isSet( x, y, z ) ) {
+            counter[ off + k*step ] += box[k].countNghb26( x, y, z );
             if ( k > 0 ) subcount( k-1, counter, off, step, x*2, y*2, z*2 );
           }
         }
@@ -319,12 +462,23 @@ class FractalComputer
             }
           }
         }
-      } else { // if ( mMode == COUNT_NGHB )
+      } else if ( mMode == COUNT_NGHB_6 ) {
         for ( int x = 0; x<box[k].nx; ++x ) {
           for ( int y = 0; y<box[k].ny; ++y ) {
             for ( int z = 0; z<box[k].nz; ++z ) {
               if ( box[k].isSet( x, y, z ) ) {
-                counter[ off + k*step ] += box[k].countNghb( x, y, z );
+                counter[ off + k*step ] += box[k].countNghb6( x, y, z );
+                subcount( k-1, counter, off, step, x*2, y*2, z*2 );
+              }
+            }
+          }
+	}
+      } else if ( mMode == COUNT_NGHB_26 ) {
+        for ( int x = 0; x<box[k].nx; ++x ) {
+          for ( int y = 0; y<box[k].ny; ++y ) {
+            for ( int z = 0; z<box[k].nz; ++z ) {
+              if ( box[k].isSet( x, y, z ) ) {
+                counter[ off + k*step ] += box[k].countNghb26( x, y, z );
                 subcount( k-1, counter, off, step, x*2, y*2, z*2 );
               }
             }

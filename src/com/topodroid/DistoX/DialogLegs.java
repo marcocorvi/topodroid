@@ -29,6 +29,9 @@ class DialogLegs extends MyDialog
   private CheckBox mCBduplicate;
   private CheckBox mCBcommented;
 
+  /** cstr
+   * @param context context
+   */
   public DialogLegs( Context context )
   {
     super( context, R.string.DialogLegs );
@@ -54,6 +57,9 @@ class DialogLegs extends MyDialog
     mCBcommented.setChecked( GlModel.showLegsCommented );
   }
 
+  /** respond to user taps
+   * @param v   tapped view
+   */
   @Override
   public void onClick(View v)
   {

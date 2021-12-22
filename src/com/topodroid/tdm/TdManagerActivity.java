@@ -320,17 +320,17 @@ public class TdManagerActivity extends Activity
     switch ( request ) {
       case TDRequest.REQUEST_TDCONFIG:
         if ( result == TDRequest.RESULT_TDCONFIG_OK ) {
-          TDLog.v( "TdmConfig OK" );
+          TDLog.v( "**** TdmConfig OK" );
           // nothing 
         } else if ( result == TDRequest.RESULT_TDCONFIG_DELETE ) {
-          TDLog.v( "TdmConfig DELETE" );
+          TDLog.v( "**** TdmConfig DELETE" );
           // get TdmConfig name and delete it
           String path = extras.getString( TDRequest.TDCONFIG_PATH );
           mTdmConfigAdapter.deleteTdmConfig( path );
           mList.invalidate();
           // updateTdmConfigList();
         } else if ( result == TDRequest.RESULT_TDCONFIG_NONE ) {
-          TDLog.Error( "TdmConfig NONE" );
+          TDLog.Error( "**** TdmConfig NONE" );
           // nothing
         }
         break;

@@ -28,54 +28,61 @@ import android.widget.TextView;
 class DialogMeasure extends MyDialog 
                     implements View.OnClickListener
 {
-    // private Cave3DView mCave3Dview;
-    private TglMeasure mMeasure;
+  // private Cave3DView mCave3Dview;
+  private TglMeasure mMeasure;
 
-    public DialogMeasure( Context context, TglMeasure measure )
-    {
-      super( context, R.string.DialogMeasure );
-      mMeasure   = measure;
-    }
+  /** cstr
+   * @param context context
+   * @param measure measurement results
+   */
+  public DialogMeasure( Context context, TglMeasure measure )
+  {
+    super( context, R.string.DialogMeasure );
+    mMeasure   = measure;
+  }
 
-    @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
-        super.onCreate(savedInstanceState);
-        initLayout( R.layout.cave3d_station_distance_dialog, R.string.STATIONS_DISTANCE );
+  @Override
+  protected void onCreate(Bundle savedInstanceState)
+  {
+      super.onCreate(savedInstanceState);
+      initLayout( R.layout.cave3d_station_distance_dialog, R.string.STATIONS_DISTANCE );
 
-        ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
+      ((Button) findViewById( R.id.button_close )).setOnClickListener( this );
 
-        TextView tv = ( TextView ) findViewById(R.id.st_name);
-        tv.setText( mMeasure.st1.getFullName() + " - " + mMeasure.st2.getFullName() );
+      TextView tv = ( TextView ) findViewById(R.id.st_name);
+      tv.setText( mMeasure.st1.getFullName() + " - " + mMeasure.st2.getFullName() );
 
-        tv = ( TextView ) findViewById(R.id.st_east);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_east), mMeasure.de ) );
-        tv = ( TextView ) findViewById(R.id.st_north);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_north), mMeasure.dn ) );
-        tv = ( TextView ) findViewById(R.id.st_vert);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_vert), mMeasure.dz ) );
-        tv = ( TextView ) findViewById(R.id.st_dist);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_distance), mMeasure.d3 ));
-        tv = ( TextView ) findViewById(R.id.st_horz);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.horz_distance), mMeasure.d2 ));
-        tv = ( TextView ) findViewById(R.id.st_angle);
-        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_angle), mMeasure.azimuth, mMeasure.clino ));
+      tv = ( TextView ) findViewById(R.id.st_east);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_east), mMeasure.de ) );
+      tv = ( TextView ) findViewById(R.id.st_north);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_north), mMeasure.dn ) );
+      tv = ( TextView ) findViewById(R.id.st_vert);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_vert), mMeasure.dz ) );
+      tv = ( TextView ) findViewById(R.id.st_dist);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_distance), mMeasure.d3 ));
+      tv = ( TextView ) findViewById(R.id.st_horz);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.horz_distance), mMeasure.d2 ));
+      tv = ( TextView ) findViewById(R.id.st_angle);
+      tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_angle), mMeasure.azimuth, mMeasure.clino ));
 
-        tv = ( TextView ) findViewById(R.id.st_cave_pathlength);
-        if ( mMeasure.dcave > 0 ) {
-          tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_length), mMeasure.dcave, mMeasure.getDistPos(), mMeasure.getDistNeg() ));
-        } else {
-          tv.setVisibility( View.GONE );
-        }
+      tv = ( TextView ) findViewById(R.id.st_cave_pathlength);
+      if ( mMeasure.dcave > 0 ) {
+        tv.setText( String.format(Locale.US, mContext.getResources().getString(R.string.cave_length), mMeasure.dcave, mMeasure.getDistPos(), mMeasure.getDistNeg() ));
+      } else {
+        tv.setVisibility( View.GONE );
+      }
 
-    }
+  }
 
-    // only button_close
-    @Override
-    public void onClick( View v )
-    {
-      // TDLog.v( "Measure onClick()" );
-      dismiss();
-    }
+  /** respond to user taps
+   * @param v tapped view
+   * @note only button_close
+   */
+  @Override
+  public void onClick( View v )
+  {
+    // TDLog.v( "Measure onClick()" );
+    dismiss();
+  }
 }
 

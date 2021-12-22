@@ -132,6 +132,7 @@ public class TdmConfigActivity extends Activity
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
       String path = extras.getString( TDRequest.TDCONFIG_PATH );
+      TDLog.v("TDM config " + path );
       if ( path != null ) {
         mTdmConfig = new TdmConfig( path, false ); // false: no save 
         if ( mTdmConfig != null ) {
@@ -177,7 +178,7 @@ public class TdmConfigActivity extends Activity
   protected void onPause()
   {
     super.onPause();
-    // TDLog.v( "TdmConfig activity on pause");
+    TDLog.v( "TdmConfig activity on pause");
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
   }
 
@@ -334,8 +335,10 @@ public class TdmConfigActivity extends Activity
   {
     Intent intent = new Intent();
     if ( mTdmConfig != null ) {
+      TDLog.v("TDM config finish with path " + mTdmConfig.getFilepath() );
       intent.putExtra( TDRequest.TDCONFIG_PATH, mTdmConfig.getFilepath() );
     } else {
+      TDLog.Error("TDM config finish with no path" );
       intent.putExtra( TDRequest.TDCONFIG_PATH, "no_path" );
     }
     setResult( result, intent );

@@ -115,7 +115,7 @@
   <string name="SetupDrawingUnitDialog" translatable="false">page_setup.htm</string>
 
   <string name="TdManager" translatable="false">manual14.htm</string>
-  <string name="TdmConfigWindow" translatable="false">manual14.htm</string>
+  <string name="TdmConfigWindow" translatable="false">page_tdm_config.htm</string>
   <string name="TdmConfigDialog" translatable="false">page_tdm_config_dialog.htm</string>
   <string name="TdmEquateNewDialog" translatable="false">page_tdm_equate_new.htm</string>
   <string name="TdmEquatesDialog" translatable="false">page_tdm_equates.htm</string>

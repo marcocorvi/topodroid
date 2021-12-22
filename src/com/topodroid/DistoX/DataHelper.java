@@ -258,7 +258,7 @@ public class DataHelper extends DataSetObservable
   private void openDatabase( Context context, String db_name )
   {
     try {
-      TDLog.v( "opened database, skip check");
+      TDLog.v( "opened database " + db_name + ", skip check");
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         int oldVersion = myDB.getVersion();

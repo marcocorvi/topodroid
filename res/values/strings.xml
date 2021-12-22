@@ -1802,6 +1802,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="cmenu_fractal">FRACTAL DIM.</string -->
 
     <string name="fractal_title">Fractal counts</string>
+    <string name="fractal_cnt_total">Total nr.</string>
+    <string name="fractal_cnt_six">6-neighbor nr.</string>
+    <string name="fractal_cnt_twentysix">26-neighbor nr.</string>
+
     <string name="info_title">MODEL INFO</string>
     <string name="info_surveys">Surveys</string>
     <string name="info_axes">Axes: blue North, green East</string>

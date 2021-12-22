@@ -24,12 +24,23 @@ Subdirs bin gen are created by the build
 
 [3] TopoDroid debug build.
    ant debug
+or 
+   make
    
 [4] TopoDroid debug install.
    adb install -r bin/DistoX-debug.apk
+or
+   make install
    
 N.B. to build/install release apk replace "debug" with "release".
 Keystore and key for topodroid are not included in the repo :-)
+
+[5] TopoDroid release build
+   make release
+This is however not suitable for install on newer Androids. 
+Therefore use
+   make signed
+which creates a v1-3 signed apk.
 
 ----------------------------------------------------------------
 Howto Build with studio

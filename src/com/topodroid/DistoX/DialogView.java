@@ -38,6 +38,11 @@ class DialogView extends MyDialog
   private Button mRBsouth;
   private CheckBox mCBzoom;
 
+  /** cstr
+   * @param context  context
+   * @param app      3D viewer activity
+   * @param renderer screen renderer
+   */
   public DialogView( Context context, TopoGL app, GlRenderer renderer )
   {
     super( context, R.string.DialogView );
@@ -72,6 +77,9 @@ class DialogView extends MyDialog
 
   }
 
+  /** respond to user taps
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v)
   {
@@ -96,5 +104,6 @@ class DialogView extends MyDialog
     }
     dismiss();
   }
+
 }
 

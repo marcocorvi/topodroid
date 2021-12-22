@@ -67,20 +67,24 @@
       android:paddingRight="6dip"
       android:paddingBottom="3dip">
    					  
-      <RadioButton android:id="@+id/fractal_count_total"
+      <RadioButton android:id="@+id/fractal_cnt_total"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Total Nr."
+        android:text="@string/fractal_cnt_total"
       />
-
-      <RadioButton android:id="@+id/fractal_count_nghb"
+      <RadioButton android:id="@+id/fractal_cnt_six"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:text="Nghb Nr."
+        android:text="@string/fractal_cnt_six"
       />
-
+      <RadioButton android:id="@+id/fractal_cnt_twentysix"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:text="@string/fractal_cnt_twentysix"
+      />
     </RadioGroup>
 
   <LinearLayout android:id="@+id/help"

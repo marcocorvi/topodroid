@@ -1,22 +1,58 @@
 <html><body>
-<h4>TopoDroid Manager - Project window</h4>
+<h4>PROJECT MANAGER - Project window</h4>
 
-The <i>Cave Project Window</i> displays the list of surveys in the cave project.
-<br><p>
+The cave <i>Project Window</i> is opened tapping a project name in the listing of the <i>Manager Window</i>.<br><p>
 
-<b>Buttons</b><br>
-Add more surveys<br>
-Drop selected surveys<br>
-View selected surveys<br>
-List of the <i>equates</i><br>
-3D view (Cave3D)<br>
-<p>
+It displays the list of surveys that comprise the project. The list is empty if the project has no
+surveys.<br>
+Each survey can be selected for further actions, by tapping its checkbox.<br><p>
 
 <b>Menus</b><br>
-Close the window<br>
-Export the cave project (Therion or Survex)<br>
-Delete the cave project<br>
-Help<br>
-<p>
+<ul>
+<li>Close the window</li>
+<li>Export the cave project (Therion or Survex)</li>
+<li>Delete the cave project</li>
+<li>Help</li>
+</ul><br>
+
+<b>Buttons</b><br>
+<ul>
+<li><i>insert</i> surveys</li>
+<li><i>remove</i> the selected surveys</li>
+<li>2D <i>display</i> of the selected surveys, in plan view</li>
+<li>list the project <i>equates</i></li>
+<li><i>3d view</i> of the project</li>
+</ul><br>
+
+The <i>insert</i> button display the list of surveys in the TopoDroid database.
+Surveys are added to the project by tapping their checkboxes and confirming with 
+the <i>OK</i> button.<br><p> 
+
+<b>Project 3D view</b><br>
+The project is displays in the 3D viewer beginning with the first survey.<br>
+The following surveys are shown in the 3D only if they are (directly or indirectly) connected to
+the first survey.<br><p>
+
+If several surveys are georeferenced, they can all be displayed in 3D, together with the
+connected surveys.<br><p>
+
+
+<b>Surveys 2D view</b><br>
+
+The selected survey are displayed in plan view, with midline and station names.
+Each survey has a different color. After a while the colors repeat therefore you should display
+only two or three surveys at a time.<br>
+Equates are shown as dashed red lines, and equated stations have a round background.<br><p>
+
+The view can be panned and zoomed.<br>
+A survey can be grabbed (tap on a station: it gets circled) and dragged around while the other surveys do not move.
+In this way you can overlap stations of different surveys that you want to equate.
+When they overlap circle them both by tapping the point: you can then insert the equate between them with the menu "add equate".<br><p>
+
+<b>Buttons</b>
+<ul style="margin-top:0">
+<li><i>Add equate</i>: opens a dialog to manually add an equate between surveys of the cave project.</li>
+<li><i>List equates</i> between surveys of the cave  project</li>
+</ul><br><p>
 
 </body></html>

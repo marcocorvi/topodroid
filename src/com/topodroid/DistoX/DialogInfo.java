@@ -116,7 +116,7 @@ class DialogInfo extends MyDialog
     mBTclose.setOnClickListener( this );
   }
 
-  /** implements click listener
+  /** respond to user taps
    * @param view  tapped view (unused)
    */
   @Override
@@ -126,7 +126,7 @@ class DialogInfo extends MyDialog
     dismiss();
   }
 
-  /** implements item click listener
+  /** respond to taps on item views
    * @param parent    view parent container
    * @param view      clicked item view
    * @param position  position of the item in the container
