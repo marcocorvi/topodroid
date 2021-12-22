@@ -35,6 +35,7 @@
   <string name="CalibListDialog" translatable="false">page_calib_dialog.htm</string>
   <string name="CalibValidateListDialog" translatable="false">page_validation.htm</string>
   <string name="CalibValidateResultDialog" translatable="false">page_validation.htm</string>
+  <string name="ExportDialogCalib" translatable="false">page_calib_import.htm</string>
   <!-- string name="ConnectDialog" translatable="false">page_connect.htm</string -->
   <string name="CurrentStationDialog" translatable="false">page_saved_station.htm</string>
   <string name="SearchDialog" translatable="false">page_search.htm</string>
@@ -121,10 +122,13 @@
   <string name="TdmEquatesDialog" translatable="false">page_tdm_equates.htm</string>
   <string name="TdmSourcesDialog" translatable="false">page_tdm_sources.htm</string>
   <!-- string name="TdmViewEquatesDialog" translatable="false">page_view_equates.htm</string -->
+  <string name="ExportDialogTdm" translatable="false">page_tdm_export.htm</string>
 
   <string name="DialogIco" translatable="false">page_3d_ico.htm</string>
+  <string name="DialogRose" translatable="false">page_3d_rose.htm</string>
   <string name="DialogView" translatable="false">page_3d_view.htm</string>
   <string name="DialogInfo" translatable="false">page_3d_info.htm</string>
+  <string name="ExportDialogModel" translatable="false">page_3d_export.htm</string>
   <string name="DialogLegs" translatable="false">page_3d_legs.htm</string>
   <string name="DialogProjection" translatable="false">page_3d_proj.htm</string>
   <string name="DialogFractal" translatable="false">page_3d_fractal.htm</string>

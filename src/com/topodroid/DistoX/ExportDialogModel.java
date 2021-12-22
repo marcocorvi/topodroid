@@ -63,7 +63,7 @@ public class ExportDialogModel extends MyDialog
    */
   public ExportDialogModel( Context context, TopoGL parent, TglParser parser, String[] types, int title )
   {
-    super( context, R.string.ExportDialog );
+    super( context, R.string.ExportDialogModel );
     mParent = parent;
     mParser = parser;
     mTypes  = types;
@@ -97,6 +97,12 @@ public class ExportDialogModel extends MyDialog
     // updateLayouts(); // not necessary
   }
 
+  /** respond to a tap on an item view
+   * @param av     items adapter
+   * @param v      tapped item view
+   * @param pos    item position in the adapter
+   * @param id     ...
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
@@ -105,6 +111,9 @@ public class ExportDialogModel extends MyDialog
     // updateLayouts(); // not neceessary
   }
 
+  /** respond to a deselection: clear the selected view and position
+   * @param av     items adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av ) 
   { 
@@ -113,6 +122,9 @@ public class ExportDialogModel extends MyDialog
     // updateLayouts(); // not neceessary
   }
 
+  /** respond to a user tap
+   * @param v   tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -174,6 +186,8 @@ public class ExportDialogModel extends MyDialog
   //   }
   // }
 
+  /** initialize the export options according to the state of the 3D model
+   */
   private void initOptions()
   {
     ((CheckBox) findViewById( R.id.model_stations )).setChecked( true );

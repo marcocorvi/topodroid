@@ -48,7 +48,7 @@ public class ExportDialogTdm extends MyDialog
 
   public ExportDialogTdm( Context context, IExporter parent, String[] types, int title, String survey )
   {
-    super( context, R.string.ExportDialog );
+    super( context, R.string.ExportDialogTdm );
     mParent = parent;
     mTypes  = types;
     mSelected = null;

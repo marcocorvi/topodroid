@@ -1,20 +1,28 @@
-<html>
-<body>
+<html><body>
 
-<h4>DistoX CALIBRATION IMPORT</h4>
+<h4>DistoX CALIBRATION Import/Export</h4>
 
-This dialog is opened from the <i>Import</i> button in the <i>Calibration</i> list dialog.<br><p>
+<b>Calibration import</b><br>
+A calibration can be imported from a CSV calibration file.<br><p>
 
-This dialog displays the list of calibration CSV files.<br><p>
+The import dialog is opened from the <i>Import</i> button in the <i>Calibration</i> list dialog.<br><p>
 
+This dialog displays the list of the calibration CSV files.<br>
 Tap the entry you want to import.<br><p>
 
 The import fails if the file does not contain a calibration,
-or the calibration is already present.<br><p>
+or the calibration is already present.<br>
+It can also fail if the device bluetooth address written in the calibration is different from that of the
+current device.<br><p>
 
 <b>Calibration CSV export</b><br>
 
-The calibration CSV export format contains the calibration details (name, date, device BT address, comment, algorithm), followed by the calibration data.<br><p>
+A DistoX calibration can be exported in CSV (text) format.<br><p>
+
+Te export dialog is opened from the <i>Export</i> menu of the <i>calibration info</i> window.<br><p>
+
+The calibration CSV export format contains the calibration details (name, date, device bluetooth address, comment, algorithm), followed by the calibration data,
+and the calibration coefficients.<br><p>
 
 Each data line contains:
 <ul>
@@ -27,5 +35,4 @@ Each data line contains:
 </ul>
 <br><p>
 
-</body>
-</html>
+</body></html>

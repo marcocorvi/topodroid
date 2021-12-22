@@ -762,7 +762,7 @@ public class TopoGL extends Activity
   BitmapDrawable mBMturn;
   BitmapDrawable mBMhull;
 
-  // BitmapDrawable mBMbleDown  = null; // FIXME BLUETOOTH BUTTON
+  // BitmapDrawable mBMbleDown  = null; // FIXME BLUETOOTH BUTTON STATE-ICONS
   // BitmapDrawable mBMbleOff   = null;
   // BitmapDrawable mBMbleOn    = null; 
   // BitmapDrawable mBMbleWait  = null;
@@ -806,6 +806,8 @@ public class TopoGL extends Activity
   BitmapDrawable mBMframeAxes;
 
 
+  /** reset the button bar
+   */
   private int resetButtonBar()
   {
     int size = 42;
@@ -869,7 +871,7 @@ public class TopoGL extends Activity
       mBMframeNo     = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_no );
       mBMframeAxes   = MyButton.getButtonBackground( this, size, R.drawable.iz_frame_axes );
 
-      // if ( BLUETOOTH ) {
+      // if ( BLUETOOTH ) { // bluetooth button state-icons
       //   mBMbleDown  = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_down );
       //   mBMbleOff   = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_off );
       //   mBMbleOn    = MyButton.getButtonBackground( this, size, R.drawable.iz_bt_on  );
@@ -900,7 +902,15 @@ public class TopoGL extends Activity
     return size;
   }
 
-  // only for BTN_STATION
+  /** resport to user long-tap on a button
+   * @param v   tapped view
+   * @return true if the long-tap has been handled
+   * @note for projection: adjust focal length
+   * @note for stations: toggle station-selectability
+   * @note for splays: insert a new leg manually (only for BT surveying mode)
+   * @note for surveys: list surveys to disable display
+   * @note for legs: leg visibility
+   */
   @Override 
   public boolean onLongClick( View v ) 
   {
@@ -941,6 +951,8 @@ public class TopoGL extends Activity
   }
   // ------------------------------------------------------------------
 
+  /** reset the state of the buttons
+   */
   private void resetButtons()
   {
     setButtonProjection();
@@ -953,6 +965,8 @@ public class TopoGL extends Activity
     setButtonFrame();
   }
 
+  /** set the state of the STATION button, according to the selectability and the station-mode (none, point, name)
+   */
   private void setButtonStation()
   {
     if ( mSelectStation ) {
@@ -988,6 +1002,8 @@ public class TopoGL extends Activity
     }
   }
 
+  /** set the FRAME button, according to the frame-mode
+   */
   private void setButtonFrame()
   {
     if ( mRenderer == null ) return;
@@ -1004,6 +1020,9 @@ public class TopoGL extends Activity
     }
   }
 
+  /** set the COLOR button, according to the color-mode (grey, by-survey, by-depth, by-surface)
+   * @note the color could also be set by an attribute, eg, temperature, if there are enough values
+   */
   private void setButtonColor()
   {
     if ( mRenderer == null ) return;
@@ -1026,6 +1045,8 @@ public class TopoGL extends Activity
     }
   }
 
+  /** set the SPLAYS button, according to the splay-mode (none, line, endpoint)
+   */
   private void setButtonSplays()
   {
     switch ( GlModel.splayMode ) {
@@ -1041,22 +1062,30 @@ public class TopoGL extends Activity
     }
   }
 
+  /** set the SURFACE button: either shown or hidden
+   */
   private void setButtonSurface()
   {
     mButton1[ BTN_SURFACE ].setBackgroundDrawable( GlModel.surfaceMode ? mBMsurface : mBMsurfaceNo );
   }
 
+  /** set the WALLS button: either shown or hidden
+   */
   private void setButtonWall() 
   {
     mButton1[ BTN_WALL ].setBackgroundDrawable( GlModel.wallMode ? mBMwall : mBMwallNo );
   }
 
+  /** set the PROJECTION button: either orthogonal or perspective
+   */
   private void setButtonProjection()
   {
     mButton1[ BTN_PROJECT ].setBackgroundDrawable( 
      ( mRenderer != null && mRenderer.projectionMode == GlRenderer.PROJ_PERSPECTIVE )? mBMperspective : mBMorthogonal );
   }
 
+  /** set the MOVE button: light, pan, rotate
+   */
   private void setButtonMove()
   {
     if ( GlSurfaceView.mLightMode ) {
@@ -1070,6 +1099,9 @@ public class TopoGL extends Activity
     }
   }
 
+  /** show the selected station
+   * @param text display text
+   */
   void showCurrentStation( String text )
   {
     mCurrentStation.setText( text );
@@ -1080,6 +1112,8 @@ public class TopoGL extends Activity
     mFixStation.setBackground( mBMfixOff );
   }
  
+  /** hide the selected station
+   */
   void closeCurrentStation()
   {
     mLayoutStation.setVisibility( View.GONE );
@@ -1090,6 +1124,9 @@ public class TopoGL extends Activity
     GlNames.setHLcolorG( 0.0f );
   }
 
+  /** set the rotation center at the selected station
+   * @return true if success
+   */
   boolean centerAtCurrentStation( )
   {
     boolean res = false;
@@ -1099,6 +1136,9 @@ public class TopoGL extends Activity
     return res;
   }
 
+  /** respond to user taps
+   * @param view tapped view
+   */
   @Override
   public void onClick(View view)
   { 
@@ -1182,6 +1222,9 @@ public class TopoGL extends Activity
 
   // -------------------------------------------------------------------
 
+  /** set the survey (model) name
+   * @param name   survey name
+   */
   void setSurveyName( String name )
   {
     if ( name == null ) {
@@ -1197,7 +1240,10 @@ public class TopoGL extends Activity
     }
   }
 
-
+  /** set the title
+   * @param clino    clino of the viewpoint
+   * @param phi      azimuth of the viewpoint
+   */
   void showTitle( double clino, double phi )
   {
     if ( mSurveyName != null ) {
@@ -1207,6 +1253,11 @@ public class TopoGL extends Activity
     }
   }
 
+  /** open a TopoDroid survey
+   * @param survey   survey name
+   * @param base     topodroid base folder
+   * @return true if success
+   */
   private boolean doOpenSurvey( String survey, String base )
   {
     // Cave3DFile.checkAppBasePath( this );
@@ -1218,9 +1269,15 @@ public class TopoGL extends Activity
     return true;
   }
 
-  // always called asynch
-  // asynch call returns always false
-  // synch call return true if successful
+  /** load model from a file
+   * @param uri      file URI
+   * @param filename file name
+   * @param asynch   ...
+   * @return true if success
+   * @note always called asynch
+   *       asynch call returns always false
+   *       synch call return true if successful
+   */
   private boolean doOpenFile( final Uri uri, final String pathname, boolean asynch )
   {
     mFilename = null;
@@ -1290,6 +1347,9 @@ public class TopoGL extends Activity
   //   startActivityForResult( openFileIntent, REQUEST_OPEN_FILE );
   // }
 
+  /** set the WALL button - this method is empty
+   * @param wall_mode    walls mode
+   */
   private void setWallButton( int wall_mode )
   {
 /*
@@ -1319,7 +1379,6 @@ public class TopoGL extends Activity
     }
 */
   }
-
 
   // ------------------------------ SKETCH
   /** open a sketch file (in Cave3D format)
@@ -1472,7 +1531,7 @@ public class TopoGL extends Activity
   /** load a geotiff texture from file
    * @param isr      the input-stream reader is not used
    * @param pathname TIFF file full pathname
-   * @param bounds   ...
+   * @param bounds   clipping rectangle
    */
   private void loadTextureGeotiff( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
@@ -1501,6 +1560,11 @@ public class TopoGL extends Activity
     }).execute( pathname );
   }
 
+  /** load an OSM texture file
+   * @param isr      file input stream
+   * @param pathname file pathname
+   * @param bounds   clipping rectangle
+   */
   private void loadTextureOSM( final InputStreamReader isr, final String pathname, final RectF bounds )
   {
     (new AsyncTask<String, Void, Boolean>() {
@@ -1544,6 +1608,8 @@ public class TopoGL extends Activity
   // TglPerms perms_dialog = null;
   static int mRequestPermissionTime = 1;
 
+  /** check settings: load settings and set VERSION
+   */
   private void checkPreferences()
   {
     SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences( this );
@@ -1796,6 +1862,9 @@ public class TopoGL extends Activity
   }
 */
 
+  /** load the 3D viewer settings
+   * @param sp shared preferences
+   */
   private void loadPreferences( SharedPreferences sp )
   {
     float r;
@@ -1883,8 +1952,12 @@ public class TopoGL extends Activity
 
   // ---------------------------------------------------------------
 
-  // first "init rendering"
-  // FIXME isr == null
+  /** first "init rendering"
+   * @param survey    survey name
+   * @param base      TopoDroid base folder
+   * @return true if success
+   * FIXME isr == null
+   */
   private boolean initRendering1( String survey, String base ) 
   {
     // TDLog.v("TopoGL init rendering " + survey + " base " + base );
@@ -1907,8 +1980,13 @@ public class TopoGL extends Activity
     return (mParser != null);
   }
 
-  // second "init rendering"
-  // called only by doOpenFile
+  /** second "init rendering"
+   * @param is         file input stream
+   * @param filepath   file path 
+   * @param surveyname survey name
+   * @return true if success
+   * @note called only by doOpenFile
+   */
   private boolean initRendering2( InputStream is, String filepath, String surveyname )
   {
     doSketches = false;
@@ -1963,6 +2041,11 @@ public class TopoGL extends Activity
     return (mParser != null);
   }
 
+  /** toast after a notification
+   * @param res   notification result, either true or false
+   * @param ok    resource for true result
+   * @param no    resource for false result
+   */
   private void notify( boolean res, int ok, int no )
   {
     if ( res ) {
@@ -1972,7 +2055,11 @@ public class TopoGL extends Activity
     }
   }
 
-  // run on onPostExecute
+  /** react to notification of wall-compute complition
+   * @param type   computation type
+   * @param result true if computation successful
+   * @note run on onPostExecute
+   */
   void notifyWall( int type, boolean result )
   {
     // TDLog.v("TopoGL app notify wall " + type );
@@ -1990,6 +2077,8 @@ public class TopoGL extends Activity
     if ( mRenderer != null ) mRenderer.notifyWall( type, result );
   }
 
+  /** refresh the display
+   */
   void refresh()
   {
     // TDLog.v("TopoGL refresh. mode " + mRenderer.projectionMode );
@@ -2000,12 +2089,19 @@ public class TopoGL extends Activity
     }
   }
 
+  /** open the dialpg to load a survey sketch (c3d format)
+   */
   void loadSketch()
   {
     new DialogSketch( this, this ).show();
   }
 
-  // WITH-GPS
+  /** react to location notify
+   * @param lng longitude [WGS84 deimal degrees]
+   * @param lat latitude
+   * @param alt altitude [m]
+   * @note WITH-GPS
+   */
   public void notifyLocation( double lng, double lat, double alt )
   {
     // TDLog.v("TopoGL GPS notified location " + lng + " " + lat );
@@ -2084,7 +2180,10 @@ public class TopoGL extends Activity
   }
 ------------ */
 
-  // WITH-GPS
+  // WITH-GPS -----------------------------------------------------------------
+  /** set the GPS status
+   * @param status  either on (true) or off (false)
+   */
   void setGPSstatus( boolean status )
   {
     // TDLog.v("TopoGL GPS set status " + status );
@@ -2097,12 +2196,18 @@ public class TopoGL extends Activity
       mGPS.setListener( null );
     }
   }
-  
+
+  /** @return the GPS status (on or off)
+   */  
   boolean getGPSstatus()
   {
     return mGPS != null && mGPS.mIsLocating;
   }
 
+  /** add a geolocalized point
+   * @param e   East coordinate
+   * @param n   North coordinate
+   */
   void addGPSpoint( double e, double n )
   {
     double z = mRenderer.getDEM_Z( e, n );
@@ -2114,8 +2219,11 @@ public class TopoGL extends Activity
       TDLog.Error("GPS location " + e + " " + n + " out of DEM" );
     }
   }
-  // end WITH-GPS
+  // end WITH-GPS ------------------------------------------------------------
 
+  /** forward to the rendered a list of surveys to hide or show
+   * @param survey  list of surveys
+   */
   void hideOrShow( List< Cave3DSurvey > surveys )
   {
     if ( mRenderer != null ) {
@@ -2124,10 +2232,16 @@ public class TopoGL extends Activity
   }
 
   // ---------------------------------------- EXPORT
-  // this is run inside ExportTask
-  // export model as GLTF works only with pathname, not with URI 
-  // @param type      must be GLTF
-  // @param pathname  export file path 
+
+  /** export model as GTLF
+   * @note this is run inside ExportTask
+   * @note export model as GLTF works only with pathname, not with URI 
+   * @param type      must be GLTF
+   * @param fos       output stream
+   * @param pathname  export file path 
+   * @param export    export data struct
+   * @return true if success
+   */
   public boolean exportGltfModel( int type, DataOutputStream fos, final String pathname, ExportData export )
   { 
     if ( type == ModelType.GLTF ) {
@@ -2136,11 +2250,12 @@ public class TopoGL extends Activity
     return false;
   }
 
-  /**
-   * @param type       export type (SHP_ASCII)
-   * @param fos        output stream
-   * @param pathname   
-   * @param export     export data struct
+  /** export model as Shapefile
+   * @param type      export type (SHP_ASCII)
+   * @param fos       output stream
+   * @param pathname  ... 
+   * @param export    export data struct
+   * @return true if success
    */
   public boolean exportShpModel( int type, DataOutputStream fos, final String pathname, ExportData export )
   { 
@@ -2152,7 +2267,6 @@ public class TopoGL extends Activity
 
   /*
   // BLUETOOTH -----------------------------------------------------------------------
-  // FIXME BLUETOOTH
 
   static int bearing = 0; 
   static int clino   = 0;
@@ -2623,7 +2737,7 @@ public class TopoGL extends Activity
     }
     onShotData();
   }
-  // ---------------------------------------------------------------
+  // end BLUETOOTH ---------------------------------------------------------------
   */
 
   // --------------------------------------------------------------------------------------------
@@ -2635,9 +2749,20 @@ public class TopoGL extends Activity
 
   private ExportData mExport = null; // type; FLAGS: splays, walls, surface, station; mime
 
+  /** request selection of a DEM file
+   */
   void selectDEMFile( )     { selectFile( REQUEST_DEM_FILE,     Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_dem_file,     null ); }
+
+  /** request selection of a texture file
+   */
   void selectTextureFile( ) { selectFile( REQUEST_TEXTURE_FILE, Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_texture_file, null ); }
+
+  /** request selection of an import file
+   */
   void selectImportFile( )  { selectFile( REQUEST_IMPORT_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_survey_file,  null ); }
+
+  // /** request selection of an attribute (temperature) file
+  //  */
   // void selectTemperatureFile( ) { selectFile( REQUEST_TEMPERATURE_FILE,  Intent.ACTION_OPEN_DOCUMENT, null, R.string.select_temp_file, null ); }
 
   /** export file selection
@@ -2708,6 +2833,11 @@ public class TopoGL extends Activity
     }
   }
 
+  /** extract a path from a URI
+   * @param ctx    context
+   * @param uri    URI
+   * @return path
+   */
   private String getPathFromUri( Context ctx, Uri uri )
   {
     Cursor cursor = null;
@@ -2722,6 +2852,9 @@ public class TopoGL extends Activity
     }
   }
 
+  /** import a survey reading from a URI
+   * @param uri    URI
+   */
   private void importSurvey( Uri uri )
   {
     String pathname = uri.getPath();

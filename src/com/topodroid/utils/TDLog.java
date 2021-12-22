@@ -31,7 +31,7 @@ public class TDLog
   // ---------------------------------------------------------
   // DEBUG: logcat flags
 
-  static final public String TAG = "TOPODROID";
+  static final public String TAG = "DistoXX";
 
   static private int mLogStream = 0;    // log stream
   static private boolean mLogAppend = false;

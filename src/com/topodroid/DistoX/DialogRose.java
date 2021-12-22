@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.DistoX.R;
+import com.topodroid.ui.MyDialog;
 
 // import java.util.List;
 
@@ -31,7 +32,7 @@ import android.util.DisplayMetrics;
 import android.widget.ImageView;
 // import android.view.View;
 
-class DialogRose extends Dialog
+class DialogRose extends MyDialog
 {
   private static int SIDE  = 180;
   private static int CX = SIDE/2;
@@ -44,12 +45,14 @@ class DialogRose extends Dialog
   private Canvas mCanvas;
 
   private ImageView mImage;
-  private Context mContext;
 
+  /** cstr
+   * @param context  context
+   * @param parser   3D model data
+   */
   public DialogRose( Context context, TglParser parser )
   {
-    super( context );
-    mContext = context;
+    super( context, R.string.DialogRose );
 
     DisplayMetrics dm = context.getResources().getDisplayMetrics();
     // double density  = dm.density;
@@ -70,16 +73,22 @@ class DialogRose extends Dialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    setContentView( R.layout.cave3d_diagram );
+    initLayout( R.layout.cave3d_diagram, -1 );
+
     mImage = (ImageView) findViewById( R.id.image );
     reset();
   }
 
+  /** reset the bitmap to the image
+   */
   private void reset()
   {
     mImage.setImageBitmap( mBitmap );
   }
 
+  /** compute the rose diagram (this is colled in the cstr)
+   * @param parser   3D mode data
+   */
   private void evalRoseDiagram( TglParser parser )
   {
     mNr = 72;
@@ -119,4 +128,5 @@ class DialogRose extends Dialog
       mCanvas.drawPath( path, paint );
     } 
   }
+
 }
