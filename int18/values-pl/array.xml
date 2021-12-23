@@ -211,12 +211,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">Najnowszy</item>
      <item name="list">Lista</item>
      <item name="grid">Siatka</item>
      <item name="grid3">Potrójna siatka</item>
-  </string-array>
+  </string-array -->
 
   <!-- string-array name="sectionStations">
      <item name="both">Both</item>

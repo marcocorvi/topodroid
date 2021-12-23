@@ -2324,7 +2324,7 @@ public class TopoDroidApp extends Application
   //     //
   //     // Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("file://" + filename ) );
   //     
-  //     if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.N ) {
+  //     if ( TDandroid.BELOW_API_24 ) {
   //       Intent intent = new Intent(Intent.ACTION_VIEW );
   //       intent.setFlags( Intent.FLAG_ACTIVITY_CLEAR_TOP );
   //       intent.setDataAndType( Uri.fromFile( file ), "image/jpeg" ); // pre Nougat

@@ -194,12 +194,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">Piu\' recente</item>
      <item name="list">Lista</item>
      <item name="grid">Griglia</item>
      <item name="grid3">Tre griglie</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="sectionStations">
      <item name="Entrambe">both</item>

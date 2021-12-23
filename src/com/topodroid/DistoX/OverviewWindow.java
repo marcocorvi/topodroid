@@ -48,7 +48,6 @@ import android.graphics.Matrix;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Message;
-import android.os.Build;
 import android.os.ParcelFileDescriptor;
 
 import android.app.Activity;
@@ -776,7 +775,7 @@ public class OverviewWindow extends ItemDrawer
       TDToast.makeBad( R.string.null_bitmap );
       return;
     }
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ) { // pre API-19
+    if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
       TDToast.makeBad( R.string.no_feature_pdf );
       return;
     }
@@ -800,7 +799,7 @@ public class OverviewWindow extends ItemDrawer
 
       // PrintAttributes.Builder builder = new PrintAttributes.Builder();
       // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // at least API-23
+      // if ( TDandroid.AT_LEAST_API_23 ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // at least API-23
       // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
       // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
       // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );

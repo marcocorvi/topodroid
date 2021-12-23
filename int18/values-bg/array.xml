@@ -196,12 +196,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">Последни използвани</item>
      <item name="list">Списъци</item>
      <item name="grid">Таблици</item>
      <item name="grid3">Тройна таблица</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="sectionStations">
      <item name="both">В двата</item>

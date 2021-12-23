@@ -492,7 +492,7 @@
      <item name="toporobot">7</item>
   </string-array>
 
-  <string-array name="pickerType">
+  <!-- string-array name="pickerType">
      <item name="recent">Most recent</item>
      <item name="list">List</item>
      <item name="grid">Grid</item>
@@ -503,7 +503,7 @@
      <item name="list">1</item>
      <item name="grid">2</item>
      <item name="grid3">3</item>
-  </string-array>
+  </string-array -->
 
   <!-- string-array name="sectionStations">
      <item name="both">Both</item>

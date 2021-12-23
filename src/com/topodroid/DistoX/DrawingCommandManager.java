@@ -21,7 +21,6 @@ import com.topodroid.common.PlotType;
 
 // import android.content.res.Configuration;
 import android.app.Activity;
-import android.os.Build;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -726,15 +725,15 @@ public class DrawingCommandManager
     Display d = act.getWindowManager().getDefaultDisplay();
     int r = d.getRotation();
     float ww, hh;
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 ) {
-      hh = d.getHeight();
-      ww = d.getWidth();
-    } else {
+    // if ( TDandroid.BELOW_API_13 ) { // HONEYCOMB_MR2
+    //   hh = d.getHeight();
+    //   ww = d.getWidth();
+    // } else {
       Point pt = new Point();
       d.getSize( pt );
       hh = pt.y;
       ww = pt.x;
-    }
+    // }
     // TDLog.v( "R " + r + " W " + ww + " H " + hh );
 
     mLandscape = landscape;

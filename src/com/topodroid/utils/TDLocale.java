@@ -16,7 +16,6 @@ import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.BrushManager;
 
-import android.os.Build;
 import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.Configuration;
@@ -43,7 +42,7 @@ public class TDLocale
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
-    // if ( android.os.Build.VERSION.SDK_INT >= 17 ) { // minSdkVersion is 18
+    // if ( TDandroid.ABOVE_API_16 ) { // minSdkVersion is 18
       Configuration conf = new Configuration( res.getConfiguration() );
       conf.setLocale( mLocale );
       // TDInstance.context = TDInstance.context.createConfigurationContext( conf );

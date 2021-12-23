@@ -13,8 +13,6 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDColor;
 
-import android.os.Build;
-
 import android.annotation.SuppressLint;
 import android.widget.Toast;
 import android.widget.TextView;
@@ -118,9 +116,9 @@ public class TDToast
     View view = toast.getView(); // ANDROID-11 returns null
     if ( view != null ) {
       view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+      if ( TDandroid.ABOVE_API_26 ) { // Android-8 (O) 
         view.setBackgroundResource( mBgDrawable );
-      } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+      } else if ( TDandroid.BELOW_API_23 ) { // Android-6 (M) 
         view.setBackgroundColor( mBgColor );
       }
       // view.setClipToOutline( true );
@@ -135,9 +133,9 @@ public class TDToast
     View view = toast.getView(); // ANDROID-11 returns null
     if ( view != null ) {
       view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
-      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ) {
+      if ( TDandroid.ABOVE_API_26 ) {
         view.setBackgroundResource( mBgDrawable );
-      } else if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) {
+      } else if ( TDandroid.BELOW_API_23 ) {
         view.setBackgroundColor( mBgColor );
       }
       // view.setClipToOutline( true );

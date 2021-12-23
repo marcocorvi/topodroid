@@ -46,7 +46,7 @@ public class ExportDialogCalib extends MyDialog
 
   public ExportDialogCalib( Context context, IExporter parent, String[] types, int title )
   {
-    super( context, R.string.ExportDialog );
+    super( context, R.string.ExportDialogCalib );
     mParent = parent;
     mTypes  = types;
     mSelected = null;

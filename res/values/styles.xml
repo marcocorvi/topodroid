@@ -16,12 +16,12 @@
 
 
 <!--suppress AndroidDomInspection -->
-<resources>
+<resources xmlns:tools="http://schemas.android.com/tools">
   <!-- style name="titleBackground">
     <item name="android:background">#333333</item>
   </style -->
 
-    <style name="Theme.FullScreen" parent="@android:style/Theme.Material.NoActionBar"> <!-- REQUIRES API-21 -->
+    <style name="Theme.FullScreen" parent="@android:style/Theme.Material.NoActionBar" tools:targetApi="lollipop"> <!-- REQUIRES API-21 -->
       <item name="android:windowNoTitle">false</item>
       <!-- item name="android:windowTitleBackgroundStyle">@style/titleBackground</item -->
       <item name="android:windowTitleSize">40dp</item>

@@ -36,16 +36,18 @@ import android.os.Bundle;
 class TdmSourcesDialog extends MyDialog
                        implements OnClickListener
 {
-  Context mContext;
   TdmSourceAdapter mTdmSourceAdapter;
   TdmConfigActivity mParent;
   ListView mList;
   ArrayList< TdmSource > mSources;
 
+  /** cstr
+   * @param context context
+   * @param parent  config activity
+   */
   TdmSourcesDialog( Context context, TdmConfigActivity parent )
   {
     super( context, R.string.TdmSourcesDialog );
-    mContext = context;
     mParent = parent;
     mSources = new ArrayList< TdmSource >();
   }
@@ -65,6 +67,8 @@ class TdmSourcesDialog extends MyDialog
     updateList();
   }
 
+  /** update list of surveys
+   */
   void updateList()
   {
     mTdmSourceAdapter = new TdmSourceAdapter( mContext, R.layout.tdsource_adapter, mSources );
@@ -86,6 +90,9 @@ class TdmSourcesDialog extends MyDialog
     }
   }
 
+  /** respnd to user taps: if tapped OK button tell the config activity to add the selected surveys
+   * @param v tapped view
+   */
   @Override
   public void onClick( View v )
   {

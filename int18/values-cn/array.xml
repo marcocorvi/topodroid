@@ -269,12 +269,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">最近使用</item>
      <item name="list">列表显示</item>
      <item name="grid">网格显示</item>
      <item name="grid3">三重网格</item>
-  </string-array>
+  </string-array -->
 
   <!-- string-array name="sectionStations">
      <item name="both">Both</item>

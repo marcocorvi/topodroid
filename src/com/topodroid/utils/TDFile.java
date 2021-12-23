@@ -15,9 +15,11 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDUtil;
+import com.topodroid.DistoX.TDandroid;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
+import android.os.Build;
 
 // import android.app.Application;
 import android.app.Activity;
@@ -357,10 +359,11 @@ public class TDFile
   private static File getCBD( String type, boolean create )
   {
     File ret = null;
+    String documents = ( TDandroid.BELOW_API_19 )? "Documents" : Environment.DIRECTORY_DOCUMENTS;
     if ( type == null ) {
-      ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX" );
+      ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX" );
     } else {
-      ret = new File( Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOCUMENTS), "TDX/" + type );
+      ret = new File( Environment.getExternalStoragePublicDirectory( documents ), "TDX/" + type );
     } 
     if ( create && ret != null && ! ret.exists() ) {
       TDLog.v( "mkdirs " + ret.getPath() + " type: " + ((type == null)? "null" : type) + " create: " + create );

@@ -11,8 +11,6 @@
  */
 package com.topodroid.DistoX;
 
-import android.os.Build;
-
 import android.content.DialogInterface;
 import android.app.AlertDialog;
 // import android.app.AlertDialog.Builder;
@@ -81,7 +79,7 @@ public class TopoDroidAlertDialog
       AlertDialog alert = alert_builder.create();
       
       // NEEDED API-11 for custom background color
-      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ) {
+      if ( TDandroid.ABOVE_API_24 ) {
         alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
       } else {
         alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
@@ -118,7 +116,7 @@ public class TopoDroidAlertDialog
 
       AlertDialog alert = alert_builder.create();
       // NEEDED API-11 for custom background color
-      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ) {
+      if ( TDandroid.ABOVE_API_24 ) {
         alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
       } else {
         alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );

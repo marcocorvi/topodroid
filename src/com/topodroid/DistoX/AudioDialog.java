@@ -221,8 +221,8 @@ class AudioDialog extends MyDialog
       mMR = new MediaRecorder();
       mMR.setAudioSource(MediaRecorder.AudioSource.MIC);
       mMR.setOutputFormat(MediaRecorder.OutputFormat.THREE_GPP);
-      mMR.setAudioEncoder(MediaRecorder.OutputFormat.DEFAULT); // AMR_NB
-      // mMR.setAudioEncoder(AudioEncoder.DEFAULT); // AMR_NB
+      // mMR.setAudioEncoder(MediaRecorder.OutputFormat.DEFAULT); // AMR_NB
+      mMR.setAudioEncoder(MediaRecorder.AudioEncoder.DEFAULT); // AMR_NB
       mMR.setOutputFile( mFilepath );
       mMR.prepare();
       canPlay = false;

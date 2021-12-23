@@ -212,12 +212,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">Utoljára használt</item>
      <item name="list">Lista</item>
      <item name="grid">Rács</item>
      <item name="grid3">3-as Rács</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="sectionStations">
      <item name="both">Mindkettő</item>

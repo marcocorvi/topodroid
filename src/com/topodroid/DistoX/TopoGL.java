@@ -66,7 +66,7 @@ import java.util.Set;
 import java.util.Locale;
 
 import android.os.Environment;
-import android.os.Build;
+import android.os.Build; // FINERPRINT and MODEL
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.AsyncTask;
@@ -354,7 +354,7 @@ public class TopoGL extends Activity
       mHasExtra = true;
       // mVersionCheck = TDVersion.checkTopoDroidVersion( this );
       // // FIXME ANDROID-11 etc.
-      // if ( mVersionCheck == -1 && Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ) {
+      // if ( mVersionCheck == -1 && TDandroid.ABOVE_API_29 ) { 
       //   mVersionCheck = 0;
       // }
       // if ( mVersionCheck < -1 ) {
@@ -496,12 +496,12 @@ public class TopoGL extends Activity
     // OpenGL ES 2.0.
     final boolean supportsEs2 =
         configurationInfo.reqGlEsVersion >= 0x20000
-            || (Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1
-             && (Build.FINGERPRINT.startsWith("generic")
-              || Build.FINGERPRINT.startsWith("unknown")
-              || Build.MODEL.contains("google_sdk")
-              || Build.MODEL.contains("Emulator")
-              || Build.MODEL.contains("Android SDK built for x86")));
+            || ( // ( TDandroid.AT_LEAST_API_15 ) && 
+                 ( Build.FINGERPRINT.startsWith("generic")
+                || Build.FINGERPRINT.startsWith("unknown")
+                || Build.MODEL.contains("google_sdk")
+                || Build.MODEL.contains("Emulator")
+                || Build.MODEL.contains("Android SDK built for x86")));
 
     if (supportsEs2) {
         // TDToast.make("This device supports OpenGL ES 2.0." );

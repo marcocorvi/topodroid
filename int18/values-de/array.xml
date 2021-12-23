@@ -195,12 +195,12 @@
   </string-array>
 -->
 
-  <string-array name="pickerType">
+  <!-- UNUSED string-array name="pickerType">
      <item name="recent">Häufigste</item>
      <item name="list">Liste</item>
      <item name="grid">Gitter</item>
      <item name="grid3">Dreifachgitter</item>
-  </string-array>
+  </string-array -->
 
   <!-- UNUSED string-array name="sectionStations">
      <item name="both">beide</item>

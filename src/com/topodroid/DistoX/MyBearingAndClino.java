@@ -27,7 +27,6 @@ import java.util.Locale;
 // import android.graphics.Bitmap;
 
 import android.media.ExifInterface; // REQUIRES android.support
-import android.os.Build;
 
 public class MyBearingAndClino implements IBearingAndClino
 {
@@ -108,8 +107,9 @@ public class MyBearingAndClino implements IBearingAndClino
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", b, c );
       int rot = getExifOrientation( o );
-      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N )
+      if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
+      }
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(c*100) ) );
@@ -117,8 +117,9 @@ public class MyBearingAndClino implements IBearingAndClino
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );
       exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
       // FIXME-GPS_LATITUDE work-around for tag GPS Latitude not supported correctly
-      if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N )
+      if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION, String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
+      }
       exif.saveAttributes();
     } catch ( IOException e ) {
       TDLog.Error( "Set exif: IO exception " + e.getMessage() );

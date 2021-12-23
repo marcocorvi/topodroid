@@ -63,13 +63,29 @@ class DBlockBuffer
     return mBuffer;
   }
 
-  /** sort the data in te buffer by increasing ID
+  /** sort the data in the buffer by increasing ID.
+   * This is used to reorder the DBlock's before appending them to a survey.
    */
   void sort()
   {
-    mBuffer.sort( new Comparator<DBlock>() {
-      public int compare( DBlock b1, DBlock b2 ) { return (b1.mId < b2.mId)? -1 : (b1.mId == b2.mId)? 0 : 1; }
-    } );
+    if ( TDandroid.BELOW_API_24 ) { // implement sorting
+      int len = mBuffer.size();
+      for ( int k1 = 0; k1 < len-1; ++k1 ) {
+        DBlock blk1 = mBuffer.get(k1);
+        for ( int k2 = k1 + 1; k2 < len; ++ k2 ) {
+          DBlock blk2 = mBuffer.get(k2);
+          if ( blk1.mId > blk2.mId ) {
+            mBuffer.set( k2, blk1 );
+            blk1 = blk2; 
+          }
+        }
+        mBuffer.set( k1, blk1 );
+      }
+    } else {
+      mBuffer.sort( new Comparator<DBlock>() {
+        public int compare( DBlock b1, DBlock b2 ) { return (b1.mId < b2.mId)? -1 : (b1.mId == b2.mId)? 0 : 1; }
+      } );
+    }
   }
 
 }

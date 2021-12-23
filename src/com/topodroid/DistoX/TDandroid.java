@@ -17,12 +17,12 @@ import com.topodroid.prefs.TDSetting;
 
 import android.content.SharedPreferences.Editor;
 
-// import android.os.Build.VERSION_CODES;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.Context;
 import java.lang.reflect.Method;
 import android.os.Build;
+// import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 import android.content.pm.PackageInfo;
@@ -38,6 +38,26 @@ import android.graphics.drawable.BitmapDrawable;
 
 public class TDandroid
 {
+  // final static public boolean BELOW_API_13 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 );
+  // final static public boolean BELOW_API_15 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 );
+  final static public boolean BELOW_API_19 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT );
+  final static public boolean BELOW_API_21 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP );
+  final static public boolean BELOW_API_23 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M );
+  final static public boolean BELOW_API_24 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.N );
+  final static public boolean BELOW_API_29 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
+  final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
+
+  // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
+  final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
+  final static public boolean ABOVE_API_24 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.N ); // Android-6 Nougat
+  final static public boolean ABOVE_API_26 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.O ); // Android-8 Oreo
+  final static public boolean ABOVE_API_29 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.Q ); // Android-10
+
+  // final static public boolean AT_LEAST_API_15 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWITCH_MR1 );
+  final static public boolean AT_LEAST_API_21 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP );
+  final static public boolean AT_LEAST_API_23 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M );
+  final static public boolean AT_LEAST_API_24 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ); // Android-6 Nougat
+
   /** permissions string codes
    */ 
   static final String[] perms = {
@@ -101,7 +121,7 @@ public class TDandroid
     // TDLog.v("PERM " + "create perms " );
 
     MustRestart = false;
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return 0;
+    if ( BELOW_API_23 ) return 0;
     // StringBuilder sb = new StringBuilder();
     // sb.append("Not granted" );
 
@@ -140,7 +160,7 @@ public class TDandroid
 
   static boolean canRun( Context context, Activity activity )
   {
-    if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M ) return true;
+    if ( BELOW_API_23 ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
     }
@@ -333,7 +353,7 @@ public class TDandroid
   //   Display d = act.getWindowManager().getDefaultDisplay();
   //   int r = d.getRotation();
   //   int h, w;
-  //   if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 ) {
+  //   if ( BELOW_API_13 ) 
   //     h = d.getHeight();
   //     w = d.getWidth();
   //   } else {

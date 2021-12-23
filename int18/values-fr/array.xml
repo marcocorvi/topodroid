@@ -221,12 +221,12 @@
   </string-array>
 -->
 
-   <string-array name="pickerType">
+   <!-- UNUSED string-array name="pickerType">
      <item name="recent">Plus récentes</item>
      <item name="list">Liste</item>
      <item name="grid">Grille</item>
      <item name="grid3">Triple grille</item>
-   </string-array>
+   </string-array -->
 
 
   <!-- UNUSED string-array name="deviceType">

@@ -14,6 +14,7 @@ package com.topodroid.dev.ble;
 
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.TDandroid;
 
 import android.bluetooth.le.BluetoothLeScanner;
 import android.bluetooth.le.ScanCallback;
@@ -24,7 +25,7 @@ import android.bluetooth.le.ScanSettings;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 
-import android.os.Build;
+// import android.os.Build;
 import android.os.Handler;
 import android.os.ParcelUuid;
 
@@ -45,13 +46,17 @@ public class BleScanner
 
   private ScanCallback mScanCallback;
   private BluetoothAdapter mBTAdapter;
-  private BluetoothAdapter.LeScanCallback mLeScanCallback;
+  private BluetoothAdapter.LeScanCallback mLeScanCallback; // min API-21
 
   private Handler mScanHandler = null;
   private Runnable mScanHandlerRunnable = null;
 
   // -----------------------------------------------
 
+  /** cstr
+   * @param parent   BT low-energy scan dialog
+   * @param adapter  BT adapter
+   */
   BleScanner( BleScanDialog parent, BluetoothAdapter adapter )
   {
     mParent    = parent;
@@ -59,12 +64,16 @@ public class BleScanner
     // TDLog.v( "BLE scanner cstr");
   }
 
-  /** 
+  /** start a BT scan (if not already scanning)
    * @param uuid_str UUID string
    * @return true if scanning successfully started (or already ongoing)
    */
   boolean startScan( String uuid_str ) { return startScan( (uuid_str == null)? null : UUID.fromString( uuid_str ) ); }
 
+  /** start a BT scan (if not already scanning)
+   * @param uuid  UUID 
+   * @return true if scanning successfully started (or already ongoing) - always return true
+   */
   boolean startScan( UUID uuid )
   {
     // BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -78,7 +87,7 @@ public class BleScanner
     // TDLog.v( "BLE scanner start scan");
 
     // FIXME mParent.disconnectGatt();
-    if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
+    if ( TDandroid.AT_LEAST_API_21 ) { // > Build.VERSION_CODES.KITKAT )
       BluetoothLeScanner scanner = mBTAdapter.getBluetoothLeScanner();
 
       mScanCallback = new ScanCallback() {
@@ -140,21 +149,29 @@ public class BleScanner
     return true;
   }
 
+  /** @return the BT device from a scan-result (null for API < 20 )
+   * @param result   scan result
+   * @note called only on API-21 or above
+   */
   private BluetoothDevice getDevice( ScanResult result )
   {
-    int rssi = result.getRssi();
-    // TDLog.v( "BLE scanner device RSSI " + rssi );
-    ScanRecord record = result.getScanRecord();
-    if ( record != null ) {
-      // TDLog.v( "BLE scanner device name " + record.getDeviceName() );
-      List< ParcelUuid > uuids = record.getServiceUuids();
-      if ( uuids != null ) {
-        for ( ParcelUuid uuid : uuids ) TDLog.v( "BLE scanner uuid " + uuid.toString() );
+    if ( TDandroid.AT_LEAST_API_21 ) {
+      // TDLog.v( "BLE scanner device RSSI " + result.getRssi() );
+      ScanRecord record = result.getScanRecord();
+      if ( record != null ) {
+        // TDLog.v( "BLE scanner device name " + record.getDeviceName() );
+        List< ParcelUuid > uuids = record.getServiceUuids();
+        if ( uuids != null ) {
+          for ( ParcelUuid uuid : uuids ) TDLog.v( "BLE scanner uuid " + uuid.toString() );
+        }
       }
+      return result.getDevice();
     }
-    return result.getDevice();
+    return null;
   }
 
+  /** finish BT scan
+   */
   void stopScan()
   {
     // TDLog.v( "BLE scanner stop scan");
@@ -163,7 +180,7 @@ public class BleScanner
     }
     if ( mScanning ) {
       // BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-      if ( Build.VERSION.SDK_INT > Build.VERSION_CODES.KITKAT ) {
+      if ( TDandroid.AT_LEAST_API_21 ) { // > Build.VERSION_CODES.KITKAT )
         BluetoothLeScanner scanner = mBTAdapter.getBluetoothLeScanner();
         if ( scanner != null ) scanner.stopScan( mScanCallback );
         mScanCallback = null;
@@ -177,6 +194,9 @@ public class BleScanner
     mScanHandler = null;
   }  
 
+  /** set the reote BT device: tell the device to the parent
+   * @param device   BT device
+   */
   private void setRemoteDevice( final BluetoothDevice device )
   {
     // TDLog.v( "BLE scanner set remote device " + device.getName() );

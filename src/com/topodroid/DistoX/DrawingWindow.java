@@ -80,7 +80,6 @@ import android.os.Message;
 import android.os.ParcelFileDescriptor;
 // import android.os.AsyncTask;
 // /* fixme-23 */
-import android.os.Build;
 // import java.lang.reflect.Method;
 
 import android.view.KeyEvent;
@@ -6152,7 +6151,7 @@ public class DrawingWindow extends ItemDrawer
 	TDToast.makeBad( R.string.null_bitmap );
 	return;
       }
-      if ( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT ) { // pre API-19
+      if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
 	TDToast.makeBad( R.string.no_feature_pdf );
         return;
       }
@@ -6166,7 +6165,7 @@ public class DrawingWindow extends ItemDrawer
 
         // PrintAttributes.Builder builder = new PrintAttributes.Builder();
         // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-        // if ( Build.VERSION.SDX_INT >= Build.VERSION_CODE.M ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE );
+        // if ( TDandroid.AT_LEAST_API_23 ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // not less than Android-6 (M)
         // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
         // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
         // // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
