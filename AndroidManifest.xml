@@ -23,11 +23,11 @@
 	     item_picker2_dialog.xml
              symbol_enable_dialog.xml
     -->
-    <!-- API-18 = Android 4.3   JellyBeans
+    <!-- API-18 = Android 4.3   Jelly Bean
          API-19 = Android 4.4   KitKat
          API-21 = Android 5.0   Lollipop
          API-22 = Android 5.1 
-         API-23 = Android 6     Marshmellow
+         API-23 = Android 6     Marshmallow
          API-24 = Android 7.0   Nougat
          API-25 = Android 7.1
          API-26 = Android 8.0.0 Oreo
