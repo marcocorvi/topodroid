@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.DistoX.TDToast;
@@ -103,7 +103,7 @@ public class ExportDialogSettings extends MyDialog
         @Override
         protected Boolean doInBackground(Void... v)
         {
-          // TDLog.v("import settings - functional " + functional );
+          TDLog.v("import settings - functional " + functional );
           return TDSetting.importSettings( prefs, all );
         }
         @Override

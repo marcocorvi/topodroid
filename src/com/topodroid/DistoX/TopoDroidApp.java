@@ -252,17 +252,23 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
+  /** @return the densiti of the display
+   */
   public static float getDisplayDensity( )
   {
     return Resources.getSystem().getDisplayMetrics().density;
   }
 
-  public static float getDisplayDensity( Context context )
-  {
-    return Resources.getSystem().getDisplayMetrics().density;
-  }
+  // /** @return the densiti of the display
+  //  * @param context   context (unused)
+  //  */
+  // public static float getDisplayDensity( Context context )
+  // {
+  //   return Resources.getSystem().getDisplayMetrics().density;
+  // }
 
-  // FIXED_ZOOM
+  /** @return the densiti DPI of the display // FIXED_ZOOM
+   */
   public static int getDisplayDensityDpi( )
   {
     return Resources.getSystem().getDisplayMetrics().densityDpi;
@@ -273,6 +279,11 @@ public class TopoDroidApp extends Application
   //   return TopoDroidApp.setListViewHeight( this, listView );
   // }
 
+  /** set the height of the button list-view
+   * @param context   context
+   * @param listView  list view
+   * @return button size
+   */
   public static int setListViewHeight( Context context, MyHorizontalListView listView )
   {
     // int size = getScaledSize( context );
@@ -284,15 +295,46 @@ public class TopoDroidApp extends Application
     return TDSetting.mSizeButtons;
   }
 
-  // default button size - USED by Tdm...
+  /** @return the scaled size of buttons
+   * @param context   context
+   * @note default button size - USED by Tdm...
+   */
   static int getScaledSize( Context context )
   {
     return (int)( TDSetting.mSizeButtons * context.getResources().getSystem().getDisplayMetrics().density );
   }
   
-  public static void resetButtonBar() { if ( mMainActivity != null ) mMainActivity.resetButtonBar(); }
-  public static void setMenuAdapter( ) { if ( mMainActivity != null ) mMainActivity.setMenuAdapter( TDInstance.getResources() ); }
-  public static void setScreenOrientation() { if ( mMainActivity != null ) TDandroid.setScreenOrientation( mMainActivity  ); }
+  /** re-set the button bar of the main window
+   */
+  public static void resetButtonBar() 
+  { 
+    if ( mMainActivity == null ) return;
+    mMainActivity.runOnUiThread( new Runnable() { 
+      public void run () { 
+        mMainActivity.resetButtonBar(); 
+      }
+    } );
+  }
+   
+  /** set the screen orientation
+   */
+  public static void setScreenOrientation() 
+  { 
+    if ( mMainActivity == null ) return;
+    TDandroid.setScreenOrientation( mMainActivity  );
+  }
+
+  // /** re-set the menu adapter of the main window
+  //  */
+  // public static void setMenuAdapter( ) 
+  // { 
+  //   if ( mMainActivity == null ) return;
+  //   mMainActivity.runOnUiThread( new Runnable() { 
+  //     public void run () { 
+  //       mMainActivity.setMenuAdapter( TDInstance.getResources() ); 
+  //     }
+  //   } );
+  // }
 
   // UNUSED was called by HelpEntry
   // static int getDefaultSize( Context context )

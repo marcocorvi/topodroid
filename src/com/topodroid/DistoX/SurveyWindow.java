@@ -281,9 +281,7 @@ public class SurveyWindow extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
-    mNrButton1 = TDLevel.overNormal ? 6 
-               : TDLevel.overBasic ? 3 : 2;
-    if ( ! TDSetting.mWithSensors ) mNrButton1 --;
+    mNrButton1 = TDLevel.overNormal ? ( TDSetting.mWithSensors ? 6 : 5 ) : 2;
 
     mButton1 = new Button[ mNrButton1 + 1 ];
     int kb = 0;
@@ -354,17 +352,18 @@ public class SurveyWindow extends Activity
       doNotes();
     } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // INFO STATISTICS
       new SurveyStatDialog( mActivity, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
-      do3D();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
-      mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
-      // FIXME update declination
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
-      // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
-      (new PhotoListDialog( this, mApp_mData )).show();
-    } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
-      // if ( TDSetting.mWithSensors )
+    } else if ( TDLevel.overNormal ) {
+      if ( k < mNrButton1 && b == mButton1[k++] ) {  // 3D
+        do3D();
+      } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // GPS LOCATION
+        mActivity.startActivity( new Intent( mActivity, FixedActivity.class ) );
+        // FIXME update declination
+      } else if ( k < mNrButton1 && b == mButton1[k++] ) {  // PHOTO CAMERA
+        // mActivity.startActivity( new Intent( mActivity, PhotoActivity.class ) );
+        (new PhotoListDialog( this, mApp_mData )).show();
+      } else if ( TDSetting.mWithSensors && k < mNrButton1 && b == mButton1[k++] ) {  // SENSORS DATA
         mActivity.startActivity( new Intent( mActivity, SensorListActivity.class ) );
+      }
     }
   }
 

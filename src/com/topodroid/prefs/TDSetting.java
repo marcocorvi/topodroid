@@ -2550,7 +2550,7 @@ public class TDSetting
     if ( mPalettes != b ) {
       mPalettes = b;
       // TopoDroidApp.resetButtonBar();
-      TopoDroidApp.setMenuAdapter();
+      // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
     }
   }
 
@@ -2569,8 +2569,8 @@ public class TDSetting
     // if ( ! TDLevel.overExpert ) {
     //   mMagAnomaly = false; // magnetic anomaly compensation requires level overExpert
     // }
-    TopoDroidApp.resetButtonBar();
-    TopoDroidApp.setMenuAdapter();
+    // TopoDroidApp.resetButtonBar(); // was in 6.0.33
+    // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
     if ( TDPrefActivity.mPrefActivityAll != null ) TDPrefActivity.mPrefActivityAll.reloadPreferences();
   }
 
@@ -2621,7 +2621,7 @@ public class TDSetting
       BrushManager.reloadLineLibrary( res );
       BrushManager.reloadAreaLibrary( res );
     }
-    TopoDroidApp.setMenuAdapter(); 
+    // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
     TDPrefActivity.reloadPreferences();
   }
 
@@ -2719,7 +2719,7 @@ public class TDSetting
       pw.printf(Locale.US, "Orientation %d \n", mOrientation );
 
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
-      String eol = "\\n"; if ( mSurvexEol.equals("\r\n") ) eol = "\\r\\n";
+      String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
       pw.printf(Locale.US, "VisualTopo: splays %c, at-from %c, trox %c \n", tf(mVTopoSplays), tf(mVTopoLrudAtFrom), tf(mVTopoTrox) ); 
@@ -2820,7 +2820,11 @@ public class TDSetting
     return in.substring( 1, in.length() -1 );
   }
 
-  private static String getString( String[] vals, int idx ) { return vals[idx]; }
+  /** @return the string at the given index
+   * @param vals    string array
+   * @param idx     index
+   */
+  private static String getString( String[] vals, int idx ) { return ( idx < vals.length )? vals[idx] : null; }
 
   private static char getQuotedChar( String line )
   { 
@@ -2829,23 +2833,39 @@ public class TDSetting
     return line.charAt( from+1 );
   }
 
-  private static boolean getBoolean( String[] vals, int idx ) { return vals[idx].equals("T"); }
+  /** @return true if the string at the given index is "T"
+   * @param vals    string array
+   * @param idx     index
+   */
+  private static boolean getBoolean( String[] vals, int idx ) { return idx < vals.length && vals[idx].equals("T"); }
 
+  /** @return the string at the given index as a float value, or the failover value
+   * @param vals    string array
+   * @param idx     index
+   * @param fail    failover value
+   */
   private static float getFloat( String[] vals, int idx, float fail )
   {
-    try { 
-      return Float.parseFloat(vals[idx]);
-    } catch ( NumberFormatException e ) { }
+    if ( idx < vals.length ) {
+      try { 
+        return Float.parseFloat(vals[idx]);
+      } catch ( NumberFormatException e ) { }
+    }
     return fail;
   }
 
-  // get an integer, 
-  // return "fail" on failure
+  /** @return the string at the given index as an integer value, or the failover value
+   * @param vals    string array
+   * @param idx     index
+   * @param fail    failover value
+   */
   private static int getInt( String[] vals, int idx, int fail )
   {
-    try { 
-      return Integer.parseInt(vals[idx]);
-    } catch ( NumberFormatException e ) { }
+    if ( idx < vals.length ) {
+      try { 
+        return Integer.parseInt(vals[idx]);
+      } catch ( NumberFormatException e ) { }
+    }
     return fail;
   }
 
@@ -2971,7 +2991,9 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mVTopoSplays     = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_VTOPO_SPLAYS", mVTopoSplays );
             mVTopoLrudAtFrom = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_VTOPO_LRUD",   mVTopoLrudAtFrom );
-            mVTopoTrox       = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_VTOPO_TROX",   mVTopoTrox );
+            if ( vals.length > 6 ) {
+              mVTopoTrox     = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_VTOPO_TROX",   mVTopoTrox );
+            }
           }
           continue;
         }
@@ -3013,7 +3035,7 @@ public class TDSetting
           continue;
         }
         if ( line.startsWith("SVG") ) {
-          if ( vals.length > 20 ) {
+          if ( vals.length > 21 ) {
             mSvgShotStroke  = getFloat( vals, 2, 0.5f );    setPreference( editor, "DISTOX_SVG_SHOT_STROKE", mSvgShotStroke );
             mSvgLabelStroke = getFloat( vals, 4, 0.3f );    setPreference( editor, "DISTOX_SVG_LABEL_STROKE", mSvgLabelStroke );
             mSvgLabelSize   = getInt( vals, 5, 20 );        setPreference( editor, "DISTOX_SVG_LABEL_SIZE", mSvgLabelSize );

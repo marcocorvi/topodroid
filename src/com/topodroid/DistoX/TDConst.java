@@ -110,6 +110,7 @@ public class TDConst
     "Therion",
     "VisualTopo",
     // "VisualTopo-X",
+    "Walls",
     "PocketTopo"
   };
 
@@ -121,6 +122,7 @@ public class TDConst
     SURVEY_FORMAT_TH,
     SURVEY_FORMAT_TRO,
     // SURVEY_FORMAT_TROX,
+    SURVEY_FORMAT_SRV,
     SURVEY_FORMAT_TOP
   };
 

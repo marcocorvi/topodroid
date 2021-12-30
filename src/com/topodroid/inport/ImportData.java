@@ -26,7 +26,8 @@ public class ImportData
 
   private boolean mDiving;
 
-  // cstr
+  /** cstr
+   */
   public ImportData()
   {
     mLrud = false;
@@ -41,6 +42,9 @@ public class ImportData
     }
   }
 
+  /** set diving mode
+   * @param diving  whether to set (0r unset) diving mode
+   */
   public void setDiving( boolean diving ) 
   {
     if ( TDLevel.overExpert ) {
@@ -49,6 +53,8 @@ public class ImportData
     }
   }
 
+  /** @return the diving mode
+   */
   public boolean getDiving() { return mDiving; }
 
 }

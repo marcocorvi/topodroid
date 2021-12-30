@@ -15,6 +15,7 @@ import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDsafUri;
+import com.topodroid.DistoX.TDLevel;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -222,6 +223,7 @@ public class TdmConfigActivity extends Activity
       // exclude 3D on Android-R and beyond
       // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) mNrButton1 --;
 
+      mNrButton1 = ( TDLevel.overNormal)? 5 : 4; // not necessary because TDM is at Tester Level
       mButton1 = new Button[mNrButton1];
 
       for (int k=0; k<mNrButton1; ++k ) {
@@ -418,24 +420,17 @@ public class TdmConfigActivity extends Activity
       startTdmSurveysActivity();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
-    } else if ( k1 < mNrButton1 /* && Build.VERSION.SDK_INT < Build.VERSION_CODES.R */ && b0 == mButton1[k1++] ) {  // 3D
-      // int check = TDVersion.checkCave3DVersion( this );
-      // if ( check < 0 ) {
-      //   TDToast.makeBad( R.string.no_cave3d );
-      // } else if ( check > 0 ) {
-      //   TDToast.makeBad( R.string.outdated_cave3d );
-      // } else {
-        try {
-          // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
-          // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-          Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.DistoX.TopoGL.class );
-          intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
-          intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          TDToast.make( R.string.no_cave3d );
-        }
-      // }
+    } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D
+      try {
+        // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
+        // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
+        Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.DistoX.TopoGL.class );
+        intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
+        intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
+        startActivity( intent );
+      } catch ( ActivityNotFoundException e ) {
+        TDToast.make( R.string.no_cave3d );
+      }
     }
   }
 

@@ -39,7 +39,7 @@ import com.topodroid.dev.distox1.DeviceA3MemoryDialog;
 import com.topodroid.dev.distox1.DeviceA3InfoDialog;
 import com.topodroid.dev.distox1.InfoReadA3Task;
 import com.topodroid.dev.distox1.DeviceA3Details;
-// import com.topodroid.dev.ble.BleScanDialog;
+// import com.topodroid.dev.ble.BleScanDialog; // BLE_SCAN
 import com.topodroid.dev.bric.BricMemoryDialog;
 import com.topodroid.dev.bric.MemoryBricTask;
 import com.topodroid.dev.bric.BricInfoDialog;
@@ -894,8 +894,8 @@ public class DeviceActivity extends Activity
     ArrayAdapter< String > nemu_adapter = new ArrayAdapter<>(this, R.layout.menu );
 
     int k = -1;
-    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // SCAN
-    // ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC
+    // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );         // BT_SCAN
+    // ++k; if ( TDLevel.overExpert && mHasBLE ) nemu_adapter.add( res.getString( menus[k] ) ); // FIXME_SCAN_BRIC BLE_SCAN
     // ++k; if ( TDLevel.overBasic    ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overNormal   ) nemu_adapter.add( res.getString( menus[k] ) );
     ++k; if ( TDLevel.overAdvanced ) nemu_adapter.add( res.getString( menus[k] ) );
@@ -917,13 +917,13 @@ public class DeviceActivity extends Activity
   {
     closeMenu();
     int p = 0;
-    // if ( TDLevel.overBasic && p++ == pos ) { // SCAN
+    // if ( TDLevel.overBasic && p++ == pos ) { // BT_SCAN
     //   Intent scanIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceList.class );
     //   scanIntent.putExtra( TDTag.TOPODROID_DEVICE_ACTION, DeviceList.DEVICE_SCAN );
     //   startActivityForResult( scanIntent, TDRequest.REQUEST_DEVICE );
     //   TDToast.makeLong(R.string.wait_scan );
 
-    // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC
+    // } else if ( TDLevel.overExpert && mHasBLE && p++ == pos ) { // FIXME_SCAN_BRIC BLE_SCAN
     //   BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     //   (new BleScanDialog( this, this, adapter, null )).show();
     // } else if ( TDLevel.overBasic && p++ == pos ) { // PAIR

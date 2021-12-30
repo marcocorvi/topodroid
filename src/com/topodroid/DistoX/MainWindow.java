@@ -35,6 +35,7 @@ import com.topodroid.inport.ImportVisualTopoTask;
 import com.topodroid.inport.ImportTherionTask;
 import com.topodroid.inport.ImportPocketTopoTask;
 import com.topodroid.inport.ImportSurvexTask;
+import com.topodroid.inport.ImportWallsTask;
 import com.topodroid.inport.ImportCaveSniperTask;
 import com.topodroid.inport.ImportZipTask;
 // import com.topodroid.inport.ImportDialog;
@@ -129,8 +130,8 @@ public class MainWindow extends Activity
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_tools,   // iz_palette
-                          R.drawable.iz_manager, // FIXME THMANAGER
                           R.drawable.iz_3d,      // FIXME CAVE3D
+                          R.drawable.iz_manager, // FIXME THMANAGER
                           // R.drawable.iz_database
 			  R.drawable.iz_empty
                           };
@@ -151,8 +152,8 @@ public class MainWindow extends Activity
                           R.string.help_add_topodroid,
                           R.string.help_import,
                           R.string.help_symbol,
-                          R.string.help_therion, // FIXME THMANAGER
                           R.string.help_cave3d,
+                          R.string.help_therion, // FIXME THMANAGER
                           // R.string.help_database
                           };
   private static final int[] help_menus = {
@@ -306,7 +307,7 @@ public class MainWindow extends Activity
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
         }
-      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
+      } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
         // int check = TDVersion.checkCave3DVersion( this );
         // if ( check < 0 ) {
         //   TDToast.makeBad( R.string.no_cave3d );
@@ -509,6 +510,12 @@ public class MainWindow extends Activity
     // FIXME SYNC updateDisplay();
   }
   
+  /** start the import task
+   * @param uri     uri of the import file
+   * @param name    name of the import file
+   * @param type    import format type
+   * @param data    import data
+   */   
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
@@ -530,6 +537,9 @@ public class MainWindow extends Activity
     } else if ( type.equals(".svx") ) {
       setTitleImport();
       new ImportSurvexTask( this, isr ).execute( name ); 
+    } else if ( type.equals(".srv") ) {
+      setTitleImport();
+      new ImportWallsTask( this, isr ).execute( name ); 
     } else if ( type.equals(".csn") ) {
       setTitleImport();
       new ImportCaveSniperTask( this, isr ).execute( name ); 
@@ -554,14 +564,18 @@ public class MainWindow extends Activity
   private boolean mWithLogs     = false;
   // private boolean mWithBackupsClear = false; // CLEAR_BACKUPS
 
-  void setMenuAdapter( Resources res )
+  /** set the adapter of the menu pull-down list
+   */
+  void setMenuAdapter( )
   {
-    ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
+    Resources res = getResources();
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >(mActivity, R.layout.menu );
 
     mWithPalette  = TDLevel.overNormal;
     mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
     mWithLogs     = TDLevel.overAdvanced;
     // mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear; // CLEAR_BACKUPS
+    TDLog.v("Main Window set menu adapter. With palette " + mWithPalette + " With palettes " + mWithPalettes );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
     if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
@@ -572,16 +586,22 @@ public class MainWindow extends Activity
     menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
     menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
     menu_adapter.add( res.getString( menus[5] ) ); // HELP
+
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
   }
 
+  /** close the menu oull-down list
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** handle a tap on a manu item
+   * @param pos   menu item index
+   */
   private void handleMenu( int pos ) 
   {
     closeMenu();
@@ -655,9 +675,9 @@ public class MainWindow extends Activity
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
+    // setMenuAdapter( );
+    // closeMenu();
 
     // TDLog.Profile("TDActivity buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
@@ -831,9 +851,11 @@ public class MainWindow extends Activity
 
     // FIXME THMANAGER
     mNrButton1 = 4;
+    if ( TDLevel.overNormal ) {
+      ++mNrButton1; // CAVE3D
+    }
     if ( TDLevel.overExpert ) {
       ++ mNrButton1; // TH MANAGER
-      ++mNrButton1; // CAVE3D
     }
     mButton1 = new Button[ mNrButton1 + 1 ];
 
@@ -972,13 +994,13 @@ public class MainWindow extends Activity
     if ( TDandroid.canRun( mApp, mActivity ) ) {
       mApp.initEnvironmentFirst( );
       showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
-      resetButtonBar();
+      // resetButtonBar();
     } else {
       ++ mRequestPermissionTime;
       if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
         mApp.initEnvironmentFirst( );
         showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
-        resetButtonBar();
+        // resetButtonBar();
       // } else {  // the followings are delayed after the permissions have been granted
       //   mApp.initEnvironmentFirst( );
       //   if ( perms == 0 ) showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
@@ -991,6 +1013,9 @@ public class MainWindow extends Activity
   {
     super.onResume();
     if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale();
+    resetButtonBar();
+    setMenuAdapter( );
+    closeMenu();
     // TDLog.v( "onResume runs on " + Thread.currentThread().getId() );
 
     // TDLog.Profile("TDActivity onResume");

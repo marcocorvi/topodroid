@@ -25,10 +25,10 @@ import java.util.Locale;
  */
 public class FixedInfo extends MagLatLong
 {
-  final static long SRC_UNKNOWN    = 0L;
-  final static long SRC_TOPODROID  = 1L;
-  final static long SRC_MANUAL     = 2L;
-  final static long SRC_MOBILE_TOP = 3L;
+  public final static long SRC_UNKNOWN    = 0L;
+  public final static long SRC_TOPODROID  = 1L;
+  public final static long SRC_MANUAL     = 2L;
+  public final static long SRC_MOBILE_TOP = 3L;
   long   id;       // fixed id
   long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
   String name;     // station name, or whatever
@@ -43,7 +43,7 @@ public class FixedInfo extends MagLatLong
   double cs_alt;   // altitude
   long   cs_n_dec; // number of decimals in lng/lat
 
-  FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src )
+  public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src )
   {
     id = _id;
     name = n;

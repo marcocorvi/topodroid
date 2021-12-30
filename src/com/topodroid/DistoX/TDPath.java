@@ -41,13 +41,14 @@ public class TDPath
   final static String C3D = ".c3d";
   final static String CSN = ".csn";  // CaveSniper
   // final static String CSV = ".csv";
-  final static String DAT = ".dat";
+  final static String DAT = ".dat"; // Compass
   final static String SVX = ".svx"; // Survex
+  final static String SRV = ".srv"; // Walls
   final static String TDR = ".tdr";
   // final static private String TMP = ".tmp";
 
   final static String TOP = ".top"; // PockeTopo
-  final static String TH  = ".th";
+  final static String TH  = ".th";  // Therion
   final static String TRO = ".tro"; // VisualTopo
   final static String TROX = ".trox"; // VisualTopo
   final static String TXT = ".txt";
@@ -514,7 +515,7 @@ public class TDPath
   // NOTA BENE extensions include the dot, eg, ".th"
   static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX };
   static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
-  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX };
+  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV };
 
   // static File[] getImportFiles() // DistoX-SAF
   // { 
