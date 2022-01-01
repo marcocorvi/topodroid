@@ -197,7 +197,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="few_data">Nincs elegendő adat</string>
     <string name="few_iter">Iteráció nem sikerült</string>
     <string name="few_groups">Nincs elegendő csoportosítható adat</string>
-    <string name="found_groups">%1$d Magtalált csoport</string>
+    <string name="found_groups">%1$d Megtalált csoport</string>
     <string name="regroup">Nincs újracsoportosítás</string>
     <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
