@@ -68,12 +68,45 @@ public class TDSetting
   private static String defaultTextSize   = "16";
   private static String defaultButtonSize = TDString.ONE;
 
+  private static int FLAG_BUTTON = 1;
+  private static int FLAG_MENU   = 2;
+  private static int FLAG_TEXT   = 4;
+  private static int FLAG_LOCALE = 8;
+  private static int FLAG_LEVEL  = FLAG_BUTTON | FLAG_MENU;
+  private static int mMainFlag = 0xff; // Main Window flag
+
+  /** reset MainWindow flag
+   */
+  public static void resetFlag() 
+  { 
+    // TDLog.v("SETTINGS clear main flag");
+    mMainFlag = 0; 
+  }
+
+  /** @return true if Main flag button is set
+   */
+  public static boolean isFlagButton() { return ( mMainFlag & FLAG_BUTTON ) != 0; }
+
+  /** @return true if Main flag menu is set
+   */
+  public static boolean isFlagMenu() { return ( mMainFlag & FLAG_MENU ) != 0; }
+
+  /** @return true if Main flag text is set
+   */
+  public static boolean isFlagText() { return ( mMainFlag & FLAG_TEXT) != 0; }
+
+  /** @return true if Main flag language is set
+   */
+  public static boolean isFlagLocale() { return ( mMainFlag & FLAG_LOCALE ) != 0; }
+
+
   public static String setTextSize( int ts )
   {
     float ds = TopoDroidApp.getDisplayDensity() / 3.0f;
     mTextSize = (int)( ( ds * ts ) );
     if ( mTextSize < MIN_SIZE_TEXT ) {
       mTextSize = MIN_SIZE_TEXT;
+      mMainFlag |= FLAG_TEXT;
       return Integer.toString( mTextSize );
     }
     return null;
@@ -704,6 +737,7 @@ public class TDSetting
       mSizeButtons = (int)( sz * TopoDroidApp.getDisplayDensity() * 0.86f );
       // TDLog.v("SETTING Size " + size + " Btns " + mSizeBtns + " " + mSizeButtons );
       if ( mSizeButtons < MIN_SIZE_BUTTONS ) mSizeButtons = MIN_SIZE_BUTTONS;
+      mMainFlag |= FLAG_BUTTON;
       return true;
     }
     return false;
@@ -835,7 +869,7 @@ public class TDSetting
     mConnectionMode = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
     // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
     mHeadTail       = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
-    TDLog.v("SETTING load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
+    TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
     mSockType       = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
     // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
@@ -2551,6 +2585,7 @@ public class TDSetting
       mPalettes = b;
       // TopoDroidApp.resetButtonBar();
       // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
+      mMainFlag |= FLAG_MENU;
     }
   }
 
@@ -2571,6 +2606,7 @@ public class TDSetting
     // }
     // TopoDroidApp.resetButtonBar(); // was in 6.0.33
     // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
+    mMainFlag |= FLAG_LEVEL;
     if ( TDPrefActivity.mPrefActivityAll != null ) TDPrefActivity.mPrefActivityAll.reloadPreferences();
   }
 
@@ -2623,6 +2659,7 @@ public class TDSetting
     }
     // TopoDroidApp.setMenuAdapter(); // was in 6.0.33
     TDPrefActivity.reloadPreferences();
+    mMainFlag |= (FLAG_MENU | FLAG_LOCALE);
   }
 
   // void clearPreferences()

@@ -502,7 +502,7 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
-    TDLog.v( "Do export: type " + type + " index " + index );
+    TDLog.v( "SURVEY do export: type " + type + " index " + index );
     if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
       doArchive();
     } else if ( index >= 0 ) {
@@ -516,7 +516,7 @@ public class SurveyWindow extends Activity
         // }
       }
     } else {
-      TDLog.Error("Do export - negative index " + index );
+      TDLog.Error("Survey Window export - negative index " + index );
     }
   }
 
@@ -548,7 +548,7 @@ public class SurveyWindow extends Activity
         if ( result == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
-          TDLog.v( "Export: index " + mExportIndex + " uri " + uri.toString() );
+          // TDLog.v( "SURVEY export: index " + mExportIndex + " uri " + uri.toString() );
           TopoDroidApp.doExportDataAsync( getApplicationContext(), uri, mExportIndex, true );
         }
     }

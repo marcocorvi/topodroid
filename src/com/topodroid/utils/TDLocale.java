@@ -13,6 +13,7 @@ package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDPrefActivity;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.BrushManager;
 
@@ -26,7 +27,7 @@ import java.util.Locale;
 
 public class TDLocale
 {
-  public static final boolean FIXME_LOCALE = true;
+  public static final boolean FIXME_LOCALE = false; // 6.0.33 true;
 
   static Locale mLocale = null;
   static String mLocaleStr = null;
@@ -38,6 +39,7 @@ public class TDLocale
   // called by MainWindow
   public static void resetLocale( )
   {
+    if ( ! TDSetting.isFlagLocale() ) return;
     TDLog.v( "reset locale str <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();

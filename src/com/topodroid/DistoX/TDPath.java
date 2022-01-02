@@ -162,7 +162,7 @@ public class TDPath
     } catch ( SecurityException e ) {
       TDLog.Error("security error: " + e.getMessage() );
     }
-    TDLog.v( "check base <" + name + ">: " + ret );
+    TDLog.v( "PATH check base <" + name + ">: " + ret );
     return ret;
   }
 
@@ -227,7 +227,7 @@ public class TDPath
   static void setSurveyPaths( String survey )
   {
     if ( survey == null || survey.length() == 0 ) {
-      TDLog.v( "set survey path NULL");
+      TDLog.v( "PATH set survey path NULL");
       clearAppPaths();
     } else {
       // TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
@@ -285,7 +285,7 @@ public class TDPath
     };
     File[] files = dir.listFiles( filter );
     if ( files == null || files.length == 0 ) {
-      TDLog.v("tdconfig: no files");
+      TDLog.v("PATH tdconfig: no files");
       return null;
     }
     String[] filenames = new String[ files.length ];
@@ -503,7 +503,7 @@ public class TDPath
       }
     } );
     if ( files == null || files.length == 0 ) {
-      TDLog.v("no TopoDroid folders");
+      TDLog.v("PATH no TopoDroid folders");
       return null;
     }
     int len = files.length;
@@ -733,7 +733,7 @@ public class TDPath
     File dir = TDFile.getPrivateDir( dirname );
     File [] files = dir.listFiles();
     if ( files == null || files.length == 0 ) {
-      TDLog.v("no symbol files " + dirname + " to clear");
+      TDLog.v("PATH no symbol files " + dirname + " to clear");
       return;
     }
     for ( int i=0; i<files.length; ++i ) {
@@ -926,20 +926,19 @@ public class TDPath
   public static void moveTo6( Context context /* , TextView tv */ )
   {
     // if ( TDFile.hasExternalDir(null) ) {
-    //   TDLog.v("MOVE TO 6 has already external dir CBD");
+    //   TDLog.v("PATH MOVE TO 6 has already external dir CBD");
     //   return;
     // }
     final boolean dry_run = false;
 
-    TDLog.v("MOVE TO 6 create CBD");
+    TDLog.v("PATH move to 6 create CBD");
     File cbd = TDFile.getExternalDir( null );
     if ( ! cbd.exists() ) {
-      TDLog.Error("MOVE TO 6 failed create CBD");
+      TDLog.Error("PATH move to 6 failed create CBD");
       // if ( tv != null) tv.setText("failed to create TDX folder");
       return;
     }
 
-    TDLog.v("MOVE TO 6");
     String sdcard = Environment.getExternalStorageDirectory().getPath();
     // if ( tv != null ) tv.setText("moving app files to sdcard + "/Android/data/com.topodroid.DistoX");
     File priv_dir = TDFile.getPrivateDir( null );
@@ -980,7 +979,7 @@ public class TDPath
     copyDir( f, new File( cwd, "thconfig" ), dry_run );
 
     // open database and create survey folders, and move survey files
-    TDLog.v("MOVE TO 6: database " + f2.getAbsolutePath() );
+    TDLog.v("PATH move to 6: database " + f2.getAbsolutePath() );
     DataHelper db = new DataHelper( context, f2.getAbsolutePath() );
     List<String> surveys = db.selectAllSurveys( );
     for ( String survey : surveys ) {
@@ -1024,15 +1023,15 @@ public class TDPath
   private static boolean copyDir( File in, File out, boolean dry_run )
   {
     if ( in == null ) {
-      TDLog.v("Input dir is null"); 
+      TDLog.v("PATH copy dir null input"); 
       return true;
     }
     if ( ! in.exists() ) {
-      TDLog.v("Dir " + in.getPath() + " does not exist");
+      TDLog.v("PATH copy dir " + in.getPath() + " not exist");
       return true;
     }
     if ( ! in.isDirectory() ) {
-      TDLog.v("Dir " + in.getPath() + " is not directory");
+      TDLog.v("PATH copy dir " + in.getPath() + " not directory");
       return true;
     }
     if ( ! dry_run ) {
@@ -1042,7 +1041,7 @@ public class TDPath
       }
       if ( ! out.isDirectory() ) return false;
     } else {
-      TDLog.v("Copy Dir " + in.getName() + " -> " + out.getName() + " dry run");
+      TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
     }
     boolean ret = true;
     File[] files = in.listFiles();
@@ -1064,19 +1063,19 @@ public class TDPath
   private static boolean copyFile( File in, File out, boolean dry_run )
   {
     if ( in == null ) {
-      TDLog.v("Input file is null"); 
+      TDLog.v("PATH copy file null input"); 
       return true;
     }
     if ( !in.exists() ) {
-      TDLog.v("File " + in.getPath() + " does not exist");
+      TDLog.v("PATH copy file " + in.getPath() + " not exist");
       return true;
     }
     if ( !in.isFile() ) {
-      TDLog.v("File " + in.getPath() + " is not regular");
+      TDLog.v("PATH copy file " + in.getPath() + " not regular");
       return true;
     }
     if ( dry_run ) {
-      TDLog.v("Copy File " + in.getName() + " -> " + out.getName() + " dry run");
+      TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " dry run");
       return true;
     }
 
@@ -1098,13 +1097,13 @@ public class TDPath
       fos.close();
       fis.close();
     } catch ( FileNotFoundException e ) {
-      TDLog.Error("File error " + e.getMessage() );
+      TDLog.Error("PATH file error " + e.getMessage() );
       return false;
     } catch ( IOException e ) {
-      TDLog.Error("IO error " + e.getMessage() );
+      TDLog.Error("PATH IO error " + e.getMessage() );
       return false;
     }
-    TDLog.v("Copied File " + in.getName() + " -> " + out.getName() + " length " + tot_len );
+    TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " length " + tot_len );
     return true;
   }
  

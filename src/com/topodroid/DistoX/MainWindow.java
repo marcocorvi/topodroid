@@ -575,7 +575,7 @@ public class MainWindow extends Activity
     mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
     mWithLogs     = TDLevel.overAdvanced;
     // mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear; // CLEAR_BACKUPS
-    TDLog.v("Main Window set menu adapter. With palette " + mWithPalette + " With palettes " + mWithPalettes );
+    // TDLog.v("Main Window set menu adapter. With palette " + mWithPalette + " With palettes " + mWithPalettes );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
     if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
@@ -634,6 +634,7 @@ public class MainWindow extends Activity
       } else if ( p++ == pos ) { // ABOUT
         (new TopoDroidAbout( mActivity, this, -2 )).show();
       } else if ( p++ == pos ) { // SETTINGS
+        TDSetting.resetFlag();
         intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
         intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_ALL );
         startActivity( intent );
@@ -683,7 +684,9 @@ public class MainWindow extends Activity
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
 
-    // resetButtonBar();
+    // resetButtonBar(); // moved to onStart()
+    // setMenuAdapter( );
+    // closeMenu();
 
     // FIXME TOOLBAR mToolbar = (Toolbar) findViewById( R.id.toolbar );
     // setActionBar( mToolbar );
@@ -712,7 +715,7 @@ public class MainWindow extends Activity
   // called also by DialogR
   void showInitDialogs( boolean say_dialog_r )
   {
-    TDLog.v( "show init dialogs - already done: " + done_init_dialogs );
+    // TDLog.v( "show init dialogs - already done: " + done_init_dialogs );
     if ( done_init_dialogs ) return;
     String app_dir = TDInstance.context.getExternalFilesDir( null ).getPath();
     // TDLog.v( "show init dialogs: app_dir <" + app_dir + ">" );
@@ -967,7 +970,8 @@ public class MainWindow extends Activity
     // restoreInstanceFromFile();
     // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
 
-    // TDLog.Profile("TDActivity onStart");
+    // TDLog.Profile("Main Window on Start");
+    // TDLog.v("Main Window on Start");
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( DeviceUtil.hasAdapter() ) {
@@ -1006,16 +1010,25 @@ public class MainWindow extends Activity
       //   if ( perms == 0 ) showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
       }
     }
+
+    if ( TDSetting.isFlagButton() ) resetButtonBar(); // 6.0.33
+    if ( TDSetting.isFlagMenu() ) {
+      setMenuAdapter( );
+      closeMenu();
+    }
+    if ( TDSetting.isFlagLocale() ) TDLocale.resetLocale();
   }
 
   @Override
   public synchronized void onResume() 
   {
     super.onResume();
+    // TDLog.v("Main Window on Resume");
     if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale();
-    resetButtonBar();
-    setMenuAdapter( );
-    closeMenu();
+    // resetButtonBar();  // 6.0.33
+    // setMenuAdapter();
+    // closeMenu();
+
     // TDLog.v( "onResume runs on " + Thread.currentThread().getId() );
 
     // TDLog.Profile("TDActivity onResume");
@@ -1038,6 +1051,7 @@ public class MainWindow extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
+    // TDLog.v("Main Window on Pause");
     // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
     mApp.suspendComm();
   }
@@ -1046,6 +1060,7 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
+    // TDLog.v("Main Window on Stop");
     // if ( TopoDroidApp.isTracing ) {
     //   Debug.stopMethodTracing();
     // }
@@ -1116,6 +1131,7 @@ public class MainWindow extends Activity
 
   public void onActivityResult( int request, int result, Intent intent ) 
   {
+    // TDLog.v( "Main Window on Activity Result " + request + " " + result );
     // TDLog.v( "onActivityResult runs on " + Thread.currentThread().getId() );
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
@@ -1206,8 +1222,6 @@ public class MainWindow extends Activity
         } else {
         }
         break;
-   
-
     }
   }
 
