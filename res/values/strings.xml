@@ -610,7 +610,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="wait_scan">Scanning: wait &#8230;</string -->
     <string name="write_failed">Failed DistoX-write</string>
     <string name="write_ok">Written calibration to DistoX</string>
-    <string name="zip_saved">Saved </string>
+    <string name="zip_saved">Saved zip archive</string>
     <string name="zip_failed">Failed survey-zip</string>
     <string name="unzip_fail">Failed survey-unzip</string>
     <string name="unzip_fail_sqlite">Failed SQL: delete survey and retry</string>

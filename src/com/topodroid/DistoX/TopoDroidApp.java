@@ -2562,22 +2562,21 @@ public class TopoDroidApp extends Application
   // ==================================================================
   
   // called by (ShotWindow and) SurveyWindow on export
-  static boolean doExportDataAsync( Context context, Uri uri, int exportIndex, boolean toast )
+  boolean doExportDataAsync( Context context, Uri uri, int exportIndex, boolean toast )
   {
     if ( exportIndex < 0 ) return false; // extra safety
-    // TODO EXPORT ZIP
-    // if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) {
-    //   // this is SurveyWindow.doArchive
-    //   while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
-    //   (new ExportZipTask( this, this, uri )).execute();
-    //   return true;
-    // }
-    SurveyInfo info = getSurveyInfo( );
-    if ( info == null ) return false;
-    TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
-    String format = context.getResources().getString(R.string.saved_file_1);
-    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, toast )).execute();
+    if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
+      // this is SurveyWindow.doArchive
+      while ( ! TopoDroidApp.mEnableZip ) Thread.yield();
+      (new ExportZipTask( context, this, uri )).execute();
+    } else {
+      SurveyInfo info = getSurveyInfo( );
+      if ( info == null ) return false;
+      TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
+      String format = context.getResources().getString(R.string.saved_file_1);
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, toast )).execute();
+    }
     return true;
   }
 

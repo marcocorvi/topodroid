@@ -14,8 +14,12 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDsafUri;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+
+import android.os.ParcelFileDescriptor;
+import android.net.Uri;
 
 import java.io.File;
 import java.io.IOException;
@@ -53,7 +57,7 @@ public class Archiver
   private static final int BUF_SIZE = 4096;
   private byte[] data; // = new byte[ BUF_SIZE ];
 
-  String zipname;
+  private String mZipname;
 
   /** cstr
    */
@@ -240,7 +244,7 @@ public class Archiver
   }
 
   /** compress symbol files
-   * @param zipname  compressed zip file
+   * @param zipfile  compressed zip file
    * @param lib      symbol library
    * @param type     symbols type
    * @return true if successful
@@ -335,9 +339,10 @@ public class Archiver
 
   /** archive the current syrvey - compress to the default zip file
    * @param app   application
+   * @param uri   output URI (if null the default output zipfile is used)
    * @return true if successful
    */
-  boolean archive( TopoDroidApp mApp )
+  boolean archive( TopoDroidApp mApp, Uri uri )
   {
     if ( TDInstance.sid < 0 ) return false;
     DataHelper app_data = TopoDroidApp.mData;
@@ -347,15 +352,21 @@ public class Archiver
     String survey = TDInstance.survey;
     boolean ret = true;
 
-    zipname = TDPath.getSurveyZipFile( survey );
-    TDPath.checkPath( zipname );
     // TDLog.Log( TDLog.LOG_IO, "ZIP export file: " + zipname );
     // TDLog.v( "ZIP export file: " + zipname + " pre " + ret );
 
+    ParcelFileDescriptor pfd = null;
     ZipOutputStream zos = null;
     try {
       String pathname;
-      zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( zipname ) ) );
+      if ( uri == null ) {
+        mZipname = TDPath.getSurveyZipFile( survey );
+        TDPath.checkPath( mZipname );
+        zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getFileOutputStream( mZipname ) ) );
+      } else {
+        pfd = TDsafUri.docWriteFileDescriptor( uri );
+        zos = new ZipOutputStream( new BufferedOutputStream( TDsafUri.docFileOutputStream( pfd ) ) );
+      }
 
       pathname = TDPath.getManifestFile( ); // The first entry must be the manifest 
       mApp.writeManifestFile();
@@ -422,6 +433,7 @@ public class Archiver
       // FIXME
     } finally {
       if ( zos != null ) try { zos.close(); } catch ( IOException e ) { TDLog.Error("ZIP close error"); }
+      if ( pfd != null ) TDsafUri.closeFileDescriptor( pfd );
       TDFile.deleteFile( TDPath.getSqlFile() );
     }
     // TDLog.v("ZIP archive returns " + ret );

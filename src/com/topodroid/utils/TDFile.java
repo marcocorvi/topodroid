@@ -882,7 +882,7 @@ public class TDFile
 
   /** get the file descriptor.
    * @param uri    file uri
-   * @param mode   open mode
+   * @param mode   open mode, eg, "r" or "w"
    * @return file descriptor
    * @note After use must call close() on the file desriptor
    */
