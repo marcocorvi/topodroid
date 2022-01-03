@@ -820,6 +820,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="symbol_extra">Speläologie (Extra)</string>
 
     <string name="symbol_reload">Zeichenwerkzeuge</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
 
     <!-- UNUSED string name="length">Length [m]</string -->

@@ -813,6 +813,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Strumenti Disegno</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Lunghezza [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->

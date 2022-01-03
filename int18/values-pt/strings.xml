@@ -806,6 +806,7 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">Espeleologia (extras)</string>
 
     <string name="symbol_reload">Símbolos</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Comprimento [m]</string -->
     <!-- UNUSED string name="azimuth">Azimute [deg]</string -->

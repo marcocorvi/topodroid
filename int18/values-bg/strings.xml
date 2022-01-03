@@ -803,6 +803,7 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">Спелео допълнителни</string>
 
     <string name="symbol_reload">Символи за рисуване</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Дължина [метри]</string -->
     <!-- UNUSED string name="azimuth">Азимут [градуси]</string -->

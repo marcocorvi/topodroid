@@ -822,6 +822,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Drawing Tools</string>
+    <string name="warning_no_palette">Warning: palette not yet loaded</string>
 
     <!-- UNUSED string name="length">Length [m]</string -->
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->

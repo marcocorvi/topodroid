@@ -803,6 +803,7 @@ Refer to the web pages for details.\n
     <string name="symbol_speleo">Spéléo</string>
     <string name="symbol_extra">Spéléo (2)</string>
     <string name="symbol_reload">Outils de dessin</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
 
     <!-- UNUSED string name="length">Longueur [m]</string -->

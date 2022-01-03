@@ -816,6 +816,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="symbol_extra">Speleo (2)</string -->
 
     <string name="symbol_reload">Narzędzia rysowania</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Długość [m]</string -->
     <!-- UNUSED string name="azimuth">Azymut [deg]</string -->

@@ -805,6 +805,7 @@
     <string name="symbol_extra">Спелео (2)</string>
 
     <string name="symbol_reload">Инструменты Рисования</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Длина [м]</string -->
     <!-- UNUSED string name="azimuth">Азимут [грд]</string -->

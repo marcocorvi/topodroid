@@ -296,17 +296,8 @@ public class MainWindow extends Activity
 	  dlg.anchorTop();
 	  dlg.show();
         } else {
-	  TDToast.makeBad( "palette not yet loaded" );
+	  TDToast.makeBad( R.string.warning_no_palette );
 	}
-      // FIXME THMANAGER
-      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
-        try {
-          intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.tdm.TdManagerActivity.class );
-          startActivity( intent );
-        } catch ( ActivityNotFoundException e ) {
-          // TDToast.makeBad( R.string.no_thmanager );
-          TDLog.Error( "Td Manager activity not started" );
-        }
       } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // CAVE3D
         // int check = TDVersion.checkCave3DVersion( this );
         // if ( check < 0 ) {
@@ -320,6 +311,14 @@ public class MainWindow extends Activity
             TDToast.makeBad( R.string.no_cave3d );
           }
         // }
+      } else if ( TDLevel.overExpert && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // THERION MANAGER TdManager
+        try {
+          intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.tdm.TdManagerActivity.class );
+          startActivity( intent );
+        } catch ( ActivityNotFoundException e ) {
+          // TDToast.makeBad( R.string.no_thmanager );
+          TDLog.Error( "Td Manager activity not started" );
+        }
       }
     }
     // if ( status != mStatus ) {

@@ -820,6 +820,7 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Symboly na kreslenie</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Length [m]</string -->
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->

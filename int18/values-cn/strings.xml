@@ -815,6 +815,7 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">洞穴学(2)</string>
 
     <string name="symbol_reload">绘图工具</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Length [m]</string -->
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->

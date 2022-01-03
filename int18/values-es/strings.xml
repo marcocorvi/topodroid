@@ -807,6 +807,7 @@
     <string name="symbol_extra">Espeleo(2)</string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Longitud [m]</string -->
     <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->

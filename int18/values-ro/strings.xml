@@ -805,6 +805,7 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">Speologie (2)</string>
 
     <string name="symbol_reload">Unelte desen</string>
+    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
 
     <!-- UNUSED string name="length">Lungime [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
