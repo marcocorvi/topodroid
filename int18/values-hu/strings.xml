@@ -822,7 +822,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="symbol_extra">Barlangászat (2)</string>
 	
     <string name="symbol_reload">Rajz eszközök</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">Figyelmeztetés: a paletta még nincs betöltve</string>
 
     <!-- UNUSED string name="length">Hossz [m]</string -->
     <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
