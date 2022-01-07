@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
 import com.topodroid.DistoX.DBlock;
 import com.topodroid.DistoX.DataHelper;
 import com.topodroid.DistoX.SurveyInfo;
@@ -30,7 +31,7 @@ public class TdmSurvey
   TdmStation mStartStation;
   SurveyInfo mInfo = null;
   boolean    mLoadedData = false;
-  float      mDeclination;
+  float      mDeclination; // declination [radians]
 
   ArrayList< TdmShot >    mShots;
   ArrayList< TdmStation > mStations;
@@ -101,7 +102,7 @@ public class TdmSurvey
       mInfo = data.getSurveyInfo( mName );
     }
     if ( mInfo != null ) {
-      mDeclination = mInfo.getDeclination();
+      mDeclination = mInfo.getDeclination() * TDMath.DEG2RAD;
       List< DBlock > blks = data.getSurveyReducedData( mInfo.id );
       for ( DBlock blk : blks ) {
         addShot( blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino, blk.getIntExtend() );
@@ -195,6 +196,8 @@ public class TdmSurvey
 
   // ---------------------------------------------------------------
 
+  /** compute the stations coordinates (for data reduction)
+   */
   private void computeStations()
   {
     mStations = new ArrayList< TdmStation >();

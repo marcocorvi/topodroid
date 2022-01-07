@@ -36,7 +36,7 @@ public class SurveyInfo
   public String name;
   public String date;  // YYYY.MM.DD
   String team;
-  float  declination;
+  float  declination;  // declination [degree]
   String comment;
   String initStation;
   int xsections; // 0: shared, 1: private
@@ -67,16 +67,21 @@ public class SurveyInfo
   int getExtend() { return mExtend; }
   void setExtend( int extend ) { mExtend = TDMath.in360( extend ); }
 
-
+  /** @return true if declination is set
+   */
   public boolean hasDeclination() { return declination < DECLINATION_MAX; }
 
-  // get the declination or 0 if not-defined
+  /** @return the declination [degrees]  or 0 if not-defined
+   */
   public float getDeclination()
   {
     if ( declination < DECLINATION_MAX ) return declination;
     return 0;
   }
 
+  /** @return the value of the declination from the string presentation [degrres]
+   * @param et    string presentation (as edit text)
+   */
   public static float declination( EditText et )
   {
     float decl = DECLINATION_UNSET;
@@ -95,8 +100,9 @@ public class SurveyInfo
     return decl;
   }
 
-  // test returns false if declination is in range [-360,360] 
-  //                    or edit textfield is empty
+  /** @return false if declination is in range [-360,360], or edit textfield is empty
+   * @param et    string presentation (as edit text)
+   */
   static boolean declinationOutOfRange( EditText et )
   {
     if ( et != null && et.getText() != null ) {
@@ -113,4 +119,5 @@ public class SurveyInfo
     }
     return false;
   }
+
 }

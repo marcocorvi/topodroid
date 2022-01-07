@@ -73,8 +73,15 @@ public class TdmViewSurface extends SurfaceView
     public int width()  { return mWidth; }
     public int height() { return mHeight; }
 
+    /** set the parent activity
+     * @param act   parent activity
+     */
     void setActivity( TdmViewActivity act ) { mActivity = act; }
 
+    /** cstr
+     * @param context  context
+     * @param attrs    ???
+     */
     public TdmViewSurface(Context context, AttributeSet attrs) 
     {
       super(context, attrs);
@@ -103,6 +110,8 @@ public class TdmViewSurface extends SurfaceView
       mEquates = Collections.synchronizedList( new ArrayList< TdmViewEquate >() );
     }
 
+    /** clear selected station
+     */
     void resetStation()
     {
       for ( TdmViewCommand command : mCommandManager ) {
@@ -111,11 +120,18 @@ public class TdmViewSurface extends SurfaceView
       mCommand = null;
     }
 
+    /** set the center of the display
+     * @param x   X coordinate
+     * @param y   Y coordinate
+     */
     void setDisplayCenter( float x, float y )
     {
       mDisplayCenter = new PointF( x, y );
     }
 
+    /** add a set of equates to the scene
+     * @param equates   list of equates to add to the scene
+     */
     void addEquates( ArrayList< TdmEquate > equates )
     {
       // TDLog.v("View surface: add equates: size " + equates.size() );
@@ -158,6 +174,13 @@ public class TdmViewSurface extends SurfaceView
       }
     }
 
+    /** add a survey to the scene
+     * @param survey    survey to add
+     * @param color     display color
+     * @param xoff      X offset
+     * @param yoff      Y offset
+     * @param equates   ...
+     */
     void addSurvey( TdmSurvey survey, int color, float xoff, float yoff, ArrayList< TdmEquate > equates )
     {
       TdmViewCommand command = new TdmViewCommand( survey, color, xoff, yoff );
@@ -190,9 +213,11 @@ public class TdmViewSurface extends SurfaceView
       mCommandManager.add( command );
     }
 
-    // dx   delta X
-    // dy   delta Y
-    // rs   rescale factor
+    /** apply a transformation
+     * @param dx   delta X
+     * @param dy   delta Y
+     * @param rs   rescale factor
+     */
     public void transform( float dx, float dy, float rs )
     {
       mXoffset += dx;
@@ -205,6 +230,9 @@ public class TdmViewSurface extends SurfaceView
       mMatrix.postScale( mZoom, mZoom );
     }
 
+    /** change zoom
+     * @param f   changing factor
+     */
     void changeZoom( float f )
     {
       float zoom0 = mZoom;
@@ -216,6 +244,12 @@ public class TdmViewSurface extends SurfaceView
       // transform( 0, 0, f );
     }
 
+    /** get the survey at a point (x,y)
+     * @param x   X coordinate
+     * @param y   Y coordinate
+     * @param cmd excluded drawing item (null: no exclusion)
+     * @return true if a drawing item has been found (and saved in mCommand)
+     */
     boolean getSurveyAt( float x, float y, TdmViewCommand cmd )
     {
       if ( cmd == null ) {
@@ -238,24 +272,35 @@ public class TdmViewSurface extends SurfaceView
       return (mCommand != null);
     }
 
+    /** @return the selected station
+     */
     TdmViewStation selectedStation()
     {
       return ( mCommand == null )? null : mCommand.mSelected;
     }
 
+    /** @return the selected command
+     */
     TdmViewCommand selectedCommand() { return mCommand; }
 
+    /** @return the name of the selected station 
+     */
     String selectedStationName()
     { 
       return ( mCommand == null )? null : mCommand.mSelected.name();
     }
 
+    /** @return the name of the selected command
+     */
     String selectedCommandName()
     { 
       return ( mCommand == null )? null : mCommand.name();
     }
        
-
+    /** shift the display
+     * @param dx   X shift
+     * @param dy   Y shift
+     */
     void shift( float dx, float dy ) 
     { 
       if ( mCommand != null ) {

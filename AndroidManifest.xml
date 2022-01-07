@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600036"
-      android:versionName="6.0.36"
+      android:versionCode="600037"
+      android:versionName="6.0.37"
     >
     <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
 
