@@ -78,7 +78,7 @@ select fixeds.* from fixeds,surveys where surveys.name="$name" and surveys.id ==
 .mode insert stations
 select stations.* from stations,surveys where surveys.name="$name" and surveys.id == stations.surveyId;
 .mode insert sensors
-select sensors.* from sensors,surveys where surveys.name=$name and surveys.id == sensors.surveyId;
+select sensors.* from sensors,surveys where surveys.name="$name" and surveys.id == sensors.surveyId;
 x123end
 
     $SQLITE $distox14 < $name.sqlite
