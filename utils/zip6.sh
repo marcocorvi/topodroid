@@ -9,7 +9,7 @@
 # 
 # If run without argument the script list the available surveys.
 #
-# Requirements: sqlite3, zip, date, sed
+# Requirements: sqlite3, zip, date
 #
 SQLITE=`which sqlite3`
 ZIP=`which zip`
@@ -44,7 +44,7 @@ fi
 if [ ! -f $device10 ] ; then
      td_version=`echo "select value from configs where key=\"version\";" | $SQLITE $device10`
 fi
-td_version_code=`echo $td_version | sed -e s'/\./0/g'`
+td_version_code=`echo {$td_version//\./0}`
 
 if [ $# -eq 0 ] ; then
     echo "select name from surveys;" > __input

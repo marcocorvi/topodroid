@@ -8,7 +8,7 @@
 # 
 # If run without argument the script list the available surveys.
 #
-# Requirements: sqlite3, zip, date, sed
+# Requirements: sqlite3, zip, date
 #
 SQLITE=`which sqlite3`
 ZIP=`which zip`
@@ -29,7 +29,7 @@ echo "Found $SQLITE"
 echo "      $ZIP"
 echo "      $DATE"
 
-td_version="5.1.50 501040"
+td_version="5.1.40"
 db_version="42"
 
 distox14="distox14.sqlite"
@@ -43,6 +43,7 @@ fi
 if [ ! -f $device10 ] ; then
      td_version=`echo "select value from configs where key=\"version\";" | $SQLITE $device10`
 fi
+td_version_code=`echo {$td_version//\./0}`
 
 if [ $# -eq 0 ] ; then
     echo "select name from surveys;" > __input
@@ -54,7 +55,7 @@ else
     rm -rf __tmp
     mkdir __tmp
     name=$1
-    echo "5.1.40 501040" > __tmp/manifest
+    echo "$td_version $td_version_code" > __tmp/manifest
     echo "$db_version" >> __tmp/manifest
     echo "$name" >> __tmp/manifest
     $DATE +%Y-%m-%d >> __tmp/manifest
