@@ -1069,19 +1069,20 @@ public class TopoDroidApp extends Application
 
   static int mManifestDbVersion = 0;
 
-  // returns
-  //  >=0 ok
-  // -1 survey already present
-  // -2 TopoDroid version mismatch
-  // -3 database version mismatch: manifest_DB_version < min_DB_version
-  // -4 database version mismatch: manifest_DB_version > current DB_version
-  // -5 survey name does not match filename
-  // -10 number format error
-  // -11 file not found
-  // -12 IO error
-  //
-  // @note surveyname is modified
-  // static public int checkManifestFile( String filename, String surveyname )
+  /** check a  manifest file
+   * @param manifest   content of manifest 
+   * @param surveyname survey name (@note surveyname is modified)
+   * @return
+   *  >=0 ok
+   * -1 survey already present
+   * -2 TopoDroid version mismatch
+   * -3 database version mismatch: manifest_DB_version < min_DB_version
+   * -4 database version mismatch: manifest_DB_version > current DB_version
+   * -5 survey name does not match filename
+   * -10 number format error
+   * -11 file not found
+   * -12 IO error
+   */
   static public int checkManifestFile( String manifest, String surveyname )
   {
     mManifestDbVersion = 0;
@@ -1136,11 +1137,14 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  // returns
-  //   -10 number format error
-  //   -2  version is too old
-  //   0   version is in acceptable range
-  //   1   version is newer than this app
+  /** check the version line of a manifest file
+   * @param version_line version line
+   * @return
+   *   -10 number format error
+   *   -2  version is too old
+   *   0   version is in acceptable range
+   *   1   version is newer than this app
+   */
   private static int checkVersionLine( String version_line )
   {
     int ret = 0;
