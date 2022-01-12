@@ -30,7 +30,13 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
   private int mTo;
   private boolean mOnOff;
 
-  // @param ht head_tail
+  /** cstr
+   * @param app      application
+   * @param type     device type
+   * @param address  device luetooth address
+   * @param ht       head_tail - head at index 0, tail at index 1
+   * @param on_off
+   */
   SwapHotBitTask( TopoDroidApp app, int type, String address, int[] ht, boolean on_off )
   {
     mApp     = new WeakReference<TopoDroidApp>( app );
@@ -42,6 +48,9 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
     // // TDLog.v("do reset from " + from + " to " + to );
   }
 
+  /** execute the swapping task
+   * @return the number of data hot-bits that have been swapped
+   */
   @Override
   protected Integer doInBackground(Void... v)
   {
@@ -59,6 +68,9 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
   // {
   // }
 
+  /** post-execution user feedback
+   * @param result   execution result (number of data hot-bits that have been swapped)
+   */
   @Override
   protected void onPostExecute( Integer result )
   {

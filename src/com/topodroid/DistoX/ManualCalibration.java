@@ -14,11 +14,13 @@ package com.topodroid.DistoX;
 
 class ManualCalibration
 {
-  static float mLength  = 0; // calibration of manually inputed data: length
-  static float mAzimuth = 0;
-  static float mClino   = 0;
+  static float mLength  = 0; // calibration of manually inputed data: length [m]
+  static float mAzimuth = 0; // [degrees]
+  static float mClino   = 0; // [degrees]
   static boolean mLRUD  = false; // whether length applies also to LRUD or not
 
+  /** reset the static fields
+   */
   static void reset() 
   {
     mLength  = 0; 

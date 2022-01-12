@@ -34,6 +34,12 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
   List< GlSketch > mItems;
   private final LayoutInflater mLayoutInflater;
 
+  /** cstr
+   * @param ctx     context
+   * @param parent  parent window
+   * @param res_id  id of the resource used to present the sketches
+   * @param items   list of sketches
+   */
   SketchAdapter( Context ctx, TopoGL parent, int res_id, List< GlSketch > items )
   {
     super( ctx, res_id, items );
@@ -43,12 +49,16 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
-  // return the sketch at the given position
+  /** @return the sketch at the given position
+   * @param pos   position in the list of sketches
+   */
   public GlSketch get( int pos ) 
   { 
     return ( pos < 0 || pos >= mItems.size() )? null : mItems.get(pos);
   }
 
+  /** sketch view holder
+   */
   private class ViewHolder implements OnClickListener
   { 
     int      pos;
@@ -89,6 +99,11 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
     }
   }
 
+  /** @return the view used to present a sketch
+   * @param pos   sketch position
+   * @param convertView convertible view (if not null)
+   * @param parent      view-group parent
+   */
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
@@ -111,14 +126,26 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
     return convertView;
   }
 
+  /** @return the number of sketches in the list
+   */ 
   @Override
   public int getCount() { return mItems.size(); }
 
+  /** @return the number of sketches in the list
+   */ 
   public int size() { return mItems.size(); }
 
+  /** @return the type of a sketch view, always IGNORE
+   * @param pos   sketch position
+   */ 
   @Override
   public int getItemViewType(int pos) { return AdapterView.ITEM_VIEW_TYPE_IGNORE; }
 
+  /** add a sketch to the list
+   * @param sketch   sketch to add
+   * @return true if successful
+   * @note it can fail if the sketch is null, or has a null name, or the name is already in the list
+   */
   public boolean addSketch( GlSketch sketch ) 
   { 
     if ( sketch == null || sketch.mName == null ) return false;

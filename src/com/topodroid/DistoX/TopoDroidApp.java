@@ -171,18 +171,19 @@ public class TopoDroidApp extends Application
   // ListerSet mListerSet;
   ListerSetHandler mListerSet; // FIXME_LISTER
 
-  void registerLister( ILister lister ) { mListerSet.registerLister( lister ); }
-  void unregisterLister( ILister lister ) { mListerSet.unregisterLister( lister ); }
+  /** register a lister in the lister-set
+   * @param lister   data lister to register
+   */
+  void registerLister( ILister lister ) { if ( lister != null ) mListerSet.registerLister( lister ); }
 
-  // public void notifyStatus( )
-  // { 
-  //   if ( mMainActivity == null ) return;
-  //   mMainActivity.runOnUiThread( new Runnable() { 
-  //     public void run () { 
-  //       mListerSet.setConnectionStatus( mDataDownloader.getStatus() );
-  //     }
-  //   } );
-  // }
+  /** unregister a lister from the lister-set
+   * @param lister   data lister to unregister
+   */
+  void unregisterLister( ILister lister ) { if ( lister != null ) mListerSet.unregisterLister( lister ); }
+
+  /** notify a new status to the data listers
+   * @param status new status
+   */
   public void notifyStatus( final int status )
   { 
     // TDLog.v( "App: notify status " + status );
@@ -194,8 +195,9 @@ public class TopoDroidApp extends Application
     } );
   }
 
-
-  // @param data_type ...
+  /** receive a disconnection notification
+   * @param data_type   type of data that are downloaded
+   */
   public void notifyDisconnected( int data_type )
   {
     if ( mListerSet.size() > 0 ) {
@@ -224,7 +226,10 @@ public class TopoDroidApp extends Application
   public static DrawingWindow mDrawingWindow  = null; // FIXME currently not used
   public static MainWindow mMainActivity      = null; // FIXME ref Main Activity
 
+  /** @return the ID of the last shot
+   */
   static long lastShotId( ) { return mData.getLastShotId( TDInstance.sid ); }
+
   static StationName mStationName = null;
 
   // static Device mDevice = null;
@@ -234,16 +239,17 @@ public class TopoDroidApp extends Application
   // FIXME VirtualDistoX
   // VirtualDistoX mVirtualDistoX = new VirtualDistoX();
 
+  /** notify the drawing window to update the midline display
+   * @param blk_id    ID of the shot DBlock 
+   * @param got_leg   whether a new leg has been detected
+   */
   static void notifyDrawingUpdateDisplay( long blk_id, boolean got_leg )
   {
     if ( mDrawingWindow != null ) mDrawingWindow.notifyUpdateDisplay( blk_id, got_leg );
   }
 
-  // public static void setToolsToolbars()
-  // {
-  //   if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbars();
-  // }
-
+  /** set the toolbar parameters of the drawing window
+   */
   public static void setToolsToolbarParams()
   {
     if ( mDrawingWindow != null ) mDrawingWindow.setToolsToolbarParams();
@@ -252,7 +258,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
-  /** @return the densiti of the display
+  /** @return the density of the display
    */
   public static float getDisplayDensity( )
   {
@@ -267,7 +273,7 @@ public class TopoDroidApp extends Application
   //   return Resources.getSystem().getDisplayMetrics().density;
   // }
 
-  /** @return the densiti DPI of the display // FIXED_ZOOM
+  /** @return the density DPI of the display // FIXED_ZOOM
    */
   public static int getDisplayDensityDpi( )
   {
@@ -350,26 +356,31 @@ public class TopoDroidApp extends Application
   // ConnListener
   ArrayList< Handler > mConnListener = null;
 
+  /** register a connection-listener in the conn-listener set
+   * @param hdl   connection listener
+   */
   void registerConnListener( Handler hdl )
   {
     if ( hdl != null && mConnListener != null ) {
       mConnListener.add( hdl );
-      // try {
-      //   new Messenger( hdl ).send( new Message() );
-      // } catch ( RemoteException e ) { }
+      // try { new Messenger( hdl ).send( new Message() ); } catch ( RemoteException e ) { }
     }
   }
 
+  /** unregister a connection-listener from the conn-listener set
+   * @param hdl   connection listener
+   */
   void unregisterConnListener( Handler hdl )
   {
     if ( hdl != null && mConnListener != null ) {
-      // try {
-      //   new Messenger( hdl ).send( new Message() );
-      // } catch ( RemoteException e ) { }
+      // try { new Messenger( hdl ).send( new Message() ); } catch ( RemoteException e ) { }
       mConnListener.remove( hdl );
     }
   }
 
+  /** send a notification to the commention listeners
+   * @param w  notification (value)
+   */
   private void notifyConnState( int w )
   {
     // TDLog.v( "notify conn state" );
@@ -387,6 +398,8 @@ public class TopoDroidApp extends Application
   // survey/calib info
   //
 
+  /** @return true if the calibration matches with the current device
+   */
   boolean checkCalibrationDeviceMatch() 
   {
     CalibInfo info = mDData.selectCalibInfo( TDInstance.cid  );
@@ -395,12 +408,16 @@ public class TopoDroidApp extends Application
     return ( TDInstance.getDeviceA() == null || ( info != null && info.device.equals( TDInstance.deviceAddress() ) ) );
   }
 
+  /** @return the list of the survey names
+   */ 
   public static List< String > getSurveyNames()
   {
     if ( mData == null ) return null;
     return mData.selectAllSurveys();
   }
 
+  /** @return the info of the current survey
+   */
   public static SurveyInfo getSurveyInfo()
   {
     if ( TDInstance.sid <= 0 ) return null;
@@ -409,6 +426,8 @@ public class TopoDroidApp extends Application
     // if ( info == null ) TDLog.Error("null survey info. sid " + TDInstance.sid );
   }
 
+  /** @return the "extend" value of the current survey (or default to NORMAL)
+   */
   private static int getSurveyExtend()
   {
     if ( TDInstance.sid <= 0 ) return SurveyInfo.SURVEY_EXTEND_NORMAL;
@@ -416,6 +435,9 @@ public class TopoDroidApp extends Application
     return mData.getSurveyExtend( TDInstance.sid );
   }
 
+  /** set the "extend" value of the current survey
+   * @param extend   extend value
+   */
   public static void setSurveyExtend( int extend )
   {
     // TDLog.v( "set Survey Extend: " + extend );
@@ -424,6 +446,8 @@ public class TopoDroidApp extends Application
     mData.updateSurveyExtend( TDInstance.sid, extend );
   }
 
+  /** @return the info of the current calibration
+   */
   public CalibInfo getCalibInfo()
   {
     if ( TDInstance.cid <= 0 ) return null;
@@ -431,6 +455,8 @@ public class TopoDroidApp extends Application
     return mDData.selectCalibInfo( TDInstance.cid );
   }
 
+  /** @return the names of the stations of the current survey
+   */
   Set<String> getStationNames() { return mData.selectAllStations( TDInstance.sid ); }
 
   // ----------------------------------------------------------------
@@ -442,6 +468,12 @@ public class TopoDroidApp extends Application
     thisApp = null;
   }
 
+  /** set the model of the bluetooth device
+   * @param device   bluetooth device (must agree with the primary device)
+   * @param model    device model
+   *
+   * @note nothing if the device is not the primary device
+   */
   static void setDeviceModel( Device device, int model )
   {
     if ( device != null && device == TDInstance.getDeviceA() ) {
@@ -466,7 +498,7 @@ public class TopoDroidApp extends Application
     }
   }
 
-  /**
+  /** set the blluetooth device nickname
    * @param device      device
    * @param nickname    device nickmane
    */
@@ -1325,7 +1357,6 @@ public class TopoDroidApp extends Application
     TDInstance.datamode = 0;
     // TDINstance.extend   = SurveyInfo.SURVEY_EXTEND_NORMAL;
     StationName.clearCurrentStation();
-    // resetManualCalibrations();
     ManualCalibration.reset();
 
     if ( name != null && mData != null ) {
@@ -1928,7 +1959,7 @@ public class TopoDroidApp extends Application
     long id;
     long millis = java.lang.System.currentTimeMillis()/1000;
     long extend = 0L;
-    float calib = ManualCalibration.mLRUD ? ManualCalibration.mLength / TDSetting.mUnitLength : 0;
+    float calib = ManualCalibration.mLRUD ? ManualCalibration.mLength : 0;
     float l = -1.0f;
     float r = -1.0f;
     float u = -1.0f;
@@ -2077,9 +2108,9 @@ public class TopoDroidApp extends Application
    * @param up       up splay 
    * @param down     down splay 
    * @param splay_station station of splay shots
+   * @return inserted block or null on failure
    * 
-   * NOTE manual shots take into account the instruents calibrations
-   *      LRUD are not affected
+   * @note manual shots take into account the instruments calibrations, LRUD can also be affected
    */
   DBlock insertManualShot( long at, String from, String to,
                            float distance, float bearing, float clino, long extend0, long flag0,
@@ -2091,9 +2122,9 @@ public class TopoDroidApp extends Application
     long id;
     long millis = java.lang.System.currentTimeMillis()/1000;
 
-    distance = (distance - ManualCalibration.mLength)  / TDSetting.mUnitLength;
-    clino    = (clino    - ManualCalibration.mClino)   / TDSetting.mUnitAngle;
-    float b  = bearing / TDSetting.mUnitAngle;
+    distance = distance / TDSetting.mUnitLength - ManualCalibration.mLength;
+    clino    = clino    / TDSetting.mUnitAngle  - ManualCalibration.mClino;
+    float b  = bearing  / TDSetting.mUnitAngle;
 
 
     if ( ( distance < 0.0f ) ||
@@ -2102,9 +2133,7 @@ public class TopoDroidApp extends Application
       TDToast.makeBad( R.string.illegal_data_value );
       return null;
     }
-    bearing = TDMath.in360( (bearing  - ManualCalibration.mAzimuth) / TDSetting.mUnitAngle );
-    // while ( bearing >= 360 ) bearing -= 360;
-    // while ( bearing <    0 ) bearing += 360;
+    bearing = TDMath.in360( bearing / TDSetting.mUnitAngle - ManualCalibration.mAzimuth );
 
     if ( from != null && to != null && from.length() > 0 ) {
       // if ( mData.makesCycle( -1L, TDInstance.sid, from, to ) ) {

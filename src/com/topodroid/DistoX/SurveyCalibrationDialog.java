@@ -12,21 +12,14 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
 import java.util.Locale;
 
 import android.os.Bundle;
-// import android.app.Dialog;
-// import android.app.Activity;
 import android.content.Context;
-// import android.content.Intent;
-// import android.content.DialogInterface;
-// import android.content.DialogInterface.OnCancelListener;
-// import android.content.DialogInterface.OnDismissListener;
 
 import android.view.View;
-// import android.view.ViewGroup.LayoutParams;
-// import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -41,14 +34,13 @@ class SurveyCalibrationDialog extends MyDialog
   // private Button mBTcancel;
   private CheckBox mCBlrud;
 
-  // private final TopoDroidApp mApp;
-
-  SurveyCalibrationDialog( Context context /*, TopoDroidApp app */ )
+  /** cstr
+   * @param context   context
+   */
+  SurveyCalibrationDialog( Context context )
   {
     super( context, R.string.SurveyCalibrationDialog );
-    // mApp    = app;
   }
-
 
   @Override
   public void onCreate( Bundle bundle )
@@ -60,9 +52,10 @@ class SurveyCalibrationDialog extends MyDialog
     mETlength  = (EditText) findViewById( R.id.et_length );
     mETazimuth = (EditText) findViewById( R.id.et_azimuth );
     mETclino   = (EditText) findViewById( R.id.et_clino );
-    mETlength.setText(  String.format(Locale.US, "%.2f", ManualCalibration.mLength ) );
-    mETazimuth.setText( String.format(Locale.US, "%.1f", ManualCalibration.mAzimuth ) );
-    mETclino.setText(   String.format(Locale.US, "%.1f", ManualCalibration.mClino ) );
+    // ManualCalibration fields are in the current units and are presented in the current units
+    mETlength.setText(  String.format(Locale.US, "%.2f", ManualCalibration.mLength  * TDSetting.mUnitLength ) );
+    mETazimuth.setText( String.format(Locale.US, "%.1f", ManualCalibration.mAzimuth * TDSetting.mUnitAngle ) );
+    mETclino.setText(   String.format(Locale.US, "%.1f", ManualCalibration.mClino   * TDSetting.mUnitAngle ) );
 
     mCBlrud   = (CheckBox) findViewById( R.id.cb_lrud );
     mCBlrud.setChecked( ManualCalibration.mLRUD );
@@ -71,6 +64,10 @@ class SurveyCalibrationDialog extends MyDialog
     ( (Button) findViewById( R.id.btn_cancel ) ).setOnClickListener( this );
   }
 
+  /** respond to a user tap: update static fields in the ManualCalibration class
+   * @param view tapped view
+    * @note ManualCalibration fields are stored in [m, degrees]
+   */
   @Override
   public void onClick(View view)
   {
@@ -79,17 +76,17 @@ class SurveyCalibrationDialog extends MyDialog
       case R.id.btn_save:
         if ( mETlength.getText() != null ) {
           try {
-            ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() );
+            ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() ) / TDSetting.mUnitLength;
           } catch ( NumberFormatException e ) { }
         }
         if ( mETazimuth.getText() != null ) {
           try {
-            ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() );
+            ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() ) / TDSetting.mUnitAngle;
           } catch ( NumberFormatException e ) { }
         }
         if ( mETclino.getText() != null ) {
           try {
-            ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() );
+            ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() ) / TDSetting.mUnitAngle;
           } catch ( NumberFormatException e ) { }
         }
         ManualCalibration.mLRUD = mCBlrud.isChecked();

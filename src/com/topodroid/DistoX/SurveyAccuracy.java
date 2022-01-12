@@ -23,21 +23,29 @@ import java.util.Locale;
 class SurveyAccuracy
 {
   private float mAccelerationMean = 0.0f; // mean acceleration value
-  private float mMagneticMean     = 0.0f;
-  private float mDipMean          = 0.0f;
+  private float mMagneticMean     = 0.0f; // mean magnetic field value
+  private float mDipMean          = 0.0f; // mean magnetic dip [degrees]
   private int   mCount = 0;               // nr. of contributions to the means
 
+  /** default cstr
+   */
   SurveyAccuracy()
   {
     reset(); // not necessary
   }
 
+  /** cstr
+   * @param blks   list of data, used to initialize the accuracy
+   */
   SurveyAccuracy( List< DBlock > blks )
   {
     reset();
     setBlocks( blks );
   }
 
+  /** @return true if a shot is above A/M/D threshold
+   * @param blk    shot data
+   */
   boolean isBlockAMDBad( DBlock blk )
   {
     if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false; // block witout G,M,Dip
@@ -46,8 +54,9 @@ class SurveyAccuracy
         || deltaDip( blk.mDip )          > TDSetting.mDipThr;
   }
   
-  // @param blk  data shot
-  // @return the string with how much the data differ from the means
+  /** @return the string with how much the data differ from the means
+   * @param blk  shot data
+   */
   String getBlockExtraString( DBlock blk )
   {
     if ( blk == null ) return TDString.EMPTY;
@@ -59,7 +68,9 @@ class SurveyAccuracy
   }
 
 
-  // add a block to the existing means
+  /** add a block to the existing means
+   * @param blk  shot data
+   */
   void addBlockAMD( DBlock blk ) 
   {
     if ( blk == null || blk.mAcceleration < 10.0 ) return;
@@ -91,7 +102,9 @@ class SurveyAccuracy
 
   // -----------------------------------------------------------------------------
 
-  // reset the means with a list of blocks
+  /** reset the means with a list of shot data
+   * @param blks   list of shot data
+   */
   private void setBlocks( List< DBlock > blks ) 
   {
     if ( blks == null || blks.size() == 0 ) return;
@@ -110,6 +123,8 @@ class SurveyAccuracy
     }
   } 
 
+  /** reset counters
+   */
   private void reset()
   {
     mAccelerationMean = 0.0f;
@@ -118,15 +133,24 @@ class SurveyAccuracy
     mCount = 0;
   }
 
+  /** @return percent difference from the mean acceleration
+   * @param acc   testing acceleration
+   */
   private float deltaAcc( float acc )
   {
     return ( mAccelerationMean > 0 )? TDMath.abs( 100*(acc - mAccelerationMean)/mAccelerationMean ) : 0;
   }
 
+  /** @return percent difference from the mean magnetic field
+   * @param mag   testing magnetic field
+   */
   private float deltaMag( float mag )
   {
     return ( mMagneticMean > 0 )? TDMath.abs( 100*(mag - mMagneticMean)/mMagneticMean ) : 0;
   }
 
+  /** @return absolute difference from the mean magnetic dip [degrees]
+   * @param mag   testing magnetic dip [degrees]
+   */
   private float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 }
