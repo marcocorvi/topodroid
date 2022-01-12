@@ -9,7 +9,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <!-- TODO string name="desc_menu">Menu</string -->
+    <string name="desc_menu">菜单</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
@@ -18,15 +18,15 @@
     <string name="new_survey_label">新建测量</string>
     <string name="distox_label">DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
-  </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_title">Android R 重要通知</string>
+  <string name="r_dialog">
+使用 Android-R，TopoDroid 必须使用"Android/data"下的文件夹. TopoDroid 没有找到它并创建了它的文件夹.\n您可以导入旧的测量zip档案.\n\n请注意，卸载 TopoDroid 时会删除新 TopoDroid 文件夹中的文件.\n\n
+详情请参阅网页.\n
+  </string>
+  <string name="r_checkboxes">您必须确认复选框.</string>
+  <string name="r_i_understood">我完全理解这个通知</string>
+  <string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string>
+  <string name="r_continue">继续</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
@@ -83,7 +83,7 @@ Refer to the web pages for details.\n
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
     <string name="shot_not_found">未发现测线数据</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">坏的测量簇</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -97,20 +97,20 @@ Refer to the web pages for details.\n
     <string name="failed_snap_to_splays">未发现连线要连接的闭合副线</string>
     <string name="failed_append_to_line">未能追加到另一线段</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_device">设备 %1$s</string>
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">固件 %1$s</string>
+    <string name="bric_hw">硬件 %1$s</string>
+    <string name="bric_battery">电池 %1$d</string>
+    <string name="bric_battery_wait">电池 &#8230;</string>
+    <string name="bric_reset_time">重置时间</string>
+    <string name="bric_clear_memory">清除存储</string>
+    <string name="bric_future_time">Bad shot sibling</string>
+    <string name="bric_ask_memory_clear">清除 BRIC 内存 ?</string>
+    <string name="bric_reset_ok">重置时间</string>
+    <string name="bric_reset_fail">时间重置失败</string>
+    <string name="bric_clear_ok">内存已清除 </string>
+    <string name="bric_clear_fail">内存清除失败</string>
 
     <string name="calibration_title">设备校准</string>
     <string name="calibration_length">卷尺</string>
@@ -122,7 +122,7 @@ Refer to the web pages for details.\n
     <string name="calib_delete">删除校准 </string>
     <string name="calib_device_mismatch">警告: 校准设备不匹配</string>
     <string name="calib_no_name">强制命名</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">校准系数未设定</string >
     <!-- REMOVE string name="calib_gm_policy">原则</string -->
     <string name="calib_gm_policy">组策略</string>
     <string name="calib_gm_undelete">还原校准数据?</string>
@@ -205,11 +205,11 @@ Refer to the web pages for details.\n
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <string name="export_data_title">数据输出</string>
+    <string name="export_plot_title">草图输出</string>
+    <string name="export_overview_title">概览输出</string>
+    <string name="export_model_title">3D模型输出</string>
+    <string name="export_tdconfig_title">项目输出</string>
 
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
     <string name="import_already">测量已导入</string>
@@ -228,8 +228,8 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="import_zip_wait">Imported zip file may take long. Please wait &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Saving sketch &#8230; please wait &#8230;</string -->
     <string name="MT_points_none">无GPS坐标点</string>
-    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
-    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
+    <string name="MT_bad_file">错误的移动地形图文件</string>
+    <string name="bad_manifest">错误的清单文件</string>
  
     <string name="pleasewait">请稍后</string>
     <string name="processing">处理 &#8230;</string>
@@ -285,7 +285,7 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">项目已存在</string>
     <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
-    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+    <string name="error_name_duplicate">重复名称</string>
 
     <!-- UNUSED string name="error_dir_exists">目录已经存在</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -348,7 +348,7 @@ Refer to the web pages for details.\n
     <string name="no_device_address">设备未选定</string>
     <string name="no_device_found">未发现设备</string>
     <string name="no_feature_audio">音频不支持</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF格式不支持</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
     <string name="no_geo_station">错误: 无地理定位测点</string>
     <string name="no_leg_first">选择未从主线开始</string>
@@ -365,7 +365,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_thmanager">ThManager应用未安装</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">没有项目要恢复</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">没有要恢复/粘贴的项目</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -387,11 +387,11 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="menu_display">DISPLAY</string -->
     <string name="menu_show_deleted">显示已删除</string>
     <string name="menu_hide_deleted">隐藏已删除</string>
-    <!-- TODO string name="menu_device">Device</string -->
+    <string name="menu_device">设备</string>
     <string name="menu_export">输出</string>
     <string name="menu_firmware">固件</string>
     <string name="menu_recover">恢复</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">恢复/粘贴</string>
     <string name="menu_reload">重新导入</string>
     <string name="menu_rename_delete">重命名/删除</string>
     <string name="menu_rename">重命名</string>
@@ -422,9 +422,9 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">方格纸</string>
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <string name="start_scan">开始扫描</string>
+    <string name="stop_scan">停止扫描</string>
+    <string name="title_scan">BLE扫描</string>
     <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->
     <!-- UNUSED string name="ble_gatt_failure">蓝牙故障</string -->
     <string name="ble_no_remote">无远程设备</string>
@@ -435,7 +435,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
+    <string name="bric_memory">BRIC内存</string>
 
 
     <string name="popup_join_pt">接至附近点</string>
@@ -449,7 +449,7 @@ Refer to the web pages for details.\n
     <string name="popup_remove_pt">删除点</string>
     <string name="popup_append_line">贴到线上</string>
     <string name="popup_multiselect">单击多选</string>
-    <!-- TODO string name="popup_finish">Finish</string -->
+    <string name="popup_finish">结束</string>
     <string name="popup_delete">删除</string>
     <string name="popup_decimate">抽取</string>
     <string name="popup_join">结合</string>
@@ -584,7 +584,7 @@ Refer to the web pages for details.\n
     <string name="cover_calib">校准数据分布: %1$.2f %%</string>
     <string name="cover_g">G 分布: %1$.2f %%</string>
     <string name="cover_m">M 分布: %1$.2f %%</string>
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_r">滚动分布: %1$.2f %%</string>
 
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
@@ -599,7 +599,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">DistoX触发失败</string>
     <string name="toggle_ok">触发DistoX校准模式</string>
     <string name="undelete_text">点击项目恢复</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">恢复/粘贴 项目</string>
     <string name="undelete_shot">测线</string>
     <string name="undelete_overshoot">无效测线</string>
     <string name="undelete_check">检测</string>
@@ -659,15 +659,15 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="plan">平面图</string -->
     <string name="extended">延展的剖面图</string>
     <string name="profile">投影剖面图</string>
-    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
-    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
-    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+    <string name="fmt_plan">%1$s: 平面图</string -->
+    <string name="fmt_extended">%1$s: 侧视图</string -->
+    <string name="fmt_profile">%1$s: 项目</string -->
 
     <string name="extended_profile">延展剖面图</string>
-    <!-- UNUSED string name="x_section">X-SECTION</string -->
-    <!-- UNUSED string name="v_section">V-SECTION</string -->
+    <!-- UNUSED string name="x_section">X-断面</string -->
+    <!-- UNUSED string name="v_section">V-断面</string -->
     <!-- UNUSED string name="h_section">H-截面图</string -->
-    <!-- UNUSED string name="landscape">landscape</string -->
+    <!-- UNUSED string name="landscape">地形</string -->
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX内存读取失败</string>
@@ -692,7 +692,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
     <string name="button_convert"   >转换   </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
+    <string name="button_copy"      >拷贝</string>
     <string name="button_current"   >激活    </string>
     <string name="button_delete"    >删除    </string>
     <string name="button_duplicate" >副本 </string>
@@ -701,7 +701,7 @@ Refer to the web pages for details.\n
     <string name="button_eval"      >复运算      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
+    <string name="button_evalroll"  >滚动</string>
     <string name="button_eval_cal"  >校准复运算</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
@@ -763,8 +763,8 @@ Refer to the web pages for details.\n
     <string name="button_write"     >上载</string>
     <string name="button_xsection"  >截面</string>
     <string name="xsection">截面</string>
-    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
-    <!-- TODO string name="buffer_unsorted">unsorted</string -->
+    <string name="buffer_size">缓存: %1$d 数据</string>
+    <string name="buffer_unsorted">未分类</string>
 
     <string name="mode_leg">主线测段</string>
     <string name="mode_splay">辐测</string>
@@ -793,11 +793,11 @@ Refer to the web pages for details.\n
     <string name="popup_do_splay">侧线测量</string>
     <string name="popup_do_leg">主线测量</string>
     <string name="popup_do_gm_data">校准测量</string>
-    <!-- TODO string name="popup_do_laser">Laser</string -->
-    <!-- TODO string name="popup_do_scan">Scan</string -->
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
-    <!-- TODO string name="popup_do_off">Off</string -->
+    <string name="popup_do_laser">激光</string>
+    <string name="popup_do_scan">扫描</string>
+    <string name="popup_do_shot">测射</string>
+    <string name="popup_do_clear">清除</string>
+    <string name="popup_do_off">关闭</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <string name="btn_export">输出</string>
@@ -815,29 +815,29 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">洞穴学(2)</string>
 
     <string name="symbol_reload">绘图工具</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">警告: 调色板尚未加载</string>
 
     <!-- UNUSED string name="length">Length [m]</string -->
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="hint_notes">notes</string -->
-    <!-- TODO string name="hint_label">label</string -->
-    <!-- TODO string name="hint_comment">comment</string -->
-    <!-- TODO string name="hint_text">text</string -->
-    <!-- TODO string name="hint_options">options</string -->
-    <!-- TODO string name="hint_name">name</string -->
-    <!-- TODO string name="hint_from">from</string -->
-    <!-- TODO string name="hint_to">to</string -->
-    <!-- TODO string name="hint_azimuth">azimuth</string -->
-    <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_roll">roll</string -->
-    <!-- TODO string name="hint_year">year</string -->
-    <!-- TODO string name="hint_month">month</string -->
-    <!-- TODO string name="hint_day">day</string -->
-    <!-- TODO string name="hint_hour">hour</string -->
-    <!-- TODO string name="hint_minute">minute</string -->
-    <!-- TODO string name="hint_second">second</string -->
+    <string name="hint_notes">注释</string>
+    <string name="hint_label">标签</string>
+    <string name="hint_comment">评论</string>
+    <string name="hint_text">正文</string>
+    <string name="hint_options">选择</string>
+    <string name="hint_name">名称</string>
+    <string name="hint_from">从</string>
+    <string name="hint_to">到</string>
+    <string name="hint_azimuth">方位角</string>
+    <string name="hint_clino">倾角</string>
+    <string name="hint_roll">滚动</string>
+    <string name="hint_year">年</string>
+    <string name="hint_month">月</string>
+    <string name="hint_day">日</string>
+    <string name="hint_hour">时</string>
+    <string name="hint_minute">分</string>
+    <string name="hint_second">秒</string>
     <!-- UNUSED string name="hint_latitude">latitude</string -->
     <!-- UNUSED string name="hint_longitude">longitude</string -->
     <!-- UNUSED string name="hint_altitude">altitude</string -->
@@ -885,7 +885,7 @@ Refer to the web pages for details.\n
     <string name="help_backups">删除草图备份</string>
     <string name="help_calib_check">校准检验测量</string>
     <string name="help_close">关闭窗口</string>
-    <!-- TODO string name="help_close_app">Close app</string -->
+    <string name="help_close_app">关闭软件</string>
     <string name="help_coeff">显示校准系数</string>
     <string name="help_color">清除副线颜色</string>
     <string name="help_continue">继续画线</string>
@@ -1013,13 +1013,13 @@ Refer to the web pages for details.\n
     <string name="export_splays">辐测</string>
     <string name="export_splays_named">辐测名称</string>
     <string name="export_stations">测量点</string>
-    <!-- TODO string name="export_surface">Surface</string -->
+    <string name="export_surface">表面</string>
     <string name="export_swap_lr">左右交换 L/R</string>
-    <!-- TODO string name="export_trox">Trox format</string -->
-    <!-- TODO string name="export_walls">Walls</string -->
+    <string name="export_trox">Trox格式</string>
+    <string name="export_walls">洞壁</string>
     <string name="export_xvi">Xvi 图像</string>
-    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
-    <!-- TODO string name="export_with_reference">Include XY reference</string -->
+    <string name="export_with_xsections">包含 X-断面</string>
+    <string name="export_with_reference">包含 XY 参考</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1029,8 +1029,8 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
+    <string name="audio_id_shot">记录: 测射 %1$s %2$s</string>
+    <string name="audio_id_plot">记录: 草图%1$d</string>
     <string name="audio_paused">暂停</string>
     <string name="audio_playing">播放中</string>
     <string name="audio_recording">记录中</string>
@@ -1039,7 +1039,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
     <string name="import_functional">只导入功能设置</string>
-    <!-- TODO string name="import_trox">Trox file format</string -->
+    <string name="import_trox">Trox 文件格式</string>
     <string name="import_lrud">输入 左右上下</string>
     <string name="import_leg_first">主线在左右上下侧线之前</string>
     <string name="import_diving_datamode">潜水数据模式</string>
@@ -1082,7 +1082,7 @@ Refer to the web pages for details.\n
     <string name="title_packet_dialog">数据包</string>
     <string name="title_photo">更多测线编辑</string>
     <string name="title_photo_comment">照片注释</string>
-    <!-- TODO string name="title_photo_list">Photos</string -->
+    <string name="title_photo_list">照片</string>
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
@@ -1111,7 +1111,7 @@ Refer to the web pages for details.\n
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <string name="title_settings_splay">TopoDroid 侧线设定</string>
     <string name="title_settings_shot">TopoDroid测线数据设置</string>
     <string name="title_settings_units">TopoDroid单位设置</string>
     <string name="title_settings_location">TopoDroid位置设置</string>
@@ -1126,16 +1126,16 @@ Refer to the web pages for details.\n
     <string name="title_settings_edit">TopoDroid编辑设置</string>
     <string name="title_settings_device">TopoDroid设备设置</string>
     <string name="title_settings_calib">TopoDroid校准设置</string>
-    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
-    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
-    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
+    <string name="title_settings_3d">TopoDroid 3D设定</string>
+    <string name="title_settings_dem">TopoDroid 模型设定</string>
+    <string name="title_settings_walls3d">TopoDroid 3D设定</string>
     <string name="title_settings_geek">TopoDroid高级设置</string>
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_geek_survey">Geek测量设定</string>
+    <string name="title_settings_geek_splay">Geek侧线设定</string>
+    <string name="title_settings_geek_plot">Geek草图设定</string>
+    <string name="title_settings_geek_line">Geek线 设定</string>
+    <string name="title_settings_geek_device">Geek设备设定</string>
+    <string name="title_settings_geek_import">Geek输入设定</string>
     <string name="title_settings_log">TopoDroid日志设置</string>
 
     <string name="title_shift">转换</string>
@@ -1154,14 +1154,14 @@ Refer to the web pages for details.\n
     <string name="title_calib_export">输出校准</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
+    <string name="title_import_shot">测量导入</string>
+    <string name="title_import_gps">GPS 点输入</string>
 
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_cat_survey">测量信息</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">侧线数据</string>
   <string name="pref_cat_drawing">草图</string>
   <string name="pref_cat_import_export">输入输出</string>
   <string name="pref_cat_exportimport">输入</string>
@@ -1181,7 +1181,7 @@ Refer to the web pages for details.\n
   <string name="pref_cat_calib">校准</string>
   <!-- UNUSED string name="pref_cat_min_algo">MIN ALGO</string -->
   <string name="pref_cat_device">设备</string>
-  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
+  <string name="pref_cat_cave3d">3D 查看</string>
   <string name="pref_cat_geek">高级设置</string>
   <!-- UNUSED string name="pref_cat_log">LOGS</string -->
 
@@ -1207,8 +1207,8 @@ Refer to the web pages for details.\n
   <string name="pref_import_datamode_title">输入数据传输方式</string>
   <string name="pref_import_datamode_summary">导入测量的数据传输方式</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
+  <string name="pref_therion_config_title">Therion配置命令</string->
+  <string name="pref_therion_config_summary">建立Therion配置命令</string->
   <string name="pref_therion_maps_title">Therion地图优先</string>
   <string name="pref_therion_maps_summary">把Therion地图放在数据之前</string>
   <string name="pref_extra_buttons_title">激活等级</string>
@@ -1246,8 +1246,8 @@ Refer to the web pages for details.\n
   <string name="pref_vtopo_splays_summary">在VisualTopo文件中输出侧线</string>
   <string name="pref_vtopo_lrud_title">左右上下 来自 &#8230;</string>
   <string name="pref_vtopo_lrud_summary">VisualTopo的左右上下来自站点</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Trox 格式</string>
+  <string name="pref_vtopo_trox_summary">输出VisualTopo到trox格式</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot station names</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Station names are in TopoRobot style</string -->
   <string name="pref_ortho_lrud_title">左右上下辐测角度</string>
@@ -1286,8 +1286,8 @@ Refer to the web pages for details.\n
   <string name="pref_svg_line_dir_summary">添加方向标记到线方向</string>
   <string name="pref_svg_stationsize_title">测量点大小</string>
   <string name="pref_svg_stationsize_summary">测量点名称文本大小</string>
-  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
-  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
+  <string name="pref_svg_labelsize_title">标签尺寸</string>
+  <string name="pref_svg_labelsize_summary">便签文字尺寸</string>
   <string name="pref_kml_stations_title">KML/JSON 测点</string>
   <string name="pref_kml_stations_summary">添加测点到KML/GeoJSON输出</string>
   <string name="pref_kml_splays_title">KML/JSON 辐测</string>
@@ -1328,16 +1328,16 @@ Refer to the web pages for details.\n
   <string name="pref_socket_delay_summary">允许配对的连接延迟 [0.1 秒]</string>
   <string name="pref_z6_workaround_title">Z6 工作区</string>
   <string name="pref_z6_workaround_summary">Z6 工作区数据下载</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">固件检查</string>
+  <string name="pref_firmware_sanity_summary">Enforce固件健康检查</string>
   <string name="pref_crs_title">C R S </string>
   <string name="pref_crs_summary">CRS 名称,类属于Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">GPS Averaging</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Use GPSAveraging</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+  <string name="pref_bric_mode_title">BRIC 模式</string>
+  <string name="pref_bric_mode_summary">BRIC 操作模式</string>
+  <string name="pref_bric_zero_length_title">BRIC 零点测射</string>
+  <string name="pref_bric_zero_length_summary">记录BRIC 零长度测射</string>
 
   <string name="pref_plot_screen_title">草图</string>
   <string name="pref_tool_line_title">线</string>
@@ -1431,12 +1431,12 @@ Refer to the web pages for details.\n
   <string name="pref_bitmap_bgcolor_summary">草图PNG图像输出背景颜色</string>
   <string name="pref_acad_version_title">DXF 版本</string>
   <string name="pref_acad_version_summary">DXF 版本</string>
-  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
-  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
-  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
-  <!-- UNUSED string name="pref_dxf_scale_title">DXF sketch scale</string -->
-  <!-- UNUSED string name="pref_dxf_scale_summary">DXF sketch scale factor</string -->
+  <string name="pref_acad_spline_title">DXF 曲线</string>
+  <string name="pref_acad_spline_summary">DXF 插值三次曲线</string>
+  <string name="pref_dxf_reference_title">DXF 参考</string>
+  <string name="pref_dxf_reference_summary">DXF的X-Y 轴 草图输出</string>
+  <!-- UNUSED string name="pref_dxf_scale_title">DXF草图规模</string -->
+  <!-- UNUSED string name="pref_dxf_scale_summary">DXF草图比例系数</string -->
   <string name="pref_dxf_blocks_title">DXF 副线端点</string>
   <string name="pref_dxf_blocks_summary">DXF 副线端点</string>
   <string name="pref_shp_georef_title">地理参考草图输出</string>
@@ -1505,8 +1505,8 @@ Refer to the web pages for details.\n
   <string name="pref_plane_interpolation_summary">启用平面插值操作</string>
   <string name="pref_plot_split_title">草图分割/合并</string>
   <string name="pref_plot_split_summary">启用草图分割和合并操作</string>
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_stylus_size_title">笔尖尺寸</string>
+  <string name="pref_stylus_size_summary">笔尖尺寸 [0: ignore]</string>
   <string name="pref_fixed_thickness_title">测量线宽度</string>
   <string name="pref_fixed_thickness_summary">测量线宽度</string>
   <!-- UNUSED string name="pref_device_title">Device</string -->
@@ -1517,8 +1517,8 @@ Refer to the web pages for details.\n
   <string name="pref_checkAttached_summary">检测如果测点有附加项</string>
   <string name="pref_checkExtend_title">主线延展检测</string>
   <string name="pref_checkExtend_summary">检测如果已经设置了主线延展</string>
-  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
-  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
+  <string name="pref_toolbarSize_title">工具栏尺寸</string>
+  <string name="pref_toolbarSize_summary">绘图项工具栏的大小</string>
   <string name="pref_backup_number_title">备份数</string>
   <string name="pref_backup_number_summary">草图文件备份数</string>
   <string name="pref_backup_interval_title">备份间隔</string>
@@ -1576,8 +1576,8 @@ Refer to the web pages for details.\n
   <!-- FIXME string name="pref_side_drag_summary">启用草图窗口中的边框拖动</string -->
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
-  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
-  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
+  <string name="pref_unit_measure_title">标尺单位</string>
+  <string name="pref_unit_measure_summary">量具长度单位</string>
   <!-- UNUSED string name="pref_recent_nr_title">最近的工具数量</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">项目选择器中最新使用工具的数量</string -->
   <string name="pref_area_border_title">区边界的可见性</string>
@@ -1706,12 +1706,12 @@ Refer to the web pages for details.\n
    <string name="ask_dump">转储固件?</string>
    <string name="ask_upload">上载固件?</string>
    <string name="ask_upload_not_compatible">固件文件不正确.\n强行上载??</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">DistoX硬件检查失败</string>
+   <string name="firmware_upload_bad_sign">不兼容的DistoX硬件</string>
    <string name="firmware_file_dumped">保存固件文件 %1$s size %2$d</string>
    <string name="firmware_file_uploaded">升级固件文件 %1$s written %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
+   <string name="firmware_file_dump_fail">失败的固件转储</string>
+   <string name="firmware_file_upload_fail">固件上传失败</string>
    <string name="firmware_not_supported">设备不支持固件功能</string>
    
 
@@ -1744,7 +1744,7 @@ Refer to the web pages for details.\n
     <string name="title_export">项目输出 &#8230;</string>
     <string name="title_equates">相同项目</string>
     <string name="title_equate_new">添加相同 &#8230;</string>
-    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
+    <string name="title_equate_with">等同 %1$s and %2$s</string>
     <!-- UNUSED string name="title_cwd">当前工作目录</string -->
     <string name="title_drop">停止测量 ?</string>
     <string name="title_tdconfig">输入项目名称</string>
@@ -1754,42 +1754,42 @@ Refer to the web pages for details.\n
   <string name="imported_settings">输入设置</string>
     <string name="export_failed">输出失败</string>
 
-    <!-- TODO 3D VIEWER strings
+    < 3D VIEWER strings
     VERY IMPORTANT Fix the "UNUSED" commented strings
 
-    <string name="cbtn_bind">Rebind</string>
+    <string name="cbtn_bind">重打包</string>
 
-    <string name="cmenu_open">Open file</string>
-    <string name="cmenu_reset">Reset</string>
+    <string name="cmenu_open">打开文件</string>
+    <string name="cmenu_reset">重置</string>
 
-    <string name="cmenu_alpha">Surface</string>
+    <string name="cmenu_alpha">表面</string>
     < UNUSED string name="cmenu_ble">BT surveys</string>
-    <string name="cmenu_viewpoint">Viewpoint</string>
-    < UNUSED string name="cmenu_files">Surveys</string>
-    < UNUSED string name="cmenu_frame">Frame</string>
-    < UNUSED string name="cmenu_color">Color</string>
-    <string name="cmenu_info">Info</string>
-    <string name="cmenu_ico">3D-Rose diagram</string>
-    <string name="cmenu_rose">Rose diagram</string>
-    <string name="cmenu_wall">Wall models</string>
-    <string name="cmenu_sketch">Sketches</string>
-    < UNUSED string name="cmenu_fractal">Fractal counts</string>
+    <string name="cmenu_viewpoint">视角</string>
+    < UNUSED string name="cmenu_files">测量</string>
+    < UNUSED string name="cmenu_frame">构架</string>
+    < UNUSED string name="cmenu_color">颜色</string>
+    <string name="cmenu_info">信息</string>
+    <string name="cmenu_ico">3D-玫瑰图</string>
+    <string name="cmenu_rose">玫瑰图</string>
+    <string name="cmenu_wall">墙模式</string>
+    <string name="cmenu_sketch">草图</string>
+    < UNUSED string name="cmenu_fractal">分形计算</string>
 
-    <string name="fractal_title">Fractal counts</string>
-    <string name="info_title">INFO</string>
-    <string name="info_surveys">SURVEYS</string>
-    <string name="info_axes">Axes: blue North, green East</string>
-    <string name="info_grid">Grid cell</string>
-    <string name="info_view">Viewpoint</string>
-    <string name="info_survey">Surveys</string>
-    <string name="info_shot">Shots</string>
-    <string name="info_station">Stations</string>
-    <string name="info_length">Length</string>
-    <string name="info_depth">Depth</string>
-    <string name="info_volume">Volume</string>
-    <string name="info_east">East</string>
-    <string name="info_north">North</string>
-    <string name="info_z">Altitude</string>
+    <string name="fractal_title">分形计算</string>
+    <string name="info_title">信息</string>
+    <string name="info_surveys">测量</string>
+    <string name="info_axes">坐标轴: 蓝 北, 绿 东</string>
+    <string name="info_grid">网格单元</string>
+    <string name="info_view">视角</string>
+    <string name="info_survey">测量</string>
+    <string name="info_shot">测射</string>
+    <string name="info_station">站点</string>
+    <string name="info_length">长度</string>
+    <string name="info_depth">深度</string>
+    <string name="info_volume">体积</string>
+    <string name="info_east">东</string>
+    <string name="info_north">北</string>
+    <string name="info_z">海拔高度</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
@@ -1803,73 +1803,73 @@ Refer to the web pages for details.\n
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
 
-    <string name="legs_surface">Surface</string>
-    <string name="legs_duplicate">Duplicate</string>
-    <string name="legs_commented">Commented</string>
+    <string name="legs_surface">表面</string>
+    <string name="legs_duplicate">副本</string>
+    <string name="legs_commented">注释</string>
 
-    <string name="proj_perspective">Perspective parameters</string>
+    <string name="proj_perspective">角度参数</string>
     <string name="proj_orthographic">Orthographic parameters</string>
     <string name="proj_focal">Focal</string>
-    <string name="proj_side">Side</string>
-    <!- UNUSED string name="proj_near">Near</string ->
-    <!- UNUSED string name="proj_far">Far</string ->
+    <string name="proj_side">侧面</string>
+    <!- UNUSED string name="proj_near">近</string ->
+    <!- UNUSED string name="proj_far">远</string ->
 
     <string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string>
-    < UNUSED string name="cno_files">No files</string>
-    <string name="reading_file">Reading file %1$s</string>
-    <string name="read_survey">Read survey %1$s\n</string>
-    <string name="clear">Clear</string>
-    <string name="plan_proj">Plan</string>
-    <string name="profile_proj">Profile</string>
+    < UNUSED string name="cno_files">没有文件</string>
+    <string name="reading_file">读取文件 %1$s</string>
+    <string name="read_survey">读取测量 %1$s\n</string>
+    <string name="clear">清除</string>
+    <string name="plan_proj">平面图</string>
+    <string name="profile_proj">侧视图</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-    <string name="measure">measure</string>
+    <string name="measure">测量</string>
 
     < UNUSED string name="style_stroke">Stroke</string>
     < UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string>
     < UNUSED string name="style_fill">Fill</string>
-    <string name="surface_projection">Projection on surface</string>
-    <string name="surface_texture">Surface texture</string>
-    <string name="surface_gps">GPS track</string>
-    <string name="surface_east">East</string>
-    <string name="surface_north">North</string>
+    <string name="surface_projection">表面投影</string>
+    <string name="surface_texture">表面纹理</string>
+    <string name="surface_gps">GPS 路径</string>
+    <string name="surface_east">东</string>
+    <string name="surface_north">北</string>
     < OK string name="dem_file">%1$s</string>
-    <string name="dem_load">Load DEM</string>
-    <string name="dem_failed">Failed DEM loading</string>
-    <string name="dem_ok">Read DEM data</string>
+    <string name="dem_load">载入 DEM</string>
+    <string name="dem_failed">DEM载入失败</string>
+    <string name="dem_ok">读取 DEM 数据</string>
     < OK string name="texture_file">%1$s</string>
-    <string name="texture_load">Load texture</string>
-    <string name="texture_failed">Failed texture loading</string>
-    <string name="texture_ok">Read texture file</string>
-    <string name="sketch_load">Load</string>
-    <string name="sketch_failed">Failed sketch loading</string>
-    <string name="sketch_ok">Read sketch data</string>
+    <string name="texture_load">载入纹理</string>
+    <string name="texture_failed">纹理载入失败</string>
+    <string name="texture_ok">读取纹理失败</string>
+    <string name="sketch_load">载入</string>
+    <string name="sketch_failed">草图载入失败</string>
+    <string name="sketch_ok">读取草图数据</string>
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
-    <string name="ctitle_surface_alpha">Surface transparency</string>
-    <string name="ctitle_sketches">Sketches</string>
-    <string name="ctitle_legs">Legs visibility</string>
-    <!- UNUSED string name="ctitle_manual_leg">New leg</string ->
-    <!- UNUSED string name="ctitle_bluetooth">Bluetooth</string ->
+    <string name="ctitle_surface_alpha">表面透明度</string>
+    <string name="ctitle_sketches">草图</string>
+    <string name="ctitle_legs">Legs 透明度</string>
+    <!- UNUSED string name="ctitle_manual_leg">新leg</string ->
+    <!- UNUSED string name="ctitle_bluetooth">蓝牙</string ->
 
-    < UNUSED string name="cbtn_laser">Laser</string>
-    < UNUSED string name="cbtn_scan">Scan</string>
-    < UNUSED string name="cbtn_shot">Shot</string>
-    < UNUSED string name="cbtn_start">Start</string>
-    < UNUSED string name="cbtn_stop">Stop</string>
+    < UNUSED string name="cbtn_laser">激光</string>
+    < UNUSED string name="cbtn_scan">扫描</string>
+    < UNUSED string name="cbtn_shot">测射</string>
+    < UNUSED string name="cbtn_start">开始</string>
+    < UNUSED string name="cbtn_stop">停止</string>
 
-    <string name="survey_list">SURVEYS</string>
-    <string name="survey_legs"> Legs: </string>
-    <string name="survey_legs_length"> Legs length: </string>
+    <string name="survey_list">测量</string>
+    <string name="survey_legs"> 主线: </string>
+    <string name="survey_legs_length"> 主线长度: </string>
     <string name="survey_splays"> Splays: </string>
     <string name="survey_splays_length"> Splays length: </string>
-    <string name="cave_east"> E: %1$.1f</string>
-    <string name="cave_north"> N: %1$.1f</string>
-    <string name="cave_vert"> Z: %1$.1f</string>
-    <string name="cave_distance"> 3D distance: %1$.1f</string>
-    <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
-    <string name="cave_length"> Cave length: %1$.1f %2$.1f %$3.1f</string>
-    <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
+    <string name="cave_east"> 东: %1$.1f</string>
+    <string name="cave_north"> 北: %1$.1f</string>
+    <string name="cave_vert"> 立: %1$.1f</string>
+    <string name="cave_distance"> 3D 距离: %1$.1f</string>
+    <string name="horz_distance"> 2D 水平距离: %1$.1f</string>
+    <string name="cave_length"> 洞穴长度: %1$.1f %2$.1f %$3.1f</string>
+    <string name="cave_angle"> 方位角: %1$.0f  Clino: %2$.0f</string>
 
 
     < UNUSED string name="SURVEYS">S U R V E Y S</string>
@@ -2008,8 +2008,8 @@ Refer to the web pages for details.\n
 <!- UNUSED
     <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
-    <string name="cpref_delaunay_title">Delaunay</string>
-    <string name="cpref_delaunay_summary">Delaunay walls</string>
+    <string name="cpref_delaunay_title">三角剖分</string>
+    <string name="cpref_delaunay_summary">三角剖分洞壁</string>
     <string name="cpref_hull_title">Hull</string>
     <string name="cpref_hull_summary">Hull walls</string>
 ->
@@ -2019,27 +2019,27 @@ Refer to the web pages for details.\n
     <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
     <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
 
-    <string name="help_open_3d">Open 3D file</string>
-    <string name="help_export_3d">Export 3D file</string>
-    <string name="help_info_3d">3D info</string>
-    <string name="help_ico_3d">3D leg distribution</string>
-    <string name="help_rose_3d">Rose diagram</string>
-    <string name="help_reset_3d">Reset 3D view</string>
-    <string name="help_viewpoint_3d">3D viewpoint</string>
+    <string name="help_open_3d">打开 3D 文件</string>
+    <string name="help_export_3d">输出 3D 文件</string>
+    <string name="help_info_3d">3D 信息</string>
+    <string name="help_ico_3d">3D leg 分布</string>
+    <string name="help_rose_3d">玫瑰图</string>
+    <string name="help_reset_3d">重置3D视图</string>
+    <string name="help_viewpoint_3d">3D 视角</string>
     <string name="help_alpha_3d">D.E.M.</string>
-    <string name="help_wall_3d">3D model</string>
-    <!- UNUSED string name="help_temperature">Tempertaure</string ->
-    <string name="help_sketch_3d">3D sketch lifting</string>
-    <!- UNUSED string name="help_fractal">Fractal analysis</string ->
+    <string name="help_wall_3d">3D 模型</string>
+    <!- UNUSED string name="help_temperature">温度</string ->
+    <string name="help_sketch_3d">3D 草图提升</string>
+    <!- UNUSED string name="help_fractal">分形分析</string ->
 
     <string name="help_light_3d">Pan and light</string>
-    <string name="help_projection_3d">3D projection</string>
-    <string name="help_stations_3d">Stations</string>
-    <string name="help_splays_3d">Splays</string>
-    <string name="help_walls_3d">Walls</string>
-    <string name="help_surface_3d">Terrain</string>
-    <string name="help_color_3d">Colors</string>
-    <string name="help_frame_3d">Frame</string>
+    <string name="help_projection_3d">3D 预测</string>
+    <string name="help_stations_3d">站点</string>
+    <string name="help_splays_3d">侧线</string>
+    <string name="help_walls_3d">洞壁</string>
+    <string name="help_surface_3d">地形</string>
+    <string name="help_color_3d">颜色</string>
+    <string name="help_frame_3d">框架</string>
 
     -->
 </resources>
