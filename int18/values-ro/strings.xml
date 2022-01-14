@@ -1732,27 +1732,27 @@ Refer to the web pages for details.\n
   <!-- TODO string name="imported_settings">Imported settings</string -->
     <string name="export_failed">Export eșuat</string>
 
-    <!-- TODO 3D VIEWER strings
-    VERY IMPORTANT Fix the "UNUSED" commented strings
+    <!-- TODO 3D VIEWER strings -->
 
-    <string name="cbtn_bind">Rebind</string>
+    <!-- TODO string name="cbtn_bind">Rebind</string -->
 
-    <string name="cmenu_open">Open file</string>
-    <string name="cmenu_reset">Reset</string>
+    <!-- TODO string name="cmenu_open">Open file</string -->
+    <!-- TODO string name="cmenu_reset">Reset</string -->
 
-    <string name="cmenu_alpha">Surface</string>
-    < UNUSED string name="cmenu_ble">BT surveys</string>
-    <string name="cmenu_viewpoint">Viewpoint</string>
-    < UNUSED string name="cmenu_files">Surveys</string>
-    < UNUSED string name="cmenu_frame">Frame</string>
-    < UNUSED string name="cmenu_color">Color</string>
-    <string name="cmenu_info">Info</string>
-    <string name="cmenu_ico">3D-Rose diagram</string>
-    <string name="cmenu_rose">Rose diagram</string>
-    <string name="cmenu_wall">Wall models</string>
-    <string name="cmenu_sketch">Sketches</string>
-    < UNUSED string name="cmenu_fractal">Fractal counts</string>
+    <!-- TODO string name="cmenu_alpha">Surface</string -->
+    <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
+    <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
+    <!-- UNUSED string name="cmenu_files">Surveys</string -->
+    <!-- UNUSED string name="cmenu_frame">Frame</string -->
+    <!-- UNUSED string name="cmenu_color">Color</string -->
+    <!-- TODO string name="cmenu_info">Info</string -->
+    <!-- TODO string name="cmenu_ico">3D-Rose diagram</string -->
+    <!-- TODO string name="cmenu_rose">Rose diagram</string -->
+    <!-- TODO string name="cmenu_wall">Wall models</string -->
+    <!-- TODO string name="cmenu_sketch">Sketches</string -->
+    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
+<!-- TODO
     <string name="fractal_title">Fractal counts</string>
     <string name="info_title">INFO</string>
     <string name="info_surveys">SURVEYS</string>
@@ -1775,7 +1775,9 @@ Refer to the web pages for details.\n
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
-    <!- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string ->
+-->
+    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
+<!-- TODO
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
     <string name="info_east_value">W %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
@@ -1789,11 +1791,13 @@ Refer to the web pages for details.\n
     <string name="proj_orthographic">Orthographic parameters</string>
     <string name="proj_focal">Focal</string>
     <string name="proj_side">Side</string>
-    <!- UNUSED string name="proj_near">Near</string ->
-    <!- UNUSED string name="proj_far">Far</string ->
+-->
+    <!-- UNUSED string name="proj_near">Near</string -->
+    <!-- UNUSED string name="proj_far">Far</string -->
 
-    <string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string>
-    < UNUSED string name="cno_files">No files</string>
+    <!-- TODO string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
+    <!-- UNUSED string name="cno_files">No files</string -->
+<!-- TODO
     <string name="reading_file">Reading file %1$s</string>
     <string name="read_survey">Read survey %1$s\n</string>
     <string name="clear">Clear</string>
@@ -1802,40 +1806,42 @@ Refer to the web pages for details.\n
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
     <string name="measure">measure</string>
+-->
 
-    < UNUSED string name="style_stroke">Stroke</string>
-    < UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string>
-    < UNUSED string name="style_fill">Fill</string>
-    <string name="surface_projection">Projection on surface</string>
-    <string name="surface_texture">Surface texture</string>
-    <string name="surface_gps">GPS track</string>
-    <string name="surface_east">East</string>
-    <string name="surface_north">North</string>
-    < OK string name="dem_file">%1$s</string>
-    <string name="dem_load">Load DEM</string>
-    <string name="dem_failed">Failed DEM loading</string>
-    <string name="dem_ok">Read DEM data</string>
-    < OK string name="texture_file">%1$s</string>
-    <string name="texture_load">Load texture</string>
-    <string name="texture_failed">Failed texture loading</string>
-    <string name="texture_ok">Read texture file</string>
-    <string name="sketch_load">Load</string>
-    <string name="sketch_failed">Failed sketch loading</string>
-    <string name="sketch_ok">Read sketch data</string>
+    <!-- UNUSED string name="style_stroke">Stroke</string -->
+    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
+    <!-- UNUSED string name="style_fill">Fill</string -->
+    <!-- TODO string name="surface_projection">Projection on surface</string -->
+    <!-- TODO string name="surface_texture">Surface texture</string -->
+    <!-- TODO string name="surface_gps">GPS track</string -->
+    <!-- TODO string name="surface_east">East</string -->
+    <!-- TODO string name="surface_north">North</string -->
+    <!-- OK string name="dem_file">%1$s</string -->
+    <!-- TODO string name="dem_load">Load DEM</string -->
+    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
+    <!-- TODO string name="dem_ok">Read DEM data</string -->
+    <!-- OK string name="texture_file">%1$s</string --> 
+    <!-- TODO string name="texture_load">Load texture</string -->
+    <!-- TODO string name="texture_failed">Failed texture loading</string -->
+    <!-- TODO string name="texture_ok">Read texture file</string -->
+    <!-- TODO string name="sketch_load">Load</string -->
+    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
+    <!-- TODO string name="sketch_ok">Read sketch data</string -->
 
-    <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
-    <string name="ctitle_surface_alpha">Surface transparency</string>
-    <string name="ctitle_sketches">Sketches</string>
-    <string name="ctitle_legs">Legs visibility</string>
-    <!- UNUSED string name="ctitle_manual_leg">New leg</string ->
-    <!- UNUSED string name="ctitle_bluetooth">Bluetooth</string ->
+    <!-- TODO string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string -->
+    <!-- TODO string name="ctitle_surface_alpha">Surface transparency</string -->
+    <!-- TODO string name="ctitle_sketches">Sketches</string -->
+    <!-- TODO string name="ctitle_legs">Legs visibility</string -->
+    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
-    < UNUSED string name="cbtn_laser">Laser</string>
-    < UNUSED string name="cbtn_scan">Scan</string>
-    < UNUSED string name="cbtn_shot">Shot</string>
-    < UNUSED string name="cbtn_start">Start</string>
-    < UNUSED string name="cbtn_stop">Stop</string>
+    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_scan">Scan</string -->
+    <!-- UNUSED string name="cbtn_shot">Shot</string -->
+    <!-- UNUSED string name="cbtn_start">Start</string -->
+    <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
+<!-- TODO
     <string name="survey_list">SURVEYS</string>
     <string name="survey_legs"> Legs: </string>
     <string name="survey_legs_length"> Legs length: </string>
@@ -1848,14 +1854,15 @@ Refer to the web pages for details.\n
     <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
     <string name="cave_length"> Cave length: %1$.1f %2$.1f %$3.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
+-->
 
-
-    < UNUSED string name="SURVEYS">S U R V E Y S</string>
-    <string name="INFO">I N F O</string>
-    <string name="STATIONS">S T A T I O N</string>
-    <string name="STATIONS_DISTANCE">STATIONS DISTANCE</string>
-    < UNUSED string name="DISTANCE">DISTANCE</string>
-    < UNUSED string name="CENTER">CENTER</string>
+    <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
+    <!-- TODO string name="INFO">I N F O</string -->
+    <!-- TODO string name="STATIONS">S T A T I O N</string -->
+    <!-- TODO string name="STATIONS_DISTANCE">STATIONS DISTANCE</string -->
+    <!-- UNUSED string name="DISTANCE">DISTANCE</string -->
+    <!-- UNUSED string name="CENTER">CENTER</string -->
+<!-- TODO
     <string name="select_survey_file">Select a survey file</string>
     <string name="select_export_file">Select export file</string>
     <string name="select_dem_file">Select a DEM file</string>
@@ -1873,21 +1880,23 @@ Refer to the web pages for details.\n
 
     <string name="walls_title">WALLS</string>
     <string name="walls_convexhull">Convex Hull</string>
-    < OK string name="walls_powercrust">Powercrust</string>
-    <string name="walls_hull">Hull</string>
-    <string name="walls_bubble">Bubble</string>
-    <string name="walls_tube">Tube</string>
-    < OK string name="walls_delaunay">Delaunay</string>
+-->
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
+    <!-- TODO string name="walls_hull">Hull</string -->
+    <!-- TODO string name="walls_bubble">Bubble</string -->
+    <!-- TODO string name="walls_tube">Tube</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
-    <string name="powercrust_few_splays">Powercrust: too few splays</string>
-    <string name="powercrust_failed">Powercrust failed</string>
-    <string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string>
-    <string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string>
+    <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
+    <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
+    <!-- TODO string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
+    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
 
-    <string name="ok_export">OK. Exported %1$s</string>
+    <!-- TODO string name="ok_export">OK. Exported %1$s</string -->
 
-    < UNUSED string name="no_planview">No plan view</string>
-    < UNUSED string name="no_surface">No surface DEM</string>
+    <!-- UNUSED string name="no_planview">No plan view</string -->
+    <!-- UNUSED string name="no_surface">No surface DEM</string -->
+<!-- TODO
     <string name="no_model">No 3D model</string>
     <string name="no_topodroid_model">Not a TopoDroid model</string>
 
@@ -1905,44 +1914,46 @@ Refer to the web pages for details.\n
     <string name="export_gltf_fail">Failed glTf export</string>
 
     <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
-    <!- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string ->
-    <!- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string ->
-    <!- UNUSED string name="warning_not_las">Warning: not las file %1$s</string ->
-    <!- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string ->
-    <!- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string ->
-    <string name="warning_no_cwd">Warning: no base path</string>
-    < UNUSED string name="warning_no_file">Warning: no 3d file found</string>
-    < UNUSED string name="warning_empty_cwd">Warning: empty base path</string>
-    <string name="warning_no_parent">Warning: cannot go to parent folder</string>
-    <string name="no_permissions">The app cannot run without the required permissions</string>
+-->
+    <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
+    <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
+    <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
+    <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
+    <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
+    <!-- TODO string name="warning_no_cwd">Warning: no base path</string -->
+    <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
+    <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
+    <!-- TODO string name="warning_no_parent">Warning: cannot go to parent folder</string -->
+    <!-- TODO string name="no_permissions">The app cannot run without the required permissions</string -->
 
-    <string name="done_fractals">Done fractals dims</string>
-    <string name="done_convexhull">Done convex-hull walls</string>
-    <string name="fail_convexhull">Failed convex-hull walls</string>
-    <string name="done_powercrust">Done powercrust walls</string>
-    <string name="fail_powercrust">Failed powercrust walls</string>
-    <string name="done_hull">Done simple-hull walls</string>
-    <string name="fail_hull">Failed simple-hull walls</string>
-    <string name="done_tube">Done simple-tube walls</string>
-    <string name="fail_tube">Failed simple-tube walls</string>
-    <string name="done_bubble">Done bubble walls</string>
-    <string name="fail_bubble">Failed bubble walls</string>
+    <!-- TODO string name="done_fractals">Done fractals dims</string -->
+    <!-- TODO string name="done_convexhull">Done convex-hull walls</string -->
+    <!-- TODO string name="fail_convexhull">Failed convex-hull walls</string -->
+    <!-- TODO string name="done_powercrust">Done powercrust walls</string -->
+    <!-- TODO string name="fail_powercrust">Failed powercrust walls</string -->
+    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
+    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
+    <!-- TODO string name="done_tube">Done simple-tube walls</string -->
+    <!-- TODO string name="fail_tube">Failed simple-tube walls</string -->
+    <!-- TODO string name="done_bubble">Done bubble walls</string -->
+    <!-- TODO string name="fail_bubble">Failed bubble walls</string -->
 
-    <string name="no_database">No database\n</string>
-    <string name="cno_survey">No survey %1$s\n</string>
-    <!- UNUSED string name="cno_file">No file %1$s\n</string ->
-    <string name="empty_survey">Empty survey %1$s\n</string>
+    <!-- TODO string name="no_database">No database\n</string -->
+    <!-- TODO string name="cno_survey">No survey %1$s\n</string -->
+    <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
+    <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
 
-    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
+    <!-- TODO string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
 
-    <string name="cpref_dem3d">DEM</string>
-    <string name="cpref_walls3d">WALL MODEL</string>
-    <!- UNUSED string name="cpref_base_path_title">App base path</string ->
-    <!- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string ->
-    <!- UNUSED string name="cpref_text_size_title">Label size</string ->
-    <!- UNUSED string name="cpref_text_size_summary">Station label size [10 pt]</string ->
-    <!- UNUSED string name="cpref_size_buttons_title">Buttons size</string ->
-    <!- UNUSED string name="cpref_size_buttons_summary">Buttons size</string ->
+    <!-- TODO string name="cpref_dem3d">DEM</string -->
+    <!-- TODO string name="cpref_walls3d">WALL MODEL</string -->
+    <!-- UNUSED string name="cpref_base_path_title">App base path</string -->
+    <!-- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string -->
+    <!-- UNUSED string name="cpref_text_size_title">Label size</string -->
+    <!-- UNUSED string name="cpref_text_size_summary">Station label size [10 pt]</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Buttons size</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
+<!-- TODO
     <string name="cpref_selection_radius_title">Selection radius</string>
     <string name="cpref_selection_radius_summary">Radius of selection [20 pxl]</string>
     <string name="cpref_station_toast_title">Station dialog</string>
@@ -1983,42 +1994,38 @@ Refer to the web pages for details.\n
 
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Exclude splays differing from nearby too much [0.1]</string>
-<!- UNUSED
-    <string name="cpref_convex_hull_title">Convex hull</string>
-    <string name="cpref_convex_hull_summary">Convex hull walls</string>
-    <string name="cpref_delaunay_title">Delaunay</string>
-    <string name="cpref_delaunay_summary">Delaunay walls</string>
-    <string name="cpref_hull_title">Hull</string>
-    <string name="cpref_hull_summary">Hull walls</string>
-->
+-->
+    <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
+    <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull walls</string -->
+    <!-- UNUSED string name="cpref_delaunay_title">Delaunay</string -->
+    <!-- UNUSED string name="cpref_delaunay_summary">Delaunay walls</string -->
+    <!-- UNUSED string name="cpref_hull_title">Hull</string -->
+    <!-- UNUSED string name="cpref_hull_summary">Hull walls</string -->
 
-    < UNUSED string name="TopoGLPerms">Permissions</string>
-    <string name="cperms_mandatory">Cave3D cannot run without:</string>
-    <!- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string ->
-    <!- UNUSED string name="cwelcome_title">Cave3D %1$s</string ->
+    <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
+    <!-- TODO string name="cperms_mandatory">Cave3D cannot run without:</string -->
+    <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
+    <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
+    <!-- TODO string name="help_open_3d">Open 3D file</string -->
+    <!-- TODO string name="help_export_3d">Export 3D file</string -->
+    <!-- TODO string name="help_info_3d">3D info</string -->
+    <!-- TODO string name="help_ico_3d">3D leg distribution</string -->
+    <!-- TODO string name="help_rose_3d">Rose diagram</string -->
+    <!-- TODO string name="help_reset_3d">Reset 3D view</string -->
+    <!-- TODO string name="help_viewpoint_3d">3D viewpoint</string -->
+    <!-- TODO string name="help_alpha_3d">D.E.M.</string -->
+    <!-- TODO string name="help_wall_3d">3D model</string -->
+    <!-- UNUSED string name="help_temperature">Tempertaure</string -->
+    <!-- TODO string name="help_sketch_3d">3D sketch lifting</string -->
+    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
 
-    <string name="help_open_3d">Open 3D file</string>
-    <string name="help_export_3d">Export 3D file</string>
-    <string name="help_info_3d">3D info</string>
-    <string name="help_ico_3d">3D leg distribution</string>
-    <string name="help_rose_3d">Rose diagram</string>
-    <string name="help_reset_3d">Reset 3D view</string>
-    <string name="help_viewpoint_3d">3D viewpoint</string>
-    <string name="help_alpha_3d">D.E.M.</string>
-    <string name="help_wall_3d">3D model</string>
-    <!- UNUSED string name="help_temperature">Tempertaure</string ->
-    <string name="help_sketch_3d">3D sketch lifting</string>
-    <!- UNUSED string name="help_fractal">Fractal analysis</string ->
-
-    <string name="help_light_3d">Pan and light</string>
-    <string name="help_projection_3d">3D projection</string>
-    <string name="help_stations_3d">Stations</string>
-    <string name="help_splays_3d">Splays</string>
-    <string name="help_walls_3d">Walls</string>
-    <string name="help_surface_3d">Terrain</string>
-    <string name="help_color_3d">Colors</string>
-    <string name="help_frame_3d">Frame</string>
-
-    -->
+    <!-- TODO string name="help_light_3d">Pan and light</string -->
+    <!-- TODO string name="help_projection_3d">3D projection</string -->
+    <!-- TODO string name="help_stations_3d">Stations</string -->
+    <!-- TODO string name="help_splays_3d">Splays</string -->
+    <!-- TODO string name="help_walls_3d">Walls</string -->
+    <!-- TODO string name="help_surface_3d">Terrain</string -->
+    <!-- TODO string name="help_color_3d">Colors</string -->
+    <!-- TODO string name="help_frame_3d">Frame</string -->
 
 </resources>

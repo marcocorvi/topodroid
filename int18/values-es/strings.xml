@@ -1732,7 +1732,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="exported">Saved file %1$s</string -->
     <!-- TODO string name="export_failed">Failed export</string -->
 
-    <!-- TODO 3D VIEWER strings-->
+    <!-- 3D VIEWER strings-->
 
     <string name="cmenu_open">Abrir Archivo</string>
     <string name="cmenu_reset">Resetear</string>

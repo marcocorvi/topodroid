@@ -1750,8 +1750,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="exported">Saved file %1$s</string -->
     <!-- TODO string name="export_failed">Failed export</string -->
 
-    <!-- TODO 3D VIEWER strings
-    VERY IMPORTANT Fix the "UNUSED" commented strings
+    <!-- TODO 3D VIEWER strings VERY IMPORTANT Translate and then fix the "UNUSED/OK" commented strings
 
     <string name="cbtn_bind">Rebind</string>
 

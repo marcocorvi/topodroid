@@ -1728,7 +1728,7 @@ Refer to the web pages for details.\n
 
 
     <!-- TODO 3D VIEWER strings
-    VERY IMPORTANT Fix the "UNUSED" commented strings
+    VERY IMPORTANT Translae and fix the "UNUSED/OK" commented strings
 
     <string name="cbtn_bind">Rebind</string>
 

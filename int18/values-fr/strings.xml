@@ -1949,4 +1949,26 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
+    <!-- TODO string name="help_open_3d">Open 3D file</string -->
+    <!-- TODO string name="help_export_3d">Export 3D file</string -->
+    <!-- TODO string name="help_info_3d">3D info</string -->
+    <!-- TODO string name="help_ico_3d">3D leg distribution</string -->
+    <!-- TODO string name="help_rose_3d">Rose diagram</string -->
+    <!-- TODO string name="help_reset_3d">Reset 3D view</string -->
+    <!-- TODO string name="help_viewpoint_3d">3D viewpoint</string -->
+    <!-- TODO string name="help_alpha_3d">D.E.M.</string -->
+    <!-- TODO string name="help_wall_3d">3D model</string -->
+    <!-- UNUSED string name="help_temperature">Tempertaure</string -->
+    <!-- TODO string name="help_sketch_3d">3D sketch lifting</string -->
+    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
+
+    <!-- TODO string name="help_light_3d">Pan and light</string -->
+    <!-- TODO string name="help_projection_3d">3D projection</string -->
+    <!-- TODO string name="help_stations_3d">Stations</string -->
+    <!-- TODO string name="help_splays_3d">Splays</string -->
+    <!-- TODO string name="help_walls_3d">Walls</string -->
+    <!-- TODO string name="help_surface_3d">Terrain</string -->
+    <!-- TODO string name="help_color_3d">Colors</string -->
+    <!-- TODO string name="help_frame_3d">Frame</string -->
+   
 </resources>
