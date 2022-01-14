@@ -19,6 +19,9 @@ public class WireFrame
   private ArrayList< WireSegment > mSegment;
   private double mEps;
 
+  /** cstr
+   * @param eps  epsilon (tolerance)
+   */
   public WireFrame( double eps )
   {
     mPoint   = new ArrayList< Cave3DStation >();
@@ -26,6 +29,9 @@ public class WireFrame
     mEps = eps;
   }
 
+  /** add a point
+   * @param station   3D station
+   */
   void addPoint( Cave3DStation station )
   {
     for ( Cave3DStation st : mPoint ) {
@@ -34,11 +40,18 @@ public class WireFrame
     mPoint.add( station );
   }
 
+  /** add a splay point
+   * @param station   3D station
+   */
   void addSplayPoint( Cave3DStation station )
   {
     mPoint.add( station );
   }
 
+  /** construct the wire-frame
+   * @param max ...
+   * @param n   ...
+   */
   void makeFrame( double max, int n )
   {
     int np = mPoint.size();
@@ -71,7 +84,10 @@ public class WireFrame
     }
   }
         
-
+  /** add a segment, if it does not coincide with an existing segment within the epsilon tolerance
+   * @param segment   segment
+   * @return true if the segment has been added
+   */
   boolean addSegment( WireSegment segment )
   {
     for ( WireSegment ws : mSegment ) {
@@ -81,6 +97,8 @@ public class WireFrame
     return true;
   }
 
+  /** @return the list of segments
+   */
   List< WireSegment > getSegments() { return mSegment; }
 
 

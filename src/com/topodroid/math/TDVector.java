@@ -26,7 +26,8 @@ public class TDVector
 
   public static final TDVector zero = new TDVector(0.0f, 0.0f, 0.0f);
 
-  // defaulkt cstr: zero vector
+  /** defaulkt cstr: zero vector
+   */
   public TDVector()
   {
     x = 0.0f;
@@ -34,7 +35,11 @@ public class TDVector
     z = 0.0f;
   }
 
-  // cstr vector (x0, y0., z0)
+  /** cstr vector (x0, y0., z0)
+   * @param x0  X coord
+   * @param y0  Y coord
+   * @param z0  Z coord
+   */
   public TDVector( float x0, float y0, float z0 )
   {
     x = x0;
@@ -42,9 +47,10 @@ public class TDVector
     z = z0;
   }
 
-  // cstr a unit vector from bearing and clino (as used by the calibration class)
-  // b   bearing [radians]
-  // c   clino [radians]
+  /** cstr a unit vector from bearing and clino (as used by the calibration class)
+   * @param b   bearing [radians]
+   * @param c   clino [radians]
+   */
   public TDVector( float b, float c )
   {
     float h = (float)Math.cos( c );
@@ -53,7 +59,9 @@ public class TDVector
     z = (float)Math.sin( c );
   }
 
-  // copy cstr
+  /** copy cstr
+   * @param a   another vector
+   */
   public TDVector( TDVector a )
   {
     x = a.x;
@@ -61,9 +69,12 @@ public class TDVector
     z = a.z;
   }
 
-  // this cross (1,0,0)
+  /** @return this vector cross (1,0,0)
+   */
   public TDVector crossX() { return new TDVector( 0, z, -y ); }
 
+  /** @return the maximum absolute value of x, y, z
+   */
   public float maxAbsValue()
   {
     float mx = TDMath.abs(x);
@@ -73,7 +84,8 @@ public class TDVector
                                : ( ( my > mz )? my : mz ) );
   }
 
-  // get unit vector 
+  /** @return the unit vector aligned to this vector
+   */
   public TDVector getUnitVector( )
   {
     TDVector ret = new TDVector( x, y, z );
@@ -81,18 +93,28 @@ public class TDVector
     return ret;
   }
 
+  /** @return the (euclidean) length of this vector
+   */
   public float Length()
   {
     return (float)Math.sqrt( x*x + y*y + z*z );
   }
 
+  /** @return the squared length of this vector
+   */
   public float LengthSquared()
   {
     return ( x*x + y*y + z*z );
   }
 
+  /** @return the (euclidean) length of this vector
+   */
   public float Abs( ) { return Length(); }
 
+  /** @return the vector right-hand turned around the X axis 
+   * @param s   sine of the turn angle
+   * @param c   cosine of the turn angle
+   */
   public TDVector TurnX( float s, float c )
   {
     return new TDVector( x, c*y - s*z, c*z + s*y );
@@ -102,6 +124,8 @@ public class TDVector
 
   // public TDVector TurnZ( float s, float c ) { return new TDVector( c*x - s*y, c*y + s*x, z ); }
 
+  /** normalize this vector
+   */
   public void normalize( )
   {
     float len = Length();
@@ -113,6 +137,8 @@ public class TDVector
     }
   }
 
+  /** reverse this vector
+   */
   public void reverse()
   {
     x = -x;
@@ -120,6 +146,9 @@ public class TDVector
     z = -z;
   }
 
+  /** @return the maximum absolute difference of coordinates with another vector
+   * @param b   the other vector
+   */
   public float MaxDiff( TDVector b )
   {
     float dx = TDMath.abs( x - b.x );
@@ -130,7 +159,10 @@ public class TDVector
     return dx;
   }
 
-  public void copy( TDVector b ) // copy assignment
+  /** copy assignment of another vector to this vector
+   * @param b   the other vector
+   */
+  public void copy( TDVector b )
   {
     x = b.x;
     y = b.y;
@@ -144,6 +176,9 @@ public class TDVector
   //   z = a.z;
   // }
 
+  /** add another vector to this vector
+   * @param b   the other vector
+   */
   public void plusEqual( TDVector b ) 
   {
     x += b.x;
@@ -151,6 +186,9 @@ public class TDVector
     z += b.z;
   }
 
+  /** subtract another vector to this vector
+   * @param b   the other vector
+   */
   public void minusEqual( TDVector b ) 
   {
     x -= b.x;
@@ -158,6 +196,9 @@ public class TDVector
     z -= b.z;
   }
 
+  /** multiply this vector by a scalar
+   * @param f   scalar value
+   */
   public void timesEqual( float f )
   {
     x *= f;
@@ -165,29 +206,47 @@ public class TDVector
     z *= f;
   }
 
+  /** @return the addition of another vector to this vector
+   * @param b   the other vector
+   */
   public TDVector plus( TDVector b ) { return new TDVector( x+b.x, y+b.y, z+b.z ); }
 
+  /** @return the subtraction of another vector to this vector
+   * @param b   the other vector
+   */
   public TDVector minus( TDVector b ) { return new TDVector( x-b.x, y-b.y, z-b.z ); }
 
-  // MULTIPLICATION: this * b
+  /** @return the multiplication of this vector by a scalar
+   * @param b   scalar value
+   */
   public TDVector times( float b ) { return new TDVector(x*b, y*b, z*b ); }
 
-  // DOT PRODUCT: this * b
+  /** @return the dot-product of this vector with another vector
+   * @param b   the other vector
+   */
   public float dot( TDVector b ) { return x*b.x + y*b.y + z*b.z; }
 
-  // dot-product of two Vectors
+  /** @return dot-product of two Vectors
+   * @param p1  first vector
+   * @param p2  second vector
+   */
   public static float dot_product( TDVector p1, TDVector p2 )
   {
     return p1.x * p2.x + p1.y * p2.y + p1.z * p2.z;
   }
 
-  // CROSS PRODUCT: this % b
+  /** @return cross product of this vector by another vector 
+   * @param b   the other vector
+   */
   public TDVector cross( TDVector b )
   {
     return new TDVector( y*b.z - z*b.y, z*b.x - x*b.z, x*b.y - y*b.x );
   }
 
-  // cross-product of two Vectors
+  /** @return cross-product of two vectors, P1 ^ P2
+   * @param p1  first vector
+   * @param p2  second vector
+   */
   public static TDVector cross_product( TDVector p1, TDVector p2 ) // PRIVATE
   {
     return new TDVector( p1.y * p2.z - p1.z * p2.y,
@@ -195,14 +254,20 @@ public class TDVector
     		       p1.x * p2.y - p1.y * p2.x );
   }
 
-  // triple-product of three Vectors
+  /** @return the triple-product of three vectors, P1 ^ P2 * P3
+   * @param p1  first vector
+   * @param p2  second vector
+   * @param p3  third vector
+   */
   public static double triple_product( TDVector p1, TDVector p2, TDVector p3 )
   {
     return dot_product( cross_product( p1, p2 ), p3 );
   }
 
-  // arc-distance = arccos of the dot-product ( range in [0, PI] )
-  // p1 and p2 unit vectors
+  /** @return the arc-distance of two unit vectors = arccos of the dot-product ( range in [0, PI] )
+   * @param p1  first unit vector
+   * @param p2  second unit vector
+   */
   public static double arc_distance( TDVector p1, TDVector p2 )
   {
     float ca1 = dot_product( p1, p2 );
@@ -219,11 +284,9 @@ public class TDVector
   //   return dot_product( p12, p13 );
   // }
 
-  /** projection of a vector in the plane orthogonal to this vector
+  /** @return the projection (vector) of a vector in the plane orthogonal to this vector
    * @param b vector to project
-   * @return projected vector
-   *
-   * B - (B*T)/(T*T) T
+   * @note B - (B*T)/(T*T) T
    */
   public TDVector orthogonalNormal( TDVector b )
   {
@@ -231,14 +294,19 @@ public class TDVector
     return new TDVector( b.x - f*x, b.y - f*y, b.z - f*z );
   }
 
-  // if this is normalized can use this method
+  /** @return the projection of a vector in the plane orthogonal to this vector
+   * @param b vector to project
+   * @note this vector must be normalized to use this method
+   */
   public TDVector orthogonal( TDVector b ) // PRIVATE
   {
     float f = this.dot( b );
     return new TDVector( b.x - f*x, b.y - f*y, b.z - f*z );
   }
 
-  // euclidean distance from another point
+  /** @return the euclidean distance from another point
+   * @param p  the other 3D point
+   */
   public float distance( TDVector p )
   {
     float a = x - p.x;
@@ -247,8 +315,9 @@ public class TDVector
     return (float)Math.sqrt( a*a + b*b + c*c );
   }
 
-  // as 3D point (X,Y,Z) are east, south, vert(down) 
-  // Y and Z are reversed in Therion
+  /** @return Therion string presentation
+   * @note since 3D point (X,Y,Z) are east, south, vert(down) Y and Z are reversed in Therion
+   */
   public void toTherion( PrintWriter pw )
   {
     pw.format(Locale.US, "  %.2f %.2f %.2f\n", x, -y, -z );
@@ -289,7 +358,8 @@ public class TDVector
   //   return n;
   // }
   
-  /** compute the mean vector (CoM) of the vectors of an array
+  /** @return the mean vector (CoM) of the vectors of an array
+   * @param pts  array of 3D points
    */
   public static TDVector computeMeanVector( ArrayList< TDVector > pts ) // PRIVATE
   {
@@ -305,6 +375,9 @@ public class TDVector
     return new TDVector( x0/n, y0/n, z0/n );
   }
 
+  /** @return the "mean normal" of the vectors of an array
+   * @param pts  array of 3D points
+   */
   public static TDVector computeNormal( ArrayList< TDVector > pts )
   {
     TDVector normal = new TDVector();
@@ -330,6 +403,9 @@ public class TDVector
     return normal;
   }
 
+  /** @return the length of a string of 3D points, | P0 - P1 | + | P1 - P2 | + ...
+   * @param pts   array (string) of 3D points
+   */
   public static float computeLength( ArrayList< TDVector > pts )
   {
     float d = 0f;

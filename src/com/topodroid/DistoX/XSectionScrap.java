@@ -17,6 +17,11 @@ class XSectionScrap
   String name; // scrap name
   float x, y;  // offset
 
+  /** cstr
+   * @param nm  name
+   * @param xx  X offset
+   * @param yy  Y offset
+   */
   XSectionScrap( String nn, float xx, float yy )
   {
     name = nn;

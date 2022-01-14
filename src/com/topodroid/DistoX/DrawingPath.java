@@ -534,24 +534,29 @@ public class DrawingPath extends RectF
   // void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
 
-  // ICanvasCommand interface
-  //
+  // ------ ICanvasCommand interface
+  /** @return the type of the command, namely 0
+   */
   public int commandType() { return 0; }
 
   // void undoCommand() { // TODO this would be changed later }
 
-  // from ICanvasCommand
+  // --------- from ICanvasCommand
+  /** compute the bounding box - it does nothing
+   * @param bounds   bounding box (unaffected)
+   * @param b        not used (see android.graphics.Path)
+   */
   public void computeBounds( RectF bound, boolean b ) 
   { 
     mPath.computeBounds( bound, b );
-    // TDLog.v( "bounds " + bound.left + " " + bound.top + " " + bound.right + " " + bound.bottom );
   }
 
   // void transform( Matrix matrix ) { mPath.transform( matrix ); }
 
-  // ------------------------------------------------------------------
-  // Therion options
-
+  // --------- Therion options
+  /** add an option to the options string
+   * @param option  new string to add to the options
+   */
   void addOption( String option ) 
   {
     if ( option == null ) return;
@@ -562,7 +567,9 @@ public class DrawingPath extends RectF
     }
   }
 
-  // key must be not null and start with '-'
+  /** @return the (string) value of an option, or null if the key is not found
+   * @param key  option key, it must be not null and start with '-'
+   */
   public String getOption( String key )
   {
     if ( mOptions == null ) return null;
@@ -577,10 +584,17 @@ public class DrawingPath extends RectF
     return null;
   }
 
+  /** @return the options string, or empty if it is null
+   */
   public String getOptionString() { return ( mOptions == null )? "" : mOptions; }
 
+  /** @return the options (string)
+   */
   public String getOptions() { return mOptions; }
 
+  /** set the options string
+   * @param options   new options string
+   */
   void setOptions( String options ) { mOptions = options; }
 
   void prepareCave3D() 
@@ -594,6 +608,12 @@ public class DrawingPath extends RectF
 
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector v2 ) { }
 
+  /** @return a vector in world frame, V1 * X0 + V2 * Y0
+   * @param x   X coord of ...
+   * @param y   Y coord of ...
+   * @param V1  ...
+   * @param V2  ...
+   */
   static TDVector getCave3D( float x, float y, TDVector V1, TDVector V2 )
   {
     float x0 = DrawingUtil.sceneToWorldX( x, y );

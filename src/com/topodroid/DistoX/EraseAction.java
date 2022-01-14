@@ -32,6 +32,10 @@ class EraseAction // implements ICanvasCommand
   private ArrayList< LinePoint > mOldPoints = null;
   private ArrayList< LinePoint > mNewPoints = null;
                  
+  /** cstr - copy the path points to the set of "old" points
+   * @param type   action type (remove, insert, or modify)
+   * @param path   affected sketch item
+   */
   EraseAction( int type, DrawingPath path )
   {
     mInitialType = type;
@@ -47,6 +51,9 @@ class EraseAction // implements ICanvasCommand
     }
   }
 
+  /** restore the points of the sketch item - only for line/area
+   * @param old   whether to restore the old or the new points
+   */
   void restorePoints( boolean old )
   {
     if ( mPath.mType == DrawingPath.DRAWING_PATH_LINE || mPath.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -56,6 +63,8 @@ class EraseAction // implements ICanvasCommand
     }
   }
 
+  /** close the action - copy the path points to the set of "new" points
+   */
   void completeAction()
   {
     mNewPoints = new ArrayList<>();
@@ -63,6 +72,10 @@ class EraseAction // implements ICanvasCommand
     setPoints( mNewPoints, line );
   }
 
+  /** copy the line points to a new set
+   * @param pts   new set of points
+   * @param line  existing point line
+   */
   private void setPoints( ArrayList< LinePoint > pts, DrawingPointLinePath line )
   {
     LinePoint prev = null;

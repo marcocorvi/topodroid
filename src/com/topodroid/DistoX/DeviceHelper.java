@@ -83,18 +83,18 @@ public class DeviceHelper extends DataSetObservable
   // DATABASE
 
   private final Context mContext;
-  // private final TopoDroidApp mApp; // unused
 
+  /** @return the SQLite database
+   */
   SQLiteDatabase getDb() { return myDB; }
 
   // DeviceHelper( Context context, TopoDroidApp app, ArrayList< DataListener > listeners ) // IF_COSURVEY
   /** cstr
    * @param context context
    */
-  DeviceHelper( Context context /* , TopoDroidApp app */ )
+  DeviceHelper( Context context )
   {
     mContext = context;
-    // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
     openDatabase();
   }
@@ -108,7 +108,7 @@ public class DeviceHelper extends DataSetObservable
     myDB = null;
   }
 
-  /** open the "devuice10" database
+  /** open the "devuice10.sqlite" database
    */
   private void openDatabase()
   {
@@ -155,6 +155,13 @@ public class DeviceHelper extends DataSetObservable
     }
   }
 
+  /** update a table
+   * @param table   table to update
+   * @param cv      values (key-value pairs) to update
+   * @param where   where clause
+   * @param args    args to the where cause
+   * @param msg     log message
+   */
   private boolean doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
   {
     if ( myDB == null ) {
@@ -308,6 +315,10 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT STATEMENTS
 
+  /** reset all the GM data (group=0, error=0)
+   * @param cid      calibration ID
+   * @param start_id ID where to start to reset
+   */
   void resetAllGMs( long cid, long start_id )
   {
     ContentValues cv = new ContentValues();
@@ -326,6 +337,11 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "reset GM " + cid + "/" + start_id, e ); }
   }
 
+  /** @return the list of GM data
+   * @param cid      calibration ID
+   * @param status   if 0 return only good-data, if 1 all data
+   * @param negative_too whether to include also negative-group data 
+   */
   public List< CBlock > selectAllGMs( long cid, int status, boolean negative_too )
   {
     List< CBlock > list = new ArrayList<>();
@@ -369,6 +385,10 @@ public class DeviceHelper extends DataSetObservable
     return list;
   }
 
+  /** @return a GM data
+   * @param id      GM data ID
+   * @param cid     calibration ID
+   */
   CBlock selectGM( long id, long cid )
   {
     if ( myDB == null ) {
@@ -404,7 +424,9 @@ public class DeviceHelper extends DataSetObservable
     return block;
   }
 
-
+  /** @return the index of the calibration algorithm (default AUTO)
+   * @param cid     calibration ID
+   */
   public int selectCalibAlgo( long cid )
   {
     if ( myDB == null ) {
@@ -427,6 +449,10 @@ public class DeviceHelper extends DataSetObservable
     return algo;
   }
 
+  /** @return the calibration ID (-1 if the calibration name is not present)
+   * @param name   calibration name
+   * @param device device
+   */
   long getCalibCID( String name, String device )
   {
     if ( myDB == null ) {
@@ -449,6 +475,9 @@ public class DeviceHelper extends DataSetObservable
     return id;
   }
  
+  /** @return the info of a calibration 
+   * @param cid     calibration ID
+   */
   public CalibInfo selectCalibInfo( long cid )
   {
     if ( myDB == null ) {
@@ -477,6 +506,10 @@ public class DeviceHelper extends DataSetObservable
     return info;
   }
 
+  /** get the results of a calibration 
+   * @param cid     calibration ID
+   * @param res     calibration result (output)
+   */
   public void selectCalibError( long cid, CalibResult res )
   {
     if ( myDB == null ) {
@@ -511,6 +544,9 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
+  /** @return the coefficients of a calibration (as a string)
+   * @param cid     calibration ID
+   */
   public String selectCalibCoeff( long cid )
   {
     if ( myDB == null ) {
@@ -536,6 +572,9 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // SELECT: LIST SURVEY / CABIL NAMES
 
+  /** @return the list of names in a table
+   * @param table   table
+   */
   private List< String > selectAllNames( String table )
   {
     // TDLog.Log( TDLog.LOG_DB, "selectAllNames table " + table );
@@ -560,8 +599,13 @@ public class DeviceHelper extends DataSetObservable
     return list;
   }
 
+  /** @return the list of calibration names
+   */
   List< String > selectAllCalibs() { return selectAllNames( CALIB_TABLE ); }
 
+  /** @return the list of calibration names of a device
+   * @param device  device
+   */
   public List< String > selectDeviceCalibs( String device )
   {
     List< String > ret = new ArrayList<>();
@@ -586,6 +630,9 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return the list of calibration infos of a device
+   * @param device  device
+   */
   public List< CalibInfo > selectDeviceCalibsInfo( String device ) 
   {
     List< CalibInfo > ret = new ArrayList<>();
@@ -619,6 +666,9 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // CONFIG DATA
 
+  /** @return a configuration value
+   * @param key  value key
+   */
   String getValue( String key )
   {
     if ( myDB == null ) {
@@ -644,6 +694,10 @@ public class DeviceHelper extends DataSetObservable
     return value;
   }
 
+  /** set a configuration value
+   * @param key   key
+   * @param value value
+   */
   void setValue( String key, String value )
   {
     if ( myDB == null ) {
@@ -687,8 +741,15 @@ public class DeviceHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // symbols
 
+  /** set a symbol enabled flag
+   * @param name    symbol name
+   * @param enabled new enabled flag
+   */
   void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
 
+  /** @return true is a symbol is enabled
+   * @param name  symbol name
+   */
   boolean isSymbolEnabled( String name )
   { 
     if ( myDB == null ) {
@@ -716,6 +777,10 @@ public class DeviceHelper extends DataSetObservable
    * If the survey/calib name does not exists a new record is inserted in the table
    */
 
+  /** @return the name field of a given ID
+   * @param table  table
+   * @param id     given ID
+   */
   private String getNameFromId( String table, long id )
   {
     if ( myDB == null ) {
@@ -756,7 +821,14 @@ public class DeviceHelper extends DataSetObservable
   //   return id;
   // }
 
-  // this must be called when the calib name is not yet in the db
+  /** insert a calibration in the database
+   * @param name    `calibration name
+   * @param date    calibration date
+   * @param device  calibration device
+   * @param comment calibration description
+   * @param algo    calibration algorithm
+   * @note this must be called when the calib name is not yet in the db
+   */
   public long insertCalibInfo( String name, String date, String device, String comment, long algo )
   {
     if ( myDB == null ) {
@@ -789,8 +861,13 @@ public class DeviceHelper extends DataSetObservable
     return id;
   }
 
-  // used only by setCalib
-  // DB non-null
+  /** add a new calibration to the database, if the name is not already there
+   * @param name   calibration name
+   * @return calibration ID
+   *
+   * @note used only by setCalib
+   * @note DB non-null
+   */
   private long setCalibName( String name ) 
   {
     long id = -1;
@@ -849,6 +926,8 @@ public class DeviceHelper extends DataSetObservable
   //   return id;
   // }
 
+  /** @return the list of (known) device in the database
+   */
   ArrayList< Device > getDevices( ) 
   {
     ArrayList< Device > ret = new ArrayList<>();
@@ -876,7 +955,9 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  // get device by address or by nickname
+  /** @return a device by address or by nickname
+   * @param addr  device address or nickname
+   */
   Device getDevice( String addr )
   {
     if ( myDB == null ) {
@@ -890,7 +971,10 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
        
-  // DB non-null
+  /** @return a device by the nickname
+   * @param nickname  device nickname
+   * @note DB non-null
+   */
   private Device getDeviceByNickname( String nickname )
   {
     Device ret = null;
@@ -912,7 +996,10 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-  // DB non-null
+  /** @return a device by the address
+   * @param addr  device address
+   * @note DB non-null
+   */
   private Device getDeviceByAddress( String addr )
   {
     Device ret = null;
@@ -934,6 +1021,9 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return a device tail index (useful only for DistoX v. 1 ?)
+   * @param addr  device address
+   */
   int getDeviceTail( String address )
   { 
     if ( myDB == null ) {
@@ -955,6 +1045,10 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
+  /** get a device haed-tail indices (useful only for DistoX v. 1)
+   * @param addr       device address
+   * @param head_tail  (output) head-tail pair
+   */
   void getDeviceHeadTail( String address, int[] head_tail )
   {
     if ( myDB == null ) {
@@ -975,6 +1069,11 @@ public class DeviceHelper extends DataSetObservable
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
   }
 
+  /** insert a device in the database, if not already present
+   * @param address  device address
+   * @param model    device model
+   * @param name     device name
+   */
   void insertDevice( String address, String model, String name )
   {
     if ( myDB == null ) {
@@ -1021,6 +1120,10 @@ public class DeviceHelper extends DataSetObservable
   //   } catch (SQLiteException e ) { logError( "insert device H-T", e ); }
   // }
 
+  /** update a device model
+   * @param address   device address
+   * @param model     device new model
+   */
   void updateDeviceModel( String address, String model )
   {
     ContentValues cv = new ContentValues();
@@ -1036,6 +1139,10 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "update device", e ); }
   }
 
+  /** update a device nickname
+   * @param address   device address
+   * @param nickname  device new nickname
+   */
   void updateDeviceNickname( String address, String nickname )
   {
     ContentValues cv = new ContentValues();
@@ -1051,6 +1158,10 @@ public class DeviceHelper extends DataSetObservable
     // } catch (SQLiteException e ) { logError( "update device nickname", e ); }
   }
 
+  /** update a device head-tail pair
+   * @param address   device address
+   * @param head_tail device new head-tail pair
+   */
   boolean updateDeviceHeadTail( String address, int[] head_tail )
   {
     boolean ret = false;
@@ -1089,9 +1200,15 @@ public class DeviceHelper extends DataSetObservable
     return ret;
   }
 
-
+  /** @return true if a calibration name is in the database
+   * @param name   calibration name
+   */
   public boolean hasCalibName( String name )  { return hasName( name, CALIB_TABLE ); }
 
+  /** @return true if a name is in a database table
+   * @param name   name
+   * @param table  table
+   */
   private boolean hasName( String name, String table )
   {
     if ( myDB == null ) {
@@ -1109,6 +1226,12 @@ public class DeviceHelper extends DataSetObservable
      return ret;
    }
 
+   /** update the calibration info
+    * @param id      calibration ID
+    * @param date    calibration date
+    * @param device  calibration device
+    * @param comment calibration description
+    */
    void updateCalibInfo( long id, String date, String device, String comment )
    {
      // TDLog.Log( TDLog.LOG_DB, "updateCalibInfo id " + id + " day " + date + " comm. " + comment );
@@ -1134,6 +1257,10 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
+   /** update the calibration algorithm
+    * @param id      calibration ID
+    * @param algo    calibration algorithm
+    */
    void updateCalibAlgo( long id, long algo )
    {
      ContentValues cv = new ContentValues();
@@ -1152,6 +1279,10 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
+   /** update the calibration coefficinets
+    * @param id      calibration ID
+    * @param coeff   calibration coefficients (as a string)
+    */
    void updateCalibCoeff( long id, String coeff )
    {
      ContentValues cv = new ContentValues();
@@ -1171,6 +1302,14 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
+   /** update the calibration results
+    * @param id         calibration ID
+    * @param delta_bh   calibration Heeb Delta
+    * @param error      calibration data mean error
+    * @param stddev     calibration data error std. deviation
+    * @param max_error  calibration data maximum error
+    * @param iterations calibration iterations
+    */
    void updateCalibError( long id, double delta_bh, double error, double stddev, double max_error, int iterations )
    {
      ContentValues cv = new ContentValues();
@@ -1196,6 +1335,9 @@ public class DeviceHelper extends DataSetObservable
      // // return true;
    }
 
+   /** @return the ID of a calibration 
+    * @param calib  calibration name
+    */
    long setCalib( String calib )
    {
      if ( myDB == null ) {
@@ -1217,6 +1359,9 @@ public class DeviceHelper extends DataSetObservable
      return cid;
    }
 
+   /** @return the calibration name from the ID
+    * @param cid   calibration ID
+    */
    String getCalibFromId( long cid ) { return getNameFromId( CALIB_TABLE, cid ); }
 
    // ----------------------------------------------------------------------

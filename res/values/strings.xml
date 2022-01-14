@@ -400,7 +400,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_help">HELP</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">LOGS</string>
-    <string name="menu_manual_calibration">CALIBRATION</string>
+    <string name="menu_manual_calibration">INSTR. OFFSET</string>
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_packets">PACKETS</string>

@@ -20,6 +20,12 @@ class AudioInfo
   final long fileIdx;      // shot id
   private final String mDate;
 
+  /** cstr
+   * @param _sid    survey ID
+   * @param _id     audio ID
+   * @param fileidx shot ID
+   * @param dt      date
+   */
   AudioInfo( long _sid, long _id, long fileidx, String dt )
   {
     sid     = _sid;
@@ -28,6 +34,8 @@ class AudioInfo
     mDate   = dt;
   }
 
+  /** @return the shot ID
+   */
   int getFileNumber() { return (int)fileIdx; }
 
   // String getAudioName() 
@@ -36,11 +44,16 @@ class AudioInfo
   // }
 
   // @RecentlyNonNull
+  /** @return the string presentation of this audio info
+   */
   public String toString()
   {
     return id + " <" + mDate  + "> ";
   }
 
+  /** @return the full string presentation of this audio info
+   * @param shot_name   name of the shot
+   */
   public String getFullString( String shot_name )
   {
     return id + ": " + shot_name + " <" + mDate  + "> ";

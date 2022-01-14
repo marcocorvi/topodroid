@@ -59,14 +59,20 @@ public class SymbolPoint extends Symbol
   // boolean hasText() { return mHasText; }
   // double orientation() { return mOrientation; }
 
+  /** @return true if the point is orientable
+   */
   @Override public boolean isOrientable() { return mOrientable; }
 
   // @Override public boolean isEnabled() { return mEnabled; }
   // @Override public void setEnabled( boolean enabled ) { mEnabled = enabled; }
   // @Override public void toggleEnabled() { mEnabled = ! mEnabled; }
 
+  /** set the point orientation angle
+   * @param angle   orientation angle [degrees]
+   * @return true if the orientation has been set
+   */
   @Override
-  public boolean setAngle( float angle ) // degrees
+  public boolean setAngle( float angle )
   {
     if ( ! mOrientable ) return false;
     float a = angle - (float)mOrientation;
@@ -76,21 +82,46 @@ public class SymbolPoint extends Symbol
     }
     return false;
   }
-  @Override public int getAngle() { return (int)mOrientation; } // degrees
 
+  /** @return the point orientation angle [degrres]
+   */
+  @Override public int getAngle() { return (int)mOrientation; } 
+
+  /** @return the point local name
+   */
   @Override public String getName( ) { return mName; }
   // @Override public String getThName( ) { return mThName; } // same as in Symbol.java
 
+  /** @return the point in DXVI format
+   */
   public SymbolPointDxf getDxf() { return mDxf; }
+
+  /** @return the point in XVI format
+   */
   public String getSvg( ) { return mSvg; }
+
+  /** @return the point in XVI format
+   */
   public String getXvi( ) { return mXvi; }
 
+  /** @return the point path
+   */
   @Override public Path getPath( ) { return mPath; }
 
+  /** @return the point original path
+   */
   Path getOrigPath( ) { return mOrigPath; }
  
+  /** @return the point paint
+   */
   @Override public Paint getPaint( ) { return mPaint; }
 
+  /** cstr
+   * @param pathname file path
+   * @param fname    file name (must coincide with Therion name)
+   * @param locale   current locale
+   * @param iso      ...
+   */
   SymbolPoint( String pathname, String fname, String locale, String iso )
   {
     super( null, null, fname, Symbol.W2D_DETAIL_SYM );
@@ -100,6 +131,17 @@ public class SymbolPoint extends Symbol
     readFile( pathname, locale, iso );
   }
 
+  /** cstr
+   * @param n1      name
+   * @param tn1     Therion name
+   * @param group   group
+   * @param fname   file name
+   * @param c1      color
+   * @param path    path
+   * @param orientable whether the point is orientable
+   * @param level      symbol level
+   * @param rt         ...
+   */
   SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int level, int rt )
   {
     super( tn1, group, fname, rt );
@@ -115,6 +157,18 @@ public class SymbolPoint extends Symbol
     mLevel = level;
   }
 
+  /** cstr
+   * @param n1      name
+   * @param tn1     Therion name
+   * @param group   group
+   * @param fname   file name
+   * @param c1      color
+   * @param path    path
+   * @param orientable whether the point is orientable
+   * @param has_text   whether the point can have text (0 no, 1 text, 2 value)
+   * @param level      symbol level
+   * @param rt         ...
+   */
   SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int has_text, int level, int rt )
   {
     super( tn1, group, fname, rt ); // FIXME fname
@@ -130,6 +184,9 @@ public class SymbolPoint extends Symbol
     mLevel = level;
   }
 
+  /** rotate the orienttaion of the point symbol
+   * @param a   rotation angle [degrees]
+   */
   void rotateGradP( double a )
   {
     if ( mOrientable ) {
@@ -142,6 +199,8 @@ public class SymbolPoint extends Symbol
     }
   }
 
+  /** reset the orienttaion of the point symbol
+   */
   void resetOrientation()
   {
     if ( mOrientable && mOrientation != 0.0 ) {
@@ -153,6 +212,10 @@ public class SymbolPoint extends Symbol
   }
 
   /** create a symbol reading it from a file
+   * @param pathname  file path
+   * @param locale    locale
+   * @param iso       ...
+   *
    *  The file syntax is 
    *      symbol point
    *      name NAME
@@ -359,7 +422,9 @@ public class SymbolPoint extends Symbol
   //   mXvi = "";
   // }
 
-  /* Make the path from its stringn description
+  /** Make the path from its string description
+   * @param path   path string description
+   *
    * The path string description is composed of the following directives
    *     - "moveTo X Y"
    *     - "lineTo X Y"
@@ -612,6 +677,10 @@ public class SymbolPoint extends Symbol
     mXvi = sv4.getBuffer().toString();
   }
 
+  /** @return a paint
+   * @param color   paint color
+   * @param style   paint style
+   */
   static Paint makePaint( int color, Paint.Style style )
   {
     Paint ret = new Paint();

@@ -22,35 +22,52 @@ import java.io.IOException;
 class XSplay extends Vector3D
              implements Comparable
 {
-  double angle;
+  final static double EPS = 1.0e-7; // angle comparison tolerance
+  double angle; // XSplay angle
 
+  /** cstr
+   * @param p  3D point
+   * @param a  angle
+   */
   XSplay( Vector3D p, double a )
   {
     super( p );
     angle = a;
   }
 
-  // used by deserialize
+  /** cstr
+   * @param x  X coord
+   * @param y  Y coord
+   * @param z  Z coord
+   * @param a  angle
+   * @note used by deserialize
+   */
   XSplay( double x, double y, double z, double a )
   {
     super( x,y,z );
     angle = a;
   }
 
-
+  /** @return true if the other object is an XSplay and has the same angle (within 1.e-7)
+   * @param other   another XSplay
+   */
   @Override public boolean equals( Object other )
   { 
     if ( other == null ) return false;
-    if ( other instanceof XSplay ) return this.angle == ((XSplay)other).angle;
+    if ( other instanceof XSplay ) return Math.abs( this.angle - ((XSplay)other).angle ) < EPS;
     return false;
   }
 
-  // if other is not instanceof XSplay return ClassCastException
+  /** compare to another XSplay - for ordering
+   * @param other   another XSplay
+   * @return -1,0,1 or an exception
+   * @note if other is not instanceof XSplay return ClassCastException
+   */
   @Override public int compareTo( Object other ) 
   { 
     if ( other == null ) throw new NullPointerException();
     if ( other instanceof XSplay )
-      return (this.angle < ((XSplay)other).angle)? -1 : (this.angle == ((XSplay)other).angle)? 0 : 1;
+      return (this.angle < ((XSplay)other).angle - EPS)? -1 : (this.angle > ((XSplay)other).angle + EPS)? 1 : 0;
     throw new ClassCastException();
   }
 
@@ -59,6 +76,9 @@ class XSplay extends Vector3D
   //   TDLog.v("TopoGL " + String.format("   %6.1f  %8.2f %8.2f %8.2f", angle, x, y, z ) );
   // }
 
+  /** serialize the XSplay
+   * @param dos     output data stream
+   */
   void serialize( DataOutputStream dos ) throws IOException
   {
     dos.writeDouble( x );
@@ -66,7 +86,11 @@ class XSplay extends Vector3D
     dos.writeDouble( z );
     dos.writeDouble( angle );
   }
-
+ 
+  /** @return deserialized XSplay
+   * @param dis     input data stream
+   * @param version input stream version
+   */
   static XSplay deserialize( DataInputStream dis, int version ) throws IOException
   {
     return new XSplay( dis.readDouble(), dis.readDouble(), dis.readDouble(), dis.readDouble() );

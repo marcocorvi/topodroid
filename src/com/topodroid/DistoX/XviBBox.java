@@ -15,6 +15,8 @@ import com.topodroid.utils.TDLog;
 
 import android.graphics.RectF;
 
+/** bounding box for XVI export
+ */
 class XviBBox
 {
   float xmin, xmax;
@@ -22,10 +24,19 @@ class XviBBox
   int width;
   int height;
 
+  /** cstr
+   * @param plot   drawing items
+   */
   XviBBox( DrawingCommandManager plot ) { init( plot.getBoundingBox( ) ); }
 
+  /** cstr
+   * @param bbox   bounding box
+   */
   XviBBox( RectF bbox ) { init( bbox ); }
 
+  /** initialize the bounding box
+   * @param bbox   bounding box
+   */
   private void init( RectF bbox )
   {
     xmin = bbox.left;

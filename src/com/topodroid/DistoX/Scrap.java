@@ -776,6 +776,9 @@ public class Scrap
     // checkLines();
   }
 
+  /** compute the bitmap bounding box, union of the bounding boxes of the sketch items
+   * @param bound   output bounding box
+   */
   void getBitmapBounds( RectF bounds )
   {
     RectF b = new RectF();

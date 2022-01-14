@@ -48,6 +48,12 @@ class DeviceSelectDialog extends MyDialog
   // private Button  mBtnCancel;
 
   // ---------------------------------------------------------------
+  /** cstr
+   * @param context    context
+   * @param app        application
+   * @param downloader data downloader
+   * @param lister     data lister
+   */
   DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader, ILister lister )
   {
     super( context, R.string.DeviceSelectDialog );
@@ -77,6 +83,8 @@ class DeviceSelectDialog extends MyDialog
     updateList();
   }
 
+  /** update the list of known devices
+   */
   private void updateList( )
   {
     ListItemAdapter array_adapter = new ListItemAdapter( mContext, R.layout.message );
@@ -97,6 +105,12 @@ class DeviceSelectDialog extends MyDialog
     mList.setAdapter( array_adapter );
   }
 
+  /** respond to a user tap on a device of the list
+   * @param parent ...
+   * @param view   tapped view
+   * @param pos    device position in the list
+   * @param id     ...
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -123,6 +137,9 @@ class DeviceSelectDialog extends MyDialog
     mDownloader.doDataDownload( DataType.DATA_ALL );
   }
 
+  /** respond to a user tap - dismiss the dialog
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) 
   {

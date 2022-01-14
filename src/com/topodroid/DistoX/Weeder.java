@@ -21,19 +21,24 @@ import java.util.ArrayList;
 
 class Weeder
 {
-  // ------------------------------------------------------------------
-  // point 2D with the line-abscissa
-  //
+  /** point 2D with the line-abscissa
+   */
   class WeedPoint extends Point2D
   {
     float s;  // line abscissa
     WeedPoint( float xx, float yy ) { super(xx,yy); }
   }
   
-  // check whether two segments crosses - allow a buffer to both
-  // buffer are in units of segments lengths
-  //
-  // p1 + s * (p2 - p1) = q1 + t * (q2 - q1)
+  /** check whether two segments crosses - allow a buffer to both, buffers are in units of segments lengths
+   * @param p1   first point of first segment
+   * @param p2   second point of first segment
+   * @param q1   first point of second segment
+   * @param q2   second point of second segment
+   * @param bp   buffer of first segment
+   * @param bq   buffer of second segment
+   *
+   * p1 + s * (p2 - p1) = q1 + t * (q2 - q1)
+   */
   static boolean cross( WeedPoint p1, WeedPoint p2, WeedPoint q1, WeedPoint q2, float bp, float bq )
   {
     float px = p2.x - p1.x;
@@ -50,8 +55,9 @@ class Weeder
     return true;
   }
   
-  // 2D line
-  // basically used only to compute the fartest point
+  /** 2D line
+   * basically used only to compute the fartest point
+   */
   class WeedSegment
   { 
     float a, b, c;
@@ -89,6 +95,8 @@ class Weeder
     }
   }
   
+  /** TODO
+   */
   class WeedIndex
   {
     int k;
@@ -110,15 +118,24 @@ class Weeder
 
   ArrayList< WeedPoint > mPoints;
 
+  /** cstr
+   */
   Weeder()
   {
     mPoints = new ArrayList< WeedPoint >();
   }
 
+  /** add a point
+   * @param x   point X coord
+   * @param y   point Y coord
+   */
   void addPoint( float x, float y ) { mPoints.add( new WeedPoint(x,y) ); }
 
-  // max_dist maximum distance from segment for point suppression
-  // max_len  maximum section length
+  /** simplify the set of points
+   * @param max_dist maximum distance from segment for point suppression
+   * @param max_len  maximum section length
+   * @return simplified list of points
+   */
   ArrayList< Point2D > simplify( float max_dist, float max_len )
   {
     ArrayList< Point2D > ret = new ArrayList<>();
@@ -144,6 +161,9 @@ class Weeder
   }
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+  /** initialize the line-abscissa of the points
+   * @param pts   list of points
+   */
   private void initLineAbscissa( List< WeedPoint > pts )
   {
     WeedPoint p = pts.get( 0 );
@@ -156,7 +176,12 @@ class Weeder
     }
   }
   
-  // return Index of fartest point
+  /** @return index of fartest point between two points
+   * @param pts   list of points
+   * @param i1    first point
+   * @param i2    second point
+   * @param thr   minimum acceptable distance - return null if distance is too small
+   */
   private WeedIndex fartestPoint( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
   {
     int k1 = i1.k;
@@ -173,6 +198,11 @@ class Weeder
     return new WeedIndex( pts.get(k0), k0, i1, i2 );
   }
   
+  /** initialize the sections of points
+   * @param pts   list of points
+   * @param max_len ...
+   * @return index of ...
+   */
   private WeedIndex initSections( List< WeedPoint > pts, float max_len )
   {
     initLineAbscissa( pts );
@@ -214,6 +244,12 @@ class Weeder
     return idx0;
   }
   
+  /** simplyfy a section of points
+   * @param pts   list of points
+   * @param i1    first point of the section
+   * @param i2    second point of the section
+   * @param thr   minimum acceptable distance - return null if distance is too small
+   */
   private void simplifySection( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
   {
     if ( i1.k + 1 >= i2.k ) return;

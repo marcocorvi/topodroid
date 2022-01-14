@@ -13,6 +13,8 @@ package com.topodroid.DistoX;
 
 import java.util.ArrayList;
 
+/** wall-computer interface
+ */
 public interface WallComputer
 {
   ArrayList< Triangle3D > getTriangles();

@@ -37,6 +37,10 @@ class DanglingShotsDialog extends MyDialog
 
   // private Button mBtnBack;
 
+  /** cstr
+   * @param context   context
+   * @param num       data reduction 
+   */
   DanglingShotsDialog( Context context, TDNum num )
   {
     super( context, R.string.DanglingShotsDialog );
@@ -67,6 +71,9 @@ class DanglingShotsDialog extends MyDialog
     ( (Button) findViewById(R.id.btn_back) ).setOnClickListener( this );
   }
 
+  /** respont to user tap - dismiss this dialog
+   * @param view tapped view
+   */
   @Override
   public void onClick(View view)
   {
