@@ -30,7 +30,7 @@ else
     mkdir tmp1
     name=$1
     touch tmp1/manifest
-    echo "5.1.40 500140" >> tmp1/manifest
+    echo "5.1.40 501040" >> tmp1/manifest
     echo "42" >> tmp1/manifest
     echo "$name" >> tmp1/manifest
     /bin/date +%Y-%m-%d >> tmp1/manifest
