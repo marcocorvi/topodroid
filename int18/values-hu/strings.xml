@@ -112,7 +112,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="bric_clear_ok">Memória törölve </string>
     <string name="bric_clear_fail">Memória törlés sikertelen</string>
 
-    <string name="calibration_title">Műszerek kalibrálása</string>
+    <string name="calibration_title">Műszerek nullpontja</string>
     <string name="calibration_length">Mérőszalag</string>
     <string name="calibration_azimuth">Tájoló</string>
     <string name="calibration_clino">Lejtszögmérő</string>
@@ -165,7 +165,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="device_code">DistoX kódja %1$4d</string>
     <string name="device_firmware">Firmware verzió: %1$d.%2$d</string>
     <string name="device_hardware">Hardware verzió: %1$d.%2$d</string>
-	<!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
+	<!-- UNUSED string name="device_memory">Memória  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Szög mértékegysége: újfok</string>
     <string name="device_status_angle_degree">Szög mértékegysége: fok</string>
     <string name="device_status_compass_on">Iránytű/lejtszögmérő: be</string>
@@ -402,7 +402,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
     <string name="menu_logs">NAPLÓK</string>
-    <string name="menu_manual_calibration">KALIBRÁCIÓ</string>
+    <string name="menu_manual_calibration">NULLPONT</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTŐ</string>
     <string name="menu_packets">CSOMAGOK</string>
