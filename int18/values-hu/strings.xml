@@ -612,7 +612,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="wait_scan">Keresés: várj &#8230;</string -->
     <string name="write_failed">Nem sikerült felülírni a kalibrációt</string>
     <string name="write_ok">DistoX kalibrációja felülírva</string>
-    <string name="zip_saved">Mentve</string>
+    <string name="zip_saved">Zip archívum mentve</string>
     <string name="zip_failed">Nem sikerült a felmérés tömörítése</string>
     <string name="unzip_fail">Nem sikerült a felmérés kitömörítése</string>
     <string name="unzip_fail_sqlite">Sikertelen SQL: törölje a felmérést és próbálkozzon újra</string>
