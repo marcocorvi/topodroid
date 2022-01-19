@@ -177,8 +177,8 @@ public class TDSetting
   public static final int BTN_SIZE_MEDIUM  = 48;
   public static final int BTN_SIZE_LARGE   = 64;
   public static final int BTN_SIZE_HUGE    = 84;
-  public static int mSizeBtns     = 0;      // action bar buttons scale 
-  public static int mSizeButtons  = 0; // 42;     // default 42 minimum MIN_SIZE_BUTTONS
+  public static int mSizeBtns     = 3;      // action bar buttons scale (3: medium)
+  public static int mSizeButtons  = 42;     // default 42 minimum MIN_SIZE_BUTTONS
   public static int mTextSize     = 16;     // list text size 
   public static boolean mKeyboard = true;
   public static boolean mNoCursor = false;

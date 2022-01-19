@@ -24,12 +24,18 @@ public class InfoReadBricTask extends AsyncTask<Void, Integer, Boolean>
   private final WeakReference<TopoDroidApp>   mApp; // FIXME LEAK
   private final WeakReference<BricInfoDialog> mDialog;
 
+  /** cstr
+   * @param app    application
+   * @param dialog info display dialog
+   */
   public InfoReadBricTask( TopoDroidApp app, BricInfoDialog dialog )
   {
     mApp      = new WeakReference<TopoDroidApp>( app );
     mDialog   = new WeakReference<BricInfoDialog>( dialog );
   }
 
+  /** execute the task in background
+   */
   @Override
   protected Boolean doInBackground(Void... v)
   {

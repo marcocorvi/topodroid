@@ -3126,7 +3126,14 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  // called by DrawingWindow to splay select shots for x-sections
+  /** select all the shots between two stations, both 1-2 and 2-1
+   * @param sid      survey ID
+   * @param station1 first station
+   * @param station2 second station
+   * @return list of shots
+   *
+   * @note called by DrawingWindow to splay select shots for x-sections
+   */
   List< DBlock > selectAllShotsAtStations( long sid, String station1, String station2 )
   {
     if ( station2 == null ) return selectAllShotsAtStation( sid, station1 );
@@ -3154,9 +3161,12 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  // @param sid        survey id
-  // @param stations   stations names (must be unique)
-  // @param with_leg   whether to include legs or not
+  /** select all the shots at one or two stations
+   * @param sid        survey id
+   * @param stations   stations names (must be unique)
+   * @param with_leg   whether to include legs or not
+   * @return list of shots
+   */
   List< DBlock > selectAllShotsAtStations( long sid, List< String > stations, boolean with_legs )
   {
     List< DBlock > list = new ArrayList<>();
@@ -3195,6 +3205,10 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  /** select all the shots at a station
+   * @param sid        survey id
+   * @return list of shots
+   */
   private List< DBlock > selectAllShotsAtStation( long sid, String station )
   {
     List< DBlock > list = new ArrayList<>();
@@ -3313,6 +3327,7 @@ public class DataHelper extends DataSetObservable
 
   /** select all shots, used by CSV raw export
    * @param sid surveyId
+   * @return list of shots
    */
   List< RawDBlock > selectAllShotsRawData( long sid )
   {
@@ -3332,7 +3347,12 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  List< DBlock > selectAllShots( long sid, long status )
+  /** select all shots with a given status
+   * @param sid     surveyId
+   * @param status  shot status
+   * @return list of shots
+   */
+  List< DBlock > selectAllShots( long sid, long status ) // ANDROID-11 SQLiteDiskIOException
   {
     // TDLog.v( "B3 select shots all");
     List< DBlock > list = new ArrayList<>();
@@ -3353,6 +3373,11 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
+  /** get the export shots
+   * @param sid     surveyId
+   * @param status  shot status
+   * @return list of shots
+   */
   List< DBlock > selectAllExportShots( long sid, long status )
   {
     // TDLog.v( "B3 select shots all");
@@ -3373,9 +3398,12 @@ public class DataHelper extends DataSetObservable
     return list;
   }
 
-  // @param backshot  whether the DistoX is in backshot mode
-  // @return the last block with either the from station (non-backshot) or the to station (backshot)
-  // used only by StationName
+  /** get the last non-blank shot
+   * @param sid    survey ID
+   * // param backshot  whether the DistoX is in backshot mode
+   * @return the last block with either the from station (non-backshot) or the to station (backshot)
+   * @note used only by StationName
+   */
   DBlock selectLastNonBlankShot( long sid /* , long status, boolean backshot */ )
   {
     if ( myDB == null ) return null;
@@ -3748,6 +3776,10 @@ public class DataHelper extends DataSetObservable
     // return true; // FIXME
   }
  
+  /** @return the info of a plot
+   * @param sid    survey ID
+   * @param name   plot name
+   */
   PlotInfo getPlotInfo( long sid, String name )
   {
     PlotInfo plot = null;

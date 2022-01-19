@@ -102,11 +102,11 @@ public class BricInfoDialog extends MyDialog
         break;
       case BricComm.DATA_INFO_27:
         // TDLog.v( "BricInfo Hardware " + BleUtils.bytesToAscii( bytes ) );
-        tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
+        tv_hw.setText( String.format( mRes.getString( R.string.bric_hw ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_INFO_28:
         // TDLog.v( "BricInfo Fiwrmware " + BleUtils.bytesToAscii( bytes ) );
-        tv_hw.setText( String.format( mRes.getString( R.string.bric_hw ), BleUtils.bytesToAscii( bytes ) ) );
+        tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
         break;
       case BricComm.DATA_BATTERY_LVL:
         // TDLog.v( "BricInfo Battery " + (int)(bytes[0]) );

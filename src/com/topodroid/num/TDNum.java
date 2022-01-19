@@ -1217,7 +1217,7 @@ public class TDNum
    * @param cycles     list of cycles (output)
    * @param branches   list of branches
    *
-   * checked with C++ test 
+   * checked with C++ test, however it seems that it can generate ANR (6.0.33 Android-11)
    */
   private void makeIndependentCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
   {

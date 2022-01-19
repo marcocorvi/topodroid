@@ -93,6 +93,7 @@ import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.FileProvider;
 
+// import android.provider.Settings;
 // import android.provider.Settings.System;
 // import android.provider.Settings.SettingNotFoundException;
 
@@ -808,6 +809,17 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
+
+    // ONLY IF BUILT WITH ANDROID-30 and above
+    // if ( TDandroid.ABOVE_API_29 ) {
+    //   if ( ! android.os.Environment.isExternalStorageManager() ) {
+    //     // Uri uri = Uri.parse("package:" + BuildConfig.APPLICATION_ID );
+    //     // startActivity( android.content.Intent( android.provider.Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION, uri ) );
+    //     android.content.Intent intent = new android.content.Intent();
+    //     intent.setAction( android.provider.Settings.ACTION_MANAGE_ALL_FILES_ACCESS_PERMISSION );
+    //     startActivity( intent );
+    //   }
+    // }
 
     // require large memory pre Honeycomb
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
@@ -1732,6 +1744,9 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------
   // FIRMWARE 
 
+  /** install the firmware files
+   * @param overwrite whether to overwrite existing files
+   */
   static private void installFirmware( boolean overwrite )
   {
     TDLog.v("APP FW install firmware. overwrite: " + overwrite );
@@ -1743,6 +1758,9 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------
   // SYMBOLS
 
+  /** install default (speleo) symbols
+   * @param overwrite whether to overwrite existing files
+   */
   static void installSymbols( boolean overwrite )
   {
     deleteObsoleteSymbols();
@@ -1751,12 +1769,18 @@ public class TopoDroidApp extends Application
     mDData.setValue( "symbol_version", TDVersion.SYMBOL_VERSION );
   }
 
+  /** install a symbol set
+   * @param res       symbol set resource 
+   * @param overwrite whether to overwrite existing files
+   */
   static void installSymbols( int res, boolean overwrite )
   {
     InputStream is = TDInstance.getResources().openRawResource( res );
     symbolsUncompress( is, overwrite );
   }
 
+  /** delete the files of obsolete symbols 
+   */
   static private void deleteObsoleteSymbols()
   {
     String[] lines = { 
@@ -1811,6 +1835,13 @@ public class TopoDroidApp extends Application
     DrawingSurface.clearManagersCache();
   }
 
+  /** decompress the symbols files
+   * @param fis       input zip-file stream
+   * @param overwrite whether to overwrite existing files
+   * 
+   * @note the output symbols files are in the private "point", "line", and "area" folders, 
+   *       their names are taken from the zip entries
+   */
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
     TDLog.v("APP uncompressing symbols - overwrite " + overwrite );
@@ -1862,6 +1893,12 @@ public class TopoDroidApp extends Application
 
   // -------------------------------------------------------------------
 
+  /** decompress the firmwares files
+   * @param fis       input zip-file stream
+   * @param overwrite whether to overwrite existing files
+   * 
+   * @note the output files are in the private "bin" folder, and their names are taken from the zip entries
+   */
   static private void firmwareUncompress( InputStream fis, boolean overwrite )
   {
     // TDLog.v("FW " + "firmware uncompress ...");
@@ -2185,16 +2222,25 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
+  /** guess the algo from the info in the database of the current calibration 
+   * @return algo code (@see CalibInfo)
+   */
   int getCalibAlgoFromDB()
   {
     return mDData.selectCalibAlgo( TDInstance.cid );
   }
 
+  /** update the algo of the current calibration in the database
+   * @param algo   algo code (@see CalibInfo)
+   */
   void updateCalibAlgo( int algo ) 
   {
     mDData.updateCalibAlgo( TDInstance.cid, algo );
   }
   
+  /** guess the calibration algo from the device infos
+   * @return algo code (@see CalibInfo)
+   */
   int getCalibAlgoFromDevice()
   {
     if ( TDInstance.getDeviceA() == null ) return CalibInfo.ALGO_LINEAR;
@@ -2209,6 +2255,9 @@ public class TopoDroidApp extends Application
 
   // --------------------------------------------------------
 
+  /** send a command to the BRIC
+   * @param cmd   command code (@see BricConst)
+   */
   public void sendBricCommand( int cmd )
   { 
     // boolean ret = false;
@@ -2222,6 +2271,10 @@ public class TopoDroidApp extends Application
     // return ret;
   }
 
+  /** retrieve the BRIC info
+   * @param info   info display dialog
+   * @return true if successful
+   */
   public boolean getBricInfo( BricInfoDialog info )
   {
     if ( mComm != null && mComm instanceof BricComm ) {
@@ -2229,19 +2282,25 @@ public class TopoDroidApp extends Application
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
         connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown(4000); // FIXME was 4000
       }
       if ( comm.isConnected() ) {
         comm.registerInfo( info );
         info.getInfo( comm );
         if ( disconnect ) disconnectComm();
+        return true;
       } else {
-        TDLog.Error("get BRIC info: failed to connect");
+        TDLog.Error("BRIC info: failed to connect");
       }
     }
     return false;
   }
 
+  /** set BRIC memory
+   * @param bytes ...
+   * @return true if successful
+   */
   public boolean setBricMemory( byte[] bytes )
   {
     // TDLog.v( "set BRIC memory - ... " + ( (bytes == null)? "clear" : bytes[4] + ":" + bytes[5] + ":" + bytes[6] ) );
@@ -2251,25 +2310,28 @@ public class TopoDroidApp extends Application
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
         connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        TDLog.v("BRIC memory: wait 4 secs");
         TDUtil.yieldDown(4000);
       }
       if ( comm.isConnected() ) {
         ret = comm.setMemory( bytes );
         if ( disconnect ) disconnectComm();
+        return true;
       } else {
-        TDLog.Error( "set BRIC memory: failed to connect");
+        TDLog.Error( "BRIC memory: failed to connect");
       }
     }
     return ret;
   }
 
 
-  /** 
-   * @param what      what to do
+  /** set the X310 laser
+   * @param what      what to do:  0: off, 1: on, 2: measure
    * @param nr        number od data to download
    # @param lister    optional lister
+   * @param data_type type of expected data
    */
-  public void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // 0: off, 1: on, 2: measure // FIXME_LISTER
+  public void setX310Laser( int what, int nr, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     if ( mComm instanceof DistoX310Comm ) {
@@ -2285,7 +2347,10 @@ public class TopoDroidApp extends Application
   //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().getAddress() );
   // }
 
-  // @param hw expected device hardware
+  /** read the firmware signature - only X310
+   * @param hw expected device hardware
+   * @return firmware signtaure (or null if failure)
+   */
   public byte[] readFirmwareSignature( int hw )
   {
     TDLog.v("APP FW read signature - HW " + hw );
@@ -2299,7 +2364,10 @@ public class TopoDroidApp extends Application
     return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
   }
 
-  // @param name   filename including ".bin" extension
+  /** read the firmware and save it to a file - only X310
+   * @param name   filename including ".bin" extension
+   * @return ...
+   */
   public int dumpFirmware( String name )
   {
     TDLog.v("APP FW dump " + name );
@@ -2314,6 +2382,10 @@ public class TopoDroidApp extends Application
     return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( name ) );
   }
 
+  /** read a firmware reading it from a file - only X310
+   * @param name   filename including ".bin" extension
+   * @return ...
+   */
   public int uploadFirmware( String name )
   {
     TDLog.v("APP FW upload " + name );

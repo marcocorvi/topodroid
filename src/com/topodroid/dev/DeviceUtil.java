@@ -68,11 +68,18 @@ public class DeviceUtil
 
   public static boolean hasAdapter() { return BluetoothAdapter.getDefaultAdapter() != null; }
 
+  /** @return the set of bonded devices
+   */
   public static Set< BluetoothDevice > getBondedDevices() 
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     if ( adapter == null ) return null;
-    return adapter.getBondedDevices();
+    try {
+      return adapter.getBondedDevices();
+    } catch ( SecurityException e ) { // FIXME ANDROID-12
+      TDLog.Error("get bonded devices " + e.getMessage() );
+    }
+    return null;
   }
 
   public static BluetoothDevice getRemoteDevice( String address ) 

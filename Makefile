@@ -18,17 +18,17 @@ default:
 
 release:
 	$(ANT) release
-	mv bin/TopoDroid-release.apk TopoDroid-$(VERSION).apk
-	ls -l TopoDroid-$(VERSION).apk
-	md5sum TopoDroid-$(VERSION).apk
+	mv bin/TopoDroid-release.apk TopoDroid-$(VERSION)-release.apk
+	ls -l TopoDroid-$(VERSION)-release.apk
+	md5sum TopoDroid-$(VERSION)-release.apk
 
 signed:
 	$(ANT) release
 	echo "Version $(VERSION)"
 	./howto/sign.sh
-	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION)-gp.apk
-	ls -l TopoDroid-$(VERSION)-gp.apk
-	md5sum TopoDroid-$(VERSION)-gp.apk
+	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION).apk
+	ls -l TopoDroid-$(VERSION).apk
+	md5sum TopoDroid-$(VERSION).apk
 
 debug-signed:
 	$(ANT) debug

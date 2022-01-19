@@ -120,7 +120,7 @@ public class BricComm extends TopoDroidComm
               if ( TDSetting.mBricMode == BricMode.MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
               } else {
-                ((BricProto)mProtocol).addMeasPrim( buffer.data );
+                ((BricProto)mProtocol).addMeasPrim( buffer.data ); // ANDROID-11 ANDROID-12 null ptr
               }
               break;
             case DATA_META:
@@ -177,10 +177,15 @@ public class BricComm extends TopoDroidComm
     consumer.start();
   }
 
-  // register an info-dialog
-  // @param info   info dialog, use null to unregister
+  /** register an info-dialog
+   * @param info   info dialog, use null to unregister
+   */
   public void registerInfo( BricInfoDialog info ) { mBricInfoDialog = info; }
 
+  /** reset the BRIC memory (?)
+   * @param bytes ... (use null to clear the memory)
+   * @return true if successful
+   */
   public boolean setMemory( byte[] bytes )
   {
     if ( bytes == null ) { // CLEAR
@@ -195,21 +200,35 @@ public class BricComm extends TopoDroidComm
     // return false;
   }
 
-  // this is run by BleOpChrtRead
+  /** read a characteristics
+   * @param srvUuid  service UUID
+   * @param chrtUuid charcateristics UUID
+   * @return true if successful
+   * @note this is run by BleOpChrtRead
+   */
   public boolean readChrt( UUID srvUuid, UUID chrtUuid ) 
   { 
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: read chsr " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid ); 
   }
 
-  // this is run by BleOpChrtWrite
+  /** write a characteristics
+   * @param srvUuid  service UUID
+   * @param chrtUuid charcateristics UUID
+   * @return true if successful
+   * @note this is run by BleOpChrtWrite
+   */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   { 
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: write chsr " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes ); 
   }
 
-  // enlist a read from a characteristics
+  /** enlist a read from a characteristics
+   * @param srvUuid  service UUID
+   * @param chrtUuid charcateristics UUID
+   * @return true if successful
+   */
   public boolean enlistRead( UUID srvUuid, UUID chrtUuid )
   {
     BluetoothGattCharacteristic chrt = mCallback.getReadChrt( srvUuid, chrtUuid );
@@ -301,7 +320,10 @@ public class BricComm extends TopoDroidComm
      enqueueOp( new BleOpNotify( mContext, this, service, characteristic, true ) );
   }
 
-  // from onServicesDiscovered
+  /** react to service discovery
+   * @param gatt   bluetooth GATT
+   * @note from onServicesDiscovered
+   */
   public int servicesDiscovered( BluetoothGatt gatt )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm service discovered");
@@ -358,7 +380,11 @@ public class BricComm extends TopoDroidComm
     return 0;
   }
 
-  // from onCharacteristicRead
+  /** react after a characteristics has been read
+   * @param uuid_str characteristics string UUID
+   * @param bytes    read bytes
+   * @note from onCharacteristicRead
+   */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: readed chrt " + uuid_str );
@@ -405,21 +431,35 @@ public class BricComm extends TopoDroidComm
     clearPending();
   }
 
-  // from onCharacteristicWrite
+  /** react after a characteristics has been written
+   * @param uuid_str characteristics string UUID
+   * @param bytes    written bytes
+   * @note from onCharacteristicWrite
+   */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm chrt written " + uuid_str + " " + BleUtils.bytesToString( bytes ) );
     clearPending();
   }
 
-  // from onDescriptorRead
+  /** react after a descriptor has been read
+   * @param uuid_str       characteristics string UUID
+   * @param uuid_chrt_str  descriptor string UUID
+   * @param bytes          read bytes
+   * @note from onDescriptorRead
+   */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm desc readed " + uuid_chrt_str + " " + BleUtils.bytesToString( bytes ) );
     clearPending();
   }
 
-  // from onDescriptorWrite
+  /** react after a descriptor has been written
+   * @param uuid_str       characteristics string UUID
+   * @param uuid_chrt_str  descriptor string UUID
+   * @param bytes          read bytes
+   * @note from onDescriptorWrite
+   */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm desc written " + uuid_chrt_str );

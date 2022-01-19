@@ -779,6 +779,9 @@ public class ParserTh extends TglParser
     } catch ( IOException e ) {
       TDLog.Error( "Th IO error " + e.getMessage() );
       throw new ParserException( filename, linenr );
+    } catch ( NullPointerException e ) { // FIXME ANDROID-11
+      TDLog.Error( "Th IO null ptr " + e.getMessage() ); 
+      throw new ParserException( filename, linenr );
     }
     // TDLog.v( "Th Done readFile " + filename );
 

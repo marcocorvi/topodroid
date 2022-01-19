@@ -236,10 +236,14 @@ public class BleCallback extends BluetoothGattCallback
     closeGatt();
     // TDLog.v( "BLE callback: connect gatt");
     // device.connectGatt( ctx, mAutoConnect, this );
-    if ( Build.VERSION.SDK_INT < 23 ) {
-      mGatt = device.connectGatt( ctx, mAutoConnect, this );
-    } else {
-      mGatt = device.connectGatt( ctx, mAutoConnect, this, BluetoothDevice.TRANSPORT_LE ); 
+    try { 
+      if ( Build.VERSION.SDK_INT < 23 ) {
+        mGatt = device.connectGatt( ctx, mAutoConnect, this );
+      } else {
+        mGatt = device.connectGatt( ctx, mAutoConnect, this, BluetoothDevice.TRANSPORT_LE ); 
+      }
+    } catch ( SecurityException e ) { // FIXME ANDROID-12
+      TDLog.Error("Sec error " + e.getMessage() );
     }
   }
 

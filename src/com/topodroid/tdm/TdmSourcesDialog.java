@@ -73,7 +73,8 @@ class TdmSourcesDialog extends MyDialog
   {
     mTdmSourceAdapter = new TdmSourceAdapter( mContext, R.layout.tdsource_adapter, mSources );
     // List< String > surveys = mParent.mAppData.selectAllSurveys(); 
-    List< String > surveys = TopoDroidApp.mData.selectAllSurveys(); 
+    if ( TopoDroidApp.mData == null ) return; // ANDROID-11 can be null
+    List< String > surveys = TopoDroidApp.mData.selectAllSurveys();
     for ( String name : surveys ) {
       if ( ! mParent.hasSource( name ) ) {
         TDLog.v("source name " + name );
