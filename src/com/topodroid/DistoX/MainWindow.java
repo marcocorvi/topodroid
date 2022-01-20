@@ -1159,6 +1159,9 @@ public class MainWindow extends Activity
             if (path == null) {
               // filename = FilenameUtils.getName(uri.toString());
               filename = uri.getLastPathSegment();
+              int ros = filename.indexOf(":"); // drop the "content" header
+              if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+              TDLog.v("import path NULL filename " + filename );
               if ( filename != null ) {
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
@@ -1168,10 +1171,15 @@ public class MainWindow extends Activity
               // filename = (new File(path)).getName(); // FILE to get the survey name
               int pos = path.lastIndexOf('/');
               filename = ( pos >= 0 )? path.substring(pos+1) : path;
+              int ros = filename.indexOf(":"); // drop the "content" header
+              if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+              TDLog.v("import path " + path + " filename " + filename );
               TDLog.Error( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
             }
           } else {
             filename = uri.getLastPathSegment();
+            int ros = filename.indexOf(":"); // drop the "content" header
+            if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
             int pos = filename.lastIndexOf("."); 
             int qos = filename.lastIndexOf("/");
             String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase() : ""; // extension with leading '.'

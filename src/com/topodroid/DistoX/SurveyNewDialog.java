@@ -159,7 +159,7 @@ class SurveyNewDialog extends MyDialog
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return;
     }
-    name = TDUtil.noSpaces( name ).trim(); // FIXME FORCE NAMES WITHOUT SPACES
+    name = TDUtil.noSpaces( name ); // FIXME FORCE NAMES WITHOUT UNACCEPTABLE CHARACTERS
     if ( ! saveSurvey( name ) ) {
       return;
     }
@@ -182,7 +182,7 @@ class SurveyNewDialog extends MyDialog
   private boolean saveSurvey( String name )
   {
     // if ( name == null ) return false; // guaranteed
-    // name = TDUtil.noSpaces( name ).trim(); // already checked
+    // name = TDUtil.noSpaces( name ); // already checked
     if ( name.length() == 0 ) {
       mEditName.setError( mContext.getResources().getString( R.string.error_name_required ) );
       return false;

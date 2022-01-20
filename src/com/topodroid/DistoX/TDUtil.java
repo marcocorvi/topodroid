@@ -84,7 +84,7 @@ public class TDUtil
   public static String noSpaces( String s )
   {
     return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
+      : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "").replaceAll(":","-");
   }
 
   public static String dropSpaces( String s )

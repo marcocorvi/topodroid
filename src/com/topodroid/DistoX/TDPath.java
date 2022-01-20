@@ -718,12 +718,6 @@ public class TDPath
 
   // -------------- PRIVATE ---------------------------------------------------------
 
-  // private static String noSpaces( String s )
-  // {
-  //   return ( s == null )? null 
-  //     : s.trim().replaceAll("\\s+", "_").replaceAll("/", "-").replaceAll("\\*", "+").replaceAll("\\\\", "");
-  // }
-
   /** delete symbol files from a folder
    * @param dirname   symbol folder name
    */

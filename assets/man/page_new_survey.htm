@@ -25,8 +25,10 @@ the filesystem is case insensitive. TopoDroid raises a warning if the new survey
 except for the characters case.<br><p>
 
 <b>WARNING</b>.
-The name of the survey cannot contain the character '/' (slash), which is the pathname separator.
-Slashes are replaced with dashes '-'.<br><p>
+The name of the survey cannot contain spaces, nor the characters '/' (slash, which is the pathname separator), ':' (colon),
+'*' (star), and '\' (backslash).
+Backslashes are dropped.
+Spaces are replaced with '_' (underscore), slashes and colons with dashes '-', and stars with '+' (plus).<br><p>
 
 
 The <i>date</i> is written with format "yyyy.mm.dd". For example January 6, 2015 is "2015.01.06". It is preset to the current date.<br><p>

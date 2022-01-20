@@ -170,15 +170,16 @@ public class TDSetting
   // prefs default values
   public static String  mDefaultTeam = "";
 
-  public static final int MIN_SIZE_BUTTONS = 32;
+  public static final int MIN_SIZE_BUTTONS = 32; // minimum size of buttons
   public static final int MIN_SIZE_TEXT    = 12;
+  public static final int BTN_SIZE_UNUSED  = 52; // a value that differs from the next five
   public static final int BTN_SIZE_SMALL   = 36;
   public static final int BTN_SIZE_NORMAL  = 42;
   public static final int BTN_SIZE_MEDIUM  = 48;
   public static final int BTN_SIZE_LARGE   = 64;
   public static final int BTN_SIZE_HUGE    = 84;
-  public static int mSizeBtns     = 3;      // action bar buttons scale (3: medium)
-  public static int mSizeButtons  = 42;     // default 42 minimum MIN_SIZE_BUTTONS
+  public static int mSizeBtns     = 0;      // action bar buttons scale (3: medium)
+  public static int mSizeButtons  = BTN_SIZE_UNUSED;     // default 52 
   public static int mTextSize     = 16;     // list text size 
   public static boolean mKeyboard = true;
   public static boolean mNoCursor = false;
