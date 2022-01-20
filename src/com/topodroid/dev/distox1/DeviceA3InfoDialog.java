@@ -51,6 +51,11 @@ public class DeviceA3InfoDialog extends MyDialog
   private TextView tv_statusCalib;
   private TextView tv_statusSilent;
 
+  /** cstr
+   * @param context   context
+   * @param parent    parent activity
+   * @param device    current device (DistoX A3)
+   */
   public DeviceA3InfoDialog( Context context, DeviceActivity parent, Device device )
   {
     super( context, R.string.DeviceA3InfoDialog );
@@ -96,16 +101,28 @@ public class DeviceA3InfoDialog extends MyDialog
     mBTresetMemory.setOnClickListener( this );
   }
 
+  /** update the display of the DistoX2 info
+   * @param info   DistoX info
+   */
   void updateInfo( DeviceA3Info info )
   {
     if ( info == null ) return;
-    tv_serial.setText( info.mCode );
-    tv_statusAngle.setText(   info.mAngle   );
-    tv_statusCompass.setText( info.mCompass );
-    tv_statusCalib.setText(   info.mCalib   );
-    tv_statusSilent.setText(  info.mSilent  );
+    mParent.runOnUiThread( new Runnable() {
+      public void run() {
+        tv_serial.setText( info.mCode );
+        tv_statusAngle.setText(   info.mAngle   );
+        tv_statusCompass.setText( info.mCompass );
+        tv_statusCalib.setText(   info.mCalib   );
+        tv_statusSilent.setText(  info.mSilent  );
+      }
+    } );
   }
 
+  /** react to a user tap: 
+   *    dismiss the dialog if the tapped button is "CANCEL"
+   *    clear the memory if the dialog is "MEMORY"
+   * @param view tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -136,6 +153,8 @@ public class DeviceA3InfoDialog extends MyDialog
     }
   }
 
+  /** clear the memory - forward the request to the parent app 
+   */
   private void doClearMemory()
   {
     mParent.doClearA3Memory( );

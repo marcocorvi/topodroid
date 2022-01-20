@@ -7,6 +7,7 @@ import com.topodroid.dev.ble.BleConst;
 import com.topodroid.dev.ble.BleUtils;
 // import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.R;
+import com.topodroid.DistoX.DeviceActivity;
 
 import com.topodroid.ui.MyDialog;
 
@@ -18,10 +19,11 @@ import android.widget.Button;
 import android.view.View;
 
 public class BricInfoDialog extends MyDialog
-                         implements View.OnClickListener
+                            implements View.OnClickListener
 {
   private final Resources mRes;
   private final Device mDevice;
+  private final DeviceActivity mParent;
 
   private TextView tv_device;
   private TextView tv_ble;
@@ -29,9 +31,16 @@ public class BricInfoDialog extends MyDialog
   private TextView tv_hw;
   private TextView tv_battery;
 
-  public BricInfoDialog( Context ctx, Resources res, Device device )
+  /** cstr
+   * @param ctx      context
+   * @param parent   parent activity
+   * @param res      application resources
+   * @param device   current device (BRIC4)
+   */
+  public BricInfoDialog( Context ctx, DeviceActivity parent, Resources res, Device device )
   {
     super( ctx, R.string.BricInfoDialog );
+    mParent = parent;
     mRes    = res;
     mDevice = device;
   }
@@ -60,6 +69,9 @@ public class BricInfoDialog extends MyDialog
     // TDLog.v( "Bric info dialog created");
   }
 
+  /** react to a user tap - always dismiss the dialog
+   * @param view  tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -72,7 +84,10 @@ public class BricInfoDialog extends MyDialog
   //   app.getBricInfo( this );
   // }
 
-  public void getInfo( BricComm comm )
+  /** enqueue a request for the BRIC info
+   * @param comm   BRIC communication
+   */
+  static public void getInfo( BricComm comm )
   {
     // TDLog.v( "BricInfo read - srv: " + BleConst.INFO_SRV_UUID.toString() );
     // comm.enlistRead( BleConst.INFO_SRV_UUID, BleConst.INFO_23_UUID ); // manufacturer
@@ -89,28 +104,42 @@ public class BricInfoDialog extends MyDialog
     comm.enlistRead( BleConst.BATTERY_SRV_UUID, BleConst.BATTERY_LVL_UUID );
   }
 
-  public void setValue( int type, byte[] bytes )
+  /** update the display of an info
+   * @param type   info type
+   * @param bytes  info value
+   */
+  public void setValue( int type, final byte[] bytes )
   {
     switch (type) {
       case BricComm.DATA_DEVICE_00:
         // TDLog.v( "BricInfo Device " + BleUtils.bytesToAscii( bytes ) );
-        tv_device.setText( String.format( mRes.getString( R.string.bric_device ), BleUtils.bytesToAscii( bytes ) ) );
+        mParent.runOnUiThread( new Runnable() { public void run() {
+          tv_device.setText( String.format( mRes.getString( R.string.bric_device ), BleUtils.bytesToAscii( bytes ) ) );
+        } } );
         break;
       case BricComm.DATA_INFO_26:
         // TDLog.v( "BricInfo Fw " + BleUtils.bytesToAscii( bytes ) );
-        tv_ble.setText( String.format( mRes.getString( R.string.bric_ble ), BleUtils.bytesToAscii( bytes ) ) );
+        mParent.runOnUiThread( new Runnable() { public void run() {
+          tv_ble.setText( String.format( mRes.getString( R.string.bric_ble ), BleUtils.bytesToAscii( bytes ) ) );
+        } } );
         break;
       case BricComm.DATA_INFO_27:
         // TDLog.v( "BricInfo Hardware " + BleUtils.bytesToAscii( bytes ) );
-        tv_hw.setText( String.format( mRes.getString( R.string.bric_hw ), BleUtils.bytesToAscii( bytes ) ) );
+        mParent.runOnUiThread( new Runnable() { public void run() {
+          tv_hw.setText( String.format( mRes.getString( R.string.bric_hw ), BleUtils.bytesToAscii( bytes ) ) );
+        } } );
         break;
       case BricComm.DATA_INFO_28:
         // TDLog.v( "BricInfo Fiwrmware " + BleUtils.bytesToAscii( bytes ) );
-        tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
+        mParent.runOnUiThread( new Runnable() { public void run() {
+          tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
+        } } );
         break;
       case BricComm.DATA_BATTERY_LVL:
         // TDLog.v( "BricInfo Battery " + (int)(bytes[0]) );
-        tv_battery.setText( String.format( mRes.getString( R.string.bric_battery ), (int)(bytes[0]) ) );
+        mParent.runOnUiThread( new Runnable() { public void run() {
+          tv_battery.setText( String.format( mRes.getString( R.string.bric_battery ), (int)(bytes[0]) ) );
+        } } );
         break;
       default:
         break;

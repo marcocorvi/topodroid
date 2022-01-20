@@ -4958,7 +4958,8 @@ public class DataHelper extends DataSetObservable
    }
 
    /** load survey data from a sql file
-    * @param filename  name of the sql file
+    * @param filename    name of the sql file
+    * @param db_version  current database version
     */
    long loadFromFile( String filename, int db_version )
    {

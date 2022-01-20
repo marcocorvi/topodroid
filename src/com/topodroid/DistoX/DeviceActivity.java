@@ -606,7 +606,7 @@ public class DeviceActivity extends Activity
           // currDeviceA().dump();
           new DeviceX310InfoDialog( this, this, currDeviceA() ).show();
         } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
-          BricInfoDialog info = new BricInfoDialog( this, getResources(), currDeviceA() );
+          BricInfoDialog info = new BricInfoDialog( this, this, getResources(), currDeviceA() );
           info.show();
           (new InfoReadBricTask( mApp, info )).execute();
         } else {

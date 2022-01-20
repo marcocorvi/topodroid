@@ -32,7 +32,7 @@ import android.widget.TextView;
 import android.widget.Button;
 
 public class DeviceX310InfoDialog extends MyDialog
-                           implements View.OnClickListener
+                                  implements View.OnClickListener
 {
   // private RadioButton mRBa3;
   // private RadioButton mRBx310;
@@ -46,13 +46,17 @@ public class DeviceX310InfoDialog extends MyDialog
   private TextView tv_firmware;
   private TextView tv_hardware;
 
+  /** cstr
+   * @param context   context
+   * @param parent    parent activity
+   * @param device    current device (DistoX2 X310)
+   */
   public DeviceX310InfoDialog( Context context, DeviceActivity parent, Device device )
   {
     super( context, R.string.DeviceX310InfoDialog );
     mParent = parent;
     mDevice = device;
   }
-
 
   @Override
   public void onCreate( Bundle bundle )
@@ -84,14 +88,24 @@ public class DeviceX310InfoDialog extends MyDialog
     mBTback.setOnClickListener( this );
   }
 
+  /** update the display of the DistoX2 info
+   * @param info   DistoX2 info
+   */
   void updateInfo( DeviceX310Info info )
   {
     if ( info == null ) return;
-    tv_code.setText(     info.mCode );
-    tv_firmware.setText( info.mFirmware );
-    tv_hardware.setText( info.mHardware );
+    mParent.runOnUiThread( new Runnable() {
+      public void run() {
+        tv_code.setText(     info.mCode );
+        tv_firmware.setText( info.mFirmware );
+        tv_hardware.setText( info.mHardware );
+      }
+    } );
   }
 
+  /** react to a user tap: dismiss the dialog if the tapped button is "BACK"
+   * @param view tapped view
+   */
   @Override
   public void onClick(View view)
   {

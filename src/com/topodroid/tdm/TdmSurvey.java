@@ -182,12 +182,13 @@ public class TdmSurvey
     mShots.add( new TdmShot( from, to, d, b, c, e, this ) );
   }
 
-  /** get a station by the the name
+  /** get a station by the the name, or null if the name is null/empty or the station is not found
    * @param name    station name
    */
   TdmStation getStation( String name )
   {
     if ( name == null || name.equals("") ) return null;
+    if ( mStations == null ) return null; // safety check
     for ( TdmStation st : mStations ) {
       if ( st.mName.equals( name ) ) return st;
     }

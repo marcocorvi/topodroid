@@ -19,6 +19,11 @@ class Scanline
   private int pos,  // string position
               len;  // string length
 
+  /** cstr
+   * @param line   text line
+   * @param p      start position
+   * @param l      end position, eg, length of the text line
+   */
   Scanline( String line, int p, int l )
   {
     val = line;
@@ -27,17 +32,23 @@ class Scanline
     skipSpaces();
   }
 
+  /** skip the spaces
+   */
   private void skipSpaces( )
   {
     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
   }
 
+  /** skip one comma (if present) and following spaces
+   */
   private void skipCommaAndSpaces( )
   {
     if ( pos < len && val.charAt(pos) == ',' ) ++pos;
     while ( pos < len && val.charAt(pos) == ' ' ) ++ pos;
   }
   
+  /** @return the position of the next quote
+   */
   private int nextQuote()
   {
     int next = pos;
@@ -45,8 +56,9 @@ class Scanline
     return next;
   }
 
-  // return the position of next comma or space
-  // the return value is guaranteed >= pos
+  /** @return the position of next comma or space
+   *  the return value is guaranteed >= pos
+   */
   private int nextCommaOrSpace()
   {
     int next = pos;
@@ -54,6 +66,8 @@ class Scanline
     return next;
   }
 
+  /** @return the next item on the scanline as a string
+   */
   String stringValue( ) 
   {
     ++pos; // skip '"'
@@ -65,8 +79,9 @@ class Scanline
     return ret;
   }
 
-  // @param ret default return value
-  // returns the next item on the scanline as a long
+  /** @return the next item on the scanline as a long
+   * @param ret default return value
+   */
   long longValue( long ret )
   {
     int next_pos = nextCommaOrSpace( );
@@ -88,8 +103,9 @@ class Scanline
     return ret;
   }
 
-  // @param ret default return value
-  // returns the next item on the scanline as a double
+  /** @return the next item on the scanline as a double
+   * @param ret default return value
+   */
   double doubleValue( double ret )
   {
     int next_pos = nextCommaOrSpace( );

@@ -2563,9 +2563,13 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // @param do_load whether to load plot from file
-  // @param tt      used only by leg x-sections when created to insert leg intersection point
-  // called by onCreate, switchPlotType, onBackPressed and pushInfo
+  /** start the sketch display 
+   * @param do_load whether to load plot from file
+   * @param tt      used only by leg x-sections when created to insert leg intersection point
+   * @note called by onCreate, switchPlotType, onBackPressed and pushInfo
+   * 
+   * FIXME null ptr in 5.1.40 on ANDROID-11 at line 2507 
+   */
   private void doStart( boolean do_load, float tt )
   {
     // TDLog.v( "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -2635,8 +2639,13 @@ public class DrawingWindow extends ItemDrawer
   //   DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(x,y), DrawingUtil.toSceneY(x,y), DrawingLevel.LEVEL_DEFAULT );
   //   mDrawingSurface.addDrawingPath( path );
   // }
-  
-  // called by doRestart, doStart, doRecover
+
+  /** make the refrence for a x-section
+   * @param list   list of shots of the section
+   * @param tt     abscissa of the leg intercept
+   * @param skip   control param about how to make the reference (?)
+   * @note called by doRestart, doStart, doRecover
+   */
   private void makeSectionReferences( List< DBlock > list, float tt, int skip )
   {
 
@@ -2835,6 +2844,11 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
   }
 
+  /** read the plot from file(s) - the file name(s) is taken from the plot names stored in the object
+   * @param type    plot type
+   * @param list    shots list
+   * @return true on success
+   */
   private boolean loadFiles( long type, List< DBlock > list )
   {
     // TDLog.v( "load files - type " + type );
@@ -2953,6 +2967,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** save the current reference
+   */
   private void updateReference()
   {
     // TDLog.v("updateReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -2965,7 +2981,11 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // called by updateReefernce and moveTo
+  /** save the current refernce in the plot info struct (and the database)
+   * @param plot info struct
+   * @param pid  plot ID
+   * @note called by updateReefernce and moveTo
+   */
   private void saveReference( PlotInfo plot, long pid )
   {
     // TDLog.v( "save Reference()" );
@@ -2976,6 +2996,9 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
   }
 
+  /** restore the current refernce from the plot info struct 
+   * @param plot info struct
+   */
   private void resetReference( PlotInfo plot )
   {
     // TDLog.v("resetReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -2991,6 +3014,9 @@ public class DrawingWindow extends ItemDrawer
   // previewPaint is not thread safe, but it is ok if two threads make two preview paints
   // eventually only one remains
   static private Paint previewPaint = null;
+
+  /** @return the preview paint
+   */
   static public  Paint getPreviewPaint()
   {
     if ( previewPaint != null ) return previewPaint;
@@ -3004,8 +3030,12 @@ public class DrawingWindow extends ItemDrawer
     return paint;
   }
 
-  // called only onTouchUp
-  // x,y scene points
+  /** select at a scene point (x,y)
+   * @param x    X-coord of the scene point
+   * @param y    Y-coord of the scene point
+   * @param size selection radiius
+   * @note called only onTouchUp
+   */
   private void doSelectAt( float x, float y, float size )
   {
     // TDLog.v("doSelectAt " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
