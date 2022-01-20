@@ -113,7 +113,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bric_clear_ok">Memory cleared</string>
     <string name="bric_clear_fail">Failed: memory clear</string>
 
-    <string name="calibration_title">Instruments calibration</string>
+    <string name="calibration_title">Instruments offset</string>
     <string name="calibration_length">Tape</string>
     <string name="calibration_azimuth">Compass</string>
     <string name="calibration_clino">Clino</string>
