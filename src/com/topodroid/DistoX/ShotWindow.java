@@ -2440,6 +2440,15 @@ public class ShotWindow extends Activity
     startActivity( drawIntent );
   }
 
+  // /** react to a change in the configuration
+  //  * @param cfg   new configuration
+  //  */
+  // @Override
+  // public void onConfigurationChanged( Configuration new_cfg )
+  // {
+  //   super.onConfigurationChanged( new_cfg );
+  // }
+
   // ------------------------------------------------------------------
   void startAudio( DBlock blk )
   {

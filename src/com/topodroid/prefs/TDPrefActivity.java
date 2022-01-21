@@ -104,6 +104,7 @@ public class TDPrefActivity extends Activity
       if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = this; }
       setTheTitle();
     } else {
+      setResult( RESULT_CANCELED );
       finish();
     }
   }
@@ -111,13 +112,17 @@ public class TDPrefActivity extends Activity
   @Override
   public void onBackPressed () 
   {
-    if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL )    { mPrefActivityAll = null; }
-    if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) { mPrefActivitySurvey = null; }
+    if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) { 
+      mPrefActivityAll = null;
+    } else if (mPrefCategory == TDPrefCat.PREF_CATEGORY_SURVEY ) {
+      mPrefActivitySurvey = null;
+    }
     if ( mPrefs != null ) {
       for ( TDPref pref : mPrefs ) if ( pref.wtype == TDPref.EDITTEXT ) {
         pref.commitValueString();
       }
     }
+    setResult( RESULT_OK, null ); // result is always OK
     // finish();
     super.onBackPressed();
   }
@@ -364,12 +369,12 @@ public class TDPrefActivity extends Activity
   }
 
   // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
+  // public void onConfigurationChanged( Configuration cfg )
   // {
-  //   super.onConfigurationChanged( new_cfg );
-  //   if ( new_cfg.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
+  //   super.onConfigurationChanged( cfg );
+  //   if ( cfg.orientation == Configuration.ORIENTATION_LANDSCAPE ) {
   //     TDLog.Error( "landscape" );
-  //   } else if ( new_cfg.orientation == Configuration.ORIENTATION_PORTRAIT ) {
+  //   } else if ( cfg.orientation == Configuration.ORIENTATION_PORTRAIT ) {
   //     TDLog.Error( "portrait" );
   //   } else {
   //     TDLog.Error( "unknown" );

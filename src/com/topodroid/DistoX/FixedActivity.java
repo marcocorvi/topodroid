@@ -156,6 +156,17 @@ public class FixedActivity extends Activity
     refreshList();
   }
 
+  // /** react to a change in the configuration
+  //  * @param cfg   new configuration
+  //  */
+  // @Override
+  // public void onConfigurationChanged( Configuration new_cfg )
+  // {
+  //   super.onConfigurationChanged( new_cfg );
+  // }
+
+  /** refresh the list of fixed points
+   */
   private void refreshList()
   {
     List< FixedInfo > fxds = TopoDroidApp.mData.selectAllFixed( TDInstance.sid, TDStatus.NORMAL );

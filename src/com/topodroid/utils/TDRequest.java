@@ -23,7 +23,7 @@ public class TDRequest
   public static final int REQUEST_GET_IMPORT = 8;
   public static final int REQUEST_GET_EXPORT = 9;
   public static final int REQUEST_GET_GPS_IMPORT = 10;
-  // public static final int REQUEST_SETTINGS = 11;
+  public static final int REQUEST_SETTINGS = 11;
 
   public static final int REQUEST_TDCONFIG = 200;
   public static final String TDCONFIG_PATH = "TdManagerConfig"; // request extra key

@@ -563,6 +563,15 @@ public class MainWindow extends Activity
   private boolean mWithLogs     = false;
   // private boolean mWithBackupsClear = false; // CLEAR_BACKUPS
 
+  // /** react to a change in the configuration
+  //  * @param cfg   new configuration
+  //  */
+  // @Override
+  // public void onConfigurationChanged( Configuration new_cfg )
+  // {
+  //   super.onConfigurationChanged( new_cfg );
+  // }
+
   /** set the adapter of the menu pull-down list
    */
   void setMenuAdapter( )
@@ -636,7 +645,7 @@ public class MainWindow extends Activity
         TDSetting.resetFlag();
         intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
         intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_ALL );
-        startActivity( intent );
+        startActivityForResult( intent, TDRequest.REQUEST_SETTINGS );
       } else if ( p++ == pos ) { // HELP
         new HelpDialog(mActivity, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();
       }
@@ -1015,7 +1024,10 @@ public class MainWindow extends Activity
       setMenuAdapter( );
       closeMenu();
     }
-    if ( TDSetting.isFlagLocale() ) TDLocale.resetLocale();
+    if ( TDSetting.isFlagLocale() ) {
+      TDLog.v("main start reset locale");
+      TDLocale.resetLocale();
+    }
   }
 
   @Override
@@ -1119,9 +1131,13 @@ public class MainWindow extends Activity
 
   // ------------------------------------------------------------------
  
+  /** attach base context
+   * @param ctx   context
+   */
   @Override
   protected void attachBaseContext( Context ctx )
   {
+    TDLog.v("main attach base context");
     TDInstance.context = ctx;
     TDLocale.resetLocale( );
     super.attachBaseContext( TDInstance.context );
@@ -1148,6 +1164,14 @@ public class MainWindow extends Activity
         // FIXME mApp.mBluetooth = ( result == Activity.RESULT_OK );
         // setBTMenus( DeviceUtil.isAdapterEnabled() );
         updateDisplay( );
+        break;
+      case TDRequest.REQUEST_SETTINGS:
+        if ( result == Activity.RESULT_OK ) {
+          if ( TDSetting.isFlagMenu() ) {
+            TDLog.v("main set menu adapter");
+            setMenuAdapter( );
+          }
+        }
         break;
       case TDRequest.REQUEST_GET_IMPORT:
         if ( result == Activity.RESULT_OK ) {

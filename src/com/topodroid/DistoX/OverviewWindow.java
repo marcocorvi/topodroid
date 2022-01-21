@@ -1355,6 +1355,9 @@ public class OverviewWindow extends ItemDrawer
     }
   }
 
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )
   {

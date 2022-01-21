@@ -972,10 +972,13 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** attach base context
+   * @param ctx   context
+   */
   @Override
   protected void attachBaseContext( Context ctx )
   {
-    // TDLog.v("APP attach base context");
+    TDLog.v("APP attach base context");
     TDInstance.context = ctx;
     TDLocale.resetLocale();
     super.attachBaseContext( TDInstance.context );

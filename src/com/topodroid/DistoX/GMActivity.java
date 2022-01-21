@@ -1353,6 +1353,15 @@ public class GMActivity extends Activity
     }
   }
 
+  // /** react to a change in the configuration
+  //  * @param cfg   new configuration
+  //  */
+  // @Override
+  // public void onConfigurationChanged( Configuration new_cfg )
+  // {
+  //   super.onConfigurationChanged( new_cfg );
+  // }
+
   // public void notifyDisconnected()
   // {
   // }

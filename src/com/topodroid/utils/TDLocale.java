@@ -32,15 +32,22 @@ public class TDLocale
   static Locale mLocale = null;
   static String mLocaleStr = null;
 
+  /** @return the current locale
+   */
   public static Locale getLocale() { return mLocale; }
 
+  /** @return the locale country ISO code
+   */
   public static String getLocaleCode() { return mLocale.toString().substring(0,2); }
 
-  // called by MainWindow
+  /** reset the locale
+   * @note called by MainWindow
+   */
   public static void resetLocale( )
   {
     if ( ! TDSetting.isFlagLocale() ) return;
     TDLog.v( "reset locale str <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
+
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
     DisplayMetrics dm = res.getDisplayMetrics();
@@ -56,13 +63,30 @@ public class TDLocale
     // }
   }
 
-  // called by TDSetting
+  /** set the locale
+   * @param locale   country ISO code
+   * @note called by TDSetting
+   */
   public static void setLocale( String locale )
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    // TDLog.v( "set locale str <" + mLocaleStr + "> " + mLocale.toString() );
-    resetLocale( );
+    TDLog.v( "set locale str <" + mLocaleStr + "> " + mLocale.toString() );
+
+    // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
+    Resources res = TDInstance.getResources();
+    DisplayMetrics dm = res.getDisplayMetrics();
+    // if ( TDandroid.ABOVE_API_16 ) { // minSdkVersion is 18
+      Configuration conf = new Configuration( res.getConfiguration() );
+      conf.setLocale( mLocale );
+      // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
+      res.updateConfiguration( conf, dm );
+    // } else {
+    //   Configuration conf = res.getConfiguration();
+    //   conf.locale = mLocale; 
+    //   res.updateConfiguration( conf, dm );
+    // }
+    TDSetting.clearFlagLocale();
   }
 
 }

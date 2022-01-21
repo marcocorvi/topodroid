@@ -83,21 +83,25 @@ public class TDSetting
     mMainFlag = 0; 
   }
 
-  /** @return true if Main flag button is set
+  /** @return true if Main flag button bit is set
    */
   public static boolean isFlagButton() { return ( mMainFlag & FLAG_BUTTON ) != 0; }
 
-  /** @return true if Main flag menu is set
+  /** @return true if Main flag menu bit is set
    */
   public static boolean isFlagMenu() { return ( mMainFlag & FLAG_MENU ) != 0; }
 
-  /** @return true if Main flag text is set
+  /** @return true if Main flag text bit is set
    */
   public static boolean isFlagText() { return ( mMainFlag & FLAG_TEXT) != 0; }
 
-  /** @return true if Main flag language is set
+  /** @return true if Main flag language bit is set
    */
   public static boolean isFlagLocale() { return ( mMainFlag & FLAG_LOCALE ) != 0; }
+
+  /** clear language bit in the Main flag
+   */
+  public static void clearFlagLocale() { mMainFlag &= ~FLAG_LOCALE; }
 
 
   public static String setTextSize( int ts )
@@ -2651,6 +2655,7 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
+    TDLog.v("set locale " + locale );
     TDLocale.setLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {

@@ -1108,12 +1108,16 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
   }
 
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
     // TDLog.v( "config changed " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+    // setMenuAdapter( getResources(), mType );
   }
 
   /** set the title of the window

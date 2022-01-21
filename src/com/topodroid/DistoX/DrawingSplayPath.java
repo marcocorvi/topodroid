@@ -324,9 +324,9 @@ public class DrawingSplayPath extends DrawingPath
         break;
       case TDSetting.DASHING_VIEW:
         if ( PlotType.isProfile( type ) ) {
-          this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
           this.setSplayPaintPlan( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
         break;
       // case TDSetting.DASHING_NONE:
