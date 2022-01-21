@@ -59,7 +59,7 @@ public class Cave3DStation extends Vector3D
     dos.writeDouble( x );
     dos.writeDouble( y );
     dos.writeDouble( z );
-    TDLog.v("ser. station " + mId + " " + mSid + " <" + full_name + "> " + x + " " + y + " " + z );
+    // TDLog.v("ser. station " + mId + " " + mSid + " <" + full_name + "> " + x + " " + y + " " + z );
   }
 
   /** serialize a 3D station
@@ -76,7 +76,7 @@ public class Cave3DStation extends Vector3D
     double x = dis.readDouble();
     double y = dis.readDouble();
     double z = dis.readDouble();
-    TDLog.v("deser. station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
+    // TDLog.v("deser. station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
     return new Cave3DStation( full_name, x, y, z, id, sid, flag, "" );
   }
 

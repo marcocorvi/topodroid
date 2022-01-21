@@ -57,7 +57,7 @@ public class Cave3DSurvey
   {
     int id = dis.readInt();
     String name = dis.readUTF();
-    TDLog.v("Cave3D survey deser. " + id + " " + name );
+    // TDLog.v("Cave3D survey deser. " + id + " " + name );
     return new Cave3DSurvey( name, id, -1 );
   }
 

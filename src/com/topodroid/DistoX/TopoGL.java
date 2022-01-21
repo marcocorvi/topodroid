@@ -368,7 +368,7 @@ public class TopoGL extends Activity
         mSurveyBase = extras.getString( "SURVEY_BASE" ); // TopoDroid CWD fullpath
         mThconfigName = extras.getString( "INPUT_THCONFIG" );  // thconfig
         mSurveyName = extras.getString( "INPUT_SURVEY" );
-        TDLog.v("extras: base " + mSurveyBase + " survey " + mSurveyName );
+        // TDLog.v("extras: base " + mSurveyBase + " survey " + mSurveyName );
       // }
     }
 
@@ -2773,7 +2773,7 @@ public class TopoGL extends Activity
     mExport = export;
     mExport.mName = mSurveyName; 
     // if ( TDSetting.mExportUri ) {
-      TDLog.v( "export with URI - survey " + mSurveyName );
+      // TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
     //} else {
     //  TDLog.v( "export with task - survey " + mSurveyName );
@@ -2824,7 +2824,7 @@ public class TopoGL extends Activity
       case REQUEST_EXPORT_FILE:
         // if ( TDSetting.mExportUri ) {
           if ( uri != null && mExport != null ) {
-            TDLog.v("export survey. uri " + uri.toString() );
+            // TDLog.v("export survey. uri " + uri.toString() );
             (new ExportTask( this, mParser, uri, mExport )).execute(); 
           }
         // }
@@ -2863,7 +2863,7 @@ public class TopoGL extends Activity
     pos = pathname.lastIndexOf("/");
     if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
     for ( int trial = 0; trial < 2; ++ trial ) { 
-      TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
+      // TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
       if ( pathname.toLowerCase().endsWith( ".th" ) 
         || pathname.toLowerCase().endsWith( "thconfig" )
         || pathname.toLowerCase().endsWith( "tdconfig" )

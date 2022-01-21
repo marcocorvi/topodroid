@@ -142,7 +142,7 @@ public class ExportDialogPlot extends MyDialog
   @Override
   public void onClick(View v) 
   {
-    TDLog.v("Export plot: " + mPlotName + " selected " + mSelected + " pos " + mSelectedPos  );
+    // TDLog.v("Export plot: " + mPlotName + " selected " + mSelected + " pos " + mSelectedPos  );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();

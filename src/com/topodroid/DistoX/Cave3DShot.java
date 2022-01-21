@@ -75,7 +75,7 @@ public class Cave3DShot
     dos.writeDouble( cln );
     dos.writeLong( mFlag );
     dos.writeLong( mMillis );
-    TDLog.v("ser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
+    // TDLog.v("ser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
   }
 
   static Cave3DShot deserialize( DataInputStream dis, int version ) throws IOException
@@ -88,7 +88,7 @@ public class Cave3DShot
     double cln  = dis.readDouble( );
     long flag   = dis.readLong( );
     long millis = dis.readLong( );
-    TDLog.v("deser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
+    // TDLog.v("deser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
     Cave3DShot shot = new Cave3DShot( from, to, len, ber, cln, flag, millis );
     shot.mSurveyId = id;
     return shot;

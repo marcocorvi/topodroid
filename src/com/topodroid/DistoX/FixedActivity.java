@@ -396,9 +396,9 @@ public class FixedActivity extends Activity
           }
         // } catch ( NumberFormatException e ) {
         } catch ( FileNotFoundException e ) {
-          TDLog.v( "File not found " + e.getMessage() );
+          TDLog.Error( "File not found " + e.getMessage() );
         } catch ( IOException e ) { 
-          TDLog.v( "IO exception " + e.getMessage() );
+          TDLog.Error( "IO exception " + e.getMessage() );
         }
       }
     }

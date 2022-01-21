@@ -71,7 +71,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         final FileOutputStream out = TDFile.getFileOutputStream( temp );
         */
         // TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
-        TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
+        // TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
         // FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
         FileOutputStream out = TDsafUri.docFileOutputStream( pfd );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);

@@ -77,7 +77,7 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
     //   return mFilename;
     // }
     // return null;
-    TDLog.v( "save full file: " + mFullname );
+    // TDLog.v( "save full file: " + mFullname );
     int res = TDExporter.exportSurveyAsCsx( mUri, mSid, mData, mInfo, mPsd1, mPsd2, mOrigin, mFullname );
     return (res == 1)? mFullname : null;
   }

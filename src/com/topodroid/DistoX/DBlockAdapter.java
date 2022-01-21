@@ -334,7 +334,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       public void onClick( View v )
       {
         if ( pos < START ) return;
-        TDLog.v( "onClick " + v.getId() );
+        // TDLog.v( "onClick " + v.getId() );
         if ( (TextView)v == tvLength ) {
           mParent.itemClick( v, pos );
         } else {
@@ -354,7 +354,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       public boolean onEditorAction( TextView v, int action, KeyEvent event )
       {
         if ( pos < START ) return false;
-        TDLog.v( "onEditor " + v.getId() + " F " + tvFrom.getId() + " T " + tvTo.getId() );
+        // TDLog.v( "onEditor " + v.getId() + " F " + tvFrom.getId() + " T " + tvTo.getId() );
         if ( (TextView)v == tvLength ) return false;
         // action EditorInfo.IME_NULL = 0
         // TDLog.v( "FROM action " + action + " event " + ( (event == null)? "null": event.toString()) );

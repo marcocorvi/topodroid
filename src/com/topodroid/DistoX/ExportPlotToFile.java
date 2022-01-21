@@ -67,7 +67,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      TDLog.v("export plot to file cstr. Type " + type + " fullname " + name + " ext " + ext );
+      // TDLog.v("export plot to file cstr. Type " + type + " fullname " + name + " ext " + ext );
       // FIXME assert( ext != null );
       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);

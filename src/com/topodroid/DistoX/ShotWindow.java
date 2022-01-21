@@ -1920,7 +1920,7 @@ public class ShotWindow extends Activity
   {
     if ( ! blk.isLeg() ) return;
     if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
-      TDLog.v("shot window detect bad sibling");
+      // TDLog.v("shot window detect bad sibling");
       TDToast.makeWarn( R.string.bad_sibling );
     }
   }

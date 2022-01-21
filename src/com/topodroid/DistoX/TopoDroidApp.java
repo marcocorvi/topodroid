@@ -884,7 +884,7 @@ public class TopoDroidApp extends Application
   {
     if ( done_init_env_second ) return true;
     done_init_env_second = true;
-    TDLog.v("APP init env. second " );
+    // TDLog.v("APP init env. second " );
 
     TDPrefHelper prefHlp = new TDPrefHelper( thisApp );
 
@@ -915,7 +915,7 @@ public class TopoDroidApp extends Application
     if ( done_init_env_first ) return;
     done_init_env_first = true;
 
-    TDLog.v( "APP init env. first " );
+    // TDLog.v( "APP init env. first " );
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     mDData = new DeviceHelper( thisApp );
     // TDLog.Profile("TDApp prefs");
@@ -975,12 +975,15 @@ public class TopoDroidApp extends Application
   @Override
   protected void attachBaseContext( Context ctx )
   {
-    TDLog.v("APP attach base context");
+    // TDLog.v("APP attach base context");
     TDInstance.context = ctx;
     TDLocale.resetLocale();
     super.attachBaseContext( TDInstance.context );
   }
 
+  /** react to a change of configuration
+   * @param cfg  new configuration
+   */
   @Override
   public void onConfigurationChanged( Configuration cfg )
   {
@@ -1866,7 +1869,7 @@ public class TopoDroidApp extends Application
           
           // String pathname = TDPath.getSymbolFile( filepath );
           // File file = TDFile.getPrivateFile( type, filepath );
-          TDLog.v("APP uncompress symbol " + type + " " + filepath );
+          // TDLog.v("APP uncompress symbol " + type + " " + filepath );
           if ( overwrite || ! TDFile.existPrivateFile( type, filepath ) ) {
             // APP_SAVE SYMBOLS LOAD_MISSING
             // if ( file.exists() ) {
@@ -1971,7 +1974,7 @@ public class TopoDroidApp extends Application
     // TDLog.v( "[2] dupl.-shot Data " + distance + " " + bearing + " " + clino );
     long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1 );
     if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
-      TDLog.v("APP insert duplicate leg detect bad sibling");
+      // TDLog.v("APP insert duplicate leg detect bad sibling");
       TDToast.makeWarn( R.string.bad_sibling );
     }
     mData.updateShotName( id, TDInstance.sid, from, to );
@@ -2192,7 +2195,7 @@ public class TopoDroidApp extends Application
           // String name = from + "-" + to;
           mData.updateShotName( id, TDInstance.sid, from, to );
           if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
-            TDLog.v("APP insert manual shot detect bad sibling");
+            // TDLog.v("APP insert manual shot detect bad sibling");
             TDToast.makeWarn( R.string.bad_sibling );
           }
           // mData.updateShotExtend( id, TDInstance.sid, extend0, stretch0 );
@@ -2282,7 +2285,7 @@ public class TopoDroidApp extends Application
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
         connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
-        TDLog.v("BRIC info: wait 4 secs");
+        // TDLog.v("BRIC info: wait 4 secs");
         TDUtil.yieldDown(4000); // FIXME was 4000
       }
       if ( comm.isConnected() ) {
@@ -2310,7 +2313,7 @@ public class TopoDroidApp extends Application
       boolean disconnect = comm.isConnected();
       if ( ! disconnect ) {
         connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
-        TDLog.v("BRIC memory: wait 4 secs");
+        // TDLog.v("BRIC memory: wait 4 secs");
         TDUtil.yieldDown(4000);
       }
       if ( comm.isConnected() ) {
@@ -2455,7 +2458,7 @@ public class TopoDroidApp extends Application
     // X,Y offset  0,0
     // zoom        mScaleFactor
     // orientation 0
-    TDLog.v("APP insert 2D section from <" + from + "> to <" + to + ">" );
+    // TDLog.v("APP insert 2D section from <" + from + "> to <" + to + ">" );
     String hide = ( parent == null )? TDString.EMPTY : parent;
     String nick = ( nickname == null )? TDString.EMPTY : nickname;
     return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0 );
@@ -2677,7 +2680,7 @@ public class TopoDroidApp extends Application
     } else {
       SurveyInfo info = getSurveyInfo( );
       if ( info == null ) return false;
-      TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
+      // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
       String format = context.getResources().getString(R.string.saved_file_1);
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
       (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, toast )).execute();

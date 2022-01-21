@@ -113,7 +113,7 @@ public class DeviceHelper extends DataSetObservable
   private void openDatabase()
   {
     String database_name = TDFile.getDeviceDatabase().getAbsolutePath();
-    TDLog.v( "Device DB <" + database_name + ">");
+    // TDLog.v( "Device DB <" + database_name + ">");
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
     try {

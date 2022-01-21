@@ -101,7 +101,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   // get the item at a certain position in the list of symbols 
   ItemSymbol get( int k ) 
   { 
-    TDLog.v("Get item at " + k + " of " + mItems.size() );
+    // TDLog.v("Get item at " + k + " of " + mItems.size() );
     return ( k < mItems.size() ) ? mItems.get(k) : null ; 
   }
 
@@ -109,7 +109,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   
   int getSelectedPos() 
   {
-    TDLog.v("Selected position " + mPos );
+    // TDLog.v("Selected position " + mPos );
     return mPos;
   }
 
@@ -133,7 +133,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       mPos = ( mItems.size() > 1 )? 1 : 0; // user symbols cannot be disabled: are always present
       mItems.get( mPos ).setChecked( true );
     }
-    TDLog.v("set selected at index " + index + " pos " + mPos );
+    // TDLog.v("set selected at index " + index + " pos " + mPos );
   }
 
   /** set selected position from the item symbol
@@ -206,7 +206,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           if ( cb == item.mCheckBox ) {
             if ( mPos == pos && Math.abs(millis - mClickMillis) < DOUBLE_CLICK_TIME ) doubleclick = true;
             mPos = pos; // item.mIndex;
-            TDLog.v("set type and item [1]: pos " + mPos + " index " + item.mIndex );
+            // TDLog.v("set type and item [1]: pos " + mPos + " index " + item.mIndex );
             mParent.setTypeAndItem( mType, mPos );
             item.setChecked( true );
           } else {
@@ -223,7 +223,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           if (mPos == pos && Math.abs( millis - mClickMillis ) < DOUBLE_CLICK_TIME)
             doubleclick = true;
           mPos = pos; // item.mIndex;
-          TDLog.v("set type and item [2]: pos " + mPos + " index " + item.mIndex );
+          // TDLog.v("set type and item [2]: pos " + mPos + " index " + item.mIndex );
           mParent.setTypeAndItem( mType, mPos );
           item.setChecked( true );
         } else {

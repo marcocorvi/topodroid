@@ -128,7 +128,7 @@ abstract class ItemDrawer extends Activity
 
   public void areaSelected( int k, boolean update_recent ) 
   {
-    TDLog.v("Item drawer point selected: " + k + " update " + update_recent );
+    // TDLog.v("Item drawer point selected: " + k + " update " + update_recent );
     mSymbol = SymbolType.AREA;
     if ( k >= 0 && k < BrushManager.getAreaLibSize() ) {
       mCurrentArea = k;
@@ -148,20 +148,20 @@ abstract class ItemDrawer extends Activity
 
   public void lineSelected( int k, boolean update_recent ) 
   {
-    TDLog.v("Item drawer line selected " + k + " update recent " + update_recent );
+    // TDLog.v("Item drawer line selected " + k + " update recent " + update_recent );
     mSymbol = SymbolType.LINE;
     if ( k >= 0 && k < BrushManager.getLineLibSize() ) {
       mCurrentLine = k;
       if ( TDSetting.mWithLevels > 0 ) {
         if ( ! DrawingLevel.isVisible( BrushManager.getLineLevel( k ) ) ) {
-          TDLog.v("Item drawer line selected " + k + " is not visible");
+          // TDLog.v("Item drawer line selected " + k + " is not visible");
           mCurrentLine = 0; // BrushManager.mLineLib.mLineUserIndex;
         }
       }
     }
     setTheTitle();
     if ( update_recent ) {
-      TDLog.v("Item drawer update recent: current line " + mCurrentLine );
+      // TDLog.v("Item drawer update recent: current line " + mCurrentLine );
       updateRecentLine( mCurrentLine );
       setBtnRecent( SymbolType.LINE );
     }
@@ -172,7 +172,7 @@ abstract class ItemDrawer extends Activity
   public void pointSelected( int p, boolean update_recent )
   {
     mSymbol = SymbolType.POINT;
-    TDLog.v("Item drawer point selected: " + p + " update " + update_recent );
+    // TDLog.v("Item drawer point selected: " + p + " update " + update_recent );
     if ( p >= 0 && p < BrushManager.getPointLibSize() ) {
       mCurrentPoint = p;
       if ( TDSetting.mWithLevels > 0 ) {

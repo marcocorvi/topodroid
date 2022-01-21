@@ -139,7 +139,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
 
     if ( mManager == null ) return false;
     if ( mSuffix == PlotSave.EXPORT ) {
-      TDLog.v( "save plot Therion file EXPORT " + mFullName );
+      // TDLog.v( "save plot Therion file EXPORT " + mFullName );
       // File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
       // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
@@ -302,7 +302,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   protected void onPostExecute(Boolean bool)
   {
     super.onPostExecute(bool);
-    TDLog.v( "save plot file task post exec " + bool );
+    // TDLog.v( "save plot file task post exec " + bool );
     if ( mHandler != null ) {
       mHandler.sendEmptyMessage( bool? 661 : 660 );
     }

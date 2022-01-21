@@ -251,12 +251,12 @@ public class DrawingSplayPath extends DrawingPath
     if (cosine >= 0 ) {
       if ( cosine < TDSetting.mCosHorizSplay ) {
         mPaint = BrushManager.paintSplayXBdot;
-        TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
+        // TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
       }
     } else if (cosine < 0 ) {
       if ( cosine > -TDSetting.mCosHorizSplay ) {
         mPaint = BrushManager.paintSplayXBdash;
-        TDLog.v("paint DASH cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
+        // TDLog.v("paint DASH cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
       }
     // } else { // nothing: paint is already SplayXB
     //   mPaint = BrushManager.paintSplayXB;
@@ -272,10 +272,10 @@ public class DrawingSplayPath extends DrawingPath
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
     if (blk.mClino > TDSetting.mVertSplay ) {
-      TDLog.v("paint DOT clino " + blk.mClino + " " + TDSetting.mVertSplay );
+      // TDLog.v("paint DOT clino " + blk.mClino + " " + TDSetting.mVertSplay );
       mPaint= BrushManager.paintSplayXBdot;
     } else if (blk.mClino < -TDSetting.mVertSplay) {
-      TDLog.v("paint DASH clino " + blk.mClino + " " + TDSetting.mVertSplay );
+      // TDLog.v("paint DASH clino " + blk.mClino + " " + TDSetting.mVertSplay );
       mPaint= BrushManager.paintSplayXBdash;
     // } else { // nothing: paint is already SplayXB
     //   mPaint= BrushManager.paintSplayXB;

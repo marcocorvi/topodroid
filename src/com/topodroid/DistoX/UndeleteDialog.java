@@ -237,7 +237,7 @@ class UndeleteDialog extends MyDialog
     LinearLayout layout_buffer = (LinearLayout)findViewById( R.id.buffer );
     if ( mDBlockBuffer != null ) {
       int buffer_size = mDBlockBuffer.size();
-      TDLog.v("non-null buffer: size " + buffer_size );
+      // TDLog.v("non-null buffer: size " + buffer_size );
       if ( buffer_size > 0 ) {
         TextView text_buffer = (TextView)findViewById( R.id.text_buffer );
         text_buffer.setText( String.format( mContext.getResources().getString( R.string.buffer_size ), buffer_size ) );
@@ -248,7 +248,7 @@ class UndeleteDialog extends MyDialog
       }
       setTitle( R.string.undelete_paste_text );
     } else {
-      TDLog.v("null buffer" );
+      // TDLog.v("null buffer" );
       layout_buffer.setVisibility( View.GONE );
       setTitle( R.string.undelete_text );
     }

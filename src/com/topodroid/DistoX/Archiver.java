@@ -301,7 +301,7 @@ public class Archiver
       ZipInputStream szin = new ZipInputStream( fis );
       while ( ( sze = szin.getNextEntry() ) != null ) {
         File symbolfile = TDFile.getPrivateFile( type, sze.getName() );
-        TDLog.v( "ZIP try to uncompress symbol " + type + " " + sze.getName() );
+        // TDLog.v( "ZIP try to uncompress symbol " + type + " " + sze.getName() );
         if ( ! symbolfile.exists() ) { // don't overwrite
           // TDLog.v( "ZIP-uncompress symbol " + symbolfile.getPath() );
           // FileOutputStream sfout = TDFile.getFileOutputStream( symbolfilename ); // uncompress symbols zip
@@ -618,7 +618,7 @@ public class Archiver
 
   static public int getOkManifest( InputStream fis, String filename, String surveyname )
   {
-    TDLog.v( "get OK manifest - file " + filename + " survey " + surveyname );
+    // TDLog.v( "get OK manifest - file " + filename + " survey " + surveyname );
     int ok_manifest = -2;
     ZipEntry ze;
     try {
@@ -666,7 +666,7 @@ public class Archiver
     String pathname;
     ZipEntry ze;
     DataHelper app_data = TopoDroidApp.mData;
-    TDLog.v( "unarchive input stream - survey: " + surveyname );
+    // TDLog.v( "unarchive input stream - survey: " + surveyname );
     // mApp.setSurveyFromName( surveyname, -1, true ); // open survey: tell app to update survey name+id
     TDPath.setSurveyPaths( surveyname );
 
@@ -754,7 +754,7 @@ public class Archiver
     if ( ok_manifest < 0 ) { // delete survey folder
       // TODO
     }
-    TDLog.v( "unarchive stream returns " + ok_manifest );
+    // TDLog.v( "unarchive stream returns " + ok_manifest );
     return ok_manifest; // return 0 or 1
   }
 

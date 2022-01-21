@@ -504,7 +504,7 @@ public class SurveyWindow extends Activity
   {
     saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
-    TDLog.v( "SURVEY do export: type " + type + " index " + index );
+    // TDLog.v( "SURVEY do export: type " + type + " index " + index );
     // if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
     //   doArchive();
     // } else 

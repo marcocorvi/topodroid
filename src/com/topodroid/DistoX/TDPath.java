@@ -162,7 +162,7 @@ public class TDPath
     } catch ( SecurityException e ) {
       TDLog.Error("security error: " + e.getMessage() );
     }
-    TDLog.v( "PATH check base <" + name + ">: " + ret );
+    // TDLog.v( "PATH check base <" + name + ">: " + ret );
     return ret;
   }
 
@@ -227,7 +227,7 @@ public class TDPath
   static void setSurveyPaths( String survey )
   {
     if ( survey == null || survey.length() == 0 ) {
-      TDLog.v( "PATH set survey path NULL");
+      // TDLog.v( "PATH set survey path NULL");
       clearAppPaths();
     } else {
       // TDLog.v( "set survey path " + survey + " base " + PATH_CW_DIR );
@@ -285,7 +285,7 @@ public class TDPath
     };
     File[] files = dir.listFiles( filter );
     if ( files == null || files.length == 0 ) {
-      TDLog.v("PATH tdconfig: no files");
+      TDLog.Error("PATH tdconfig: no files");
       return null;
     }
     String[] filenames = new String[ files.length ];
@@ -503,7 +503,7 @@ public class TDPath
       }
     } );
     if ( files == null || files.length == 0 ) {
-      TDLog.v("PATH no TopoDroid folders");
+      TDLog.Error("PATH no TopoDroid folders");
       return null;
     }
     int len = files.length;
@@ -727,7 +727,7 @@ public class TDPath
     File dir = TDFile.getPrivateDir( dirname );
     File [] files = dir.listFiles();
     if ( files == null || files.length == 0 ) {
-      TDLog.v("PATH no symbol files " + dirname + " to clear");
+      TDLog.Error("PATH no symbol files " + dirname + " to clear");
       return;
     }
     for ( int i=0; i<files.length; ++i ) {
@@ -1017,15 +1017,15 @@ public class TDPath
   private static boolean copyDir( File in, File out, boolean dry_run )
   {
     if ( in == null ) {
-      TDLog.v("PATH copy dir null input"); 
+      TDLog.Error("PATH copy dir null input"); 
       return true;
     }
     if ( ! in.exists() ) {
-      TDLog.v("PATH copy dir " + in.getPath() + " not exist");
+      TDLog.Error("PATH copy dir " + in.getPath() + " not exist");
       return true;
     }
     if ( ! in.isDirectory() ) {
-      TDLog.v("PATH copy dir " + in.getPath() + " not directory");
+      TDLog.Error("PATH copy dir " + in.getPath() + " not directory");
       return true;
     }
     if ( ! dry_run ) {
@@ -1034,8 +1034,8 @@ public class TDPath
         // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PESISTENT
       }
       if ( ! out.isDirectory() ) return false;
-    } else {
-      TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
+    // } else {
+    //   TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
     }
     boolean ret = true;
     File[] files = in.listFiles();
@@ -1057,15 +1057,15 @@ public class TDPath
   private static boolean copyFile( File in, File out, boolean dry_run )
   {
     if ( in == null ) {
-      TDLog.v("PATH copy file null input"); 
+      TDLog.Error("PATH copy file null input"); 
       return true;
     }
     if ( !in.exists() ) {
-      TDLog.v("PATH copy file " + in.getPath() + " not exist");
+      TDLog.Error("PATH copy file " + in.getPath() + " not exist");
       return true;
     }
     if ( !in.isFile() ) {
-      TDLog.v("PATH copy file " + in.getPath() + " not regular");
+      TDLog.Error("PATH copy file " + in.getPath() + " not regular");
       return true;
     }
     if ( dry_run ) {
@@ -1075,7 +1075,7 @@ public class TDPath
 
     byte[] buf = new byte[4096];
     if ( buf == null ) {
-      TDLog.v("failed alloc buffer");
+      TDLog.Error("failed alloc buffer");
       return false;
     }
     int len;
@@ -1097,7 +1097,7 @@ public class TDPath
       TDLog.Error("PATH IO error " + e.getMessage() );
       return false;
     }
-    TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " length " + tot_len );
+    // TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " length " + tot_len );
     return true;
   }
  

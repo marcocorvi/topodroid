@@ -650,8 +650,7 @@ public class DrawingIO
 				   boolean complete,
 				   String plotName )
   {
-    TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
-
+    // TDLog.v( "load data stream file " + filename + " plot name " + ( (plotName == null)? "null" : plotName ) );
     int version = 0;
     boolean in_scrap = false;
     int scrap_index = 0;
@@ -682,8 +681,7 @@ public class DrawingIO
       pos = survey_name.indexOf('-');
       if ( pos > 0 ) survey_name = survey_name.substring(0, pos);
     // }
-
-    TDLog.v( "drawing I/O load stream " + filename );
+    // TDLog.v( "drawing I/O load stream " + filename );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {

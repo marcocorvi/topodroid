@@ -37,7 +37,7 @@ public class Symbol implements SymbolInterface
       sizeFactorXL = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_xl ) );
       sizeFactorYL = Float.parseFloat( TDInstance.context.getResources().getString( R.string.size_factor_yl ) );
     } catch ( NumberFormatException e ) {
-      TDLog.v("SIZE FACTORS exception " + e.getMessage() );
+      TDLog.Error("SIZE FACTORS exception " + e.getMessage() );
     }
     hasSizeFactors = true;
   }

@@ -2467,7 +2467,7 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    TDLog.v("Drawing Activity onStart " );
+    // TDLog.v("Drawing Activity onStart " );
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
@@ -3691,7 +3691,7 @@ public class DrawingWindow extends ItemDrawer
                                                             mDrawingSurface.scrapIndex() );
                 area.setOptions( BrushManager.getAreaDefaultOptions( mCurrentArea ) );
                 if ( xs - mCurrentAreaPath.mFirst.x > 20 ) { // 20 == 1.0 meter // CLOSE BOTTOM SURFACE
-                  TDLog.v("CLOSE BOTTOM " + (ys - mCurrentAreaPath.mFirst.y) );
+                  // TDLog.v("CLOSE BOTTOM " + (ys - mCurrentAreaPath.mFirst.y) );
                   LinePoint lp = mCurrentAreaPath.mFirst; 
                   float yy = lp.y;
                   mCurrentAreaPath.addPoint( xs, yy-0.001f );
@@ -3706,7 +3706,7 @@ public class DrawingWindow extends ItemDrawer
                   }
                   mCurrentAreaPath = area; // area is empty if not recreated
                 } else if ( mCurrentAreaPath.mFirst.x - xs > 20 ) { // 20 == 1.0 meter // CLOSE TOP SURFACE
-                  TDLog.v("CLOSE TOP " + (ys - mCurrentAreaPath.mFirst.y) );
+                  // TDLog.v("CLOSE TOP " + (ys - mCurrentAreaPath.mFirst.y) );
                   LinePoint lp = mCurrentAreaPath.mFirst; 
                   float yy = lp.y;
                   mCurrentAreaPath.addPoint( xs, yy-0.001f );
@@ -3721,10 +3721,10 @@ public class DrawingWindow extends ItemDrawer
                   }
                   mCurrentAreaPath = area; // area is empty if not recreated
                 } else {
-                  TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) + " " + (xs - mCurrentAreaPath.mFirst.x) );
+                  // TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) + " " + (xs - mCurrentAreaPath.mFirst.x) );
                 }
               } else {  
-                TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) );
+                // TDLog.v("NO CLOSE " + (ys - mCurrentAreaPath.mFirst.y) );
                 if ( squared_shift > TDSetting.mLineSegment2 || ( mPointCnt % mLinePointStep ) > 0 ) {
                   mCurrentAreaPath.addPoint( xs, ys );
                 }
@@ -7794,7 +7794,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void rotateRecentToolset( )
   { 
-    TDLog.v("rotate recent toolset");
+    // TDLog.v("rotate recent toolset");
     if ( mRecentToolsForward ) {
       if ( mRecentTools == mRecentPoint ) {
         mRecentTools = mRecentLine;
@@ -7832,7 +7832,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setToolsToolbars()
   {
-    TDLog.v("set tools toolbars");
+    // TDLog.v("set tools toolbars");
     // TDLog.v("set Tools Toolbar - triple: " + TDSetting.mTripleToolbar );
     // if ( TDSetting.mTripleToolbar ) {
     //   ZOOM_TRANSLATION = ZOOM_TRANSLATION_3;
@@ -7878,7 +7878,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
   {
-    TDLog.v("set btn recent " + symbol );
+    // TDLog.v("set btn recent " + symbol );
     int index = -1;
     switch ( symbol ) {
       case SymbolType.POINT: 
@@ -8030,7 +8030,7 @@ public class DrawingWindow extends ItemDrawer
   public void setLine( int k, boolean update_recent )
   {
     int current = BrushManager.getLineIndex( mRecentLine[k] );
-    TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
+    // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
     if ( current >= 0 ) {
       mCurrentLine = current;
       lineSelected( current, update_recent );

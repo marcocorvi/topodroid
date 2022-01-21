@@ -573,7 +573,7 @@ public class TglParser
       }
     }
     String filepath = TDPath.getC3exportPath( export.mName ); // export temporary folder for shp files - fullpath
-    TDLog.v("export SHP: name " + export.mName + " path " + filepath );
+    // TDLog.v("export SHP: name " + export.mName + " path " + filepath );
     return shp.exportASCII( zos, filepath, export.mName, this, true, export.mSplays, export.mWalls );
   }
 
@@ -613,11 +613,11 @@ public class TglParser
   { 
     boolean ret = false;
     if ( type == ModelType.SERIAL ) { // serialization
-      TDLog.v("3D export serial");
+      // TDLog.v("3D export serial");
       ret = writeWalls( osw );
     } else {                          // model export 
       if ( type == ModelType.KML_ASCII ) { // KML export ASCII
-        TDLog.v("3D export KML");
+        // TDLog.v("3D export KML");
         ExportKML kml = new ExportKML();
         if ( export.mWalls ) {
           if ( convexhullcomputer != null ) {
@@ -632,10 +632,10 @@ public class TglParser
         }
         ret = kml.exportASCII( osw, this, export.mSplays, export.mWalls, export.mSurface );
       } else if ( type == ModelType.CGAL_ASCII ) { // CGAL export: only stations and splay-points
-        TDLog.v("3D export CGAL");
+        // TDLog.v("3D export CGAL");
         ret = (new ExportCGAL()).exportASCII( osw, this, export.mSplays, export.mWalls, export.mSurface );
       } else if ( type == ModelType.DXF_ASCII ) { // DXF
-        TDLog.v("3D export DXF");
+        // TDLog.v("3D export DXF");
         ExportDXF dxf = new ExportDXF();
         if ( export.mWalls ) {
           if ( convexhullcomputer != null ) {
@@ -667,7 +667,7 @@ public class TglParser
       //   }
       //   ret = shp.exportASCII( data_output_stream?, filepath?, export.mName, this, true, export.mSplays, export.mWalls );
       } else if ( type == ModelType.STL_ASCII ) {
-        TDLog.v("3D export STL");
+        // TDLog.v("3D export STL");
         ExportSTL stl = new ExportSTL();
         if ( export.mWalls ) {
           if ( convexhullcomputer != null ) {

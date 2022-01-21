@@ -1904,7 +1904,7 @@ public class DataHelper extends DataSetObservable
                           long extend, double stretch, long leg, long status, long shot_type, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    // TDLog.v("DB simple insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;
@@ -1924,7 +1924,7 @@ public class DataHelper extends DataSetObservable
                           long extend, double stretch, long leg, long status, String comment, long shot_type, String addr )
   {
     // TDLog.Log( TDLog.LOG_DB, "insert shot <" + id + "> " + from + "-" + to + " extend " + extend );
-    TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
+    // TDLog.v("DB complete insert shot id " + id + " d " + d + " b " + b + " c " + c );
     if ( myDB == null ) return -1L;
     if ( id == -1L ) {
       ++ myNextId;

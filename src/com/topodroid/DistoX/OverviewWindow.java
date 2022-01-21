@@ -703,7 +703,7 @@ public class OverviewWindow extends ItemDrawer
       TDLog.Error("Error. Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
       return;
     }
-    TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
+    // TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
 
     // if ( TDSetting.mExportUri ) { // FIXME_URI
       Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
@@ -742,7 +742,7 @@ public class OverviewWindow extends ItemDrawer
   // interface IExporter FIXME_URI
   public void doUriExport( Uri uri ) 
   {
-    TDLog.v( "Overview URI export: index " + mExportIndex );
+    // TDLog.v( "Overview URI export: index " + mExportIndex );
     switch ( mExportIndex ) {
       case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
       case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
@@ -790,7 +790,7 @@ public class OverviewWindow extends ItemDrawer
     try {
       OutputStream fos = null;
       // if ( uri != null ) {
-        TDLog.v( "Export overview PDF: uri " + uri.toString() );
+        // TDLog.v( "Export overview PDF: uri " + uri.toString() );
         fos = TDsafUri.docFileOutputStream( pfd );
       // } else {
       //   TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );

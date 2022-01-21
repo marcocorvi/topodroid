@@ -133,7 +133,7 @@ class ItemPickerDialog extends MyDialog
       TDToast.makeWarn( "Symbols not ready" );
       return;
     }
-    TDLog.v("Dims " + DIMXP + " " + DIMXL + " " + DIMYL + " " + DIMMX + " " + DIMMY );
+    // TDLog.v("Dims " + DIMXP + " " + DIMXL + " " + DIMYL + " " + DIMMX + " " + DIMMY );
 
     // createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST /* || TDSetting.mPickerType == TDSetting.PICKER_RECENT */ ) );
     createAdapters( true );
@@ -517,7 +517,7 @@ class ItemPickerDialog extends MyDialog
       case SymbolType.LINE: 
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
-          TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
+          // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
           if ( mPlotType != PlotType.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
@@ -640,20 +640,20 @@ class ItemPickerDialog extends MyDialog
       case SymbolType.POINT: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          TDLog.v( "item picker selected point " + mSelectedPoint );
+          // TDLog.v( "item picker selected point " + mSelectedPoint );
           mParent.get().pointSelected( mSelectedPoint, true ); // true = update tools toolbar
         }
         break;
       case SymbolType.LINE: 
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          TDLog.v( "item picker selected line " + mSelectedLine );
+          // TDLog.v( "item picker selected line " + mSelectedLine );
           mParent.get().lineSelected( mSelectedLine, true ); 
 	}
         break;
       case SymbolType.AREA: 
         // if ( TDLevel.overBasic )
         if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-          TDLog.v( "item picker selected area " + mSelectedArea );
+          // TDLog.v( "item picker selected area " + mSelectedArea );
           mParent.get().areaSelected( mSelectedArea, true );
         }
         break;

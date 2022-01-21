@@ -494,13 +494,13 @@ public class GlNames extends GlShape
       // TDLog.v("DIM " + DIMX + " names " + nameCount );
       bitmap0 = Bitmap.createBitmap( DIMX, DIMY, Bitmap.Config.ARGB_8888); // Create an empty, mutable bitmap
       if ( bitmap0 == null ) {
-        TDLog.v("NAMES null bitmap");
+        TDLog.Error("NAMES null bitmap");
         break;
       }
       bitmap0.eraseColor(0);
       Canvas canvas = new Canvas(bitmap0); // get a canvas to paint over the bitmap
       if ( canvas == null ) {
-        TDLog.v("NAMES null canvas");
+        TDLog.Error("NAMES null canvas");
         bitmap0.recycle();
         bitmap0 = null;
         break;

@@ -495,7 +495,7 @@ public class MainWindow extends Activity
   public void importStream( Uri uri, String name, String type )
   {
     // FIXME connect-title string
-    TDLog.v( "import with uri stream <" + name + "> type <" + type + ">" );
+    // TDLog.v( "import with uri stream <" + name + "> type <" + type + ">" );
     if ( type.equals(".top") ) {
       setTitleImport();
       new ImportPocketTopoTask( this, uri ).execute( null, name );  // null filename (use fis); name = surveyname
@@ -518,7 +518,7 @@ public class MainWindow extends Activity
   public void importReader( Uri uri, String name, String type, ImportData data )
   {
     // FIXME connect-title string
-    TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
+    // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals(".th") ) {
@@ -706,7 +706,7 @@ public class MainWindow extends Activity
 
     // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
-    TDLog.v("VERSION " + TDVersion.string() );
+    // TDLog.v("VERSION " + TDVersion.string() );
   }
 
   static private boolean done_init_dialogs = false;
@@ -725,7 +725,7 @@ public class MainWindow extends Activity
       return;
     } 
     done_init_dialogs = true;
-    TDLog.v( "init environment second");
+    // TDLog.v( "init environment second");
     if ( ! TopoDroidApp.initEnvironmentSecond( say_dialogR ) ) {
       TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.tdx_stale, 
         new DialogInterface.OnClickListener() {
@@ -1161,7 +1161,7 @@ public class MainWindow extends Activity
               filename = uri.getLastPathSegment();
               int ros = filename.indexOf(":"); // drop the "content" header
               if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-              TDLog.v("import path NULL filename " + filename );
+              // TDLog.v("import path NULL filename " + filename );
               if ( filename != null ) {
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
@@ -1173,7 +1173,7 @@ public class MainWindow extends Activity
               filename = ( pos >= 0 )? path.substring(pos+1) : path;
               int ros = filename.indexOf(":"); // drop the "content" header
               if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
-              TDLog.v("import path " + path + " filename " + filename );
+              // TDLog.v("import path " + path + " filename " + filename );
               TDLog.Error( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
             }
           } else {
@@ -1185,7 +1185,7 @@ public class MainWindow extends Activity
             String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase() : ""; // extension with leading '.'
             String name = (pos > qos )? filename.substring( qos+1, pos ) : filename.substring( qos+1 );
             String surveyname = name;
-            TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
+            // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
               ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
               FileInputStream fis = TDsafUri.docFileInputStream( pfd );

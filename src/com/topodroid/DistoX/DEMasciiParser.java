@@ -59,11 +59,11 @@ class DEMasciiParser extends ParserDEM
   {
     // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
     if ( ! mValid ) {
-      TDLog.v("DEM acsii parser read data. Not valid" );
+      TDLog.Error("DEM acsii parser read data. Not valid" );
       return mValid;
     }
     if ( mBr == null ) {
-      TDLog.v("DEM acsii parser read data. Null buffered reader" );
+      TDLog.Error("DEM acsii parser read data. Null buffered reader" );
       return false;
     }
     // FileReader fr = null;
@@ -116,7 +116,7 @@ class DEMasciiParser extends ParserDEM
       }
 
       if ( mNr1 <= 1 || mNr2 <= 1 ) {
-        TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
+        TDLog.Error("DEM size " + mNr1 + "x" + mNr2 + " invalid ");
         mValid = false;
       } else {
         // TDLog.v("DEM size " + mNr1 + "x" + mNr2 + " E " + mEast1 + " " + mEast2 + " N " + mNorth1 + " " + mNorth2 );
