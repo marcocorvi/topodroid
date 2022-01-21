@@ -945,7 +945,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** used to add legs and splays
-   * @param type
+   * @param type    plot type
    * @param blk     data block
    * @param x1,y1   first endpoint
    * @param x2,y2   second endpoint
@@ -965,6 +965,15 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** used to append legs and splays to the respective list
+   * @param type    plot type
+   * @param blk     data block
+   * @param x1,y1   first endpoint
+   * @param x2,y2   second endpoint
+   * @param cosine  used only for splays
+   * @param splay   whether the shot is a splay
+   * @param selectable whether the shot is selectable
+   */
   private void appendFixedLine( long type, DBlock blk, double x1, double y1, double x2, double y2,
                                 float cosine, boolean splay, boolean selectable )
   {
@@ -978,30 +987,30 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-
+  /** @return a drawing splay path
+   * @param type    plot type
+   * @param blk     data block
+   * @param x1,y1   first endpoint
+   * @param x2,y2   second endpoint
+   * @param cosine  ... (used only for splays)
+   */
   private DrawingSplayPath makeFixedSplay( long type, DBlock blk, float x1, float y1, float x2, float y2, float cosine )
   {
     DrawingSplayPath dpath = null;
     dpath = new DrawingSplayPath( blk, mDrawingSurface.scrapIndex() );
     dpath.setCosine( cosine ); // save cosine into path
-    if ( PlotType.isProfile( type ) ) {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-        dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      }
-    } else {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-        dpath.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        dpath.setSplayPaintPlan( blk, dpath.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-      }
-    }
+    dpath.setSplayPathPaint( type, blk );
     DrawingUtil.makeDrawingSplayPath( dpath, x1, y1, x2, y2 );
     return dpath;
   }
     
 
+  /** @return a drawing (leg) path
+   * @param type    plot type
+   * @param blk     data block
+   * @param x1,y1   first endpoint
+   * @param x2,y2   second endpoint
+   */
   private DrawingPath makeFixedLeg( long type, DBlock blk, float x1, float y1, float x2, float y2 )
   {
     DrawingPath dpath = null;
@@ -1021,7 +1030,6 @@ public class DrawingWindow extends ItemDrawer
     DrawingUtil.makeDrawingPath( dpath, x1, y1, x2, y2 ); // LEG PATH
     return dpath;
   }
-
 
   /** used for splays in x-sections
    * the DBlock comes from a query in the DB and it is not the DBlock in the plan/profile
@@ -1108,6 +1116,8 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
+  /** set the title of the window
+   */
   @Override
   public void setTheTitle()
   {
@@ -3113,26 +3123,14 @@ public class DrawingWindow extends ItemDrawer
     block.mComment = comment;
     mApp_mData.updateShotComment( block.mId, mSid, comment );
   }
-  
+
   void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
   {
     if ( blk.getFlag() == flag ) return;
     blk.resetFlag( flag );
     // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
-    if ( PlotType.isProfile( mType ) ) {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      }
-    } else {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-      }
+    if ( shot instanceof DrawingSplayPath ) {
+      ((DrawingSplayPath)shot).setSplayPathPaint( mType, blk );
     }
     mApp_mData.updateShotFlag( blk.mId, mSid, flag );
   }
@@ -3144,20 +3142,8 @@ public class DrawingWindow extends ItemDrawer
     if ( shot.mBlock != null ) shot.mBlock.setTypeSplay();
     mApp_mData.updateShotLeg( blk.mId, mSid, LegType.NORMAL );
     // the next is really necessary only if flag || mFlag is FLAG_COMMENTED:
-    if ( PlotType.isProfile( mType ) ) {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      }
-    } else {
-      if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-        shot.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-      } else {
-        // shot.setSplayPaintPlan( blk, blk.getReducedIntExtend(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-        shot.setSplayPaintPlan( blk, shot.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-      }
+    if ( shot instanceof DrawingSplayPath ) {
+      ((DrawingSplayPath)shot).setSplayPathPaint( mType, blk );
     }
   }
 

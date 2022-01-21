@@ -228,19 +228,20 @@ public class BrushManager
   public static final Paint fixedRedPaint    = makePaint( TDColor.FIXED_RED,    WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedYellowPaint = makePaint( TDColor.FIXED_YELLOW, WIDTH_CURRENT, Paint.Style.STROKE);
   public static final Paint fixedOrangePaint = makePaint( TDColor.FIXED_ORANGE, WIDTH_CURRENT, Paint.Style.STROKE);
-  public static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT,WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,         WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
 
-  public static final Paint paintSplayXBdot  = makePaint( TDColor.SPLAY_LIGHT,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayXVdash = makePaint( TDColor.SPLAY_NORMAL,        WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
-  public static final Paint paintSplayXVdot  = makePaint( TDColor.SPLAY_NORMAL,       WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE);
+  public static final Paint paintSplayLRUD    = makePaint( TDColor.SPLAY_LRUD,    WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXB      = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayComment = makePaint( TDColor.SPLAY_COMMENT, WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXBdot   = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXVdash  = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
+  public static final Paint paintSplayXVdot   = makePaint( TDColor.SPLAY_NORMAL,  WIDTH_CURRENT, Paint.Style.STROKE);
 
   public static final Paint fixedGridPaint    = makePaint( TDColor.DARK_GRID,   WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid10Paint  = makePaint( TDColor.GRID,        WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint fixedGrid100Paint = makePaint( TDColor.LIGHT_GRID,  WIDTH_FIXED, Paint.Style.STROKE);
+
   public static Paint fixedStationPaint = makePaint( TDColor.REDDISH,     WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static Paint fixedStationSavedPaint   = makePaint( TDColor.ORANGE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static Paint fixedStationActivePaint  = makePaint( TDColor.LIGHT_GREEN, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
@@ -313,13 +314,20 @@ public class BrushManager
     if ( mAreaLib  != null ) mAreaLib.makeEnabledListFromPalette( palette, clear );
   }
 
-  static private boolean doneMakePaths = false;
-
-  // paint for fixed path
+  /** make a STROKE paint with fixed width (for fixed path)
+   * @param color   paint color
+   * @return the paint
+   */
   static Paint makePaint( int color ) { return makePaint( color, WIDTH_FIXED, Paint.Style.STROKE ); }
 
   // static Paint makePaint( int color, int width ) { return makePaint( color, width, Paint.Style.STROKE ); }
 
+  /** make a paint 
+   * @param color   paint color
+   * @param width   paint stroke width
+   * @param style   paint type (STROKE, FILL, or FILL_AND_STROKE)
+   * @return the paint
+   */
   static private Paint makePaint( int color, int width, Paint.Style style )
   {
     Paint paint = new Paint();
@@ -332,7 +340,9 @@ public class BrushManager
     return paint;
   }
 
-  // alpha in [0,100]
+  /** set the splay opacity
+   * @param alpha   opacity, in [0,100], 0=transparent
+   */
   public static void setSplayAlpha( int alpha )
   {
     alpha = (alpha * 255)/100;
@@ -346,6 +356,12 @@ public class BrushManager
     if ( paintSplayXVdot   != null ) paintSplayXVdot.setAlpha( alpha );  // blue dot splay
   }
 
+  /** guard for doMakePaths()
+   */
+  static private boolean doneMakePaths = false;
+
+  /** make the paths - protected by doneMakePaths to make paths only once
+   */
   static void doMakePaths()
   {
     if ( ! doneMakePaths ) {
@@ -367,23 +383,21 @@ public class BrushManager
       // paintSplayXViewed = makePaint( TDColor.SPLAY_NORMAL,         WIDTH_CURRENT, Paint.Style.STROKE);
       // paintSplayXBdash  = makePaint( TDColor.SPLAY_LIGHT,   WIDTH_CURRENT, Paint.Style.STROKE);
 
-      float[] x = new float[2];
-      x[0] = 24; // FIXME
-      x[1] =  8;
-      DashPathEffect dash3 = new DashPathEffect( x, 0 );
-      paintSplayXBdash.setPathEffect( dash3 );
+      // TDLog.v("density " + TopoDroidApp.getDisplayDensity() + " " + TopoDroidApp.getDisplayDensityDpi() );
 
-      // paintSplayXVdash = makePaint( TDColor.SPLAY_NORMAL,        WIDTH_CURRENT, Paint.Style.STROKE);
+      float dot = 2 * TopoDroidApp.getDisplayDensity();
+      float[] x1 = new float[2];
+      x1[1] = 2 * dot;
+      x1[0] = 6 * dot;
+      DashPathEffect dash3 = new DashPathEffect( x1, 0 );
+      paintSplayXBdash.setPathEffect( dash3 );
       paintSplayXVdash.setPathEffect( dash3 );
 
-      // paintSplayXBdot  = makePaint( TDColor.SPLAY_LIGHT,  WIDTH_CURRENT, Paint.Style.STROKE);
-      // float[] x = new float[2];
-      x[0] = 14; // FIXME
-      x[1] =  8; 
-      DashPathEffect dash4 = new DashPathEffect( x, 0 );
+      float[] x2 = new float[2];
+      x2[1] = 2 * dot;
+      x2[0] = dot;
+      DashPathEffect dash4 = new DashPathEffect( x2, 0 );
       paintSplayXBdot.setPathEffect( dash4 );
-
-      // paintSplayXVdot  = makePaint( TDColor.SPLAY_NORMAL,       WIDTH_CURRENT, Paint.Style.STROKE);
       paintSplayXVdot.setPathEffect( dash4 );
 
       doneMakePaths = true;
@@ -393,6 +407,8 @@ public class BrushManager
     setTextSizes();
   }
 
+  /** set the width of certain paints according to the relevant settings
+   */
   public static void setStrokeWidths()
   {
     if (fixedShotPaint != null)    fixedShotPaint.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
@@ -404,6 +420,8 @@ public class BrushManager
     if (paintSplayXViewed != null) paintSplayXViewed.setStrokeWidth( WIDTH_FIXED * TDSetting.mFixedThickness );
   }
 
+  /** set the text size of certain paints according to the relevant settings
+   */
   public static void setTextSizes()
   {
     if ( labelPaint != null )               labelPaint.setTextSize( TDSetting.mLabelSize );
@@ -416,6 +434,8 @@ public class BrushManager
     if ( referencePaint != null )           referencePaint.setTextSize( TDSetting.mStationSize );
   }
 
+  /** prepare the symbols palette
+   */
   static SymbolsPalette preparePalette()
   {
     SymbolsPalette palette = new SymbolsPalette();
@@ -462,6 +482,9 @@ public class BrushManager
     return palette;
   }
 
+  /** serialize the symbol libraries
+   * @param dos   output stream
+   */
   static void toDataStream( DataOutputStream dos )
   {
     if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { } }

@@ -259,7 +259,7 @@ public class TopoDroidApp extends Application
   // -------------------------------------------------------------------------------------
   // static SIZE methods
 
-  /** @return the density of the display
+  /** @return the density of the display, e.g, 3.0
    */
   public static float getDisplayDensity( )
   {
@@ -274,7 +274,7 @@ public class TopoDroidApp extends Application
   //   return Resources.getSystem().getDisplayMetrics().density;
   // }
 
-  /** @return the density DPI of the display // FIXED_ZOOM
+  /** @return the density DPI of the display, e.g., 480 // FIXED_ZOOM
    */
   public static int getDisplayDensityDpi( )
   {

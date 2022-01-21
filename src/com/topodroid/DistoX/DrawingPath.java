@@ -491,14 +491,6 @@ public class DrawingPath extends RectF
     return ( mBlock == null )? 0 : mBlock.getIntExtend();
   }
  
-  // setSplayExtend is used for the plan view
-  // cosine = cos(angle_splay-leg)
-  // called by DrawingCommandManager
-  void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint ) { }
-  
-  // setSplayClino is used for the profile view
-  void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint ) { }
-
   /* FIXME apparently this can be called when mPaint is still null
    *        and when fixedBluePaint is null
    *

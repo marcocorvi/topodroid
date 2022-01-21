@@ -907,23 +907,9 @@ public class DrawingCommandManager
     }
     if( mSplaysStack != null ) { 
       synchronized( TDPath.mShotsLock ) {
+        long type = profile ? PlotType.PLOT_EXTENDED : PlotType.PLOT_PLAN; // if profile it can be either EXTENDED or PROJECTED
         for ( DrawingSplayPath path : mSplaysStack ) {
-          if ( path.mBlock == null /* || ( ! path.mBlock.isMultiBad() ) */ ) { // splays cannot be multibad
-            // path.setPathPaint( paint );
-            if ( profile ) {
-              if ( TDSetting.mDashSplay == TDSetting.DASHING_AZIMUTH ) {
-                path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-              } else {
-                path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-              }
-            } else {
-              if ( TDSetting.mDashSplay == TDSetting.DASHING_CLINO ) {
-                path.setSplayPaintProfile( path.mBlock, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-              } else {
-                path.setSplayPaintPlan( path.mBlock, path.getCosine(), BrushManager.deepBluePaint, BrushManager.darkBluePaint );
-              }
-            }
-          }
+          path.setSplayPathPaint( type, path.mBlock );
         }
 	// highlightsSplays( app ); // FIXME_HIGHLIGHT
       }

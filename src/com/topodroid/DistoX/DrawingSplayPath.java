@@ -16,11 +16,12 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.num.TDNum;
 // import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.ui.TDGreenDot;
+import com.topodroid.common.PlotType;
 
 // import java.io.PrintWriter;
 // import java.io.DataOutputStream;
@@ -173,6 +174,16 @@ public class DrawingSplayPath extends DrawingPath
     draw( canvas, matrix, scale, bbox, true );
   }
 
+  /** draw the splay on the canvas
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping bounding box
+   * @param not_edit whether the splay is drawn not editable (only for splay mode POINT)
+   * 
+   * @note the circle radius is fixed and does not increase with the zoom
+   * @note canvas is guaranteed ! null
+   */
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, boolean not_edit )
   {
     if ( intersects( bbox ) ) {
@@ -186,15 +197,20 @@ public class DrawingSplayPath extends DrawingPath
     }
   }
 
-  // setSplayExtend is used for the plan view
-  // cosine = cos(angle_splay-leg)
-  // called by DrawingCommandManager
-  @Override
-  void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
+  /** set splay paint - default behaviour
+   * @param h_paint  H-splay paint
+   * @param v_paint  V-splay paint
+   * @return true if a special paint has been set
+   *
+   * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_NONE
+   * 
+   * over advanced level splay can have classes (X-H-V) or be commented
+   */
+  private boolean setSplayPaintDefault( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( blk == null ) {
       mPaint = BrushManager.paintSplayXB;
-      return;
+      return true;
     }
     // if ( blk.isHighlighted() ) {
     //   mPaint = BrushManager.highlightPaint;
@@ -203,74 +219,66 @@ public class DrawingSplayPath extends DrawingPath
     if ( TDLevel.overAdvanced ) {
       if ( blk.isCommented() ) { // FIXME_COMMENTED
         mPaint = BrushManager.paintSplayComment;
-        return;
+        return true;
       } 
-      if ( TDLevel.overAdvanced && blk.isXSplay() ) {
+      if ( blk.isXSplay() ) {
         mPaint = BrushManager.paintSplayLRUD;
-        return;
+        return true;
       } 
       if ( blk.isHSplay() ) {
         mPaint = h_paint;
-        return;
+        return true;
       } 
       if ( blk.isVSplay() ) {
         mPaint = v_paint;
-        return;
+        return true;
       } 
     }
-    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
-      mPaint = BrushManager.paintSplayXB;
-    } else {
-      if (cosine >= 0 && cosine < TDSetting.mCosHorizSplay) {
+    mPaint = BrushManager.paintSplayXB;
+    // TDLog.v("paint: none is false");
+    return false;
+  }
+
+  /** set splay paint according to the azimuth (plan)
+   * @param cosine   cos(angle_splay-leg) used for plan-dashing
+   * @param h_paint  H-splay paint
+   * @param v_paint  V-splay paint
+   * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_AZIMUTH, or DASHING_VIEW for profile
+   */
+  private void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
+  {
+    if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
+    if (cosine >= 0 ) {
+      if ( cosine < TDSetting.mCosHorizSplay ) {
         mPaint = BrushManager.paintSplayXBdot;
-      } else if (cosine < 0 && cosine > -TDSetting.mCosHorizSplay) {
-        mPaint = BrushManager.paintSplayXBdash;
-      } else {
-        mPaint = BrushManager.paintSplayXB;
+        TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
       }
+    } else if (cosine < 0 ) {
+      if ( cosine > -TDSetting.mCosHorizSplay ) {
+        mPaint = BrushManager.paintSplayXBdash;
+        TDLog.v("paint DASH cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
+      }
+    // } else { // nothing: paint is already SplayXB
+    //   mPaint = BrushManager.paintSplayXB;
     }
   }
   
-  // setSplayClino is used for the profile view
-  @Override
-  void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
+  /** set splay paint according to the clino (profile)
+   * @param h_paint  H-splay paint
+   * @param v_paint  V-splay paint
+   * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_CLINO, or DASHING_VIEW for plan
+   */
+  private void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
   {
-    if ( blk == null ) {
-      mPaint= BrushManager.paintSplayXB;
-      return;
-    } 
-    // if ( blk.isHighlighted() ) {
-    //   mPaint = BrushManager.highlightPaint;
-    //   return;
-    // } 
-    if ( TDLevel.overAdvanced ) {
-      if ( blk.isCommented() ) { // FIXME_COMMENTED
-        mPaint= BrushManager.paintSplayComment;
-        return;
-      }
-      if ( blk.isXSplay() ) {
-        mPaint= BrushManager.paintSplayLRUD;
-        return;
-      }
-      if ( blk.isHSplay() ) {
-        mPaint = h_paint;
-        return;
-      }
-      if ( blk.isVSplay() ) {
-        mPaint = v_paint;
-	return;
-      } 
-    }
-    if ( TDSetting.mDashSplay == TDSetting.DASHING_NONE ) {
-      mPaint = BrushManager.paintSplayXB;
-    } else {
-      if (blk.mClino > TDSetting.mVertSplay) {
-        mPaint= BrushManager.paintSplayXBdot;
-      } else if (blk.mClino < -TDSetting.mVertSplay) {
-        mPaint= BrushManager.paintSplayXBdash;
-      } else {
-        mPaint= BrushManager.paintSplayXB;
-      }
+    if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
+    if (blk.mClino > TDSetting.mVertSplay ) {
+      TDLog.v("paint DOT clino " + blk.mClino + " " + TDSetting.mVertSplay );
+      mPaint= BrushManager.paintSplayXBdot;
+    } else if (blk.mClino < -TDSetting.mVertSplay) {
+      TDLog.v("paint DASH clino " + blk.mClino + " " + TDSetting.mVertSplay );
+      mPaint= BrushManager.paintSplayXBdash;
+    // } else { // nothing: paint is already SplayXB
+    //   mPaint= BrushManager.paintSplayXB;
     }
   }
 
@@ -298,6 +306,34 @@ public class DrawingSplayPath extends DrawingPath
       }
     } 
     if ( mPaint != null ) canvas.drawPath( path, mPaint );
+  }
+
+  /** set the paint of the splay path according to the splay-dash setting
+   * @param type    plot type
+   * @param blk     splay data-block
+   */
+  void setSplayPathPaint( long type, DBlock blk )
+  {
+    // TDLog.v("splay paint " + TDSetting.mDashSplay + " cos " + this.getCosine() );
+    switch ( TDSetting.mDashSplay ) {
+      case TDSetting.DASHING_AZIMUTH:
+        this.setSplayPaintPlan( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        break;
+      case TDSetting.DASHING_CLINO:
+        this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        break;
+      case TDSetting.DASHING_VIEW:
+        if ( PlotType.isProfile( type ) ) {
+          this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else {
+          this.setSplayPaintPlan( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        }
+        break;
+      // case TDSetting.DASHING_NONE:
+      default:
+        this.setSplayPaintDefault( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        break;
+    }
   }
 
 
