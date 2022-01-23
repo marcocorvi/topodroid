@@ -207,8 +207,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_data_title">File esportazione dati</string>
     <string name="export_plot_title">File esportazione disegno</string>
     <string name="export_overview_title">File esportazione panoramica</string>
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <string name="export_model_title">Esporta modello 3D</string>
+    <string name="export_tdconfig_title">Esporta progetto</string>
 
     <!-- UNUSED string name="import_wait">Importazione file&#8230; attendi&#8230;</string -->
     <string name="import_already">Rilievo già presente</string>
@@ -363,7 +363,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">Nessun elemento da ripristinare</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Posizione %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinazione %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -389,7 +389,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="menu_export">ESPORTA</string>
     <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">RECUPERA</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">RIPRISTINA/INCOLLA</string>
     <string name="menu_reload">RICARICA</string>
     <string name="menu_rename_delete">RINOMINA/CANCELLA</string>
     <string name="menu_rename">RINOMINA</string>
@@ -594,7 +594,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="toggle_failed">Attivazione modo calibrazione fallita</string>
     <string name="toggle_ok">DistoX in modo calibrazione</string>
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">Elementi Ripristina/Incolla</string>
     <string name="undelete_shot">Tiri</string>
     <string name="undelete_overshoot">Tiri troppo lunghi</string>
     <string name="undelete_check">Controlli</string>
@@ -690,7 +690,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_color"     >Colore</string>
     <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
+    <string name="button_copy"      >Copia</string>
     <string name="button_current"   >Corrente   </string>
     <string name="button_delete"    >Elimina   </string>
     <string name="button_duplicate" >Duplicato   </string>
@@ -760,8 +760,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_write"     >Installa</string>
     <string name="button_xsection"  >Sezione trasversale</string>
     <string name="xsection">Sezione trasversale</string>
-    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
-    <!-- TODO string name="buffer_unsorted">unsorted</string -->
+    <string name="buffer_size">Buffer: %1$d dati</string>
+    <string name="buffer_unsorted">non ordinati</string>
 
     <string name="mode_leg">Battute</string>
     <string name="mode_splay">Splay</string>
@@ -813,35 +813,35 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="symbol_extra">Speleo (2)</string>
 
     <string name="symbol_reload">Strumenti Disegno</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">Warning: palette non caricata</string>
 
     <!-- UNUSED string name="length">Lunghezza [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
-    <!-- TODO string name="hint_notes">notes</string -->
-    <!-- TODO string name="hint_label">label</string -->
-    <!-- TODO string name="hint_comment">comment</string -->
-    <!-- TODO string name="hint_text">text</string -->
-    <!-- TODO string name="hint_options">options</string -->
-    <!-- TODO string name="hint_name">name</string -->
-    <!-- TODO string name="hint_from">from</string -->
-    <!-- TODO string name="hint_to">to</string -->
-    <!-- TODO string name="hint_azimuth">azimuth</string -->
-    <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_roll">roll</string -->
-    <!-- TODO string name="hint_year">year</string -->
-    <!-- TODO string name="hint_month">month</string -->
-    <!-- TODO string name="hint_day">day</string -->
-    <!-- TODO string name="hint_hour">hour</string -->
-    <!-- TODO string name="hint_minute">minute</string -->
-    <!-- TODO string name="hint_second">second</string -->
-    <!-- UNUSED string name="hint_latitude">latitude</string -->
-    <!-- UNUSED string name="hint_longitude">longitude</string -->
-    <!-- UNUSED string name="hint_altitude">altitude</string -->
-    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
-    <!-- UNUSED string name="hint_declination">declination</string -->
-    <!-- TODO string name="hint_station">station</string -->
+    <string name="hint_notes">note</string>
+    <string name="hint_label">etichetta</string>
+    <string name="hint_comment">commento</string>
+    <string name="hint_text">testo</string>
+    <string name="hint_options">opzioni</string>
+    <string name="hint_name">nome</string>
+    <string name="hint_from">da</string>
+    <string name="hint_to">a</string>
+    <string name="hint_azimuth">azimut</string>
+    <string name="hint_clino">inclinazione</string>
+    <string name="hint_roll">rotazione</string>
+    <string name="hint_year">anno</string>
+    <string name="hint_month">mese</string>
+    <string name="hint_day">giorno</string>
+    <string name="hint_hour">ora</string>
+    <string name="hint_minute">minuti</string>
+    <string name="hint_second">secondi</string>
+    <!-- UNUSED string name="hint_latitude">latitudine</string -->
+    <!-- UNUSED string name="hint_longitude">longitudine</string -->
+    <!-- UNUSED string name="hint_altitude">altitudine</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitudine (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declinatione</string -->
+    <string name="hint_station">caposaldo</string>
 
     <string name="orientation">orientamento</string>
     <string name="contents">contenuti</string>
@@ -1012,10 +1012,10 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_splays">Splay</string>
     <string name="export_splays_named">Splay con nome</string>
     <string name="export_stations">Capisaldi</string>
-    <!-- TODO string name="export_surface">Surface</string -->
+    <string name="export_surface">Superfice</string>
     <string name="export_swap_lr">Scambia L/R</string>
     <string name="export_trox">Formato Trox</string>
-    <!-- TODO string name="export_walls">Walls</string -->
+    <string name="export_walls">Pareti</string>
     <string name="export_xvi">Immagini Xvi</string>
     <string name="export_with_xsections">Includere X-section</string>
     <string name="export_with_reference">Includere riferimenti XY</string>
@@ -1129,12 +1129,12 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="title_settings_dem">Impostazioni TopoDroid DEM</string>
     <string name="title_settings_walls3d">Impostazioni TopoDroid 3d model</string>
     <string name="title_settings_geek">Flag impostazioni principianti</string>
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_geek_survey">Principianti: impostazioni rilievo</string>
+    <string name="title_settings_geek_splay">Principianti: impostazioni splay</string>
+    <string name="title_settings_geek_plot">Principianti: impostazioni disegno</string>
+    <string name="title_settings_geek_line">Principianti: impostazioni linee</string>
+    <string name="title_settings_geek_device">Principianti: impostazioni disto</string>
+    <string name="title_settings_geek_import">Principianti: impostazioni import</string>
     <string name="title_settings_log">Impostazione log</string>
 
     <string name="title_shift">Sposta</string>
@@ -1767,61 +1767,61 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="fractal_title">Computo frattale</string>
     <string name="info_title">INFO</string>
-    <!-- TODO string name="info_surveys">SURVEYS</string -->
+    <string name="info_surveys">RILIEVI</string>
     <string name="info_axes">Assi: blu Nord, verde Est</string>
     <string name="info_grid">Griglia [m]</string>
     <string name="info_view">Punto di vista</string>
     <string name="info_surveys">Rilievi</string>
-    <!-- TODO string name="info_shot">Shots</string -->
-    <!-- TODO string name="info_station">Stations</string -->
+    <string name="info_shot">Battute</string>
+    <string name="info_station">Capisaldi</string>
     <string name="info_length">Sviluppo</string>
     <string name="info_depth">Profondità</string>
     <string name="info_volume">Volume</string>
 
-    <!-- TODO string name="info_east">East</string -->
-    <!-- TODO string name="info_north">North</string -->
-    <!-- TODO string name="info_z">Altitude</string -->
-    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
-    <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
-    <!-- TODO string name="info_survey_value">%1$d</string -->
-    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
-    <!-- TODO string name="info_station_value">%1$d</string -->
-    <!-- TODO string name="info_length_value">%1$.1f m</string -->
-    <!-- TODO string name="info_depth_value">%1$.1f m</string -->
+    <string name="info_east">Est</string>
+    <string name="info_north">Nord</string>
+    <string name="info_z">Altitudine</string>
+    <string name="info_grid_value">%1$.0f m</string>
+    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
+    <string name="info_survey_value">%1$d</string>
+    <string name="info_shot_value">Tiri %1$d, Splay %2$d</string>
+    <string name="info_station_value">%1$d</string>
+    <string name="info_length_value">%1$.1f m</string>
+    <string name="info_depth_value">%1$.1f m</string>
     <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <!-- TODO string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string -->
-    <!-- TODO string name="info_east_value">W %1$.1f E %2$.1f</string -->
-    <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
-    <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
+    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_east_value">W %1$.1f E %2$.1f</string>
+    <string name="info_north_value">S %1$.1f N %2$.1f</string>
+    <string name="info_z_value">%1$.1f  %2$.1f</string>
 
     <string name="query" formatted="false">Rilievi: %d Battute: %d Capisaldi: %d\nSviluppo: %d Profondità: %d</string>
     <!-- UNUSED string name="cno_files">Nessun file</string -->
-    <!-- TODO string name="reading_file">Reading file %1$s</string -->
+    <string name="reading_file">Lettura file %1$s</string>
     <string name="clear">Pulisci</string>
 
-    <!-- TODO string name="plan_proj">Plan</string -->
-    <!-- TODO string name="profile_proj">Profile</string -->
-    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string -->
-    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string -->
-    <!-- TODO string name="measure">measure</string -->
+    <string name="plan_proj">Pianta</string>
+    <string name="profile_proj">Sezione</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Grotta %9$.1f</string>
+    <string name="measure">misura</string>
 
     <!-- UNUSED string name="style_stroke">Tratto</string -->
     <!-- UNUSED string name="style_stroke_fill">Tratto &amp; area</string -->
     <!-- UNUSED string name="style_fill">Area</string -->
-    <!-- TODO string name="surface_projection">Projection on DEM</string -->
-    <!-- TODO string name="surface_texture">Surface texture</string -->
+    <string name="surface_projection">Proiezione su DEM</string>
+    <string name="surface_texture">Trama superficie</string>
     <!-- OK string name="dem_file">DEM %1$s</string -->
-    <!-- TODO string name="dem_load">load</string -->
+    <string name="dem_load">carica</string>
 
-    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
-    <!-- TODO string name="dem_ok">Read DEM data</string -->
+    <string name="dem_failed">ERRORE: caricamento DEM</string>
+    <string name="dem_ok">Lettura DEM</string>
     <!-- OK string name="texture_file">%1$s</string -->
-    <!-- TODO string name="texture_load">load texture</string -->
-    <!-- TODO string name="texture_failed">Failed texture loading</string -->
-    <!-- TODO string name="texture_ok">Read texture file</string -->
-    <!-- TODO string name="sketch_load">Load</string -->
-    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
-    <!-- TODO string name="sketch_ok">Read sketch data</string -->
+    <string name="texture_load">caricamento trama</string>
+    <string name="texture_failed">ERRORE: caricamento trama</string>
+    <string name="texture_ok">Lettura file trama</string>
+    <string name="sketch_load">carica</string>
+    <string name="sketch_failed">ERRORE: caricamento disegno</string>
+    <string name="sketch_ok">Lettura disegno</string>
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
     <string name="ctitle_surface_alpha">Trasparenza DEM</string>
@@ -1835,14 +1835,14 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="survey_splays"> Splays: </string>
     <string name="survey_splays_length"> Lunghezza splays: </string>
 
-    <!-- TODO string name="cave_east"> E: %1$.1f</string -->
-    <!-- TODO string name="cave_north"> N: %1$.1f</string -->
-    <!-- TODO string name="cave_vert"> Z: %1$.1f</string -->
+    <string name="cave_east"> E: %1$.1f</string>
+    <string name="cave_north"> N: %1$.1f</string>
+    <string name="cave_vert"> Z: %1$.1f</string>
 
     <string name="cave_distance"> 3D distanza: %1$.2f</string>
-    <!-- TODO string name="horz_distance"> 2D horizontal distance: %1$.1f</string -->
+    <string name="horz_distance"> 2D distanza orizontale: %1$.1f</string>
     <string name="cave_length"> Sviluppo totale: %1$.2f %2$.1f %3$.1f</string>
-    <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
+    <string name="cave_angle"> Azimut: %1$.0f  Inclinazione: %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">R I L I E V I</string -->
     <string name="INFO">I N F O</string>
@@ -1850,8 +1850,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="STATIONS_DISTANCE">DISTANZA CAPISALDI</string>
     <!-- UNUSED string name="DISTANCE">DISTANZA</string -->
     <!-- UNUSED string name="CENTER">CENTRA</string -->
-    <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
-    <!-- TODO string name="select_texture_file">Select a texture file:</string -->
+    <string name="select_dem_file">Seleziona un DEM:</string>
+    <string name="select_texture_file">Seleziona una trama:</string>
 
     <string name="view_title">PUNTI DI VISTA</string>
     <string name="view_top">Sopra</string>
@@ -1866,8 +1866,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="walls_convexhull">Inviluppo Convesso</string>
     <!-- OK string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Inviluppo</string>
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
+    <string name="walls_bubble">Bolla</string>
+    <string name="walls_tube">Condotta</string>
     <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Powercrust: pochi splay</string>
@@ -1900,8 +1900,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="fail_convexhull">Calcolo inviluppo-convesso fallito</string>
     <string name="done_powercrust">Powercrust calcolato</string>
     <string name="fail_powercrust">Powercrust fallito</string>
-    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
-    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
+    <string name="done_hull">Fatta parete a strato semplice</string>
+    <string name="fail_hull">Fallita parete a strato semplice</string>
 
     <string name="no_database">Database non trovato\n</string>
     <!-- UNUSED string name="no_survey">Rilievo %1$s non trovato\n</string -->
@@ -1917,35 +1917,35 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cpref_selection_radius_title">Raggio di selezione</string>
     <string name="cpref_selection_radius_summary">Raggio di selezione</string>
 
-    <!-- TODO string name="cpref_station_toast_title">Station dialog</string -->
-    <!-- TODO string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string -->
-    <!-- TODO string name="cpref_station_points_title">Station points</string -->
-    <!-- TODO string name="cpref_station_points_summary">Display stations always [n]</string -->
-    <!-- TODO string name="cpref_station_size_title">Station point size</string -->
-    <!-- TODO string name="cpref_station_size_summary">Size of station points [8 pxl]</string -->
-    <!-- TODO string name="cpref_measure_dialog_title">Distance message</string -->
-    <!-- TODO string name="cpref_measure_dialog_summary">Distance message instead of doalog [n]</string -->
+    <string name="cpref_station_toast_title">Dialog caposaldo</string>
+    <string name="cpref_station_toast_summary">Dati caposaldo in dialog invece che in box [n]</string>
+    <string name="cpref_station_points_title">Punti capisaldi</string>
+    <string name="cpref_station_points_summary">Mostra sempre capisaldi [n]</string>
+    <string name="cpref_station_size_title">Grandezza punti capisaldi</string>
+    <string name="cpref_station_size_summary">Grandezza punti capisaldi [8 px]</string>
+    <string name="cpref_measure_dialog_title">Messaggio distanza</string>
+    <string name="cpref_measure_dialog_summary">Messaggio distanza invece di dialog [n]</string>
  
     <string name="cpref_grid_above_title">Griglia superiore</string>
     <string name="cpref_grid_above_summary">Griglia superiore</string>
-    <!-- TODO string name="cpref_grid_extent_title">Grid extent</string -->
-    <!-- TODO string name="cpref_grid_extend_summary">Grid extent arond the survey</string -->
+    <string name="cpref_grid_extent_title">Estensione griglia</string>
+    <string name="cpref_grid_extend_summary">Estensione griglia attorno al rilievo</string>
     <string name="cpref_neg_clino_title">Viste sotto l\'orizzonte</string>
     <string name="cpref_neg_clino_summary">Permette punti di vista sotto l\'orizzonte</string>
-    <!-- TODO string name="cpref_dem_buffer_title">DEM buffer</string -->
-    <!-- TODO string name="cpref_dem_buffer_summary">DEM extent around survey</string -->
+    <string name="cpref_dem_buffer_title">buffer del DEM</string>
+    <string name="cpref_dem_buffer_summary">Estensione DEM attorno al rilievo</string>
    
-    <!-- TODO string name="cpref_dem_maxsize_title">DEM max size</string -->
-    <!-- TODO string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string -->
-    <!-- TODO string name="cpref_dem_reduce_title">DEM reduce</string -->
-    <!-- TODO string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string -->
+    <string name="cpref_dem_maxsize_title">Grandezza massima DEM</string>
+    <string name="cpref_dem_maxsize_summary">Numero massimo di celle [400]</string>
+    <string name="cpref_dem_reduce_title">Riduci DEM</string>
+    <string name="cpref_dem_reduce_summary">Metodo riduzione DEM [shrink]</string>
   
     <string name="cpref_all_splay_title">Splay per pareti</string>
     <string name="cpref_all_splay_summary">Usa tutti gli splay per le pareti</string>
-    <!-- TODO string name="cpref_splay_proj_title">Projected splays</string -->
-    <!-- TODO string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string -->
-    <!-- TODO string name="cpref_splay_thr_title">Splay threshold</string -->
-    <!-- TODO string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string -->
+    <string name="cpref_splay_proj_title">Splay Proiettati</string>
+    <string name="cpref_splay_proj_summary">Usare splay proiettati su un piano? [n]</string>
+    <string name="cpref_splay_thr_title">Soglia Splay</string>
+    <string name="cpref_splay_thr_summary">Splay fuori dalla battuta da tenere [0.5]</string>
 
     <string name="cpref_split_triangles_title">Triangoli di parete</string>
     <string name="cpref_split_triangles_summary">Dividi i triangoli di parete</string>
@@ -1970,26 +1970,26 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="cperms_optional">Cave3D può non funzionare senza questi permessi:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
-    <!-- TODO string name="help_open_3d">Open 3D file</string -->
-    <!-- TODO string name="help_export_3d">Export 3D file</string -->
-    <!-- TODO string name="help_info_3d">3D info</string -->
-    <!-- TODO string name="help_ico_3d">3D leg distribution</string -->
-    <!-- TODO string name="help_rose_3d">Rose diagram</string -->
-    <!-- TODO string name="help_reset_3d">Reset 3D view</string -->
-    <!-- TODO string name="help_viewpoint_3d">3D viewpoint</string -->
-    <!-- TODO string name="help_alpha_3d">D.E.M.</string -->
-    <!-- TODO string name="help_wall_3d">3D model</string -->
-    <!-- UNUSED string name="help_temperature">Tempertaure</string -->
-    <!-- TODO string name="help_sketch_3d">3D sketch lifting</string -->
-    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
+    <string name="help_open_3d">Apri file 3D</string>
+    <string name="help_export_3d">Esporta file 3D</string>
+    <string name="help_info_3d">Info 3D</string>
+    <string name="help_ico_3d">Distribuzione tiri in 3D</string>
+    <string name="help_rose_3d">Diagramma Rose</string>
+    <string name="help_reset_3d">Reset vista 3D</string>
+    <string name="help_viewpoint_3d">Punto di vista 3D</string>
+    <string name="help_alpha_3d">D.E.M.</string>
+    <string name="help_wall_3d">modello 3D</string>
+    <!-- UNUSED string name="help_temperature">Temperatura</string -->
+    <string name="help_sketch_3d">sollevamento disegno 3D</string>
+    <!-- UNUSED string name="help_fractal">Analisi Frattale</string -->
 
-    <!-- TODO string name="help_light_3d">Pan and light</string -->
-    <!-- TODO string name="help_projection_3d">3D projection</string -->
-    <!-- TODO string name="help_stations_3d">Stations</string -->
-    <!-- TODO string name="help_splays_3d">Splays</string -->
-    <!-- TODO string name="help_walls_3d">Walls</string -->
-    <!-- TODO string name="help_surface_3d">Terrain</string -->
-    <!-- TODO string name="help_color_3d">Colors</string -->
-    <!-- TODO string name="help_frame_3d">Frame</string -->
+    <string name="help_light_3d">Panoramica e luce</string>
+    <string name="help_projection_3d">Proiezione 3D</string>
+    <string name="help_stations_3d">Capisaldi</string>
+    <string name="help_splays_3d">Splay</string>
+    <string name="help_walls_3d">Pareti</string>
+    <string name="help_surface_3d">Terreno</string>
+    <string name="help_color_3d">Colori</string>
+    <string name="help_frame_3d">Cornice</string>
 
 </resources>
