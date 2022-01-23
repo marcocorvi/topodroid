@@ -1792,7 +1792,7 @@
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
-    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
+    <string name="info_shot_value">主线 %1$d, 侧射线 %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
@@ -1807,13 +1807,13 @@
     <string name="legs_commented">注释</string>
 
     <string name="proj_perspective">角度参数</string>
-    <!-- TODO string name="proj_orthographic">Orthographic parameters</string -->
+    <string name="proj_orthographic">直角参数</string>
     <string name="proj_focal">Focal</string>
     <string name="proj_side">侧面</string>
     <!-- UNUSED string name="proj_near">近</string -->
     <!-- UNUSED string name="proj_far">远</string -->
 
-    <!-- TODO string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
+    <string name="query" formatted="false">测量: %d 测射: %d 站点: %d\n 长度: %d 深度: %d</string>
     <!-- UNUSED string name="cno_files">没有文件</string -->
     <string name="reading_file">读取文件 %1$s</string>
     <string name="read_survey">读取测量 %1$s\n</string>
@@ -1832,11 +1832,11 @@
     <string name="surface_gps">GPS 路径</string>
     <string name="surface_east">东</string>
     <string name="surface_north">北</string>
-    <!-- OK string name="dem_file">%1$s</string -->
+    <string name="dem_file">%1$s</string>
     <string name="dem_load">载入 DEM</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <string name="texture_file">%1$s</string>
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>
     <string name="texture_ok">读取纹理失败</string>
@@ -1844,7 +1844,7 @@
     <string name="sketch_failed">草图载入失败</string>
     <string name="sketch_ok">读取草图数据</string>
 
-    <!-- TODO string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string -->
+    <string name="ctitle">%1$s  倾角: %2$.0f  方位角: %3$.0f</string>
     <string name="ctitle_surface_alpha">表面透明度</string>
     <string name="ctitle_sketches">草图</string>
     <string name="ctitle_legs">Legs 透明度</string>
@@ -1860,8 +1860,8 @@
     <string name="survey_list">测量</string>
     <string name="survey_legs"> 主线: </string>
     <string name="survey_legs_length"> 主线长度: </string>
-    <!-- TODO string name="survey_splays"> Splays: </string -->
-    <!-- TODO string name="survey_splays_length"> Splays length: </string -->
+    <string name="survey_splays"> Splays: </string>
+    <string name="survey_splays_length"> Splays length: </string>
     <string name="cave_east"> 东: %1$.1f</string>
     <string name="cave_north"> 北: %1$.1f</string>
     <string name="cave_vert"> 立: %1$.1f</string>
@@ -1872,138 +1872,138 @@
 
 
     <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
-    <!-- TODO string name="INFO">I N F O</string -->
-    <!-- TODO string name="STATIONS">S T A T I O N</string -->
-    <!-- TODO string name="STATIONS_DISTANCE">STATIONS DISTANCE</string -->
-    <!-- UNUSED string name="DISTANCE">DISTANCE</string -->
-    <!-- UNUSED string name="CENTER">CENTER</string -->
-    <!-- TODO string name="select_survey_file">Select a survey file</string -->
-    <!-- TODO string name="select_export_file">Select export file</string -->
-    <!-- TODO string name="select_dem_file">Select a DEM file</string -->
-    <!-- TODO string name="select_texture_file">Select a texture file</string -->
-    <!-- TODO string name="select_sketch_file">Select a sketch file</string -->
+    <string name="INFO"> 信 息 </string>
+    <string name="STATIONS"> 站 点 </string>
+    <string name="STATIONS_DISTANCE">站点距离</string>
+    <!-- UNUSED string name="DISTANCE">距离</string -->
+    <!-- UNUSED string name="CENTER">中心</string -->
+    <string name="select_survey_file">选择一个测量文件</string>
+    <string name="select_export_file">选择输出文件</string>
+    <string name="select_dem_file">选择一个DEM文件</string>
+    <string name="select_texture_file">选择一个纹理文件</string>
+    <string name="select_sketch_file">选择一个草图文件</string>
 
-    <!-- TODO string name="view_title">VIEWPOINTS</string -->
-    <!-- TODO string name="view_top">Top</string -->
-    <!-- TODO string name="view_east">East</string -->
-    <!-- TODO string name="view_north">North</string -->
-    <!-- TODO string name="view_west">West</string -->
-    <!-- TODO string name="view_south">South</string -->
-    <!-- TODO string name="view_point">Viewpoint</string -->
-    <!-- TODO string name="view_zoom">Zoom 1</string -->
+    <string name="view_title">视角</string>
+    <string name="view_top">顶部</string>
+    <string name="view_east">东</string>
+    <string name="view_north">北</string>
+    <string name="view_west">西</string>
+    <string name="view_south">南</string>
+    <string name="view_point">视角</string>
+    <string name="view_zoom">缩放 1</string>
 
-    <!-- TODO string name="walls_title">WALLS</string -->
-    <!-- TODO string name="walls_convexhull">Convex Hull</string -->
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
-    <!-- TODO string name="walls_hull">Hull</string -->
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <string name="walls_title">墙</string>
+    <string name="walls_convexhull">凸面外壳</string>
+    <string name="walls_powercrust">动力外壳</string>
+    <string name="walls_hull">外壳</string>
+    <string name="walls_bubble">泡装</string>
+    <string name="walls_tube">管状</string>
+    <string name="walls_delaunay">三角</string>
 
-    <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
-    <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
-    <!-- TODO string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
-    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
+    <string name="powercrust_few_splays">动力外壳: 侧射太少</string>
+    <string name="powercrust_failed">动力外壳失败</string>
+    <string name="powercrust_successful">动力外壳成功: %1$d / %2$d</string>
+    <string name="powercrust_dxf_not_supported">动力外壳dxf输出不支持</string>
 
-    <!-- TODO string name="ok_export">OK. Exported %1$s</string -->
+    <string name="ok_export">成功. 输出 %1$s</string>
 
-    <!-- UNUSED string name="no_planview">No plan view</string -->
-    <!-- UNUSED string name="no_surface">No surface DEM</string -->
-    <!-- TODO string name="no_model">No 3D model</string -->
-    <!-- TODO string name="no_topodroid_model">Not a TopoDroid model</string -->
+    <!-- UNUSED string name="no_planview">无平面视图</string -->
+    <!-- UNUSED string name="no_surface">无表面 DEM</string -->
+    <string name="no_model">无3D模型</string>
+    <string name="no_topodroid_model">无TopoDroid模型</string>
 
-    <!-- TODO string name="error_file_not_found">Error: file %1$s not found</string -->
-    <!-- TODO string name="error_file_not_readable">Error: file %1$s not readable</string -->
-    <!-- TODO string name="error_file_read">Error: file %1$s failed read</string -->
-    <!-- TODO string name="error_survey_read">Error: survey %1$s failed read</string -->
-    <!-- TODO string name="error_io_exception">Error: IO exception %1$s</string -->
-    <!-- TODO string name="error_parser_error">Error: parsing %1$s</string -->
-    <!-- TODO string name="error_export_failed">Error: export %1$s failed</string -->
-    <!-- TODO string name="unsupported_format">Unsupported file format</string -->
+    <string name="error_file_not_found">错误: 文件 %1$s 没有发现</string>
+    <string name="error_file_not_readable">错误: 文件 %1$s 无法读取</string>
+    <string name="error_file_read">错误: 文件 %1$s 读取失败</string>
+    <string name="error_survey_read">错误: 测量 %1$s 读取失败</string>
+    <string name="error_io_exception">错误: 输入输出异常 %1$s</string>
+    <string name="error_parser_error">错误: 解析 %1$s</string>
+    <string name="error_export_failed">错误: 输出 %1$s 失败</string>
+    <string name="unsupported_format">不支持的文件格式</string>
 
 
-    <!-- TODO string name="export_gltf_ok">Exported glTF file</string -->
-    <!-- TODO string name="export_gltf_fail">Failed glTf export</string -->
+    <string name="export_gltf_ok">输出 glTF 文件</string>
+    <string name="export_gltf_fail">失败的 glTf 文件输出</string>
 
-    <!-- TODO string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
-    <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
-    <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
-    <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
-    <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
-    <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-    <!-- TODO string name="warning_no_cwd">Warning: no base path</string -->
-    <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
-    <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
-    <!-- TODO string name="warning_no_parent">Warning: cannot go to parent folder</string -->
-    <!-- TODO string name="no_permissions">The app cannot run without the required permissions</string -->
+    <string name="warning_not_overwrite">警告: 不覆盖现有文件 %1$s</string>
+    <!-- UNUSED string name="warning_not_txt">警告: 无txt文件 %1$s</string -->
+    <!-- UNUSED string name="warning_not_kml">警告: 无 kml 文件 %1$s</string -->
+    <!-- UNUSED string name="warning_not_las">警告: 无 las 文件 %1$s</string -->
+    <!-- UNUSED string name="warning_not_cgal">警告: 无 CGAL 文本文件 %1$s</string -->
+    <!-- UNUSED string name="warning_not_stl">警告: 无 stl 文件 %1$s</string -->
+    <string name="warning_no_cwd">警告: 无贝塞尔路径</string>
+    <!-- UNUSED string name="warning_no_file">警告: 未发现 3d 文件</string -->
+    <!-- UNUSED string name="warning_empty_cwd">警告: 空基本路径</string -->
+    <string name="warning_no_parent">警告: 无法转到父文件夹</string>
+    <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
-    <!-- TODO string name="done_fractals">Done fractals dims</string -->
-    <!-- TODO string name="done_convexhull">Done convex-hull walls</string -->
-    <!-- TODO string name="fail_convexhull">Failed convex-hull walls</string -->
-    <!-- TODO string name="done_powercrust">Done powercrust walls</string -->
-    <!-- TODO string name="fail_powercrust">Failed powercrust walls</string -->
-    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
-    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
-    <!-- TODO string name="done_tube">Done simple-tube walls</string -->
-    <!-- TODO string name="fail_tube">Failed simple-tube walls</string -->
-    <!-- TODO string name="done_bubble">Done bubble walls</string -->
-    <!-- TODO string name="fail_bubble">Failed bubble walls</string -->
+    <string name="done_fractals">完成分形会变暗</string>
+    <string name="done_convexhull">凸起外壳洞壁已完成</string>
+    <string name="fail_convexhull">凸起外壳洞壁失败</string>
+    <string name="done_powercrust">动力外壳洞壁已完成</string>
+    <string name="fail_powercrust">动力外壳洞壁失败</string>
+    <string name="done_hull">简单外壳洞壁已完成</string>
+    <string name="fail_hull">简单外壳洞壁失败</string>
+    <string name="done_tube">简单管状洞壁已完成</string>
+    <string name="fail_tube">简单管状洞壁失败</string>
+    <string name="done_bubble">泡装洞壁已完成</string>
+    <string name="fail_bubble">泡状洞壁失败</string>
 
-    <!-- TODO string name="no_database">No database\n</string -->
-    <!-- TODO string name="cno_survey">No survey %1$s\n</string -->
-    <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
-    <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
+    <string name="no_database">无数据库\n</string>
+    <string name="cno_survey">无测量文件 %1$s\n</string>
+    <!-- UNUSED string name="cno_file">无文件 %1$s\n</string -->
+    <string name="empty_survey">空测量文件 %1$s\n</string>
 
-    <!-- TODO string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
+    <string name="viewing_at">在倾角 %1$.0f 方位角 %2$.0f 查看</string>
 
-    <!-- TODO string name="cpref_dem3d">DEM</string -->
-    <!-- TODO string name="cpref_walls3d">WALL MODEL</string -->
-    <!-- UNUSED string name="cpref_base_path_title">App base path</string -->
+    <string name="cpref_dem3d">DEM</string>
+    <string name="cpref_walls3d">洞壁模型</string>
+    <!-- UNUSED string name="cpref_base_path_title">软件基本路径</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string -->
     <!-- UNUSED string name="cpref_text_size_title">Label size</string -->
     <!-- UNUSED string name="cpref_text_size_summary">Station label size [10 pt]</string -->
     <!-- UNUSED string name="cpref_size_buttons_title">Buttons size</string -->
     <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
-    <!-- TODO string name="cpref_selection_radius_title">Selection radius</string -->
-    <!-- TODO string name="cpref_selection_radius_summary">Radius of selection [20 pxl]</string -->
-    <!-- TODO string name="cpref_station_toast_title">Station dialog</string -->
-    <!-- TODO string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string -->
-    <!-- TODO string name="cpref_station_points_title">Station points</string -->
-    <!-- TODO string name="cpref_station_points_summary">Display stations always [n]</string -->
-    <!-- TODO string name="cpref_station_size_title">Station point size</string -->
-    <!-- TODO string name="cpref_station_size_summary">Size of station points [8 pxl]</string -->
-    <!-- TODO string name="cpref_measure_dialog_title">Distance message</string -->
-    <!-- TODO string name="cpref_measure_dialog_summary">Distance message instead of dialog [n]</string -->
-    <!-- TODO string name="cpref_grid_above_title">Top grid</string -->
-    <!-- TODO string name="cpref_grid_above_summary">Grid on the top instead of bottom [n]</string -->
-    <!-- TODO string name="cpref_grid_extent_title">Grid extent</string -->
-    <!-- TODO string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string -->
-    <!-- TODO string name="cpref_neg_clino_title">Below-horizon views</string -->
-    <!-- TODO string name="cpref_neg_clino_summary">Allow below-horizon viewpoints [n]</string -->
-    <!-- TODO string name="cpref_dem_buffer_title">DEM buffer</string -->
-    <!-- TODO string name="cpref_dem_buffer_summary">Extension of the DEM around survey [200]</string -->
-    <!-- TODO string name="cpref_dem_maxsize_title">DEM max size</string -->
-    <!-- TODO string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string -->
-    <!-- TODO string name="cpref_dem_reduce_title">DEM reduce</string -->
-    <!-- TODO string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string -->
-    <!-- TODO string name="cpref_all_splay_title">All splays</string -->
-    <!-- TODO string name="cpref_all_splay_summary">Whether to use all the splays for the walls [y]</string -->
-    <!-- TODO string name="cpref_splay_use_title">Splay usage</string -->
-    <!-- TODO string name="cpref_splay_use_summary">Splay use: none, normal, xsections [nornal]</string -->
-    <!-- TODO string name="cpref_splay_proj_title">Projected splays</string -->
-    <!-- TODO string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string -->
-    <!-- TODO string name="cpref_splay_thr_title">Splay threshold</string -->
-    <!-- TODO string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string -->
+    <string name="cpref_selection_radius_title">选择边界范围</string>
+    <string name="cpref_selection_radius_summary">选择半径 [20 pxl]</string>
+    <string name="cpref_station_toast_title">站点对话框</string>
+    <string name="cpref_station_toast_summary">站点数据对话框代替框 [n]</string>
+    <string name="cpref_station_points_title">站点</string>
+    <string name="cpref_station_points_summary">总是显示站点 [n]</string>
+    <string name="cpref_station_size_title">站点尺寸</string>
+    <string name="cpref_station_size_summary">站点的尺寸 [8 pxl]</string>
+    <string name="cpref_measure_dialog_title">距离信息</string>
+    <string name="cpref_measure_dialog_summary">距离信息替代对话框 [n]</string>
+    <string name="cpref_grid_above_title">顶部网格</string>
+    <string name="cpref_grid_above_summary">顶部网格替代底部网格 [n]</string>
+    <string name="cpref_grid_extent_title">网格范围</string>
+    <string name="cpref_grid_extent_summary">网格范围围绕测量平面图视图</string>
+    <string name="cpref_neg_clino_title">地平线以下视图</string>
+    <string name="cpref_neg_clino_summary">允许低于地平线的视点 [n]</string>
+    <string name="cpref_dem_buffer_title">DEM 缓存</string>
+    <string name="cpref_dem_buffer_summary">测量周围DEM的延伸 [200]</string>
+    <string name="cpref_dem_maxsize_title">DEM 最大尺寸</string>
+    <string name="cpref_dem_maxsize_summary">最大单元格数 [400]</string>
+    <string name="cpref_dem_reduce_title">DEM 减少</string -->
+    <string name="cpref_dem_reduce_summary">DEM减少模式 [shrink]</string>
+    <string name="cpref_all_splay_title">所有的侧射线</string>
+    <string name="cpref_all_splay_summary">是否将所有的侧射线用于洞壁 [y]</string>
+    <string name="cpref_splay_use_title">侧射线使用</string>
+    <string name="cpref_splay_use_summary">侧射线使用: 无, 正常, 断面 [正常]</string>
+    <string name="cpref_splay_proj_title">推断的侧射线</string>
+    <string name="cpref_splay_proj_summary">是否将推测的侧射线投影到平面图 [n]</string>
+    <string name="cpref_splay_thr_title">侧射线阈值</string>
+    <string name="cpref_splay_thr_summary">侧射线超出可保存值 [0.5]</string>
 
-    <!-- TODO string name="cpref_split_triangles_title">Split triangles</string -->
-    <!-- TODO string name="cpref_split_triangles_summary">Whether to split intersecting wall triangles [y]</string -->
-    <!-- TODO string name="cpref_split_random_title">Randomize points</string -->
-    <!-- TODO string name="cpref_split_random_summary">Small random vector added to splays [0.1]</string -->
-    <!-- TODO string name="cpref_split_stretch_title">Stretch walls</string -->
-    <!-- TODO string name="cpref_split_stretch_summary">Stretch of wall points along the leg [0.1]</string -->
+    <string name="cpref_split_triangles_title">分割三角形</string>
+    <string name="cpref_split_triangles_summary">是否分割相交的洞壁三角形 [y]</string>
+    <string name="cpref_split_random_title">随机点</string>
+    <string name="cpref_split_random_summary">将小随机矢量添加到测射线 [0.1]</string>
+    <string name="cpref_split_stretch_title">延展洞壁</string>
+    <string name="cpref_split_stretch_summary">沿着主线延展洞壁点 [0.1]</string>
 
-    <!-- TODO string name="cpref_powercrust_delta_title">Powercrust Delta</string -->
-    <!-- TODO string name="cpref_powercrust_delta_summary">Exclude splays differing from nearby too much [0.1]</string -->
+    <TODO string name="cpref_powercrust_delta_title">动力外壳细节</string>
+    <TODO string name="cpref_powercrust_delta_summary">排除与附近相差太大的侧射线 [0.1]</string>
 <!-- UNUSED
     <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
@@ -2014,8 +2014,8 @@
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <!-- TODO string name="cperms_mandatory">Cave3D cannot run without:</string -->
-    <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
+    <string name="cperms_mandatory">Cave3D 的运行离不开:</string>
+    <!-- UNUSED string name="cperms_optional">Cave3D 非全功能离不开:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
     <string name="help_open_3d">打开 3D 文件</string>
