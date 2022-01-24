@@ -1771,7 +1771,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="info_axes">Assi: blu Nord, verde Est</string>
     <string name="info_grid">Griglia [m]</string>
     <string name="info_view">Punto di vista</string>
-    <string name="info_surveys">Rilievi</string>
+    <!-- ALREADY DEFINED string name="info_surveys">Rilievi</string -->
     <string name="info_shot">Battute</string>
     <string name="info_station">Capisaldi</string>
     <string name="info_length">Sviluppo</string>
@@ -1929,7 +1929,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cpref_grid_above_title">Griglia superiore</string>
     <string name="cpref_grid_above_summary">Griglia superiore</string>
     <string name="cpref_grid_extent_title">Estensione griglia</string>
-    <string name="cpref_grid_extend_summary">Estensione griglia attorno al rilievo</string>
+    <string name="cpref_grid_extent_summary">Estensione griglia attorno al rilievo</string>
     <string name="cpref_neg_clino_title">Viste sotto l\'orizzonte</string>
     <string name="cpref_neg_clino_summary">Permette punti di vista sotto l\'orizzonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>

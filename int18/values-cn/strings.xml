@@ -1832,11 +1832,11 @@
     <string name="surface_gps">GPS 路径</string>
     <string name="surface_east">东</string>
     <string name="surface_north">北</string>
-    <string name="dem_file">%1$s</string>
+    <!-- OK string name="dem_file">%1$s</string -->
     <string name="dem_load">载入 DEM</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
-    <string name="texture_file">%1$s</string>
+    <!-- OK string name="texture_file">%1$s</string -->
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>
     <string name="texture_ok">读取纹理失败</string>
@@ -1894,11 +1894,11 @@
 
     <string name="walls_title">墙</string>
     <string name="walls_convexhull">凸面外壳</string>
-    <string name="walls_powercrust">动力外壳</string>
+    <!-- DO NOT TRANSLATE string name="walls_powercrust">动力外壳</string -->
     <string name="walls_hull">外壳</string>
     <string name="walls_bubble">泡装</string>
     <string name="walls_tube">管状</string>
-    <string name="walls_delaunay">三角</string>
+    <!-- DO NOT TRANSLATE string name="walls_delaunay">三角</string -->
 
     <string name="powercrust_few_splays">动力外壳: 侧射太少</string>
     <string name="powercrust_failed">动力外壳失败</string>
@@ -1984,7 +1984,7 @@
     <string name="cpref_dem_buffer_summary">测量周围DEM的延伸 [200]</string>
     <string name="cpref_dem_maxsize_title">DEM 最大尺寸</string>
     <string name="cpref_dem_maxsize_summary">最大单元格数 [400]</string>
-    <string name="cpref_dem_reduce_title">DEM 减少</string -->
+    <string name="cpref_dem_reduce_title">DEM 减少</string>
     <string name="cpref_dem_reduce_summary">DEM减少模式 [shrink]</string>
     <string name="cpref_all_splay_title">所有的侧射线</string>
     <string name="cpref_all_splay_summary">是否将所有的侧射线用于洞壁 [y]</string>
@@ -2002,8 +2002,8 @@
     <string name="cpref_split_stretch_title">延展洞壁</string>
     <string name="cpref_split_stretch_summary">沿着主线延展洞壁点 [0.1]</string>
 
-    <TODO string name="cpref_powercrust_delta_title">动力外壳细节</string>
-    <TODO string name="cpref_powercrust_delta_summary">排除与附近相差太大的侧射线 [0.1]</string>
+    <string name="cpref_powercrust_delta_title">动力外壳细节</string>
+    <string name="cpref_powercrust_delta_summary">排除与附近相差太大的侧射线 [0.1]</string>
 <!-- UNUSED
     <string name="cpref_convex_hull_title">Convex hull</string>
     <string name="cpref_convex_hull_summary">Convex hull walls</string>
