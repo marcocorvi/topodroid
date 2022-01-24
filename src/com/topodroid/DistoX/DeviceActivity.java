@@ -17,6 +17,7 @@ import com.topodroid.utils.TDTag;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -72,6 +73,7 @@ import android.content.res.Resources;
 import android.content.DialogInterface;
 import android.content.BroadcastReceiver;
 // import android.content.ComponentName;
+import android.content.res.Configuration;
 
 import android.widget.TextView;
 import android.widget.ArrayAdapter;
@@ -366,8 +368,6 @@ public class DeviceActivity extends Activity
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( res );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
     // TDLog.Debug("device activity create done");
 
@@ -678,6 +678,9 @@ public class DeviceActivity extends Activity
   public void onStart()
   {
     super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
   }
 
   @Override
@@ -685,8 +688,6 @@ public class DeviceActivity extends Activity
   {
     super.onResume();
     // TDLog.Debug("device activity on resume" );
-    // if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
-
     registerReceiver( mPairReceiver, new IntentFilter( DeviceUtil.ACTION_BOND_STATE_CHANGED ) );
     mApp.resumeComm();
     mDeviceActivityVisible = true;
@@ -1074,15 +1075,6 @@ public class DeviceActivity extends Activity
     }
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
-
   // from ScanBLEDialoag
   public void setBLEDevice( BluetoothDevice bt_device )
   {
@@ -1090,5 +1082,16 @@ public class DeviceActivity extends Activity
     TDToast.make( "TODO set bluetooth LE device" );
     // set bt_device as current
   }
+
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
+
 }
 

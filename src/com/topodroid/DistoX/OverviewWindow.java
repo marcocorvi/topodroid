@@ -505,8 +505,6 @@ public class OverviewWindow extends ItemDrawer
       mMenuImage.setOnClickListener( this );
       TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, res, R.drawable.iz_menu ) );
       mMenu = (ListView) findViewById( R.id.menu );
-      setMenuAdapter( res );
-      closeMenu();
       mMenu.setOnItemClickListener( this );
 
       doStart();
@@ -521,7 +519,6 @@ public class OverviewWindow extends ItemDrawer
     protected synchronized void onResume()
     {
       super.onResume();
-      if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
       doResume();
     }
 
@@ -533,11 +530,15 @@ public class OverviewWindow extends ItemDrawer
       doPause();
     }
 
-    // @Override // only calls super method
-    // protected synchronized void onStart()
-    // {
-    //   super.onStart();
-    // }
+  @Override
+  public void onStart() 
+  {
+    super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
+  }
+
 
     @Override
     protected synchronized void onStop()
@@ -1362,6 +1363,7 @@ public class OverviewWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
     mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 

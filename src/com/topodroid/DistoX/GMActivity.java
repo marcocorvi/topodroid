@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -55,6 +56,7 @@ import android.os.Bundle;
 // import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.content.DialogInterface;
 
 import android.widget.ArrayAdapter;
@@ -867,9 +869,6 @@ public class GMActivity extends Activity
     mImage.setOnClickListener( this );
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( res );
-    onMenu = true;
-    closeMenu();
     mMenu.setOnItemClickListener( this );
   }
 
@@ -1180,6 +1179,10 @@ public class GMActivity extends Activity
   {
     super.onStart();
     // setBTMenus( DeviceUtil.isAdapterEnabled() );
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    onMenu = true;
+    closeMenu();
   }
 
   @Override
@@ -1353,14 +1356,15 @@ public class GMActivity extends Activity
     }
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
   // public void notifyDisconnected()
   // {

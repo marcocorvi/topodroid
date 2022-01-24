@@ -55,6 +55,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
 
@@ -1021,7 +1022,6 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
-        if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
           // (new PhotoCommentDialog(this, this, mShotId) ).show();
           Bundle extras = intent.getExtras();
@@ -1203,10 +1203,10 @@ public class ShotWindow extends Activity
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
-    onMenu = true;
-    closeMenu();
     mMenu.setOnItemClickListener( this );
+    // setMenuAdapter( getResources() );
+    // onMenu = true; // force close menu
+    // closeMenu();
 
     // CutNPaste.dismissPopupBT();
 
@@ -1222,7 +1222,11 @@ public class ShotWindow extends Activity
   {
     super.onStart();
     // Debug.startMethodTracing( "distox" );
-    // TDLog.v( "Shot Activity onStart() " );
+    // TDLog.v( "Shot Activity on Start() " );
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    onMenu = true; // force close menu
+    closeMenu();
   }
 
   @Override
@@ -1263,8 +1267,6 @@ public class ShotWindow extends Activity
   {
     super.onResume();
     // TDLog.v("ShotWindow onResume()" );
-    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
-
     // FIXME NOTIFY register ILister
     // if ( mApp.mComm != null ) { mApp.mComm.resume(); }
     // TDLog.v( "Shot Activity on Resume()" );
@@ -2440,14 +2442,15 @@ public class ShotWindow extends Activity
     startActivity( drawIntent );
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
   // ------------------------------------------------------------------
   void startAudio( DBlock blk )

@@ -44,6 +44,7 @@ import android.content.Intent;
 import android.content.DialogInterface;
 import android.content.ActivityNotFoundException;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 
 // import android.location.LocationManager;
 
@@ -298,22 +299,34 @@ public class SurveyWindow extends Activity
     mMenuImage.setOnClickListener( this );
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( res );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
   }
 
+  /** lifecycle: on start
+   */
+  @Override
+  public void onStart() 
+  {
+    super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
+  }
+
+  /** set the window title: the survey name
+   */
   void setTheTitle()
   {
     setTitle( // mApp.getConnectionStateTitleStr() + // IF_COSURVEY
               getResources().getString( R.string.title_survey ) );
   }
 
+  /** lifecycle: on resume
+   */
   @Override
   public synchronized void onResume() 
   {
     super.onResume();
-    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     doSetDeclination( mApp_mData.getSurveyDeclination( TDInstance.sid ) );
   }
 
@@ -705,13 +718,14 @@ public class SurveyWindow extends Activity
   //   (new ConvertTdr2Th2Task( mActivity, convert_handler, mApp )).execute();
   // }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
 }

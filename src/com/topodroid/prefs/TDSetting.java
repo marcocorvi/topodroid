@@ -2655,8 +2655,8 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    TDLog.v("set locale " + locale );
-    TDLocale.setLocale( locale );
+    TDLog.v("SETTING set locale " + locale );
+    TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {
       BrushManager.reloadPointLibrary( TDInstance.context, res ); // reload symbols

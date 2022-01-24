@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDTag;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.help.UserManualActivity;
@@ -25,6 +26,7 @@ import android.os.Bundle;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.res.Configuration;
 
 import android.widget.RadioButton;
 import android.widget.Button;
@@ -151,14 +153,15 @@ public class SensorActivity extends Activity
     // mETvalue.setText( null );
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
   private void setSensor( )
   { 

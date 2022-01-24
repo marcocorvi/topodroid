@@ -1116,6 +1116,7 @@ public class DrawingWindow extends ItemDrawer
   {
     super.onConfigurationChanged( new_cfg );
     // TDLog.v( "config changed " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    TDLocale.resetTheLocale();
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // setMenuAdapter( getResources(), mType );
   }
@@ -2166,9 +2167,6 @@ public class DrawingWindow extends ItemDrawer
 
     doStart( true, -1 );
 
-    setMenuAdapter( getResources(), mType );
-    closeMenu();
-
     mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
     mLayoutToolsL = (LinearLayout) findViewById( R.id.layout_tool_l );
@@ -2252,8 +2250,8 @@ public class DrawingWindow extends ItemDrawer
 
 
     setToolsToolbarParams();
-    // setBtnRecentAll(); done onStart
-    // mRecentTools = mRecentLine; // done onStart
+    // setBtnRecentAll(); done on Start
+    // mRecentTools = mRecentLine; // done on Start
 
     if ( mDataDownloader != null ) {
       mApp.registerLister( this );
@@ -2447,7 +2445,6 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     // TDLog.v( "Drawing Activity onResume " + ((mDataDownloader!=null)?"with DataDownloader":"") );
     doResume();
     if ( mDataDownloader != null ) {
@@ -2471,12 +2468,15 @@ public class DrawingWindow extends ItemDrawer
   protected synchronized void onStart()
   {
     super.onStart();
-    // TDLog.v("Drawing Activity onStart " );
+    // TDLog.v("Drawing Activity on Start " );
+    TDLocale.resetTheLocale();
     loadRecentSymbols( mApp_mData );
     mOutlinePlot1 = null;
     mOutlinePlot2 = null;
     setBtnRecentAll(); 
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on start done");
+    setMenuAdapter( getResources(), mType );
+    closeMenu();
   }
 
   @Override

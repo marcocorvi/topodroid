@@ -11,9 +11,9 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDPrefActivity;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.BrushManager;
 
@@ -43,10 +43,10 @@ public class TDLocale
   /** reset the locale
    * @note called by MainWindow
    */
-  public static void resetLocale( )
+  public static void resetTheLocale( )
   {
-    if ( ! TDSetting.isFlagLocale() ) return;
-    TDLog.v( "reset locale str <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
+    // if ( ! TDSetting.isFlagLocale() ) return;
+    TDLog.v( "LOCALE reset <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
@@ -67,11 +67,11 @@ public class TDLocale
    * @param locale   country ISO code
    * @note called by TDSetting
    */
-  public static void setLocale( String locale )
+  public static void setTheLocale( String locale )
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    TDLog.v( "set locale str <" + mLocaleStr + "> " + mLocale.toString() );
+    TDLog.v( "LOCALE set <" + mLocaleStr + "> " + mLocale.toString() );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
@@ -86,7 +86,7 @@ public class TDLocale
     //   conf.locale = mLocale; 
     //   res.updateConfiguration( conf, dm );
     // }
-    TDSetting.clearFlagLocale();
+    // TDSetting.clearFlagLocale();
   }
 
 }

@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDLocale;
 
 // import com.topodroid.DistoX.TDandroid;
 
@@ -84,6 +85,7 @@ import android.content.SharedPreferences.Editor;
 import android.content.Intent;
 import android.content.Context;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
@@ -339,8 +341,6 @@ public class TopoGL extends Activity
     mMenuImage.setOnClickListener( this );
     TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( getResources() );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
 
     // glSurfaceView = (GLSurfaceView) findViewById( R.id.view );
@@ -396,6 +396,9 @@ public class TopoGL extends Activity
   {
     super.onStart();
     // TDLog.v("TopoGL on start");
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
     makeSurface();
   }
 
@@ -416,6 +419,17 @@ public class TopoGL extends Activity
     //   String name = mPrefs.getString( "CAVE3D_BLUETOOTH_DEVICE", "" );
     //   checkBluetooth( name );
     // }
+  }
+
+  /** react to a change of configuration
+   * @param cfg  new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration cfg )
+  {
+    super.onConfigurationChanged( cfg );
+    // TDLog.v("TOPOGL config change" );
+    TDLocale.resetTheLocale( );
   }
 
   // -----------------------------------------------------------------

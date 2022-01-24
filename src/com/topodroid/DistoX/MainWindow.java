@@ -70,6 +70,7 @@ import android.content.DialogInterface;
 import android.content.DialogInterface.OnCancelListener;
 import android.content.DialogInterface.OnDismissListener;
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 
@@ -566,16 +567,19 @@ public class MainWindow extends Activity
   // /** react to a change in the configuration
   //  * @param cfg   new configuration
   //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLog.v("MAIN config changed");
+    TDLocale.resetTheLocale();
+  }
 
   /** set the adapter of the menu pull-down list
    */
   void setMenuAdapter( )
   {
+    TDLog.v("MAIN set menu adapter");
     Resources res = getResources();
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >(mActivity, R.layout.menu );
 
@@ -685,14 +689,14 @@ public class MainWindow extends Activity
     mMenuImage.setOnClickListener( this );
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
-    // setMenuAdapter( );
+    // setMenuAdapter( ); // in on Start()
     // closeMenu();
 
     // TDLog.Profile("TDActivity buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     mListView.setEmptyPlacholder( true );
 
-    // resetButtonBar(); // moved to onStart()
+    // resetButtonBar(); // moved to on Start()
     // setMenuAdapter( );
     // closeMenu();
 
@@ -979,7 +983,7 @@ public class MainWindow extends Activity
     // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
 
     // TDLog.Profile("Main Window on Start");
-    // TDLog.v("Main Window on Start");
+    TDLog.v("MAIN on Start");
     if ( do_check_bt ) {
       do_check_bt = false;
       if ( DeviceUtil.hasAdapter() ) {
@@ -1020,22 +1024,20 @@ public class MainWindow extends Activity
     }
 
     if ( TDSetting.isFlagButton() ) resetButtonBar(); // 6.0.33
-    if ( TDSetting.isFlagMenu() ) {
-      setMenuAdapter( );
-      closeMenu();
-    }
-    if ( TDSetting.isFlagLocale() ) {
-      TDLog.v("main start reset locale");
-      TDLocale.resetLocale();
-    }
+    // if ( TDSetting.isFlagMenu() ) {
+    //   setMenuAdapter( );
+    //   closeMenu();
+    // }
+    TDLocale.resetTheLocale();
+    setMenuAdapter( );
+    closeMenu();
   }
 
   @Override
   public synchronized void onResume() 
   {
     super.onResume();
-    // TDLog.v("Main Window on Resume");
-    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale();
+    TDLog.v("MAIN on Resume");
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1062,7 +1064,7 @@ public class MainWindow extends Activity
   protected synchronized void onPause() 
   { 
     super.onPause();
-    // TDLog.v("Main Window on Pause");
+    TDLog.v("MAIN on Pause");
     // TDLog.Log( TDLog.LOG_MAIN, "onPause " );
     mApp.suspendComm();
   }
@@ -1071,7 +1073,7 @@ public class MainWindow extends Activity
   public void onStop()
   {
     super.onStop();
-    // TDLog.v("Main Window on Stop");
+    TDLog.v("MAIN on Stop");
     // if ( TopoDroidApp.isTracing ) {
     //   Debug.stopMethodTracing();
     // }
@@ -1084,7 +1086,7 @@ public class MainWindow extends Activity
     if ( doubleBackHandler != null ) {
       doubleBackHandler.removeCallbacks( doubleBackRunnable );
     }
-    // TDLog.Log( TDLog.LOG_MAIN, "onDestroy " );
+    TDLog.v( "MAIN on Destroy " );
     // FIXME if ( mApp.mComm != null ) { mApp.mComm.interrupt(); }
     // FIXME BT_RECEIVER mApp.resetCommBTReceiver();
     // saveInstanceToData();
@@ -1137,9 +1139,9 @@ public class MainWindow extends Activity
   @Override
   protected void attachBaseContext( Context ctx )
   {
-    TDLog.v("main attach base context");
+    TDLog.v("MAIN attach base context");
     TDInstance.context = ctx;
-    TDLocale.resetLocale( );
+    TDLocale.resetTheLocale( );
     super.attachBaseContext( TDInstance.context );
   }
 
@@ -1152,7 +1154,7 @@ public class MainWindow extends Activity
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
       case TDRequest.REQUEST_ENABLE_BT:
-        // TDLocale.resetLocale(); // OK-LOCALE apparently this does not affect locale
+        // TDLocale.resetTheLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
           // nothing to do: scanBTDEvices() is called by menu CONNECT
         } else if ( ! say_dialogR && say_not_enabled ) {
@@ -1168,7 +1170,7 @@ public class MainWindow extends Activity
       case TDRequest.REQUEST_SETTINGS:
         if ( result == Activity.RESULT_OK ) {
           if ( TDSetting.isFlagMenu() ) {
-            TDLog.v("main set menu adapter");
+            TDLog.v("MAIN setting activity result: menu flag");
             setMenuAdapter( );
           }
         }

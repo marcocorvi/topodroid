@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.help.UserManualActivity;
 
@@ -24,21 +25,22 @@ import android.os.Bundle;
 
 import android.app.Activity;
 
-// import android.content.res.ColorStateList;
 // import android.content.Context;
 // import android.content.Intent;
-
-import android.view.KeyEvent;
+// import android.content.res.ColorStateList;
+import android.content.res.Configuration;
 
 // import android.location.LocationManager;
 
 import android.widget.TextView;
 import android.widget.ListView;
 // import android.widget.Button;
-import android.view.View;
-// import android.view.View.OnClickListener;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
+
+import android.view.View;
+import android.view.KeyEvent;
+// import android.view.View.OnClickListener;
 
 public class SensorListActivity extends Activity
                                 implements OnItemClickListener
@@ -168,12 +170,13 @@ public class SensorListActivity extends Activity
     return false;
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration cfg )
+  {
+    super.onConfigurationChanged( cfg );
+    TDLocale.resetTheLocale();
+  }
 }

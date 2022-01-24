@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 // import com.topodroid.utils.TDLocale;
@@ -32,6 +33,7 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
+import android.content.res.Configuration;
 
 // import android.widget.TextView;
 // import android.widget.EditText;
@@ -155,15 +157,6 @@ public class FixedActivity extends Activity
 
     refreshList();
   }
-
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
 
   /** refresh the list of fixed points
    */
@@ -432,6 +425,16 @@ public class FixedActivity extends Activity
         // TDLog.Error( "key down: code " + code );
     }
     return false;
+  }
+
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration cfg )
+  {
+    super.onConfigurationChanged( cfg );
+    TDLocale.resetTheLocale();
   }
 
 }

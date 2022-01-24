@@ -18,6 +18,7 @@ package com.topodroid.tdm;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDRequest;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -36,6 +37,7 @@ import java.io.FilenameFilter;
 import java.util.ArrayList;
 
 import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.content.pm.PackageManager;
 // import android.app.Dialog;
 import android.os.Build;
@@ -111,8 +113,6 @@ public class TdManagerActivity extends Activity
 
     mMenu = (ListView) findViewById( R.id.menu );
     mMenuAdapter = null;
-    setMenuAdapter( getResources() );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
 
   }
@@ -220,6 +220,9 @@ public class TdManagerActivity extends Activity
     super.onStart();
     // TDLog.v( "TdManager on resume");
     updateTdmConfigList();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
   }
 
   // @Override
@@ -432,13 +435,14 @@ public class TdManagerActivity extends Activity
     startTdmConfigActivity( tdconfig );
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
 }

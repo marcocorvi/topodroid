@@ -81,17 +81,17 @@ import android.app.Application;
 // import android.app.Activity;
 
 import android.content.Context;
+// import android.content.Intent;
+// import android.content.ActivityNotFoundException;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 
-// import android.content.Intent;
-// import android.content.ActivityNotFoundException;
-import android.net.Uri;
-
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.FileProvider;
+
+import android.net.Uri;
 
 // import android.provider.Settings;
 // import android.provider.Settings.System;
@@ -980,7 +980,7 @@ public class TopoDroidApp extends Application
   {
     TDLog.v("APP attach base context");
     TDInstance.context = ctx;
-    TDLocale.resetLocale();
+    TDLocale.resetTheLocale();
     super.attachBaseContext( TDInstance.context );
   }
 
@@ -993,7 +993,7 @@ public class TopoDroidApp extends Application
     super.onConfigurationChanged( cfg );
     // boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
     TDLog.v("APP config change" );
-    TDLocale.resetLocale( );
+    TDLocale.resetTheLocale( );
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
   }
 

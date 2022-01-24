@@ -317,8 +317,6 @@ public class PlotReloadWindow extends ItemDrawer
     mImage.setOnClickListener( this );
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( res );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
     
     //  TDLog.v("Reload " + filename + " offset " + mOffset.x + " " + mOffset.y );
@@ -333,7 +331,6 @@ public class PlotReloadWindow extends ItemDrawer
   protected synchronized void onResume()
   {
     super.onResume();
-    if ( TDLocale.FIXME_LOCALE ) TDLocale.resetLocale(); 
     doResume();
   }
 
@@ -344,11 +341,14 @@ public class PlotReloadWindow extends ItemDrawer
     doPause();
   }
 
-  // @Override // only calls super method
-  // protected synchronized void onStart()
-  // {
-  //   super.onStart();
-  // }
+  @Override // only calls super method
+  protected synchronized void onStart()
+  {
+    super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
+  }
 
   @Override
   protected synchronized void onStop()
@@ -743,6 +743,7 @@ public class PlotReloadWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
     mReloadSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 

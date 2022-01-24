@@ -14,6 +14,7 @@ package com.topodroid.tdm;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.DistoX.TDLevel;
 
@@ -42,17 +43,15 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
 import android.net.Uri;
-import android.os.ParcelFileDescriptor;
-
-import android.widget.TextView;
-import android.widget.ListView;
-import android.app.Dialog;
-import android.widget.Button;
-import android.widget.ArrayAdapter;
 
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
+
+import android.widget.TextView;
+import android.widget.ListView;
+import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.LinearLayout;
@@ -61,11 +60,12 @@ import android.widget.LinearLayout.LayoutParams;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.os.Build;
 import android.app.Activity;
-
-import android.content.res.Resources;
+import android.os.ParcelFileDescriptor;
 
 public class TdmConfigActivity extends Activity
                               implements OnClickListener
@@ -167,12 +167,18 @@ public class TdmConfigActivity extends Activity
 
       mMenu = (ListView) findViewById( R.id.menu );
       mMenuAdapter = null;
-      setMenuAdapter( getResources() );
-      closeMenu();
       mMenu.setOnItemClickListener( this );
-
       updateList();
     }
+  }
+
+  @Override
+  public void onStart()
+  {
+    super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
   }
 
   @Override
@@ -532,13 +538,14 @@ public class TdmConfigActivity extends Activity
     }
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
 }

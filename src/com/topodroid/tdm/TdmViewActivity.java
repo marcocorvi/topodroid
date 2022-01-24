@@ -11,6 +11,7 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLocale;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
@@ -22,13 +23,14 @@ import com.topodroid.DistoX.TopoDroidAlertDialog;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.R;
 
-import android.app.Activity;
 import android.os.Bundle;
+import android.app.Activity;
 // import android.content.Context;
 // import android.content.Intent;
-import android.content.res.Resources;
-import android.content.pm.PackageManager;
 import android.content.DialogInterface;
+import android.content.res.Resources;
+import android.content.res.Configuration;
+import android.content.pm.PackageManager;
 
 // import android.graphics.Paint;
 // import android.graphics.Paint.FontMetrics;
@@ -40,14 +42,13 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnClickListener;
 // import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup;
+// import android.view.Display;
 // import android.widget.LinearLayout;
 // import android.widget.LinearLayout.LayoutParams;
 import android.widget.Button;
 import android.widget.ListView;
 // import android.widget.TextView;
-// import android.view.ViewGroup;
-// import android.view.Display;
-
 import android.widget.ZoomControls;
 // import android.widget.ZoomButton;
 import android.widget.ZoomButtonsController;
@@ -195,10 +196,7 @@ public class TdmViewActivity extends Activity
       TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( (TopoDroidApp)getApplication(), getResources(), R.drawable.iz_menu ) );
       mMenu = (ListView) findViewById( R.id.menu );
       mMenuAdapter = null;
-      setMenuAdapter( getResources() );
-      closeMenu();
       mMenu.setOnItemClickListener( this );
-
 
       doStart();
       mDrawingSurface.transform( width/2.0f, height/2.0f, 1 );
@@ -222,6 +220,9 @@ public class TdmViewActivity extends Activity
     protected synchronized void onStart()
     {
       super.onStart();
+      TDLocale.resetTheLocale();
+      setMenuAdapter( getResources() );
+      closeMenu();
     }
 
     @Override
@@ -665,12 +666,13 @@ public class TdmViewActivity extends Activity
     }
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 }

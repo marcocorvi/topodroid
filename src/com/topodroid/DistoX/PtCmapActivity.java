@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDTag;
 import com.topodroid.help.UserManualActivity;
 
@@ -19,6 +20,7 @@ import android.app.Activity;
 import android.os.Bundle;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.widget.EditText;
 import android.widget.Button;
 
@@ -214,13 +216,14 @@ public class PtCmapActivity extends Activity
     return false;
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 }
 

@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLocale;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -28,35 +29,27 @@ import com.topodroid.calib.CalibCoeffDialog;
 
 // import java.util.ArrayList;
 
-import android.app.Activity;
-// import android.app.Dialog;
-import android.content.DialogInterface;
 import android.os.Bundle;
-
+import android.app.Activity;
+import android.app.DatePickerDialog;
 // import android.content.Context;
-// import android.content.Intent;
+import android.content.Intent;
+import android.content.res.Resources;
+import android.content.DialogInterface;
+import android.content.res.Configuration;
 
 import android.widget.EditText;
 // import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;
-import android.view.View;
-import android.app.DatePickerDialog;
-
-// import android.app.Application;
-
-// import android.content.Context;
-import android.content.Intent;
-import android.content.res.Resources;
-
-// import android.view.View;
-// import android.view.View.OnClickListener;
-import android.view.KeyEvent;
-
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
+
+import android.view.View;
+// import android.view.View.OnClickListener;
+import android.view.KeyEvent;
 
 // import android.graphics.Bitmap;
 // import android.graphics.BitmapFactory;
@@ -241,9 +234,16 @@ public class CalibActivity extends Activity
     TDandroid.setButtonBackground( mImage, MyButton.getButtonBackground( mApp, res, R.drawable.iz_menu ) );
 
     mMenu = (ListView) findViewById( R.id.menu );
-    setMenuAdapter( res );
-    closeMenu();
     mMenu.setOnItemClickListener( this );
+  }
+
+  @Override
+  public void onStart() 
+  {
+    super.onStart();
+    TDLocale.resetTheLocale();
+    setMenuAdapter( getResources() );
+    closeMenu();
   }
 
   // ---------------------------------------------------------------
@@ -552,13 +552,14 @@ public class CalibActivity extends Activity
     }
   }
 
-  // /** react to a change in the configuration
-  //  * @param cfg   new configuration
-  //  */
-  // @Override
-  // public void onConfigurationChanged( Configuration new_cfg )
-  // {
-  //   super.onConfigurationChanged( new_cfg );
-  // }
+  /** react to a change in the configuration
+   * @param cfg   new configuration
+   */
+  @Override
+  public void onConfigurationChanged( Configuration new_cfg )
+  {
+    super.onConfigurationChanged( new_cfg );
+    TDLocale.resetTheLocale();
+  }
 
 }
