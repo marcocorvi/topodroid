@@ -1581,7 +1581,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_plot_shift_title">Vázlat mozgatás/nagyítás</string>
   <string name="pref_plot_shift_summary">Vázlat mozgatás és nagyítás engedélyezése</string>
   <string name="pref_splay_alpha_title">Segédmérés átlátszóság</string>
-  <string name="pref_splay_alpha_summary">Segédmérés átlátszóság [0: átlátszó, 100: áttetsző]</string>
+  <string name="pref_splay_alpha_summary">Segédmérés fedettség [0: átlátszó, 100: fedett]</string>
 
   <!-- UNUSED string name="pref_picker_type_title">Rajzeszköz választó</string -->
   <!-- UNUSED string name="pref_picker_type_summary">Rajzeszköz választó típusa</string -->
