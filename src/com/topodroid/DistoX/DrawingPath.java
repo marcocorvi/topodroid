@@ -169,9 +169,20 @@ public class DrawingPath extends RectF
   boolean isArea()  { return mType == DRAWING_PATH_AREA; }
   boolean isLineOrArea()  { return mType == DRAWING_PATH_LINE || mType == DRAWING_PATH_AREA; }
 
+  /** @return the X coord of the center
+   */
   float getX() { return cx; }
+
+  /** @return the Y coord of the center
+   */
   float getY() { return cy; }
 
+  /** set the bounding box of the path
+   * @param x1    X coord of the top-left corner
+   * @param x2    X coord of the bottom-right corner
+   * @param y1    Y coord of the top-left corner
+   * @param y2    Y coord of the bottom-right corner
+   */
   void setBBox( float x1, float x2, float y1, float y2 )
   {
     // assert( x1 <= x2 ) && assert( y1 <= y2 )
@@ -181,6 +192,9 @@ public class DrawingPath extends RectF
     bottom = y2;
   }
 
+  /** @return true if the path intersects a given rectangle
+   * @param bbox   given rectangle
+   */
   boolean intersects( RectF bbox )
   { 
     // return true;
@@ -247,8 +261,8 @@ public class DrawingPath extends RectF
   /** make the path copying from another path
    * @param path   the path to copy or null for an empty path
    * @param m      transform matrix
-   * @param off_x  offset X
-   * @param off_y  offset Y
+   * @param off_x  offset X coord
+   * @param off_y  offset Y coord
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
   {
@@ -268,6 +282,12 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y ); // FIXME-PATH this was only for path != null
   }
 
+  /** make a segment path (x1,y1)--(x2,y2)
+   * @param x1    X coord of the first endpoint
+   * @param y1    Y coord of the first endpoint
+   * @param x2    X coord of the second endpoint
+   * @param y2    Y coord of the second endpoint
+   */
   void makePath( float x1, float y1, float x2, float y2 )
   {
     // TDLog.v("make endpoint path - type " + mType + " at " + x1 + " " + y1 );
@@ -285,6 +305,14 @@ public class DrawingPath extends RectF
   //   // mPaint = BrushManager.mDotPaint; 
   // }
 
+  /** make a segment path (x1,y1)--(x2,y2)
+   * @param x1    X coord of the first endpoint
+   * @param y1    Y coord of the first endpoint
+   * @param x2    X coord of the second endpoint
+   * @param y2    Y coord of the second endpoint
+   * @param off_x X offset [scene frame ?]
+   * @param off_y Y offset
+   */
   void makeStraightPath( float x1, float y1, float x2, float y2, float off_x, float off_y )
   {
     // TDLog.v("make straight path - type " + mType + " at " + x1 + " " + y1 );
@@ -294,6 +322,10 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y );
   }
 
+  /** add a strainght segment ending at (x,y) to the path
+   * @param x     X coord of the endpoint
+   * @param y     Y coord of the endpoint
+   */
   void pathAddLineTo( float x, float y )
   {
     mPath.lineTo( x, y );
@@ -305,6 +337,13 @@ public class DrawingPath extends RectF
     setEndPoints( x1, y1, x, y );
   }
 
+  /** make a triangular path centerd at (x1,y1) with side 2*r
+   * @param x     X coord - not used
+   * @param y     Y coord - not used
+   * @param r     half-side
+   * @param off_x X offset [scene frame ?]
+   * @param off_y Y offset
+   */
   void makeTrianglePath( float x, float y, float r, float off_x, float off_y )
   {
     float r2 = r * 1.732f;
@@ -316,10 +355,17 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y );
   }
 
+  /** set the path paint
+   * @param paint   new path paint
+   */
   void setPathPaint( Paint paint ) { mPaint = paint; }
 
-  // x10, y10 first endpoint scene coords
-  // x20, y20 second endpoint scene coords
+  /** set the path endpoints
+   * @param x10 first endpoint scene X coords
+   * @param y10 first endpoint scene Y coords
+   * @param x20 second endpoint scene X coords
+   * @param y20 second endpoint scene Y coords
+   */
   void setEndPoints( float x10, float y10, float x20, float y20 )
   {
     x1 = x10;
@@ -440,8 +486,12 @@ public class DrawingPath extends RectF
     top    = (ylt < yrt)? ylt : yrt;
     bottom = (ylb > yrb)? ylb : yrb;
   }
-
-  // this is used only by the Selection 
+ 
+  /** @return distance of the path to a point (x,y)
+   * @param x    X coord of the point
+   * @param y    Y coord of the point
+   * @note this is used only by the Selection 
+   */
   float distanceToPoint( float x, float y )
   {
     // if ( mBlock == null ) return 1000.0f; // a large number
@@ -452,11 +502,18 @@ public class DrawingPath extends RectF
 
   // int type() { return mType; }
 
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   */
   public void draw( Canvas canvas )
   {
     drawPath( mPath, canvas );
   }
 
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param bbox     clipping rectangle
+   */
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
@@ -468,8 +525,12 @@ public class DrawingPath extends RectF
     }
   }
 
-  // N.B. canvas is guaranteed ! null
-  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param bbox     clipping rectangle
+   */
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
     if ( intersects( bbox ) ) 
     {
@@ -478,6 +539,24 @@ public class DrawingPath extends RectF
       drawPath( mTransformedPath, canvas );
     }
   }
+
+  // /** draw the path on a canvas
+  //  * @param canvas   canvas - N.B. canvas is guaranteed not null
+  //  * @param matrix   transform matrix
+  //  * @param scale    rescaling factor, 
+  //  * @param bbox     clipping rectangle
+  //  */
+  // public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  // {
+  //   if ( intersects( bbox ) ) 
+  //   {
+  //     Matrix m = new Matrix();
+  //     mTransformedPath = new Path( mPath );
+  //     mTransformedPath.transform( m );
+  //     mTransformedPath.transform( matrix );
+  //     drawPath( mTransformedPath, canvas );
+  //   }
+  // }
 
   // used in executeAll
   boolean isBlockRecent( )

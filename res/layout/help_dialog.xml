@@ -5,10 +5,15 @@
   android:orientation="vertical"
   >
 
-  <ListView android:id="@+id/help_list"
-    style="@style/list_help"
-  />  
-
+  <ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="0dp"
+    android:layout_weight="1"
+    >
+    <ListView android:id="@+id/help_list"
+      style="@style/list_help"
+    />  
+  </ScrollView>
   <Button android:id="@+id/button_manual"
     android:layout_width="42sp"
     android:layout_height="42sp"

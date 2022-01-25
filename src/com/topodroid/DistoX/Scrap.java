@@ -794,21 +794,28 @@ public class Scrap
     // TDLog.v( "bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
   }
 
-  void draw( Canvas c, Matrix mat, float sca )
+  /** draw on the canvas
+   * @param c     canvas
+   * @param mat   transform matrix
+   * @param scale transform scale - not used
+   */
+  void draw( Canvas c, Matrix mat, float scale )
   {
     if( mCurrentStack != null ){
       synchronized( TDPath.mCommandsLock ) {
         if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
           for ( ICanvasCommand cmd : mCurrentStack ) {
             if ( cmd.commandType() == 0 ) {
-              cmd.draw( c, mat, sca, null );
+              // cmd.draw( c, mat, scale, null );
+              cmd.draw( c, mat, null );
             }
           }
         } else {
           for ( ICanvasCommand cmd : mCurrentStack ) {
             if ( cmd.commandType() == 0 ) {
               if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-                cmd.draw( c, mat, sca, null );
+                // cmd.draw( c, mat, scale, null );
+                cmd.draw( c, mat, null );
               }
             }
           }
@@ -817,8 +824,15 @@ public class Scrap
     }
   }
 
-  // line points are scene-coords
-  // continuation is checked in canvas-coords: canvas = offset + scene * zoom
+  /** fine the line to continue
+   * @param lp     line point
+   * @param type   line type
+   * @param zoom   display zoom
+   * @param size   ...
+   * @return the line to continue or null
+   * @note line points are scene-coords
+   *       continuation is checked in canvas-coords: canvas = offset + scene * zoom
+   */
   DrawingLinePath getLineToContinue( LinePoint lp, int type, float zoom, float size )
   {
     String group = BrushManager.getLineGroup( type );
@@ -850,11 +864,12 @@ public class Scrap
     return ret;
   }
         
-  // @return true if the line has been modified
-  // @param line  line to modify
-  // @param line2 modification
-  // @param zoom  current zoom
-  // @param size  selection size
+  /** @return true if the line has been modified
+   * @param line  line to modify
+   * @param line2 modification
+   * @param zoom  current zoom
+   * @param size  selection size
+   */
   boolean modifyLine( DrawingLinePath line, DrawingLinePath line2, float zoom, float size )
   {
     LinePoint lp1 = line.mFirst; 
@@ -2145,6 +2160,12 @@ public class Scrap
 
   // DRAW ACTIONS --------------------------------------------------------
 
+  /** draw the outline
+   * @param canvas   canvas
+   * @param mat      transform matrix
+   * @param scale    not used
+   * @param bbox     clipping rectangle
+   */
   void drawOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
@@ -2153,13 +2174,20 @@ public class Scrap
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
           if ( path.isLine() ) { // path instanceof DrawingLinePath
-            if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, scale, bbox );
+            // if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, scale, bbox );
+            if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, bbox );
           }
         }
       }
     }
   }
 
+  /** draw with a grey outline
+   * @param canvas   canvas
+   * @param mat      transform matrix
+   * @param scale    not used
+   * @param bbox     clipping rectangle
+   */
   void drawGreyOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
@@ -2176,6 +2204,12 @@ public class Scrap
     }
   }
 
+  /** draw all sketch items
+   * @param canvas   canvas
+   * @param mat      transform matrix
+   * @param scale    transform scale - not used
+   * @param bbox     clipping rectangle
+   */
   void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
@@ -2184,7 +2218,8 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
-            cmd.draw( canvas, matrix, scale, bbox );
+            // cmd.draw( canvas, matrix, scale, bbox );
+            cmd.draw( canvas, matrix, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
@@ -2203,7 +2238,8 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-              cmd.draw( canvas, matrix, scale, bbox );
+              // cmd.draw( canvas, matrix, scale, bbox );
+              cmd.draw( canvas, matrix, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
@@ -2222,10 +2258,17 @@ public class Scrap
     }
   }
 
+  /** draw the user stations
+   * @param canvas   canvas
+   * @param mat      transform matrix
+   * @param scale    transform scale - not used (?)
+   * @param bbox     clipping rectangle
+   */
   void drawUserStations( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     synchronized( TDPath.mStationsLock ) {
-      for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, scale, bbox );
+      // for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, scale, bbox );
+      for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, bbox );
     }
   }
 
@@ -2305,7 +2348,13 @@ public class Scrap
     }
   }
 
-  // called under TDPath.mSelectionLock
+  /** draw the selection (???)
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    used only to draw the "extend" control
+   * @param is_extended ???
+   * @note called under TDPath.mSelectionLock
+   */
   void drawSelection( Canvas canvas, Matrix matrix, float zoom, float scale, boolean is_extended )
   {
     // PATH_SELECTION

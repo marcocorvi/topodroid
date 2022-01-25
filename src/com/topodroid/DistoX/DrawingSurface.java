@@ -233,13 +233,17 @@ class DrawingSurface extends SurfaceView
 
   // -----------------------------------------------------
 
-  /** get the canvas width
+  /** @return the canvas width
    */
   public int width()  { return mWidth; }
 
-  /** get the canvas height
+  /** @return the canvas height
    */
   public int height() { return mHeight; }
+
+  /** @return the sketch drawing scale
+   */
+  float getScale() { return (commandManager == null) ? 1.0f  : commandManager.getScale(); }
 
   // private Timer mTimer;
   // private TimerTask mTask;
@@ -732,10 +736,20 @@ class DrawingSurface extends SurfaceView
   // used only by H-Sections
   public void setNorthPath( DrawingPath path ) { commandManager.setNorthLine( path ); }
 
-  public void setFirstReference( DrawingPath path ) { commandManager.setFirstReference( path ); }
+  /** set the path for the first point of a measurement
+   * @param path   path for the first point
+   */
+  public void setFirstReference( DrawingMeasureStartPath path ) { commandManager.setFirstReference( path ); }
 
-  public void setSecondReference( DrawingPath path ) { commandManager.setSecondReference( path ); }
+  /** set the path for the second point of a measurement
+   * @param path   path for the second point
+   */
+  public void setSecondReference( DrawingMeasureEndPath path ) { commandManager.setSecondReference( path ); }
 
+  /** add the path for the second point of a measurement
+   * @param x  X coord of the point added to the second reference
+   * @param y  Y coord of the point added to the second reference
+   */
   public void addSecondReference( float x, float y ) { commandManager.addSecondReference( x, y ); }
 
   // k : grid type 1, 10, 100

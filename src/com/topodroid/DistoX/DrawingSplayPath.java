@@ -168,21 +168,20 @@ public class DrawingSplayPath extends DrawingPath
    * @note the circle radius is fixed and does not increase with the zoom
    * @note canvas is guaranteed ! null
    */
-  @Override
+  // @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     draw( canvas, matrix, scale, bbox, true );
   }
 
   /** draw the splay on the canvas
-   * @param canvas   canvas
+   * @param canvas   canvas - @note canvas is guaranteed ! null
    * @param matrix   transform matrix
-   * @param scale    transform scale
+   * @param scale    transform scale: to keep the circle radius fixed
    * @param bbox     clipping bounding box
    * @param not_edit whether the splay is drawn not editable (only for splay mode POINT)
    * 
    * @note the circle radius is fixed and does not increase with the zoom
-   * @note canvas is guaranteed ! null
    */
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, boolean not_edit )
   {

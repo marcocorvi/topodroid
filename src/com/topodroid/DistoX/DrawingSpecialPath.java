@@ -140,9 +140,13 @@ public class DrawingSpecialPath extends DrawingPath
   // @Override
   // public void scalePathBy( float z, Matrix m ) { }
 
-  // N.B. canvas is guaranteed ! null
+  /** draw the label on the screen
+   * @param canvas   canvas - note canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param bbox     clipping rectangle
+   */
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
     if ( intersects( bbox ) ) {
       mTransformedPath = new Path( mPath );

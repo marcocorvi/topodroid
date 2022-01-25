@@ -35,23 +35,15 @@
       </LinearLayout>
     </LinearLayout>
 
-  <!-- ScrollView
-    android:layout_width="fill_parent"
-    android:layout_height="fill_parent"
-    -->
     <ListView android:id="@+id/list"
-        android:layout_marginTop="10dp"
-        android:padding="10dp"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:transcriptMode="alwaysScroll"
-        android:fastScrollEnabled="true"
-        android:scrollingCache="true"
-        android:layout_weight="1"
-        android:textSize="18sp"
+      style="@style/list_top_fast"
+      android:layout_marginTop="10dp"
+      android:padding="10dp"
+      android:layout_width="match_parent"
+      android:layout_height="0dp"
+      android:layout_weight="1"
     />  
     <!-- android:layout_height="match_parent" -->
-  <!-- /ScrollView -->
 
 </LinearLayout>
 

@@ -152,7 +152,7 @@ public class OverviewWindow extends ItemDrawer
 
   private TDNum mNum;
   private Path mCrossPath;
-  private Path mCirclePath;
+  // private Path mCirclePath;
 
   // String mName1;  // first name (PLAN)
   // String mName2;  // second name (EXTENDED)
@@ -416,6 +416,8 @@ public class OverviewWindow extends ItemDrawer
       }
     }
 
+    static final private int ROD = 10; // measure path size
+
     @Override
     public void onCreate(Bundle savedInstanceState) 
     {
@@ -426,17 +428,17 @@ public class OverviewWindow extends ItemDrawer
       mUnitRuler = TDSetting.mUnitMeasure;
       if ( mUnitRuler < 0 ) mUnitRuler = TDSetting.mUnitGrid;
 
-      mCrossPath = new Path();
-      mCrossPath.moveTo(10,10);
-      mCrossPath.lineTo(-10,-10);
-      mCrossPath.moveTo(10,-10);
-      mCrossPath.lineTo(-10,10);
-      mCirclePath = new Path();
-      mCirclePath.addCircle( 0, 0, 10, Path.Direction.CCW );
-      mCirclePath.moveTo(-10, 0);
-      mCirclePath.lineTo(10, 0);
-      mCirclePath.moveTo(0, -10);
-      mCirclePath.lineTo(0, 10);
+      // mCrossPath = new Path();
+      // mCrossPath.moveTo(  ROD,  ROD);
+      // mCrossPath.lineTo( -ROD, -ROD);
+      // mCrossPath.moveTo(  ROD, -ROD);
+      // mCrossPath.lineTo( -ROD, ROD);
+      // mCirclePath = new Path();
+      // mCirclePath.addCircle( 0, 0, ROD, Path.Direction.CCW );
+      // mCirclePath.moveTo( -ROD,   0);
+      // mCirclePath.lineTo(  ROD,   0);
+      // mCirclePath.moveTo(   0, -ROD);
+      // mCirclePath.lineTo(   0,  ROD);
 
       mMeasurePts = new ArrayList< Point2D >();
 
@@ -515,21 +517,27 @@ public class OverviewWindow extends ItemDrawer
       mOverviewSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
 
-    @Override
-    protected synchronized void onResume()
-    {
-      super.onResume();
-      doResume();
-    }
+  /** react to the activity "resume"
+   */
+  @Override
+  protected synchronized void onResume()
+  {
+    super.onResume();
+    doResume();
+  }
 
-    @Override
-    protected synchronized void onPause() 
-    { 
-      super.onPause();
-      // TDLog.v( "Drawing Activity onPause " + ((mDataDownloader!=null)?"with DataDownloader":"") );
-      doPause();
-    }
+  /** react to the activity "pause"
+   */
+  @Override
+  protected synchronized void onPause() 
+  { 
+    super.onPause();
+    // TDLog.v( "Drawing Activity onPause " + ((mDataDownloader!=null)?"with DataDownloader":"") );
+    doPause();
+  }
 
+  /** react to the activity "start"
+   */
   @Override
   public void onStart() 
   {
@@ -539,162 +547,177 @@ public class OverviewWindow extends ItemDrawer
     closeMenu();
   }
 
+  /** react to the activity "stop"
+   */
+  @Override
+  protected synchronized void onStop()
+  {
+    super.onStop();
+    mOverviewSurface.setDisplayMode( mOverviewSurface.getDisplayMode() & DisplayMode.DISPLAY_OVERVIEW );
+  }
 
-    @Override
-    protected synchronized void onStop()
-    {
-      super.onStop();
-      mOverviewSurface.setDisplayMode( mOverviewSurface.getDisplayMode() & DisplayMode.DISPLAY_OVERVIEW );
-    }
+  /** implement the actions of a "resume"
+   */
+  private void doResume()
+  {
+    // PlotInfo info = mApp.mData.getPlotInfo( mSid, mName );
+    // mOffset.x = info.xoffset;
+    // mOffset.y = info.yoffset;
+    // mZoom     = info.zoom;
+    mOverviewSurface.isDrawing = true;
+    switchZoomCtrl( TDSetting.mZoomCtrl );
+  }
 
-    private void doResume()
-    {
-      // PlotInfo info = mApp.mData.getPlotInfo( mSid, mName );
-      // mOffset.x = info.xoffset;
-      // mOffset.y = info.yoffset;
-      // mZoom     = info.zoom;
-      mOverviewSurface.isDrawing = true;
-      switchZoomCtrl( TDSetting.mZoomCtrl );
-    }
+  /** implement the actions of a "pause"
+   */
+  private void doPause()
+  {
+    switchZoomCtrl( 0 );
+    mOverviewSurface.isDrawing = false;
+  }
 
-    private void doPause()
-    {
-      switchZoomCtrl( 0 );
-      mOverviewSurface.isDrawing = false;
+  /** implement the actions of a "start"
+   */
+  private void doStart()
+  {
+    // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
+    // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
+    mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
+    if ( mBlockList.size() == 0 ) {
+      TDToast.makeBad( R.string.few_data );
+      finish();
+    } else {
+      loadFiles( mType ); 
     }
+  }
 
 // ----------------------------------------------------------------------------
 
-    private void doStart()
-    {
-      // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
-      // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
-      mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
-      if ( mBlockList.size() == 0 ) {
-        TDToast.makeBad( R.string.few_data );
-        finish();
+  // boolean mAllSymbols = true;
+
+  private void loadFiles( long type )
+  {
+    // List< PlotInfo > plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
+    List< PlotInfo > plots = TopoDroidApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
+
+    // TDLog.v( "Overview plots " + plots.size() );
+
+    // if ( plots.size() < 1 ) { // N.B. this should never happpen
+    //   TDToast.makeBad( R.string.few_plots );
+    //   finish();
+    //   return;
+    // }
+    // mAllSymbols  = true; // by default there are all the symbols
+    // SymbolsPalette missingSymbols = new SymbolsPalette(); 
+
+    NumStation mStartStation = null;
+
+    mOverviewSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
+
+    for ( int k=0; k<plots.size(); ++k ) {
+      PlotInfo plot = plots.get(k);
+      // TDLog.v( "plot " + plot.name );
+
+      String start = plot.start;
+      float xdelta = 0.0f;
+      float ydelta = 0.0f;
+      if ( k == 0 ) {
+        String view  = plot.view;
+        // mPlot1 = plot;
+        // mPid = plot.id;
+        // NOTE Overview only for plan or extended plots
+        // float decl = mData.getSurveyDeclination( mSid );
+        mNum = new TDNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
+        mStartStation = mNum.getStation( start );
+        // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
+        computeReferences( (int)type, mZoom );
+        // TDLog.v( "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
       } else {
-        loadFiles( mType ); 
+        NumStation st = mNum.getStation( start );
+        if ( st == null ) continue;
+        if ( type == PlotType.PLOT_PLAN ) {
+          xdelta = (float)(st.e - mStartStation.e); // FIXME SCALE FACTORS ???
+          ydelta = (float)(st.s - mStartStation.s);
+        } else {
+          xdelta = (float)(st.h - mStartStation.h);
+          ydelta = (float)(st.v - mStartStation.v);
+        }
       }
+      xdelta *= DrawingUtil.SCALE_FIX;
+      ydelta *= DrawingUtil.SCALE_FIX;
+      // TDLog.v( " delta " + xdelta + " " + ydelta );
+
+      // now try to load drawings from therion file
+      String fullName = TDInstance.survey + "-" + plot.name;
+      // TDLog.v( "load tdr file " + fullName );
+
+      String tdr = TDPath.getTdrFileWithExt( fullName );
+      mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ); // save plot fullname in paths
     }
 
-    // boolean mAllSymbols = true;
+    // if ( ! mAllSymbols ) {
+    //   String msg = missingSymbols.getMessage( getResources() );
+    //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
+    //   TDToast.makeBad( "Missing symbols \n" + msg );
+    //   // (new MissingDialog( this, this, msg )).show();
+    //   // finish();
+    // }
 
-    private void loadFiles( long type )
-    {
-      // List< PlotInfo > plots = mApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type, landscape );
-      List< PlotInfo > plots = TopoDroidApp.mData.selectAllPlotsWithType( mSid, TDStatus.NORMAL, type );
+    // // resetZoom();
+    // resetReference( mPlot1 );
+  }
 
-      // TDLog.v( "Overview plots " + plots.size() );
+  /** export drawing 
+   * @param uri    URI of the export file
+   * @param ext    export type (ie, extension)
+   * @note called only by export menu
+   */
+  private void saveWithExt( Uri uri, final String ext )
+  {
+    TDNum num = mNum;
+    final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
+    // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
+    // TDLog.v( "export th2 file " + fullname );
+    DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
-      // if ( plots.size() < 1 ) { // N.B. this should never happpen
-      //   TDToast.makeBad( R.string.few_plots );
-      //   finish();
-      //   return;
-      // }
-      // mAllSymbols  = true; // by default there are all the symbols
-      // SymbolsPalette missingSymbols = new SymbolsPalette(); 
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    if ( uri == null ) return;
 
-      NumStation mStartStation = null;
-
-      mOverviewSurface.resetManager( DrawingSurface.DRAWING_OVERVIEW, null, false ); // is_extended = false
-
-      for ( int k=0; k<plots.size(); ++k ) {
-        PlotInfo plot = plots.get(k);
-        // TDLog.v( "plot " + plot.name );
-
-        String start = plot.start;
-        float xdelta = 0.0f;
-        float ydelta = 0.0f;
-        if ( k == 0 ) {
-          String view  = plot.view;
-          // mPlot1 = plot;
-          // mPid = plot.id;
-          // NOTE Overview only for plan or extended plots
-          // float decl = mData.getSurveyDeclination( mSid );
-          mNum = new TDNum( mBlockList, start, null, null, 0.0f, null ); // null formatClosure
-          mStartStation = mNum.getStation( start );
-          // computeReferences( (int)type, mOffset.x, mOffset.y, mZoom );
-          computeReferences( (int)type, mZoom );
-          // TDLog.v( "Overview num stations " + mNum.stationsNr() + " shots " + mNum.shotsNr() );
-        } else {
-          NumStation st = mNum.getStation( start );
-          if ( st == null ) continue;
-          if ( type == PlotType.PLOT_PLAN ) {
-            xdelta = (float)(st.e - mStartStation.e); // FIXME SCALE FACTORS ???
-            ydelta = (float)(st.s - mStartStation.s);
-          } else {
-            xdelta = (float)(st.h - mStartStation.h);
-            ydelta = (float)(st.v - mStartStation.v);
-          }
-        }
-        xdelta *= DrawingUtil.SCALE_FIX;
-        ydelta *= DrawingUtil.SCALE_FIX;
-        // TDLog.v( " delta " + xdelta + " " + ydelta );
-
-        // now try to load drawings from therion file
-        String fullName = TDInstance.survey + "-" + plot.name;
-        // TDLog.v( "load tdr file " + fullName );
-
-        String tdr = TDPath.getTdrFileWithExt( fullName );
-        mOverviewSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ fullName ); // save plot fullname in paths
+    if ( ext.equals("th2") ) {
+      Handler th2Handler = new Handler() {
+         @Override public void handleMessage(Message msg) {
+           if (msg.what == 661 ) {
+             TDToast.make( String.format( getString(R.string.saved_file_1), fullname ) ); 
+           } else {
+             TDToast.makeBad( R.string.saving_file_failed );
+           }
+         }
+      };
+      // parent is null because this is user-requested EXPORT
+      // fullname is null
+      // azimuth = 0
+      // rotate  = 0
+      (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
+    } else {
+      GeoReference station = null;
+      if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
+       String origin = mNum.getOriginStation();
+       station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
       }
-
-      // if ( ! mAllSymbols ) {
-      //   String msg = missingSymbols.getMessage( getResources() );
-      //   TDLog.Log( TDLog.LOG_PLOT, "Missing " + msg );
-      //   TDToast.makeBad( "Missing symbols \n" + msg );
-      //   // (new MissingDialog( this, this, msg )).show();
-      //   // finish();
-      // }
-
-      // // resetZoom();
-      // resetReference( mPlot1 );
-   }
-
-   // called only by export menu
-   private void saveWithExt( Uri uri, final String ext )
-   {
-     TDNum num = mNum;
-     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
-     // TDLog.Log( TDLog.LOG_IO, "export plot type " + mType + " with extension " + ext );
-     // TDLog.v( "export th2 file " + fullname );
-     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
-
-     // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-     if ( uri == null ) return;
-
-     if ( ext.equals("th2") ) {
-       Handler th2Handler = new Handler() {
-          @Override public void handleMessage(Message msg) {
-            if (msg.what == 661 ) {
-              TDToast.make( String.format( getString(R.string.saved_file_1), fullname ) ); 
-            } else {
-              TDToast.makeBad( R.string.saving_file_failed );
-            }
-          }
-       };
-       // parent is null because this is user-requested EXPORT
-       // fullname is null
-       // azimuth = 0
-       // rotate  = 0
-       (new SavePlotFileTask( this, uri, null, th2Handler, mNum, manager, null, fullname, mType, 0, PlotSave.OVERVIEW, 0 )).execute();
-     } else {
-       GeoReference station = null;
-       if ( mType == PlotType.PLOT_PLAN && ext.equals("shp") ) {
-        String origin = mNum.getOriginStation();
-        station = TDExporter.getGeolocalizedStation( mSid, mData, 1.0f, true, origin );
-       }
-       SurveyInfo info = mData.selectSurveyInfo( mSid );
-       // null PlotInfo, null FixedInfo, true toast
-       (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
-     }
-   }
+      SurveyInfo info = mData.selectSurveyInfo( mSid );
+      // null PlotInfo, null FixedInfo, true toast
+      (new ExportPlotToFile( this, uri, info, null, null, mNum, manager, mType, fullname, ext, true, station )).execute();
+    }
+  }
 
   private static int mExportIndex;
   private static String mExportExt;
 
-  // called by the ExportPlotDialog
+  /** export the drawing
+   * @param export_type   export file format
+   * @param filename      export file "name"
+   * @note called by the ExportPlotDialog
+   */
   public void doExport( String export_type, String filename ) // EXPORT
   {
     if ( export_type == null ) return;
@@ -721,6 +744,13 @@ public class OverviewWindow extends ItemDrawer
   }
 
   // FIXME_URI
+  /** react to a called activity result
+   * @param request   request passed to the activity
+   * @param result    result code (OK or CANCEL)
+   * @param intent    intent with result data
+   *
+   * used only with request GET_EXPORT. The result data contains the export URI.
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
@@ -741,6 +771,9 @@ public class OverviewWindow extends ItemDrawer
   }
 
   // interface IExporter FIXME_URI
+  /** export drawing: either export with a specific format (extension) or export as PDF
+   * @param uri   export URI
+   */
   public void doUriExport( Uri uri ) 
   {
     // TDLog.v( "Overview URI export: index " + mExportIndex );
@@ -758,6 +791,9 @@ public class OverviewWindow extends ItemDrawer
   }
 
   // PDF ------------------------------------------------------------------
+  /** export drawing as PDF
+   * @param uri   export URI
+   */
   private void savePdf( Uri uri ) 
   {
     String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
@@ -769,7 +805,12 @@ public class OverviewWindow extends ItemDrawer
     }
   }
 
-  // TODO with background task
+  /** export drawing as PDF
+   * @param uri      export URI
+   * @param manager  drawing items
+   * @param fullname export "name" - used only in the toast
+   * TODO with background task
+   */
   private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
   {
     if ( manager == null ) {
@@ -874,6 +915,9 @@ public class OverviewWindow extends ItemDrawer
   }
   */
 
+  /** @return the distance between the first two pointer of the touch event, 0 if the event does not have at least two pointers
+   * @param ev   touch event
+   */
   private float spacing(MotionEventWrap ev)
   {
     int np = ev.getPointerCount();
@@ -883,6 +927,10 @@ public class OverviewWindow extends ItemDrawer
     return TDMath.sqrt(x*x + y*y);
   }
 
+  /** store the touch event pointer coordinates for later use
+   * @param ev   touch event
+   * @note the pointers are stored in mSave0 and mSave1
+   */
   private void saveEventPoint(MotionEventWrap ev)
   {
     int np = ev.getPointerCount();
@@ -899,7 +947,9 @@ public class OverviewWindow extends ItemDrawer
     }
   }
 
-  
+  /** shift the drawing 
+   * @param ev   touch event
+   */
   private void shiftByEvent(MotionEventWrap ev)
   {
     float x0 = 0.0f;
@@ -933,6 +983,10 @@ public class OverviewWindow extends ItemDrawer
 
   }
 
+  /** shift the canvas
+   * @param x_shift   X shift
+   * @param y_shift   Y shift
+   */
   private void moveCanvas( float x_shift, float y_shift )
   {
     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
@@ -1038,6 +1092,8 @@ public class OverviewWindow extends ItemDrawer
 
       mSaveX = x_canvas; // FIXME-000
       mSaveY = y_canvas;
+      Matrix mm = new Matrix();
+      mm.postScale( 1.0f/mZoom, 1.0f/mZoom );
       if ( mOnMeasure == MEASURE_START ) {
         mStartX = x_canvas/mZoom - mOffset.x;
         mStartY = y_canvas/mZoom - mOffset.y;
@@ -1045,18 +1101,20 @@ public class OverviewWindow extends ItemDrawer
         mBaseY = mStartY;
         mOnMeasure = MEASURE_ON;
         // add reference point
-        DrawingPath path1 = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
-        path1.setPathPaint( BrushManager.highlightPaint );
-        path1.makePath( mCirclePath, new Matrix(), mStartX, mStartY );
-        // TDLog.v( "first ref " + mStartX + " " + mStartY );
+        // DrawingMeasure path1 = new DrawingMeasureStartPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
+        // path1.setPathPaint( BrushManager.highlightPaint );
+        // path1.makePath( mCirclePath, mm, mStartX, mStartY );
+        // TDLog.v( "first ref " + mStartX + " " + mStartY + " scale " + mOverviewSurface.getScale() + " zoom " + mZoom );
+        DrawingMeasureStartPath path1 = new DrawingMeasureStartPath( mStartX, mStartY, 5 * TDSetting.mDotRadius * mOverviewSurface.getScale() * mZoom );
         mOverviewSurface.setFirstReference( path1 );
         if ( mIsContinue ) {
           mTotal   = 0;
           mDDtotal = 0;
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
-          path.setPathPaint( BrushManager.fixedBluePaint );
-          path.makePath( null, new Matrix(), mStartX, mStartY ); // default path 
-          // path.mPath.moveTo( mStartX, mStartY ); FIXME-PATH
+          // DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
+          // path.setPathPaint( BrushManager.fixedBluePaint );
+          // path.makePath( null, mm, mStartX, mStartY ); // default path 
+          // // path.mPath.moveTo( mStartX, mStartY ); FIXME-PATH
+          DrawingMeasureEndPath path = new DrawingMeasureEndPath( mStartX, mStartY, 5 * TDSetting.mDotRadius * mOverviewSurface.getScale() * mZoom );
           mOverviewSurface.setSecondReference( path );
 	  mMeasurePts.clear();
 	  mMeasurePts.add( new Point2D( mStartX, mStartY ) );
@@ -1094,11 +1152,12 @@ public class OverviewWindow extends ItemDrawer
           mDDtotal = dd;
           mTotal   = 1;
           // replace target point
-          DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
-          path.setPathPaint( BrushManager.fixedBluePaint );
-          path.makePath( mCrossPath, new Matrix(), x, y );
-          path.mPath.moveTo( mStartX, mStartY );
-          path.mPath.lineTo( x, y );
+          // DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
+          // path.setPathPaint( BrushManager.fixedBluePaint );
+          // path.makePath( mCrossPath, mm, x, y );
+          // path.mPath.moveTo( mStartX, mStartY );
+          // path.mPath.lineTo( x, y );
+          DrawingMeasureEndPath path = new DrawingMeasureEndPath( mStartX, mStartY, x, y, 5 * TDSetting.mDotRadius * mOverviewSurface.getScale() * mZoom );
           mOverviewSurface.setSecondReference( path );
         }
         mActivity.setTitle( String.format( format, bb, mDDtotal, bx, by, ba ) );
@@ -1191,6 +1250,9 @@ public class OverviewWindow extends ItemDrawer
     }
     */
 
+    /** set the OnMeasure flag
+     * @param measure     flag, either OFF or START
+     */
     private void setOnMeasure( int measure )
     {
       mOnMeasure = measure;
@@ -1261,10 +1323,14 @@ public class OverviewWindow extends ItemDrawer
     mStartX = pt0.x;
     mStartY = pt0.y;
     mMeasurePts.remove( sz );
-    DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
-    path.setPathPaint( BrushManager.fixedBluePaint );
-    path.makePath( null, new Matrix(), mBaseX, mBaseY ); // default-path
-    // path.mPath.moveTo( mBaseX, mBaseY ); FIXME-PATH
+
+    // DrawingPath path = new DrawingPath( DrawingPath.DRAWING_PATH_NORTH, null, -1 );
+    // path.setPathPaint( BrushManager.fixedBluePaint );
+    // path.makePath( null, new Matrix(), mBaseX, mBaseY ); // default-path
+    // // path.mPath.moveTo( mBaseX, mBaseY ); FIXME-PATH
+    Matrix mm = new Matrix();
+    mm.postScale( 1.0f/mZoom, 1.0f/mZoom );
+    DrawingMeasureEndPath path = new DrawingMeasureEndPath( mStartX, mStartY, 5 * TDSetting.mDotRadius * mOverviewSurface.getScale() * mZoom );
     mOverviewSurface.setSecondReference( path );
     for ( int k=1; k<sz; ++k ) {
       Point2D pt = mMeasurePts.get(k);

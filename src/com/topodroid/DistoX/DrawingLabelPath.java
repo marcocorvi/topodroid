@@ -132,7 +132,7 @@ public class DrawingLabelPath extends DrawingPointPath
   /** draw the label on the screen
    * @param canvas   canvas
    * @param matrix   transform matrix
-   * @param scale    transform scale
+   * @param scale    transform scale - not used
    * @param bbox     clipping rectangle
    */
   @Override

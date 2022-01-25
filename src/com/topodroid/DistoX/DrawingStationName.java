@@ -180,11 +180,10 @@ public class DrawingStationName extends DrawingPointPath
   /** draw the station on the screen
    * @param canvas   canvas
    * @param matrix   transform matrix
-   * @param scale    transform scale
    * @param bbox     clipping box
    */
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );

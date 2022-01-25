@@ -19,11 +19,16 @@
     />
   </LinearLayout>
 
-  <ListView android:id="@+id/list"
-    style="@style/list_bottom"
+  <ScrollView 
     android:layout_width="match_parent"
     android:layout_height="fill_parent"
-  />  
+    >
+    <ListView android:id="@+id/list"
+      style="@style/list_bottom"
+      android:layout_width="match_parent"
+      android:layout_height="fill_parent"
+    />  
+  </ScrollView>
 </LinearLayout>
 
 

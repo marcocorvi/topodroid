@@ -74,7 +74,7 @@ class DialogMeasure extends MyDialog
 
   }
 
-  /** respond to user taps
+  /** respond to user taps: close the dialog
    * @param v tapped view
    * @note only button_close
    */

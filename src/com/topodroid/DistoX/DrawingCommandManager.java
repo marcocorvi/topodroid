@@ -53,8 +53,8 @@ public class DrawingCommandManager
   private RectF mBBox;
   boolean mIsExtended = false;
 
-  private DrawingPath mFirstReference;
-  private DrawingPath mSecondReference;
+  private DrawingMeasureStartPath mFirstReference;
+  private DrawingMeasureEndPath   mSecondReference;
 
   private DrawingPath mNorthLine;
   private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
@@ -100,6 +100,10 @@ public class DrawingCommandManager
   private boolean mLandscape = false;
   private String  mPlotName;
 
+  /** cstr
+   * @param mode        command manager type
+   * @param plot_name   plot name
+   */
   DrawingCommandManager( int mode, String plot_name )
   {
     // TDLog.v(plot_name + " command manager mode " + mode );
@@ -138,11 +142,25 @@ public class DrawingCommandManager
 
   // ----------------------------------------------------------------
   // display MODE
+  
+  /** set the mode of display
+   * @param mode  ...
+   */
   static void setDisplayMode( int mode ) { mDisplayMode = mode; }
+
+  /** @return the mode of display
+   */
   static int getDisplayMode( ) { return mDisplayMode; }
 
   // FIXED_ZOOM
+  /** set whether the zoom is fixed
+   * @param fixed_zoom whether the zoom is fixed
+   */
   void setFixedZoom( boolean fixed_zoom ) { mFixedZoom = fixed_zoom; }
+
+  /** @return the display scale
+   */
+  float getScale() { return mScale; }
 
   // ----------------------------------------------------------------
   // SCRAPS management
@@ -287,6 +305,9 @@ public class DrawingCommandManager
     canvas.drawPath( path, BrushManager.highlightPaint2 );
   }
 
+  /** draw the side-drag rectanles
+   * @param canvas   canvas
+   */ 
   private void drawSideDrag( Canvas canvas )
   {
     Path path = new Path();
@@ -415,7 +436,7 @@ public class DrawingCommandManager
     }
   }
 
-  /** Shift the drawing: translate the drawing by (x,y)
+  /** shift the drawing: translate the drawing by (x,y)
    * @param x   X shift
    * @param y   Y shift
    */
@@ -432,7 +453,7 @@ public class DrawingCommandManager
     }
   }
 
-  /** Scale the drawing (by z)
+  /** scale the drawing (by z)
    * @param z    scale factor
    */
   void scaleDrawing( float z )
@@ -476,8 +497,8 @@ public class DrawingCommandManager
   }
 
 
-  /**
-   * this is the only place DrawuingScaleReference is instantiated
+  /** add the scalebar
+   * @note this is the only place DrawuingScaleReference is instantiated
    */
   void addScaleRef( ) // boolean with_azimuth
   {
@@ -497,6 +518,8 @@ public class DrawingCommandManager
   //                                   + mCurrentStack.toArray().length );
   // }
 
+  /** clear the selected set: forward to the scraps
+   */
   void syncClearSelected()
   { 
     synchronized( TDPath.mSelectionLock ) { 
@@ -506,7 +529,8 @@ public class DrawingCommandManager
    }
   }
 
-  // clear the shots/stations - only extended profile
+  /** clear the shots/stations - only for extended profile
+   */
   void clearShotsAndStations( )
   {
     synchronized( TDPath.mSelectionLock ) { 
@@ -515,6 +539,8 @@ public class DrawingCommandManager
     }
   }
 
+  /** clear the sketch references
+   */
   void clearReferences()
   {
     // TDLog.v( "clear references");
@@ -540,6 +566,8 @@ public class DrawingCommandManager
     syncClearSelected();
   }
 
+  /** clear the sketch temporary references
+   */
   void clearTmpReferences()
   {
     // TDLog.v( "clear references");
@@ -569,11 +597,15 @@ public class DrawingCommandManager
     syncClearSelected();
   }
 
+  /** start to create a new sketch reference-set (clear the temporary reference-set)
+   */
   void newReferences()
   {
     clearTmpReferences();
   }
 
+  /** commit the sketch references 
+   */
   void commitReferences()
   {
     synchronized( TDPath.mGridsLock ) {
@@ -596,6 +628,8 @@ public class DrawingCommandManager
     mTmpStations     = null;
   }
 
+  /** clear the sketch items: forward the clear to the scraps
+   */
   private void clearSketchItems()
   {
     synchronized( mScraps ) {
@@ -605,6 +639,8 @@ public class DrawingCommandManager
     mDisplayPoints = false;
   }
 
+  /** clear the drawing: clear the references and the sketch items
+   */
   void clearDrawing()
   {
     clearReferences();
@@ -612,19 +648,33 @@ public class DrawingCommandManager
     // mMatrix = new Matrix(); // identity
   }
 
-  // first and second references are used only by the OverviewWindow
-  void setFirstReference( DrawingPath path ) { synchronized( TDPath.mGridsLock ) { mFirstReference = path; } }
 
-  void setSecondReference( DrawingPath path ) { synchronized( TDPath.mGridsLock ) { mSecondReference = path; } }
+  /** set the path for the first point of a measurement
+   * @param path   path for the first point
+   * @note first and second references are used only by the OverviewWindow
+   */
+  void setFirstReference( DrawingMeasureStartPath path ) { synchronized( TDPath.mGridsLock ) { mFirstReference = path; } }
 
+  /** set the path for the second point of a measurement
+   * @param path   path for the second point
+   * @note first and second references are used only by the OverviewWindow
+   */
+  void setSecondReference( DrawingMeasureEndPath path ) { synchronized( TDPath.mGridsLock ) { mSecondReference = path; } }
+
+  /** add the path for the second point of a measurement
+   * @param x  X coord of the point added to the second reference
+   * @param y  Y coord of the point added to the second reference
+   * @note first and second references are used only by the OverviewWindow
+   */
   void addSecondReference( float x, float y ) 
   {
     synchronized( TDPath.mGridsLock ) { 
-      if ( mSecondReference != null ) mSecondReference.pathAddLineTo(x,y); 
+      // if ( mSecondReference != null ) mSecondReference.pathAddLineTo(x,y); 
+      if ( mSecondReference != null ) mSecondReference.setEndPath(x,y); 
     }
   }
 
-  /* the next index for the ID of the area border
+  /** @return the next index for the ID of the area border
    */
   int getNextAreaIndex() { return mCurrentScrap.getNextAreaIndex(); }
 
@@ -1152,22 +1202,26 @@ public class DrawingCommandManager
     c.drawBitmap (bitmap, 0, 0, null);
 
     Matrix mat = new Matrix();
-    float sca = 1 / mBitmapScale;
+    float scale = 1 / mBitmapScale;
     mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
     mat.postScale( mBitmapScale, mBitmapScale );
     if ( TDSetting.mSvgGrid ) {
       if ( mGridStack1 != null ) {
         synchronized( TDPath.mGridsLock ) {
           for ( DrawingPath p1 : mGridStack1 ) {
-            p1.draw( c, mat, sca, null );
+            // p1.draw( c, mat, scale, null );
+            p1.draw( c, mat, null );
           }
           for ( DrawingPath p10 : mGridStack10 ) {
-            p10.draw( c, mat, sca, null );
+            // p10.draw( c, mat, scale, null );
+            p10.draw( c, mat, null );
           }
           for ( DrawingPath p100 : mGridStack100 ) {
-            p100.draw( c, mat, sca, null );
+            // p100.draw( c, mat, scale, null );
+            p100.draw( c, mat, null );
           }
-          if ( mNorthLine != null ) mNorthLine.draw( c, mat, sca, null );
+          // if ( mNorthLine != null ) mNorthLine.draw( c, mat, scale, null );
+          if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
           // no extend line for bitmap
         }
       }
@@ -1177,13 +1231,14 @@ public class DrawingCommandManager
       if ( TDSetting.mTherionSplays ) {
         if ( mSplaysStack != null ) {
           for ( DrawingSplayPath path : mSplaysStack ) {
-            path.draw( c, mat, sca, null, true ); // true = not_edit
+            path.draw( c, mat, scale, null, true ); // true = not_edit
           }
         }
       }
       if ( mLegsStack != null ) {
         for ( DrawingPath path : mLegsStack ) {
-          path.draw( c, mat, sca, null );
+          // path.draw( c, mat, scale, null );
+          path.draw( c, mat, null );
         }
       }
     }
@@ -1192,19 +1247,20 @@ public class DrawingCommandManager
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : mStations ) {
-            st.draw( c, mat, sca, null );
+            // st.draw( c, mat, scale, null );
+            st.draw( c, mat, null );
           }
         }
         // synchronized( TDPath.mFixedsLock ) {
         //   for ( DrawingFixedName fx : mFixeds ) {
-        //     fx.draw( c, mat, sca, null );
+        //     fx.draw( c, mat, scale, null );
         //   }
         // }
       }
     }
 
     synchronized( mScraps ) {
-      for ( Scrap scrap : mScraps ) scrap.draw( c, mat, sca );
+      for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
     }
 
     // checkLines();
@@ -1241,7 +1297,7 @@ public class DrawingCommandManager
       return;
     }
 
-    Matrix mm    = mMatrix;
+    Matrix mm    = mMatrix; // mMatrix = Scale( 1/s, 1/s) * Translate( -Offx, -Offy)  (first translate then scale)
     float  scale = mScale;
     RectF  bbox  = mBBox;
     boolean sidebars = true;
@@ -1336,15 +1392,19 @@ public class DrawingCommandManager
           }
         } else {
           if ( scale < 1 ) {
-            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, scale, bbox );
+            // for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, scale, bbox );
+            for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox );
           }
           if ( scale < 10 ) {
-            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, scale, bbox );
+            // for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, scale, bbox );
+            for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox );
           }
-          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, scale, bbox );
+          // for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, scale, bbox );
+          for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox );
         }
       }
-      if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, scale, bbox );
+      // if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, scale, bbox );
+      if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, bbox );
       if ( scaleRef && (mScaleRef != null)) {
         if ( sidebars ) {
           mScaleRef.draw(canvas, zoom, mLandscape);
@@ -1356,7 +1416,8 @@ public class DrawingCommandManager
 
     synchronized( TDPath.mShotsLock ) {
       if ( legs && mLegsStack != null ) {
-        for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, scale, bbox );
+        // for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, scale, bbox );
+        for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox );
       }
       if ( mSplaysStack != null ) {
         if ( station_splay == null ) {
@@ -1379,12 +1440,14 @@ public class DrawingCommandManager
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {
       if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
         synchronized( mPlotOutline )  {
-          for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, scale, null /* bbox */ );
+          // for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, scale, null /* bbox */ );
+          for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, null /* bbox */ );
         }
       }
       if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
         synchronized( TDPath.mXSectionsLock )  {
-          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, scale, null /* bbox */ );
+          // for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, scale, null /* bbox */ );
+          for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, null /* bbox */ );
         }
       }
     }
@@ -1392,7 +1455,8 @@ public class DrawingCommandManager
     if ( stations ) {
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
-          for ( DrawingStationName st : mStations ) st.draw( canvas, mm, scale, bbox );
+          // for ( DrawingStationName st : mStations ) st.draw( canvas, mm, scale, bbox );
+          for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
         }
       }
       // if ( mFixeds != null ) {  
@@ -1455,8 +1519,10 @@ public class DrawingCommandManager
 
     if ( mGridStack1 != null ) {
       synchronized (TDPath.mGridsLock) {
-        if (mFirstReference != null) mFirstReference.draw(canvas, mm, scale, null);
-        if (mSecondReference != null) mSecondReference.draw(canvas, mm, scale, null);
+        if (mFirstReference != null) {
+          mFirstReference.draw(canvas, mm, zoom, null);
+          if (mSecondReference != null) mSecondReference.draw(canvas, mm, zoom, null);
+        }
       }
     }
 

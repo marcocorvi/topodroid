@@ -215,12 +215,14 @@ class ProjectionCommandManager
     synchronized( TDPath.mShotsLock ) {
       if ( mLegsStack != null ) {
         for ( DrawingPath path : mLegsStack ) {
-          path.draw( canvas, mMatrix, mScale, mBBox );
+          // path.draw( canvas, mMatrix, mScale, mBBox );
+          path.draw( canvas, mMatrix, mBBox );
         }
       }
       if ( mSplaysStack != null ) {
         for ( DrawingPath path : mSplaysStack ) {
-          path.draw( canvas, mMatrix, mScale, mBBox );
+          // path.draw( canvas, mMatrix, mScale, mBBox );
+          path.draw( canvas, mMatrix, mBBox );
         }
       }
     }
@@ -228,7 +230,8 @@ class ProjectionCommandManager
     if ( mStations != null ) {  
       synchronized( TDPath.mStationsLock ) {
         for ( DrawingStationName st : mStations ) {
-          st.draw( canvas, mMatrix, mScale, mBBox );
+          // st.draw( canvas, mMatrix, mScale, mBBox );
+          st.draw( canvas, mMatrix, mBBox );
         }
       }
     }

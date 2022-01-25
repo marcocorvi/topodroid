@@ -876,6 +876,7 @@ public class TopoDroidApp extends Application
   }
 
   static boolean done_init_env_second = false;
+
   /** second step of environment initailization
    * @param with_dialog_r
    * @return true if successful - can fail if cannot open the database
@@ -910,6 +911,8 @@ public class TopoDroidApp extends Application
   //
   static boolean done_init_env_first = false;
 
+  /** initialize the environment, first step
+   */
   void initEnvironmentFirst(  ) // TDPrefHelper prefHlp 
   {
     if ( done_init_env_first ) return;
@@ -1020,8 +1023,12 @@ public class TopoDroidApp extends Application
 
 // -----------------------------------------------------------------
 
-  // called by GMActivity and by CalibCoeffDialog 
-  // and DeviceActivity (to reset coeffs)
+  /** upload the calibration coefficients to the DistoX
+   * @param coeff    calibration coefficients
+   * @param check    whether to check that the calibration matches the device 
+   * @param b        "write" button - to update its state at the end
+   * @note called by GMActivity and by CalibCoeffDialog and DeviceActivity (to reset coeffs)
+   */
   public void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
   {
     // TODO this writeCoeff shoudl be run in an AsyncTask
@@ -1039,7 +1046,11 @@ public class TopoDroidApp extends Application
     resetComm();
   }
 
-  // called by CalibReadTask.onPostExecute
+  /** read the calibration coefficients from the DistoX
+   * @param coeff    calibration coefficients [output]
+   * @return true if successful
+   * @note called by CalibReadTask.onPostExecute
+   */
   public boolean readCalibCoeff( byte[] coeff )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return false;
@@ -1048,7 +1059,10 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
-  // called by CalibToggleTask.doInBackground
+  /** toggle the DistoX calibration/normal mode
+   * @return true if successful
+   * @note called by CalibToggleTask.doInBackground
+   */
   public boolean toggleCalibMode( )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return false;
@@ -1057,6 +1071,11 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
+  /** read the DistoX memory
+   * @param address   device address
+   * @param addr      memory address
+   * @return array of bytes read from the DistoX memory at the given address
+   */
   public byte[] readMemory( String address, int addr )
   {
     if ( mComm == null || isCommConnected() ) return null;
@@ -1065,6 +1084,13 @@ public class TopoDroidApp extends Application
     return ret;
   }
 
+  /** read the DistoX2 (X310) memory
+   * @param address   device address
+   * @param h0        ?
+   * @param h1        ?
+   * @param memory    array of octets to be filled by the memory-read
+   * @return number of octets that have been read (-1 on error)
+   */
   public int readX310Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;
@@ -1079,6 +1105,13 @@ public class TopoDroidApp extends Application
     return -1;
   }
 
+  /** read the DistoX (A3) memory
+   * @param address   device address
+   * @param h0        ?
+   * @param h1        ?
+   * @param memory    array of octets to be filled by the memory-read
+   * @return number of octets that have been read (-1 on error)
+   */
   public int readA3Memory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
   {
     if ( mComm == null || isCommConnected() ) return -1;

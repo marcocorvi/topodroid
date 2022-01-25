@@ -104,8 +104,8 @@
       style="@style/list_top"
       android:layout_width="match_parent"
       android:layout_height="fill_parent"
-    />  
-     					  
+    />
+
   </LinearLayout>
 
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"

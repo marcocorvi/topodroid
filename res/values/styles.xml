@@ -139,12 +139,32 @@
        <item name="android:dividerHeight">@dimen/dividersmall</item>
     </style>
 
+    <style name="list_top_fast">
+       <item name="android:stackFromBottom">false</item>
+       <item name="android:textSize">@dimen/textsize</item>
+       <item name="android:transcriptMode">alwaysScroll</item>
+       <item name="android:divider">@color/divider</item>
+       <item name="android:dividerHeight">@dimen/dividersmall</item>
+       <item name="android:fastScrollEnabled">true</item>
+       <item name="android:scrollingCache">true</item>
+    </style>
+
     <style name="list_bottom">
        <item name="android:stackFromBottom">true</item>
        <item name="android:textSize">@dimen/textsize</item>
        <item name="android:transcriptMode">alwaysScroll</item>
        <item name="android:divider">@color/divider</item>
        <item name="android:dividerHeight">@dimen/dividersmall</item>
+    </style>
+
+    <style name="list_bottom_fast">
+       <item name="android:stackFromBottom">true</item>
+       <item name="android:textSize">@dimen/textsize</item>
+       <item name="android:transcriptMode">alwaysScroll</item>
+       <item name="android:divider">@color/divider</item>
+       <item name="android:dividerHeight">@dimen/dividersmall</item>
+       <item name="android:fastScrollEnabled">true</item>
+       <item name="android:scrollingCache">true</item>
     </style>
 
     <style name="list_help">

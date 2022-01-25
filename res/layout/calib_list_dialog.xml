@@ -50,10 +50,10 @@
   </LinearLayout>
    
   <ListView android:id="@+id/list"
-      style="@style/list_top"
-      android:layout_width="match_parent"
-      android:layout_height="match_parent"
-    />  
+    style="@style/list_top"
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+  />  
 
   <!-- LinearLayout 
          android:layout_width="match_parent" 
