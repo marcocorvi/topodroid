@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+  <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+
+  <TextView 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center|bottom"
+    android:text="@string/north"
+    />
+  <LinearLayout
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center|center_vertical"
+    >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:gravity="right|center_vertical"
+        android:text="@string/west"
+      />
+      <Button
+        android:id="@+id/btn_azimuth"
+        android:layout_width="96dp"
+        android:layout_height="96dp"
+        android:layout_gravity="center"
+        style="@style/button_default"
+      />
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="96dp"
+        android:gravity="left|center_vertical"
+        android:text="@string/east"
+      />
+  </LinearLayout>
+  <TextView 
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:layout_gravity="center"
+    android:gravity="center|top"
+    android:text="@string/south"
+    />
+
+    <SeekBar android:id="@+id/seekbar"
+      android:layout_gravity="center"
+      android:layout_width="match_parent"
+      android:layout_height="20dp" 
+      android:max="360"
+      android:background="#666666"
+      android:progressDrawable="@drawable/progress2"
+      android:layout_marginTop="@dimen/marginv"
+    />
+
+    <LinearLayout android:id="@+id/layout4"
+      android:orientation="horizontal" 
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      >
+      <EditText android:id="@+id/et_azimuth"
+        style="@style/edit_number_light"
+        android:layout_width="100dp" 
+        android:layout_marginRight="@dimen/marginh"
+        android:imeOptions="actionDone"
+        android:hint="@string/hint_azimuth"
+      />    
+      <!-- Button android:id="@+id/btn_sensor"
+        style="@style/button_default"
+        android:text="@string/button_azimuth"
+        / -->
+    </LinearLayout>
+
+    <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_gravity="right"
+      android:gravity="left"
+      android:layout_marginTop="@dimen/marginvbig"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/btn_left"
+          style="@style/button_default"
+          android:text="@string/button_left"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/btn_ok"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/btn_right"
+          style="@style/button_default"
+          android:text="@string/button_right"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_cancel"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+        />
+      </LinearLayout>
+    </LinearLayout>
+   					  
+  </LinearLayout>
+</ScrollView>

@@ -1,0 +1,336 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:id="@+id/top"
+  style="@style/base_padding"
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  android:focusable="true"
+  android:focusableInTouchMode="true"
+  >
+
+
+    <!-- TextView android:id="@+id/shot_info" 
+        android:layout_marginBottom="@dimen/marginv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/shot_info"
+        android:textSize="@dimen/textsizebig"
+      / -->
+
+    <LinearLayout 
+      android:id="@+id/layout1"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_alignParentTop="true"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@+id/shot_from" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:scrollHorizontally="true"
+        android:hint="@string/shot_from"
+        android:nextFocusRight="@+id/shot_to"
+        android:nextFocusDown="@id/shot_to"
+        android:nextFocusForward="@id/shot_to"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_to" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="50"
+        android:layout_height="wrap_content" 
+        android:scrollHorizontally="true"
+        android:nextFocusRight="@+id/shot_distance"
+        android:nextFocusDown="@id/shot_distance"
+        android:nextFocusForward="@id/shot_distance"
+        android:hint="@string/shot_to"
+        android:singleLine="true"
+        />
+    </LinearLayout>
+
+    <LinearLayout 
+      android:id="@+id/layout2"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_below="@id/layout1"
+      android:layout_marginTop="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@id/shot_distance" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_length"
+        android:nextFocusRight="@+id/shot_bearing"
+        android:nextFocusDown="@id/shot_bearing"
+        android:nextFocusForward="@id/shot_bearing"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_bearing" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_azimuth"
+        android:nextFocusRight="@+id/shot_clino"
+        android:nextFocusDown="@id/shot_clino"
+        android:nextFocusForward="@id/shot_clino"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_clino" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_clino"
+        android:nextFocusRight="@+id/shot_left"
+        android:nextFocusDown="@id/shot_left"
+        android:nextFocusForward="@id/shot_left"
+        android:singleLine="true"
+        />
+      <TextView 
+        android:id="@+id/shot_forsight"
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="@dimen/marginh"
+	android:text="@string/greater_than"
+        />
+    </LinearLayout>
+
+    <LinearLayout 
+      android:id="@+id/shot_backsight"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_below="@id/layout2"
+      android:layout_marginTop="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@+id/shot_backdistance" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_length"
+        android:nextFocusRight="@+id/shot_backbearing"
+        android:nextFocusDown="@id/shot_backbearing"
+        android:nextFocusForward="@id/shot_backbearing"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_backbearing" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_azimuth"
+        android:nextFocusRight="@+id/shot_backclino"
+        android:nextFocusDown="@id/shot_backclino"
+        android:nextFocusForward="@id/shot_backclino"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_backclino" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="30"
+        android:layout_height="wrap_content" 
+	android:hint="@string/input_clino"
+        android:singleLine="true"
+        />
+      <TextView 
+        android:layout_width="0dp"
+        android:layout_weight="10"
+        android:layout_height="wrap_content" 
+        android:layout_marginLeft="@dimen/marginh"
+	android:text="@string/less_than"
+        />
+    </LinearLayout>
+
+    <LinearLayout 
+      android:id="@+id/layout3"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_below="@id/shot_backsight"
+      android:layout_marginTop="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
+      <EditText android:id="@id/shot_left" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+	android:hint="@string/arrow_left"
+        android:nextFocusRight="@+id/shot_right"
+        android:nextFocusDown="@id/shot_right"
+        android:nextFocusForward="@id/shot_right"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_right" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+	android:hint="@string/arrow_right"
+        android:nextFocusRight="@+id/shot_up"
+        android:nextFocusDown="@id/shot_up"
+        android:nextFocusForward="@id/shot_up"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_up" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+        android:hint="@string/arrow_up"
+        android:nextFocusRight="@+id/shot_down"
+        android:nextFocusDown="@id/shot_down"
+        android:nextFocusForward="@id/shot_down"
+        android:singleLine="true"
+        />
+      <EditText android:id="@id/shot_down" 
+        style="@style/edit_text"
+        android:maxLines="1" 
+        android:layout_width="0dp"
+        android:layout_weight="25"
+        android:layout_height="wrap_content" 
+	android:hint="@string/arrow_down"
+        android:singleLine="true"
+        />
+    </LinearLayout>
+    
+    <!-- buttons LRUD-box etc. -->
+    <LinearLayout 
+      android:id="@+id/layout5"
+      android:layout_below="@id/layout3"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:paddingLeft="@dimen/marginnormal"
+      android:paddingRight="@dimen/marginnormal"
+      android:orientation="horizontal" 
+      >
+      <RadioGroup 
+        android:id="@+id/radio5"
+        android:layout_width="wrap_content" 
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/marginv"
+        android:orientation="horizontal" 
+        >
+        <RadioButton 
+          android:id="@+id/radio_left"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/extend_left" />
+        <RadioButton 
+          android:id="@+id/radio_vert"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/extend_vert" />
+        <RadioButton 
+          android:id="@+id/radio_right"
+          android:layout_width="wrap_content"
+          android:layout_height="wrap_content"
+          android:text="@string/extend_right" />
+      </RadioGroup>
+      <LinearLayout 
+        android:id="@+id/layout4"
+        android:layout_width="match_parent" 
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/marginnormal"
+        android:paddingRight="@dimen/marginnormal"
+        android:orientation="horizontal" 
+        android:gravity="right"
+        />
+    </LinearLayout>
+
+    <!-- LinearLayout 
+      android:id="@+id/layout4"
+      android:layout_below="@id/radio5"
+      android:layout_width="wrap_content" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginv"
+      android:orientation="horizontal" 
+      >
+      <!== Button android:id="@+id/button_sensor"
+          style="@style/button_default"
+          android:text="@string/button_direction"
+          / ==>
+      <Button android:id="@+id/button_sensor"
+          android:layout_width="wrap_content" 
+          android:layout_height="wrap_content" 
+          android:background="@drawable/iz_sensor"
+          android:layout_marginRight="@dimen/marginh"
+          />
+
+      <CheckBox android:id="@+id/splay_at_to"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/splay_at_to"
+        />
+    </LinearLayout -->
+
+    <!-- Spinner  android:id="@+id/extend"
+          android:layout_height="wrap_content"
+          android:layout_width="wrap_content"
+          android:prompt="@string/extend"/ -->
+
+    <LinearLayout android:id="@+id/help"
+      android:layout_below="@id/layout5"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      android:layout_marginTop="@dimen/marginvbig"
+      android:gravity="left"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="right"
+        >
+        <Button android:id="@+id/button_cancel_name"
+          style="@style/button_default"
+          android:text="@string/button_cancel"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_save_shot_name"
+          style="@style/button_default"
+          android:text="@string/button_save"
+          android:layout_marginRight="@dimen/marginh"
+        />
+        <Button android:id="@+id/button_ok_shot_name"
+          style="@style/button_default"
+          android:text="@string/button_ok"
+        />
+    </LinearLayout>
+  </LinearLayout>
+   					  
+
+  <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
+    style="@style/keyboard"
+  />
+
+   		
+</RelativeLayout>
+</ScrollView>
+

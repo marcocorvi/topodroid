@@ -216,7 +216,7 @@ public class TopoGL extends Activity
 
   static boolean mSelectStation = true;
   static boolean mHasC3d = false;
-  static boolean mHasFractal = true;
+  static boolean mHasFractal = false;
 
   // --------------------------------- OpenGL stuff
   private GlSurfaceView glSurfaceView;
