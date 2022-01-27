@@ -54,6 +54,8 @@ public class GlLines extends GlShape
 
   // private boolean mIncremental = false;
 
+  /** 3D segment
+   */
   private class Line3D
   {
     Vector3D v1;
@@ -62,7 +64,13 @@ public class GlLines extends GlShape
     int      survey; // survey index in Parser survey list
     boolean  isSurvey; // survey or axis
 
-    // w1, w2 in survey frame
+    /** cstr
+     * @param w1   first point (survey frame): the vector in OpenGL has comps (x, z, -y)
+     * @param w2   second point (survey frame)
+     * @param c    color
+     * @param s    survey index
+     * @param is   whether the segment is survey
+     */
     Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is ) 
     { 
        v1 = new Vector3D( w1.x, w1.z, -w1.y );
@@ -72,8 +80,16 @@ public class GlLines extends GlShape
        isSurvey = is;
     }
 
-    // w1, w2 in survey frame
-    // XYZ med in OpenGL
+    /** cstr
+     * @param w1   first point (survey frame)
+     * @param w2   second point (survey frame)
+     * @param c    color
+     * @param s    survey index
+     * @param is   whether the segment is survey
+     * @param xmed mean X (in OpenGL)
+     * @param ymed mean Y (in OpenGL)
+     * @param zmed mean Z (in OpenGL)
+     */
     Line3D( Vector3D w1, Vector3D w2, int c, int s, boolean is, double xmed, double ymed, double zmed ) 
     { 
        v1 = new Vector3D( w1.x-xmed, w1.z-ymed, -w1.y-zmed );
@@ -83,7 +99,11 @@ public class GlLines extends GlShape
        isSurvey = is;
      }
 
-    // XYZ med in OpenGL
+    /** reduce the segment endpoints to the center
+     * @param x0  center X (in OpenGL)
+     * @param y0  center Y (in OpenGL)
+     * @param z0  center Z (in OpenGL)
+     */
     void reduce( double x0, double y0, double z0 )
     {
       v1.x -= x0;   v1.y -= y0;   v1.z -= z0;
@@ -107,19 +127,49 @@ public class GlLines extends GlShape
   private double ymin=0, ymax=0;
   private double zmin=0, zmax=0;
 
+  /** @return the minimum X coordinate
+   */
   double getXmin()   { return xmin; }
+
+  /** @return the minimum Y coordinate
+   */
   double getYmin()   { return ymin; }
+
+  /** @return the minimum Z coordinate
+   */
   double getZmin()   { return zmin; }
+
+  /** @return the maximum X coordinate
+   */
   double getXmax()   { return xmax; }
+
+  /** @return the maximum Y coordinate
+   */
   double getYmax()   { return ymax; }
+
+  /** @return the maximum Z coordinate
+   */
   double getZmax()   { return zmax; }
 
+  /** @return the difference between Ymax and Ymin
+   */
   double getYdelta() { return ymax - ymin; }
+
+  /** @return the average value of X: (Xmin + Xmax)/2
+   */
   double getXmed()   { return (xmin + xmax)/2; }
+
+  /** @return the average value of Y
+   */
   double getYmed()   { return (ymin + ymax)/2; }
+
+  /** @return the average value of Z
+   */
   double getZmed()   { return (zmin + zmax)/2; }
 
-  String getBBoxString() // LOG
+  /** @return the bounding box as a string - LOG
+   */
+  String getBBoxString()
   {
     StringBuilder sb = new StringBuilder();
     sb.append( " X ").append(xmin).append(" ").append(xmax)
@@ -127,7 +177,9 @@ public class GlLines extends GlShape
       .append( " Z ").append(zmin).append(" ").append(zmax);
     return sb.toString();
   }
-
+ 
+  /** initualize an empty bounding box
+   */
   void initEmptyBBox() // FIXME INCREMENTAL
   {
     xmin=-100;
@@ -138,7 +190,9 @@ public class GlLines extends GlShape
     zmax= 100;
   }
 
-  // this is not the rel diameter, but the diagonal of the enclosing axis-parallel parallelepiped 
+  /** @return the diameter
+   * @note this is not the real diameter, but the diagonal of the enclosing axis-parallel parallelepiped 
+   */
   double diameter()
   {
     double x = xmax - xmin;
@@ -147,7 +201,13 @@ public class GlLines extends GlShape
     return Math.sqrt( x*x + y*y + z*z );
   }
 
-  // vertex data ( X Y Z R G B A )
+  /** cstr
+   * @param ctx        context
+   * @param color_mode color mode
+   * @param increment  ... (not used)
+   *
+   * @note the vertex data are ( X Y Z R G B A )
+   */
   GlLines( Context ctx, int color_mode, int increment )
   {
     super( ctx );
@@ -161,6 +221,11 @@ public class GlLines extends GlShape
     // }
   }
 
+  /** cstr
+   * @param ctx        context
+   * @param color      TGL color 
+   * @param increment  ... (not used)
+   */
   GlLines( Context ctx, TglColor color, int increment )
   {
     super( ctx );
@@ -174,6 +239,11 @@ public class GlLines extends GlShape
     // }
   }
 
+  /** cstr
+   * @param ctx        context
+   * @param color      color, as array of float
+   * @param increment  ... (not used)
+   */
   GlLines( Context ctx, float[] color, int increment )
   {
     super( ctx );
@@ -229,8 +299,13 @@ public class GlLines extends GlShape
   //   return val;
   // }
 
-  // survey = survey or fixed (axis) color
-  // color  = color index: [0-12) for survey, [0-5) for fixed
+  /** add a line-segment
+   * @param w1         first 3D vector
+   * @param w2         second 3D vector
+   * @param color      color index: [0-12) for survey, [0-5) for fixed
+   * @param survey     survey or fixed (axis) color
+   * @param is_survey  whether the line is a survey line
+   */
   void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey ) 
   { 
     if ( w1 == null || w2 == null ) return; // should not happen, but it did:
@@ -256,15 +331,25 @@ public class GlLines extends GlShape
     // }
   }
 
-  // survey = index of survey in Cave3DSurvey list
-  // w1, w2 in survey frame
-  // XYZ med n OpenGlL
+  /** add a line-segment
+   * @param w1         first 3D vector (in survey frame)
+   * @param w2         second 3D vector (in survey frame)
+   * @param color      color index: [0-12) for survey, [0-5) for fixed
+   * @param survey     index of survey in Cave3DSurvey list
+   * @param is_survey  whether the line is a survey line
+   * @param xmed       mean X (in OpenGL)
+   * @param ymed       mean Y (in OpenGL)
+   * @param zmed       mean Z (in OpenGL)
+   */
   void addLine( Vector3D w1, Vector3D w2, int color, int survey, boolean is_survey, double xmed, double ymed, double zmed ) 
   { 
     if ( w1 == null || w2 == null ) return; // should not happen
     lines.add( new Line3D( w1, w2, color, survey, is_survey, xmed, ymed, zmed ) ); 
   }
 
+  /** prepare the buffer of depths
+   * @param legs   list of legs
+   */
   void prepareDepthBuffer( List<Cave3DShot> legs )
   {
     int count = 2 * legs.size();
@@ -310,7 +395,8 @@ public class GlLines extends GlShape
   //   }
   // }
 
-  // compute BBox in OpenGL frame
+  /** compute BBox in OpenGL frame
+   */
   void computeBBox()
   {
     if ( lines.size() == 0 ) return;
@@ -326,7 +412,8 @@ public class GlLines extends GlShape
     }
   }
 
-  /* LOG */
+  /** LOG min and max
+   */
   void logMinMax() 
   {
     if ( lines.size() == 0 ) {
@@ -350,6 +437,9 @@ public class GlLines extends GlShape
     // TDLog.v("lines " + lines.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
   }
   
+  /** toggle the display of the line segments
+   * @param visible   array of visibility flags
+   */
   void hideOrShow( boolean[] visible )
   {
     // TDLog.v("Line hide/show " + lineCount + " vis " + visible.length );
@@ -374,14 +464,21 @@ public class GlLines extends GlShape
     }
   }
 
-  // must be called only on legs - for the others use addLine with reduced XYZ med
-  // X,Y,Z openGL
+  /** reduce the coords of the lines to the center
+   * @param xmed    center X coord (in OpenGL)
+   * @param ymed    center Y coord (in OpenGL)
+   * @param zmed    center Z coord (in OpenGL)
+   * @note must be called only on legs - for the others use addLine with reduced XYZ med
+   */
   void reduceData( double xmed, double ymed, double zmed )
   {
     for ( Line3D line : lines ) line.reduce( xmed, ymed, zmed );
     computeBBox();
   }
 
+  /** prepare the data array
+   * @return ...
+   */
   private float[] prepareData( )
   { 
     if ( lines.size() == 0 ) return null;
@@ -423,6 +520,9 @@ public class GlLines extends GlShape
   }
 
   // FIXME INCREMENTAL void initData( ) { initData( prepareData(), lines.size() ); }
+
+  /** initialize the data buffer
+   */
   void initData( ) 
   { 
     if ( mDataBuffer != null ) {
@@ -434,6 +534,10 @@ public class GlLines extends GlShape
     }
   }
 
+  /** initialize the data buffer
+   * @param data   ...
+   * @param count  number of line segments
+   */
   void initData( float[] data, int count )
   { 
     lineCount = count;
@@ -458,7 +562,13 @@ public class GlLines extends GlShape
   // ---------------------------------------------------
   // DRAW
 
-  void draw( float[] mvpMatrix, int draw_mode, boolean points, float[] color ) // for legs-only
+  /** draw - for legs only
+   * @param mvpMatrix   model-view-project matrix
+   * @param draw_mode   drawing mode
+   * @param points      whether to draw the endpoints
+   * @param color       color 4-vector
+   */
+  void draw( float[] mvpMatrix, int draw_mode, boolean points, float[] color )
   {
     if ( draw_mode == GlModel.DRAW_NONE || lineCount == 0 ) {
       // TDLog.v("Lines draw none " + lineCount );
@@ -504,6 +614,10 @@ public class GlLines extends GlShape
     // unbindData();
   }
 
+  /** draw
+   * @param mvpMatrix   model-view-project matrix
+   * @param draw_mode   drawing mode
+   */
   void draw( float[] mvpMatrix, int draw_mode )
   {
     if ( draw_mode == GlModel.DRAW_NONE || lineCount == 0 ) return;
@@ -548,6 +662,10 @@ public class GlLines extends GlShape
     // unbindData();
   }
 
+  /** bind station data
+   * @param mvpMatrix   model-view-project matrix
+   * @param color       color 4-vector
+   */
   private void bindDataStation( float[] mvpMatrix, float[] color ) // Station is the same as UColor, just with a different color
   {
     GL.setUniformMatrix( mstUMVPMatrix, mvpMatrix );
@@ -556,6 +674,10 @@ public class GlLines extends GlShape
     GL.setUniform( mstUColor, color[0], color[1], color[2], color[3] );
   }
 
+  /** bind data - uniform color
+   * @param mvpMatrix   model-view-project matrix
+   * @param color       color 4-vector
+   */
   private void bindDataUColor( float[] mvpMatrix, float[] color )
   {
     GL.setUniformMatrix( muUMVPMatrix, mvpMatrix );
@@ -572,6 +694,9 @@ public class GlLines extends GlShape
     GL.setUniform( muUColor, color[0], color[1], color[2], color[3] );
   }
 
+  /** bind data - attribute color
+   * @param mvpMatrix   model-view-project matrix
+   */
   private void bindDataAColor( float[] mvpMatrix )
   {
     GL.setUniformMatrix( maUMVPMatrix, mvpMatrix );
@@ -581,6 +706,10 @@ public class GlLines extends GlShape
     GL.setAttributePointer( maAColor,    dataBuffer, OFFSET_COLOR,  COORDS_PER_COLOR,  BYTE_STRIDE );
   }
 
+  /** bind data - depth color
+   * @param mvpMatrix   model-view-project matrix
+   * @param color       color 4-vector
+   */
   private void bindDataZColor( float[] mvpMatrix, float[] color )
   {
     GL.setUniformMatrix( mzUMVPMatrix, mvpMatrix );
@@ -592,6 +721,10 @@ public class GlLines extends GlShape
     GL.setUniform( mzUColor, color[0], color[1], color[2], color[3] );
   }
 
+  /** bind data - ...
+   * @param mvpMatrix   model-view-project matrix
+   * @param buffer      ...
+   */
   private void bindDataSColor( float[] mvpMatrix, FloatBuffer buffer )
   {
     GL.setUniformMatrix( msUMVPMatrix, mvpMatrix );
@@ -606,12 +739,25 @@ public class GlLines extends GlShape
   // ------------------------------------------------------------
   // UTILITIES
 
+  /** @return the number of line-segments
+   */
   public int size() { return lines.size(); }
 
+  /** set the size of the points
+   * @param size   new size
+   */
   void setPointSize( float size ) { mPointSize = 5.0f * size; }
 
+  /** set the opacity (alpha) between 0.2 and 1.0
+   * @param a   alpha
+   */
   void setAlpha( float a ) { mAlpha = ( a < 0.2f )? 0.2f : ( a > 1.0f )? 1.0f : a; }
 
+  /** update the bounds
+   * @param x    X coord (in OpenGL)
+   * @param y    Y coord (in OpenGL)
+   * @param z    Z coord (in OpenGL)
+   */
   private void updateBounds( double x, double y, double z )
   {
     if ( xmin > x ) { xmin = x; } else if ( xmax < x ) { xmax = x; }
@@ -628,7 +774,15 @@ public class GlLines extends GlShape
   // static final int COLOR_TEMP    = 4; // TEMPERATURE
   static final int COLOR_MAX     = 4;
 
+  /** cyclically rotate the color mode
+   * @param max   maximum value of the color mode
+   */
   void toggleColorMode( int max ) { setColorMode( mColorMode + 1, max ); }
+
+  /** set the color mode
+   * @param mode  new color mode
+   * @param max   maximum value of the color mode
+   */
   void setColorMode(int mode, int max ) { mColorMode = mode % max; }
 
   // -----------------------------------------------------------------
@@ -671,6 +825,9 @@ public class GlLines extends GlShape
   private static int mzUZMin;
   private static int mzUZDelta;
 
+  /** initialize OpenGL
+   * @param ctx   context
+   */
   static void initGL( Context ctx )
   {
     mProgramUColor = GL.makeProgram( ctx, R.raw.line_ucolor_vertex, R.raw.line_ucolor_fragment );
@@ -691,6 +848,9 @@ public class GlLines extends GlShape
     // TDLog.v("Line progs " + mProgramAColor + " " + mProgramUColor + " " + mProgramZColor );
   }
 
+  /** set the S-color program locations
+   * @param program   program
+   */
   private static void setLocationsSColor( int program )
   {
     msUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
@@ -700,6 +860,10 @@ public class GlLines extends GlShape
     msADColor    = GL.getAttribute( program, GL.aDColor );
     // TDLog.v("Line-A " + maUPointSize + " " + maAPosition + " " + maAColor + " " + maUAlpha );
   }
+
+  /** set the attribute-color program locations
+   * @param program   program
+   */
   private static void setLocationsAColor( int program )
   {
     maUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
@@ -709,6 +873,10 @@ public class GlLines extends GlShape
     maUAlpha     = GL.getUniform(   program, GL.uAlpha );
     // TDLog.v("Line-A " + maUPointSize + " " + maAPosition + " " + maAColor + " " + maUAlpha );
   }
+
+  /** set the uniform-color program locations
+   * @param program   program
+   */
   private static void setLocationsUColor( int program )
   {
     muUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
@@ -718,7 +886,11 @@ public class GlLines extends GlShape
     muUColor     = GL.getUniform(   program, GL.uColor );
     // TDLog.v("Line-U " + muUPointSize + " " + muAPosition + " " + muUColor );
   }
-  // Station is the sane as UColor
+
+  /** set the station program locations
+   * @param program   program
+   * @note Station is the sane as UColor
+   */
   private static void setLocationsStation( int program )
   {
     mstUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );
@@ -727,6 +899,10 @@ public class GlLines extends GlShape
     mstUColor     = GL.getUniform(   program, GL.uColor );
     // TDLog.v("Line-U " + muUPointSize + " " + muAPosition + " " + muUColor );
   }
+
+  /** set the depth-color program locations
+   * @param program   program
+   */
   private static void setLocationsZColor( int program )
   {
     mzUMVPMatrix = GL.getUniform(   program, GL.uMVPMatrix );

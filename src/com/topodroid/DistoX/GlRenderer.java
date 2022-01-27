@@ -163,16 +163,24 @@ public class GlRenderer implements Renderer
     makeModelMatrix();
   }
 
+  /** unbind the textures
+   */
   void unbindTextures()
   {
     mModel.unbindTextures();
   }
 
+  /** rebind the textures
+   */
   void rebindTextures()
   {
     mModel.rebindTextures();
   }
 
+  /** prepare the 3D model
+   * @param parser   data parser
+   * @param reduce   ...   
+   */
   void prepareModel( TglParser parser, boolean reduce )
   {
     // mModel = new GlModel( mApp, mHalfWidth*2, mHalfHeight*2, parser );
@@ -189,14 +197,20 @@ public class GlRenderer implements Renderer
     doMakeModel = true;
   }
 
-  // this must run on the rendering thread
+  /** construct the 3D model
+   * @note this must run on the rendering thread
+   */
   private void makeModel()
   {
     mModel.createModel();
     doMakeModel = false;
   }
 
-  // this is called on an external thread
+  /** set the parser
+   * @param parser   data parser
+   * @param reduce   ...   
+   * @note this is called on an external thread
+   */
   void setParser( TglParser parser, boolean reduce )
   {
     // TDLog.v("Renderer set parser" );
@@ -228,6 +242,10 @@ public class GlRenderer implements Renderer
   // END INCREMENTAL
 
   // ------------------------------------------------------------------------
+  /** cstr
+   * @param app    3D activity
+   * @param model  3D model
+   */
   public GlRenderer( TopoGL app, GlModel model )
   {
     super();
@@ -235,6 +253,8 @@ public class GlRenderer implements Renderer
     mModel = model;
   }
 
+  /** @return the point-of-view / lighting-direction as a string
+   */
   String getAngleString()
   {
     float clino   = -mXAngle;
@@ -307,32 +327,42 @@ public class GlRenderer implements Renderer
     // mModel.createModel( width ); // must be done on surface created
   }
 
-  // perspective matrixA
-  //   focal/aspect    0               0                      0
-  //        0        focal             0                      0
-  //        0          0    -(far+near)/(far-near)  2*far*near/(far-near)
-  //        0          0               1                      0
-  //
-  // focal  = 1 / tg( field_of_vision / 2 )
-  // aspect = aspect ration of the screen
-  // far    = far plane (positive and far > near)
-  // near   = near plane (positive, eg near=1 means plane z=-1)
+  /** make perspective matrixA
+   *   focal/aspect    0               0                      0
+   *        0        focal             0                      0
+   *        0          0    -(far+near)/(far-near)  2*far*near/(far-near)
+   *        0          0               1                      0
+   *
+   * focal  = 1 / tg( field_of_vision / 2 )
+   * aspect = aspect ration of the screen
+   * far    = far plane (positive and far > near)
+   * near   = near plane (positive, eg near=1 means plane z=-1)
+   */
   void makePerspectiveMatrix( )
   {
     // TDLog.v("Renderer perspective " + FOCAL + " " + NEAR_P + " " + FAR_P );
     Matrix.frustumM(mPerspectiveMatrix, 0, -FOCAL*ratio, FOCAL*ratio, -FOCAL, FOCAL, NEAR_P, FAR_P ); // 0 ... : offset, left, right, bottom, top, near, far 
   }
 
-  // ortographic matrix
+  /** make ortographic matrix
+   */
   void makeOrthographicMatrix( )
   {
     // TDLog.v("Renderer ortographic " + SIDE + " " + NEAR_O + " " + FAR_O );
     Matrix.orthoM( mOrtograohicMatrix, 0, -SIDE*ratio, SIDE*ratio, -SIDE, SIDE, NEAR_O, FAR_O );
   }
 
+  /** @return the X angle
+   */
   public float getXAngle() { return mXAngle; }
+
+  /** @return the Y angle
+   */
   public float getYAngle() { return mYAngle; }
 
+  /** normalize a vector
+   * @param v  vector
+   */
   private void normalize( float[] v ) {
     v[0] /= v[3];
     v[1] /= v[3];
@@ -346,6 +376,8 @@ public class GlRenderer implements Renderer
   //   if ( mModel != null ) mModel.setPath( path, mApp.hasBluetoothName() ); 
   // }
 
+  /** clear the highlight of stations
+   */
   void clearStationHighlight() 
   { 
     if ( mModel != null ) mModel.clearStationHighlight();

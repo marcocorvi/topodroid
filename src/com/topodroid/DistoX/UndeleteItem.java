@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 class UndeleteItem 
 {
+  // item types:
   final static int UNDELETE_PLOT = 0;
   final static int UNDELETE_SHOT = 1;
   final static int UNDELETE_OVERSHOOT = 2;
@@ -23,6 +24,11 @@ class UndeleteItem
   String  text;
   int     type;
 
+  /** cstr
+   * @param _id     item ID
+   * @param txt     display text
+   * @param _type   item type
+   */
   UndeleteItem( long _id, String txt, int _type )
   {
     id = _id;
@@ -31,8 +37,12 @@ class UndeleteItem
     type = _type;
   }
 
+  /** toggle the item flag
+   */
   void flipFlag() { flag = ! flag; }
 
+  /** @return the display text
+   */
   String getText() 
   {
     return (flag? "[+] " : "[ ] ") + text;

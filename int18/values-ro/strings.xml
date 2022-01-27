@@ -316,6 +316,7 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Radieri</string>
     <string name="splays">radieri</string>
     <string name="legs">Vize</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -682,6 +683,7 @@ Refer to the web pages for details.\n
     <string name="button_close"     >Închide   </string>
     <!-- UNUSED string name="button_create"    >Crează    </string -->
     <string name="button_color"     >Culoare   </string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Conversie </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Activ     </string>

@@ -319,6 +319,7 @@
     <string name="splays_on_off">副线开关</string>
     <string name="splays">副线</string>
     <string name="legs">主线</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -691,6 +692,7 @@
     <string name="button_close"     >关闭     </string>
     <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >转换   </string>
     <string name="button_copy"      >拷贝</string>
     <string name="button_current"   >激活    </string>

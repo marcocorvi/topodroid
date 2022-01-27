@@ -13,7 +13,21 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     >
-    <EditText android:id="@+id/name"
+    <LinearLayout android:id="@+id/layout12"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
+      >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/stations"
+        android:layout_marginRight="@dimen/marginh"
+      />
+      <EditText android:id="@+id/name"
         style="@style/edit_text"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -21,9 +35,10 @@
         android:inputType="text"
         android:layout_marginTop="@dimen/marginv"
         android:hint="@string/station"
-    />
+      />
+    </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout2"
+    <LinearLayout android:id="@+id/layout22"
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

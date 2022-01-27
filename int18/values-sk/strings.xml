@@ -321,6 +321,7 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">Pomocné zámery</string>
     <string name="legs">Hlavné zámery</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Zemepisná šírka %1$s</string>
@@ -697,6 +698,7 @@ Refer to the web pages for details.\n
     <string name="button_close"     >Zavrieť    </string>
     <!-- UNUSED string name="button_create"    >Vytvoriť     </string -->
     <string name="button_color"     >Farba</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Konvertovať  </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Aktivovať  </string>

@@ -321,6 +321,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="splays_on_off">Segédmérések</string>
     <string name="splays">segédmérések is</string>
     <string name="legs">Poligon mérések</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">HALLGAT | %1$s</string -->
     <string name="fmt_id">Azonosító %1$s</string>
     <string name="fmt_latitude">Szélesség %1$s</string>
@@ -697,6 +698,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_close"     >Bezár</string>
     <!-- UNUSED string name="button_create"    >Létrehoz</string -->
     <string name="button_color"     >Szín</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_clear_convert">Átal. törlés</string>
     <string name="button_convert"   >Átalakít</string>
     <string name="button_copy"      >Másol</string>

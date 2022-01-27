@@ -33,6 +33,10 @@ public class TDLevel
   boolean mDeveloper   = false;
   static String  mAndroidId   = null;
 
+  /** set the activity level
+   * @param ctx    context
+   * @param level  activity level
+   */
   public static void setLevel( Context ctx, int level )
   {
     mLevel = level;

@@ -318,6 +318,7 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Medidas auxiliares</string>
     <string name="splays">medidas auxiliares</string>
     <string name="legs">Visadas</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">OUVIR | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -681,6 +682,7 @@ Refer to the web pages for details.\n
     <string name="button_close"     >Fechar     </string>
     <!-- UNUSED string name="button_create"    >Criar      </string -->
     <string name="button_color"     >Cor        </string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Converter  </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Atual      </string>

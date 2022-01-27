@@ -44,6 +44,12 @@ public class ExportDialogCalib extends MyDialog
   private String    mSelected;
   private final int mTitle;
 
+  /** cstr
+   * @param context  context
+   * @param parent   parent activity
+   * @param types    export types
+   * @param title    title resource index
+   */
   public ExportDialogCalib( Context context, IExporter parent, String[] types, int title )
   {
     super( context, R.string.ExportDialogCalib );
@@ -77,12 +83,24 @@ public class ExportDialogCalib extends MyDialog
 
   }
 
+  /** react to an item selection
+   * @param av    item adapter
+   * @param v     item view
+   * @param pos   item position
+   * @param id    ?
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) { mSelected = mTypes[ pos ]; }
 
+  /** react to a deselction
+   * @param av    item adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av ) { mSelected = null; }
 
+  /** react to a user tap
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) 
   {

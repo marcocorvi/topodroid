@@ -60,12 +60,14 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutPng;
   private LinearLayout mLayoutPdf;
 
-  // @param context
-  // @param parent      parent window
-  // @param types       export types, for the options
-  // @param title       dialog title (resource)
-  // @param parent_type 0: drawing, 1: overview
-  // @param plotname    name of the plot
+  /** cstr
+   * @param context     context
+   * @param parent      parent window
+   * @param types       export types, for the options
+   * @param title       dialog title (resource)
+   * @param parent_type 0: drawing, 1: overview
+   * @param plotname    name of the plot
+   */
   public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type, String plotname )
   {
     super( context, R.string.ExportDialog );
@@ -123,6 +125,12 @@ public class ExportDialogPlot extends MyDialog
     updateLayouts();
   }
 
+  /** react to an item selection
+   * @param av    item adapter
+   * @param v     item view
+   * @param pos   item position
+   * @param id    ?
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
@@ -131,6 +139,9 @@ public class ExportDialogPlot extends MyDialog
     updateLayouts();
   }
 
+  /** react to a deselection
+   * @param av    item adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av ) 
   { 
@@ -139,6 +150,9 @@ public class ExportDialogPlot extends MyDialog
     updateLayouts();
   }
 
+  /** react to a user tap
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -157,6 +171,8 @@ public class ExportDialogPlot extends MyDialog
     dismiss();
   }
 
+  /** update the layouts
+   */
   private void updateLayouts()
   {
     mLayoutTherion.setVisibility( View.GONE );
@@ -189,6 +205,8 @@ public class ExportDialogPlot extends MyDialog
     }
   }
 
+  /** set the options for the selected export
+   */
   private void setOptions()
   {
     int selected = mSelectedPos;
@@ -270,6 +288,8 @@ public class ExportDialogPlot extends MyDialog
     }
   }
 
+  /** initialize the options widgets
+   */
   private void initOptions()
   {
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );

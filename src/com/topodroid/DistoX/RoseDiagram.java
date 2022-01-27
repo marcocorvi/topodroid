@@ -14,8 +14,11 @@ package com.topodroid.DistoX;
 class RoseDiagram
 {
   int mPointNr;
-  double[] mValue;
+  double[] mValue; // accumulator
 
+  /** cstr
+   * @param n   number of bins
+   */
   RoseDiagram( int n )
   {
     mPointNr = n;
@@ -23,12 +26,20 @@ class RoseDiagram
     reset();
   }
 
+  /** reset the accumulator bins to zero
+   */
   void reset()
   {
     for ( int k = 0; k < mPointNr; ++k ) mValue[k] = 0.0;
   }
 
-  void add( double d, double b, double c, double eps ) // angles in radians
+  /** add a shot
+   * @param d   shot distance
+   * @param b   shot bearing [radians]
+   * @param c   shot clino [radians]
+   * @param eps tolerance
+   */
+  void add( double d, double b, double c, double eps ) 
   {
     d *= Math.cos( c );
     double f = 2.0*Math.PI/mPointNr;
@@ -42,6 +53,8 @@ class RoseDiagram
     }
   }
 
+  /** @return the maximum accumulator value
+   */
   double maxValue()
   {
     double max = 0;

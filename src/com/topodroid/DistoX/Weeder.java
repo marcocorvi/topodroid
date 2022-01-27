@@ -60,13 +60,17 @@ class Weeder
    */
   class WeedSegment
   { 
-    float a, b, c;
-    WeedPoint pt1, pt2;
+    float a, b, c;       // line-segment coefficients: a * X + b * Y + c = 0, normalized: a^2 + b^2 = 1
+    WeedPoint pt1, pt2;  // endpoints
     float dx, dy;
     float prj;
   
     // LineWeed( float aa, float bb, float cc ) : a(aa), b(bb), c(cc) { reduce(); }
   
+    /** cstr
+     * @param p1   first point
+     * @param p2   second point
+     */
     WeedSegment( WeedPoint p1, WeedPoint p2 )
     {
       pt1 = p1;
@@ -79,13 +83,18 @@ class Weeder
 
       a =   p2.y - p1.y;
       b = - p2.x + p1.x;
-      c = - p1.y * b - p1.x * a;
+      c = - p1.y * b - p1.x * a; // = p1.x * p2.y - p1.y * p2.x
       d = TDMath.sqrt( a*a + b*b );
       a /= d;
       b /= d;
       c /= d;
     }
   
+    /** @return the distance of a point from the segment:
+     *   | P - P1 | if the projection of P on the line P1-P2 is on the side of P1
+     *   | P - P2 | if it is on the side of P2
+     *   d( P, P1-P2) if it is inside
+     */
     float distance( WeedPoint p ) 
     {
       prj = (p.x-pt1.x)*dx + (p.y-pt1.y)*dy; // project P on the segment ("inside if in [0,1])
@@ -95,23 +104,26 @@ class Weeder
     }
   }
   
-  /** TODO
+  /** forward linked list of points
    */
   class WeedIndex
   {
     int k;
-    WeedPoint p;
-    // WeedIndex prev;
-    WeedIndex next;
+    WeedPoint p;    // point
+    WeedIndex next; // next index
   
+    /** cstr
+     * @param pt    point
+     * @param kk    ...
+     * @param pp    previous index, or null
+     * @param nn    next index
+     */
     WeedIndex( WeedPoint pt, int kk, WeedIndex pp, WeedIndex nn ) 
     {
       p = pt;
       k = kk;
-      // prev = pp;
       next = nn;
       if ( pp != null ) pp.next = this;
-      // if ( nn != null ) nn.prev = this;
     }
   }
   // ------------------------------------------------------------------

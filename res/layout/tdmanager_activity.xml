@@ -52,8 +52,9 @@
       android:layout_height="match_parent"
       android:paddingTop="@dimen/marginvbig"
       android:stackFromBottom="false"
-      android:transcriptMode="alwaysScroll"
     />  
+    <!--  android:transcriptMode="alwaysScroll" -->
+
     <ListView android:id="@+id/menu"
       android:layout_width="150dp"
       android:layout_height="wrap_content"

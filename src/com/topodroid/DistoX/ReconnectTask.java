@@ -24,6 +24,11 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
   private int mDataType; // data type, passed to data_douwnloader try_connect()
   private int mDelay = 0;
 
+  /** cstr
+   * @param downloader   data downloader
+   * @param data_type    type of data to download
+   * @param delay        ...
+   */
   ReconnectTask( DataDownloader downloader, int data_type, int delay )
   {
     mDownloader = downloader;
@@ -32,7 +37,10 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     running = null;
   }
 
-// -------------------------------------------------------------------
+  /** execute the task in background
+   * @param statuses   unused
+   * @return
+   */
   @Override
   protected Integer doInBackground( String... statuses )
   {
@@ -50,12 +58,14 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     return 0;
   }
 
-  @Override
-  protected void onProgressUpdate( Integer... values)
-  {
-    super.onProgressUpdate( values );
-  }
+  // @Override
+  // protected void onProgressUpdate( Integer... values)
+  // {
+  //   super.onProgressUpdate( values );
+  // }
 
+  /** execute after the task: release the lock
+   */
   @Override
   protected void onPostExecute( Integer res )
   {
@@ -64,6 +74,9 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     unlock();
   }
 
+  /** aqcuire the lock
+   * @return true if successful
+   */
   private synchronized boolean lock()
   {
     if ( running != null ) return false;
@@ -71,6 +84,8 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     return true;
   }
 
+  /** release the lock
+   */
   private synchronized void unlock()
   {
     if ( running == this ) running = null;

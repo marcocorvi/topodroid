@@ -38,6 +38,14 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     private String  mFormat;
     private Uri     mUri = null;
 
+    /** cstr
+     * @param uri      export URI
+     * @param format   export format
+     * @param bitmap   bitmap to export
+     * @param scale    ...
+     * @param name     plot fullname
+     * @param toast    whether to toast to tell the user the result
+     */
     ExportBitmapToFile( Uri uri, String format, Bitmap bitmap, float scale, String name, boolean toast )
     {
        /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
@@ -50,12 +58,17 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
        // TDLog.v( "Export bitmap to file " + mFullName );
     }
 
+    /** execute the export task
+     */
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
       return exec();
     }
 
+    /** execute the export task
+     * @return true on success
+     */
     boolean exec()
     {
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
@@ -91,6 +104,9 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       return false;
     }
 
+    /** post execution (on UI thread)
+     * @param bool  execution result
+     */
     @Override
     protected void onPostExecute(Boolean bool) {
       super.onPostExecute(bool);

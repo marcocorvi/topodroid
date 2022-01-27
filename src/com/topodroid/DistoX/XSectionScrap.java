@@ -15,7 +15,7 @@ package com.topodroid.DistoX;
 class XSectionScrap
 {
   String name; // scrap name
-  float x, y;  // offset
+  float x, y;  // offset (scene coords ?)
 
   /** cstr
    * @param nm  name

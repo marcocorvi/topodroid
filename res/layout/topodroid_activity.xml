@@ -52,8 +52,7 @@
       android:layout_height="match_parent"
       android:paddingTop="@dimen/marginvbig"
     />  
-  
-  
+
     <ListView android:id="@+id/menu"
       style="@style/menu_default"
     />

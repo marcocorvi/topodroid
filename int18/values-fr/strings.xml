@@ -314,6 +314,7 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Visées d\'habillage ON OFF</string>
 <string name="splays">Visées d\'habillage</string>
     <string name="legs">Visées de cheminement</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -679,6 +680,7 @@ Refer to the web pages for details.\n
     <string name="button_close"     >Fermer     </string>
     <!-- UNUSED string name="button_create"    >Créer    </string -->
     <string name="button_color"     >Couleur  </string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Convertir   </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Courant   </string>

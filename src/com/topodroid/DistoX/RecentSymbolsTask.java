@@ -20,27 +20,26 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
 {
   private DataHelper mData;
   private ItemDrawer mDrawer;
-  // private WeakReference<Context> mContext;
-  // private Symbol[] mRecentPoint;
-  // private Symbol[] mRecentLine;
-  // private Symbol[] mRecentArea;
-  // private int mNr;
   private int mWhat;
-  static final int LOAD = 0;
+  static final int LOAD = 0; // actions
   static final int SAVE = 1;
 
-  RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, /* Symbol[] points, Symbol[] lines, Symbol[] areas, int nr, */ int what )
+  /** cstr
+   * @param context    context (unused)
+   * @param drawer     sketch/drawing window
+   * @param data       database helper class
+   * @param what       task action, either LOAD or SAVE
+   */
+  RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, int what )
   {
-    // mContext = new WeakReference<Context>( context );
     mDrawer  = drawer;
     mData    = data;
-    // mRecentPoint = points;
-    // mRecentLine  = lines;
-    // mRecentArea  = areas;
-    // mNr = nr;
     mWhat = what;
   }
 
+  /** execute the task
+   * @return true 
+   */
   @Override
   protected Boolean doInBackground(Void... v)
   {
@@ -54,6 +53,8 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
     return true;
   }
 
+  /** save the recent symbol tools
+   */
   private void saveRecentSymbols()
   {
     // TDLog.v( "save recent tools");
@@ -110,6 +111,8 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
     }
   }
 
+  /** load the recent symbol tools
+   */
   private void loadRecentSymbols()
   {
     // TDLog.v( "load recent tools");
@@ -145,6 +148,9 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
+  /** react to the execution outcome
+   * @param result   result of the execution
+   */
   @Override
   protected void onPostExecute( Boolean result )
   {

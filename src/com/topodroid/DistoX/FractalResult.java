@@ -19,59 +19,81 @@ import android.os.AsyncTask;
 
 import android.graphics.Bitmap;
 
+import java.util.Locale;
+
 class FractalResult
 {
-  static FractalComputer computer = null;
+  DialogFractal   mDialog;
+  FractalComputer mComputer = null;
 
   /** @return the array of computed dimensions
    */
-  static double[] mCount = new double[ FractalComputer.SIZE ];
+  double[] mCount = null;
+
+  /** cstr
+   * @param dialog   dialog
+   */
+  FractalResult( DialogFractal dialog )
+  {
+    mDialog = dialog;
+    mCount = new double[ FractalComputer.SIZE ];
+  }
+
+  /** display the result on the dialog
+   */
+  void showResults()
+  {
+    mDialog.showResult( this );
+  }
 
   /** compute the dimensions
    * @param r        3D model data
    * @param do_splay whether to use splays
    * @param cell     initial cell size
    * @param mode     computation mode
+   * @return false on failure
    */
-  static int compute( final TglParser r, boolean do_splays, int cell, int mode )
+  boolean compute( final TglParser r, boolean do_splays, double cell, int mode )
   {
-    if ( computer != null ) return -1;
-    computer = new FractalComputer( r.emin, r.emax, r.nmin, r.nmax, r.zmin, r.zmax, do_splays, cell, mode );
+    mComputer = new FractalComputer( this, r.emin, r.emax, r.nmin, r.nmax, r.zmin, r.zmax, do_splays, cell, mode );
     (new AsyncTask<Void, Void, Void>() {
 	public Void doInBackground( Void ... v ) {
-          computer.computeFractalCounts( r.getShots(), r.getSplays() );
+          mComputer.computeFractalCounts( r.getShots(), r.getSplays() );
 	  return null;
 	}
 
         public void onPostExecute( Void v )
         {
           TDToast.make( R.string.done_fractals );
+          showResults();
         }
     }).execute();
-    return 0;
+    return true;
   }
 
-  /** relese the fractal computer
-   */
-  static void releaseComputer()
-  {
-    computer = null;
-    // TDToast.make( R.string.done_fractal );
-  }
+  // /** relese the fractal computer
+  //  */
+  // void releaseComputer()
+  // {
+  //   mComputer = null;
+  //   // TDToast.make( R.string.done_fractal );
+  // }
 
   /** set a dimension
    * @param k   index in the result array
    * @param val result value
    */
-  static void setCount(int k, double val) { mCount[k] = val; }
+  void setCount(int k, double val) { mCount[k] = val; }
 
-  static String countsString()
+  String countsString()
   {
     StringBuilder counts = new StringBuilder();
-    counts.append( (int)(mCount[0]*100) );
+    // counts.append( (int)(mCount[0]*100) );
+    counts.append( String.format(Locale.US, " %.1f", mCount[0]) );
     for ( int s=1; s<FractalComputer.SIZE; ++s ) {
-      counts.append(" ");
-      counts.append( (int)(mCount[s]*100) );
+      // counts.append(" ");
+      // counts.append( (int)(mCount[s]*100) );
+      counts.append( String.format(Locale.US, " %.1f", mCount[s]) );
     }
     return counts.toString();
   }
@@ -79,7 +101,7 @@ class FractalResult
   /** create the image of the resulting graph
    * @return the graph bitmap
    */
-  static Bitmap makeImage()
+  Bitmap makeImage()
   {
     int ww = 100 * FractalComputer.DIM_ONE + 100;
     int hh = 500;
@@ -94,11 +116,13 @@ class FractalResult
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-1*uy-zero, 0xffcccccc );
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-2*uy-zero, 0xff999999 );
     for ( int i=0; i<ww; ++i ) bitmap.setPixel( i, hh-3*uy-zero, 0xff666666 );
-    for ( int k=0; k<FractalComputer.SIZE; ++k ) {
-      int j = hh - zero - (int)(mCount[k]*uy);
-      int i = ux + ux*k;
-      if ( j > zz && j < hh-zz-1  ) {
-        for ( int jj=j-zz; jj<=j+zz; ++jj) for ( int ii=i-zz; ii<=i+zz; ++ii ) bitmap.setPixel( ii, jj, 0xffff0000 );
+    if ( mComputer != null ) {
+      for ( int k=0; k<FractalComputer.SIZE; ++k ) {
+        int j = hh - zero - (int)(mCount[k]*uy);
+        int i = ux + ux*k;
+        if ( j > zz && j < hh-zz-1  ) {
+          for ( int jj=j-zz; jj<=j+zz; ++jj) for ( int ii=i-zz; ii<=i+zz; ++ii ) bitmap.setPixel( ii, jj, 0xffff0000 );
+        }
       }
     }
     return bitmap;

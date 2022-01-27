@@ -83,6 +83,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       mStation   = station;
     }
 
+    /** execute in background
+     * @return true on success
+     */
     @Override
     protected Boolean doInBackground(Void... arg0)
     {
@@ -149,7 +152,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       return false;
     }
 
-
+    /** post execution, on UI thread
+     * @param bool execution result
+     */
     @Override
     protected void onPostExecute(Boolean bool) 
     {

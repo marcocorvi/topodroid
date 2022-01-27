@@ -257,6 +257,8 @@ class UndeleteDialog extends MyDialog
     incrementStatus(); // calls updateList();
   }
 
+  /** update the list of undeletable items: switch adapter according to the status
+   */
   private void updateList()
   {
     switch ( mStatus ) {
@@ -280,6 +282,8 @@ class UndeleteDialog extends MyDialog
     // mList.invalidate( );
   }
 
+  /** switch status cyclically
+   */
   private void incrementStatus( )
   {
     for ( int k=0; k<4; ++k) {

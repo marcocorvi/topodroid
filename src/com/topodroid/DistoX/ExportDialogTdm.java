@@ -46,6 +46,13 @@ public class ExportDialogTdm extends MyDialog
   private String    mSurvey;
   private int       mSelectedPos;
 
+  /** cstr
+   * @param context     context
+   * @param parent      parent window
+   * @param types       export types, for the options
+   * @param title       dialog title (resource)
+   * @param survey      survey name
+   */
   public ExportDialogTdm( Context context, IExporter parent, String[] types, int title, String survey )
   {
     super( context, R.string.ExportDialogTdm );
@@ -82,6 +89,12 @@ public class ExportDialogTdm extends MyDialog
     mSelectedPos = -1;
   }
 
+  /** react to an item selection
+   * @param av    item adapter
+   * @param v     item view
+   * @param pos   item position
+   * @param id    ?
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   { 
@@ -89,9 +102,15 @@ public class ExportDialogTdm extends MyDialog
     mSelectedPos = pos;
   }
 
+  /** react to a deselection
+   * @param av    item adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av ) { mSelected = null; }
 
+  /** react to a user tap
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -105,6 +124,8 @@ public class ExportDialogTdm extends MyDialog
     dismiss();
   }
 
+  /** @return the filename, ie, survey + extension
+   */
   private String getFilename()
   {
     switch(mSelectedPos) {

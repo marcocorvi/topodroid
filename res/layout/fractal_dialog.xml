@@ -11,11 +11,11 @@
     android:paddingRight="6dip"
     android:paddingBottom="3dip">
    					  
-    <TextView android:id="@+id/fractal_computer"
+    <!-- TextView android:id="@+id/fractal_computer"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content" 
       android:gravity="left"
-      />
+      / -->
 
     <ImageView android:id="@+id/fractal_dims"
         android:layout_width="wrap_content"
@@ -51,9 +51,9 @@
       <EditText android:id="@+id/fractal_cell"
         android:layout_width="50dp" 
         android:layout_height="wrap_content" 
-	android:inputType="number"
 	android:text="2"
 	android:layout_marginRight="10dp"
+        android:inputType="numberDecimal"
         />
       <CheckBox android:id="@+id/fractal_splays"
         android:layout_width="wrap_content" 
@@ -114,7 +114,7 @@
           android:layout_height="wrap_content"
           android:layout_marginLeft="10dp"
           android:layout_marginRight="10dp"
-          android:text="@string/button_cancel"
+          android:text="@string/button_back"
       />
       <Button android:id="@+id/fractal_ok"
         style="@style/button_default"
@@ -122,7 +122,7 @@
         android:layout_height="wrap_content"
         android:layout_marginRight="10dp"
         android:layout_marginLeft="10dp"
-        android:text="btn_compute"
+        android:text="@string/button_compute"
         />
     </LinearLayout>
   </LinearLayout>

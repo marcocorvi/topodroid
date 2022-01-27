@@ -321,6 +321,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="splays_on_off">Domiary</string>
     <string name="splays">domiary</string>
     <!-- TODO string name="legs">Legs</string -->
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Szer. geogr. %1$s</string>
@@ -692,6 +693,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_close"     >Zamknij     </string>
     <!-- UNUSED string name="button_create"    >Stwórz    </string -->
     <string name="button_color"     >Kolor</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Konwertuj   </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Aktywuj    </string>

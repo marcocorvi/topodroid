@@ -27,13 +27,21 @@ class EnableSymbol implements View.OnClickListener
   float sx;
   float sy;
 
+  /** @return true is the enabled value must be saved
+   */
   boolean MustSave()
   {
     return mEnabled != mSymbol.isEnabled();
   }
 
+  /** set the value of the enabled
+   * @param enabled   new enabled value
+   */
   void setEnabled( boolean enabled ) { mEnabled = enabled; }
 
+  /** react to user taps
+   * @param v   tapped view
+   */
   @Override
   public void onClick( View v ) 
   {
@@ -45,12 +53,23 @@ class EnableSymbol implements View.OnClickListener
     }
   }
 
+  /** @return the symbol name
+   */
   String getName()  { return mSymbol.getName(); }
+
+  /** @return the symbol group
+   */
   String getGroupName()  { return mSymbol.getGroupName(); }
 
   // boolean getEnabled() { return mSymbol.isEnabled(); }
   // void setEnabled( boolean enabled ) { mSymbol.mEnabled = enabled; }
 
+  /** cstr
+   * @param context  context
+   * @param type     symbol type
+   * @param index    symbol index in the library
+   * @param symbol   symbol
+   */
   EnableSymbol( Context context, int type, int index, SymbolInterface symbol )
   {  
     mType  = type;

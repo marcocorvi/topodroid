@@ -311,6 +311,7 @@
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Tomas laterales</string>
     <string name="legs">Trayecto</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitud %1$s</string>
@@ -683,6 +684,7 @@
     <string name="button_close"     >Cerrar     </string>
     <!-- UNUSED string name="button_create"    >Crear    </string -->
     <string name="button_color"     >Color  </string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Convertir </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Corriente   </string>

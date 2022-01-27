@@ -319,6 +319,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="splays_on_off">Splays</string>
     <string name="splays">including splays</string>
     <string name="legs">Legs</string>
+    <string name="stations">Station</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -696,6 +697,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_close"     >Close</string>
     <!-- UNUSED string name="button_create"    >Create</string -->
     <string name="button_color"     >Color</string>
+    <string name="button_compute"   >Compute</string>
     <string name="button_clear_convert">Clear convert</string>
     <string name="button_convert"   >Convert</string>
     <string name="button_copy"      >Copy</string>
@@ -1800,12 +1802,14 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
     <string name="cmenu_sketch">SKETCHES</string>
-    <!-- UNUSED string name="cmenu_fractal">FRACTAL DIM.</string -->
+    <string name="cmenu_fractal">FRACTAL DIM.</string>
 
-    <string name="fractal_title">Fractal counts</string>
-    <string name="fractal_cnt_total">Total nr.</string>
-    <string name="fractal_cnt_six">6-neighbor nr.</string>
-    <string name="fractal_cnt_twentysix">26-neighbor nr.</string>
+    <string name="fractal_title">Fractal result</string>
+    <string name="fractal_cnt_total">count</string>
+    <string name="fractal_cnt_six">6-neighbor</string>
+    <string name="fractal_cnt_twentysix">26-neighbor</string>
+    <string name="fractal_failed">Fractal compute failed</string>
+    <string name="illegal_value">Illegal value</string>
 
     <string name="info_title">MODEL INFO</string>
     <string name="info_surveys">Surveys</string>
@@ -2061,7 +2065,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_wall_3d">3D model</string>
     <!-- UNUSED string name="help_temperature">Tempertaure</string -->
     <string name="help_sketch_3d">3D sketch lifting</string>
-    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
+    <string name="help_fractal">Fractal analysis</string>
 
     <string name="help_light_3d">Pan and light</string>
     <string name="help_projection_3d">3D projection</string>

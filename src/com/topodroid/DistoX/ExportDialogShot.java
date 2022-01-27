@@ -59,6 +59,13 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
 
+  /** cstr
+   * @param context     context
+   * @param parent      parent window
+   * @param types       export types, for the options
+   * @param title       dialog title (resource)
+   * @param survey      survey name
+   */
   public ExportDialogShot( Context context, IExporter parent, String[] types, int title, String survey )
   {
     super( context, R.string.ExportDialog );
@@ -107,6 +114,12 @@ public class ExportDialogShot extends MyDialog
     updateLayouts();
   }
 
+  /** react to an item selection
+   * @param av    item adapter
+   * @param v     item view
+   * @param pos   item position
+   * @param id    ?
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) 
   {
@@ -115,6 +128,9 @@ public class ExportDialogShot extends MyDialog
     updateLayouts();
   }
 
+  /** react to a deselection
+   * @param av    item adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av ) 
   { 
@@ -123,6 +139,9 @@ public class ExportDialogShot extends MyDialog
     updateLayouts();
   }
 
+  /** react to a user tap
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -138,6 +157,8 @@ public class ExportDialogShot extends MyDialog
     dismiss();
   }
 
+  /** update the layouts
+   */
   private void updateLayouts()
   {
     mLayoutCompass.setVisibility( View.GONE );
@@ -163,6 +184,8 @@ public class ExportDialogShot extends MyDialog
     }
   }
 
+  /** set the options for the selected export
+   */
   private void setOptions()
   {
     switch ( mSelectedPos ) {
@@ -231,6 +254,8 @@ public class ExportDialogShot extends MyDialog
     }
   }
 
+  /** initialize the options widgets
+   */
   private void initOptions()
   {
     ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );

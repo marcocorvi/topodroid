@@ -318,6 +318,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="splays_on_off">Splays</string>
     <string name="splays">inclusi splay</string>
     <string name="legs">Battute</string>
+    <string name="stations">Caposaldo</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <!-- FT_NO_TR string name="fmt_id">ID %1$s</string -->
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -688,6 +689,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_close"     >Chiudi    </string>
     <!-- UNUSED string name="button_create"    >Crea      </string -->
     <string name="button_color"     >Colore</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_copy"      >Copia</string>

@@ -216,6 +216,7 @@ public class TopoGL extends Activity
 
   static boolean mSelectStation = true;
   static boolean mHasC3d = false;
+  static boolean mHasFractal = true;
 
   // --------------------------------- OpenGL stuff
   private GlSurfaceView glSurfaceView;
@@ -305,6 +306,9 @@ public class TopoGL extends Activity
     // TDLog.v("on create: Not Android 10 " + NOT_ANDROID_10 + " 11 " + NOT_ANDROID_11 );
     // TDLog.v("on create");
     checkPreferences();
+
+    mHasC3d     &= TDLevel.overExpert;
+    mHasFractal &= TDLevel.overExpert;
 
     setContentView( R.layout.cave3d_activity );
     mLayout = (LinearLayout) findViewById( R.id.view_layout );
@@ -554,8 +558,9 @@ public class TopoGL extends Activity
 
   // final static int MENU_BT   =  2; // bluetooth
   // // final static int MENU_WALL =  8; // bluetooth
-  // final static int MENU_TEMP = 8; // temperature
-  final static int MENU_C3D  = 9; // sketch
+  final static int MENU_C3D     =  9; // sketch
+  final static int MENU_TEMP    =  9; // temperature
+  final static int MENU_FRACTAL = 10; // fractal
 
   Button     mMenuImage = null;
   ListView   mMenu = null;
@@ -565,17 +570,17 @@ public class TopoGL extends Activity
     R.string.cmenu_open,       // 0
     R.string.menu_export,
     // R.string.cmenu_ble, // FIXME BLUETOOTH  MENU
-    R.string.cmenu_info,       // 3
+    R.string.cmenu_info,       // 2
     R.string.cmenu_ico,
     R.string.cmenu_rose,
     R.string.cmenu_reset,
-    R.string.cmenu_viewpoint,  // 7
+    R.string.cmenu_viewpoint,  // 6
     R.string.cmenu_alpha,
-    R.string.cmenu_wall,       // 9
+    R.string.cmenu_wall,       // 8
+    R.string.cmenu_sketch,     // 9  C3D
     // R.string.cmenu_temp,       // 10 TEMPERATURE
-    R.string.cmenu_sketch,     // 11
+    R.string.cmenu_fractal,    // 10 FRACTAL
     R.string.menu_options,
-    // R.string.cmenu_fractal, // FRACTAL
     R.string.menu_help
   };
 
@@ -592,7 +597,7 @@ public class TopoGL extends Activity
                           // R.string.help_temperature, // TEMPERATURE
                           R.string.help_sketch_3d,
                           R.string.help_prefs,
-                          // R.string.help_fractal, // FRACTAL
+                          R.string.help_fractal, // FRACTAL
                           R.string.help_help
   };
 
@@ -604,7 +609,7 @@ public class TopoGL extends Activity
     for ( int k=0; k<menus.length; ++k ) {
       // if ( k == MENU_BT  && ! ( mWithBluetooth && hasBluetoothName() ) ) continue; // FIXME BLUETOOTH  MENU
       if ( k == MENU_C3D && ! mHasC3d ) continue;
-            
+      if ( k == MENU_FRACTAL && ! mHasFractal ) continue;
       menu_adapter.add( res.getString( menus[k] ) );
     }
     mMenu.setAdapter( menu_adapter );
@@ -700,13 +705,13 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
+    } else if ( mHasFractal && p++ == pos ) { // FRACTAL
+      new DialogFractal( this, mParser ).show();
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CAVE3D );
       startActivity( intent );
       // startActivity( new Intent( this, TopoGLPreferences.class ) );
-    // } else if ( p++ == pos ) { // FRACTAL
-    //   new FractalDialog( this, mRenderer ).show();
     } else if ( p++ == pos ) { // HELP
       // new DialogHelp(this).show();	    
       new HelpDialog(this, izons, menus, help_icons, help_menus, mNrButton1, help_menus.length, getResources().getString( HELP_PAGE )).show();

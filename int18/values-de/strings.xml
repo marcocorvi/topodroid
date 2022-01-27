@@ -320,6 +320,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
     <string name="legs">Messzüge</string>
+    <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Länge %1$s</string>
@@ -697,6 +698,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="button_close"     >Schließen     </string>
     <!-- UNUSED string name="button_create"    >Erstellen    </string -->
     <string name="button_color"     >Farbe</string>
+    <!-- TODO string name="button_compute"   >Compute</string -->
     <string name="button_convert"   >Konvertieren </string>
     <!-- TODO string name="button_copy"      >Copy</string -->
     <string name="button_current"   >Hier fortsetzen   </string>
