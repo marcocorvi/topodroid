@@ -316,7 +316,7 @@
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
     <string name="legs">Замеры м-у пикетами</string>
-    <!-- TODO string name="stations">Station</string -->
+    <string name="stations">Пикет</string>
     <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
@@ -682,7 +682,7 @@
     <string name="button_close"     >Закрыть   </string>
     <!-- UNUSED string name="button_create"    >Создать    </string -->
     <string name="button_color"     >Цвет	</string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >Расчитать</string>
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_copy"      >Копировать</string>
     <string name="button_current"   >Текущий   </string>
