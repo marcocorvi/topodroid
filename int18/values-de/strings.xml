@@ -1169,6 +1169,11 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_export_settings">Einstellungen exportieren</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
+  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
+  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+
 <!-- PREFERENCES STRINGS CAN BE LEFT UNTRANSLATED FOR NOW -->
   <string name="pref_cat_survey">Vermessung</string>
   <string name="pref_cat_splay">Hilfslinien</string>

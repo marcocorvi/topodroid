@@ -89,8 +89,6 @@ import android.content.res.Configuration;
 import android.content.pm.ConfigurationInfo;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.os.Bundle;
-import android.os.Handler;
 
 import android.provider.MediaStore;
 import android.database.Cursor;
@@ -216,7 +214,8 @@ public class TopoGL extends Activity
 
   static boolean mSelectStation = true;
   static boolean mHasC3d = false;
-  static boolean mHasFractal = false;
+  // static boolean mHasFractal = false; // FRACTAL
+  // static boolean mHasTemperature = false; // TEMPERATURE
 
   // --------------------------------- OpenGL stuff
   private GlSurfaceView glSurfaceView;
@@ -244,6 +243,7 @@ public class TopoGL extends Activity
   // ---------------------------------------------------------------
   // LIFECYCLE
   private boolean mHasExtra = false;
+
   private boolean mFileDialog = true;
   // private int mVersionCheck = -1;
   private String mSurveyBase = null; // TopoDroid CWD fullpath
@@ -308,7 +308,9 @@ public class TopoGL extends Activity
     checkPreferences();
 
     mHasC3d     &= TDLevel.overExpert;
-    mHasFractal &= TDLevel.overExpert;
+    // mHasFractal &= TDLevel.overExpert;
+    // mHasTemperature &= TDLevel.overExpert;
+   
 
     setContentView( R.layout.cave3d_activity );
     mLayout = (LinearLayout) findViewById( R.id.view_layout );
@@ -579,7 +581,7 @@ public class TopoGL extends Activity
     R.string.cmenu_wall,       // 8
     R.string.cmenu_sketch,     // 9  C3D
     // R.string.cmenu_temp,       // 10 TEMPERATURE
-    R.string.cmenu_fractal,    // 10 FRACTAL
+    // R.string.cmenu_fractal,    // 10 FRACTAL
     R.string.menu_options,
     R.string.menu_help
   };
@@ -594,10 +596,10 @@ public class TopoGL extends Activity
                           R.string.help_viewpoint_3d,
                           R.string.help_alpha_3d,
                           R.string.help_wall_3d,
-                          // R.string.help_temperature, // TEMPERATURE
                           R.string.help_sketch_3d,
+                          // R.string.help_temperature, // TEMPERATURE
+                          // R.string.help_fractal, // FRACTAL
                           R.string.help_prefs,
-                          R.string.help_fractal, // FRACTAL
                           R.string.help_help
   };
 
@@ -609,7 +611,8 @@ public class TopoGL extends Activity
     for ( int k=0; k<menus.length; ++k ) {
       // if ( k == MENU_BT  && ! ( mWithBluetooth && hasBluetoothName() ) ) continue; // FIXME BLUETOOTH  MENU
       if ( k == MENU_C3D && ! mHasC3d ) continue;
-      if ( k == MENU_FRACTAL && ! mHasFractal ) continue;
+      // if ( k == MENU_TEMPERATURE && ! mHasTemperature ) continue;
+      // if ( k == MENU_FRACTAL && ! mHasFractal ) continue;
       menu_adapter.add( res.getString( menus[k] ) );
     }
     mMenu.setAdapter( menu_adapter );
@@ -689,12 +692,6 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
-    // } else if ( p++ == pos ) { // TEMPERATURE
-    //   if ( mParser != null ) {
-    //     selectTemperatureFile();
-    //   } else {
-    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
-    //   }
     } else if ( mHasC3d && p++ == pos ) { // SKETCH
       if ( mParser != null ) {
         if ( doSketches ) {
@@ -705,8 +702,14 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
-    } else if ( mHasFractal && p++ == pos ) { // FRACTAL
-      new DialogFractal( this, mParser ).show();
+    // } else if ( mHasTempertaure && p++ == pos ) { // TEMPERATURE
+    //   if ( mParser != null ) {
+    //     selectTemperatureFile();
+    //   } else {
+    //     Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
+    //   }
+    // } else if ( mHasFractal && p++ == pos ) { // FRACTAL
+    //   new DialogFractal( this, mParser ).show();
     } else if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( this, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_CAVE3D );

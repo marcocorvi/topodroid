@@ -334,8 +334,8 @@ public class TDSetting
 
   public static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
   // public static boolean mExportTcsx    = true;
-  // public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
-  // public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
+  public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
+  public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   public static boolean mTherionMaps   = false;
   public static boolean mSvgRoundTrip  = false;
   public static boolean mSvgGrid       = false;
@@ -954,14 +954,14 @@ public class TDSetting
 
     String[] keyExport = TDPrefKey.EXPORT;
     String[] defExport = TDPrefKey.EXPORTdef;
-    // mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
-    // mExportPlotFormat  = tryInt(   prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 0],      defExport[ 0] );  // DISTOX_ORTHO_LRUD
+    mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
+    mExportPlotFormat  = tryInt(   prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
+    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 2],      defExport[ 2] );  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    mLRUDvertical      = tryFloat( prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_LRUD_VERTICAL
-    mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 2],      defExport[ 2] );  // DISTOX_LRUD_HORIZONTAL
-    mBezierStep        = tryFloat( prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_BEZIER_STEP
+    mLRUDvertical      = tryFloat( prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_LRUD_VERTICAL
+    mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_LRUD_HORIZONTAL
+    mBezierStep        = tryFloat( prefs,      keyExport[ 5],      defExport[ 5] );  // DISTOX_BEZIER_STEP
     // TDLog.v("SETTING load secondary export done");
 
     String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
@@ -1788,7 +1788,7 @@ public class TDSetting
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_EXTEND (bool)
       mLRExtend = tryBooleanValue( hlp, k, v, bool(def[ 1]) ); 
     } else {
-      TDLog.Error("missing EXPORT key: " + k );
+      TDLog.Error("missing IMPORT key: " + k );
     }
     return null;
   }
@@ -1820,27 +1820,26 @@ public class TDSetting
     // TDLog.v("update pref export: " + k );
     String[] key = TDPrefKey.EXPORT;
     String[] def = TDPrefKey.EXPORTdef;
-    // if ( k.equals( key[ 0 ] ) ) { // DISTOX_EXPORT_SHOTS (choice)
-    //   mExportShotsFormat = tryIntValue( hlp, k, v, def[ 0] );
-    // } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
-    //   mExportPlotFormat = tryIntValue( hlp, k, v, def[ 1] );
-    // } else
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_ORTHO_LRUD
-      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 0] );
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_EXPORT_SHOTS (choice)
+      mExportShotsFormat = tryIntValue( hlp, k, v, def[ 0] );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
+      mExportPlotFormat = tryIntValue( hlp, k, v, def[ 1] );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ORTHO_LRUD
+      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 2] );
       if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = TDString.ZERO; }
       if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = TDString.NINETY; }
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    } else if ( k.equals( key[  1 ] ) ) { // DISTOX_LRUD_VERTICAL
-      mLRUDvertical = tryFloatValue( hlp, k, v, def[ 1] );
+    } else if ( k.equals( key[  3 ] ) ) { // DISTOX_LRUD_VERTICAL
+      mLRUDvertical = tryFloatValue( hlp, k, v, def[ 3] );
       if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; ret = TDString.ZERO; }
       if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  2 ] ) ) { // DISTOX_LRUD_HORIZONTAL
-      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 2] );
+    } else if ( k.equals( key[  4 ] ) ) { // DISTOX_LRUD_HORIZONTAL
+      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 4] );
       if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; ret = TDString.ZERO; }
       if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  3 ] ) ) { // DISTOX_BEZIER_STEP
-      mBezierStep  = tryFloatValue( hlp, k, v, def[ 3] );
+    } else if ( k.equals( key[  5 ] ) ) { // DISTOX_BEZIER_STEP
+      mBezierStep  = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mBezierStep < 0 ) { mBezierStep = 0; ret = TDString.ZERO; }
       if ( mBezierStep > 3 ) { mBezierStep = 3; ret = TDString.THREE; } // was 2
     } else {
@@ -2762,6 +2761,7 @@ public class TDSetting
       pw.printf(Locale.US, "Orientation %d \n", mOrientation );
 
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
+      pw.printf(Locale.US, "Export-format data %d, plot %d \n", mExportShotsFormat, mExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
@@ -3004,14 +3004,21 @@ public class TDSetting
           }
           continue;
         }
-        if ( line.startsWith("Auto-export") ) {
-          // if ( vals.length > 5 ) {
-          //   mDataBackup = getBoolean( vals, 1 ); setPreference( editor, "DISTOX_DATA_BACKUP", mDataBackup );
-          //   mExportShotsFormat = getInt( vals, 3, 0 ); setPreference( editor, "DISTOX_EXPORT_SHOTS", mExportShotsFormat );
-          //   mExportPlotFormat  = getInt( vals, 5, 0 ); setPreference( editor, "DISTOX_EXPORT_PLOT",  mExportPlotFormat );
-          // }
+        if ( line.startsWith("Export-Format") ) {
+          if ( vals.length > 4 ) {
+            mExportShotsFormat = getInt( vals, 2, 0 ); setPreference( editor, "DISTOX_EXPORT_SHOTS", mExportShotsFormat );
+            mExportPlotFormat  = getInt( vals, 4, 0 ); setPreference( editor, "DISTOX_EXPORT_PLOT",  mExportPlotFormat );
+          }
           continue;
         }
+        // if ( line.startsWith("Auto-export") )
+        //   if ( vals.length > 5 ) { 
+        //     mDataBackup = getBoolean( vals, 1 ); setPreference( editor, "DISTOX_DATA_BACKUP", mDataBackup );
+        //     mExportShotsFormat = getInt( vals, 3, 0 ); setPreference( editor, "DISTOX_EXPORT_SHOTS", mExportShotsFormat );
+        //     mExportPlotFormat  = getInt( vals, 5, 0 ); setPreference( editor, "DISTOX_EXPORT_PLOT",  mExportPlotFormat );
+        //   }
+        //   continue;
+        // }
         if ( line.startsWith("Survex") ) { 
           if ( vals.length > 6 ) {
             mSurvexEol   = getQuotedString( line ); 

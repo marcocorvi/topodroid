@@ -108,10 +108,31 @@ public class ExportDialogShot extends MyDialog
     // Bundle extras = getIntent().getExtras();
     // String title  = extras.getString( TopoDroidApp.TOPODROID_SURVEY );
 
-    mSelectedPos = 0;
-    mSelected = mTypes[ mSelectedPos ];
+    // mSelectedPos = 0;
+    // mSelected = mTypes[ mSelectedPos ];
+    setSelected( spin );
+
     initOptions();
     updateLayouts();
+  }
+
+  /** set the initial selection according to the default export format
+   * @param spin   drop-down list
+   */
+  private void setSelected( Spinner spin )
+  {
+    int pos = 0;
+    if ( TDSetting.mExportShotsFormat >= 0 ) {
+      for ( int k = 0; k < TDConst.mSurveyExportIndex.length; ++ k ) {
+        if ( TDConst.mSurveyExportIndex[k] == TDSetting.mExportShotsFormat ) {
+          pos = k;
+          break;
+        }
+      }
+    }
+    mSelected = mTypes[ pos ];
+    mSelectedPos = pos;
+    spin.setSelection( pos );
   }
 
   /** react to an item selection

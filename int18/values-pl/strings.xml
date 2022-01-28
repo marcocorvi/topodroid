@@ -1163,6 +1163,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_export_settings">Export settings</string -->
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
+  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
+  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+
   <string name="pref_cat_survey">DANE CIĄGU</string>
   <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">SZKICOWANIE</string>

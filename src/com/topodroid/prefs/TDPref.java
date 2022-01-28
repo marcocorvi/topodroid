@@ -567,24 +567,24 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     int[] dsc = TDPrefKey.EXPORTdesc;
     String[] def = TDPrefKey.EXPORTdef;
     return new TDPref[ ] {
-      // makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, ctx, hlp ),
-      // makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, ctx, hlp ),
-      makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], A, def[ 0], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], A, def[ 1], FLOAT,  ctx, hlp ),
+      makeLst( cat, key[ 0], tit[ 0], dsc[ 0], B, def[ 0], R.array.exportShots, R.array.exportShotsValue, ctx, hlp ),
+      makeLst( cat, key[ 1], tit[ 1], dsc[ 1], B, def[ 1], R.array.exportPlot, R.array.exportPlotValue, ctx, hlp ),
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], A, def[ 2], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3], FLOAT,  ctx, hlp ),
-      makeFwd( cat, key[ 4], tit[ 4],          N,                  ctx, hlp ),
-      makeFwd( cat, key[ 5], tit[ 5],          N,                  ctx, hlp ),
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,  ctx, hlp ),
+      makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], E, def[ 5], FLOAT,  ctx, hlp ),
       makeFwd( cat, key[ 6], tit[ 6],          N,                  ctx, hlp ),
       makeFwd( cat, key[ 7], tit[ 7],          N,                  ctx, hlp ),
       makeFwd( cat, key[ 8], tit[ 8],          N,                  ctx, hlp ),
       makeFwd( cat, key[ 9], tit[ 9],          N,                  ctx, hlp ),
       makeFwd( cat, key[10], tit[10],          N,                  ctx, hlp ),
-      makeFwd( cat, key[11], tit[11],          T,                  ctx, hlp ), // shp
-      makeFwd( cat, key[12], tit[12],          T,                  ctx, hlp ), // dxf
-      makeFwd( cat, key[13], tit[13],          T,                  ctx, hlp ),
-      makeFwd( cat, key[14], tit[14],          T,                  ctx, hlp ),
-      makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp )
+      makeFwd( cat, key[11], tit[11],          N,                  ctx, hlp ),
+      makeFwd( cat, key[12], tit[12],          N,                  ctx, hlp ),
+      makeFwd( cat, key[13], tit[13],          T,                  ctx, hlp ), // shp
+      makeFwd( cat, key[14], tit[14],          T,                  ctx, hlp ), // dxf
+      makeFwd( cat, key[15], tit[15],          T,                  ctx, hlp ),
+      makeFwd( cat, key[16], tit[16],          T,                  ctx, hlp ),
+      makeFwd( cat, key[17], tit[17],          T,                  ctx, hlp )
     };
   }
 

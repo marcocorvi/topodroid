@@ -383,8 +383,8 @@ public class TDPrefKey
 
   // ==============================================================================
   public static String[] EXPORT = { // [16] [32]
-    // "DISTOX_EXPORT_SHOTS",    // 0 // default data export
-    // "DISTOX_EXPORT_PLOT",          // default plot export
+    "DISTOX_EXPORT_SHOTS",    // 0 // default data export format
+    "DISTOX_EXPORT_PLOT",          // default plot export format
     "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
@@ -405,8 +405,8 @@ public class TDPrefKey
   };
 
   static int[] EXPORTtitle = {
-    // R.string.pref_export_shots_title,
-    // R.string.pref_export_plot_title,
+    R.string.pref_export_shots_title,
+    R.string.pref_export_plot_title,
     R.string.pref_ortho_lrud_title,
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
@@ -426,8 +426,8 @@ public class TDPrefKey
   };
 
   static int[] EXPORTdesc = {
-    // R.string.pref_export_shots_summary,
-    // R.string.pref_export_plot_summary,
+    R.string.pref_export_shots_summary,
+    R.string.pref_export_plot_summary,
     R.string.pref_ortho_lrud_summary,
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
@@ -447,8 +447,8 @@ public class TDPrefKey
   };
 
   public static String[] EXPORTdef = {
-    // "-1",
-    // "-1",
+    "-1",
+    "-1",
     TDString.ZERO,
     TDString.ZERO,
     TDString.NINETY,

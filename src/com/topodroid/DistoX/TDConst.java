@@ -221,7 +221,7 @@ public class TDConst
     // "Shapefile"
   };
 
-  private static final int[] mSurveyExportIndex = {
+  static final int[] mSurveyExportIndex = {
     SURVEY_FORMAT_ZIP,
     SURVEY_FORMAT_DAT,
     SURVEY_FORMAT_CSX,
@@ -286,7 +286,7 @@ public class TDConst
       "Cave3D"
   };
 
-  private static final int[] mPlotExportIndex = {
+  static final int[] mPlotExportIndex = {
     SURVEY_FORMAT_TH2,
     SURVEY_FORMAT_CSX,
     SURVEY_FORMAT_DXF,

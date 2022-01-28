@@ -1152,6 +1152,11 @@ Refer to the web pages for details.\n
   <string name="pref_export_settings">CONFIGURAÇÕES DE EXPORTAÇÃO</string>
   <!-- UNUSED string name="pref_tcsx">Exportar cSurvey-1.20 transfer-csx</string -->
 
+  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
+  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
+  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
+  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+
   <string name="pref_cat_survey">DADOS DA TOPO</string>
   <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
