@@ -319,7 +319,7 @@
     <string name="splays_on_off">副线开关</string>
     <string name="splays">副线</string>
     <string name="legs">主线</string>
-    <!-- TODO string name="stations">Station</string -->
+    <string name="stations">站点</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -676,7 +676,7 @@
     <string name="distox_err_headtail_eof">DistoX内存清除错误</string>
     <string name="distox_err_connected">设备已连接</string>
 
-    <!-- TODO string name="ask_close_app">Close TopoDroid?</string -->
+    <string name="ask_close_app">关闭TopoDroid?</string>
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">设置GPS服务?</string>
@@ -692,7 +692,7 @@
     <string name="button_close"     >关闭     </string>
     <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >计算</string>
     <string name="button_convert"   >转换   </string>
     <string name="button_copy"      >拷贝</string>
     <string name="button_current"   >激活    </string>
@@ -845,7 +845,7 @@
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <!-- TODO string name="hint_station">station</string -->
+    <string name="hint_station">站点</string>
 
     <string name="orientation">方向</string>
     <string name="contents">目录</string>
@@ -1066,7 +1066,7 @@
     <!-- UNUSED string name="title_draw">Draw</string -->
     <string name="title_draw_area">区 %1$s</string>
     <string name="title_draw_line">线 %1$s</string>
-    <string name="title_draw_line_no_stations">线 %1$s: no stations</string>
+    <string name="title_draw_line_no_stations">线 %1$s: 无站点</string>
     <string name="title_draw_point">点 %1$s</string>
     <string name="title_edit">编辑</string>
     <string name="title_edit_user_station">编辑用户定义测点 </string>
@@ -1162,10 +1162,10 @@
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+  <string name="pref_export_plot_title">草图输出格式</string>
+  <string name="pref_export_plot_summary">默认草图输出格式</string>
+  <string name="pref_export_shots_title">数据输出格式</string>
+  <string name="pref_export_shots_summary">默认数据输出格式</string>
 
   <string name="pref_cat_survey">测量信息</string>
   <string name="pref_cat_splay">侧线数据</string>
