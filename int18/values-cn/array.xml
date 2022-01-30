@@ -359,20 +359,20 @@
   </string-array -->
 
   <!-- 3D VIEWER array strings -->
-  <!-- TODO string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
-  </string-array -->
+  <string-array name="csizeButtons">
+     <item name="small1">小</item>
+     <item name="large">大</item>
+  </string-array>
 
   <!-- UNUSED string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
   </string-array -->
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
-     <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+  <string-array name="splayUse">
+     <item name="skip">跳过</item>
+     <item name="normal">正常</item>
+     <item name="xsection">X-断面</item>
+  </string-array>
 
 </resources>
