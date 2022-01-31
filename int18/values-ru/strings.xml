@@ -1151,10 +1151,10 @@
   <string name="pref_export_settings">Экспорт настроек</string>
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+  <string name="pref_export_plot_title">Формат экспорта абрисов</string>
+  <string name="pref_export_plot_summary">Формат по умолчанию для экспорта абрисов</string>
+  <string name="pref_export_shots_title">Формат экспорта съёмки</string>
+  <string name="pref_export_shots_summary">Формат по умолчанию для экспорта данных топосъёмки</string>
 
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
   <string name="pref_cat_splay">НАСТРОЙКИ СПЛЕЕВ</string>
