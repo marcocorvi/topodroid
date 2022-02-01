@@ -43,6 +43,18 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   private String mFormat;
   private Uri mUri;
 
+  /** 
+   * @param context   context
+   * @param uri       expot URI or null (to export to private folder)
+   * @param sid       survey ID
+   * @param data      database helper
+   * @param info      survey metadata
+   * @param psd1      plot data
+   * @param psd2      profile data
+   * @param origin    sketch origin
+   * @param fullname  file name, either "survey" or "survey-plot" 
+   * @param toast     whther to toast to result
+   */
   SaveFullFileTask( Context context, Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, // String filename,
                     String fullname, /* String dirname, */ boolean toast )
   {

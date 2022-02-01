@@ -79,6 +79,7 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
   // private final static String WHERE_SID_STATUS_LEG  = "surveyId=? AND status=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_LEG     = "surveyId=? AND fStation > \"\" AND tStation > \"\"";
+  private final static String WHERE_SID_FROM    = "surveyId=? AND fStation > \"\"";
   private final static String WHERE_ID_SID_LEG  = "id<=? AND surveyId=? AND fStation > \"\" AND tStation > \"\"";
   private final static String WHERE_SID_SHOTID  = "surveyId=? AND shotId=?";
   private final static String WHERE_SID_START   = "surveyId=? AND start=?";
@@ -2854,6 +2855,26 @@ public class DataHelper extends DataSetObservable
                                 null, null, null );
     DBlock block = null;
     if (cursor.moveToFirst()) {
+      block = new DBlock();
+      fillBlock( sid, block, cursor );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // TDLog.v( "A6 select one shot id " + id + " block leg " + block.getLegType() );
+    return block;
+  }
+
+  /** select the last shot with FROM station
+   * @param sid   survey ID
+   */
+  DBlock selectLastShotWithFromStation( long sid )
+  {
+    // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
+    if ( myDB == null ) return null;
+    Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+                                WHERE_SID_FROM, new String[] { Long.toString(sid) },
+                                null, null, null );
+    DBlock block = null;
+    if (cursor.moveToLast()) {
       block = new DBlock();
       fillBlock( sid, block, cursor );
     }

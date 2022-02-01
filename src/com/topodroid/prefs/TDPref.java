@@ -613,6 +613,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeLst( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], R.array.importDatamode, R.array.importDatamodeValue, ctx, hlp ),
       makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ), // DISTOX_AUTO_XSECTIONS
       makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],         ctx, hlp ), // DISTOX_AUTO_STATIONS
+      makeLst( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], R.array.exportPlotAuto, R.array.exportPlotAutoValue, ctx, hlp ), // DISTOX_AUTO_PLOT_EXPORT
       // makeCbx( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2],         ctx, hlp ),
     };
   }

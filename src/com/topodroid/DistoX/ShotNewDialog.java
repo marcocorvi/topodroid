@@ -209,11 +209,19 @@ class ShotNewDialog extends MyDialog
       // prev blk is the last leg block of the survey
       if ( mPrevBlk != null ) {
         if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
-          mETfrom.setText( mPrevBlk.mTo );
-          mETto.setText( DistoXStationName.incrementName( mPrevBlk.mTo, mApp.getStationNames() ) );
+          if ( mPrevBlk.mTo != null && mPrevBlk.mTo.length() > 0 ) {
+            mETfrom.setText( mPrevBlk.mTo );
+            mETto.setText( DistoXStationName.incrementName( mPrevBlk.mTo, mApp.getStationNames() ) );
+          } else if ( mPrevBlk.mFrom != null && mPrevBlk.mFrom.length() > 0 ) {
+            mETfrom.setText( mPrevBlk.mFrom );
+          }
         } else {
-          mETto.setText( mPrevBlk.mFrom );
-          mETfrom.setText( DistoXStationName.incrementName( mPrevBlk.mFrom, mApp.getStationNames() ) );
+          if ( mPrevBlk.mFrom != null && mPrevBlk.mFrom.length() > 0 ) {
+            mETto.setText( mPrevBlk.mFrom );
+            mETfrom.setText( DistoXStationName.incrementName( mPrevBlk.mFrom, mApp.getStationNames() ) );
+          } else if ( mPrevBlk.mTo != null && mPrevBlk.mTo.length() > 0 ) {
+            mETfrom.setText( mPrevBlk.mTo );
+          }
         }
       } else {
         if ( StationPolicy.isSurveyForward() ) { // if ( StationPolicy.mSurveyStations == 1 ) FIXME_POLICY
@@ -605,6 +613,7 @@ class ShotNewDialog extends MyDialog
         }
         resetData( shot_to );
         if ( mLister !=  null ) {
+          TDLog.v("new shot - lister refresh display" );
           mLister.refreshDisplay( 1, false );
         }
         notDone = true;

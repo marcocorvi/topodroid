@@ -1178,9 +1178,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_export_plot_title">Sketch export format</string>
-  <string name="pref_export_plot_summary">Default sketch export format</string>
+  <string name="pref_export_plot_summary">Default format for sketch export</string>
   <string name="pref_export_shots_title">Data export format</string>
-  <string name="pref_export_shots_summary">Default data export format</string>
+  <string name="pref_export_shots_summary">Default format for data export</string>
+  <string name="pref_auto_plot_export_title">Sketch auto export format</string>
+  <string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string>
 
   <string name="pref_cat_survey">SURVEY DATA</string>
   <string name="pref_cat_splay">SPLAY DATA</string>

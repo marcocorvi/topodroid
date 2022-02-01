@@ -5758,8 +5758,9 @@ public class DrawingWindow extends ItemDrawer
         resetFixedPaint();
         updateReference();
         if ( TDInstance.getDeviceA() == null ) {
-          // DBlock last_blk = null; // mApp_mData.selectLastLegShot( TDInstance.sid );
-          (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+          DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
+          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
+          // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
         } else {
           mDataDownloader.toggleDownload();
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
@@ -6223,13 +6224,14 @@ public class DrawingWindow extends ItemDrawer
 
     // CSX ------------------------------------------------------------------
     /** save as cSurvey - used also by SavePlotFileTask
-     * @param uri     export URI
+     * @param uri     export URI or null (to export in private folder)
      * @param origin
      * @param psd1    plan plot save-data
      * @param psd2    profile plot save-data
      * @param toast   whether to toast
+     * @note used also by SavePlotFileTask
      */
-    private void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+    void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
     {
       // TDLog.v( "save csx");
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI

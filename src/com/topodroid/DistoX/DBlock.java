@@ -386,25 +386,44 @@ public class DBlock
   // ----------------------------------------------------------------
   // PAINT and VIEW
 
+  /** @return the display view (null if the block is not on display)
+   */
   View getView() { return mView; }
 
+  /** set the display view
+   * @param view   display view
+   */
   void setView( View view ) { mView = view; }
 
+  /** set the color of the background
+   * @param color   new background color
+   */
   void setBackgroundColor( int color ) { if ( mView != null ) mView.setBackgroundColor( color ); }
 
   // void setTextColor( int color ) { if ( mView != null ) mView.setTextColor( color ); }
 
+  /** redraw the display view
+   */
   void invalidate( ) { if ( mView != null ) mView.invalidate( ); }
 
+  /** @return the block paint
+   */
   Paint getPaint() { return mPaint; }
 
+  /** @return the block paint (foreground) color
+   */
   int getPaintColor() { return (mPaint==null)? 0 : mPaint.getColor(); }
 
+  /** reset the block paint - set the paint null
+   */
   void clearPaint() { 
     // TDLog.v( "Block " + mId + " clear paint");
     mPaint = null;
   }
 
+  /** set the block paint (foreground) color
+   * @param color   new foreground color
+   */
   void setPaintColor( int color )
   {
     // TDLog.v( "Block " + mId + " set paint color " + color );

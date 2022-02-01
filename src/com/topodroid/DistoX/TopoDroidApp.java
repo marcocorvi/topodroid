@@ -1736,6 +1736,14 @@ public class TopoDroidApp extends Application
   // ================================================================
   // EXPORTS
 
+  /** 
+   * @param context   context
+   * @param uri       expot URI or null (to export to private folder)
+   * @param origin    sketch origin
+   * @param psd1      plot data
+   * @param psd2      profile data
+   * @param toast     whther to toast to result
+   */
   static void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
     SurveyInfo info = getSurveyInfo();

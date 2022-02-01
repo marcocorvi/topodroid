@@ -314,6 +314,16 @@ public class TDFile
     return getFileOutputStream( file );
   }
 
+  /** @return private file output writer
+   * @param type   folder name
+   * @param name   filename
+   */
+  public static FileWriter getPrivateFileWriter( String type, String name ) throws IOException
+  {
+    File file = new File( TDInstance.context.getExternalFilesDir( type ), name );
+    return getFileWriter( file );
+  }
+
   /** @return private file input stream
    * @param type   folder name
    * @param name   filename

@@ -2,11 +2,9 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600048"
-      android:versionName="6.0.48"
+      android:versionCode="600051"
+      android:versionName="6.0.51"
     >
-    <!-- LETTER CODE must range a-j only: a=0, b=1, ... j=9 -->
-
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
 	 (1) edit src/com/topodroid/DistoX/TDandroid.java
@@ -289,9 +287,9 @@
         </service -->
 
       <activity android:name=".TopoGL"
-                android:screenOrientation="portrait"
-                android:theme="@style/Theme.FullScreen"
-                android:label="@string/app_name"
+          android:theme="@style/Theme.FullScreen"
+          android:label="@string/app_name"
+          android:configChanges="orientation|screenSize"
         ><!--
                 android:configChanges="orientation|screenSize" to react to screen orientation chnages
 	        android:requestLegacyExternalStorage="true"

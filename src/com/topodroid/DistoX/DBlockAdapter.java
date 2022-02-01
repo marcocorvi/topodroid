@@ -110,9 +110,15 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // TDLog.v( " search shot " + flag + " results " + mSearch.size() );
     // return (mSearch.size() > 0);
   }
-    
+
+  /** @return true if there are blocks in the multiselection
+   */
   boolean isMultiSelect() { return ( mSelect.size() > 0 ); }
 
+  /** add a block to the multiselection
+   * @param pos  block position
+   * @return the number of blocks in the multiselection
+   */
   boolean multiSelect(int pos ) 
   {
     if ( pos >= START && pos < getCount() ) {
@@ -122,15 +128,18 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( mSelect.remove( b ) ) {
             b.mMultiSelected = false;
             b.setBackgroundColor( TDColor.TRANSPARENT );
+            // TDLog.v("multiselect remove " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
           } else {
             mSelect.add( b );
             b.mMultiSelected = true;
             b.setBackgroundColor( TDColor.GRID );
+            // TDLog.v("multiselect add " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
           }
         } else {
           mSelect.add( b );
           b.mMultiSelected = true;
           b.setBackgroundColor( TDColor.GRID );
+          // TDLog.v("multiselect start " + b.mFrom + " " + b.mTo + " " + mSelect.size() );
         }
       }
     // } else {
@@ -140,6 +149,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ( mSelect.size() > 0 );
   }
 
+  /** clear the multiselection
+   */
   void clearMultiSelect() 
   { 
     for ( DBlock b : mSelect ) {
@@ -216,7 +227,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return true;
   }
 
-  // called by ShotWindow::updateShotlist
+  // @note called by ShotWindow::updateShotlist
   //  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
@@ -233,7 +244,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
-  // @return true if the block was already in the list
+  /** @return true if the block was already in the list
+   */
   private boolean hasBlock( long id )
   {
     // TDLog.v( "Data Adapter items size " + getCount() + " block id " + id );
@@ -248,6 +260,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // return false;
   }
 
+  /** update the name, ie, from-to stations, of a block
+   * @param id    block ID
+   * @param from  FROM station
+   * @param to    TO station
+   */
   void updateBlockName( long id, String from, String to ) 
   {
     int size = getCount();

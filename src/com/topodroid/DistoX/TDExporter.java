@@ -249,26 +249,32 @@ public class TDExporter
    * @param psd1    first plot-data of the survey (plan)
    * @param psd2    second plot-data of the survey (profile)
    * @param origin  plot origin station
-   * @param surveyname survey name (...)
+   * @param surveyname file name, either "survey" or "survey-plot"
    * @return 1 on success
    */
   static int exportSurveyAsCsx( Uri uri, long sid, DataHelper data, SurveyInfo info, PlotSaveData psd1, PlotSaveData psd2, String origin, String surveyname )
   {
     int ret = 0; // 0 = failure
-    ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
-    if ( pfd == null ) return 0;
+    ParcelFileDescriptor pfd = null;
+    if ( uri != null ) {
+      pfd = TDsafUri.docWriteFileDescriptor( uri );
+      if ( pfd == null ) return 0;
+    }
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getCsxFileWithExt( surveyname ) ) );
-      BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+      BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", surveyname + ".csx" ) );
+      // BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
       ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
+      bw.flush();
       bw.close();
     } catch ( FileNotFoundException e ) {
       TDLog.Error("file not found");
     } catch ( IOException e ) {
       TDLog.Error( "io error " + e.getMessage() );
     } finally {
-      TDsafUri.closeFileDescriptor( pfd );
+      if ( pfd != null ) {
+        TDsafUri.closeFileDescriptor( pfd );
+      }
     }
     return ret;
   }

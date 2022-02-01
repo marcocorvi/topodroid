@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
-// import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.prefs.TDSetting;
 
@@ -39,8 +39,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
     private Uri     mUri = null;
 
     /** cstr
-     * @param uri      export URI
-     * @param format   export format
+     * @param uri      export URI or null (to export to private folder)
+     * @param format   toast message format
      * @param bitmap   bitmap to export
      * @param scale    ...
      * @param name     plot fullname
@@ -71,8 +71,11 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
      */
     boolean exec()
     {
-      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
-      if ( pfd == null ) return false;
+      ParcelFileDescriptor pfd = null;
+      if ( mUri != null ) {
+        pfd = TDsafUri.docWriteFileDescriptor( mUri );
+        if ( pfd == null ) return false;
+      }
       try {
         /*
         // File temp = File.createTempFile( "tmp", ".png", TDFile.getFile( TDPath.getPngFile("") ) );
@@ -85,8 +88,8 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         */
         // TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
         // TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
-        // FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPngFileWithExt( mFullName ) );
-        FileOutputStream out = TDsafUri.docFileOutputStream( pfd );
+        FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getPrivateFileOutputStream( "expor", mFullName + ".png" );
+        // FileOutputStream out = TDsafUri.docFileOutputStream( pfd );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();
         out.close();
@@ -99,7 +102,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
-        TDsafUri.closeFileDescriptor( pfd );
+        if ( pfd != null ) TDsafUri.closeFileDescriptor( pfd );
       }
       return false;
     }

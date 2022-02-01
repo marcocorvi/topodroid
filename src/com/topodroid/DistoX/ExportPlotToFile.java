@@ -51,7 +51,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 
     /** constructor
      * @param content context, for the resources
-     * @param uri     export URI
+     * @param uri     export URI or null (to export in private folder)
      * @param info    survey info
      * @param plot    plot info
      * @param fixed   fixed info, for georeference
@@ -67,7 +67,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      // TDLog.v("export plot to file cstr. Type " + type + " fullname " + name + " ext " + ext );
+      TDLog.v("export plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
       // FIXME assert( ext != null );
       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);
@@ -91,17 +91,21 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     {
       // TDLog.v("export plot to file in bkgr. ext " + mExt );
       // String dirname = null;
-      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
-      if ( pfd == null ) return false;
+      ParcelFileDescriptor pfd = null; 
+      if ( mUri != null ) {
+        pfd = TDsafUri.docWriteFileDescriptor( mUri );
+        if ( pfd == null ) return false;
+      }
       try {
         // TDLog.v("export plot to file: <" + mFullName + "> <" + mExt + ">" );
         // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
+	String file_name = mFullName + "." + mExt; // file-name
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           if ( mExt.equals("shp") ) { 
-            // FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getShpFileWithExt( mFullName ) );
-            FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
+            FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getPrivateFileOutputStream( "export", file_name );
+            // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
             String dirpath = TDPath.getShpTempRelativeDir();
 	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
 	    // DrawingShp.writeShp( fos, mFullName, mCommand, mType, mStation );
@@ -110,31 +114,30 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	  } else {
             BufferedWriter bw = null;
             if ( mExt.equals("dxf") ) {
-              // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getDxfFileWithExt( mFullName ) ) );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
-              String name = mFullName + ".svg"; // file-name
-              // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getSvgFileWithExt( mFullName ) ) );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               if ( TDSetting.mSvgRoundTrip ) {
                 // List<String> segments = pfd.getPathSegments();
-                (new DrawingSvgWalls()).writeSvg( name, bw, mNum, mCommand, mType );
+                (new DrawingSvgWalls()).writeSvg( file_name, bw, mNum, mCommand, mType );
               } else {
                 (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
-              // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getXviFileWithExt( mFullName ) ) );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
-              // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTnlFileWithExt( mFullName ) ) );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
               // TDLog.v("C3D export to Cave3D: " + mFullName );
-              // bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getC3dFileWithExt( mFullName ) ) );
-              bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }
             if ( bw != null ) {
@@ -147,7 +150,9 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
       } catch (Exception e) {
         e.printStackTrace();
       } finally {
-        TDsafUri.closeFileDescriptor( pfd );
+        if ( pfd != null ) {
+          TDsafUri.closeFileDescriptor( pfd );
+        }
       }
       return false;
     }

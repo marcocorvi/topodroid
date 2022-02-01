@@ -353,7 +353,7 @@ public class ShotWindow extends Activity
   Set<String> getStationNames() { return mApp_mData.selectAllStations( TDInstance.sid ); }
 
   // -------------------------------------------------------------------
-  // FXIME ok only for numbers
+  // FIXME ok only for numbers
   // String getNextStationName()
   // {
   //   return mApp_mData.getNextStationName( TDInstance.sid );
@@ -362,6 +362,7 @@ public class ShotWindow extends Activity
   @Override
   public void refreshDisplay( int nr, boolean toast ) 
   {
+    // TDLog.v("SHOT refresh display " + nr );
     setConnectionStatus( mDataDownloader.getStatus() );
     if ( nr >= 0 ) {
       if ( nr > 0 ) {
@@ -384,8 +385,11 @@ public class ShotWindow extends Activity
     }
   }
     
+  /** update the display 
+   */
   void updateDisplay( )
   {
+    // TDLog.v("SHOT update display");
     // highlightBlocks( null );
     if ( mApp_mData != null && TDInstance.sid >= 0 ) {
       List< DBlock > list = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
@@ -479,7 +483,12 @@ public class ShotWindow extends Activity
     }
   }
 
-  // called only by updateDisplay
+  /** update the list of shot data with the photo infos
+   * @param list    list of shot data
+   * @param photos  list of photos
+   * first clear the data adapter, then fill it with the shot data, finally with the photo infos
+   * @note called only by updateDisplay
+   */
   private void updateShotList( List< DBlock > list, List< PhotoInfo > photos )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
@@ -493,7 +502,11 @@ public class ShotWindow extends Activity
     mDataAdapter.reviseBlockWithPhotos( photos );
   }
 
-  // called only by updateShotList
+  /** process the list of shot data and fill the adapter for the display list
+   * @param list    list of shot data
+   * this is a bit of overkill because the shot leg type are updated in the database
+   * @note called only by updateShotList
+   */
   private void processShotList( List< DBlock > list )
   {
     // TDLog.v( "process shot list");
@@ -574,12 +587,19 @@ public class ShotWindow extends Activity
 
   private boolean mSkipItemClick = false;
 
+  /** begin multiselection at a given position
+   * @param pos   item position
+   * @note the multiselection is closed if it contains only the given position
+   */
   private void multiSelect( int pos )
   {
+    // TDLog.v("multiselect " + pos );
     if ( mDataAdapter.multiSelect( pos ) ) {
       mListView.setAdapter( mButtonViewF.mAdapter );
       mListView.invalidate();
       onMultiselect = true;
+      // FIXME this should not be neceessary but it is (???)
+      if ( pos == 0 ) mDataAdapter.notifyDataSetChanged(); // THIS IS USED TO REFRESH THE DATA LIST
     } else {
       mListView.setAdapter( mButtonView1.mAdapter );
       mListView.invalidate();
@@ -587,6 +607,8 @@ public class ShotWindow extends Activity
     }
   }
 
+  /** close the multiselection
+   */
   void clearMultiSelect( )
   {
     // mApp.setHighlighted( null ); // FIXME_HIGHLIGHT
@@ -596,6 +618,12 @@ public class ShotWindow extends Activity
     onMultiselect = false;
   }
 
+  /** react to a user tap on an item (menu entry)
+   * @param parent   ...
+   * @param view     tapped view
+   * @param pos      item position
+   * @param id       ...
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -612,6 +640,13 @@ public class ShotWindow extends Activity
     if ( closeMenu() ) return;
   }
 
+  /** implement user tap on a shot data
+   * @param view  tapped viee
+   * @param pos   item position
+   *
+   * if it is in "multiselection" add the item to the multiselection,
+   * otherwise perform an "item click"
+   */
   public void itemClick( View view, int pos )
   {
     if ( mDataAdapter.isMultiSelect() ) {
@@ -622,6 +657,10 @@ public class ShotWindow extends Activity
     if ( blk != null ) onBlockClick( blk, pos );
   }
 
+  /** perform a user tap on a shot data
+   * @param blk   item data-block
+   * @param pos   item position
+   */
   void onBlockClick( DBlock blk, int pos )
   {
     // TDLog.v( "on block click: on_open " + mOnOpenDialog );
@@ -635,6 +674,12 @@ public class ShotWindow extends Activity
     (new ShotDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
   }
 
+  /** react to a user long-tap on an item (menu entry)
+   * @param parent   ...
+   * @param view     tapped view
+   * @param pos      item position
+   * @param id       ...
+   */
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -644,6 +689,10 @@ public class ShotWindow extends Activity
     return false;
   }
 
+  /** implement a user long-tap of a shot data item: start a multiselection
+   * @param view     tapped view
+   * @param pos      item position
+   */
   public boolean itemLongClick( View view, int pos )
   {
     DBlock blk = mDataAdapter.get(pos);
@@ -1488,7 +1537,7 @@ public class ShotWindow extends Activity
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // ADD MANUAL SHOT
         if ( TDLevel.overBasic ) {
           // mSearch = null; // invalidate search
-          DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
+          DBlock last_blk = mApp_mData.selectLastShotWithFromStation( TDInstance.sid );
           (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // AZIMUTH

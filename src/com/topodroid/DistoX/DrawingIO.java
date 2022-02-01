@@ -23,8 +23,8 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 // import com.topodroid.common.PointScale;
 
-// import java.io.File;
-// import java.io.FileWriter;
+import java.io.File;
+import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.BufferedReader;
 import java.io.BufferedInputStream;
@@ -494,12 +494,19 @@ public class DrawingIO
   // which calls the full method exportTherion with the list of sketch items
 
   /* UNUSED ( was exportTherion )
-  // FIXME DataHelper and SID are necessary to export splays by the station
-  // @param fullname  full scrap name ( filename without extension )
-  static void exportTherionFile( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
+   * @note DataHelper and SID are necessary to export splays by the station
+   * @param manager   drawing items
+   * @param type      plot type
+   * @param file      output file
+   * @param fullname  full scrap name ( filename without extension )
+   * @param projname  ...
+   * @param proj_dir  projection direction (for projected profile)
+   * @param multisketchmultisketch ...
+   */
+  static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
-    TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
-    // TDLog.v( "export Therion " + fullname + " file " + file.getPath() );
+    // TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
+    TDLog.v( "export Therion " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -508,7 +515,6 @@ public class DrawingIO
       TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
     }
   }
-  */
 
   static void exportTherion( DrawingCommandManager manager, int type, BufferedWriter bw, String fullname, String projname, int proj_dir, boolean multisketch )
   {

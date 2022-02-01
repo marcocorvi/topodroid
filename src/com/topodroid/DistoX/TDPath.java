@@ -718,6 +718,14 @@ public class TDPath
 
   // -------------- PRIVATE ---------------------------------------------------------
 
+  /** @return private export file
+   * @param filename file name (with extension if any)
+   */
+  static File getExportFile( String filename )
+  {
+    return TDFile.getPrivateFile( "export", filename );
+  }
+
   /** delete symbol files from a folder
    * @param dirname   symbol folder name
    */

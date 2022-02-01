@@ -336,6 +336,7 @@ public class TDSetting
   // public static boolean mExportTcsx    = true;
   public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
   public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
+  public static int mAutoExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   public static boolean mTherionMaps   = false;
   public static boolean mSvgRoundTrip  = false;
   public static boolean mSvgGrid       = false;
@@ -949,6 +950,7 @@ public class TDSetting
     mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
     mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
     mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
+    mExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 
@@ -1806,6 +1808,8 @@ public class TDSetting
       mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else if ( k.equals( key[ 3 ] ) ) {        // DISTOX_AUTO_STATIONS
       mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
+    } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT
+      mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
     // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
     //   mExportTcsx = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else {
@@ -2761,7 +2765,7 @@ public class TDSetting
       pw.printf(Locale.US, "Orientation %d \n", mOrientation );
 
       // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
-      pw.printf(Locale.US, "Export-format data %d, plot %d \n", mExportShotsFormat, mExportPlotFormat );
+      pw.printf(Locale.US, "Export-format data %d, plot %d, auto-plot %d \n", mExportShotsFormat, mExportPlotFormat, mAutoExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
@@ -3008,6 +3012,9 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mExportShotsFormat = getInt( vals, 2, 0 ); setPreference( editor, "DISTOX_EXPORT_SHOTS", mExportShotsFormat );
             mExportPlotFormat  = getInt( vals, 4, 0 ); setPreference( editor, "DISTOX_EXPORT_PLOT",  mExportPlotFormat );
+            if ( vals.length > 6 ) {
+              mAutoExportPlotFormat = getInt( vals, 4, 0 ); setPreference( editor, "DISTOX_AUTO_PLOT_EXPORT",  mAutoExportPlotFormat );
+            }
           }
           continue;
         }

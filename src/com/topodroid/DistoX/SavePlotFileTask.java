@@ -15,12 +15,12 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.num.TDNum;
-// import com.topodroid.prefs.TDSetting;
+import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
 import java.lang.ref.WeakReference;
 
-// import java.io.File; // TDR/BACKUP FILE
+import java.io.File; 
 // import java.io.FileDescriptor;
 import java.io.FileWriter;
 import java.io.BufferedWriter;
@@ -38,7 +38,7 @@ import android.os.Handler;
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
 
-// import android.graphics.Bitmap;
+import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
 class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
@@ -98,12 +98,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
      // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
-     // if ( mSuffix == PlotSave.SAVE && TDSetting.mExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
-     //   // TDLog.v( "auto export CSX");
-     //   origin = parent.getOrigin();
-     //   psd1 = parent.makePlotSaveData( 1, suffix, rotate );
-     //   psd2 = parent.makePlotSaveData( 2, suffix, rotate );
-     // }
+     if ( TDLevel.overExpert && mSuffix == PlotSave.SAVE && TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
+       // TDLog.v( "auto export CSX");
+       origin = parent.getOrigin();
+       psd1 = parent.makePlotSaveData( 1, suffix, rotate );
+       psd2 = parent.makePlotSaveData( 2, suffix, rotate );
+     }
   }
 
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
@@ -185,67 +185,68 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // boolean ret2 = true; // false = binary cancelled
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
       // // TDLog.v( "save plot Therion file SAVE " + mFullName );
-      // switch ( TDSetting.mExportPlotFormat ) { // auto-export format
-      //   case TDConst.SURVEY_FORMAT_TH2:
-      //     if ( mManager != null ) {
-      //       File file2 = TDFile.getFile( TDPath.getTh2FileWithExt( mFullName ) );
-      //       DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
-      //     }
-      //     break;
-      //   case TDConst.SURVEY_FORMAT_DXF:
-      //     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "dxf", false );
-      //     }
-      //     break;
-      //   case TDConst.SURVEY_FORMAT_SVG:
-      //     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "svg", false );
-      //     }
-      //     break;
-      //   case TDConst.SURVEY_FORMAT_SHP:
-      //     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "shp", false );
-      //     }
-      //     break;
-      //   case TDConst.SURVEY_FORMAT_XVI:
-      //     if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //       mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "xvi", false );
-      //     }
-      //     break;
-      //   // case TDConst.SURVEY_FORMAT_C3D:
-      //   //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //   //     mParent.get().doSaveWithExt( mNum, mManager, mType, mFullName, "c3d", false );
-      //   //   }
-      //   //   break;
-      //   case TDConst.SURVEY_FORMAT_CSX: // IMPORTANT CSX must come before PNG
-      //     if ( PlotType.isSketch2D( mType ) ) {
-      //       if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
-      //         mParent.get().doSaveCsx( origin, psd1, psd2, false );
-      //       }
-      //       break;
-      //     } else { // X-Section cSurvey are exported as PNG
-      //       // fall-through
-      //     }
-      //   case TDConst.SURVEY_FORMAT_PNG:
-      //     if ( mManager != null ) {
-      //       Bitmap bitmap = mManager.getBitmap();
-      //       if (bitmap == null) {
-      //         TDLog.Error( "cannot save PNG: null bitmap" );
-      //         ret1 = false;
-      //       } else {
-      //         float scale = mManager.getBitmapScale();
-      //         if (scale > 0) {
-      //           // FIXME execute must be called from the main thread, current thread is working thread
-      //           (new ExportBitmapToFile( mFormat, bitmap, scale, mFullName, false )).exec();
-      //         } else {
-      //           TDLog.Error( "cannot save PNG: negative scale" );
-      //           ret1 = false;
-      //         }
-      //       }
-      //     }
-      //     break;
-      // }
-    
+      if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 ) {
+        switch ( TDSetting.mAutoExportPlotFormat ) { // auto-export format
+          case TDConst.SURVEY_FORMAT_TH2:
+            if ( mManager != null ) {
+              File file2 = TDPath.getExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
+              DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // false= single sketch
+            }
+            break;
+          case TDConst.SURVEY_FORMAT_DXF:
+            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false );
+            }
+            break;
+          case TDConst.SURVEY_FORMAT_SVG:
+            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false );
+            }
+            break;
+          case TDConst.SURVEY_FORMAT_SHP:
+            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shp", false );
+            }
+            break;
+          case TDConst.SURVEY_FORMAT_XVI:
+            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false );
+            }
+            break;
+          // case TDConst.SURVEY_FORMAT_C3D:
+          //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+          //     mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "c3d", false );
+          //   }
+          //   break;
+          case TDConst.SURVEY_FORMAT_CSX: // IMPORTANT CSX must come before PNG
+            if ( PlotType.isSketch2D( mType ) ) {
+              if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+                mParent.get().doSaveCsx( null, origin, psd1, psd2, false );
+              }
+              break;
+            } else { // X-Section cSurvey are exported as PNG
+              // fall-through
+            }
+          case TDConst.SURVEY_FORMAT_PNG:
+            if ( mManager != null ) {
+              Bitmap bitmap = mManager.getBitmap();
+              if (bitmap == null) {
+                TDLog.Error( "cannot save PNG: null bitmap" );
+                // ret1 = false;
+              } else {
+                float scale = mManager.getBitmapScale();
+                if (scale > 0) {
+                  // FIXME execute must be called from the main thread, current thread is working thread
+                  (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
+                } else {
+                  TDLog.Error( "cannot save PNG: negative scale" );
+                  // ret1 = false;
+                }
+              }
+            }
+            break;
+        }
+      }
       // TDLog.v( "save plot SAVE");
       assert( mInfo != null );
       String filename = TDPath.getTdrFileWithExt( mFullName ) + TDPath.BCK_SUFFIX;

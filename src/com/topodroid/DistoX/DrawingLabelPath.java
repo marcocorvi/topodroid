@@ -88,6 +88,8 @@ public class DrawingLabelPath extends DrawingPointPath
       options = dis.readUTF();
 
       // TDLog.Log( TDLog.LOG_PLOT, "Label <" + text + " " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
+      // TDLog.v( "Label <" + text + "> " + ccx + " " + ccy + " scale " + scale + " (" + options + ")" );
+
       DrawingLabelPath ret = new DrawingLabelPath( text, ccx, ccy, scale, options, scrap );
       ret.mLevel = level;
       ret.setOrientation( orientation );
@@ -132,11 +134,10 @@ public class DrawingLabelPath extends DrawingPointPath
   /** draw the label on the screen
    * @param canvas   canvas
    * @param matrix   transform matrix
-   * @param scale    transform scale - not used
    * @param bbox     clipping rectangle
    */
   @Override
-  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
@@ -172,7 +173,7 @@ public class DrawingLabelPath extends DrawingPointPath
     Rect r = new Rect();
     mPaint.getTextBounds( mPointText, 0, mPointText.length(), r );
     // float len = 20 * f * mPointText.length();
-    float len = 10 * r.width(); // FIXME multiplying by 10 is a hack
+    float len = 2 * r.width(); // FIXME multiplying by 10 is a hack
 
     float a = (float)(mOrientation) * TDMath.DEG2RAD;
     float ca = len * TDMath.cos( a );
