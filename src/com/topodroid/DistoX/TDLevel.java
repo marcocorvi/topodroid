@@ -11,7 +11,13 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDLog;
+
 import android.content.Context;
+import android.content.pm.ApplicationInfo;
+import android.content.pm.PackageInfo;
+// import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 // import android.provider.Settings.Secure;
 
 public class TDLevel
@@ -30,8 +36,8 @@ public class TDLevel
   public static boolean overAdvanced = false;
   public static boolean overExpert   = false;
   public static boolean overTester   = false;
-  boolean mDeveloper   = false;
-  static String  mAndroidId   = null;
+  private static boolean test_debug = true;
+  private static boolean debug = false;
 
   /** set the activity level
    * @param ctx    context
@@ -42,17 +48,22 @@ public class TDLevel
     mLevel = level;
 
     // FIXME_DEVELOPER
-    // if ( mAndroidId == null ) {
-    //   mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
-    //   mDeveloper = "8c894b79b6dce351".equals( mAndroidId );
-    //   // "e5582eda21cafac3" // Nexus-4
-    // }
+    if ( test_debug ) {
+      // mAndroidId = Secure.getString( ctx.getContentResolver(), Secure.ANDROID_ID );
+      try {
+        final PackageInfo info = ctx.getPackageManager().getPackageInfo( ctx.getPackageName(), 0);
+        debug = (info.applicationInfo.flags & ApplicationInfo.FLAG_DEBUGGABLE) != 0;
+      } catch ( NameNotFoundException e ) {
+      }
+      test_debug = false;
+      TDLog.v("DEBUG " + debug );
+    }
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;
     overAdvanced = mLevel > ADVANCED;
     overExpert   = mLevel > EXPERT;
     // overTester  = mLevel > TESTER;
     // FIXME_DEVELOPER
-    // if ( overExpert && mDeveloper ) overTester = true;
+    if ( overExpert && debug ) overTester = true;
   }
 }

@@ -98,7 +98,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
      // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
-     if ( TDLevel.overExpert && mSuffix == PlotSave.SAVE && TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
+     if ( TDLevel.overTester && mSuffix == PlotSave.SAVE && TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
        // TDLog.v( "auto export CSX");
        origin = parent.getOrigin();
        psd1 = parent.makePlotSaveData( 1, suffix, rotate );
@@ -185,7 +185,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // boolean ret2 = true; // false = binary cancelled
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
       // // TDLog.v( "save plot Therion file SAVE " + mFullName );
-      if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 ) {
+      if ( TDLevel.overTester && TDSetting.mAutoExportPlotFormat >= 0 ) {
         switch ( TDSetting.mAutoExportPlotFormat ) { // auto-export format
           case TDConst.SURVEY_FORMAT_TH2:
             if ( mManager != null ) {
