@@ -1179,7 +1179,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_export_plot_title">Vázlat export formátum</string>
   <string name="pref_export_plot_summary">Alapértelmezett vázlat export formátum</string>
   <string name="pref_export_shots_title">Adat export formátum</string>
-  <!string name="pref_export_shots_summary">Alapértelmezett adat export formátum</string>
+  <string name="pref_export_shots_summary">Alapértelmezett adat export formátum</string>
 
   <string name="pref_cat_survey">FELMÉRÉSI ADAT</string>
   <string name="pref_cat_splay">SEGÉDMÉRÉS ADAT</string>
