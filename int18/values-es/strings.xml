@@ -1164,6 +1164,8 @@
   <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
   <!-- TODO string name="pref_export_shots_title">Data export format</string -->
   <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
+  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
+  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
 
   <string name="pref_cat_survey">Ajustes de topografía</string>
   <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->

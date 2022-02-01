@@ -1155,6 +1155,8 @@
   <string name="pref_export_plot_summary">Формат по умолчанию для экспорта абрисов</string>
   <string name="pref_export_shots_title">Формат экспорта съёмки</string>
   <string name="pref_export_shots_summary">Формат по умолчанию для экспорта данных топосъёмки</string>
+  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
+  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
 
   <string name="pref_cat_survey">НАСТРОЙКИ ТОПОСЪЁМКИ </string>
   <string name="pref_cat_splay">НАСТРОЙКИ СПЛЕЕВ</string>

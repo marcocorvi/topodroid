@@ -39,8 +39,13 @@ class NumCycle
   double e, s, v;    // displacement = closure error
   double ce, cs, cv; // corrections
 
+  /** @return the number of branches in this cycle
+   */
   int size() { return branches.size(); }
 
+  /** cstr
+   * @param sz   not-used
+   */
   NumCycle( int sz )
   {
     // mMax = sz;
@@ -50,6 +55,10 @@ class NumCycle
     // dirs  = new int[mMax];
   }
 
+  /** add a branch to this cycle
+   * @param branch   branch to add
+   * @param node     ...
+   */
   void addBranch( NumBranch branch, NumNode node )
   {
     branches.add( new NumCycleBranch( branch, node, ( (node == branch.n2)? 1 : -1 ) ) );
@@ -69,8 +78,9 @@ class NumCycle
   //   return null;
   // }
 
-  // assumes that branches displacement-vector (e,s,v) have been computed
-  // computes the total displacement along the cycle (= loop misclosure)
+  /** assumes that branches displacement-vector (e,s,v) have been computed
+   *  computes the total displacement along the cycle (= loop misclosure)
+   */
   void computeError()
   {
     e = 0;
@@ -86,8 +96,10 @@ class NumCycle
     }
   }
 
-  // @param br   num branch
-  // @return  the direction of the branch in this cycle or 0 if the branch is not in this cycle
+  /** get the branch direction in this cycle
+   * @param br   num branch
+   * @return  the direction of the branch in this cycle or 0 if the branch is not in this cycle
+   */
   int getBranchDir( NumBranch br )
   {
     for ( NumCycleBranch branch : branches ) {
@@ -96,7 +108,9 @@ class NumCycle
     return 0;
   }
 
-  // return true if every branch in this cycle is equal to a branch of one of the cycles
+  /** @return true if every branch in this cycle is equal to a branch of one of the cycles
+   * @param cycles    array of cycles
+   */
   boolean isBranchCovered( ArrayList< NumCycle > cycles )
   {
     for ( NumCycleBranch branch : branches ) {
