@@ -5,7 +5,7 @@
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation</string>
 
-    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected.\nForce-stop the app.\nRename the folder and restart the app.</string>
+    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected:\nTopoDroid must stop.\nRename the folder and restart the app.\nRead the manual preface.</string>
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->

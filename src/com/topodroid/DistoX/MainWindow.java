@@ -1092,6 +1092,9 @@ public class MainWindow extends Activity
     // saveInstanceToData();
 
     mApp.stopPairingRequest();
+    if ( say_dialogR ) {
+      android.os.Process.killProcess( android.os.Process.myPid() );
+    }
   }
 
   private boolean doubleBack = false;
