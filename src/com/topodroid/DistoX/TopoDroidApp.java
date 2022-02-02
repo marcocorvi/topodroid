@@ -137,7 +137,7 @@ public class TopoDroidApp extends Application
 
   static String mClipboardText = null; // text clipboard
 
-  public static float mScaleFactor   = 1.0f;
+  public static float mScaleFactor   = 1.0f; // DisplayHeight / 320 * density, eg, 2040/320*3.0 = 19.15...
   public static float mDisplayWidth  = 200f;
   public static float mDisplayHeight = 320f;
   public static float mBorderRight      = 4096;
@@ -280,11 +280,6 @@ public class TopoDroidApp extends Application
   {
     return Resources.getSystem().getDisplayMetrics().densityDpi;
   }
-
-  // public int setListViewHeight( MyHorizontalListView listView )
-  // {
-  //   return TopoDroidApp.setListViewHeight( this, listView );
-  // }
 
   /** set the height of the button list-view
    * @param context   context
@@ -2480,7 +2475,7 @@ public class TopoDroidApp extends Application
     return pid_p;
   }
   
-  /** insert a new X-Section
+  /** insert a new XSection
    * @param sid      survey ID
    * @param name     section name
    * @param type     X-section type
@@ -2505,7 +2500,11 @@ public class TopoDroidApp extends Application
     // TDLog.v("APP insert 2D section from <" + from + "> to <" + to + ">" );
     String hide = ( parent == null )? TDString.EMPTY : parent;
     String nick = ( nickname == null )? TDString.EMPTY : nickname;
-    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, 0, 0, mScaleFactor, azimuth, clino, hide, nick, 0 );
+    // FIXME the reason for this offset is not clear - especially why 3.5 ?
+    float xoff = mDisplayWidth / (2*mScaleFactor) - DrawingUtil.CENTER_X;
+    float yoff = mDisplayHeight / (2*mScaleFactor) - DrawingUtil.CENTER_Y;
+    // TDLog.v("size " + mDisplayWidth + " " + mDisplayHeight + " offset " + xoff + " " + yoff + " density " + getDisplayDensity() + " " + getDisplayDensityDpi() );
+    return mData.insertPlot( sid, -1L, name, type, 0L, from, to, xoff, yoff, mScaleFactor, azimuth, clino, hide, nick, 0 );
   }
 
   // @param ctx       context

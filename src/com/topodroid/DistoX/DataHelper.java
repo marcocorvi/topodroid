@@ -206,6 +206,8 @@ public class DataHelper extends DataSetObservable
     openDatabase( context, db_path ); // true = readonly
   }
 
+  /** close the database
+   */
   void closeDatabase()
   {
     if ( myDB == null ) return;
@@ -213,8 +215,11 @@ public class DataHelper extends DataSetObservable
     myDB = null;
   }
 
-  /** open default database
+  /** open or create the default database
    * @param context context
+   *
+   * open the databse, if successful check if it needs to be updated
+   * otherwise create the database
    */
   void openDatabase( Context context )
   {
@@ -255,6 +260,8 @@ public class DataHelper extends DataSetObservable
   /** open a given database file
    * @param context    context
    * @param db_name    database path
+   *
+   * open the database, if successful check if it needs updating
    */
   private void openDatabase( Context context, String db_name )
   {
@@ -371,6 +378,9 @@ public class DataHelper extends DataSetObservable
   //   "select flag, distance, fStation, tStation, clino, extend from shots where surveyId=? AND status=0 AND fStation!=\"\" AND tStation!=\"\" ";
   private static final String qSurveysStat5 = " select count() from shots where surveyId=? AND status=0 AND flag=0 AND fStation!=\"\" AND tStation=\"\" ";
 
+  /** @return the name of the survey initial station
+   * @param sid   survey ID
+   */
   String getSurveyInitStation( long sid )
   {
     String ret = TDSetting.mInitStation; 
@@ -393,9 +403,12 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  // at-station xsextions type
-  //   0 : shared
-  //   1 : private
+  /** @return the (at-station) xsection index 
+   * @param sid   survey ID
+   * @note at-station xsextions type
+   *   0 : shared
+   *   1 : private
+   */
   int getSurveyXSections( long sid )
   {
     int ret = 0;
@@ -417,9 +430,9 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  // survey data-mode
-  //   0 : normal
-  //   1 : diving
+  /** @return the survey data-mode ie,   0 : normal,  1 : diving
+   * @param sid   survey ID
+   */
   int getSurveyDataMode( long sid )
   {
     int ret = 0;
@@ -441,6 +454,9 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return the survey declination
+   * @param sid   survey ID
+   */
   float getSurveyDeclination( long sid )
   {
     float ret = 0;
@@ -460,6 +476,9 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return the survey "extend"
+   * @param sid   survey ID
+   */
   int getSurveyExtend( long sid )
   {
     int ret = SurveyInfo.SURVEY_EXTEND_NORMAL;
@@ -472,6 +491,10 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** update the survey "extend"
+   * @param sid     survey ID
+   * @param extend  new "extend" value
+   */
   void updateSurveyExtend( long sid, int extend )
   {
     if ( myDB == null ) return;
@@ -486,6 +509,9 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  /** @return the survey data statistics
+   * @param sid   survey ID
+   */
   SurveyStat getSurveyStat( long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "Get Survey Stat sid " + sid );
@@ -828,11 +854,18 @@ public class DataHelper extends DataSetObservable
   }
   */
 
+  /** DEBUG: log an error
+   * @param msg    message
+   * @param e      exception
+   */
   private void logError( String msg, Exception e )
   {
     TDLog.Error("DB " + msg + ": " + e.getMessage() );
   }
 
+  /** handle a disk error
+   * @param e      disk error
+   */
   private void handleDiskIOError( SQLiteDiskIOException e )
   {
     // TDLog.e( "DB disk IO error " + e.getMessage() );
@@ -845,6 +878,11 @@ public class DataHelper extends DataSetObservable
   // SURVEY
   // survey attributes renaming are "rare" actions
 
+  /** rename a survey
+   * @param id   survey ID
+   * @param name new survey name
+   * @return true if successful
+   */
   boolean renameSurvey( long id, String name )
   {
     boolean ret = true;
@@ -861,6 +899,9 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** make the content-value set for a survey "extend"
+   * @param extend   "extend" value
+   */
   private ContentValues makeSurveyExtend( int extend )
   {
     ContentValues cv = new ContentValues();
@@ -868,6 +909,14 @@ public class DataHelper extends DataSetObservable
     return cv;
   }
 
+  /** make the content-value set for a survey infos
+   * @param date         date
+   * @param team         survey team
+   * @param decl         declination
+   * @param comment      survey comment
+   * @param init_station initial station
+   * @param xections     xsection mode (private or shared)
+   */
   private ContentValues makeSurveyInfoCcontentValues( String date, String team, double decl, String comment,
                                 String init_station, int xsections ) // datamode cannot be updated
   {
@@ -881,6 +930,14 @@ public class DataHelper extends DataSetObservable
     return cv;
   }
 
+  /** update a survey infos
+   * @param date         date
+   * @param team         survey team
+   * @param decl         declination
+   * @param comment      survey comment
+   * @param init_station initial station
+   * @param xections     xsection mode (private or shared)
+   */
   void updateSurveyInfo( long sid, String date, String team, double decl, String comment,
                          String init_station, int xsections )
                          // FIXME int extend
@@ -897,22 +954,33 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  /** update a survey date and comment
+   *@param name      survey name
+   * @param date     new date
+   * @param comment  survey new comment
+   * @return true if successful
+   */
   public boolean updateSurveyDayAndComment( String name, String date, String comment )
   {
     boolean ret = false;
-    long id = getIdFromName( SURVEY_TABLE, name );
-    if ( id >= 0 ) { // survey name exists
-      ret = updateSurveyDayAndComment( id, date, comment );
+    long sid = getIdFromName( SURVEY_TABLE, name );
+    if ( sid >= 0 ) { // survey name exists
+      ret = updateSurveyDayAndComment( sid, date, comment );
     }
     return ret;
   }
 
-  private boolean doUpdateSurvey( long id, ContentValues cv, String msg )
+  /** perform a survey update
+   * @param sid    survey ID
+   * @param cv     content-value set of the update
+   * @param msg    message (for error reporting)
+   */
+  private boolean doUpdateSurvey( long sid, ContentValues cv, String msg )
   {
     if ( myDB == null ) return false;
     try {
       myDB.beginTransaction();
-      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(id) } );
+      myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
       myDB.setTransactionSuccessful();
       return true;
     } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
@@ -922,6 +990,13 @@ public class DataHelper extends DataSetObservable
     return false;
   }
 
+  /** perform a table update
+   * @param table  table name
+   * @param cv     content-value set of the update
+   * @param sid    survey ID
+   * @param msg    message (for error reporting)
+   * @return true if successful
+   */
   private boolean doUpdate( String table, ContentValues cv, long sid, long id, String msg )
   {
     boolean ret = false;
@@ -937,6 +1012,13 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** perform a table update
+   * @param table  table name
+   * @param cv     content-value set of the update
+   * @param where  where string
+   * @param args   where args
+   * @param msg    message (for error reporting)
+   */
   private void doUpdate( String table, ContentValues cv, String where, String[] args, String msg )
   {
     try {
@@ -949,6 +1031,12 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
+  /** perform a table insert
+   * @param table  table name
+   * @param cv     content-value set of the update
+   * @param msg    message (for error reporting)
+   * @return true if successful
+   */
   private boolean doInsert( String table, ContentValues cv, String msg )
   {
     boolean ret = false;
@@ -964,6 +1052,11 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** perform a SQL statement
+   * @param sw     SQL statement
+   * @param msg    message (for error reporting)
+   * @return true if successful
+   */
   private boolean doExecSQL( StringWriter sw, String msg )
   {
     boolean ret = false;
@@ -979,8 +1072,19 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** execute a "shot" SQL
+   * @param id   shot ID, used for error reporting
+   * @param sw   SQL statement
+   * @return true if successful
+   */
   private boolean doExecShotSQL( long id, StringWriter sw ) { return doExecSQL( sw, "sht " + id ); }
 
+  /** update the "status" field
+   * @param table    table
+   * @param id       record ID
+   * @param sid      survey ID
+   * @param status   new status
+   */
   private void updateStatus( String table, long id, long sid, long status )
   {
     ContentValues cv = new ContentValues();
@@ -3817,6 +3921,26 @@ public class DataHelper extends DataSetObservable
     return plot;
   }
  
+  /** @return the info of a plot
+   * @param sid    survey ID
+   * @param pid    plot ID
+   */
+  PlotInfo getPlotInfo( long sid, long pid )
+  {
+    PlotInfo plot = null;
+    if ( myDB != null && pid >= 0 ) {
+      Cursor cursor = myDB.query( PLOT_TABLE, mPlotFields,
+                WHERE_SID_ID,
+                new String[] { Long.toString(sid), Long.toString(pid) },
+                null, null, null );
+      if (cursor != null ) {
+        if (cursor.moveToFirst() ) plot = makePlotInfo( sid, cursor );
+        if (!cursor.isClosed()) cursor.close();
+      }
+    }
+    return plot;
+  }
+ 
   // NEW X_SECTIONS
   // this is for at-station private x-sections
   // the name of the parent plot is stored in the "hide" field
@@ -3836,6 +3960,10 @@ public class DataHelper extends DataSetObservable
   //   return plot;
   // }
 
+  /** @return the ID of a plot
+   * @param sid    survey ID
+   * @param name   plot name
+   */
   long getPlotId( long sid, String name )
   {
     long ret = -1;
@@ -3874,12 +4002,15 @@ public class DataHelper extends DataSetObservable
   //   return ret;
   // }
 
-  /**
+  /** make the content-value set for a photo data
    * @param sid       survey id
    * @param id        photo id (or -1)
    * @param shotid    shot id
    * @param title     photo title
+   * @param date      date
    * @param comment   comment
+   * @param camera    camera type
+   * @return content-value set
    */
   private ContentValues makePhotoContentValues( long sid, long id, long shotid, long status, String title, String date, String comment, long camera )
   {
@@ -3895,6 +4026,15 @@ public class DataHelper extends DataSetObservable
     return cv;
   }
 
+  /** insert a photo
+   * @param sid       survey id
+   * @param id        photo id (or -1)
+   * @param shotid    shot id
+   * @param title     photo title
+   * @param date      date
+   * @param comment   comment
+   * @param camera    camera type
+   */
   void insertPhoto( long sid, long id, long shotid, String title, String date, String comment, int camera )
   {
     if ( myDB == null ) return; // -1L;
@@ -3905,11 +4045,20 @@ public class DataHelper extends DataSetObservable
     // return id;
   }
 
+  /** @return the next ID for a photo
+   * @param sid   survey ID
+   */
   long nextPhotoId( long sid )
   {
     return maxId( PHOTO_TABLE, sid );
   }
 
+  /** update a photo comment
+   * @param sid     survey ID
+   * @param id      photo ID
+   * @param comment new photo comment
+   * @return true if successful
+   */
   boolean updatePhoto( long sid, long id, String comment )
   {
     if ( myDB == null ) return false;
@@ -3925,6 +4074,10 @@ public class DataHelper extends DataSetObservable
     return true;
   }
 
+  /** delete a photo
+   * @param sid     survey ID
+   * @param id      photo ID
+   */
   void deletePhoto( long sid, long id )
   {
     if ( myDB == null ) return;
@@ -3937,15 +4090,17 @@ public class DataHelper extends DataSetObservable
     } finally { myDB.endTransaction(); }
   }
 
-  /**
+  /** make the content-value set for a sensor data
    * @param sid       survey id
    * @param id        photo id (or -1)
    * @param shotid    shot id
+   * @param status    ...
    * @param title     sensor title
    * @param date      sensor date
    * @param comment   comment
    * @param type      sensor type
    * @param value     sensor value
+   * @return content-value set
    */
   private ContentValues makeSensorContentValues( long sid, long id, long shotid, long status,
        	   String title, String date, String comment, String type, String value )
@@ -3963,6 +4118,16 @@ public class DataHelper extends DataSetObservable
     return cv;
   }
 
+  /** insert a sensor data
+   * @param sid       survey id
+   * @param id        photo id (or -1)
+   * @param shotid    shot id
+   * @param title     sensor title
+   * @param date      sensor date
+   * @param comment   comment
+   * @param type      sensor type
+   * @param value     sensor value
+   */
   void insertSensor( long sid, long id, long shotid, String title, String date, String comment, String type, String value )
   {
     if ( myDB == null ) return; // -1L;
@@ -3973,17 +4138,29 @@ public class DataHelper extends DataSetObservable
     // return id;
   }
 
+  /** @return the next ID for a sensor-data
+   * @param sid   survey ID
+   */
   long nextSensorId( long sid )
   {
     return maxId( SENSOR_TABLE, sid );
   }
 
+  /** delete a sensor-data
+   * @param sid   survey ID
+   * @param id    sensor-data ID
+   */
   void deleteSensor( long sid, long id )
   {
     if ( myDB == null ) return;
     updateStatus( SENSOR_TABLE, id, sid, TDStatus.DELETED );
   }
 
+  /** update a sensor-data comment
+   * @param sid   survey ID
+   * @param id    sensor-data ID
+   * @param comment new sensor-data comment
+   */
   boolean updateSensor( long sid, long id, String comment )
   {
     if ( myDB == null ) return false;

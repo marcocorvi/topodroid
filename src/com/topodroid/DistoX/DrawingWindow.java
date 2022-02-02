@@ -436,7 +436,6 @@ public class DrawingWindow extends ItemDrawer
   private DataDownloader mDataDownloader;
   private MediaManager   mMediaManager;
 
-  // private DrawingUtil mDrawingUtil;
   private boolean mLandscape;
   private boolean audioCheck;
   // private DataHelper mData;
@@ -1868,6 +1867,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** prepare the buttons of the top bars
+   */
   private void makeButtons( )
   {
     Resources res = getResources();
@@ -4319,13 +4320,14 @@ public class DrawingWindow extends ItemDrawer
 
       // orientation of the section-line
       azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+      DBlock blk = null;
 
       if ( nr_legs == 1 ) {
         DrawingPathIntersection pi = paths.get(0);
         DrawingPath p = pi.path;
         tt = pi.tt;
         // TDLog.v( "assign tt " + tt );
-        DBlock blk = p.mBlock;
+        blk = p.mBlock;
 
         // Float result = Float.valueOf(0);
         // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
@@ -4567,10 +4569,14 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setCurrentStation( st, saved );
     }
 
-    // delete at-station xsection
+    /** delete at-station xsection
+     * @param st   station
+     * @param name xsection index
+     * @param type parent sketch type (PLAN or profile)
+     */
     void deleteXSection( DrawingStationName st, String name, long type ) 
     {
-      // TDLog.v("deleteXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // TDLog.v("delete X-Section " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
       long xtype = -1;
       String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
@@ -4595,7 +4601,9 @@ public class DrawingWindow extends ItemDrawer
       deleteSectionPoint( xs_id ); 
     }
 
-    // delete section point and possibly the xsection outline
+    /** delete section point and possibly the xsection outline
+     * @param xs_id    X-section name
+     */
     private void deleteSectionPoint( String xs_id )
     {
       // TDLog.v("deleteSectionPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -4606,6 +4614,9 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
     }
 
+    /** @return the (leg) xsection type according to the parent sketch type
+     * @param type parent sketch type (PLAN or profile)
+     */
     private long getXSectionType( long type )
     {
       if ( type == PlotType.PLOT_PLAN ) return PlotType.PLOT_X_SECTION;
@@ -4613,6 +4624,10 @@ public class DrawingWindow extends ItemDrawer
       return PlotType.PLOT_NULL;
     }
 
+    /** @return the station xsection name according to the parent sketch type, ie, either "xs-" or "xh-" followed by the station name
+     * @param st_name   station name
+     * @param type      parent sketch type (PLAN or profile)
+     */
     private String getXSectionName( String st_name, long type )
     {
       if ( type == PlotType.PLOT_PLAN ) return "xs-" + st_name;
@@ -4620,8 +4635,10 @@ public class DrawingWindow extends ItemDrawer
       return null;
     }
 
-    // st_name = station name
-    // type = parent type
+    /** @return the station xsection nickname according to the parent sketch type
+     * @param st_name   station name
+     * @param type      parent sketch type (PLAN or profile)
+     */
     String getXSectionNick( String st_name, long type )
     {
       // parent name = mName
@@ -4636,26 +4653,22 @@ public class DrawingWindow extends ItemDrawer
       return null;
     }
 
-    // X-SECTION at station B where A--B--C
-    // @param st_name station name
-    // @param type type of the plot where the x-section is defined
-    // @param azimuth clino  section plane direction
-    //        direct: azimuth = average azimuth of AB and BC
-    //                clino   = average clino of AB and BC 
-    //        inverse opposite
-    //
-    // if plot type = PLAN
-    //    clino = 0
-    //
-    // if plot type = PROFILE
-    //    clino = -90, 0, +90  according to horiz
-    //
-    // @param horiz  (?) whether the section is horizontal 
-    // @param nick   section name
-    //
+    /** open a station xsection - at station B where A--B--C
+     * @param st_name   station name
+     * @param type      type of the parent plot where the x-section is defined
+     * @param azimuth   section plane direction
+     *        direct: azimuth = average azimuth of AB and BC, inverse: the opposite
+     * @param clino     section plane inclination
+     *        direct: clino   = average clino of AB and BC, inverse: the opposite
+     * @note plot type = PLAN ==> clino = 0; plot type = PROFILE ==> clino = -90, 0, +90  according to horiz
+     * @param horiz  (?) whether the section is horizontal 
+     * @param nick   section name
+     *
+     * @note if the xsection does not exists it is created
+     */
     void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
     {
-      // TDLog.v("openXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
       // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
       // parent plot name = mName
@@ -4684,13 +4697,14 @@ public class DrawingWindow extends ItemDrawer
         }
         // TDLog.v( "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
 
-        mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
+        long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
+        // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
         plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
 
         // add x-section to station-name
 
         st.setXSection( azimuth, clino, type );
-        if ( TDSetting.mAutoSectionPt ) { // insert section point
+        if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
           float x5 = st.getXSectionX( 4 ); // FIXME offset
           float y5 = st.getXSectionY( 4 );
 	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
@@ -6010,12 +6024,21 @@ public class DrawingWindow extends ItemDrawer
       );
     }
 
-
+    /** prepare a (leg) xsection - retrieve the ID or create a new section plot and return the ID
+     * @param id    section name
+     * @param type  parent plot type
+     * @param from  FROM station
+     * @param to    TO station
+     * @param nick  ...
+     * @param azimuth section azimuth
+     * @param clino   section clino
+     * @return the xsection plot ID
+     */
     private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino )
     {
       mCurrentLine = BrushManager.getLineWallIndex();
       if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
-      // TDLog.v("prepareXSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // TDLog.v("prepare XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null );
       setTheTitle();
 
@@ -6023,7 +6046,6 @@ public class DrawingWindow extends ItemDrawer
       mSectionName = id;
       long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
       if ( pid < 0 ) { 
-        // TDLog.v( "prepare xsection <" + mSectionName + "> nick <" + nick + ">" );
         pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
       }
       return pid;
@@ -6063,14 +6085,14 @@ public class DrawingWindow extends ItemDrawer
      */
     void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt )
     {
-      // TDLog.v( "make section: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+      // TDLog.v( "make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
       long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
       if ( pid >= 0 ) {
         // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
         mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
         pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
       } 
-      zoomFit( mDrawingSurface.getBitmapBounds() );
+      // zoomFit( mDrawingSurface.getBitmapBounds() );
     }
 
     /** open the xsection scrap in the window
@@ -6087,7 +6109,7 @@ public class DrawingWindow extends ItemDrawer
       PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
       if ( pi != null ) {
         pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, pi.intercept );
-        zoomFit( mDrawingSurface.getBitmapBounds() );
+        // zoomFit( mDrawingSurface.getBitmapBounds() );
       }
     }
 
@@ -6560,7 +6582,8 @@ public class DrawingWindow extends ItemDrawer
       mOffset.y = ( TopoDroidApp.mDisplayHeight + mListView.getHeight() - DrawingUtil.CENTER_Y )/(2*mZoom) - tb;
     }
     // TDLog.v( "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
-    // TDLog.v( "zoom fit " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight );
+    // TDLog.v( "zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
