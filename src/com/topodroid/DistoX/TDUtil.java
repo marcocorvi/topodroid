@@ -25,6 +25,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
+import java.time.DateTimeException;
 
 import android.content.Context;
 
@@ -107,46 +108,73 @@ public class TDUtil
 
   // DATE and TIME -------------------------------------------------------------
 
+  /** @return the current (today) date - format "yyyy.mm.dd"
+   * @note month mm ranges from 01 to 12
+   *       day dd ranges from 01 to 31
+   */
   public static String currentDate()
   {
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd", Locale.US );
     return sdf.format( new Date() );
   }
 
+  /** @return the current date-time - format "yyyy.mm.dd-hh:mm"
+   */
   public static String currentDateTime()
   {
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy.MM.dd-HH:mm", Locale.US );
     return sdf.format( new Date() );
   }
 
+  /** @return the current date-time - Bric4 format "yyyy mm dd hh mm ss"
+   */
   public static String currentDateTimeBric()
   {
     SimpleDateFormat sdf = new SimpleDateFormat( "yyyy MM dd HH mm ss", Locale.US );
     return sdf.format( new Date() );
   }
 
+  /** @return the current minute-seconds - format "mm:ss"
+   */
   public static String currentMinuteSecond()
   {
     SimpleDateFormat sdf = new SimpleDateFormat( "mm:ss", Locale.US );
     return sdf.format( new Date() );
   }
 
-
+  /** @return the current date with the given format
+   * @param format   given format
+   */
   public static String getDateString( String format )
   {
     SimpleDateFormat sdf = new SimpleDateFormat( format, Locale.US );
     return sdf.format( new Date() );
   }
 
+  /** parse a day 2-char string
+   * @param str    day string
+   * @return the day as a number (in 1 .. 31)
+   */
   public static int parseDay( String str )
   {
-    return 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
-  }
-  public static int parseMonth( String str )
-  {
-    return 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
+    int ret = 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
+    if ( ret < 1 || ret > 31 ) throw new DateTimeException( "Illegal month " + str );
+    return ret;
   }
 
+  /** parse a month 2-char string
+   * @param str    month string
+   * @return the month as a number (in 1 .. 12)
+   */
+  public static int parseMonth( String str )
+  {
+    int ret = 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
+    if ( ret < 1 || ret > 12 ) throw new DateTimeException( "Illegal day " + str );
+    return ret;
+  }
+
+  /** @return the current date as a Polygon float
+   */
   public static float getDatePlg( ) // Polygog style date
   {
     Calendar c = new GregorianCalendar();
@@ -156,8 +184,15 @@ public class TDUtil
     return getDatePlg( y, m, d );
   }
 
+  /** days before a given month (month 0 is January)
+   */
   private static final int[] mDaysByMonth = { 0, 31, 59, 90, 120, 151, 181,  212, 243, 273, 304, 324, 365 };
-  // m: 1 .. 12
+
+  /** @return a date as Polygon float
+   * @param y  year
+   * @param m  month, in 1 .. 12
+   * @param d  day, in 1 .. 31
+   */
   public static float getDatePlg( int y, int m, int d )
   {
     int days = 36524; // 100 * 365 + 24 = from 1900.01.01 to 1999.12.31
@@ -173,7 +208,9 @@ public class TDUtil
     return days;
   }
 
-  // get the year from a topodroid date string
+  /** @return the year from a topodroid date string
+   * @param date   topodroid date string (yyyy.mm.dd)
+   */
   public static int dateParseYear( String date )
   {
     if ( date != null && date.length() >= 4 ) {
@@ -184,7 +221,9 @@ public class TDUtil
     return 1970;
   }
 
-  // get the month from a topodroid date string
+  /** @return the month from a topodroid date string
+   * @param date   topodroid date string (yyyy.mm.dd)
+   */
   public static int dateParseMonth( String date )
   {
     int ret = 0;
@@ -196,7 +235,9 @@ public class TDUtil
     return (ret > 0)? ret-1 : 0;
   }
 
-  // get the month-day from a topodroid date string
+  /** @return the month-day from a topodroid date string
+   * @param date   topodroid date string (yyyy.mm.dd)
+   */
   public static int dateParseDay( String date )
   {
     int ret = 1;
@@ -209,30 +250,48 @@ public class TDUtil
     return Math.max(ret, 0);
   }
 
+  /** @return the topodroid date string
+   * @param y  year
+   * @param m  month (1 .. 12)
+   * @param d  day of the month (1 .. 31)
+   */
   public static String composeDate( int y, int m, int d )
   {
     return String.format(Locale.US, "%04d.%02d.%02d", y, m+1, d );
   }
 
-  // get the VTopo date string (DD/MM/YYYY) from a topodroid date string (YYYY.MM.DD)
-  // 
+  /** @return the VTopo date string (DD/MM/YYYY) from a topodroid date string (YYYY.MM.DD)
+   * @param date   topodroid date string (yyyy.mm.dd)
+   */
   public static String toVTopoDate( String date )
   {
     return date.substring(8,10) + "/" + date.substring(5,7) + "/" + date.substring(0,4);
   }
 
-  // @param date date in VTopo format DD/MM/YYYY
-  // @return date in TopoDroid format YYYY.MM.DD
+  /** @return date in TopoDroid format YYYY.MM.DD from a VTopo date string
+   * @param date date in VTopo format DD/MM/YYYY
+   */
   public static String fromVTopoDate( String date )
   {
     return date.substring(6,10) + "." + date.substring(3,5) + "." + date.substring(0,2);
   }
 
-  // NOTE month 0=Jan.
+  /** @return the current year
+   */
   public static int year()  { return (new GregorianCalendar()).get( Calendar.YEAR ); }
+
+  /** @return the current month (in 0 .. 11)
+   * @note month 0=Jan.
+   */
   public static int month() { return (new GregorianCalendar()).get( Calendar.MONTH ); }
+
+  /** @return the current day of the month (in 1 .. 31)
+   */
   public static int day()   { return (new GregorianCalendar()).get( Calendar.DAY_OF_MONTH); }
 
+  /** @return the string presentation of a time interval
+   * @param age   time interval [milliseconds]
+   */
   public static String getAge( long age )
   {
     age /= 60000;
@@ -249,6 +308,9 @@ public class TDUtil
 
   // SLOW ----------------------------------------------------
 
+  /** sleep the thread
+   * @param msec   sleep time [milliseconds]
+   */
   public static boolean slowDown( int msec ) 
   {
     try {
@@ -257,6 +319,10 @@ public class TDUtil
     return true;
   }
 
+  /** sleep the thread
+   * @param msec   sleep time [milliseconds]
+   * @param msg    interrupt message
+   */
   public static boolean slowDown( int msec, String msg )
   {
     try {
@@ -268,6 +334,9 @@ public class TDUtil
     return true;
   }
 
+  /** yield and sleep the thread
+   * @param msec   sleep time [milliseconds]
+   */
   public static boolean yieldDown( int msec ) 
   {
     try {
@@ -277,8 +346,11 @@ public class TDUtil
     return true;
   }
 
-  // @param surveyname   name of the survey
-  // @param scrapname    name of the Xsection scrap
+  /** replace a xsection prefix in the scrap name and prepend the survey name
+   * @param surveyname   name of the survey
+   * @param scrapname    name of the Xsection scrap
+   * @return ...
+   */
   public static String replacePrefix( String surveyname, String scrapname ) 
   {
     if ( scrapname == null ) return null;
@@ -288,6 +360,5 @@ public class TDUtil
     if ( pos < 0 ) return null;
     return surveyname + scrapname.substring( pos );
   }
-   
 
 }

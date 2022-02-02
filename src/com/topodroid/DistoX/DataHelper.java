@@ -1117,6 +1117,12 @@ public class DataHelper extends DataSetObservable
 
   // -----------------------------------------------------------------
 
+  /** update the survey date and comment
+   * @param id      survey ID
+   * @param date    survey new date
+   * @param comment survey new comment (free string)
+   * @return true if successful
+   */
   public boolean updateSurveyDayAndComment( long id, String date, String comment )
   {
     if ( date == null ) return false;
@@ -1126,6 +1132,11 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey day+cmt" );
   }
 
+  /** update the survey team
+   * @param id      survey ID
+   * @param team    survey new team (free string)
+   * @return true if successful
+   */
   public boolean updateSurveyTeam( long id, String team )
   {
     ContentValues cv = new ContentValues();
@@ -1133,6 +1144,11 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey team" );
   }
 
+  /** update the survey initial station
+   * @param id      survey ID
+   * @param station survey initial station
+   * @return true if successful
+   */
   public boolean updateSurveyInitStation( long id, String station )
   {
     ContentValues cv = new ContentValues();
@@ -1141,6 +1157,11 @@ public class DataHelper extends DataSetObservable
     return doUpdateSurvey( id, cv, "survey init_station" );
   }
   
+  /** update the survey declination
+   * @param id      survey ID
+   * @param decl    survey declination
+   * @return true if successful
+   */
   public boolean updateSurveyDeclination( long id, double decl )
   {
     ContentValues cv = new ContentValues();
@@ -1151,6 +1172,9 @@ public class DataHelper extends DataSetObservable
   // -----------------------------------------------------------------------
   // SURVEY delete
 
+  /** delete a survey
+   * @param sid   survey ID
+   */
   void doDeleteSurvey( long sid )
   {
     if ( myDB == null ) return;
