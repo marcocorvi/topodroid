@@ -1180,8 +1180,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_export_plot_summary">Alapértelmezett vázlat export formátum</string>
   <string name="pref_export_shots_title">Adat export formátum</string>
   <string name="pref_export_shots_summary">Alapértelmezett adat export formátum</string>
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
+  <string name="pref_auto_plot_export_title">Vázlat automatikus export formátum</string>
+  <string name="pref_auto_plot_export_summary">Vázlatok automatikus export formátuma</string>
 
   <string name="pref_cat_survey">FELMÉRÉSI ADAT</string>
   <string name="pref_cat_splay">SEGÉDMÉRÉS ADAT</string>
