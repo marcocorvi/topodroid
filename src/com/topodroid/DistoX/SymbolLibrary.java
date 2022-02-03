@@ -281,8 +281,10 @@ public class SymbolLibrary
     }
   }
 
-  // symbols = palette.mPaletteAreas etc. (filenames)
-  // clear     if true disable all symbols before enabling the symbols in the palette
+  /** make the list of enabled symbols starting from a palette
+   * @param symbols    filenaes of the palette
+   * @param clear      whether to clear the current enable list first, ie, disable, all symbols first
+   */
   void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
   {
     if ( clear ) {
@@ -295,6 +297,9 @@ public class SymbolLibrary
     makeEnabledList( );
   }
 
+  /** set the array of recently used symnols
+   * @param recent  array of recent symbols
+   */
   void setRecentSymbols( Symbol[] recent )
   {
     int k = 0;
@@ -314,6 +319,9 @@ public class SymbolLibrary
   //   }
   // }
 
+  /** serialize the symbols 
+   * @param dos   data output stream
+   */
   void toDataStream( DataOutputStream dos ) 
   {
     StringBuilder sb = new StringBuilder();
@@ -331,6 +339,10 @@ public class SymbolLibrary
   static final private boolean BLACK = true;
   static final private boolean RED = false;
 
+  /** compare two strings, return -1, 0, +1 as strcmp
+   * @param s1   first string
+   * @param s2   second string
+   */
   static private int compare( String s1, String s2 )
   { 
     if ( s1 == null ) return ((s2 == null)? 0 : +1);
@@ -347,6 +359,8 @@ public class SymbolLibrary
     return 0;
   }
 
+  /** symbol node in the RB-tree of symbols
+   */
   private class SymbolNode
   {
     SymbolNode parent;
@@ -355,6 +369,9 @@ public class SymbolLibrary
     boolean color;
     Symbol value;    // the Node value is the Symbol
 
+    /** cstr
+     * @param v  symbol
+     */
     SymbolNode( Symbol v )
     {
       parent = null;
@@ -364,7 +381,9 @@ public class SymbolLibrary
       value = v;
     }
 
-    // @param name  query key (symbol filename)
+    /** @return the symbol given the name (= filename)
+     * @param name  query key (symbol filename)
+     */
     Symbol get( String name )
     {
       int c = compare( value.getThName(), name );
@@ -375,6 +394,9 @@ public class SymbolLibrary
   }
 
   // -----------------------------------------------------
+  /** insert a node in the RB-tree: case 1
+   * @param n   node
+   */
   private void insert_case1( SymbolNode n ) 
   {
     if ( n.parent == null ) {
@@ -384,14 +406,20 @@ public class SymbolLibrary
     }
   }
 
-  // n.parent != null
+  /** insert a node in the RB-tree: case 2
+   * @param n   node
+   * @note the parent of the node is non-null
+   */
   private void insert_case2( SymbolNode n ) 
   {
     if ( n.parent.color ) return; // isBlack( n.parent )
     insert_case3( n );
   }
 
-  // n.parent != null && n.parent RED
+  /** insert a node in the RB-tree: case 3
+   * @param n   node
+   * @note the parent of the node is RED and non-null 
+   */
   private void insert_case3( SymbolNode n )
   {
     SymbolNode u = uncle( n );
@@ -406,8 +434,12 @@ public class SymbolLibrary
     }
   }
 
-  // n.parent == g.left && n = n.parent.right ( n.parent RED )
-  // or symmetric
+  /** insert a node in the RB-tree: case 4
+   * @param n   node
+   * @note the parent of the node is RED, and
+   *   the node is the RIGHT child of the parent, and the parent is a LEFT child of the grandparent,
+   *   or the symmetric case
+   */
   private void insert_case4( SymbolNode n )
   {
     SymbolNode p = n.parent;
@@ -442,7 +474,10 @@ public class SymbolLibrary
     insert_case5( n );
   }
 
-  // n.parent RED but n.uncle BLACK
+  /** insert a node in the RB-tree: case 5
+   * @param n   node
+   * @note the parent of the node is RED, but the uncle node is BLACK
+   */
   private void insert_case5( SymbolNode n )
   {
     SymbolNode g = grandparent( n );
@@ -475,11 +510,17 @@ public class SymbolLibrary
     }
   }
 
+  /** @return the grandparent of a node (or null)
+   * @param n   node
+   */
   private SymbolNode grandparent( SymbolNode n )
   {
     return ( n != null && n.parent != null )?  n.parent.parent : null;
   }
 
+  /** @return the uncle of a node (or null): the brother of the parent
+   * @param n   node
+   */
   private SymbolNode uncle( SymbolNode n ) 
   {
     SymbolNode p = n.parent;
@@ -490,11 +531,22 @@ public class SymbolLibrary
   }
 
   // private boolean isBlack( SymbolNode n ) { return ( n == null ) || n.color; }
+
+  /** @return true if the node is RED
+   * @param n   node
+   */
   private boolean isRed( SymbolNode n ) { return ( n != null ) && (! n.color ); }
 
-  // prereq. n.parent != null
+  /** @return true if the node is LEFT child
+   * @param n   node
+   * @note prereq.: the node parentis non-null
+   */
   private boolean isLeft( SymbolNode n ) { return ( n == n.parent.left ); }
+
+  /** @return true if the node is RIGHT child
+   * @param n   node
+   * @note prereq.: the node parentis non-null
+   */
   private boolean isRight( SymbolNode n ) { return ( n == n.parent.right ); }
-  // ===========================================================================
 
 }    

@@ -8,6 +8,7 @@ CFLAGS = -g -O0 -Wall -DMAIN
 AFLAGS = -v 
 
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
+TARGET_SDK = `grep targetSdkVersion AndroidManifest.xml | sed -e 's/ *android:targetSdkVersion=//' | sed -e 's/"//g' `
 
 APPNAME = DistoX
 LOGNAME = $(APPNAME)
@@ -29,6 +30,7 @@ signed:
 	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION).apk
 	ls -l TopoDroid-$(VERSION).apk
 	md5sum TopoDroid-$(VERSION).apk
+	mv TopoDroid-$(VERSION).apk TopoDroid-$(VERSION)-$(TARGET_SDK).apk
 
 debug-signed:
 	$(ANT) debug

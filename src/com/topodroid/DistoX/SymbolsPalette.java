@@ -27,6 +27,8 @@ class SymbolsPalette
   TreeSet< String > mPaletteLine;
   TreeSet< String > mPaletteArea;
 
+  /** deafult cstr - allocate the lists of symbols
+   */
   SymbolsPalette( )
   {
     mPalettePoint = new TreeSet< String >();
@@ -34,6 +36,8 @@ class SymbolsPalette
     mPaletteArea  = new TreeSet< String >();
   }
 
+  /** clear the lists of symbols
+   */
   void resetSymbolLists()
   {
     mPalettePoint.clear();
@@ -41,15 +45,25 @@ class SymbolsPalette
     mPaletteArea.clear();
   }
 
-  // N.B. TreeSet.add adds the type if it is not already present
+  /** add a point symbol
+   * @param type   point filename (ie, point name) 
+   * @note TreeSet.add adds the type if it is not already present
+   */
   void addPointFilename( String type ) { mPalettePoint.add( type ); }
 
+  /** add a line symbol
+   * @param type   line filename (ie, line name) 
+   */
   void addLineFilename( String type ) { mPaletteLine.add( type ); }
 
+  /** add a area symbol
+   * @param type   area filename (ie, area name) 
+   */
   void addAreaFilename( String type ) { mPaletteArea.add( type ); }
 
-  boolean isOK() { return mPalettePoint.size() == 0 && mPaletteLine.size() == 0 && mPaletteArea.size() == 0; }
-
+  // /** @return true is the lists of symbols are empty
+  //  */
+  // boolean isOK() { return mPalettePoint.size() == 0 && mPaletteLine.size() == 0 && mPaletteArea.size() == 0; }
 
   // public String getMessage( Resources res )
   // {
@@ -83,4 +97,5 @@ class SymbolsPalette
   //   pw.format( "%s\n",  res.getString( R.string.missing-hint ) );
   //   return sw.getBuffer().toString();
   // }
+
 }

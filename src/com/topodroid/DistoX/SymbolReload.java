@@ -33,7 +33,7 @@ import android.view.View;
 
 
 class SymbolReload extends MyDialog
-                          implements View.OnClickListener
+                   implements View.OnClickListener
 {
   private final TopoDroidApp mApp;
 
@@ -53,6 +53,11 @@ class SymbolReload extends MyDialog
 
   private boolean mAll;
 
+  /** cstr
+   * @param context  context
+   * @param app      application
+   * @param all      whether to display checkboxes for all palettes, instead of only for speleo palette
+   */
   SymbolReload( Context context, TopoDroidApp app, boolean all )
   {
     super(context, R.string.SymbolReload );
@@ -110,6 +115,9 @@ class SymbolReload extends MyDialog
     }
   }
 
+  /** react to a user tap - either "install" or "replace" have effect
+   * @param v  tapped view
+   */
   public void onClick(View v) 
   {
     Button b = (Button) v;
@@ -143,6 +151,8 @@ class SymbolReload extends MyDialog
     dismiss();
   }
 
+  /** react to a user tap on BACK button - dismiss the dialog
+   */
   @Override
   public void onBackPressed()
   {

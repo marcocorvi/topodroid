@@ -42,7 +42,8 @@ public class SymbolPointLibrary extends SymbolLibrary
   // int mPointDangerIndex;
   int mPointSectionIndex;
 
-  // empty poin library
+  /** default cstr - empty point library
+   */
   SymbolPointLibrary( )
   {
     super( "p_" );
@@ -54,6 +55,10 @@ public class SymbolPointLibrary extends SymbolLibrary
     mPointSectionIndex = -1;
   }
 
+  /** cstr
+   * @param ctx    context
+   * @param res    resources
+   */
   SymbolPointLibrary( Context ctx, Resources res )
   {
     super( "p_" );
@@ -68,29 +73,55 @@ public class SymbolPointLibrary extends SymbolLibrary
     makeEnabledList();
   }
 
+  /** @return true if the point has text value
+   * @param k    point index
+   */
   boolean pointHasText( int k )        { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText == 1; }
+
+  /** @return true if the point has numeric value
+   * @param k    point index
+   */
   boolean pointHasValue( int k )       { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText == 2; }
+
+  /** @return true if the point has either text or numeric value
+   * @param k    point index
+   */
   boolean pointHasTextOrValue( int k ) { return k >= 0 && k < size() && ((SymbolPoint)mSymbols.get(k)).mHasText > 0; }
 
+  /** @return the orientation current value of the point symbol
+   * @param k    point index
+   */
   double getPointOrientation( int k )
   { return ( k < 0 || k >= size() )? 0.0 : ((SymbolPoint)mSymbols.get(k)).mOrientation; }
 
+  /** reset the orientation of all points
+   */
   @Override
   void resetOrientations()
   {
     for ( Symbol sp : mSymbols ) ((SymbolPoint)sp).resetOrientation();
   }
 
+  /** rotate (clockwise?) the current orientation value of a point
+   * @param k    point index
+   * @param s    rotation angle [degrees]
+   */
   void rotateGrad( int k, double a )
   {
     if ( k >= 0 && k < size() ) ((SymbolPoint)mSymbols.get(k)).rotateGradP( a );
   }
 
+  /** @return the current drawing path of a point
+   * @param k    point index
+   */
   Path getPointPath( int k ) { 
   {
     return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getPath( ); }
   }
 
+  /** @return the original drawing path of a point
+   * @param k    point index
+   */
   Path getPointOrigPath( int k )
   {
     return ( k < 0 || k >= size() )? null : ((SymbolPoint)mSymbols.get(k)).getOrigPath( );
@@ -102,6 +133,9 @@ public class SymbolPointLibrary extends SymbolLibrary
   static final private String p_user    = "addCircle 0 0 6";                                  // "o" shape
   static final private String p_section = "moveTo -5 -5 lineTo -5 5 lineTo 5 5 lineTo 5 -5 lineTo -5 -5"; // square
 
+  /** load the system points, "user", "label", "section"
+   * @param res   resources
+   */
   private void loadSystemPoints( Resources res )
   {
     SymbolPoint symbol;
@@ -125,6 +159,9 @@ public class SymbolPointLibrary extends SymbolLibrary
     // TDLog.v("PointLibrary user " + mPointUserIndex + " label " + mPointLabelIndex + " section " + mPointSectionIndex );
   }
 
+  /** load the user points
+   * @param ctx   context
+   */
   void loadUserPoints( Context ctx )
   {
     String locale = "name-" + TDLocale.getLocaleCode(); // TopoDroidApp.mLocale.toString().substring(0,2);
@@ -217,6 +254,8 @@ public class SymbolPointLibrary extends SymbolLibrary
 
 // ------------------------------------------------------------------
   
+  /** make the list of enabled points
+   */
   @Override
   protected void makeEnabledList()
   {
@@ -234,6 +273,10 @@ public class SymbolPointLibrary extends SymbolLibrary
     //                 + " section " + mPointSectionIndex );
   }
 
+  /** make the list of enabled points starting from a palette
+   * @param palette    palette
+   * @param clear      whether to clear the current enable list first, ie, disable, all symbols first
+   */
   void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear )
   {
     makeEnabledListFromStrings( palette.mPalettePoint, clear );

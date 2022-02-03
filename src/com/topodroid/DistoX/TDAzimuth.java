@@ -20,9 +20,12 @@ public class TDAzimuth
   static long  mFixedExtend = 0;  // -1 left, 0 unspecified, 1 right
 
   // if mFixedExtend != 0 the mRefAzimuth is the last bearing times mFixedExtend
-  public static float mRefAzimuth  = SurveyInfo.SURVEY_EXTEND_NORMAL; // west to east
+  public static float mRefAzimuth  = SurveyInfo.SURVEY_EXTEND_NORMAL; // west to east [degrees]
 
-
+  /** reset the value of the reference azimuth
+   * @param window   reference to the Shot Window
+   * @param azimuth  value of reference azimuth [degrees]
+   */
   public static void resetRefAzimuth( final ShotWindow window, float azimuth )
   {
     // TDLog.v( "reset Ref Azimuth " + azimuth );
@@ -34,7 +37,10 @@ public class TDAzimuth
     // DrawingWindow does not have the RefAzimuth setting
   }
 
-  // called by ShotNewDialog, and setLegExtend
+  /** @return the value of "extend" of a leg
+   * @param bearing  leg azimuth [degrees]
+   * @note called by ShotNewDialog, and setLegExtend
+   */
   static long computeLegExtend( double bearing )
   {
     if ( mFixedExtend == 0 ) {
@@ -54,11 +60,19 @@ public class TDAzimuth
     return mFixedExtend;
   }
 
+  /** @return the value of the fixed "extend"
+   */
   static long getFixedExtend() { return mFixedExtend; }
+
+  /** @return true if "extend" has a fixed value
+   */
   static boolean isFixedExtend() { return mFixedExtend != 0; }
 
-  // commented use for manually entered shots, 
-  // used by by Compass/VisualTopo parser
+  /** @return the "extend" of a splay
+   * @param bearing  (splay) azimuth [degrees]
+   * @note used by by Compass/VisualTopo parser
+   *       commented use for manually entered shots, 
+   */
   public static long computeSplayExtend( double bearing )
   {
     while ( bearing < mRefAzimuth ) bearing += 360;
@@ -66,9 +80,11 @@ public class TDAzimuth
     return computeAbsoluteExtendSplay( bearing );
   }
 
-
-  // @param b bearing [deg] in 0 .. 360
-  // called only by computeSplayExtend
+  /** @return the "extend" of a splay, in absolute reference (-1 west, +1 east)
+   * @param b   azimuth [deg] in 0 .. 360
+   * @note mExtendThr determines the angle around North-South where "extend" is 0
+   * @note called only by computeSplayExtend
+   */
   static private long computeAbsoluteExtendSplay( double b )
   {
     if ( b >= 90 + TDSetting.mExtendThr && b <= 270 - TDSetting.mExtendThr ) return -1L;

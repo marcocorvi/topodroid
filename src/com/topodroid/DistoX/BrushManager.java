@@ -265,6 +265,9 @@ public class BrushManager
   // static BitmapDrawable mSymbolHighlight = null;
 
   // ===========================================================================
+  /** make the point symbol "station"
+   * @param res   resources
+   */
   static private void makeStationSymbol( Resources res )
   {
     if ( mStationSymbol == null ) {
@@ -275,9 +278,18 @@ public class BrushManager
     }
   }
 
+  /** @return the paint of the point symbol "station"
+   */
   static Paint getStationPaint() { return (mStationSymbol == null)? errorPaint : mStationSymbol.mPaint; }
+
+  /** @return the drawing path of the point symbol "station"
+   */
   static Path  getStationPath()  { return (mStationSymbol == null)? null : mStationSymbol.mPath; }
 
+  /** reload the three symbols libraries
+   * @param ctx   context
+   * @param res   resources
+   */
   static void loadAllLibraries( Context ctx, Resources res ) 
   {
     makeStationSymbol( res );
@@ -286,26 +298,38 @@ public class BrushManager
     reloadAreaLibrary( res );
   }
 
+  /** reload the point symbols
+   * @param ctx   context
+   * @param res   resources
+   */
   public static void reloadPointLibrary( Context ctx, Resources res )
   {
     mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
   }
 
+  /** reload the line symbols
+   * @param res   resources
+   */
   public static void reloadLineLibrary( Resources res )
   {
     mLineLib = new SymbolLineLibrary( res );
     // mLineLib.loadUserLines();
   }
 
+  /** reload the area symbols
+   * @param res   resources
+   */
   public static void reloadAreaLibrary( Resources res )
   {
     mAreaLib = new SymbolAreaLibrary( res );
     // mAreaLib.loadUserAreas();
   }
 
-  // palette    set of symbols filenames
-  // clear      whether the disable all symbols first
+  /** make the list of enabled symbols starting from a palette
+   * @param palette    set of symbols filenames
+   * @param clear      whether the disable all symbols first
+   */
   static void makeEnabledListFromPalette( SymbolsPalette palette, boolean clear ) 
   {
     if ( palette == null ) return;
