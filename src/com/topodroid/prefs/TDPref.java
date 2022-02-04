@@ -82,6 +82,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   View mView = null;
   EditText mEdittext = null;
 
+  /** private cstr
+   * @param cat     category
+   * @param nm      name
+   * @param wt      type
+   * @param tit     display title
+   * @param sum     display summary
+   * @param lvl     activity level
+   * @param pt      preference type
+   * @param val     value
+   * @param def_val default value
+   * @param ctx     context
+   * @param hlp     shared preference helper
+   */
   private TDPref( int cat, String nm, int wt, int tit, int sum, int lvl, int pt, String val, String def_val, Context ctx, TDPrefHelper hlp )
   {
     name  = nm;
@@ -100,6 +113,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     commit   = false;
   }
 
+  /** @return the view that displays this preference
+   * @param context   context
+   * @param li        layout inflater
+   * @param parent    parent view
+   */
   View getView( Context context, LayoutInflater li, ViewGroup parent )
   {
     View v = null;
@@ -161,18 +179,37 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return v;
   }
 
+  /** @return the view stored in this preference
+   */
   View getView() { return mView; }
 
   // -------------------------------------------------------------------------
+  /** react to a user finish text change
+   * @param e    editable ???
+   */
   @Override
   public void afterTextChanged( Editable e ) { commit = true; }
 
+  /** react to a user init text change - it does nothing
+   * @param cs     text
+   * @param start  ...
+   * @param cnt    ...
+   * @param after  ...
+   */
   @Override
   public void beforeTextChanged( CharSequence cs, int start, int cnt, int after ) { }
 
+  /** react to a user text change - it does nothing
+   * @param cs     text
+   * @param start  ...
+   * @param before ...
+   * @param cnt    ...
+   */
   @Override
   public void onTextChanged( CharSequence cs, int start, int before, int cnt ) { }
-  
+
+  /** commit the preference (string) value
+   */
   void commitValueString()
   {
     // TDLog.v( "Pref [*] " + name + " value " + value + " commit " + commit );
@@ -191,6 +228,10 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     }
   }
 
+  /** react to a view focus change
+   * @param v         affected view
+   * @param has_focus ...
+   */
   @Override
   public void onFocusChange( View v, boolean has_focus )
   {
@@ -198,6 +239,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     if ( (! has_focus) /* && ( v == mEdittext ) */ ) commitValueString();
   }
 
+  /** react to a user tap on a view
+   * @param v         tapped view
+   */
   @Override
   public void onClick(View v) 
   {
@@ -214,6 +258,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     }
   }
 
+  /** react to a user item selection
+   * @param av    parent adapter
+   * @param v     tapped view
+   * @param pos   item position 
+   * @param id    ... (not used)
+   */
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id )
   {
@@ -225,6 +275,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     }
   }
 
+  /** react to a user items deselection
+   * @param av    parent adapter
+   */
   @Override
   public void onNothingSelected( AdapterView av )
   {
@@ -233,6 +286,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     // TDLog.v( "Pref TODO nothing Selected: " + name + " index " + ivalue + " val " + value );
   }
 
+  /** react to a user key press
+   * @param v       affected view
+   * @param keyCode key code
+   * @param event   key event
+   * @return true if key-press has been handled
+   */
   @Override
   public boolean onKey( View view, int keyCode, KeyEvent event)
   {
@@ -268,18 +327,46 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   // -------------------------------------------------------------------------
   // creators
-  
+ 
+  /** factory cstr a "forward" preference
+   * @param cat   category
+   * @param nm    preference name
+   * @param tit   preference title
+   * @param lvl   activity level
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   */ 
   private static TDPref makeFwd( int cat, String nm, int tit, int lvl, Context ctx, TDPrefHelper hlp )
   { 
     return new TDPref( cat, nm, FORWARD, tit, -1, lvl, PREF, null, null, ctx, hlp );
   }
 
+  /** factory cstr a "button" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default value
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeBtn( int cat, String nm, int tit, int sum, int lvl, String def_val, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
     return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, ctx, hlp );
   }
 
+  /** factory cstr a "checkbox" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default boolean value
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, boolean def_val, Context ctx, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_val );
@@ -288,6 +375,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
+  /** factory cstr a "checkbox" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default (string) value
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeCbx( int cat, String nm, int tit, int sum, int lvl, String def_str, Context ctx, TDPrefHelper hlp )
   { 
     boolean val = hlp.getBoolean( nm, def_str.startsWith("t") );
@@ -296,6 +393,17 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
+  /** factory cstr a "text" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default text value
+   * @param pt      preference type
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeEdt( int cat, String nm, int tit, int sum, int lvl, String def_val, int pt, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val );
@@ -323,6 +431,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //   return ret;
   // }
 
+  /** factory cstr a "list" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default text value
+   * @param opts    options resource ID
+   * @param vals    values resource ID
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, String def_val, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, def_val ); // options stoctx the selected value
@@ -337,6 +457,18 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
+  /** factory cstr a "list" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param idef    preference default value resource ID
+   * @param opts    options resource ID
+   * @param vals    values resource ID
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
   private static TDPref makeLst( int cat, String nm, int tit, int sum, int lvl, int idef, int opts, int vals, Context ctx, TDPrefHelper hlp )
   { 
     String val = hlp.getString( nm, ctx.getResources().getString(idef) ); // options stores the selected value
@@ -394,6 +526,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //   return null;
   // }
 
+  /** set the prefernce value
+   * @param val  new value
+   */
   public void setValue( String val )
   {
     value = val;
@@ -414,6 +549,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     }
   }
 
+  /** set the "buttion" prefernce value
+   * @param val  new value
+   */
   public void setButtonValue( String val )
   {
     if ( mView != null ) {
@@ -423,9 +561,20 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     value = val;
   }
 
+  /** @return the prefrence integer value
+   */
   public int intValue()         { return ( ptype == INTEGER || ptype == OPTIONS )? ivalue : 0; }
+
+  /** @return the preference float value
+   */
   public float floatValue()     { return ( ptype == FLOAT )? fvalue : 0; }
+
+  /** @return the preference string value
+   */
   public String stringValue()   { return value; }
+
+  /** @return the preference boolean value
+   */
   public boolean booleanValue() { return ( ptype == BOOLEAN )&& bvalue; }
 
   // -----------------------------------------------
@@ -436,6 +585,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static final int T = 4;
   static final int D = 5;
 
+  /** construct the general "main" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of main preferences
+   */
   public static TDPref[] makeMainPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_ALL;
@@ -464,6 +618,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "survey" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "survey" preferences
+   */
   public static TDPref[] makeSurveyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SURVEY;
@@ -488,6 +647,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "plot" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "plot" preferences
+   */
   public static TDPref[] makePlotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_PLOT;
@@ -513,6 +677,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "calibration" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "calibration" preferences
+   */
   public static TDPref[] makeCalibPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CALIB;
@@ -536,6 +705,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "device" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "device" preferences
+   */
   public static TDPref[] makeDevicePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DEVICE;
@@ -559,6 +733,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "export" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "export" preferences
+   */
   public static TDPref[] makeExportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_EXPORT;
@@ -588,6 +767,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "import" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "import" preferences
+   */
   public static TDPref[] makeImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_IMPORT;
@@ -601,6 +785,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek import" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek import" preferences
+   */
   public static TDPref[] makeGeekImportPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_IMPORT;
@@ -618,7 +807,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-
+  /** construct the "shapefile" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "shapefile" preferences
+   */
   public static TDPref[] makeShpPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SHP;
@@ -631,6 +824,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "Survex" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "Survex" preferences
+   */
   public static TDPref[] makeSvxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SVX;
@@ -645,6 +843,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "Therion" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "Therion" preferences
+   */
   public static TDPref[] makeThPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_TH;
@@ -665,6 +868,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "Comapss" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "Comapss" preferences
+   */
   public static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DAT;
@@ -679,6 +887,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "VisualTopo" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "VisualTopo" preferences
+   */
   public static TDPref[] makeTroPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_TRO;
@@ -693,6 +906,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "SVG" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "SVG" preferences
+   */
   public static TDPref[] makeSvgPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_SVG;
@@ -717,6 +935,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "DXF" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "DXF" preferences
+   */
   public static TDPref[] makeDxfPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_DXF;
@@ -734,6 +957,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "PNG image" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "PNG image" preferences
+   */
   public static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_PNG;
@@ -750,6 +978,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "KML" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "KML" preferences
+   */
   public static TDPref[] makeKmlPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_KML;
@@ -763,6 +996,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "cSurvey" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "cSurvey" preferences
+   */
   public static TDPref[] makeCsxPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CSX;
@@ -775,6 +1013,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "CVS" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "CVS" preferences
+   */
   public static TDPref[] makeCsvPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_CSV;
@@ -789,7 +1032,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-
+  /** construct the "shot data" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "shot data" preferences
+   */
   public static TDPref[] makeShotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_SHOT_DATA;
@@ -813,6 +1060,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "units" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "units" preferences
+   */
   public static TDPref[] makeUnitsPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_SHOT_UNITS;
@@ -830,6 +1082,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "accuracy" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "accuracy" preferences
+   */
   public static TDPref[] makeAccuracyPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_ACCURACY;
@@ -844,6 +1101,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "location" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "location" preferences
+   */
   public static TDPref[] makeLocationPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_LOCATION;
@@ -857,6 +1119,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "sketch display" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "sketch display" preferences
+   */
   public static TDPref[] makeScreenPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_SCREEN;
@@ -876,6 +1143,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "line items" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "line items" preferences
+   */
   public static TDPref[] makeLinePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_TOOL_LINE;
@@ -895,6 +1167,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "point items" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "point items" preferences
+   */
   public static TDPref[] makePointPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_TOOL_POINT;
@@ -927,6 +1204,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //   };
   // }
 
+  /** construct the "sketch drawing" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "sketch drawing" preferences
+   */
   public static TDPref[] makeDrawPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_DRAW;
@@ -951,6 +1233,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "sketch erasing" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "sketch erasing" preferences
+   */
   public static TDPref[] makeErasePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_ERASE;
@@ -965,6 +1252,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "sketch editing" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "sketch editing" preferences
+   */
   public static TDPref[] makeEditPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_PLOT_EDIT;
@@ -981,6 +1273,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   }
 
 
+  /** construct the "geek device" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek device" preferences
+   */
   public static TDPref[] makeGeekDevicePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_DEVICE;
@@ -1001,6 +1298,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek line item" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek line item" preferences
+   */
   public static TDPref[] makeGeekLinePrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_LINE;
@@ -1023,6 +1325,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek shot data" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek shot data" preferences
+   */
   public static TDPref[] makeGeekShotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SHOT;
@@ -1049,6 +1356,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek sketch" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek sketch" preferences
+   */
   public static TDPref[] makeGeekPlotPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_PLOT;
@@ -1071,6 +1383,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek splays" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek splays" preferences
+   */
   public static TDPref[] makeGeekSplayPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_GEEK_SPLAY;
@@ -1090,6 +1407,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "geek main" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "geek main" preferences
+   */
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
     TDLog.v("make Geek Prefs");
@@ -1113,6 +1435,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "3D viewer" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "3D viewer" preferences
+   */
   public static TDPref[] makeCave3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
@@ -1136,6 +1463,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "3D DEM" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "3D DEM" preferences
+   */
   public static TDPref[] makeDem3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
@@ -1151,6 +1483,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
+  /** construct the "3D walls" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "3D walls" preferences
+   */
   public static TDPref[] makeWalls3DPrefs( Context ctx, TDPrefHelper hlp )
   {
     // TDLog.v("make Cave3D Prefs");
@@ -1191,6 +1528,11 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   }
   * END_SKETCH_3D */
 
+  /** construct the "logging" preferences array
+   * @param ctx   context
+   * @param hlp   shared preferences helper
+   * @return array of "logging" preferences
+   */
   public static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
   {
     int cat = TDPrefCat.PREF_CATEGORY_LOG;

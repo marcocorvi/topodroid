@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date aug 2018
  *
- * @brief TopoDroid options keys
+ * @brief TopoDroid arrays of preference keys and accessory data 
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

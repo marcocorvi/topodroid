@@ -1174,7 +1174,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="imported_settings">Imported settings</string>
   <string name="imported_settings_failed">Failed to import settings</string>
   <string name="export_settings_failed">Failed to export settings</string>
-  <string name="pref_export_settings">Export settings to file</string>
+  <string name="pref_export_settings">Settings import/export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_export_plot_title">Sketch export format</string>
