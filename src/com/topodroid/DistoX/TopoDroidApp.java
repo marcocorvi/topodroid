@@ -648,10 +648,12 @@ public class TopoDroidApp extends Application
     return info;
   }
 
-  // @param address    device address
-  // @param command
-  // @param head_tail  return array with positions of head and tail
-  // @return HeadTail string, null on failure
+  /** read head-tail from a DistoX A3
+   * @param address    device address
+   * @param command
+   * @param head_tail  return array with positions of head and tail
+   * @return head-tail string, null on failure
+   */
   public String readA3HeadTail( String address, byte[] command, int[] head_tail )
   {
     if ( mComm instanceof DistoXA3Comm ) {
@@ -665,8 +667,13 @@ public class TopoDroidApp extends Application
     return null;
   }
 
-  // swap hot bit in the range [from, to)
-  // @return the number of bit that have been swapped
+  /** swap hot bit in the range [from, to)
+   * @param address   device address
+   * @param from      initial memory address
+   * @param to        final memory address (non-inclusive)
+   * @param on_off    whether to swap hot bit ON or OFF
+   * @return the number of bit that have been swapped
+   */
   public int swapA3HotBit( String address, int from, int to, boolean on_off ) 
   {
     if ( mComm instanceof DistoXA3Comm ) {
@@ -685,6 +692,8 @@ public class TopoDroidApp extends Application
 
   // ---------------------------------------------------------
 
+  /** second step of application initialization
+   */
   void startupStep2( )
   {
     TDPrefHelper prefHlp = new TDPrefHelper( this );
@@ -709,6 +718,8 @@ public class TopoDroidApp extends Application
     // TDLog.Debug("ready");
   }
 
+  /** create the bluetooth communication
+   */
   private void createComm()
   {
     if ( mComm != null ) {
@@ -743,6 +754,12 @@ public class TopoDroidApp extends Application
     // }
   }
 
+  /** react to a user tap on the bluetooth button
+   * @param ctx       context
+   * @param lister    data lister
+   * @param b         bluetooth button
+   * @param nr_shots  ...
+   */
   void doBluetoothButton( Context ctx, ILister lister, Button b, int nr_shots )
   {
     if ( TDLevel.overAdvanced ) {
@@ -771,6 +788,9 @@ public class TopoDroidApp extends Application
     doBluetoothReset( lister );
   }
 
+  /** reset the bluetooth
+   * @param lister  data lister
+   */
   private void doBluetoothReset( ILister lister )
   {
     mDataDownloader.setDownload( false );
@@ -780,8 +800,10 @@ public class TopoDroidApp extends Application
     TDToast.make(R.string.bt_reset );
   }
  
-  // @param dm     metrics
-  // @param landscape whether the screen orientation is landscape
+  /** initualize the display parameters 
+   * @param dm     display metrics
+   * // @param landscape whether the screen orientation is landscape
+   */
   static private void setDisplayParams( DisplayMetrics dm /* , boolean landscape */ )
   {
     float density  = dm.density;
@@ -837,6 +859,10 @@ public class TopoDroidApp extends Application
     //   setDefaultSocketType( );
     // }
     mSetupScreen = prefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
+    if ( mSetupScreen ) { // deafult button size
+      TDSetting.mSizeBtns = 5;
+      TDSetting.mSizeButtons =  (int)( TDSetting.BTN_SIZE_UNUSED * TopoDroidApp.getDisplayDensity() * 0.86f );
+    }
 
     DistoXConnectionError = new String[5];
     DistoXConnectionError[0] = getResources().getString( R.string.distox_err_ok );
@@ -1124,6 +1150,8 @@ public class TopoDroidApp extends Application
   // ------------------------------------------------------------------
   // FILE NAMES
 
+  /** write the manifest file for the current survey
+   */
   public void writeManifestFile()
   {
     SurveyInfo info = mData.selectSurveyInfo( TDInstance.sid );
@@ -1505,6 +1533,9 @@ public class TopoDroidApp extends Application
   //   TDPrefHelper.update( "DISTOX_SOCKET_TYPE", 1 ); // UNSECURE
   // }
 
+  /** set the CWD preference
+   * @param cwd   CWD (Current Work Directory)
+   */
   static void setCWDPreference( String cwd /*, String cbd */ )
   { 
     if ( TDInstance.cwd.equals( cwd ) /* && TDInstance.cbd.equals( cbd ) */ ) return;
@@ -1513,6 +1544,9 @@ public class TopoDroidApp extends Application
     setCWD( cwd /*, cbd */ ); 
   }
 
+  /** set the PT map preference
+   * @param cmap  PT map - PocketTopo color map
+   */
   static void setPtCmapPreference( String cmap )
   {
     TDPrefHelper.update( "DISTOX_PT_CMAP", cmap ); 
@@ -1525,6 +1559,9 @@ public class TopoDroidApp extends Application
   //   TDPrefHelper.update( "DISTOX_ACCEL_THR", Float.toString( acceleration ), "DISTOX_MAG_THR", Float.toString( magnetic ), "DISTOX_DIP_THR", Float.toString( dip ) ); 
   // }
 
+  /** set the text size
+   * @param ts    text size
+   */
   static void setTextSize( int ts )
   {
     TDSetting.setTextSize( ts );
@@ -1534,6 +1571,9 @@ public class TopoDroidApp extends Application
     TDPrefHelper.update( "DISTOX_TEXT_SIZE", Integer.toString(ts), "DISTOX_LABEL_SIZE", Float.toString(ts*3), "DISTOX_STATION_SIZE", Float.toString(ts*2) );
   }
 
+  /** set the buttons size
+   * @param bs    buttons size
+   */
   static void setButtonSize( int bs )
   {
     // TDLog.v("set button size " + bs );
@@ -1541,12 +1581,18 @@ public class TopoDroidApp extends Application
     TDPrefHelper.update( "DISTOX_SIZE_BUTTONS", Integer.toString(bs) );
   }
 
+  /** set the drawing icons units
+   * @param u    drawing icons units
+   */
   static void setDrawingUnitIcons( float u )
   {
     TDSetting.setDrawingUnitIcons( u );
     TDPrefHelper.update( "DISTOX_DRAWING_UNIT", Float.toString(u) );
   }
 
+  /** set the drawing lines units
+   * @param u    drawing lines units
+   */
   static void setDrawingUnitLines( float u )
   {
     TDSetting.setDrawingUnitLines( u );

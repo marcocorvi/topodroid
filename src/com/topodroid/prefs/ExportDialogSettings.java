@@ -30,6 +30,8 @@ import android.view.View;
 public class ExportDialogSettings extends MyDialog
                    implements View.OnClickListener
 {
+  private TDPrefActivity mParent;
+  private SharedPreferences mPrefs;
   private Button   mBtnExport;
   private Button   mBtnImport;
   // private Button   mBtnBack;
@@ -38,12 +40,16 @@ public class ExportDialogSettings extends MyDialog
 
   /** cstr
    * @param context context
+   * @param parent  parent activity
+   * @param prefs   shared prefrences
    * @param title   title resource index
    */
-  public ExportDialogSettings( Context context, int title )
+  public ExportDialogSettings( Context context, TDPrefActivity parent, SharedPreferences prefs, int title )
   {
     super( context, R.string.ExportSettings );
-    mTitle = title;
+    mParent = parent;
+    mPrefs  = prefs;
+    mTitle  = title;
   }
 
 // -------------------------------------------------------------------
@@ -98,13 +104,11 @@ public class ExportDialogSettings extends MyDialog
       final boolean functional = mCBfunctional.isChecked();
       final boolean all = ! functional;
       ( new AsyncTask< Void, Void, Boolean >() { // FIXME static or LEAK
-          TDPrefHelper hlp = new TDPrefHelper( mContext );
-          SharedPreferences prefs = hlp.getSharedPrefs();
         @Override
         protected Boolean doInBackground(Void... v)
         {
           TDLog.v("import settings - functional " + functional );
-          return TDSetting.importSettings( prefs, all );
+          return TDSetting.importSettings( mPrefs, all );
         }
         @Override
         protected void onPostExecute( Boolean v )
@@ -114,6 +118,7 @@ public class ExportDialogSettings extends MyDialog
           } else {
             TDToast.makeWarn( R.string.imported_settings_failed );
           }
+          mParent.reloadPreferences();
         }
       }).execute();
       

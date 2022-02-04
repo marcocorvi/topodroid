@@ -103,9 +103,14 @@ public class TDandroid
   public static final int TITLE_TOPOROBOT  = 0xffdbd100; // ORANGE
   public static final int TITLE_ANOMALY    = 0xffff3333; // BRIGHT RED
 
-  public static void applyEditor( Editor editor )
+  /** apply the changes stored in the editor
+   * @param editor   preferences editor
+   * @return true if successful
+   */
+  public static boolean applyEditor( Editor editor )
   {
-    editor.apply(); 
+    // editor.apply(); 
+    return editor.commit(); 
   }
 
   static boolean MustRestart = false; // whether need to restart app

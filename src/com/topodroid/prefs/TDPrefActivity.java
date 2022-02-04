@@ -25,6 +25,7 @@ import com.topodroid.DistoX.R;
 
 import android.content.Intent;
 import android.content.Context;
+import android.content.SharedPreferences;
 // import android.content.res.Resources;
 import android.content.res.Configuration;
 
@@ -61,6 +62,10 @@ public class TDPrefActivity extends Activity
   private Context mCtx;
   private TDPref[] mPrefs;
 
+  /** find a preference by the name
+   * @param name    preference name
+   * @return the requested preference (or null if not found)
+   */
   TDPref findPreference( String name ) 
   {
     if ( mPrefs == null ) return null;
@@ -70,6 +75,8 @@ public class TDPrefActivity extends Activity
     return null;
   }
 
+  /** lifecycle: activity destroy
+   */
   @Override
   public void onDestroy( )
   {
@@ -79,6 +86,9 @@ public class TDPrefActivity extends Activity
     // if (mPrefCategory == TDPrefCat.PREF_CATEGORY_ALL ) { TopoDroidApp.mPrefActivityAll = null; }
   }
 
+  /** lifecycle: activity create
+   * @param savedInstanceState  saved state (unused)
+   */
   @Override
   public void onCreate(Bundle savedInstanceState)
   {
@@ -109,6 +119,8 @@ public class TDPrefActivity extends Activity
     }
   }
 
+  /** react to a user tap on the BACK key
+   */
   @Override
   public void onBackPressed () 
   {
@@ -127,16 +139,22 @@ public class TDPrefActivity extends Activity
     super.onBackPressed();
   }
 
+  /** set the title of the window
+   */
   private void setTheTitle()
   {
     setTitle( getResources().getString( TDPrefCat.mTitleRes[ mPrefCategory ] ) );
   }
 
-  void startExportDialog()
+  /** start the dialog to export/import settings
+   */
+  void startExportDialog( SharedPreferences prefs )
   {
-    (new ExportDialogSettings( this, R.string.title_export_settings ) ).show();
+    (new ExportDialogSettings( this, this, prefs, R.string.title_export_settings ) ).show();
   }
 
+  /** load the preferences
+   */
   private boolean loadPreferences( )
   {
     setContentView( R.layout.pref_activity );
@@ -224,7 +242,7 @@ public class TDPrefActivity extends Activity
         if ( v != null ) {
           v.setOnClickListener( new OnClickListener() {
             @Override
-            public void onClick( View v ) { startExportDialog(); }
+            public void onClick( View v ) { startExportDialog( hlp.getSharedPrefs() ); }
           } );
         }
       }
@@ -290,9 +308,13 @@ public class TDPrefActivity extends Activity
     return true;
   }
 
-  // called by TopoDroidApp.setLocale
+  /** reload preferences - only for the general preference screen
+   * @note called by TopoDroidApp.setLocale and ExportDialogSettings
+   */
   public static void reloadPreferences() { if ( mPrefActivityAll != null ) mPrefActivityAll.doReloadPreferences(); }
 
+  /** reload preferences (implementation) - only for the general preference screen
+   */
   private void doReloadPreferences()
   {
     // TDLog.v( "reload prefs. cat " + mPrefCategory );
@@ -319,6 +341,10 @@ public class TDPrefActivity extends Activity
     }
   }
 
+  /** link a subscreen preference
+   * @param pref_name   preferece name
+   * @param category    preferece catagory
+   */
   private void linkPreference( String pref_name, int category )
   {
     // if ( pref_name == null ) return;
@@ -340,6 +366,11 @@ public class TDPrefActivity extends Activity
     } );
   }
 
+  /** react to the result of a sub-activity
+   * @param request    request code
+   * @param result     result code (either OK or CANCEL)
+   * @param intent     return intent
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     Bundle extras = (intent != null)? intent.getExtras() : null;

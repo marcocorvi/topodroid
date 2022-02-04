@@ -66,7 +66,7 @@ public class TDSetting
   public static final int DASHING_VIEW    = 3;
 
   private static String defaultTextSize   = "16";
-  private static String defaultButtonSize = TDString.ONE;
+  private static String defaultButtonSize = TDString.THREE;
 
   private static int FLAG_BUTTON = 1;
   private static int FLAG_MENU   = 2;
@@ -771,8 +771,6 @@ public class TDSetting
   {
     SharedPreferences prefs = pref_hlp.getSharedPrefs();
   
-    // defaultTextSize   = my_app.getResources().getString( R.string.default_textsize );
-    // defaultButtonSize = my_app.getResources().getString( R.string.default_buttonsize );
     defaultTextSize   = res.getString( R.string.default_textsize );
     defaultButtonSize = res.getString( R.string.default_buttonsize );
     // TDLog.v("SETTING default button size " + defaultButtonSize );
@@ -2679,28 +2677,46 @@ public class TDSetting
   //   editor.apply();
   // }
 
-  private static void setPreference( SharedPreferences sp, String name, String value )
+  /** change a string preference
+   * @param sp    shared prefernces
+   * @param name  preference name
+   * @param value preference value
+   * @return true if successful
+   */
+  private static boolean setPreference( SharedPreferences sp, String name, String value )
   {
     // TDLog.v("Setting set pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putString( name, value );
-    TDandroid.applyEditor( editor );
+    return TDandroid.applyEditor( editor );
   }
 
-  private static void setPreference( SharedPreferences sp, String name, boolean value )
+  /** change a boolean preference
+   * @param sp    shared prefernces
+   * @param name  preference name
+   * @param value preference value
+   * @return true if successful
+   */
+  private static boolean setPreference( SharedPreferences sp, String name, boolean value )
   {
     // TDLog.v("Setting set b-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putBoolean( name, value );
-    TDandroid.applyEditor( editor );
+    return TDandroid.applyEditor( editor );
   }
 
-  public static void setPreference( SharedPreferences sp, String name, long value )
+  /** change a long preference
+   * @param sp    shared prefernces
+   * @param name  preference name
+   * @param value preference value
+   * @return true if successful
+   */
+  public static boolean setPreference( SharedPreferences sp, String name, long value )
   {
     // TDLog.v("Setting set l-pref " + name + " " + value );
     Editor editor = sp.edit();
     editor.putLong( name, value );
-    TDandroid.applyEditor( editor );
+    return TDandroid.applyEditor( editor );
   }
 
   private static void setPreference( Editor editor, String name, String value )  { editor.putString( name, value ); }
@@ -2708,8 +2724,18 @@ public class TDSetting
   // private static void setPreference( Editor editor, String name, long value )    { editor.putLong( name, value ); }
   private static void setPreference( Editor editor, String name, int value )     { editor.putString( name, Integer.toString(value) ); }
   private static void setPreference( Editor editor, String name, float value )   { editor.putString( name, Float.toString(value) ); }
-  private static void commitEditor( Editor editor ) { TDandroid.applyEditor( editor ); }
 
+  /** commit the changes that are in the editor
+   * @param editor   prefernces editor
+   * @return true if succesful
+   */
+  private static boolean commitEditor( Editor editor ) { return TDandroid.applyEditor( editor ); }
+
+  /** @return the (long) value of a preference
+   * @param sp         shared preferences
+   * @param name       preference name
+   * @param def_value  default preference value
+   */
   public static long getLongPreference( SharedPreferences sp, String name, long def_value )
   {
     return sp.getLong( name, def_value ); 
@@ -2764,8 +2790,8 @@ public class TDSetting
       pw.printf(Locale.US, "Palettes %c \n", tf(mPalettes) );
       pw.printf(Locale.US, "Orientation %d \n", mOrientation );
 
-      // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       pw.printf(Locale.US, "Export-format data %d, plot %d, auto-plot %d \n", mExportShotsFormat, mExportPlotFormat, mAutoExportPlotFormat );
+      // pw.printf(Locale.US, "Auto-export %c data %d, plot %d \n", tf(mDataBackup), mExportShotsFormat, mExportPlotFormat );
       String eol = mSurvexEol.equals("\r\n")? eol = "\\r\\n" : "\\n";
       pw.printf(Locale.US, "Survex: eol \"%s\", splay %c, LRUD %c \n", eol, tf(mSurvexSplay), tf(mSurvexLRUD) );
       pw.printf(Locale.US, "Compass: swap_LR %c, prefix %c, splays %c \n", tf(mSwapLR), tf(mExportStationsPrefix), tf(mCompassSplays) );
@@ -2965,6 +2991,7 @@ public class TDSetting
                 return false;
               }
               setTextSize( size ); setPreference( editor, "DISTOX_TEXT_SIZE", mTextSize );
+              // TDLog.v("Setting text size " + mTextSize );
             } else {
               // TDLog.v("Setting text vals len " + vals.length );
               return false;
@@ -3551,7 +3578,6 @@ public class TDSetting
       TDLog.Error("failed to export settings"); 
       return false;
     }
-    commitEditor( editor );
-    return true;
+    return commitEditor( editor );
   }
 }
