@@ -17,6 +17,12 @@
      <item name="view">视图</item>
   </string-array>
 
+  <!-- TODO string-array name="splayColors">
+     <item name="none">none</item>
+     <item name="all">all</item>
+     <item name="palette">palette</item>
+  </string-arrayi -->
+
   <string-array name="feedbackMode">
      <item name="none">无</item>
      <item name="sound">声音</item>

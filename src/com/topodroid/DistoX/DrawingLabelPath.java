@@ -134,10 +134,12 @@ public class DrawingLabelPath extends DrawingPointPath
   /** draw the label on the screen
    * @param canvas   canvas
    * @param matrix   transform matrix
+   * @param scale    scaling factor - not used
    * @param bbox     clipping rectangle
+   * @note scale is not used but this signature is necessary because DrawingLabelPath extends DrawingPointPath
    */
   @Override
-  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );

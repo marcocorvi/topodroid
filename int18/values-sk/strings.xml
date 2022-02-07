@@ -287,6 +287,7 @@ Refer to the web pages for details.\n
     <string name="error_name_invalid">Nevhodné meno projektu</string>
     <string name="error_name_required">Vyžaduje sa meno</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
 
 	
     <!-- UNUSED string name="error_dir_exists">Adresár už existuje</string -->
@@ -1389,6 +1390,11 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Pomocné zámery azimutu nad prahovú hodnotu sú v profile čiarkované </string>
   <string name="pref_section_splay_title">Hodnota pomocnej zámery-rez</string>
   <string name="pref_section_splay_message">Pomocné zámery zvierajúce väčší ako tento uhol sú v reze čiarkované</string>
+  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
+  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
+  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
+  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+
   <!-- UNUSED string name="pref_data_backup_title">Automatické exportovanie</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatický export údajov (vyžaduje predvolený formát)</string -->
   <string name="pref_editable_stations_title">Editovateľné Staničenia</string>

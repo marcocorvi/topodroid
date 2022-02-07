@@ -43,7 +43,7 @@
   
   <string-array name="splayColors">
      <item name="none">none</item>
-     <item name="all">all</item>
+     <item name="all">picker</item>
      <item name="palette">palette</item>
   </string-array>
   <string-array name="splayColorsValue">

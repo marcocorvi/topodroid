@@ -14,6 +14,12 @@
      <item name="view">view</item>
   </string-array -->
 
+  <!-- TODO string-array name="splayColors">
+     <item name="none">none</item>
+     <item name="all">all</item>
+     <item name="palette">palette</item>
+  </string-arrayi -->
+
   <!-- TODO string-array name="feedbackMode">
      <item name="none">none</item>
      <item name="sound">sound</item>

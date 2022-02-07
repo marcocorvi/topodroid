@@ -3036,6 +3036,12 @@ public class DrawingWindow extends ItemDrawer
         if ( st_f != null && st_t != null ) {
           TDVector vf = new TDVector( ytt - (float)st_f.s, (float)st_f.e - xtt, ztt - (float)st_f.v ); // N,E,Up
           TDVector vt = new TDVector( ytt - (float)st_t.s, (float)st_t.e - xtt, ztt - (float)st_t.v );
+          float af = vf.dot( V0 );
+          float at = vt.dot( V0 );
+          // intercept   F ----- X ----- T
+          //                af      at
+          float tt = Math.abs( af / ( af - at ) );
+
           xfrom = vf.dot(V1); 
           yfrom = vf.dot(V2);
           xto   = vt.dot(V1); 
@@ -3044,6 +3050,15 @@ public class DrawingWindow extends ItemDrawer
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selecteable
           mDrawingSurface.addDrawingStationName( b.mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
           mDrawingSurface.addDrawingStationName( b.mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
+          if ( tt >= 0 && tt <= 1 ) {
+            float xt = xfrom + tt * ( xto - xfrom );
+            float yt = yfrom + tt * ( yto - yfrom );
+            // float zt = zfrom + tt * ( zto - zfrom );
+            // zfrom =  dist * v.dot(V0);
+            if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
+            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xt,yt), DrawingUtil.toSceneY(xt,yt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
+            mDrawingSurface.addDrawingDotPath( path );
+          }
         } else {
           TDLog.Error( "leg block without station " + b.mFrom + " " + b.mTo );
         }
@@ -8366,6 +8381,7 @@ public class DrawingWindow extends ItemDrawer
   public void setLine( int k, boolean update_recent )
   {
     int current = BrushManager.getLineIndex( mRecentLine[k] );
+    if ( PlotType.isAnySection( mType ) && BrushManager.isLineSection( current ) ) current = BrushManager.getLineWallIndex();
     // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
     if ( current >= 0 ) {
       mCurrentLine = current;

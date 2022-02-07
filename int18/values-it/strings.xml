@@ -285,6 +285,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_name_invalid">Nome progetto non valido</string>
     <string name="error_name_required">Nome mancante</string>
     <string name="error_name_duplicate">Nome duplicato</string>
+    <string name="error_no_section_in_section">No X-section in X-section</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory già esistente</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -1375,6 +1376,11 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
   <string name="pref_section_splay_title">Angolo di soglia tratteggio splay</string>
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
+  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
+  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
+  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
+  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+
   <!-- UNUSED string name="pref_data_backup_title">Auto-esporta dati</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string -->
   <string name="pref_zipped_symbols_title">File simboli formato ZIP</string>

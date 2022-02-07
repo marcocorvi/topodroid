@@ -285,6 +285,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Nome exigido</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
 
     <!-- UNUSED string name="error_dir_exists">Diretório já existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -1363,6 +1364,11 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Medida auxiliar divergindo do azimute acima deste limite será pontilhada</string>
   <string name="pref_section_splay_title">Limite pontilhamento de med. aux. X plano corte</string>
   <string name="pref_section_splay_message">Acima deste ângulo com o plano do corte, a medida auxiliar será pontilhada</string>
+  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
+  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
+  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
+  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+
   <!-- UNUSED string name="pref_data_backup_title">Exportação automática</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Exportação automática de dados (exige definição de formato padrão)</string -->
   <string name="pref_zipped_symbols_title">Arquivos de símbolos zipados</string>

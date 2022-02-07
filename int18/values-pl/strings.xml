@@ -288,6 +288,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="error_name_invalid">Invalid project name</string -->
     <string name="error_name_required">Wymagana nazwa</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
 
     <!-- UNUSED string name="error_dir_exists">Katalog już istnieje</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -1378,6 +1379,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- TODO string name="pref_horiz_splay_message">Splay off azimuth more than this are dashed</string -->
   <!-- TODO string name="pref_section_splay_title">Splay dash angle-threshold</string -->
   <string name="pref_section_splay_message">Domiary nad katem w płaszczyznie przekroju kreskowane</string>
+  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
+  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
+  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
+  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+
   <!-- UNUSED string name="pref_data_backup_title">Automatyczny eksport danych</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatyczny eksport danych (wymagany domyślny format)</string -->
   <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->

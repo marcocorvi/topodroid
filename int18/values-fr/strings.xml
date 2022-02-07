@@ -281,6 +281,7 @@ Refer to the web pages for details.\n
     <string name="error_name_invalid">Nom de projet invelide</string>
 <string name="error_name_required">Nom nécessaire</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
+    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
 
 <!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -1358,6 +1359,11 @@ Refer to the web pages for details.\n
   <string name="pref_horiz_splay_message">Les visées latérales d\'habillage avec azimut supérieur à ce seuil sont en pointillés</string>
   <string name="pref_section_splay_title"><em>Seuil de l\'angle du tiret</em></string>
   <string name="pref_section_splay_message">Les visées latérales d\'habillage des sections transverses avec angle inférieur à ce seuil sont en pointillés</string>
+  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
+  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
+  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
+  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+
   <!-- UNUSED string name="pref_data_backup_title">Auto-export des données</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Export automatique des données (nécessite le format par défaut)</string -->
   <string name="pref_zipped_symbols_title">Fichiers de symboles zippés</string>

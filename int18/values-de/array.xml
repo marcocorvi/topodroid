@@ -14,6 +14,12 @@
      <item name="view">je nach Ansicht</item>
   </string-array>
 
+  <!-- TODO string-array name="splayColors">
+     <item name="none">none</item>
+     <item name="all">all</item>
+     <item name="palette">palette</item>
+  </string-arrayi -->
+
     <string-array name="feedbackMode">
         <item name="none">keine</item>
         <item name="sound">Ton</item>
