@@ -1001,7 +1001,7 @@ public class TDPrefKey
     // "DISTOX_DASH_SPLAY",           // whether dash-splay are coherent between plan and profile
     // "DISTOX_VERT_SPLAY",      // 9 // splays with clino over this are shown with dashed/dotted line
     // "DISTOX_HORIZ_SPLAY",          // splays off-azimuth over this are shown with dashed/dotted line
-    // "DISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
+    // "ashedDISTOX_SECTION_SPLAY",        // splays with angle over this are shown with dashed/dotted line
     // "DISTOX_HTHRESHOLD",      // 12 // if clino is over thr, H_SECTION is horizontal (has north arrow)
     null
   };
@@ -1501,13 +1501,15 @@ public class TDPrefKey
 
   public static String[] GEEKsplay = {
     "DISTOX_SPLAY_CLASSES",   // splay classes
-    "DISTOX_SPLAY_COLOR",     // splay color
-    // "DISTOX_SPLAY_AS_DOT",    // plot splays as dots
+    "DISTOX_DISCRETE_COLORS", // splay color: 0 no, 1 yes, 2 discrete - was DISTOX_SPLAY_COLOR
+    // "DISTOX_SPLAY_AS_DOT", // plot splays as dots
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
     "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
     "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
     "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
     "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
+    "DISTOX_SPLAY_DASH_COLOR",      // color for dash splay 
+    "DISTOX_SPLAY_DOT_COLOR",       // color for dot splay 
   };
 
   public static int[] GEEKsplaytitle = {
@@ -1519,6 +1521,8 @@ public class TDPrefKey
     R.string.pref_vert_splay_title,
     R.string.pref_horiz_splay_title,
     R.string.pref_section_splay_title,
+    R.string.pref_splay_dash_color_title,
+    R.string.pref_splay_dot_color_title,
   };
 
   public static int[] GEEKsplaydesc = {
@@ -1530,17 +1534,21 @@ public class TDPrefKey
     R.string.pref_vert_splay_message,  
     R.string.pref_horiz_splay_message,  
     R.string.pref_section_splay_message, 
+    R.string.pref_splay_dash_color_summary,
+    R.string.pref_splay_dot_color_summary,
   };
 
   public static String[] GEEKsplaydef = {
     FALSE,
-    FALSE,
+    TDString.ZERO,
     // FALSE,
     "80",
     TDString.ZERO,
     TDString.FIFTY,
     TDString.SIXTY,
     TDString.SIXTY,
+    "7190271", // "4285380351", // "0xff6db6ff", // BLUE
+    "7190271", 
   };
 
   // ----------------------------------- 3D ----------------------------------

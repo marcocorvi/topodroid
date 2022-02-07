@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.DPoint2D;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;
@@ -34,13 +35,13 @@ public class OsmFactory
    */
   class Path
   {
-    ArrayList< Point2D > nodes;  // nodes of the path
+    ArrayList< DPoint2D > nodes;  // nodes of the path
     
     /** cstr
      */
     Path()
     {
-      nodes = new ArrayList< Point2D >();
+      nodes = new ArrayList< DPoint2D >();
     }
     
     /** @return the number of nodes
@@ -50,7 +51,7 @@ public class OsmFactory
     /** add a point to the nodes
      * @param pt    point to add
      */
-    void add( Point2D pt ) { nodes.add( pt ); }
+    void add( DPoint2D pt ) { nodes.add( pt ); }
 
     /** draw the path on a canvas
      * @param canvas    canvas
@@ -59,9 +60,9 @@ public class OsmFactory
     void draw( Canvas canvas, Paint paint )
     {
       if ( size() < 2 ) return;
-      Point2D p1 = nodes.get( 0 );
+      DPoint2D p1 = nodes.get( 0 );
       for ( int k=1; k<size(); ++k ) {
-        Point2D p2 = nodes.get( k );
+        DPoint2D p2 = nodes.get( k );
         // draw line p1-p2
         canvas.drawLine( (float)p1.x, (float)p1.y, (float)p2.x, (float)p2.y, paint );
         p1 = p2;
@@ -99,7 +100,7 @@ public class OsmFactory
      * @param pt   point to add
      * @note the work-path is created if needed, and added to the array of paths
      */
-    void append( Point2D pt )
+    void append( DPoint2D pt )
     {
       if ( path == null ) {
         path = new Path();
@@ -239,7 +240,7 @@ public class OsmFactory
     double lon = 0;
     Way way = null;
 
-    HashMap<String, Point2D> nodes = new HashMap<>();
+    HashMap<String, DPoint2D> nodes = new HashMap<>();
 
     try {
       // FileReader fis = new FileReader( path );
@@ -274,7 +275,7 @@ public class OsmFactory
           if ( nodeId != null && lon >= m1 && lon <= m2 && lat >= p1 && lat <= p2 ) {
             double x = (m2x( lon ) - x1) / mXres; // bitmap coordinates
             double y = height - 1 - (p2y( lat ) - y1) / mYres;
-            nodes.put( nodeId, new Point2D( x, y ) ); 
+            nodes.put( nodeId, new DPoint2D( x, y ) ); 
           }       
           inNode = false;
           nodeId = null;
@@ -286,7 +287,7 @@ public class OsmFactory
             int idx = line.indexOf( " ref=" );
             if ( idx > 0 ) {
               String ref = getValue( line, idx+6 );
-              Point2D pt = nodes.get( ref );
+              DPoint2D pt = nodes.get( ref );
               if ( pt != null ) { 
                 way.append( pt );
               } else {

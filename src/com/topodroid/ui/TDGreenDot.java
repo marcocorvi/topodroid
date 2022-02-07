@@ -52,27 +52,27 @@ public class TDGreenDot
    * @param dot_radius circle radius
    * @param paint      dot paint
    */
-  public static void draw( Canvas canvas, Matrix matrix, float scale, float x, float y, float dot_radius, Paint paint )
+  public static void draw( Canvas canvas, Matrix matrix, float x, float y, float dot_radius, Paint paint )
   {
     Path path = new Path();
-    path.addCircle( x, y, dot_radius*scale, Path.Direction.CCW );
+    path.addCircle( x, y, dot_radius, Path.Direction.CCW );
     path.transform( matrix );
     canvas.drawPath( path, paint );
   }
 
-  /** draw a point, as a dot with the given paint
-   * @param canvas     canvas
-   * @param x          X coordinate
-   * @param y          Y coordinate
-   * @param dot_radius circle radius
-   * @param paint      dot paint
-   */
-  public static void draw( Canvas canvas, float scale, float x, float y, float dot_radius, Paint paint )
-  {
-    Path path = new Path();
-    path.addCircle( x, y, dot_radius*scale, Path.Direction.CCW );
-    canvas.drawPath( path, paint );
-  }
+  // /** draw a point, as a dot with the given paint
+  //  * @param canvas     canvas
+  //  * @param x          X coordinate
+  //  * @param y          Y coordinate
+  //  * @param dot_radius circle radius
+  //  * @param paint      dot paint
+  //  */
+  // public static void draw( Canvas canvas, float x, float y, float dot_radius, Paint paint )
+  // {
+  //   Path path = new Path();
+  //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
+  //   canvas.drawPath( path, paint );
+  // }
 
 }
 

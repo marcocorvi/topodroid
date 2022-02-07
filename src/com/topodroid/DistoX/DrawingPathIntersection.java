@@ -13,12 +13,17 @@
  */
 package com.topodroid.DistoX;
 
+// import com.topodroid.math.Point2D;
 
 class DrawingPathIntersection // extends PointF
 {
-  public DrawingPath path; // reference
+  public DrawingPath path; // reference shot 
   float tt;         // intersection coordinate
 
+  /** cstr
+   * @param path   path of intersecting shot
+   * @param t0     intersection abscissa
+   */
   DrawingPathIntersection( DrawingPath path0, float t0 )
   {
     path = path0;

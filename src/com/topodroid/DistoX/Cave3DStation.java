@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.DPoint2D;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -197,8 +198,13 @@ public class Cave3DStation extends Vector3D
    */
   Cave3DStation getPathPrevious() { return pathprev; }
 
+  /** @return the 3D vector
+   */
   Vector3D toVector3D() { return new Vector3D( x, y, z ); }
-  Point2D  toPoint2D()  { return new Point2D( x, y ); }
+  
+  /** @return the 2D point X-Y
+   */
+  DPoint2D  toPoint2D() { return new DPoint2D( x, y ); }
 
   // boolean coincide( Cave3DStation p, double eps ) this is Vector3D::coincide()
 

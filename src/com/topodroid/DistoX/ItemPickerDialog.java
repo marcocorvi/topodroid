@@ -95,7 +95,8 @@ class ItemPickerDialog extends MyDialog
   /**
    * @param context   context
    * @param parent    DrawingWindow parent
-   * @param type      drawing type
+   * @param type      plot type
+   * @param item_type initial symbol class to show
    */
   ItemPickerDialog( Context context, ItemDrawer parent, long type, int item_type  )
   {
@@ -506,7 +507,9 @@ class ItemPickerDialog extends MyDialog
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // TDLog.v( "set TypeAndItem type point pos " + index + " index " + is.mIndex );
-          mSelectedPoint = is.mIndex;
+          if ( ! PlotType.isAnySection( mPlotType ) || ! BrushManager.isPointSection( is.mIndex ) ) {
+            mSelectedPoint = is.mIndex;
+          }
           // mParent.get().pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
           setSeekBarProgress();
           mBTpoint.setTextColor( TDColor.SYMBOL_ON );
@@ -518,7 +521,7 @@ class ItemPickerDialog extends MyDialog
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
-          if ( mPlotType != PlotType.PLOT_SECTION || ! BrushManager.isLineSection( is.mIndex ) ) {
+          if ( ! PlotType.isAnySection( mPlotType ) || ! BrushManager.isLineSection( is.mIndex ) ) {
             mSelectedLine = is.mIndex;
             // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           // } else {

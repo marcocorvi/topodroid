@@ -29,8 +29,8 @@ public class TDVersion
   public static final String SYMBOL_VERSION = "37";
   
   // database version
-  public static final String DB_VERSION = "44"; // FIXME agrees with Cave3DThParser values
-  public static final int DATABASE_VERSION = 44;
+  public static final String DB_VERSION = "45"; // NOTE agrees with Cave3DThParser values
+  public static final int DATABASE_VERSION = 45;
   public static final int DATABASE_VERSION_MIN = 21; // was 14
 
   public static final int DEVICE_DATABASE_VERSION = 27;
@@ -84,6 +84,10 @@ public class TDVersion
   // public static int checkCave3DVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3D", MIN_CAVE3D_VERSION ); }
   // public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.DistoX", MIN_TOPODROID_VERSION ); }
 
+  /** set the app version getting it from the Package Manager
+   * @param context   context
+   * @return true if successful
+   */
   public static boolean setVersion( Context context )
   {
     // TDLog.Profile("TDApp onCreate");

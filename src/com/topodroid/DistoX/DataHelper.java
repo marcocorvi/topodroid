@@ -158,9 +158,11 @@ public class DataHelper extends DataSetObservable
     };
 
   static final private String[] mPlotFieldsFull =
-    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap", "intercept" };
+    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick",
+      "orientation", "maxscrap", "intercept", "center_x", "center_y", "center_z" };
   static final private String[] mPlotFields =
-    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick", "orientation", "maxscrap", "intercept" };
+    { "id", "name", "type", "start", "view", "xoffset", "yoffset", "zoom", "azimuth", "clino", "hide", "nick",
+      "orientation", "maxscrap", "intercept", "center_x", "center_y", "center_z" };
 
   static final private String[] mSketchFields =
     { "id", "name", "start", "st1", "st2",
@@ -245,10 +247,18 @@ public class DataHelper extends DataSetObservable
       TDLog.v( "App does not have database helper " + db_name + " - trying to open it");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-        if ( myDB != null ) {
+        if ( myDB == null ) {
           TDLog.v( "open and create new database if necessary");
           DistoXOpenHelper.createTables( myDB );
           myDB.setVersion( TDVersion.DATABASE_VERSION );
+        } else {
+          int oldVersion = myDB.getVersion();
+          int newVersion = TDVersion.DATABASE_VERSION;
+          TDLog.v( "opened existing database: old version " + oldVersion + " current version " + newVersion );
+          if ( oldVersion < newVersion ) {
+            DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+            myDB.setVersion( TDVersion.DATABASE_VERSION );
+          }
         }
       } catch ( SQLiteException e ) {
         TDLog.Error( "opened database error: " + e.getMessage() );
@@ -2139,7 +2149,7 @@ public class DataHelper extends DataSetObservable
     // doStatement( updatePlotViewStmt, "plt view" );
   }
 
-  // for X-sections hide stores the value of incercept TT
+  // for leg xsections store the value of incercept TT
   void updatePlotIntercept( long pid, long sid, float intercept )
   {
     if ( myDB == null ) return; // false;
@@ -2147,6 +2157,17 @@ public class DataHelper extends DataSetObservable
     PrintWriter  pw = new PrintWriter( sw );
     pw.format( Locale.US, "UPDATE plots set intercept=%f WHERE surveyId=%d AND id=%d", intercept, sid, pid );
     doExecSQL( sw, "plt intercept" );
+  }
+
+  // for multileg xsections stores the value of incercept TT=2 and center
+  void updatePlotCenter( long pid, long sid, Vector3D center )
+  {
+    if ( myDB == null ) return; // false;
+    if ( center == null ) return;
+    StringWriter sw = new StringWriter();
+    PrintWriter  pw = new PrintWriter( sw );
+    pw.format( Locale.US, "UPDATE plots set intercept=2.0, center_x=%f, center_y=%f, center_z=%f WHERE surveyId=%d AND id=%d", center.x, center.y, center.z, sid, pid );
+    doExecSQL( sw, "plt center" );
   }
 
   float selectPlotIntercept( long pid, long sid )
@@ -2730,6 +2751,7 @@ public class DataHelper extends DataSetObservable
      plot.orientation = (int)(cursor.getLong(12));
      plot.maxscrap = (int)(cursor.getLong(13));
      plot.intercept = (float)(cursor.getDouble(14));
+     plot.center = new Vector3D( (float)(cursor.getDouble(15)), (float)(cursor.getDouble(16)), (float)(cursor.getDouble(17)) );
      return plot;
    }
 
@@ -2974,6 +2996,11 @@ public class DataHelper extends DataSetObservable
   //   if (cursor != null && !cursor.isClosed()) cursor.close();
   // }
 
+  /** select a shot given the ID
+   * @param id   shot ID
+   * @param sid  survey ID
+   * @return the shot
+   */
   DBlock selectShot( long id, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "selectShot " + id + "/" + sid );
@@ -3346,6 +3373,37 @@ public class DataHelper extends DataSetObservable
               list.add( block );
             }
           }
+        } while (cursor.moveToNext());
+      }
+      // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    return list;
+  }
+
+  /** select all the splays at some stations
+   * @param sid        survey id
+   * @param stations   stations names 
+   * @return list of shots
+   */
+  List< DBlock > selectAllSplaysAtStations( long sid, TreeSet< String > stations )
+  {
+    List< DBlock > list = new ArrayList<>();
+    if ( stations == null || myDB == null ) return list;
+    int sz = stations.size();
+    if ( sz == 0 ) return list;
+    for ( String station : stations ) {
+      Cursor cursor = myDB.query( SHOT_TABLE, mShotFields,
+        "surveyId=? and status=? and fStation=? and tStation=\"\"",
+        new String[] { Long.toString(sid), TDStatus.NORMAL_STR, station },
+        null, null, "id" );
+      if (cursor.moveToFirst()) {
+        do {
+          // if ( cursor.getLong(11) == 0 ) { // non-leg blocks
+            DBlock block = new DBlock();
+            fillBlock( sid, block, cursor );
+            list.add( block );
+          // }
         } while (cursor.moveToNext());
       }
       // TDLog.Log( TDLog.LOG_DB, "select All Shots At Station list size " + list.size() );
@@ -4331,9 +4389,31 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
+  /** @return key-value set to insert a plot
+   * @param sid     survey ID
+   * @param id      plot id
+   * @param name    plot name
+   * @param type    plot type code
+   * @param status  plot status
+   * @param start   plot origin (plan/profile), viewing station (leg-xsection)
+   * @param view    viewed station (leg-xstation)
+   * @param xoffset display X offset
+   * @param yoffset display Y offset
+   * @param zoom    display zoom
+   * @param azimuth azimuth (xsection / projected profile)
+   * @param clino   clino (xsection)
+   * @param hide    hiding stations (plan/profile), parent plot (xsection)
+   * @param nick    comment (xsection)
+   * @param orientation plot orientation, either PORTRAIT (0) or LANDSCAPE (1)
+   * @param intercept   leg-xsection intercept abscissa
+   * @param center_x    multileg xsection center X
+   * @param center_y    multileg xsection center Y
+   * @param center_z    multileg xsection center Z
+   */
   private ContentValues makePlotContentValues( long sid, long id, String name, long type, long status, String start, String view,
                           double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                          String hide, String nick, int orientation, int maxscrap, double intercept )
+                          String hide, String nick, int orientation, int maxscrap, double intercept,
+                          double center_x, double center_y, double center_z )
   {
     ContentValues cv = new ContentValues();
     cv.put( "surveyId", sid );
@@ -4353,12 +4433,63 @@ public class DataHelper extends DataSetObservable
     cv.put( "orientation", orientation );
     cv.put( "maxscrap",    maxscrap );
     cv.put( "intercept",   intercept );
+    cv.put( "center_x",    center_x );
+    cv.put( "center_y",    center_y );
+    cv.put( "center_z",    center_z );
     return cv;
   }
 
+  /** insert a plot
+   * @param sid     survey ID
+   * @param id      plot id
+   * @param name    plot name
+   * @param type    plot type code
+   * @param status  plot status
+   * @param start   ... viewing station (xsection)
+   * @param view    viewed station (xstation)
+   * @param xoffset display X offset
+   * @param yoffset display Y offset
+   * @param zoom    display zoom
+   * @param azimuth azimuth (xsection / projected profile)
+   * @param clino   clino (xsection)
+   * @param hide    hiding stations (plan/profile), parent plot (xsection)
+   * @param nick    comment (xsection)
+   * @param orientation plot orientation, either PORTRAIT (0) or LANDSCAPE (1)
+   * @return ID of the new plot, -1 if failure
+   */
   long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
-                          double xoffset, double yoffset, double zoom, double azimuth, double clino,
-                          String hide, String nick, int orientation )
+                   double xoffset, double yoffset, double zoom, double azimuth, double clino,
+                   String hide, String nick, int orientation )
+  {
+    return insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, -1, 0, 0, 0 );
+  }
+
+  /** insert a plot
+   * @param sid     survey ID
+   * @param id      plot id
+   * @param name    plot name
+   * @param type    plot type code
+   * @param status  plot status
+   * @param start   ...
+   * @param view    viewed station (xstation)
+   * @param xoffset display X offset
+   * @param yoffset display Y offset
+   * @param zoom    display zoom
+   * @param azimuth azimuth (xsection / projected profile)
+   * @param clino   clino (xsection)
+   * @param hide    hiding stations (plan/profile), parent plot (xsection)
+   * @param nick    comment (xsection)
+   * @param orientation plot orientation, either PORTRAIT (0) or LANDSCAPE (1)
+   * @param intercept   leg-xsection intercept abscissa
+   * @param center_x    multileg xsection center X
+   * @param center_y    multileg xsection center Y
+   * @param center_z    multileg xsection center Z
+   * @return ID of the new plot, -1 if failure
+   */
+  long insertPlot( long sid, long id, String name, long type, long status, String start, String view,
+                   double xoffset, double yoffset, double zoom, double azimuth, double clino,
+                   String hide, String nick, int orientation,
+                   double intercept, double center_x, double center_y, double center_z )
   {
     // TDLog.v( "DB insert plot " + name + " start " + start + " azimuth " + azimuth );
     // TDLog.v( "insert plot <" + name + "> hide <" + hide + "> nick <" + nick + ">" );
@@ -4368,13 +4499,18 @@ public class DataHelper extends DataSetObservable
     if ( view == null ) view = TDString.EMPTY;
     if ( id == -1L ) id = maxId( PLOT_TABLE, sid );
     // maxscrap = 0
-    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, 0, -1 );
+    ContentValues cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, 0, 
+                                              intercept, center_x, center_y, center_z );
     if ( ! doInsert( PLOT_TABLE, cv, "plot insert" ) ) { // failed
       id = -1L;
     }
     return id;
   }
 
+  /** @return the maximum ID in a table for a given survey
+   * @param table   table
+   * @param sid     survey ID
+   */
   private long maxId( String table, long sid )
   {
     long id = 1;
@@ -4392,7 +4528,11 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
-  // used only for AUDIO table to get negative indices
+  /** @return the minimum ID in a table for a given survey
+   * @param table   table
+   * @param sid     survey ID
+   * @note used only for AUDIO table to get negative indices
+   */
   private long minId( String table, long sid )
   {
     if ( myDB == null ) return -2L;
@@ -5003,7 +5143,7 @@ public class DataHelper extends DataSetObservable
        if (cursor.moveToFirst()) {
          do {
            pw.format(Locale.US,
-             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d, %.2f );\n",
+             "INSERT into %s values( %d, %d, \"%s\", %d, %d, \"%s\", \"%s\", %.2f, %.2f, %.2f, %.2f, %.2f, \"%s\", \"%s\", %d, %d, %.2f, %.2f, %.2f, %.2f );\n",
              PLOT_TABLE,
              sid,
              cursor.getLong(0),    // plot id
@@ -5021,7 +5161,10 @@ public class DataHelper extends DataSetObservable
              TDString.escape( cursor.getString(12) ), // nick
              cursor.getLong(13),   // orientation
              cursor.getLong(14),   // maxscrap
-             cursor.getDouble(15)  // intercept
+             cursor.getDouble(15), // intercept
+             cursor.getDouble(16), // center_x
+             cursor.getDouble(17), // center_y
+             cursor.getDouble(18)  // center_z
            );
          } while (cursor.moveToNext());
        }
@@ -5299,8 +5442,12 @@ public class DataHelper extends DataSetObservable
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
 	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
                double intercept = (db_version > 42)? scanline1.doubleValue( 0.5 ) : 0;
+               double center_x = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
+               double center_y = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
+               double center_z = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
-               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap, intercept );
+               cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap, intercept,
+                                           center_x, center_y, center_z );
                myDB.insert( PLOT_TABLE, null, cv ); 
                // TDLog.Log( TDLog.LOG_DB, "load from file plot " + sid + " " + id + " " + start + " " + name );
                // TDLog.v( "DB load from file plot " + sid + " " + id + " " + start + " " + name + " success " + success );
@@ -5831,7 +5978,10 @@ public class DataHelper extends DataSetObservable
             +   " nick TEXT, "
             +   " orientation INTEGER default 0, "
             +   " maxscrap INTEGER default 0, "
-            +   " intercept REAL default -1"
+            +   " intercept REAL default -1, "
+            +   " center_x REAL default 0, "
+            +   " center_y REAL default 0, "
+            +   " center_z REAL default 0 "
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"
@@ -6016,6 +6166,10 @@ public class DataHelper extends DataSetObservable
 	   case 43:
              updateSymbolKeys( db );
 	   case 44:
+             db.execSQL( "ALTER TABLE plots ADD COLUMN center_x REAL default 0" ); // east
+             db.execSQL( "ALTER TABLE plots ADD COLUMN center_y REAL default 0" ); // south
+             db.execSQL( "ALTER TABLE plots ADD COLUMN center_z REAL default 0" ); // down
+	   case 45:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

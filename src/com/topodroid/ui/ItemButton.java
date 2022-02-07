@@ -38,18 +38,30 @@ public class ItemButton extends Button
   private static final int H4  = 4;
   private static final int PAD = 4;
 
+  /** "first default" cstr
+   * @param context  context
+   */
   public ItemButton( Context context )
   {
     super( context );
     setDefault();
   }
 
+  /** "second default" cstr
+   * @param context  context
+   * @param attr     attribute set
+   */
   public ItemButton( Context context, android.util.AttributeSet attr )
   {
     super( context, attr );
     setDefault();
   }
 
+  /** "third default" cstr
+   * @param context  context
+   * @param attr     attribute set
+   * @param a        ???
+   */
   public ItemButton( Context context, android.util.AttributeSet attr, int a )
   {
     super( context, attr, a );
@@ -62,6 +74,8 @@ public class ItemButton extends Button
   //   setDefault();
   // }
 
+  /** set the default values
+   */
   private void setDefault()
   {
     setBackgroundColor( TDColor.BLACK );
@@ -70,11 +84,21 @@ public class ItemButton extends Button
     mPaint = null;
   }
 
+  /** switch highlight on/off
+   * @param on   whether to switch highlight ON
+   */
   public void highlight( boolean on )
   {
     setBackgroundColor( on ? 0xff663300 : TDColor.BLACK );
   }
 
+  /** cstr 
+   * @param context  context
+   * @param paint    paint
+   * @param path     button drawing path
+   * @param sx       path X-scale
+   * @param sy       path Y-scale
+   */
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy )
   {
     super(context);
@@ -83,6 +107,14 @@ public class ItemButton extends Button
     resetPaintPath( paint, path, sx, sy );
   }
 
+  /** cstr 
+   * @param context  context
+   * @param paint    paint
+   * @param path     button drawing path
+   * @param sx       path X-scale
+   * @param sy       path Y-scale
+   * @param pad      padding [pixels]
+   */
   public ItemButton(Context context, Paint paint, Path path, float sx, float sy, int pad )
   {
     super(context);
@@ -91,6 +123,12 @@ public class ItemButton extends Button
     resetPaintPath( paint, path, sx, sy );
   }
 
+  /** reset the path and the paint 
+   * @param paint    paint
+   * @param path     button drawing path
+   * @param sx       path X-scale
+   * @param sy       path Y-scale
+   */
   public void resetPaintPath(Paint paint, Path path, float sx, float sy )
   {
     setMinimumWidth( (int)(2*W5*TDSetting.mItemButtonSize*sx) );
@@ -100,6 +138,11 @@ public class ItemButton extends Button
     // mClip = new Rect( 0, 0, (int)(40*sx), (int)(30*sy) );
   }
 
+  /** reset the path 
+   * @param path     button drawing path
+   * @param sx       path X-scale
+   * @param sy       path Y-scale
+   */
   public void resetPath( Path path, float sx, float sy )
   {
     mPath = new Path(path);
@@ -109,6 +152,9 @@ public class ItemButton extends Button
     mPath.offset( W5*TDSetting.mItemButtonSize*sx, H4*TDSetting.mItemButtonSize*sy );
   }
 
+  /** draw the item button
+   * @param canvas   canvas
+   */
   public void onDraw(Canvas canvas) 
   {
     // draw the button background
@@ -117,5 +163,6 @@ public class ItemButton extends Button
       canvas.drawPath( mPath, mPaint ); // FIXME apparently called with null canvas
     }
   }
+
 }
 

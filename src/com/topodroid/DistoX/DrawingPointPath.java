@@ -393,7 +393,7 @@ public class DrawingPointPath extends DrawingPath
    * @param bbox      clipping rectangle
    * @note canvas is guaranteed not null
    */
-  // @Override
+  @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
     if ( intersects( bbox ) ) {

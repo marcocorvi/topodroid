@@ -20,6 +20,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.math.Point2D; // float X-Y
 
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
@@ -93,7 +94,13 @@ public class DrawingPath extends RectF
   float deltaX, deltaY, len2; // used for Cave3D export
   // RectF mBBox;   // path boundig box (scene coords)
 
+  /** set the cosine
+   * @param cosine  cosine value
+   */
   void setCosine( float cosine ) { mCosine = cosine; }
+  
+  /** @return the cosine value
+   */
   float getCosine() { return mCosine; }
   
   // FIXME-COPYPATH
@@ -393,19 +400,26 @@ public class DrawingPath extends RectF
     }
   }
 
-  // intersection of 
-  //    x = x1 + t*(x2-x1)
-  //    y = y1 + t*(y2-y1)
-  // and
-  //    x = x10 + s*(x20-x10)
-  //    y = y10 + s*(y20-y10)
-  //
-  // t * (x2-x1) - s*(x20-x10) = x10 - x1;
-  // t * (y2-y1) - s*(y20-y10) = y10 - y1;
-  // inverse
-  // t   | -(y20-y10)  +(x20-x10) | | x10 - x1 |
-  // s   | -(y2-y1)    +(x2-x1)   | | y10 - y1 |
-  //
+  /** intersection with a segment (for shot paths)
+   * intersection of 
+   *    x = x1 + t*(x2-x1)
+   *    y = y1 + t*(y2-y1)
+   * and
+   *    x = x10 + s*(x20-x10)
+   *    y = y10 + s*(y20-y10)
+   *
+   * t * (x2-x1) - s*(x20-x10) = x10 - x1;
+   * t * (y2-y1) - s*(y20-y10) = y10 - y1;
+   * inverse
+   * t   | -(y20-y10)  +(x20-x10) | | x10 - x1 |
+   * s   | -(y2-y1)    +(x2-x1)   | | y10 - y1 |
+   *
+   * @param x10  segment first endpoint X
+   * @param y10  segment first endpoint Y
+   * @param x20  segment second endpoint X
+   * @param y20  segment second endpoint Y
+   * @return the intersection abscissa on this path (-1 in case of no intersection)
+   */
   float intersectSegment( float x10, float y10, float x20, float y20 )
   {
     float det = -(x2-x1)*(y20-y10) + (x20-x10)*(y2-y1);
@@ -540,23 +554,17 @@ public class DrawingPath extends RectF
     }
   }
 
-  // /** draw the path on a canvas
-  //  * @param canvas   canvas - N.B. canvas is guaranteed not null
-  //  * @param matrix   transform matrix
-  //  * @param scale    rescaling factor, 
-  //  * @param bbox     clipping rectangle
-  //  */
-  // public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
-  // {
-  //   if ( intersects( bbox ) ) 
-  //   {
-  //     Matrix m = new Matrix();
-  //     mTransformedPath = new Path( mPath );
-  //     mTransformedPath.transform( m );
-  //     mTransformedPath.transform( matrix );
-  //     drawPath( mTransformedPath, canvas );
-  //   }
-  // }
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param scale    rescaling factor - used only for point items
+   * @param bbox     clipping rectangle
+   * @note default implementation falls back to draw( Canvas, Matrix, RectF )
+   */
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  {
+    draw( canvas, matrix, bbox );
+  }
 
   // used in executeAll
   boolean isBlockRecent( )

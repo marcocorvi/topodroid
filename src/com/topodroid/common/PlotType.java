@@ -131,5 +131,14 @@ public class PlotType
   //    if ( type.equals("PROFILE") )    return (int)PLOT_PROJECTED;
   //    return (int)PLOT_PLAN;
   // }
+
+  /** @return true is the plot is multileg xsection
+   * @param type plot type
+   * @param to   plot TO station
+   */
+  public static boolean isMultilegSection( long type, String to )
+  {
+    return PlotType.isLegSection( type ) && ( to == null || to.length() == 0 );
+  }
 }
 

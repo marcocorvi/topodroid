@@ -41,6 +41,17 @@
      <item name="view">3</item>
   </string-array>
   
+  <string-array name="splayColors">
+     <item name="none">none</item>
+     <item name="all">all</item>
+     <item name="palette">palette</item>
+  </string-array>
+  <string-array name="splayColorsValue">
+     <item name="none">0</item>
+     <item name="all">1</item>
+     <item name="palette">2</item>
+  </string-array>
+
   <string-array name="feedbackMode">
      <item name="none">none</item>
      <item name="sound">sound</item>

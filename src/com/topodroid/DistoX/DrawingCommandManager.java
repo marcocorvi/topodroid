@@ -18,6 +18,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+import com.topodroid.math.Point2D; // intersection point
 
 // import android.content.res.Configuration;
 import android.app.Activity;
@@ -371,7 +372,7 @@ public class DrawingCommandManager
   */
 
   /** set the alpha flag for the splays
-   * @param on   whether to se the flag
+   * @param on   whether to set the flag
    */
   void setSplayAlpha( boolean on ) 
   {
@@ -616,6 +617,7 @@ public class DrawingCommandManager
     synchronized( TDPath.mShotsLock ) {
       mLegsStack   = mTmpLegsStack;
       mSplaysStack = mTmpSplaysStack;
+      TDLog.v("commit refs: legs " + mLegsStack.size() + " splays " + mSplaysStack.size() );
     }
     synchronized( TDPath.mStationsLock ) { 
       mStations = mTmpStations;
@@ -1154,7 +1156,8 @@ public class DrawingCommandManager
 
   private float mBitmapScale = 1;
 
-  // returns the last used bitmap scale
+  /** @return the last used bitmap scale
+   */
   float getBitmapScale() { return mBitmapScale; }
 
   public Bitmap getBitmap()
@@ -1209,18 +1212,14 @@ public class DrawingCommandManager
       if ( mGridStack1 != null ) {
         synchronized( TDPath.mGridsLock ) {
           for ( DrawingPath p1 : mGridStack1 ) {
-            // p1.draw( c, mat, scale, null );
             p1.draw( c, mat, null );
           }
           for ( DrawingPath p10 : mGridStack10 ) {
-            // p10.draw( c, mat, scale, null );
             p10.draw( c, mat, null );
           }
           for ( DrawingPath p100 : mGridStack100 ) {
-            // p100.draw( c, mat, scale, null );
             p100.draw( c, mat, null );
           }
-          // if ( mNorthLine != null ) mNorthLine.draw( c, mat, scale, null );
           if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
           // no extend line for bitmap
         }
@@ -1237,7 +1236,6 @@ public class DrawingCommandManager
       }
       if ( mLegsStack != null ) {
         for ( DrawingPath path : mLegsStack ) {
-          // path.draw( c, mat, scale, null );
           path.draw( c, mat, null );
         }
       }
@@ -1247,13 +1245,12 @@ public class DrawingCommandManager
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
           for ( DrawingStationName st : mStations ) {
-            // st.draw( c, mat, scale, null );
             st.draw( c, mat, null );
           }
         }
         // synchronized( TDPath.mFixedsLock ) {
         //   for ( DrawingFixedName fx : mFixeds ) {
-        //     fx.draw( c, mat, scale, null );
+        //     fx.draw( c, mat, null );
         //   }
         // }
       }
@@ -1392,18 +1389,14 @@ public class DrawingCommandManager
           }
         } else {
           if ( scale < 1 ) {
-            // for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, scale, bbox );
             for ( DrawingPath p1 : mGridStack1 ) p1.draw( canvas, mm, bbox );
           }
           if ( scale < 10 ) {
-            // for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, scale, bbox );
             for ( DrawingPath p10 : mGridStack10 ) p10.draw( canvas, mm, bbox );
           }
-          // for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, scale, bbox );
           for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox );
         }
       }
-      // if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, scale, bbox );
       if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, bbox );
       if ( scaleRef && (mScaleRef != null)) {
         if ( sidebars ) {
@@ -1416,7 +1409,6 @@ public class DrawingCommandManager
 
     synchronized( TDPath.mShotsLock ) {
       if ( legs && mLegsStack != null ) {
-        // for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, scale, bbox );
         for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox );
       }
       if ( mSplaysStack != null ) {
@@ -1440,13 +1432,11 @@ public class DrawingCommandManager
     if ( mMode < DrawingSurface.DRAWING_SECTION ) {
       if ( mPlotOutline != null && mPlotOutline.size() > 0 ) {
         synchronized( mPlotOutline )  {
-          // for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, scale, null /* bbox */ );
           for (DrawingLinePath path : mPlotOutline ) path.draw( canvas, mm, null /* bbox */ );
         }
       }
       if ( mXSectionOutlines != null && mXSectionOutlines.size() > 0 ) {
         synchronized( TDPath.mXSectionsLock )  {
-          // for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, scale, null /* bbox */ );
           for ( DrawingOutlinePath path : mXSectionOutlines ) path.mPath.draw( canvas, mm, null /* bbox */ );
         }
       }
@@ -1455,25 +1445,24 @@ public class DrawingCommandManager
     if ( stations ) {
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
-          // for ( DrawingStationName st : mStations ) st.draw( canvas, mm, scale, bbox );
           for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
         }
       }
       // if ( mFixeds != null ) {  
       //   synchronized( TDPath.mFixedsLock ) {
-      //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mm, scale, bbox );
+      //     for ( DrawingFixedName fx : mFixeds ) fx.draw( canvas, mm, bbox );
       //   }
       // }
     }
     
     if ( ! TDSetting.mAutoStations ) {
-      mCurrentScrap.drawUserStations( canvas, mm, scale, bbox );
+      mCurrentScrap.drawUserStations( canvas, mm, bbox );
     }
 
     if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
       if ( outline ) {
         synchronized( mScraps ) {
-          for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mm, scale, bbox );
+          for ( Scrap scrap : mScraps ) scrap.drawOutline( canvas, mm, bbox );
         }
       } else {
         synchronized( mScraps ) {
@@ -1486,7 +1475,7 @@ public class DrawingCommandManager
           if ( scrap == mCurrentScrap ) {
             scrap.drawAll( canvas, mm, scale, bbox );
           } else {
-            scrap.drawGreyOutline( canvas, mm, scale, bbox );
+            scrap.drawGreyOutline( canvas, mm, bbox );
           }
         }
       }

@@ -187,7 +187,7 @@ public class DrawingSplayPath extends DrawingPath
   {
     if ( intersects( bbox ) ) {
       if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
-        TDGreenDot.draw( canvas, matrix, scale, xEnd, yEnd, TDSetting.mDotRadius*1.5f, mPaint );
+        TDGreenDot.draw( canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius*1.5f*scale, mPaint );
       } else {
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );

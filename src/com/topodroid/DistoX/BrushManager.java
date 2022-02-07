@@ -49,6 +49,7 @@ public class BrushManager
   static private SymbolLineLibrary  mLineLib  = null;
   static private SymbolAreaLibrary  mAreaLib  = null;
   static private SymbolPoint mStationSymbol   = null;
+  static private int mAlpha = 0xff; // splay alpha
 
   // -----------------------------------------------------------
   /* LOAD_MISSING
@@ -364,20 +365,48 @@ public class BrushManager
     return paint;
   }
 
+  /** set the color of splay dash lines
+   * @param color   color (rrggbb)
+   */
+  static public void setSplayDashColor( int color )
+  {
+    if ( paintSplayXBdash != null ) {
+      paintSplayXBdash.setColor( color );
+      paintSplayXBdash.setAlpha( mAlpha );
+    } else {
+      TDLog.v("Warning: null splay dash paint");
+    }
+  }
+
+  /** set the color of splay dot lines
+   * @param color   color (rrggbb)
+   */
+  static public void setSplayDotColor( int color )
+  {
+    if ( paintSplayXBdot != null ) {
+      paintSplayXBdot.setColor( color );
+      paintSplayXBdot.setAlpha( mAlpha );
+    } else {
+      TDLog.v("Warning: null splay dot paint");
+    }
+  }
+
+
   /** set the splay opacity
    * @param alpha   opacity, in [0,100], 0=transparent
+   * @note the alpha is saved in mAlpha
    */
   public static void setSplayAlpha( int alpha )
   {
-    alpha = (alpha * 255)/100;
-    if ( paintSplayLRUD    != null ) paintSplayLRUD.setAlpha( alpha );
-    if ( paintSplayXB      != null ) paintSplayXB.setAlpha( alpha );
-    if ( paintSplayComment != null ) paintSplayComment.setAlpha( alpha );  // commented splay
-    if ( paintSplayXViewed != null ) paintSplayXViewed.setAlpha( alpha );  // cross-section splay2 (at viewed station)
-    if ( paintSplayXBdash  != null ) paintSplayXBdash.setAlpha( alpha );  // dash splay
-    if ( paintSplayXBdot   != null ) paintSplayXBdot.setAlpha( alpha );  // dot splay
-    if ( paintSplayXVdash  != null ) paintSplayXVdash.setAlpha( alpha );  // blue dash splay
-    if ( paintSplayXVdot   != null ) paintSplayXVdot.setAlpha( alpha );  // blue dot splay
+    mAlpha = (alpha * 255)/100;
+    if ( paintSplayLRUD    != null ) paintSplayLRUD.setAlpha( mAlpha );
+    if ( paintSplayXB      != null ) paintSplayXB.setAlpha( mAlpha );
+    if ( paintSplayComment != null ) paintSplayComment.setAlpha( mAlpha );  // commented splay
+    if ( paintSplayXViewed != null ) paintSplayXViewed.setAlpha( mAlpha );  // cross-section splay2 (at viewed station)
+    if ( paintSplayXBdash  != null ) paintSplayXBdash.setAlpha( mAlpha );  // dash splay
+    if ( paintSplayXBdot   != null ) paintSplayXBdot.setAlpha( mAlpha );  // dot splay
+    if ( paintSplayXVdash  != null ) paintSplayXVdash.setAlpha( mAlpha );  // blue dash splay
+    if ( paintSplayXVdot   != null ) paintSplayXVdot.setAlpha( mAlpha );  // blue dot splay
   }
 
   /** guard for doMakePaths()

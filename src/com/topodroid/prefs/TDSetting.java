@@ -14,6 +14,7 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDString;
@@ -372,6 +373,8 @@ public class TDSetting
   public static float   mHorizSplay    = 60;
   public static float   mCosHorizSplay = TDMath.cosd( mHorizSplay );
   public static float   mSectionSplay  = 60;
+  public static int     mSplayDashColor = TDColor.SPLAY_LIGHT;
+  public static int     mSplayDotColor  = TDColor.SPLAY_LIGHT;
   public static int     mStationNames  = 0;        // type of station names (0: alpha, 1: number)
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
   // public static boolean mSplayAsDot    = false;    // draw splays as dots
@@ -491,7 +494,8 @@ public class TDSetting
   public static boolean mBedding        = false;
   public static int     mTripleShot     = FEEDBACK_NONE;  // leg feedback
   public static boolean mSplayClasses   = false;
-  public static boolean mSplayColor     = false;
+  public static int     mDiscreteColors = 0;;
+  public static boolean mSplayColor     = false; // = (mDiscreteColors > 0)
   public static boolean mDivingMode     = false;
 
   public static boolean mPlotSplit      = false;
@@ -604,6 +608,12 @@ public class TDSetting
     return i;
   }
 
+  // color is stored as integer (string)
+  private static int tryColor( SharedPreferences prefs, String key, String def_value )
+  {
+    return tryInt( prefs, key, def_value );
+  }
+
   private static float tryFloatValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     float f = 0;
@@ -640,6 +650,30 @@ public class TDSetting
       }
     }
     return i;
+  }
+
+  // rrggbb as "rr gg bb" with values in [0,100]
+  private static int tryColorValue( TDPrefHelper hlp, String key, String val, String def_value )
+  {
+    int color = 0xffffffff;
+    String[] vals = val.split(" ");
+    if ( vals.length == 3 ) {
+      try {
+        int r = (Integer.parseInt( vals[0] ) * 255)/100;
+        int g = (Integer.parseInt( vals[1] ) * 255)/100;
+        int b = (Integer.parseInt( vals[2] ) * 255)/100;
+        color = (r << 16) | (g << 8) | b;
+        hlp.update( key, Integer.toString(color) );
+      } catch( NumberFormatException e ) { 
+        TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
+        color = Integer.parseInt(def_value);
+        hlp.update( key, def_value );
+      }
+    } else {
+      color = Integer.parseInt(def_value);
+      hlp.update( key, def_value );
+    }
+    return color;
   }
 
   private static String tryStringValue( TDPrefHelper hlp, String key, String val, String def_value )
@@ -873,7 +907,7 @@ public class TDSetting
     mConnectionMode = tryInt( prefs,    keyDevice[ 1],      defDevice[ 1] );   // DISTOX_CONN_MODE choice: 0, 1, 2
     // mAutoReconnect  = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_AUTO_RECONNECT
     mHeadTail       = prefs.getBoolean( keyDevice[ 2], bool(defDevice[ 2]) );  // DISTOX_HEAD_TAIL
-    TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
+    // TDLog.v("SETTINGS load device skip >" + keyDevice[3] + "< >" + defDevice[3] + "<" );
     mSockType       = tryInt( prefs,    keyDevice[ 3],      defDevice[ 3] ); // mDefaultSockStrType );  // DISTOX_SOCKET_TYPE choice: 0, 1, (2, 3)
     // TDLog.v("SETTING load device next " + keyDevice[4] + " " + defDevice[4] );
     mZ6Workaround   = prefs.getBoolean( keyDevice[ 4], bool(defDevice[ 4])  ); // DISTOX_Z6_WORKAROUND
@@ -935,6 +969,7 @@ public class TDSetting
       GlModel.mSplitStretch = false;
     }
     GlModel.mPowercrustDelta = tryFloat( prefs,  keyWalls3D[7], defWalls3D[7] );
+    // TDLog.v("SETTING load model done");
 
     String[] keyImport = TDPrefKey.EXPORT_import;
     String[] defImport = TDPrefKey.EXPORT_importdef;
@@ -1062,6 +1097,7 @@ public class TDSetting
     mTripleShot     = tryInt(  prefs,          keyData[ 9],      defData[ 9]  ); // DISTOX_LEG_FEEDBACK
     // mTimerWait     = tryInt(   prefs,          keyData[10],      defData[10] );  // DISTOX_SHOT_TIMER
     // mBeepVolume    = tryInt(   prefs,          keyData[11],      defData[11] );  // DISTOX_BEEP_VOLUME
+    // TDLog.v("SETTING load secondary data done");
 
     String[] keyGShot = TDPrefKey.GEEKSHOT;
     String[] defGShot = TDPrefKey.GEEKSHOTdef;
@@ -1077,6 +1113,7 @@ public class TDSetting
     mTimerWait     = tryInt(   prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_BEEP_VOLUME
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
+    // TDLog.v("SETTING load secondary GEEK data done");
 
     String[] keyGPlot = TDPrefKey.GEEKPLOT;
     String[] defGPlot = TDPrefKey.GEEKPLOTdef;
@@ -1090,11 +1127,14 @@ public class TDSetting
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
+    // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
     String[] defGPlotSplay = TDPrefKey.GEEKsplaydef;
     mSplayClasses  = prefs.getBoolean( keyGPlotSplay[ 0], bool(defGPlotSplay[ 0]) ); // DISTOX_SPLAY_CLASSES
-    mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
+    // mSplayColor    = prefs.getBoolean( keyGPlotSplay[ 1], bool(defGPlotSplay[ 1]) ); // DISTOX_SPLAY_COLOR
+    mDiscreteColors = tryInt( prefs,   keyGPlotSplay[ 1],      defGPlotSplay[ 1] );  // DISTOX_DISCRETE_COLORS
+    mSplayColor = (mDiscreteColors > 0);
     // mSplayAsDot    = prefs.getBoolean( keyGPlotSplay[ 2], bool(defGPlotSplay[ 2]) ); // DISTOX_SPLAY_AS_DOT
     mSplayVertThrs  = tryFloat( prefs, keyGPlotSplay[ 2],      defGPlotSplay[ 2]  ); // DISTOX_SPLAY_VERT_THRS
     mDashSplay      = tryInt( prefs,   keyGPlotSplay[ 3],      defGPlotSplay[ 3] );  // DISTOX_SPLAY_DASH
@@ -1102,7 +1142,11 @@ public class TDSetting
     mHorizSplay     = tryFloat( prefs, keyGPlotSplay[ 5],      defGPlotSplay[ 5] );  // DISTOX_HORIZ_SPLAY
     mCosHorizSplay = TDMath.cosd( mHorizSplay );  
     mSectionSplay   = tryFloat( prefs, keyGPlotSplay[ 6],      defGPlotSplay[ 6] );  // DISTOX_SECTION_SPLAY
-    // TDLog.v("SETTING load splay geek done");
+    mSplayDashColor = tryColor( prefs, keyGPlotSplay[ 7],      defGPlotSplay[ 7] );  // DISTOX_SPLAY_DASH_COLOR
+    BrushManager.setSplayDashColor( mSplayDashColor );
+    mSplayDotColor  = tryColor( prefs, keyGPlotSplay[ 8],      defGPlotSplay[ 8] );  // DISTOX_SPLAY_DASH_COLOR
+    BrushManager.setSplayDotColor( mSplayDotColor );
+    // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGLine = TDPrefKey.GEEKLINE;
     String[] defGLine = TDPrefKey.GEEKLINEdef;
@@ -1117,7 +1161,7 @@ public class TDSetting
     mLineStraight  = prefs.getBoolean( keyGLine[ 8], bool(defGLine[ 8]) );  // DISTOX_LINE_STRAIGHT
     mPathMultiselect = prefs.getBoolean( keyGLine[ 9], bool(defGLine[ 9]) );  // DISTOX_PATH_MULTISELECT
     mCompositeActions = prefs.getBoolean( keyGLine[10], bool(defGLine[10]) );  // DISTOX_COMPOSITE_ACTIONS
-    // TDLog.v("SETTING load line geek done");
+    // TDLog.v("SETTING load secondary GEEK line done");
 
     String[] keyUnits = TDPrefKey.UNITS;
     String[] defUnits = TDPrefKey.UNITSdef;
@@ -1672,8 +1716,10 @@ public class TDSetting
     String[] def = TDPrefKey.GEEKsplaydef;
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SPLAY_CLASSES
       mSplayClasses = tryBooleanValue( hlp, k, v, bool(def[ 0]) );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SPLAY_COLOR
-      mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_DISCREE_COLORS was DISTOX_SPLAY_COLOR
+      // mSplayColor   = tryBooleanValue( hlp, k, v, bool(def[ 1]) );
+      mDiscreteColors = tryIntValue( hlp, k, v, def[ 1] );
+      mSplayColor = (mDiscreteColors > 0);
     // } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_AS_DOT
     //   mSplayAsDot = tryBooleanValue( hlp, k, v, bool(def[ 2]) );
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SPLAY_VERT_THRS
@@ -1695,6 +1741,12 @@ public class TDSetting
       mSectionSplay = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mSectionSplay <  0 ) { mSectionSplay =  0; ret = TDString.ZERO; }
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
+      mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
+      BrushManager.setSplayDashColor( mSplayDashColor );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SPLAY_DOT_COLOR
+      mSplayDotColor = tryColorValue( hlp, k, v, def[ 8] ); 
+      BrushManager.setSplayDotColor( mSplayDotColor );
     } else {
       TDLog.Error("missing GEEK_SPLAY key: " + k );
     }
@@ -2656,7 +2708,7 @@ public class TDSetting
 
   private static void setLocale( String locale, boolean load_symbols )
   {
-    TDLog.v("SETTING set locale " + locale );
+    // TDLog.v("SETTING set locale " + locale );
     TDLocale.setTheLocale( locale );
     Resources res = TDInstance.getResources();
     if ( load_symbols ) {
@@ -2861,8 +2913,8 @@ public class TDSetting
       pw.printf(Locale.US, "Backup: nr %d, interval %d\n", mBackupNumber, mBackupInterval );
       pw.printf(Locale.US, "XSections: shared %c, auto-export %c, point %c\n", tf(mSharedXSections), tf(mAutoXSections), tf(mAutoSectionPt) );
       pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
-      pw.printf(Locale.US, "Splay: alpha %d, color %c, splay-dash %d, vert %.1f, horiz %.1f, section %.1f\n",
-        mSplayAlpha, tf(mSplayColor), mDashSplay, mVertSplay, mHorizSplay, mSectionSplay );
+      pw.printf(Locale.US, "Splay: alpha %d, color %d, splay-dash %d, vert %.1f, horiz %.1f, section %.1f color %d %d\n",
+        mSplayAlpha, mDiscreteColors, mDashSplay, mVertSplay, mHorizSplay, mSectionSplay, mSplayDashColor, mSplayDotColor );
       pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f\n", mAccelerationThr, mMagneticThr, mDipThr );
       // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
       // AUTOWALLS
@@ -3540,12 +3592,18 @@ public class TDSetting
           if ( all ) {
             if ( vals.length > 12 ) {
               mSplayAlpha = getInt( vals, 2, 80 );  setPreference( editor, "DISTOX_SPLAY_ALPHA", mSplayAlpha );
-              mSplayColor = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_SPLAY_COLOR", mSplayColor );
+              // mSplayColor = getBoolean( vals, 4 );  setPreference( editor, "DISTOX_SPLAY_COLOR", mSplayColor );
+              mDiscreteColors = getInt( vals, 4, 0 );  setPreference( editor, "DISTOX_DISCRETE_COLORS", mDiscreteColors );
+              mSplayColor = (mDiscreteColors > 0);
               mDashSplay  = getInt( vals, 6, 0 );   setPreference( editor, "DISTOX_SPLAY_DASH",  mDashSplay );
               mVertSplay  = getFloat( vals, 8, 50.0f );    setPreference( editor, "DISTOX_VERT_SPLAY",  mVertSplay );
               mHorizSplay = getFloat( vals, 10, 60.0f );   setPreference( editor, "DISTOX_HORIZ_SPLAY", mHorizSplay );
               mCosHorizSplay = TDMath.cosd( mHorizSplay );  
               mSectionSplay = getFloat( vals, 12, 60.0f ); setPreference( editor, "DISTOX_SECTION_SPLAY", mSectionSplay );
+              if ( vals.length > 15 ) {
+                mSplayDashColor = getInt( vals, 14, 0 );   setPreference( editor, "DISTOX_SPLAY_DASH_COLOR",  mSplayDashColor );
+                mSplayDotColor  = getInt( vals, 15, 0 );   setPreference( editor, "DISTOX_SPLAY_DOT_COLOR",   mSplayDotColor );
+              }
             }
           }
           continue;

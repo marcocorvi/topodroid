@@ -51,6 +51,19 @@ public class TDMath
   static public float atan2Fd( double y, double x ) { return (float)( RAD2DEG * Math.atan2( y, x ) ); }
   static public float sqrtF( double x )   { return (float)Math.sqrt( x ); }
 
+  /** @return the difference between two angles [degrees]
+   * @param a1   first angle [deg.]
+   * @param a2   second angle [deg.]
+   */
+  static public float angleDifference( float a1, float a2 )
+  {
+    float diff = Math.abs( a1 - a2 );
+    return ( diff > 180 )? 360 - diff : diff;
+  }
+  
+  /** @return the value of an angle mod(360)
+   * @param f  angle [deg.]
+   */
   static public int in360( int f )
   {
     while ( f >= 360 ) f -= 360;
@@ -58,6 +71,9 @@ public class TDMath
     return f;
   }
 
+  /** @return the value of an angle mod(360)
+   * @param f  angle [deg.]
+   */
   static public float in360( float f )
   {
     while ( f >= 360 ) f -= 360;
@@ -65,6 +81,9 @@ public class TDMath
     return f;
   }
 
+  /** @return the value of an angle mod(360)
+   * @param f  angle [deg.]
+   */
   static public double in360( double f )
   {
     while ( f >= 360 ) f -= 360;
@@ -72,6 +91,9 @@ public class TDMath
     return f;
   }
 
+  /** @return angle + 90 mod(360)
+   * @param a  angle [deg.]
+   */
   static public float add90( float a )
   {
     a += 90;
@@ -79,6 +101,9 @@ public class TDMath
     return a;
   }
 
+  /** @return angle + 180 mod(360)
+   * @param a  angle [deg.]
+   */
   static public int add180( int a )
   {
     a += 180;
@@ -86,6 +111,9 @@ public class TDMath
     return a;
   }
 
+  /** @return angle + 180 mod(360)
+   * @param a  angle [deg.]
+   */
   static public float add180( float a )
   {
     a += 180;
@@ -93,6 +121,9 @@ public class TDMath
     return a;
   }
 
+  /** @return angle + 180 mod(360)
+   * @param a  angle [deg.]
+   */
   static public double add180( double a )
   {
     a += 180;
@@ -100,6 +131,9 @@ public class TDMath
     return a;
   }
 
+  /** @return angle - 90 mod(360)
+   * @param a  angle [deg.]
+   */
   static public float sub90( float a )
   {
     a -= 90;
@@ -107,7 +141,10 @@ public class TDMath
     return a;
   }
 
-
+  /** @return the value of an angle that is closest to another angle [degrees]
+   * @param f   angle
+   * @param f0  the other angle
+   */
   static public float around( float f, float f0 ) 
   {
     if ( f - f0 > 180 ) return f - 360;
@@ -115,10 +152,22 @@ public class TDMath
     return f;
   }
 
+  /** @return conversion from degrees to slope (in 1 .. 100)
+   * @param def   angle [deg.]
+   */
   static public float degree2slope( float deg ) { return (float)(100 * Math.tan( deg * DEG2RAD ) ); }
+
+  /** @return conversion from slope to degrees
+   * @param slp   slope, in 1 .. 100
+   */
   static public float slope2degree( float slp ) { return (float)( Math.atan( slp/100 ) * RAD2DEG ); }
 
-  // orthonormalize a 3x3 matrix which is almost orthonormal
+  /** orthonormalize a 3x3 matrix which is almost orthonormal
+   * @param R   3x3 matrix
+   * @param eps terminate when every change is smaller than eps
+   * @param max maximum number of iterations
+   * @return true if successful
+   */
   static public boolean orthonormalize3( float[] R, float eps, int max )
   {
     float delta = 0;

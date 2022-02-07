@@ -704,10 +704,10 @@ public class TopoDroidApp extends Application
     // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
-    // TDLog.v( "PCmap set map done");
+    TDLog.v( "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
-    // TDLog.v( "load secondary done");
+    TDLog.v( "load secondary done");
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -2530,7 +2530,7 @@ public class TopoDroidApp extends Application
    * @param azimuth  projected profile azimuth / section plane direction 
    * @param clino    projected profile clino / section plane direction 
    * @param parent   name of parent plot
-   * @param nickname
+   * @param nickname xsection comment
    * @return XSection plot ID
    * 
    * @note the database field "hide" is overloaded for x_sections with the parent plot name

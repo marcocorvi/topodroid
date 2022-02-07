@@ -1090,10 +1090,32 @@ class DrawingSurface extends SurfaceView
   
   // ----------------------------------------------------------------
   // station splays
+
+  /** toggle splay display at a station
+   * @param st_name   station name
+   * @param on        whether to add the station to the ON list
+   * @param off       whether to add the station to the OFF list
+   */
   void toggleStationSplays( String st_name, boolean on, boolean off ) { mStationSplay.toggleStationSplays( st_name, on, off ); }
+
+  /** @return true if the stationis on the ON list
+   * @param st_name   station name
+   */
   boolean isStationSplaysOn( String st_name ) { return mStationSplay.isStationSplaysOn( st_name ); }
+
+  /** @return true if the stationis on the OFF list
+   * @param st_name   station name
+   */
   boolean isStationSplaysOff( String st_name ) { return mStationSplay.isStationSplaysOff( st_name ); }
+
+  /** show splays at a station
+   * @param station    station
+   */
   void showStationSplays( String station ) { mStationSplay.showStationSplays( station ); }
+
+  /** hide splays at a station
+   * @param station    station
+   */
   void hideStationSplays( String station ) { mStationSplay.hideStationSplays( station ); }
   
   void setStationXSections( List< PlotInfo > xsection_plan, List< PlotInfo > xsection_ext, long type2 )

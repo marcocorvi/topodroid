@@ -286,6 +286,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
     <string name="error_name_duplicate">Duplicate name</string>
+    <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -1393,6 +1394,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_horiz_splay_message">Minimum off azimuth for dashed splays</string>
   <string name="pref_section_splay_title">Splay dash angle-threshold</string>
   <string name="pref_section_splay_message">Minimum angle with the section plane for dashed splays</string>
+  <string name="pref_splay_dash_color_title">Splay dash color</string>
+  <string name="pref_splay_dash_color_summary">Color of dashed lines</string>
+  <string name="pref_splay_dot_color_title">Splay dot color</string>
+  <string name="pref_splay_dot_color_summary">Color of dotted lines</string>
+  
   <!-- UNUSED string name="pref_data_backup_title">Data auto-export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatic data export (need default format)</string -->
   <string name="pref_editable_stations_title">Editable stations</string>

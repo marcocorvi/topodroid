@@ -797,7 +797,7 @@ public class Scrap
   /** draw on the canvas
    * @param c     canvas
    * @param mat   transform matrix
-   * @param scale transform scale - not used
+   * @param scale rescaling factor
    */
   void draw( Canvas c, Matrix mat, float scale )
   {
@@ -806,16 +806,14 @@ public class Scrap
         if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
           for ( ICanvasCommand cmd : mCurrentStack ) {
             if ( cmd.commandType() == 0 ) {
-              // cmd.draw( c, mat, scale, null );
-              cmd.draw( c, mat, null );
+              cmd.draw( c, mat, scale, null );
             }
           }
         } else {
           for ( ICanvasCommand cmd : mCurrentStack ) {
             if ( cmd.commandType() == 0 ) {
               if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-                // cmd.draw( c, mat, scale, null );
-                cmd.draw( c, mat, null );
+                cmd.draw( c, mat, scale, null );
               }
             }
           }
@@ -2163,10 +2161,9 @@ public class Scrap
   /** draw the outline
    * @param canvas   canvas
    * @param mat      transform matrix
-   * @param scale    not used
    * @param bbox     clipping rectangle
    */
-  void drawOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
+  void drawOutline( Canvas canvas, Matrix mat, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -2174,7 +2171,6 @@ public class Scrap
         if ( cmd.commandType() == 0 ) {
           DrawingPath path = (DrawingPath)cmd;
           if ( path.isLine() ) { // path instanceof DrawingLinePath
-            // if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, scale, bbox );
             if ( ((DrawingLinePath)path).hasOutline() ) cmd.draw( canvas, mat, bbox );
           }
         }
@@ -2185,10 +2181,9 @@ public class Scrap
   /** draw with a grey outline
    * @param canvas   canvas
    * @param mat      transform matrix
-   * @param scale    not used
    * @param bbox     clipping rectangle
    */
-  void drawGreyOutline( Canvas canvas, Matrix mat, float scale, RectF bbox )
+  void drawGreyOutline( Canvas canvas, Matrix mat, RectF bbox )
   {
     if ( mCurrentStack == null ) return;
     synchronized( TDPath.mCommandsLock ) {
@@ -2207,7 +2202,7 @@ public class Scrap
   /** draw all sketch items
    * @param canvas   canvas
    * @param mat      transform matrix
-   * @param scale    transform scale - not used
+   * @param scale    rescaling factor
    * @param bbox     clipping rectangle
    */
   void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox )
@@ -2218,8 +2213,7 @@ public class Scrap
         for ( ICanvasCommand cmd : mCurrentStack  ) {
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
-            // cmd.draw( canvas, matrix, scale, bbox );
-            cmd.draw( canvas, matrix, bbox );
+            cmd.draw( canvas, matrix, scale, bbox );
             if ( path.isLine() ) { // path instanceof DrawingLinePath
               DrawingLinePath line = (DrawingLinePath)path;
               if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
@@ -2238,8 +2232,7 @@ public class Scrap
           if ( cmd.commandType() == 0 ) {
             DrawingPath path = (DrawingPath)cmd;
             if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
-              // cmd.draw( canvas, matrix, scale, bbox );
-              cmd.draw( canvas, matrix, bbox );
+              cmd.draw( canvas, matrix, scale, bbox );
               if ( path.isLine() ) { // path instanceof DrawingLinePath
                 DrawingLinePath line = (DrawingLinePath)path;
                 if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
@@ -2261,13 +2254,11 @@ public class Scrap
   /** draw the user stations
    * @param canvas   canvas
    * @param mat      transform matrix
-   * @param scale    transform scale - not used (?)
    * @param bbox     clipping rectangle
    */
-  void drawUserStations( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  void drawUserStations( Canvas canvas, Matrix matrix, RectF bbox )
   {
     synchronized( TDPath.mStationsLock ) {
-      // for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, scale, bbox );
       for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, bbox );
     }
   }

@@ -48,9 +48,12 @@ class DrawingLineSectionDialog extends MyDialog
   private PlotInfo mPlotInfo;
   private String  mFrom;
   private String  mTo;
-  private String  mNick;
+  private String  mNick;    // section comment
   private float   mAzimuth;
   private float   mClino;
+  private Vector3D mCenter; // intersection centroid TODO ...
+  // the list of leg-dblocks can go in "hide",
+  // but there is no room for the center in the DB table ...
 
   private MyCheckBox mBtnFoto  = null;
   private MyCheckBox mBtnDraw  = null;
@@ -62,30 +65,44 @@ class DrawingLineSectionDialog extends MyDialog
   private ImageView mIVimage;   // photo image
   private boolean mHSection;
   private boolean mExists;
-  private boolean hasPhoto;
+  private boolean hasPhoto;     // whether the xsection can have a photo
   private float mTT; // intersection abscissa
 
   private TDImage mTdImage = null;
 
-  
+  /** cstr
+   * @param context   context
+   * @param parent    parent window
+   * @param h_section whether it is a xsection in profile view
+   * @param exist     whether the xsection exists
+   * @param id        ... (xsection name ?)
+   * @param line      section line
+   * @param from      station behind - for single-leg xsection (definition only), shotd IDs (multileg xsection)
+   * @param to        viewed station (in front)
+   * @param azimuth   azimuth of xsection plane - (definition only)
+   * @param clino     clino of xsection plane - (definition only)
+   * @param tt0       intersection abscissa - for single-leg xsection (definition only)
+   * @param center    intersection 3D centroid (E,S,V) - for nulti-leg xsections (definition only)
+   */
   DrawingLineSectionDialog( Context context,
                             DrawingWindow parent, // TopoDroidApp app, 
                             boolean h_section, boolean exists, String id,
-                            DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0 )
+                            DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0,
+                            Vector3D center )
   {
     super( context, R.string.DrawingLineSectionDialog );
     mParent = parent;
     // mApp  = app;
     mExists = exists;      // whether the section exists or it is being created
     mHSection = h_section; // if the line has "-id" the h_section is taken from the PlotInfo
-    mLine = line;
-    mFrom = from;
-    mTo   = to;
-    mNick = null;
+    mLine    = line;
+    mFrom    = from;
+    mTo      = to;
+    mNick    = null;
     mAzimuth = azimuth;
-    mClino = clino;
-    mTT = tt0;
-    hasPhoto = TDandroid.checkCamera( context );
+    mClino   = clino;
+    mTT      = tt0; // if center is null mTT is retrieved from the database
+    mCenter  = center;
 
     // read section id from the line options
     mId = mLine.getOption( "-id" );
@@ -100,12 +117,15 @@ class DrawingLineSectionDialog extends MyDialog
       if ( mPlotInfo != null ) { // extra careful
         mFrom     = mPlotInfo.start;
         mTo       = mPlotInfo.view;
-        mNick     = mPlotInfo.nick;
+        mNick     = mPlotInfo.nick; // section comment
         mAzimuth  = mPlotInfo.azimuth;
         mClino    = mPlotInfo.clino;
         mHSection = (mPlotInfo.type == PlotType.PLOT_H_SECTION);
+        mTT       = mPlotInfo.intercept;
+        if ( mTT > 1.0 ) mCenter = mPlotInfo.center;
       }
     }
+    hasPhoto = ( mTT <= 1.0 ) && TDandroid.checkCamera( context );
     // TDLog.v( "line id " + mId );
   }
 
@@ -200,6 +220,9 @@ class DrawingLineSectionDialog extends MyDialog
 
   }
 
+  /** react to a user tap
+   * @param v tapped view
+   */
   public void onClick(View v) 
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Line Section Dialog onClick() " + b.getText().toString() );
@@ -216,10 +239,10 @@ class DrawingLineSectionDialog extends MyDialog
       long type = mHSection ? PlotType.PLOT_H_SECTION : PlotType.PLOT_SECTION;
       mNick = ( mETnick.getText() != null )? mETnick.getText().toString() : "";
       MyCheckBox cb = (MyCheckBox)v;
-      if ( cb == mBtnFoto ) {
+      if ( hasPhoto && cb == mBtnFoto ) {
         mParent.makePhotoXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino );
       } else if ( cb == mBtnDraw ) {
-        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT );
+        mParent.makePlotXSection( mLine, mId, type, mFrom, mTo, mNick, mAzimuth, mClino, mTT, mCenter );
       } else if ( cb == mBtnErase ) {
         mParent.deleteLine( mLine );
       } else if ( cb == mBtnSave ) {
@@ -231,6 +254,8 @@ class DrawingLineSectionDialog extends MyDialog
     dismiss();
   }
 
+  /** recycle images
+   */
   private void recycleImage()
   {
     if ( mTdImage != null ) mTdImage.recycleImages();

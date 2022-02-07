@@ -60,6 +60,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 import java.util.Set;
+import java.util.TreeSet;
 import java.util.ArrayList;
 
 import java.util.concurrent.RejectedExecutionException;
@@ -593,6 +594,8 @@ public class DrawingWindow extends ItemDrawer
   private long mType; // current plot type
   private String mFrom;
   private String mTo;   // TO station for sections
+  private ArrayList< String > mFroms = new ArrayList<>(); // multileg stations
+  private ArrayList< String > mTos   = new ArrayList<>();
   private float mAzimuth = 0.0f;
   private float mClino   = 0.0f;
   private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections
@@ -948,7 +951,7 @@ public class DrawingWindow extends ItemDrawer
    * @param blk     data block
    * @param x1,y1   first endpoint
    * @param x2,y2   second endpoint
-   * @param cosine  used only for splays
+   * @param cosine  used only for splays: cosine of the angle (splay,leg) of (splay,plane)
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
@@ -1080,13 +1083,31 @@ public class DrawingWindow extends ItemDrawer
   // final static String titleLandscape = " L ";
   // final static String titlePortrait  = " P ";
 
-  /**
+  /** select a point symbol
+   * @param k       index of selected point-tool in the symbol-library array
+   * @param update_recent ...
+   */
+  @Override
+  public void pointSelected( int k, boolean update_recent )
+  {
+    if ( PlotType.isAnySection( mType ) && BrushManager.isPointSection( k ) ) {
+      TDToast.makeToast( R.string.error_no_section_in_section );
+      return;
+    }
+    super.pointSelected( k, update_recent );
+  }
+
+  /** select a line symbol
    * @param k       index of selected line-tool in the symbol-library array
    * @param update_recent ...
    */
   @Override
   public void lineSelected( int k, boolean update_recent )
   {
+    if ( PlotType.isAnySection( mType ) && BrushManager.isLineSection( k ) ) {
+      TDToast.makeToast( R.string.error_no_section_in_section );
+      return;
+    }
     super.lineSelected( k, update_recent );
     if ( TDLevel.overNormal ) {
       if ( BrushManager.getLineGroup( mCurrentLine ) == null ) {
@@ -1199,7 +1220,7 @@ public class DrawingWindow extends ItemDrawer
       // Modified = true; // force saving
       startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
       popInfo();
-      doStart( false, -1 );
+      doStart( false, -1, null );
       // FIXME_POPINFO recomputeReferences( mNum, mZoom );
     } else {
       if ( doubleBack ) {
@@ -2166,7 +2187,7 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.TimeEnd( "on create" );
 
-    doStart( true, -1 );
+    doStart( true, -1, null );
 
     mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
@@ -2320,7 +2341,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
-  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt )
+  private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
     // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     mSavedType = mType;
@@ -2335,7 +2356,7 @@ public class DrawingWindow extends ItemDrawer
     // mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION | ( mSavedMode & DisplayMode.DISPLAY_SCALEBAR ) );
     mDrawingSurface.setDisplayMode( DisplayMode.DISPLAY_SECTION & mSavedMode );
     resetStatus();
-    doStart( true, tt );
+    doStart( true, tt, center );
     updateSplays( mApp.mSplayMode );
 
     // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
@@ -2350,25 +2371,45 @@ public class DrawingWindow extends ItemDrawer
   {
     mApp.mSplayMode = mode;
     switch ( mode ) {
-      case 0:
+      case 0: // hide splays at FROM and at TO
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
-        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
-        mDrawingSurface.hideStationSplays( mFrom );
+        if ( PlotType.isMultilegSection( mType, mTo ) ) {
+          for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
+          for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
+        } else {
+          if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+          mDrawingSurface.hideStationSplays( mFrom );
+        }
         break;
-      case 1:
+      case 1: // hide splays at FROM show splays at TO
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
-        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
-        mDrawingSurface.hideStationSplays( mFrom );
+        if ( PlotType.isMultilegSection( mType, mTo ) ) {
+          for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
+          for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
+        } else {
+          if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+          mDrawingSurface.hideStationSplays( mFrom );
+        }
         break;
-      case 2:
+      case 2: // show splays at FROM and at TO
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
-        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
-        mDrawingSurface.showStationSplays( mFrom );
+        if ( PlotType.isMultilegSection( mType, mTo ) ) {
+          for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
+          for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
+        } else {
+          if ( PlotType.isLegSection( mType ) ) mDrawingSurface.showStationSplays( mTo );
+          mDrawingSurface.showStationSplays( mFrom );
+        }
         break;
-      case 3:
+      case 3: // show splays at FROM, hide splays at TO
         TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
-        if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
-        mDrawingSurface.showStationSplays( mFrom );
+        if ( PlotType.isMultilegSection( mType, mTo ) ) {
+          for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
+          for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
+        } else {
+          if ( PlotType.isLegSection( mType ) ) mDrawingSurface.hideStationSplays( mTo );
+          mDrawingSurface.showStationSplays( mFrom );
+        }
         break;
     }
     mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
@@ -2421,11 +2462,13 @@ public class DrawingWindow extends ItemDrawer
       // mContinueLine = TDSetting.mContinueLine; 
       resetModified();
 
-      doStart( true, -1 );
+      doStart( true, -1, null );
     }
   }
 
   // ==============================================================
+  /** start the item picker dialog
+   */
   void startItemPickerDialog()
   {
     int symbol = mSymbol;
@@ -2435,6 +2478,9 @@ public class DrawingWindow extends ItemDrawer
     startItemPickerDialog( symbol );
   }
 
+  /** start the item picker dialog
+   * @param symbol  initial symbol class that is shown in the dialog
+   */
   private void startItemPickerDialog( int symbol )
   {
     new ItemPickerDialog( mActivity, this, mType, symbol ).show();
@@ -2552,29 +2598,78 @@ public class DrawingWindow extends ItemDrawer
   // }
 
 // ----------------------------------------------------------------------------
+  /** @return the list of legs and splays given a set of IDs of the legs
+   * @param from    string with the leg IDs
+   */
+  private List<DBlock> getMultilegShots( String from )
+  {
+    mFroms.clear();
+    mTos.clear();
+    ArrayList< DBlock > list = new ArrayList< >();
+    TreeSet< String > stations = new TreeSet<>();
+    String[] ids = from.split(" ");
+    for ( String id : ids ) {
+      if ( id.length() == 0 ) continue;
+      DBlock blk = mApp_mData.selectShot( Long.parseLong(id), mSid );
+      if ( blk != null ) { 
+        TDLog.v("leg " + id + ": " + blk.mFrom + " " + blk.mTo );
+        stations.add( blk.mFrom );
+        stations.add( blk.mTo );
+        if ( TDMath.angleDifference( mAzimuth, blk.mBearing) < 90.0f ) {
+          mFroms.add( blk.mFrom );
+          mTos.add( blk.mTo );
+        } else {
+          mTos.add( blk.mFrom );
+          mFroms.add( blk.mTo );
+        }
+        list.add( blk );
+      }
+    }
+    List< DBlock > list0 = mApp_mData.selectAllSplaysAtStations( mSid, stations );
+    for ( DBlock blk0 : list0 ) list.add( blk0 );
+    TDLog.v("multileg list size " + list.size() + " stations " + stations.size() + " splays " + list0.size() + " froms " + mFroms.size() + " tos " + mTos.size() );
+    return list;
+  }
 
-  // called by updateDisplay if the type is not plan/profile
+  private List<DBlock> getXSectionShots( long type, String from, String to )
+  {
+    List< DBlock > list = null;
+    if ( PlotType.isLegSection( type ) ) {
+      if ( to != null && to.length() > 0 ) { // single leg xsection
+        list = mApp_mData.selectAllShotsAtStations( mSid, from, to );
+        // TDLog.v("Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
+      } else { // multileg xsection
+        list = getMultilegShots( from );
+      }
+    } else if ( PlotType.isStationSection( type ) ) { 
+      // N.B. mTo can be null
+      list = mApp_mData.selectShotsAt( mSid, from, false ); // select only splays
+      // TDLog.v("Station-Xsection select all shots at " + mFrom + " : " + list.size() );
+    }
+    return list;
+  }
+
+  /** restart a xsection
+   * @note called by updateDisplay if the type is not plan/profile
+   */
   private void doRestart( )
   {
     // TDLog.v("doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
-    List< DBlock > list = null;
-    if ( PlotType.isLegSection( mType ) ) {
-      list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
-      // TDLog.v("Leg-Xsection select all shots at " + mFrom + " " + mTo + " : " + list.size() );
-    } else if ( PlotType.isStationSection( mType ) ) { 
-      // N.B. mTo can be null
-      list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
-      // TDLog.v("Station-Xsection select all shots at " + mFrom + " : " + list.size() );
-    }
+    List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
     if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
       // TDLog.v("doRestart section T " + mIntersectionT + " " + mPlot3.intercept );
-      if ( mIntersectionT != mPlot3.intercept ) {
-        // TDLog.v( "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
-        mPlot3.intercept = mIntersectionT;
-        mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
+      if ( PlotType.isMultilegSection( mType, mTo ) ) {
+        TDLog.v("restart multileg list " + list.size() );
+        makeSectionReferences( list, mPlot3.center );
+      } else {
+        if ( mIntersectionT != mPlot3.intercept ) {
+          // TDLog.v( "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
+          mPlot3.intercept = mIntersectionT;
+          mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
+        }
+        makeSectionReferences( list, mPlot3.intercept, 0 /* mSectionSkip */ );
       }
-      makeSectionReferences( list, mPlot3.intercept, 0 /* mSectionSkip */ );
     }
   }
 
@@ -2585,8 +2680,9 @@ public class DrawingWindow extends ItemDrawer
    * 
    * FIXME null ptr in 5.1.40 on ANDROID-11 at line 2507 
    */
-  private void doStart( boolean do_load, float tt )
+  private void doStart( boolean do_load, float tt, Vector3D center )
   {
+
     // TDLog.v( "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
@@ -2597,16 +2693,8 @@ public class DrawingWindow extends ItemDrawer
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
-    List< DBlock > list = null;
-    if ( PlotType.isLegSection( mType ) ) {
-      list = mApp_mData.selectAllShotsAtStations( mSid, mFrom, mTo );
-      // TDLog.v("select all shots at " + mFrom + " " + mTo + " : " + list.size() );
-    } else if ( PlotType.isStationSection( mType ) ) { 
-      // N.B. mTo can be null
-      list = mApp_mData.selectShotsAt( mSid, mFrom, false ); // select only splays
-    } else {
-      list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
-    }
+    boolean is_section = PlotType.isAnySection( mType );
+    List< DBlock > list = is_section ?  getXSectionShots( mType, mFrom, mTo ) : mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
 
     // TDLog.TimeEnd( "before load" );
 
@@ -2615,7 +2703,7 @@ public class DrawingWindow extends ItemDrawer
         TDToast.makeBad( R.string.plot_not_found );
         if  ( tt >= 0 ) { // if failed to load x-section file
           popInfo();
-          doStart( false, -1 );
+          doStart( false, -1, null );
           // FIXME_POPINFO recomputeReferences( mNum, mZoom );
           return;
         } else {
@@ -2631,18 +2719,25 @@ public class DrawingWindow extends ItemDrawer
     // SECTION and H_SECTION: mFrom != null, mTo != null, splays and leg
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
-    if ( PlotType.isAnySection( mType ) ) {
-      // TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
-      if ( tt != mPlot3.intercept ) {
-        // TDLog.v( "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
-        mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, tt );
-        mPlot3.intercept = tt;
-      }
-      // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-      makeSectionReferences( list, mPlot3.intercept, 0 );
-    // } else {
-    //   TDLog.v("PLOT try to highlight [1] ");
-    //   if ( mApp.hasHighlighted() ) mDrawingSurface.highlights( mApp ); 
+    if ( is_section ) {
+      if ( PlotType.isMultilegSection( mType, mTo ) ) {
+        TDLog.v("start multileg list " + list.size() );
+        if ( center != null ) {
+          TDLog.v("do start center " + center.x + " " + center.y + " " + center.z );
+          mPlot3.center = center;
+          mApp_mData.updatePlotCenter( mPlot3.id, mSid, center );
+        }
+        makeSectionReferences( list, mPlot3.center );
+      } else {
+        TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
+        if ( tt != mPlot3.intercept ) {
+          TDLog.v( "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
+          mApp_mData.updatePlotIntercept( mPlot3.id, mSid, tt );
+          mPlot3.intercept = tt;
+        }
+        // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
+        makeSectionReferences( list, mPlot3.intercept, 0 );
+      } 
     }
     // TDLog.TimeEnd("do start done");
 
@@ -2655,7 +2750,7 @@ public class DrawingWindow extends ItemDrawer
   //   mDrawingSurface.addDrawingPath( path );
   // }
 
-  /** make the refrence for a x-section
+  /** make the refrence for a leg/at-station xsection
    * @param list   list of shots of the section
    * @param tt     abscissa of the leg intercept
    * @param skip   control param about how to make the reference (?)
@@ -2700,7 +2795,7 @@ public class DrawingWindow extends ItemDrawer
     // float Y2 = Z0 * X1 - Z1 * X0;
     // float Z2 = X0 * Y1 - X1 * Y0;
 
-    TDVector V0 = new TDVector( ma, mc ); // normal to the x-section plane
+    TDVector V0 = new TDVector( (float)(Math.cos(ma)*Math.cos(mc)), (float)(Math.sin(ma)*Math.cos(mc)), (float)Math.sin(mc) ); // normal to the x-section plane
     // V1,V2 are the frame of reference in the x-section plane
     TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
     TDVector V2 = V0.cross( V1 );
@@ -2859,6 +2954,104 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
   }
 
+  /** make the refrence for a multileg xsection
+   * @param list   list of shots of the section
+   * @param center center
+   * @note called by doRestart, doStart, doRecover
+   */
+  private void makeSectionReferences( List< DBlock > list, Vector3D center )
+  {
+
+    assert( mLastLinePath == null); // not needed - guaranteed by callers
+    TDLog.v("multileg make section reference " + mAzimuth + " " + mClino + " list " + list.size() );
+
+    mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
+    DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
+    mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
+    float xfrom=0;
+    float yfrom=0;
+    float zfrom=0;
+    float xto=0;
+    float yto=0;
+    float zto=0;
+    // normal, horizontal and cross-product
+    float mc = mClino   * TDMath.DEG2RAD;
+    float ma = mAzimuth * TDMath.DEG2RAD;
+    // canvas X-axis, unit horizontal axis: 90 degrees to the right of the azimuth
+    //   azimuth = 0 (north) --> horizontal = ( 0N, 1E)
+    //   azimuth = 90 (east) --> horizontal = (-1N, 0E)
+    //   etc.
+    // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
+    // canvas Y-axis = - UP-axis
+
+    // FIXME_VECTOR
+    // float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
+    // float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
+    // float Z0 = (float)Math.sin( mc );                          // Z = Up
+    // float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
+    // float Y1 =   (float)Math.cos( ma ); 
+    // float Z1 = 0;
+    // // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
+    // // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
+    // // float Z2 =   (float)Math.cos( ma );
+    // float X2 = Y0 * Z1 - Y1 * Z0; 
+    // float Y2 = Z0 * X1 - Z1 * X0;
+    // float Z2 = X0 * Y1 - X1 * Y0;
+
+    TDVector V0 = new TDVector( (float)(Math.cos(ma)*Math.cos(mc)), (float)(Math.sin(ma)*Math.cos(mc)), (float)Math.sin(mc) ); // normal to the x-section plane
+    // V1,V2 are the frame of reference in the x-section plane
+    TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 ); // N,E,Up
+    TDVector V2 = new TDVector( 0, 0, 1 ); // V0.cross( V1 );
+
+    float dist = 0;
+    DBlock blk = null;
+    // float xn = 0;  // X-North // Rotate as NORTH is upward
+    // float yn = -1; // Y-North
+    float xtt = (float)center.x; // x-section center East
+    float ytt = (float)center.y; // South
+    float ztt = (float)center.z; // Down
+    for ( DBlock b : list ) {
+      if ( b.isSplay() ) {
+        // TDLog.v("multileg splay block " + b.mFrom );
+        NumStation st_f = mNum.getStation( b.mFrom );
+        NumSplay sp = mNum.getSplayOf( b );
+        if ( st_f != null && sp != null ) {
+          TDVector vf = new TDVector( ytt - (float)st_f.s, (float)st_f.e - xtt, ztt - (float)st_f.v ); // N,E,Up
+          TDVector vt = new TDVector( ytt - (float)sp.s,   (float)sp.e - xtt,   ztt - (float)sp.v );
+          TDVector vft = new TDVector( (float)st_f.s - (float)sp.s, (float)sp.e - (float)st_f.e, (float)st_f.v - (float)sp.v );
+          float cosine = vft.dot(V0)/vft.Length();
+          xfrom = vf.dot(V1); 
+          yfrom = vf.dot(V2);
+          xto   = vt.dot(V1); 
+          yto   = vt.dot(V2);
+          // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto + " cosine " + cosine );
+          addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selecteable
+        } else {
+          TDLog.Error( "splay block without station " + b.mFrom );
+        }
+      } else {
+        // TDLog.v("multileg leg block " + b.mFrom + " " + b.mTo );
+        NumStation st_f = mNum.getStation( b.mFrom );
+        NumStation st_t = mNum.getStation( b.mTo );
+        if ( st_f != null && st_t != null ) {
+          TDVector vf = new TDVector( ytt - (float)st_f.s, (float)st_f.e - xtt, ztt - (float)st_f.v ); // N,E,Up
+          TDVector vt = new TDVector( ytt - (float)st_t.s, (float)st_t.e - xtt, ztt - (float)st_t.v );
+          xfrom = vf.dot(V1); 
+          yfrom = vf.dot(V2);
+          xto   = vt.dot(V1); 
+          yto   = vt.dot(V2);
+          // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto );
+          addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selecteable
+          mDrawingSurface.addDrawingStationName( b.mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
+          mDrawingSurface.addDrawingStationName( b.mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
+        } else {
+          TDLog.Error( "leg block without station " + b.mFrom + " " + b.mTo );
+        }
+      }
+    }
+    mDrawingSurface.commitReferences();
+  }
+
   /** read the plot from file(s) - the file name(s) is taken from the plot names stored in the object
    * @param type    plot type
    * @param list    shots list
@@ -2968,7 +3161,10 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  // called by doResume and doStart
+  /** set the plot type
+   * @param type  plot type
+   * called by doResume and doStart
+   */
   private void setPlotType( long type )
   {
     // TDLog.v("setPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -4310,107 +4506,137 @@ public class DrawingWindow extends ItemDrawer
 
     List< DrawingPathIntersection > paths = mDrawingSurface.getIntersectionShot( l1, l2 );
     int nr_legs = paths.size() ; // 0 no-leg, 1 ok, 2 too many legs
+
+    if ( nr_legs == 0 ) { // FAILURE: no leg
+      TDToast.makeWarn( R.string.no_leg_intersection );
+      return;
+    }
+
     String from = null;
     String to   = null;
     float azimuth = 0;
-    float clino = 0;
-    float tt = -1;
-    if ( paths.size() > 0 ) {
-      currentLine.computeUnitNormal();
+    float clino   = 0;
+    float tt      = -1;  // no intercept
 
-      // orientation of the section-line
-      azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
-      DBlock blk = null;
+    currentLine.computeUnitNormal();
 
-      if ( nr_legs == 1 ) {
-        DrawingPathIntersection pi = paths.get(0);
-        DrawingPath p = pi.path;
-        tt = pi.tt;
-        // TDLog.v( "assign tt " + tt );
-        blk = p.mBlock;
+    // orientation of the section-line
+    azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
+    DBlock blk = null;
+    Vector3D center = null; // centroid of the intersection
 
-        // Float result = Float.valueOf(0);
-        // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
-        // float intersection = result.floatValue();
-        // // p.log();
+    if ( nr_legs == 1 ) {
+      DrawingPathIntersection pi = paths.get(0);
 
-        from = blk.mFrom;
-        to   = blk.mTo;
-        if ( h_section ) { // xsection in profile view
-          int extend = 1;
-          if ( azimuth < 180 ) {
-            clino = 90 - azimuth;
-            // extend = 1;
-          } else {
-            clino = azimuth - 270;
-            extend = -1;
-          }
+      DrawingPath p = pi.path;
+      tt = pi.tt;
+      // TDLog.v( "assign tt " + tt );
+      blk = p.mBlock;
+
+      // Float result = Float.valueOf(0);
+      // p.intersect( l1.x, l1.y, l2.x, l2.y, result );
+      // float intersection = result.floatValue();
+      // // p.log();
+
+      from = blk.mFrom;
+      to   = blk.mTo;
+      if ( h_section ) { // xsection in profile view
+        int extend = 1;
+        if ( azimuth < 180 ) {
+          clino = 90 - azimuth;
+          // extend = 1;
+        } else {
+          clino = azimuth - 270;
+          extend = -1;
+        }
     
-          float dc = TDMath.in360( (extend == blk.getIntExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
-          if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
-            azimuth = TDMath.add180( blk.mBearing );
-            from = blk.mTo;
-            to   = blk.mFrom;
-            tt   = 1 - tt;
-          } else {
-            azimuth = blk.mBearing;
-          }
-          // if ( extend != blk.getIntExtend() ) {
-          //   azimuth = TDMath.add180( blk.mBearing );
-          // }
-        } else { // xsection in plan view ( clino = 0 )
-          float da = TDMath.in360( azimuth - blk.mBearing );
-          if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
-            from = blk.mTo;
-            to   = blk.mFrom;
-            tt   = 1 - tt;
-          }
+        float dc = TDMath.in360( (extend == blk.getIntExtend())? clino - blk.mClino : 180 - clino - blk.mClino );
+        if ( dc > 90 && dc <= 270 ) { // exchange FROM-TO 
+          azimuth = TDMath.add180( blk.mBearing );
+          from = blk.mTo;
+          to   = blk.mFrom;
+          tt   = 1 - tt;
+        } else {
+          azimuth = blk.mBearing;
         }
-      } else if ( nr_legs > 1 ) { // many legs
-        // TDToast.makeWarn( R.string.too_many_leg_intersection );
-        if ( ! h_section ) { // not xsection in profile view
-          nr_legs = 1; // ok
-          // these have already been computed before the if-test
-          // azimuth = TDMath.in360( 90 + (float)(Math.atan2( l2.x-l1.x, -l2.y+l1.y ) * TDMath.RAD2DEG ) );
-        // } else {
-        //   // nothing 
+        // if ( extend != blk.getIntExtend() ) {
+        //   azimuth = TDMath.add180( blk.mBearing );
+        // }
+      } else { // xsection in plan view ( clino = 0 )
+        float da = TDMath.in360( azimuth - blk.mBearing );
+        if ( da > 90 && da <= 270 ) { // exchange FROM-TO 
+          from = blk.mTo;
+          to   = blk.mFrom;
+          tt   = 1 - tt;
         }
       }
+      // TDLog.v( "new leg xsection " + from + " - " + to + " intercept " + tt );
+    } else if ( nr_legs > 1 ) {
+      if ( h_section ) { // FAILURE: xsection in profile view and many legs
+        TDToast.makeWarn( R.string.too_many_leg_intersection );
+        return;
+      }
+      StringBuilder sb = new StringBuilder();
+
+      double x = 0; // FIXME the centroid is not used yet
+      double y = 0;
+      double z = 0;
+      int cnt = 0;
+      for ( DrawingPathIntersection path : paths ) {
+        DBlock b = path.path.mBlock;
+        float t   = path.tt;
+        NumStation st_f = mNum.getStation( b.mFrom );
+        NumStation st_t = mNum.getStation( b.mTo );
+        if ( st_f != null && st_t != null ) {
+          if ( cnt > 0 ) sb.append(" ");
+          sb.append( Long.toString(b.mId) );
+          x += st_f.e + t * ( st_t.e -  st_f.e ); // eastward
+          y += st_f.s + t * ( st_t.s -  st_f.s ); // southward
+          z += st_f.v + t * ( st_t.v -  st_f.v ); // downward
+          cnt ++;
+        }
+      }
+      if ( cnt > 0 ) {
+        tt = 2; // multileg intercept
+        center = new Vector3D( x/cnt, y/cnt, z/cnt ); // 3D (E,S,V) centroid of the intersections
+        from = sb.toString();
+        // TDLog.v( "new multileg xsection " + from + " " + center.x + " " + center.y + " " + center.z );
+      } else {
+        TDToast.makeWarn( R.string.too_many_leg_intersection ); // FIXME bad intersections
+        return;
+      }
     }
-    // TDLog.v( "new section " + from + " - " + to );
     // cross-section does not exists yet
-    if ( nr_legs == 0 ) {
-      TDToast.makeWarn( R.string.no_leg_intersection );
-    } else if ( nr_legs == 1 ) {
-      String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
-      currentLine.addOption( "-id " + section_id );
-      mDrawingSurface.addDrawingPath( currentLine );
+    String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
+    currentLine.addOption( "-id " + section_id );
+    mDrawingSurface.addDrawingPath( currentLine );
 
-      if ( TDSetting.mAutoSectionPt && section_id != null ) {
-        float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
-        float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
-        // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-        // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
-        String scrap_option = "-scrap " + TDInstance.survey + "-" + section_id;
-        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
-                                                        x5, y5, PointScale.SCALE_M, 
-                                                        null, // no text 
-                                                        scrap_option, mDrawingSurface.scrapIndex() );
-	section_pt.setLink( currentLine );
-        mDrawingSurface.addDrawingPath( section_pt );
-      }
-
-      // TDLog.v( "line section dialog TT " + tt );
-      new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, false, section_id, currentLine, from, to, azimuth, clino, tt ).show();
-
-    } else { // many legs in profile view
-      TDToast.makeWarn( R.string.too_many_leg_intersection );
+    if ( TDSetting.mAutoSectionPt && section_id != null ) {
+      float x5 = currentLine.mLast.x + currentLine.mDx * 20; 
+      float y5 = currentLine.mLast.y + currentLine.mDy * 20; 
+      // FIXME_LANDSCAPE if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
+      // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + section_id;
+      String scrap_option = "-scrap " + TDInstance.survey + "-" + section_id;
+      DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
+                                                      x5, y5, PointScale.SCALE_M, 
+                                                      null, // no text 
+                                                      scrap_option, mDrawingSurface.scrapIndex() );
+      section_pt.setLink( currentLine );
+      mDrawingSurface.addDrawingPath( section_pt );
     }
+
+    // TDLog.v( "line section dialog TT " + tt );
+    new DrawingLineSectionDialog( mActivity, this, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt, center ).show();
   }
 
   // -------------------------------------------------------------
 
-    // add a therion label point (ILabelAdder)
+    /** insert a therion label point (ILabelAdder)
+     * @param label  text
+     * @param x      X coord
+     * @param y      Y coord
+     * @param level  canvas level of the point
+     */
     public void addLabel( String label, float x, float y, int level )
     {
       // TDLog.v("addLabel " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -4430,6 +4656,8 @@ public class DrawingWindow extends ItemDrawer
   // private long  mMediaId = -1L;
   // private int   mMediaCamera = PhotoInfo.CAMERA_UNDEFINED;
 
+  /** create a "photo" point item
+   */
   private void createPhotoPoint()
   {
     DrawingPhotoPath photo = new DrawingPhotoPath( mMediaManager.getComment(), mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, mMediaManager.getPhotoId(), mDrawingSurface.scrapIndex() );
@@ -4452,7 +4680,9 @@ public class DrawingWindow extends ItemDrawer
   //   }
   // }
 
-  // @from IPhotoInserter
+  /** insert a photo
+   * @note from IPhotoInserter
+   */
   public void insertPhoto( )
   {
     mApp_mData.insertPhoto( TDInstance.sid, mMediaManager.getPhotoId(), -1, "", TDUtil.currentDate(), mMediaManager.getComment(), mMediaManager.getCamera() );
@@ -4468,6 +4698,11 @@ public class DrawingWindow extends ItemDrawer
   //   mApp_mData.updatePlotAzimuthClino( TDInstance.sid, pid, azimuth, clino );
   // }
 
+  /** take a photo
+   * @param imagefile   photo image file
+   * @param insert      whether to insert the point (?)
+   * @param pid         plot ID
+   */
   private void doTakePointPhoto( String imagefile, boolean insert, long pid )
   {
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
@@ -4492,6 +4727,11 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** insert a "photo" point
+   * @param comment  photo comment
+   * @param x      X coord
+   * @param y      Y coord
+   */
   public void addPhotoPoint( String comment, float x, float y )
   {
     // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -4509,367 +4749,393 @@ public class DrawingWindow extends ItemDrawer
     doTakePointPhoto( mMediaManager.getImageFilepath(), true, -1L ); // with inserter, no pid
   }
 
-    private void addAudioPoint( float x, float y )
-    {
-      // TDLog.v("add Audio Point " + x + " " + y );
-      assert( mLastLinePath == null );
-      // mMediaComment = ""; // audio point do not have comment
-      if ( ! audioCheck ) {
-	TDToast.makeWarn( R.string.no_feature_audio );
-	return;
-      }
-      if ( mLandscape ) {
-        mMediaManager.setPoint( -y, x );
-      } else {
-        mMediaManager.setPoint( x, y );
-      }
-      long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
-      // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
-      // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
-      // TODO RECORD AUDIO
-      new AudioDialog( mActivity, this, audio_id, null ).show();
+  /** insert a "audio" point
+   * @param x      X coord
+   * @param y      Y coord
+   */
+  private void addAudioPoint( float x, float y )
+  {
+    // TDLog.v("add Audio Point " + x + " " + y );
+    assert( mLastLinePath == null );
+    // mMediaComment = ""; // audio point do not have comment
+    if ( ! audioCheck ) {
+      TDToast.makeWarn( R.string.no_feature_audio );
+      return;
     }
-
-    // @from IAudioInserter
-    public void deletedAudio( long audio_id )
-    {
-      // TDLog.v("deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
-      deletePoint( audio ); // if audio == null doesn't do anything
+    if ( mLandscape ) {
+      mMediaManager.setPoint( -y, x );
+    } else {
+      mMediaManager.setPoint( x, y );
     }
+    long audio_id = mMediaManager.prepareNextAudioNeg( -1, "" );
+    // mMediaId = mApp_mData.nextAudioNegId( TDInstance.sid );
+    // File file = TDFile.getFile( TDPath.getSurveyWavFile( TDInstance.survey, Long.toString(mMediaId) ) );
+    // TODO RECORD AUDIO
+    new AudioDialog( mActivity, this, audio_id, null ).show();
+  }
 
-    // @from IAudioInserter
-    // public void startRecordAudio( long bid )
-    // {
-    //   // nothing
-    // }
+  /** delete an audio record
+   * @param id   audio ID
+   * @note from IAudioInserter
+   */
+  public void deletedAudio( long audio_id )
+  {
+    // TDLog.v("deleteAudio " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
+    deletePoint( audio ); // if audio == null doesn't do anything
+  }
 
-    /** stop recording an audio 
-     * @param audio_id    ID of the recording audio
-     *
-     * @from IAudioInserter
-     */
-    public void stopRecordAudio( long audio_id )
-    {
-      DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
-      if ( audio == null ) {
-        // assert bid == mMediaManager.getAudioId()
-        audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, audio_id, mDrawingSurface.scrapIndex() );
-	audio.mLandscape = mLandscape;
-        mDrawingSurface.addDrawingPath( audio );
-        modified();
-      }
-    }
+  // @from IAudioInserter
+  // public void startRecordAudio( long bid )
+  // {
+  //   // nothing
+  // }
 
-    void setCurrentStationName( String name, DrawingStationName st )
-    {
-      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
-      mApp.setCurrentStationName( name );
-      mDrawingSurface.setCurrentStation( st, saved );
-    }
-
-    /** delete at-station xsection
-     * @param st   station
-     * @param name xsection index
-     * @param type parent sketch type (PLAN or profile)
-     */
-    void deleteXSection( DrawingStationName st, String name, long type ) 
-    {
-      // TDLog.v("delete X-Section " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      long xtype = -1;
-      String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
-      if ( type == PlotType.PLOT_PLAN ) {
-        xs_id = "xs-" + name;
-        xtype = PlotType.PLOT_X_SECTION;
-      } else if ( PlotType.isProfile( type ) ) {
-        xs_id = "xh-" + name;
-        xtype = PlotType.PLOT_XH_SECTION;
-      } else {
-	TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
-        return;
-      }
-
-      st.resetXSection();
-      mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
-      // drop the files
-      TDFile.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
-      // TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
-      // TODO delete backup files
-
-      deleteSectionPoint( xs_id ); 
-    }
-
-    /** delete section point and possibly the xsection outline
-     * @param xs_id    X-section name
-     */
-    private void deleteSectionPoint( String xs_id )
-    {
-      // TDLog.v("deleteSectionPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      if ( xs_id == null ) return;
-      String scrap_name = TDInstance.survey + "-" + xs_id;
-      mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
-      mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
-    }
-
-    /** @return the (leg) xsection type according to the parent sketch type
-     * @param type parent sketch type (PLAN or profile)
-     */
-    private long getXSectionType( long type )
-    {
-      if ( type == PlotType.PLOT_PLAN ) return PlotType.PLOT_X_SECTION;
-      if ( PlotType.isProfile( type ) ) return PlotType.PLOT_XH_SECTION;
-      return PlotType.PLOT_NULL;
-    }
-
-    /** @return the station xsection name according to the parent sketch type, ie, either "xs-" or "xh-" followed by the station name
-     * @param st_name   station name
-     * @param type      parent sketch type (PLAN or profile)
-     */
-    private String getXSectionName( String st_name, long type )
-    {
-      if ( type == PlotType.PLOT_PLAN ) return "xs-" + st_name;
-      if ( PlotType.isProfile( type ) ) return "xh-" + st_name;
-      return null;
-    }
-
-    /** @return the station xsection nickname according to the parent sketch type
-     * @param st_name   station name
-     * @param type      parent sketch type (PLAN or profile)
-     */
-    String getXSectionNick( String st_name, long type )
-    {
-      // parent name = mName
-      String xs_id = getXSectionName( st_name, type );
-      if ( xs_id == null ) return "";
-      if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
-
-      // TDLog.v( "xsection nick for <" + xs_id + ">" );
-
-      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
-      if ( plot != null ) return plot.nick;
-      return null;
-    }
-
-    /** open a station xsection - at station B where A--B--C
-     * @param st_name   station name
-     * @param type      type of the parent plot where the x-section is defined
-     * @param azimuth   section plane direction
-     *        direct: azimuth = average azimuth of AB and BC, inverse: the opposite
-     * @param clino     section plane inclination
-     *        direct: clino   = average clino of AB and BC, inverse: the opposite
-     * @note plot type = PLAN ==> clino = 0; plot type = PROFILE ==> clino = -90, 0, +90  according to horiz
-     * @param horiz  (?) whether the section is horizontal 
-     * @param nick   section name
-     *
-     * @note if the xsection does not exists it is created
-     */
-    void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
-    {
-      // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
-      // parent plot name = mName
-      String xs_id = getXSectionName( st_name, type );
-      if ( xs_id == null ) return;
-      if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
-      long xtype = getXSectionType( type );
-
-      // TDLog.v( "open xsection <" + xs_id + "> nick <" + nick + ">" );
-
-      PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
-
-      if ( plot == null  ) { // if there does not exist xsection xs-name create it
-        // TDToast.makeWarn( R.string.too_many_legs_xsection );
-        if ( azimuth >= 360 ) azimuth -= 360;
-
-        if ( PlotType.isProfile( type ) ) {
-          if ( horiz ) {
-            clino = ( clino > 0 ) ? 90 : -90;
-          } else {
-            clino = 0;
-          }
-          // clino = ( clino >  TDSetting.mVertSplay )?  90 : ( clino < -TDSetting.mVertSplay )? -90 : 0;
-        } else { // type == PlotType.PLOT_PLAN
-          clino = 0;
-        }
-        // TDLog.v( "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
-
-        long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
-        // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
-        plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
-
-        // add x-section to station-name
-
-        st.setXSection( azimuth, clino, type );
-        if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
-          float x5 = st.getXSectionX( 4 ); // FIXME offset
-          float y5 = st.getXSectionY( 4 );
-	  if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
-	  // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
-	  String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
-	  DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
-							    x5, y5, PointScale.SCALE_M, 
-							    null, scrap_option, mDrawingSurface.scrapIndex() ); // no text
-	  section_pt.setLink( st );
-	  mDrawingSurface.addDrawingPath( section_pt );
-        }
-      } else {
-        updatePlotNick( plot, nick );
-      }
-      if ( plot != null ) {
-        pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino, -1 );
-        // zoomFit( mDrawingSurface.getBitmapBounds() );
-      }
-    }
-
-    // update section-line x-section nick
-    // also at-station
-    void updatePlotNick( PlotInfo plot, String nick )
-    {
-      if ( nick == null || plot == null ) return;
-      if ( ! nick.equals( plot.nick ) ) {
-        mApp_mData.updatePlotNick( plot.id, mSid, nick );
-      }
-    }
-
-    void toggleStationSplays( String st_name, boolean on, boolean off ) { mDrawingSurface.toggleStationSplays( st_name, on, off ); }
-    boolean isStationSplaysOn( String st_name ) { return mDrawingSurface.isStationSplaysOn( st_name ); }
-    boolean isStationSplaysOff( String st_name ) { return mDrawingSurface.isStationSplaysOff( st_name ); }
-
-    void toggleStationHidden( String st_name, boolean is_hidden )
-    {
-      String hide = mPlot1.hide.trim();
-      // TDLog.v( "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
-      String new_hide = ""; // empty string
-      boolean add = false;
-      boolean drop = false;
-      if ( /* hide == null || */ hide.length() == 0 ) {
-        add = true;
-        drop = false;
-      } else {
-        String[] hidden = hide.split( "\\s+" );
-        StringBuilder sb = new StringBuilder();
-        int k = 0;
-        for (; k < hidden.length; ++k ) {
-          if ( hidden[k].length() > 0 ) {
-            if ( hidden[k].equals( st_name ) ) { // N.B. hidden[k] != null
-              drop = true;
-            } else {
-              sb.append(" ").append( hidden[k] );
-              // new_hide = new_hide + " " + hidden[k];
-            }
-          }
-        }
-        if ( sb.length() > 0 ) new_hide = sb.toString().trim();
-        // if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
-        add = ! drop;
-      }
-      int h = 0;
-
-      if ( add && ! is_hidden ) {
-        if ( /* hide == null || */ hide.length() == 0 ) {
-          hide = st_name;
-        } else {
-          hide = hide + " " + st_name;
-        }
-        // TDLog.v( "addStationHidden " + st_name + " hide <" + hide + ">" );
-        mApp_mData.updatePlotHide( mPid1, mSid, hide );
-        mApp_mData.updatePlotHide( mPid2, mSid, hide );
-        mPlot1.hide = hide;
-        mPlot2.hide = hide;
-        h = 1; // hide
-      } else if ( drop && is_hidden ) {
-        mApp_mData.updatePlotHide( mPid1, mSid, new_hide );
-        mApp_mData.updatePlotHide( mPid2, mSid, new_hide );
-        mPlot1.hide = new_hide;
-        mPlot2.hide = new_hide;
-        h = -1; // un-hide
-        // TDLog.v( "dropStationHidden " + st_name + " hide <" + new_hide + ">" );
-      }
-      // TDLog.v( "toggle station hidden: hide <" + hide + "> H " + h );
-
-      if ( h != 0 ) {
-        // TDLog.v("clear shots and stations" );
-        mDrawingSurface.clearShotsAndStations( );
-        mNum.setStationHidden( st_name, h );
-        recomputeReferences( mNum, mZoom );
-      }
-    }
-    //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
-
-    void toggleStationBarrier( String st_name, boolean is_barrier ) 
-    {
-      String view = mPlot1.view.trim();
-      // TDLog.v( "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
-      String new_view = ""; // empty string
-      boolean add = false;
-      boolean drop = false;
-      if ( view == null ) { // always false
-        add = true;
-        drop = false;
-      } else {
-        String[] barrier = view.split( " " );
-        StringBuilder sb = new StringBuilder();
-        int k = 0;
-        for (; k < barrier.length; ++k ) {
-          if ( barrier[k].length() > 0 ) {
-            if ( barrier[k].equals( st_name ) ) { // N.B. barrier[k] != null
-              drop = true;
-            } else {
-              sb.append(" ").append( barrier[k] );
-              // new_view = new_view + " " + barrier[k];
-            }
-          }
-        }
-        if ( sb.length() > 0 ) new_view = sb.toString().trim();
-        // if ( new_view.length() > 0 ) new_view = new_view.trim();
-        add = ! drop;
-      }
-      int h = 0;
-
-      if ( add && ! is_barrier ) {
-        if ( /* view == null || */ view.length() == 0 ) {
-          view = st_name;
-        } else {
-          view = view + " " + st_name;
-        }
-        // TDLog.v( "addStationBarrier " + st_name + " view <" + view + ">" );
-        mApp_mData.updatePlotView( mPid1, mSid, view );
-        mApp_mData.updatePlotView( mPid2, mSid, view );
-        mPlot1.view = view;
-        mPlot2.view = view;
-        h = 1;
-      } else if ( drop && is_barrier ) {
-        mApp_mData.updatePlotView( mPid1, mSid, new_view );
-        mApp_mData.updatePlotView( mPid2, mSid, new_view );
-        mPlot1.view = new_view;
-        mPlot2.view = new_view;
-        h = -1;
-      }
-      // TDLog.v( "toggle station barrier: view <" + view + "> H " + h );
-
-      if ( h != 0 ) {
-        // TDLog.v("clear shots and stations" );
-        mDrawingSurface.clearShotsAndStations( );
-        mNum.setStationBarrier( st_name, h );
-        recomputeReferences( mNum, mZoom );
-      }
-    }
-   
-    /** add a therion station point
-     * @param st    (user) station point
-     */
-    public void addStationPoint( DrawingStationName st )
-    {
-      // TDLog.v("addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      DrawingStationPath path = new DrawingStationPath( st, PointScale.SCALE_M, mDrawingSurface.scrapIndex() );
-      mDrawingSurface.addDrawingStationPath( path );
+  /** stop recording an audio 
+   * @param audio_id    ID of the recording audio
+   *
+   * @from IAudioInserter
+   */
+  public void stopRecordAudio( long audio_id )
+  {
+    DrawingAudioPath audio = mDrawingSurface.getAudioPoint( audio_id );
+    if ( audio == null ) {
+      // assert bid == mMediaManager.getAudioId()
+      audio = new DrawingAudioPath( mMediaManager.getX(), mMediaManager.getY(), mPointScale, null, audio_id, mDrawingSurface.scrapIndex() );
+      audio.mLandscape = mLandscape;
+      mDrawingSurface.addDrawingPath( audio );
       modified();
     }
+  }
+
+  /** set the name of the current station
+   * @param name      name
+   * @param st        station name item
+   */
+  void setCurrentStationName( String name, DrawingStationName st )
+  {
+    List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+    mApp.setCurrentStationName( name );
+    mDrawingSurface.setCurrentStation( st, saved );
+  }
+
+  /** delete at-station xsection
+   * @param st   station
+   * @param name xsection index
+   * @param type parent sketch type (PLAN or profile)
+   */
+  void deleteXSection( DrawingStationName st, String name, long type ) 
+  {
+    // TDLog.v("delete X-Section " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    long xtype = -1;
+    String xs_id = null; // xsection_id eg, xs-2 (xsection at station 2)
+    if ( type == PlotType.PLOT_PLAN ) {
+      xs_id = "xs-" + name;
+      xtype = PlotType.PLOT_X_SECTION;
+    } else if ( PlotType.isProfile( type ) ) {
+      xs_id = "xh-" + name;
+      xtype = PlotType.PLOT_XH_SECTION;
+    } else {
+      TDLog.Error("No at-station section to delete. Plot type " + type + " Name " + name + " SID "  + TDInstance.sid );
+      return;
+    }
+
+    st.resetXSection();
+    mApp_mData.deletePlotByName( xs_id, TDInstance.sid );
+    // drop the files
+    TDFile.deleteFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, xs_id ) );
+    // TDFile.deleteFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, xs_id ) );
+    // TODO delete backup files
+
+    deleteSectionPoint( xs_id ); 
+  }
+
+  /** delete section point and possibly the xsection outline
+   * @param xs_id    X-section name
+   */
+  private void deleteSectionPoint( String xs_id )
+  {
+    // TDLog.v("deleteSectionPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    if ( xs_id == null ) return;
+    String scrap_name = TDInstance.survey + "-" + xs_id;
+    mDrawingSurface.deleteSectionPoint( scrap_name );   // this section-point delete cannot be undone
+    mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
+  }
+
+  /** @return the (leg) xsection type according to the parent sketch type
+   * @param type parent sketch type (PLAN or profile)
+   */
+  private long getXSectionType( long type )
+  {
+    if ( type == PlotType.PLOT_PLAN ) return PlotType.PLOT_X_SECTION;
+    if ( PlotType.isProfile( type ) ) return PlotType.PLOT_XH_SECTION;
+    return PlotType.PLOT_NULL;
+  }
+
+  /** @return the station xsection name according to the parent sketch type, ie, either "xs-" or "xh-" followed by the station name
+   * @param st_name   station name
+   * @param type      parent sketch type (PLAN or profile)
+   */
+  private String getXSectionName( String st_name, long type )
+  {
+    if ( type == PlotType.PLOT_PLAN ) return "xs-" + st_name;
+    if ( PlotType.isProfile( type ) ) return "xh-" + st_name;
+    return null;
+  }
+
+  /** @return the station xsection comment according to the parent sketch type
+   * @param st_name   station name
+   * @param type      parent sketch type (PLAN or profile)
+   */
+  String getXSectionNick( String st_name, long type )
+  {
+    // parent name = mName
+    String xs_id = getXSectionName( st_name, type );
+    if ( xs_id == null ) return "";
+    if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
+
+    // TDLog.v( "xsection comment for <" + xs_id + ">" );
+
+    PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
+    if ( plot != null ) return plot.nick;
+    return null;
+  }
+
+  /** open a station xsection - at station B where A--B--C
+   * @param st_name   station name
+   * @param type      type of the parent plot where the x-section is defined
+   * @param azimuth   section plane direction
+   *        direct: azimuth = average azimuth of AB and BC, inverse: the opposite
+   * @param clino     section plane inclination
+   *        direct: clino   = average clino of AB and BC, inverse: the opposite
+   * @note plot type = PLAN ==> clino = 0; plot type = PROFILE ==> clino = -90, 0, +90  according to horiz
+   * @param horiz  (?) whether the section is horizontal 
+   * @param nick   section comment
+   *
+   * @note if the xsection does not exists it is created
+   */
+  void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
+  {
+    // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
+    // parent plot name = mName
+    String xs_id = getXSectionName( st_name, type );
+    if ( xs_id == null ) return;
+    if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
+    long xtype = getXSectionType( type );
+
+    // TDLog.v( "open xsection <" + xs_id + "> nick <" + nick + ">" );
+
+    PlotInfo plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
+
+    if ( plot == null  ) { // if there does not exist xsection xs-name create it
+      // TDToast.makeWarn( R.string.too_many_legs_xsection );
+      if ( azimuth >= 360 ) azimuth -= 360;
+
+      if ( PlotType.isProfile( type ) ) {
+        if ( horiz ) {
+          clino = ( clino > 0 ) ? 90 : -90;
+        } else {
+          clino = 0;
+        }
+        // clino = ( clino >  TDSetting.mVertSplay )?  90 : ( clino < -TDSetting.mVertSplay )? -90 : 0;
+      } else { // type == PlotType.PLOT_PLAN
+        clino = 0;
+      }
+      // TDLog.v( "new at-station X-section " + xs_id + " st_name " + st_name + " nick <" + nick + ">" );
+
+      long pid = mApp.insert2dSection( TDInstance.sid, xs_id, xtype, st_name, "", azimuth, clino, (TDInstance.xsections? null : mName), nick );
+      // plot = mApp_mData.getPlotInfo( TDInstance.sid, pid );
+      plot = mApp_mData.getPlotInfo( TDInstance.sid, xs_id );
+
+      // add x-section to station-name
+
+      st.setXSection( azimuth, clino, type );
+      if ( TDSetting.mAutoSectionPt ) { // insert xsection point in the plot
+        float x5 = st.getXSectionX( 4 ); // FIXME offset
+        float y5 = st.getXSectionY( 4 );
+        if ( mLandscape ) { float t=x5; x5=-y5; y5=t; }
+        // FIXME String scrap_option = "-scrap " /* + TDInstance.survey + "-" */ + xs_id;
+        String scrap_option = "-scrap " + TDInstance.survey + "-" + xs_id;
+        DrawingPointPath section_pt = new DrawingPointPath( BrushManager.getPointSectionIndex(),
+      						    x5, y5, PointScale.SCALE_M, 
+      						    null, scrap_option, mDrawingSurface.scrapIndex() ); // no text
+        section_pt.setLink( st );
+        mDrawingSurface.addDrawingPath( section_pt );
+      }
+    } else {
+      updatePlotNick( plot, nick );
+    }
+    if ( plot != null ) {
+      pushInfo( plot.type, plot.name, plot.start, "", plot.azimuth, plot.clino, -1, null );
+      // zoomFit( mDrawingSurface.getBitmapBounds() );
+    }
+  }
+
+  /** update section-line x-section comment - also at-station
+   * @param plot   plot info
+   * @param nick   xsection comment 
+   */
+  void updatePlotNick( PlotInfo plot, String nick )
+  {
+    if ( nick == null || plot == null ) return;
+    if ( ! nick.equals( plot.nick ) ) {
+      mApp_mData.updatePlotNick( plot.id, mSid, nick );
+    }
+  }
+
+  /** toggle splay display at a station
+   * @param st_name   station name
+   * @param on        whether to add the station to the ON list
+   * @param off       whether to add the station to the OFF list
+   */
+  void toggleStationSplays( String st_name, boolean on, boolean off ) { mDrawingSurface.toggleStationSplays( st_name, on, off ); }
+
+  /** @return true if the stationis on the ON list
+   * @param st_name   station name
+   */
+  boolean isStationSplaysOn( String st_name ) { return mDrawingSurface.isStationSplaysOn( st_name ); }
+
+  /** @return true if the stationis on the OFF list
+   * @param st_name   station name
+   */
+  boolean isStationSplaysOff( String st_name ) { return mDrawingSurface.isStationSplaysOff( st_name ); }
+
+  void toggleStationHidden( String st_name, boolean is_hidden )
+  {
+    String hide = mPlot1.hide.trim();
+    // TDLog.v( "toggle station " + st_name + " hidden " + is_hidden + " hide: <" + hide + ">" );
+    String new_hide = ""; // empty string
+    boolean add = false;
+    boolean drop = false;
+    if ( /* hide == null || */ hide.length() == 0 ) {
+      add = true;
+      drop = false;
+    } else {
+      String[] hidden = hide.split( "\\s+" );
+      StringBuilder sb = new StringBuilder();
+      int k = 0;
+      for (; k < hidden.length; ++k ) {
+        if ( hidden[k].length() > 0 ) {
+          if ( hidden[k].equals( st_name ) ) { // N.B. hidden[k] != null
+            drop = true;
+          } else {
+            sb.append(" ").append( hidden[k] );
+            // new_hide = new_hide + " " + hidden[k];
+          }
+        }
+      }
+      if ( sb.length() > 0 ) new_hide = sb.toString().trim();
+      // if ( new_hide.length() > 0 ) new_hide = new_hide.trim();
+      add = ! drop;
+    }
+    int h = 0;
+
+    if ( add && ! is_hidden ) {
+      if ( /* hide == null || */ hide.length() == 0 ) {
+        hide = st_name;
+      } else {
+        hide = hide + " " + st_name;
+      }
+      // TDLog.v( "addStationHidden " + st_name + " hide <" + hide + ">" );
+      mApp_mData.updatePlotHide( mPid1, mSid, hide );
+      mApp_mData.updatePlotHide( mPid2, mSid, hide );
+      mPlot1.hide = hide;
+      mPlot2.hide = hide;
+      h = 1; // hide
+    } else if ( drop && is_hidden ) {
+      mApp_mData.updatePlotHide( mPid1, mSid, new_hide );
+      mApp_mData.updatePlotHide( mPid2, mSid, new_hide );
+      mPlot1.hide = new_hide;
+      mPlot2.hide = new_hide;
+      h = -1; // un-hide
+      // TDLog.v( "dropStationHidden " + st_name + " hide <" + new_hide + ">" );
+    }
+    // TDLog.v( "toggle station hidden: hide <" + hide + "> H " + h );
+
+    if ( h != 0 ) {
+      // TDLog.v("clear shots and stations" );
+      mDrawingSurface.clearShotsAndStations( );
+      mNum.setStationHidden( st_name, h );
+      recomputeReferences( mNum, mZoom );
+    }
+  }
+  //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
+
+  void toggleStationBarrier( String st_name, boolean is_barrier ) 
+  {
+    String view = mPlot1.view.trim();
+    // TDLog.v( "toggle station " + st_name + " barrier " + is_barrier + " view: <" + view + ">" );
+    String new_view = ""; // empty string
+    boolean add = false;
+    boolean drop = false;
+    if ( view == null ) { // always false
+      add = true;
+      drop = false;
+    } else {
+      String[] barrier = view.split( " " );
+      StringBuilder sb = new StringBuilder();
+      int k = 0;
+      for (; k < barrier.length; ++k ) {
+        if ( barrier[k].length() > 0 ) {
+          if ( barrier[k].equals( st_name ) ) { // N.B. barrier[k] != null
+            drop = true;
+          } else {
+            sb.append(" ").append( barrier[k] );
+            // new_view = new_view + " " + barrier[k];
+          }
+        }
+      }
+      if ( sb.length() > 0 ) new_view = sb.toString().trim();
+      // if ( new_view.length() > 0 ) new_view = new_view.trim();
+      add = ! drop;
+    }
+    int h = 0;
+
+    if ( add && ! is_barrier ) {
+      if ( /* view == null || */ view.length() == 0 ) {
+        view = st_name;
+      } else {
+        view = view + " " + st_name;
+      }
+      // TDLog.v( "addStationBarrier " + st_name + " view <" + view + ">" );
+      mApp_mData.updatePlotView( mPid1, mSid, view );
+      mApp_mData.updatePlotView( mPid2, mSid, view );
+      mPlot1.view = view;
+      mPlot2.view = view;
+      h = 1;
+    } else if ( drop && is_barrier ) {
+      mApp_mData.updatePlotView( mPid1, mSid, new_view );
+      mApp_mData.updatePlotView( mPid2, mSid, new_view );
+      mPlot1.view = new_view;
+      mPlot2.view = new_view;
+      h = -1;
+    }
+    // TDLog.v( "toggle station barrier: view <" + view + "> H " + h );
+
+    if ( h != 0 ) {
+      // TDLog.v("clear shots and stations" );
+      mDrawingSurface.clearShotsAndStations( );
+      mNum.setStationBarrier( st_name, h );
+      recomputeReferences( mNum, mZoom );
+    }
+  }
+  
+  /** add a therion station point
+   * @param st    (user) station point
+   */
+  public void addStationPoint( DrawingStationName st )
+  {
+    // TDLog.v("addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    DrawingStationPath path = new DrawingStationPath( st, PointScale.SCALE_M, mDrawingSurface.scrapIndex() );
+    mDrawingSurface.addDrawingStationPath( path );
+    modified();
+  }
 
     /** delete a station point
      * @param st    (user) station point
@@ -5460,6 +5726,8 @@ public class DrawingWindow extends ItemDrawer
 
     // -----------------------------------------------------------------------------------------
 
+    /** switch plot type between PLAN and PROFILE
+     */
     private void switchPlotType()
     {
       // TDLog.v( "switch plot type ");
@@ -5473,7 +5741,9 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    // called by doRecover and setPlotType
+    /** set the plot as of type 3
+     * @note called by doRecover and setPlotType
+     */
     private void setPlotType3( )
     {
       assert( mLastLinePath == null);
@@ -5491,6 +5761,9 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
+    /** set the plot as of type 2
+     * @param compute ...
+     */
     private void setPlotType2( boolean compute )
     {
       assert( mLastLinePath == null);
@@ -5514,7 +5787,10 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     } 
 
-    // called by setPlotType, switchPlotType and doRecover
+    /** set the plot as of type 2
+     * @param compute ...
+     * called by setPlotType, switchPlotType and doRecover
+     */
     private void setPlotType1( boolean compute )
     {
       assert( mLastLinePath == null);
@@ -5538,6 +5814,9 @@ public class DrawingWindow extends ItemDrawer
       setTheTitle();
     }
 
+    /** flip a shot "extend"
+     * @param blk   shot
+     */
     private void flipBlock( DBlock blk )
     {
       if ( blk != null && blk.flipExtendAndStretch() ) {
@@ -5545,9 +5824,10 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    // flip the profile sketch left/right
-    // @param flip_shots whether to flip also the shots extend
-    // @note barrier and hiding shots are not flipped
+    /** flip the profile sketch left/right
+     * @param flip_shots whether to flip also the shots extend
+     * @note barrier and hiding shots are not flipped
+     */
     public void flipProfile( boolean flip_shots )
     {
       // TDLog.v("flipProfile " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -5605,6 +5885,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  @Override
   public boolean onLongClick( View view ) 
   {
     Button b = (Button)view;
@@ -5723,621 +6004,629 @@ public class DrawingWindow extends ItemDrawer
     setButton3Item( null );
   }
 
-    public void onClick(View view)
-    {
-      if ( onMenu ) {
-        closeMenu();
-        return;
+  @Override
+  public void onClick(View view)
+  {
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+    // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onClick() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_PLOT, "DrawingWindow onClick() point " + mCurrentPoint + " symbol " + mSymbol );
+    int dismiss = dismissPopups();
+
+    Button b = (Button)view;
+    if ( b == mMenuImage ) {
+      if ( mMenu.getVisibility() == View.VISIBLE ) {
+        mMenu.setVisibility( View.GONE );
+        onMenu = false;
+      } else {
+        mMenu.setVisibility( View.VISIBLE );
+        onMenu = true;
       }
-      // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onClick() " + view.toString() );
-      // TDLog.Log( TDLog.LOG_PLOT, "DrawingWindow onClick() point " + mCurrentPoint + " symbol " + mSymbol );
-      int dismiss = dismissPopups();
-
-      Button b = (Button)view;
-      if ( b == mMenuImage ) {
-        if ( mMenu.getVisibility() == View.VISIBLE ) {
-          mMenu.setVisibility( View.GONE );
-          onMenu = false;
-        } else {
-          mMenu.setVisibility( View.VISIBLE );
-          onMenu = true;
-        }
-        return;
+      return;
+    }
+    int k1 = 3;
+    int k2 = 3;
+    int k3 = 3;
+    int k5 = 3;
+    if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
+         ( b == mButton5[1] && mMode == MODE_ERASE ) || 
+         ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
+      // PATH_MULTISELECTION
+      if ( mDrawingSurface.isMultiselection() ) mDrawingSurface.resetMultiselection();
+      setMode( MODE_MOVE );
+    } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
+      setMode( MODE_DRAW );
+    } else if ( b == mButton1[1] || b == mButton2[1] || b == mButton3[1] ) { // 1--> ERASE
+      setMode( MODE_ERASE );
+      mListView.invalidate();
+    } else if ( b == mButton1[2] || b == mButton2[2] || b == mButton5[2] ) { // 2 --> EDIT
+      if ( TDLevel.overBasic ) {
+        setMode( MODE_EDIT );
       }
-      int k1 = 3;
-      int k2 = 3;
-      int k3 = 3;
-      int k5 = 3;
-      if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
-           ( b == mButton5[1] && mMode == MODE_ERASE ) || 
-           ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
-	// PATH_MULTISELECTION
-        if ( mDrawingSurface.isMultiselection() ) mDrawingSurface.resetMultiselection();
-        setMode( MODE_MOVE );
-      } else if ( b == mButton1[0] || b == mButton3[0] || b == mButton5[0] ) { // 0 --> DRAW
-        setMode( MODE_DRAW );
-      } else if ( b == mButton1[1] || b == mButton2[1] || b == mButton3[1] ) { // 1--> ERASE
-        setMode( MODE_ERASE );
-        mListView.invalidate();
-      } else if ( b == mButton1[2] || b == mButton2[2] || b == mButton5[2] ) { // 2 --> EDIT
-        if ( TDLevel.overBasic ) {
-          setMode( MODE_EDIT );
-        }
-      
-      // if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
-      //   makeModePopup( b );
+    
+    // if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
+    //   makeModePopup( b );
 
-      } else if ( b == mButton1[k1++] ) { // DOWNLOAD
-        // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
-        resetFixedPaint();
-        updateReference();
-        if ( TDInstance.getDeviceA() == null ) {
-          DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
-          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
-          // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+    } else if ( b == mButton1[k1++] ) { // DOWNLOAD
+      // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
+      resetFixedPaint();
+      updateReference();
+      if ( TDInstance.getDeviceA() == null ) {
+        DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
+        (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
+        // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+      } else {
+        mDataDownloader.toggleDownload();
+        // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
+        mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+      }
+    } else if ( b == mButton1[k1++] ) { // BLUETOOTH
+      doBluetooth( b, dismiss );
+    } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
+      new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
+
+    } else if ( b == mButton1[k1++] ) { //  NOTE
+      (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
+
+    } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
+      if ( PlotType.isSketch2D( mType ) ) { 
+        // TDLog.v( "saving TOGGLE ...");
+        startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
+        // mDrawingSurface.clearDrawing();
+        switchPlotType();
+      } else if ( PlotType.isLegSection( mType ) ) {
+        updateSplays( (mApp.mSplayMode + 1)%4 );
+      } else if ( PlotType.isStationSection( mType ) ) {
+        updateSplays( (mApp.mSplayMode + 2)%4 );
+      }
+    } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
+      if ( PlotType.isSketch2D( mType ) ) { 
+        if ( TDSetting.mAzimuthManual ) {
+          setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
         } else {
-          mDataDownloader.toggleDownload();
-          // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
-          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+          (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
+          // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
         }
-      } else if ( b == mButton1[k1++] ) { // BLUETOOTH
-        doBluetooth( b, dismiss );
-      } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
-        new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
+      }
+    } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
+      updateDisplay();
 
-      } else if ( b == mButton1[k1++] ) { //  NOTE
-        (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
+    } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
+      mDrawingSurface.undo();
+      // if ( ! mDrawingSurface.hasMoreUndo() ) {
+      //   // undoBtn.setEnabled( false );
+      // }
+      // redoBtn.setEnabled( true );
+      // canRedo = true;/
+      mLastLinePath = null;
+      modified();
+    } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // REDO
+      if ( mDrawingSurface.hasMoreRedo() ) {
+        mDrawingSurface.redo();
+        mLastLinePath = null;
+      }
+    } else if ( b == mButton2[k2++] ) { // TOOLS
+      // if ( ! TDSetting.mTripleToolbar ) {
+        rotateRecentToolset();
+      // } else {
+      //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+      // }
+    } else if ( b == mButton2[k2++] ) { // SPLAYS
+      toggleSplayMode();
+    } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
+      if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
+        // setButtonContinue( (mContinueLine+1) % CONT_MAX );
+        makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
+      }
 
-      } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
-        if ( PlotType.isSketch2D( mType ) ) { 
-          // TDLog.v( "saving TOGGLE ...");
-          startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
-          // mDrawingSurface.clearDrawing();
-          switchPlotType();
-        } else if ( PlotType.isLegSection( mType ) ) {
-          updateSplays( (mApp.mSplayMode + 1)%4 );
-        } else if ( PlotType.isStationSection( mType ) ) {
-          updateSplays( (mApp.mSplayMode + 2)%4 );
-        }
-      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
-        if ( PlotType.isSketch2D( mType ) ) { 
-          if ( TDSetting.mAzimuthManual ) {
-            setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
+    } else if ( b == mButton3[k3++] ) { // PREV
+      if ( mHasSelected ) {
+        SelectionPoint pt = mDrawingSurface.prevHotItem( );
+        if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+        setButton3Item( pt );
+      } else {
+        makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
+      }
+    } else if ( b == mButton3[k3++] ) { // NEXT
+      if ( mHasSelected ) {
+        SelectionPoint pt = mDrawingSurface.nextHotItem( );
+        if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+        setButton3Item( pt );
+      } else {
+        setButtonSelectSize( mSelectScale + 1 ); // toggle select size
+      }
+    } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
+      // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
+      if ( hasPointActions ) {
+        makePopupEdit( b, dismiss );
+      // } else {
+        // SelectionPoint sp = mDrawingSurface.hotItem();
+        // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
+        //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
+        //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
+        // }
+      }
+    } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null ) {
+        DrawingPath item = sp.mItem;
+        if ( item != null ) {
+          if ( item instanceof DrawingStationName ) {
+            DrawingStationName st = (DrawingStationName)(item);
+            DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
+            boolean barrier = mNum.isBarrier( st.getName() );
+            boolean hidden  = mNum.isHidden( st.getName() );
+            List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
+            new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+          } else if ( item instanceof DrawingPointPath ) {
+            DrawingPointPath point = (DrawingPointPath)(item);
+            // TDLog.v( "edit point type " + point.mPointType );
+            if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
+              new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
+            } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
+              if ( audioCheck ) {
+                DrawingAudioPath audio = (DrawingAudioPath)point;
+                new AudioDialog( mActivity, this, audio.mId, null ).show();
+              } else {
+                TDToast.makeWarn( R.string.no_feature_audio );
+              }
+            } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+              new DrawingPointSectionDialog( mActivity, this, point ).show();
+            } else {
+              new DrawingPointDialog( mActivity, this, point ).show();
+            }
+            // modified()
+          } else if ( item instanceof DrawingLinePath ) {
+            DrawingLinePath line = (DrawingLinePath)(item);
+            if ( BrushManager.isLineSection( line.mLineType ) ) {
+              // TDLog.v( "edit section line " ); // default azimuth = 0 clino = 0
+              // cross-section exists already
+              boolean h_section = PlotType.isProfile( mType ); // not really necessary
+              String id = line.getOption( "-id" );
+              if ( id != null ) {
+                new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
+              } else {
+                TDLog.Error("edit section line with null id" );
+              }
+            } else {
+              new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
+            }
+            // modified()
+          } else if ( item instanceof DrawingAreaPath ) {
+              new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(item) ).show();
+              // modified()
           } else {
-            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
-            // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
+            // TDLog.v( "centerline path type " + sp.type() );
+            if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
+              int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
+              new DrawingShotDialog( mActivity, this, item, flag ).show();
+            } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
+              new DrawingShotDialog( mActivity, this, item, 0 ).show();
+            }
+          }
+        } else {
+          TDLog.Error("selected point has null item");
+        }
+      }
+      clearSelected();
+    } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null ) {
+        int t = sp.type();
+        if ( t == DrawingPath.DRAWING_PATH_POINT ||
+             t == DrawingPath.DRAWING_PATH_LINE  ||
+             t == DrawingPath.DRAWING_PATH_AREA  ) {
+          String name = "";
+          DrawingPath p = sp.mItem;
+          switch ( t ) {
+            case DrawingPath.DRAWING_PATH_POINT:
+              name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
+              break;
+            case DrawingPath.DRAWING_PATH_LINE:
+              name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
+              break;
+            case DrawingPath.DRAWING_PATH_AREA:
+              name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
+              break;
+          }
+          askDeleteItem( p, t, name );
+        } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
+          if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
+            DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
+            DBlock blk = p.mBlock;
+            if ( blk != null ) {
+              askDeleteSplay( p, sp, blk );
+            }
           }
         }
-      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
-        updateDisplay();
+      }
+    } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
+      mDoEditRange = SelectionRange.rotateType( mDoEditRange );
+      setButtonRange();
+    } else if ( b == mButton5[k5++] ) { // ERASE MODE
+      makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
+    } else if ( b == mButton5[k5++] ) { // ERASE SIZE
+      setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
+    }
+  }
 
-      } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
-        mDrawingSurface.undo();
-        // if ( ! mDrawingSurface.hasMoreUndo() ) {
-        //   // undoBtn.setEnabled( false );
-        // }
-        // redoBtn.setEnabled( true );
-        // canRedo = true;/
-        mLastLinePath = null;
-        modified();
-      } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // REDO
-        if ( mDrawingSurface.hasMoreRedo() ) {
-          mDrawingSurface.redo();
-          mLastLinePath = null;
-        }
-      } else if ( b == mButton2[k2++] ) { // TOOLS
-        // if ( ! TDSetting.mTripleToolbar ) {
-          rotateRecentToolset();
-        // } else {
-        //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-        // }
-      } else if ( b == mButton2[k2++] ) { // SPLAYS
-        toggleSplayMode();
-      } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
-        if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
-          // setButtonContinue( (mContinueLine+1) % CONT_MAX );
-          makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
-        }
+  private void toggleSplayMode()
+  {
+    if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
+      TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
+    } else {
+      TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
+    }
+  }
 
-      } else if ( b == mButton3[k3++] ) { // PREV
-        if ( mHasSelected ) {
-          SelectionPoint pt = mDrawingSurface.prevHotItem( );
-          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
-          setButton3Item( pt );
-        } else {
-          makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
-        }
-      } else if ( b == mButton3[k3++] ) { // NEXT
-        if ( mHasSelected ) {
-          SelectionPoint pt = mDrawingSurface.nextHotItem( );
-          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
-          setButton3Item( pt );
-        } else {
-          setButtonSelectSize( mSelectScale + 1 ); // toggle select size
-        }
-      } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
-        // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
-        if ( hasPointActions ) {
-          makePopupEdit( b, dismiss );
-        // } else {
-          // SelectionPoint sp = mDrawingSurface.hotItem();
-          // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
-          //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
-          //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
+  private void askDeleteItem( final DrawingPath p, final int t, final String name )
+  {
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
+                              String.format( getResources().getString( R.string.item_delete ), name ), 
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          if ( p instanceof DrawingPointPath ) {
+            deletePoint( (DrawingPointPath)p );
+          } else if ( p instanceof DrawingLinePath ) {
+            deleteLine( (DrawingLinePath)p );
+          } else if ( p instanceof DrawingAreaPath ) {
+            deleteArea( (DrawingAreaPath)p );
+          }
+          // switch( t ) {
+          //   case DrawingPath.DRAWING_PATH_POINT:
+          //     deletePoint( (DrawingPointPath)p );
+          //     break;
+          //   case DrawingPath.DRAWING_PATH_LINE:
+          //     deleteLine( (DrawingLinePath)p );
+          //     break;
+          //   case DrawingPath.DRAWING_PATH_AREA:
+          //     deleteArea( (DrawingAreaPath)p );
+          //     break;
+          //   default:
+          //     break;
           // }
         }
-      } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
-        SelectionPoint sp = mDrawingSurface.hotItem();
-        if ( sp != null ) {
-          DrawingPath item = sp.mItem;
-          if ( item != null ) {
-            if ( item instanceof DrawingStationName ) {
-              DrawingStationName st = (DrawingStationName)(item);
-              DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
-              boolean barrier = mNum.isBarrier( st.getName() );
-              boolean hidden  = mNum.isHidden( st.getName() );
-              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
-            } else if ( item instanceof DrawingPointPath ) {
-              DrawingPointPath point = (DrawingPointPath)(item);
-              // TDLog.v( "edit point type " + point.mPointType );
-              if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
-                new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
-              } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
-                if ( audioCheck ) {
-                  DrawingAudioPath audio = (DrawingAudioPath)point;
-                  new AudioDialog( mActivity, this, audio.mId, null ).show();
-                } else {
-	          TDToast.makeWarn( R.string.no_feature_audio );
-                }
-              } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-                new DrawingPointSectionDialog( mActivity, this, point ).show();
-              } else {
-                new DrawingPointDialog( mActivity, this, point ).show();
-              }
-              // modified()
-            } else if ( item instanceof DrawingLinePath ) {
-              DrawingLinePath line = (DrawingLinePath)(item);
-              if ( BrushManager.isLineSection( line.mLineType ) ) {
-                // TDLog.v( "edit section line " ); // default azimuth = 0 clino = 0
-                // cross-section exists already
-                boolean h_section = PlotType.isProfile( mType ); // not really necessary
-                String id = line.getOption( "-id" );
-                if ( id != null ) {
-                  new DrawingLineSectionDialog( mActivity, this, /* mApp, */ h_section, true, id, line, null, null, 0, 0, -1 ).show();
-                } else {
-                  TDLog.Error("edit section line with null id" );
-                }
-              } else {
-                new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
-              }
-              // modified()
-            } else if ( item instanceof DrawingAreaPath ) {
-                new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(item) ).show();
-                // modified()
-            } else {
-              // TDLog.v( "centerline path type " + sp.type() );
-              if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
-                int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
-                new DrawingShotDialog( mActivity, this, item, flag ).show();
-              } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
-                new DrawingShotDialog( mActivity, this, item, 0 ).show();
-              }
-            }
-          } else {
-            TDLog.Error("selected point has null item");
-          }
-        }
-        clearSelected();
-      } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
-        SelectionPoint sp = mDrawingSurface.hotItem();
-        if ( sp != null ) {
-          int t = sp.type();
-          if ( t == DrawingPath.DRAWING_PATH_POINT ||
-               t == DrawingPath.DRAWING_PATH_LINE  ||
-               t == DrawingPath.DRAWING_PATH_AREA  ) {
-            String name = "";
-            DrawingPath p = sp.mItem;
-            switch ( t ) {
-              case DrawingPath.DRAWING_PATH_POINT:
-                name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
-                break;
-              case DrawingPath.DRAWING_PATH_LINE:
-                name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
-                break;
-              case DrawingPath.DRAWING_PATH_AREA:
-                name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
-                break;
-            }
-            askDeleteItem( p, t, name );
-          } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
-            if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
-              DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
-              DBlock blk = p.mBlock;
-              if ( blk != null ) {
-                askDeleteSplay( p, sp, blk );
-              }
-            }
-          }
-        }
-      } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
-        mDoEditRange = SelectionRange.rotateType( mDoEditRange );
-        setButtonRange();
-      } else if ( b == mButton5[k5++] ) { // ERASE MODE
-        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
-      } else if ( b == mButton5[k5++] ) { // ERASE SIZE
-        setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }
-    }
+    );
+  }
 
-    private void toggleSplayMode()
-    {
-      if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
-        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
-      } else {
-        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
-      }
-    }
-
-    private void askDeleteItem( final DrawingPath p, final int t, final String name )
-    {
-      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
-                                String.format( getResources().getString( R.string.item_delete ), name ), 
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            if ( p instanceof DrawingPointPath ) {
-              deletePoint( (DrawingPointPath)p );
-            } else if ( p instanceof DrawingLinePath ) {
-              deleteLine( (DrawingLinePath)p );
-            } else if ( p instanceof DrawingAreaPath ) {
-              deleteArea( (DrawingAreaPath)p );
-            }
-            // switch( t ) {
-            //   case DrawingPath.DRAWING_PATH_POINT:
-            //     deletePoint( (DrawingPointPath)p );
-            //     break;
-            //   case DrawingPath.DRAWING_PATH_LINE:
-            //     deleteLine( (DrawingLinePath)p );
-            //     break;
-            //   case DrawingPath.DRAWING_PATH_AREA:
-            //     deleteArea( (DrawingAreaPath)p );
-            //     break;
-            //   default:
-            //     break;
-            // }
-          }
+  private void askDeleteSplay( final DrawingSplayPath p, final SelectionPoint sp, final DBlock blk )
+  {
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
+                              String.format( getResources().getString( R.string.splay_delete ), blk.Name() ), 
+      new DialogInterface.OnClickListener() {
+        @Override
+        public void onClick( DialogInterface dialog, int btn ) {
+          deleteSplay( p, sp, blk );
         }
-      );
-    }
-
-    private void askDeleteSplay( final DrawingSplayPath p, final SelectionPoint sp, final DBlock blk )
-    {
-      TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
-                                String.format( getResources().getString( R.string.splay_delete ), blk.Name() ), 
-        new DialogInterface.OnClickListener() {
-          @Override
-          public void onClick( DialogInterface dialog, int btn ) {
-            deleteSplay( p, sp, blk );
-          }
-        }
-      );
-    }
-
-    /** prepare a (leg) xsection - retrieve the ID or create a new section plot and return the ID
-     * @param id    section name
-     * @param type  parent plot type
-     * @param from  FROM station
-     * @param to    TO station
-     * @param nick  ...
-     * @param azimuth section azimuth
-     * @param clino   section clino
-     * @return the xsection plot ID
-     */
-    private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino )
-    {
-      mCurrentLine = BrushManager.getLineWallIndex();
-      if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
-      // TDLog.v("prepare XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      setTheTitle();
-
-      if ( id == null || id.length() == 0 ) return -1;
-      mSectionName = id;
-      long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
-      if ( pid < 0 ) { 
-        pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
       }
-      return pid;
-    }
+    );
+  }
 
-    /** make a photo X-Section from a section-line
-     * @param line    "section" line
-     * @param id      section ID, eg "xx0"
-     * @param type    either PLOT_SECTION or PLOT_H_SECTION
-     * @param from    from station, eg "1"
-     * @param to      to station, eg "2"
-     * @param nick
-     * @param azimuth section azimuth
-     * @param clino   section clino
-     */
-    void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
-    {
-      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
-      if ( pid >= 0 ) {
-        // imageFile := PHOTO_DIR / surveyId / photoId .jpg
-        String imagefilepath = TDPath.getSurveyJpgFile( TDInstance.survey, id );
-        // File imagefile = TDFile.getTopoDroidFile( imagefilepath );
-        // TODO TD_XSECTION_PHOTO
-        doTakePointPhoto( imagefilepath, false, pid ); // without inserter
-      }
-    }
+  /** prepare a (leg) xsection - retrieve the ID or create a new section plot and return the ID
+   * @param id    section name
+   * @param type  parent plot type
+   * @param from  FROM station
+   * @param to    TO station
+   * @param nick  xsection comment
+   * @param azimuth section azimuth
+   * @param clino   section clino
+   * @return the xsection plot ID
+   */
+  private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino )
+  {
+    mCurrentLine = BrushManager.getLineWallIndex();
+    if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
+    // TDLog.v("prepare XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    setTheTitle();
 
-    /** make a X-Section from a section-line
-     * @param line    "section" line
-     * @param id      section ID, eg "xx0"
-     * @param type    either PLOT_SECTION or PLOT_H_SECTION
-     * @param from    from station, eg "1"
-     * @param to      to station, eg "2"
-     * @param azimuth section azimuth
-     * @param clino   section clino
-     * @param tt      intersection abscissa
-     */
-    void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt )
-    {
-      // TDLog.v( "make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
-      long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
-      if ( pid >= 0 ) {
-        // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
+    if ( id == null || id.length() == 0 ) return -1;
+    mSectionName = id;
+    long pid = mApp_mData.getPlotId( TDInstance.sid, mSectionName );
+    if ( pid < 0 ) { 
+      pid = mApp.insert2dSection( TDInstance.sid, mSectionName, type, from, to, azimuth, clino, ( TDInstance.xsections? null : mName), nick );
+    }
+    return pid;
+  }
+
+  /** make a photo X-Section from a section-line
+   * @param line    "section" line
+   * @param id      section ID, eg "xx0"
+   * @param type    either PLOT_SECTION or PLOT_H_SECTION
+   * @param from    from station, eg "1"
+   * @param to      to station, eg "2"
+   * @param nick    xsection comment
+   * @param azimuth section azimuth
+   * @param clino   section clino
+   */
+  void makePhotoXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino )
+  {
+    long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
+    if ( pid >= 0 ) {
+      // imageFile := PHOTO_DIR / surveyId / photoId .jpg
+      String imagefilepath = TDPath.getSurveyJpgFile( TDInstance.survey, id );
+      // File imagefile = TDFile.getTopoDroidFile( imagefilepath );
+      // TODO TD_XSECTION_PHOTO
+      doTakePointPhoto( imagefilepath, false, pid ); // without inserter
+    }
+  }
+
+  /** make a X-Section from a section-line
+   * @param line    "section" line
+   * @param id      section ID, eg "xx0"
+   * @param type    either PLOT_SECTION or PLOT_H_SECTION
+   * @param from    from station, eg "1"
+   * @param to      to station, eg "2"
+   * @param nick    xsection comment
+   * @param azimuth section azimuth
+   * @param clino   section clino
+   * @param tt      intersection abscissa (leg xsection), 2 (multileg xsection)
+   * @param center  center (multileg xsection)
+   */
+  void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt, Vector3D center )
+  {
+    // TDLog.v( "make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+    long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
+    if ( pid >= 0 ) {
+      // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
+      if ( tt <= 1.0 ) {
         mApp_mData.updatePlotIntercept( pid, TDInstance.sid, tt );
-        pushInfo( type, mSectionName, from, to, azimuth, clino, tt );
-      } 
+      } else {
+        mApp_mData.updatePlotCenter( pid, TDInstance.sid, center );
+      }
+      pushInfo( type, mSectionName, from, to, azimuth, clino, tt, center );
+    } 
+    // zoomFit( mDrawingSurface.getBitmapBounds() );
+  }
+
+  /** open the xsection scrap in the window
+   * @param scrapname fullname of the scrap
+   * the name can be the scrap-name or the section-name (plot name)
+   * @note called only by DrawingPointDialog and myself
+   */
+  void openSectionDraw( String scrapname )
+  { 
+    // remove survey name from scrap-name (if necessary)
+    String name = scrapname.replace( TDInstance.survey + "-", "" );
+    // TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
+
+    PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
+    if ( pi != null ) {
+      Vector3D center = (pi.intercept <= 1 ) ? null : pi.center;
+      pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, pi.intercept, center );
       // zoomFit( mDrawingSurface.getBitmapBounds() );
     }
+  }
 
-    /** open the xsection scrap in the window
-     * @param scrapname fullname of the scrap
-     * the name can be the scrap-name or the section-name (plot name)
-     * @note called only by DrawingPointDialog and myself
-     */
-    void openSectionDraw( String scrapname )
-    { 
-      // remove survey name from scrap-name (if necessary)
-      String name = scrapname.replace( TDInstance.survey + "-", "" );
-      // TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
+  // --------------------------------------------------------------------------
 
-      PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
-      if ( pi != null ) {
-        pushInfo( pi.type, pi.name, pi.start, pi.view, pi.azimuth, pi.clino, pi.intercept );
-        // zoomFit( mDrawingSurface.getBitmapBounds() );
+  private void savePng( Uri uri, long type )
+  {
+    String fullname = null;
+    if ( PlotType.isAnySection( type ) ) { 
+      fullname = mFullName3;
+    } else if ( PlotType.isProfile( type ) ) { 
+      fullname = mFullName2;
+    } else {
+      fullname = mFullName1;
+    }
+    // TDLog.v("save PNG. uri " + ( (uri!=null)? uri.toString() : "null" ) );
+
+    if ( fullname != null ) {
+      DrawingCommandManager manager = mDrawingSurface.getManager( type );
+      if ( PlotType.isAnySection( type ) ) { 
+        doSavePng( uri, manager, type, fullname );
+      } else if ( PlotType.isProfile( type ) ) { 
+        // Nota Bene OK for projected profile (to check)
+        doSavePng( uri, manager, (int)PlotType.PLOT_EXTENDED, fullname );
+      } else {
+        // doSavePng( manager, (int)PlotType.PLOT_PLAN, fullname );
+        doSavePng( uri, manager, type, fullname );
       }
     }
+  }
 
-    // --------------------------------------------------------------------------
+  private void doSavePng( Uri uri, DrawingCommandManager manager, long type, final String filename )
+  {
+    if ( manager == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    Bitmap bitmap = manager.getBitmap( );
+    if ( bitmap == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    float scale = manager.getBitmapScale();
+    String format = getResources().getString( R.string.saved_file_2 );
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    // TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
+    new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
+  }
 
-    private void savePng( Uri uri, long type )
-    {
-      String fullname = null;
+  // PDF ------------------------------------------------------------------
+  /** save as PDF file
+   * @param uri      export URI
+   * @param type     plot ttype
+   */
+  private void savePdf( Uri uri, long type ) 
+  {
+    String fullname = null;
+    if ( PlotType.isAnySection( type ) ) { 
+      fullname = mFullName3;
+    } else if ( PlotType.isProfile( type ) ) { 
+      fullname = mFullName2;
+    } else {
+      fullname = mFullName1;
+    }
+
+    if ( fullname != null ) {
+      DrawingCommandManager manager = mDrawingSurface.getManager( type );
+      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+      doSavePdf( uri, manager, fullname );
+    }
+  }
+
+  // TODO with background task
+  /** save as PDF file
+   * @param uri      export URI
+   * @param manager  drawing items
+   * @param fullname plot fullname, for the toast and for filesystem-based export
+   */
+  private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
+  {
+    if ( manager == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
+      TDToast.makeBad( R.string.no_feature_pdf );
+      return;
+    }
+    // TDPath.getPdfDir();
+    // TDLog.v( "PDF export <" + fullname + ">");
+    ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
+    if ( pfd == null ) return;
+    try {
+      // OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
+      OutputStream fos = TDsafUri.docFileOutputStream( pfd );
+
+      // PrintAttributes.Builder builder = new PrintAttributes.Builder();
+      // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
+      // if ( TDandroid.AT_LEAST_API_23 ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // not less than Android-6 (M)
+      // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
+      // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
+      // // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
+      // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
+      // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
+
+      RectF bnds = manager.getBitmapBounds();
+      float zw = (bnds.right - bnds.left);
+      float zh = (bnds.bottom - bnds.top);
+      // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
+      PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
+      PageInfo info = builder.create();
+
+      PdfDocument pdf = new PdfDocument( );
+      Page page = pdf.startPage( info );
+      // must select the zoom to the plot size - however the zoom arg is not for this purpose
+      // RectF bnds = manager.getBitmapBounds();
+      // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
+      // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
+      // float zoom = 1.00f / ( (zw > zh)? zw : zh );
+      page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
+      manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
+      pdf.finishPage( page );
+      pdf.writeTo( fos );
+      pdf.close();
+      fos.close();
+      TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
+    // } catch ( NoSuchMethodException e ) {
+    } catch ( IOException e ) {
+      TDLog.Error("failed PDF export " + e.getMessage() );
+    } finally {
+      TDsafUri.closeFileDescriptor( pfd );
+    }
+  }
+
+  // CSX ------------------------------------------------------------------
+  /** save as cSurvey - used also by SavePlotFileTask
+   * @param uri     export URI or null (to export in private folder)
+   * @param origin
+   * @param psd1    plan plot save-data
+   * @param psd2    profile plot save-data
+   * @param toast   whether to toast
+   * @note used also by SavePlotFileTask
+   */
+  void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
+  {
+    // TDLog.v( "save csx");
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
+  }
+
+  /** used to save "dxf", "svg" - called only by doExport
+   * @param uri   export URI
+   * @param type  export type
+   * @param ext   extension
+   */
+  private void saveWithExt( Uri uri, long type, String ext ) 
+  {
+    TDNum num = mNum;
+    // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
+    // TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    if ( "png".equals( ext ) ) {
+      savePng( uri, type );
+    } else if ( "pdf".equals( ext ) ) {
+      savePdf( uri, type );
+    } else {
       if ( PlotType.isAnySection( type ) ) { 
-	fullname = mFullName3;
-      } else if ( PlotType.isProfile( type ) ) { 
-	fullname = mFullName2;
-      } else {
-	fullname = mFullName1;
-      }
-      // TDLog.v("save PNG. uri " + ( (uri!=null)? uri.toString() : "null" ) );
-
-      if ( fullname != null ) {
         DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        if ( PlotType.isAnySection( type ) ) { 
-          doSavePng( uri, manager, type, fullname );
-        } else if ( PlotType.isProfile( type ) ) { 
-          // Nota Bene OK for projected profile (to check)
-          doSavePng( uri, manager, (int)PlotType.PLOT_EXTENDED, fullname );
+        String fullname = mFullName3;
+        if ( "csx".equals( ext ) || "png".equals( ext ) ) {
+          doSavePng( uri, manager, type, fullname ); 
         } else {
-          // doSavePng( manager, (int)PlotType.PLOT_PLAN, fullname );
-          doSavePng( uri, manager, type, fullname );
+          doSaveWithExt( uri, num, manager, type, fullname, ext, true ); 
         }
-      }
-    }
-
-    private void doSavePng( Uri uri, DrawingCommandManager manager, long type, final String filename )
-    {
-      if ( manager == null ) {
-	TDToast.makeBad( R.string.null_bitmap );
-	return;
-      }
-      Bitmap bitmap = manager.getBitmap( );
-      if ( bitmap == null ) {
-	TDToast.makeBad( R.string.null_bitmap );
-	return;
-      }
-      float scale = manager.getBitmapScale();
-      String format = getResources().getString( R.string.saved_file_2 );
-      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      // TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
-      new ExportBitmapToFile( uri, format, bitmap, scale, filename, true ).execute();
-    }
-
-    // PDF ------------------------------------------------------------------
-    /** save as PDF file
-     * @param uri      export URI
-     * @param type     plot ttype
-     */
-    private void savePdf( Uri uri, long type ) 
-    {
-      String fullname = null;
-      if ( PlotType.isAnySection( type ) ) { 
-	fullname = mFullName3;
-      } else if ( PlotType.isProfile( type ) ) { 
-	fullname = mFullName2;
       } else {
-	fullname = mFullName1;
-      }
-
-      if ( fullname != null ) {
-        DrawingCommandManager manager = mDrawingSurface.getManager( type );
-        // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-        doSavePdf( uri, manager, fullname );
-      }
-    }
-
-    // TODO with background task
-    /** save as PDF file
-     * @param uri      export URI
-     * @param manager  drawing items
-     * @param fullname plot fullname, for the toast and for filesystem-based export
-     */
-    private void doSavePdf( Uri uri, DrawingCommandManager manager, final String fullname )
-    {
-      if ( manager == null ) {
-	TDToast.makeBad( R.string.null_bitmap );
-	return;
-      }
-      if ( TDandroid.BELOW_API_19 ) { // Android-4.4 (KITKAT)
-	TDToast.makeBad( R.string.no_feature_pdf );
-        return;
-      }
-      // TDPath.getPdfDir();
-      // TDLog.v( "PDF export <" + fullname + ">");
-      ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( uri );
-      if ( pfd == null ) return;
-      try {
-        // OutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
-        OutputStream fos = TDsafUri.docFileOutputStream( pfd );
-
-        // PrintAttributes.Builder builder = new PrintAttributes.Builder();
-        // builder.setColorMode( PrintAttributes.COLOR_MODE_COLOR );
-        // if ( TDandroid.AT_LEAST_API_23 ) builder.setDuplexMode( PrintAttributes.DUPLEX_MODE_NONE ); // not less than Android-6 (M)
-        // builder.setMediaSize( PrintAttributes.MediaSize.ISO_A2 ); // 420 x 594 ( 16.54 x 23.39 )
-        // builder.setMinMargins( PrintAttributes.Margins.NO_MARGINS );
-        // // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " x " + TopoDroidApp.mDisplayHeight );
-        // builder.setResolution( new PrintAttributes.Resolution( "300", "300 dpi", 300, 300 ) );
-        // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
-
-        RectF bnds = manager.getBitmapBounds();
-        float zw = (bnds.right - bnds.left);
-        float zh = (bnds.bottom - bnds.top);
-        // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
-        PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
-        PageInfo info = builder.create();
-
-        PdfDocument pdf = new PdfDocument( );
-        Page page = pdf.startPage( info );
-        // must select the zoom to the plot size - however the zoom arg is not for this purpose
-        // RectF bnds = manager.getBitmapBounds();
-        // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
-        // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
-        // float zoom = 1.00f / ( (zw > zh)? zw : zh );
-        page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
-        manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
-        pdf.finishPage( page );
-        pdf.writeTo( fos );
-        pdf.close();
-        fos.close();
-        TDToast.make( String.format( getResources().getString(R.string.saved_file_1), fullname ) );
-      // } catch ( NoSuchMethodException e ) {
-      } catch ( IOException e ) {
-        TDLog.Error("failed PDF export " + e.getMessage() );
-      } finally {
-        TDsafUri.closeFileDescriptor( pfd );
-      }
-    }
-
-    // CSX ------------------------------------------------------------------
-    /** save as cSurvey - used also by SavePlotFileTask
-     * @param uri     export URI or null (to export in private folder)
-     * @param origin
-     * @param psd1    plan plot save-data
-     * @param psd2    profile plot save-data
-     * @param toast   whether to toast
-     * @note used also by SavePlotFileTask
-     */
-    void doSaveCsx( Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
-    {
-      // TDLog.v( "save csx");
-      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      TopoDroidApp.exportSurveyAsCsxAsync( mActivity, uri, origin, psd1, psd2, toast );
-    }
-
-    /** used to save "dxf", "svg" - called only by doExport
-     * @param uri   export URI
-     * @param type  export type
-     * @param ext   extension
-     */
-    private void saveWithExt( Uri uri, long type, String ext ) 
-    {
-      TDNum num = mNum;
-      // TDLog.Log( TDLog.LOG_IO, "export plot type " + type + " with extension " + ext );
-      // TDLog.v( "save with ext. plot type " + type + " with extension " + ext );
-      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      if ( "png".equals( ext ) ) {
-        savePng( uri, type );
-      } else if ( "pdf".equals( ext ) ) {
-        savePdf( uri, type );
-      } else {
-        if ( PlotType.isAnySection( type ) ) { 
+        if ( ext.equals("c3d") ) {
           DrawingCommandManager manager = mDrawingSurface.getManager( type );
-          String fullname = mFullName3;
-          if ( "csx".equals( ext ) || "png".equals( ext ) ) {
-            doSavePng( uri, manager, type, fullname ); 
+          if ( PlotType.isProfile( type ) ) {
+            doSaveWithExt( uri, num, manager, type, mFullName2, ext, true ); 
+          } else if ( type == PlotType.PLOT_PLAN ) {
+            doSaveWithExt( uri, num, manager, type, mFullName1, ext, true ); 
           } else {
-            doSaveWithExt( uri, num, manager, type, fullname, ext, true ); 
+            // TDLog.v( "save xsection as c3d");
+            doSaveWithExt( uri, num, manager, type, mFullName3, ext, true ); 
           }
         } else {
-          if ( ext.equals("c3d") ) {
-            DrawingCommandManager manager = mDrawingSurface.getManager( type );
-            if ( PlotType.isProfile( type ) ) {
-              doSaveWithExt( uri, num, manager, type, mFullName2, ext, true ); 
-            } else if ( type == PlotType.PLOT_PLAN ) {
-              doSaveWithExt( uri, num, manager, type, mFullName1, ext, true ); 
-            } else {
-              // TDLog.v( "save xsection as c3d");
-              doSaveWithExt( uri, num, manager, type, mFullName3, ext, true ); 
-            }
-          } else {
-            if ( PlotType.isProfile( type ) ) {
-              DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
-              String fullname2 = mFullName2;
-              doSaveWithExt( uri, num, manager2, mPlot2.type, fullname2, ext, true); 
-            } else if ( type == PlotType.PLOT_PLAN ) {
-              DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
-              String fullname1 = mFullName1;
-              doSaveWithExt( uri, num, manager1, mPlot1.type, fullname1, ext, true); 
-            }
+          if ( PlotType.isProfile( type ) ) {
+            DrawingCommandManager manager2 = mDrawingSurface.getManager( mPlot2.type );
+            String fullname2 = mFullName2;
+            doSaveWithExt( uri, num, manager2, mPlot2.type, fullname2, ext, true); 
+          } else if ( type == PlotType.PLOT_PLAN ) {
+            DrawingCommandManager manager1 = mDrawingSurface.getManager( mPlot1.type );
+            String fullname1 = mFullName1;
+            doSaveWithExt( uri, num, manager1, mPlot1.type, fullname1, ext, true); 
           }
         }
       }
     }
+  }
 
-    // ext file extension (--> saving class)
-    // ext can be dxf, svg
-    // FIXME OK PROFILE
-    // used also by SavePlotFileTask
-    void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
-    {
-      // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-      // TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
-      // mActivity = context (only to toast)
-      SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
-      PlotInfo   plot  = null;
-      FixedInfo  fixed = null;
-      GeoReference station = null;
+  // ext file extension (--> saving class)
+  // ext can be dxf, svg
+  // FIXME OK PROFILE
+  // used also by SavePlotFileTask
+  void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
+  {
+    // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
+    // TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
+    // mActivity = context (only to toast)
+    SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
+    PlotInfo   plot  = null;
+    FixedInfo  fixed = null;
+    GeoReference station = null;
 
-      if ( type == PlotType.PLOT_PLAN && ext.equals("shp") ) {
-        String origin = num.getOriginStation();
-        station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
-      } else if ( ext.equals("c3d") ) {
-        // c3d export uses pplot and fixed instead of station 
-        plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;
-        List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
-        if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
-        // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
-        if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0 );
-      }
-      // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
+    if ( type == PlotType.PLOT_PLAN && ext.equals("shp") ) {
+      String origin = num.getOriginStation();
+      station = TDExporter.getGeolocalizedStation( mSid, mApp_mData, 1.0f, true, origin );
+    } else if ( ext.equals("c3d") ) {
+      // c3d export uses pplot and fixed instead of station 
+      plot  = PlotType.isAnySection(type) ? mPlot3 : PlotType.isProfile( type )? mPlot2 : mPlot1;
+      List<FixedInfo> fixeds = mApp_mData.selectAllFixed( mSid, TDStatus.NORMAL );
+      if ( fixeds != null && fixeds.size() > 0 ) fixed = fixeds.get( 0 );
+      // TDLog.v("C3D saving " + filename + " fixeds " + fixeds.size() + " fixed " + fixed );
+      if ( fixed == null ) fixed = new FixedInfo( -1, num.getOriginStation(), 0, 0, 0, 0, "", 0 );
     }
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    new ExportPlotToFile( mActivity, uri, info, plot, fixed, num, manager, type, filename, ext, toast, station ).execute();
+  }
 
   // static private Handler th2Handler = null;
 
@@ -6723,6 +7012,7 @@ public class DrawingWindow extends ItemDrawer
 
   /** set the view orientation
    * @param orientation   requested view-orientation
+   * @note called from ZoomFitDialog
    */
   void setOrientation( int orientation )
   {
@@ -6979,9 +7269,16 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
         setPlotType3( );
         // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-        float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
-        // TDLog.v("do section T " + tt );
-        makeSectionReferences( mApp_mData.selectAllShots( mSid, TDStatus.NORMAL ), tt, 0 );
+        List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
+        if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
+          if ( PlotType.isMultilegSection( mType, mTo ) ) {
+            TDLog.v("recover multileg list " + list.size() );
+            makeSectionReferences( list, mPlot3.center );
+          } else {
+            // float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
+            makeSectionReferences( list, mPlot3.intercept, 0 );
+          }
+        }
       } else {
         TDLog.Error("null Plot 3");
       }
@@ -7904,6 +8201,9 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // --------------------- from ItemDrawer
+  /** set the recent symbol buttons of a symbol class
+   * @param symbol   symbol claas
+   */
   @Override
   public void setBtnRecent( int symbol ) // ItemButton[] mBtnRecent, Symbol[] mRecentTools, float sx, float sy )
   {
@@ -7969,7 +8269,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
 
-  /** set all the recent tools buttons
+  /** set the recent buttons of all the symbol classes
    */
   private void setBtnRecentAll()
   {
@@ -8043,6 +8343,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
    
+  /** set the current point symbol
+   * @param k    index in the recent point array
+   * @param update_recent whether to update the array of recent symbols
+   */
   @Override
   public void setPoint( int k, boolean update_recent )
   {
@@ -8054,7 +8358,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // @param k    index in the recent array
+  /** set the current line symbol
+   * @param k    index in the recent line array
+   * @param update_recent whether to update the array of recent symbols
+   */
   @Override
   public void setLine( int k, boolean update_recent )
   {
@@ -8067,6 +8374,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set the current area symbol
+   * @param k    index in the recent area array
+   * @param update_recent whether to update the array of recent symbols
+   */
   @Override
   public void setArea( int k, boolean update_recent )
   {
@@ -8078,6 +8389,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set the recent symbols buttons, after the recent symbols ahave been loaded
+   */
   @Override
   public void onRecentSymbolsLoaded()
   {

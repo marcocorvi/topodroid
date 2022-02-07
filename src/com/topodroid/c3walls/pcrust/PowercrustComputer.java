@@ -17,9 +17,9 @@ import com.topodroid.DistoX.Triangle3D;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Vector3D;
-import com.topodroid.DistoX.Point2D;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.DPoint2D;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -226,11 +226,11 @@ public class PowercrustComputer
     mProfilearcs = null;
     int nst = mStations.size();
     int nsh = mShots.size();
-    Point2D[] F = new Point2D[ nsh ]; // P - from point of shot k
-    Point2D[] T = new Point2D[ nsh ]; // P - to point of shot k
-    Point2D[] P = new Point2D[ nsh ]; // point on intersection of bisecants
-    Point2D[] B = new Point2D[ nst ]; // bisecant at station j
-    Point2D[] M = new Point2D[ nsh ]; // midpoint of shot k
+    DPoint2D[] F = new DPoint2D[ nsh ]; // P - from point of shot k
+    DPoint2D[] T = new DPoint2D[ nsh ]; // P - to point of shot k
+    DPoint2D[] P = new DPoint2D[ nsh ]; // point on intersection of bisecants
+    DPoint2D[] B = new DPoint2D[ nst ]; // bisecant at station j
+    DPoint2D[] M = new DPoint2D[ nsh ]; // midpoint of shot k
 
     // find bisecant of shots at st:
     //      ... -- sh1 ----(st)--- sh2 -- ...
@@ -265,18 +265,18 @@ public class PowercrustComputer
         double dx = dx1 + dx2;
         double dy = dy1 + dy2;
         // double d   = Math.sqrt( dx*dx + dy*dy );
-        // B[k] = new Point2D( dx/d, dy/d );
-        B[k] = new Point2D( dx, dy ); // bisecant (no need to normalize)
+        // B[k] = new DPoint2D( dx/d, dy/d );
+        B[k] = new DPoint2D( dx, dy ); // bisecant (no need to normalize)
       } else if ( sh1 != null ) { // end-station: ... (st1)--- sh1 ---(st)
         Cave3DStation st1 = ( sh1.from_station == st )? sh1.to_station : sh1.from_station;
         double dx1 = st1.x - st.x;
         double dy1 = st1.y - st.y;
         // double d1  = Math.sqrt( dx1*dx1 + dy1*dy1 );
-        // B[k] = new Point2D( dy1/d1, -dx1/d1 );
-        B[k] = new Point2D( dy1, -dx1 ); // orthogonal: no need to normalize
+        // B[k] = new DPoint2D( (dy1/d1), -(dx1/d1) );
+        B[k] = new DPoint2D( dy1, -dx1 ); // orthogonal: no need to normalize
       } else { // ERROR unattached station
         TDLog.Error( "PCrust Error: missing station shots at " + st.getFullName() );
-        B[k] = new Point2D( 0, 0 ); // ERROR
+        B[k] = new DPoint2D( 0, 0 ); // ERROR
       }
     }
 
@@ -285,12 +285,12 @@ public class PowercrustComputer
       Cave3DShot sh = mShots.get(k);
       Cave3DStation fr = sh.from_station;
       Cave3DStation to = sh.to_station;
-      F[k] = new Point2D( fr.x, fr.y ); // CRASH here - but there is no reason a shot doesnot have stations
-      T[k] = new Point2D( to.x, to.y );
-      M[k] = new Point2D( (fr.x+to.x)/2, (fr.y+to.y)/2 );
+      F[k] = new DPoint2D( fr.x, fr.y ); // CRASH here - but there is no reason a shot doesnot have stations
+      T[k] = new DPoint2D( to.x, to.y );
+      M[k] = new DPoint2D( (fr.x+to.x)/2, (fr.y+to.y)/2 );
       // intersection of bisecants
-      Point2D b1 = null; // bisecant at from point
-      Point2D b2 = null; // bisecant at to point
+      DPoint2D b1 = null; // bisecant at from point
+      DPoint2D b2 = null; // bisecant at to point
       for (int kk=0; kk<nst; ++kk ) {
         Cave3DStation st = mStations.get(kk);
         if ( st == fr ) { b1 = B[kk]; if ( b2 != null ) break; }
@@ -306,7 +306,7 @@ public class PowercrustComputer
       double det = a11 * a22 - a12 * a21;
       double t = ( a22 * c1 - a12 * c2 ) / det;
       // double s = ( a11 * c2 - a21 * c1 ) / det;
-      P[k] = new Point2D( fr.x + a11 * t, fr.y + a21 * t );
+      P[k] = new DPoint2D( fr.x + a11 * t, fr.y + a21 * t );
     }
 
     // clear sites angles

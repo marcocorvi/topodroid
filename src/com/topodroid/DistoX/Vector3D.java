@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.DistoX.DPoint2D;
 
 public class Vector3D
 {
@@ -317,7 +318,7 @@ public class Vector3D
     z += ( delta * ( Math.random() - 0.5 ) );
   }
 
-  public Point2D projectXY( ) { return new Point2D( x, y ); }
+  public DPoint2D projectXY( ) { return new DPoint2D( x, y ); }
 
   // m1 = min( this, m1 )
   // m2 = max( this, m2 )

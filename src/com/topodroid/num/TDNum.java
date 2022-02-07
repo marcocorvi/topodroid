@@ -232,6 +232,9 @@ public class TDNum
   public List< NumClosure > getClosures() { return mClosures; }
   public List< DBlock >     getUnattached() { return mUnattachedShots; }
 
+  /** @return the list of splays at a given station
+   * @param st    station
+   */
   public List< NumSplay >   getSplaysAt( NumStation st )
   {
     ArrayList< NumSplay > ret = new ArrayList<>();
@@ -243,19 +246,39 @@ public class TDNum
     return ret;
   }
 
-  // these are for the incremental update
+  /** @return the splay of a given data-block, or null if not found
+   * @param blk   data block
+   */
+  public NumSplay getSplayOf( DBlock blk )
+  {
+    long bid = blk.mId;
+    for ( NumSplay splay : mSplays ) {
+      if ( splay.getBlock().mId == bid ) return splay;
+    }
+    return null;
+  }
+
+  /** drop the last splay
+   * @note for the incremental update
+   */
   public void dropLastSplay()
   {
     int sz = mSplays.size();
     if ( sz > 0 ) mSplays.remove( sz - 1 );
   }
 
+  /** @return the last splay
+   * @note for the incremental update
+   */
   public NumSplay getLastSplay() 
   {
     int sz = mSplays.size();
     return ( sz == 0 )? null : mSplays.get( sz - 1 );
   }
 
+  /** @return the last shot
+   * @note for the incremental update
+   */
   public NumShot getLastShot() 
   {
     NumShot ret = null;
@@ -266,7 +289,10 @@ public class TDNum
     return ret;
   }
 
-  // get shots at station st, except shot [st,except]
+  /** @return the list of the shots at station st, except shot [st,except]
+   * @param st     given AT station, either FROM or TO
+   * @param except excluded station, respectively To or FROM
+   */
   public List< NumShot > getShotsAt( NumStation st, NumStation except )
   {
     ArrayList< NumShot > ret = new ArrayList<>();
@@ -281,16 +307,24 @@ public class TDNum
     return ret;
   }
 
+  /** @return the station closest to a 2D point (x,y)
+   * @param type   plot type
+   * @param x      point X coord
+   * @param y      point Y coord
+   */
   public NumStation getClosestStation( long type, double x, double y ) { return mStations.getClosestStation( type, x, y ); }
 
-  /** FIXME there is a problem here:               ,-----B---
+  /** set a station either hidden or shown
+   * @param name   station name
+   * @param hide   whether to hide or show: +1 to hide, -1 to show
+   *
+   * FIXME there is a problem here:               ,-----B---
    * if the reduction tree has a branch, say 0----A
    *                                               `---C----D
    * when B, C are both hidden the left side of the tree is not shown.
    * If B gets un-hidden the line 0--A--B gets shown as well as C---D
    * and these two pieces remain separated.
    */
-  // hide = +1 to hide, -1 to show
   public void setStationHidden( String name, int hide )
   {
     // TDLog.v( "Set Station Hidden: " + hide );
@@ -309,6 +343,9 @@ public class TDNum
     }
   }
 
+  /** set the hidden stations
+   * @param hide   string with the names of the hidden stations
+   */
   private void setStationsHide( String hide )
   {
     if ( hide == null ) return;
@@ -318,7 +355,10 @@ public class TDNum
     }
   }
 
-  // barrier = +1 (set barrier), -1 (unset barrier)
+  /** set a station either barrier or non-barrier
+   * @param name    station name
+   * @param barrier whether to barrier or not: +1 to barrier, -1 not to barrier
+   */
   public void setStationBarrier( String name, int barrier )
   {
     // TDLog.v( "Set Station barrier: " + barrier );
@@ -343,6 +383,9 @@ public class TDNum
     }
   }
 
+  /** set the barrier stations
+   * @param barr   string with the names of the barrier stations
+   */
   private void setStationsBarr( String barr )
   {
     if ( barr == null ) return;
@@ -352,19 +395,25 @@ public class TDNum
     }
   }
 
+  /** @return true if the station is hidden
+   * @param name  station name
+   */
   public boolean isHidden( String name )
   {
     NumStation st = getStation( name );
     return ( st != null && st.hidden() );
   }
 
+  /** @return true if the station is barrier
+   * @param name  station name
+   */
   public boolean isBarrier( String name )
   {
     NumStation st = getStation( name );
     return ( st != null && st.barrier() );
   }
 
-  // for the shot FROM-TO
+  // @note for the shot FROM-TO
   public int canBarrierHidden( String from, String to )
   {
     int has_shot = hasShot( from, to );
@@ -380,6 +429,9 @@ public class TDNum
     return ret;
   }
 
+  /** @return the station from the ID (name)
+   * @param id    station ID (name)
+   */
   public NumStation getStation( String id ) 
   {
     if ( id == null ) return null;
@@ -388,6 +440,10 @@ public class TDNum
     // return null;
   }
 
+  /** @return get the shot between two stations
+   * @param s1   first station name
+   * @param s2   second station name
+   */
   public NumShot getShot( String s1, String s2 )
   {
     if ( s1 == null || s2 == null ) return null;
@@ -401,6 +457,10 @@ public class TDNum
     return ret;
   }
 
+  /** @return get the shot between two stations
+   * @param st1   first station
+   * @param st2   second station
+   */
   public NumShot getShot( NumStation st1, NumStation st2 )
   {
     if ( st1 == null || st2 == null ) return null;
@@ -413,9 +473,13 @@ public class TDNum
     return ret;
   }
 
-  // return +1 if has shot s1-s2
-  //        -1 if has shot s2-s1
-  //         0 otherwise
+  /** check if there is the shot between two stations
+   * @param s1   first station name
+   * @param s2   second station name
+   * @return +1 if has shot s1-s2
+   *         -1 if has shot s2-s1
+   *          0 otherwise
+   */
   private int hasShot( String s1, String s2 )
   {
     if ( s1 == null || s2 == null ) return 0;

@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+// import com.topodroid.math.Point2D;
 
 import android.graphics.Canvas;
 import android.graphics.Matrix;
@@ -74,6 +75,8 @@ class ProjectionCommandManager
   //   }
   // }
 
+  /** cstr
+   */
   ProjectionCommandManager()
   {
     // mGridStack1   = Collections.synchronizedList(new ArrayList< DrawingPath >());
@@ -85,6 +88,10 @@ class ProjectionCommandManager
     mMatrix = new Matrix(); // identity
   }
 
+  /** @return the set of shot paths that intersect a segment
+   * @param p1  segment first endpoint
+   * @param p2  segment second endpoint
+   */
   List< DrawingPath > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
     List< DrawingPath > ret = new ArrayList<>();

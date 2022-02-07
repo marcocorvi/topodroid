@@ -21,6 +21,9 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDColor;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.R;
 
 import android.os.Bundle;
@@ -33,14 +36,16 @@ import android.graphics.ColorMatrix;
 import android.graphics.RectF;
 import android.graphics.Shader;
 import android.graphics.SweepGradient;
+
 import android.view.MotionEvent;
 import android.view.View;
 
 import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.GridLayout;
 
 public class MyColorPicker extends MyDialog
-                    implements View.OnClickListener
+                           implements View.OnClickListener
 {
   private static final int CENTER_X = 200;
   private static final int CENTER_Y = 200;
@@ -59,6 +64,9 @@ public class MyColorPicker extends MyDialog
   private int mColor;
   private ColorPickerView mColorPicker;
 
+  private LinearLayout mColorLayout;
+  private GridLayout   mGridLayout;
+
   // content view of color picker
   private static class ColorPickerView extends View
   {
@@ -71,6 +79,11 @@ public class MyColorPicker extends MyDialog
       private boolean mHighlightCenter;
       private RectF   mRect;
       
+      /** cstr
+       * @param c     context
+       * @param l     listener to color changes
+       * @param color initial color
+       */
       ColorPickerView(Context c, IColorChanged l, int color)
       {
         super(c);
@@ -114,11 +127,30 @@ public class MyColorPicker extends MyDialog
           setMeasuredDimension(CENTER_X*2, CENTER_Y*2);
       }
       
+      /** @return rounded integer value
+       * @param x  input float value
+       */
       private int floatToByte(float x) { return Math.round(x); }
+
+      /** @return byte-clipped integer, ie, in [0,255]
+       * @param n input integer
+       */
       private int pinToByte(int n) { return ( n < 0 )? 0 : ( n > 255 ) ? 255 : n; }
       
+      /** @return the interpolation between two integers
+       * @param s first integer
+       * @param d second integer
+       * @param p fraction of second integer - in [0,1]
+       * @note (1-p) is the fraction of the first integer
+       */
       private int ave(int s, int d, float p) { return s + Math.round(p * (d - s)); }
       
+      /** get the color interpolating an array of colors
+       * @param colors   array of colors
+       * @param unit     interpolation abscissa in [0,1], 0: first color, 1:last color
+       * @return interpolated color
+       * @note for circular interpolation the first and the last color must be equal
+       */
       private int interpColor(int[] colors, float unit)
       {
         if (unit <= 0) {
@@ -140,6 +172,11 @@ public class MyColorPicker extends MyDialog
         return Color.argb(a, r, g, b);
       }
       
+      /** "rotate" the color hue
+       * @param color   input color
+       * @param rad     rotation angle [radians]
+       * @return rotated color
+       */
       private int rotateColor(int color, float rad) {
           float deg = rad * 180 / 3.1415927f;
           int r = Color.red(color);
@@ -166,6 +203,9 @@ public class MyColorPicker extends MyDialog
       
       private static final float PI = 3.1415926f;
 
+      /** react to user touch
+       * @param event  touch event
+       */
       @Override
       public boolean onTouchEvent(MotionEvent event)
       {
@@ -213,7 +253,42 @@ public class MyColorPicker extends MyDialog
 
       int getColor() { return mCenterPaint.getColor(); }
     }
+    // ------------------------------------------------------------------------------
 
+    /** color call button
+     */
+    private class MyColorCell extends Button
+    {
+      private int idx; // index of the color in TDColor.mTDColors
+
+      /** cstr
+       * @param context      context
+       * @param k            color index
+       * @param listener     color-changed listener
+      */
+      MyColorCell( Context ctx, int k, OnClickListener listener, int w, int h )
+      {
+        super( ctx );
+        idx = k;
+        setOnClickListener( listener );
+        setMinWidth(  w );
+        setMinHeight( h );
+        setMaxWidth(  w );
+        setMaxHeight( h );
+        setBackgroundColor( TDColor.mTDColors[ idx ] );
+      }
+
+      /** @return the color index
+       */
+      int getIndex() { return idx; }
+    }
+    // ------------------------------------------------------------------------------
+
+    /** cstr
+     * @param context      context
+     * @param listener     color-changed listener
+     * @param initialColor initial color
+     */
     public MyColorPicker( Context context, IColorChanged listener, int initialColor)
     {
       super(context, 0); // 0 no help
@@ -239,27 +314,53 @@ public class MyColorPicker extends MyDialog
       mBtnOk    = (Button) findViewById( R.id.btn_ok );
       mBtnClear = (Button) findViewById( R.id.btn_clear );
       mBtnClose = (Button) findViewById( R.id.btn_close );
-      mBtnOk.setOnClickListener( this );
       mBtnClear.setOnClickListener( this );
       mBtnClose.setOnClickListener( this );
 
-      LinearLayout layout = (LinearLayout) findViewById( R.id.color_layout );
-      LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
-      mColorPicker = new ColorPickerView(getContext(), l, mColor);
-      layout.addView( mColorPicker, lp );
-      layout.invalidate();
+      mColorLayout = (LinearLayout) findViewById( R.id.color_layout );
+      mGridLayout = (GridLayout) findViewById( R.id.grid_layout );
+      if ( TDSetting.mDiscreteColors == 2 ) {
+        int w = (int)(TopoDroidApp.mDisplayWidth / 5) - 50;
+        int h = (int)(TopoDroidApp.mDisplayHeight / 14) - 30;
+        LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 20, 10, 30, 20 );
+        mColorLayout.setVisibility( View.GONE );
+        mBtnOk.setVisibility( View.GONE );
+        for ( int k=0; k<TDColor.mTDColors.length; ++k ) {
+          MyColorCell cell = new MyColorCell( mContext, k, this, w, h );
+          mGridLayout.addView( cell, lp );
+        }
+      } else { // TDSetting.mDiscreteColors == 1 
+        mBtnOk.setOnClickListener( this );
+        LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
+        mGridLayout.setVisibility( View.GONE );
+        mColorPicker = new ColorPickerView(getContext(), l, mColor);
+        mColorLayout.addView( mColorPicker, lp );
+        mColorLayout.invalidate();
+      // } else {
+      //   dismiss();
+      }
     }
 
+    /** react to a user tap
+     * @param v tapped view
+     *
+     * there are two actions:
+     *   OK: set the selected color
+     *   CLEAR: clear the color
+     */
     @Override
     public void onClick( View v )
     {
-      Button b = (Button)v;
-      if ( b == mBtnOk ) {
+      if ( v.getId() == R.id.btn_ok ) {
         mListener.colorChanged( mColorPicker.getColor() );
-      } else if ( b == mBtnClear ) {
+      } else if ( v.getId() == R.id.btn_clear ) {
         mListener.colorChanged( 0 ); // clear color is 0
-      // } else if ( b == mBtnClose ) {
+      // } else if ( v.getId() == R.id.btn_close ) {
           /* nothing */
+      } else if ( v instanceof MyColorCell ) {
+        MyColorCell cell = (MyColorCell)v;
+        int col = TDColor.mTDColors[ cell.getIndex() ];
+        mListener.colorChanged( col );
       }
       dismiss();
     }
