@@ -287,7 +287,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_invalid">Érvénytelen projekt név</string>
     <string name="error_name_required">Név szükséges</string>
     <string name="error_name_duplicate">Duplikált név</string>
-    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
 
 	
     <!-- UNUSED string name="error_dir_exists">A konyvtár már létezik</string -->
@@ -1393,10 +1393,10 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_horiz_splay_message">Segédmérés iránya ami felett szaggatott</string>
   <string name="pref_section_splay_title">Sün metszet irány</string>
   <string name="pref_section_splay_message">Ha nagyobb ennél a szögnél a metszet sikban akkor a segédmérések szaggatottak</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+  <string name="pref_splay_dash_color_title">Sün szaggatás szín</string>
+  <string name="pref_splay_dash_color_summary">Szaggatott vonal színe</string>
+  <string name="pref_splay_dot_color_title">Sün pontozott szín</string>
+  <string name="pref_splay_dot_color_summary">Pontozott vonal színe</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Adat autómatikus export</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Automatkus adat export(alapértelmezett formátumra van szükség)</string -->
