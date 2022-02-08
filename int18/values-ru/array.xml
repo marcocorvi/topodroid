@@ -14,11 +14,11 @@
      <item name="view">по проекции</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">нет</item>
+     <item name="all">все</item>
+     <item name="palette">палитра</item>
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">нет</item>
