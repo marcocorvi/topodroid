@@ -92,6 +92,7 @@ public class DrawingShp
       ArrayList< DrawingPointPath > extras     = new ArrayList<>();
       ArrayList< DrawingPointLinePath > lines  = new ArrayList<>();
       ArrayList< DrawingPointLinePath > areas  = new ArrayList<>();
+      ArrayList< Link > links          = new ArrayList<>();
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
@@ -117,11 +118,16 @@ public class DrawingShp
       ShpPoint shp_point = new ShpPoint( dirname, "point", files );
       shp_point.writePoints( points, xoff, yoff, xscale, yscale, cd, sd );
       ShpExtra shp_extra = new ShpExtra( dirname, "extra", files );
-      shp_extra.writeExtras( extras, xoff, yoff, xscale, yscale, cd, sd );
+      shp_extra.writeExtras( extras, xoff, yoff, xscale, yscale, cd, sd, links );
       ShpPolyline shp_line = new ShpPolyline( dirname, "line", DrawingPath.DRAWING_PATH_LINE, files );
       shp_line.writeLines( lines, xoff, yoff, xscale, yscale, cd, sd );
       ShpPolyline shp_area = new ShpPolyline( dirname, "area", DrawingPath.DRAWING_PATH_AREA, files );
       shp_area.writeAreas( areas, xoff, yoff, xscale, yscale, cd, sd );
+
+      if ( links.size() > 0 ) {
+        ShpLink shp_link = new ShpLink( dirname, "link", files );
+        shp_link.writeLinks( links, xoff, yoff, xscale, yscale, cd, sd );
+      }
 
       // stations: xoff+name.cx, yoff+name.cy
       List< DrawingStationName > stations = plot.getStations();

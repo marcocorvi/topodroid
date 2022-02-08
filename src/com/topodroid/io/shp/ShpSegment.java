@@ -35,13 +35,25 @@ import java.util.List;
 // This class handles shots: les and splays
 public class ShpSegment extends ShpObject
 {
+  /** cstr
+   * @param subdir  ...
+   * @param path    filename
+   * @param files   list of files to fill for the zip-compression
+   */
   public ShpSegment( String subdir, String path, List< String > files ) // throws IOException
   {
     super( SHP_POLYLINE, subdir, path, files );
   }
 
-  // @param x0 x-offset
-  // @param y0 y-offset
+  /** write a set of segments
+   * @param sgms   list of segments
+   * @param x0     x-offset
+   * @param y0     y-offset
+   * @param xscale  X scale factor
+   * @param yscale  Y scale factor
+   * @param cd      cosine declination angle
+   * @param sd      sine declination angle
+   */
   public boolean writeSegments( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int nrs = ( sgms != null )? sgms.size() : 0;
@@ -77,6 +89,7 @@ public class ShpSegment extends ShpObject
     writeDBaseHeader( nrs, dbfRecLen, n_fld, fields, ftypes, flens );
     // TDLog.v( "shots done headers" );
 
+    int shp_len = getShpRecordLength( );
     int cnt = 1;
     int offset = 50;
     if ( sgms != null && nrs > 0 ) {
@@ -97,12 +110,9 @@ public class ShpSegment extends ShpObject
           fields[3] = Long.toString( blk.getFlag() );
 	}
         if ( write ) {
-	  int shp_len = getShpRecordLength( );
-
           writeShpRecord( cnt, shp_len, sgm, x0, y0, xscale, yscale, cd, sd );
           writeShxRecord( offset, shp_len );
           writeDBaseRecord( n_fld, fields, flens );
-
           offset += shp_len;
           ++cnt;
         }
@@ -113,6 +123,17 @@ public class ShpSegment extends ShpObject
     return true;
   }
 
+  /** write a segment
+   * @param cnt     counter
+   * @param len     record length
+   * @param sgm     segment to write
+   * @param x0      X offset
+   * @param y0      Y offset
+   * @param xscale  X scale factor
+   * @param yscale  Y scale factor
+   * @param cd      cosine declination angle
+   * @param sd      sine declination angle
+   */
   private void writeShpRecord( int cnt, int len, DrawingPath sgm, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
     double x1 = DrawingUtil.declinatedX( sgm.x1, sgm.y1, cd, sd );
@@ -152,11 +173,21 @@ public class ShpSegment extends ShpObject
     // TDLog.v( "SHOT record [2] " + (x0 + xscale*x2) + " " + (y0 - yscale*y2 ) );
   }
 
-  // segment record length [word]: 4 + (48 + npt * 16)/2   [npt = 2]
-  // 4 for the record header (2 int)
+  /** @return segment record length [word]: 4 + (48 + npt * 16)/2   [npt = 2]
+   * 4 for the record header (2 int)
+   */
   // @Override 
   protected int getShpRecordLength( ) { return 28 + 2 * 8; }
 
+  /** compute the bounds
+   * @param sgms    list of segments
+   * @param x0      X offset
+   * @param y0      Y offset
+   * @param xscale  X scale factor
+   * @param yscale  Y scale factor
+   * @param cd      cosine declination angle
+   * @param sd      sine declination angle
+   */
   private void setBoundsLines( List< DrawingPath > sgms, double x0, double y0, double xscale, double yscale, double cd, double sd )
   {
     int nrs = ( sgms != null )? sgms.size() : 0;

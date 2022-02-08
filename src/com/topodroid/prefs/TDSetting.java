@@ -656,23 +656,13 @@ public class TDSetting
   private static int tryColorValue( TDPrefHelper hlp, String key, String val, String def_value )
   {
     int color = 0xffffffff;
-    String[] vals = val.split(" ");
-    if ( vals.length == 3 ) {
-      try {
-        int r = (Integer.parseInt( vals[0] ) * 255)/100;
-        int g = (Integer.parseInt( vals[1] ) * 255)/100;
-        int b = (Integer.parseInt( vals[2] ) * 255)/100;
-        color = (r << 16) | (g << 8) | b;
-        hlp.update( key, Integer.toString(color) );
-      } catch( NumberFormatException e ) { 
-        TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
-        color = Integer.parseInt(def_value);
-        hlp.update( key, def_value );
-      }
-    } else {
+    try {
+      color = Integer.parseInt( val );
+    } catch( NumberFormatException e ) { 
+      TDLog.Error("Integer Format Error. Key " + key + " " + e.getMessage() );
       color = Integer.parseInt(def_value);
-      hlp.update( key, def_value );
     }
+    hlp.update( key, Integer.toString(color) );
     return color;
   }
 
@@ -1743,9 +1733,11 @@ public class TDSetting
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
       mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
+      TDLog.v("dash color " + mSplayDashColor );
       BrushManager.setSplayDashColor( mSplayDashColor );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SPLAY_DOT_COLOR
       mSplayDotColor = tryColorValue( hlp, k, v, def[ 8] ); 
+      TDLog.v("dot color " + mSplayDotColor );
       BrushManager.setSplayDotColor( mSplayDotColor );
     } else {
       TDLog.Error("missing GEEK_SPLAY key: " + k );

@@ -18,7 +18,7 @@
      <item name="none">nincs</item>
      <item name="all">összes</item>
      <item name="palette">paletta</item>
-  </string-arrayi>
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">nincs</item>

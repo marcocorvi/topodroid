@@ -12,6 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyColorPicker;
 import com.topodroid.DistoX.TDConst;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.R;
@@ -21,7 +22,7 @@ import android.content.Context;
 
 import android.widget.TextView;
 import android.widget.EditText;
-// import android.widget.Button;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.Spinner;
 // import android.widget.LinearLayout;
@@ -45,6 +46,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 		      , View.OnFocusChangeListener
 		      , TextWatcher
 		      , OnKeyListener
+                      , MyColorPicker.IColorChanged
 {
   TDPrefHelper helper = null;
   Context context;
@@ -54,6 +56,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static final int CHECKBOX = 2;
   static final int EDITTEXT = 3;
   static final int LIST     = 4;
+  static final int COLORBOX = 5;
 
   static final int PREF     = 0;
   static final int INTEGER  = 1;
@@ -61,6 +64,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   static final int STRING   = 3;
   static final int OPTIONS  = 4;
   static final int BOOLEAN  = 5;
+  static final int COLOR    = 6;
 
   String name;
   int wtype;   // widget type
@@ -81,6 +85,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   View mView = null;
   EditText mEdittext = null;
+  Button mButton = null;
 
   /** private cstr
    * @param cat     category
@@ -166,6 +171,12 @@ public class TDPref implements AdapterView.OnItemSelectedListener
         spinner.setSelection( intValue() );
         spinner.setOnItemSelectedListener( this );
         break;
+      case COLORBOX:
+        v = li.inflate( R.layout.pref_color, parent, false );
+	mButton = (Button) v.findViewById( R.id.button );
+	mButton.setOnClickListener( this );
+        setColor( value );
+        break;
     }
     textview = (TextView) v.findViewById( R.id.title );
     textview.setMaxWidth( (int)(0.70f * TopoDroidApp.mDisplayWidth) );
@@ -182,6 +193,25 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   /** @return the view stored in this preference
    */
   View getView() { return mView; }
+
+  /** set the button color
+   * @param color color (string)
+   */
+  private void setColor( String color )
+  {
+    setColor( Integer.parseInt( color ) );
+  }
+
+  /** set the button color
+   * @param color color (int 0xRRGGBB)
+   */
+  private void setColor( int color )
+  {
+    if ( mButton == null ) return;
+    ivalue = color & 0xffffff;
+    mButton.setBackgroundColor( 0xff000000 | ivalue );
+    // TDLog.v( name + " set color " + ivalue + " " + color );
+  }
 
   // -------------------------------------------------------------------------
   /** react to a user finish text change
@@ -255,7 +285,20 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       case R.id.title:
         // TDLog.v( "Pref TODO title click tell TDSetting " + title );
         break;
+      case R.id.button:
+        // TDLog.v(" start the color picker dialog ");
+        int color = intValue();
+        (new MyColorPicker( context, this, color )).show();
+        break;
     }
+  }
+
+  // IColorChanged
+  public void colorChanged( int color )
+  {
+    setColor( color );
+    // TDLog.v(name + " update color " + ivalue + " " + color );
+    TDSetting.updatePreference( helper, category, name, Integer.toString( ivalue ) );
   }
 
   /** react to a user item selection
@@ -393,6 +436,53 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return ret;
   }
 
+  /** factory cstr a "color" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default boolean value
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
+  private static TDPref makeColor( int cat, String nm, int tit, int sum, int lvl, int def_val, Context ctx, TDPrefHelper hlp )
+  { 
+    String def_str = Integer.toString( def_val );
+    String str = hlp.getString( nm, def_str );
+    // TDLog.v("[1] Helper " + nm + " color " + str + " default " + def_str );
+    TDPref ret = new TDPref( cat, nm, COLORBOX, tit, sum, lvl, COLOR, str, def_str, ctx, hlp );
+    int color = def_val;
+    try {
+      color = Integer.parseInt( str );
+    } catch ( NumberFormatException e ) { }
+    ret.setColor( color );
+    return ret;
+  }
+
+  /** factory cstr a "checkbox" preference
+   * @param cat     category
+   * @param nm      preference name
+   * @param tit     preference title
+   * @param sun     preference description
+   * @param lvl     activity level
+   * @param def_val preference default (string) value
+   * @param ctx     context
+   * @param hlp     shared preferences helper
+   */ 
+  private static TDPref makeColor( int cat, String nm, int tit, int sum, int lvl, String def_str, Context ctx, TDPrefHelper hlp )
+  { 
+    String str = hlp.getString( nm, def_str );
+    // TDLog.v("[2] Helper " + nm + " color " + str + " default " + def_str );
+    TDPref ret = new TDPref( cat, nm, COLORBOX, tit, sum, lvl, COLOR, str, def_str, ctx, hlp );
+    int color = 0;
+    try {
+      color = Integer.parseInt( str );
+    } catch ( NumberFormatException e ) { color = Integer.parseInt( def_str ); }
+    ret.setColor( color );
+    return ret;
+  }
+
   /** factory cstr a "text" preference
    * @param cat     category
    * @param nm      preference name
@@ -485,6 +575,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
 
   // -----------------------------------------------------------------------
 
+  /** @return the list index equal to the "value"
+   */
   private int makeLstIndex( )
   {
     // TDLog.v( "Pref make list index: val <" + value + "> opts size " + options.length );
@@ -1405,8 +1497,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), // DASH PLAN
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PROFILE
       makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
-      makeEdt( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7], INTEGER, ctx, hlp ), // DASH COLOR SPLAY 
-      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], INTEGER, ctx, hlp ), // DASH COLOR SPLAY 
+      makeColor( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],        ctx, hlp ), // DASH COLOR SPLAY 
+      makeColor( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],        ctx, hlp ), // DASH COLOR SPLAY 
     };
   }
 
@@ -1417,7 +1509,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */
   public static TDPref[] makeGeekPrefs( Context ctx, TDPrefHelper hlp )
   {
-    TDLog.v("make Geek Prefs");
+    // TDLog.v("make Geek Prefs");
     int cat = TDPrefCat.PREF_CATEGORY_GEEK;
     String[] key = TDPrefKey.GEEK;
     int[] tit    = TDPrefKey.GEEKtitle;
