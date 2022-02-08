@@ -20,6 +20,7 @@ import com.topodroid.DistoX.DrawingPointPath;
 import com.topodroid.DistoX.DrawingAudioPath;
 import com.topodroid.DistoX.DrawingPhotoPath;
 import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.DistoX.IDrawingLink;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDInstance;
@@ -97,6 +98,7 @@ public class ShpExtra extends ShpObject
       shpBuffer.putDouble( y0 - yscale * y );
 
       // TDLog.v( "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
+      IDrawingLink link = null;
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
       fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
@@ -112,12 +114,18 @@ public class ShpExtra extends ShpObject
       } else {
         if ( BrushManager.isPointSection( pt.pointType() ) ) {
           fields[6] = TDUtil.replacePrefix( TDInstance.survey, pt.getOption(TDString.OPTION_SCRAP) ); 
+          link = pt.mLink;
         }
       }
       if ( fields[3] == null ) fields[3] = "";
       if ( fields[4] == null ) fields[4] = "";
       if ( fields[5] == null ) fields[5] = "";
       writeDBaseRecord( n_fld, fields, flens );
+      if ( link != null ) {
+        double xl = DrawingUtil.declinatedX( link.getLinkX(), link.getLinkY(), cd, sd );
+        double yl = DrawingUtil.declinatedY( link.getLinkX(), link.getLinkY(), cd, sd );
+        // TODO line (x,y) -- (xl,yl)
+      }
       ++cnt;
     }
     // TDLog.v( "POINT done records");

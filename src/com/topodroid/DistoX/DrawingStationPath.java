@@ -29,7 +29,7 @@ import java.io.PrintWriter;
  * station points do not shift (!)
  */
 public class DrawingStationPath extends DrawingPath
-                         implements IDrawingLink
+                                implements IDrawingLink
 {
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
   private int mScale;         //! symbol scale
@@ -44,7 +44,13 @@ public class DrawingStationPath extends DrawingPath
   //   return ret;
   // }
 
-
+  /** cstr
+   * @param name    station name
+   * @param x       X coord (scene)
+   * @param y       Y coord
+   * @param scale   point scale
+   * @param scrap   point scrap (index)
+   */
   DrawingStationPath( String name, float x, float y, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
@@ -65,6 +71,11 @@ public class DrawingStationPath extends DrawingPath
     // TDLog.v( "Point cstr " + type + " orientation " + mOrientation + " flip " + mFlip );
   }
 
+  /** cstr
+   * @param st   station name item
+   * @param scale   point scale
+   * @param scrap   point scrap (index)
+   */
   public DrawingStationPath( DrawingStationName st, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
@@ -85,13 +96,25 @@ public class DrawingStationPath extends DrawingPath
     setBBox( cx - 1, cx + 1, cy - 1, cy + 1 );
   }
 
+  /** @return the station name
+   */
   public String name() { return mName; }
 
-  // @implements IDrawingLink
+  /** @return X scene coord of the linked item
+   * @implements IDrawingLink
+   */
   public float getLinkX() { return cx; }
+
+  /** @return Y scene coord of the linked item
+   * @implements IDrawingLink
+   */
   public float getLinkY() { return cy; }
+
   // public Point2D getLink() { return new Point2D(cx,cy); }
 
+  /** set the point scale (XS, S, M, L, or XL)
+   * @param scale  new point scale
+   */
   private void setScale( int scale )
   {
     if ( scale != mScale ) {
@@ -121,7 +144,8 @@ public class DrawingStationPath extends DrawingPath
 
   // public double orientation() { return mOrientation; }
 
-
+  /** #return the "therion" serialized string
+   */
   @Override
   public String toTherion( )
   {
@@ -129,6 +153,10 @@ public class DrawingStationPath extends DrawingPath
     return String.format(Locale.US, "point %.2f %.2f station -name %s\n", cx*TDSetting.mToTherion, -cy*TDSetting.mToTherion, mName );
   }
 
+  /** serialize to a data stream
+   * @param dos    output stream
+   * @param scrap  index of the point scrap
+   */
   @Override
   void toDataStream( DataOutputStream dos, int scrap )
   {
@@ -148,6 +176,11 @@ public class DrawingStationPath extends DrawingPath
     }
   }
 
+  /** load a point path from a data stream
+   * @param version  data stream version
+   * @param dis      input stream
+   * @return new station point
+   */
   public static DrawingStationPath loadDataStream( int version, DataInputStream dis )
   {
     try {
@@ -208,8 +241,15 @@ public class DrawingStationPath extends DrawingPath
   //   // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   // }
 
+  /** serialize to cSurvey format
+   * @param pw     output writer
+   * @param survey survey name
+   * @param cave   cave name
+   * @param branch branch name
+   * @param bind   station point binding (or ull for no-binding)
+   */
   @Override
-  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind )
   { 
     pw.format("<item type=\"point\" name=\"station\" cave=\"%s\" branch=\"%s\" text=\"\" ", cave, branch );
     if ( bind != null ) pw.format(" bind=\"%s\" ", bind );

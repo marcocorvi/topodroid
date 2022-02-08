@@ -42,6 +42,7 @@ import com.topodroid.DistoX.DrawingStationPath;
 import com.topodroid.DistoX.DrawingStationName;
 import com.topodroid.DistoX.DrawingLabelPath;
 import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.IDrawingLink;
 import com.topodroid.DistoX.Symbol;
 import com.topodroid.DistoX.SymbolPoint;
 import com.topodroid.DistoX.SymbolPointLibrary;
@@ -689,6 +690,10 @@ public class DrawingDxf
                                        scale, point.cx, point.cy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y, z );
                     done_point = true;
                   }
+                  IDrawingLink link = point.mLink;
+                  if ( link != null ) {
+                    // TODO line connecting point and link
+                  } 
                 }
               } 
               if ( ! done_point ) {

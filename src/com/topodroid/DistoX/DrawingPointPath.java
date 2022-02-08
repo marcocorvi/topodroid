@@ -46,7 +46,7 @@ public class DrawingPointPath extends DrawingPath
   protected int mScale;       // symbol scale
   public double mOrientation; // orientation [degrees]
   public String mPointText;   // point text value (if any)
-  IDrawingLink mLink;         // linked drawing item
+  public IDrawingLink mLink;  // linked drawing item
 
   // FIXME-COPYPATH
   // @Override

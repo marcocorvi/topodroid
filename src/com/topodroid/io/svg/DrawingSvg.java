@@ -27,6 +27,7 @@ import com.topodroid.DistoX.DrawingAreaPath;
 import com.topodroid.DistoX.DrawingPath;
 import com.topodroid.DistoX.DrawingUtil;
 import com.topodroid.DistoX.DrawingCommandManager;
+import com.topodroid.DistoX.IDrawingLink;
 import com.topodroid.DistoX.BrushManager;
 // import com.topodroid.DistoX.SymbolPoint;
 import com.topodroid.DistoX.Scrap;
@@ -275,6 +276,16 @@ public class DrawingSvg extends DrawingSvgBase
                   pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
                   out.write( sw52.getBuffer().toString() );
   	        }
+                IDrawingLink link = point.mLink;
+                if ( link != null ) {
+                  float xx0 = xoff+link.getLinkX();
+                  float yy0 = yoff+link.getLinkY();
+                  StringWriter sw520 = new StringWriter();
+                  PrintWriter pw520  = new PrintWriter(sw520);
+                  pw520.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"$f\"", xx, yy, xx0, yy0 );
+                  pw520.format(Locale.US, " style=\"fill:grey;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
+                  out.write( sw520.getBuffer().toString() );
+                }
               } else {
                 String color_str = pathToColor( path );
                 StringWriter sw53 = new StringWriter();

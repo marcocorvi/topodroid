@@ -26,7 +26,7 @@ import java.io.PrintWriter;
 import java.util.Locale;
 
 public class DrawingPointLinePath extends DrawingPath
-                           implements IDrawingLink
+                                  implements IDrawingLink
 {
   private boolean mVisible; // visible line
   private boolean mClosed;  // closed path
