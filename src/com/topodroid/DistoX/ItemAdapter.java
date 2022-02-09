@@ -38,10 +38,11 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private ArrayList< ItemSymbol > mItems;
   // private Context mContext;
   private IItemPicker mParent;
-  private int mPos;    
+  private int mPos;    // position of selected item
   private int mType;
-  private boolean mShowSelected;
+  private boolean mShowSelected; // whether to show selected item
   // private int mNonClick = -1;
+  // private boolean mOnClickReact = true;
 
   /** cstr
    * @param ctx
@@ -74,6 +75,13 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     }
   }
 
+  // /** set whether to react to a checkbox click
+  //  * @param react  whether to react to a checkbox click
+  //  */
+  // void setOnClickReact( boolean react ) { mOnClickReact = react; }
+
+  /** @return the number of items on this adapter
+   */
   int size() { return mItems.size(); }
 
   // void rotateItem( int index, int angle )
@@ -86,54 +94,95 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //   }
   // }
   
+  /** @return true if the index is valid, ie, between 0 and the number of items
+   * @param p   index
+   */
   private boolean isValid( int p ) { return p >= 0 && p < mItems.size() /* && p != mNonClick */ ; }
 
+  /** set anitem orientation
+   * @param pos    item position (index)
+   * @param angle  orientation angle [degrees]
+   */
   void setItemOrientation( int pos, int angle ) { if ( isValid(pos) ) { mItems.get( pos ).setAngle( angle ); } }
 
+  /** set whether to show selected item
+   * @param s   whether to show selected item or not
+   */
   void setShowSelected( boolean s ) 
   { 
+    TDLog.v("Adapter " + mType + " show selected " + s + " pos " + mPos );
     mShowSelected = s;
     if ( isValid(mPos) ) {
-      mItems.get( mPos ).setChecked( mShowSelected );
+      // setOnClickReact( false );
+      mItems.get( mPos ).setItemChecked( mShowSelected );
+      // setOnClickReact( true );
     }
   }
 
-  // get the item at a certain position in the list of symbols 
+  /** @return the item at a certain position in the list of symbols 
+   * @param k  itemindex
+   */
   ItemSymbol get( int k ) 
   { 
-    // TDLog.v("Get item at " + k + " of " + mItems.size() );
+    TDLog.v("Adapter " + mType + " get item at " + k + " of " + mItems.size() );
     return ( k < mItems.size() ) ? mItems.get(k) : null ; 
   }
 
   // ItemSymbol get( int pos ) { return mItems.get(pos); }
   
+  /** @return the index of the selected item
+   */
   int getSelectedPos() 
   {
-    // TDLog.v("Selected position " + mPos );
+    TDLog.v("Adapter " + mType + " get selected position " + mPos );
     return mPos;
   }
 
+  /** @return the selected item
+   */
   ItemSymbol getSelectedItem() { return ( isValid(mPos) )? mItems.get(mPos) : null; }
 
-  // set selected position from the item index
+  // /** clear selected position from the item index
+  //  * @param index   index of item to clear
+  //  */
+  // void clearSelectedItem( int index )
+  // {
+  //   TDLog.v("Adapter " + mType + " clear " + index );
+  //   for ( int k=0; k<mItems.size(); ++k ) {
+  //     // if ( k == mNonClick ) continue;
+  //     ItemSymbol item = mItems.get(k);
+  //     if ( index == item.mIndex ) {
+  //       item.clearChecked( );
+  //       break;
+  //     }
+  //   }
+  // }
+
+  /** set selected position from the item index
+   * @param index   index of item to select
+   */
   void setSelectedItem( int index )
   {
+    TDLog.v("Adapter " + mType + " select " + index );
+    // setOnClickReact( false );
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
       // if ( k == mNonClick ) continue;
       ItemSymbol item = mItems.get(k);
       if ( index == item.mIndex ) {
         mPos = k;
-        item.setChecked( true );
+        item.setItemChecked( true );
       } else {
-        item.setChecked( false );
+        item.setItemChecked( false );
       }
     }
     if ( mPos == -1 ) {
       mPos = ( mItems.size() > 1 )? 1 : 0; // user symbols cannot be disabled: are always present
-      mItems.get( mPos ).setChecked( true );
+      mItems.get( mPos ).setItemChecked( true );
     }
     // TDLog.v("set selected at index " + index + " pos " + mPos );
+    // setOnClickReact( true );
+    TDLog.v("Adapter " + mType + " select done " + mPos );
   }
 
   /** set selected position from the item symbol
@@ -142,21 +191,25 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   int setSelectedItem( Symbol symbol )
   {
+    TDLog.v("Adapter " + mType + " set selected symbol ");
+    // setOnClickReact( false );
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
       // if ( k == mNonClick ) continue;
       ItemSymbol item = mItems.get(k);
       if ( symbol == item.mSymbol ) {
         mPos = k;
-        item.setChecked( true );
+        item.setItemChecked( true );
       } else {
-        item.setChecked( false );
+        item.setItemChecked( false );
       }
     }
     if ( mPos == -1 ) {
       mPos = ( mItems.size() > 1 )? 1 : 0;
-      mItems.get( mPos ).setChecked( true );
+      mItems.get( mPos ).setItemChecked( true );
     }
+    // setOnClickReact( true );
+    TDLog.v("Adapter " + mType + " set selected symbol " + mPos + " return " + mItems.get( mPos ).mIndex);
     return mItems.get( mPos ).mIndex;
   }
 
@@ -168,6 +221,9 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //   return null;
   // }
 
+  /** add an item
+   * @param item   item to add
+   */
   public void add( ItemSymbol item ) 
   {
     // if ( mType == SymbolType.POINT && BrushManager.isPointSection( item.mIndex ) ) mNonClick = mItems.size();
@@ -175,6 +231,11 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     item.setOnClickListener( this );
   }
 
+  /** @return the view for an item
+   * @param pos         item position
+   * @param convertView convertible view or null
+   * @param parent      parent group for the view
+   */
   // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
@@ -183,24 +244,31 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     return ( b == null )? convertView : b.mView;
   }
 
+  /** react to a user tap: forward to doClick()
+   * @param v  tapped  view
+   */
   @Override
   public void onClick( View v )
   {
-    // TDLog.v( "Item Adapter onClick()");
+    TDLog.v( "Adapter " + mType + " onClick()");
     doClick( v );
   }
 
   private long mClickMillis = 0;
   static final private int DOUBLE_CLICK_TIME = 400;
 
+  /** react to a user tap
+   * @param v  tapped  view
+   */
   private void doClick( View v )
   {
-    // TDLog.v( "--> Item Adapter doClick()");
+    // TDLog.v( "Adapter " + mType + " do click - react " + mOnClickReact );
+    TDLog.v( "Adapter " + mType + " do click " );
     long millis = System.currentTimeMillis();
     boolean doubleclick = false;
     if ( v instanceof CheckBox ) {
       CheckBox cb = (CheckBox)v;
-      if ( cb != null ) {
+      if ( /* mOnClickReact && */ cb != null ) {
         int pos = 0;
         for ( ItemSymbol item : mItems ) {
           if ( cb == item.mCheckBox ) {
@@ -208,9 +276,9 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
             mPos = pos; // item.mIndex;
             // TDLog.v("set type and item [1]: pos " + mPos + " index " + item.mIndex );
             mParent.setTypeAndItem( mType, mPos );
-            item.setChecked( true );
+            item.setItemChecked( true );
           } else {
-            item.setChecked( false );
+            item.setItemChecked( false );
           }
           ++ pos;
         }
@@ -225,9 +293,9 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
           mPos = pos; // item.mIndex;
           // TDLog.v("set type and item [2]: pos " + mPos + " index " + item.mIndex );
           mParent.setTypeAndItem( mType, mPos );
-          item.setChecked( true );
+          item.setItemChecked( true );
         } else {
-          item.setChecked( false );
+          item.setItemChecked( false );
         }
         ++pos;
       }

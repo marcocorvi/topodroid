@@ -247,18 +247,12 @@ public class DataHelper extends DataSetObservable
       TDLog.v( "App does not have database helper " + db_name + " - trying to open it");
       try {
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-        if ( myDB == null ) {
+        if ( myDB != null ) {
           TDLog.v( "open and create new database if necessary");
           DistoXOpenHelper.createTables( myDB );
           myDB.setVersion( TDVersion.DATABASE_VERSION );
         } else {
-          int oldVersion = myDB.getVersion();
-          int newVersion = TDVersion.DATABASE_VERSION;
-          TDLog.v( "opened existing database: old version " + oldVersion + " current version " + newVersion );
-          if ( oldVersion < newVersion ) {
-            DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-            myDB.setVersion( TDVersion.DATABASE_VERSION );
-          }
+          TDLog.Error( "cannot open the database" );
         }
       } catch ( SQLiteException e ) {
         TDLog.Error( "opened database error: " + e.getMessage() );
@@ -3862,7 +3856,8 @@ public class DataHelper extends DataSetObservable
   private long setName( String table, String name, int datamode )
   {
     long id = -1;
-    if ( myDB == null ) { return 0; }
+    if ( name == null || name.length() == 0 ) return 0; 
+    if ( myDB == null ) return 0;
     Cursor cursor = myDB.query( table, new String[] { "id" },
                                 "name = ?", new String[] { name },
                                 null, null, null );
@@ -4723,12 +4718,24 @@ public class DataHelper extends DataSetObservable
     doUpdate( FIXED_TABLE, cv, sid, id, "fix cs" );
   }
 
+  /** @return true if the database contains the survey name
+   * @param name   survey name
+   */
   public boolean hasSurveyName( String name )  { return hasName( name, SURVEY_TABLE ); }
 
+  /** @return true if the database contains the plot name
+   * @param sid    survey ID
+   * @param name   plot name
+   */
   public boolean hasSurveyPlotName( long sid, String name )  { return hasName( sid, name, PLOT_TABLE ); }
 
+  /** @return true if the database table contains the given name
+   * @param name   name
+   * @param table  table
+   */
   private boolean hasName( String name, String table )
   {
+    if ( name == null || name.length() == 0 ) return false;
     if ( myDB == null ) {
       TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
@@ -4737,15 +4744,23 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       String query = String.format("SELECT name FROM %s WHERE name='%s' COLLATE NOCASE", table, name );
+      TDLog.v("quey string <" + query + ">" );
       cursor = myDB.rawQuery( query, new String[] { } );
       ret = ( cursor != null && cursor.moveToFirst() ); 
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+    } catch ( RuntimeException e ) { TDLog.Error( e.getMessage() );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
     return ret;
   }
 
+  /** @return true if the database table contains the given name
+   * @param sid    survey ID
+   * @param name   name
+   * @param table  table
+   */
   private boolean hasName( long sid, String name, String table )
   {
+    if ( name == null || name.length() == 0 ) return false;
     if ( myDB == null ) {
       TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
@@ -4764,8 +4779,11 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  // @return positive ID on success
-  //         0 or -1 failure
+  /** set the current survey
+   * @param name     survey name
+   * @param datamode survey data-mode
+   * @return positive ID on success, 0 or -1 failure
+   */
   long setSurvey( String name, int datamode )
   {
     myNextId = 0;
@@ -4781,7 +4799,9 @@ public class DataHelper extends DataSetObservable
     return sid;
   }
    
-  // get survey id (-1L on error)
+  /** @return the survey id given the survey name (-1L on error)
+   * @param name     survey name
+   */
   long getSurveyId( String name )
   {
     if ( myDB == null ) return -1L;
@@ -4796,14 +4816,31 @@ public class DataHelper extends DataSetObservable
     return id;
   }
 
+  /** @return the survey name given the survey ID
+   * @param sid     survey ID
+   */
   String getSurveyFromId( long sid ) { return getNameFromId( SURVEY_TABLE, sid ); }
 
+  /** @return the survey date given the survey ID 
+   * @param sid     survey ID
+   * @note the date is a string formatted yyyy.mm.dd
+   */
   String getSurveyDate( long sid ) { return getSurveyFieldAsString( sid, "day" ); }
 
+  /** @return the survey description given the survey ID
+   * @param sid     survey ID
+   */
   String getSurveyComment( long sid ) { return getSurveyFieldAsString( sid, "comment" ); }
 
+  /** @return the survey team given the survey ID
+   * @param sid     survey ID
+   */
   String getSurveyTeam( long sid ) { return getSurveyFieldAsString( sid, "team" ); }
 
+  /** @return the survey field given the survey ID
+   * @param sid     survey ID
+   * @param attr    field name, as in the database "surveys" table
+   */
   private String getSurveyFieldAsString( long sid, String attr )
   {
     String ret = null;

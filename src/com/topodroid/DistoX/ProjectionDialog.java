@@ -48,10 +48,10 @@ import java.util.Locale;
 /**
  */
 class ProjectionDialog extends MyDialog
-                             implements View.OnTouchListener
-                                      , View.OnClickListener
-                                      , OnZoomListener
-                                      , IZoomer
+                       implements View.OnTouchListener
+                       , View.OnClickListener
+                       , OnZoomListener
+                       , IZoomer
 {
   private View mZoomView;
 
@@ -90,6 +90,13 @@ class ProjectionDialog extends MyDialog
 
   private boolean mETazimuthChanged = false;
 
+  /** cstr
+   * @param context context
+   * @param parent  parent activity (ShotWindow)
+   * @param sid     survey ID
+   * @param name    plot name
+   * @param from    plot origin station
+   */
   ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
     super( context, R.string.ProjectionDialog ); // FIXME
@@ -102,6 +109,8 @@ class ProjectionDialog extends MyDialog
     // mApp     = mParent.getApp();
   }
 
+  /** update the text in the edit field with the current value of the azimuth
+   */
   private void updateEditText()
   { 
     mETazimuth.setText( String.format(Locale.US, "%d", mAzimuth ) );
@@ -111,8 +120,13 @@ class ProjectionDialog extends MyDialog
   // -------------------------------------------------------------------
   // ZOOM CONTROLS
 
+  /** @return the zoom
+   */
   public float zoom() { return mZoom; }
 
+  /** react to a change of visibility
+   * @param visible ...
+   */
   @Override
   public void onVisibilityChanged(boolean visible)
   {
@@ -121,6 +135,9 @@ class ProjectionDialog extends MyDialog
     }
   }
 
+  /** react to a zoom tap
+   * @param zoomin   whether to zoom IN or OUT
+   */
   @Override
   public void onZoom( boolean zoomin )
   {
@@ -128,6 +145,9 @@ class ProjectionDialog extends MyDialog
     else changeZoom( DrawingWindow.ZOOM_DEC );
   }
 
+  /** change the value of the zoom
+   * @param f    multiplicative change factor
+   */
   private void changeZoom( float f ) 
   {
     float zoom = mZoom;
@@ -142,7 +162,12 @@ class ProjectionDialog extends MyDialog
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
 
+  /** zoom IN (increase resolution)
+   */
   void zoomIn()  { changeZoom( DrawingWindow.ZOOM_INC ); }
+
+  /** zoom OUT (decrease resolution)
+   */
   void zoomOut() { changeZoom( DrawingWindow.ZOOM_DEC ); }
   // public void zoomOne() { resetZoom( ); }
 
@@ -155,6 +180,13 @@ class ProjectionDialog extends MyDialog
 
   // -----------------------------------------------------------------
 
+  /** add a splay line
+   * @param blk   splay data
+   * @param x1    X coord of first point
+   * @param y1    Y coord of first point
+   * @param x2    X coord of second point
+   * @param y2    Y coord of second point
+   */
   private void addFixedSplayLine( DBlock blk, float x1, float y1, float x2, float y2 )
   {
     DrawingSplayPath dpath = null;
@@ -164,6 +196,13 @@ class ProjectionDialog extends MyDialog
     mProjectionSurface.addFixedSplayPath( dpath );
   }
     
+  /** add a leg line
+   * @param blk   leg data
+   * @param x1    X coord of first point
+   * @param y1    Y coord of first point
+   * @param x2    X coord of second point
+   * @param y2    Y coord of second point
+   */
   private void addFixedLegLine( DBlock blk, float x1, float y1, float x2, float y2 )
   {
     DrawingPath dpath = null;
@@ -176,6 +215,8 @@ class ProjectionDialog extends MyDialog
 
   // --------------------------------------------------------------------------------------
 
+  /** compute the references of the graphics
+   */
   private void computeReferences( )
   {
     mProjectionSurface.clearReferences( );
@@ -239,7 +280,10 @@ class ProjectionDialog extends MyDialog
 
   // --------------------------------------------------------------
 
-  // this method is a callback to let other objects tell the activity to use zooms or not
+  /** svitch the visibility of zoom-controls
+   * @param ctrl   control value: 0 not used, 1 not visible, 2 visible
+   * @note this method is a callback to let other objects tell the activity to use zooms or not
+   */
   private void switchZoomCtrl( int ctrl )
   {
     // TDLog.v( "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
@@ -383,6 +427,10 @@ class ProjectionDialog extends MyDialog
     doStart();
   }
 
+  /** set the vallue of the azimuth
+   * @param a         new value of the azimuth
+   * @param edit_text whether the set came from the edit text field
+   */
   private void setAzimuth( int a, boolean edit_text )
   {
     mAzimuth = a;
@@ -393,7 +441,8 @@ class ProjectionDialog extends MyDialog
     if ( edit_text ) updateEditText();
   }
 
-  // empty but called by ProjectionSurface
+  /** emptyi method but called by ProjectionSurface
+   */
   void setSize( int w, int h )
   {
     // mOffset.x = w/2;
@@ -401,212 +450,242 @@ class ProjectionDialog extends MyDialog
     // mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
   }
 
-// ----------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------
 
-    private void doStart()
-    {
-      mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
-      if ( mList.size() == 0 ) {
-        dismiss();
-        TDToast.makeBad( R.string.few_data );
-      } else {
-        // float decl = mApp.mData.getSurveyDeclination( mSid );
-        mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
-        mSeekBar.setProgress( 200 );
-        float de = - mNum.surveyEmin();
-        if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();
-        float ds = - mNum.surveySmin();
-        if ( mNum.surveySmax() > ds ) ds = mNum.surveySmax();
-        mZoom *= 2 / (float)Math.sqrt( de*de + ds*ds );
-        // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * DrawingUtil.SCALE_FIX/2;
-        // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * DrawingUtil.SCALE_FIX/2;
-        // TDLog.v( "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
+  /** lifecycle: start
+   */
+  private void doStart()
+  {
+    mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
+    if ( mList.size() == 0 ) {
+      dismiss();
+      TDToast.makeBad( R.string.few_data );
+    } else {
+      // float decl = mApp.mData.getSurveyDeclination( mSid );
+      mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
+      mSeekBar.setProgress( 200 );
+      float de = - mNum.surveyEmin();
+      if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();
+      float ds = - mNum.surveySmin();
+      if ( mNum.surveySmax() > ds ) ds = mNum.surveySmax();
+      mZoom *= 2 / (float)Math.sqrt( de*de + ds*ds );
+      // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * DrawingUtil.SCALE_FIX/2;
+      // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * DrawingUtil.SCALE_FIX/2;
+      // TDLog.v( "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
-        computeReferences();
-        mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2;
-        mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2;
+      computeReferences();
+      mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2;
+      mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2;
 
-        mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-      }
-   }
+      mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    }
+  }
 
-   private float spacing( MotionEventWrap ev )
-   {
-      int np = ev.getPointerCount();
-      if ( np < 2 ) return 0.0f;
-      float x = ev.getX(1) - ev.getX(0);
-      float y = ev.getY(1) - ev.getY(0);
-      return (float)Math.sqrt(x*x + y*y);
-   }
+  /** compute the spacing of a two-finger touch
+   * @param ev   touch event 
+   * @return spacing between the two finger touch points
+   */
+  private float spacing( MotionEventWrap ev )
+  {
+     int np = ev.getPointerCount();
+     if ( np < 2 ) return 0.0f;
+     float x = ev.getX(1) - ev.getX(0);
+     float y = ev.getY(1) - ev.getY(0);
+     return (float)Math.sqrt(x*x + y*y);
+  }
 
-   private void saveEventPoint( MotionEventWrap ev )
-   {
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        mSave0X = ev.getX(0);
-        mSave0Y = ev.getY(0);
-        if ( np >= 2 ) {
-          mSave1X = ev.getX(1);
-          mSave1Y = ev.getY(1);
-        } else {
-          mSave1X = mSave0X;
-          mSave1Y = mSave0Y;
-        } 
-      }
-   }
-
-    
-   private void shiftByEvent( MotionEventWrap ev )
-   {
-      float x0 = 0.0f;
-      float y0 = 0.0f;
-      float x1 = 0.0f;
-      float y1 = 0.0f;
-      int np = ev.getPointerCount();
-      if ( np >= 1 ) {
-        x0 = ev.getX(0);
-        y0 = ev.getY(0);
-        if ( np >= 2 ) {
-          x1 = ev.getX(1);
-          y1 = ev.getY(1);
-        } else {
-          x1 = x0;
-          y1 = y0;
-        } 
-      }
-      float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
-      float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
-      mSave0X = x0;
-      mSave0Y = y0;
-      mSave1X = x1;
-      mSave1Y = y1;
-
-      moveCanvas( x_shift, y_shift );
-   }
-
-   private void moveCanvas( float x_shift, float y_shift )
-   {
-      if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
-        mOffset.x += x_shift / mZoom;                // add shift to offset
-        mOffset.y += y_shift / mZoom; 
-        // TDLog.v( "move canvas " + mOffset.x + " " + mOffset.y + " " + mZoom );
-        mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-        // mProjectionSurface.refresh();
-      }
-   }
-
-   public void checkZoomBtnsCtrl()
-   {
-      // if ( mZoomBtnsCtrl == null ) return; // not necessary
-      if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
-        mZoomBtnsCtrl.setVisible( true );
-      }
-   }
-
-   // private boolean pointerDown = false;
-
-   public boolean onTouch( View view, MotionEvent rawEvent )
-   {
-      checkZoomBtnsCtrl();
-
-      MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
-      // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onTouch() " );
-      // dumpEvent( event );
-
-      int act = event.getAction();
-      int action = act & MotionEvent.ACTION_MASK;
-      int id = 0;
-
-      if (action == MotionEvent.ACTION_POINTER_DOWN) {
-        mTouchMode = DrawingWindow.MODE_ZOOM;
-        oldDist = spacing( event );
-        saveEventPoint( event );
-        // pointerDown = true;
-        return true;
-      } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-        int np = event.getPointerCount();
-        if ( np > 2 ) return true;
-        mTouchMode = DrawingWindow.MODE_MOVE;
-        id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
-        // int idx = rawEvent.findPointerIndex( id );
-        /* fall through */
-      }
-      float x_canvas = event.getX(id);
-      float y_canvas = event.getY(id);
-      // TDLog.v( "touch " + x_canvas + " " + y_canvas + " (" + mOffset.x + " " + mOffset.y + " " + mZoom + ")" );
-
-      // ---------------------------------------- DOWN
-      if (action == MotionEvent.ACTION_DOWN) {
-        if ( y_canvas > TopoDroidApp.mBorderBottom ) {
-          if ( mZoomBtnsCtrlOn && x_canvas > TopoDroidApp.mBorderInnerLeft && x_canvas < TopoDroidApp.mBorderInnerRight ) {
-            mTouchMode = DrawingWindow.MODE_ZOOM;
-            mZoomBtnsCtrl.setVisible( true );
-            // mZoomCtrl.show( );
-          } else if ( TDSetting.mSideDrag ) {
-            mTouchMode = DrawingWindow.MODE_ZOOM;
-          }
-        } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
-          mTouchMode = DrawingWindow.MODE_ZOOM;
-        }
-
-        // setTheTitle( );
-        mSaveX = x_canvas; // FIXME-000
-        mSaveY = y_canvas;
-        return false;
-
-      // ---------------------------------------- MOVE
-      } else if ( action == MotionEvent.ACTION_MOVE ) {
-        if ( mTouchMode == DrawingWindow.MODE_MOVE) {
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
-          moveCanvas( x_shift, y_shift );
-          mSaveX = x_canvas; 
-          mSaveY = y_canvas;
-        } else { // mTouchMode == DrawingWindow.MODE_ZOOM
-          float newDist = spacing( event );
-          if ( newDist > 16.0f && oldDist > 16.0f ) {
-            float factor = newDist/oldDist;
-            if ( factor > 0.05f && factor < 4.0f ) {
-              changeZoom( factor );
-              oldDist = newDist;
-            }
-          }
-          shiftByEvent( event );
-        }
-
-      // ---------------------------------------- UP
-
-      } else if (action == MotionEvent.ACTION_UP) {
-        if ( mTouchMode == DrawingWindow.MODE_ZOOM ) {
-          mTouchMode = DrawingWindow.MODE_MOVE;
-        } else {
-          float x_shift = x_canvas - mSaveX; // compute shift
-          float y_shift = y_canvas - mSaveY;
-        }
-      }
-      return true;
-   }
-
-   @Override
-   public void onClick(View view)
-   {
-     Button b = (Button)view;
-     if ( b == mBtnOk ) {
-       mProjectionSurface.stopDrawingThread();
-       mParent.doProjectedProfile( mName, mFrom, mAzimuth );
-       dismiss();
-     } else if ( b == mBtnPlus ) {
-       setAzimuth( mAzimuth + 1, true );
-     } else if ( b == mBtnMinus ) {
-       setAzimuth( mAzimuth - 1, true );
+  /** save the screen coordinates of a tough event
+   * @param ev   touch event 
+   */
+  private void saveEventPoint( MotionEventWrap ev )
+  {
+     int np = ev.getPointerCount();
+     if ( np >= 1 ) {
+       mSave0X = ev.getX(0);
+       mSave0Y = ev.getY(0);
+       if ( np >= 2 ) {
+         mSave1X = ev.getX(1);
+         mSave1Y = ev.getY(1);
+       } else {
+         mSave1X = mSave0X;
+         mSave1Y = mSave0Y;
+       } 
      }
-   }
+  }
 
-   @Override
-   public void onBackPressed()
-   {
-     mProjectionSurface.stopDrawingThread();
-     dismiss();
-   }
+  /** shitf the drawing 
+   * @param ev   touch event 
+   */ 
+  private void shiftByEvent( MotionEventWrap ev )
+  {
+     float x0 = 0.0f;
+     float y0 = 0.0f;
+     float x1 = 0.0f;
+     float y1 = 0.0f;
+     int np = ev.getPointerCount();
+     if ( np >= 1 ) {
+       x0 = ev.getX(0);
+       y0 = ev.getY(0);
+       if ( np >= 2 ) {
+         x1 = ev.getX(1);
+         y1 = ev.getY(1);
+       } else {
+         x1 = x0;
+         y1 = y0;
+       } 
+     }
+     float x_shift = ( x0 - mSave0X + x1 - mSave1X ) / 2;
+     float y_shift = ( y0 - mSave0Y + y1 - mSave1Y ) / 2;
+     mSave0X = x0;
+     mSave0Y = y0;
+     mSave1X = x1;
+     mSave1Y = y1;
+
+     moveCanvas( x_shift, y_shift );
+  }
+
+  /** move the canvas
+   * @param x_shift   shift in the horizontal direction
+   * @param y_shift   shift in the vertical direction
+   */
+  private void moveCanvas( float x_shift, float y_shift )
+  {
+     if ( Math.abs( x_shift ) < 60 && Math.abs( y_shift ) < 60 ) {
+       mOffset.x += x_shift / mZoom;                // add shift to offset
+       mOffset.y += y_shift / mZoom; 
+       // TDLog.v( "move canvas " + mOffset.x + " " + mOffset.y + " " + mZoom );
+       mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+       // mProjectionSurface.refresh();
+     }
+  }
+
+  /** react to a zoom touch: if the controls should be visible and are not visible
+   * make them visible
+   */
+  public void checkZoomBtnsCtrl()
+  {
+     // if ( mZoomBtnsCtrl == null ) return; // not necessary
+     if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
+       mZoomBtnsCtrl.setVisible( true );
+     }
+  }
+
+  // private boolean pointerDown = false;
+
+  /** react to a user touch
+   * @param view     touched view
+   * @param rawEvent raw touch event
+   */
+  public boolean onTouch( View view, MotionEvent rawEvent )
+  {
+     checkZoomBtnsCtrl();
+
+     MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
+     // TDLog.Log( TDLog.LOG_INPUT, "DrawingWindow onTouch() " );
+     // dumpEvent( event );
+
+     int act = event.getAction();
+     int action = act & MotionEvent.ACTION_MASK;
+     int id = 0;
+
+     if (action == MotionEvent.ACTION_POINTER_DOWN) {
+       mTouchMode = DrawingWindow.MODE_ZOOM;
+       oldDist = spacing( event );
+       saveEventPoint( event );
+       // pointerDown = true;
+       return true;
+     } else if ( action == MotionEvent.ACTION_POINTER_UP) {
+       int np = event.getPointerCount();
+       if ( np > 2 ) return true;
+       mTouchMode = DrawingWindow.MODE_MOVE;
+       id = 1 - ((act & MotionEvent.ACTION_POINTER_INDEX_MASK) >> MotionEvent.ACTION_POINTER_INDEX_SHIFT);
+       // int idx = rawEvent.findPointerIndex( id );
+       /* fall through */
+     }
+     float x_canvas = event.getX(id);
+     float y_canvas = event.getY(id);
+     // TDLog.v( "touch " + x_canvas + " " + y_canvas + " (" + mOffset.x + " " + mOffset.y + " " + mZoom + ")" );
+
+     // ---------------------------------------- DOWN
+     if (action == MotionEvent.ACTION_DOWN) {
+       if ( y_canvas > TopoDroidApp.mBorderBottom ) {
+         if ( mZoomBtnsCtrlOn && x_canvas > TopoDroidApp.mBorderInnerLeft && x_canvas < TopoDroidApp.mBorderInnerRight ) {
+           mTouchMode = DrawingWindow.MODE_ZOOM;
+           mZoomBtnsCtrl.setVisible( true );
+           // mZoomCtrl.show( );
+         } else if ( TDSetting.mSideDrag ) {
+           mTouchMode = DrawingWindow.MODE_ZOOM;
+         }
+       } else if ( TDSetting.mSideDrag && ( x_canvas > TopoDroidApp.mBorderRight || x_canvas < TopoDroidApp.mBorderLeft ) ) {
+         mTouchMode = DrawingWindow.MODE_ZOOM;
+       }
+
+       // setTheTitle( );
+       mSaveX = x_canvas; // FIXME-000
+       mSaveY = y_canvas;
+       return false;
+
+     // ---------------------------------------- MOVE
+     } else if ( action == MotionEvent.ACTION_MOVE ) {
+       if ( mTouchMode == DrawingWindow.MODE_MOVE) {
+         float x_shift = x_canvas - mSaveX; // compute shift
+         float y_shift = y_canvas - mSaveY;
+         moveCanvas( x_shift, y_shift );
+         mSaveX = x_canvas; 
+         mSaveY = y_canvas;
+       } else { // mTouchMode == DrawingWindow.MODE_ZOOM
+         float newDist = spacing( event );
+         if ( newDist > 16.0f && oldDist > 16.0f ) {
+           float factor = newDist/oldDist;
+           if ( factor > 0.05f && factor < 4.0f ) {
+             changeZoom( factor );
+             oldDist = newDist;
+           }
+         }
+         shiftByEvent( event );
+       }
+
+     // ---------------------------------------- UP
+
+     } else if (action == MotionEvent.ACTION_UP) {
+       if ( mTouchMode == DrawingWindow.MODE_ZOOM ) {
+         mTouchMode = DrawingWindow.MODE_MOVE;
+       } else {
+         float x_shift = x_canvas - mSaveX; // compute shift
+         float y_shift = y_canvas - mSaveY;
+       }
+     }
+     return true;
+  }
+
+  /** reac t to a user tap
+   * @param view tapped view
+   *   - button OK: tell the parent to create the projection profile with the current azimuth
+   *   - button PLUS: increase azimuth
+   *   - button MINUS: decrease azimuth
+   */
+  @Override
+  public void onClick(View view)
+  {
+    Button b = (Button)view;
+    if ( b == mBtnOk ) {
+      mProjectionSurface.stopDrawingThread();
+      mParent.doProjectedProfile( mName, mFrom, mAzimuth );
+      dismiss();
+    } else if ( b == mBtnPlus ) {
+      setAzimuth( mAzimuth + 1, true );
+    } else if ( b == mBtnMinus ) {
+      setAzimuth( mAzimuth - 1, true );
+    }
+  }
+
+  /** react to a user tap on BACK: stop drawing and close the dialog with no further action
+   */
+  @Override
+  public void onBackPressed()
+  {
+    mProjectionSurface.stopDrawingThread();
+    dismiss();
+  }
 
 }

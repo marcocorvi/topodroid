@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.DistoX"
       android:installLocation="auto"
-      android:versionCode="600056"
-      android:versionName="6.0.56"
+      android:versionCode="600059"
+      android:versionName="6.0.59"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -98,7 +98,7 @@
 	  -->
           <!--
 	  android:requestLegacyExternalStorage="true"
-	  android:preserveLegacyExternalStorage="true"
+	  android:preserveLegacyExternalStorage="true" DO NOT ADD THIS: it breaks the database 
           -->
 
 	  <!-- android:screenOrientation="portrait" -->

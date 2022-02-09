@@ -92,7 +92,7 @@ public class DrawingShp
       ArrayList< DrawingPointPath > extras     = new ArrayList<>();
       ArrayList< DrawingPointLinePath > lines  = new ArrayList<>();
       ArrayList< DrawingPointLinePath > areas  = new ArrayList<>();
-      ArrayList< Link > links          = new ArrayList<>();
+      ArrayList< Link > links = (TDSetting.mAutoXSections ? new ArrayList<>() : null );
       for ( ICanvasCommand cmd : plot.getCommands() ) {
         if ( cmd.commandType() != 0 ) continue;
         DrawingPath path = (DrawingPath)cmd;
@@ -124,7 +124,7 @@ public class DrawingShp
       ShpPolyline shp_area = new ShpPolyline( dirname, "area", DrawingPath.DRAWING_PATH_AREA, files );
       shp_area.writeAreas( areas, xoff, yoff, xscale, yscale, cd, sd );
 
-      if ( links.size() > 0 ) {
+      if ( links != null && links.size() > 0 ) {
         ShpLink shp_link = new ShpLink( dirname, "link", files );
         shp_link.writeLinks( links, xoff, yoff, xscale, yscale, cd, sd );
       }

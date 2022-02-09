@@ -381,7 +381,7 @@ public class DrawingDxf
         int flag = 0;
         int color = 1;
         // if ( ! DXF.mVersion13_14 ) { handle = 40; }
-        handle = DXF.printLayer( pw2, handle, "0",       flag, 7, DXF.lt_continuous ); // LAYER "0" .. FIXME DraftSight ..must be AutoCAD white
+        handle = DXF.printLayer( pw2, handle, "0",       flag, 7,     DXF.lt_continuous ); // LAYER "0" .. FIXME DraftSight color must be AutoCAD white
         handle = DXF.printLayer( pw2, handle, "LEG",     flag, color, DXF.lt_continuous ); ++color; // red
         handle = DXF.printLayer( pw2, handle, "SPLAY",   flag, color, DXF.lt_continuous ); ++color; // yellow
         handle = DXF.printLayer( pw2, handle, "STATION", flag, color, DXF.lt_continuous ); ++color; // green
@@ -389,6 +389,7 @@ public class DrawingDxf
         handle = DXF.printLayer( pw2, handle, "POINT",   flag, color, DXF.lt_continuous ); ++color; // blue
         handle = DXF.printLayer( pw2, handle, "AREA",    flag, color, DXF.lt_continuous ); ++color; // magenta
         handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
+        handle = DXF.printLayer( pw2, handle, "LINK",    flag, color, DXF.lt_continuous ); ++color; // ??? Link
         
         if ( linelib != null ) { // always true
           for ( Symbol line : linelib.getSymbols() ) {
@@ -693,6 +694,16 @@ public class DrawingDxf
                   IDrawingLink link = point.mLink;
                   if ( link != null ) {
                     // TODO line connecting point and link
+                    StringWriter sw4l = new StringWriter();
+                    PrintWriter pw4l  = new PrintWriter(sw4l);
+                    DXF.printString( pw4l, 0, "LINE" );
+                    handle = DXF.printAcDb( pw4l, handle, DXF.AcDbEntity, DXF.AcDbLine );
+                    DXF.printString( pw4l, 8, "LINK" );
+                    // DXF.printInt( pw4l, 39, 1 );         // line thickness
+                    DXF.printXYZ( pw4l, scale*(xoff + point.cx), -scale*(yoff + point.cy), z, 0 );
+                    DXF.printXYZ( pw4l, scale*(xoff + link.getLinkX()), -scale*(yoff + link.getLinkY()), z, 1 );
+                    out.write( sw4l.getBuffer().toString() );
+                    out.flush();
                   } 
                 }
               } 

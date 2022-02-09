@@ -39,12 +39,26 @@ import java.util.List;
 
 public class ShpExtra extends ShpObject
 {
+  /** cstr
+   * @param subdir   folder
+   * @param path     filename
+   * @param files    array of files to add names of written files
+   */
   public ShpExtra( String subdir, String path, List< String > files ) // throws IOException
   {
     super( SHP_EXTRA, subdir, path, files );
   }
 
-  // write headers for EXTRA
+  /** write headers for EXTRA
+   * @param pts    extra points
+   * @param x0     X offset
+   * @param y0     Y offset
+   * @param xscale X scale
+   * @param yscale Y scale
+   * @param cd     cosine of declination angle
+   * @param sd     sine of declination angle
+   * @param links  array of links - to be filled if not null
+   */
   public boolean writeExtras( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd, List< Link > links ) throws IOException
   {
     int n_pts = (pts != null)? pts.size() : 0;
@@ -112,7 +126,7 @@ public class ShpExtra extends ShpObject
       } else {
         if ( BrushManager.isPointSection( pt.pointType() ) ) {
           fields[6] = TDUtil.replacePrefix( TDInstance.survey, pt.getOption(TDString.OPTION_SCRAP) ); 
-          if ( pt.mLink != null ) {
+          if ( links != null && pt.mLink != null ) {
             links.add( new Link( pt ) );
           }
         }
@@ -128,10 +142,19 @@ public class ShpExtra extends ShpObject
     return true;
   }
 
-  // record length [words]: 4 + 20/2
+  /** @return  record length [words]: 4 + 20/2 = 14
+   */
   @Override protected int getShpRecordLength( ) { return 14; }
     
-  // Utility: set the bounding box of the set of geometries
+  /** Utility: set the bounding box of the set of geometries
+   * @param pts    extra points
+   * @param x0     X offset
+   * @param y0     Y offset
+   * @param xscale X scale
+   * @param yscale Y scale
+   * @param cd     cosine of declination angle
+   * @param sd     sine of declination angle
+   */
   private void setBoundsPoints( List< DrawingPointPath > pts, double x0, double y0, double xscale, double yscale, double cd, double sd ) 
   {
     if ( pts.size() == 0 ) {

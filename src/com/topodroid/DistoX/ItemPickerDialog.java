@@ -137,7 +137,7 @@ class ItemPickerDialog extends MyDialog
     // TDLog.v("Dims " + DIMXP + " " + DIMXL + " " + DIMYL + " " + DIMMX + " " + DIMMY );
 
     // createAdapters( ( TDSetting.mPickerType == TDSetting.PICKER_LIST /* || TDSetting.mPickerType == TDSetting.PICKER_RECENT */ ) );
-    createAdapters( true );
+    createAdapters( );
     
     // if ( TDSetting.mPickerType == TDSetting.PICKER_GRID || TDSetting.mPickerType == TDSetting.PICKER_GRID_3 ) {
     //   setContentView(R.layout.item_picker2_dialog);
@@ -354,16 +354,20 @@ class ItemPickerDialog extends MyDialog
   //   }
   // }
         
-  private void createAdapters( boolean use_text )
+  /** create the adapters
+   */
+  private void createAdapters( )
   {
+    TDLog.v("create adapters");
     // if ( TDLevel.overBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, R.layout.item, new ArrayList< ItemSymbol >() );
       int np = mPointLib.size();
       for ( int i=0; i<np; ++i ) {
+      if ( mParent.get().forbidPointSection( i ) ) continue;
         SymbolPoint p = (SymbolPoint)mPointLib.getSymbolByIndex( i );
         if ( p.isEnabled() && ( /* TDLevel.overAdvanced || */ ! p.isThName( SymbolLibrary.SECTION ) ) ) { // FIXME_SECTION_POINT 
-          mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p, use_text ) );
+          mPointAdapter.add( new ItemSymbol( mContext, this, SymbolType.POINT, i, p ) );
         }
       }
     }
@@ -371,9 +375,10 @@ class ItemPickerDialog extends MyDialog
     mLineAdapter  = new ItemAdapter( mContext, this, SymbolType.LINE, R.layout.item, new ArrayList< ItemSymbol >() );
     int nl = mLineLib.size();
     for ( int j=0; j<nl; ++j ) {
+      if ( mParent.get().forbidLineSection( j ) ) continue;
       SymbolLine l = (SymbolLine)mLineLib.getSymbolByIndex( j );
       if ( l.isEnabled() ) {
-        mLineAdapter.add( new ItemSymbol( mContext, this, SymbolType.LINE, j, l, use_text ) );
+        mLineAdapter.add( new ItemSymbol( mContext, this, SymbolType.LINE, j, l ) );
       }
     }
 
@@ -384,7 +389,7 @@ class ItemPickerDialog extends MyDialog
       for ( int k=0; k<na; ++k ) {
         SymbolArea a = (SymbolArea)mAreaLib.getSymbolByIndex( k );
         if ( a.isEnabled() ) {
-          mAreaAdapter.add( new ItemSymbol( mContext, this, SymbolType.AREA, k, a, use_text ) );
+          mAreaAdapter.add( new ItemSymbol( mContext, this, SymbolType.AREA, k, a ) );
         }
       }
     }
@@ -496,10 +501,16 @@ class ItemPickerDialog extends MyDialog
     setTitle( title.toString() );
   }
 
-  // pos 
+  /** set the current item type and index
+   * @param type   item type
+   * @param index  item index
+   * @note called from onCreate, setTypeFromCurrent
+   *
+   * @note IItemPicker implementation
+   */
   public void setTypeAndItem( int type, int index )
   {
-    // TDLog.v( "set TypeAndItem type " + mItemType  + " item " + index );
+    TDLog.v( "set TypeAndItem type " + mItemType  + " item " + index );
     mItemType = type;
     ItemSymbol is;
     switch ( type ) {
@@ -507,9 +518,7 @@ class ItemPickerDialog extends MyDialog
         if ( mPointAdapter != null /* && TDLevel.overBasic */ ) {
           is = mPointAdapter.get( index );
           // TDLog.v( "set TypeAndItem type point pos " + index + " index " + is.mIndex );
-          if ( ! PlotType.isAnySection( mPlotType ) || ! BrushManager.isPointSection( is.mIndex ) ) {
-            mSelectedPoint = is.mIndex;
-          }
+          mSelectedPoint = is.mIndex;
           // mParent.get().pointSelected( is.mIndex, false ); // mPointAdapter.getSelectedItem() );
           setSeekBarProgress();
           mBTpoint.setTextColor( TDColor.SYMBOL_ON );
@@ -521,12 +530,8 @@ class ItemPickerDialog extends MyDialog
         if ( mLineAdapter != null ) {
           is = mLineAdapter.get( index );
           // TDLog.v( "set TypeAndItem type line pos " + index + " index " + is.mIndex + " " + is.mSymbol.getName() );
-          if ( ! PlotType.isAnySection( mPlotType ) || ! BrushManager.isLineSection( is.mIndex ) ) {
-            mSelectedLine = is.mIndex;
-            // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
-          // } else {
-            /* nothing */
-          }
+          mSelectedLine = is.mIndex;
+          // mParent.get().lineSelected( is.mIndex, false ); // mLineAdapter.getSelectedItem() );
           mSeekBar.setEnabled( false );
           // mBTpoint.setTextColor( TDColor.SYMBOL_TAB );
           mBTline.setTextColor(  TDColor.SYMBOL_ON );
@@ -555,6 +560,7 @@ class ItemPickerDialog extends MyDialog
   // this is called tapping the tab-buttons on the top
   private void setTypeFromCurrent( )
   {
+    TDLog.v("set type from current ");
     switch ( mItemType ) {
       case SymbolType.POINT: 
         // if ( TDLevel.overBasic ) 
@@ -783,6 +789,7 @@ class ItemPickerDialog extends MyDialog
 
   private int setRecentSymbol( Symbol p )
   {
+    TDLog.v("set recent symbol ");
     int index = -1;
     if ( p != null ) {
       if ( mAdapter != null ) {

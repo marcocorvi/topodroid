@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.ItemButton;
 // import com.topodroid.common.SymbolType;
@@ -30,7 +30,8 @@ import android.widget.LinearLayout;
 
 class ItemSymbol
 {
-  int mType;   // symbol type POINT (0) LINE (1) AREA (2)
+  // private OnClickListener mListener = null;
+  int mType;   // symbol type POINT (1) LINE (2) AREA (3)
   int mIndex;  // symbol index
   CheckBox     mCheckBox = null;
   ItemButton   mButton   = null;
@@ -39,47 +40,53 @@ class ItemSymbol
   SymbolInterface mSymbol;
   private float sx;
   private float sy;
-  private boolean mUseText;
+  // private boolean mUseText;
 
   // private Context mContext;
 
-  ItemSymbol( Context context, IItemPicker dialog, int type, int index, SymbolInterface symbol, boolean use_text )
+  /** cstr
+   * @param context   context
+   * @param dialog    parent dialog
+   * @param type      symbol class (POINT, LINE, AREA)
+   * @param index     symbol index
+   * @param symbol    symbol interface
+   */
+  ItemSymbol( Context context, IItemPicker dialog, int type, int index, SymbolInterface symbol )
   {  
     mType  = type;
     mIndex = index;
     mSymbol = symbol;
-    mUseText = use_text;
     int pad = 4;
 
     sx = Symbol.sizeX( mType );
     sy = Symbol.sizeY( mType );
-    // TDLog.v( "Item symbol " + mType + "/" + mIndex + " " + mSymbol.getName() );
+    // TDLog.v( "Item " + mType + "/" + mIndex + " " + mSymbol.getName() );
 
     LinearLayout ll = new LinearLayout( context );
     // ll.setOrientation( LinearLayout.HORIZONTAL );
     int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
     int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
     LinearLayout.LayoutParams lllp = new LinearLayout.LayoutParams(lh,lw);
-    if ( ! mUseText ) {
-      lllp.gravity = 0x03; // left
-    } else {
+    // if ( ! mUseText ) {
+    //   lllp.gravity = 0x03; // left
+    // } else {
       mCheckBox = new CheckBox( context );
       mCheckBox.setChecked( false );
       ll.addView( mCheckBox, lllp );
-    }
+    // }
     lllp.setMargins(2,1,2,1);
 
     mButton   = new ItemButton( context, mSymbol.getPaint(), mSymbol.getPath(), sx, sy, pad );
     ll.addView( mButton, lllp );
 
-    if ( mUseText ) {
+    // if ( mUseText ) {
       TextView textView = new TextView( context );
       // textView.setBackgroundColor( TDColor.BLACK );
       textView.setText( mSymbol.getName() ); // getFullName()
       ll.addView( textView, new LinearLayout.LayoutParams(lh,lw) );
-    } else {
-      mButton.setClickable( true );
-    }
+    // } else {
+    //   mButton.setClickable( true );
+    // }
 
     // FIXME
     // if ( mType == SymbolType.POINT ) {
@@ -123,43 +130,63 @@ class ItemSymbol
 
   // void rotate( float dx ) 
   // {
-  //   // TDLog.v( "Item symbol rotate " + dx );
+  //   // TDLog.v( "Item " + mType + "/" + mIndex + " rotate " + dx );
   //   mSymbol.rotate( dx );
   //   mButton.resetPath( mSymbol.getPath(), sx, sy );
   //   mView.invalidate();
   // }
 
+  /** set the symbol orientatiomn angle
+   * @param angle   orientation angle [degree]
+   */
   void setAngle( float angle )
   {
-    // TDLog.v( "item symbol " + mSymbol.getName() + " set angle " + angle );
+    // TDLog.v( "item " + mType + "/" + mIndex + " " + mSymbol.getName() + " set angle " + angle );
     if ( mSymbol.setAngle( angle ) ) {
       mButton.resetPath( mSymbol.getPath(), sx, sy );
       mButton.invalidate();
     }
   }
 
+  /** set the click listener
+   */
   void setOnClickListener( OnClickListener listener ) 
   {
-    if ( mUseText ) {
+    // mListener = listener;
+    // if ( mUseText ) {
       mCheckBox.setOnClickListener( listener );
       // mButton.setOnClickListener( listener );
-    } else {
-      mButton.setOnClickListener( listener );
-    }
+    // } else {
+    //   mButton.setOnClickListener( listener );
+    // }
   }
- 
-  void setChecked( boolean checked )
+
+  // /** clear teh checkbox
+  //  */
+  // void clearChecked()
+  // {
+  //   TDLog.v( "Item " + mType + "/" + mIndex + " clear checked " );
+  //   // if ( mUseText ) {
+  //     mCheckBox.setChecked( false );
+  //   // }
+  // }
+
+  /** set the item checked or not
+   * @param checked     whether to set the item checked
+   */
+  void setItemChecked( boolean checked )
   {
-    if ( mUseText ) {
+    TDLog.v( "Item " + mType + "/" + mIndex + " set checked " + checked  );
+    // if ( mUseText ) {
       mCheckBox.setChecked( checked );
-    } else {
-      mButton.setBackgroundColor( checked? TDColor.DARK_GRAY : TDColor.BLACK ); 
-      // if ( checked ) {
-      //   mButton.setBackground( BrushManager.mSymbolHighlight );
-      // } else {
-      //   mButton.setBackgroundColor( TDColor.BLACK ); 
-      // }
-    }
+    // } else {
+    //   mButton.setBackgroundColor( checked? TDColor.DARK_GRAY : TDColor.BLACK ); 
+    //   // if ( checked ) {
+    //   //   mButton.setBackground( BrushManager.mSymbolHighlight );
+    //   // } else {
+    //   //   mButton.setBackgroundColor( TDColor.BLACK ); 
+    //   // }
+    // }
   }
 
 }

@@ -1083,6 +1083,24 @@ public class DrawingWindow extends ItemDrawer
   // final static String titleLandscape = " L ";
   // final static String titlePortrait  = " P ";
 
+  /** @return true if the index refers to the point "section" and the plot is a xsection
+   * @param index   point index (in the symbol library)
+   */
+  @Override
+  public boolean forbidPointSection( int index )
+  {
+    return PlotType.isAnySection( mType ) && BrushManager.isPointSection( index );
+  }
+
+  /** @return true if the index refers to the line "section" and the plot is a xsection
+   * @param index   line index (in the symbol library)
+   */
+  @Override
+  public boolean forbidLineSection( int index )
+  {
+    return PlotType.isAnySection( mType ) && BrushManager.isLineSection( index );
+  }
+
   /** select a point symbol
    * @param k       index of selected point-tool in the symbol-library array
    * @param update_recent ...
@@ -1104,7 +1122,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void lineSelected( int k, boolean update_recent )
   {
-    if ( PlotType.isAnySection( mType ) && BrushManager.isLineSection( k ) ) {
+    if ( forbidLineSection( k ) ) {
       TDToast.makeToast( R.string.error_no_section_in_section );
       return;
     }
@@ -2204,8 +2222,11 @@ public class DrawingWindow extends ItemDrawer
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
             for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentP[k] ) {
-              setPoint( k, false );
-              setHighlight( SymbolType.POINT, k );
+              if ( setCurrentPoint( k, false ) ) {
+                setHighlight( SymbolType.POINT, k );
+              } else {
+                TDToast.makeWarn( R.string.section_line_not_allowed );
+              }
               break;
             }
           }
@@ -2216,8 +2237,11 @@ public class DrawingWindow extends ItemDrawer
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
             for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentL[k] ) {
-              setLine( k, false );
-              setHighlight( SymbolType.LINE, k );
+              if ( setCurrentLine( k, false ) ) {
+                setHighlight( SymbolType.LINE, k );
+              } else {
+                TDToast.makeWarn( R.string.section_line_not_allowed );
+              }
               break;
             }
           }
@@ -2228,7 +2252,7 @@ public class DrawingWindow extends ItemDrawer
         new View.OnClickListener() {
           @Override public void onClick( View v ) {
             for ( int k = 0; k<NR_RECENT; ++k ) if ( v == mBtnRecentA[k] ) {
-              setArea( k, false );
+              setCurrentArea( k, false );
               setHighlight( SymbolType.AREA, k );
               break;
             }
@@ -8362,47 +8386,48 @@ public class DrawingWindow extends ItemDrawer
    * @param k    index in the recent point array
    * @param update_recent whether to update the array of recent symbols
    */
-  @Override
-  public void setPoint( int k, boolean update_recent )
+  // @Override
+  private boolean setCurrentPoint( int k, boolean update_recent )
   {
     int index = BrushManager.getPointIndex( mRecentPoint[k] );
-    if ( index >= 0 ) {
-      mCurrentPoint = index;
-      pointSelected( index, update_recent );
-      updateAge( k, mRecentPointAge );
-    }
+    if ( index < 0 ) return false;
+    if ( forbidPointSection( index ) ) return false;
+    mCurrentPoint = index;
+    pointSelected( index, update_recent );
+    updateAge( k, mRecentPointAge );
+    return true;
   }
 
   /** set the current line symbol
    * @param k    index in the recent line array
    * @param update_recent whether to update the array of recent symbols
    */
-  @Override
-  public void setLine( int k, boolean update_recent )
+  // @Override
+  private boolean setCurrentLine( int k, boolean update_recent )
   {
     int current = BrushManager.getLineIndex( mRecentLine[k] );
-    if ( PlotType.isAnySection( mType ) && BrushManager.isLineSection( current ) ) current = BrushManager.getLineWallIndex();
+    if ( current < 0 ) return false;
+    if ( forbidLineSection( current ) ) return false;
     // TDLog.v("AGE set line " + k + " update " + update_recent + " current " + current );
-    if ( current >= 0 ) {
-      mCurrentLine = current;
-      lineSelected( current, update_recent );
-      updateAge( k, mRecentLineAge );
-    }
+    mCurrentLine = current;
+    lineSelected( current, update_recent );
+    updateAge( k, mRecentLineAge );
+    return true;
   }
 
   /** set the current area symbol
    * @param k    index in the recent area array
    * @param update_recent whether to update the array of recent symbols
    */
-  @Override
-  public void setArea( int k, boolean update_recent )
+  // @Override
+  private boolean setCurrentArea( int k, boolean update_recent )
   {
     int index = BrushManager.getAreaIndex( mRecentArea[k] );
-    if ( index >= 0 ) {
-      mCurrentArea = index;
-      areaSelected( index, update_recent );
-      updateAge( k, mRecentAreaAge );
-    }
+    if ( index < 0 ) return false;
+    mCurrentArea = index;
+    areaSelected( index, update_recent );
+    updateAge( k, mRecentAreaAge );
+    return true;
   }
 
   /** set the recent symbols buttons, after the recent symbols ahave been loaded
