@@ -2205,6 +2205,11 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.TimeEnd( "on create" );
 
+    TDLog.v( "on create" );
+    if ( mCurrentPoint < 0 ) mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
+    if ( mCurrentLine < 0 )  mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    if ( mCurrentArea < 0 )  mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
+
     doStart( true, -1, null );
 
     mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
@@ -2368,6 +2373,7 @@ public class DrawingWindow extends ItemDrawer
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
     // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
+    TDLog.v( "push info - curent line " + mCurrentLine );
     mSavedType = mType;
     mName = mName3 = name;
     mFullName3 = TDInstance.survey + "-" + mName;
@@ -2447,7 +2453,7 @@ public class DrawingWindow extends ItemDrawer
     TDInstance.setRecentPlot( name, tt );
 
     PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
-    // TDLog.v( "name " + name + " info " + p1.name + " " + p1.id + " pid " + mPid1 + " " + mPid2 );
+    TDLog.v( "switch name " + name + " info " + p1.name + " " + p1.id + " pid " + mPid1 + " " + mPid2 );
     if ( mPid1 == p1.id ) {
       if ( tt != mType ) { // switch plot type
         startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -2711,9 +2717,11 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
     TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
-    mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
-    mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
-    mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
+
+    // mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
+    // mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+    // mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
+
     // mContinueLine = TDSetting.mContinueLine; // do not reset
     if ( TDLevel.overNormal ) setButtonContinue( mContinueLine );
 
@@ -2744,6 +2752,18 @@ public class DrawingWindow extends ItemDrawer
     // X_SECTION, XH_SECTION: mFrom != null, mTo == null, splays only 
 
     if ( is_section ) {
+      // pointSelected( mCurrentPoint, true );
+      // areaSelected( mCurrentArea, true );
+      if ( BrushManager.isLineSection( mCurrentLine ) ) { // line must be last
+        mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
+        lineSelected( mCurrentLine, true );
+        int k = getCurrentLineIndex();       // FIXME SECTION LINE
+        // TDLog.v("highlight index " + k );
+        setHighlight( SymbolType.LINE, k );
+      } else {
+        // TDLog.v("current line " + mCurrentLine + " not section" );
+      }
+
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
         TDLog.v("start multileg list " + list.size() );
         if ( center != null ) {
@@ -2753,9 +2773,9 @@ public class DrawingWindow extends ItemDrawer
         }
         makeSectionReferences( list, mPlot3.center );
       } else {
-        TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
+        // TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
         if ( tt != mPlot3.intercept ) {
-          TDLog.v( "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
+          // TDLog.v( "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
           mApp_mData.updatePlotIntercept( mPlot3.id, mSid, tt );
           mPlot3.intercept = tt;
         }
@@ -2787,7 +2807,6 @@ public class DrawingWindow extends ItemDrawer
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     // TDLog.v( "section list " + list.size() + " tt " + tt + " skip " + skip + " azimuth " + mAzimuth + " clino " + mClino );
-    DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
     float xfrom=0;
     float yfrom=0;
@@ -2805,20 +2824,6 @@ public class DrawingWindow extends ItemDrawer
     // canvas UP-axis: this is X0 ^ X1 : it goes up in the section plane 
     // canvas Y-axis = - UP-axis
 
-    // FIXME_VECTOR
-    // float X0 = (float)Math.cos( mc ) * (float)Math.cos( ma );  // X = North
-    // float Y0 = (float)Math.cos( mc ) * (float)Math.sin( ma );  // Y = East
-    // float Z0 = (float)Math.sin( mc );                          // Z = Up
-    // float X1 = - (float)Math.sin( ma ); // X1 goes to the left in the section plane !!!
-    // float Y1 =   (float)Math.cos( ma ); 
-    // float Z1 = 0;
-    // // float X2 = - (float)Math.sin( mc ) * (float)Math.cos( ma );
-    // // float Y2 = - (float)Math.sin( mc ) * (float)Math.sin( ma );
-    // // float Z2 =   (float)Math.cos( ma );
-    // float X2 = Y0 * Z1 - Y1 * Z0; 
-    // float Y2 = Z0 * X1 - Z1 * X0;
-    // float Z2 = X0 * Y1 - X1 * Y0;
-
     TDVector V0 = new TDVector( (float)(Math.cos(ma)*Math.cos(mc)), (float)(Math.sin(ma)*Math.cos(mc)), (float)Math.sin(mc) ); // normal to the x-section plane
     // V1,V2 are the frame of reference in the x-section plane
     TDVector V1 = new TDVector( - (float)Math.sin( ma ), (float)Math.cos( ma ), 0 );
@@ -2828,9 +2833,11 @@ public class DrawingWindow extends ItemDrawer
     DBlock blk = null;
     float xn = 0;  // X-North // Rotate as NORTH is upward
     float yn = -1; // Y-North
-    float xtt = 0; // x-section center
+
+    float xtt = 0; // x-section center (intersection point)
     float ytt = 0;
     float ztt = 0;
+
     if ( skip == 0 ) {
       if ( PlotType.isLegSection( mType ) ) {
         if ( mType == PlotType.PLOT_H_SECTION ) {
@@ -2865,15 +2872,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         if ( blk != null ) {
-          // FIXME_VECTOR
-          // float bc = blk.mClino * TDMath.DEG2RAD;
-          // float bb = blk.mBearing * TDMath.DEG2RAD;
-          // float X = (float)Math.cos( bc ) * (float)Math.cos( bb );
-          // float Y = (float)Math.cos( bc ) * (float)Math.sin( bb );
-          // float Z = (float)Math.sin( bc );
-          // xfrom = -dist * (X1 * X + Y1 * Y + Z1 * Z); // neg. because it is the FROM point
-          // yfrom =  dist * (X2 * X + Y2 * Y + Z2 * Z);
-	  TDVector v = new TDVector( blk.mBearing * TDMath.DEG2RAD, blk.mClino * TDMath.DEG2RAD );
+	  TDVector v = blk.getUnitVector( );
           xfrom = -dist * v.dot(V1); // neg. because it is the FROM point
           yfrom =  dist * v.dot(V2);
 
@@ -2891,7 +2890,7 @@ public class DrawingWindow extends ItemDrawer
             ytt = yfrom + tt * ( yto - yfrom );
             ztt = zfrom + tt * ( zto - zfrom );
             if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
-            // TDLog.v( "TT " + tt + " " + xtt + " " + xfrom + " " + xto );
+            TDLog.v( "TT " + tt + " X " + xtt + " " + xfrom + " " + xto + " Y " + ytt + " " + yfrom + " " + yto );
             // makeXSectionLegPoint( xtt, ytt );
 
             DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
@@ -2936,16 +2935,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       float d = b.mLength;
-      // FIXME_VECTOR
-      // float bc = b.mClino * TDMath.DEG2RAD;
-      // float bb = b.mBearing * TDMath.DEG2RAD;
-      // float X = (float)Math.cos( bc ) * (float)Math.cos( bb ); // North
-      // float Y = (float)Math.cos( bc ) * (float)Math.sin( bb ); // East
-      // float Z = (float)Math.sin( bc );                       // Up
-      // float x =  d * (X1 * X + Y1 * Y + Z1 * Z);
-      // float y = -d * (X2 * X + Y2 * Y + Z2 * Z);
-      // float a = 90 - (float)(Math.acos(X0 * X + Y0 * Y + Z0 * Z) * TDMath.RAD2DEG); // cos-angle with the normal
-      TDVector v = new TDVector(  b.mBearing * TDMath.DEG2RAD, b.mClino * TDMath.DEG2RAD);
+      TDVector v = b.getUnitVector( );
       float x =  d * v.dot(V1);
       float y = -d * v.dot(V2);
       // float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
@@ -2975,6 +2965,10 @@ public class DrawingWindow extends ItemDrawer
     // mSectionSkip = cnt;
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
 
+    // float x0 = 0; // DrawingUtil.toSceneX(xtt,ytt); // grid offset [scene ref.]
+    // float y0 = 0; // DrawingUtil.toSceneY(xtt,ytt);
+    // TDLog.v("X0 " + x0 + " " + y0 + " grid unit " + TDSetting.mUnitGrid );
+    DrawingUtil.addGrid( -10, 10, -10, 10, xtt, ytt, 0, 0, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.commitReferences();
   }
 
@@ -4664,7 +4658,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addDrawingPath( section_pt );
     }
 
-    // TDLog.v( "line section dialog TT " + tt );
+    TDLog.v( "line section dialog TT " + tt + " line type " + mCurrentLine );
     new DrawingLineSectionDialog( mActivity, this, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt, center ).show();
   }
 
@@ -4961,6 +4955,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
     // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
+    TDLog.v( "open xsection - current line " + mCurrentLine );
     // parent plot name = mName
     String xs_id = getXSectionName( st_name, type );
     if ( xs_id == null ) return;
@@ -6357,8 +6352,9 @@ public class DrawingWindow extends ItemDrawer
    */
   private long prepareXSection( String id, long type, String from, String to, String nick, float azimuth, float clino )
   {
-    mCurrentLine = BrushManager.getLineWallIndex();
-    if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
+    // mCurrentLine = BrushManager.getLineWallIndex();
+    // if ( ! BrushManager.isLineEnabled( SymbolLibrary.WALL ) ) mCurrentLine = 0;
+
     // TDLog.v("prepare XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
     setTheTitle();
@@ -6409,6 +6405,7 @@ public class DrawingWindow extends ItemDrawer
   void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt, Vector3D center )
   {
     // TDLog.v( "make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+    TDLog.v( "make xsection: " + mCurrentLine );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
       // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
@@ -6432,6 +6429,7 @@ public class DrawingWindow extends ItemDrawer
     // remove survey name from scrap-name (if necessary)
     String name = scrapname.replace( TDInstance.survey + "-", "" );
     // TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
+    TDLog.v( "open section: current line " + mCurrentLine );
 
     PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
     if ( pi != null ) {
@@ -8345,10 +8343,13 @@ public class DrawingWindow extends ItemDrawer
 
   /** highlight a symbol in the tools-bar
    * @param type  tools type to highlight
-   * @param index index of the tool button to highlight
+   * @param index index of the tool button to highlight -  if negative no tool is highlighted
+   *
+   * @note this method sets also highlightType and highlightIndex
    */
   private void setHighlight( int type, int index )
   {
+    TDLog.v("Highlight " + type + " from " + highlightType + "/" + highlightIndex + " to " + index );
     if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
       switch ( highlightType ) { // switch off highlighted symbol
         case SymbolType.POINT:

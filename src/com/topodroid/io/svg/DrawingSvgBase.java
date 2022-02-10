@@ -208,15 +208,22 @@ public class DrawingSvgBase
   //    y="562.5"
   //    id="text32">0</text>
 
+  /** export a line item to SVG
+   * @param pw    output writer
+   * @param line  line item
+   * @param color color
+   * @param xoff  X offset
+   * @param yoff  Y offset
+   */
   static protected void toSvg( PrintWriter pw, DrawingLinePath line, String color, float xoff, float yoff ) 
   {
     String th_name = line.getThName( ); 
     pw.format(Locale.US, "  <path stroke=\"%s\" stroke-width=\"%.2f\" fill=\"none\" class=\"%s\"", color, TDSetting.mSvgLineStroke, th_name );
     if ( th_name.equals( SymbolLibrary.ARROW ) )                pw.format(" marker-end=\"url(#Triangle)\"");
-    else if ( th_name.equals( SymbolLibrary.SECTION ) )         pw.format(" stroke-dasharray=\"5 3 \"");
-    else if ( th_name.equals( SymbolLibrary.FAULT ) )           pw.format(" stroke-dasharray=\"8 4 \"");
-    else if ( th_name.equals( SymbolLibrary.FLOOR_MEANDER ) )   pw.format(" stroke-dasharray=\"6 2 \"");
-    else if ( th_name.equals( SymbolLibrary.CEILING_MEANDER ) ) pw.format(" stroke-dasharray=\"6 2 \"");
+    else if ( th_name.equals( SymbolLibrary.SECTION ) )         pw.format(" stroke-dasharray=\"5 3\"");
+    else if ( th_name.equals( SymbolLibrary.FAULT ) )           pw.format(" stroke-dasharray=\"8 4\"");
+    else if ( th_name.equals( SymbolLibrary.FLOOR_MEANDER ) )   pw.format(" stroke-dasharray=\"6 2\"");
+    else if ( th_name.equals( SymbolLibrary.CEILING_MEANDER ) ) pw.format(" stroke-dasharray=\"6 2\"");
     toSvgPointLine( pw, line, xoff, yoff, line.isClosed() );
     if ( TDSetting.mSvgLineDirection ) {
       if ( BrushManager.hasLineEffect( line.lineType() ) ) {
@@ -230,6 +237,13 @@ public class DrawingSvgBase
     pw.format(" />\n");
   }
 
+  /** export an area item to SVG
+   * @param pw    output writer
+   * @param area  area item
+   * @param color color
+   * @param xoff  X offset
+   * @param yoff  Y offset
+   */
   static protected void toSvg( PrintWriter pw, DrawingAreaPath area, String color, float xoff, float yoff )
   {
     pw.format(Locale.US, "  <path stroke=\"black\" stroke-width=\"%.2f\" fill=\"%s\" fill-opacity=\"0.5\" ", TDSetting.mSvgLineStroke, color );
@@ -284,6 +298,7 @@ public class DrawingSvgBase
       x0 = x3;
       y0 = y3;
     }
+    p = lp.last();
     if ( closed ) { 
       pw.format(" Z \"");
     } else {
@@ -344,6 +359,14 @@ public class DrawingSvgBase
     }
   }
 
+  /** draw a xscetion tdr 
+   * @param pw   output writer
+   * @param scrapfile   tdr file
+   * @param dx          delta X applied when the trd items are read from the file
+   * @param dy          delta Y
+   * @param xoff        X offset applied when the items are drawn to the SVG output
+   * @param yoff        Y offset
+   */
   static protected void tdrToSvg( PrintWriter pw, String scrapfile, float dx, float dy, float xoff, float yoff )
   {
     try {

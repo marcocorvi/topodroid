@@ -248,9 +248,10 @@ public class DrawingSvg extends DrawingSvgBase
             } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
               DrawingPointPath point = (DrawingPointPath)path;
               if ( BrushManager.isPointSection( point.mPointType ) ) {
-                // TDLog.v( "SVG point xsection");
-                float xx = xoff+point.cx;
-                float yy = yoff+point.cy;
+                float xx = point.cx;
+                float yy = point.cy;
+                // TDLog.v( "SVG point xsection " + xx + " " + yy + " offset " + xoff + " " + yoff );
+                
   	        if ( TDSetting.mAutoXSections ) {
                   // String color_str = pathToColor( path );
                   // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
@@ -258,6 +259,7 @@ public class DrawingSvg extends DrawingSvgBase
                   // TDLog.v( "Section point <" + point.mOptions + "> " + point.cx + " " + point.cy );
                   // option: -scrap survey-xx#
                   // FIXME GET_OPTION
+                  XSection xsection = null;
                   String scrapname = TDUtil.replacePrefix( TDInstance.survey, point.getOption( TDString.OPTION_SCRAP ) );
                   if ( scrapname != null ) {
                     String scrapfile = scrapname + ".tdr";
@@ -265,23 +267,27 @@ public class DrawingSvg extends DrawingSvgBase
   
                     // TODO open file survey-xx#.tdr and convert it to svg
                     // tdrToSvg( pw5, scrapfile, xx, yy, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
-  	          xsections.add( new XSection( scrapfile, xx, yy ) );
+                    // xsection = new XSection( scrapfile, xx, yy );
+                    xsection = new XSection( scrapfile, xx-DrawingUtil.CENTER_X, yy-DrawingUtil.CENTER_Y );
+  	            xsections.add( xsection );
                   }
                   // pw5.format( end_grp );
-                  IDrawingLink link = point.mLink;
-                  if ( link != null ) {
-                    float xx0 = xoff+link.getLinkX();
-                    float yy0 = yoff+link.getLinkY();
+                  IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and wrtten with it 
+                  if ( link != null && xsection != null ) {
+                    float x1 = (xoff + xx) * TDSetting.mToSvg;
+                    float y1 = (yoff + yy) * TDSetting.mToSvg;
+                    float x2 = (xoff + link.getLinkX() ) * TDSetting.mToSvg;
+                    float y2 = (yoff + link.getLinkY() ) * TDSetting.mToSvg;
                     StringWriter sw520 = new StringWriter();
                     PrintWriter pw520  = new PrintWriter(sw520);
-                    pw520.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", xx, yy, xx0, yy0 );
+                    pw520.format(Locale.US, "  <line x1=\"%f\" y1=\"%f\" x2=\"%f\" y2=\"%f\"", x1, y1, x2, y2 );
                     pw520.format(Locale.US, " class=\"link\" style=\"fill:none;stroke:brown;stroke-width:%.2f\" />\n", TDSetting.mSvgShotStroke );
                     out.write( sw520.getBuffer().toString() );
                   }
   	        } else {
                   StringWriter sw52 = new StringWriter();
                   PrintWriter pw52  = new PrintWriter(sw52);
-                  printPointWithCXCY( pw52, "<circle", xx, yy );
+                  printPointWithCXCY( pw52, "<circle", xoff+xx, yoff+yy );
                   pw52.format(Locale.US, " r=\"%d\" ", RADIUS );
                   pw52.format(Locale.US, " style=\"fill:grey;stroke:black;stroke-width:%.2f\" />\n", TDSetting.mSvgLabelStroke );
                   out.write( sw52.getBuffer().toString() );
@@ -333,11 +339,12 @@ public class DrawingSvg extends DrawingSvgBase
         // TDLog.v( "SVG xsections " + xsections.size() );
         out.write("<g id=\"xsections\">\n");
         for ( XSection xsection : xsections ) {
-          // TDLog.v( "SVG xsection " + xsection.mFilename );
+          // TDLog.v( "SVG xsection " + xsection.mFilename + " " + xsection.mX + " " + xsection.mY );
           StringWriter sw7 = new StringWriter();
           PrintWriter pw7  = new PrintWriter(sw7);
           pw7.format("<g id=\"%s\">\n", xsection.mFilename );
-          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+          // tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, -DrawingUtil.CENTER_X, -DrawingUtil.CENTER_Y );
+          tdrToSvg( pw7, xsection.mFilename, xsection.mX, xsection.mY, xoff, yoff );
           pw7.format( end_grp );
           out.write( sw7.getBuffer().toString() );
           out.flush();

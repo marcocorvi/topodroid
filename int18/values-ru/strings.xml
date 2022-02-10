@@ -522,6 +522,8 @@
     <string name="section_name">Комментарий сечения</string>
     <string name="scrap_outline">Контуры другого абриса</string>
     <string name="scrap_string">Абрис скрап: %1$d / %2$d</string>
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">датчик</string -->
     <string name="sensor_gravity">ускорение</string>

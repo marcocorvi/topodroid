@@ -13,7 +13,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.math.Point2D;
 
@@ -198,8 +198,7 @@ public class DrawingUtil
    * @param yoff    Y offset [scene]
    * @param surface drawing surface
    */
-  static
-  void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
+  static void addGrid( float xmin, float xmax, float ymin, float ymax, float xoff, float yoff, DrawingSurface surface )
   {
     // TDLog.v("add grid min/max X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " off " + xoff + " " + yoff );
     if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }
@@ -215,6 +214,7 @@ public class DrawingUtil
     if ( x1 > x2 ) { float x = x1; x1 = x2; x2 = x; } // important for the bbox culling
     if ( y1 > y2 ) { float y = y1; y1 = y2; y2 = y; }
     // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
+    // TDLog.v("add grid X " + x1 + " " + x2 + " Y " + y1 + " " + y2 );
     
     int xx1 = toBoundX( xmin, ymin );
     int yy1 = toBoundY( xmin, ymin );
@@ -223,18 +223,70 @@ public class DrawingUtil
     if ( xx1 > xx2 ) { int x = xx1; xx1 = xx2; xx2 = x; }
     if ( yy1 > yy2 ) { int y = yy1; yy1 = yy2; yy2 = y; }
 
-    // TDLog.v("add grid Y-lines X " + xx1 + " " + xx2 + " Y " + y1 + " " + y2 );
+    // TDLog.v("add grid Y-lines XX " + xx1 + " " + xx2 + " Y " + y1 + " " + y2 );
     DrawingPath dpath = null;
     for ( int x = xx1; x <= xx2; x += 1 ) {
       float x0 = x * TDSetting.mUnitGrid;
       x0 = toSceneX( x0, x0) - xoff;
       addGridLine( x, x0, x0, y1, y2, surface );
     }
-    // TDLog.v("add grid X-lines X " + x1 + " " + x2 + " Y " + yy1 + " " + yy2 );
-    for ( int y = yy1; y <= yy2; y += 1 ) {
+    // TDLog.v("add grid X-lines X " + x1 + " " + x2 + " YY " + yy1 + " " + yy2 );
+    for ( int y = yy1; y <= yy2; y += 1 ) { // grid-line index y
       float y0 = y * TDSetting.mUnitGrid;
       y0 = toSceneY( y0, y0 ) - yoff;
       addGridLine( y, x1, x2, y0, y0, surface );
+    }
+    // TDLog.v("grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
+  }
+
+  /** make a straight path - used for x-sections
+   * @param xmin    first point X coord [world]
+   * @param xmax    second point X coord [world]
+   * @param ymin    first point Y coord [world]
+   * @param ymax    second point Y coord [world]
+   * @param xc      center X
+   * @param yc      center Y
+   * @param xoff    X offset [scene]
+   * @param yoff    Y offset [scene]
+   * @param surface drawing surface
+   */
+  static void addGrid( float xmin, float xmax, float ymin, float ymax, float xc, float yc, float xoff, float yoff, DrawingSurface surface )
+  {
+    // TDLog.v("add grid min/max X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " off " + xoff + " " + yoff );
+    if ( xmin > xmax ) { float x = xmin; xmin = xmax; xmax = x; }
+    if ( ymin > ymax ) { float y = ymin; ymin = ymax; ymax = y; }
+    xmin = (xmin - 100.0f) / TDSetting.mUnitGrid;
+    xmax = (xmax + 100.0f) / TDSetting.mUnitGrid;
+    ymin = (ymin - 100.0f) / TDSetting.mUnitGrid;
+    ymax = (ymax + 100.0f) / TDSetting.mUnitGrid;
+    float x1c = toSceneX( xc+xmin, yc+ymin ) - xoff;
+    float y1c = toSceneY( xc+xmin, yc+ymin ) - yoff;
+    float x2c = toSceneX( xc+xmax, yc+ymax ) - xoff;
+    float y2c = toSceneY( xc+xmax, yc+ymax ) - yoff;
+    if ( x1c > x2c ) { float x = x1c; x1c = x2c; x2c = x; } // important for the bbox culling
+    if ( y1c > y2c ) { float y = y1c; y1c = y2c; y2c = y; }
+    // mDrawingSurface.setBounds( toSceneX( xmin ), toSceneX( xmax ), toSceneY( ymin ), toSceneY( ymax ) );
+    // TDLog.v("add grid X " + x1c + " " + x2c + " Y " + y1c + " " + y2c );
+    
+    int xx1 = toBoundX( xmin, ymin );
+    int yy1 = toBoundY( xmin, ymin );
+    int xx2 = toBoundX( xmax, ymax );
+    int yy2 = toBoundY( xmax, ymax );
+    if ( xx1 > xx2 ) { int x = xx1; xx1 = xx2; xx2 = x; }
+    if ( yy1 > yy2 ) { int y = yy1; yy1 = yy2; yy2 = y; }
+
+    // TDLog.v("add grid Y-lines XX " + xx1 + " " + xx2 + " Y " + y1c + " " + y2c );
+    DrawingPath dpath = null;
+    for ( int x = xx1; x <= xx2; x += 1 ) {
+      float x0  = x * TDSetting.mUnitGrid;
+      float x0c = toSceneX( xc+x0, xc+x0) - xoff;
+      addGridLine( x, x0c, x0c, y1c, y2c, surface );
+    }
+    // TDLog.v("add grid X-lines X " + x1c + " " + x2c + " YY " + yy1 + " " + yy2 );
+    for ( int y = yy1; y <= yy2; y += 1 ) { // grid-line index y
+      float y0 = y * TDSetting.mUnitGrid;
+      float y0c = toSceneY( yc+y0, yc+y0 ) - yoff;
+      addGridLine( y, x1c, x2c, y0c, y0c, surface );
     }
     // TDLog.v("grid sizes " + surface.getGrid1Size() + " " + surface.getGrid10Size() );
   }

@@ -528,6 +528,8 @@
     <string name="section_name">截面注释</string>
     <string name="scrap_outline">草图轮廓</string>
     <string name="scrap_string">草图层: %1$d / %2$d</string>
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">重力</string>

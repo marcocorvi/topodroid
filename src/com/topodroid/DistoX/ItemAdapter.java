@@ -110,7 +110,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   void setShowSelected( boolean s ) 
   { 
-    TDLog.v("Adapter " + mType + " show selected " + s + " pos " + mPos );
+    // TDLog.v("Adapter " + mType + " show selected " + s + " pos " + mPos );
     mShowSelected = s;
     if ( isValid(mPos) ) {
       // setOnClickReact( false );
@@ -124,7 +124,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   ItemSymbol get( int k ) 
   { 
-    TDLog.v("Adapter " + mType + " get item at " + k + " of " + mItems.size() );
+    // TDLog.v("Adapter " + mType + " get item at " + k + " of " + mItems.size() );
     return ( k < mItems.size() ) ? mItems.get(k) : null ; 
   }
 
@@ -134,7 +134,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   int getSelectedPos() 
   {
-    TDLog.v("Adapter " + mType + " get selected position " + mPos );
+    // TDLog.v("Adapter " + mType + " get selected position " + mPos );
     return mPos;
   }
 
@@ -147,7 +147,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   //  */
   // void clearSelectedItem( int index )
   // {
-  //   TDLog.v("Adapter " + mType + " clear " + index );
+  //   // TDLog.v("Adapter " + mType + " clear " + index );
   //   for ( int k=0; k<mItems.size(); ++k ) {
   //     // if ( k == mNonClick ) continue;
   //     ItemSymbol item = mItems.get(k);
@@ -163,7 +163,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   void setSelectedItem( int index )
   {
-    TDLog.v("Adapter " + mType + " select " + index );
+    // TDLog.v("Adapter " + mType + " select " + index );
     // setOnClickReact( false );
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
@@ -182,7 +182,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
     }
     // TDLog.v("set selected at index " + index + " pos " + mPos );
     // setOnClickReact( true );
-    TDLog.v("Adapter " + mType + " select done " + mPos );
+    // TDLog.v("Adapter " + mType + " select done " + mPos );
   }
 
   /** set selected position from the item symbol
@@ -191,7 +191,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   int setSelectedItem( Symbol symbol )
   {
-    TDLog.v("Adapter " + mType + " set selected symbol ");
+    // TDLog.v("Adapter " + mType + " set selected symbol ");
     // setOnClickReact( false );
     mPos = -1;
     for ( int k=0; k<mItems.size(); ++k ) {
@@ -209,7 +209,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
       mItems.get( mPos ).setItemChecked( true );
     }
     // setOnClickReact( true );
-    TDLog.v("Adapter " + mType + " set selected symbol " + mPos + " return " + mItems.get( mPos ).mIndex);
+    // TDLog.v("Adapter " + mType + " set selected symbol " + mPos + " return " + mItems.get( mPos ).mIndex);
     return mItems.get( mPos ).mIndex;
   }
 
@@ -250,7 +250,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   @Override
   public void onClick( View v )
   {
-    TDLog.v( "Adapter " + mType + " onClick()");
+    // TDLog.v( "Adapter " + mType + " onClick()");
     doClick( v );
   }
 
@@ -263,7 +263,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   private void doClick( View v )
   {
     // TDLog.v( "Adapter " + mType + " do click - react " + mOnClickReact );
-    TDLog.v( "Adapter " + mType + " do click " );
+    // TDLog.v( "Adapter " + mType + " do click " );
     long millis = System.currentTimeMillis();
     boolean doubleclick = false;
     if ( v instanceof CheckBox ) {

@@ -37,22 +37,33 @@ public class ProjectionSurface extends SurfaceView
     private int mWidth;            // canvas width
     private int mHeight;           // canvas height
     private ProjectionDialog mParent = null;
+    private ProjectionCommandManager mCommandManager; 
 
+    /** set the parent ProjectionDialog
+     * @param parent   parent ProjectionDialog
+     */
     void setProjectionDialog( ProjectionDialog parent ) 
     {
       mParent = parent;
       if ( mWidth > 0 ) mParent.setSize( mWidth, mHeight );
     }
 
-    private ProjectionCommandManager mCommandManager; 
-
+    /** @return the surface width 
+     */
     public int width()  { return mWidth; }
+
+    /** @return the surface height
+     */
     public int height() { return mHeight; }
 
     // private Timer mTimer;
     // private TimerTask mTask;
     // void setZoomer( IZoomer zoomer ) { mZoomer = zoomer; }
 
+    /** cstr
+     * @param context context
+     * @param attr    attributes
+     */
     public ProjectionSurface(Context context, AttributeSet attrs)
     {
       super(context, attrs);
@@ -69,10 +80,20 @@ public class ProjectionSurface extends SurfaceView
 
     // -----------------------------------------------------------
 
+    /** set the transform of the drawing
+     * @param dx   X translation
+     * @param dy   Y translation
+     * @param s    scaling factor
+     */
     void setTransform( float dx, float dy, float s ) { mCommandManager.setTransform( dx, dy, s ); }
 
+    /** clear the references
+     */
     void clearReferences( ) { mCommandManager.clearReferences(); }
 
+    /** redraw the surface canvas
+     * @param holder    surface canvas holder
+     */
     private void refreshSurface( SurfaceHolder holder )
     {
       // if ( mZoomer != null ) mZoomer.checkZoomBtnsCtrl();
@@ -102,8 +123,12 @@ public class ProjectionSurface extends SurfaceView
     //   }
     // };
 
+    /** clear the drawing
+     */
     void clearDrawing() { mCommandManager.clearDrawing(); }
 
+    /** drawing thread
+     */
     class DrawThread extends  Thread
     {
       private volatile boolean mRunning;
@@ -133,7 +158,13 @@ public class ProjectionSurface extends SurfaceView
       }
     }
 
-    // called by DrawingWindow::computeReference
+    /** add a station name
+     * @param num_st   station
+     * @param x        X coord
+     * @param y        Y coord
+     * @return the drawing station name
+     * @note called by DrawingWindow::computeReference
+     */
     DrawingStationName addDrawingStationName ( NumStation num_st, float x, float y )
     {
       DrawingStationName st = new DrawingStationName( num_st, x, y, 0 ); // 0: no scrap
@@ -142,24 +173,33 @@ public class ProjectionSurface extends SurfaceView
       return st;
     }
 
-    // called by DarwingActivity::addFixedLine
-    void addFixedSplayPath( DrawingSplayPath path )
-    {
-      mCommandManager.addSplayPath( path );
-    }
+    /** add a splay
+     * @param path   drawing splay path 
+     * @note called by DarwingActivity::addFixedLine
+     */
+    void addFixedSplayPath( DrawingSplayPath path ) { mCommandManager.addSplayPath( path ); }
 
-    void addFixedLegPath( DrawingPath path )
-    {
-      mCommandManager.addLegPath( path );
-    }
+    /** add a leg
+     * @param path   drawing leg path 
+     */
+    void addFixedLegPath( DrawingPath path ) { mCommandManager.addLegPath( path ); }
 
-    // k : grid type 1, 10, 100
+    /** add a grid line (unused)
+     * @param path   grid line
+     * @param k      grid type: 1, 10, 100 - used to choose the color
+     */
     void addGridPath( DrawingPath path, int k ) { mCommandManager.addGrid( path, k ); }
 
     // void setBounds( float x1, float x2, float y1, float y2 ) { mCommandManager.setBounds( x1, x2, y1, y2 ); }
 
     // ---------------------------------------------------------------------
 
+    /** callback for a change in the surface: set width and height
+     * @param holder   surface canvas holder
+     * @param format   (unused)
+     * @param width    canvas width
+     * @param height   canvas height
+     */
     public void surfaceChanged( SurfaceHolder holder, int format, int width,  int height ) 
     {
       // TDLog.Log( TDLog.LOG_PLOT, "surfaceChanged " );
@@ -170,6 +210,9 @@ public class ProjectionSurface extends SurfaceView
       if ( mWidth > 0 ) mParent.setSize( mWidth, mHeight );
     }
 
+    /** callback when the surface is created: start the drawing thread
+     * @param holder   surface canvas holder
+     */
     public void surfaceCreated( SurfaceHolder holder ) 
     {
       // TDLog.v( "surface created");
@@ -185,6 +228,9 @@ public class ProjectionSurface extends SurfaceView
       mSurfaceCreated = true;
     }
 
+    /** callback when the surface is destroyed: suspend the drawing thread
+     * @param holder   surface canvas holder
+     */
     public void surfaceDestroyed(SurfaceHolder holder) 
     {
       // TDLog.v( "surface destroyed");
@@ -193,12 +239,16 @@ public class ProjectionSurface extends SurfaceView
       suspendDrawingThread();
     }
 
+    /** suspend the drawing thread
+     */
     synchronized void suspendDrawingThread()
     {
       // TDLog.v( "drawing thread suspend");
       isDrawing = false;
     }
 
+    /** stop the drawing thread
+     */
     synchronized void stopDrawingThread()
     {
       // TDLog.v( "drawing thread stop");

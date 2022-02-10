@@ -545,14 +545,27 @@ public class DBlock
   boolean isBacksight() { return mShotType == -1; }
   boolean isManual() { return mShotType > 0; }
 
+  /** set the block ID
+   * @param shot_id     shot (block) ID
+   * @param survey_id   survey ID
+   */
   void setId( long shot_id, long survey_id )
   {
     mId       = shot_id;
     mSurveyId = survey_id;
   }
 
+  /** set the block name (for forward leg)
+   * @param from       FROM station name
+   * @param to         TO station name
+   */
   void setBlockName( String from, String to ) { setBlockName( from, to, false ); }
 
+  /** set the block name
+   * @param from       FROM station name
+   * @param to         TO station name
+   * @param is_backleg whether the block is a back-leg
+   */
   void setBlockName( String from, String to, boolean is_backleg )
   {
     if ( from == null || to == null ) {
@@ -576,6 +589,8 @@ public class DBlock
     }
   }
 
+  /** @return the block name, namey "FROM-TO"
+   */
   public String Name() { return mFrom + "-" + mTo; }
   
   // x bearing [degrees]
@@ -601,7 +616,9 @@ public class DBlock
   //   return BLOCK_MAIN_LEG;
   // }
 
-  // compute relative angle in radians
+  /** @return the relative angle [in radians] between this block and another block (normal mode)
+   * @param b  the other block
+   */
   public float relativeAngle( DBlock b )
   {
     float cc, sc, cb, sb;
@@ -618,6 +635,10 @@ public class DBlock
     return (v1.minus(v2)).Length(); // approximation: 2 * asin( dv/2 );
   }
 
+  /** @return true if the relative distance between this block and the another block is smaller that CloseDistance setting (normal mode)
+   * @param b  the other block
+   * @note blocks are in normal mode
+   */
   private boolean checkRelativeDistance( DBlock b )
   {
     float cc, sc, cb, sb;
@@ -637,6 +658,10 @@ public class DBlock
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
+  /** @return true if the relative distance between this block and the another block is smaller that CloseDistance setting (diving mode)
+   * @param b  the other block
+   * @note blocks are in diving mode
+   */
   private boolean checkRelativeDistanceDiving( DBlock b )
   {
     float cb, sb;
@@ -661,6 +686,9 @@ public class DBlock
   // -------------------------------------------------------------
   // STRING presentations
 
+  /** @return the block data, in normal mode, fully-formatted
+   * @param show_id   whether to include the block ID
+   */
   String toStringNormal( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
@@ -680,6 +708,9 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  /** @return the block data, in diving mode, fully-formatted
+   * @param show_id   whether to include the block ID
+   */
   String toStringDiving( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
@@ -699,6 +730,9 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  /** @return the block data, in normal mode, short-formatted
+   * @param show_id   whether to include the block ID
+   */
   public String toShortStringNormal( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
@@ -710,6 +744,9 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  /** @return the block data, in diving mode, short-formatted
+   * @param show_id   whether to include the block ID
+   */
   String toShortStringDiving( boolean show_id )
   {
     float ul = TDSetting.mUnitLength;
@@ -721,6 +758,8 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  /** @return the block notes
+   */
   String toNote()
   {
     StringWriter sw = new StringWriter();
@@ -731,6 +770,9 @@ public class DBlock
     return sw.getBuffer().toString();
   }
 
+  /** @return the data values, in normal format, as a string
+   * @param fmt   output format
+   */
   String dataStringNormal( String fmt )
   {
     float ul = TDSetting.mUnitLength;
@@ -738,6 +780,9 @@ public class DBlock
     return String.format(Locale.US, fmt, mLength*ul, mBearing*ua, mClino*ua );
   }
 
+  /** @return the data values, in diving format, as a string
+   * @param fmt   output format
+   */
   String dataStringDiving( String fmt )
   {
     float ul = TDSetting.mUnitLength;
@@ -745,11 +790,15 @@ public class DBlock
     return String.format(Locale.US, fmt, mLength*ul, mBearing*ua, mDepth*ul );
   }
 
+  /** @return the distance value as a string
+   */
   String distanceString()
   {
     return String.format(Locale.US, "%.2f", mLength * TDSetting.mUnitLength );
   }
 
+  /** @return the azimuth value as a string
+   */
   String bearingString()
   {
     if ( mShotType == -1 ) {
@@ -758,6 +807,8 @@ public class DBlock
     return String.format(Locale.US, "%.1f", mBearing * TDSetting.mUnitAngle );
   }
 
+  /** @return the clino value as a string
+   */
   String clinoString()
   {
     if ( mShotType == -1 ) {
@@ -766,6 +817,8 @@ public class DBlock
     return String.format(Locale.US, "%.1f", mClino * TDSetting.mUnitAngle );
   }
 
+  /** @return the depth value as a string
+   */
   String depthString()
   {
     return String.format(Locale.US, "%.1f", mDepth * TDSetting.mUnitLength );
@@ -780,14 +833,17 @@ public class DBlock
   //   );
   // }
   
+  /** write a closin square bracket, followed by the flag if there is any
+   * @param pw   output writer
+   */
   private void formatFlagPhoto( PrintWriter pw )
   {
     if ( isNone() ) {
-      pw.format("]x");       // section symbol
+      pw.format("]x");       // section symbol: 'x'
     } else if ( isNoPlan() ) {
       pw.format("]\u00A7");       // section symbol
     } else if ( isNoProfile() ) {
-      pw.format("]_");            // low_line
+      pw.format("]_");            // low_line: underscore
     } else if ( isDuplicate() ) {
       pw.format( "]\u00B2" );     // superscript 2
     } else if ( isSurface() ) {
@@ -802,11 +858,18 @@ public class DBlock
     if ( mWithPhoto ) { pw.format("#"); }
   }
 
+  /** write the comment 
+   * @param pw   output writer
+   */
   private void formatComment( PrintWriter pw )
   {
     if ( mComment == null || mComment.length() == 0 ) return;
     pw.format(" %s", mComment);
   }
+
+  /** @return the unit vector alogned with this block
+   */
+  TDVector getUnitVector() { return new TDVector( mBearing * TDMath.DEG2RAD, mClino * TDMath.DEG2RAD ); }
 
 }
 

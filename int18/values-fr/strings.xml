@@ -520,6 +520,8 @@ Refer to the web pages for details.\n
     <string name="section_name">Commentaires section</string>
     <string name="scrap_outline">Contour Esquisse</string>
     <string name="scrap_string">Scrap du croquis %1$d / %2$d</string>
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">capteur</string -->
     <string name="sensor_gravity">gravité</string>

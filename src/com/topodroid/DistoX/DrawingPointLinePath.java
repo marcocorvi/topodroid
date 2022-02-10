@@ -115,14 +115,15 @@ public class DrawingPointLinePath extends DrawingPath
     return ret;
   }
 
-  // @implements IDrawingLink
   /** X-coord of the last point
    * @return X-coord of the last point
+   * @note implements IDrawingLink
    */
   public float getLinkX( ) { return mLast.x; }
 
   /** Y-coord of the last point
    * @return Y-coord of the last point
+   * @note implements IDrawingLink
    */
   public float getLinkY( ) { return mLast.y; }
   // public Point2D getLink() { return mLast; }

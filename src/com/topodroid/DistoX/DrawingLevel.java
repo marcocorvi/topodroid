@@ -36,11 +36,23 @@ class DrawingLevel
 
   static private int mDisplayLevel = DrawingLevel.LEVEL_ANY;
 
+  /** set the current display level
+   * @param level  current display level
+   */
   static void setDisplayLevel( int level ) { mDisplayLevel = level; }
+
+  /** @return the current display level
+   */
   static int getDisplayLevel( ) { return mDisplayLevel; }
 
+  /** @return true if the level is visible
+   * @param level  display level
+   */
   static boolean isVisible( int level ) { return (level & mDisplayLevel ) != 0; }
 
+  /** @return true is the drawing path is visible according to the display level
+   * @param path   drawing path
+   */
   static  boolean isLevelVisible( DrawingPath path )
   {
     if ( TDSetting.mWithLevels == 0 || path == null ) return true; // visibility is filtered only if path is non-null

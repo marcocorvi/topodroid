@@ -524,6 +524,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="section_name">Nota sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
     <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>

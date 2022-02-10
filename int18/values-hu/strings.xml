@@ -529,6 +529,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="section_name">metszet megjegyzés</string>
     <string name="scrap_outline">Körvonal vázlat létrehozása</string>
     <string name="scrap_string">Vázlat szint: %1$d / %2$d</string>
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">szenzor</string -->
     <string name="sensor_gravity">gravitációs szenzor</string>

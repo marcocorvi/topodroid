@@ -453,6 +453,7 @@ class ProjectionDialog extends MyDialog
   // ----------------------------------------------------------------------------
 
   /** lifecycle: start
+   * set the progress-bar and compute the initial offset and zoom
    */
   private void doStart()
   {
@@ -464,18 +465,19 @@ class ProjectionDialog extends MyDialog
       // float decl = mApp.mData.getSurveyDeclination( mSid );
       mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
       mSeekBar.setProgress( 200 );
-      float de = - mNum.surveyEmin();
-      if ( mNum.surveyEmax() > de ) de = mNum.surveyEmax();
-      float ds = - mNum.surveySmin();
-      if ( mNum.surveySmax() > ds ) ds = mNum.surveySmax();
-      mZoom *= 2 / (float)Math.sqrt( de*de + ds*ds );
-      // mOffset.x = 2 * mDisplayCenter.x; // + (mNum.surveyEmax() + mNum.surveyEmin()) * DrawingUtil.SCALE_FIX/2;
-      // mOffset.y = 2 * mDisplayCenter.y; // - (mNum.surveySmax() + mNum.surveySmin()) * DrawingUtil.SCALE_FIX/2;
-      // TDLog.v( "start " + de + " " + ds + " " + dr + " off " + mOffset.x + " " + mOffset.y + " " + mZoom );
+
+      float de = ( mNum.surveyEmax() - mNum.surveyEmin() ) / 2;
+      float ds = ( mNum.surveySmax() - mNum.surveySmin() ) / 2;
+      float zoom = mZoom / (float)Math.sqrt( de*de + ds*ds );
 
       computeReferences();
-      mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2;
-      mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2;
+
+      mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2 + DrawingUtil.CENTER_X;
+      mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2 + DrawingUtil.CENTER_Y;
+
+      mZoom = 0.5f * zoom;                  // mZoom = zoom / 2
+      mOffset.x += mDisplayCenter.x/zoom;   // 1/mZoom - 1/zoom = 2/zoom - 1/zoom = 1/zoom
+      mOffset.y += mDisplayCenter.y/zoom;
 
       mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
     }

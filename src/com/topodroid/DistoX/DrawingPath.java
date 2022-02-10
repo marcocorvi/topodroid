@@ -136,6 +136,11 @@ public class DrawingPath extends RectF
   //   mTransformedPath = null;
   // }
 
+  /** cstr
+   * @param type   path type: POINT (1), LINE (2), AREA (3) etc.
+   * @param blk    shot data block, associated to the path, or null
+   * @param scrap  path scrap (index)
+   */
   DrawingPath( int type, DBlock blk, int scrap )
   {
     mType    = type;
@@ -159,21 +164,41 @@ public class DrawingPath extends RectF
   //   return mType >= DRAWING_PATH_STATION && mType <= DRAWING_PATH_AREA; 
   // }
 
+  /** set the visivility of this path, using the alpha of the color
+   * @param on  whether the path is visible (alpha 0xff)
+   */
   void setPaintAlpha( boolean on ) { mPaint.setAlpha( (on ? 0xff : 0) ); }
 
+  /** @return true if the path type is a "reference" 
+   * @patam type   path type
+   */
   static boolean isReferenceType( int type ) 
   {
     return type < DRAWING_PATH_STATION || type >= DRAWING_PATH_NAME;
   }
 
+  /** @return true if the path type is a "drawing item" 
+   * @patam type   path type
+   */
   static boolean isDrawingType( int type ) 
   {
     return type >= DRAWING_PATH_STATION && type < DRAWING_PATH_NAME;
   }
 
+  /** @return true if this path type is POINT
+   */
   boolean isPoint() { return mType == DRAWING_PATH_POINT; }
+  
+  /** @return true if this path type is LINE
+   */
   boolean isLine()  { return mType == DRAWING_PATH_LINE; }
+  
+  /** @return true if this path type is AREA
+   */
   boolean isArea()  { return mType == DRAWING_PATH_AREA; }
+  
+  /** @return true if this path type is either LINE or AREA
+   */
   boolean isLineOrArea()  { return mType == DRAWING_PATH_LINE || mType == DRAWING_PATH_AREA; }
 
   /** @return the X coord of the center
@@ -566,22 +591,29 @@ public class DrawingPath extends RectF
     draw( canvas, matrix, bbox );
   }
 
-  // used in executeAll
+  /** @return true if this path is asscociated to a "recent" block
+   * @note used in executeAll
+   */
   boolean isBlockRecent( )
   {
     return mBlock != null && mBlock.isRecent();
   }
 
-  // used in executeAll to draw yellow extend control segnment
+  /** @Return the (int) "extend" of the block of this path (0 if the path has no block)
+   * @note used in executeAll to draw yellow extend control segnment
+   */
   int getBlockExtend( )
   {
     return ( mBlock == null )? 0 : mBlock.getIntExtend();
   }
  
-  /* FIXME apparently this can be called when mPaint is still null
-   *        and when fixedBluePaint is null
+  /** draw this path on a canvas
+   * @param path   path to draw
+   * @param canvas canvas
    *
-   * NOTE DrawingAreaPath overrides this
+   * FIXME apparently this can be called when mPaint is still null and when fixedBluePaint is null
+   *
+   * @note DrawingAreaPath overrides this
    */
   void drawPath( Path path, Canvas canvas )
   {
@@ -604,14 +636,30 @@ public class DrawingPath extends RectF
     if ( mPaint != null ) canvas.drawPath( path, mPaint );
   }
 
+  /** set the orientation - empty by default
+   * @param angle   orientation angle [defgree]
+   */
   void setOrientation( double angle ) { }
 
-  String toTherion( ) { return null; } // FIXME
+  /** @return the "therion" presentation of this path - null by default
+   * @note this method should be overridden by derived classes
+   */
+  String toTherion( ) { return null; }
 
+  /** write the path to a data stream - it does nothing by default
+   * @param dos   output stream
+   * @param scrap scrap index
+   */
   void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR DrawingPath toDataStream with scrap executed"); }
 
-  // void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
-  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ ) { }
+  /** write the path in cSurvey format - it does nothing by default
+   * @param pw     output writer
+   * @param survey survey name
+   * @param cave   cave name
+   * @param branch branch name
+   * @param bind   binding item
+   */
+  void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind ) { }
 
   // ------ ICanvasCommand interface
   /** @return the type of the command, namely 0
@@ -683,8 +731,20 @@ public class DrawingPath extends RectF
     len2   = deltaX * deltaX + deltaY * deltaY;
   }
 
+  /** write the path in "Cave3D" format - empty by default
+   * @param pw     output writer
+   * @param type   ...
+   * @param cmd    drawing items manager
+   * @param num    data reduction
+   */
   void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num ) { }
 
+  /** write the path in "Cave3D" format - empty by default
+   * @param pw     output writer
+   * @param type   ...
+   * @param V1     ...
+   * @param V2     ...
+   */
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector v2 ) { }
 
   /** @return a vector in world frame, V1 * X0 + V2 * Y0

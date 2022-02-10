@@ -24,9 +24,9 @@ abstract class ItemDrawer extends Activity
 
   protected Activity mActivity = null;
 
-  int mCurrentPoint;
-  int mCurrentLine;
-  int mCurrentArea;
+  int mCurrentPoint = -1;
+  int mCurrentLine  = -1;
+  int mCurrentArea  = -1;
   protected int mPointScale;
   protected int mLinePointStep = 1;
 

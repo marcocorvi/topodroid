@@ -358,7 +358,7 @@ class ItemPickerDialog extends MyDialog
    */
   private void createAdapters( )
   {
-    TDLog.v("create adapters");
+    // TDLog.v("create adapters");
     // if ( TDLevel.overBasic ) 
     {
       mPointAdapter = new ItemAdapter( mContext, this, SymbolType.POINT, R.layout.item, new ArrayList< ItemSymbol >() );
@@ -510,7 +510,7 @@ class ItemPickerDialog extends MyDialog
    */
   public void setTypeAndItem( int type, int index )
   {
-    TDLog.v( "set TypeAndItem type " + mItemType  + " item " + index );
+    // TDLog.v( "set TypeAndItem type " + mItemType  + " item " + index );
     mItemType = type;
     ItemSymbol is;
     switch ( type ) {
@@ -560,7 +560,7 @@ class ItemPickerDialog extends MyDialog
   // this is called tapping the tab-buttons on the top
   private void setTypeFromCurrent( )
   {
-    TDLog.v("set type from current ");
+    // TDLog.v("set type from current ");
     switch ( mItemType ) {
       case SymbolType.POINT: 
         // if ( TDLevel.overBasic ) 
@@ -772,7 +772,7 @@ class ItemPickerDialog extends MyDialog
   // @Override
   // public void onItemClick( AdapterView adapter, View view, int pos, long id )
   // {
-  //    TDLog.v( "ItemPicker onItemCLick()" );
+  //    // TDLog.v( "ItemPicker onItemCLick()" );
   //    if ( mAdapter != null ) mAdapter.doClick( view );
   // }
 
@@ -789,7 +789,7 @@ class ItemPickerDialog extends MyDialog
 
   private int setRecentSymbol( Symbol p )
   {
-    TDLog.v("set recent symbol ");
+    // TDLog.v("set recent symbol ");
     int index = -1;
     if ( p != null ) {
       if ( mAdapter != null ) {

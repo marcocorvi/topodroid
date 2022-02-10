@@ -530,6 +530,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="section_name">Komentarz przekroju</string>
     <string name="scrap_outline">Zarys szkicu</string>
     <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
+    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
+    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
 
     <!-- UNUSED string name="sensor">sensor</string -->
     <string name="sensor_gravity">grawitacja</string>

@@ -176,7 +176,7 @@ class ItemSymbol
    */
   void setItemChecked( boolean checked )
   {
-    TDLog.v( "Item " + mType + "/" + mIndex + " set checked " + checked  );
+    // TDLog.v( "Item " + mType + "/" + mIndex + " set checked " + checked  );
     // if ( mUseText ) {
       mCheckBox.setChecked( checked );
     // } else {
