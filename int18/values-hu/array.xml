@@ -16,7 +16,7 @@
 
   <string-array name="splayColors">
      <item name="none">nincs</item>
-     <item name="all">összes</item>
+     <item name="all">teljes</item>
      <item name="palette">paletta</item>
   </string-array>
 
