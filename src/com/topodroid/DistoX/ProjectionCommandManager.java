@@ -145,6 +145,14 @@ class ProjectionCommandManager
     mStations.clear();
   }
 
+  /** set the transformation matrix
+   * @param dx   X translation
+   * @param dy   Y translation
+   * @param s    scaling
+   * 
+   * x' = (x + dx) * s
+   * y' = (y + dy) * s
+   */
   void setTransform( float dx, float dy, float s )
   {
     mMatrix = new Matrix();

@@ -198,9 +198,9 @@ class ProjectionDialog extends MyDialog
     
   /** add a leg line
    * @param blk   leg data
-   * @param x1    X coord of first point
+   * @param x1    X coord of first point [scene ref.]
    * @param y1    Y coord of first point
-   * @param x2    X coord of second point
+   * @param x2    X coord of second point [scene ref.]
    * @param y2    Y coord of second point
    */
   private void addFixedLegLine( DBlock blk, float x1, float y1, float x2, float y2 )
@@ -242,8 +242,8 @@ class ProjectionDialog extends MyDialog
 	double x2 = st2.e * cosp + st2.s * sinp; // - dx;
 	double y1 = st1.v; // - dy;
 	double y2 = st2.v; // - dy;
-        h1 = DrawingUtil.toSceneX( x1, y1 );
-        h2 = DrawingUtil.toSceneX( x2, y2 );
+        h1 = DrawingUtil.toSceneX( x1, y1 ); // CENTER_X + x1 * SCALE_FIX = 100 + x1 * 20
+        h2 = DrawingUtil.toSceneX( x2, y2 ); // CENTER_Y + Y1 * SCALE_FIX = 120 + y1 * 20
         v1 = DrawingUtil.toSceneY( x1, y1 );
         v2 = DrawingUtil.toSceneY( x2, y2 );
         addFixedLegLine( sh.getFirstBlock(), h1, v1, h2, v2 );
@@ -465,21 +465,34 @@ class ProjectionDialog extends MyDialog
       // float decl = mApp.mData.getSurveyDeclination( mSid );
       mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
       mSeekBar.setProgress( 200 );
+      float e1 = DrawingUtil.toSceneX( mNum.surveyEmin(), mNum.surveySmin() );  // CENTER_X + Emin * SCALE referred to upper-left corner
+      float s1 = DrawingUtil.toSceneY( mNum.surveyEmin(), mNum.surveySmin() ); 
+      float e2 = DrawingUtil.toSceneX( mNum.surveyEmax(), mNum.surveySmax() ); 
+      float s2 = DrawingUtil.toSceneY( mNum.surveyEmax(), mNum.surveySmax() ); 
 
-      float de = ( mNum.surveyEmax() - mNum.surveyEmin() ) / 2;
-      float ds = ( mNum.surveySmax() - mNum.surveySmin() ) / 2;
-      float zoom = mZoom / (float)Math.sqrt( de*de + ds*ds );
+      float de = ( e2 - e1 ) / 2; // ( Emax - Emin)/2 * SCALE
+      float ds = ( s2 - s1 ) / 2;
+      float zoom = 10 * mZoom / (float)Math.sqrt( de*de + ds*ds );
 
-      computeReferences();
+      float centerx = ( e1 + e2 )/ 2;
+      float centery = ( s1 + s2 )/ 2;
 
-      mOffset.x = ( mNum.surveyEmax() + mNum.surveyEmin() )/ 2 + DrawingUtil.CENTER_X;
-      mOffset.y = ( mNum.surveySmax() + mNum.surveySmin() )/ 2 + DrawingUtil.CENTER_Y;
+      // X --> X' = ( sceneX + offsetX ) * zoom 
+      //          = ( (CENTER_X + X*SCALE) + offsetX ) * zoom
+      //          = DisplayCenter.X + X * SCALE * zoom - (CENTER_X + cX * SCALE) * zoom;
+      mOffset.x = (mDisplayCenter.x - DrawingUtil.CENTER_X) / zoom - centerx;
+      mOffset.y = (mDisplayCenter.y - DrawingUtil.CENTER_Y) / zoom - centery;
+      mZoom = zoom;
+      TDLog.v("corner " + e1 + " " + s1 + "   " + e2 + " " + s2 + " center " + centerx + " " + centery );
+      TDLog.v("size " + de + " " + ds + " off " + mOffset.x + " " + mOffset.y + " zoom " + zoom );
 
-      mZoom = 0.5f * zoom;                  // mZoom = zoom / 2
-      mOffset.x += mDisplayCenter.x/zoom;   // 1/mZoom - 1/zoom = 2/zoom - 1/zoom = 1/zoom
-      mOffset.y += mDisplayCenter.y/zoom;
+      // mZoom = 10 * zoom;
+      // mOffset.x += (mDisplayCenter.x - DrawingUtil.CENTER_X) * ( 1/mZoom - 1/zoom );
+      // mOffset.y += (mDisplayCenter.y - DrawingUtil.CENTER_Y) * ( 1/mZoom - 1/zoom );
 
       mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+
+      computeReferences();
     }
   }
 
