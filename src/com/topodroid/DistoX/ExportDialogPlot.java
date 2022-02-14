@@ -182,9 +182,9 @@ public class ExportDialogPlot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       if ( mParentType == 0 ) { // plot
-        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ) ); 
+        mParent.doExport( mSelected, TDConst.getPlotFilename( mSelectedPos, mPlotName ), null );  // null prefix
       } else { // overview
-        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ) ); 
+        mParent.doExport( mSelected, TDConst.getOverviewFilename( mSelectedPos, mPlotName ), null ); // null prefix
       }
     // } else if ( b == mBtnBack ) {
     //   /* nothing */

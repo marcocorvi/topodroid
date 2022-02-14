@@ -512,9 +512,15 @@ public class SurveyWindow extends Activity
     mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
   }
 
-  // interface IExporter
-  public void doExport( String type, String filename )
+  /** export the survey data
+   * @param export_type   export file format
+   * @param filename      export file "name"
+   * @param prefix        station name prefix (Compass, VTopo, Winkarst
+   * @note interface IExporter
+   */
+  public void doExport( String type, String filename, String prefix )
   {
+    mExportPrefix = prefix;
     saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
@@ -537,6 +543,7 @@ public class SurveyWindow extends Activity
   }
 
   private static int mExportIndex; // index of the export-type 
+  private static String mExportPrefix = null;
 
   // FIXME_URI
   private void selectExportFromProvider( int index, String filename ) // EXPORT
@@ -565,7 +572,7 @@ public class SurveyWindow extends Activity
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
           // TDLog.v( "SURVEY export: index " + mExportIndex + " uri " + uri.toString() );
-          mApp.doExportDataAsync( getApplicationContext(), uri, mExportIndex, true );
+          mApp.doExportDataAsync( getApplicationContext(), uri, mExportIndex, mExportPrefix, true );
         }
     }
   }

@@ -2606,7 +2606,7 @@ public class TDExporter
 
   static private void writeDatFromTo( PrintWriter pw, String prefix, String from, String to )
   {
-    if ( TDSetting.mExportStationsPrefix ) {
+    if ( prefix != null && prefix.length() > 0 ) {
       pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
     } else {
       pw.format("%s %s ", from, to );
@@ -2623,7 +2623,10 @@ public class TDExporter
     return ret;
   }
 
-  static int exportSurveyAsDat( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  /**
+   * @param prefix     station names prefix
+   */
+  static int exportSurveyAsDat( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
   {
     // TDLog.v( "export as compass: " + surveyname + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -2691,7 +2694,7 @@ public class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
+              writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -2699,14 +2702,14 @@ public class TDExporter
 	    if ( TDSetting.mCompassSplays ) {
               // Integer i = splay_station.get( to );
 	      int ii = nextSplayInt( splay_stations, to );
-	      printSplayToDat( pw, info.name, to, to + "ss" + ii, item, true ); // reverse
+	      printSplayToDat( pw, prefix, to, to + "ss" + ii, item, true ); // reverse
 	    }
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
-              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
+              writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -2714,12 +2717,12 @@ public class TDExporter
 	    if ( TDSetting.mCompassSplays ) {
               // Integer i = splay_station.get( from );
 	      int ii = nextSplayInt( splay_stations, from );
-	      printSplayToDat( pw, info.name, from, from + "ss" + ii, item, false ); // not reverse
+	      printSplayToDat( pw, prefix, from, from + "ss" + ii, item, false ); // not reverse
 	    }
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
+              writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
               printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
             }
             ref_item = item;
@@ -2730,7 +2733,7 @@ public class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
-        writeDatFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo );
+        writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
         printShotToDat( pw, leg, lrud, duplicate, ref_item.mComment );
       }
       pw.format( "\f\r\n" );
@@ -3007,14 +3010,14 @@ public class TDExporter
     } else {
       pw.format("N ");
     }
-    if ( TDSetting.mExportStationsPrefix ) {
+    if ( prefix != null && prefix.length() > 0 ) {
       pw.format("%s-%s %s-%s ", prefix, from, prefix, to );
     } else {
       pw.format("%s %s ", from, to );
     }
   }
 
-  static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsSur( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
   {
     // TDLog.v( "export as winkarst: " + file.getName() + " swap LR " + TDSetting.mSwapLR );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -3089,7 +3092,7 @@ public class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
               printShotToSur( pw, leg, lrud, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -3099,7 +3102,7 @@ public class TDExporter
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
               printShotToSur( pw, leg, lrud, ref_item.mComment );
               duplicate = false;
               ref_item = null; 
@@ -3107,7 +3110,7 @@ public class TDExporter
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               lrud = computeLRUD( ref_item, list, true );
-              writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+              writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
               printShotToSur( pw, leg, lrud, ref_item.mComment );
             }
             ref_item = item;
@@ -3118,7 +3121,7 @@ public class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         lrud = computeLRUD( ref_item, list, true );
-        writeSurFromTo( pw, info.name, ref_item.mFrom, ref_item.mTo, duplicate );
+        writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
         printShotToSur( pw, leg, lrud, ref_item.mComment );
       }
       pw.format( "#END\r\n" );
@@ -4209,17 +4212,19 @@ public class TDExporter
   // FIXME not sure declination written in the right place
   // shot flags are not supported
 
-  /**
+  /** write a shot data to the output file, in TRO format
    * @param pw     writer
    * @param item   reference shot
-   ( @param list   ...
+   * @param list   list of data, to compute LRUD
+   * @param prefix station names prefix
    * note item is guaranteed not null by the caller
    */
-  static private boolean printStartShotToTro( PrintWriter pw, DBlock item, List< DBlock > list )
+  static private boolean printStartShotToTro( PrintWriter pw, DBlock item, List< DBlock > list, String prefix )
   {
     if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, ! TDSetting.mVTopoLrudAtFrom ); // default: mVTopoLrudAtFrom = false
     String station = TDSetting.mVTopoLrudAtFrom ? item.mTo : item.mFrom;
+    if ( prefix != null && prefix.length() > 0 ) station = prefix + station;
     pw.format(Locale.US, "%s %s 0.00 0.00 0.00 ", station, station );
     pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -4229,11 +4234,19 @@ public class TDExporter
     return true;
   }
 
-  static private boolean printStartShotToTrox( PrintWriter pw, DBlock item, List< DBlock > list ) // , int ref, int suiv )
+  /** write a shot data to the output file, in TROX form
+   * @param pw     writer
+   * @param item   reference shot
+   * @param list   list of data, to compute LRUD
+   * @param prefix station names prefix
+   * note item is guaranteed not null by the caller
+   */
+  static private boolean printStartShotToTrox( PrintWriter pw, DBlock item, List< DBlock > list, String prefix ) // , int ref, int suiv )
   {
     if ( item == null ) return false;
     LRUD lrud = computeLRUD( item, list, ! TDSetting.mVTopoLrudAtFrom ); // default: mVTopoLrudAtFrom = false
     String station = TDSetting.mVTopoLrudAtFrom ? item.mTo : item.mFrom;
+    if ( prefix != null && prefix.length() > 0 ) station = prefix + station;
     pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" Long=\"0.00\" Az=\"0.0\" Pte=\"0.0\" ", station, station );
     pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
     // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
@@ -4244,11 +4257,15 @@ public class TDExporter
     return true;
   }
 
-  static private void printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud )
+  static private void printShotToTro( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud, String prefix )
   {
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
-    pw.format("%s %s ", item.mFrom, item.mTo );
+    if ( prefix == null || prefix.length() == 0 ) {
+      pw.format("%s %s ", item.mFrom, item.mTo );
+    } else {
+      pw.format("%s%s %s%s ", prefix, item.mFrom, prefix, item.mTo );
+    }
     pw.format(Locale.US, "%.2f %.1f %.1f ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
     pw.format(Locale.US, "%.2f %.2f %.2f %.2f N I *", lrud.l, lrud.r, lrud.u, lrud.d );
@@ -4260,11 +4277,15 @@ public class TDExporter
     pw.format("\r\n");
   }
 
-  static private void printShotToTrox( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud ) // , int ref, int suiv )
+  static private void printShotToTrox( PrintWriter pw, DBlock item, AverageLeg leg, LRUD lrud, String prefix ) // , int ref, int suiv )
   {
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
-    pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
+    if ( prefix == null || prefix.length() == 0 ) {
+      pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
+    } else {
+      pw.format(Locale.US, "    <Visee Dep=\"%s%s\" Arr=\"%s%s\" ", prefix, item.mFrom, prefix, item.mTo );
+    }
     pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
     pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
@@ -4278,18 +4299,26 @@ public class TDExporter
     }
   }
 
-  static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct )
+  static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct, String prefix )
   {
     if ( ! TDSetting.mVTopoSplays ) return; // false;
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     if ( direct ) {
-      pw.format("%s * ", item.mFrom );
+      if ( prefix == null || prefix.length() == 0 ) {
+        pw.format("%s * ", item.mFrom );
+      } else {
+        pw.format("%s%s * ", prefix, item.mFrom );
+      }
       pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, item.mBearing, item.mClino );
     } else {
       // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
       float b = TDMath.add180( item.mBearing );
-      pw.format("%s * ", item.mTo );
+      if ( prefix == null || prefix.length() == 0 ) {
+        pw.format("%s * ", item.mTo );
+      } else {
+        pw.format("%s%s * ", prefix, item.mTo );
+      }
       pw.format(Locale.US, "%.2f %.1f %.1f * * * * N E", item.mLength, b, - item.mClino );
     }
     pw.format( (item.isCommented() ? " D" : " M" ) );
@@ -4301,18 +4330,26 @@ public class TDExporter
     pw.format("\r\n");
   }
 
-  static private void printSplayToTrox( PrintWriter pw, DBlock item, boolean direct ) // , int ref )
+  static private void printSplayToTrox( PrintWriter pw, DBlock item, boolean direct, String prefix ) // , int ref )
   {
     if ( ! TDSetting.mVTopoSplays ) return; // false;
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     if ( direct ) {
-      pw.format("    <Visee Dep=\"%s\" ", item.mFrom );
+      if ( prefix == null || prefix.length() == 0 ) {
+        pw.format("    <Visee Dep=\"%s\" ", item.mFrom );
+      } else {
+        pw.format("    <Visee Dep=\"%s%s\" ", prefix, item.mFrom );
+      }
       pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, item.mBearing, item.mClino );
     } else {
       // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
       float b = TDMath.add180( item.mBearing );
-      pw.format("    <Visee Dep=\"%s\" ", item.mTo );
+      if ( prefix == null || prefix.length() == 0 ) {
+        pw.format("    <Visee Dep=\"%s\" ", item.mTo );
+      } else {
+        pw.format("    <Visee Dep=\"%s%s\" ", prefix, item.mTo );
+      }
       pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, b, - item.mClino );
     }
     // pw.format(Locale.US, "Ref=\"%d\" ", ref );
@@ -4326,7 +4363,7 @@ public class TDExporter
     }
   }
 
-  static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
   {
     // TDLog.v( "export as visualtopo: " + file.getName() );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -4381,45 +4418,45 @@ public class TDExporter
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
               if ( ! started ) {
-                started = printStartShotToTro( pw, ref_item, list );
+                started = printStartShotToTro( pw, ref_item, list, prefix );
               }
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTro( pw, ref_item, leg, lrud );
+              printShotToTro( pw, ref_item, leg, lrud, prefix );
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-	    printSplayToTro( psw, item, false );
+	    printSplayToTro( psw, item, false, prefix );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               if ( ! started ) {
-                started = printStartShotToTro( pw, ref_item, list );
+                started = printStartShotToTro( pw, ref_item, list, prefix );
               }
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTro( pw, ref_item, leg, lrud );
+              printShotToTro( pw, ref_item, leg, lrud, prefix );
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-	    printSplayToTro( psw, item, true );
+	    printSplayToTro( psw, item, true, prefix );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
               if ( ! started ) {
-                started = printStartShotToTro( pw, ref_item, list );
+                started = printStartShotToTro( pw, ref_item, list, prefix );
               }
 	      pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTro( pw, ref_item, leg, lrud );
+              printShotToTro( pw, ref_item, leg, lrud, prefix );
             }
             ref_item = item;
             // duplicate = item.isDuplicate();
@@ -4431,11 +4468,11 @@ public class TDExporter
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
         if ( ! started ) {
-          started = printStartShotToTro( pw, ref_item, list );
+          started = printStartShotToTro( pw, ref_item, list, prefix );
         }
 	pw.format( sw.toString() );
         lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-        printShotToTro( pw, ref_item, leg, lrud );
+        printShotToTro( pw, ref_item, leg, lrud, prefix );
       } else {
 	pw.format( sw.toString() );
       }
@@ -4511,7 +4548,7 @@ public class TDExporter
   }
 
 
-  static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
+  static int exportSurveyAsTrox( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String prefix )
   {
     // TDLog.v( "export as visualtopo-X " );
     List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
@@ -4587,40 +4624,40 @@ public class TDExporter
             }
           } else { // only TO station
             if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, prefix ); // , ref, suiv );
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+              printShotToTrox( pw, ref_item, leg, lrud, prefix ); // , ref, suiv );
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-            printSplayToTrox( psw, item, false ); // , ref );
+            printSplayToTrox( psw, item, false, prefix ); // , ref );
           }
         } else { // with FROM station
           if ( to == null || to.length() == 0 ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
-              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, prefix ); // , ref, suiv );
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+              printShotToTrox( pw, ref_item, leg, lrud, prefix ); // , ref, suiv );
               // duplicate = false;
               // surface = false;
               ref_item = null; 
             }
-            printSplayToTrox( psw, item, true ); // , ref );
+            printSplayToTrox( psw, item, true, prefix ); // , ref );
           } else {
             if ( leg.mCnt > 0 && ref_item != null ) {
-              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+              if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, prefix ); // , ref, suiv );
               pw.format( sw.toString() );
               sw = new StringWriter();
               psw = new PrintWriter( sw );
               lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-              printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+              printShotToTrox( pw, ref_item, leg, lrud, prefix ); // , ref, suiv );
             }
             ref_item = item;
             // duplicate = item.isDuplicate();
@@ -4631,10 +4668,10 @@ public class TDExporter
         }
       }
       if ( leg.mCnt > 0 && ref_item != null ) {
-        if ( ! started ) started = printStartShotToTrox( pw, ref_item, list ); // , ref, suiv );
+        if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, prefix ); // , ref, suiv );
         pw.format( sw.toString() );
         lrud = computeLRUD( ref_item, list, TDSetting.mVTopoLrudAtFrom );
-        printShotToTrox( pw, ref_item, leg, lrud ); // , ref, suiv );
+        printShotToTrox( pw, ref_item, leg, lrud, prefix ); // , ref, suiv );
       } else {
         pw.format( sw.toString() );
       }

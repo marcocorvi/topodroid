@@ -442,9 +442,13 @@ public class TdmConfigActivity extends Activity
 
   private int mExportIndex = -1;
 
-  // @implements IExporter
-  // @note surveyname is not used (TdmConfig already has it)
-  public void doExport( String type, String surveyname )
+  /**
+   * @param type       export type
+   * @param surveyname not used (TdmConfig already has it)
+   * @param prefix     station names prefix (not used)
+   * @note implements IExporter
+   */
+  public void doExport( String type, String surveyname, String prefix )
   {
     String filename = null;
     int index = -1;
@@ -460,6 +464,9 @@ public class TdmConfigActivity extends Activity
     }
   }
 
+  /** export implementation
+   * @param uri   export URI
+   */
   private void doRealExport( Uri uri )
   {
     if ( mExportIndex < 0 ) return;

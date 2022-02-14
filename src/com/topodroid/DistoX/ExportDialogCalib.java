@@ -107,7 +107,7 @@ public class ExportDialogCalib extends MyDialog
     // TDLog.v("C3D selected " + mSelected );
     Button b = (Button)v;
     if ( b == mBtnOk && mSelected != null ) {
-      mParent.doExport( mSelected, TDInstance.calib ); // calib name is not used
+      mParent.doExport( mSelected, TDInstance.calib, null ); // calib name is not used, null prefix
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }

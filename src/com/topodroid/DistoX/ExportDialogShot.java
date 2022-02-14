@@ -28,7 +28,9 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.LinearLayout;
 import android.widget.CheckBox;
-// import android.widget.EditText;
+import android.widget.EditText;
+
+import android.text.Editable;
 
 import android.view.View;
 // import android.view.View.OnKeyListener;
@@ -48,6 +50,7 @@ public class ExportDialogShot extends MyDialog
   private final int mTitle;
   private int mSelectedPos;
   private String    mSurvey;
+  private String    mExportPrefix;
 
   private LinearLayout mLayoutCompass;
   private LinearLayout mLayoutCSurvey;
@@ -58,6 +61,7 @@ public class ExportDialogShot extends MyDialog
   private LinearLayout mLayoutDxf;
   private LinearLayout mLayoutKml;
   private LinearLayout mLayoutShp;
+  private LinearLayout mLayoutWinkarst;
 
   /** cstr
    * @param context     context
@@ -74,6 +78,7 @@ public class ExportDialogShot extends MyDialog
     mSelected = null;
     mTitle = title;
     mSurvey = survey;
+    mExportPrefix = null;
   }
 
 // -------------------------------------------------------------------
@@ -89,15 +94,16 @@ public class ExportDialogShot extends MyDialog
     ArrayAdapter adapter = new ArrayAdapter<>( mContext, R.layout.menu, mTypes );
     spin.setAdapter( adapter );
 
-    mLayoutCompass = (LinearLayout) findViewById( R.id.layout_compass );
-    mLayoutCSurvey = (LinearLayout) findViewById( R.id.layout_csurvey );
-    mLayoutSurvex  = (LinearLayout) findViewById( R.id.layout_survex );
-    mLayoutTherion = (LinearLayout) findViewById( R.id.layout_therion );
-    mLayoutVTopo   = (LinearLayout) findViewById( R.id.layout_vtopo );
-    mLayoutCsv     = (LinearLayout) findViewById( R.id.layout_csv );
-    mLayoutDxf     = (LinearLayout) findViewById( R.id.layout_dxf );
-    mLayoutKml     = (LinearLayout) findViewById( R.id.layout_kml );
-    mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
+    mLayoutCompass  = (LinearLayout) findViewById( R.id.layout_compass );
+    mLayoutCSurvey  = (LinearLayout) findViewById( R.id.layout_csurvey );
+    mLayoutSurvex   = (LinearLayout) findViewById( R.id.layout_survex );
+    mLayoutTherion  = (LinearLayout) findViewById( R.id.layout_therion );
+    mLayoutVTopo    = (LinearLayout) findViewById( R.id.layout_vtopo );
+    mLayoutCsv      = (LinearLayout) findViewById( R.id.layout_csv );
+    mLayoutDxf      = (LinearLayout) findViewById( R.id.layout_dxf );
+    mLayoutKml      = (LinearLayout) findViewById( R.id.layout_kml );
+    mLayoutShp      = (LinearLayout) findViewById( R.id.layout_shp );
+    mLayoutWinkarst = (LinearLayout) findViewById( R.id.layout_winkarst );
 
     mBtnOk   = (Button) findViewById(R.id.button_ok );
     mBtnOk.setOnClickListener( this );
@@ -171,7 +177,7 @@ public class ExportDialogShot extends MyDialog
     if ( b == mBtnOk && mSelected != null ) {
       setOptions();
       int selected_pos = ( mSelectedPos == 11 && TDSetting.mVTopoTrox )? -mSelectedPos : mSelectedPos;
-      mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ) );
+      mParent.doExport( mSelected, TDConst.getSurveyFilename( selected_pos, mSurvey ), mExportPrefix );
     // } else if ( b == mBtnBack ) {
     //   /* nothing */
     }
@@ -191,17 +197,32 @@ public class ExportDialogShot extends MyDialog
     mLayoutDxf.setVisibility( View.GONE );
     mLayoutKml.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
-    switch ( mSelectedPos ) {
+    mLayoutWinkarst.setVisibility( View.GONE );
+    switch ( mSelectedPos ) { // indices in mSurveyExportTypes
       case 1: mLayoutCompass.setVisibility( View.VISIBLE ); break;
       case 2: mLayoutCSurvey.setVisibility( View.VISIBLE ); break;
       case 7: mLayoutSurvex.setVisibility( View.VISIBLE ); break;
       case 8: mLayoutTherion.setVisibility( View.VISIBLE ); break;
       case 11: mLayoutVTopo.setVisibility( View.VISIBLE ); break;
+      case 13: mLayoutWinkarst.setVisibility( View.VISIBLE ); break;
       case 14: mLayoutCsv.setVisibility( View.VISIBLE ); break;
       case 15: mLayoutDxf.setVisibility( View.VISIBLE ); break;
       case 16: 
       case 18: mLayoutKml.setVisibility( View.VISIBLE ); break;
       case 19: if ( TDLevel.overExpert) mLayoutShp.setVisibility( View.VISIBLE ); break;
+    }
+  }
+
+  /** set the export prefix
+   * @param prefix   content of the prefix edit text-field
+   */
+  private void setExportPrefix( Editable prefix )
+  {
+    if ( prefix == null ) {
+      mExportPrefix = null;
+    } else {
+      mExportPrefix = prefix.toString().trim();
+      if ( mExportPrefix.length() == 0 ) mExportPrefix = null;
     }
   }
 
@@ -217,9 +238,10 @@ public class ExportDialogShot extends MyDialog
       //   break;
       case 1: // Compass
         {
-          TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
+          // TDSetting.mExportStationsPrefix = ((CheckBox) findViewById( R.id.compass_prefix )).isChecked();
           TDSetting.mCompassSplays = ((CheckBox) findViewById( R.id.compass_splays )).isChecked();
           TDSetting.mSwapLR = ((CheckBox) findViewById( R.id.compass_swap_lr )).isChecked();
+          setExportPrefix( ((EditText) findViewById( R.id.compass_prefix )).getText() );
         }
         break;
       case 2: // CSurvey
@@ -245,6 +267,12 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
           TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
+          setExportPrefix( ((EditText) findViewById( R.id.vtopo_prefix )).getText() );
+        }
+        break;
+      case 13: // Winkarst
+        {
+          setExportPrefix( ((EditText) findViewById( R.id.winkarst_prefix )).getText() );
         }
         break;
       case 14: //CSV
@@ -279,7 +307,7 @@ public class ExportDialogShot extends MyDialog
    */
   private void initOptions()
   {
-    ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
+    // ((CheckBox) findViewById( R.id.compass_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     ((CheckBox) findViewById( R.id.compass_splays )).setChecked( TDSetting.mCompassSplays );
     ((CheckBox) findViewById( R.id.compass_swap_lr )).setChecked( TDSetting.mSwapLR );
 

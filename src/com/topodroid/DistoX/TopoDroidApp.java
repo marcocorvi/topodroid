@@ -2758,8 +2758,15 @@ public class TopoDroidApp extends Application
 
   // ==================================================================
   
-  // called by (ShotWindow and) SurveyWindow on export
-  boolean doExportDataAsync( Context context, Uri uri, int exportIndex, boolean toast )
+  /**
+   * @param context         conetxt
+   * @param uri             output URI
+   * @param exportIndex     export type
+   * @param exportPrefix    stationn names export prefix (Compass, VTopo, Winkarst
+   * @param toast           whether to toast a message
+   * @note called by (ShotWindow and) SurveyWindow on export
+   */
+  boolean doExportDataAsync( Context context, Uri uri, int exportIndex, String exportPrefix, boolean toast )
   {
     if ( exportIndex < 0 ) return false; // extra safety
     if ( exportIndex == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
@@ -2772,7 +2779,7 @@ public class TopoDroidApp extends Application
       // TDLog.v( "APP async-export survey " + TDInstance.survey + " Index " + exportIndex );
       String format = context.getResources().getString(R.string.saved_file_1);
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, toast )).execute();
+      (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, exportPrefix, toast )).execute();
     }
     return true;
   }

@@ -7188,7 +7188,12 @@ public class DrawingWindow extends ItemDrawer
   static private int mExportIndex;
   static private String mExportExt;
 
-  public void doExport( String export_type, String filename ) // EXPORT
+  /**
+   * @param type         export type
+   * @param filename     export filename
+   * @param prefix       station names export-prefix (not used)
+   */
+  public void doExport( String export_type, String filename, String prefix ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );

@@ -502,16 +502,17 @@ public class CalibActivity extends Activity
 
   /** export this caibration
    * @param type    export type (string)
-   * @param name    calib name (not used)
+   * @param name    calib filename (not used)
+   * @param prefix  station-prefix (not used)
    */
-  public void doExport( String type, String name )
+  public void doExport( String type, String name, String prefix )
   {
     int index = TDConst.calibExportIndex( type );
     if ( index >= 0 ) {
       // if ( TDSetting.mExportUri ) {
       //   selectExportFromProvider( index ); // TODO
       // } else {
-        doExport( index, name );
+        doMyExport( index, name );
       // }
     }
   }
@@ -520,7 +521,7 @@ public class CalibActivity extends Activity
    * @param exportType  integer export index 
    * @param name        calib name (not used)
    */
-  private void doExport( int exportType, String name )
+  private void doMyExport( int exportType, String name )
   {
     if ( TDInstance.cid < 0 ) {
       TDToast.makeBad( R.string.no_calibration );

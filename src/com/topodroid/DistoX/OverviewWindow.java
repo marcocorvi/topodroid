@@ -716,9 +716,10 @@ public class OverviewWindow extends ItemDrawer
   /** export the drawing
    * @param export_type   export file format
    * @param filename      export file "name"
+   * @param prefix        station name prefix (not used)
    * @note called by the ExportPlotDialog
    */
-  public void doExport( String export_type, String filename ) // EXPORT
+  public void doExport( String export_type, String filename, String prefix ) // EXPORT
   {
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );

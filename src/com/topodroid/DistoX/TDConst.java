@@ -178,22 +178,22 @@ public class TDConst
 
   // ======= DATA EXPORT  ======
   public static final String[] mSurveyExportTypes = { "ZIP", 
-    "Compass",
+    "Compass",   // 1
     "cSurvey",
     "GHTopo",
     "Grottolf",
-    "PocketTopo",
+    "PocketTopo", // 5
     "Polygon",
     "Survex",
     "Therion",
     "Topo",
-    "TopoRobot",
+    "TopoRobot",  // 10
     "VisualTopo",
     "Walls", 
-    "WinKarst",
+    "WinKarst",   // 13
     "CSV",
     "DXF",
-    "KML",
+    "KML",        // 16
     "OziExplorer",
     "GeoJSON",
     "Shapefile"
