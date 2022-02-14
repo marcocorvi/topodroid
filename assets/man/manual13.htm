@@ -113,7 +113,7 @@ Supported data format are "normal" and "diving".<br>
 Data units are 'feet' and 'degrees' (converted to meters and degrees inside TopoDroid).<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>Station prefix</u>: if given it is appended to the station names</li>
+<li><u>Station prefix</u>: if given it is prepended to the station names</li>
 <li><u>Splays</u></li>
 <li><u>L/R swap</u></li>
 </ul>
@@ -203,7 +203,7 @@ Settings:<ul style="margin-top=0">
 <li><u>Trox</u> format. By default data are saved in "tro" format</li>
 <li><u>Splays</u></li>
 <li><u>LRUD at From</u></li>
-<li><u>Station prefix</u>: if given it is appended to the station names</li>
+<li><u>Station suffix</u>: if given it is appended to the station names</li>
 </ul>
 <br><p>
 
@@ -215,7 +215,7 @@ Data units follow the user options.<br><p>
 Survey data can be exported as <i>WinKarst</i> files (untested).<br><p>
 
 Settings:<ul style="margin-top=0">
-<li><u>Station prefix</u>: if given it is appended to the station names</li>
+<li><u>Station prefix</u>: if given it is prepended to the station names</li>
 </ul>
 <br><p>
 
@@ -605,7 +605,7 @@ otherwise only the user-chosen stations are included</li>
 <li><b>Therion</b> <i>map commands</i> before or after the centerline block [after]</li>
 <li><b>Therion</b> <i>auto-stations</i>: automatically add station points to the therion sketch file(s) [yes]. If you want to use the sketch files in therion they must have station points to define their scale. You can choose manually which point to add (by editing the sketch drawing), or let TopoDroid add the stations. The program will add all the stations that are "inside" the drawing (inside the drawing convex hull).</li>
 <li><b>Therion</b> <i>splays</i> lines in Therion scraps [yes]</li>
-<li><b>cSurvey/Compass</b> <i>survey prefix</i> to the stations [no]</li>
+<li><b>cSurvey</b> <i>survey prefix</i> to the stations [no]</li>
 <li><b>Compass/TopoRobot/WinKarst/Polygon/VisualTopo</b>
   <ul>
   <li>minimum <i>splay-leg angle</i> for LRUD computation [0.0] This is also used in <b>Survex/Therion</b> if LRUD are required.</li>

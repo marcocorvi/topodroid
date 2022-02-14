@@ -1012,6 +1012,8 @@
     <string name="export_lrud_from">测量点的左右上下</string>
     <string name="export_maps">地图在数据之前</string>
     <string name="export_prefix">测量点名称里的洞穴前缀</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">往返</string>
     <string name="export_scale_png">分辨率</string>
     <string name="export_scale_th">比例 1 :</string>

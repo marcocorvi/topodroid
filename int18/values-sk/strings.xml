@@ -1018,6 +1018,8 @@ Refer to the web pages for details.\n
     <string name="export_lrud_from">LRUD na POČIATOČNOM staničení</string>
     <string name="export_maps">Mapy pred dátami</string>
     <string name="export_prefix">Cave-prefix v staničeniach</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_scale_png">Rozlíšenie</string>
     <string name="export_scale_th">Mierka 1 :</string>

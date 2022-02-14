@@ -148,10 +148,10 @@
       android:layout_height="wrap_content"
       android:text="@string/export_lrud_from"
       />
-    <EditText android:id="@+id/vtopo_prefix"
+    <EditText android:id="@+id/vtopo_suffix"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:hint="@string/export_prefix_hint"
+      android:hint="@string/export_suffix_hint"
       />
   </LinearLayout>
 

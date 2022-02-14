@@ -1011,6 +1011,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_lrud_from">LRUD alla stazione DA</string>
     <string name="export_maps">Mappa prima dei dati</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">Andata e Ritorno</string>
     <string name="export_scale_png">Risoluzione</string>
     <string name="export_scale_th">Scala 1 :</string>

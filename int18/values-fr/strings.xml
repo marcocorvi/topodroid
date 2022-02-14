@@ -998,6 +998,8 @@ Refer to the web pages for details.\n
     <string name="export_lrud_from">GDHB liées à la station DEPUIS</string>
     <string name="export_maps">Les cartes avant les données</string>
     <string name="export_prefix">Préfixe de la cavité inclus dans les noms de stations</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <!-- TODO string name="export_roundtrip">Roundtrip</string -->
     <string name="export_scale_png">Résolution</string>
     <string name="export_scale_th">Echelle 1 :</string>

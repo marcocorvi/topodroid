@@ -1018,6 +1018,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="export_lrud_from">LRUD an der Ausgangsstation</string>
     <string name="export_maps">Pläne/Karten vor Daten</string>
     <string name="export_prefix">Name der Vermessung in Messpunkten</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">Rundschluss</string>
     <string name="export_scale_png">Auflösung</string>
     <string name="export_scale_th">Massstab 1 :</string>

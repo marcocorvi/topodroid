@@ -1001,6 +1001,8 @@
     <string name="export_lrud_from">ЛПВН на пикете ОТ</string>
     <string name="export_maps">Блок map до данных съёмки</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
+    <!-- TODO string name="export_prefix_hint">prefix</string -->
+    <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_scale_png">Разрешение</string>
     <string name="export_scale_th">Масштаб 1 :</string>

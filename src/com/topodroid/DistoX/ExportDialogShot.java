@@ -267,7 +267,7 @@ public class ExportDialogShot extends MyDialog
           TDSetting.mVTopoTrox = ((CheckBox) findViewById( R.id.vtopo_trox )).isChecked();
           TDSetting.mVTopoSplays = ((CheckBox) findViewById( R.id.vtopo_splays )).isChecked();
           TDSetting.mVTopoLrudAtFrom = ((CheckBox) findViewById( R.id.vtopo_lrud )).isChecked();
-          setExportPrefix( ((EditText) findViewById( R.id.vtopo_prefix )).getText() );
+          setExportPrefix( ((EditText) findViewById( R.id.vtopo_suffix )).getText() );
         }
         break;
       case 13: // Winkarst
