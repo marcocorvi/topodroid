@@ -335,8 +335,8 @@ public class TDSetting
 
   public static int mImportDatamode    = 0;  // SurveyInfo.DATAMODE_NORMAL
   // public static boolean mExportTcsx    = true;
-  public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE
-  public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
+  public static int mExportShotsFormat = -1; // DISTOX_EXPORT_NONE this is the preferred format on the shot export dialog
+  public static int mExportPlotFormat  = -1; // DISTOX_EXPORT_NONE this is the preferred format on the plot export dialog
   public static int mAutoExportPlotFormat  = -1; // DISTOX_EXPORT_NONE
   public static boolean mTherionMaps   = false;
   public static boolean mSvgRoundTrip  = false;
@@ -973,7 +973,7 @@ public class TDSetting
     mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
     mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
     mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
-    mExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    mAutoExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 

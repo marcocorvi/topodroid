@@ -599,10 +599,11 @@ public class DrawingWindow extends ItemDrawer
   private float mAzimuth = 0.0f;
   private float mClino   = 0.0f;
   private float mIntersectionT = -1.0f; // intersection abscissa for leg xsections
-  // private int   mSectionSkip = 0;       // number of splays to skip in section refresh
   private PointF mOffset  = new PointF( 0f, 0f );
   private PointF mDisplayCenter;
   private float mZoom  = 1.0f;
+  private PointF mSavedOffset  = new PointF( 0f, 0f );
+  private float mSavedZoom  = 1.0f;
 
   private boolean mModified; // whether the sketch has been modified 
 
@@ -2327,6 +2328,8 @@ public class DrawingWindow extends ItemDrawer
   private int mSavedMode;
   // private int mSplayMode;
 
+  /** reset the status mode(s) to the default values
+   */
   private void resetStatus()
   {
     mSectionName  = null; 
@@ -2339,6 +2342,8 @@ public class DrawingWindow extends ItemDrawer
     setMenuAdapter( getResources(), mType );
   }
   
+  /** restore the saved status
+   */
   private void popInfo()
   {
     // TODO save plot offset and zoom
@@ -2351,6 +2356,9 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
+    mOffset.x = mSavedOffset.x;
+    mOffset.y = mSavedOffset.y;
+    mZoom     = mSavedZoom;
     PlotInfo plot = ( mSavedType == PlotType.PLOT_PLAN )? mPlot1 : mPlot2;
     mType    = plot.type;
     mName    = plot.name;
@@ -2370,11 +2378,25 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
+  /** push the status info when a xsectin is opened
+   * @param type    xsection type
+   * @param name    xsection name
+   * @param from    xsection from string
+   * @param to      xsection to string
+   * @param azimuth xsection azimuth
+   * @param clino   xsection clino
+   * @param tt      xsection leg-intersection, only for single-leg xsections
+   * @param center  xsection center, only for multileg xsections
+   */
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
     // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
     TDLog.v( "push info - curent line " + mCurrentLine );
     mSavedType = mType;
+    mSavedOffset.x = mOffset.x;
+    mSavedOffset.y = mOffset.y;
+    mSavedZoom     = mZoom;
+
     mName = mName3 = name;
     mFullName3 = TDInstance.survey + "-" + mName;
     mType    = type;
@@ -2397,6 +2419,9 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
+  /** update the display of the splays - for XSections
+   * @param mode  splay display mode
+   */
   private void updateSplays( int mode )
   {
     mApp.mSplayMode = mode;
@@ -2445,8 +2470,11 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays ); // not necessary ?
   }
 
-
-  // called by PlotListDialog
+  /** switch to another plot
+   * @param name   the other plot name
+   * @param type   the other plot type
+   * @note called by PlotListDialog
+   */
   void switchNameAndType( String name, long tt ) // SWITCH
   {
     // TopoDroidApp.mShotWindow.setRecentPlot( name, tt );
@@ -2518,6 +2546,8 @@ public class DrawingWindow extends ItemDrawer
 
   // ==============================================================
 
+  /** lifecycle: RESUME
+   */
   @Override
   protected synchronized void onResume()
   {
@@ -2532,6 +2562,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on resume done");
   }
 
+  /** lifecycle: PAUSE
+   */
   @Override
   protected synchronized void onPause() 
   { 
@@ -2541,6 +2573,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on pause done");
   }
 
+  /** lifecycle: START
+   */
   @Override
   protected synchronized void onStart()
   {
@@ -2556,6 +2590,8 @@ public class DrawingWindow extends ItemDrawer
     closeMenu();
   }
 
+  /** lifecycle: STOP
+   */
   @Override
   protected synchronized void onStop()
   {
@@ -2566,6 +2602,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on stop done");
   }
 
+  /** lifecycle: DESTROY
+   */
   @Override
   protected synchronized void onDestroy()
   {
@@ -2582,6 +2620,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "drawing activity on destroy done");
   }
 
+  /** lifecycle: implement RESUME
+   */
   private void doResume() // restoreInstanceFromData
   {
     // TDLog.v( "doResume()" );
@@ -2601,6 +2641,8 @@ public class DrawingWindow extends ItemDrawer
     setPlotType( mType );
   }
 
+  /** lifecycle: implement PAUSE
+   */
   private void doPause() // saveInstanceToData
   {
     switchZoomCtrl( 0 );
@@ -2687,18 +2729,17 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("doRestart " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
     List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
-    if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
-      // TDLog.v("doRestart section T " + mIntersectionT + " " + mPlot3.intercept );
+    if ( list != null && list.size() > 0 ) {
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
         TDLog.v("restart multileg list " + list.size() );
-        makeSectionReferences( list, mPlot3.center );
+        makeMultilegSectionReferences( list, mPlot3.center );
       } else {
         if ( mIntersectionT != mPlot3.intercept ) {
           // TDLog.v( "do restart section - update intercept T " + mIntersectionT + " " + mPlot3.intercept);
           mPlot3.intercept = mIntersectionT;
           mApp_mData.updatePlotIntercept( mPlot3.id, TDInstance.sid, mIntersectionT );
         }
-        makeSectionReferences( list, mPlot3.intercept, 0 /* mSectionSkip */ );
+        makeSinglelegSectionReferences( list, mPlot3.intercept );
       }
     }
   }
@@ -2771,7 +2812,7 @@ public class DrawingWindow extends ItemDrawer
           mPlot3.center = center;
           mApp_mData.updatePlotCenter( mPlot3.id, mSid, center );
         }
-        makeSectionReferences( list, mPlot3.center );
+        makeMultilegSectionReferences( list, mPlot3.center );
       } else {
         // TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
         if ( tt != mPlot3.intercept ) {
@@ -2780,7 +2821,7 @@ public class DrawingWindow extends ItemDrawer
           mPlot3.intercept = tt;
         }
         // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
-        makeSectionReferences( list, mPlot3.intercept, 0 );
+        makeSinglelegSectionReferences( list, mPlot3.intercept );
       } 
     }
     // TDLog.TimeEnd("do start done");
@@ -2797,16 +2838,15 @@ public class DrawingWindow extends ItemDrawer
   /** make the refrence for a leg/at-station xsection
    * @param list   list of shots of the section
    * @param tt     abscissa of the leg intercept
-   * @param skip   control param about how to make the reference (?)
    * @note called by doRestart, doStart, doRecover
    */
-  private void makeSectionReferences( List< DBlock > list, float tt, int skip )
+  private void makeSinglelegSectionReferences( List< DBlock > list, float tt )
   {
 
     assert( mLastLinePath == null); // not needed - guaranteed by callers
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
-    // TDLog.v( "section list " + list.size() + " tt " + tt + " skip " + skip + " azimuth " + mAzimuth + " clino " + mClino );
+    // TDLog.v( "section list " + list.size() + " tt " + tt + " azimuth " + mAzimuth + " clino " + mClino );
     mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)mType );
     float xfrom=0;
     float yfrom=0;
@@ -2834,92 +2874,97 @@ public class DrawingWindow extends ItemDrawer
     float xn = 0;  // X-North // Rotate as NORTH is upward
     float yn = -1; // Y-North
 
-    float xtt = 0; // x-section center (intersection point)
-    float ytt = 0;
-    float ztt = 0;
+    float xc = 0; // center
+    float yc = 0;
 
-    if ( skip == 0 ) {
-      if ( PlotType.isLegSection( mType ) ) {
-        if ( mType == PlotType.PLOT_H_SECTION ) {
-          if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
-            // FIXME_VECTOR
-            // xn =  X1;
-            // yn = -X2;
-            xn =  V1.x;
-            yn = -V2.x; 
+    if ( PlotType.isLegSection( mType ) ) {
+      if ( mType == PlotType.PLOT_H_SECTION ) {
+        if ( Math.abs( mClino ) > TDSetting.mHThreshold ) { // north arrow == (1,0,0), 5 m long in the CS plane
+          // FIXME_VECTOR
+          // xn =  X1;
+          // yn = -X2;
+          xn =  V1.x;
+          yn = -V2.x; 
 
-            float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
-            if ( mClino > 0 ) xn = -xn;
-            // FIXME_NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
-            // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
-            // if ( mLandscape ) {
-            //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
-            // } else {
-              addFixedSpecial( 0, -d, 0, 0 ); // NORTH is upward
-            // }
-          }
+          float d = 5 / (float)Math.sqrt(xn*xn + yn*yn);
+          if ( mClino > 0 ) xn = -xn;
+          // FIXME_NORTH addFixedSpecial( xn*d, yn*d, 0, 0, 0, 0 ); 
+          // addFixedSpecial( 0, -d, 0, 0, 0, 0 ); // NORTH is upward
+          // if ( mLandscape ) {
+          //   addFixedSpecial( -d, 0, 0, 0 ); // NORTH is leftward
+          // } else {
+            addFixedSpecial( 0, -d, 0, 0 ); // NORTH is upward
+          // }
         }
-        for ( DBlock b : list ) {
-          if ( b.isSplay() ) continue;
-          if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
-            dist = b.mLength;
-            blk = b;
-            break;
-          } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
-            dist = - b.mLength;
-            blk = b;
-            break;
-          }
-        }
-        if ( blk != null ) {
-	  TDVector v = blk.getUnitVector( );
-          xfrom = -dist * v.dot(V1); // neg. because it is the FROM point
-          yfrom =  dist * v.dot(V2);
-
-          if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
-            float xx = -yn * xfrom + xn * yfrom;
-            yfrom = -xn * xfrom - yn * yfrom;
-            xfrom = xx;
-          }
-          addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
-          mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
-          mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
-          if ( tt >= 0 && tt <= 1 ) {
-            zfrom =  dist * v.dot(V0);
-            xtt = xfrom + tt * ( xto - xfrom );
-            ytt = yfrom + tt * ( yto - yfrom );
-            ztt = zfrom + tt * ( zto - zfrom );
-            if ( mLandscape ) { float t=xtt; xtt=-ytt; ytt=t; }
-            TDLog.v( "TT " + tt + " X " + xtt + " " + xfrom + " " + xto + " Y " + ytt + " " + yfrom + " " + yto );
-            // makeXSectionLegPoint( xtt, ytt );
-
-            DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xtt,ytt), DrawingUtil.toSceneY(xtt,ytt), DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
-            mDrawingSurface.addDrawingDotPath( path );
-          }
-        }
-      } else { // if ( PlotType.isStationSection( mType ) ) 
-        mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
       }
+      for ( DBlock b : list ) {
+        if ( b.isSplay() ) continue;
+        if ( mFrom.equals( b.mFrom ) && mTo.equals( b.mTo ) ) { // FROM --> TO
+          dist = b.mLength;
+          blk = b;
+          break;
+        } else if ( mFrom.equals( b.mTo ) && mTo.equals( b.mFrom ) ) { // TO --> FROM
+          dist = - b.mLength;
+          blk = b;
+          break;
+        }
+      }
+      if ( blk != null ) {
+        float dfrom = dist;
+        float dto   = 0;
+        if ( tt >= 0 && tt <= 1 ) {
+          dfrom = dist * tt;
+          dto   = dist * ( 1 - tt );
+
+          DrawingSpecialPath path = new DrawingSpecialPath( DrawingSpecialPath.SPECIAL_DOT, DrawingUtil.toSceneX(xc,yc), DrawingUtil.toSceneY(xc,yc),
+                                                            DrawingLevel.LEVEL_DEFAULT, mDrawingSurface.scrapIndex() );
+          mDrawingSurface.addDrawingDotPath( path );
+        }
+
+        TDVector v = blk.getUnitVector( );
+        xfrom = -dfrom * v.dot(V1); // neg. because it is the FROM point
+        yfrom =  dfrom * v.dot(V2);
+        zfrom =  dfrom * v.dot(V0);
+        xto =  dto * v.dot(V1);
+        yto = -dto * v.dot(V2);
+        zto = -dto * v.dot(V0);
+
+        TDLog.v( "TT " + tt + " X " + xfrom + " " + xto + " Y " + yfrom + " " + yto );
+
+        if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
+          float xx = -yn * xfrom + xn * yfrom;
+          yfrom = -xn * xfrom - yn * yfrom;
+          xfrom = xx;
+          xx  = -yn * xto + xn * yto;
+          yto = -xn * xto - yn * yto;
+          xto = xx;
+        }
+        addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
+        mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
+        mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
+
+      }
+    } else { // if ( PlotType.isStationSection( mType ) ) 
+      mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
     }
+    
     // TDLog.v( "From " + xfrom + " " + yfrom + " " + zfrom );
     // TDLog.v( "To   " + xto + " " + yto + " " + zto );
-    // TDLog.v( "TT   " + xtt + " " + ytt + " " + ztt );
 
     // using distance of splay endpoint from xsection plane
     // V0 = normal to the plane
-    // (xtt,ytt,ztt) center of the plane
 
     int cnt = 0;
+    float x0 = 0;
+    float y0 = 0;
+    float z0 = 0;
     for ( DBlock b : list ) { // repeat for splays
       ++cnt;
-      if ( cnt < skip || ! b.isSplay() ) {
-        // TDLog.v("cnt " + cnt + " skip " + skip + " is splay " + b.isSplay() + " " + b.getBlockType() );
+      if ( ! b.isSplay() ) {
+        // TDLog.v("cnt " + cnt + " is splay " + b.isSplay() + " " + b.getBlockType() );
         continue;
       }
   
-      float x0 = xto;
-      float y0 = yto;
-      float z0 = zto;
       int splay_station = 3; // could use a boolean
       if ( b.mFrom.equals( mFrom ) ) {
         splay_station = 1;
@@ -2929,6 +2974,9 @@ public class DrawingWindow extends ItemDrawer
         // if ( TDSetting.mSectionStations == 2 ) continue;
       } else if ( b.mFrom.equals( mTo ) ) {
         splay_station = 2;
+        x0 = xto;
+        y0 = yto;
+        z0 = zto;
         // if ( TDSetting.mSectionStations == 1 ) continue;
       } else {
         continue;
@@ -2936,14 +2984,15 @@ public class DrawingWindow extends ItemDrawer
 
       float d = b.mLength;
       TDVector v = b.getUnitVector( );
+
       float x =  d * v.dot(V1);
       float y = -d * v.dot(V2);
       // float a = 90 - (float)(Math.acos( v.dot(V0) ) * TDMath.RAD2DEG); // cos-angle with the normal
 
       // splay endpoint
-      x0 += d * v.dot(V1) - xtt;
-      y0 += d * v.dot(V2) - ytt;
-      z0 += d * v.dot(V0) - ztt;
+      x0 += d * v.dot(V1);
+      y0 += d * v.dot(V2);
+      z0 += d * v.dot(V0);
       float d0 = ( x0*x0 + y0*y0 + z0*z0 );
       float a = (d0 > 0)? 90 - (float)(Math.abs( z0 ) / Math.sqrt( d0 )) : 90;
       
@@ -2965,10 +3014,8 @@ public class DrawingWindow extends ItemDrawer
     // mSectionSkip = cnt;
     // mDrawingSurface.setScaleBar( mCenter.x, mCenter.y ); // (90,160) center of the drawing
 
-    // float x0 = 0; // DrawingUtil.toSceneX(xtt,ytt); // grid offset [scene ref.]
-    // float y0 = 0; // DrawingUtil.toSceneY(xtt,ytt);
     // TDLog.v("X0 " + x0 + " " + y0 + " grid unit " + TDSetting.mUnitGrid );
-    DrawingUtil.addGrid( -10, 10, -10, 10, xtt, ytt, 0, 0, mDrawingSurface ); // FIXME_SK moved out
+    DrawingUtil.addGrid( -10, 10, -10, 10, xc, yc, 0, 0, mDrawingSurface ); // FIXME_SK moved out
     mDrawingSurface.commitReferences();
   }
 
@@ -2977,7 +3024,7 @@ public class DrawingWindow extends ItemDrawer
    * @param center center
    * @note called by doRestart, doStart, doRecover
    */
-  private void makeSectionReferences( List< DBlock > list, Vector3D center )
+  private void makeMultilegSectionReferences( List< DBlock > list, Vector3D center )
   {
 
     assert( mLastLinePath == null); // not needed - guaranteed by callers
@@ -3226,8 +3273,8 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** save the current refernce in the plot info struct (and the database)
-   * @param plot info struct
-   * @param pid  plot ID
+   * @param plot    sketch info struct
+   * @param pid     plot ID
    * @note called by updateReefernce and moveTo
    */
   private void saveReference( PlotInfo plot, long pid )
@@ -3241,7 +3288,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** restore the current refernce from the plot info struct 
-   * @param plot info struct
+   * @param plot    sketch info struct
    */
   private void resetReference( PlotInfo plot )
   {
@@ -3321,7 +3368,10 @@ public class DrawingWindow extends ItemDrawer
     } 
   }
 
-  // x,y scene points
+  /** execute an esase action
+   * @param x    X coordinate of the erase action (scene frame)
+   * @param y    Y coordinate of the erase action (scene frame)
+   */
   private void doEraseAt( float x, float y )
   {
     if ( mLandscape ) { float t=x; x=-y; y=t; }
@@ -3329,6 +3379,11 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** update the name of a data block
+   * @param block   shot data block
+   * @param from    new FROM station 
+   * @param to      new TO station 
+   */
   void updateBlockName( DBlock block, String from, String to )
   {
     // if ( mFullName2 == null ) return; // nothing for PLOT_SECTION or PLOT_H_SECTION
@@ -3351,6 +3406,10 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
  
+  /** update the comment of a data block
+   * @param block   shot data block
+   * @param comment new comment
+   */
   void updateBlockComment( DBlock block, String comment ) 
   {
     if ( comment.equals( block.mComment ) ) return;
@@ -3358,6 +3417,11 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updateShotComment( block.mId, mSid, comment );
   }
 
+  /** update the flag of a data block
+   * @param blk   shot data block
+   * @param flag  new flag
+   * @param shot  drawing path of the data block
+   */
   void updateBlockFlag( DBlock blk, long flag, DrawingPath shot )
   {
     if ( blk.getFlag() == flag ) return;
@@ -3369,6 +3433,10 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updateShotFlag( blk.mId, mSid, flag );
   }
   
+  /** update the data block leg to NORMAL
+   * @param blk   shot data block
+   * @param shot  drawing path of the data block
+   */
   void clearBlockSplayLeg( DBlock blk, DrawingPath shot )
   {
     // TDLog.v( "clear splay leg " + blk.mId + "/" + mSid + " reset shot paint ");
@@ -3381,7 +3449,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // called be DrawingShotDialog and onTouch
+  /** update the "extend" of a data block
+   * @param block   shot data block
+   * @param extend  integer extend
+   * @param stretch fractional part of the extend
+   * @note called be DrawingShotDialog and onTouch
+   */
   void updateBlockExtend( DBlock block, int extend, float stretch )
   {
     // if ( ! block.isSplay() ) extend -= ExtendType.EXTEND_FVERT;
@@ -3391,8 +3464,9 @@ public class DrawingWindow extends ItemDrawer
     recomputeProfileReference();
   }
 
-  // only PLOT_EXTENDED ( not PLOT_PROJECTED )
-  // used only when a shot extend is changed
+  /** recompute the plot centerline in profile view - only PLOT_EXTENDED ( not PLOT_PROJECTED )
+   * @note used only when a shot extend is changed
+   */
   private void recomputeProfileReference()
   {
     // TDLog.v("recomputeProfileReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3410,6 +3484,11 @@ public class DrawingWindow extends ItemDrawer
     } 
   }
 
+  /** delete a splay
+   * @param p    drawing path of the splay
+   * @param sp   selected point of the shot
+   * @param blk  shot data block
+   */
   private void deleteSplay( DrawingSplayPath p, SelectionPoint sp, DBlock blk )
   {
     mDrawingSurface.deleteSplay( p, sp ); 
@@ -3419,6 +3498,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** delete a drawing point
+   * @param point   drawing point item
+   */
   private void deletePoint( DrawingPointPath point )
   {
     if ( point == null ) return;
@@ -3440,6 +3522,10 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** split a line
+   * @param line   drawing line item
+   * @param point  splitting point
+   */
   private void splitLine( DrawingLinePath line, LinePoint point )
   {
     mDrawingSurface.splitLine( line, point );
@@ -3448,6 +3534,11 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** remove a line point
+   * @param line   drawing line item
+   * @param point  point to remove
+   * @param sp     selected point of the point to remove
+   */
   private void removeLinePoint( DrawingPointLinePath line, LinePoint point, SelectionPoint sp ) 
   {
     if (  mDrawingSurface.removeLinePoint(line, point, sp) ) {
@@ -3455,7 +3546,11 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // used to remove the last point of a line
+  /** remove a line point
+   * @param line   drawing line item
+   * @param point  point to remove
+   * @note used to remove the last point of a line
+   */
   void removeLinePointFromSelection( DrawingLinePath line, LinePoint point )
   {
     if (  mDrawingSurface.removeLinePointFromSelection(line, point ) ) {
@@ -3463,8 +3558,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // @param xs_id      section-line id 
-  // @param scrap_name xsection scrap_name = survey_name + "-" + xsection_id
+  /** delete a line
+   * @param line   drawing line item to delete
+   */
   void deleteLine( DrawingLinePath line ) 
   { 
     if ( BrushManager.isLineSection( line.mLineType ) ) {
@@ -3477,6 +3573,9 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** delete a xsection line
+   * @param line   drawing line item to delete
+   */
   private void deleteSectionLine( DrawingLinePath line )
   {
     String xs_id = line.getOption( "-id" );
@@ -3496,6 +3595,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** make a line sharper
+   * @param line   drawing line item to sharpen
+   */
   void sharpenLine( DrawingLinePath line )
   {
     // TDLog.v("sharpenLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3504,6 +3606,10 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** reduce the points of a line 
+   * @param line         drawing line item to reduce
+   * @param decimation   out of how many points to keep one
+   */
   void reduceLine( DrawingLinePath line, int decimation )
   {
     // TDLog.v("reduceLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3512,6 +3618,9 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** make a line "rocky"
+   * @param line   drawing line item to "rock"
+   */
   void rockLine( DrawingLinePath line )
   {
     // TDLog.v("rockLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3520,6 +3629,9 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** make a line closed
+   * @param line   drawing line item to close
+   */
   void closeLine( DrawingLinePath line )
   {
     // TDLog.v("closeLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3528,6 +3640,10 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
+  /** reduce the points of an area border
+   * @param area         drawing area item to reduce
+   * @param decimation   out of how many points to keep one
+   */
   void reduceArea( DrawingAreaPath area, int decimation )
   {
     // TDLog.v("reduceArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3536,7 +3652,9 @@ public class DrawingWindow extends ItemDrawer
     modified();
   }
 
-
+  /** delete an area
+   * @param area   drawing area item to delete
+   */
   private void deleteArea( DrawingAreaPath area )
   {
     // TDLog.v("deleteArea " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -5183,7 +5301,8 @@ public class DrawingWindow extends ItemDrawer
       modified();
     }
 
-
+    /** implement the plot delete
+     */
     private void doDelete()
     {
       mApp_mData.deletePlot( mPid1, mSid );
@@ -5719,6 +5838,8 @@ public class DrawingWindow extends ItemDrawer
       mPopupEdit.showAsDropDown(b); 
     }
 
+    /** dismiss the EDIT popup
+     */
     private boolean dismissPopupEdit()
     {
       if ( mPopupEdit != null ) {
@@ -5729,6 +5850,8 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
+    /** dismiss the erase/select FILTER popup
+     */
     public boolean dismissPopupFilter()
     {
       if ( mPopupFilter != null ) {
@@ -5739,6 +5862,8 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
+    /** dismiss the line JOIN popup
+     */
     public boolean dismissPopupJoin()
     {
       if ( mPopupJoin != null ) {
@@ -5749,6 +5874,8 @@ public class DrawingWindow extends ItemDrawer
       return false;
     }
 
+    /** dismiss the popups
+     */
     private int dismissPopups() 
     {
       if ( dismissPopupEdit() )         return DISMISS_EDIT;
@@ -6027,6 +6154,8 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
+  /** clear the selection of item/point
+   */
   private void clearSelected()
   {
     // TDLog.v("clearSelected " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -6038,6 +6167,9 @@ public class DrawingWindow extends ItemDrawer
     setButton3Item( null );
   }
 
+  /** react to a user tap
+   * @param view   tapped view
+   */
   @Override
   public void onClick(View view)
   {
@@ -6286,6 +6418,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** toggle the splay display mode
+   */
   private void toggleSplayMode()
   {
     if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
@@ -6295,10 +6429,14 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** ask confirmation to delete an item
+   * @param p    item to delete
+   * @param t    ... (not used)
+   * @param name item name
+   */
   private void askDeleteItem( final DrawingPath p, final int t, final String name )
   {
-    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
-                              String.format( getResources().getString( R.string.item_delete ), name ), 
+    TopoDroidAlertDialog.makeAlert( mActivity, getResources(), String.format( getResources().getString( R.string.item_delete ), name ), 
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
@@ -6327,6 +6465,11 @@ public class DrawingWindow extends ItemDrawer
     );
   }
 
+  /** ask confirmation to delete a splay
+   * @param p    splay path to delete
+   * @param sp   selection point corresponding to the splay path
+   * @param blk  splay data block
+   */
   private void askDeleteSplay( final DrawingSplayPath p, final SelectionPoint sp, final DBlock blk )
   {
     TopoDroidAlertDialog.makeAlert( mActivity, getResources(), 
@@ -7014,12 +7157,16 @@ public class DrawingWindow extends ItemDrawer
     mMenu.invalidate();
   }
 
+  /** close the menu popup
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** change the zoom to fit the drawing to the screen
+   */
   private void doZoomFit()
   {
     if ( mFixedZoom > 0 ) return;
@@ -7315,10 +7462,10 @@ public class DrawingWindow extends ItemDrawer
         if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
           if ( PlotType.isMultilegSection( mType, mTo ) ) {
             TDLog.v("recover multileg list " + list.size() );
-            makeSectionReferences( list, mPlot3.center );
+            makeMultilegSectionReferences( list, mPlot3.center );
           } else {
             // float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
-            makeSectionReferences( list, mPlot3.intercept, 0 );
+            makeSinglelegSectionReferences( list, mPlot3.intercept );
           }
         }
       } else {
