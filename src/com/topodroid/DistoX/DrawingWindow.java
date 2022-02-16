@@ -2070,7 +2070,7 @@ public class DrawingWindow extends ItemDrawer
 
     mApp  = (TopoDroidApp)getApplication();
     mActivity = this;
-    mApp_mData = TopoDroidApp.mData; // new DataHelper( this ); 
+    mApp_mData = TopoDroidApp.mData; 
     mMediaManager = new MediaManager( mApp_mData );
 
     mFormatClosure = getResources().getString(R.string.format_closure );

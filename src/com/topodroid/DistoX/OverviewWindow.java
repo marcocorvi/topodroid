@@ -490,7 +490,7 @@ public class OverviewWindow extends ItemDrawer
 
       setTheTitle();
 
-      mData         = TopoDroidApp.mData; // new DataHelper( this );
+      mData         = TopoDroidApp.mData; 
       Bundle extras = getIntent().getExtras();
       if ( extras == null ) { finish(); return; } // extra can be null [ Galaxy S7, Galaxy A30s ] 
       mSid          = extras.getLong( TDTag.TOPODROID_SURVEY_ID );

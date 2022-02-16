@@ -196,16 +196,17 @@ public class DataHelper extends DataSetObservable
   {
     // mApp     = app;
     // mListeners = listeners; // IF_COSURVEY
-    openDatabase( context );
+    this.openDatabase( context );
   }
 
   /** cstr
    * @param context context
    * @param db_path database pathname
+   * @note used only for moveTo6
    */
   public DataHelper( Context context, String db_path )
   {
-    openDatabase( context, db_path ); // true = readonly
+    this.openDatabaseWithPath( context, db_path );
   }
 
   /** close the database
@@ -226,38 +227,36 @@ public class DataHelper extends DataSetObservable
   void openDatabase( Context context )
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
-    if ( TopoDroidApp.hasTopoDroidDatabase() ) {
-      TDLog.v( "App has database helper " + db_name );
-      try {
-        myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
-        if ( myDB != null ) {
-          int oldVersion = myDB.getVersion();
-          int newVersion = TDVersion.DATABASE_VERSION;
-          TDLog.v( "opened existing database: old version " + oldVersion + " current version " + newVersion );
-          if ( oldVersion < newVersion ) {
-            DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-            myDB.setVersion( TDVersion.DATABASE_VERSION );
-          }
+    if ( myDB != null ) {
+      TDLog.v( "DB open: app already has database " + db_name );
+      return;
+    }
+    try {
+      TDLog.v("... try to open RW ");
+      myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
+      if ( myDB != null ) {
+        TDLog.v( "opened existing database");
+        int oldVersion = myDB.getVersion();
+        int newVersion = TDVersion.DATABASE_VERSION;
+        if ( oldVersion < newVersion ) {
+          TDLog.v( "update database: old version " + oldVersion + " current version " + newVersion );
+          DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+          myDB.setVersion( TDVersion.DATABASE_VERSION );
         }
-      } catch ( SQLiteException e ) {
-        TDLog.Error( "opened database error: " + e.getMessage() );
-        myDB = null;
-      }
-    } else {
-      TDLog.v( "App does not have database helper " + db_name + " - trying to open it");
-      try {
+      } else {
+        TDLog.v("... try to open RW and CREATE");
         myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
         if ( myDB != null ) {
           TDLog.v( "open and create new database if necessary");
           DistoXOpenHelper.createTables( myDB );
           myDB.setVersion( TDVersion.DATABASE_VERSION );
         } else {
-          TDLog.Error( "cannot open the database" );
+          TDLog.Error( "cannot open/create database" );
         }
-      } catch ( SQLiteException e ) {
-        TDLog.Error( "opened database error: " + e.getMessage() );
-        myDB = null;
       }
+    } catch ( SQLiteException e ) {
+      TDLog.Error( "opened database error: " + e.getMessage() );
+      myDB = null;
     }
   }
 
@@ -266,8 +265,9 @@ public class DataHelper extends DataSetObservable
    * @param db_name    database path
    *
    * open the database, if successful check if it needs updating
+   * @note the database is opened RW only to update the tables (if needed)
    */
-  private void openDatabase( Context context, String db_name )
+  private void openDatabaseWithPath( Context context, String db_name )
   {
     try {
       TDLog.v( "opened database " + db_name + ", skip check");
