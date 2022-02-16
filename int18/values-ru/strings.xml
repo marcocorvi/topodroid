@@ -522,8 +522,8 @@
     <string name="section_name">Комментарий сечения</string>
     <string name="scrap_outline">Контуры другого абриса</string>
     <string name="scrap_string">Абрис скрап: %1$d / %2$d</string>
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="section_point_not_allowed">точка сечения недопустима</string>
+    <string name="section_line_not_allowed">точка сечения недопустима</string>
 
     <!-- UNUSED string name="sensor">датчик</string -->
     <string name="sensor_gravity">ускорение</string>
@@ -1001,8 +1001,8 @@
     <string name="export_lrud_from">ЛПВН на пикете ОТ</string>
     <string name="export_maps">Блок map до данных съёмки</string>
     <string name="export_prefix">Добавлять префикс к номерам пикетов</string>
-    <!-- TODO string name="export_prefix_hint">prefix</string -->
-    <!-- TODO string name="export_suffix_hint">suffix</string -->
+    <string name="export_prefix_hint">префикс</string>
+    <string name="export_suffix_hint">суффикс</string>
     <string name="export_roundtrip">Roundtrip</string>
     <string name="export_scale_png">Разрешение</string>
     <string name="export_scale_th">Масштаб 1 :</string>
