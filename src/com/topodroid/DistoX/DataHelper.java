@@ -232,31 +232,45 @@ public class DataHelper extends DataSetObservable
       return;
     }
     try {
-      TDLog.v("... try to open RW ");
+      TDLog.v("DB ... try to open RW " + db_name);
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
-        TDLog.v( "opened existing database");
-        int oldVersion = myDB.getVersion();
-        int newVersion = TDVersion.DATABASE_VERSION;
-        if ( oldVersion < newVersion ) {
-          TDLog.v( "update database: old version " + oldVersion + " current version " + newVersion );
-          DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
-          myDB.setVersion( TDVersion.DATABASE_VERSION );
-        }
-      } else {
-        TDLog.v("... try to open RW and CREATE");
-        myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
-        if ( myDB != null ) {
-          TDLog.v( "open and create new database if necessary");
-          DistoXOpenHelper.createTables( myDB );
-          myDB.setVersion( TDVersion.DATABASE_VERSION );
-        } else {
-          TDLog.Error( "cannot open/create database" );
-        }
+        checkUpgrade();
+        return;
       }
     } catch ( SQLiteException e ) {
-      TDLog.Error( "opened database error: " + e.getMessage() );
+      // if it OK to fail
+      TDLog.Error( "ERROR DB open RW: " + e.getMessage() );
+    }
+    
+    try {
+      TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
+      if ( myDB != null ) {
+        TDLog.v( "DB opened: create tables");
+        DistoXOpenHelper.createTables( myDB );
+        myDB.setVersion( TDVersion.DATABASE_VERSION );
+      } else {
+        TDLog.Error( "ERROR DB failed open/create" );
+      }
+    } catch ( SQLiteException e ) {
+      TDLog.Error( "ERROR DB open/create: " + e.getMessage() );
       myDB = null;
+    }
+  }
+
+  /** check if the database need upgrading - in case upgrade it
+   */
+  private void checkUpgrade()
+  {
+    int oldVersion = myDB.getVersion();
+    int newVersion = TDVersion.DATABASE_VERSION;
+    boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
+    TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
+    if ( oldVersion < newVersion ) {
+      TDLog.v( "DB updating tables ...");
+      DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
+      myDB.setVersion( TDVersion.DATABASE_VERSION );
     }
   }
 
@@ -270,19 +284,20 @@ public class DataHelper extends DataSetObservable
   private void openDatabaseWithPath( Context context, String db_name )
   {
     try {
-      TDLog.v( "opened database " + db_name + ", skip check");
+      TDLog.v( "BD-path open " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         int oldVersion = myDB.getVersion();
         int newVersion = TDVersion.DATABASE_VERSION;
-        TDLog.v( "opened readonly database: old version " + oldVersion + " current version " + newVersion );
+        TDLog.v( "DB-path version: " + oldVersion + " -> " + newVersion );
         if ( oldVersion < newVersion ) {
+          TDLog.v( "DB-path updating tables ...");
           DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
           myDB.setVersion( TDVersion.DATABASE_VERSION );
         }
       }
     } catch ( SQLiteException e ) {
-      TDLog.Error( "opened database error: " + e.getMessage() );
+      TDLog.Error( "ERROR DB-path open: " + e.getMessage() );
       myDB = null;
     }
   }
@@ -3742,11 +3757,11 @@ public class DataHelper extends DataSetObservable
       return;
     }
     if ( key == null || key.length() == 0 ) {
-      TDLog.Error( "Data Helper::setValue null key");
+      TDLog.Error( "DB config: null key");
       return;
     }
     if ( value == null || value.length() == 0 ) {
-      TDLog.Error( "Data Helper::setValue null value");
+      TDLog.Error( "DB config: null value");
       return;
     }
 
@@ -3772,7 +3787,7 @@ public class DataHelper extends DataSetObservable
           myDB.insert( CONFIG_TABLE, null, cv );
         }
       } else {
-        TDLog.Error( "set value cannot get cursor" );
+        TDLog.Error( "DB config: cannot get cursor for " + key + " " + value );
       }
       myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e ); 
@@ -3912,7 +3927,7 @@ public class DataHelper extends DataSetObservable
               int k = Integer.parseInt( name.substring( prefix_length ) );
               if ( k >= max ) max = k+1;
             } catch ( NumberFormatException e ) {
-              TDLog.Error( "getNextSectionId parse Int error: survey ID " + sid );
+              TDLog.Error( "DB getNextSectionId parse Int error: survey ID " + sid );
             }
           }
         } while (cursor.moveToNext());
@@ -4744,7 +4759,7 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       String query = String.format("SELECT name FROM %s WHERE name='%s' COLLATE NOCASE", table, name );
-      TDLog.v("quey string <" + query + ">" );
+      TDLog.v("DB query string <" + query + ">" );
       cursor = myDB.rawQuery( query, new String[] { } );
       ret = ( cursor != null && cursor.moveToFirst() ); 
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -5414,7 +5429,7 @@ public class DataHelper extends DataSetObservable
            myDB.update( SURVEY_TABLE, cv, "id=?", new String[]{ Long.toString(sid) } );
 
            while ( (line = br.readLine()) != null ) {
-             TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
+             // TDLog.Log( TDLog.LOG_DB, "load from file: " + line );
              vals = line.split(" ", 4);
              table = vals[2];
              v = vals[3];
@@ -5875,7 +5890,7 @@ public class DataHelper extends DataSetObservable
       }
       db.setTransactionSuccessful();
       db.endTransaction();
-      TDLog.Error( "Updated symbols: " + pt + " points, " + ln + " lines, " + ar + " areas");
+      // TDLog.v( "DB updated symbols: " + pt + " points, " + ln + " lines, " + ar + " areas");
     } catch ( SQLException e ) { TDLog.Error( "updateSymbolKeys exception: " + e.getMessage() );
     }
   }
@@ -5908,7 +5923,7 @@ public class DataHelper extends DataSetObservable
 
      static void createTables( SQLiteDatabase db )
      {
-       TDLog.Log( TDLog.LOG_DB, "BD open helper - create tables");
+       // TDLog.Log( TDLog.LOG_DB, "BD open helper - create tables");
        try {
           // db.setLockingEnabled( false );
           db.beginTransaction();
@@ -6123,7 +6138,7 @@ public class DataHelper extends DataSetObservable
      static void updateTables( SQLiteDatabase db, int oldVersion, int newVersion)
      {
         // FIXME this is called at each start when the database file exists
-        TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
+        // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
