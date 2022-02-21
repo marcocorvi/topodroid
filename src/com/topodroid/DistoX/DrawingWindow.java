@@ -1086,11 +1086,13 @@ public class DrawingWindow extends ItemDrawer
 
   /** @return true if the index refers to the point "section" and the plot is a xsection
    * @param index   point index (in the symbol library)
+   * @note section point is always forbidden
    */
   @Override
   public boolean forbidPointSection( int index )
   {
-    return PlotType.isAnySection( mType ) && BrushManager.isPointSection( index );
+    // return PlotType.isAnySection( mType ) && BrushManager.isPointSection( index );
+    return BrushManager.isPointSection( index );
   }
 
   /** @return true if the index refers to the line "section" and the plot is a xsection

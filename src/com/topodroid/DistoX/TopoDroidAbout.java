@@ -45,7 +45,7 @@ class TopoDroidAbout extends Dialog
     setContentView(R.layout.welcome);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
-    setTitle( String.format( context.getResources().getString(R.string.welcome_title), TDVersion.string() ) );
+    setTitle( String.format( context.getResources().getString(R.string.welcome_title), TDVersion.fullString() ) );
 
     ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
     ((Button)findViewById(R.id.btn_manual)).setOnClickListener( this );

@@ -103,7 +103,12 @@ public class Symbol implements SymbolInterface
 
   // ------------------------------------------------------------------------
 
-  /** @return the symplo default options
+  /** @return true if the symbol (therion name) is "section"
+   * @note used by ItemDrawer updateRecentPoint
+   */
+  boolean isSection() { return mThName.equals("section"); }
+
+  /** @return the symbol default options
    */
   public String getDefaultOptions() { return mDefaultOptions; }
 

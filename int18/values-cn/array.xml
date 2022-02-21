@@ -370,7 +370,7 @@
      <item name="large">大</item>
   </string-array>
 
-  <!-- UNUSED string-array name="demReduce">
+  <!-- TODO string-array name="demReduce">
      <item name="shrink">Subsample</item>
      <item name="cut">Clip</item>
   </string-array -->

@@ -283,10 +283,10 @@
      <item name="large">Grande</item>
   </string-array -->
 
-  <!-- UNUSED string-array name="demReduce">
+  <string-array name="demReduce">
      <item name="shrink">Submuestra</item>
      <item name="cut">Cortar</item>
-  </string-array -->
+  </string-array>
 
   <!-- TODO string-array name="splayUse">
      <item name="skip">Saltar</item>

@@ -24,6 +24,8 @@ import android.content.pm.PackageInfo;
 
 public class TDVersion 
 {
+  public static int TARGET_SDK = 0;
+
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
   public static final String SYMBOL_VERSION = "37";
@@ -59,6 +61,7 @@ public class TDVersion
   public static final int CODE_MIN  = 20101;
   
   public static String string()  { return VERSION; }
+  public static String fullString() { return VERSION + "-" + TARGET_SDK; }
   public static int    code()    { return VERSION_CODE; }
   public static String symbols() { return SYMBOL_VERSION; }
 
@@ -91,7 +94,9 @@ public class TDVersion
   public static boolean setVersion( Context context )
   {
     // TDLog.Profile("TDApp onCreate");
+
     try {
+      TARGET_SDK   = context.getApplicationInfo().targetSdkVersion;
       VERSION      = context.getPackageManager().getPackageInfo( context.getPackageName(), 0 ).versionName;
       VERSION_CODE = context.getPackageManager().getPackageInfo( context.getPackageName(), 0 ).versionCode;
       int v = VERSION_CODE;

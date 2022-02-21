@@ -60,9 +60,11 @@ abstract class ItemDrawer extends Activity
 
   /** update the array of recent points
    * @param point  index of the point in the point library
+   * @note section point is excluded from the "recent points" toolbar
    */
   static void updateRecentPoint( int point )
   {
+    if ( BrushManager.isPointSection( point ) ) return;
     updateRecent( BrushManager.getPointByIndex( point ), mRecentPoint, mRecentPointAge );
   }
 
@@ -84,8 +86,13 @@ abstract class ItemDrawer extends Activity
 
   /** update the array of recent points
    * @param point  point symbol
+   * @note section point is excluded from the "recent points" toolbar
    */
-  static void updateRecentPoint( Symbol point ) { updateRecent( point, mRecentPoint, mRecentPointAge ); }
+  static void updateRecentPoint( Symbol point ) 
+  {
+    if ( point.isSection() ) return;
+    updateRecent( point, mRecentPoint, mRecentPointAge );
+  }
 
   /** update the array of recent lines
    * @param line  line symbol

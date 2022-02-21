@@ -34,7 +34,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   {
     mDrawer  = drawer;
     mData    = data;
-    mWhat = what;
+    mWhat    = what;
   }
 
   /** execute the task
@@ -112,6 +112,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   }
 
   /** load the recent symbol tools
+   * @note skip "section" point
    */
   private void loadRecentSymbols()
   {
@@ -124,6 +125,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
     if ( names != null ) {
       String[] points = names.split(" ");
       for ( String point : points ) {
+        if ( point.equals("section" ) ) continue;
         ItemDrawer.updateRecent( BrushManager.getPointByThName( point ), ItemDrawer.mRecentPoint, ItemDrawer.mRecentPointAge );
       }
     }

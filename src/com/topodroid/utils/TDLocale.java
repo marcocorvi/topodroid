@@ -12,10 +12,12 @@
 package com.topodroid.utils;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.prefs.TDPrefActivity;
+// import com.topodroid.prefs.TDPrefActivity;
+import com.topodroid.prefs.TDPrefKey;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.BrushManager;
+import com.topodroid.DistoX.R;
 
 import android.content.Context;
 import android.content.res.Resources;
@@ -46,7 +48,7 @@ public class TDLocale
   public static void resetTheLocale( )
   {
     // if ( ! TDSetting.isFlagLocale() ) return;
-    TDLog.v( "LOCALE reset <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
+    TDLog.v( "LOCALE RESET <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
@@ -56,6 +58,10 @@ public class TDLocale
       conf.setLocale( mLocale );
       // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
       res.updateConfiguration( conf, dm );
+
+    // TDPrefKey.FALSE = res.getString( R.string.string_false ); // these are necessary only in the "set"
+    // TDPrefKey.TRUE  = res.getString( R.string.string_true );
+
     // } else {
     //   Configuration conf = res.getConfiguration();
     //   conf.locale = mLocale; 
@@ -71,7 +77,7 @@ public class TDLocale
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
-    TDLog.v( "LOCALE set <" + mLocaleStr + "> " + mLocale.toString() );
+    TDLog.v( "LOCALE SET <" + mLocaleStr + "> " + mLocale.toString() );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
@@ -81,6 +87,8 @@ public class TDLocale
       conf.setLocale( mLocale );
       // TDInstance.context = TDInstance.context.createConfigurationContext( conf );
       res.updateConfiguration( conf, dm );
+    TDPrefKey.FALSE = res.getString( R.string.string_false );
+    TDPrefKey.TRUE  = res.getString( R.string.string_true );
     // } else {
     //   Configuration conf = res.getConfiguration();
     //   conf.locale = mLocale; 
