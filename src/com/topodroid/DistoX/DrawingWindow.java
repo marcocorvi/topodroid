@@ -432,6 +432,10 @@ public class DrawingWindow extends ItemDrawer
   private final static int DISMISS_JOIN   = 3;
   private final static int DISMISS_BT     = 4;
 
+  private final static boolean COMPUTE_NO  = false;  // do not compute references
+  private final static boolean COMPUTE_YES = true;   // compute references
+  private final static boolean PARAMS_YES  = true;   // update display params
+
   private TopoDroidApp mApp;
   private DataHelper   mApp_mData;
   private DataDownloader mDataDownloader;
@@ -1156,7 +1160,7 @@ public class DrawingWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
-    // TDLog.v( "config changed " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom );
     TDLocale.resetTheLocale();
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // setMenuAdapter( getResources(), mType );
@@ -1469,7 +1473,7 @@ public class DrawingWindow extends ItemDrawer
                                   // float xoff, float yoff,
                                   float zoom, boolean can_toast )
   {
-    // TDLog.v( "compute references() zoom " + zoom + " landscape " + mLandscape );
+    // TDLog.v( "PLOT compute references() zoom " + zoom + " landscape " + mLandscape );
     if ( ! PlotType.isSketch2D( type ) ) return false;
     if ( num == null ) return false;
 
@@ -2208,7 +2212,7 @@ public class DrawingWindow extends ItemDrawer
 
     // TDLog.TimeEnd( "on create" );
 
-    TDLog.v( "on create" );
+    // TDLog.v( "on create" );
     if ( mCurrentPoint < 0 ) mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
     if ( mCurrentLine < 0 )  mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
     if ( mCurrentArea < 0 )  mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
@@ -2371,7 +2375,11 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.setDisplayMode( mSavedMode );
     // TDLog.v( "pop " + mType + " " + mName + " from " + mFrom + " A " + mAzimuth + " C " + mClino );
     resetStatus();
-    resetReference( plot );
+
+    // DO NOT CALL resetReference( plot ); THIS LINE IS ENOUGH
+    // TDLog.v("PLOT INFO pop: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
+
     // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
 
@@ -2393,11 +2401,11 @@ public class DrawingWindow extends ItemDrawer
   private void pushInfo( long type, String name, String from, String to, float azimuth, float clino, float tt, Vector3D center )
   {
     // TDLog.v( "push info " + type + " " + name + " from " + from + " " + to + " A " + azimuth + " C " + clino + " TT " + tt );
-    TDLog.v( "push info - curent line " + mCurrentLine );
     mSavedType = mType;
     mSavedOffset.x = mOffset.x;
     mSavedOffset.y = mOffset.y;
     mSavedZoom     = mZoom;
+    // TDLog.v( "PLOT INFO push: " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
     mName = mName3 = name;
     mFullName3 = TDInstance.survey + "-" + mName;
@@ -2483,7 +2491,7 @@ public class DrawingWindow extends ItemDrawer
     TDInstance.setRecentPlot( name, tt );
 
     PlotInfo p1 = mApp_mData.getPlotInfo( TDInstance.sid, name+"p" );
-    TDLog.v( "switch name " + name + " info " + p1.name + " " + p1.id + " pid " + mPid1 + " " + mPid2 );
+    // TDLog.v( "PLOT switch name " + name + " info " + p1.name + " " + p1.id + " pid " + mPid1 + " " + mPid2 );
     if ( mPid1 == p1.id ) {
       if ( tt != mType ) { // switch plot type
         startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -2635,12 +2643,13 @@ public class DrawingWindow extends ItemDrawer
     mOffset.x = info.xoffset;
     mOffset.y = info.yoffset;
     mZoom     = info.zoom;
+    // TDLog.v("PLOT resume: " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.isDrawing = true;
     // TDLog.v("doResume " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null; // necessary ???
     switchZoomCtrl( TDSetting.mZoomCtrl );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
-    setPlotType( mType );
+    setPlotType( mType, PARAMS_YES );
   }
 
   /** lifecycle: implement PAUSE
@@ -2651,6 +2660,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.isDrawing = false;
     if ( mPid >= 0 ) {
       try {
+        // TDLog.v("PLOT pause: " + mOffset.x + " " + mOffset.y + " " + mZoom );
         mApp_mData.updatePlot( mPid, mSid, mOffset.x, mOffset.y, mZoom );
       } catch ( IllegalStateException e ) {
         TDLog.Error("cannot save plot state: " + e.getMessage() );
@@ -2686,7 +2696,7 @@ public class DrawingWindow extends ItemDrawer
       if ( id.length() == 0 ) continue;
       DBlock blk = mApp_mData.selectShot( Long.parseLong(id), mSid );
       if ( blk != null ) { 
-        TDLog.v("leg " + id + ": " + blk.mFrom + " " + blk.mTo );
+        // TDLog.v("PLOT leg " + id + ": " + blk.mFrom + " " + blk.mTo );
         stations.add( blk.mFrom );
         stations.add( blk.mTo );
         if ( TDMath.angleDifference( mAzimuth, blk.mBearing) < 90.0f ) {
@@ -2701,7 +2711,7 @@ public class DrawingWindow extends ItemDrawer
     }
     List< DBlock > list0 = mApp_mData.selectAllSplaysAtStations( mSid, stations );
     for ( DBlock blk0 : list0 ) list.add( blk0 );
-    TDLog.v("multileg list size " + list.size() + " stations " + stations.size() + " splays " + list0.size() + " froms " + mFroms.size() + " tos " + mTos.size() );
+    // TDLog.v("PLOT multileg list size " + list.size() + " stations " + stations.size() + " splays " + list0.size() + " froms " + mFroms.size() + " tos " + mTos.size() );
     return list;
   }
 
@@ -2733,7 +2743,7 @@ public class DrawingWindow extends ItemDrawer
     List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
     if ( list != null && list.size() > 0 ) {
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
-        TDLog.v("restart multileg list " + list.size() );
+        // TDLog.v("PLOT restart multileg list " + list.size() );
         makeMultilegSectionReferences( list, mPlot3.center );
       } else {
         if ( mIntersectionT != mPlot3.intercept ) {
@@ -2787,7 +2797,7 @@ public class DrawingWindow extends ItemDrawer
       }
     }
 
-    setPlotType( mType );
+    setPlotType( mType, do_load ); // if loaded update display-params
     // TDLog.TimeEnd( "after load" );
 
     // There are four types of sections:
@@ -2808,9 +2818,9 @@ public class DrawingWindow extends ItemDrawer
       }
 
       if ( PlotType.isMultilegSection( mType, mTo ) ) {
-        TDLog.v("start multileg list " + list.size() );
+        // TDLog.v("PLOT start multileg list " + list.size() );
         if ( center != null ) {
-          TDLog.v("do start center " + center.x + " " + center.y + " " + center.z );
+          // TDLog.v("PLOT do start center " + center.x + " " + center.y + " " + center.z );
           mPlot3.center = center;
           mApp_mData.updatePlotCenter( mPlot3.id, mSid, center );
         }
@@ -2931,7 +2941,7 @@ public class DrawingWindow extends ItemDrawer
         yto = -dto * v.dot(V2);
         zto = -dto * v.dot(V0);
 
-        TDLog.v( "TT " + tt + " X " + xfrom + " " + xto + " Y " + yfrom + " " + yto );
+        // TDLog.v( "PLOT tt " + tt + " X " + xfrom + " " + xto + " Y " + yfrom + " " + yto );
 
         if ( mType == PlotType.PLOT_H_SECTION ) { // Rotate as NORTH is upward
           float xx = -yn * xfrom + xn * yfrom;
@@ -3030,7 +3040,7 @@ public class DrawingWindow extends ItemDrawer
   {
 
     assert( mLastLinePath == null); // not needed - guaranteed by callers
-    TDLog.v("multileg make section reference " + mAzimuth + " " + mClino + " list " + list.size() );
+    // TDLog.v("PLOT multileg make section reference " + mAzimuth + " " + mClino + " list " + list.size() );
 
     mDrawingSurface.newReferences( DrawingSurface.DRAWING_SECTION, (int)mType );
     DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface ); // FIXME_SK moved out
@@ -3225,7 +3235,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
       mDrawingSurface.linkAllSections();
     } else { // X_SECTION
-      resetReference( mPlot3 );
+      resetReference( mPlot3, true );
       mTo = ( PlotType.isLegSection( type ) )? mPlot3.view : "";
       mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
       // mAllSymbols =
@@ -3244,19 +3254,20 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** set the plot type
-   * @param type  plot type
+   * @param type    plot type
+   * @param params  whether to update display params
    * called by doResume and doStart
    */
-  private void setPlotType( long type )
+  private void setPlotType( long type, boolean params )
   {
     // TDLog.v("setPlotType " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
     if ( PlotType.isProfile( type ) ) {
-      setPlotType2( false );
+      setPlotType2( COMPUTE_NO, params );
     } else if ( type == PlotType.PLOT_PLAN ) { 
-      setPlotType1( false );
+      setPlotType1( COMPUTE_NO, params );
     } else {
-      setPlotType3();
+      setPlotType3( params );
     }
   }
 
@@ -3282,7 +3293,7 @@ public class DrawingWindow extends ItemDrawer
   private void saveReference( PlotInfo plot, long pid )
   {
     // TDLog.v( "save Reference()" );
-    // TDLog.v( "save pid " + pid + " ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "PLOT save " + pid + " ref: " + mOffset.x + " " + mOffset.y + " " + mZoom );
     plot.xoffset = mOffset.x;
     plot.yoffset = mOffset.y;
     plot.zoom    = mZoom;
@@ -3291,15 +3302,18 @@ public class DrawingWindow extends ItemDrawer
 
   /** restore the current refernce from the plot info struct 
    * @param plot    sketch info struct
+   * @param params  whether to update XY-zomm params by the plot
    */
-  private void resetReference( PlotInfo plot )
+  private void resetReference( PlotInfo plot, boolean params )
   {
     // TDLog.v("resetReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
-    mOffset.x = plot.xoffset; 
-    mOffset.y = plot.yoffset; 
-    mZoom     = plot.zoom;    
-    // TDLog.v( "reset ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    if ( params ) {
+      mOffset.x = plot.xoffset; 
+      mOffset.y = plot.yoffset; 
+      mZoom     = plot.zoom;
+    }
+    // TDLog.v( "PLOT reset ref " + params + ": " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
@@ -3403,7 +3417,7 @@ public class DrawingWindow extends ItemDrawer
     }
     mApp_mData.updateShotName( block.mId, mSid, from, to );
     doComputeReferences( true );
-    // TDLog.v( "update blk name " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "PLOT update blk name " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     modified();
   }
@@ -3479,7 +3493,7 @@ public class DrawingWindow extends ItemDrawer
       // if ( mNum != null ) { // always true
         mDrawingSurface.clearShotsAndStations( (int)mType );
         computeReferences( mNum, (int)mType, mName, TopoDroidApp.mScaleFactor, false );
-        // TDLog.v( "profile ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
+        // TDLog.v( "PLOT profile ref " + mOffset.x + " " + mOffset.y + " " + mZoom );
         mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
         modified();
       // }
@@ -3750,7 +3764,7 @@ public class DrawingWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      // TDLog.v( "shift event " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v( "PLOT shift event " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
@@ -3822,7 +3836,7 @@ public class DrawingWindow extends ItemDrawer
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
       mOffset.x += x_shift / mZoom;                // add shift to offset
       mOffset.y += y_shift / mZoom; 
-      // TDLog.v( "move event " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v( "PLOT move event " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
@@ -3941,7 +3955,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDSetting.mStylusOnly ) {
       int np = event.getPointerCount();
       for ( id = 0; id < np; ++id ) {
-        TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id ) + " " + TDSetting.mStylusSize );
+        // TDLog.v("STYLUS tool " + id + " size " + rawEvent.getSize( id ) + " " + rawEvent.getToolMajor( id ) + " " + TDSetting.mStylusSize );
         if ( rawEvent.getToolMajor( id ) < TDSetting.mStylusSize ) {
           break;
         }
@@ -4778,7 +4792,7 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.addDrawingPath( section_pt );
     }
 
-    TDLog.v( "line section dialog TT " + tt + " line type " + mCurrentLine );
+    // TDLog.v( "PLOT line section dialog TT " + tt + " line type " + mCurrentLine );
     new DrawingLineSectionDialog( mActivity, this, h_section, false, section_id, currentLine, from, to, azimuth, clino, tt, center ).show();
   }
 
@@ -4829,7 +4843,7 @@ public class DrawingWindow extends ItemDrawer
   //     // // FIXME NOTIFY ? no
   //     createPhotoPoint();
   //   } else {
-  //     TDLog.v("PHOTO failed to save photo");
+  //     TDLog.v("PLOT PHOTO failed to save photo");
   //   }
   // }
 
@@ -5074,8 +5088,8 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v("open XSection " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
-    // TDLog.v( "Open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
-    TDLog.v( "open xsection - current line " + mCurrentLine );
+    // TDLog.v( "PLOT open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
+    // TDLog.v( "PLOT open xsection - current line " + mCurrentLine );
     // parent plot name = mName
     String xs_id = getXSectionName( st_name, type );
     if ( xs_id == null ) return;
@@ -5898,40 +5912,43 @@ public class DrawingWindow extends ItemDrawer
       if ( mModified ) doSaveTdr( ); // this sets Modified = false after spawning the saving task
       updateReference();
       if ( mType == PlotType.PLOT_PLAN ) {
-        setPlotType2( false );
+        setPlotType2( COMPUTE_NO, PARAMS_YES );
       } else if ( PlotType.isProfile( mType ) ) {
-        setPlotType1( false );
+        setPlotType1( COMPUTE_NO, PARAMS_YES );
       }
     }
 
     /** set the plot as of type 3
+     * @param params   whether to update XY-zomm values by the plot
      * @note called by doRecover and setPlotType
      */
-    private void setPlotType3( )
+    private void setPlotType3( boolean params )
     {
       assert( mLastLinePath == null);
       if ( mPlot3 == null ) {
         TDLog.Error( "set plot xsection: null plot" );
         return;
       }
+      // TDLog.v( "PLOT set type 3 mType " + mType );
       mPid  = mPid3;
       mName = mName3;
       mType = mPlot3.type;
       // TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
       // TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
-      resetReference( mPlot3 );
+      resetReference( mPlot3, params );
       setTheTitle();
     } 
 
     /** set the plot as of type 2
+     * @param params   whether to update XY-zomm values by the plot
      * @param compute ...
      */
-    private void setPlotType2( boolean compute )
+    private void setPlotType2( boolean compute, boolean params )
     {
       assert( mLastLinePath == null);
-      // TDLog.v( "set plot type 2 mType " + mType );
       if ( mPlot2 == null ) return;
+      // TDLog.v( "PLOT set type 2 mType " + mType );
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
@@ -5940,7 +5957,7 @@ public class DrawingWindow extends ItemDrawer
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
       }
-      resetReference( mPlot2 );
+      resetReference( mPlot2, params );
       TDInstance.recentPlotType = mType;
       // if ( TopoDroidApp.mShotWindow != null ) {
       //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
@@ -5951,14 +5968,15 @@ public class DrawingWindow extends ItemDrawer
     } 
 
     /** set the plot as of type 2
+     * @param params   whether to update XY-zomm values by the plot
      * @param compute ...
      * called by setPlotType, switchPlotType and doRecover
      */
-    private void setPlotType1( boolean compute )
+    private void setPlotType1( boolean compute, boolean params )
     {
       assert( mLastLinePath == null);
-      // TDLog.v( "set plot type 1 mType " + mType );
       if ( mPlot1 == null ) return;
+      // TDLog.v( "PLOT set type 1 mType " + mType );
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
@@ -5967,7 +5985,7 @@ public class DrawingWindow extends ItemDrawer
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
       }
-      resetReference( mPlot1 );
+      resetReference( mPlot1, params );
       TDInstance.recentPlotType = mType;
       // if ( TopoDroidApp.mShotWindow != null ) {
       //   // TopoDroidApp.mShotWindow.mRecentPlotType = mType;
@@ -6549,8 +6567,8 @@ public class DrawingWindow extends ItemDrawer
    */
   void makePlotXSection( DrawingLinePath line, String id, long type, String from, String to, String nick, float azimuth, float clino, float tt, Vector3D center )
   {
-    // TDLog.v( "make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
-    TDLog.v( "make xsection: " + mCurrentLine );
+    // TDLog.v( "PLOT make XSection: " + id + " <" + from + "-" + to + "> azimuth " + azimuth + " clino " + clino + " tt " + tt );
+    // TDLog.v( "PLOT make xsection: " + mCurrentLine );
     long pid = prepareXSection( id, type, from, to, nick, azimuth, clino );
     if ( pid >= 0 ) {
       // TDLog.v( "push info: " + type + " <" + mSectionName + "> TT " + tt );
@@ -6567,14 +6585,14 @@ public class DrawingWindow extends ItemDrawer
   /** open the xsection scrap in the window
    * @param scrapname fullname of the scrap
    * the name can be the scrap-name or the section-name (plot name)
-   * @note called only by DrawingPointDialog and myself
+   * @note called only by DrawingPointDialog and onLongClick()
    */
   void openSectionDraw( String scrapname )
   { 
     // remove survey name from scrap-name (if necessary)
     String name = scrapname.replace( TDInstance.survey + "-", "" );
-    // TDLog.v( "open section: scrapname " + scrapname + " plot name " + name );
-    TDLog.v( "open section: current line " + mCurrentLine );
+    // TDLog.v( "PLOT open section: scrapname " + scrapname + " plot name " + name );
+    // TDLog.v( "PLOT open section: current line " + mCurrentLine );
 
     PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
     if ( pi != null ) {
@@ -6892,21 +6910,21 @@ public class DrawingWindow extends ItemDrawer
 
   /** (re)compute the reference, for both plan and profile
    * @param reset whether to reset the reference
-   * @note called by updateBlockName and refreshDisplay
+   * @note called by updateBlockName and refreshDisplay - hence false params for resetReference
    */
   private void doComputeReferences( boolean reset )
   {
-    // TDLog.v( "do Compute References() type " + mType );
+    // TDLog.v( "PLOT compute ref type " + mType + " reset " + reset );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     if ( mType == (int)PlotType.PLOT_PLAN ) {
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
-      if ( reset ) resetReference( mPlot1 );
+      if ( reset ) resetReference( mPlot1, false );
     } else if ( PlotType.isProfile( mType ) ) {
       computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
-      if ( reset ) resetReference( mPlot2 );
+      if ( reset ) resetReference( mPlot2, false );
     }
   }
 
@@ -7054,7 +7072,7 @@ public class DrawingWindow extends ItemDrawer
     }
     // TDLog.v( "W " + w + " H " + h + " zoom " + mZoom + " X " + mOffset.x + " Y " + mOffset.y );
     // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight );
-    // TDLog.v( "zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
+    // TDLog.v( "PLOT zoom fit " + mOffset.x + " " + mOffset.y + " zoom " + mZoom + " tb " + tb + " lr " + lr );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
@@ -7191,7 +7209,7 @@ public class DrawingWindow extends ItemDrawer
       // moveTo( mPlot1.type, station );
       // moveTo( mPlot2.type, station );
       moveTo( (int)mType, station );
-      // TDLog.v( "center station " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v( "PLOT center station " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
   }
@@ -7211,7 +7229,7 @@ public class DrawingWindow extends ItemDrawer
       //         float t = mOffset.x; mOffset.x = -mOffset.y;  mOffset.y = t;
       // }
       mApp_mData.updatePlotOrientation( TDInstance.sid, mPid, mLandscape ? 1 : 0 );
-      // TDLog.v( "orientation " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      // TDLog.v( "PLOT orientation " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
       doZoomFit();
       setTheTitle();
@@ -7431,14 +7449,14 @@ public class DrawingWindow extends ItemDrawer
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
     TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
-    // TDLog.v("recover " + type + " <" + filename + "> TRD " + tdr );
+    // TDLog.v("PLOT recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotType.PLOT_PLAN ) {
       if ( mPlot1 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
         mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols
         // mDrawingSurface.linkSections();
         // DrawingSurface.addManagerToCache( mFullName1 );
-        setPlotType1( true );
+        setPlotType1( COMPUTE_YES, PARAMS_YES );
       } else {
         TDLog.Error("null Plot 1");
       }
@@ -7449,7 +7467,7 @@ public class DrawingWindow extends ItemDrawer
         // mDrawingSurface.linkSections();
         // DrawingSurface.addManagerToCache( mFullName2 );
         // now switch to extended view FIXME-VIEW
-        setPlotType2( true );
+        setPlotType2( COMPUTE_YES, PARAMS_YES );
       } else {
         TDLog.Error("null Plot 2");
       }
@@ -7458,12 +7476,12 @@ public class DrawingWindow extends ItemDrawer
       if ( mPlot3 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
         mDrawingSurface.modeloadDataStream( tdr, null, false /*, null */ ); // sections are not cached
-        setPlotType3( );
+        setPlotType3( true ); // true reset display-params
         // FIXME MOVED_BACK_IN DrawingUtil.addGrid( -10, 10, -10, 10, 0.0f, 0.0f, mDrawingSurface );
         List< DBlock > list = getXSectionShots( mType, mFrom, mTo );
         if ( list != null && list.size() > 0 /* mSectionSkip */ ) {
           if ( PlotType.isMultilegSection( mType, mTo ) ) {
-            TDLog.v("recover multileg list " + list.size() );
+            // TDLog.v("PLOT recover multileg list " + list.size() );
             makeMultilegSectionReferences( list, mPlot3.center );
           } else {
             // float tt = mApp_mData.selectPlotIntercept( mSid, mPlot3.id );
@@ -7477,7 +7495,7 @@ public class DrawingWindow extends ItemDrawer
     mOffset.x = x;
     mOffset.y = y;
     mZoom     = z;
-    // TDLog.v( "do recover " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    // TDLog.v( "PLOT recover " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
   }
 
@@ -8566,7 +8584,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setHighlight( int type, int index )
   {
-    TDLog.v("Highlight " + type + " from " + highlightType + "/" + highlightIndex + " to " + index );
+    // TDLog.v("PLOT highlight " + type + " from " + highlightType + "/" + highlightIndex + " to " + index );
     if ( highlightIndex >= 0 && highlightIndex < NR_RECENT ) { // clear previous highlight
       switch ( highlightType ) { // switch off highlighted symbol
         case SymbolType.POINT:
