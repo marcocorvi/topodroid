@@ -26,32 +26,37 @@ class HelpEntry
   // private TextView mTextView = null;
   LinearLayout mView;
 
-  /**
+  /** cstr
    * @param context     display context
-   * @param icon        button resource int
-   * @param text        text resource int
+   * @param text        button resource int, either text or icon
+   * @param decs        description resource int
+   * @param is_text     whether the adapter is for a MENU item (or an ICON item)
    */
-  HelpEntry( Context context, int icon, int text, boolean is_text )
+  HelpEntry( Context context, int text, int decs, boolean is_text )
   {
     Button mButton   = new Button( context );
     TextView mTextView = new TextView( context );
 
     if ( is_text ) {
-      mButton.setText( icon );
+      mButton.setText( text );
       mButton.setBackgroundColor( TDColor.TRANSPARENT );
       mButton.setTextColor( 0xff66a8dd ); // FIXME color/menu_foreground
     } else {
       // int size = TopoDroidApp.getDefaultSize( context );
-      TDandroid.setButtonBackground( mButton, MyButton.getButtonBackground( context, context.getResources(), icon ) );
+      TDandroid.setButtonBackground( mButton, MyButton.getButtonBackground( context, context.getResources(), text ) );
     }
-    mTextView.setText( text );
+    mTextView.setText( decs );
 
     LinearLayout ll = new LinearLayout( context );
     // ll.setOrientation( LinearLayout.HORIZONTAL );
     int lw = LinearLayout.LayoutParams.WRAP_CONTENT;
     int lh = LinearLayout.LayoutParams.WRAP_CONTENT;
 
-    ll.addView( mButton,   new LinearLayout.LayoutParams(lh,lw) );
+    LinearLayout.LayoutParams lp = new LinearLayout.LayoutParams(lh,lw);
+    lp.setMarginStart( 10 );
+    lp.setMarginEnd( 20 );
+
+    ll.addView( mButton,   lp );
     ll.addView( mTextView, new LinearLayout.LayoutParams(lh,lw) );
     mView = ll;
   }

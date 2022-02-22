@@ -44,6 +44,16 @@ public class HelpDialog extends MyDialog
   private Button mBtnManual;
 
   // TODO list of help entries
+  /** cstr
+   * @param context     context
+   * @param icons       icons
+   * @param menus       menus
+   * @param texts1      icons descriptions
+   * @param texts2      menus descriptions
+   * @param n0          ...
+   * @param n1          ...
+   * @param page        man page (to be linked)
+   */
   public HelpDialog( Context context, int[] icons, int[] menus, int[] texts1, int[] texts2, int n0, int n1, String page )
   {
     super( context, R.string.HelpDialog ); 
@@ -77,6 +87,8 @@ public class HelpDialog extends MyDialog
     mList.invalidate();
   }
 
+  /** create the items (icons and menus) adapters
+   */
   private void createAdapter()
   {
     // TDLog.v( "HELP create adapter mNr0 " + mNr0 );
@@ -93,6 +105,10 @@ public class HelpDialog extends MyDialog
     }
   }
 
+  /** react to a user tap - only the taps on "man book" are taken
+   *  open the associated man page
+   * @param v  tapped view
+   */
   @Override 
   public void onClick( View v ) 
   {
@@ -100,6 +116,10 @@ public class HelpDialog extends MyDialog
     UserManualActivity.showHelpPage( mContext, mPage );
   }
 
+  /** react to a user long tap - only the taps on "man book" are taken
+   *  open the namual with the start page
+   * @param v  tapped view
+   */
   @Override 
   public boolean onLongClick( View v ) 
   {
