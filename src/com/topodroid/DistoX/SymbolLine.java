@@ -58,7 +58,7 @@ class SymbolLine extends Symbol
   // no effect
   SymbolLine( String name, String th_name, String group, String fname, int color, int level, int rt )
   {
-    super( th_name, group, fname, rt );
+    super( Symbol.TYPE_LINE, th_name, group, fname, rt );
     init( name, color, 1 );
     makeLinePath();
     mLevel = level;
@@ -67,7 +67,7 @@ class SymbolLine extends Symbol
   // no effect
   SymbolLine( String name, String th_name, String group, String fname, int color, float width, int level, int rt )
   {
-    super( th_name, group, fname, rt );
+    super( Symbol.TYPE_LINE, th_name, group, fname, rt );
     init( name, color, width );
     makeLinePath();
     mLevel = level;
@@ -75,7 +75,7 @@ class SymbolLine extends Symbol
 
   SymbolLine( String name, String th_name, String group, String fname, int color, float width, PathEffect effect_dir, PathEffect effect_rev, int level, int rt )
   {
-    super( th_name, group, fname, rt );
+    super( Symbol.TYPE_LINE, th_name, group, fname, rt );
     init( name, color, width );
     mPaint.setPathEffect( effect_dir );
     mRevPaint.setPathEffect( effect_rev );
@@ -103,7 +103,7 @@ class SymbolLine extends Symbol
 
   SymbolLine( String filepath, String fname, String locale, String iso ) 
   {
-    super( null, null, fname, Symbol.W2D_DETAIL_SHP );
+    super( Symbol.TYPE_LINE, null, null, fname, Symbol.W2D_DETAIL_SHP );
     mStyleStraight = false;
     mClosed = false;
     mStyleX = 1;

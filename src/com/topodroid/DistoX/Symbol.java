@@ -48,6 +48,13 @@ public class Symbol implements SymbolInterface
   public static final int W2D_DETAIL_SHP = 3;
   public static final int W2D_DETAIL_SYM = 4;
 
+  public static final int TYPE_NONE  = 0;
+  public static final int TYPE_POINT = 1;
+  public static final int TYPE_LINE  = 2;
+  public static final int TYPE_AREA  = 3;
+  // public static final int TYPE_EXTRA = 4;
+
+  int     mSymbolType; // the Symbol class needs a field for the symbol type, POINT, LINE, AREA
   boolean mEnabled;  //!< whether the symbol is enabled in the library
   private String  mThName;   // therion name
   String  mGroup;    // group of this symbol (null if no group)
@@ -57,27 +64,31 @@ public class Symbol implements SymbolInterface
   int     mLevel;       // canvas levels [flag]
   int     mRoundTrip;
 
-  /** default cstr
-   */
-  Symbol()
-  {
-    mEnabled = true;
-    mThName  = null;
-    mGroup   = null;
-    mDefaultOptions = null;
-    // mFilename = null;
-    mLevel = DrawingLevel.LEVEL_DEFAULT;
-    mRoundTrip = W2D_NONE;
-  }
+  // /** default cstr - UNUSED
+  //  * @param s_type    symbol type
+  //  */
+  // Symbol( int s_type )
+  // {
+  //   mEnabled = true;
+  //   mThName  = null;
+  //   mGroup   = null;
+  //   mDefaultOptions = null;
+  //   // mFilename = null;
+  //   mLevel = DrawingLevel.LEVEL_DEFAULT;
+  //   mRoundTrip = W2D_NONE;
+  //   mSymbolType = s_type;
+  // }
 
   /** cstr
+   * @param s_type    symbol type
    * @param th_name   therion name (must be non-null)
    * @param group     symbol group (can be null)
    * @param filename  not used
    * @param rt        roundtrip (1 walls_shp, 2 walls_sym, 3 detail_shp, 4 detail_sym)
    */
-  Symbol( String th_name, String group, String filename, int rt ) 
+  Symbol( int s_type, String th_name, String group, String filename, int rt ) 
   { 
+    mSymbolType = s_type;
     mEnabled  = true;
     setThName( th_name );
     mGroup    = group;
@@ -87,19 +98,21 @@ public class Symbol implements SymbolInterface
     mRoundTrip = rt;
   }
 
-  /** cstr - with only the "enabled" field
-   * @param enabled  whether the symbol is enabled
-   */
-  Symbol(boolean enabled ) 
-  { 
-    mEnabled  = enabled; 
-    mThName   = null;
-    mGroup    = null;
-    mDefaultOptions = null;
-    // mFilename = null;
-    mLevel = DrawingLevel.LEVEL_DEFAULT;
-    mRoundTrip = W2D_NONE;
-  }
+  // /** cstr - with only the "enabled" field - UNUSED
+  //  * @param s_type    symbol type
+  //  * @param enabled  whether the symbol is enabled
+  //  */
+  // Symbol( int s_type, boolean enabled ) 
+  // { 
+  //   mEnabled  = enabled; 
+  //   mThName   = null;
+  //   mGroup    = null;
+  //   mDefaultOptions = null;
+  //   // mFilename = null;
+  //   mLevel = DrawingLevel.LEVEL_DEFAULT;
+  //   mRoundTrip = W2D_NONE;
+  //   mSymbolType = s_type;
+  // }
 
   // ------------------------------------------------------------------------
 
@@ -107,6 +120,18 @@ public class Symbol implements SymbolInterface
    * @note used by ItemDrawer updateRecentPoint
    */
   boolean isSection() { return mThName.equals("section"); }
+
+  /** @return true if this is a POINT symbol
+   */
+  boolean isPoint() { return mSymbolType == TYPE_POINT; }
+
+  // /** @return true if this is a LINE symbol - UNUSED
+  //  */
+  // boolean isLine() { return mSymbolType == TYPE_LINE; }
+
+  // /** @return true if this is a AREA symbol - UNUSED
+  //  */
+  // boolean isArea() { return mSymbolType == TYPE_AREA; }
 
   /** @return the symbol default options
    */

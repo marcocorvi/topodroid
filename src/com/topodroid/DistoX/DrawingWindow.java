@@ -2233,7 +2233,7 @@ public class DrawingWindow extends ItemDrawer
               if ( setCurrentPoint( k, false ) ) {
                 setHighlight( SymbolType.POINT, k );
               } else {
-                TDToast.makeWarn( R.string.section_line_not_allowed );
+                TDToast.makeWarn( R.string.section_point_not_allowed );
               }
               break;
             }
@@ -8035,6 +8035,11 @@ public class DrawingWindow extends ItemDrawer
 
   // --------------------------------------------------------------------------
 
+  /** react to the result of a child activity
+   * @param reqCode    request code
+   * @param resCode    result code
+   * @param intent     returned intent (and data)
+   */
   @Override
   protected void onActivityResult( int reqCode, int resCode, Intent intent )
   {
@@ -8090,17 +8095,34 @@ public class DrawingWindow extends ItemDrawer
   // ------------------------------------------------------------------
   // SCRAPS, X-SECTIONS, OUTLINES 
 
+  /** @return the index of the active scrap of the current ploy
+   */
   int getScrapIndex() { return mDrawingSurface.scrapIndex(); }
+
+  /** @return the maximum index of the scraps of the current ploy
+   */
   int getScrapMaxIndex() { return mDrawingSurface.scrapMaxIndex(); }
 
+  /** switch to the next scrap of the current ploy
+   */
   void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
+
+  /** switch to the previous scrap of the current ploy
+   */
   void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
+
+  /** make a new scrap in the current plot 
+   */
   void scrapNew() 
   { 
     int scrap_idx = mDrawingSurface.newScrapIndex( );
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
 
+  /** prepare for the dialog about the scrap outline:
+   * select the plots with same type as the current plot and open the dialog
+   * @note apparenty there is not difference whether the type is PLAN or PROFILE
+   */
   void scrapOutlineDialog()
   {
     if ( mType != PlotType.PLOT_PLAN && mType != PlotType.PLOT_EXTENDED ) {
@@ -8126,6 +8148,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** add a scrap to the plot
+   * @param plot  (current) plot info
+   */
   void addScrap( PlotInfo plot )
   {
     // TDLog.v("addScrap " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -8166,10 +8191,18 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.addScrapDataStream( tdr, xdelta, ydelta );
   }
 
-  // @param name xsection scrap_name = survey_name + "-" + xsection_id
-  //                      tdr_path = tdr_dir + scrap_name + ".tdr"
+  /** @return true if the plot has the xsection outline
+   * @param name xsection scrap_name = survey_name + "-" + xsection_id
+   *                      tdr_path = tdr_dir + scrap_name + ".tdr"
+   */
   boolean hasXSectionOutline( String name ) { return mDrawingSurface.hasXSectionOutline( name ); }
 
+  /** add/drop the outline of a xsection
+   * @param name    xsection name
+   * @param on_off  whether to add or to drop
+   * @param x       X coordinate of the point where to put the xsection (canvas frame)
+   * @param y
+   */
   void setXSectionOutline( String name, boolean on_off, float x, float y )
   { 
     // TDLog.v("setXSectionOutline " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -8188,6 +8221,12 @@ public class DrawingWindow extends ItemDrawer
   // SPLIT AND MERGE
   // here we are guaranteed that "name" can be used for a new plot name
   // and the survey has station "station"
+
+  /** split the current plot moving/copying items to a new plot
+   * @param name    name of the new plot
+   * @param station origin station of the new plot
+   * @param remove  whether to move or copy the items: if remove is true the items are moved to the new plot
+   */
   void splitPlot( String name, String station, boolean remove ) 
   {
     // TDLog.v("splitPlot " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -8214,6 +8253,8 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("mode " + mMode + " touch-mode " + mTouchMode );
   }
 
+  /** marge the plot of the outline in the current plot
+   */
   void mergeOutlineScrap()
   {
     // merge is aclled in MOVE mode
@@ -8248,8 +8289,11 @@ public class DrawingWindow extends ItemDrawer
   //   new PlotMergeDialog( mActivity, this, plots ).show();
   // }
 
-  // called by mergeOutlineScrap
-  // called only with mType PLOT_PLAN or PLOT_EXTENDED
+  /** merge the items of another plot into the current plot
+   * @param plt   the other plot info
+   * @note called by mergeOutlineScrap
+   *       called only with mType PLOT_PLAN or PLOT_EXTENDED
+   */
   private void doMergePlot( PlotInfo plt )
   {
     // assert( mLastLinePath == null); // obvious
@@ -8277,7 +8321,10 @@ public class DrawingWindow extends ItemDrawer
     boolean ret = mDrawingSurface.addLoadDataStream( tdr, xdelta, ydelta, /* null, */ null ); // do not save plot name in paths
   }
 
-  // mSplitRemove: whether to remove the paths from the current plot
+  /** split the current plot: selected items are moved or copied to a new plot
+   * @note mSplitBorder: border path of the items to move/copy to the new plot
+   * @note mSplitRemove: whether to remove the paths from the current plot
+   */
   private void doSplitPlot( )
   {
     if ( mSplitBorder.size() <= 3 ) { // too few points: nothing to split
@@ -8479,18 +8526,34 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setButtonRecent( ItemButton[] buttons, Symbol[] recents )
   {
+    int kk = 0;
     for ( int k=0; k<NR_RECENT; ++k ) {
       Symbol p = recents[k];
-      if ( p == null ) {
-        // TDLog.v("recent tool " + k + " is null" );
-        break;
-      }
-      if ( buttons[k] != null ) {
-        buttons[k].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
-        buttons[k].invalidate();
-      }
+      if ( p == null || buttons[k] == null ) break;
+      if ( p.isPoint() && p.isSection() ) continue;
+      buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+      buttons[kk].invalidate();
+      ++kk;
     }
   }
+
+  // /** set the recent points tools buttons - merged in setButtonRecent using isPoint()
+  //  * @param buttons   array of buttons
+  //  * @param recents   array of recent tools
+  //  * @note a special method for points is necessary to skip the "section" point
+  //  */
+  // private void setButtonRecentPoints( ItemButton[] buttons, Symbol[] recents )
+  // {
+  //   int kk = 0;
+  //   for ( int k=0; k<NR_RECENT; ++k ) {
+  //     Symbol p = recents[k];
+  //     if ( p == null || buttons[kk] == null ) break;
+  //     if ( p.isSection() ) continue;
+  //     buttons[kk].resetPaintPath( p.getPaint(), p.getPath(), mRecentDimX, mRecentDimY );
+  //     buttons[kk].invalidate();
+  //     ++ kk;
+  //   }
+  // }
 
   private int highlightType = SymbolType.UNDEF; // type of current symbol highlighted
   private int highlightIndex = -1;              // index of current symbol highlighted

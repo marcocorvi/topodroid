@@ -77,7 +77,7 @@ class SymbolArea extends Symbol
   SymbolArea( String name, String th_name, String group, String fname, int color, Bitmap bitmap, TileMode xmode, TileMode ymode,
               boolean close_horizontal, int level, int rt )
   {
-    super( th_name, group, fname, rt );
+    super( Symbol.TYPE_AREA, th_name, group, fname, rt );
     mName   = name;
     mColor  = color;
     mLevel  = level;
@@ -132,7 +132,7 @@ class SymbolArea extends Symbol
 
   SymbolArea( String filepath, String fname, String locale, String iso )
   {
-    super( null, null, fname, Symbol.W2D_DETAIL_SHP );
+    super( Symbol.TYPE_AREA, null, null, fname, Symbol.W2D_DETAIL_SHP );
     mOrientable  = false;
     // FIXME AREA_ORIENT
     mOrientation = 0;

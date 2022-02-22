@@ -5,9 +5,6 @@
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
-
     <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
     <!-- UNUSED string name="desc_points">Точки</string -->
     <!-- UNUSED string name="desc_lines">Линии</string -->

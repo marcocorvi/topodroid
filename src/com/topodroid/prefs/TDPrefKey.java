@@ -16,8 +16,8 @@ import com.topodroid.DistoX.R;
 
 public class TDPrefKey
 {
-  public static String FALSE = "false";
-  public static String TRUE  = "true";
+  public static final String FALSE = "false";
+  public static final String TRUE  = "true";
 
   public static String[] MAIN = { // [14]
     "DISTOX_CWD",           // 0 // CWD must be the last of primary preferences

@@ -124,7 +124,7 @@ public class SymbolPoint extends Symbol
    */
   SymbolPoint( String pathname, String fname, String locale, String iso )
   {
-    super( null, null, fname, Symbol.W2D_DETAIL_SYM );
+    super( Symbol.TYPE_POINT, null, null, fname, Symbol.W2D_DETAIL_SYM );
     mOrientable = false;
     mHasText = 0;
     mOrientation = 0.0;
@@ -144,7 +144,7 @@ public class SymbolPoint extends Symbol
    */
   SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int level, int rt )
   {
-    super( tn1, group, fname, rt );
+    super( Symbol.TYPE_POINT, tn1, group, fname, rt );
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); // FIXME style
@@ -171,7 +171,7 @@ public class SymbolPoint extends Symbol
    */
   SymbolPoint( String n1, String tn1, String group, String fname, int c1, String path, boolean orientable, int has_text, int level, int rt )
   {
-    super( tn1, group, fname, rt ); // FIXME fname
+    super( Symbol.TYPE_POINT, tn1, group, fname, rt ); // FIXME fname
     mName  = n1;
     mDxf   = null;
     mPaint = makePaint( c1, Paint.Style.STROKE ); //FIXME style

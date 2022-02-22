@@ -21,7 +21,6 @@ import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.prefs.TDPrefHelper;
-import com.topodroid.prefs.TDPrefKey;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
@@ -827,8 +826,6 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
-    TDPrefKey.FALSE = getResources().getString( R.string.string_false );
-    TDPrefKey.TRUE  = getResources().getString( R.string.string_true );
 
     // ONLY IF BUILT WITH ANDROID-30 and above
     // if ( TDandroid.ABOVE_API_29 ) {

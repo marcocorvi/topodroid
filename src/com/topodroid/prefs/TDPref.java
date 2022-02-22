@@ -1597,7 +1597,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],          ctx, hlp ), // CAVE3D_SPLAY_PROJ
       makeEdt( cat, key[3], tit[3], dsc[3], N, def[3], FLOAT,   ctx, hlp ), // CAVE3D_SPLAY_THR
       makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],          ctx, hlp ), // CAVE3D_SPLIT_TRIANGLES
-      makeEdt( cat, key[5], tit[5], dsc[5], N, def[4], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_RANDOM
+      makeEdt( cat, key[5], tit[5], dsc[5], N, def[5], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_RANDOM
       makeEdt( cat, key[6], tit[6], dsc[6], N, def[6], FLOAT,   ctx, hlp ), // CAVE3D_SPLIT_STRETCH
       makeEdt( cat, key[7], tit[7], dsc[7], N, def[7], FLOAT,   ctx, hlp ), // CAVE3D_POWERCRUST_DELTA
     };

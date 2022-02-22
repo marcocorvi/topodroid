@@ -150,7 +150,7 @@ abstract class ItemDrawer extends Activity
    */
   protected void loadRecentSymbols( DataHelper db )
   {
-    ( new RecentSymbolsTask( this, this, db, /* mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, */ RecentSymbolsTask.LOAD ) ).execute();
+    ( new RecentSymbolsTask( this, this, db, RecentSymbolsTask.LOAD ) ).execute();
 
   }
 
@@ -159,7 +159,7 @@ abstract class ItemDrawer extends Activity
    */
   protected void saveRecentSymbols( DataHelper db )
   {
-    ( new RecentSymbolsTask( this, this, db, /* mRecentPoint, mRecentLine, mRecentArea, NR_RECENT, */ RecentSymbolsTask.SAVE ) ).execute();
+    ( new RecentSymbolsTask( this, this, db, RecentSymbolsTask.SAVE ) ).execute();
   }
 
   // ----------------------------------------------------------------------

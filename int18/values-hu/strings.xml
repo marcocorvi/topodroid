@@ -5,9 +5,6 @@
     <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
     <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
-
     <!-- UNUSED string name="desc_user_man">Felhasználói kézikönyv</string -->
     <!-- UNUSED string name="desc_points">Pontok</string -->
     <!-- UNUSED string name="desc_lines">Vonalak</string -->
