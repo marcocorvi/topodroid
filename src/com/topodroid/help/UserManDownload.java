@@ -37,16 +37,21 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
 {
   // private final Context mContext; // unused 
   private String  mUrl;
-  // private static UserManDownload running = null; // WARNING do not place context in a static field
   private static boolean running = false; 
 
+  /** cstr
+   * @param url   URL from which to download the man pages
+   */
   public UserManDownload( /* Context context, */ String url )
   {
     // mContext = context;
     mUrl     = url;
   }
 
-// -------------------------------------------------------------------
+  // -------------------------------------------------------------------
+  /** execute tha man pages download in background
+   * @param statuses ...
+   */
   @Override
   protected Integer doInBackground( String... statuses )
   {
@@ -102,12 +107,19 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
     return ret;
   }
 
+  /** update the interface during the downloading 
+   * @param values ...
+   * only forward to the superclass
+   */
   @Override
   protected void onProgressUpdate( Integer... values)
   {
     super.onProgressUpdate( values );
   }
 
+  /** update the interface at the end of the download: display a toast
+   * @param res   download result
+   */
   @Override
   protected void onPostExecute( Integer res )
   {
@@ -122,18 +134,19 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
     unlock();
   }
 
+  /** lock the task: prevent double download
+   */
   private synchronized boolean lock()
   {
-    // if ( running != null ) return false;
-    // running = this;
     if ( running ) return false;
     running = true;
     return true;
   }
 
+  /** unlock the task: allow another download
+   */
   private synchronized void unlock()
   {
-    // if ( running == this ) running = null;
     if ( running ) running = false;
   }
 

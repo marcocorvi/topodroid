@@ -17,11 +17,17 @@ public class MotionEventWrap
 {
    protected MotionEvent event;
 
+   /** cstr
+    * @param event    motion event
+    */
    public MotionEventWrap( MotionEvent event )
    {
       this.event = event;
    }
 
+   /** @return a wrapper of the given event
+    * @param event    motion event
+    */
    public static MotionEventWrap wrap(MotionEvent event)
    {
       // FIXME NFE 
@@ -36,29 +42,55 @@ public class MotionEventWrap
       }
    }
    
+   /** @return the action ID from the wrapped event
+    */
    public int getAction() { return event.getAction(); }
 
    // this is the X coord (pixels, from the center ?) adjusted for containing window and views
    // to get the real X use getRawX()
-   //
+   
+   /** @return the X coordinate from the wrapped event
+    */
    public float getX() { return event.getX(); }
+   
+   /** @return the X coordinate from the wrapped event
+    * @param pointerIndex touch index
+    */
    public float getX(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return getX();
    }
+
+   /** @return the Y coordinate from the wrapped event
+    */
    public float getY() { return event.getY(); }
+   
+   /** @return the Y coordinate from the wrapped event
+    * @param pointerIndex touch index
+    */
    public float getY(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return getY();
    }
+ 
+   /** @return the number of touches - always 1
+    */
    public int getPointerCount() { return 1; }
+
+   /** @return the touch ID - always 0
+    * @param pointerIndex touch index
+    */
    public int getPointerId(int pointerIndex)
    {
       verifyPointerIndex(pointerIndex);
       return 0;
    }
+
+   /** verify that the touch index is valid
+    * @param pointerIndex touch index
+    */
    private void verifyPointerIndex(int pointerIndex) 
    {
       if (pointerIndex > 0) {

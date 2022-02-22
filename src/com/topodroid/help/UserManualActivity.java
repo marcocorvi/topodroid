@@ -60,6 +60,10 @@ public class UserManualActivity extends Activity
   private WebView mTVtext;
   private int mCloseOnBack = 0;
 
+  /** load and display a man page
+   * @param view     display view
+   * @param filename man page file
+   */
   private void load( WebView view, String filename ) throws IOException
   {
     ++mCloseOnBack;
@@ -100,6 +104,11 @@ public class UserManualActivity extends Activity
     }
   }
    
+  /** load and display a local man page
+   * @param view     display view
+   * @param fr       file reader
+   * @param pagepath man page filepath
+   */
   private void loadLocal( WebView view, FileReader fr, String pagepath ) throws IOException
   {
     // view.loadUrl( "file://" + page );
@@ -149,6 +158,9 @@ public class UserManualActivity extends Activity
   private ImageView     mImage;
   private ListView      mList;
 
+  /** set the settings of the display view
+   * @param view     display view
+   */
   private void setWebViewSettings( WebView view )
   {
     // WebSettings ws = view.getSettings();
@@ -245,7 +257,9 @@ public class UserManualActivity extends Activity
     mList.setOnItemClickListener( this );
   }
 
-
+  /** react to a user tap
+   * @param v   tapped view
+   */
   @Override 
   public void onClick(View v) 
   {
@@ -261,6 +275,12 @@ public class UserManualActivity extends Activity
     }
   }
 
+  /** react to a user tap on an item 
+   * @param parent view parent container
+   * @param view   tapped view
+   * @param pos    item position
+   * @param id     ...
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -280,6 +300,8 @@ public class UserManualActivity extends Activity
     }
   }
 
+  /** react to a user tap on the BACK button
+   */
   @Override
   public void onBackPressed()
   {
@@ -299,6 +321,10 @@ public class UserManualActivity extends Activity
   //   context.startActivity( intent );
   // }
   
+  /** display a help page
+   * @param context  context
+   * @param page     help page name
+   */
   public static void showHelpPage( Context context, String page )
   {
     // if ( page == null ) return;

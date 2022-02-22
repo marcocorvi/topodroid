@@ -12,18 +12,36 @@ import android.view.MotionEvent;
 
 public class MotionEventEclair extends MotionEventWrap
 {
+   /** cstr - save the event in the superclass
+    * @param event   motion event
+    */
    public MotionEventEclair(MotionEvent event) {
       super(event);
    }
+
+   /** @return X cordinate of a touch
+    * @param pointerIndex  touch index
+    */
    public float getX(int pointerIndex) {
       return event.getX(pointerIndex);
    }
+
+   /** @return Y cordinate of a touch
+    * @param pointerIndex  touch index
+    */
    public float getY(int pointerIndex) {
       return event.getY(pointerIndex);
    }
+
+   /** @return the number of simultaneous touches
+    */
    public int getPointerCount() {
       return event.getPointerCount();
    }
+
+   /** @return ID (???) of a touch
+    * @param pointerIndex  touch index
+    */
    public int getPointerId(int pointerIndex) {
       return event.getPointerId(pointerIndex);
    }

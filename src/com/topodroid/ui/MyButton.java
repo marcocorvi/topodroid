@@ -42,6 +42,11 @@ public class MyButton extends Button
   static private SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
                                                               : null;
 
+  /** @return the background bitmap for a LVR seekbar
+   * @param ctx    context (TODO replace with resources)
+   * @param width  seekbar witdh
+   * @param height seekbar height
+   */
   public static Bitmap getLVRseekbarBackGround( Context ctx, int width, int height )
   {
     if ( mLVRseekbar == null ) {
@@ -54,13 +59,21 @@ public class MyButton extends Button
     return mLVRseekbar;
   }
 
-  // called with context = mApp
-  public static void resetCache( /* Context context, */ int size )
+  /** clear the cache and reset the global button size
+   * @param size    new global size
+   * @note called with context = mApp
+   */
+  public static void resetCache( int size )
   {
     if ( size > 0 ) mGlobalSize = size;
     if ( USE_CACHE ) mBitmapCache.clear();
   }
 
+  /** @return a new button
+   * @param ctx     context
+   * @param click   user-tap listener
+   * @param res_id  ID of the button icon
+   */
   public static Button getButton( Context ctx, OnClickListener click, int res_id )
   {
     Button ret = new Button( ctx );
@@ -70,6 +83,11 @@ public class MyButton extends Button
     return ret;
   }
 
+  /** @return a new button background
+   * @param ctx     context (not used)
+   * @param res     resources
+   * @param res_id  ID of the button background
+   */
   public static BitmapDrawable getButtonBackground( Context ctx, Resources res, int res_id )
   {
     BitmapDrawable ret = USE_CACHE ? mBitmapCache.get( res_id )
@@ -96,7 +114,13 @@ public class MyButton extends Button
     return ret;
   }
 
-  // get tentative bitmap (do not use cache)
+  /** @return a new button background
+   * @param ctx     context (not used)
+   * @param res     resources
+   * @param res_id  ID of the button background
+   * @param size    button size
+   * @note get tentative bitmap (do not use cache)
+   */
   public static BitmapDrawable getButtonBackground( Context ctx, Resources res, int res_id, int size )
   {
     try {
@@ -110,17 +134,28 @@ public class MyButton extends Button
     return null;
   }
 
-  // for TopoGL
-  public static BitmapDrawable getButtonBackground( Context c, int size, int res_id )
+  /** @return a new button background
+   * @param ctx     context (TODO replace with resources)
+   * @param size    button size
+   * @param res_id  ID of the button background
+   * @note for TopoGL
+   */
+  public static BitmapDrawable getButtonBackground( Context ctx, int size, int res_id )
   {
-    Bitmap bm1 = BitmapFactory.decodeResource( c.getResources(), res_id );
-    BitmapDrawable bm2 = new BitmapDrawable( c.getResources(), Bitmap.createScaledBitmap( bm1, size, size, false ) );
+    Bitmap bm1 = BitmapFactory.decodeResource( ctx.getResources(), res_id );
+    BitmapDrawable bm2 = new BitmapDrawable( ctx.getResources(), Bitmap.createScaledBitmap( bm1, size, size, false ) );
     return bm2;
   }
 
-  public static void setButtonBackground( Context c, Button b, int size, int res_id )
+  /** set a button background
+   * @param ctx     context 
+   * @param b       button
+   * @param size    button size
+   * @param res_id  ID of the button background
+   */
+  public static void setButtonBackground( Context ctx, Button b, int size, int res_id )
   {
-    b.setBackgroundDrawable( getButtonBackground( c, size, res_id ) );
+    b.setBackgroundDrawable( getButtonBackground( ctx, size, res_id ) );
   }
 
   // --------------- MyButton intanace:
@@ -132,7 +167,13 @@ public class MyButton extends Button
   private int mSize;
   private float mX, mY;
 
-  public MyButton( Context context, OnClickListener click_listener, int size, int res_id /*, int res_id2 */ )
+  /** cstr
+   * @param ctx     context 
+   * @param cick_listener user-tap listener
+   * @param size    button size
+   * @param res_id  ID of the button background
+   */
+  public MyButton( Context context, OnClickListener click_listener, int size, int res_id )
   {
     super( context );
     mContext = context;
@@ -146,5 +187,7 @@ public class MyButton extends Button
     setBackgroundDrawable( mBitmap );
   }
 
+  /** @return the button bitmap
+   */
   public BitmapDrawable getBitmap() { return mBitmap; }
 }

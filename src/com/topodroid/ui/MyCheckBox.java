@@ -26,6 +26,9 @@ public class MyCheckBox extends CompoundButton
   private int mSize;
   private boolean mState;
 
+  /** cstr
+   * @param context context
+   */
   public MyCheckBox( Context context )
   {
     super( context );
@@ -37,6 +40,12 @@ public class MyCheckBox extends CompoundButton
     init();
   }
 
+  /** cstr
+   * @param context context
+   * @param size    button size
+   * @param id_on   resource ID of ON state
+   * @param id_off  resource ID of OFF state
+   */
   public MyCheckBox( Context context, int size, int id_on, int id_off )
   {
     super( context );
@@ -57,6 +66,8 @@ public class MyCheckBox extends CompoundButton
     init();
   }
 
+  /** initialize the checkbox
+   */
   private void init()
   {
     setOnCheckedChangeListener( new OnCheckedChangeListener() {
@@ -80,15 +91,23 @@ public class MyCheckBox extends CompoundButton
     TDandroid.setButtonBackground( this, MyButton.getButtonBackground( mContext, mContext.getResources(), (mState ? mIdOn : mIdOff) ) );
   }
 
+  /** @return true if the checkbox is ON
+   */
   @Override
   public boolean isChecked() { return mState; }
 
+  
+  /** @return new state of the checkbox after toggling ON-OFF
+   */
   public boolean toggleState()
   {
     setState( ! mState );
     return mState;
   }
 
+  /** set the state of the checkbox
+   * @param state   new state
+   */
   public void setState( boolean state )
   {
     mState = state;

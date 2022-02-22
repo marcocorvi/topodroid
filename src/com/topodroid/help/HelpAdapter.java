@@ -26,6 +26,11 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
   // private Context mContext;
   // private final HelpDialog mParent;
 
+  /** cstr
+   * @param ctx   context
+   * @param id    resource ID
+   * @param items list of entries to put on the adapter
+   */
   HelpAdapter( Context ctx, /* HelpDialog parent, */ int id, ArrayList< HelpEntry > items )
   {
     super( ctx, id, items );
@@ -38,11 +43,19 @@ class HelpAdapter extends ArrayAdapter< HelpEntry >
     }
   }
 
+  /** add an entry to the adapter
+   * @param item   entry to add
+   */
   public void add( HelpEntry item ) 
   {
     mItems.add( item );
   }
 
+  /** get the view to display an entry
+   * @param pos    entry position
+   * @param convertView convertible view (if not null)
+   * @param parent      view container parent
+   */
   // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
