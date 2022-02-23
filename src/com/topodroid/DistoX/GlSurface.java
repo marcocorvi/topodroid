@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
@@ -55,6 +55,7 @@ public class GlSurface extends GlShape
  
   private float[] mSurfaceData = null;
   private Bitmap mBitmap = null;
+  private boolean mBitmapBounded = false;
   boolean isValid;
 
   // texture: bitmap resource
@@ -114,27 +115,79 @@ public class GlSurface extends GlShape
     return isValid;
   }
 
-  // take ownership of the bitmap
-  synchronized void setBitmap( Bitmap bitmap ) { mBitmap = bitmap; }
-
-  // texture = texture resource id
-  synchronized void initTexture( int texture )
-  {
-    mBitmap = GlResourceReader.readTexture( mContext, texture );
+  /** set the texture bitmap
+   * @param bitmap   texture bitmap
+   * @note take ownership of the bitmap
+   */
+  synchronized void setTextureBitmap( Bitmap bitmap ) 
+  { 
+    // TDLog.v("GL SURFACE set texture bitmap- bound " + mBitmapBounded );
+    if ( mBitmap == bitmap ) return;
+    if ( mBitmap != null ) {
+      mBitmap.recycle();
+    }
+    mBitmap = bitmap; 
+    mBitmapBounded = false;
   }
 
+  // /** initialize the texture - NOT USED 
+  //  * @param texture   texture resource id
+  //  */
+  // synchronized void initTextureBitmap( int texture )
+  // {
+  //   if ( mBitmap != null ) {
+  //     mBitmap.recycle();
+  //   }
+  //   mBitmap = GlResourceReader.readTexture( mContext, texture );
+  // }
+
+  /** unbind bitmap texture, if any
+   */
+  synchronized void unbindTexture()
+  {
+    // TDLog.v("GL SURFACE unbind texture " + mTexId );
+    if ( mTexId >= 0 ) GL.unbindTexture( mTexId );
+    mTexId = -1;
+    mBitmapBounded = false;
+  }
+  
+
+  // /** rebind the surface texture bitmap - save the texture ID - (empty : unuesed)
+  //  */
+  // synchronized void rebindBitmap()
+  // {
+  //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId );
+  //   // if ( mBitmap == null ) return;
+  //   // if ( mTexId <= 0 ) {
+  //   //   mTexId = GL.bindTexture( mBitmap );
+  //   //   mBitmapBounded = true;
+  //   //   TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId );
+  //   // } else {
+  //   //   TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId + " aleady bound " + mBitmapBounded );
+  //   // }
+  // }
+
+  /** bind the surface texture bitmap - save the texture ID
+   */
   private synchronized void bindBitmap()
   {
-    if ( mBitmap == null ) return;
+    if ( mBitmapBounded ) return;
     mTexId = GL.bindTexture( mBitmap );
-    mBitmap.recycle();
-    mBitmap = null;
+    // mBitmap.recycle();
+    // mBitmap = null;
+    mBitmapBounded = true;
+    // TDLog.v("GL SURFACE bind texture bitmap: " + mTexId );
   }
 
-  private void bindDataBitmap( float[] mvp_matrix, float[] mv_matrix_int_t, Vector3D light )
+  /** bind the display data when there is a surface texture bitmap
+   * @param mvp_matrix      MVP matrix
+   * @param mv_matrix_inv_t inverse transpose of MV matrix
+   * @param light           light position
+   */
+  private void bindDataBitmap( float[] mvp_matrix, float[] mv_matrix_inv_t, Vector3D light )
   {
     GL.setUniformMatrix( mbUMVPMatrix, mvp_matrix );
-    GL.setUniformMatrix( mbUMVMatrixInvT, mv_matrix_int_t );
+    GL.setUniformMatrix( mbUMVMatrixInvT, mv_matrix_inv_t );
     if ( dataBuffer != null ) {
       GL.setAttributePointer( mbAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, BYTE_STRIDE );
       GL.setAttributePointer( mbANormal,   dataBuffer, OFFSET_NORMAL, COORDS_PER_NORMAL, BYTE_STRIDE );
@@ -152,12 +205,17 @@ public class GlSurface extends GlShape
     GL.setUniform( mbUAlpha, mAlpha ); // UNUSED
   }
 
-  private void bindDataGray( float[] mvp_matrix, float[] mv_matrix_int_t, Vector3D light )
+  /** bind the display data when there is no surface texture bitmap
+   * @param mvp_matrix      MVP matrix
+   * @param mv_matrix_inv_t inverse transpose of MV matrix
+   * @param light           light position
+   */
+  private void bindDataGray( float[] mvp_matrix, float[] mv_matrix_inv_t, Vector3D light )
   {
     // GLES20.glActiveTexture( 0 );
 
     GL.setUniformMatrix( mgUMVPMatrix, mvp_matrix );
-    GL.setUniformMatrix( mgUMVMatrixInvT, mv_matrix_int_t );
+    GL.setUniformMatrix( mgUMVMatrixInvT, mv_matrix_inv_t );
     if ( dataBuffer != null ) {
       GL.setAttributePointer( mgAPosition, dataBuffer, OFFSET_VERTEX, COORDS_PER_VERTEX, BYTE_STRIDE );
       GL.setAttributePointer( mgANormal,   dataBuffer, OFFSET_NORMAL, COORDS_PER_NORMAL, BYTE_STRIDE );
@@ -176,17 +234,22 @@ public class GlSurface extends GlShape
   //   GLES20.glActiveTexture( 0 );
   // }
 
-  void draw( float[] mvp_matrix, float[] mv_matrix_int_t, Vector3D light ) 
+  /** draw the surface
+   * @param mvp_matrix      MVP matrix
+   * @param mv_matrix_inv_t inverse transpose of MV matrix
+   * @param light           light position
+   */
+  void draw( float[] mvp_matrix, float[] mv_matrix_inv_t, Vector3D light ) 
   {
     if ( triangleCount == 0 ) return;
     bindBitmap(); // bind the texture bitmap if any
 
     if ( mTexId >= 0 && GlModel.surfaceTexture ) {
       GL.useProgram( mProgramBitmap );
-      bindDataBitmap( mvp_matrix, mv_matrix_int_t, light );
+      bindDataBitmap( mvp_matrix, mv_matrix_inv_t, light );
     } else {
       GL.useProgram( mProgramGray );
-      bindDataGray( mvp_matrix, mv_matrix_int_t, light );
+      bindDataGray( mvp_matrix, mv_matrix_inv_t, light );
     }
     // GLES20.glDrawElements( GLES20.GL_TRIANGLES, triangleCount*3, GLES20.GL_UNSIGNED_SHORT, orderBuffer );
     GL.drawTriangle( 0, triangleCount );
@@ -214,6 +277,18 @@ public class GlSurface extends GlShape
   //   for ( int s=0; s<COORDS_PER_VERTEX; ++s ) vector[s] = data[doff+s];
   // }
 
+  /** set the value of a DEM vertex (X-Z horizomntal grid, Y elevation)
+   * @param buffer   vertexes buffer
+   * @param k        vertex index
+   * @param data     data array of Y values
+   * @param i        col-index in the data
+   * @param j        row-index in the data
+   * @param nx       number of columns in the data
+   * @param nz       number of rows in the data (unused)
+   * @param x        X vertex velue
+   * @param z        z vertex velue
+   * @param ymed     Y value of the center ( to subtract from Y values )
+   */
   private void putVertex( float[] buffer, int k, float[] data, int i, int j, int nx, int nz, float x, float z, float ymed ) // ny unused
   {
     int doff = (j * nx + i) * COORDS_PER_VERTEX;
@@ -223,7 +298,12 @@ public class GlSurface extends GlShape
     buffer[boff+2] = -z;
   }
 
-  
+  /** set the value of a textel 
+   * @param buffer   textels buffer
+   * @param k        textel index
+   * @param s0       S value (?)
+   * @param t0       T value (?)
+   */
   private void putTexel( float[] buffer, int k, float s0, float t0 ) 
   {
     int boff = k * STRIDE + OFFSET_TEXEL;

@@ -170,12 +170,12 @@ public class GlRenderer implements Renderer
     mModel.unbindTextures();
   }
 
-  /** rebind the textures
-   */
-  void rebindTextures()
-  {
-    mModel.rebindTextures();
-  }
+  // /** rebind the textures - empty : unused
+  //  */
+  // void rebindTextures()
+  // {
+  //   // mModel.rebindTextures(); // this method is empty
+  // }
 
   /** prepare the 3D model
    * @param parser   data parser

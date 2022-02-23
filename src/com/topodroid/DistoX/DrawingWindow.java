@@ -956,7 +956,7 @@ public class DrawingWindow extends ItemDrawer
    * @param blk     data block
    * @param x1,y1   first endpoint
    * @param x2,y2   second endpoint
-   * @param cosine  used only for splays: cosine of the angle (splay,leg) of (splay,plane)
+   * @param cosine  used only for splays: cosine of the angle (splay,leg) or (splay,plane)
    * @param splay   whether the shot is a splay
    * @param selectable whether the shot is selectable
    */
@@ -999,7 +999,7 @@ public class DrawingWindow extends ItemDrawer
    * @param blk     data block
    * @param x1,y1   first endpoint
    * @param x2,y2   second endpoint
-   * @param cosine  ... (used only for splays)
+   * @param cosine  ... (used for dot/dash drawing)
    */
   private DrawingSplayPath makeFixedSplay( long type, DBlock blk, float x1, float y1, float x2, float y2, float cosine )
   {
@@ -1580,9 +1580,7 @@ public class DrawingWindow extends ItemDrawer
           mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(st.h, st.v), DrawingUtil.toSceneY(st.h, st.v), true, xhsections, saved );
         }
       }
-    } 
-    else                                        // ------------- PROJECTED PROFILE ---------------
-    { // if ( type == PlotType.PLOT_PROJECTED ) 
+    } else { // if ( type == PlotType.PLOT_PROJECTED ) // ------------- PROJECTED PROFILE ---------------
       double h1, h2;
       for ( NumShot sh : shots ) {
         // TDLog.v( "shot " + sh.from.name + "-" + sh.to.name + " from " + sh.from.show() + " to " + sh.to.show() );
@@ -1601,7 +1599,10 @@ public class DrawingWindow extends ItemDrawer
           if ( ! blk.isNoProfile() ) {
             h1 = st.e * cosp + st.s * sinp;
             h2 = sp.e * cosp + sp.s * sinp;
-            addFixedLine( type, blk, h1, st.v, h2, sp.v, sp.getCosine(), true, true );
+            // cosine of the angle between the splay and the direction of projection
+            float cosine = TDMath.sind( blk.mBearing ) * sinp + TDMath.cosd( blk.mBearing ) * cosp; // instead of sp.getCosine()
+            TDLog.v("splay " + blk.mBearing + " cosine " + cosine + " " + cosp + " " + sinp );
+            addFixedLine( type, blk, h1, st.v, h2, sp.v, cosine, true, true );
           }
         }
       }
@@ -7264,7 +7265,7 @@ public class DrawingWindow extends ItemDrawer
 	} else {
           if ( mNum != null ) {
             float azimuth = -1;
-            if ( mPlot2 !=  null && PlotType.PLOT_PROJECTED == mPlot2.type ) {
+            if ( isProfileProjected() ) {
               azimuth = mPlot2.azimuth;
             }
             new DrawingStatDialog( mActivity, mNum, mPlot1.start, azimuth, mApp_mData.getSurveyStat( TDInstance.sid ) ).show();
@@ -7350,6 +7351,13 @@ public class DrawingWindow extends ItemDrawer
             new HelpDialog(mActivity, izons_move, menus, help_icons_move, help_menus, nn_move, help_menus.length, getResources().getString( HELP_PAGE ) ).show();
         }
       }
+  }
+
+  /** @return true if the profile is projected
+   */
+  private boolean isProfileProjected()
+  {
+    return ( mPlot2 !=  null && PlotType.PLOT_PROJECTED == mPlot2.type );
   }
 
   static private int mExportIndex;

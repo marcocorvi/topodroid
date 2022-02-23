@@ -386,6 +386,8 @@ public class TopoGL extends Activity
     // }
   }
 
+  /** lifecycle: when the window pauses displaying
+   */
   @Override
   protected void onPause()
   {
@@ -397,6 +399,8 @@ public class TopoGL extends Activity
     }
   }
 
+  /** lifecycle: when the window starts
+   */
   @Override
   protected void onStart()
   {
@@ -408,6 +412,8 @@ public class TopoGL extends Activity
     makeSurface();
   }
 
+  /** lifecycle: when the window resumes displaying
+   */
   @Override
   protected void onResume()
   {
@@ -417,7 +423,7 @@ public class TopoGL extends Activity
       // glSurfaceView.setMinimumWidth( mLayout.getWidth() );
       // glSurfaceView.setMinimumHeight( mLayout.getHeight() );
       glSurfaceView.onResume();
-      mRenderer.rebindTextures();
+      // mRenderer.rebindTextures(); // this method is empty-unused
       // mRenderer.onSurfaceChanged( null, glSurfaceView.getWidth(), glSurfaceView.getHeight() );
       // glSurfaceView.requestRender();
     }

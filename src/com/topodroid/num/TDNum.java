@@ -29,7 +29,7 @@ import java.util.HashMap;
 
 public class TDNum
 {
-  /** create the numerical centerline
+  /** cstr: create the numerical centerline
    * @param data     list of survey data
    * @param start    start station
    * @param view     barriers list
@@ -93,6 +93,9 @@ public class TDNum
     mVmax  = 0;
   }
 
+  /** update the bounding box to include a new point
+   * @param s    new survey point
+   */
   private void updateBBox( NumSurveyPoint s )
   {
     if ( s.s < mSmin ) mSmin = s.s; else if ( s.s > mSmax ) mSmax = s.s;
@@ -124,6 +127,8 @@ public class TDNum
 
   private int mLenCnt;
 
+  /** reset the counters for the statistics
+   */
   private void resetStats()
   {
     mLenCnt  = 0;
@@ -137,7 +142,9 @@ public class TDNum
     mInLegErr1 = mInLegErr2 = 0;
   }
 
-  // add the contribution of the data of a leg to the statistics of in-leg errors
+  /** add the contribution of the data of a leg to the statistics of in-leg errors
+   * @param ts   leg shot
+   */
   private void addToInLegError( TriShot ts )
   {
     int size = ts.blocks.size();
@@ -153,6 +160,8 @@ public class TDNum
     }
   }
 
+  /** compute the in-leg error (mean and stddev)
+   */
   private void computeInLegError()
   {
     if ( mInLegErrSum0 > 0 ) {
@@ -161,6 +170,13 @@ public class TDNum
     }
   }
 
+  /** add data to the counters for the statistics
+   * @param d     whether it is duplicate leg
+   * @param s     whether it is surface leg
+   * @param l     shot length
+   * @param e     shot extent
+   * @param h     shot horizontal extent
+   */
   private void addToStats( boolean d, boolean s, double l, double e, double h )
   {
     if ( d ) ++mDupNr;
@@ -173,6 +189,14 @@ public class TDNum
     }
   }
 
+  /** add data to the counters for the statistics
+   * @param d     whether it is duplicate leg
+   * @param s     whether it is surface leg
+   * @param l     shot length
+   * @param e     shot extent
+   * @param h     shot horizontal extent
+   * @param v     vertical value
+   */
   private void addToStats( boolean d, boolean s, double l, double e, double h, double v )
   {
     if ( d ) ++mDupNr;
@@ -187,23 +211,61 @@ public class TDNum
     }
   }
 
+  /** @return the number of stations
+   */
   public int stationsNr()  { return mStations.size(); }
+
+  /** @return the number of (leg) shots
+   */
   public int shotsNr()     { return mShots.size(); }
+
+  /** @return the number of duplicate (leg) shots
+   */
   public int duplicateNr() { return mDupNr; }
+
+  /** @return the number of surface (leg) shots
+   */
   public int surfaceNr()   { return mSurfNr; }
+
+  /** @return the number of splays
+   */
   public int splaysNr()    { return mSplays.size(); }
+
+  /** @return the number of loops
+   */
   public int loopNr()      { return mClosures.size(); }
+
+  /** @return the number of unattached (leg) shots
+   */
   public int unattachedShotsNr() { return mUnattachedShots.size(); }
 
+  /** @return the length of the survey midline 
+   */
   public float surveyLength()     { return (float)mLength; }
+
+  /** @return the length of the survey extent line 
+   */
   public float surveyExtLen()     { return (float)mExtLen; }
+
+  /** @return the length of the survey horizontal extent line 
+   */
   public float surveyProjLen()    { return (float)mProjLen; }
+
   public float surveyTop()        { return (float)mTup; }   // top must be positive
+
   public float surveyBottom()     { return (float)mTdown; } // bottom must be negative
+
+  /** @return the length of the survey unattached legs
+   */
   public float unattachedLength() { return (float)mUnattachedLength; }
 
-  public float angleErrorMean()   { return (float)mInLegErr1; } // radians
-  public float angleErrorStddev() { return (float)mInLegErr2; } // radians
+  /** @return the mean angle error [radians]
+   */
+  public float angleErrorMean()   { return (float)mInLegErr1; }
+
+  /** @return the std-dev of the angle error [radians]
+   */
+  public float angleErrorStddev() { return (float)mInLegErr2; }
 
   // -------------------------------------------------------
   // SURVEY DATA 

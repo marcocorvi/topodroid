@@ -80,8 +80,10 @@ public class GlModel
   // -----------------------------------------------------------------
   // WITH-GPS GPS LOCATION
   
-  // use null vector to clear location
-  synchronized void setLocation( Vector3D v ) // e, n, z
+  /** set the GPS location - use null vector to clear location
+   * @param v   GPS location (E, N, Z)
+   */
+  synchronized void setLocation( Vector3D v ) 
   {
     if ( glPoint != null ) {
       if ( v != null ) {
@@ -97,32 +99,50 @@ public class GlModel
   // --------------------------------------------------------------
   // MAINTENANCE
 
+  /** @return true if the rendered has a data parser
+   */
   boolean hasParser() { return mParser != null; }
 
+  /** @return true if the rendered has a DEM surface
+   */
   boolean hasSurface() { return  surfaceMode && glSurface != null; }
 
-  void rebindTextures()
-  {
-    // if ( glNames != null ) glNames.resetTexture(); // nothing to do
-  }
+  // /** rebind textures - empty: unused
+  //  */
+  // void rebindTextures()
+  // {
+  //   // TDLog.v("GL MODEL rebind textures");
+  //   // if ( glNames != null ) glNames.resetTexture(); // nothing to do
+  //   // if ( glSurface != null ) glSurface.rebindBitmap(); // this method is empty - commented out
+  // }
 
-
+  /** unbind rendered textures ( station names and surface bitmap)
+   */
   void unbindTextures()
   {
     // TDLog.v("Model unbind textures");
     if ( glNames != null ) glNames.unbindTexture();
+    if ( glSurface != null ) glSurface.unbindTexture();
   }
 
+  /** @return the diameter of the model
+   */
   double getDiameter() { return mDiameter; } 
 
+  /** @return the center of the model
+   */
   Vector3D getCenter() { return ( glNames != null )? glNames.getCenter() : null; }
 
+  /** @return the size of the grid cells
+   */
   float getGridCell() { return grid_size; }
 
   // double getDx0() { return ((glLegs == null)? 0 : glLegs.xmed ); }
   // double getDy0() { return ((glLegs == null)? 0 : glLegs.ymin ); }
   // double getDz0() { return ((glLegs == null)? 0 : glLegs.zmin ); }
 
+  /** completely clear the 3D model
+   */
   synchronized void clearAll() 
   {
     glSurfaceLegs = null;
@@ -143,6 +163,10 @@ public class GlModel
     glPoint   = null; // WITH-GPS
   }
 
+  /** set the width and the height
+   * @param w  width
+   * @param h  heihght
+   */
   static void setWidthAndHeight( float w, float h ) 
   {
     mHalfWidth = w/2.0f;
@@ -150,6 +174,8 @@ public class GlModel
     mHeight = h;
   }
 
+  /** initialize the openGL
+   */
   void initGL()
   {
     GlLines.initGL( mContext ); // init GL programs
@@ -202,13 +228,28 @@ public class GlModel
   static public double mSplitStretchDelta   = 0.1f;
   static public double mPowercrustDelta     = 0.1f; // meters
 
+  /** cycle through the modes of the display of the splays
+   */
   static void toggleSplays()   { splayMode = (splayMode+1) % DRAW_MAX; }
+
   // static void togglePlanview() { planviewMode = ( planviewMode + 1 ) % 4; }
+
+  /** toggle the display of the wall-model
+   */
   static void toggleWallMode() { wallMode = ! wallMode; }
+
+  /** toggle the display of the DEM surface
+   */
   static void toggleSurface() { surfaceMode = ! surfaceMode; }
+
   // static void toggleSurfaceLegs() { surfaceLegsMode = ! surfaceLegsMode; }
+
+  /** cycle through the modes of the display of the frame
+   */
   static void toggleFrameMode()   { frameMode = (frameMode + 1) % FRAME_MAX; }
 
+  /** reset to the default display modes
+   */
   static void resetModes()
   {
     splayMode    = DRAW_NONE;
@@ -225,6 +266,8 @@ public class GlModel
     // GlSketch.reloadSymbols( TDPath.PATH_SYMBOL_POINT );
   }
 
+  /** rseet the leg/splay color modes
+   */
   void resetColorMode()
   {
     if ( glLegs   != null ) glLegs.setColorMode(   GlLines.COLOR_NONE, GlLines.COLOR_MAX );
@@ -235,12 +278,16 @@ public class GlModel
     clearStationHighlight();
   }
   
+  /** clear the hight of the stations
+   */
   void clearStationHighlight()
   {
     if ( glNames  != null ) glNames.clearHighlight();
     clearPath( );
   }
 
+  /** cycle throught the leg/splay color modes
+   */
   synchronized void toggleColorMode() { 
     if ( glLegs != null ) {
       // int max = ( mParser.has_temperature )? GlLines.COLOR_MAX : GlLines.COLOR_MAX - 1; // TEMPERATURE
@@ -255,16 +302,23 @@ public class GlModel
     }
   }
 
+  /** @return the leg/splay color mode
+   */
   int getColorMode() 
   {
     return ( glLegs != null )? glLegs.mColorMode : GlLines.COLOR_NONE;
   }
 
+  /** zoom fit - empty
+   */
   public void zoomOne() { /* TODO */ }
 
   private boolean modelCreated = false;
 
   // ---------------------------------------------------------------------------
+  /** cstr
+   * @param ctx   context
+   */
   GlModel ( Context ctx )
   { 
     mContext = ctx;
@@ -650,10 +704,13 @@ public class GlModel
     synchronized( this ) { glPoint = point; }
   }
 
+  /** prepare the surface texture: set the textute to the surface
+   * @param texture   surface texture bitmap
+   */
   void prepareTexture( Bitmap texture )
   {
     if ( texture != null && glSurface != null ) {
-      glSurface.setBitmap( texture );
+      glSurface.setTextureBitmap( texture );
     }
   }
 
@@ -904,7 +961,7 @@ public class GlModel
         if ( parser != null && parser.mBitmap != null ) {
           Bitmap texture = parser.mBitmap.getBitmap( surface.mEast1, surface.mNorth1, surface.mEast2, surface.mNorth2 );
           if ( texture != null ) {
-            gl_surface.setBitmap( texture );
+            gl_surface.setTextureBitmap( texture );
           }
         }
         synchronized( this ) { glSurface = gl_surface; }

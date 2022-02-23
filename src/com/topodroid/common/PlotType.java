@@ -31,23 +31,67 @@ public class PlotType
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
   public static final long PLOT_PROJECTED    = 8; // projected profile
 
-  public static boolean isVertical( long type ) 
-  { return ( type == PLOT_EXTENDED || type == PLOT_PROJECTED || type == PLOT_SECTION || type == PLOT_X_SECTION ); }
+  /** @return true if the type is for a vertical sketch
+   * @param t   plot type
+   */
+  public static boolean isVertical( long t ) 
+  { return ( t == PLOT_EXTENDED || t == PLOT_PROJECTED || t == PLOT_SECTION || t == PLOT_X_SECTION ); }
 
+  /** @return true if the type is for a leg-xsection sketch
+   * @param t   plot type
+   */
   public static boolean isLegSection( long t )     { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
+
+  /** @return true if the type is for a station-xsection sketch
+   * @param t   plot type
+   */
   public static boolean isStationSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+
+  /** @return true if the type is for a xsection sketch
+   * @param t   plot type
+   */
   public static boolean isAnySection( long t ) { return t == PLOT_SECTION || t == PLOT_H_SECTION 
                                             || t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
+
+  /** @return true if the type is for a xsection photo
+   * @param t   plot type
+   */
   public static boolean isPhoto( long t )    { return t == PLOT_PHOTO; }
+
+  /** @return true if the type is for a xsection sketch or photo
+   * @param t   plot type
+   */
   public static boolean isAnySectionOrPhoto( long t )
   { return t == PLOT_SECTION || t == PLOT_H_SECTION || t == PLOT_X_SECTION || t == PLOT_XH_SECTION || t == PLOT_PHOTO; }
 
+  /** @return true if the type is for a 2D plot (not xsection)
+   * @param t   plot type
+   */
   public static boolean isSketch2D( long t ) { return t == PLOT_PLAN || t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
+
+  /** @return true if the type is for a 2D profile sketch
+   * @param t   plot type
+   */
   public static boolean isProfile(  long t ) { return t == PLOT_EXTENDED || t == PLOT_PROJECTED; }
+
+  /** @return true if the type is for a 2D extended profile sketch
+   * @param t   plot type
+   */
   public static boolean isExtended( long t ) { return t == PLOT_EXTENDED; }
-  public static boolean isProjeted( long t ) { return t == PLOT_PROJECTED; }
+
+  /** @return true if the type is for a 2D projected profile sketch
+   * @param t   plot type
+   */
+  public static boolean isProjected( long t ) { return t == PLOT_PROJECTED; }
+
+  /** @return true if the type is for a 2D plan sketch
+   * @param t   plot type
+   */
   public static boolean isPlan(     long t ) { return t == PLOT_PLAN; }
 
+  /** @return true if the type is for a 3D sketch
+   * @param t   plot type
+   */
   public static boolean isSketch3D( long t ) { return t == PLOT_SKETCH_3D; }
 
 
@@ -62,6 +106,12 @@ public class PlotType
   //   "XH-SECTION"
   // };
 
+  /** convert plot type to string
+   * @param name   ...
+   * @param type   plot type
+   * @param res    resources
+   * @return plot type as string
+   */
   public static String plotTypeString( String name, int type, Resources res )
   {
     switch (type) {
@@ -87,6 +137,10 @@ public class PlotType
     return null; // cause a throw
   }
 
+  /** convert plot type to string
+   * @param type   plot type as string
+   * @return plot type
+   */
   public static long stringToPlotType( String type )
   {
     Resources res = TDInstance.context.getResources();
@@ -112,6 +166,9 @@ public class PlotType
     "none", "plan", "extended", "none", "none", "none", "sketch_3d", "none", "elevation"
   };
 
+  /** @return the Therion projection for a given type
+   * @param type   plot type
+   */
   public static String projName( int type ) { return mTherionProjName[ type ]; }
 
   // static final String[] plotName = { // plot list names

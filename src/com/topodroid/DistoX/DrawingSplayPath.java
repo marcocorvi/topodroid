@@ -244,7 +244,7 @@ public class DrawingSplayPath extends DrawingPath
    * @param v_paint  V-splay paint
    * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_AZIMUTH, or DASHING_VIEW for profile
    */
-  private void setSplayPaintPlan( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
+  private void setSplayPaintAzimuth( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
     if (cosine >= 0 ) {
@@ -267,7 +267,7 @@ public class DrawingSplayPath extends DrawingPath
    * @param v_paint  V-splay paint
    * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_CLINO, or DASHING_VIEW for plan
    */
-  private void setSplayPaintProfile( DBlock blk, Paint h_paint, Paint v_paint )
+  private void setSplayPaintClino( DBlock blk, Paint h_paint, Paint v_paint )
   {
     if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
     if (blk.mClino > TDSetting.mVertSplay ) {
@@ -278,6 +278,30 @@ public class DrawingSplayPath extends DrawingPath
       mPaint= BrushManager.paintSplayXBdash;
     // } else { // nothing: paint is already SplayXB
     //   mPaint= BrushManager.paintSplayXB;
+    }
+  }
+
+  /** set splay paint according to the azimuth (projected profile)
+   * @param cosine   cos(angle_splay-proj_direction) used for projected dashing
+   * @param h_paint  H-splay paint
+   * @param v_paint  V-splay paint
+   * @note called by DrawingCommandManager when TDSetting.mDashSplay == DASHING_AZIMUTH, or DASHING_VIEW for profile
+   */
+  private void setSplayPaintProjected( DBlock blk, float cosine, Paint h_paint, Paint v_paint )
+  {
+    if ( setSplayPaintDefault( blk, h_paint, v_paint ) ) return;
+    if (cosine >= 0 ) {
+      if ( cosine > TDSetting.mCosHorizSplay ) {
+        mPaint = BrushManager.paintSplayXBdot;
+        // TDLog.v("paint DOT cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
+      }
+    } else if (cosine < 0 ) {
+      if ( cosine < -TDSetting.mCosHorizSplay ) {
+        mPaint = BrushManager.paintSplayXBdash;
+        // TDLog.v("paint DASH cosine " + cosine+ " " + TDSetting.mCosHorizSplay );
+      }
+    // } else { // nothing: paint is already SplayXB
+    //   mPaint = BrushManager.paintSplayXB;
     }
   }
 
@@ -316,16 +340,18 @@ public class DrawingSplayPath extends DrawingPath
     // TDLog.v("splay paint " + TDSetting.mDashSplay + " cos " + this.getCosine() );
     switch ( TDSetting.mDashSplay ) {
       case TDSetting.DASHING_AZIMUTH:
-        this.setSplayPaintPlan( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        this.setSplayPaintAzimuth( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         break;
       case TDSetting.DASHING_CLINO:
-        this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        this.setSplayPaintClino( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         break;
       case TDSetting.DASHING_VIEW:
-        if ( PlotType.isProfile( type ) ) {
-          this.setSplayPaintPlan( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
-        } else {
-          this.setSplayPaintProfile( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        if ( PlotType.isPlan( type ) ) {
+          this.setSplayPaintClino( blk, BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else if ( PlotType.isExtended( type ) ) {
+          this.setSplayPaintAzimuth( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
+        } else if ( PlotType.isProjected( type ) ) {
+          this.setSplayPaintProjected( blk, this.getCosine(), BrushManager.darkBluePaint, BrushManager.deepBluePaint );
         }
         break;
       // case TDSetting.DASHING_NONE:
