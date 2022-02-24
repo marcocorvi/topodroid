@@ -153,8 +153,8 @@ class ProjectionDialog extends MyDialog
     float zoom = mZoom;
     mZoom     *= f;
     // TDLog.v( "zoom " + mZoom );
-    mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
-    mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
+    mOffset.x -= mDisplayCenter.x * (1/zoom - 1/mZoom);
+    mOffset.y -= mDisplayCenter.y * (1/zoom - 1/mZoom);
     // TDLog.v( "change zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
     // mProjectionSurface.refresh();
@@ -215,7 +215,7 @@ class ProjectionDialog extends MyDialog
 
   // --------------------------------------------------------------------------------------
 
-  /** compute the references of the graphics
+  /** compute the midline projection 
    */
   private void computeReferences( )
   {
@@ -339,10 +339,7 @@ class ProjectionDialog extends MyDialog
     mBtnMinus.setOnClickListener( this );
     mZoom = TopoDroidApp.mScaleFactor;    // canvas zoom
 
-    float displayWidth = TopoDroidApp.mDisplayWidth;
-    float displayHeight = TopoDroidApp.mDisplayHeight;
-    
-    mDisplayCenter = new PointF( displayWidth / 2, displayHeight / 2);
+    mDisplayCenter = new PointF( TopoDroidApp.mDisplayWidth / 2 - DrawingUtil.CENTER_X, TopoDroidApp.mDisplayHeight / 2 - DrawingUtil.CENTER_Y );
     // TDLog.v( "surface " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
     mProjectionSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
@@ -464,6 +461,7 @@ class ProjectionDialog extends MyDialog
     } else {
       // float decl = mApp.mData.getSurveyDeclination( mSid );
       mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
+      mNum.recenter();
       mSeekBar.setProgress( 200 );
       float e1 = DrawingUtil.toSceneX( mNum.surveyEmin(), mNum.surveySmin() );  // CENTER_X + Emin * SCALE referred to upper-left corner
       float s1 = DrawingUtil.toSceneY( mNum.surveyEmin(), mNum.surveySmin() ); 
@@ -480,15 +478,15 @@ class ProjectionDialog extends MyDialog
       // X --> X' = ( sceneX + offsetX ) * zoom 
       //          = ( (CENTER_X + X*SCALE) + offsetX ) * zoom
       //          = DisplayCenter.X + X * SCALE * zoom - (CENTER_X + cX * SCALE) * zoom;
-      mOffset.x = (mDisplayCenter.x - DrawingUtil.CENTER_X) / zoom - centerx;
-      mOffset.y = (mDisplayCenter.y - DrawingUtil.CENTER_Y) / zoom - centery;
+      mOffset.x = mDisplayCenter.x / zoom - centerx;
+      mOffset.y = mDisplayCenter.y / zoom - centery;
       mZoom = zoom;
-      TDLog.v("corner " + e1 + " " + s1 + "   " + e2 + " " + s2 + " center " + centerx + " " + centery );
-      TDLog.v("size " + de + " " + ds + " off " + mOffset.x + " " + mOffset.y + " zoom " + zoom );
+      // TDLog.v("corner " + e1 + " " + s1 + "   " + e2 + " " + s2 + " center " + centerx + " " + centery );
+      // TDLog.v("size " + de + " " + ds + " off " + mOffset.x + " " + mOffset.y + " zoom " + zoom );
 
       // mZoom = 10 * zoom;
-      // mOffset.x += (mDisplayCenter.x - DrawingUtil.CENTER_X) * ( 1/mZoom - 1/zoom );
-      // mOffset.y += (mDisplayCenter.y - DrawingUtil.CENTER_Y) * ( 1/mZoom - 1/zoom );
+      // mOffset.x += mDisplayCenter.x * ( 1/mZoom - 1/zoom );
+      // mOffset.y += mDisplayCenter.y * ( 1/mZoom - 1/zoom );
 
       mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
 

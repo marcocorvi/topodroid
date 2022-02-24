@@ -1285,11 +1285,13 @@ public class TDNum
   // =============================================================================
   // LOOP CLOSURE-ERROR COMPENSATION
 
+  /** a cycle step: a branch from a node
+   */
   class NumStep
   { 
-    NumBranch b;
-    NumNode n;
-    int k;
+    NumBranch b; // branch of this step
+    NumNode n;   // ???
+    int k;       // index of steps on the same cycle
   
     NumStep( NumBranch b0, NumNode n0, int k0 )
     {
@@ -1299,19 +1301,27 @@ public class TDNum
     }
   }
 
-  // LIFO stack of steps
+  /** LIFO stack of steps
+   * the stack is implemented as a fixed-size array - this is ok because small stacks can be expected
+   */
   class NumStack
   {
-    int pos;
+    int pos; // number of items on the stack 
     int max;
     NumStep[] data;
    
+    /** cstr
+     * @param m  max stack size 
+     */
     NumStack( int m )
     {
       max = m;
+      pos = 0;
       data = new NumStep[max];
     }
 
+    /** @return the number of items on the stack
+     */
     int size() { return pos; }
 
     void push( NumStep step )
@@ -1322,13 +1332,23 @@ public class TDNum
       ++ pos;
     }
 
+    /** @return the item on the top of the stack (or null if the stack is empty)
+     */
     NumStep top() { return ( pos > 0 )? data[pos-1] : null; }
 
+    /** @return true if the stack is empty
+     */
     boolean empty() { return pos == 0; }
   
+    /** remove the top item from the stack
+     */
     void pop() { if ( pos > 0 ) { --pos; } }
   }
 
+  /** build a cycle
+   * @param stack   stack of cycle steps
+   * @return the cycle made of the branches of the steps in the stack
+   */
   private NumCycle buildCycle( NumStack stack )
   {
     int sz = stack.size();
@@ -1403,6 +1423,11 @@ public class TDNum
     }
   }
 
+  /** make the single loops
+   * @param branches     survey branches
+   * @param shots        survey shots
+   * TODO explain the logic of this method
+   */
   private void makeSingleLoops( ArrayList< NumBranch > branches, ArrayList< NumShot > shots )
   {
     for ( NumShot shot : shots ) {
@@ -1450,7 +1475,12 @@ public class TDNum
     }
   }
 
-  // follow a shot (good for a single line without crosses)
+  /** follow a shot (good for a single line without crosses) to make a branch
+   * @param br     branch (to which shots are added) 
+   * @param st     starting station
+   * @param after  whether the direction is forward (FROM -> TO) or backward (To -> FROM)
+   * @return list of (leg) shots that follow the station, as far as possible
+   */
   private ArrayList< NumShot > followShot( NumBranch br, NumStation st, boolean after )
   {
     ArrayList< NumShot > ret = new ArrayList<>();
@@ -1480,7 +1510,7 @@ public class TDNum
     return ret;
   }
 
-  /* make branches from this num nodes
+  /** make branches from this num nodes
    * @param also_cross_end     whether to include branches to end-points
    */
   public ArrayList< NumBranch > makeBranches( boolean also_cross_end ) 
@@ -1820,7 +1850,7 @@ public class TDNum
   }
 
   // ------------------------------------------------------------------------------
-  // ALGORITMS
+  // ALGORITHMS
 
   /** compute the 3D vector of a point along a leg
    * @param s     abscissa along the leg: 0 = FROM station, 1 = TO station
@@ -1841,7 +1871,10 @@ public class TDNum
     return new TDVector( (float)( st1.e + (st2.e-st1.e)*s ), (float)( st1.s + (st2.s-st1.s)*s ), (float)( st1.v + ( st2.v - st1.v)*s ) );
   }
 
-  
+  /** @return the list of legs of the shortest path between two stations
+   * @param s1    first station 
+   * @param s2    second station 
+   */
   private ArrayList<NumShot> getShortestPathShots( NumStation s1, NumStation s2 )
   {
     ArrayList< NumShot > ret = new ArrayList<>();
@@ -1852,6 +1885,39 @@ public class TDNum
       ret.add( e );
     }
     return ret;
+  }
+
+  /** recetner the survey about the middle 
+   * @note used only by the projection dialog
+   */
+  public void recenter()
+  {
+    double ec = (mEmin + mEmax)/2;
+    double sc = (mSmin + mSmax)/2;
+    double vc = (mVmin + mVmax)/2;
+    // double hc = (mHmin + mHmax)/2;
+    double de = (mEmax - mEmin)/2;
+    double ds = (mSmax - mSmin)/2;
+    double dv = (mVmax - mVmin)/2;
+    for ( NumStation st : mStations.getStations() ) {
+      st.e -= ec;
+      st.s -= sc;
+      st.v -= vc;
+      // st.h -= hc;
+    }
+    // shots use FROM-TO stations coords
+    for ( NumSplay sp : mSplays ) {
+      sp.e -= ec;
+      sp.s -= sc;
+      sp.v -= vc;
+      // sp.h -= hc;
+    }
+    mEmin = - de;
+    mEmax =   de;
+    mSmin = - ds;
+    mSmax =   ds;
+    mVmin = - dv;
+    mVmax =   dv;
   }
 
 }
