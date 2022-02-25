@@ -63,7 +63,7 @@ class ProjectionDialog extends MyDialog
   private Button  mBtnPlus;
   private Button  mBtnMinus;
   private EditText mETazimuth;
-  private TDNum mNum;
+  private TDNum mNum = null;
 
   private ZoomButtonsController mZoomBtnsCtrl = null;
   private boolean mZoomBtnsCtrlOn = false;
@@ -320,12 +320,6 @@ class ProjectionDialog extends MyDialog
     super.onCreate(savedInstanceState);
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
 
-    // Display display = getWindowManager().getDefaultDisplay();
-    // DisplayMetrics dm = new DisplayMetrics();
-    // display.getMetrics( dm );
-    // int width = dm widthPixels;
-    int width = mContext.getResources().getDisplayMetrics().widthPixels;
-
     // mIsNotMultitouch = ! TDandroid.checkMultitouch( this );
 
     setContentView( R.layout.projection_dialog );
@@ -337,10 +331,6 @@ class ProjectionDialog extends MyDialog
     mBtnOk.setOnClickListener( this );
     mBtnPlus.setOnClickListener( this );
     mBtnMinus.setOnClickListener( this );
-    mZoom = TopoDroidApp.mScaleFactor;    // canvas zoom
-
-    mDisplayCenter = new PointF( TopoDroidApp.mDisplayWidth / 2 - DrawingUtil.CENTER_X, TopoDroidApp.mDisplayHeight / 2 - DrawingUtil.CENTER_Y );
-    // TDLog.v( "surface " + mOffset.x + " " + mOffset.y + " " + mZoom );
 
     mProjectionSurface = (ProjectionSurface) findViewById(R.id.drawingSurface);
     // mProjectionSurface.setZoomer( this );
@@ -421,6 +411,12 @@ class ProjectionDialog extends MyDialog
     //   }
     // } );
 
+    // Display display = getWindowManager().getDefaultDisplay();
+    // DisplayMetrics dm = new DisplayMetrics();
+    // display.getMetrics( dm );
+    // int width = dm widthPixels;
+    // int width = mContext.getResources().getDisplayMetrics().widthPixels; // same as TopoDroidApp.mDisplayWidth
+
     doStart();
   }
 
@@ -438,13 +434,46 @@ class ProjectionDialog extends MyDialog
     if ( edit_text ) updateEditText();
   }
 
-  /** emptyi method but called by ProjectionSurface
+  /** @note called by ProjectionSurface
+   * @param w   surface width
+   * @param h   surface height
    */
-  void setSize( int w, int h )
+  synchronized void setSize( int w, int h )
   {
-    // mOffset.x = w/2;
-    // mOffset.y = h/2;
-    // mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    // TDLog.v("PROJ set size " + w + " " + h );
+    if ( w == 0 || h == 0 ) return;
+    float e1 = DrawingUtil.toSceneX( mNum.surveyEmin(), mNum.surveySmin() );  // CENTER_X + Emin * SCALE referred to upper-left corner
+    float s1 = DrawingUtil.toSceneY( mNum.surveyEmin(), mNum.surveySmin() ); 
+    float e2 = DrawingUtil.toSceneX( mNum.surveyEmax(), mNum.surveySmax() ); 
+    float s2 = DrawingUtil.toSceneY( mNum.surveyEmax(), mNum.surveySmax() ); 
+
+    float de = ( e2 - e1 ) / 2; // ( Emax - Emin)/2 * SCALE
+    float ds = ( s2 - s1 ) / 2;
+    float dx = (float)Math.sqrt( de*de + ds*ds );
+    float v1 = DrawingUtil.toSceneY( mNum.surveyHmin(), mNum.surveyVmin() );
+    float v2 = DrawingUtil.toSceneY( mNum.surveyHmax(), mNum.surveyVmax() );
+    float dy = ( v2 - v1 ) / 2;
+    // mZoom = TopoDroidApp.mScaleFactor;    // canvas zoom = 19.153126, DisplayWidth = 1080, DisplayHeight = 2043
+    float zoom = ( (dx > dy)? w / dx :  h / dy ) * TopoDroidApp.mScaleFactor / 100;
+
+    int h0 = findViewById( R.id.layout1 ).getHeight();
+    
+    // mDisplayCenter = new PointF( w / 2 - DrawingUtil.CENTER_X, h / 2 - DrawingUtil.CENTER_Y );
+    mDisplayCenter = new PointF( w / 2, (h + h0)/ 2 );
+
+    float centerx = ( e1 + e2 )/ 2; // FIXME this is DrawingUtil.CENTER_X = 100
+    float centery = ( v1 + v2 )/ 2; // FIXME this is DrawingUtil.CENTER_Y = 120
+
+    // X --> X' = ( sceneX + offsetX ) * zoom 
+    //          = ( (CENTER_X + X*SCALE) + offsetX ) * zoom
+    //          = DisplayCenter.X + X * SCALE * zoom - (CENTER_X + cX * SCALE) * zoom;
+    mOffset.x = mDisplayCenter.x / zoom - centerx;
+    mOffset.y = mDisplayCenter.y / zoom - centery;
+    mZoom     = zoom;
+    mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
+    if ( mNum != null ) {
+      computeReferences();
+    }
   }
 
   // ----------------------------------------------------------------------------
@@ -452,7 +481,7 @@ class ProjectionDialog extends MyDialog
   /** lifecycle: start
    * set the progress-bar and compute the initial offset and zoom
    */
-  private void doStart()
+  synchronized private void doStart()
   {
     mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
     if ( mList.size() == 0 ) {
@@ -463,34 +492,9 @@ class ProjectionDialog extends MyDialog
       mNum = new TDNum( mList, mFrom, "", "", 0.0f, null ); // null formatClosure
       mNum.recenter();
       mSeekBar.setProgress( 200 );
-      float e1 = DrawingUtil.toSceneX( mNum.surveyEmin(), mNum.surveySmin() );  // CENTER_X + Emin * SCALE referred to upper-left corner
-      float s1 = DrawingUtil.toSceneY( mNum.surveyEmin(), mNum.surveySmin() ); 
-      float e2 = DrawingUtil.toSceneX( mNum.surveyEmax(), mNum.surveySmax() ); 
-      float s2 = DrawingUtil.toSceneY( mNum.surveyEmax(), mNum.surveySmax() ); 
-
-      float de = ( e2 - e1 ) / 2; // ( Emax - Emin)/2 * SCALE
-      float ds = ( s2 - s1 ) / 2;
-      float zoom = 10 * mZoom / (float)Math.sqrt( de*de + ds*ds );
-
-      float centerx = ( e1 + e2 )/ 2;
-      float centery = ( s1 + s2 )/ 2;
-
-      // X --> X' = ( sceneX + offsetX ) * zoom 
-      //          = ( (CENTER_X + X*SCALE) + offsetX ) * zoom
-      //          = DisplayCenter.X + X * SCALE * zoom - (CENTER_X + cX * SCALE) * zoom;
-      mOffset.x = mDisplayCenter.x / zoom - centerx;
-      mOffset.y = mDisplayCenter.y / zoom - centery;
-      mZoom = zoom;
-      // TDLog.v("corner " + e1 + " " + s1 + "   " + e2 + " " + s2 + " center " + centerx + " " + centery );
-      // TDLog.v("size " + de + " " + ds + " off " + mOffset.x + " " + mOffset.y + " zoom " + zoom );
-
-      // mZoom = 10 * zoom;
-      // mOffset.x += mDisplayCenter.x * ( 1/mZoom - 1/zoom );
-      // mOffset.y += mDisplayCenter.y * ( 1/mZoom - 1/zoom );
-
-      mProjectionSurface.setTransform( mOffset.x, mOffset.y, mZoom );
-
-      computeReferences();
+      if ( mProjectionSurface != null ) {
+        setSize( mProjectionSurface.width(), mProjectionSurface.height() );
+      }
     }
   }
 
