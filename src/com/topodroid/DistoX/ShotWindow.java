@@ -834,7 +834,8 @@ public class ShotWindow extends Activity
       List< DBlock > shots1 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.DELETED );
       List< DBlock > shots2 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
-      List< PlotInfo > plots     = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
+      List< PlotInfo > plots   = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
+      // the list of deleted plots contains an even number of items: plan-profile pairs
       if (  TDLevel.overAdvanced ) {
         if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 && mDBlockBuffer.size() == 0 ) {
           TDToast.makeWarn( R.string.no_undelete_paste );

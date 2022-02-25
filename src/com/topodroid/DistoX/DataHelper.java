@@ -2801,6 +2801,9 @@ public class DataHelper extends DataSetObservable
      return list;
    }
 
+   /** @return the list of plots for a given survey
+    * @param sid    survey ID
+    */
    List< PlotInfo > selectAllPlots( long sid )
    {
      return doSelectAllPlots( sid, 
@@ -2809,6 +2812,10 @@ public class DataHelper extends DataSetObservable
      );
    }
 
+   /** @return the list of plots for a given survey and with given status
+    * @param sid    survey ID
+    * @param status plot status
+    */
    List< PlotInfo > selectAllPlots( long sid, long status )
    {
      return doSelectAllPlots( sid, 
@@ -2817,6 +2824,11 @@ public class DataHelper extends DataSetObservable
      );
    }
 
+   /** @return the list of plots for a given survey and with given status, and type
+    * @param sid    survey ID
+    * @param status plot status
+    * @param type   plot type
+    */
    List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type )
    {
      return doSelectAllPlots( sid, 
@@ -2825,20 +2837,26 @@ public class DataHelper extends DataSetObservable
      );
    }
 
+   // NOT USED
+   // List< PlotInfo > selectAllPlotsWithTypeOrientation( long sid, long status, long type, boolean landscape )
+   // {
+   //   return doSelectAllPlots( sid, 
+   //                            "surveyId=? and status=? and type=? and orientation=" + (landscape? 1 : 0),
+   //                            new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
+   //   );
+   // }
 
-   List< PlotInfo > selectAllPlotsWithType( long sid, long status, long type, boolean landscape )
-   {
-     return doSelectAllPlots( sid, 
-                              "surveyId=? and status=? and type=? and orientation=" + (landscape? 1 : 0),
-                              new String[] { Long.toString(sid), Long.toString(status), Long.toString(type) }
-     );
-   }
-
-   // NEW X_SECTIONS hide = parent plot
-   // @param parent   parent plot name (null if shared xsections)
-   //
+   /** @return list of plot xsections or a given survey and with given status and type
+    * @param sid    survey ID
+    * @param status plot status
+    * @param type   plot (xsection) type
+    * @param parent   parent plot name (null if shared xsections)
+    * @note NEW X_SECTIONS hide = parent plot
+    * @note used by DrawingWindow
+    */
    List< PlotInfo > selectAllPlotSectionsWithType( long sid, long status, long type, String parent )
    {
+     if ( ! PlotType.isAnySection( type ) ) return null; // safety check: FIXME what about PLOT_PHOTO ?
      if ( parent == null ) {
        return doSelectAllPlots( sid, 
                               "surveyId=? and status=? and type=?",
@@ -2852,6 +2870,11 @@ public class DataHelper extends DataSetObservable
    }
 
 
+  /** @return list of plot xsections or a given survey and with given status 
+   * @param sid    survey ID
+   * @param status plot status
+   * @note the values of the type(s) are taken from PlotType: 0 X_SECTION, 3 H_SECTION, 5 SECTION, 7 XH_SECTION
+   */
   List< PlotInfo > selectAllPlotsSection( long sid, long status )
   {
     return doSelectAllPlots( sid, 
@@ -2860,6 +2883,10 @@ public class DataHelper extends DataSetObservable
     );
   }
 
+  /** @return the list of plots at a station
+   * @param sid    survey ID
+   * @param name   station name
+   */
   private List< PlotInfo > selectPlotsAtStation( long sid, String name )
   {
     return doSelectAllPlots( sid, 
@@ -2868,7 +2895,10 @@ public class DataHelper extends DataSetObservable
     );
   }
 
-  // select all the plot names of a survey to delete shp exports
+  /** select all the plot names of a survey to delete shp exports
+   * @param sid    survey ID
+   * @return list of plot names
+   */
   List< String > selectPlotNames( long sid )
   {
     if ( myDB == null ) return null;
@@ -2884,7 +2914,9 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  // get the origin of the first plot (of type plan, or null if no plots
+  /** @return the origin of the first plot (of type plan, or null if no plots
+   * @param sid    survey ID
+   */
   String getFirstPlotOrigin( long sid )
   {
     if ( myDB == null ) return null;
@@ -2898,6 +2930,10 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return true if the given survey has a shot ID
+   * @param sid    survey ID
+   * @param id     shot ID
+   */
   private boolean hasShotId( long sid, long id )
   {
     if ( myDB == null ) return false;
@@ -2907,6 +2943,11 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
+  /** @return true if the survey has a shot between two given stations
+   * @param sid    survey ID
+   * @param fStation FROM station
+   * @param tStation TO station
+   */
   boolean hasShot( long sid, String fStation, String tStation )
   {
     if ( myDB == null ) return false;
@@ -2922,7 +2963,12 @@ public class DataHelper extends DataSetObservable
     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
     return ret;
   }
-    
+
+  /** @return the name of the TO station of the shot with the givel FROM station (or null if the shot was not found)
+   * @param sid    survey ID
+   * @param fStation FROM station
+   * @note the returned TO station can be empty
+   */
   String nextStation( long sid, String fStation )
   {
     if ( myDB == null ) return null;
@@ -3065,11 +3111,18 @@ public class DataHelper extends DataSetObservable
     return block;
   }
 
+  /** @return the data block of the last leg
+   * @param sid    survey ID
+   */
   DBlock selectLastLegShot( long sid )
   {
     return selectPreviousLegShot( myNextId+1, sid );
   }
 
+  /** @return the data block of the leg before a given shot
+   * @param shot_id  shot ID
+   * @param sid      survey ID
+   */
   private DBlock selectPreviousLegShot( long shot_id, long sid )
   {
     // TDLog.Log( TDLog.LOG_DB, "select previous leg shot " + shot_id + "/" + sid );
@@ -3095,6 +3148,9 @@ public class DataHelper extends DataSetObservable
     return block;
   }
 
+  /** @return the name of the last station
+   * @param sid    survey ID
+   */
   String getLastStationName( long sid )
   {
     if ( myDB == null ) return null;

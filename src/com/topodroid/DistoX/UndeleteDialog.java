@@ -70,8 +70,9 @@ class UndeleteDialog extends MyDialog
    * @param shots1    ... 
    * @param shots2    ... 
    * @param shots3    ... 
-   * @param plots     deleted plots
+   * @param plots     deleted plots (plan-profile pairs)
    * @param buffer    data-block buffer (copy/cut and paste)
+   * @note the choice of two separate lists of plots: plans and profiles is brittle
    */
   UndeleteDialog( Context context, ShotWindow parent, DataHelper data, long sid,
                          List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3,
@@ -100,10 +101,21 @@ class UndeleteDialog extends MyDialog
         mShots3.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_CALIB_CHECK ) );
       }
     }
-    if ( plots.size() > 0 ) {
+    int np = plots.size();
+    if ( np > 0 && (np%2) == 0 ) {
       mPlots  = new ArrayList< UndeleteItem >();
-      for ( PlotInfo p : plots ) {
-        mPlots.add( new UndeleteItem( p.id, String.format(Locale.US, "%d <%s> %s", p.id, p.name, p.getTypeString() ), UndeleteItem.UNDELETE_PLOT ) );
+      for ( int k=0; k<np; k+=2 ) {
+        PlotInfo plan = plots.get(k);
+        PlotInfo profile = plots.get(k+1);
+        String name = plan.name;
+        // N.B. this assumes that the list of plots contains plan-profile pairs - could assert
+        int len = name.length() - 1;
+        name = name.substring( 0, len );
+        if ( ! name.equals( profile.name.substring( 0, len) ) ) {
+          TDLog.Error("UNDELETE plan-profile name mismatch: " + plan.name + " " + profile.name ); 
+          break;
+        }
+        mPlots.add( new UndeleteItem( plan.id, profile.id, String.format(Locale.US, "%d-%d <%s>", plan.id, profile.id, name ), UndeleteItem.UNDELETE_PLOT ) );
       }
     }
   }
@@ -176,6 +188,7 @@ class UndeleteDialog extends MyDialog
         if ( mPlots != null ) {
           for ( UndeleteItem item : mPlots ) if ( item.flag ) {
             mData.undeletePlot( item.id, mSid );
+            mData.undeletePlot( item.id2, mSid );
           }
         }
         break;

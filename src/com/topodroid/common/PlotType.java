@@ -29,7 +29,7 @@ public class PlotType
   public static final long PLOT_SECTION    = 5; // section-line cross-section
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
-  public static final long PLOT_PROJECTED    = 8; // projected profile
+  public static final long PLOT_PROJECTED  = 8; // projected profile
 
   /** @return true if the type is for a vertical sketch
    * @param t   plot type

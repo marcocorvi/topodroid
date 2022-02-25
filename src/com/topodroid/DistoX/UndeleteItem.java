@@ -19,7 +19,8 @@ class UndeleteItem
   final static int UNDELETE_OVERSHOOT = 2;
   final static int UNDELETE_CALIB_CHECK = 3;
 
-  long id;
+  long id;      // ID of the item to recover
+  long id2;     // ID of the associated item (for plots)
   boolean flag;
   String  text;
   int     type;
@@ -31,7 +32,23 @@ class UndeleteItem
    */
   UndeleteItem( long _id, String txt, int _type )
   {
-    id = _id;
+    id   = _id;
+    id2  = -1L;
+    flag = false;
+    text = txt;
+    type = _type;
+  }
+
+  /** cstr
+   * @param _id     item ID
+   * @param _id2    associated item ID
+   * @param txt     display text
+   * @param _type   item type
+   */
+  UndeleteItem( long _id, long _id2, String txt, int _type )
+  {
+    id   = _id;
+    id2  = _id2;
     flag = false;
     text = txt;
     type = _type;
