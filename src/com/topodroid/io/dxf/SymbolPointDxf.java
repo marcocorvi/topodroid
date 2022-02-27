@@ -39,7 +39,7 @@ public class SymbolPointDxf
     addHandle( DXF.ACAD_12 );
     addColor( DXF.lt_byLayer );
     addAcDbEntity( DXF.ACAD_12, null ); // 2021-A
-    addLayer( DXF.ACAD_9, layer );  // 2021-A
+    addLayer( DXF.ACAD_9, layer );  // 2021-A    !!2022 ACAD_14 must be write layer!!
     addAcDbPolyline();
     addPolylineColor( 256 );
     addPolylineGroup( 1 );
