@@ -50,7 +50,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
-          android:inputType="number"
+        android:inputType="number"
         />
     </LinearLayout>
   </LinearLayout>
@@ -87,6 +87,25 @@
       android:layout_height="wrap_content"
       android:text="@string/export_with_xsections"
       />
+    <LinearLayout android:id="@+id/layout_svg_scale"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_scale_th"
+        android:labelFor="@+id/svg_scale"
+        />
+      <EditText android:id="@id/svg_scale"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        />
+    </LinearLayout>
     <!-- LinearLayout 
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"

@@ -1295,6 +1295,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_survex_splay_summary">Add TO station to splays in Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">Add LRUD to Survex/Therion export</string>
+  <string name="pref_svg_program_title">SVG program</string>
+  <string name="pref_svg_program_summary">Target SVG program</string>
   <string name="pref_svg_grid_title">Grid</string>
   <string name="pref_svg_grid_summary">Add grid to SVG/PNG export</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>

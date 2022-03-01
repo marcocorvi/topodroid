@@ -241,11 +241,7 @@ public class ExportDialogPlot extends MyDialog
           TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.therion_splays )).isChecked();
           TDSetting.mTherionXvi = ((CheckBox) findViewById( R.id.therion_xvi )).isChecked();
           try { 
-            int scale = Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() );
-            if ( scale < 40 ) { scale = 40; }
-            if ( scale > 2000 ) { scale = 2000; }
-            TDSetting.mTherionScale = scale;
-            TDSetting.mToTherion = TDSetting.THERION_SCALE / scale;
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
             TDLog.Error("Not integer export scale");
           }
@@ -278,6 +274,11 @@ public class ExportDialogPlot extends MyDialog
           TDSetting.mSvgLineDirection   = ((CheckBox) findViewById( R.id.svg_linedir )).isChecked();
           TDSetting.mSvgSplays     = ((CheckBox) findViewById( R.id.svg_splays )).isChecked();
           TDSetting.mAutoXSections = ((CheckBox) findViewById( R.id.svg_xsections )).isChecked();
+          try { 
+            TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.svg_scale )).getText().toString() ) );
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("Not integer export scale");
+          }
         }
         break;
       case 4: // Shapefile
@@ -329,6 +330,7 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.svg_linedir )).setChecked( TDSetting.mSvgLineDirection );
     ((CheckBox) findViewById( R.id.svg_splays )).setChecked( TDSetting.mSvgSplays );
     ((CheckBox) findViewById( R.id.svg_xsections )).setChecked( TDSetting.mAutoXSections );
+    ((EditText) findViewById( R.id.svg_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 

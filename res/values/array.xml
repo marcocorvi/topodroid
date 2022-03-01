@@ -146,6 +146,28 @@
      <item name="lfcr">LFCR</item>
   </string-array>
 
+  <!-- string-array name="exportScale">
+     <item name="s50">1:50</item>
+     <item name="s100">1:100</item>
+     <item name="s200">1:200</item>
+     <item name="s500">1:500</item>
+  </string-array>
+  <string-array name="exportScaleValue">
+     <item name="s50">50</item>
+     <item name="s100">100</item>
+     <item name="s200">200</item>
+     <item name="s500">500</item>
+  </string-array -->
+
+  <string-array name="svgProgram" translatable="false">
+     <item name="inkscape">Inkscape</item>
+     <item name="illustrator">Illustrator</item>
+  </string-array>
+  <string-array name="svgProgramValue" translatable="false">
+     <item name="inkscape">0</item>
+     <item name="illustrator">1</item>
+  </string-array>
+
   <!-- string-array name="wallsType">
      <item name="none">None</item>
      <item name="convex">Convex</item>

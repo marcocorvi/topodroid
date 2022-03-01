@@ -303,7 +303,7 @@ public class DrawingIO
   //                         try {
   //                           orientation = Double.parseDouble( vals2[3] );
   //                         } catch ( NumberFormatException e ) { 
-  //                           TDLog.Error( "Therion Area orientation error <" + line + ">" );
+  //                           TDLog.Error( "THERION area orientation error <" + line + ">" );
   //                         }
   //                       }
   //                       path.setAreaType( arType );
@@ -323,10 +323,10 @@ public class DrawingIO
   //                       path.addPoint( x, y );
   //                       // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x + " " + y);
   //                     } catch ( NumberFormatException e ) {
-  //                       TDLog.Error( "Therion Line X-Y error (10) <" + line + ">" );
+  //                       TDLog.Error( "THERION line X-Y error (10) <" + line + ">" );
   //                       continue;
   //                     } catch ( ArrayIndexOutOfBoundsException e ) {
-  //                       TDLog.Error( "Therion Line X-Y error (11) " + line );
+  //                       TDLog.Error( "THERION line X-Y error (11) " + line );
   //                       continue;
   //                     }
   //                   } else if ( pt2.length == 6 ) {
@@ -340,10 +340,10 @@ public class DrawingIO
   //                       path.addPoint3( x1, y1, x2, y2, x, y );
   //                       // TDLog.Log( TDLog.LOG_DEBUG, "area pt " + x1 + " " + y1 + " " + x2 + " " + y2 + " " + x + " " + y);
   //                     } catch ( NumberFormatException e ) {
-  //                       TDLog.Error( "Therion Line X-Y error (12) <" + line + ">" );
+  //                       TDLog.Error( "THERION line X-Y error (12) <" + line + ">" );
   //                       continue;
   //                     } catch ( ArrayIndexOutOfBoundsException e ) {
-  //                       TDLog.Error( "Therion Line X-Y error (13) " + line );
+  //                       TDLog.Error( "THERION line X-Y error (13) " + line );
   //                       continue;
   //                     }
   //                   }
@@ -414,10 +414,10 @@ public class DrawingIO
   //                   y = dy - Float.parseFloat( pt0[1] ) / toTherion;
   //                   path.addStartPoint( x, y );
   //                 } catch ( NumberFormatException e ) {
-  //                   TDLog.Error( "Therion Line X-Y error (1) <" + line + ">" );
+  //                   TDLog.Error( "THERION line X-Y error (1) <" + line + ">" );
   //                   continue;
   //                 } catch ( ArrayIndexOutOfBoundsException e ) {
-  //                   TDLog.Error( "Therion Line X-Y error (2) " + line );
+  //                   TDLog.Error( "THERION line X-Y error (2) " + line );
   //                   continue;
   //                 }
   //                 // TDLog.v( "  line start point: <" + line + "> " + x + " " + y );
@@ -445,10 +445,10 @@ public class DrawingIO
   //                         y = dy - Float.parseFloat( pt[1] ) / toTherion;
   //                         path.addPoint( x, y );
   //                       } catch ( NumberFormatException e ) {
-  //                         TDLog.Error( "Therion Line X-Y error (3) <" + line + ">" );
+  //                         TDLog.Error( "THERION line X-Y error (3) <" + line + ">" );
   //                         continue;
   //                       } catch ( ArrayIndexOutOfBoundsException e ) {
-  //                         TDLog.Error( "Therion Line X-Y error (4) " + line );
+  //                         TDLog.Error( "THERION line X-Y error (4) " + line );
   //                         continue;
   //                       }
   //                     } else if ( pt.length == 6 ) {
@@ -461,10 +461,10 @@ public class DrawingIO
   //                         y  = dy - Float.parseFloat( pt[5] ) / toTherion;
   //                         path.addPoint3( x1, y1, x2, y2, x, y );
   //                       } catch ( NumberFormatException e ) {
-  //                         TDLog.Error( "Therion Line X-Y error (5) <" + line + ">" );
+  //                         TDLog.Error( "THERION line X-Y error (5) <" + line + ">" );
   //                         continue;
   //                       } catch ( ArrayIndexOutOfBoundsException e ) {
-  //                         TDLog.Error( "Therion Line X-Y error (6) " + line );
+  //                         TDLog.Error( "THERION line X-Y error (6) " + line );
   //                         continue;
   //                       }
   //                     }
@@ -505,14 +505,14 @@ public class DrawingIO
    */
   static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
-    // TDLog.Log( TDLog.LOG_IO, "export Therion " + fullname + " file " + file.getPath() );
-    TDLog.v( "export Therion " + fullname + " file " + file.getPath() );
+    // TDLog.Log( TDLog.LOG_IO, "export therion " + fullname + " file " + file.getPath() );
+    TDLog.v( "THERION export " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
       exportTherion( manager, type, bw, fullname, projname, proj_dir, multisketch );
     } catch ( IOException e ) {
-      TDLog.Error( "Export Therion i/o error: " + e.getMessage() );
+      TDLog.Error( "THERION export i/o error [1] " + e.getMessage() );
     }
   }
 
@@ -523,7 +523,7 @@ public class DrawingIO
       bw.flush();
       bw.close();
     } catch ( IOException e ) {
-      TDLog.Error( "IO error " + e.getMessage() );
+      TDLog.Error( "THERION export i/o error [2] " + e.getMessage() );
     }
   }
 
