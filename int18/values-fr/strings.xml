@@ -1253,6 +1253,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Ajout station VERS aux visées dans Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Ajout LRUD à l\'export Survex</string>
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Grille</string>
   <string name="pref_svg_grid_summary">Ajouter une grille à l\'export SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">Aller-retour SVG</string>

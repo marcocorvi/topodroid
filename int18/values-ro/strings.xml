@@ -1260,6 +1260,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Adaugă stație TO (punct viză) la radieri în Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex/Therion</string>
   <string name="pref_survex_lrud_summary">Adaugă LRUD la exportul Survex/Therion</string>
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Caroiaj</string>
   <string name="pref_svg_grid_summary">Adaugă caroiaj la exportul SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">buclă SVG</string>

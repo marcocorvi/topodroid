@@ -1277,6 +1277,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_survex_splay_summary">dodaj stację docelową do domiarów w Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion LRUD</string>
   <string name="pref_survex_lrud_summary">dodaj LRUD do eksportu Survex/Therion</string>
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">siatka</string>
   <string name="pref_svg_grid_summary">dodaj siatkę do eksportu SVG/PNG</string>
   <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->

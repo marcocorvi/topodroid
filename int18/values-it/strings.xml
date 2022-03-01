@@ -1276,6 +1276,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_survex_splay_summary">Survex - Aggiungi stazione A agli splay</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Griglia</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia all\'export SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>
