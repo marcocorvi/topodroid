@@ -76,7 +76,7 @@ public class DrawingSvg extends DrawingSvgBase
       // }
 
       // header
-      out.write( "<svg width=\"" + width + "\" height=\"" + height + "\"\n" );
+      out.write( "<svg width=\"" + width + "pt\" height=\"" + height + "pt\" viewBox=\"0 0 " + width + " " + height + "\"\n" );
       out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n");
       out.write( "   xmlns=\"http://www.w3.org/2000/svg\" >\n" );
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
