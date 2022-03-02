@@ -65,18 +65,17 @@ public class DrawingSvg extends DrawingSvgBase
     if ( dy > 200 ) dy = 200;
     xmin -= dx;  xmax += dx;
     ymin -= dy;  ymax += dy;
-    float xoff = 0; // xmin; // offset
-    float yoff = 0; // ymin;
-    int width = (int)((xmax - xmin));
+    int width  = (int)((xmax - xmin));
     int height = (int)((ymax - ymin));
+    float xoff = - xmin; // offset
+    float yoff = - ymin;
 
     try {
-      // if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-      //   out.write("<!DOCTYPE html>\n<html>\n<body>\n");
-      // }
+      // if ( TDSetting.mSvgInHtml ) out.write("<!DOCTYPE html>\n<html>\n<body>\n");
 
       // header
-      out.write( "<svg width=\"" + width + "pt\" height=\"" + height + "pt\" viewBox=\"0 0 " + width + " " + height + "\"\n" );
+      out.write( "<svg width=\"" + width + "pt\" height=\"" + height + "pt\"\n" );
+      out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
       out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n");
       out.write( "   xmlns=\"http://www.w3.org/2000/svg\" >\n" );
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
@@ -87,9 +86,7 @@ public class DrawingSvg extends DrawingSvgBase
       out.write( "    </marker>\n"); 
       out.write( "  </defs>\n");
 
-      out.write( "<g id=\"canvas\"\n" );
-      out.write( "  transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
-
+      // out.write( "<g id=\"canvas\" transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
 
       // ***** FIXME TODO POINT SYMBOLS
       // {
@@ -134,13 +131,12 @@ public class DrawingSvg extends DrawingSvgBase
             printSvgGrid( out, plot.getGrid1(),   "grid1",   "999999", 0.4f, xoff, yoff, xmin, xmax, ymin, ymax );
             printSvgGrid( out, plot.getGrid10(),  "grid10",  "666666", 0.6f, xoff, yoff, xmin, xmax, ymin, ymax );
             printSvgGrid( out, plot.getGrid100(), "grid100", "333333", 0.8f, xoff, yoff, xmin, xmax, ymin, ymax );
-            out.write( end_grp );
+            out.write( end_grp ); // grid
           }
           // FIXME OK PROFILE
 
           // TDLog.v( "SVG legs " + plot.getLegs().size() );
-          out.write("<g id=\"legs\"\n" );
-          out.write("  style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
+          out.write("<g id=\"legs\" fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
@@ -171,7 +167,7 @@ public class DrawingSvg extends DrawingSvgBase
             out.write( sw4.getBuffer().toString() );
             out.flush();
           }
-          out.write( end_grp );
+          out.write( end_grp ); // legs
 
           // TDLog.v( "SVG splays " + plot.getSplays().size() );
           if ( TDSetting.mSvgSplays ) {
@@ -236,7 +232,6 @@ public class DrawingSvg extends DrawingSvgBase
           out.write( "<g id=\"scrap_" + scrap.mScrapIdx + "\">\n" );
 
           // TDLog.v( "SVG paths " + paths.size() + " points" );
-
           out.write("<g id=\"points\">\n");
           for ( DrawingPath path : paths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
@@ -251,7 +246,6 @@ public class DrawingSvg extends DrawingSvgBase
                 float xx = point.cx;
                 float yy = point.cy;
                 // TDLog.v( "SVG point xsection " + xx + " " + yy + " offset " + xoff + " " + yoff );
-                
   	        if ( TDSetting.mAutoXSections ) {
                   // String color_str = pathToColor( path );
                   // pw5.format(Locale.US, "<g transform=\"translate(%.2f,%.2f)\" >\n", xx, yy );
@@ -305,7 +299,6 @@ public class DrawingSvg extends DrawingSvgBase
           out.write( end_grp ); // point
 
           // TDLog.v( "SVG paths lines" );
-
           out.write( "<g id=\"lines\">\n" );
           for ( DrawingPath path : paths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
@@ -319,7 +312,6 @@ public class DrawingSvg extends DrawingSvgBase
           out.write( end_grp ); // lines
 
           // TDLog.v( "SVG paths areas" );
-
           out.write( "<g id=\"areas\">\n" );
           for ( DrawingPath path : paths ) {
             if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -332,10 +324,9 @@ public class DrawingSvg extends DrawingSvgBase
           }
           out.write( end_grp ); // areas
 
-          out.write( end_grp ); // scrap
+          out.write( end_grp ); // scrap_
         }
 
-        // xsections
         // TDLog.v( "SVG xsections " + xsections.size() );
         out.write("<g id=\"xsections\">\n");
         for ( XSection xsection : xsections ) {
@@ -349,9 +340,8 @@ public class DrawingSvg extends DrawingSvgBase
           out.write( sw7.getBuffer().toString() );
           out.flush();
         }
-        out.write( end_grp );
+        out.write( end_grp ); // xsections
 
-        // stations
         // TDLog.v( "SVG statioons " + plot.getStations().size() );
         out.write("<g id=\"stations\">\n");
         if ( TDSetting.mAutoStations ) {
@@ -370,15 +360,12 @@ public class DrawingSvg extends DrawingSvgBase
           }
         }
         out.flush();
-        
-        out.write( end_grp );
+        out.write( end_grp ); // stations
       }
-      out.write( end_grp );
+      // out.write( end_grp ); // canvas
       out.write( end_svg );
 
-      // if ( TDSetting.mSvgInHtml ) { // SVG_IN_HTML
-      //   out.write("</body>\n</html>\n");
-      // }
+      // if ( TDSetting.mSvgInHtml ) out.write("</body>\n</html>\n");
 
       out.flush();
     } catch ( IOException e ) {
