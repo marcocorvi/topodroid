@@ -225,8 +225,8 @@ public class TDSetting
   public static boolean mVTopoTrox = false; 
 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
-  public static final float SVG_SCALE_INK = 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
-  public static final float SVG_SCALE_AI  = 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
+  public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
+  public static final float SVG_SCALE_AI  = 141.73228346f; // 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
   public static float   SVG_SCALE = SVG_SCALE_INK;
   public static int     mTherionScale = 100;
   public static float   mToTherion = THERION_SCALE / 100;
@@ -3662,6 +3662,7 @@ public class TDSetting
     mTherionScale = scale;
     mToTherion = THERION_SCALE / mTherionScale;
     mToSvg     = SVG_SCALE / mTherionScale;
+    TDLog.v("Set export scale " + scale + " SVG " + mToSvg );
     return ret;
   }
 

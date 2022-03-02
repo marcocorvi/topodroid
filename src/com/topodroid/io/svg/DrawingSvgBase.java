@@ -100,27 +100,67 @@ public class DrawingSvgBase
     }
   }
 
+  /** print a point X-Y
+   * @param pw   writer
+   * @param prefix   string prefix
+   * @param x        X coord
+   * @param y        Y coord
+   */
   static protected void printPoint( PrintWriter pw, String prefix, float x, float y )
   {
     pw.format(Locale.US, "%s %.2f %.2f", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
   }
 
+  /** print a point X-Y with x, y attribute tags
+   * @param pw   writer
+   * @param prefix   string prefix
+   * @param x        X coord
+   * @param y        Y coord
+   */
   static protected void printPointWithXY( PrintWriter pw, String prefix, float x, float y )
   {
     pw.format(Locale.US, "%s x=\"%.2f\" y=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
   }
 
+  /** print a point X-Y with cx, cy attribute tags
+   * @param pw   writer
+   * @param prefix   string prefix
+   * @param x        X coord
+   * @param y        Y coord
+   */
   static protected void printPointWithCXCY( PrintWriter pw, String prefix, float x, float y )
   {
     pw.format(Locale.US, "%s cx=\"%.2f\" cy=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
   }
 
+  /** print a segment with the closing angle-braket
+   * @param pw   writer
+   * @param x1    X coord of the first point
+   * @param y1    Y coord of the first point
+   * @param x2    X coord of the second point
+   * @param y2    Y coord of the second point
+   */
   static protected void printSegmentWithClose( PrintWriter pw, float x1, float y1, float x2, float y2 )
   {
     pw.format(Locale.US, "M %.2f %.2f L %.2f %.2f\" />",
       x1*TDSetting.mToSvg, y1*TDSetting.mToSvg, x2*TDSetting.mToSvg, y2*TDSetting.mToSvg );
   }
 
+  /** print a transform matrix
+   * @param pw   writer
+   * @param c    cosine
+   * @param s    sine
+   * @param x    x translate
+   * @param y    y translate
+   */
+  static protected void printMatrix( PrintWriter pw, float c, float s, float x, float y )
+  {
+    pw.format(Locale.US, " transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\"", c, s, -s, c, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
+  }
+
+  /** @return the string hex RGB-color of a path
+   * @param path   path
+   */
   static protected String pathToColor( DrawingPath path )
   {
     int color = path.color();
@@ -324,8 +364,8 @@ public class DrawingSvgBase
       printPointWithXY( pw, "<text", 0, 0 );
       pw.format(Locale.US, " font-size=\"%.2f\"", TDSetting.mSvgLabelSize * scale );
       pw.format(Locale.US, " style=\"fill:black;stroke:black;stroke-width:%.2f\"", TDSetting.mSvgLabelStroke * scale );
-      pw.format(Locale.US, " transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">", c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
-      pw.format( "%s</text>\n", label.mPointText );
+      printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
+      pw.format( " >%s</text>\n", label.mPointText );
     // } else if ( name.equals("continuation") ) {
     //   printPointWithXY( pw, "<text", xoff+point.cx, yoff+point.cy );
     //   pw.format(Locale.US, " style=\"fill:none;stroke:black;stroke-width:%.2f\">\?</text>\n", TDSetting.mSvgLabelStroke );
@@ -345,8 +385,9 @@ public class DrawingSvgBase
         float o = (float)(point.mOrientation);
         float s = POINT_SCALE * TDMath.sind( o ) * scale;
         float c = POINT_SCALE * TDMath.cosd( o ) * scale;
-        pw.format(Locale.US, "<g transform=\"matrix(%.2f,%.2f,%.2f,%.2f,%.2f,%.2f)\">\n", 
-          c, s, -s, c, (xoff+point.cx)*TDSetting.mToSvg, (yoff+point.cy)*TDSetting.mToSvg );
+        pw.format(Locale.US, "<g" );
+        printMatrix( pw, c, s, (xoff+point.cx), (yoff+point.cy) );
+        pw.format(Locale.US, " >\n" );
 
         pw.format( "%s\n", sp.getSvg() );
         pw.format( end_grp );
