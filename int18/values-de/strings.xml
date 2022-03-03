@@ -1277,8 +1277,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG/PNG hinzufügen</string>
   <string name="pref_svg_roundtrip_title">SVG Roundtrip via Compass</string>

@@ -1263,8 +1263,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Incluir a base PARA à medida auxiliar nos arquivos Survex exportados</string>
   <string name="pref_survex_lrud_title">EDTC Survex</string>
   <string name="pref_survex_lrud_summary">Incluir EDTC nos arquivos Survex exportados</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Grade</string>
   <string name="pref_svg_grid_summary">Incluir grade no arquivo SVG/PNG exportado</string>
   <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->

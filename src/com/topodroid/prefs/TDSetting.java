@@ -225,16 +225,16 @@ public class TDSetting
   public static boolean mVTopoTrox = false; 
 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
-  public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
+  // public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
   public static final float SVG_SCALE_AI  = 141.73228346f; // 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
-  public static float   SVG_SCALE = SVG_SCALE_INK;
+  public static float   SVG_SCALE = SVG_SCALE_AI;
   public static int     mTherionScale = 100;
   public static float   mToTherion = THERION_SCALE / 100;
   public static float   mToSvg     = SVG_SCALE / 100;
 
-  public static final int SVG_INKSCAPE    = 0;
+  // public static final int SVG_INKSCAPE    = 0;
   public static final int SVG_ILLUSTRATOR = 1;
-  public static int mSvgProgram = SVG_INKSCAPE;
+  // public static int mSvgProgram = SVG_ILLUSTRATOR;
 
   public static float mBitmapScale = 1.5f;
   public static float mBezierStep  = 0.2f;
@@ -1030,20 +1030,20 @@ public class TDSetting
 
     String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
     String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
-    mSvgProgram        = tryInt(   prefs,      keyExpSvg[0],      defExpSvg[0] );  // DISTOX_SVG_PROGRAM
-    mSvgRoundTrip      = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_ROUNDTRIP
-    mSvgGrid           = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_GRID
-    mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[3], bool(defExpSvg[3]) ); // DISTOX_SVG_LINE_DIR
-    mSvgSplays         = prefs.getBoolean(     keyExpSvg[4], bool(defExpSvg[4]) ); // DISTOX_SVG_SPLAYS
+    // mSvgProgram        = tryInt(   prefs,      keyExpSvg[0],      defExpSvg[0] );  // DISTOX_SVG_PROGRAM
+    mSvgRoundTrip      = prefs.getBoolean(     keyExpSvg[0], bool(defExpSvg[9]) ); // DISTOX_SVG_ROUNDTRIP
+    mSvgGrid           = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_GRID
+    mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_LINE_DIR
+    mSvgSplays         = prefs.getBoolean(     keyExpSvg[3], bool(defExpSvg[3]) ); // DISTOX_SVG_SPLAYS
     // mSvgInHtml      = prefs.getBoolean(     keyExpSvg[ ], bool(defExpSvg[ ]) ); // DISTOX_SVG_IN_HTML
-    mSvgPointStroke    = tryFloat( prefs,      keyExpSvg[5],      defExpSvg[5] );  // DISTOX_SVG_POINT_STROKE
-    mSvgLabelStroke    = tryFloat( prefs,      keyExpSvg[6],      defExpSvg[6] );  // DISTOX_SVG_LABEL_STROKE
-    mSvgLineStroke     = tryFloat( prefs,      keyExpSvg[7],      defExpSvg[7] );  // DISTOX_SVG_LINE_STROKE
-    mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_GRID_STROKE
-    mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[9],      defExpSvg[9] );  // DISTOX_SVG_SHOT_STROKE
-    mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[10],     defExpSvg[10] ); // DISTOX_SVG_LINEDIR_STROKE
-    mSvgStationSize    = tryInt(   prefs,      keyExpSvg[11],     defExpSvg[11] ); // DISTOX_SVG_STATION_SIZE
-    mSvgLabelSize      = tryInt  ( prefs,      keyExpSvg[12],     defExpSvg[12] ); // DISTOX_SVG_LABEL_SIZE
+    mSvgPointStroke    = tryFloat( prefs,      keyExpSvg[4],      defExpSvg[4] );  // DISTOX_SVG_POINT_STROKE
+    mSvgLabelStroke    = tryFloat( prefs,      keyExpSvg[5],      defExpSvg[5] );  // DISTOX_SVG_LABEL_STROKE
+    mSvgLineStroke     = tryFloat( prefs,      keyExpSvg[6],      defExpSvg[6] );  // DISTOX_SVG_LINE_STROKE
+    mSvgGridStroke     = tryFloat( prefs,      keyExpSvg[7],      defExpSvg[7] );  // DISTOX_SVG_GRID_STROKE
+    mSvgShotStroke     = tryFloat( prefs,      keyExpSvg[8],      defExpSvg[8] );  // DISTOX_SVG_SHOT_STROKE
+    mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[ 9],     defExpSvg[ 9] ); // DISTOX_SVG_LINEDIR_STROKE
+    mSvgStationSize    = tryInt(   prefs,      keyExpSvg[10],     defExpSvg[10] ); // DISTOX_SVG_STATION_SIZE
+    mSvgLabelSize      = tryInt  ( prefs,      keyExpSvg[11],     defExpSvg[11] ); // DISTOX_SVG_LABEL_SIZE
     // TDLog.v("SETTING load secondary export SVG done");
 
     // having mTherionScale and mSvgProgram we can set export scale
@@ -2097,43 +2097,43 @@ public class TDSetting
     // TDLog.v("update pref SVY: " + k );
     String[] key = TDPrefKey.EXPORT_SVG;
     String[] def = TDPrefKey.EXPORT_SVGdef;
-    if ( k.equals( key[0] ) ) {  // DISTOX_SVG_PROGRAM
-      mSvgProgram    = tryIntValue( hlp, k, v, def[0] );
-      if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
-      setExportScale( mTherionScale );
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
-      mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_GRID (bool)
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SVG_LINE_DIR (bool)
-      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[3]) );
-    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SVG_SPLAYS (bool)
-      mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[4]) );
+    // if ( k.equals( key[0] ) ) {  // DISTOX_SVG_PROGRAM
+    //   mSvgProgram    = tryIntValue( hlp, k, v, def[0] );
+    //   if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
+    //   setExportScale( mTherionScale );
+    if ( k.equals( key[ 0 ] ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
+      mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(def[0]) );
+    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_GRID (bool)
+      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[1]) );
+    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_LINE_DIR (bool)
+      mSvgLineDirection = tryBooleanValue( hlp, k, v, bool(def[2]) );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SVG_SPLAYS (bool)
+      mSvgSplays = tryBooleanValue( hlp, k, v, bool(def[3]) );
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
     // } else if ( k.equals( key[ ? ] ) ) { // DISTOX_SVG_IN_HTML (bool)
     //   mSvgInHtml = tryBooleanValue( hlp, k, bool(def[ ]) );
-    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SVG_POINT_STROKE
-      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[5] );
+    } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_SVG_POINT_STROKE
+      mSvgPointStroke    = tryFloatValue( hlp, k, v, def[4] );
       if ( mSvgPointStroke < 0.01f ) { mSvgPointStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SVG_LABEL_STROKE
-      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 5 ] ) ) { // DISTOX_SVG_LABEL_STROKE
+      mSvgLabelStroke    = tryFloatValue( hlp, k, v, def[5] );
       if ( mSvgLabelStroke < 0.01f ) { mSvgLabelStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SVG_LINE_STROKE
-      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[7] );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SVG_GRID_STROKE
-      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[8] );
+    } else if ( k.equals( key[ 6 ] ) ) { // DISTOX_SVG_LINE_STROKE
+      mSvgLineStroke     = tryFloatValue( hlp, k, v, def[6] );
+    } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SVG_GRID_STROKE
+      mSvgGridStroke     = tryFloatValue( hlp, k, v, def[7] );
       if ( mSvgGridStroke < 0.01f ) { mSvgGridStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SVG_SHOT_STROKE
-      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[9] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SVG_SHOT_STROKE
+      mSvgShotStroke     = tryFloatValue( hlp, k, v, def[8] );
       if ( mSvgShotStroke < 0.01f ) { mSvgShotStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[10 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
-      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[10] );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_SVG_LINEDIR_STROKE
+      mSvgLineDirStroke  = tryFloatValue( hlp, k, v, def[ 9] );
       if ( mSvgLineStroke < 0.01f ) { mSvgLineStroke = 0.01f; ret = "0.01"; }
-    } else if ( k.equals( key[11] ) ) {  // DISTOX_SVG_STATION_SIZE
-      mSvgStationSize    = tryIntValue( hlp, k, v, def[11] );
+    } else if ( k.equals( key[10] ) ) {  // DISTOX_SVG_STATION_SIZE
+      mSvgStationSize    = tryIntValue( hlp, k, v, def[10] );
       if ( mSvgStationSize < 1 ) { mSvgStationSize = 1; ret = "1"; }
-    } else if ( k.equals( key[12] ) ) {  // DISTOX_SVG_LABEL_SIZE
-      mSvgLabelSize    = tryIntValue( hlp, k, v, def[12] );
+    } else if ( k.equals( key[11] ) ) {  // DISTOX_SVG_LABEL_SIZE
+      mSvgLabelSize    = tryIntValue( hlp, k, v, def[11] );
       if ( mSvgLabelSize < 1 ) { mSvgLabelSize = 1; ret = "1"; }
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BEZIER_STEP
     //   mBezierStep  = tryFloatValue( hlp, k, v, def[8] );
@@ -2856,9 +2856,9 @@ public class TDSetting
         tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mTherionScale );
       pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
       pw.printf(Locale.US, "DXF: acad_version %d, blocks %c, spline %c \n", mAcadVersion, tf(mDxfBlocks), tf(mAcadSpline) );
-      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, %d, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c, program %d \n",
+      pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, %d, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c \n",
         mSvgShotStroke, mSvgLabelStroke, mSvgLabelSize, mSvgStationSize, mSvgPointStroke,
-        tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays), mSvgProgram );
+        tf(mSvgRoundTrip), tf(mSvgGrid), mSvgGridStroke, mSvgLineStroke, tf(mSvgLineDirection), mSvgLineDirStroke, tf(mSvgSplays) ); // , mSvgProgram );
       pw.printf(Locale.US, "SHP: georef-plan %c \n", tf(mShpGeoref) );
       pw.printf(Locale.US, "KML: stations %c, splays %c \n", tf(mKmlStations), tf(mKmlSplays) );
       pw.printf(Locale.US, "CSV: raw %c, separator \'%c\' \n", tf(mCsvRaw), mCsvSeparator );
@@ -3188,12 +3188,12 @@ public class TDSetting
             mSvgLineDirection = getBoolean( vals, 18 );     setPreference( editor, "DISTOX_SVG_LINE_DIR", mSvgLineDirection );
             mSvgLineDirStroke = getFloat( vals, 19, 6.0f ); setPreference( editor, "DISTOX_SVG_LINEDIR_STROKE", mSvgLineDirStroke );
             mSvgSplays = getBoolean( vals, 21 );            setPreference( editor, "DISTOX_SVG_SPLAYS", mSvgSplays );
-            if ( vals.length > 23 ) {
-              mSvgProgram     = getInt( vals, 23, 0 );
-              if ( mSvgProgram != 1 ) mSvgProgram = 0;  // either 1 (Illustrator) or 0 (Inkscape) 
-              setPreference( editor, "DISTOX_SVG_PROGRAM", mSvgProgram );
-              setExportScale( mTherionScale );
-            }
+            // if ( vals.length > 23 ) {
+            //   mSvgProgram     = getInt( vals, 23, 0 );
+            //   if ( mSvgProgram != 1 ) mSvgProgram = 0;  // either 1 (Illustrator) or 0 (Inkscape) 
+            //   setPreference( editor, "DISTOX_SVG_PROGRAM", mSvgProgram );
+            //   setExportScale( mTherionScale );
+            // }
           }
           continue;
         }
@@ -3658,7 +3658,7 @@ public class TDSetting
     String ret = null;
     if ( scale < 40 )   { scale = 40;   ret = "40"; }
     if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
-    SVG_SCALE = ( mSvgProgram == 1 )? SVG_SCALE_AI : SVG_SCALE_INK;
+    // SVG_SCALE = ( mSvgProgram == 1 )? SVG_SCALE_AI : SVG_SCALE_INK;
     mTherionScale = scale;
     mToTherion = THERION_SCALE / mTherionScale;
     mToSvg     = SVG_SCALE / mTherionScale;

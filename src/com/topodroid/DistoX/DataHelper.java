@@ -5550,9 +5550,9 @@ public class DataHelper extends DataSetObservable
 	       int orientation = (db_version > 32 )? (int)(scanline1.longValue( 0 )) : 0; // default PlotInfo.ORIENTATION_PORTRAIT
 	       int maxscrap = (db_version > 41 )? (int)(scanline1.longValue( 0 )) : 0; // default 0
                double intercept = (db_version > 42)? scanline1.doubleValue( 0.5 ) : 0;
-               double center_x = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
-               double center_y = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
-               double center_z = (db_version > 43)? scanline1.doubleValue( 0.0 ) : 0;
+               double center_x = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
+               double center_y = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
+               double center_z = (db_version > 44)? scanline1.doubleValue( 0.0 ) : 0;
                // if ( insertPlot( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, false ) < 0 ) { success = false; }
                cv = makePlotContentValues( sid, id, name, type, status, start, view, xoffset, yoffset, zoom, azimuth, clino, hide, nick, orientation, maxscrap, intercept,
                                            center_x, center_y, center_z );

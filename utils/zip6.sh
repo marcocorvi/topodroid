@@ -30,8 +30,8 @@ echo "Found $SQLITE"
 echo "      $ZIP"
 echo "      $DATE"
 
-td_version="6.0.37"
-db_version="44"
+td_version="6.0.75"
+db_version="45"
 
 distox14="distox14.sqlite"
 device10="device10.sqlite"

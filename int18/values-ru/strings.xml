@@ -1263,8 +1263,8 @@
   <string name="pref_survex_splay_summary">Добавить пикет ДО к боковым замерам при экспорте в формат Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion ЛПВН</string>
   <string name="pref_survex_lrud_summary">Расчитать ЛПВН в при экспорте в формат Survex/Therion</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Сетка в SVG/PNG</string>
   <string name="pref_svg_grid_summary">Добавить сетку в SVG/PNG экспорт</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>
