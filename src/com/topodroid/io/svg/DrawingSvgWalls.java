@@ -410,7 +410,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private static final String end_rdf      = "    </cc:Work></rdf:RDF>\n";
   private static final String end_metadata = "  </metadata>\n";
 
-  private static final String sodipodi = "  <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"960\" inkscape:window-height=\"680\" id=\"namedview48\" showgrid=\"false\" inkscape:zoom=\"1\" inkscape:cx=\"480\" inkscape:cy=\"340\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:window-maximized=\"0\" inkscape:current-layer=\"w2d_Walls_shp\" />";
+  private static final String sodipodi = "  <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"960\" inkscape:window-height=\"680\" id=\"namedview48\" showgrid=\"false\" inkscape:zoom=\"1\" inkscape:cx=\"480\" inkscape:cy=\"340\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:window-maximized=\"1\" inkscape:current-layer=\"w2d_Walls_shp\" />";
   private static final String clip = "<!--Used to clip frame - Not compatible with AI10 - remove if necessary-->";
   private static final String svg_options = " overflow=\"hidden\" version=\"1.1\" id=\"svg44\" style=\"display:inline;overflow:hidden\" >\n";
 
