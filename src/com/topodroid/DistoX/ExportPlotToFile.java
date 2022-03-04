@@ -124,7 +124,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                 // List<String> segments = pfd.getPathSegments();
                 (new DrawingSvgWalls()).writeSvg( file_name, bw, mNum, mCommand, mType );
               } else {
-                (new DrawingSvg()).writeSvg( bw, mNum, mCommand, mType );
+                (new DrawingSvg()).writeSvg( file_name, bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
               bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );

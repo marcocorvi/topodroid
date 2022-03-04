@@ -225,16 +225,16 @@ public class TDSetting
   public static boolean mVTopoTrox = false; 
 
   public static final float THERION_SCALE = 196.8503937f; // 200 * 39.3700787402 / 40;
-  // public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
+  public static final float SVG_SCALE_INK = 188.97637795f; // 94.488189f; // 10 * 96 px/in / ( 25.4 mm/in * 40 px/m ) -> scale 1 : 100  Inkscape
   public static final float SVG_SCALE_AI  = 141.73228346f; // 70.866141732f; // A.I. 10 * 72 / ( 25.4 * 40 ) scale 1:100 Adobe Illustrator
   public static float   SVG_SCALE = SVG_SCALE_AI;
   public static int     mTherionScale = 100;
   public static float   mToTherion = THERION_SCALE / 100;
   public static float   mToSvg     = SVG_SCALE / 100;
 
-  // public static final int SVG_INKSCAPE    = 0;
+  public static final int SVG_INKSCAPE    = 0;
   public static final int SVG_ILLUSTRATOR = 1;
-  // public static int mSvgProgram = SVG_ILLUSTRATOR;
+  public static int mSvgProgram = SVG_ILLUSTRATOR;
 
   public static float mBitmapScale = 1.5f;
   public static float mBezierStep  = 0.2f;
@@ -1030,7 +1030,6 @@ public class TDSetting
 
     String[] keyExpSvg = TDPrefKey.EXPORT_SVG;
     String[] defExpSvg = TDPrefKey.EXPORT_SVGdef;
-    // mSvgProgram        = tryInt(   prefs,      keyExpSvg[0],      defExpSvg[0] );  // DISTOX_SVG_PROGRAM
     mSvgRoundTrip      = prefs.getBoolean(     keyExpSvg[0], bool(defExpSvg[9]) ); // DISTOX_SVG_ROUNDTRIP
     mSvgGrid           = prefs.getBoolean(     keyExpSvg[1], bool(defExpSvg[1]) ); // DISTOX_SVG_GRID
     mSvgLineDirection  = prefs.getBoolean(     keyExpSvg[2], bool(defExpSvg[2]) ); // DISTOX_SVG_LINE_DIR
@@ -1044,6 +1043,7 @@ public class TDSetting
     mSvgLineDirStroke  = tryFloat( prefs,      keyExpSvg[ 9],     defExpSvg[ 9] ); // DISTOX_SVG_LINEDIR_STROKE
     mSvgStationSize    = tryInt(   prefs,      keyExpSvg[10],     defExpSvg[10] ); // DISTOX_SVG_STATION_SIZE
     mSvgLabelSize      = tryInt  ( prefs,      keyExpSvg[11],     defExpSvg[11] ); // DISTOX_SVG_LABEL_SIZE
+    mSvgProgram        = tryInt(   prefs,      keyExpSvg[12],     defExpSvg[12] );  // DISTOX_SVG_PROGRAM
     // TDLog.v("SETTING load secondary export SVG done");
 
     // having mTherionScale and mSvgProgram we can set export scale
@@ -2097,10 +2097,6 @@ public class TDSetting
     // TDLog.v("update pref SVY: " + k );
     String[] key = TDPrefKey.EXPORT_SVG;
     String[] def = TDPrefKey.EXPORT_SVGdef;
-    // if ( k.equals( key[0] ) ) {  // DISTOX_SVG_PROGRAM
-    //   mSvgProgram    = tryIntValue( hlp, k, v, def[0] );
-    //   if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
-    //   setExportScale( mTherionScale );
     if ( k.equals( key[ 0 ] ) ) { // DISTOX_SVG_ROUNDTRIP (bool)
       mSvgRoundTrip = tryBooleanValue( hlp, k, v, bool(def[0]) );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_SVG_GRID (bool)
@@ -2137,6 +2133,10 @@ public class TDSetting
       if ( mSvgLabelSize < 1 ) { mSvgLabelSize = 1; ret = "1"; }
     // } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_BEZIER_STEP
     //   mBezierStep  = tryFloatValue( hlp, k, v, def[8] );
+    } else if ( k.equals( key[12] ) ) {  // DISTOX_SVG_PROGRAM
+      mSvgProgram    = tryIntValue( hlp, k, v, def[12] );
+      if ( mSvgProgram < 0 || mSvgProgram > 1 ) mSvgProgram = 0;
+      setExportScale( mTherionScale );
     } else {
       TDLog.Error("missing EXPORT_SVG key: " + k );
     }
@@ -3658,7 +3658,7 @@ public class TDSetting
     String ret = null;
     if ( scale < 40 )   { scale = 40;   ret = "40"; }
     if ( scale > 2000 ) { scale = 2000; ret = "2000"; }
-    // SVG_SCALE = ( mSvgProgram == 1 )? SVG_SCALE_AI : SVG_SCALE_INK;
+    SVG_SCALE = ( mSvgProgram == 1 )? SVG_SCALE_AI : SVG_SCALE_INK;
     mTherionScale = scale;
     mToTherion = THERION_SCALE / mTherionScale;
     mToSvg     = SVG_SCALE / mTherionScale;

@@ -39,7 +39,7 @@ public class SymbolPointDxf
     addHandle( DXF.ACAD_12 );
     addColor( DXF.lt_byLayer );
     addAcDbEntity( DXF.ACAD_12, null ); // 2021-A
-    addLayer( DXF.ACAD_9, layer );  // 2021-A    !!2022 ACAD_14 must be write layer!!
+    addLayer( TOKEN_POLYLINE, DXF.ACAD_9, layer );  // 2021-A    !!2022 ACAD_14 must be write layer!!
     addAcDbPolyline();
     addPolylineColor( 256 );
     addPolylineGroup( 1 );
@@ -51,7 +51,7 @@ public class SymbolPointDxf
       startVertex( null ); // null layer
       addHandlePointer( DXF.ACAD_12 );
       addAcDbEntity( DXF.ACAD_12, null );
-      addLayer( DXF.ACAD_9, layer ); 
+      addLayer( TOKEN_VERTEX, DXF.ACAD_9, layer ); 
       addAcDbVertex( DXF.ACAD_12 );
       addVertexData( xx[k], yy[k] );
       addVertexFlag( DXF.ACAD_12, 32 );
@@ -115,6 +115,9 @@ public class SymbolPointDxf
   }
 
   // ---------------------------------------------------------
+  /** tokens are pieces of the DXF file.
+   * The tokens are added to a list and at the end the token write to the output in sequence
+   */
 
   private final static int TOKEN_LINE     =  1;
   private final static int TOKEN_POLYLINE =  2;
@@ -136,6 +139,8 @@ public class SymbolPointDxf
   private final static int TOKEN_NPOINTS  = 17;
   private final static int TOKEN_POSITION = 18;
 
+  /** base (abstract) token class
+   */
   private abstract class DxfToken
   {
     int type = 0;
@@ -150,6 +155,8 @@ public class SymbolPointDxf
     abstract int write( BufferedWriter out, int version, int handle, int ref ) throws IOException;
   }
 
+  /** generic (normal) token
+   */
   private class NormalToken extends DxfToken
   {
     String string; // string 
@@ -168,6 +175,8 @@ public class SymbolPointDxf
     }
   }
 
+  /** SEQEND token
+   */
   private class SeqendToken extends NormalToken
   {
     SeqendToken( int v, String s )
@@ -187,7 +196,8 @@ public class SymbolPointDxf
     }
   }
 
-  // flag token for polylines
+  /** FLAG token, for polylines
+   */
   private class FlagToken extends DxfToken
   {
     int is3D;
@@ -211,11 +221,18 @@ public class SymbolPointDxf
     }
   }
 
+  /** NAME token, with LAYER
+   */
   private class NameToken extends DxfToken
   {
     String name;
     String layer;
 
+    /** cstr
+     * @param v   ACAD version
+     * @param n   name
+     * @param l   layer
+     */
     NameToken( int v, String n, String l )
     {
       super( TOKEN_ARC, v );
@@ -237,8 +254,13 @@ public class SymbolPointDxf
     }
   }
 
+  /** POLYLINE token
+   */
   private class PolylineToken extends DxfToken
   {
+    /** cstr
+     * @param v   ACAD version
+     */
     PolylineToken( int v )
     {
       super( TOKEN_POLYLINE, v );
@@ -255,8 +277,13 @@ public class SymbolPointDxf
     }
   }
 
+  /** POLYLINE token, with AcDb
+   */
   private class PolylineAcDbToken extends DxfToken
   {
+    /** cstr
+     * @param v   ACAD version
+     */
     PolylineAcDbToken( int v )
     {
       super( TOKEN_POLYLINE, v );
@@ -274,13 +301,20 @@ public class SymbolPointDxf
     }
   }
    
+  /** DATA (X, Y) token
+   */
   private class DataToken extends DxfToken
   {
     float x, y;
 
-    DataToken( int version, float xx, float yy )
+    /** cstr
+     * @param v   ACAD version
+     * @param xx  X value
+     * @param yy  Y value
+     */
+    DataToken( int v, float xx, float yy )
     {
-      super( TOKEN_DATA, version );
+      super( TOKEN_DATA, v );
       x = xx;
       y = yy;
     }
@@ -298,13 +332,19 @@ public class SymbolPointDxf
     }
   }
    
+  /** number of points token
+   */
   private class NPointsToken extends DxfToken
   {
     int npt;
 
-    NPointsToken( int version, int n )
+    /** cstr
+     * @param v   ACAD version
+     * @param n   number of points
+     */
+    NPointsToken( int v, int n )
     {
-      super( TOKEN_NPOINTS, version );
+      super( TOKEN_NPOINTS, v );
       npt = n;
     }
 
@@ -318,10 +358,18 @@ public class SymbolPointDxf
     }
   }
    
+  /** 3D point token
+   */
   private class PositionToken extends DxfToken
   {
     float x, y, z;
 
+    /** cstr
+     * @param v   ACAD version
+     * @param xx  X coord
+     * @param yy  Y coord
+     * @param zz  Z coord
+     */
     PositionToken( int version, float xx, float yy, float zz )
     {
       super( TOKEN_POSITION, version );
@@ -340,7 +388,8 @@ public class SymbolPointDxf
     }
   }
 
-  // Entity token does not affect handle - used only for VERTEX
+  /** ENTITY token: it does not affect handle - used only for VERTEX
+   */
   private class EntityToken extends DxfToken
   {
     String layer; 
@@ -362,6 +411,8 @@ public class SymbolPointDxf
     }
   }
 
+  /** HANDLE token
+   */
   private class HandleToken extends DxfToken
   {
     HandleToken( int version ) { super( TOKEN_HANDLE, version ); }
@@ -380,7 +431,8 @@ public class SymbolPointDxf
     }
   }
 
-  // HandlePointer is used only for POLYLINE vertex and seqend
+  /** HANDLE_POINTER token, used only for POLYLINE vertex and SEQEND
+   */
   private class HandlePointerToken extends DxfToken
   {
     int value = -1;
@@ -404,30 +456,32 @@ public class SymbolPointDxf
     }
   }
 
-  // this class is not used 
-  private class HandleRefToken extends DxfToken
-  {
-    HandleRefToken( int version ) { super( TOKEN_REF, version ); }
+  // NOTE this class is not used 
+  // private class HandleRefToken extends DxfToken
+  // {
+  //   HandleRefToken( int version ) { super( TOKEN_REF, version ); }
 
-    int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
-    {
-      if ( version >= this.version && handle >= 0 ) {
-        handle = DXF.inc( handle );
-        // DXF.writeHex( out, 5, handle );
-        StringWriter sw = new StringWriter();
-        PrintWriter pw  = new PrintWriter(sw);
-        pw.printf("  %d%s%X%s", 5, DXF.EOL, handle, DXF.EOL );
-        if ( ref > 0 ) pw.printf("  %d%s%X%s", 330, DXF.EOL, ref, DXF.EOL );
-        out.write( sw.getBuffer().toString() );
-      }
-      return handle;
-    }
-  }
+  //   int write( BufferedWriter out, int version, int handle, int ref ) throws IOException
+  //   {
+  //     if ( version >= this.version && handle >= 0 ) {
+  //       handle = DXF.inc( handle );
+  //       // DXF.writeHex( out, 5, handle );
+  //       StringWriter sw = new StringWriter();
+  //       PrintWriter pw  = new PrintWriter(sw);
+  //       pw.printf("  %d%s%X%s", 5, DXF.EOL, handle, DXF.EOL );
+  //       if ( ref > 0 ) pw.printf("  %d%s%X%s", 330, DXF.EOL, ref, DXF.EOL );
+  //       out.write( sw.getBuffer().toString() );
+  //     }
+  //     return handle;
+  //   }
+  // }
 
  
   // -------------------------------------------
   private ArrayList< DxfToken > mDxfTokens; // PRIVATE
 
+  /** cstr
+   */
   public SymbolPointDxf( )
   {
     mDxfTokens = new ArrayList< DxfToken >();
@@ -468,6 +522,9 @@ public class SymbolPointDxf
   private void startPolyline( ) { addToken( new PolylineToken( DXF.ACAD_9 ) ); }
   private void addAcDbPolyline() { addToken( new PolylineAcDbToken( DXF.ACAD_12 ) ); }
 
+  /** add the header token of a vertex 
+   * @param version ACAD version
+   */
   private void addAcDbVertex( int version ) 
   { 
     StringWriter sw = new StringWriter();
@@ -482,21 +539,45 @@ public class SymbolPointDxf
   // used only for VERTEX and SEQEND
   private void addAcDbEntity( int version, String layer ) { addToken( new EntityToken( version, layer ) ); }
 
-  // used only for VERTEX
-  private void addLayer( int version, String layer ) 
+  /** add a "layer" token
+   * @param type    token type
+   * @param version ACAD version
+   * @param layer   layer name
+   * @note used only for VERTEX and POLYLINE
+   */
+  private void addLayer( int type, int version, String layer ) 
   {
-    if ( layer != null ) addToken( new NormalToken( TOKEN_VERTEX, version, String.format( "  8%s%s%s", DXF.EOL, layer, DXF.EOL ) ) );
+    if ( layer != null ) addToken( new NormalToken( type, version, String.format( "  8%s%s%s", DXF.EOL, layer, DXF.EOL ) ) );
   }
 
-  private void addVertexFlag( int version, int flag ) { addToken( new NormalToken( TOKEN_VERTEX, version, String.format(Locale.US, "  70%s%d%s", DXF.EOL, flag, DXF.EOL ) ) ); }
+  /** add a "flag" token
+   * @param version ACAD version
+   * @param flag    flag
+   * @note used only for VERTEX
+   */
+  private void addVertexFlag( int version, int flag ) 
+  {
+    addToken( new NormalToken( TOKEN_VERTEX, version, String.format(Locale.US, "  70%s%d%s", DXF.EOL, flag, DXF.EOL ) ) );
+  }
 
-
-  private void addColor( String color ) { addToken( new NormalToken( TOKEN_COLOR, DXF.ACAD_9, String.format("  6%s%s%s", DXF.EOL, color, DXF.EOL ) ) ); }
+  /** add a "color" token
+   * @param color   color
+   */
+  private void addColor( String color )
+  {
+    addToken( new NormalToken( TOKEN_COLOR, DXF.ACAD_9, String.format("  6%s%s%s", DXF.EOL, color, DXF.EOL ) ) ); 
+  }
 
   private void addHandle( int version )        { addToken( new HandleToken( version ) ); }
   private void addHandlePointer( int version ) { addToken( new HandlePointerToken( version ) ); }
   // private void addHandleRef( int version )     { addToken( new HandleRefToken( version ) ); }
 
+  /** add a line segment to the DXF
+   * @param x0   first point X coord
+   * @param y0   first point Y coord
+   * @param x1   second point X coord
+   * @param y1   second point Y coord
+   */
   private void addLine( float x0, float y0, float x1, float y1 )
   {
     StringWriter sw = new StringWriter();
@@ -560,12 +641,19 @@ public class SymbolPointDxf
   //   addToken( new NormalToken( TOKEN_VERTEX, DXF.ACAD_9, sw.toString() ) );
   // }
 
-  // used only for VERTEX
+  /** close a sequence: add a SEQEND token
+   * @note used only for VERTEX
+   */
   private void closeSeq()
   {
     addToken( new SeqendToken( DXF.ACAD_9, String.format("  0%sSEQEND%s", DXF.EOL, DXF.EOL ) ) );
   }
 
+  /** add a circle
+   * @param x    X coord of the center
+   * @param y    Y coord of the center
+   * @param r    radius
+   */
   private void addCircle( float x, float y, float r )
   {
     StringWriter sw = new StringWriter();
@@ -576,6 +664,10 @@ public class SymbolPointDxf
     addToken( new NormalToken( TOKEN_CIRCLE, DXF.ACAD_9, sw.toString() ) );
   }
 
+  /** add angles of an arc (?)
+   * @param a1 angle ...
+   * @param a2 angle ...
+   */
   private void addArcAngles( float a1, float a2 )
   {
     StringWriter sw = new StringWriter();
@@ -585,11 +677,15 @@ public class SymbolPointDxf
     addToken( new NormalToken( TOKEN_ARC, DXF.ACAD_9, sw.toString() ) );
   }
 
-  // FIXME TODO
-  // @param x0,y0 left endpoint
-  // @param x1,y1 right endpoint
-  // @param r     aspect ratio
-  // @param a1,a2 angles
+  /** add an ellipse
+   * @param x0 left endpoint X coord
+   * @param y0 left endpoint Y coord
+   * @param x1 right endpoint X coord
+   * @param y1 right endpoint Y coord
+   * @param r  aspect ratio
+   * @param a1 angle ...
+   * @param a2 angle ...
+   */
   private void addEllipse( float x0, float y0, float x1, float y1, float r, float a1, float a2 ) 
   {
     float xc = (x0+x1)/2;

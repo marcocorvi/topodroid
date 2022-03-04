@@ -49,7 +49,7 @@ import android.graphics.RectF;
 public class DrawingSvg extends DrawingSvgBase
 {
 
-  public void writeSvg( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
+  public void writeSvg( String filename, BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     String wall_group = BrushManager.getLineWallGroup( );
 
@@ -74,11 +74,18 @@ public class DrawingSvg extends DrawingSvgBase
       // if ( TDSetting.mSvgInHtml ) out.write("<!DOCTYPE html>\n<html>\n<body>\n");
 
       // header
-      out.write( "<svg width=\"" + width + "pt\" height=\"" + height + "pt\"\n" );
-      out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
-      out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n");
-      out.write( "   xmlns=\"http://www.w3.org/2000/svg\" >\n" );
+      out.write( svg_header );
+      out.write( " width=\"" + width + "pt\" height=\"" + height + "pt\"\n" );
+      // out.write( " viewBox=\"0 0 " + width + " " + height + "\"\n" );
+      // out.write( "   xmlns:svg=\"http://www.w3.org/2000/svg\"\n"); // already in the svg_header
+      // out.write( "   xmlns=\"http://www.w3.org/2000/svg\");
+      out.write( "  version=\"1.1\"\n" );
+      out.write( "  id=\"svg46\"\n" );
+      out.write( "  sodipodi:docname=\"" + filename + "\"\n" );
+      out.write( "  inkscape:version=\"0.92.4 (5da689c313, 2019-01-14)\">\n" );
       out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
+      out.write( sodipodi );
+
       out.write( "  <defs>\n");
       out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
       out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
@@ -136,7 +143,7 @@ public class DrawingSvg extends DrawingSvgBase
           // FIXME OK PROFILE
 
           // TDLog.v( "SVG legs " + plot.getLegs().size() );
-          out.write("<g id=\"legs\" fill:none;stroke-opacity:0.6;stroke:red\" >\n");
+          out.write("<g id=\"legs\" style=\"fill:none;stroke-opacity:0.6;stroke:red\" >\n");
           for ( DrawingPath sh : plot.getLegs() ) {
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;

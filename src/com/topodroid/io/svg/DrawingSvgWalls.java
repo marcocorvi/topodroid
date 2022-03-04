@@ -105,11 +105,13 @@ public class DrawingSvgWalls extends DrawingSvgBase
     ymin -= dy;  ymax += dy;
     int width  = (int)((xmax - xmin));
     int height = (int)((ymax - ymin));
-    String vbox = "0 0 " + width + " " + height;
     float xoff = - xmin; // offset
     float yoff = - ymin;
+    // xoff + xmin = 0
+    // xoff + xmax = xmax - xmin = width
+    // xmin xmax are used only for the grids
 
-    // TDLog.v( "SvgWalls X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " W " + width + " H " + height ); 
+    TDLog.v( "SVG Walls X " + xoff + " " + xmin + " " + xmax + " W " + width + " Y " + yoff + " " + ymin + " " + ymax + " H " + height ); 
 
     ArrayList< XSection > xsections = getXSections( plot, xoff, yoff );
 
@@ -122,23 +124,24 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write( xml_header ); 
       out.write( walls_header );
       out.write( compass_header );
-      out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write( svg_header );
-      out.write( "  i:pageBounds=\"0 0 " + width + " " + (-height) + "\"\n" ); // FIXME i: ???
-      out.write( "  width=\"" + width + "pt\"\n" );
-      out.write( "  height=\"" + height + "pt\"\n" );
-      out.write( "  viewBox=\"" + vbox + "\"\n" );
-      out.write( "  style=\"overflow:visible;enable-background:new " + vbox + "\"\n" );
+      out.write( " width=\"" + width + "pt\" height=\"" + height + "pt\"\n" );
+      // out.write( "  viewBox=\"0 0 " + width + " " + height + "\"\n" );
+      // out.write( "  i:pageBounds=\"0 0 " + width + " " + (height) + "\"\n" ); // FIXME i: ???
+      // out.write( "  style=\"overflow:visible;enable-background:new 0 0 " + width + " " + height + "\"\n" );
       out.write( "  version=\"1.1\"\n" );
       out.write( "  id=\"svg46\"\n" );
       out.write( "  sodipodi:docname=\"" + filename + "\"\n" );
       out.write( "  inkscape:version=\"0.92.4 (5da689c313, 2019-01-14)\">\n" );
+      out.write( "<!-- SVG created by TopoDroid v. " + TDVersion.string() + " -->\n" );
       out.write(    metadata );
       out.write(      rdf );
       out.write(        dc_format );
       out.write(        dc_type );
       out.write(      end_rdf );
       out.write(    end_metadata );
+      out.write(    sodipodi );
+
       out.write( "  <defs id=\"defs\">\n" );
       out.write( "    <marker id=\"Triangle\" viewBox=\"0 0 10 10\" refX=\"0\" refY=\"5\" \n");
       out.write( "      markerUnits=\"strokeWidth\" markerWidth=\"4\" markerHeight=\"3\" orient=\"auto\" >\n");
@@ -161,23 +164,22 @@ public class DrawingSvgWalls extends DrawingSvgBase
       out.write( swD.getBuffer().toString() );
       out.flush();
       // }
-      out.write( "    <icons id=\"icons\" " ); out.write( group_mode_open );
+      out.write( "    <g id=\"icons\" " ); out.write( group_mode_open );
       for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
         SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
         if (pt != null) {
           int block = 1 + n; // block_name = 1 + therion_code
-          out.write("    <symbol id=\"" + pt.getThName() + "\">\n");
+          out.write("    <marker id=\"" + pt.getThName() + "\">\n");
           out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
-          out.write("    </symbol>\n");
+          out.write("    </marker>\n");
         }
       }
-      out.write( "    </icons>\n");
+      out.write( "    </g>\n");
       out.write( "  </defs>\n");
-      out.write(    sodipodi );
-      out.write(    clip );
-      out.write( "  <svg width=\"" + width + "\" height=\"" + height + "\"\n" );
+      // out.write(    clip );
+      // out.write( "  <svg width=\"" + width + "\" height=\"" + height + "\"\n" );
+      out.write( "  <svg width=\"auto\" height=\"auto\"\n" );
       out.write(      svg_options );
-
 
       // out.write( "<g id=\"canvas\" transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
 
@@ -401,7 +403,6 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private static final String xml_header = "<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\n";
   private static final String walls_header = "<?walls updated=\"no\" merged-content=\"no\" adjustable=\"no\"?>\n";
   private static final String compass_header = "<?compass inkscape-compatible=\"yes\"?>\n";
-  private static final String svg_header = "<svg xmlns:i=\"http://ns.adobe.com/AdobeIllustrator/10.0/\" xmlns:dc=\"http://purl.org/dc/elements/1.1/\" xmlns:cc=\"http://creativecommons.org/ns#\" xmlns:rdf=\"http://www.w3.org/1999/02/22-rdf-syntax-ns#\" xmlns:svg=\"http://www.w3.org/2000/svg\" xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" xmlns:sodipodi=\"http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd\" xmlns:inkscape=\"http://www.inkscape.org/namespaces/inkscape\" \n";
   
   private static final String metadata = "  <metadata id=\"metadata52\">\n";
   private static final String rdf = "    <rdf:RDF><cc:Work rdf:about=\"\">\n";
@@ -410,8 +411,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
   private static final String end_rdf      = "    </cc:Work></rdf:RDF>\n";
   private static final String end_metadata = "  </metadata>\n";
 
-  private static final String sodipodi = "  <sodipodi:namedview pagecolor=\"#ffffff\" bordercolor=\"#666666\" borderopacity=\"1\" objecttolerance=\"10\" gridtolerance=\"10\" guidetolerance=\"10\" inkscape:pageopacity=\"0\" inkscape:pageshadow=\"2\" inkscape:window-width=\"960\" inkscape:window-height=\"680\" id=\"namedview48\" showgrid=\"false\" inkscape:zoom=\"1\" inkscape:cx=\"480\" inkscape:cy=\"340\" inkscape:window-x=\"0\" inkscape:window-y=\"0\" inkscape:window-maximized=\"0\" inkscape:current-layer=\"w2d_Walls_shp\" />";
-  private static final String clip = "<!--Used to clip frame - Not compatible with AI10 - remove if necessary-->";
+  // private static final String clip = "<!--Used to clip frame - Not compatible with AI10 - remove if necessary-->";
   private static final String svg_options = " overflow=\"hidden\" version=\"1.1\" id=\"svg44\" style=\"display:inline;overflow:hidden\" >\n";
 
   private static final String group_bgrnd   = "    <g id=\"w2d_Background\" ";
