@@ -13,6 +13,10 @@ package com.topodroid.io.dxf;
 
 public class DxfColor
 {
+  /** covert RGB color to index
+   * @param rgb   RGB [hex]
+   * @return color index
+   */
   public static int rgbToIndex( long rgb )
   { 
     double r = ((rgb >> 16)&0xff) / 255.0; 

@@ -81,7 +81,10 @@ public class DrawingDxf
   //   DXF.printString( pw, 100, DXF.AcDbText );
   // }
 
-
+  /** @return the number of interpolating points for a line
+   * @param line    line path
+   * @param closed  whether the path is closed
+   */
   static private int countInterpolatedPolylinePoints(  DrawingPointLinePath line, boolean closed )
   {
     float bezier_step = TDSetting.getBezierStep();
@@ -111,6 +114,18 @@ public class DrawingDxf
     return npt;
   }
 
+  /** print an interpolated line path
+   * @param pw     output writer
+   * @param line   line path
+   * @param scale  scale factor
+   * @param handle ACAD handle
+   * @param ref    ...
+   * @param layer  DXF layer
+   * @param closed  whether the path is closed
+   * @param xoff   X offset
+   * @param yoff   Y offset
+   * @param z      Z "level" (used only if layer is not null)
+   */
   static private int printInterpolatedPolyline(  PrintWriter pw, DrawingPointLinePath line, float scale, int handle, int ref,
                                     String layer, boolean closed, float xoff, float yoff, float z )
   {
@@ -168,6 +183,18 @@ public class DrawingDxf
     return handle;
   }
 
+  /** print an interpolated line path
+   * @param pw     output writer
+   * @param line   line path
+   * @param scale  scale factor
+   * @param handle ACAD handle
+   * @param ref    ...
+   * @param layer  DXF layer
+   * @param closed  whether the path is closed
+   * @param xoff   X offset
+   * @param yoff   Y offset
+   * @param z      Z "level" (used only if layer is not null)
+   */
   static private int printPolyline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, int ref,
                                     String layer, boolean closed, float xoff, float yoff, float z )
   {
@@ -197,6 +224,9 @@ public class DrawingDxf
   //   return handle;
   // }
 
+  /** @return true of the line contains a spline piece ( the path has some control point )
+   * @param line   line path
+   */
   static private boolean checkSpline( DrawingPointLinePath line )
   {
     if ( DXF.mVersion13_14 ) {
@@ -209,6 +239,17 @@ public class DrawingDxf
     return false;
   }
 
+  /** print a spline line path
+   * @param pw     output writer
+   * @param line   line path
+   * @param scale  scale factor
+   * @param handle ACAD handle
+   * @param layer  DXF layer
+   * @param closed  whether the path is closed
+   * @param xoff   X offset
+   * @param yoff   Y offset
+   * @param z      Z "level" (used only if layer is not null)
+   */
   static private int printSpline( PrintWriter pw, DrawingPointLinePath line, float scale, int handle, String layer, boolean closed,
                           float xoff, float yoff, float z )
   {
@@ -316,7 +357,12 @@ public class DrawingDxf
     return handle;
   }
 
-
+  /** write the plot-sketch in DXF format
+   * @param out     output writer
+   * @param num     data reduction
+   * @param plot    plot sketch
+   * @param type    plot type
+   */
   public static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
     DXF.mVersion9  = (TDSetting.mAcadVersion == DXF.ACAD_9);
@@ -758,6 +804,16 @@ public class DrawingDxf
     }
   }
 
+  /** write a station name to DXF format
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param sn         station name
+   * @param scale      scale factor
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingStationName sn, float scale, float xoff, float yoff, float z )
   { // FIXME point scale factor is 0.3
     if ( sn == null ) return handle;
@@ -765,6 +821,16 @@ public class DrawingDxf
                         STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z );
   }
 
+  /** write a station point to DXF format
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param sp         station point
+   * @param scale      scale factor
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingStationPath sp, float scale, float xoff, float yoff, float z )
   { // FIXME point scale factor is 0.3
     if ( sp == null ) return handle;
@@ -772,6 +838,17 @@ public class DrawingDxf
                         STATION_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z );
   }
 
+  /** write a point item to DXF format
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param model_record_handle ...
+   * @param point      point item
+   * @param scale      scale factor
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, int model_record_handle, DrawingPointPath point, float scale, float xoff, float yoff, float z )
   { // FIXME point scale factor is 0.3
     if ( point == null ) return handle;
@@ -796,6 +873,16 @@ public class DrawingDxf
     return handle;
   }
 
+  /** write a line item to DXF format
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param line       line item
+   * @param scale      scale factor
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingLinePath line, float scale, float xoff, float yoff, float z )
   {
     if ( line == null ) return handle;
@@ -818,6 +905,16 @@ public class DrawingDxf
     return handle;
   }
 
+  /** write a area item to DXF format
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param area       area item
+   * @param scale      scale factor
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingAreaPath area, float scale, float xoff, float yoff, float z )
   {
     if ( area == null ) return handle;
@@ -848,6 +945,19 @@ public class DrawingDxf
     return handle;
   }
 
+  /** write a scrap to DXF format (used for xsections)
+   * @param pw         output writer
+   * @param handle     ACAD handle
+   * @param ref_handle ACAD handle of the reference object
+   * @param model_record_handle ...
+   * @param scrapfile  name of the TDR file of the scrap
+   * @param scale      scale factor
+   * @param dx         X shift (applied when the scrap is read from file)
+   * @param dy         Y shift
+   * @param xoff       X offset
+   * @param yoff       Y offset
+   * @param z          Z "level"
+   */
   static private int tdrToDxf( PrintWriter pw, int handle, int ref_handle, int model_record_handle, String scrapfile,
                                float scale, float dx, float dy, float xoff, float yoff, float z )
   {

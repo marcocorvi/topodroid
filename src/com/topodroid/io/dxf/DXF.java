@@ -80,11 +80,20 @@ public class DXF
  
   static int p_style = 0;
 
+  /** write a comment
+   * @param out       output writer
+   * @param comment   comment
+   */
   static void writeComment( BufferedWriter out, String comment ) throws IOException
   {
     out.write( "  999" + EOL + comment + EOL );
   }
 
+  /** write a handle in hex
+   * @param out       output writer
+   * @param code      ...
+   * @param handle    handle
+   */
   static void writeHex( BufferedWriter out, int code, int handle ) throws IOException 
   {
     if ( mVersion13_14 ) {
@@ -95,6 +104,11 @@ public class DXF
     }
   }
 
+  /** write a handle in hex
+   * @param pw        output printer
+   * @param code      ...
+   * @param handle    handle
+   */
   static void printHex( PrintWriter pw, int code, int handle ) 
   {
     if ( mVersion13_14 ) {
@@ -102,6 +116,11 @@ public class DXF
     }
   }
 
+  /** write one AcDb
+   * @param out       output writer
+   * @param hex       ...
+   * @param acdb1     AcDb string
+   */
   static int writeAcDb( BufferedWriter out, int hex, String acdb1 ) throws IOException 
   {
     if ( mVersion13_14 ) {
@@ -114,6 +133,12 @@ public class DXF
     return hex;
   }
 
+  /** write two AcDb
+   * @param out       output writer
+   * @param hex       ...
+   * @param acdb1     first AcDb string
+   * @param acdb2     second AcDb string
+   */
   static int writeAcDb( BufferedWriter out, int hex, String acdb1, String acdb2 ) throws IOException 
   {
     if ( mVersion13_14 ) {
@@ -126,6 +151,13 @@ public class DXF
     return hex;
   }
 
+  /** write two AcDb
+   * @param out       output writer
+   * @param hex       ...
+   * @param ref       ...
+   * @param acdb1     first AcDb string
+   * @param acdb2     second AcDb string
+   */
   static int writeAcDb( BufferedWriter out, int hex, int ref, String acdb1, String acdb2 ) throws IOException 
   {
     if ( mVersion13_14 ) {
@@ -140,6 +172,11 @@ public class DXF
   }
 
 
+  /** write one AcDb
+   * @param pw        output printer
+   * @param hex       ...
+   * @param acdb1     AcDb string
+   */
   static int printAcDb( PrintWriter pw, int hex, String acdb1 )
   {
     if ( mVersion13_14 ) {
@@ -152,6 +189,12 @@ public class DXF
     return hex;
   }
 
+  /** write one AcDb
+   * @param pw        output printer
+   * @param hex       ...
+   * @param ref       ...
+   * @param acdb1     AcDb string
+   */
   static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1 ) 
   {
     if ( mVersion13_14 ) {
@@ -165,6 +208,13 @@ public class DXF
     return hex;
   }
 
+  /** write AcDb ModelSpace
+   * @param pw        output printer
+   * @param hex       ...
+   * @param ref       ...
+   * @param layer     layer
+   * @param acdb1     AcDb string
+   */
   static int printAcDbModelSpace( PrintWriter pw, int hex, int ref, String layer, String acdb1 ) 
   {
     if ( mVersion13_14 ) {
@@ -183,6 +233,12 @@ public class DXF
     return hex;
   }
 
+  /** write two AcDb
+   * @param pw        output printer
+   * @param hex       ...
+   * @param acdb1     first AcDb string
+   * @param acdb2     second AcDb string
+   */
   static int printAcDb( PrintWriter pw, int hex, String acdb1, String acdb2 ) 
   {
     if ( mVersion13_14 ) {
@@ -195,6 +251,13 @@ public class DXF
     return hex;
   }
 
+  /** write two AcDb
+   * @param pw        output printer
+   * @param hex       ...
+   * @param ref       ...
+   * @param acdb1     first AcDb string
+   * @param acdb2     second AcDb string
+   */
   static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2 )
   {
     if ( mVersion13_14 ) {
@@ -208,6 +271,14 @@ public class DXF
     return hex;
   }
 
+  /** write three AcDb
+   * @param pw        output printer
+   * @param hex       ...
+   * @param ref       ...
+   * @param acdb1     first AcDb string
+   * @param acdb2     second AcDb string
+   * @param acdb3     third AcDb string
+   */
   static int printAcDb( PrintWriter pw, int hex, int ref, String acdb1, String acdb2, String acdb3 )
   {
     if ( mVersion13_14 ) {
@@ -221,43 +292,89 @@ public class DXF
     return hex;
   }
 
-  static void writeString(  BufferedWriter out, int code, String name ) throws IOException
+  /** write a string
+   * @param out      output writer
+   * @param code     string code
+   * @param text     string text
+   */
+  static void writeString(  BufferedWriter out, int code, String text ) throws IOException
   {
-    out.write( "  " + code + EOL + name + EOL );
+    out.write( "  " + code + EOL + text + EOL );
   }
+
+  /** write an empty string
+   * @param out      output writer
+   * @param code     string code
+   */
   static void writeStringEmpty(  BufferedWriter out, int code ) throws IOException
   {
     out.write( "  " + code + EOL + TDString.EMPTY + EOL );
   }
+
+  /** write the string "1.0"
+   * @param out      output writer
+   * @param code     string code
+   */
   static void writeStringOne(  BufferedWriter out, int code ) throws IOException
   {
     out.write( "  " + code + EOL + "1.0" + EOL );
   }
+
+  /** write the string "0.0"
+   * @param out      output writer
+   * @param code     string code
+   */
   static void writeStringZero(  BufferedWriter out, int code ) throws IOException
   {
     out.write( "  " + code + EOL + "0.0" + EOL );
   }
 
-  static void printString(  PrintWriter pw, int code, String name )
+  /** write a string
+   * @param pw       output printer
+   * @param code     string code
+   * @param text     string text
+   */
+  static void printString(  PrintWriter pw, int code, String text )
   {
-    pw.printf("  %d%s%s%s", code, EOL, name, EOL );
+    pw.printf("  %d%s%s%s", code, EOL, text, EOL );
   }
 
+  /** write a float number
+   * @param pw       output printer
+   * @param code     string code
+   * @param val      float value
+   */
   static void printFloat(  PrintWriter pw, int code, float val )
   {
     pw.printf(Locale.US, "  %d%s%.2f%s", code, EOL, val, EOL );
   }
 
+  /** write an integer number
+   * @param out      output writer
+   * @param code     string code
+   * @param val      integer value
+   */
   static void writeInt(  BufferedWriter out, int code, int val ) throws IOException
   {
     out.write( SPACE + code + EOL + val + EOL );
   }
 
+  /** write an integer number
+   * @param pw       output printer
+   * @param code     string code
+   * @param val      integer value
+   */
   static void printInt(  PrintWriter pw, int code, int val )
   {
     pw.printf( "  %d%s%d%s", code, EOL, val, EOL );
   }
 
+  /** write a X-Y pair
+   * @param out      output writer
+   * @param x        X value
+   * @param y        Y value
+   * @param base     base code
+   */
   static void writeXY( BufferedWriter out, int x, int y, int base ) throws IOException
   {
     int b10 = 10 + base;
@@ -265,6 +382,13 @@ public class DXF
     out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOL );
   }
 
+  /** write a XYZ triple
+   * @param out      output writer
+   * @param x        X value
+   * @param y        Y value
+   * @param z        Z value
+   * @param base     base code
+   */
   static void writeXYZ( BufferedWriter out, int x, int y, int z, int base ) throws IOException
   {
     int b10 = 10 + base;
@@ -273,11 +397,24 @@ public class DXF
     out.write( SPACE + b10 + EOL + x + EOLSPACE + b20 + EOL + y + EOLSPACE + b30 + EOL + z + EOL );
   }
 
+  /** write a X-Y pair
+   * @param pw       output printer
+   * @param x        X value
+   * @param y        Y value
+   * @param base     base code
+   */
   static void printXY( PrintWriter pw, float x, float y, int base )
   {
     pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s", base+10, EOL, x, EOL, base+20, EOL, y, EOL );
   }
 
+  /** write a XYZ triple
+   * @param pw       output printer
+   * @param x        X value
+   * @param y        Y value
+   * @param z        Z value
+   * @param base     base code
+   */
   static void printXYZ( PrintWriter pw, float x, float y, float z, int base )
   {
     pw.printf(Locale.US, "  %d%s%.2f%s  %d%s%.2f%s  %d%s%.2f%s",
@@ -292,17 +429,30 @@ public class DXF
 
   // -----------------------------------------
 
+  /** write a SECTION start
+   * @param out      output writer
+   * @param name     section name
+   */
   static void writeSection( BufferedWriter out, String name ) throws IOException
   {
     writeString(out, 0, "SECTION");
     writeString(out, 2, name );
   }
 
+  /** write a SECTION end
+   * @param out      output writer
+   */
   static void writeEndSection( BufferedWriter out ) throws IOException
   {
     writeString(out, 0, "ENDSEC" );
   }
 
+  /** write a TABLE begin
+   * @param out      output writer
+   * @param name     table name
+   * @param handle   ACAD handle
+   * @param num      ...
+   */
   static int writeBeginTable(  BufferedWriter out, String name, int handle, int num ) throws IOException
   {
     writeString(out, 0, "TABLE" );
@@ -312,6 +462,9 @@ public class DXF
     return handle;
   }
   
+  /** write a TABLE end
+   * @param out      output writer
+   */
   static void writeEndTable(  BufferedWriter out ) throws IOException
   {
     writeString( out, 0, "ENDTAB");
