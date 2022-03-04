@@ -1313,7 +1313,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_svg_shotstroke_title">SVG poligon tulajdonság</string>
   <string name="pref_svg_shotstroke_summary">Mérési vonalak vastagsága az SVG-ben</string>
   <string name="pref_svg_linedirstroke_title">SVG irány tulajdonság</string>
-  <string name="pref_svg_linedirstroke_summary">Vonal irány vastagság az SVG-ben</string>
+  <string name="pref_svg_linedirstroke_summary">Vonal irány tüske hossza az SVG-ben</string>
   <string name="pref_svg_line_dir_title">SVG vonal irány</string>
   <string name="pref_svg_line_dir_summary">Vonal irány jelző tüskék hozzáadása SVG exportálásnál</string>
   <string name="pref_svg_stationsize_title">Fixpont méret</string>
