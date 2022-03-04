@@ -358,6 +358,7 @@ Refer to the web pages for details.\n
 <string name="no_sensors">Le relevé ne contient aucune mesure</string>
 <!-- UNUSED string name="no_shots">Le relevé ne contient aucune visées.\n Utilisez le menu Télécharger pour en obtenir.</string -->
 <string name="no_survey">Aucun relevé sélectionné.</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
 <!-- UNUSED string name="no_thmanager">ThManager non installé</string -->
 <!-- UNUSED string name="no_db_viewer">DB_viewer app pas trouvée</string -->
 <string name="no_undelete">Aucun élément à récupérer</string>

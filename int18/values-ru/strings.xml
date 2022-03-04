@@ -360,6 +360,7 @@
     <string name="no_sensors">В съёмке отсутствуют измерения</string>
     <!-- UNUSED string name="no_shots">В съёмке отсутствуют пикеты.\nИспользуйте кнопку Скачать для их создания</string -->
     <string name="no_survey">Съёмка не выбрана.</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">ThManager не установлен</string -->
     <!-- UNUSED string name="no_db_viewer">Приложение просмотра баз данных не найдено</string -->
     <string name="no_undelete">Нечего восстанавливать</string>

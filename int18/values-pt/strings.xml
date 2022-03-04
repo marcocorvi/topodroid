@@ -362,6 +362,7 @@ Refer to the web pages for details.\n
     <string name="no_sensors">Topo sem informações de sensores externos</string>
     <!-- UNUSED string name="no_shots">Nenhuma medida registrada na topo.\nUsar o botão Download para baixar algumas</string -->
     <string name="no_survey">Nenhuma topo selecionada</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">O aplicativo ThManager não está instalado</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer não encontrado</string -->
     <string name="no_undelete">Nenhum item a ser restaurado</string>

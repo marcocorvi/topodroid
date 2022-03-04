@@ -2464,11 +2464,29 @@ public class ShotWindow extends Activity
     TDToast.makeBad( R.string.plot_not_found );
   }
 
+  /** start the plot-sketching window
+   * @param start      origin station
+   * @param plot1_name plan view name
+   * @param plot1_id   plan view id
+   * @param plot2_name profile view name
+   * @param plot2_id   profile view id
+   * @param type       type of plot to show in the window
+   * @param station    ???
+   * @param landscape  whether to use landscape presentation
+   */
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,
                                    String plot2_name, long plot2_id, long type, String station, boolean landscape )
   {
     if ( TDInstance.sid < 0 || plot1_id < 0 || plot2_id < 0 ) {
       TDToast.makeWarn( R.string.no_survey );
+      return;
+    }
+    for ( int k = 0; k < 5; ++k ) {
+      if ( BrushManager.hasSymbolLibraries() ) break;
+      TDUtil.slowDown( 250 );
+    }
+    if ( ! BrushManager.hasSymbolLibraries() ) {
+      TDToast.makeWarn( R.string.no_symbols );
       return;
     }
     
@@ -2503,6 +2521,9 @@ public class ShotWindow extends Activity
   }
 
   // ------------------------------------------------------------------
+  /** start the audio dialog for a data block
+   * @param blk   data block
+   */
   void startAudio( DBlock blk )
   {
     (new AudioDialog( mActivity, /* this */ null, blk.mId, blk )).show();

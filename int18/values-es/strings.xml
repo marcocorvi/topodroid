@@ -355,6 +355,7 @@
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_survey">Topografía no seleccionada</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>

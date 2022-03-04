@@ -364,6 +364,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="no_sensors">Vermessung hat keine Sensormessungen</string>
     <!-- UNUSED string name="no_shots">Vermessung hat keine Messungen</string -->
     <string name="no_survey">Keine Vermessung ausgewählt</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">Keine ThManager App</string -->
     <!-- UNUSED string name="no_db_viewer">Keine DB_viewer App</string -->
     <string name="no_undelete">Nichts wiederherzustellen</string>

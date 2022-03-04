@@ -366,6 +366,7 @@ Refer to the web pages for details.\n
     <string name="no_sensors">Mapovanie nemá žiadne meranie</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">Nie je zvolené mapovanie</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">ThManager app nie je nainštalovaná</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Žiadna položka na Obnovenie </string>

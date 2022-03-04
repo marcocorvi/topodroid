@@ -366,6 +366,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_sensors">Pomiar nie ma danych</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">Brak wybranego pomiaru</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">ThManager nie jest zainstalowany</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">Brak elementu od odzyskania</string>

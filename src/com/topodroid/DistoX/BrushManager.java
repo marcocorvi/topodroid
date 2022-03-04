@@ -50,6 +50,7 @@ public class BrushManager
   static private SymbolAreaLibrary  mAreaLib  = null;
   static private SymbolPoint mStationSymbol   = null;
   static private int mAlpha = 0xff; // splay alpha
+  static private boolean mHasSymbolLibraries = false;
 
   // -----------------------------------------------------------
   /* LOAD_MISSING
@@ -57,6 +58,15 @@ public class BrushManager
   static boolean tryLoadMissingLine( String thname )  { return mLineLib  != null && mLineLib.tryLoadMissingLine( thname ); }
   static boolean tryLoadMissingArea( String thname )  { return mAreaLib  != null && mAreaLib.tryLoadMissingArea( thname ); }
   */
+
+  /** @return true if the manager has the three symbol libraries
+   */
+  static boolean hasSymbolLibraries() { return mHasSymbolLibraries; }
+
+  /** set has SymbolLibraries
+   * @note called by the MainWindow setup thread
+   */
+  static void setHasSymbolLibraries( boolean what ) { mHasSymbolLibraries = what; }
 
   public static SymbolPointLibrary getPointLib() { return mPointLib; }
   public static SymbolLineLibrary  getLineLib()  { return mLineLib; }
@@ -293,10 +303,13 @@ public class BrushManager
    */
   static void loadAllLibraries( Context ctx, Resources res ) 
   {
+    TDLog.v("BRUSH load libraries" );
+    mHasSymbolLibraries = false;
     makeStationSymbol( res );
     reloadPointLibrary( ctx, res );
     reloadLineLibrary( res );
     reloadAreaLibrary( res );
+    mHasSymbolLibraries = true;
   }
 
   /** reload the point symbols
@@ -305,6 +318,7 @@ public class BrushManager
    */
   public static void reloadPointLibrary( Context ctx, Resources res )
   {
+    TDLog.v("BRUSH load point library" );
     mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
   }
@@ -314,6 +328,7 @@ public class BrushManager
    */
   public static void reloadLineLibrary( Resources res )
   {
+    TDLog.v("BRUSH load line library" );
     mLineLib = new SymbolLineLibrary( res );
     // mLineLib.loadUserLines();
   }
@@ -323,6 +338,7 @@ public class BrushManager
    */
   public static void reloadAreaLibrary( Resources res )
   {
+    TDLog.v("BRUSH load area library" );
     mAreaLib = new SymbolAreaLibrary( res );
     // mAreaLib.loadUserAreas();
   }
@@ -412,6 +428,10 @@ public class BrushManager
   /** guard for doMakePaths()
    */
   static private boolean doneMakePaths = false;
+
+  // /** @return true if paths have been made
+  //  */
+  // static boolean hasMadePaths() { return doneMakePaths; }
 
   /** make the paths - protected by doneMakePaths to make paths only once
    */

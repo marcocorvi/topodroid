@@ -803,6 +803,7 @@ public class MainWindow extends Activity
           BrushManager.reloadPointLibrary( mApp, res ); // reload symbols
           BrushManager.reloadLineLibrary( res );
           BrushManager.reloadAreaLibrary( res );
+          BrushManager.setHasSymbolLibraries( true );
           BrushManager.doMakePaths( );
           WorldMagneticModel.loadEGM9615( mApp );
 	  enablePaletteButton();

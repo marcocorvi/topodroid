@@ -362,6 +362,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
+    <!-- TODO string name="no_symbols">No symbol palette.</string -->
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
