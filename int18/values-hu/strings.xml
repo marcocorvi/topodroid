@@ -366,7 +366,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_sensors">A felmérésben nincsennek mérések</string>
     <!-- UNUSED string name="no_shots">Mérésben nincs poligon.\nhasználd a letöltés gombot</string -->
     <string name="no_survey">Nincs kiválasztva felmérés</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+    <string name="no_symbols">Nincs szimbólum paletta.</string>
     <!-- UNUSED string name="no_thmanager">A Thmanager alkalmazás nincs telepítve</string -->
     <!-- UNUSED string name="no_db_viewer">A DB_viewer alkalmazás nem található</string -->
     <string name="no_undelete">Nincs helyreállítható részlet</string>
@@ -1269,7 +1269,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_connect_feedback_title">Kapcsolat visszajelzés</string>
   <string name="pref_connect_feedback_summary">Visszajelzés a műszer kapcsolatról</string>
   <string name="pref_station_prefix_title">Pontnév előtag</string>
-  <string name="pref_station_prefix_summary">cSurvey pontnév előtagok exportálása</string>
+  <string name="pref_station_prefix_summary">Pontnév előtagok exportálása</string>
   <string name="pref_compass_splays_title">Compass segédmérések</string>
   <string name="pref_compass_splays_summary">Segédmérések exportja a Compass fájlokba</string>
   <string name="pref_vtopo_splays_title">VisualTopo segédmérések</string>
