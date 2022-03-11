@@ -73,6 +73,8 @@ import android.os.RemoteException;
 // import android.os.Debug;
 // import android.os.SystemClock; // FIXME TROBOT
 
+import android.database.sqlite.SQLiteDatabase;
+
 import android.app.Application;
 // import android.app.Notification;
 // import android.app.NotificationManager;
@@ -826,6 +828,10 @@ public class TopoDroidApp extends Application
 
     thisApp = this;
     TDInstance.setContext( getApplicationContext() );
+
+    // MODE_WORLD_WRITEABLE and MODE_WORLD_READABLE are no longer supported
+    // SQLiteDatabase dbase = openOrCreateDatabase("DISTOX14", 0, null );
+    // DBase path: /data/user/0/com.topodroid.DistoX/databases/DISTOX14
 
     // ONLY IF BUILT WITH ANDROID-30 and above
     // if ( TDandroid.ABOVE_API_29 ) {

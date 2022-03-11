@@ -14,6 +14,6 @@ package com.topodroid.DistoX;
 interface IJoinClickHandler
 {
   void setButtonJoinMode( int join_mode, int code );
-  boolean dismissPopupJoin();
+  // boolean dismissPopupJoin();
 }
 

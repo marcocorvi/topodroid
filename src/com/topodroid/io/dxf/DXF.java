@@ -470,6 +470,14 @@ public class DXF
     writeString( out, 0, "ENDTAB");
   }
 
+  /** write a LAYER
+   * @param pw2      output printer
+   * @param handle   ACAD handle
+   * @param name     layer name
+   * @param flag     layer flags
+   * @param color    layer color
+   * @param linetype layer line type
+   */
   static int printLayer( PrintWriter pw2, int handle, String name, int flag, int color, String linetype )
   {
     name = name.replace(":", "-");
@@ -494,6 +502,17 @@ public class DXF
   //   printString( pw, 7, style );
   //   printString( pw, 100, AcDbText );
   // }
+
+  /** write a line point (VERTEX)
+   * @param pw       output printer
+   * @param scale    scale factor
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   * @param x        X coordinate
+   * @param y        Y coordinate
+   * @param z        Z coordinate
+   */
   static int printLinePoint( PrintWriter pw, float scale, int handle, int ref, String layer, float x, float y, float z )
   {
     if ( mVersion14 ) {
@@ -512,6 +531,17 @@ public class DXF
     return handle;
   }
 
+  /** write a line segment
+   * @param pw       output printer
+   * @param scale    scale factor
+   * @param handle   ACAD handle
+   * @param layer    layer name
+   * @param x1       X coordinate of the first point
+   * @param y1       Y coordinate of the first point
+   * @param x2       X coordinate of the second point
+   * @param y2       Y coordinate of the second point
+   * @param z        Z coordinate
+   */
   static int printLine(PrintWriter pw, float scale, int handle, String layer, float x1, float y1, float x2, float y2, float z )
   {
     printString( pw, 0, "LINE" );
@@ -525,6 +555,14 @@ public class DXF
     return handle;
   }
 
+  /** write a polyline header
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   * @param closed   whether the polyline is closed
+   * @param npt      number of points
+   */
   static int printPolylineHeader( PrintWriter pw, int handle, int ref, String layer, boolean closed, int npt )
   {
     if ( mVersion14 ) {
@@ -558,6 +596,12 @@ public class DXF
     return handle;
   }
 
+  /** write a polyline footer
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   */
   static int printPolylineFooter( PrintWriter pw, int handle, int ref, String layer )
   {
     if ( mVersion14 ) {
@@ -593,6 +637,14 @@ public class DXF
   //   return handle;
   // }
 
+
+  /** write a hatch header
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param layer    layer name
+   * @param npt      number of points
+   */
   static int printHatchHeader( PrintWriter pw, int handle, int ref, String layer, int npt )
   {
     if ( mVersion13_14 ) {
@@ -621,6 +673,11 @@ public class DXF
     return handle;
   }
 
+  /** write a hatch footer
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   */
   static int printHatchFooter( PrintWriter pw, int handle, int ref )
   {
     if ( mVersion13_14 ) {
@@ -663,6 +720,20 @@ public class DXF
   }
 
 
+  /** write a text
+   * @param pw       output printer
+   * @param handle   ACAD handle
+   * @param ref      ...
+   * @param label    text
+   * @param x        X coordinate
+   * @param y        Y coordinate
+   * @param scale    scale factor
+   * @param layer    layer name
+   * @param style    style
+   * @param xoff     X offset
+   * @param yoff     Y offset
+   * @param z        Z level
+   */
   static int printText( PrintWriter pw, int handle, int ref, String label, float x, float y, float angle, float scale,
                         String layer, String style, float xoff, float yoff, float z )
   {

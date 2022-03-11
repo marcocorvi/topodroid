@@ -163,6 +163,8 @@ public class SensorActivity extends Activity
     TDLocale.resetTheLocale();
   }
 
+  /** set the text of the sensor value according to the active sensor type
+   */
   private void setSensor( )
   { 
     if ( mSensorType != -1 ) {
@@ -200,6 +202,8 @@ public class SensorActivity extends Activity
     }
   }
 
+  /** register the sensor listener with the System Sensor Manager
+   */
   private void registerSensorEventListener()
   {
     if ( mSensorType != -1 ) {
@@ -211,7 +215,9 @@ public class SensorActivity extends Activity
       }
     }
   }
-    
+
+  /** custom sensor listener
+   */
   private final SensorEventListener mListener = new SensorEventListener() 
   {
     @Override
@@ -269,6 +275,9 @@ public class SensorActivity extends Activity
     }
   };
 
+  /** react to a user tap; either set the sensor type, or accept the active sensor value, or cancel
+   * @param view tapped view
+   */
   @Override
   public void onClick( View view )
   {
@@ -313,6 +322,8 @@ public class SensorActivity extends Activity
     }
   }  
     
+  /** when the activity resumes: register sensor listener
+   */
   @Override
   protected void onResume()
   {
@@ -320,6 +331,8 @@ public class SensorActivity extends Activity
     registerSensorEventListener();
   }
     
+  /** when the activity stop: unregister sensor listener
+   */
   @Override
   protected void onStop()
   {
@@ -327,6 +340,10 @@ public class SensorActivity extends Activity
      super.onStop();
   }
 
+  /** process a user key-press
+   * @param code   key code
+   * @param event  key event
+   */
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {

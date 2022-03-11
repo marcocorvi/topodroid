@@ -29,6 +29,11 @@ class StationName
   protected DataHelper mData;
   protected long mSid;
 
+  /** cstr
+   * @param ctx    context
+   * @param data   database helper
+   * @param sid    survey ID
+   */
   StationName( Context ctx, DataHelper data, long sid ) 
   {
     mContext = ctx;
@@ -88,7 +93,7 @@ class StationName
   // String getFirstStation( ) { return mData.getFirstStation( mSid ); }
   static String getFirstStation( DataHelper data, long sid ) { return data.getFirstStation( sid ); }
   
-  // used only to reset/getCurrentOrLastStation name
+  // @note used only to reset/getCurrentOrLastStation name
   static private String getLastStationName( DataHelper data, long sid )
   {
     DBlock last = data.selectLastNonBlankShot( sid );

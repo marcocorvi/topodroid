@@ -733,7 +733,7 @@ public class DrawingPath extends RectF
 
   /** write the path in "Cave3D" format - empty by default
    * @param pw     output writer
-   * @param type   ...
+   * @param type   plot type
    * @param cmd    drawing items manager
    * @param num    data reduction
    */
@@ -741,17 +741,17 @@ public class DrawingPath extends RectF
 
   /** write the path in "Cave3D" format - empty by default
    * @param pw     output writer
-   * @param type   ...
-   * @param V1     ...
-   * @param V2     ...
+   * @param type   plot type
+   * @param V1     X unit axis lifted in 3D
+   * @param V2     Y unit axis lifted in 3D
    */
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector v2 ) { }
 
   /** @return a vector in world frame, V1 * X0 + V2 * Y0
-   * @param x   X coord of ...
-   * @param y   Y coord of ...
-   * @param V1  ...
-   * @param V2  ...
+   * @param x   X coord of the point in the drawing
+   * @param y   Y coord of the point in the drawing
+   * @param V1  X unit axis lifted in 3D
+   * @param V2  Y unit axis lifted in 3D
    */
   static TDVector getCave3D( float x, float y, TDVector V1, TDVector V2 )
   {

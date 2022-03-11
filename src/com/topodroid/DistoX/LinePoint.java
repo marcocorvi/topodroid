@@ -222,21 +222,28 @@ public class LinePoint extends Point2D
     mPrev = prev;
   }
 
-  // distance of the first control-point from a given coord-pair
-  // @param x0,y0   coord-pairs
+  /** @return the distance of the first control-point from a given (X,Y) coord-pair
+   * @param x0  X ccordinate
+   * @param y0  Y ccordinate
+   */
   float distanceCP1( float x0, float y0 )
   {
     return (float)Math.sqrt( (x0-x1)*(x0-x1) + (y0-y1)*(y0-y1) );
   }
 
-  // distance of the second control-point from a given coord-pair
-  // @param x0,y0   coord-pairs
+  /** @return the distance of the second control-point from a given (X,Y) coord-pair
+   * @param x0  X ccordinate
+   * @param y0  Y ccordinate
+   */
   float distanceCP2( float x0, float y0 )
   {
     return (float)Math.sqrt( (x0-x2)*(x0-x2) + (y0-y2)*(y0-y2) );
   }
 
-  // return line-coord of the projection of this point on the line P0-P1
+  /** @return line-coord of the projection of this point on the segment P0-P1
+   * @param p0   first endpoint of the segment
+   * @param p1   second endpoint of the segment
+   */
   float orthoProject( LinePoint p0, LinePoint p1 )
   {
     float x01 = p1.x - p0.x;
@@ -244,7 +251,10 @@ public class LinePoint extends Point2D
     return ((x-p0.x)*x01 + (y-p0.y)*y01) / ( x01*x01 + y01*y01 );
   }
     
-  // return orthogonal distance of this point on the line P0-P1
+  /** @return orthogonal distance of this point on the segment P0-P1
+   * @param p0   first endpoint of the segment
+   * @param p1   second endpoint of the segment
+   */
   float orthoDistance( LinePoint p0, LinePoint p1 )
   {
     float x01 = p1.x - p0.x;
@@ -252,6 +262,9 @@ public class LinePoint extends Point2D
     return TDMath.abs( (x-p0.x)*y01 - (y-p0.y)*x01 ) / TDMath.sqrt( x01*x01 + y01*y01 );
   }
 
+  /** write this line-point in therion format
+   * @param pw   output writer
+   */
   public void toTherion( PrintWriter pw )
   {
       if ( has_cp ) {
@@ -264,6 +277,9 @@ public class LinePoint extends Point2D
       }
   }
 
+  /** write this line-point in tdr (binary) format
+   * @param dos   output writer
+   */
   void toDataStream( DataOutputStream dos )
   {
     try {
@@ -283,6 +299,12 @@ public class LinePoint extends Point2D
     } catch ( IOException e ) { }
   }
 
+  /** write this line-point in Cave3D format
+   * @param w      output writer
+   * @param type   plot type
+   * @param cmd    drawing item manager
+   * @param num    data reduction - used to get the 3D vector of this line-point
+   */
   void toCave3D( PrintWriter pw, int type, DrawingCommandManager cmd, TDNum num )
   {
     // x: east, y:south, v:down
@@ -301,6 +323,12 @@ public class LinePoint extends Point2D
     pw.format( Locale.US, "%f %f %f\n", x0, -y0, -v0 );
   }
 
+  /** write this line-point in Cave3D format
+   * @param w      output writer
+   * @param type   plot type
+   * @param V1     X unit axis lifted in 3D
+   * @param V2     Y unit axis lifted in 3D
+   */
   void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 )
   {
     // cx,cy are in pixels divide by 20 to write coords in meters

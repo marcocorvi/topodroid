@@ -20,9 +20,13 @@ import java.util.ArrayList;
 
 public class DistoXStationName
 {
-  static String mInitialStation;
-  static String mSecondStation;
+  static String mInitialStation;  // initial station
+  static String mSecondStation;   // initial second station
 
+  /** set the initial station 
+   * @param init   initial station (null to use the setting)
+   * @note the second station is set to the increment of the initial station
+   */
   public static void setInitialStation( String init )
   {
     if ( init == null || init.length() == 0 ) init = TDSetting.mInitStation;
@@ -30,15 +34,22 @@ public class DistoXStationName
     mSecondStation  = incrementName( init );
   }
 
+  // lowercase characters
   private static final char[] lc = {
     'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
     'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z' 
   };
+
+  // uppercase characters
   private static final char[] uc = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M',
     'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z' 
   };
 
+  /** @return true if the LHS string is less or equal to the RHS string
+   * @param lhs    left-hand side 
+   * @param rhs    right-hand side 
+   */
   static boolean isLessOrEqual( String lhs, String rhs )
   {
     int l1 = lhs.length();
@@ -78,6 +89,11 @@ public class DistoXStationName
     return ( l1 <= l2 );
   }
 
+  /** @return the increment of a string
+   * @param name   string to increment
+   * @param set    set of strings to skip
+   * @note the given name is incremented until a string not in the set is found
+   */
   static String incrementName( String name, Set<String> set )
   {
     String n = name;
@@ -87,6 +103,11 @@ public class DistoXStationName
     return n;
   }
 
+  /** @return the increment of a string
+   * @param name   string to increment
+   * @param list   list of data block 
+   * @note the given name is incremented until a string not among the stations of the list is found
+   */
   static String incrementName( String name, List< DBlock > list )
   {
     String n = name;
@@ -105,7 +126,9 @@ public class DistoXStationName
     return n;
   }
 
-
+  /** @return the increment of a string
+   * @param name   string to increment
+   */
   static String incrementName( String name )
   {
     // if name is numeric
@@ -124,18 +147,33 @@ public class DistoXStationName
           int n = 0;
           int s = 1;
           // TDLog.Log( TDLog.LOG_NAME, "name >" + name + "< n " + n );
+          int digits = 0;
+          int leading = -1;
           while ( len > 0 ) {
             -- len;
             k = Character.getNumericValue( name.charAt(len) );
             if ( k < 0 || k >= 10 ) { ++len; break; }
             n += s * k;
             s *= 10;
+            ++digits;
+            leading = k;
             // TDLog.Log( TDLog.LOG_NAME, "k " + k + " n " + n + " len " + len);
           }
           if ( len > 0 ) {
-            return name.substring( 0, len ) + Integer.toString( n+1 );
-          } 
-          return Integer.toString( n+1 );
+            if ( leading == 0 ) {
+              String fmt = String.format("%%0%dd", digits );
+              return name.substring( 0, len ) + String.format( fmt, n+1 );
+            } else {
+              return name.substring( 0, len ) + Integer.toString( n+1 );
+            }
+          } else {
+            if ( leading == 0 ) {
+              String fmt = String.format("%%0%dd", digits );
+              return String.format( fmt, n+1 );
+            } else {
+              return Integer.toString( n+1 );
+            }
+          }
         } else {
           return name + "1";
         }
@@ -144,7 +182,10 @@ public class DistoXStationName
     return ""; // default is the empty string
   }
 
-  // used by SketchNewShotDialog
+  /** @return true if a data block in a list has the given name as station
+   * @param list   list of data block 
+   * @param name   station name
+   */
   static private boolean listHasName( List< DBlock > list, String name )
   {
     if ( name != null ) {
@@ -156,7 +197,10 @@ public class DistoXStationName
     return false;
   }
 
-  // used by PocketTopo export
+  /** @return the PocketTopo integer for a station name
+   * @param name   station name
+   * @note used by PocketTopo export
+   */
   public static int toInt( String name )
   {
     if ( name == null ) return -1;
@@ -196,7 +240,11 @@ public class DistoXStationName
     return ret;
   }
 
-  // check if the ordered list of names contains a name
+  /** check if the ordered list of names contains a name
+   * @param a   array (list) of names
+   * @param s   station name
+   * @return true if the station name is in the list
+   */
   static private boolean orderContains( ArrayList< String > a, String s )
   {
     int n1 = 0;
@@ -232,7 +280,10 @@ public class DistoXStationName
     return false;
   }
 
-  // insert a name in the ordered list of names
+  /** insert a name in the ordered list of names
+   * @param a   array (list) of names
+   * @param s   station name
+   */
   static void orderInsert( ArrayList< String > a, String s )
   {
     int n1 = 0;

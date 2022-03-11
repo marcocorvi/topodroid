@@ -133,7 +133,7 @@ public class DrawingWindow extends ItemDrawer
                                     , IZoomer
                                     , IExporter
                                     , IFilterClickHandler
-                                    , IJoinClickHandler
+                                    // , IJoinClickHandler
                                     , IPhotoInserter
                                     , IAudioInserter
 {
@@ -1771,10 +1771,12 @@ public class DrawingWindow extends ItemDrawer
   /** set button "continue"
    * @param join_mode    type of join
    * @param code         unused
+   * @note called by JoinClickListener
    */
   public void setButtonJoinMode( int join_mode, int code )
   {
     if ( TDLevel.overNormal ) setButtonContinue( join_mode );
+    dismissPopupJoin();
   }
 
   /** set button "filter"
@@ -5881,7 +5883,7 @@ public class DrawingWindow extends ItemDrawer
 
     /** dismiss the line JOIN popup
      */
-    public boolean dismissPopupJoin()
+    private boolean dismissPopupJoin()
     {
       if ( mPopupJoin != null ) {
         mPopupJoin.dismiss();

@@ -31,7 +31,7 @@ import java.io.IOException;
 
 public class OsmFactory
 {
-  /** a 2D line path
+  /** a 2D line path: a line-path is an array of 2D nodes
    */
   class Path
   {

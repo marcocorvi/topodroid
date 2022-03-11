@@ -18,19 +18,27 @@ class JoinClickListener implements OnClickListener
 {
   private int mIndex;
   private int mCode;
-  private IJoinClickHandler mParent;
+  private DrawingWindow mParent; // IJoinClickHandler mParent;
 
-  JoinClickListener( IJoinClickHandler parent, int i, int c ) 
+  /** cstr
+   * @param parent   parent click handler
+   * @param i        click index
+   * @param c        click code
+   */
+  JoinClickListener( DrawingWindow parent, int i, int c ) 
   {
     mParent = parent;
     mIndex = i;
     mCode  = c;
   }
 
+  /** react to a user tap - invoke the parent handling methods
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v) {
     mParent.setButtonJoinMode( mIndex, mCode );
-    mParent.dismissPopupJoin();
+    // mParent.dismissPopupJoin(); // already in setButtonJoinMode()
   }
 }
 
