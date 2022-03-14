@@ -163,7 +163,7 @@ public class GlSketch extends GlShape
     zmin = zmax = v0.z;
     for ( SketchPoint point : mPoints ) {
       Vector3D v = point;
-      TDLog.v("TopoGL Point " + v.x + " " + v.y + " " + v.z );
+      // TDLog.v("TopoGL Point " + v.x + " " + v.y + " " + v.z );
       if ( v.x < xmin ) { xmin = v.x; } else if ( v.x > xmax ) { xmax = v.x; }
       if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
       if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }

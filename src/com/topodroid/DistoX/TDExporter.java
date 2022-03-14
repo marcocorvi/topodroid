@@ -4281,10 +4281,11 @@ public class TDExporter
   {
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    pw.format("    <Visee ");
     if ( suffix == null || suffix.length() == 0 ) {
-      pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
+      pw.format(Locale.US, "Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
     } else {
-      pw.format(Locale.US, "    <Visee Dep=\"%s%s\" Arr=\"%s%s\" ", item.mFrom, suffix, item.mTo, suffix );
+      pw.format(Locale.US, "Dep=\"%s%s\" Arr=\"%s%s\" ", item.mFrom, suffix, item.mTo, suffix );
     }
     pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", leg.length(), leg.bearing(), leg.clino() );
     leg.reset();
@@ -4292,11 +4293,11 @@ public class TDExporter
     // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
     if ( item.isDuplicate() ) pw.format("Exc=\"E\" ");
     // if ( surface ) pw.forma(" #|S#");
+    pw.format(">");
     if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("/><Commentaire>%s</Commentaire></Visee>\r\n", item.mComment );
-    } else {
-      pw.format("/>\r\n");
+      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
     }
+    pw.format("</Visee>\r\n", item.mComment );
   }
 
   static private void printSplayToTro( PrintWriter pw, DBlock item, boolean direct, String suffix )
@@ -4335,32 +4336,33 @@ public class TDExporter
     if ( ! TDSetting.mVTopoSplays ) return; // false;
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
+    pw.format("    <Visee ");
     if ( direct ) {
       if ( suffix == null || suffix.length() == 0 ) {
-        pw.format("    <Visee Dep=\"%s\" ", item.mFrom );
+        pw.format("Dep=\"%s\" ", item.mFrom );
       } else {
-        pw.format("    <Visee Dep=\"%s%s\" ", item.mFrom, suffix );
+        pw.format("Dep=\"%s%s\" ", item.mFrom, suffix );
       }
-      pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, item.mBearing, item.mClino );
+      pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, item.mBearing, item.mClino );
     } else {
       // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
       float b = TDMath.add180( item.mBearing );
       if ( suffix == null || suffix.length() == 0 ) {
-        pw.format("    <Visee Dep=\"%s\" ", item.mTo );
+        pw.format("Dep=\"%s\" ", item.mTo );
       } else {
-        pw.format("    <Visee Dep=\"%s%s\" ", item.mTo, suffix );
+        pw.format("Dep=\"%s%s\" ", item.mTo, suffix );
       }
-      pw.format(Locale.US, " Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, b, - item.mClino );
+      pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", item.mLength, b, - item.mClino );
     }
     // pw.format(Locale.US, "Ref=\"%d\" ", ref );
     if (item.isCommented() ) pw.format("Exc=\"E\" ");
     // if ( duplicate ) pw.format(" #|L#");
     // if ( surface ) pw.format(" #|S#");
+    pw.format(">");
     if ( item.mComment != null && item.mComment.length() > 0 ) {
-      pw.format("/><Commentaire>%s</Commentaire></Visee>\r\n", item.mComment );
-    } else {
-      pw.format("/>\r\n");
-    }
+      pw.format("<Commentaire>%s</Commentaire>", item.mComment );
+    } 
+    pw.format("</Visee>\r\n");
   }
 
   static int exportSurveyAsTro( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname, String suffix )

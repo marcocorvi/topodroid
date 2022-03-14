@@ -351,7 +351,7 @@ public class CWConvexHull
   
   private void insertPoint( Vector3D p )
   {
-    // TDLog.v( "CW-Hull " + mVertex.size() + " insert point " + p.x + " " + p.y + " " + p.z );
+     // TDLog.v( "CW-Hull " + mVertex.size() + " insert point " + p.x + " " + p.y + " " + p.z );
     if ( mVertex.size() < 4 ) {
       mVertex.add( new CWPoint( p.x, p.y, p.z ) );
       if ( mVertex.size() == 4 ) {
