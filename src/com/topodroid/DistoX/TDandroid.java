@@ -25,7 +25,7 @@ import android.os.Build;
 // import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.PackageInfo;
+// import android.content.pm.PackageInfo;
 
 import android.hardware.Sensor;
 import android.widget.Button;
@@ -421,8 +421,6 @@ public class TDandroid
         break;
     }
   }
-
-
 
 }
   

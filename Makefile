@@ -32,6 +32,18 @@ signed:
 	md5sum TopoDroid-$(VERSION).apk
 	mv TopoDroid-$(VERSION).apk TopoDroid-$(VERSION)-$(TARGET_SDK).apk
 
+signed-29:
+	./howto/target.sh 29
+	make signed
+
+signed-30:
+	./howto/target.sh 30
+	make signed
+
+signed-31:
+	./howto/target.sh 31
+	make signed
+
 debug-signed:
 	$(ANT) debug
 	./howto/sign-debug.sh

@@ -490,13 +490,18 @@ public class SurveyWindow extends Activity
 
   // ---------------------------------------------------------------
 
-  private void saveSurvey( )
+  private boolean saveSurvey( )
   {
     // String name = mTextName.getText().toString(); // RENAME is special
     // if ( name == null || name.length == 0 ) {
     // }
-    String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
+    if ( team == null || team.length() == 0 ) {
+      mEditTeam.setError( getResources().getString( R.string.error_team_required ) );
+      TDToast.makeBad( R.string.survey_not_saved );
+      return false;
+    }
+    String date = mEditDate.getText().toString();
     String comment = mEditComment.getText().toString();
     float decl = SurveyInfo.declination( mEditDecl );
     doSetDeclination( decl );
@@ -508,8 +513,9 @@ public class SurveyWindow extends Activity
     /* if ( team != null ) */ { team = team.trim(); } // else { team = ""; }
     /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
-    // TDLog.Log( TDLog.LOG_SURVEY, "INSERT survey id " + id + " date " + date + " name " + name + " comment " + comment );
+    TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
     mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
+    return true;
   }
 
   /** export the survey data
@@ -520,8 +526,8 @@ public class SurveyWindow extends Activity
    */
   public void doExport( String type, String filename, String prefix )
   {
+    if ( ! saveSurvey() ) return;
     mExportPrefix = prefix;
-    saveSurvey();
     int index = TDConst.surveyFormatIndex( type );
     // TDLog.v( "SURVEY do export: type " + type + " index " + index );
     // if ( index == TDConst.SURVEY_FORMAT_ZIP ) {
@@ -617,7 +623,7 @@ public class SurveyWindow extends Activity
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
-        // saveSurvey(); 
+        if ( ! saveSurvey() ) return false;
         TopoDroidApp.mSurveyWindow = null;
         super.onBackPressed();
         return true;
@@ -664,7 +670,6 @@ public class SurveyWindow extends Activity
     closeMenu();
     int p = 0;
     if ( p++ == pos ) { // CLOSE
-      // saveSurvey();
       TopoDroidApp.mSurveyWindow = null;
       super.onBackPressed();
     } else if ( p++ == pos ) { // EXPORT

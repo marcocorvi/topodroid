@@ -19,6 +19,7 @@ import com.topodroid.DistoX.Cave3DShot;
 import com.topodroid.DistoX.Cave3DStation;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
+import com.topodroid.utils.TDVersion;
 
 // import com.topodroid.utils.TDLog;
 
@@ -427,7 +428,7 @@ public class ExportDXF
       BufferedWriter out = new BufferedWriter( osw );
 
       // HEADERS
-      writeComment( out, "DXF created by Cave3D v. " + TopoGL.VERSION );
+      writeComment( out, "DXF created by TopoDroid v. " + TDVersion.string() );
       writeSection( out, "HEADER" );
 
       // ACAD versions: 1006 (R10) 1009 (R11 R12) 1012 (R13) 1014 (R14)

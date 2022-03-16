@@ -720,6 +720,21 @@ public class MainWindow extends Activity
     // mApp_mCheckPerms = TopoDroidApp.mCheckPerms;
 
     // TDLog.v("VERSION " + TDVersion.string() );
+
+    // The following is good to get permission to the document-tree
+    // which does not present a File API to the files
+    // For example /sdcard/Documents is 
+    //     content://com.android.externalstorage.documents/tree/primary%3ADocuments
+    // 
+    // if ( ! TDInstance.hasFolderPermission() ) {
+    //   TDLog.v("no folder permission ");
+    //   TDLog.v("request TREE URI");
+    //   Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE );
+    //   intent.addFlags( Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
+    //                  | Intent.FLAG_GRANT_WRITE_URI_PERMISSION 
+    //                  | Intent.FLAG_GRANT_READ_URI_PERMISSION );
+    //   startActivityForResult( intent, TDRequest.REQUEST_TREE_URI );
+    // }
   }
 
   static private boolean done_init_dialogs = false;
@@ -738,15 +753,24 @@ public class MainWindow extends Activity
       return;
     } 
     done_init_dialogs = true;
-    // TDLog.v( "init environment second");
+    TDLog.v( "init environment second");
+
+    // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
+    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.target_sdk,
+    //     new DialogInterface.OnClickListener() {
+    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+    //     }
+    //   );
+    // }
+
     if ( ! TopoDroidApp.initEnvironmentSecond( say_dialogR ) ) {
       TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.tdx_stale, 
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
         }
       );
-
     }
+
     if ( mApp.mWelcomeScreen ) {
       TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;
@@ -1259,6 +1283,11 @@ public class MainWindow extends Activity
         } else {
         }
         break;
+      // case TDRequest.REQUEST_TREE_URI:
+      //   if ( result == Activity.RESULT_OK ) {
+      //     TDInstance.handleRequestTreeUri( intent );
+      //   }
+      //   break;
     }
   }
 

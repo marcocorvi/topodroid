@@ -42,7 +42,6 @@ public class ExportCGAL
 
   public boolean exportASCII( BufferedWriter osw, TglParser data, boolean do_splays, boolean do_walls, boolean do_station )
   {
-    // String name = "Cave3D";
     // Log.v( "Cave3D-CGAL, "export as CGAL " + filename );
     if ( data == null ) return false;
 

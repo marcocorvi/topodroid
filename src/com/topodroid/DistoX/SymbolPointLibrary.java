@@ -200,7 +200,7 @@ public class SymbolPointLibrary extends SymbolLibrary
           boolean enable = false;
           if ( symbol.isThName( SECTION ) ) { // FIXME_SECTION_POINT always enabled
             enable = true;
-	  } else {
+	  } else if ( TopoDroidApp.mData != null ) {
             if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
               for ( int k=0; k<DefaultPoints.length; ++k ) { 
                 if ( DefaultPoints[k].equals( thname ) ) { enable = true; break; }

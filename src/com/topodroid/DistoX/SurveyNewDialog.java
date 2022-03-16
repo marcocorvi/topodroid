@@ -194,6 +194,10 @@ class SurveyNewDialog extends MyDialog
 
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
+    if ( team == null || team.length() == 0 ) {
+      mEditTeam.setError( mContext.getResources().getString( R.string.error_team_required ) );
+      return false;
+    } 
     String comment = mEditComment.getText().toString();
     double decl = SurveyInfo.declination( mEditDecl );
     // if ( decl >= SurveyInfo.DECLINATION_MAX ) {

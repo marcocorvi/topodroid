@@ -8,7 +8,8 @@
     <string name="string_false">false</string>
     <string name="string_true">true</string>
 
-    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected:\nTopoDroid must stop.\nRename the folder and restart the app.\nRead the manual preface.</string>
+    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected:\nTopoDroid must stop.\nRename the folder and restart the app.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
+    <string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html</string>
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -290,6 +291,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_required">Name required</string>
     <string name="error_name_duplicate">Duplicate name</string>
     <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
+    <string name="error_team_required">Team required</string>
 
     <!-- UNUSED string name="error_dir_exists">Directory already exists</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -576,6 +578,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="survey_not_extend">WARNING: unset shot extends</string>
     <string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string>
     <string name="survey_no_data_reduction">WARNING: no data reduction</string>
+    <string name="survey_not_saved">WARNING: survey info not saved</string>
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>

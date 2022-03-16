@@ -273,6 +273,7 @@ public class SymbolLibrary
   // prefix: p_ l_ a_
   protected void makeEnabledList( )
   {
+    if ( TopoDroidApp.mData == null ) return;
     for ( Symbol symbol : mSymbols ) {
       TopoDroidApp.mData.setSymbolEnabled( mPrefix + symbol.getThName(), symbol.mEnabled );
       // if ( symbol.mEnabled ) {

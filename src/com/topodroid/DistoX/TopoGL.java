@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDVersion;
 
 // import com.topodroid.DistoX.TDandroid;
 
@@ -181,8 +182,8 @@ public class TopoGL extends Activity
   //   app.handleRegularData( d, b, c );
   // }
 
-  public static String VERSION = "";
-  public static int VERSION_CODE = 0;
+  // public static String VERSION = "";
+  // public static int VERSION_CODE = 0;
 
   // private static final int REQUEST_OPEN_FILE = 1;
 
@@ -1636,7 +1637,7 @@ public class TopoGL extends Activity
   // TglPerms perms_dialog = null;
   static int mRequestPermissionTime = 1;
 
-  /** check settings: load settings and set VERSION
+  /** check settings: load settings 
    */
   private void checkPreferences()
   {
@@ -1644,12 +1645,13 @@ public class TopoGL extends Activity
     loadPreferences( mPrefs );
     // mPrefs.registerOnSharedPreferenceChangeListener( this );
 
-    try {
-      VERSION = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
-      VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
-    } catch ( NameNotFoundException e ) {
-      e.printStackTrace(); // FIXME
-    }
+    // This is in TDVersion
+    // try {
+    //   VERSION = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionName;
+    //   VERSION_CODE = getPackageManager().getPackageInfo( getPackageName(), 0 ).versionCode;
+    // } catch ( NameNotFoundException e ) {
+    //   e.printStackTrace(); // FIXME
+    // }
   }
 
   /* FeatureChecker

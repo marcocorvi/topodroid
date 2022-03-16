@@ -143,13 +143,15 @@ public class SymbolAreaLibrary extends SymbolLibrary
           String thname = symbol.getThName();
           String name   = mPrefix + thname;
           boolean enable = false;
-          if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
-            for ( int k=0; k<DefaultAreas.length; ++k ) { 
-              if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
+          if ( TopoDroidApp.mData != null ) {
+            if ( ! TopoDroidApp.mData.hasSymbolName( name ) ) {
+              for ( int k=0; k<DefaultAreas.length; ++k ) { 
+                if ( DefaultAreas[k].equals( thname ) ) { enable = true; break; }
+              }
+              TopoDroidApp.mData.setSymbolEnabled( name, enable );
+            } else {
+              enable = TopoDroidApp.mData.getSymbolEnabled( name );
             }
-            TopoDroidApp.mData.setSymbolEnabled( name, enable );
-          } else {
-            enable = TopoDroidApp.mData.getSymbolEnabled( name );
           }
           symbol.setEnabled( enable );
         } else {

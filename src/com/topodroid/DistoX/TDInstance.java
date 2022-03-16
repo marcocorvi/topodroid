@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.PlotType;
+import com.topodroid.utils.TDLog;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -26,7 +27,8 @@ import android.content.res.Resources;
 import android.bluetooth.BluetoothDevice;
 import android.bluetooth.BluetoothAdapter;
 
-import android.net.Uri;
+// import android.net.Uri;
+// import androidx.documentfile.provider.DocumentFile;
 
 // static class (singleton) with instance data
 public class TDInstance
@@ -282,15 +284,6 @@ public class TDInstance
     return String.format( context.getResources().getString( r ), arg );
   }
 
-  // /** take persitent permissions for a given uri
-  //  * @param uri   uri
-  //  */
-  // static void takePersistentPermissions( Uri uri )
-  // {
-  //   int flags = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
-  //   getContentResolver().takePersistableUriPermission( uri, flags );
-  // }
-
   /** @return the application shared preferences
    */
   public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }
@@ -308,5 +301,67 @@ public class TDInstance
   /** @return true if survey data are set to "diving mode"
    */
   static boolean isDivingMode() { return datamode == SurveyInfo.DATAMODE_DIVING; }
+
+
+  // FOLDER PERMISSION ----------------------------------------------------
+  // This ok to get permission to the Document Tree, not the File API unfortunately
+
+  // static final String TDX_TREE_URI = "TDX_TREE_URI";
+
+  // /** take persitent permissions for a given uri
+  //  * @param uri   uri
+  //  * @param flag  intent flags
+  //  * @return true if successful
+  //  */
+  // static boolean takePersistentPermissions( Uri uri, int flag )
+  // {
+  //   if ( (flag & Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION) == 0 ) return false;
+  //   flag = Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION;
+  //   getContentResolver().takePersistableUriPermission( uri, flag );
+  //   return true;
+  // }
+
+  // /** @return true if the app has permission on the (document tree) folder
+  //  */
+  // static boolean hasFolderPermission( )
+  // {
+  //   boolean ret = false;
+  //   try {
+  //     // SharedPreferences preferences = context.getPreferences(MODE_PRIVATE);
+  //     SharedPreferences preferences = getPrefs();
+  //     String treeUri = preferences.getString( TDX_TREE_URI, "");
+  //     Uri uri = Uri.parse(treeUri);
+  //     ret = DocumentFile.fromTreeUri( context, uri).canWrite();
+  //     TDLog.v("folder " + treeUri + " has permission " + ret );
+  //   } catch (Exception e) {
+  //     TDLog.Error("has folder permission error: " + e.getMessage() );
+  //   }
+  //   return ret;
+  // }
+
+  // /** handle a return from the activity that request folder permission
+  //  * @param data   return data
+  //  * @return true if successful
+  //  */
+  // static boolean handleRequestTreeUri( Intent data )
+  // {
+  //   if ( data == null ) return false;
+  //   Uri treeUri = data.getData();
+  //   if ( treeUri == null ) return false;
+  //   DocumentFile file = DocumentFile.fromTreeUri( context, treeUri );
+  //   if ( file == null ) return false;
+  //   boolean ret = file.canWrite();
+  //   TDLog.v("result TREE URI return " + ret );
+  //   if ( ret ) {
+  //     if ( takePersistentPermissions( treeUri, data.getFlags() ) ) {
+  //       TDLog.v("result TREE URI taken persistent permissions" );
+  //       SharedPreferences preferences = getPrefs();
+  //       SharedPreferences.Editor editor = preferences.edit();
+  //       editor.putString( TDX_TREE_URI, data.getDataString() );
+  //       editor.commit();
+  //     }
+  //   }
+  //   return ret;
+  // }
 
 }

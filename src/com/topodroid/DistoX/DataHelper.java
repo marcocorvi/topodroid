@@ -1266,16 +1266,17 @@ public class DataHelper extends DataSetObservable
     if ( myDB == null ) return -1;
     // if ( makesCycle( id, sid, fStation, tStation ) ) return -2;
 
-    // TDLog.v("DB update shot. id " + id + " extend " + extend + " leg " + leg );
     if ( tStation == null ) tStation = TDString.EMPTY;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw = new PrintWriter( sw );
     if ( comment != null ) {
+      // TDLog.v("DB update shot. id " + id + " extend " + extend + " leg " + leg + " comment <" + comment + ">" );
       pw.format( Locale.US,
         "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d, comment=\"%s\" WHERE surveyId=%d AND id=%d",
         fStation, tStation, extend, flag, leg, comment, sid, id );
     } else {
+      // TDLog.v("DB update shot. id " + id + " extend " + extend + " leg " + leg );
       pw.format( Locale.US,
         "UPDATE shots SET fStation=\"%s\", tStation=\"%s\", extend=%d, flag=%d, leg=%d WHERE surveyId=%d AND id=%d",
         fStation, tStation, extend, flag, leg, sid, id );

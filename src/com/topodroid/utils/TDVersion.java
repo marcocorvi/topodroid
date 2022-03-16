@@ -60,10 +60,11 @@ public class TDVersion
   public static final int SUB_MIN   = 1;
   public static final int CODE_MIN  = 20101;
   
-  public static String string()  { return VERSION; }
+  public static String string()     { return VERSION; }
   public static String fullString() { return VERSION + "-" + TARGET_SDK; }
-  public static int    code()    { return VERSION_CODE; }
-  public static String symbols() { return SYMBOL_VERSION; }
+  public static int    code()       { return VERSION_CODE; }
+  public static String symbols()    { return SYMBOL_VERSION; }
+  public static int    targetSdk()  { return TARGET_SDK; }
 
   // return: 0 ok, 1 no, <0 error
   // public static int checkPackageVersion( Context context, String package_name, int min_version )
