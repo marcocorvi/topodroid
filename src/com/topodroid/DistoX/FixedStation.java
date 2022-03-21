@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.DistoX.CurrentStation;
+// import com.topodroid.DistoX.StationInfo;
 import com.topodroid.num.NumStation;
 
 public class FixedStation

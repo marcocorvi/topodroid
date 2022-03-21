@@ -424,6 +424,15 @@ public class TopoDroidApp extends Application
     // if ( info == null ) TDLog.Error("null survey info. sid " + TDInstance.sid );
   }
 
+  /** @return the xsection mode of the current survey: 0 shared, 1 private, -1 error
+   */
+  public static int getSurveyXSectionsMode() 
+  {
+    if ( TDInstance.sid <= 0 ) return -1;
+    if ( mData == null ) return -1;
+    return mData.getSurveyXSectionsMode( TDInstance.sid );
+  }
+
   /** @return the "extend" value of the current survey (or default to NORMAL)
    */
   private static int getSurveyExtend()
@@ -1455,7 +1464,7 @@ public class TopoDroidApp extends Application
         TDInstance.secondLastShotId = lastShotId();
         // restoreFixed();
 	if ( update ) updateWindows();
-        TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSections( TDInstance.sid ) );
+        TDInstance.xsections = ( SurveyInfo.XSECTION_SHARED == mData.getSurveyXSectionsMode( TDInstance.sid ) );
 
         // TDInstance.extend = 
         int extend = mData.getSurveyExtend( TDInstance.sid );

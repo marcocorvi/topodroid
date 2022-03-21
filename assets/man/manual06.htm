@@ -14,12 +14,12 @@ The title color depends on the current station assignment policy:
 <li>orange: "toporobot" policy</li>
 </ul><br><p>
 
+Shot properties are shown through the foreground and background color of the shot data and station names.
+<br><p>
+
 TopoDroid distinguishes four kinds of shots (displayed with different colors): "leg", "repeated-leg", "splay", and "blank".
 Splays can be further classified as "cross" (X), horizontal (H), vertical (V), and "scan" (shots acquired in scan mode).
-<a href="page_shot_edit1.htm">Splay classes</a> X-H-V can be enabled with a custom setting.<br><p>
-
-Important shot properties are shown through the background color of the shot data and station names.
-<br><p>
+<a href="page_shot_edit1.htm">Splay classes</a> X-H-V are disabled by default [G].<br><p>
 
 Shot data foreground color:
 <ol>
@@ -34,16 +34,16 @@ Shot data foreground color:
 <li>[violet]: blank leg</li>
 </ol><p>
 
-Station name foreground color:
-<ul>
-<li>[bright green] current station</li>
-</ul><p>
-
 Shot data background color:
 <ul>
 <li>[reddish] <a href="page_accuracy.htm">unreliable</a> shots, i.e. shots with "abnormal" field intensities (only DistoX2)</li>
 <li>[orange] short leg</li>
 <li>[gray] commented shot</li>
+</ul><p>
+
+Station name foreground color:
+<ul>
+<li>[bright green] current station</li>
 </ul><p>
 
 Station names background color:
@@ -54,6 +54,16 @@ Station names background color:
 </ul><p>
 
 <img src="shots_list.png" alt="shots list"/><p>
+
+<h4>Station names</h4>
+Station names are properties of the shot, like the azimuth or the distance.
+Unlike these, however, the names of the stations are used to "join" together the shots to form the midline.
+This affects both the midline and the sketches.<br>
+When the name of a leg station is changed, the midline can change.
+If the station has attached a x-section, this is unlinked from the midline (and can be later linked to another
+station).
+A sketch (plan or profile) can be unlinked from the midline if the name of its reference station (the origin)
+is changed.<br><p>
 
 <h4>ACTIONS</h4>
 <ul style="margin-top:0">

@@ -380,8 +380,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
           if ( ( event != null && event.getKeyCode() == KeyEvent.KEYCODE_ENTER ) || action == EditorInfo.IME_ACTION_DONE ) {
             String f = tvFrom.getText().toString();
             String t = tvTo.getText().toString();
-            mParent.updateShotName( mBlock.mId, f, t );
-            mBlock.setBlockName( f, t, mBlock.isBackLeg() ); 
+            mParent.updateDBlockName( mBlock, f, t );
+            // mBlock.setBlockName( f, t, mBlock.isBackLeg() ); moved to updateDBlockName
             setColor( mBlock );
             InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow( v.getWindowToken(), 0);

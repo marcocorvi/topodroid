@@ -560,7 +560,7 @@ class ShotDialog extends MyDialog
     // boolean shot_secleg = false;
     if ( mCBlegPrev.isChecked() ) {
       mBlk.setTypeSecLeg();
-      mParent.updateShot( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk );
+      mParent.updateShotNameAndFlags( "", "", ExtendType.EXTEND_IGNORE, 0, 0, LegType.EXTRA, "", mBlk );
       return;
       // shot_from = "";
       // shot_to   = "";
@@ -690,7 +690,7 @@ class ShotDialog extends MyDialog
       long leg = LegType.NORMAL;
       // TDLog.v("[2] leg type " + leg + " " + set_xsplay );
       // mParent.updateSplayLegType( mBlk, leg );
-      mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
+      mParent.updateShotNameAndFlags( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     } else {
       // TDLog.v("other " + set_xsplay );
       // mBlk.setName( shot_from, shot_to ); // done by parent.updateShot
@@ -704,7 +704,7 @@ class ShotDialog extends MyDialog
       }
       // TDLog.v( "Block is splay " + mBlk.isSplay() + " leg " + leg + " blk type " + mBlk.getBlockType() );
       // TDLog.v("from <" + shot_from + "> to <" + shot_to + ">" );
-      mParent.updateShot( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
+      mParent.updateShotNameAndFlags( shot_from, shot_to, extend, shot_stretch, shot_flag, leg, comment, mBlk );
     }
     // mParent.scrollTo( mPos );
 

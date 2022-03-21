@@ -14,7 +14,7 @@ package com.topodroid.io.shp;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 import com.topodroid.DistoX.SavedStation;
-import com.topodroid.DistoX.CurrentStation;
+import com.topodroid.DistoX.StationInfo;
 // import com.topodroid.DistoX.DrawingUtil;
 
 // import java.io.File;
@@ -76,7 +76,7 @@ public class ShpNamez extends ShpObject
     int cnt = 0;
     for ( SavedStation st : pts ) {
       NumStation pt = st.mNumStation;
-      CurrentStation cs = st.mCurrent;
+      StationInfo cs = st.mCurrent;
       int offset = 50 + cnt * shpRecLen; 
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   

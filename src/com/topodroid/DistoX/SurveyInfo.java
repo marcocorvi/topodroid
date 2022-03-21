@@ -59,6 +59,8 @@ public class SurveyInfo
     return ret;
   }
 
+  // boolean isSectionPrivate() { return xsection == 1; }
+
   static boolean isExtendLeft( int extend ) { return extend < -999; }
   static boolean isExtendRight( int extend ) { return extend  > 999; }
 

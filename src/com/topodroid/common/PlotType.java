@@ -24,9 +24,9 @@ public class PlotType
   public static final long PLOT_X_SECTION  = 0; // X-section at a station (defined in PLAN plot)
   public static final long PLOT_PLAN       = 1;
   public static final long PLOT_EXTENDED   = 2;
-  public static final long PLOT_H_SECTION  = 3; // leave the place but do not use
+  public static final long PLOT_H_SECTION  = 3; // horizontal leg x-section
   public static final long PLOT_PHOTO      = 4;
-  public static final long PLOT_SECTION    = 5; // section-line cross-section
+  public static final long PLOT_SECTION    = 5; // vertical leg x-section
   public static final long PLOT_SKETCH_3D  = 6;
   public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
   public static final long PLOT_PROJECTED  = 8; // projected profile
@@ -37,17 +37,17 @@ public class PlotType
   public static boolean isVertical( long t ) 
   { return ( t == PLOT_EXTENDED || t == PLOT_PROJECTED || t == PLOT_SECTION || t == PLOT_X_SECTION ); }
 
-  /** @return true if the type is for a leg-xsection sketch
+  /** @return true if the type is for a leg-xsection sketch, 3 or 5
    * @param t   plot type
    */
   public static boolean isLegSection( long t )     { return t == PLOT_SECTION   || t == PLOT_H_SECTION; }
 
-  /** @return true if the type is for a station-xsection sketch
+  /** @return true if the type is for a station-xsection sketch, 0 or 7
    * @param t   plot type
    */
   public static boolean isStationSection( long t ) { return t == PLOT_X_SECTION || t == PLOT_XH_SECTION; }
 
-  /** @return true if the type is for a xsection sketch
+  /** @return true if the type is for a xsection sketch, 0, 3, 5, or 7
    * @param t   plot type
    */
   public static boolean isAnySection( long t ) { return t == PLOT_SECTION || t == PLOT_H_SECTION 
@@ -197,5 +197,27 @@ public class PlotType
   {
     return PlotType.isLegSection( type ) && ( to == null || to.length() == 0 );
   }
+
+  /** @return the station xsection name according to the parent sketch type, ie, either "xs-" or "xh-" followed by the station name
+   * @param st_name   station name
+   * @param type      parent sketch type (PLAN or profile)
+   */
+  public static String getXSectionName( String st_name, long type )
+  {
+    if ( type == PlotType.PLOT_PLAN ) return "xs-" + st_name;
+    if ( PlotType.isProfile( type ) ) return "xh-" + st_name;
+    return null;
+  }
+
+  /** @return the (leg) xsection type according to the parent sketch type
+   * @param type parent sketch type (PLAN or profile)
+   */
+  public static long getXSectionType( long type )
+  {
+    if ( type == PlotType.PLOT_PLAN ) return PlotType.PLOT_X_SECTION;
+    if ( PlotType.isProfile( type ) ) return PlotType.PLOT_XH_SECTION;
+    return PlotType.PLOT_NULL;
+  }
+
 }
 

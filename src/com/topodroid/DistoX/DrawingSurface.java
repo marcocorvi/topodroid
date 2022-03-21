@@ -591,7 +591,7 @@ class DrawingSurface extends SurfaceView
   // void clearDrawing() { commandManager.clearDrawing(); }
 
   // return true if the station is the current active
-  private void setStationPaint( DrawingStationName st, List< CurrentStation > saved, DrawingCommandManager manager )
+  private void setStationPaint( DrawingStationName st, List< StationInfo > saved, DrawingCommandManager manager )
   {
     if ( st == null ) return; // 20191010 should not be necessary: crash called from setCurrentStation
     String name = st.getName();
@@ -610,7 +610,7 @@ class DrawingSurface extends SurfaceView
     } else {
       st.setPathPaint( BrushManager.fixedStationPaint );
       if ( TDSetting.mSavedStations && saved != null ) { // the test on mSavedStatios is extra care
-	for ( CurrentStation sst : saved ) {
+	for ( StationInfo sst : saved ) {
 	  if ( sst.mName.equals( num_st.name ) ) {
             st.setPathPaint( BrushManager.fixedStationSavedPaint );
 	    break;
@@ -620,7 +620,7 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  void setCurrentStation( DrawingStationName st, List< CurrentStation > saved )
+  void setCurrentStation( DrawingStationName st, List< StationInfo > saved )
   {
     DrawingStationName st0 = commandManager.getCurrentStationName();
     if ( st0 != null && st0 != st ) {
@@ -647,7 +647,7 @@ class DrawingSurface extends SurfaceView
   // @param xsections  list of survey xsections
   // @param saved      list of saved stations
   DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
-		                             List< PlotInfo > xsections, List< CurrentStation > saved )
+		                             List< PlotInfo > xsections, List< StationInfo > saved )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -971,8 +971,14 @@ class DrawingSurface extends SurfaceView
   //   return DrawingIO.doLoadTherion( this, th21, 0, 0, missingSymbols, localPalette );
   // }
 
-  // called by OverviewWindow
-  // @pre tdr != null
+  /** add a sketch loaded from file
+   * @pram tdr         tdr file pathname
+   * @param xdelta     X shift
+   * @param ydelta     Y shift
+   * @param plotName   sketch name
+   * @note called by OverviewWindow
+   * @pre tdr != null
+   */
   boolean addLoadDataStream( String tdr, float xdelta, float ydelta, /* SymbolsPalette missingSymbols, */ String plotName )
   {
     boolean ret = false;
@@ -983,7 +989,12 @@ class DrawingSurface extends SurfaceView
     return ret;
   }
 
-  // called only by DrawingWindow
+  /** load a sketch from file
+   * @param tdr1           tdr file pathname
+   * @param fullname       sketch fullname (= survey-plot)
+   * @param link_sections  whether to link xsections to station names
+   * @note called only by DrawingWindow
+   */
   boolean modeloadDataStream( String tdr1, String fullname, boolean link_sections /*, SymbolsPalette missingSymbols */ )
   {
     boolean ret = false;
@@ -991,11 +1002,20 @@ class DrawingSurface extends SurfaceView
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (TDFile.getTopoDroidFile( tdr1 )).exists() ) {
-        // TDLog.v( "file " + tdr1 + " exists: loading ...");
+        TDLog.v( "file " + tdr1 + " exists: loading ... " + fullname );
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
           BrushManager.makeEnabledListFromPalette( localPalette, false );
-          if ( link_sections ) linkSections();
+          if ( link_sections ) {
+            if ( fullname.startsWith( TDInstance.survey ) ) {
+              int len = TDInstance.survey.length() + 1;
+              if ( len < fullname.length() ) {
+                linkSections( fullname.substring( len ) );
+              }
+            } else {
+              linkSections( fullname );
+            }
+          }
           if ( fullname != null ) addManagerToCache( fullname );
         } else {
           TDLog.Error( "file " + tdr1 + " failed to load" );
@@ -1007,12 +1027,15 @@ class DrawingSurface extends SurfaceView
     return ret;
   }
 
-  private void linkSections() { commandManager.linkSections(); }
+  /** link xsections to station names
+   * @param name   name of xsections parent plot
+   */
+  private void linkSections( String name ) { commandManager.linkSections( name ); }
 
-  void linkAllSections() 
+  void linkAllSections( String name1, String name2 ) 
   {
-    mCommandManager1.linkSections();
-    mCommandManager2.linkSections();
+    mCommandManager1.linkSections( name1 );
+    mCommandManager2.linkSections( name2 );
   }
 
   // -----------------------------------------------------------------------------

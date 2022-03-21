@@ -65,7 +65,7 @@ public class DataHelper extends DataSetObservable
   private static final String SHOT_TABLE   = "shots";
   private static final String STATION_TABLE = "stations";
   private static final String PLOT_TABLE   = "plots";
-  private static final String SKETCH_TABLE = "sketches";
+  // private static final String SKETCH_TABLE = "sketches";
   private static final String PHOTO_TABLE  = "photos";
   private static final String SENSOR_TABLE = "sensors";
   private static final String AUDIO_TABLE  = "audios";
@@ -386,6 +386,7 @@ public class DataHelper extends DataSetObservable
   // private static String qSurveysField = "select ? from surveys where id=?";
   private static final String qInitStation  = "select init_station from surveys where id=?";
   private static final String qXSections    = "select xsections from surveys where id=?";
+  private static final String qXSectionStations = "select start from plots where surveyId=? and (type=0 or type=7)";
   private static final String qDatamode     = "select datamode from surveys where id=?";
   private static final String qDeclination  = "select declination from surveys where id=?";
   private static final String qExtend       = "select extend from surveys where id=?";
@@ -422,13 +423,13 @@ public class DataHelper extends DataSetObservable
     return ret;
   }
 
-  /** @return the (at-station) xsection index 
+  /** @return the (at-station) xsections mode 
    * @param sid   survey ID
-   * @note at-station xsextions type
+   * @note at-station xsextions mode can be
    *   0 : shared
    *   1 : private
    */
-  int getSurveyXSections( long sid )
+  int getSurveyXSectionsMode( long sid )
   {
     int ret = 0;
     if ( myDB == null ) return ret;
@@ -443,6 +444,23 @@ public class DataHelper extends DataSetObservable
     if ( cursor != null ) {
       if (cursor.moveToFirst()) {
         ret = (int)cursor.getLong(0);
+      }
+      if ( ! cursor.isClosed() ) cursor.close();
+    }
+    return ret;
+  }
+
+  /** @return the list of stations that have an x-section
+   * @param sid   survey ID
+   * @note this function can be used to check when a station name associated to a xsection is changed
+   */
+  ArrayList<String> getXSectionStations( long sid )
+  {
+    ArrayList<String> ret = new ArrayList<>();
+    Cursor cursor = myDB.rawQuery( qXSectionStations, new String[] { Long.toString(sid) } );
+    if ( cursor != null ) {
+      if (cursor.moveToFirst()) {
+        ret.add( cursor.getString(0) );
       }
       if ( ! cursor.isClosed() ) cursor.close();
     }
@@ -5740,26 +5758,33 @@ public class DataHelper extends DataSetObservable
      // return ret;
    }
 
-   CurrentStation getStation( long sid, String name )
+   StationInfo getStation( long sid, String name, boolean insert )
    {
-     CurrentStation cs = null;
+     if ( name == null || name.length() == 0 ) return null;
+     StationInfo cs = null;
      if ( myDB != null ) {
        Cursor cursor = myDB.query( STATION_TABLE,
            new String[]{ "name", "comment", "flag" },
            "surveyId=? and name=?", new String[]{ Long.toString( sid ), name },
            null, null, null );
        if (cursor.moveToFirst()) {
-         cs = new CurrentStation( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ) );
+         cs = new StationInfo( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ) );
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+     }
+     if ( cs == null && insert ) {
+       ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0 );
+       if ( doInsert( STATION_TABLE, cv, "station insert" ) ) {
+         cs = new StationInfo( name, TDString.EMPTY, 0 );
+       }
      }
      return cs;
    }
 
 
-   ArrayList< CurrentStation > getStations( long sid )
+   ArrayList< StationInfo > getStations( long sid )
    {
-     ArrayList< CurrentStation > ret = new ArrayList<>();
+     ArrayList< StationInfo > ret = new ArrayList<>();
      if ( myDB == null ) return ret;
      Cursor cursor = myDB.query( STATION_TABLE, 
                             new String[] { "name", "comment", "flag" },
@@ -5767,7 +5792,7 @@ public class DataHelper extends DataSetObservable
                             null, null, null );
      if (cursor.moveToFirst()) {
        do {
-         ret.add( new CurrentStation( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
+         ret.add( new StationInfo( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
        } while (cursor.moveToNext());
      }
      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -6002,10 +6027,10 @@ public class DataHelper extends DataSetObservable
             +   " team TEXT, "
             +   " comment TEXT, "
             +   " declination REAL, "
-            +   " init_station TEXT, "
-            +   " xsections INTEGER, "
-            +   " datamode INTEGER, "
-            +   " extend INTEGER "
+            +   " init_station TEXT, "  // initial station
+            +   " xsections INTEGER, "  // whether xsections are shared or private
+            +   " datamode INTEGER, "   // datamode: normal or diving
+            +   " extend INTEGER "      // ???
             +   ")"
           );
 
@@ -6013,7 +6038,7 @@ public class DataHelper extends DataSetObservable
               create_table + SHOT_TABLE 
             + " ( surveyId INTEGER, "
             +   " id INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-            +   " fStation TEXT, "
+            +   " fStation TEXT, "   // stations are indexed by the name
             +   " tStation TEXT, "
             +   " distance REAL, "   // distance 
             +   " bearing REAL, "    // azimuth
@@ -6041,13 +6066,13 @@ public class DataHelper extends DataSetObservable
               create_table + FIXED_TABLE
             + " ( surveyId INTEGER, "
             +   " id INTEGER, "   //  PRIMARY KEY AUTOINCREMENT, "
-            +   " station TEXT, "
+            +   " station TEXT, "     // fix (GPS) point
             +   " longitude REAL, "
             +   " latitude REAL, "
             +   " altitude REAL, "    // WGS84 altitude
             +   " altimetric REAL, "  // altimetric altitude (if any)
             +   " comment TEXT, "
-            +   " status INTEGER, "
+            +   " status INTEGER, "   // NORMAL DELETED
             +   " cs_name TEXT, "
             +   " cs_longitude REAL, "
             +   " cs_latitude REAL, "
@@ -6061,8 +6086,8 @@ public class DataHelper extends DataSetObservable
 
           db.execSQL(
               create_table + STATION_TABLE 
-            + " ( surveyId INTEGER, " //  PRIMARY KEY AUTOINCREMENT, "
-            +   " name TEXT, "
+            + " ( surveyId INTEGER, " 
+            +   " name TEXT, "          // PRIMARY KEY
             +   " comment TEXT, "
             +   " flag INTEGER default 0 "
             +   ")"
@@ -6075,7 +6100,7 @@ public class DataHelper extends DataSetObservable
             +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
             +   " name TEXT, "
             +   " type INTEGER, "
-            +   " status INTEGER, "
+            +   " status INTEGER, " // NORMAL DELETED
             +   " start TEXT, "
             +   " view TEXT, "
             +   " xoffset REAL, "
@@ -6096,33 +6121,33 @@ public class DataHelper extends DataSetObservable
             +   ")"
           );
 
-          db.execSQL(
-              create_table + SKETCH_TABLE
-            + " ( surveyId INTEGER, "
-            +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
-            +   " name TEXT, "
-            +   " status INTEGER, "
-            +   " start TEXT, "
-            +   " st1 TEXT, "
-            +   " st2 TEXT, "
-            +   " xoffsettop REAL, "
-            +   " yoffsettop REAL, "
-            +   " zoomtop REAL, "
-            +   " xoffsetside REAL, "
-            +   " yoffsetside REAL, "
-            +   " zoomside REAL, "
-            +   " xoffset3d REAL, "
-            +   " yoffset3d REAL, "
-            +   " zoom3d REAL, "
-            +   " east REAL, "
-            +   " south REAL, "
-            +   " vert REAL, "
-            +   " azimuth REAL, "
-            +   " clino REAL "
-            // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
-            // +   " ON DELETE CASCADE "
-            +   ")"
-          );
+          // db.execSQL(
+          //     create_table + SKETCH_TABLE
+          //   + " ( surveyId INTEGER, "
+          //   +   " id INTEGER, " // PRIMARY KEY AUTOINCREMENT, "
+          //   +   " name TEXT, "
+          //   +   " status INTEGER, "
+          //   +   " start TEXT, "
+          //   +   " st1 TEXT, "
+          //   +   " st2 TEXT, "
+          //   +   " xoffsettop REAL, "
+          //   +   " yoffsettop REAL, "
+          //   +   " zoomtop REAL, "
+          //   +   " xoffsetside REAL, "
+          //   +   " yoffsetside REAL, "
+          //   +   " zoomside REAL, "
+          //   +   " xoffset3d REAL, "
+          //   +   " yoffset3d REAL, "
+          //   +   " zoom3d REAL, "
+          //   +   " east REAL, "
+          //   +   " south REAL, "
+          //   +   " vert REAL, "
+          //   +   " azimuth REAL, "
+          //   +   " clino REAL "
+          //   // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
+          //   // +   " ON DELETE CASCADE "
+          //   +   ")"
+          // );
 
           db.execSQL(
               create_table + PHOTO_TABLE
@@ -6133,7 +6158,7 @@ public class DataHelper extends DataSetObservable
             +   " title TEXT, "
             +   " date TEXT, "
             +   " comment TEXT, "
-            +   " camera INTEGER "
+            +   " camera INTEGER "  // source type
             // +   " surveyId REFERENCES " + SURVEY_TABLE + "(id)"
             // +   " ON DELETE CASCADE "
             +   ")"

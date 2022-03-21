@@ -19,7 +19,7 @@ import com.topodroid.utils.TDString;
 
 import com.topodroid.DistoX.TDUtil;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.CurrentStation;
+import com.topodroid.common.StationFlag;
 
 import java.io.IOException;
 // import java.io.FileInputStream;
@@ -435,9 +435,9 @@ class ParserTherion extends ImportParser
                 String flag_str = vals[ vals_len - 1 ];
                 int flag = 0;
                 if ( "painted".equals( vals[ vals_len-1 ] ) ) {
-                  flag = CurrentStation.STATION_PAINTED;
+                  flag = StationFlag.STATION_PAINTED;
                 } else if ( "fixed".equals( vals[ vals_len-1 ] ) ) {
-                  flag = CurrentStation.STATION_FIXED;
+                  flag = StationFlag.STATION_FIXED;
                 }
                 // TDLog.v( "Therion parser: mark flag " + flag + " " + flag_str );
                 if ( flag != 0 ) {

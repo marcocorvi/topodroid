@@ -49,6 +49,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
+import com.topodroid.common.StationFlag;
 
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
@@ -322,7 +323,7 @@ public class TDExporter
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     // List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
     // FIXME TODO_CSURVEY
-    // List< CurrentStation > stations = data.getStations( sid );
+    // List< StationInfo > stations = data.getStations( sid );
 
     if ( origin == null ) { // use first non-null "from"
       for ( DBlock item : dlist ) {
@@ -922,10 +923,10 @@ public class TDExporter
         //   }
         // }
 
-        List< CurrentStation > cst = data.getStations( sid );
+        List< StationInfo > cst = data.getStations( sid );
         if ( cst.size() > 0 ) {
           ArrayList< SavedStation > sst = new ArrayList<>();
-          for ( CurrentStation cs : cst ) {
+          for ( StationInfo cs : cst ) {
             for ( TDNum num : nums ) {
               NumStation ns = num.getStation( cs.mName );
               if ( ns != null ) {
@@ -1384,7 +1385,7 @@ public class TDExporter
 
     List< FixedInfo > fixed = data.selectAllFixed( sid, TDStatus.NORMAL );
     List< PlotInfo > plots  = data.selectAllPlots( sid, TDStatus.NORMAL );
-    List< CurrentStation > stations = data.getStations( sid );
+    List< StationInfo > stations = data.getStations( sid );
     try {
       // TDLog.Log( TDLog.LOG_IO, "export Therion " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "th", surveyname + ".th", "text/th" );
@@ -1483,11 +1484,11 @@ public class TDExporter
         pw.format("\n");
         StringBuilder sb_fixed   = new StringBuilder();
         StringBuilder sb_painted = new StringBuilder();
-        for ( CurrentStation station : stations ) {
-          if ( station.mFlag == CurrentStation.STATION_FIXED ) { 
+        for ( StationInfo station : stations ) {
+          if ( station.mFlag.isFixed() ) { 
             sb_fixed.append(" ");
             sb_fixed.append( station.mName );
-          } else if ( station.mFlag == CurrentStation.STATION_PAINTED ) {
+          } else if ( station.mFlag.isPainted() ) {
             sb_painted.append(" ");
             sb_painted.append( station.mName );
           }

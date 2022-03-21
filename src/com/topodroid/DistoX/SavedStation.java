@@ -12,15 +12,15 @@
 package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.DistoX.CurrentStation;
+// import com.topodroid.DistoX.StationInfo;
 import com.topodroid.num.NumStation;
 
 public class SavedStation
 {
-  public CurrentStation mCurrent; // mName, mComment, mFlag
-  public NumStation     mNumStation;
+  public StationInfo mCurrent; // mName, mComment, mFlag
+  public NumStation  mNumStation;
 
-  public SavedStation( CurrentStation cs, NumStation ns )
+  public SavedStation( StationInfo cs, NumStation ns )
   {
     mCurrent    = cs;
     mNumStation = ns;

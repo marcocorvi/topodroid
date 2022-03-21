@@ -20,8 +20,9 @@ import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.common.StationFlag;
 
-import com.topodroid.utils.TDLog;
+// import androidx.annotation.RecentlyNonNull;
 
 // import java.util.List;
 import java.util.ArrayList;
@@ -126,7 +127,7 @@ class CurrentStationDialog extends MyDialog
     }
 
     mName.setText( mStation );
-    setComment( );
+    setComment( mStation );
 
     updateList();
   }
@@ -135,8 +136,8 @@ class CurrentStationDialog extends MyDialog
   {
     MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
     // mApp.fillCurrentStationAdapter( adapter );
-    ArrayList< CurrentStation > stations = TopoDroidApp.mData.getStations( TDInstance.sid );
-    for ( CurrentStation st : stations ) {
+    ArrayList< StationInfo > stations = TopoDroidApp.mData.getStations( TDInstance.sid );
+    for ( StationInfo st : stations ) {
       adapter.add( st.toString() );
     }
     mList.setAdapter( adapter );
@@ -162,41 +163,47 @@ class CurrentStationDialog extends MyDialog
   }
 
   
-  // @param name    saved-station name
+  /** set the display from an existing station data
+   * @param name    saved-station name
+   * @note called from onItemClick, therefore the station exists
+   */
   private void setNameAndComment( String name )
   {
+    if ( name == null || name.length() == 0 ) return; // safety check
     mStation = name;
-    mBtnFixed.setChecked( false );
-    mBtnPainted.setChecked( false );
-    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStation );
+    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, false );
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
       mComment.setText( null );
     } else {
       mName.setText( cs.mName );
       mComment.setText( cs.mComment );
-      if ( cs.mFlag == CurrentStation.STATION_FIXED ) {
-        mBtnFixed.setChecked( true );
-      } else if ( cs.mFlag == CurrentStation.STATION_PAINTED ) {
-        mBtnPainted.setChecked( true );
-      }
     }
+    setFlags( cs );
   }
   
-  private void setComment( )
+  /** set the display comment field
+   * @param name   station name
+   */
+  private void setComment( String name )
+  {
+    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, false );
+    mComment.setText( ( cs == null )? null : cs.mComment );
+    setFlags( cs );
+  }
+
+  /** set the display flags boxes
+   * @param cs   station info
+   */
+  private void setFlags( StationInfo cs )
   {
     mBtnFixed.setChecked( false );
     mBtnPainted.setChecked( false );
-    CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStation );
-    if ( cs == null ) {
-      mComment.setText( null );
-    } else {
-      mComment.setText( cs.mComment );
-      if ( cs.mFlag == CurrentStation.STATION_FIXED ) {
-        mBtnFixed.setChecked( true );
-      } else if ( cs.mFlag == CurrentStation.STATION_PAINTED ) {
-        mBtnPainted.setChecked( true );
-      }
+    if ( cs == null ) return; // safety check
+    if ( cs.mFlag.isFixed() ) {
+      mBtnFixed.setChecked( true );
+    } else if ( cs.mFlag.isPainted() ) {
+      mBtnPainted.setChecked( true );
     }
   }
 
@@ -238,11 +245,11 @@ class CurrentStationDialog extends MyDialog
         return;
       }
       
-      int flag = CurrentStation.STATION_NONE;
+      int flag = StationFlag.STATION_NONE;
       if ( mBtnFixed.isChecked() ) {
-        flag = CurrentStation.STATION_FIXED;
+        flag = StationFlag.STATION_FIXED;
       } else if ( mBtnPainted.isChecked() ) {
-        flag = CurrentStation.STATION_PAINTED;
+        flag = StationFlag.STATION_PAINTED;
       }
 
       String comment = TDString.EMPTY;

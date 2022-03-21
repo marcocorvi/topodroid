@@ -1756,8 +1756,11 @@ public class DrawingCommandManager
 
   DrawingAudioPath getAudioPoint( long bid ) { return mCurrentScrap.getAudioPoint( bid ); }
 
-  // this is not efficient: the station names should be stored in a tree (key = name) for log-time search
-  // type = type of the plot
+  /** assign xsections to station names
+   * @param xsections   set of xsections
+   * @param type   type of the plot
+   * @note this is not efficient: the station names should be stored in a tree (key = name) for log-time search
+   */
   void setStationXSections( List< PlotInfo > xsections, long type )
   {
     for ( DrawingStationName st : mStations ) {
@@ -1772,15 +1775,27 @@ public class DrawingCommandManager
     }
   }
 
+  /** compute the area of the xsextion
+   * @return the computed area
+   */
   float computeSectionArea() { return mCurrentScrap.computeSectionArea(); }
 
-  void linkSections() { mCurrentScrap.linkSections( mStations ); }
+  /** link the xsections to the station names
+   * @param stations station names
+   * @param name     name of parent plot of the xsections
+   */
+  void linkSections( String name ) { mCurrentScrap.linkSections( mStations, name ); }
 
   // -------------------------------------------------------------------
   // OUTLINE
 
+  /** clear the scrap outlines
+   */
   void clearScrapOutline() { synchronized( mPlotOutline ) { mPlotOutline.clear(); } }
 
+  /** add an outline path to the set of outlines
+   * @param path    outline path
+   */
   void addScrapOutlinePath( DrawingLinePath path ) { synchronized( mPlotOutline ) { mPlotOutline.add( path ); } }
 
   // void addScrapDataStream( String tdr, float xdelta, float ydelta )
@@ -1790,8 +1805,13 @@ public class DrawingCommandManager
   //   }
   // }
 
+  /** clear te set of xsection outlines
+   */
   void clearXSectionsOutline() { synchronized( TDPath.mXSectionsLock ) { mXSectionOutlines.clear(); } }
 
+  /** @return true if the specified scrap is contained in the xsection outlines
+   * @param name   scrap name
+   */
   boolean hasXSectionOutline( String name ) 
   { 
     if ( mXSectionOutlines == null || mXSectionOutlines.size() == 0 ) return false;
@@ -1803,6 +1823,9 @@ public class DrawingCommandManager
     return false;
   }
 
+  /** add an outline path to the set of xsection outlines
+   * @param path    xsection outline path
+   */
   void addXSectionOutlinePath( DrawingOutlinePath path )
   {
     synchronized( TDPath.mXSectionsLock ) {
@@ -1811,6 +1834,9 @@ public class DrawingCommandManager
     // TDLog.v("sections outline " + mXSectionOutlines.size() );
   }
 
+  /** remove a xsection outline from the set of xsection outlines
+   * @param name   name of the xsection outline to remove
+   */
   void clearXSectionOutline( String name )
   {
     List< DrawingOutlinePath > xsection_outlines = Collections.synchronizedList(new ArrayList< DrawingOutlinePath >());

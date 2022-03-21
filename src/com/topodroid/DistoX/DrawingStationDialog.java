@@ -21,6 +21,7 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
+import com.topodroid.common.StationFlag;
 
 import java.util.List;
 
@@ -121,7 +122,7 @@ class DrawingStationDialog extends MyDialog
       mBtnCancel   = (Button) findViewById(R.id.btn_cancel);
 
       mBtnXSection  = (Button) findViewById(R.id.btn_xsection );
-      mCBhorizontal  = (CheckBox) findViewById(R.id.cb_horizontal );
+      mCBhorizontal = (CheckBox) findViewById(R.id.cb_horizontal );
       mBtnXDelete   = (Button) findViewById(R.id.btn_xdelete );  // delete / sensors
       mBtnDirect  = (Button) findViewById( R.id.btn_direct );
       mBtnInverse = (Button) findViewById( R.id.btn_inverse );
@@ -129,13 +130,13 @@ class DrawingStationDialog extends MyDialog
 
       mBtnOkComment = (Button) findViewById( R.id.btn_ok_comment );
       mComment = (EditText) findViewById( R.id.comment );
-      mFlag    = 0;
+      mFlag    = StationFlag.STATION_NONE;
       if ( TDLevel.overExpert ) {
-        CurrentStation cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName );
+        StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, false );
         mBtnOkComment.setOnClickListener( this );
         if ( cs != null ) {
           mComment.setText( cs.mComment );
-          mFlag = cs.mFlag;
+          mFlag = cs.mFlag.getValue();
         // } else {
         //   mComment.setVisibility( View.GONE );
         }

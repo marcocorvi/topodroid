@@ -755,15 +755,16 @@ public class MainWindow extends Activity
     done_init_dialogs = true;
     TDLog.v( "init environment second");
 
-    // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
-    //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.target_sdk,
-    //     new DialogInterface.OnClickListener() {
-    //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
-    //     }
-    //   );
-    // }
+    boolean ok_folder = TopoDroidApp.initEnvironmentSecond( say_dialogR );
 
-    if ( ! TopoDroidApp.initEnvironmentSecond( say_dialogR ) ) {
+    if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
+      TDLog.v( "init environment target " + TDVersion.targetSdk() );
+      TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
+        }
+      );
+    } else if ( ! ok_folder ) {
       TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.tdx_stale, 
         new DialogInterface.OnClickListener() {
           @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }

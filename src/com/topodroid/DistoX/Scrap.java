@@ -1954,46 +1954,62 @@ public class Scrap
     return ret / 2;
   }
 
-  void linkSections( List< DrawingStationName > stations )
+  /** link the xsections to the station names
+   * @param stations station names
+   * if xsections are private the station xsection name is survey-prefix-station-sketch
+   * where prefix is either xs of xh
+   */
+  void linkSections( List< DrawingStationName > stations, String plotname )
   {
+    int xsections_mode = TopoDroidApp.getSurveyXSectionsMode();
+    TDLog.v("link xsections " + plotname + " ... " + xsections_mode + " private " + SurveyInfo.XSECTION_PRIVATE );
+    int len = 0; // length of station suffix
+    if ( xsections_mode == SurveyInfo.XSECTION_PRIVATE && plotname != null ) { // remove the suffix "-plotname"
+      len = plotname.length() + 1;
+    }
     synchronized( TDPath.mCommandsLock ) {
       for ( ICanvasCommand cmd : mCurrentStack ) {
         if ( cmd.commandType() != 0 ) continue; 
         DrawingPath p = (DrawingPath)cmd;
-        if ( ! p.isPoint() ) continue; // !(p instanceof DrawingPointPath)
-        DrawingPointPath pt = (DrawingPointPath)p;
-        if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
-        // get the line/station
-        String scrap = TDUtil.replacePrefix( TDInstance.survey, p.getOption( TDString.OPTION_SCRAP ) );
-        if ( scrap != null ) {
-          // TDLog.v( "section point scrap " + scrap );
-          int pos = scrap.lastIndexOf( "-xx" );
-          if ( pos > 0 ) {
-            String id = scrap.substring(pos+1); // line id
-            if ( /* id != null && */ id.length() > 0 ) { // id always not null [?]
-              for ( ICanvasCommand cmd2 : mCurrentStack ) {
-                if ( cmd2.commandType() != 0 ) continue; 
-                DrawingPath p2 = (DrawingPath)cmd2;
-                if ( ! p2.isLine() ) continue; // !(p2 instanceof DrawingLinePath)
-                DrawingLinePath ln = (DrawingLinePath)p2;
-                if ( ! BrushManager.isLineSection( ln.mLineType ) ) continue;
-                if ( id.equals( ln.getOption("-id") ) ) {
-                  pt.setLink( ln );
-                  break;
+        if (p instanceof DrawingPointPath) {
+          DrawingPointPath pt = (DrawingPointPath)p;
+          if ( ! BrushManager.isPointSection( pt.mPointType ) ) continue;
+          // get the line/station
+          String scrap = TDUtil.replacePrefix( TDInstance.survey, p.getOption( TDString.OPTION_SCRAP ) );
+          if ( scrap != null ) {
+            // TDLog.v( "link xsection: point scrap " + scrap );
+            int pos = scrap.lastIndexOf( "-xx" );
+            if ( pos > 0 ) {
+              String id = scrap.substring(pos+1); // line id
+              if ( /* id != null && */ id.length() > 0 ) { // id always not null [?]
+                for ( ICanvasCommand cmd2 : mCurrentStack ) {
+                  if ( cmd2.commandType() != 0 ) continue; 
+                  DrawingPath p2 = (DrawingPath)cmd2;
+                  if (p2 instanceof DrawingLinePath) {
+                    DrawingLinePath ln = (DrawingLinePath)p2;
+                    if ( ! BrushManager.isLineSection( ln.mLineType ) ) continue;
+                    if ( id.equals( ln.getOption("-id") ) ) {
+                      pt.setLink( ln );
+                      break;
+                    }
+                  }
                 }
               }
-            }
-          } else {
-            pos = scrap.lastIndexOf( "-xs-" );
-            if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
-            if ( pos > 0 ) {
-              String name = scrap.substring(pos+4);
-              if ( /* name != null && */ name.length() > 0 ) { // name always not null [?]
-                // TDLog.v( "section station " + name );
-                for ( DrawingStationName st : stations ) {
-                  if ( name.equals( st.getName() ) ) {
-                    pt.setLink( st );
-                    break;
+            } else {
+              pos = scrap.lastIndexOf( "-xs-" );
+              if ( pos < 0 ) pos = scrap.lastIndexOf( "-xh-" );
+              if ( pos > 0 ) {
+                String name = scrap.substring(pos+4);
+                if ( /* name != null && */ name.length() > len ) { // name always not null [?]
+                  if ( len > 0 ) {
+                    name = name.substring(0, name.length() - len );
+                  }
+                  TDLog.v( "link xsection station " + name );
+                  for ( DrawingStationName st : stations ) {
+                    if ( name.equals( st.getName() ) ) {
+                      pt.setLink( st );
+                      break;
+                    }
                   }
                 }
               }

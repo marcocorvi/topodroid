@@ -8,8 +8,9 @@
     <string name="string_false">false</string>
     <string name="string_true">true</string>
 
-    <string name="tdx_stale" translatable="false">Stale TopoDroid folder detected:\nTopoDroid must stop.\nRename the folder and restart the app.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
-    <string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html</string>
+    <string name="tdx_stale" translatable="false">TopoDroid detected a stale folder and must stop.\nRename the folder and restart the app.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
+    <string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string>
+    <string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -1998,6 +1999,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
+    <string name="warning_station_xsection">Warning: changing station with X-section</string>
 
     <string name="done_fractals">Done fractals dims</string>
     <string name="done_convexhull">Done convex-hull walls</string>

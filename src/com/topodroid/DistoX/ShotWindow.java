@@ -1682,6 +1682,8 @@ public class ShotWindow extends Activity
    */
   void doMultiDelete()
   {
+    checkXSections( mDataAdapter.mSelect );
+
     if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
     for ( DBlock blk : mDataAdapter.mSelect ) {
       if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
@@ -1884,13 +1886,24 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
-  // @param leg leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
-  void updateShot( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
+  /** update the shot stations and the flags
+   * @param from    FROM station
+   * @param to      TO station
+   * @param extend  integer extend
+   * @param stretch fractional extend
+   * @param flag    shot flags
+   * @param leg     leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
+   * @param comment shot comment
+   * @param blk     shot data block
+   * @note called only by ShotDialog 
+   */
+  void updateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
     // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
     // TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType()
     //       + " blk type " + blk.getBlockType() + " comment " + comment );
 
+    checkXSections( blk );
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
@@ -1963,11 +1976,38 @@ public class ShotWindow extends Activity
     updateDisplay();
   }
 
-  void updateShotName( long bid, String from, String to )
+  /** update the FROM-TO stations of a shot database record
+   * @param bid    block ID
+   * @param from   FROM station
+   * @param to     TO station
+   */
+  private void updateShotName( long bid, String from, String to )
   {
     mApp_mData.updateShotName( bid, TDInstance.sid, from, to );
   }
 
+  /** update the FROM-TO stations of a shot database record
+   * @param blk    data block 
+   * @param from   FROM station
+   * @param to     TO station
+   * @note used by the DBlockAdapter to react to edit actions
+   */
+  void updateDBlockName( DBlock blk, String from, String to )
+  {
+    checkXSections( blk );
+    updateShotName( blk.mId, from, to );
+    blk.setBlockName( from, to, blk.isBackLeg() ); 
+  }
+    // TODO check if the blk stations have xsections linked to
+
+  /** check the sibling shots and toast a warning if there is a bad sibling
+   * @param blk    data block 
+   * @param from   FROM station
+   * @param to     TO station
+   * @param d      distance
+   * @param b      azimuth [deg.]
+   * @param c      clino [deg.]
+   */
   private void checkSiblings( DBlock blk,  String from, String to, float d, float b, float c )
   {
     if ( ! blk.isLeg() ) return;
@@ -1977,13 +2017,47 @@ public class ShotWindow extends Activity
     }
   }
 
-  // only called by MultishotDialog
-  // @param blks    list of blocks to renumber
-  // @param from    FROM station to assign to first block
-  // @param to      TO station to assign to first block
-  // no need to synchronize
+  private boolean checkXSections( DBlock blk )
+  {
+    if ( ! blk.isLeg() ) return false;
+    ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
+    // for ( String name : names ) TDLog.v("check xsection [1] station: " + name );
+    if (  ( blk.mFrom != null && blk.mFrom.length() > 0 && names.contains( blk.mFrom ) ) 
+       || ( blk.mTo != null && blk.mTo.length() > 0 && names.contains( blk.mTo ) ) ) {
+      TDToast.makeWarn( R.string.warning_station_xsection );
+      return true;
+    }
+    return false;
+  }
+
+  private boolean checkXSections( List< DBlock > blks )
+  {
+    if ( blks.size() == 0 ) return false;
+    ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
+    // for ( String name : names ) TDLog.v("check xsection [2] station: " + name );
+    for ( DBlock b : blks ) {
+      if ( b.isLeg() ) { 
+        if (  ( b.mFrom != null && b.mFrom.length() > 0 && names.contains( b.mFrom ) ) 
+           || ( b.mTo != null && b.mTo.length() > 0 && names.contains( b.mTo ) ) ) {
+          TDToast.makeWarn( R.string.warning_station_xsection );
+          return true;
+        }
+      }
+    }
+    return false;
+  }
+
+  /** rename a set of data blocks
+   * @param blks    list of blocks to renumber
+   * @param from    FROM station to assign to first block
+   * @param to      TO station to assign to first block
+   * @note only called by MultishotDialog
+   * no need to synchronize
+   */
   void renumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
+    checkXSections( blks );
+
     if ( from.length() == 0 && to.length() == 0 ) {
       for ( DBlock b : blks ) {
         b.setBlockName( from, to );
@@ -2018,6 +2092,8 @@ public class ShotWindow extends Activity
 
   void swapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
   {
+    checkXSections( blks );
+
     // TDLog.v( "swap list size " + blks.size() );
     for ( DBlock blk : blks ) {
       String from = blk.mTo;

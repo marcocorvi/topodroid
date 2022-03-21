@@ -1541,7 +1541,7 @@ public class DrawingWindow extends ItemDrawer
       // N.B. this is where TDInstance.xsections is necessary: to decide which xsections to check for stations
       //      could use PlotType.isStationSectionPrivate and PlotInfo.getXSectionParent
       List< PlotInfo > xsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_X_SECTION, parent );
-      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           // DrawingStationName dst =
@@ -1572,7 +1572,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
-      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         // TDLog.v("EXTEND station " + st.name + " has extend " + st.hasExtend() );
         if ( st.hasExtend() && st.show() ) {
@@ -1607,7 +1607,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       List< PlotInfo > xhsections = mApp_mData.selectAllPlotSectionsWithType( TDInstance.sid, 0, PlotType.PLOT_XH_SECTION, parent );
-      List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+      List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
       for ( NumStation st : stations ) {
         if ( st.show() ) {
           h1 = st.e * cosp + st.s * sinp;
@@ -3211,7 +3211,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
-        // TDLog.v( "modeload data stream 1");
+        TDLog.v( "modeload data stream 1 " + mName1 + " " + mFullName1);
         // mAllSymbols =
         mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ );
         // DrawingSurface.addManagerToCache( mFullName1 );
@@ -3236,7 +3236,7 @@ public class DrawingWindow extends ItemDrawer
       doMoveTo();
 
       mDrawingSurface.setStationXSections( xsection_plan, xsection_ext, mPlot2.type );
-      mDrawingSurface.linkAllSections();
+      mDrawingSurface.linkAllSections( mName1, mName2 );
     } else { // X_SECTION
       resetReference( mPlot3, true );
       mTo = ( PlotType.isLegSection( type ) )? mPlot3.view : "";
@@ -4985,7 +4985,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void setCurrentStationName( String name, DrawingStationName st )
   {
-    List< CurrentStation > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
+    List< StationInfo > saved = TDSetting.mSavedStations ? mApp_mData.getStations( TDInstance.sid ) : null;
     mApp.setCurrentStationName( name );
     mDrawingSurface.setCurrentStation( st, saved );
   }
@@ -5035,27 +5035,6 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.clearXSectionOutline( scrap_name ); // clear outline if any
   }
 
-  /** @return the (leg) xsection type according to the parent sketch type
-   * @param type parent sketch type (PLAN or profile)
-   */
-  private long getXSectionType( long type )
-  {
-    if ( type == PlotType.PLOT_PLAN ) return PlotType.PLOT_X_SECTION;
-    if ( PlotType.isProfile( type ) ) return PlotType.PLOT_XH_SECTION;
-    return PlotType.PLOT_NULL;
-  }
-
-  /** @return the station xsection name according to the parent sketch type, ie, either "xs-" or "xh-" followed by the station name
-   * @param st_name   station name
-   * @param type      parent sketch type (PLAN or profile)
-   */
-  private String getXSectionName( String st_name, long type )
-  {
-    if ( type == PlotType.PLOT_PLAN ) return "xs-" + st_name;
-    if ( PlotType.isProfile( type ) ) return "xh-" + st_name;
-    return null;
-  }
-
   /** @return the station xsection comment according to the parent sketch type
    * @param st_name   station name
    * @param type      parent sketch type (PLAN or profile)
@@ -5063,7 +5042,7 @@ public class DrawingWindow extends ItemDrawer
   String getXSectionNick( String st_name, long type )
   {
     // parent name = mName
-    String xs_id = getXSectionName( st_name, type );
+    String xs_id = PlotType.getXSectionName( st_name, type );
     if ( xs_id == null ) return "";
     if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
 
@@ -5075,7 +5054,7 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** open a station xsection - at station B where A--B--C
-   * @param st_name   station name
+   * @param st_name   station name 
    * @param type      type of the parent plot where the x-section is defined
    * @param azimuth   section plane direction
    *        direct: azimuth = average azimuth of AB and BC, inverse: the opposite
@@ -5094,10 +5073,10 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "PLOT open XSection nick <" + nick + "> st_name <" + st_name + "> plot " + mName );
     // TDLog.v( "PLOT open xsection - current line " + mCurrentLine );
     // parent plot name = mName
-    String xs_id = getXSectionName( st_name, type );
+    String xs_id = PlotType.getXSectionName( st_name, type );
     if ( xs_id == null ) return;
     if ( ! TDInstance.xsections ) xs_id = xs_id + "-" + mName;
-    long xtype = getXSectionType( type );
+    long xtype = PlotType.getXSectionType( type );
 
     // TDLog.v( "open xsection <" + xs_id + "> nick <" + nick + ">" );
 
@@ -7463,8 +7442,7 @@ public class DrawingWindow extends ItemDrawer
     if ( type == PlotType.PLOT_PLAN ) {
       if ( mPlot1 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, null, false );
-        mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols
-        // mDrawingSurface.linkSections();
+        mDrawingSurface.modeloadDataStream( tdr, mFullName1, true /*, null */ ); // no missing symbols, true = linkSections
         // DrawingSurface.addManagerToCache( mFullName1 );
         setPlotType1( COMPUTE_YES, PARAMS_YES );
       } else {
@@ -7473,8 +7451,7 @@ public class DrawingWindow extends ItemDrawer
     } else if ( PlotType.isProfile( type ) ) {
       if ( mPlot2 != null ) {
         mDrawingSurface.resetManager( DrawingSurface.DRAWING_PROFILE, null, PlotType.isExtended(type) );
-        mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ );
-        // mDrawingSurface.linkSections();
+        mDrawingSurface.modeloadDataStream( tdr, mFullName2, true /*, null */ ); // true = linkSections
         // DrawingSurface.addManagerToCache( mFullName2 );
         // now switch to extended view FIXME-VIEW
         setPlotType2( COMPUTE_YES, PARAMS_YES );
