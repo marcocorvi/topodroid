@@ -171,7 +171,7 @@ class CurrentStationDialog extends MyDialog
   {
     if ( name == null || name.length() == 0 ) return; // safety check
     mStation = name;
-    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, false );
+    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {
       mName.setText( TDString.EMPTY );
       mComment.setText( null );
@@ -187,7 +187,7 @@ class CurrentStationDialog extends MyDialog
    */
   private void setComment( String name )
   {
-    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, false );
+    StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     mComment.setText( ( cs == null )? null : cs.mComment );
     setFlags( cs );
   }
@@ -258,7 +258,7 @@ class CurrentStationDialog extends MyDialog
       }
 
       mStation = name;
-      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag );
+      TopoDroidApp.mData.insertStation( TDInstance.sid, name, comment, flag, name ); // PRESENTATION = name
       updateList();
       return;
 

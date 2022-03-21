@@ -19,9 +19,10 @@ import com.topodroid.utils.TDString;
 
 public class StationInfo
 {
-  final String mName;      // name
-  final String mComment;   // comment / description
-  final StationFlag mFlag; // flags
+  String mName;      // name (ID)
+  String mComment;   // comment / description
+  StationFlag mFlag; // flags
+  String mPresentation;  // presentation string
 
   // flag tests
   private boolean isFlagFixed()   { return mFlag.isFixed(); }
@@ -34,25 +35,31 @@ public class StationInfo
   public String getFlagCode() { return mFlag.getCode(); }
 
   /** cstr
-   * @param name     name
+   * @param id       station ID
+   * @param name     name (presentation string)
    * @param comment  comments (can be null)
    * @param flag     flag
    */
-  StationInfo( String name, String comment, long flag )
+  StationInfo( String name, String comment, long flag, String presentation )
   {
     mName    = name;
     mComment = (comment == null)? TDString.EMPTY : comment;
     mFlag    = new StationFlag( (int)flag );
+    mPresentation = presentation;
   }
 
   // @RecentlyNonNull
   public String toString()
   { 
     StringBuilder sb = new StringBuilder();
-    sb.append( mName ).append("[").append( getFlagCode() ).append("]");
+    sb.append( mPresentation ).append("[").append( getFlagCode() ).append("]");
     if ( mComment != null ) sb.append( mComment );
     return sb.toString();
   }
+
+  /** @return the presentation string
+   */
+  public String getPresentation() { return mPresentation; }
 
   /** get the current station comment
    * @return comment

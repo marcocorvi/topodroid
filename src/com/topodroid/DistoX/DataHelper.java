@@ -176,6 +176,8 @@ public class DataHelper extends DataSetObservable
     "cs_name", "cs_longitude", "cs_latitude", "cs_altitude", "cs_decimals"
   };
 
+  static final private String[] mStationFields = { "name", "comment", "flag", "presentation" };
+
   // private DataListenerSet mListeners; // IF_COSURVEY
 
   // ----------------------------------------------------------------------
@@ -5401,20 +5403,21 @@ public class DataHelper extends DataSetObservable
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
 
-       cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment", "flag" },
+       cursor = myDB.query( STATION_TABLE, mStationFields,
                             "surveyId=?", new String[] { Long.toString( sid ) },
                             null, null, null );
        if (cursor.moveToFirst()) {
          do {
            // STATION_TABLE does not have field "id"
            pw.format(Locale.US,
-             "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d );\n",
+             "INSERT into %s values( %d, 0, \"%s\", \"%s\", %d, \"%s\" );\n",
              STATION_TABLE,
              sid, 
              TDString.escape( cursor.getString(0) ),
              TDString.escape( cursor.getString(1) ),
-             cursor.getLong(2) );
+             cursor.getLong(2),
+             TDString.escape( cursor.getString(3) )
+           );
          } while (cursor.moveToNext());
        }
        if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
@@ -5680,8 +5683,10 @@ public class DataHelper extends DataSetObservable
                name    = TDString.unescape( scanline1.stringValue( ) );
                comment = TDString.unescape( scanline1.stringValue( ) );
                long flag = ( db_version > 25 )? scanline1.longValue( 0 ) : 0;
+               String presentation = name;
+               if ( db_version > 45 ) presentation = TDString.unescape( scanline1.stringValue( ) );
                // success &= insertStation( sid, name, comment, flag );
-               cv = makeStationContentValues( sid, name, comment, flag );
+               cv = makeStationContentValues( sid, name, comment, flag, presentation );
                myDB.insert( STATION_TABLE, null, cv ); 
              }
            }
@@ -5702,103 +5707,121 @@ public class DataHelper extends DataSetObservable
    }
 
    // ----------------------------------------------------------------------
-   private ContentValues makeStationContentValues( long sid, String name, String comment, long flag )
-   {
-     ContentValues cv = new ContentValues();
-     cv.put( "surveyId",  sid );
-     cv.put( "name",      name );
-     cv.put( "comment",   comment );
-     cv.put( "flag",      flag );
-     return cv;
-   }
+  private ContentValues makeStationContentValues( long sid, String name, String comment, long flag, String presentation )
+  {
+    ContentValues cv = new ContentValues();
+    cv.put( "surveyId",  sid );
+    cv.put( "name",      name );
+    cv.put( "comment",   comment );
+    cv.put( "flag",      flag );
+    cv.put( "presentation", presentation );
+    return cv;
+  }
 
-   public void insertStation( long sid, String name, String comment, long flag )
-   {
-     if ( myDB == null ) return; // false;
-     // boolean ret = false;
-     if ( comment == null ) comment = TDString.EMPTY;
-     Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment", "flag" },
-                            "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
-                            null, null, null );
-     if (cursor.moveToFirst()) {
-       // StringWriter sw = new StringWriter();
-       // PrintWriter  pw = new PrintWriter( sw );
-       // pw.format( Locale.US, "UPDATE stations SET comment=\"%s\", flag=%d WHERE surveyId=%d AND name=\"%s\"",
-       //            comment, flag, sid, name );
-       // myDB.execSQL( sw.toString() );
-       ContentValues cv = new ContentValues();
-       cv.put("comment", comment );
-       cv.put("flag", flag );
-       doUpdate( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name }, "station" );
-       // try {
-       //   myDB.beginTransaction();
-       //   myDB.update( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name } );
-       //   myDB.setTransactionSuccessful();
-       // } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
-       // } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
-       // } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
-       // } finally { myDB.endTransaction(); }
+  /** insert/update a station
+   * @param sid          survey ID
+   * @param name         station name (ID)
+   * @param comment      station comment
+   * @param flag         station flag
+   * @param presentation station presentation string
+   */
+  public void insertStation( long sid, String name, String comment, long flag, String presentation )
+  {
+    if ( myDB == null ) return; // false;
+    // boolean ret = false;
+    if ( comment == null ) comment = TDString.EMPTY;
+    Cursor cursor = myDB.query( STATION_TABLE, mStationFields,
+                           "surveyId=? and name=?", new String[] { Long.toString( sid ), name },
+                           null, null, null );
+    if (cursor.moveToFirst()) {
+      // StringWriter sw = new StringWriter();
+      // PrintWriter  pw = new PrintWriter( sw );
+      // pw.format( Locale.US, "UPDATE stations SET comment=\"%s\", flag=%d WHERE surveyId=%d AND name=\"%s\"",
+      //            comment, flag, sid, name );
+      // myDB.execSQL( sw.toString() );
+      ContentValues cv = new ContentValues();
+      cv.put("comment", comment );
+      cv.put("flag", flag );
+      cv.put("presentation", ( presentation == null )? name : presentation );
+      doUpdate( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name }, "station" );
+      // try {
+      //   myDB.beginTransaction();
+      //   myDB.update( STATION_TABLE, cv, "surveyId=? AND name=?", new String[]{ Long.toString(sid), name } );
+      //   myDB.setTransactionSuccessful();
+      // } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e ); ret = false;
+      // } catch ( SQLiteException e1 )       { logError("survey rename " + name, e1 ); ret =false;
+      // } catch ( IllegalStateException e2 ) { logError("survey rename", e2 ); ret = false;
+      // } finally { myDB.endTransaction(); }
 
-       // if ( updateStationCommentStmt == null ) {
-       //    updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
-       // }
-       // updateStationCommentStmt.bindString( 1, comment );
-       // updateStationCommentStmt.bindLong(   2, flag );
-       // updateStationCommentStmt.bindLong(   3, sid );
-       // updateStationCommentStmt.bindString( 4, name );
-       // // ret =
-       // doStatement( updateStationCommentStmt, "station update" );
-     } else {
-       ContentValues cv = makeStationContentValues( sid, name, comment, flag );
-       // ret =
-       doInsert( STATION_TABLE, cv, "station insert" );
-     }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     // return ret;
-   }
+      // if ( updateStationCommentStmt == null ) {
+      //    updateStationCommentStmt = myDB.compileStatement( "UPDATE stations SET comment=?, flag=? WHERE surveyId=? AND name=?" );
+      // }
+      // updateStationCommentStmt.bindString( 1, comment );
+      // updateStationCommentStmt.bindLong(   2, flag );
+      // updateStationCommentStmt.bindLong(   3, sid );
+      // updateStationCommentStmt.bindString( 4, name );
+      // // ret =
+      // doStatement( updateStationCommentStmt, "station update" );
+    } else {
+      ContentValues cv = makeStationContentValues( sid, name, comment, flag, ((presentation == null)? name : presentation) );
+      // ret =
+      doInsert( STATION_TABLE, cv, "station insert" );
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    // return ret;
+  }
 
-   StationInfo getStation( long sid, String name, boolean insert )
-   {
-     if ( name == null || name.length() == 0 ) return null;
-     StationInfo cs = null;
-     if ( myDB != null ) {
-       Cursor cursor = myDB.query( STATION_TABLE,
-           new String[]{ "name", "comment", "flag" },
-           "surveyId=? and name=?", new String[]{ Long.toString( sid ), name },
-           null, null, null );
-       if (cursor.moveToFirst()) {
-         cs = new StationInfo( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ) );
-       }
-       if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     }
-     if ( cs == null && insert ) {
-       ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0 );
-       if ( doInsert( STATION_TABLE, cv, "station insert" ) ) {
-         cs = new StationInfo( name, TDString.EMPTY, 0 );
-       }
-     }
-     return cs;
-   }
+  /** @return a station
+   * @param sid          survey ID
+   * @param name         station name (ID)
+   * @param presentation station presentation string: if non-null and the station does not exists it is created
+   */
+  StationInfo getStation( long sid, String name, String presentation )
+  {
+    if ( name == null || name.length() == 0 ) return null;
+    StationInfo cs = null;
+    if ( myDB != null ) {
+      Cursor cursor = myDB.query( STATION_TABLE, mStationFields,
+          "surveyId=? and name=?", new String[]{ Long.toString( sid ), name },
+          null, null, null );
+      if (cursor.moveToFirst()) {
+        cs = new StationInfo( cursor.getString( 0 ), cursor.getString( 1 ), cursor.getLong( 2 ), cursor.getString(3) );
+      }
+      if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    }
+    if ( cs == null && presentation != null ) {
+      ContentValues cv = makeStationContentValues( sid, name, TDString.EMPTY, 0, presentation );
+      if ( doInsert( STATION_TABLE, cv, "station insert" ) ) {
+        cs = new StationInfo( name, TDString.EMPTY, 0, presentation );
+      }
+    }
+    return cs;
+  }
 
 
-   ArrayList< StationInfo > getStations( long sid )
-   {
-     ArrayList< StationInfo > ret = new ArrayList<>();
-     if ( myDB == null ) return ret;
-     Cursor cursor = myDB.query( STATION_TABLE, 
-                            new String[] { "name", "comment", "flag" },
-                            "surveyId=?", new String[] { Long.toString( sid ) },
-                            null, null, null );
-     if (cursor.moveToFirst()) {
-       do {
-         ret.add( new StationInfo( cursor.getString(0), cursor.getString(1), cursor.getLong(2) ) );
-       } while (cursor.moveToNext());
-     }
-     if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
-     return ret;
-   }
+  /** @return the set of stations of a survey
+   * @param sid   survey ID
+   */
+  ArrayList< StationInfo > getStations( long sid )
+  {
+    ArrayList< StationInfo > ret = new ArrayList<>();
+    if ( myDB == null ) return ret;
+    Cursor cursor = myDB.query( STATION_TABLE, mStationFields, 
+                           "surveyId=?", new String[] { Long.toString( sid ) },
+                           null, null, null );
+    if (cursor.moveToFirst()) {
+      do {
+        ret.add( new StationInfo( cursor.getString(0), cursor.getString(1), cursor.getLong(2), cursor.getString(3) ) );
+      } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return ret;
+  }
 
+  /** delete a station
+   * @param sid   survey ID
+   * @param name  station name (ID)
+   */
   void deleteStation( long sid, String name )
   {
     StringWriter sw = new StringWriter();
@@ -6089,7 +6112,8 @@ public class DataHelper extends DataSetObservable
             + " ( surveyId INTEGER, " 
             +   " name TEXT, "          // PRIMARY KEY
             +   " comment TEXT, "
-            +   " flag INTEGER default 0 "
+            +   " flag INTEGER default 0, "
+            +   " presentation TEXT default NIL "
             +   ")"
           );
            
@@ -6304,6 +6328,8 @@ public class DataHelper extends DataSetObservable
              db.execSQL( "ALTER TABLE plots ADD COLUMN center_y REAL default 0" ); // south
              db.execSQL( "ALTER TABLE plots ADD COLUMN center_z REAL default 0" ); // down
 	   case 45:
+             db.execSQL( "ALTER TABLE stations ADD COLUMN presentation TEXT default NIL" ); // down
+	   case 46:
              // TDLog.v( "current version " + oldVersion );
            default:
              break;

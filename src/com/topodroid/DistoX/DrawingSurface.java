@@ -975,16 +975,27 @@ class DrawingSurface extends SurfaceView
    * @pram tdr         tdr file pathname
    * @param xdelta     X shift
    * @param ydelta     Y shift
-   * @param plotName   sketch name
+   * @param plotname   sketch name
    * @note called by OverviewWindow
    * @pre tdr != null
    */
-  boolean addLoadDataStream( String tdr, float xdelta, float ydelta, /* SymbolsPalette missingSymbols, */ String plotName )
+  boolean addLoadDataStream( String tdr, float xdelta, float ydelta, /* SymbolsPalette missingSymbols, */ String plotname )
   {
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
     if ( (TDFile.getTopoDroidFile(tdr)).exists() ) {
-      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotName );
+      TDLog.v( "add file " + tdr + " loading ... " + plotname );
+      ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotname );
+    }
+    if ( ret ) {
+      if ( plotname.startsWith( TDInstance.survey ) ) {
+        int len = TDInstance.survey.length() + 1;
+        if ( len < plotname.length() ) {
+          linkSections( plotname.substring( len ) );
+        }
+      } else {
+        linkSections( plotname );
+      }
     }
     return ret;
   }
@@ -1002,7 +1013,7 @@ class DrawingSurface extends SurfaceView
     // FIXME-MISSING if ( missingSymbols != null ) missingSymbols.resetSymbolLists();
     if ( tdr1 != null ) {
       if ( (TDFile.getTopoDroidFile( tdr1 )).exists() ) {
-        TDLog.v( "file " + tdr1 + " exists: loading ... " + fullname );
+        // TDLog.v( "file " + tdr1 + " exists: loading ... " + fullname );
         ret = DrawingIO.doLoadDataStream( this, tdr1, 0, 0, /* missingSymbols, */ localPalette, null, false, null ); // no plot_name
         if ( ret ) {
           BrushManager.makeEnabledListFromPalette( localPalette, false );

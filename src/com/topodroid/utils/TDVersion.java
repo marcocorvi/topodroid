@@ -31,8 +31,8 @@ public class TDVersion
   public static final String SYMBOL_VERSION = "37";
   
   // database version
-  public static final String DB_VERSION = "45"; // NOTE agrees with Cave3DThParser values
-  public static final int DATABASE_VERSION = 45;
+  public static final String DB_VERSION = "46"; // NOTE agrees with Cave3DThParser values
+  public static final int DATABASE_VERSION = 46;
   public static final int DATABASE_VERSION_MIN = 21; // was 14
 
   public static final int DEVICE_DATABASE_VERSION = 27;

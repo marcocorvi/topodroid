@@ -132,7 +132,7 @@ class DrawingStationDialog extends MyDialog
       mComment = (EditText) findViewById( R.id.comment );
       mFlag    = StationFlag.STATION_NONE;
       if ( TDLevel.overExpert ) {
-        StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, false );
+        StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, mStationName, null ); // null: do not create
         mBtnOkComment.setOnClickListener( this );
         if ( cs != null ) {
           mComment.setText( cs.mComment );
@@ -332,7 +332,7 @@ class DrawingStationDialog extends MyDialog
           String comment = mComment.getText().toString().trim();
           if ( comment.length() > 0 ) {
             // set/change saved-station comment - leave flags unchanged
-            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag );
+            TopoDroidApp.mData.insertStation( TDInstance.sid, mStationName, comment, mFlag, mStationName ); // PRESENTATION
             fail = false;
           } 
         } 
