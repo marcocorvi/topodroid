@@ -96,7 +96,7 @@ public class QCamDrawingSurface extends SurfaceView
   {
     super(context, attrs);
     // mContext = context;
-    // TDLog.v( "QCamDrawingSurface cstr" );
+    TDLog.v( "QCam Surface cstr" );
     mHolder = getHolder();
     mHolder.addCallback(this);
     // mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // required on android <= API-11
@@ -122,14 +122,15 @@ public class QCamDrawingSurface extends SurfaceView
 
   public void surfaceCreated(SurfaceHolder holder) 
   {
-    // TDLog.v( "surface created " );
-    try {
-      mCamera = Camera.open();
-      mCamera.setPreviewDisplay( holder );
-      // mCamera.startPreview();
-    } catch (Exception e) {
-      TDLog.Error( "Error setting camera preview: " + e.getMessage());
-    }
+    TDLog.v( "QCAM surface created " );
+    open();
+    // try {
+    //   mCamera = Camera.open();
+    //   mCamera.setPreviewDisplay( holder );
+    //   // mCamera.startPreview();
+    // } catch (Exception e) {
+    //   TDLog.Error( "Error setting camera preview: " + e.getMessage());
+    // }
   }
 
   public void surfaceDestroyed(SurfaceHolder holder) // release the camera preview in QCamCompass
@@ -214,7 +215,9 @@ public class QCamDrawingSurface extends SurfaceView
       Camera.Size size = params.getPreviewSize();
       // mWidth  = size.width;
       // mHeight = size.height;
-      // TDLog.v( "QCamPreview size " + size.width + " " + size.height );
+      TDLog.v( "QCam preview size " + size.width + " " + size.height );
+      setMinimumWidth( size.width );
+      setMinimumHeight( size.height );
       try {
         mCamera.setDisplayOrientation( 90 );
         mCamera.setPreviewDisplay( mHolder );

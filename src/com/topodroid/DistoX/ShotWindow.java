@@ -919,8 +919,10 @@ public class ShotWindow extends Activity
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
     if ( mMediaManager.isTopoDroidCamera() ) {
+      TDLog.v("take photo with TopoDroid");
       new QCamCompass( this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
     } else {
+      TDLog.v("take photo with Android");
       try {
         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
         if ( intent.resolveActivity( getPackageManager() ) != null ) {

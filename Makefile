@@ -11,7 +11,7 @@ VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionNam
 TARGET_SDK = `grep targetSdkVersion AndroidManifest.xml | sed -e 's/ *android:targetSdkVersion=//' | sed -e 's/"//g' `
 
 APPNAME = DistoX
-LOGNAME = $(APPNAME)
+LOGNAME = topodroid-X
 PACKAGE = com.topodroid.$(APPNAME)
 
 default:
