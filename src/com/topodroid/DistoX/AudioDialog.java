@@ -89,7 +89,7 @@ class AudioDialog extends MyDialog
     hadNoFile = ! hasFile;
     mBlk      = blk;
     isRecPlay = STATUS_IDLE;
-    TDLog.v( "audio dialog " + bid + " file: " + mFilepath );
+    // TDLog.v( "audio dialog " + bid + " file: " + mFilepath );
   }
 
 
@@ -160,7 +160,7 @@ class AudioDialog extends MyDialog
     try {
       MyStateBox b = (MyStateBox)v;
       if ( b == mBtnDelete ) {
-	TDLog.v( "audio delete: is rec " + isRecPlay );
+	// TDLog.v( "audio delete: is rec " + isRecPlay );
         stopRecPlay();
         if ( hasFile ) { // delete audio file
 	  // TDLog.v( "audio delete ask confirm");
@@ -170,7 +170,7 @@ class AudioDialog extends MyDialog
         }
 	// TDLog.v( "audio delete has no file");
       } else if ( b == mBtnPlay ) {
-	TDLog.v( "audio play: is rec " + isRecPlay );
+	// TDLog.v( "audio play: is rec " + isRecPlay );
         if ( isRecPlay != STATUS_IDLE ) return;
         mAction = ACTION_NONE;
         mBtnConfirm.setText( R.string.audio_paused );
@@ -188,7 +188,7 @@ class AudioDialog extends MyDialog
 	}
         return;
       } else if ( b == mBtnRec ) {
-	TDLog.v( "audio rec: is rec " + isRecPlay );
+	// TDLog.v( "audio rec: is rec " + isRecPlay );
         if ( canRec ) {
           int sr = mBtnRec.getState();
           if ( sr == 1 ) {
@@ -217,15 +217,15 @@ class AudioDialog extends MyDialog
       }
     } catch ( ClassCastException e ) { /* THIS IS OK */ }
     if ( isRecPlay == STATUS_RECORD ) return; // no action while recording
-    TDLog.v( "audio action: " + mAction + " is rec " + isRecPlay );
+    // TDLog.v( "audio action: " + mAction + " is rec " + isRecPlay );
     if ( mAction > ACTION_NONE ) {
       try {
         if ( (Button)v == mBtnConfirm ) {
           if ( mAction == ACTION_DELETE ) {
-	    TDLog.v( "audio delete");
+	    // TDLog.v( "audio delete");
             deleteAudio();
           } else if ( mAction == ACTION_OVERWRITE ) {
-	    TDLog.v( "audio overwrite start record");
+	    // TDLog.v( "audio overwrite start record");
             startRec();
             return;
           }
@@ -234,7 +234,7 @@ class AudioDialog extends MyDialog
 	}
       } catch ( ClassCastException e ) { /* THIS IS OK */ }
     }
-    TDLog.v( "audio dismiss");
+    // TDLog.v( "audio dismiss");
     dismiss();
   }
 

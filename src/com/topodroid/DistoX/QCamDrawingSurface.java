@@ -92,11 +92,15 @@ public class QCamDrawingSurface extends SurfaceView
   //   }
   // } 
 
+  /** cstr
+   * @param context  context
+   * @param attrs    attributes
+   */
   public QCamDrawingSurface(Context context, AttributeSet attrs)
   {
     super(context, attrs);
     // mContext = context;
-    TDLog.v( "QCam Surface cstr" );
+    // TDLog.v( "QCam Surface cstr" );
     mHolder = getHolder();
     mHolder.addCallback(this);
     // mHolder.setType(SurfaceHolder.SURFACE_TYPE_PUSH_BUFFERS); // required on android <= API-11
@@ -109,6 +113,12 @@ public class QCamDrawingSurface extends SurfaceView
   }
 
 
+  /** called when the surface is changed
+   * @param holder    surface holder
+   * @param format    ... (unused)
+   * @param width     width (unused)
+   * @param height    height (unused)
+   */
   public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
   {
     // TDLog.v( "surface changed " );
@@ -120,9 +130,12 @@ public class QCamDrawingSurface extends SurfaceView
     start();
   }
 
+  /** called when the surface is created
+   * @param holder    surface holder
+   */
   public void surfaceCreated(SurfaceHolder holder) 
   {
-    TDLog.v( "QCAM surface created " );
+    // TDLog.v( "QCAM surface created " );
     open();
     // try {
     //   mCamera = Camera.open();
@@ -133,15 +146,40 @@ public class QCamDrawingSurface extends SurfaceView
     // }
   }
 
+  /** called when the surface is destroyed
+   * @param holder    surface holder
+   */
   public void surfaceDestroyed(SurfaceHolder holder) // release the camera preview in QCamCompass
   {
     // TDLog.v( "surface destroyed " );
     close();
   }
 
+  /** react to a measure of the view and its content - invoked by measure( int, in )
+   * @param measuredWidth  measured width
+   * @param measuredHeight measured height
+   */
+  @Override
+  public void onMeasure( int measuredWidth, int measuredHeight )
+  {
+    int w = getSuggestedMinimumWidth();
+    int h = getSuggestedMinimumHeight();
+    // TDLog.v( "QCAM surface on measure " + measuredWidth + " " + measuredHeight + " " + w + " " + h );
+    if ( w == 0 || h == 0 ) { 
+      super.onMeasure( measuredWidth, measuredHeight );
+    } else {
+      // exchange w-h because the orientation is 90
+      setMeasuredDimension( h, w );
+    }
+  }
+
+  /** take a pictture
+   * @param orientation   display orientation ???
+   * @return true on success
+   */
   boolean takePicture( int orientation )
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface take picture. Orientation " + orientation );
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface take picture. Orientation " + orientation );
     boolean ret = false;
     if ( mCamera != null ) {
       try {
@@ -157,11 +195,16 @@ public class QCamDrawingSurface extends SurfaceView
     return ret;
   }
 
+  /** get the maximum zoom value
+   */
   int getMaxZoom()
   {
     return (mCamera != null )? mCamera.getParameters().getMaxZoom() : 100;
   }
 
+  /** zoom in/out
+   * @param delta_zoom   zoom change
+   */
   void zoom( int delta_zoom )
   {
     if ( mCamera != null ) {
@@ -176,7 +219,8 @@ public class QCamDrawingSurface extends SurfaceView
     }
   }
 
-
+  /** close the camera
+   */
   void close()
   {
     TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
@@ -188,6 +232,9 @@ public class QCamDrawingSurface extends SurfaceView
     }
   }
 
+  /** open the camera
+   * @return true on success
+   */
   boolean open()
   {
     TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface open");
@@ -215,7 +262,7 @@ public class QCamDrawingSurface extends SurfaceView
       Camera.Size size = params.getPreviewSize();
       // mWidth  = size.width;
       // mHeight = size.height;
-      TDLog.v( "QCam preview size " + size.width + " " + size.height );
+      // TDLog.v( "QCam preview size " + size.width + " " + size.height );
       setMinimumWidth( size.width );
       setMinimumHeight( size.height );
       try {
@@ -235,6 +282,9 @@ public class QCamDrawingSurface extends SurfaceView
     return false;
   }
 
+  /** start the preview
+   * @note display orientation is 90
+   */
   void start()
   {
     if ( mCamera != null ) {
@@ -249,6 +299,8 @@ public class QCamDrawingSurface extends SurfaceView
     }
   }
 
+  /** stop the preview
+   */
   private void stop()
   {
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
@@ -261,6 +313,9 @@ public class QCamDrawingSurface extends SurfaceView
     }
   }
 
+  /** create the callbacks, mostly empty functions. 
+   * @note onPictureTaken store the JPEG data
+   */
   private void createCallbacks()
   {
     mShutter = new ShutterCallback() {
