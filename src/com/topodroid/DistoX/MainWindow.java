@@ -942,6 +942,8 @@ public class MainWindow extends Activity
   //   mToolbar.addView( mMenuImage, params );
   // }
 
+  /** set the icon of the "device" button
+   */
   public void setButtonDevice()
   {
     if ( TDInstance.isDeviceX310() ) {

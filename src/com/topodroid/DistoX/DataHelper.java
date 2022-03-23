@@ -3878,10 +3878,23 @@ public class DataHelper extends DataSetObservable
   // ----------------------------------------------------------------------
   // symbols
 
-  void setSymbolEnabled( String name, boolean enabled ) { setValue( name, enabled? TDString.ONE : TDString.ZERO ); }
+  /** store a symbol state (enabled/disabled)
+   * @param name    symbol name
+   * @param enabled whether the symbol is enabled
+   */
+  void setSymbolEnabled( String name, boolean enabled ) 
+  { 
+    // if ( name == null || name.length() == 0 ) return; // already handled by setValue
+    setValue( name, enabled? TDString.ONE : TDString.ZERO );
+  }
 
+  /** retrieve a symbol state (enabled/disabled)
+   * @param name    symbol name
+   * @return true if the symbol is enabled
+   */
   boolean getSymbolEnabled( String name )
   { 
+    // if ( name == null || name.length() == 0 ) return false; // already handled by getValue
     String enabled = getValue( name );
     if ( enabled != null ) {
       return enabled.equals(TDString.ONE);
@@ -3903,6 +3916,10 @@ public class DataHelper extends DataSetObservable
   //   }
   // }
 
+  /** check if a symbol state is stored in the database
+   * @param name    symbol name
+   * @return true if the symbol state is in the database
+   */
   boolean hasSymbolName( String name ) { return ( getValue( name ) != null ); }
 
   // ----------------------------------------------------------------------

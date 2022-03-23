@@ -552,6 +552,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Usunąć pomiar ?</string>
     <string name="shots_delete">Usunąć pomiary ?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">Zaznaczyć pomiar jako sprawdzający ?</string>
     <string name="shot_from">z</string>
     <string name="shot_info">Wprowadz dane pomiaru</string>

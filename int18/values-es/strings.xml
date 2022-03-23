@@ -538,6 +538,9 @@
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shots_delete">¿Quiere eliminar las tomas?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>

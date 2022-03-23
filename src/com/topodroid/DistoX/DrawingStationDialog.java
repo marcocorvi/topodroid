@@ -395,6 +395,11 @@ class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
+  /**
+   * @param b  azimuth [degrees]
+   * @param c  clino [degrees]
+   * @param o  orientation (unused)
+   */
     public void setBearingAndClino( float b, float c, int orientation )
     {
       // TDLog.v( "Station dialog set orientation " + orientation + " bearing " + b + " clino " + c );

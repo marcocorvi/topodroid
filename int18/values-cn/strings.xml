@@ -550,6 +550,9 @@
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">删除测线 ?</string>
     <string name="shots_delete">删除多个测线 ?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">标记测线为检测测线?</string>
     <string name="shot_from">从</string>
     <string name="shot_info">进入测量数据</string>

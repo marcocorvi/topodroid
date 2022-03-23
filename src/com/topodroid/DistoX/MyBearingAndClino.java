@@ -30,6 +30,15 @@ import android.media.ExifInterface; // REQUIRES android.support
 
 public class MyBearingAndClino implements IBearingAndClino
 {
+  final static int ORIENTATION_UP    =   0;
+  final static int ORIENTATION_RIGHT =  90;
+  final static int ORIENTATION_DOWN  = 180;
+  final static int ORIENTATION_LEFT  = 270;
+  final static int EXIF_UP    = 6;
+  final static int EXIF_RIGHT = 3;
+  final static int EXIF_DOWN  = 8;
+  final static int EXIF_LEFT  = 1;
+
   private final TopoDroidApp mApp;
   // private File  mFile;
   private String mFilepath;  // file full pathname
@@ -56,7 +65,7 @@ public class MyBearingAndClino implements IBearingAndClino
   /** set azimuth/clino and orientation index 
    * @param b0 azimuth [degrees]
    * @param c0 clino [degrees]
-   * @param o  camera orientation [degrres]
+   * @param o  camera orientation [degrees], 0: up, 90: right, etc.
    */
   public void setBearingAndClino( float b0, float c0, int o0 )
   {
@@ -127,8 +136,8 @@ public class MyBearingAndClino implements IBearingAndClino
     }
   }
 
-  /** @return EXIF orientation index from the orientation
-   * @param orientation   orientation [degrees]
+  /** @return EXIF orientation index from the orientation angle
+   * @param orientation   orientation angle [degrees]
    *
    * jpegexiforient man page has
    *   up              down                     left               right
@@ -139,23 +148,23 @@ public class MyBearingAndClino implements IBearingAndClino
    */
   static private int getExifOrientation( int orientation )
   {
-    if ( orientation <  45 ) return 6; // up
-    if ( orientation < 135 ) return 3; // right
-    if ( orientation < 225 ) return 8; // down
-    if ( orientation < 315 ) return 1; // left
-    return 6; // up
+    if ( orientation <  45 ) return EXIF_UP;
+    if ( orientation < 135 ) return EXIF_RIGHT;
+    if ( orientation < 225 ) return EXIF_DOWN;
+    if ( orientation < 315 ) return EXIF_LEFT;
+    return EXIF_UP;
   }
 
-  /** @return camera orientation [degrees] from the orientation
-   * @param orientation   orientation [degrees]
+  /** @return camera orientation [degrees] from the orientation angle
+   * @param orientation   orientation angle [degrees]
    */
   static int getCameraOrientation( int orientation )
   {
-    if ( orientation <  45 ) return 0;   // up
-    if ( orientation < 135 ) return 90;  // right
-    if ( orientation < 225 ) return 180; // down
-    if ( orientation < 315 ) return 270; // left
-    return 0; // up
+    if ( orientation <  45 ) return ORIENTATION_UP;
+    if ( orientation < 135 ) return ORIENTATION_RIGHT;
+    if ( orientation < 225 ) return ORIENTATION_DOWN;
+    if ( orientation < 315 ) return ORIENTATION_LEFT;
+    return ORIENTATION_UP;
   }
 
 }

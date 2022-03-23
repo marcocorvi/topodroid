@@ -1,4 +1,4 @@
-/* @file PhotoSensorsDialog.java
+/* @file ShotEditMoreDialog.java
  *
  * @author marco corvi
  * @date may 2012
@@ -41,7 +41,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.CheckBox;
 
-class PhotoSensorsDialog extends MyDialog
+class ShotEditMoreDialog extends MyDialog
                                 implements View.OnClickListener
 {
   private final ShotWindow mParent;
@@ -84,12 +84,12 @@ class PhotoSensorsDialog extends MyDialog
    * @param context   context
    * @param parent    parent shot list activity
    */
-  PhotoSensorsDialog( Context context, ShotWindow parent, DBlock blk )
+  ShotEditMoreDialog( Context context, ShotWindow parent, DBlock blk )
   {
-    super( context, R.string.PhotoSensorsDialog );
+    super( context, R.string.ShotEditMoreDialog );
     mParent  = parent;
     mBlk = blk;
-    // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");
+    // TDLog.Log( TDLog.LOG_PHOTO, "Shot EditMore Dialog");
   }
 
 // -------------------------------------------------------------------
@@ -97,8 +97,8 @@ class PhotoSensorsDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate(savedInstanceState);
-    // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoSensorDialog onCreate" );
-    initLayout(R.layout.photo_sensor_dialog, R.string.title_photo );
+    // TDLog.Log(  TDLog.LOG_PHOTO, "Shot EditMore Dialog onCreate" );
+    initLayout(R.layout.shot_edit_more_dialog, R.string.title_photo );
 
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
 

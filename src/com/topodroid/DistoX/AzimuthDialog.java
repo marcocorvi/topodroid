@@ -165,7 +165,7 @@ class AzimuthDialog extends MyDialog
     mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setBearingAndClino( (progress+180)%360, 0, 0 ); // clino 0, orientation 0
+          setBearingAndClino( (progress+180)%360, 0, MyBearingAndClino.ORIENTATION_UP ); // clino 0, orientation 0
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
@@ -178,6 +178,11 @@ class AzimuthDialog extends MyDialog
     updateEditText();
   }
 
+  /**
+   * @param b0  azimuth [degrees]
+   * @param c0  clino (unused)
+   * @param o0  orientation (unused)
+   */
   public void setBearingAndClino( float b0, float c0, int o0 )
   {
     // TDLog.v( "Azimuth dialog set orientation " + o0 + " bearing " + b0 + " clino " + c0 );

@@ -546,6 +546,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
     <string name="shots_delete">Cancello il tiro?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">Marco il tiro come di controllo?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>

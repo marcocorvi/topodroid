@@ -555,6 +555,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">Delete shot ?</string>
     <string name="shots_delete">Delete shots ?</string>
+    <string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string>
+    <string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string>
+    <string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string>
     <string name="shot_check">Mark shot as check-shot?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>
@@ -1999,7 +2002,6 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
-    <string name="warning_station_xsection">Warning: changing station with X-section</string>
 
     <string name="done_fractals">Done fractals dims</string>
     <string name="done_convexhull">Done convex-hull walls</string>

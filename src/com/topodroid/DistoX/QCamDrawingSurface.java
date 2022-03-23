@@ -110,6 +110,8 @@ public class QCamDrawingSurface extends SurfaceView
     mJpegData = null;
 
     createCallbacks();
+    mWidth  = (int)TopoDroidApp.mDisplayHeight;
+    mHeight = (int)TopoDroidApp.mDisplayWidth;  // default values
   }
 
 
@@ -121,12 +123,13 @@ public class QCamDrawingSurface extends SurfaceView
    */
   public void surfaceChanged(SurfaceHolder holder, int format, int width,  int height) 
   {
-    // TDLog.v( "surface changed " );
+    TDLog.v( "surface changed " );
     if ( mHolder.getSurface() == null) { // preview surface does not exist
       return;
     }
     stop();
     // set preview size and make any resize, rotate or reformatting changes here
+    setPreviewSize(); // this is necessary to have correct aspect ratio
     start();
   }
 
@@ -135,15 +138,14 @@ public class QCamDrawingSurface extends SurfaceView
    */
   public void surfaceCreated(SurfaceHolder holder) 
   {
-    // TDLog.v( "QCAM surface created " );
-    open();
-    // try {
-    //   mCamera = Camera.open();
-    //   mCamera.setPreviewDisplay( holder );
-    //   // mCamera.startPreview();
-    // } catch (Exception e) {
-    //   TDLog.Error( "Error setting camera preview: " + e.getMessage());
-    // }
+    TDLog.v( "QCAM surface created " );
+    try {
+      mCamera = Camera.open();
+      mCamera.setPreviewDisplay( holder );
+      // mCamera.startPreview();
+    } catch (Exception e) {
+      TDLog.Error( "QCAN Error setting camera preview: " + e.getMessage());
+    }
   }
 
   /** called when the surface is destroyed
@@ -151,8 +153,25 @@ public class QCamDrawingSurface extends SurfaceView
    */
   public void surfaceDestroyed(SurfaceHolder holder) // release the camera preview in QCamCompass
   {
-    // TDLog.v( "surface destroyed " );
+    TDLog.v( "surface destroyed " );
     close();
+  }
+
+  private void setPreviewSize()
+  {
+    if ( mCamera != null ) {
+      Camera.Parameters params = mCamera.getParameters();
+      Camera.Size size = params.getPreviewSize();
+      mWidth  = size.width;
+      mHeight = size.height;
+      TDLog.v( "QCam preview size: width " + size.width + " " + mWidth + " height " + size.height + " " + mHeight );
+      // mWidth  = (int)TopoDroidApp.mDisplayHeight;
+      // mHeight = (int)TopoDroidApp.mDisplayWidth;
+      setMinimumWidth( mWidth );
+      setMinimumHeight( mHeight );
+      // setTop(0); // set top with respect to parent
+      // setLeft(0);
+    }
   }
 
   /** react to a measure of the view and its content - invoked by measure( int, in )
@@ -168,12 +187,14 @@ public class QCamDrawingSurface extends SurfaceView
     if ( w == 0 || h == 0 ) { 
       super.onMeasure( measuredWidth, measuredHeight );
     } else {
-      // exchange w-h because the orientation is 90
+      // exchange w-h because the orientation is ORIENTATION_RIGHT (90)
       setMeasuredDimension( h, w );
+      setMinimumWidth( w );
+      setMinimumHeight( h );
     }
   }
 
-  /** take a pictture
+  /** take a picture
    * @param orientation   display orientation ???
    * @return true on success
    */
@@ -187,7 +208,7 @@ public class QCamDrawingSurface extends SurfaceView
         mCamera.takePicture( mShutter, mRaw, null, mJpeg);
         ret = true;
       } catch ( RuntimeException e ) {
-        TDLog.Error("camera runtime exception " + e.getMessage() );
+        TDLog.Error("QCAM Error take picture " + e.getMessage() );
       }
     }
     // mQCam.enableButtons( true );
@@ -223,78 +244,80 @@ public class QCamDrawingSurface extends SurfaceView
    */
   void close()
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
+    // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
+    TDLog.v( "QCAM surface close");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
-      mCamera.stopPreview();
+      stop(); // mCamera.stopPreview();
       mCamera.release();
       mCamera = null;
     }
   }
 
-  /** open the camera
-   * @return true on success
-   */
-  boolean open()
-  {
-    TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface open");
-    close();
-    try {
-      mCamera = Camera.open();
-      Camera.Parameters params = mCamera.getParameters();
-      params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
-      params.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
-      params.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
-      List< Integer > formats = params.getSupportedPreviewFormats();
-      for ( Integer fmt : formats ) {
-        if ( fmt.intValue() == ImageFormat.JPEG ) {
-          // TDLog.v( "Set preview format JPEG" );
-          params.setPreviewFormat( ImageFormat.JPEG );
-        }
-        // TDLog.v( "QCamPreview formats " + fmt );
-      }
-      mCamera.setParameters( params );
-      mCamera.setPreviewCallback( mPreviewCallback );
-      int format = params.getPreviewFormat();
-      // TDLog.v( "QCamPreview Format " + format );
-      // mOrientationListener = new MyOrientationListener( mContext, params );
-
-      Camera.Size size = params.getPreviewSize();
-      // mWidth  = size.width;
-      // mHeight = size.height;
-      // TDLog.v( "QCam preview size " + size.width + " " + size.height );
-      setMinimumWidth( size.width );
-      setMinimumHeight( size.height );
-      try {
-        mCamera.setDisplayOrientation( 90 );
-        mCamera.setPreviewDisplay( mHolder );
-      } catch ( IOException e ) {
-        TDLog.Error( "cannot set preview display" );
-      }
-      // if ( mOrientationListener != null ) mOrientationListener.enable( );
-      mCamera.startPreview();
-      return true;
-    } catch ( RuntimeException e ) { // fail to connect to canera service
-      if ( mCamera != null ) mCamera.release();
-      mCamera = null;
-      TDLog.Error( e.getMessage() );
-    }
-    return false;
-  }
+  // /** open the camera - OBSOLETE
+  //  * @return true on success
+  //  */
+  // private boolean open()
+  // {
+  //   // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface open");
+  //   TDLog.v( "QCAM surface open");
+  //   close();
+  //   try {
+  //     mCamera = Camera.open();
+  //     Camera.Parameters params = mCamera.getParameters();
+  //     params.setFocusMode( Camera.Parameters.FOCUS_MODE_AUTO );
+  //     params.setSceneMode( Camera.Parameters.SCENE_MODE_AUTO );
+  //     params.setFlashMode( Camera.Parameters.FLASH_MODE_AUTO );
+  //     List< Integer > formats = params.getSupportedPreviewFormats();
+  //     for ( Integer fmt : formats ) {
+  //       if ( fmt.intValue() == ImageFormat.JPEG ) {
+  //         // TDLog.v( "Set preview format JPEG" );
+  //         params.setPreviewFormat( ImageFormat.JPEG );
+  //       }
+  //       // TDLog.v( "QCamPreview formats " + fmt );
+  //     }
+  //     mCamera.setParameters( params );
+  //     mCamera.setPreviewCallback( mPreviewCallback );
+  //     int format = params.getPreviewFormat();
+  //     // TDLog.v( "QCamPreview Format " + format );
+  //     // mOrientationListener = new MyOrientationListener( mContext, params );
+  //     Camera.Size size = params.getPreviewSize();
+  //     // mWidth  = size.width;
+  //     // mHeight = size.height;
+  //     TDLog.v( "QCam preview size " + size.width + " " + size.height );
+  //     // setMinimumWidth( size.width );
+  //     // setMinimumHeight( size.height );
+  //     try {
+  //       mCamera.setDisplayOrientation( 90 );
+  //       mCamera.setPreviewDisplay( mHolder );
+  //     } catch ( IOException e ) {
+  //       TDLog.Error( "QCAM cannot set preview display " + e.getMessage() );
+  //     }
+  //     // if ( mOrientationListener != null ) mOrientationListener.enable( );
+  //     mCamera.startPreview();
+  //     return true;
+  //   } catch ( RuntimeException e ) { // fail to connect to canera service
+  //     if ( mCamera != null ) mCamera.release();
+  //     mCamera = null;
+  //     TDLog.Error( "QCAM error: " + e.getMessage() );
+  //   }
+  //   return false;
+  // }
 
   /** start the preview
    * @note display orientation is 90
    */
   void start()
   {
+    TDLog.v("QCAM preview start");
     if ( mCamera != null ) {
       try { // start preview with new settings
-        mCamera.setDisplayOrientation( 90 );
+        mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
         mCamera.setPreviewDisplay(mHolder);
         // if ( mOrientationListener != null ) mOrientationListener.enable( );
         mCamera.startPreview();
       } catch ( Exception e ) {
-        TDLog.Error( "Error starting camera preview: " + e.getMessage());
+        TDLog.Error( "QCAM Error start preview: " + e.getMessage());
       }
     }
   }
@@ -303,12 +326,14 @@ public class QCamDrawingSurface extends SurfaceView
    */
   private void stop()
   {
+    TDLog.v("QCAM preview stop");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       try { // stop preview before making changes
         mCamera.stopPreview();
       } catch ( Exception e ) {
         // ignore: tried to stop a non-existent preview
+        TDLog.Error( "QCAM Error stop preview: " + e.getMessage());
       }
     }
   }

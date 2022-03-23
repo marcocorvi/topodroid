@@ -545,6 +545,9 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="shot_compass">compas</string -->
     <string name="shot_delete">Șterge măsurătoarea?</string>
     <string name="shots_delete">Șterge măsurătorile?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">Marchează măsurătoarea ca măsurătoare de verificare?</string>
     <string name="shot_from">de la</string>
     <string name="shot_info">Introdu valorile măsurătorii</string>

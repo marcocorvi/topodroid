@@ -1962,7 +1962,7 @@ public class Scrap
   void linkSections( List< DrawingStationName > stations, String plotname )
   {
     int xsections_mode = TopoDroidApp.getSurveyXSectionsMode();
-    TDLog.v("link xsections " + plotname + " ... " + xsections_mode + " private " + SurveyInfo.XSECTION_PRIVATE );
+    // TDLog.v("link xsections " + plotname + " ... " + xsections_mode + " private " + SurveyInfo.XSECTION_PRIVATE );
     int len = 0; // length of station suffix
     if ( xsections_mode == SurveyInfo.XSECTION_PRIVATE && plotname != null ) { // remove the suffix "-plotname"
       len = plotname.length() + 1;
@@ -2004,7 +2004,7 @@ public class Scrap
                   if ( len > 0 ) {
                     name = name.substring(0, name.length() - len );
                   }
-                  TDLog.v( "link xsection station " + name );
+                  // TDLog.v( "link xsection station " + name );
                   for ( DrawingStationName st : stations ) {
                     if ( name.equals( st.getName() ) ) {
                       pt.setLink( st );

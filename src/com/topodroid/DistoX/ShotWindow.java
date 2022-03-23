@@ -803,7 +803,7 @@ public class ShotWindow extends Activity
   {
     mShotId = blk.mId; // save shot id
     if ( TDLevel.overNormal ) {
-      (new PhotoSensorsDialog(mActivity, this, blk ) ).show();
+      (new ShotEditMoreDialog(mActivity, this, blk ) ).show();
     } else {
       (new ShotDeleteDialog( mActivity, this, blk ) ).show();
     }
@@ -1662,8 +1662,9 @@ public class ShotWindow extends Activity
    */
   private void askMultiDelete()
   {
+    boolean safe = checkXSections( mDataAdapter.mSelect, null, null );
     Resources res = getResources();
-    TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString(R.string.shots_delete),
+    TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( safe? R.string.shots_delete : R.string.shots_delete_unsafe ),
       res.getString(R.string.button_ok), 
       res.getString(R.string.button_cancel),
       new DialogInterface.OnClickListener() { // ok handler
@@ -1681,11 +1682,10 @@ public class ShotWindow extends Activity
   }
 
   /** cut (delete) a set of shots and put them in the buffer
+   * @note package because called (only) by askMultiDelete
    */
   void doMultiDelete()
   {
-    checkXSections( mDataAdapter.mSelect );
-
     if ( TDLevel.overAdvanced ) mDBlockBuffer.clear();
     for ( DBlock blk : mDataAdapter.mSelect ) {
       if ( TDLevel.overAdvanced ) mDBlockBuffer.add( blk );
@@ -1905,7 +1905,36 @@ public class ShotWindow extends Activity
     // TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType()
     //       + " blk type " + blk.getBlockType() + " comment " + comment );
 
-    checkXSections( blk );
+    if ( checkXSections( blk, from, to ) ) {
+      doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
+    } else {
+      Resources res = getResources();
+      TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( R.string.shot_rename_unsafe ),
+        res.getString(R.string.button_ok), 
+        res.getString(R.string.button_cancel),
+        new DialogInterface.OnClickListener() { // ok handler
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
+          } },
+        null
+      );
+    }
+  }
+
+  /** internal implementation of update the shot stations and the flags
+   * @param from    FROM station
+   * @param to      TO station
+   * @param extend  integer extend
+   * @param stretch fractional extend
+   * @param flag    shot flags
+   * @param leg     leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
+   * @param comment shot comment
+   * @param blk     shot data block
+   * @note package because called (only) by alert dialog callback
+   */
+  void doUpdateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
+  {
     blk.setBlockName( from, to, (leg == LegType.BACK) );
 
     int ret = mApp_mData.updateShotNameAndData( blk.mId, TDInstance.sid, from, to, extend, flag, leg, comment );
@@ -1982,8 +2011,9 @@ public class ShotWindow extends Activity
    * @param bid    block ID
    * @param from   FROM station
    * @param to     TO station
+   * @note package because called by the alert dialog callback
    */
-  private void updateShotName( long bid, String from, String to )
+  void updateShotName( long bid, String from, String to )
   {
     mApp_mData.updateShotName( bid, TDInstance.sid, from, to );
   }
@@ -1996,11 +2026,24 @@ public class ShotWindow extends Activity
    */
   void updateDBlockName( DBlock blk, String from, String to )
   {
-    checkXSections( blk );
-    updateShotName( blk.mId, from, to );
-    blk.setBlockName( from, to, blk.isBackLeg() ); 
+    if ( checkXSections( blk, from, to ) ) {
+      updateShotName( blk.mId, from, to );
+      blk.setBlockName( from, to, blk.isBackLeg() ); 
+    } else {
+      Resources res = getResources();
+      TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( R.string.shot_rename_unsafe ),
+        res.getString(R.string.button_ok), 
+        res.getString(R.string.button_cancel),
+        new DialogInterface.OnClickListener() { // ok handler
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            updateShotName( blk.mId, from, to );
+            blk.setBlockName( from, to, blk.isBackLeg() ); 
+          } },
+        null
+      );
+    }
   }
-    // TODO check if the blk stations have xsections linked to
 
   /** check the sibling shots and toast a warning if there is a bad sibling
    * @param blk    data block 
@@ -2019,34 +2062,50 @@ public class ShotWindow extends Activity
     }
   }
 
-  private boolean checkXSections( DBlock blk )
+  /** @return true if no xsection refer to a station of the blcok, or to FROM / TO
+   * @param blk    data block
+   * @param from   FROM station (or null)
+   * @param to     TO station (or null)
+   */
+  private boolean checkXSections( DBlock blk, String from, String to )
   {
-    if ( ! blk.isLeg() ) return false;
+    if ( ! blk.isLeg() ) return true;
     ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
     // for ( String name : names ) TDLog.v("check xsection [1] station: " + name );
+    if (  ( from != null && from.length() > 0 && names.contains( from ) ) 
+       || ( to != null && to.length() > 0 && names.contains( to ) ) ) {
+      return false;
+    }
     if (  ( blk.mFrom != null && blk.mFrom.length() > 0 && names.contains( blk.mFrom ) ) 
        || ( blk.mTo != null && blk.mTo.length() > 0 && names.contains( blk.mTo ) ) ) {
-      TDToast.makeWarn( R.string.warning_station_xsection );
-      return true;
+      return false;
     }
-    return false;
+    return true;
   }
 
-  private boolean checkXSections( List< DBlock > blks )
+  /** @return true if no xsection refer to any block station or to FROM / TO
+   * @param blks   list of data blocks
+   * @param from   FROM station (or null)
+   * @param to     TO station (or null)
+   */
+  private boolean checkXSections( List< DBlock > blks, String from, String to )
   {
-    if ( blks.size() == 0 ) return false;
+    if ( blks.size() == 0 ) return true;
     ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
     // for ( String name : names ) TDLog.v("check xsection [2] station: " + name );
+    if (  ( from != null && from.length() > 0 && names.contains( from ) ) 
+       || ( to != null && to.length() > 0 && names.contains( to ) ) ) {
+      return false;
+    }
     for ( DBlock b : blks ) {
       if ( b.isLeg() ) { 
         if (  ( b.mFrom != null && b.mFrom.length() > 0 && names.contains( b.mFrom ) ) 
            || ( b.mTo != null && b.mTo.length() > 0 && names.contains( b.mTo ) ) ) {
-          TDToast.makeWarn( R.string.warning_station_xsection );
-          return true;
+          return false;
         }
       }
     }
-    return false;
+    return true;
   }
 
   /** rename a set of data blocks
@@ -2058,8 +2117,25 @@ public class ShotWindow extends Activity
    */
   void renumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
-    checkXSections( blks );
+    if ( checkXSections( blks, from, to ) ) {
+      doRenumberBlocks( blks, from, to );
+    } else {
+      Resources res = getResources();
+      TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( R.string.shots_rename_unsafe ),
+        res.getString(R.string.button_ok), 
+        res.getString(R.string.button_cancel),
+        new DialogInterface.OnClickListener() { // ok handler
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doRenumberBlocks( blks, from, to );
+          } },
+        null
+      );
+    }
+  }
 
+  private void doRenumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
+  {
     if ( from.length() == 0 && to.length() == 0 ) {
       for ( DBlock b : blks ) {
         b.setBlockName( from, to );
@@ -2094,8 +2170,29 @@ public class ShotWindow extends Activity
 
   void swapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
   {
-    checkXSections( blks );
+    if ( checkXSections( blks, null, null ) ) {
+      doSwapBlocksName( blks );
+    } else {
+      Resources res = getResources();
+      TopoDroidAlertDialog.makeAlert( mActivity, res, res.getString( R.string.shots_rename_unsafe ),
+        res.getString(R.string.button_ok), 
+        res.getString(R.string.button_cancel),
+        new DialogInterface.OnClickListener() { // ok handler
+          @Override
+          public void onClick( DialogInterface dialog, int btn ) {
+            doSwapBlocksName( blks );
+          } },
+        null
+      );
+    }
+  }
 
+  /**
+   * @param blks   list of data blocks
+   * @note pacakge for the alert dialog callback
+   */
+  void doSwapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
+  {
     // TDLog.v( "swap list size " + blks.size() );
     for ( DBlock blk : blks ) {
       String from = blk.mTo;

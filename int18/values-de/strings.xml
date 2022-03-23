@@ -554,6 +554,9 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- UNUSED string name="shot_compass">Azimut</string -->
     <string name="shot_delete">Messung löschen?</string>
     <string name="shots_delete">Messungen löschen?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Manuelle Messung erfassen</string>

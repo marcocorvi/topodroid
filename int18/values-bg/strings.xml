@@ -543,6 +543,9 @@ Refer to the web pages for details.\n
     <!-- string name="shot_compass">compass</string -->
     <string name="shot_delete">Изтриване на измерване?</string>
     <string name="shots_delete">Изтриване на измерванията?</string>
+    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
+    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
+    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
     <string name="shot_check">Маркиране като контролно измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>

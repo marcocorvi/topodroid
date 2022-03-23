@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 // import java.util.LinkedList;
 // import java.util.ListIterator;
@@ -27,6 +27,8 @@ class Selection
   ArrayList< SelectionPoint > mPoints;
   ArrayList< SelectionBucket > mBuckets;
 
+  /** cstr - prepare lists
+   */
   Selection( )
   {
     mPoints  = new ArrayList< SelectionPoint >();
@@ -48,6 +50,10 @@ class Selection
   //   }
   // }
 
+  /** shift selection
+   * @param x    X shift [pixels]
+   * @param y    Y shift
+   */
   void shiftSelectionBy( float x, float y )  // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
@@ -69,6 +75,10 @@ class Selection
     }
   }
 
+  /** scale selection
+   * @param z    scale factor
+   * @param m    scaling matrix
+   */
   void scaleSelectionBy( float z, Matrix m ) // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
@@ -90,6 +100,10 @@ class Selection
     }
   }
 
+  /** affine transform selection
+   * @param mm   affine transform matrix as array
+   * @param m    affine transform matrix
+   */
   void affineTransformSelectionBy( float[] mm, Matrix m ) // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
@@ -111,12 +125,16 @@ class Selection
     }
   }
 
+  /** clear the selection - remove all points
+   */
   void clearSelectionPoints() // synchronized by CommandManager
   {
     mPoints.clear();
     mBuckets.clear();
   }
 
+  /** clear the reference points
+   */
   void clearReferencePoints() // synchronized by CommandManager
   {        
     // int cnt = 0;
@@ -146,6 +164,9 @@ class Selection
   //   }
   // }
 
+  /** insert the station name point
+   * @param st   station name item
+   */
   void insertStationName( DrawingStationName st )
   {
     insertItem( st, null );
@@ -167,6 +188,9 @@ class Selection
     return sp;
   }
   
+  /** insert the points of a line
+   * @param path   line item
+   */
   void insertLinePath( DrawingLinePath path ) // synchronized by CommandManager
   {
     for ( LinePoint p2 = path.first(); p2 != null; p2 = p2.mNext ) {
@@ -174,6 +198,9 @@ class Selection
     }
   }
 
+  /** insert the points of a path
+   * @param path   item
+   */
   void insertPath( DrawingPath path ) // synchronized by CommandManager
   {
     // TDLog.v( "Selection insert path" );
@@ -209,6 +236,8 @@ class Selection
     }
   }
 
+  /** reset to 0 the distance field of the points in the selection
+   */
   void resetDistances()
   {
     // TDLog.v( "Selection reset distances" );
@@ -217,16 +246,27 @@ class Selection
     }
   }
 
+  /** rebucket a point
+   * @param sp   point
+   */
   void rebucket( SelectionPoint sp ) // synchronized by CommandManager
   {
     sp.setBucket( getBucket( sp.X(), sp.Y() ) );
   }
 
+  /** insert an item
+   * @param path  item
+   * @param pt    line point
+   */
   private void insertItem( DrawingPath path, LinePoint pt )
   {
-    SelectionPoint sp = new SelectionPoint( path, pt, null ); // OOM Exception
-    mPoints.add( sp );
-    sp.setBucket( getBucket( sp.X(), sp.Y() ) );
+    try {
+      SelectionPoint sp = new SelectionPoint( path, pt, null ); // OOM Exception
+      mPoints.add( sp );
+      sp.setBucket( getBucket( sp.X(), sp.Y() ) );
+    } catch ( OutOfMemoryError e ) { // unrecoverable error
+      TDLog.Error("OOM " + e.getMessage() );
+    }
 
     // if ( pt != null ) {
     //   TDLog.v("SELECT insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
@@ -237,7 +277,14 @@ class Selection
     // dumpBuckets();
   }
 
-  // FIXME this is called with dmin = 10f
+  /** find the closest point of the bucket containing a given point, provided it is close enough
+   * @param sp   selection point
+   * @param x    X coord
+   * @param y    Y coord
+   * @param dmin maximum acceptable distance
+   * @return minimum distance point or null
+   * @note this is called with dmin = 10f
+   */
   private SelectionPoint getBucketNearestPoint(SelectionPoint sp,float x,float y,float dmin)
   {
     SelectionPoint spmin = null;
@@ -258,12 +305,15 @@ class Selection
     return spmin;
   }
 
-  // get the nearest endpoint of a line having the same type as that of sp
-  // @param sp   selection point (hot item)
-  // @param x,y  point coords
-  // @param dmin maximum acceptable point-distance
-  // @param linetype type of the line
-  // FIXME this is called with dmin = 10f
+  /** get the nearest endpoint of a line having the same type as that of sp
+   * @param sp   selection point (hot item)
+   * @param x    point X coord
+   * @param y    point Y coord
+   * @param dmin maximum acceptable point-distance
+   * @param linetype type of the line
+   * @return minimum distance point or null
+   * @note this is called with dmin = 10f
+   */
   private SelectionPoint getBucketNearestLineEndPoint(SelectionPoint sp, float x, float y, float dmin, int linetype )
   {
     if ( sp.type() != DrawingPath.DRAWING_PATH_LINE ) return null;
@@ -294,6 +344,10 @@ class Selection
     return spmin;
   }
 
+  /** @return the selection point of a line corresponding to a line point
+   * @param line   line item
+   * @param pt     line point
+   */
   private SelectionPoint getBucketLinePoint( DrawingLinePath line, LinePoint pt )
   {
     float dmin = 1f;
@@ -309,6 +363,12 @@ class Selection
     return null;
   }
 
+  /** @return the selection point closest to (x,y) within a maximum distance
+   * @param sp    selection point for the initial search bucket
+   * @param x     X coord
+   * @param y     Y coord
+   * @param dmin  maximum acceptable distance
+   */
   SelectionPoint getNearestPoint( SelectionPoint sp, float x, float y, float dmin )
   {
     SelectionPoint spmin = getBucketNearestPoint( sp, x, y, dmin );
@@ -325,6 +385,13 @@ class Selection
     return spmin;
   }
 
+  /** @return the selection point, of a line endpoint, closest to (x,y) within a maximum distance
+   * @param sp    selection point for the initial search bucket
+   * @param x     X coord
+   * @param y     Y coord
+   * @param dmin  maximum acceptable distance
+   * @param linetype line type
+   */
   SelectionPoint getNearestLineEndPoint( SelectionPoint sp, float x, float y, float dmin, int linetype )
   {
     SelectionPoint spmin = getBucketNearestLineEndPoint( sp, x, y, dmin, linetype );
@@ -348,19 +415,29 @@ class Selection
     return spmin;
   }
 
+  /** remove a line point
+   * @param line   line item
+   * @param pt     line point
+   */
   void removeLineLastPoint( DrawingLinePath line, LinePoint pt )
   {
     SelectionPoint sp = getBucketLinePoint( line, pt );
     if ( sp != null ) removePoint( sp );
   }
 
+  /** remove a point
+   * @param sp  point to remove
+   */
   void removePoint( SelectionPoint sp ) // synchronized by CommandManager
   {
     sp.setBucket( null );
     mPoints.remove( sp ); 
   }
 
-  // for incremental update
+  /** remove the points of a splay item
+   * @param path   item
+   * @note for incremental update
+   */
   void removeSplayPath( DrawingPath path ) // synchronized by CommandManager
   {
     for ( SelectionPoint sp : mPoints ) {
@@ -371,6 +448,9 @@ class Selection
     }
   }
 
+  /** remove the points of an item
+   * @param path   item
+   */
   void removePath( DrawingPath path ) // synchronized by CommandManager
   {
     if ( path.mType == DrawingPath.DRAWING_PATH_LINE || path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -393,6 +473,10 @@ class Selection
     }
   }
 
+  /** remove a point-line point
+   * @param path   point-line item
+   * @param pt     line point
+   */
   void removeLinePoint( DrawingPointLinePath path, LinePoint lp ) // snchronized by CommandManager
   {
     if ( path.mType != DrawingPath.DRAWING_PATH_LINE && path.mType != DrawingPath.DRAWING_PATH_AREA ) return;
@@ -404,6 +488,9 @@ class Selection
     }
   }
 
+  /** @return the selection point of a line point
+   * @param pt     line point
+   */
   SelectionPoint getSelectionPoint( LinePoint lp )
   {
     // for ( SelectionPoint sp : mPoints ) {
@@ -423,12 +510,23 @@ class Selection
     return null;
   }
 
-
+  /** @return the selection point ...
+   * @param item    ...
+   * @param x       X coord
+   * @param y       Y coord
+   * @param radius  selection radius
+   */
   SelectionPoint selectOnItemAt( DrawingPath item, float x, float y, float radius ) // synchronized by CommandManager
   {
     return bucketSelectOnItemAt( item, x, y, radius );
   }
 
+  /** @return the selection point ...
+   * @param item    ...
+   * @param x       X coord
+   * @param y       Y coord
+   * @param radius  selection radius
+   */
   private SelectionPoint bucketSelectOnItemAt(DrawingPath item,float x,float y,float radius)
   {  
     float min_distance = radius;
@@ -449,6 +547,17 @@ class Selection
     return ret;
   }
 
+  /** select by type
+   * @param x        X coord
+   * @param y        Y coord
+   * @param radius   selection radius
+   * @param mode     ...
+   * @param sel      selection set (to be filled)
+   * @param legs     whether to include legs
+   * @param splays   whether to include splays
+   * @param stations whether to include stations
+   * @param station_splay ...
+   */
   private void bucketSelectAt(float x,float y,float radius,int mode,SelectionSet sel,boolean legs,boolean splays,boolean stations, DrawingStationSplay station_splay )
   {
     // TDLog.v( "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
@@ -526,12 +635,25 @@ class Selection
     }
   }
  
-  // select by type
+  /** select by type
+   * @param sel    selection set (to be filled)
+   * @param x      X coord
+   * @param y      Y coord
+   * @param radius selection radius
+   * @param type   selectable items type
+   */
   void selectAt( SelectionSet sel, float x, float y, float radius, int type )
   {
     bucketSelectAt( x, y, radius, type, sel );
   }
 
+  /** select by type
+   * @param x      X coord
+   * @param y      Y coord
+   * @param radius selection radius
+   * @param type   selectable items type
+   * @param sel    selection set (to be filled)
+   */
   private void bucketSelectAt(float x,float y,float radius,int type, SelectionSet sel )
   {
     // TDLog.v( "bucket select at " + x + " " + y + " R " + radius + " buckets " + mBuckets.size() );
@@ -547,12 +669,26 @@ class Selection
     } 
   }
   
+  /** select by type
+   * @param sel      selection set (to be filled)
+   * @param x        X coord
+   * @param y        Y coord
+   * @param radius   selection radius
+   * @param mode     ...
+   * @param legs     whether to include legs
+   * @param splays   whether to include splays
+   * @param stations whether to include stations
+   * @param station_splay ...
+   */
   void selectAt( SelectionSet sel, float x, float y, float radius, int mode, boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay )
   {
     bucketSelectAt( x, y, radius, mode, sel, legs, splays, stations, station_splay );
   }
 
-
+  /** @return the bucket containing (x,y)
+   * @param x   X coord
+   * @param y   Y coord
+   */
   private SelectionBucket getBucket( float x, float y )
   {
     for ( SelectionBucket bucket : mBuckets ) {
@@ -565,8 +701,9 @@ class Selection
     return ret;
   }
 
-  // check if the SelectionPoint is still in its bucket
-  // otherwise move it to the new bucket
+  /** check if the SelectionPoint is still in its bucket - otherwise move it to the new bucket
+   * @param sp   selection point
+   */
   void checkBucket( SelectionPoint sp ) 
   {
     if ( sp == null ) return;
@@ -584,6 +721,9 @@ class Selection
     }
   }
 
+  /** rebucket a point-line
+   * @param line   point-line item
+   */
   private void rebucketLinePath(DrawingPointLinePath line)
   {
     for ( LinePoint lp = line.first(); lp != null; lp = lp.mNext ) {

@@ -3834,6 +3834,10 @@ public class DrawingWindow extends ItemDrawer
     return 0;
   }
 
+  /** shift the canvas
+   * @param x_shift   X shift
+   * @param y_shift   Y shift
+   */
   private void moveCanvas( float x_shift, float y_shift )
   {
     if ( Math.abs( x_shift ) < TDSetting.mMinShift && Math.abs( y_shift ) < TDSetting.mMinShift ) {
@@ -3854,9 +3858,11 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // lp1    is the line (being drawn) to modify - a copy of the current linepath
-  // lp2    is used to get the line to join/continue - initialized to the current linepath
-  // return true is the line lp1 must be added to the sketch
+  /** try to join two lines
+   * @param lp1    is the line (being drawn) to modify - a copy of the current linepath
+   * @param lp2    is used to get the line to join/continue - initialized to the current linepath
+   * @return true is the line lp1 must be added to the sketch
+   */
   private boolean tryToJoin( DrawingLinePath lp1, DrawingLinePath lp2 )
   {
     if ( lp1 == null ) return false;
@@ -3918,6 +3924,12 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // -------------------------------------------------------------------------
+  /** begin an erase command
+   * @param xs   scene X coord
+   * @param ys   scene Y coord
+   * @param xc   canvas X coord 
+   * @param yc   canvas Y coord
+   */
   private void startErasing( float xs, float ys, float xc, float yc )
   {
     // TDLog.v("startErasing " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -3930,6 +3942,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** complete an erase command
+   */
   private void finishErasing()
   {
     mDrawingSurface.endEraser();
@@ -3941,6 +3955,11 @@ public class DrawingWindow extends ItemDrawer
   }
 
 
+  /** react to a touch event
+   * @param view  touched view
+   * @param rawEvent raw event
+   * @return ...
+   */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
     dismissPopups();
@@ -4012,6 +4031,13 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
+  /** react to a touch-up event
+   * @param xc   canvas X coord 
+   * @param yc   canvas Y coord
+   * @param xs   scene X coord
+   * @param ys   scene Y coord
+   * @return ...
+   */
   private boolean onTouchUp( float xc, float yc, float xs, float ys )
   {
     if ( onMenu ) {
@@ -4410,6 +4436,13 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
+  /** react to a touch-down event
+   * @param xc   canvas X coord 
+   * @param yc   canvas Y coord
+   * @param xs   scene X coord
+   * @param ys   scene Y coord
+   * @return ...
+   */
   private boolean onTouchDown( float xc, float yc, float xs, float ys )
   {
     mDrawingSurface.endEraser();
@@ -4532,6 +4565,15 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
+  /** react to a touch-move event
+   * @param xc   canvas X coord 
+   * @param yc   canvas Y coord
+   * @param xs   scene X coord
+   * @param ys   scene Y coord
+   * @param event motion event
+   * @param threePointers whether the event has three pointers
+   * @return ...
+   */
   private boolean onTouchMove( float xc, float yc, float xs, float ys, MotionEventWrap event, boolean threePointers )
   {
     // TDLog.v( "action MOVE mode " + mMode + " touch-mode " + mTouchMode);
@@ -4654,7 +4696,9 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-
+  /** ... section-line
+   * @param currentLine  current line
+   */
   private void doSectionLine( DrawingLinePath currentLine )
   {
     // TDLog.v("doSectionLine " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
@@ -4801,26 +4845,26 @@ public class DrawingWindow extends ItemDrawer
 
   // -------------------------------------------------------------
 
-    /** insert a therion label point (ILabelAdder)
-     * @param label  text
-     * @param x      X coord
-     * @param y      Y coord
-     * @param level  canvas level of the point
-     */
-    public void addLabel( String label, float x, float y, int level )
-    {
-      // TDLog.v("addLabel " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-      assert( mLastLinePath == null );
-      if ( label != null && label.length() > 0 ) {
-	if ( mLandscape ) { float t=x; x=-y; y=t; }
-        DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
-	label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
-	label_path.mLandscape = mLandscape;
-        label_path.mLevel = level;
-        mDrawingSurface.addDrawingPath( label_path );
-        modified();
-      } 
-    }
+  /** insert a therion label point (ILabelAdder)
+   * @param label  text
+   * @param x      X coord
+   * @param y      Y coord
+   * @param level  canvas level of the point
+   */
+  public void addLabel( String label, float x, float y, int level )
+  {
+    // TDLog.v("addLabel " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    assert( mLastLinePath == null );
+    if ( label != null && label.length() > 0 ) {
+      if ( mLandscape ) { float t=x; x=-y; y=t; }
+      DrawingLabelPath label_path = new DrawingLabelPath( label, x, y, mPointScale, null, mDrawingSurface.scrapIndex() );
+      label_path.setOrientation( BrushManager.getPointOrientation( mCurrentPoint ) ); // FIX Asenov
+      label_path.mLandscape = mLandscape;
+      label_path.mLevel = level;
+      mDrawingSurface.addDrawingPath( label_path );
+      modified();
+    } 
+  }
 
   // private String mMediaComment = null;
   // private long  mMediaId = -1L;
@@ -4870,14 +4914,15 @@ public class DrawingWindow extends ItemDrawer
 
   /** take a photo
    * @param imagefile   photo image file
-   * @param insert      whether to insert the point (?)
+   * @param insert      whether to insert the photo-point item
    * @param pid         plot ID
    */
   private void doTakePointPhoto( String imagefile, boolean insert, long pid )
   {
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
+      boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
-      new QCamCompass( this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), true, false).show();  // true = with_box, false=with_delay
+      new QCamCompass( this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false).show(); // false=with_delay
     } else {
       try {
         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
@@ -5155,6 +5200,10 @@ public class DrawingWindow extends ItemDrawer
    */
   boolean isStationSplaysOff( String st_name ) { return mDrawingSurface.isStationSplaysOff( st_name ); }
 
+  /** toggle hidden flag of a station
+   * @param st_name    station name
+   * @param is_hidden  whether the station is hidden (?)
+   */
   void toggleStationHidden( String st_name, boolean is_hidden )
   {
     String hide = mPlot1.hide.trim();
@@ -5216,6 +5265,10 @@ public class DrawingWindow extends ItemDrawer
   }
   //  mNum.setStationHidden( st_name, (hidden? -1 : +1) ); // if hidden un-hide(-1), else hide(+1)
 
+  /** toggle hidden flag of a station
+   * @param st_name    station name
+   * @param is_barrier whether the station is barrier (?)
+   */
   void toggleStationBarrier( String st_name, boolean is_barrier ) 
   {
     String view = mPlot1.view.trim();
@@ -6020,6 +6073,8 @@ public class DrawingWindow extends ItemDrawer
     mApp.doBluetoothButton( mActivity, this, b, -1 );
   }
 
+  /** set the icon of the "azimuth" button
+   */
   private void setButtonAzimuth()
   {
     // if ( mRotateAzimuth ) {
@@ -6028,6 +6083,8 @@ public class DrawingWindow extends ItemDrawer
     // }
   }
 
+  /** set the icon of the "range" button
+   */
   private void setButtonRange()
   {
     if ( BTN_BORDER < mButton3.length ) {
@@ -6586,6 +6643,10 @@ public class DrawingWindow extends ItemDrawer
 
   // --------------------------------------------------------------------------
 
+  /** save the sketch as PNG image
+   * @param uri   output URI
+   * @param type  plot type
+   */
   private void savePng( Uri uri, long type )
   {
     String fullname = null;
@@ -6612,6 +6673,12 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** internal save the sketch as PNG image
+   * @param uri       output URI
+   * @param manager   plot items 
+   * @param type      plot type
+   * @param filename  ...
+   */
   private void doSavePng( Uri uri, DrawingCommandManager manager, long type, final String filename )
   {
     if ( manager == null ) {

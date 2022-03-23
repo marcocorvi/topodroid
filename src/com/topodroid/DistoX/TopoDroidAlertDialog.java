@@ -21,16 +21,33 @@ import android.content.res.Resources;
 
 public class TopoDroidAlertDialog 
 {
+  /** make alert dialog with OK / CANCEL buttons
+   * @param context   context
+   * @param res       resources
+   * @param message   display message code
+   * @param pos       OK callback
+   */  
   public static void makeAlert( Context context, Resources res, int message, DialogInterface.OnClickListener pos )
   {
     makeAlert( context, res, res.getString(message), R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
+  /** make alert dialog with OK / CANCEL buttons
+   * @param context   context
+   * @param res       resources
+   * @param message   display message string
+   * @param pos       OK callback
+   */  
   public static void makeAlert( Context context, Resources res, String message, DialogInterface.OnClickListener pos )
   {
     makeAlert( context, res, message, R.string.button_cancel, R.string.button_ok, null, pos );
   }
 
+  /** make alert dialog with only OK button
+   * @param context   context
+   * @param res       resources
+   * @param message   display message code
+   */  
   public static void makeAlert( Context context, Resources res, int message )
   {
     makeAlert( context, res, res.getString(message), -1, R.string.button_ok, null, null );
@@ -50,6 +67,15 @@ public class TopoDroidAlertDialog
     // alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
     // alert.show();
 
+  /** make alert dialog with OK / CANCEL buttons
+   * @param context    context
+   * @param res        resources
+   * @param message    display message string
+   * @param ok         OK string (null to hide)
+   * @param no         CANCEL string (null to hide)
+   * @param ok_handler OK callback (null to default to nothing)
+   * @param no_handler CANCEL callback (null to default to nothing)
+   */  
   public static void makeAlert( Context context, Resources res, String message, 
              String ok, 
              String no,
@@ -88,6 +114,15 @@ public class TopoDroidAlertDialog
       alert.show();
   }
 
+  /** make alert dialog with OK / CANCEL buttons
+   * @param context    context
+   * @param res        resources
+   * @param message    display message string
+   * @param ok         OK string code (negative to hide)
+   * @param no         CANCEL string code (negative to hide)
+   * @param ok_handler OK callback (null to default to nothing)
+   * @param no_handler CANCEL callback (null to default to nothing)
+   */  
   public static void makeAlert( Context context, Resources res, String message, 
              int ok, 
              int no,
