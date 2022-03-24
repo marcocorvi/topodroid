@@ -1,9 +1,9 @@
-/* @file PhotoCommentDialog.java
+/* @file ShotPhotoDialog.java
  *
  * @author marco corvi
  * @date may 2012
  *
- * @brief TopoDroid photo dialog 
+ * @brief TopoDroid photo dialog for a shot
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -33,7 +33,7 @@ import android.view.View;
 // import android.view.View.OnKeyListener;
 // import android.view.KeyEvent;
 
-class PhotoCommentDialog extends MyDialog
+class ShotPhotoDialog extends MyDialog
                          implements View.OnClickListener
 {
   private final ShotWindow mParent;
@@ -49,9 +49,9 @@ class PhotoCommentDialog extends MyDialog
    * @param context   context
    * @param parent    parent shot list activity
    */
-  PhotoCommentDialog( Context context, ShotWindow parent, long sid )
+  ShotPhotoDialog( Context context, ShotWindow parent, long sid )
   {
-    super( context, R.string.PhotoCommentDialog );
+    super( context, R.string.ShotPhotoDialog );
     mParent = parent;
     mSid    = sid;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoComment");

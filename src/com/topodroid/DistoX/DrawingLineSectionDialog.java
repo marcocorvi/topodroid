@@ -229,7 +229,7 @@ class DrawingLineSectionDialog extends MyDialog
 
     if ( v.getId() == R.id.line_image ) {
       if ( mTdImage != null ) {
-        (new PhotoDialog( mContext, mFilename )).show();
+        (new PhotoViewDialog( mContext, mFilename )).show();
       }
       return;
     } else if ( v.getId() == R.id.button_cancel ) {

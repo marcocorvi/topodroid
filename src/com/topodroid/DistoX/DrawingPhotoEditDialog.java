@@ -111,7 +111,7 @@ class DrawingPhotoEditDialog extends MyDialog
       case R.id.photo_image:
         // TopoDroidApp.viewPhoto( mContext, mFilename );
 	if ( mTdImage != null ) {
-          (new PhotoDialog( mContext, mFilename )).show();
+          (new PhotoViewDialog( mContext, mFilename )).show();
         }
         return;
     }

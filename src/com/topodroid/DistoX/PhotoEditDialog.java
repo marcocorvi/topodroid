@@ -122,7 +122,7 @@ class PhotoEditDialog extends MyDialog
         mParent.dropPhoto( mPhoto );
         break;
       case R.id.photo_image:
-        (new PhotoDialog( mContext, mPhoto )).show();
+        (new PhotoViewDialog( mContext, mPhoto )).show();
         return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();

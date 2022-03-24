@@ -905,7 +905,7 @@ public class ShotWindow extends Activity
 
   void askPhotoComment( DBlock blk )
   {
-    (new PhotoCommentDialog(mActivity, this, blk.mId ) ).show();
+    (new ShotPhotoDialog(mActivity, this, blk.mId ) ).show();
   }
 
   /**
@@ -1075,7 +1075,7 @@ public class ShotWindow extends Activity
     switch ( reqCode ) {
       case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
         if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
-          // (new PhotoCommentDialog(this, this, mShotId) ).show();
+          // (new ShotPhotoDialog(this, this, mShotId) ).show();
           Bundle extras = intent.getExtras();
           Bitmap bitmap = (Bitmap) extras.get("data");
           mMediaManager.savePhoto( bitmap, 90 ); // compression = 90

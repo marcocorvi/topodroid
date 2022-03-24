@@ -1154,13 +1154,13 @@ public class DrawingWindow extends ItemDrawer
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
-    TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom + " orientation " + new_cfg.orientation );
     TDLocale.resetTheLocale();
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // setMenuAdapter( getResources(), mType );

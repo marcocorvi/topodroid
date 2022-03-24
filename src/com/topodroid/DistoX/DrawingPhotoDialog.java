@@ -63,7 +63,7 @@ class DrawingPhotoDialog extends MyDialog
   @Override
   public void onClick(View view)
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingPhotoDialog onClick() " + view.toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
     if (view.getId() == R.id.photo_ok ) {
       mActivity.addPhotoPoint( mComment.getText().toString(), mX, mY );
     // } else if ( view.getId() == R.id.photo_cancel ) {

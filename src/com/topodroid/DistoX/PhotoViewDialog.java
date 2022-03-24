@@ -1,4 +1,4 @@
-/* @file PhotoDialog.java
+/* @file PhotoViewDialog.java
  *
  * @author marco corvi
  * @date may 2012
@@ -23,7 +23,7 @@ import android.widget.Button;
 
 import android.view.View;
 
-class PhotoDialog extends MyDialog
+class PhotoViewDialog extends MyDialog
                   implements View.OnClickListener
 {
   private TDImage mTdImage = null;
@@ -35,9 +35,9 @@ class PhotoDialog extends MyDialog
    * @param context   context
    * @param photo     photo info
    */
-  PhotoDialog( Context context, PhotoInfo photo )
+  PhotoViewDialog( Context context, PhotoInfo photo )
   {
-    super( context, R.string.PhotoDialog );
+    super( context, R.string.PhotoViewDialog );
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     // TDLog.v("photo dialog id " + photo.id );
     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
@@ -48,9 +48,9 @@ class PhotoDialog extends MyDialog
    * @param context   context
    * @param filename  file path
    */
-  PhotoDialog( Context context, String filename )
+  PhotoViewDialog( Context context, String filename )
   {
-    super( context, R.string.PhotoDialog );
+    super( context, R.string.PhotoViewDialog );
     // TDLog.v("photo dialog file " + filename );
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     mTdImage = new TDImage( filename );

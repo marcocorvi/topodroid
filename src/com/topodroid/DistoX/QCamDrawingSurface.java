@@ -22,13 +22,16 @@ import android.content.Context;
 import android.graphics.ImageFormat;
 
 // API-21 use android.hardware.camera2 clases
+import android.hardware.SensorManager;
 import android.hardware.Camera;
+import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
 
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
+import android.view.OrientationEventListener;
 
 import android.util.AttributeSet;
 
@@ -40,11 +43,10 @@ public class QCamDrawingSurface extends SurfaceView
                                 implements SurfaceHolder.Callback 
 {
   QCamCompass mQCam;
+  private Context mContext;
 
   private Boolean mDoDraw;
   private SurfaceHolder mHolder;
-  int mWidth;            // canvas width
-  int mHeight;           // canvas height
 
   private Camera mCamera = null;
   private Camera.PreviewCallback mPreviewCallback;
@@ -54,6 +56,8 @@ public class QCamDrawingSurface extends SurfaceView
   byte[] mJpegData;
 
   // MyOrientationListener mOrientationListener = null;
+  // private OrientationEventListener mOrientationListener = null;
+  // private int mOrientation = 0;
 
   // class MyOrientationListener extends OrientationEventListener
   // {
@@ -99,7 +103,7 @@ public class QCamDrawingSurface extends SurfaceView
   public QCamDrawingSurface(Context context, AttributeSet attrs)
   {
     super(context, attrs);
-    // mContext = context;
+    mContext = context;
     // TDLog.v( "QCam Surface cstr" );
     mHolder = getHolder();
     mHolder.addCallback(this);
@@ -110,8 +114,6 @@ public class QCamDrawingSurface extends SurfaceView
     mJpegData = null;
 
     createCallbacks();
-    mWidth  = (int)TopoDroidApp.mDisplayHeight;
-    mHeight = (int)TopoDroidApp.mDisplayWidth;  // default values
   }
 
 
@@ -127,10 +129,8 @@ public class QCamDrawingSurface extends SurfaceView
     if ( mHolder.getSurface() == null) { // preview surface does not exist
       return;
     }
-    stop();
     // set preview size and make any resize, rotate or reformatting changes here
     setPreviewSize(); // this is necessary to have correct aspect ratio
-    start();
   }
 
   /** called when the surface is created
@@ -142,7 +142,15 @@ public class QCamDrawingSurface extends SurfaceView
     try {
       mCamera = Camera.open();
       mCamera.setPreviewDisplay( holder );
-      // mCamera.startPreview();
+      // mOrientationListener = new OrientationEventListener( mContext, SensorManager.SENSOR_DELAY_NORMAL ) {
+      //   public void onOrientationChanged( int orientation ) 
+      //   { 
+      //     if ( orientation >= 0 ) mOrientation = orientation; 
+      //   }
+      // };
+      // mOrientationListener.enable();
+      setMinimumWidth( mContext.getResources().getDisplayMetrics().widthPixels );
+      setMinimumHeight( mContext.getResources().getDisplayMetrics().heightPixels );
     } catch (Exception e) {
       TDLog.Error( "QCAN Error setting camera preview: " + e.getMessage());
     }
@@ -154,45 +162,62 @@ public class QCamDrawingSurface extends SurfaceView
   public void surfaceDestroyed(SurfaceHolder holder) // release the camera preview in QCamCompass
   {
     TDLog.v( "surface destroyed " );
+    // if ( mOrientationListener != null ) mOrientationListener.disable();
     close();
   }
 
+  /** set the preview size
+   * @note this method first stops the preview, then it starts the preview
+   */
   private void setPreviewSize()
   {
-    if ( mCamera != null ) {
-      Camera.Parameters params = mCamera.getParameters();
-      Camera.Size size = params.getPreviewSize();
-      mWidth  = size.width;
-      mHeight = size.height;
-      TDLog.v( "QCam preview size: width " + size.width + " " + mWidth + " height " + size.height + " " + mHeight );
-      // mWidth  = (int)TopoDroidApp.mDisplayHeight;
-      // mHeight = (int)TopoDroidApp.mDisplayWidth;
-      setMinimumWidth( mWidth );
-      setMinimumHeight( mHeight );
-      // setTop(0); // set top with respect to parent
-      // setLeft(0);
+    if ( mCamera == null ) return;
+    
+    int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
+
+    stop();
+    // CameraInfo info = new CameraInfo(); // info.orientation is fixed to the value that has been set (90)
+    // mCamera.getCameraInfo( 0, info );
+    // Camera.Parameters params = mCamera.getParameters();
+    // Camera.Size size = params.getPreviewSize();
+    // TDLog.v( "QCAM preview size " + size.width + " " + size.height + " orientation " + o + " " + info.orientation + " " + mOrientation );
+    if  ( o == 1 ) {
+      // params.setPreviewSize( width, height );
+      mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
+    } else {
+      mCamera.setDisplayOrientation( 0 );
+      // params.setPreviewSize( height, width );
     }
+    // mCamera.setParameters( params );
+    start();
   }
 
-  /** react to a measure of the view and its content - invoked by measure( int, in )
-   * @param measuredWidth  measured width
-   * @param measuredHeight measured height
-   */
-  @Override
-  public void onMeasure( int measuredWidth, int measuredHeight )
-  {
-    int w = getSuggestedMinimumWidth();
-    int h = getSuggestedMinimumHeight();
-    // TDLog.v( "QCAM surface on measure " + measuredWidth + " " + measuredHeight + " " + w + " " + h );
-    if ( w == 0 || h == 0 ) { 
-      super.onMeasure( measuredWidth, measuredHeight );
-    } else {
-      // exchange w-h because the orientation is ORIENTATION_RIGHT (90)
-      setMeasuredDimension( h, w );
-      setMinimumWidth( w );
-      setMinimumHeight( h );
-    }
-  }
+  // /** react to a measure of the view and its content - invoked by measure( int, in )
+  //  * @param measuredWidth  measured width
+  //  * @param measuredHeight measured height
+  //  * DEBUG: some printouts
+  //  */
+  // @Override
+  // public void onMeasure( int measuredWidth, int measuredHeight )
+  // {
+  //   int w = getSuggestedMinimumWidth();
+  //   int h = getSuggestedMinimumHeight();
+  //   int orientation = mContext.getResources().getConfiguration().orientation;
+  //   TDLog.v( "QCAM on measure " + measuredWidth + " " + measuredHeight + " suggested " + w + " " + h + " orientation " + orientation );
+  //   super.onMeasure( measuredWidth, measuredHeight );
+  //   // if ( w == 0 || h == 0 ) { 
+  //   //   super.onMeasure( measuredWidth, measuredHeight );
+  //   // } else {
+  //   //   // exchange w-h because the orientation is ORIENTATION_RIGHT (90)
+  //   //   if ( orientation == 1 ) { // portrait
+  //   //     setMeasuredDimension( h, w );
+  //   //   } else { // orientation == 2 // landscape
+  //   //     setMeasuredDimension( w, h );
+  //   //   }
+  //   //   // setMinimumWidth( w );
+  //   //   // setMinimumHeight( h );
+  //   // }
+  // }
 
   /** take a picture
    * @param orientation   display orientation ???
@@ -289,12 +314,11 @@ public class QCamDrawingSurface extends SurfaceView
   //     // setMinimumHeight( size.height );
   //     try {
   //       mCamera.setDisplayOrientation( 90 );
-  //       mCamera.setPreviewDisplay( mHolder );
   //     } catch ( IOException e ) {
   //       TDLog.Error( "QCAM cannot set preview display " + e.getMessage() );
   //     }
   //     // if ( mOrientationListener != null ) mOrientationListener.enable( );
-  //     mCamera.startPreview();
+  //     start();
   //     return true;
   //   } catch ( RuntimeException e ) { // fail to connect to canera service
   //     if ( mCamera != null ) mCamera.release();
@@ -312,8 +336,9 @@ public class QCamDrawingSurface extends SurfaceView
     TDLog.v("QCAM preview start");
     if ( mCamera != null ) {
       try { // start preview with new settings
-        mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
-        mCamera.setPreviewDisplay(mHolder);
+        // mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
+        // mCamera.setPreviewDisplay(mHolder);
+
         // if ( mOrientationListener != null ) mOrientationListener.enable( );
         mCamera.startPreview();
       } catch ( Exception e ) {

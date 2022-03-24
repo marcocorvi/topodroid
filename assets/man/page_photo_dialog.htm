@@ -1,16 +1,59 @@
-<html><body>
+<html>
+<body>
 
-<h4>SKETCH PHOTO ITEM</h4>
+<h4>SHOT/SKETCH PHOTO</h4>
 
 <div style="font-size=90%">
-This dialog is opened when you insert a photo, in drawing mode in the <u>sketch window</u>.<br><p>
+This dialog is opened from the <i>Photo</i> button in the secondary <i>Shot edit</i> dialog, or when a "photo" point
+or a photo xsection are inserted
+in the <u>sketch window</u>.<br><p>
 
-Photo properties:
+It has a text field for the <b>comment</b> to the photo you are going to take.<br><p>
+
+Uncheck the box <b>TopoDroid camera</b> if you want to use a Camera app instead of the TopoDroid camera.<br><p>
+
+Buttons:
 <ul>
-<li><b>comment</b></li>
+<li><b>OK</b> closes the dialog and starts to take a photo.</li>
+<li><b>Cancel</b> closes the dialog.</li>
+</ul><br><p>
+
+<b>TopoDroid camera</b><br>
+This is a simple implementation of a camera. 
+Its unique feature is that it stores the azimuth and inclination of the device in exif tags in the image file. 
+The azimuth is stored as GPS_LONGITUDE and the inclination as GPS_LATITUDE (with sign).
+<br>
+The following exif tags are set by TopoDroid:
+<ul>
+<li><i>Software</i>: "TopoDroid" and its version, separated by a space</li>
+<li><i>Orientation</i>:</li>
+<li><i>Datatime</i>: timestamp</li>
+<li><i>GPS latitude</i>: inclination</li>
+<li><i>GPS latitude ref</i>: "N"</li>
+<li><i>GPS longitude</i>: azimuth</li>
+<li><i>GPS longitude ref</i>: "E"</li>
+<li><i>Image description</i>: azimuth and inclination in 1/100&deg;, separaated by a space</li>
 </ul>
+<br><p>
+
+For "photo" point or photo xsection the display has a centered overlaid cross-hair.<br><p>
+
+The camera has three buttons on the lower right.
+<ul>
+<li><b>camera</b>. Red: ready, tap to take a picture. Blue: on hold, tap to turn camera active.</li>
+<li><b>save</b> saves the picture</li>
+<li><b>back</b> closes the window</li>
+</ul>
+
+With the screen up the picture is portrait.
+When the screen is turned to the left the picture is landscape. 
+When the screen is turned to the right the picture is landscape and upside-down.<br><p>
+
+Zoom buttns are brought up by tapping the screen in the lower mid.
+To go through large zoom steps tap the zoom buttons repeatedly fast.
 </div><br><p>
 
-Other properties are stored in the <a href="page_photo_comment.htm">exif tags</a> of the image file.
 
-</body></html>
+</body>
+</html>
+
