@@ -1109,7 +1109,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_note">Survey notes</string>
     <string name="title_packet_dialog">Packets</string>
     <string name="title_photo">More shot edit</string>
-    <string name="title_photo_comment">Photo comment</string>
+    <string name="title_photo_comment">Photo info</string>
     <string name="title_photo_list">Photos</string>
     <string name="title_photo_view">Photo</string>
     <string name="title_plot_save">Export sketch</string>

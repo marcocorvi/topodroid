@@ -37,6 +37,9 @@ public class TDImage
   private int mImageWidth  = 0;
   private int mImageHeight = 0;
 
+  /** cstr
+   * @param filename   file path
+   */
   public TDImage( String filename )
   {
     mFilename = filename;
@@ -72,6 +75,12 @@ public class TDImage
     // TDLog.v( "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
   }
 
+  /** read the image info from the EXIF
+   *  - orientation
+   *  - azimuth (gps_longitude or image_description)
+   *  - clino (gps_latitude or image_description)
+   *  - date (datetime)
+   */
   private void readExif()
   {
     try {
@@ -114,16 +123,21 @@ public class TDImage
     }
   }
 
-  // 6 = upward
-  // 8 = downward
-  // 1 = leftward
-  // 3 = rightward
+  /** @return true if the image is portrait - exif orientations:
+   * 6 = upward
+   * 8 = downward
+   * 1 = leftward
+   * 3 = rightward
+   */
   public boolean isPortrait() { return mOrientation == 6 || mOrientation == 8; }
 
-  // @param view
-  // @param ww     width
-  // @param hh     height
-  // @param orient whether to apply image orientation
+  /** fill the view with the image
+   * @param view   view to fill
+   * @param ww     width
+   * @param hh     height
+   * @param orient whether to apply image orientation
+   * @return true on success
+   */
   public boolean fillImageView( ImageView view, int ww, int hh, boolean orient )
   {
     if ( mImage == null ) return false;
@@ -158,18 +172,25 @@ public class TDImage
   //   return fillImageView( view, (int)(TopoDroidApp.mDisplayWidth), (int)(TopoDroidApp.mDisplayHeight), false );
   // }
 
+  /** recycle image and thumbnail
+   */
   public void recycleImages()
   {
     if ( mImage != null ) mImage.recycle();
     if ( mImage2 != null ) mImage2.recycle();
   }
   
-  // EXIF orientation is detailed in MyBearingAndClino
-  //                           up
-  // 1: no rotation            6
-  // 6: rotate right    left 1-+-3 right
-  // 3: rotate 180             8
-  // 8: rotate left            down
+  /** apply the image bitmap to the image view using an orientation
+   * @param image       image view
+   * @param bitmap      image bitmap
+   * @param orientation orientation
+   * EXIF orientation is detailed in MyBearingAndClino
+   *                           up
+   * 1: no rotation            6
+   * 6: rotate right    left 1-+-3 right
+   * 3: rotate 180             8
+   * 8: rotate left            down
+   */
   private static void applyOrientation( ImageView image, Bitmap bitmap, int orientation )
   {
     Matrix m = new Matrix();

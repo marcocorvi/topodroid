@@ -27,6 +27,16 @@ class PhotoInfo
   String mComment;
   int mCamera;
 
+  /** cstr
+   * @param _sid     survey id
+   * @param _id      id 
+   * @param _shitid  shot id
+   * @param t        title
+   * @param sn       shot name
+   * @param dt       datetime
+   * @param cmt      comment
+   * @param camera   camera type
+   */
   PhotoInfo( long _sid, long _id, long _shotid, String t, String sn, String dt, String cmt, int camera )
   {
     sid    = _sid;
@@ -44,6 +54,8 @@ class PhotoInfo
   //   return String.format( "%d-%03d", sid, id );
   // }
 
+  /** @return string presentation
+   */
   public String toString()
   {
     return id 
@@ -51,6 +63,8 @@ class PhotoInfo
            + "> " + mComment; 
   }
 
+  /** @return debug string presentation
+   */
   String debugString()
   {
     return id  

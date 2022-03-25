@@ -45,6 +45,8 @@ class PhotoEditDialog extends MyDialog
 
   /**
    * @param context   context
+   * @param parent    photo listing
+   * @param photo     photo info
    */
   PhotoEditDialog( Context context, PhotoListDialog parent, PhotoInfo photo )
   {
@@ -105,6 +107,10 @@ class PhotoEditDialog extends MyDialog
     // TDLog.v( "photo edit dialog on create done");
   }
 
+  /** react to a user tap
+   * @param v   tapped view: it can be OK button, DELETE button, or the image thumbnail
+   */
+  @Override
   public void onClick(View v) 
   {
     // Button b = (Button) v;
@@ -129,6 +135,8 @@ class PhotoEditDialog extends MyDialog
     dismiss();
   }
 
+  /** react to a user tap on BACK - recycle the image
+   */
   @Override
   public void onBackPressed()
   {

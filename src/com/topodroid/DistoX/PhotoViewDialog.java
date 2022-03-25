@@ -29,6 +29,7 @@ class PhotoViewDialog extends MyDialog
   private TDImage mTdImage = null;
 
   private ImageView mView2;
+  private String mTitle = null;
   // private Button   mButtonCancel;
 
   /** cstr
@@ -42,6 +43,7 @@ class PhotoViewDialog extends MyDialog
     // TDLog.v("photo dialog id " + photo.id );
     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
     mTdImage = new TDImage( filename );
+    mTitle   = photo.mTitle;
   }
 
   /** cstr
@@ -73,6 +75,7 @@ class PhotoViewDialog extends MyDialog
     mView2.invalidate();
 
     ( (Button) findViewById(R.id.photo_back ) ).setOnClickListener( this );
+    if (mTitle != null) setTitle( mTitle );
   }
 
   /** implements click listener
