@@ -90,6 +90,13 @@ public class TDImage
       // TDLog.v( "Photo edit orientation " + mOrientation );
       String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
       String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
+      String bref = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF );
+      String cref = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE_REF );
+      int bsign = 1;
+      int csign = 1;
+      if ( bref.startsWith("W") || bref.startsWith("-") || bref.startsWith("West") ) bsign = -1; 
+      if ( cref.startsWith("S") || cref.startsWith("-") || cref.startsWith("South") ) csign = -1; 
+
       mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
       // TDLog.v( "TD image bearing " + b + " clino " + c + " date " + mDate );
       if ( mDate == null ) mDate = "";
@@ -107,16 +114,16 @@ public class TDImage
         }
       }
       if ( b != null && c != null ) {
-        // TDLog.v( "b " + b + " c " + c );
+        TDLog.v( "b " + b + " " + bref + " c " + c + " " + cref );
         int k = b.indexOf('/');
 	if ( k >= 0 ) {
-          try { mAzimuth = Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+          try { mAzimuth = bsign * Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
 	}
         k = c.indexOf('/');
 	if ( k >= 0 ) {
-          try { mClino = Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
+          try { mClino = csign * Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
 	}
-        // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + ">" );
+        TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
       }
     } catch ( IOException e ) {
       TDLog.Error("failed exif interface " + mFilename );

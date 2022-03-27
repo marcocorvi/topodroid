@@ -111,7 +111,7 @@ public class MyBearingAndClino implements IBearingAndClino
    */
   static void setExifBearingAndClino( String filepath, float b, float c, int o )
   {
-    // TDLog.v( "BearingClino UI set exif " + b + " " + c + " file " + filepath );
+    TDLog.v( "BearingClino UI set exif " + b + " " + c + " file " + filepath );
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", b, c );
@@ -121,13 +121,26 @@ public class MyBearingAndClino implements IBearingAndClino
       }
       exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
-      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", (int)(c*100) ) );
-      exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
-      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", (int)(b*100) ) );
-      exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
+      int cint = (int)(c*100);
+      int bint = (int)(b*100);
+      TDLog.v("EXIF b " + bint + " c " + cint );
+      if ( cint >= 0 ) {
+        exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", cint ) );
+        exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
+      } else {
+        exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", -cint ) );
+        exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "S" );
+      }
+      if ( bint >= 0 ) {
+        exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", bint ) );
+        exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "E" );
+      } else {
+        exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE, String.format(Locale.US, "%d/100", -bint ) );
+        exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "W" );
+      }
       // FIXME-GPS_LATITUDE work-around for tag GPS Latitude not supported correctly
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
-        exif.setAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION, String.format(Locale.US, "%d %d", (int)(b*100), (int)(c*100) ) );
+        exif.setAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION, String.format(Locale.US, "%d %d", bint, cint ) );
       }
       exif.saveAttributes();
     } catch ( IOException e ) {
