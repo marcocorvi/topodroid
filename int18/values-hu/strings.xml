@@ -551,9 +551,9 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="shot_compass">iránytű</string -->
     <string name="shot_delete">Törli a mérést?</string>
     <string name="shots_delete">Törli a méréseket ?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Mérési pontokra hivatkozó keresztmetszetek.\nTörli a méréseket?</string>
+    <string name="shot_rename_unsafe">Mérési pontokra hivatkozó keresztmetszetek.\nÁtnevezi a mérést?</string>
+    <string name="shots_rename_unsafe">Mérési ponoktra hivatkozó keresztmetszetek.\nÁtnevezi a méréseket?</string>
     <string name="shot_check">Mérés megjelölése ellenőrző mérésként</string>
     <string name="shot_from">Honnan</string>
     <string name="shot_info">Írd be a mérés adatait</string>
