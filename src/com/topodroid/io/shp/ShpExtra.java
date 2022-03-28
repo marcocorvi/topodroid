@@ -11,7 +11,7 @@
  */
 package com.topodroid.io.shp;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
@@ -24,6 +24,8 @@ import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDUtil;
+import com.topodroid.ui.ExifInfo;
+
 
 // import java.io.File;
 // import java.io.FileOutputStream;
@@ -113,7 +115,16 @@ public class ShpExtra extends ShpObject
       // TDLog.v( "POINT " + cnt + ": " + pt.getThName() +  " orient " +  (int)pt.mOrientation + " scale " +  pt.getScale() + " level " + pt.mLevel + " scrap " + pt.mScrap );
       writeShxRecord( offset, shpRecLen );
       fields[0] = pt.getThName( );
-      fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
+      if ( BrushManager.isPointPhoto( pt.mPointType ) ) {
+        DrawingPhotoPath photo = (DrawingPhotoPath)pt;
+        long photo_id = photo.getId(); // filepath = id.jpg
+        String filepath = TDPath.getJpgFile( photo_id + ".jpg" );
+        ExifInfo exif = new ExifInfo( filepath );
+        fields[1] = new String( blankPadded( (int)(exif.azimuth()), SIZE_ORIENT ) );
+        // TDLog.v("SHP photo id " + photo_id + " path " + filepath + " orientation " + exif.azimuth() );
+      } else {
+        fields[1] = new String( blankPadded( (int)pt.mOrientation, SIZE_ORIENT ) ); 
+      }
       fields[2] = new String( blankPadded( pt.getScale(), SIZE_SCALE ) );
       fields[3] = Integer.toString( pt.mLevel );
       fields[4] = Integer.toString( pt.mScrap ); 

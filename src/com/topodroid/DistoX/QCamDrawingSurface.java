@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.ui.ExifInfo;
 // import com.topodroid.prefs.TDSetting;
 
 import java.io.IOException;
@@ -155,7 +156,7 @@ public class QCamDrawingSurface extends SurfaceView
     // TDLog.v( "QCAM preview size " + size.width + " " + size.height + " orientation " + o + " " + info.orientation + " " + mOrientation );
     // TDLog.v( "QCAM preview orientation " + o + " " + mOrientation );
     if  ( o == 1 ) {
-      mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
+      mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
     } else {
       if ( mOrientation > 180 ) {
         mCamera.setDisplayOrientation( 0 );
@@ -282,7 +283,7 @@ public class QCamDrawingSurface extends SurfaceView
     // TDLog.v("QCAM preview start");
     if ( mCamera != null ) {
       try { // start preview with new settings
-        // mCamera.setDisplayOrientation( MyBearingAndClino.ORIENTATION_RIGHT );
+        // mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
         // mCamera.setPreviewDisplay(mHolder);
 
         // if ( mOrientationListener != null ) mOrientationListener.enable( );

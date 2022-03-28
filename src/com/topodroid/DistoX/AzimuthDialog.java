@@ -17,6 +17,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.ExifInfo;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.Locale;
@@ -165,7 +166,7 @@ class AzimuthDialog extends MyDialog
     mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setBearingAndClino( (progress+180)%360, 0, MyBearingAndClino.ORIENTATION_UP ); // clino 0, orientation 0
+          setBearingAndClino( (progress+180)%360, 0, ExifInfo.ORIENTATION_UP ); // clino 0, orientation 0
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }

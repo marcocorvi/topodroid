@@ -15,6 +15,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.ExifInfo;
 import com.topodroid.prefs.TDSetting;
 
 import android.app.Dialog;
@@ -120,6 +121,7 @@ class QCamCompass extends Dialog
     requestWindowFeature( Window.FEATURE_NO_TITLE );
     setContentView(R.layout.qcam_compass);
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
+    // lock screen orientation
 
     mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface );
     mSurface.mQCam = this;
@@ -175,7 +177,7 @@ class QCamCompass extends Dialog
     TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c );
     mBearing = b;
     mClino   = c;
-    mOrientation = MyBearingAndClino.getCameraOrientation( o );
+    mOrientation = ExifInfo.getCameraOrientation( o );
     // TDLog.v( "QCAM compass orient " + o + " --> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
@@ -237,6 +239,7 @@ class QCamCompass extends Dialog
       if ( mInserter != null ) mInserter.insertPhoto();
       // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
     }
+    // unlock screen orientation
     dismiss();
   }
 

@@ -155,6 +155,7 @@
 
         <activity android:name=".ShotWindow"
 	  android:theme="@style/Theme.FullScreen"
+          android:screenOrientation="fullSensor"
           android:configChanges="orientation|screenSize"
           >
         </activity>

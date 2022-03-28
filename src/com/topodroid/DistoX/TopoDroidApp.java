@@ -76,13 +76,14 @@ import android.os.RemoteException;
 import android.database.sqlite.SQLiteDatabase;
 
 import android.app.Application;
+import android.app.Activity;
 // import android.app.Notification;
 // import android.app.NotificationManager;
 // import android.app.KeyguardManager;
 // import android.app.KeyguardManager.KeyguardLock;
-// import android.app.Activity;
 
 import android.content.Context;
+import android.content.pm.ActivityInfo;
 // import android.content.Intent;
 // import android.content.ActivityNotFoundException;
 import android.content.IntentFilter;
@@ -99,7 +100,7 @@ import android.net.Uri;
 // import android.provider.Settings.System;
 // import android.provider.Settings.SettingNotFoundException;
 
-// import android.view.WindowManager;
+import android.view.WindowManager;
 // import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 
@@ -2828,5 +2829,32 @@ public class TopoDroidApp extends Application
   //   }
   //   return false;
   // }
+
+  // ------------------------------------------------------------------
+  // SCREEN ORIENTATION
+
+  /** lock/unlock the screen orientation for an activity
+   * @param activity activity
+   * @param lock     whether to lock or unlock
+   * @note from https://riptutorial.com/android/example/21077/lock-screen-s-rotation-programmatically
+   */ 
+  static void lockScreenOrientation( Activity activity, boolean lock ) 
+  {
+    if ( lock ) {
+      int currentOrientation = activity.getResources().getConfiguration().orientation;
+      if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE ) {
+        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE );
+      } else {
+        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT );
+      }
+    } else { // unlock
+      activity.getWindow().clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE );
+      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) { // API-18
+        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_USER );
+      // } else {
+      //   activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR );
+      // }
+    }
+  }
 
 }

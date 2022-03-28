@@ -27,10 +27,7 @@ import android.media.ExifInterface; // REQUIRES android.support
 public class TDImage
 {
   private String mFilename;
-  private float  mAzimuth = 0;
-  private float  mClino   = 0;
-  private int mOrientation = 0;
-  private String mDate = "";
+  private ExifInfo mExif; 
 
   private Bitmap mImage    = null;
   private Bitmap mImage2   = null;
@@ -43,14 +40,14 @@ public class TDImage
   public TDImage( String filename )
   {
     mFilename = filename;
-    readExif();
+    mExif = new ExifInfo( filename );
     decodeImage();
     // TDLog.v( "TD image " + filename );
   }
 
-  public float azimuth() { return mAzimuth; }
-  public float clino()   { return mClino; }
-  public String date()   { return mDate; }
+  public float azimuth() { return mExif.azimuth(); }
+  public float clino()   { return mExif.clino(); }
+  public String date()   { return mExif.date(); }
   public int width()     { return mImageWidth; }
   public int height()    { return mImageHeight; }
 
@@ -75,68 +72,13 @@ public class TDImage
     // TDLog.v( "photo: file " + mFilename + " image " + mImageWidth + "x" + mImageHeight + " req. size " + required_size + " scale " + scale );
   }
 
-  /** read the image info from the EXIF
-   *  - orientation
-   *  - azimuth (gps_longitude or image_description)
-   *  - clino (gps_latitude or image_description)
-   *  - date (datetime)
-   */
-  private void readExif()
-  {
-    try {
-      ExifInterface exif = new ExifInterface( mFilename );
-      // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
-      // TDLog.v( "Photo edit orientation " + mOrientation );
-      String b = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
-      String c = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
-      String bref = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF );
-      String cref = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE_REF );
-      int bsign = 1;
-      int csign = 1;
-      if ( bref.startsWith("W") || bref.startsWith("-") || bref.startsWith("West") ) bsign = -1; 
-      if ( cref.startsWith("S") || cref.startsWith("-") || cref.startsWith("South") ) csign = -1; 
-
-      mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
-      // TDLog.v( "TD image bearing " + b + " clino " + c + " date " + mDate );
-      if ( mDate == null ) mDate = "";
-      if ( b == null || c == null ) { // FIXME-GPS_LATITUDE work-around for tag GPSLatitude not working
-        if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
-          String u = exif.getAttribute( ExifInterface.TAG_IMAGE_DESCRIPTION );
-          // TDLog.v( "Photo desc " + u );
-          if ( u != null ) {
-            String[] vals = u.split(" ");
-            if (vals.length > 1) {
-              if (b == null) b = vals[0] + "/100";
-              if (c == null) c = vals[1] + "/100";
-            }
-          }
-        }
-      }
-      if ( b != null && c != null ) {
-        TDLog.v( "b " + b + " " + bref + " c " + c + " " + cref );
-        int k = b.indexOf('/');
-	if ( k >= 0 ) {
-          try { mAzimuth = bsign * Integer.parseInt( b.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
-	}
-        k = c.indexOf('/');
-	if ( k >= 0 ) {
-          try { mClino = csign * Integer.parseInt( c.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
-	}
-        TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
-      }
-    } catch ( IOException e ) {
-      TDLog.Error("failed exif interface " + mFilename );
-    }
-  }
-
   /** @return true if the image is portrait - exif orientations:
    * 6 = upward
    * 8 = downward
    * 1 = leftward
    * 3 = rightward
    */
-  public boolean isPortrait() { return mOrientation == 6 || mOrientation == 8; }
+  public boolean isPortrait() { return mExif.isPortrait(); }
 
   /** fill the view with the image
    * @param view   view to fill
@@ -162,14 +104,14 @@ public class TDImage
     //   ww = (int)( mImageWidth * hh / mImageHeight );
     // }
       
-    // TDLog.v( "fill image view w " + ww + " h " + hh + " orientation " + mOrientation );
+    // TDLog.v( "fill image view w " + ww + " h " + hh + " orientation " + mExif.orientation() );
     if ( ww <= 0 || hh <= 0 ) return false;
     if ( mImage2 != null ) mImage2.recycle();
     mImage2 = Bitmap.createScaledBitmap( mImage, ww, hh, true );
     if ( mImage2 == null ) return false;
 
-    // MyBearingAndClino.applyOrientation( view, mImage2, (orient? mOrientation : 6) );
-    applyOrientation( view, mImage2, mOrientation );
+    // MyBearingAndClino.applyOrientation( view, mImage2, (orient? mExif.orientation() : 6) );
+    applyOrientation( view, mImage2, mExif.orientation() );
     return true;
   }
 

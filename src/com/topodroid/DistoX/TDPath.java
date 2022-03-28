@@ -378,9 +378,9 @@ public class TDPath
 
   /** @return the current survey photo file full pathname
    * @param name photo filename, ie, <index>.jpg
-   * @note used by Archiver and DrawingWindow
+   * @note used by Archiver, DrawingWindow, and ShpPoint
    */
-  static String getJpgFile( String name )   { return APP_PHOTO_PATH + "/" + name; }
+  static public String getJpgFile( String name )   { return APP_PHOTO_PATH + "/" + name; }
 
   /** @return the current survey audio file full pathname
    * @param name audio filename, ie, <index>.wav

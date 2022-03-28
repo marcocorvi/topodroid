@@ -17,6 +17,7 @@ import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.ui.ExifInfo;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 
@@ -84,9 +85,7 @@ class ShotNewDialog extends MyDialog
   private static boolean mLRUDatTo = false;
   private boolean sensorCheck = false;
   private boolean cameraCheck = false;
-  private float mBearing;
-  private float mClino;
-  private int mOrientation;
+  private ExifInfo mExif;
 
   private TimerTask mTimer;
   private MyKeyboard mKeyboard = null;
@@ -112,6 +111,7 @@ class ShotNewDialog extends MyDialog
     sensorCheck = TDSetting.mWithAzimuth && TDLevel.overNormal;
     cameraCheck = TDSetting.mWithAzimuth && TDLevel.overAdvanced && TDandroid.checkCamera( mApp );
     diving = (TDInstance.datamode == SurveyInfo.DATAMODE_DIVING);
+    mExif = new ExifInfo();
   }
 
 
@@ -335,9 +335,7 @@ class ShotNewDialog extends MyDialog
   public void setBearingAndClino( float b, float c, int o )
   {
     // TDLog.v( "New shot dialog set orientation " + o + " bearing " + b + " clino " + c );
-    mBearing = b;
-    mClino   = c;
-    mOrientation = o;
+    mExif.setValues( b, c, o );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
@@ -601,7 +599,7 @@ class ShotNewDialog extends MyDialog
             fos.write( mJpegData );
             // fos.flush();
             fos.close();
-	    MyBearingAndClino.setExifBearingAndClino( filepath, mBearing, mClino, mOrientation );
+            mExif.writeExif( filepath );
             TopoDroidApp.mData.insertPhoto( TDInstance.sid, photo_id, blk.mId,
                                     "",
                                     TDUtil.currentDate(),
