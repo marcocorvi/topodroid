@@ -69,6 +69,8 @@ class QCamCompass extends Dialog
   private float mBearing;
   private float mClino;
   private int   mOrientation;
+  private int   mAccuracy;
+  
   private boolean mHasBearingAndClino;
   private IBearingAndClino mCallback;
   private boolean mWithBox;
@@ -171,13 +173,15 @@ class QCamCompass extends Dialog
    * @param b   azimuth
    * @param c   clino
    * @param o   orientation: 0 up, 90 right, 180 down, 270 left
+   * @param a   sensor accuracy 
    */
-  public void setBearingAndClino( float b, float c, int o )
+  public void setBearingAndClino( float b, float c, int o, int a )
   {
     TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c );
-    mBearing = b;
-    mClino   = c;
+    mBearing     = b;
+    mClino       = c;
     mOrientation = ExifInfo.getCameraOrientation( o );
+    mAccuracy    = a;
     // TDLog.v( "QCAM compass orient " + o + " --> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
@@ -223,7 +227,7 @@ class QCamCompass extends Dialog
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
           // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
-          mCallback.setBearingAndClino( mBearing, mClino, mOrientation );
+          mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy );
           mHasSaved = mCallback.setJpegData( mSurface.mJpegData );
         }
       }

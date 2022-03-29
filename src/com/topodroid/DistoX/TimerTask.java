@@ -56,8 +56,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mCount   = count;
     mSensorManager = (SensorManager)TDInstance.context.getSystemService( Context.SENSOR_SERVICE );
     TDLog.Log( TDLog.LOG_PHOTO, "Timer task axis " + axis );
-    mMagAccuracy = -1;
-    mAccAccuracy = -1;
+    mMagAccuracy = 0;
+    mAccAccuracy = 0;
   }
 
   @Override
@@ -132,6 +132,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       TDLog.Log( TDLog.LOG_PHOTO, "Timer task null direction. Acc. counts " + mCntAcc + " Mag. counts " + mCntMag );
     }
     computeBearingAndClino();
+    toastMagAccuracy();
   }
 
   @Override
@@ -139,19 +140,24 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   {
     int type = sensor.getType();
     if ( type == Sensor.TYPE_MAGNETIC_FIELD ) {
-      if ( accuracy == mMagAccuracy) return;
+      if ( accuracy <= mMagAccuracy) return;
       mMagAccuracy = accuracy;
     } else if ( type == Sensor.TYPE_ACCELEROMETER ) {
-      if ( accuracy == mAccAccuracy) return;
+      if ( accuracy <= mAccAccuracy) return;
       mAccAccuracy = accuracy;
     } else {
       return;
     }
-    if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_HIGH ) return;
-    if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW ) { 
-      TDToast.makeWarn( R.string.accuracy_low );
+  }
+ 
+  private void toastMagAccuracy()
+  {
+    if ( mMagAccuracy >= SensorManager.SENSOR_STATUS_ACCURACY_HIGH ) {
+      // TDToast.make( R.string.accuracy_high );
     } else if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM ) { 
       TDToast.makeWarn( R.string.accuracy_medium );
+    } else if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW ) { 
+      TDToast.makeWarn( R.string.accuracy_low );
     } else {
       TDToast.makeWarn( R.string.accuracy_unreliable );
     }
@@ -223,7 +229,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
     c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
-    if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0 );
+    if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0, mMagAccuracy );
   }
 
 }

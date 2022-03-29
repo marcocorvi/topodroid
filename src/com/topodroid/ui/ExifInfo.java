@@ -35,6 +35,7 @@ public class ExifInfo
   private float  mAzimuth = 0;
   private float  mClino   = 0;
   private int mOrientation = 0;
+  private int mAccuracy    = -1; // sensor accuracy (-1: undefined, 0: unreliable, ...)
   private String mDate = "";
 
   /** default cstr
@@ -55,17 +56,19 @@ public class ExifInfo
   public float clino()   { return mClino; }
   public String date()   { return mDate; }
   public int orientation() { return mOrientation; }
+  public int accuracy()    { return mAccuracy; }
 
   /** set exif values
    * @param azimuth      azimuth [degrees]
    * @param clino        clino [degrees]
    * @param orienatation camera orientation [degrees]
    */
-  public void setValues( float azimuth, float clino, int orientation )
+  public void setExifValues( float azimuth, float clino, int orientation, int accuracy )
   {
     mAzimuth     = azimuth;
     mClino       = clino;
     mOrientation = orientation;
+    mAccuracy    = accuracy;
     mDate = TDUtil.currentDateTime();
   }
 
@@ -106,6 +109,7 @@ public class ExifInfo
         exif.setAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF, "W" );
       }
       exif.setAttribute( ExifInterface.TAG_GPS_IMG_DIRECTION,  String.format(Locale.US, "%d/100", bint ) );
+      exif.setAttribute( ExifInterface.TAG_MAKER_NOTE,  String.format(Locale.US, "%d", mAccuracy ) );
 
       // FIXME-GPS_LATITUDE work-around for tag GPS Latitude not supported correctly
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
@@ -167,6 +171,12 @@ public class ExifInfo
           try { mClino = csign * Integer.parseInt( clino.substring(0,k) ) / 100.0f; } catch ( NumberFormatException e ) { }
 	}
         // TDLog.v( "Long <" + mAzimuth + "> Lat <" + mClino + "> " );
+      }
+      String acc = exif.getAttribute( ExifInterface.TAG_MAKER_NOTE );
+      try {
+        mAccuracy = Integer.parseInt( acc );
+      } catch ( NumberFormatException e ) {
+        mAccuracy = -1; // undefined
       }
     } catch ( IOException e ) {
       TDLog.Error("EXIF failed exif interface " + filename );

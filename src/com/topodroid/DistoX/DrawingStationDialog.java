@@ -398,9 +398,10 @@ class DrawingStationDialog extends MyDialog
   /**
    * @param b  azimuth [degrees]
    * @param c  clino [degrees]
-   * @param o  orientation (unused)
+   * @param orientation  orientation (unused)
+   * @param accuracy     sensor accuracy (unused)
    */
-    public void setBearingAndClino( float b, float c, int orientation )
+    public void setBearingAndClino( float b, float c, int orientation, int accuracy )
     {
       // TDLog.v( "Station dialog set orientation " + orientation + " bearing " + b + " clino " + c );
       String nick = "";

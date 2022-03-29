@@ -328,14 +328,15 @@ class ShotNewDialog extends MyDialog
   }
 
   /** implements: set azimuth/clino and orientation
-   * @param b      azimuth [degrees]
-   * @param c      clino [degrees]
-   * @param o      camera orientation [degrees]
+   * @param b  azimuth [degrees]
+   * @param c  clino [degrees]
+   * @param o  camera orientation [degrees]
+   * @param a  sensor accuracy
    */
-  public void setBearingAndClino( float b, float c, int o )
+  public void setBearingAndClino( float b, float c, int o, int a )
   {
     // TDLog.v( "New shot dialog set orientation " + o + " bearing " + b + " clino " + c );
-    mExif.setValues( b, c, o );
+    mExif.setExifValues( b, c, o, a );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 

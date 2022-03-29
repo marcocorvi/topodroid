@@ -17,8 +17,9 @@ interface IBearingAndClino
    * @param b0 bearing
    * @param c0 clino
    * @param o0 orienatation
+   * @param a0 accuracy
    */
-  void setBearingAndClino( float b0, float c0, int o0 );
+  void setBearingAndClino( float b0, float c0, int o0, int a0 );
 
   boolean setJpegData( byte[] data );
 
