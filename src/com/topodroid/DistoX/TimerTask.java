@@ -44,6 +44,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private int mAxis;
   private int mWait;  // secs to wait
   private int mCount; // measures to count
+  private int mMagAccuracy;
+  private int mAccAccuracy;
 
   TimerTask( IBearingAndClino parent, int axis, int wait, int count )
   {
@@ -54,6 +56,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mCount   = count;
     mSensorManager = (SensorManager)TDInstance.context.getSystemService( Context.SENSOR_SERVICE );
     TDLog.Log( TDLog.LOG_PHOTO, "Timer task axis " + axis );
+    mMagAccuracy = -1;
+    mAccAccuracy = -1;
   }
 
   @Override
@@ -131,7 +135,27 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   }
 
   @Override
-  public void onAccuracyChanged( Sensor sensor, int accuracy ) { }
+  public void onAccuracyChanged( Sensor sensor, int accuracy ) 
+  {
+    int type = sensor.getType();
+    if ( type == Sensor.TYPE_MAGNETIC_FIELD ) {
+      if ( accuracy == mMagAccuracy) return;
+      mMagAccuracy = accuracy;
+    } else if ( type == Sensor.TYPE_ACCELEROMETER ) {
+      if ( accuracy == mAccAccuracy) return;
+      mAccAccuracy = accuracy;
+    } else {
+      return;
+    }
+    if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_HIGH ) return;
+    if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW ) { 
+      TDToast.makeWarn( R.string.accuracy_low );
+    } else if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM ) { 
+      TDToast.makeWarn( R.string.accuracy_medium );
+    } else {
+      TDToast.makeWarn( R.string.accuracy_unreliable );
+    }
+  }
 
   @Override
   public void onSensorChanged( SensorEvent event )

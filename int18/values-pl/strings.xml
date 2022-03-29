@@ -596,6 +596,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
     <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+
 
     <string name="cannot_rename">Nie można zmienić nazwy ciągu</string>
     <string name="declination">Magn. dekl.</string>

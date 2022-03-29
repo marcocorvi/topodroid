@@ -595,6 +595,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cover_g">G eloszlás: %1$.2f %%</string>
     <string name="cover_m">M eloszlás: %1$.2f %%</string>
     <string name="cover_r">Forgás eloszlás: %1$.2f %%</string>
+
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
 	
     <string name="empty_clipboard">Üres vágólap</string>
     <string name="cannot_rename">A felmérés nem nevezhető át</string>

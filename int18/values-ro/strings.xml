@@ -588,6 +588,10 @@ Refer to the web pages for details.\n
     <string name="cover_m">Distribuție M: %1$.2f %%</string>
     <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
 
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
     <string name="description">descriere</string>

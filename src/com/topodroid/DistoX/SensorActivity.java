@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDTag;
 // import com.topodroid.utils.TDColor;
@@ -268,8 +268,8 @@ public class SensorActivity extends Activity
     @Override
     public void onAccuracyChanged( Sensor sensor, int accuracy )
     {
-      // TODO Auto-generated method stub
-      // TDLog.v( "sensor accuracy changed");
+      // TODO see TimerTask onAccuracyChnaged
+      TDLog.v( "sensor type " + sensor.getType() + " accuracy changed " + accuracy );
       mFirst = true;
       mAlpha = 0.8f;
     }

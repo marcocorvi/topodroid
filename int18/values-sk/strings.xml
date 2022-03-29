@@ -595,6 +595,10 @@ Refer to the web pages for details.\n
     <string name="cover_g">G Distribúcia: %1$.2f %%</string>
     <string name="cover_m">M Distribúcia: %1$.2f %%</string>
     <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
 	
     <string name="empty_clipboard">Prázdna schránka</string>
     <string name="cannot_rename">Nedá sa premenovať názov mapovania</string>

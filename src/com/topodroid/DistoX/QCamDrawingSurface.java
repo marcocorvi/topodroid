@@ -29,10 +29,12 @@ import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
+import android.hardware.display.DisplayManager;
 
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
 import android.view.OrientationEventListener;
+import android.view.Display;
 
 import android.util.AttributeSet;
 
@@ -54,6 +56,7 @@ public class QCamDrawingSurface extends SurfaceView
   private Camera.PictureCallback mRaw;
   private Camera.PictureCallback mJpeg;
   private Camera.ShutterCallback mShutter;
+  private Display mDisplay = null;
   byte[] mJpegData;
 
   private OrientationEventListener mOrientationListener = null;
@@ -88,6 +91,11 @@ public class QCamDrawingSurface extends SurfaceView
     mJpegData = null;
 
     createCallbacks();
+
+    try {
+      DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
+      mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
+    } catch ( ClassCastException e ) { }
   }
 
 
@@ -147,21 +155,32 @@ public class QCamDrawingSurface extends SurfaceView
   private void setPreviewSize()
   {
     if ( mCamera == null ) return;
-    
-    int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
-    // CameraInfo info = new CameraInfo(); // info.orientation is fixed to the value that has been set (90)
-    // mCamera.getCameraInfo( 0, info );
-    // Camera.Parameters params = mCamera.getParameters();
-    // Camera.Size size = params.getPreviewSize();
-    // TDLog.v( "QCAM preview size " + size.width + " " + size.height + " orientation " + o + " " + info.orientation + " " + mOrientation );
-    // TDLog.v( "QCAM preview orientation " + o + " " + mOrientation );
-    if  ( o == 1 ) {
-      mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
-    } else {
-      if ( mOrientation > 180 ) {
+
+    if ( mDisplay != null ) {
+      int r = mDisplay.getRotation(); // 0: up, 1: left, 3: right 2: down
+      if ( r == 0 ) {
+        mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
+      } else if ( r == 1 ) {
         mCamera.setDisplayOrientation( 0 );
-      } else {
+      } else if ( r == 3 ) {
         mCamera.setDisplayOrientation( 180 );
+      } else {
+        mCamera.setDisplayOrientation( 270 );
+      }
+    } else {
+      int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
+      // CameraInfo info = new CameraInfo(); // info.orientation is fixed to the value that has been set (90)
+      // mCamera.getCameraInfo( 0, info );
+      // Camera.Parameters params = mCamera.getParameters();
+      // Camera.Size size = params.getPreviewSize();
+      if  ( o == 1 ) {
+        mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
+      } else {
+        if ( mOrientation > 180 ) {
+          mCamera.setDisplayOrientation( 0 );
+        } else {
+          mCamera.setDisplayOrientation( 180 );
+        }
       }
     }
   }

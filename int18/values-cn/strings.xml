@@ -594,6 +594,10 @@
     <string name="cover_m">M 分布: %1$.2f %%</string>
     <string name="cover_r">滚动分布: %1$.2f %%</string>
 
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
     <string name="declination">磁偏角</string>

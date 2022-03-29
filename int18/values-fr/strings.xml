@@ -585,6 +585,10 @@ Refer to the web pages for details.\n
     <string name="cover_m">M répartition: %1$.2f %%</string>
     <string name="cover_r">Roulis répartition: %1$.2f %%</string>
 
+    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
+    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
+    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+
     <string name="cannot_rename">Impossible de renommer le relevé</string>
     <string name="declination">Déclinaison magnétique</string>
     <string name="description">Description</string>

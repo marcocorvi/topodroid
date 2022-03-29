@@ -601,6 +601,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="cover_m">M distribution: %1$.2f %%</string>
     <string name="cover_r">Roll distribution: %1$.2f %%</string>
 
+    <string name="accuracy_low">Low accuracy. Calibration needed</string>
+    <string name="accuracy_medium">Low accuracy</string>
+    <string name="accuracy_unreliable">Unreliable sensors</string>
+
     <string name="empty_clipboard">Empty clipboard</string>
     <string name="cannot_rename">Cannot rename survey</string>
     <string name="declination">Magn. decl.</string>
