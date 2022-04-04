@@ -81,7 +81,7 @@ public class ExifInfo
    */
   public void writeExif( String filepath )
   {
-    TDLog.v( "EXIF set " + mAzimuth + " " + mClino + " file " + filepath );
+    // TDLog.v( "EXIF set " + mAzimuth + " " + mClino + " file " + filepath );
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", azimuth, clino );
@@ -93,7 +93,7 @@ public class ExifInfo
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       int cint = (int)(mClino*100);
       int bint = (int)(mAzimuth*100);
-      TDLog.v("EXIF azimuth " + bint + " clino " + cint );
+      // TDLog.v("EXIF azimuth " + bint + " clino " + cint );
       if ( cint >= 0 ) {
         exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE, String.format(Locale.US, "%d/100", cint ) );
         exif.setAttribute( ExifInterface.TAG_GPS_LATITUDE_REF, "N" );
@@ -137,12 +137,8 @@ public class ExifInfo
       // TDLog.v( "Photo edit orientation " + mOrientation );
       String azimuth = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
       String clino   = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );
-      String bref = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF );
-      String cref = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE_REF );
       int bsign = 1;
       int csign = 1;
-      if ( bref.startsWith("W") || bref.startsWith("-") || bref.startsWith("West") ) bsign = -1; 
-      if ( cref.startsWith("S") || cref.startsWith("-") || cref.startsWith("South") ) csign = -1; 
 
       mDate = exif.getAttribute( ExifInterface.TAG_DATETIME );
       // TDLog.v( "TD image bearing " + azimuth + " clino " + clino + " date " + mDate );
@@ -158,6 +154,16 @@ public class ExifInfo
               if (clino == null) clino = vals[1] + "/100";
             }
           }
+        }
+      } else {
+        String bref = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE_REF );
+        String cref = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE_REF );
+        // TDLog.v("EXIF B " + azimuth + " " + bref + " C " + clino + " " + cref );
+        if ( bref != null ) {
+          if ( bref.startsWith("W") || bref.startsWith("-") || bref.startsWith("West") ) bsign = -1; 
+        }
+        if ( cref != null ) {
+          if ( cref.startsWith("S") || cref.startsWith("-") || cref.startsWith("South") ) csign = -1; 
         }
       }
       if ( azimuth != null && clino != null ) {

@@ -2833,28 +2833,28 @@ public class TopoDroidApp extends Application
   // ------------------------------------------------------------------
   // SCREEN ORIENTATION
 
-  /** lock/unlock the screen orientation for an activity
-   * @param activity activity
-   * @param lock     whether to lock or unlock
-   * @note from https://riptutorial.com/android/example/21077/lock-screen-s-rotation-programmatically
-   */ 
-  static void lockScreenOrientation( Activity activity, boolean lock ) 
-  {
-    if ( lock ) {
-      int currentOrientation = activity.getResources().getConfiguration().orientation;
-      if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE ) {
-        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE );
-      } else {
-        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT );
-      }
-    } else { // unlock
-      activity.getWindow().clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE );
-      // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) { // API-18
-        activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_USER );
-      // } else {
-      //   activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR );
-      // }
-    }
-  }
+  // /** lock/unlock the screen orientation for an activity
+  //  * @param activity activity
+  //  * @param lock     whether to lock or unlock
+  //  * @note from https://riptutorial.com/android/example/21077/lock-screen-s-rotation-programmatically
+  //  */ 
+  // static void lockScreenOrientation( Activity activity, boolean lock ) 
+  // {
+  //   if ( lock ) {
+  //     int currentOrientation = activity.getResources().getConfiguration().orientation;
+  //     if (currentOrientation == Configuration.ORIENTATION_LANDSCAPE ) {
+  //       activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_LANDSCAPE );
+  //     } else {
+  //       activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_SENSOR_PORTRAIT );
+  //     }
+  //   } else { // unlock
+  //     activity.getWindow().clearFlags( WindowManager.LayoutParams.FLAG_NOT_TOUCHABLE );
+  //     // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) { // API-18
+  //       activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_USER );
+  //     // } else {
+  //     //   activity.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_FULL_SENSOR );
+  //     // }
+  //   }
+  // }
 
 }

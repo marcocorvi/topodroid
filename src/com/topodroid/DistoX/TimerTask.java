@@ -47,6 +47,12 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private int mMagAccuracy;
   private int mAccAccuracy;
 
+  /** cstr
+   * @param parent   parent activity/dialog
+   * @param axis     reference axis
+   * @param wait     number of seconds to wait before taking measurements
+   * @param count    number of readings to average
+   */
   TimerTask( IBearingAndClino parent, int axis, int wait, int count )
   {
     mParent  = new WeakReference<IBearingAndClino>( parent );
@@ -55,16 +61,20 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     mWait    = wait;
     mCount   = count;
     mSensorManager = (SensorManager)TDInstance.context.getSystemService( Context.SENSOR_SERVICE );
-    TDLog.Log( TDLog.LOG_PHOTO, "Timer task axis " + axis );
+    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task axis " + axis );
     mMagAccuracy = 0;
     mAccAccuracy = 0;
   }
 
+  /** task execution
+   * @param str ...
+   * @return always 0
+   */
   @Override
   protected Long doInBackground( String... str )
   {
     // TDLog.v( "timer task in bkgr");
-    TDLog.Log( TDLog.LOG_PHOTO, "Timer task in background - run " + mRun );
+    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task in background - run " + mRun );
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
     long ret = 0;
@@ -78,7 +88,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
         break;
       }
     }
-    TDLog.Log( TDLog.LOG_PHOTO, "Timer task ready - run " + mRun );
+    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task ready - run " + mRun );
     if ( mRun ) {
       int cnt = 3*mCount;
       mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
@@ -106,11 +116,16 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     return ret;
   }
 
+  /** progress update (empty)
+   */
   @Override
   protected void onProgressUpdate(Integer... progress) 
   {
   }
 
+  /** post execution
+   * @param result   execution result (unused)
+   */
   @Override
   protected void onPostExecute(Long result) 
   {
@@ -132,37 +147,46 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       TDLog.Log( TDLog.LOG_PHOTO, "Timer task null direction. Acc. counts " + mCntAcc + " Mag. counts " + mCntMag );
     }
     computeBearingAndClino();
-    toastMagAccuracy();
+    toastAccuracy( mMagAccuracy );
   }
 
+  /** react to a notification of a change in sensor accuracy
+   * @param sensor   sensor type
+   * @param accuracy sensor accuracy (0: unreliable, 1: low, 2: med, 3: high)
+   * @note store the value of the accuracy in a local field
+   */
   @Override
   public void onAccuracyChanged( Sensor sensor, int accuracy ) 
   {
     int type = sensor.getType();
     if ( type == Sensor.TYPE_MAGNETIC_FIELD ) {
-      if ( accuracy <= mMagAccuracy) return;
+      // if ( accuracy <= mMagAccuracy) return;
       mMagAccuracy = accuracy;
     } else if ( type == Sensor.TYPE_ACCELEROMETER ) {
-      if ( accuracy <= mAccAccuracy) return;
+      // if ( accuracy <= mAccAccuracy) return;
       mAccAccuracy = accuracy;
-    } else {
-      return;
     }
   }
  
-  private void toastMagAccuracy()
+  /** toast a warning if the accuracy is not good
+   * @param accuracy   sensor accuracy
+   */
+  private void toastAccuracy( int accuracy )
   {
-    if ( mMagAccuracy >= SensorManager.SENSOR_STATUS_ACCURACY_HIGH ) {
+    if ( accuracy >= SensorManager.SENSOR_STATUS_ACCURACY_HIGH ) {
       // TDToast.make( R.string.accuracy_high );
-    } else if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM ) { 
+    } else if ( accuracy == SensorManager.SENSOR_STATUS_ACCURACY_MEDIUM ) { 
       TDToast.makeWarn( R.string.accuracy_medium );
-    } else if ( mMagAccuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW ) { 
+    } else if ( accuracy == SensorManager.SENSOR_STATUS_ACCURACY_LOW ) { 
       TDToast.makeWarn( R.string.accuracy_low );
     } else {
       TDToast.makeWarn( R.string.accuracy_unreliable );
     }
   }
 
+  /** react to a change in a sensor value
+   * @param event   sensor event
+   */
   @Override
   public void onSensorChanged( SensorEvent event )
   {
@@ -183,9 +207,11 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     }
   }
 
+  /** compute azimuth and clino
+   */
   private void computeBearingAndClino( )
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "Timer task compute B & C" );
+    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task compute B & C" );
     TDVector g = new TDVector( mValAcc[0], mValAcc[1], mValAcc[2] );
     TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] );
     g.normalize();

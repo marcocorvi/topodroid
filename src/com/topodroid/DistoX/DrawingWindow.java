@@ -4922,7 +4922,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
-      new QCamCompass( this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false).show(); // false=with_delay
+      new QCamCompass( this, this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false).show(); // false=with_delay
     } else {
       try {
         Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );

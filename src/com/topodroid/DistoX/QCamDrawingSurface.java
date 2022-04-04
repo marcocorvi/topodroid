@@ -57,7 +57,7 @@ public class QCamDrawingSurface extends SurfaceView
   private Camera.PictureCallback mJpeg;
   private Camera.ShutterCallback mShutter;
   private Display mDisplay = null;
-  byte[] mJpegData;
+  private byte[] mJpegData;
 
   private OrientationEventListener mOrientationListener = null;
   private int mOrientation = 0;
@@ -98,6 +98,10 @@ public class QCamDrawingSurface extends SurfaceView
     } catch ( ClassCastException e ) { }
   }
 
+  /** @return the JPEG data buffer
+   */
+  byte[] getJpegData() { return mJpegData; }
+
 
   /** called when the surface is changed
    * @param holder    surface holder
@@ -130,9 +134,14 @@ public class QCamDrawingSurface extends SurfaceView
         }
       };
       mOrientationListener.enable();
-      setMinimumWidth( mContext.getResources().getDisplayMetrics().widthPixels );
-      setMinimumHeight( mContext.getResources().getDisplayMetrics().heightPixels );
-      start();
+      int w = mContext.getResources().getDisplayMetrics().widthPixels;  
+      int h = mContext.getResources().getDisplayMetrics().heightPixels;
+      TDLog.v("QCAM diaplay " + w + " x " + h );
+      if ( w > 1928 ) w = 1928;
+      if ( h > 1080 ) h = 1080;
+      setMinimumWidth(  w );
+      setMinimumHeight( h );
+      startPreview();
     } catch (Exception e) {
       TDLog.Error( "QCAM Error setting camera preview: " + e.getMessage());
     }
@@ -144,8 +153,8 @@ public class QCamDrawingSurface extends SurfaceView
   public void surfaceDestroyed(SurfaceHolder holder) // release the camera preview in QCamCompass
   {
     // TDLog.v( "surface destroyed " );
-    stop();
     if ( mOrientationListener != null ) mOrientationListener.disable();
+    stop();
     close();
   }
 
@@ -156,8 +165,10 @@ public class QCamDrawingSurface extends SurfaceView
   {
     if ( mCamera == null ) return;
 
+    int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
     if ( mDisplay != null ) {
       int r = mDisplay.getRotation(); // 0: up, 1: left, 3: right 2: down
+      TDLog.v("QCAM display rotation " + r + " orientation " + o );
       if ( r == 0 ) {
         mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
       } else if ( r == 1 ) {
@@ -168,7 +179,7 @@ public class QCamDrawingSurface extends SurfaceView
         mCamera.setDisplayOrientation( 270 );
       }
     } else {
-      int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
+      TDLog.v("QCAM orientation " + o );
       // CameraInfo info = new CameraInfo(); // info.orientation is fixed to the value that has been set (90)
       // mCamera.getCameraInfo( 0, info );
       // Camera.Parameters params = mCamera.getParameters();
@@ -192,6 +203,7 @@ public class QCamDrawingSurface extends SurfaceView
   boolean takePicture( int orientation )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface take picture. Orientation " + orientation );
+    TDLog.v("QCAM take picture orientation " + orientation ); 
     boolean ret = false;
     if ( mCamera != null ) {
       try {
@@ -284,7 +296,7 @@ public class QCamDrawingSurface extends SurfaceView
   //       TDLog.Error( "QCAM cannot set preview display " + e.getMessage() );
   //     }
   //     // if ( mOrientationListener != null ) mOrientationListener.enable( );
-  //     start();
+  //     startPreview();
   //     return true;
   //   } catch ( RuntimeException e ) { // fail to connect to canera service
   //     if ( mCamera != null ) mCamera.release();
@@ -297,7 +309,7 @@ public class QCamDrawingSurface extends SurfaceView
   /** start the preview
    * @note display orientation is 90
    */
-  void start()
+  void startPreview()
   {
     // TDLog.v("QCAM preview start");
     if ( mCamera != null ) {
@@ -314,6 +326,7 @@ public class QCamDrawingSurface extends SurfaceView
   }
 
   /** stop the preview
+   * @note called also by QCamCompass
    */
   private void stop()
   {

@@ -11,7 +11,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDImage;
 
@@ -57,7 +57,7 @@ class PhotoEditDialog extends MyDialog
     // mFilename = filename;
     mFilename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mPhoto.id) );
     mAtShot   = (mPhoto.shotid >= 0);
-    // TDLog.Log(TDLog.LOG_PHOTO, "PhotoEditDialog " + mFilename);
+    // TDLog.v("PhotoEditDialog " + mFilename);
     mTdImage = new TDImage( mFilename );
     // TDLog.v( "photo edit dialog: " + photo.debugString() + " image width " + mTdImage.width() );
     // TDLog.v( "photo edit dialog: " + mFilename );
@@ -114,7 +114,7 @@ class PhotoEditDialog extends MyDialog
   public void onClick(View v) 
   {
     // Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
+    // TDLog.Log( TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
 
     switch ( v.getId() ) {
       case R.id.photo_ok:

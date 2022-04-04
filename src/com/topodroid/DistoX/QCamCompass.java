@@ -19,6 +19,7 @@ import com.topodroid.ui.ExifInfo;
 import com.topodroid.prefs.TDSetting;
 
 import android.app.Dialog;
+import android.app.Activity;
 import android.content.Context;
 
 import android.os.Bundle;
@@ -38,6 +39,7 @@ import android.widget.ZoomButtonsController.OnZoomListener;
 import android.graphics.drawable.BitmapDrawable;
 
 import java.util.Locale;
+import java.nio.ByteBuffer;
 
 class QCamCompass extends Dialog
                   implements OnClickListener
@@ -49,8 +51,10 @@ class QCamCompass extends Dialog
   // DrawingWindow mDrawer;
   // long mPid;
 
+  private Activity mParent; // parent activity;
   private IPhotoInserter mInserter;
   private QCamDrawingSurface mSurface;
+  // private QCamDrawingTexture mSurface; // TEXTURE
   // private QCamBox mBox;
   private Button buttonClick;
   private Button buttonSave;
@@ -78,10 +82,11 @@ class QCamCompass extends Dialog
   private boolean mHasSaved;
   private boolean mHasShot;
 
-  QCamCompass( Context context, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay )
+  QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay )
   {
     super( context );
     mContext   = context;
+    mParent    = parent; 
     mCallback  = callback;
     // mDrawer    = drawer;
     // mPid       = pid;
@@ -107,6 +112,20 @@ class QCamCompass extends Dialog
     // }
   }
 
+  /** enable buttons 
+   * @param enable  whether to enable
+   * @note used by QCamDrawingTexture
+   */
+  void enableButtonsOnUiThread( final boolean enable ) // TEXTURE
+  {
+    if ( mParent != null ) {
+      mParent.runOnUiThread( new Runnable() {
+        @Override
+        public void run() { enableButtons( enable ); }
+      } );
+    }
+  }
+
   private void enableButtonSave( boolean enable )
   {
     TDLog.v( "QCAM compass enable save button " + enable );
@@ -125,9 +144,12 @@ class QCamCompass extends Dialog
     getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
     // lock screen orientation
 
-    mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface );
+    mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface ); // TEXTURE
     mSurface.mQCam = this;
     // mSurface.setOnTouchListener( this );
+    // mSurface = (QCamDrawingTexture) findViewById( R.id.drawingTexture );
+    // mSurface.start( this );
+
     findViewById( R.id.qcam_layout ).setOnTouchListener( this );
 
     mZoomView = (View) findViewById(R.id.zoomView );
@@ -194,9 +216,6 @@ class QCamCompass extends Dialog
     // buttonClick.setText( mContext.getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
   }
 
-
-  public boolean setJpegData( byte[] data ) { return false; }
-
   @Override
   public void onClick(View v)
   {
@@ -207,7 +226,9 @@ class QCamCompass extends Dialog
         mHasShot = false;
         TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
         // buttonClick.setText( mContext.getString( R.string.button_eval ) );
-        mSurface.start();
+
+        // QCamDrawingSurface.startPreview() when it is created
+        // mSurface.startPreview(); // TEXTURE
         enableButtons( true );
       } else {
         int wait  = TDSetting.mTimerWait;
@@ -228,7 +249,7 @@ class QCamCompass extends Dialog
         if ( mCallback != null ) {
           // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
           mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy );
-          mHasSaved = mCallback.setJpegData( mSurface.mJpegData );
+          mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
         }
       }
     } else if ( b == buttonCancel ) {
@@ -244,6 +265,8 @@ class QCamCompass extends Dialog
       // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
     }
     // unlock screen orientation
+    // // mSurface.close(); 
+    // mSurface.stop(); // TEXTURE 
     dismiss();
   }
 
@@ -374,5 +397,10 @@ class QCamCompass extends Dialog
     mZoomTime = time;
   }
 
+  /** set the JPEG data
+   * @param data   JPEG image data
+   * @return true on success
+   */
+  public boolean setJpegData( byte[] data ) { return false; } 
 
 }

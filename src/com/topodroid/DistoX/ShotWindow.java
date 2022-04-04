@@ -920,7 +920,7 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
     if ( mMediaManager.isTopoDroidCamera() ) {
       TDLog.v("take photo with TopoDroid");
-      new QCamCompass( this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
+      new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
     } else {
       TDLog.v("take photo with Android");
       try {
