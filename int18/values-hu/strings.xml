@@ -577,7 +577,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_not_attached">FIGYELEM: nem kapcsolódó mérések</string>
     <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
     <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
-	<string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
+    <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
@@ -596,9 +596,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cover_m">M eloszlás: %1$.2f %%</string>
     <string name="cover_r">Forgás eloszlás: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+    <string name="accuracy_low">Alacsony pontosság. Kalibráció szükséges</string>
+    <string name="accuracy_medium">Alacsony pontosság</string>
+    <string name="accuracy_high">Megfelelő pontosság</string>
+    <string name="accuracy_unreliable">Megbízhatatlan érzékelők</string>
 	
     <string name="empty_clipboard">Üres vágólap</string>
     <string name="cannot_rename">A felmérés nem nevezhető át</string>
