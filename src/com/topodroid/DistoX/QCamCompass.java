@@ -53,8 +53,8 @@ class QCamCompass extends Dialog
 
   private Activity mParent; // parent activity;
   private IPhotoInserter mInserter;
-  private QCamDrawingSurface mSurface;
-  // private QCamDrawingTexture mSurface; // TEXTURE
+  private QCamDrawingSurface mSurface = null;
+  private QCamDrawingTexture mTexture = null; // TEXTURE
   // private QCamBox mBox;
   private Button buttonClick;
   private Button buttonSave;
@@ -81,8 +81,9 @@ class QCamCompass extends Dialog
   private boolean mWithDelay;
   private boolean mHasSaved;
   private boolean mHasShot;
+  private int mCamera;
 
-  QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay )
+  QCamCompass( Context context, Activity parent, IBearingAndClino callback, IPhotoInserter inserter, boolean with_box, boolean with_delay, int camera )
   {
     super( context );
     mContext   = context;
@@ -95,6 +96,7 @@ class QCamCompass extends Dialog
     mWithDelay = with_delay;
     mHasSaved  = false;
     mHasShot   = false;
+    mCamera    = camera;
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM compass. Box " + mWithBox + " delay " + mWithDelay );
   }
 
@@ -140,15 +142,21 @@ class QCamCompass extends Dialog
   {
     super.onCreate(savedInstanceState);
     requestWindowFeature( Window.FEATURE_NO_TITLE );
-    setContentView(R.layout.qcam_compass);
-    getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
-    // lock screen orientation
-
-    mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface ); // TEXTURE
-    mSurface.mQCam = this;
-    // mSurface.setOnTouchListener( this );
-    // mSurface = (QCamDrawingTexture) findViewById( R.id.drawingTexture );
-    // mSurface.start( this );
+    TDLog.v("QCAM camera " + mCamera );
+    if ( mCamera == PhotoInfo.CAMERA_TOPODROID ) {
+      setContentView(R.layout.qcam_compass);
+      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
+      // lock screen orientation
+      mSurface = (QCamDrawingSurface) findViewById( R.id.drawingSurface ); // TEXTURE
+      mSurface.mQCam = this;
+      // mSurface.setOnTouchListener( this );
+    } else {
+      setContentView(R.layout.qcam_compass_two);
+      getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
+      // lock screen orientation
+      mTexture = (QCamDrawingTexture) findViewById( R.id.drawingTexture );
+      mTexture.start( this );
+    }
 
     findViewById( R.id.qcam_layout ).setOnTouchListener( this );
 
@@ -210,7 +218,11 @@ class QCamCompass extends Dialog
     mHasBearingAndClino = true;
 
     // take snapshot
-    mHasShot = mSurface.takePicture( mOrientation );
+    if ( mSurface != null ) {
+      mHasShot = mSurface.takePicture( mOrientation );
+    } else if ( mTexture != null ) {
+      mHasShot = mTexture.takePicture( mOrientation );
+    }
     enableButtonSave( true );
     TDandroid.setButtonBackground( buttonClick, (mHasShot ? mBDcamera : mBDcameraRed) );
     // buttonClick.setText( mContext.getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
@@ -228,7 +240,11 @@ class QCamCompass extends Dialog
         // buttonClick.setText( mContext.getString( R.string.button_eval ) );
 
         // QCamDrawingSurface.startPreview() when it is created
-        // mSurface.startPreview(); // TEXTURE
+        if ( mSurface != null ) {
+          mSurface.startPreview(); // TEXTURE
+        } else if ( mTexture != null ) {
+          // TODO
+        }
         enableButtons( true );
       } else {
         int wait  = TDSetting.mTimerWait;
@@ -249,7 +265,11 @@ class QCamCompass extends Dialog
         if ( mCallback != null ) {
           // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
           mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy );
-          mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
+          if ( mSurface != null ) {
+            mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
+          } else if ( mTexture != null ) {
+            mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
+          }
         }
       }
     } else if ( b == buttonCancel ) {
@@ -257,7 +277,7 @@ class QCamCompass extends Dialog
     } else {
       TDLog.Error( "QCAM compass. Click unexpected view");
     }
-    // mSurface.close();
+    // if ( mSurface != null ) mSurface.close();
     TDUtil.slowDown( 100 );
 
     if ( mHasSaved ) {
@@ -266,7 +286,7 @@ class QCamCompass extends Dialog
     }
     // unlock screen orientation
     // // mSurface.close(); 
-    // mSurface.stop(); // TEXTURE 
+    if ( mTexture != null ) mTexture.stop(); // TEXTURE 
     dismiss();
   }
 
@@ -296,10 +316,18 @@ class QCamCompass extends Dialog
         float d = TDMath.sqrt( x0*x0 + y0*y0 );
         ret = true;
         if ( d > mZoomD0 * 1.1 ) {
-          mSurface.zoom( +1 );
+          if ( mSurface != null ) {
+            mSurface.zoom( +1 );
+          } else if ( mTexture != null ) {
+            mTexture.zoom( +1 );
+          }
           mZoomD0 = d;
         } else if ( d < mZoomD0 * 0.9 ) {
-          mSurface.zoom( -1 );
+          if ( mSurface != null ) {
+            mSurface.zoom( -1 );
+          } else if ( mTexture != null ) {
+            mTexture.zoom( -1 );
+          }
           mZoomD0 = d;
         }
       }
@@ -393,7 +421,11 @@ class QCamCompass extends Dialog
     // } else {
     //   mDeltaZoom = 1;
     }
-    mSurface.zoom( zoomin? mDeltaZoom : -mDeltaZoom );
+    if ( mSurface != null ) {
+      mSurface.zoom( zoomin? mDeltaZoom : -mDeltaZoom );
+    } else if ( mTexture != null ) {
+      mTexture.zoom( zoomin? mDeltaZoom : -mDeltaZoom );
+    }
     mZoomTime = time;
   }
 

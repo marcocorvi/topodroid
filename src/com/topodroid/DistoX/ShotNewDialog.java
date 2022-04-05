@@ -628,7 +628,7 @@ class ShotNewDialog extends MyDialog
       mTimer = new TimerTask( this, TimerTask.Y_AXIS, TDSetting.mTimerWait, 10 );
       mTimer.execute();
     } else if ( cameraCheck && b == mBtnCamera ) {
-      new QCamCompass( mContext, mApp.mShotWindow, this, null, true, true).show();
+      new QCamCompass( mContext, mApp.mShotWindow, this, null, true, true, PhotoInfo.CAMERA_TOPODROID ).show();
                        // null inserter, with_box, with_delay
     } else if ( b == mBtnBack ) {
       dismiss();

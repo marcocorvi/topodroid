@@ -224,7 +224,7 @@ class DrawingPointDialog extends MyDialog
       if ( TDSetting.mWithLevels > 1 ) setLevel();
 
     // } else if ( b == mBTdraw ) {
-    //   mParent.openSectionDraw( mXSectionName );
+    //   mParent.openXSectionDraw( mXSectionName );
     // } else if ( b == mBtnCancel ) {
     //   // nothing
     }

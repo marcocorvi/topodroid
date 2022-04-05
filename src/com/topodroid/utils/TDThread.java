@@ -14,7 +14,12 @@ package com.topodroid.utils;
 import android.os.Handler;
 import android.os.HandlerThread;
 
-public class TDThread
+/** usage
+ * [1] create a background thread and get the HandlerThread
+ * [2] get the background Handler
+ * [3] post Runnable's to the Handler
+ */
+public class TDThread 
 {
   /** get a background thread
    * @param name  thread name
@@ -54,6 +59,5 @@ public class TDThread
       return false;
     }
   }
-
 
 }

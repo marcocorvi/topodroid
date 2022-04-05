@@ -4919,27 +4919,27 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doTakePointPhoto( String imagefile, boolean insert, long pid )
   {
-    if ( TDandroid.checkCamera( mApp ) ) { // hasPhoto
+    // if ( TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mApp ) ) { // hasPhoto
       boolean with_box = true; // ! insert;
       mMediaManager.setCamera( PhotoInfo.CAMERA_TOPODROID );
-      new QCamCompass( this, this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false).show(); // false=with_delay
-    } else {
-      try {
-        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        if ( intent.resolveActivity( getPackageManager() ) != null ) {
-          if ( insert ) {
-            mMediaManager.setCamera( PhotoInfo.CAMERA_INTENT );
-            mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
-          } else {
-            mActivity.startActivity( intent );
-          }
-        } else {
-          TDToast.makeBad( R.string.no_capture_app );
-        }
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.makeBad( R.string.no_capture_app );
-      }
-    }
+      new QCamCompass( this, this, (new MyBearingAndClino( mApp, imagefile )), (insert ? this : null), with_box, false, PhotoInfo.CAMERA_TOPODROID ).show(); // false=with_delay
+    // } else {
+    //   try {
+    //     Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+    //     if ( intent.resolveActivity( getPackageManager() ) != null ) {
+    //       if ( insert ) {
+    //         mMediaManager.setCamera( PhotoInfo.CAMERA_INTENT );
+    //         mActivity.startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_DRAWWINDOW );
+    //       } else {
+    //         mActivity.startActivity( intent );
+    //       }
+    //     } else {
+    //       TDToast.makeBad( R.string.no_capture_app );
+    //     }
+    //   } catch ( ActivityNotFoundException e ) {
+    //     TDToast.makeBad( R.string.no_capture_app );
+    //   }
+    // }
   }
 
   /** insert a "photo" point
@@ -6185,7 +6185,7 @@ public class DrawingWindow extends ItemDrawer
             if ( BrushManager.isPointSection( point.mPointType ) ) {
               String section_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) );
               if ( section_name != null ) {
-                openSectionDraw( section_name );
+                openXSectionDraw( section_name );
               } else {
                 onClick( view ); 
               }
@@ -6626,7 +6626,7 @@ public class DrawingWindow extends ItemDrawer
    * the name can be the scrap-name or the section-name (plot name)
    * @note called only by DrawingPointDialog and onLongClick()
    */
-  void openSectionDraw( String scrapname )
+  void openXSectionDraw( String scrapname )
   { 
     // remove survey name from scrap-name (if necessary)
     String name = scrapname.replace( TDInstance.survey + "-", "" );
@@ -8127,21 +8127,23 @@ public class DrawingWindow extends ItemDrawer
       //   }
       //   mShotNewDialog = null;
       //   break;
-      case TDRequest.CAPTURE_IMAGE_DRAWWINDOW:
-        if ( resCode == Activity.RESULT_OK ) {
-          Bundle extras = intent.getExtras();
-          Bitmap bitmap = (Bitmap) extras.get("data");
-          if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
-            // // FIXME TITLE has to go
-            // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
-            // // FIXME NOTIFY ? no
-            createPhotoPoint();
-          } else {
-            // TDLog.e("failed to save photo");
-            TDLog.Error("failed to save photo");
-          }
-        }
-        break;
+
+      // case TDRequest.CAPTURE_IMAGE_DRAWWINDOW:
+      //   if ( resCode == Activity.RESULT_OK ) {
+      //     Bundle extras = intent.getExtras();
+      //     Bitmap bitmap = (Bitmap) extras.get("data");
+      //     if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
+      //       // // FIXME TITLE has to go
+      //       // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
+      //       // // FIXME NOTIFY ? no
+      //       createPhotoPoint();
+      //     } else {
+      //       // TDLog.e("failed to save photo");
+      //       TDLog.Error("failed to save photo");
+      //     }
+      //   }
+      //   break;
+
       case TDRequest.PLOT_RELOAD:
         if ( resCode == Activity.RESULT_OK ) {
           Bundle extras = (intent != null)? intent.getExtras() : null;

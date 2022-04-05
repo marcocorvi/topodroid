@@ -12,7 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.utils.TDTag;
@@ -85,7 +85,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
-// import android.net.Uri;
+import android.net.Uri;
+
+import java.io.File;
 
 // FIXME-28
 // import androidx.recyclerview.widget.RecyclerView;
@@ -910,30 +912,38 @@ public class ShotWindow extends Activity
 
   /**
    * @param comment  photo comment
-   * @param camera   camera type: 0 use URL, 1 use TopoDroid
+   * @param camera   camera type: 0 use URI, 1 use TopoDroid - not used
    */
   void doTakePhoto( long sid, String comment, int camera )
   {
+    // camera = 1;
     mMediaManager.prepareNextPhoto( sid, comment, camera );
 
     // imageFile := PHOTO_DIR / surveyId / photoId .jpg
     // TDLog.Log( TDLog.LOG_SHOT, "photo " + imagefile.toString() );
-    if ( mMediaManager.isTopoDroidCamera() ) {
-      TDLog.v("take photo with TopoDroid");
-      new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
-    } else {
-      TDLog.v("take photo with Android");
-      try {
-        Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
-        if ( intent.resolveActivity( getPackageManager() ) != null ) {
-          startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
-        } else {
-          TDToast.makeBad( R.string.no_capture_app );
-        }
-      } catch ( ActivityNotFoundException e ) {
-        TDToast.makeBad( R.string.no_capture_app );
-      }
-    }
+
+    // if ( mMediaManager.isTopoDroidCamera() ) {
+      // TDLog.v("take photo with TopoDroid");
+      // new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false).show();  // false = with_box, false=with_delay
+      new QCamCompass( this, this, (new MyBearingAndClino( mApp, mMediaManager.getImageFilepath()) ), this, false, false, camera).show();  // false = with_box, false=with_delay
+    // } else {
+    //   // TDLog.v("take photo with Android");
+    //   try {
+    //     Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
+    //     if ( intent.resolveActivity( getPackageManager() ) != null ) {
+    //       String path = TDPath.getSurveyPhotoDir( TDInstance.survey ) + "/";
+    //       TDLog.v("DistoX photo path " + path );
+    //       // the URI must be a content resolver Uri
+    //       intent.putExtra( android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile( new File( path ) ) );
+    //       intent.putExtra( "return-data", true );
+    //       startActivityForResult( intent, TDRequest.CAPTURE_IMAGE_SHOTWINDOW );
+    //     } else {
+    //       TDToast.makeBad( R.string.no_capture_app );
+    //     }
+    //   } catch ( ActivityNotFoundException e ) {
+    //     TDToast.makeBad( R.string.no_capture_app );
+    //   }
+    // }
   }
 
   void askSensor( DBlock blk )
@@ -1073,14 +1083,17 @@ public class ShotWindow extends Activity
   {
     // TDLog.Log( TDLog.LOG_DEBUG, "on Activity Result: request " + reqCode + " result " + resCode );
     switch ( reqCode ) {
-      case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
-        if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
-          // (new ShotPhotoDialog(this, this, mShotId) ).show();
-          Bundle extras = intent.getExtras();
-          Bitmap bitmap = (Bitmap) extras.get("data");
-          mMediaManager.savePhoto( bitmap, 90 ); // compression = 90
-        }
-        break;
+      // case TDRequest.CAPTURE_IMAGE_SHOTWINDOW:
+      //   if ( resCode == Activity.RESULT_OK ) { // RESULT_OK = -1 (0xffffffff)
+      //     // (new ShotPhotoDialog(this, this, mShotId) ).show();
+      //     // Bundle extras = intent.getExtras();
+      //     // Bitmap bitmap = (Bitmap) extras.get("data");
+      //     // mMediaManager.savePhoto( bitmap, 90 ); // compression = 90
+      //     // TODO TDToast.makeToast( "saved " + mMediaManager.getImageFilepath() );
+      //     Uri uri = intent.getData();
+      //     if ( uri != null ) TDLog.v( "saved " + uri.toString() );
+      //   }
+      //   break;
       case TDRequest.SENSOR_ACTIVITY_SHOTWINDOW:
       // case TDRequest.EXTERNAL_ACTIVITY:
         if ( resCode == Activity.RESULT_OK ) {

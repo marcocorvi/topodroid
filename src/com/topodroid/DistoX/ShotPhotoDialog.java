@@ -14,7 +14,7 @@
  */
 package com.topodroid.DistoX;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 
 // import android.app.Dialog;
@@ -40,7 +40,7 @@ class ShotPhotoDialog extends MyDialog
 
   private EditText mETcomment;     // photo comment
   private Button   mButtonOK;
-  private CheckBox mCamera;        // whether to use camera app
+  private CheckBox mCamera;        // whether to use camera or camera2
   private long     mSid;           // shot id
   // private Button   mButtonCancel;
   private boolean  cameraCheck;
@@ -63,7 +63,7 @@ class ShotPhotoDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    cameraCheck = TDandroid.checkCamera( mContext );
+    cameraCheck = TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mContext );
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
     initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
     
@@ -92,7 +92,10 @@ class ShotPhotoDialog extends MyDialog
     if ( b == mButtonOK && mETcomment.getText() != null ) {
       // TDLog.Log( TDLog.LOG_PHOTO, "set photo comment " + mETcomment.getText().toString() );
       // mParent.insertPhoto( mETcomment.getText().toString() );
-      int camera = ( cameraCheck && ! mCamera.isChecked() )? PhotoInfo.CAMERA_INTENT : PhotoInfo.CAMERA_TOPODROID;
+      // int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_INTENT;
+      int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      TDLog.v("camera " + camera + " check " + cameraCheck + " is checked " + mCamera.isChecked() );
+      // int camera = PhotoInfo.CAMERA_TOPODROID;
       mParent.doTakePhoto( mSid, mETcomment.getText().toString(), camera );
     // } else if ( b == mButtonCancel ) {
       /* nothing */

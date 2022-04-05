@@ -13,9 +13,10 @@ package com.topodroid.DistoX;
 
 class PhotoInfo
 {
-  static final int CAMERA_UNDEFINED = 0;
-  static final int CAMERA_TOPODROID = 1;
-  static final int CAMERA_INTENT    = 2;       // camera type
+  static final int CAMERA_UNDEFINED   = 0;
+  static final int CAMERA_TOPODROID   = 1;
+  static final int CAMERA_TOPODROID_2 = 2;
+  static final int CAMERA_INTENT      = 3;       // camera type
 
   long sid;       // survey id
   long id;        // photo id

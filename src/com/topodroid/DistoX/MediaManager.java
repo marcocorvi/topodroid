@@ -69,9 +69,9 @@ class MediaManager
     return mAudioId;
   }
 
-  /** @return true if the photos are taken by TopoDroid
-   */
-  boolean isTopoDroidCamera() { return (mCamera == PhotoInfo.CAMERA_TOPODROID); }
+  // /** @return true if the photos are taken by TopoDroid
+  //  */
+  // boolean isTopoDroidCamera() { return (mCamera == PhotoInfo.CAMERA_TOPODROID); }
 
   /** set the camera
    * @param camera   camera index

@@ -30,8 +30,8 @@ public class TDRequest
   public static final int REQUEST_TDCONFIG = 200;
   public static final String TDCONFIG_PATH = "TdManagerConfig"; // request extra key
 
-  public static final int CAPTURE_IMAGE_SHOTWINDOW = 100;
-  public static final int CAPTURE_IMAGE_DRAWWINDOW = 101;
+  // public static final int CAPTURE_IMAGE_SHOTWINDOW = 100;
+  // public static final int CAPTURE_IMAGE_DRAWWINDOW = 101;
 
   public static final int RESULT_TDCONFIG_OK     = 0;
   public static final int RESULT_TDCONFIG_NONE   = 1;

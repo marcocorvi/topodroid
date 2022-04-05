@@ -40,6 +40,7 @@ public class TDandroid
 {
   // final static public boolean BELOW_API_13 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.HONEYCOMB_MR2 );
   // final static public boolean BELOW_API_15 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.ICE_CREAM_SANDWICH_MR1 );
+  final static public boolean BELOW_API_18 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN_MR2 );
   final static public boolean BELOW_API_19 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.KITKAT );
   final static public boolean BELOW_API_21 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP );
   final static public boolean BELOW_API_23 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M );
@@ -83,6 +84,14 @@ public class TDandroid
       // "ACCESS_MEDIA_LOCATION"
   };
 
+  // private static final int PERM_BT       = 0;
+  // private static final int PERM_BT_ADMIN = 1;
+  // private static final int PERM_STORAGE  = 2;
+  // private static final int PERM_LOCATION = 3;
+  private static final int PERM_CAMERA   = 4;
+  // private static final int PERM_AUDIO    = 5;
+  // private static final int PERM_MEDIA    = 6;
+
   static final int NR_PERMS_D = 3;
   static final int NR_PERMS   = 6;
 
@@ -118,8 +127,11 @@ public class TDandroid
 
   // number of times permissions are requested
 
-  // return the number of permissions that are not granted
-  // @param time    time that the permissions are requested
+  /** @return the number of permissions that are not granted
+   * @param context  context
+   * @param activity activity
+   * @param time     time that the permissions are requested
+   */
   static int createPermissions( Context context, Activity activity, int time )
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
@@ -133,6 +145,7 @@ public class TDandroid
     int not_granted = 0;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       // TDLog.v("PERM " + "Create permission " + permNames[k] );
+      if ( k == PERM_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
         ++not_granted;
@@ -163,10 +176,16 @@ public class TDandroid
     return not_granted;
   }
 
+  /** check if the app has the minimal permissions
+   * @param context    context
+   * @param activity   activity
+   * @return true is the app can run
+   */
   static boolean canRun( Context context, Activity activity )
   {
     if ( BELOW_API_23 ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
+      // if ( k == PERN_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
     }
     return true;
@@ -283,13 +302,15 @@ public class TDandroid
     int flag = 1;
     for ( ; k<NR_PERMS; ++k ) {
       // TDLog.v("PERM " + "Check permission " + permNames[k] );
-      int res = context.checkCallingOrSelfPermission( perms[k] );
-      if ( res != PackageManager.PERMISSION_GRANTED ) {
-        // TDLog.v("PERM " + "Check permission " + permNames[k] + " not granted ");
-        // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
-	ret += flag;
-      } else {
-        // TDLog.v("PERM " + "Check permission " + permNames[k] + " granted ");
+      if ( k == PERM_CAMERA && AT_LEAST_API_21 ) { // CAMERA only for API >= 21
+        int res = context.checkCallingOrSelfPermission( perms[k] );
+        if ( res != PackageManager.PERMISSION_GRANTED ) {
+          // TDLog.v("PERM " + "Check permission " + permNames[k] + " not granted ");
+          // TDToast.make( mActivity, "TopoDroid may need " + perms[k] );
+          ret += flag;
+        } else {
+          // TDLog.v("PERM " + "Check permission " + permNames[k] + " granted ");
+        }
       }
       flag *= 2;
     }
@@ -297,6 +318,9 @@ public class TDandroid
     return ret;
   }
 
+  /** @return true if location access is granted
+   * @return context  context
+   */
   public static boolean checkLocation( Context context )
   {
     // TDLog.Log( LOG_PERM, "check location" );
@@ -307,16 +331,23 @@ public class TDandroid
         && pm.hasSystemFeature(PackageManager.FEATURE_LOCATION_GPS);
   }
 
+  /** @return true if camera is granted
+   * @return context  context
+   */
   public static boolean checkCamera( Context context )
   {
     // TDLog.Log( LOG_PERM, "check camera" );
     TDLog.v("PERM " + "Check camera ");
+    if ( ! AT_LEAST_API_21 ) return false;
     PackageManager pm = context.getPackageManager();
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.CAMERA ) == PackageManager.PERMISSION_GRANTED )
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA)
         && pm.hasSystemFeature(PackageManager.FEATURE_CAMERA_AUTOFOCUS);
   }
 
+  /** @return true if the display is multitouch
+   * @return context  context
+   */
   public static boolean checkMultitouch( Context context )
   {
     // TDLog.Log( LOG_PERM, "check multitouch" );
@@ -324,6 +355,9 @@ public class TDandroid
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_TOUCHSCREEN_MULTITOUCH );
   }
 
+  /** @return true if audio is granted
+   * @return context  context
+   */
   public static boolean checkMicrophone( Context context )
   {
     // TDLog.Log( LOG_PERM, "check microphone" );
@@ -332,6 +366,9 @@ public class TDandroid
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_MICROPHONE );
   }
 
+  /** @return true if bluetooth is granted
+   * @return context  context
+   */
   public static boolean checkBluetooth( Context context )
   {
     // TDLog.Log( LOG_PERM, "check bluetooth" );
@@ -340,6 +377,9 @@ public class TDandroid
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 
+  /** @return true if internet access is granted
+   * @return context  context
+   */
   public static boolean checkInternet( Context context )
   {
     // TDLog.Log( LOG_PERM, "check internet" );
@@ -347,12 +387,18 @@ public class TDandroid
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.INTERNET ) == PackageManager.PERMISSION_GRANTED );
   }
 
-  // REQUIRES API-18
+  /** @return true if bluetooth LE is available
+   * @return context  context
+   * @note REQUIRES API-18
+   */
   static boolean checkBluetoothLE( Context context )
   {
+    if ( BELOW_API_18 ) return false;
     return context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH_LE );
   }
 
+  // orientation lock is also in TopoDroidApp 
+  //
   // static void lockOrientation( Activity act )
   // {
   //   Display d = act.getWindowManager().getDefaultDisplay();
