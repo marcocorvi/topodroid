@@ -544,6 +544,7 @@
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
     <string name="shot_reverse">Toma Inversa</string>

@@ -551,6 +551,7 @@ Refer to the web pages for details.\n
     <string name="shot_check">Marcar medida como medida de calibração?</string>
     <string name="shot_from">de</string>
     <string name="shot_info">Inserir medida manualmente</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">comprimento</string -->
     <string name="shot_note">comentário</string>
     <string name="shot_reverse">inverter</string>

@@ -558,6 +558,7 @@ Refer to the web pages for details.\n
     <string name="shot_check">Označiť meranie, ako kontrolné meranie ?</string>
     <string name="shot_from">Z</string>
     <string name="shot_info">Vložte údaje o zámere</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">Poznámka</string>
     <string name="shot_reverse">Vymeniť body</string>

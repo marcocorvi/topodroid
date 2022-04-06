@@ -549,6 +549,7 @@ Refer to the web pages for details.\n
     <string name="shot_check">Маркиране като контролно измерване?</string>
     <string name="shot_from">от</string>
     <string name="shot_info">Въведете данни за отсечката</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- string name="shot_length">length</string -->
     <string name="shot_note">бележка</string>
     <string name="shot_reverse">обръщане</string>

@@ -556,6 +556,7 @@
     <string name="shot_check">标记测线为检测测线?</string>
     <string name="shot_from">从</string>
     <string name="shot_info">进入测量数据</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">注释</string>
     <string name="shot_reverse">反测</string>

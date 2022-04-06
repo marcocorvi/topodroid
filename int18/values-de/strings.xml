@@ -560,6 +560,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="shot_check">Messung als Kalibrierungstest markieren?</string>
     <string name="shot_from">von</string>
     <string name="shot_info">Manuelle Messung erfassen</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">Länge</string -->
     <string name="shot_note">Notizen</string>
     <string name="shot_reverse">Richtung umkehren</string>

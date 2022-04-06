@@ -59,6 +59,7 @@ import android.view.TextureView.SurfaceTextureListener;
 import android.view.Surface;
 import android.view.OrientationEventListener;
 import android.view.Display;
+import android.view.View;
 
 import android.media.Image;
 import android.media.ImageReader;
@@ -72,7 +73,7 @@ import android.util.Size;
  */
 public class QCamDrawingTexture extends TextureView
 {
-  private static final int MAX_PREVIEW_WIDTH  = 1928;
+  private static final int MAX_PREVIEW_WIDTH  = 1920; // expect landscape image
   private static final int MAX_PREVIEW_HEIGHT = 1080;
 
   QCamCompass mQCam;
@@ -402,60 +403,58 @@ public class QCamDrawingTexture extends TextureView
         mImageReader = ImageReader.newInstance( largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, 2 );
         mImageReader.setOnImageAvailableListener( mImageAvailable, mBackgroundHandler );
 
-        mOrientation = chr.get( CameraCharacteristics.SENSOR_ORIENTATION );
+        mOrientation = chr.get( CameraCharacteristics.SENSOR_ORIENTATION ); // 0, 90, 180, or 270
 
         Point displaySize = new Point();
-        int rotation = 0;
+        int rot = 0;
         try {
           DisplayManager dm = (DisplayManager)( mContext.getSystemService( Context.DISPLAY_SERVICE ) );
           mDisplay = dm.getDisplay( Display.DEFAULT_DISPLAY );
           mDisplay.getSize( displaySize );
-          rotation = mDisplay.getRotation();
+          rot = mDisplay.getRotation();
         } catch ( ClassCastException e ) {
           TDLog.Error("CAM2 class cast " + e.getMessage() );
         }
-        boolean swapped = false;
-        switch ( rotation ) {
-          case Surface.ROTATION_0:
-          case Surface.ROTATION_180:
-            if ( mOrientation == 90 || mOrientation == 270 ) swapped = true;
+        boolean swapped = false; // whether the swap width and height
+        switch ( rot ) {
+          case Surface.ROTATION_0:   // 0 display is portrait
+          case Surface.ROTATION_180: // 2
+            if ( mOrientation == 90 || mOrientation == 270 ) swapped = true; // sensor is right or left
             break;
-          case Surface.ROTATION_90:
-          case Surface.ROTATION_270:
-            if ( mOrientation == 0 || mOrientation == 180 ) swapped = true;
+          case Surface.ROTATION_90:  // 1 display is landscape
+          case Surface.ROTATION_270: // 3
+            if ( mOrientation == 0 || mOrientation == 180 ) swapped = true; // sensor is up or down
             break;
           default:
-            TDLog.Error("CAM2 invalid rotation " + rotation );
+            TDLog.Error("CAM2 invalid rotation " + rot );
         }
 
-        int rotatedWidth  = w;
-        int rotatedHeight = h;
-        int maxWidth  = displaySize.x;
-        int maxHeight = displaySize.y;
-        if ( swapped ) {
-          rotatedWidth  = h;
-          rotatedHeight = w;
-          maxWidth  = displaySize.y;
-          maxHeight = displaySize.x;
+        int rot_w = w;
+        int rot_h = h;
+        int max_w = displaySize.x;
+        int max_h = displaySize.y;
+        if ( swapped ) { // if sensor orientation and display do not agree swap width and height
+          rot_w = h;
+          rot_h = w;
+          max_w = displaySize.y;
+          max_h = displaySize.x;
         }
-        if ( maxWidth  > MAX_PREVIEW_WIDTH  ) maxWidth  = MAX_PREVIEW_WIDTH;
-        if ( maxHeight > MAX_PREVIEW_HEIGHT ) maxHeight = MAX_PREVIEW_HEIGHT;
-        mPreviewSize  = optimalSize( map.getOutputSizes( SurfaceTexture.class ), rotatedWidth, rotatedHeight, maxWidth, maxHeight, largest );
-        int orientation = mContext.getResources().getConfiguration().orientation;
+        TDLog.v("CAM2 rot " + rot_w + "x" + rot_h + " max " + max_w + "x" + max_h + " swapped " + swapped + " rotation " + rot + " sensor orient " + mOrientation );
+        if ( max_w > MAX_PREVIEW_WIDTH  ) max_w = MAX_PREVIEW_WIDTH;
+        if ( max_h > MAX_PREVIEW_HEIGHT ) max_h = MAX_PREVIEW_HEIGHT;
+        mPreviewSize = optimalSize( map.getOutputSizes( SurfaceTexture.class ), rot_w, rot_h, max_w, max_h, largest );
+     
+        int orientation = mContext.getResources().getConfiguration().orientation; 
         if ( orientation == Configuration.ORIENTATION_LANDSCAPE ) {
-          // setAspectRatio( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
-          setMinimumWidth( mPreviewSize.getWidth() );
-          setMinimumHeight( mPreviewSize.getHeight() );
+          setAspectRatio( mPreviewSize.getWidth(), mPreviewSize.getHeight() );
         } else {
-          // setAspectRatio( mPreviewSize.getHeight(), mPreviewSize.getWidth() );
-          setMinimumWidth( mPreviewSize.getHeight() );
-          setMinimumHeight( mPreviewSize.getWidth() );
+          setAspectRatio( mPreviewSize.getHeight(), mPreviewSize.getWidth() );
         }
         Boolean flash = chr.get( CameraCharacteristics.FLASH_INFO_AVAILABLE );
         mHasFlash = ( flash == null )? false : flash;
 
         mCameraId = id;
-        TDLog.v("CAM2 setup camera output camera " + id + " orientation " + mOrientation + " rotation " + rotation + " flash " + mHasFlash );
+        TDLog.v("CAM2 preview size " + mPreviewSize.getWidth() + "x" + mPreviewSize.getHeight() + " config orient " + orientation + " rotation " + rot + " flash " + mHasFlash );
         return;
       }
     } catch ( CameraAccessException e ) {
@@ -595,11 +594,11 @@ public class QCamDrawingTexture extends TextureView
     
 
   /** configure matrix transform to texture view
-   * @param w   view width
-   * @param h   view height
+   * @param vw   view width
+   * @param vh   view height
    * @note called by openCamera() and onSurfaceSizeChanged()
    */
-  private void configureTransform( int w, int h )
+  private void configureTransform( int vw, int vh )
   {
     if ( mPreviewSize == null ) {
       TDLog.v( "CAM2 configure transform no preview-size");
@@ -610,16 +609,19 @@ public class QCamDrawingTexture extends TextureView
       return;
     }
     int r = mDisplay.getRotation(); // 0: up, 1: left, 3: right 2: down
-    TDLog.v( "CAM2 configure transform rotation " + r );
+    int pw = mPreviewSize.getWidth();
+    int ph = mPreviewSize.getHeight();
+    TDLog.v( "CAM2 configure transform: view " + vw + " " + vh + " preview " + pw + " " + ph + " rotation " + r );
     Matrix mat = new Matrix();
-    RectF viewRect = new RectF( 0, 0, w, h );
-    RectF bufRect  = new RectF( 0, 0, mPreviewSize.getHeight(), mPreviewSize.getWidth() );
+    RectF viewRect = new RectF( 0, 0, vw, vh );
+    // RectF bufRect  = new RectF( 0, 0, mPreviewSize.getHeight(), mPreviewSize.getWidth() );
+    RectF bufRect  = new RectF( 0, 0, ph, pw );
     float cx = viewRect.centerX();
     float cy = viewRect.centerY();
     if ( r == Surface.ROTATION_90 || r == Surface.ROTATION_270 ) {
       bufRect.offset( cx - bufRect.centerX(), cy - bufRect.centerY() );
       mat.setRectToRect( viewRect, bufRect, Matrix.ScaleToFit.FILL );
-      float scale = Math.max( (float)h / mPreviewSize.getHeight(), (float)w / mPreviewSize.getWidth() );
+      float scale = Math.max( (float)vh / (float)ph, (float)vw / (float)pw );
       mat.postScale( scale, scale, cx, cy );
       mat.postRotate( 90 * (r - 2), cx, cy );
     } else if ( r == Surface.ROTATION_180 ) {
@@ -824,6 +826,51 @@ public class QCamDrawingTexture extends TextureView
     //     mCamera.setParameters( params );
     //   }
     // }
+  }
+
+  // from AutoFitTextureView -------------------------------------------------------------
+  // https://github.com/googlearchive/android-Camera2Basic/blob/master/kotlinApp/Application/src/main/java/com/example/android/camera2basic/AutoFitTextureView.kt
+
+  private int ratioWidth  = 0;
+  private int ratioHeight = 0;
+
+  /** set the aspect raion 
+   * @param w   width
+   * @param h   height
+   */
+  private void setAspectRatio( int w, int h ) 
+  {
+    if (w < 0 || h < 0) {
+      throw new IllegalArgumentException("CAM2 Size cannot be negative.");
+    }
+    ratioWidth  = w;
+    ratioHeight = h;
+    requestLayout();
+  }
+
+  /** react to a request to remeasure
+   * @param widthMeasureSpec   width
+   * @param heightMeasureSpec  height
+   */
+  @Override
+  public void onMeasure( int widthMeasureSpec, int heightMeasureSpec )
+  {
+    super.onMeasure( widthMeasureSpec, heightMeasureSpec );
+    int width  = View.MeasureSpec.getSize( widthMeasureSpec );
+    int height = View.MeasureSpec.getSize( heightMeasureSpec );
+    if (ratioWidth == 0 || ratioHeight == 0) {
+      setMeasuredDimension(width, height);
+    } else {
+      int wrh = width * ratioHeight;
+      int hrw = height * ratioWidth;
+      // if ( wrh == hrw ) return;
+      TDLog.v("CAM2 WxH " + width + "x" + height + " ratio " + ratioWidth + "x" + ratioHeight );
+      if ( wrh < hrw ) {
+        setMeasuredDimension(width, width * ratioHeight / ratioWidth);
+      } else {
+        setMeasuredDimension(height * ratioWidth / ratioHeight, height);
+      }
+    }
   }
 
 

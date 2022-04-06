@@ -552,6 +552,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="shot_check">Marco il tiro come di controllo?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
     <string name="shot_reverse">inverso</string>

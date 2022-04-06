@@ -206,7 +206,7 @@ class ShotEditMoreDialog extends MyDialog
 
     mTVstations = (TextView) findViewById( R.id.photo_shot_stations );
     mTVdata = (TextView) findViewById( R.id.photo_shot_data );
-    mTVstations.setText( mBlk.Name() );
+    mTVstations.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mBlk.Name() ) );
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_NORMAL ) {
       mTVdata.setText( mBlk.dataStringNormal( mContext.getResources().getString(R.string.shot_data) ) );
     } else { // SurveyInfo.DATAMODE_DIVING

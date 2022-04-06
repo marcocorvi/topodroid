@@ -561,6 +561,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_check">Mark shot as check-shot?</string>
     <string name="shot_from">from</string>
     <string name="shot_info">Enter shot data</string>
+    <string name="shot_name">Shot %1$s</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">note</string>
     <string name="shot_reverse">reverse</string>

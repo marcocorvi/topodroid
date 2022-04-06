@@ -558,6 +558,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="shot_check">Zaznaczyć pomiar jako sprawdzający ?</string>
     <string name="shot_from">z</string>
     <string name="shot_info">Wprowadz dane pomiaru</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">uwaga</string>
     <string name="shot_reverse">wsteczny</string>

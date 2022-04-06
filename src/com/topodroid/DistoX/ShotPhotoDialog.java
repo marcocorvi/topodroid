@@ -23,7 +23,7 @@ import android.os.Bundle;
 // import android.content.Intent;
 import android.content.Context;
 
-// import android.widget.TextView;
+import android.widget.TextView;
 import android.widget.EditText;
 import android.widget.Button;
 import android.widget.CheckBox;
@@ -42,18 +42,22 @@ class ShotPhotoDialog extends MyDialog
   private Button   mButtonOK;
   private CheckBox mCamera;        // whether to use camera or camera2
   private long     mSid;           // shot id
+  private String   mName;          // shot name
   // private Button   mButtonCancel;
   private boolean  cameraCheck;
 
   /**
    * @param context   context
-   * @param parent    parent shot list activity
+   * @param parent    parent shot list activityA
+   * @param sid       shot id
+   * @param name      shot name
    */
-  ShotPhotoDialog( Context context, ShotWindow parent, long sid )
+  ShotPhotoDialog( Context context, ShotWindow parent, long sid, String name )
   {
     super( context, R.string.ShotPhotoDialog );
     mParent = parent;
     mSid    = sid;
+    mName   = name;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoComment");
   }
 
@@ -67,7 +71,8 @@ class ShotPhotoDialog extends MyDialog
     // TDLog.Log(  TDLog.LOG_PHOTO, "PhotoComment onCreate" );
     initLayout(R.layout.photo_comment_dialog, R.string.title_photo_comment );
     
-
+    TextView tv = (TextView) findViewById(R.id.photo_shot_name );
+    tv.setText( String.format( mContext.getResources().getString( R.string.shot_name ), mName ) );
     mETcomment = (EditText) findViewById(R.id.photo_comment_comment);
     mButtonOK  = (Button) findViewById(R.id.photo_comment_ok );
     mCamera    = (CheckBox) findViewById(R.id.photo_camera );

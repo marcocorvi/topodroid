@@ -557,6 +557,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="shot_check">Mérés megjelölése ellenőrző mérésként</string>
     <string name="shot_from">Honnan</string>
     <string name="shot_info">Írd be a mérés adatait</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">hossz</string -->
     <string name="shot_note">megjegyzés</string>
     <string name="shot_reverse">visszamérés</string>

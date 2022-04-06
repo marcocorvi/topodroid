@@ -548,6 +548,7 @@ Refer to the web pages for details.\n
     <string name="shot_check">Marquer la visée comme visée de contrôle ?</string>
     <string name="shot_from">DEPUIS ou DE</string>
     <string name="shot_info">Saisir les infos de visée</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">longueur</string -->
     <string name="shot_note">Note</string>
     <string name="shot_reverse">Inverse</string>

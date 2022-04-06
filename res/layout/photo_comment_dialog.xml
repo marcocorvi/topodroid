@@ -18,6 +18,13 @@
     android:layout_height="wrap_content" 
     android:text="@string/photo_comment_prompt"
     />
+
+  <TextView android:id="@+id/photo_shot_name" 
+    android:maxLines="1" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    />
       	
   <EditText android:id="@+id/photo_comment_comment" 
     style="@style/edit_text_light"

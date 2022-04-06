@@ -551,6 +551,7 @@ Refer to the web pages for details.\n
     <string name="shot_check">Marchează măsurătoarea ca măsurătoare de verificare?</string>
     <string name="shot_from">de la</string>
     <string name="shot_info">Introdu valorile măsurătorii</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">lungime</string -->
     <string name="shot_note">notă</string>
     <string name="shot_reverse">inversează</string>

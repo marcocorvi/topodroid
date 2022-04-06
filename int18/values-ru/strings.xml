@@ -550,6 +550,7 @@
     <string name="shot_check">Пометить замер как проверочный?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные измерений</string>
+    <!-- TODO string name="shot_name">Shot %1$s</string -->
     <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
     <string name="shot_reverse">развернуть</string>
