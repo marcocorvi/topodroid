@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDFile;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
@@ -327,7 +328,7 @@ class ShotNewDialog extends MyDialog
     mETdistance.requestFocus( );  // try to get focus to distance/depth field
   }
 
-  /** implements: set azimuth/clino and orientation
+  /** @implements: set azimuth/clino and orientation
    * @param b  azimuth [degrees]
    * @param c  clino [degrees]
    * @param o  camera orientation [degrees]
@@ -341,8 +342,9 @@ class ShotNewDialog extends MyDialog
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 
  
-  /** implements: set image data
+  /** @implements: store the image JPEG data
    * @param data   image data
+   * @return true if the JPEG data are not null
    */
   public boolean setJpegData( byte[] data )
   {
@@ -350,7 +352,7 @@ class ShotNewDialog extends MyDialog
     return mJpegData != null;
   }
 
-  /** implements user long-taps
+  /** react to a user long-taps
    * @param v    tapped view
    * @return true if tap has been handled 
    */
@@ -377,7 +379,7 @@ class ShotNewDialog extends MyDialog
     return bx;
   }
 
-  /** implements user taps // FIXME synchronized ?
+  /** react to a user taps // FIXME synchronized ?
    * @param v    tapped view
    */
   @Override

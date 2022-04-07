@@ -21,6 +21,7 @@ import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -4884,7 +4885,7 @@ public class DrawingWindow extends ItemDrawer
   // {
   //   // TDLog.v("insert photo " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
   //   assert( mLastLinePath == null );
-  //   if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
+  //   if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
   //     // // FIXME TITLE has to go
   //     // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
   //     // // FIXME NOTIFY ? no
@@ -8132,7 +8133,7 @@ public class DrawingWindow extends ItemDrawer
       //   if ( resCode == Activity.RESULT_OK ) {
       //     Bundle extras = intent.getExtras();
       //     Bitmap bitmap = (Bitmap) extras.get("data");
-      //     if ( mMediaManager.savePhoto( bitmap, 90 ) ) { // compression = 90
+      //     if ( mMediaManager.savePhotoFile( bitmap, 90 ) ) { // compression = 90
       //       // // FIXME TITLE has to go
       //       // mApp_mData.insertPhoto( TDInstance.sid, mMediaId, -1, "", TDUtil.currentDate(), mMediaComment, mMediaCamera );
       //       // // FIXME NOTIFY ? no

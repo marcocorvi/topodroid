@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.ExifInfo;
@@ -244,6 +245,7 @@ class QCamCompass extends Dialog
           mSurface.startPreview(); // TEXTURE
         } else if ( mTexture != null ) {
           // TODO
+          mTexture.startPreview();
         }
         enableButtons( true );
       } else {
@@ -273,6 +275,7 @@ class QCamCompass extends Dialog
         }
       }
     } else if ( b == buttonCancel ) {
+      mHasSaved = false;
       TDLog.v( "QCAM compass. Click cancel button");
     } else {
       TDLog.Error( "QCAM compass. Click unexpected view");
@@ -296,7 +299,6 @@ class QCamCompass extends Dialog
   public void onBackPressed()
   {
     TDLog.v( "QCAM compass. BACK pressed");
-    mHasSaved = false;
     onClick( buttonCancel );
   }
 
@@ -429,10 +431,10 @@ class QCamCompass extends Dialog
     mZoomTime = time;
   }
 
-  /** set the JPEG data
-   * @param data   JPEG image data
-   * @return true on success
-   */
-  public boolean setJpegData( byte[] data ) { return false; } 
+  // /** set the JPEG data - use default
+  //  * @param data   JPEG image data
+  //  * @return true on success
+  //  */
+  // public boolean setJpegData( byte[] data ) { return false; } 
 
 }

@@ -12,9 +12,9 @@
 package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDandroid;
 
 import android.os.ParcelFileDescriptor;

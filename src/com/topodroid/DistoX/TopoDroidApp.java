@@ -17,6 +17,7 @@ import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.prefs.TDPrefActivity;

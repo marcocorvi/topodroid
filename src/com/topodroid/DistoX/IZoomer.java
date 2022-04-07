@@ -13,7 +13,8 @@ package com.topodroid.DistoX;
 
 interface IZoomer 
 {
-  // get the value of the zoom
+  /** @return the value of the zoom
+   */
   float zoom();
 
   void checkZoomBtnsCtrl();

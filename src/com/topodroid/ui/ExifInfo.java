@@ -12,9 +12,9 @@
 package com.topodroid.ui;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.TDUtil;
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.DistoX.TDandroid;
 
 import java.io.IOException;
 import java.util.Locale;
@@ -52,16 +52,32 @@ public class ExifInfo
     readExif( filename );
   }
 
-  public float azimuth() { return mAzimuth; }
-  public float clino()   { return mClino; }
-  public String date()   { return mDate; }
+  /** @return the azimuth [degree]
+   */
+  public float azimuth()   { return mAzimuth; }
+
+  /** @return the inclination [degree]
+   */
+  public float clino()     { return mClino; }
+
+  /** @return the date (format yyyy.MM.dd) 
+   * @see TDUtils.currentDateTime
+   */
+  public String date()     { return mDate; }
+
+  /** @return the image orientation [degree]
+   */
   public int orientation() { return mOrientation; }
+
+  /** @return the sensor accuracy, as reported by Android 
+   */
   public int accuracy()    { return mAccuracy; }
 
   /** set exif values
    * @param azimuth      azimuth [degrees]
    * @param clino        clino [degrees]
    * @param orienatation camera orientation [degrees]
+   * @param accuracy     sensor accuracy
    */
   public void setExifValues( float azimuth, float clino, int orientation, int accuracy )
   {
@@ -69,7 +85,7 @@ public class ExifInfo
     mClino       = clino;
     mOrientation = orientation;
     mAccuracy    = accuracy;
-    mDate = TDUtil.currentDateTime();
+    mDate        = TDUtil.currentDateTime();
   }
 
   // ANDROID-11

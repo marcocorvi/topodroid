@@ -12,10 +12,10 @@
 package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.packetX.PacketLogger;
-import com.topodroid.DistoX.TDUtil;
 
 // import java.lang.ref.WeakReference;
 

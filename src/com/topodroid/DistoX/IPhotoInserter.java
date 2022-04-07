@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 interface IPhotoInserter
 {
+  /** insert the photo
+   */
   void insertPhoto( );
-
 }

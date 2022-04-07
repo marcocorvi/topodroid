@@ -15,7 +15,7 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.common.LegType;
 import com.topodroid.common.ExtendType;
 

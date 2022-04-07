@@ -12,6 +12,7 @@
 package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;

@@ -12,9 +12,9 @@
 package com.topodroid.dev.distox;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.DistoX.DataDownloader;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TopoDroidApp;
 

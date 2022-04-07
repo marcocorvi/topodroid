@@ -15,10 +15,8 @@ import android.view.SurfaceHolder;
 
 interface IDrawingSurface 
 {
-  /**
+  /** refresh the surface
    * @param holder surface holder
-   * 
-   * refresh surface
    */
   void refresh( SurfaceHolder holder );
 

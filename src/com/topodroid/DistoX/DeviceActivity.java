@@ -14,6 +14,7 @@ package com.topodroid.DistoX;
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;

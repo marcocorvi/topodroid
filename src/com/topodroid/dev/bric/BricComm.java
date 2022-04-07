@@ -32,7 +32,7 @@ import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TopoDroidApp;
 import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 

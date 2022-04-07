@@ -497,9 +497,10 @@ public class QCamDrawingTexture extends TextureView
             }
             TDLog.v("CAM2 capture session on configured");
             mCaptureSession = session;
-            mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
-            setAutoFlash( mPreviewRequestBuilder );
-            mPreviewRequest = mPreviewRequestBuilder.build();
+            // called in startPreview()
+            // mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
+            // setAutoFlash( mPreviewRequestBuilder );
+            // mPreviewRequest = mPreviewRequestBuilder.build();
             startPreview();
           }
           @Override
@@ -520,8 +521,16 @@ public class QCamDrawingTexture extends TextureView
   public boolean startPreview()
   {
     TDLog.v("CAM2 start preview");
-    if ( mCamera != null && mPreviewRequest != null ) {
+    mState = STATE_PREVIEW;
+    if ( mCamera != null /* && mPreviewRequest != null */ ) {
       try { // continuously send capture requests: necessary to send pictures to the surface
+        mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
+
+        mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_MODE, CaptureRequest.CONTROL_AF_MODE_CONTINUOUS_PICTURE ); // autofocus
+        setAutoFlash( mPreviewRequestBuilder );
+        mPreviewRequest = mPreviewRequestBuilder.build();
+        if ( mPreviewRequest == null ) return false;
+
         mCaptureSession.setRepeatingRequest( mPreviewRequest, null, mBackgroundHandler ); // null CaptureCallback
         return true;
       } catch ( CameraAccessException e ) {
@@ -632,6 +641,8 @@ public class QCamDrawingTexture extends TextureView
     setTransform( mat );
   }
 
+  /** @return the JPEG data
+   */
   byte[] getJpegData() { return mJpegData; }
 
   /** take a picture
@@ -721,17 +732,22 @@ public class QCamDrawingTexture extends TextureView
   private void unlockFocus()
   {
     TDLog.v("CAM2 unlock focus");
-    // try {
-    //   mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
-    //   setAutoFlash( mPreviewRequestBuilder );
-    //   mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
-    //   mState = STATE_PREVIEW;
-    //   TDLog.v("CAM2 state --> PREVIEW");
-    //   mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
-    // } catch ( CameraAccessException e ) {
-    //   TDLog.Error("CAM2 access " + e.getMessage() );
-    // }
     mState = STATE_PICTURE_DONE;
+  }
+
+  private void restartPreview()
+  {
+    TDLog.v("CAM2 restart preview");
+    try {
+      mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
+      setAutoFlash( mPreviewRequestBuilder );
+      mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
+      mState = STATE_PREVIEW;
+      TDLog.v("CAM2 state --> PREVIEW");
+      mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
+    } catch ( CameraAccessException e ) {
+      TDLog.Error("CAM2 access " + e.getMessage() );
+    }
   }
 
   /** set the auto-flash
@@ -744,26 +760,16 @@ public class QCamDrawingTexture extends TextureView
     builder.set( CaptureRequest.CONTROL_AE_MODE, CaptureRequest.CONTROL_AE_MODE_ON_AUTO_FLASH );
   }
 
-  // /** save the JPEG image data
-  //  * @param data   JPEG image data
-  //  * @return true if data is not null
-  //  */
-  // boolean setJpegData( byte[] data )
-  // {
-  //   TDLog.v("CAM2 set JPEG data");
-  //   mJpegData = data;
-  //   return (mJpegData != null);
-  // }
-
-  // static {
-  //   ORIENTATIONS.append(Surface.ROTATION_0, 90);
-  //   ORIENTATIONS.append(Surface.ROTATION_90, 0);
-  //   ORIENTATIONS.append(Surface.ROTATION_180, 270);
-  //   ORIENTATIONS.append(Surface.ROTATION_270, 180);
-  // }
 
   /** @return orientation from the rotation
    * @param rot  rotation
+   *
+   * static {
+   *   ORIENTATIONS.append(Surface.ROTATION_0, 90);
+   *   ORIENTATIONS.append(Surface.ROTATION_90, 0);
+   *   ORIENTATIONS.append(Surface.ROTATION_180, 270);
+   *   ORIENTATIONS.append(Surface.ROTATION_270, 180);
+   * }
    */
   private int getOrientation( int rot )
   {

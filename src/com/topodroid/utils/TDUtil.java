@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.DistoX;
+package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;

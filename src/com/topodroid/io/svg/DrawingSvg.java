@@ -15,6 +15,7 @@ package com.topodroid.io.svg;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDVersion;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -32,7 +33,6 @@ import com.topodroid.DistoX.BrushManager;
 // import com.topodroid.DistoX.SymbolPoint;
 import com.topodroid.DistoX.Scrap;
 // import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.DBlock;
 

@@ -16,6 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;

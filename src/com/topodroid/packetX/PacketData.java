@@ -12,7 +12,7 @@
 package com.topodroid.packetX;
 
 import com.topodroid.utils.TDColor;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 
 // import java.text.SimpleDateFormat;
 import java.util.Locale;

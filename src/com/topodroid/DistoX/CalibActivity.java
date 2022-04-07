@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;

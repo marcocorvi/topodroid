@@ -14,7 +14,7 @@ package com.topodroid.tdm;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDVersion;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 
 // import java.io.File;
 import java.io.IOException;

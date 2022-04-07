@@ -13,6 +13,7 @@ package com.topodroid.io.shp;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 //  import com.topodroid.num.NumSplay;
@@ -23,7 +24,6 @@ import com.topodroid.DistoX.DrawingUtil;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.ui.ExifInfo;
 
 

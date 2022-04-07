@@ -69,6 +69,7 @@ public class MyBearingAndClino implements IBearingAndClino
   /** write the image data to the (output) file - and stores azimuth/clino as well
    * @param data    image data
    * @return true on success
+   * @note override default
    */
   public boolean setJpegData( byte[] data )
   {
@@ -78,13 +79,12 @@ public class MyBearingAndClino implements IBearingAndClino
       fos.write( data );
       fos.flush();
       fos.close();
-      // TDLog.v( "BearingClino UI saved JPEG file " + mFile.getPath() );
+      mExif.writeExif( mFilepath );
+      return true;
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );
-      return false;
     }
-    mExif.writeExif( mFilepath );
-    return true;
+    return false;
   }
 
 }

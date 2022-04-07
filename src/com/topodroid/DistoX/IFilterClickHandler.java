@@ -14,5 +14,6 @@ package com.topodroid.DistoX;
 interface IFilterClickHandler
 {
   void setButtonFilterMode( int filter_mode, int code );
+
   boolean dismissPopupFilter();
 }

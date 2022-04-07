@@ -14,10 +14,10 @@
 package com.topodroid.dev.distox2;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.R;
 
 import java.io.File;

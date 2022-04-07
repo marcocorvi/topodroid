@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.DistoX.TDToast;
 import com.topodroid.DistoX.TDPath;
 import com.topodroid.DistoX.DeviceActivity;

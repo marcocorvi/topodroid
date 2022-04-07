@@ -15,6 +15,7 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.num.TDNum;
 import com.topodroid.ptopo.PTFile;
 import com.topodroid.ptopo.PTTrip;
@@ -37,7 +38,6 @@ import com.topodroid.DistoX.DrawingLinePath;
 // import com.topodroid.DistoX.DrawingPointLinePath;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.PtCmapActivity;
 
 // import java.io.File;

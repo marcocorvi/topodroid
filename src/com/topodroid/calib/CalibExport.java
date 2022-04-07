@@ -13,7 +13,7 @@ package com.topodroid.calib;
 
 import com.topodroid.DistoX.DeviceHelper;
 import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.calib.CalibInfo;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLog;

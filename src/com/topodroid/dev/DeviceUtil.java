@@ -12,8 +12,8 @@
 package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDUtil;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;

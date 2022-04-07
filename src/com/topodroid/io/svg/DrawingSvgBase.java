@@ -15,6 +15,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
@@ -37,7 +38,6 @@ import com.topodroid.DistoX.LinePoint;
 import com.topodroid.DistoX.BrushManager;
 import com.topodroid.DistoX.SymbolPoint;
 import com.topodroid.DistoX.SymbolLibrary;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.ICanvasCommand;
 

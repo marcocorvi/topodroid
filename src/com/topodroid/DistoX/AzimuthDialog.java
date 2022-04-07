@@ -193,10 +193,22 @@ class AzimuthDialog extends MyDialog
     updateEditText();
   }
 
-  public boolean setJpegData( byte[] data ) { return false; }
+  // /** set the photo JPEG - use default
+  //  * @param data   JPEG data
+  //  * @return false: the JPEG data are not saved
+  //  */
+  // public boolean setJpegData( byte[] data ) { return false; }
 
   private TimerTask mTimer = null;
 
+  /** react to a user tap
+   * @param v    tapped view - it can be
+   *   - CANCEL
+   *   - SENSOR: start the timer to measure animuth and clino
+   *   - OK: set azimuth and clino
+   *   - LEFT: set fixed "left"
+   *   - RIGHT: set fixed "right"
+   */
   public void onClick(View v) 
   {
     if ( mTimer != null ) {
@@ -241,6 +253,8 @@ class AzimuthDialog extends MyDialog
     }
   }
 
+  /** react to a tap on BACK - cancel the timer and close the dialog
+   */
   @Override
   public void onBackPressed()
   {

@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDUtil;
 
 // import java.io.File;
 import java.io.FileOutputStream;
@@ -118,33 +119,33 @@ class MediaManager
    */
   float getY() { return mMediaY; }
 
-  /** store the photo - and clear the photo filepath
-   * @param bitmap      ...
-   * @param compression compression mode
-   * @return true if successful
-   */
-  boolean savePhoto( Bitmap bitmap, int compression )
-  { 
-    boolean ret = false;
-    if ( mImageFilepath != null ) {
-      try {
-        FileOutputStream fos = TDFile.getFileOutputStream( mImageFilepath );
-        bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
-        fos.flush();
-        fos.close();
-        mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera );
-        ret = true;
-      } catch ( FileNotFoundException e ) {
-        TDLog.Error("cannot save photo: file not found");
-      } catch ( IOException e ) {
-       TDLog.Error("cannot save photo: i/o error");
-      }
-    } else {
-      TDLog.Error("cannot save photo: null file" );
-    }
-    mImageFilepath = null;
-    return ret;
-  }
+  // /** store the photo - and clear the photo filepath - NOT USED
+  //  * @param bitmap      ...
+  //  * @param compression compression mode
+  //  * @return true if successful
+  //  */
+  // boolean savePhotoFile( Bitmap bitmap, int compression )
+  // { 
+  //   boolean ret = false;
+  //   if ( mImageFilepath != null ) {
+  //     try {
+  //       FileOutputStream fos = TDFile.getFileOutputStream( mImageFilepath );
+  //       bitmap.compress( Bitmap.CompressFormat.JPEG, compression, fos );
+  //       fos.flush();
+  //       fos.close();
+  //       mData.insertPhoto( TDInstance.sid, mPhotoId, mShotId, "", TDUtil.currentDate(), mComment, mCamera );
+  //       ret = true;
+  //     } catch ( FileNotFoundException e ) {
+  //       TDLog.Error("cannot save photo: file not found");
+  //     } catch ( IOException e ) {
+  //      TDLog.Error("cannot save photo: i/o error");
+  //     }
+  //   } else {
+  //     TDLog.Error("cannot save photo: null file" );
+  //   }
+  //   mImageFilepath = null;
+  //   return ret;
+  // }
 
   // void insertPhoto()
   // {

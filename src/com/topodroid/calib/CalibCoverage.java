@@ -13,8 +13,8 @@ package com.topodroid.calib;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDVector;
-import com.topodroid.DistoX.TDUtil;
 
 import java.util.List;
 

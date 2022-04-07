@@ -12,10 +12,15 @@
  */
 package com.topodroid.DistoX;
 
+/** icosahedron vertex
+ */
 class IcoVertex extends IcoPoint
 {
   int mIndex;
 
+  /** cstr
+   * @parm k   vertex index
+   */
   IcoVertex( int k )
   {
     // super();

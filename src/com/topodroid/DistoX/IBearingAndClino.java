@@ -21,6 +21,10 @@ interface IBearingAndClino
    */
   void setBearingAndClino( float b0, float c0, int o0, int a0 );
 
-  boolean setJpegData( byte[] data );
+  /** set the JPEG data
+   * @param data   JPEG data
+   * @return false: the JPEG data are not stored
+   */
+  default boolean setJpegData( byte[] data ) { return false; }
 
 }

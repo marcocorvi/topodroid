@@ -20,6 +20,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
@@ -1088,7 +1089,7 @@ public class ShotWindow extends Activity
       //     // (new ShotPhotoDialog(this, this, mShotId, blk_name ) ).show();
       //     // Bundle extras = intent.getExtras();
       //     // Bitmap bitmap = (Bitmap) extras.get("data");
-      //     // mMediaManager.savePhoto( bitmap, 90 ); // compression = 90
+      //     // mMediaManager.savePhotoFile( bitmap, 90 ); // compression = 90
       //     // TODO TDToast.makeToast( "saved " + mMediaManager.getImageFilepath() );
       //     Uri uri = intent.getData();
       //     if ( uri != null ) TDLog.v( "saved " + uri.toString() );

@@ -13,6 +13,7 @@ package com.topodroid.io.svg;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
@@ -33,7 +34,6 @@ import com.topodroid.DistoX.DrawingCommandManager;
 // import com.topodroid.DistoX.Scrap;
 import com.topodroid.DistoX.SymbolLibrary;
 import com.topodroid.DistoX.LinePoint;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.DBlock;
 import com.topodroid.DistoX.SurveyInfo;

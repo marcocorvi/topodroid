@@ -11,6 +11,8 @@
  */
 package com.topodroid.DistoX;
 
+import com.topodroid.utils.TDUtil;
+
 import android.widget.TextView;
 import android.widget.DatePicker;
 import android.app.DatePickerDialog.OnDateSetListener;

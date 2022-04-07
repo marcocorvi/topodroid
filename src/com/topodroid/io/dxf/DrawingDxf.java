@@ -13,6 +13,7 @@ package com.topodroid.io.dxf;
 
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.Point2D;
 import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
@@ -23,7 +24,6 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.DistoX.DBlock;
 import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.TDInstance;
 import com.topodroid.DistoX.ICanvasCommand;
 import com.topodroid.DistoX.BrushManager;

@@ -14,8 +14,8 @@ package com.topodroid.inport;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TDUtil;
 import com.topodroid.DistoX.DataHelper;
 
 // import java.io.File;

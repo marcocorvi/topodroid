@@ -13,6 +13,7 @@ package com.topodroid.DistoX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.prefs.TDSetting;
 

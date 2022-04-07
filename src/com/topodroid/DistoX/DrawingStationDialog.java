@@ -418,7 +418,11 @@ class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
-    public boolean setJpegData( byte[] data ) { return false; }
+  // /** set the JPEG data - use default
+  //  * @param data   JPEG data
+  //  * @return false: the JPEG data are not stored
+  //  */
+  // public boolean setJpegData( byte[] data ) { return false; }
   
 }
         
