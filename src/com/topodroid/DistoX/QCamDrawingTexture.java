@@ -143,23 +143,28 @@ public class QCamDrawingTexture extends TextureView
     public void onImageAvailable(ImageReader reader)
     {
       TDLog.v("CAM2 image available");
-      Image image = reader.acquireNextImage();
-      Image.Plane[] planes = image.getPlanes();
-      if ( planes.length > 0 ) {
-        ByteBuffer data = planes[0].getBuffer();
-        if ( data != null ) {
-          int size = data.limit();
-          if ( size > 0 ) {
-            TDLog.v("CAM2 planes " + planes.length + " size " + size );
-            mJpegData = new byte[size];
-            data.get( mJpegData, 0, size );
-          } 
-          // mQCam.setJpegData( data.array() );
-          mQCam.enableButtonsOnUiThread( mJpegData != null );
-        }  
+      try {
+        Image image = reader.acquireNextImage();
+        Image.Plane[] planes = image.getPlanes();
+        if ( planes.length > 0 ) {
+          ByteBuffer data = planes[0].getBuffer();
+          if ( data != null ) {
+            int size = data.limit();
+            if ( size > 0 ) {
+              TDLog.v("CAM2 planes " + planes.length + " size " + size );
+              mJpegData = new byte[size];
+              data.get( mJpegData, 0, size );
+            } 
+            // mQCam.setJpegData( data.array() );
+            mQCam.enableButtonsOnUiThread( mJpegData != null );
+          }  
+        }
+        mState = STATE_PICTURE_DONE;
+        // mBackgroundHandler.post( new ImageSaver( reader.acquireNextImage(), mQCam ) );
+      } catch ( RuntimeException e ) {
+        TDLog.Error("CAM2 runtime " + e.getMessage() );
+        startPreview(); // restart preview
       }
-      mState = STATE_PICTURE_DONE;
-      // mBackgroundHandler.post( new ImageSaver( reader.acquireNextImage(), mQCam ) );
     }
   };
 
@@ -735,20 +740,22 @@ public class QCamDrawingTexture extends TextureView
     mState = STATE_PICTURE_DONE;
   }
 
-  private void restartPreview()
-  {
-    TDLog.v("CAM2 restart preview");
-    try {
-      mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
-      setAutoFlash( mPreviewRequestBuilder );
-      mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
-      mState = STATE_PREVIEW;
-      TDLog.v("CAM2 state --> PREVIEW");
-      mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
-    } catch ( CameraAccessException e ) {
-      TDLog.Error("CAM2 access " + e.getMessage() );
-    }
-  }
+  // /** restart the preview
+  //  */
+  // private void restartPreview()
+  // {
+  //   TDLog.v("CAM2 restart preview");
+  //   try {
+  //     mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
+  //     setAutoFlash( mPreviewRequestBuilder );
+  //     mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
+  //     mState = STATE_PREVIEW;
+  //     TDLog.v("CAM2 state --> PREVIEW");
+  //     mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
+  //   } catch ( CameraAccessException e ) {
+  //     TDLog.Error("CAM2 access " + e.getMessage() );
+  //   }
+  // }
 
   /** set the auto-flash
    * @param builder   capture request builder

@@ -27,16 +27,18 @@ public class ExifInfo
   public final static int ORIENTATION_RIGHT =  90;
   public final static int ORIENTATION_DOWN  = 180;
   public final static int ORIENTATION_LEFT  = 270;
-  final static int EXIF_UP    = 6;
-  final static int EXIF_RIGHT = 3;
-  final static int EXIF_DOWN  = 8;
-  final static int EXIF_LEFT  = 1;
+  final static int EXIF_UP     = 6;
+  final static int EXIF_RIGHT  = 3;
+  final static int EXIF_DOWN   = 8;
+  final static int EXIF_LEFT   = 1;
+  final static int EXIF_NORMAL = 1;
 
   private float  mAzimuth = 0;
   private float  mClino   = 0;
   private int mOrientation = 0;
   private int mAccuracy    = -1; // sensor accuracy (-1: undefined, 0: unreliable, ...)
   private String mDate = "";
+  private int mCamera  = 1; // old camera API
 
   /** default cstr
    */
@@ -78,14 +80,16 @@ public class ExifInfo
    * @param clino        clino [degrees]
    * @param orienatation camera orientation [degrees]
    * @param accuracy     sensor accuracy
+   * @param camera       camera API (1 or 2)
    */
-  public void setExifValues( float azimuth, float clino, int orientation, int accuracy )
+  public void setExifValues( float azimuth, float clino, int orientation, int accuracy, int camera )
   {
     mAzimuth     = azimuth;
     mClino       = clino;
     mOrientation = orientation;
     mAccuracy    = accuracy;
     mDate        = TDUtil.currentDateTime();
+    mCamera      = camera;
   }
 
   // ANDROID-11
@@ -101,7 +105,7 @@ public class ExifInfo
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", azimuth, clino );
-      int rot = getExifOrientation( mOrientation );
+      int rot = (mCamera == 1 )? getExifOrientation( mOrientation ) : getExifOrientation2( mOrientation );
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       }
@@ -231,6 +235,11 @@ public class ExifInfo
     if ( orientation < 225 ) return EXIF_DOWN;
     if ( orientation < 315 ) return EXIF_LEFT;
     return EXIF_UP;
+  }
+
+  static private int getExifOrientation2( int orientation )
+  {
+    return EXIF_NORMAL;
   }
 
   /** @return camera orientation [degrees] from the orientation angle

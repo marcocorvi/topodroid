@@ -400,8 +400,9 @@ class DrawingStationDialog extends MyDialog
    * @param c  clino [degrees]
    * @param orientation  orientation (unused)
    * @param accuracy     sensor accuracy (unused)
+   * @param cam          camera API (unused)
    */
-    public void setBearingAndClino( float b, float c, int orientation, int accuracy )
+    public void setBearingAndClino( float b, float c, int orientation, int accuracy, int cam )
     {
       // TDLog.v( "Station dialog set orientation " + orientation + " bearing " + b + " clino " + c );
       String nick = "";
@@ -418,11 +419,11 @@ class DrawingStationDialog extends MyDialog
       dismiss();
     }
 
-  // /** set the JPEG data - use default
-  //  * @param data   JPEG data
-  //  * @return false: the JPEG data are not stored
-  //  */
-  // public boolean setJpegData( byte[] data ) { return false; }
+  /** @implement set the JPEG data - use default (comment wen minsdk = 24)
+   * @param data   JPEG data
+   * @return false: the JPEG data are not stored
+   */
+  public boolean setJpegData( byte[] data ) { return false; }
   
 }
         

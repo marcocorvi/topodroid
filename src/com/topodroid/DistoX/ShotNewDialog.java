@@ -333,11 +333,12 @@ class ShotNewDialog extends MyDialog
    * @param c  clino [degrees]
    * @param o  camera orientation [degrees]
    * @param a  sensor accuracy
+   * @param cam  camera
    */
-  public void setBearingAndClino( float b, float c, int o, int a )
+  public void setBearingAndClino( float b, float c, int o, int a, int cam )
   {
     // TDLog.v( "New shot dialog set orientation " + o + " bearing " + b + " clino " + c );
-    mExif.setExifValues( b, c, o, a );
+    mExif.setExifValues( b, c, o, a, cam );
     mETbearing.setText( String.format(Locale.US, "%.1f", b ) );
     mETclino.setText( String.format(Locale.US, "%.1f", c ) );
   } 

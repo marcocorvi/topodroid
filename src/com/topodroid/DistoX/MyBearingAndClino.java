@@ -56,17 +56,18 @@ public class MyBearingAndClino implements IBearingAndClino
    * @param c0 clino [degrees]
    * @param o0 camera orientation [degrees], 0: up, 90: right, etc.
    * @param a0 accuracy 
+   * @param cam camera API (1 or 2)
    */
-  public void setBearingAndClino( float b0, float c0, int o0, int a0 )
+  public void setBearingAndClino( float b0, float c0, int o0, int a0, int cam )
   {
     // TDLog.v( "BearingClino UI set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
     // TDLog.v( "Bearing and Clino orientation " + o0 );
     // this is not good for photo because it might alter azimuth/clino of xsection sketch
     // mApp.mData.updatePlotAzimuthClino( TDInstance.sid, mPid, b0, c0 );
-    mExif.setExifValues( b0, c0, o0, a0 );
+    mExif.setExifValues( b0, c0, o0, a0, cam );
   }
 
-  /** write the image data to the (output) file - and stores azimuth/clino as well
+  /** @implement write the image data to the (output) file - and stores azimuth/clino as well
    * @param data    image data
    * @return true on success
    * @note override default

@@ -200,20 +200,22 @@ class QCamCompass extends Dialog
     }
   }
 
-  /** implements
+  /** @implements
    * @param b   azimuth
    * @param c   clino
    * @param o   orientation: 0 up, 90 right, 180 down, 270 left
    * @param a   sensor accuracy 
+   * @param cam camera API (1 or 2)
    */
-  public void setBearingAndClino( float b, float c, int o, int a )
+  public void setBearingAndClino( float b, float c, int o, int a, int cam )
   {
-    TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c );
     mBearing     = b;
     mClino       = c;
     mOrientation = ExifInfo.getCameraOrientation( o );
     mAccuracy    = a;
+    // mCamera
     // TDLog.v( "QCAM compass orient " + o + " --> " + mOrientation );
+    TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c + " orientation " + o + " -> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
@@ -229,6 +231,9 @@ class QCamCompass extends Dialog
     // buttonClick.setText( mContext.getString( mHasShot ? R.string.button_redo : R.string.button_eval ) );
   }
 
+  /** react to a user tap
+   * @param v  tapped view
+   */
   @Override
   public void onClick(View v)
   {
@@ -266,10 +271,11 @@ class QCamCompass extends Dialog
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
           // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
-          mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy );
           if ( mSurface != null ) {
+            mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
             mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
           } else if ( mTexture != null ) {
+            mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
             mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
           }
         }
@@ -303,6 +309,12 @@ class QCamCompass extends Dialog
   }
 
   float mZoomD0 = 0;
+
+  /** react to a user screen touch
+   * @param view     touched view
+   * @param rawEvent touch event
+   * @return true if the event has been handled
+   */
   public boolean onTouch( View view, MotionEvent rawEvent )
   {
     // MotionEventWrap event = MotionEventWrap.wrap(rawEvent);
@@ -361,6 +373,9 @@ class QCamCompass extends Dialog
     return false;
   }
 
+  /** @implement from OnZoomListener: called when zoom controls visibility changes.
+   * @param visible whether controls are visible
+   */
   @Override
   public void onVisibilityChanged(boolean visible)
   {
@@ -369,13 +384,15 @@ class QCamCompass extends Dialog
     }
   }
 
-  public void checkZoomBtnsCtrl()
-  {
-    // if ( mZoomBtnsCtrl == null ) return; // not necessary
-    if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
-      mZoomBtnsCtrl.setVisible( true );
-    }
-  }
+  // /** THIS IS NOT: @implement from IZoomer
+  //  */
+  // public void checkZoomBtnsCtrl()
+  // {
+  //   // if ( mZoomBtnsCtrl == null ) return; // not necessary
+  //   if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
+  //     mZoomBtnsCtrl.setVisible( true );
+  //   }
+  // }
 
   // this method is a callback to let other objects tell the activity to use zooms or not
   private void switchZoomCtrl( int ctrl )
@@ -411,6 +428,9 @@ class QCamCompass extends Dialog
   // int mDeltaZoom = 1;
   long mZoomTime = 0;
 
+  /** @implements from OnZoomListener: view needs to be zoomed
+   * @param zoomin whether it is a zoom-in
+   */
   @Override
   public void onZoom( boolean zoomin )
   {
@@ -431,10 +451,10 @@ class QCamCompass extends Dialog
     mZoomTime = time;
   }
 
-  // /** set the JPEG data - use default
-  //  * @param data   JPEG image data
-  //  * @return true on success
-  //  */
-  // public boolean setJpegData( byte[] data ) { return false; } 
+  /** @implement set the JPEG data - use default (comment wen minsdk = 24)
+   * @param data   JPEG image data
+   * @return true on success
+   */
+  public boolean setJpegData( byte[] data ) { return false; } 
 
 }

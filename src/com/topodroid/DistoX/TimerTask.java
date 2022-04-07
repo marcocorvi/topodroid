@@ -256,7 +256,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
     c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
-    if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0, mMagAccuracy );
+    if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0, mMagAccuracy, 0 ); // 0 timer does not know camera API
   }
 
 }

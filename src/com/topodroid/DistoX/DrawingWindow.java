@@ -156,8 +156,9 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_CONT_NONE    = 14;  // index of continue-no icon
   private static final int IC_PREV         = 15;
   private static final int IC_NEXT         = 16;
-  private static final int IC_JOIN         = 17;
-  private static final int IC_DELETE_OFF   = 19;
+  private static final int IC_DELETE_OFF   = 17;
+  private static final int IC_ATTRIBS      = 18;
+  private static final int IC_JOIN         = 19;
   private static final int IC_RANGE_NO     = 20;
   private static final int IC_ERASE_ALL    = 22;
   private static final int IC_MEDIUM       = 23;
@@ -198,15 +199,15 @@ public class DrawingWindow extends ItemDrawer
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
   private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
   private static final int BTN_CONT   = 7;    // index of mButton2 continue button (level > normal)
-  private static final int BTN_JOIN   = 5;    // index of mButton3 join button
-  private static final int BTN_REMOVE = 7;    // index of mButton3 remove
+  private static final int BTN_REMOVE = 5;    // index of mButton3 remove
+  private static final int BTN_ATTRIB = 6;    // index of mButton3 attributes
+  private static final int BTN_JOIN   = 7;    // index of mButton3 join button
   private static final int BTN_BORDER = 8;    // line border-editing (level > advanced)
 
   private static final int BTN_SELECT_MODE = 3; // select-mode button
   private static final int BTN_SELECT_PREV = 3; // select-mode button
   private static final int BTN_SELECT_NEXT = 4; // select-mode button
-  private static final int BTN_ITEM_EDIT   = 6; // select button item-edit properties
-  // private static final int BTN_DELETE      = 7; // select-mode button
+  private static final int BTN_ITEM_EDIT   = 6; // select button item-edit properties FIXME same as BTN_ATTRIB
 
   private static final int BTN_ERASE_MODE = 5; // erase-mode button
   private static final int BTN_ERASE_SIZE = 6; // erase-size button
@@ -232,9 +233,9 @@ public class DrawingWindow extends ItemDrawer
 
                         R.drawable.iz_back,          // 15 EDIT Nr 3+6
                         R.drawable.iz_forw,
-                        R.drawable.iz_join,
+                        R.drawable.iz_delete_off,    // 17
                         R.drawable.iz_attrib,          
-                        R.drawable.iz_delete_off,    // 19
+                        R.drawable.iz_join,
                         R.drawable.iz_range_no,      // 20
 
                         R.drawable.iz_select_all,    // only for help
@@ -632,9 +633,9 @@ public class DrawingWindow extends ItemDrawer
   private static final int NR_BUTTON2 = 8;
   private static final int NR_BUTTON3 = 9;
   private static final int NR_BUTTON5 = 7;
-  private int mNrButton1 = NR_BUTTON1; // main-primary [8: if level <= normal]
-  private int mNrButton2 = NR_BUTTON2; // draw
-  private int mNrButton3 = NR_BUTTON3; // edit [8 if level <= advanced]
+  private int mNrButton1 = TDLevel.overNormal? NR_BUTTON1 : 8; // main-primary [8: if level <= normal]
+  private int mNrButton2 = TDLevel.overNormal? NR_BUTTON2 : 7; // draw
+  private int mNrButton3 = TDLevel.overAdvanced ? NR_BUTTON3 : ( TDLevel.overNormal ? 8 : 6); // edit [6 if level <= normal, 8 if level <= advanced]
   private int mNrButton5 = NR_BUTTON5; // erase
   private MyHorizontalButtonView mButtonView1;
   private MyHorizontalButtonView mButtonView2;
@@ -1196,7 +1197,7 @@ public class DrawingWindow extends ItemDrawer
       }
       // boolean visible = ( mSymbol == SymbolType.LINE && mCurrentLine == BrushManager.getLineWallIndex() );
       boolean visible = ( mSymbol == SymbolType.LINE );
-      if ( TDLevel.overNormal ) {
+      if ( TDLevel.overNormal && BTN_CONT < mNrButton2 ) {
         mButton2[ BTN_CONT ].setVisibility( visible? View.VISIBLE : View.GONE );
       }
     } else if ( mMode == MODE_MOVE ) {
@@ -1648,23 +1649,22 @@ public class DrawingWindow extends ItemDrawer
     TDAzimuth.mFixedExtend = fixed_extend;
     TDAzimuth.mRefAzimuth = azimuth;
     if ( ! TDLevel.overNormal ) return;
-    if ( BTN_DIAL >= mButton1.length ) return;
-
-    if ( TDAzimuth.mFixedExtend == 0 ) {
-      // FIXME_AZIMUTH_DIAL 2
-      // android.graphics.Matrix m = new android.graphics.Matrix();
-      // m.postRotate( azimuth - 90 );
-      // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
-      // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
-      // FIXME_AZIMUTH_DIAL 1
-      Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-
-      TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
-    } else if ( TDAzimuth.mFixedExtend == -1L ) {
-      TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMleft );
-    } else {
-      TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMright );
-    } 
+    if ( BTN_DIAL < mNrButton1 ) {
+      if ( TDAzimuth.mFixedExtend == 0 ) {
+        // FIXME_AZIMUTH_DIAL 2
+        // android.graphics.Matrix m = new android.graphics.Matrix();
+        // m.postRotate( azimuth - 90 );
+        // Bitmap bm1 = Bitmap.createScaledBitmap( mBMdial, mButtonSize, mButtonSize, true );
+        // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
+        // FIXME_AZIMUTH_DIAL 1
+        Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
+        TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
+      } else if ( TDAzimuth.mFixedExtend == -1L ) {
+        TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMleft );
+      } else {
+        TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMright );
+      } 
+    }
   }
 
   /** set the button3 by the type of the hot-item
@@ -1719,8 +1719,8 @@ public class DrawingWindow extends ItemDrawer
       mHotItemType = -1;
       mActivity.setTitle( title );
     }
-    TDandroid.setButtonBackground( mButton3[ BTN_JOIN ], bm );
-    TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (deletable ? mBMdelete_on : mBMdelete_off) );
+    if ( BTN_REMOVE < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (deletable ? mBMdelete_on : mBMdelete_off) );
+    if ( TDLevel.overNormal && BTN_JOIN < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_JOIN ], bm );
   }
 
   /** set the button3 to display "prev/next" 
@@ -1743,29 +1743,31 @@ public class DrawingWindow extends ItemDrawer
   private void setButtonContinue( int continue_line )
   {
     mContinueLine = continue_line;
-    if ( mSymbol == SymbolType.LINE /* && mCurrentLine == BrushManager.getLineWallIndex() */ ) {
-      mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
-      switch ( mContinueLine ) {
-        case CONT_NONE:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_none  );
-          break;
-        case CONT_START:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_start  );
-          break;
-        case CONT_END:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_end   );
-          break;
-        case CONT_BOTH:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_both  );
-          break;
-        case CONT_CONTINUE:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_continue  );
-          break;
-        case CONT_OFF:
-          TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_off  );
+    if ( BTN_CONT < mNrButton2 ) {
+      if ( mSymbol == SymbolType.LINE /* && mCurrentLine == BrushManager.getLineWallIndex() */ ) {
+        mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
+        switch ( mContinueLine ) {
+          case CONT_NONE:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_none  );
+            break;
+          case CONT_START:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_start  );
+            break;
+          case CONT_END:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_end   );
+            break;
+          case CONT_BOTH:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_both  );
+            break;
+          case CONT_CONTINUE:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_continue  );
+            break;
+          case CONT_OFF:
+            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_off  );
+        }
+      } else {
+        mButton2[ BTN_CONT ].setVisibility( View.GONE );
       }
-    } else {
-      mButton2[ BTN_CONT ].setVisibility( View.GONE );
     }
   }
 
@@ -1855,7 +1857,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setButtonDelete( boolean on ) 
   {
-    TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (on ? mBMdelete_on : mBMdelete_off) );
+    if ( BTN_REMOVE < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (on ? mBMdelete_on : mBMdelete_off) );
   }
 
   /** set button "size" to display a given scale
@@ -1922,7 +1924,9 @@ public class DrawingWindow extends ItemDrawer
   private void makeButtons( )
   {
     Resources res = getResources();
-    if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
+    TDLog.v("Buttons " + mNrButton1 + " " + mNrButton2 + " " + mNrButton3 + " " + mNrButton5 );
+
+    // if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
     mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
     int off = 0;
     int ic = 0;
@@ -1934,6 +1938,7 @@ public class DrawingWindow extends ItemDrawer
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( this, res, izons[ic] ); }
     }
     mButton1[ mNrButton1 ] = MyButton.getButton( mActivity,this, R.drawable.iz_empty );
+
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); 
     mDialOn          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_on ); 
@@ -1955,7 +1960,7 @@ public class DrawingWindow extends ItemDrawer
     mBMsplayBackBlack  = MyButton.getButtonBackground( this, res, R.drawable.iz_splay_back_black );
     mBMsplayBothBlack  = MyButton.getButtonBackground( this, res, R.drawable.iz_splay_both_black );
 
-    if ( ! TDLevel.overNormal ) -- mNrButton2;
+    // if ( ! TDLevel.overNormal ) -- mNrButton2;
     mButton2 = new Button[ mNrButton2 + 1 ]; // DRAW
     off = (NR_BUTTON1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
@@ -1964,6 +1969,7 @@ public class DrawingWindow extends ItemDrawer
       if ( ic == IC_CONT_NONE ) mBMcont_none = MyButton.getButtonBackground( this, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
     mButton2[ mNrButton2 ] = mButton1[ mNrButton1 ];
+
     mBMcont_continue  = MyButton.getButtonBackground( this, res, izons[IC_CONT_CONTINUE] );
     mBMcont_start = MyButton.getButtonBackground( this, res, izons[IC_CONT_START] );
     mBMcont_end   = MyButton.getButtonBackground( this, res, izons[IC_CONT_END] );
@@ -1976,18 +1982,19 @@ public class DrawingWindow extends ItemDrawer
     mBMtoolsPoint   = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_POINT] );
     mBMtoolsLine    = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_LINE] );
     mBMtoolsArea    = MyButton.getButtonBackground( this, res, izons[IC_TOOLS_AREA] );
+    mBMjoin         = MyButton.getButtonBackground( this, res, izons[IC_JOIN] );
 
-    if ( ! TDLevel.overExpert ) -- mNrButton3;
+    // if ( ! TDLevel.overNormal ) mNrButton3 -= 2; // item_properties point_actions 
+    // if ( ! TDLevel.overExpert ) mNrButton3 -= 1; // line_range
     mButton3 = new Button[ mNrButton3 + 1 ];      // EDIT
     off = (NR_BUTTON1 - 3) + (NR_BUTTON2 - 3); 
     for ( int k=0; k<mNrButton3; ++k ) {
       ic = ( k < 3 )? k : off+k;
       mButton3[k] = MyButton.getButton( mActivity, this, ((k==2)? izons_ok[ic] : izons[ic]) );
-      if ( ic == IC_JOIN ) 
-        mBMjoin = MyButton.getButtonBackground( this, res, ((k==2)? izons_ok[ic] : izons[ic]) );
+      // if ( ic == IC_JOIN ) mBMjoin = MyButton.getButtonBackground( this, res, ((k==2)? izons_ok[ic] : izons[ic]) );
     }
     if ( TDLevel.overExpert ) {
-      if ( BTN_BORDER < mButton3.length ) {
+      if ( BTN_BORDER < mNrButton3 ) {
         mButton3[ BTN_BORDER ].setPadding(4,4,4,4);
         mButton3[ BTN_BORDER ].setTextColor( 0xffffffff );
       }
@@ -1997,6 +2004,7 @@ public class DrawingWindow extends ItemDrawer
       mBMedit_no   = MyButton.getButtonBackground( this, res, izons[IC_RANGE_NO] );
     }
     mButton3[ mNrButton3 ] = mButton1[ mNrButton1 ];
+
     mBMjoin_no = MyButton.getButtonBackground( this, res, izons[IC_JOIN_NO] );
     mBMadd     = MyButton.getButtonBackground( this, res, izons[IC_ADD] );
 
@@ -2008,6 +2016,7 @@ public class DrawingWindow extends ItemDrawer
       mButton5[k] = MyButton.getButton( mActivity, this, ((k==1)? izons_ok[ic] : izons[ic] ) );
     }
     mButton5[ mNrButton5 ] = mButton1[ mNrButton1 ];
+
     mBMeraseAll   = MyButton.getButtonBackground( this, res, izons[IC_ERASE_ALL] );
     mBMerasePoint = MyButton.getButtonBackground( this, res, izons[IC_ERASE_POINT] );
     mBMeraseLine  = MyButton.getButtonBackground( this, res, izons[IC_ERASE_LINE] );
@@ -2151,16 +2160,17 @@ public class DrawingWindow extends ItemDrawer
 
     mButton2[ BTN_TOOL ].setOnLongClickListener( this );
 
+
     if ( TDLevel.overAdvanced ) {
       mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
       mButton1[BTN_DIAL].setOnLongClickListener( this );
       mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
     }
     if ( TDLevel.overBasic ) {
-      if ( BTN_PLOT   < mButton1.length ) mButton1[BTN_PLOT].setOnLongClickListener( this );
-      if ( BTN_REMOVE < mButton3.length ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
+      if ( BTN_PLOT   < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+      if ( BTN_REMOVE < mNrButton3 ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
- 
+
     // setConnectionStatus( mDataDownloader.getStatus() ); // 20201123 this is done in onResume
     mListView.setAdapter( mButtonView1.mAdapter );
     // mListView.invalidate();
@@ -2388,8 +2398,8 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
 
     // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
-    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( this );
-    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
+    if ( ! TDLevel.overExpert && BTN_PLOT < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+    if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
   /** push the status info when a xsectin is opened
@@ -2429,8 +2439,8 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
 
     // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
-    if ( ! TDLevel.overExpert ) mButton1[BTN_PLOT].setOnLongClickListener( null );
-    if ( TDLevel.overNormal && BTN_DIAL < mButton1.length ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
+    if ( ! TDLevel.overExpert && BTN_PLOT < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( null );
+    if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
   /** update the display of the splays - for XSections
@@ -2441,7 +2451,7 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0: // hide splays at FROM and at TO
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
+        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -2451,7 +2461,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 1: // hide splays at FROM show splays at TO
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
+        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2461,7 +2471,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 2: // show splays at FROM and at TO
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
+        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2471,7 +2481,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 3: // show splays at FROM, hide splays at TO
-        TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
+        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -3361,7 +3371,7 @@ public class DrawingWindow extends ItemDrawer
         //   return;
         // }
         if ( SelectionRange.isRange( mDoEditRange ) ) {
-          // TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
+          // if ( BTN_BORDER < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
             mMode = MODE_SHIFT;
             return;
@@ -4048,8 +4058,10 @@ public class DrawingWindow extends ItemDrawer
 
     if ( mRotateAzimuth ) {
       mRotateAzimuth = false;
-      Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-      TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
+      if ( BTN_DIAL < mNrButton1 ) {
+        Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
+        TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
+      }
     }
 
     // TDLog.v( "on touch up. mode " + mMode + " " + mTouchMode );
@@ -5970,7 +5982,7 @@ public class DrawingWindow extends ItemDrawer
       mName = mName3;
       mType = mPlot3.type;
       // TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
-      // TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
+      // if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3, params );
       setTheTitle();
@@ -5988,7 +6000,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
-      TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
+      if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
@@ -6016,7 +6028,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
-      TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMplan );
+      if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
@@ -6078,17 +6090,17 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setButtonAzimuth()
   {
-    // if ( mRotateAzimuth ) {
+    if ( BTN_DIAL < mNrButton1 ) { // && mRotateAzimuth
       Bitmap bm2 = AzimuthDialog.getRotatedBitmap( TDAzimuth.mRefAzimuth, mDialOn );
       mButton1[ BTN_DIAL ].setBackgroundDrawable( new BitmapDrawable( getResources(), bm2 ) ); // DEPRECATED API-16
-    // }
+    }
   }
 
   /** set the icon of the "range" button
    */
   private void setButtonRange()
   {
-    if ( BTN_BORDER < mButton3.length ) {
+    if ( BTN_BORDER < mNrButton3 ) {
       switch ( mDoEditRange ) {
         case SelectionRange.RANGE_POINT:
           TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
@@ -6363,16 +6375,36 @@ public class DrawingWindow extends ItemDrawer
       } else {
         setButtonSelectSize( mSelectScale + 1 ); // toggle select size
       }
-    } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
-      // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
-      if ( hasPointActions ) {
-        makePopupEdit( b, dismiss );
-      // } else {
-        // SelectionPoint sp = mDrawingSurface.hotItem();
-        // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
-        //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
-        //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
-        // }
+    } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
+      SelectionPoint sp = mDrawingSurface.hotItem();
+      if ( sp != null ) {
+        int t = sp.type();
+        if ( t == DrawingPath.DRAWING_PATH_POINT ||
+             t == DrawingPath.DRAWING_PATH_LINE  ||
+             t == DrawingPath.DRAWING_PATH_AREA  ) {
+          String name = "";
+          DrawingPath p = sp.mItem;
+          switch ( t ) {
+            case DrawingPath.DRAWING_PATH_POINT:
+              name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
+              break;
+            case DrawingPath.DRAWING_PATH_LINE:
+              name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
+              break;
+            case DrawingPath.DRAWING_PATH_AREA:
+              name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
+              break;
+          }
+          askDeleteItem( p, t, name );
+        } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
+          if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
+            DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
+            DBlock blk = p.mBlock;
+            if ( blk != null ) {
+              askDeleteSplay( p, sp, blk );
+            }
+          }
+        }
       }
     } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
       SelectionPoint sp = mDrawingSurface.hotItem();
@@ -6437,36 +6469,16 @@ public class DrawingWindow extends ItemDrawer
         }
       }
       clearSelected();
-    } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
-      SelectionPoint sp = mDrawingSurface.hotItem();
-      if ( sp != null ) {
-        int t = sp.type();
-        if ( t == DrawingPath.DRAWING_PATH_POINT ||
-             t == DrawingPath.DRAWING_PATH_LINE  ||
-             t == DrawingPath.DRAWING_PATH_AREA  ) {
-          String name = "";
-          DrawingPath p = sp.mItem;
-          switch ( t ) {
-            case DrawingPath.DRAWING_PATH_POINT:
-              name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
-              break;
-            case DrawingPath.DRAWING_PATH_LINE:
-              name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
-              break;
-            case DrawingPath.DRAWING_PATH_AREA:
-              name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
-              break;
-          }
-          askDeleteItem( p, t, name );
-        } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
-          if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
-            DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
-            DBlock blk = p.mBlock;
-            if ( blk != null ) {
-              askDeleteSplay( p, sp, blk );
-            }
-          }
-        }
+    } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
+      // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
+      if ( hasPointActions ) {
+        makePopupEdit( b, dismiss );
+      // } else {
+        // SelectionPoint sp = mDrawingSurface.hotItem();
+        // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
+        //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
+        //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
+        // }
       }
     } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
       mDoEditRange = SelectionRange.rotateType( mDoEditRange );
@@ -6482,10 +6494,12 @@ public class DrawingWindow extends ItemDrawer
    */
   private void toggleSplayMode()
   {
-    if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
-      TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
-    } else {
-      TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
+    if ( BTN_SPLAYS < mNrButton2 ) {
+      if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
+        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
+      } else {
+        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
+      }
     }
   }
 
@@ -8123,7 +8137,7 @@ public class DrawingWindow extends ItemDrawer
       //       Bundle extras = intent.getExtras();
       //       float b = Float.parseFloat( extras.getString( TDTag.TOPODROID_BEARING ) );
       //       float c = Float.parseFloat( extras.getString( TDTag.TOPODROID_CLINO ) );
-      //       mShotNewDialog.setBearingAndClino( b, c, 0 ); // orientation 0
+      //       mShotNewDialog.setBearingAndClino( b, c, 0, 3, 0 ); // orientation 0
       //     } catch ( NumberFormatException e ) { }
       //   }
       //   mShotNewDialog = null;
@@ -8490,7 +8504,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentPointIndex();
         pointSelected( mCurrentPoint, false );
         setHighlight( SymbolType.POINT, k );
-        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsPoint );
+        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsPoint );
       } else if ( mRecentTools == mRecentLine ) {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
@@ -8499,7 +8513,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("Set tools toolbars: Current line index " + k );
         lineSelected( mCurrentLine, false );
         setHighlight( SymbolType.LINE, k );
-        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsLine );
+        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsLine );
       } else {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
@@ -8507,7 +8521,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentAreaIndex();
         areaSelected( mCurrentArea, false );
         setHighlight( SymbolType.AREA, k );
-        TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsArea );
+        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsArea );
       }
     // }
     mLayoutTools.invalidate();

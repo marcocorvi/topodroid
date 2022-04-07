@@ -166,7 +166,7 @@ class AzimuthDialog extends MyDialog
     mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {
         if ( fromUser ) {
-          setBearingAndClino( (progress+180)%360, 0, ExifInfo.ORIENTATION_UP, 3 ); // clino 0, orientation 0, accuracy 3 (high)
+          setBearingAndClino( (progress+180)%360, 0, ExifInfo.ORIENTATION_UP, 3, 0 ); // clino 0, orientation 0, accuracy 3 (high), camera 0
         }
       }
       public void onStartTrackingTouch(SeekBar seekbar) { }
@@ -184,8 +184,9 @@ class AzimuthDialog extends MyDialog
    * @param c0  clino (unused)
    * @param o0  orientation (unused)
    * @param a0  accuracy
+   * @param cam camera API (unused)
    */
-  public void setBearingAndClino( float b0, float c0, int o0, int a0 )
+  public void setBearingAndClino( float b0, float c0, int o0, int a0, int cam )
   {
     // TDLog.v( "Azimuth dialog set orientation " + o0 + " bearing " + b0 + " clino " + c0 );
     mAzimuth = b0;
@@ -193,11 +194,11 @@ class AzimuthDialog extends MyDialog
     updateEditText();
   }
 
-  // /** set the photo JPEG - use default
-  //  * @param data   JPEG data
-  //  * @return false: the JPEG data are not saved
-  //  */
-  // public boolean setJpegData( byte[] data ) { return false; }
+  /** @implement set the photo JPEG - use default (comment wen minsdk = 24)
+   * @param data   JPEG data
+   * @return false: the JPEG data are not saved
+   */
+  public boolean setJpegData( byte[] data ) { return false; }
 
   private TimerTask mTimer = null;
 

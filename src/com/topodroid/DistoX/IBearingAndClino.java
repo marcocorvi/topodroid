@@ -18,13 +18,15 @@ interface IBearingAndClino
    * @param c0 clino
    * @param o0 orienatation
    * @param a0 accuracy
+   * @param cam camera API (1 or 2)
    */
-  void setBearingAndClino( float b0, float c0, int o0, int a0 );
+  void setBearingAndClino( float b0, float c0, int o0, int a0, int cam );
 
   /** set the JPEG data
    * @param data   JPEG data
    * @return false: the JPEG data are not stored
+   * @note default requires min-sdk >= 24
    */
-  default boolean setJpegData( byte[] data ) { return false; }
+  boolean setJpegData( byte[] data ); // { return false; }
 
 }
