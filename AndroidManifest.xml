@@ -29,11 +29,13 @@
          API-24 = Android 7.0   Nougat
          API-25 = Android 7.1
          API-26 = Android 8.0.0 Oreo
-         API-27 = Android 8.0.1
+         API-27 = Android 8.1.0
          API-28 = Android 9     Pie
          API-29 = Android 10
          API-30 = Android 11
          API-31 = Android 12
+         API-32 = Android 12.1
+         API-33 = Android 13
     -->
     <uses-sdk
        android:minSdkVersion="18"
