@@ -511,7 +511,11 @@ class ShotDialog extends MyDialog
       mButtonSave.setVisibility( View.GONE );
     }
     mButtonOK.setOnClickListener( this );
-    mButtonMore.setOnClickListener( this );
+    if ( TDLevel.overNormal ) {
+      mButtonMore.setOnClickListener( this );
+    } else {
+      mButtonMore.setVisibility( View.GONE );
+    }
     mButtonBack.setOnClickListener( this );
 
 
@@ -822,7 +826,7 @@ class ShotDialog extends MyDialog
     } else if ( b == mButtonMore ) {
       CutNPaste.dismissPopup();
       dismiss();
-      mParent.onBlockLongClick( mBlk );
+      if ( TDLevel.overNormal ) mParent.onBlockLongClick( mBlk );
     } else if ( b == mButtonOK ) { // OK and SAVE close the keyboard
       saveDBlock();
       dismiss();
