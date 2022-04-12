@@ -245,6 +245,7 @@ Refer to the web pages for details.\n
 
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Entre comentário para foto</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">RÓTULO</string>
     <string name="label_text">Inserir o texto do rótulo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

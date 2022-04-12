@@ -241,6 +241,7 @@
     <string name="illegal_data_value">Недопустимое значение</string>
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

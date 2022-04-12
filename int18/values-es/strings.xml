@@ -238,6 +238,7 @@
     <string name="illegal_data_value">Valores de datos no válidos</string>
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

@@ -247,6 +247,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="photo_title">Zdjęcie</string>
     <string name="photo_text">Dodaj opis zdjęcia</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">Etykieta</string>
     <string name="label_text">Wpisz tekst etykiety</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

@@ -241,6 +241,7 @@ Refer to the web pages for details.\n
 <string name="illegal_data_value">Valeur de donnée incorrecte</string>
 <string name="photo_title">PHOTO</string>
 <string name="photo_text">Saisir un commentaire</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
 <string name="label_title">ÉTIQUETTE</string>
 <string name="label_text">Saisissez le texte</string>
 <!-- UNUSED string name="altitude">Alt. </string -->

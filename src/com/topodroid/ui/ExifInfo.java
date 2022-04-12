@@ -109,7 +109,12 @@ public class ExifInfo
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       }
-      exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
+      if ( mCamera == 1 ) {
+        exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
+      }
+      // exif.setAttribute( ExifInterface.TAG_MAKE, String.format(Locale.US, "%d", rot) ); // set by Android
+      exif.setAttribute( ExifInterface.TAG_MAKER_NOTE, String.format(Locale.US, "%d %d", mCamera, rot) ); 
+      // exif.setAttribute( ExifInterface.TAG_USER_COMMENT, String.format(Locale.US, "%d", rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       int cint = (int)(mClino*100);
       int bint = (int)(mAzimuth*100);
@@ -153,7 +158,18 @@ public class ExifInfo
     try {
       ExifInterface exif = new ExifInterface( filename );
       // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+      String maker_note = exif.getAttribute( ExifInterface.TAG_MAKER_NOTE );
+      if ( maker_note != null ) {
+        String[] vals = maker_note.split(" ");
+        if ( vals.length == 2 ) {
+          try {
+            mCamera = Integer.parseInt( vals[0] );
+            mOrientation = Integer.parseInt( vals[1] );
+          } catch ( NumberFormatException e ) { }
+        }
+      } else {
+        mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+      }
       // TDLog.v( "Photo edit orientation " + mOrientation );
       String azimuth = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
       String clino   = exif.getAttribute( ExifInterface.TAG_GPS_LATITUDE );

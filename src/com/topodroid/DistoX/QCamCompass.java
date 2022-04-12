@@ -237,6 +237,7 @@ class QCamCompass extends Dialog
   @Override
   public void onClick(View v)
   {
+    boolean dismiss = true;
     Button b = (Button)v;
     if ( b == buttonClick ) {
       TDLog.v( "QCAM compass. Click picture button");
@@ -270,13 +271,17 @@ class QCamCompass extends Dialog
       TDLog.v( "QCAM compass. Click save button");
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
-          // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
+          TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
           if ( mSurface != null ) {
             mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
             mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
           } else if ( mTexture != null ) {
             mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 2 ); // camera2 API
             mHasSaved = mCallback.setJpegData( mTexture.getJpegData() );
+          }
+          if ( ! mHasSaved ) {
+            TDToast.makeBad( mContext.getResources().getString( R.string.photo_failed ) );
+            dismiss = false;
           }
         }
       }
@@ -286,17 +291,23 @@ class QCamCompass extends Dialog
     } else {
       TDLog.Error( "QCAM compass. Click unexpected view");
     }
-    // if ( mSurface != null ) mSurface.close();
-    TDUtil.slowDown( 100 );
+    TDLog.v("QCAM has saved data " + mHasSaved + " dismiss " + dismiss );
+    if ( dismiss ) {
+      // if ( mSurface != null ) mSurface.close();
+      TDUtil.slowDown( 100 );
 
-    if ( mHasSaved ) {
-      if ( mInserter != null ) mInserter.insertPhoto();
-      // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
+      if ( mHasSaved ) {
+        if ( mInserter != null ) mInserter.insertPhoto();
+        // if ( mDrawer   != null ) mDrawer.notifyAzimuthClino( mPid, mBearing, mClino );
+      }
+      // unlock screen orientation
+      // // mSurface.close(); 
+      if ( mTexture != null ) mTexture.stop(); // TEXTURE 
+      dismiss();
+    } else {
+      enableButtons( true );
+      enableButtonSave( false );
     }
-    // unlock screen orientation
-    // // mSurface.close(); 
-    if ( mTexture != null ) mTexture.stop(); // TEXTURE 
-    dismiss();
   }
 
   /** BACK pressed is like "close" but data are not saved

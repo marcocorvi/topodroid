@@ -245,6 +245,7 @@
 
     <string name="photo_title">照片</string>
     <string name="photo_text">输入照片注释</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">标注</string>
     <string name="label_text">输入标注文本</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

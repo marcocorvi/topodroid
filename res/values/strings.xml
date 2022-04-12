@@ -249,6 +249,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="photo_title">Photo</string>
     <string name="photo_text">Enter photo comment</string>
+    <string name="photo_failed">Failed photo</string>
     <string name="label_title">Label</string>
     <string name="label_text">Enter the label text</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

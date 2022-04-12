@@ -247,6 +247,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
 <!-- MISC STRINGS -->
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Foto-Kommentar eingeben</string>
+    <!-- TODO string name="photo_failed">Failed photo</string -->
     <string name="label_title">BESCHRIFTUNG</string>
     <string name="label_text">Geben Sie den Beschriftungstext ein</string>
     <!-- UNUSED string name="altitude">Höhe</string -->
