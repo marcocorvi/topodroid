@@ -47,7 +47,7 @@ class MediaManager
 
   long prepareNextPhoto( long sid, String comment, int camera )
   {
-    mShotId       = sid;
+    mShotId  = sid;
     mComment = comment;
     mCamera  = camera;
     mPhotoId = mData.nextPhotoId( TDInstance.sid );

@@ -22,12 +22,12 @@ The azimuth is stored as GPS_LONGITUDE and the inclination as GPS_LATITUDE (with
 <br>
 The following exif tags are set by TopoDroid:
 <ul>
-<li><i>Software</i>: "TopoDroid" and its version, separated by a space</li>
-<li><i>Orientation</i>:</li>
-<li><i>Datatime</i>: timestamp</li>
-<li><i>GPS latitude</i>: inclination</li>
+<li><i>Software</i>: "TopoDroid" and its version, separated by a space [Android 7 and up]</li>
+<li><i>Orientation</i></li>
+<li><i>Datatime</i> [yyyy.MM.dd]</li>
+<li><i>GPS latitude</i>: inclination [1/100&deg;]</li>
 <li><i>GPS latitude ref</i>: "N" or "S"</li>
-<li><i>GPS longitude</i>: azimuth</li>
+<li><i>GPS longitude</i>: azimuth [1/100&deg;]</li>
 <li><i>GPS longitude ref</i>: "E"</li>
 <li><i>Image description</i>: azimuth and inclination in 1/100&deg;, separaated by a space</li>
 </ul>
@@ -41,8 +41,8 @@ A warning is displayed if the sensor accuracy is low.<br><p>
 The TopoDroid camera has three buttons on the lower right.
 <ul>
 <li><b>camera</b>. Red: ready, tap to take a picture. Blue: on hold, tap to turn camera active.</li>
-<li><b>save</b> saves the picture</li>
-<li><b>back</b> closes the window</li>
+<li><b>save</b> saves the picture. Grayed until a picture has been taken.</li>
+<li><b>back</b> closes the window without saving the picture.</li>
 </ul>
 
 With the screen up the picture is portrait.

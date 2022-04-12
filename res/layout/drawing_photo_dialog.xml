@@ -9,10 +9,9 @@
   android:layout_height="wrap_content"
   android:orientation="vertical"
   >
-   					  
 
   <TextView 
-    android:layout_marginTop="@dimen/margintiny"
+    android:layout_marginTop="@dimen/marginv"
     android:layout_width="wrap_content"
     android:layout_height="wrap_content" 
     android:text="@string/photo_text"
@@ -20,13 +19,20 @@
       				  
   <EditText android:id="@+id/photo_comment"
     style="@style/edit_text"
-    android:layout_marginTop="@dimen/margintiny"
+    android:layout_marginTop="@dimen/marginv"
     android:layout_width="match_parent"
     android:layout_height="wrap_content" 
     android:singleLine="true"
     android:inputType="text"
     android:hint="@string/hint_comment"
     />
+
+  <CheckBox android:id="@+id/photo_camera" 
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content" 
+    android:text="@string/photo_camera"
+  />
       	
   <LinearLayout android:id="@+id/help"
     android:layout_width="match_parent" 

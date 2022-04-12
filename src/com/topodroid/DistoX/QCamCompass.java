@@ -213,8 +213,8 @@ class QCamCompass extends Dialog
     mClino       = c;
     mOrientation = ExifInfo.getCameraOrientation( o );
     mAccuracy    = a;
-    // mCamera
-    // TDLog.v( "QCAM compass orient " + o + " --> " + mOrientation );
+    mCamera = cam;
+    TDLog.v( "QCAM compass camera " + cam + " orient " + o + " --> " + mOrientation );
     TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c + " orientation " + o + " -> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );

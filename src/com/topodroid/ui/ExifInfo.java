@@ -101,11 +101,11 @@ public class ExifInfo
    */
   public void writeExif( String filepath )
   {
-    // TDLog.v( "EXIF set " + mAzimuth + " " + mClino + " file " + filepath );
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", azimuth, clino );
       int rot = (mCamera == 1 )? getExifOrientation( mOrientation ) : getExifOrientation2( mOrientation );
+      TDLog.v( "EXIF write " + filepath + " : orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       }

@@ -26,6 +26,7 @@ import android.content.Context;
 import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 
 
@@ -33,12 +34,14 @@ class DrawingPhotoDialog extends MyDialog
                          implements View.OnClickListener
 {
   private EditText mComment;
+  private CheckBox mCamera;
+  private boolean  cameraCheck;
 
-  private final ILabelAdder mActivity;
+  private final DrawingWindow mActivity;
   private final float mX;
   private final float mY;
 
-  DrawingPhotoDialog( Context context, ILabelAdder activity, float x, float y )
+  DrawingPhotoDialog( Context context, DrawingWindow activity, float x, float y )
   {
     super(context, R.string.DrawingPhotoDialog );
     mActivity = activity;
@@ -50,9 +53,16 @@ class DrawingPhotoDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState)
   {
     super.onCreate(savedInstanceState);
+    cameraCheck = TDandroid.AT_LEAST_API_21 && TDandroid.checkCamera( mContext );
     initLayout( R.layout.drawing_photo_dialog, R.string.photo_title );
 
-    mComment   = (EditText) findViewById(R.id.photo_comment);
+    mComment = (EditText) findViewById(R.id.photo_comment);
+    mCamera  = (CheckBox) findViewById( R.id.photo_camera );
+    if ( ! cameraCheck ) {
+      mCamera.setVisibility( View.GONE );
+    } else {
+      mCamera.setChecked( true );
+    }
 
     ((Button) findViewById(R.id.photo_ok)).setOnClickListener( this );
     ((Button) findViewById(R.id.photo_cancel)).setOnClickListener( this );
@@ -65,7 +75,8 @@ class DrawingPhotoDialog extends MyDialog
   {
     // TDLog.Log( TDLog.LOG_INPUT, "Drawing Photo Dialog onClick() " + view.toString() );
     if (view.getId() == R.id.photo_ok ) {
-      mActivity.addPhotoPoint( mComment.getText().toString(), mX, mY );
+      int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
+      mActivity.addPhotoPoint( mComment.getText().toString(), mX, mY, camera );
     // } else if ( view.getId() == R.id.photo_cancel ) {
     //   /* nothing */
     }

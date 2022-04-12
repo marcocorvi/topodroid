@@ -30,7 +30,7 @@ class DrawingLabelDialog extends MyDialog
 {
   private EditText mLabel;
 
-  private final ILabelAdder mActivity;
+  private final DrawingWindow mActivity;
   private final float mX;
   private final float mY;
 
@@ -50,7 +50,7 @@ class DrawingLabelDialog extends MyDialog
    * @param x         X coord
    * @param y         Y coord
    */
-  DrawingLabelDialog( Context context, ILabelAdder activity, float x, float y )
+  DrawingLabelDialog( Context context, DrawingWindow activity, float x, float y )
   {
     super(context, R.string.DrawingLabelDialog );
     mActivity = activity;

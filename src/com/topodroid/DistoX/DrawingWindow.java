@@ -129,7 +129,7 @@ public class DrawingWindow extends ItemDrawer
                                     , OnItemClickListener
                                     , OnItemSelectedListener
                                     , OnZoomListener
-                                    , ILabelAdder
+                                    // , ILabelAdder
                                     , ILister
                                     , IZoomer
                                     , IExporter
@@ -4959,8 +4959,9 @@ public class DrawingWindow extends ItemDrawer
    * @param comment  photo comment
    * @param x      X coord
    * @param y      Y coord
+   * @param camera camera type (API)
    */
-  public void addPhotoPoint( String comment, float x, float y )
+  public void addPhotoPoint( String comment, float x, float y, int camera )
   {
     // TDLog.v("addPhoto " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
@@ -4969,7 +4970,7 @@ public class DrawingWindow extends ItemDrawer
     } else {
       mMediaManager.setPoint( x, y );
     }
-    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), PhotoInfo.CAMERA_UNDEFINED );
+    mMediaManager.prepareNextPhoto( -1, ((comment == null)? "" : comment), camera );
     // mMediaComment = (comment == null)? "" : comment;
     // mMediaId = mApp_mData.nextPhotoId( TDInstance.sid );
     // File imagefile = TDFile.getFile( TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(mMediaId) ) );
