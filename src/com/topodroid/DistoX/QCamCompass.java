@@ -242,18 +242,23 @@ class QCamCompass extends Dialog
     if ( b == buttonClick ) {
       TDLog.v( "QCAM compass. Click picture button");
       if ( mHasShot ) {
-        mHasShot = false;
-        TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
-        // buttonClick.setText( mContext.getString( R.string.button_eval ) );
+        if ( mTexture != null && ! mTexture.canCapture() ) {
+          TDToast.makeWarn( "Too many pictures" );
+          enableButtons( false );
+        } else {
+          mHasShot = false;
+          TDandroid.setButtonBackground( buttonClick, mBDcameraRed );
+          // buttonClick.setText( mContext.getString( R.string.button_eval ) );
 
-        // QCamDrawingSurface.startPreview() when it is created
-        if ( mSurface != null ) {
-          mSurface.startPreview(); // TEXTURE
-        } else if ( mTexture != null ) {
-          // TODO
-          mTexture.startPreview();
+          // QCamDrawingSurface.startPreview() when it is created
+          if ( mSurface != null ) {
+            mSurface.startPreview(); // TEXTURE
+          } else if ( mTexture != null ) {
+            // TODO
+            mTexture.startPreview();
+          }
+          enableButtons( true );
         }
-        enableButtons( true );
       } else {
         int wait  = TDSetting.mTimerWait;
         int count = 10;
@@ -263,6 +268,10 @@ class QCamCompass extends Dialog
         }
         enableButtons( false );
         enableButtonSave( false );
+        if ( mTexture != null && ! mTexture.canCapture() ) {
+          buttonClick.setVisibility( View.GONE );
+          TDToast.makeWarn( mContext.getResources().getString( R.string.photo_max_captures ) );
+        }
         TimerTask timer = new TimerTask( this, -TimerTask.Z_AXIS, wait, count );
         timer.execute();
       }

@@ -8,7 +8,8 @@ This dialog is opened from the <i>Photo</i> button in the secondary <i>Shot edit
 or a photo xsection are inserted
 in the <u>sketch window</u>.<br><p>
 
-It has a text field for the <b>comment</b> to the photo you are going to take.<br><p>
+There is a text field for the <b>comment</b> to the photo you are going to take,
+and a checkbox for the choice of the camera implementation.<br><p>
 
 Buttons:
 <ul>
@@ -49,9 +50,19 @@ With the screen up the picture is portrait.
 When the screen is turned to the left or to the rigth the picture is landscape.<br><p>
 
 Zoom buttns are brought up by tapping the screen in the mid-bottom.
-To go through large zoom steps tap the zoom buttons repeatedly fast.
-</div><br><p>
+To go through large zoom steps tap the zoom buttons repeatedly fast.<br><p>
 
+<b>Camera implementation</b><br>
+TopoDroid has two camera implementations: the first uses the old Android camera API,
+the second uses the new Android camera2 API.<br>
+The default is the old camera.<br><p>
+
+With the new camera2 API there is a limit of five attempts of picture capture,
+after which the <i>camera</i> button is no longer available.<br><p>
+
+A warning is displayed, if the JPEG image saving fails.<br><p> 
+
+</div><br><p>
 
 </body>
 </html>

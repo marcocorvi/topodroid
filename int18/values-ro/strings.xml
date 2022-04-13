@@ -244,6 +244,7 @@ Refer to the web pages for details.\n
     <string name="photo_title">FOTOGRAFIE</string>
     <string name="photo_text">Introdu comentariu pentru fotografie</string>
     <!-- TODO string name="photo_failed">Failed photo</string -->
+    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
     <string name="label_title">ETICHETĂ</string>
     <string name="label_text">Introdu comentariu pentru etichetă</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

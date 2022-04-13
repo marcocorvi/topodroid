@@ -246,6 +246,7 @@ Refer to the web pages for details.\n
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Napíšte poznámku</string>
     <!-- TODO string name="photo_failed">Failed photo</string -->
+    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
     <string name="label_title">POPIS</string>
     <string name="label_text">Zadajte text popisu</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

@@ -242,6 +242,7 @@
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
     <!-- TODO string name="photo_failed">Failed photo</string -->
+    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->

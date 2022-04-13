@@ -244,6 +244,7 @@ Refer to the web pages for details.\n
     <string name="photo_title">Снимка</string>
     <string name="photo_text">Въведете коментар за снимката</string>
     <!-- TODO string name="photo_failed">Failed photo</string -->
+    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
     <string name="label_title">надпис</string>
     <string name="label_text">Въведете текст за надписа</string>
     <!-- UNUSED string name="altitude">Надм. височина</string -->

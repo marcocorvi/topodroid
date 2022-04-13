@@ -244,7 +244,8 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Inserisci commento</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
+    <string name="photo_failed">Fallito salvataggio foto</string>
+    <string name="photo_max_captures">Raggiunto limite massimo di foto</string>
     <string name="label_title">TESTO</string>
     <string name="label_text">Scrivi il testo</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -363,7 +364,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_sensors">Rilievo senza misurazioni</string>
     <!-- UNUSED string name="no_shots">Rilievo senza dati</string -->
     <string name="no_survey">Rilievo non selezionato</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+    <string name="no_symbols">Nessuna palette di strumenti</string>
     <!-- UNUSED string name="no_thmanager">ThManager non installato</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer non installato</string -->
     <string name="no_undelete">Nessun oggetto da riprendere</string>
@@ -526,8 +527,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="section_name">Nota sezione</string>
     <string name="scrap_outline">Contorno del disegno</string>
     <string name="scrap_string">Disegno scartato: %1$d / %2$d</string>
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="section_point_not_allowed">Punto sezione non permesso</string>
+    <string name="section_line_not_allowed">Linea sezione non permessa</string>
 
     <!-- UNUSED string name="sensor">sensore</string -->
     <string name="sensor_gravity">gravità</string>
@@ -547,13 +548,13 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="shot_compass">bussola</string -->
     <string name="shot_delete">Cancellare la misura?</string>
     <string name="shots_delete">Cancello il tiro?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Caposaldo con sezione trasversale.\nCancallo battuta ?</string>
+    <string name="shot_rename_unsafe">Caposaldo con sezione trasversale.\nRinomino battuta ?</string>
+    <string name="shots_rename_unsafe">Caposaldo con sezione trasversale.\nRinomino battute ?</string>
     <string name="shot_check">Marco il tiro come di controllo?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Battuta %1$s</string>
     <!-- UNUSED string name="shot_length">lunghezza</string -->
     <string name="shot_note">nota</string>
     <string name="shot_reverse">inverso</string>
@@ -591,9 +592,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cover_m">Distribuzione dati M: %1$.2f %%</string>
     <string name="cover_r">Distributione rotazioni: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+    <string name="accuracy_low">Accuratezza bassa. Calibrazione consigliata.</string>
+    <string name="accuracy_medium">Accuratezza bassa</string>
+    <string name="accuracy_unreliable">Sensori non affidabili</string>
     
     <string name="empty_clipboard">No appunti</string>
     <string name="cannot_rename">Rinomina rilievo non riuscita</string>
@@ -702,7 +703,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_close"     >Chiudi    </string>
     <!-- UNUSED string name="button_create"    >Crea      </string -->
     <string name="button_color"     >Colore</string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >Calcola</string>
     <string name="button_clear_convert">Pulisci conversione</string>
     <string name="button_convert"   >Converti  </string>
     <string name="button_copy"      >Copia</string>
@@ -1021,8 +1022,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_lrud_from">LRUD alla stazione DA</string>
     <string name="export_maps">Mappa prima dei dati</string>
     <string name="export_prefix">Prefisso grotta nei nomi capisaldi</string>
-    <!-- TODO string name="export_prefix_hint">prefix</string -->
-    <!-- TODO string name="export_suffix_hint">suffix</string -->
+    <string name="export_prefix_hint">prefisso</string>
+    <string name="export_suffix_hint">suffisso</string>
     <string name="export_roundtrip">Andata e Ritorno</string>
     <string name="export_scale_png">Risoluzione</string>
     <string name="export_scale_th">Scala 1 :</string>
@@ -1185,12 +1186,12 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_export_settings">Impostazioni Export</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
+  <string name="pref_export_plot_title">Formato export schizzi</string>
+  <string name="pref_export_plot_summary">Formato export schizzi di default</string>
+  <string name="pref_export_shots_title">Formato export dati</string>
+  <string name="pref_export_shots_summary">Formato export dati di default</string>
+  <string name="pref_auto_plot_export_title">Formato export schizzi automatico</string>
+  <string name="pref_auto_plot_export_summary">Formato di export automatico di schizzi</string>
 
   <string name="pref_cat_survey">OPZIONI RILIEVO</string>
   <string name="pref_cat_splay">DATI SPLAY</string>
@@ -1392,10 +1393,10 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_horiz_splay_message">Splay con azimut maggiore di questo sono tratteggiati</string>
   <string name="pref_section_splay_title">Angolo di soglia tratteggio splay</string>
   <string name="pref_section_splay_message">Nella sezione, oltre questo angolo, gli splay sono tratteggiati</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+  <string name="pref_splay_dash_color_title">Colore splay tratteggiati</string>
+  <string name="pref_splay_dash_color_summary">Colore delle linee tratteggiate</string>
+  <string name="pref_splay_dot_color_title">Colore splay punteggiati</string>
+  <string name="pref_splay_dot_color_summary">Colore delle linee punteggiate</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Auto-esporta dati</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Esportazione automatica dei dati (necessita formato di default)</string -->

@@ -76,6 +76,8 @@ public class QCamDrawingTexture extends TextureView
   private static final int MAX_PREVIEW_WIDTH  = 1920; // expect landscape image
   private static final int MAX_PREVIEW_HEIGHT = 1080;
 
+  static final int MAX_CAPTURES = 5;
+
   QCamCompass mQCam;
   private Context mContext;
 
@@ -98,6 +100,7 @@ public class QCamDrawingTexture extends TextureView
   private OrientationEventListener mOrientationListener = null;
   private int mOrientation = 0; // sensor orientation
   private boolean mHasFlash = false;
+  private int mNrCaptures = 0;
 
   // ------------------------------------------------------------------------
   /** surface-texture listener
@@ -144,7 +147,7 @@ public class QCamDrawingTexture extends TextureView
     {
       TDLog.v("CAM2 image available");
       try {
-        Image image = reader.acquireNextImage();
+        Image image = reader.acquireLatestImage();
         Image.Plane[] planes = image.getPlanes();
         if ( planes.length > 0 ) {
           ByteBuffer data = planes[0].getBuffer();
@@ -160,7 +163,7 @@ public class QCamDrawingTexture extends TextureView
           }  
         }
         mState = STATE_PICTURE_DONE;
-        // mBackgroundHandler.post( new ImageSaver( reader.acquireNextImage(), mQCam ) );
+        // mBackgroundHandler.post( new ImageSaver( reader.acquireLatestImage(), mQCam ) );
       } catch ( RuntimeException e ) {
         TDLog.Error("CAM2 runtime " + e.getMessage() );
         startPreview(); // restart preview
@@ -405,7 +408,7 @@ public class QCamDrawingTexture extends TextureView
         StreamConfigurationMap map = chr.get( CameraCharacteristics.SCALER_STREAM_CONFIGURATION_MAP );
         if ( map == null ) continue;
         Size largest = Collections.max( Arrays.asList( map.getOutputSizes( ImageFormat.JPEG ) ), new CompareSizeByArea() );
-        mImageReader = ImageReader.newInstance( largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, 2 );
+        mImageReader = ImageReader.newInstance( largest.getWidth(), largest.getHeight(), ImageFormat.JPEG, MAX_CAPTURES );
         mImageReader.setOnImageAvailableListener( mImageAvailable, mBackgroundHandler );
 
         mOrientation = chr.get( CameraCharacteristics.SENSOR_ORIENTATION ); // 0, 90, 180, or 270
@@ -525,7 +528,8 @@ public class QCamDrawingTexture extends TextureView
    */
   public boolean startPreview()
   {
-    TDLog.v("CAM2 start preview");
+    TDLog.v("CAM2 start preview " + mNrCaptures );
+    if ( ! canCapture() ) return false;
     mState = STATE_PREVIEW;
     if ( mCamera != null /* && mPreviewRequest != null */ ) {
       try { // continuously send capture requests: necessary to send pictures to the surface
@@ -650,13 +654,20 @@ public class QCamDrawingTexture extends TextureView
    */
   byte[] getJpegData() { return mJpegData; }
 
+  /** @return true if the number of captures is smaller than the max limit
+   */
+  boolean canCapture() { return mNrCaptures < MAX_CAPTURES; }
+
+
   /** take a picture
    * @param orientation   display orientation ???
    * @return true on success
    */
   boolean takePicture( int orientation )
   {
-    TDLog.v( "CAM2 take picture " + orientation );
+    TDLog.v( "CAM2 take picture " + orientation + " nr.captures " + mNrCaptures );
+    if ( ! canCapture() ) return false;
+    mNrCaptures ++;
     lockFocus();
     return true;
   }
