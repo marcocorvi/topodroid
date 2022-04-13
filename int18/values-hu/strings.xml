@@ -245,8 +245,8 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="photo_title">FÉNYKÉP</string>
     <string name="photo_text">Írd be a fénykép megjegyzését</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">Sikertelen fotó</string>
+    <string name="photo_max_captures">Elérte a maximális rögzítési korlátot</string>
     <string name="label_title">FELIRAT</string>
     <string name="label_text">Írd be a feliratot.</string>
     <!-- UNUSED string name="altitude">Mag. </string -->
