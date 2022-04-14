@@ -84,6 +84,7 @@ public class ExifInfo
    */
   public void setExifValues( float azimuth, float clino, int orientation, int accuracy, int camera )
   {
+    TDLog.v("EXIF set orientation " + orientation + " camera " + camera );
     mAzimuth     = azimuth;
     mClino       = clino;
     mOrientation = orientation;
@@ -98,14 +99,25 @@ public class ExifInfo
   //
   /** set the values of azimuth and clino in the file exif tags
    * @param filepath   image filepath (file.getPath())
+   *
+   * used tags
+   *   MAKE_NOTE     accuracy
+   *   SOFTWARE      TopoDroid version
+   *   USER_COMMENT  camera + rotation
+   *   ORIENTATION   rotation
+   *   DATETIME      current date
+   *   GPS_LATITUDE  inclination
+   *   GPS_LONGITUDE azimuth
+   *   GPS_IMG_DIRECTION azimuth
+   *   IMAGE_DESCRIPTION azimuth + inclination
    */
   public void writeExif( String filepath )
   {
     try {
       ExifInterface exif = new ExifInterface( filepath );
       // String.format(Locale.US, "%.2f %.2f", azimuth, clino );
-      int rot = (mCamera == 1 )? getExifOrientation( mOrientation ) : getExifOrientation2( mOrientation );
-      TDLog.v( "EXIF write " + filepath + " : orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
+      int rot = (mCamera == 1 )? toRotation( mOrientation ) : toRotation2( mOrientation );
+      TDLog.v( "EXIF write orientation " + mOrientation + " rotation " + rot + " camera " + mCamera );
       if ( TDandroid.AT_LEAST_API_24 ) { // at least Android-7 (N)
         exif.setAttribute( ExifInterface.TAG_SOFTWARE, "TopoDroid " + TDVersion.string() );
       }
@@ -113,8 +125,7 @@ public class ExifInfo
         exif.setAttribute( ExifInterface.TAG_ORIENTATION, String.format(Locale.US, "%d", rot) );
       }
       // exif.setAttribute( ExifInterface.TAG_MAKE, String.format(Locale.US, "%d", rot) ); // set by Android
-      exif.setAttribute( ExifInterface.TAG_MAKER_NOTE, String.format(Locale.US, "%d %d", mCamera, rot) ); 
-      // exif.setAttribute( ExifInterface.TAG_USER_COMMENT, String.format(Locale.US, "%d", rot) );
+      exif.setAttribute( ExifInterface.TAG_USER_COMMENT, String.format(Locale.US, "%d %d", mCamera, rot) );
       exif.setAttribute( ExifInterface.TAG_DATETIME, TDUtil.currentDateTime() );
       int cint = (int)(mClino*100);
       int bint = (int)(mAzimuth*100);
@@ -158,7 +169,7 @@ public class ExifInfo
     try {
       ExifInterface exif = new ExifInterface( filename );
       // mAzimuth = exif.getAttribute( "GPSImgDirection" );
-      String maker_note = exif.getAttribute( ExifInterface.TAG_MAKER_NOTE );
+      String maker_note = exif.getAttribute( ExifInterface.TAG_USER_COMMENT );
       if ( maker_note != null ) {
         String[] vals = maker_note.split(" ");
         if ( vals.length == 2 ) {
@@ -167,8 +178,10 @@ public class ExifInfo
             mOrientation = Integer.parseInt( vals[1] );
           } catch ( NumberFormatException e ) { }
         }
+        TDLog.v("EXIF from MAKER_NOTE orientation " + mOrientation + " camera " + mCamera );
       } else {
         mOrientation = exif.getAttributeInt( ExifInterface.TAG_ORIENTATION, 0 );
+        TDLog.v("EXIF from ORIENTATION orientation " + mOrientation );
       }
       // TDLog.v( "Photo edit orientation " + mOrientation );
       String azimuth = exif.getAttribute( ExifInterface.TAG_GPS_LONGITUDE );
@@ -244,8 +257,9 @@ public class ExifInfo
    *   xx        xx       x    x      x         xxxxxx   xxxxxx         x
    *   x          x    xxxx    xxxx   
    */
-  static private int getExifOrientation( int orientation )
+  static private int toRotation( int orientation )
   {
+    TDLog.v("EXIT to rotation " + orientation );
     if ( orientation <  45 ) return EXIF_UP;
     if ( orientation < 135 ) return EXIF_RIGHT;
     if ( orientation < 225 ) return EXIF_DOWN;
@@ -253,8 +267,9 @@ public class ExifInfo
     return EXIF_UP;
   }
 
-  static private int getExifOrientation2( int orientation )
+  static private int toRotation2( int orientation )
   {
+    TDLog.v("EXIT to rotation-2 " + orientation );
     return EXIF_NORMAL;
   }
 
@@ -263,10 +278,11 @@ public class ExifInfo
    */
   static public int getCameraOrientation( int orientation )
   {
-    if ( orientation <  45 ) return ORIENTATION_UP;
-    if ( orientation < 135 ) return ORIENTATION_RIGHT;
-    if ( orientation < 225 ) return ORIENTATION_DOWN;
-    if ( orientation < 315 ) return ORIENTATION_LEFT;
+    TDLog.v("EXIF get camera orientation for " + orientation );
+    if ( orientation <  45 ) return ORIENTATION_UP;     // 0
+    if ( orientation < 135 ) return ORIENTATION_RIGHT;  // 90
+    if ( orientation < 225 ) return ORIENTATION_DOWN;   // 180
+    if ( orientation < 315 ) return ORIENTATION_LEFT;   // 270
     return ORIENTATION_UP;
   }
 
