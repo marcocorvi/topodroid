@@ -542,6 +542,8 @@ Refer to the web pages for details.\n
     <string name="sensor_value">valoare</string>
     <string name="sensor_comment">comentariu</string>
     <!-- UNUSED string name="insufficient_data">date sezor insuficiente</string -->
+    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
+    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
 
     <!-- UNUSED string name="shot_clino">clinometru</string -->
     <!-- UNUSED string name="shot_compass">compas</string -->

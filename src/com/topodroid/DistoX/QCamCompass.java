@@ -131,7 +131,7 @@ class QCamCompass extends Dialog
 
   private void enableButtonSave( boolean enable )
   {
-    TDLog.v( "QCAM compass enable save button " + enable );
+    // TDLog.v( "QCAM compass enable save button " + enable );
     buttonSave.setEnabled( enable );
     // buttonSave.setVisibility( enable? View.VISIBLE : View.GONE );
     TDandroid.setButtonBackground( buttonSave, (enable? mBDsaveok : mBDsaveoff) );
@@ -143,7 +143,7 @@ class QCamCompass extends Dialog
   {
     super.onCreate(savedInstanceState);
     requestWindowFeature( Window.FEATURE_NO_TITLE );
-    TDLog.v("QCAM camera " + mCamera );
+    // TDLog.v("QCAM camera " + mCamera );
     if ( mCamera == PhotoInfo.CAMERA_TOPODROID ) {
       setContentView(R.layout.qcam_compass);
       getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.MATCH_PARENT );
@@ -200,6 +200,66 @@ class QCamCompass extends Dialog
     }
   }
 
+  // /** conpute the azimuth of the z-vector from Android azimuth, pitch and roll
+  //  * @param a   azimuth [radians]
+  //  * @param p   pitch
+  //  * @param r   roll
+  //  * @return z-axis azimuth in [0, 360] degrees
+  //  *
+  //  * Android axes are (SensorEvent) 
+  //  *    Y long side upward
+  //  *    X short side rightward
+  //  *    Z outward from the screen 
+  //  *    z inward the screen ( z = -Z )
+  //  *
+  //  * given (a,p,r) azimuth, pitch, roll from Android [radians], where
+  //  *    a = angle between projection of Y (long side) on horizontal plane and North
+  //  *    p = angle between Y and its projection on the horizontal plane
+  //  *    r = angle between the intersection of the device plane amd the horizontal plane and X axis (short side)
+  //  * 
+  //  * Y = N c(a) c(p)                       + E s(a) c(p)                     - V s(p)
+  //  * X = N[ - s(a) c(r) - s(p) s(r) c(a) ] + E[ c(a) c(r) - s(p) s(r) s(a) ] - V c(p) s(r)
+  //  * Z = N[   s(a) s(r) - s(p) c(r) s(a) ] - E[ c(a) s(r) + s(p) c(r) s(a) ] - V c(p) c(r)
+  //  * z = N[ - s(a) s(r) + s(p) c(r) s(a) ] + E[ c(a) s(r) + s(p) c(r) s(a) ] + V c(p) c(r)
+  //  *
+  //  * where V vertical downward (N,E,V right triplet)
+  //  */
+  // static float getZBearing( float a, float p, float r )
+  // {
+  //   float sa = TDMath.sin( a );
+  //   float ca = TDMath.cos( a );
+  //   float sp = TDMath.sin( p );
+  //   // float cp = TDMath.cos( p );
+  //   float sr = TDMath.sin( r );
+  //   float cr = TDMath.cos( r );
+  //   float zn = - sa * sr + sp * cr + ca;
+  //   float ze =   ca * sr + sp * cr * sa;
+  //   // float zv =   cp * cr;
+  //   return TDMath.in360( TDMath.atan2d( ze, zn ) );
+  // }
+
+  // /** conpute the clino of the z-vector (inward to the screen) from Android azimuth, pitch and roll
+  //  * @param a   azimuth [radians]
+  //  * @param p   pitch
+  //  * @param r   roll
+  //  * @return z-axis clino in [-90, 90] degrees
+  //  * @see getZBearing()
+  //  */
+  // static float getZClino( float a, float p, float r )
+  // {
+  //   float sa = TDMath.sin( a );
+  //   float ca = TDMath.cos( a );
+  //   float sp = TDMath.sin( p );
+  //   float cp = TDMath.cos( p );
+  //   float sr = TDMath.sin( r );
+  //   float cr = TDMath.cos( r );
+  //   float zn = - sa * sr + sp * cr + ca;
+  //   float ze =   ca * sr + sp * cr * sa;
+  //   float zh = TDMath.sqrt( ze*ze + zn*zn );
+  //   float zv =   cp * cr;
+  //   return TDMath.atan2d( zv, zh );
+  // }
+
   /** @implements
    * @param b   azimuth
    * @param c   clino
@@ -214,8 +274,8 @@ class QCamCompass extends Dialog
     mOrientation = ExifInfo.getCameraOrientation( o );
     mAccuracy    = a;
     mCamera = cam;
-    TDLog.v( "QCAM compass camera " + cam + " orient " + o + " --> " + mOrientation );
-    TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c + " orientation " + o + " -> " + mOrientation );
+    // TDLog.v( "QCAM compass camera " + cam + " orient " + o + " --> " + mOrientation );
+    // TDLog.v( "QCAM compass set orientation " + o + " bearing " + b + " clino " + c + " orientation " + o + " -> " + mOrientation );
 
     mTVdata.setText( String.format(Locale.US, "%.2f %.2f", mBearing, mClino ) );
     mHasBearingAndClino = true;
@@ -240,7 +300,7 @@ class QCamCompass extends Dialog
     boolean dismiss = true;
     Button b = (Button)v;
     if ( b == buttonClick ) {
-      TDLog.v( "QCAM compass. Click picture button");
+      // TDLog.v( "QCAM compass. Click picture button");
       if ( mHasShot ) {
         if ( mTexture != null && ! mTexture.canCapture() ) {
           TDToast.makeWarn( "Too many pictures" );
@@ -277,10 +337,10 @@ class QCamCompass extends Dialog
       }
       return;
     } else if ( b == buttonSave ) {
-      TDLog.v( "QCAM compass. Click save button");
+      // TDLog.v( "QCAM compass. Click save button");
       if ( mHasBearingAndClino ) {
         if ( mCallback != null ) {
-          TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
+          // TDLog.v( "Orientation " + mOrientation + " " + mBearing + " " + mClino );
           if ( mSurface != null ) {
             mCallback.setBearingAndClino( mBearing, mClino, mOrientation, mAccuracy, 1 ); // camera API
             mHasSaved = mCallback.setJpegData( mSurface.getJpegData() );
@@ -296,11 +356,11 @@ class QCamCompass extends Dialog
       }
     } else if ( b == buttonCancel ) {
       mHasSaved = false;
-      TDLog.v( "QCAM compass. Click cancel button");
+      // TDLog.v( "QCAM compass. Click cancel button");
     } else {
       TDLog.Error( "QCAM compass. Click unexpected view");
     }
-    TDLog.v("QCAM has saved data " + mHasSaved + " dismiss " + dismiss );
+    // TDLog.v("QCAM has saved data " + mHasSaved + " dismiss " + dismiss );
     if ( dismiss ) {
       // if ( mSurface != null ) mSurface.close();
       TDUtil.slowDown( 100 );
@@ -324,7 +384,7 @@ class QCamCompass extends Dialog
   @Override
   public void onBackPressed()
   {
-    TDLog.v( "QCAM compass. BACK pressed");
+    // TDLog.v( "QCAM compass. BACK pressed");
     onClick( buttonCancel );
   }
 
@@ -366,7 +426,7 @@ class QCamCompass extends Dialog
         }
       }
     } else if ( action == MotionEvent.ACTION_POINTER_DOWN) {
-      //  TDLog.v("Qcam POINTER DOWN" );
+      // TDLog.v("Qcam POINTER DOWN" );
       if (event.getPointerCount() == 2) {
         float x0 = event.getX(1) - event.getX(0);
         float y0 = event.getY(1) - event.getY(0);
@@ -374,21 +434,21 @@ class QCamCompass extends Dialog
         ret = true;
       }
     } else if ( action == MotionEvent.ACTION_POINTER_UP) {
-      //  TDLog.v("Qcam POINTER UP" );
+      // TDLog.v("Qcam POINTER UP" );
       if (event.getPointerCount() == 2) {
         ret = true;
       }
     } else if (action == MotionEvent.ACTION_DOWN) { 
       float x0 = event.getX(0);
       float y0 = event.getY(0);
-      //  TDLog.v("Qcam DOWN " + x0 + " " + y0 );
+      // TDLog.v("Qcam DOWN " + x0 + " " + y0 );
       if ( y0 > TopoDroidApp.mBorderBottom ) {
         if ( mZoomBtnsCtrlOn && x0 > TopoDroidApp.mBorderInnerLeft && x0 < TopoDroidApp.mBorderInnerRight ) {
           mZoomBtnsCtrl.setVisible( true );
         }
       }
     // } else if (action == MotionEvent.ACTION_UP) {
-      //  TDLog.v("Qcam UP" );
+      // TDLog.v("Qcam UP" );
     }
     return false;
   }

@@ -136,7 +136,7 @@ public class QCamDrawingSurface extends SurfaceView
       mOrientationListener.enable();
       int w = mContext.getResources().getDisplayMetrics().widthPixels;  
       int h = mContext.getResources().getDisplayMetrics().heightPixels;
-      TDLog.v("QCAM diaplay " + w + " x " + h );
+      // TDLog.v("QCAM diaplay " + w + " x " + h );
       if ( w > 1928 ) w = 1928;
       if ( h > 1080 ) h = 1080;
       setMinimumWidth(  w );
@@ -168,7 +168,7 @@ public class QCamDrawingSurface extends SurfaceView
     int o = mContext.getResources().getConfiguration().orientation; // this is reported only 1 (PORTRAIT) or 2 (LANDSCAPE)
     if ( mDisplay != null ) {
       int r = mDisplay.getRotation(); // 0: up, 1: left, 3: right 2: down
-      TDLog.v("QCAM display rotation " + r + " orientation " + o );
+      // TDLog.v("QCAM display rotation " + r + " orientation " + o );
       if ( r == 0 ) {
         mCamera.setDisplayOrientation( ExifInfo.ORIENTATION_RIGHT );
       } else if ( r == 1 ) {
@@ -179,7 +179,7 @@ public class QCamDrawingSurface extends SurfaceView
         mCamera.setDisplayOrientation( 270 );
       }
     } else {
-      TDLog.v("QCAM orientation " + o );
+      // TDLog.v("QCAM orientation " + o );
       // CameraInfo info = new CameraInfo(); // info.orientation is fixed to the value that has been set (90)
       // mCamera.getCameraInfo( 0, info );
       // Camera.Parameters params = mCamera.getParameters();
@@ -203,7 +203,7 @@ public class QCamDrawingSurface extends SurfaceView
   boolean takePicture( int orientation )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface take picture. Orientation " + orientation );
-    TDLog.v("QCAM take picture orientation " + orientation ); 
+    // TDLog.v("QCAM take picture orientation " + orientation ); 
     boolean ret = false;
     if ( mCamera != null ) {
       try {
@@ -248,7 +248,7 @@ public class QCamDrawingSurface extends SurfaceView
   void close()
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface close");
-    TDLog.v( "QCAM surface close");
+    // TDLog.v( "QCAM surface close");
     // if ( mOrientationListener != null ) mOrientationListener.disable( );
     if ( mCamera != null ) {
       stop(); // mCamera.stopPreview();
@@ -263,7 +263,7 @@ public class QCamDrawingSurface extends SurfaceView
   // private boolean open()
   // {
   //   // TDLog.Log( TDLog.LOG_PHOTO, "QCAM surface open");
-  //   TDLog.v( "QCAM surface open");
+  //   // TDLog.v( "QCAM surface open");
   //   close();
   //   try {
   //     mCamera = Camera.open();
@@ -287,7 +287,7 @@ public class QCamDrawingSurface extends SurfaceView
   //     Camera.Size size = params.getPreviewSize();
   //     // mWidth  = size.width;
   //     // mHeight = size.height;
-  //     TDLog.v( "QCam preview size " + size.width + " " + size.height );
+  //     // TDLog.v( "QCam preview size " + size.width + " " + size.height );
   //     // setMinimumWidth( size.width );
   //     // setMinimumHeight( size.height );
   //     try {

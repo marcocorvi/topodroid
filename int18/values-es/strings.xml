@@ -535,6 +535,8 @@
     <string name="sensor_value">Valor</string>
     <string name="sensor_comment">Commentario</string>
     <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
+    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
+    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->

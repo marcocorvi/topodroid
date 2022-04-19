@@ -549,6 +549,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="sensor_value">wartość</string>
     <string name="sensor_comment">komentarz</string>
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
+    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
+    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->

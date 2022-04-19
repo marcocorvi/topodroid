@@ -81,7 +81,7 @@ public class MyBearingAndClino implements IBearingAndClino
       fos.flush();
       fos.close();
       mExif.writeExif( mFilepath );
-      TDLog.v("set JPEG data - file: " + mFilepath );
+      // TDLog.v("set JPEG data - file: " + mFilepath );
       return true;
     } catch ( IOException e ) {
       TDLog.Error( "IO exception " + e.getMessage() );

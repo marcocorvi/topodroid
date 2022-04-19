@@ -543,6 +543,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="sensor_value">valore</string>
     <string name="sensor_comment">commento</string>
     <!-- UNUSED string name="insufficient_data">Dati sensore insufficienti</string -->
+    <string name="sensor_no_readings">Misure insufficienti</string>
+    <string name="sensor_failure">Errore nei sensori: %1$d</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">bussola</string -->

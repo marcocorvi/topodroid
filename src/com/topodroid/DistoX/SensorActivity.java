@@ -245,7 +245,7 @@ public class SensorActivity extends Activity
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
           case Sensor.TYPE_ORIENTATION: // DEPRECAED API-16
-          // case Sensor.TYPE_ACCELEROMETER:
+          // case Sensor.TYPE_GRAVITY:
           default:
             if ( mFirst ) {
               mFirst = false;

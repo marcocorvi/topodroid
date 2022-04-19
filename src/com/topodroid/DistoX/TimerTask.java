@@ -35,9 +35,9 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   final static int Y_AXIS = 2; // long side of phone heading top
   final static int Z_AXIS = 3; // coming out of the screen
 
-  private int mCntAcc;
-  private int mCntMag;
-  private float[] mValAcc = new float[3];
+  private int mCntGrv;  // gravity counter
+  private int mCntMag;  // magnetic counter
+  private float[] mValGrv = new float[3];
   private float[] mValMag = new float[3];
   private SensorManager mSensorManager;
   private WeakReference<IBearingAndClino> mParent;
@@ -47,6 +47,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private int mCount; // measures to count
   private int mMagAccuracy;
   private int mAccAccuracy;
+  private boolean mTakeReading = false; // whether to take readings or not
 
   /** cstr
    * @param parent   parent activity/dialog
@@ -69,7 +70,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
 
   /** task execution
    * @param str ...
-   * @return always 0
+   * @return 0 on success, neg. error (-1 no-run, -2 no sensor manager, -3 no sensors, -4 cancelled )
    */
   @Override
   protected Long doInBackground( String... str )
@@ -78,43 +79,48 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task in background - run " + mRun );
     int duration = 100; // ms
     ToneGenerator toneG = new ToneGenerator( AudioManager.STREAM_ALARM, TDSetting.mBeepVolume );
-    long ret = 0;
-    mCntAcc = 0;
+    mCntGrv = 0;
     mCntMag = 0;
+    if ( ! mRun ) return -1L;
+    if ( mSensorManager == null ) {
+      TDLog.Error( "Timer task: no sensor manager" );
+      return -2L;
+    }
+    Sensor mAcc = mSensorManager.getDefaultSensor( Sensor.TYPE_GRAVITY );
+    Sensor mMag = mSensorManager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
+    if ( mAcc == null || mMag == null ) {
+      TDLog.Error( "Timer task: no sensors" );
+      return -3L;
+    }
+    mTakeReading = false;
+    mSensorManager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
+    mSensorManager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
     for ( int i=0; i<mWait && mRun; ++i ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       TDUtil.slowDown( 1000 - duration );
       if ( isCancelled() ) {
+        TDLog.Error( "Timer task: cancelled" );
         mRun = false;
-        break;
+        mSensorManager.unregisterListener( this );
+        return -4L;
       }
     }
+
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task ready - run " + mRun );
-    if ( mRun ) {
-      int cnt = 3*mCount;
-      mValAcc[0] = 0; mValAcc[1] = 0; mValAcc[2] = 0;
-      mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
-      if ( mSensorManager != null ) {
-        Sensor mAcc = mSensorManager.getDefaultSensor( Sensor.TYPE_ACCELEROMETER );
-        Sensor mMag = mSensorManager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
-        if ( mAcc != null && mMag != null ) {
-          mSensorManager.registerListener( this, mAcc, SensorManager.SENSOR_DELAY_NORMAL );
-          mSensorManager.registerListener( this, mMag, SensorManager.SENSOR_DELAY_NORMAL );
-          while ( cnt > 0 && ( mCntAcc < mCount || mCntMag < mCount ) ) {
-            toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
-            -- cnt;
-            TDUtil.slowDown( 100 );
-          }    
-          mSensorManager.unregisterListener( this );
-        } else {
-          TDLog.Log( TDLog.LOG_PHOTO, "Timer task: no sensors" );
-        }
-      } else {
-        TDLog.Log( TDLog.LOG_PHOTO, "Timer task: no sensor manager" );
-      }
+    mTakeReading = true;
+    int cnt = 3*mCount;
+    mValGrv[0] = 0; mValGrv[1] = 0; mValGrv[2] = 0;
+    mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
+    while ( cnt > 0 && ( mCntGrv < mCount || mCntMag < mCount ) ) {
+      toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
+      -- cnt;
+      TDUtil.slowDown( 100 );
     }
+    mTakeReading = false;
+    mSensorManager.unregisterListener( this );
+    
     // TDLog.v( "timer task bkgr done");
-    return ret;
+    return 0L;
   }
 
   /** progress update (empty)
@@ -130,25 +136,32 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   protected void onPostExecute(Long result) 
   {
-    TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntAcc + " Mag " + mCntMag + " run " + mRun );
-    if ( mCntAcc > 0 && mCntMag > 0 && mRun ) {
-      mValAcc[0] /= mCntAcc;
-      mValAcc[1] /= mCntAcc;
-      mValAcc[2] /= mCntAcc;
-      mValMag[0] /= mCntMag;
-      mValMag[1] /= mCntMag;
-      mValMag[2] /= mCntMag;
+    // TDLog.Log( TDLog.LOG_PHOTO, "Timer task post exec. Acc " + mCntGrv + " Mag " + mCntMag + " run " + mRun );
+    // TDLog.v( "Timer task post exec. " + result + " Acc " + mCntGrv + " Mag " + mCntMag );
+    if ( result == 0 ) {
+      if ( mCntGrv > 0 && mCntMag > 0 && mRun ) {
+        mValGrv[0] /= mCntGrv;
+        mValGrv[1] /= mCntGrv;
+        mValGrv[2] /= mCntGrv;
+        mValMag[0] /= mCntMag;
+        mValMag[1] /= mCntMag;
+        mValMag[2] /= mCntMag;
+        computeBearingAndClino();
+        toastAccuracy( mMagAccuracy );
+        // TDLog.v( "Timer task. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
+      } else {
+        mValGrv[0] = 0;
+        mValGrv[1] = 0;
+        mValGrv[2] = 0;
+        mValMag[0] = 0;
+        mValMag[1] = 0;
+        mValMag[2] = 0;
+        TDLog.Error( "Timer task null direction. Acc. counts " + mCntGrv + " Mag. counts " + mCntMag );
+        TDToast.makeWarn( R.string.sensor_no_readings );
+      }
     } else {
-      mValAcc[0] = 0;
-      mValAcc[1] = 0;
-      mValAcc[2] = 0;
-      mValMag[0] = 0;
-      mValMag[1] = 0;
-      mValMag[2] = 0;
-      TDLog.Log( TDLog.LOG_PHOTO, "Timer task null direction. Acc. counts " + mCntAcc + " Mag. counts " + mCntMag );
+      TDToast.makeWarn( String.format( TDInstance.getResourceString( R.string.sensor_failure ), result.longValue() ) );
     }
-    computeBearingAndClino();
-    toastAccuracy( mMagAccuracy );
   }
 
   /** react to a notification of a change in sensor accuracy
@@ -163,7 +176,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     if ( type == Sensor.TYPE_MAGNETIC_FIELD ) {
       // if ( accuracy <= mMagAccuracy) return;
       mMagAccuracy = accuracy;
-    } else if ( type == Sensor.TYPE_ACCELEROMETER ) {
+    } else if ( type == Sensor.TYPE_GRAVITY ) {
       // if ( accuracy <= mAccAccuracy) return;
       mAccAccuracy = accuracy;
     }
@@ -191,19 +204,20 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   @Override
   public void onSensorChanged( SensorEvent event )
   {
+    if ( ! mTakeReading ) return;
     float[] value = event.values;
     switch ( event.sensor.getType() ) {
-      case Sensor.TYPE_MAGNETIC_FIELD:
+      case Sensor.TYPE_MAGNETIC_FIELD: // ambient magnetic field [uT]
         ++ mCntMag;
-        mValMag[0] += value[0];
-        mValMag[1] += value[1];
-        mValMag[2] += value[2];
+        mValMag[0] += value[0]; // X-axis of the device: rightward to the side
+        mValMag[1] += value[1]; // Y-axis: forward from the top
+        mValMag[2] += value[2]; // Z-axis: upward out of the screen
         break;
-      case Sensor.TYPE_ACCELEROMETER:
-        ++ mCntAcc;
-        mValAcc[0] += value[0];
-        mValAcc[1] += value[1];
-        mValAcc[2] += value[2];
+      case Sensor.TYPE_GRAVITY: // when the device is at rest, the output of GRAVITY should be identical to that of ACCELEROMETER
+        ++ mCntGrv;
+        mValGrv[0] += value[0]; // - Gx [m/s^2]
+        mValGrv[1] += value[1]; // - Gy
+        mValGrv[2] += value[2]; // - Gz
         break;
     }
   }
@@ -213,15 +227,16 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private void computeBearingAndClino( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task compute B & C" );
-    TDVector g = new TDVector( mValAcc[0], mValAcc[1], mValAcc[2] );
-    TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] );
+    // TDLog.v("Gravity " + mValGrv[0] + " " + mValGrv[1] + " " + mValGrv[2] + " Magn " + mValMag[0] + " " + mValMag[1] + " " + mValMag[2] );
+    TDVector g = new TDVector( mValGrv[0], mValGrv[1], mValGrv[2] ); // -G: X-right, Y-forward, Z-upward
+    TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] ); //  M:
     g.normalize();
+    m.normalize();
 
     int o0 = 0;
 
-    m.normalize();
     // TDVector e = new TDVector( 1.0f, 0.0f, 0.0f );
-    TDVector w = m.cross( g ); // west
+    TDVector w = m.cross( g ); // east // FIXME THIS
     TDVector n = g.cross( w ); // north
     w.normalize();
     n.normalize();
@@ -230,20 +245,20 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     switch ( mAxis ) {
       case X_AXIS:
       case -X_AXIS:
-        b0 = TDMath.atan2( -w.x, n.x );
-        c0 = - TDMath.atan2( g.x, TDMath.sqrt(w.x*w.x+n.x*n.x) );
+        b0 =   TDMath.atan2( -w.x, n.x );
+        c0 = - TDMath.atan2( g.x, TDMath.sqrt( w.x*w.x + n.x*n.x ) );
         o0 = ((int)(TDMath.atan2d( -g.y, g.z ) + 360)) % 360;
         break;
       case Y_AXIS:
       case -Y_AXIS:
-        b0 = TDMath.atan2( -w.y, n.y );
-        c0 = - TDMath.atan2( g.y, TDMath.sqrt(w.y*w.y+n.y*n.y) );
+        b0 =   TDMath.atan2( -w.y, n.y );
+        c0 = - TDMath.atan2( g.y, TDMath.sqrt( w.y*w.y + n.y*n.y ) );
         o0 = ((int)(TDMath.atan2d( -g.z, g.x ) + 360)) % 360;
         break;
       case Z_AXIS:
       case -Z_AXIS:
-        b0 = TDMath.atan2( -w.z, n.z );
-        c0 = - TDMath.atan2( g.z, TDMath.sqrt(w.z*w.z+n.z*n.z) );
+        b0 =   TDMath.atan2( -w.z, n.z );
+        c0 = - TDMath.atan2( g.z, TDMath.sqrt( w.z*w.z + n.z*n.z ) );
         o0 = ((int)(TDMath.atan2d( -g.x, g.y ) + 360)) % 360;
         break;
     }
@@ -255,7 +270,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     if ( b0 < 0.0f ) b0 += TDMath.M_2PI;
     // if ( r0 < 0.0f ) r0 += TDMath.M_2PI;
     b0 = 360 - b0 * 360.0f / TDMath.M_2PI;
-    c0 = 0 - c0 * 360.0f / TDMath.M_2PI;
+    c0 =   0 - c0 * 360.0f / TDMath.M_2PI;
     if ( mParent.get() != null ) mParent.get().setBearingAndClino( b0, c0, o0, mMagAccuracy, 0 ); // 0 timer does not know camera API
   }
 
