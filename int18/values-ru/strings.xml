@@ -241,8 +241,8 @@
     <string name="illegal_data_value">Недопустимое значение</string>
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">Ошибка фото</string>
+    <string name="photo_max_captures">Достигнут предел кол-ва попыток съёмки</string>
     <string name="label_title">ПОДПИСЬ</string>
     <string name="label_text">Введите текст подписи</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -554,7 +554,7 @@
     <string name="shot_check">Пометить замер как проверочный?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные измерений</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Замер %1$s</string>
     <!-- UNUSED string name="shot_length">длина</string -->
     <string name="shot_note">заметки</string>
     <string name="shot_reverse">развернуть</string>
