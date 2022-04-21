@@ -31,6 +31,9 @@ import android.hardware.SensorEventListener;
 class TimerTask extends AsyncTask<String, Integer, Long >
                 implements SensorEventListener
 {
+  final static int TYPE_MAG = Sensor.TYPE_MAGNETIC_FIELD;
+  final static int TYPE_ACC = Sensor.TYPE_ACCELEROMETER; // when the device is at rest, the output of GRAVITY should be identical to that of ACCELEROMETER
+  
   final static int X_AXIS = 1; // short side of phone heading right
   final static int Y_AXIS = 2; // long side of phone heading top
   final static int Z_AXIS = 3; // coming out of the screen
@@ -86,8 +89,8 @@ class TimerTask extends AsyncTask<String, Integer, Long >
       TDLog.Error( "Timer task: no sensor manager" );
       return -2L;
     }
-    Sensor mAcc = mSensorManager.getDefaultSensor( Sensor.TYPE_GRAVITY );
-    Sensor mMag = mSensorManager.getDefaultSensor( Sensor.TYPE_MAGNETIC_FIELD );
+    Sensor mAcc = mSensorManager.getDefaultSensor( TYPE_ACC );
+    Sensor mMag = mSensorManager.getDefaultSensor( TYPE_MAG );
     if ( mAcc == null || mMag == null ) {
       TDLog.Error( "Timer task: no sensors" );
       return -3L;
@@ -107,10 +110,10 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     }
 
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task ready - run " + mRun );
-    mTakeReading = true;
     int cnt = 3*mCount;
     mValGrv[0] = 0; mValGrv[1] = 0; mValGrv[2] = 0;
     mValMag[0] = 0; mValMag[1] = 0; mValMag[2] = 0;
+    mTakeReading = true;
     while ( cnt > 0 && ( mCntGrv < mCount || mCntMag < mCount ) ) {
       toneG.startTone( ToneGenerator.TONE_PROP_BEEP, duration ); 
       -- cnt;
@@ -173,10 +176,10 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   public void onAccuracyChanged( Sensor sensor, int accuracy ) 
   {
     int type = sensor.getType();
-    if ( type == Sensor.TYPE_MAGNETIC_FIELD ) {
+    if ( type == TYPE_MAG ) {
       // if ( accuracy <= mMagAccuracy) return;
       mMagAccuracy = accuracy;
-    } else if ( type == Sensor.TYPE_GRAVITY ) {
+    } else if ( type == TYPE_ACC ) {
       // if ( accuracy <= mAccAccuracy) return;
       mAccAccuracy = accuracy;
     }
@@ -207,13 +210,13 @@ class TimerTask extends AsyncTask<String, Integer, Long >
     if ( ! mTakeReading ) return;
     float[] value = event.values;
     switch ( event.sensor.getType() ) {
-      case Sensor.TYPE_MAGNETIC_FIELD: // ambient magnetic field [uT]
+      case TYPE_MAG: // ambient magnetic field [uT]
         ++ mCntMag;
         mValMag[0] += value[0]; // X-axis of the device: rightward to the side
         mValMag[1] += value[1]; // Y-axis: forward from the top
         mValMag[2] += value[2]; // Z-axis: upward out of the screen
         break;
-      case Sensor.TYPE_GRAVITY: // when the device is at rest, the output of GRAVITY should be identical to that of ACCELEROMETER
+      case TYPE_ACC: // when the device is at rest, the output of GRAVITY should be identical to that of ACCELEROMETER
         ++ mCntGrv;
         mValGrv[0] += value[0]; // - Gx [m/s^2]
         mValGrv[1] += value[1]; // - Gy
