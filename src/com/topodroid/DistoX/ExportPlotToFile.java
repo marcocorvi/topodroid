@@ -67,7 +67,7 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                       TDNum num, DrawingCommandManager command,
                       long type, String name, String ext, boolean toast, GeoReference station )
     {
-      TDLog.v("export plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
+      TDLog.v("EXPORT plot to file cstr. Type: " + type + " fullname: " + name + " ext: " + ext );
       // FIXME assert( ext != null );
       /* if ( TDSetting.mExportUri ) */ mUri = uri; // FIXME_URI
       mFormat    = context.getResources().getString(R.string.saved_file_1);
@@ -97,14 +97,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
         if ( pfd == null ) return false;
       }
       try {
-        // TDLog.v("export plot to file: <" + mFullName + "> <" + mExt + ">" );
-        // TDLog.Log( TDLog.LOG_IO, "export plot to file " + filename );
 	String file_name = mFullName + "." + mExt; // file-name
+        String file_path = TDPath.getOutFile( file_name );
+        TDLog.v("EXPORT plot to file " + file_name + " path " + file_path );
         boolean ret = true;
         synchronized ( TDFile.mFilesLock ) {
           // final FileOutputStream out = TDFile.getFileOutputStream( filename );
           if ( mExt.equals("shp") ) { 
-            FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getPrivateFileOutputStream( "export", file_name );
+            FileOutputStream fos = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getFileOutputStream( file_path );
             // FileOutputStream fos = TDsafUri.docFileOutputStream( pfd );
             String dirpath = TDPath.getShpTempRelativeDir();
 	    DrawingShp.writeShp( fos, dirpath, mCommand, mType, mStation );
@@ -114,11 +114,11 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
 	  } else {
             BufferedWriter bw = null;
             if ( mExt.equals("dxf") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               DrawingDxf.writeDxf( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("svg") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               if ( TDSetting.mSvgRoundTrip ) {
                 // List<String> segments = pfd.getPathSegments();
@@ -127,16 +127,16 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
                 (new DrawingSvg()).writeSvg( file_name, bw, mNum, mCommand, mType );
               }
             } else if ( mExt.equals("xvi") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               DrawingXvi.writeXvi( bw, mNum, mCommand, mType );
             } else if ( mExt.equals("xml") ) {
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               (new DrawingTunnel()).writeXml( bw, mInfo, mNum, mCommand, mType );
             } else if ( mExt.equals("c3d") ) {
               // TDLog.v("C3D export to Cave3D: " + mFullName );
-              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", file_name ) );
+              bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( file_path ) );
               // bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
               ret = DrawingIO.exportCave3D( bw, mCommand, mNum, mPlotInfo, mFixedInfo, mFullName );
             }

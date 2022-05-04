@@ -538,11 +538,17 @@ public class SurveyWindow extends Activity
       if ( TDInstance.sid < 0 ) {
         TDToast.makeBad( R.string.no_survey );
       } else {
-        // if ( TDSetting.mExportUri ) { // FIXME-URI
+        // APP_OUT_DIR
+        // // if ( TDSetting.mExportUri ) { // FIXME-URI
+        //   selectExportFromProvider( index, filename );
+        // // } else {
+        // //   mApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
+        // // }
+        if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
           selectExportFromProvider( index, filename );
-        // } else {
-        //   mApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
-        // }
+        } else {
+          mApp.doExportDataAsync( getApplicationContext(), filename, index, mExportPrefix, true ); // uri = null
+        }
       }
     } else {
       TDLog.Error("Survey Window export - negative index " + index );
@@ -550,7 +556,7 @@ public class SurveyWindow extends Activity
   }
 
   private static int mExportIndex; // index of the export-type 
-  private static String mExportPrefix = null;
+  private static String mExportPrefix = null; // station names export prefix
 
   // FIXME_URI
   private void selectExportFromProvider( int index, String filename ) // EXPORT

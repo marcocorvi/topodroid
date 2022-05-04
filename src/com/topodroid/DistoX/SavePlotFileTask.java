@@ -186,10 +186,12 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
       // // TDLog.v( "save plot Therion file SAVE " + mFullName );
       if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 ) {
+        // APP_OUT_DIR
+        TDLog.v("EXPORT AUTO " + mFullName );
         switch ( TDSetting.mAutoExportPlotFormat ) { // auto-export format
           case TDConst.SURVEY_FORMAT_TH2:
             if ( mManager != null ) {
-              File file2 = TDPath.getExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
+              File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
               DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // false= single sketch
             }
             break;

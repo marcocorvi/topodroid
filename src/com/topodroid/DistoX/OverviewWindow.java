@@ -73,6 +73,7 @@ import android.graphics.pdf.PdfDocument.PageInfo;
 
 import android.net.Uri;
 
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -672,7 +673,7 @@ public class OverviewWindow extends ItemDrawer
    * @param ext    export type (ie, extension)
    * @note called only by export menu
    */
-  private void saveWithExt( Uri uri, final String ext )
+  private void saveWithExt( /* Uri uri, */ final String ext )
   {
     TDNum num = mNum;
     final String fullname = TDInstance.survey + ( (mType == PlotType.PLOT_PLAN )? "-p" : "-s" );
@@ -680,8 +681,11 @@ public class OverviewWindow extends ItemDrawer
     // TDLog.v( "export th2 file " + fullname );
     DrawingCommandManager manager = mOverviewSurface.getManager( DrawingSurface.DRAWING_OVERVIEW );
 
-    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-    if ( uri == null ) return;
+    // APP_OUT_DIR
+    // if ( uri == null ) return;
+    String filename = fullname + "." + ext;
+    Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
+    TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
 
     if ( ext.equals("th2") ) {
       Handler th2Handler = new Handler() {
@@ -730,66 +734,63 @@ public class OverviewWindow extends ItemDrawer
     }
     // TDLog.v("Overview export: type " + export_type + " index " + mExportIndex + " ext " + mExportExt );
 
-    // if ( TDSetting.mExportUri ) { // FIXME_URI
-      Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-      intent.setType( TDConst.mMimeType[ mExportIndex ] );
-      intent.addCategory(Intent.CATEGORY_OPENABLE);
-      intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-      // intent.putExtra( "exporttype", index ); // index is not returned to the app
-      intent.putExtra( Intent.EXTRA_TITLE, filename );
-      startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
-    // } else {
-    //   // saveWithExt( null, mExportExt );
-    //   doUriExport( null );
-    // }
+    // APP_OUT_DIR
+    // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+    // intent.setType( TDConst.mMimeType[ mExportIndex ] );
+    // intent.addCategory(Intent.CATEGORY_OPENABLE);
+    // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // // intent.putExtra( "exporttype", index ); // index is not returned to the app
+    // intent.putExtra( Intent.EXTRA_TITLE, filename );
+    // startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_overview_title ) ), TDRequest.REQUEST_GET_EXPORT );
+
+    saveWithExt( mExportExt );
   }
 
-  // FIXME_URI
-  /** react to a called activity result
-   * @param request   request passed to the activity
-   * @param result    result code (OK or CANCEL)
-   * @param intent    intent with result data
-   *
-   * used only with request GET_EXPORT. The result data contains the export URI.
-   */
-  public void onActivityResult( int request, int result, Intent intent ) 
-  {
-    // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
-    // if ( ! TDSetting.mExportUri ) return;
-    if ( intent == null ) return;
-    // Bundle extras = intent.getExtras();
-    switch ( request ) {
-      case TDRequest.REQUEST_GET_EXPORT:
-        if ( result == Activity.RESULT_OK ) {
-          // int index = intent.getIntExtra( "exporttype", -1 );
-          Uri uri = intent.getData();
-          // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );
-          doUriExport( uri );
-        }
-      // default:
-      //   super.onActivityResult( request, result, intent );
-    }
-  }
+  // /** react to a called activity result ---- APP_OUT_DIR
+  //  * @param request   request passed to the activity
+  //  * @param result    result code (OK or CANCEL)
+  //  * @param intent    intent with result data
+  //  *
+  //  * used only with request GET_EXPORT. The result data contains the export URI.
+  //  */
+  // public void onActivityResult( int request, int result, Intent intent ) 
+  // {
+  //   // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
+  //   // if ( ! TDSetting.mExportUri ) return;
+  //   if ( intent == null ) return;
+  //   // Bundle extras = intent.getExtras();
+  //   switch ( request ) {
+  //     case TDRequest.REQUEST_GET_EXPORT:
+  //       if ( result == Activity.RESULT_OK ) {
+  //         // int index = intent.getIntExtra( "exporttype", -1 );
+  //         Uri uri = intent.getData();
+  //         // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );
+  //         doUriExport( uri );
+  //       }
+  //     // default:
+  //     //   super.onActivityResult( request, result, intent );
+  //   }
+  // }
 
-  // interface IExporter FIXME_URI
-  /** export drawing: either export with a specific format (extension) or export as PDF
-   * @param uri   export URI
-   */
-  public void doUriExport( Uri uri ) 
-  {
-    // TDLog.v( "Overview URI export: index " + mExportIndex );
-    switch ( mExportIndex ) {
-      case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
-      case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
-      case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, "svg" ); break;
-      case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shp" ); break;
-      case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
-      case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
-      default:
-        TDLog.Error("Unexpected export index " + mExportIndex );
-        break;
-    }
-  }
+  // APP_OUT_DIR
+  // /** export drawing: either export with a specific format (extension) or export as PDF
+  //  * @param uri   export URI
+  //  */
+  // public void doUriExport( Uri uri ) 
+  // {
+  //   // TDLog.v( "Overview URI export: index " + mExportIndex );
+  //   switch ( mExportIndex ) {
+  //     case TDConst.SURVEY_FORMAT_TH2: saveWithExt( uri, "th2" ); break;
+  //     case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, "dxf" ); break; 
+  //     case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, "svg" ); break;
+  //     case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, "shp" ); break;
+  //     case TDConst.SURVEY_FORMAT_XVI: saveWithExt( uri, "xvi" ); break;
+  //     case TDConst.SURVEY_FORMAT_PDF: savePdf( uri ); break;
+  //     default:
+  //       TDLog.Error("Unexpected export index " + mExportIndex );
+  //       break;
+  //   }
+  // }
 
   // PDF ------------------------------------------------------------------
   /** export drawing as PDF

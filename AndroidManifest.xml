@@ -55,6 +55,9 @@
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <!-- API-33 has the media granularity permissions: READ_MEDIA_IMAGES READ_MEDIA_VIDEO READ_MEDIA_AUDIO -->
+    <!-- uses-permission can be limited with android:maxSdkVersion="32" -->
+    <!-- permission android:name="..." android:protectionLevel="development" -->
 
     <uses-permission android:name="android.permission.CAMERA" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />

@@ -278,7 +278,7 @@ public class TDFile
   }
 
   /** @return the file of the specified folder
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    */
   public static File getPrivateDir( String type ) 
   { 
@@ -286,7 +286,7 @@ public class TDFile
   }
 
   /** @return a private file
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static File getPrivateFile( String type, String name ) 
@@ -295,7 +295,7 @@ public class TDFile
   }
 
   /** @return true if the private file exists
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static boolean existPrivateFile( String type, String name )
@@ -305,7 +305,7 @@ public class TDFile
   }
 
   /** @return private file output stream
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static FileOutputStream getPrivateFileOutputStream( String type, String name ) throws IOException
@@ -315,7 +315,7 @@ public class TDFile
   }
 
   /** @return private file output writer
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static FileWriter getPrivateFileWriter( String type, String name ) throws IOException
@@ -325,7 +325,7 @@ public class TDFile
   }
 
   /** @return private file input stream
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static FileInputStream getPrivateFileInputStream( String type, String name ) throws IOException
@@ -335,7 +335,7 @@ public class TDFile
   }
 
   /** delete a private file
-   * @param type   folder name
+   * @param type   folder name (in the private app files)
    * @param name   filename
    */
   public static void deletePrivateFile( String type, String name ) 
@@ -384,7 +384,7 @@ public class TDFile
   }
 
   /** @return true if the directory exists and is read-writable
-   * @param type ...
+   * @param type folder name
    */
   public static boolean hasExternalDir( String type ) 
   {

@@ -264,7 +264,7 @@ public class TDExporter
     }
     try {
       // BufferedWriter bw = TDFile.getMSwriter( "csx", surveyname + ".csx", "text/csx" );
-      BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getPrivateFileWriter( "export", surveyname + ".csx" ) );
+      BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : TDFile.getFileWriter( TDPath.getOutFile( surveyname + ".csx" ) ) );
       // BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
       ret = exportSurveyAsCsx( bw, sid, data, info, psd1, psd2, origin, surveyname );
       bw.flush();

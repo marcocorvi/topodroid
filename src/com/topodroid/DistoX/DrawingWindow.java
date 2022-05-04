@@ -54,7 +54,7 @@ import com.topodroid.common.LegType;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
 
-// import java.io.File;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -6871,7 +6871,7 @@ public class DrawingWindow extends ItemDrawer
   void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
   {
     // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-    // TDLog.v( "do save with ext: filename " + filename + " ext " + ext );
+    TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext );
     // mActivity = context (only to toast)
     SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
     PlotInfo   plot  = null;
@@ -7442,13 +7442,19 @@ public class DrawingWindow extends ItemDrawer
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
       } else {
-        Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
-        intent.setType( TDConst.mMimeType[ mExportIndex] );
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
-        // intent.putExtra( "exporttype", index ); // index is not returned to the app
-        intent.putExtra( Intent.EXTRA_TITLE, filename );
-        startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
+        // APP_OUT_DIR
+        // Intent intent = new Intent( Intent.ACTION_CREATE_DOCUMENT );
+        // intent.setType( TDConst.mMimeType[ mExportIndex] );
+        // intent.addCategory(Intent.CATEGORY_OPENABLE);
+        // intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+        // // intent.putExtra( "exporttype", index ); // index is not returned to the app
+        // intent.putExtra( Intent.EXTRA_TITLE, filename );
+        // startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
+        Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
+        TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
+        if ( uri != null ) {
+          doUriExport( uri );
+        }
       }
     // } else {
     //   if ( mExportIndex == TDConst.SURVEY_FORMAT_TH2 ) {
@@ -7469,10 +7475,10 @@ public class DrawingWindow extends ItemDrawer
     // }
   }
 
-  /** interface IExporter: export sketch
+  /** 
    * @param uri export URI
    */
-  public void doUriExport( Uri uri ) 
+  private void doUriExport( Uri uri ) 
   {
     // if ( ! TDSetting.mExportUri ) return;
     // TDLog.v( "do URI export. index " + mExportIndex );
@@ -8170,14 +8176,15 @@ public class DrawingWindow extends ItemDrawer
           doRecover( filename, type );
         }
         break;
-      case TDRequest.REQUEST_GET_EXPORT:
-        if ( /* TDSetting.mExportUri && */ resCode == Activity.RESULT_OK ) {
-          // int index = intent.getIntExtra( "exporttype", -1 );
-          Uri uri = intent.getData();
-          // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );
-          if ( uri != null ) doUriExport( uri );
-        }
-        break;
+      // APP_OUT_DIR
+      // case TDRequest.REQUEST_GET_EXPORT:
+      //   if ( /* TDSetting.mExportUri && */ resCode == Activity.RESULT_OK ) {
+      //     // int index = intent.getIntExtra( "exporttype", -1 );
+      //     Uri uri = intent.getData();
+      //     // TDLog.v( "URI Export " + mExportIndex + " uri " + uri.toString() );
+      //     if ( uri != null ) doUriExport( uri );
+      //   }
+      //   break;
     }
   }
 

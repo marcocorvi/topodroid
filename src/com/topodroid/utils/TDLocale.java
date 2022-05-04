@@ -68,11 +68,14 @@ public class TDLocale
   /** set the locale
    * @param locale   country ISO code
    * @note called by TDSetting
+   * @note API-33 AppCompatDelegate.setApplicationLocales( LocaleListCompat )
+   *              using AppCompatDelegate requires using it instead of Activity for several methods
+   *              and calling it from other Activity methods
    */
   public static void setTheLocale( String locale )
   {
     mLocaleStr = locale;
-    mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
+    mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr ); // from API-21 Locale.forLanguageTag( locale )
     TDLog.v( "LOCALE SET <" + mLocaleStr + "> " + mLocale.toString() );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );

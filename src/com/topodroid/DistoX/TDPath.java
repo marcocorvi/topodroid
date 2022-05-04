@@ -114,6 +114,7 @@ public class TDPath
   private static String APP_NOTE_PATH     = null;
   private static String APP_TDR_PATH      = null;
   private static String APP_C3D_PATH      = null;
+  private static String APP_OUT_PATH      = null;
 
   private static String RELATIVE_TMP = null;
   private static String APP_TMP_PATH = null;
@@ -128,6 +129,7 @@ public class TDPath
     APP_NOTE_PATH     = null;
     APP_TDR_PATH      = null;
     APP_C3D_PATH      = null;
+    APP_OUT_PATH      = null;
 
     APP_TMP_PATH = null;
     RELATIVE_TMP = null;
@@ -238,6 +240,7 @@ public class TDPath
       APP_NOTE_PATH  = root + "/note";    checkFilesystemDirs( APP_NOTE_PATH );
       APP_PHOTO_PATH = root + "/photo";   checkFilesystemDirs( APP_PHOTO_PATH );
       APP_AUDIO_PATH = root + "/audio";   checkFilesystemDirs( APP_AUDIO_PATH );
+      APP_OUT_PATH   = root + "/out";     checkFilesystemDirs( APP_OUT_PATH );
 
       APP_TMP_PATH = root + "/tmp";    // CWD/survey/tmp
       RELATIVE_TMP = survey + "/tmp";
@@ -375,6 +378,11 @@ public class TDPath
    * @note used only by Archiver
    */
   static String getNoteFile( String name )  { return APP_NOTE_PATH  + "/" + name; }
+
+  /** @return a current survey out-file full pathname
+   * @param name out filename, eg, <survey>.th
+   */
+  static String getOutFile( String name )  { return APP_OUT_PATH  + "/" + name; }
 
   /** @return the current survey photo file full pathname
    * @param name photo filename, ie, <index>.jpg
@@ -716,15 +724,25 @@ public class TDPath
     }
   }
 
-  // -------------- PRIVATE ---------------------------------------------------------
-
+  // APP_OUT_DIR
   /** @return private export file
    * @param filename file name (with extension if any)
    */
-  static File getExportFile( String filename )
+  static File getOutExportFile( String filename )
   {
-    return TDFile.getPrivateFile( "export", filename );
+    return new File( getOutFile( filename ) );
   }
+
+
+  // -------------- PRIVATE ---------------------------------------------------------
+
+  // /** @return private export file
+  //  * @param filename file name (with extension if any)
+  //  */
+  // static File getPrivateExportFile( String filename )
+  // {
+  //   return TDFile.getPrivateFile( "export", filename );
+  // }
 
   /** delete symbol files from a folder
    * @param dirname   symbol folder name

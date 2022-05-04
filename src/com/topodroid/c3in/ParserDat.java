@@ -479,7 +479,7 @@ public class ParserDat extends TglParser
         if (  sh.from_station != null ) continue;
         // TDLog.v( "check shot " + sh.from + " " + sh.to );
         for ( Cave3DStation s : stations ) {
-          if ( sh.from.equals( s.getFullName() ) ) {
+          if ( sh.from.equals( s.getFullName() ) ) { // s.name
             sh.from_station = s;
             sh.setUsed( );
             sh.to_station = sh.getStationFromStation( s );

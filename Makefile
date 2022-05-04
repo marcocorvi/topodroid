@@ -10,27 +10,29 @@ AFLAGS = -v
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 TARGET_SDK = `grep targetSdkVersion AndroidManifest.xml | sed -e 's/ *android:targetSdkVersion=//' | sed -e 's/"//g' `
 
-APPNAME = DistoX
+APPCODE = DistoX
+APPNAME = TopoDroid
+APPVERSION = $(APPNAME)-$(VERSION)
 LOGNAME = topodroid-X
-PACKAGE = com.topodroid.$(APPNAME)
+PACKAGE = com.topodroid.$(APPCODE)
 
 default:
 	$(ANT) debug
 
 release:
 	$(ANT) release
-	mv bin/TopoDroid-release.apk TopoDroid-$(VERSION)-release.apk
-	ls -l TopoDroid-$(VERSION)-release.apk
-	md5sum TopoDroid-$(VERSION)-release.apk
+	mv bin/$(APPNAME)-release.apk $(APPVERSION)-release.apk
+	ls -l $(APPVERSION)-release.apk
+	md5sum $(APPVERSION)-release.apk
 
 signed:
 	$(ANT) release
 	echo "Version $(VERSION)"
 	./howto/sign.sh
-	mv TopoDroid-release-keysigned.apk TopoDroid-$(VERSION).apk
-	ls -l TopoDroid-$(VERSION).apk
-	md5sum TopoDroid-$(VERSION).apk
-	mv TopoDroid-$(VERSION).apk TopoDroid-$(VERSION)-$(TARGET_SDK).apk
+	mv $(APPNAME)-release-keysigned.apk $(APPVERSION).apk
+	ls -l $(APPVERSION).apk
+	md5sum $(APPVERSION).apk
+	mv $(APPVERSION).apk $(APPVERSION)-$(TARGET_SDK).apk
 
 signed-29:
 	./howto/target.sh 29
@@ -47,21 +49,21 @@ signed-31:
 debug-signed:
 	$(ANT) debug
 	./howto/sign-debug.sh
-	mv TopoDroid-debug-keysigned.apk TopoDroid-$(VERSION)-debug.apk
+	mv $(APPNAME)-debug-keysigned.apk $(APPVERSION)-debug.apk
 
 bundle:
 	$(ANT) release
-	./bundle.sh
+	./howto/bundle.sh
 
 install:
-	adb install -r bin/TopoDroid-debug.apk
+	adb install -r bin/$(APPNAME)-debug.apk
 
 uninstall:
 	adb uninstall $(PACKAGE)
 
 reinstall:
 	adb uninstall $(PACKAGE)
-	adb install -r bin/TopoDroid-debug.apk
+	adb install -r bin/$(APPNAME)-debug.apk
 
 rebuild:
 	$(ANT) clean
@@ -98,7 +100,6 @@ SRC = \
   ./AndroidManifest.xml \
   ./ant/* \
   ./build.xml \
-  ./bundle.sh \
   ./LICENSE \
   ./COPYING \
   ./Makefile \
@@ -131,7 +132,7 @@ SRC = \
   ./src/com/topodroid/calib/*.java \
   ./src/com/topodroid/dev/*.java \
   ./src/com/topodroid/dev/*/*.java \
-  ./src/com/topodroid/$(APPNAME)/*.java \
+  ./src/com/topodroid/$(APPCODE)/*.java \
   ./src/com/topodroid/dln/*.java \
   ./src/com/topodroid/help/*.java \
   ./src/com/topodroid/inport/*.java \

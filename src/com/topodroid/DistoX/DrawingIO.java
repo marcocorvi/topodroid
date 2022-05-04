@@ -1343,7 +1343,8 @@ public class DrawingIO
               if ( p instanceof DrawingPointPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_POINT )
                 DrawingPointPath pp = (DrawingPointPath)p;
                 exportTherionPoint( out, pp );
-                // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
+                // APP_OUT_DIR
+                if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
                   if ( BrushManager.isPointSection( pp.mPointType ) ) {
                     if ( TDSetting.mAutoXSections ) {
                       String scrapname = TDUtil.replacePrefix( TDInstance.survey, pp.getOption( TDString.OPTION_SCRAP ) ); // x-section name
@@ -1351,7 +1352,7 @@ public class DrawingIO
                       if ( scrapname != null && scrapname.length() > 0 ) xsections.add( new XSectionScrap( scrapname, pp.cx, pp.cy ) );
                     }
                   }
-                // }
+                }
               } else if ( p instanceof DrawingLinePath ) { // ( p.mType == DrawingPath.DRAWING_PATH_LINE ) 
                 exportTherionLine( out, (DrawingLinePath)p );
               } else if ( p instanceof DrawingAreaPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -1391,7 +1392,8 @@ public class DrawingIO
       e.printStackTrace();
     }
 
-    // if ( TDSetting.mExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
+    // APP_OUT_DIR
+    if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
         // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );
         try { 
@@ -1404,7 +1406,7 @@ public class DrawingIO
           e.printStackTrace();
         }
       }
-    // }
+    }
   }
 
   // FIXME DataHelper and SID are necessary to export splays by the station
