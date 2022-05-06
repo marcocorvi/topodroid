@@ -385,6 +385,7 @@ public class TDPrefKey
   public static String[] EXPORT = { // [16] [32]
     "DISTOX_EXPORT_SHOTS",    // 0 // default data export format
     "DISTOX_EXPORT_PLOT",          // default plot export format
+    "DISTOX_AUTO_PLOT_EXPORT", // format to export plots to "out" folder automatically
     "DISTOX_ORTHO_LRUD",      // 2 // orthogonal LRUD ( >=1 disable, min 0 )
     "DISTOX_LRUD_VERTICAL", 
     "DISTOX_LRUD_HORIZONTAL", // 4 
@@ -407,6 +408,7 @@ public class TDPrefKey
   static int[] EXPORTtitle = {
     R.string.pref_export_shots_title,
     R.string.pref_export_plot_title,
+    R.string.pref_auto_plot_export_title,
     R.string.pref_ortho_lrud_title,
     R.string.pref_lrud_vertical_title,
     R.string.pref_lrud_horizontal_title,
@@ -428,6 +430,7 @@ public class TDPrefKey
   static int[] EXPORTdesc = {
     R.string.pref_export_shots_summary,
     R.string.pref_export_plot_summary,
+    R.string.pref_auto_plot_export_summary,
     R.string.pref_ortho_lrud_summary,
     R.string.pref_lrud_vertical_summary,
     R.string.pref_lrud_horizontal_summary,
@@ -447,6 +450,7 @@ public class TDPrefKey
   };
 
   public static String[] EXPORTdef = {
+    "-1",
     "-1",
     "-1",
     TDString.ZERO,
@@ -1748,7 +1752,7 @@ public class TDPrefKey
     "DISTOX_IMPORT_DATAMODE",
     "DISTOX_AUTO_XSECTIONS",  // automatically add xsections on export/save
     "DISTOX_AUTO_STATIONS",    // whether to add stations to therion th2 exports
-    "DISTOX_AUTO_PLOT_EXPORT", // whether to export plots to private folder automatically
+    // "DISTOX_AUTO_PLOT_EXPORT", // whether to export plots to private folder automatically
     // "DISTOX_TRANSFER_CSURVEY"
   };
  
@@ -1757,7 +1761,7 @@ public class TDPrefKey
     R.string.pref_import_datamode_title,
     R.string.pref_auto_xsections_title,
     R.string.pref_autoStations_title,
-    R.string.pref_auto_plot_export_title,
+    // R.string.pref_auto_plot_export_title,
     // R.string.pref_tcsx,
     -1
   };
@@ -1767,7 +1771,7 @@ public class TDPrefKey
     R.string.pref_import_datamode_summary,
     R.string.pref_auto_xsections_summary,
     R.string.pref_autoStations_summary,
-    R.string.pref_auto_plot_export_summary,
+    // R.string.pref_auto_plot_export_summary,
     // R.string.pref_tcsx,
     -1
   };
@@ -1777,7 +1781,7 @@ public class TDPrefKey
     TDString.ZERO, // SurveyInfo.DATAMODE_NORMAL
     TRUE,
     TRUE,
-    "-1",
+    // "-1",
     // TRUE,
     null
   };

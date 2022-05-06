@@ -72,6 +72,7 @@ public class TDandroid
       android.Manifest.permission.RECORD_AUDIO
       // android.Manifest.permission.ACCESS_MEDIA_LOCATION
   };
+
   static final String[] permNames = {
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
@@ -83,6 +84,9 @@ public class TDandroid
       "RECORD_AUDIO"
       // "ACCESS_MEDIA_LOCATION"
   };
+
+  // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
+  static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
   // private static final int PERM_BT       = 0;
   // private static final int PERM_BT_ADMIN = 1;
@@ -174,6 +178,16 @@ public class TDandroid
     // }
 
     return not_granted;
+  }
+
+  /** check if the app can access external storage
+   * @param context app context
+   * @return true if the app can access external storage
+   */
+  static boolean canManageExternalStorage( Context context )
+  {
+    if ( BELOW_API_30 ) return true;
+    return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
   }
 
   /** check if the app has the minimal permissions

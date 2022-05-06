@@ -981,7 +981,7 @@ public class TDSetting
     mImportDatamode = tryInt(   prefs,  keyGeekImport[ 1],      defGeekImport[ 1] );  // DISTOX_IMPORT_DATAMODE
     mAutoXSections  = prefs.getBoolean( keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_AUTO_XSECTIONS
     mAutoStations   = prefs.getBoolean( keyGeekImport[ 3], bool(defGeekImport[ 3]) ); // DISTOX_AUTO_STATIONS
-    mAutoExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    // mAutoExportPlotFormat = tryInt( prefs,  keyGeekImport[ 4],      defGeekImport[ 4] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
     // mExportTcsx     = prefs.getBoolean(     keyGeekImport[ 2], bool(defGeekImport[ 2]) ); // DISTOX_TRANSFER_CSURVEY
     // TDLog.v("SETTING load secondary GEEK import done");
 
@@ -989,12 +989,13 @@ public class TDSetting
     String[] defExport = TDPrefKey.EXPORTdef;
     mExportShotsFormat = tryInt(   prefs,      keyExport[ 0],      defExport[ 0] );  // DISTOX_EXPORT_SHOTS choice: 
     mExportPlotFormat  = tryInt(   prefs,      keyExport[ 1],      defExport[ 1] );  // DISTOX_EXPORT_PLOT choice: 14, 2, 11, 12, 13
-    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 2],      defExport[ 2] );  // DISTOX_ORTHO_LRUD
+    mAutoExportPlotFormat = tryInt(  prefs,    keyExport[ 2],      defExport[ 2] );  // DISTOX_AUTO_PLOT_EXPORT choice: ...
+    mOrthogonalLRUDAngle = tryFloat( prefs,    keyExport[ 3],      defExport[ 3] );  // DISTOX_ORTHO_LRUD
     mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
     mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    mLRUDvertical      = tryFloat( prefs,      keyExport[ 3],      defExport[ 3] );  // DISTOX_LRUD_VERTICAL
-    mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_LRUD_HORIZONTAL
-    mBezierStep        = tryFloat( prefs,      keyExport[ 5],      defExport[ 5] );  // DISTOX_BEZIER_STEP
+    mLRUDvertical      = tryFloat( prefs,      keyExport[ 4],      defExport[ 4] );  // DISTOX_LRUD_VERTICAL
+    mLRUDhorizontal    = tryFloat( prefs,      keyExport[ 5],      defExport[ 5] );  // DISTOX_LRUD_HORIZONTAL
+    mBezierStep        = tryFloat( prefs,      keyExport[ 6],      defExport[ 6] );  // DISTOX_BEZIER_STEP
     // TDLog.v("SETTING load secondary export done");
 
     String[] keyExpSvx = TDPrefKey.EXPORT_SVX;
@@ -1861,8 +1862,8 @@ public class TDSetting
       mAutoXSections = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else if ( k.equals( key[ 3 ] ) ) {        // DISTOX_AUTO_STATIONS
       mAutoStations = tryBooleanValue( hlp, k, v, bool(def[ 3]) ); 
-    } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT
-      mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
+    // } else if ( k.equals( key[ 4 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT moved to EXPORT
+    //   mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 4] );
     // } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_TRANSFER_CSURVEY
     //   mExportTcsx = tryBooleanValue( hlp, k, v, bool(def[ 2]) ); 
     } else {
@@ -1881,22 +1882,24 @@ public class TDSetting
       mExportShotsFormat = tryIntValue( hlp, k, v, def[ 0] );
     } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_EXPORT_PLOT (choice)
       mExportPlotFormat = tryIntValue( hlp, k, v, def[ 1] );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_ORTHO_LRUD
-      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 2] );
+    } else if ( k.equals( key[ 2 ] ) ) {        // DISTOX_AUTO_PLOT_EXPORT
+      mAutoExportPlotFormat = tryIntValue( hlp, k, v, def[ 2] );
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_ORTHO_LRUD
+      mOrthogonalLRUDAngle  = tryFloatValue( hlp, k, v, def[ 3] );
       if ( mOrthogonalLRUDAngle <  0 ) { mOrthogonalLRUDAngle =  0;  ret = TDString.ZERO; }
       if ( mOrthogonalLRUDAngle > 90 ) { mOrthogonalLRUDAngle = 90;  ret = TDString.NINETY; }
       mOrthogonalLRUDCosine = TDMath.cosd( mOrthogonalLRUDAngle );
       mOrthogonalLRUD       = ( mOrthogonalLRUDAngle > 0.000001f ); 
-    } else if ( k.equals( key[  3 ] ) ) { // DISTOX_LRUD_VERTICAL
-      mLRUDvertical = tryFloatValue( hlp, k, v, def[ 3] );
+    } else if ( k.equals( key[  4 ] ) ) { // DISTOX_LRUD_VERTICAL
+      mLRUDvertical = tryFloatValue( hlp, k, v, def[ 4] );
       if ( mLRUDvertical <  0 ) { mLRUDvertical =  0; ret = TDString.ZERO; }
       if ( mLRUDvertical > 91 ) { mLRUDvertical = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  4 ] ) ) { // DISTOX_LRUD_HORIZONTAL
-      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 4] );
+    } else if ( k.equals( key[  5 ] ) ) { // DISTOX_LRUD_HORIZONTAL
+      mLRUDhorizontal = tryFloatValue( hlp, k, v, def[ 5] );
       if ( mLRUDhorizontal <  0 ) { mLRUDhorizontal =  0; ret = TDString.ZERO; }
       if ( mLRUDhorizontal > 91 ) { mLRUDhorizontal = 91; ret = TDString.NINETYONE; }
-    } else if ( k.equals( key[  5 ] ) ) { // DISTOX_BEZIER_STEP
-      mBezierStep  = tryFloatValue( hlp, k, v, def[ 5] );
+    } else if ( k.equals( key[  6 ] ) ) { // DISTOX_BEZIER_STEP
+      mBezierStep  = tryFloatValue( hlp, k, v, def[ 6] );
       if ( mBezierStep < 0 ) { mBezierStep = 0; ret = TDString.ZERO; }
       if ( mBezierStep > 3 ) { mBezierStep = 3; ret = TDString.THREE; } // was 2
     } else {

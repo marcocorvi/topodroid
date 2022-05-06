@@ -507,7 +507,7 @@ public class DrawingIO
   static void exportTherionExport( DrawingCommandManager manager, int type, File file, String fullname, String projname, int proj_dir, boolean multisketch )
   {
     // TDLog.Log( TDLog.LOG_IO, "export therion " + fullname + " file " + file.getPath() );
-    TDLog.v( "THERION export " + fullname + " file " + file.getPath() );
+    // TDLog.v( "EXPORT THERION " + fullname + " file " + file.getPath() );
     try {
       FileWriter fw = TDFile.getFileWriter( file );
       BufferedWriter bw = new BufferedWriter( fw );
@@ -1343,7 +1343,7 @@ public class DrawingIO
               if ( p instanceof DrawingPointPath ) { // ( p.mType == DrawingPath.DRAWING_PATH_POINT )
                 DrawingPointPath pp = (DrawingPointPath)p;
                 exportTherionPoint( out, pp );
-                // APP_OUT_DIR
+                // APP_OUT_DIR this if was commented !??
                 if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // if auto-export is not Therion, ie xsections are not already exported therion
                   if ( BrushManager.isPointSection( pp.mPointType ) ) {
                     if ( TDSetting.mAutoXSections ) {
@@ -1392,7 +1392,7 @@ public class DrawingIO
       e.printStackTrace();
     }
 
-    // APP_OUT_DIR
+    // APP_OUT_DIR this if was commented !?
     if ( TDSetting.mAutoExportPlotFormat != TDConst.SURVEY_FORMAT_TH2 ) { // xsections if not already auto exported
       for ( XSectionScrap xsection : xsections ) { // write xsection scraps
         // File file = TDFile.getTopoDroidFile( TDPath.getTdrFileWithExt( xsection.name ) );

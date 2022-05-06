@@ -9,8 +9,8 @@
     <string name="string_true">true</string>
 
     <string name="tdx_stale" translatable="false">TopoDroid detected a stale folder and must stop.\nRename the folder and restart the app.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
-    <string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string>
-    <string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string>
+    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
+    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -18,14 +18,17 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
 
-  <string name="r_title">Android R important notice</string>
+  <string name="r_title">Important notice for Android R and above</string>
   <string name="r_dialog">
+Starting with Android-R you must granted access to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.DistoX MANAGE_EXTERNAL_STORAGE allow".
+  </string>
+  <!-- UNUSED string name="r_old_dialog">
 With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
 Refer to the web pages for details.\n
-  </string>
-  <string name="r_checkboxes">You must confirm the checkboxes to continue.</string>
+  </string -->
+  <string name="r_checkboxes">You must confirm the checkbox to continue.</string>
   <string name="r_i_understood">I fully understood this notice</string>
-  <string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string>
+  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <string name="r_continue">CONTINUE</string>
 
     <string name="app_name" translatable="false">TopoDroid</string>

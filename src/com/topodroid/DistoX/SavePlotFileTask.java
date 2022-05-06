@@ -185,44 +185,48 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // boolean ret2 = true; // false = binary cancelled
       // TDLog.v( "save plot SAVE (no action) " + mFullName );
       // // TDLog.v( "save plot Therion file SAVE " + mFullName );
-      if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 ) {
+      if ( TDLevel.overExpert && TDSetting.mAutoExportPlotFormat >= 0 && mManager != null ) {
         // APP_OUT_DIR
-        TDLog.v("EXPORT AUTO " + mFullName );
         switch ( TDSetting.mAutoExportPlotFormat ) { // auto-export format
           case TDConst.SURVEY_FORMAT_TH2:
-            if ( mManager != null ) {
-              File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
-              DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // false= single sketch
-            }
+            // TDLog.v("EXPORT AUTO th2 " + mFullName );
+            File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
+            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // false= single sketch
             break;
           case TDConst.SURVEY_FORMAT_DXF:
-            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+            if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()
+              // TDLog.v("EXPORT AUTO dxf " + mFullName );
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "dxf", false );
             }
             break;
           case TDConst.SURVEY_FORMAT_SVG:
-            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+            if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
+              // TDLog.v("EXPORT AUTO svg " + mFullName );
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "svg", false );
             }
             break;
           case TDConst.SURVEY_FORMAT_SHP:
-            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+            // TDLog.v("EXPORT AUTO shp " + mFullName );
+            if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "shp", false );
             }
             break;
           case TDConst.SURVEY_FORMAT_XVI:
-            if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+            // TDLog.v("EXPORT AUTO xvi " + mFullName );
+            if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
               mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "xvi", false );
             }
             break;
           // case TDConst.SURVEY_FORMAT_C3D:
-          //   if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+          //   // TDLog.v("EXPORT AUTO c3d " + mFullName );
+          //   if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
           //     mParent.get().doSaveWithExt( null, mNum, mManager, mType, mFullName, "c3d", false );
           //   }
           //   break;
           case TDConst.SURVEY_FORMAT_CSX: // IMPORTANT CSX must come before PNG
+            // TDLog.v("EXPORT AUTO csx " + mFullName );
             if ( PlotType.isSketch2D( mType ) ) {
-              if ( mParent.get() != null && ! mParent.get().isFinishing() ) {
+              if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) {
                 mParent.get().doSaveCsx( null, origin, psd1, psd2, false );
               }
               break;
@@ -230,22 +234,24 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
               // fall-through
             }
           case TDConst.SURVEY_FORMAT_PNG:
-            if ( mManager != null ) {
-              Bitmap bitmap = mManager.getBitmap();
-              if (bitmap == null) {
-                TDLog.Error( "cannot save PNG: null bitmap" );
-                // ret1 = false;
+            // TDLog.v("EXPORT AUTO png " + mFullName );
+            Bitmap bitmap = mManager.getBitmap();
+            if (bitmap == null) {
+              TDLog.Error( "cannot save PNG: null bitmap" );
+              // ret1 = false;
+            } else {
+              float scale = mManager.getBitmapScale();
+              if (scale > 0) {
+                // FIXME execute must be called from the main thread, current thread is working thread
+                (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
               } else {
-                float scale = mManager.getBitmapScale();
-                if (scale > 0) {
-                  // FIXME execute must be called from the main thread, current thread is working thread
-                  (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
-                } else {
-                  TDLog.Error( "cannot save PNG: negative scale" );
-                  // ret1 = false;
-                }
+                TDLog.Error( "cannot save PNG: negative scale" );
+                // ret1 = false;
               }
             }
+            break;
+          default:
+            TDLog.v("EXPORT AUTO unknown " + mFullName + " " + TDSetting.mAutoExportPlotFormat );
             break;
         }
       }

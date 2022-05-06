@@ -24,12 +24,12 @@
         android:text="@string/r_i_understood"
         />
 
-    <CheckBox android:id="@+id/r_disclaimer"
+    <!-- CheckBox android:id="@+id/r_disclaimer"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" 
         android:text="@string/r_disclaimer"
-        />
+        / -->
 
     <LinearLayout 
         android:layout_width="fill_parent" 

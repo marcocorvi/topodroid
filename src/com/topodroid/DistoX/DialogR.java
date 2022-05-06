@@ -41,7 +41,7 @@ class DialogR extends MyDialog
   // private Button mBtnContinue;
 
   private CheckBox mCBunderstood;
-  private CheckBox mCBdisclaimer;
+  // private CheckBox mCBdisclaimer;
 
   // Dialog R
   // if this dialog is shown the TopoDroid folder in the app private space does not exists
@@ -61,13 +61,13 @@ class DialogR extends MyDialog
     ((Button) findViewById(R.id.r_continue)).setOnClickListener( this );
 
     mCBunderstood = (CheckBox) findViewById( R.id.r_i_understood );
-    mCBdisclaimer = (CheckBox) findViewById( R.id.r_disclaimer );
+    // mCBdisclaimer = (CheckBox) findViewById( R.id.r_disclaimer );
   }
 
   public void onClick( View v )
   {
     if ( v.getId() == R.id.r_continue ) {
-      if ( ! ( mCBunderstood.isChecked() && mCBdisclaimer.isChecked() ) ) {
+      if ( ! ( mCBunderstood.isChecked() /*&& mCBdisclaimer.isChecked() */ ) ) {
         TDToast.make( R.string.r_checkboxes );
       } else {
         TDLog.v( "Dialog R accepted");

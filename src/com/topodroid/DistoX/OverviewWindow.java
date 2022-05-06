@@ -685,7 +685,7 @@ public class OverviewWindow extends ItemDrawer
     // if ( uri == null ) return;
     String filename = fullname + "." + ext;
     Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
-    TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
+    // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
 
     if ( ext.equals("th2") ) {
       Handler th2Handler = new Handler() {

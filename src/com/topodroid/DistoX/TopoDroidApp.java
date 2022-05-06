@@ -2822,7 +2822,7 @@ public class TopoDroidApp extends Application
       String format = context.getResources().getString(R.string.saved_file_1);
       Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
       if ( uri != null ) {
-        TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
+        // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
         (new SaveDataFileTask( uri, format, TDInstance.sid, info, mData, TDInstance.survey, TDInstance.getDeviceA(), exportIndex, exportPrefix, toast )).execute();
         return true;
       }

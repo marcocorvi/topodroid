@@ -1238,7 +1238,7 @@ public class DrawingWindow extends ItemDrawer
     super.onBackPressed();
   }
 
-  // doSaveTdr( ) is already called by onPause
+  // @note doSaveTdr( ) is already called by onPause
   @Override
   public void onBackPressed () // askClose
   {
@@ -1270,7 +1270,9 @@ public class DrawingWindow extends ItemDrawer
     doSaveTdr( );
   }
 
-  // called by doPause 
+  /** start the task to save the TDR file
+   * @note called by doPause 
+   */
   private void doSaveTdr( )
   {
     if ( mDrawingSurface != null ) {
@@ -1296,58 +1298,68 @@ public class DrawingWindow extends ItemDrawer
    */
   String getOrigin() { return mPlot1.start; }
 
-  // called by SavePlotFileTask
-  // @param tt       plot type
-  // @param suffix   plot save mode
-  // @param rotate
-  PlotSaveData makePlotSaveData( int tt, int suffix, int rotate )
+  /** @return the plot save data for the specified plot type
+   * @param tt        plot type
+   * @param save_mode plot save mode
+   * @param rotate    number of backup rotates
+   * @note called by SavePlotFileTask
+   */
+  PlotSaveData makePlotSaveData( int tt, int save_mode, int rotate )
   {
     if ( tt == 1 && mPlot1 != null )
-      return new PlotSaveData( mNum, mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot1, mDrawingSurface.getManager( mPlot1.type ), mName1, mFullName1, 0, save_mode, rotate );
     if ( tt == 2 && mPlot2 != null )
-      return new PlotSaveData( mNum, mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot2, mDrawingSurface.getManager( mPlot2.type ), mName2, mFullName2, (int)mPlot2.azimuth, save_mode, rotate );
     if ( tt == 3 && mPlot3 != null )
-      return new PlotSaveData( mNum, mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, suffix, rotate );
+      return new PlotSaveData( mNum, mPlot3, mDrawingSurface.getManager( mPlot3.type ), mName3, mFullName3, 0, save_mode, rotate );
     return null;
   }
 
-  /** called by doSaveTdr and doSaveTh2
-   *    prepare struct and forwards to doStartSaveTdrTask
+  /** prepare struct and forwards to doStartSaveTdrTask
    * @param type      plot type (-1 to save both plan and profile)
-   * @param suffix    plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
+   * @param save_mode plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
    * @param maxTasks
    * @param rotate    backup_rotate
+   * @note called by doSaveTdr and doSaveTh2
    */
-  private void startSaveTdrTask( final long type, int suffix, int maxTasks, int rotate )
+  private void startSaveTdrTask( final long type, int save_mode, int maxTasks, int rotate )
   {
-    if ( ( suffix == PlotSave.TOGGLE || suffix == PlotSave.MODIFIED ) && ! mModified ) {
+    if ( ( save_mode == PlotSave.TOGGLE || save_mode == PlotSave.MODIFIED ) && ! mModified ) {
+      TDLog.v("SAVE TDR: save_mode toggle or modified, but not modified ");
       return;
     }
-    // TDLog.v( "start save TDR task - suffix " + suffix + " modified " + mModified );
+    // TDLog.v( "start save TDR task - save_mode " + save_mode + " modified " + mModified );
     PlotSaveData psd1 = null;
     PlotSaveData psd2 = null;
     if ( type == -1 ) {
-      psd2 = makePlotSaveData( 2, suffix, rotate );
-      psd1 = makePlotSaveData( 1, suffix, rotate );
+      psd2 = makePlotSaveData( 2, save_mode, rotate );
+      psd1 = makePlotSaveData( 1, save_mode, rotate );
     } else if ( PlotType.isProfile( type ) ) {
-      psd1 = makePlotSaveData( 2, suffix, rotate );
+      psd1 = makePlotSaveData( 2, save_mode, rotate );
     } else if ( type == PlotType.PLOT_PLAN ) {
-      psd1 = makePlotSaveData( 1, suffix, rotate );
+      psd1 = makePlotSaveData( 1, save_mode, rotate );
     } else {
-      psd1 = makePlotSaveData( 3, suffix, rotate );
+      psd1 = makePlotSaveData( 3, save_mode, rotate );
     }
-    doStartSaveTdrTask( psd1, psd2, suffix, maxTasks, rotate );
+    doStartSaveTdrTask( psd1, psd2, save_mode, maxTasks, rotate );
   }
 
-  private void doStartSaveTdrTask( final PlotSaveData psd1, final PlotSaveData psd2, int suffix, int maxTasks, int rotate )
+  /** start the TDR saving task
+   * @param psd1      plan plot save data
+   * @param psd2      profile plot save data
+   * @param save_mode plot save mode (see PlotSave) - called only with TOGGLE, SAVE, MODIFIED
+   * @param maxTasks
+   * @param rotate    backup_rotate
+   */
+  private void doStartSaveTdrTask( final PlotSaveData psd1, final PlotSaveData psd2, int save_mode, int maxTasks, int rotate )
   {
     if ( psd1 == null ) return;
     int r = ( rotate == 0 )? 0 : psd1.rotate;
     Handler saveHandler = null;
 
-    switch ( suffix ) {
+    switch ( save_mode ) {
       case PlotSave.EXPORT:
-        // TDLog.v( "exporting plot ... " + maxTasks );
+        // TDLog.v( "EXPORT plot ... " + maxTasks );
         saveHandler = new Handler(){
           @Override
           public void handleMessage(Message msg) {
@@ -1357,7 +1369,7 @@ public class DrawingWindow extends ItemDrawer
         };
         break;
       case PlotSave.SAVE:
-        // TDLog.v( "saving plot ... " + maxTasks );
+        // TDLog.v( "SAVE plot ... " + maxTasks );
         saveHandler = new Handler(){
           @Override
           public void handleMessage(Message msg) {
@@ -1368,7 +1380,7 @@ public class DrawingWindow extends ItemDrawer
         break;
       case PlotSave.TOGGLE:
       case PlotSave.MODIFIED:
-        // TDLog.v( "backing up plot ... " + maxTasks + " nr tasks " + mNrSaveTh2Task + " modified " + mModified );
+        // TDLog.v( "BACKUP plot ... " + maxTasks + " nr tasks " + mNrSaveTh2Task + " modified " + mModified );
         if ( ! mModified ) return;
         if ( mNrSaveTh2Task > maxTasks ) return;
         saveHandler = new Handler() {
@@ -1463,13 +1475,13 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** compute the plot refrences
-   *  this is called only for PLAN / PROFILE
+  /** compute the plot references
    * @param num     data reduction
    * @param type    plot type
    * @param name    plot name
    * @param zoom    zoom factor
    * @param can_toast whether the method can toast
+   * @note this is called only for PLAN / PROFILE
    */
   private boolean computeReferences( TDNum num, int type, String name,
                                   // float xoff, float yoff,
@@ -2045,6 +2057,8 @@ public class DrawingWindow extends ItemDrawer
     mButtonView5 = new MyHorizontalButtonView( mButton5 );
   }
 
+  /** set the params of the tools toolbar
+   */
   public void setToolsToolbarParams()
   {
     float scale = 8 * TDSetting.mItemButtonSize;
@@ -3337,6 +3351,7 @@ public class DrawingWindow extends ItemDrawer
   static private Paint previewPaint = null;
 
   /** @return the preview paint
+   * @note the preview paint is a static object created when this method is called the first time
    */
   static public  Paint getPreviewPaint()
   {
@@ -3716,6 +3731,9 @@ public class DrawingWindow extends ItemDrawer
   }
   */
 
+  /** @return the spacing between the first two pointers in the event
+   * @param ev    screen event
+   */
   private float spacing( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
@@ -3725,6 +3743,9 @@ public class DrawingWindow extends ItemDrawer
     return (float)Math.sqrt(x*x + y*y);
   }
 
+  /** save the display coords of an event pointer(s)
+   * @param ev    screen event
+   */
   private void saveEventPoint( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
@@ -3750,6 +3771,9 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** shift the canvas according to an event
+   * @param ev    screen event
+   */
   private void shiftByEvent( MotionEventWrap ev )
   {
     float x0 = 0.0f;
@@ -3783,15 +3807,18 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  // x0 = a saveX0 + b saveY0 + c
-  // x1 = a saveX1 + b saveY1 + c
-  // x2 = a saveX2 + b saveY2 + c
-  // 
-  // let M = | saveX0  saveY0  1 |
-  //         | saveX1  saveY1  1 |
-  //         | saveX2  saveY2  1 |
-  // then (a,b,c) = M^-1 ( x1, x1, x2 )
-  //
+  /** apply an affine trasnformation to the drawing
+   * @param ev    screen event defining the transformation parameters
+   *
+   * x0 = a saveX0 + b saveY0 + c
+   * x1 = a saveX1 + b saveY1 + c
+   * x2 = a saveX2 + b saveY2 + c
+   * 
+   * let M = | saveX0  saveY0  1 |
+   *         | saveX1  saveY1  1 |
+   *         | saveX2  saveY2  1 |
+   * then (a,b,c) = M^-1 ( x1, x1, x2 )
+   */
   private int affineTransformByEvent( MotionEventWrap ev )
   {
     int np = ev.getPointerCount();
@@ -3859,6 +3886,8 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** make the zoom controls visible (if enabled)
+   */
   public void checkZoomBtnsCtrl()
   {
     // if ( mZoomBtnsCtrl == null ) return; // not necessary
@@ -6909,7 +6938,7 @@ public class DrawingWindow extends ItemDrawer
     if ( manager == null ) return;
     Handler th2Handler = null;
 
-    int suffix = PlotSave.EXPORT;
+    int save_mode = PlotSave.EXPORT;
     int azimuth = 0;
     String name = null;
     PlotInfo info = null;
@@ -6945,7 +6974,7 @@ public class DrawingWindow extends ItemDrawer
     try { 
       // TDLog.v( "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, suffix, 0 )).execute();
+      (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, save_mode, 0 )).execute();
     } catch ( RejectedExecutionException e ) {
       TDLog.Error("Sketch saving exec rejected");
     }
@@ -7437,7 +7466,7 @@ public class DrawingWindow extends ItemDrawer
     if ( export_type == null ) return;
     mExportIndex = TDConst.plotExportIndex( export_type );
     mExportExt   = TDConst.plotExportExt( export_type );
-    // TDLog.v( "export type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
+    // TDLog.v( "EXPORT do type " + export_type + " index " + mExportIndex + " ext " + mExportExt + " filename " + filename );
     // if ( TDSetting.mExportUri ) {
       if ( mExportIndex == TDConst.SURVEY_FORMAT_C3D ) { // Cave3D
         saveWithExt( null, mType, mExportExt );
@@ -7451,7 +7480,7 @@ public class DrawingWindow extends ItemDrawer
         // intent.putExtra( Intent.EXTRA_TITLE, filename );
         // startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_plot_title ) ), TDRequest.REQUEST_GET_EXPORT );
         Uri uri = Uri.fromFile( new File( TDPath.getOutFile( filename ) ) );
-        TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
+        // TDLog.v("EXPORT " + TDPath.getOutFile( filename ) );
         if ( uri != null ) {
           doUriExport( uri );
         }
@@ -7463,9 +7492,9 @@ public class DrawingWindow extends ItemDrawer
     //     if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
     //       if ( mPlot1 != null ) {
     //         String origin = mPlot1.start;
-    //         int suffix    = PlotSave.EXPORT;
-    //         PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
-    //         PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
+    //         int save_mode    = PlotSave.EXPORT;
+    //         PlotSaveData psd1 = makePlotSaveData( 1, save_mode, 0 );
+    //         PlotSaveData psd2 = makePlotSaveData( 2, save_mode, 0 );
     //         doSaveCsx( null, origin, psd1, psd2, true );
     //       }
     //     }
@@ -7489,9 +7518,9 @@ public class DrawingWindow extends ItemDrawer
         if ( ! PlotType.isAnySection( mType ) ) { // FIXME x-sections are saved PNG for CSX
           if ( mPlot1 != null ) {
             String origin = mPlot1.start;
-	    int suffix    = PlotSave.EXPORT;
-	    PlotSaveData psd1 = makePlotSaveData( 1, suffix, 0 );
-	    PlotSaveData psd2 = makePlotSaveData( 2, suffix, 0 );
+	    int save_mode    = PlotSave.EXPORT;
+	    PlotSaveData psd1 = makePlotSaveData( 1, save_mode, 0 );
+	    PlotSaveData psd2 = makePlotSaveData( 2, save_mode, 0 );
             doSaveCsx( uri, origin, psd1, psd2, true );
 	  }
           break;
