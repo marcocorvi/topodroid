@@ -17,11 +17,11 @@ import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.ui.MotionEventWrap;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TopoDroidAlertDialog;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import android.os.Bundle;
 import android.app.Activity;

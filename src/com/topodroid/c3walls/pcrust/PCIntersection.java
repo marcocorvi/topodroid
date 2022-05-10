@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.pcrust;
 
-import com.topodroid.DistoX.Vector3D;
+import com.topodroid.TDX.Vector3D;
 
 // 3D intersection point on the segment
 class PCIntersection extends Vector3D

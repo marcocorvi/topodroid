@@ -13,8 +13,8 @@ package com.topodroid.io.shp;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
-import com.topodroid.DistoX.FixedInfo;
-import com.topodroid.DistoX.FixedStation;
+import com.topodroid.TDX.FixedInfo;
+import com.topodroid.TDX.FixedStation;
 
 // import java.io.File;
 // import java.io.FileOutputStream;

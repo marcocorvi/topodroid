@@ -14,8 +14,8 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import android.os.Bundle;
 import android.os.AsyncTask;

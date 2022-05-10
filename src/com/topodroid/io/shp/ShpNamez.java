@@ -13,9 +13,9 @@ package com.topodroid.io.shp;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
-import com.topodroid.DistoX.SavedStation;
-import com.topodroid.DistoX.StationInfo;
-// import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.TDX.SavedStation;
+import com.topodroid.TDX.StationInfo;
+// import com.topodroid.TDX.DrawingUtil;
 
 // import java.io.File;
 // import java.io.FileOutputStream;

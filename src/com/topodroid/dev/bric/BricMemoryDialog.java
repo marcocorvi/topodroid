@@ -4,9 +4,9 @@ package com.topodroid.dev.bric;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
-import com.topodroid.DistoX.DeviceActivity;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import com.topodroid.ui.MyDialog;
 

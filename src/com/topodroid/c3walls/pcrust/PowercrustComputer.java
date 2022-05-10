@@ -11,15 +11,15 @@
  */
 package com.topodroid.c3walls.pcrust;
 
-import com.topodroid.DistoX.TglParser;
-import com.topodroid.DistoX.GlModel;
-import com.topodroid.DistoX.Triangle3D;
-import com.topodroid.DistoX.Cave3DStation;
-import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Vector3D;
+import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.GlModel;
+import com.topodroid.TDX.Triangle3D;
+import com.topodroid.TDX.Cave3DStation;
+import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Vector3D;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DPoint2D;
+import com.topodroid.TDX.DPoint2D;
 
 import java.util.List;
 import java.util.ArrayList;

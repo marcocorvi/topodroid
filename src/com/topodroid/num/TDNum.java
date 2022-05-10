@@ -16,10 +16,10 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.StationPolicy;
-import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.DBlock;
+import com.topodroid.TDX.StationPolicy;
+import com.topodroid.TDX.SurveyInfo;
 
 import java.util.ArrayList;
 import java.util.List;

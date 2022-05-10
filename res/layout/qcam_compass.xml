@@ -5,12 +5,12 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   >
-  <com.topodroid.DistoX.QCamDrawingSurface
+  <com.topodroid.TDX.QCamDrawingSurface
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawingSurface"
   />
-  <!-- com.topodroid.DistoX.QCamDrawingTexture
+  <!-- com.topodroid.TDX.QCamDrawingTexture
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:id="@+id/drawingTexture"

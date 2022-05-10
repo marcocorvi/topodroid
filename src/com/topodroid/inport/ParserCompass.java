@@ -17,7 +17,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TDAzimuth;
+import com.topodroid.TDX.TDAzimuth;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 

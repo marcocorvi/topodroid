@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3walls.bubble;
 
-import com.topodroid.DistoX.Vector3D;
+import com.topodroid.TDX.Vector3D;
 
 //  -.   T31    .--
 //    P1 ---- P3

@@ -13,9 +13,9 @@ package com.topodroid.tdm;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
-import com.topodroid.DistoX.DBlock;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.TDX.DBlock;
+import com.topodroid.TDX.DataHelper;
+import com.topodroid.TDX.SurveyInfo;
 
 import java.util.ArrayList;
 import java.util.List;

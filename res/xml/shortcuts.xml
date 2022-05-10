@@ -8,8 +8,8 @@
      >
      <intent 
        android:action="android.intent.action.VIEW"
-       android:targetPackage="com.topodroid.DistoX"
-       android:targetClass="com.topodroid.DistoX.MainWindow">
+       android:targetPackage="com.topodroid.TDX"
+       android:targetClass="com.topodroid.TDX.MainWindow">
        <extra android:name="action" android:value="new_survey" />
      </intent>
      <categories android:name="android.shortcut.conversation" />
@@ -22,8 +22,8 @@
      >
      <intent 
        android:action="android.intent.action.VIEW"
-       android:targetPackage="com.topodroid.DistoX"
-       android:targetClass="com.topodroid.DistoX.MainWindow">
+       android:targetPackage="com.topodroid.TDX"
+       android:targetClass="com.topodroid.TDX.MainWindow">
        <extra android:name="action" android:value="distox" />
      </intent>
      <categories android:name="android.shortcut.conversation" />

@@ -23,8 +23,8 @@ package com.topodroid.ui;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.R;
 
 import android.os.Bundle;
 // import android.app.Dialog;

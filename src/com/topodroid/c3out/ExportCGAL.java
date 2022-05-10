@@ -11,10 +11,10 @@
  */
 package com.topodroid.c3out;
 
-import com.topodroid.DistoX.TglParser;
-import com.topodroid.DistoX.Cave3DStation;
-import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Vector3D;
+import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.Cave3DStation;
+import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Vector3D;
 
 // import com.topodroid.utils.TDLog;
 

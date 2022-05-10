@@ -13,7 +13,7 @@ package com.topodroid.utils;
 
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDPrefKey;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.TDX.TDPath;
 
 import java.io.File;
 import java.io.IOException;

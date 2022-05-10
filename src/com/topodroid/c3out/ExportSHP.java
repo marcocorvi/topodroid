@@ -13,14 +13,14 @@ package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.TglParser;
-import com.topodroid.DistoX.Triangle3D;
-import com.topodroid.DistoX.Vector3D;
-import com.topodroid.DistoX.Cave3DStation;
-import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Archiver;
-// import com.topodroid.DistoX.Cave3DFile;
-// import com.topodroid.DistoX.TDPath;
+import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.Triangle3D;
+import com.topodroid.TDX.Vector3D;
+import com.topodroid.TDX.Cave3DStation;
+import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Archiver;
+// import com.topodroid.TDX.Cave3DFile;
+// import com.topodroid.TDX.TDPath;
 import com.topodroid.c3walls.cw.CWFacet;
 import com.topodroid.c3walls.cw.CWPoint;
 

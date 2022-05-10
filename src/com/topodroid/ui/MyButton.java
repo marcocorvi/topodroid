@@ -13,9 +13,9 @@ package com.topodroid.ui;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import android.content.Context;
 import android.content.res.Resources;

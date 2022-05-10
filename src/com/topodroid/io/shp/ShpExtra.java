@@ -17,13 +17,13 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 //  import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPointPath;
-import com.topodroid.DistoX.DrawingAudioPath;
-import com.topodroid.DistoX.DrawingPhotoPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.BrushManager;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDInstance;
+import com.topodroid.TDX.DrawingPointPath;
+import com.topodroid.TDX.DrawingAudioPath;
+import com.topodroid.TDX.DrawingPhotoPath;
+import com.topodroid.TDX.DrawingUtil;
+import com.topodroid.TDX.BrushManager;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TDInstance;
 import com.topodroid.ui.ExifInfo;
 
 

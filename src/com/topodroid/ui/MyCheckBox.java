@@ -11,7 +11,7 @@
  */
 package com.topodroid.ui;
 
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.TDX.TDandroid;
 
 import android.content.Context;
 

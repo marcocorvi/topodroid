@@ -12,9 +12,9 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TopoDroidAlertDialog;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
 // import java.io.File;

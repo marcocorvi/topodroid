@@ -11,8 +11,8 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.DistoX.MainWindow;
-import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.TDX.MainWindow;
+import com.topodroid.TDX.SurveyInfo;
 
 // import java.lang.ref.WeakReference;
 

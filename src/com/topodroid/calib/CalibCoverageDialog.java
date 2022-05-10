@@ -15,8 +15,8 @@ package com.topodroid.calib;
 import com.topodroid.utils.TDMath;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDToast;
 
 import java.util.List;
 import java.util.Locale;

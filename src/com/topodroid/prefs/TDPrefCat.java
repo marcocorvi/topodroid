@@ -11,7 +11,7 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 public class TDPrefCat
 {

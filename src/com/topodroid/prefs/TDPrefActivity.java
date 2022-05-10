@@ -14,14 +14,14 @@ package com.topodroid.prefs;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDTag;
 import com.topodroid.ui.TDLayout;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDLevel;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TopoDroidApp;
-// import com.topodroid.DistoX.CWDActivity;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDLevel;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TopoDroidApp;
+// import com.topodroid.TDX.CWDActivity;
+import com.topodroid.TDX.R;
 
 import android.content.Intent;
 import android.content.Context;
@@ -229,7 +229,7 @@ public class TDPrefActivity extends Activity
         mCwdPref.setValue( TDInstance.cwd );
         View v = mCwdPref.getView();
         if ( v != null ) {
-          final Intent cwd_intent = new Intent( mCtx, com.topodroid.DistoX.CWDActivity.class ); // this
+          final Intent cwd_intent = new Intent( mCtx, com.topodroid.TDX.CWDActivity.class ); // this
           v.setOnClickListener( new OnClickListener() {
             @Override
             public void onClick( View v ) { startActivityForResult( cwd_intent, REQUEST_CWD ); }
@@ -259,7 +259,7 @@ public class TDPrefActivity extends Activity
       if ( mPtCmapPref != null ) {
         View v = mPtCmapPref.getView();
 	if ( v != null ) {
-          final Intent pt_intent = new Intent( mCtx, com.topodroid.DistoX.PtCmapActivity.class ); // this
+          final Intent pt_intent = new Intent( mCtx, com.topodroid.TDX.PtCmapActivity.class ); // this
           v.setOnClickListener( 
             new OnClickListener() {
               @Override

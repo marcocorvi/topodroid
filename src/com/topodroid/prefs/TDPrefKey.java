@@ -12,7 +12,7 @@
 package com.topodroid.prefs;
 
 import com.topodroid.utils.TDString;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 public class TDPrefKey
 {

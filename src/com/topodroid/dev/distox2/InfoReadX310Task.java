@@ -11,9 +11,9 @@
  */
 package com.topodroid.dev.distox2;
 
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDToast;
 
 import com.topodroid.utils.TDLog;
 

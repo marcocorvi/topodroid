@@ -13,7 +13,7 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyButton;
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.TDX.TDandroid;
 
 import android.content.Context;
 import android.widget.Button;

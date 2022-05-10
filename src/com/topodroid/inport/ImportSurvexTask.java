@@ -12,10 +12,10 @@
 package com.topodroid.inport;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.MainWindow;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.DataHelper;
+import com.topodroid.TDX.SurveyInfo;
+import com.topodroid.TDX.MainWindow;
 
 
 // import java.lang.ref.WeakReference;

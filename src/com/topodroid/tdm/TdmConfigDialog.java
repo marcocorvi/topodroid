@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 import android.os.Bundle;
 import android.app.Dialog;

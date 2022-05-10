@@ -13,7 +13,7 @@ package com.topodroid.calib;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 // import android.app.Dialog;
 import android.os.Bundle;

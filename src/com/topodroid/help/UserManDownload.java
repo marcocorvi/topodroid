@@ -13,10 +13,10 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import java.io.FileOutputStream;
 import java.io.InputStream;

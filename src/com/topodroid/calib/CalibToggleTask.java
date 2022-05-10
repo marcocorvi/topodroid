@@ -12,9 +12,9 @@
 package com.topodroid.calib;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
 
 import java.lang.ref.WeakReference;
 

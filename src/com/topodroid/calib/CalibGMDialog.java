@@ -19,10 +19,10 @@ import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.TDLayout;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.GMActivity;
-import com.topodroid.DistoX.TDLevel;
-import com.topodroid.DistoX.TDConst;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.GMActivity;
+import com.topodroid.TDX.TDLevel;
+import com.topodroid.TDX.TDConst;
 
 import java.util.Locale;
 import java.lang.ref.WeakReference;

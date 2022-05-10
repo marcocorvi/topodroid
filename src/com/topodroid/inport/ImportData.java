@@ -13,8 +13,8 @@
 package com.topodroid.inport;
 
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.SurveyInfo;
-import com.topodroid.DistoX.TDLevel;
+import com.topodroid.TDX.SurveyInfo;
+import com.topodroid.TDX.TDLevel;
 
 public class ImportData
 {

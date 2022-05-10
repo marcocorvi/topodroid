@@ -18,8 +18,8 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.DistoX.FixedInfo;
-// import com.topodroid.DistoX.CurrentStation;
+import com.topodroid.TDX.FixedInfo;
+// import com.topodroid.TDX.CurrentStation;
 
 import com.topodroid.common.LegType;
 

@@ -12,12 +12,12 @@
 package com.topodroid.inport;
 
 import com.topodroid.utils.TDsafUri;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.Archiver;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.MainWindow;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.Archiver;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.MainWindow;
 
 
 // import java.lang.ref.WeakReference;

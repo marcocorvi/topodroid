@@ -13,7 +13,7 @@ package com.topodroid.ui;
 
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.CutNPaste;
+import com.topodroid.TDX.CutNPaste;
 
 import java.util.Map;
 import java.util.List;

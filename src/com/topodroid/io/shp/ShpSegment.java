@@ -15,9 +15,9 @@ package com.topodroid.io.shp;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 // import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingPath;
-import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.TDX.DrawingPath;
+import com.topodroid.TDX.DrawingUtil;
+import com.topodroid.TDX.DBlock;
 
 // import java.io.File;
 // import java.io.FileOutputStream;

@@ -16,7 +16,7 @@
 // 
 // // import com.topodroid.prefs.TDSetting;
 // import com.topodroid.utils.TDLog;
-// import com.topodroid.DistoX.TDandroid;
+// import com.topodroid.TDX.TDandroid;
 // 
 // import android.bluetooth.le.BluetoothLeScanner;
 // import android.bluetooth.le.ScanCallback;

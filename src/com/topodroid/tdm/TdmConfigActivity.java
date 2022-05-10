@@ -16,23 +16,23 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDsafUri;
-import com.topodroid.DistoX.TDLevel;
+import com.topodroid.TDX.TDLevel;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TopoDroidAlertDialog;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.ExportDialogTdm;
-import com.topodroid.DistoX.IExporter;
-import com.topodroid.DistoX.TDandroid;
-import com.topodroid.DistoX.TDConst;
+import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TopoDroidAlertDialog;
+import com.topodroid.TDX.DataHelper;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.ExportDialogTdm;
+import com.topodroid.TDX.IExporter;
+import com.topodroid.TDX.TDandroid;
+import com.topodroid.TDX.TDConst;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -430,7 +430,7 @@ public class TdmConfigActivity extends Activity
       try {
         // TDLog.v( "Cave3D of " + mTdmConfig.getFilepath() );
         // Intent intent = new Intent( "Cave3D.intent.action.Launch" );
-        Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.DistoX.TopoGL.class );
+        Intent intent = new Intent( Intent.ACTION_VIEW ).setClass( this, com.topodroid.TDX.TopoGL.class );
         intent.putExtra( "INPUT_THCONFIG", mTdmConfig.getSurveyName() ); // thconfig (project) name, without ".thconfig" extension
         intent.putExtra( "SURVEY_BASE", TDPath.getPathBase() );          // current work directory
         startActivity( intent );

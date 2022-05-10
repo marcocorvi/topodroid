@@ -86,7 +86,7 @@ public class TDVersion
   // }
 
   // public static int checkCave3DVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.Cave3D", MIN_CAVE3D_VERSION ); }
-  // public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.DistoX", MIN_TOPODROID_VERSION ); }
+  // public static int checkTopoDroidVersion( Context ctx ) { return checkPackageVersion( ctx, "com.topodroid.TDX", MIN_TOPODROID_VERSION ); }
 
   /** set the app version getting it from the Package Manager
    * @param context   context

@@ -16,8 +16,8 @@
 // 
 // import com.topodroid.ui.MyDialog;
 // // import com.topodroid.utils.TDLog;
-// import com.topodroid.DistoX.DeviceActivity;
-// import com.topodroid.DistoX.R;
+// import com.topodroid.TDX.DeviceActivity;
+// import com.topodroid.TDX.R;
 // 
 // // import android.app.Dialog;
 // 

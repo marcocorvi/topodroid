@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3in;
 
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDVersion;
@@ -19,19 +19,19 @@ import com.topodroid.c3db.DataHelper;
 import com.topodroid.c3db.SurveyFixed;
 import com.topodroid.c3db.SurveyInfo;
 import com.topodroid.c3db.DBlock;
-import com.topodroid.DistoX.TopoGL;
-import com.topodroid.DistoX.TglParser;
-import com.topodroid.DistoX.Cave3DCS;
-import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Cave3DStation;
-import com.topodroid.DistoX.Cave3DSurvey;
-import com.topodroid.DistoX.Cave3DFix;
-// import com.topodroid.DistoX.Cave3DXSection;
-import com.topodroid.DistoX.Geodetic;
-import com.topodroid.DistoX.DEMsurface;
-import com.topodroid.DistoX.Vector3D;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDInstance;
+import com.topodroid.TDX.TopoGL;
+import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.Cave3DCS;
+import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Cave3DStation;
+import com.topodroid.TDX.Cave3DSurvey;
+import com.topodroid.TDX.Cave3DFix;
+// import com.topodroid.TDX.Cave3DXSection;
+import com.topodroid.TDX.Geodetic;
+import com.topodroid.TDX.DEMsurface;
+import com.topodroid.TDX.Vector3D;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDInstance;
 
 import java.io.File; // DB FILE
 import java.io.IOException;

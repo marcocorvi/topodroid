@@ -17,8 +17,8 @@ import com.topodroid.dev.TopoDroidProtocol;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleCallback;
 // import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDToast;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 

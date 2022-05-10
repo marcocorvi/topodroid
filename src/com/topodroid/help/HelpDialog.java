@@ -12,7 +12,7 @@
 package com.topodroid.help;
 
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
 

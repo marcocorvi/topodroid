@@ -11,7 +11,7 @@
  */
 package com.topodroid.utils;
 
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.TDX.TDandroid;
 
 public class TDColor
 {

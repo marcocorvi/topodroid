@@ -17,7 +17,7 @@ import com.topodroid.utils.TDUtil;
 // import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 // import com.topodroid.num.NumSplay;
-import com.topodroid.DistoX.DrawingUtil;
+import com.topodroid.TDX.DrawingUtil;
 
 // import java.io.File;
 import java.io.FileOutputStream;

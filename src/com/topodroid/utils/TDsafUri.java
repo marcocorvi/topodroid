@@ -12,8 +12,8 @@
 package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDPath;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Build;

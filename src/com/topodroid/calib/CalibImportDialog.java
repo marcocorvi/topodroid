@@ -14,11 +14,11 @@ package com.topodroid.calib;
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 import com.topodroid.utils.TDUtil;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.DeviceActivity;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.DeviceActivity;
 
 import java.io.File;
 // import java.util.Set;

@@ -11,11 +11,11 @@
  */
 package com.topodroid.inport;
 
-import com.topodroid.DistoX.MainWindow;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.DataHelper;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.TDToast;
+import com.topodroid.TDX.MainWindow;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.DataHelper;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.TDToast;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;

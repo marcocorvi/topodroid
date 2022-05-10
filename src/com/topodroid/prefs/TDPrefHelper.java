@@ -11,8 +11,8 @@
  */
 package com.topodroid.prefs;
 
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDandroid;
 
 import android.preference.PreferenceManager;
 import android.content.SharedPreferences;

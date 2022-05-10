@@ -15,9 +15,9 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DataType;
-import com.topodroid.DistoX.ILister;
-import com.topodroid.DistoX.ListerHandler;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.TDX.ILister;
+import com.topodroid.TDX.ListerHandler;
+import com.topodroid.TDX.TopoDroidApp;
 
 
 import android.os.AsyncTask;

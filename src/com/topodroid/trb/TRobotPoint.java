@@ -11,7 +11,7 @@
  */
 package com.topodroid.trb;
 
-import com.topodroid.DistoX.DBlock;
+import com.topodroid.TDX.DBlock;
 
 // import com.topodroid.utils.TDLog;
 

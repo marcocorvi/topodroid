@@ -10,8 +10,10 @@ AFLAGS = -v
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 TARGET_SDK = `grep targetSdkVersion AndroidManifest.xml | sed -e 's/ *android:targetSdkVersion=//' | sed -e 's/"//g' `
 
-APPCODE = DistoX
-APPNAME = TopoDroid
+# APPCODE must coincide with the main source folder
+APPCODE = TDX
+# APPNAME is the application name, as in build.xml
+APPNAME = TopoDroidX
 APPVERSION = $(APPNAME)-$(VERSION)
 LOGNAME = topodroid-X
 PACKAGE = com.topodroid.$(APPCODE)

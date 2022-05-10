@@ -12,9 +12,9 @@
 package com.topodroid.io.shp;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.DistoX.DrawingPointPath;
-// import com.topodroid.DistoX.DrawingUtil;
-import com.topodroid.DistoX.IDrawingLink;
+import com.topodroid.TDX.DrawingPointPath;
+// import com.topodroid.TDX.DrawingUtil;
+import com.topodroid.TDX.IDrawingLink;
 
 class Link
 {

@@ -14,11 +14,11 @@ package com.topodroid.calib;
 import com.topodroid.utils.TDLog;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
-import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.TDToast;
-import com.topodroid.DistoX.DeviceActivity;
-import com.topodroid.DistoX.GMActivity;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.GMActivity;
+import com.topodroid.TDX.R;
 
 import java.lang.ref.WeakReference;
 // import java.util.List;
@@ -50,7 +50,7 @@ public class CalibReadTask extends AsyncTask<Void, Integer, Boolean>
     mApp    = new WeakReference<>( app );
     coeff = new byte[52]; // always read 52 bytes
     mParentType = parent_type;
-    // comp_name = "ComponentInfo{com.topodroid.DistoX/com.topodroid.DistoX." + act_name + "}";
+    // comp_name = "ComponentInfo{com.topodroid.TDX/com.topodroid.DistoX." + act_name + "}";
   }
 
   @Override

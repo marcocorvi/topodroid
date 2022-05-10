@@ -13,9 +13,9 @@ package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDPath;
-import com.topodroid.DistoX.TDandroid;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TDandroid;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
@@ -267,8 +267,8 @@ public class TDFile
     
 
   // INTERNAL FILES --------------------------------------------------------------
-  // context.getFilesDir --> /data/user/0/com.topodroid.DistoX/files
-  // context.getExternalFilesDir --> /storage/emulated/0/Android/data/com.topodroid.DistoX/files
+  // context.getFilesDir --> /data/user/0/com.topodroid.TDX/files
+  // context.getExternalFilesDir --> /storage/emulated/0/Android/data/com.topodroid.TDX/files
 
   /** @return the file of the private base folder
    */

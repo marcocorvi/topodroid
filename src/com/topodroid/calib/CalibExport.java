@@ -11,8 +11,8 @@
  */
 package com.topodroid.calib;
 
-import com.topodroid.DistoX.DeviceHelper;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.TDX.DeviceHelper;
+import com.topodroid.TDX.TDPath;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.calib.CalibInfo;
 import com.topodroid.utils.TDFile;

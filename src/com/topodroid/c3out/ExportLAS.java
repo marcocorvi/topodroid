@@ -12,7 +12,7 @@
 package com.topodroid.c3out;
 
 
-import com.topodroid.DistoX.TglParser;
+import com.topodroid.TDX.TglParser;
 
 // import com.topodroid.utils.TDLog;
 

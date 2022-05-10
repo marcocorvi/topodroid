@@ -19,8 +19,8 @@ import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.DistoX.TDAzimuth;
-import com.topodroid.DistoX.SurveyInfo;
+import com.topodroid.TDX.TDAzimuth;
+import com.topodroid.TDX.SurveyInfo;
 
 import java.io.IOException;
 import java.io.BufferedReader;

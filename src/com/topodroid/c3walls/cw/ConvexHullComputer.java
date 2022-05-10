@@ -11,10 +11,10 @@
  */
 package com.topodroid.c3walls.cw;
 
-import com.topodroid.DistoX.TglParser;
-import com.topodroid.DistoX.GlModel;
-import com.topodroid.DistoX.Cave3DShot;
-import com.topodroid.DistoX.Cave3DStation;
+import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.GlModel;
+import com.topodroid.TDX.Cave3DShot;
+import com.topodroid.TDX.Cave3DStation;
 
 import com.topodroid.utils.TDLog;
 

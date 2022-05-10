@@ -20,12 +20,12 @@ package com.topodroid.c3out;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.DistoX.GlModel;
-import com.topodroid.DistoX.GlNames;
-import com.topodroid.DistoX.GlLines;
-import com.topodroid.DistoX.GlSurface;
-import com.topodroid.DistoX.Archiver;
-import com.topodroid.DistoX.TDPath;
+import com.topodroid.TDX.GlModel;
+import com.topodroid.TDX.GlNames;
+import com.topodroid.TDX.GlLines;
+import com.topodroid.TDX.GlSurface;
+import com.topodroid.TDX.Archiver;
+import com.topodroid.TDX.TDPath;
 
 // import android.util.Base64;
 // import android.util.Base64OutputStream;

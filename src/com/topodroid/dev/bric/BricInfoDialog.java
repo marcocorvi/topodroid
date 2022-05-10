@@ -5,9 +5,9 @@ package com.topodroid.dev.bric;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.ble.BleConst;
 import com.topodroid.dev.ble.BleUtils;
-// import com.topodroid.DistoX.TopoDroidApp;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.DeviceActivity;
+// import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.DeviceActivity;
 
 import com.topodroid.ui.MyDialog;
 

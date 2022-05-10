@@ -13,11 +13,11 @@ package com.topodroid.calib;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.MyDialog;
-import com.topodroid.DistoX.R;
-import com.topodroid.DistoX.DeviceActivity;
-import com.topodroid.DistoX.TDInstance;
-import com.topodroid.DistoX.TDLevel;
-import com.topodroid.DistoX.TopoDroidApp;
+import com.topodroid.TDX.R;
+import com.topodroid.TDX.DeviceActivity;
+import com.topodroid.TDX.TDInstance;
+import com.topodroid.TDX.TDLevel;
+import com.topodroid.TDX.TopoDroidApp;
 
 import java.util.List;
 // import java.util.ArrayList;

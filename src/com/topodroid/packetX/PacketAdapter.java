@@ -13,7 +13,7 @@ package com.topodroid.packetX;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.prefs.TDSetting;
-import com.topodroid.DistoX.R;
+import com.topodroid.TDX.R;
 
 import android.content.Context;
 
