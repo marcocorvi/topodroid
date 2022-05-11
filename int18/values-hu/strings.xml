@@ -489,7 +489,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="not_implemented">Nincs még megvalósítva</string -->
     <string name="null_bitmap">Kép létrehozása nem sikerült [OOM error]</string>
     <string name="photo">fotó</string>
-    <string name="photo_camera">TopoDroid kamera</string>
+    <string name="photo_camera">Régi kamera</string>
     <string name="photo_comment_prompt">Írj megjegyzést a fotóhoz</string>
     <string name="photo_azimuth_clino">Irányszög: %1$.1f Lejtszög %2$.1f</string>
     <!-- UNUSED string name="photo_name">álláspont/név</string -->
