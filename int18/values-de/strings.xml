@@ -26,7 +26,7 @@ Die bisherigen Vermessungen können nun als ZIP wieder importiert werden.\n\n
 Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid deinstalliert wird.\n\n</string>
   <string name="r_checkboxes">Bitte bestätigen.</string>
   <string name="r_i_understood">Ich verstehe diesen Hinweis</string>
-  <string name="r_disclaimer">Ich bin einverstanden, dass der/die Autor(en) von TopoDroid nicht haftbar sind für jeglichen Datenverlust.</string>
+  <!-- UNUSED string name="r_disclaimer">Ich bin einverstanden, dass der/die Autor(en) von TopoDroid nicht haftbar sind für jeglichen Datenverlust.</string -->
   <string name="r_continue">WEITER</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->

@@ -64,7 +64,7 @@ public class TopoDroidAlertDialog
     // alert_builder.setNegativeButton( res.getString( R.string.button_ok ), pos );
     // AlertDialog alert = alert_builder.create();
     // // alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
-    // alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+    // alert.getWindow().setBackgroundDrawableResource( R.xml.alert_bg );
     // alert.show();
 
   /** make alert dialog with OK / CANCEL buttons
@@ -106,7 +106,7 @@ public class TopoDroidAlertDialog
       
       // NEEDED API-11 for custom background color
       if ( TDandroid.ABOVE_API_24 ) {
-        alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+        alert.getWindow().setBackgroundDrawableResource( R.xml.alert_bg );
       } else {
         alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
       }
@@ -152,7 +152,7 @@ public class TopoDroidAlertDialog
       AlertDialog alert = alert_builder.create();
       // NEEDED API-11 for custom background color
       if ( TDandroid.ABOVE_API_24 ) {
-        alert.getWindow().setBackgroundDrawableResource( R.drawable.alert_bg );
+        alert.getWindow().setBackgroundDrawableResource( R.xml.alert_bg );
       } else {
         alert.getWindow().setBackgroundDrawableResource( R.color.alert_background );
       }

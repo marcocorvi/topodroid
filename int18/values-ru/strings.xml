@@ -25,7 +25,7 @@
   </string>
   <string name="r_checkboxes">Вы должны подтвердить следующее:</string>
   <string name="r_i_understood">Я полностью понял это уведомление.</string>
-  <string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string>
+  <!-- UNUSED string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string -->
   <string name="r_continue">ПРОДОЛЖИТЬ</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->

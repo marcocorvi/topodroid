@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601001"
-      android:versionName="6.1.1"
+      android:versionCode="601002"
+      android:versionName="6.1.2"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:

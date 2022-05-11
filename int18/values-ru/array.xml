@@ -272,10 +272,6 @@
   </string-array>
 
   <!--  3D VIEWER array strings  -->
-  <!-- UNUSED string-array name="csizeButtons">
-     <item name="small1">Маленькие</item>
-     <item name="large">Большие</item>
-  </string-array -->
 
   <string-array name="demReduce">
      <item name="shrink">Передискретизировать</item>

@@ -25,7 +25,7 @@ Refer to the web pages for details.\n
   </string -->
   <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
   <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- TODO string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <!-- TODO string name="r_continue">CONTINUE</string -->
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <string-array name="orientação">
+  <string-array name="orientation">
      <item name="unspecified">indefinida</item>
      <item name="portrait">retrato</item>
      <item name="landscape">paisagem</item>
@@ -271,10 +271,6 @@
   </string-array -->
 
   <!-- 3D VIEWER array strings -->
-  <!-- TODO string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
-  </string-array -->
 
   <!-- TODO string-array name="demReduce">
      <item name="shrink">Subsample</item>

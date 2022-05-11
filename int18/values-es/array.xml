@@ -278,10 +278,6 @@
   </string-array -->
 
   <!-- 3D VIEWER array strings -->
-  <!-- TODO string-array name="csizeButtons">
-     <item name="small1">Pequeño</item>
-     <item name="large">Grande</item>
-  </string-array -->
 
   <string-array name="demReduce">
      <item name="shrink">Submuestra</item>

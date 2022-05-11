@@ -25,7 +25,7 @@
   </string>
   <string name="r_checkboxes">您必须确认复选框.</string>
   <string name="r_i_understood">我完全理解这个通知</string>
-  <string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string>
+  <!-- UNUSED string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string -->
   <string name="r_continue">继续</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->

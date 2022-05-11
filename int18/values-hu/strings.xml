@@ -25,7 +25,7 @@ A részletekért keresse fel a weboldalakat.\n
   </string>
   <string name="r_checkboxes">Nyugtáznod kell a jelölőnégyzettel.</string>
   <string name="r_i_understood">Teljesen megértettem ezt az értesítést</string>
-  <string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string>
+  <!-- UNUSED string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string -->
   <string name="r_continue">FOLYTATÁS</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->

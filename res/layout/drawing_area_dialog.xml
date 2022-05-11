@@ -53,7 +53,7 @@
       android:layout_height="20dp" 
       android:max="360"
       android:background="#666666"
-      android:progressDrawable="@drawable/progress2"
+      android:progressDrawable="@xml/progress2"
     />
   </LinearLayout>
 

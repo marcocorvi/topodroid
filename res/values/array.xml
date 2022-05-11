@@ -722,14 +722,6 @@
   </string-array -->
 
   <!-- 3D VIEWER array strings -->
-  <!-- UNUSED string-array name="csizeButtons">
-     <item name="small1">Small</item>
-     <item name="large">Large</item>
-  </string-array>
-  <string-array name="csizeButtonsValue" translatable="false">
-     <item name="small">1</item>
-     <item name="large">2</item>
-  </string-array -->
 
   <string-array name="demReduce">
      <item name="shrink">Subsample</item>

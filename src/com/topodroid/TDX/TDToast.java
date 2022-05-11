@@ -27,7 +27,7 @@ import android.view.View.OnClickListener;
 
 public class TDToast
 {
-  static final private int mBgDrawable = R.drawable.toast_bg; // 0xff333333;
+  static final private int mBgDrawable = R.xml.toast_bg; // 0xff333333;
   static final private int mBgColor = 0xff333333;
 
   static final private int mGravity = Gravity.BOTTOM | Gravity.CENTER | Gravity.FILL_HORIZONTAL;

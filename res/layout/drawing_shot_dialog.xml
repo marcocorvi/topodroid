@@ -104,7 +104,7 @@
     android:max="300"
     android:background="#666666"
     />
-    <!-- android:progressDrawable="@drawable/progress2" -->
+    <!-- android:progressDrawable="@xml/progress2" -->
       				  
   <LinearLayout android:id="@+id/layout3"
     android:layout_marginTop="@dimen/marginv"
@@ -169,7 +169,7 @@
         android:layout_margin="0dp"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:background="@drawable/button_border"
+        android:background="@xml/button_border"
         android:layout_marginRight="@dimen/marginh"
         >
         <Button android:id="@+id/btn_color"

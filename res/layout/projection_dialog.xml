@@ -22,7 +22,7 @@
       android:layout_marginBottom="@dimen/marginv"
       android:max="400"
       android:background="#666666"
-      android:progressDrawable="@drawable/progress2"
+      android:progressDrawable="@xml/progress2"
     />
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"

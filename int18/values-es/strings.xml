@@ -23,7 +23,7 @@
   </string>
   <string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
   <string name="r_i_understood">He entendido perfectamente este aviso</string>
-  <string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string>
+  <!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
   <string name="r_continue">CONTINUAR</string>
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
