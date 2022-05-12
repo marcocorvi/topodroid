@@ -14,11 +14,11 @@
      <item name="view">vista</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
+  <string-array name="splayColors">
+     <item name="none">nessuno</item>
+     <item name="all">tutti</item>
      <item name="palette">palette</item>
-  </string-arrayi -->
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">nessuna</item>
@@ -279,15 +279,15 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array name="demReduce">
+     <item name="shrink">Sottoinsieme</item>
+     <item name="cut">Ritaglio</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
-     <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+  <string-array name="splayUse">
+     <item name="skip">Salta</item>
+     <item name="normal">Normale</item>
+     <item name="xsection">Sezione cross</item>
+  </string-array>
 
 </resources>
