@@ -169,7 +169,7 @@
         android:layout_margin="0dp"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:background="@xml/button_border"
+        android:background="@xml/button_b"
         android:layout_marginRight="@dimen/marginh"
         >
         <Button android:id="@+id/btn_color"

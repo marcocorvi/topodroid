@@ -202,15 +202,15 @@ public class DataHelper extends DataSetObservable
     this.openDatabase( context );
   }
 
-  /** cstr
-   * @param context context
-   * @param db_path database pathname
-   * @note used only for moveTo6
-   */
-  public DataHelper( Context context, String db_path )
-  {
-    this.openDatabaseWithPath( context, db_path );
-  }
+  // /** cstr MOVE_TO_6
+  //  * @param context context
+  //  * @param db_path database pathname
+  //  * @note used only for moveTo6
+  //  */
+  // public DataHelper( Context context, String db_path )
+  // {
+  //   this.openDatabaseWithPath( context, db_path );
+  // }
 
   /** close the database
    */

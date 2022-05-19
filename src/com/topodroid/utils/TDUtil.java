@@ -13,6 +13,7 @@ package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TDandroid;
 
 // import java.lang.Math;
 
@@ -25,7 +26,7 @@ import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.Comparator;
 import java.util.Collections;
-import java.time.DateTimeException;
+import java.time.DateTimeException; // API-26
 
 import android.content.Context;
 
@@ -158,7 +159,13 @@ public class TDUtil
   public static int parseDay( String str )
   {
     int ret = 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
-    if ( ret < 1 || ret > 31 ) throw new DateTimeException( "Illegal month " + str );
+    if ( ret < 1 || ret > 31 ) {
+      if ( TDandroid.BELOW_API_26 ) {
+        ret = 1;
+      } else {
+        throw new DateTimeException( "Illegal day " + str );
+      }
+    }
     return ret;
   }
 
@@ -169,7 +176,13 @@ public class TDUtil
   public static int parseMonth( String str )
   {
     int ret = 10 * ( str.charAt(0) - '0' ) + ( str.charAt(1) - '0' );
-    if ( ret < 1 || ret > 12 ) throw new DateTimeException( "Illegal day " + str );
+    if ( ret < 1 || ret > 12 ) {
+      if ( TDandroid.BELOW_API_26 ) {
+        ret = ( ret < 1 )? 1 : 12;
+      } else {
+        throw new DateTimeException( "Illegal month " + str );
+      }
+    }
     return ret;
   }
 

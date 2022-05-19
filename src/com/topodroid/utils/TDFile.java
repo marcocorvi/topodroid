@@ -647,18 +647,19 @@ public class TDFile
   }
 
   /** rename a file
-   * @param oldname   old pathname of the existing file
+   * @param oldname   old pathname (it's ok if it does not exists)
    * @param newname   new pathname
    * @pre oldname exists AND ! newname exists
    */
   public static void renameFile( String oldname, String newname )
   {
     File f1 = getTopoDroidFile( oldname ); // DistoX-SAF
+    if ( ! f1.exists() ) return;
     File f2 = getTopoDroidFile( newname );
-    if ( f1.exists() && ! f2.exists() ) {
+    if ( ! f2.exists() ) {
       if ( ! f1.renameTo( f2 ) ) TDLog.Error("file rename: failed " + oldname + " to " + newname );
     } else {
-      TDLog.Error("file rename: no-exist " + oldname + " or exist " + newname );
+      TDLog.Error("file rename: " + oldname + " to existing " + newname );
     }
   }
 

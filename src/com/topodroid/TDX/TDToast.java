@@ -27,7 +27,7 @@ import android.view.View.OnClickListener;
 
 public class TDToast
 {
-  static final private int mBgDrawable = R.xml.toast_bg; // 0xff333333;
+  // static final private int mBgDrawable = R.drawable.toast_bg; // 0xff333333;
   static final private int mBgColor = 0xff333333;
 
   static final private int mGravity = Gravity.BOTTOM | Gravity.CENTER | Gravity.FILL_HORIZONTAL;
@@ -117,7 +117,7 @@ public class TDToast
     if ( view != null ) {
       view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
       if ( TDandroid.ABOVE_API_26 ) { // Android-8 (O) 
-        view.setBackgroundResource( mBgDrawable );
+        view.setBackgroundResource( R.drawable.toast_bg );
       } else if ( TDandroid.BELOW_API_23 ) { // Android-6 (M) 
         view.setBackgroundColor( mBgColor );
       }
@@ -134,7 +134,7 @@ public class TDToast
     if ( view != null ) {
       view.setOnClickListener( new OnClickListener() { public void onClick( View v ) { v.setVisibility( View.GONE ); } } );
       if ( TDandroid.ABOVE_API_26 ) {
-        view.setBackgroundResource( mBgDrawable );
+        view.setBackgroundResource( R.drawable.toast_bg );
       } else if ( TDandroid.BELOW_API_23 ) {
         view.setBackgroundColor( mBgColor );
       }

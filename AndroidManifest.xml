@@ -2,8 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601002"
-      android:versionName="6.1.2"
+      android:versionCode="601003"
+      android:versionName="6.1.3"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -31,15 +31,15 @@
          API-26 = Android 8.0.0 Oreo
          API-27 = Android 8.1.0
          API-28 = Android 9     Pie
-         API-29 = Android 10
+         API-29 = Android 10    Q
          API-30 = Android 11
          API-31 = Android 12
          API-32 = Android 12.1
-         API-33 = Android 13
+         API-33 = Android 13    Tiramisu
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="30"
+       android:targetSdkVersion="31"
     />
     <!-- android:maxSdkVersion="29" -->
 
@@ -54,10 +54,11 @@
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
     <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
 
-    <!-- Android-12 ignores MANAGE_EXTERNAL_STORAGE: user must grant with adb-->
+    <!-- Android-12 ignores MANAGE_EXTERNAL_STORAGE: user must grant with adb - nevertheless the uses-permission must be declared -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+
     <!-- API-33 has the media granularity permissions: READ_MEDIA_IMAGES READ_MEDIA_VIDEO READ_MEDIA_AUDIO -->
     <!-- uses-permission can be limited with android:maxSdkVersion="32" -->
     <!-- permission android:name="..." android:protectionLevel="development" -->
@@ -96,6 +97,10 @@
           android:hasFragileUserData="true"
 	  android:requestLegacyExternalStorage="true"
 	  >
+          <!-- request legacy is not necessary on android-11 but it is ok to leave it in
+	  android:requestLegacyExternalStorage="true"
+	  android:preserveLegacyExternalStorage="true" DO NOT ADD THIS: it breaks the database 
+          -->
           <!-- android:largeHeap="true"  post Gingerbread large memory 
                FIXME-23 android:largeHeap="true"
                FIXME-16 android:largeHeap="true"
@@ -104,10 +109,6 @@
 	  android:roundIcon="@drawable/icon4"
                 FIXME-29
 	  -->
-          <!--
-	  android:requestLegacyExternalStorage="true"
-	  android:preserveLegacyExternalStorage="true" DO NOT ADD THIS: it breaks the database 
-          -->
 
 	  <!-- android:screenOrientation="portrait" -->
 	  <!-- android:extractNativeLibs="false" -->
@@ -288,9 +289,9 @@
 	</provider -->
 
         <!-- service
-          android:name="TD_DistoX"
+          android:name="TDX"
           android:icon="@drawable/icon4"
-          android:label="TD_DistoX"
+          android:label="TDX"
           android:process=":td_distox_process"
           >
         </service -->

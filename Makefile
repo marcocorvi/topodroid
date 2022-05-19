@@ -53,6 +53,14 @@ debug-signed:
 	./howto/sign-debug.sh
 	mv $(APPNAME)-debug-keysigned.apk $(APPVERSION)-debug.apk
 
+perms:
+	adb shell appops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow
+	adb shell appops set com.topodroid.TDX WRITE_EXTERNAL_STORAGE allow
+	adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow
+
+# interactively it could be
+#	adb shell if [[ `getprop ro.vendor.build.version.sdk` > 29 ]]; then appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow ; fi
+
 bundle:
 	$(ANT) release
 	./howto/bundle.sh

@@ -859,14 +859,16 @@ public class TopoDroidApp extends Application
     // dalvik.system.VMRuntime.getRuntime().setMinimumHeapSize( 64<<20 );
 
     // TDLog.Profile("TDApp onCreate");
-    boolean hasTopoDroidDir = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid" ).exists();
-    boolean hasTDXDir =  TDFile.hasExternalDir(null);
-    TDLog.v( "APP has external dir: " + hasTDXDir + " " + TDFile.hasExternalDir("TopoDroid") );
-    TDLog.v( "APP has old TopoDroid dir: " + hasTopoDroidDir );
-    if ( hasTopoDroidDir && ! hasTDXDir ) {
-      TDLog.v("APP move to 6");
-      TDPath.moveTo6( this );
-    }
+    
+    // MOVE_TO_6
+    // boolean hasTopoDroidDir = TDFile.getTopoDroidFile( "/sdcard/Documents/TopoDroid" ).exists();
+    // boolean hasTDXDir =  TDFile.hasExternalDir(null);
+    // TDLog.v( "APP has external dir: " + hasTDXDir + " " + TDFile.hasExternalDir("TopoDroid") );
+    // TDLog.v( "APP has old TopoDroid dir: " + hasTopoDroidDir );
+    // if ( hasTopoDroidDir && ! hasTDXDir ) {
+    //   TDLog.v("APP move to 6");
+    //   TDPath.moveTo6( this );
+    // }
 
     TDVersion.setVersion( this );
     TDPrefHelper prefHlp = new TDPrefHelper( this );
@@ -1348,7 +1350,7 @@ public class TopoDroidApp extends Application
   // ----------------------------------------------------------
   // SURVEY AND CALIBRATION
 
-  /** rename the survey
+  /** rename the current survey
    * @param sid   survey ID
    * @param name  new survey name
    * @return true if success
@@ -1364,6 +1366,12 @@ public class TopoDroidApp extends Application
         for ( PlotInfo p : plots ) {
           // Tdr
           TDFile.renameFile( TDPath.getSurveyPlotTdrFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrFile( name, p.name ) );
+          // Tdr backups
+          TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotTdrBackupFile( name, p.name ) );
+          for ( int bck_nr = 0; bck_nr < 5; ++ bck_nr ) {
+            TDFile.renameFile( TDPath.getSurveyPlotTdrBackupFile( TDInstance.survey, p.name, bck_nr ), TDPath.getSurveyPlotTdrBackupFile( name, p.name, bck_nr ) );
+          }
+
           // rename exported plots: th2 dxf png svg csx
           // TDFile.renameFile( TDPath.getSurveyPlotTh2File( TDInstance.survey, p.name ), TDPath.getSurveyPlotTh2File( name, p.name ) );
           // TDFile.renameFile( TDPath.getSurveyPlotDxfFile( TDInstance.survey, p.name ), TDPath.getSurveyPlotDxfFile( name, p.name ) );
@@ -1409,9 +1417,10 @@ public class TopoDroidApp extends Application
       // rename note file: note
       TDFile.renameFile( TDPath.getSurveyNoteFile( TDInstance.survey ), TDPath.getSurveyNoteFile( name ) );
       // rename photo folder: photo
-      TDFile.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
+      // TDFile.renameFile( TDPath.getSurveyPhotoDir( TDInstance.survey ), TDPath.getSurveyPhotoDir( name ) );
       // rename audio folder: audio
-      TDFile.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
+      // TDFile.renameFile( TDPath.getSurveyAudioDir( TDInstance.survey ), TDPath.getSurveyAudioDir( name ) );
+
       // rename survey folder
       TDFile.renameFile( TDPath.getSurveyDir( TDInstance.survey ), TDPath.getSurveyDir( name ) );
 

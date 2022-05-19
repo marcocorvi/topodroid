@@ -45,6 +45,7 @@ public class TDandroid
   final static public boolean BELOW_API_21 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP );
   final static public boolean BELOW_API_23 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.M );
   final static public boolean BELOW_API_24 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.N );
+  final static public boolean BELOW_API_26 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.O );
   final static public boolean BELOW_API_29 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
   final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
 
@@ -139,10 +140,13 @@ public class TDandroid
   static int createPermissions( Context context, Activity activity, int time )
   {
     // TDLog.Log( LOG_PERM, "create permissions" );
-    // TDLog.v("PERM " + "create perms " );
 
     MustRestart = false;
-    if ( BELOW_API_23 ) return 0;
+    if ( BELOW_API_23 ) {
+      TDLog.v("PERM " + "create perms: below API-23 - return " );
+      return 0;
+    }
+
     // StringBuilder sb = new StringBuilder();
     // sb.append("Not granted" );
 
@@ -153,12 +157,13 @@ public class TDandroid
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
         ++not_granted;
-        // TDLog.v( "Perm " + permNames[k] + " not granted ");
+        TDLog.v( "PERM " + permNames[k] + " not granted ");
         // if ( k < NR_PERMS_D ) MustRestart = true;
       // } else {
       //   // TDLog.v( "Perm " + permNames[k] + " granted ");
       }
     }
+    TDLog.v("PERM " + "create perms " + time + ": not granted " + not_granted + " / " + NR_PERMS );
 
     if ( not_granted > 0 && time < 3 ) {
       // TDLog.v( "request perms time " + time );

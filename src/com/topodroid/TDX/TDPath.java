@@ -398,6 +398,20 @@ public class TDPath
 
   // @parm name   (reduced) plot name
   static String getSurveyPlotTdrFile( String survey, String name ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr" ; }
+
+  /** @return survey plot backup filename
+   * @param survey   survey name
+   * @param name     plot name
+   */
+  static String getSurveyPlotTdrBackupFile( String survey, String name ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck"; }
+
+  /** @return survey plot backup filename
+   * @param survey   survey name
+   * @param name     plot name
+   * @param backup   backup extension number 
+   */
+  static String getSurveyPlotTdrBackupFile( String survey, String name, int backup ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr.bck" + backup ; }
+
   static String getSurveyPlotC3dFile( String survey, String name ) { return APP_C3D_PATH + "/" + survey + "-" + name + ".c3d" ; }
 
   /** @return survey zip-archive full pathname
@@ -938,193 +952,177 @@ public class TDPath
     }
   }
 
-  // ---------------------------------------------------------------
-  /** transfer from 5.1.40 to 6.1.xx
-   * @param context    context
-   * @note when this function is called the external TDX dir does not exists
-   */
-  public static void moveTo6( Context context /* , TextView tv */ )
-  {
-    // if ( TDFile.hasExternalDir(null) ) {
-    //   TDLog.v("PATH MOVE TO 6 has already external dir CBD");
-    //   return;
-    // }
-    final boolean dry_run = false;
+  // MOVE_TO_6 ---------------------------------------------------------------
+  // /** transfer from 5.1.40 to 6.1.xx
+  //  * @param context    context
+  //  * @note when this function is called the external TDX dir does not exists
+  //  */
+  // public static void moveTo6( Context context /* , TextView tv */ )
+  // {
+  //   // if ( TDFile.hasExternalDir(null) ) {
+  //   //   TDLog.v("PATH MOVE TO 6 has already external dir CBD");
+  //   //   return;
+  //   // }
+  //   final boolean dry_run = false;
+  //   TDLog.v("PATH move to 6 create CBD");
+  //   File cbd = TDFile.getExternalDir( null );
+  //   if ( ! cbd.exists() ) {
+  //     TDLog.Error("PATH move to 6 failed create CBD");
+  //     // if ( tv != null) tv.setText("failed to create TDX folder");
+  //     return;
+  //   }
+  //   String sdcard = Environment.getExternalStorageDirectory().getPath();
+  //   // if ( tv != null ) tv.setText("moving app files to sdcard + "/Android/data/com.topodroid.TDX");
+  //   File priv_dir = TDFile.getPrivateDir( null );
+  //   File f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/device10.sqlite" );
+  //   copyFile( f, new File( priv_dir, "device10.sqlite" ), dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/point" );
+  //   copyDir( f, new File( priv_dir, "point" ), dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/line" );
+  //   copyDir( f, new File( priv_dir,  "line" ), dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/area" );
+  //   copyDir( f, new File( priv_dir,  "area" ), dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/bin" );
+  //   copyDir( f, new File( priv_dir,  "bin" ), dry_run );
+  //   // f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/man" );
+  //   // copyDir( f, new File( priv_dir,  "man" ), dry_run );
+  //   File cwd = TDFile.getExternalDir( "TopoDroid" );
+  //   if ( ! cwd.exists() ) {
+  //     TDLog.Error("MOVE TO 6: failed create TopoDroid subfolderi CWD");
+  //     // if ( tv != null) tv.setText("failed to create TopoDroid subfolder");
+  //     return;
+  //   }
+  //   // if ( tv != null ) tv.setText("moving project files to sdcard + "/Documents/TDX/TopoDroid");
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/distox14.sqlite" );
+  //   File f2 = new File( cwd, "distox14.sqlite" );
+  //   copyFile( f, f2, dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/zip" );
+  //   copyDir( f, new File( cwd, "zip" ), dry_run );
+  //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/thconfig" );
+  //   copyDir( f, new File( cwd, "thconfig" ), dry_run );
+  //   // open database and create survey folders, and move survey files
+  //   TDLog.v("PATH move to 6: database " + f2.getAbsolutePath() );
+  //   DataHelper db = new DataHelper( context, f2.getAbsolutePath() );
+  //   List<String> surveys = db.selectAllSurveys( );
+  //   for ( String survey : surveys ) {
+  //     // if ( tv != null ) tv.setText("moving survey " + survey );
+  //     File tdr = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/tdr" );
+  //     tdr.mkdirs();
+  //     // TDInstance.takePersistentPermissions( Uri.fromFile( tdr ) ); // FIXME_PESISTENT
+  //     // move all tdr files of the survey
+  //     List<String> plots = db.selectAllPlotNames( survey );
+  //     for ( String plot : plots ) {
+  //       String plot_name = survey + "-" + plot + ".tdr";
+  //       f =  TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/tdr/" + plot_name );
+  //       copyFile( f, new File( tdr, plot_name ), dry_run );
+  //     }
+  //     File audio1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/audio/" + survey );
+  //     if ( audio1.exists() ) {
+  //       File audio2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/audio" );
+  //       copyDir( audio1, audio2, dry_run );
+  //     }
+  //     File photo1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/photo/" + survey );
+  //     if ( photo1.exists() ) {
+  //       File photo2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/photo" );
+  //       copyDir( photo1, photo2, dry_run );
+  //     }
+  //     File note1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/note/" + survey + ".txt" );
+  //     if ( note1.exists() ) {
+  //       File note2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + ".txt" );
+  //       copyFile( note1, note2, dry_run );
+  //     }
+  //   }
+  //   // if ( tv != null ) tv.setText("done");
+  // }
 
-    TDLog.v("PATH move to 6 create CBD");
-    File cbd = TDFile.getExternalDir( null );
-    if ( ! cbd.exists() ) {
-      TDLog.Error("PATH move to 6 failed create CBD");
-      // if ( tv != null) tv.setText("failed to create TDX folder");
-      return;
-    }
+  // /** copy a directory or create it (if not dry_run)
+  //  * @param in    input directory
+  //  * @param out   output directory
+  //  */
+  // private static boolean copyDir( File in, File out, boolean dry_run )
+  // {
+  //   if ( in == null ) {
+  //     TDLog.Error("PATH copy dir null input"); 
+  //     return true;
+  //   }
+  //   if ( ! in.exists() ) {
+  //     TDLog.Error("PATH copy dir " + in.getPath() + " not exist");
+  //     return true;
+  //   }
+  //   if ( ! in.isDirectory() ) {
+  //     TDLog.Error("PATH copy dir " + in.getPath() + " not directory");
+  //     return true;
+  //   }
+  //   if ( ! dry_run ) {
+  //     if ( ! out.exists() ) {
+  //       if ( ! out.mkdirs() ) return false;
+  //       // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PESISTENT
+  //     }
+  //     if ( ! out.isDirectory() ) return false;
+  //   // } else {
+  //   //   TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
+  //   }
+  //   boolean ret = true;
+  //   File[] files = in.listFiles();
+  //   if ( files != null ) {
+  //     for ( File file1 : files ) {
+  //       File file2 = new File( out, file1.getName() );
+  //       ret &= copyFile( file1, file2, dry_run );
+  //     }
+  //   }
+  //   return ret;
+  // }
 
-    String sdcard = Environment.getExternalStorageDirectory().getPath();
-    // if ( tv != null ) tv.setText("moving app files to sdcard + "/Android/data/com.topodroid.TDX");
-    File priv_dir = TDFile.getPrivateDir( null );
-    File f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/device10.sqlite" );
-    copyFile( f, new File( priv_dir, "device10.sqlite" ), dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/point" );
-    copyDir( f, new File( priv_dir, "point" ), dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/line" );
-    copyDir( f, new File( priv_dir,  "line" ), dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/area" );
-    copyDir( f, new File( priv_dir,  "area" ), dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/bin" );
-    copyDir( f, new File( priv_dir,  "bin" ), dry_run );
-
-    // f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/symbol/man" );
-    // copyDir( f, new File( priv_dir,  "man" ), dry_run );
-
-    File cwd = TDFile.getExternalDir( "TopoDroid" );
-    if ( ! cwd.exists() ) {
-      TDLog.Error("MOVE TO 6: failed create TopoDroid subfolderi CWD");
-      // if ( tv != null) tv.setText("failed to create TopoDroid subfolder");
-      return;
-    }
-    // if ( tv != null ) tv.setText("moving project files to sdcard + "/Documents/TDX/TopoDroid");
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/distox14.sqlite" );
-    File f2 = new File( cwd, "distox14.sqlite" );
-    copyFile( f, f2, dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/zip" );
-    copyDir( f, new File( cwd, "zip" ), dry_run );
-
-    f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/thconfig" );
-    copyDir( f, new File( cwd, "thconfig" ), dry_run );
-
-    // open database and create survey folders, and move survey files
-    TDLog.v("PATH move to 6: database " + f2.getAbsolutePath() );
-    DataHelper db = new DataHelper( context, f2.getAbsolutePath() );
-    List<String> surveys = db.selectAllSurveys( );
-    for ( String survey : surveys ) {
-      // if ( tv != null ) tv.setText("moving survey " + survey );
-      File tdr = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/tdr" );
-      tdr.mkdirs();
-      // TDInstance.takePersistentPermissions( Uri.fromFile( tdr ) ); // FIXME_PESISTENT
-      // move all tdr files of the survey
-      List<String> plots = db.selectAllPlotNames( survey );
-      for ( String plot : plots ) {
-        String plot_name = survey + "-" + plot + ".tdr";
-        f =  TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/tdr/" + plot_name );
-        copyFile( f, new File( tdr, plot_name ), dry_run );
-      }
-
-      File audio1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/audio/" + survey );
-      if ( audio1.exists() ) {
-        File audio2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/audio" );
-        copyDir( audio1, audio2, dry_run );
-      }
-
-      File photo1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/photo/" + survey );
-      if ( photo1.exists() ) {
-        File photo2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/photo" );
-        copyDir( photo1, photo2, dry_run );
-      }
-
-      File note1 = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/note/" + survey + ".txt" );
-      if ( note1.exists() ) {
-        File note2 = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + ".txt" );
-        copyFile( note1, note2, dry_run );
-      }
-    }
-    // if ( tv != null ) tv.setText("done");
-  }
-
-  /** copy a directory or create it (if not dry_run)
-   * @param in    input directory
-   * @param out   output directory
-   */
-  private static boolean copyDir( File in, File out, boolean dry_run )
-  {
-    if ( in == null ) {
-      TDLog.Error("PATH copy dir null input"); 
-      return true;
-    }
-    if ( ! in.exists() ) {
-      TDLog.Error("PATH copy dir " + in.getPath() + " not exist");
-      return true;
-    }
-    if ( ! in.isDirectory() ) {
-      TDLog.Error("PATH copy dir " + in.getPath() + " not directory");
-      return true;
-    }
-    if ( ! dry_run ) {
-      if ( ! out.exists() ) {
-        if ( ! out.mkdirs() ) return false;
-        // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PESISTENT
-      }
-      if ( ! out.isDirectory() ) return false;
-    // } else {
-    //   TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
-    }
-    boolean ret = true;
-    File[] files = in.listFiles();
-    if ( files != null ) {
-      for ( File file1 : files ) {
-        File file2 = new File( out, file1.getName() );
-        ret &= copyFile( file1, file2, dry_run );
-      }
-    }
-    return ret;
-  }
-
-  /** copy a file
-   * @param in      input file
-   * @param out     output file
-   * @param dry_run whether to run dry
-   * @return true if success
-   */
-  private static boolean copyFile( File in, File out, boolean dry_run )
-  {
-    if ( in == null ) {
-      TDLog.Error("PATH copy file null input"); 
-      return true;
-    }
-    if ( !in.exists() ) {
-      TDLog.Error("PATH copy file " + in.getPath() + " not exist");
-      return true;
-    }
-    if ( !in.isFile() ) {
-      TDLog.Error("PATH copy file " + in.getPath() + " not regular");
-      return true;
-    }
-    if ( dry_run ) {
-      TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " dry run");
-      return true;
-    }
-
-    byte[] buf = new byte[4096];
-    if ( buf == null ) {
-      TDLog.Error("failed alloc buffer");
-      return false;
-    }
-    int len;
-    int tot_len = 0;
-    try {
-      FileInputStream fis = new FileInputStream( in );
-      FileOutputStream fos = new FileOutputStream( out );
-      while ( (len = fis.read( buf, 0, 4096 )) > 0 ) {
-        tot_len += len;
-        fos.write( buf, 0, len );
-      }
-      fos.flush();
-      fos.close();
-      fis.close();
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error("PATH file error " + e.getMessage() );
-      return false;
-    } catch ( IOException e ) {
-      TDLog.Error("PATH IO error " + e.getMessage() );
-      return false;
-    }
-    // TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " length " + tot_len );
-    return true;
-  }
+  // /** copy a file
+  //  * @param in      input file
+  //  * @param out     output file
+  //  * @param dry_run whether to run dry
+  //  * @return true if success
+  //  */
+  // private static boolean copyFile( File in, File out, boolean dry_run )
+  // {
+  //   if ( in == null ) {
+  //     TDLog.Error("PATH copy file null input"); 
+  //     return true;
+  //   }
+  //   if ( !in.exists() ) {
+  //     TDLog.Error("PATH copy file " + in.getPath() + " not exist");
+  //     return true;
+  //   }
+  //   if ( !in.isFile() ) {
+  //     TDLog.Error("PATH copy file " + in.getPath() + " not regular");
+  //     return true;
+  //   }
+  //   if ( dry_run ) {
+  //     TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " dry run");
+  //     return true;
+  //   }
+  //   byte[] buf = new byte[4096];
+  //   if ( buf == null ) {
+  //     TDLog.Error("failed alloc buffer");
+  //     return false;
+  //   }
+  //   int len;
+  //   int tot_len = 0;
+  //   try {
+  //     FileInputStream fis = new FileInputStream( in );
+  //     FileOutputStream fos = new FileOutputStream( out );
+  //     while ( (len = fis.read( buf, 0, 4096 )) > 0 ) {
+  //       tot_len += len;
+  //       fos.write( buf, 0, len );
+  //     }
+  //     fos.flush();
+  //     fos.close();
+  //     fis.close();
+  //   } catch ( FileNotFoundException e ) {
+  //     TDLog.Error("PATH file error " + e.getMessage() );
+  //     return false;
+  //   } catch ( IOException e ) {
+  //     TDLog.Error("PATH IO error " + e.getMessage() );
+  //     return false;
+  //   }
+  //   // TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " length " + tot_len );
+  //   return true;
+  // }
  
 }

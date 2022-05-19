@@ -759,6 +759,7 @@ public class MainWindow extends Activity
     TDLog.v( "INIT environment second");
     boolean ok_folder = TopoDroidApp.initEnvironmentSecond( say_dialogR );
 
+    TDLog.v( "INIT environment second done " + ok_folder );
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
     //   TDLog.v( "init environment target " + TDVersion.targetSdk() );
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
@@ -782,6 +783,7 @@ public class MainWindow extends Activity
       );
     }
 
+    TDLog.v( "INIT welcome screen");
     if ( mApp.mWelcomeScreen ) {
       TopoDroidApp.setBooleanPreference( "DISTOX_WELCOME_SCREEN", false );
       mApp.mWelcomeScreen = false;
@@ -798,7 +800,7 @@ public class MainWindow extends Activity
       }
     }
     
-
+    TDLog.v( "INIT symbols");
     // FIXME INSTALL_SYMBOL
     // if ( mApp.askSymbolUpdate ) {
     //   // (new TopoDroidVersionDialog(this, mApp)).show();
@@ -849,6 +851,7 @@ public class MainWindow extends Activity
     }
     setTheTitle();
 
+    TDLog.v( "INIT check intent");
     Intent intent = getIntent();
     if ( intent != null ) {
       Bundle extras = intent.getExtras();
@@ -1053,15 +1056,17 @@ public class MainWindow extends Activity
       // int perms = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
 
       if ( TDandroid.canRun( mApp, mActivity ) ) {
-        TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() );
+        TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " init envs first");
         mApp.initEnvironmentFirst( );
+        TDLog.v("MAIN show init dialogs [1]");
         showInitDialogs( false /* ! TopoDroidApp.hasTopoDroidDatabase() */ );
         // resetButtonBar();
       } else {
         ++ mRequestPermissionTime;
-        TDLog.v("MAIN can run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms " + mRequestPermissionTime );
+        TDLog.v("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
           mApp.initEnvironmentFirst( );
+          TDLog.v("MAIN show init dialogs [2]");
           showInitDialogs( false /* ! TopoDroidApp.hasTopoDroidDatabase() */ );
           // resetButtonBar();
         // } else {  // the followings are delayed after the permissions have been granted

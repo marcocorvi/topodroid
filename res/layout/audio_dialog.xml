@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
@@ -34,8 +35,8 @@
         android:gravity="right"
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginLeft="@dimen/marginh" 
-        android:layout_marginRight="@dimen/marginh" 
-        />
+        android:layout_marginRight="@dimen/marginh"
+          tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
     <LinearLayout android:id="@+id/help"
@@ -44,8 +45,8 @@
       android:orientation="horizontal" 
       android:layout_gravity="right"
       android:gravity="left"
-      android:layout_marginTop="@dimen/marginvbig" 
-      >
+      android:layout_marginTop="@dimen/marginvbig"
+        tools:ignore="RtlHardcoded">
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
           android:text="@string/button_help"
