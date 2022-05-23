@@ -265,8 +265,8 @@ A részletekért keresse fel a weboldalakat.\n
 	
     <string name="error_m">Hiba [m]</string>
     <string name="fmt_error_m">Hiba %1$.1f m</string>
-    <string name="fmt_h_geoid">Hiba %1$.0f m</string>
-    <string name="fmt_h_ellipsoid">Hiba %1$.0f m</string>
+    <string name="fmt_h_geoid">Geoid mag. %1$.0f m</string>
+    <string name="fmt_h_ellipsoid">Ellipszoid mag. %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Figyelem! Adat mélység hiba</string -->
 
     <string name="error_azimuth_required">Azimut szükséges</string>
