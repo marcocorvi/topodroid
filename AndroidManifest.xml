@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
       android:versionCode="601005"
@@ -40,6 +41,7 @@
     <uses-sdk
        android:minSdkVersion="18"
        android:targetSdkVersion="29"
+       tools:ignore="GradleOverrides,OldTargetApi"
     />
     <!-- android:maxSdkVersion="29" -->
 
@@ -91,8 +93,9 @@
     <application 
           android:name=".TopoDroidApp"
           android:label="@string/app_name"
-          android:allowBackup="false"
 	  android:icon="@mipmap/ic_launcher"
+
+          android:allowBackup="false"
 	  android:largeHeap="true"
           android:hasFragileUserData="true"
 	  android:requestLegacyExternalStorage="true"
@@ -107,7 +110,9 @@
                FIXME-8 nothing
 	  android:icon="@drawable/icon4"
 	  android:roundIcon="@drawable/icon4"
-                FIXME-29
+                FIXME-31
+          android:roundIcon="@mipmap/ic_launcher_round"
+          tools:targetApi="31" 
 	  -->
 
 	  <!-- android:screenOrientation="portrait" -->
@@ -194,6 +199,7 @@
         <!-- activity android:name=".DeviceList"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity -->
 
@@ -222,6 +228,7 @@
         <!-- activity android:name=".SketchWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />

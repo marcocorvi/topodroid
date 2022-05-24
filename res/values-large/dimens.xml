@@ -42,7 +42,7 @@
   <string name="dimmx">3</string> <!-- integer -->
   <string name="dimmy">1</string>
 
-  <string name="dimorientation" translatable="false">40</string>
+  <!-- string name="dimorientation" translatable="false">40</string -->
 
   <string name="size_factor_xp" translatable="false">4.0</string>
   <string name="size_factor_yp" translatable="false">4.0</string>

@@ -14,7 +14,7 @@
     android:layout_height="fill_parent"
     >
 
-  <LinearLayout android:id="@+id/layout0"
+  <LinearLayout android:id="@+id/layout1"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -49,13 +49,13 @@
       style="@style/edit_text_light"
      android:layout_width="match_parent"
      android:layout_height="wrap_content"
-     android:layout_below="@id/layout0"
+     android:layout_below="@id/layout1"
      android:hint="@string/comment"
      android:singleLine="true"
   />
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout1"
+    android:layout_below="@id/comment"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"

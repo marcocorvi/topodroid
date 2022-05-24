@@ -2,7 +2,7 @@ How to build TopoDroid-X with Android Studio
 
 [1] create an empty Studio project with name com.topodroid.TDX
 
-[2] copy the src/com/topodroid folder to app/src/main/java/topodroid
+[2] copy the src/com/topodroid folder to app/src/main/java/com/topodroid
 
 [3] copy the res/* subfolders to app/src/main/res
 
@@ -12,7 +12,7 @@ How to build TopoDroid-X with Android Studio
 
 [5] copy AndroidManifest to app/src/main
 
-[6] edit app/src/build.gradle:
+[6] edit app/build.gradle:
   - remove all dependencies
   - remove testInstrumentationRunner
   - change minSdk to 18
@@ -26,3 +26,8 @@ timings
 
 clean   27 s
 build   52 s
+
+full-build      8 mimnutes
+sign apk        1'40"
+install and run 1'24" INSTALL_PARSE_FAILED_NO_CERTIFICATES
+
