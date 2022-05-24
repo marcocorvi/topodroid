@@ -1029,8 +1029,12 @@ public class MainWindow extends Activity
       do_check_bt = false;
       if ( DeviceUtil.hasAdapter() ) {
         if ( TDSetting.mCheckBT == 1 && ! DeviceUtil.isAdapterEnabled() ) {    
-          Intent enableIntent = new Intent( DeviceUtil.ACTION_REQUEST_ENABLE );
-          startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
+          if ( TDandroid.BELOW_API_31 ) {
+            Intent enableIntent = new Intent( DeviceUtil.ACTION_REQUEST_ENABLE );
+            startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
+          } else {
+            TDToast.makeBad( R.string.no_bt );
+          }
         // } else {
           // nothing to do: scanBTDEvices(); is called by menu CONNECT
         }

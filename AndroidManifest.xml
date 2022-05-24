@@ -117,6 +117,7 @@
         <activity android:name=".MainWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.MAIN" />
@@ -135,30 +136,35 @@
         <activity android:name=".FixedActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name=".PlotReloadWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name=".GMActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name=".CalibActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name=".SurveyWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
@@ -166,6 +172,7 @@
 	  android:theme="@style/Theme.FullScreen"
           android:screenOrientation="fullSensor"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
@@ -173,12 +180,14 @@
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:windowSoftInputMode="stateHidden|adjustResize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name=".DeviceActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
@@ -191,6 +200,7 @@
         <activity android:name=".DrawingWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -201,6 +211,7 @@
         <activity android:name=".OverviewWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -221,6 +232,7 @@
         <activity android:name="com.topodroid.help.UserManualActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
           <intent-filter>
               <action android:name="android.intent.action.VIEW" />
@@ -232,6 +244,7 @@
 	  android:theme="@style/Theme.FullScreen"
           android:windowSoftInputMode="stateHidden"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
@@ -239,6 +252,7 @@
         <activity android:name=".CWDActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
@@ -246,6 +260,7 @@
         <activity android:name=".PtCmapActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
 	  <!-- android:screenOrientation="portrait" -->
         </activity>
@@ -253,22 +268,26 @@
         <activity android:name=".SensorListActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
         <activity android:name="com.topodroid.tdm.TdManagerActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
         <activity android:name="com.topodroid.tdm.TdmConfigActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
         <activity android:name="com.topodroid.tdm.TdmViewActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
         </activity>
 
@@ -300,6 +319,7 @@
           android:theme="@style/Theme.FullScreen"
           android:label="@string/app_name"
           android:configChanges="orientation|screenSize"
+          android:exported="false"
         ><!--
                 android:configChanges="orientation|screenSize" to react to screen orientation chnages
 	        android:requestLegacyExternalStorage="true"

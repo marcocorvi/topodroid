@@ -48,6 +48,7 @@ public class TDandroid
   final static public boolean BELOW_API_26 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.O );
   final static public boolean BELOW_API_29 = ( Build.VERSION.SDK_INT < Build.VERSION_CODES.Q );
   final static public boolean BELOW_API_30 = ( Build.VERSION.SDK_INT < 30 ) ; // Build.VERSION_CODES.R );
+  final static public boolean BELOW_API_31 = ( Build.VERSION.SDK_INT < 31 ) ; // Build.VERSION_CODES.S );
 
   // final static public boolean ABOVE_API_16 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.JELLYBEAN );
   final static public boolean ABOVE_API_21 = ( Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP );
@@ -65,6 +66,7 @@ public class TDandroid
   static final String[] perms = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
+      // android.Manifest.permission.BLUETOOTH_CONNECT, // API-31
       // android.Manifest.permission.INTERNET,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -77,6 +79,7 @@ public class TDandroid
   static final String[] permNames = {
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
+      // "BLUETOOTH_CONNECT", // API-31
       // "INTERNET",
       "WRITE_EXTERNAL_STORAGE",
       // "READ_EXTERNAL_STORAGE",
@@ -89,13 +92,14 @@ public class TDandroid
   // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
-  // private static final int PERM_BT       = 0;
-  // private static final int PERM_BT_ADMIN = 1;
-  // private static final int PERM_STORAGE  = 2;
-  // private static final int PERM_LOCATION = 3;
-  private static final int PERM_CAMERA   = 4;
-  // private static final int PERM_AUDIO    = 5;
-  // private static final int PERM_MEDIA    = 6;
+  // private static final int PERM_BT         = 0;
+  // private static final int PERM_BT_ADMIN   = 1;
+  // private static final int PERM_BT_CONNECT = ;
+  // private static final int PERM_STORAGE    = 2;
+  // private static final int PERM_LOCATION   = 3;
+  private static final int PERM_CAMERA     = 4;
+  // private static final int PERM_AUDIO      = 5;
+  // private static final int PERM_MEDIA      = 6;
 
   static final int NR_PERMS_D = 3;
   static final int NR_PERMS   = 6;
@@ -128,7 +132,7 @@ public class TDandroid
   }
 
   static boolean MustRestart = false; // whether need to restart app
-  static boolean[] GrantedPermission = { false, false, false, false, false, false };
+  static boolean[] GrantedPermission = { false, false, false, false, false, false, false };
 
   // number of times permissions are requested
 
@@ -393,6 +397,7 @@ public class TDandroid
     // TDLog.Log( LOG_PERM, "check bluetooth" );
     TDLog.v("PERM " + "Check bluetooth ");
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
+        // && ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH_CONNECT ) == PackageManager.PERMISSION_GRANTED ) // API-31
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 
