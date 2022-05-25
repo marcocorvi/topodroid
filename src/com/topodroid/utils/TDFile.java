@@ -638,7 +638,7 @@ public class TDFile
   }
 
   /** delete a TopoDroid folder
-   * @param pathname   full pathname of the folder to delete
+   * @param dirname   full pathname of the folder to delete
    * @return true if the folder has been deleted
    */
   public static boolean deleteDir( String dirname ) 
@@ -695,7 +695,7 @@ public class TDFile
   }
 
   /** creates an "extrenal" folder
-   * @param pathname    folder pathname
+   * @param type    folder pathname
    */
   public static File makeExternalDir( String type )
   {
@@ -735,7 +735,7 @@ public class TDFile
 
   /** rename a TopoDroid file to another TopoDroid file
    * @param oldname  pathname of TopoDroid file
-   * @param nename   pathname of the target file 
+   * @param newname   pathname of the target file
    */
   public static boolean renameTopoDroidFile( String oldname, String newname )
   { 
@@ -746,7 +746,7 @@ public class TDFile
 
   /** rename a temporary file to a TopoDroid filE
    * @param oldname  pathname of temporary file
-   * @param nename   pathname of the target file 
+   * @param newname   pathname of the target file
    */
   public static boolean renameExternalTempFile( String oldname, String newname )
   { 

@@ -35,6 +35,7 @@ signed:
 	ls -l $(APPVERSION).apk
 	md5sum $(APPVERSION).apk
 	mv $(APPVERSION).apk $(APPVERSION)-$(TARGET_SDK).apk
+	rm TopoDroidX-release-keysigned.apk.idsig
 
 signed-29:
 	./howto/target.sh 29

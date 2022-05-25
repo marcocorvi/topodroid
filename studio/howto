@@ -19,7 +19,18 @@ How to build TopoDroid-X with Android Studio
   - change targetSdk to 29
   - set applicationId to com.topodroid.TDX
 
-[7] in the run start the activity com.topodroid.TDX.MainWindow
+[7] in Gradle,scripts/gradle.properties
+  android.useAndroidX=false
+
+[8] in the run start the activity com.topodroid.TDX.MainWindow
+
+[9] to include native libs - in build.gradle
+  externalNativeBuild {
+    ndkBuild {
+      path="/path/to/Android.mk"
+    }
+  }
+  however there are problems ... it would be nice to link the libs already compiled
 
 --------------------------------------------------------------
 timings

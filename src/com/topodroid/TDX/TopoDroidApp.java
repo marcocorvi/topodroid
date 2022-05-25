@@ -1042,7 +1042,7 @@ public class TopoDroidApp extends Application
 
   /** set the current work directoty
    * @param cwd current work directory
-   * @param cbd current base directory (UNUSED)
+   // * @param cbd current base directory (UNUSED)
    */
   public static void setCWD( String cwd /* , String cbd */ )
   {
