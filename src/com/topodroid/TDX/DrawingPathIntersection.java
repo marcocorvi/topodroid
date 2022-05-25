@@ -21,7 +21,7 @@ class DrawingPathIntersection // extends PointF
   float tt;         // intersection coordinate
 
   /** cstr
-   * @param path   path of intersecting shot
+   * @param path0  path of intersecting shot
    * @param t0     intersection abscissa
    */
   DrawingPathIntersection( DrawingPath path0, float t0 )

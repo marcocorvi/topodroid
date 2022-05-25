@@ -488,9 +488,9 @@ public class DXF
     printInt( pw2, 62, color );   // layer color
     printString( pw2, 6, linetype ); // linetype name
     // if ( mVersion13_14 ) {
-    //   printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
-    //   printInt( pw2, 370, -3 );      // lineweight enum value
-    //   printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
+    //   printInt( pw2, 330, 2 );       // soft-pointer id/handle to owner dictionary
+    //   printInt( pw2, 370, -3 );      // line-weight enum value
+    //   printString( pw2, 390, "F" );  // hard-pointer id/handle or plot style-name object
     //   // printInt( pw2, 347, 46 );
     //   // printInt( pw2, 348, 0 );
     // }
@@ -665,7 +665,7 @@ public class DXF
       printInt( pw, 91, 1 );            // nr. boundary paths (loops): 1
       // boundary data
         printInt( pw, 92, 7 );          // flag. 1:external 2:polyline 4:derived 8:text 16:outer
-        printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-arec 4:spline
+        printInt( pw, 72, 0 );          // not-polyline edge type (0: default) 1:line 2:arc 3:ellipse-area 4:spline
                                         // polyline: has-bulge
         printInt( pw, 73, 1 );          // is-closed flag
         printInt( pw, 93, npt );        // nr. of edges (only if not polyline) - nr. vertices (polyline) - maybe this is not necessary
@@ -757,8 +757,8 @@ public class DXF
       // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s%s  0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, x, y, z, 0 );
-      // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
-      // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
+      // printXYZ( pw, 0, 0, 1, 1 );   // second alignment (optional)
+      // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (optional 0 0 1)
       // printFloat( pw, 39, 0 );      // thickness (optional 0) 
       printFloat( pw, 40, scale );     // height
       // printFloat( pw, 41, 1 );      // scale X (optional 1)
@@ -768,7 +768,7 @@ public class DXF
       // printFloat( pw, 72, 0 );      // H-align (optional 0)
       // printFloat( pw, 73, 0 );      // V-align
       printString( pw, 1, label );    
-      // printString( pw, 7, style );  // style, optional (dftl STANDARD)
+      // printString( pw, 7, style );  // style, optional (default STANDARD)
 
       printAcDb( pw, -1, AcDbText );
     // }
@@ -798,7 +798,7 @@ public class DXF
     }
     writeString( out, 8, "0" );
     writeString( out, 2, name );
-    writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+    writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-const attr, 4=xref, 8=xref overlay,
     writeInt( out, 10, 0 ); 
     writeInt( out, 20, 0 ); 
     writeInt( out, 30, 0 ); 
@@ -860,7 +860,7 @@ public class DXF
       writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, BY_LAYER ); // 
 
       writeString( out, 9, "$MEASUREMENT" ); writeInt( out, 70, 1 ); // drawing units 1=metric
-      writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty drawing units 0=unitless 4=mm
+      writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // default drawing units 0=unit-less 4=mm
       writeString( out, 9, "$DIMASSOC" );    writeInt( out, 280, 0 ); // 0=no association
     }
     writeEndSection( out );
@@ -887,7 +887,7 @@ public class DXF
         handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
         writeString( out, 2, "*Active" ); // name
         writeInt( out, 70, 0 );  // flags:
-        writeXY( out, (int)xmin, (int)ymin, 0 ); // lower-left cormer
+        writeXY( out, (int)xmin, (int)ymin, 0 ); // lower-left corner
         writeXY( out, (int)xmax, (int)ymax, 1 ); // upper-right corner
         writeXY( out, (int)(xmin+xmax)/2, (int)(ymin+ymax)/2, 2 ); // center point
         writeXY( out, 0, 0, 3 );   // snap base-point
@@ -1099,7 +1099,7 @@ public class DXF
       writeString( out, 0, "APPID" );
       if ( mVersion9 ) { handle = 11; } // incremented before writing
       handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbRegAppTableRecord" );
-      writeString( out, 2, "ACAD" ); // applic. name
+      writeString( out, 2, "ACAD" ); // application name
       writeInt( out, 70, 0 );        // flag
     }
     writeEndTable( out );

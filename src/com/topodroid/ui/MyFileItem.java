@@ -5,7 +5,7 @@
  *
  * @brief Cave3D file list item
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -61,7 +61,7 @@ public class MyFileItem extends TextView
 
   /** cstr
    * @param context context
-   * @param listenr click listener
+   * @param listener click listener
    * @param text    display text
    * @param is_dir  whether this file item is a directory
    */
@@ -88,7 +88,7 @@ public class MyFileItem extends TextView
   // void resetBgColor() { setBackgroundColor( 0xff333333 ); }
 
   /** set the click listener
-   * @param listenr click listener
+   * @param listener click listener
    */
   public void setListener( OnClickListener listener ) { mListener = listener; }
 

@@ -5,7 +5,7 @@
  *
  * @brief 3D: coordinate system
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  */
 package com.topodroid.TDX;
@@ -32,7 +32,7 @@ public class Cave3DCS
   public boolean hasName() { return ( name != null ) && ( name.length() > 0 ); }
 
   /** check if the CS name is equal to a given name
-   * @param name   name
+   * @param cs_name   name
    * @return true if the name of this CS is not null, nor empty, and equal to the given name
    */
   // public boolean equals( Cave3DCS cs ) { return (cs != null) && equals( cs.name ); }

@@ -1,7 +1,7 @@
 /* @file MyCheckBox.java
  *
  * @author marco corvi
- * @date nsept 2015
+ * @date Sept 2015
  *
  * @brief TopoDroid checkbox button
  * --------------------------------------------------------

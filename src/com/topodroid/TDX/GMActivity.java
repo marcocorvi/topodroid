@@ -189,7 +189,7 @@ public class GMActivity extends Activity
   // -------------------------------------------------------------
 
   /** get the calibration algorithm
-   * @return the index of the calibration algoritm
+   * @return the index of the calibration algorithm
    */
   public int getAlgo() { return mAlgo; }
 
@@ -237,7 +237,7 @@ public class GMActivity extends Activity
       case CalibInfo.ALGO_NON_LINEAR:
         mCalibration = new CalibAlgoBH( 0, true );
         // FIXME set the calibration algorithm (whether non-linear or linear)
-        // mCalibration.setAlgorith( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
+        // mCalibration.setAlgorithm( mAlgo == 2 ); // CALIB_AUTO_NON_LINEAR
         break;
       // case CalibInfo.ALGO_MINIMUM:
       //   if ( TDLevel.overTester ) {
@@ -385,7 +385,7 @@ public class GMActivity extends Activity
                                    ave0, std0, ave1, std1, err1, err2, errmax, name, TDInstance.calib ).show();
   }
 
-  /** compute the error stats of the data of this calibration using the coeffiecients of another calibration
+  /** compute the error stats of the data of this calibration using the coefficients of another calibration
    * @param  calib    calibration (algorithm)
    * @param  list     calibration data
    * @param  errors   [output] errors 
@@ -606,7 +606,7 @@ public class GMActivity extends Activity
 
   /** refresh the display
    * @param nr    calibration result
-   * @param toast wheter to toast a message
+   * @param toast whether to toast a message
    */
   @Override
   public void refreshDisplay( int nr, boolean toast )
@@ -791,7 +791,7 @@ public class GMActivity extends Activity
         TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.calib_gm_undelete,
           new DialogInterface.OnClickListener() {
             @Override public void onClick( DialogInterface dialog, int btn ) {
-              // TDLog.Log( TDLog.LOG_INPUT, "calib delite" );
+              // TDLog.Log( TDLog.LOG_INPUT, "calib delete" );
               deleteGM( false );
             }
           }
@@ -823,7 +823,7 @@ public class GMActivity extends Activity
 
     // mHandler = new ConnHandler( mApp, this );
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder(true);
+    mListView.setEmptyPlaceholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mNrButton1 = 5;
@@ -900,7 +900,7 @@ public class GMActivity extends Activity
     }
   }
 
-  /** check if the activity is finisshing - from interface ICoeffDisplayer
+  /** check if the activity is finishing - from interface ICoeffDisplayer
    * @return true if this activity is finishing
    */
   public boolean isActivityFinishing() { return this.isFinishing(); }
@@ -1035,7 +1035,7 @@ public class GMActivity extends Activity
 
     } else if ( b == mButton1[BTN_GROUP] ) { // GROUP
       if ( TDInstance.cid >= 0 ) {
-        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: includde negative-grp
+        List< CBlock > list = mApp_mDData.selectAllGMs( TDInstance.cid, 0, true ); // true: include negative-grp
         if ( list.size() >= 16 ) {
           (new GMGroupsDialog( this, this )).show();
             // // ( TDSetting.mGroupBy == TDSetting.GROUP_BY_DISTANCE )?  getResources().getString( R.string.group_policy_distance ) :
@@ -1103,7 +1103,7 @@ public class GMActivity extends Activity
     }
   }
 
-  /** upload the caibration coeffs
+  /** upload the calibration coeffs
    * @param delta   maximum calibration data angle error
    * @param coeff   calibration coefficients
    * @param mode    ...
@@ -1281,7 +1281,7 @@ public class GMActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -1357,7 +1357,7 @@ public class GMActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

@@ -24,7 +24,7 @@ import com.topodroid.TDX.SurveyInfo;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Stack;
-import java.util.Locale;
+// import java.util.Locale;
 import java.util.HashMap;
 
 public class TDNum
@@ -47,13 +47,13 @@ public class TDNum
 
   // public void dump()
   // {
-  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "TDNum Stations:" );
+  //   TDLog.Log( TDLog.LOG_NUM, "TDNum Stations:" );
   //   for ( NumStation st : mStations ) {
-  //     TDLog.Log( TopoDroiaLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
+  //     TDLog.Log( TDLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
-  //   TDLog.Log( TopoDroiaLog.LOG_NUM, "Shots:" );
+  //   TDLog.Log( TDLog.LOG_NUM, "Shots:" );
   //   for ( NumShot sh : mShots ) {
-  //     TDLog.Log( TopoDroiaLog.LOG_NUM, "   From: " + sh.from.name + " To: " + sh.to.name );
+  //     TDLog.Log( TDLog.LOG_NUM, "   From: " + sh.from.name + " To: " + sh.to.name );
   //   }
   // } 
 
@@ -756,11 +756,11 @@ public class TDNum
     return sh;
   }
 
-  /** initalize the list of shots and splays from the list of survey data
+  /** initialize the list of shots and splays from the list of survey data
    * @param data     survey data
    * @param shots    (temporary) legs
    * @param splays   (temporary) splays
-   * @note mLastLeg remains after the shots have been initalized
+   * @note mLastLeg remains after the shots have been initialized
    */
   private void initShots( List< DBlock > data, List< TriShot > shots, List< TriSplay > splays )
   {
@@ -1263,7 +1263,7 @@ public class TDNum
           ++ nbck;
         }
       }
-      if ( nbck > 0 ) {  // station_anomaly must be subtracted to mearured bearing to get corrected bearing
+      if ( nbck > 0 ) {  // station_anomaly must be subtracted to measured bearing to get corrected bearing
         anomaly = bbck/nbck - bfwd/nfwd - 180;  // station_anomaly = <backward> - <forward> - 180
         if ( anomaly < -180 ) anomaly += 360;
       }
@@ -1628,7 +1628,7 @@ public class TDNum
   // Weighting the compensations.
   // In the incidence matrix instead of the integers, 0, +1, -1, put the weight of the branch 
   // (eg, the length) multiplied by the integer.
-  // Then the closure error of C(i) is distributed anong the branches with the weight,
+  // Then the closure error of C(i) is distributed among the branches with the weight,
   //    dB'(j) = w(B(j)) * dB(j)
   //
   private void compensateLoopClosure( ArrayList< NumNode > nodes, ArrayList< NumShot > shots )
@@ -1855,7 +1855,7 @@ public class TDNum
   /** compute the 3D vector of a point along a leg
    * @param s     abscissa along the leg: 0 = FROM station, 1 = TO station
    * @param blk   leg
-   * N.B. offset for geocoord of origin must be handled by caller
+   * N.B. offset for geo-coord of origin must be handled by caller
    */
   public TDVector getCave3Dz( float s, DBlock blk )
   {
@@ -1887,7 +1887,7 @@ public class TDNum
     return ret;
   }
 
-  /** recetner the survey about the middle 
+  /** recenter the survey about the middle
    * @note used only by the projection dialog
    */
   public void recenter()

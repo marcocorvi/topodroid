@@ -12,7 +12,7 @@
 package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDandroid;
 
 // import java.lang.Math;
@@ -28,7 +28,7 @@ import java.util.Comparator;
 import java.util.Collections;
 import java.time.DateTimeException; // API-26
 
-import android.content.Context;
+// import android.content.Context;
 
 public class TDUtil
 {
@@ -188,7 +188,7 @@ public class TDUtil
 
   /** @return the current date as a Polygon float
    */
-  public static float getDatePlg( ) // Polygog style date
+  public static float getDatePlg( ) // Polygon style date
   {
     Calendar c = new GregorianCalendar();
     int y = c.get( Calendar.YEAR );

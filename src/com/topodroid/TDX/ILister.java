@@ -43,7 +43,7 @@ public interface ILister
    * 
    * effects:
    * DrawingWindow: change button[0] background 
-   * GMACtivity: nothing
+   * GMActivity: nothing
    * PhotoActivity: nothing
    * ShotWindow: change button[0] background
    * SketchWindow: nothing (TODO)

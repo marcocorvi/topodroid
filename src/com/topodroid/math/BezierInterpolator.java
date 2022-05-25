@@ -253,7 +253,7 @@ public class BezierInterpolator
     float[] u = chordLengthParameterize( d, first, last );
     bezCurve = generateBezier( d, first, last, u, tHat1, tHat2 );
   
-    /*  Find max deviation (max fittin error) of points to fitted curve */
+    /*  Find max deviation (max fitting error) of points to fitted curve */
     float maxError = bezCurve.computeMaxError( d, first, last, u );
     if (maxError < error) {
       insertBezierCurve( bezCurve );
@@ -261,7 +261,7 @@ public class BezierInterpolator
     }
   
   
-    /*  If error not too large, try some reparameterization and iteration */
+    /*  If error not too large, try some re-parametrization and iteration */
     if (maxError < iterationError) {
       for (int i = 0; i < maxIterations; i++) {
         bezCurve.reparameterize(d, first, last, u);

@@ -259,7 +259,7 @@ public class DrawingDxf
     DXF.printString( pw, 8, layer );
     DXF.printString( pw, 6, DXF.lt_continuous );
     DXF.printFloat( pw, 48, 1.0f ); // scale 
-    DXF.printInt( pw, 60, 0 ); // visibilty (0: visible, 1: invisible)
+    DXF.printInt( pw, 60, 0 ); // visibility (0: visible, 1: invisible)
     DXF.printInt( pw, 66, 1 ); // group 1: "entities follow" flag
     // DXF.printInt( pw, 67, 0 ); // in model space [default]
     DXF.printXYZ( pw, 0, 0, 1, 200 ); // normal vector
@@ -519,7 +519,7 @@ public class DrawingDxf
           }
           // DXF.writeString( out, 8, "P_" + th_name );
           DXF.writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
-          DXF.writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+          DXF.writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-const attr, 4=xref, 8=xref overlay,
                                         // 16=ext. dependent, 32=ext. resolved (ignored), 64=referenced xref (ignored)
           DXF.writeXYZ( out, 0, 0, 0, 0 );
           // out.write( pt.getDxf() );

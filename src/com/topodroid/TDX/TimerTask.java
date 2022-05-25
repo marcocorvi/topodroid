@@ -230,7 +230,7 @@ class TimerTask extends AsyncTask<String, Integer, Long >
   private void computeBearingAndClino( )
   {
     // TDLog.Log( TDLog.LOG_PHOTO, "Timer task compute B & C" );
-    // TDLog.v("Gravity " + mValGrv[0] + " " + mValGrv[1] + " " + mValGrv[2] + " Magn " + mValMag[0] + " " + mValMag[1] + " " + mValMag[2] );
+    // TDLog.v("Gravity " + mValGrv[0] + " " + mValGrv[1] + " " + mValGrv[2] + " Magnetic" + mValMag[0] + " " + mValMag[1] + " " + mValMag[2] );
     TDVector g = new TDVector( mValGrv[0], mValGrv[1], mValGrv[2] ); // -G: X-right, Y-forward, Z-upward
     TDVector m = new TDVector( mValMag[0], mValMag[1], mValMag[2] ); //  M:
     g.normalize();

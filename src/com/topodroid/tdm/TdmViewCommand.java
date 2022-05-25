@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager drawing: commands manager
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,12 +15,12 @@ import android.graphics.Canvas;
 import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.graphics.PointF;
-import android.graphics.Path;
+// import android.graphics.PointF;
+// import android.graphics.Path;
 // import android.graphics.Path.Direction;
 import android.os.Handler;
 
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 // import java.util.Locale;
 import java.util.Collections;

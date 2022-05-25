@@ -51,11 +51,11 @@ class ImportParser
    */
   public int getSplayNumber()   { return splays.size(); }
 
-  /** @return the arrys of legs
+  /** @return the arrays of legs
    */
   ArrayList< ParserShot > getShots() { return shots; }
 
-  /** @return the arrys of splays
+  /** @return the arrays of splays
    */
   ArrayList< ParserShot > getSplays() { return splays; }
 
@@ -184,7 +184,7 @@ class ImportParser
 
   /** @return the input reader
    * @param isr  input stream
-   * @param filename file full pathname (userd if the stream is null)
+   * @param filename file full pathname (used if the stream is null)
    */
   static BufferedReader getBufferedReader( InputStreamReader isr, String filename )
   {

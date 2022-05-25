@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2019
  *
- * @brief TopoDroid drawing: shapefile oject
+ * @brief TopoDroid drawing: shapefile object
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -62,7 +62,7 @@ class ShpObject
   // static double yWorld( double y ) { return (y-DrawingUtil.CENTER_Y)*SCALE; }
 
   int geomType; // geom type
-  int nr;   // nuber of objects
+  int nr;   // number of objects
   String subdir;
   String name; // file name
   // String path; // file path 
@@ -340,7 +340,7 @@ class ShpObject
 			      // 0x83 File with DBT, dBase III+ with memo
 			      // 0x87 Visual Objects for dBase III with memo
 			      // 0x8b dBase IV with memo
-			      // 0x8e dBasde IV with SQL table
+			      // 0x8e dBase IV with SQL table
 			      // 0xb3 .dvb and .dbt memo
 			      // 0xe5
 			      // 0xf5 FoxPro with memo
@@ -389,7 +389,7 @@ class ShpObject
       for (k=0; k<7; ++k ) dbfBuffer.put( BYTE0 ); // reserved
       dbfBuffer.put( BYTE0 );           // key: 0 no, 1 yes
     }
-    dbfBuffer.put( (byte)0x0d ); // (32+32*n_fld) header ternimator
+    dbfBuffer.put( (byte)0x0d ); // (32+32*n_fld) header terminator
     // no FoxPro data container [264 bytes]
 
     // // field property struct

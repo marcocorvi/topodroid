@@ -83,7 +83,7 @@ public class SymbolPoint extends Symbol
     return false;
   }
 
-  /** @return the point orientation angle [degrres]
+  /** @return the point orientation angle [degrees]
    */
   @Override public int getAngle() { return (int)mOrientation; } 
 
@@ -184,7 +184,7 @@ public class SymbolPoint extends Symbol
     mLevel = level;
   }
 
-  /** rotate the orienttaion of the point symbol
+  /** rotate the orientation of the point symbol
    * @param a   rotation angle [degrees]
    */
   void rotateGradP( double a )
@@ -199,7 +199,7 @@ public class SymbolPoint extends Symbol
     }
   }
 
-  /** reset the orienttaion of the point symbol
+  /** reset the orientation of the point symbol
    */
   void resetOrientation()
   {

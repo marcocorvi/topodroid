@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid user manual actvity with a webview
+ * @brief TopoDroid user manual activity with a web-view
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -20,23 +20,23 @@ import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
-import java.io.File;
-import java.io.FileInputStream;
+// import java.io.File;
+// import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 
-import java.net.URI;
-import java.net.URL;
-import java.net.MalformedURLException;
+// import java.net.URI;
+// import java.net.URL;
+// import java.net.MalformedURLException;
 import java.util.Locale;
 
 import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
-import android.content.ActivityNotFoundException;
-import android.net.Uri;
+// import android.content.ActivityNotFoundException;
+// import android.net.Uri;
 
 import android.widget.TextView;
 import android.widget.ImageView;
@@ -50,7 +50,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 import android.webkit.WebView;
-import android.webkit.WebSettings;
+// import android.webkit.WebSettings;
 import android.webkit.WebViewClient;
 
 public class UserManualActivity extends Activity

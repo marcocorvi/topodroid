@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager cave-project object
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,7 +18,7 @@ import com.topodroid.utils.TDUtil;
 
 // import java.io.File;
 import java.io.IOException;
-import java.io.FileNotFoundException;
+// import java.io.FileNotFoundException;
 // import java.io.FileWriter;
 // import java.io.FileReader;
 import java.io.BufferedReader;
@@ -26,9 +26,9 @@ import java.io.BufferedWriter;
 import java.io.PrintWriter;
 
 import java.util.ArrayList;
-import java.util.Date;
+// import java.util.Date;
 // import java.text.SimpleDateFormat;
-import java.util.Locale;
+// import java.util.Locale;
 import java.util.Iterator;
 
 class TdmConfig extends TdmFile

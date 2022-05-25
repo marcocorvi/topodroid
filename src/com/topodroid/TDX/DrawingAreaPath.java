@@ -45,7 +45,7 @@ import java.util.Locale;
 public class DrawingAreaPath extends DrawingPointLinePath
 {
   // private static int area_id_cnt = 0;
-  // private statis String makeId() 
+  // private static String makeId()
   // {
   //   ++ area_id_cnt;
   //   String ret = "a" + area_id_cnt;
@@ -281,7 +281,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
 
   private void resetPathPaint()
   {
-    // TDLog.v( "arae path reset paint orientation " + mOrientation );
+    // TDLog.v( "area path reset paint orientation " + mOrientation );
     // Bitmap bitmap = BrushManager.getAreaBitmap( mAreaType );
     // if ( bitmap != null )
     if ( mLocalShader != null ) {

@@ -82,7 +82,7 @@ public class DrawingLinePath extends DrawingPointLinePath
 
   /** factory: deserialize a line from a data stream
    * @param version   serialized version
-   * @param dis       data inut stream
+   * @param dis       data input stream
    * @param x         X coord
    * @param y         Y coord
    */
@@ -340,7 +340,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
-  /** set the reversed attriobute
+  /** set the reversed attribute
    * @param reversed   new reversed attribute
    */
   void setReversed( boolean reversed )
@@ -353,7 +353,7 @@ public class DrawingLinePath extends DrawingPointLinePath
     }
   }
 
-  /** flip the reversed attriobute
+  /** flip the reversed attribute
    */
   void flipReversed() 
   {
@@ -389,7 +389,7 @@ public class DrawingLinePath extends DrawingPointLinePath
 
   /** draw the line with the specified paint
    * @param canvas   canvas
-   * @praam matrix   transform matrix
+   * @param matrix   transform matrix
    * @param bbox     clipping rectangle
    * @param paint    paint
    *

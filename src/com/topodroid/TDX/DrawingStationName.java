@@ -146,7 +146,7 @@ public class DrawingStationName extends DrawingPointPath
     }
   }
 
-  /** clear the XXection
+  /** clear the XSection
    */
   void resetXSection( ) { mXSectionType = PlotType.PLOT_NULL; }
 

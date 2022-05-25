@@ -17,9 +17,9 @@ import com.topodroid.ui.TDLayout;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDLevel;
-import com.topodroid.TDX.TDToast;
-import com.topodroid.TDX.TDPath;
-import com.topodroid.TDX.TopoDroidApp;
+// import com.topodroid.TDX.TDToast;
+// import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TopoDroidApp;
 // import com.topodroid.TDX.CWDActivity;
 import com.topodroid.TDX.R;
 
@@ -27,7 +27,7 @@ import android.content.Intent;
 import android.content.Context;
 import android.content.SharedPreferences;
 // import android.content.res.Resources;
-import android.content.res.Configuration;
+// import android.content.res.Configuration;
 
 import android.os.Bundle;
 import android.app.Activity;
@@ -341,9 +341,9 @@ public class TDPrefActivity extends Activity
     }
   }
 
-  /** link a subscreen preference
-   * @param pref_name   preferece name
-   * @param category    preferece catagory
+  /** link a sub-screen preference
+   * @param pref_name   preference name
+   * @param category    preference category
    */
   private void linkPreference( String pref_name, int category )
   {
@@ -360,7 +360,7 @@ public class TDPrefActivity extends Activity
         @Override
         public void onClick( View v )
         {
-	  // TDLog.v( "PREF click on " + pref.name + " categoy " + category );
+	  // TDLog.v( "PREF click on " + pref.name + " category " + category );
           startActivity( intent );
         }
     } );

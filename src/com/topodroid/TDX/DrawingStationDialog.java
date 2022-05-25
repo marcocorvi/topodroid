@@ -78,7 +78,7 @@ class DrawingStationDialog extends MyDialog
 
     // cannot use disabled compass, otherwise there is no way to choose x-section at junction station
     // private boolean sensorCheck; // whether android sensor is enabled
-    private boolean mSensors;    // whether use comapss or delete x-section
+    private boolean mSensors;    // whether use compass or delete x-section
 
     DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
                           DrawingStationName station, DrawingStationPath path,

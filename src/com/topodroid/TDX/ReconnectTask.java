@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2013
  *
- * @brief TopoDroid Data downlod reconnection task
+ * @brief TopoDroid Data download reconnection task
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -21,7 +21,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
 {
   private DataDownloader mDownloader;
   private ReconnectTask  running;
-  private int mDataType; // data type, passed to data_douwnloader try_connect()
+  private int mDataType; // data type, passed to data_downloader try_connect()
   private int mDelay = 0;
 
   /** cstr
@@ -74,7 +74,7 @@ class ReconnectTask extends AsyncTask< String, Integer, Integer >
     unlock();
   }
 
-  /** aqcuire the lock
+  /** acquire the lock
    * @return true if successful
    */
   private synchronized boolean lock()

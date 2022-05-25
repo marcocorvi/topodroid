@@ -224,7 +224,7 @@ public class Archiver
   {
     // here zipname is the full absolute zipfile path
     // TDLog.v( "ZIP-compress files. subdir " + subdir );
-    ZipOutputStream zos = null;
+    ZipOutputStream zos; //  = null;
     boolean ret = true;
     // try {
       zos = new ZipOutputStream( new BufferedOutputStream( os ) );
@@ -292,14 +292,14 @@ public class Archiver
     boolean ret = false;
     // TDLog.v( "ZIP-uncompress symbol type " + type + " prefix " + prefix );
     File tempfile = TDFile.getExternalFile( null, "tmp.zip" );
-    FileOutputStream fout = null;
+    FileOutputStream fout; // = null;
     int c;
     byte[] sbuffer = new byte[4096];
     try { 
       fout = new FileOutputStream( tempfile );
       while ( ( c = zin.read( sbuffer ) ) != -1 ) fout.write(sbuffer, 0, c);
       fout.close();
-      fout = null;
+      // fout = null;
       // uncompress symbols zip
       ZipEntry sze;
       FileInputStream fis = new FileInputStream( tempfile );
@@ -344,7 +344,7 @@ public class Archiver
     return ret;
   }
 
-  /** archive the current syrvey - compress to the default zip file
+  /** archive the current survey - compress to the default zip file
    * @param mApp   application
    * @param uri   output URI (if null the default output zipfile is used)
    * @return true if successful
@@ -448,11 +448,10 @@ public class Archiver
     return ret;
   }
 
-  /** decompresss a zip entry
+  /** decompress a zip entry
    * @param zin    zip input stream
    * @param ze     zip entry
    * @param fout   entry output stream
-   * @note the zip inputstream must be aligned to the entry
    * @return ...
    */
   private static int decompressEntry( InputStream zin, ZipEntry ze, FileOutputStream fout )
@@ -541,7 +540,7 @@ public class Archiver
       // byte[] buffer = new byte[4096];
 
         // int nr_entry = 0;
-      Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FUXME "unchecked cast"
+      Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FIXME "unchecked cast"
       for ( ; entries.hasMoreElements(); ) {
         ze = entries.nextElement();
           // ++ nr_entry;
@@ -642,23 +641,23 @@ public class Archiver
     // mManifestPath = null;
     try {
       ZipInputStream zin = new ZipInputStream( fis );
-      int nr_entry = 0;
+      // int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {
         // TDLog.v( "ZIP get OK manifest: zentry name " + ze.getName() );
         if ( ze.getName().equals( "manifest" ) ) {
           // String pathname = TDPath.getManifestFile( );
-          // TDLog.v( "OK imanifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
+          // TDLog.v( "OK manifest: pathname " + pathname + " entry \"" + ze.getName() + "\"");
           // FileOutputStream fout = TDFile.getFileOutputStream( pathname );
           ByteArrayOutputStream bout = new ByteArrayOutputStream();
           int size = decompressEntry( zin, ze, bout );
-          // TDLog.Log( TDLog.LOG_ZIP, "Zip imanifest: \"" + ze.getName() + "\" size " + size );
+          // TDLog.Log( TDLog.LOG_ZIP, "Zip manifest: \"" + ze.getName() + "\" size " + size );
           if ( size > 0 ) {
             // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
             ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
             // mManifestPath = surveyname;
             // TDLog.v( "ZIP manifest: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest );
           } else {
-            // TDLog.v( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
+            TDLog.Error( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
           }
           // TDFile.deleteFile( pathname );
           if ( ok_manifest < 0 ) return ok_manifest;
@@ -676,7 +675,7 @@ public class Archiver
     return ok_manifest;
   }
 
-  // un-archive from an imput stream
+  // un-archive from an input stream
   // @param app        TopoDroid
   // @param fis        input stream
   // @param surveyname name of the survey (= new folder)
@@ -772,7 +771,7 @@ public class Archiver
       TDPath.setSurveyPaths( null );
     }
     if ( ok_manifest < 0 ) { // delete survey folder
-      // TODO
+      TDLog.Error("TODO manifest result " + ok_manifest );
     }
     // TDLog.v( "unarchive stream returns " + ok_manifest );
     return ok_manifest; // return 0 or 1

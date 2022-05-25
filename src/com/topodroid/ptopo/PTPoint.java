@@ -24,7 +24,7 @@ public class PTPoint
 
   PTPoint( int x, int y ) { _x=x; _y=y; }
 
-  // deafult copy cstr and assignment are ok
+  // default copy cstr and assignment are ok
 
   public int x() { return _x; } 
   public int y() { return _y; } 

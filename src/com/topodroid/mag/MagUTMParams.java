@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-// MAGtype_UTMParameters;
+// MAG-type_UTMParameters;
 class MagUTMParams {
   double Lambda;   // used in calculation
   double Easting;  // (X) in meters

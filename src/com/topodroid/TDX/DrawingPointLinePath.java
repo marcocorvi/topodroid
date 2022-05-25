@@ -311,7 +311,7 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal();
   }
 
-  /** get the line point after a gival line point
+  /** get the line point after a given line point
    * @param lp  given line point
    * @return the line point after the given line point, or null
    * @note not static because DrawingAreaPath
@@ -322,7 +322,7 @@ public class DrawingPointLinePath extends DrawingPath
     return lp.mNext;
   }
 
-  /** get the line point before a gival line point
+  /** get the line point before a given line point
    * @param lp  given line point
    * @return the line point before the given line point, or null
    * @note not static because DrawingAreaPath
@@ -391,7 +391,7 @@ public class DrawingPointLinePath extends DrawingPath
       -- decimation;
     }
     if ( mSize < min_size ) {
-      throw new RuntimeException("PointLine makeRedude: small final size " + mSize );
+      throw new RuntimeException("PointLine makeReduce: small final size " + mSize );
     } 
     retracePath();
   }
@@ -447,7 +447,7 @@ public class DrawingPointLinePath extends DrawingPath
     }    
   }
 
-  /** make the path a straight-segment joinin the first and the last points
+  /** make the path a straight-segment joining the first and the last points
    */
   void makeStraight( )
   {
@@ -710,7 +710,7 @@ public class DrawingPointLinePath extends DrawingPath
     computeUnitNormal(); // FIXME 
   }
 
-  /** computet the distance from the path to a point
+  /** compute the distance from the path to a point
    * @param x   X-coord of the point
    * @param y   Y-coord of the point
    * @return the distance from the path to the point

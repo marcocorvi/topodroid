@@ -247,7 +247,7 @@ class NumStationSet
           break;
         }
       }
-      // rebalance
+      // re-balance
       if ( ret ) insert_case1( n );
     }
     if ( ret ) mStations.add( v );
@@ -381,7 +381,7 @@ class NumStationSet
   private boolean isBlack( NumStationNode n ) { return ( n == null ) || n.color; }
   private boolean isRed( NumStationNode n ) { return ( n != null ) && (! n.color ); }
 
-  // prereq. n.parent != null
+  // prerequisite n.parent != null
   private boolean isLeft( NumStationNode n ) { return ( n == n.parent.left ); }
   private boolean isRight( NumStationNode n ) { return ( n == n.parent.right ); }
 

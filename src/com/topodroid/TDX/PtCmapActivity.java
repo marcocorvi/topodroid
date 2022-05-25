@@ -203,7 +203,7 @@ public class PtCmapActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.PtCmapActivity );
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;
@@ -217,7 +217,7 @@ public class PtCmapActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

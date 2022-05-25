@@ -74,15 +74,15 @@ class DrawingLineSectionDialog extends MyDialog
    * @param context   context
    * @param parent    parent window
    * @param h_section whether it is a xsection in profile view
-   * @param exist     whether the xsection exists
+   * @param exists    whether the xsection exists
    * @param id        ... (xsection name ?)
    * @param line      section line
-   * @param from      station behind - for single-leg xsection (definition only), shotd IDs (multileg xsection)
+   * @param from      station behind - for single-leg xsection (definition only), shotid IDs (multileg xsection)
    * @param to        viewed station (in front)
    * @param azimuth   azimuth of xsection plane - (definition only)
    * @param clino     clino of xsection plane - (definition only)
    * @param tt0       intersection abscissa - for single-leg xsection (definition only)
-   * @param center    intersection 3D centroid (E,S,V) - for nulti-leg xsections (definition only)
+   * @param center    intersection 3D centroid (E,S,V) - for multi-leg xsections (definition only)
    */
   DrawingLineSectionDialog( Context context,
                             DrawingWindow parent, // TopoDroidApp app, 

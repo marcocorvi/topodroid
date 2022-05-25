@@ -73,7 +73,7 @@ public class NumBranch
       float b = sh.bearing(); // degrees
       float c = sh.clino(); // degrees
       len += d;
-      // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRCETION
+      // d *= sh.mDirection * sh.mBranchDir; // FIXME DIRECTION
       d *= sh.mBranchDir;
       double v0 = d * TDMath.sinDd( c );
       v -= v0;

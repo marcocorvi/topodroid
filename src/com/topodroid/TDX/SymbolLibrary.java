@@ -98,7 +98,7 @@ public class SymbolLibrary
 
   boolean addSymbol( Symbol v )
   {
-    if ( v == null ) return false; // prereq.
+    if ( v == null ) return false; // prerequisite
     boolean ret = true;
     SymbolNode n = new SymbolNode( v );
     if ( mRoot == null ) {
@@ -129,7 +129,7 @@ public class SymbolLibrary
           break;
         }
       }
-      // rebalance
+      // re-balance
       if ( ret ) insert_case1( n );
     }
     if ( ret ) {
@@ -283,7 +283,7 @@ public class SymbolLibrary
   }
 
   /** make the list of enabled symbols starting from a palette
-   * @param symbols    filenaes of the palette
+   * @param symbols    filenames of the palette
    * @param clear      whether to clear the current enable list first, ie, disable, all symbols first
    */
   void makeEnabledListFromStrings( TreeSet<String> symbols, boolean clear )
@@ -298,7 +298,7 @@ public class SymbolLibrary
     makeEnabledList( );
   }
 
-  /** set the array of recently used symnols
+  /** set the array of recently used symbols
    * @param recent  array of recent symbols
    */
   void setRecentSymbols( Symbol[] recent )
@@ -340,7 +340,7 @@ public class SymbolLibrary
   static final private boolean BLACK = true;
   static final private boolean RED = false;
 
-  /** compare two strings, return -1, 0, +1 as strcmp
+  /** compare two strings, return -1, 0, +1 as strcmp()
    * @param s1   first string
    * @param s2   second string
    */
@@ -540,13 +540,13 @@ public class SymbolLibrary
 
   /** @return true if the node is LEFT child
    * @param n   node
-   * @note prereq.: the node parentis non-null
+   * @note prerequisite: the node parentis non-null
    */
   private boolean isLeft( SymbolNode n ) { return ( n == n.parent.left ); }
 
   /** @return true if the node is RIGHT child
    * @param n   node
-   * @note prereq.: the node parentis non-null
+   * @note prerequisite: the node parentis non-null
    */
   private boolean isRight( SymbolNode n ) { return ( n == n.parent.right ); }
 

@@ -5,7 +5,7 @@
  *
  * @brief Cave3D model renderer
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  */
 package com.topodroid.TDX;
@@ -48,7 +48,7 @@ class FractalResult
 
   /** compute the dimensions
    * @param r        3D model data
-   * @param do_splay whether to use splays
+   * @param do_splays whether to use splays
    * @param cell     initial cell size
    * @param mode     computation mode
    * @return false on failure
@@ -71,7 +71,7 @@ class FractalResult
     return true;
   }
 
-  // /** relese the fractal computer
+  // /** release the fractal computer
   //  */
   // void releaseComputer()
   // {

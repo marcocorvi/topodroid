@@ -166,7 +166,7 @@ class ShotEditMoreDialog extends MyDialog
     }
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    // mListView.setEmptyPlacholder( true );
+    // mListView.setEmptyPlaceholder( true );
     /* size = */ TopoDroidApp.setListViewHeight( mContext, mListView );
     mButtonView = new MyHorizontalButtonView( mButton );
     mListView.setAdapter( mButtonView.mAdapter );
@@ -244,7 +244,7 @@ class ShotEditMoreDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoSensorDialog onClick() " + b.getText().toString() );
 
     if ( b == mBTlrud ) { // AT-STATION LRUD
       float d = -1;
@@ -290,7 +290,7 @@ class ShotEditMoreDialog extends MyDialog
     } else if ( mButtonAudio != null && b == mButtonAudio ) {  // AUDIO
       mParent.startAudio( mBlk );
       dismiss();
-    } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOIR
+    } else if ( mButtonSensor != null && b == mButtonSensor ) { // SENSOR
       mParent.askSensor( mBlk );
       dismiss();
     // } else if ( b == mButtonExternal ) {

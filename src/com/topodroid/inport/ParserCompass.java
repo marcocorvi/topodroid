@@ -36,7 +36,7 @@ class ParserCompass extends ImportParser
 
   /** Compass parser
    * @param filename name of the file to parse
-   * @param apply_declination whether to aapply declination correction
+   * @param apply_declination whether to apply declination correction
    */
   ParserCompass( InputStreamReader isr, String filename, boolean apply_declination, boolean lrud, boolean leg_first ) throws ParserException
   {
@@ -88,7 +88,7 @@ class ParserCompass extends ImportParser
               mDate = String.format(Locale.US, "%04d.%02d.%02d",
                 Integer.parseInt( vals[4] ), Integer.parseInt( vals[2] ), Integer.parseInt( vals[3] ) );
             } catch ( NumberFormatException e ) {
-              TDLog.Error("Non-iteger date value");
+              TDLog.Error("Non-integer date value");
             }
             if ( vals.length >= 6 ) {
               int com = line.indexOf("COMMENT:");

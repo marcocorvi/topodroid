@@ -31,11 +31,11 @@ public class NumSplay extends NumSurveyPoint
    */
   public float getCosine() { return mCosine; }
 
-  /** @return the flag of the data blcok
+  /** @return the flag of the data block
    */
   public int getReducedFlag() { return mBlock.getReducedFlag(); }
 
-  /** @return the comment of the data blcok
+  /** @return the comment of the data block
    */
   public String getComment()  { return mBlock.mComment; }
 

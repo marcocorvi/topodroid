@@ -39,7 +39,7 @@ public class ImportTherionTask extends ImportTask
     TDLog.v( "import Therion task: " + str[0] + " survey " + str[1] );
     long sid = 0;
     try {
-      // if fr == null, str[0] is the filename, otherwoise it is the survey name
+      // if fr == null, str[0] is the filename, otherwise it is the survey name
       ParserTherion parser = new ParserTherion( isr, str[0], true ); // apply_declination = true
       if ( ! parser.isValid() ) return -2L;
       if ( mApp.get() == null ) return -1L;

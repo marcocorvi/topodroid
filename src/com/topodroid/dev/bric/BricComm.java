@@ -202,7 +202,7 @@ public class BricComm extends TopoDroidComm
 
   /** read a characteristics
    * @param srvUuid  service UUID
-   * @param chrtUuid charcateristics UUID
+   * @param chrtUuid characteristics UUID
    * @return true if successful
    * @note this is run by BleOpChrtRead
    */
@@ -214,19 +214,19 @@ public class BricComm extends TopoDroidComm
 
   /** write a characteristics
    * @param srvUuid  service UUID
-   * @param chrtUuid charcateristics UUID
+   * @param chrtUuid characteristics UUID
    * @return true if successful
    * @note this is run by BleOpChrtWrite
    */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   { 
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: write chsr " + chrtUuid.toString() );
+    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: write chrt " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes ); 
   }
 
   /** enlist a read from a characteristics
    * @param srvUuid  service UUID
-   * @param chrtUuid charcateristics UUID
+   * @param chrtUuid characteristics UUID
    * @return true if successful
    */
   public boolean enlistRead( UUID srvUuid, UUID chrtUuid )
@@ -389,7 +389,7 @@ public class BricComm extends TopoDroidComm
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: readed chrt " + uuid_str );
     int ret;
-    if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharcateristicChanged
+    if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharacteristicChanged
       mQueue.put( DATA_PRIM, bytes ); 
     } else if ( uuid_str.equals( BricConst.MEAS_META ) ) {
       mQueue.put( DATA_META, bytes );

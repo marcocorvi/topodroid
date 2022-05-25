@@ -47,7 +47,7 @@ public class CBlockAdapter extends ArrayAdapter< CBlock >
     mLayoutInflater = (LayoutInflater)ctx.getSystemService( Context.LAYOUT_INFLATER_SERVICE );
   }
 
-  // @return the CBlock item at the gival position in the array
+  // @return the CBlock item at the given position in the array
   public CBlock get( int pos ) { return items.get(pos); }
 
   // @NonNull

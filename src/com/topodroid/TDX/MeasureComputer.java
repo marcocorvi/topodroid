@@ -5,7 +5,7 @@
  *
  * @brief Cave3D station distances computer
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -92,7 +92,7 @@ class MeasureComputer extends AsyncTask< Void, Void, Integer >
   @Override
   protected void onPostExecute( Integer result )
   {
-    // String[] resstr = { "no path", "ok", "same staion", "no station", "no start", "no name", "no model", "skip" };
+    // String[] resstr = { "no path", "ok", "same station", "no station", "no start", "no name", "no model", "skip" };
     // TDLog.v("measure result: " + resstr[result] );
   
     switch ( result.intValue() ) {

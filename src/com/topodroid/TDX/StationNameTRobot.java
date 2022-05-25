@@ -13,6 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDLog;
 
 import java.util.List;
 import java.util.Set;
@@ -46,7 +47,9 @@ class StationNameTRobot extends StationName
           try {
             int r = Integer.parseInt( blk.mFrom.substring( 0, pos ) );
             if ( r > ret ) ret = r;
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("TopoROBOT parse error " + blk.mFrom );
+          }
         }
       }
       if ( blk.mTo.length() > 0 ) {
@@ -55,7 +58,9 @@ class StationNameTRobot extends StationName
           try {
             int r = Integer.parseInt( blk.mTo.substring( 0, pos ) );
             if ( r > ret ) ret = r;
-          } catch ( NumberFormatException e ) { }
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("TopoROBOT parse error " + blk.mTo );
+          }
         }
       }
     }

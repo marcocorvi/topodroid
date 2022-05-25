@@ -35,10 +35,11 @@ public class StationInfo
   public String getFlagCode() { return mFlag.getCode(); }
 
   /** cstr
-   * @param id       station ID
+   // * @param id       station ID
    * @param name     name (presentation string)
    * @param comment  comments (can be null)
    * @param flag     flag
+   * @param presentation ???
    */
   StationInfo( String name, String comment, long flag, String presentation )
   {

@@ -15,10 +15,10 @@ package com.topodroid.utils;
 // import com.topodroid.prefs.TDPrefActivity;
 // import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
-import com.topodroid.TDX.BrushManager;
-import com.topodroid.TDX.R;
+// import com.topodroid.TDX.BrushManager;
+// import com.topodroid.TDX.R;
 
-import android.content.Context;
+// import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 

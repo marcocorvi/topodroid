@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 
 // import java.io.File; // ONLY TEMP_FILE
 import java.io.FileOutputStream;
@@ -88,7 +88,7 @@ class ExportBitmapToFile extends AsyncTask<Void,Void,Boolean>
         */
         // TDLog.v( "export bitmap - path <" + TDPath.getPngFileWithExt( mFullName ) + ">" );
         // TDLog.v( "export bitmap - uri <" + ((mUri != null)? mUri.toString() : "null") + ">" );
-        FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getPrivateFileOutputStream( "expor", mFullName + ".png" );
+        FileOutputStream out = (pfd != null)? TDsafUri.docFileOutputStream( pfd ) : TDFile.getPrivateFileOutputStream( "export", mFullName + ".png" );
         // FileOutputStream out = TDsafUri.docFileOutputStream( pfd );
         mBitmap.compress(Bitmap.CompressFormat.PNG, 90, out);
         out.flush();

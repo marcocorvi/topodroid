@@ -1156,7 +1156,7 @@ public class ShotWindow extends Activity
     }
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder( true );
+    mListView.setEmptyPlaceholder( true );
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();

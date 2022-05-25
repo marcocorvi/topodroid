@@ -155,7 +155,7 @@ public class SensorListActivity extends Activity
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.SensorListActivity );
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;

@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;

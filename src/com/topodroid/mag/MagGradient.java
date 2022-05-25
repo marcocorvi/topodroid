@@ -20,7 +20,7 @@
 package com.topodroid.mag;
 
 
-// MAGtype_Gradient;
+// MAG-type_Gradient;
 class MagGradient
 {
     int UseGradient;

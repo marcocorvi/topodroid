@@ -134,8 +134,8 @@ class LoopUtil
     int[] permutation = new int[ ne ];
     independentColumns( A, nc, ne, permutation );
     // print( "Incidence matrix:", A, nc, ne ); 
-    // permutation[0] is the fisrt indep. column
-    // permutation[1] is the second indep. column
+    // permutation[0] is the first independent column
+    // permutation[1] is the second independent column
     // and so on
   
     // split incidence matrix in A-part and B-part

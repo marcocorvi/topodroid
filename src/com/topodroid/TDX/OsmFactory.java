@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.TDX.DPoint2D;
+// import com.topodroid.TDX.DPoint2D;
 
 import android.graphics.Bitmap;
 import android.graphics.Paint;
@@ -55,7 +55,7 @@ public class OsmFactory
 
     /** draw the path on a canvas
      * @param canvas    canvas
-     * @param point     drawing paint
+     * @param paint     drawing paint
      */
     void draw( Canvas canvas, Paint paint )
     {

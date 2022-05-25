@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-// MAGtype_Date;
+// MAG-type_Date;
 class MagDate
 {
     static private int[] MonthDays = { 0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31 };

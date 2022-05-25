@@ -15,17 +15,17 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.ui.ExifInfo;
 // import com.topodroid.prefs.TDSetting;
 
-import java.io.IOException;
-import java.util.List;
+// import java.io.IOException;
+// import java.util.List;
 
 import android.content.Context;
 
-import android.graphics.ImageFormat;
+// import android.graphics.ImageFormat;
 
-// API-21 use android.hardware.camera2 clases
+// API-21 use android.hardware.camera2 classes
 import android.hardware.SensorManager;
 import android.hardware.Camera;
-import android.hardware.Camera.CameraInfo;
+// import android.hardware.Camera.CameraInfo;
 import android.hardware.Camera.PreviewCallback;
 import android.hardware.Camera.PictureCallback;
 import android.hardware.Camera.ShutterCallback;
@@ -136,7 +136,7 @@ public class QCamDrawingSurface extends SurfaceView
       mOrientationListener.enable();
       int w = mContext.getResources().getDisplayMetrics().widthPixels;  
       int h = mContext.getResources().getDisplayMetrics().heightPixels;
-      // TDLog.v("QCAM diaplay " + w + " x " + h );
+      // TDLog.v("QCAM display " + w + " x " + h );
       if ( w > 1928 ) w = 1928;
       if ( h > 1080 ) h = 1080;
       setMinimumWidth(  w );
@@ -298,7 +298,7 @@ public class QCamDrawingSurface extends SurfaceView
   //     // if ( mOrientationListener != null ) mOrientationListener.enable( );
   //     startPreview();
   //     return true;
-  //   } catch ( RuntimeException e ) { // fail to connect to canera service
+  //   } catch ( RuntimeException e ) { // fail to connect to camera service
   //     if ( mCamera != null ) mCamera.release();
   //     mCamera = null;
   //     TDLog.Error( "QCAM error: " + e.getMessage() );

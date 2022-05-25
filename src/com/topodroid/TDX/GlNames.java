@@ -5,7 +5,7 @@
  *
  * @brief Cave3D station names
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -32,7 +32,7 @@ import java.util.ArrayList;
 
 public class GlNames extends GlShape
 {
-  private final static int NN = 6; // 2 trinagles (3 vertex per triangle)
+  private final static int NN = 6; // 2 triangles (3 vertex per triangle)
 
   static final int STATION_NONE  = 0;
   static final int STATION_POINT = 1;
@@ -607,7 +607,7 @@ public class GlNames extends GlShape
   private static int mUTextSizeHL;
   private static int mUColorHL;
 
-  // the point red highight has only the pointSize
+  // the point red highlight has only the pointSize
   private static int mpUMVPMatrixHL;
   private static int mpAPositionHL;
   private static int mpUPointSizeHL;

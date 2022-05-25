@@ -5,7 +5,7 @@
  *
  * @brief Model glTF exporter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -596,7 +596,7 @@ public class ExportGltf
   // COORDS_PER_VERTEX = 3;
   // OFFSET_VERTEX     = 0;
   // STRIDE_VERTEX     = 12; // Float.BYTES * COORDS_PER_VERTEX;
-  // @param min     minimun coord value
+  // @param min     minimum coord value
   // @param scale   (max - min)/2
   private int doExportNames( String filepath, GlNames names, MinMax minMax )
   {

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date june 2017
  *
- * @brief TopoDroid Delaunay Traingle side
+ * @brief TopoDroid Delaunay Triangle side
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

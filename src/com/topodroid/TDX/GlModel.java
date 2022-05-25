@@ -5,7 +5,7 @@
  *
  * @brief Cave3D model
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -165,7 +165,7 @@ public class GlModel
 
   /** set the width and the height
    * @param w  width
-   * @param h  heihght
+   * @param h  height
    */
   static void setWidthAndHeight( float w, float h ) 
   {
@@ -266,7 +266,7 @@ public class GlModel
     // GlSketch.reloadSymbols( TDPath.PATH_SYMBOL_POINT );
   }
 
-  /** rseet the leg/splay color modes
+  /** reset the leg/splay color modes
    */
   void resetColorMode()
   {
@@ -278,7 +278,7 @@ public class GlModel
     clearStationHighlight();
   }
   
-  /** clear the hight of the stations
+  /** clear the height of the stations
    */
   void clearStationHighlight()
   {
@@ -286,7 +286,7 @@ public class GlModel
     clearPath( );
   }
 
-  /** cycle throught the leg/splay color modes
+  /** cycle through the leg/splay color modes
    */
   synchronized void toggleColorMode() { 
     if ( glLegs != null ) {
@@ -534,7 +534,7 @@ public class GlModel
       // TDLog.v("clear path");
       synchronized( this ) { glPath = null; }
     }
-    // if ( gl_path_old != null ) gl_path_old.releaseBuffer(); // FIXME doesnot do anything
+    // if ( gl_path_old != null ) gl_path_old.releaseBuffer(); // FIXME does not do anything
     // if ( glPath != null ) glPath.logMinMax();
     return ret;
   }
@@ -654,7 +654,7 @@ public class GlModel
   // void prepareTemperatures()
   // {
   //   double inv_temp_zmax = prepareStationTemperatureDepth( mParser );
-  //   TDLog.v("Model prepare tempertures - inv zmax " + inv_temp_zmax );
+  //   TDLog.v("Model prepare temperatures - inv zmax " + inv_temp_zmax );
   //   glLegs.prepareTemperatureBuffer(  legsSurvey );
   //   glLegsS.prepareTemperatureBuffer( legsSurface );
   //   glLegsD.prepareTemperatureBuffer( legsDuplicate );
@@ -704,7 +704,7 @@ public class GlModel
     synchronized( this ) { glPoint = point; }
   }
 
-  /** prepare the surface texture: set the textute to the surface
+  /** prepare the surface texture: set the texture to the surface
    * @param texture   surface texture bitmap
    */
   void prepareTexture( Bitmap texture )
@@ -868,7 +868,7 @@ public class GlModel
     // TDLog.v("Model prepare full");
     modelCreated = false;
     if ( parser == null || parser.getShotNumber() == 0 ) {
-      TDLog.Error("Model Error. Cannot create model witout shots");
+      TDLog.Error("Model Error. Cannot create model without shots");
       return;
     }
     mParser = parser;

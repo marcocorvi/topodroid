@@ -62,7 +62,7 @@ class SketchAdapter extends ArrayAdapter< GlSketch >
   private class ViewHolder implements OnClickListener
   { 
     int      pos;
-    GlSketch mSketch;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
+    GlSketch mSketch;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
     TextView tvName;
     CheckBox cbShow;
     CheckBox cbDelete;

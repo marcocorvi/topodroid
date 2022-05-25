@@ -91,7 +91,7 @@ class TriShot
     // float ret = 0.0f;
     // for ( DBlock b : blocks ) ret += b.mLength; 
     // return ret / blocks.size();
-    return (float)mAvgLeg.length();
+    return mAvgLeg.length();
   }
 
   // horizontal length (good only for DATAMODE_NORMAL)
@@ -132,7 +132,7 @@ class TriShot
     // }
     // return TDMath.in360( ret/size );
 
-    float ret = (float)mAvgLeg.bearing();
+    float ret = mAvgLeg.bearing();
     if ( reversed == -1 ) { 
       // ret += 180; if (ret >= 360) ret -= 360;
       ret = TDMath.add180( ret );
@@ -153,7 +153,7 @@ class TriShot
     // for ( DBlock b : blocks ) ret += b.mClino;
     // return ret / blocks.size();
 
-    return (float)( reversed * mAvgLeg.clino() ); 
+    return ( reversed * mAvgLeg.clino() );
   }
 
   // void Dump()

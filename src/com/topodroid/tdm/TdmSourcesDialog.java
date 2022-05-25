@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager survey source dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -91,7 +91,7 @@ class TdmSourcesDialog extends MyDialog
     }
   }
 
-  /** respnd to user taps: if tapped OK button tell the config activity to add the selected surveys
+  /** respond to user taps: if tapped OK button tell the config activity to add the selected surveys
    * @param v tapped view
    */
   @Override

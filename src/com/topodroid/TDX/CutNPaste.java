@@ -12,6 +12,8 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import static android.view.Gravity.LEFT;
+
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
@@ -51,6 +53,9 @@ public class CutNPaste
   static private PopupWindow mPopup = null;
   static private WeakReference<EditText> mEditText;
 
+  /** dismiss the popup
+   * @return true is a popup has been dismissed
+   */
   static public boolean dismissPopup()
   {
     if ( mPopup != null ) {
@@ -61,6 +66,10 @@ public class CutNPaste
     return false;
   }
 
+  /** make a new popup
+   * @param context  context
+   * @param et       popup edit text
+   */
   static public void makePopup( final Context context, EditText et )
   {
     if ( mPopup != null ) {
@@ -88,7 +97,7 @@ public class CutNPaste
             mClipboardText = etext.getText().toString();
             etext.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -102,7 +111,7 @@ public class CutNPaste
           if ( etext != null ) {
             mClipboardText = etext.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
-            TDToast.makeGravity( str, Gravity.LEFT | Gravity.TOP );
+            TDToast.makeGravity( str, LEFT | Gravity.TOP );
           }
           dismissPopup();
         }
@@ -135,6 +144,13 @@ public class CutNPaste
     mPopup.showAsDropDown( et );
   }
 
+  /** make a button
+   * @param context  context
+   * @param text     button text
+   * @param color    button background color
+   * @param size     button size
+   * @return the created button
+   */
   static private Button makeButton( Context context, String text, int color, int size )
   {
     Button button = new Button( context );
@@ -154,6 +170,15 @@ public class CutNPaste
     return button;
   }
 
+  /** make a popup button
+   * @param context  context
+   * @param text     button text
+   * @param layout   ? layout ?
+   * @param w        button width
+   * @param h        button height
+   * @param listener button click listener
+   * @return the created button
+   */
   static public Button makePopupButton( Context context, String text,
                                  LinearLayout layout, int w, int h, View.OnClickListener listener )
   {
@@ -173,9 +198,13 @@ public class CutNPaste
   static private PopupWindow mPopupBT = null;
 
   /** show BT mPopup under button b
-   * @param b button
+   * @param context  context
+   * @param ilister  data lister
+   * @param app      TopoDroid app
+   * @param b        button
    * @param gm_data  if called from GM-activity
    * @param do_clear if add button to clear memory (BRIC only)
+   * @return the new popup
    */
   static public PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data, boolean do_clear )
   {
@@ -414,6 +443,9 @@ public class CutNPaste
     return mPopupBT;
   }
 
+  /** dismiss the BlueTooth popup
+   * @return true if success
+   */
   static public boolean dismissPopupBT()
   {
     if ( mPopupBT != null ) {

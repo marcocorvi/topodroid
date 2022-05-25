@@ -3,9 +3,9 @@
  * @author marco corvi
  * @date nov 2019
  *
- * @brief TopoDroid Manager adapter for the surveys input objetcs
+ * @brief TopoDroid Manager adapter for the surveys input objects
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,7 +21,7 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 import android.view.View;
 import android.view.ViewGroup;

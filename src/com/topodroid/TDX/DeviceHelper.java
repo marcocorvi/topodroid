@@ -1022,7 +1022,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
   /** @return a device tail index (useful only for DistoX v. 1 ?)
-   * @param addr  device address
+   * @param address  device address
    */
   int getDeviceTail( String address )
   { 
@@ -1046,7 +1046,7 @@ public class DeviceHelper extends DataSetObservable
   }
 
   /** get a device haed-tail indices (useful only for DistoX v. 1)
-   * @param addr       device address
+   * @param address       device address
    * @param head_tail  (output) head-tail pair
    */
   void getDeviceHeadTail( String address, int[] head_tail )

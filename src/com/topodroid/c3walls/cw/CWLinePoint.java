@@ -5,7 +5,7 @@
  *
  * @brief CW triangles intersection line-point
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -82,7 +82,7 @@ public class CWLinePoint extends Vector3D
   }
 
   /* FIXME
-  static CWLinePoint deserialize( DataInputStream dis ) thrpws IOException
+  static CWLinePoint deserialize( DataInputStream dis ) throws IOException
   {
     TODO
   }

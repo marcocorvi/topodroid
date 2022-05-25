@@ -79,7 +79,7 @@ class DrawingLabelDialog extends MyDialog
     }
   }
 
-  /** reset (clear) levels chcekboxes
+  /** reset (clear) levels checkboxes
    */
   private void setCBlayers()
   {

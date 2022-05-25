@@ -23,7 +23,7 @@ public class DBlock
   public long   mId;
   public long   mMillis;
   public long   mSurveyId;
-  public String mFrom;    // N.B. mfrom and mTo must be not null
+  public String mFrom;    // N.B. mFrom and mTo must be not null
   public String mTo;
   public double mLength;   // meters
   public double mBearing;  // degrees

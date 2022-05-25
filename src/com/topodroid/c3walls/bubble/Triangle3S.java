@@ -5,7 +5,7 @@
  *
  * @brief bubble algo: a triangle of points on the sphere
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -185,7 +185,7 @@ public class Triangle3S
   // a neighbor triangle contains a reversed side 
   public boolean hasNghb( Triangle3S tr ) { return getNgbh( tr ) != 0; }
 
-  // get the index of the side on which tr is neghbor, or 0 if not ngbh
+  // get the index of the side on which tr is neighbor, or 0 if not ngbh
   public int getNgbh( Triangle3S tr ) 
   {
     return tr.hasSide( p2, p1 ) ? 3
@@ -207,7 +207,7 @@ public class Triangle3S
     return null;
   }
 
-  // get the ngth triangle of side (pp1 -- pp2)
+  // get the neighbor triangle of side (pp1 -- pp2)
   public Triangle3S getTriangle( Point3S pp1, Point3S pp2 )
   {
     switch ( getSide( pp1, pp2 ) ) {
@@ -261,7 +261,7 @@ public class Triangle3S
     return normal.dotProduct( pt.difference(p1) );
   }
 
-  // volume of the tetrahedrom given the four vertices
+  // volume of the tetrahedron given the four vertices
   static public double volume( Vector3D v1, Vector3D v2, Vector3D v3, Vector3D v4 )
   {
     return volume( v2.difference(v1), v3.difference(v1), v4.difference(v1) );

@@ -21,7 +21,7 @@ package com.topodroid.mag;
 
 // import java.util.Locale;
 
-// MAGtype_LegendreFunction;
+// MAG-type_LegendreFunction;
 class MagLegendre
 {
   private int nTerms;

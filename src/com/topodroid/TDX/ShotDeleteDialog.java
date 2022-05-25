@@ -92,7 +92,7 @@ class ShotDeleteDialog extends MyDialog
   public void onClick(View v) 
   {
     Button b = (Button) v;
-    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoiSensorDialog onClick() " + b.getText().toString() );
+    // TDLog.Log(  TDLog.LOG_INPUT, "PhotoSensorDialog onClick() " + b.getText().toString() );
     if ( b == mButtonDelete ) {
       mParent.doDeleteShot( mBlk.mId, mBlk, TDStatus.DELETED, mCBleg.isChecked() );
     // } else if ( b == mButtonCancel ) {

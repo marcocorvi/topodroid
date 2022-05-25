@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-// MAGtype_SphericalHarmonicVariables
+// MAG-type_SphericalHarmonicVariables
 class MagHarmonic
 {
   private int nMax;

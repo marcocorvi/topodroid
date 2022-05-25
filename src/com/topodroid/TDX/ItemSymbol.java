@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
+// import com.topodroid.utils.TDColor;
 import com.topodroid.ui.ItemButton;
 // import com.topodroid.common.SymbolType;
 
@@ -136,7 +136,7 @@ class ItemSymbol
   //   mView.invalidate();
   // }
 
-  /** set the symbol orientatiomn angle
+  /** set the symbol orientation angle
    * @param angle   orientation angle [degree]
    */
   void setAngle( float angle )

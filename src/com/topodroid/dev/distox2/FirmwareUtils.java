@@ -82,9 +82,9 @@ public class FirmwareUtils
         TDLog.v( "failed read second block");
         return 0;
       }
-      if ( verifySignatureLandolf( buf ) == SIGNATURE_SIZE ) {
-        TDLog.v( "LANDOLT fw " + readFirmwareLandolf( buf ) );
-        return readFirmwareLandolf( buf );
+      if ( verifySignatureLandolt( buf ) == SIGNATURE_SIZE ) {
+        TDLog.v( "LANDOLT fw " + readFirmwareLandolt( buf ) );
+        return readFirmwareLandolt( buf );
       }
     } catch ( IOException e ) {
     } finally {
@@ -141,7 +141,7 @@ public class FirmwareUtils
       case 2512: return ( checksum == 0x1ecb8dc0 ); // continuous
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
-      case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magn calib matrix
+      case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
     }
     return false;
   }
@@ -154,7 +154,7 @@ public class FirmwareUtils
       TDLog.v( "device hw HEEB" );
       return HW_HEEB;
     }
-    if ( verifySignatureLandolf( signature ) == SIGNATURE_SIZE ) {
+    if ( verifySignatureLandolt( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
     }
@@ -190,7 +190,7 @@ public class FirmwareUtils
   //    od -x -j 2048 -N 64 <firmware_file>
   // use -j 4096 for 2.6 firmwares
   //
-  // Firmare21.bin
+  // Firmware21.bin
   // byte index     1 0   3 2   5 4 ...
   //      0004000  4803  4685  f003 <f834> 4800  4700 <08f5> 0800
   //      0004020 <0c40> 2000  2300  e002  2301  2200  46c0  b5f0
@@ -204,7 +204,7 @@ public class FirmwareUtils
   //      0010060  f835  f000  f834  4e24  f000  f830  1b00  1b49
   //
 
-  // sigmature is 64 bytes after the first 2048
+  // signature is 64 bytes after the first 2048
   //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
   // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
   //                             -12    d5    d5    d5    f5    f5    d5    d5    d5
@@ -220,12 +220,12 @@ public class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  // sigmature is 64 bytes after the first 4096
+  // signature is 64 bytes after the first 4096
   //                        2.61  2.63  2.63
   //                 13-12  5ba1  5da9  5dcd
   //                   -16    b8    c0    c0
   //
-  static final private byte[] signatureLandolf = {
+  static final private byte[] signatureLandolt = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x00, (byte)0xf0, (byte)0xa2, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xa1, (byte)0x5b, (byte)0x00, (byte)0x08,
     (byte)0xb8, (byte)0x13, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
@@ -258,11 +258,11 @@ public class FirmwareUtils
   }
 
   // @param buf   signature block at 4096-offset
-  private static int verifySignatureLandolf( byte[] buf )
+  private static int verifySignatureLandolt( byte[] buf )
   {
     for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
       if ( k==12 || k==13 || k==16) continue;
-      if ( buf[k] != signatureLandolf[k] ) return -k;
+      if ( buf[k] != signatureLandolt[k] ) return -k;
     }
     return SIGNATURE_SIZE; // success
   }
@@ -316,7 +316,7 @@ public class FirmwareUtils
   //                        261    263    264
   //                 12-13  a1 5b  a9 5d  cd 5d
   //                 16     b8     c0     c0
-  private static int readFirmwareLandolf( byte[] buf )
+  private static int readFirmwareLandolt( byte[] buf )
   {
     if ( buf[12] == (byte)0xa1 &&  buf[13] == (byte)0x5b && buf[16] == (byte)0xb8 ) return 2610;
     if ( buf[12] == (byte)0xa9 &&  buf[13] == (byte)0x5d && buf[16] == (byte)0xc0 ) return 2630;

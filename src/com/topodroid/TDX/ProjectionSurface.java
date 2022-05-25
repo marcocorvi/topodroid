@@ -62,7 +62,7 @@ public class ProjectionSurface extends SurfaceView
 
     /** cstr
      * @param context context
-     * @param attr    attributes
+     * @param attrs    attributes
      */
     public ProjectionSurface(Context context, AttributeSet attrs)
     {
@@ -175,7 +175,7 @@ public class ProjectionSurface extends SurfaceView
 
     /** add a splay
      * @param path   drawing splay path 
-     * @note called by DarwingActivity::addFixedLine
+     * @note called by DrawingActivity::addFixedLine
      */
     void addFixedSplayPath( DrawingSplayPath path ) { mCommandManager.addSplayPath( path ); }
 

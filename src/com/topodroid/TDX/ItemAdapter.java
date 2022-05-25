@@ -13,7 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.ui.ItemButton;
-import com.topodroid.common.SymbolType;
+// import com.topodroid.common.SymbolType;
 
 import java.util.ArrayList;
 
@@ -45,11 +45,11 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   // private boolean mOnClickReact = true;
 
   /** cstr
-   * @param ctx
+   * @param ctx     ...
    * @param parent  parent dialog
    * @param type    symbol type (POINT, LINE, AREA)
    * @param id      layout resource id
-   * @param items
+   * @param items   ...
    */
   ItemAdapter( Context ctx, IItemPicker parent, int type, int id, ArrayList< ItemSymbol > items )
   {
@@ -99,7 +99,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
    */
   private boolean isValid( int p ) { return p >= 0 && p < mItems.size() /* && p != mNonClick */ ; }
 
-  /** set anitem orientation
+  /** set an item orientation
    * @param pos    item position (index)
    * @param angle  orientation angle [degrees]
    */
@@ -120,7 +120,7 @@ class ItemAdapter extends ArrayAdapter< ItemSymbol >
   }
 
   /** @return the item at a certain position in the list of symbols 
-   * @param k  itemindex
+   * @param k  item index
    */
   ItemSymbol get( int k ) 
   { 

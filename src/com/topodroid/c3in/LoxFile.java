@@ -5,7 +5,7 @@
  *
  * @brief loch file parser
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -326,7 +326,7 @@ class LoxFile
     double[] c = new double[6];
     c[0]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // e0
     c[1]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // n0
-    c[2]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // e = e0 + C2 * i + C3 * j // not sure abot c3/c4
+    c[2]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // e = e0 + C2 * i + C3 * j // not sure about c3/c4
     c[3]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL;
     c[4]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL; // n = n0 + C4 * i + C5 * j
     c[5]  = Endian.toDoubleLEndian( recs, off ); off += Endian.SIZEDBL;

@@ -5,7 +5,7 @@
  *
  * @brief 3D Topo-GL activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 
 // import com.topodroid.TDX.TDandroid;
 
@@ -41,7 +41,7 @@ import com.topodroid.c3walls.cw.CWConvexHull;
 
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.prefs.TDPrefCat;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.help.HelpDialog;
 
@@ -51,23 +51,23 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
 // import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
-import java.io.FileInputStream;
+// import java.io.FileInputStream;
 import java.io.DataInputStream;
 import java.io.InputStreamReader;
 import java.io.DataOutputStream;
 import java.io.IOException;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import java.util.List;
-import java.util.Set;
-import java.util.Locale;
+// import java.util.Set;
+// import java.util.Locale;
 
-import android.os.Environment;
+// import android.os.Environment;
 import android.os.Build; // FINERPRINT and MODEL
 import android.os.Bundle;
 import android.os.Handler;
@@ -88,20 +88,20 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.content.pm.ConfigurationInfo;
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
+// import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager.NameNotFoundException;
 
 import android.provider.MediaStore;
 import android.database.Cursor;
 
 import android.graphics.RectF;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
+// import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnTouchListener;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnTouchListener;
 import android.view.View.OnClickListener;
 import android.view.View.OnLongClickListener;
 // import android.view.Menu;
@@ -111,7 +111,7 @@ import android.view.View.OnLongClickListener;
 import android.widget.Toast;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 // import android.widget.TextView;
 import android.widget.LinearLayout;
 import android.widget.ArrayAdapter;
@@ -119,14 +119,14 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 
 
-import android.util.DisplayMetrics;
+// import android.util.DisplayMetrics;
 
-import android.bluetooth.BluetoothAdapter;
-import android.bluetooth.BluetoothDevice;
+// import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothDevice;
 
 import android.net.Uri;
 
-import android.opengl.GLSurfaceView;
+// import android.opengl.GLSurfaceView;
 
 public class TopoGL extends Activity 
                     implements OnClickListener
@@ -322,7 +322,7 @@ public class TopoGL extends Activity
     // mDisplayWidth  = dm.widthPixels;
     // mDisplayHeight = dm.heightPixels;
     // mScaleFactor   = (mDisplayHeight / 320.0f) * density;
-    // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight + " scale " + TopoDroiaApp.mScaleFactor + " density " + density );
+    // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight + " scale " + TopoDroidApp.mScaleFactor + " density " + density );
 
     GlModel.setWidthAndHeight( TopoDroidApp.mDisplayWidth, TopoDroidApp.mDisplayHeight );
     
@@ -653,7 +653,7 @@ public class TopoGL extends Activity
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
     // FIXME BLUETOOTH  MENU
-    // } else if ( mWithBluetooth && hasBluetoothName() && (p++ == pos) ) { // BLEUTOOTH SURVEY
+    // } else if ( mWithBluetooth && hasBluetoothName() && (p++ == pos) ) { // BLUETOOTH SURVEY
     //   // TODO 
     //   (new DialogBluetoothSurveyList( this, this )).show();
 
@@ -709,7 +709,7 @@ public class TopoGL extends Activity
       } else {
         Toast.makeText( this, R.string.no_model, Toast.LENGTH_SHORT ).show();
       }
-    // } else if ( mHasTempertaure && p++ == pos ) { // TEMPERATURE
+    // } else if ( mHasTemperature && p++ == pos ) { // TEMPERATURE
     //   if ( mParser != null ) {
     //     selectTemperatureFile();
     //   } else {
@@ -853,7 +853,7 @@ public class TopoGL extends Activity
       mButton1[5] = MyButton.getButton( this, this, izons[5] );
       mButton1[6] = MyButton.getButton( this, this, izons[6] );
       mButton1[7] = MyButton.getButton( this, this, izons[7] );
-      // if ( BLUETOOTH ) mButton1[8] = MyButtoni.getButton( this, this, izons[8] );
+      // if ( BLUETOOTH ) mButton1[8] = MyButton.getButton( this, this, izons[8] );
 
       // mButton1[ 0 ].setOnLongClickListener( this );
       mButton1[ 1 ].setOnLongClickListener( this ); // projection params
@@ -931,7 +931,7 @@ public class TopoGL extends Activity
     return size;
   }
 
-  /** resport to user long-tap on a button
+  /** report to user long-tap on a button
    * @param v   tapped view
    * @return true if the long-tap has been handled
    * @note for projection: adjust focal length
@@ -1300,7 +1300,7 @@ public class TopoGL extends Activity
 
   /** load model from a file
    * @param uri      file URI
-   * @param filename file name
+   * @param pathname file name
    * @param asynch   ...
    * @return true if success
    * @note always called asynch
@@ -2085,7 +2085,7 @@ public class TopoGL extends Activity
     }
   }
 
-  /** react to notification of wall-compute complition
+  /** react to notification of wall-compute completion
    * @param type   computation type
    * @param result true if computation successful
    * @note run on onPostExecute
@@ -2119,7 +2119,7 @@ public class TopoGL extends Activity
     }
   }
 
-  /** open the dialpg to load a survey sketch (c3d format)
+  /** open the dialog to load a survey sketch (c3d format)
    */
   void loadSketch()
   {
@@ -2127,7 +2127,7 @@ public class TopoGL extends Activity
   }
 
   /** react to location notify
-   * @param lng longitude [WGS84 deimal degrees]
+   * @param lng longitude [WGS84 decimal degrees]
    * @param lat latitude
    * @param alt altitude [m]
    * @note WITH-GPS
@@ -2252,7 +2252,7 @@ public class TopoGL extends Activity
   // end WITH-GPS ------------------------------------------------------------
 
   /** forward to the rendered a list of surveys to hide or show
-   * @param survey  list of surveys
+   * @param surveys  list of surveys
    */
   void hideOrShow( List< Cave3DSurvey > surveys )
   {

@@ -130,7 +130,7 @@ public class BricInfoDialog extends MyDialog
         } } );
         break;
       case BricComm.DATA_INFO_28:
-        // TDLog.v( "BricInfo Fiwrmware " + BleUtils.bytesToAscii( bytes ) );
+        // TDLog.v( "BricInfo Firmware " + BleUtils.bytesToAscii( bytes ) );
         mParent.runOnUiThread( new Runnable() { public void run() {
           tv_fw.setText( String.format( mRes.getString( R.string.bric_fw ), BleUtils.bytesToAscii( bytes ) ) );
         } } );

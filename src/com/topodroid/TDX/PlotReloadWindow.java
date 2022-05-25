@@ -177,7 +177,7 @@ public class PlotReloadWindow extends ItemDrawer
   private ArrayList< PlotBackup > mBackups;
   private int mPos = 0;
     
-  // @parm filename    survey-1p without ".tdr"
+  // @param filename    survey-1p without ".tdr"
   private void populateBackups( String filename )
   {
     mBackups = new ArrayList< PlotBackup >();
@@ -291,7 +291,7 @@ public class PlotReloadWindow extends ItemDrawer
     switchZoomCtrl( TDSetting.mZoomCtrl );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder( true );
+    mListView.setEmptyPlaceholder( true );
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mButton1 = new Button[ mNrButton1 + 1 ];
@@ -661,7 +661,7 @@ public class PlotReloadWindow extends ItemDrawer
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -737,7 +737,7 @@ public class PlotReloadWindow extends ItemDrawer
 
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

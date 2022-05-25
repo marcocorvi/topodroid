@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDStatus;
+// import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
 
 import java.util.ArrayList;
@@ -29,8 +29,8 @@ import android.widget.LinearLayout;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.ListView;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+// import android.widget.AdapterView;
+// import android.widget.AdapterView.OnItemClickListener;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -270,7 +270,7 @@ class UndeleteDialog extends MyDialog
     incrementStatus(); // calls updateList();
   }
 
-  /** update the list of undeletable items: switch adapter according to the status
+  /** update the list of undeleteable items: switch adapter according to the status
    */
   private void updateList()
   {

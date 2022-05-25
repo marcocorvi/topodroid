@@ -19,14 +19,14 @@ public class MotionEventEclair extends MotionEventWrap
       super(event);
    }
 
-   /** @return X cordinate of a touch
+   /** @return X coordinate of a touch
     * @param pointerIndex  touch index
     */
    public float getX(int pointerIndex) {
       return event.getX(pointerIndex);
    }
 
-   /** @return Y cordinate of a touch
+   /** @return Y coordinate of a touch
     * @param pointerIndex  touch index
     */
    public float getY(int pointerIndex) {

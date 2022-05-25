@@ -48,15 +48,15 @@ public class ShpPolyline extends ShpObject
 
   public void writeLines( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
-    writwPointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale, cd, sd );
+    writePointLines( lns, DrawingPath.DRAWING_PATH_LINE, x0, y0, xscale, yscale, cd, sd );
   }
 
   public void writeAreas( List< DrawingPointLinePath > lns, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
-    writwPointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale, cd, sd );
+    writePointLines( lns, DrawingPath.DRAWING_PATH_AREA, x0, y0, xscale, yscale, cd, sd );
   }
 
-  private boolean writwPointLines( List< DrawingPointLinePath > lns, int path_type, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
+  private boolean writePointLines( List< DrawingPointLinePath > lns, int path_type, double x0, double y0, double xscale, double yscale, double cd, double sd ) throws IOException
   {
     int nrs = ( lns != null )? lns.size() : 0;
     if ( nrs == 0 ) return false;

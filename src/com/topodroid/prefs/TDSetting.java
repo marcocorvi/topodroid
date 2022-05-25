@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2014
  *
- * @brief TopoDroid application settings (preferenceces)
+ * @brief TopoDroid application settings (preferences)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -160,7 +160,7 @@ public class TDSetting
     }
   }
 
-  public static boolean mDxfBlocks = true; // DXF_BLOCKS data-eport
+  public static boolean mDxfBlocks = true; // DXF_BLOCKS data-export
   public static boolean mShpGeoref = false;
 
   public static float mAlgoMinAlpha = 0.1f;
@@ -244,11 +244,11 @@ public class TDSetting
   public static int mBitmapBgcolor = 0x000000;
 
   public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
-  public static boolean mAcadSpline = true; // interpolated cubics
+  public static boolean mAcadSpline = true; // interpolated cubic
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // LOCATION
-  public static String mCRS = "Long-Lat";    // default coord ref systen 
+  public static String mCRS = "Long-Lat";    // default coord ref system
   // public static final  String UNIT_LOCATION  = "ddmmss";
   public static int mUnitLocation = 0; // 0 dec-degree, 1 ddmmss
 
@@ -260,7 +260,7 @@ public class TDSetting
 
   public static final float DISTOX_MAX_EPS  = 0.01f; // hard limit
   // public static final String CALIB_EPS      = "0.000001";
-  public static float mCalibEps = 0.000001f; // calibartion epsilon
+  public static float mCalibEps = 0.000001f; // calibration epsilon
 
   public static int   mCalibMaxIt = 200;     // calibration max nr of iterations
   public static boolean mCalibShotDownload = true;
@@ -329,9 +329,9 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
-  public static float mVThreshold = 80f;   // verticality threshold (LRUD)
+  public static float mVThreshold = 80f;   // vertical threshold (LRUD)
   public static float mHThreshold;         // horizontal plot threshold
-  // public static boolean mDataBackup = false; // whether to export data when shotwindow is closed
+  // public static boolean mDataBackup = false; // whether to export data when shot-window is closed
   public static boolean mDistoXBackshot = false;
   public static boolean mEditableStations = false;
   // public static int mTitleColor = TDColor.TITLE_NORMAL;
@@ -475,7 +475,7 @@ public class TDSetting
   public static float mStationSize    = 20;   // size of station names [pt]
   public static float mLabelSize      = 24;   // size of labels [pt]
   public static float mFixedThickness = 1;    // width of fixed lines
-  public static float mLineThickness  = 1;    // witdh of drawing lines
+  public static float mLineThickness  = 1;    // width of drawing lines
   public static boolean mAutoSectionPt = false;
   public static int   mBackupNumber   = 5;
   public static int   mBackupInterval = 60;
@@ -563,7 +563,7 @@ public class TDSetting
     } catch ( NumberFormatException e ) { }
   }
 
-  // backgroind color RGB_565
+  // background color RGB_565
   private static String setBitmapBgcolor( SharedPreferences prefs, String key, String color, String def_value )
   {
     int r=0, g=0, b=0;
@@ -2514,7 +2514,7 @@ public class TDSetting
       hlp.update( k, v );
       TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, v ); // FIXME_PREF
     } else {
-      boolean def = k.equals( key[3] ); // DSITOX_LOG_ERR
+      boolean def = k.equals( key[3] ); // DISTOX_LOG_ERR
       boolean b = tryBooleanValue( hlp, k, v, def );
       TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, b ); // FIXME_PREF
     }
@@ -2529,10 +2529,10 @@ public class TDSetting
     mLineType  = 1;
     if ( style.equals( TDString.ZERO ) ) {
       mLineStyle = LINE_STYLE_BEZIER;
-      // mLineType  = 1;                 // alreday assigned
+      // mLineType  = 1;                 // already assigned
     } else if ( style.equals( TDString.ONE ) ) {
       mLineStyle = LINE_STYLE_ONE;
-      // mLineType  = 1;                 // already assignd
+      // mLineType  = 1;                 // already assigned
     } else if ( style.equals( TDString.TWO ) ) {
       // mLineStyle = LINE_STYLE_TWO;    // already assigned
       mLineType  = 2;
@@ -2736,7 +2736,7 @@ public class TDSetting
   // }
 
   /** change a string preference
-   * @param sp    shared prefernces
+   * @param sp    shared preferences
    * @param name  preference name
    * @param value preference value
    * @return true if successful
@@ -2750,7 +2750,7 @@ public class TDSetting
   }
 
   /** change a boolean preference
-   * @param sp    shared prefernces
+   * @param sp    shared preferences
    * @param name  preference name
    * @param value preference value
    * @return true if successful
@@ -2764,7 +2764,7 @@ public class TDSetting
   }
 
   /** change a long preference
-   * @param sp    shared prefernces
+   * @param sp    shared preferences
    * @param name  preference name
    * @param value preference value
    * @return true if successful
@@ -2784,8 +2784,8 @@ public class TDSetting
   private static void setPreference( Editor editor, String name, float value )   { editor.putString( name, Float.toString(value) ); }
 
   /** commit the changes that are in the editor
-   * @param editor   prefernces editor
-   * @return true if succesful
+   * @param editor   preferences editor
+   * @return true if successful
    */
   private static boolean commitEditor( Editor editor ) { return TDandroid.applyEditor( editor ); }
 
@@ -2838,7 +2838,7 @@ public class TDSetting
     File file = TDFile.getSettingsFile(); // PRIVATE FILE
     try {
       FileWriter fw = new FileWriter( file, false ); // true = append
-      PrintWriter pw = new PrintWriter( fw, true ); // true = autoflush
+      PrintWriter pw = new PrintWriter( fw, true ); // true = auto-flush
       pw.printf(Locale.US, "TopoDroid v. %s %d\n", TDVersion.string(), TDVersion.code() );
       pw.printf(Locale.US, "Buttons Size %d %d\n", mSizeBtns, mSizeButtons);
       pw.printf(Locale.US, "Text Size %d \n", mTextSize);
@@ -2874,7 +2874,7 @@ public class TDSetting
       pw.printf(Locale.US, "Packet log %c\n", tf(mPacketLog) );
       pw.printf(Locale.US, "Wait: laser %d, shot %d, data %d, conn %d, command %d\n", mWaitLaser, mWaitShot, mWaitData, mWaitConn, mWaitCommand );
 
-      pw.printf(Locale.US, "Calib grous %d, distance %.2f\n", mGroupBy, mGroupDistance);
+      pw.printf(Locale.US, "Calib groups %d, distance %.2f\n", mGroupBy, mGroupDistance);
       pw.printf(Locale.US, "Calib algo %d, eps %f, iter %d\n", mCalibAlgo, mCalibEps, mCalibMaxIt );
       pw.printf(Locale.US, "Calib shot download %c, raw data %d \n", tf(mCalibShotDownload), mRawCData );
       pw.printf(Locale.US, "Min_Algo alpha %.1f, beta %.1f, gamma %.1f, delta %.1f \n", mAlgoMinAlpha, mAlgoMinBeta, mAlgoMinGamma, mAlgoMinDelta );
@@ -2970,10 +2970,10 @@ public class TDSetting
    */
   private static boolean getBoolean( String[] vals, int idx ) { return idx < vals.length && vals[idx].equals("T"); }
 
-  /** @return the string at the given index as a float value, or the failover value
+  /** @return the string at the given index as a float value, or the fail-over value
    * @param vals    string array
    * @param idx     index
-   * @param fail    failover value
+   * @param fail    fail-over value
    */
   private static float getFloat( String[] vals, int idx, float fail )
   {
@@ -2985,10 +2985,10 @@ public class TDSetting
     return fail;
   }
 
-  /** @return the string at the given index as an integer value, or the failover value
+  /** @return the string at the given index as an integer value, or the fail-over value
    * @param vals    string array
    * @param idx     index
-   * @param fail    failover value
+   * @param fail    fail-over value
    */
   private static int getInt( String[] vals, int idx, int fail )
   {
@@ -3001,7 +3001,7 @@ public class TDSetting
   }
 
   /** import the settings from the settings file
-   * @param prefs   shared prefernces
+   * @param prefs   shared preferences
    * @param all     whether to import all settings
    * @return true on success
    */
@@ -3012,7 +3012,7 @@ public class TDSetting
     File file = TDFile.getSettingsFile(); // PRIVATE FILE
     try {
       FileReader fr = new FileReader( file ); // true = append
-      BufferedReader br = new BufferedReader( fr ); // true = autoflush
+      BufferedReader br = new BufferedReader( fr ); // true = auto-flush
       String line;
       while ( ( line = br.readLine() ) != null ) {
         String[] vals = line.replaceAll(",", "").replaceAll("\\s+", " ").split(" ");

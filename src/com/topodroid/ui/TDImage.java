@@ -14,15 +14,15 @@ package com.topodroid.ui;
 import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
 
-import java.io.IOException;
+// import java.io.IOException;
 
-import android.os.Build;
+// import android.os.Build;
 import android.widget.ImageView;
 
 import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.media.ExifInterface; // REQUIRES android.support
+// import android.media.ExifInterface; // REQUIRES android.support
 
 public class TDImage
 {

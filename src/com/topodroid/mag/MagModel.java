@@ -23,7 +23,7 @@ import com.topodroid.utils.TDLog;
 
 // import java.util.Locale;
 
-// MAGtype_MagneticModel;
+// MAG-type_MagneticModel;
 class  MagModel
 {
   private String ModelName;

@@ -92,13 +92,25 @@ public class DeviceUtil
   public static void startDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-    if ( adapter != null ) adapter.startDiscovery();
+    if ( adapter != null ) {
+      try {
+        adapter.startDiscovery();
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
+      }
+    }
   }
 
   public static void cancelDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
-    if ( adapter != null ) adapter.cancelDiscovery();
+    if ( adapter != null ) {
+      try {
+        adapter.cancelDiscovery();
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
+      }
+    }
   }
 
   // static void ensureDiscoverable()
@@ -120,7 +132,14 @@ public class DeviceUtil
 
   public static boolean isPaired( BluetoothDevice device )
   {
-    return ( device != null ) && ( device.getBondState() == BOND_BONDED );
+    if ( device != null ) {
+      try {
+        return device.getBondState() == BOND_BONDED;
+      } catch (SecurityException e) {
+        TDLog.Error("SECURITY " + e.getMessage());
+      }
+    }
+    return false;
   }
 
   // @return 0: null device
@@ -130,9 +149,12 @@ public class DeviceUtil
   public static int pairDevice( BluetoothDevice device )
   {
     if ( device == null ) return 0;
-    int state = device.getBondState();
-    if ( state == BOND_BONDED ) { // already paired
-      return 2;
+    try {
+      if ( device.getBondState() == BOND_BONDED ) { // already paired
+        return 2;
+      }
+    } catch (SecurityException e) {
+      TDLog.Error("SECURITY " + e.getMessage());
     }
     try {
       Method m = device.getClass().getMethod( "createBond", (Class[]) null );
@@ -146,10 +168,14 @@ public class DeviceUtil
   public static int unpairDevice( BluetoothDevice device )
   {
     if ( device == null ) return 0;
-    int state = device.getBondState();
-    if ( state != BOND_BONDED ) { // already not paired
-      return 2;
+    try {
+      if (device.getBondState() != BOND_BONDED) { // already not paired
+        return 2;
+      }
+    } catch ( SecurityException e ) {
+      TDLog.Error( "SECURITY " + e.getMessage() );
     }
+
     try {
       Method m = device.getClass().getMethod( "removeBond", (Class[]) null );
       m.invoke( device, (Object[]) null );
@@ -159,7 +185,7 @@ public class DeviceUtil
     return 1;
   }
 
-  // Intent paiting_intent = new Intent( ACTION_PAIRING_REQUEST );
+  // Intent pairing_intent = new Intent( ACTION_PAIRING_REQUEST );
   // pairing_intent.putExtra( EXTRA_DEVICE, device )
   // pairing_intent.putExtra( EXTRA_PAIRING_VARIANT, PAIRING_VARIANT_PIN );
   // pairing_intent.setFlag( Intent.FLAG_ACTIVITY_NEW_TASK );

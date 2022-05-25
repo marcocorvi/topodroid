@@ -6,7 +6,7 @@
  * @brief export model task
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -22,7 +22,7 @@ import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
@@ -33,10 +33,10 @@ import android.os.ParcelFileDescriptor;
 
 import android.net.Uri;
 
-import java.io.FileWriter;
-import java.io.FileOutputStream;
+// import java.io.FileWriter;
+// import java.io.FileOutputStream;
 import java.io.DataOutputStream;
-import java.io.FileWriter;
+// import java.io.FileWriter;
 import java.io.BufferedWriter;
 import java.io.IOException;
 

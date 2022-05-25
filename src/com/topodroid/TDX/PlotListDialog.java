@@ -63,7 +63,7 @@ class PlotListDialog extends MyDialog
   // private GridView mList;
 
   /** cstr
-   * @param content   context
+   * @param context   context
    * @param parent    survey data window parent
    * @param app       TopoDroid app
    * @param parent2   plot window (second) parent

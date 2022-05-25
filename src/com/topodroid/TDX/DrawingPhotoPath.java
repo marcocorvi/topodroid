@@ -108,7 +108,7 @@ public class DrawingPhotoPath extends DrawingPointPath
   @Override
   void toTCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind /* , DrawingUtil mDrawingUtil */ )
   { 
-    String subdir = survey + "/photo"; // "phpto/" + survey;
+    String subdir = survey + "/photo"; // "photo/" + survey;
     String name   = mId + ".jpg"; // Long.toString(mId) + ".jpg";
     if ( TDFile.hasMSfile( subdir, name ) ) {
       byte[] buf = TDExporter.readFileBytes( subdir, name );
@@ -124,7 +124,7 @@ public class DrawingPhotoPath extends DrawingPointPath
         float y = DrawingUtil.sceneToWorldY( cx, cy );
         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
         pw.format("</item>\n");
-        // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+        // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
       }
     }
   }

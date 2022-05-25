@@ -138,7 +138,7 @@ public class Symbol implements SymbolInterface
   public String getDefaultOptions() { return mDefaultOptions; }
 
   // SymbolInterface methods
-  /** set the symbol Terion name
+  /** set the symbol Therion name
    * @param name    symbol Therion name
    */
   protected void setThName( String name )
@@ -163,7 +163,7 @@ public class Symbol implements SymbolInterface
   boolean hasThName( String th_name ) { return mThName != null && mThName.equals( th_name ); } 
 
   /** @return true if the symbol Therion name coincides with the given name, or both are null
-   * @param th_name   given name
+   * @param name   given name
    */
   boolean isThName( String name ) { return (name == null && mThName == null) || mThName.equals( name ); }
 

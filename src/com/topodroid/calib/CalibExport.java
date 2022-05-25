@@ -35,13 +35,13 @@ import java.util.List;
 
 public class CalibExport
 {
-  public static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String calibname )
+  public static String exportCalibAsCsv( long cid, DeviceHelper data, CalibInfo ci, String calib_name )
   {
     try {
       // TDLog.Log( TDLog.LOG_IO, "export calibration " + name );
       // TDPath.checkPath( filename );
-      // BufferedWriter bw = TDFile.getMSwriter( "ccsv", calibname + ".csv", "text/csv" );
-      BufferedWriter bw = new BufferedWriter( new FileWriter( TDPath.getCcsvFile( calibname + ".csv" ) ) );
+      // BufferedWriter bw = TDFile.getMSwriter( "ccsv", calib_name + ".csv", "text/csv" );
+      BufferedWriter bw = new BufferedWriter( new FileWriter( TDPath.getCcsvFile( calib_name + ".csv" ) ) );
       PrintWriter pw = new PrintWriter( bw );
 
       pw.format("# %s created by TopoDroid v %s\n\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
@@ -106,14 +106,14 @@ public class CalibExport
    * @param data database
    * @param file calibration file (private storage)
    * @param device_name  name of the device - for consistency check
-   * @return erroir-code (0: success)
+   * @return error-code (0: success)
    *
    * Calib file format
    * line-1 must contain string "TopoDroid"
    * line-2 skipped
    * line-3 contains name at pos 2: must not match any calib name already in the db
    * line-4 contains date at pos 2 format yyyy.mm.dd
-   * line-5 containd device MAC at pos 2: must match current device
+   * line-5 contained device MAC at pos 2: must match current device
    * line-6 contains comment starting at pos 2
    * line-7 contains algo at pos 2: 0 unset, 1 linear, 2 non-linear
    * next data lines follow, each with at least 8 entries:

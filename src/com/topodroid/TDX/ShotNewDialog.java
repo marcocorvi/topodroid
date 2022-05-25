@@ -501,7 +501,7 @@ class ShotNewDialog extends MyDialog
               float bx = divingBearing( bearing ); // DIVING_BEARING
               blk = mApp.insertManualShot( mAt, shot_from, shot_to,
                                Float.parseFloat( clino.replace(',','.') ),    // diving length
-                               bx, // DIVING_BEARIN Float.parseFloat( bearing.replace(',','.') ),
+                               bx, // DIVING_BEARING Float.parseFloat( bearing.replace(',','.') ),
                                Float.parseFloat( distance.replace(',','.') ), // diving depth
                                shot_extend, DBlock.FLAG_SURVEY,
                                mETleft.getText().toString().replace(',','.') ,

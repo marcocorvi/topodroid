@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager new equate dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -14,21 +14,21 @@ package com.topodroid.tdm;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
 
 // import android.app.Activity;
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
 import android.view.View.OnClickListener;
-import android.view.ViewGroup.LayoutParams;
-import android.view.View.OnKeyListener;
-import android.view.KeyEvent;
-import android.view.Window;
+// import android.view.ViewGroup.LayoutParams;
+// import android.view.View.OnKeyListener;
+// import android.view.KeyEvent;
+// import android.view.Window;
 
 import android.widget.LinearLayout;
 import android.widget.Button;

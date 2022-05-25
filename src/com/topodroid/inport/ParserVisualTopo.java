@@ -75,7 +75,7 @@ class ParserVisualTopo extends ImportParser
       
 
   /** read input file
-   * @param isr iinput reader on the input file
+   * @param isr input reader on the input file
    * @param filename   filename, in case isr is null
    */
   private void readFile( InputStreamReader isr, String filename ) throws ParserException

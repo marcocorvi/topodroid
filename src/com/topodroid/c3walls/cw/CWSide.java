@@ -5,7 +5,7 @@
  *
  * @brief face side
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -107,12 +107,16 @@ public class CWSide
     if ( t == t2 ) t2 = null;
   }
 
-  public void replacePoint( CWPoint pold, CWPoint pnew )
+  /** replace a point
+   * @param p_old old point
+   * @param p_new new point
+   */
+  public void replacePoint( CWPoint p_old, CWPoint p_new )
   {
-    if ( p1 == pold ) { 
-      p1 = pnew; 
-    } else if ( p2 == pold ) {
-      p2 = pnew;
+    if ( p1 == p_old ) {
+      p1 = p_new;
+    } else if ( p2 == p_old ) {
+      p2 = p_new;
     // } else {
     //   return false;
     }

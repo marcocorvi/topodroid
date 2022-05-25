@@ -104,7 +104,7 @@ public class SymbolPointLibrary extends SymbolLibrary
 
   /** rotate (clockwise?) the current orientation value of a point
    * @param k    point index
-   * @param s    rotation angle [degrees]
+   * @param a    rotation angle [degrees]
    */
   void rotateGrad( int k, double a )
   {

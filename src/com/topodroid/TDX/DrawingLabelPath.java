@@ -214,7 +214,7 @@ public class DrawingLabelPath extends DrawingPointPath
     makeLabelPath( /* fontSize() */ );
   }
 
-  /** set the size of the text accrding to the point scale
+  /** set the size of the text according to the point scale
    */ 
   private void setTextSize()
   {

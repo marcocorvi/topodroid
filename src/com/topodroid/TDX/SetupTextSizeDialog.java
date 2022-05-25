@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jun 2018
  *
- * @brief TopoDroid setup textsize 
+ * @brief TopoDroid setup text size
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

@@ -50,14 +50,14 @@ class ExportPlotToFile extends AsyncTask<Void,Void,Boolean>
     private Uri mUri = null;
 
     /** constructor
-     * @param content context, for the resources
+     * @param context context, for the resources
      * @param uri     export URI or null (to export in private folder)
      * @param info    survey info
      * @param plot    plot info
      * @param fixed   fixed info, for georeference
      * @param num     data reduction
      * @param command plot drawing items
-     * @param type
+     * @param type    ???
      * @param name    full filename
      * @param ext     extension, used to decide how to export the plot data
      * @param toast   whether to toast

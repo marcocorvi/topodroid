@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid WGS84 geodetic data and functions
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * ref. T. Soler, L.D. Hothem
@@ -70,7 +70,7 @@ public class Geodetic
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
     //double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
-    double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + height; //ellips. alt.
+    double RADIUS_NS = (EARTH_A * EARTH_1E2 / ( W * W * W )) + height; //ellipsoidic altitude
     return (RADIUS_NS * Math.PI / 180.0);
   }
 
@@ -92,7 +92,7 @@ public class Geodetic
   /*
    * The following functions are from
    *   K.M. Borokowski
-   *   "Accurate algoritms to transform geocentric to geodetic coordinates" 
+   *   "Accurate algorithms to transform geocentric to geodetic coordinates"
    *   Bull. Geod. 63 (1989) 50-56
    * 
    * R = A cos(psi) + H cos(phi)

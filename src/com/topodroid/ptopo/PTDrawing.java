@@ -252,7 +252,7 @@ int main( int argc, char ** argv )
     printf("Usage: %s [options] <filename>\n", argv[0] );
     return 0;
   }
-  while ( argf < argc && argv[argf][0] == '-' ) {
+  while ( argc < argc && argv[argf][0] == '-' ) {
     switch ( argv[argf][1] ) {
       case 'c':
         ++ argf;

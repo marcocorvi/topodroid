@@ -48,8 +48,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 // import java.io.PrintWriter; // FIXME_TH2
 
-import java.io.FileOutputStream;
-import java.io.BufferedOutputStream;
+// import java.io.FileOutputStream;
+// import java.io.BufferedOutputStream;
 import java.io.DataOutputStream;
 import java.util.List;
 import java.util.ArrayList;
@@ -225,9 +225,9 @@ class ParserPocketTopo extends ImportParser
     float yoff = DrawingUtil.CENTER_Y; // * 5;
 
     int elem_count = drawing.elementNumber();
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing elems " + elem_count );
-    TDLog.v( "PT drawing elems " + elem_count );
-    // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elems " + elem_count );
+    // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing elements " + elem_count );
+    TDLog.v( "PT drawing elements " + elem_count );
+    // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elements " + elem_count );
 
     TDPath.checkPath( filename );
     // File file = new File( filename );

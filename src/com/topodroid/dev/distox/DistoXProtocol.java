@@ -120,13 +120,13 @@ public class DistoXProtocol extends TopoDroidProtocol
 
   /** try to read 8 bytes - return the number of read bytes
    * @param timeout    joining timeout
-   * @param maxtimeout max number of join attempts
+   * @param max_timeout max number of join attempts
    * @param data_type  expected data type (shot or calib)
    * @return number of data to read
    */
-  private int getAvailable( long timeout, int maxtimeout, int data_type ) throws IOException
+  private int getAvailable( long timeout, int max_timeout, int data_type ) throws IOException
   {
-    mMaxTimeout = maxtimeout;
+    mMaxTimeout = max_timeout;
     final int[] dataRead = { 0 };
     final int[] toRead   = { 8 }; // 8 bytes to read
     final int[] count    = { 0 };
@@ -205,7 +205,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     // TDLog.Log( TDLog.LOG_PROTO, "Protocol read packet no-timeout " + (no_timeout?"true":"false") );
     // TDLog.v( "DistoX proto: read packet no-timeout " + (no_timeout?"true":"false") );
     try {
-      final int maxtimeout = 8;
+      final int max_timeout = 8;
       int timeout = 0;
       int available = 0;
 
@@ -213,12 +213,12 @@ public class DistoXProtocol extends TopoDroidProtocol
         available = 8;
       } else { // do timeout
         if ( TDSetting.mZ6Workaround ) {
-          available = getAvailable( 200, 2*maxtimeout, data_type );
+          available = getAvailable( 200, 2*max_timeout, data_type );
         } else {
-          // while ( ( available = mIn.available() ) == 0 && timeout < maxtimeout ) 
-          while ( ( available = mIn.available() ) < min_available && timeout < maxtimeout ) {
+          // while ( ( available = mIn.available() ) == 0 && timeout < max_timeout )
+          while ( ( available = mIn.available() ) < min_available && timeout < max_timeout ) {
             ++ timeout;
-            // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + maxtimeout );
+            // TDLog.Log( TDLog.LOG_PROTO, "Proto read packet sleep " + timeout + "/" + max_timeout );
             TDUtil.slowDown( 100, "Proto read packet InterruptedException" );
           }
         }
@@ -247,7 +247,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           if ( TDSetting.mPacketLog ) logPacket1( 1L, mAcknowledge );
         }
         if ( ok ) return handlePacket( mBuffer );
-      } // else timedout with no packet
+      } // else timed-out with no packet
     } catch ( EOFException e ) {
       TDLog.Error( "Proto read packet EOFException" + e.toString() );
     } catch (ClosedByInterruptException e ) {

@@ -5,7 +5,7 @@
  *
  * @brief Cave3D measure result
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -27,7 +27,7 @@ class TglMeasure
   double dcave; // cave distance
 
   // positive and negative distances are the sum of deltaZ weighted by
-  //    0 if cino < 10 degrees
+  //    0 if clino < 10 degrees
   //    (clino - 10)/20 if clino is between 10 and 30
   //    1 if clino is above 30 degrees
   private double dist_pos; // vertical positive distance

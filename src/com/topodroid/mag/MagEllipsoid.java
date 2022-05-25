@@ -21,7 +21,7 @@ package com.topodroid.mag;
 
 import com.topodroid.utils.TDMath;
 
-// MAGtype_Ellipsoid;
+// MAG-type_Ellipsoid;
 class MagEllipsoid
 {
   private double a; /*semi-major axis of the ellipsoid*/

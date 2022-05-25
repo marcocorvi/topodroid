@@ -85,7 +85,7 @@ public class SelectionPoint
   // as side effect set mDistance to the result
   float distance( float xx, float yy )
   {
-    mMin = 0; // index of the point that has achived the min distance
+    mMin = 0; // index of the point that has achieved the min distance
     if ( mPoint != null ) {
       float d = mPoint.distance( xx, yy );
       if ( mPoint.has_cp ) {

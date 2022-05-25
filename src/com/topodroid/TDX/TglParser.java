@@ -5,14 +5,14 @@
  *
  * @brief Cave3D file parser 
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.c3out.ExportData;
 import com.topodroid.c3out.ExportKML;
 import com.topodroid.c3out.ExportCGAL;
@@ -34,8 +34,8 @@ import java.io.IOException;
 // import java.io.FileReader;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
-import java.io.FileWriter;
-import java.io.StringWriter;
+// import java.io.FileWriter;
+// import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.io.FileNotFoundException;
 import java.io.DataInputStream;
@@ -43,19 +43,19 @@ import java.io.DataOutputStream;
 import java.io.BufferedWriter;
 import java.io.FileInputStream;
 // import java.io.FileOutputStream;
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
+// import java.io.BufferedInputStream;
+// import java.io.BufferedOutputStream;
 
 import java.util.ArrayList;
 import java.util.Stack;
 import java.util.regex.Pattern;
 import java.util.Locale;
 
-import android.widget.Toast;
+// import android.widget.Toast;
 
 import android.os.AsyncTask;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 public class TglParser
 {
@@ -186,11 +186,11 @@ public class TglParser
   //   if ( path == null ) return false;
   //   File file = new File( path );
   //   if ( ! file.exists() ) {
-  //     TDToasti.makeBad( R.string.error_file_not_found, path );
+  //     TDToast.makeBad( R.string.error_file_not_found, path );
   //     return false;
   //   }
   //   if ( ! file.canRead() ) {
-  //     TDToasti.makeBad( R.string.error_file_not_readable, path );
+  //     TDToast.makeBad( R.string.error_file_not_readable, path );
   //     return false;
   //   }
   //   return true;

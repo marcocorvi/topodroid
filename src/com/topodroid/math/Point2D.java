@@ -73,7 +73,7 @@ public class Point2D // extends PointF
   //   y += c.y;
   // }
 
-  // use PointF implemenetation (Euclidean length)
+  // use PointF implementation (Euclidean length)
   public float length() 
   { 
     float l2 = x*x + y*y;

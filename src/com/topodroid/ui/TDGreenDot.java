@@ -13,7 +13,7 @@ package com.topodroid.ui;
 
 import com.topodroid.TDX.SelectionPoint;
 import com.topodroid.TDX.BrushManager;
-import com.topodroid.TDX.DrawingSplayPath;
+// import com.topodroid.TDX.DrawingSplayPath;
 
 import android.graphics.Path;
 import android.graphics.Paint;

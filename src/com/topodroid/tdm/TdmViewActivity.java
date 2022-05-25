@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager main drawing activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -91,7 +91,7 @@ public class TdmViewActivity extends Activity
   ZoomControls mZoomCtrl;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
-  private float oldDist;  // zoom pointer-sapcing
+  private float oldDist;  // zoom pointer-spacing
 
   private static final float ZOOM_INC = 1.4f;
   private static final float ZOOM_DEC = 1.0f/ZOOM_INC;
@@ -667,7 +667,7 @@ public class TdmViewActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

@@ -117,7 +117,7 @@ public class HelpDialog extends MyDialog
   }
 
   /** react to a user long tap - only the taps on "man book" are taken
-   *  open the namual with the start page
+   *  open the manual with the start page
    * @param v  tapped view
    */
   @Override 

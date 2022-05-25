@@ -13,8 +13,8 @@ package com.topodroid.help;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.TDX.TDInstance;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDInstance;
+// import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
@@ -31,7 +31,7 @@ import java.util.zip.ZipInputStream;
 import java.util.zip.ZipEntry;
 
 import android.os.AsyncTask;
-import android.content.Context;
+// import android.content.Context;
 
 public class UserManDownload extends AsyncTask< String, Integer, Integer >
 {

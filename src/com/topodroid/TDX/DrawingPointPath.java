@@ -309,8 +309,8 @@ public class DrawingPointPath extends DrawingPath
   }
 
   /** affine transform the point symbol - with respect to the scene
-   * @param mm   affine matrix (to tranform the center)
-   * @param m    tranform matrix
+   * @param mm   affine matrix (to transform the center)
+   * @param m    transform matrix
    */
   @Override
   void affineTransformBy( float[] mm, Matrix m )
@@ -370,7 +370,7 @@ public class DrawingPointPath extends DrawingPath
 
   /** Affine transform the symbol path (empty method)
    * @param mm   affine matrix 
-   * @param m    tranform matrix
+   * @param m    transform matrix
    */
   @Override // empty
   public void affineTransformPathBy( float[] mm, Matrix m )
@@ -552,7 +552,7 @@ public class DrawingPointPath extends DrawingPath
 //     pw.format("  </datarow>\n");
 //     pw.format("</item>\n");
 // 
-//     // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+//     // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
 //   }
 
   /** export the point path in cSurvey format
@@ -573,7 +573,7 @@ public class DrawingPointPath extends DrawingPath
     float y = DrawingUtil.sceneToWorldY( cx, cy );
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("</item>\n");
-    // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+    // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   }
 
   /** export the point path in cSurvey format
@@ -616,7 +616,7 @@ public class DrawingPointPath extends DrawingPath
       }
     }
     pw.format("</item>\n");
-    // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+    // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
   }
 
   /** export the X-Section in cSurvey format

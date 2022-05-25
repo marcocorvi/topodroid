@@ -129,7 +129,7 @@ public class FixedActivity extends Activity
     setTitle( R.string.title_fixed );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    // mListView.setEmptyPlacholder(true);
+    // mListView.setEmptyPlaceholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     // MOBILE TOPOGRAPHER
@@ -412,7 +412,7 @@ public class FixedActivity extends Activity
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.FixedActivity );
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;

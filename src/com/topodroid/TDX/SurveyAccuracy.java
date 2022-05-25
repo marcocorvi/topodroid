@@ -48,7 +48,7 @@ class SurveyAccuracy
    */
   boolean isBlockAMDBad( DBlock blk )
   {
-    if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false; // block witout G,M,Dip
+    if ( blk == null || blk.mAcceleration < 10.0f || blk.mMagnetic < 10.0f ) return false; // block without G,M,Dip
     return deltaMag( blk.mMagnetic )     > TDSetting.mMagneticThr
         || deltaAcc( blk.mAcceleration ) > TDSetting.mAccelerationThr
         || deltaDip( blk.mDip )          > TDSetting.mDipThr;
@@ -150,7 +150,7 @@ class SurveyAccuracy
   }
 
   /** @return absolute difference from the mean magnetic dip [degrees]
-   * @param mag   testing magnetic dip [degrees]
+   * @param dip   testing magnetic dip [degrees]
    */
   private float deltaDip( float dip ) { return TDMath.abs( dip - mDipMean ); }
 }

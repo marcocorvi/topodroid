@@ -5,7 +5,7 @@
  *
  * @brief Cave3D fractal analysis
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  */
 package com.topodroid.TDX;
@@ -68,7 +68,7 @@ class FractalComputer
     mMode    = mode;
   }
 
-  // class Point == Cave3DStationn
+  // class Point == Cave3DStation
   //
   //
   /** box
@@ -140,7 +140,7 @@ class FractalComputer
     // boolean contains( Cave3DStation p ) { return contains( p.x, p.y, p.z); }
   
     /** check if this box intersects another box
-     * @param box   the other box
+     * @param b   the other box
      * @return true if this box intersects or touches the other box
      *
      *    x0 --------- x1
@@ -761,7 +761,7 @@ class FractalComputer
     double dz = (zmax - zmin);
     // TDLog.v( "FRACTAL dx " + dx + " dy " + dy + " dz " + dz );
 
-    // dims: make shure tey are multiple of max_side
+    // dims: make sure tey are multiple of max_side
     int max_side = 1<<DIM_ONE;
     // 1 2 4 8 16 32 64 128
     int nx = (int)(dx/one) + 1; nx = max_side*( (nx + max_side-1)/max_side );
@@ -815,8 +815,8 @@ class FractalComputer
   }
 
   /** intersection of a box and a segment
-   * @param box   box
-   * @param line  segment
+   * @param b   box
+   * @param ln  segment
    * @return true if the box intersects the segment
    */
   private boolean intersection( Box b, Line ln )

@@ -33,7 +33,7 @@ class SwapHotBitTask extends AsyncTask<Void, Integer, Integer>
   /** cstr
    * @param app      application
    * @param type     device type
-   * @param address  device luetooth address
+   * @param address  device bluetooth address
    * @param ht       head_tail - head at index 0, tail at index 1
    * @param on_off
    */

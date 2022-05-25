@@ -273,7 +273,7 @@ public class DrawingSvg extends DrawingSvgBase
   	            xsections.add( xsection );
                   }
                   // pw5.format( end_grp );
-                  IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and wrtten with it 
+                  IDrawingLink link = point.mLink; // FIXME Link could be stored in the XSection and written with it
                   if ( link != null && xsection != null ) {
                     float x1 = (xoff + xx) * TDSetting.mToSvg;
                     float y1 = (yoff + yy) * TDSetting.mToSvg;
@@ -349,7 +349,7 @@ public class DrawingSvg extends DrawingSvgBase
         }
         out.write( end_grp ); // xsections
 
-        // TDLog.v( "SVG statioons " + plot.getStations().size() );
+        // TDLog.v( "SVG stations " + plot.getStations().size() );
         out.write("<g id=\"stations\">\n");
         if ( TDSetting.mAutoStations ) {
           for ( DrawingStationName name : plot.getStations() ) { // auto-stations

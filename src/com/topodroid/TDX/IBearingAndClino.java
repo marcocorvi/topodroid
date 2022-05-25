@@ -16,7 +16,7 @@ interface IBearingAndClino
   /**
    * @param b0 bearing
    * @param c0 clino
-   * @param o0 orienatation
+   * @param o0 orientation
    * @param a0 accuracy
    * @param cam camera API (1 or 2)
    */

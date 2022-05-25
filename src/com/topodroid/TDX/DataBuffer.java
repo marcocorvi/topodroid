@@ -5,7 +5,7 @@
  *
  * @brief 3D: directly allocated data buffer with memory management
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -150,7 +150,7 @@ class DataBuffer
 
   // ----------------------------------------------------------------
 
-  /** createa a data buffer
+  /** create a data buffer
    * @param type  data type
    * @param cap   capacity
    * @param delta ...
@@ -164,7 +164,7 @@ class DataBuffer
     return null;
   }
 
-  /** createa a data buffer
+  /** create a data buffer
    * @param type  data type
    * @param cap   capacity
    * @return the newly created data buffer

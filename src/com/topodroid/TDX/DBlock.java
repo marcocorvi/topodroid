@@ -457,7 +457,7 @@ public class DBlock
    * @param r      roll
    * @param e      extend
    * @param t      block type
-   * @param shot_tyoe shot type
+   * @param shot_type shot type
    * @note used by PocketTopo parser only
    */
   DBlock( String f, String t, float d, float b, float c, float r, int e, int type, int shot_type )

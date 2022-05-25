@@ -204,7 +204,7 @@ public class DistoXComm extends TopoDroidComm
   // SOCKET
 
   /** close the socket (and the RFcomm thread) but don't delete it
-   * alwasy called with wait_thread
+   * always called with wait_thread
    */
   protected synchronized void closeSocket( )
   {
@@ -224,7 +224,7 @@ public class DistoXComm extends TopoDroidComm
         mBTSocket.close();
         mBTSocket = null;
       } catch ( IOException e ) {
-        TDLog.Error( "close socket IOexception " + e.getMessage() );
+        TDLog.Error( "close socket IO exception " + e.getMessage() );
         // TDLog.LogStackTrace( e );
       // } finally {
       //   mBTConnected = false;
@@ -235,7 +235,7 @@ public class DistoXComm extends TopoDroidComm
 
   /** close the socket and delete it
    * the connection becomes unusable
-   * As a matter of fact this is alwyas called with wait_thread = true
+   * As a matter of fact this is always called with wait_thread = true
    */
   protected void destroySocket( ) // boolean wait_thread )
   {
@@ -279,7 +279,7 @@ public class DistoXComm extends TopoDroidComm
       try {
         mBTDevice = DeviceUtil.getRemoteDevice( address );
       } catch ( IllegalArgumentException e ) {
-        TDLog.Error( "create Socket failed to get remode device - address " + address );
+        TDLog.Error( "create Socket failed to get remote device - address " + address );
         mBTDevice = null;
         if ( mProtocol != null ) mProtocol.closeIOstreams();
         mProtocol = null;
@@ -322,7 +322,11 @@ public class DistoXComm extends TopoDroidComm
           Class[] classes2 = new Class[]{ UUID.class };
           if ( TDSetting.mSockType == TDSetting.TD_SOCK_DEFAULT ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5a] createRfcommSocketToServiceRecord " );
-            mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( SERVICE_UUID );
+            try {
+              mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( SERVICE_UUID );
+            } catch ( SecurityException e ) {
+              TDLog.Error("SECURITY " + e.getMessage() );
+            }
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5b] createInsecureRfcommSocketToServiceRecord " );
             Method m3 = mBTDevice.getClass().getMethod( "createInsecureRfcommSocketToServiceRecord", classes2 );
@@ -356,7 +360,8 @@ public class DistoXComm extends TopoDroidComm
           if ( mBTSocket != null ) { mBTSocket = null; }
         }
       } else {
-        TDLog.Error( "device not paired. state " + mBTDevice.getBondState() );
+        // TDLog.Error( "device not paired. state " + mBTDevice.getBondState() );
+        TDLog.Error( "device not paired" );
       }
 
       mProtocol = null;
@@ -401,7 +406,7 @@ public class DistoXComm extends TopoDroidComm
   }
 
   /** connect the socket to the device
-   * @param address   remote devioce address
+   * @param address   remote device address
    */
   protected boolean connectSocketAny( String address ) { return connectSocket( address, DataType.DATA_ALL); }
 
@@ -426,6 +431,9 @@ public class DistoXComm extends TopoDroidComm
             // TDLog.Log( TDLog.LOG_BT, "[3] device state " + mBTDevice.getBondState() );
             mBTSocket.connect();
             mBTConnected = true;
+          } catch ( SecurityException e ) {
+            TDLog.Error("SECURITY " + e.getMessage() );
+            closeSocket();
           } catch ( IOException e ) {
             // Toast must run on UI Thread
             // not sure this is good because it shows also when reconnection is interrupted
@@ -454,7 +462,7 @@ public class DistoXComm extends TopoDroidComm
 
   /** start the communication thread
    * @param to_read   number of packets to read
-   * @param lister    packet calback handler
+   * @param lister    packet callback handler
    * @param data_type packet datatype (either shot of calib)
    * @return true on success
    */
@@ -591,7 +599,7 @@ public class DistoXComm extends TopoDroidComm
 
   /**
    * @param address    device address
-   * @param lister
+   * @param lister     data lister
    * @param data_type  packet datatype
    * @return true if successful
    */

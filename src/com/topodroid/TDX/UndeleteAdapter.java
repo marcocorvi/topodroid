@@ -12,8 +12,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.utils.TDColor;
+// import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
 
@@ -27,9 +27,9 @@ import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 // import android.view.View.OnLongClickListener;
 
-import java.util.List;
+// import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
+// import java.util.Locale;
 
 class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
                       // , OnClickListener
@@ -44,7 +44,7 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
 
   /** cstr
    * @param ctx    context
-   * @param perent parent window
+   * @param parent parent window
    * @param id     ...
    * @param items  list of items that can be recovered
    */
@@ -71,7 +71,7 @@ class UndeleteAdapter extends ArrayAdapter< UndeleteItem >
     int      pos;
     CheckBox mCB;
     TextView mTV;
-    UndeleteItem   mItem;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
+    UndeleteItem   mItem;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
 
     ViewHolder( CheckBox cb, TextView tv )
     {

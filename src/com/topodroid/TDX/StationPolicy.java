@@ -40,7 +40,7 @@ public class StationPolicy
   static boolean isSurveyForward()     { return (mSurveyStations%2) == SURVEY_STATION_FOREWARD; }
   static boolean isSurveyBackward()    { return mSurveyStations>0 && (mSurveyStations%2) == SURVEY_STATION_ZERO; }
   static boolean isSurveyBackward1()   { return mSurveyStations == SURVEY_STATION_BACKWARD; }
-  // the check on the level should not be neceessary
+  // the check on the level should not be necessary
   public static boolean doMagAnomaly() { return mMagAnomaly && TDLevel.overAdvanced; }
   public static boolean doTopoRobot()  { return mTRobotShot && TDLevel.overExpert; }
   public static boolean doTripod()     { return mTripodShot && TDLevel.overNormal; }
@@ -71,7 +71,7 @@ public class StationPolicy
   {
     // TDLog.v( "policy upgrade " + mSavedPolicy + " for level " + level );
     // dump();
-    // after settin the level, check if it has been raised and the saved policy committed to DB
+    // after setting the level, check if it has been raised and the saved policy committed to DB
     switch ( level ) { // order by decreasing level
       case TDLevel.TESTER:
         if ( mSavedPolicy == SURVEY_STATION_TOPOROBOT ) return 7;
@@ -127,7 +127,7 @@ public class StationPolicy
         mMagAnomaly      = false;
         mSurveyStations  = SURVEY_STATION_FOREWARD;
         mTitleColor = TDColor.TITLE_BACKSIGHT;
-	// mSavedPolicy = policy; // not neceessary
+	// mSavedPolicy = policy; // not necessary
       // } else {
       //   return false;
       // }
@@ -186,7 +186,7 @@ public class StationPolicy
   //   //       however this restarts the activity which is not good
   //   // if ( TopoDroidApp.mPrefActivitySurvey != null ) TopoDroidApp.mPrefActivitySurvey.reloadPreferences();
   //   //
-  //   // TDLog.v( "SET Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
+  //   // TDLog.v( "SET Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomaly " + mMagAnomaly );
   // }
 
   // // called only by parseStationPolicy
@@ -196,7 +196,7 @@ public class StationPolicy
   //     mMagAnomaly = false;
   //     // setPreference( prefs, "DISTOX_MAG_ANOMALY", false );
   //   }
-  //   // TDLog.v( "CLEAR Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomlay " + mMagAnomaly );
+  //   // TDLog.v( "CLEAR Policy " + mSurveyStations + " " + mSavedPolicy + " mag anomaly " + mMagAnomaly );
   // }
 
 }

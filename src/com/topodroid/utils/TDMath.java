@@ -153,7 +153,7 @@ public class TDMath
   }
 
   /** @return conversion from degrees to slope (in 1 .. 100)
-   * @param def   angle [deg.]
+   * @param deg   angle [deg.]
    */
   static public float degree2slope( float deg ) { return (float)(100 * Math.tan( deg * DEG2RAD ) ); }
 

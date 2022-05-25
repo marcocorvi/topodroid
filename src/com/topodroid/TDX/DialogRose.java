@@ -5,7 +5,7 @@
  *
  * @brief Cave3D Rose dialog
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -21,7 +21,7 @@ import android.graphics.Canvas;
 import android.graphics.Path;
 import android.graphics.Paint;
 
-import android.app.Dialog;
+// import android.app.Dialog;
 import android.os.Bundle;
 
 // import android.widget.Toast;

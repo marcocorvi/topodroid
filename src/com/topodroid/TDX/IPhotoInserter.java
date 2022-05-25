@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2012
  *
- * @brief TopoDroid label adder interfare
+ * @brief TopoDroid label adder interface
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

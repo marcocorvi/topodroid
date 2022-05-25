@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager equate display object
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -18,7 +18,7 @@ import android.graphics.Path;
 import android.graphics.Canvas;
 import android.graphics.Matrix;
 
-import android.widget.CheckBox;
+// import android.widget.CheckBox;
 
 class TdmViewEquate
 {

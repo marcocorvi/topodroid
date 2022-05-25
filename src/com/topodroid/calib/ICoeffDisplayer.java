@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2019
  *
- * @brief TopoDroid DistoX coefficient diaplayer
+ * @brief TopoDroid DistoX coefficient displayer
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

@@ -12,7 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.utils.TDRequest;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDsafUri;
@@ -25,13 +25,13 @@ import com.topodroid.help.HelpDialog;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TopoDroidAlertDialog;
-import com.topodroid.TDX.DataHelper;
+// import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.ExportDialogTdm;
 import com.topodroid.TDX.IExporter;
-import com.topodroid.TDX.TDandroid;
+// import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TDConst;
 
 import java.util.List;
@@ -48,14 +48,14 @@ import android.view.View;
 // import android.view.ViewGroup.LayoutParams;
 import android.view.View.OnClickListener;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.ListView;
 import android.widget.Button;
 import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+// import android.widget.LinearLayout;
+// import android.widget.LinearLayout.LayoutParams;
 
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
@@ -63,7 +63,7 @@ import android.content.DialogInterface;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 import android.os.Bundle;
-import android.os.Build;
+// import android.os.Build;
 import android.app.Activity;
 import android.os.ParcelFileDescriptor;
 
@@ -546,7 +546,7 @@ public class TdmConfigActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

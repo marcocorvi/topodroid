@@ -1,7 +1,7 @@
 /* @file TDFeedback.java
  *
  * @author marco corvi
- * @date feb 2021 ( estracted from TopoDroidApp )
+ * @date feb 2021 ( extracted from TopoDroidApp )
  *
  * @brief TopoDroid LED & vibration feedbacks
  * --------------------------------------------------------
@@ -25,7 +25,7 @@ public class TDFeedback
 {
   static boolean mFeedbackOn = false;
 
-  // Led notifcation are shown only while the display is off
+  // Led notification are shown only while the display is off
   // static final int NOTIFY_LED_ID = 10101;
   //   NotificationManager manager =
   //     (NotificationManager)getSystemService( Context.NOTIFICATION_SERVICE );

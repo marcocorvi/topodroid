@@ -45,7 +45,7 @@ public class LinePoint extends Point2D
   public LinePoint mPrev; // previous LinePoint on the line
   public LinePoint mNext; // next LinePoint on the line
 
-  /** change presentation from landscape to portrai
+  /** change presentation from landscape to portrait
    */
   void landscapeToPortrait()
   {
@@ -127,7 +127,7 @@ public class LinePoint extends Point2D
     }
   }
 
-  /** affine tranform
+  /** affine transform
    * @param mm  transform 3x3 array
    * @param m   transform matrix
    */
@@ -223,8 +223,8 @@ public class LinePoint extends Point2D
   }
 
   /** @return the distance of the first control-point from a given (X,Y) coord-pair
-   * @param x0  X ccordinate
-   * @param y0  Y ccordinate
+   * @param x0  X coordinate
+   * @param y0  Y coordinate
    */
   float distanceCP1( float x0, float y0 )
   {
@@ -232,8 +232,8 @@ public class LinePoint extends Point2D
   }
 
   /** @return the distance of the second control-point from a given (X,Y) coord-pair
-   * @param x0  X ccordinate
-   * @param y0  Y ccordinate
+   * @param x0  X coordinate
+   * @param y0  Y coordinate
    */
   float distanceCP2( float x0, float y0 )
   {
@@ -300,7 +300,7 @@ public class LinePoint extends Point2D
   }
 
   /** write this line-point in Cave3D format
-   * @param w      output writer
+   * @param pw      output writer
    * @param type   plot type
    * @param cmd    drawing item manager
    * @param num    data reduction - used to get the 3D vector of this line-point
@@ -324,7 +324,7 @@ public class LinePoint extends Point2D
   }
 
   /** write this line-point in Cave3D format
-   * @param w      output writer
+   * @param pw      output writer
    * @param type   plot type
    * @param V1     X unit axis lifted in 3D
    * @param V2     Y unit axis lifted in 3D

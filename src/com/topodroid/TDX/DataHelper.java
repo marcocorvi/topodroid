@@ -3769,7 +3769,7 @@ public class DataHelper extends DataSetObservable
     return info;
   }
   // ----------------------------------------------------------------------
-  // SELECT: LIST SURVEY / CABIL NAMES
+  // SELECT: LIST SURVEY / CALIB NAMES
 
   private List< String > selectAllNames( String table )
   {
@@ -5198,7 +5198,7 @@ public class DataHelper extends DataSetObservable
       
    // ----------------------------------------------------------------------
    // SERIALIZATION of surveys TO FILE
-   // the following tables are serialized (besides the survey recond)
+   // the following tables are serialized (besides the survey record)
    // 15 SHOTS    { "id", "fStation", "tStation", "distance", "bearing", "clino", "roll", "acceleration", "magnetic", "dip",
    //                                             "extend", "flag", "leg", "status", "comment" },
    // 10 PLOTS    { "id", "name", "type", "status", "start", "view", "xoffset", "yoffset", "zoom", "azimuth" },
@@ -6236,7 +6236,7 @@ public class DataHelper extends DataSetObservable
           //   + " INSERT on " + SHOT_TABLE 
           //   + " FOR EACH ROW BEGIN "
           //   +   " SELECT RAISE "
-          //   +   " (ROLLBACK, 'insert on \"" + SHOT_TABLE + "\" violates foreing key constraint')"
+          //   +   " (ROLLBACK, 'insert on \"" + SHOT_TABLE + "\" violates foreign key constraint')"
           //   +   " WHERE ( SELECT id FROM " + SURVEY_TABLE + " WHERE id = NEW.surveyId ) IS NULL; "
           //   + " END;"
           // );

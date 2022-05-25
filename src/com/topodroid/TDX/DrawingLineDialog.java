@@ -38,7 +38,7 @@ class DrawingLineDialog extends MyDialog
   private DrawingWindow mParent;
   private DrawingLinePath mLine;  // edit item
   private LinePoint mPoint;       // edit point
-  private boolean mDoOptions;     // whether levl is over advanced (cached)
+  private boolean mDoOptions;     // whether level is over advanced (cached)
 
   private int mType;              // line type - initialized from line item's type
   private int mTypeSection;

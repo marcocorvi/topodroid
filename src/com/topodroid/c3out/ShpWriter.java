@@ -637,7 +637,7 @@ class ShpPolylinez extends ShpObject
   private void setBoundsShots( List< Cave3DShot > lns )
   {
     int nrs = ( lns != null )? lns.size() : 0;
-    // if ( lns.size() == 0 && lms.size() ) { // guaramteed one is non-zero
+    // if ( lns.size() == 0 && lms.size() ) { // guaranteed one is non-zero
     //   xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
     //   return;
     // }

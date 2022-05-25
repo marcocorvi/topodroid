@@ -37,8 +37,8 @@ class SurveyStat
   float stddevD;
 
   float[] G; // accelerations
-  float[] M; // magn. fields
-  float[] D; // magn. dips
+  float[] M; // magnetic fields
+  float[] D; // magnetic dips
 
   int nrMGD;
 }

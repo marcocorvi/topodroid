@@ -50,7 +50,7 @@ class SurveyAdapter extends ArrayAdapter< Cave3DSurvey >
   private class ViewHolder implements OnClickListener
   { 
     int      pos;
-    Cave3DSurvey mSurvey;   // used to make sure blocks do not hold ref to a view, that does not belog to them REVISE_RECENT
+    Cave3DSurvey mSurvey;   // used to make sure blocks do not hold ref to a view, that does not belong to them REVISE_RECENT
     CheckBox cbShow;
 
     ViewHolder( CheckBox show )

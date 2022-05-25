@@ -5,14 +5,14 @@
  *
  * @brief DEM surface grid
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 import com.topodroid.c3in.ParserException;
 import com.topodroid.c3in.ParserTh;
 
@@ -45,8 +45,8 @@ public class DEMsurface
    * @param n1   north coord of cell (0,0) lower-left corner
    * @param delta_e  cell east-size 
    * @param delta_n  cell north-size 
-   * @param d1 number of cells in the east direction
-   * @param d2 number of cells in the north direction
+   * @param dim1 number of cells in the east direction
+   * @param dim2 number of cells in the north direction
    *
    *        ^
    * d2 = 2 |-----------+P2 = (e2,n2)

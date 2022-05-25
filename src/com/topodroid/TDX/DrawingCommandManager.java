@@ -18,7 +18,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
-import com.topodroid.math.Point2D; // intersection point
+// import com.topodroid.math.Point2D; // intersection point
 
 // import android.content.res.Configuration;
 import android.app.Activity;
@@ -290,7 +290,7 @@ public class DrawingCommandManager
     hasEraser = true;
   }
 
-  /** finosh an erase command
+  /** finish an erase command
    */
   void endEraser() { hasEraser = false; }
 
@@ -306,7 +306,7 @@ public class DrawingCommandManager
     canvas.drawPath( path, BrushManager.highlightPaint2 );
   }
 
-  /** draw the side-drag rectanles
+  /** draw the side-drag rectangles
    * @param canvas   canvas
    */ 
   private void drawSideDrag( Canvas canvas )
@@ -499,7 +499,7 @@ public class DrawingCommandManager
 
 
   /** add the scalebar
-   * @note this is the only place DrawuingScaleReference is instantiated
+   * @note this is the only place DrawingScaleReference is instantiated
    */
   void addScaleRef( ) // boolean with_azimuth
   {
@@ -683,7 +683,7 @@ public class DrawingCommandManager
   /** get the shots that intersect a line portion
    * @param p1 first point of the line portion
    * @param p2 second point of the line portion
-   * @return the list of shots that intesect the segment (p1--p2)
+   * @return the list of shots that intersects the segment (p1--p2)
    */
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
@@ -846,7 +846,7 @@ public class DrawingCommandManager
    * @param x    X scene coords
    * @param y    Y scene coords
    * @param zoom current canvas display zoom
-   * @param cmd  erase command
+   * @param eraseCmd  erase command
    * @param erase_mode  erasing mode
    * @param erase_size  eraser size
    *
@@ -895,7 +895,7 @@ public class DrawingCommandManager
     
 
   /** remove a splay path
-   * @param p   splay path (thsi is the path of the selection point)
+   * @param p   splay path (this is the path of the selection point)
    * @param sp  selection point for the path p
    */
   void deleteSplay( DrawingSplayPath p, SelectionPoint sp )
@@ -1775,13 +1775,13 @@ public class DrawingCommandManager
     }
   }
 
-  /** compute the area of the xsextion
+  /** compute the area of the xsection
    * @return the computed area
    */
   float computeSectionArea() { return mCurrentScrap.computeSectionArea(); }
 
   /** link the xsections to the station names
-   * @param stations station names
+   // * @param stations station names
    * @param name     name of parent plot of the xsections
    */
   void linkSections( String name ) { mCurrentScrap.linkSections( mStations, name ); }

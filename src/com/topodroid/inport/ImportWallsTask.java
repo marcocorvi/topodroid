@@ -37,7 +37,7 @@ public class ImportWallsTask extends ImportTask
   }
 
   /** execute import task
-   * @param str[0] survey name
+   * @param str params: str[0] survey name
    */
   @Override
   protected Long doInBackground( String... str )

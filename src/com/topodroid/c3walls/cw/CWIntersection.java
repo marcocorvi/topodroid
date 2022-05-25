@@ -8,7 +8,7 @@
  *        its endpoints can belong to sides of one of the two triangles (type 2)
  *        or to one side for each triangle (type 1)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -31,7 +31,7 @@ public class CWIntersection
   static void resetCounter() { cnt = 0; }
 
   int mCnt;
-  int mType;         // 1 one endpoint fron each triangle, 2 both endpoints from one triangle
+  int mType;         // 1 one endpoint from each triangle, 2 both endpoints from one triangle
   CWTriangle mTriA;    
   CWTriangle mTriB;
   Vector3D mV;       // base-point of intersection line

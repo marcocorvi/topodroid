@@ -56,7 +56,7 @@ class Weeder
   }
   
   /** 2D line
-   * basically used only to compute the fartest point
+   * basically used only to compute the farthest point
    */
   class WeedSegment
   { 
@@ -188,13 +188,13 @@ class Weeder
     }
   }
   
-  /** @return index of fartest point between two points
+  /** @return index of farthest point between two points
    * @param pts   list of points
    * @param i1    first point
    * @param i2    second point
    * @param thr   minimum acceptable distance - return null if distance is too small
    */
-  private WeedIndex fartestPoint( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
+  private WeedIndex farthestPoint( List< WeedPoint > pts, WeedIndex i1, WeedIndex i2, float thr )
   {
     int k1 = i1.k;
     int k2 = i2.k;
@@ -256,7 +256,7 @@ class Weeder
     return idx0;
   }
   
-  /** simplyfy a section of points
+  /** simplify a section of points
    * @param pts   list of points
    * @param i1    first point of the section
    * @param i2    second point of the section
@@ -266,7 +266,7 @@ class Weeder
   {
     if ( i1.k + 1 >= i2.k ) return;
     while ( i1 != i2 ) {
-      if ( fartestPoint( pts, i1, i1.next, thr ) == null ) {
+      if ( farthestPoint( pts, i1, i1.next, thr ) == null ) {
         i1 = i1.next;
       }
     }

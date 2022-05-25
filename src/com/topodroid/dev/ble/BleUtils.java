@@ -38,7 +38,12 @@ public class BleUtils
   
   public static String deviceToString( BluetoothDevice device )
   {
-    String name = device.getName();
+    String name = null;
+    try {
+      name = device.getName();
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage() );
+    }
     if ( name == null ) name = "--";
     return name + " " + device.getAddress();
   }

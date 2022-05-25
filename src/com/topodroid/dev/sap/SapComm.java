@@ -236,7 +236,7 @@ public class SapComm extends TopoDroidComm
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
-    // TDLog.v( "SAP comm: batch data downlaod");
+    // TDLog.v( "SAP comm: batch data download");
     mConnectionMode = 0;
     mLister = lister;
     mNrPacketsRead = 0;
@@ -358,7 +358,7 @@ public class SapComm extends TopoDroidComm
 
   public void completedReliableWrite()
   {
-    TDLog.Log( TDLog.LOG_BT, "SAP comm: realiable write" );
+    TDLog.Log( TDLog.LOG_BT, "SAP comm: reliable write" );
   }
 
   public void disconnected()
@@ -384,10 +384,12 @@ public class SapComm extends TopoDroidComm
     // TDLog.v( "SAP callback W-chrt has write " + write_has_write );
 
     mWriteChrt.setWriteType( BluetoothGattCharacteristic.WRITE_TYPE_DEFAULT );
-    mWriteInitialized = gatt.setCharacteristicNotification( mWriteChrt, true );
-
-    mReadInitialized = gatt.setCharacteristicNotification( mReadChrt, true );
-
+    try {
+      mWriteInitialized = gatt.setCharacteristicNotification(mWriteChrt, true);
+      mReadInitialized = gatt.setCharacteristicNotification(mReadChrt, true);
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage() );
+    }
     BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleUtils.CCCD_UUID );
     if ( readDesc == null ) {
       TDLog.Error("SAP callback FAIL no R-desc CCCD ");
@@ -403,8 +405,13 @@ public class SapComm extends TopoDroidComm
       return -2;
     } else {
       readDesc.setValue( notify );
-      if ( ! gatt.writeDescriptor( readDesc ) ) {
-        TDLog.Error("SAP callback ERROR writing readDesc");
+      try {
+        if (!gatt.writeDescriptor(readDesc)) {
+          TDLog.Error("SAP callback ERROR writing readDesc");
+          return -3;
+        }
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
         return -3;
       }
     }

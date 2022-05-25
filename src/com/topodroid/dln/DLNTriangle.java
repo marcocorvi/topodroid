@@ -98,7 +98,7 @@ public class DLNTriangle
     return null;
   }
 
-  // axes are righthanded Y-X
+  // axes are right-handed Y-X
   boolean contains( Point2D p )
   {
     if ( y10*(p.x-mP0.x) - x10*(p.y-mP0.y) < 0 ) return false;

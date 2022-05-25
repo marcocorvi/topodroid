@@ -5,7 +5,7 @@
  *
  * @brief Cave3D wire segment
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  */
 package com.topodroid.TDX;
@@ -27,7 +27,7 @@ public class WireSegment
     wp2 = p2;
   }
 
-  /** @return true if this segment coincide with the givel segment withing epsilon tolerance
+  /** @return true if this segment coincide with the given segment withing epsilon tolerance
    * @param s   given segment
    * @param eps epsilon tolerance
    */

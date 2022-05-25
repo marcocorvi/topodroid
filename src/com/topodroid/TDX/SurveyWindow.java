@@ -252,8 +252,8 @@ public class SurveyWindow extends Activity
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
       @Override
-      public void onFocusChange( View v, boolean hasfocus ) {
-        if ( ! hasfocus ) {
+      public void onFocusChange( View v, boolean has_focus ) {
+        if ( ! has_focus ) {
           if ( SurveyInfo.declinationOutOfRange( mEditDecl ) ) {
             mEditDecl.setText("");
 	  }
@@ -279,7 +279,7 @@ public class SurveyWindow extends Activity
     // mPhoto = new ArrayList<>();
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder( true );
+    mListView.setEmptyPlaceholder( true );
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
@@ -520,7 +520,7 @@ public class SurveyWindow extends Activity
   }
 
   /** export the survey data
-   * @param export_type   export file format
+   * @param type   export file format
    * @param filename      export file "name"
    * @param prefix        station name prefix (Compass, VTopo, Winkarst
    * @note interface IExporter
@@ -634,7 +634,7 @@ public class SurveyWindow extends Activity
         TopoDroidApp.mSurveyWindow = null;
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -738,7 +738,7 @@ public class SurveyWindow extends Activity
   // }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

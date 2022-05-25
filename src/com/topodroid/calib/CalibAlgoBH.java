@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid DistoX Beat Heeb's calibration algorithm
+ * @brief TopoDroid DistoX Beat Heeb calibration algorithm
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -12,7 +12,7 @@
  * which, in turns, is based on PocketTopo implementation.
  * This calibration algorithm is published in 
  *   B. Heeb 
- *   A general calibration algorithm for a 3-axis compass/clinometer devices
+ *   A general calibration algorithm for a 3-axis compass/clino devices
  *   CREG Journal 73
  * The C# source code for both the linear and the non-linear algorithms 
  * hev been provided courtesy of Beat Heeb.
@@ -57,14 +57,14 @@ public class CalibAlgoBH extends CalibAlgo
 
 
   // @param N         number of calib data
-  // @parm nonLinear  whether to use non-linear algo
+  // @param nonLinear  whether to use non-linear algo
   public CalibAlgoBH( int N, boolean nonLinear )
   {
     super( N, nonLinear );
     // mNonLinear = nonLinear;
   }
 
-  // void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
+  // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
 
   // public TDVector GetNL() { return nL; }
 
@@ -94,7 +94,7 @@ public class CalibAlgoBH extends CalibAlgo
       bG = new TDVector();
       bM = new TDVector();
     }
-    nL = new TDVector();   // inittialize to zero vector
+    nL = new TDVector();   // initialize to zero vector
   }
 
   // compute (gxp, mxp)
@@ -136,7 +136,7 @@ public class CalibAlgoBH extends CalibAlgo
     TDMatrix[] gs = null;
     if ( mNonLinear ) {
       gl = new TDVector[nn]; // linearized g values
-      gs = new TDMatrix[nn]; // Diag(g^2 - 1/2)
+      gs = new TDMatrix[nn]; // Diagonal(g^2 - 1/2)
     }
 
     TDMatrix aG0;

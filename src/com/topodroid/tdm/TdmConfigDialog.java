@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager dialog to enter the filename of a project
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -15,13 +15,13 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
-import android.app.Dialog;
+// import android.app.Dialog;
 // import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 
 import android.view.View;
-import android.view.ViewGroup.LayoutParams;
+// import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
 import android.widget.EditText;
 

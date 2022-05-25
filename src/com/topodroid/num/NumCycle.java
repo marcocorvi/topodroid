@@ -79,7 +79,7 @@ class NumCycle
   // }
 
   /** assumes that branches displacement-vector (e,s,v) have been computed
-   *  computes the total displacement along the cycle (= loop misclosure)
+   *  computes the total displacement along the cycle (= loop mis-closure)
    */
   void computeError()
   {

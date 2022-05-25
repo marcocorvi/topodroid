@@ -196,7 +196,7 @@
 //     mScanHandler = null;
 //   }  
 // 
-//   /** set the reote BT device: tell the device to the parent
+//   /** set the remote BT device: tell the device to the parent
 //    * @param device   BT device
 //    */
 //   private void setRemoteDevice( final BluetoothDevice device )

@@ -31,7 +31,7 @@ public class DxfColor
     if ( max == 0 ) return 250;      // ci=250 black
     double s = delta / max;
 
-    // Ligtness
+    // Lightness
     double l = max;
     if( delta < 0.1 ) {
       if (max >= 0.88 ) {

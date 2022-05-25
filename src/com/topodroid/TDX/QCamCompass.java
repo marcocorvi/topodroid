@@ -40,7 +40,7 @@ import android.widget.ZoomButtonsController.OnZoomListener;
 import android.graphics.drawable.BitmapDrawable;
 
 import java.util.Locale;
-import java.nio.ByteBuffer;
+// import java.nio.ByteBuffer;
 
 class QCamCompass extends Dialog
                   implements OnClickListener
@@ -200,7 +200,7 @@ class QCamCompass extends Dialog
     }
   }
 
-  // /** conpute the azimuth of the z-vector from Android azimuth, pitch and roll
+  // /** compute the azimuth of the z-vector from Android azimuth, pitch and roll
   //  * @param a   azimuth [radians]
   //  * @param p   pitch
   //  * @param r   roll
@@ -238,7 +238,7 @@ class QCamCompass extends Dialog
   //   return TDMath.in360( TDMath.atan2d( ze, zn ) );
   // }
 
-  // /** conpute the clino of the z-vector (inward to the screen) from Android azimuth, pitch and roll
+  // /** compute the clino of the z-vector (inward to the screen) from Android azimuth, pitch and roll
   //  * @param a   azimuth [radians]
   //  * @param p   pitch
   //  * @param r   roll

@@ -18,7 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
@@ -47,7 +47,7 @@ import com.topodroid.mag.WorldMagneticModel;
 // import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
-import java.io.FileFilter;
+// import java.io.FileFilter;
 import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.FileNotFoundException;
@@ -603,7 +603,7 @@ public class MainWindow extends Activity
     mMenu.invalidate();
   }
 
-  /** close the menu oull-down list
+  /** close the menu pull-down list
    */
   private void closeMenu()
   {
@@ -611,7 +611,7 @@ public class MainWindow extends Activity
     onMenu = false;
   }
 
-  /** handle a tap on a manu item
+  /** handle a tap on a menu item
    * @param pos   menu item index
    */
   private void handleMenu( int pos ) 
@@ -694,7 +694,7 @@ public class MainWindow extends Activity
 
     // TDLog.Profile("TDActivity buttons");
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder( true );
+    mListView.setEmptyPlaceholder( true );
 
     // resetButtonBar(); // moved to on Start()
     // setMenuAdapter( );
@@ -1030,13 +1030,17 @@ public class MainWindow extends Activity
       if ( DeviceUtil.hasAdapter() ) {
         if ( TDSetting.mCheckBT == 1 && ! DeviceUtil.isAdapterEnabled() ) {    
           if ( TDandroid.BELOW_API_31 ) {
-            Intent enableIntent = new Intent( DeviceUtil.ACTION_REQUEST_ENABLE );
-            startActivityForResult( enableIntent, TDRequest.REQUEST_ENABLE_BT );
+            try {
+              Intent enableIntent = new Intent(DeviceUtil.ACTION_REQUEST_ENABLE);
+              startActivityForResult(enableIntent, TDRequest.REQUEST_ENABLE_BT);
+            } catch ( SecurityException e ) {
+              TDLog.Error("SECURITY error " + e.getMessage() );
+            }
           } else {
             TDToast.makeBad( R.string.no_bt );
           }
         // } else {
-          // nothing to do: scanBTDEvices(); is called by menu CONNECT
+          // nothing to do: scanBTDevices(); is called by menu CONNECT
         }
         // FIXME_BT
         // setBTMenus( DeviceUtil.isAdapterEnabled() );
@@ -1216,7 +1220,7 @@ public class MainWindow extends Activity
       case TDRequest.REQUEST_ENABLE_BT:
         // TDLocale.resetTheLocale(); // OK-LOCALE apparently this does not affect locale
         if ( result == Activity.RESULT_OK ) {
-          // nothing to do: scanBTDEvices() is called by menu CONNECT
+          // nothing to do: scanBTDevices() is called by menu CONNECT
         } else if ( ! say_dialogR && say_not_enabled ) {
           say_not_enabled = false;
           TDToast.makeBad(R.string.not_enabled );
@@ -1333,7 +1337,7 @@ public class MainWindow extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -1366,7 +1370,7 @@ public class MainWindow extends Activity
             finish();
           }
         } else {
-          // the database is opend after the second step of envs initialization
+          // the database is opened after the second step of envs initialization
           mApp.initEnvironmentFirst( );
           showInitDialogs( false /* ! TopoDroidApp.hasTopoDroidDatabase() */ );
           resetButtonBar();

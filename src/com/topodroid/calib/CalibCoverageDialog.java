@@ -179,7 +179,7 @@ public class CalibCoverageDialog extends MyDialog
 	if ( radius < H2 ) { // if pixel is inside the circle
 	  int iclino = (int)( (radius) * STEP_Y ); // range [0,90)
           float compass = ( TDMath.atan2( i, -j ) + TDMath.M_PI ) / TDMath.M_2PI; // range [0, 1]
-	  // UP HEMISPHERE iliear interpolation:
+	  // UP HEMISPHERE bi-linear interpolation:
           //   j2:    i21 - i22    ...  d2
           //          /       \         d
           //   j1:  i11 ----- i12  ...  d1

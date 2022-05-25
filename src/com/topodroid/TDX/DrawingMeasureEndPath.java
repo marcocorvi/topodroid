@@ -16,14 +16,14 @@ package com.topodroid.TDX;
 // import com.topodroid.math.TDVector;
 // import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 
 import android.graphics.Canvas;
-import android.graphics.Paint;
+// import android.graphics.Paint;
 import android.graphics.Matrix;
 import android.graphics.Path;
 import android.graphics.RectF;
-import android.graphics.Matrix;
+// import android.graphics.Matrix;
 
 public class DrawingMeasureEndPath extends DrawingPath
 {

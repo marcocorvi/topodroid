@@ -5,7 +5,7 @@
  *
  * @brief Walls DXF exporter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -352,8 +352,8 @@ public class ExportDXF
       // printString( pw, 7, style_dejavu ); // style (optional)
       // pw.printf("%s\%s 0%s", "\"10\"", EOL, EOL );
       printXYZ( pw, (xoff+x)*scale, (yoff+y)*scale, (zoff+z)*scale, 0 );
-      // printXYZ( pw, 0, 0, 1, 1 );   // second alignmenmt (otional)
-      // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (otional 0 0 1)
+      // printXYZ( pw, 0, 0, 1, 1 );   // second alignment (optional)
+      // printXYZ( pw, 0, 0, 1, 200 ); // extrusion (optional 0 0 1)
       // printFloat( pw, 39, 0 );      // thickness (optional 0) 
       printFloat( pw, 40, height );    // height
       // printFloat( pw, 41, 1 );      // scale X (optional 1)
@@ -474,7 +474,7 @@ public class ExportDXF
         writeString( out, 9, "$CECOLOR" );     writeInt( out, 62, 256 ); // 
 
         writeString( out, 9, "$MEASUREMENT" ); writeInt( out, 70, 1 ); // drawing units 1=metric
-        writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // defaulty draing units 0=unitless 4=mm
+        writeString( out, 9, "$INSUNITS" );    writeInt( out, 70, 4 ); // default drawing units 0=unit-less 4=mm
         writeString( out, 9, "$DIMASSOC" );    writeInt( out, 280, 0 ); // 0=no association
       }
       writeEndSection( out );
@@ -491,7 +491,7 @@ public class ExportDXF
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbViewportTableRecord" );
             writeString( out, 2, "*Active" ); // name
             writeInt( out, 70, 0 );  // flags:
-            //writeXY( out, (int)xmin, (int)ymin, (int)zmin ); // lower-left cormer //not Z point
+            //writeXY( out, (int)xmin, (int)ymin, (int)zmin ); // lower-left corner //not Z point
             //writeXY( out, (int)xmax, (int)ymax, (int)zmax ); // upper-right corner //not Z point
             //writeXY( out, (int)(xmin+xmax)/2, (int)(ymin+ymax)/2, (int)(zmin+zmax)/2 ); // center point //not Z point
             writeXY( out, 0, 0, 0 );
@@ -718,7 +718,7 @@ public class ExportDXF
           writeString( out, 0, "APPID" );
           if ( version13 ) { handle = inc(handle); } else { handle = 12; }
           writeAcDb( out, handle, AcDbSymbolTR, "AcDbRegAppTableRecord" );
-          writeString( out, 2, "ACAD" ); // applic. name
+          writeString( out, 2, "ACAD" ); // application name
           writeInt( out, 70, 0 );        // flag
         }
         writeEndTable( out );
@@ -811,7 +811,7 @@ public class ExportDXF
         handle = inc(handle); writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
         writeString( out, 8, "0" );
         writeString( out, 2, "*Model_Space" );
-        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-const attr, 4=xref, 8=xref overlay,
         writeInt( out, 10, 0 ); 
         writeInt( out, 20, 0 ); 
         writeInt( out, 30, 0 ); 
@@ -824,7 +824,7 @@ public class ExportDXF
         handle = inc(handle); writeAcDb( out, handle, AcDbEntity, "AcDbBlockBegin" );
         writeString( out, 8, "0" );
         writeString( out, 2, "*Paper_Space" );
-        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-conts attr, 4=xref, 8=xref overlay,
+        writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-const attr, 4=xref, 8=xref overlay,
         writeInt( out, 10, 0 ); 
         writeInt( out, 20, 0 ); 
         writeInt( out, 30, 0 ); 

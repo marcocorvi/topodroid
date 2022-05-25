@@ -18,7 +18,7 @@ class XSectionScrap
   float x, y;  // offset (scene coords ?)
 
   /** cstr
-   * @param nm  name
+   * @param nn  name
    * @param xx  X offset
    * @param yy  Y offset
    */

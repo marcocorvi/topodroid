@@ -37,7 +37,7 @@ import android.graphics.Matrix;
 import android.graphics.RectF;
 import android.graphics.SurfaceTexture;
 
-// API-21 use android.hardware.camera2 clases
+// API-21 use android.hardware.camera2 classes
 import android.hardware.SensorManager;
 import android.hardware.display.DisplayManager;
 
@@ -119,7 +119,7 @@ public class QCamDrawingTexture extends TextureView
     @Override
     public void onSurfaceTextureSizeChanged( SurfaceTexture texture, int w, int h )
     {
-      // TDLog.v("CAM2 surface listener on sizw changed");
+      // TDLog.v("CAM2 surface listener on size changed");
       configureTransform( w, h ); 
     }
 
@@ -269,7 +269,7 @@ public class QCamDrawingTexture extends TextureView
             Integer ae = result.get( CaptureResult.CONTROL_AE_STATE );
             if ( ae == null || ae == CaptureResult.CONTROL_AE_STATE_CONVERGED ) {
               mState = STATE_PICTURE_TAKEN;
-              // TDLog.v("CAM2 state WATING LOCK --> PICTURE TAKEN");
+              // TDLog.v("CAM2 state WAITING LOCK --> PICTURE TAKEN");
               capturePicture();
             } else {
               runPrecaptureSequence();
@@ -323,7 +323,7 @@ public class QCamDrawingTexture extends TextureView
     mBackgroundThread  = TDThread.startThread( "camera thread" );
     mBackgroundHandler = TDThread.getHandler( mBackgroundThread );
     
-    if ( isAvailable() ) { // already available: open immadiately the camera
+    if ( isAvailable() ) { // already available: open immediately the camera
       openCamera( getWidth(), getHeight() );
     } else { // npt yet available: set a listener
       setSurfaceTextureListener( mSurfaceTextureListener );
@@ -743,7 +743,7 @@ public class QCamDrawingTexture extends TextureView
   //   }
   // }
 
-  /** unlock fpcus - and restart previewing
+  /** unlock focus - and restart previewing
    */
   private void unlockFocus()
   {
@@ -858,7 +858,7 @@ public class QCamDrawingTexture extends TextureView
   private int ratioWidth  = 0;
   private int ratioHeight = 0;
 
-  /** set the aspect raion 
+  /** set the aspect ratio
    * @param w   width
    * @param h   height
    */

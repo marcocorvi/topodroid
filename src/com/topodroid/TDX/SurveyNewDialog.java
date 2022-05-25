@@ -98,8 +98,8 @@ class SurveyNewDialog extends MyDialog
 
     mEditDecl.setOnFocusChangeListener( new OnFocusChangeListener() {
       @Override
-      public void onFocusChange( View v, boolean hasfocus ) {
-        if ( ! hasfocus ) {
+      public void onFocusChange( View v, boolean has_focus ) {
+        if ( ! has_focus ) {
           if ( SurveyInfo.declinationOutOfRange( mEditDecl ) ) {
             mEditDecl.setText("");
 	  }

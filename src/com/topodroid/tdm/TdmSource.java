@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager survey source object
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -14,7 +14,7 @@
 package com.topodroid.tdm;
 
 import android.view.View;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 import android.widget.CheckBox;
 
 class TdmSource extends TdmFile
@@ -28,7 +28,7 @@ class TdmSource extends TdmFile
     mChecked = false;
   }
 
-  // void toggleChecekd() { mChecked = ! mChecked; }
+  // void toggleChecked() { mChecked = ! mChecked; }
 
   boolean isChecked() { return mChecked; }
 

@@ -12,42 +12,42 @@
 package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
+// import com.topodroid.utils.TDUtil;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDandroid;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Environment;
-import android.os.Build;
+// import android.os.Build;
 
 // import android.app.Application;
-import android.app.Activity;
+// import android.app.Activity;
 
-import android.content.Context;
-import android.content.ContentValues;
-import android.content.ContentResolver;
-import android.content.Intent;
-import android.content.IntentFilter;
-import android.content.ContentUris;
-import android.content.res.Resources;
-import android.content.res.Configuration;
-import android.content.SharedPreferences;
-import android.preference.PreferenceManager;
+// import android.content.Context;
+// import android.content.ContentValues;
+// import android.content.ContentResolver;
+// import android.content.Intent;
+// import android.content.IntentFilter;
+// import android.content.ContentUris;
+// import android.content.res.Resources;
+// import android.content.res.Configuration;
+// import android.content.SharedPreferences;
+// import android.preference.PreferenceManager;
 
-import android.database.Cursor;
+// import android.database.Cursor;
 
-import android.provider.DocumentsContract;
+// import android.provider.DocumentsContract;
 import android.net.Uri;
 
-import android.provider.MediaStore;
+// import android.provider.MediaStore;
 
 // import androidx.documentfile.provider.DocumentFile;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 
 import java.io.File;
-import java.io.FileDescriptor;
+// import java.io.FileDescriptor;
 import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.io.OutputStreamWriter;
@@ -459,7 +459,7 @@ public class TDFile
    */
   public static File getExternalTempFile( String name ) { return getExternalFile( "tmp", name ); }
 
-  /** clear istale files in the external temporary folder, in the current work directory
+  /** clear stale files in the external temporary folder, in the current work directory
    * @param before  timestamp
    */
   public static void clearExternalTempDir( long before )
@@ -532,7 +532,7 @@ public class TDFile
 
   /** @return a file writer
    * @param name    file fullpath
-   * @param append  whther to open the file in append mode
+   * @param append  whether to open the file in append mode
    */
   public static FileWriter getFileWriter( String name, boolean append ) throws IOException { return new FileWriter( name, append ); }
 
@@ -694,7 +694,7 @@ public class TDFile
     return f;
   }
 
-  /** creates an "extrenal" folder
+  /** creates an "external" folder
    * @param type    folder pathname
    */
   public static File makeExternalDir( String type )
@@ -781,7 +781,7 @@ public class TDFile
   }
 
   // @param subdir   folder, relative to CWD
-  // @param name     filename, relarive to the folder
+  // @param name     filename, relative to the folder
   public static boolean hasMSfile( String subdir, String name )
   {
     File dir = getMSfile( subdir );
@@ -825,7 +825,7 @@ public class TDFile
     return new FileOutputStream( getMSfile( subdir, filename ) );
   }
 
-  // @note the returnet OutputStreamWriter must be closed after it has been written
+  // @note the returned OutputStreamWriter must be closed after it has been written
   static public BufferedWriter getMSwriter( String subdir, String filename, String mimetype ) throws IOException
   {
     if ( ! makeMSdir( subdir ) ) {
@@ -895,7 +895,7 @@ public class TDFile
    * @param uri    file uri
    * @param mode   open mode, eg, "r" or "w"
    * @return file descriptor
-   * @note After use must call close() on the file desriptor
+   * @note After use must call close() on the file descriptor
    */
   static ParcelFileDescriptor getFileDescriptor( Uri uri, String mode )
   {

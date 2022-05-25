@@ -50,7 +50,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.PlotType;
-import com.topodroid.common.StationFlag;
+// import com.topodroid.common.StationFlag;
 
 import android.os.ParcelFileDescriptor;
 import android.net.Uri;
@@ -93,7 +93,7 @@ public class TDExporter
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) {
       for ( DBlock blk : list ) {
 	if ( blk.mTo != null && blk.mTo.length() > 0 && blk.mFrom != null && blk.mFrom.length() > 0 ) {
-          // sets the blocks clinos
+          // sets the blocks clino
           TDNum num = new TDNum( list, blk.mFrom, null, null, 0.0f, null ); // no declination, null formatClosure
 	  break;
 	}
@@ -985,7 +985,7 @@ public class TDExporter
   //   NOTE shot flags are ignored
 
   /** export data json file
-   * @param br    buffered output stream
+   * @param bw    buffered output stream
    * @param sid   survey ID
    * @param data  database helper object
    * @param info  survey info
@@ -1081,7 +1081,7 @@ public class TDExporter
   //   NOTE shot flags are ignored
 
   /** export data track-file
-   * @param br    buffered output stream
+   * @param bw    buffered output stream
    * @param data  database helper object
    * @param info  survey info
    * @param surveyname survey name

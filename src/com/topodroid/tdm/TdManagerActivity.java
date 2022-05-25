@@ -5,7 +5,7 @@
  *
  * @brief project manager main activity
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  *
@@ -23,7 +23,7 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyHorizontalListView;
 import com.topodroid.ui.MyHorizontalButtonView;
 import com.topodroid.help.HelpDialog;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDandroid;
 import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDPath;
@@ -31,23 +31,23 @@ import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
 // import java.io.File;
-import java.io.IOException;
-import java.io.FilenameFilter;
+// import java.io.IOException;
+// import java.io.FilenameFilter;
 
 import java.util.ArrayList;
 
 import android.content.res.Resources;
 import android.content.res.Configuration;
-import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager;
 // import android.app.Dialog;
-import android.os.Build;
+// import android.os.Build;
 
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.ListView;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
-import android.widget.LinearLayout.LayoutParams;
+// import android.widget.ImageView;
+// import android.widget.LinearLayout;
+// import android.widget.LinearLayout.LayoutParams;
 import android.widget.Button;
 
 import android.view.View;
@@ -64,9 +64,9 @@ import android.os.Bundle;
 import android.app.Activity;
 import android.net.Uri;
 
-import android.view.Menu;
+// import android.view.Menu;
 // import android.view.SubMenu;
-import android.view.MenuItem;
+// import android.view.MenuItem;
 // import android.view.MenuInflater;
 
 public class TdManagerActivity extends Activity
@@ -147,7 +147,7 @@ public class TdManagerActivity extends Activity
 
     if ( mNrButton1 > 0 ) {
       mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-      // int size = TopoDroisApp.getScaledSize( this );
+      // int size = TopoDroidApp.getScaledSize( this );
       // LinearLayout layout = (LinearLayout) findViewById( R.id.list_layout );
       // layout.setMinimumHeight( size + 40 );
       // LayoutParams lp = new LayoutParams( LayoutParams.WRAP_CONTENT, LayoutParams.WRAP_CONTENT );
@@ -400,7 +400,7 @@ public class TdManagerActivity extends Activity
   // /** implements user long-taps on items
   //  * @param parent ...
   //  * @param view   tapped view
-  //  * @param pos    tapped iten index
+  //  * @param pos    tapped item index
   //  * @param id     ...
   //  */
   // @Override
@@ -413,7 +413,7 @@ public class TdManagerActivity extends Activity
   /** implements user taps on items
    * @param parent ...
    * @param view   tapped view
-   * @param pos    tapped iten index
+   * @param pos    tapped item index
    * @param id     ...
    */
   @Override
@@ -436,7 +436,7 @@ public class TdManagerActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

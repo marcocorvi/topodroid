@@ -83,7 +83,7 @@ public class CalibCheckDialog extends MyDialog
     list.setDividerHeight( 2 );
     
     // setTitle( R.string.title_calib_check );
-    // NOTE no calib ceck for DATAMODE_DIVING
+    // NOTE no calib check for DATAMODE_DIVING
     for ( DBlock blk : mShots ) {
       array_adapter.add( blk.toShortStringNormal(true) );
     }
@@ -324,7 +324,7 @@ public class CalibCheckDialog extends MyDialog
                 TDVector w3 = new TDVector( h * TDMath.sind( bb.mBearing ), h * TDMath.cosd( bb.mBearing ), bb.mLength * TDMath.sind( bb.mClino ) );
 	        float l3 = w3.Length();
                 w3.plusEqual( w2 );                    // W1 + W2 + W3
-	    	// misclosure (percent of length), the factor 1 / (10*RAD2DEG) acoounts for the same in makeHistogramBitmap()
+	    	// mis-closure (percent of length), the factor 1 / (10*RAD2DEG) accounts for the same in makeHistogramBitmap()
 		// 52 = 3*sqrt(3) * 100 / 10
                 errors3[(h1*n2+h2)*n3+h3] = 52 * w3.Length() / ( (l1+l2+l3)*TDMath.RAD2DEG);
 		// TDLog.v( "error " + errors3[(h1*n2+h2)*n3+h3] + " " + l1 + " " + l2 + " " + l3 );

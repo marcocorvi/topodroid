@@ -19,7 +19,7 @@ class IcoVertex extends IcoPoint
   int mIndex;
 
   /** cstr
-   * @parm k   vertex index
+   * @param k   vertex index
    */
   IcoVertex( int k )
   {

@@ -20,12 +20,12 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
-import com.topodroid.prefs.TDPrefActivity;
+// import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.dev.Device;
-import com.topodroid.dev.ConnectionState;
+// import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.TopoDroidComm;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.distox1.DistoXA3Comm;
@@ -51,7 +51,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.FileWriter;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
+// import java.io.FileReader;
 import java.io.BufferedReader;
 import java.io.StringReader;
 
@@ -74,25 +74,25 @@ import android.os.RemoteException;
 // import android.os.Debug;
 // import android.os.SystemClock; // FIXME TROBOT
 
-import android.database.sqlite.SQLiteDatabase;
+// import android.database.sqlite.SQLiteDatabase;
 
 import android.app.Application;
-import android.app.Activity;
+// import android.app.Activity;
 // import android.app.Notification;
 // import android.app.NotificationManager;
 // import android.app.KeyguardManager;
 // import android.app.KeyguardManager.KeyguardLock;
 
 import android.content.Context;
-import android.content.pm.ActivityInfo;
+// import android.content.pm.ActivityInfo;
 // import android.content.Intent;
 // import android.content.ActivityNotFoundException;
 import android.content.IntentFilter;
 import android.content.res.Resources;
 import android.content.res.Configuration;
 
-import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
+// import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.FileProvider;
 
 import android.net.Uri;
@@ -101,7 +101,7 @@ import android.net.Uri;
 // import android.provider.Settings.System;
 // import android.provider.Settings.SettingNotFoundException;
 
-import android.view.WindowManager;
+// import android.view.WindowManager;
 // import android.view.Display;
 import android.view.ViewGroup.LayoutParams;
 
@@ -114,7 +114,7 @@ import android.widget.Button;
 import android.util.DisplayMetrics;
 
 import android.bluetooth.BluetoothDevice;
-import android.bluetooth.BluetoothAdapter;
+// import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice; // COSURVEY
 
 public class TopoDroidApp extends Application
@@ -270,7 +270,7 @@ public class TopoDroidApp extends Application
     return Resources.getSystem().getDisplayMetrics().density;
   }
 
-  // /** @return the densiti of the display
+  // /** @return the density of the display
   //  * @param context   context (unused)
   //  */
   // public static float getDisplayDensity( Context context )
@@ -378,7 +378,7 @@ public class TopoDroidApp extends Application
     }
   }
 
-  /** send a notification to the commention listeners
+  /** send a notification to the connection listeners
    * @param w  notification (value)
    */
   private void notifyConnState( int w )
@@ -507,9 +507,9 @@ public class TopoDroidApp extends Application
     }
   }
 
-  /** set the blluetooth device nickname
+  /** set the bluetooth device nickname
    * @param device      device
-   * @param nickname    device nickmane
+   * @param nickname    device nickname
    */
   static void setDeviceName( Device device, String nickname )
   {
@@ -813,7 +813,7 @@ public class TopoDroidApp extends Application
     TDToast.make(R.string.bt_reset );
   }
  
-  /** initualize the display parameters 
+  /** initialize the display parameters
    * @param dm     display metrics
    * // @param landscape whether the screen orientation is landscape
    */
@@ -878,7 +878,7 @@ public class TopoDroidApp extends Application
     //   setDefaultSocketType( );
     // }
     mSetupScreen = prefHlp.getBoolean( "DISTOX_SETUP_SCREEN", true ); // default: SetupScreen = true
-    if ( mSetupScreen ) { // deafult button size
+    if ( mSetupScreen ) { // default button size
       TDSetting.mSizeBtns = 5;
       TDSetting.mSizeButtons =  (int)( TDSetting.BTN_SIZE_UNUSED * TopoDroidApp.getDisplayDensity() * 0.86f );
     }
@@ -917,7 +917,7 @@ public class TopoDroidApp extends Application
 
   static boolean done_init_env_second = false;
 
-  /** second step of environment initailization
+  /** second step of environment initialization
    * @param with_dialog_r
    * @return true if successful - can fail if cannot open the database
    */
@@ -1040,7 +1040,7 @@ public class TopoDroidApp extends Application
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
   }
 
-  /** set the current work directoty
+  /** set the current work directory
    * @param cwd current work directory
    // * @param cbd current base directory (UNUSED)
    */
@@ -1071,7 +1071,7 @@ public class TopoDroidApp extends Application
    */
   public void uploadCalibCoeff( byte[] coeff, boolean check, Button b )
   {
-    // TODO this writeCoeff shoudl be run in an AsyncTask
+    // TODO this writeCoeff should be run in an AsyncTask
     if ( b != null ) b.setEnabled( false );
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
       TDToast.makeBad( R.string.no_device_address );
@@ -1629,8 +1629,8 @@ public class TopoDroidApp extends Application
   static void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
-  /** set the prinmary device
-   * @param address   prinmary device address
+  /** set the primary device
+   * @param address   primary device address
    * @param model     device model
    * @param name      device name
    * @param bt_device bluetooth device of the device
@@ -1719,7 +1719,7 @@ public class TopoDroidApp extends Application
       // FIXME BATCH
       // if ( ret > 0 && TDSetting.mSurveyStations > 0 ) {
       //   // FIXME TODO select only shots after the last leg shots
-      //   List< DBlock > list = mData.selectAllShots( TDInstance.sid, TDStataus.NORMAL );
+      //   List< DBlock > list = mData.selectAllShots( TDInstance.sid, TDStatus.NORMAL );
       //   assign Stations( list );
       // }
     }
@@ -1747,7 +1747,7 @@ public class TopoDroidApp extends Application
    * this re-assign stations to shots with station(s) already set
    * the list of stations is ordered by compare
    *
-   * @param blk0 block after whcih to assign stations
+   * @param blk0 block after which to assign stations
    * @param list list of shot to assign
    * @return ???
    */
@@ -1805,11 +1805,11 @@ public class TopoDroidApp extends Application
 
   /** 
    * @param context   context
-   * @param uri       expot URI or null (to export to private folder)
+   * @param uri       export URI or null (to export to private folder)
    * @param origin    sketch origin
    * @param psd1      plot data
    * @param psd2      profile data
-   * @param toast     whther to toast to result
+   * @param toast     whether to toast to result
    */
   static void exportSurveyAsCsxAsync( Context context, Uri uri, String origin, PlotSaveData psd1, PlotSaveData psd2, boolean toast )
   {
@@ -1829,7 +1829,7 @@ public class TopoDroidApp extends Application
   }
 
   // FIXME_SYNC might be a problem with big surveys
-  // this is called sync to pass the therion file to the 3D viewwer
+  // this is called sync to pass the therion file to the 3D viewer
   // static boolean exportSurveyAsThSync( )
   // {
   //   SurveyInfo info = getSurveyInfo();
@@ -2062,7 +2062,7 @@ public class TopoDroidApp extends Application
   long insertLRUDatStation( long at, String splay_station, float bearing, float clino,
                             String left, String right, String up, String down )
   {
-    // TDLog.v("LRUD " + "isert LRUD " + at + " station " + splay_station );
+    // TDLog.v("LRUD " + "insert LRUD " + at + " station " + splay_station );
     return addManualSplays( at, splay_station, left, right, up, down, bearing, false, true ); // horizontal=false, true=ret +/-1;
   }
 
@@ -2082,7 +2082,7 @@ public class TopoDroidApp extends Application
     resetCurrentOrLastStation( );
     long millis = java.lang.System.currentTimeMillis()/1000;
     distance = distance / TDSetting.mUnitLength;
-    // TDLog.v( "[2] dupl.-shot Data " + distance + " " + bearing + " " + clino );
+    // TDLog.v( "[2] duplicate-shot Data " + distance + " " + bearing + " " + clino );
     long id = mData.insertManualShot( TDInstance.sid, -1L, millis, 0, distance, bearing, clino, 0.0f, extend, 0.0, LegType.NORMAL, 1 );
     if ( mData.checkSiblings( id, TDInstance.sid, from, to, distance, bearing, clino ) ) {
       // TDLog.v("APP insert duplicate leg detect bad sibling");
@@ -2250,7 +2250,7 @@ public class TopoDroidApp extends Application
    * @param from     from station
    * @param to       to station
    * @param distance shot length
-   * @param bearing  shot aimuth
+   * @param bearing  shot azimuth
    * @param clino    shot clino
    * @param extend0  extend
    * @param flag0    flags
@@ -2463,7 +2463,7 @@ public class TopoDroidApp extends Application
 
   /** read the firmware signature - only X310
    * @param hw expected device hardware
-   * @return firmware signtaure (or null if failure)
+   * @return firmware signature (or null if failure)
    */
   public byte[] readFirmwareSignature( int hw )
   {
@@ -2580,7 +2580,7 @@ public class TopoDroidApp extends Application
   }
 
   // @param ctx       context
-  // @prarm filename  photo filename
+  // @param filename  photo filename
   // static void viewPhoto( Context ctx, String filename )
   // {
   //   // TDLog.v( "photo <" + filename + ">" );
@@ -2785,10 +2785,10 @@ public class TopoDroidApp extends Application
   // ==================================================================
   
   /** export survey data in a user-chosen URI
-   * @param context         conetxt
+   * @param context         context
    * @param uri             output URI
    * @param exportIndex     export type
-   * @param exportPrefix    stationn names export prefix (Compass, VTopo, Winkarst
+   * @param exportPrefix    station names export prefix (Compass, VTopo, Winkarst
    * @param toast           whether to toast a message
    * @note called by (ShotWindow and) SurveyWindow on export
    */
@@ -2812,10 +2812,10 @@ public class TopoDroidApp extends Application
   
   /** export survey data in the "out" subfolder
    * ----- APP_OUT_DATA
-   * @param context         conetxt
+   * @param context         context
    * @param filename        output filename
    * @param exportIndex     export type
-   * @param exportPrefix    stationn names export prefix (Compass, VTopo, Winkarst)
+   * @param exportPrefix    station names export prefix (Compass, VTopo, Winkarst)
    * @param toast           whether to toast a message
    * @note called by SurveyWindow on export
    */

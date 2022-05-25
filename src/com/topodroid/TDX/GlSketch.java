@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid symbols
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -209,7 +209,7 @@ public class GlSketch extends GlShape
     areaCount = 0;
     for ( SketchLine area : mAreas ) if ( area.size() > 2 ) areaCount += area.size() - 2; // triangles per area
 
-    // TDLog.v("SKETCH point coint " + pointCount + " line count " + lineCount + " area count " + areaCount );
+    // TDLog.v("SKETCH point count " + pointCount + " line count " + lineCount + " area count " + areaCount );
     if ( (pointCount + lineCount + areaCount) == 0 ) {
       mEmpty = true;
       return;
@@ -406,7 +406,7 @@ public class GlSketch extends GlShape
     return isLeftHanded( v1, v2, v0 ) && isLeftHanded( v2, v3, v0 ) && isLeftHanded( v3, v1, v0 );
   }
 
-  /** @return array of indices of area triuangulation
+  /** @return array of indices of area triangulation
    * @param area    area
    */
   private int[] triangulate( SketchLine area )
@@ -511,7 +511,7 @@ public class GlSketch extends GlShape
     float ds = 72.0f/WIDTH;
     float dt = 72.0f/HEIGHT;
 
-    int NN = 6; // 2 trinagles (3 vertex per triangle)
+    int NN = 6; // 2 triangles (3 vertex per triangle)
     // ---------- BASE POINT
     float[] data6 = new float[ pointCount * 3 * NN ]; // 3 float, XYZ, per vertex
     float[] pos = new float[ pointCount * 4 * NN ]; // Dx, Dy, Dz=0, S, T

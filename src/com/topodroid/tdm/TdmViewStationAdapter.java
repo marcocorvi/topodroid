@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager survey station display adapter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -14,24 +14,24 @@ package com.topodroid.tdm;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+// import java.util.Iterator;
 
 import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.CheckBox;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 import android.view.View.OnClickListener;
 
-import android.widget.ArrayAdapter;
-import android.widget.ListView;
-import android.widget.CheckBox;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
+// import android.widget.ArrayAdapter;
+// import android.widget.ListView;
+// import android.widget.CheckBox;
+// import android.widget.AdapterView;
+// import android.widget.AdapterView.OnItemClickListener;
 
 class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
                            implements OnClickListener

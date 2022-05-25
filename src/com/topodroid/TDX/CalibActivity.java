@@ -173,7 +173,7 @@ public class CalibActivity extends Activity
     }
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder(true);
+    mListView.setEmptyPlaceholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
@@ -540,7 +540,7 @@ public class CalibActivity extends Activity
   }
 
   /** respond to a tap on an item
-   * @param perent   parent container
+   * @param parent   parent container
    * @param view     item
    * @param pos      item posiztion
    * @param id       ...
@@ -555,7 +555,7 @@ public class CalibActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

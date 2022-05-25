@@ -1,4 +1,4 @@
-/* @file DrawingSatationSplay.java
+/* @file DrawingStationSplay.java
  *
  * @author marco corvi
  * @date nov 2011

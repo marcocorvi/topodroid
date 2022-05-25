@@ -81,7 +81,7 @@ public class SurveyInfo
     return 0;
   }
 
-  /** @return the value of the declination from the string presentation [degrres]
+  /** @return the value of the declination from the string presentation [degrees]
    * @param et    string presentation (as edit text)
    */
   public static float declination( EditText et )
@@ -102,7 +102,7 @@ public class SurveyInfo
     return decl;
   }
 
-  /** @return false if declination is in range [-360,360], or edit textfield is empty
+  /** @return false if declination is in range [-360,360], or edit text-field is empty
    * @param et    string presentation (as edit text)
    */
   static boolean declinationOutOfRange( EditText et )

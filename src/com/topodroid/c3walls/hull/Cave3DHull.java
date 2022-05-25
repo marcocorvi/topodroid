@@ -6,7 +6,7 @@
  * @brief convex hull of the 2D projs of splays on the plane normal to the shot
  *
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  */
 package com.topodroid.c3walls.hull;
@@ -204,7 +204,7 @@ class Cave3DHull
   private void computeHullProjs( ArrayList< Cave3DShot > rays, ArrayList< HullProjection > projs, Cave3DStation st, HullAngle angles )
   {
     // N.B. the HullProjection has a vector that depends on setting mSplayProj (ie use splay as 3D vector or on the projection plane)
-    //      but its projection vector is indepenedent
+    //      but its projection vector is independent
     // Vector3D right = new Vector3D( Math.sin( angles.a1 ), -Math.cos( angles.a1 ), 0 ); // normal to the right
     // Vector3D left  = new Vector3D( Math.sin( angles.a2 ), -Math.cos( angles.a2 ), 0 ); // normal to the left
     // TDLog.v("Hull compute projs ");

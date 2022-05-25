@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
 
 import android.content.SharedPreferences.Editor;
@@ -20,11 +20,11 @@ import android.content.SharedPreferences.Editor;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.Context;
-import java.lang.reflect.Method;
+// import java.lang.reflect.Method;
 import android.os.Build;
 // import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
-import android.content.pm.PackageManager.NameNotFoundException;
+// import android.content.pm.PackageManager.NameNotFoundException;
 // import android.content.pm.PackageInfo;
 
 import android.hardware.Sensor;
@@ -173,7 +173,7 @@ public class TDandroid
       // TDLog.v( "request perms time " + time );
       // String[] ask_perms = new String[ not_granted ];
       // int kk = 0;
-      // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = parms[k];
+      // for ( int k = 0; k < NR_PERMS; ++k ) if ( ! GrantedPermission[k] ) ask_perms[kk++] = perms[k];
       activity.requestPermissions( perms, REQUEST_PERMISSIONS );
     }
     
@@ -208,7 +208,7 @@ public class TDandroid
   {
     if ( BELOW_API_23 ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
-      // if ( k == PERN_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
+      // if ( k == PERM_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
     }
     return true;
@@ -300,7 +300,7 @@ public class TDandroid
   /** check whether the running app has the needed permissions
    * @return 0 ok
    *         -1 missing some necessary permission
-   *         >0 missing some complementary permssion (flag):
+   *         >0 missing some complementary permission (flag):
    *            1 FINE_LOCATION
    *            2 CAMERA
    *            4 AUDIO
@@ -471,9 +471,9 @@ public class TDandroid
 
   // static void unlockOrientation( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED ); }
 
-  // static void lockOrientationiPortrait( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ); }
+  // static void lockOrientationPortrait( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_PORTRAIT ); }
 
-  // static void lockOrientationiLandscape( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ); }
+  // static void lockOrientationLandscape( Activity act ) { act.setRequestedOrientation( ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE ); }
 
 
   public static void setScreenOrientation( Activity act )

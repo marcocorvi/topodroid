@@ -100,7 +100,7 @@ public class DistoXA3Comm extends DistoXComm
       if ( connectSocketAny( address ) ) {
         if ( mProtocol instanceof DistoXA3Protocol ) {
           res = ((DistoXA3Protocol)mProtocol).readA3HeadTail( command, head_tail );
-          // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, haed_tail ); NOTE int[] instead of byte[]
+          // FIXME ASYNC new CommandThread( mProtocol, READ_HEAD_TAIL, head_tail ); NOTE int[] instead of byte[]
           // TDLog.Log( TDLog.LOG_COMM, "read Head Tail() result " + res );
         }
       }

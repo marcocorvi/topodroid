@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date oct 2014
  *
- * @brief TopoDroid label adder interfare
+ * @brief TopoDroid label adder interface
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -166,8 +166,8 @@ abstract class ItemDrawer extends Activity
   // TOOL SELECTION
 
   /** react to the selection of an area symbol
-   * @param p      symbol index
-   * @param update_recent whether to update the recemt symbols set
+   * @param k      symbol index
+   * @param update_recent whether to update the recent symbols set
    */
   public void areaSelected( int k, boolean update_recent ) 
   {
@@ -190,8 +190,8 @@ abstract class ItemDrawer extends Activity
   }
 
   /** react to the selection of a line symbol
-   * @param p      symbol index
-   * @param update_recent whether to update the recemt symbols set
+   * @param k      symbol index
+   * @param update_recent whether to update the recent symbols set
    */
   public void lineSelected( int k, boolean update_recent ) 
   {
@@ -218,7 +218,7 @@ abstract class ItemDrawer extends Activity
 
   /** react to the selection of a point symbol
    * @param p      symbol index
-   * @param update_recent whether to update the recemt symbols set
+   * @param update_recent whether to update the recent symbols set
    */
   public void pointSelected( int p, boolean update_recent )
   {

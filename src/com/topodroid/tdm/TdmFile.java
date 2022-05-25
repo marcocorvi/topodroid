@@ -5,7 +5,7 @@
  *
  * @brief TdmFile represents a cave project stored as a file
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -19,7 +19,7 @@ class TdmFile
   private String mFilepath;            // tdconfig file (fullpath) or null
 
   /** cstr
-   * @param filepath   file full patname
+   * @param filepath   file full pathname
    * @param surveyname presentation name: survey name or filename
    */
   public TdmFile( String filepath, String surveyname )

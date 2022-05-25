@@ -12,15 +12,15 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 // import com.topodroid.utils.TDUtil;
 
 // import java.io.File;
-import java.io.FileOutputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+// import java.io.FileOutputStream;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
 
-import android.graphics.Bitmap;
+// import android.graphics.Bitmap;
 // import android.graphics.Bitmap.CompressFormat;
 
 class MediaManager

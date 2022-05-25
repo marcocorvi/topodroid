@@ -61,12 +61,12 @@ import java.io.IOException;
  *   determines the scale for the drawing (real-world value of the SVG user units)
  * - User-unit: unit length in the current user coord system
  * - Unit-id: can be mm, cm, in, pt, px, pc ...
- * - Scale-factor: (from SVG root width/height and viewbox) maps user-units in the doc to real-world units
+ * - Scale-factor: (from SVG root width/height and view-box) maps user-units in the doc to real-world units
  *
  * Example <svg width="100cm" height="60cm" viewBox="0 0, 50 30">
  *   the nominal size of the drawing is 100x60 cm
  *   if the unit-id is missing the user-unit is intended
- *   the drawing is 50x30 unser-units ( 1 user-unit = 2 cm )
+ *   the drawing is 50x30 user-units ( 1 user-unit = 2 cm )
  *     width="10"  -> 10 user-units = 2 in (at nominal drawing size)
  *     width="1in" -> 96 user-units = 19.2 in
  *   the user-unit can be scaled by a transform="scale(0.75,0.75)" -> user-unit is scaled to 3/4
@@ -133,7 +133,7 @@ public class DrawingSvgBase
     pw.format(Locale.US, "%s cx=\"%.2f\" cy=\"%.2f\" ", prefix, x*TDSetting.mToSvg, y*TDSetting.mToSvg );
   }
 
-  /** print a segment with the closing angle-braket
+  /** print a segment with the closing angle-bracket
    * @param pw   writer
    * @param x1    X coord of the first point
    * @param y1    Y coord of the first point
@@ -400,7 +400,7 @@ public class DrawingSvgBase
     }
   }
 
-  /** draw a xscetion tdr 
+  /** draw a xsection tdr
    * @param pw   output writer
    * @param scrapfile   tdr file
    * @param dx          delta X applied when the trd items are read from the file

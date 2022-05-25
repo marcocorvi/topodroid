@@ -50,7 +50,7 @@ class AudioListDialog extends MyDialog
 
   /** cstr
    * @param context   context
-   * @param perent    parent window
+   * @param parent    parent window
    * @param audios    audio list
    * @param shots     data list
    */
@@ -64,7 +64,7 @@ class AudioListDialog extends MyDialog
 
 
   /** @return description from an audio info
-   * @param info   audio info
+   * @param audio   audio info
    */
   private String getAudioDescription( AudioInfo audio )
   {
@@ -78,7 +78,7 @@ class AudioListDialog extends MyDialog
   }
 
   /** @return data block from an audio info
-   * @param info   audio info
+   * @param audio   audio info
    */
   private DBlock getAudioBlock( AudioInfo audio )
   {

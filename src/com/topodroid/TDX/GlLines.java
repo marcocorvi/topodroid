@@ -5,7 +5,7 @@
  *
  * @brief Cave3D shots (either legs or splays)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -178,7 +178,7 @@ public class GlLines extends GlShape
     return sb.toString();
   }
  
-  /** initualize an empty bounding box
+  /** initialize an empty bounding box
    */
   void initEmptyBBox() // FIXME INCREMENTAL
   {
@@ -607,7 +607,7 @@ public class GlLines extends GlShape
 
     GL.drawLine( 0, lineCount ); 
     if ( mPointSize > 0 && points ) {
-      GL.useProgram( mProgramStation ); // Sttaion is the same as UColor 
+      GL.useProgram( mProgramStation ); // Station is the same as UColor
       bindDataStation( mvpMatrix, TglColor.ColorStation );
       GL.drawPoint( 0, lineCount * 2 );
     }

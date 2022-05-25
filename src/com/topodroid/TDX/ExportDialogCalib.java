@@ -92,7 +92,7 @@ public class ExportDialogCalib extends MyDialog
   @Override
   public void onItemSelected( AdapterView av, View v, int pos, long id ) { mSelected = mTypes[ pos ]; }
 
-  /** react to a deselction
+  /** react to a deselection
    * @param av    item adapter
    */
   @Override

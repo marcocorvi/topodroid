@@ -5,7 +5,7 @@
  *
  * @brief Cave3D therion file parser and model
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -106,7 +106,7 @@ public class ParserTh extends TglParser
   }
 
   /** @return int-flag parsed from a string
-   * @param string-flag
+   * @param str flag
    */
   private int parseFlag( String str ) // parse Therion flag name
   {
@@ -303,7 +303,7 @@ public class ParserTh extends TglParser
         // double alng = fx.mLongitude;
         double alat = fx.mLatitude;
         double aalt = fx.mAltitude; // FIXME Therion altitude are geodetic not ellipsoidic
-        // KML radius is already premultiplied by PI/180
+        // KML radius is already pre-multiplied by PI/180
         double s_radius = Geodetic.meridianRadiusExact( alat, aalt );
         double e_radius = Geodetic.parallelRadiusExact( alat, aalt );
 
@@ -929,7 +929,7 @@ public class ParserTh extends TglParser
             sh.to_station = s;
             repeat = true; // unnecessary
           } else if ( sf != null && st == null ) {
-            // TDLog.v( "Th using forwxprad shot " + sh.from + " " + sh.to + " : " + sf.name + " null" );
+            // TDLog.v( "Th using forward shot " + sh.from + " " + sh.to + " : " + sf.name + " null" );
             Cave3DStation s = sh.getStationFromStation( sf );
             stations.add( s );
             sh.to_station = s;

@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date june 2017
  *
- * @brief TopoDroid audio parent interfare
+ * @brief TopoDroid audio parent interface
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

@@ -161,7 +161,7 @@ public class CalibAlgo
     mNonLinear = nonLinear;
   }
 
-  // void setAlgorith( boolean nonLinear ) { mNonLinear = nonLinear; }
+  // void setAlgorithm( boolean nonLinear ) { mNonLinear = nonLinear; }
 
   public float DeltaBH()      { return mDeltaBH; }
   public float Delta()        { return mDelta; }
@@ -624,7 +624,7 @@ public class CalibAlgo
     //                    (float)Math.sin(c0) );
   }
 
-  // error acumulators
+  // error accumulators
   protected int    mSumCount;
   protected double mSumErrors;
   protected double mSumErrorSquared;

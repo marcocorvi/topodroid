@@ -17,7 +17,7 @@ import java.util.ArrayList;
 
 class SearchResult
 {
-  private String mName = null;
+  private String mName; // = null;
   private int   mIdx;    // current result-index in the array
   private ArrayList< Integer > mPos;
 

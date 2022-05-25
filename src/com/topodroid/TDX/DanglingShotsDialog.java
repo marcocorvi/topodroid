@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid dalngling shots listing dialog
+ * @brief TopoDroid dangling shots listing dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -71,7 +71,7 @@ class DanglingShotsDialog extends MyDialog
     ( (Button) findViewById(R.id.btn_back) ).setOnClickListener( this );
   }
 
-  /** respont to user tap - dismiss this dialog
+  /** respond to user tap - dismiss this dialog
    * @param view tapped view
    */
   @Override

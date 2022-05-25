@@ -241,17 +241,17 @@ public class DistoX310Comm extends DistoXComm
         // FIXME DRY_RUN
         if ( DRY_RUN ) {
           ret = ((DistoX310Protocol)mProtocol).uploadFirmwareDryRun( file );
-          TDLog.v( "Comm Firmware upoad dry run: " + ret );
+          TDLog.v( "Comm Firmware upload dry run: " + ret );
         } else {
           // ret = ((DistoX310Protocol)mProtocol).uploadFirmware( filepath );
           ret = ((DistoX310Protocol)mProtocol).uploadFirmware( file );
-          TDLog.v( "Comm Firmware upoad: " + ret );
+          TDLog.v( "Comm Firmware upload: " + ret );
         }
       } else {
         ret = -1;
       }
     } else {
-      TDLog.Log( TDLog.LOG_BT, "Comm Firmware upoad socket failure");
+      TDLog.Log( TDLog.LOG_BT, "Comm Firmware upload socket failure");
     }
     destroySocket( );
     return ret;

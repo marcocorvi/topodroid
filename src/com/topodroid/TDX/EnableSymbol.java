@@ -67,7 +67,7 @@ class EnableSymbol implements View.OnClickListener
   /** cstr
    * @param context  context
    * @param type     symbol type
-   * @param index    symbol index in the library
+   * @param index    symbol index in the library (unused)
    * @param symbol   symbol
    */
   EnableSymbol( Context context, int type, int index, SymbolInterface symbol )

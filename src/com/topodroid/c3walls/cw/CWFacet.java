@@ -5,7 +5,7 @@
  *
  * @brief triangular facet (STL)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -114,7 +114,7 @@ public class CWFacet
    */
   double area() { return Math.abs( u2.crossProduct(u3).length() ); }
 
-  /** compute the volume of the tetrahedrom of this triangle and the point P0
+  /** compute the volume of the tetrahedron of this triangle and the point P0
    * @param p0    point "external" to the triangle
    * @return volume
    * @note the volume has sign: since the triangle is directed towards the inside of the CW the volume is
@@ -123,7 +123,7 @@ public class CWFacet
   double volume( Vector3D p0 ) { return u.dotProduct( p0.difference(v1) ); }
   
   /** solid angle of the triangle as seen from a point
-   * A. van Oosterom, J. Strackee "A solid angle of a plane traiangle" IEEE Trans. Biomed. Eng. 30:2 1983 125-126
+   * A. van Oosterom, J. Strackee "A solid angle of a plane triangle" IEEE Trans. Biomed. Eng. 30:2 1983 125-126
    */
   double solidAngle( Vector3D p )
   {

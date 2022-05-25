@@ -20,7 +20,7 @@
 package com.topodroid.mag;
 
 
-// MAGtype_GeoMagneticElements;
+// MAG-type_GeoMagneticElements;
 public class MagElement
 {
   public double Decl; /* 1. Angle between the magnetic field vector and true north, positive east*/

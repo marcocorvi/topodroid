@@ -36,7 +36,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * gereric brush 
+ * generic brush
  */
 public class BrushManager
 {
@@ -513,7 +513,7 @@ public class BrushManager
   {
     SymbolsPalette palette = new SymbolsPalette();
     // populate local palette with default symbols
-    palette.addPointFilename( SymbolLibrary.USER ); // make sure local palette contains "user" symnbols
+    palette.addPointFilename( SymbolLibrary.USER ); // make sure local palette contains "user" symbols
     palette.addLineFilename( SymbolLibrary.USER );
     palette.addAreaFilename( SymbolLibrary.USER );
     SymbolPointLibrary points = mPointLib;

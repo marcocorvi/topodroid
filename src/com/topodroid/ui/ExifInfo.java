@@ -78,7 +78,7 @@ public class ExifInfo
   /** set exif values
    * @param azimuth      azimuth [degrees]
    * @param clino        clino [degrees]
-   * @param orienatation camera orientation [degrees]
+   * @param orientation camera orientation [degrees]
    * @param accuracy     sensor accuracy
    * @param camera       camera API (1 or 2)
    */

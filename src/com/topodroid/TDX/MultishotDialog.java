@@ -151,11 +151,11 @@ class MultishotDialog extends MyDialog
       }
     }
     if ( mColoring ) {
-      // mButtonHighlight.setOnClickListener( this ); FIXME_HIGHIGHT
+      // mButtonHighlight.setOnClickListener( this ); FIXME_HIGHLIGHT
       mButtonColor.setOnClickListener( this );
       mButtonSplays.setOnClickListener( this );
     } else {
-      // ((LinearLayout) findViewById( R.id.layout_highlight )).setVisibility( View.GONE ); FIXME_HIGHIGHT
+      // ((LinearLayout) findViewById( R.id.layout_highlight )).setVisibility( View.GONE ); FIXME_HIGHLIGHT
       ((LinearLayout) findViewById( R.id.layout_color )).setVisibility( View.GONE );
       ((LinearLayout) findViewById( R.id.layout_splays )).setVisibility( View.GONE );
     }

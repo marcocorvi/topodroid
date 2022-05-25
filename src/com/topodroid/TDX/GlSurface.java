@@ -5,7 +5,7 @@
  *
  * @brief Cave3D DEM surface
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -152,7 +152,7 @@ public class GlSurface extends GlShape
   }
   
 
-  // /** rebind the surface texture bitmap - save the texture ID - (empty : unuesed)
+  // /** rebind the surface texture bitmap - save the texture ID - (empty : unused)
   //  */
   // synchronized void rebindBitmap()
   // {
@@ -277,7 +277,7 @@ public class GlSurface extends GlShape
   //   for ( int s=0; s<COORDS_PER_VERTEX; ++s ) vector[s] = data[doff+s];
   // }
 
-  /** set the value of a DEM vertex (X-Z horizomntal grid, Y elevation)
+  /** set the value of a DEM vertex (X-Z horizontal grid, Y elevation)
    * @param buffer   vertexes buffer
    * @param k        vertex index
    * @param data     data array of Y values
@@ -285,8 +285,8 @@ public class GlSurface extends GlShape
    * @param j        row-index in the data
    * @param nx       number of columns in the data
    * @param nz       number of rows in the data (unused)
-   * @param x        X vertex velue
-   * @param z        z vertex velue
+   * @param x        X vertex value
+   * @param z        z vertex value
    * @param ymed     Y value of the center ( to subtract from Y values )
    */
   private void putVertex( float[] buffer, int k, float[] data, int i, int j, int nx, int nz, float x, float z, float ymed ) // ny unused

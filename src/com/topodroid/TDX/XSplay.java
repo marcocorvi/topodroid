@@ -5,7 +5,7 @@
  *
  * @brief a splay in a x-section
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -13,8 +13,8 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 
-import java.io.StringWriter;
-import java.io.PrintWriter;
+// import java.io.StringWriter;
+// import java.io.PrintWriter;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;

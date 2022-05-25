@@ -124,7 +124,7 @@ class SetupDrawingUnitDialog extends MyDialog
     mBtnMinus.setOnClickListener( this );
   }
 
-  /** update the EditText text - disable TextChange listening temporarely 
+  /** update the EditText text - disable TextChange listening temporary
    * @param sz         new size
    */
   private void setETsize( float sz )

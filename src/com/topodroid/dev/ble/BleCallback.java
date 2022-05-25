@@ -153,7 +153,7 @@ public class BleCallback extends BluetoothGattCallback
         mComm.failure( ret, "onServicesDiscovered" );
       }
     } else {
-      // TDLog.v( "BLE callback: service discover faiure");
+      // TDLog.v( "BLE callback: service discover failure");
       mComm.failure( status, "onServicesDiscovered" );
     }
   }
@@ -161,7 +161,7 @@ public class BleCallback extends BluetoothGattCallback
   @Override
   public void onDescriptorRead(BluetoothGatt gatt, BluetoothGattDescriptor desc, int status)
   {
-    // TDLog.v( "BLE callback: onDescriptorRead " + desc.getUuuid() + " " + status );
+    // TDLog.v( "BLE callback: onDescriptorRead " + desc.getUuid() + " " + status );
     if ( isSuccess( status, "onDescriptorRead" ) ) {
       String uuid_str = desc.getUuid().toString();
       String uuid_chrt_str = desc.getCharacteristic().getUuid().toString();
@@ -319,7 +319,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: enable notify null chrt");
       return false;
     }
-    // TDLog.v( "BLE callback: notify chrt " + chrt.getUuid().toString() + " notifyable " + BleUtils.canChrtPNotify( chrt ) );
+    // TDLog.v( "BLE callback: notify chrt " + chrt.getUuid().toString() + " notifiable " + BleUtils.canChrtPNotify( chrt ) );
     byte[] enable = BleUtils.getChrtPNotify( chrt );
     if ( enable == null ) {
       TDLog.Error("BLE callback: enable notify null enable");
@@ -351,7 +351,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: enable indicate null chrt");
       return false;
     }
-    // TDLog.v( "BLE callback: indicate chrt " + chrt.getUuid().toString() + " indicatable " + BleUtils.canChrtPIndicate( chrt ) );
+    // TDLog.v( "BLE callback: indicate chrt " + chrt.getUuid().toString() + " indicateable " + BleUtils.canChrtPIndicate( chrt ) );
     byte[] enable = BleUtils.getChrtPIndicate( chrt );
     if ( enable == null ) {
       TDLog.Error("BLE callback: enable indicate null enable");

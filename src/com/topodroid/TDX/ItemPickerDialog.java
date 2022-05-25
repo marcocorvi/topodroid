@@ -15,8 +15,8 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.ui.ItemButton;
-import com.topodroid.prefs.TDSetting;
-import com.topodroid.common.PlotType;
+// import com.topodroid.prefs.TDSetting;
+// import com.topodroid.common.PlotType;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
 
@@ -31,7 +31,7 @@ import android.graphics.*;
 import android.view.View;
 import android.view.ViewGroup.LayoutParams;
 import android.widget.Button;
-import android.widget.LinearLayout;
+// import android.widget.LinearLayout;
 import android.widget.SeekBar;
 import android.widget.SeekBar.OnSeekBarChangeListener;
 

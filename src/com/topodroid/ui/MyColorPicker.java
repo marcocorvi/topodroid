@@ -262,7 +262,7 @@ public class MyColorPicker extends MyDialog
       private int idx; // index of the color in TDColor.mTDColors
 
       /** cstr
-       * @param context      context
+       * @param ctx      context
        * @param k            color index
        * @param listener     color-changed listener
       */

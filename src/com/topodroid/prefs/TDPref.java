@@ -248,7 +248,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       if ( ! value.equals( val ) ) {
         setValue( val );
         String text = TDSetting.updatePreference( helper, category, name, value );
-        // TDLog.v( "Pref [commitValueStrring] " + name + " value " + val + " text " + text );
+        // TDLog.v( "Pref [commitValueString] " + name + " value " + val + " text " + text );
 	if ( text != null ) {
 	  // TDLog.v("commit value <" + text + ">" );
 	  mEdittext.setText( text );
@@ -330,7 +330,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   }
 
   /** react to a user key press
-   * @param v       affected view
+   * @param view       affected view
    * @param keyCode key code
    * @param event   key event
    * @return true if key-press has been handled
@@ -388,7 +388,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param def_val preference default value
    * @param ctx     context
@@ -404,7 +404,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param def_val preference default boolean value
    * @param ctx     context
@@ -422,9 +422,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
-   * @param def_val preference default (string) value
+   * @param def_str preference default (string) value
    * @param ctx     context
    * @param hlp     shared preferences helper
    */ 
@@ -440,7 +440,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param def_val preference default boolean value
    * @param ctx     context
@@ -464,9 +464,9 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
-   * @param def_val preference default (string) value
+   * @param def_str preference default (string) value
    * @param ctx     context
    * @param hlp     shared preferences helper
    */ 
@@ -487,7 +487,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param def_val preference default text value
    * @param pt      preference type
@@ -525,7 +525,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param def_val preference default text value
    * @param opts    options resource ID
@@ -551,7 +551,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    * @param cat     category
    * @param nm      preference name
    * @param tit     preference title
-   * @param sun     preference description
+   * @param sum     preference description
    * @param lvl     activity level
    * @param idef    preference default value resource ID
    * @param opts    options resource ID
@@ -618,7 +618,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   //   return null;
   // }
 
-  /** set the prefernce value
+  /** set the preference value
    * @param val  new value
    */
   public void setValue( String val )
@@ -641,7 +641,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     }
   }
 
-  /** set the "buttion" prefernce value
+  /** set the "button" preference value
    * @param val  new value
    */
   public void setButtonValue( String val )
@@ -653,7 +653,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     value = val;
   }
 
-  /** @return the prefrence integer value
+  /** @return the preference integer value
    */
   public int intValue()         { return ( ptype == INTEGER || ptype == OPTIONS )? ivalue : 0; }
 
@@ -961,10 +961,10 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-  /** construct the "Comapss" preferences array
+  /** construct the "Compass" preferences array
    * @param ctx   context
    * @param hlp   shared preferences helper
-   * @return array of "Comapss" preferences
+   * @return array of "Compass" preferences
    */
   public static TDPref[] makeDatPrefs( Context ctx, TDPrefHelper hlp )
   {
@@ -1067,7 +1067,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  ctx, hlp ),
       makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, ctx, hlp ),
       makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],         ctx, hlp ),  // DISTOX_SVG_GRID
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_THEREION_SPLAYS
+      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_THERION_SPLAYS
       // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
     };
   }
@@ -1406,7 +1406,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     String[] def = TDPrefKey.GEEKLINEdef;
     return new TDPref[ ] {
       makeEdt( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0], FLOAT,   ctx, hlp ), // REDUCE ANGLE
-      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], FLOAT,   ctx, hlp ), // BEZIER ACCUR.
+      makeEdt( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1], FLOAT,   ctx, hlp ), // BEZIER ACCURACY
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], FLOAT,   ctx, hlp ), //        CORNER
       makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], E, def[ 3], FLOAT,   ctx, hlp ), // WEED DISTANCE
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], E, def[ 4], FLOAT,   ctx, hlp ), //      LENGTH
@@ -1435,8 +1435,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 0], tit[ 0], dsc[ 0], T, def[ 0],          ctx, hlp ), // DIVING_MODE
       makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], T, def[ 1],          ctx, hlp ), // RECENT_SHOT
       makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], T, def[ 2], INTEGER, ctx, hlp ), // RECENT TIMEOUT
-      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // EXTEND FRAC
-      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // BACHSHOT
+      makeCbx( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3],          ctx, hlp ), // EXTEND FRACTIONAL
+      makeCbx( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4],          ctx, hlp ), // BACKSHOT
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // BEDDING PLANE
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], A, def[ 6],          ctx, hlp ), // WITH SENSORS
       makeLst( cat, key[ 7], tit[ 7], dsc[ 7], E, def[ 7], R.array.loopClosure, R.array.loopClosureValue, ctx, hlp ),
@@ -1498,7 +1498,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeLst( cat, key[ 3], tit[ 3], dsc[ 3], T, def[ 3], R.array.splayDash, R.array.splayDashValue,       ctx, hlp ), // DASH COHERENCE
       makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], T, def[ 4], FLOAT,   ctx, hlp ), // DASH PLAN
       makeEdt( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5], FLOAT,   ctx, hlp ), // DASH PROFILE
-      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SCETION
+      makeEdt( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6], FLOAT,   ctx, hlp ), // DASH X-SECTION
       makeColor( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],        ctx, hlp ), // DASH COLOR SPLAY 
       makeColor( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8],        ctx, hlp ), // DASH COLOR SPLAY 
     };
@@ -1525,7 +1525,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeFwd( cat, key[3], tit[3],          T,          ctx, hlp ), // GEEK_SPLAY
       makeFwd( cat, key[4], tit[4],          A,          ctx, hlp ), // GEEK_PLOT
       makeFwd( cat, key[5], tit[5],          A,          ctx, hlp ), // GEEK_LINE
-      // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTPWALLS
+      // makeFwd( cat, key[7], tit[7],          T,          ctx, hlp ), // PLOT_WALLS AUTOWALLS
       makeFwd( cat, key[6], tit[6],          A,          ctx, hlp ), // GEEK_DEVICE
       makeFwd( cat, key[7], tit[7],          T,          ctx, hlp )  // GEEK_IMPORT
       // makeFwd( cat, key[8], tit[8],          D,          ctx, hlp )  // SKETCH // FIXME_SKETCH_3D

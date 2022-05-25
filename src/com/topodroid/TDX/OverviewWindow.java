@@ -15,7 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDsafUri;
-import com.topodroid.utils.TDRequest;
+// import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDLocale;
@@ -50,7 +50,7 @@ import android.os.Handler;
 import android.os.Message;
 import android.os.ParcelFileDescriptor;
 
-import android.app.Activity;
+// import android.app.Activity;
 
 import android.view.MotionEvent;
 import android.view.View;
@@ -74,7 +74,7 @@ import android.graphics.pdf.PdfDocument.PageInfo;
 import android.net.Uri;
 
 import java.io.File;
-import java.io.FileOutputStream;
+// import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
 
@@ -467,7 +467,7 @@ public class OverviewWindow extends ItemDrawer
       switchZoomCtrl( TDSetting.mZoomCtrl );
 
       mListView = (MyHorizontalListView) findViewById(R.id.listview);
-      mListView.setEmptyPlacholder( true );
+      mListView.setEmptyPlaceholder( true );
       /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
       mButton1 = new Button[ mNrButton1 + 1 ];
@@ -669,7 +669,7 @@ public class OverviewWindow extends ItemDrawer
   }
 
   /** export drawing 
-   * @param uri    URI of the export file
+   // * @param uri    URI of the export file
    * @param ext    export type (ie, extension)
    * @note called only by export menu
    */
@@ -1360,7 +1360,7 @@ public class OverviewWindow extends ItemDrawer
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -1425,7 +1425,7 @@ public class OverviewWindow extends ItemDrawer
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

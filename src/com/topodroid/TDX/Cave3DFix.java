@@ -5,7 +5,7 @@
  *
  * @brief 3D: fixed station
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  * ref. T. Soler, L.D. Hothem
@@ -49,7 +49,7 @@ public class Cave3DFix extends Vector3D
 
   /** deserialize a 3D fix
    * @param dis     input stream
-   * @param version stream version
+   * @param version stream version (unused)
    * @return the deserialized 3D fix
    */
   static Cave3DFix deserialize( DataInputStream dis, int version ) throws IOException

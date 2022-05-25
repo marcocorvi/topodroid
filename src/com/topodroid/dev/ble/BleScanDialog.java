@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jan 2021
  *
- * @brief Bluetoth low-energy scan dialog
+ * @brief Bluetooth low-energy scan dialog
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

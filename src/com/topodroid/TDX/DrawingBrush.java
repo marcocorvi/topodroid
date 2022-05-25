@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 import android.graphics.Path;
 
 /**
- * gereric brush 
+ * generic brush
  */
 class DrawingBrush implements  IBrush
 {

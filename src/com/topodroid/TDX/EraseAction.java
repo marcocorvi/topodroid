@@ -26,7 +26,7 @@ class EraseAction // implements ICanvasCommand
   static final int ERASE_MODIFY = 2; // modify item
 
 
-  int mInitialType;  // action inital type
+  int mInitialType;  // action initial type
   int mType;         // action type
   DrawingPath mPath; // affected path
   private ArrayList< LinePoint > mOldPoints = null;

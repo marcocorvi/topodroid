@@ -144,7 +144,7 @@ public class SymbolLineLibrary extends SymbolLibrary
     }
   }
 
-  /* LOAD_MISSING - APP_SAVE SYMNBOLS
+  /* LOAD_MISSING - APP_SAVE SYMBOLS
   // thname  symbol th-name
   boolean tryLoadMissingLine( String thname )
   {

@@ -21,7 +21,7 @@ import android.preference.PreferenceManager;
 import android.content.SharedPreferences;
 import android.content.ContentResolver;
 import android.content.Context;
-import android.content.Intent;
+// import android.content.Intent;
 import android.content.res.Resources;
 
 import android.bluetooth.BluetoothDevice;
@@ -110,12 +110,12 @@ public class TDInstance
   }
 
   /** set primary bluetooth device
-   * @param bluetooth device
+   * @param device bluetooth device
    */
   public static void setDeviceA( Device device ) { deviceA = device; }
 
   /** set secondary bluetooth device
-   * @param bluetooth device
+   * @param device bluetooth device
    */
   public static void setDeviceB( Device device ) { deviceB = device; }
 
@@ -172,7 +172,7 @@ public class TDInstance
     return deviceA != null && ( deviceA.isX310() || deviceA.isBric() ); 
   }
 
-  // FIXME VitualDistoX
+  // FIXME VirtualDistoX
   // static boolean isDeviceZeroAddress( ) { return ( deviceA == null || deviceA.getAddress().equals( Device.ZERO_ADDRESS ) ); }
 
   /** @return true if the primary device is set
@@ -308,7 +308,7 @@ public class TDInstance
 
   // static final String TDX_TREE_URI = "TDX_TREE_URI";
 
-  // /** take persitent permissions for a given uri
+  // /** take persistent permissions for a given uri
   //  * @param uri   uri
   //  * @param flag  intent flags
   //  * @return true if successful

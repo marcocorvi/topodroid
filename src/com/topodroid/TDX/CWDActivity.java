@@ -29,7 +29,7 @@ import android.os.Bundle;
 // import android.content.Context;
 import android.content.Intent;
 // import android.content.res.Resources;
-import android.content.res.Configuration;
+// import android.content.res.Configuration;
 
 import android.widget.TextView;
 import android.widget.EditText;
@@ -222,7 +222,7 @@ public class CWDActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.CWDActivity );
         /* if ( help_page != null ) always true */ UserManualActivity.showHelpPage( this, help_page );
         return true;

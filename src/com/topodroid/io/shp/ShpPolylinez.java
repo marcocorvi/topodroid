@@ -153,7 +153,7 @@ public class ShpPolylinez extends ShpObject
   {
     int nrs = ( lns != null )? lns.size() : 0;
     int mrs = ( lms != null )? lms.size() : 0;
-    // if ( lns.size() == 0 && lms.size() ) { // guaramteed one is non-zero
+    // if ( lns.size() == 0 && lms.size() ) { // guaranteed one is non-zero
     //   xmin = xmax = ymin = ymax = zmin = zmax = 0.0;
     //   return;
     // }

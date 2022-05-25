@@ -61,9 +61,9 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
     initView();
   }
 
-  public void setEmptyPlacholder( boolean empty_placehoder )
+  public void setEmptyPlaceholder( boolean empty_placeholder )
   {
-    mEmptyPlaceholder = empty_placehoder;
+    mEmptyPlaceholder = empty_placeholder;
   }
 
   private synchronized void initView() 

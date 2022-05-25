@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date jul 2017
  *
- * @brief TopoDroid plot zomm-fit / landscape
+ * @brief TopoDroid plot zoom-fit / landscape
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

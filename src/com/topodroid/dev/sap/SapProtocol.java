@@ -56,7 +56,7 @@ class SapProtocol extends TopoDroidProtocol
     }
   }
 
-  // @param crtr   GATT write characteristic
+  // @param chrt   GATT write characteristic
   // @return number of bytes set into the write characteristic
   public byte[] handleWrite( )
   {
@@ -70,7 +70,8 @@ class SapProtocol extends TopoDroidProtocol
     return bytes;
   }
 
-  // @param crtr   GATT read characteristic
+  // @param chrt   GATT read characteristic
+  // @param bytes  return byte array
   public int handleRead( byte[] bytes )
   {
     // TDLog.v( "SAP proto: read bytes " + bytes.length );

@@ -5,7 +5,7 @@
  *
  * @brief Cave3D convex hull model computer
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -193,7 +193,7 @@ public class PowercrustComputer
     mPlanview = makePolygons( mVertices );
   }
 
-  // polygons are built chaining the sites thru their angle' V1 vertex
+  // polygons are built chaining the sites through their angle' V1 vertex
   private ArrayList<PCPolygon> makePolygons( PCSite[] vertices )
   {
     ArrayList<PCPolygon> polygons = new ArrayList< PCPolygon >();
@@ -205,7 +205,7 @@ public class PowercrustComputer
       if ( s0.isOpen() ) {
         PCPolygon polygon = new PCPolygon();
         polygon.addPoint( s0 );  // add S0 to the polygon
-        s0.poly = polygon;       // and set the poligon to S0
+        s0.poly = polygon;       // and set the polygon to S0
         for ( PCSite s1 = s0.angle.v1; s1 != s0; s1=s1.angle.v1 ) {
           if ( s1 == null || ! s1.isOpen() ) break; // 20200512 added test ! isOpen()
           if ( polygon.addPoint( s1 ) ) break; // break if S1 is already in the polygon 
@@ -222,17 +222,17 @@ public class PowercrustComputer
 
   private void computePowercrustProfileView( )
   {
-    // profileview = null;
+    // profile_view = null;
     mProfilearcs = null;
     int nst = mStations.size();
     int nsh = mShots.size();
     DPoint2D[] F = new DPoint2D[ nsh ]; // P - from point of shot k
     DPoint2D[] T = new DPoint2D[ nsh ]; // P - to point of shot k
-    DPoint2D[] P = new DPoint2D[ nsh ]; // point on intersection of bisecants
-    DPoint2D[] B = new DPoint2D[ nst ]; // bisecant at station j
+    DPoint2D[] P = new DPoint2D[ nsh ]; // point on intersection of bi-secants
+    DPoint2D[] B = new DPoint2D[ nst ]; // bi-secant at station j
     DPoint2D[] M = new DPoint2D[ nsh ]; // midpoint of shot k
 
-    // find bisecant of shots at st:
+    // find bi-secant of shots at st:
     //      ... -- sh1 ----(st)--- sh2 -- ...
     for ( int k=0; k < nst; ++k ) {
       Cave3DStation st = mStations.get(k);
@@ -266,7 +266,7 @@ public class PowercrustComputer
         double dy = dy1 + dy2;
         // double d   = Math.sqrt( dx*dx + dy*dy );
         // B[k] = new DPoint2D( dx/d, dy/d );
-        B[k] = new DPoint2D( dx, dy ); // bisecant (no need to normalize)
+        B[k] = new DPoint2D( dx, dy ); // bi-secant (no need to normalize)
       } else if ( sh1 != null ) { // end-station: ... (st1)--- sh1 ---(st)
         Cave3DStation st1 = ( sh1.from_station == st )? sh1.to_station : sh1.from_station;
         double dx1 = st1.x - st.x;
@@ -285,12 +285,12 @@ public class PowercrustComputer
       Cave3DShot sh = mShots.get(k);
       Cave3DStation fr = sh.from_station;
       Cave3DStation to = sh.to_station;
-      F[k] = new DPoint2D( fr.x, fr.y ); // CRASH here - but there is no reason a shot doesnot have stations
+      F[k] = new DPoint2D( fr.x, fr.y ); // CRASH here - but there is no reason a shot does not have stations
       T[k] = new DPoint2D( to.x, to.y );
       M[k] = new DPoint2D( (fr.x+to.x)/2, (fr.y+to.y)/2 );
-      // intersection of bisecants
-      DPoint2D b1 = null; // bisecant at from point
-      DPoint2D b2 = null; // bisecant at to point
+      // intersection of bi-secants
+      DPoint2D b1 = null; // bi-secant at from point
+      DPoint2D b2 = null; // bi-secant at to point
       for (int kk=0; kk<nst; ++kk ) {
         Cave3DStation st = mStations.get(kk);
         if ( st == fr ) { b1 = B[kk]; if ( b2 != null ) break; }

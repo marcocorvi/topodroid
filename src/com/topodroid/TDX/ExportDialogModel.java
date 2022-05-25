@@ -56,7 +56,7 @@ public class ExportDialogModel extends MyDialog
 
   /** dialog that selects the export type of the 3D model
    * @param context
-   * @param parent     3D viewer acivity
+   * @param parent     3D viewer activity
    * @param parser     3D model parser
    * @param types      supported 3D export types
    * @param title      dialog title
@@ -108,7 +108,7 @@ public class ExportDialogModel extends MyDialog
   {
     mSelected = mTypes[ pos ];
     mSelectedPos = pos;
-    // updateLayouts(); // not neceessary
+    // updateLayouts(); // not necessary
   }
 
   /** respond to a deselection: clear the selected view and position
@@ -119,7 +119,7 @@ public class ExportDialogModel extends MyDialog
   { 
     mSelected = null;
     mSelectedPos = -1;
-    // updateLayouts(); // not neceessary
+    // updateLayouts(); // not necessary
   }
 
   /** respond to a user tap

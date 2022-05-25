@@ -175,9 +175,9 @@ class Selection
   /** like insertItem, but it returns the inserted SelectionPoint
    * @param path     point-line path
    * @param pt       new point on the point-line
-   * @return newly cretaed selection point
+   * @return newly created selection point
    */
-  SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt ) // synchrinized by CommandManager
+  SelectionPoint insertPathPoint( DrawingPointLinePath path, LinePoint pt ) // synchronized by CommandManager
   {
     SelectionPoint sp = new SelectionPoint( path, pt, null );
     mPoints.add( sp );
@@ -246,7 +246,7 @@ class Selection
     }
   }
 
-  /** rebucket a point
+  /** re-bucket a point
    * @param sp   point
    */
   void rebucket( SelectionPoint sp ) // synchronized by CommandManager
@@ -475,9 +475,9 @@ class Selection
 
   /** remove a point-line point
    * @param path   point-line item
-   * @param pt     line point
+   * @param lp     line point
    */
-  void removeLinePoint( DrawingPointLinePath path, LinePoint lp ) // snchronized by CommandManager
+  void removeLinePoint( DrawingPointLinePath path, LinePoint lp ) // synchronized by CommandManager
   {
     if ( path.mType != DrawingPath.DRAWING_PATH_LINE && path.mType != DrawingPath.DRAWING_PATH_AREA ) return;
     for ( SelectionPoint sp : mPoints ) {
@@ -489,7 +489,7 @@ class Selection
   }
 
   /** @return the selection point of a line point
-   * @param pt     line point
+   * @param lp     line point
    */
   SelectionPoint getSelectionPoint( LinePoint lp )
   {
@@ -721,7 +721,7 @@ class Selection
     }
   }
 
-  /** rebucket a point-line
+  /** re-bucket a point-line
    * @param line   point-line item
    */
   private void rebucketLinePath(DrawingPointLinePath line)
@@ -742,7 +742,7 @@ class Selection
   }
 
   // private void dumpBuckets()
-  // {
+  // {a
   //   for ( SelectionBucket bucket : mBuckets ) {
   //     bucket.dump();
   //   }

@@ -5,7 +5,7 @@
  *
  * @brief Cave3D convex-concave hull
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -495,9 +495,9 @@ public class CWConvexHull
         // for ( int j=0; j<sideToKeep.size(); ++j ) sideToKeep.get(j).dump();
         // TDLog.v( "CW-Hull sides to remove " + sideToRemove.size() );
         // for ( int j=0; j<sideToRemove.size(); ++j ) sideToRemove.get(j).dump();
-        // TDLog.v( "CW-Hull vertexs to keep " + vertexToKeep.size() );
+        // TDLog.v( "CW-Hull vertexes to keep " + vertexToKeep.size() );
         // for ( int j=0; j<vertexToKeep.size(); ++j ) vertexToKeep.get(j).dump();
-        // TDLog.v( "CW-Hull vertexs to remove " + vertexToRemove.size() );
+        // TDLog.v( "CW-Hull vertexes to remove " + vertexToRemove.size() );
         // for ( int j=0; j<vertexToRemove.size(); ++j ) vertexToRemove.get(j).dump();
         // TDLog.v( "CW-Hull faces to remove " + faceToRemove.size() );
         // for ( int j=0; j<faceToRemove.size(); ++j ) faceToRemove.get(j).dump();

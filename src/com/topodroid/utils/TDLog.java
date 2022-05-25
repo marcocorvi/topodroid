@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid application (consts and prefs)
+ * @brief TopoDroid application (const's and prefs)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -13,7 +13,7 @@ package com.topodroid.utils;
 
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDPrefKey;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDPath;
 
 import java.io.File;
 import java.io.IOException;
@@ -167,7 +167,7 @@ public class TDLog
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
-        // mLog.flush(); // autoflush ?
+        // mLog.flush(); // auto-flush ?
       }
     }
   }
@@ -180,7 +180,7 @@ public class TDLog
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
-        // mLog.flush(); // autoflush ?
+        // mLog.flush(); // auto-flush ?
       }
     }
   }
@@ -193,7 +193,7 @@ public class TDLog
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
-        // mLog.flush(); // autoflush ?
+        // mLog.flush(); // auto-flush ?
       }
     }
   }
@@ -206,7 +206,7 @@ public class TDLog
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
-        // mLog.flush(); // autoflush ?
+        // mLog.flush(); // auto-flush ?
       }
     }
   }
@@ -244,7 +244,7 @@ public class TDLog
       try {
         File log_file = TDFile.getLogFile();
         mLogFile = new FileWriter( log_file, mLogAppend ); // true = append
-        mLog = new PrintWriter( mLogFile, true ); // true = autoflush
+        mLog = new PrintWriter( mLogFile, true ); // true = auto-flush
         mLog.format( "TopoDroid version %s\n", TDVersion.string() );
       } catch ( IOException e ) {
         Log.e( TAG, "create log file error: " + e.getMessage() );

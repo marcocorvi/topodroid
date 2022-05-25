@@ -21,7 +21,7 @@ public class TDPrefKey
 
   public static String[] MAIN = { // [14]
     "DISTOX_CWD",           // 0 // CWD must be the last of primary preferences
-    "DISTOX_TEXT_SIZE",     // 1 * // size of tetx [pt]
+    "DISTOX_TEXT_SIZE",     // 1 * // size of text [pt]
     "DISTOX_SIZE_BUTTONS",  // 2 * // size of buttons (S, N, M, L, XL)
     "DISTOX_EXTRA_BUTTONS", // 3 * // Activity Level
     "DISTOX_MKEYBOARD",     // 4 * // whether to use TopoDroid keypads
@@ -94,7 +94,7 @@ public class TDPrefKey
      TRUE,            // NO CURSOR
      TDString.ZERO,   // USER MANUAL
      TDString.EMPTY,  // LOCALE
-     TDString.ZERO,   // SCREEEN ORIENTATION
+     TDString.ZERO,   // SCREEN ORIENTATION
      // FALSE, // IF_COSURVEY
      "",
      "",

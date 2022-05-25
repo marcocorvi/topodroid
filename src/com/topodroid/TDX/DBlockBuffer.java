@@ -12,15 +12,15 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDColor;
-import com.topodroid.prefs.TDSetting;
+// import com.topodroid.utils.TDColor;
+// import com.topodroid.prefs.TDSetting;
 
-import android.content.Context;
+// import android.content.Context;
 
 
 import java.util.List;
 import java.util.ArrayList;
-import java.util.Locale;
+// import java.util.Locale;
 import java.util.Comparator;
 
 class DBlockBuffer

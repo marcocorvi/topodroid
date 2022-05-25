@@ -99,7 +99,7 @@ public class CalibCoverage
       
   }
 
-  static final int DELTA_Y     =   3; // degrres
+  static final int DELTA_Y     =   3; // degrees
   static final int DIM_Y       =  1 + 180 / DELTA_Y;
   static final int DIM_Y2      =  180 / ( 2 * DELTA_Y );
   static final int AZIMUTH_BIT =  360 / DELTA_Y;

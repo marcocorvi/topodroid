@@ -174,7 +174,7 @@ public class DrawingSpecialPath extends DrawingPath
     makePath( null, new Matrix(), cx, cy ); // FIXME-PATH make default path
   }
 
-  // no export to cSurevy
+  // no export to cSurvey
 //   @Override
 //   public void toCsurvey( PrintWriter pw, String survey, String cave, String branch, String bind ) { }
 

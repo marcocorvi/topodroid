@@ -5,7 +5,7 @@
  *
  * @brief file opener dialog: get TopoDroid sketch-export filename
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

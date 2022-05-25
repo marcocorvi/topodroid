@@ -17,7 +17,7 @@ import android.os.HandlerThread;
 /** usage
  * [1] create a background thread and get the HandlerThread
  * [2] get the background Handler
- * [3] post Runnable's to the Handler
+ * [3] post Runnable(s) to the Handler
  */
 public class TDThread 
 {

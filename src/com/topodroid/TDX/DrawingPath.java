@@ -20,7 +20,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.num.TDNum;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
-import com.topodroid.math.Point2D; // float X-Y
+// import com.topodroid.math.Point2D; // float X-Y
 
 import java.io.PrintWriter;
 import java.io.DataOutputStream;
@@ -92,7 +92,7 @@ public class DrawingPath extends RectF
 
   public float cx, cy; // midpoint scene coords
   float deltaX, deltaY, len2; // used for Cave3D export
-  // RectF mBBox;   // path boundig box (scene coords)
+  // RectF mBBox;   // path bounding box (scene coords)
 
   /** set the cosine
    * @param cosine  cosine value
@@ -164,13 +164,13 @@ public class DrawingPath extends RectF
   //   return mType >= DRAWING_PATH_STATION && mType <= DRAWING_PATH_AREA; 
   // }
 
-  /** set the visivility of this path, using the alpha of the color
+  /** set the visibility of this path, using the alpha of the color
    * @param on  whether the path is visible (alpha 0xff)
    */
   void setPaintAlpha( boolean on ) { mPaint.setAlpha( (on ? 0xff : 0) ); }
 
   /** @return true if the path type is a "reference" 
-   * @patam type   path type
+   * @param type   path type
    */
   static boolean isReferenceType( int type ) 
   {
@@ -178,7 +178,7 @@ public class DrawingPath extends RectF
   }
 
   /** @return true if the path type is a "drawing item" 
-   * @patam type   path type
+   * @param type   path type
    */
   static boolean isDrawingType( int type ) 
   {
@@ -354,7 +354,7 @@ public class DrawingPath extends RectF
     mPath.offset( off_x, off_y );
   }
 
-  /** add a strainght segment ending at (x,y) to the path
+  /** add a straight segment ending at (x,y) to the path
    * @param x     X coord of the endpoint
    * @param y     Y coord of the endpoint
    */
@@ -369,7 +369,7 @@ public class DrawingPath extends RectF
     setEndPoints( x1, y1, x, y );
   }
 
-  /** make a triangular path centerd at (x1,y1) with side 2*r
+  /** make a triangular path centered at (x1,y1) with side 2*r
    * @param x     X coord - not used
    * @param y     Y coord - not used
    * @param r     half-side
@@ -591,7 +591,7 @@ public class DrawingPath extends RectF
     draw( canvas, matrix, bbox );
   }
 
-  /** @return true if this path is asscociated to a "recent" block
+  /** @return true if this path is associated to a "recent" block
    * @note used in executeAll
    */
   boolean isBlockRecent( )
@@ -600,7 +600,7 @@ public class DrawingPath extends RectF
   }
 
   /** @Return the (int) "extend" of the block of this path (0 if the path has no block)
-   * @note used in executeAll to draw yellow extend control segnment
+   * @note used in executeAll to draw yellow extend control segment
    */
   int getBlockExtend( )
   {
@@ -637,7 +637,7 @@ public class DrawingPath extends RectF
   }
 
   /** set the orientation - empty by default
-   * @param angle   orientation angle [defgree]
+   * @param angle   orientation angle [degree]
    */
   void setOrientation( double angle ) { }
 
@@ -670,8 +670,8 @@ public class DrawingPath extends RectF
 
   // --------- from ICanvasCommand
   /** compute the bounding box - it does nothing
-   * @param bounds   bounding box (unaffected)
-   * @param b        not used (see android.graphics.Path)
+   * @param bound   bounding box (unaffected)
+   * @param b       not used (see android.graphics.Path)
    */
   public void computeBounds( RectF bound, boolean b ) 
   { 
@@ -745,7 +745,7 @@ public class DrawingPath extends RectF
    * @param V1     X unit axis lifted in 3D
    * @param V2     Y unit axis lifted in 3D
    */
-  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector v2 ) { }
+  void toCave3D( PrintWriter pw, int type, TDVector V1, TDVector V2 ) { }
 
   /** @return a vector in world frame, V1 * X0 + V2 * Y0
    * @param x   X coord of the point in the drawing

@@ -321,7 +321,7 @@ public class DeviceActivity extends Activity
     mTvAddressB = (TextView) findViewById( R.id.device_address_b );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder(true);
+    mListView.setEmptyPlaceholder(true);
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
@@ -391,7 +391,12 @@ public class DeviceActivity extends Activity
         String addr = device.getAddress();
         Device dev = mApp_mDData.getDevice( addr );
         if ( dev == null ) {
-          String model = device.getName();
+          String model = null;
+          try {
+            model = device.getName();
+          } catch( SecurityException e ) {
+            TDLog.Error("SECUTITY " + e.getMessage() );
+          }
           if ( model == null ) {
             TDLog.Error( "WARNING. Null name for device " + addr );
           } else {
@@ -822,7 +827,12 @@ public class DeviceActivity extends Activity
   {
     if ( device == null ) return;
     String address = device.getAddress();
-    String name    = device.getName();
+    String name    = null;
+    try {
+      name = device.getName();
+    } catch( SecurityException e ) {
+      TDLog.Error("SECUTITY " + e.getMessage() );
+    }
     // if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
       mApp.setDevicePrimary( address, null, name, device );
@@ -1085,7 +1095,7 @@ public class DeviceActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )

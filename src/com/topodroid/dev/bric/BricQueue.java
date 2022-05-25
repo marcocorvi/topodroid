@@ -13,6 +13,8 @@ package com.topodroid.dev.bric;
 
 // import com.topodroid.dev.ble.BleUtils;
 
+import com.topodroid.utils.TDLog;
+
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
@@ -52,7 +54,9 @@ class BricQueue
       while ( mHead == null ) {
         try {
           notEmpty.await();
-        } catch ( InterruptedException e ) { }
+        } catch ( InterruptedException e ) {
+          TDLog.v("INTERRUPT " + e.getMessage() );
+        }
       }
       BricBuffer ret = mHead;
       mHead = mHead.next;

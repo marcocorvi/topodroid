@@ -13,7 +13,7 @@ package com.topodroid.dev;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
-import com.topodroid.utils.TDColor;
+// import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDInstance;
@@ -22,7 +22,7 @@ import com.topodroid.TDX.Lister;
 // import com.topodroid.TDX.DBlock;
 import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
-import com.topodroid.dev.distox.DistoX;
+// import com.topodroid.dev.distox.DistoX;
 
 import java.util.UUID;
 // import java.util.List;
@@ -361,7 +361,7 @@ public class TopoDroidComm
   /** 
    * @param lister    data lister
    * @param data_type packet datatype, either shot or calib (or all)
-   * @return ialways -1: number of packet received - must be overridden
+   * @return always -1: number of packet received - must be overridden
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {

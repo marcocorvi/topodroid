@@ -25,12 +25,25 @@ How to build TopoDroid-X with Android Studio
 [8] in the run start the activity com.topodroid.TDX.MainWindow
 
 [9] to include native libs - in build.gradle
-  externalNativeBuild {
-    ndkBuild {
-      path="/path/to/Android.mk"
+  - [9.a] add a link to the native lib.so
+       app/src/main/jniLibs 
+    which points to a folder with subfolders
+      arm64-v8a etc.
+    where the .so file are stored
+  - [9.b] maybe add source sets
+    sourceSets {
+      main {
+          jniLibs.srcDirs += "${projectDir}/jniLibs"
+      }
+      ... same for debug and release
     }
-  }
-  however there are problems ... it would be nice to link the libs already compiled
+  - [9.c] if need to compile the native libs,
+    in defaultConfig can add config for ndkBuild or cmake, eg,
+        externalNativeBuild {
+            ndkBuild {
+                cppFlags '...'
+            }
+        }
 
 --------------------------------------------------------------
 timings

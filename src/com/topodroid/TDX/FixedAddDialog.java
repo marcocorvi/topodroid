@@ -159,7 +159,7 @@ class FixedAddDialog extends MyDialog
     return true;
   }
 
-  // set the cordinates 
+  // set the coordinates
   // @param lng longitude
   // @param lat latitude
   // @param alt geoid altitude

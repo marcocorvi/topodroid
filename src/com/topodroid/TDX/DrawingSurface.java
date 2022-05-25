@@ -283,7 +283,7 @@ class DrawingSurface extends SurfaceView
   // -------------------------------------------------------------------
 
   /** set whether to display points, in the current manager
-   * @param display  wheter to display the points
+   * @param display  whether to display the points
    */
   void setDisplayPoints( boolean display ) 
   { 
@@ -307,7 +307,7 @@ class DrawingSurface extends SurfaceView
   /** get the shots that intersect a line portion, in the current manager
    * @param p1 first point of the line portion
    * @param p2 second point of the line portion
-   * @return the list of shots that intesect the segment (p1--p2)
+   * @return the list of shots that intersects the segment (p1--p2)
    */
   List< DrawingPathIntersection > getIntersectionShot( LinePoint p1, LinePoint p2 )
   {
@@ -332,7 +332,7 @@ class DrawingSurface extends SurfaceView
   public void setDisplayMode( int mode ) { DrawingCommandManager.setDisplayMode(mode); }
 
   /** get the global display mode
-   * @return the gloabal display mode
+   * @return the global display mode
    */
   public int getDisplayMode( ) { return DrawingCommandManager.getDisplayMode(); }
 
@@ -349,7 +349,7 @@ class DrawingSurface extends SurfaceView
    */
   public void setTransform( Activity act, float dx, float dy, float s, boolean landscape )
   {
-    if ( commandManager != null ) // test for Xiaomi readmi note
+    if ( commandManager != null ) // test for Xiaomi redmi note
       commandManager.setTransform( act, dx, dy, s, landscape );
   }
 
@@ -433,7 +433,7 @@ class DrawingSurface extends SurfaceView
    */
   void closePointLine( DrawingPointLinePath line ) { commandManager.closePointLine( line ); }
 
-  /** finosh an erase command, in the current manager
+  /** finish an erase command, in the current manager
    */
   void endEraser() { commandManager.endEraser(); }
 
@@ -609,7 +609,7 @@ class DrawingSurface extends SurfaceView
       st.setPathPaint( BrushManager.fixedStationBarrierPaint );
     } else {
       st.setPathPaint( BrushManager.fixedStationPaint );
-      if ( TDSetting.mSavedStations && saved != null ) { // the test on mSavedStatios is extra care
+      if ( TDSetting.mSavedStations && saved != null ) { // the test on mSavedStations is extra care
 	for ( StationInfo sst : saved ) {
 	  if ( sst.mName.equals( num_st.name ) ) {
             st.setPathPaint( BrushManager.fixedStationSavedPaint );
@@ -704,7 +704,7 @@ class DrawingSurface extends SurfaceView
   // only for X-Sections autowalls
   List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }
 
-  // called by DarwingActivity::addFixedLine
+  // called by DrawingActivity::addFixedLine
   void addFixedSplayPath( DrawingSplayPath path, boolean selectable )
   {
     commandManager.addTmpSplayPath( path, selectable );
@@ -972,7 +972,7 @@ class DrawingSurface extends SurfaceView
   // }
 
   /** add a sketch loaded from file
-   * @pram tdr         tdr file pathname
+   * @param tdr         tdr file pathname
    * @param xdelta     X shift
    * @param ydelta     Y shift
    * @param plotname   sketch name
@@ -1132,12 +1132,12 @@ class DrawingSurface extends SurfaceView
    */
   void toggleStationSplays( String st_name, boolean on, boolean off ) { mStationSplay.toggleStationSplays( st_name, on, off ); }
 
-  /** @return true if the stationis on the ON list
+  /** @return true if the stations on the ON list
    * @param st_name   station name
    */
   boolean isStationSplaysOn( String st_name ) { return mStationSplay.isStationSplaysOn( st_name ); }
 
-  /** @return true if the stationis on the OFF list
+  /** @return true if the stations on the OFF list
    * @param st_name   station name
    */
   boolean isStationSplaysOff( String st_name ) { return mStationSplay.isStationSplaysOff( st_name ); }

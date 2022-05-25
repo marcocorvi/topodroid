@@ -13,32 +13,32 @@ package com.topodroid.utils;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDPath;
 
 import android.os.ParcelFileDescriptor;
 import android.os.Build;
 import android.os.Environment;
 // import android.app.Application;
-import android.app.Activity;
+// import android.app.Activity;
 import android.content.Context;
 
 import android.content.ContentUris;
-import android.content.res.Resources;
+// import android.content.res.Resources;
 
-import java.util.ArrayList;
+// import java.util.ArrayList;
 import android.provider.DocumentsContract;
 import android.net.Uri;
 import android.database.Cursor;
 
-import java.io.File;
-import java.io.FileDescriptor;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.BufferedReader;
-import java.io.OutputStream;
-import java.io.OutputStreamWriter;
-import java.io.BufferedWriter;
-import java.io.FileNotFoundException;
+// import java.io.File;
+// import java.io.FileDescriptor;
+// import java.io.InputStream;
+// import java.io.InputStreamReader;
+// import java.io.BufferedReader;
+// import java.io.OutputStream;
+// import java.io.OutputStreamWriter;
+// import java.io.BufferedWriter;
+// import java.io.FileNotFoundException;
 // import java.io.FileFilter;
 // import java.io.FilenameFilter;
 import java.io.FileWriter;

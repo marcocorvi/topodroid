@@ -14,7 +14,7 @@ package com.topodroid.TDX;
 
 class ManualCalibration
 {
-  static float mLength  = 0; // calibration of manually inputed data: length [m]
+  static float mLength  = 0; // calibration of manually input-ed data: length [m]
   static float mAzimuth = 0; // [degrees]
   static float mClino   = 0; // [degrees]
   static boolean mLRUD  = false; // whether length applies also to LRUD or not

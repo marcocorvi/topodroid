@@ -195,11 +195,11 @@ public class Scrap
     // synchronized ( TDPath.mSelectedLock ) {
     synchronized ( TDPath.mSelectionLock ) {
       mSelected.clear();
-      // FIXME_LATEST latests splays are not considered in the selection
+      // FIXME_LATEST latest splays are not considered in the selection
       mSelection.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); 
       selection_fixed.selectAt( mSelected, x, y, radius, mode, legs, splays, stations, station_splay ); // FIXME-HIDE
       // FIXME-HIDE if ( mSelected.mPoints.size() > 0 ) {
-        // TDLog.v( "seleceted " + mSelected.mPoints.size() + " points " );
+        // TDLog.v( "selected " + mSelected.mPoints.size() + " points " );
         mSelected.nextHotItem();
       // }
     }
@@ -440,7 +440,7 @@ public class Scrap
     }
     if ( splitted ) {
       // TDLog.v( "split " + line.size() + " ==> " + line1.size() + " " + line2.size() );
-      // synchronized( TDPath.mCommandsLock ) // not neceessary: called in synchronized context
+      // synchronized( TDPath.mCommandsLock ) // not necessary: called in synchronized context
       {
         eraseCmd.addAction( EraseAction.ERASE_REMOVE, line );
         mCurrentStack.remove( line );
@@ -778,7 +778,7 @@ public class Scrap
   }
 
   /** compute the bitmap bounding box, union of the bounding boxes of the sketch items
-   * @param bound   output bounding box
+   * @param bounds   output bounding box
    */
   void getBitmapBounds( RectF bounds )
   {
@@ -1517,7 +1517,7 @@ public class Scrap
     LinePoint pp10 = null; // current point forward
     LinePoint pp20 = null; // current point backward
     // LinePoint pp1  = null; // next point forward
-    // LinePoint pp2  = null; // prev point backwrad
+    // LinePoint pp2  = null; // prev point backward
     LinePoint qq10 = null;
     LinePoint qq20 = null;
     LinePoint qq1 = null;
@@ -2218,7 +2218,7 @@ public class Scrap
 
   /** draw all sketch items
    * @param canvas   canvas
-   * @param mat      transform matrix
+   * @param matrix      transform matrix
    * @param scale    rescaling factor
    * @param bbox     clipping rectangle
    */
@@ -2270,7 +2270,7 @@ public class Scrap
 
   /** draw the user stations
    * @param canvas   canvas
-   * @param mat      transform matrix
+   * @param matrix      transform matrix
    * @param bbox     clipping rectangle
    */
   void drawUserStations( Canvas canvas, Matrix matrix, RectF bbox )

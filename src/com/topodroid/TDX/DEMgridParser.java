@@ -10,14 +10,14 @@
  *    if ( DEM.valid() ) DEM.readData( west, east, south, north );
  *    if ( DEM.valid() ) { // use data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 
 // import java.io.FileReader;
 // import java.io.BufferedReader;

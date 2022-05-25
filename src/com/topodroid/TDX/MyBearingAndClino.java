@@ -13,14 +13,14 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
-import com.topodroid.utils.TDVersion;
+// import com.topodroid.utils.TDVersion;
 import com.topodroid.ui.ExifInfo;
 
 // import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 
-import java.util.Locale;
+// import java.util.Locale;
 
 // import android.widget.ImageView;
 
@@ -67,7 +67,7 @@ public class MyBearingAndClino implements IBearingAndClino
     mExif.setExifValues( b0, c0, o0, a0, cam );
   }
 
-  /** @implement write the image data to the (output) file - and stores azimuth/clino as well
+  /** implement write the image data to the (output) file - and stores azimuth/clino as well
    * @param data    image data
    * @return true on success
    * @note override default

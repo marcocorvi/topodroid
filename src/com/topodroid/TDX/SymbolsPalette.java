@@ -27,7 +27,7 @@ class SymbolsPalette
   TreeSet< String > mPaletteLine;
   TreeSet< String > mPaletteArea;
 
-  /** deafult cstr - allocate the lists of symbols
+  /** default cstr - allocate the lists of symbols
    */
   SymbolsPalette( )
   {

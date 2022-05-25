@@ -36,7 +36,7 @@ public class ShpLink extends ShpObject
   /** cstr
    * @param subdir ...
    * @param path   filename
-   * @param files  list of files to fill for the zip-compresssion
+   * @param files  list of files to fill for the zip-compression
    */
   public ShpLink( String subdir, String path, List< String > files ) // throws IOException
   {

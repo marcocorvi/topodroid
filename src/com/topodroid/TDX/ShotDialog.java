@@ -630,7 +630,7 @@ class ShotDialog extends MyDialog
     //   // TDLog.v( "block set sec-leg type ");
     //   mBlk.setTypeSecLeg();
     // } else if ( leg_next ) { // FIXME this can go immediately after the test of the checkbox
-    //   // do_backleg = false; // not neceessary
+    //   // do_backleg = false; // not necessary
     //   long id = mParent.mergeToNextLeg( mBlk );
     //   if ( id >= 0 ) {
     //     shot_from = mBlk.mFrom;

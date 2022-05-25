@@ -28,7 +28,7 @@ public class PlotType
   public static final long PLOT_PHOTO      = 4;
   public static final long PLOT_SECTION    = 5; // vertical leg x-section
   public static final long PLOT_SKETCH_3D  = 6;
-  public static final long PLOT_XH_SECTION = 7; // X-H_sectiuon at a station (defined in EXT plot)
+  public static final long PLOT_XH_SECTION = 7; // X-H_section at a station (defined in EXT plot)
   public static final long PLOT_PROJECTED  = 8; // projected profile
 
   /** @return true if the type is for a vertical sketch

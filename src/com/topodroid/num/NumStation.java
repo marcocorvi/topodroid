@@ -76,7 +76,7 @@ public class NumStation extends NumSurveyPoint
   {
     super();
 
-    // TDLog.Log( TopoDroiaLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
+    // TDLog.Log( TDLog.LOC_NUM, "NumStation cstr " + id + " from " + from + " (extend " + extend + ")" );
     name = id;
     v = from.v - d * TDMath.sinDd( c );
     double h0 = d * Math.abs( TDMath.cosDd( c ) );
@@ -158,15 +158,15 @@ public class NumStation extends NumSurveyPoint
       if ( azimuth > 360 ) { // make sure to start with a negative azimuth
         temp.add( new NumAzimuth( a3.mAzimuth-360, a3.mExtend ) );
       }
-      temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bisecant
+      temp.add( new NumAzimuth( azimuth-360, Float.NaN ) ); // bi-secant
       temp.add( a1 );
       for (int k=1; k<sz; ++k ) {
         NumAzimuth a2 = mLegs.get( k );
-        temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bisecant
+        temp.add( new NumAzimuth( (a1.mAzimuth + a2.mAzimuth)/2, Float.NaN ) ); // bi-secant
         temp.add( a2 );
         a1 = a2;
       }
-      temp.add( new NumAzimuth( azimuth, 0 ) ); // bisecant (sz-1)..0
+      temp.add( new NumAzimuth( azimuth, 0 ) ); // bi-secant (sz-1)..0
       if ( azimuth < 360 ) {
         a1 = mLegs.get( 0 );
         temp.add( new NumAzimuth( a1.mAzimuth+360, a1.mExtend ) );

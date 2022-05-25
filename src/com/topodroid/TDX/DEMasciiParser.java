@@ -10,14 +10,14 @@
  *    if ( DEM.valid() ) DEM.readData( west, east, south, north );
  *    if ( DEM.valid() ) { // use data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDFile;
+// import com.topodroid.utils.TDFile;
 
 // import java.io.FileReader;
 // import java.io.BufferedReader;
@@ -59,11 +59,11 @@ class DEMasciiParser extends ParserDEM
   {
     // TDLog.v("DEM ascii X " + xwest + " " + xeast + " Y " + ysouth + " " + ynorth );
     if ( ! mValid ) {
-      TDLog.Error("DEM acsii parser read data. Not valid" );
+      TDLog.Error("DEM ascii parser read data. Not valid" );
       return mValid;
     }
     if ( mBr == null ) {
-      TDLog.Error("DEM acsii parser read data. Null buffered reader" );
+      TDLog.Error("DEM ascii parser read data. Null buffered reader" );
       return false;
     }
     // FileReader fr = null;
@@ -147,14 +147,14 @@ class DEMasciiParser extends ParserDEM
     return mValid;
   }
 
-  /** read tthe header info
+  /** read the header info
    * @param filename file fullpath - not used
    * @return true if successful
    */
   @Override
   protected boolean readHeader( String filename ) // FIXME DEM_URI
   {
-    // TDLog.v("DEM acsii parser read header " + filename );
+    // TDLog.v("DEM ascii parser read header " + filename );
     if ( mBr == null ) return false;
     try {
       // FileReader fr = new FileReader( filename );

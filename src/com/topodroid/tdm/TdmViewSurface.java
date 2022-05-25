@@ -5,7 +5,7 @@
  *
  * @brief TopoDroid Manager drawing surface (canvas)
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -17,7 +17,7 @@ import android.content.Context;
 
 import android.graphics.Matrix;
 import android.graphics.Paint;
-import android.graphics.PathEffect;
+// import android.graphics.PathEffect;
 import android.graphics.DashPathEffect;
 import android.graphics.PointF;
 import android.graphics.Canvas;
@@ -29,14 +29,14 @@ import android.os.Message;
 import android.util.AttributeSet;
 import android.view.SurfaceHolder;
 import android.view.SurfaceView;
-import android.view.View;
+// import android.view.View;
 
-import android.view.MotionEvent;
+// import android.view.MotionEvent;
 
 import java.util.ArrayList;
-import java.util.TreeSet;
+// import java.util.TreeSet;
 import java.util.Collections;
-import java.util.Iterator;
+// import java.util.Iterator;
 import java.util.List;
 
 /**

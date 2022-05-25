@@ -11,8 +11,8 @@
  */
 package com.topodroid.io.dxf;
 
-import com.topodroid.math.BezierCurve;
-import com.topodroid.math.Point2D;
+// import com.topodroid.math.BezierCurve;
+// import com.topodroid.math.Point2D;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -196,7 +196,7 @@ public class SymbolPointDxf
     }
   }
 
-  /** FLAG token, for polylines
+  /** FLAG token, for poly-lines
    */
   private class FlagToken extends DxfToken
   {
@@ -365,7 +365,7 @@ public class SymbolPointDxf
     float x, y, z;
 
     /** cstr
-     * @param v   ACAD version
+     * @param version   ACAD version
      * @param xx  X coord
      * @param yy  Y coord
      * @param zz  Z coord

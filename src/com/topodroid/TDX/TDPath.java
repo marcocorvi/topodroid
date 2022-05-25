@@ -17,21 +17,21 @@ import com.topodroid.utils.TDFile;
 // import android.provider.DocumentsContract;
 
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
+// import java.io.FileInputStream;
+// import java.io.FileOutputStream;
 import java.io.FileFilter;
 import java.io.FilenameFilter;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+// import java.io.FileNotFoundException;
+// import java.io.IOException;
 
 import java.util.List;
 import java.util.Locale;
 
-import android.content.Context;
-import android.os.Environment;
-import android.widget.TextView;
+// import android.content.Context;
+// import android.os.Environment;
+// import android.widget.TextView;
 
-import android.net.Uri;
+// import android.net.Uri;
 
 public class TDPath
 {
@@ -47,7 +47,7 @@ public class TDPath
   final static String TDR = ".tdr";
   // final static private String TMP = ".tmp";
 
-  final static String TOP = ".top"; // PockeTopo
+  final static String TOP = ".top"; // PocketTopo
   final static String TH  = ".th";  // Therion
   final static String TRO = ".tro"; // VisualTopo
   final static String TROX = ".trox"; // VisualTopo
@@ -64,7 +64,7 @@ public class TDPath
   final static String THCONFIG = ".thconfig";
   // final static String TDCONFIG = ".tdconfig";
 
-  // used by Archiver, and Symbol*Library (thru TDFile)
+  // used by Archiver, and Symbol*Library (through TDFile)
   static String getSymbolPointDirname() { return DIR_POINT; } // "symbol/point"
   static String getSymbolLineDirname()  { return DIR_LINE; }  // "symbol/line"
   static String getSymbolAreaDirname()  { return DIR_AREA; }  // "symbol/area"
@@ -156,7 +156,7 @@ public class TDPath
         return false;
       }
     }
-    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
+    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
 
     boolean ret = false;
     try {
@@ -189,7 +189,7 @@ public class TDPath
 
     try {
       if ( dir.exists() || dir.mkdirs() ) {
-        // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
+        // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
 	if ( dir.isDirectory() && dir.canWrite() ) {
 	  PATH_CW_DIR   = PATH_CB_DIR + "/" + name;
           PATH_ZIP      = PATH_CW_DIR + "/zip";      checkFilesystemDirs( PATH_ZIP );
@@ -270,7 +270,7 @@ public class TDPath
 
   // ------------------------------------------------------------------
 
-  /** @return array of tdconfig files full patnames
+  /** @return array of tdconfig files full pathnames
    * @note used only be TdManagerActivity
    */
   public static String[] scanTdconfigDir() // DistoX-SAF
@@ -280,7 +280,7 @@ public class TDPath
       TDLog.Error("tdconfig error: no exist no make");
       return null;
     }
-    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PESISTENT
+    // TDInstance.takePersistentPermissions( Uri.fromFile( dir ) ); // FIXME_PERSISTENT
     FilenameFilter filter = new FilenameFilter() {
        public boolean accept( File dir, String name ) {
 	 return name.endsWith( "tdconfig" );
@@ -299,7 +299,7 @@ public class TDPath
   // ------------------------------------------------------------------
   // FILE NAMES
 
-  /** @return the ful pathname of the current work dircetory
+  /** @return the ful pathname of the current work directory
    */
   public static String getPathBase() { return PATH_CW_DIR; }
 
@@ -396,7 +396,7 @@ public class TDPath
    */
   static String getAudioFile( String name ) { return APP_AUDIO_PATH + "/" + name; }
 
-  // @parm name   (reduced) plot name
+  // @param name   (reduced) plot name
   static String getSurveyPlotTdrFile( String survey, String name ) { return APP_TDR_PATH + "/" + survey + "-" + name + ".tdr" ; }
 
   /** @return survey plot backup filename
@@ -420,7 +420,7 @@ public class TDPath
   public static String getSurveyZipFile( String survey ) { return getPathname( PATH_ZIP, survey, ZIP ); }
 
   /** @return survey note-file full pathname
-   * @param survey   survey name
+   * @param title   survey name
    */
   public static String getSurveyNoteFile( String title ) { return getPathname( APP_NOTE_PATH, title, TXT ); }
 
@@ -455,7 +455,7 @@ public class TDPath
    */
   public static File[] getBinFiles()   { return getInternalFiles( DIR_BIN ); }
 
-  /** @return array of callibration export files
+  /** @return array of calibration export files
    */
   public static File[] getCalibFiles() { return getInternalFiles( DIR_CCSV  ); } // DistoX-SAF
 
@@ -489,7 +489,7 @@ public class TDPath
    */
   public static File getAreaFile( String filename )  { return TDFile.getPrivateFile( DIR_AREA, filename ); }
 
-  /** @return the point stmbol folder
+  /** @return the point symbol folder
    */
   public static File getPointDir( ) { return TDFile.getPrivateDir( DIR_POINT ); }
 
@@ -613,7 +613,7 @@ public class TDPath
 
   /** @return reduced filename of a survey audio (WAV) file 
    * @param survey   survey name
-   * @param idx      audio index
+   * @param id      audio index
    * @note used by SHP export
    */
   public static String getSurveyWavFilename( String survey, String id ) { return survey + "/audio/" + id + ".wav"; }
@@ -824,7 +824,7 @@ public class TDPath
 
   /** compose a file pathname: directory/name
    * @param directory    directory pathname
-   * @param name         file name (includin extension)
+   * @param name         file name (including extension)
    * @return the file pathname
    */
   private static String getPathname( String directory, String name ) 
@@ -988,7 +988,7 @@ public class TDPath
   //   // copyDir( f, new File( priv_dir,  "man" ), dry_run );
   //   File cwd = TDFile.getExternalDir( "TopoDroid" );
   //   if ( ! cwd.exists() ) {
-  //     TDLog.Error("MOVE TO 6: failed create TopoDroid subfolderi CWD");
+  //     TDLog.Error("MOVE TO 6: failed create TopoDroid subfolder CWD");
   //     // if ( tv != null) tv.setText("failed to create TopoDroid subfolder");
   //     return;
   //   }
@@ -1008,7 +1008,7 @@ public class TDPath
   //     // if ( tv != null ) tv.setText("moving survey " + survey );
   //     File tdr = TDFile.getTopoDroidFile( sdcard + "/Documents/TDX/TopoDroid/" + survey + "/tdr" );
   //     tdr.mkdirs();
-  //     // TDInstance.takePersistentPermissions( Uri.fromFile( tdr ) ); // FIXME_PESISTENT
+  //     // TDInstance.takePersistentPermissions( Uri.fromFile( tdr ) ); // FIXME_PERSISTENT
   //     // move all tdr files of the survey
   //     List<String> plots = db.selectAllPlotNames( survey );
   //     for ( String plot : plots ) {
@@ -1056,7 +1056,7 @@ public class TDPath
   //   if ( ! dry_run ) {
   //     if ( ! out.exists() ) {
   //       if ( ! out.mkdirs() ) return false;
-  //       // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PESISTENT
+  //       // TDInstance.takePersistentPermissions( Uri.fromFile( out ) ); // FIXME_PERSISTENT
   //     }
   //     if ( ! out.isDirectory() ) return false;
   //   // } else {

@@ -420,7 +420,7 @@ class ProjectionDialog extends MyDialog
     doStart();
   }
 
-  /** set the vallue of the azimuth
+  /** set the value of the azimuth
    * @param a         new value of the azimuth
    * @param edit_text whether the set came from the edit text field
    */
@@ -530,7 +530,7 @@ class ProjectionDialog extends MyDialog
      }
   }
 
-  /** shitf the drawing 
+  /** shift the drawing
    * @param ev   touch event 
    */ 
   private void shiftByEvent( MotionEventWrap ev )
@@ -675,7 +675,7 @@ class ProjectionDialog extends MyDialog
      return true;
   }
 
-  /** reac t to a user tap
+  /** react to a user tap
    * @param view tapped view
    *   - button OK: tell the parent to create the projection profile with the current azimuth
    *   - button PLUS: increase azimuth

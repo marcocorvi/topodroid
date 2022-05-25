@@ -91,7 +91,7 @@ public class BezierCurve
     return maxDist;
   }
 
-  /**  Reparameterize: Given set of points and their parameterization,
+  /**  re-parametrize: Given set of points and their parameterization,
    * try to find a better parameterization.
    *
    * @param d           Array of digitized points
@@ -113,7 +113,7 @@ public class BezierCurve
   /**  Bezier: Evaluate a Bezier curve at a particular parameter value
    * degree  The degree of the bezier curve
    * @param t       Parametric value to find point for
-   * note used by cSurevy export
+   * note used by cSurvey export
    */
   public Point2D evaluate( float t ) { return evaluate(3, c, t ); }
 

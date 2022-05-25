@@ -15,12 +15,12 @@ import com.topodroid.utils.TDLog;
 
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
-import android.content.res.Resources;
-import android.content.res.Configuration;
+// import android.content.res.Resources;
+// import android.content.res.Configuration;
 
-import android.content.pm.PackageManager;
+// import android.content.pm.PackageManager;
 import android.content.pm.PackageManager.NameNotFoundException;
-import android.content.pm.PackageInfo;
+// import android.content.pm.PackageInfo;
 
 public class TDVersion 
 {

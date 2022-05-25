@@ -49,13 +49,13 @@ class GeomagLib
     MagVector sumSecVarCoeff = sumSecVar( legendre, model, sph_vars, spherical ); //Sum Sec. Var. Coeffs 
     // sumSecVarCoeff.debugVector( "sum sec var coeff" );
 
-    MagVector result    = rotateVector( spherical, geodetic, sumSphCoeff);     // Computed Magn. fld to Geodeitic coords
+    MagVector result    = rotateVector( spherical, geodetic, sumSphCoeff);     // Computed Magnetic field to Geodetic coords
     // result.debugVector( "result" );
     MagVector resultSV  = rotateVector( spherical, geodetic, sumSecVarCoeff);  // sec. var. fld comps to Geodetic coords
     // resultSV.debugVector( "result SV" );
 
-    MagElement elems   = calculateGeoMagneticElements( result );             // Geomagn. elems Eq. 19 , WMM Tech rep
-    calculateSecularVariationElements( resultSV, elems );                     // sec var of each of the Geomagn elems
+    MagElement elems   = calculateGeoMagneticElements( result );             // Geomagnetic elements Eq. 19 , WMM Tech rep
+    calculateSecularVariationElements( resultSV, elems );                     // sec var of each of the Geomagnetic elems
     return elems;
   }
 
@@ -145,10 +145,10 @@ class GeomagLib
     elems.X = result.x;
     elems.Y = result.y;
     elems.Z = result.z;
-    elems.H = Math.sqrt(result.x * result.x + result.y * result.y); // horiz magn. fld strength
-    elems.F = Math.sqrt(elems.H * elems.H + result.z * result.z); // magn. fld strength
-    elems.Decl = TDMath.RAD2DEG*( Math.atan2(elems.Y, elems.X) ); // angle Magn. Fld and North (pos. east)
-    elems.Incl = TDMath.RAD2DEG*( Math.atan2(elems.Z, elems.H) ); // angle Magn. Fld and horiz plan (pos. down)
+    elems.H = Math.sqrt(result.x * result.x + result.y * result.y); // horiz magnetic field strength
+    elems.F = Math.sqrt(elems.H * elems.H + result.z * result.z); // magnetic field strength
+    elems.Decl = TDMath.RAD2DEG*( Math.atan2(elems.Y, elems.X) ); // angle magnetic field and North (pos. east)
+    elems.Incl = TDMath.RAD2DEG*( Math.atan2(elems.Z, elems.H) ); // angle magnetic field and horiz plan (pos. down)
     return elems;
   } /*MAG_CalculateGeoMagneticElements */
 

@@ -21,7 +21,7 @@ import android.content.Context;
 import android.content.res.Resources;
 
 import android.widget.Button;
-import android.view.View.OnClickListener;
+// import android.view.View.OnClickListener;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -38,13 +38,13 @@ public class MyButton extends Button
 
   // static Random rand = new Random();
 
-  // CACHE : using a cache for the BitmapDrawing does not dramatically improve perfoormanaces
+  // CACHE : using a cache for the BitmapDrawing does not dramatically improve performances
   static private SparseArray<BitmapDrawable> mBitmapCache = USE_CACHE ? new SparseArray<BitmapDrawable>()
                                                               : null;
 
   /** @return the background bitmap for a LVR seekbar
    * @param ctx    context (TODO replace with resources)
-   * @param width  seekbar witdh
+   * @param width  seekbar width
    * @param height seekbar height
    */
   public static Bitmap getLVRseekbarBackGround( Context ctx, int width, int height )
@@ -158,7 +158,7 @@ public class MyButton extends Button
     b.setBackgroundDrawable( getButtonBackground( ctx, size, res_id ) );
   }
 
-  // --------------- MyButton intanace:
+  // --------------- MyButton instance:
 
   private Context mContext;
   private BitmapDrawable mBitmap;
@@ -168,8 +168,8 @@ public class MyButton extends Button
   private float mX, mY;
 
   /** cstr
-   * @param ctx     context 
-   * @param cick_listener user-tap listener
+   * @param context     context
+   * @param click_listener user-tap listener
    * @param size    button size
    * @param res_id  ID of the button background
    */

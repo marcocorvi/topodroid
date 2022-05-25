@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-// MAGtype_CoordGeodetic;
+// MAG-type_CoordGeodetic;
 class MagGeodetic
 {
   double lambda; /* longitude */

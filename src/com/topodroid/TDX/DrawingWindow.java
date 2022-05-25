@@ -525,7 +525,7 @@ public class DrawingWindow extends ItemDrawer
   // FIXME_ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
   // ZoomButton mZoomIn;
-  private float oldDist;  // zoom pointer-sapcing
+  private float oldDist;  // zoom pointer-spacing
   private View mZoomView;
   private float mZoomTranslate = 48; // pixels
   private LinearLayout mLayoutTools;
@@ -2109,7 +2109,7 @@ public class DrawingWindow extends ItemDrawer
     mFormatClosure = getResources().getString(R.string.format_closure );
 
     audioCheck = TDandroid.checkMicrophone( mActivity );
-    // TDLog.v( "Micrphone perm : " + audioCheck );
+    // TDLog.v( "Microphone perm : " + audioCheck );
 
     mZoomBtnsCtrlOn = (TDSetting.mZoomCtrl > 1);  // do before setting content
     mPointScale = PointScale.SCALE_M;
@@ -2146,7 +2146,7 @@ public class DrawingWindow extends ItemDrawer
     // switchZoomCtrl( TDSetting.mZoomCtrl );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    mListView.setEmptyPlacholder(true);
+    mListView.setEmptyPlaceholder(true);
     mButtonSize = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mZoomTranslate = mButtonSize;
@@ -2220,7 +2220,7 @@ public class DrawingWindow extends ItemDrawer
     // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
     // mDrawingUtil = new DrawingUtilPortrait();
 
-    if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi readmi note
+    if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi redmi note
     mSectionName  = null; // resetStatus
     mLastLinePath = null;
     mShiftDrawing = false;
@@ -2416,7 +2416,7 @@ public class DrawingWindow extends ItemDrawer
     if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
-  /** push the status info when a xsectin is opened
+  /** push the status info when a xsection is opened
    * @param type    xsection type
    * @param name    xsection name
    * @param from    xsection from string
@@ -2856,7 +2856,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         // TDLog.v("do start section T " + tt + " " + mPlot3.intercept );
         if ( tt != mPlot3.intercept ) {
-          // TDLog.v( "do start section - update plot intercaept T " + tt + " " + mPlot3.intercept );
+          // TDLog.v( "do start section - update plot intercept T " + tt + " " + mPlot3.intercept );
           mApp_mData.updatePlotIntercept( mPlot3.id, mSid, tt );
           mPlot3.intercept = tt;
         }
@@ -2875,7 +2875,7 @@ public class DrawingWindow extends ItemDrawer
   //   mDrawingSurface.addDrawingPath( path );
   // }
 
-  /** make the refrence for a leg/at-station xsection
+  /** make the reference for a leg/at-station xsection
    * @param list   list of shots of the section
    * @param tt     abscissa of the leg intercept
    * @note called by doRestart, doStart, doRecover
@@ -2979,7 +2979,7 @@ public class DrawingWindow extends ItemDrawer
           yto = -xn * xto - yn * yto;
           xto = xx;
         }
-        addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selecteable
+        addFixedLine( mType, blk, xfrom, yfrom, xto, yto, blk.getReducedExtend(), false, false ); // not-splay, not-selectable
         mDrawingSurface.addDrawingStationName( mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
         mDrawingSurface.addDrawingStationName( mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
 
@@ -3059,7 +3059,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
   }
 
-  /** make the refrence for a multileg xsection
+  /** make the reference for a multileg xsection
    * @param list   list of shots of the section
    * @param center center
    * @note called by doRestart, doStart, doRecover
@@ -3130,7 +3130,7 @@ public class DrawingWindow extends ItemDrawer
           xto   = vt.dot(V1); 
           yto   = vt.dot(V2);
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto + " cosine " + cosine );
-          addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selecteable
+          addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selectable
         } else {
           TDLog.Error( "splay block without station " + b.mFrom );
         }
@@ -3152,7 +3152,7 @@ public class DrawingWindow extends ItemDrawer
           xto   = vt.dot(V1); 
           yto   = vt.dot(V2);
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto );
-          addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selecteable
+          addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selectable
           mDrawingSurface.addDrawingStationName( b.mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );
           mDrawingSurface.addDrawingStationName( b.mTo, DrawingUtil.toSceneX(xto, yto), DrawingUtil.toSceneY(xto, yto) );
           if ( tt >= 0 && tt <= 1 ) {
@@ -3313,10 +3313,10 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** save the current refernce in the plot info struct (and the database)
+  /** save the current reference in the plot info struct (and the database)
    * @param plot    sketch info struct
    * @param pid     plot ID
-   * @note called by updateReefernce and moveTo
+   * @note called by updateReference and moveTo
    */
   private void saveReference( PlotInfo plot, long pid )
   {
@@ -3328,9 +3328,9 @@ public class DrawingWindow extends ItemDrawer
     mApp_mData.updatePlot( pid, mSid, mOffset.x, mOffset.y, mZoom );
   }
 
-  /** restore the current refernce from the plot info struct 
+  /** restore the current reference from the plot info struct
    * @param plot    sketch info struct
-   * @param params  whether to update XY-zomm params by the plot
+   * @param params  whether to update XY-zoom params by the plot
    */
   private void resetReference( PlotInfo plot, boolean params )
   {
@@ -3369,7 +3369,7 @@ public class DrawingWindow extends ItemDrawer
   /** select at a scene point (x,y)
    * @param x    X-coord of the scene point
    * @param y    Y-coord of the scene point
-   * @param size selection radiius
+   * @param size selection radius
    * @note called only onTouchUp
    */
   private void doSelectAt( float x, float y, float size )
@@ -3413,7 +3413,7 @@ public class DrawingWindow extends ItemDrawer
     } 
   }
 
-  /** execute an esase action
+  /** execute an erase action
    * @param x    X coordinate of the erase action (scene frame)
    * @param y    Y coordinate of the erase action (scene frame)
    */
@@ -3807,7 +3807,7 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
-  /** apply an affine trasnformation to the drawing
+  /** apply an affine transformation to the drawing
    * @param ev    screen event defining the transformation parameters
    *
    * x0 = a saveX0 + b saveY0 + c
@@ -4413,9 +4413,9 @@ public class DrawingWindow extends ItemDrawer
     	      DBlock blk = path.mBlock;
     	      float msz = TopoDroidApp.mDisplayWidth/(mZoom*DrawingUtil.SCALE_FIX); // TDSetting.mMinShift / 2;
     	      if ( mLandscape ) {
-    	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
+    	        float y = (path.y1 + path.y2)/2; // midpoint (scene)
     	        if ( Math.abs( y - xs ) < msz ) {
-    	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
+    	          float x = (path.x1 + path.x2)/2; // midpoint (scene)
     	          // TDLog.v( "blk scene " + x + " " + y + " tap " + xs + " " + ys);
     	          if ( Math.abs( x + ys ) < 2.5f*msz ) {
     	            int extend = (-ys + msz < x)? -1 : (-ys - msz > x)? 1 : 0;
@@ -4423,9 +4423,9 @@ public class DrawingWindow extends ItemDrawer
     	          }
     	        }
     	      } else {
-    	        float y = (path.y1 + path.y2)/2; // midpoin (scene)
+    	        float y = (path.y1 + path.y2)/2; // midpoint (scene)
     	        if ( Math.abs( y - ys ) < msz ) {
-    	          float x = (path.x1 + path.x2)/2; // midpoin (scene)
+    	          float x = (path.x1 + path.x2)/2; // midpoint (scene)
 		  float dx = x - xs;
     	          // TDLog.v( "blk scene dx " + dx + " msz " + msz + " zoom " + mZoom );
     	          if ( Math.abs( x - xs ) < 2.5f*msz ) {
@@ -5233,12 +5233,12 @@ public class DrawingWindow extends ItemDrawer
    */
   void toggleStationSplays( String st_name, boolean on, boolean off ) { mDrawingSurface.toggleStationSplays( st_name, on, off ); }
 
-  /** @return true if the stationis on the ON list
+  /** @return true if the stations on the ON list
    * @param st_name   station name
    */
   boolean isStationSplaysOn( String st_name ) { return mDrawingSurface.isStationSplaysOn( st_name ); }
 
-  /** @return true if the stationis on the OFF list
+  /** @return true if the stations on the OFF list
    * @param st_name   station name
    */
   boolean isStationSplaysOff( String st_name ) { return mDrawingSurface.isStationSplaysOff( st_name ); }
@@ -5389,7 +5389,7 @@ public class DrawingWindow extends ItemDrawer
      */
     public void removeStationPoint( DrawingStationName st, DrawingStationPath path )
     {
-      // TDLog.v("reoveStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+      // TDLog.v("removeStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null);
       mDrawingSurface.removeDrawingStationPath( path );
       modified();
@@ -6019,7 +6019,7 @@ public class DrawingWindow extends ItemDrawer
     } 
 
     /** set the plot as of type 2
-     * @param params   whether to update XY-zomm values by the plot
+     * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      */
     private void setPlotType2( boolean compute, boolean params )
@@ -6046,7 +6046,7 @@ public class DrawingWindow extends ItemDrawer
     } 
 
     /** set the plot as of type 2
-     * @param params   whether to update XY-zomm values by the plot
+     * @param params   whether to update XY-zoom values by the plot
      * @param compute ...
      * called by setPlotType, switchPlotType and doRecover
      */
@@ -6327,7 +6327,7 @@ public class DrawingWindow extends ItemDrawer
         // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
       } else {
         mDataDownloader.toggleDownload();
-        // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commenetd
+        // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
         mDataDownloader.doDataDownload( DataType.DATA_SHOT );
       }
     } else if ( b == mButton1[k1++] ) { // BLUETOOTH
@@ -6745,7 +6745,7 @@ public class DrawingWindow extends ItemDrawer
   // PDF ------------------------------------------------------------------
   /** save as PDF file
    * @param uri      export URI
-   * @param type     plot ttype
+   * @param type     plot type
    */
   private void savePdf( Uri uri, long type ) 
   {
@@ -7174,7 +7174,7 @@ public class DrawingWindow extends ItemDrawer
   private void recomputeReferences( TDNum num, float zoom )
   {
     if ( num == null ) return;
-    // TDLog.v("recomputeRefenrences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
+    // TDLog.v("recomputeReferences " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     // mLastLinePath = null; // not needed
 
     if ( mType == (int)PlotType.PLOT_PLAN ) {
@@ -7219,7 +7219,7 @@ public class DrawingWindow extends ItemDrawer
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( mActivity, getResources().getString( HELP_PAGE ));
         return true;
       case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -7285,7 +7285,7 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( mFixedZoom > 0 ) return;
     // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
-    // maybe should increse the bitmap bounds by a small factor ...
+    // maybe should increase the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds();
     zoomFit( b );
   }
@@ -8774,7 +8774,7 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  /** set the recent symbols buttons, after the recent symbols ahave been loaded
+  /** set the recent symbols buttons, after the recent symbols  have been loaded
    */
   @Override
   public void onRecentSymbolsLoaded()

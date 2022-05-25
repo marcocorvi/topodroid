@@ -194,7 +194,7 @@ class AzimuthDialog extends MyDialog
     updateEditText();
   }
 
-  /** @implement set the photo JPEG - use default (comment wen minsdk = 24)
+  /** implement set the photo JPEG - use default (comment wen minsdk = 24)
    * @param data   JPEG data
    * @return false: the JPEG data are not saved
    */

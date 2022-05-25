@@ -87,7 +87,7 @@ class SymbolArea extends Symbol
     mYMode  = ymode;
     mCloseHorizontal = close_horizontal;
     mOrientable  = false;
-    // FIXME AREA_ORIET mOrientation = 0;
+    // FIXME AREA_ORIENT mOrientation = 0;
     mPaint = new Paint();
     mPaint.setDither(true);
     mPaint.setColor( mColor );
@@ -104,7 +104,7 @@ class SymbolArea extends Symbol
   void rotateGradArea( double a ) 
   {
     if ( mOrientable ) {
-      // TDLog.Error( "ERROR area symbol rotate by " + a + " not implementd" );
+      // TDLog.Error( "ERROR area symbol rotate by " + a + " not implemented" );
       // mOrientation += a;
       // while ( mOrientation >= 360 ) mOrientation -= 360;
       // while ( mOrientation < 0 ) mOrientation += 360;

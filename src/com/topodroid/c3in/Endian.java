@@ -5,7 +5,7 @@
  *
  * @brief endianness conversions
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -112,7 +112,7 @@ class Endian
   // }
 
   // @param fis    file input stream
-  // @param int32  array of SIZE32 bytes (preallocated)
+  // @param int32  array of SIZE32 bytes (pre-allocated)
   static int readInt32( DataInputStream fis, byte[] int32 ) throws IOException
   {
     return fis.read( int32, 0, SIZE32 );

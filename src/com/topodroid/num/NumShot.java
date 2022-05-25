@@ -30,7 +30,7 @@ public class NumShot
   public int mDirection; // direction of the block (1 same, -1 opposite)
                   // this is used only to decide between barrier and hidden
   NumBranch branch;
-  boolean mUsed;  // whether the shot has been used in the station coords recomputation after loop-closure
+  boolean mUsed;  // whether the shot has been used in the station coords re-computation after loop-closure
   public boolean mIgnoreExtend;
   // int mExtend;
   // float mLength;

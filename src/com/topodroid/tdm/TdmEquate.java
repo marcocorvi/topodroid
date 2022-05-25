@@ -3,9 +3,9 @@
  * @author marco corvi
  * @date nov 2019
  *
- * @brief TopoDroid Manager station-equate objectc
+ * @brief TopoDroid Manager station-equate object
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */

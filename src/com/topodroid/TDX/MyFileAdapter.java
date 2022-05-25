@@ -5,7 +5,7 @@
  *
  * @brief Cave3D file adapter
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -82,7 +82,7 @@ class MyFileAdapter extends ArrayAdapter< MyFileItem >
 
   /** get the view at a given position
    * @param pos    position
-   * @param convertView conevrt view
+   * @param convertView convert view
    * @param parent  ...
    */
   @Override

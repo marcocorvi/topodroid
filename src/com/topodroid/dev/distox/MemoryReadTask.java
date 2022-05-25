@@ -96,10 +96,10 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     dumpfile = dumpfile.trim();
     if ( dumpfile.length() == 0 ) return;
     try { 
-      // TDLog.Log( TDLog.LOG_IO, "dump memory to file " + dumppath );
-      // String dumppath = TDPath.getDumpFile( dumpfile );
-      // TDPath.checkPath( dumppath );
-      // FileWriter fw = new FileWriter( dumppath );
+      // TDLog.Log( TDLog.LOG_IO, "dump memory to file " + dumpfile );
+      // String dump_path = TDPath.getDumpFile( dumpfile );
+      // TDPath.checkPath( dump_path );
+      // FileWriter fw = new FileWriter( dump_path );
       File file = TDPath.getDumpFile( dumpfile );
       FileWriter fw = new FileWriter( file );
       PrintWriter pw = new PrintWriter( fw );

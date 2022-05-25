@@ -154,7 +154,7 @@ public class SensorActivity extends Activity
   }
 
   /** react to a change in the configuration
-   * @param cfg   new configuration
+   * @param new_cfg   new configuration
    */
   @Override
   public void onConfigurationChanged( Configuration new_cfg )
@@ -225,7 +225,7 @@ public class SensorActivity extends Activity
     {
       if ( event.sensor.getType() == mSensorType ) {
         // TDLog.Log( TDLog.LOG_SENSOR,
-        //   "sensorChanged (" + evenmt.values[0] + ", " + evenmt.values[1] + ", " + evenmt.values[2] + ")");
+        //   "sensorChanged (" + event.values[0] + ", " + event.values[1] + ", " + event.values[2] + ")");
         // if ( mFirst ) TDLog.v( "sensor changed first " + event.values[0] );
         String value = "";
         switch ( mSensorType ) {
@@ -244,7 +244,7 @@ public class SensorActivity extends Activity
             value = String.format(Locale.US, "%.2f", mValues[0] );
             break;
           case Sensor.TYPE_MAGNETIC_FIELD:
-          case Sensor.TYPE_ORIENTATION: // DEPRECAED API-16
+          case Sensor.TYPE_ORIENTATION: // DEPRECATED API-16
           // case Sensor.TYPE_GRAVITY:
           default:
             if ( mFirst ) {
@@ -268,7 +268,7 @@ public class SensorActivity extends Activity
     @Override
     public void onAccuracyChanged( Sensor sensor, int accuracy )
     {
-      // TODO see TimerTask onAccuracyChnaged
+      // TODO see TimerTask onAccuracyChanged
       TDLog.v( "sensor type " + sensor.getType() + " accuracy changed " + accuracy );
       mFirst = true;
       mAlpha = 0.8f;
@@ -348,7 +348,7 @@ public class SensorActivity extends Activity
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         String help_page = getResources().getString( R.string.SensorActivity );
         /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
         return true;

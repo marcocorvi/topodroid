@@ -21,7 +21,7 @@ package com.topodroid.mag;
 
 import com.topodroid.utils.TDMath;
 
-// MAGtype_CoordSpherical;
+// MAG-type_CoordSpherical;
 class MagSpherical
 {
   double lambda; /* longitude*/

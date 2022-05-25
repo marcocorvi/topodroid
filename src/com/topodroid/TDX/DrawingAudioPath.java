@@ -117,7 +117,7 @@ public class DrawingAudioPath extends DrawingPointPath
         float y = DrawingUtil.sceneToWorldY( cx, cy );
         pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
         pw.format("</item>\n");
-        // TDLog.v( "toCSurevy() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+        // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
       }
     }
   }

@@ -10,7 +10,7 @@
  *    if ( DEM.valid() ) DEM.readData( west, east, south, north );
  *    if ( DEM.valid() ) { // use data
  * --------------------------------------------------------
- *  Copyright This sowftare is distributed under GPL-3.0 or later
+ *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
@@ -74,7 +74,7 @@ class ParserDEM extends DEMsurface
     mValid = readHeader( mFilename );
   }
 
-  /** @return whther the DEM is valid
+  /** @return whether the DEM is valid
    */
   boolean valid() { return mValid; }
 
@@ -124,7 +124,7 @@ class ParserDEM extends DEMsurface
    * @param xwest     West X coord
    * @param xeast     East X coord
    * @param ysouth    South Y coord
-   * @param ynouth    Nouth Y coord
+   * @param ynorth    Nouth Y coord
    */
   boolean readData( double xwest, double xeast, double ysouth, double ynorth ) { return false; }
 

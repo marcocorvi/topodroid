@@ -139,7 +139,7 @@ class StationName
 
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
-    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " bckleg " + is_backleg );
+    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
     //   TDLog.v("station name detect bad sibling (1)");
@@ -162,7 +162,7 @@ class StationName
 
   // ------------------------------------------------------------------------------------------------
   // called in assignStationsAfter_Backsight
-  //           assignStations_BacksightBachshot
+  //           assignStations_BacksightBackshot
   //           assignStations_Backsight
   // note backsight-shot is a shot taken backsight (ie backward)
   //      backshot is a distox mode, in which direction data are stored reversed

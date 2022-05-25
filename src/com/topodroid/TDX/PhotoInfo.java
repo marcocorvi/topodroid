@@ -31,7 +31,7 @@ class PhotoInfo
   /** cstr
    * @param _sid     survey id
    * @param _id      id 
-   * @param _shitid  shot id
+   * @param _shotid  shot id
    * @param t        title
    * @param sn       shot name
    * @param dt       datetime

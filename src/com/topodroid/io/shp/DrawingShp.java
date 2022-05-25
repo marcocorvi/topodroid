@@ -72,7 +72,7 @@ public class DrawingShp
     ArrayList< String > files = new ArrayList<>();
 
     try {
-      // centerline data: shepafile of segments (fields: type, fron, to)
+      // centerline data: shape-file of segments (fields: type, from, to)
       // xoff+sh.x1, yoff+sh.y1  --  xoff+sh.x2, yoff+sh.y2
       ArrayList< DrawingPath > shots = new ArrayList<>();
       if ( PlotType.isSketch2D( type ) ) { 
@@ -141,7 +141,7 @@ public class DrawingShp
       TDLog.Error( "SHP io-exception " + e.getMessage() );
       return false;
     } finally {
-      TDFile.deleteMSdir( dirname ); // delete temporary shapedir
+      TDFile.deleteMSdir( dirname ); // delete temporary shape-dir
     }
     return true;
   }

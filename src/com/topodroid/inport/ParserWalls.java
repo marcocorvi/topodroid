@@ -43,7 +43,7 @@ class ParserWalls extends ImportParser
     double lng, lat; // WGS84 longitude and latitude
     double alt;      // geoid altitude
   
-    /** ctsr
+    /** cstr
      * @param st    station name
      * @param _lng  longitude [dec. degrees]
      * @param _lat  latitude [dec. degrees]
@@ -67,7 +67,7 @@ class ParserWalls extends ImportParser
   /** cstr
    * @param isr         input stream 
    * @param name        survey name
-   * @param apply_declination wheter to apply the declination to the azimuths
+   * @param apply_declination whether to apply the declination to the azimuths
    */
   ParserWalls( InputStreamReader isr, String name, boolean apply_declination ) throws ParserException
   {
@@ -90,10 +90,10 @@ class ParserWalls extends ImportParser
    * @param filename name of the file to parse
    * @param basepath survey pathname base
    * 
-   * LRUD styles: F FROM station perp. [default]
-   *              T To station perp.
-   *              FB FROM sttaion bisector - replaced by F
-   *              TB TO sttaion bisector - replaced by T
+   * LRUD styles: F FROM station perpendicular [default]
+   *              T To station perpendicular
+   *              FB FROM station bisector - replaced by F
+   *              TB TO station bisector - replaced by T
    */
   private void readFile( InputStreamReader isr, String filename, String basepath ) throws ParserException
   {

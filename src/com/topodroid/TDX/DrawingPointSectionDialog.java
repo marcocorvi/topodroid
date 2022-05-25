@@ -1,4 +1,4 @@
-/* @file DrawingPoinSectiontDialog.java
+/* @file DrawingPointSectionDialog.java
  *
  * @author marco corvi
  * @date march 2021
@@ -22,7 +22,7 @@ import com.topodroid.common.PointScale;
 import android.os.Bundle;
 import android.content.Context;
 
-import android.widget.EditText;
+// import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Button;
 import android.widget.RadioButton;

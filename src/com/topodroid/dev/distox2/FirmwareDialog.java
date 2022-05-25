@@ -9,7 +9,7 @@
  *  See the file COPYING.
  * --------------------------------------------------------
  *
- * this class is intsantiated only by DeviceActivity
+ * this class is instantiated only by DeviceActivity
  */
 package com.topodroid.dev.distox2;
 
@@ -149,10 +149,10 @@ public class FirmwareDialog extends MyDialog
           // File fp = new File( TDPath.getBinFile( filename ) );
           File fp = TDPath.getBinFile( filename );
           if ( ! fp.exists() ) {
-            TDLog.Error( "inexistent upload firmware file " + filename );
+            TDLog.Error( "non-existent upload firmware file " + filename );
             return;    
           }
-          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guass firmware version
+          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
           // TDLog.LogFile( "Detected Firmware version " + fw );
           TDLog.v( "Detected Firmware version " + fw );
 	  boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );

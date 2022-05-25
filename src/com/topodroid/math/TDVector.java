@@ -26,7 +26,7 @@ public class TDVector
 
   public static final TDVector zero = new TDVector(0.0f, 0.0f, 0.0f);
 
-  /** defaulkt cstr: zero vector
+  /** default cstr: zero vector
    */
   public TDVector()
   {
@@ -326,7 +326,7 @@ public class TDVector
   /* The plane of a path is: a0*x + b0*y + c0*z = 1
    * There is an unresolved ambiguity: the normal to the plane could be
    * reversed and the plane still be the same.
-   * Need to require that the points are traversed righthand wise,
+   * Need to require that the points are traversed right-hand wise,
    * going around the normal.
    */
   // static TDVector computeVectorsNormal( ArrayList< TDVector > pts )

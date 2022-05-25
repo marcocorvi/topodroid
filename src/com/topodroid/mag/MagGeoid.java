@@ -19,7 +19,7 @@
  */
 package com.topodroid.mag;
 
-// MAGtype_Geoid
+// MAG-type_Geoid
 class MagGeoid
 {
   private int NumbGeoidCols;
@@ -54,7 +54,7 @@ class MagGeoid
    * Geoid height at the specified geodetic coordinates to the equivalent
    * ellipsoid height, using the EGM96 gravity model.
    *
-   *   geodetic->phi        : Geodetic latitude in degress           (input)
+   *   geodetic->phi        : Geodetic latitude in degrees           (input)
    *    geodetic->lambda     : Geodetic longitude in degrees          (input)
    *    geodetic->HeightAboveEllipsoid	     : Ellipsoid height, in kilometers         (output)
    *    geodetic->HeightAboveGeoid: Geoid height, in kilometers           (input)
@@ -105,7 +105,7 @@ class MagGeoid
     return ret;
   }
 
-  /** The  function getGeoidHeight returns the height of the EGM96 geiod above or below the WGS84 ellipsoid,
+  /** The  function getGeoidHeight returns the height of the EGM96 Geoid above or below the WGS84 ellipsoid,
    * at the specified geodetic coordinates, using a grid of height adjustments from the EGM96 gravity model.
    *    Latitude            : Geodetic latitude in radians           (input)
    *    Longitude           : Geodetic longitude in radians          (input)
