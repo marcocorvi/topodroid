@@ -1278,17 +1278,16 @@ public class MainWindow extends Activity
             String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
             // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
-              // String surveyname = name;
               ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
               FileInputStream fis = TDsafUri.docFileInputStream( pfd );
               // if ( fis.markSupported() ) fis.mark();
-              int manifest_ok = Archiver.getOkManifest( fis, /* name, */ name ); // NOTE last arg was surveyname
+              int manifest_ok = Archiver.getOkManifest( mApp, fis );
               try { fis.close(); } catch ( IOException e ) { }
               TDsafUri.closeFileDescriptor( pfd );
               if ( manifest_ok >= 0 ) {
                 ParcelFileDescriptor pfd2 = TDsafUri.docReadFileDescriptor( uri );
                 FileInputStream fis2 = TDsafUri.docFileInputStream( pfd2 );
-                Archiver.unArchive( mApp, fis2, name ); 
+                Archiver.unArchive( mApp, fis2 ); 
                 try { fis2.close(); } catch ( IOException e ) { }
                 TDsafUri.closeFileDescriptor( pfd2 );
               } else {

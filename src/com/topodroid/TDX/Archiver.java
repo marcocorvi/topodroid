@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
+import com.topodroid.utils.TDVersion;
 import com.topodroid.prefs.TDSetting;
 // import com.topodroid.common.PlotType;
 
@@ -25,12 +26,13 @@ import java.io.File;
 import java.io.IOException;
 import java.io.FileNotFoundException;
 import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
+import java.io.StringReader;
 
 import java.io.InputStream;
 import java.io.FileInputStream;
 import java.io.BufferedInputStream;
 import java.io.InputStreamReader;
-import java.io.BufferedReader;
 import java.io.OutputStream;
 import java.io.FileOutputStream;
 import java.io.BufferedOutputStream;
@@ -53,9 +55,12 @@ import java.util.List;
 
 public class Archiver
 {
-  // private final TopoDroidApp mApp;
   private static final int BUF_SIZE = 4096;
   private byte[] data; // = new byte[ BUF_SIZE ];
+
+  private static int mManifestDbVersion = 0;
+  private static String mManifestSurveyname = null;
+
 
   private String mZipname;
   // private static String mManifestPath = null;
@@ -64,7 +69,6 @@ public class Archiver
    */
   public Archiver( ) // TopoDroidApp app
   {
-    // mApp = app;
     data = new byte[ BUF_SIZE ];
   }
 
@@ -345,11 +349,11 @@ public class Archiver
   }
 
   /** archive the current survey - compress to the default zip file
-   * @param mApp   application
+   * @param app   application
    * @param uri   output URI (if null the default output zipfile is used)
    * @return true if successful
    */
-  boolean archive( TopoDroidApp mApp, Uri uri )
+  boolean archive( TopoDroidApp app, Uri uri )
   {
     if ( TDInstance.sid < 0 ) return false;
     DataHelper app_data = TopoDroidApp.mData;
@@ -376,7 +380,7 @@ public class Archiver
       }
 
       pathname = TDPath.getManifestFile( ); // The first entry must be the manifest 
-      mApp.writeManifestFile();
+      app.writeManifestFile();
       ret &= addEntry( zos, TDFile.getTopoDroidFile(pathname), pathname );
       // TDLog.v("ZIP archive post-manifest returns " + ret );
 
@@ -497,9 +501,159 @@ public class Archiver
     return size;
   }
 
-  public int unArchive( TopoDroidApp mApp, String filename, String surveyname, boolean force )
+  /** check a  manifest file
+   * @param manifest   content of manifest 
+   * @return
+   *  >=0 ok
+   * -1 survey already present
+   * -2 TopoDroid version mismatch
+   * -3 database version mismatch: manifest_DB_version < min_DB_version
+   * -4 database version mismatch: manifest_DB_version > current DB_version
+   * -5 survey name does not match filename
+   * -10 number format error
+   * -11 file not found
+   * -12 IO error
+   */
+  static private int checkManifestFile( TopoDroidApp app, String manifest )
   {
-    TDLog.v("ZIP 7 un-archive file " + filename + " survey " + surveyname );
+    mManifestDbVersion = 0;
+    String line;
+    int version_code = 0;
+    int ret = -1;
+    try {
+      // FileReader fr = TDFile.getFileReader( filename );
+      StringReader fr = new StringReader( manifest );
+      BufferedReader br = new BufferedReader( fr );
+      // first line is version
+      line = br.readLine().trim();
+      ret = checkVersionLine( line );
+      if ( ret < 0 ) return ret;
+
+      line = br.readLine().trim();
+      try {
+        mManifestDbVersion = Integer.parseInt( line );
+      } catch ( NumberFormatException e ) {
+        TDLog.Error( "MANIFEST DB version format error: " + line );
+        return -10;
+      }
+      
+      if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
+        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + + TDVersion.DATABASE_VERSION_MIN );
+        return -3;
+      }
+      if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
+        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
+        return -4;
+      }
+
+      mManifestSurveyname = br.readLine().trim();
+      TDLog.v("MANIFEST read <" + mManifestSurveyname + ">" );
+      if ( app.mData.hasSurveyName( mManifestSurveyname ) ) {
+        TDLog.Error( "MANIFEST survey exists: <" + mManifestSurveyname + ">" );
+        return -1;
+      }
+      // fr.close();
+    } catch ( NumberFormatException e ) {
+      TDLog.Error( "MANIFEST error: " + e.getMessage() );
+      return -10;
+    } catch ( FileNotFoundException e ) {
+      TDLog.Error( "MANIFEST file not found: " + e.getMessage() );
+      return -11;
+    } catch ( IOException e ) {
+      TDLog.Error( "MANIFEST I/O error: " + e.getMessage() );
+      return -12;
+    }
+    return ret;
+  }
+
+  /** check the version line of a manifest file - called by checkManifestFile
+   * @param version_line version line
+   * @return
+   *   -10 number format error
+   *   -2  version is too old
+   *   0   version is in acceptable range
+   *   1   version is newer than this app
+   */
+  static private int checkVersionLine( String version_line )
+  {
+    int ret = 0;
+    int version_code = 0;
+    String[] vers = version_line.split(" ");
+    for ( int k=1; k<vers.length; ++ k ) {
+      if ( vers[k].length() > 0 ) {
+        try {
+          version_code = Integer.parseInt( vers[k] );
+          break;
+        } catch ( NumberFormatException e ) { 
+          // this is OK
+        }
+      }
+    }
+    if ( version_code == 0 ) {
+      String[] ver = vers[0].split("\\.");
+      int major = 0;
+      int minor = 0;
+      int sub   = 0;
+      char vch  = ' '; // char order: ' ' < A < B < ... < a < b < ... < '}' 
+      if ( ver.length > 2 ) { // M.m.sv version code
+        try {
+          major = Integer.parseInt( ver[0] );
+          minor = Integer.parseInt( ver[1] );
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "parse error: major/minor " + ver[0] + " " + ver[1] );
+          return -10;
+        }
+        int k = 0;
+        while ( k < ver[2].length() ) {
+          char ch = ver[2].charAt(k);
+          if ( ch < '0' || ch > '9' ) { vch = ch; break; }
+          sub = 10 * sub + (int)(ch - '0');
+          ++k;
+        }
+        // TDLog.v( "Version " + major + " " + minor + " " + sub );
+        if (    ( major <  TDVersion.MAJOR_MIN )
+             || ( major == TDVersion.MAJOR_MIN && minor < TDVersion.MINOR_MIN )
+             || ( major == TDVersion.MAJOR_MIN && minor == TDVersion.MINOR_MIN && sub < TDVersion.SUB_MIN ) 
+          ) {
+          TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.MAJOR_MIN + "." + TDVersion.MINOR_MIN + "." + TDVersion.SUB_MIN );
+          return -2;
+        }
+        if (    ( major > TDVersion.MAJOR ) 
+             || ( major == TDVersion.MAJOR && minor > TDVersion.MINOR )
+             || ( major == TDVersion.MAJOR && minor == TDVersion.MINOR && sub > TDVersion.SUB ) ) {
+          ret = 1; 
+        } else if ( major == TDVersion.MAJOR && minor == TDVersion.MINOR && sub == TDVersion.SUB && vch > ' ' ) {
+          if ( TDVersion.VCH == ' ' ) { 
+            ret = 1;
+          } else if ( TDVersion.VCH <= 'Z' && ( vch >= 'a' || vch < TDVersion.VCH ) ) { // a-z or vch(A-Z) < VCH
+            ret = 1;
+          } else if ( TDVersion.VCH >= 'a' && vch < TDVersion.VCH ) { // A-Z < a-z 
+            ret = 1;
+          }
+        }
+
+      } else { // version code
+        try {
+          version_code = Integer.parseInt( ver[0] );
+          if ( version_code < TDVersion.CODE_MIN ) {
+            TDLog.Error( "TopoDroid version mismatch: " + version_line + " < " + TDVersion.CODE_MIN );
+            return -2;
+          }
+        } catch ( NumberFormatException e ) {
+          TDLog.Error( "parse error: version code " + ver[0] + " " + e.getMessage() );
+          return -10;
+        }
+        if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
+      }
+    } else {
+      if ( version_code > TDVersion.VERSION_CODE ) ret = 1;
+    }
+    return ret;
+  }
+
+  public int unArchive( TopoDroidApp app, String filename, boolean force )
+  {
+    TDLog.v("ZIP 7 un-archive file " + filename );
     boolean sql_success = false;
     int ok_manifest = -2;
     String pathname;
@@ -508,7 +662,6 @@ public class Archiver
     try {
       // byte buffer[] = new byte[36768];
       // byte[] buffer = new byte[4096];
-
       ZipEntry ze;
       // TDLog.Log( TDLog.LOG_ZIP, "unzip " + filename );
       ZipFile zip = new ZipFile( filename );
@@ -523,10 +676,8 @@ public class Archiver
       // fout.close();
       if ( msize > 0 ) {
         // int c; while ( ( c = is.read( mbuffer ) ) != -1 ) fout.write(mbuffer, 0, c);
-        // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
-        ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
-        // mManifestPath = surveyname;
-        TDLog.v( "ZIP 7 manifest: " + ze.getName() + " size " + msize + " ok " + ok_manifest + " survey " + surveyname );
+        ok_manifest = checkManifestFile( app, bout.toString() );
+        TDLog.v( "ZIP 7 manifest: " + ze.getName() + " size " + msize + " ok " + ok_manifest + " survey " + mManifestSurveyname );
       }
       // TDFile.deleteFile( pathname );
       // TDLog.Log( TDLog.LOG_ZIP, "un-archived manifest " + ok_manifest );
@@ -537,10 +688,8 @@ public class Archiver
           return ok_manifest;
         }
       }
-      // TDLog.Log( TDLog.LOG_ZIP, "unzip file " + filename + " survey " + surveyname );
       // byte buffer[] = new byte[36768];
       // byte[] buffer = new byte[4096];
-
       // int nr_entry = 0;
       Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FIXME "unchecked cast"
       for ( ; entries.hasMoreElements(); ) {
@@ -559,34 +708,34 @@ public class Archiver
           if ( ze.getName().equals( "survey.sql" ) ) {
             pathname = TDPath.getSqlFile();
             sql = true;
-	  // /* FIXME_SKETCH_3D *
+          // /* FIXME_SKETCH_3D *
           // } else if ( ze.getName().endsWith( TDPath.TH3 ) ) {
           //   pathname = TDPath.getTh3File( ze.getName() );
-	  // * END_SKETCH_3D */
+          // * END_SKETCH_3D */
           } else if ( ze.getName().endsWith( TDPath.TDR ) ) { // PLOTS
             pathname = TDPath.getTdrFile( ze.getName() );
           } else if ( ze.getName().endsWith( TDPath.TXT ) ) { // NOTES
             pathname = TDPath.getNoteFile( ze.getName() );
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
-            pathname = TDPath.getSurveyAudioDir( surveyname );
+            pathname = TDPath.getSurveyAudioDir( mManifestSurveyname );
             TDFile.makeTopoDroidDir( pathname );
-            pathname = TDPath.getSurveyAudioFile( surveyname, ze.getName() );
+            pathname = TDPath.getSurveyAudioFile( mManifestSurveyname, ze.getName() );
           } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
             // FIXME need survey dir
-            pathname = TDPath.getSurveyPhotoDir( surveyname );
+            pathname = TDPath.getSurveyPhotoDir( mManifestSurveyname );
             TDFile.makeTopoDroidDir( pathname );
-            pathname = TDPath.getSurveyJpgFile( surveyname, ze.getName() );
+            pathname = TDPath.getSurveyJpgFile( mManifestSurveyname, ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
-              BrushManager.reloadPointLibrary( mApp, mApp.getResources() );
+              BrushManager.reloadPointLibrary( app, app.getResources() );
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
             if ( uncompressSymbols( zin, TDPath.getSymbolLineDirname(), "l_" ) ) {
-              BrushManager.reloadLineLibrary( mApp.getResources() );
+              BrushManager.reloadLineLibrary( app.getResources() );
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
             if ( uncompressSymbols( zin, TDPath.getSymbolAreaDirname(), "a_" ) ) {
-              BrushManager.reloadAreaLibrary( mApp.getResources() );
+              BrushManager.reloadAreaLibrary( app.getResources() );
             }
           } else {
             TDLog.Error("ZIP 7 unexpected file type " + ze.getName() );
@@ -601,9 +750,9 @@ public class Archiver
             fout.close();
             if ( size > 0 ) {
               if ( sql ) {
-                // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
-                TDLog.v( "ZIP 7 sqlfile " + pathname + " DB version " + TopoDroidApp.mManifestDbVersion );
-                sql_success = ( app_data.loadFromFile( pathname, TopoDroidApp.mManifestDbVersion ) >= 0 );
+                // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mManifestDbVersion );
+                TDLog.v( "ZIP 7 sqlfile " + pathname + " DB version " + mManifestDbVersion );
+                sql_success = ( app_data.loadFromFile( pathname, mManifestDbVersion ) >= 0 );
                 TDFile.deleteFile( pathname );
               }
             } else {
@@ -626,19 +775,16 @@ public class Archiver
       // tell user that there was a problem
       return -5;
     }
-
     return ok_manifest; // return 0 or 1
   }
 
   /** check if manifest file is OK
-   * @param fis         zip archive input stream
-   // * @param filename    unused
-   * @param surveyname  expected survey-name, also set when the manifest is checked
+   * @param app   application
+   * @param fis   zip archive input stream
    * @note called by MainWindow
    */
-  static public int getOkManifest( InputStream fis, /* String filename, */ String surveyname )
+  static public int getOkManifest( TopoDroidApp app, InputStream fis )
   {
-    TDLog.v( "ZIP get OK manifest - expect survey " + surveyname );
     int ok_manifest = -2;
     ZipEntry ze;
     // mManifestPath = null;
@@ -655,17 +801,14 @@ public class Archiver
           int size = decompressEntry( zin, ze, bout );
           // TDLog.Log( TDLog.LOG_ZIP, "Zip manifest: \"" + ze.getName() + "\" size " + size );
           if ( size > 0 ) {
-            // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
-            ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
-            // mManifestPath = surveyname;
-            TDLog.v( "ZIP manifest [1]: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest + " survey " + surveyname );
+            ok_manifest = checkManifestFile( app, bout.toString() );
+            TDLog.v( "ZIP manifest [1]: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest + " survey " + mManifestSurveyname );
           } else {
             TDLog.Error( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
           }
           // TDFile.deleteFile( pathname );
           if ( ok_manifest < 0 ) return ok_manifest;
           // TDLog.Log( TDLog.LOG_ZIP, "un-archive manifest " + ok_manifest );
-          // TDLog.v( "ZIP un-archive manifest " + ok_manifest + " entry " + nr_entry + " survey " + surveyname );
           break;
         }
         zin.closeEntry();
@@ -681,20 +824,17 @@ public class Archiver
   /** un-archive from an input stream
    * @param app        TopoDroid application
    * @param fis        input stream
-   * @param surveyname name of the survey (= new folder)
    *
    * When this method is called the manifest has been checked and is OK
    * This method sets the survey path by the passed survey-name at start, and resets it to null at the end
    */
-  static public int unArchive( TopoDroidApp mApp, InputStream fis, String surveyname )
+  static public int unArchive( TopoDroidApp app, InputStream fis )
   {
-    TDLog.v( "ZIP 8 un-archive input stream - survey: " + surveyname );
     int ok_manifest = 0;
     String pathname;
     ZipEntry ze;
     DataHelper app_data = TopoDroidApp.mData;
-    // mApp.setSurveyFromName( surveyname, -1, true ); // open survey: tell app to update survey name+id
-    TDPath.setSurveyPaths( surveyname );
+    TDPath.setSurveyPaths( mManifestSurveyname );
 
     try {
       // byte buffer[] = new byte[36768];
@@ -728,24 +868,22 @@ public class Archiver
           } else if ( ze.getName().endsWith( TDPath.TXT ) ) {
             pathname = TDPath.getNoteFile( ze.getName() );
           } else if ( ze.getName().endsWith( ".wav" ) ) { // AUDIOS
-            // pathname = TDPath.getSurveyAudioDir( surveyname ); // FIXME need survey dir ?
             // TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getAudioFile( ze.getName() );
           } else if ( ze.getName().endsWith( ".jpg" ) ) { // PHOTOS
-            // pathname = TDPath.getSurveyJpgDir( surveyname ); // FIXME need survey dir ?
             // TDFile.makeTopoDroidDir( pathname );
             pathname = TDPath.getJpgFile( ze.getName() );
           } else if ( ze.getName().equals( "points.zip" ) ) { // POINTS
             if ( uncompressSymbols( zin, TDPath.getSymbolPointDirname(), "p_" ) ) {
-              BrushManager.reloadPointLibrary( mApp, mApp.getResources() );
+              BrushManager.reloadPointLibrary( app, app.getResources() );
             }
           } else if ( ze.getName().equals( "lines.zip" ) ) { // LINES
             if ( uncompressSymbols( zin, TDPath.getSymbolLineDirname(), "l_" ) ) {
-              BrushManager.reloadLineLibrary( mApp.getResources() );
+              BrushManager.reloadLineLibrary( app.getResources() );
             }
           } else if ( ze.getName().equals( "areas.zip" ) ) { // AREAS
             if ( uncompressSymbols( zin, TDPath.getSymbolAreaDirname(), "a_" ) ) {
-              BrushManager.reloadAreaLibrary( mApp.getResources() );
+              BrushManager.reloadAreaLibrary( app.getResources() );
             }
           } else {
             // TDLog.Error("unexpected file type " + ze.getName() );
@@ -761,8 +899,8 @@ public class Archiver
               TDFile.deleteFile( pathname );
             } else {
               if ( sql ) {
-                // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
-                if ( app_data.loadFromFile( pathname, TopoDroidApp.mManifestDbVersion ) < 0 ) ok_manifest = -5;
+                // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mManifestDbVersion );
+                if ( app_data.loadFromFile( pathname, mManifestDbVersion ) < 0 ) ok_manifest = -5;
                 TDFile.deleteFile( pathname );
               }
             }

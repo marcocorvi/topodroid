@@ -52,17 +52,17 @@ public class ImportZipTask extends ImportTask
     String filename = str[0];
     TopoDroidApp app = mApp.get();
     if ( app == null ) return -7L;
-    String name = filename.replace(".zip", "");
+    // String name = filename.replace(".zip", "");
 
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( mUri );
     if ( pfd == null ) {
       Archiver archiver = new Archiver( );
-      return (long)archiver.unArchive( app, TDPath.getZipFile( filename ), name, mForce );
+      return (long)archiver.unArchive( app, TDPath.getZipFile( filename ), /* name, */ mForce );
     } else {
       long ret = -1L;
       try {
         fis = TDsafUri.docFileInputStream( pfd ); // super.fis
-        ret = (long)Archiver.unArchive( app, fis, name );
+        ret = (long)Archiver.unArchive( app, fis );
         fis.close(); 
       } catch ( IOException e ) { 
       } finally {
