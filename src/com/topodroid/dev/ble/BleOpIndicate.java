@@ -57,7 +57,7 @@ public class BleOpIndicate extends BleOperation
     }
     if ( mEnable ) {
       mPipe.enablePIndicate( mSrvUuid, mChrtUuid );
-    } else {
+    // } else {
       // mPipe.disablePNotify( mSrvUuid, mChrtUuid );
     }
   }

@@ -335,7 +335,7 @@ public class SapComm extends TopoDroidComm
     if ( ! uuid_str.equals( SapConst.SAP5_CHRT_READ_UUID_STR ) ) { error(-2, uuid_str); return; }
     int res = mSapProto.handleRead( bytes ); 
     if ( res != DataType.PACKET_DATA ) { error(-3, uuid_str); return; }
-    ++ mNrPacketsRead;
+    ++ mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
     handleRegularPacket( res, mLister, DataType.DATA_SHOT );
   }
 

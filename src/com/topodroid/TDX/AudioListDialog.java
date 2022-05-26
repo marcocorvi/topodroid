@@ -39,13 +39,13 @@ class AudioListDialog extends MyDialog
                   // , OnClickListener
                   , OnItemLongClickListener
 {
-  private ShotWindow mParent;
+  private final ShotWindow mParent;
   private ListView mList;
   // private Button   mButtonCancel;
 
   private List< AudioInfo > mAudios;
-  private List< AudioInfo > mSurveyAudios;
-  private List< DBlock > mShots;
+  private final List< AudioInfo > mSurveyAudios;
+  private final List< DBlock > mShots;
   private MediaPlayer mMP = null;
 
   /** cstr

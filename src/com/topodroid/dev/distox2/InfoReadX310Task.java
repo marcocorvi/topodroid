@@ -29,7 +29,7 @@ public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   private final WeakReference<DeviceX310InfoDialog>  mDialog;
   private DeviceX310Info mInfo = null;
   // int mType; // DistoX type
-  private String mAddress;
+  private final String mAddress;
 
   public InfoReadX310Task( TopoDroidApp app, DeviceX310InfoDialog dialog, String address )
   {

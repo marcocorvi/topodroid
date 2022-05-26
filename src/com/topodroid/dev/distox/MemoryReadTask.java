@@ -22,6 +22,7 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
+import com.topodroid.utils.TDLog;
 
 import java.lang.ref.WeakReference;
 
@@ -110,6 +111,7 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
+      TDLog.Error("IO error " + e.getMessage() );
     }
   }
 }

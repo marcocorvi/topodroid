@@ -74,7 +74,7 @@ public class TopoDroidComm
   {
     // TDLog.v( "TD comm: packet DATA");
     // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-    ++mNrPacketsRead;
+    ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
     double d = mProtocol.mDistance;
     double b = mProtocol.mBearing;
     double c = mProtocol.mClino;
@@ -105,12 +105,17 @@ public class TopoDroidComm
     return true;
   }
 
+  /** handle zero packet
+   * @param index      ???
+   * @param lister     data lister
+   * @param data_type  packet expected data type (unused)
+   */
   public void handleZeroPacket( long index, Handler lister, int data_type )
   {
     // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     // TDLog.v( "TD comm: packet DATA");
     // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-    ++mNrPacketsRead;
+    ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
     double r = mProtocol.mRoll;
     long status = TDStatus.NORMAL;
     mLastShotId = TopoDroidApp.mData.insertDistoXShot( TDInstance.sid, index, 0, 0, 0, r, ExtendType.EXTEND_IGNORE, status, TDInstance.deviceAddress() );
@@ -128,16 +133,18 @@ public class TopoDroidComm
     }
   }
 
-  // @param res    packet type (as returned by handlePacket / or set by Protocol )
-  // @param lister data lister
-  // @param data_type unused
+  /** handle regular packet
+   * @param res    packet type (as returned by handlePacket / or set by Protocol )
+   * @param lister data lister
+   * @param data_type unused
+   */
   public void handleRegularPacket( int res, Handler lister, int data_type )
   {
     // TDLog.v( "TD comm: PACKET " + res + "/" + DataType.PACKET_DATA + " type " + data_type );
     if ( res == DataType.PACKET_DATA ) {
       // TDLog.v( "TD comm: packet DATA");
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++mNrPacketsRead;
+      ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
       double d = mProtocol.mDistance;
       double b = mProtocol.mBearing;
       double c = mProtocol.mClino;
@@ -174,13 +181,13 @@ public class TopoDroidComm
       // TDLog.v( "TD comm: packet G");
       /// TDLog.Log( TDLog.LOG_COMM, "Comm G PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++mNrPacketsRead;
+      ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
       setHasG( true );
     } else if ( res == DataType.PACKET_M ) {
       // TDLog.v( "TD comm: packet M");
       // TDLog.Log( TDLog.LOG_COMM, "Comm M PACKET" );
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++mNrPacketsRead;
+      ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
       // get G and M from mProtocol and save them to store
       // TDLog.Log( TDLog.LOG_COMM, "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
       long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
@@ -231,7 +238,7 @@ public class TopoDroidComm
       // TDLog.v( "TD comm: packet VECTOR");
       // vector packet do count
       // mNrPacketsRead.incrementAndGet(); // FIXME_ATOMIC_INT
-      ++mNrPacketsRead;
+      ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
       double acc  = mProtocol.mAcceleration;
       double mag  = mProtocol.mMagnetic;
       double dip  = mProtocol.mDip;

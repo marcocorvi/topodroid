@@ -43,8 +43,8 @@ public class BricProto extends TopoDroidProtocol
 {
   private Device mDevice; // device of this communication
   private ConcurrentLinkedQueue< BleOperation > mOps;
-  private BricComm mComm;
-  private Handler mLister;
+  private final BricComm mComm;
+  private final Handler mLister;
   private byte[] mLastTime;       // content of LastTime payload
   private byte[] mLastPrim;   // used to check if the coming Prim is new
   private boolean mPrimToDo = false;
@@ -56,8 +56,8 @@ public class BricProto extends TopoDroidProtocol
   // private float mErrSecondVal2;
   private String mComment = null;
 
-  private Context mContext;
-  BleCallback mCallback;
+  private Context mContext; // unused
+  BleCallback mCallback;    // unused
 
   // data struct
   private int   mLastIndex = 0x7ffffffe;
@@ -74,7 +74,13 @@ public class BricProto extends TopoDroidProtocol
   // short mYear;
   // char  mMonth, mDay, mHour, mMinute, mSecond, mCentisecond;
 
-
+  /** cstr
+   * @param ctx     context
+   * @param app     application (unused)
+   * @param lister  data lister
+   * @param device  bluetooth device
+   * @param comm    BRIC comm object
+   */
   public BricProto( Context ctx, TopoDroidApp app, Handler lister, Device device, BricComm comm )
   {
     super( device, ctx );

@@ -96,11 +96,11 @@ public class DistoXProtocol extends TopoDroidProtocol
   public void closeIOstreams()
   {
     if ( mIn != null ) {
-      try { mIn.close(); } catch ( IOException e ) { }
+      try { mIn.close(); } catch ( IOException e ) { TDLog.Error("Stream in close"); }
       mIn = null;
     }
     if ( mOut != null ) {
-      try { mOut.close(); } catch ( IOException e ) { }
+      try { mOut.close(); } catch ( IOException e ) { TDLog.Error("Stream out close"); }
       mOut = null;
     }
   }
@@ -167,7 +167,7 @@ public class DistoXProtocol extends TopoDroidProtocol
             // synchronized ( dataRead ) 
             {
               if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
-                try { wait( 100 ); } catch ( InterruptedException e ) { }
+                try { wait( 100 ); } catch ( InterruptedException e ) { TDLog.Error("Interrupted wait"); }
               } else {
                 if ( reader.isAlive() ) reader.interrupt(); 
                 break;
@@ -176,7 +176,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           }
           // TDLog.v( "interruptor done " + dataRead[0] );
         } };
-        interruptor.start(); // TODO catch ( OutOfmemoryError e ) { }
+        interruptor.start(); // TODO catch ( OutOfMemoryError e ) { }
 
         try {
           interruptor.join( 200 );

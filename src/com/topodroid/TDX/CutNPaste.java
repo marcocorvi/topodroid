@@ -92,10 +92,10 @@ public class CutNPaste
     Button btn_cut = makePopupButton( context, cut, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          EditText etext = mEditText.get();
-          if ( etext != null ) {
-            mClipboardText = etext.getText().toString();
-            etext.setText(TDString.EMPTY);
+          EditText edit_text = mEditText.get();
+          if ( edit_text != null ) {
+            mClipboardText = edit_text.getText().toString();
+            edit_text.setText(TDString.EMPTY);
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, LEFT | Gravity.TOP );
           }
@@ -107,9 +107,9 @@ public class CutNPaste
     Button btn_copy = makePopupButton( context, copy, layout, lWidth, lHeight,
       new View.OnClickListener( ) {
         public void onClick(View v) {
-          EditText etext = mEditText.get();
-          if ( etext != null ) {
-            mClipboardText = etext.getText().toString();
+          EditText edit_text = mEditText.get();
+          if ( edit_text != null ) {
+            mClipboardText = edit_text.getText().toString();
             String str = String.format( context.getResources().getString( R.string.copied ), mClipboardText );
             TDToast.makeGravity( str, LEFT | Gravity.TOP );
           }
@@ -123,9 +123,9 @@ public class CutNPaste
       new View.OnClickListener( ) {
         public void onClick(View v) {
           if ( mClipboardText != null ) {
-            EditText etext = mEditText.get();
-            if ( etext != null ) {
-              etext.setText( mClipboardText );
+            EditText edit_text = mEditText.get();
+            if ( edit_text != null ) {
+              edit_text.setText( mClipboardText );
             }
           }
           dismissPopup();
@@ -157,7 +157,7 @@ public class CutNPaste
     // button.set???( R.layout.popup_item );
 
     // THIS CRASHES THE APP
-    // button.setBackgroundResource( R.drawable.popup_bgcolor );
+    // button.setBackgroundResource( R.drawable.popup_bg_color );
     button.setTextColor( color );
     button.setBackgroundColor( TDColor.VERYDARK_GRAY );
 
@@ -199,17 +199,17 @@ public class CutNPaste
 
   /** show BT mPopup under button b
    * @param context  context
-   * @param ilister  data lister
+   * @param i_lister  data lister
    * @param app      TopoDroid app
    * @param b        button
    * @param gm_data  if called from GM-activity
    * @param do_clear if add button to clear memory (BRIC only)
    * @return the new popup
    */
-  static public PopupWindow showPopupBT( final Context context, final ILister ilister, final TopoDroidApp app, View b, boolean gm_data, boolean do_clear )
+  static public PopupWindow showPopupBT( final Context context, final ILister i_lister, final TopoDroidApp app, View b, boolean gm_data, boolean do_clear )
   {
     final Resources res = context.getResources();
-    final ListerHandler lister = new ListerHandler( ilister );
+    final ListerHandler lister = new ListerHandler( i_lister );
     LinearLayout popup_layout  = new LinearLayout( context );
     popup_layout.setOrientation(LinearLayout.VERTICAL);
     int lHeight = LinearLayout.LayoutParams.WRAP_CONTENT;
@@ -269,8 +269,8 @@ public class CutNPaste
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+              // i_lister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
               dismissPopupBT();
             }
           } );
@@ -284,8 +284,8 @@ public class CutNPaste
           textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
             new View.OnClickListener( ) {
               public void onClick(View v) {
-                // ilister.enableBluetoothButton(false);
-                new DeviceX310TakeShot( ilister, lister, app, 4, DataType.DATA_CALIB ).execute();
+                // i_lister.enableBluetoothButton(false);
+                new DeviceX310TakeShot( i_lister, lister, app, 4, DataType.DATA_CALIB ).execute();
                 dismissPopupBT();
               }
             } );
@@ -300,8 +300,8 @@ public class CutNPaste
         textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+              // i_lister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );
@@ -314,8 +314,8 @@ public class CutNPaste
         textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
           new View.OnClickListener( ) {
             public void onClick(View v) {
-              // ilister.enableBluetoothButton(false);
-              new DeviceX310TakeShot( ilister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+              // i_lister.enableBluetoothButton(false);
+              new DeviceX310TakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
               dismissPopupBT();
             }
           } );

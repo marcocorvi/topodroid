@@ -1210,6 +1210,7 @@ public class TopoDroidApp extends Application
    */
   static public int checkManifestFile( String manifest, String surveyname )
   {
+    TDLog.v("MANIFEST called <" + surveyname + ">" );
     mManifestDbVersion = 0;
     String line;
     // if ( mData.hasSurveyName( surveyname ) ) {
@@ -1230,39 +1231,41 @@ public class TopoDroidApp extends Application
       try {
         mManifestDbVersion = Integer.parseInt( line );
       } catch ( NumberFormatException e ) {
-        TDLog.Error( "parse error: db version " + line );
+        TDLog.Error( "MANIFEST DB version format error: " + line );
         return -10;
       }
       
       if ( ! ( mManifestDbVersion >= TDVersion.DATABASE_VERSION_MIN ) ) {
-        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " min " + + TDVersion.DATABASE_VERSION_MIN );
+        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " min " + + TDVersion.DATABASE_VERSION_MIN );
         return -3;
       }
       if ( ! ( mManifestDbVersion <= TDVersion.DATABASE_VERSION ) ) {
-        TDLog.Error( "TopoDroid DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
+        TDLog.Error( "MANIFEST DB version mismatch: found " + mManifestDbVersion + " current " + TDVersion.DATABASE_VERSION );
         return -4;
       }
+
       surveyname = br.readLine().trim();
+      TDLog.v("MANIFEST read <" + surveyname + ">" );
       // if ( ! line.equals( surveyname ) ) return -4;
       if ( mData.hasSurveyName( surveyname ) ) {
-        TDLog.Error( "TopoDroid survey exists already: <" + surveyname + ">" );
+        TDLog.Error( "MANIFEST survey exists: <" + surveyname + ">" );
         return -1;
       }
       // fr.close();
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "TopoDroid check manifest error: " + e.getMessage() );
+      TDLog.Error( "MANIFEST error: " + e.getMessage() );
       return -10;
     } catch ( FileNotFoundException e ) {
-      TDLog.Error( "TopoDroid check manifest file not found: " + e.getMessage() );
+      TDLog.Error( "MANIFEST file not found: " + e.getMessage() );
       return -11;
     } catch ( IOException e ) {
-      TDLog.Error( "TopoDroid check manifest I/O error: " + e.getMessage() );
+      TDLog.Error( "MANIFEST I/O error: " + e.getMessage() );
       return -12;
     }
     return ret;
   }
 
-  /** check the version line of a manifest file
+  /** check the version line of a manifest file - called by checkManifestFile
    * @param version_line version line
    * @return
    *   -10 number format error
@@ -1270,7 +1273,7 @@ public class TopoDroidApp extends Application
    *   0   version is in acceptable range
    *   1   version is newer than this app
    */
-  private static int checkVersionLine( String version_line )
+  static private int checkVersionLine( String version_line )
   {
     int ret = 0;
     int version_code = 0;

@@ -73,7 +73,7 @@ public class TdmConfigActivity extends Activity
                               , IExporter
 {
   int mNrButton1 = 5; 
-  private static int[] izons = { 
+  private static final int[] izons = {
     R.drawable.iz_add,
     R.drawable.iz_drop,
     R.drawable.iz_view,
@@ -90,7 +90,7 @@ public class TdmConfigActivity extends Activity
 
   boolean onMenu;
   int mNrMenus   = 4;
-  private static int[] menus = { 
+  private static final int[] menus = {
     R.string.menu_close,
     R.string.menu_export,
     R.string.menu_delete,
@@ -305,9 +305,9 @@ public class TdmConfigActivity extends Activity
   // ------------------------ ADD ------------------------------
   // called by TdmSourcesDialog with a list of sources filenames
   //
-  void addSources( List< String > surveynames )
+  void addSources( List< String > survey_names )
   {
-    for ( String name : surveynames ) {
+    for ( String name : survey_names ) {
       // TDLog.v( "add source " + name );
       TdmInput input = new TdmInput( name );
       // mTdmConfig.addInput( input );
@@ -541,7 +541,7 @@ public class TdmConfigActivity extends Activity
     }
     if ( onMenu ) {
       closeMenu();
-      return;
+      // return;
     }
   }
 

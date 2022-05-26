@@ -15,7 +15,7 @@ package com.topodroid.TDX;
 
 class AudioInfo
 {
-  private final long sid;  // survey id
+  private final long sid;  // survey id (assigned but never used)
   final long id;           // audio id
   final long fileIdx;      // shot id
   private final String mDate;

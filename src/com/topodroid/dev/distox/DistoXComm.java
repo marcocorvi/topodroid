@@ -291,7 +291,7 @@ public class DistoXComm extends TopoDroidComm
       // FIXME PAIRING
       // TDLog.Log( TDLog.LOG_BT, "[1] device state " + mBTDevice.getBondState() );
       if ( ! DeviceUtil.isPaired( mBTDevice ) ) {
-        int ret = DeviceUtil.pairDevice( mBTDevice );
+        DeviceUtil.pairDevice( mBTDevice );
         // TDLog.Log( TDLog.LOG_BT, "[1b] pairing device " + ret );
       // }
 

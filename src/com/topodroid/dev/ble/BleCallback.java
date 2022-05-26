@@ -110,13 +110,23 @@ public class BleCallback extends BluetoothGattCallback
         // if ( mGatt != null ) mGatt.close(); // FIXME_BRIC
         // mGatt = gatt;
         mComm.connected();
-        gatt.discoverServices();
+        try {
+          gatt.discoverServices();
+        } catch ( SecurityException e ) {
+          TDLog.Error("SECURITY " + e.getMessage() );
+        }
 
       } else if ( newState == BluetoothProfile.STATE_DISCONNECTED ) {
-        if ( gatt != null ) gatt.close();
+        if ( gatt != null ) {
+          try {
+            gatt.close();
+          } catch ( SecurityException e ) {
+            TDLog.Error("SECURITY " + e.getMessage() );
+          }
+        }
         mGatt = null;
         mComm.disconnected(); // this calls notifyStatus( CONN_DISCONNECTED );
-      } else {
+      // } else {
         // TDLog.v( "BLE callback: on Connection State Change new state " + newState );
       }
     } else {
@@ -148,7 +158,13 @@ public class BleCallback extends BluetoothGattCallback
       if ( ret == 0 ) {
         mGatt = gatt;
       } else {
-        if ( gatt != null ) gatt.close();
+        if ( gatt != null ) {
+          try {
+            gatt.close();
+          } catch ( SecurityException e ) {
+            TDLog.Error("SECURITY " + e.getMessage() );
+          }
+        }
         mGatt = null;
         mComm.failure( ret, "onServicesDiscovered" );
       }
@@ -225,9 +241,13 @@ public class BleCallback extends BluetoothGattCallback
   public void closeGatt()
   { 
     if ( mGatt != null ) {
-      // mGatt.disconnect();
-      mGatt.close();
-      mGatt = null;
+      try {
+        // mGatt.disconnect();
+        mGatt.close();
+        mGatt = null;
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
+      }
     }
   }
 
@@ -254,9 +274,13 @@ public class BleCallback extends BluetoothGattCallback
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
-      mGatt.disconnect();
-      mGatt.close();
-      mGatt = null;
+      try {
+        mGatt.disconnect();
+        mGatt.close();
+        mGatt = null;
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
+      }
     }
   }
 
@@ -266,31 +290,46 @@ public class BleCallback extends BluetoothGattCallback
     // mWriteInitialized = false; 
     // mReadInitialized  = false; 
     if ( mGatt != null ) {
-      // TDLog.v( "BLE callback: disconnect gatt");
-      mGatt.disconnect();
-      // FIXME mGapp.close();
-      mGatt = null;
+      try {
+        // TDLog.v( "BLE callback: disconnect gatt");
+        mGatt.disconnect();
+        // FIXME mGapp.close();
+        mGatt = null;
+      } catch ( SecurityException e ) {
+        TDLog.Error("SECURITY " + e.getMessage() );
+      }
     }
   }
   // ---------------------------------------------------------------------
 
   private boolean setNotification( BluetoothGattCharacteristic chrt, byte [] value )
   {
-    if ( ! mGatt.setCharacteristicNotification( chrt, true ) ) {
-      TDLog.Error("BLE callback: failed notify enable");
+    try {
+      if ( ! mGatt.setCharacteristicNotification( chrt, true ) ) {
+        TDLog.Error("BLE callback: failed notify enable");
+        return false;
+      }
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage() );
       return false;
     }
+
     BluetoothGattDescriptor desc = chrt.getDescriptor( BleUtils.CCCD_UUID );
     if ( desc == null ) {
-      TDLog.Error("BLE callback: failed no CCCD descr" );
+      TDLog.Error("BLE callback: failed no CCCD descriptor" );
       return false;
     }
     if ( ! desc.setValue( value ) ) {
-      TDLog.Error("BLE callback: failed descr set value" );
+      TDLog.Error("BLE callback: failed descriptor set value" );
       return false;
     }
     // TDLog.v( "BLE callback: set notification: " + chrt.getUuid().toString() + " " + value );
-    return mGatt.writeDescriptor( desc );
+    try {
+      return mGatt.writeDescriptor( desc );
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage());
+    }
+    return false;
   }
 
   /*
@@ -312,6 +351,11 @@ public class BleCallback extends BluetoothGattCallback
     return enablePNotify( srvUuid, srv.getCharacteristic( chrtUuid ) );
   }
 
+  /** enable P notify
+   * @param srvUuid service UUID (unused)
+   * @param chrt    characteristics
+   * @return true on success
+   */
   public boolean enablePNotify( UUID srvUuid, BluetoothGattCharacteristic chrt )
   {
     // TDLog.v( "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
@@ -344,6 +388,11 @@ public class BleCallback extends BluetoothGattCallback
     return enablePIndicate( srvUuid, srv.getCharacteristic( chrtUuid ) );
   }
 
+  /** enable P indicate
+   * @param srvUuid service UUID (unused)
+   * @param chrt    characteristics
+   * @return true on success
+   */
   public boolean enablePIndicate( UUID srvUuid, BluetoothGattCharacteristic chrt )
   {
     // TDLog.v( "BLE callback enable P notify " + srvUuid + " " + chrt.getUuid() );
@@ -351,7 +400,7 @@ public class BleCallback extends BluetoothGattCallback
       TDLog.Error("BLE callback: enable indicate null chrt");
       return false;
     }
-    // TDLog.v( "BLE callback: indicate chrt " + chrt.getUuid().toString() + " indicateable " + BleUtils.canChrtPIndicate( chrt ) );
+    // TDLog.v( "BLE callback: indicate chrt " + chrt.getUuid().toString() + " indicate-able " + BleUtils.canChrtPIndicate( chrt ) );
     byte[] enable = BleUtils.getChrtPIndicate( chrt );
     if ( enable == null ) {
       TDLog.Error("BLE callback: enable indicate null enable");
@@ -366,7 +415,12 @@ public class BleCallback extends BluetoothGattCallback
   {
     BluetoothGattCharacteristic chrt = getReadChrt( srvUuid, chrtUuid );
     // TDLog.v( "BLE callback: read chrt " + chrtUuid.toString() + " readable " + BleUtils.canChrtPRead( chrt ) );
-    return chrt != null && mGatt.readCharacteristic( chrt );
+    try {
+      return chrt != null && mGatt.readCharacteristic( chrt );
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage());
+    }
+    return false;
   }
 
   public boolean writeChrt(  UUID srvUuid, UUID chrtUuid, byte[] bytes )
@@ -383,7 +437,12 @@ public class BleCallback extends BluetoothGattCallback
     }
     chrt.setWriteType( write_type );
     chrt.setValue( bytes );
-    return mGatt.writeCharacteristic( chrt );
+    try {
+      return mGatt.writeCharacteristic( chrt );
+    } catch ( SecurityException e ) {
+      TDLog.Error("SECURITY " + e.getMessage());
+    }
+    return false;
   }
 
   // int toInt4( byte[] b )

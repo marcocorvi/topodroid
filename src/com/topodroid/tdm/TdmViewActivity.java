@@ -662,7 +662,7 @@ public class TdmViewActivity extends Activity
     }
     if ( onMenu ) {
       closeMenu();
-      return;
+      // return;
     }
   }
 

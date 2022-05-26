@@ -12,7 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 // import com.topodroid.ui.MyTurnBitmap;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.MyCheckBox;
@@ -59,9 +59,9 @@ class AzimuthDialog extends MyDialog
   // private Button mBTfore;
   private Button mBTazimuth;
   private Button mBTsensor;
-  private Button mBTok;
-  private Button mBTleft;
-  private Button mBTright;
+  // private Button bt_ok;
+  // private Button bt_left;
+  // private Button bt_right;
 
   private Button mBtnCancel;
 
@@ -116,9 +116,9 @@ class AzimuthDialog extends MyDialog
     // mBTfore = (Button) findViewById(R.id.btn_fore );
     mBTazimuth = (Button) findViewById(R.id.btn_azimuth );
     // mBTsensor  = (Button) findViewById(R.id.btn_sensor );
-    mBTok      = (Button) findViewById(R.id.btn_ok );
-    mBTleft    = (Button) findViewById(R.id.btn_left );
-    mBTright   = (Button) findViewById(R.id.btn_right );
+    Button bt_ok      = (Button) findViewById(R.id.btn_ok );
+    Button bt_left    = (Button) findViewById(R.id.btn_left );
+    Button bt_right   = (Button) findViewById(R.id.btn_right );
 
     mBtnCancel = (Button) findViewById( R.id.button_cancel );
     mBtnCancel.setOnClickListener( this );
@@ -142,7 +142,7 @@ class AzimuthDialog extends MyDialog
           mAzimuth = azimuth;
           updateSeekBar();
           updateView();
-        } catch ( NumberFormatException e ) { }
+        } catch ( NumberFormatException e ) { TDLog.Error("Error " + e.getMessage() ); }
       }
     } );
 
@@ -159,9 +159,9 @@ class AzimuthDialog extends MyDialog
     // mBTfore.setOnClickListener( this );
     mBTazimuth.setOnClickListener( this );
     mBTsensor.setOnClickListener( this );
-    mBTok.setOnClickListener( this );
-    mBTleft.setOnClickListener( this );
-    mBTright.setOnClickListener( this );
+    bt_ok.setOnClickListener( this );
+    bt_left.setOnClickListener( this );
+    bt_right.setOnClickListener( this );
 
     mSeekBar.setOnSeekBarChangeListener( new SeekBar.OnSeekBarChangeListener() {
       public void onProgressChanged( SeekBar seekbar, int progress, boolean fromUser) {

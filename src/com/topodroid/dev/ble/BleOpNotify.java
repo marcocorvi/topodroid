@@ -57,7 +57,7 @@ public class BleOpNotify extends BleOperation
     }
     if ( mEnable ) {
       mPipe.enablePNotify( mSrvUuid, mChrtUuid );
-    } else {
+    // } else {
       // mPipe.disablePNotify( mSrvUuid, mChrtUuid );
     }
   }

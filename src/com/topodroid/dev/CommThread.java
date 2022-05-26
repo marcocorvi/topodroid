@@ -26,11 +26,11 @@ public class CommThread extends Thread
   // private TopoDroidProtocol mProtocol;
   private int toRead; // number of packet to read
   // private ILister mLister;
-  Handler mLister = null; // FIXME_LISTER
+  Handler mLister; // = null; // FIXME_LISTER
   // private long mLastShotId;   // last shot id
 
   private volatile boolean doWork = true;
-  private int mDataType;   // packet datatype 
+  private final int mDataType;   // packet datatype
 
   public void cancelWork()
   {

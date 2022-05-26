@@ -72,10 +72,10 @@ public class DistoXA3Comm extends DistoXComm
     }
     boolean ret = false;
     if ( connectSocketAny( address ) ) {
-      byte[] result = null;
+      // byte[] result = null;
       // byte[] result = new byte[4];
       // if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
-      result = mProtocol.readMemory( DeviceA3Details.STATUS_ADDRESS ); // TODO TEST THIS
+      byte[] result = mProtocol.readMemory( DeviceA3Details.STATUS_ADDRESS ); // TODO TEST THIS
       if ( result == null ) { 
         TDLog.Error( "toggle Calib Mode A3 failed read 8000" );
       } else {

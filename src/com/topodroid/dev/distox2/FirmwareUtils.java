@@ -87,10 +87,11 @@ public class FirmwareUtils
         return readFirmwareLandolt( buf );
       }
     } catch ( IOException e ) {
+      TDLog.Error("IO " + e.getMessage() );
     } finally {
       try {
         if ( fis != null ) fis.close();
-      } catch ( IOException e ) { }
+      } catch ( IOException e ) { TDLog.Error("IO " + e.getMessage() ); }
     }
     return 0;
   }

@@ -18,7 +18,7 @@ import java.io.DataOutputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 
-// 3D vcetor (E, N, Up)
+// 3D vector (E, N, Up)
 public class Cave3DStation extends Vector3D
 {
   public static final int FLAG_NONE    = 0;
@@ -36,7 +36,7 @@ public class Cave3DStation extends Vector3D
   private String survey_name;
   private String full_name;
 
-  // double temp;          // station tempertaure [Celcius] TEMPERATURE
+  // double temp;          // station temperature [Celcius] TEMPERATURE
   double depth;         // depth from Zmax: positive and scaled in [0,1] : 1.0 deepest
   double surface_depth; // depth beneath the surface
   int flag;       // station flag (not used)
@@ -77,7 +77,7 @@ public class Cave3DStation extends Vector3D
     double x = dis.readDouble();
     double y = dis.readDouble();
     double z = dis.readDouble();
-    // TDLog.v("deser. station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
+    // TDLog.v("deserialized station " + id + " " + sid + " <" + full_name + "> " + x + " " + y + " " + z );
     return new Cave3DStation( full_name, x, y, z, id, sid, flag, "" );
   }
 
@@ -178,11 +178,11 @@ public class Cave3DStation extends Vector3D
     }
   }
 
-  /** @return positive denivel 
+  /** @return positive denivelation
    */
   double getPathDistPos() { return pathdistpos; }
 
-  /** @return negative denivel 
+  /** @return negative denivelation
    */
   double getPathDistNeg() { return pathdistneg; }
 

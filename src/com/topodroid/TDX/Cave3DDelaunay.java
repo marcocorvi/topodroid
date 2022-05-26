@@ -79,7 +79,7 @@ class Cave3DDelaunay
   {
     DelaunaySide s1, s2, s3;
     // int   sign;
-    private double radius; // maximal inside the circumsphere
+    private final double radius; // maximal inside the circumsphere
     private Vector3D center;
 
     DelaunayTriangle( DelaunaySide i0, DelaunaySide j0, DelaunaySide k0 )
@@ -90,22 +90,25 @@ class Cave3DDelaunay
       Vector3D v1 = s1.p1;
       Vector3D v2 = s2.p1.difference( v1 );
       Vector3D v3 = s3.p1.difference( v1 );
-      Vector3D v0 = v1.sum( s2.p1 ).sum( s3.p1 );
+      // Vector3D v0 = v1.sum( s2.p1 ).sum( s3.p1 );
       center = v2.crossProduct( v3 ); // (v2-v1)^(v3-v1) = (v2^v3 + v3^v1 + v1^v2) normalized
       center.normalized();
       // sign = ( center.dotProduct(v0) > 0 )? -1 : +1;
       radius = center.dotProduct( v1 );
     }
 
-    DelaunayTriangle( DelaunayTriangle t )
-    {
-      s1 = t.s1;
-      s2 = t.s2;
-      s3 = t.s3;
-      // sign   = t.sign;
-      radius = t.radius;
-      center = t.center;
-    }
+    // /** copy cstr
+    //  * @param t the triangle to copy
+    //  */
+    // DelaunayTriangle( DelaunayTriangle t )
+    // {
+    //   s1 = t.s1;
+    //   s2 = t.s2;
+    //   s3 = t.s3;
+    //   // sign   = t.sign;
+    //   radius = t.radius;
+    //   center = t.center;
+    // }
 
     // v = unit vector
     boolean circumcontains( Vector3D v, double eps ) { return center.dotProduct(v) > radius + eps; }

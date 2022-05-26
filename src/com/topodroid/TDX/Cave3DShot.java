@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.io.DataOutputStream;
 import java.io.DataInputStream;
@@ -88,7 +88,7 @@ public class Cave3DShot
     double cln  = dis.readDouble( );
     long flag   = dis.readLong( );
     long millis = dis.readLong( );
-    // TDLog.v("deser. shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
+    // TDLog.v("deserialized shot <" + from + "=" + to + "> " + len + " " + ber + " " + cln );
     Cave3DShot shot = new Cave3DShot( from, to, len, ber, cln, flag, millis );
     shot.mSurveyId = id;
     return shot;
@@ -121,7 +121,7 @@ public class Cave3DShot
     mMillis = millis;
   }
 
-  /** cstr, used for cave pathlength between stations - b,c radians
+  /** cstr, used for cave path-length between stations - b,c radians
    * @param f    from station
    * @param t    to station
    * @param l    length

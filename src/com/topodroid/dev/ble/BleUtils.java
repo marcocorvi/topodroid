@@ -30,7 +30,7 @@ import java.nio.ByteOrder;
 public class BleUtils
 {
   // ------------------------------------------------------------------------------
-  // UTIILS
+  // UTILITIES
 
   public final static String STANDARD_UUID =  "-0000-1000-8000-00805f9b34fb";
 
@@ -62,12 +62,12 @@ public class BleUtils
     String s = isChrtPWriteSign(prop)? "Ws" : ".";
     String n = isChrtPWriteNoResp(prop)? "Wn" : ".";
 
-    String wtype = "";
+    String write_type = "";
     if ( canChrtPWrite( chrt ) ) {
       int type = chrt.getWriteType();
-      wtype = (isChrtWDflt(type)? "d" : "-") + (isChrtWNoResp(type)? "n" : "-") + (isChrtWSign(type)? "s" : "-");
+      write_type = (isChrtWDflt(type)? "d" : "-") + (isChrtWNoResp(type)? "n" : "-") + (isChrtWSign(type)? "s" : "-");
     }
-    return " props(" + prop + ") " + B + I + N + " " + r + w + s + n + " w-type " + wtype;
+    return " props(" + prop + ") " + B + I + N + " " + r + w + s + n + " w-type " + write_type;
   } 
 
   public static String chrtPermString( BluetoothGattCharacteristic chrt )

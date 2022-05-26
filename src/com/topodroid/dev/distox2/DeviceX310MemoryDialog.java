@@ -93,41 +93,39 @@ public class DeviceX310MemoryDialog extends MyDialog
   {
     int[] ht = new int[2];
     String from, to, error;
-    switch ( view.getId() ) {
-      case R.id.button_dump:
-        from = mETdumpfrom.getText().toString();
-        to   = mETdumpto.getText().toString();
-        if ( /* from == null || */ from.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_begin_required );
-          mETdumpfrom.setError( error );
-          return;
-        }
-        if ( /* to == null || */ to.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_end_required );
-          mETdumpto.setError( error );
-          return;
-        }
-        try {
-          ht[0] = Integer.parseInt( from );
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETdumpfrom.setError( error );
-          return;
-        }
-        try {
-          ht[1] = Integer.parseInt( to ); 
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETdumpto.setError( error );
-          return;
-        }
-        if ( DeviceX310Details.boundHeadTail( ht ) ) {
-          String file = null;
-          if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
-          mParent.readX310Memory( this, ht, file );
-        }
-        break;
-      // case R.id.button_cancel:
+    if ( view.getId() == R.id.button_dump ) {
+      from = mETdumpfrom.getText().toString();
+      to   = mETdumpto.getText().toString();
+      if ( /* from == null || */ from.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_begin_required );
+        mETdumpfrom.setError( error );
+        return;
+      }
+      if ( /* to == null || */ to.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_end_required );
+        mETdumpto.setError( error );
+        return;
+      }
+      try {
+        ht[0] = Integer.parseInt( from );
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETdumpfrom.setError( error );
+        return;
+      }
+      try {
+        ht[1] = Integer.parseInt( to );
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETdumpto.setError( error );
+        return;
+      }
+      if ( DeviceX310Details.boundHeadTail( ht ) ) {
+        String file = null;
+        if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
+        mParent.readX310Memory( this, ht, file );
+      }
+    // } else if ( view.getId() == R.id.button_cancel ) {
       //   dismiss();
       //   break;
     }

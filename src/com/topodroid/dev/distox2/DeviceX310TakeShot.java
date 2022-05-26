@@ -28,7 +28,7 @@ public class DeviceX310TakeShot extends AsyncTask<Integer, Integer, Integer >
   private final ListerHandler mLister; // lister that manages downloaded shots (if null shots are not downloaded)
   private final TopoDroidApp  mApp;    // FIXME LEAK
   private final int mNr;               // number of shots to measure before download
-  private int mDataType;
+  private final int mDataType;
  
   public DeviceX310TakeShot( ILister ilister, ListerHandler lister, TopoDroidApp app, int nr, int data_type )
   {

@@ -331,7 +331,7 @@ public class CalibActivity extends Activity
       new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // TDLog.Log( TDLog.LOG_INPUT, "calib delite" );
+          // TDLog.Log( TDLog.LOG_INPUT, "calib delete" );
           doDelete();
         }
       }
@@ -437,7 +437,7 @@ public class CalibActivity extends Activity
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
         return true;
-      case KeyEvent.KEYCODE_MENU:   // HARDWRAE MENU (82)
+      case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
         UserManualActivity.showHelpPage( this, getResources().getString( HELP_PAGE ));
         return true;
       // case KeyEvent.KEYCODE_VOLUME_UP:   // (24)
@@ -501,10 +501,11 @@ public class CalibActivity extends Activity
     }
   }
 
-  /** export this caibration
+  /** export this calibration 
    * @param type    export type (string)
    * @param name    calib filename (not used)
    * @param prefix  station-prefix (not used)
+   * @note implements IExporter
    */
   public void doExport( String type, String name, String prefix )
   {
@@ -513,16 +514,15 @@ public class CalibActivity extends Activity
       // if ( TDSetting.mExportUri ) {
       //   selectExportFromProvider( index ); // TODO
       // } else {
-        doMyExport( index, name );
+        doMyExport( index );
       // }
     }
   }
 
   /** export this calibration
    * @param exportType  integer export index 
-   * @param name        calib name (not used)
    */
-  private void doMyExport( int exportType, String name )
+  private void doMyExport( int exportType )
   {
     if ( TDInstance.cid < 0 ) {
       TDToast.makeBad( R.string.no_calibration );
@@ -542,7 +542,7 @@ public class CalibActivity extends Activity
   /** respond to a tap on an item
    * @param parent   parent container
    * @param view     item
-   * @param pos      item posiztion
+   * @param pos      item position
    * @param id       ...
    */
   @Override 

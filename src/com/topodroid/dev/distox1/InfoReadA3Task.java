@@ -25,7 +25,7 @@ public class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
   private final WeakReference<DeviceA3InfoDialog> mDialog;
   private DeviceA3Info mInfo = null;
   // int mType; // DistoX type
-  private String mAddress;
+  private final String mAddress;
 
   public InfoReadA3Task( TopoDroidApp app, DeviceA3InfoDialog dialog, String address )
   {

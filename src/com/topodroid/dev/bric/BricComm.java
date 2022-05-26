@@ -208,7 +208,7 @@ public class BricComm extends TopoDroidComm
    */
   public boolean readChrt( UUID srvUuid, UUID chrtUuid ) 
   { 
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: read chsr " + chrtUuid.toString() );
+    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: read chrt " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid ); 
   }
 
@@ -388,7 +388,6 @@ public class BricComm extends TopoDroidComm
   public void readedChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: readed chrt " + uuid_str );
-    int ret;
     if ( uuid_str.equals( BricConst.MEAS_PRIM ) ) { // this is not executed: PRIM is read from onCharacteristicChanged
       mQueue.put( DATA_PRIM, bytes ); 
     } else if ( uuid_str.equals( BricConst.MEAS_META ) ) {
@@ -484,7 +483,6 @@ public class BricComm extends TopoDroidComm
   // MEAS_META, MEAS_ERR, and LAST_TIME are change-notified 
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    int ret;
     String chrt_uuid = chrt.getUuid().toString();
     // TDLog.Log( TDLog.LOG_COMM, "BRIC comm changed chrt " + chrt_uuid );
     // delay closing one second after a characteristic change
@@ -513,7 +511,7 @@ public class BricComm extends TopoDroidComm
   // from onReliableWriteCompleted
   public void completedReliableWrite() 
   { 
-    // TDLog.v( "BRUC comm: reliable write" );
+    // TDLog.v( "BRIC comm: reliable write" );
     clearPending();
   }
 
@@ -615,7 +613,7 @@ public class BricComm extends TopoDroidComm
     if ( mReconnect ) {
       TDLog.v( "BRIC comm ***** reconnect yes Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
-      int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
+      enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {

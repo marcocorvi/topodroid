@@ -158,7 +158,7 @@ public class Archiver
     } catch ( IOException e ) {
       TDLog.Error( "ZIP 3 IO error " + e.getMessage() );
     } finally {
-      if ( bis != null ) try { bis.close(); } catch (IOException e ) { }
+      if ( bis != null ) try { bis.close(); } catch (IOException e ) { TDLog.v("ZIP IO " + e.getMessage() ); }
     }
   }
 
@@ -179,40 +179,40 @@ public class Archiver
     }
   }
 
-  /** used to compress shapefiles
-   * @param zipdir    zip folder
-   * @param zipname   zip-filename
-   * @param subdir    files subdirectory
-   * @param filenames file names
-   * @return true if successful
-   */
-  public boolean compressFiles( String zipdir, String zipname, String subdir, List< String > filenames )
-  {
-    // here zipname is the full absolute zipfile path
-    // TDLog.v( "ZIP-compress files to " + zipdir + " " + zipname );
-    ZipOutputStream zos = null;
-    boolean ret = true;
-    try {
-      zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getMSoutput( zipdir, zipname, "application/octet-stream" ) ) );
-      for ( String filename : filenames ) {
-        // the file.getPath() is the full absolute file path
-        // TDLog.v( "ZIP-compress add file " + file.getPath() );
-        ret &= addEntry( zos, subdir, filename );
-      }
-      // for ( File file : files ) TDFile.deleteFile( file );
-    } catch ( FileNotFoundException e ) {
-      TDLog.Error( "ZIP 4 file not found " + e.getMessage() );
-    } catch ( IOException e ) {
-      TDLog.Error( "ZIP 4 IO error " + e.getMessage() );
-      // FIXME
-    } finally {
-      if ( zos != null ) try { zos.close(); } catch ( IOException e ) { 
-        ret = false;
-        // TDLog.Error("ZIP compress close error");
-      }
-    }
-    return ret;
-  }
+  // /** used to compress shapefiles
+  //  * @param zipdir    zip folder
+  //  * @param zipname   zip-filename
+  //  * @param subdir    files subdirectory
+  //  * @param filenames file names
+  //  * @return true if successful
+  //  */
+  // public boolean compressFiles( String zipdir, String zipname, String subdir, List< String > filenames )
+  // {
+  //   // here zipname is the full absolute zipfile path
+  //   // TDLog.v( "ZIP-compress files to " + zipdir + " " + zipname );
+  //   ZipOutputStream zos = null;
+  //   boolean ret = true;
+  //   try {
+  //     zos = new ZipOutputStream( new BufferedOutputStream( TDFile.getMSoutput( zipdir, zipname, "application/octet-stream" ) ) );
+  //     for ( String filename : filenames ) {
+  //       // the file.getPath() is the full absolute file path
+  //       // TDLog.v( "ZIP-compress add file " + file.getPath() );
+  //       ret &= addEntry( zos, subdir, filename );
+  //     }
+  //     // for ( File file : files ) TDFile.deleteFile( file );
+  //   } catch ( FileNotFoundException e ) {
+  //     TDLog.Error( "ZIP 4 file not found " + e.getMessage() );
+  //   } catch ( IOException e ) {
+  //     TDLog.Error( "ZIP 4 IO error " + e.getMessage() );
+  //     // FIXME
+  //   } finally {
+  //     if ( zos != null ) try { zos.close(); } catch ( IOException e ) { 
+  //       ret = false;
+  //       // TDLog.Error("ZIP compress close error");
+  //     }
+  //   }
+  //   return ret;
+  // }
 
   /** compress a set of files from a subdirectory
    * @param os        output stream
@@ -473,7 +473,7 @@ public class Archiver
       // size = decompresser.inflate( buffer );
       // decompresser.end();
     } catch ( IOException e ) {
-      TDLog.Error("ZIP decompress entry error " + e.getMessage() );
+      TDLog.Error("ZIP decompress entry: " + e.getMessage() );
       return -1;
     }
     // TDLog.v( "decompress entry: size " + size );
@@ -491,7 +491,7 @@ public class Archiver
         size += c;
       }
     } catch ( IOException e ) {
-      TDLog.Error("ZIP decompress entry to byte array error " + e.getMessage() );
+      TDLog.Error("ZIP decompress entry to byte array: " + e.getMessage() );
       return -1;
     }
     return size;
@@ -499,6 +499,7 @@ public class Archiver
 
   public int unArchive( TopoDroidApp mApp, String filename, String surveyname, boolean force )
   {
+    TDLog.v("ZIP 7 un-archive file " + filename + " survey " + surveyname );
     boolean sql_success = false;
     int ok_manifest = -2;
     String pathname;
@@ -525,11 +526,12 @@ public class Archiver
         // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
         ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
         // mManifestPath = surveyname;
+        TDLog.v( "ZIP 7 manifest: " + ze.getName() + " size " + msize + " ok " + ok_manifest + " survey " + surveyname );
       }
       // TDFile.deleteFile( pathname );
       // TDLog.Log( TDLog.LOG_ZIP, "un-archived manifest " + ok_manifest );
       if ( ok_manifest < 0 ) {
-        TDLog.v("ZIP bad manifest " + ok_manifest );
+        TDLog.v("ZIP 7 bad manifest " + ok_manifest );
         if ( ! force ) {
           zip.close();
           return ok_manifest;
@@ -539,11 +541,12 @@ public class Archiver
       // byte buffer[] = new byte[36768];
       // byte[] buffer = new byte[4096];
 
-        // int nr_entry = 0;
+      // int nr_entry = 0;
       Enumeration<ZipEntry> entries = (Enumeration<ZipEntry>)zip.entries(); // FIXME "unchecked cast"
       for ( ; entries.hasMoreElements(); ) {
         ze = entries.nextElement();
-          // ++ nr_entry;
+        // TDLog.v("ZIP 7 entry " + ze.getName() );
+        // ++ nr_entry;
         if ( ze.isDirectory() ) {
           TDFile.makeTopoDroidDir( TDPath.getDirFile( ze.getName() ) );
         } else if ( ze.getName().equals( "manifest" ) ) {
@@ -594,18 +597,18 @@ public class Archiver
             FileOutputStream fout = TDFile.getFileOutputStream( pathname );
             int size = decompressEntry( zin, ze, fout );
             // TDLog.Log( TDLog.LOG_ZIP, "Unzip file \"" + pathname + "\" size " + size );
-            TDLog.v( "ZIP unzipped file \"" + pathname + "\" size " + size );
+            TDLog.v( "ZIP 7 file " + pathname + " size " + size );
             fout.close();
             if ( size > 0 ) {
               if ( sql ) {
                 // TDLog.Log( TDLog.LOG_ZIP, "Zip sqlfile \"" + pathname + "\" DB version " + mApp.mManifestDbVersion );
-                TDLog.v( "ZIP sqlfile \"" + pathname + "\" DB version " + TopoDroidApp.mManifestDbVersion );
+                TDLog.v( "ZIP 7 sqlfile " + pathname + " DB version " + TopoDroidApp.mManifestDbVersion );
                 sql_success = ( app_data.loadFromFile( pathname, TopoDroidApp.mManifestDbVersion ) >= 0 );
                 TDFile.deleteFile( pathname );
               }
             } else {
               TDFile.deleteFile( pathname );
-              TDLog.Error("ZIP 7 failed unzip " + pathname + " ret " + size );
+              TDLog.Error("ZIP 7 failed " + pathname + " ret " + size );
             }
           }
         }
@@ -614,9 +617,9 @@ public class Archiver
     } catch ( FileNotFoundException e ) {
       TDLog.Error( "ZIP 7 file not found " + e.getMessage() );
     } catch ( IOException e ) {
-      TDLog.Error( "ZIP 7 IO error: " + e.getMessage() );
+      TDLog.Error( "ZIP 7 IO: " + e.getMessage() );
     } catch ( ClassCastException e ) {
-      TDLog.Error( "ZIP 7 cast error: " + e.getMessage() );
+      TDLog.Error( "ZIP 7 cast: " + e.getMessage() );
     }
     if ( ok_manifest == 0 && ! sql_success ) {
       TDLog.Error( "ZIP 7 sql error" );
@@ -635,7 +638,7 @@ public class Archiver
    */
   static public int getOkManifest( InputStream fis, /* String filename, */ String surveyname )
   {
-    // TDLog.v( "ZIP get OK manifest - file " + filename + " survey " + surveyname );
+    TDLog.v( "ZIP get OK manifest - expect survey " + surveyname );
     int ok_manifest = -2;
     ZipEntry ze;
     // mManifestPath = null;
@@ -655,7 +658,7 @@ public class Archiver
             // ok_manifest = TopoDroidApp.checkManifestFile( pathname, surveyname  ); // this sets surveyname
             ok_manifest = TopoDroidApp.checkManifestFile( bout.toString(), surveyname  ); // this sets surveyname
             // mManifestPath = surveyname;
-            // TDLog.v( "ZIP manifest: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest );
+            TDLog.v( "ZIP manifest [1]: \"" + ze.getName() + "\" size " + size + " ok " + ok_manifest + " survey " + surveyname );
           } else {
             TDLog.Error( "ZIP manifest: \"" + ze.getName() + "\" size " + size );
           }
@@ -675,17 +678,21 @@ public class Archiver
     return ok_manifest;
   }
 
-  // un-archive from an input stream
-  // @param app        TopoDroid
-  // @param fis        input stream
-  // @param surveyname name of the survey (= new folder)
+  /** un-archive from an input stream
+   * @param app        TopoDroid application
+   * @param fis        input stream
+   * @param surveyname name of the survey (= new folder)
+   *
+   * When this method is called the manifest has been checked and is OK
+   * This method sets the survey path by the passed survey-name at start, and resets it to null at the end
+   */
   static public int unArchive( TopoDroidApp mApp, InputStream fis, String surveyname )
   {
+    TDLog.v( "ZIP 8 un-archive input stream - survey: " + surveyname );
     int ok_manifest = 0;
     String pathname;
     ZipEntry ze;
     DataHelper app_data = TopoDroidApp.mData;
-    // TDLog.v( "unarchive input stream - survey: " + surveyname );
     // mApp.setSurveyFromName( surveyname, -1, true ); // open survey: tell app to update survey name+id
     TDPath.setSurveyPaths( surveyname );
 
@@ -698,16 +705,17 @@ public class Archiver
       ZipInputStream zin = new ZipInputStream( fis );
       // int nr_entry = 0;
       while ( ( ze = zin.getNextEntry() ) != null ) {
+        // TDLog.v( "ZIP 8 entry " + ze.getName() ); // entry names do not have directory but only filename with extension
         // ++ nr_entry;
         if ( ze.isDirectory() ) {
-          // TDLog.v( "Zip dir entry " + nr_entry + " \"" + ze.getName() + "\"");
+          // TDLog.v( "ZIP 8 dir entry " + nr_entry + " \"" + ze.getName() + "\"");
           TDFile.makeTopoDroidDir( TDPath.getDirFile( ze.getName() ) );
         } else if ( ze.getName().equals( "manifest" ) ) {
-          // TDLog.v( "Zip entry " + nr_entry + " \"manifest\": skipping ...");
+          // TDLog.v( "ZIP 8 entry " + nr_entry + " \"manifest\": skipping ...");
           // skip
         } else {
           // TDLog.Log( TDLog.LOG_ZIP, "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
-          // TDLog.v( "Zip file entry " + nr_entry + " \"" + ze.getName() + "\"");
+          // TDLog.v( "ZIP 8 file entry " + nr_entry + " \"" + ze.getName() + "\"");
           boolean sql = false;
           pathname = null;
           if ( ze.getName().equals( "survey.sql" ) ) {

@@ -133,9 +133,9 @@ public class DistoX310Protocol extends DistoXProtocol
       // read only bytes 0-7 and 16-17
       int k = 0;
       int addr = index2addrX310( start );
-      int endaddr = addr + BYTE_PER_DATA;
-      // TDLog.v( start + " addr " + addr + " end " + endaddr );
-      for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
+      int end_addr = addr + BYTE_PER_DATA;
+      // TDLog.v( start + " addr " + addr + " end " + end_addr );
+      for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
@@ -147,7 +147,7 @@ public class DistoX310Protocol extends DistoXProtocol
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
           // TDLog.v( "X310 read-memory[1]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
-          TDLog.Error( "readmemory() IO failed" );
+          TDLog.Error( "read memory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -162,8 +162,8 @@ public class DistoX310Protocol extends DistoXProtocol
       // vector packet - need only the first byte
       // k = 0;
       addr = index2addrX310( start ) + 8;
-      // endaddr = addr + BYTE_PER_DATA;
-      // for ( ; addr < endaddr && k < 8; addr += 4, k+=4 ) {
+      // end_addr = addr + BYTE_PER_DATA;
+      // for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
         mBuffer[0] = (byte)( 0x38 );
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
@@ -175,7 +175,7 @@ public class DistoX310Protocol extends DistoXProtocol
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
           // TDLog.v( "X310 read-memory[2]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
-          TDLog.Error( "readmemory() IO failed" );
+          TDLog.Error( "read memory() IO failed" );
           break;
         }
       //   if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -206,7 +206,7 @@ public class DistoX310Protocol extends DistoXProtocol
           // if ( TDSetting.mPacketLog ) logPacket( 0L );
           // TDLog.v( "X310 read-memory[3]: " + String.format(" %02x", mBuffer[0] ) );
         } catch ( IOException e ) {
-          TDLog.Error( "readmemory() IO failed" );
+          TDLog.Error( "read memory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( 0x38 ) ) break;
@@ -436,7 +436,7 @@ public class DistoX310Protocol extends DistoXProtocol
   public byte[] readFirmwareBlock( int nr )
   {
     byte[] buf = new byte[256];
-    boolean ok = true;
+    // boolean ok = true;
     int addr = nr;
     try {
       buf[0] = (byte)0x3a;
@@ -452,14 +452,15 @@ public class DistoX310Protocol extends DistoXProtocol
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
       if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
         TDLog.LogFile( "Firmware read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
-        ok = false;
+        // ok = false;
       } else {
         TDLog.LogFile( "Firmware read block " + nr + ": ok");
       }
 
       mIn.readFully( buf, 0, 256 );
-    } catch ( IOException e ) { 
-      ok = false;
+    } catch ( IOException e ) {
+      TDLog.Error("IO " + e.getMessage() );
+      // ok = false;
     }
     return buf;
   }

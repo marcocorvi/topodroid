@@ -80,7 +80,7 @@ public class Cave3DFix extends Vector3D
    * @param cs0  coord reference system
    * @param lng  WGS84 longitude
    * @param lat  WGS84 latitude
-   * @param alt  WGS84 altitude (ellissoidic)
+   * @param alt  WGS84 altitude (ellipsoid)
    */
   public Cave3DFix( String nm, double e0, double n0, double z0, Cave3DCS cs0, double lng, double lat, double alt )
   {
@@ -124,14 +124,14 @@ public class Cave3DFix extends Vector3D
    */
   public boolean isWGS84() { return cs.isWGS84(); }
 
-  /** @return the south-north redius
+  /** @return the south-north radius
    */
   public double getSNradius() 
   { 
     return isWGS84()? Geodetic.meridianRadiusExact( latitude, altitude ) : 1.0;
   }
 
-  /** @return the west-east redius
+  /** @return the west-east radius
    */
   public double getWEradius() 
   { 

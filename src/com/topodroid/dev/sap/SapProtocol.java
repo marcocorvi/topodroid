@@ -62,7 +62,7 @@ class SapProtocol extends TopoDroidProtocol
   {
     // TDLog.v( "SAP proto: write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
-    synchronized ( mWriteBuffer ) {
+    synchronized ( mWriteBuffer ) { // FIXME SYNCH_ON_NON_FINAL
       while ( ! mWriteBuffer.isEmpty() ) {
         bytes = mWriteBuffer.remove(0);
       }

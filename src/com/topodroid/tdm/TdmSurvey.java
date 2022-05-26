@@ -93,7 +93,7 @@ public class TdmSurvey
    *
    * @note declination is saved in a class field - it could be added to the shot bearing here
    *       however it is added when the stations coords are computed 
-   *       @see computeStations()
+   *       see computeStations()
    */
   void loadSurveyData( DataHelper data ) 
   {

@@ -26,11 +26,11 @@ public class Device
   // FIXME VirtualDistoX
   // static final String ZERO_ADDRESS = "00-00-00-00-00-00";
 
-  private String mAddress;  // device mac address
+  private final String mAddress; // device mac address
   public String mModel;    // device model (type string)
   public String mName;     // device name (X310 only)
-  public String mNickname;  // device nickname
-  public  int mType;        // device type
+  public String mNickname; // device nickname
+  public  int mType;       // device type
   private int mHead;
   private int mTail;
 

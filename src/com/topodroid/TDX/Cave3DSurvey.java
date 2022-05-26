@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-import com.topodroid.utils.TDLog;
+// import com.topodroid.utils.TDLog;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -26,7 +26,7 @@ public class Cave3DSurvey
 
   public int number; // survey index
   int mId;    // id 
-  int mPid;   // parend Id
+  int mPid;   // parent Id
   String name;
   boolean visible;
 
@@ -57,7 +57,7 @@ public class Cave3DSurvey
   {
     int id = dis.readInt();
     String name = dis.readUTF();
-    // TDLog.v("Cave3D survey deser. " + id + " " + name );
+    // TDLog.v("Cave3D survey deserialized " + id + " " + name );
     return new Cave3DSurvey( name, id, -1 );
   }
 
@@ -88,7 +88,7 @@ public class Cave3DSurvey
    */
   public boolean hasName( String nm ) { return name != null && name.equals( nm ); }
 
-  /** @return the staion name
+  /** @return the station name
    */
   public String  getName() { return name; }
 
@@ -253,11 +253,11 @@ public class Cave3DSurvey
 
   /** @return the total length of the shots
    */
-  double getShotLenght()  { return mLenShots; }
+  double getShotLength()  { return mLenShots; }
 
   /** @return the total length of the splays
    */
-  double getSplayLenght() { return mLenSplays; }
+  double getSplayLength() { return mLenSplays; }
 
   // ---------------------------- INIT
   /** initialize

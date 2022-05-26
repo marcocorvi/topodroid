@@ -374,7 +374,7 @@ public class TdmViewSurface extends SurfaceView
             try {
               // TDLog.v( "View surface: drawing thread sleeps ..." );
               sleep(100);
-            } catch ( InterruptedException e ) { }
+            } catch ( InterruptedException e ) { TDLog.v("Interrupted"); }
           }
         }
       }

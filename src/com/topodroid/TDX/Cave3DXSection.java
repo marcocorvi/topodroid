@@ -132,7 +132,7 @@ public class Cave3DXSection
     double b2 = - ( A[0] + A[4] + A[8] ); // trace
     double b1 = ( A[0]*A[4] + A[0]*A[8] + A[4]*A[8] - A[5]*A[7] - A[1]*A[3] - A[2]*A[6] );
     double b0 =  - A[0]*A[4]*A[8] - A[2]*A[3]*A[7] - A[1]*A[5]*A[6] + A[0]*A[5]*A[7] + A[4]*A[2]*A[6] + A[8]*A[1]*A[3]; // determinant
-    double b00 = A[0]*( A[4]*A[8] - A[5]*A[7] ) - A[1]*( A[3]*A[8] - A[6]*A[5] ) + A[2]*( A[3]*A[7] - A[6]*A[4] ); // determinant
+    // double b00 = A[0]*( A[4]*A[8] - A[5]*A[7] ) - A[1]*( A[3]*A[8] - A[6]*A[5] ) + A[2]*( A[3]*A[7] - A[6]*A[4] ); // determinant
     // find first positive zero of   f(L) = L^3 + b2 L^2 + b1 L + b0 = 0;
     //   f'(L) = 3 L^2 + 2 b2 L + b1 = 0
     // for L = ( - b2 +/- sqrt( b2*b2 - 3 b1 ) )/3
@@ -147,8 +147,8 @@ public class Cave3DXSection
     // assert( det1 >= 0 );
     double L2 = ( - b2 + Math.sqrt(det1) )/3;
     double L1 = 0;
-    double F1 = L1 * L1 * L1 + b2 * L1 * L1 + b1 * L1 + b0;
-    double F2 = L2 * L2 * L2 + b2 * L2 * L2 + b1 * L2 + b0;
+    // double F1 = L1 * L1 * L1 + b2 * L1 * L1 + b1 * L1 + b0;
+    // double F2 = L2 * L2 * L2 + b2 * L2 * L2 + b1 * L2 + b0;
     // assert( F1 <= 0 );
     // assert( F2 >= 0 );
     double L = L1;
@@ -189,7 +189,7 @@ public class Cave3DXSection
     } while ( Math.abs( f0 ) > 0.0000001 );
     */
 
-    double a0 = A[0] - L;
+    // double a0 = A[0] - L;
     double a4 = A[4] - L;
     double a8 = A[8] - L;
     double nx = 1.0;

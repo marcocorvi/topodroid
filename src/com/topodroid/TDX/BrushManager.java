@@ -79,9 +79,9 @@ public class BrushManager
   public static boolean isAreaRoundTrip( DrawingAreaPath path, int rt )
   { return (mAreaLib != null) && mAreaLib.getSymbolByIndex( path.mAreaType ).mRoundTrip == rt; }
 
-  static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNames(); }
-  static ArrayList< String > getLineNamesNoSection() { return (mLineLib == null)? (new ArrayList< String >()) : mLineLib.getSymbolNamesExcept( SymbolLibrary.SECTION ); }
-  static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList< String >()) : mAreaLib.getSymbolNames(); }
+  static ArrayList< String > getLineNames() { return (mLineLib == null)? (new ArrayList<>()) : mLineLib.getSymbolNames(); }
+  static ArrayList< String > getLineNamesNoSection() { return (mLineLib == null)? (new ArrayList<>()) : mLineLib.getSymbolNamesExcept( SymbolLibrary.SECTION ); }
+  static ArrayList< String > getAreaNames() { return (mAreaLib == null)? (new ArrayList<>()) : mAreaLib.getSymbolNames(); }
 
   static int getPointIndex( Symbol point ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndex( point ); }
   static int getLineIndex( Symbol line )   { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndex( line ); }
@@ -560,9 +560,9 @@ public class BrushManager
    */
   static void toDataStream( DataOutputStream dos )
   {
-    if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { } }
-    if ( mLineLib  != null ) { mLineLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { } }
-    if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { } }
+    if ( mPointLib != null ) { mPointLib.toDataStream(dos); } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
+    if ( mLineLib  != null ) { mLineLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
+    if ( mAreaLib  != null ) { mAreaLib.toDataStream(dos);  } else { try { dos.writeUTF(""); } catch (IOException e) { TDLog.Error("IO " + e.getMessage() ); } }
   }
 
 }

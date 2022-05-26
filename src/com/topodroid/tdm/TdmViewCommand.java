@@ -123,10 +123,10 @@ public class TdmViewCommand
 
   public void executeAll( Canvas canvas, Handler preview_handler )
   {
-    synchronized( mFixedStack ) {
+    synchronized( mFixedStack ) { // FIXME SYNCH_ON_NON_FINAL
       for ( TdmViewPath path : mFixedStack ) path.draw( canvas, mMatrix, mPaint );
     }
-    synchronized( mStations ) {
+    synchronized( mStations ) { // FIXME SYNCH_ON_NON_FINAL
       float zoom = mScale / 50;
       for ( TdmViewStation st : mStations ) {
         st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
@@ -149,7 +149,7 @@ public class TdmViewCommand
     double dmin = 100000; // FIXME a very large number
 
     // TDLog.v("get station at: " + name() + " get station at " + x + " " + y );
-    synchronized ( mStations ) {
+    synchronized ( mStations ) { // FIXME SYNCH_ON_NON_FINAL
       for ( TdmViewStation st : mStations ) {
         // TDLog.v("get station at " + name() + " station " + st.mStation.mName + " " + st.x + " " + st.y );
         double d = Math.abs( st.x - x ) + Math.abs( st.y - y );
