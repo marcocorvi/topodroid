@@ -18,7 +18,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.TDX.FixedInfo;
+// import com.topodroid.TDX.FixedInfo;
 // import com.topodroid.TDX.CurrentStation;
 
 import com.topodroid.common.LegType;
@@ -99,8 +99,8 @@ class ParserWalls extends ImportParser
   {
     // String path = basepath;   // survey pathname(s)
 
-    int jFrom    = 0; // index of FROM station
-    int jTo      = 1;
+    // int jFrom    = 0; // index of FROM station
+    // int jTo      = 1;
     int jLength  = 2; // index of length (DAV)
     int jCompass = 3;
     int jClino   = 4;
@@ -164,8 +164,8 @@ class ParserWalls extends ImportParser
                   ul = 1;
                 } else if ( vals[k].toLowerCase().startsWith("order=") ) {
                   int c = 2;
-                  int kcmax = vals[k].length(); if ( kcmax > 9 ) kcmax = 9;
-                  for ( int kc = 6; kc<kcmax; ++kc, ++c ) {
+                  int kc_max = vals[k].length(); if ( kc_max > 9 ) kc_max = 9;
+                  for ( int kc = 6; kc<kc_max; ++kc, ++c ) {
                     switch ( vals[k].charAt(kc) ) {
                       case 'D': jLength  = c; break;
                       case 'A': jCompass = c; break;

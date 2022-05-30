@@ -85,12 +85,12 @@ class  MagModel
   //   }
   // }
     
-  MagModel( int nt, int nm, int nmsv )
+  MagModel( int nt, int nm, int n_m_sv )
   {
-    // TDLog.v( "MaG Model cstr " + nt + " " + nm + " " + nmsv );
+    // TDLog.v( "MaG Model cstr " + nt + " " + nm + " " + n_m_sv );
     nTerms = nt;
     nMax   = nm;
-    nMaxSecVar = nmsv;
+    nMaxSecVar = n_m_sv;
 
     ModelName = "";
     EditionDate = 0;

@@ -54,12 +54,12 @@ public class CalibCoverageDialog extends MyDialog
   private TextView mText;
   private ImageView mImageUp;
   private ImageView mImageDown;
-  private Button mBtnEval;
-  private Button mBtnEvalG;
-  private Button mBtnEvalM;
-  private Button mBtnEvalRoll;
-  private Button mBtnEvalCal;
-  private Button mBtnBack;
+  // private Button mBtnEval;
+  // private Button mBtnEvalG;
+  // private Button mBtnEvalM;
+  // private Button mBtnEvalRoll;
+  // private Button mBtnEvalCal;
+  // private Button mBtnBack;
 
   private CalibCoverage mCoverage;
 
@@ -94,22 +94,22 @@ public class CalibCoverageDialog extends MyDialog
     mText  = (TextView) findViewById( R.id.coverage_value );
     mImageUp     = (ImageView) findViewById( R.id.coverage_image_up );
     mImageDown   = (ImageView) findViewById( R.id.coverage_image_down );
-    mBtnEval     = (Button) findViewById( R.id.coverage_eval );
-    mBtnEvalG    = (Button) findViewById( R.id.coverage_g   );
-    mBtnEvalM    = (Button) findViewById( R.id.coverage_m   );
-    mBtnEvalRoll = (Button) findViewById( R.id.coverage_roll );
-    mBtnEvalCal  = (Button) findViewById( R.id.coverage_eval_cal );
-    mBtnBack    = (Button) findViewById( R.id.coverage_back );
-    mBtnEval.setOnClickListener( this );
-    mBtnEvalG.setOnClickListener( this );
-    mBtnEvalM.setOnClickListener( this );
-    mBtnEvalRoll.setOnClickListener( this );
+    Button btnEval     = (Button) findViewById( R.id.coverage_eval );
+    Button btnEvalG    = (Button) findViewById( R.id.coverage_g   );
+    Button btnEvalM    = (Button) findViewById( R.id.coverage_m   );
+    Button btnEvalRoll = (Button) findViewById( R.id.coverage_roll );
+    Button btnEvalCal  = (Button) findViewById( R.id.coverage_eval_cal );
+    Button btnBack    = (Button) findViewById( R.id.coverage_back );
+    btnEval.setOnClickListener( this );
+    btnEvalG.setOnClickListener( this );
+    btnEvalM.setOnClickListener( this );
+    btnEvalRoll.setOnClickListener( this );
     if ( mCalib != null ) {
-      mBtnEvalCal.setOnClickListener( this );
+      btnEvalCal.setOnClickListener( this );
     } else {
-      mBtnEvalCal.setVisibility( View.GONE );
+      btnEvalCal.setVisibility( View.GONE );
     }
-    mBtnBack.setOnClickListener( this );
+    btnBack.setOnClickListener( this );
     reset( R.string.cover_data );
   }
 
@@ -117,7 +117,7 @@ public class CalibCoverageDialog extends MyDialog
   {
     mImageUp.setImageBitmap( mBitmapUp );
     mImageDown.setImageBitmap( mBitmapDown );
-    String format = mContext.getResources().getString(res);
+    // String format = mContext.getResources().getString(res);
     // TDLog.v("COVER res " + res + " format " + format );
 
     mText.setText( String.format(Locale.US, mContext.getResources().getString(res), mCoverageValue ) );
@@ -168,8 +168,8 @@ public class CalibCoverageDialog extends MyDialog
     // int W2 = WIDTH / 2 + DELTA_W;  // 180 + 20
     // int j1min = 1000; // DEBUG
     // int j1max = -1000;
-    // int upperj2max = 0;
-    // int belowj2min = 37;
+    // int upper_j2max = 0;
+    // int below_j2min = 37;
 
     for (int j0=0; j0<=H1; ++j0) {
       float j = j0 - H2;  // pixel (i,j) j-index
@@ -177,19 +177,19 @@ public class CalibCoverageDialog extends MyDialog
         float i = i0 - H2;  // range -90 .. +90 :pixel (i,j) i-index
 	float radius = TDMath.sqrt(i*i + j*j);
 	if ( radius < H2 ) { // if pixel is inside the circle
-	  int iclino = (int)( (radius) * STEP_Y ); // range [0,90)
+	  int i_clino = (int)( (radius) * STEP_Y ); // range [0,90)
           float compass = ( TDMath.atan2( i, -j ) + TDMath.M_PI ) / TDMath.M_2PI; // range [0, 1]
 	  // UP HEMISPHERE bi-linear interpolation:
           //   j2:    i21 - i22    ...  d2
           //          /       \         d
           //   j1:  i11 ----- i12  ...  d1
-	  int j1 = iclino / CalibCoverage.DELTA_Y;   // range 0..8
+	  int j1 = i_clino / CalibCoverage.DELTA_Y;   // range 0..8
           // if ( j1 < j1min ) j1min = j1;
           // if ( j1 > j1max ) j1max = j1;
 	  int j2 = j1 + 1;              //     d
-          // if ( j2 > upperj2max ) upperj2max = j2;
+          // if ( j2 > upper_j2max ) upper_j2max = j2;
 
-          float d = (iclino % CalibCoverage.DELTA_Y) / DELTA_YF;  // j1 ------ iclino ------------ j2
+          float d = (i_clino % CalibCoverage.DELTA_Y) / DELTA_YF;  // j1 ------ i_clino ------------ j2
 	  int j1off = t_offset[j1];
 	  int j2off = t_offset[j2];
 	  float c1 = ( compass * t_size[j1] );
@@ -217,7 +217,7 @@ public class CalibCoverageDialog extends MyDialog
 	  // DOWN HEMISPHERE
 	  j1 = CalibCoverage.DIM_Y - 1 - j1;  // range 18 .. 0
 	  j2 = CalibCoverage.DIM_Y - 1 - j2;
-          // if ( j2 < belowj2min ) belowj2min = j2;
+          // if ( j2 < below_j2min ) below_j2min = j2;
 	  j1off = t_offset[j1];
 	  j2off = t_offset[j2];
 	  c1 = ( compass * t_size[j1] );
@@ -245,7 +245,7 @@ public class CalibCoverageDialog extends MyDialog
         }
       }
     }
-    // TDLog.v( " upperJ2min " + upperj2max + " belowJ2max " + belowj2min );
+    // TDLog.v( " upper J2min " + upper_j2max + " below J2max " + below_j2min );
     // TDLog.v( " J1min " + j1min + " J1max " + j1max + " DIM_Y " + CalibCoverage.DIM_Y + " " + CalibCoverage.DIM_Y2 );
     // prints 0 18 37 18 
     // therefore upper hemisphere ranges [ 0, 1] [ 1, 2] ... [18,19]

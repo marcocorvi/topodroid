@@ -140,7 +140,7 @@ public class CalibExport
         if ( data.hasCalibName( name ) ) {
           ret = -2; // CALIB NAME ALREADY EXISTS
         } else {
-          String date   = nextLineAtPos( br, 2 );
+          String date = nextLineAtPos( br, 2 );
           if ( date == null || date.length() < 10 ) {
             date = TDUtil.currentDate();
           }
@@ -154,7 +154,7 @@ public class CalibExport
             if ( line != null && line.charAt(0) == '#' ) {
               try {
                 algo = Long.parseLong( line.substring(2) );
-              } catch ( NumberFormatException e ) { }
+              } catch ( NumberFormatException e ) { TDLog.v("Error " + e.getMessage() ); }
               line = br.readLine();
             }
             if ( line == null ) {

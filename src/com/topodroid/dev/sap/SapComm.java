@@ -22,6 +22,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.TDInstance;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
 import com.topodroid.dev.ConnectionState;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
@@ -388,7 +389,10 @@ public class SapComm extends TopoDroidComm
       mWriteInitialized = gatt.setCharacteristicNotification(mWriteChrt, true);
       mReadInitialized = gatt.setCharacteristicNotification(mReadChrt, true);
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage() );
+      TDLog.Error("SECURITY CHRT notiofication " + e.getMessage() );
+      // TDToast.makeBad("Security error: CHRT notification");
+      // TODO closeGatt() ?
+      return -1;
     }
     BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleUtils.CCCD_UUID );
     if ( readDesc == null ) {
@@ -411,7 +415,9 @@ public class SapComm extends TopoDroidComm
           return -3;
         }
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY write descriptor " + e.getMessage() );
+        // TDToast.makeBad("Security error: write descriptor");
+        // TODO closeGatt() ?
         return -3;
       }
     }

@@ -50,6 +50,9 @@ class Endian
     return (r0 | ( r1 << 8 ));
   }
 
+  /** @return integer value stored in the byte array in little-endian
+   * @param val   byte array
+   */
   static int toIntLEndian( byte[] val ) 
   {
     // Log.v( "TopoGL-LOX", "toInt " + val[0] + " " + val[1] + " " + val[2] + " " + val[3] );
@@ -60,11 +63,17 @@ class Endian
     return r0 | ( r1 << 8 ) | ( r2 << 16 ) | ( r3 << 24 );
   }
 
-  static float toFloatLEndian( byte[] val ) 
-  {
-    return Float.intBitsToFloat( (int)val[0] | ( ((int)val[1]) << 8 ) | ( ((int)(val[2])) << 16 ) | ( ((int)(val[3])) << 24 ) );
-  }
+  // /** @return float value stored in the byte array in little-endian
+  //  * @param val   byte array
+  //  */
+  // static float toFloatLEndian( byte[] val ) 
+  // {
+  //   return Float.intBitsToFloat( (int)val[0] | ( ((int)val[1]) << 8 ) | ( ((int)(val[2])) << 16 ) | ( ((int)(val[3])) << 24 ) );
+  // }
 
+  /** @return double value stored in the byte array in little-endian
+   * @param val   byte array
+   */
   static double toDoubleLEndian( byte[] val )
   {
     int r0 = ( val[0] < 0 )? 256+val[0] : val[0];
@@ -111,8 +120,11 @@ class Endian
   //        tmp = val[off+3]; val[off+3] = val[off+4]; val[off+4] = tmp;
   // }
 
-  // @param fis    file input stream
-  // @param int32  array of SIZE32 bytes (pre-allocated)
+  /** read a 32-bit integer
+   * @param fis    file input stream
+   * @param int32  array of SIZE32 bytes (pre-allocated)
+   * @return the number of bytes that have been read
+   */
   static int readInt32( DataInputStream fis, byte[] int32 ) throws IOException
   {
     return fis.read( int32, 0, SIZE32 );
@@ -120,13 +132,13 @@ class Endian
 
   static int readInt( DataInputStream fis, byte[] int32 ) throws IOException
   {
-    fis.read( int32, 0, SIZE32 );
+    if ( fis.read( int32, 0, SIZE32 ) != SIZE32 ) throw new IOException();
     return toIntLEndian( int32 );
   }
 
   static int readShort( DataInputStream fis, byte[] int16 ) throws IOException
   {
-    fis.read( int16, 0, SIZE16 );
+    if ( fis.read( int16, 0, SIZE16 ) != SIZE16 ) throw new IOException();
     return toShortLEndian( int16 );
   }
 

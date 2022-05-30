@@ -46,9 +46,9 @@ public class ParserTro extends TglParser
   double ul = 1;  // units factor [m]
   double ub = 1;  // dec.deg
   double uc = 1;  // dec.deg
-  int dirw = 1;  // width direction
-  int dirb = 1;  // bearing direction
-  int dirc = 1;  // clino direction
+  int dir_w = 1;  // width direction (read but not used)
+  int dir_b = 1;  // bearing direction (read but not used)
+  int dir_c = 1;  // clino direction (read but not used)
 
   public ParserTro( TopoGL app, InputStreamReader isr, String name ) throws ParserException
   {
@@ -95,7 +95,7 @@ public class ParserTro extends TglParser
         double y = Double.parseDouble( params[2] );
         double z = Double.parseDouble( params[3] );
         // TDLog.v("TRO XYZ " + x + " " + y + " " + z );
-        String vt_cs = params[4]; // ccords system: must be present in VisualTopo registry
+        String vt_cs = params[4]; // coords system: must be present in VisualTopo registry
         fixes.add( new Cave3DFix( entrance, x, y, z, new Cave3DCS( vt_cs ) ) ); // FIXME
         return true;
       } catch ( NumberFormatException e ) {
@@ -184,9 +184,9 @@ public class ParserTro extends TglParser
             } else if ( vals[k].startsWith("Dir") || vals[k].startsWith("Inv") ) {
               String[] dirs = vals[k].split(",");
               if ( dirs.length == 3 ) {
-                dirb = ( dirs[0].equals("Dir") )? 1 : -1;
-                dirc = ( dirs[1].equals("Dir") )? 1 : -1;
-                dirw = ( dirs[2].equals("Dir") )? 1 : -1;
+                dir_b = ( dirs[0].equals("Dir") )? 1 : -1;
+                dir_c = ( dirs[1].equals("Dir") )? 1 : -1;
+                dir_w = ( dirs[2].equals("Dir") )? 1 : -1;
               }
             } else if ( vals[k].equals("Inc") ) {
               // FIXME splay at next station: Which ???

@@ -505,12 +505,12 @@ public class SymbolPointDxf
   private void startCircle( String layer )   { addToken( new NameToken( DXF.ACAD_9, "CIRCLE", layer ) ); }
   private void startArc( String layer )      { addToken( new NameToken( DXF.ACAD_9, "ARC", layer ) ); }
     
-  private void addAcDb( String acdbitem, boolean acdb_only )
+  private void addAcDb( String acdb_item, boolean acdb_only )
   {
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter( sw );
     if ( ! acdb_only ) pw.printf( DXF.EOL100 +  DXF.AcDbEntity + DXF.EOL );
-    pw.printf( DXF.EOL100 + acdbitem + DXF.EOL );
+    pw.printf( DXF.EOL100 + acdb_item + DXF.EOL );
     addToken( new NormalToken( TOKEN_ACDB, DXF.ACAD_12, sw.toString() ) );
   }
 

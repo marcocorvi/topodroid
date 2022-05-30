@@ -61,7 +61,7 @@ public class CalibCoverage
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
       if ( ir <= 0 || ir >= 23 ) { 
         ir = 0;
-      } else if ( ir > 0 ) {
+      } else { // ( ir > 0 )
         ir = (ir + 1)/2;
       }
       mRoll |= ROLL_3[ir];
@@ -72,7 +72,7 @@ public class CalibCoverage
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
       if ( ir <= 0 || ir >= 23 ) { 
         ir = 0;
-      } else if ( ir > 0 ) {
+      } else { // ( ir > 0 )
         ir = (ir + 1)/2;
       }
       mRoll |= ROLL_2[ir];
@@ -83,7 +83,7 @@ public class CalibCoverage
       int ir = (int)(r/15); // 0=[0..15), 1=[15..30), 2=[30..45), 3=[45..60), ...
       if ( ir <= 0 || ir >= 23 ) { 
         ir = 0;
-      } else if ( ir > 0 ) {
+      } else { // ( ir > 0 )
         ir = (ir + 1)/2;
       }
       mRoll |= ROLL_1[ir];
@@ -128,9 +128,12 @@ public class CalibCoverage
     mCoverage = 0; // do not compute immediately
   }
 
-  float getCoverage() { return mCoverage; }
+  // float getCoverage() { return mCoverage; }
+
   Direction[] getDirections() { return angles; }
+
   int[] getTSize() { return t_size; }
+
   int[] getTOffset() { return t_offset; }
 
   private void setup()
@@ -348,10 +351,12 @@ public class CalibCoverage
 
     for (int j=0; j<t_dim; ++j ) angles[j].resetValue( );
 
+    /* unused
     long old_grp = 0;
     float compass_avg = 0.0f;
     float clino_avg   = 0.0f;
     int cnt_avg = 0;
+    */
     for ( CBlock b : clist ) {
       if ( b.mGroup == 0 ) continue;
       if ( transform == null ) {
@@ -379,10 +384,12 @@ public class CalibCoverage
   {
     for (int j=0; j<t_dim; ++j ) angles[j].resetValue( );
 
+    /* unused
     long old_grp = 0;
     float compass_avg = 0.0f;
     float clino_avg   = 0.0f;
     int cnt_avg = 0;
+    */
 
     float f = TDUtil.FV;
     for ( CBlock b : clist ) {

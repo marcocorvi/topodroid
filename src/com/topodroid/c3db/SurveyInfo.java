@@ -16,7 +16,7 @@ package com.topodroid.c3db;
 public class SurveyInfo
 {
   public final static double DECLINATION_MAX = 720;    // twice 360
-  public final static double DECLINATION_UNSET = 1080; // three times 360
+  // public final static double DECLINATION_UNSET = 1080; // three times 360 (unused)
 
   public long id;
   public String name;

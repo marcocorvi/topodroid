@@ -89,7 +89,7 @@ public class ExportSHP
     // TDLog.v("shp export. dirname " + filepath + " name " + name );
     ArrayList< String > files = new ArrayList<>(); // will contain strings "stations.shp" ...
 
-    String subname  = "c3export/" + name;
+    String sub_name  = "c3export/" + name;
     // this is dirname
     // String filepath = TDPath.getC3exportPath( name ); // export temporary folder for shp files - fullpath
 
@@ -106,7 +106,7 @@ public class ExportSHP
     if ( ret ) {
       // TDLog.v( "export SHP: make zip. files " + files.size() );
       Archiver zipper = new Archiver( );
-      zipper.compressFiles( zos, subname, files );
+      zipper.compressFiles( zos, sub_name, files );
       try {
         zos.close();
       } catch ( IOException e ) {

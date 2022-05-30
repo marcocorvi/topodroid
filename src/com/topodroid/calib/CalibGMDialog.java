@@ -59,17 +59,17 @@ public class CalibGMDialog extends MyDialog
   private final String mErrorGroupRequired;
   private final String mErrorGroupNonInt;
 
-  // private EditText mETbearing;
-  // private EditText mETclino;
-  // private EditText mETroll;
-  // private TextView mTVerror;
+  // private EditText mET_bearing;
+  // private EditText mET_clino;
+  // private EditText mET_roll;
+  // private TextView mTV_error;
   
-  private EditText mETname;  // group number
+  private EditText mET_name;  // group number
   private Button   mButtonOK;
   private Button   mButtonDelete;
-  private MyCheckBox mCBregroup = null;
-  private MyStateBox mSBregroup = null;
-  private TextView   mTVregroup = null;
+  private MyCheckBox mCB_regroup = null;
+  private MyStateBox mSB_regroup = null;
+  private TextView   mTV_regroup = null;
   private Button   mButtonCancel;
 
   private MyKeyboard mKeyboard = null;
@@ -96,12 +96,12 @@ public class CalibGMDialog extends MyDialog
 
     initLayout( R.layout.calib_gm_dialog, null );
 
-    EditText eTbearing = (EditText) findViewById( R.id.gm_bearing );
-    EditText eTclino   = (EditText) findViewById( R.id.gm_clino   );
-    EditText eTroll    = (EditText) findViewById( R.id.gm_roll    );
-    TextView tVerror   = (TextView) findViewById( R.id.gm_error );
+    EditText eT_bearing = (EditText) findViewById( R.id.gm_bearing );
+    EditText eT_clino   = (EditText) findViewById( R.id.gm_clino   );
+    EditText eT_roll    = (EditText) findViewById( R.id.gm_roll    );
+    TextView tV_error   = (TextView) findViewById( R.id.gm_error );
 
-    mETname = (EditText) findViewById(R.id.gm_name);
+    mET_name = (EditText) findViewById(R.id.gm_name);
 
     LinearLayout layout2 = (LinearLayout) findViewById( R.id.layout2 );
     int size = TDSetting.mSizeButtons; // TopoDroidApp.getScaledSize( mContext );
@@ -115,17 +115,17 @@ public class CalibGMDialog extends MyDialog
     layout2.addView( mButtonDelete, lp );
 
     if ( TDLevel.overExpert ) {
-      mSBregroup = new MyStateBox( mContext, R.drawable.iz_numbers_no, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_ok );
-      mSBregroup.setState( 0 );
-      mSBregroup.setOnClickListener( this );
-      layout2.addView( mSBregroup, lp );
-      mTVregroup = new TextView( mContext );
-      mTVregroup.setText( R.string.regroup );
-      layout2.addView( mTVregroup, lp );
+      mSB_regroup = new MyStateBox( mContext, R.drawable.iz_numbers_no, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_ok );
+      mSB_regroup.setState( 0 );
+      mSB_regroup.setOnClickListener( this );
+      layout2.addView( mSB_regroup, lp );
+      mTV_regroup = new TextView( mContext );
+      mTV_regroup.setText( R.string.regroup );
+      layout2.addView( mTV_regroup, lp );
     } else {
-      mCBregroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no ); 
-      mCBregroup.setState( false );
-      layout2.addView( mCBregroup, lp );
+      mCB_regroup    = new MyCheckBox( mContext, size, R.drawable.iz_numbers_ok, R.drawable.iz_numbers_no );
+      mCB_regroup.setState( false );
+      layout2.addView( mCB_regroup, lp );
     }
 
     // layout2.addView( mButtonOK, lp );
@@ -135,22 +135,22 @@ public class CalibGMDialog extends MyDialog
     mButtonCancel = (Button) findViewById(R.id.gm_cancel );
     mButtonCancel.setOnClickListener( this );
 
-    eTbearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
-    eTclino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
-    eTroll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
-    tVerror.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
+    eT_bearing.setText( String.format(Locale.US, "%.1f", mBlk.mBearing ) );
+    eT_clino.setText( String.format(Locale.US, "%.1f", mBlk.mClino ) );
+    eT_roll.setText( String.format(Locale.US, "%.1f", mBlk.mRoll ) );
+    tV_error.setText( String.format(Locale.US, "%.4f", mBlk.mError ) );
 
-    mETname.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
+    mET_name.setText( String.format(Locale.US, "%d", mBlk.mGroup ) );
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), R.xml.my_keyboard_base_sign, -1 );
     if ( TDSetting.mKeyboard ) {
-      MyKeyboard.registerEditText( mKeyboard, mETname, MyKeyboard.FLAG_SIGN );
+      MyKeyboard.registerEditText( mKeyboard, mET_name, MyKeyboard.FLAG_SIGN );
     } else {
-      mETname.setInputType( TDConst.NUMBER_SIGNED );
+      mET_name.setInputType( TDConst.NUMBER_SIGNED );
     }
-    setEditable( eTbearing ); // , null, false, MyKeyboard.FLAG_POINT );
-    setEditable( eTclino ); // ,   null, false, MyKeyboard.FLAG_POINT );
-    setEditable( eTroll ); // ,    null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eT_bearing ); // , null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eT_clino ); // ,   null, false, MyKeyboard.FLAG_POINT );
+    setEditable( eT_roll ); // ,    null, false, MyKeyboard.FLAG_POINT );
   }
 
   @Override
@@ -160,31 +160,31 @@ public class CalibGMDialog extends MyDialog
     // TDLog.Log( TDLog.LOG_INPUT, "GM dialog onClick button " + b.getText().toString() );
     if ( b == mButtonOK ) {
       MyKeyboard.close( mKeyboard );
-      String name = mETname.getText().toString();
+      String name = mET_name.getText().toString();
       // if ( name == null || name.length() == 0 ) {
-      //   name = mETname.getHint().toString();
+      //   name = mET_name.getHint().toString();
       // }
       GMActivity parent = mParent.get();
       if ( parent != null ) {
         if ( /* name == null || */ name.length() == 0 ) { // name == null always false
-          mETname.setError( mErrorGroupRequired );
+          mET_name.setError( mErrorGroupRequired );
           return;
         } else {
           try {
             long value = Long.parseLong( name );
             parent.updateGM( value, name );
           } catch ( NumberFormatException e ) {
-            mETname.setError( mErrorGroupNonInt );
+            mET_name.setError( mErrorGroupNonInt );
             return;
           }
         }
         if ( TDLevel.overExpert ) {
-          switch ( mSBregroup.getState() ) {
+          switch ( mSB_regroup.getState() ) {
             case 1: parent.resetAndComputeGroups( mBlk.mId, TDSetting.GROUP_BY_FOUR ); break;
             case 2: parent.resetAndComputeGroups( mBlk.mId, TDSetting.GROUP_BY_ONLY_16 ); break;
           }
         } else {
-          if ( mCBregroup.isChecked() ) {
+          if ( mCB_regroup.isChecked() ) {
             parent.resetAndComputeGroups( mBlk.mId, TDSetting.mGroupBy );
           }
         }
@@ -200,11 +200,11 @@ public class CalibGMDialog extends MyDialog
       }
     // } else if ( b == mButtonCancel ) {
       /* nothing */
-    } else if ( TDLevel.overExpert && b == mSBregroup ) {
-      switch ( mSBregroup.getState() ) {
-        case 0: mSBregroup.setState(1); mTVregroup.setText("TopoDroid"); break; 
-        case 1: mSBregroup.setState(2); mTVregroup.setText("PocketTopo"); break; 
-        case 2: mSBregroup.setState(0); mTVregroup.setText(R.string.regroup); break; 
+    } else if ( TDLevel.overExpert && b == mSB_regroup ) {
+      switch ( mSB_regroup.getState() ) {
+        case 0: mSB_regroup.setState(1); mTV_regroup.setText("TopoDroid"); break;
+        case 1: mSB_regroup.setState(2); mTV_regroup.setText("PocketTopo"); break;
+        case 2: mSB_regroup.setState(0); mTV_regroup.setText(R.string.regroup); break;
       }
       return;
     }

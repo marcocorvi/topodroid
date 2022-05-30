@@ -19,6 +19,7 @@ import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.DEMsurface;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
 
 // import java.io.File;
 import java.io.DataInputStream;
@@ -28,7 +29,7 @@ import java.util.ArrayList;
 
 public class ParserLox extends TglParser
 {
-  private static double RAD2DEG = (180/Math.PI);
+  // private static double RAD2DEG = (180/Math.PI);
 
   // @param dis    input stream
   // @param name   name for error report
@@ -41,23 +42,23 @@ public class ParserLox extends TglParser
   private static LoxSurvey getLoxSurvey( int id, ArrayList< LoxSurvey > lox_surveys ) 
   { 
     if ( id < 0 ) return null;
-    for ( LoxSurvey lox_survey : lox_surveys ) if ( lox_survey.id == id ) return lox_survey;
+    for ( LoxSurvey lox_survey : lox_surveys ) if ( lox_survey.Id() == id ) return lox_survey;
     return null;
   }
 
   private static String getLoxSurveyFullname( LoxSurvey lox_survey, ArrayList< LoxSurvey > lox_surveys )
   {
-    if ( lox_survey.pid > 0 ) {
-      LoxSurvey parent = getLoxSurvey( lox_survey.pid, lox_surveys );
+    if ( lox_survey.Parent() > 0 ) {
+      LoxSurvey parent = getLoxSurvey( lox_survey.Parent(), lox_surveys );
       if ( parent != null ) {
         String parent_name = getLoxSurveyFullname( parent, lox_surveys );
         if ( parent_name.length() > 0 ) {
-          return parent_name + "." + lox_survey.name;
+          return parent_name + "." + lox_survey.Name();
         }
       }
     }
     // parent null or empty name
-    return lox_survey.name; 
+    return lox_survey.Name();
   }
 
   // @param dis    input stream
@@ -72,7 +73,7 @@ public class ParserLox extends TglParser
       String name = getLoxSurveyFullname( survey, lox_surveys );
       // String name = survey.name;
       // Log.v("TopoGL-LOX", "survey " + name + " " + survey.id + " " + survey.pid );
-      surveys.add( new Cave3DSurvey( name, survey.id, survey.pid ) ); // pid = parent_id
+      surveys.add( new Cave3DSurvey( name, survey.Id(), survey.Parent() ) ); // pid = parent_id
     }
 
     ArrayList< LoxStation > lox_stations = lox.GetStations();
@@ -81,11 +82,11 @@ public class ParserLox extends TglParser
 
     int cnt = 0;
     for ( LoxStation st : lox_stations ) {
-      Cave3DSurvey survey = getSurvey( st.sid );
-      String name = (survey != null)? st.name + "@" + survey.getName() : st.name;
+      Cave3DSurvey survey = getSurvey( st.Survey() );
+      String name = (survey != null)? st.Name() + "@" + survey.getName() : st.Name();
       // String name = null;
       // for ( LoxSurvey s : lox_surveys ) if ( s.id == st.sid ) { name = s.name; break; } // no need to get the survey name
-      Cave3DStation station = new Cave3DStation( name, st.x, st.y, st.z, st.id, st.sid, st.flag, st.comment );
+      Cave3DStation station = new Cave3DStation( name, st.x, st.y, st.z, st.Id(), st.Survey(), st.Flag(), st.Comment() );
       // Log.v("TopoGL", "station " + st.name + " " + st.x + " " + st.y + " " + st.z );
       stations.add( station );
       // Cave3DSurvey survey = getSurvey( st.sid );
@@ -111,26 +112,26 @@ public class ParserLox extends TglParser
     }
 
     for ( LoxShot sh : lox_shots ) {
-      Cave3DStation f = getStation( sh.from );
-      Cave3DStation t = getStation( sh.to );
+      Cave3DStation f = getStation( sh.From() );
+      Cave3DStation t = getStation( sh.To() );
       if ( f != null && t != null ) {
         double de = t.x - f.x;
         double dn = t.y - f.y;
         double dz = t.z - f.z;
         double len = Math.sqrt( de*de + dn*dn + dz*dz );
-        double ber = Math.atan2( de, dn ) * RAD2DEG;
+        double ber = Math.atan2( de, dn ) * TDMath.RAD2DEG;
         if ( ber < 0 ) ber += 360;
         double dh = Math.sqrt( de*de + dn*dn );
-        double cln = Math.atan2( dz, dh ) * RAD2DEG;
-        Cave3DShot shot = new Cave3DShot( f.getFullName(), t.getFullName(), len, ber, cln, sh.flag, 0 );
+        double cln = Math.atan2( dz, dh ) * TDMath.RAD2DEG;
+        Cave3DShot shot = new Cave3DShot( f.getFullName(), t.getFullName(), len, ber, cln, sh.Flag(), 0 );
         // Log.v("TopoGL", "shot " + f.name + " " + t.name + " : " + len + " " + ber + " " + cln );
         shot.from_station = f;
         shot.to_station   = t;
         shot.setUsed();
         mCaveLength += len;
 
-        Cave3DSurvey survey = getSurvey( sh.sid );
-        if ( (sh.flag & LoxShot.FLAG_SPLAY) != 0 ) {
+        Cave3DSurvey survey = getSurvey( sh.Survey() );
+        if ( (sh.Flag() & LoxShot.FLAG_SPLAY) != 0 ) {
           if ( mSplayUse > SPLAY_USE_SKIP ) {
             splays.add( shot );
             if ( survey != null ) {

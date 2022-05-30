@@ -300,14 +300,14 @@ public class ParserTh extends TglParser
         double x0=0, y0=0, z0=0; // long-lat E,N,Z
         double x1=0, y1=0, z1=0; // CS1 E,N,Z
 
-        // double alng = fx.mLongitude;
-        double alat = fx.mLatitude;
-        double aalt = fx.mAltitude; // FIXME Therion altitude are geodetic not ellipsoidic
+        // double a_lng = fx.mLongitude;
+        double a_lat = fx.mLatitude;
+        double a_alt = fx.mAltitude; // FIXME Therion altitude are geodetic not ellipsoidic
         // KML radius is already pre-multiplied by PI/180
-        double s_radius = Geodetic.meridianRadiusExact( alat, aalt );
-        double e_radius = Geodetic.parallelRadiusExact( alat, aalt );
+        double s_radius = Geodetic.meridianRadiusExact( a_lat, a_alt );
+        double e_radius = Geodetic.parallelRadiusExact( a_lat, a_alt );
 
-        // TODO use alng alat aalt
+        // TODO use a_lng a_lat a_alt
 
         x0 = fx.mLongitude * e_radius;
         y0 = fx.mLatitude  * s_radius;

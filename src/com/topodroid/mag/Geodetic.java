@@ -15,7 +15,7 @@ package com.topodroid.mag;
 
 public class Geodetic
 {
-  static public  final double EARTH_A  = 6378137.0;          // a - semimajor axis [meter]
+  static public  final double EARTH_A  = 6378137.0;          // a - semi-major axis [meter]
   static public  final double EARTH_B  = 6356752;
   static public  final double EARTH_BA = EARTH_B / EARTH_A; // b/a
   static private final double EARTH_C  = Math.sqrt( EARTH_A * EARTH_A - EARTH_B * EARTH_B );
@@ -36,22 +36,22 @@ public class Geodetic
   // -----------------------------------------------------------------------------------
   /* approximation
 
-  static private final double EARTH_RADIUS1 = (EARTH_A * Math.PI / 180.0); // semimajor axis [m]
+  static private final double EARTH_RADIUS1 = (EARTH_A * Math.PI / 180.0); // semi-major axis [m]
   static private final double EARTH_RADIUS2 = (EARTH_B * Math.PI / 180.0);
 
   // get the meridian radius times PI/180
   static public double meridianRadiusApprox( double latitude )
   {
-    double alat = Math.abs( latitude );
-    return ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
+    double a_lat = Math.abs( latitude );
+    return ((90 - a_lat) * EARTH_RADIUS1 + a_lat * EARTH_RADIUS2)/90;
   }
 
   // get the parallel radius times PI/180 - horizontal X-Y radius
   static public double parallelRadiusApprox( double latitude )
   {
-    double alat = Math.abs( latitude );
-    double s_radius = ((90 - alat) * EARTH_RADIUS1 + alat * EARTH_RADIUS2)/90;
-    return s_radius * Math.cos( alat * Math.PI / 180 );
+    double a_lat = Math.abs( latitude );
+    double s_radius = ((90 - a_lat) * EARTH_RADIUS1 + a_lat * EARTH_RADIUS2)/90;
+    return s_radius * Math.cos( a_lat * Math.PI / 180 );
   }
   */
 
@@ -65,8 +65,8 @@ public class Geodetic
   // @param height     ellipsoidic altitude [m]
   static public double meridianRadiusExact( double latitude, double height )
   {
-    double alat = Math.abs( latitude );
-    double s = Math.sin( alat * Math.PI / 180.0 );
+    double a_lat = Math.abs( latitude );
+    double s = Math.sin( a_lat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     // RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N)
     //double RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W ); // ! W3 meridian radius of curvature (M)
@@ -79,13 +79,13 @@ public class Geodetic
   // @param height     ellipsoidic altitude [m]
   static public double parallelRadiusExact( double latitude, double height )
   {
-    double alat = Math.abs( latitude );
-    double s = Math.sin( alat * Math.PI / 180.0 );
+    double a_lat = Math.abs( latitude );
+    double s = Math.sin( a_lat * Math.PI / 180.0 );
     double W = Math.sqrt( 1 - EARTH_E2 * s * s );
     //double RADIUS_WE = EARTH_A / W; // principal radius of curvature in the prime vertical plane (N) 
-    double RADIUS_WE = (EARTH_A / W) + height; //ellips. alt. 
+    double RADIUS_WE = (EARTH_A / W) + height; // ellipsoid altitude
     // RADIUS_NS = EARTH_A * EARTH_1E2 / ( W * W * W );    
-    return (RADIUS_WE * Math.cos( alat * Math.PI / 180 ) * Math.PI / 180.0);
+    return (RADIUS_WE * Math.cos( a_lat * Math.PI / 180 ) * Math.PI / 180.0);
   }
   
   // UNUSED -----------------------------------------------------------------------------
@@ -125,7 +125,7 @@ public class Geodetic
   private double mZ;
   */
 
-  /** cstr
+  /* cstr
    * @param lat   latitude [deg]
    * @param lng   longitude [deg] 
    * @param h     height (over ellipsoid) [m] 
@@ -147,7 +147,7 @@ public class Geodetic
   }
   */
 
-  /** get geodetic cords of a nearby point
+  /* get geodetic cords of a nearby point
    * @param dn   north displacement [m]
    * @param de   east displacement [m]
    * @param dh   vertical displacement [m]
@@ -166,7 +166,7 @@ public class Geodetic
   }
   */
 
-  /** compute geocentric R value: R = ( N + h ) * cos( lat )
+  /* compute geocentric R value: R = ( N + h ) * cos( lat )
    * @param phi latitude [deg]
    * @param h   height [m]
   public static double geocentricR( double phi, double h ) 
@@ -177,7 +177,7 @@ public class Geodetic
   }
   */
 
-  /** compute geocentric Z value: Z = ( N (1-e^2) + h ) * sin( lat )
+  /* compute geocentric Z value: Z = ( N (1-e^2) + h ) * sin( lat )
    * @param phi latitude [deg]
    * @param h   height [m]
   public static double geocentricZ( double phi, double h ) 
@@ -188,7 +188,7 @@ public class Geodetic
   }
   */
 
-  /** compute the geodetic latitude [degrees]
+  /* compute the geodetic latitude [degrees]
    * @param r    horizontal (X-Y) radius [m]
    * @param z    vertical [m]
   public static double geodeticLat( double r, double z )
@@ -223,7 +223,7 @@ public class Geodetic
   }
   */
  
-  /** compute the geodetic height [m]
+  /* compute the geodetic height [m]
    * @param r    horizontal (X-Y) radius [m]
    * @param z    vertical [m]
    * @param phi  latitude [deg] - must have been obtained using geodeticLat()

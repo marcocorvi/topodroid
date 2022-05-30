@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 // import com.topodroid.TDX.DataDownloader;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TDToast;
 
 import com.topodroid.dev.Device;
 import com.topodroid.dev.DeviceUtil;
@@ -325,7 +326,8 @@ public class DistoXComm extends TopoDroidComm
             try {
               mBTSocket = mBTDevice.createRfcommSocketToServiceRecord( SERVICE_UUID );
             } catch ( SecurityException e ) {
-              TDLog.Error("SECURITY " + e.getMessage() );
+              TDLog.Error("SECURITY RFcomm socket " + e.getMessage() );
+              // TDToast.makeBad("Security error: RFcomm socket");
             }
           } else if ( TDSetting.mSockType == TDSetting.TD_SOCK_INSEC ) {
             // TDLog.Log( TDLog.LOG_COMM, "[5b] createInsecureRfcommSocketToServiceRecord " );
@@ -432,7 +434,8 @@ public class DistoXComm extends TopoDroidComm
             mBTSocket.connect();
             mBTConnected = true;
           } catch ( SecurityException e ) {
-            TDLog.Error("SECURITY " + e.getMessage() );
+            TDLog.Error("SECURITY connect socket " + e.getMessage() );
+            // TDToast.makeBad("Security error: connect socket");
             closeSocket();
           } catch ( IOException e ) {
             // Toast must run on UI Thread

@@ -39,7 +39,7 @@ public class HullComputer implements WallComputer
   public boolean computeHull()
   {
     ArrayList< Cave3DHull > hulls = new ArrayList<>();
-    int kcol = 0;
+    int k_col = 0;
     for ( Cave3DShot sh : shots ) {
       Cave3DStation sf = sh.from_station;
       Cave3DStation st = sh.to_station;
@@ -51,8 +51,8 @@ public class HullComputer implements WallComputer
         ArrayList< Cave3DShot > splays1 = mParser.getSplayAt( sf, false );
         ArrayList< Cave3DShot > splays2 = mParser.getSplayAt( st, false );
         Cave3DHull hull = new Cave3DHull( sh, splays1, splays2, sf, st, af, at );
-        hull.color = colors[ kcol ];
-        kcol = ( kcol + 1) % 6;
+        hull.color = colors[ k_col ];
+        k_col = ( k_col + 1) % 6;
         if ( hull.size()> 0 ) hulls.add( hull );
       }
     }

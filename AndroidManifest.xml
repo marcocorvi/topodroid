@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601005"
-      android:versionName="6.1.5"
+      android:versionCode="601006"
+      android:versionName="6.1.6"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -40,7 +40,7 @@
     -->
     <uses-sdk
        android:minSdkVersion="18"
-       android:targetSdkVersion="29"
+       android:targetSdkVersion="31"
        tools:ignore="GradleOverrides,OldTargetApi"
     />
     <!-- android:maxSdkVersion="29" -->
@@ -54,7 +54,7 @@
     <uses-permission android:name="android.permission.BLUETOOTH_ADMIN" />
     <!-- Android-12 replaces BLUETOOTH and BLUETTOTH_ADMIN with the following two -->
     <uses-permission android:name="android.permission.BLUETOOTH_CONNECT" />
-    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" />
+    <uses-permission android:name="android.permission.BLUETOOTH_SCAN" android:usesPermissionFlags="neverForLocation" />
 
     <!-- Android-12 ignores MANAGE_EXTERNAL_STORAGE: user must grant with adb - nevertheless the uses-permission must be declared -->
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
@@ -70,6 +70,7 @@
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
+
 
     <!-- uses-permission android:name="android.permission.ACCESS_MEDIA_LOCATION" / -->
     <!-- uses-permission android:name="android.permission.DISABLE_KEYGUARD"/ -->

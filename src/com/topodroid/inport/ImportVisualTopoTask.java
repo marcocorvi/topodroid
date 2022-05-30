@@ -14,8 +14,8 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDLog;
 
 import com.topodroid.TDX.SurveyInfo;
-import com.topodroid.TDX.DataHelper;
-import com.topodroid.TDX.TopoDroidApp;
+// import com.topodroid.TDX.DataHelper;
+// import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.MainWindow;
 
 
@@ -62,7 +62,7 @@ public class ImportVisualTopoTask extends ImportTask
 
       sid = mApp.get().setSurveyFromName( parser.mName, SurveyInfo.DATAMODE_NORMAL, false );
 
-      DataHelper app_data = TopoDroidApp.mData;
+      // DataHelper app_data = TopoDroidApp.mData;
       // app_data.updateSurveyDayAndComment( sid, parser.mDate, parser.mTitle );
       // app_data.updateSurveyDeclination( sid, parser.mDeclination );
       // app_data.updateSurveyInitStation( sid, parser.initStation() );

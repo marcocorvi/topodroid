@@ -243,8 +243,8 @@ public class DLNWall
 
     DLNSideList hsp1 = null;
     DLNSideList hsn1 = null;
-    int nhp = -1;
-    int nhn = -1;
+    // int nhp = -1;
+    // int nhn = -1;
     for ( int nh=0; nh < mHull.size(); ++nh ) {
       DLNSideList hs = mHull.get(nh);
       int sng = sign( hs );

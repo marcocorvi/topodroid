@@ -30,14 +30,14 @@ class GeomagLib
    * Though, this subroutine can be called successively to calculate a time series, profile or grid
    * of magnetic field, these are better achieved by the subroutine MAG_Grid.
    */
-  MagElement MAG_Geomag(  MagEllipsoid ellip,
+  MagElement MAG_Geomag(  MagEllipsoid ellipsoid,
                           MagSpherical spherical,
                           MagGeodetic geodetic,
                           MagModel model )
   {
     int nmax = model.nMax;
     // int NumTerms = ((nmax + 1) * (nmax + 2)) / 2; 
-    MagHarmonic sph_vars  = sphericalHarmonicVariables( ellip, spherical, nmax ); // Spherical Harmonic vars
+    MagHarmonic sph_vars  = sphericalHarmonicVariables( ellipsoid, spherical, nmax ); // Spherical Harmonic vars
     MagLegendre legendre  = associatedLegendreFunction( spherical, nmax );        // Compute ALF  
     // legendre.debugLegendre();
 
@@ -54,12 +54,12 @@ class GeomagLib
     MagVector resultSV  = rotateVector( spherical, geodetic, sumSecVarCoeff);  // sec. var. fld comps to Geodetic coords
     // resultSV.debugVector( "result SV" );
 
-    MagElement elems   = calculateGeoMagneticElements( result );             // Geomagnetic elements Eq. 19 , WMM Tech rep
-    calculateSecularVariationElements( resultSV, elems );                     // sec var of each of the Geomagnetic elems
-    return elems;
+    MagElement elements   = calculateGeoMagneticElements( result );             // Geomagnetic elements Eq. 19 , WMM Tech rep
+    calculateSecularVariationElements( resultSV, elements );                     // sec var of each of the Geomagnetic elements
+    return elements;
   }
 
-  void MAG_Gradient( MagEllipsoid ellip,
+  void MAG_Gradient( MagEllipsoid ellipsoid,
                      MagGeodetic geodetic,
                      MagModel model,
                      MagGradient Gradient )
@@ -79,20 +79,20 @@ class GeomagLib
     double hDelta = -1;
   
     //Initialization
-    MagSpherical spherical = ellip.geodeticToSpherical( geodetic );
-    MagElement elems = MAG_Geomag( ellip, spherical, geodetic, model );
+    MagSpherical spherical = ellipsoid.geodeticToSpherical( geodetic );
+    MagElement elements = MAG_Geomag( ellipsoid, spherical, geodetic, model );
     MagGeodetic adjGeodetic = new MagGeodetic( geodetic );
   
     // Gradient along x
     adjGeodetic.phi = geodetic.phi + phiDelta;
   
-    spherical = ellip.geodeticToSpherical( adjGeodetic );
-    MagElement AdjGeoMagneticElements0 = MAG_Geomag( ellip, spherical, adjGeodetic, model );
+    spherical = ellipsoid.geodeticToSpherical( adjGeodetic );
+    MagElement AdjGeoMagneticElements0 = MAG_Geomag( ellipsoid, spherical, adjGeodetic, model );
   
     MagVector X0 = spherical.toCartesian( );
     adjGeodetic.phi = geodetic.phi - phiDelta;
-    spherical = ellip.geodeticToSpherical( adjGeodetic );
-    MagElement AdjGeoMagneticElements1 = MAG_Geomag(ellip, spherical, adjGeodetic, model );
+    spherical = ellipsoid.geodeticToSpherical( adjGeodetic );
+    MagElement AdjGeoMagneticElements1 = MAG_Geomag(ellipsoid, spherical, adjGeodetic, model );
     MagVector X1 = spherical.toCartesian( );
   
     double distance = X0.distance(X1);
@@ -106,20 +106,20 @@ class GeomagLib
     // the longitude lines approach each other, and the calculation that works well
     // for latitude lines becomes unstable when 0.01 degrees represents sufficiently
     // small numbers, and fails to function correctly at all at the North Pole
-    spherical = ellip.geodeticToSpherical( geodetic );
-    Gradient.GradLambda = MAG_GradY(ellip, spherical, geodetic, model, elems );
+    spherical = ellipsoid.geodeticToSpherical( geodetic );
+    Gradient.GradLambda = MAG_GradY(ellipsoid, spherical, geodetic, model, elements );
     
     // Gradient along z
     adjGeodetic.HeightAboveEllipsoid = geodetic.HeightAboveEllipsoid + hDelta;
     adjGeodetic.HeightAboveGeoid     = geodetic.HeightAboveGeoid + hDelta;
-    spherical = ellip.geodeticToSpherical( adjGeodetic );
+    spherical = ellipsoid.geodeticToSpherical( adjGeodetic );
   
-    AdjGeoMagneticElements0 = MAG_Geomag( ellip, spherical, adjGeodetic, model );
+    AdjGeoMagneticElements0 = MAG_Geomag( ellipsoid, spherical, adjGeodetic, model );
     X0 = spherical.toCartesian( );
     adjGeodetic.HeightAboveEllipsoid = geodetic.HeightAboveEllipsoid - hDelta;
     adjGeodetic.HeightAboveGeoid = geodetic.HeightAboveGeoid - hDelta;
-    spherical = ellip.geodeticToSpherical( adjGeodetic );
-    AdjGeoMagneticElements1 = MAG_Geomag( ellip, spherical, adjGeodetic, model );
+    spherical = ellipsoid.geodeticToSpherical( adjGeodetic );
+    AdjGeoMagneticElements1 = MAG_Geomag( ellipsoid, spherical, adjGeodetic, model );
     X1 = spherical.toCartesian( );
   
     distance = X0.distance( X1 );
@@ -128,11 +128,11 @@ class GeomagLib
     // adjGeodetic = new MagGeodetic(geodetic);
   }
 
-  MagErrors MAG_BaseErrors(double DeclCoef, double DeclBaseline, double InclOffset, double FOffset,
+  MagErrors MAG_BaseErrors(double DeclCoeff, double DeclBaseline, double InclOffset, double FOffset,
                           double Multiplier, double H )
   {
     double declHorizontalAdjustmentSq;
-    declHorizontalAdjustmentSq = (DeclCoef/H) * (DeclCoef/H);
+    declHorizontalAdjustmentSq = (DeclCoeff/H) * (DeclCoeff/H);
     return new MagErrors( 
       Math.sqrt(declHorizontalAdjustmentSq + DeclBaseline*DeclBaseline) * Multiplier,
       InclOffset*Multiplier,
@@ -141,15 +141,15 @@ class GeomagLib
 
   private MagElement calculateGeoMagneticElements(MagVector result )
   {
-    MagElement elems = new MagElement( );
-    elems.X = result.x;
-    elems.Y = result.y;
-    elems.Z = result.z;
-    elems.H = Math.sqrt(result.x * result.x + result.y * result.y); // horiz magnetic field strength
-    elems.F = Math.sqrt(elems.H * elems.H + result.z * result.z); // magnetic field strength
-    elems.Decl = TDMath.RAD2DEG*( Math.atan2(elems.Y, elems.X) ); // angle magnetic field and North (pos. east)
-    elems.Incl = TDMath.RAD2DEG*( Math.atan2(elems.Z, elems.H) ); // angle magnetic field and horiz plan (pos. down)
-    return elems;
+    MagElement elements = new MagElement( );
+    elements.X = result.x;
+    elements.Y = result.y;
+    elements.Z = result.z;
+    elements.H = Math.sqrt(result.x * result.x + result.y * result.y); // horiz magnetic field strength
+    elements.F = Math.sqrt(elements.H * elements.H + result.z * result.z); // magnetic field strength
+    elements.Decl = TDMath.RAD2DEG*( Math.atan2(elements.Y, elements.X) ); // angle magnetic field and North (pos. east)
+    elements.Incl = TDMath.RAD2DEG*( Math.atan2(elements.Z, elements.H) ); // angle magnetic field and horiz plan (pos. down)
+    return elements;
   } /*MAG_CalculateGeoMagneticElements */
 
   /** Computes the grid variation for |latitudes| > MAG_MAX_LAT_DEGREE
@@ -176,16 +176,16 @@ class GeomagLib
     }
   } 
 
-  private MagElement calculateGradientElements( MagVector grad, MagElement elems )
+  private MagElement calculateGradientElements( MagVector grad, MagElement elements )
   {
-    MagElement ret = new MagElement( elems ); // FIXME copy elems
+    MagElement ret = new MagElement( elements ); // FIXME copy elements
     ret.X = grad.x;
     ret.Y = grad.y;
     ret.Z = grad.z;
-    ret.H = (ret.X * elems.X + ret.Y * elems.Y) / elems.H;
-    ret.F = (ret.X * elems.X + ret.Y * elems.Y + ret.Z * elems.Z) / elems.F;
-    ret.Decl = TDMath.RAD2DEG * (elems.X * ret.Y - elems.Y * ret.X) / (elems.H * elems.H);
-    ret.Incl = TDMath.RAD2DEG * (elems.H * ret.Z - elems.Z * ret.H) / (elems.F * elems.F);
+    ret.H = (ret.X * elements.X + ret.Y * elements.Y) / elements.H;
+    ret.F = (ret.X * elements.X + ret.Y * elements.Y + ret.Z * elements.Z) / elements.F;
+    ret.Decl = TDMath.RAD2DEG * (elements.X * ret.Y - elements.Y * ret.X) / (elements.H * elements.H);
+    ret.Incl = TDMath.RAD2DEG * (elements.H * ret.Z - elements.Z * ret.H) / (elements.F * elements.F);
     ret.GV = ret.Decl;
     return ret;
   }
@@ -193,16 +193,16 @@ class GeomagLib
   /** This takes the Magnetic Variation in x, y, and z and uses it to calculate the secular variation
    *  of each of the Geomagnetic elements.
    */
-  private void calculateSecularVariationElements( MagVector var, MagElement elems )
+  private void calculateSecularVariationElements( MagVector var, MagElement elements )
   {
-    elems.Xdot = var.x;
-    elems.Ydot = var.y;
-    elems.Zdot = var.z;
-    elems.Hdot = (elems.X * elems.Xdot + elems.Y * elems.Ydot) / elems.H; /* See equation 19 in the WMM technical report */
-    elems.Fdot = (elems.X * elems.Xdot + elems.Y * elems.Ydot + elems.Z * elems.Zdot) / elems.F;
-    elems.Decldot = TDMath.RAD2DEG * (elems.X * elems.Ydot - elems.Y * elems.Xdot) / (elems.H * elems.H);
-    elems.Incldot = TDMath.RAD2DEG * (elems.H * elems.Zdot - elems.Z * elems.Hdot) / (elems.F * elems.F);
-    elems.GVdot = elems.Decldot;
+    elements.Xdot = var.x;
+    elements.Ydot = var.y;
+    elements.Zdot = var.z;
+    elements.Hdot = (elements.X * elements.Xdot + elements.Y * elements.Ydot) / elements.H; /* See equation 19 in the WMM technical report */
+    elements.Fdot = (elements.X * elements.Xdot + elements.Y * elements.Ydot + elements.Z * elements.Zdot) / elements.F;
+    elements.Decldot = TDMath.RAD2DEG * (elements.X * elements.Ydot - elements.Y * elements.Xdot) / (elements.H * elements.H);
+    elements.Incldot = TDMath.RAD2DEG * (elements.H * elements.Zdot - elements.Z * elements.Hdot) / (elements.F * elements.F);
+    elements.GVdot = elements.Decldot;
   } /*MAG_CalculateSecularVariationElements*/
 
   MagElement MAG_ErrorCalc(MagElement B )
@@ -243,10 +243,10 @@ class GeomagLib
 
     /* WGS84 ellipsoid */
     double Eps    = 0.081819190842621494335;
-    double Epssq  = 0.0066943799901413169961;
+    double Eps_sq = 0.0066943799901413169961;
     double K0R4   = 6367449.1458234153093;
     double K0R4oa = 0.99832429843125277950;
-    double[] Acoeff = {
+    double[] A_coeff = {
       8.37731820624469723600E-04,
       7.60852777357248641400E-07,
       1.19764550324249124400E-09,
@@ -258,8 +258,8 @@ class GeomagLib
     };
 
     /*   Execution of the forward T.M. algorithm  */
-    // boolean XYonly = false;
-    return MAG_TMfwd4(Eps, Epssq, K0R4, K0R4oa, Acoeff, utm0, K0, falseE, falseN, false, Lambda, Phi );
+    // boolean XY_only = false;
+    return MAG_TMfwd4(Eps, Eps_sq, K0R4, K0R4oa, A_coeff, utm0, K0, falseE, falseN, false, Lambda, Phi );
   }
 
   /** The function MAG_GetUTMParameters converts geodetic (latitude and
@@ -269,7 +269,7 @@ class GeomagLib
    *    Latitude          : Latitude in radians                 (input)
    *    Longitude         : Longitude in radians                (input)
    *    Zone              : UTM zone                            (output)
-   *    HemiSphere        : North or South hemisphere           (output)
+   *    Hemi-Sphere       : North or South hemisphere           (output)
    *    CentralMeridian	: Central Meridian of the UTM Zone in radians	   (output)
    */
   private MagUTMParams  MAG_GetUTMParameters(double Latitude, double Longitude )
@@ -328,18 +328,18 @@ class GeomagLib
    *   C software written by:  K. Robins
    * Constants fixed by choice of ellipsoid and choice of projection parameters
    *     Eps          Eccentricity (epsilon) of the ellipsoid
-   *     Epssq        Eccentricity squared
-   *   ( R4           Meridional isoperimetric radius   )
+   *     Eps_sq       Eccentricity squared
+   *   ( R4           Meridional iso-perimeter radius   )
    *   ( K0           Central scale factor              )
    *     K0R4         K0 times R4
    *     K0R4oa       K0 times Ratio of R4 over semi-major axis
-   *     Acoeff       Trig series coefficients, omega as a function of chi
+   *     A_coeff      Trig series coefficients, omega as a function of chi
    *     Lam0         Longitude of the central meridian in radians
    *     K0           Central scale factor, for example, 0.9996 for UTM
    *     falseE       False easting, for example, 500000 for UTM
    *     falseN       False northing
    * Processing option
-   *       XYonly     If one (1), then only X and Y will be properly computed.
+   *       XY_only    If one (1), then only X and Y will be properly computed.
    *                  Values returned for point-scale and CoM will merely be the
    *     	     trivial values for points on the central meridian
    * Input items that identify the point to be converted
@@ -348,12 +348,12 @@ class GeomagLib
    * Output items
    *       X            X coordinate (Easting) in meters
    *       Y            Y coordinate (Northing) in meters
-   *       pscale       point-scale (dimensionless)
+   *       p_scale      point-scale (dimensionless)
    *       CoM          Convergence-of-meridians in radians
    */
-  private MagUTMParams MAG_TMfwd4(double Eps, double Epssq, double K0R4, double K0R4oa,
-        double[] Acoeff, MagUTMParams utm0, double K0, double falseE,
-        double falseN, boolean XYonly, double Lambda, double Phi )
+  private MagUTMParams MAG_TMfwd4(double Eps, double Eps_sq, double K0R4, double K0R4oa,
+        double[] A_coeff, MagUTMParams utm0, double K0, double falseE,
+        double falseN, boolean XY_only, double Lambda, double Phi )
   {
     /* Ellipsoid to sphere
        Convert longitude (Greenwhich) to longitude from the central meridian
@@ -371,9 +371,9 @@ class GeomagLib
     double P = Math.exp(Eps * MagUtil.ATanH(Eps * SPhi));
     double part1 = (1 + SPhi) / P;
     double part2 = (1 - SPhi) * P;
-    double denom = 1 / (part1 + part2);
-    double CChi = 2 * CPhi * denom;
-    double SChi = (part1 - part2) * denom;
+    double denom_1 = 1 / (part1 + part2);
+    double CChi = 2 * CPhi * denom_1;
+    double SChi = (part1 - part2) * denom_1;
 
     /* Sphere to first plane
        Apply spherical theory of transverse Mercator to get (u,v) coordinates
@@ -392,11 +392,11 @@ class GeomagLib
        Compute Sin  of even multiples of V
      */
     double Tsq = T * T;
-    double denom2 = 1 / (1 - Tsq);
-    double c2u = (1 + Tsq) * denom2;
-    double s2u = 2 * T * denom2;
-    double c2v = (-1 + CChi * CChi * (1 + CLam * CLam)) * denom2;
-    double s2v = 2 * CLam * CChi * SChi * denom2;
+    double denom_2 = 1 / (1 - Tsq);
+    double c2u = (1 + Tsq) * denom_2;
+    double s2u = 2 * T * denom_2;
+    double c2v = (-1 + CChi * CChi * (1 + CLam * CLam)) * denom_2;
+    double s2v = 2 * CLam * CChi * SChi * denom_2;
 
     double c4u = 1 + 2 * s2u * s2u;
     double s4u = 2 * c2u * s2u;
@@ -416,46 +416,46 @@ class GeomagLib
     /*   First plane to second plane
          Accumulate terms for X and Y
      */
-    double Xstar = Acoeff[3] * s8u * c8v;
-    Xstar = Xstar + Acoeff[2] * s6u * c6v;
-    Xstar = Xstar + Acoeff[1] * s4u * c4v;
-    Xstar = Xstar + Acoeff[0] * s2u * c2v;
-    Xstar = Xstar + U;
+    double X_star = A_coeff[3] * s8u * c8v;
+    X_star = X_star + A_coeff[2] * s6u * c6v;
+    X_star = X_star + A_coeff[1] * s4u * c4v;
+    X_star = X_star + A_coeff[0] * s2u * c2v;
+    X_star = X_star + U;
 
-    double Ystar = Acoeff[3] * c8u * s8v;
-    Ystar = Ystar + Acoeff[2] * c6u * s6v;
-    Ystar = Ystar + Acoeff[1] * c4u * s4v;
-    Ystar = Ystar + Acoeff[0] * c2u * s2v;
-    Ystar = Ystar + V;
+    double Y_star = A_coeff[3] * c8u * s8v;
+    Y_star = Y_star + A_coeff[2] * c6u * s6v;
+    Y_star = Y_star + A_coeff[1] * c4u * s4v;
+    Y_star = Y_star + A_coeff[0] * c2u * s2v;
+    Y_star = Y_star + V;
 
     MagUTMParams utm = new MagUTMParams();
     utm.Zone            = utm0.Zone; /*UTM Zone*/
     utm.HemiSphere      = utm0.HemiSphere;
     utm.CentralMeridian = utm0.CentralMeridian; /* Central Meridian of the UTM Zone */
 
-    /*   Apply isoperimetric radius, scale adjustment, and offsets  */
-    utm.Easting  = K0R4 * Xstar + falseE; // UTM Easting (X) in meters 
-    utm.Northing = K0R4 * Ystar + falseN; // UTM Northing (Y) in meters
+    /*   Apply iso-perimeter radius, scale adjustment, and offsets  */
+    utm.Easting  = K0R4 * X_star + falseE; // UTM Easting (X) in meters
+    utm.Northing = K0R4 * Y_star + falseN; // UTM Northing (Y) in meters
 
     /*  Point-scale and CoM */
-    if ( XYonly ) {
+    if ( XY_only ) {
       utm.PointScale = K0;
       utm.ConvergenceOfMeridians = 0; /* Convergence of meridians of the UTM Zone and location */
     } else {
-      double sig1 = 8 * Acoeff[3] * c8u * c8v;
-      sig1 = sig1 + 6 * Acoeff[2] * c6u * c6v;
-      sig1 = sig1 + 4 * Acoeff[1] * c4u * c4v;
-      sig1 = sig1 + 2 * Acoeff[0] * c2u * c2v;
+      double sig1 = 8 * A_coeff[3] * c8u * c8v;
+      sig1 = sig1 + 6 * A_coeff[2] * c6u * c6v;
+      sig1 = sig1 + 4 * A_coeff[1] * c4u * c4v;
+      sig1 = sig1 + 2 * A_coeff[0] * c2u * c2v;
       sig1 = sig1 + 1;
 
-      double sig2 = 8 * Acoeff[3] * s8u * s8v;
-      sig2 = sig2 + 6 * Acoeff[2] * s6u * s6v;
-      sig2 = sig2 + 4 * Acoeff[1] * s4u * s4v;
-      sig2 = sig2 + 2 * Acoeff[0] * s2u * s2v;
+      double sig2 = 8 * A_coeff[3] * s8u * s8v;
+      sig2 = sig2 + 6 * A_coeff[2] * s6u * s6v;
+      sig2 = sig2 + 4 * A_coeff[1] * s4u * s4v;
+      sig2 = sig2 + 2 * A_coeff[0] * s2u * s2v;
 
       /*    Combined square roots  */
-      double comroo = Math.sqrt((1 - Epssq * SPhi * SPhi) * denom2 * (sig1 * sig1 + sig2 * sig2));
-      utm.PointScale = K0R4oa * 2 * denom * comroo;
+      double com_roo = Math.sqrt((1 - Eps_sq * SPhi * SPhi) * denom_2 * (sig1 * sig1 + sig2 * sig2));
+      utm.PointScale = K0R4oa * 2 * denom_1 * com_roo;
       utm.ConvergenceOfMeridians = TDMath.RAD2DEG * ( Math.atan2(SChi * SLam, CLam) + Math.atan2(sig2, sig1) );
     }
     return utm;
@@ -468,10 +468,10 @@ class GeomagLib
                                   double lambda; ( longitude)
                                   double phig;   ( geocentric latitude )
                                   double r;  	 ( distance from the center of the ellipsoid)
-             nMax        	integer 	 ( Maxumum degree of spherical harmonic secular model)
+             nMax        	integer 	 ( Maximum degree of spherical harmonic secular model)
    * OUTPUT  legendre data structure with the following elements
                                   double[] Pcup;  ( store Legendre Function  )
-                                  double[] dPcup; ( store  Derivative of Lagendre function )
+                                  double[] dPcup; ( store  Derivative of Legendre function )
    */
   private MagLegendre associatedLegendreFunction(MagSpherical spherical, int nMax )
   {
@@ -496,10 +496,10 @@ class GeomagLib
   } 
 
   /** Computes Spherical variables
-   *  Variables computed are (a/r)^(n+2), cos_m(lamda) and sin_m(lambda) for spherical harmonic
+   *  Variables computed are (a/r)^(n+2), cos_m(lambda) and sin_m(lambda) for spherical harmonic
    *  summations. (Equations 10-12 in the WMM Technical Report)
    */
-  private MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellip, MagSpherical spherical, int nMax )
+  private MagHarmonic sphericalHarmonicVariables( MagEllipsoid ellipsoid, MagSpherical spherical, int nMax )
   {
     // TDLog.v( "N " + nMax + " " + spherical.r + " " + spherical.lambda + " " + spherical.phig );
     MagHarmonic vars = new MagHarmonic( nMax );
@@ -507,9 +507,9 @@ class GeomagLib
     double sin_lambda = Math.sin(TDMath.DEG2RAD * spherical.lambda);
     /* for n = 0 ... model_order, compute (Radius of Earth / Spherical radius r)^(n+2)
        for n  1..nMax-1 (this is much faster than calling pow MAX_N+1 times).      */
-    vars.RelativeRadiusPower[0] = (ellip.re / spherical.r) * (ellip.re / spherical.r);
+    vars.RelativeRadiusPower[0] = (ellipsoid.re / spherical.r) * (ellipsoid.re / spherical.r);
     for ( int n = 1; n <= nMax; n++) {
-      vars.RelativeRadiusPower[n] = vars.RelativeRadiusPower[n - 1] * (ellip.re / spherical.r);
+      vars.RelativeRadiusPower[n] = vars.RelativeRadiusPower[n - 1] * (ellipsoid.re / spherical.r);
     }
     /* Compute cos(m*lambda), sin(m*lambda) for m = 0 ... nMax
            cos(a + b) = cos(a)*cos(b) - sin(a)*sin(b)
@@ -527,19 +527,19 @@ class GeomagLib
     return vars;
   }
 
-  private MagElement MAG_GradY( MagEllipsoid ellip,
+  private MagElement MAG_GradY( MagEllipsoid ellipsoid,
                   MagSpherical spherical,
                   MagGeodetic geodetic,
                   MagModel model,
-                  MagElement elems )
+                  MagElement elements )
   {
     int nmax = model.nMax;
     // int NumTerms = ((nmax + 1) * (nmax + 2)) / 2; 
-    MagHarmonic sph_vars = sphericalHarmonicVariables(ellip, spherical, nmax ); // Spherical Harmonic variables
+    MagHarmonic sph_vars = sphericalHarmonicVariables(ellipsoid, spherical, nmax ); // Spherical Harmonic variables
     MagLegendre legendre = associatedLegendreFunction(spherical, nmax ); // Compute ALF
     MagVector gradYSph = gradYSummation(legendre, model, sph_vars, spherical ); // Accumulate sph. harm. coeffs
-    MagVector gradYgeo = rotateVector(spherical, geodetic, gradYSph ); // computed Magn. fld to Geodetic coords
-    MagElement gradYelems = calculateGradientElements(gradYgeo, elems); // Geomagn. elems Equation 18 , WMM Tech rep
+    MagVector gradYgeo = rotateVector(spherical, geodetic, gradYSph ); // computed Magnetic field to Geodetic coords
+    MagElement gradYelems = calculateGradientElements(gradYgeo, elements); // Geomagnetic elements Equation 18 , WMM Tech rep
     return gradYelems;
   }
 
@@ -593,13 +593,13 @@ class GeomagLib
    * Manoj Nair, Nov, 2009 Manoj.C.Nair@Noaa.Gov
    *
    * Change from the previous version
-   * The prevous version computes the derivatives as
-   * dP(n,m)(x)/dx, where x = sin(latitude) (or cos(colatitude) ).
+   * The previous version computes the derivatives as
+   * dP(n,m)(x)/dx, where x = sin(latitude) (or cos(co-latitude) ).
    * However, the WMM Geomagnetic routines requires dP(n,m)(x)/dlatitude.
    * Hence the derivatives are multiplied by sin(latitude).
    * Removed the options for CS phase and normalizations.
    *
-   * Note: In geomagnetism, the derivatives of ALF are usually found with respect to the colatitudes.
+   * Note: In geomagnetism, the derivatives of ALF are usually found with respect to the co-latitudes.
    * Here the derivatives are found with respect * to the latitude. The difference is a sign reversal
    * for the derivative of the Associated Legendre Functions.
    *
@@ -617,7 +617,7 @@ class GeomagLib
     double[] f1 = new double[ NumTerms + 1 ];
     double[] PreSqr = new double[ NumTerms + 1 ];
     double[] f2 = new double[ NumTerms + 1 ];
-    double scalef = 1.0e-280;
+    double scale_f = 1.0e-280;
 
     for ( int n = 0; n <= 2 * nMax + 1; ++n) PreSqr[n] = Math.sqrt((double) (n));
 
@@ -656,47 +656,47 @@ class GeomagLib
       pm1 = plm;
     }
 
-    double pmm = PreSqr[2] * scalef;
-    double rescalem = 1.0 / scalef;
-    int kstart = 0;
+    double pmm = PreSqr[2] * scale_f;
+    double rescale_m = 1.0 / scale_f;
+    int k_start = 0;
 
     for ( int m = 1; m <= nMax - 1; ++m) {
-      rescalem = rescalem * z;
+      rescale_m = rescale_m * z;
       // Calculate Pcup(m,m)
-      kstart = kstart + m + 1;
+      k_start = k_start + m + 1;
       pmm = pmm * PreSqr[2 * m + 1] / PreSqr[2 * m];
-      legendre.Pcup[kstart] = pmm * rescalem / PreSqr[2 * m + 1];
-      legendre.dPcup[kstart] = -((double) (m) * x * legendre.Pcup[kstart] / z);
+      legendre.Pcup[k_start] = pmm * rescale_m / PreSqr[2 * m + 1];
+      legendre.dPcup[k_start] = -((double) (m) * x * legendre.Pcup[k_start] / z);
       pm2 = pmm / PreSqr[2 * m + 1];
       // Calculate Pcup(m+1,m)
-      k = kstart + m + 1;
+      k = k_start + m + 1;
       pm1 = x * PreSqr[2 * m + 1] * pm2;
-      legendre.Pcup[k] = pm1*rescalem;
-      legendre.dPcup[k] = ((pm2 * rescalem) * PreSqr[2 * m + 1] - x * (m + 1) * legendre.Pcup[k]) / z;
+      legendre.Pcup[k] = pm1*rescale_m;
+      legendre.dPcup[k] = ((pm2 * rescale_m) * PreSqr[2 * m + 1] - x * (m + 1) * legendre.Pcup[k]) / z;
       // Calculate Pcup(n,m)
       for ( int n = m + 2; n <= nMax; ++n) {
         k = k + n;
         double plm = x * f1[k] * pm1 - f2[k] * pm2;
-        legendre.Pcup[k] = plm*rescalem;
-        legendre.dPcup[k] = (PreSqr[n + m] * PreSqr[n - m] * (pm1 * rescalem) - n * x * legendre.Pcup[k]) / z;
+        legendre.Pcup[k] = plm*rescale_m;
+        legendre.dPcup[k] = (PreSqr[n + m] * PreSqr[n - m] * (pm1 * rescale_m) - n * x * legendre.Pcup[k]) / z;
         pm2 = pm1;
         pm1 = plm;
       }
     }
 
     // Calculate Pcup(nMax,nMax) // m == nMax
-    rescalem = rescalem*z;
-    kstart = kstart + nMax + 1; 
+    rescale_m = rescale_m*z;
+    k_start = k_start + nMax + 1;
     pmm = pmm / PreSqr[2 * nMax];
-    legendre.Pcup[kstart] = pmm * rescalem;
-    legendre.dPcup[kstart] = - nMax * x * legendre.Pcup[kstart] / z;
+    legendre.Pcup[k_start] = pmm * rescale_m;
+    legendre.dPcup[k_start] = - nMax * x * legendre.Pcup[k_start] / z;
     return legendre;
   }
 
   /** This function evaluates all of the Schmidt-semi normalized associated Legendre functions up to degree nMax.
    * Notes: Overflow may occur if nMax > 20 , especially for high-latitudes.  Use MAG_PcupHigh for large nMax.
    * Note: In geomagnetism, the derivatives of ALF are usually found with
-   * respect to the colatitudes. Here the derivatives are found with respect
+   * respect to the co-latitudes. Here the derivatives are found with respect
    * to the latitude. The difference is a sign reversal for the derivative of
    * the Associated Legendre Functions.
    */
@@ -712,7 +712,7 @@ class GeomagLib
     double z = Math.sqrt((1.0 - x) * (1.0 + x));
     double[] schmidtQuasiNorm = new double[ NumTerms + 1 ];
 
-    //First,	Compute the Gauss-normalized associated Legendre WMMcoeff.index(n-1,m); // functions
+    //First,	Compute the Gauss-normalized associated Legendre WMM-coeff.index(n-1,m); // functions
     for ( int n = 1; n <= nMax; n++) {
       for ( int m = 0; m <= n; m++) {
         int index = WMMcoeff.index(n,m); // n * (n + 1) / 2 + m;
@@ -765,7 +765,7 @@ class GeomagLib
         int index = WMMcoeff.index(n,m); // (n * (n + 1)) / 2 + m;
         legendre.Pcup[index]  =   legendre.Pcup[index] * schmidtQuasiNorm[index];
         legendre.dPcup[index] = - legendre.dPcup[index] * schmidtQuasiNorm[index];
-        // The sign is changed since the new WMM routines use derivative with respect to latitude insted of co-latitude 
+        // The sign is changed since the new WMM routines use derivative with respect to latitude instead of co-latitude
       }
     }
     // legendre.debugLegendre();

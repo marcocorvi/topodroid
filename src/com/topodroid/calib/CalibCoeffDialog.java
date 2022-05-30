@@ -47,7 +47,7 @@ public class CalibCoeffDialog extends MyDialog
   private Bitmap mBitmap = null;
 
   private Button mButtonWrite;
-  private Button mButtonBack;
+  // private Button mButtonBack;
 
   private final String bg0;
   private final String agx;
@@ -102,6 +102,15 @@ public class CalibCoeffDialog extends MyDialog
     // mSaturated = saturated;
   }
 
+  /** create a bitmap with the histogram of the errors
+   * @param error  errors
+   * @param width  bitmap width
+   * @param height bitmap height
+   * @param bin    histogram bin
+   * @param step   histogram step (?)
+   * @param col    ???
+   * @return histogram bitmap
+   */
   static Bitmap makeHistogramBitmap( float[] error, int width, int height, int bin, int step, int col )
   {
     Bitmap bitmap = Bitmap.createBitmap( width+20, height+20, Bitmap.Config.ARGB_8888 );
@@ -196,8 +205,8 @@ public class CalibCoeffDialog extends MyDialog
     TextView textMaxError = (TextView) findViewById(R.id.coeff_max_error);
     TextView textIter     = (TextView) findViewById(R.id.coeff_iter);
     mButtonWrite  = (Button) findViewById( R.id.button_coeff_write );
-    mButtonBack  = (Button) findViewById( R.id.button_coeff_back );
-    mButtonBack.setOnClickListener( this );
+    Button button_back  = (Button) findViewById( R.id.button_coeff_back );
+    button_back.setOnClickListener( this );
 
     textBG.setText( bg0 );
     textAGx.setText( agx );

@@ -86,8 +86,8 @@ public class DrawingTunnel extends DrawingSvgBase
     ymin -= dy;  ymax += dy;
     float xoff = 0; // xmin; // offset
     float yoff = 0; // ymin;
-    int width = (int)((xmax - xmin));
-    int height = (int)((ymax - ymin));
+    // int width = (int)((xmax - xmin));
+    // int height = (int)((ymax - ymin));
 
 
     int nr = 0;
@@ -115,7 +115,7 @@ public class DrawingTunnel extends DrawingSvgBase
           for ( DrawingPath sh : plot.getLegs() ) { // LEGS
             DBlock blk = sh.mBlock;
             if ( blk == null ) continue;
-            // if ( blk.mFrom.length() == 0 || blk.mTo.lnegth() == 0 ) continue;
+            // if ( blk.mFrom.length() == 0 || blk.mTo.length() == 0 ) continue;
             String from = blk.mFrom; // .replaceAll(".", "_");
             String to   = blk.mTo; // .replaceAll(".", "_");
             NumStation f = num.getStation( blk.mFrom );
@@ -271,7 +271,7 @@ public class DrawingTunnel extends DrawingSvgBase
 	// }
 
         // stations
-        // TDLog.v( "SVG statioons " + plot.getStations().size() );
+        // TDLog.v( "SVG stations " + plot.getStations().size() );
         // StringWriter sw6 = new StringWriter();
         // PrintWriter pw6  = new PrintWriter(sw6);
         // if ( TDSetting.mAutoStations ) {

@@ -42,6 +42,8 @@ import com.topodroid.inport.ImportZipTask;
 // import com.topodroid.inport.ImportDatDialog;
 // import com.topodroid.inport.ImportTroDialog;
 
+import com.topodroid.TDX.TDToast;
+
 import com.topodroid.mag.WorldMagneticModel;
 
 // import java.io.File;
@@ -1034,7 +1036,8 @@ public class MainWindow extends Activity
               Intent enableIntent = new Intent(DeviceUtil.ACTION_REQUEST_ENABLE);
               startActivityForResult(enableIntent, TDRequest.REQUEST_ENABLE_BT);
             } catch ( SecurityException e ) {
-              TDLog.Error("SECURITY error " + e.getMessage() );
+              // TDLog.Error("SECURITY request bluetooth " + e.getMessage() );
+              TDToast.makeBad("Security error: request bluetooth");
             }
           } else {
             TDToast.makeBad( R.string.no_bt );
@@ -1362,7 +1365,7 @@ public class MainWindow extends Activity
 	}
         ++ mRequestPermissionTime;
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
-        // TDLog.v("PERM " + "MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
+        TDLog.v("PERM " + "MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
         if ( ! TDandroid.canRun( mApp, this ) ) { // if ( not_granted > 0 /* && ! say_dialogR */ )
           TDToast.makeLong( "Permissions not granted. Goodbye" );
           if ( mRequestPermissionTime > 2 ) { 

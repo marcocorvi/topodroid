@@ -89,9 +89,9 @@ public class DrawingSvgWalls extends DrawingSvgBase
   public void writeSvg( String filename, BufferedWriter out, TDNum num, DrawingCommandManager plot, long type )
   {
     // TDLog.v("SvgWalls write " + filename + " type " + type );
-    String wall_group = BrushManager.getLineWallGroup( );
+    // String wall_group = BrushManager.getLineWallGroup( );
 
-    int handle = 0;
+    // int handle = 0;
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
     float xmax = bbox.right;
@@ -168,7 +168,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
       for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
         SymbolPoint pt = (SymbolPoint) BrushManager.getPointByIndex(n);
         if (pt != null) {
-          int block = 1 + n; // block_name = 1 + therion_code
+          // int block = 1 + n; // block_name = 1 + therion_code
           out.write("    <marker id=\"" + pt.getThName() + "\">\n");
           out.write("      " + pt.getSvg().replace("path", "path inkscape:connector-curvature=\"0\"") + "\n");
           out.write("    </marker>\n");
@@ -183,7 +183,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
 
       // out.write( "<g id=\"canvas\" transform=\"translate(" + (int)(-xmin) + "," + (int)(-ymin) + ")\" >\n" );
 
-      out.write( group_bgrnd ); out.write( group_mode_close ); 
+      out.write( group_bg ); out.write( group_mode_close );
       out.write( group_ref );   out.write( group_mode_close ); 
 
       // COMPASS TRACING
@@ -415,7 +415,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
 
   private static final String svg_options = " overflow=\"hidden\" version=\"1.1\" id=\"svg44\" style=\"display:inline;overflow:hidden\" >\n";
 
-  private static final String group_bgrnd   = "    <g id=\"w2d_Background\" ";
+  private static final String group_bg      = "    <g id=\"w2d_Background\" ";
   private static final String group_ref     = "    <g id=\"w2d_Ref\" ";
   private static final String group_tracing = "    <g id=\"cmp_tracing\" ";
   private static final String group_passage = "      <g id=\"cmp_passage\" ";

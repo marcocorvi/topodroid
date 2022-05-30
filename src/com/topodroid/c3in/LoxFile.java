@@ -83,25 +83,25 @@ class LoxFile
     readChunks( dis, filename );
   }
 
-  int NrSurveys()  { return mSurveyChunk.size(); }
-  int NrStations() { return mStationChunk.size(); }
-  int NrShots()    { return mShotChunk.size(); }
-  int NrScraps()   { return mScrapChunk.size(); }
-  int NrSurfaces() { return mSurfaceChunk.size(); }
-  int NrBitmaps()  { return mBitmapChunk.size(); }
+  // int NrSurveys()  { return mSurveyChunk.size(); }
+  // int NrStations() { return mStationChunk.size(); }
+  // int NrShots()    { return mShotChunk.size(); }
+  // int NrScraps()   { return mScrapChunk.size(); }
+  // int NrSurfaces() { return mSurfaceChunk.size(); }
+  // int NrBitmaps()  { return mBitmapChunk.size(); }
 
   ArrayList< LoxSurvey >  GetSurveys()  { return mSurveys; }
   ArrayList< LoxStation > GetStations() { return mStations; }
   ArrayList< LoxShot >    GetShots()    { return mShots; }
-  ArrayList< LoxScrap >   GetScraps()   { return mScraps; }
+  // ArrayList< LoxScrap >   GetScraps()   { return mScraps; }
   LoxSurface              GetSurface()  { return mSurface; }
   LoxBitmap               GetBitmap()   { return mBitmap; }
 
-  static private final int SIZE_SURVEY  = ( ( 6 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
+  // static private final int SIZE_SURVEY  = ( ( 6 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
   static private final int SIZE_STATION = ( ( 7 * Endian.SIZE32 + 3 * Endian.SIZEDBL ) ); // 52 bytes
   static private final int SIZE_SHOT    = ( ( 5 * Endian.SIZE32 + 9 * Endian.SIZEDBL ) );
   static private final int SIZE_SCRAP   = ( ( 8 * Endian.SIZE32 + 0 * Endian.SIZEDBL ) );
-  static private final int SIZE_SURFACE = ( ( 5 * Endian.SIZE32 + 6 * Endian.SIZEDBL ) );
+  // static private final int SIZE_SURFACE = ( ( 5 * Endian.SIZE32 + 6 * Endian.SIZEDBL ) );
 
   private void readChunks( DataInputStream dis, String filename ) throws ParserException
   {
@@ -130,13 +130,13 @@ class LoxFile
         // TDLog.v(  "LOX Type " + c.type + " RecSize " + c.rec_size + " RecCnt " + c.rec_cnt + " DataSize " + c.data_size );
         if ( c.rec_size > 0 ) {
           c.records = new byte[ c.rec_size ];
-          dis.read( c.records, 0, c.rec_size );
+          if ( dis.read( c.records, 0, c.rec_size ) != c.rec_size ) throw new ParserException(filename, linenr);
           // TDLog.v(  "LOX " + c.records[0] + " " + c.records[1] + " " + c.records[2] + " " + c.records[3] + " " + 
           //            c.records[4] + " " + c.records[5] + " " + c.records[6] + " " + c.records[7] );
         }
         if ( c.data_size > 0 ) {
           c.data = new byte[ c.data_size ];
-          dis.read( c.data, 0, c.data_size );
+          if ( dis.read( c.data, 0, c.data_size ) != c.data_size ) throw new ParserException(filename, linenr);
         }
         // TDLog.v( "LOX Read: bytes " + (4 * Endian.SIZE32 + c.rec_size + c.data_size) );
         switch ( type ) {
@@ -167,7 +167,7 @@ class LoxFile
     } finally {
       try {
         if ( dis != null ) dis.close();
-      } catch( IOException e ) { }
+      } catch( IOException e ) { TDLog.v("Error " + e.getMessage() ); }
     }
   }
 
@@ -314,7 +314,7 @@ class LoxFile
   private void HandleSurface( Chunk_t chunk )
   {
     mSurfaceChunk = chunk;
-    int n0 = chunk.rec_cnt;
+    // int n0 = chunk.rec_cnt;
     byte[] recs = chunk.records; // as int32
     byte[] data = chunk.data;    // as char
     int off = 0;
@@ -345,7 +345,7 @@ class LoxFile
   private void HandleBitmap( Chunk_t chunk )
   {
     mBitmapChunk = chunk;
-    int n0 = chunk.rec_cnt;
+    // int n0 = chunk.rec_cnt;
     byte[] recs = chunk.records; // as int32
     byte[] data = chunk.data;    // as char
     int off = 0;

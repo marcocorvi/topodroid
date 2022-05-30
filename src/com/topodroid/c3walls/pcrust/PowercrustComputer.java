@@ -60,13 +60,13 @@ public class PowercrustComputer
       powercrust = new Powercrust( );
       powercrust.resetSites( 3 );
       double x, y, z, v;
-      int ntot = mStations.size();
-      // TDLog.v( "PCrust ... add sites (stations " + ntot + ")" );
+      int n_tot = mStations.size();
+      // TDLog.v( "PCrust ... add sites (stations " + n_tot + ")" );
 
       /* average angular distance
       double da = 0;
       int na = 0;
-      for ( int n0 = 0; n0 < ntot; ++n0 ) {
+      for ( int n0 = 0; n0 < n_tot; ++n0 ) {
         Cave3DStation st = mStations.get( n0 );
         ArrayList< Cave3DShot > station_splays = mParser.getSplayAt( st, false );
         int ns = station_splays.size();
@@ -95,7 +95,7 @@ public class PowercrustComputer
       // TDLog.v( "PCrust average splay angle " + da );
       */
 
-      for ( int n0 = 0; n0 < ntot; ++n0 ) {
+      for ( int n0 = 0; n0 < n_tot; ++n0 ) {
         Cave3DStation st = mStations.get( n0 );
         x = st.x;
         y = st.y;
@@ -139,10 +139,10 @@ public class PowercrustComputer
             len_prev = len;
           }
         }
-        long nsites = powercrust.nrSites();
-        // TDLog.v( after station " + n0 + "/" + ns + " sites " + nsites );
+        long n_sites = powercrust.nrSites();
+        // TDLog.v( after station " + n0 + "/" + ns + " sites " + n_sites );
       }
-      // long nsites = powercrust.nrSites();
+      // long n_sites = powercrust.nrSites();
       // TDLog.v( total sites " + powercrust.nrSites() + " ... compute" );
       int ok = powercrust.compute( );
       if ( ok == 1 ) {
@@ -198,7 +198,7 @@ public class PowercrustComputer
   {
     ArrayList<PCPolygon> polygons = new ArrayList< PCPolygon >();
     // TDLog.v( "PCrust up triangles " + nup );
-    int nsite = 0;
+    int n_site = 0;
     for ( int k = 0; k<vertices.length; ++k ) {
       PCSite s0 = vertices[k];
       if ( s0.poly != null ) continue;
@@ -212,10 +212,10 @@ public class PowercrustComputer
           s1.poly = polygon;                   // otherwise S1 is added to the polygon and the polygon set to S1
         }
         polygons.add( polygon );
-        nsite += polygon.size();
+        n_site += polygon.size();
       }
     }
-    // TDLog.v( "PCrust polygon sites " + nsite );
+    // TDLog.v( "PCrust polygon sites " + n_site );
     // TDLog.v( "PCrust plan polygons " + polygons.size() );
     return polygons;
   }
@@ -313,7 +313,7 @@ public class PowercrustComputer
     int nvp = mVertices.length;
     for ( int k=0; k<nvp; ++k ) mVertices[k].angle = null;
 
-    int nup = 0;
+    int n_up = 0;
     mProfilearcs = new ArrayList< PCSegment >();
     // intersection triangles is ok for vertical caves
     for ( int k = 0; k < nsh; ++k ) {
@@ -327,7 +327,7 @@ public class PowercrustComputer
         PCIntersection q1 = null;
         PCIntersection q2 = null;
         PCSite s1 = (PCSite)t.vertex[nn-1];
-        double z1=1;
+        double z1 = 1;
         for ( int kk=0; kk<nn; ++kk ) {
           PCSite s2 = (PCSite)t.vertex[kk];
           PCIntersection qq = intersect2D( p1, p2, s1, s2 );

@@ -12,7 +12,7 @@
 package com.topodroid.io.shp;
 
 // import com.topodroid.utils.TDLog;
-import com.topodroid.num.NumStation;
+// import com.topodroid.num.NumStation;
 // import com.topodroid.num.NumShot;
 // import com.topodroid.num.NumSplay;
 // import com.topodroid.TDX.DrawingPath;
@@ -81,7 +81,7 @@ public class ShpStation extends ShpObject
       writeShpRecordHeader( cnt, shpRecLen );
       shpBuffer.order(ByteOrder.LITTLE_ENDIAN);   
       shpBuffer.putInt( SHP_POINT );
-      NumStation nst = st.getNumStation();
+      // NumStation nst = st.getNumStation();
       double x = DrawingUtil.declinatedX( st.cx, st.cy, cd, sd );
       double y = DrawingUtil.declinatedY( st.cx, st.cy, cd, sd );
       shpBuffer.putDouble( x0 + xscale * x );

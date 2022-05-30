@@ -179,15 +179,19 @@ public class ShpPolylinez extends ShpObject
         }
       }
     } else { // mrs > 0
-      NumSplay lm = lms.get(0);
-      NumStation pt = lm.from;
-      initBBox( pt.e, pt.s, pt.v );
-      updateBBox( lm.e, lm.s, lm.v );
-      for ( int k=1; k<mrs; ++k ) {
-        lm = lms.get(k);
-        pt = lm.from;
-        updateBBox( pt.e, pt.s, pt.v );
-        updateBBox( lm.e, lm.s, lm.v );
+      if ( lms != null ) {
+        NumSplay lm = lms.get(0);
+        if ( lm != null ) {
+          NumStation pt = lm.from;
+          initBBox( pt.e, pt.s, pt.v );
+          updateBBox( lm.e, lm.s, lm.v );
+          for ( int k=1; k<mrs; ++k ) {
+            lm = lms.get(k);
+            pt = lm.from;
+            updateBBox(pt.e, pt.s, pt.v);
+            updateBBox(lm.e, lm.s, lm.v);
+          }
+        }
       }
     }
   }

@@ -13,11 +13,11 @@ package com.topodroid.c3in;
 
 class LoxSurface
 {
-  int id;
-  private int ww;
-  private int hh;
-  private double[] calib;
-  private double[] grid;
+  private final int id;
+  private final int ww;
+  private final int hh;
+  private final double[] calib;
+  private final double[] grid;
 
   double East1()    { return (calib[0]); }
   double North1()   { return (calib[1]); } // loch data are written north-to-south
@@ -36,12 +36,12 @@ class LoxSurface
     for ( int k=0; k<6; ++k ) calib[k] = c[k];
   }
 
-  int Id()      { return id; }
+  // int Id()      { return id; }
   int Width()   { return ww; }
   int Height()  { return hh; }
 
-  double Calib( int k )  { return calib[k]; }
-  double Z( int i, int j )  { return grid[ j * ww + i ]; }
+  // double Calib( int k )  { return calib[k]; }
+  // double Z( int i, int j )  { return grid[ j * ww + i ]; }
   double[] Grid() { return grid; }
 
 }

@@ -47,9 +47,9 @@ public class ParserTrox extends TglParser
   float ul = 1;  // units factor [m]
   float ub = 1;  // dec.deg
   float uc = 1;  // dec.deg
-  int dirw = 1;  // width direction
-  int dirb = 1;  // bearing direction
-  int dirc = 1;  // clino direction
+  int dir_w = 1;  // width direction
+  int dir_b = 1;  // bearing direction
+  int dir_c = 1;  // clino direction
 
 
   public ParserTrox( TopoGL app, InputStreamReader isr, String name ) throws ParserException
@@ -277,9 +277,9 @@ public class ParserTrox extends TglParser
           if ( ( value = getValue( "DeclinAuto=\"", line ) ) != null ) {
             mApplyDeclination = value.equals("M");
           }
-          if ( "Inv".equals( getValue( "SensDir=\"", line ) ) ) dirb = -1;
-          if ( "Inv".equals( getValue( "SensPte=\"", line ) ) ) dirc = -1;
-          if ( "Inv".equals( getValue( "SensLar=\"", line ) ) ) dirw = -1;
+          if ( "Inv".equals( getValue( "SensDir=\"", line ) ) ) dir_b = -1;
+          if ( "Inv".equals( getValue( "SensPte=\"", line ) ) ) dir_c = -1;
+          if ( "Inv".equals( getValue( "SensLar=\"", line ) ) ) dir_w = -1;
           if ( ( value = getValue( "DimPt=\"", line ) ) != null ) {
             if ( value.equals("Inc") ) {
               // FIXME isSplay at next station: Which ???

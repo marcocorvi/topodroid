@@ -1,5 +1,9 @@
 Howto Build with ant
 
+[0] Java version is set with JAVA_HOME environment
+# export JAVA_HOME=/usr/local/java/jre-11.0.12
+export JAVA_HOME=/home/programs/android-studio/jre
+
 [1] Android setup:
 /home/programs/android-sdk : all android stuff
 /home/programs/android-ndk : all android NDK stuff

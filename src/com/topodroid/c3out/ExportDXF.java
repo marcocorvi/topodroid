@@ -11,7 +11,7 @@
  */
 package com.topodroid.c3out;
 
-import com.topodroid.TDX.TopoGL;
+// import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;
 import com.topodroid.TDX.Triangle3D;
 import com.topodroid.TDX.Vector3D;
@@ -292,9 +292,9 @@ public class ExportDXF
     printInt( pw2, 62, color );   // layer color
     printString( pw2, 6, linetype ); // linetype name
     // if ( mVersion13 ) {
-    //   printInt( pw2, 330, 2 );       // softpointer id/handle to owner dictionary 
-    //   printInt( pw2, 370, -3 );      // lineweight enum value
-    //   printString( pw2, 390, "F" );  // hardpointer id/handle or plotstylename object
+    //   printInt( pw2, 330, 2 );       // soft-pointer id/handle to owner dictionary
+    //   printInt( pw2, 370, -3 );      // line-weight enum value
+    //   printString( pw2, 390, "F" );  // hard-pointer id/handle or plot style-name object
     //   // printInt( pw2, 347, 46 );
     //   // printInt( pw2, 348, 0 );
     // }
@@ -363,7 +363,7 @@ public class ExportDXF
       // printFloat( pw, 72, 0 );      // H-align (optional 0)
       // printFloat( pw, 73, 0 );      // V-align
       printString( pw, 1, label );
-      // printString( pw, 7, style );  // style, optional (dftl STANDARD)
+      // printString( pw, 7, style );  // style, optional (default STANDARD)
       printString( pw, 100, AcDbText);
     // }
     return handle;
@@ -576,9 +576,9 @@ public class ExportDXF
         }
 
         if ( version13 ) { handle = inc(handle); } else { handle = 5; }
-        int ltypeowner = handle;
-        int ltypenr    = version13 ? 5 : 1; // linetype number
-        writeBeginTable( out, "LTYPE", handle, ltypenr ); 
+        int ltype_owner = handle;
+        int ltype_nr    = version13 ? 5 : 1; // linetype number
+        writeBeginTable( out, "LTYPE", handle, ltype_nr );
         writeInt( out, 330, 0 ); // table has no owner
         {
           // int flag = 64;
@@ -586,7 +586,7 @@ public class ExportDXF
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_byBlock );
-            writeInt( out, 330, ltypeowner );
+            writeInt( out, 330, ltype_owner );
             writeInt( out, 70, 0 );
             writeString( out, 3, "Std by block" );
             writeInt( out, 72, 65 );
@@ -596,7 +596,7 @@ public class ExportDXF
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_byLayer );
-            writeInt( out, 330, ltypeowner );
+            writeInt( out, 330, ltype_owner );
             writeInt( out, 70, 0 );
             writeString( out, 3, "Std by layer" );
             writeInt( out, 72, 65 );
@@ -606,7 +606,7 @@ public class ExportDXF
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_continuous );
-            writeInt( out, 330, ltypeowner );
+            writeInt( out, 330, ltype_owner );
             writeInt( out, 70, 0 );
             writeString( out, 3, "Solid line ------" );
             writeInt( out, 72, 65 );
@@ -616,7 +616,7 @@ public class ExportDXF
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_center );
-            writeInt( out, 330, ltypeowner );
+            writeInt( out, 330, ltype_owner );
             writeInt( out, 70, 0 );
             writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
             writeInt( out, 72, 65 );
@@ -630,7 +630,7 @@ public class ExportDXF
             writeString( out, 0, "LTYPE" );
             handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             writeString( out, 2, lt_ticks );
-            writeInt( out, 330, ltypeowner );
+            writeInt( out, 330, ltype_owner );
             writeInt( out, 70, 0 );
             writeString( out, 3, "Ticks ____|____|____|____" ); // description
             writeInt( out, 72, 65 );
@@ -650,7 +650,7 @@ public class ExportDXF
             // writeString( out, 0, "LTYPE" );
             // handle = inc(handle); writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
             // writeString( out, 2, lt_tick );
-            // writeInt( out, 330, ltypeowner );
+            // writeInt( out, 330, ltype_owner );
             // writeInt( out, 70, 0 );
             // writeString( out, 3, "Ticks ____|____|____|____" ); // description
             // writeInt( out, 72, 65 );

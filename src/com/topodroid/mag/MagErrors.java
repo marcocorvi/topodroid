@@ -21,9 +21,9 @@ package com.topodroid.mag;
 
 class MagErrors
 {
-  private double DeclErr;
-  private double InclErr;
-  private double FErr;
+  private final double DeclErr;
+  private final double InclErr;
+  private final double FErr;
 
   MagErrors( )
   {

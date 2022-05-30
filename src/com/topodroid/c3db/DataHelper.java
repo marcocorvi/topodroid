@@ -50,11 +50,11 @@ public class DataHelper extends DataSetObservable
   private final static String WHERE_SID         = "surveyId=?";
   private final static String WHERE_SID_STATUS  = "surveyId=? AND status=?";
 
-  private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
+  // private final static String WHERE_SID_ID      = "surveyId=? AND id=?";
 
   private SQLiteDatabase myDB = null;
 
-  static private String[] mReducedShotFields =
+  static private final String[] mReducedShotFields =
     { "id", "millis", "fStation", "tStation", "distance", "bearing", "clino", "flag"};
   // static private String[] mFullShotFields =
   //   { "id", "fStation", "tStation", "distance", "bearing", "clino", "acceleration", "magnetic", "dip", // 0 ..  8
@@ -85,7 +85,7 @@ public class DataHelper extends DataSetObservable
         myDB = SQLiteDatabase.openDatabase( database_name, null, SQLiteDatabase.OPEN_READONLY );
         if ( myDB == null ) {
           TDLog.Error("DB failed get readable database" );
-          return;
+          // return;
         } 
         // TDLog.v("DB opened database");
 
@@ -101,15 +101,22 @@ public class DataHelper extends DataSetObservable
      }
    }
 
-  private void logError( String msg, Exception e )
-  {
-    TDLog.Error( "DB " + msg + ": " + e.getMessage() );
-  }
+  // /** print an error log
+  //  * @param msg  header
+  //  * @param e    exception
+  //  */
+  // private void logError( String msg, Exception e )
+  // {
+  //   TDLog.Error( "DB " + msg + ": " + e.getMessage() );
+  // }
 
-  private void handleDiskIOError( SQLiteDiskIOException e )
-  {
-    TDLog.Error( "DB disk error " + e.getMessage() );
-  }
+  // /** handle a disk error
+  //   * @param e  exception
+  //  */
+  // private void handleDiskIOError( SQLiteDiskIOException e )
+  // {
+  //   TDLog.Error( "DB disk error " + e.getMessage() );
+  // }
 
   // long getSurveyIdFromName( String name ) 
   // {
@@ -193,7 +200,7 @@ public class DataHelper extends DataSetObservable
   {
     // TDLog.v("DB get fixed stations" );
     if ( myDB == null ) return null;
-    List<SurveyFixed> ret = new ArrayList<SurveyFixed>();
+    List<SurveyFixed> ret = new ArrayList<>();
     Cursor cursor = myDB.query( "fixeds", // FIXED_TABLE,
                                new String[] { "station", "longitude", "latitude", "altitude", "altimetric", "cs_name", "cs_longitude", "cs_latitude", "cs_altitude" }, // columns
                                WHERE_SID, new String[] { Long.toString(sid) },

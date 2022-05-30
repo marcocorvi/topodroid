@@ -56,13 +56,13 @@ class ShpObject
   final static short SHORT0 = (short)0;
 
   int mGeomType; // geom type
-  int nr;   // nuber of objects
+  int nr;   // number of objects
   String path; // file path 
   String name; // file name 
   int year, month, day;
 
   double xmin, xmax, ymin, ymax, zmin, zmax; // bounding box
-  // double mmin = 0.0, mmax = 0.0;
+  // double m_min = 0.0, m_max = 0.0;
 
   FileChannel shpChannel;   
   FileChannel shxChannel;   
@@ -119,11 +119,11 @@ class ShpObject
   }
 
 
-  protected void resetChannels( int shplen, int shxlen, int dbflen ) throws IOException
+  protected void resetChannels( int shp_len, int shx_len, int dbf_len ) throws IOException
   {
-    shpBuffer = ByteBuffer.allocateDirect( shplen + 8 );
-    shxBuffer = ByteBuffer.allocateDirect( shxlen + 8 );
-    dbfBuffer = ByteBuffer.allocateDirect( dbflen + 8 );
+    shpBuffer = ByteBuffer.allocateDirect( shp_len + 8 );
+    shxBuffer = ByteBuffer.allocateDirect( shx_len + 8 );
+    dbfBuffer = ByteBuffer.allocateDirect( dbf_len + 8 );
     try { 
       shpChannel.position(0);   
       shxChannel.position(0);   
@@ -251,7 +251,7 @@ class ShpObject
   // @param buffer
   // @param n_rec  number of records
   // @param n_fld  number of fields
-  // @param flds   array of fields names
+  // @param fields   array of fields names
   // @return buffer
   //
   // @note write 33 + 32*n_fld bytes (less than 100 for 2 fields)
@@ -270,7 +270,7 @@ class ShpObject
   // x+1 terminator: 0x0d all 32 fields present, 0x00 otherwise
   // ... records
   //     eof: 0x1a
-  void writeDBaseHeader( int n_rec, int lenRecord, int n_fld, String[] flds, byte[] types, int[] lens )
+  void writeDBaseHeader( int n_rec, int lenRecord, int n_fld, String[] fields, byte[] types, int[] lens )
   {
     int fldLength = 32; // field descriptor length [bytes]
     int lenHeader = 32 + fldLength * n_fld + 1;
@@ -318,7 +318,7 @@ class ShpObject
     // write field descriptors (32 bytes each) max 128 fields
     int off = 1;
     for ( int n=0; n<n_fld; ++n ) {
-      String fld = flds[n];
+      String fld = fields[n];
       int k = 0;
       int k0 = fld.length(); if ( k0 > 10 ) k0 = 10;
       for ( ; k<k0; ++k ) dbfBuffer.put( (byte)fld.charAt(k) ); // field name
@@ -339,7 +339,7 @@ class ShpObject
       for (k=0; k<7; ++k ) dbfBuffer.put( BYTE0 ); // reserved
       dbfBuffer.put( BYTE0 );           // key: 0 no, 1 yes
     }
-    dbfBuffer.put( (byte)0x0d ); // (32+32*n_fld) header ternimator
+    dbfBuffer.put( (byte)0x0d ); // (32+32*n_fld) header terminator
     // no FoxPro data container [264 bytes]
 
     // // field property struct
@@ -442,7 +442,7 @@ class ShpObject
 
 class ShpPointz extends ShpObject
 {
-  private static int mShpType = SHP_POINTZ;
+  private static final int mShpType = SHP_POINTZ;
 
   ShpPointz( String path, String name, List<String> files ) // throws IOException
   {
@@ -697,7 +697,7 @@ class ShpPolygonz extends ShpObject
     super( mShpType, path, name, files );
   }
 
-  @Override protected int getShpRecordLength( ) { return 108; } // POLIGONZ 76 + 4*8/2 + 4*8/2
+  @Override protected int getShpRecordLength( ) { return 108; } // POLYGONZ 76 + 4*8/2 + 4*8/2
 
   private double area( CWPoint p1, CWPoint p2, CWPoint p3 ) 
   {
@@ -781,7 +781,7 @@ class ShpPolygonz extends ShpObject
       writeShxRecord( offset, shpRecLen );
       fields[0] = "facet";
       fields[1] = String.format(Locale.US, "%.2f", a );
-      fields[0] = zz;
+      fields[2] = zz;
       writeDBaseRecord( n_fld, fields, flens );
     }
     // TDLog.v( "SHP shots done " + cnt + " records" );

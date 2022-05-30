@@ -16,7 +16,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.TDX.TDandroid;
-import com.topodroid.TDX.TDPath;
+// import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.R;
 
@@ -38,7 +38,7 @@ import android.content.Intent;
 // import android.content.ActivityNotFoundException;
 // import android.net.Uri;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ArrayAdapter;
@@ -57,7 +57,7 @@ public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
   private static final String NEEDLE = "DistoX/files/man";
-  private WebView mTVtext;
+  private WebView mTV_text;
   private int mCloseOnBack = 0;
 
   /** load and display a man page
@@ -78,7 +78,7 @@ public class UserManualActivity extends Activity
         // TDLog.v( "MAN-1 filename " + filename + " index " + pos );
         if ( pos > 0 ) {
           String name = filename.substring( pos + NEEDLE.length() );
-          String pagename = TDPath.getManFileName( name );
+          // String pagename = TDPath.getManFileName( name );
           // File pagefile = TDFile.getManFile( name );
           // TDLog.v( "MAN-2 pagefile " + pagefile.getPath() );
           // TDLog.v( "MAN-2 pagename " + pagename );
@@ -88,7 +88,7 @@ public class UserManualActivity extends Activity
     } else {
       int pos = filename.lastIndexOf("/");
       if ( pos >= 0 ) filename = filename.substring(pos+1);
-      String pagename = TDPath.getManFileName( filename );
+      // String pagename = TDPath.getManFileName( filename );
       // File pagefile = TDFile.getManFile( filename );
       // TDLog.v( "MAN-3 filename " + filename );
       // TDLog.v( "MAN-3 pagename " + pagename );
@@ -112,7 +112,7 @@ public class UserManualActivity extends Activity
   private void loadLocal( WebView view, FileReader fr, String pagepath ) throws IOException
   {
     // view.loadUrl( "file://" + page );
-    StringBuilder pagedata = new StringBuilder();
+    StringBuilder page_data = new StringBuilder();
     String encoding = "UTF-8";
     String mime = "text/html";
     String baseurl = "file://" + pagepath;
@@ -122,10 +122,10 @@ public class UserManualActivity extends Activity
     BufferedReader br = new BufferedReader( fr );
     String line;
     while ( ( line = br.readLine() ) != null ) {
-      pagedata.append( line );
+      page_data.append( line );
     }
     fr.close();
-    view.loadDataWithBaseURL( baseurl, pagedata.toString(), mime, encoding, null );
+    view.loadDataWithBaseURL( baseurl, page_data.toString(), mime, encoding, null );
 
     // try { 
     //   URI pageuri = pagefile.toURI();
@@ -195,11 +195,11 @@ public class UserManualActivity extends Activity
     if ( page == null ) page = "manual00.htm";
 
     setContentView(R.layout.distox_manual_dialog);
-    mTVtext   = (WebView) findViewById(R.id.manual_text );
+    mTV_text   = (WebView) findViewById(R.id.manual_text );
  
-    setWebViewSettings( mTVtext );
+    setWebViewSettings( mTV_text );
 
-    mTVtext.setWebViewClient( new WebViewClient() {
+    mTV_text.setWebViewClient( new WebViewClient() {
       @Override 
       public boolean shouldOverrideUrlLoading( WebView view, String url ) {
         ++mCloseOnBack;
@@ -222,7 +222,7 @@ public class UserManualActivity extends Activity
 
     setTitle( R.string.title_manual );
     try {
-      load( mTVtext, page );
+      load( mTV_text, page );
     } catch ( IOException e ) { 
       TDLog.Error( "UserMan load " + page + " Error: " + e.getMessage() );
     }
@@ -284,15 +284,15 @@ public class UserManualActivity extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
-    CharSequence item = ((TextView) view).getText();
+    // CharSequence item = ((TextView) view).getText();
     // TDLog.v( "click " + item + " pos " + pos);
     mList.setVisibility( View.GONE );
     if ( pos <= 16 ) {
       mCloseOnBack = 0;
       try { 
-        load( mTVtext, String.format(Locale.US, "manual%02d.htm", pos ) );
+        load( mTV_text, String.format(Locale.US, "manual%02d.htm", pos ) );
       } catch ( IOException e ) {
-        TDLog.Error("Userman pos " + pos + " error " + e.getMessage() );
+        TDLog.Error("User-man pos " + pos + " error " + e.getMessage() );
       }
     } else {
       // getManualFromWeb();
@@ -307,7 +307,7 @@ public class UserManualActivity extends Activity
   {
     mCloseOnBack -= 2;
     if ( mCloseOnBack <= 0 ) finish();
-    mTVtext.goBack();
+    mTV_text.goBack();
   }
 
   // static void show Help Page( Context context, int class_string )

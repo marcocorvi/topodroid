@@ -91,15 +91,15 @@ class MagGeoid
   private MagLatLong equivalentLatLon(double lat, double lon )
   {
     MagLatLong ret = new MagLatLong();
-    double colat = 90 - lat;
+    double co_lat = 90 - lat;
     ret.lng = lon;
-    if (colat < 0) colat = -colat;
-    while (colat > 360) colat -= 360;
-    if (colat > 180) {
-        colat-=180;
+    if (co_lat < 0) co_lat = -co_lat;
+    while (co_lat > 360) co_lat -= 360;
+    if (co_lat > 180) {
+        co_lat-=180;
         ret.lng = ret.lng+180;
     }
-    ret.lat = 90 - colat;
+    ret.lat = 90 - co_lat;
     if (ret.lng > 360) ret.lng-=360;
     if (ret.lng < -180) ret.lng+=360;
     return ret;

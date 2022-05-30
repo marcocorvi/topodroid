@@ -80,7 +80,7 @@ class ParserPocketTopo extends ImportParser
     checkValid();
   }
 
-  private void readPocketTopoFile( InputStream fis, String filename, String tdrdir ) throws ParserException
+  private void readPocketTopoFile( InputStream fis, String filename, String tdr_dir ) throws ParserException
   {
     PTFile ptfile = new PTFile();
     // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
@@ -195,7 +195,7 @@ class ParserPocketTopo extends ImportParser
       PTDrawing outline = ptfile.getOutline();
       String scrap_name1 = mName + "-1p";
       // String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
-      String filename1 = TDPath.getTdrFileWithExt( tdrdir, scrap_name1 );
+      String filename1 = TDPath.getTdrFileWithExt( tdr_dir, scrap_name1 );
       // TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap p: " + filename1 );
       TDLog.v( "PT parser scrap p: " + filename1 );
       writeDrawing( filename1, scrap_name1, outline, PlotType.PLOT_PLAN, over_scale );
@@ -203,7 +203,7 @@ class ParserPocketTopo extends ImportParser
       PTDrawing sideview = ptfile.getSideview();
       String scrap_name2 = mName + "-1s";
       // String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
-      String filename2 = TDPath.getTdrFileWithExt( tdrdir, scrap_name2 );
+      String filename2 = TDPath.getTdrFileWithExt( tdr_dir, scrap_name2 );
       // TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap s: " + filename2 );
       TDLog.v( "PT parser scrap s: " + filename2 );
       writeDrawing( filename2, scrap_name2, sideview, PlotType.PLOT_EXTENDED, over_scale );
@@ -330,8 +330,8 @@ class ParserPocketTopo extends ImportParser
 
         // File file = new File( filename );
         // FileOutputStream fos = new FileOutputStream( file );
-        // BufferedOutputStream bfos = new BufferedOutputStream( fos );
-        // DataOutputStream dos = new DataOutputStream( bfos );
+        // BufferedOutputStream b_fos = new BufferedOutputStream( fos );
+        // DataOutputStream dos = new DataOutputStream( b_fos );
         DataOutputStream dos = TDFile.getTopoDroidFileOutputStream( filename );
 	DrawingIO.exportDataStream( (int)type, dos, null, scrap_name, 0, bbox, paths, 0 ); // proj_dir not used, scrap = 0
         dos.close();

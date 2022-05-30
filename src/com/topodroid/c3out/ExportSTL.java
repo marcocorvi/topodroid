@@ -222,7 +222,7 @@ public class ExportSTL
     } finally {
       try {
         dos.close();
-      } catch ( IOException e ) {}
+      } catch ( IOException e ) { TDLog.v("Error " + e.getMessage() ); }
     }
     return ret;
   }

@@ -58,19 +58,19 @@ public class LoxBitmap
   // e = calib[0] + calib[2] * i + calib[4] * j
   // n = calib[1] + calib[3] * i + calib[5] * j
 
-  int Surface() { return sid; }
-  int Type() { return type; }
-  double Calib( int k ) { return calib[k]; }
-  int DataSize() { return size; }
-  byte[] Data()  { return data; }
-  int DataOffset() { return data_offset; }
+  // int Surface() { return sid; }
+  // int Type() { return type; }
+  // double Calib( int k ) { return calib[k]; }
+  // int DataSize() { return size; }
+  // byte[] Data()  { return data; }
+  // int DataOffset() { return data_offset; }
 
-  void recycle()
-  {
-    if ( image != null ) image.recycle();
-    image = null;
-    width = height = 0;
-  }
+  // void recycle()
+  // {
+  //   if ( image != null ) image.recycle();
+  //   image = null;
+  //   width = height = 0;
+  // }
 
   private double ENtoI( double e, double n )
   {
@@ -118,7 +118,7 @@ public class LoxBitmap
 
   private boolean isPNG( byte[] data, int off )
   {
-    return data[0+off] == (byte)(0x89) 
+    return data[  off] == (byte)(0x89)
         && data[1+off] == (byte)(0x50)
         && data[2+off] == (byte)(0x4e)
         && data[3+off] == (byte)(0x47);
@@ -135,7 +135,7 @@ public class LoxBitmap
   private void Data2RGB()
   {
     image = null;
-    int len = data.length - data_offset;
+    // int len = data.length - data_offset;
     if ( isJPG( data, data_offset ) ) {
       // TDLog.v("Bitmap JPG image type " + type + " length " + len + " size " + size );
       image = BitmapFactory.decodeByteArray( data, data_offset, size );

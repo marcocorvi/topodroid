@@ -34,12 +34,12 @@ public class CalibValidateResultDialog extends MyDialog
   // private ImageView hist0;
   // private ImageView hist1;
   // private ImageView hist2;
-  private final String avestd0;
-  private final String avestd1;
+  private final String ave_std0;
+  private final String ave_std1;
   // private final String std; // UNUSED
   private final String err1;
   private final String err2;
-  private final String errmax;
+  private final String err_max;
   private final String title;
   private final float[] errors0;
   private final float[] errors1;
@@ -56,11 +56,11 @@ public class CalibValidateResultDialog extends MyDialog
     errors0 = errs0;
     errors1 = errs1;
     errors2 = errs2;
-    avestd0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
-    avestd1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );
+    ave_std0 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a0, s0 );
+    ave_std1 = String.format( mContext.getResources().getString( R.string.calib_ave_std ), a1, s1 );
     err1  = String.format( mContext.getResources().getString( R.string.calib_validate_error ), e1 );
     err2 = String.format( mContext.getResources().getString( R.string.calib_stddev ), e2 );
-    errmax = String.format( mContext.getResources().getString( R.string.calib_max_error ), em );
+    err_max = String.format( mContext.getResources().getString( R.string.calib_max_error ), em );
     title = String.format( mContext.getResources().getString( R.string.calib_validation ), n1, n2 );
   }
 
@@ -75,11 +75,11 @@ public class CalibValidateResultDialog extends MyDialog
     mBtnClose = (Button) findViewById( R.id.button_close );
     mBtnClose.setOnClickListener( this );
 
-    ((TextView)findViewById(R.id.avestd0)).setText( avestd0 );
-    ((TextView)findViewById(R.id.avestd1)).setText( avestd1 );
+    ((TextView)findViewById(R.id.avestd0)).setText( ave_std0 );
+    ((TextView)findViewById(R.id.avestd1)).setText( ave_std1 );
     ((TextView)findViewById(R.id.error1)).setText( err1 );
     ((TextView)findViewById(R.id.error2)).setText( err2 );
-    ((TextView)findViewById(R.id.error_max)).setText( errmax );
+    ((TextView)findViewById(R.id.error_max)).setText( err_max );
 
     ImageView hist0 = (ImageView) findViewById( R.id.histogram0 );
     ImageView hist1 = (ImageView) findViewById( R.id.histogram1 );

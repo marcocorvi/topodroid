@@ -20,11 +20,11 @@ class LoxStation
   static final int FLAG_CONTINUATION =  8;
   static final int FLAG_HAS_WALLS    = 16;
 
-  int id;
-  int sid; // survey
-  String name;
-  String comment;
-  int flag;
+  private final int id;
+  private final int sid; // survey
+  private final String name;
+  private final String comment;
+  private final int flag;
 
   double x, y, z;
 

@@ -585,7 +585,7 @@ public class CWConvexHull
     CWPoint p4 = s4.otherPoint(p1);
 	  
     CWTriangle t3 = s5.otherTriangle(t2);
-    // TDTDLog.v( "CW-Hull  T2/3 " + t2.mCnt + " " + t3.mCnt +  " TN " + tn.mCnt
+    // TDLog.v( "CW-Hull  T2/3 " + t2.mCnt + " " + t3.mCnt +  " TN " + tn.mCnt
     //    + " S4/5 " + s4.mCnt + " " + s5.mCnt + " P4 " + p4.mCnt );
     
     p3.removeTriangle(t);
@@ -663,7 +663,7 @@ public class CWConvexHull
   // boolean checkPoint( Vector3D v )
   // {
   //   // TDLog.v( "CW-Hull Check vector " + v.x + " " + v.y + " " + v.z );
-  //   double totvol = 0;
+  //   double tot_vol = 0;
   //   boolean ret = true;
   //   for ( CWTriangle t : mFace ) {
   //     double vol = t.volume( v );
@@ -672,12 +672,12 @@ public class CWConvexHull
   //       // t.dump(); 
   //       ret = false;
   //     }
-  //     totvol += vol;
+  //     tot_vol += vol;
   //   }
   //   if ( ret ) {
-  //     totvol = Math.round( totvol*100 )/100;
+  //     tot_vol = Math.round( tot_vol*100 )/100;
   //     double angle = solidAngle( v, 0.0001f );
-  //     TDLog.v( "CW-Hull Volume " + totvol + " " + ret + " angle " + angle );
+  //     TDLog.v( "CW-Hull Volume " + tot_vol + " " + ret + " angle " + angle );
   //   }
   //   return ret;
   // } 
@@ -1053,7 +1053,7 @@ public class CWConvexHull
     CWPoint w1 = null, w2 = null, w3 = null;
     CWSide  z1 = null, z2 = null, z3 = null;
     for ( CWTriangle t : mFace ) {
-      int tcnt = t.mCnt;
+      int t_cnt = t.mCnt;
       int nv = t.countVertexIn( pts, vts );
       if ( nv == 0 ) continue;
       t.mType = CWTriangle.TRIANGLE_HIDDEN;
@@ -1084,13 +1084,13 @@ public class CWConvexHull
       ArrayList< CWPoint > pts2 = new ArrayList< CWPoint > ();
       for ( int k = 0; k < ns; ++k ) {
         CWIntersection ii = ints.get( k % ns );
-        if ( tcnt == ii.mSign[2] ) { 
+        if ( t_cnt == ii.mSign[2] ) {
           int start = k;
           int end = k;
           boolean inside = true;
           do {
             ii = ints.get( k % ns );
-            if ( tcnt == ii.mSign[0] ) {
+            if ( t_cnt == ii.mSign[0] ) {
               end = k;
               inside = false;
             } else {
@@ -1190,19 +1190,19 @@ public class CWConvexHull
       //   w2 /____________\ w3
       int k = ks;
       CWIntersection ii = ints.get( k % ns );
-      int kmin = k;
-      double dmin = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
+      int k_min = k;
+      double d_min = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
       for ( ; k < ke; ++k ) {
         ii = ints.get( k % ns );
         double d = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
-        if ( d < dmin ) { dmin = d; kmin = k; }
+        if ( d < d_min ) { d_min = d; k_min = k; }
       }
-      // TDLog.v( "CW-Hull [1] ks " + ks + " ke " + ke + " kmin " + kmin );
-      CWPoint p1 = (ks < kmin ) ? addTrianglesAtVertexCCW( t, w3, ps, ks, kmin, ints, ns ) : ps;
+      // TDLog.v( "CW-Hull [1] ks " + ks + " ke " + ke + " k_min " + k_min );
+      CWPoint p1 = (ks < k_min ) ? addTrianglesAtVertexCCW( t, w3, ps, ks, k_min, ints, ns ) : ps;
       CWSide r0 = getSide( p1, w2 );
       CWSide r2 = getSide( p1, w3 );
       addSplitTriangle( w2, w3, p1, r2, r0, z1 );
-      if ( kmin < ke ) addTrianglesAtVertexCCW( t, w2, p1, kmin, ke, ints, ns );
+      if ( k_min < ke ) addTrianglesAtVertexCCW( t, w2, p1, k_min, ke, ints, ns );
     } else if ( ss == z3 && se == z2 ) {
       //            w1
       //          /    \ z2
@@ -1210,19 +1210,19 @@ public class CWConvexHull
       //   w2 /____________\ w3
       int k = ks;
       CWIntersection ii = ints.get( k % ns );
-      int kmin = k;
-      double dmin = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
+      int k_min = k;
+      double d_min = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
       for ( ; k < ke; ++k ) {
         ii = ints.get( k % ns );
         double d = w2.distance3D( ii.mV2 ) + w3.distance3D( ii.mV2 );
-        if ( d < dmin ) { dmin = d; kmin = k; }
+        if ( d < d_min ) { d_min = d; k_min = k; }
       }
-      // TDLog.v( "CW-Hull [2] ks " + ks + " ke " + ke + " kmin " + kmin );
-      CWPoint p1 = (ks < kmin )? addTrianglesAtVertexCW( t, w2, ps, ks, kmin, ints, ns ) : ps;
+      // TDLog.v( "CW-Hull [2] ks " + ks + " ke " + ke + " k_min " + k_min );
+      CWPoint p1 = (ks < k_min )? addTrianglesAtVertexCW( t, w2, ps, ks, k_min, ints, ns ) : ps;
       CWSide r0 = getSide( p1, w2 );
       CWSide r2 = getSide( p1, w3 );
       addSplitTriangle( w2, w3, p1, r2, r0, z1 );
-      if ( kmin < ke ) addTrianglesAtVertexCW( t, w3, p1, kmin, ke, ints, ns );
+      if ( k_min < ke ) addTrianglesAtVertexCW( t, w3, p1, k_min, ke, ints, ns );
     } else if ( ss == z2 && se == z1 ) {
       //            w1
       //          /    \ ss

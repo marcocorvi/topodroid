@@ -46,13 +46,18 @@ public class CalibCheckDialog extends MyDialog
                                 , OnClickListener
 {
   // private SurveyWindow mParent;
-  private List< DBlock > mShots;
+  private final List< DBlock > mShots;
 
   // private ImageView hist0;
   private ImageView hist1;
   private ImageView hist2;
-  private Button    mBtnClose;
+  // private Button    mBtnClose;
 
+  /** cstr
+   * @param context  context
+   * @param parent   parent activity (unused)
+   * @param shots    list of calibration-check shots
+   */
   public CalibCheckDialog( Context context, SurveyWindow parent, List< DBlock > shots )
   {
     super( context, R.string.CalibCheckDialog );
@@ -72,8 +77,8 @@ public class CalibCheckDialog extends MyDialog
     hist1 = (ImageView) findViewById( R.id.histogram1 );
     hist2 = (ImageView) findViewById( R.id.histogram2 );
 
-    mBtnClose = (Button) findViewById( R.id.button_close );
-    mBtnClose.setOnClickListener( this );
+    Button btn_close = (Button) findViewById( R.id.button_close );
+    btn_close.setOnClickListener( this );
 
     ArrayAdapter<String> array_adapter = new ArrayAdapter<>( mContext, R.layout.message );
 

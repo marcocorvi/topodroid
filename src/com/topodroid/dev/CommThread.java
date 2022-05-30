@@ -96,7 +96,7 @@ public class CommThread extends Thread
         }
       }
     } else { // if ( mType == COMM_GATT ) 
-      // Log.v("DistoX-BLEC", "TD comm: proto read_pckets");
+      // Log.v("DistoX-BLEC", "TD comm: proto read_packets");
       // mProtocol.readPacket( true, mDataType ); // start reading a packet
       mComm.readingPacket( true, mDataType );
     }

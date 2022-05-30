@@ -71,7 +71,7 @@ public class DrawingDxf
   static final private float LABEL_SCALE   =  8.0f / DrawingUtil.SCALE_FIX; // scale of label text
   static final private float AXIS_SCALE    = 10.0f / DrawingUtil.SCALE_FIX; // scale of text on the axes
 
-  static final private String two_n_half = "2.5";
+  // static final private String two_n_half = "2.5";
   // static final String ten = "10";
 
 
@@ -359,9 +359,9 @@ public class DrawingDxf
 
   /** write the plot-sketch in DXF format
    * @param out     output writer
-   * @param num     data reduction
+   * @param num     data reduction (unused)
    * @param plot    plot sketch
-   * @param type    plot type
+   * @param type    plot type (unused)
    */
   public static void writeDxf( BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
@@ -412,10 +412,10 @@ public class DrawingDxf
       handle = DXF.writeLTypesTable( out, handle );
 
       int nr_layers = 7;
-      SymbolPointLibrary pointlib = BrushManager.getPointLib();
-      SymbolLineLibrary linelib   = BrushManager.getLineLib();
-      SymbolAreaLibrary arealib   = BrushManager.getAreaLib();
-      // nr_layers += 1 + linelib.size() + arealib.size();
+      SymbolPointLibrary point_lib = BrushManager.getPointLib();
+      SymbolLineLibrary line_lib   = BrushManager.getLineLib();
+      SymbolAreaLibrary area_lib   = BrushManager.getAreaLib();
+      // nr_layers += 1 + line_lib.size() + area_lib.size();
       nr_layers += 1 + BrushManager.getLineLibSize() + BrushManager.getAreaLibSize();
       if ( DXF.mVersion9 ) { handle = 2; }
       handle = DXF.writeBeginTable( out, "LAYER", handle, nr_layers );
@@ -437,34 +437,34 @@ public class DrawingDxf
         handle = DXF.printLayer( pw2, handle, "REF",     flag, color, DXF.lt_continuous ); ++color; // white
         handle = DXF.printLayer( pw2, handle, "LINK",    flag, color, DXF.lt_continuous ); ++color; // ??? Link
         
-        if ( linelib != null ) { // always true
-          for ( Symbol line : linelib.getSymbols() ) {
-            String lname = "L_" + line.getThName().replace(':','-');
-            String ltype = DXF.lt_continuous;
+        if ( line_lib != null ) { // always true
+          for ( Symbol line : line_lib.getSymbols() ) {
+            String l_name = "L_" + replaceColon( line.getThName() );
+            String l_type = DXF.lt_continuous;
             if ( DXF.mVersion13 ) {
-              if ( lname.equals("L_pit") ) { 
-                ltype = DXF.lt_ticks;
-              } else if ( lname.equals("L_border" ) ) {
-                ltype = DXF.lt_center;
+              if ( l_name.equals("L_pit") ) {
+                l_type = DXF.lt_ticks;
+              } else if ( l_name.equals("L_border" ) ) {
+                l_type = DXF.lt_center;
               }
             }
             color = DxfColor.rgbToIndex( line.getColor() );
-            handle = DXF.printLayer( pw2, handle, lname, flag, color, ltype ); 
+            handle = DXF.printLayer( pw2, handle, l_name, flag, color, l_type );
           }
         }
 
-        if ( arealib != null ) { // always true
-          for ( Symbol area : arealib.getSymbols() ) {
-            String aname = "A_" + area.getThName().replace(':','-');
+        if ( area_lib != null ) { // always true
+          for ( Symbol area : area_lib.getSymbols() ) {
+            String a_name = "A_" + replaceColon( area.getThName() );
             color = DxfColor.rgbToIndex( area.getColor() );
-            handle = DXF.printLayer( pw2, handle, aname, flag, color, DXF.lt_continuous ); 
+            handle = DXF.printLayer( pw2, handle, a_name, flag, color, DXF.lt_continuous );
           }
         }
-        if ( pointlib != null ) { // always true
-          for ( Symbol point : pointlib.getSymbols() ) {
-            String pname = "P_" + point.getThName().replace(':','-');
+        if ( point_lib != null ) { // always true
+          for ( Symbol point : point_lib.getSymbols() ) {
+            String p_name = "P_" + replaceColon( point.getThName() );
             color = DxfColor.rgbToIndex( point.getColor() );
-            handle = DXF.printLayer( pw2, handle, pname, flag, color, DXF.lt_continuous ); 
+            handle = DXF.printLayer( pw2, handle, p_name, flag, color, DXF.lt_continuous );
           }
         }
         out.write( sw2.getBuffer().toString() );
@@ -481,14 +481,14 @@ public class DrawingDxf
           model_record_handle = handle;
           handle = DXF.writeSpaceBlockRecord( out, "*Paper_Space", handle );
 
-          for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
-            String th_name = BrushManager.getPointThName(n).replace(':','-');
-            DXF.writeString( out, 0, "BLOCK_RECORD" );
-            handle = DXF.writeAcDb( out, handle, DXF.AcDbSymbolTR, "AcDbBlockTableRecord" );
-            point_record_handle[ n ] = handle;
-            DXF.writeString( out, 8, "P_" + th_name );
-            DXF.writeString( out, 2, "B_" + th_name ); // block name
-            DXF.writeInt( out, 70, 0 );                // block insertion units
+          for (int n = 0; n < BrushManager.getPointLibSize(); ++n) {
+            String th_name = replaceColon( BrushManager.getPointThName(n) );
+            DXF.writeString(out, 0, "BLOCK_RECORD");
+            handle = DXF.writeAcDb(out, handle, DXF.AcDbSymbolTR, "AcDbBlockTableRecord");
+            point_record_handle[n] = handle;
+            DXF.writeString(out, 8, "P_" + th_name);
+            DXF.writeString(out, 2, "B_" + th_name); // block name
+            DXF.writeInt(out, 70, 0);                // block insertion units
           }
         }
         DXF.writeEndTable( out );
@@ -501,7 +501,7 @@ public class DrawingDxf
       {
         if ( DXF.mVersion13_14 ) {
           handle = DXF.writeSpaceBlock( out, "*Model_Space", handle );
-          model_block_handle = handle - 1; // spaceblock increase handle by 2
+          model_block_handle = handle - 1; // space-block increase handle by 2
           handle = DXF.writeSpaceBlock( out, "*Paper_Space", handle );
           // TDLog.v( "model handle " + String.format("%X", model_block_handle ) );
         }
@@ -510,13 +510,13 @@ public class DrawingDxf
         for ( int n = 0; n < BrushManager.getPointLibSize(); ++ n ) {
           int block_handle = -1;
           SymbolPoint pt = (SymbolPoint)BrushManager.getPointByIndex(n);
-	  String th_name = pt.getThName().replace(':','-');
           DXF.writeString( out, 0, "BLOCK" );
           if ( DXF.mVersion13_14 ) {
             // handle = DXF.writeAcDb( out, handle, DXF.AcDbEntity, "AcDbBlockBegin" );
             handle = DXF.writeAcDb( out, handle, point_record_handle[n], DXF.AcDbEntity, "AcDbBlockBegin" );
             block_handle = handle;
           }
+          String th_name = replaceColon( pt.getThName() );
           // DXF.writeString( out, 8, "P_" + th_name );
           DXF.writeString( out, 2, "B_" + th_name ); // block name, can be repeated with '3'
           DXF.writeInt( out, 70, 0 );       // flag 0=none, 1=anonymous, 2=non-const attr, 4=xref, 8=xref overlay,
@@ -696,10 +696,10 @@ public class DrawingDxf
           else if ( path.mType == DrawingPath.DRAWING_PATH_POINT )
           {
             DrawingPointPath point = (DrawingPointPath) path;
-	    String name = point.getThName();
-	    String th_name = point.getThName().replace(':','-');
-            int idx = 1 + point.mPointType;
-	    if ( name.equals("label") ) {
+	        String name = point.getThName();
+	        String th_name = replaceColon( point.getThName() );
+            // int idx = 1 + point.mPointType;
+	        if ( name.equals("label") ) {
               DrawingLabelPath label = (DrawingLabelPath)point;
               DXF.printString(pw5, 0, "TEXT");
               if ( DXF.mVersion13_14 ) {
@@ -757,7 +757,7 @@ public class DrawingDxf
                 if ( DXF.mVersion13_14 ) {
                   handle = toDxf( pw5, handle, model_block_handle, model_record_handle, point, scale, xoff, yoff, z );
                 } else {
-                  // String th_name = point.getThName().replace(':','-');
+                  // String th_name = replaceColon( point.getThName() );
                   DXF.printString( pw5, 0, "INSERT" );
                   DXF.printString( pw5, 8, "P_" + th_name );
                   DXF.printString( pw5, 2, "B_" + th_name );
@@ -860,7 +860,7 @@ public class DrawingDxf
          LABEL_SCALE, "POINT", DXF.style_dejavu, xoff, yoff, z );
     }
 
-    String th_name = point.getThName().replace(':','-');
+    String th_name = replaceColon( point.getThName() );
     // TDLog.v( "POINT PATH <" + th_name + "> " + String.format("%X %X", ref_handle, model_record_handle) );
     // int idx = 1 + point.mPointType;
     DXF.printString( pw, 0, "INSERT" );
@@ -886,8 +886,8 @@ public class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingLinePath line, float scale, float xoff, float yoff, float z )
   {
     if ( line == null ) return handle;
-    String layer = "L_" + line.getThName( ).replace(':','-');
-    int flag = 0;
+    String layer = "L_" + replaceColon( line.getThName( ) );
+    // int flag = 0;
     if ( DXF.mVersion13_14 && checkSpline( line ) ) {
       if ( TDSetting.mAcadSpline ) {
         int npt = countInterpolatedPolylinePoints( line, line.isClosed() );
@@ -918,9 +918,9 @@ public class DrawingDxf
   static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingAreaPath area, float scale, float xoff, float yoff, float z )
   {
     if ( area == null ) return handle;
-    float bezier_step = TDSetting.getBezierStep();
+    // float bezier_step = TDSetting.getBezierStep();
     // TDLog.v( "area size " + area.size() );
-    String layer = "A_" + area.getThName( ).replace(':','-');
+    String layer = "A_" + replaceColon( area.getThName( ) );
     if ( DXF.mVersion13_14 && checkSpline( area ) ) {
       if ( TDSetting.mAcadSpline ) {
         int npt = countInterpolatedPolylinePoints( area, true );
@@ -965,8 +965,8 @@ public class DrawingDxf
       // TDLog.Log( TDLog.LOG_IO, "tdr to dxf. scrapfile " + scrapfile );
       // TDLog.v( "tdr to dxf. scrapfile " + scrapfile );
       FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
-      BufferedInputStream bfis = new BufferedInputStream( fis );
-      DataInputStream dis = new DataInputStream( bfis );
+      BufferedInputStream b_fis = new BufferedInputStream( fis );
+      DataInputStream dis = new DataInputStream( b_fis );
       int version = DrawingIO.skipTdrHeader( dis );
       // TDLog.v( "tdr to svg delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
@@ -1028,5 +1028,19 @@ public class DrawingDxf
     return handle;
   }
 
+  /** @return the string with colon replaced with dash
+   * @param input   input string
+   */
+  static private String replaceColon( String input )
+  {
+    try {
+      return input.replace(':','-');
+    } catch ( NullPointerException e ) {
+      // TDLog.v("Error " + e.getMessage() );
+      return input;
+    }
+  }
+
 }
+
 

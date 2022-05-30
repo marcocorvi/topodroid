@@ -27,14 +27,14 @@ class LoxShot
   static final int TYPE_DIAMOND = 3;
   static final int TYPE_TUNNEL = 4;
 
-  int from;
-  int to;
-  int sid;
-  int flag;
-  int type;
-  double[] fLRUD;
-  double[] tLRUD;
-  double vthr;
+  private final int from;
+  private final int to;
+  private final int sid;
+  private final int flag;
+  private final int type;
+  private final double[] fLRUD;
+  private final double[] tLRUD;
+  private final double vthr;
 
   LoxShot( int f, int t, int _sid, int fl, int tp, double thr,
            double f0, double f1, double f2, double f3,

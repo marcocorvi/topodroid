@@ -14,10 +14,10 @@ package com.topodroid.c3in;
 
 class LoxSurvey
 {
-  int id;
-  int pid; // parent id
-  String name;
-  String title;
+  private final int id;
+  private final int pid; // parent id
+  private final String name;
+  private final String title;
 
   LoxSurvey( int _id, int _pid, String n, String t )
   {

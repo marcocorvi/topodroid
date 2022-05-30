@@ -36,7 +36,7 @@ public class WorldMagneticModel
   private static MagDate  mStartEpoch = null;
   private static float[]  mGeoidHeightBuffer = null;
   private static WMMcoeff[] mWmmCoeff = null;
-  private MagEllipsoid mEllip;
+  private MagEllipsoid mEllipsoid;
   private MagGeoid     mGeoid;
 
   public WorldMagneticModel( Context context )
@@ -52,7 +52,7 @@ public class WorldMagneticModel
     // mModel.epoch = 2020.0;
     // mModel.CoefficientFileEndDate = mModel.epoch + 5;
     mModel.setCoeffs( mWmmCoeff );
-    mEllip = new MagEllipsoid(); // default values
+    mEllipsoid = new MagEllipsoid(); // default values
     mGeoid = new MagGeoid( mGeoidHeightBuffer );
   }
 
@@ -109,7 +109,7 @@ public class WorldMagneticModel
     // geodetic.HeightAboveGeoid = -9999;
     // mGeoid.convertEllipsoidToGeoidHeight( geodetic ); // FIXME
 
-    MagSpherical spherical = mEllip.geodeticToSpherical( geodetic ); // geodetic to Spherical Eqs. 17-18 
+    MagSpherical spherical = mEllipsoid.geodeticToSpherical( geodetic ); // geodetic to Spherical Eqs. 17-18
     MagModel timedModel    = mModel.getTimelyModifyModel( date );
 
     // date.debugDate();
@@ -118,10 +118,10 @@ public class WorldMagneticModel
     GeomagLib geomag = new GeomagLib();
 
     /* Computes the geoMagnetic field elements and their time change*/
-    MagElement elems = geomag.MAG_Geomag( mEllip, spherical, geodetic, timedModel );
-    geomag.calculateGridVariation( geodetic, elems );
-    // MagElement errors = MagUtil.getWMMErrorCalc( elems.H );
-    return elems;
+    MagElement elements = geomag.MAG_Geomag( mEllipsoid, spherical, geodetic, timedModel );
+    geomag.calculateGridVariation( geodetic, elements );
+    // MagElement errors = MagUtil.getWMMErrorCalc( elements.H );
+    return elements;
   }
 
   // public static void main( String[] argv )
@@ -151,8 +151,8 @@ public class WorldMagneticModel
   //       double lat = Double.parseDouble( vals[3] );
   //       double lng = Double.parseDouble( vals[4] );
   //       // System.out.println("Compute " + date + " " + lat + " " + lng + " " + alt );
-  //       MagElement elems = WMM.computeMagElement( lat, lng, alt, date );
-  //       elems.dump();
+  //       MagElement elements = WMM.computeMagElement( lat, lng, alt, date );
+  //       elements.dump();
   //     }
   //     fr.close();
   //   } catch ( IOException e ) { }
@@ -160,13 +160,13 @@ public class WorldMagneticModel
 
   // --------------------------------------------------
 
-  // private static int byteToInt( byte[] bval )
+  // private static int byteToInt( byte[] b_val )
   // {
-  //   int i0 = (int)(bval[0]); if ( i0 < 0 ) i0 = 256 + i0;
-  //   int i1 = (int)(bval[1]); if ( i1 < 0 ) i1 = 256 + i1;
-  //   int i2 = (int)(bval[2]); if ( i2 < 0 ) i2 = 256 + i2;
-  //   int i3 = (int)(bval[3]); if ( i3 < 0 ) i3 = 256 + i3;
-  //   // System.out.println( "Bytes " + bval[0] + " " + bval[1] + " " + bval[2] + " " + bval[3] );
+  //   int i0 = (int)(b_val[0]); if ( i0 < 0 ) i0 = 256 + i0;
+  //   int i1 = (int)(b_val[1]); if ( i1 < 0 ) i1 = 256 + i1;
+  //   int i2 = (int)(b_val[2]); if ( i2 < 0 ) i2 = 256 + i2;
+  //   int i3 = (int)(b_val[3]); if ( i3 < 0 ) i3 = 256 + i3;
+  //   // System.out.println( "Bytes " + b_val[0] + " " + b_val[1] + " " + b_val[2] + " " + b_val[3] );
   //   // System.out.println( "Ints " + i0 + " " + i1 + " " + i2 + " " + i3 );
   //   // return (i0 | (i1<<8) | (i2<<16) | (i3<<24));
   //   return (((i3*256 + i2)*256 + i1)*256 + i0);
@@ -203,12 +203,12 @@ public class WorldMagneticModel
       if ( mGeoidHeightBuffer != null ) return;
       mGeoidHeightBuffer = new float[ N ];
       try {
-        // byte[] bval = new byte[4];
+        // byte[] b_val = new byte[4];
         // DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615" ) );
         // for ( int k=0; k < N; ++k ) {
-        //   fis.read( bval );
-        //   int ival = byteToInt( bval );
-        //   double val = ival / 1000.0f;
+        //   fis.read( b_val );
+        //   int i_val = byteToInt( b_val );
+        //   double val = i_val / 1000.0f;
         //   mGeoidHeightBuffer[k] = val;
         // }
         // fis.close();
@@ -219,41 +219,41 @@ public class WorldMagneticModel
   
         int[] res   = new int[ N ];
         int[] delta = new int[ ND ];
-        int dval1, dval2;
+        int d_val1, d_val2;
 
         DataInputStream fis = new DataInputStream( context.getAssets().open( "wmm/egm9615.1024" ) );
         fis.readFully( b4 );
-        int kold = 0;
-        res[kold] = byteToInt( b4 );
+        int k_old = 0;
+        res[k_old] = byteToInt( b4 );
         for ( int nk=0; nk<ND; ++nk ) {
           fis.readFully( b4 );
-          int oldval = byteToInt( b4 );
-          int dval = oldval >> 18;
-          int dk   = oldval & 0x03ffff; // if ( dval < 0 ) dk ^= 0x03ffff;
-          kold += dk + 1;
-          if ( kold < N ) {
-            res[kold] = dval; // dval is res[kold] - res[kold-1];
+          int old_val = byteToInt( b4 );
+          int d_val = old_val >> 18;
+          int dk   = old_val & 0x03ffff; // if ( d_val < 0 ) dk ^= 0x03ffff;
+          k_old += dk + 1;
+          if ( k_old < N ) {
+            res[k_old] = d_val; // d_val is res[k_old] - res[k_old-1];
           }
           delta[nk] = dk;
         }
-        kold = 0;
+        k_old = 0;
         for ( int nk=0; nk<ND; ++nk ) {
           int nj = delta[nk];
-          kold ++; // skip one res
+          k_old ++; // skip one res
           for ( int j=1; j<nj; j+=2 ) {
             fis.readFully( b3 );
-            dval1 = byteToFirst( b3 );
-            if ( dval1 >= 2048 ) dval1 -= 4096;
-            res[kold++] = dval1;
-            dval2 = byteToSecond( b3 );
-            if ( dval2 >= 2048 ) dval2 -= 4096;
-            res[kold++] = dval2;
+            d_val1 = byteToFirst( b3 );
+            if ( d_val1 >= 2048 ) d_val1 -= 4096;
+            res[k_old++] = d_val1;
+            d_val2 = byteToSecond( b3 );
+            if ( d_val2 >= 2048 ) d_val2 -= 4096;
+            res[k_old++] = d_val2;
           }
           if ( (nj%2) == 1 ) {
             fis.readFully( b2 );
-            dval1 = byteToFirst( b2 );
-            if ( dval1 >= 2048 ) dval1 -= 4096;
-            res[kold++] = dval1;
+            d_val1 = byteToFirst( b2 );
+            if ( d_val1 >= 2048 ) d_val1 -= 4096;
+            res[k_old++] = d_val1;
           }
         }
         fis.close();

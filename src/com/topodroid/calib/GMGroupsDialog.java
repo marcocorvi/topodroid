@@ -20,7 +20,7 @@ import com.topodroid.TDX.GMActivity;
 import android.os.Bundle;
 import android.content.Context;
 
-import android.widget.TextView;
+// import android.widget.TextView;
 // import android.widget.CheckBox;
 import android.widget.Button;
 import android.widget.RadioButton;
@@ -65,7 +65,7 @@ public class GMGroupsDialog extends MyDialog
     // mBtnCancel.setOnClickListener( this );
     ( (Button) findViewById( R.id.group_cancel ) ).setOnClickListener( this );
     
-    TextView policy = (TextView) findViewById( R.id.group_policy );
+    // TextView policy = (TextView) findViewById( R.id.group_policy );
     // if ( TDLevel.overExpert ) {
       mRBtd = (RadioButton) findViewById( R.id.gm_policy_td );
       mRBpt = (RadioButton) findViewById( R.id.gm_policy_pt );

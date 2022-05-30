@@ -32,7 +32,7 @@ class HullAngle
 
   void dump()
   {
-    TDLog.v("ANGLE " + station.getShortName() + " Ber " + deg(ber) + " a1 " + deg(a1) + " a2 " + deg(a2) + " Vber " + vBer.x + " " + vBer.y + " " + vBer.z );
+    TDLog.v("ANGLE " + station.getShortName() + " Ber " + deg(ber) + " a1 " + deg(a1) + " a2 " + deg(a2) + " V-ber " + vBer.x + " " + vBer.y + " " + vBer.z );
   }
     
 

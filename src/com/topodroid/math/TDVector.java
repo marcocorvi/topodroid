@@ -264,7 +264,7 @@ public class TDVector
     return dot_product( cross_product( p1, p2 ), p3 );
   }
 
-  /** @return the arc-distance of two unit vectors = arccos of the dot-product ( range in [0, PI] )
+  /** @return the arc-distance of two unit vectors = arc_cos of the dot-product ( range in [0, PI] )
    * @param p1  first unit vector
    * @param p2  second unit vector
    */

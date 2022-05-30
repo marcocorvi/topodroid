@@ -55,7 +55,7 @@ public class ExportGltf
   private final static String ARRAY_COORDS = "34962";
   private final static String ARRAY_ELEMS  = "34963";
 
-  private final static String TYPE_SCALAR  = "SCALAR";
+  private final static String  TYPE_SCALAR  = "SCALAR";
   private final static String TYPE_VEC3    = "VEC3";
   private final static String TYPE_VEC4    = "VEC4";
   private final static String TYPE_MAT4    = "MAT4";
@@ -73,7 +73,7 @@ public class ExportGltf
   private final static String ALPHA_MASK   = "MASK";
   private final static String ALPHA_BLEND  = "BLEND";
 
-  private final static String LIGHT_DIRECTIONAL  = "directional";
+  private final static String LIGHT_DIRECTIONAL = "directional";
   private final static String LIGHT_POINT        = "point";
   private final static String LIGHT_SPOT         = "spot";
 
@@ -144,7 +144,7 @@ public class ExportGltf
     String formatMin() { return String.format(Locale.US, "[ %f, %f, %f ]", xmin, ymin, zmin ); }
   }
 
-  private void doExport( PrintWriter pw, String rootpath, String subdir, ArrayList<String> files ) // throws IOException
+  private void doExport( PrintWriter pw, String root_path, String subdir, ArrayList<String> files ) // throws IOException
   {
     int count_stations = (mModel.glNames  == null)? 0 : mModel.glNames.size();
     int count_legs     = (mModel.glLegs   == null)? 0 : mModel.glLegs.size()   * 2;
@@ -179,10 +179,10 @@ public class ExportGltf
     // String max_splays   = String.format(Locale.US, "[  1.0,  1.0,  1.0 ]", mModel.glSplays.getXmax(), mModel.glSplays.getYmax(), mModel.glSplays.getZmax() );
     // String min_splays   = String.format(Locale.US, "[ -1.0, -1.0, -1.0 ]", mModel.glSplays.getXmin(), mModel.glSplays.getYmin(), mModel.glSplays.getZmin() );
 
-    String buffer_stations = rootpath + "/stations.bin"; // buffer pathnames are always prepared
-    String buffer_legs     = rootpath + "/legs.bin";
-    String buffer_splays   = rootpath + "/splays.bin";
-    String buffer_surface  = rootpath + "/surface.bin";
+    String buffer_stations = root_path + "/stations.bin"; // buffer pathnames are always prepared
+    String buffer_legs     = root_path + "/legs.bin";
+    String buffer_splays   = root_path + "/splays.bin";
+    String buffer_surface  = root_path + "/surface.bin";
 
     int bytelen_stations = 0;
     String max_stations  = null;
@@ -232,8 +232,8 @@ public class ExportGltf
       min_surface = minMax4.formatMin();
       max_surface_normals = minMax5.formatMax();
       min_surface_normals = minMax5.formatMin();
-      // TDLog.v("Gltf minmax_P " + min_surface + " " + max_surface );
-      // TDLog.v("Gltf minmax_N " + min_surface_normals + " " + max_surface_normals );
+      // TDLog.v("Gltf min-max_P " + min_surface + " " + max_surface );
+      // TDLog.v("Gltf min-max_N " + min_surface_normals + " " + max_surface_normals );
       if ( bytelen_surface == 0 ) {
         has_surface = false;
       } else {
@@ -248,7 +248,7 @@ public class ExportGltf
     // int bytelen_legs     = printBufferData( baos2, mModel.glLegs,   min, max );
     // int bytelen_splays   = printBufferData( baos3, mModel.glSplays, min, max );
 
-    int sep = rootpath.lastIndexOf('/');
+    int sep = root_path.lastIndexOf('/');
     if ( sep >= 0 ) {
       buffer_stations = buffer_stations.substring( sep+1 );
       buffer_legs     = buffer_legs.substring( sep+1 );
@@ -326,7 +326,7 @@ public class ExportGltf
     }
     closeArrayTag( pw, 1, true );
 
-    openArrayTag( pw, 1, "bufferViews" ); // ----------- BUFFERVIEWS
+    openArrayTag( pw, 1, "bufferViews" ); // ----------- BUFFER-VIEWS
     {
       int buffer = 0;
       if ( has_stations ) printBufferView( pw, 2, buffer++, 0, bytelen_stations, 12, ARRAY_COORDS, true );
@@ -379,7 +379,7 @@ public class ExportGltf
     printAttributeWithComma( pw, indent+2, "metallicFactor",  String.format(Locale.US, "%.2f", metallic ) );
     printAttribute( pw, indent+2, "roughnessFactor", String.format(Locale.US, "%.2f", roughness ) );
     closeElement( pw, indent+1, true ); 
-    // NOT AN ATTROBUTE printAttributeWithComma( pw, indent+1, "opacity", "0.5" );
+    // NOT AN ATTRIBUTE printAttributeWithComma( pw, indent+1, "opacity", "0.5" );
     printAttributeString( pw, indent+1, "alphaMode", alpha );
     closeElement( pw, indent, comma ); 
   }
@@ -605,20 +605,20 @@ public class ExportGltf
       FileOutputStream fos = new FileOutputStream( filepath );
       DataOutputStream dos = new DataOutputStream( fos );
       if ( names != null && names.getVertexData() != null ) {
-        int fstride = GlNames.getVertexStride(); 
-        int fcoords = GlNames.getVertexSize(); 
-        int fcount  = names.size();
-        if ( fcount > 0 ) {
+        int f_stride = GlNames.getVertexStride();
+        int f_coords = GlNames.getVertexSize();
+        int f_count  = names.size();
+        if ( f_count > 0 ) {
           minMax.reset();
           float[] array = names.getVertexData();
-          int     flen  = names.size() * fstride;
+          int     f_len  = names.size() * f_stride;
           int offset = 0;
-          while ( offset < flen ) {
-            // TDLog.v("Gltf Names file " + filepath + " stride " + fstride + " coords " + fcoords + " flen " + flen + " offset " + offset );
+          while ( offset < f_len ) {
+            // TDLog.v("Gltf Names file " + filepath + " stride " + f_stride + " coords " + f_coords + " length " + f_len + " offset " + offset );
             byte[] buffer = new byte[ BUFFER_SIZE1 ];
-            int nb = getNextChunk( buffer, BUFFER_SIZE1, array, flen, offset, fcoords, fstride, minMax );
+            int nb = getNextChunk( buffer, BUFFER_SIZE1, array, f_len, offset, f_coords, f_stride, minMax );
             dos.write( buffer, 0, nb );
-            offset += fstride * nb / (4*fcoords);
+            offset += f_stride * nb / (4*f_coords);
             len += nb;
           }
           // TDLog.v("Gltf Names file " + filepath + " written len " + len + " offset " + offset );
@@ -647,20 +647,20 @@ public class ExportGltf
       FileOutputStream fos = new FileOutputStream( filepath );
       DataOutputStream dos = new DataOutputStream( fos );
       if ( lines != null && lines.getVertexData() != null ) {
-        int fstride = GlLines.getVertexStride(); 
-        int fcoords = GlLines.getVertexSize(); 
-        int fcount  = lines.size(); // getVertexCount();
-        if ( fcount > 0 ) {
+        int f_stride = GlLines.getVertexStride();
+        int f_coords = GlLines.getVertexSize();
+        int f_count  = lines.size(); // getVertexCount();
+        if ( f_count > 0 ) {
           minMax.reset();
           float[] array = lines.getVertexData();
-          int     flen  = lines.size() * fstride * 2; // 14 floats per line (two vertices of 3+4 floats)
+          int     f_len  = lines.size() * f_stride * 2; // 14 floats per line (two vertices of 3+4 floats)
           int offset = 0;
-          // TDLog.v("Gltf Lines file stride " + fstride + " coords " + fcoords + " flen " + flen + " offset " + offset + " count " + fcount );
-          while ( offset < flen ) {
+          // TDLog.v("Gltf Lines file stride " + f_stride + " coords " + f_coords + " length " + f_len + " offset " + offset + " count " + f_count );
+          while ( offset < f_len ) {
             byte[] buffer = new byte[ BUFFER_SIZE2 ];
-            int nb = getNextChunk( buffer, BUFFER_SIZE2, array, flen, offset, fcoords, fstride, minMax );
+            int nb = getNextChunk( buffer, BUFFER_SIZE2, array, f_len, offset, f_coords, f_stride, minMax );
             dos.write( buffer, 0, nb );
-            offset += fstride * nb / (4 * fcoords);
+            offset += f_stride * nb / (4 * f_coords);
             len += nb;
           }
           // TDLog.v("Gltf Lines file written len " + len + " end offset " + offset );
@@ -691,21 +691,21 @@ public class ExportGltf
       FileOutputStream fos = new FileOutputStream( filepath );
       DataOutputStream dos = new DataOutputStream( fos );
       if ( surface != null && surface.getSurfaceData() != null ) {
-        int fstride = GlSurface.getVertexStride(); 
-        int fcoords = GlSurface.getVertexSize(); // position + normal
-        int fcount  = surface.getVertexCount();
-        if ( fcount > 0 ) {
+        int f_stride = GlSurface.getVertexStride();
+        int f_coords = GlSurface.getVertexSize(); // position + normal
+        int f_count  = surface.getVertexCount();
+        if ( f_count > 0 ) {
           minMaxP.reset();
           minMaxN.reset();
           float[] array = surface.getSurfaceData();
-          int     flen  = surface.size() * fstride * 3; // 3*3*6 floats per triangle (three vertices of 3+3 floats)
+          int     f_len  = surface.size() * f_stride * 3; // 3*3*6 floats per triangle (three vertices of 3+3 floats)
           int offset = 0;
-          // TDLog.v("Gltf Surface file stride " + fstride + " coords " + fcoords + " flen " + flen + " offset " + offset + " count " + fcount );
-          while ( offset < flen ) {
+          // TDLog.v("Gltf Surface file stride " + f_stride + " coords " + f_coords + " length " + f_len + " offset " + offset + " count " + f_count );
+          while ( offset < f_len ) {
             byte[] buffer = new byte[ BUFFER_SIZE6 ];
-            int nb = getNextChunkPN( buffer, BUFFER_SIZE6, array, flen, offset, fcoords, fstride, minMaxP, minMaxN );
+            int nb = getNextChunkPN( buffer, BUFFER_SIZE6, array, f_len, offset, f_coords, f_stride, minMaxP, minMaxN );
             dos.write( buffer, 0, nb );
-            offset += fstride * nb / (4 * fcoords);
+            offset += f_stride * nb / (4 * f_coords);
             len += nb;
           }
           // TDLog.v("Gltf Surface file written len " + len + " end offset " + offset );
@@ -722,51 +722,51 @@ public class ExportGltf
   }
 
   /** copy a chunk of bytes from an array of float to and array of bytes
-   * @param buf     array of bytes (preallocated)
-   * @param clen    length of the array of bytes
+   * @param buf     array of bytes (pre-allocated)
+   * @param c_len   length of the array of bytes
    * @param array   array of floats
-   * @param flen    length of the array of floats
+   * @param f_len   length of the array of floats
    * @param offset  index in the array of float to start with
    * @param len     number of floats to copy for each "vertex"
    * @param stride  number of floats in a vertex
    * @return the number of bytes copied into the array of bytes
    */
-  private int getNextChunk( byte[] buf, int clen, float[] array, int flen, int offset, int len, int stride, MinMax minMax )
+  private int getNextChunk( byte[] buf, int c_len, float[] array, int f_len, int offset, int len, int stride, MinMax minMax )
   {
     // StringBuilder sb = new StringBuilder();
-    int bpos = 0;
-    int klen = clen / (4*len);
-    // TDLog.v("Gltf Get chunk Flen " + flen + " offset " + offset + " len " + len + " klen " + klen );
-    // sb.append("[" + klen + "]" );
-    for ( int k=0; k<klen; ++k ) {
-      int fpos = offset + k * stride;
-      if ( fpos >= flen ) break;
+    int b_pos = 0;
+    int k_len = c_len / (4*len);
+    // TDLog.v("Gltf Get chunk length " + f_len + " offset " + offset + " len " + len + " k-len " + k_len );
+    // sb.append("[" + k_len + "]" );
+    for ( int k=0; k<k_len; ++k ) {
+      int f_pos = offset + k * stride;
+      if ( f_pos >= f_len ) break;
       for ( int j=0; j<len; ++j ) {
-        float fval = array[fpos+j];
+        float f_val = array[f_pos+j];
         if ( j == 0 ) {
-          if ( fval < minMax.xmin ) { minMax.xmin = fval; } else if  ( fval > minMax.xmax ) { minMax.xmax = fval; }
+          if ( f_val < minMax.xmin ) { minMax.xmin = f_val; } else if  ( f_val > minMax.xmax ) { minMax.xmax = f_val; }
         } else if ( j == 1 ) {
-          if ( fval < minMax.ymin ) { minMax.ymin = fval; } else if  ( fval > minMax.ymax ) { minMax.ymax = fval; }
+          if ( f_val < minMax.ymin ) { minMax.ymin = f_val; } else if  ( f_val > minMax.ymax ) { minMax.ymax = f_val; }
         } else if ( j == 2 ) {
-          if ( fval < minMax.zmin ) { minMax.zmin = fval; } else if  ( fval > minMax.zmax ) { minMax.zmax = fval; }
+          if ( f_val < minMax.zmin ) { minMax.zmin = f_val; } else if  ( f_val > minMax.zmax ) { minMax.zmax = f_val; }
         }
-        int val = Float.floatToRawIntBits( fval );
-        // sb.append( " " + fval );
-        buf[bpos++] = (byte) (val);
-        buf[bpos++] = (byte) (val >> 8);
-        buf[bpos++] = (byte) (val >> 16) ;
-        buf[bpos++] = (byte) (val >> 24);
+        int val = Float.floatToRawIntBits( f_val );
+        // sb.append( " " + f_val );
+        buf[b_pos++] = (byte) (val);
+        buf[b_pos++] = (byte) (val >> 8);
+        buf[b_pos++] = (byte) (val >> 16) ;
+        buf[b_pos++] = (byte) (val >> 24);
       }
     }
     // TDLog.v("Gltf Chunk " + sb.toString() );
-    return bpos;
+    return b_pos;
   }
 
   /** copy a chunk of bytes from an array of float to and array of bytes
-   * @param buf     array of bytes (preallocated)
-   * @param clen    length of the array of bytes
+   * @param buf     array of bytes (pre-allocated)
+   * @param c_len    length of the array of bytes
    * @param array   array of floats
-   * @param flen    length of the array of floats
+   * @param f_len    length of the array of floats
    * @param offset  index in the array of float to start with
    * @param len     number of floats to copy for each "vertex"
    * @param stride  number of floats in a vertex
@@ -774,94 +774,94 @@ public class ExportGltf
    * @param minMaxN normal min-max
    * @return the number of bytes copied into the array of bytes
    */
-  private int getNextChunkPN( byte[] buf, int clen, float[] array, int flen, int offset, int len, int stride, MinMax minMaxP, MinMax minMaxN )
+  private int getNextChunkPN( byte[] buf, int c_len, float[] array, int f_len, int offset, int len, int stride, MinMax minMaxP, MinMax minMaxN )
   {
     // assert( len == 6 );
     // StringBuilder sb = new StringBuilder();
-    int bpos = 0;
-    int klen = clen / (4*len);
-    // TDLog.v("Gltf Get chunk Flen " + flen + " offset " + offset + " len " + len + " klen " + klen );
-    // sb.append("[" + klen + "]" );
-    for ( int k=0; k<klen; ++k ) {
-      int fpos = offset + k * stride;
-      if ( fpos >= flen ) break;
+    int b_pos = 0;
+    int k_len = c_len / (4*len);
+    // TDLog.v("Gltf Get chunk length " + f_len + " offset " + offset + " len " + len + " k-len " + k_len );
+    // sb.append("[" + k_len + "]" );
+    for ( int k=0; k<k_len; ++k ) {
+      int f_pos = offset + k * stride;
+      if ( f_pos >= f_len ) break;
       
-      float xval = array[fpos+0]; // position
-      float yval = array[fpos+1];
-      float zval = array[fpos+2];
-      if ( xval < minMaxP.xmin ) { minMaxP.xmin = xval; } else if  ( xval > minMaxP.xmax ) { minMaxP.xmax = xval; }
-      if ( yval < minMaxP.ymin ) { minMaxP.ymin = yval; } else if  ( yval > minMaxP.ymax ) { minMaxP.ymax = yval; }
-      if ( zval < minMaxP.zmin ) { minMaxP.zmin = zval; } else if  ( zval > minMaxP.zmax ) { minMaxP.zmax = zval; }
-      int val = Float.floatToRawIntBits( xval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
-      val = Float.floatToRawIntBits( yval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
-      val = Float.floatToRawIntBits( zval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
+      float x_val = array[f_pos  ]; // position
+      float y_val = array[f_pos+1];
+      float z_val = array[f_pos+2];
+      if ( x_val < minMaxP.xmin ) { minMaxP.xmin = x_val; } else if  ( x_val > minMaxP.xmax ) { minMaxP.xmax = x_val; }
+      if ( y_val < minMaxP.ymin ) { minMaxP.ymin = y_val; } else if  ( y_val > minMaxP.ymax ) { minMaxP.ymax = y_val; }
+      if ( z_val < minMaxP.zmin ) { minMaxP.zmin = z_val; } else if  ( z_val > minMaxP.zmax ) { minMaxP.zmax = z_val; }
+      int val = Float.floatToRawIntBits( x_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
+      val = Float.floatToRawIntBits( y_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
+      val = Float.floatToRawIntBits( z_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
 
-      xval = array[fpos+3]; // normal
-      yval = array[fpos+4];
-      zval = array[fpos+5];
-      float nlen = (float)Math.sqrt( xval*xval + yval*yval + zval*zval );
-      xval /= nlen;
-      yval /= nlen;
-      zval /= nlen;
-      if ( xval < minMaxN.xmin ) { minMaxN.xmin = xval; } else if  ( xval > minMaxN.xmax ) { minMaxN.xmax = xval; }
-      if ( yval < minMaxN.ymin ) { minMaxN.ymin = yval; } else if  ( yval > minMaxN.ymax ) { minMaxN.ymax = yval; }
-      if ( zval < minMaxN.zmin ) { minMaxN.zmin = zval; } else if  ( zval > minMaxN.zmax ) { minMaxN.zmax = zval; }
-      val = Float.floatToRawIntBits( xval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
-      val = Float.floatToRawIntBits( yval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
-      val = Float.floatToRawIntBits( zval );
-      buf[bpos++] = (byte) (val);
-      buf[bpos++] = (byte) (val >> 8);
-      buf[bpos++] = (byte) (val >> 16) ;
-      buf[bpos++] = (byte) (val >> 24);
+      x_val = array[f_pos+3]; // normal
+      y_val = array[f_pos+4];
+      z_val = array[f_pos+5];
+      float n_len = (float)Math.sqrt( x_val*x_val + y_val*y_val + z_val*z_val );
+      x_val /= n_len;
+      y_val /= n_len;
+      z_val /= n_len;
+      if ( x_val < minMaxN.xmin ) { minMaxN.xmin = x_val; } else if  ( x_val > minMaxN.xmax ) { minMaxN.xmax = x_val; }
+      if ( y_val < minMaxN.ymin ) { minMaxN.ymin = y_val; } else if  ( y_val > minMaxN.ymax ) { minMaxN.ymax = y_val; }
+      if ( z_val < minMaxN.zmin ) { minMaxN.zmin = z_val; } else if  ( z_val > minMaxN.zmax ) { minMaxN.zmax = z_val; }
+      val = Float.floatToRawIntBits( x_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
+      val = Float.floatToRawIntBits( y_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
+      val = Float.floatToRawIntBits( z_val );
+      buf[b_pos++] = (byte) (val);
+      buf[b_pos++] = (byte) (val >> 8);
+      buf[b_pos++] = (byte) (val >> 16) ;
+      buf[b_pos++] = (byte) (val >> 24);
     }
     // TDLog.v("Gltf Chunk " + sb.toString() );
-    return bpos;
+    return b_pos;
   }
 
   /*
-  private int getNextChunk2_3( byte[] buf, int clen, float[] array, int flen, int offset, int len, int stride, float min, float scale )
+  private int getNextChunk2_3( byte[] buf, int c_len, float[] array, int f_len, int offset, int len, int stride, float min, float scale )
   {
     StringBuilder sb = new StringBuilder();
-    int bpos = 0;
-    int klen = clen / (4*len);
-    sb.append("[" + klen + "]" );
-    for ( int k=0; k<klen; ++k ) {
-      int fpos = offset + k * stride;
-      if ( fpos >= flen ) break;
+    int b_pos = 0;
+    int k_len = c_len / (4*len);
+    sb.append("[" + k_len + "]" );
+    for ( int k=0; k<k_len; ++k ) {
+      int f_pos = offset + k * stride;
+      if ( f_pos >= f_len ) break;
       for ( int j=0; j<len; ++j ) {
-        float fval1 = (array[fpos+j+0]-min)/scale - 1.0f;
-        int val1 = Float.floatToRawIntBits( fval1 );
-        // float fval2 = (array[fpos+j+1]-min)/scale - 1.0f;
-        // int val2 = Float.floatToRawIntBits( fval2 );
-        // sb.append( " " + fval1 );
-        buf[bpos++] = (byte) (val1 >> 24);
-        buf[bpos++] = (byte) (val1 >> 16) ;
-        buf[bpos++] = (byte) (val1 >> 8);
-        buf[bpos++] = (byte) (val1);
+        float f_val1 = (array[f_pos+j+0]-min)/scale - 1.0f;
+        int val1 = Float.floatToRawIntBits( f_val1 );
+        // float f_val2 = (array[f_pos+j+1]-min)/scale - 1.0f;
+        // int val2 = Float.floatToRawIntBits( f_val2 );
+        // sb.append( " " + f_val1 );
+        buf[b_pos++] = (byte) (val1 >> 24);
+        buf[b_pos++] = (byte) (val1 >> 16) ;
+        buf[b_pos++] = (byte) (val1 >> 8);
+        buf[b_pos++] = (byte) (val1);
       }
     }
     // TDLog.v("Gltf Chunk " + sb.toString() );
-    return bpos;
+    return b_pos;
   }
   */
 

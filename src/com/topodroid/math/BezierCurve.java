@@ -19,16 +19,16 @@ import java.util.ArrayList;
 public class BezierCurve
 {
   private Point2D[] c;      // control points of the cubic spline
-  private Point2D[] Vtemp;  // work vector of four points
+  private Point2D[] v_temp;  // work vector of four points
   private int splitIndex;       // Point of split (criteria: maximum error)	
 
   // BezierCurve() // UNUSED
   // {
   //   c = new Point2D[4];
-  //   Vtemp = new Point2D[4];
+  //   v_temp = new Point2D[4];
   //   for (int i=0; i<4; ++i ) {
   //     c[i] = new Point2D();
-  //     Vtemp[i] = new Point2D();
+  //     v_temp[i] = new Point2D();
   //   }
   //   splitIndex = -1;
   // }
@@ -37,13 +37,13 @@ public class BezierCurve
   public BezierCurve( Point2D c0, Point2D c1, Point2D c2, Point2D c3 )
   {
     c = new Point2D[4];
-    Vtemp = new Point2D[4];
+    v_temp = new Point2D[4];
     c[0] = new Point2D( c0 );
     c[1] = new Point2D( c1 );
     c[2] = new Point2D( c2 );
     c[3] = new Point2D( c3 );
     for (int i=0; i<4; ++i ) {
-      Vtemp[i] = new Point2D();
+      v_temp[i] = new Point2D();
     }
     splitIndex = -1;
   }
@@ -52,13 +52,13 @@ public class BezierCurve
   public BezierCurve( float x0, float y0, float x1, float y1, float x2, float y2, float x3, float y3 )
   {
     c = new Point2D[4];
-    Vtemp = new Point2D[4];
+    v_temp = new Point2D[4];
     c[0] = new Point2D( x0, y0 );
     c[1] = new Point2D( x1, y1 );
     c[2] = new Point2D( x2, y2 );
     c[3] = new Point2D( x3, y3 );
     for (int i=0; i<4; ++i ) {
-      Vtemp[i] = new Point2D();
+      v_temp[i] = new Point2D();
     }
     splitIndex = -1;
   }
@@ -121,15 +121,15 @@ public class BezierCurve
   {
     float t1 = 1.0f - t;
     for (int i = 0; i <= degree; i++) { // copy array
-      Vtemp[i].set( V[i] );
+      v_temp[i].set( V[i] );
     }
     for (int i = 1; i <= degree; i++) {	// triangle computation
       for (int j = 0; j <= degree-i; j++) {
-        Vtemp[j].x = t1 * Vtemp[j].x + t * Vtemp[j+1].x;
-        Vtemp[j].y = t1 * Vtemp[j].y + t * Vtemp[j+1].y;
+        v_temp[j].x = t1 * v_temp[j].x + t * v_temp[j+1].x;
+        v_temp[j].y = t1 * v_temp[j].y + t * v_temp[j+1].y;
       }
     }
-    return Vtemp[0];
+    return v_temp[0];
   }
 
   /**  findRootNewtonRaphson: Use Newton-Raphson iteration to find better root.

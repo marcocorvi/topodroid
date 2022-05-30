@@ -137,8 +137,8 @@ class ParserTherion extends ImportParser
   {
     String path = basepath;   // survey pathname(s)
     int ks = 0;               // survey index
-    int ksmax = 20;
-    int[] survey_pos = new int[ksmax]; // current survey pos in the pathname
+    int ks_max = 20;
+    int[] survey_pos = new int[ks_max]; // current survey pos in the pathname
 
     int jFrom    = 0;
     int jTo      = 1;
@@ -242,9 +242,9 @@ class ParserTherion extends ImportParser
               survey_pos[ks] = path.length(); // set current survey pos in pathname
               path = path + "." + vals[1];    // add survey name to path
               ++ks;
-	      if ( ks >= ksmax ) {
-		    ksmax += 10;
-		    int[] tmp = new int[ksmax];
+	      if ( ks >= ks_max ) {
+		    ks_max += 10;
+		    int[] tmp = new int[ks_max];
 		    // for ( int k=0; k<ks; ++k ) tmp[k] = survey_pos[k];
 		    System.arraycopy( survey_pos, 0, tmp, 0, ks );
 		    survey_pos = tmp;
@@ -284,7 +284,7 @@ class ParserTherion extends ImportParser
                       if ( vals[j].endsWith( "\"" ) ) {
                         mTitle = vals[j].substring(1,vals[j].length()-1);
                       } else {
-                        StringBuffer sb = new StringBuffer();
+                        StringBuilder sb = new StringBuilder();
                         sb.append( vals[j].substring(1) );
                         for ( ++j; j<vals_len; ++j ) {
                           if ( vals[j].length() == 0 ) continue;
@@ -321,14 +321,14 @@ class ParserTherion extends ImportParser
               // } else if ( cmd.equals("explo-team") ) {
               // } else if ( cmd.equals("instrument") ) {
               } else if ( cmd.equals("calibrate") ) {
-                boolean clen = false;
-                boolean cber = false;
-                boolean ccln = false;
+                boolean c_len = false;
+                boolean c_ber = false;
+                boolean c_cln = false;
 		int k = 1;
                 for ( ; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length") || vals[k].equals("tape") )     clen = true;
-                  if ( vals[k].equals("compass") || vals[k].equals("bearing") ) cber = true;
-                  if ( vals[k].equals("clino") || vals[k].equals("gradient") )  ccln = true;
+                  if ( vals[k].equals("length") || vals[k].equals("tape") )     c_len = true;
+                  if ( vals[k].equals("compass") || vals[k].equals("bearing") ) c_ber = true;
+                  if ( vals[k].equals("clino") || vals[k].equals("gradient") )  c_cln = true;
                 }
                 float zero = 0.0f;
                 float scale = 1.0f;
@@ -352,30 +352,30 @@ class ParserTherion extends ImportParser
           }
                 }
 
-                if ( clen ) {
+                if ( c_len ) {
                   state.mZeroLen  = zero;
                   state.mScaleLen = scale;
                 }
-                if ( cber ) {
+                if ( c_ber ) {
                   state.mZeroBer  = zero;
                   state.mScaleBer = scale;
                 }
-                if ( ccln ) {
+                if ( c_cln ) {
                   state.mZeroCln  = zero;
                   state.mScaleCln = scale;
                 }
               } else if ( cmd.equals("units") ) { // units quantity_list [factor] unit
-                boolean ulen = false;
-                boolean uber = false;
-                boolean ucln = false;
-                boolean uleft  = false;
-                boolean uright = false;
-                boolean uup    = false;
-                boolean udown  = false;
+                boolean u_len = false;
+                boolean u_ber = false;
+                boolean u_cln = false;
+                boolean u_left  = false;
+                boolean u_right = false;
+                boolean u_up    = false;
+                boolean u_down  = false;
                 for ( int k=1; k<vals_len - 1; ++k ) {
-                  if ( vals[k].equals("length")  || vals[k].equals("tape") )     ulen = true;
-                  if ( vals[k].equals("compass") || vals[k].equals("bearing") )  uber = true;
-                  if ( vals[k].equals("clino")   || vals[k].equals("gradient") ) ucln = true;
+                  if ( vals[k].equals("length")  || vals[k].equals("tape") )     u_len = true;
+                  if ( vals[k].equals("compass") || vals[k].equals("bearing") )  u_ber = true;
+                  if ( vals[k].equals("clino")   || vals[k].equals("gradient") ) u_cln = true;
                 }
                 float factor = 1.0f;
                 try {
@@ -383,14 +383,14 @@ class ParserTherion extends ImportParser
                 } catch ( NumberFormatException e ) {
                   TDLog.Debug( "therion parser: units without factor " + line ); // this is OK
                 }
-                if ( ulen || uleft || uright || uup || udown ) {
+                if ( u_len || u_left || u_right || u_up || u_down ) {
                   float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
-                  if ( ulen )   state.mUnitLen   = len;
+                  if ( u_len )   state.mUnitLen   = len;
                 } 
-                if ( uber || ucln ) {
+                if ( u_ber || u_cln ) {
                   float angle = factor * ParserUtil.parseAngleUnit( vals[vals_len-1] );
-                  if ( uber ) state.mUnitBer = angle;
-                  if ( ucln ) state.mUnitCln = angle;
+                  if ( u_ber ) state.mUnitBer = angle;
+                  if ( u_cln ) state.mUnitCln = angle;
                 }
               } else if ( cmd.equals("sd") ) {
                 // ignore
@@ -462,7 +462,7 @@ class ParserTherion extends ImportParser
                     if ( comment.endsWith( "\"" ) ) {
                       comment = comment.substring(1,comment.length()-1);
                     } else {
-                      StringBuffer sb = new StringBuffer();
+                      StringBuilder sb = new StringBuilder();
                       sb.append( comment.substring( 1 ) );
                       for ( int kk=3; kk<vals_len; ++kk ) {
                         if ( vals[kk].endsWith("\"") ) {
@@ -688,8 +688,8 @@ class ParserTherion extends ImportParser
               } else {
                 TDLog.Error("Parser Therion: endsurvey out of survey");
 	      }
-              int kpos = survey_pos[ks];
-              path = ( kpos > 0 )? path.substring(kpos) : ""; // return to previous survey_pos in path
+              int k_pos = survey_pos[ks];
+              path = ( k_pos > 0 )? path.substring(k_pos) : ""; // return to previous survey_pos in path
               state.in_survey = ( ks > 0 );
             }
           }

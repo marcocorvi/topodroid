@@ -141,11 +141,11 @@ class ParserVisualTopoX extends ImportParser
    * @param mRight      right (if positive)
    * @param mUp         up (if positive)
    * @param mDown       down (if positive)
-   * @param dirw        direction of view (for left/right azimuth)
+   * @param dir_w        direction of view (for left/right azimuth)
    */
   private void addLeg( String mFrom, String mTo, float mLength, float mBearing, float mClino,
                       int shot_extend, boolean duplicate, boolean surface, boolean backshot, String comment,
-                      String station, float mLeft, float mRight, float mUp, float mDown, float dirw )
+                      String station, float mLeft, float mRight, float mUp, float mDown, float dir_w )
   {
     // TDLog.v("add leg " + mFrom + " " + mTo );
     if ( mLegFirst ) {
@@ -155,12 +155,12 @@ class ParserVisualTopoX extends ImportParser
     }
     if ( mLrud ) {
       if ( mLeft > 0 ) {
-        float ber = TDMath.in360( mBearing + 180 + 90 * dirw );
+        float ber = TDMath.in360( mBearing + 180 + 90 * dir_w );
         int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
         shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
       }
       if ( mRight > 0 ) {
-        float ber = TDMath.in360( mBearing + 180 - 90 * dirw );
+        float ber = TDMath.in360( mBearing + 180 - 90 * dir_w );
         int extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
         shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, LegType.XSPLAY, false, false, false, "" ) );
       } 
@@ -197,9 +197,9 @@ class ParserVisualTopoX extends ImportParser
     boolean isSplay = false;
     String last_to = "";
 
-    int dirw = 1;  // direction of left/right width
-    int dirb = 1;  // bearing direction
-    int dirc = 1;  // clino direction
+    int dir_w = 1;  // direction of left/right width
+    int dir_b = 1;  // bearing direction
+    int dir_c = 1;  // clino direction
 
     boolean splayAtFrom = true;
     String comment = "";
@@ -269,7 +269,7 @@ class ParserVisualTopoX extends ImportParser
               addSplay( mFrom, mLength, mBearing, mClino );
             } else {
               addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment,
-                      mStation, mLeft, mRight, mUp, mDown, dirw );
+                      mStation, mLeft, mRight, mUp, mDown, dir_w );
             }
           }
         } else if ( line.startsWith("</Visee>") && inMesures ) { 
@@ -278,7 +278,7 @@ class ParserVisualTopoX extends ImportParser
               addSplay( mFrom, mLength, mBearing, mClino );
             } else {
               addLeg( mFrom, mTo, mLength, mBearing, mClino, shot_extend, duplicate, surface, backshot, comment,
-                      mStation, mLeft, mRight, mUp, mDown, dirw );
+                      mStation, mLeft, mRight, mUp, mDown, dir_w );
             }
           }
           inVisee = false;
@@ -292,7 +292,7 @@ class ParserVisualTopoX extends ImportParser
               } else if ( "Gra".equals( value ) ) {
                 ub = 0.9f; // 360/400
               } else if ( "Degd".equals( value ) ) {
-                // nothing: ub = 1, dmb = false
+                TDLog.v("Degd: nothing"); // ub = 1, dmb = false
               }
             }
           }
@@ -303,7 +303,7 @@ class ParserVisualTopoX extends ImportParser
               } else if ( "Gra".equals( value ) ) {
                 uc = 0.9f; // 360/400
               } else if ( "Degd".equals( value ) ) {
-                // nothing: uc = 1, dmc = false
+                TDLog.v("Degd: nothing"); // uc = 1, dmc = false
               }
             }
           }
@@ -311,9 +311,9 @@ class ParserVisualTopoX extends ImportParser
           if ( ( value = getValue( "DeclinAuto=\"", line ) ) != null ) {
             mApplyDeclination = value.equals("M");
           }
-          if ( "Inv".equals( getValue( "SensDir=\"", line ) ) ) dirb = -1;
-          if ( "Inv".equals( getValue( "SensPte=\"", line ) ) ) dirc = -1;
-          if ( "Inv".equals( getValue( "SensLar=\"", line ) ) ) dirw = -1;
+          if ( "Inv".equals( getValue( "SensDir=\"", line ) ) ) dir_b = -1;
+          if ( "Inv".equals( getValue( "SensPte=\"", line ) ) ) dir_c = -1;
+          if ( "Inv".equals( getValue( "SensLar=\"", line ) ) ) dir_w = -1;
           if ( ( value = getValue( "DimPt=\"", line ) ) != null ) {
             if ( value.equals("Inc") ) {
               // FIXME isSplay at next station: Which ???
@@ -348,7 +348,7 @@ class ParserVisualTopoX extends ImportParser
           String club = getValue("<Club>", "</Club>", line );
           if ( club != null ) mTeam = club;
         } else if ( line.startsWith("<Entree" ) && inCavite ) {
-          // TODO
+          TDLog.v("Entree: TODO");
         } else if ( line.startsWith("<Configuration>") ) {
           break;
         }

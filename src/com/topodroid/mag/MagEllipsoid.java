@@ -24,11 +24,11 @@ import com.topodroid.utils.TDMath;
 // MAG-type_Ellipsoid;
 class MagEllipsoid
 {
-  private double a; /*semi-major axis of the ellipsoid*/
-  private double b; /*semi-minor axis of the ellipsoid*/
-  private double fla; /* flattening */
-  private double epssq; /*first eccentricity squared */
-  private double eps; /* first eccentricity */
+  private final double a; /*semi-major axis of the ellipsoid*/
+  private final double b; /*semi-minor axis of the ellipsoid*/
+  private final double fla; /* flattening */
+  private final double eps_sq; /*first eccentricity squared */
+  private final double eps; /* first eccentricity */
   double re; /* mean radius of  ellipsoid*/
 
   /* Sets WGS-84 parameters Eq. 8 p. 8 */
@@ -38,7 +38,7 @@ class MagEllipsoid
     b = 6356.7523142; /*semi-minor axis of the ellipsoid [Km] */
     fla = 1 / 298.257223563; /* flattening */
     eps = Math.sqrt(1 - (b * b) / (a * a)); /*first eccentricity */
-    epssq = (eps * eps); /*first eccentricity squared */
+    eps_sq = (eps * eps); /*first eccentricity squared */
     re = 6371.2; /* Earth's radius */
   }
 
@@ -75,17 +75,17 @@ class MagEllipsoid
     double g = (Math.sqrt( e*e + v ) + e) / 2.0;
     double t = Math.sqrt( g*g  + (f - v*g)/(2.0*g - e) ) - g;
   
-    double rlat = Math.atan( (a*(1.0 - t*t)) / (2.0*modified_b*t) );
-	    ret.phi = TDMath.RAD2DEG * rlat;
+    double r_lat = Math.atan( (a*(1.0 - t*t)) / (2.0*modified_b*t) );
+	    ret.phi = TDMath.RAD2DEG * r_lat;
           
     /* 5.0 compute height above ellipsoid */
-    ret.HeightAboveEllipsoid = (r - a*t) * Math.cos(rlat) + (V.z - modified_b) * Math.sin(rlat);
+    ret.HeightAboveEllipsoid = (r - a*t) * Math.cos(r_lat) + (V.z - modified_b) * Math.sin(r_lat);
   
     /* 6.0 compute longitude east of Greenwich */
-    double zlong = Math.atan2( V.y, V.x );
-    if ( zlong < 0.0 ) zlong= zlong + 2 * TDMath.M_PI;
+    double z_long = Math.atan2( V.y, V.x );
+    if ( z_long < 0.0 ) z_long= z_long + 2 * TDMath.M_PI;
   
-    ret.lambda = TDMath.RAD2DEG * zlong;
+    ret.lambda = TDMath.RAD2DEG * z_long;
     while(ret.lambda > 180) ret.lambda-=360;
     return ret;
   }
@@ -104,10 +104,10 @@ class MagEllipsoid
   {
     double CosLat = Math.cos( TDMath.DEG2RAD * geodetic.phi );
     double SinLat = Math.sin( TDMath.DEG2RAD * geodetic.phi );
-    double rc = a / Math.sqrt(1.0 - epssq * SinLat * SinLat);
+    double rc = a / Math.sqrt(1.0 - eps_sq * SinLat * SinLat);
 
     double xp = (rc + geodetic.HeightAboveEllipsoid) * CosLat;
-    double zp = (rc * (1.0 - epssq) + geodetic.HeightAboveEllipsoid) * SinLat;
+    double zp = (rc * (1.0 - eps_sq) + geodetic.HeightAboveEllipsoid) * SinLat;
     double r = Math.sqrt(xp * xp + zp * zp);
     return new MagSpherical( 
       geodetic.lambda,                        // lambda: longitude 

@@ -318,7 +318,7 @@ public class BezierInterpolator
     ArrayList< Integer > corners = new ArrayList<>();
     corners.add( Integer.valueOf(0) );
     int kc = 0;
-    int kgap = 0;
+    int k_gap = 0;
     float dc = 0.0f;
     boolean in_corner = false;
     for (k1=0; k1<nPts; ++k1) {
@@ -340,14 +340,14 @@ public class BezierInterpolator
         }
       } else if ( d0 > len_thr_hgh ) {
         in_corner = false;
-        if ( kc > kgap ) {
+        if ( kc > k_gap ) {
           corners.add( Integer.valueOf(kc) );
-          kgap = k0;
+          k_gap = k0;
         }
       }
     }
     if ( in_corner ) {
-      if ( kc > kgap ) corners.add( Integer.valueOf(kc) );
+      if ( kc > k_gap ) corners.add( Integer.valueOf(kc) );
     }
     if ( kc != nPts-1 ) { // last point is a corner
       corners.add( Integer.valueOf(nPts-1) );

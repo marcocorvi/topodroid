@@ -52,30 +52,30 @@ public class ExportLAS
     int fmt = FMT1_SIZE;
     int nr_vlr = 0;
 
-    double minx, miny, minz;
-    double maxx, maxy, maxz;
+    double min_x, min_y, min_z;
+    double max_x, max_y, max_z;
     if ( nr_pts == 0 ) return false;
-    minx = maxx = v[0];
-    miny = maxy = v[1];
-    minz = maxz = v[2];
+    min_x = max_x = v[0];
+    min_y = max_y = v[1];
+    min_z = max_z = v[2];
     for ( int k=1; k<nr_pts; ++k ) {
       int k3 = k*3;
-      if ( v[k3] < minx ) { minx = v[k3]; } else if ( v[k3] > maxx ) { maxx = v[k3]; }
+      if ( v[k3] < min_x ) { min_x = v[k3]; } else if ( v[k3] > max_x ) { max_x = v[k3]; }
       ++k3;
-      if ( v[k3] < miny ) { miny = v[k3]; } else if ( v[k3] > maxy ) { maxy = v[k3]; }
+      if ( v[k3] < min_y ) { min_y = v[k3]; } else if ( v[k3] > max_y ) { max_y = v[k3]; }
       ++k3;
-      if ( v[k3] < minz ) { minz = v[k3]; } else if ( v[k3] > maxz ) { maxz = v[k3]; }
+      if ( v[k3] < min_z ) { min_z = v[k3]; } else if ( v[k3] > max_z ) { max_z = v[k3]; }
     }
-    minx -= 1;
-    miny -= 1;
-    minz -= 1;
-    maxx += 1 - minx;
-    maxy += 1 - miny;
-    maxz += 1 - minz;
-    double inta = (90)/maxx;
-    double intz = (1<<15)/maxz;
+    min_x -= 1;
+    min_y -= 1;
+    min_z -= 1;
+    max_x += 1 - min_x;
+    max_y += 1 - min_y;
+    max_z += 1 - min_z;
+    double int_a = (90)/max_x;
+    double int_z = (1<<15)/max_z;
     try {
-      byte[] header = makeHeader( nr_pts, nr_vlr, fmt, minx, maxx, miny, maxy, minz, maxz );
+      byte[] header = makeHeader( nr_pts, nr_vlr, fmt, min_x, max_x, min_y, max_y, min_z, max_z );
       dos.write( header );
       dos.write( (byte)0xdd );
       dos.write( (byte)0xcc );
@@ -89,9 +89,9 @@ public class ExportLAS
       }
 
       for ( int k3 = 0; k3 < 3*nr_pts; k3 += 3 ) {
-	double z = v[k3+2] - minz;
-	double x = v[k3]   - minx;
-        byte[] point = getPointFormat1( x, v[k3+1]-miny, z, (short)(z*intz), (byte)(x*inta) );
+	double z = v[k3+2] - min_z;
+	double x = v[k3]   - min_x;
+        byte[] point = getPointFormat1( x, v[k3+1]-min_y, z, (short)(z*int_z), (byte)(x*int_a) );
         dos.write( point );
       }
       dos.flush();
@@ -193,9 +193,9 @@ public class ExportLAS
     ByteBuffer ret = ByteBuffer.allocate( size );
     
     int k;
-    int klen = userId.length();
+    int k_len = userId.length();
     putShort( ret, (short)0xaabb ); // reserved (directory version)
-    for ( k=0; k<klen; ++k ) ret.put( (byte)userId.charAt(k) );
+    for ( k=0; k<k_len; ++k ) ret.put( (byte)userId.charAt(k) );
     for ( ; k<16; ++k ) ret.put( (byte)0 );
     putShort( ret, (short)recordId ); // record id
     putShort( ret, (short)len );        // record length after header
@@ -204,13 +204,13 @@ public class ExportLAS
   }
 
   static private byte[] makeHeader( int nr_pts, int nr_vlr, int fmt,
-		                 double minx, double maxx,
-                                 double miny, double maxy, 
-                                 double minz, double maxz )
+		                 double min_x, double max_x,
+                                 double min_y, double max_y,
+                                 double min_z, double max_z )
   {
     ByteBuffer ret = ByteBuffer.allocate( HDR_SIZE );
 
-    short gencoding = 0;
+    // short gen_coding = 0; (unused)
     // bit-0 GPS time (0 = GPS week time)
     // bit-1 waveform data packet (deprecated, use 0)
     // bit-2 waveform data packet ext. (if set external, use 0)
@@ -263,19 +263,19 @@ public class ExportLAS
     putInt(   ret, (int)nr_pts );       // nr pt records by return 
     for ( k=1; k < 5; ++k ) ret.putInt( (int)0 );        // 5 ints (135)
     // Log.v( "Cave3D-LAS", "position scale " + ret.position() );
-    putDouble( ret, (double)SCALE );   // X scale
-    putDouble( ret, (double)SCALE );   // Y scale
-    putDouble( ret, (double)SCALE );   // Z scale
-    putDouble( ret, (double)0 );      // X offset
-    putDouble( ret, (double)0 );      // Y offset
-    putDouble( ret, (double)0 );      // Z offset (183)
+    putDouble( ret, SCALE );  // X scale - cast to double not needed
+    putDouble( ret, SCALE );  // Y scale
+    putDouble( ret, SCALE );  // Z scale
+    putDouble( ret, 0 );      // X offset
+    putDouble( ret, 0 );      // Y offset
+    putDouble( ret, 0 );      // Z offset (183)
     // Log.v( "Cave3D-LAS", "position max/min " + ret.position() );
-    putDouble( ret, (double)maxx );
-    putDouble( ret, (double)minx );
-    putDouble( ret, (double)maxy );
-    putDouble( ret, (double)miny );
-    putDouble( ret, (double)maxz );
-    putDouble( ret, (double)minz ); // (231)
+    putDouble( ret, max_x ); // cast to double not needed
+    putDouble( ret, min_x );
+    putDouble( ret, max_y );
+    putDouble( ret, min_y );
+    putDouble( ret, max_z );
+    putDouble( ret, min_z ); // (231)
 
     // putLong( ret, (long)0 );        // start of waveform packet record {v. 1.3}
     // putLong( ret, (long)elen );     // start of EVRL (247) {v. 1.4}

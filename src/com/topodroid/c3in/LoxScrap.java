@@ -14,12 +14,12 @@ package com.topodroid.c3in;
 
 class LoxScrap
 {
-  int id;
-  int sid;
-  int nPts;
-  int nIdx;
-  double[] pts;
-  int[] idx;
+  private final int id;
+  private final int sid;
+  private final int nPts;
+  private final int nIdx;
+  private final double[] pts;
+  private final int[] idx;
 
   LoxScrap( int _id, int _sid, int np, int ni, double[] p, int[] i )
   {
@@ -41,7 +41,7 @@ class LoxScrap
   double[] Point( int k ) 
   { 
     double[] p = new double[3];
-    p[0] = pts[3*k+0];
+    p[0] = pts[3*k  ];
     p[1] = pts[3*k+1];
     p[2] = pts[3*k+2];
     return p;
@@ -49,7 +49,7 @@ class LoxScrap
   int[] Index( int k ) 
   { 
     int[] p = new int[3];
-    p[0] = idx[3*k+0];
+    p[0] = idx[3*k  ];
     p[1] = idx[3*k+1];
     p[2] = idx[3*k+2];
     return p;

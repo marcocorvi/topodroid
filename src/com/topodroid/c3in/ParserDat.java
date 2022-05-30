@@ -156,14 +156,14 @@ public class ParserDat extends TglParser
     Cave3DCS cs = null;
     // int in_data = 0; // 0 none, 1 normal, 2 dimension
 
-    int[] survey_pos = new int[50]; // FIXME max 50 levels
-    int ks = 0;
-    boolean in_survey = false;
+    // int[] survey_pos = new int[50]; // FIXME max 50 levels
+    // int ks = 0;
+    // boolean in_survey = false;
 
     double declination = 0.0;
     double units_len = 0.3048; // foot to meter
-    double units_ber = 1;
-    double units_cln = 1;
+    // double units_ber = 1;
+    // double units_cln = 1;
     int idx;
 
     double length, bearing, clino, left, up, down, right, back_bearing, back_clino;
@@ -201,8 +201,8 @@ public class ParserDat extends TglParser
               continue;
 	    }
 	    if ( line.charAt(0) == 0x0c ) {
-              // TDLog.v( "DAT formfeed");
-              break; // formfeed
+              // TDLog.v( "DAT form-feed");
+              break; // form-feed
 	    }
             String[] vals = splitLine( line );
 	    if ( vals.length >= 5 ) { // FROM TO LEN BEAR INC L U D R FLAGS COMMENT
@@ -279,10 +279,10 @@ public class ParserDat extends TglParser
 
                 if ( mSplayUse > SPLAY_USE_SKIP ) {
                   Cave3DShot splay;
-                  double bleft = bearing - 90; if ( bleft < 0 ) bleft += 360;
-                  double bright = bearing + 90; if ( bright >= 360  ) bright -= 360;
+                  double b_left = bearing - 90; if ( b_left < 0 ) b_left += 360;
+                  double b_right = bearing + 90; if ( b_right >= 360  ) b_right -= 360;
 		  if ( left > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-L"+survey, left,  bleft,     0, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-L"+survey, left,  b_left,     0, 0, 0 );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }
@@ -297,7 +297,7 @@ public class ParserDat extends TglParser
                     splays.add( splay );
                   }
 		  if ( right > 0 ) {
-                    splay = new Cave3DShot( from, f0+"-R"+survey, right, bright,    0, 0, 0 );
+                    splay = new Cave3DShot( from, f0+"-R"+survey, right, b_right,    0, 0, 0 );
                     temp_splays.add( splay );
                     splays.add( splay );
                   }
@@ -384,17 +384,17 @@ public class ParserDat extends TglParser
     }
   }
 
-  private void processShots( ArrayList<Cave3DShot> tshots, ArrayList<Cave3DShot> tsplays )
+  private void processShots( ArrayList<Cave3DShot> t_shots, ArrayList<Cave3DShot> t_splays )
   {
-    if ( tshots.size() == 0 ) return;
+    if ( t_shots.size() == 0 ) return;
     if ( fixes.size() == 0 ) {
-      // TDLog.v( "shots " + tshots.size() + " fixes " + fixes.size() );
-      Cave3DShot sh = tshots.get( 0 );
+      // TDLog.v( "shots " + t_shots.size() + " fixes " + fixes.size() );
+      Cave3DShot sh = t_shots.get( 0 );
       fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) );
     }
  
     int mLoopCnt = 0;
-    Cave3DFix f0 = fixes.get( 0 );
+    // Cave3DFix f0 = fixes.get( 0 );
     // TDLog.v( "Process Shots. Fix " + f0.name + " " + f0.x + " " + f0.y + " " + f0.z );
 
     mCaveLength = 0.0f;
@@ -415,9 +415,9 @@ public class ParserDat extends TglParser
     
       boolean repeat = true;
       while ( repeat ) {
-        // TDLog.v( "scanning the tshots");
+        // TDLog.v( "scanning the t_shots");
         repeat = false;
-        for ( Cave3DShot sh : tshots ) {
+        for ( Cave3DShot sh : t_shots ) {
           if ( sh.isUsed() ) continue;
           // TDLog.v( "check shot " + sh.from + " " + sh.to );
           // Cave3DStation sf = sh.from_station;
@@ -474,7 +474,7 @@ public class ParserDat extends TglParser
 
     // 3D splay shots
     if ( mSplayUse > SPLAY_USE_SKIP ) {
-      for ( Cave3DShot sh : tsplays ) {
+      for ( Cave3DShot sh : t_splays ) {
         if ( sh.isUsed() ) continue;
         if (  sh.from_station != null ) continue;
         // TDLog.v( "check shot " + sh.from + " " + sh.to );

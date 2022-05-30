@@ -12,6 +12,7 @@
 package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.TDX.TDToast;
 
 import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothProfile;
@@ -42,7 +43,9 @@ public class BleUtils
     try {
       name = device.getName();
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage() );
+      TDLog.Error("SECURITY device name " + e.getMessage() );
+      // TDToast.makeBad("Security error: device name");
+      return "-- --";
     }
     if ( name == null ) name = "--";
     return name + " " + device.getAddress();

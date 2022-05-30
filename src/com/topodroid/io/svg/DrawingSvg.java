@@ -51,9 +51,9 @@ public class DrawingSvg extends DrawingSvgBase
 
   public void writeSvg( String filename, BufferedWriter out, TDNum num, /* DrawingUtil util, */ DrawingCommandManager plot, long type )
   {
-    String wall_group = BrushManager.getLineWallGroup( );
+    // String wall_group = BrushManager.getLineWallGroup( );
 
-    int handle = 0;
+    // int handle = 0;
     RectF bbox = plot.getBoundingBox( );
     float xmin = bbox.left;
     float xmax = bbox.right;
@@ -183,7 +183,7 @@ public class DrawingSvg extends DrawingSvgBase
               // split splays in classes
               ArrayList< DrawingPath > horiz  = new ArrayList<>();
               ArrayList< DrawingPath > vert   = new ArrayList<>();
-              ArrayList< DrawingPath > xsect  = new ArrayList<>();
+              ArrayList< DrawingPath > x_sect  = new ArrayList<>();
               for ( DrawingPath sh : plot.getSplays() ) {
                 DBlock blk = sh.mBlock;
                 if ( blk == null ) continue;
@@ -192,7 +192,7 @@ public class DrawingSvg extends DrawingSvgBase
                 } else if ( blk.isVSplay() ) {
                   vert.add( sh );
                 } else if ( blk.isXSplay() ) {
-                  xsect.add( sh );
+                  x_sect.add( sh );
                 } else {
                   normal.add( sh );
                 }
@@ -200,7 +200,7 @@ public class DrawingSvg extends DrawingSvgBase
               writeSplays( out, normal, "splays", "grey", xoff, yoff );
               writeSplays( out, horiz,  "h-splays", "lightseagreen", xoff, yoff );
               writeSplays( out, vert,   "v-splays", "lightsteelblue", xoff, yoff );
-              writeSplays( out, xsect,  "x-splays", "lightseablue", xoff, yoff );
+              writeSplays( out, x_sect,  "x-splays", "lightseablue", xoff, yoff );
             } else {
               for ( DrawingPath sh : plot.getSplays() ) {
                 DBlock blk = sh.mBlock;

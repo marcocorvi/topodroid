@@ -12,6 +12,7 @@
 package com.topodroid.inport;
 
 import com.topodroid.utils.TDsafUri;
+import com.topodroid.utils.TDLog;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDPath;
@@ -64,7 +65,8 @@ public class ImportZipTask extends ImportTask
         fis = TDsafUri.docFileInputStream( pfd ); // super.fis
         ret = (long)Archiver.unArchive( app, fis );
         fis.close(); 
-      } catch ( IOException e ) { 
+      } catch ( IOException e ) {
+        TDLog.v("Error " + e.getMessage() );
       } finally {
         TDsafUri.closeFileDescriptor( pfd );
       }

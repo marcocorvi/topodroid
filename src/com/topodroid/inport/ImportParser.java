@@ -147,7 +147,7 @@ class ImportParser
      return pattern.split(line); // line.split( "\\s+" );
   }
    
-  /** read input file
+  /* read input file
    * @param filename name of the file to parse
    *
   void readFile( String filename ) throws ParserException

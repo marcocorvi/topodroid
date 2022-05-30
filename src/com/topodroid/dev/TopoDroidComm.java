@@ -190,11 +190,11 @@ public class TopoDroidComm
       ++mNrPacketsRead; // FIXME NON_ATOMIC_ON_VOLATILE
       // get G and M from mProtocol and save them to store
       // TDLog.Log( TDLog.LOG_COMM, "G " + mProtocol.mGX + " " + mProtocol.mGY + " " + mProtocol.mGZ + " M " + mProtocol.mMX + " " + mProtocol.mMY + " " + mProtocol.mMZ );
-      long cblk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
+      long c_blk = TopoDroidApp.mDData.insertGM( TDInstance.cid, mProtocol.mGX, mProtocol.mGY, mProtocol.mGZ, mProtocol.mMX, mProtocol.mMY, mProtocol.mMZ );
       if ( lister != null ) {
         Message msg = lister.obtainMessage( Lister.LIST_UPDATE );
         Bundle bundle = new Bundle();
-        bundle.putLong( Lister.BLOCK_ID, cblk );
+        bundle.putLong( Lister.BLOCK_ID, c_blk );
         msg.setData(bundle);
         lister.sendMessage(msg);
       }

@@ -14,6 +14,7 @@ package com.topodroid.dev;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
+// import com.topodroid.TDX.TDToast;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.InvocationTargetException;
@@ -77,7 +78,8 @@ public class DeviceUtil
     try {
       return adapter.getBondedDevices();
     } catch ( SecurityException e ) { // FIXME ANDROID-12
-      TDLog.Error("get bonded devices " + e.getMessage() );
+      TDLog.Error("SECURITY get bonded devices " + e.getMessage() );
+      // TDToast.makeBad("Security error: get bonded devices");
     }
     return null;
   }
@@ -96,7 +98,8 @@ public class DeviceUtil
       try {
         adapter.startDiscovery();
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY start discovery " + e.getMessage() );
+        // TDToast.makeBad("Security error: start discovery");
       }
     }
   }
@@ -108,7 +111,8 @@ public class DeviceUtil
       try {
         adapter.cancelDiscovery();
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY cancel discovery " + e.getMessage() );
+        // TDToast.makeBad("Security error: cancel discovery");
       }
     }
   }
@@ -136,7 +140,8 @@ public class DeviceUtil
       try {
         return device.getBondState() == BOND_BONDED;
       } catch (SecurityException e) {
-        TDLog.Error("SECURITY " + e.getMessage());
+        TDLog.Error("SECURITY is paired " + e.getMessage());
+        // TDToast.makeBad("Security error: is paired");
       }
     }
     return false;
@@ -154,12 +159,15 @@ public class DeviceUtil
         return 2;
       }
     } catch (SecurityException e) {
-      TDLog.Error("SECURITY " + e.getMessage());
+      TDLog.Error("SECURITY pair device " + e.getMessage());
+      // TDToast.makeBad("Security error: pair device");
+      return -1;
     }
     try {
       Method m = device.getClass().getMethod( "createBond", (Class[]) null );
       m.invoke( device, (Object[]) null );
     } catch ( Exception e ) {
+      TDLog.Error("Error create bond " + e.getMessage());
       return -1;
     }
     return 1;
@@ -173,13 +181,15 @@ public class DeviceUtil
         return 2;
       }
     } catch ( SecurityException e ) {
-      TDLog.Error( "SECURITY " + e.getMessage() );
+      TDLog.Error( "SECURITY unpair device " + e.getMessage() );
+      // TDToast.makeBad("Security error: unpair device");
     }
 
     try {
       Method m = device.getClass().getMethod( "removeBond", (Class[]) null );
       m.invoke( device, (Object[]) null );
     } catch ( Exception e ) {
+      TDLog.Error("Error remove bond " + e.getMessage());
       return -1;
     }
     return 1;

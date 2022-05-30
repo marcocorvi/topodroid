@@ -68,7 +68,7 @@ public class DrawingShp
       TDLog.Error("mkdir " + dirname + " error");
       return false;
     }
-    // TDLog.v( "mkdir created MSdir " + dirname );
+    // TDLog.v( "mkdir created MS-dir " + dirname );
     ArrayList< String > files = new ArrayList<>();
 
     try {

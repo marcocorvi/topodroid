@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date may 2021
  *
- * @brief bubble algo: a point on the sphere correspoding to a 3D vector
+ * @brief bubble algo: a point on the sphere corresponding to a 3D vector
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

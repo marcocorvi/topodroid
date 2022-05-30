@@ -77,10 +77,10 @@ public class CWFacet
     u22 = u2.dotProduct(u2);
     u23 = u2.dotProduct(u3);
     u33 = u3.dotProduct(u3);
-    double udet = u22 * u33 - u23 * u23;
-    u22 /= udet;
-    u23 /= udet;
-    u33 /= udet;
+    double u_det = u22 * u33 - u23 * u23;
+    u22 /= u_det;
+    u23 /= u_det;
+    u33 /= u_det;
   }
 
   // void serialize( PrintWriter out )

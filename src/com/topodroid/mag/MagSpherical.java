@@ -24,9 +24,9 @@ import com.topodroid.utils.TDMath;
 // MAG-type_CoordSpherical;
 class MagSpherical
 {
-  double lambda; /* longitude*/
-  double phig; /* geocentric latitude*/
-  double r; /* distance from the center of the ellipsoid*/
+  double lambda; // longitude
+  double phig; // geocentric latitude
+  double r; // distance from the center of the ellipsoid
 
   MagSpherical( double l, double p, double rr )
   {
@@ -37,11 +37,11 @@ class MagSpherical
   
   MagVector toCartesian( )
   {
-    double radphi    = phig   * TDMath.RAD2DEG;
-    double radlambda = lambda * TDMath.RAD2DEG;
+    double rad_phi    = phig   * TDMath.RAD2DEG;
+    double rad_lambda = lambda * TDMath.RAD2DEG;
     return new MagVector(
-      r * Math.cos(radphi) * Math.cos(radlambda),
-      r * Math.cos(radphi) * Math.sin(radlambda),
-      r * Math.sin(radphi) );
+      r * Math.cos(rad_phi) * Math.cos(rad_lambda),
+      r * Math.cos(rad_phi) * Math.sin(rad_lambda),
+      r * Math.sin(rad_phi) );
   }
 }

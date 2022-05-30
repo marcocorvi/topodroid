@@ -57,7 +57,7 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 
 /* Inkscape units
- * - The root element can have width and height with units, which with the proper viewbox
+ * - The root element can have width and height with units, which with the proper view-box
  *   determines the scale for the drawing (real-world value of the SVG user units)
  * - User-unit: unit length in the current user coord system
  * - Unit-id: can be mm, cm, in, pt, px, pc ...
@@ -413,8 +413,8 @@ public class DrawingSvgBase
     try {
       // TDLog.Log( TDLog.LOG_IO, "trd to svg. scrap file " + scrapfile );
       FileInputStream fis = TDFile.getFileInputStream( TDPath.getTdrFile( scrapfile ) );
-      BufferedInputStream bfis = new BufferedInputStream( fis );
-      DataInputStream dis = new DataInputStream( bfis );
+      BufferedInputStream b_fis = new BufferedInputStream( fis );
+      DataInputStream dis = new DataInputStream( b_fis );
       int version = DrawingIO.skipTdrHeader( dis );
       // TDLog.v( "tdr to svg " + scrapfile + " delta " + dx + " " + dy + " Offset " + xoff + " " + yoff );
 
@@ -424,7 +424,7 @@ public class DrawingSvgBase
         int what = dis.read();
         switch ( what ) {
           case 'N': // scrap index ( v. >= 401160 )
-            int scrap = dis.readInt();
+            // int scrap = dis.readInt();
             break;
           case 'P':
             path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );

@@ -32,8 +32,8 @@ class Cave3DHull
   ArrayList< Triangle3D > triangles;
   ArrayList< HullProjection > projs1;
   ArrayList< HullProjection > projs2;
-  HullAngle afrom;
-  HullAngle ato;
+  HullAngle a_from;
+  HullAngle a_to;
   int color; // DEBUG
 
   // /** get the size of the projections
@@ -59,12 +59,12 @@ class Cave3DHull
     rays2  = splays2;
     projs1 = new ArrayList< HullProjection >();
     projs2 = new ArrayList< HullProjection >();
-    afrom  = af;
-    ato    = at;
+    a_from = af;
+    a_to   = at;
 
     // TDLog.v("ANGLE Shot " + sf.short_name + "-" + st.short_name + " ber " + (sh.ber * 180/Math.PI) );
-    // afrom.log( sf.short_name );
-    // ato.log(   st.short_name );
+    // a_from.log( sf.short_name );
+    // a_to.log(   st.short_name );
 
     normal = shot.toVector3D(); // (E,N,Up)
     normal.z = 0;  // make normal horizontal (Up = 0)
@@ -162,8 +162,8 @@ class Cave3DHull
   {
     // TDLog.v( "compute Hull [0]: splays " + rays1.size() + " " + rays2.size() );
 
-    computeHullProjs( rays1, projs1, mStationFrom, afrom );
-    computeHullProjs( rays2, projs2, mStationTo,   ato );
+    computeHullProjs( rays1, projs1, mStationFrom, a_from );
+    computeHullProjs( rays2, projs2, mStationTo,   a_to );
     // TDLog.v( "compute Hull [1]: projs " + projs1.size() + " " + projs2.size() );
 
     Vector3D p0 = null; // pick a reference projection vector

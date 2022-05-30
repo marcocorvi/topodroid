@@ -977,9 +977,9 @@ public class DXF
   static int writeLTypesTable( BufferedWriter out, int handle ) throws IOException
   {
     if ( mVersion9 ) { handle = 5; } // necessary ???
-    int ltypenr    = mVersion13_14 ? 5 : 1; // linetype number
-    handle = writeBeginTable( out, "LTYPE", handle, ltypenr ); 
-    int ltypeowner = handle;
+    int l_type_nr    = mVersion13_14 ? 5 : 1; // linetype number
+    handle = writeBeginTable( out, "LTYPE", handle, l_type_nr );
+    int l_type_owner = handle;
     // FIXME this line might be a problem with AutoCAD
     // writeInt( out, 330, 0 ); // table has no owner
     {
@@ -988,7 +988,7 @@ public class DXF
         writeString( out, 0, "LTYPE" );
         handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_byBlock );
-        writeInt( out, 330, ltypeowner );
+        writeInt( out, 330, l_type_owner );
         writeInt( out, 70, 0 );
         writeString( out, 3, "Std by block" );
         writeInt( out, 72, 65 );
@@ -998,7 +998,7 @@ public class DXF
         writeString( out, 0, "LTYPE" );
         handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_byLayer );
-        writeInt( out, 330, ltypeowner );
+        writeInt( out, 330, l_type_owner );
         writeInt( out, 70, 0 );
         writeString( out, 3, "Std by layer" );
         writeInt( out, 72, 65 );
@@ -1008,7 +1008,7 @@ public class DXF
         writeString( out, 0, "LTYPE" );
         handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         writeString( out, 2, lt_continuous );
-        writeInt( out, 330, ltypeowner );
+        writeInt( out, 330, l_type_owner );
         writeInt( out, 70, 0 );
         writeString( out, 3, "Solid line ------" );
         writeInt( out, 72, 65 );
@@ -1019,7 +1019,7 @@ public class DXF
           writeString( out, 0, "LTYPE" );
           handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
           writeString( out, 2, lt_center );
-          writeInt( out, 330, ltypeowner );
+          writeInt( out, 330, l_type_owner );
           writeInt( out, 70, 0 );
           writeString( out, 3, "Center ____ _ ____ _ ____ _ ____" ); // description
           writeInt( out, 72, 65 );
@@ -1033,7 +1033,7 @@ public class DXF
           writeString( out, 0, "LTYPE" );
           handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
           writeString( out, 2, lt_ticks );
-          writeInt( out, 330, ltypeowner );
+          writeInt( out, 330, l_type_owner );
           writeInt( out, 70, 0 );
           writeString( out, 3, "Ticks ____|____|____|____" ); // description
           writeInt( out, 72, 65 );
@@ -1054,7 +1054,7 @@ public class DXF
         // writeString( out, 0, "LTYPE" );
         // handle = writeAcDb( out, handle, AcDbSymbolTR, "AcDbLinetypeTableRecord" );
         // writeString( out, 2, lt_tick );
-        // writeInt( out, 330, ltypeowner );
+        // writeInt( out, 330, l_type_owner );
         // writeInt( out, 70, 0 );
         // writeString( out, 3, "Ticks ____|____|____|____" ); // description
         // writeInt( out, 72, 65 );

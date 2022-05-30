@@ -17,6 +17,7 @@ package com.topodroid.dev.ble;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.dev.ConnectionState;
+import com.topodroid.TDX.TDToast;
 
 import android.os.Build;
 // import android.os.Looper;
@@ -113,18 +114,14 @@ public class BleCallback extends BluetoothGattCallback
         try {
           gatt.discoverServices();
         } catch ( SecurityException e ) {
-          TDLog.Error("SECURITY " + e.getMessage() );
+          TDLog.Error("SECURITY discover services " + e.getMessage() );
+          // TDToast.makeBad("Security error: discover services");
+          // TODO closeGatt() ?
+          return;
         }
 
       } else if ( newState == BluetoothProfile.STATE_DISCONNECTED ) {
-        if ( gatt != null ) {
-          try {
-            gatt.close();
-          } catch ( SecurityException e ) {
-            TDLog.Error("SECURITY " + e.getMessage() );
-          }
-        }
-        mGatt = null;
+        closeGatt();
         mComm.disconnected(); // this calls notifyStatus( CONN_DISCONNECTED );
       // } else {
         // TDLog.v( "BLE callback: on Connection State Change new state " + newState );
@@ -158,14 +155,7 @@ public class BleCallback extends BluetoothGattCallback
       if ( ret == 0 ) {
         mGatt = gatt;
       } else {
-        if ( gatt != null ) {
-          try {
-            gatt.close();
-          } catch ( SecurityException e ) {
-            TDLog.Error("SECURITY " + e.getMessage() );
-          }
-        }
-        mGatt = null;
+        closeGatt();
         mComm.failure( ret, "onServicesDiscovered" );
       }
     } else {
@@ -244,10 +234,11 @@ public class BleCallback extends BluetoothGattCallback
       try {
         // mGatt.disconnect();
         mGatt.close();
-        mGatt = null;
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY GATT close " + e.getMessage() );
+        // TDToast.makeBad("Security error: GATT close");
       }
+      mGatt = null;
     }
   }
 
@@ -263,7 +254,8 @@ public class BleCallback extends BluetoothGattCallback
         mGatt = device.connectGatt( ctx, mAutoConnect, this, BluetoothDevice.TRANSPORT_LE ); 
       }
     } catch ( SecurityException e ) { // FIXME ANDROID-12
-      TDLog.Error("Sec error " + e.getMessage() );
+      TDLog.Error("SECURITY GATT connect " + e.getMessage() );
+      // TDToast.makeBad("Security error: GATT connect");
     }
   }
 
@@ -277,10 +269,11 @@ public class BleCallback extends BluetoothGattCallback
       try {
         mGatt.disconnect();
         mGatt.close();
-        mGatt = null;
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY GATT disconnect and close " + e.getMessage() );
+        // TDToast.makeBad("Security error: GATT disconnect and close");
       }
+      mGatt = null;
     }
   }
 
@@ -294,10 +287,11 @@ public class BleCallback extends BluetoothGattCallback
         // TDLog.v( "BLE callback: disconnect gatt");
         mGatt.disconnect();
         // FIXME mGapp.close();
-        mGatt = null;
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY " + e.getMessage() );
+        TDLog.Error("SECURITY GATT disconnect " + e.getMessage() );
+        // TDToast.makeBad("Security error: GATT disconnect");
       }
+      mGatt = null;
     }
   }
   // ---------------------------------------------------------------------
@@ -307,10 +301,13 @@ public class BleCallback extends BluetoothGattCallback
     try {
       if ( ! mGatt.setCharacteristicNotification( chrt, true ) ) {
         TDLog.Error("BLE callback: failed notify enable");
+        // TODO closeGatt() ?
         return false;
       }
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage() );
+      TDLog.Error("SECURITY iCHRT notification " + e.getMessage() );
+      // TDToast.makeBad("Security error: CHRT notification");
+      // TODO closeGatt() ?
       return false;
     }
 
@@ -327,7 +324,9 @@ public class BleCallback extends BluetoothGattCallback
     try {
       return mGatt.writeDescriptor( desc );
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage());
+      TDLog.Error("SECURITY write descriptor " + e.getMessage());
+      // TDToast.makeBad("Security error: write descriptor");
+      // TODO closeGatt() ?
     }
     return false;
   }
@@ -418,7 +417,9 @@ public class BleCallback extends BluetoothGattCallback
     try {
       return chrt != null && mGatt.readCharacteristic( chrt );
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage());
+      TDLog.Error("SECURITY read characteristic " + e.getMessage());
+      // TDToast.makeBad("Security error: read charcteristic");
+      // TODO closeGatt() ?
     }
     return false;
   }
@@ -440,7 +441,9 @@ public class BleCallback extends BluetoothGattCallback
     try {
       return mGatt.writeCharacteristic( chrt );
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY " + e.getMessage());
+      TDLog.Error("SECURITY write characteristic " + e.getMessage());
+      // TDToast.makeBad("Security error: write charcteristic");
+      // TODO closeGatt() ?
     }
     return false;
   }

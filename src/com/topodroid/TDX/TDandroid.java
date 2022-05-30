@@ -60,13 +60,14 @@ public class TDandroid
   final static public boolean AT_LEAST_API_21 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP );
   final static public boolean AT_LEAST_API_23 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.M );
   final static public boolean AT_LEAST_API_24 = ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ); // Android-6 Nougat
+  final static public boolean AT_LEAST_API_31 = ( Build.VERSION.SDK_INT >= 31 ); 
 
   /** permissions string codes
    */ 
   static final String[] perms = {
       android.Manifest.permission.BLUETOOTH,            // Bluetooth permissions are normal - no need to request at runtime
       android.Manifest.permission.BLUETOOTH_ADMIN,
-      // android.Manifest.permission.BLUETOOTH_CONNECT, // API-31
+      android.Manifest.permission.BLUETOOTH_CONNECT, // API-31
       // android.Manifest.permission.INTERNET,
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
       // android.Manifest.permission.READ_EXTERNAL_STORAGE,
@@ -79,7 +80,7 @@ public class TDandroid
   static final String[] permNames = {
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
-      // "BLUETOOTH_CONNECT", // API-31
+      "BLUETOOTH_CONNECT", // API-31
       // "INTERNET",
       "WRITE_EXTERNAL_STORAGE",
       // "READ_EXTERNAL_STORAGE",
@@ -92,17 +93,18 @@ public class TDandroid
   // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
+  static final int NR_PERMS_D = 4; // 4 API-31
+  static final int NR_PERMS   = NR_PERMS_D + 3;
+
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
-  // private static final int PERM_BT_CONNECT = ;
+  private static final int PERM_BT_CONNECT = 2; // 2 API-31, use -1 to fail tests and skip
   // private static final int PERM_STORAGE    = 2;
-  // private static final int PERM_LOCATION   = 3;
-  private static final int PERM_CAMERA     = 4;
-  // private static final int PERM_AUDIO      = 5;
-  // private static final int PERM_MEDIA      = 6;
 
-  static final int NR_PERMS_D = 3;
-  static final int NR_PERMS   = 6;
+  // private static final int PERM_LOCATION   = NR_PERMS_D + 0;
+  private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
+  // private static final int PERM_AUDIO      = NR_PERMS_D + 2;
+  // private static final int PERM_MEDIA      = NR_PERMS_D + 3;
 
   /** app specific code - for callback in MainWindow
    */
@@ -157,7 +159,17 @@ public class TDandroid
     int not_granted = 0;
     for ( int k=0; k<NR_PERMS; ++k ) { // check whether the app has the six permissions
       // TDLog.v("PERM " + "Create permission " + permNames[k] );
-      if ( k == PERM_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
+
+      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) { // BT_CONNECT only for API >= 31 - API-31
+        GrantedPermission[k] = true;
+        continue;
+      }
+
+      if ( k == PERM_CAMERA && BELOW_API_21 ) { // CAMERA only for API >= 21
+        // GrantedPermission[k] = false;
+        continue;
+      }
+
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
         ++not_granted;
@@ -208,8 +220,12 @@ public class TDandroid
   {
     if ( BELOW_API_23 ) return true;
     for ( int k=0; k<NR_PERMS_D; ++k ) { // check whether the app has the six permissions
-      // if ( k == PERM_CAMERA && BELOW_API_21 ) continue; // CAMERA only for API >= 21
-      if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) return false;
+      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) continue; // BT_CONNECT only for API >= 31 - API-31
+      // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
+      if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
+        TDLog.v("TD cannot run because of " + k + ": " + perms[k] );
+        return false;
+      }
     }
     return true;
   }
@@ -312,7 +328,9 @@ public class TDandroid
     // TDLog.v( "check permissions" );
     int k;
     for ( k=0; k<NR_PERMS_D; ++k ) {
-      int res = context.checkCallingOrSelfPermission( perms[k] );
+      int res;
+      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) res = PackageManager.PERMISSION_GRANTED; // API-31
+      res = context.checkCallingOrSelfPermission( perms[k] );
       if ( res != PackageManager.PERMISSION_GRANTED ) {
         // TDLog.v("PERM " + "Check permission " + permNames[k] + " not granted ");
         // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
@@ -396,8 +414,12 @@ public class TDandroid
   {
     // TDLog.Log( LOG_PERM, "check bluetooth" );
     TDLog.v("PERM " + "Check bluetooth ");
+    if ( PERM_BT_CONNECT < 0 || BELOW_API_31 ) {
+      return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
+        && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
+    } // API-31
     return ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH ) == PackageManager.PERMISSION_GRANTED )
-        // && ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH_CONNECT ) == PackageManager.PERMISSION_GRANTED ) // API-31
+        && ( context.checkCallingOrSelfPermission( android.Manifest.permission.BLUETOOTH_CONNECT ) == PackageManager.PERMISSION_GRANTED )
         && context.getPackageManager().hasSystemFeature( PackageManager.FEATURE_BLUETOOTH );
   }
 

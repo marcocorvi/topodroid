@@ -49,7 +49,7 @@ public class BubbleComputer implements WallComputer
   {
     // TDLog.v( "Bubble computer: " + stations.size() + " " + shots.size() + " " + splays.size() );
     ArrayList< Bubble > bubbles = new ArrayList<>();
-    int kcol = 0;
+    // int k_col = 0;
     for ( Cave3DStation st : stations ) {
       // st = center of the bubble
       ArrayList< Point3S > pts = new ArrayList<>();

@@ -84,9 +84,9 @@ class ParserVisualTopo extends ImportParser
     String mFlag=null, mFrom=null, mTo=null;
     String last_to = "";
 
-    int dirw = 1;  // width direction
-    int dirb = 1;  // bearing direction
-    int dirc = 1;  // clino direction
+    int dir_w = 1;  // width direction
+    int dir_b = 1;  // bearing direction
+    int dir_c = 1;  // clino direction
 
     boolean splayAtFrom = true;
     String comment = "";
@@ -116,7 +116,7 @@ class ParserVisualTopo extends ImportParser
         if ( line.length() > 0 ) {    // length==0 comment
           String[] vals = splitLine(line); // line.split( "\\s+" );
           if ( line.startsWith("Version") ) {
-            // IGNORE
+            TDLog.v("Version: ignored");
           } else if ( line.startsWith("Trou") ) {
             String[] params = line.substring(5).split(",");
             if ( params.length > 0 ) {
@@ -152,9 +152,9 @@ class ParserVisualTopo extends ImportParser
               } else if ( vals[k].startsWith("Dir") || vals[k].startsWith("Inv") ) {
                 String[] dirs = vals[k].split(",");
                 if ( dirs.length == 3 ) {
-                  dirb = ( dirs[0].equals("Dir") )? 1 : -1;
-                  dirc = ( dirs[1].equals("Dir") )? 1 : -1;
-                  dirw = ( dirs[2].equals("Dir") )? 1 : -1;
+                  dir_b = ( dirs[0].equals("Dir") )? 1 : -1;
+                  dir_c = ( dirs[1].equals("Dir") )? 1 : -1;
+                  dir_w = ( dirs[2].equals("Dir") )? 1 : -1;
                 }
               } else if ( vals[k].equals("Inc") ) {
                 // FIXME splay at next station: Which ???
@@ -164,7 +164,7 @@ class ParserVisualTopo extends ImportParser
               } else if ( vals[k].equals("Arr") ) {
                 splayAtFrom = false;
               } else if ( vals[k].equals("Std") ) {
-                // standard colors; ignore
+                TDLog.v("Std colors: ignored" );
               } else if ( k == 5 ) {
                 try {
                   mDeclination = angle( Float.parseFloat( vals[k] ), 1, true ); // declination is in degrees.minutes
@@ -176,13 +176,13 @@ class ParserVisualTopo extends ImportParser
               }
             }
           } else if ( vals[0].equals("Entree") ) {
-            // ignore
+            TDLog.v("Entree: ignored" );
           } else if ( vals[0].equals("Club") ) {
             mTeam = line.substring(5);
           } else if ( vals[0].equals("Couleur") ) {
-            // IGNORE
+            TDLog.v("Couleur: ignored");
           } else if ( vals[0].equals("Surface") ) {
-            // IGNORE
+            TDLog.v("Surface: ignored");
           } else { // survey data
             if ( vals.length >= 5 && ! vals[0].equals( vals[1] ) ) {
               boolean splay = false;
@@ -234,12 +234,12 @@ class ParserVisualTopo extends ImportParser
                   }
                   if ( mLrud ) {
                     if ( mLeft > 0 ) {
-	              float ber = TDMath.in360( mBearing + 180 + 90 * dirw );
+	              float ber = TDMath.in360( mBearing + 180 + 90 * dir_w );
                       extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
                       shots.add( new ParserShot( station, TDString.EMPTY, mLeft, ber, 0.0f, 0.0f, extend, LegType.XSPLAY, false, false, false, "" ) );
                     }
                     if ( mRight > 0 ) {
-                      float ber = TDMath.in360( mBearing + 180 - 90 * dirw );
+                      float ber = TDMath.in360( mBearing + 180 - 90 * dir_w );
                       extend = ( TDSetting.mLRExtend )? (int)TDAzimuth.computeSplayExtend( ber ) : ExtendType.EXTEND_UNSET;
                       shots.add( new ParserShot( station, TDString.EMPTY, mRight, ber, 0.0f, 0.0f, -extend, LegType.XSPLAY, false, false, false, "" ) );
                     } 
