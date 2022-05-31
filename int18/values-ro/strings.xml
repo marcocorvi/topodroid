@@ -5,8 +5,8 @@
     <string name="user_man_ok">Manualul de utilizare tradus a fost instalat</string>
     <string name="user_man_fail">Manualul de utilizare tradus nu a putut fi instalat</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -209,8 +209,8 @@ Refer to the web pages for details.\n
     <string name="calib_import_title">Importare calibrare</string>
     <string name="import_title">Importare cartare</string>
     <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
+    <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
 
@@ -349,7 +349,7 @@ Refer to the web pages for details.\n
     <string name="no_calib">Lipsește calibrarea</string>
     <string name="no_calib_check">Lipsește măsurătoarea verificare calibrare</string>
     <string name="no_calibration">Calibrare neselectată</string>
-    <string name="no_capture_app">Lipsește aplicația de captură de imagine</string>
+    <!-- UNUSED string name="no_capture_app">Lipsește aplicația de captură de imagine</string -->
     <string name="no_cave3d">Cave3D nu este instalat</string>
     <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>

@@ -44,6 +44,7 @@ import java.io.PrintWriter;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Locale;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 
@@ -696,7 +697,7 @@ public class ParserTh extends TglParser
               if ( idx < vals.length ) {
                 filename = vals[idx];
                 // TDLog.v( "Th file " + filename );
-                if ( filename.toLowerCase().endsWith( ".th" ) ) {
+                if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".th" ) ) {
                   String filepath = dirname + filename; // dirname + '/' + filename
                   InputStreamReader isr0 = new InputStreamReader( new FileInputStream( filepath ) );
                   int res = readFile( isr0, filepath, path,
@@ -717,7 +718,7 @@ public class ParserTh extends TglParser
                 // TDLog.v( "Th survey " + filename );
                 if ( mData == null ) {
                   String base = null;
-                  if ( dirname.toLowerCase().endsWith( "tdconfig/" ) ) {
+                  if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
                     // base = dirname.replace( "tdconfig/", "" );
                     base = dirname.substring( 0, dirname.length()-9 );
                     i = base.lastIndexOf('/');

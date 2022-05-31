@@ -5,8 +5,8 @@
     <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">Manuale utente</string -->
     <!-- UNUSED string name="desc_points">Punti</string -->
@@ -208,8 +208,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>
     <string name="export_data_title">File esportazione dati</string>
-    <string name="export_plot_title">File esportazione disegno</string>
-    <string name="export_overview_title">File esportazione panoramica</string>
+    <!-- UNUSED string name="export_plot_title">File esportazione disegno</string -->
+    <!-- UNUSED string name="export_overview_title">File esportazione panoramica</string -->
     <string name="export_model_title">Esporta modello 3D</string>
     <string name="export_tdconfig_title">Esporta progetto</string>
 
@@ -350,7 +350,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_calib">Nessuna calibrazione</string>
     <string name="no_calib_check">Nessun tiro di controllo calibrazione</string>
     <string name="no_calibration">Nessuna calibrazione selezionata</string>
-    <string name="no_capture_app">Nessuna app per foto</string>
+    <!-- UNUSED string name="no_capture_app">Nessuna app per foto</string -->
     <string name="no_cave3d">Cave3D non installato</string>
     <string name="no_data_reduction">Nessuna riduzione dei dati</string>
     <string name="no_db">Nessun database</string>

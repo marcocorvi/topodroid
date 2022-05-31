@@ -323,7 +323,7 @@ class DrawingXvi
 
     if ( BrushManager.isPointSection( idx ) ) return;
     if ( BrushManager.isPointLabel( idx ) ) {
-      String label = point.getPointText().toUpperCase();
+      String label = point.getPointText().toUpperCase( Locale.getDefault() );
       int len = label.length();
       int pos = 0;
       for ( int k = 0; k < len; ++k ) {

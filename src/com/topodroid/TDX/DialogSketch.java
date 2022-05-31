@@ -34,6 +34,8 @@ import android.widget.Button;
 import android.view.View;
 // import android.view.View.OnClickListener;
 
+import java.util.Locale;
+
 
 class DialogSketch extends MyDialog
                    implements OnItemClickListener
@@ -49,7 +51,7 @@ class DialogSketch extends MyDialog
   class MyFilenameFilter implements FilenameFilter
   {
     public boolean accept( File dir, String name ) {
-      return ( name.toLowerCase().endsWith( ".c3d" ) );  // Cave3D sketch file
+      return ( name.toLowerCase( Locale.getDefault() ).endsWith( ".c3d" ) );  // Cave3D sketch file
     }
   }
 

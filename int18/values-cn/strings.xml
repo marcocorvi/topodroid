@@ -5,8 +5,8 @@
     <string name="user_man_ok">已安装用户手册译本</string>
     <string name="user_man_fail">无法安装用户手册译本</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -209,8 +209,8 @@
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>
     <string name="export_data_title">数据输出</string>
-    <string name="export_plot_title">草图输出</string>
-    <string name="export_overview_title">概览输出</string>
+    <!-- UNUSED string name="export_plot_title">草图输出</string -->
+    <!-- UNUSED string name="export_overview_title">概览输出</string -->
     <string name="export_model_title">3D模型输出</string>
     <string name="export_tdconfig_title">项目输出</string>
 
@@ -352,7 +352,7 @@
     <string name="no_calib">无校准</string>
     <string name="no_calib_check">无校准检测测量</string>
     <string name="no_calibration">无选择校准</string>
-    <string name="no_capture_app">无图像捕捉应用</string>
+    <!-- UNUSED string name="no_capture_app" > 无图像捕捉应用</string -->
     <string name="no_cave3d">Cave3D 未安装</string>
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>

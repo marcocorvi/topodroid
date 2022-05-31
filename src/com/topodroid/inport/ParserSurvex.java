@@ -28,6 +28,7 @@ import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.regex.Pattern;
+import java.util.Locale;
 
 // TODO this class can be made extend ImportParser
 //
@@ -251,7 +252,7 @@ class ParserSurvex extends ImportParser
               } else if ( cmd.equals("default") ) {
                 // deafult calibrate|data|units|all
 		if ( vals_len > 1 ) {
-		  String what = vals[1].toLowerCase();
+		  String what = vals[1].toLowerCase( Locale.getDefault() );
 		  if ( what.equals("calibrate") ) {
                     state.setCalibrateDefault();
 		  } else if ( what.equals("data") ) {
@@ -305,7 +306,7 @@ class ParserSurvex extends ImportParser
                 // calibrate <quantities> <zero_error> <zero_units> [<scale>]
 		// calibrate default
 		if ( vals_len > 1 ) {
-		  if ( vals[1].toLowerCase().equals("default") ) {
+		  if ( vals[1].toLowerCase( Locale.getDefault() ).equals("default") ) {
                     state.setCalibrateDefault();
 		  } else {
 		    boolean clen = false;
@@ -313,7 +314,7 @@ class ParserSurvex extends ImportParser
                     boolean ccln = false;
 	            int k = 1;
                     for ( ; k<vals_len - 1; ++k ) {
-                      String what = vals[k].toLowerCase();
+                      String what = vals[k].toLowerCase( Locale.getDefault() );
                       if ( what.equals("length")  || what.equals("tape") )  { clen = true; }
                       else if ( what.equals("compass") || what.equals("bearing") )  { cber = true; }
                       else if ( what.equals("clino")   || what.equals("gradient") ) { ccln = true; }
@@ -369,7 +370,7 @@ class ParserSurvex extends ImportParser
                 // units quantities [factor] unit
 		// units default
 		if ( vals_len > 1 ) {
-                  if ( vals[1].toLowerCase().equals("default") ) {
+                  if ( vals[1].toLowerCase( Locale.getDefault() ).equals("default") ) {
                     state.setUnitsDefault();
 		  } else {
                     boolean ulen = false;
@@ -431,13 +432,13 @@ class ParserSurvex extends ImportParser
                 int k = 1;
                 if ( k < vals_len ) {
 	          boolean val = true;
-                  String what = vals[k].toLowerCase();
+                  String what = vals[k].toLowerCase( Locale.getDefault() );
                   if ( what.equals("not") ) {
                     val = false;
 	            ++k;
 	          }
 	          if ( k < vals_len ) {
-                    what = vals[k].toLowerCase();
+                    what = vals[k].toLowerCase( Locale.getDefault() );
                     if ( what.equals("duplicate") ) {
                       state.mDuplicate = val;
 	            } else if ( what.equals("splay") ) {
@@ -473,7 +474,7 @@ class ParserSurvex extends ImportParser
               } else if ( cmd.equals("data") ) {
                 // data normal from to length compass clino ...
 	        // data default
-	        String what = vals[1].toLowerCase();
+	        String what = vals[1].toLowerCase( Locale.getDefault() );
                 if ( what.equals("normal") ) {
                   state.data_type = ParserUtil.DATA_NORMAL;
 	          if ( setJIndices( vals, vals_len ) ) {

@@ -29,6 +29,7 @@ import java.io.InputStreamReader;
 import java.io.BufferedReader;
 import java.util.ArrayList;
 import java.util.regex.Pattern;
+import java.util.Locale;
 
 // TODO this class can be made extend ImportParser
 //
@@ -123,6 +124,8 @@ class ParserWalls extends ImportParser
     boolean in_comment = false;
     int extend = 1;
 
+    Locale locale = Locale.getDefault();
+
     // data order DAV / ENU
 
     try {
@@ -130,9 +133,9 @@ class ParserWalls extends ImportParser
       int i = filename.lastIndexOf('/');
       if ( i >= 0 ) {
         dirname = filename.substring(0, i+1);
-        mName = filename.substring( i+1 ).toLowerCase();
+        mName = filename.substring( i+1 ).toLowerCase( locale );
       } else {
-        mName = filename.toLowerCase();
+        mName = filename.toLowerCase( locale );
       } 
       int j = mName.lastIndexOf(".");
       if ( j >= 0 ) mName = mName.substring( 0, j );
@@ -155,14 +158,14 @@ class ParserWalls extends ImportParser
           String[] vals = pattern.split(line); // line.split( "\\s+" );
           int sz = vals.length;
           if ( sz > 0 ) {
-            String cmd = vals[0].toLowerCase();
+            String cmd = vals[0].toLowerCase( locale );
             if ( cmd.equals("#units" ) ) { 
               for ( int k=1; k<sz; ++k ) { 
-                if ( vals[k].toLowerCase().equals("feet") ) {
+                if ( vals[k].toLowerCase( locale ).equals("feet") ) {
                   ul = TDUtil.FT2M;
-                } else if ( vals[k].toLowerCase().equals("meter") ) {
+                } else if ( vals[k].toLowerCase( locale ).equals("meter") ) {
                   ul = 1;
-                } else if ( vals[k].toLowerCase().startsWith("order=") ) {
+                } else if ( vals[k].toLowerCase( locale ).startsWith("order=") ) {
                   int c = 2;
                   int kc_max = vals[k].length(); if ( kc_max > 9 ) kc_max = 9;
                   for ( int kc = 6; kc<kc_max; ++kc, ++c ) {
@@ -175,7 +178,7 @@ class ParserWalls extends ImportParser
                       case 'U': jUpward  = c; break;
                     }
                   }
-                } else if ( vals[k].toLowerCase().startsWith("decl=") ) {
+                } else if ( vals[k].toLowerCase( locale ).startsWith("decl=") ) {
                   mDeclination = Float.parseFloat( vals[k].substring(5) );
                 } 
                 // TODO continue

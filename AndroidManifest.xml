@@ -5,7 +5,6 @@
       android:installLocation="auto"
       android:versionCode="601006"
       android:versionName="6.1.6"
-      android:supportsRtl="false"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -98,10 +97,10 @@
           android:label="@string/app_name"
 	  android:icon="@mipmap/ic_launcher"
 
-          android:allowBackup="false"
 	  android:largeHeap="true"
           android:hasFragileUserData="true"
 	  android:requestLegacyExternalStorage="true"
+          android:supportsRtl="false"
 	  >
           <!-- request legacy is not necessary on android-11 but it is ok to leave it in
 	  android:requestLegacyExternalStorage="true"
@@ -116,6 +115,8 @@
                 FIXME-31
           android:roundIcon="@mipmap/ic_launcher_round"
           tools:targetApi="31" 
+
+          android:allowBackup="false" deprecated from Android 12
 	  -->
 
 	  <!-- android:screenOrientation="portrait" -->
@@ -327,7 +328,6 @@
 
       <activity android:name=".TopoGL"
           android:theme="@style/Theme.FullScreen"
-          android:label="@string/app_name"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         ><!--

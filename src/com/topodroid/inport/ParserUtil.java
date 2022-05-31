@@ -15,6 +15,8 @@ package com.topodroid.inport;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.common.ExtendType;
 
+import java.util.Locale;
+
 class ParserUtil
 {
   final static int DATA_DEFAULT    = 0;
@@ -35,8 +37,8 @@ class ParserUtil
   static String applyCase( int c, String name ) 
   {
     switch ( c ) {
-      case CASE_UPPER: return name.toUpperCase();
-      case CASE_LOWER: return name.toLowerCase();
+      case CASE_UPPER: return name.toUpperCase( Locale.getDefault() );
+      case CASE_LOWER: return name.toLowerCase( Locale.getDefault() );
       case CASE_PRESERVE:
       default: return name;
     }
@@ -44,7 +46,7 @@ class ParserUtil
 
   static float parseAngleUnit( String unit )
   {
-    String u = unit.toLowerCase();
+    String u = unit.toLowerCase( Locale.getDefault() );
     // not handled "percent"
     if ( u.startsWith("min") )  return 1/60.0f;
     if ( u.startsWith("grad") ) return TDUtil.GRAD2DEG;
@@ -55,7 +57,7 @@ class ParserUtil
 
   static float parseLengthUnit( String unit )
   {
-    String u = unit.toLowerCase();
+    String u = unit.toLowerCase( Locale.getDefault() );
     if ( u.startsWith("c") ) return 0.01f; // cm centimeter
     if ( u.startsWith("f") ) return TDUtil.FT2M; // ft feet
     if ( u.startsWith("i") ) return TDUtil.IN2M; // in inch

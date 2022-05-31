@@ -5,8 +5,8 @@
     <string name="user_man_ok">Installed user manual translation</string>
     <string name="user_man_fail">Failed to install user manual translation</string>
 
-    <string name="string_false">false</string>
-    <string name="string_true">true</string>
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant these permissions using the appops command in an adb shell:\nappops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow\nappops set com.topodroid.TDX WRITE_EXTERNAL_STORAGE allow\nappops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow\n\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html</string>
     <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
@@ -214,8 +214,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>
     <string name="export_data_title">Data export</string>
-    <string name="export_plot_title">Sketch export</string>
-    <string name="export_overview_title">Overview export</string>
+    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
+    <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <string name="export_model_title">3D model export</string>
     <string name="export_tdconfig_title">Project export</string>
     <!-- UNUSED string name="import_wait">Importing file &#8230; please wait &#8230;</string -->
@@ -357,7 +357,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calib">No calibration</string>
     <string name="no_calib_check">No calibration-check shot</string>
     <string name="no_calibration">No calibration selected</string>
-    <string name="no_capture_app">No image capture app</string>
+    <!-- UNUSED string name="no_capture_app">No image capture app</string -->
     <string name="no_cave3d">Cave3D not installed</string>
     <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
@@ -1855,6 +1855,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="fractal_cnt_six">6-neighbor</string>
     <string name="fractal_cnt_twentysix">26-neighbor</string>
     <string name="fractal_failed">Fractal compute failed</string>
+    <string name="fractal_dimension">Fractal dimension</string>
     <string name="illegal_value">Illegal value</string>
 
     <string name="info_title">MODEL INFO</string>

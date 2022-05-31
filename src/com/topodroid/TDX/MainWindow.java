@@ -90,6 +90,8 @@ import android.widget.AdapterView.OnItemLongClickListener;
 
 import android.graphics.drawable.BitmapDrawable;
 
+import java.util.Locale;
+
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
   socket = (BluetoothSocket) m.invoke( device, 2 );
@@ -444,7 +446,7 @@ public class MainWindow extends Activity
   // {
   //   // TDLog.v( "import file " + filename );
   //   // FIXME connect-title string
-  //   if ( filename.toLowerCase().endsWith(".th") ) {
+  //   if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".th") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     String name = filename.replace(".th", "" ).replace(".TH", "");
   //     if ( TopoDroidApp.mData.hasSurveyName( name ) ) {
@@ -454,26 +456,26 @@ public class MainWindow extends Activity
   //     // TDToast.make( R.string.import_wait );
   //     setTitleImport();
   //     new ImportTherionTask( this, null ).execute( filepath, name );  // null FileReader
-  //   } else if ( filename.toLowerCase().endsWith(".dat") ) {
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".dat") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     (new ImportDatDialog( this, this, null, filepath )).show();
   //     // new ImportCompassTask( this ).execute( filepath );
-  //   } else if ( filename.toLowerCase().endsWith(".top") ) {
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".top") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     setTitleImport();
   //     new ImportPocketTopoTask( this, null ).execute( filepath, filename ); // TODO pass the drawer as arg
-  //   } else if ( filename.toLowerCase().endsWith(".tro") ) {
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".tro") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     (new ImportTroDialog( this, this, null, filepath )).show();
-  //   } else if ( filename.toLowerCase().endsWith(".svx") ) {
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".svx") ) {
   //     String filepath = TDPath.getImportFile( filename );
   //     setTitleImport();
   //     new ImportSurvexTask( this, null ).execute( filepath ); 
-  //   } else if ( filename.toLowerCase().endsWith(".csn") ) { // CaveSniper text file
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".csn") ) { // CaveSniper text file
   //     String filepath = TDPath.getImportFile( filename );
   //     new ImportCaveSniperTask( this, null ).execute( filepath ); 
   //     setTitleImport();
-  //   } else if ( filename.toLowerCase().endsWith(".zip") ) {
+  //   } else if ( filename.toLowerCase( Locale.getDefault() ).endsWith(".zip") ) {
   //     // TDToast.makeLong( R.string.import_zip_wait );
   //     setTitleImport();
   //     new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
@@ -485,7 +487,7 @@ public class MainWindow extends Activity
 
   public void importZipFile( String filename )
   {
-    if ( ! filename.toLowerCase().endsWith(".zip") ) return;
+    if ( ! filename.toLowerCase( Locale.getDefault() ).endsWith(".zip") ) return;
     setTitleImport();
     new ImportZipTask( this, null, false ) .execute( filename ); // force = true (skip version checks)
   }
@@ -1277,7 +1279,7 @@ public class MainWindow extends Activity
             if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
             int pos   = filename.lastIndexOf("."); 
             int qos_1 = filename.lastIndexOf("/") + 1;
-            String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase() : ""; // extension with leading '.'
+            String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
             String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
             // TDLog.v( "URI to import: " + filename + " mime " + mimetype + " name <" + name + "> ext <" + ext + ">" );
             if ( mimetype.equals("application/zip") ) {
@@ -1434,9 +1436,9 @@ public class MainWindow extends Activity
           if ( line == null ) break;
           String[] token = line.trim().replaceAll("\\s+", "").split("=");
           if ( token.length > 1 ) {
-            String key = token[0].toUpperCase();
+            String key = token[0].toUpperCase( Locale.getDefault() );
             if ( key.equals("LANG") ) { 
-              lang = token[1].toLowerCase();
+              lang = token[1].toLowerCase( Locale.getDefault() );
             } else if ( key.equals("VERSION") ) {
               try {
                 version = Integer.parseInt( token[1] );

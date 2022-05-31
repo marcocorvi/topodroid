@@ -65,7 +65,7 @@ import java.io.IOException;
 // import java.util.ArrayList;
 import java.util.List;
 // import java.util.Set;
-// import java.util.Locale;
+import java.util.Locale;
 
 // import android.os.Environment;
 import android.os.Build; // FINERPRINT and MODEL
@@ -1417,7 +1417,7 @@ public class TopoGL extends Activity
   void openSketch( String pathname, String filename ) 
   {
     // TDLog.v("DEM " + pathname );
-    if ( ! pathname.toLowerCase().endsWith( ".c3d" ) ) return;
+    if ( ! pathname.toLowerCase( Locale.getDefault() ).endsWith( ".c3d" ) ) return;
     ParserSketch sketch = new ParserSketch( pathname );
 
     // final double dd = mDEMbuffer;
@@ -1464,9 +1464,9 @@ public class TopoGL extends Activity
         ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri[0] );
         InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
         String pathname = uri[0].getPath();
-        if ( pathname.toLowerCase().endsWith( ".grid" ) ) {
+        if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".grid" ) ) {
           dem = new DEMgridParser( isr, pathname, mDEMmaxsize );
-        } else if ( pathname.toLowerCase().endsWith( ".asc" ) || pathname.toLowerCase().endsWith(".ascii") ) {
+        } else if ( pathname.toLowerCase( Locale.getDefault() ).endsWith( ".asc" ) || pathname.toLowerCase( Locale.getDefault() ).endsWith(".ascii") ) {
           Cave3DFix origin = mParser.getOrigin();
           // origin.log();
           double xunit = mParser.getWEradius(); // radius * PI/180
@@ -1550,7 +1550,7 @@ public class TopoGL extends Activity
     InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
 
     mTextureName = filename;
-    if ( filename.toLowerCase().endsWith( ".osm" ) ) {
+    if ( filename.toLowerCase( Locale.getDefault() ).endsWith( ".osm" ) ) {
       loadTextureOSM( isr, pathname, bounds );
     } else {
       loadTextureGeotiff( isr, pathname, bounds );
@@ -2892,17 +2892,18 @@ public class TopoGL extends Activity
     if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
     pos = pathname.lastIndexOf("/");
     if ( pos >= 0 ) pathname = pathname.substring( pos+1 );
+    String pathname_lc = pathname.toLowerCase( Locale.getDefault() );
     for ( int trial = 0; trial < 2; ++ trial ) { 
       // TDLog.v("Import trial " + trial + ": survey " + pathname + " uri-path " + uri.getPath() );
-      if ( pathname.toLowerCase().endsWith( ".th" ) 
-        || pathname.toLowerCase().endsWith( "thconfig" )
-        || pathname.toLowerCase().endsWith( "tdconfig" )
-        || pathname.toLowerCase().endsWith( ".lox" )
-        || pathname.toLowerCase().endsWith( ".mak" )
-        || pathname.toLowerCase().endsWith( ".dat" )
-        || pathname.toLowerCase().endsWith( ".tro" )
-        || pathname.toLowerCase().endsWith( ".trox" )
-        || pathname.toLowerCase().endsWith( ".3d" ) ) {
+      if ( pathname_lc.endsWith( ".th" ) 
+        || pathname_lc.endsWith( "thconfig" )
+        || pathname_lc.endsWith( "tdconfig" )
+        || pathname_lc.endsWith( ".lox" )
+        || pathname_lc.endsWith( ".mak" )
+        || pathname_lc.endsWith( ".dat" )
+        || pathname_lc.endsWith( ".tro" )
+        || pathname_lc.endsWith( ".trox" )
+        || pathname_lc.endsWith( ".3d" ) ) {
         doOpenFile( uri, pathname, true );
       } else {
         pathname = ( trial == 0 )? getPathFromUri( this, uri ) : null;

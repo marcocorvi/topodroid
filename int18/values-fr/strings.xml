@@ -5,8 +5,8 @@
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -207,8 +207,8 @@ Refer to the web pages for details.\n
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import fichier</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
+    <!-- UNSED string name="export_data_title">Data export</string -->
+    <!-- UNSED string name="export_plot_title">Sketch export</string -->
     <!-- TODO string name="export_overview_title">Overview export</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
@@ -346,7 +346,7 @@ Refer to the web pages for details.\n
 <string name="no_calib">Pas d\'étalonnage</string>
 <string name="no_calib_check">Pas de visée de contrôle d\'étalonnage</string>
 <string name="no_calibration">Aucun étalonnage sélectionné</string>
-<string name="no_capture_app">Aucune application de capture d\'image</string>
+<!-- UNUSED string name="no_capture_app">Aucune application de capture d\'image</string -->
 <string name="no_cave3d">Cave3D n\'est pas installé</string>
     <string name="no_data_reduction">Pas de réduction des données</string>
 <string name="no_db">Pas de base de données</string>

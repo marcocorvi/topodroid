@@ -17,6 +17,7 @@ import com.topodroid.prefs.TDSetting;
 import java.util.List;
 import java.util.Set;
 import java.util.ArrayList;
+import java.util.Locale;
 
 public class DistoXStationName
 {
@@ -161,14 +162,14 @@ public class DistoXStationName
           }
           if ( len > 0 ) {
             if ( leading == 0 ) {
-              String fmt = String.format("%%0%dd", digits );
+              String fmt = String.format( Locale.US, "%%0%dd", digits );
               return name.substring( 0, len ) + String.format( fmt, n+1 );
             } else {
               return name.substring( 0, len ) + Integer.toString( n+1 );
             }
           } else {
             if ( leading == 0 ) {
-              String fmt = String.format("%%0%dd", digits );
+              String fmt = String.format( Locale.US, "%%0%dd", digits );
               return String.format( fmt, n+1 );
             } else {
               return Integer.toString( n+1 );

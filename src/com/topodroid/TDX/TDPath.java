@@ -182,7 +182,7 @@ public class TDPath
   static void setTdPaths( String name /*, String base */ )
   {
     // TDLog.v( "set paths [0]: name " + name + " base " + base );
-    if ( name == null || ! name.toLowerCase().startsWith( "topodroid" ) ) return;
+    if ( name == null || ! name.toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) ) return;
 
     File dir = TDFile.getExternalDir( name ); // DistoX-SAF
     // TDLog.v( "set paths [4]. Dir " + dir.getPath()  );
@@ -521,7 +521,7 @@ public class TDPath
     File[] files = dir.listFiles( new FileFilter() {
       public boolean accept( File pathname ) { 
 	if ( ! pathname.isDirectory() ) return false;
-	return ( pathname.getName().toLowerCase(Locale.US).startsWith( "topodroid" ) );
+	return ( pathname.getName().toLowerCase( Locale.getDefault() ).startsWith( "topodroid" ) );
       }
     } );
     if ( files == null || files.length == 0 ) {
@@ -847,7 +847,7 @@ public class TDPath
             int ne = ext.length;
             if ( pathname.isDirectory() ) return false;
             if ( ne == 0 ) return true;
-            String name = pathname.getName().toLowerCase(Locale.US);
+            String name = pathname.getName().toLowerCase( Locale.getDefault() );
             for ( int n = 0; n < ne; ++n ) {
               if ( name.endsWith( ext[n] ) ) return true;
             }
@@ -915,7 +915,7 @@ public class TDPath
   {
     int pos = filename.lastIndexOf(".");
     if ( pos < 0 ) return null;
-    return filename.substring( pos+1 ).toLowerCase();
+    return filename.substring( pos+1 ).toLowerCase( Locale.getDefault() );
   }
 
   /** @return filename string from a pathname

@@ -5,8 +5,8 @@
     <string name="user_man_ok">Zainstalowane tłumaczenie podręcznika użytkownika</string>
     <string name="user_man_fail">Nie można zainstalować tłumaczenia instrukcji obsługi</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -211,8 +211,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_import_title">Import kalibracji</string>
     <string name="import_title">Import pomiaru</string>
     <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
+    <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
 
@@ -354,7 +354,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_calib">brak kalibracji</string>
     <string name="no_calib_check">brak calibration-sprawdz strzał</string>
     <string name="no_calibration">bak wybranej kalibracji</string>
-    <string name="no_capture_app">Brak apki do robienia zdjęć</string>
+    <!-- UNUSED string name="no_capture_app">Brak apki do robienia zdjęć</string -->
     <string name="no_cave3d">brak zainstalowanego Cave3D</string>
     <string name="no_data_reduction">brak redukcj danych</string>
     <string name="no_db">brak bazy danych</string>

@@ -5,8 +5,8 @@
     <string name="user_man_ok">Übersetztes Handbuch installiert</string>
     <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -212,8 +212,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="calib_import_title">Kalibrierung importieren</string>
     <string name="import_title">Daten Importieren</string>
     <string name="export_data_title">Datenexport</string>
-    <string name="export_plot_title">Skizzenexport</string>
-    <string name="export_overview_title">Übersichtexport</string>
+    <!-- UNUSED string name="export_plot_title">Skizzenexport</string -->
+    <!-- UNUSED string name="export_overview_title">Übersichtexport</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
 
@@ -352,7 +352,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="no_calib">Keine Kalibrierung</string>
     <string name="no_calib_check">Keine Kalibrierungs-Testmessung</string>
     <string name="no_calibration">Keine Kalibrierung gewählt</string>
-    <string name="no_capture_app">Keine Kamera-App vorhanden</string>
+    <!-- UNUSED string name="no_capture_app">Keine Kamera-App vorhanden</string -->
     <string name="no_cave3d">Cave3D nicht installiert</string>
     <string name="no_data_reduction">Datenreduktion nicht möglich</string>
     <string name="no_db">Keine Datenbank</string>

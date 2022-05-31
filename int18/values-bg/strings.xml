@@ -5,8 +5,8 @@
     <string name="user_man_ok">Инсталирано е преведеното ръководство</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -209,8 +209,8 @@ Refer to the web pages for details.\n
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
     <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
+    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
+    <!-- UNUSED string name="export_overview_title">Overview export</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
 
@@ -348,7 +348,7 @@ Refer to the web pages for details.\n
     <string name="no_calib">Липсва калибрация</string>
     <string name="no_calib_check">Липсва контролно измерване</string>
     <string name="no_calibration">Не е избрана калибрация</string>
-    <string name="no_capture_app">Липсва програма за камера</string>
+    <!-- UNUSED string name="no_capture_app">Липсва програма за камера</string -->
     <string name="no_cave3d">Cave3D не е инсталирана</string>
     <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Липсва база данни</string>

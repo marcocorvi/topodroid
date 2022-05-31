@@ -5,8 +5,8 @@
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
-    <!-- TODO string name="string_false">false</string -->
-    <!-- TODO string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
     <!-- UNUSED string name="desc_points">Точки</string -->
@@ -208,8 +208,8 @@
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
     <string name="export_data_title">Экспорт данных</string>
-    <string name="export_plot_title">Экспорт абрисов</string>
-    <string name="export_overview_title">Экспорт страницы обзора</string>
+    <!-- UNUSED string name="export_plot_title">Экспорт абрисов</string -->
+    <!-- UNUSED string name="export_overview_title">Экспорт страницы обзора</string -->
     <string name="export_model_title">Экспорт 3D модели</string>
     <string name="export_tdconfig_title">Экспорт проекта</string>
 
@@ -348,7 +348,7 @@
     <string name="no_calib">Отсутствует калибровка</string>
     <string name="no_calib_check">Нет замеров проверки-калибровки</string>
     <string name="no_calibration">Калибровка не выбрана</string>
-    <string name="no_capture_app">Отсутствует приложение для фото</string>
+    <!-- UNUSED string name="no_capture_app">Отсутствует приложение для фото</string -->
     <string name="no_cave3d">Cave3D не установлен</string>
     <string name="no_data_reduction">Нет сокращения данных</string>
     <string name="no_db">Отсутствует база данных</string>
