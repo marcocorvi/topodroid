@@ -5,8 +5,8 @@
     <string name="user_man_ok">Перевод руководства установлен</string>
     <string name="user_man_fail">Не удалось установить перевод руководства</string>
 
-    <!-- UNUSED string name="string_false">false</string -->
-    <!-- UNUSED string name="string_true">true</string -->
+    <!-- UNUSED string name="string_false">неверно</string -->
+    <!-- UNUSED string name="string_true">верно</string -->
 
     <!-- UNUSED string name="desc_user_man">Руководство пользователя</string -->
     <!-- UNUSED string name="desc_points">Точки</string -->
@@ -289,7 +289,7 @@
     <string name="error_name_required">Требуется название</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
-    <!-- TODO string name="error_team_required">Team required</string -->
+    <string name="error_team_required">Нужно указать группу съёмки</string>
 
     <!-- UNUSED string name="error_dir_exists">Директория уже существует</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -322,8 +322,8 @@
     <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
     <string name="splays">бок. замеры</string>
-    <!-- TODO string name="with_splays">with splays</string -->
-    <!-- TODO string name="cell_size">Cell size [m]</string -->
+    <string name="with_splays">со сплеями</string>
+    <string name="cell_size">Размер сетки [m]</string>
 
     <string name="legs">Замеры м-у пикетами</string>
     <string name="stations">Пикет</string>
@@ -582,8 +582,8 @@
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
     <string name="survey_not_attached_extend">ВНИМАНИЕ: не соединенный пикет и замеры без направления развертки</string>
-    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
-    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <string name="survey_no_data_reduction">ВНИМАНИЕ: нет сокращения данных</string>
+    <string name="survey_not_saved">ВНИМАНИЕ: информация о съёмке не сохранена</string>
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
@@ -743,7 +743,7 @@
     <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
-    <!-- TODO string name="button_recover"   >Recover</string -->
+    <string name="button_recover"   >Восстановить</string>
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
@@ -811,7 +811,7 @@
     <string name="popup_do_splay">Сделать замер</string>
     <string name="popup_do_leg">Сделать три замера</string>
     <string name="popup_do_gm_data">Калибр. замер</string>
-    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
+    <string name="popup_do_gm_group">Группа Калибр.</string>
     <string name="popup_do_laser">Лазер</string>
     <string name="popup_do_scan">Сканировать</string>
     <string name="popup_do_shot">Замер</string>
@@ -1003,7 +1003,7 @@
     <string name="help_cover">Показать угловое распределение данных калибровки</string>
     <string name="help_compute">Рассчитать калибровку</string>
     <string name="help_write">Записать коэффициенты калибровки в DistoX</string>
-    <!-- TODO string name="help_splays">Segment/point splays</string -->
+    <string name="help_splays">Сегменты/точки сплеев</string>
 
     <string name="help_add_project">Добавить проект пещеры</string>
     <string name="help_add_surveys">Добавить съёмки</string>
@@ -1288,8 +1288,8 @@
   <string name="pref_survex_splay_summary">Добавить пикет ДО к боковым замерам при экспорте в формат Survex</string>
   <string name="pref_survex_lrud_title">Survex/Therion ЛПВН</string>
   <string name="pref_survex_lrud_summary">Расчитать ЛПВН в при экспорте в формат Survex/Therion</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <string name="pref_svg_program_title">SVG версия</string>
+  <string name="pref_svg_program_summary">Целевая программа для SVG</string>
   <string name="pref_svg_grid_title">Сетка в SVG/PNG</string>
   <string name="pref_svg_grid_summary">Добавить сетку в SVG/PNG экспорт</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>
