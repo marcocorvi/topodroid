@@ -26,12 +26,12 @@
       <RadioButton android:id="@+id/gm_policy_td"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="TopoDroid"
+        android:text="@string/topodroid"
         />
       <RadioButton android:id="@+id/gm_policy_pt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:text="PocketTopo"
+        android:text="@string/pockettopo"
         />
     </RadioGroup>
 
@@ -40,7 +40,7 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
@@ -49,17 +49,17 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/group_cancel"
           style="@style/button_default"
           android:text="@string/button_cancel"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/group_reset" 
           style="@style/button_default"
           android:text="@string/group_reset"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/group_ok"
           style="@style/button_default"

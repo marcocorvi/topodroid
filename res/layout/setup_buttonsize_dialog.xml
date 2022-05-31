@@ -38,35 +38,35 @@
         android:layout_width="0dp"
         android:layout_weight="20"
           android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margintiny"
+        android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/size_xs"
       />
       <RadioButton android:id="@+id/btn_s"
         android:layout_width="0dp"
         android:layout_weight="20"
           android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margintiny"
+        android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/size_s"
       />
       <RadioButton android:id="@+id/btn_m"
         android:layout_width="0dp"
         android:layout_weight="20"
           android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margintiny"
+        android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/size_m"
       />
       <RadioButton android:id="@+id/btn_l"
         android:layout_width="0dp"
         android:layout_weight="20"
           android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margintiny"
+        android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/size_l"
       />
       <RadioButton android:id="@+id/btn_xl"
         android:layout_width="0dp"
         android:layout_weight="20"
           android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/margintiny"
+        android:layout_marginEnd="@dimen/margintiny"
         android:text="@string/size_xl"
       />
 
@@ -77,7 +77,7 @@
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginv"
     android:layout_marginBottom="@dimen/marginv"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -86,19 +86,19 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/btn_next"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_next"
       />
       <Button android:id="@+id/btn_skip"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_skip"
       />

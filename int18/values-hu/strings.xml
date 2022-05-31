@@ -5,6 +5,9 @@
     <string name="user_man_ok">Installált felhasználói kézikönyv fordítás</string>
     <string name="user_man_fail">Hiba a felhasználói kézikönyv fordítás installálásakor</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">Felhasználói kézikönyv</string -->
     <!-- UNUSED string name="desc_points">Pontok</string -->
     <!-- UNUSED string name="desc_lines">Vonalak</string -->
@@ -290,6 +293,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_required">Név szükséges</string>
     <string name="error_name_duplicate">Duplikált név</string>
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
+    <!-- TODO string name="error_team_required">Team required</string -->
 
 	
     <!-- UNUSED string name="error_dir_exists">A konyvtár már létezik</string -->
@@ -323,6 +327,9 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
     <string name="splays_on_off">Segédmérések</string>
     <string name="splays">segédmérések is</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <string name="legs">Poligon mérések</string>
     <string name="stations">Poligon-pont</string>
     <!-- UNUSED string name="fmt_listen">HALLGAT | %1$s</string -->
@@ -583,6 +590,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
     <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
@@ -752,6 +760,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_on"        >be</string>
     <string name="button_open"      >Megnyit</string>
     <string name="button_read"      >Olvas  </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Újra      </string -->
     <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
     <string name="button_dump"      >Letöltés</string>
@@ -818,6 +827,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="popup_do_splay">Segéd mérés</string>
     <string name="popup_do_leg">Poligon mérések</string>
     <string name="popup_do_gm_data">Kalibr. mérés</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <string name="popup_do_laser">Lézer</string>
     <string name="popup_do_scan">Scan mérés</string>
     <string name="popup_do_shot">Mérés</string>
@@ -1012,6 +1022,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_cover">A kalibrációs adatok szögeloszlásának bemutatása</string>
     <string name="help_compute">Kalibráció számítása</string>
     <string name="help_write">Kalibrációs együttható feltöltése a DistoX-be</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">Barlang projekt hozzáadása</string>
     <string name="help_add_surveys">Mérés hozzáadása</string>
@@ -1305,8 +1316,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_survex_splay_summary">Végpont megadása segéd-mérésekhez survex programban.</string>
   <string name="pref_survex_lrud_title">Survex/Therion BJFL</string>
   <string name="pref_survex_lrud_summary">BJFL értékek hozzáadása Survex/Therion exportnál</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Cél SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Cél SVG program</string -->
   <string name="pref_svg_grid_title">Rácsháló</string>
   <string name="pref_svg_grid_summary">Rácsháló hozzáadása SVG/PNG-képhez</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string> <!-- round-trip -->

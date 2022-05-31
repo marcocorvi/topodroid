@@ -38,7 +38,7 @@
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
-    android:gravity="right"
+    android:gravity="end"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -47,7 +47,7 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button
         style="@style/button_default"
@@ -68,8 +68,8 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:autoLink="all"
-      android:paddingLeft="@dimen/paddingh"
-      android:paddingRight="@dimen/paddingh"
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
     />
   </ScrollView>
 

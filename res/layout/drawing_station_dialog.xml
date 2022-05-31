@@ -24,7 +24,7 @@
     >
     <Button android:id="@+id/btn_ok_comment"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_save"
     />
     <EditText android:id="@+id/comment"
@@ -43,7 +43,7 @@
     >
     <Button android:id="@+id/btn_ok"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_ok"
     />
     <TextView android:id="@+id/station_text"
@@ -61,7 +61,7 @@
     >
 
     <Button android:id="@+id/btn_set"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       style="@style/button_default"
       android:text="@string/button_ok"
     />
@@ -103,7 +103,7 @@
       >
 
       <Button android:id="@+id/btn_hidden"
-	      android:layout_marginRight="@dimen/marginh"
+	      android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_ok"
       />
@@ -124,14 +124,14 @@
       <TextView android:id="@+id/splays_on_off"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:text="@string/splays_on_off"
         />
 
       <CheckBox android:id="@+id/btn_splays_on"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:text="@string/button_on"
       />
 
@@ -169,16 +169,16 @@
       <CheckBox android:id="@+id/cb_horizontal"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:text="@string/btn_horizontal"
       />
       <Button android:id="@+id/btn_direct"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_inverse"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_xdelete"
         style="@style/button_default"
@@ -189,7 +189,7 @@
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:gravity="left"
+      android:gravity="start"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginv"
       >
@@ -200,17 +200,17 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/btn_cancel"
           style="@style/button_default"
           android:text="@string/button_cancel"
-          android:layout_gravity="left"
+          android:layout_gravity="start"
           />
         <Button android:id="@+id/btn_saved"
           style="@style/button_default"
           android:text="@string/button_saved"
-          android:layout_gravity="right"
+          android:layout_gravity="end"
           />
       </LinearLayout>
     </LinearLayout>

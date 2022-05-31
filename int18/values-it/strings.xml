@@ -5,6 +5,9 @@
     <string name="user_man_ok">Istallata la traduzione del manuale utente</string>
     <string name="user_man_fail">Errore nella istallazione del manuale utente</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">Manuale utente</string -->
     <!-- UNUSED string name="desc_points">Punti</string -->
     <!-- UNUSED string name="desc_lines">Linee</string -->
@@ -288,6 +291,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_name_required">Nome mancante</string>
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
+    <!-- TODO string name="error_team_required">Team required</string -->
 
     <!-- UNUSED string name="error_dir_exists">Directory già esistente</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -320,6 +324,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">inclusi splay</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <string name="legs">Battute</string>
     <string name="stations">Caposaldo</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
@@ -577,6 +584,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="survey_not_attached">ATTENZIONE: dati scollegati</string>
     <string name="survey_not_extend">WARNING: extend disabilitati</string>
     <string name="survey_not_attached_extend">WARNING: tiri non collegati ed extend disabilitati</string>
+    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">WARNING: Coefficienti di calibrazione saturati</string>
     <string name="out_of_memory">WARNING: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
@@ -585,7 +594,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="anomaly_warning">La compensazione di anomalia magnetica e\' liv. esperto !</string>
     <string name="tripod_warning">Tripod e\' liv. avanzato !</string>
     <string name="coverage_warning">Copertura angolo sotto %1$d %%\nScrivo coefficenti?</string>
-    <string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficenti?</string>
+    <string name="delta_warning">Errore medio oltre %1$.1f\nScrivo coefficienti?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
     <string name="cover_data">Distribuzione dati grezzi: %1$.2f %%</string>
@@ -742,6 +751,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_on"        >acceso</string>
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
@@ -809,6 +819,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="popup_do_splay">Splay</string>
     <string name="popup_do_leg">Battuta</string>
     <string name="popup_do_gm_data">Tiro di calib.</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scansione</string>
     <string name="popup_do_shot">Tiro</string>
@@ -1001,6 +1012,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_cover">Distribuzione angolare dati calibrazione</string>
     <string name="help_compute">Calcola calibrazione</string>
     <string name="help_write">Scrivi calibrazione sul DistoX</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">Aggiungi progetto</string>
     <string name="help_add_surveys">Aggiungi rilievi</string>
@@ -1289,8 +1301,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_survex_splay_summary">Survex - Aggiungi stazione A agli splay</string>
   <string name="pref_survex_lrud_title">Survex - LRUD</string>
   <string name="pref_survex_lrud_summary">Survex - Aggiungi LRUD alla export</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Griglia</string>
   <string name="pref_svg_grid_summary">Aggiungi griglia all\'export SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>

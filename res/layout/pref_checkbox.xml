@@ -9,7 +9,7 @@
     android:layout_height="2dp"
     android:background="@color/pref_divider"
     />
-    <!-- android:layout_alignParentLeft="true" -->
+    <!-- android:layout_alignParentStart="true" -->
 
   <LinearLayout 
     android:layout_width="match_parent" 
@@ -27,18 +27,18 @@
     <LinearLayout 
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:gravity="right"
-      android:layout_gravity="right"
+      android:gravity="end"
+      android:layout_gravity="end"
       android:orientation="horizontal"
       >
-      <!-- android:layout_alignParentRight="true" -->
+      <!-- android:layout_alignParentEnd="true" -->
       <CheckBox android:id="@+id/checkbox"
 	style="@style/checkBoxStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@color/pref_text"
         android:padding="@dimen/padding"
-        android:gravity="right"
+        android:gravity="end"
       />
     </LinearLayout>
   </LinearLayout>

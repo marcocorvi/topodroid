@@ -21,13 +21,13 @@
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginvbig"
-    android:layout_gravity="left"
+    android:layout_gravity="start"
     >
 
     <ImageView android:id="@+id/histogram1"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="left"
+      android:layout_gravity="start"
       android:layout_marginBottom="@dimen/marginv"
       android:contentDescription="@string/error_distribution"
       />
@@ -35,7 +35,7 @@
     <ImageView android:id="@+id/histogram2"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="right"
+      android:layout_gravity="end"
       android:layout_marginBottom="@dimen/marginv"
       android:contentDescription="@string/error_distribution"
       />
@@ -45,8 +45,8 @@
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
-    android:layout_gravity="right"
-    android:gravity="left"
+    android:layout_gravity="end"
+    android:gravity="start"
     android:layout_marginTop="@dimen/marginvbig" 
     >
     <Button android:id="@+id/button_help"
@@ -56,7 +56,7 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_close"
           style="@style/button_default"

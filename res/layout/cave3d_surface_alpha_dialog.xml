@@ -7,8 +7,8 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
+    android:paddingStart="6dip"
+    android:paddingEnd="6dip"
     android:paddingBottom="3dip">
 
     <!-- DEM file -->
@@ -22,14 +22,14 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content" 
-        android:gravity="left"
+        android:gravity="start"
         android:text="@string/dem_load"
         />
       <TextView android:id="@+id/dem_file"
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content" 
-        android:gravity="left"
+        android:gravity="start"
         />
     </LinearLayout>
 
@@ -38,8 +38,8 @@
       android:layout_width="fill_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
       android:layout_marginTop="25dp"
       android:orientation="horizontal"
       >
@@ -47,14 +47,14 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content" 
-        android:gravity="left"
+        android:gravity="start"
         android:text="@string/texture_load"
         />
       <TextView android:id="@+id/texture_file"
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content" 
-        android:gravity="left"
+        android:gravity="start"
         />
     </LinearLayout>
    					  
@@ -63,8 +63,8 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:layout_marginBottom="10dp"
-      android:layout_marginLeft="10dp"
-      android:layout_marginRight="10dp"
+      android:layout_marginStart="10dp"
+      android:layout_marginEnd="10dp"
       android:layout_marginTop="25dp"
       android:padding="10dp"
       android:max="255"
@@ -103,7 +103,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:hint="@string/surface_east"
         android:inputType="numberSigned|numberDecimal"
         />
@@ -111,7 +111,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
-        android:layout_marginRight="10dp"
+        android:layout_marginEnd="10dp"
         android:hint="@string/surface_north"
         android:inputType="numberSigned|numberDecimal"
         />
@@ -123,7 +123,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -139,8 +139,8 @@
         android:layout_width="0dp" 
         android:layout_height="wrap_content"
         android:layout_weight="50"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/button_cancel"
         />
       <Button android:id="@+id/button_ok"
@@ -148,8 +148,8 @@
         android:layout_width="0dp" 
         android:layout_height="wrap_content"
         android:layout_weight="50"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         android:text="@string/button_ok"
         />
      </LinearLayout>

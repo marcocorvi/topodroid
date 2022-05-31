@@ -37,14 +37,14 @@
           <!-- Button android:id="@+id/item_left"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginEnd="@dimen/marginh"
             android:layout_marginTop="@dimen/marginv"
             android:background="@drawable/ic_undo"
           / -->
           <!-- Button android:id="@+id/item_right"
             android:layout_width="wrap_content" 
             android:layout_height="wrap_content" 
-            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginEnd="@dimen/marginh"
             android:layout_marginTop="@dimen/marginv"
             android:background="@drawable/ic_redo"
           / -->
@@ -55,11 +55,11 @@
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginBottom="@dimen/marginv"
         android:orientation="horizontal"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/size"
             android:layout_width="80dp"
-            android:layout_marginRight="@dimen/marginh"
+            android:layout_marginEnd="@dimen/marginh"
             style="@style/button_default"
 	    android:text="@string/minus_plus"
         />
@@ -78,8 +78,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/marginv"
         android:layout_marginBottom="@dimen/marginv"
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:orientation="horizontal"
       >
       </LinearLayout -->

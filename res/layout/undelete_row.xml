@@ -9,7 +9,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:padding="@dimen/padding"
-    android:gravity="left"
+    android:gravity="start"
   />
 
   <TextView 
@@ -20,7 +20,7 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="left"
+    android:gravity="start"
   />
 
 </LinearLayout>

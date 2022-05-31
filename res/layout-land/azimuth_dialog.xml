@@ -26,7 +26,7 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="96dp"
-        android:gravity="right|center_vertical"
+        android:gravity="end|center_vertical"
         android:text="@string/west"
       />
       <Button
@@ -39,7 +39,7 @@
       <TextView
         android:layout_width="wrap_content"
         android:layout_height="96dp"
-        android:gravity="left|center_vertical"
+        android:gravity="start|center_vertical"
         android:text="@string/east"
       />
   </LinearLayout>
@@ -71,7 +71,7 @@
       <EditText android:id="@+id/et_azimuth"
         style="@style/edit_number_light"
         android:layout_width="100dp" 
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:imeOptions="actionDone"
         android:hint="@string/hint_azimuth"
       />    
@@ -85,8 +85,8 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_gravity="right"
-      android:gravity="left"
+      android:layout_gravity="end"
+      android:gravity="start"
       android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/button_help"
@@ -96,22 +96,22 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/btn_left"
           style="@style/button_default"
           android:text="@string/button_left"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/btn_ok"
           style="@style/button_default"
           android:text="@string/button_ok"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/btn_right"
           style="@style/button_default"
           android:text="@string/button_right"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/button_cancel"
           style="@style/button_default"

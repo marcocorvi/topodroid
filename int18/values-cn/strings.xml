@@ -5,6 +5,9 @@
     <string name="user_man_ok">已安装用户手册译本</string>
     <string name="user_man_fail">无法安装用户手册译本</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -289,6 +292,7 @@
     <string name="error_name_required">输入名称</string>
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
+    <!-- TODO string name="error_team_required">Team required</string -->
 
     <!-- UNUSED string name="error_dir_exists">目录已经存在</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -321,6 +325,9 @@
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
     <string name="splays">副线</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <string name="legs">主线</string>
     <string name="stations">站点</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
@@ -582,6 +589,7 @@
     <string name="survey_not_extend">警告:未设置测线扩展</string>
     <string name="survey_not_attached_extend">警告:未连接的测线和未设置扩展</string>
     <string name="survey_no_data_reduction">警告:无数据缩减</string>
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">警告:饱和校正系数</string>
     <string name="out_of_memory">警告:内存不足!</string>
     <string name="disk_io_error">危险:磁盘读写错误!</string>
@@ -744,6 +752,7 @@
     <string name="button_on"        >开启</string>
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >回收站      </string>
@@ -811,6 +820,7 @@
     <string name="popup_do_splay">侧线测量</string>
     <string name="popup_do_leg">主线测量</string>
     <string name="popup_do_gm_data">校准测量</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <string name="popup_do_laser">激光</string>
     <string name="popup_do_scan">扫描</string>
     <string name="popup_do_shot">测射</string>
@@ -1003,6 +1013,7 @@
     <string name="help_cover">校准数据的角度分布</string>
     <string name="help_compute">计算校准</string>
     <string name="help_write">将校准系数写入DistoX</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">添加洞穴项目</string>
     <string name="help_add_surveys">添加测量</string>
@@ -1289,8 +1300,8 @@
   <string name="pref_survex_splay_summary">在Survex中添加测点到辐测中</string>
   <string name="pref_survex_lrud_title">Survex/Therion的左右上下</string>
   <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">参考线</string>
   <string name="pref_svg_grid_summary">添加参考线到SVG/PNG输出</string>
   <string name="pref_svg_roundtrip_title">SVG延迟</string>

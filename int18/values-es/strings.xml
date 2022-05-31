@@ -5,6 +5,9 @@
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -281,6 +284,7 @@
     <string name="error_name_required">Introducir nombre</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
     <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <!-- TODO string name="error_team_required">Team required</string -->
 
     <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -314,6 +318,9 @@
     <!-- TODO string name="splays_on_off">Splays</string -->
     <string name="splays">Tomas laterales</string>
     <string name="legs">Trayecto</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <!-- TODO string name="fmt_id">ID %1$s</string -->
@@ -578,6 +585,8 @@
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
     <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
+    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">ADVERTENCIA: coeficientes de calibración saturados</string>
     <string name="out_of_memory">ADVERTENCIA: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
@@ -736,6 +745,7 @@
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
@@ -803,6 +813,7 @@
     <string name="popup_do_splay">Tomas radiales</string>
     <string name="popup_do_leg">Tomas principales</string>
     <string name="popup_do_gm_data">Toma calib.</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <!-- TODO string name="popup_do_laser">Laser</string -->
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
@@ -994,6 +1005,7 @@
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
@@ -1282,8 +1294,8 @@
   <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG/PNG</string>
   <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->

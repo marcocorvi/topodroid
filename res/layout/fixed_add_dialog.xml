@@ -30,7 +30,7 @@
         style="@style/button_default"
         android:layout_weight="20"
 	android:text="@string/east"
-	android:layout_marginRight="@dimen/marginh"
+	android:layout_marginEnd="@dimen/marginh"
         />
       <EditText android:id="@id/edit_long" 
         style="@style/edit_text"
@@ -52,7 +52,7 @@
         style="@style/button_default"
         android:layout_weight="20"
 	android:text="@string/north"
-	android:layout_marginRight="@dimen/marginh"
+	android:layout_marginEnd="@dimen/marginh"
         />
       <EditText android:id="@id/edit_lat"
         style="@style/edit_text"
@@ -75,8 +75,8 @@
         android:layout_width="0dp" 
         android:layout_weight="40"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_gravity="left"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_gravity="start"
         android:text="@string/h_ellipsoid"
         />
       <EditText android:id="@id/edit_alt"
@@ -100,8 +100,8 @@
         android:layout_width="0dp" 
         android:layout_weight="40"
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_gravity="left"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_gravity="start"
         android:text="@string/h_geoid"
         />
       <EditText android:id="@id/edit_asl"
@@ -132,7 +132,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -141,7 +141,7 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_clipboard"
         style="@style/button_default"
@@ -153,13 +153,13 @@
         />
       <Button android:id="@+id/button_proj4"
         style="@style/button_default"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
 	android:text="@string/proj4"
         />
       <LinearLayout 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/button_ok"
           style="@style/button_default"

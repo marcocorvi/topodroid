@@ -22,7 +22,7 @@
       <LinearLayout android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:background="#111"
         >
         <Button android:id="@+id/handle"
@@ -35,7 +35,7 @@
       <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_toLeftOf="@id/right"
+        android:layout_toStartOf="@id/right"
       />
    </RelativeLayout>
 

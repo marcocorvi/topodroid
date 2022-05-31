@@ -12,7 +12,7 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="left"
+    android:gravity="start"
   />
 
   <EditText 
@@ -24,7 +24,7 @@
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="right"
+    android:gravity="end"
     android:inputType="none"
     android:editable="false"
   /> <!-- editable=false is necessary -->
@@ -46,7 +46,7 @@
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="right"
+    android:gravity="end"
     android:inputType="none"
     android:editable="false"
   /> <!-- editable=false is necessary -->
@@ -64,7 +64,7 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="left"
+    android:gravity="start"
   />
 
 </LinearLayout>

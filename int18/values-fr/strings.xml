@@ -5,6 +5,9 @@
     <string name="user_man_ok">Traduction du manuel utilisateur installée</string>
     <string name="user_man_fail">Échec de l\'installation de la traduction du manuel</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -284,6 +287,7 @@ Refer to the web pages for details.\n
 <string name="error_name_required">Nom nécessaire</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
     <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <!-- TODO string name="error_team_required">Team required</string -->
 
 <!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -317,6 +321,9 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Visées d\'habillage ON OFF</string>
 <string name="splays">Visées d\'habillage</string>
     <string name="legs">Visées de cheminement</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
@@ -573,6 +580,8 @@ Refer to the web pages for details.\n
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définies !</string>
     <string name="survey_not_attached_extend">ATTENTION : visées non reliées et dir. ext. non définies</string>
+    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">ATTENTION : coefficients d\'étalonnage saturés</string>
     <string name="out_of_memory">ATTENTION : mémoire pleine !</string>
     <string name="disk_io_error">PANNE CRITIQUE : erreur écriture lecture disque !</string>
@@ -732,6 +741,7 @@ Refer to the web pages for details.\n
     <string name="button_on"        >On</string>
     <string name="button_open"      >Ouvrir    </string>
     <string name="button_read"      >Lecture      </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrouper   </string -->
     <string name="button_dump"      >Déchargement mémoire    </string>
@@ -799,6 +809,7 @@ Refer to the web pages for details.\n
     <string name="popup_do_splay">Visée latérale</string>
     <string name="popup_do_leg">Cheminement auto</string>
     <string name="popup_do_gm_data">Visée d\'étalon.</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scan</string>
     <string name="popup_do_shot">Visée</string>
@@ -989,6 +1000,7 @@ Refer to the web pages for details.\n
     <string name="help_cover">Affiche la distribution des données d\'étalonnage</string>
     <string name="help_compute">Calcule l\'étalonnage</string>
     <string name="help_write">Écrit les coefficients d\'étalonnage sur le DistoX</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">Ajouter un projet</string>
     <string name="help_add_surveys">Ajouter des topographies au projet</string>
@@ -1266,8 +1278,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Ajout station VERS aux visées dans Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Ajout LRUD à l\'export Survex</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Grille</string>
   <string name="pref_svg_grid_summary">Ajouter une grille à l\'export SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">Aller-retour SVG</string>

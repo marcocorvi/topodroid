@@ -61,7 +61,7 @@
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
     android:layout_marginBottom="@dimen/marginv"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -70,28 +70,28 @@
     <LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       android:orientation="horizontal"
       >
       <Button android:id="@+id/button_clear"
         style="@style/button_default"
         android:text="@string/button_clear"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_push"
         style="@style/button_default"
         android:text="@string/button_save"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_pop"
         style="@style/button_default"
         android:text="@string/button_delete"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_close"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_current"
         style="@style/button_default"

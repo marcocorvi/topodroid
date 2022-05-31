@@ -7,8 +7,8 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dp"
-    android:paddingRight="6dp"
+    android:paddingStart="6dp"
+    android:paddingEnd="6dp"
     android:paddingBottom="3dp">
 
     <TextView android:id="@+id/viewpoint"
@@ -31,7 +31,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"

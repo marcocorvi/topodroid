@@ -330,6 +330,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Splays</string>
     <string name="splays">including splays</string>
+    <string name="with_splays">with splays</string>
+    <string name="cell_size">Cell size [m]</string>
+
     <string name="legs">Legs</string>
     <string name="stations">Station</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
@@ -1770,9 +1773,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 \n[8] Turn off the DistoX2 with the CLR key.
 \n
    </string>
-   <string name="firmware_wait_dump">Reading firmware &#8230; wait</string>
-   <string name="firmware_wait_check">Checking hardware &#8230; wait</string>
-   <string name="firmware_wait_upload">Uploading firmware &#8230; wait</string>
+   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
    <string name="firmware_none">no firmware file</string>
    <string name="firmware_file">firmware file</string>
    <string name="firmware_file_exists">Existing firmware file</string>
@@ -1891,6 +1894,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="proj_side">Side</string>
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
+    <string name="focal" translatable="false">S</string>
 
     <string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string>
     <!-- UNUSED string name="cno_files">No files</string -->

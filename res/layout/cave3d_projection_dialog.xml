@@ -7,15 +7,15 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
+    android:paddingStart="6dip"
+    android:paddingEnd="6dip"
     android:paddingBottom="3dip">
 
     <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_marginTop="20dp"
         android:baselineAligned="false"
         >
@@ -24,9 +24,9 @@
         android:layout_weight="20"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="right"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
+        android:layout_gravity="end"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
         >
         <TextView android:id="@+id/tv_focal"
           android:layout_width="wrap_content"
@@ -49,14 +49,14 @@
         android:layout_weight="80"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:layout_gravity="right"
-        android:layout_marginLeft="20dp"
-        android:layout_marginRight="20dp"
+        android:layout_gravity="end"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
         >
         <SeekBar android:id="@+id/focal"
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
-          android:text="S"
+          android:text="@string/focal"
           android:max="1000"
           android:background="#666666"
         />
@@ -83,7 +83,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -93,7 +93,7 @@
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:layout_marginTop="20dp"
         >
         <Button android:id="@+id/button_cancel"
@@ -101,8 +101,8 @@
           android:layout_width="0dp" 
           android:layout_height="wrap_content"
           android:layout_weight="50"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
           android:text="@string/button_cancel"
         />
         <Button android:id="@+id/button_ok"
@@ -110,8 +110,8 @@
           android:layout_width="0dp" 
           android:layout_height="wrap_content"
           android:layout_weight="50"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
           android:text="@string/button_ok"
         />
       </LinearLayout>

@@ -21,21 +21,21 @@
     <RadioButton android:id="@+id/rb_a3" 
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" 
-      android:paddingLeft="@dimen/paddingh"
-      android:paddingRight="@dimen/paddingh"
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
       android:text="@string/a3"
     />
     <RadioButton android:id="@+id/rb_x310" 
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" 
-      android:paddingLeft="@dimen/paddingh"
-      android:paddingRight="@dimen/paddingh"
+      android:paddingStart="@dimen/paddingh"
+      android:paddingEnd="@dimen/paddingh"
       android:checked="true"
       android:text="@string/x310"
     />
 
     <Button android:id="@+id/btn_ok"
-      android:layout_marginLeft="@dimen/marginh"
+      android:layout_marginStart="@dimen/marginh"
       style="@style/button_default"
       android:text="@string/button_save"
     />
@@ -76,7 +76,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -85,7 +85,7 @@
     <LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"

@@ -7,14 +7,14 @@
     android:layout_width="fill_parent" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
+    android:paddingStart="6dip"
+    android:paddingEnd="6dip"
     android:paddingBottom="3dip">
    					  
     <!-- TextView 
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:gravity="left"
+      android:gravity="start"
       android:text="@string/info_axes" 
       / -->
 
@@ -29,15 +29,15 @@
        <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_grid"
           />
         <TextView android:id="@+id/info_grid"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -48,15 +48,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_view"
           />
         <TextView android:id="@+id/info_azimuth"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -67,15 +67,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_survey"
           />
         <TextView android:id="@+id/info_survey"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -86,15 +86,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_shot"
           />
         <TextView android:id="@+id/info_shot"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -105,15 +105,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_station"
           />
         <TextView android:id="@+id/info_station"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -124,15 +124,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_length"
           />
         <TextView android:id="@+id/info_length"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -143,15 +143,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_depth"
           />
         <TextView android:id="@+id/info_depth"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -162,15 +162,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_volume"
           />
         <TextView android:id="@+id/info_volume"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -181,15 +181,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_east"
           />
         <TextView android:id="@+id/info_east"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -200,15 +200,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_north"
           />
         <TextView android:id="@+id/info_north"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -219,15 +219,15 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           android:text="@string/info_z"
           />
         <TextView android:id="@+id/info_z"
           android:layout_width="fill_parent" 
           android:layout_height="wrap_content" 
-          android:layout_marginLeft="15dp" 
-          android:gravity="left"
+          android:layout_marginStart="15dp" 
+          android:gravity="start"
           />
       </TableRow>
 
@@ -238,8 +238,8 @@
      android:layout_height="wrap_content" 
      android:layout_marginTop="15dp" 
      android:layout_marginBottom="8dp" 
-     android:layout_marginLeft="15dp" 
-     android:gravity="left"
+     android:layout_marginStart="15dp" 
+     android:gravity="start"
      android:text="@string/info_surveys"
      android:textSize="20sp"
      />
@@ -249,7 +249,7 @@
       style="@style/list_bottom"
       android:layout_width="fill_parent"
       android:layout_height="0dp"
-      android:layout_marginLeft="15dp" 
+      android:layout_marginStart="15dp" 
       android:layout_weight="1"
       />  
 
@@ -260,7 +260,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -275,8 +275,8 @@
           style="@style/button_default"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
           android:text="@string/button_close"
       />
     </LinearLayout>

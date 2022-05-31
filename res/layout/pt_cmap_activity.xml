@@ -12,8 +12,8 @@
  <TableLayout 
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
-    android:paddingLeft="@dimen/paddingh"
-    android:paddingRight="@dimen/paddingh"
+    android:paddingStart="@dimen/paddingh"
+    android:paddingEnd="@dimen/paddingh"
     android:paddingBottom="@dimen/paddingv"
     >
 
@@ -230,11 +230,11 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="right"
+      android:gravity="end"
     >
     <Button android:id="@+id/button_ok"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_save"
     />
     </LinearLayout>

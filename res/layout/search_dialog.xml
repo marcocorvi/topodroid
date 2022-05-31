@@ -25,7 +25,7 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/stations"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <EditText android:id="@+id/name"
         style="@style/edit_text"
@@ -50,12 +50,12 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/splays"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_search"
         style="@style/button_default"
         android:text="@string/button_search"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
     </LinearLayout>
 
@@ -71,17 +71,17 @@
         android:layout_height="wrap_content"
         android:singleLine="true"
         android:text="@string/legs"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_duplicate"
         style="@style/button_default"
         android:text="@string/button_duplicate"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_surface"
         style="@style/button_default"
         android:text="@string/button_surface"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_extend"
         style="@style/button_default"
@@ -95,7 +95,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginv"
       android:layout_marginBottom="@dimen/marginv"
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -104,12 +104,12 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/btn_cancel"
           style="@style/button_default"
           android:text="@string/button_cancel"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
       </LinearLayout>
     </LinearLayout>

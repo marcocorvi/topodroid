@@ -23,8 +23,8 @@
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:layout_marginRight="@dimen/marginh"
-      android:layout_gravity="left"
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_gravity="start"
       android:text="@string/longitude"
     />
     <EditText android:id="@id/fix_lng" 
@@ -49,8 +49,8 @@
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:layout_marginRight="@dimen/marginh"
-      android:layout_gravity="left"
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_gravity="start"
       android:text="@string/latitude"
     />
     <EditText android:id="@id/fix_lat" 
@@ -74,8 +74,8 @@
       android:layout_width="0dp" 
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:layout_marginRight="@dimen/marginh"
-      android:layout_gravity="left"
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_gravity="start"
       android:text="@string/h_ellipsoid"
     />
     <EditText android:id="@id/fix_alt" 
@@ -99,8 +99,8 @@
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content" 
-      android:layout_marginRight="@dimen/marginh"
-      android:layout_gravity="left"
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_gravity="start"
       android:text="@string/h_geoid"
     />
     <EditText android:id="@id/fix_asl" 
@@ -125,7 +125,7 @@
       android:layout_width="0dp"
       android:layout_weight="20"
       android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:inputType="text"
       android:hint="@string/hint_station"
     />
@@ -153,7 +153,7 @@
       android:layout_width="0dp"
       android:layout_weight="50"
       android:layout_height="wrap_content"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/declination"
     />
     <EditText android:id="@id/fix_decl" 
@@ -169,8 +169,8 @@
       android:layout_width="0dp"
       android:layout_weight="20"
       android:layout_height="wrap_content" 
-      android:layout_marginLeft="@dimen/marginh"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginStart="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
     />
   </LinearLayout>
    					  
@@ -183,12 +183,12 @@
     >  
     <Button android:id="@+id/fix_clear_convert"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_clear_convert"
       />
     <Button android:id="@+id/fix_convert"
       style="@style/button_default"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:text="@string/button_convert"
       />
     <TextView android:id="@+id/fix_crs" 
@@ -218,7 +218,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -227,16 +227,16 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/fix_view"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         android:text="@string/button_view"
       />
       <Button android:id="@+id/fix_save"
         style="@style/button_default"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:text="@string/button_save"
       />
       <Button android:id="@+id/fix_drop"

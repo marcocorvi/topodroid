@@ -5,6 +5,7 @@
       android:installLocation="auto"
       android:versionCode="601006"
       android:versionName="6.1.6"
+      android:supportsRtl="false"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -69,6 +70,7 @@
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.INTERNET"/>
 
 
@@ -207,7 +209,7 @@
         <activity android:name=".DrawingWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
-          android:exported="false"
+          android:exported="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -218,7 +220,7 @@
         <activity android:name=".OverviewWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
-          android:exported="false"
+          android:exported="true"
           >
           <intent-filter>
             <action android:name="android.intent.action.VIEW" />
@@ -240,7 +242,7 @@
         <activity android:name="com.topodroid.help.UserManualActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
-          android:exported="false"
+          android:exported="true"
           >
           <intent-filter>
               <action android:name="android.intent.action.VIEW" />

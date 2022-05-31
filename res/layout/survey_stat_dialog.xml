@@ -112,7 +112,7 @@
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:gravity="left"
+      android:gravity="start"
       android:orientation="horizontal"
       android:layout_marginTop="@dimen/marginv"
       >
@@ -123,7 +123,7 @@
       <LinearLayout
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/btn_back"
           style="@style/button_default"

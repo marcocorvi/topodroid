@@ -94,7 +94,7 @@
       android:layout_height="wrap_content"
       android:layout_marginTop="@dimen/marginvbig"
       android:orientation="horizontal" 
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
@@ -103,10 +103,10 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/button_coeff_back"
-          android:layout_gravity="left"
+          android:layout_gravity="start"
           style="@style/button_default"
           android:text="@string/button_close"
         />

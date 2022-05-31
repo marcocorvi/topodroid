@@ -41,7 +41,7 @@
       android:layout_height="wrap_content" 
       android:orientation="horizontal"
       android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
@@ -50,7 +50,7 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <!-- Button android:id="@+id/button_cancel"
           style="@style/button_default"
@@ -60,15 +60,15 @@
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
-          android:gravity="left"
+          android:gravity="start"
           >
           <Button android:id="@+id/button_loc"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             style="@style/button_default"
             android:text="@string/button_gps_start"
             />
           <Button android:id="@+id/button_view"
-            android:layout_gravity="left"
+            android:layout_gravity="start"
             android:text="@string/button_view"
             style="@style/button_default"
             />
@@ -78,10 +78,10 @@
           android:layout_width="match_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
-          android:gravity="right"
+          android:gravity="end"
           >
           <Button android:id="@+id/button_add"
-            android:layout_gravity="right"
+            android:layout_gravity="end"
             style="@style/button_default"
             android:text="@string/button_save"
             />

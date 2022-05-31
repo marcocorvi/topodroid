@@ -7,58 +7,58 @@
     android:layout_width="fill_parent" 
     android:layout_height="fill_parent"
     android:orientation="vertical"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
+    android:paddingStart="6dip"
+    android:paddingEnd="6dip"
     android:paddingBottom="3dip">
    					  
     <TextView android:id="@+id/st_name"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content" 
       android:layout_marginBottom="20sp"
-      android:gravity="left"
+      android:gravity="start"
       />
 
     <TextView android:id="@+id/st.east"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_north"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_vert"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_dist"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_horz"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_angle"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
     <TextView android:id="@+id/st_cave_pathlength"
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content" 
         android:layout_marginBottom="10sp"
-        android:gravity="left"
+        android:gravity="start"
         />
 
   <LinearLayout android:id="@+id/help"
@@ -67,7 +67,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -82,8 +82,8 @@
           style="@style/button_default"
           android:layout_width="wrap_content"
           android:layout_height="wrap_content"
-          android:layout_marginLeft="10dp"
-          android:layout_marginRight="10dp"
+          android:layout_marginStart="10dp"
+          android:layout_marginEnd="10dp"
           android:text="@string/button_close"
       />
     </LinearLayout>

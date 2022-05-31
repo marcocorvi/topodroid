@@ -29,7 +29,7 @@
           <LinearLayout android:id="@+id/right"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:background="#111"
             >
             <Button android:id="@+id/handle"
@@ -42,7 +42,7 @@
           <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toLeftOf="@+id/right"
+            android:layout_toStartOf="@id/right"
           />
         </RelativeLayout>
   
@@ -50,7 +50,7 @@
           android:layout_width="fill_parent"
           android:layout_height="wrap_content"
           android:orientation="horizontal"
-          android:gravity="right"
+          android:gravity="end"
           >
           <ListView android:id="@+id/menu"
             style="@style/menu_default"
@@ -69,25 +69,25 @@
     <Button android:id="@+id/current_station"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:layout_gravity="left"
-      android:paddingLeft="10dp"
-      android:paddingRight="5dp"
-      android:gravity="left"
+      android:layout_gravity="start"
+      android:paddingStart="10dp"
+      android:paddingEnd="5dp"
+      android:gravity="start"
       android:background="#990066cc"
       android:textColor="#ffffffff"
     />
     <Button android:id="@+id/fix_station"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:paddingLeft="5dp"
-      android:paddingRight="5dp"
+      android:paddingStart="5dp"
+      android:paddingEnd="5dp"
       android:background="@drawable/iz_station_off"
       />
     <Button android:id="@+id/measure_station"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
-      android:paddingLeft="5dp"
-      android:paddingRight="10dp"
+      android:paddingStart="5dp"
+      android:paddingEnd="10dp"
       android:background="@drawable/iz_ruler_off"
       />
 

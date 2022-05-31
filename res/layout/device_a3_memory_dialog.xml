@@ -18,7 +18,7 @@
        >
    					  
       <Button android:id="@+id/button_store"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         style="@style/button_default"
         android:text="@string/button_store"
         />
@@ -47,7 +47,7 @@
        >
    					  
       <Button android:id="@+id/button_read"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         style="@style/button_default"
         android:text="@string/button_read"
         />
@@ -78,7 +78,7 @@
        >
    					  
       <Button android:id="@+id/button_dump"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         style="@style/button_default"
         android:text="@string/button_dump"
         />
@@ -122,7 +122,7 @@
    					  
       <Button android:id="@+id/button_reset"
         style="@style/button_default"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:text="@string/button_reset"
         android:textColor="@color/textdelete"
         />

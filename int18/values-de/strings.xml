@@ -5,6 +5,9 @@
     <string name="user_man_ok">Übersetztes Handbuch installiert</string>
     <string name="user_man_fail">Fehler beim installieren des übersetzten Handbuchs</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -290,6 +293,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="error_name_required">Name erforderlich</string>
     <string name="error_name_duplicate">Name bereits verwendet</string>
     <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <!-- TODO string name="error_team_required">Team required</string -->
 
     <!-- UNUSED string name="error_dir_exists">Verzeichnis existiert bereits</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -323,6 +327,9 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="splays_on_off">Hilfszüge</string>
     <string name="splays">Hilfszüge</string>
     <string name="legs">Messzüge</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">WARTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
@@ -585,6 +592,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
     <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen mit undefinierter Ausrichtung</string>
+    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>
@@ -750,6 +759,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="button_on"        >ein</string>
     <string name="button_open"      >Öffnen     </string>
     <string name="button_read"      >Lesen      </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Nochmals      </string -->
     <!-- UNUSED string name="button_regroup"   >Umgruppieren   </string -->
     <string name="button_dump"      >Lesen</string>
@@ -816,6 +826,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="popup_do_splay">Hilfszug messen</string>
     <string name="popup_do_leg">Messzug messen (n Messungen)</string>
     <string name="popup_do_gm_data">Testmessung</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scannen</string>
     <string name="popup_do_shot">Messen</string>
@@ -1009,6 +1020,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="help_cover">Winkelverteilung der Kalibrierungsdaten</string>
     <string name="help_compute">Kalibrierungs-Koeffizienten berechnen</string>
     <string name="help_write">Kalibrierungs-Koeffizienten auf den DistoX speichern</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">Projekt hinzufügen</string>
     <string name="help_add_surveys">Vermessungen hinzufügen</string>
@@ -1290,8 +1302,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_survex_splay_summary">Zielstationen zu Hilfszügen zuweisen für Survex-Export</string>
   <string name="pref_survex_lrud_title">Survex LRUD</string>
   <string name="pref_survex_lrud_summary">LRUD-Werte in Survex export</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Gitter</string>
   <string name="pref_svg_grid_summary">Gitter zu SVG/PNG hinzufügen</string>
   <string name="pref_svg_roundtrip_title">SVG Roundtrip via Compass</string>

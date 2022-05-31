@@ -8,8 +8,8 @@
   <TextView android:id="@+id/text_version"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content" 
-    android:layout_marginRight="@dimen/marginh"
-    android:layout_marginLeft="@dimen/marginh"
+    android:layout_marginEnd="@dimen/marginh"
+    android:layout_marginStart="@dimen/marginh"
     android:layout_marginTop="@dimen/marginv"
   />
 
@@ -26,8 +26,8 @@
       <CheckBox android:id="@+id/ckb_speleo"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_speleo"
       />
@@ -35,8 +35,8 @@
       <CheckBox android:id="@+id/ckb_extra"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_extra"
       />
@@ -44,8 +44,8 @@
       <CheckBox android:id="@+id/ckb_mine"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_mine"
       />
@@ -53,8 +53,8 @@
       <CheckBox android:id="@+id/ckb_geo"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_geo"
       />
@@ -62,8 +62,8 @@
       <CheckBox android:id="@+id/ckb_archeo"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_archeo"
       />
@@ -71,8 +71,8 @@
       <CheckBox android:id="@+id/ckb_anthro"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_anthro"
       />
@@ -80,8 +80,8 @@
       <CheckBox android:id="@+id/ckb_paleo"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_paleo"
       />
@@ -89,8 +89,8 @@
       <CheckBox android:id="@+id/ckb_bio"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_bio"
       />
@@ -98,8 +98,8 @@
       <CheckBox android:id="@+id/ckb_karst"
         android:layout_width="match_parent" 
         android:layout_height="wrap_content" 
-        android:layout_marginRight="@dimen/marginh"
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginTop="@dimen/marginv"
         android:text="@string/symbol_karst"
       />
@@ -111,7 +111,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -120,17 +120,17 @@
     <LinearLayout
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_replace"
         style="@style/button_default"
         android:text="@string/button_replace"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_add"
         style="@style/button_default"

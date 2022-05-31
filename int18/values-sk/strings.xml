@@ -6,6 +6,9 @@
     <string name="user_man_ok">Preklad používateľského manuálu bol nainštalovaný</string>
     <string name="user_man_fail">Inštalácia prekladu používateľského manuálu zlyhala</string>
 
+    <!-- TODO string name="string_false">false</string -->
+    <!-- TODO string name="string_true">true</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
@@ -290,6 +293,7 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Vyžaduje sa meno</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
     <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <!-- TODO string name="error_team_required">Team required</string -->
 
 	
     <!-- UNUSED string name="error_dir_exists">Adresár už existuje</string -->
@@ -323,6 +327,9 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Pomocné zámery</string>
     <string name="splays">Pomocné zámery</string>
+    <!-- TODO string name="with_splays">with splays</string -->
+    <!-- TODO string name="cell_size">Cell size [m]</string -->
+
     <string name="legs">Hlavné zámery</string>
     <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
@@ -584,6 +591,7 @@ Refer to the web pages for details.\n
     <string name="survey_not_extend">VAROVANIE: Nenastavená Smerová orientácia</string>
     <string name="survey_not_attached_extend">VAROVANIE: Nepripojené merania a Nenastavená Smerová orientácia</string>
     <string name="survey_no_data_reduction">VAROVANIE: Žiadna redukcia dát</string>
+    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <string name="saturated_coeffs">VAROVANIE: Saturované kalibračné koeficienty</string>
     <string name="out_of_memory">VAROVANIE: Nedostatok pamäte !</string>
     <string name="disk_io_error">KRITICKÁ CHYBA: Chyba i/o disku !</string>
@@ -750,6 +758,7 @@ Refer to the web pages for details.\n
     <string name="button_on"        >Zapnúť</string>
     <string name="button_open"      >Uložiť a Otvoriť     </string>
     <string name="button_read"      >Čítať    </string>
+    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Kopírovať z DistaX   </string>
@@ -816,6 +825,7 @@ Refer to the web pages for details.\n
     <string name="popup_do_splay">Pomocná zámera</string>
     <string name="popup_do_leg">Hlavné zámery</string>
     <string name="popup_do_gm_data">Zámera kalibrácie</string>
+    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <!-- TODO string name="popup_do_laser">Laser</string -->
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
@@ -1008,6 +1018,7 @@ Refer to the web pages for details.\n
     <string name="help_cover">Distribúcia kalibračných dát v 3D sfére - azimut a sklon</string>
     <string name="help_compute">Vypočítať kalibráciu</string>
     <string name="help_write">Zapísať kalibráčné koeficienty do DistaX</string>
+    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <string name="help_add_project">Pridaj Projekt</string>
     <string name="help_add_surveys">Pridač Mapovania</string>
@@ -1301,8 +1312,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Pridanie koncového bodu do pomocných zámer v Survex</string>
   <string name="pref_survex_lrud_title">Survex / Therion - LRUD</string>
   <string name="pref_survex_lrud_summary">Pridanie LRUD do programu Survex/Therion </string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
+  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">Mriežka</string>
   <string name="pref_svg_grid_summary">Pridanie mriežky do exportu SVG/PNG</string>
   <string name="pref_svg_roundtrip_title">SVG round-trip</string>
@@ -1809,7 +1820,7 @@ DO NOT REMOVE THIS LINE -->
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
     <string name="cmenu_alpha">DEM nepriehľadnosť</string>
-    <string name="cmenu_viewpoint">Pohľad z ...</string>
+    <string name="cmenu_viewpoint">Pohľad z &#8230;</string>
     <!-- UNUSED string name="cmenu_files">Jaskyne</string -->
     <!-- UNUSED string name="cmenu_frame">Rám</string -->
     <!-- UNUSED string name="cmenu_color">Farba</string -->
@@ -1935,9 +1946,9 @@ DO NOT REMOVE THIS LINE -->
     <!-- UNUSED string name="no_planview">Žiadny pôdorys</string -->
     <!-- UNUSED string name="no_surface">Žiadny povrchový DEM</string -->
 
-    <string name="error_file_not_found">Error: súbor nenájdený</string>
-    <string name="error_file_not_readable">Error: súbor nečitateľný</string>
-    <string name="error_io_exception">Error: IO výnimka</string>
+    <!-- FIXME string name="error_file_not_found">Error: súbor nenájdený</string -->
+    <!-- FIXME string name="error_file_not_readable">Error: súbor nečitateľný</string -->
+    <!-- FIXME string name="error_io_exception">Error: IO výnimka</string -->
     <string name="error_parser_error">Error: chyba syntaktického analyzátora %1$s</string>
     <string name="error_export_failed">Error: export zlyhal %1$s</string>
 

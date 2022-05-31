@@ -243,26 +243,26 @@
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:text="@string/export_dxf_version"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         />
       <RadioButton android:id="@+id/acad_9"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:text="9"
+        android:text="@string/nine"
         android:checked="true"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <RadioButton android:id="@+id/acad_12"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:text="12"
-        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/twelve"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <RadioButton android:id="@+id/acad_16"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
-        android:text="14"
-        android:layout_marginRight="@dimen/marginh"
+        android:text="@string/fourteen"
+        android:layout_marginEnd="@dimen/marginh"
       />
     </RadioGroup>
     <CheckBox android:id="@+id/dxf_xsections"
@@ -394,7 +394,7 @@
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginvbig"
     android:layout_marginBottom="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -403,12 +403,12 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_back"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_ok"
         style="@style/button_default"

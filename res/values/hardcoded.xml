@@ -1,5 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="topodroid" translatable="false">TopoDroid</string>
+  <string name="pockettopo" translatable="false">PocketTopo</string>
+  <string name="number_sign" translatable="false"> # </string>
+  <string name="char_x" translatable="false"> X </string>
+
+  <string name="zero" translatable="false">0</string>
+  <string name="zerod" translatable="false">0.0</string>
+  <string name="two" translatable="false">2</string>
+  <string name="nine" translatable="false">9</string>
+  <string name="twelve" translatable="false">12</string>
+  <string name="fourteen" translatable="false">14</string>
+
   <!-- UNUSED string name="a3" translatable="false">A3</string -->
   <!-- UNUSED string name="x310" translatable="false">X310</string -->
   <string name="east" translatable="false">E</string>
@@ -8,7 +20,6 @@
   <string name="south" translatable="false">S</string>
 
   <string name="empty" translatable="false"> </string>
-  <string name="zero" translatable="false"> 0 </string>
   <!-- UNUSED string name="one" translatable="false"> 1 </string -->
   <string name="four_zero" translatable="false">0000</string>
   <string name="a3_max" translatable="false">4096</string>

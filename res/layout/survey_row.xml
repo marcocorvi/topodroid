@@ -10,7 +10,7 @@
     android:padding="@dimen/padding"
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
-    android:gravity="left"
+    android:gravity="start"
     android:textColor="#ffffffff"
     android:singleLine="true"
   />

@@ -24,17 +24,17 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_gravity="right"
-      android:gravity="right"
+      android:layout_gravity="end"
+      android:gravity="end"
       android:layout_marginTop="@dimen/marginvbig" 
       >
       <Button android:id="@+id/btn_close"
-        android:layout_marginRight="@dimen/marginh" 
+        android:layout_marginEnd="@dimen/marginh" 
         style="@style/button_default"
         android:text="@string/button_close"
       />
       <Button android:id="@+id/btn_clear"
-        android:layout_marginRight="@dimen/marginh" 
+        android:layout_marginEnd="@dimen/marginh" 
         style="@style/button_default"
         android:text="@string/button_clear"
       />

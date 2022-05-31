@@ -106,7 +106,7 @@
         android:layout_width="0dp"
         android:layout_weight="10"
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
 	android:text="@string/greater_than"
         />
     </LinearLayout>
@@ -156,7 +156,7 @@
         android:layout_width="0dp"
         android:layout_weight="10"
         android:layout_height="wrap_content" 
-        android:layout_marginLeft="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh"
 	android:text="@string/less_than"
         />
     </LinearLayout>
@@ -247,8 +247,8 @@
       android:layout_below="@id/radio5"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
-      android:paddingLeft="@dimen/marginnormal"
-      android:paddingRight="@dimen/marginnormal"
+      android:paddingStart="@dimen/marginnormal"
+      android:paddingEnd="@dimen/marginnormal"
       android:orientation="horizontal" 
       />
 
@@ -268,7 +268,7 @@
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           android:background="@drawable/iz_sensor"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
           />
 
       <CheckBox android:id="@+id/splay_at_to"
@@ -289,7 +289,7 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
@@ -298,17 +298,17 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/button_cancel_name"
           style="@style/button_default"
           android:text="@string/button_cancel"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/button_save_shot_name"
           style="@style/button_default"
           android:text="@string/button_save"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/button_ok_shot_name"
           style="@style/button_default"

@@ -24,8 +24,8 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/shot_label"
     android:orientation="horizontal"
-    android:paddingLeft="@dimen/paddingh"
-    android:paddingRight="@dimen/paddingh"
+    android:paddingStart="@dimen/paddingh"
+    android:paddingEnd="@dimen/paddingh"
     android:paddingBottom="@dimen/paddingv"
     >
 
@@ -142,7 +142,7 @@
     <TextView android:id="@+id/shot_hide"
       android:layout_width="wrap_content"
       android:layout_height="wrap_content" 
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:textSize="@dimen/textsize"
       android:text="@string/hide_from"
     />
@@ -154,7 +154,7 @@
     android:layout_height="wrap_content"
     android:layout_below="@id/layout3b"
     android:orientation="horizontal" 
-    android:gravity="left" 
+    android:gravity="start" 
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -163,14 +163,14 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <LinearLayout 
         android:layout_margin="0dp"
         android:layout_width="wrap_content" 
         android:layout_height="wrap_content"
         android:background="@xml/button_b"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         >
         <Button android:id="@+id/btn_color"
           style="@style/button_default"
@@ -180,12 +180,12 @@
       <Button android:id="@+id/btn_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/btn_ok"
         style="@style/button_default"
         android:text="@string/button_save"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <!-- AUTOWALLS Button android:id="@+id/walls"
         style="@style/button_default"

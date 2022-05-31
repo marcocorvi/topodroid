@@ -18,7 +18,7 @@
    					  
     <Button android:id="@+id/button_dump"
       style="@style/button_default"
-      android:layout_gravity="left"
+      android:layout_gravity="start"
       android:text="@string/button_dump"
     />
 

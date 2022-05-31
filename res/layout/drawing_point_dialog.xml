@@ -109,34 +109,34 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     >
-    <!-- Button android:id="@+id/left"
+    <!-- Button android:id="@+id/start"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:layout_marginLeft="@dimen/marginv"
-      android:layout_marginRight="@dimen/marginv"
+      android:layout_marginStart="@dimen/marginv"
+      android:layout_marginEnd="@dimen/marginv"
       android:background="@drawable/ic_undo"
     / -->
     <ImageView android:id="@+id/image"
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
       android:singleLine="true"
-      android:paddingLeft="@dimen/paddingbig"
-      android:paddingRight="@dimen/paddingbig"
+      android:paddingStart="@dimen/paddingbig"
+      android:paddingEnd="@dimen/paddingbig"
       android:contentDescription="@string/orientation"
     />
     <!-- TextView android:id="@+id/value"
        android:layout_width="wrap_content"
        android:layout_height="wrap_content"
        android:singleLine="true"
-       android:paddingLeft="@dimen/paddingbig"
-       android:paddingRight="@dimen/paddingbig"
+       android:paddingStart="@dimen/paddingbig"
+       android:paddingEnd="@dimen/paddingbig"
     / --> 
     <!-- Button android:id="@+id/right"
        android:layout_width="wrap_content" 
        android:layout_height="wrap_content" 
        android:singleLine="true"
-       android:paddingLeft="@dimen/paddingbig"
-       android:paddingRight="@dimen/paddingbig"
+       android:paddingStart="@dimen/paddingbig"
+       android:paddingEnd="@dimen/paddingbig"
        android:background="@drawable/ic_redo"
     / -->
     <SeekBar android:id="@+id/seekbar"
@@ -169,7 +169,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
     android:layout_marginTop="@dimen/marginv"
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
@@ -178,17 +178,17 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_ok"
         style="@style/button_default"
         android:text="@string/button_save"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
       />
     </LinearLayout>
   </LinearLayout>

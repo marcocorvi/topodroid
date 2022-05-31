@@ -31,11 +31,11 @@
 	/>
       <Button android:id="@+id/audio_confirm"
         style="@style/button_default"
-        android:layout_gravity="right"
-        android:gravity="right"
+        android:layout_gravity="end"
+        android:gravity="end"
         android:layout_marginTop="@dimen/marginv"
-        android:layout_marginLeft="@dimen/marginh" 
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginStart="@dimen/marginh" 
+        android:layout_marginEnd="@dimen/marginh"
           tools:ignore="RtlHardcoded" />
     </LinearLayout>
 
@@ -43,8 +43,8 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:layout_gravity="right"
-      android:gravity="left"
+      android:layout_gravity="end"
+      android:gravity="start"
       android:layout_marginTop="@dimen/marginvbig"
         tools:ignore="RtlHardcoded">
       <Button android:id="@+id/button_help"
@@ -54,10 +54,10 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <!-- Button android:id="@+id/audio_delete"
-            android:layout_marginRight="@dimen/marginh" 
+            android:layout_marginEnd="@dimen/marginh" 
             style="@style/button_default"
             android:text="@string/button_delete"
         / -->

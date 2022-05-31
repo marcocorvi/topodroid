@@ -29,15 +29,15 @@
       android:layout_width="wrap_content"
       android:layout_height="wrap_content"
       android:textSize="@dimen/textsizehuge"
-      android:gravity="left"
+      android:gravity="start"
       />
     <LinearLayout android:id="@+id/help"
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="vertical"
-      android:layout_marginRight="@dimen/marginh"
-      android:layout_alignParentRight="true"
-      android:gravity="right"
+      android:layout_marginEnd="@dimen/marginh"
+      android:layout_alignParentEnd="true"
+      android:gravity="end"
       >
       <!--
       <Button android:id="@+id/button_help"
@@ -47,21 +47,21 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
 	    <Button android:id="@+id/buttonClick"
               style="@style/button_default"
-              android:gravity="right"
+              android:gravity="end"
               android:layout_marginBottom="@dimen/marginv"
             />
 	    <Button android:id="@+id/buttonSave"
               style="@style/button_default"
-              android:gravity="right"
+              android:gravity="end"
               android:layout_marginBottom="@dimen/marginv"
               />
 	    <Button android:id="@+id/buttonQuit"
               style="@style/button_default"
-              android:gravity="right"
+              android:gravity="end"
               android:layout_marginBottom="@dimen/marginv"
               />
       </LinearLayout>

@@ -28,7 +28,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_bearing"
       />
     <EditText android:id="@id/shot_bearing"
@@ -36,7 +36,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_clino"
       />
     <EditText android:id="@id/shot_clino"
@@ -44,7 +44,7 @@
       android:layout_width="0sp"
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
-      android:layout_marginRight="@dimen/marginh"
+      android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_from"
       />
   </LinearLayout>
@@ -92,7 +92,7 @@
         android:layout_width="42dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="30"
-        android:layout_gravity="left"
+        android:layout_gravity="start"
         android:background="@drawable/ic_back"
         />
 
@@ -108,7 +108,7 @@
         android:layout_width="42dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="30"
-        android:layout_gravity="right"
+        android:layout_gravity="end"
         android:background="@drawable/ic_forw"
         />
 
@@ -173,8 +173,8 @@
     android:layout_below="@id/layout4"
     android:layout_width="match_parent" 
     android:layout_height="50sp"
-    android:paddingLeft="@dimen/paddingh"
-    android:paddingRight="@dimen/paddingh"
+    android:paddingStart="@dimen/paddingh"
+    android:paddingEnd="@dimen/paddingh"
     android:orientation="horizontal" 
     >
     <TextView 
@@ -201,7 +201,7 @@
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
-      android:gravity="right"
+      android:gravity="end"
       android:layout_marginTop="@dimen/marginvbig"
       >
       <Button android:id="@+id/btn_lrud"
@@ -216,8 +216,8 @@
     android:layout_below="@id/layout8"
     android:layout_width="match_parent" 
     android:layout_height="50sp"
-    android:paddingLeft="@dimen/paddingh"
-    android:paddingRight="@dimen/paddingh"
+    android:paddingStart="@dimen/paddingh"
+    android:paddingEnd="@dimen/paddingh"
     android:orientation="horizontal" 
     >
     <EditText android:id="@+id/shot_left" 
@@ -227,7 +227,7 @@
       android:layout_weight="25"
       android:layout_height="wrap_content" 
       android:hint="&#x21A4;"
-      android:nextFocusRight="@+id/shot_right"
+      android:nextFocusEnd="@+id/shot_right"
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_right" 
@@ -237,7 +237,7 @@
       android:layout_weight="25"
       android:layout_height="wrap_content" 
       android:hint="&#x21A6;"
-      android:nextFocusRight="@+id/shot_up"
+      android:nextFocusEnd="@+id/shot_up"
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_up" 
@@ -247,7 +247,7 @@
       android:layout_weight="25"
       android:layout_height="wrap_content" 
       android:hint="&#x21A5;"
-      android:nextFocusRight="@+id/shot_down"
+      android:nextFocusEnd="@+id/shot_down"
       android:singleLine="true"
       />
     <EditText android:id="@id/shot_down" 
@@ -265,8 +265,8 @@
     android:layout_below="@id/layout10"
     android:layout_width="match_parent" 
     android:layout_height="50sp"
-    android:paddingLeft="@dimen/paddingh"
-    android:paddingRight="@dimen/paddingh"
+    android:paddingStart="@dimen/paddingh"
+    android:paddingEnd="@dimen/paddingh"
     android:orientation="horizontal" 
     />
 
@@ -282,7 +282,7 @@
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal" 
-    android:gravity="left"
+    android:gravity="start"
     >
     <Button android:id="@+id/button_help"
         style="@style/button_empty"
@@ -291,21 +291,21 @@
     <LinearLayout 
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/btn_back"
         style="@style/button_default"
         android:text="@string/button_cancel"
-        android:layout_marginRight="@dimen/marginhsmall"
+        android:layout_marginEnd="@dimen/marginhsmall"
       />
       <Button android:id="@+id/btn_save"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginhsmall"
+        android:layout_marginEnd="@dimen/marginhsmall"
         android:text="@string/button_save"
       />
       <Button android:id="@+id/btn_more"
         style="@style/button_default"
-        android:layout_marginRight="@dimen/marginhsmall"
+        android:layout_marginEnd="@dimen/marginhsmall"
         android:text="@string/button_more"
       />
       <Button android:id="@+id/btn_ok"

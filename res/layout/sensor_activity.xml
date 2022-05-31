@@ -87,7 +87,7 @@
       >
    		
       <Button android:id="@+id/sensor_cancel"
-        android:layout_marginRight="@dimen/marginh"
+        android:layout_marginEnd="@dimen/marginh"
         style="@style/button_default"
         android:text="@string/button_cancel"
         />
@@ -96,11 +96,11 @@
         android:layout_width="match_parent" 
         android:layout_height="wrap_content"
         android:orientation="horizontal" 
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/sensor_ok"
           style="@style/button_default"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
           android:text="@string/button_save"
           />
 

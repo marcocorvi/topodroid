@@ -17,8 +17,8 @@
     <SeekBar android:id="@+id/seekbar"
       android:layout_width="match_parent"
       android:layout_height="20dp" 
-      android:layout_marginLeft="@dimen/marginsmall"
-      android:layout_marginRight="@dimen/marginsmall"
+      android:layout_marginStart="@dimen/marginsmall"
+      android:layout_marginEnd="@dimen/marginsmall"
       android:layout_marginBottom="@dimen/marginv"
       android:max="400"
       android:background="#666666"
@@ -28,7 +28,7 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
-      android:gravity="left"
+      android:gravity="start"
       >
       <Button android:id="@+id/button_help"
           style="@style/button_empty"
@@ -37,12 +37,12 @@
       <LinearLayout 
         android:layout_width="fill_parent" 
         android:layout_height="wrap_content"
-        android:gravity="right"
+        android:gravity="end"
         >
         <Button android:id="@+id/btn_minus"
           android:layout_width="0dp"
           android:layout_weight="20"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
           style="@style/button_default"
           android:text="@string/dash"
         />
@@ -50,13 +50,13 @@
           style="@style/edit_number"
           android:layout_width="0dp"
           android:layout_weight="40"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
           android:imeOptions="actionDone"
         />
         <Button android:id="@+id/btn_plus"
           android:layout_width="0dp"
           android:layout_weight="20"
-          android:layout_marginRight="@dimen/marginh"
+          android:layout_marginEnd="@dimen/marginh"
           style="@style/button_default"
           android:text="@string/plus"
         />

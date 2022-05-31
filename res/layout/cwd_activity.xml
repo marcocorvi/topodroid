@@ -41,14 +41,14 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal" 
       android:layout_marginTop="@dimen/marginvbig"
-      android:gravity="right"
+      android:gravity="end"
       >
       <Button android:id="@+id/button_cancel"
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
           style="@style/button_default"
 	  android:text="@string/button_cancel"
-	  android:layout_marginRight="@dimen/marginh"
+	  android:layout_marginEnd="@dimen/marginh"
       />
       <Button android:id="@+id/button_ok"
           android:layout_width="wrap_content" 

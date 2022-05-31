@@ -13,8 +13,8 @@
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="right"
-    android:text=" # "
+    android:gravity="end"
+    android:text="@string/number_sign"
     android:textColor="#ffffff00"
   />
 
@@ -26,8 +26,8 @@
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="right"
-    android:text=" X "
+    android:gravity="end"
+    android:text="@string/char_x"
     android:textColor="#ffff3333"
   />
 
@@ -39,7 +39,7 @@
     android:singleLine="true"
     android:typeface="monospace"
     android:padding="@dimen/padding"
-    android:gravity="left"
+    android:gravity="start"
     android:textColor="#ffffffff"
   />
 

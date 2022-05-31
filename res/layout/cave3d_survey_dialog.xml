@@ -7,14 +7,14 @@
     android:layout_width="wrap_content" 
     android:layout_height="wrap_content"
     android:orientation="vertical"
-    android:paddingLeft="6dip"
-    android:paddingRight="6dip"
+    android:paddingStart="6dip"
+    android:paddingEnd="6dip"
     android:paddingBottom="3dip">
    					  
     <TextView android:id="@+id/survey_name" 
       android:layout_width="wrap_content" 
       android:layout_height="wrap_content" 
-      android:gravity="left"
+      android:gravity="start"
       />
 
     <TableLayout 
@@ -30,14 +30,14 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:gravity="left"
+          android:gravity="start"
           android:text="@string/survey_legs"
           />
         <TextView android:id="@+id/survey_legs"
           android:layout_width="100dip" 
           android:layout_height="wrap_content" 
-          android:gravity="right"
-          android:text="0"
+          android:gravity="end"
+          android:text="@string/zero"
           />
       </TableRow>
 
@@ -48,14 +48,14 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:gravity="left"
+          android:gravity="start"
           android:text="@string/survey_legs_length"
           />
         <TextView android:id="@+id/survey_legs_length"
           android:layout_width="100dip" 
           android:layout_height="wrap_content" 
-          android:gravity="right"
-          android:text="0.0"
+          android:gravity="end"
+          android:text="@string/zerod"
           />
       </TableRow>
 
@@ -66,14 +66,14 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:gravity="left"
+          android:gravity="start"
           android:text="@string/survey_splays"
           />
         <TextView android:id="@+id/survey_splays"
           android:layout_width="100dip" 
           android:layout_height="wrap_content" 
-          android:gravity="right"
-          android:text="0"
+          android:gravity="end"
+          android:text="@string/zero"
           />
       </TableRow>
 
@@ -84,14 +84,14 @@
         <TextView 
           android:layout_width="wrap_content" 
           android:layout_height="wrap_content" 
-          android:gravity="left"
+          android:gravity="start"
           android:text="@string/survey_splays_length"
           />
         <TextView android:id="@+id/survey_splays_length"
           android:layout_width="100dip" 
           android:layout_height="wrap_content" 
-          android:gravity="right"
-          android:text="0.0"
+          android:gravity="end"
+          android:text="@string/zerod"
           />
       </TableRow>
 
@@ -104,7 +104,7 @@
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
-    android:gravity="left"
+    android:gravity="start"
     > 
     <Button android:id="@+id/button_help"
       style="@style/button_empty"

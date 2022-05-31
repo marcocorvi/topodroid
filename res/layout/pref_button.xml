@@ -9,7 +9,7 @@
     android:layout_height="2dp"
     android:background="@color/pref_divider"
     />
-    <!-- android:layout_alignParentLeft="true" -->
+    <!-- android:layout_alignParentStart="true" -->
 
   <LinearLayout 
     android:layout_width="match_parent" 
@@ -24,17 +24,17 @@
       android:singleLine="true"
       android:typeface="monospace"
       android:padding="@dimen/padding"
-      android:gravity="left"
+      android:gravity="start"
     />
     <LinearLayout 
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:layout_marginRight="10dp"
-      android:gravity="right"
-      android:layout_gravity="right"
+      android:layout_marginEnd="10dp"
+      android:gravity="end"
+      android:layout_gravity="end"
       android:orientation="horizontal"
       >
-      <!-- android:layout_alignParentRight="true" -->
+      <!-- android:layout_alignParentEnd="true" -->
       <TextView android:id="@+id/value"
         android:layout_width="match_parent" 
 	android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
         android:singleLine="true"
         android:typeface="monospace"
         android:padding="@dimen/padding"
-        android:gravity="right"
+        android:gravity="end"
       />
     </LinearLayout>
   </LinearLayout>

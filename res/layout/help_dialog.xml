@@ -14,8 +14,8 @@
     android:layout_width="42sp"
     android:layout_height="42sp"
     android:background="@drawable/ic_manual"
-    android:layout_gravity="right"
-    android:gravity="right"
+    android:layout_gravity="end"
+    android:gravity="end"
   />
   <!-- android:contextDescription="@string/desc_user_man" -->
 

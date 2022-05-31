@@ -20,6 +20,6 @@
     android:layout_height="14dip"
     android:textSize="@dimen/textsize"
     android:typeface="monospace"
-    android:layout_marginLeft="@dimen/marginh"
+    android:layout_marginStart="@dimen/marginh"
     />
 </LinearLayout>
