@@ -595,7 +595,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="survey_no_data_reduction">WARNING: no data reduction</string>
     <string name="survey_not_saved">WARNING: survey info not saved</string>
     <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
-    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string>
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
     <string name="disk_io_error">CRITICAL: disk i/o error !</string>
@@ -1136,6 +1136,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>
+    <string name="title_reduction_errors">Survey data-reduction anomalies</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
     <string name="title_scraps_outline">Sketch outlines</string>

@@ -190,6 +190,7 @@ public class DrawingWindow extends ItemDrawer
   private static final int IC_SPLAYS_POINT  = IC_MEDIUM+26;
   private static final int IC_TOOLS_POINT   = IC_MEDIUM+27;
   private static final int IC_TOOLS_AREA    = IC_MEDIUM+28;
+  private static final int IC_MENU_RED      = IC_MEDIUM+29;
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
@@ -270,6 +271,7 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_splays_point,   // 23+26
                         R.drawable.iz_tools_point,    // 23+27
                         R.drawable.iz_tools_area,     // 23+28
+                        R.drawable.iz_menu_red,       // 23+29
                       };
   private static final int[] menus = {
                         R.string.menu_switch,     // 0
@@ -455,8 +457,8 @@ public class DrawingWindow extends ItemDrawer
   private TDNum mNum;
   private float mDecl;
   private String mFormatClosure;
-  private int nr_multi_bad;    // number of bad-sibling leg shots
-  // private int nr_magnetic_bad; // number of bad-magnetic leg shots
+  private int nr_multi_bad;    // number of bad-sibling leg shots - TODO move to TDNum
+  private int nr_magnetic_bad; // number of bad-magnetic leg shots
 
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
@@ -685,6 +687,8 @@ public class DrawingWindow extends ItemDrawer
   private BitmapDrawable mBMsmall;
   private BitmapDrawable mBMmedium;
   private BitmapDrawable mBMlarge;
+  private BitmapDrawable mBMmenured;
+  private BitmapDrawable mBMmenublue;
   private BitmapDrawable mBMprev;
   private BitmapDrawable mBMnext;
   private BitmapDrawable mBMselectAll;
@@ -1033,7 +1037,7 @@ public class DrawingWindow extends ItemDrawer
         ++ nr_multi_bad;
         dpath.setPathPaint( BrushManager.fixedOrangePaint );
       } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
-        // ++ nr_magnetic_bad;
+        ++ nr_magnetic_bad;
         dpath.setPathPaint( BrushManager.fixedRedPaint );
       } else if ( /* TDSetting.mSplayColor && */ blk.isRecent( ) ) { 
         dpath.setPathPaint( BrushManager.fixedBluePaint );
@@ -1484,7 +1488,7 @@ public class DrawingWindow extends ItemDrawer
    * @param type    plot type
    * @param name    plot name
    * @param zoom    zoom factor
-   * @param can_toast whether the method can toast
+   // * @param can_toast whether the method can toast
    * @note this is called only for PLAN / PROFILE
    */
   private boolean computeReferences( TDNum num, int type, String name,
@@ -1537,7 +1541,7 @@ public class DrawingWindow extends ItemDrawer
     String parent = ( TDInstance.xsections? null : name );
 
     nr_multi_bad    = 0;
-    // nr_magnetic_bad = 0;
+    nr_magnetic_bad = 0;
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
@@ -1642,20 +1646,24 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
 
     if ( can_toast ) {
-      if ( (! num.surveyAttached) && TDSetting.mCheckAttached ) {
-        if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
-          TDToast.makeWarn( R.string.survey_not_attached_extend );
-        } else {
-          TDToast.makeWarn( R.string.survey_not_attached );
-        }
-      } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
-        TDToast.makeWarn( R.string.survey_not_extend );
-      } else if ( nr_multi_bad > 0 ) {
-        TDToast.makeWarn( R.string.survey_bad_siblings );
-      // } else if ( nr_magnetic_bad > 0 ) {
-      //   TDToast.makeWarn( R.string.survey_bad_magnetic );
-      }
+      setMenuImageRed( ! num.surveyAttached || ! num.surveyExtend || nr_multi_bad > 0 /* || nr_magnetic_bad > 0 */ );
     }
+
+    // if ( can_toast ) {
+    //   if ( (! num.surveyAttached) && TDSetting.mCheckAttached ) {
+    //     if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
+    //       TDToast.makeWarn( R.string.survey_not_attached_extend );
+    //     } else {
+    //       TDToast.makeWarn( R.string.survey_not_attached );
+    //     }
+    //   } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
+    //     TDToast.makeWarn( R.string.survey_not_extend );
+    //   } else if ( nr_multi_bad > 0 ) {
+    //     TDToast.makeWarn( R.string.survey_bad_siblings );
+    //   // } else if ( nr_magnetic_bad > 0 ) {
+    //   //   TDToast.makeWarn( R.string.survey_bad_magnetic );
+    //   }
+    // }
     return true;
   }
 
@@ -1904,6 +1912,19 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** set the menu image wit red dots, indicating data issues
+   */
+  private void setMenuImageRed( boolean red )
+  {
+    if ( red ) {
+      mMenuImage.setOnLongClickListener( this );
+      TDandroid.setButtonBackground( mMenuImage, mBMmenured );
+    } else {
+      // mMenuImage.setOnLongClickListener( null );
+      // TDandroid.setButtonBackground( mMenuImage, mBMmenublue );
+    }
+  } 
+
   /** switch the ZOOM controls
    * @param ctrl      type of controls
    * @note this method is a callback to let other objects tell the activity to use zooms or not
@@ -2058,6 +2079,10 @@ public class DrawingWindow extends ItemDrawer
     mBMsmall  = MyButton.getButtonBackground( this, res, izons[IC_SMALL] );
     mBMmedium = MyButton.getButtonBackground( this, res, izons[IC_MEDIUM] );
     mBMlarge  = MyButton.getButtonBackground( this, res, izons[IC_LARGE] );
+
+    mBMmenured = MyButton.getButtonBackground( this, res, izons[IC_MENU_RED] );
+    // mBMmenubkue = MyButton.getButtonBackground( this, res, izons[IC_MENU] );
+
     setButtonEraseSize( Drawing.SCALE_MEDIUM );
     setButtonSelectSize( Drawing.SCALE_MEDIUM );
 
@@ -2163,7 +2188,8 @@ public class DrawingWindow extends ItemDrawer
 
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
-    TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, getResources(), izons[IC_MENU] ) );
+    mBMmenublue = MyButton.getButtonBackground( this, getResources(), izons[IC_MENU] );
+    TDandroid.setButtonBackground( mMenuImage, mBMmenublue );
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
 
@@ -6250,6 +6276,14 @@ public class DrawingWindow extends ItemDrawer
           } 
         }
       }
+    } else if ( b == mMenuImage ) { // MENU long click
+      TDLog.v("MENU LONG CLICK");
+      if ( nr_multi_bad == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached ) {
+        onClick( view );
+      } else {
+        // onClick( view );
+        new ReductionErrorsDialog( this, /* this, */ nr_multi_bad, nr_magnetic_bad, ! mNum.surveyExtend, ! mNum.surveyAttached ).show();
+      }
     } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
       intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_PLOT_DRAW );
@@ -7094,7 +7128,7 @@ public class DrawingWindow extends ItemDrawer
       if ( ret ) {
         if ( got_leg ) { // drop last splay - insert last leg
           nr_multi_bad    = 0;
-          // nr_magnetic_bad = 0;
+          nr_magnetic_bad = 0;
           mNum.dropLastSplay();
           mDrawingSurface.dropLastSplayPath( mPlot1.type );
           mDrawingSurface.dropLastSplayPath( mPlot2.type );
@@ -7124,7 +7158,8 @@ public class DrawingWindow extends ItemDrawer
             } 
           }
           if ( nr_multi_bad > 0 ) {
-            TDToast.makeWarn( R.string.survey_bad_siblings );
+            setMenuImageRed( true );
+            // TDToast.makeWarn( R.string.survey_bad_siblings );
           // } else if ( nr_magnetic_bad > 0 ) {
           //   TDToast.makeWarn( R.string.survey_bad_magnetic );
           }

@@ -327,7 +327,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="splays_toggle">Mutassa a fix pontokat </string -->
     <string name="splays_on_off">Segédmérések</string>
     <string name="splays">segédmérések is</string>
-    <string name="with_splays">sünökkel</strin>
+    <string name="with_splays">sünökkel</string>
     <string name="cell_size">Cella méret [m]</string>
 
     <string name="legs">Poligon mérések</string>

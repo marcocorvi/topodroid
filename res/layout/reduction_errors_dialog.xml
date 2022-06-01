@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    >
+  <LinearLayout 
+    style="@style/base_padding"
+    android:layout_width="wrap_content" 
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    >
+    <TextView android:id="@+id/multi_bad"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_bad_siblings"
+        />
+    <TextView android:id="@+id/magnetic_bad"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_bad_magnetic"
+        />
+    <TextView android:id="@+id/extend_bad"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_not_extend"
+        />
+    <TextView android:id="@+id/attached_bad"
+        android:layout_marginTop="@dimen/margintiny"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" 
+        android:text="@string/survey_not_attached"
+        />
+
+    <LinearLayout android:id="@+id/help"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:layout_marginTop="@dimen/marginvbig"
+      android:orientation="horizontal" 
+      android:gravity="start"
+      >
+      <Button android:id="@+id/button_help"
+          style="@style/button_empty"
+          android:text="@string/button_help"
+      />
+      <LinearLayout 
+        android:layout_width="fill_parent" 
+        android:layout_height="wrap_content"
+        android:gravity="end"
+        >
+        <Button android:id="@+id/button_back"
+          android:layout_gravity="start"
+          style="@style/button_default"
+          android:text="@string/button_close"
+        />
+      </LinearLayout>
+    </LinearLayout>
+
+</LinearLayout>
+</ScrollView>
