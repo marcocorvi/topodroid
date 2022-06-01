@@ -366,11 +366,13 @@ public class DBlock
   }
 
   // ----------------------------------------------------------------
-  // RECENT
+  // RECENT and MULTIBAD
 
-  // a block is recent if
-  //   - its id comes after the given id
-  //   - its time is no more than 10 seconds before the given time
+  /** @return true if the block is recent
+   * a block is recent if
+   *   - its id comes after the given id
+   *   - its time is no more than 10 seconds before the given time
+   */
   boolean isRecent( )
   {
     if ( ! TDSetting.mShotRecent ) return false;
@@ -378,9 +380,22 @@ public class DBlock
     return mId >= TDInstance.secondLastShotId;
   }
 
-  private boolean isTimeRecent( long time ) { return mId >= TDInstance.secondLastShotId && (time-mTime) < TDSetting.mRecentTimeout; }
+  /** @return true if this block differs from a given time more recent than the "recent time interval" setting
+   *               and is more recet than the second-last shot
+   * @param time   timestamp
+   */
+  private boolean isTimeRecent( long time )
+  {
+    return mId >= TDInstance.secondLastShotId && (time-mTime) < TDSetting.mRecentTimeout;
+  }
 
+  /** @return true if this block disagree with its siblings
+   */
   boolean isMultiBad() { return mMultiBad; }
+
+  /** set whether this block disagree with its siblings
+   * @param multibad  whether this block disagree with its siblings
+   */
   public void setMultiBad( boolean multibad ) { mMultiBad = multibad; }
 
   // ----------------------------------------------------------------
@@ -488,7 +503,7 @@ public class DBlock
     mBlockType = type;
     mShotType  = shot_type; // distox, distox-backshot, or manual
     mWithPhoto = false;
-    mMultiBad  = false;
+    mMultiBad  = false;  
     mStretch   = 0.0f;
     mAddress   = null;
   }

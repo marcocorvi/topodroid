@@ -585,6 +585,8 @@ Refer to the web pages for details.\n
     <string name="survey_not_attached_extend">AVERTISMENT: măsurători neatașate și extensii măsurători nedefinite</string>
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">AVERTISMENT: coeficienți calibrare saturați</string>
     <string name="out_of_memory">AVERTISMENT: memorie insuficientă !</string>
     <string name="disk_io_error">CRITIC: eroare i/o  !</string>

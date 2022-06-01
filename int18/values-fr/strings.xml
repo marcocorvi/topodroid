@@ -582,6 +582,8 @@ Refer to the web pages for details.\n
     <string name="survey_not_attached_extend">ATTENTION : visées non reliées et dir. ext. non définies</string>
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">ATTENTION : coefficients d\'étalonnage saturés</string>
     <string name="out_of_memory">ATTENTION : mémoire pleine !</string>
     <string name="disk_io_error">PANNE CRITIQUE : erreur écriture lecture disque !</string>

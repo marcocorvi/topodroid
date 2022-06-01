@@ -862,8 +862,8 @@ public class TDNum
 
     // ---------------------------------- SIBLINGS and BACKSIGHT -------------------------------
     for ( TriShot tsh : tmpshots ) { // clear backshot, sibling, and multibad
-      tsh.backshot = 0;
-      tsh.sibling  = null;
+      tsh.backshot = 0;    
+      tsh.sibling  = null; // link to sibling shots
       tsh.getFirstBlock().setMultiBad( false );
     }
 

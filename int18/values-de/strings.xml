@@ -594,6 +594,8 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen mit undefinierter Ausrichtung</string>
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">WARNUNG: Kalibrierungs-Koeffizienten nicht berechenbar</string>
     <string name="out_of_memory">WARNUNG: Zuwenig Arbeitsspeicher!</string>
     <string name="disk_io_error">FEHLER: Lese-/Schreibfehler!</string>

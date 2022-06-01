@@ -585,6 +585,8 @@ Refer to the web pages for details.\n
     <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">ALERTA: coeficientes de calibração saturados</string>
     <string name="out_of_memory">ALERTA: sem memória!</string>
     <string name="disk_io_error">CRÍTICO: erro de E/S no disco!</string>

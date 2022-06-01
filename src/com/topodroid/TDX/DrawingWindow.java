@@ -455,6 +455,8 @@ public class DrawingWindow extends ItemDrawer
   private TDNum mNum;
   private float mDecl;
   private String mFormatClosure;
+  private int nr_multi_bad;    // number of bad-sibling leg shots
+  // private int nr_magnetic_bad; // number of bad-magnetic leg shots
 
   private String mSectionName;
   private String mMoveTo; // station of highlighted splay
@@ -1028,8 +1030,10 @@ public class DrawingWindow extends ItemDrawer
     dpath.setPathPaint( BrushManager.fixedShotPaint );
     if ( blk != null ) {
       if ( blk.isMultiBad() ) {
+        ++ nr_multi_bad;
         dpath.setPathPaint( BrushManager.fixedOrangePaint );
       } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
+        // ++ nr_magnetic_bad;
         dpath.setPathPaint( BrushManager.fixedRedPaint );
       } else if ( /* TDSetting.mSplayColor && */ blk.isRecent( ) ) { 
         dpath.setPathPaint( BrushManager.fixedBluePaint );
@@ -1532,6 +1536,8 @@ public class DrawingWindow extends ItemDrawer
 
     String parent = ( TDInstance.xsections? null : name );
 
+    nr_multi_bad    = 0;
+    // nr_magnetic_bad = 0;
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
         NumStation st1 = sh.from;
@@ -1644,6 +1650,10 @@ public class DrawingWindow extends ItemDrawer
         }
       } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
         TDToast.makeWarn( R.string.survey_not_extend );
+      } else if ( nr_multi_bad > 0 ) {
+        TDToast.makeWarn( R.string.survey_bad_siblings );
+      // } else if ( nr_magnetic_bad > 0 ) {
+      //   TDToast.makeWarn( R.string.survey_bad_magnetic );
       }
     }
     return true;
@@ -7083,6 +7093,8 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("DATA " + "drawing window calls append data " + blk.mId + " ret " + ret );
       if ( ret ) {
         if ( got_leg ) { // drop last splay - insert last leg
+          nr_multi_bad    = 0;
+          // nr_magnetic_bad = 0;
           mNum.dropLastSplay();
           mDrawingSurface.dropLastSplayPath( mPlot1.type );
           mDrawingSurface.dropLastSplayPath( mPlot2.type );
@@ -7110,6 +7122,11 @@ public class DrawingWindow extends ItemDrawer
               appendFixedLine( mPlot2.type, leg, h1, st1.v, h2, st2.v, sh.getReducedExtend(), false, true );
               mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(h0, st0.v), DrawingUtil.toSceneY(h0, st0.v), true );
             } 
+          }
+          if ( nr_multi_bad > 0 ) {
+            TDToast.makeWarn( R.string.survey_bad_siblings );
+          // } else if ( nr_magnetic_bad > 0 ) {
+          //   TDToast.makeWarn( R.string.survey_bad_magnetic );
           }
         } else { // insert last splay
           NumSplay sp = mNum.getLastSplay();

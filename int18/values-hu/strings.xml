@@ -591,6 +591,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
+    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
