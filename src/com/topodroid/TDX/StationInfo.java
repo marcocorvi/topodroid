@@ -53,8 +53,8 @@ public class StationInfo
   public String toString()
   { 
     StringBuilder sb = new StringBuilder();
-    sb.append( mPresentation ).append("[").append( getFlagCode() ).append("]");
-    if ( mComment != null ) sb.append( mComment );
+    sb.append( mPresentation ).append(" [").append( getFlagCode() ).append("]");
+    if ( mComment != null ) sb.append(" ").append( mComment );
     return sb.toString();
   }
 
