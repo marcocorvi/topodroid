@@ -301,6 +301,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_station_non_existing">Caposaldo inesistente</string>
     <string name="error_sensor_required">Sensore mancante</string>
     <string name="error_value_required">Valore mancante</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
     
     <string name="group_title">Assegna i gruppi ai dati della calibrazione</string>
     <!-- UNUSED string name="group_policy_four">Metodo: gruppi di quattro</string -->

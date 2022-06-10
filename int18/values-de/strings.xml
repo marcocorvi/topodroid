@@ -303,6 +303,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="error_station_non_existing">Messpunkt existiert nicht</string>
     <string name="error_sensor_required">Sensor erforderlich</string>
     <string name="error_value_required">Wert erforderlich</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Den Kalibrierungsdaten Gruppen zuweisen</string>
     <!-- UNUSED string name="group_policy_four">Jeweils 4 Messungen</string -->

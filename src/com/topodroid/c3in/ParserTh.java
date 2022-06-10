@@ -861,35 +861,52 @@ public class ParserTh extends TglParser
   {
     if ( shots.size() == 0 ) return;
     // TDLog.v( "Th shots " + shots.size() + " fixes " + fixes.size() );
+    ArrayList< Cave3DFix > ok_fixes = new ArrayList<>(); // array of fixed stations that are in the survey
 
-    if ( fixes.size() == 0 ) {
+    int bad_fixes = 0;
+    for ( Cave3DFix f : fixes ) {
+      boolean found = false;
+      for ( Cave3DStation s1 : stations ) {
+        if ( f.hasName( s1.getFullName() ) ) { found = true; break ; }
+      }
+      if ( found ) {
+        ok_fixes.add( f );
+      } else {
+        bad_fixes ++;
+      }
+    }
+    if ( bad_fixes > 0 ) {
+      TDToast.makeWarn( R.string.error_bad_fixes );
+    }
+
+    if ( ok_fixes.size() == 0 ) {
       Cave3DShot sh = shots.get( 0 );
-      fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) );
+      ok_fixes.add( new Cave3DFix( sh.from, 0.0f, 0.0f, 0.0f, null ) );
     }
  
     int mLoopCnt = 0;
-    Cave3DFix f0 = fixes.get( 0 );
-    // TDLog.v( "Th Process Shots. Fix " + f0.name + " " + f0.x + " " + f0.y + " " + f0.z );
+    Cave3DFix f0 = ok_fixes.get( 0 );
+    // TDLog.v( "Th Process Shots. Fix " + f0.getFullName() + " " + f0.x + " " + f0.y + " " + f0.z );
 
     mCaveLength = 0.0f;
-    // TDLog.v( "Th shots " + shots.size() + " splays " + splays.size() + " fixes " + fixes.size() );
+    // TDLog.v( "Th shots " + shots.size() + " splays " + splays.size() + " ok_fixes " + ok_fixes.size() );
 
     // for ( Cave3DShot sh : shots ) {
     //   TDLog.v( "Th shot " + sh.from + " " + sh.to );
     // }
 
     int used_cnt = 0; // number of used shots
-    for ( Cave3DFix f : fixes ) {
-      // TDLog.v( "Th checking fix " + f.name );
+    for ( Cave3DFix f : ok_fixes ) {
+      // TDLog.v( "Th checking fix " + f.getFullName() );
       boolean found = false;
       for ( Cave3DStation s1 : stations ) {
         if ( f.hasName( s1.getFullName() ) ) { found = true; break; }
       }
       if ( found ) { // skip fixed stations that are already included in the model
-        // TDLog.v( "Th fix " + f.name + " already used" );
+        // TDLog.v( "Th fix " + f.getFullName() + " already used" );
         continue;
       }
-      // TDLog.v( "Th start station " + f.name + " N " + f.y + " E " + f.x + " Z " + f.z );
+      // TDLog.v( "Th add start station " + f.getFullName() + " N " + f.y + " E " + f.x + " Z " + f.z );
       stations.add( new Cave3DStation( f.getFullName(), f.x, f.y, f.z ) );
       // sh.from_station = s0;
 
@@ -954,8 +971,8 @@ public class ParserTh extends TglParser
           }
         }
       }
-      // TDLog.v( "Th after " + f.name + " used shot " + used_cnt + " loops " + mLoopCnt );
-    } // for ( Cave3DFix f : fixes )
+      // TDLog.v( "Th after " + f.getFullName() + " used shot " + used_cnt + " loops " + mLoopCnt );
+    } // for ( Cave3DFix f : ok_fixes )
     // TDLog.v( "Th used shot " + used_cnt + " loops " + mLoopCnt + " total shots " + shots.size() );
     // StringBuilder sb = new StringBuilder();
     // for ( Cave3DStation st : stations ) { sb.append(" "); sb.append( st.name ); }

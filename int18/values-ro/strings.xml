@@ -299,6 +299,7 @@ Refer to the web pages for details.\n
     <string name="error_station_non_existing">Staț inexistentă</string>
     <string name="error_sensor_required">Senzor este obligatorie</string>
     <string name="error_value_required">Valoarea este obligatorie</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Grupuri date de calibrare</string>
     <!-- UNUSED string name="group_policy_four">Metodă: grupate câte 4</string -->

@@ -152,13 +152,10 @@ class CurrentStationDialog extends MyDialog
       return;
     }
     String name = ((TextView) view).getText().toString();
-    String[] token = name.split(" ");
-    if ( token.length == 1 ) {
-      name = name.trim();
-    } else {
-      name = token[0];
-    }
-    // TDLog.v( "get station <" + name + ">" );
+    int pos = name.indexOf('[');
+    if ( pos > 0 ) name = name.substring(0,pos);
+    name = name.trim();
+    TDLog.v( "STATION <" + name + ">" );
     setNameAndComment( name );
   }
 

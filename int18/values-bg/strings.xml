@@ -299,6 +299,7 @@ Refer to the web pages for details.\n
     <string name="error_station_non_existing">Несъществуващ репер</string>
     <string name="error_sensor_required">Необходим сензор</string>
     <string name="error_value_required">Необходима стойност</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Групиране на данните за калибрация</string>
     <!-- UNUSED string name="group_policy_four">Вид групиране: по четворки</string -->

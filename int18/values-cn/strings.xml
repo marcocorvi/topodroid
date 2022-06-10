@@ -302,6 +302,7 @@
     <string name="error_station_non_existing">不存在的测点</string>
     <string name="error_sensor_required">输入传感器</string>
     <string name="error_value_required">输入赋值</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">校准数据组</string>
     <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->

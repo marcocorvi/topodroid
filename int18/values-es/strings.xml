@@ -294,6 +294,7 @@
     <string name="error_station_non_existing">No existe estación</string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->

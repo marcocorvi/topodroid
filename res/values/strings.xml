@@ -307,6 +307,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_station_non_existing">Non existing station</string>
     <string name="error_sensor_required">Sensor required</string>
     <string name="error_value_required">Value required</string>
+    <string name="error_bad_fixes">Fix points not in the survey</string>
 
     <string name="group_title">Calibration data groups</string>
     <!-- UNUSED string name="group_policy_four">Policy: group by four</string -->

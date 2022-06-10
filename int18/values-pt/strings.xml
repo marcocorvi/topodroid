@@ -301,6 +301,7 @@ Refer to the web pages for details.\n
     <string name="error_station_non_existing">Base inexistente</string>
     <string name="error_sensor_required">Sensor exigido</string>
     <string name="error_value_required">Valor exigido</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Grupos dados calibração</string>
     <!-- UNUSED string name="group_policy_four">Regra: agrupar 4 a 4</string -->

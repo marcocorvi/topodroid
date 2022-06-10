@@ -304,6 +304,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_station_non_existing">Nem létező mérési pont</string>
     <string name="error_sensor_required">Szenzor szükséges</string>
     <string name="error_value_required">Érték szükséges</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
     
     <string name="group_title">Kalibrációs adat csoportok</string>
     <!-- UNUSED string name="group_policy_four">Négyesével csoportosítva</string -->

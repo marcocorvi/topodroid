@@ -304,6 +304,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_station_non_existing">Nieistniejący punkt</string>
     <string name="error_sensor_required">Czujnik wymagany</string>
     <string name="error_value_required">Wartość wymagana</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Grupy danych kalibracji</string>
     <!-- UNUSED string name="group_policy_four">Zasady: grupuj 4</string -->

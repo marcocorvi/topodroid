@@ -304,6 +304,7 @@ Refer to the web pages for details.\n
     <string name="error_station_non_existing">Neexistujúci meračský bod</string>
     <string name="error_sensor_required">Vyžaduje sa senzor</string>
     <string name="error_value_required">Vyžaduje sa hodnota</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
     
     <string name="group_title">Zoskupenie kalibračných údajov</string>
     <!-- UNUSED string name="group_policy_four">Metóda: Po štyroch v skupinách</string -->

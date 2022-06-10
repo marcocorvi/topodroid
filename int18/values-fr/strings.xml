@@ -297,6 +297,7 @@ Refer to the web pages for details.\n
 <string name="error_station_non_existing">Cette station n\'existe pas</string>
 <string name="error_sensor_required">Capteur nécessaire</string>
 <string name="error_value_required">Valeur nécessaire</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
 <string name="group_title">Définir les groupes de données pour l\'étalonnage </string>
 <!-- UNUSED string name="group_policy_four">Règle : grouper par 4</string -->

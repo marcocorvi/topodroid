@@ -241,35 +241,50 @@ public class TglParser
     return new TglMeasure( mApp.getResources(), s1, s2, s2.getFinalPathlength(), s2.getPathDistPos(), s2.getPathDistNeg() );
   }
 
-  public Cave3DSurvey getSurvey( String name ) // get survey by the NAME
+  /** @return a survey by the name
+   * @param name   name of the survey
+   */
+  public Cave3DSurvey getSurvey( String name )
   {
     if ( name == null ) return null;
     for ( Cave3DSurvey s : surveys ) if ( name.equals( s.name ) ) return s;
     return null;
   }
 
-  public Cave3DSurvey getSurvey( int id ) // get survey by the ID
+  /** @return a survey by the ID
+   * @param id   ID of the survey
+   */
+  public Cave3DSurvey getSurvey( int id )
   {
     if ( id < 0 ) return null;
     for ( Cave3DSurvey s : surveys ) if ( s.mId == id ) return s;
     return null;
   }
 
-  public Cave3DStation getStation( int id ) // get station by the ID
+  /** @return a station by the ID
+   * @param id   ID of the station
+   */
+  public Cave3DStation getStation( int id )
   {
     if ( id < 0 ) return null;
     for ( Cave3DStation s : stations ) if ( s.mId == id ) return s;
     return null;
   }
 
-  public Cave3DStation getStation( String fullname ) // get station by the FULL_NAME
+  /** @return a station by the full-name
+   * @param fullname   full-name of the station
+   */
+  public Cave3DStation getStation( String fullname )
   {
     if ( fullname == null ) return null;
     for ( Cave3DStation s : stations ) if ( fullname.equals( s.getFullName() ) ) return s;
     return null;
   }
 
-  private int getStationIndex( String fullname ) // get station index by the FULL_NAME
+  /** @return a station index by the full-name
+   * @param fullname   full-name of the station
+   */
+  private int getStationIndex( String fullname )
   {
     if ( fullname == null ) return -1;
     for ( int k = 0; k < stations.size(); ++k ) if ( fullname.equals( stations.get(k).getFullName() ) ) return k;
@@ -280,6 +295,9 @@ public class TglParser
   public double getCaveDepth()  { return zmax - zmin; }
   public double getCaveLength() { return mCaveLength; }
 
+  /** @return the array of the station coordinates 
+   * for each station the array contains the X, Y, and Z coordinates
+   */
   public double[] getStationVertices()
   {
     double[] v = new double[ 3 * stations.size() ];
@@ -294,6 +312,9 @@ public class TglParser
     return v;
   }
 
+  /** @return the array of the splay endpoints coordinates 
+   * for each endpoint the array contains the X, Y, and Z coordinates
+   */
   public double[] getSplaysEndpoints()
   {
     double[] v = new double[ 3 * splays.size() ];
@@ -518,6 +539,10 @@ public class TglParser
     init( app, mName );
   }
 
+  /** initialize the parser structures
+   * @param app   3D viewer activity
+   * @param name  model name ?
+   */
   private void init( TopoGL app, String name )
   {
     // TDLog.v("TglParser init " + name );
@@ -535,6 +560,8 @@ public class TglParser
     xsections = new ArrayList< Cave3DXSection >();
   }
 
+  /** compute the bounding box of the 3D model
+   */
   protected void computeBoundingBox()
   {
     if ( stations.size() == 0 ) return;
@@ -935,15 +962,21 @@ public class TglParser
   }
   */
 
-  // add a fix. The following fix fields are assumed initialized:
-  //   name, longitude, latitude, altitude 
+  /** add a fix. The following fix fields are assumed initialized:
+   *   name, longitude, latitude, altitude 
+   * @param fix   tix to add
+   */
   public void addFix( Cave3DFix fix ) { fixes.add( fix ); }
 
+  /** @return true if the model has at least one fix
+   */
   public boolean hasFixes() { return fixes != null && fixes.size() > 0; }
 
-  // add a shot. The following shot fields are assumed initialized:
-  //     surveyId, from, to, len, ber, cln, flags, millis
-  // The shot stations are set by this method
+  /** add a shot. The following shot fields are assumed initialized:
+   *     surveyId, from, to, len, ber, cln, flags, millis
+   * @note The shot stations are set by this method
+   * @param shot  shot to add
+   */
   public void addShot( Cave3DShot shot ) 
   { 
     Cave3DStation fstation = getStation( shot.from );

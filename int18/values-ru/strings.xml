@@ -299,6 +299,7 @@
     <string name="error_station_non_existing">Несуществующий пикет</string>
     <string name="error_sensor_required">Требуется датчик</string>
     <string name="error_value_required">Требуется значение</string>
+    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
     
     <string name="group_title">Присвоить номера групп калибровочным измерениям</string>
     <!-- UNUSED string name="group_policy_four">Правило: группировать по четыре</string -->
