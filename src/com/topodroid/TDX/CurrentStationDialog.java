@@ -71,6 +71,12 @@ class CurrentStationDialog extends MyDialog
 
   private MyKeyboard mKeyboard = null;
 
+  /** cstr
+   * @param context   context
+   * @param parent    parent window
+   * @param app       application (used to set the active station)
+   * @param station   station name
+   */
   CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station )
   {
     super( context, R.string.CurrentStationDialog );
@@ -132,6 +138,8 @@ class CurrentStationDialog extends MyDialog
     updateList();
   }
 
+  /** uodate the list of station infos
+   */
   private void updateList()
   {
     MyStringAdapter adapter = new MyStringAdapter( mContext, R.layout.message );
@@ -143,7 +151,12 @@ class CurrentStationDialog extends MyDialog
     mList.setAdapter( adapter );
   }
 
-
+  /** react to user tap on an item in the list
+   * @param parent    parent adapter ?
+   * @param view      item view ?
+   * @param position  item position in the list
+   * @param id        ???
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
@@ -152,7 +165,7 @@ class CurrentStationDialog extends MyDialog
       return;
     }
     String name = ((TextView) view).getText().toString();
-    int pos = name.indexOf('[');
+    int pos = name.indexOf(' ');
     if ( pos > 0 ) name = name.substring(0,pos);
     name = name.trim();
     TDLog.v( "STATION <" + name + ">" );
@@ -204,6 +217,8 @@ class CurrentStationDialog extends MyDialog
     }
   }
 
+  /** clear the input fields 
+   */
   private void clear()
   {
     mStation = TDString.EMPTY;
@@ -213,6 +228,9 @@ class CurrentStationDialog extends MyDialog
     mBtnPainted.setChecked( false );
   }
 
+  /** react to user long-tap - used for station name cun-n-paste
+   * @param v tapped view
+   */
   @Override
   public boolean onLongClick(View v) 
   {
@@ -220,6 +238,9 @@ class CurrentStationDialog extends MyDialog
     return true;
   }
 
+  /** react to a user tap
+   * @param v tapped view
+   */
   @Override
   public void onClick(View v) 
   {

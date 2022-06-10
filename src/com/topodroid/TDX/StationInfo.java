@@ -24,9 +24,16 @@ public class StationInfo
   StationFlag mFlag; // flags
   String mPresentation;  // presentation string
 
-  // flag tests
+  /** @return true if the station info flag is "fixed"
+   */
   private boolean isFlagFixed()   { return mFlag.isFixed(); }
+
+  /** @return true if the station info flag is "painted"
+   */
   private boolean isFlagPainted() { return mFlag.isPainted(); }
+
+  // /** @return true if the station info flag is "geo"
+  //  */
   // private boolean isFlagGeo()     { return mFlag.isGeo(); }
 
   /**
@@ -35,7 +42,6 @@ public class StationInfo
   public String getFlagCode() { return mFlag.getCode(); }
 
   /** cstr
-   // * @param id       station ID
    * @param name     name (presentation string)
    * @param comment  comments (can be null)
    * @param flag     flag
@@ -49,11 +55,14 @@ public class StationInfo
     mPresentation = presentation;
   }
 
+  /** @return string presentation of the station info
+   * @note the name must be followed by a space because CurrentStationDalog tokenizes on space
+   */
   // @RecentlyNonNull
   public String toString()
   { 
     StringBuilder sb = new StringBuilder();
-    sb.append( mPresentation ).append("[").append( getFlagCode() ).append("]");
+    sb.append( mPresentation ).append(" [").append( getFlagCode() ).append("]");
     if ( mComment != null ) sb.append(" ").append( mComment );
     return sb.toString();
   }

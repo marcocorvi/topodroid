@@ -592,8 +592,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
     <string name="survey_not_saved">FIGYELEM: mérés infó nincs mentve</string>
-    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
-    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <string name="survey_bad_siblings">FIGYELMEZTETÉS: rossz poligon mérés különbségek</string>
+    <!-- UNUSED string name="survey_bad_magnetic">FIGYELMEZTETÉS: rossz mágneses poligon</string -->
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
@@ -1743,14 +1743,15 @@ A részletekért keresse fel a weboldalakat.\n
 
     <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
+\nKöszönjük, hogy a TopoDroidot választotta.
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC4 és Sap5 műszerekkel történő barlangfelmérésre.
 \n\nNincs garancia: A szoftver használatával elfogadja azt, hogy a szerző nem vállal felelősséget semmilyen felmerülő adatvesztésért vagy bekövetkezett kárért.
 \n\nSegítség: menü "súgó, ?"
 \nFelhasználói kézikönyv: Könyv ikon a súgó ablakban
 \nDokumentumok: http://sites.google.com/site/speleoapps
 \nHozzászólások, hiba bejelentés, új funkció igények: marco.corvi@gmail.com
-\nA magyar fordítás Sűrű Péter munkája.
-\n kiegészítette: Holl Balázs (holl.balazs.TopoDroid@gmail.com)
+\nA magyar fordítást Sűrű Péter munkája nyomán
+\nHoll Balázs (holl.balazs.TopoDroid@gmail.com) készítette.
 \n
     </string>
 
