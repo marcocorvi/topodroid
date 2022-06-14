@@ -1154,115 +1154,117 @@ public class DrawingCommandManager
     return bounds;
   }
 
-  private float mBitmapScale = 1;
+  // NO_PNG
+  // private float mBitmapScale = 1;
 
-  /** @return the last used bitmap scale
-   */
-  float getBitmapScale() { return mBitmapScale; }
+  // NO_PNG
+  // /** @return the last used bitmap scale
+  //  */
+  // float getBitmapScale() { return mBitmapScale; }
 
-  public Bitmap getBitmap()
-  {
-    RectF bounds = getBitmapBounds();
-    // TDLog.Log( TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
-    mBitmapScale = TDSetting.mBitmapScale;
-
-    int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
-    int height = (int)((bounds.bottom - bounds.top + 2 * BORDER) );
-    int max = (int)( 8 * 1024 * 1024 / (mBitmapScale * mBitmapScale) );  // 16 MB 2 B/pixel
-    while ( width*height > max ) {
-      mBitmapScale /= 2;
-      max *= 4;
-    }
-    width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
-    height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
-   
-    Bitmap bitmap = null;
-    while ( bitmap == null && mBitmapScale > 0.05 ) {
-      if ( width <= 0 || height <= 0 ) return null; 
-      try {
-        // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
-        bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
-      } catch ( OutOfMemoryError e ) {
-        mBitmapScale /= 2;
-        width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
-        height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
-      } catch ( IllegalArgumentException e ) {
-        TDLog.Error("create bitmap illegal arg " + e.getMessage() );
-        return null;
-      }
-    }
-    if ( bitmap == null ) return null;
-    if ( mBitmapScale <= 0.05 ) {
-      bitmap.recycle();
-      return null;
-    }
-    // TDLog.v( "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
-    Canvas c = new Canvas (bitmap);
-    // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
-    c.drawColor( TDSetting.mBitmapBgcolor );
-
-    // commandManager.execute All(c,previewDoneHandler);
-    c.drawBitmap (bitmap, 0, 0, null);
-
-    Matrix mat = new Matrix();
-    float scale = 1 / mBitmapScale;
-    mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
-    mat.postScale( mBitmapScale, mBitmapScale );
-    if ( TDSetting.mSvgGrid ) {
-      if ( mGridStack1 != null ) {
-        synchronized( TDPath.mGridsLock ) {
-          for ( DrawingPath p1 : mGridStack1 ) {
-            p1.draw( c, mat, null );
-          }
-          for ( DrawingPath p10 : mGridStack10 ) {
-            p10.draw( c, mat, null );
-          }
-          for ( DrawingPath p100 : mGridStack100 ) {
-            p100.draw( c, mat, null );
-          }
-          if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
-          // no extend line for bitmap
-        }
-      }
-    }
-
-    synchronized( TDPath.mShotsLock ) {
-      if ( TDSetting.mTherionSplays ) {
-        if ( mSplaysStack != null ) {
-          for ( DrawingSplayPath path : mSplaysStack ) {
-            path.draw( c, mat, scale, null, true ); // true = not_edit
-          }
-        }
-      }
-      if ( mLegsStack != null ) {
-        for ( DrawingPath path : mLegsStack ) {
-          path.draw( c, mat, null );
-        }
-      }
-    }
- 
-    if ( TDSetting.mAutoStations ) {
-      if ( mStations != null ) {  
-        synchronized( TDPath.mStationsLock ) {
-          for ( DrawingStationName st : mStations ) {
-            st.draw( c, mat, null );
-          }
-        }
-        // synchronized( TDPath.mFixedsLock ) {
-        //   for ( DrawingFixedName fx : mFixeds ) {
-        //     fx.draw( c, mat, null );
-        //   }
-        // }
-      }
-    }
-
-    synchronized( mScraps ) {
-      for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
-    }
-
-    // checkLines();
-    return bitmap;
-  }
+  // NO_PNG
+  // public Bitmap getBitmap()
+  // {
+  //   RectF bounds = getBitmapBounds();
+  //   // TDLog.Log( TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+  //   mBitmapScale = TDSetting.mBitmapScale;
+  //   int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
+  //   int height = (int)((bounds.bottom - bounds.top + 2 * BORDER) );
+  //   int max = (int)( 8 * 1024 * 1024 / (mBitmapScale * mBitmapScale) );  // 16 MB 2 B/pixel
+  //   while ( width*height > max ) {
+  //     mBitmapScale /= 2;
+  //     max *= 4;
+  //   }
+  //   width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+  //   height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
+  //  
+  //   Bitmap bitmap = null;
+  //   while ( bitmap == null && mBitmapScale > 0.05 ) {
+  //     if ( width <= 0 || height <= 0 ) return null; 
+  //     try {
+  //       // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
+  //       bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
+  //     } catch ( OutOfMemoryError e ) {
+  //       mBitmapScale /= 2;
+  //       width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+  //       height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
+  //     } catch ( IllegalArgumentException e ) {
+  //       TDLog.Error("create bitmap illegal arg " + e.getMessage() );
+  //       return null;
+  //     }
+  //   }
+  //   if ( bitmap == null ) return null;
+  //   if ( mBitmapScale <= 0.05 ) {
+  //     bitmap.recycle();
+  //     return null;
+  //   }
+  //   // TDLog.v( "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
+  //   Canvas c = new Canvas (bitmap);
+  //   // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
+  //   c.drawColor( TDSetting.mBitmapBgcolor );
+  //
+  //   // commandManager.execute All(c,previewDoneHandler);
+  //   c.drawBitmap (bitmap, 0, 0, null);
+  //
+  //   Matrix mat = new Matrix();
+  //   float scale = 1 / mBitmapScale;
+  //   mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
+  //   mat.postScale( mBitmapScale, mBitmapScale );
+  //   if ( TDSetting.mSvgGrid ) {
+  //     if ( mGridStack1 != null ) {
+  //       synchronized( TDPath.mGridsLock ) {
+  //         for ( DrawingPath p1 : mGridStack1 ) {
+  //           p1.draw( c, mat, null );
+  //         }
+  //         for ( DrawingPath p10 : mGridStack10 ) {
+  //           p10.draw( c, mat, null );
+  //         }
+  //         for ( DrawingPath p100 : mGridStack100 ) {
+  //           p100.draw( c, mat, null );
+  //         }
+  //         if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
+  //         // no extend line for bitmap
+  //       }
+  //     }
+  //   }
+  //
+  //   synchronized( TDPath.mShotsLock ) {
+  //     if ( TDSetting.mTherionSplays ) {
+  //       if ( mSplaysStack != null ) {
+  //         for ( DrawingSplayPath path : mSplaysStack ) {
+  //           path.draw( c, mat, scale, null, true ); // true = not_edit
+  //         }
+  //       }
+  //     }
+  //     if ( mLegsStack != null ) {
+  //       for ( DrawingPath path : mLegsStack ) {
+  //         path.draw( c, mat, null );
+  //       }
+  //     }
+  //   }
+  // 
+  //   if ( TDSetting.mAutoStations ) {
+  //     if ( mStations != null ) {  
+  //       synchronized( TDPath.mStationsLock ) {
+  //         for ( DrawingStationName st : mStations ) {
+  //           st.draw( c, mat, null );
+  //         }
+  //       }
+  //       // synchronized( TDPath.mFixedsLock ) {
+  //       //   for ( DrawingFixedName fx : mFixeds ) {
+  //       //     fx.draw( c, mat, null );
+  //       //   }
+  //       // }
+  //     }
+  //   }
+  //
+  //   synchronized( mScraps ) {
+  //     for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
+  //   }
+  //
+  //   // checkLines();
+  //   return bitmap;
+  // }
 
   // static final String actionName[] = { "remove", "insert", "modify" }; // DEBUG LOG
 

@@ -590,7 +590,12 @@ class DrawingSurface extends SurfaceView
 
   // void clearDrawing() { commandManager.clearDrawing(); }
 
-  // return true if the station is the current active
+  /** set the paint of a station-name
+   * @param st      station-name item
+   * @param saved   list of saved stations
+   * @param manager drawing command manager
+   * @note used to return true if the station is the current active
+   */
   private void setStationPaint( DrawingStationName st, List< StationInfo > saved, DrawingCommandManager manager )
   {
     if ( st == null ) return; // 20191010 should not be necessary: crash called from setCurrentStation
@@ -620,6 +625,10 @@ class DrawingSurface extends SurfaceView
     }
   }
 
+  /** set the current station
+   * @param st      station-name item
+   * @param saved   list of saved stations
+   */
   void setCurrentStation( DrawingStationName st, List< StationInfo > saved )
   {
     DrawingStationName st0 = commandManager.getCurrentStationName();
@@ -640,12 +649,17 @@ class DrawingSurface extends SurfaceView
     }
   }
 
-  // called by DrawingWindow::computeReference
-  // @param parent     name of the parent plot
-  // @param num_st     station
-  // @param selectable whether the station is selectable
-  // @param xsections  list of survey xsections
-  // @param saved      list of saved stations
+  /** add a station-name drawing item
+   * @param parent     name of the parent plot
+   * @param num_st     station
+   * @param x          X coord (scene)
+   * @param y          Y coord (scene)
+   * @param selectable whether the station is selectable
+   * @param xsections  list of survey xsections
+   * @param saved      list of saved stations
+   * @return the new station-name item
+   * @note called by DrawingWindow::computeReference
+   */
   DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
 		                             List< PlotInfo > xsections, List< StationInfo > saved )
   {
@@ -670,6 +684,14 @@ class DrawingSurface extends SurfaceView
     return st;
   }
 
+  /** add a station-name drawing item
+   * @param type       ???
+   * @param num_st     station
+   * @param x          X coord (scene)
+   * @param y          Y coord (scene)
+   * @param selectable whether the station is selectable
+   * @return the new station-name item
+   */
   DrawingStationName appendDrawingStationName ( long type, NumStation num_st, float x, float y, boolean selectable )
   {
     DrawingCommandManager cmd = ( type == DRAWING_PLAN )? mCommandManager1 : mCommandManager2;
@@ -680,8 +702,14 @@ class DrawingSurface extends SurfaceView
     return st;
   }
 
-  // called by DrawingWindow (for SECTION)
-  // note: not selectable
+  /** add a station-name drawing item
+   * @param name       station name
+   * @param x          X coord (scene)
+   * @param y          Y coord (scene)
+   * @return the new station-name item
+   * @note called by DrawingWindow (for SECTION)
+   * @note not selectable
+   */
   DrawingStationName addDrawingStationName( String name, float x, float y )
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
@@ -692,13 +720,19 @@ class DrawingSurface extends SurfaceView
     return st;
   }
 
+  /** reset the "fixed" paint
+   * @param app   application
+   * @param paint new paint
+   */
   void resetFixedPaint( TopoDroidApp app, Paint paint )
   {
     mCommandManager1.resetFixedPaint( app, false, paint );
     mCommandManager2.resetFixedPaint( app, true,  paint ); 
   }
 
-  // FIXED_ZOOM
+  /** set the zoom "fixed"
+   * @param fixed_zoom  whether to set the zoom fixed or not
+   */
   void setFixedZoom( boolean fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
 
   // only for X-Sections autowalls

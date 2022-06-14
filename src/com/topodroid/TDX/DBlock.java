@@ -352,7 +352,9 @@ public class DBlock
   public float getStretch() { return mStretch; }
   public float getStretchedExtend() { return mExtend + mStretch; }
 
-  // called only by ShotWindow
+  /** flip the block extend and stretch
+   * @note called only by ShotWindow
+   */
   boolean flipExtendAndStretch()
   {
     mStretch = - mStretch;
@@ -551,13 +553,33 @@ public class DBlock
     return ( Math.abs(v) <= mLength );
   }
 
+  /** set the type of the shot
+   * @param type   shot type
+   */
   void setShotType( int type ) { mShotType = type; }
+
+  /** @return the type of the shot
+   */
   int  getShotType( ) { return mShotType; }
 
+  /** @return true if the shot type is "DistoX"
+   */
   boolean isDistoX() { return mShotType <= 0; }
+
+  /** @return true if the shot type is "DistoX - backsight" and "backshot" is set
+   */
   boolean isDistoXBacksight() { return TDSetting.mDistoXBackshot && mShotType == -1; }
+
+  /** @return true if the shot type is "DistoX - foresight"
+   */
   boolean isForesight() { return mShotType == 0; }
+
+  /** @return true if the shot type is "DistoX - backsight"
+   */
   boolean isBacksight() { return mShotType == -1; }
+
+  /** @return true if the shot type is "manual"
+   */
   boolean isManual() { return mShotType > 0; }
 
   /** set the block ID
@@ -692,6 +714,9 @@ public class DBlock
     return ( d/alen + d/blen < TDSetting.mCloseDistance );
   }
 
+  /** @return true if this shot is within relative distance from another shot
+   * @param b   the other shot
+   */
   public boolean isRelativeDistance( DBlock b )
   {
     if ( b == null ) return false;

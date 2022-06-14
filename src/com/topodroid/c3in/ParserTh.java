@@ -866,7 +866,7 @@ public class ParserTh extends TglParser
     int bad_fixes = 0;
     for ( Cave3DFix f : fixes ) {
       boolean found = false; 
-//    for ( Cave3DStation s1 : stations ) { // stations.size()=0 !
+      // when fixes are checked stations may not have been created yet, therefore the check runs on the shots
       for ( Cave3DShot s1 : shots ) { // HB
           if ( f.hasName( s1.from ) ) { found = true; break ; }
           if ( f.hasName( s1.to ) ) { found = true; break ; }

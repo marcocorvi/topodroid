@@ -1473,10 +1473,10 @@
 
   <string name="pref_hthr_title">横截面 水平临界值</string>
   <string name="pref_hthr_summary">横截面的水平临界值</string>
-  <string name="pref_bitmap_scale_title">分辨率</string>
-  <string name="pref_bitmap_scale_summary">草图PNG图像输出分辨率</string>
-  <string name="pref_bitmap_bgcolor_title">背景颜色</string>
-  <string name="pref_bitmap_bgcolor_summary">草图PNG图像输出背景颜色</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">分辨率</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">草图PNG图像输出分辨率</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">背景颜色</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">草图PNG图像输出背景颜色</string -->
   <string name="pref_acad_version_title">DXF 版本</string>
   <string name="pref_acad_version_summary">DXF 版本</string>
   <string name="pref_acad_spline_title">DXF 曲线</string>

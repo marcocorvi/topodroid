@@ -233,23 +233,23 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
             } else { // X-Section cSurvey are exported as PNG
               // fall-through
             }
-          case TDConst.SURVEY_FORMAT_PNG:
-            // TDLog.v("EXPORT AUTO png " + mFullName );
-            Bitmap bitmap = mManager.getBitmap();
-            if (bitmap == null) {
-              TDLog.Error( "cannot save PNG: null bitmap" );
-              // ret1 = false;
-            } else {
-              float scale = mManager.getBitmapScale();
-              if (scale > 0) {
-                // FIXME execute must be called from the main thread, current thread is working thread
-                (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
-              } else {
-                TDLog.Error( "cannot save PNG: negative scale" );
-                // ret1 = false;
-              }
-            }
-            break;
+          // case TDConst.SURVEY_FORMAT_PNG: // NO_PNG
+          //   // TDLog.v("EXPORT AUTO png " + mFullName );
+          //   Bitmap bitmap = mManager.getBitmap();
+          //   if (bitmap == null) {
+          //     TDLog.Error( "cannot save PNG: null bitmap" );
+          //     // ret1 = false;
+          //   } else {
+          //     float scale = mManager.getBitmapScale();
+          //     if (scale > 0) {
+          //       // FIXME execute must be called from the main thread, current thread is working thread
+          //       (new ExportBitmapToFile( null, null, bitmap, scale, mFullName, false )).exec(); // null URI, null toast-format
+          //     } else {
+          //       TDLog.Error( "cannot save PNG: negative scale" );
+          //       // ret1 = false;
+          //     }
+          //   }
+          //   break;
           default:
             TDLog.v("EXPORT AUTO unknown " + mFullName + " " + TDSetting.mAutoExportPlotFormat );
             break;

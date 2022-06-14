@@ -236,12 +236,12 @@ public class TDSetting
   public static final int SVG_ILLUSTRATOR = 1;
   public static int mSvgProgram = SVG_ILLUSTRATOR;
 
-  public static float mBitmapScale = 1.5f;
+  // public static float mBitmapScale = 1.5f; // NO_PNG
   public static float mBezierStep  = 0.2f;
   public static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
  
   // public static float mDxfScale    = 1.0f;
-  public static int mBitmapBgcolor = 0x000000;
+  // public static int mBitmapBgcolor = 0x000000; // NO_PNG
 
   public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
   public static boolean mAcadSpline = true; // interpolated cubic
@@ -563,30 +563,30 @@ public class TDSetting
     } catch ( NumberFormatException e ) { }
   }
 
-  // background color RGB_565
-  private static String setBitmapBgcolor( SharedPreferences prefs, String key, String color, String def_value )
-  {
-    int r=0, g=0, b=0;
-    String[] vals = color.split("\\s+"); 
-    color = def_value;
-    if ( vals.length == 3 ) {
-      try { 
-        r = Integer.parseInt( vals[0] );
-        g = Integer.parseInt( vals[1] );
-        b = Integer.parseInt( vals[2] );
-        if ( r > 255 ) r = 255; if ( r < 0 ) r = 0;
-        if ( g > 255 ) g = 255; if ( g < 0 ) g = 0;
-        if ( b > 255 ) b = 255; if ( b < 0 ) b = 0;
-        color = r + " " + g + " " + b; // Integer.toString(r) + " " + Integer.toString(g) + " " + Integer.toString(b);
-      } catch ( NumberFormatException e ) {
-	r = g = b = 0;
-      }
-      // TDLog.v("Setting bitmap bg color <" + r + " " + g + " " + b +">" );
-    }
-    setPreference( prefs, key, color );
-    mBitmapBgcolor = 0xff000000 | ( r << 16 ) | ( g << 8 ) | b;
-    return color;
-  }
+  // NO_PNG background color RGB_565
+  // private static String setBitmapBgcolor( SharedPreferences prefs, String key, String color, String def_value )
+  // {
+  //   int r=0, g=0, b=0;
+  //   String[] vals = color.split("\\s+"); 
+  //   color = def_value;
+  //   if ( vals.length == 3 ) {
+  //     try { 
+  //       r = Integer.parseInt( vals[0] );
+  //       g = Integer.parseInt( vals[1] );
+  //       b = Integer.parseInt( vals[2] );
+  //       if ( r > 255 ) r = 255; if ( r < 0 ) r = 0;
+  //       if ( g > 255 ) g = 255; if ( g < 0 ) g = 0;
+  //       if ( b > 255 ) b = 255; if ( b < 0 ) b = 0;
+  //       color = r + " " + g + " " + b; // Integer.toString(r) + " " + Integer.toString(g) + " " + Integer.toString(b);
+  //     } catch ( NumberFormatException e ) {
+  //       r = g = b = 0;
+  //     }
+  //     // TDLog.v("Setting bitmap bg color <" + r + " " + g + " " + b +">" );
+  //   }
+  //   setPreference( prefs, key, color );
+  //   mBitmapBgcolor = 0xff000000 | ( r << 16 ) | ( g << 8 ) | b;
+  //   return color;
+  // }
 
   // ------------------------------------------------------------------
   private static float tryFloat( SharedPreferences prefs, String key, String def_value )
@@ -1065,11 +1065,13 @@ public class TDSetting
     mCsvRaw            = prefs.getBoolean(     keyExpCsv[0], bool(defExpCsv[0]) ); // DISTOX_CSV_RAW
     mCsvSeparator      = CSV_SEPARATOR[ tryInt( prefs, keyExpCsv[1], defExpCsv[1] ) ]; // DISTOX_CSV_SEP
 
+    /* NO_PNG
     String[] keyExpPng = TDPrefKey.EXPORT_PNG;
     String[] defExpPng = TDPrefKey.EXPORT_PNGdef;
     mBitmapScale       = tryFloat( prefs,      keyExpPng[0], defExpPng[0] );  // DISTOX_BITMAP_SCALE 
     setBitmapBgcolor( prefs, keyExpPng[1], prefs.getString(keyExpPng[1], defExpPng[1]), defExpPng[1] );  // DISTOX_BITMAP_BGCOLOR
     // TDLog.v("SETTING load secondary export PNG done");
+    */
 
     String[] keyExpDxf = TDPrefKey.EXPORT_DXF;
     String[] defExpDxf = TDPrefKey.EXPORT_DXFdef;
@@ -1273,7 +1275,7 @@ public class TDSetting
       case TDPrefCat.PREF_CATEGORY_SVG:    return updatePrefSvg( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_DXF:    return updatePrefDxf( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_SHP:    return updatePrefShp( hlp, k, v );
-      case TDPrefCat.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v );
+      // case TDPrefCat.PREF_CATEGORY_PNG:    return updatePrefPng( hlp, k, v ); // NO_PNG
       case TDPrefCat.PREF_CATEGORY_KML:    return updatePrefKml( hlp, k, v );
       case TDPrefCat.PREF_CATEGORY_CSV:    return updatePrefCsv( hlp, k, v );
       case TDPrefCat.PREF_SHOT_DATA:       return updatePrefData( hlp, k, v );
@@ -2068,31 +2070,31 @@ public class TDSetting
     return null;
   }
 
-  private static String updatePrefPng( TDPrefHelper hlp, String k, String v )
-  {
-    String ret = null;
-    // TDLog.v("update pref PNG: " + k );
-    String[] key = TDPrefKey.EXPORT_PNG;
-    String[] def = TDPrefKey.EXPORT_PNGdef;
-    if ( k.equals( key[ 0 ] ) ) { // DISTOX_BITMAP_SCALE
-      mBitmapScale = tryFloatValue( hlp, k, v, def[0] );
-      if ( mBitmapScale < 0.5f ) { mBitmapScale = 0.5f; ret = "0.5"; }
-      if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = TDString.TEN; }
-    } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BITMAP_BGCOLOR
-      return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[1] ), def[1] );
-    } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_GRID
-      mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
-    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS
-      mTherionSplays = tryBooleanValue( hlp, k, v, bool(def[ 3]) );   
-    // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
-    //   mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
-
-    } else {
-      TDLog.Error("missing EXPORT PNG key: " + k );
-    }
-    if ( ret != null ) hlp.update( k, ret );
-    return ret;
-  }
+  // NO_PNG
+  // private static String updatePrefPng( TDPrefHelper hlp, String k, String v )
+  // {
+  //   String ret = null;
+  //   // TDLog.v("update pref PNG: " + k );
+  //   String[] key = TDPrefKey.EXPORT_PNG;
+  //   String[] def = TDPrefKey.EXPORT_PNGdef;
+  //   if ( k.equals( key[ 0 ] ) ) { // DISTOX_BITMAP_SCALE
+  //     mBitmapScale = tryFloatValue( hlp, k, v, def[0] );
+  //     if ( mBitmapScale < 0.5f ) { mBitmapScale = 0.5f; ret = "0.5"; }
+  //     if ( mBitmapScale >  10f ) { mBitmapScale =  10f; ret = TDString.TEN; }
+  //   } else if ( k.equals( key[ 1 ] ) ) { // DISTOX_BITMAP_BGCOLOR
+  //     return setBitmapBgcolor( hlp.getSharedPrefs(), k, tryStringValue( hlp, k, v, def[1] ), def[1] );
+  //   } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_SVG_GRID
+  //     mSvgGrid = tryBooleanValue( hlp, k, v, bool(def[2]) );
+  //   } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_THERION_SPLAYS
+  //     mTherionSplays = tryBooleanValue( hlp, k, v, bool(def[ 3]) );   
+  //   // } else if ( k.equals( key[ 4 ] ) ) { // DISTOX_AUTO_STATIONS
+  //   //   mAutoStations  = tryBooleanValue( hlp, k, v, bool(def[ 4]) );
+  //   } else {
+  //     TDLog.Error("missing EXPORT PNG key: " + k );
+  //   }
+  //   if ( ret != null ) hlp.update( k, ret );
+  //   return ret;
+  // }
 
   private static String updatePrefSvg( TDPrefHelper hlp, String k, String v )
   {
@@ -2857,7 +2859,7 @@ public class TDSetting
       pw.printf(Locale.US, "Ortho LRUD %c, angle %.2f, cos %.2f \n", tf(mOrthogonalLRUD), mOrthogonalLRUDAngle, mOrthogonalLRUDCosine );
       pw.printf(Locale.US, "Therion: config %c, maps %c, stations %c, splays %c, xvi %c, scale %d \n",
         tf(mTherionConfig), tf(mTherionMaps), tf(mAutoStations), tf(mTherionSplays), tf(mTherionXvi), mTherionScale );
-      pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
+      // pw.printf(Locale.US, "PNG scale %.2f, bg_color %d \n", mBitmapScale, (mBitmapBgcolor & 0xffffff) );
       pw.printf(Locale.US, "DXF: acad_version %d, blocks %c, spline %c \n", mAcadVersion, tf(mDxfBlocks), tf(mAcadSpline) );
       pw.printf(Locale.US, "SVG: shot %.1f, label %.1f, %d, station %d, point %.1f, round-trip %c, grid %c %.1f, line %.1f, dir %c %.1f, splays %c \n",
         mSvgShotStroke, mSvgLabelStroke, mSvgLabelSize, mSvgStationSize, mSvgPointStroke,
@@ -3162,11 +3164,11 @@ public class TDSetting
           continue;
         }
         if ( line.startsWith("PNG") ) {
-          if ( vals.length > 4 ) {
-            mBitmapScale   = getFloat( vals, 2, 1.5f ); setPreference( editor, "DISTOX_BITMAP_SCALE", mBitmapScale );
-            mBitmapBgcolor = getInt( vals, 4, 0 );   setPreference( editor, "DISTOX_BITMAP_BGCOLOR", mBitmapBgcolor );
-            mBitmapBgcolor |= 0xff000000;
-          }
+          // if ( vals.length > 4 ) { // NO_PNG
+          //   mBitmapScale   = getFloat( vals, 2, 1.5f ); setPreference( editor, "DISTOX_BITMAP_SCALE", mBitmapScale );
+          //   mBitmapBgcolor = getInt( vals, 4, 0 );   setPreference( editor, "DISTOX_BITMAP_BGCOLOR", mBitmapBgcolor );
+          //   mBitmapBgcolor |= 0xff000000;
+          // }
           continue;
         }
         if ( line.startsWith("DXF") ) {

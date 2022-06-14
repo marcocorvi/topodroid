@@ -1474,10 +1474,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_hthr_title">Przekrój poprzeczny próg horyzontalny</string>
   <string name="pref_hthr_summary">Próg dla horyzontalnego przekroju poprzecznego</string>
-  <string name="pref_bitmap_scale_title">rozdzielczość PNG</string>
-  <string name="pref_bitmap_scale_summary">rozdzielczość obrazu PNG szkicu</string>
-  <string name="pref_bitmap_bgcolor_title">kolor tła PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">kolor tła obrazu PNG szkicu</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">rozdzielczość PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">rozdzielczość obrazu PNG szkicu</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">kolor tła PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">kolor tła obrazu PNG szkicu</string -->
   <string name="pref_acad_version_title">wersja DXF</string>
   <string name="pref_acad_version_summary">wersja DXF</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->

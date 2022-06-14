@@ -32,7 +32,7 @@ public class TDPrefCat
   public static final int PREF_CATEGORY_SVG       = 13;
   public static final int PREF_CATEGORY_SHP       = 14;
   public static final int PREF_CATEGORY_DXF       = 15;
-  public static final int PREF_CATEGORY_PNG       = 16;
+  // public static final int PREF_CATEGORY_PNG       = 16; // NO_PNG
   public static final int PREF_CATEGORY_KML       = 17;
   public static final int PREF_CATEGORY_CSV       = 18;
   public static final int PREF_SHOT_DATA          = 19; 

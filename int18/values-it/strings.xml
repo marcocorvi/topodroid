@@ -1472,10 +1472,10 @@ Fai riferimento alle pagine web per i dettagli.\n
 
   <string name="pref_hthr_title">Soglia sezione orizzontale</string>
   <string name="pref_hthr_summary">Soglia inclinazione per sezioni orizzontali</string>
-  <string name="pref_bitmap_scale_title">Risoluzione PNG</string>
-  <string name="pref_bitmap_scale_summary">Risoluzione nei PNG dei disegni</string>
-  <string name="pref_bitmap_bgcolor_title">Colore di sfondo per PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Risoluzione PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Risoluzione nei PNG dei disegni</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Colore di sfondo per PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Colore di sfondo della immagine PNG dei rilievi</string -->
   <string name="pref_acad_version_title"> Versione di DXF</string>
   <string name="pref_acad_version_summary">Versione di DXF</string>
   <string name="pref_acad_spline_title">Spline DXF</string>

@@ -1454,10 +1454,10 @@ Refer to the web pages for details.\n
 
   <string name="pref_hthr_title">Граница за хор. сечения</string>
   <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>
-  <string name="pref_bitmap_scale_title">PNG резолюция</string>
-  <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
-  <string name="pref_bitmap_bgcolor_title">PNG фон</string>
-  <string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">PNG резолюция</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">PNG фон</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string -->
   <string name="pref_acad_version_title">DXF версия</string>
   <string name="pref_acad_version_summary">DXF версия</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->

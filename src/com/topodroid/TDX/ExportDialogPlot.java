@@ -57,7 +57,7 @@ public class ExportDialogPlot extends MyDialog
   private LinearLayout mLayoutDxf;
   private LinearLayout mLayoutSvg;
   private LinearLayout mLayoutShp;
-  private LinearLayout mLayoutPng;
+  // private LinearLayout mLayoutPng; // NO_PNG
   private LinearLayout mLayoutPdf;
 
   /** cstr
@@ -97,7 +97,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutDxf     = (LinearLayout) findViewById( R.id.layout_dxf );
     mLayoutSvg     = (LinearLayout) findViewById( R.id.layout_svg );
     mLayoutShp     = (LinearLayout) findViewById( R.id.layout_shp );
-    mLayoutPng     = (LinearLayout) findViewById( R.id.layout_png );
+    // mLayoutPng     = (LinearLayout) findViewById( R.id.layout_png ); // NO_PNG
     mLayoutPdf     = (LinearLayout) findViewById( R.id.layout_pdf );
 
     if ( ! TDLevel.overAdvanced ) {
@@ -201,7 +201,7 @@ public class ExportDialogPlot extends MyDialog
     mLayoutDxf.setVisibility( View.GONE );
     mLayoutSvg.setVisibility( View.GONE );
     mLayoutShp.setVisibility( View.GONE );
-    mLayoutPng.setVisibility( View.GONE );
+    // mLayoutPng.setVisibility( View.GONE ); // NO_PNG
     mLayoutPdf.setVisibility( View.GONE );
     if ( mParentType == 0 ) { // SketchWindow
       switch ( mSelectedPos ) {
@@ -210,8 +210,8 @@ public class ExportDialogPlot extends MyDialog
         case 2: mLayoutDxf.setVisibility( View.VISIBLE ); break;
         case 3: mLayoutSvg.setVisibility( View.VISIBLE ); break;
         case 4: if ( TDLevel.overExpert ) mLayoutShp.setVisibility( View.VISIBLE ); break;
-        case 5: mLayoutPng.setVisibility( View.VISIBLE ); break;
-        case 6: mLayoutPdf.setVisibility( View.VISIBLE ); break;
+        // case 5: mLayoutPng.setVisibility( View.VISIBLE ); break; // NO_PNG
+        case 5: mLayoutPdf.setVisibility( View.VISIBLE ); break;
       }
     } else { // mParentType == 1 // OverviewWindow
       switch ( mSelectedPos ) {
@@ -287,24 +287,24 @@ public class ExportDialogPlot extends MyDialog
           // TDLog.v( "shapefile set georef " + TDSetting.mShpGeoref );
         }
         break;
-      case 5: // PNG
-        {
-          TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.png_splays )).isChecked();
-          TDSetting.mSvgGrid   = ((CheckBox) findViewById( R.id.png_grid )).isChecked();
-          if ( ((CheckBox) findViewById( R.id.png_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
-          try { 
-            float sc = Float.parseFloat( ((EditText) findViewById( R.id.png_scale )).getText().toString() );
-            if ( sc > 0 ) TDSetting.mBitmapScale = sc;
-          } catch ( NumberFormatException e ) {
-            TDLog.Error("Non-number PNG scale");
-          }
-        }
-        break;
-      case 6: // PDF
+      // case 5: // NO_PNG
+      //   {
+      //     TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.png_splays )).isChecked();
+      //     TDSetting.mSvgGrid   = ((CheckBox) findViewById( R.id.png_grid )).isChecked();
+      //     if ( ((CheckBox) findViewById( R.id.png_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
+      //     try { 
+      //       float sc = Float.parseFloat( ((EditText) findViewById( R.id.png_scale )).getText().toString() );
+      //       if ( sc > 0 ) TDSetting.mBitmapScale = sc;
+      //     } catch ( NumberFormatException e ) {
+      //       TDLog.Error("Non-number PNG scale");
+      //     }
+      //   }
+      //   break;
+      case 5: // PDF
         {
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mPdfBgcolor = 0;
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
-          TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.png_splays )).isChecked();
+          TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.pdf_splays )).isChecked();
         }
         break;
     }
@@ -334,10 +334,10 @@ public class ExportDialogPlot extends MyDialog
     
     ((CheckBox) findViewById( R.id.shp_georeference )).setChecked( TDSetting.mShpGeoref );
 
-    ((CheckBox) findViewById( R.id.png_splays )).setChecked( TDSetting.mTherionSplays );
-    ((CheckBox) findViewById( R.id.png_grid )).setChecked( TDSetting.mSvgGrid );
-    ((CheckBox) findViewById( R.id.png_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
-    ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) );
+    // ((CheckBox) findViewById( R.id.png_splays )).setChecked( TDSetting.mTherionSplays ); // NO_PNG
+    // ((CheckBox) findViewById( R.id.png_grid )).setChecked( TDSetting.mSvgGrid ); // NO_PNG
+    // ((CheckBox) findViewById( R.id.png_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff ); // NO_PNG
+    // ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) ); // NO_PNG
 
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
     ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );

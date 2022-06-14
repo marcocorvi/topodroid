@@ -1051,26 +1051,27 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     };
   }
 
-  /** construct the "PNG image" preferences array
-   * @param ctx   context
-   * @param hlp   shared preferences helper
-   * @return array of "PNG image" preferences
-   */
-  public static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
-  {
-    int cat = TDPrefCat.PREF_CATEGORY_PNG;
-    String[] key = TDPrefKey.EXPORT_PNG;
-    int[] tit = TDPrefKey.EXPORT_PNGtitle;
-    int[] dsc = TDPrefKey.EXPORT_PNGdesc;
-    String[] def = TDPrefKey.EXPORT_PNGdef;
-    return new TDPref[ ] {
-      makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  ctx, hlp ),
-      makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, ctx, hlp ),
-      makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],         ctx, hlp ),  // DISTOX_SVG_GRID
-      makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_THERION_SPLAYS
-      // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
-    };
-  }
+  // NO_PNG
+  // /** construct the "PNG image" preferences array
+  //  * @param ctx   context
+  //  * @param hlp   shared preferences helper
+  //  * @return array of "PNG image" preferences
+  //  */
+  // public static TDPref[] makePngPrefs( Context ctx, TDPrefHelper hlp )
+  // {
+  //   int cat = TDPrefCat.PREF_CATEGORY_PNG;
+  //   String[] key = TDPrefKey.EXPORT_PNG;
+  //   int[] tit = TDPrefKey.EXPORT_PNGtitle;
+  //   int[] dsc = TDPrefKey.EXPORT_PNGdesc;
+  //   String[] def = TDPrefKey.EXPORT_PNGdef;
+  //   return new TDPref[ ] {
+  //     makeEdt( cat, key[0], tit[0], dsc[0], N, def[0], FLOAT,  ctx, hlp ),
+  //     makeEdt( cat, key[1], tit[1], dsc[1], N, def[1], STRING, ctx, hlp ),
+  //     makeCbx( cat, key[2], tit[2], dsc[2], N, def[2],         ctx, hlp ),  // DISTOX_SVG_GRID
+  //     makeCbx( cat, key[3], tit[3], dsc[3], A, def[3],         ctx, hlp )   // DISTOX_THERION_SPLAYS
+  //     // makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],         ctx, hlp )   // DISTOX_AUTO_STATIONS
+  //   };
+  // }
 
   /** construct the "KML" preferences array
    * @param ctx   context

@@ -1457,10 +1457,10 @@ Refer to the web pages for details.\n
 
   <string name="pref_hthr_title">Limită orizontală - secțiune transversală Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Limită pentru secțiuni transversală orizontale</string>
-  <string name="pref_bitmap_scale_title">Rezoluție PNG</string>
-  <string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string>
-  <string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Rezoluție PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string -->
   <string name="pref_acad_version_title">Versiune DXF</string>
   <string name="pref_acad_version_summary">Versiune DXF</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->

@@ -399,7 +399,7 @@ public class TDPrefKey
     "DISTOX_EXPORT_SVG_PREF",    // 12
     "DISTOX_EXPORT_SHP_PREF",    // 14
     "DISTOX_EXPORT_DXF_PREF",
-    "DISTOX_EXPORT_PNG_PREF",
+    // "DISTOX_EXPORT_PNG_PREF", // NO_PNG
     "DISTOX_EXPORT_KML_PREF",    // 16
     "DISTOX_EXPORT_CSV_PREF",    // 17
     null
@@ -422,7 +422,7 @@ public class TDPrefKey
     R.string.pref_cat_exportsvg,
     R.string.pref_cat_exportshp,
     R.string.pref_cat_exportdxf,
-    R.string.pref_cat_exportpng,
+    // R.string.pref_cat_exportpng, // NO_PNG
     R.string.pref_cat_exportkml,
     R.string.pref_cat_exportcsv,
   };
@@ -444,7 +444,7 @@ public class TDPrefKey
     -1,
     -1,
     -1,
-    -1,
+    // -1, // NO_PNG
     -1,
     -1,
   };
@@ -733,6 +733,7 @@ public class TDPrefKey
   };
 
   // ------------------------------------------------------------------------------
+  /* NO_PNG
   public static String[] EXPORT_PNG = {
     "DISTOX_BITMAP_SCALE",           // default bitmap scale PNG
     "DISTOX_BITMAP_BGCOLOR",   // 21 29 // bitmap background color [RGB]
@@ -764,6 +765,7 @@ public class TDPrefKey
     // TRUE,
     null
   };
+  */
 
   // ------------------------------------------------------------------------------
   public static String[] EXPORT_DXF = {

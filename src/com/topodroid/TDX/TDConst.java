@@ -29,7 +29,7 @@ public class TDConst
   public static final int SURVEY_FORMAT_KML = 10; //Keyhole     KmlFile
   public static final int SURVEY_FORMAT_PLT = 11; // track file PltFile
 
-  public static final int SURVEY_FORMAT_PNG = 12;
+  // public static final int SURVEY_FORMAT_PNG = 12; // NO_PNG
   public static final int SURVEY_FORMAT_SVG = 13;
   public static final int SURVEY_FORMAT_TH2 = 14;
   public static final int SURVEY_FORMAT_TH3 = 15;
@@ -279,7 +279,7 @@ public class TDConst
       "DXF",
       "SVG",
       "Shapefile",
-      "PNG",
+      // "PNG", // NO_PNG
       "PDF",
       "XVI",
       "Tunnel",
@@ -292,7 +292,7 @@ public class TDConst
     SURVEY_FORMAT_DXF,
     SURVEY_FORMAT_SVG,
     SURVEY_FORMAT_SHP,
-    SURVEY_FORMAT_PNG,
+    // SURVEY_FORMAT_PNG, // NO_PNG
     SURVEY_FORMAT_PDF,
     SURVEY_FORMAT_XVI,
     SURVEY_FORMAT_TNL,
@@ -305,7 +305,7 @@ public class TDConst
     "dxf",
     "svg",
     "shz",
-    "png",
+    // "png", // NO_PNG
     "pdf",
     "xvi",
     "xml",
@@ -320,11 +320,11 @@ public class TDConst
       case 2: return name + ".dxf";
       case 3: return name + ".svg";
       case 4: return name + ".shz";
-      case 5: return name + ".png";
-      case 6: return name + ".pdf";
-      case 7: return name + ".xvi";
-      case 8: return name + ".xml"; // Tunnel
-      case 9: return name + ".c3d";
+      // case 5: return name + ".png"; // NO_PNG
+      case 5: return name + ".pdf";
+      case 6: return name + ".xvi";
+      case 7: return name + ".xml"; // Tunnel
+      case 8: return name + ".c3d";
     }
     return name;
   }

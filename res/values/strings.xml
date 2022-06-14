@@ -1232,7 +1232,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_cat_exportsvg" translatable="false">SVG</string>
   <string name="pref_cat_exportdxf" translatable="false">DXF</string>
   <string name="pref_cat_exportshp" translatable="false">Shapefile</string>
-  <string name="pref_cat_exportpng" translatable="false">PNG</string>
+  <!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
   <string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
   <string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
   <string name="pref_cat_exportcsv" translatable="false">CSV</string>
@@ -1495,10 +1495,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
   <string name="pref_hthr_title">Cross-section h-threshold</string>
   <string name="pref_hthr_summary">Threshold for horizontal cross-sections</string>
-  <string name="pref_bitmap_scale_title">Resolution</string>
-  <string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string>
-  <string name="pref_bitmap_bgcolor_title">Background color</string>
-  <string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Resolution</string NO_PNG -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Resolution of PNG image of sketches</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Background color</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Background color of PNG image of sketches</string -->
   <string name="pref_acad_version_title">DXF version</string>
   <string name="pref_acad_version_summary">DXF version</string>
   <string name="pref_acad_spline_title">DXF splines</string>

@@ -1461,10 +1461,10 @@
 
   <string name="pref_hthr_title">Порог угла горизонтального сечения</string>
   <string name="pref_hthr_summary">Максимальный угол выше котрого поперечное сечение становится горизонтальным</string>
-  <string name="pref_bitmap_scale_title">Разрешение PNG</string>
-  <string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string>
-  <string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов в RGB</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Разрешение PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Масштабный коэффициент абриса при экспорте в PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Цвет фона PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Цвет фона PNG для абрисов в RGB</string -->
   <string name="pref_acad_version_title">Версия DXF</string>
   <string name="pref_acad_version_summary">Версия DXF</string>
   <string name="pref_acad_spline_title">DXF сплайны</string>

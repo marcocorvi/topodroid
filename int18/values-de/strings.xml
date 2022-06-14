@@ -1474,10 +1474,10 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
 
   <string name="pref_hthr_title">Grenzwert Schnitte</string>
   <string name="pref_hthr_summary">Winkelgrenzwert ab welchem Querschnitte horizontal sind</string>
-  <string name="pref_bitmap_scale_title">PNG Massstab</string>
-  <string name="pref_bitmap_scale_summary">Skalierungsfaktor in PNG-Skizzen Export</string>
-  <string name="pref_bitmap_bgcolor_title">PNG Hintergrundfarbe</string>
-  <string name="pref_bitmap_bgcolor_summary">PNG Hintergrundfarbe Skizze</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">PNG Massstab</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Skalierungsfaktor in PNG-Skizzen Export</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">PNG Hintergrundfarbe</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">PNG Hintergrundfarbe Skizze</string -->
   <string name="pref_acad_version_title">DXF-Version</string>
   <string name="pref_acad_version_summary">DXF-Version</string>
   <string name="pref_acad_spline_title">DXF Hilflinien</string>

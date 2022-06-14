@@ -51,6 +51,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   private final boolean diving;
   private SearchResult mSearch;
 
+  /** cstr
+   * @param ctx     context
+   * @param parent  parent window
+   * @param id      ???
+   * @param items   array list of data-blocks
+   */
   DBlockAdapter( Context ctx, ShotWindow parent, int id, ArrayList< DBlock > items )
   {
     super( ctx, id );
@@ -67,6 +73,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     mSearch = new SearchResult();
   }
 
+  /** search the data-blocks with a specified station 
+   * @param name   name of the station to search
+   * @param splays whether to include splays in the search
+   * @note the private search-result is filled with the found blocks
+   */
   void searchStation( String name, boolean splays )
   {
     mSearch.reset( name );
@@ -86,6 +97,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // return (mSearch.size() > 0);
   }
 
+  /** search the data-blocks with a given flag
+   * @param flag   flag to search
+   * @note the private search-result is filled with the found blocks
+   */
   void searchShot( long flag )
   {
     mSearch.reset( null );
@@ -160,6 +175,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     mSelect.clear();
   }
 
+  /** clear the search-result
+   */
   void clearSearch()
   { 
     for ( Integer pos : mSearch.getPositions() ) {
@@ -170,7 +187,13 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
     mSearch.clearSearch(); 
   }
+
+  /** @return the position of the next result in the search
+   */
   int  nextSearchPosition() { return mSearch.nextPos(); }
+
+  /** @return the name of the current result in the search
+   */
   String getSearchName()    { return mSearch.getName(); }
 
   /** this is not efficient because it scans the list of shots
@@ -216,9 +239,12 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ret;
   }
 
-  // called only by ShotWindow updateDBlockList( blk )
-  // this method changes the ArrayList of DistoxDBlock's
-  //
+  /** add a data-block to the adapter
+   * @param b  block to add
+   *
+   * @note called only by ShotWindow updateDBlockList( blk )
+   * this method changes the ArrayList of DistoxDBlock's
+   */
   boolean addDataBlock( DBlock b ) 
   {
     if ( ! b.isScan() && hasBlock( b.mId ) ) return false;
@@ -227,8 +253,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return true;
   }
 
-  // @note called by ShotWindow::updateShotlist
-  //  
+  /** revise the data-blocks with the given list of photos
+   * @param photos   list of photos
+   * @note called by ShotWindow::updateShotlist
+   */  
   void reviseBlockWithPhotos( List< PhotoInfo > photos )
   {
     int size = getCount();
@@ -278,6 +306,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  /** @return a copy of the list of the items in the adapter
+   */
   List< DBlock > getItems() 
   {
     ArrayList<DBlock> ret = new ArrayList<>();
@@ -286,8 +316,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return ret;
   }
 
-  // return the list of blocks to assign station names
-  // called only by ShotWindow.updateDBlockList
+  /** @return the list of blocks to assign station names
+   * @note called only by ShotWindow.updateDBlockList
+   */
   List< DBlock > getItemsForAssign()
   {
     List< DBlock > ret = new ArrayList<>();
@@ -307,7 +338,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // return mItems.subList( k, size );
   }
 
-  // return the block at the given position
+  /** @return the block at the given position
+   * @param pos   block position
+   */
   public DBlock get( int pos ) 
   { 
     return ( pos < START || pos >= getCount() )? null : (DBlock)( getItem( pos ) );
@@ -521,6 +554,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  /** @return the view for a position
+   * @param pos         position
+   * @param convertView convert-view, or null
+   * @param parent      parent view-group
+   */
   // @RecentlyNonNull
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
@@ -600,8 +638,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     return null;
   }
 
-  // update block name text-color
-  // @param set   whether to set green or normal color
+  /** update block name and text-color
+   * @param set   whether to set green or normal color
+   */
   private void updateBlocksName( boolean set )
   {
     int size = getCount();
@@ -643,6 +682,9 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     }
   }
 
+  // /** react to a user tap
+  //  * @param view   tapped view
+  //  */
   // public void onClick(View view)
   // {
   //   TextView tv = (TextView) view;
@@ -651,6 +693,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //   }
   // }
 
+  /** react to a user long-tap
+   * @param view   tapped view
+   * @return true if tap has been handled
+   */
   public boolean onLongClick( View view ) 
   {
     // TDLog.v( "onLongClick " + view.getId() );

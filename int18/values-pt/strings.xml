@@ -1459,10 +1459,10 @@ Refer to the web pages for details.\n
 
   <string name="pref_hthr_title">Limite hor. corte h</string>
   <string name="pref_hthr_summary">Limite horizontal para cortes horizontais</string>
-  <string name="pref_bitmap_scale_title">Resolução PNG</string>
-  <string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string>
-  <string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Resolução PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Resolução imagem PNG croquis</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Cor fundo PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Cor de fundo imagem PNG croquis</string -->
   <string name="pref_acad_version_title">Versão DXF</string>
   <string name="pref_acad_version_summary">Versão DXF</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->

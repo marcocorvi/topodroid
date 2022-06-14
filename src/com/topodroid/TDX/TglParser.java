@@ -424,7 +424,7 @@ public class TglParser
           if ( b > 2*Math.PI ) b -= 2*Math.PI;
           ret.add( new Cave3DShot( station, shot.from_station, shot.len, b, -shot.cln, shot.mFlag, shot.mMillis) );
         } else {
-        ret.add( shot );
+          ret.add( shot );
         }
       }
     }
