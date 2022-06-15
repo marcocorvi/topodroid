@@ -16,7 +16,7 @@
 
     <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
-    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
+    <string name="tdm_config_project">projekt.tdconfig</string>
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
 
     <string name="new_survey_label">Új mérés</string>
@@ -1905,11 +1905,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="surface_gps">GPS nyomvonal</string>
     <string name="surface_east">Kelet</string>
     <string name="surface_north">Észak</string>
-    <!-- TODO string name="dem_file">%1$s</string -->
+    <string name="dem_file">%1$s</string>
     <string name="dem_load">DEM betöltés</string>
     <string name="dem_failed">DEM betöltés hiba</string>
     <string name="dem_ok">DEM adat olvasás</string>
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <string name="texture_file">%1$s</string>
     <string name="texture_load">Textúra betöltés</string>
     <string name="texture_failed">Textúra betöltés hiba</string>
     <string name="texture_ok">Textúra fájl olvasás</string>
