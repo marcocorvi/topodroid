@@ -53,6 +53,12 @@ class ScrapOutlineDialog extends MyDialog
   private ListView mList;
   private List< PlotInfo > mPlots;
 
+  /** cstr
+   * @param context  context
+   * @param parent   sketch window
+   * @param app      application
+   * @param plots    list of sketches (?)
+   */
   ScrapOutlineDialog( Context context, DrawingWindow parent, TopoDroidApp app, List< PlotInfo > plots )
   {
     super( context, R.string.ScrapOutlineDialog );
@@ -89,6 +95,8 @@ class ScrapOutlineDialog extends MyDialog
     updateList();
   }
 
+  /** update the list of sketches
+   */
   private void updateList()
   {
     Resources res = mApp.getResources();
@@ -100,6 +108,9 @@ class ScrapOutlineDialog extends MyDialog
     mList.setAdapter( mArrayAdapter );
   }
  
+  /** react to a user tap
+   * @param v  tapped view
+   */
   // @Override
   public void onClick(View v) 
   {
@@ -118,6 +129,12 @@ class ScrapOutlineDialog extends MyDialog
   // ---------------------------------------------------------------
   // list items click
 
+  /** react to a user tap on an item in the list
+   * @param parent parent window (unused)
+   * @param view   tapped view (unused)
+   * @param pos    tapped position
+   * @param id     tapped ID (? unused)
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {

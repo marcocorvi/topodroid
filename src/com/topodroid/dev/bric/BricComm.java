@@ -705,11 +705,11 @@ public class BricComm extends TopoDroidComm
       case BricConst.CMD_OFF:   command = Arrays.copyOfRange( BricConst.COMMAND_OFF,   0,  9 ); break;
 /*
       case BricConst.CMD_SPLAY: 
-        TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd SPLAY");
+        // TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd SPLAY");
         mPendingCommands += 1;
         break;
       case BricConst.CMD_LEG: 
-        TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd LEG");
+        // TDLog.Log( TDLog.LOG_BT, "BRIC comm send cmd LEG");
         mPendingCommands += 3;
         break;
 */

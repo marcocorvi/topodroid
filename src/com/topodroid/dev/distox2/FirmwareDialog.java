@@ -102,63 +102,59 @@ public class FirmwareDialog extends MyDialog
   @Override
   public void onClick( View view )
   {
-    switch ( view.getId() ) {
-      case R.id.firmware_file:
-        if ( mBtnUpload.isChecked() ) {
-          (new FirmwareFileDialog( mContext, this )).show(); // select file from bin directory
-        }
-        break;
-      case R.id.firmware_upload:
-        // mETfile.setEnabled( false );
-        mETfile.setFocusable( false );
-        mETfile.setFocusableInTouchMode( false );
-        // mETfile.setClickable( true );
-        mETfile.setKeyListener( null );
-        break;
-      case R.id.firmware_dump:
-        // mETfile.setEnabled( true );
-        mETfile.setFocusable( true );
-        mETfile.setFocusableInTouchMode( true );
-        // mETfile.setClickable( true );
-        mETfile.setKeyListener( mETkeyListener );
-        break;
-      case R.id.firmware_ok:
-        String filename = null;
-        if ( mETfile.getText() != null ) { 
-          filename = mETfile.getText().toString().trim();
-          if ( filename.length() == 0 ) filename = null;
-        }
-        if ( filename == null ) {
-          TDToast.makeBad( R.string.firmware_file_missing );
+    int vid = view.getId();
+    if ( vid == R.id.firmware_file ) {
+      if ( mBtnUpload.isChecked() ) {
+        (new FirmwareFileDialog( mContext, this )).show(); // select file from bin directory
+      }
+    } else if ( vid == R.id.firmware_upload ) {
+      // mETfile.setEnabled( false );
+      mETfile.setFocusable( false );
+      mETfile.setFocusableInTouchMode( false );
+      // mETfile.setClickable( true );
+      mETfile.setKeyListener( null );
+    } else if ( vid == R.id.firmware_dump ) {
+      // mETfile.setEnabled( true );
+      mETfile.setFocusable( true );
+      mETfile.setFocusableInTouchMode( true );
+      // mETfile.setClickable( true );
+      mETfile.setKeyListener( mETkeyListener );
+    } else if ( vid == R.id.firmware_ok ) {
+      String filename = null;
+      if ( mETfile.getText() != null ) { 
+        filename = mETfile.getText().toString().trim();
+        if ( filename.length() == 0 ) filename = null;
+      }
+      if ( filename == null ) {
+        TDToast.makeBad( R.string.firmware_file_missing );
+        return;
+      }
+      if ( mBtnDump.isChecked() ) {
+        if ( ! filename.endsWith(".bin") ) filename = filename + ".bin";
+        // TDLog.LogFile( "Firmware dump to " + filename );
+        TDLog.v( "Firmware dump to " + filename );
+        // File fp = new File( TDPath.getBinFile( filename ) );
+        File fp = TDPath.getBinFile( filename );
+        if ( fp.exists() ) {
+          TDToast.makeBad( R.string.firmware_file_exists );
           return;
         }
-        if ( mBtnDump.isChecked() ) {
-          if ( ! filename.endsWith(".bin") ) filename = filename + ".bin";
-          // TDLog.LogFile( "Firmware dump to " + filename );
-          TDLog.v( "Firmware dump to " + filename );
-          // File fp = new File( TDPath.getBinFile( filename ) );
-          File fp = TDPath.getBinFile( filename );
-          if ( fp.exists() ) {
-            TDToast.makeBad( R.string.firmware_file_exists );
-            return;
-          }
-          askDump( filename );
-        } else if ( mBtnUpload.isChecked() ) {
-          // TDLog.LogFile( "Firmware upload from " + filename );
-          TDLog.v( "Firmware upload from " + filename );
-          // File fp = new File( TDPath.getBinFile( filename ) );
-          File fp = TDPath.getBinFile( filename );
-          if ( ! fp.exists() ) {
-            TDLog.Error( "non-existent upload firmware file " + filename );
-            return;    
-          }
-          int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
-          // TDLog.LogFile( "Detected Firmware version " + fw );
-          TDLog.v( "Detected Firmware version " + fw );
-	  boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
-          askUpload( filename, fw, check );
+        askDump( filename );
+      } else if ( mBtnUpload.isChecked() ) {
+        // TDLog.LogFile( "Firmware upload from " + filename );
+        TDLog.v( "Firmware upload from " + filename );
+        // File fp = new File( TDPath.getBinFile( filename ) );
+        File fp = TDPath.getBinFile( filename );
+        if ( ! fp.exists() ) {
+          TDLog.Error( "non-existent upload firmware file " + filename );
+          return;    
         }
-        break;
+        int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
+        // TDLog.LogFile( "Detected Firmware version " + fw );
+        TDLog.v( "Detected Firmware version " + fw );
+        boolean check = (fw > 0) && FirmwareUtils.firmwareChecksum( fw, fp );
+        askUpload( filename, fw, check );
+      }
     }
   }
 

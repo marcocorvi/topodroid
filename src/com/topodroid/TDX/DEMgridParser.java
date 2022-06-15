@@ -17,6 +17,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 
 // import java.io.FileReader;
@@ -131,7 +132,7 @@ class DEMgridParser extends ParserDEM
         if ( line.length() == 0 ) continue;
         if ( line.startsWith("#") || line.startsWith("grid") ) continue;
         try { 
-          String[] vals = line.replaceAll("\\s+", " ").split(" ");
+          String[] vals = TDString.splitOnSpaces( line );
           Float.parseFloat( vals[0] );
           ready = true;
         } catch ( NumberFormatException e ) { continue; }
@@ -143,7 +144,7 @@ class DEMgridParser extends ParserDEM
       }
       for ( ; k < mNr2; ++ k ) {
         line = line.trim();
-        String[] vals = line.replaceAll("\\s+", " ").split(" ");
+        String[] vals = TDString.splitOnSpaces( line );
         // TDLog.v("DEM " + j + " " + (mNorth1+j*mDim2) + ": " + line );
         try {
           if ( flip_horz ) {
@@ -189,7 +190,7 @@ class DEMgridParser extends ParserDEM
         if ( line.startsWith("#" ) ) continue; // comment line
         if ( line.startsWith("grid ") ) {
           // TDLog.v("DEM grid: " + line );
-          String[] vals = line.replaceAll("\\s+", " ").split(" ");
+          String[] vals = TDString.splitOnSpaces( line );
           cols = Integer.parseInt( vals[5] ); // ncols
           rows = Integer.parseInt( vals[6] ); // nrows
           xll = Double.parseDouble( vals[1] ); // xcorner
@@ -200,7 +201,7 @@ class DEMgridParser extends ParserDEM
         }
         if ( line.startsWith("grid-flip ") ) {
           // TDLog.v("DEM grid-flip: " + line );
-          String[] vals = line.replaceAll("\\s+", " ").split(" ");
+          String[] vals = TDString.splitOnSpaces( line );
           if ( vals[1].startsWith("vert") ) {  flip_vert = true; }
           else if ( vals[1].startsWith("horiz") ) { flip_horz = true; }
           else { TDLog.Error("DEM unknown flip " + vals[1] ); }
@@ -209,7 +210,7 @@ class DEMgridParser extends ParserDEM
         // try a data line:
         try {
           // TDLog.v("DEM try data: " + line );
-          String[] vals = line.replaceAll("\\s+", " ").split(" ");
+          String[] vals = TDString.splitOnSpaces( line );
           Float.parseFloat( vals[0] );
           break;
         } catch ( NumberFormatException e ) { // ok

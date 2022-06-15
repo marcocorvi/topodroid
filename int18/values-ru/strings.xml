@@ -14,8 +14,9 @@
     <!-- UNUSED string name="desc_areas">Области</string -->
     <string name="desc_menu">Меню</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
+    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
     <string name="new_survey_label">Новая съёмка</string>
@@ -31,7 +32,6 @@
   <!-- UNUSED string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string -->
   <string name="r_continue">ПРОДОЛЖИТЬ</string>
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
 
@@ -49,7 +49,7 @@
 	    Другие настройки связанные с отображением в окне абрисов (размер значков, размер подписей, толщина линий и Т.Д.)
             вы можете изменить под свои нужды./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <!-- NO string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
     <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
     <string name="POINT">ТОЧКА</string>
     <string name="LINE">ЛИНИЯ</string>
@@ -261,8 +261,6 @@
     <string name="loop_none">нет колец</string>
     <!-- UNUSED string name="long_lat">Широта-Долгота</string -->
 
-    <!-- OK string name="line_delete">Удалить линию</string -->
-
     <string name="error_m">Ошибка [м]</string>
     <string name="fmt_error_m">Ошибка %1$.1f м</string>
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
@@ -354,7 +352,7 @@
     <string name="no_data_reduction">Нет сокращения данных</string>
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
-    <string name="no_device_found">Прибор не обнаружен</string>
+    <!-- UNUSED string name="no_device_found">Прибор не обнаружен</string -->
     <string name="no_feature_audio">Аудио не поддерживается</string>
     <string name="no_feature_pdf">PDF не поддерживается</string>
     <string name="no_gms">Отсутствуют данные для калибровки.\nИспользуйте кнопку Скачать</string>
@@ -362,7 +360,7 @@
     <string name="no_leg_first">Выбор не начинается с замера между пикетами</string>
     <string name="no_leg_intersection">Разрез не пересекает пикет</string>
     <string name="no_location_data">Нет данных о местоположении</string>
-    <string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string>
+    <!-- UNUSED string name="no_paired_device">Отсутствует привязанный прибор.\nПросканируйте и привяжите DistoX</string -->
     <string name="no_photos">В съёмке нет фото</string>
     <string name="no_plots">В съёмке нет абрисов \nДля создания используйте кнопку Добавить</string>
     <string name="no_profile_overview">Нет обзора для спроецированного профиля</string>
@@ -377,16 +375,16 @@
     <string name="no_undelete_paste">Нет записей для восстановления/вставки</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Уклон %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <!-- OK string name="menu_3d">3D</string -->
+    <!-- TODO string name="menu_3d">3D</string -->
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_audio">АУДИО</string>
     <!-- UNUSED string name="menu_attach">СОЕДИНИТЬ</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">ОЧИСТИТЬ БЭКАП</string>
+    <!-- UNUSED string name="menu_backups">ОЧИСТИТЬ БЭКАП</string -->
     <string name="menu_calib_check">КОНТРОЛЬ КАЛИБ.</string>
     <string name="menu_close">ЗАКРЫТЬ</string>
     <!-- UNUSED string name="menu_clear">ОЧИСТИТЬ</string -->
@@ -413,7 +411,7 @@
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
     <string name="menu_packets">ПАКЕТЫ</string>
-    <string name="menu_pair">СОПРЯЖЕНИЕ</string>
+    <!-- UNUSED string name="menu_pair">СОПРЯЖЕНИЕ</string -->
     <string name="menu_palette">ПАЛИТРА</string>
     <string name="menu_photo">ФОТО</string>
     <string name="menu_sensor">ДАТЧИКИ</string>
@@ -430,9 +428,9 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Милиметровая-бумага</string>
 
-    <string name="start_scan">Начать сканирование</string>
-    <string name="stop_scan">Остановить сканирование</string>
-    <string name="title_scan">Сканировать BLE</string>
+    <!-- UNUSED string name="start_scan">Начать сканирование</string -->
+    <!-- UNUSED string name="stop_scan">Остановить сканирование</string -->
+    <!-- UNUSED string name="title_scan">Сканировать BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Сбой сканирования BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Сбой BLE</string -->
     <string name="ble_no_remote">Нет беспроводного устройства</string>
@@ -481,13 +479,12 @@
     <string name="popup_cont_continue">Продолжить</string>
 
     <string name="connection_error">Ошибка соединения</string>
-    <string name="connecting">Подключение к &#8230;</string>
+    <!-- UNUSED string name="connecting">Подключение к &#8230;</string -->
     <!-- UNUSED string name="connected_none">Не соединено</string -->
     <!-- UNUSED string name="connected_already">Уже соединено</string -->
 
-    <string name="not_available">Bluetooth недоступен</string>
+    <!-- UNUSED string name="not_available">Bluetooth недоступен</string -->
     <string name="not_enabled">Bluetooth выключен</string>
-    <!-- OK string name="not_connected">Нет соединения</string -->
     <!-- UNUSED string name="not_implemented">Пока не реализовано</string -->
     <string name="null_bitmap">null bitmap [OOM error]</string>
     <string name="photo">фото</string>
@@ -582,7 +579,7 @@
     <string name="survey_split">Разорвать съёмку ?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: не соединенный пикет</string>
     <string name="survey_not_extend">ВНИМАНИЕ: замеры без направления развертки</string>
-    <string name="survey_not_attached_extend">ВНИМАНИЕ: не соединенный пикет и замеры без направления развертки</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ВНИМАНИЕ: не соединенный пикет и замеры без направления развертки</string -->
     <string name="survey_no_data_reduction">ВНИМАНИЕ: нет сокращения данных</string>
     <string name="survey_not_saved">ВНИМАНИЕ: информация о съёмке не сохранена</string>
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -689,7 +686,7 @@
     <!-- UNUSED string name="h_section">Гор-СЕЧЕНИЕ</string -->
     <!-- UNUSED string name="landscape">альбомная</string -->
 
-    <!-- OK string name="distox_err_ok">OK</string -->
+    <!-- TODO string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_headtail_io">DistoX ошибка I/O </string>
     <string name="distox_err_headtail_eof">Ошибка чтения памяти DistoX</string>
@@ -699,7 +696,7 @@
     <!-- UNUSED string name="ask_reset">Сбросить память DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Закрыть съёмку?</string -->
     <string name="ask_gps_service">Включить сервис GPS?</string>
-    <string name="ask_backups_clear">Удалить резервные копии абрисов?</string>
+    <!-- UNUSED string name="ask_backups_clear">Удалить резервные копии абрисов?</string -->
     <string name="ask_manual_update">Обновить перевод руководства пользователя?\nТекущая v. %1$d Установленная v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Добавить  </string -->
@@ -723,9 +720,9 @@
     <string name="button_evalm"     >M      </string>
     <string name="button_evalroll"  >Разворот</string>
     <string name="button_eval_cal"  >Вычислить с учетом калиб.</string>
-    <!-- OK string name="button_gps_start" >GPS       </string -->
+    <!-- TODO string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Стоп      </string -->
-    <!-- DONT TRANSLATE string name="button_help">Помощь</string -->
+    <!-- NO string name="button_help">Помощь</string -->
     <string name="button_manual"    >Руководство</string>
     <!-- UNUSED string name="button_measure"   >Изменить   </string -->
     <!-- UNUSED string name="button_photo"   >Фото</string -->
@@ -741,7 +738,7 @@
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
-    <!-- OK string name="button_ok"        >OK        </string -->
+    <!-- TODO string name="button_ok"        >OK        </string -->
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
@@ -904,7 +901,7 @@
     <string name="help_measure_undo">Удалить последнюю точку полилинии</string>
     
     <string name="help_audio">Список аудио заметок</string>
-    <string name="help_backups">Удалить резервные копии абрисов</string>
+    <!-- UNUSED string name="help_backups">Удалить резервные копии абрисов</string -->
     <string name="help_calib_check">Контрольные замеры</string>
     <string name="help_close">Закрыть Окно</string>
     <string name="help_close_app">Закрыть приложение</string>
@@ -977,12 +974,12 @@
     <string name="help_zoom_fit">Вместить абрис в экран</string>
    
     <string name="help_line_point">Действия с линиями и точками: соединить, разорвать, обрезать, удалить</string>
-<!-- OK
-    <string name="help_to_point">Притянуть выбранную точку к ближайшей точке</string>
-    <string name="help_split_point">Разбить в этой точке на две [линии/области]</string>
-    <string name="help_split_line">Разбить линию на две в этой точке</string>
-    <string name="help_kink">Использовать прямую линию в точке [линия/область]</string>
--->
+ 
+    <!-- UNUSED string name="help_to_point">Притянуть выбранную точку к ближайшей точке</string -->
+    <!-- UNUSED string name="help_split_point">Разбить в этой точке на две [линии/области]</string -->
+    <!-- UNUSED string name="help_split_line">Разбить линию на две в этой точке</string -->
+    <!-- UNUSED string name="help_kink">Использовать прямую линию в точке [линия/область]</string -->
+
     <string name="help_manual_calibration">Ручная калибровка инструментов</string>
     <string name="help_note_plot">Редактировать свойства выбранного абриса</string>
     <!-- UNUSED string name="help_save">Сохранить нзменения информации о съёмке</string -->
@@ -1018,7 +1015,7 @@
     <string name="help_add_equate">Добавить соединение съёмок</string>
     <string name="help_equates">Список соединений съёмки</string>
 
-    <string name="export_bgcolor">Цвет фона</string>
+    <!-- UNUSED string name="export_bgcolor">Цвет фона</string -->
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
@@ -1032,7 +1029,7 @@
     <string name="export_prefix_hint">префикс</string>
     <string name="export_suffix_hint">суффикс</string>
     <string name="export_roundtrip">Roundtrip</string>
-    <string name="export_scale_png">Разрешение</string>
+    <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
     <string name="export_splays">Сплеи</string>
     <string name="export_splays_named">Именованые сплеи</string>
@@ -1135,7 +1132,7 @@
 
     <string name="title_settings_sketch">TopoDroid настройки 3d абриса</string>
     <string name="title_settings_survey">TopoDroid настройки топосъёмки</string>
-    <string name="title_settings_splay">настройки сплеев в TopoDroid</string>
+    <!-- UNUSED string name="title_settings_splay">настройки сплеев в TopoDroid</string -->
     <string name="title_settings_shot">TopoDroid настройки данных пикетов</string>
     <string name="title_settings_units">TopoDroid настройки единиц измерения</string>
     <string name="title_settings_location">TopoDroid настройки местоположения</string>
@@ -1196,15 +1193,16 @@
   <string name="pref_cat_drawing">НАСТРОЙКИ РИСОВАНИЯ </string>
   <string name="pref_cat_import_export">НАСТРОЙКИ ИМПОРТА-ЭКСПОРТА</string>
   <string name="pref_cat_exportimport">ИМПОРТ</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+
+  <!-- NO string name="pref_cat_exportth">Therion</string -->
+  <!-- NO string name="pref_cat_exportdat">Compass</string -->
+  <!-- NO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- NO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- NO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- NO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- NO string name="pref_cat_exportpng">PNG</string -->
+  <!-- NO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- NO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">НАСТРОЙКИ КАЛИБРОВКИ</string>
   <!-- UNUSED string name="pref_cat_min_algo">АЛГОРИТМ МИНИМИЗАЦИИ</string -->
@@ -1213,8 +1211,6 @@
   <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
   <!-- UNUSED string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string -->
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
-  <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
-  <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
   <string name="pref_locale_summary">Переключить язык интерфейса программы</string>
   <string name="pref_orientation_title">Ориентация экрана</string>
@@ -1559,8 +1555,8 @@
   <string name="pref_backup_number_summary">Количество резервных копий абрисов</string>
   <string name="pref_backup_interval_title">Интервал сохранения</string>
   <string name="pref_backup_interval_summary">Минимальный временной интервал между резервным копированием абрисов [с]</string>
-  <string name="pref_backups_clear_title">Очистить бэкапы</string>
-  <string name="pref_backups_clear_summary">Включить меню очистки резервных копии абрисов</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Очистить бэкапы</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Включить меню очистки резервных копии абрисов</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Области xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Сохранить области как в xtherion</string -->
   <string name="pref_therion_splays_title">Боковые замеры в абрисе Therion</string>
@@ -1705,7 +1701,7 @@
     <string name="perm_microphone">\nМикрофон</string>
 
 
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid это ПО с открытым исходным кодом для топосъёмки пещер с использованием прибора DistoX, BRIC4 или Sap5.
 \n\nОтсутствие гарантий: используя данное ПО вы соглашаетесть с тем что автор не несёт ответственность за возможную потерю данных.
@@ -1787,6 +1783,7 @@
     <string name="export_failed">Ошибка экспорта</string>
    
     <!-- 3D VIEWER strings -->
+    <!-- TODO string name="cbtn_bind">Rebind</string -->
 
     <string name="cmenu_open">Открыть файл</string>
     <string name="cmenu_reset">Сброс</string>
@@ -1801,9 +1798,10 @@
     <string name="cmenu_ico">Ico диаграмма</string>
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
+    <!-- TODO string name="cmenu_sketch">SKETCHES</string -->
     <!-- UNUSED string name="cmenu_fractal">Кол-во фракталофф</string -->
 
-    <string name="fractal_title">Кол-во фракталов</string>
+    <!-- UNUSED string name="fractal_title">Кол-во фракталов</string -->
     <string name="info_title">ИНФО</string>
     <string name="info_axes">Оси: синий Север, зеленый Восток</string>
     <string name="info_grid">Шаг сетки [м]</string>
@@ -1842,7 +1840,7 @@
     <!-- UNUSED string name="proj_near">Вблизи</string -->
     <!-- UNUSED string name="proj_far">Вдали</string -->
 
-    <string name="query" formatted="false">Съёмки: %d Замеры: %d Пикеты: %d\nДлина: %d Глубина: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Съёмки: %d Замеры: %d Пикеты: %d\nДлина: %d Глубина: %d</string -->
     <!-- UNUSED string name="cno_files">Нет файлов</string -->
     <string name="reading_file">Считывание файла %1$s</string>
     <string name="clear">Очистить</string>
@@ -1861,11 +1859,11 @@
     <string name="surface_gps">GPS трек</string>
     <string name="surface_east">Восток</string>
     <string name="surface_north">Север</string>
-    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <!-- TODO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">загрузить</string>
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <string name="texture_load">загрузить текстуру</string>
     <string name="texture_failed">Ошибка загрузки текстуры</string>
     <string name="texture_ok">Прочитать файл текстуры</string>
@@ -1914,11 +1912,11 @@
 
     <string name="walls_title">СТЕНЫ</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
+    <!-- NO string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
     <string name="walls_bubble">Пузырь</string>
     <string name="walls_tube">Труба</string>
-    <!-- OK string name="walls_delaunay">Делане</string -->
+    <!-- NO string name="walls_delaunay">Делане</string -->
 
     <string name="powercrust_few_splays">Powercrust: недостаточно боковых замеров</string>
     <string name="powercrust_failed">Powercrust ошибка</string>
@@ -1932,13 +1930,17 @@
     <string name="no_model">Нет 3D модели</string>
     <string name="no_topodroid_model">Модель не из TopoDroid</string>
 
-    <string name="error_file_not_found">Ошибка: файл не обнаружен %1$s</string>
-    <string name="error_file_not_readable">Ошибка: файл не читается %1$s</string>
+    <!-- UNUSED string name="error_file_not_found">Ошибка: файл не обнаружен %1$s</string -->
+    <!-- UNUSED string name="error_file_not_readable">Ошибка: файл не читается %1$s</string -->
     <string name="error_file_read">Ошибка: не удалось прочитать файл %1$s </string>
     <string name="error_survey_read">Ошибка: не удалось прочитать съёмку %1$s </string>
-    <string name="error_io_exception">Ошибка: IO ввода-вывода %1$s</string>
+    <!-- UNUSED string name="error_io_exception">Ошибка: IO ввода-вывода %1$s</string -->
     <string name="error_parser_error">Ошибка: ошибка парсера %1$s</string>
     <string name="error_export_failed">Ошибка: неудачный экспорт %1$s</string>
+    <!-- TODO string name="unsupported_format">Unsupported file format</string -->
+
+    <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
+    <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
     <string name="warning_not_overwrite">Внимание: не перезаписывать существующий файл %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
@@ -1952,7 +1954,7 @@
     <string name="warning_no_parent">Внимание: невозможно перейти на каталог выше</string>
     <string name="no_permissions">Приложение не может работать без необходимых разрешений</string>
 
-    <string name="done_fractals">Завершено fractals dims</string>
+    <!-- UNUSED string name="done_fractals">Завершено fractals dims</string -->
     <string name="done_convexhull">Завершено convex-hull стены</string>
     <string name="fail_convexhull">Ошибка convex-hull стены</string>
     <string name="done_powercrust">Завершено powercrust стены</string>

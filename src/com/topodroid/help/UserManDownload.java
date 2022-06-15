@@ -72,7 +72,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
           while ( ( ze = zin.getNextEntry() ) != null ) {
             String name = ze.getName();
             if ( ! ze.isDirectory() ) { // normal file
-              TDLog.Log( TDLog.LOG_PREFS, "Zip entry \"" + name + "\"" );
+              // TDLog.Log( TDLog.LOG_PREFS, "Zip entry \"" + name + "\"" );
               int pos = name.lastIndexOf('/');
 	      if ( pos > 0 ) name = name.substring(pos+1);
 	      if ( ! name.startsWith("README") ) {
@@ -88,7 +88,7 @@ public class UserManDownload extends AsyncTask< String, Integer, Integer >
                 // if ( file.getPath().endsWith("png") ) TDLog.v( "file " + file.getPath() + " " + size );
 	      }
             } else { // ze directory: not really an error
-              TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );
+              // TDLog.Log( TDLog.LOG_PREFS, "Zip dir entry \"" + name + "\"" );
 	    }
 	  }
           ret = 1;

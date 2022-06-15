@@ -17,6 +17,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 
 // import java.io.FileReader;
@@ -124,7 +125,7 @@ class DEMasciiParser extends ParserDEM
         int j = mNr2-1; // rotate by 180 degrees the map stored in mZ
         for ( ; k < rows && j >= 0; ++k, --j ) {
           String line = mBr.readLine();
-          String[] vals = line.replaceAll("\\s+", " ").split(" ");
+          String[] vals = TDString.splitOnSpaces( line );
           if ( flip_horz ) {
             for ( int ii=0; ii<mNr1; ++ii ) mZ[j*mNr1 + mNr1-1-ii] = Float.parseFloat( vals[xoff+ii] );
           } else {
@@ -161,23 +162,23 @@ class DEMasciiParser extends ParserDEM
       // FileReader fr = TDFile.getFileReader( filename );
       // BufferedReader mBr = new BufferedReader( mIsr );
       String line = mBr.readLine();
-      String[] vals = line.replaceAll("\\s+", " ").split(" ");
+      String[] vals = TDString.splitOnSpaces( line );
       cols = Integer.parseInt( vals[1] ); // ncols
       line = mBr.readLine();
-      vals = line.replaceAll("\\s+", " ").split(" ");
+      vals = TDString.splitOnSpaces( line );
       rows = Integer.parseInt( vals[1] ); // nrows
       line = mBr.readLine();
-      vals = line.replaceAll("\\s+", " ").split(" ");
+      vals = TDString.splitOnSpaces( line );
       xll  = Double.parseDouble( vals[1] ); // xllcorner
       line = mBr.readLine();
-      vals = line.replaceAll("\\s+", " ").split(" ");
+      vals = TDString.splitOnSpaces( line );
       yll  = Double.parseDouble( vals[1] ); // yllcorner
       line = mBr.readLine();
-      vals = line.replaceAll("\\s+", " ").split(" ");
+      vals = TDString.splitOnSpaces( line );
       mDim1 = Double.parseDouble( vals[1] ); // cellsize
       mDim2 = mDim1;
       line = mBr.readLine();
-      vals = line.replaceAll("\\s+", " ").split(" ");
+      vals = TDString.splitOnSpaces( line );
       nodata = Double.parseDouble( vals[1] ); // nodata.value
       // fr.close();
     } catch ( IOException e1 ) { 

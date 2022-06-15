@@ -282,43 +282,36 @@ public class SensorActivity extends Activity
   public void onClick( View view )
   {
     String error;
-    switch (view.getId()) {
-      case R.id.sensor_ok:
-      {
-        String type    = mETtype.getText().toString().trim();
-        String value   = mETvalue.getText().toString().trim();
-        String comment = mETcomment.getText().toString().trim();
-        if ( type.length() == 0 ) {
-          error = getResources().getString( R.string.error_sensor_required );
-          mETtype.setError( error );
-          return;
-        }
-        if (  value.length() == 0 ) {
-          error = getResources().getString( R.string.error_value_required );
-          mETvalue.setError( error );
-          return;
-        }
-        // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + type + " " + value );
-        Intent intent = new Intent();
-        intent.putExtra( TDTag.TOPODROID_SENSOR_TYPE, type );
-        intent.putExtra( TDTag.TOPODROID_SENSOR_VALUE, value );
-        intent.putExtra( TDTag.TOPODROID_SENSOR_COMMENT, comment );
-        setResult( RESULT_OK, intent );
-        finish();
-        break;
+    int vid = view.getId(); 
+    if ( vid == R.id.sensor_ok ) {
+      String type    = mETtype.getText().toString().trim();
+      String value   = mETvalue.getText().toString().trim();
+      String comment = mETcomment.getText().toString().trim();
+      if ( type.length() == 0 ) {
+        error = getResources().getString( R.string.error_sensor_required );
+        mETtype.setError( error );
+        return;
       }
-      case R.id.sensor_cancel:
-      {
-        setResult( RESULT_CANCELED );
-        if ( mSensorType != -1 ) {
-          mSensorManager.unregisterListener(mListener);
-        }
-        finish();
-        break;
+      if (  value.length() == 0 ) {
+        error = getResources().getString( R.string.error_value_required );
+        mETvalue.setError( error );
+        return;
       }
-      default:
-        setSensor();
-        break;
+      // TDLog.Log( TDLog.LOG_SENSOR, "sensor " + type + " " + value );
+      Intent intent = new Intent();
+      intent.putExtra( TDTag.TOPODROID_SENSOR_TYPE, type );
+      intent.putExtra( TDTag.TOPODROID_SENSOR_VALUE, value );
+      intent.putExtra( TDTag.TOPODROID_SENSOR_COMMENT, comment );
+      setResult( RESULT_OK, intent );
+      finish();
+    } else if ( vid == R.id.sensor_cancel ) {
+      setResult( RESULT_CANCELED );
+      if ( mSensorType != -1 ) {
+        mSensorManager.unregisterListener(mListener);
+      }
+      finish();
+    } else {
+      setSensor();
     }
   }  
     

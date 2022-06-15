@@ -111,7 +111,7 @@ class ParserCaveSniper extends ImportParser
       TDLog.Error( "ERROR " + mLineCnt + ": " + line );
       throw new ParserException();
     }
-    TDLog.Log( TDLog.LOG_THERION, "Parser CaveSniper shots "+ shots.size() +" splays "+ splays.size()  );
+    // TDLog.Log( TDLog.LOG_THERION, "Parser CaveSniper shots "+ shots.size() +" splays "+ splays.size()  );
     // TDLog.v( "Parser CaveSniper shots "+ shots.size() + " splays "+ splays.size() );
   }
 

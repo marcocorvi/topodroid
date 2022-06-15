@@ -14,7 +14,7 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menü</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Erneut ZURÜCK drücken zum verlassen</string>
 
@@ -32,7 +32,6 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <!-- UNUSED string name="r_disclaimer">Ich bin einverstanden, dass der/die Autor(en) von TopoDroid nicht haftbar sind für jeglichen Datenverlust.</string -->
   <string name="r_continue">WEITER</string>
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">TopoDroid wurde auf eine neue Version aktualisiert.\nSollen die Zeichensymbole aktualisiert werden?</string -->
     <string name="symbols_ask">Zeichenwerkzeuge von v.%2$s auf v.%1$s aktualisieren?</string>
 
@@ -48,7 +47,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="setup_done">Grundeinstellungen vorgenommen.\n\n
         Bei Problemen mit der Verbindung mit dem DistoX die Verbindungsart auf \'Unsicher\' stellen.
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <!-- NO string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PUNKTE</string>
     <string name="LINE">LINIEN</string>
@@ -152,7 +151,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="auto">automatisch</string>
     <string name="linear">linear</string>
     <string name="non_linear">nicht-linear</string>
-    <string name="algo_minimum">minimum</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
 <!-- DistoX DEVICE STUFF -->
     <!-- UNUSED string name="device_algo_failed">Bestimmung fehlgeschlagen.\nVerwendung von linearem Algorithmus</string -->
     <string name="device_address">Adresse %1$s</string>
@@ -358,7 +357,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="no_data_reduction">Datenreduktion nicht möglich</string>
     <string name="no_db">Keine Datenbank</string>
     <string name="no_device_address">Kein Gerät gewählt</string>
-    <string name="no_device_found">Kein Gerät gefunden</string>
+    <!-- UNUSED string name="no_device_found">Kein Gerät gefunden</string -->
     <string name="no_feature_audio">Audio nicht unterstützt</string>
     <string name="no_feature_pdf">PDF nicht unterstützt</string>
     <string name="no_gms">Kalibrierung mit keinen Daten</string>
@@ -366,7 +365,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="no_leg_first">Auswahl muss mit Messlinie starten</string>
     <string name="no_leg_intersection">Schnittlinie kreuzt keine Vermessung</string>
     <string name="no_location_data">Keine Ortsdaten</string>
-    <string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string>
+    <!-- UNUSED string name="no_paired_device">Kein gekoppeltes DistoX Gerät</string -->
     <string name="no_photos">Vermessung hat keine Fotos</string>
     <string name="no_plots">Vermessung hat keine Skizzen</string>
     <string name="no_profile_overview">Kein Überblick für projizierte Profile</string>
@@ -381,7 +380,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
     <string name="format_measure_profile">Dist %1$.2f (Total %2$.2f) &#8736; %5$.1f° Dx %3$.2f Dy %4$.2f</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
 <!-- MENUS
  detach: disconnect from the DistoX device
@@ -396,7 +395,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- UNUSED string name="menu_attach">VERBINDEN</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">BACKUPS LÖSCHEN</string>
+    <!-- UNUSED string name="menu_backups">BACKUPS LÖSCHEN</string -->
     <string name="menu_calib_check">KALIB. TEST</string>
     <string name="menu_close">SCHLIEßEN</string>
     <!-- UNUSED string name="menu_clear">SKIZZE LÖSCHEN</string -->
@@ -423,7 +422,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="menu_options">EINSTELLUNGEN</string>
     <string name="menu_overview">ÜBERBLICK</string>
     <string name="menu_packets">DATENPAKETE</string>
-    <string name="menu_pair">VERBINDEN</string>
+    <!-- UNUSED string name="menu_pair">VERBINDEN</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSORWERTE</string>
@@ -440,9 +439,9 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier-Massstab</string>
     
-    <string name="start_scan">BLE-Scan starten</string>
-    <string name="stop_scan">BLE-Scan stoppen</string>
-    <string name="title_scan">BLE-Scan</string>
+    <!-- UNUSED string name="start_scan">BLE-Scan starten</string -->
+    <!-- UNUSED string name="stop_scan">BLE-Scan stoppen</string -->
+    <!-- UNUSED string name="title_scan">BLE-Scan</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE scan fehlgeschlagen</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE Fehler</string -->
     <string name="ble_no_remote">Kein BLE-Gerät gefunden</string>
@@ -491,10 +490,10 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="popup_cont_continue">Linie Fortsetzen</string>
 
     <string name="connection_error">Verbindungsfehler</string>
-    <string name="connecting">Verbinde &#8230;</string>
+    <!-- UNUSED string name="connecting">Verbinde &#8230;</string -->
     <!-- UNUSED string name="connected_none">Nicht verbunden</string -->
     <!-- UNUSED string name="connected_already">Bereits verbunden</string -->
-    <string name="not_available">Bluetooth nicht verfügbar</string>
+    <!-- UNUSED string name="not_available">Bluetooth nicht verfügbar</string -->
     <!-- UNUSED string name="not_connected">Nicht verbinden</string -->
     <string name="not_enabled">Bluetooth nicht aktiviert</string>
 
@@ -592,7 +591,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="survey_split">Vermessung teilen?</string>
     <string name="survey_not_attached">WARNUNG: Unverbundene Messungen</string>
     <string name="survey_not_extend">WARNUNG: Nicht definierte Ausrichtung im Seitenriss</string>
-    <string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen mit undefinierter Ausrichtung</string>
+    <!-- UNUSED string name="survey_not_attached_extend">WARNUNG: Nicht verbundene Messungen mit undefinierter Ausrichtung</string -->
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -715,7 +714,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- UNUSED string name="ask_reset">DistoX zurücksetzen?</string -->
     <!-- UNUSED string name="ask_close_survey">Vermessung schließen?</string -->
     <string name="ask_gps_service">GPS aktiveren?</string>
-    <string name="ask_backups_clear">Skizzenbackups löschen?</string>
+    <!-- UNUSED string name="ask_backups_clear">Skizzenbackups löschen?</string -->
     <string name="ask_manual_update">Übersetztes Handbuch updaten?\nAktuell v%1$d Installiert v%2$d</string>
 
     <!-- UNUSED string name="button_add"       >Erstellen       </string -->
@@ -790,7 +789,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- UNUSED string name="button_stop"      >Stop</string -->
     <string name="button_upload"    >Schreiben</string>
     <string name="button_view"      >Anzeigen      </string>
-    <!-- UNUSED string name="button_zoomfit"   >Grösse anpassen  </string -->
+    <!-- UNUSED string name="button_zoomfit"   >Größe anpassen  </string -->
     <!-- UNUSED string name="button_landscape" >Querformat </string -->
     <!-- UNUSED string name="button_portrait"  >Hochformat  </string -->
     <string name="button_splays">Hilfszüge</string>
@@ -920,7 +919,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="help_measure_undo">Letzten Polygonzug-Punkt löschen</string>
 
     <string name="help_audio">Audioaufnahmen</string>
-    <string name="help_backups">Skizzenbackups löschen</string>
+    <!-- UNUSED string name="help_backups">Skizzenbackups löschen</string -->
     <string name="help_calib_check">Testmessungen</string>
     <string name="help_close">Fenster schließen</string>
     <string name="help_close_app">Beenden</string>
@@ -1035,7 +1034,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="help_add_equate">Verbindungen hinzufügen</string>
     <string name="help_equates">Verbindungspunkte</string>
 
-    <string name="export_bgcolor">Hintergrundfarbe</string>
+    <!-- UNUSED string name="export_bgcolor">Hintergrundfarbe</string -->
     <string name="export_config">Therion Konfiguration</string>
     <string name="export_csv_rawdata">Rohdaten</string>
     <string name="export_dxf_blocks">DXF Hilfslinienpunkte</string>
@@ -1049,7 +1048,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- TODO string name="export_prefix_hint">prefix</string -->
     <!-- TODO string name="export_suffix_hint">suffix</string -->
     <string name="export_roundtrip">Rundschluss</string>
-    <string name="export_scale_png">Auflösung</string>
+    <!-- UNUSED string name="export_scale_png">Auflösung</string -->
     <string name="export_scale_th">Massstab 1 :</string>
     <string name="export_splays">Hilfslinien</string>
     <string name="export_splays_named">Benannte Hilfslinien</string>
@@ -1153,7 +1152,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
 
     <string name="title_settings_sketch">Einstellungen: 3D</string>
     <string name="title_settings_survey">Einstellungen: Vermessung</string>
-    <string name="title_settings_splay">Einstellungen: Hilfslinien</string>
+    <!-- UNUSED string name="title_settings_splay">Einstellungen: Hilfslinien</string -->
     <string name="title_settings_shot">Einstellungen: Daten</string>
     <string name="title_settings_units">Einstellungen: Einheiten</string>
     <string name="title_settings_location">Einstellungen: Koordinaten</string>
@@ -1215,15 +1214,15 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_cat_drawing">Skizzen</string>
   <string name="pref_cat_import_export">Import/Export</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <!-- TODO string name="pref_cat_exportth">Therion</string -->
+  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
+  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
+  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">Kalibrierung</string>
   <string name="pref_cat_device">Verbindung</string>
@@ -1332,7 +1331,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_svg_stationsize_title">Messpunktgröße</string>
   <string name="pref_svg_stationsize_summary">Textgröße der Messpunktnamen</string>
   <string name="pref_svg_labelsize_title">Beschriftungsgrösse</string>
-  <string name="pref_svg_labelsize_summary">Grösse des Beschriftungstextes</string>
+  <string name="pref_svg_labelsize_summary">Größe des Beschriftungstextes</string>
   <string name="pref_kml_stations_title">KML/GeoJson: Messpunkte</string>
   <string name="pref_kml_stations_summary">Messpunkte zu KML/GeoJson Export hinzufügen</string>
   <string name="pref_kml_splays_title">KML/GeoJson: Hilfslinien</string>
@@ -1564,14 +1563,14 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_checkAttached_summary">Prüfe ob alle Messpunkte verbunden sind</string>
   <string name="pref_checkExtend_title">Messlinien Seitenriss-Ausrichtung Check</string>
   <string name="pref_checkExtend_summary">Prüfe ob alle Messlinien eine Ausrichtung im Seitenriss haben</string>
-  <string name="pref_toolbarSize_title">Icon Grösse</string>
-  <string name="pref_toolbarSize_summary">Grösse der Icons in der Leiste</string>
+  <string name="pref_toolbarSize_title">Icon Größe</string>
+  <string name="pref_toolbarSize_summary">Größe der Icons in der Leiste</string>
   <string name="pref_backup_number_title">Anzahl Backups</string>
   <string name="pref_backup_number_summary">Anzahl Skizzenbackups</string>
   <string name="pref_backup_interval_title">Backup Intervall</string>
   <string name="pref_backup_interval_summary">Minimales Intervall zwischen zwei Backups [s]</string>
-  <string name="pref_backups_clear_title">Backups löschen</string>
-  <string name="pref_backups_clear_summary">Backups löschen Menueintrag aktiv</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Backups löschen</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Backups löschen Menueintrag aktiv</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion Flächen</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Flächen wie xtherion speichern</string -->
   <string name="pref_therion_splays_title">Therion Hilfszüge</string>
@@ -1666,6 +1665,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_walls_xstep_summary">Abstand der automatischen Zwischenpunkte [m]</string>
 -->
 
+<!-- DONT_TRANSLATE
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo Factor (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
@@ -1674,6 +1674,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+-->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Log Output</string>
@@ -1729,7 +1730,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid is eine Open-Source Android Applikation zur Vermessung von Höhlen m mit dem DistoX.
 \n\nKeine Garantie: Der Autor ist nicht verantwortlich für jeglichen Datenverlust oder andere Schäden.
@@ -1871,7 +1872,7 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
 
-    <!-- TODO string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
+    <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <!-- TODO string name="read_survey">Read survey %1$s\n</string -->
@@ -1890,11 +1891,11 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- TODO string name="surface_gps">GPS track</string -->
     <!-- TODO string name="surface_east">East</string -->
     <!-- TODO string name="surface_north">North</string -->
-    <!-- OK string name="dem_file">%1$s</string -->
+    <!-- TODO string name="dem_file">%1$s</string -->
     <!-- TODO string name="dem_load">Load DEM</string -->
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">Load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1952,11 +1953,11 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
 
     <!-- TODO string name="walls_title">WALLS</string -->
     <!-- TODO string name="walls_convexhull">Convex Hull</string -->
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
+    <!-- NO string name="walls_powercrust">Powercrust</string -->
     <!-- TODO string name="walls_hull">Hull</string -->
     <!-- TODO string name="walls_bubble">Bubble</string -->
     <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
     <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
@@ -1970,18 +1971,17 @@ Wichtig: Dateien in diesem neuen Verzeichnis werden gelöscht, wenn TopoDroid de
     <!-- TODO string name="no_model">No 3D model</string -->
     <!-- TODO string name="no_topodroid_model">Not a TopoDroid model</string -->
 
-    <!-- TODO string name="error_file_not_found">Error: file %1$s not found</string -->
-    <!-- TODO string name="error_file_not_readable">Error: file %1$s not readable</string -->
+    <!-- UNUSED string name="error_file_not_found">Error: file %1$s not found</string -->
+    <!-- UNUSED string name="error_file_not_readable">Error: file %1$s not readable</string -->
     <!-- TODO string name="error_file_read">Error: file %1$s failed read</string -->
     <!-- TODO string name="error_survey_read">Error: survey %1$s failed read</string -->
-    <!-- TODO string name="error_io_exception">Error: IO exception %1$s</string -->
+    <!-- UNUSED string name="error_io_exception">Error: IO exception %1$s</string -->
     <!-- TODO string name="error_parser_error">Error: parsing %1$s</string -->
     <!-- TODO string name="error_export_failed">Error: export %1$s failed</string -->
     <!-- TODO string name="unsupported_format">Unsupported file format</string -->
 
-
-    <!-- TODO string name="export_gltf_ok">Exported glTF file</string -->
-    <!-- TODO string name="export_gltf_fail">Failed glTf export</string -->
+    <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
+    <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
     <!-- TODO string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->

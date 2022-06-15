@@ -56,7 +56,8 @@ public class TDPrefCat
   public static final int PREF_GEEK_LINE          = 36; 
   public static final int PREF_GEEK_DEVICE        = 37; 
   public static final int PREF_GEEK_IMPORT        = 38; 
-  public static final int PREF_CATEGORY_LOG       = 39; // this must be the last
+  // public static final int PREF_CATEGORY_LOG       = 39; // this must be the last NO_LOGS
+  public static final int PREF_CATEGORY_MAX = 38; // last category
 
   static int[] mTitleRes = {
     R.string.title_settings_main,     // 0

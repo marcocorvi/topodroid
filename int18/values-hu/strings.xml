@@ -14,8 +14,9 @@
     <!-- UNUSED string name="desc_areas">Területek</string -->
     <string name="desc_menu">Menü</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
+    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
 
     <string name="new_survey_label">Új mérés</string>
@@ -31,7 +32,6 @@ A részletekért keresse fel a weboldalakat.\n
   <!-- UNUSED string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string -->
   <string name="r_continue">FOLYTATÁS</string>
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
 
@@ -153,7 +153,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="auto">automatikus</string>
     <string name="linear">lineáris</string>
     <string name="non_linear">nem lineáris</string>
-    <string name="algo_minimum">minimum</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
    
     <!-- UNUSED string name="device_algo_failed">Az algoritmus automatikus kiválasztása nem sikerült\nLineáris eljárás használata</string -->
     <string name="device_address">Cím %1$s</string>
@@ -360,7 +360,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
-    <string name="no_device_found">Nem talált műszert</string>
+    <!-- UNUSED string name="no_device_found">Nem talált műszert</string -->
     <string name="no_feature_audio">Hang nem támogatott</string>
     <string name="no_feature_pdf">PDF nem támogatott</string>
     <string name="no_gms">Nincsenek kalibrációs adatok.\nTöltsd le az adatokat </string>
@@ -368,7 +368,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_leg_first">A kiválasztás nem poligon méréssel kezdődik</string>
     <string name="no_leg_intersection">A szelvény nem keresztez poligont</string>
     <string name="no_location_data">Nincs hely adat</string>
-    <string name="no_paired_device">Nincs párosított műszer.\nKeress és párosíts egy DistoX-et</string>
+    <!-- UNUSED string name="no_paired_device">Nincs párosított műszer.\nKeress és párosíts egy DistoX-et</string -->
     <string name="no_photos">A felméréshez nincsen fotó</string>
     <string name="no_plots">A felméréshez nincsen vázlat.\nHasználd az Új vázlat gombot, hogy létrehozz egyet</string>
     <string name="no_profile_overview">Nincs áttekintő a vetített szelvényekhez</string>
@@ -383,7 +383,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_undelete_paste">Nincs visszaállítható/beilleszthető elem</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Irány %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Lejtés %5$.1f</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">INFO</string>
@@ -392,7 +392,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="menu_attach">KAPCSOL</string -->
     <!-- UNUSED string name="menu_attached">ÖSSZEKAPCSOLT</string -->
     <!-- UNUSED string name="menu_ready">KÉSZ</string -->
-    <string name="menu_backups">MENTÉSEK TÖRLÉSE</string>
+    <!-- UNUSED string name="menu_backups">MENTÉSEK TÖRLÉSE</string -->
     <string name="menu_calib_check">KALIBR. ELLENŐRZÉS</string>
     <string name="menu_close">BEZÁR</string>
     <!-- UNUSED string name="menu_clear">TÖRLÉS</string -->
@@ -419,7 +419,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTŐ</string>
     <string name="menu_packets">CSOMAGOK</string>
-    <string name="menu_pair">PÁROSÍTÁS</string>
+    <!-- UNUSED string name="menu_pair">PÁROSÍTÁS</string -->
     <string name="menu_palette">PALETTA</string>
     <string name="menu_photo">FOTÓ</string>
     <string name="menu_sensor">SZENZOR</string>
@@ -437,9 +437,9 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Rajz felület</string>
 
-    <string name="start_scan">Keresés indítás</string>
-    <string name="stop_scan">Keresés leállítás</string>
-    <string name="title_scan">BTLE keresés</string>
+    <!-- UNUSED string name="start_scan">Keresés indítás</string -->
+    <!-- UNUSED string name="stop_scan">Keresés leállítás</string -->
+    <!-- UNUSED string name="title_scan">BTLE keresés</string -->
     <!-- UNUSED string name="ble_scan_failed">BTLE keresés eredménytelen</string -->
     <!-- UNUSED string name="ble_gatt_failure">BTLE hiba</string -->
     <string name="ble_no_remote">Nincs távoli műszer</string>
@@ -487,11 +487,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="popup_cont_continue">Folytat</string>
 
     <string name="connection_error">Kapcsolódási hiba</string>
-    <string name="connecting">Kapcsolódás &#8230;</string>
+    <!-- UNUSED string name="connecting">Kapcsolódás &#8230;</string -->
     <!-- UNUSED string name="connected_none">Nincs kapcsolat</string -->
     <!-- UNUSED string name="connected_already">Már összekapcsolt</string -->
 
-    <string name="not_available">BT nem elérhető</string>
+    <!-- UNUSED string name="not_available">BT nem elérhető</string -->
     <string name="not_enabled">BT nincs bekapcsolva</string>
 
     <!-- UNUSED string name="not_implemented">Nincs még megvalósítva</string -->
@@ -589,7 +589,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_split">Felosztja a felmérést?</string>
     <string name="survey_not_attached">FIGYELEM: nem kapcsolódó mérések</string>
     <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
-    <string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string>
+    <!-- UNUSED string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string -->
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
     <string name="survey_not_saved">FIGYELEM: mérés infó nincs mentve</string>
     <string name="survey_bad_siblings">FIGYELMEZTETÉS: rossz poligon mérés különbségek</string>
@@ -614,7 +614,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="accuracy_low">Alacsony pontosság. Kalibráció szükséges</string>
     <string name="accuracy_medium">Alacsony pontosság</string>
-    <string name="accuracy_high">Megfelelő pontosság</string>
+    <!-- UNUSED string name="accuracy_high">Megfelelő pontosság</string -->
     <string name="accuracy_unreliable">Megbízhatatlan érzékelők</string>
 	
     <string name="empty_clipboard">Üres vágólap</string>
@@ -714,7 +714,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="ask_reset">Visszaállítja a DistoX memóriáját? (Reset)</string -->
     <!-- UNUSED string name="ask_close_survey">Bezárod a felmérést?</string -->
     <string name="ask_gps_service">Bekapcsolja a GPS-t?</string>
-    <string name="ask_backups_clear">Törli a vázlat mentéseket?</string>
+    <!-- UNUSED string name="ask_backups_clear">Törli a vázlat mentéseket?</string -->
     <string name="ask_manual_update">Felülírja a felhasználói kézikönyv fordítását?\nJelenlegi v. %1$d Installált v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Hozzáad       </string -->
@@ -921,7 +921,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_measure_undo">Utolsó mérési pont eldobása</string>
     
     <string name="help_audio">Hang felvétel lista</string>
-    <string name="help_backups">Vázlat mentések törlése</string>
+    <!-- UNUSED string name="help_backups">Vázlat mentések törlése</string -->
     <string name="help_calib_check">Kalibr. ell. mérések</string>
     <string name="help_close">Súgó bezárása</string>
     <string name="help_close_app">Program bezárása</string>
@@ -1037,7 +1037,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_add_equate">Mérések kapcsolódó pontjainak hozzáadása</string>
     <string name="help_equates">Kapcsolódó pontok listázása</string>
 
-    <string name="export_bgcolor">Fehér háttér</string>
+    <!-- UNUSED string name="export_bgcolor">Fehér háttér</string -->
     <string name="export_config">Konfigurációs parancsok</string>
     <string name="export_csv_rawdata">Nyers adat</string>
     <string name="export_dxf_blocks">Segédmérés végpont</string>
@@ -1052,7 +1052,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_prefix_hint">előtag</string>
     <string name="export_suffix_hint">utótag</string>
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
-    <string name="export_scale_png">Felbontás</string>
+    <!-- UNUSED string name="export_scale_png">Felbontás</string -->
     <string name="export_scale_th">Skála 1 :</string>
     <string name="export_splays">Segédmérések</string>
     <string name="export_splays_named">Elnevezett segédmérések</string>
@@ -1156,7 +1156,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="title_settings_sketch">TopoDroid 3d vázlat beállítások</string>
     <string name="title_settings_survey">TopoDroid mérés beállítások</string>
-    <string name="title_settings_splay">TopoDroid segédmérés beállítások</string>
+    <!-- UNUSED string name="title_settings_splay">TopoDroid segédmérés beállítások</string -->
     <string name="title_settings_shot">TopoDroid mérési adat beállítások</string>
     <string name="title_settings_units">TopoDroid mértékegység beállítások</string>
     <string name="title_settings_location">TopoDroid területi beállítások</string>
@@ -1589,8 +1589,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_backup_number_summary">Automatikusan mentett vázlatok száma</string>
   <string name="pref_backup_interval_title">Háttérmentések ideje</string>
   <string name="pref_backup_interval_summary">Minimum intervallum két háttérmentés között [s]</string>
-  <string name="pref_backups_clear_title">Mentés törlése</string>
-  <string name="pref_backups_clear_summary">Vázlat biztonsági mentés törlésének engedélyezése menüből</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Mentés törlése</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Vázlat biztonsági mentés törlésének engedélyezése menüből</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion területek</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Mentse a területeket xtherionba</string -->
   <string name="pref_therion_splays_title">Segédpontok</string>
@@ -1678,6 +1678,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_walls_xstep_summary">SPontok maximális távolsága a kontúr mentén [m]</string>
 -->
 
+<!-- DONT_TRANSLATE
   <string name="pref_algo_min_alpha_title">Min-algo alfa</string>
   <string name="pref_algo_min_alpha_summary">Min-algo illesztési tényezője ([0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo béta</string>
@@ -1686,6 +1687,7 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x súlyozása</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x súlyozása</string>
+-->
 
 <!-- DONT_TRANSLATE
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
@@ -1741,7 +1743,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="perm_camera">\nKamera</string>
     <string name="perm_microphone">\nMikrofon</string>
 
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nKöszönjük, hogy a TopoDroidot választotta.
 \nTopoDroid egy Nyílt forráskódú Android alkalmazás DistoX, BRIC4 és Sap5 műszerekkel történő barlangfelmérésre.
@@ -1845,7 +1847,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cmenu_sketch">VÁZLATOK</string>
     <!-- UNUSED string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 
-    <string name="fractal_title">Fraktál számítás</string>
+    <!-- UNUSED string name="fractal_title">Fraktál számítás</string -->
     <string name="info_title">INFO</string>
     <string name="info_surveys">MÉRÉSEK</string>
     <string name="info_axes">Tengelyek: kék Észak, zöld Kelet</string>
@@ -1884,7 +1886,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="proj_near">Közel</string -->
     <!-- UNUSED string name="proj_far">Távol</string -->
 
-    <string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\nHossz: %d Mélység: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Felmérések: %d mérések: %d Pontok: %d\nHossz: %d Mélység: %d</string -->
     <!-- UNUSED string name="cno_files">Nincsenek fájlok</string -->
     <string name="reading_file">Fájl beolvasás %1$s</string>
     <string name="read_survey">Mérés beolvasás %1$s\n</string>
@@ -1903,11 +1905,11 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="surface_gps">GPS nyomvonal</string>
     <string name="surface_east">Kelet</string>
     <string name="surface_north">Észak</string>
-    <!-- OK string name="dem_file">%1$s</string -->
+    <!-- TODO string name="dem_file">%1$s</string -->
     <string name="dem_load">DEM betöltés</string>
     <string name="dem_failed">DEM betöltés hiba</string>
     <string name="dem_ok">DEM adat olvasás</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <string name="texture_load">Textúra betöltés</string>
     <string name="texture_failed">Textúra betöltés hiba</string>
     <string name="texture_ok">Textúra fájl olvasás</string>
@@ -1965,11 +1967,11 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="walls_title">FALAK</string>
     <string name="walls_convexhull">Convex Hull</string>
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
+    <!-- NO string name="walls_powercrust">Powercrust</string -->
     <string name="walls_hull">Hull</string>
     <string name="walls_bubble">Bubble</string>
     <string name="walls_tube">Tube</string>
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Powercrust: túl kevés sün</string>
     <string name="powercrust_failed">Powercrust hibás</string>
@@ -1983,18 +1985,17 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_model">Nincs 3D modell</string>
     <string name="no_topodroid_model">Nen egy TopoDroid modell</string>
 
-    <string name="error_file_not_found">Hiba: %1$s fájl nem található</string>
-    <string name="error_file_not_readable">Hiba: %1$s fájl nem olvasható</string>
+    <!-- UNUSED string name="error_file_not_found">Hiba: %1$s fájl nem található</string -->
+    <!-- UNUSED string name="error_file_not_readable">Hiba: %1$s fájl nem olvasható</string -->
     <string name="error_file_read">Hiba: %1$s fájl olvasási hiba</string>
     <string name="error_survey_read">Hiba: %1$s mérés olvasási hiba</string>
-    <string name="error_io_exception">Hiba: IO kivétel %1$s</string>
+    <!-- UNUSED string name="error_io_exception">Hiba: IO kivétel %1$s</string -->
     <string name="error_parser_error">Hiba: elemzés %1$s</string>
     <string name="error_export_failed">Hiba: %1$s export hiba</string>
     <string name="unsupported_format">Nem támogatott fájl formátum</string>
 
-
-    <string name="export_gltf_ok">Exportált glTF file</string>
-    <string name="export_gltf_fail">Hibás glTf export</string>
+    <!-- UNUSED string name="export_gltf_ok">Exportált glTF file</string -->
+    <!-- UNUSED string name="export_gltf_fail">Hibás glTf export</string -->
 
     <string name="warning_not_overwrite">Figyelem: nem írja felül a meglévő fájlt %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Figyelem: nem txt fájl %1$s</string -->
@@ -2008,7 +2009,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="warning_no_parent">Figyelem: nem tud felsőbb könyvtárba lépni</string>
     <string name="no_permissions">Az alkalmazás nem tud futni szükséges hozzáférések nélkül</string>
 
-    <string name="done_fractals">Kész fraktál dimenziók</string>
+    <!-- UNUSED string name="done_fractals">Kész fraktál dimenziók</string -->
     <string name="done_convexhull">Kész convex-hull falak</string>
     <string name="fail_convexhull">Hibás convex-hull falak</string>
     <string name="done_powercrust">Kész powercrust falak</string>
@@ -2040,7 +2041,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cpref_station_toast_title">Pont párbeszéd ablak</string>
     <string name="cpref_station_toast_summary">Pont párbeszédpanel helyett doboz [n]</string>
     <string name="cpref_station_points_title">Mérési pont</string>
-    <string name="cpref_station_points_summary">Mindíg mutassa a pontokat [n]</string>
+    <string name="cpref_station_points_summary">Mindig mutassa a pontokat [n]</string>
     <string name="cpref_station_size_title">Mérési pont mérete</string>
     <string name="cpref_station_size_summary">Mérési pont mérete [8 pxl]</string>
     <string name="cpref_measure_dialog_title">Távolság üzenet</string>

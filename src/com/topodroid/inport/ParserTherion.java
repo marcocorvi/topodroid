@@ -381,7 +381,7 @@ class ParserTherion extends ImportParser
                 try {
                   factor = Float.parseFloat( vals[vals_len-2] );
                 } catch ( NumberFormatException e ) {
-                  TDLog.Debug( "therion parser: units without factor " + line ); // this is OK
+                  TDLog.Error( "therion parser: units without factor " + line ); // this is OK
                 }
                 if ( u_len || u_left || u_right || u_up || u_down ) {
                   float len = factor * ParserUtil.parseLengthUnit( vals[vals_len-1] );
@@ -705,7 +705,7 @@ class ParserTherion extends ImportParser
     if ( mDate == null ) {
       mDate = TDUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "Parser Therion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    // TDLog.Log( TDLog.LOG_THERION, "Parser Therion shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
     // TDLog.v( "Parser TH shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 

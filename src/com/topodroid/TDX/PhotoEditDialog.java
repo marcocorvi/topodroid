@@ -116,20 +116,18 @@ class PhotoEditDialog extends MyDialog
     // Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "PhotoEditDialog onClick() " + b.getText().toString() );
 
-    switch ( v.getId() ) {
-      case R.id.photo_ok:
-        if ( mETcomment.getText() == null ) {
-          mParent.updatePhoto( mPhoto, "" );
-        } else {
-          mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
-        }
-        break;
-      case R.id.photo_delete:
-        mParent.dropPhoto( mPhoto );
-        break;
-      case R.id.photo_image:
-        (new PhotoViewDialog( mContext, mPhoto )).show();
-        return;
+    int vid = v.getId();
+    if ( vid == R.id.photo_ok ) {
+      if ( mETcomment.getText() == null ) {
+        mParent.updatePhoto( mPhoto, "" );
+      } else {
+        mParent.updatePhoto( mPhoto, mETcomment.getText().toString() );
+      }
+    } else if ( vid == R.id.photo_delete ) {
+      mParent.dropPhoto( mPhoto );
+    } else if ( vid == R.id.photo_image ) {
+      (new PhotoViewDialog( mContext, mPhoto )).show();
+      return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();

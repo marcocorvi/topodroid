@@ -158,13 +158,11 @@ class PlotNewDialog extends MyDialog
     Button b = (Button) v;
     // TDLog.Log( TDLog.LOG_INPUT, "PlotDialog onClick() button " + b.getText().toString() ); 
 
-    switch ( v.getId( ) ) {
-      case R.id.btn_ok:
-        if ( ! handleOK( ) ) return;
-        break;
-      case R.id.btn_cancel:
-        /* nothing */
-        break;
+    int vid = v.getId( );
+    if ( vid == R.id.btn_ok ) {
+      if ( ! handleOK( ) ) return;
+    // } else if ( vid == R.id.btn_cancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

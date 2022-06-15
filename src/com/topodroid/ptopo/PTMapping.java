@@ -45,7 +45,7 @@ public class PTMapping
     {
       _origin.read( fs );
       _scale = PTFile.readInt( fs );
-      TDLog.Log( TDLog.LOG_PTOPO, "PT Mapping origin " + _origin._x + " " + _origin._y + " scale " + _scale );
+      // TDLog.Log( TDLog.LOG_PTOPO, "PT Mapping origin " + _origin._x + " " + _origin._y + " scale " + _scale );
     }
 
     void write( OutputStream fs )

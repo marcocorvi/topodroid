@@ -275,21 +275,19 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   @Override
   public void onClick(View v) 
   {
-    switch ( v.getId() ) {
-      case R.id.checkbox: // click always switches the checkbox
-	bvalue = ((CheckBox)v).isChecked();
-	value  = ( bvalue? "true" : "false" );
-        // TDLog.v( "Pref [onClick] checkbox: " + name + " val " + value );
-	TDSetting.updatePreference( helper, category, name, value );
-        break;
-      case R.id.title:
-        // TDLog.v( "Pref TODO title click tell TDSetting " + title );
-        break;
-      case R.id.button:
-        // TDLog.v(" start the color picker dialog ");
-        int color = intValue();
-        (new MyColorPicker( context, this, color )).show();
-        break;
+    int vid = v.getId();
+    if ( vid == R.id.checkbox ) { // click always switches the checkbox
+      bvalue = ((CheckBox)v).isChecked();
+      value  = ( bvalue? "true" : "false" );
+      // TDLog.v( "Pref [onClick] checkbox: " + name + " val " + value );
+      TDSetting.updatePreference( helper, category, name, value );
+    } else if ( vid == R.id.title ) {
+      /* nothing */
+      // TDLog.v( "Pref TODO title click tell TDSetting " + title );
+    } else if ( vid == R.id.button ) {
+      // TDLog.v(" start the color picker dialog ");
+      int color = intValue();
+      (new MyColorPicker( context, this, color )).show();
     }
   }
 
@@ -1626,54 +1624,55 @@ public class TDPref implements AdapterView.OnItemSelectedListener
   }
   * END_SKETCH_3D */
 
-  /** construct the "logging" preferences array
-   * @param ctx   context
-   * @param hlp   shared preferences helper
-   * @return array of "logging" preferences
-   */
-  public static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
-  {
-    int cat = TDPrefCat.PREF_CATEGORY_LOG;
-    String[] key = TDPrefKey.LOG;
-    int[] tit    = TDPrefKey.LOGtitle;
-    return new TDPref[ ] {
-      makeLst( cat, key[0], R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, ctx, hlp ),
-      makeCbx( cat, key[ 1], tit[ 1], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 2], tit[ 2], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 3], tit[ 3], -1, E, true,  ctx, hlp ),
-      makeCbx( cat, key[ 4], tit[ 4], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 5], tit[ 5], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 6], tit[ 6], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 7], tit[ 7], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 8], tit[ 8], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[ 9], tit[ 9], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[10], tit[10], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[11], tit[11], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[12], tit[12], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[13], tit[13], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[14], tit[14], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[15], tit[15], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[16], tit[16], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[17], tit[17], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[18], tit[18], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[19], tit[19], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[20], tit[20], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[21], tit[21], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[22], tit[22], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[23], tit[23], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[24], tit[24], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[25], tit[25], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[26], tit[26], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[27], tit[27], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[28], tit[28], -1, T, false, ctx, hlp ),
-      makeCbx( cat, key[29], tit[29], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[30], tit[30], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[31], tit[31], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[32], tit[32], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[33], tit[33], -1, E, false, ctx, hlp ),
-      makeCbx( cat, key[34], tit[34], -1, E, false, ctx, hlp ) 
-      // makeCbx( cat, key[34], tit[34], -1, E, false, ctx, hlp )  // DISTOX_LOG_SYNC
-    };
-  }
+  // NO_LOGS
+  // /** construct the "logging" preferences array
+  //  * @param ctx   context
+  //  * @param hlp   shared preferences helper
+  //  * @return array of "logging" preferences
+  //  */
+  // public static TDPref[] makeLogPrefs( Context ctx, TDPrefHelper hlp )
+  // {
+  //   int cat = TDPrefCat.PREF_CATEGORY_LOG;
+  //   String[] key = TDPrefKey.LOG;
+  //   int[] tit    = TDPrefKey.LOGtitle;
+  //   return new TDPref[ ] {
+  //     makeLst( cat, key[0], R.string.pref_log_stream_title, R.string.pref_log_stream_summary, T, "0", R.array.logStream, R.array.logStreamValue, ctx, hlp ),
+  //     makeCbx( cat, key[ 1], tit[ 1], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 2], tit[ 2], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 3], tit[ 3], -1, E, true,  ctx, hlp ),
+  //     makeCbx( cat, key[ 4], tit[ 4], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 5], tit[ 5], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 6], tit[ 6], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 7], tit[ 7], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 8], tit[ 8], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[ 9], tit[ 9], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[10], tit[10], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[11], tit[11], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[12], tit[12], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[13], tit[13], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[14], tit[14], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[15], tit[15], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[16], tit[16], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[17], tit[17], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[18], tit[18], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[19], tit[19], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[20], tit[20], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[21], tit[21], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[22], tit[22], -1, T, false, ctx, hlp ),
+  //     makeCbx( cat, key[23], tit[23], -1, T, false, ctx, hlp ),
+  //     makeCbx( cat, key[24], tit[24], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[25], tit[25], -1, T, false, ctx, hlp ),
+  //     makeCbx( cat, key[26], tit[26], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[27], tit[27], -1, T, false, ctx, hlp ),
+  //     makeCbx( cat, key[28], tit[28], -1, T, false, ctx, hlp ),
+  //     makeCbx( cat, key[29], tit[29], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[30], tit[30], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[31], tit[31], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[32], tit[32], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[33], tit[33], -1, E, false, ctx, hlp ),
+  //     makeCbx( cat, key[34], tit[34], -1, E, false, ctx, hlp ) 
+  //     // makeCbx( cat, key[34], tit[34], -1, E, false, ctx, hlp )  // DISTOX_LOG_SYNC
+  //   };
+  // }
 
 }

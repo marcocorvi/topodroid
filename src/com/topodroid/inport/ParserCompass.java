@@ -214,7 +214,7 @@ class ParserCompass extends ImportParser
     if ( mDate == null ) {
       mDate = TDUtil.currentDate();
     }
-    TDLog.Log( TDLog.LOG_THERION, "Parser Compass shots "+ shots.size() +" splays "+ splays.size()  );
+    // TDLog.Log( TDLog.LOG_THERION, "Parser Compass shots "+ shots.size() +" splays "+ splays.size()  );
     // TDLog.v( "Parser Compass shots "+ shots.size() + " splays "+ splays.size() );
   }
 

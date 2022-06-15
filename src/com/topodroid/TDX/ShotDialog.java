@@ -847,7 +847,7 @@ class ShotDialog extends MyDialog
         loadDBlock( mPrevBlk, prevBlock, mBlk );
         // updateView();
       } else {
-        TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
+        // TDLog.Log( TDLog.LOG_SHOT, "PREV is null" );
       }
 
     } else if ( b == mButtonNext ) {
@@ -863,7 +863,7 @@ class ShotDialog extends MyDialog
         loadDBlock( mNextBlk, mBlk, next );
         // updateView();
       } else {
-        TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
+        // TDLog.Log( TDLog.LOG_SHOT, "NEXT is null" );
       }
 
     } else if ( b == mButtonReverse ) {

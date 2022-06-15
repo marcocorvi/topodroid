@@ -8,12 +8,12 @@
   android:layout_width="match_parent"
   android:layout_height="wrap_content"
   >
-  <LinearLayout android:id="@+id/layout1"
+  <LinearLayout
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
     >
-    <LinearLayout android:id="@+id/layout12"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -38,7 +38,7 @@
       />
     </LinearLayout>
 
-    <LinearLayout android:id="@+id/layout22"
+    <LinearLayout
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

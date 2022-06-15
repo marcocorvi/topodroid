@@ -28,6 +28,10 @@ public class Triangle3D
   public int direction;
   public int color; // DEBUG
 
+  /** cstr
+   * @param sz  number of vertices (3)
+   * @param col color (debug)
+   */
   public Triangle3D( int sz, int col )
   {
     size = sz;
@@ -38,6 +42,12 @@ public class Triangle3D
     color = col;
   }
 
+  /** cstr with three vertices
+   * @param v0  first vertex
+   * @param v1  second vertex
+   * @param v2  third vertex
+   * @param col color (debug)
+   */
   public Triangle3D( Vector3D v0, Vector3D v1, Vector3D v2, int col )
   {
     size = 3;
@@ -50,6 +60,12 @@ public class Triangle3D
     color = col;
   }
   
+  /** @return an offseted triangle for OpenGL
+   * @param x    X offset (OpenGL frame)
+   * @param y    Y offset
+   * @param z    Z offset
+   * @note world to OpenGL coords are (X, Z, -Y)
+   */
   public Triangle3D toOpenGL( double x, double y, double z )
   {
     Triangle3D ret = new Triangle3D( size, color );
@@ -66,6 +82,8 @@ public class Triangle3D
     return ret;
   }
 
+  /** debug
+   */
   public void dump()
   {
     TDLog.v("Cave3D " + String.format(Locale.US, "%6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f  %6.1f %6.1f %6.1f",
@@ -74,11 +92,17 @@ public class Triangle3D
       vertex[2].x, vertex[2].y, vertex[2].z ) );
   }
 
+  /** assign a vertex
+   * @param k  vertex index (0, 1, or 2)
+   * @param v  new vertex
+   */
   public void setVertex( int k, Vector3D v )
   {
     vertex[k] = v;
   }
 
+  /** compute the normal vector and the center vector
+   */
   public void computeNormal()
   {
     Vector3D w1 = vertex[1].difference( vertex[0] );
@@ -92,7 +116,10 @@ public class Triangle3D
     center.scaleBy( 1.0f/size );
   }
 
-  // update min-max according to this vector
+  /** update min-max according to the vertices of this triangle
+   * @param m1   minimum
+   * @param m2   maximum
+   */
   void minMax( Vector3D m1, Vector3D m2 )
   {
     for ( int k=0; k<size; ++k ) {
@@ -100,6 +127,8 @@ public class Triangle3D
     }
   }
 
+  /** flip the triangle: swap vertices 1 and 2, and reverse the normal
+   */
   void flip()
   {
     Vector3D v = vertex[1];
@@ -108,6 +137,8 @@ public class Triangle3D
     normal.reverse();
   }
 
+  /** @return string presentation
+   */
   public String toString()
   {
     StringWriter sw = new StringWriter();
@@ -119,7 +150,11 @@ public class Triangle3D
     return sw.getBuffer().toString();
   }
 
-  // 6 times the volume of the three vectors
+  /** @return 6 times the volume of the three vectors, referred to the origin
+   * @param v1  first vertex
+   * @param v2  second vertex
+   * @param v3  third vertex
+   */
   public static double volume( Vector3D v1, Vector3D v2, Vector3D v3 )
   {
     return v1.x * ( v2.y * v3.z - v2.z * v3.y )
@@ -127,11 +162,20 @@ public class Triangle3D
          + v1.z * ( v2.x * v3.y - v2.y * v3.x );
   }
 
+  /** @return 6 times the volume of the three vectors, referred to a base vertex
+   * @param v0  base vertex
+   * @param v1  first vertex
+   * @param v2  second vertex
+   * @param v3  third vertex
+   */
   public static double volume( Vector3D v0, Vector3D v1, Vector3D v2, Vector3D v3 )
   {
     return volume( v1.difference(v0), v2.difference(v0), v3.difference(v0) );
   }
 
+  /** @return volume of the triangle, referred to a given vertex
+   * @param v   given vertex
+   */
   public double volume( Vector3D v )
   {
     double ret = 0;
@@ -145,5 +189,4 @@ public class Triangle3D
     return ret;
   }
     
-
 }

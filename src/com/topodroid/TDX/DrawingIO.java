@@ -62,7 +62,7 @@ public class DrawingIO
     if ( line != null ) {
       line = line.trim();
       line = line.replaceAll(" *", " ");
-      // line.replaceAll("\\s+", " ");
+      // TDString.splitOnSpaces( line ); // FIXME
     }
     return line;
   } 
@@ -136,7 +136,7 @@ public class DrawingIO
   //         }
 
   //         // TDLog.Log( TDLog.LOG_PLOT, "  line: >>" + line + "<<");
-  //         line = line.replaceAll("\\s+", " ");
+  //         line = TDString.splitOnSpaces( line );
   //         String[] vals = line.split( " " );
   //         if ( vals.length == 0 ) continue;
   //         if ( vals[0].equals( "scrap" ) ) {
@@ -831,7 +831,7 @@ public class DrawingIO
     boolean in_scrap = false;
     // int scrap_index = 0;
 
-    TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
+    // TDLog.Log( TDLog.LOG_IO, "load outline tdr file " + filename );
     // TLog.v("drawing I/O load outline stream " + filename + " name " + ((name == null)? "null" : name) );
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
@@ -1870,7 +1870,7 @@ public class DrawingIO
     // synchronized( TDPath.mTherionLock ) // FIXME-THREAD_SAFE
     {
       try {
-        TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
+        // TDLog.Log( TDLog.LOG_IO, "export cSurvey. X-section file " + filename );
         DataInputStream dis = new DataInputStream( TDFile.getMSinput( "tdr", filename, "application/octet-stream" ) );
         boolean todo = true;
         while ( todo ) {

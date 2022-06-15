@@ -45,8 +45,9 @@ class DrawingPhotoEditDialog extends MyDialog
   private int mOrientation = 0;
   private String mDate = "";
 
-  /**
+  /** cstr
    * @param context   context
+   * @param photo     drawing photo item
    */
   DrawingPhotoEditDialog( Context context, /* DrawingWindow parent, TopoDroidApp app, */ DrawingPhotoPath photo )
   {
@@ -93,32 +94,39 @@ class DrawingPhotoEditDialog extends MyDialog
 
   }
 
+  /** react to user tap on a button
+   * @param v tapped button
+   * actions: 
+   *   - ok: save the changes
+   *   - image: display the photo image
+   */
   @Override
   public void onClick(View v) 
   {
     // Button b = (Button) v;
     // TDLog.Log(  TDLog.LOG_INPUT, "DrawingPhotoEditDialog onClick() " + b.getText().toString() );
 
-    switch ( v.getId() ) {
-      case R.id.photo_ok:
-        String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
-        mPhoto.setPointText( comment );
-        TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment );
-        break;
-      // case R.id.photo_delete:
-      //   mParent.dropPhoto( mPhoto );
-      //   break;
-      case R.id.photo_image:
-        // TopoDroidApp.viewPhoto( mContext, mFilename );
-	if ( mTdImage != null ) {
-          (new PhotoViewDialog( mContext, mFilename )).show();
-        }
-        return;
+    int vid = v.getId();
+    if ( vid == R.id.photo_ok ) {
+      String comment = ( mETcomment.getText() == null )? "" : mETcomment.getText().toString();
+      mPhoto.setPointText( comment );
+      TopoDroidApp.mData.updatePhoto( TDInstance.sid, mPhoto.mId, comment );
+    // } else if ( vid == R.id.photo_delete ) {
+    //   mParent.dropPhoto( mPhoto );
+    //   break;
+    } else if ( vid == R.id.photo_image ) {
+      // TopoDroidApp.viewPhoto( mContext, mFilename );
+      if ( mTdImage != null ) {
+        (new PhotoViewDialog( mContext, mFilename )).show();
+      }
+      return;
     }
     if ( mTdImage != null ) mTdImage.recycleImages();
     dismiss();
   }
 
+  /** react to user tap on the hardware back button
+   */
   @Override
   public void onBackPressed()
   {

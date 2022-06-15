@@ -595,7 +595,7 @@ public class DeviceHelper extends DataSetObservable
       }
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
     } finally { if (cursor != null && !cursor.isClosed()) cursor.close(); }
-    TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
+    // TDLog.Log( TDLog.LOG_DB, "found " + list.size() + " names " );
     return list;
   }
 
@@ -1457,7 +1457,7 @@ public class DeviceHelper extends DataSetObservable
       public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion)
       {  
          // FIXME this is called at each start when the database file exists
-         TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
+         // TDLog.Log( TDLog.LOG_DB, "onUpgrade old " + oldVersion + " new " + newVersion );
          switch ( oldVersion ) {
            case 14: 
              db.execSQL( "ALTER TABLE gms ADD COLUMN status INTEGER default 0" );

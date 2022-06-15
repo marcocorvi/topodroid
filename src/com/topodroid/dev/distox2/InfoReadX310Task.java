@@ -33,7 +33,7 @@ public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
 
   public InfoReadX310Task( TopoDroidApp app, DeviceX310InfoDialog dialog, String address )
   {
-    TDLog.Log( TDLog.LOG_BT, "X310 info read - address " + address );
+    // TDLog.v( "X310 info read - address " + address );
     mApp      = new WeakReference<TopoDroidApp>( app );
     mDialog   = new WeakReference<DeviceX310InfoDialog>( dialog );
     mAddress  = address;

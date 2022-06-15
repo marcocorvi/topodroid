@@ -144,7 +144,7 @@ public class MainWindow extends Activity
   private static final int[] menus = {
                           R.string.menu_close,
                           R.string.menu_palette,
-                          R.string.menu_logs,
+                          // R.string.menu_logs, // NO_LOGS
 			  // R.string.menu_backups, // CLEAR_BACKUPS
                           // R.string.menu_join_survey,
 			  // R.string.menu_updates, // UPDATES
@@ -164,7 +164,7 @@ public class MainWindow extends Activity
   private static final int[] help_menus = {
                           R.string.help_close_app,
                           R.string.help_symbol,
-                          R.string.help_log,
+                          // R.string.help_log, // NO_LOGS
 			  // R.string.help_backups, // CLEAR_BACKUPS
                           // R.string.help_join_survey,
                           // R.string.help_updates, // UPDATES
@@ -565,7 +565,7 @@ public class MainWindow extends Activity
   
   private boolean mWithPalette  = false;
   private boolean mWithPalettes = false;
-  private boolean mWithLogs     = false;
+  // private boolean mWithLogs     = false; // NO_LOGS
   // private boolean mWithBackupsClear = false; // CLEAR_BACKUPS
 
   // /** react to a change in the configuration
@@ -589,19 +589,19 @@ public class MainWindow extends Activity
 
     mWithPalette  = TDLevel.overNormal;
     mWithPalettes = TDLevel.overExpert && TDSetting.mPalettes; // mWithPalettes ==> mWithPalette
-    mWithLogs     = TDLevel.overAdvanced;
+    // mWithLogs     = TDLevel.overAdvanced; // NO_LOGS
     // mWithBackupsClear = TDLevel.overExpert && TDSetting.mBackupsClear; // CLEAR_BACKUPS
     // TDLog.v("Main Window set menu adapter. With palette " + mWithPalette + " With palettes " + mWithPalettes );
 
     menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
     if ( mWithPalette ) menu_adapter.add( res.getString( menus[1] ) ); // PALETTE
-    if ( mWithLogs )    menu_adapter.add( res.getString( menus[2] ) ); // LOGS
+    // if ( mWithLogs )    menu_adapter.add( res.getString( menus[2] ) ); // NO_LOGS
     // if ( mWithBackupsClear ) menu_adapter.add( res.getString( menus[3] ) ); // CLEAR_BACKUPS
     // if ( TDLevel.overExpert && mApp_mCosurvey ) menu_adapter.add( res.getString( menus[2] ) ); // IF_COSURVEY
     // if ( TDLevel.overExpert )   menu_adapter.add( res.getString( menus[3] ) ); // UPDATES
-    menu_adapter.add( res.getString( menus[3] ) ); // ABOUT
-    menu_adapter.add( res.getString( menus[4] ) ); // SETTINGS
-    menu_adapter.add( res.getString( menus[5] ) ); // HELP
+    menu_adapter.add( res.getString( menus[2] ) ); // ABOUT
+    menu_adapter.add( res.getString( menus[3] ) ); // SETTINGS
+    menu_adapter.add( res.getString( menus[4] ) ); // HELP
 
     mMenu.setAdapter( menu_adapter );
     mMenu.invalidate();
@@ -633,10 +633,10 @@ public class MainWindow extends Activity
       } else if ( mWithPalette && p++ == pos ) { // PALETTE EXTRA SYMBOLS
         // (new SymbolEnableDialog( mActivity )).show();
         (new SymbolReload( mActivity, mApp, mWithPalettes )).show();
-      } else if ( mWithLogs && p++ == pos ) { // LOGS
-        intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
-        intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_LOG );
-        startActivity( intent );
+      // } else if ( mWithLogs && p++ == pos ) { // NO_LOGS
+      //   intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
+      //   intent.putExtra( TDPrefCat.PREF_CATEGORY, TDPrefCat.PREF_CATEGORY_LOG );
+      //   startActivity( intent );
       // } else if ( mWithBackupsClear && p++ == pos ) { // CLEAR_BACKUPS
       //   TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.ask_backups_clear,
       //     new DialogInterface.OnClickListener() {
@@ -1477,7 +1477,7 @@ public class MainWindow extends Activity
           int current = Integer.parseInt( getResources().getString( res ) );
           if ( current > version ) { // prompt user
             final String url = getResources().getString( man );
-            TDLog.Log( TDLog.LOG_PREFS, "User Manual lang " + lang + " res " + res + " url " + url );
+            // TDLog.Log( TDLog.LOG_PREFS, "User Manual lang " + lang + " res " + res + " url " + url );
             String msg = String.format( getResources().getString( R.string.ask_manual_update ), current, version );
             TopoDroidAlertDialog.makeAlert( this, getResources(), msg, 
               new DialogInterface.OnClickListener() {

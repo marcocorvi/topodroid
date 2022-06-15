@@ -18,9 +18,9 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
 
-  <string name="r_title">Important notice for Android R and above</string>
+  <string name="r_title">Important notice for Android-11+</string>
   <string name="r_dialog">
-Starting with Android-R you must granted access to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
+On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
   </string>
   <!-- UNUSED string name="r_old_dialog">
 With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
@@ -33,6 +33,7 @@ Refer to the web pages for details.\n
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
     <string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">project.tdconfig</string>
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="new_survey_label">New survey</string>
@@ -158,7 +159,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="auto">auto</string>
     <string name="linear">linear</string>
     <string name="non_linear">non-linear</string>
-    <string name="algo_minimum">minimum</string>
+    <string name="algo_minimum" translatable="false">minimum</string>
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">Address %1$s</string>
@@ -363,7 +364,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
-    <string name="no_device_found">Found no device</string>
+    <!-- UNUSED string name="no_device_found">Found no device</string -->
     <string name="no_feature_audio">Audio not supported</string>
     <string name="no_feature_pdf">PDF not supported</string>
     <string name="no_gms">Calibration has no data.\nUse Download button</string>
@@ -371,7 +372,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_leg_first">Selection does not start with a leg</string>
     <string name="no_leg_intersection">Section line crosses no leg</string>
     <string name="no_location_data">No location data</string>
-    <string name="no_paired_device">No paired device.\nScan and pair a DistoX</string>
+    <!-- UNUSED string name="no_paired_device">No paired device.\nScan and pair a DistoX</string -->
     <string name="no_photos">Survey has no photo</string>
     <string name="no_plots">Survey has no sketch\nUse Add button to make one</string>
     <string name="no_profile_overview">No overview for projected profiles</string>
@@ -395,7 +396,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">CLEAR BACKUPS</string>
+    <!-- UNUSED string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">CALIB. CHECK</string>
     <string name="menu_close">CLOSE</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -422,7 +423,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
     <string name="menu_packets">PACKETS</string>
-    <string name="menu_pair">PAIR</string>
+    <!-- UNUSED string name="menu_pair">PAIR</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -440,9 +441,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Graph-paper</string>
 
-    <string name="start_scan">Start scan</string>
-    <string name="stop_scan">Stop scan</string>
-    <string name="title_scan">BLE scan</string>
+    <!-- UNUSED string name="start_scan">Start scan</string -->
+    <!-- UNUSED string name="stop_scan">Stop scan</string -->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Failed BLE scan</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <string name="ble_no_remote">No remote device</string>
@@ -490,11 +491,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_cont_continue">Continue</string>
 
     <string name="connection_error">Connection error</string>
-    <string name="connecting">Connecting &#8230;</string>
+    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
-    <string name="not_available">BT not available</string>
+    <!-- UNUSED string name="not_available">BT not available</string -->
     <string name="not_enabled">BT not enabled</string>
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
@@ -592,7 +593,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="survey_split">Split survey ?</string>
     <string name="survey_not_attached">WARNING: unattached shots</string>
     <string name="survey_not_extend">WARNING: unset shot extends</string>
-    <string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string>
+    <!-- UNUSED string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="survey_no_data_reduction">WARNING: no data reduction</string>
     <string name="survey_not_saved">WARNING: survey info not saved</string>
     <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
@@ -617,7 +618,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="accuracy_low">Low accuracy. Calibration needed</string>
     <string name="accuracy_medium">Low accuracy</string>
-    <string name="accuracy_high">Good accuracy</string>
+    <!-- UNUSED string name="accuracy_high">Good accuracy</string -->
     <string name="accuracy_unreliable">Unreliable sensors</string>
 
     <string name="empty_clipboard">Empty clipboard</string>
@@ -718,7 +719,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
-    <string name="ask_backups_clear">Delete sketch backups?</string>
+    <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
     <string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
@@ -924,7 +925,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_measure_undo">Drop the last polyline point</string>
     
     <string name="help_audio">Audio records list</string>
-    <string name="help_backups">Delete sketch backups</string>
+    <!-- UNUSED string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Calibration-check shots</string>
     <string name="help_close">Close window</string>
     <string name="help_close_app">Close app</string>
@@ -1040,7 +1041,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_add_equate">Add surveys equate</string>
     <string name="help_equates">List surveys equates</string>
 
-    <string name="export_bgcolor">White background</string>
+    <!-- UNUSED string name="export_bgcolor">White background</string -->
     <string name="export_config">Config commands</string>
     <string name="export_csv_rawdata">Raw data</string>
     <string name="export_dxf_blocks">Splay endpoints</string>
@@ -1055,7 +1056,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_prefix_hint">prefix</string>
     <string name="export_suffix_hint">suffix</string>
     <string name="export_roundtrip">Roundtrip</string>
-    <string name="export_scale_png">Resolution</string>
+    <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>
     <string name="export_splays">Splays</string>
     <string name="export_splays_named">Named splays</string>
@@ -1160,7 +1161,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_settings_sketch">3d sketch settings</string>
     <string name="title_settings_survey">Survey settings</string>
-    <string name="title_settings_splay">Splay settings</string>
+    <!-- UNUSED string name="title_settings_splay">Splay settings</string -->
     <string name="title_settings_shot">Shot data settings</string>
     <string name="title_settings_units">Data units settings</string>
     <string name="title_settings_location">Geolocation settings</string>
@@ -1593,8 +1594,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_backup_number_summary">Number of sketch files backups</string>
   <string name="pref_backup_interval_title">Backup interval</string>
   <string name="pref_backup_interval_summary">Minimum interval between two backups [s]</string>
-  <string name="pref_backups_clear_title">Backups clear</string>
-  <string name="pref_backups_clear_summary">Enable sketch backups clear menu</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">Splays</string>
@@ -1682,15 +1683,16 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_walls_xstep_summary">Separation of points along the wall [m]</string>
 -->
 
-  <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
-  <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string>
-  <string name="pref_algo_min_beta_title">Min-algo beta</string>
-  <string name="pref_algo_min_beta_summary">Min-algo M dip weight</string>
-  <string name="pref_algo_min_gamma_title">Min-algo gamma</string>
-  <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
-  <string name="pref_algo_min_delta_title">Min-algo delta</string>
-  <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+  <string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
+  <string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
+  <string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
+  <string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
+  <string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
+  <string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
+  <string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
+  <string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
 
+<!-- UNUSED NO_LOGS
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
   <string name="pref_log_stream_title" translatable="false">Log stream</string>
   <string name="pref_log_append" translatable="false">append logs</string>
@@ -1728,7 +1730,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_log_csurvey" translatable="false">cSurvey</string>
   <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
   <string name="pref_log_zip" translatable="false">ZIP</string>
-  <!-- UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string -->
+  <!- - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - ->
+-->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
   <!-- UNUSED string name="line_fine">fine</string -->
@@ -1852,14 +1855,14 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
     <string name="cmenu_sketch">SKETCHES</string>
-    <string name="cmenu_fractal">FRACTAL DIM.</string>
+    <string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string>
 
-    <string name="fractal_title">Fractal result</string>
-    <string name="fractal_cnt_total">count</string>
-    <string name="fractal_cnt_six">6-neighbor</string>
-    <string name="fractal_cnt_twentysix">26-neighbor</string>
-    <string name="fractal_failed">Fractal compute failed</string>
-    <string name="fractal_dimension">Fractal dimension</string>
+    <string name="fractal_title" translatable="false">Fractal result</string>
+    <string name="fractal_cnt_total" translatable="false">count</string>
+    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
+    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
+    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
+    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
     <string name="illegal_value">Illegal value</string>
 
     <string name="info_title">MODEL INFO</string>
@@ -1901,7 +1904,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="proj_far">Far</string -->
     <string name="focal" translatable="false">S</string>
 
-    <string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
     <string name="reading_file">Reading file %1$s</string>
     <string name="read_survey">Read survey %1$s\n</string>
@@ -2000,18 +2003,17 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="no_model">No 3D model</string>
     <string name="no_topodroid_model">Not a TopoDroid model</string>
 
-    <string name="error_file_not_found">Error: file %1$s not found</string>
-    <string name="error_file_not_readable">Error: file %1$s not readable</string>
+    <!-- UNUSED string name="error_file_not_found">Error: file %1$s not found</string -->
+    <!-- UNUSED string name="error_file_not_readable">Error: file %1$s not readable</string -->
     <string name="error_file_read">Error: file %1$s failed read</string>
     <string name="error_survey_read">Error: survey %1$s failed read</string>
-    <string name="error_io_exception">Error: IO exception %1$s</string>
+    <!-- UNUSED string name="error_io_exception">Error: IO exception %1$s</string -->
     <string name="error_parser_error">Error: parsing %1$s</string>
     <string name="error_export_failed">Error: export %1$s failed</string>
     <string name="unsupported_format">Unsupported file format</string>
 
-
-    <string name="export_gltf_ok">Exported glTF file</string>
-    <string name="export_gltf_fail">Failed glTf export</string>
+    <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
+    <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
     <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
@@ -2025,7 +2027,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
     <string name="no_permissions">The app cannot run without the required permissions</string>
 
-    <string name="done_fractals">Done fractals dims</string>
+    <string name="done_fractals" translatable="false">Done fractals dims</string>
     <string name="done_convexhull">Done convex-hull walls</string>
     <string name="fail_convexhull">Failed convex-hull walls</string>
     <string name="done_powercrust">Done powercrust walls</string>
@@ -2117,7 +2119,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="help_wall_3d">3D model</string>
     <!-- UNUSED string name="help_temperature">Tempertaure</string -->
     <string name="help_sketch_3d">3D sketch lifting</string>
-    <string name="help_fractal">Fractal analysis</string>
+    <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
     <string name="help_light_3d">Pan and light</string>
     <string name="help_projection_3d">3D projection</string>

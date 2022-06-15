@@ -37,7 +37,7 @@ public class TDNum
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
-    TDLog.Log( TDLog.LOG_NUM, "data reduction: decl " + decl + " start " + start );
+    // TDLog.Log( TDLog.LOG_NUM, "data reduction: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     surveyAttached = computeNum( data, start, format );
@@ -854,7 +854,7 @@ public class TDNum
     List< TriSplay > tmpsplays = new ArrayList<>();
 
     initShots( data, tmpshots, tmpsplays );
-    TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
+    // TDLog.Log( TDLog.LOG_NUM, "data " + data.size() + " shots " + tmpshots.size() + " splays " + tmpsplays.size() );
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_TRIANGLES ) {
       makeTrilateration( tmpshots );
@@ -947,7 +947,7 @@ public class TDNum
     // first-pass all shots with regular extends
     // second-pass any leftover shot
     for ( int pass = 0; pass < 2; ++ pass ) {
-      TDLog.Log( TDLog.LOG_NUM, "data reduction pass " + pass );
+      // TDLog.Log( TDLog.LOG_NUM, "data reduction pass " + pass );
       boolean repeat = true;
       while ( repeat ) {
         repeat = false;
@@ -1009,7 +1009,7 @@ public class TDNum
 
     // ---------------------------------- LOOP CLOSURE -------------------------------
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED ) { // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
-      TDLog.Log( TDLog.LOG_NUM, "loop closure compensation");
+      // TDLog.Log( TDLog.LOG_NUM, "loop closure compensation");
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -1080,7 +1080,7 @@ public class TDNum
         mUnattachedLength += ts.blocks.get(0).mLength;
       }
     }
-    TDLog.Log( TDLog.LOG_NUM, "unattached shot length " + mUnattachedLength );
+    // TDLog.Log( TDLog.LOG_NUM, "unattached shot length " + mUnattachedLength );
     
     return (mShots.size() + nrSiblings == tmpshots.size() );
   }

@@ -673,46 +673,42 @@ class ItemPickerDialog extends MyDialog
   public void onClick(View view)
   {
     // TDLog.v( "ItemPicker onClick()" );
-    switch (view.getId()) {
-      case R.id.item_point:
-        // if ( TDLevel.overBasic )
-        {
-          if ( mItemType != SymbolType.POINT ) {
-            mItemType = SymbolType.POINT;
-            updateList();
-            // updateRecentButtons( mItemType );
-            setTypeFromCurrent( );
-          }
-        }
-        break;
-      case R.id.item_line:
-        if ( mItemType != SymbolType.LINE ) {
-          mItemType = SymbolType.LINE;
+    int vid = view.getId();
+    if ( vid == R.id.item_point ) {
+      // if ( TDLevel.overBasic )
+      {
+        if ( mItemType != SymbolType.POINT ) {
+          mItemType = SymbolType.POINT;
           updateList();
           // updateRecentButtons( mItemType );
           setTypeFromCurrent( );
         }
-        break;
-      case R.id.item_area:
-        // if ( TDLevel.overBasic )
-        {
-          if ( mItemType != SymbolType.AREA ) {
-            mItemType = SymbolType.AREA;
-            updateList();
-            // updateRecentButtons( mItemType );
-            setTypeFromCurrent( );
-          }
+      }
+    } else if ( vid == R.id.item_line ) {
+      if ( mItemType != SymbolType.LINE ) {
+        mItemType = SymbolType.LINE;
+        updateList();
+        // updateRecentButtons( mItemType );
+        setTypeFromCurrent( );
+      }
+    } else if ( vid == R.id.item_area ) {
+      // if ( TDLevel.overBasic )
+      {
+        if ( mItemType != SymbolType.AREA ) {
+          mItemType = SymbolType.AREA;
+          updateList();
+          // updateRecentButtons( mItemType );
+          setTypeFromCurrent( );
         }
-        break;
-      case R.id.size:
-        if ( mScale < PointScale.SCALE_XL ) {
-          ++ mScale;
-        } else {
-          mScale = PointScale.SCALE_XS;
-        }
-        if ( mParent.get() != null && ! mParent.get().isFinishing() ) mParent.get().setPointScale( mScale );
-        setTheTitle();
-        break;
+      }
+    } else if ( vid == R.id.size ) {
+      if ( mScale < PointScale.SCALE_XL ) {
+        ++ mScale;
+      } else {
+        mScale = PointScale.SCALE_XS;
+      }
+      if ( mParent.get() != null && ! mParent.get().isFinishing() ) mParent.get().setPointScale( mScale );
+      setTheTitle();
     }
 
     // if ( mRecent != null ) { // this select the symbol and closes the dialog

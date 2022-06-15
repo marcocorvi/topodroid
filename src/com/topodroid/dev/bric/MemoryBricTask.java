@@ -47,7 +47,7 @@ public class MemoryBricTask extends AsyncTask<Void, Integer, Boolean>
   protected Boolean doInBackground(Void... v)
   {
     if ( mApp.get() == null ) {
-      TDLog.Log( TDLog.LOG_BT, "BRIC memory - null app");
+      TDLog.Error( "BRIC memory - null app");
       return false;
     }
     // TDLog.v( "BRIC memory - sending bytes " + ((bytes == null)? "null" : "non-null" ) );

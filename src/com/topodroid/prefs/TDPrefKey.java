@@ -1886,83 +1886,85 @@ public class TDPrefKey
   // END_SKETCH_3D */
 
   // ------------------------------------------------------------------------------
-  public static String[] LOG = {
-    "DISTOX_LOG_STREAM", // 0
-    "DISTOX_LOG_APPEND",
+  // NO_LOGS
 
-    "DISTOX_LOG_DEBUG",
-    "DISTOX_LOG_ERR", 
-    "DISTOX_LOG_MAIN",
-    "DISTOX_LOG_PERM",  
-    "DISTOX_LOG_PREFS",  
-    "DISTOX_LOG_INPUT",  // 5
-    "DISTOX_LOG_PATH",
-    "DISTOX_LOG_IO", 
-    "DISTOX_LOG_BT",
-    "DISTOX_LOG_COMM",
-    "DISTOX_LOG_DISTOX",  // 10
-    "DISTOX_LOG_PROTO",
-    "DISTOX_LOG_DEVICE",
-    "DISTOX_LOG_CALIB",
-    "DISTOX_LOG_DB",  
-    "DISTOX_LOG_UNITS",   // 15
-    "DISTOX_LOG_DATA",
-    "DISTOX_LOG_SHOT",
-    "DISTOX_LOG_NAME",
-    "DISTOX_LOG_SURVEY",
-    "DISTOX_LOG_NOTE",
-    "DISTOX_LOG_STATS",
-    "DISTOX_LOG_NUM",
-    "DISTOX_LOG_FIXED",   // 20
-    "DISTOX_LOG_LOC", 
-    "DISTOX_LOG_PHOTO",
-    "DISTOX_LOG_SENSOR",
-    "DISTOX_LOG_PLOT", 
-    "DISTOX_LOG_BEZIER",  // 25
-    "DISTOX_LOG_THERION",
-    "DISTOX_LOG_CSURVEY",
-    "DISTOX_LOG_PTOPO",
-    "DISTOX_LOG_ZIP",
-    // "DISTOX_LOG_SYNC", 
-    null
-  };
+  // public static String[] LOG = {
+  //   "DISTOX_LOG_STREAM", // 0
+  //   "DISTOX_LOG_APPEND",
+  //   "DISTOX_LOG_DEBUG",
+  //   "DISTOX_LOG_ERR", 
+  //   "DISTOX_LOG_MAIN",
+  //   "DISTOX_LOG_PERM",  
+  //   "DISTOX_LOG_PREFS",  
+  //   "DISTOX_LOG_INPUT",  // 5
+  //   "DISTOX_LOG_PATH",
+  //   "DISTOX_LOG_IO", 
+  //   "DISTOX_LOG_BT",
+  //   "DISTOX_LOG_COMM",
+  //   "DISTOX_LOG_DISTOX",  // 10
+  //   "DISTOX_LOG_PROTO",
+  //   "DISTOX_LOG_DEVICE",
+  //   "DISTOX_LOG_CALIB",
+  //   "DISTOX_LOG_DB",  
+  //   "DISTOX_LOG_UNITS",   // 15
+  //   "DISTOX_LOG_DATA",
+  //   "DISTOX_LOG_SHOT",
+  //   "DISTOX_LOG_NAME",
+  //   "DISTOX_LOG_SURVEY",
+  //   "DISTOX_LOG_NOTE",
+  //   "DISTOX_LOG_STATS",
+  //   "DISTOX_LOG_NUM",
+  //   "DISTOX_LOG_FIXED",   // 20
+  //   "DISTOX_LOG_LOC", 
+  //   "DISTOX_LOG_PHOTO",
+  //   "DISTOX_LOG_SENSOR",
+  //   "DISTOX_LOG_PLOT", 
+  //   "DISTOX_LOG_BEZIER",  // 25
+  //   "DISTOX_LOG_THERION",
+  //   "DISTOX_LOG_CSURVEY",
+  //   "DISTOX_LOG_PTOPO",
+  //   "DISTOX_LOG_ZIP",
+  //   // "DISTOX_LOG_SYNC", 
+  //   null
+  // };
 
-  static int[] LOGtitle = {
-     0,
-     R.string.pref_log_append,  
-     R.string.pref_log_debug,   
-     R.string.pref_log_err,     
-     R.string.pref_log_main,    
-     R.string.pref_log_perm,
-     R.string.pref_log_prefs,
-     R.string.pref_log_input,   
-     R.string.pref_log_path,    
-     R.string.pref_log_io,
-     R.string.pref_log_bt,
-     R.string.pref_log_comm,    
-     R.string.pref_log_distox,  
-     R.string.pref_log_proto,   
-     R.string.pref_log_device,  
-     R.string.pref_log_calib,   
-     R.string.pref_log_db,      
-     R.string.pref_log_units,   
-     R.string.pref_log_data,    
-     R.string.pref_log_shot,    
-     R.string.pref_log_name,    
-     R.string.pref_log_survey,  
-     R.string.pref_log_note,    
-     R.string.pref_log_stats,    
-     R.string.pref_log_num,     
-     R.string.pref_log_fixed,   
-     R.string.pref_log_loc,     
-     R.string.pref_log_photo,   
-     R.string.pref_log_sensor,  
-     R.string.pref_log_plot,    
-     R.string.pref_log_bezier,  
-     R.string.pref_log_therion, 
-     R.string.pref_log_csurvey, 
-     R.string.pref_log_ptopo,   
-     R.string.pref_log_zip,     
-     // R.string.pref_log_sync
-  };
+  // static int[] LOGtitle = {
+  //    0,
+  //    R.string.pref_log_append,  
+  //    R.string.pref_log_debug,   
+  //    R.string.pref_log_err,     
+  //    R.string.pref_log_main,    
+  //    R.string.pref_log_perm,
+  //    R.string.pref_log_prefs,
+  //    R.string.pref_log_input,   
+  //    R.string.pref_log_path,    
+  //    R.string.pref_log_io,
+  //    R.string.pref_log_bt,
+  //    R.string.pref_log_comm,    
+  //    R.string.pref_log_distox,  
+  //    R.string.pref_log_proto,   
+  //    R.string.pref_log_device,  
+  //    R.string.pref_log_calib,   
+  //    R.string.pref_log_db,      
+  //    R.string.pref_log_units,   
+  //    R.string.pref_log_data,    
+  //    R.string.pref_log_shot,    
+  //    R.string.pref_log_name,    
+  //    R.string.pref_log_survey,  
+  //    R.string.pref_log_note,    
+  //    R.string.pref_log_stats,    
+  //    R.string.pref_log_num,     
+  //    R.string.pref_log_fixed,   
+  //    R.string.pref_log_loc,     
+  //    R.string.pref_log_photo,   
+  //    R.string.pref_log_sensor,  
+  //    R.string.pref_log_plot,    
+  //    R.string.pref_log_bezier,  
+  //    R.string.pref_log_therion, 
+  //    R.string.pref_log_csurvey, 
+  //    R.string.pref_log_ptopo,   
+  //    R.string.pref_log_zip,     
+  //    // R.string.pref_log_sync
+  // };
+
 }

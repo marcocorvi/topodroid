@@ -1299,7 +1299,7 @@ public class TDSetting
       case TDPrefCat.PREF_GEEK_LINE:       return updatePrefGeekLine( hlp, k, v );
       case TDPrefCat.PREF_GEEK_IMPORT:     return updatePrefGeekImport( hlp, k, v );
       case TDPrefCat.PREF_GEEK_DEVICE:     return updatePrefGeekDevice( hlp, k, v );
-      case TDPrefCat.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v );
+      // case TDPrefCat.PREF_CATEGORY_LOG:    return updatePrefLog( hlp, k, v ); // NO_LOGS
       default:
         TDLog.Error("Cave3XPref. unhandled setting, cat " + cat + " key " + k + " val <" + v + ">" );
     }
@@ -2507,21 +2507,22 @@ public class TDSetting
   }
   * END_SKETCH_3D */
  
+  // NO_LOGS
   // @param k   key
   // @param v   value (either "true" of "false" for checkboxes)
-  private static String updatePrefLog( TDPrefHelper hlp, String k, String v )
-  {
-    String[] key = TDPrefKey.LOG;
-    if ( k.equals( key[0] ) ) { // DISTOX_LOG_STREAM
-      hlp.update( k, v );
-      TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, v ); // FIXME_PREF
-    } else {
-      boolean def = k.equals( key[3] ); // DISTOX_LOG_ERR
-      boolean b = tryBooleanValue( hlp, k, v, def );
-      TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, b ); // FIXME_PREF
-    }
-    return null;
-  }
+  // private static String updatePrefLog( TDPrefHelper hlp, String k, String v )
+  // {
+  //   String[] key = TDPrefKey.LOG;
+  //   if ( k.equals( key[0] ) ) { // DISTOX_LOG_STREAM
+  //     hlp.update( k, v );
+  //     TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, v ); // FIXME_PREF
+  //   } else {
+  //     boolean def = k.equals( key[3] ); // DISTOX_LOG_ERR
+  //     boolean b = tryBooleanValue( hlp, k, v, def );
+  //     TDLog.checkLogPreferences( hlp.getSharedPrefs(), k, b ); // FIXME_PREF
+  //   }
+  //   return null;
+  // }
 
   // -----------------------------------------------------------------------------
 
@@ -2818,7 +2819,7 @@ public class TDSetting
 	       };
         String url = TDInstance.getResources().getString( res[idx] );
        	if ( url != null && url.length() > 0 ) {
-          TDLog.Log( TDLog.LOG_PREFS, "idx " + idx + " url " + url );
+          // TDLog.Log( TDLog.LOG_PREFS, "idx " + idx + " url " + url );
           // try do download the zip
           (new UserManDownload( /* my_app, */ url )).execute();
 	}
@@ -2929,7 +2930,7 @@ public class TDSetting
       // pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",
       //   mWallsType, mWallsPlanThr, mWallsExtendedThr, mWallsXClose, mWallsXStep, mWallsConcave );
 
-      TDLog.exportLogSettings( pw );
+      // TDLog.exportLogSettings( pw ); // NO_LOGS
 
       fw.close();
     } catch ( IOException e ) { 

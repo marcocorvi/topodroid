@@ -125,7 +125,7 @@
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
     <!-- REMOVE string name="calib_gm_policy">Política</string-->
-    <string name="calib_gm_policy">Politica de grupo</string>
+    <string name="calib_gm_policy">Política de grupo</string>
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
@@ -227,7 +227,7 @@
     <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto móvil Topográfico</string>
-    <string name="MT_bad_file">Archivo de topografía del movil incorrecto</string>
+    <string name="MT_bad_file">Archivo de topografía del móvil incorrecto</string>
     <string name="bad_manifest">Archivo de manifiesto incorrecto</string>
 
     <string name="pleasewait">Por favor espere</string>
@@ -349,7 +349,7 @@
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
-    <string name="no_device_found">No se encuentra dispositivos</string>
+    <!-- UNUSED string name="no_device_found">No se encuentra dispositivos</string -->
     <string name="no_feature_audio">Audio no compatible</string>
     <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
@@ -357,7 +357,7 @@
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
-    <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
+    <!-- UNUSED string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string -->
     <string name="no_photos">Topografía sin foto</string>
     <string name="no_plots">Topografía sin croquis.\nPulse el botón para añadir uno</string>
     <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
@@ -372,7 +372,7 @@
     <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
@@ -381,7 +381,7 @@
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string>
+    <!-- UNUSED string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string -->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -408,7 +408,7 @@
     <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Medir distancia</string>
     <string name="menu_packets">PAQUETES</string>
-    <string name="menu_pair">Emparejar</string>
+    <!-- UNUSED string name="menu_pair">Emparejar</string -->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
@@ -425,9 +425,9 @@
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
-    <string name="start_scan">Inicio escaneo</string>
-    <string name="stop_scan">Fin de escaneo</string>
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <!-- UNUSED string name="start_scan">Inicio escaneo</string -->
+    <!-- UNUSED string name="stop_scan">Fin de escaneo</string -->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
     <string name="ble_no_remote">Sin dispositivo remoto</string>
@@ -475,11 +475,11 @@
     <string name="popup_cont_continue">Continuar</string>
 
     <string name="connection_error">Error conexión</string>
-    <string name="connecting">Conectando &#8230;</string>
+    <!-- UNUSED string name="connecting">Conectando &#8230;</string -->
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
 
-    <string name="not_available">BT No disponible</string>
+    <!-- UNUSED string name="not_available">BT No disponible</string -->
     <string name="not_enabled">BT No habilitado</string>
 
     <!-- UNUSED string name="not_implemented">No implantado</string -->
@@ -585,7 +585,7 @@
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
-    <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -701,7 +701,7 @@
     <!-- UNUSED string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
-    <string name="ask_backups_clear">Eliminar copia seguridad de croquis?</string>
+    <!-- UNUSED string name="ask_backups_clear">Eliminar copia seguridad de croquis?</string -->
     <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Añadir    </string -->
@@ -906,7 +906,7 @@
     <string name="help_measure_undo">Suelta el último punto de polilínea</string>
     
     <!-- TODO string name="help_audio">Audio records list</string -->
-    <string name="help_backups">Eliminar copia de seguridad de croquis</string>
+    <!-- UNUSED string name="help_backups">Eliminar copia de seguridad de croquis</string -->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
     <!-- TODO string name="help_close_app">Close app</string -->
@@ -1020,7 +1020,7 @@
     <!-- TODO string name="help_add_equate">Add surveys equate</string -->
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
+    <!-- UNUSED string name="export_bgcolor">Background color</string -->
     <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
@@ -1034,7 +1034,7 @@
     <!-- TODO string name="export_prefix_hint">prefix</string -->
     <!-- TODO string name="export_suffix_hint">suffix</string -->
     <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
+    <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <!-- TODO string name="export_scale_th">Scale 1 :</string -->
     <!-- TODO string name="export_splays">Splays</string -->
     <!-- TODO string name="export_splays_named">Named splays</string -->
@@ -1138,7 +1138,7 @@
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <!-- UNUSED string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Ajustes de datos de tomas en TopoDroid</string>
     <string name="title_settings_units">Ajustes de las unidades en TopoDroid</string>
     <string name="title_settings_location">Ajustes de ubicación en TopoDroid</string>
@@ -1205,15 +1205,15 @@
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <!-- TODO string name="pref_cat_exportth">Therion</string -->
+  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
+  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
+  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
@@ -1396,7 +1396,7 @@
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
   <string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string>
-  <string name="pref_dash_splay_title">Los trazos con coherencia del guión</string>
+  <string name="pref_dash_splay_title">Los trazos con coherencia del guion</string>
   <string name="pref_dash_splay_message">Los trazos se alinearon coherentemente entre el plan y el perfil.</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
@@ -1535,7 +1535,7 @@
   <string name="pref_linesnap_summary">Habilitar acción de alineación de línea/área</string>
   <string name="pref_linecurve_title">Segmento liso/derecho</string>
   <string name="pref_linecurve_summary">Acción de segmento de línea suave/enderezado</string>
-  <string name="pref_linestraight_title">Enderezar lineas</string>
+  <string name="pref_linestraight_title">Enderezar líneas</string>
   <string name="pref_linestraight_summary">Enderezar toda la acción de la línea</string>
   <string name="pref_path_multiselect_title">Ruta multiselección</string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
@@ -1563,8 +1563,8 @@
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
-  <string name="pref_backups_clear_title">Eliminar copias de seguridad</string>
-  <string name="pref_backups_clear_summary">Habilitar copias de seguridad de croquis borrar menú</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Eliminar copias de seguridad</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Habilitar copias de seguridad de croquis borrar menú</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Radiales therion</string>
@@ -1702,7 +1702,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="perm_camera">\nCámara</string>
     <string name="perm_microphone">\nMicrófono</string>
 
-    <!-- OK string name="welcome_title">Bienvenido a TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">Bienvenido a TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
@@ -1827,7 +1827,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <string name="clear">Limpiar</string>
@@ -1843,12 +1843,12 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <!-- TODO string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
 
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1897,11 +1897,11 @@ it is correct but i need to use english to tell a user which log to enable when 
 
     <string name="walls_title">Paredes</string>
     <string name="walls_convexhull">Recubrimiento Convexo</string>
-    <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
+    <!-- NO string name="walls_powercrust">Recubrimiento fuerte</string -->
     <string name="walls_hull">Recubrimiento</string>
     <!-- TODO string name="walls_bubble">Bubble</string -->
     <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string>
     <string name="powercrust_failed">Recubrimiento fuerte falló</string>
@@ -1913,9 +1913,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
-    <string name="error_file_not_found">Error: archivo no encontrado</string>
-    <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->
-    <string name="error_io_exception">Error: IO excepción</string>
+    <!-- UNUSED string name="error_file_not_found">Error: archivo no encontrado</string -->
+    <!-- UNUSED string name="error_file_not_readable">Error: file not readable</string -->
+    <!-- UNUSED string name="error_io_exception">Error: IO excepción</string -->
     <string name="error_parser_error">Error: error del analizador %1$s</string>
     <string name="error_export_failed">Error: Fallo de exportación %1$s</string>
 

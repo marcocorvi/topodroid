@@ -19,7 +19,7 @@ class BricDebug
 
   static void logMeasPrim( byte[] bytes )
   {
-    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasPrim: " + bytes.length + " " + BricConst.getTimeString( bytes ) + " Distance "
+    TDLog.v( "BRIC debug MeasPrim: " + bytes.length + " " + BricConst.getTimeString( bytes ) + " Distance "
       + BleUtils.getFloat( bytes, 8 ) + " Azimuth " + BleUtils.getFloat( bytes, 12 ) + " Clino " + BleUtils.getFloat( bytes, 16 ) 
     );
   }
@@ -32,7 +32,7 @@ class BricDebug
 
   static void logMeasMeta( byte[] bytes )
   {
-    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasMeta: " + bytes.length + " Idx " 
+    TDLog.v( "BRIC debug MeasMeta: " + bytes.length + " Idx " 
       + BleUtils.getInt( bytes, 0 ) + " dip " + BleUtils.getFloat( bytes, 4 ) + " roll " + BleUtils.getFloat( bytes, 8 ) + " temp " 
       + BleUtils.getFloat( bytes, 12 ) + " samples " + BleUtils.getShort( bytes, 16 ) + " type " + BleUtils.getChar( bytes, 18 ) 
     );
@@ -44,7 +44,7 @@ class BricDebug
     //   + BleUtils.getChar( bytes, 0 ) + ": " + BleUtils.getFloat( bytes, 1 ) + " " + BleUtils.getFloat( bytes, 5 ) + " Err2 " 
     //   + BleUtils.getChar( bytes, 9 ) + ": " + BleUtils.getFloat( bytes, 10 ) + " " + BleUtils.getFloat( bytes, 14 ) 
     // );
-    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug MeasErr: " + bytes.length + " " + BricConst.errorString( bytes ) );
+    TDLog.v( "BRIC debug MeasErr: " + bytes.length + " " + BricConst.errorString( bytes ) );
   }
 
 
@@ -52,13 +52,13 @@ class BricDebug
   {
     StringBuilder sb = new StringBuilder();
     for ( int k=0; k<bytes.length; ++k ) sb.append( String.format(" %02x", bytes[k] ) );
-    TDLog.Log( TDLog.LOG_PROTO, "BRIC debug Info " + bytes.length + ": hex " + sb.toString() );
+    TDLog.v( "BRIC debug Info " + bytes.length + ": hex " + sb.toString() );
   }
 
   static void logAscii( byte[] bytes )
   {
     if ( bytes != null ) {
-      TDLog.Log( TDLog.LOG_PROTO, "BRIC debug: " + BleUtils.bytesToAscii( bytes ) );
+      TDLog.v( "BRIC debug: " + BleUtils.bytesToAscii( bytes ) );
     }
   }
 

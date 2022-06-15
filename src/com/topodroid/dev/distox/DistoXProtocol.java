@@ -158,7 +158,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       // TDLog.v( "interrupt loop " + k + " " + dataRead[0] + "/" + toRead[0] );
       try {
         reader.join( timeout );
-      } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "reader join-1 interrupted"); }
+      } catch ( InterruptedException e ) { TDLog.v( "reader join-1 interrupted"); }
       if ( ! reader.isAlive() ) break;
       {
         Thread interruptor = new Thread() { public void run() {
@@ -180,11 +180,11 @@ public class DistoXProtocol extends TopoDroidProtocol
 
         try {
           interruptor.join( 200 );
-        } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "interruptor join interrupted"); }
+        } catch ( InterruptedException e ) { TDLog.v( "interruptor join interrupted"); }
       }
       try {
         reader.join( 200 );
-      } catch ( InterruptedException e ) { TDLog.Log(TDLog.LOG_DEBUG, "reader join-2 interrupted"); }
+      } catch ( InterruptedException e ) { TDLog.v( "reader join-2 interrupted"); }
       if ( ! reader.isAlive() ) break; 
     }
     if ( maybeException[0] != null ) throw maybeException[0];
@@ -254,7 +254,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       TDLog.Error( "Proto read packet ClosedByInterruptException" + e.toString() );
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
-      TDLog.Debug( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
+      TDLog.Error( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
       // mError = DistoX.DISTOX_ERR_OFF;
       return DistoX.DISTOX_ERR_OFF;
     }

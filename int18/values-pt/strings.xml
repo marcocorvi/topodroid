@@ -18,7 +18,7 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Clicar novamente em VOLTAR para sair</string>
 
@@ -35,7 +35,6 @@ Refer to the web pages for details.\n
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <!-- TODO string name="r_continue">CONTINUE</string -->
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Atualizando para uma nova versão do TopoDroid.\nQuer re-instalar os símbolos?</string -->
     <string name="symbols_ask">Instalar símbolos. v.%1$s?\n(Current v.%2$s)</string>
 
@@ -52,7 +51,7 @@ Refer to the web pages for details.\n
 	    Se você tiver problemas com a conexão com a DistoX, experimente a opção "Inseguro" para a configuração "Soquete".\n\n
 	    Há outras configurações que afetam a apresentação na janela de croqui (tamanho dos ícones e rótulos, espessura da linha, etc). Altere-as da maneira que achar mais conveniente.\n\n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <!-- TODO string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">PONTO</string>
     <string name="LINE">LINHA</string>
@@ -156,7 +155,7 @@ Refer to the web pages for details.\n
     <string name="auto">auto</string>
     <string name="linear">linear</string>
     <string name="non_linear">não linear</string>
-    <string name="algo_minimum">mínimo</string>
+    <!-- NO string name="algo_minimum">mínimo</string -->
 
     <!-- UNUSED string name="device_algo_failed">Determinação automática do algoritmo mal sucedida\nUtilizando algoritmo linear</string -->
     <string name="device_address">Endereço %1$s</string>
@@ -356,7 +355,7 @@ Refer to the web pages for details.\n
     <string name="no_data_reduction">Nenhuma redução nos dados</string>
     <string name="no_db">Nenhum banco de dados</string>
     <string name="no_device_address">Dispositivo não selecionado</string>
-    <string name="no_device_found">Nenhum dispositivo encontrado</string>
+    <!-- UNUSED string name="no_device_found">Nenhum dispositivo encontrado</string -->
     <string name="no_feature_audio">Sem suporte para áudio</string>
     <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Calibração sem dados.\nUse o botão de Download</string>
@@ -364,7 +363,7 @@ Refer to the web pages for details.\n
     <string name="no_leg_first">Seleção não começa com uma visada</string>
     <string name="no_leg_intersection">Linha de corte não cruza nenhuma visada</string>
     <string name="no_location_data">Nenhuma informação de posição</string>
-    <string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string>
+    <!-- UNUSED string name="no_paired_device">Nenhum dispositivo associado.\nBusque e associe uma DistoX</string -->
     <string name="no_photos">Topo sem foto</string>
     <string name="no_plots">Topo sem nenhum croqui registrado.\nUse o botão Novo para criar um</string>
     <string name="no_profile_overview">Nenhuma panorâmica para as projeções</string>
@@ -379,7 +378,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimute %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Inclinação %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">SOBRE</string>
@@ -388,7 +387,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="menu_attach">CONECTAR</string -->
     <!-- UNUSED string name="menu_attached">Conectado</string -->
     <!-- UNUSED string name="menu_ready">Pronto</string -->
-    <string name="menu_backups">APAGAR BACKUPS</string>
+    <!-- UNUSED string name="menu_backups">APAGAR BACKUPS</string -->
     <string name="menu_calib_check">VERIF. CALIB.</string>
     <string name="menu_close">FECHAR</string>
     <!-- UNUSED string name="menu_clear">LIMPAR</string -->
@@ -415,7 +414,7 @@ Refer to the web pages for details.\n
     <string name="menu_options">CONFIGURAÇÕES</string>
     <string name="menu_overview">VISÃO GLOBAL</string>
     <string name="menu_packets">PACOTES</string>
-    <string name="menu_pair">PAREAR</string>
+    <!-- UNUSED string name="menu_pair">PAREAR</string -->
     <string name="menu_palette">PALETA</string>
     <string name="menu_photo">FOTO</string>
     <string name="menu_sensor">SENSOR</string>
@@ -432,9 +431,9 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <!-- UNUSED string name="start_scan">Start scan</string -->
+    <!-- UNUSED string name="stop_scan">Stop scan</string -->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Busca por dispositivos BLE falhou</string -->
     <!-- UNUSED string name="ble_gatt_failure">Falha no dispositivo BLE</string -->
     <string name="ble_no_remote">Nenhum dispositivo remoto</string>
@@ -483,11 +482,11 @@ Refer to the web pages for details.\n
     <string name="popup_cont_continue">Continuar</string>
 
     <string name="connection_error">Erro na conexão</string>
-    <string name="connecting">Conectando &#8230;</string>
+    <!-- UNUSED string name="connecting">Conectando &#8230;</string -->
     <!-- UNUSED string name="connected_none">Não conectado</string -->
     <!-- UNUSED string name="connected_already">Já conectado</string -->
 
-    <string name="not_available">Bluetooth indisponível</string>
+    <!-- UNUSED string name="not_available">Bluetooth indisponível</string -->
     <string name="not_enabled">Bluetooth desabilitado</string>
 
     <!-- UNUSED string name="not_implemented">Não implementado</string -->
@@ -583,7 +582,7 @@ Refer to the web pages for details.\n
     <string name="survey_split">Dividir a topo?</string>
     <string name="survey_not_attached">ALERTA: visadas desconectadas</string>
     <string name="survey_not_extend">ALERTA: visadas sem medidas auxiliares</string>
-    <string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ALERTA: visadas desconectadas e sem medidas auxiliares</string -->
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -663,7 +662,7 @@ Refer to the web pages for details.\n
     <string name="stat_wens">Oeste: %1$.0f %5$s Leste: %2$.0f %5$s Norte: %3$.0f %5$s Sul: %4$.0f %5$s</string>
     <string name="stat_angle_error">Erros de ângulo: %1$.2f ± %2$.2f</string>
     <string name="shot_title">MEDIDA %1$s - %2$s</string>
-    <!-- OK string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
+    <!-- TODO string name="shot_data">D %1$.2f  A %2$.1f  I %3$.1f</string -->
     <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
 
     <string name="survey_stat_duplicate">Visadas duplicadas - Qt: %1$d Ext: %2$.1f %3$s</string>
@@ -699,7 +698,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="ask_reset">Reiniciar memória da DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Fechar mapa?</string -->
     <string name="ask_gps_service">Configurar o serviço GPS?</string>
-    <string name="ask_backups_clear">Apagar backups dos croquis?</string>
+    <!-- UNUSED string name="ask_backups_clear">Apagar backups dos croquis?</string -->
     <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Novo       </string -->
@@ -723,7 +722,7 @@ Refer to the web pages for details.\n
     <string name="button_evalm"     >M      </string>
     <!-- TODO string name="button_evalroll"  >Roll</string -->
     <string name="button_eval_cal"  >Calcular c/ calib.</string>
-    <!-- OK string name="button_gps_start" >GPS       </string -->
+    <!-- TODO string name="button_gps_start" >GPS       </string -->
     <!-- UNUSED string name="button_gps_stop"  >Parar     </string -->
     <!-- DONT TRANSLATE string name="button_help">?</string -->
     <string name="button_manual"    >Manual do Usuário</string>
@@ -741,7 +740,7 @@ Refer to the web pages for details.\n
     <string name="button_skip"    >Ignorar</string>
     <string name="button_done"    >Fim</string>
     <string name="button_lrud"    >Incluir EDTC</string>
-    <!-- OK string name="button_ok"        >OK        </string -->
+    <!-- TODO string name="button_ok"        >OK        </string -->
     <string name="button_off"       >desligar</string>
     <string name="button_on"        >ligar</string>
     <string name="button_open"      >Abrir     </string>
@@ -905,7 +904,7 @@ Refer to the web pages for details.\n
     <string name="help_measure_undo">Descartar o último ponto da polilinha</string>
 
     <!-- TODO string name="help_audio">Audio records list</string -->
-    <string name="help_backups">Apagar backups dos croquis</string>
+    <!-- UNUSED string name="help_backups">Apagar backups dos croquis</string -->
     <string name="help_calib_check">Medidas de verificação de calibração</string>
     <string name="help_close">Fechar janela</string>
     <!-- TODO string name="help_close_app">Close app</string -->
@@ -1019,7 +1018,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="help_add_equate">Add surveys equate</string -->
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
+    <!-- UNUSED string name="export_bgcolor">Background color</string -->
     <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
@@ -1033,7 +1032,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_prefix_hint">prefix</string -->
     <!-- TODO string name="export_suffix_hint">suffix</string -->
     <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
+    <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <!-- TODO string name="export_scale_th">Scale 1 :</string -->
     <!-- TODO string name="export_splays">Splays</string -->
     <!-- TODO string name="export_splays_named">Named splays</string -->
@@ -1136,7 +1135,7 @@ Refer to the web pages for details.\n
 
     <string name="title_settings_sketch">Configurações de croquis 3D do TopoDroid</string>
     <string name="title_settings_survey">Configurações de topo do TopoDroid</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <!-- UNUSED string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Configirações de dados de medidas do TopoDroid</string>
     <string name="title_settings_units">Configurações de unidades do TopoDroid</string>
     <string name="title_settings_location">Configurações de coordenadas do TopoDroid</string>
@@ -1197,15 +1196,15 @@ Refer to the web pages for details.\n
   <string name="pref_cat_drawing">DESENHANDO CROQUI</string>
   <string name="pref_cat_import_export">IMPORTAR/EXPORTAR</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <!-- TODO string name="pref_cat_exportth">Therion</string -->
+  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
+  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
+  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">CALIBRAÇÕES</string>
   <string name="pref_cat_device">DISPOSITIVOS</string>
@@ -1555,8 +1554,8 @@ Refer to the web pages for details.\n
   <string name="pref_backup_number_summary">Quantidade de backups do croqui</string>
   <string name="pref_backup_interval_title">Intervalos backup</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dois backups [s]</string>
-  <string name="pref_backups_clear_title">Apagar backups</string>
-  <string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Apagar backups</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Habilitar menu para apagar backups</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Salvar áreas como o xtherion</string -->
   <string name="pref_therion_splays_title">Medidas auxiliares Therion</string>
@@ -1638,6 +1637,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_xstep_summary">Separação dos pontos ao longo das paredes [m]</string>
 -->
 
+<!-- DONT_TRANSLATE
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">ator de correção para min-algo (em [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
@@ -1646,6 +1646,7 @@ Refer to the web pages for details.\n
   <string name="pref_algo_min_gamma_summary">Fator de correção para min-algo do peso do grupo G.x M.x</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Fator de correção para min-algo do peso do grupo G^M.x</string>
+-->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Fluxo do log de saída</string>
@@ -1700,7 +1701,7 @@ Refer to the web pages for details.\n
     <string name="perm_camera">\nCâmera</string>
     <string name="perm_microphone">\nMicrofone</string>
 
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopodroid é um aplicativo Android Open Source para mapeamento de cavernas com DistoX.
 \n\nNenhuma garantia: utilizando o aplicativo, você concorda com o fato de que o autor não é responsável por qualquer perda de dados ou quaisquer outros danos.
@@ -1831,7 +1832,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Topos: %d visadas: %d bases: %d\nComprimento: %d Profundidade: %d</string -->
     <!-- UNUSED string name="cno_files">Nenhum arquivo</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <!-- TODO string name="clear">Clear</string -->
@@ -1847,12 +1848,12 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
     <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <!-- TODO string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
 
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1901,11 +1902,11 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="walls_title">WALLS</string -->
     <!-- TODO string name="walls_convexhull">Convex Hull</string -->
-    <!-- OK string name="walls_powercrust">Powercrust</string -->
+    <!-- NO string name="walls_powercrust">Powercrust</string -->
     <!-- TODO string name="walls_hull">Hull</string -->
     <!-- TODO string name="walls_bubble">Bubble</string -->
     <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
     <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
@@ -1917,9 +1918,9 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
-    <!-- TODO string name="error_file_not_found">Error: file not found</string -->
-    <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->
-    <!-- TODO string name="error_io_exception">Error: IO exception</string -->
+    <!-- UNUSED string name="error_file_not_found">Error: file not found</string -->
+    <!-- UNUSED string name="error_file_not_readable">Error: file not readable</string -->
+    <!-- UNUSED string name="error_io_exception">Error: IO exception</string -->
     <!-- TODO string name="error_parser_error">Error: parser error %1$s</string -->
     <!-- TODO string name="error_export_failed">Error: failed export %1$s</string -->
 

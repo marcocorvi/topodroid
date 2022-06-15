@@ -393,7 +393,7 @@ class ParserSurvex extends ImportParser
                         factor = Float.parseFloat( vals[k] );
 		        ++k;
                       } catch ( NumberFormatException e ) {
-                        TDLog.Debug( "survex parser: units without factor " + line ); // this is OK
+                        TDLog.Error( "survex parser: units without factor " + line ); // this is OK
                       }
 		    }
 		    if ( k + 1 == vals_len ) {
@@ -631,7 +631,7 @@ class ParserSurvex extends ImportParser
 
     if ( mDate == null ) mDate = TDUtil.currentDate();
     if ( mTitle == null ) mTitle = TDString.EMPTY;
-    TDLog.Log( TDLog.LOG_THERION, "Parser Survex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
+    // TDLog.Log( TDLog.LOG_THERION, "Parser Survex shots "+ shots.size() +" splays "+ splays.size() +" fixes "+  fixes.size() );
     // TDLog.v( "Parser Survex shots "+ shots.size() + " splays "+ splays.size() +" fixes "+  fixes.size() );
   }
 

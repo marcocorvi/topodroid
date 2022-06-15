@@ -12,6 +12,7 @@
 package com.topodroid.tdm;
 
 import com.topodroid.ui.MyDialog;
+import com.topodroid.utils.TDString;
 import com.topodroid.TDX.R;
 
 import android.os.Bundle;
@@ -60,10 +61,13 @@ public class TdmConfigDialog extends MyDialog
     {
       if (view.getId() == R.id.label_ok ) {
         String name = mLabel.getText().toString();
-        if ( ! name.endsWith( ".tdconfig" ) ) {
-          name = name + ".tdconfig";
+        if ( name != null && name.length() > 0 ) {
+          name = TDString.spacesToUnderscore( name );
+          if ( ! name.endsWith( ".tdconfig" ) ) {
+            name = name + ".tdconfig";
+          }
+          mActivity.addTdmConfig( name );
         }
-        mActivity.addTdmConfig( name );
       // } else ( view.getId() == R.id.label_cancel ) {
       //   // nothing
       }

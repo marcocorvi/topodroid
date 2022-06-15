@@ -27,6 +27,6 @@ public class BleOpMtuRequest extends BleOperation
   @Override 
   public void execute()
   {
-    TDLog.Log( TDLog.LOG_BT, "BleOp exec MTU request" );
+    // TDLog.Log( TDLog.LOG_BT, "BleOp exec MTU request" );
   }
 }

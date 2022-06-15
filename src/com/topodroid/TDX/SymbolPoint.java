@@ -252,7 +252,7 @@ public class SymbolPoint extends Symbol
       line = br.readLine();
       boolean insymbol = false;
       while ( line != null ) {
-        line = line.trim().replaceAll("\\s+", " ");
+        line = TDString.spacesToSpace( line.trim() );
         String[] vals = line.split(" ");
         int s = vals.length;
         for (int k=0; k<s; ++k ) {

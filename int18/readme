@@ -28,8 +28,8 @@ After providing the proper translation, remove the comment and the "TODO" mark.
 
 The following keywords are used:
   TODO    a string that need to be translated
-  OK      a string that is used but does not need translation (eg, "DXF")
-  NO      similar to OK
+  OK      a string that is used but does not need translation (this is obsolete)
+  NO      a string that must not be translated
   UNUSED  a string that is not used in the program, but i do not remove from the string file, as it might be used in future
   FIXME   a string that I modified and you should check if the translation needs to be updated
           also used for a translation i think does not catch the meaning of the master string
@@ -48,6 +48,23 @@ If you make a substantial change to the translation, you can also ask me to buil
 with your translation, and send it to you by mail.
 
 Finally if you have any doubt about the meaning of a string do not hesitate to write me.
+
+-------------------------------------------------------------------------
+LINT CHECK
+
+lint is an Android command line tool that checks correctness of the code.
+In particular lint detects translation errors and warnings.
+
+To run lint copy (or sym-link) the translation folder under res.
+Next change working directory to the project root and execute 
+     $(ANDROID_SDK)/cmdline-tools/latest/bin/lint . 
+
+Example of translation problems are
+  - MissingTranslation
+  - MissingQuantity
+  - PluralsCandidate
+  - UnusedQuantity
+  - UnusedResources
 
 -------------------------------------------------------------------------
 MISSING STRINGS

@@ -143,95 +143,91 @@ public class DeviceA3MemoryDialog extends MyDialog
   {
     int[] ht = new int[2];
     String from, to, error;
-    switch ( view.getId() ) {
-      case R.id.button_store:
-        try {
-          ht[0] = Integer.parseInt( mTVrhead.getText().toString() ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mTVrhead.setError( error );
-          return;
-        }
-        try {
-          ht[1] = Integer.parseInt( mTVrtail.getText().toString() ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mTVrtail.setError( error );
-          return;
-        }
-        mParent.storeDeviceHeadTail( ht );
-        mTVshead.setText( mTVrhead.getText() );
-        mTVstail.setText( mTVrtail.getText() );
-        break;
-      case R.id.button_dump:
-        from = mETdumpfrom.getText().toString();
-        to   = mETdumpto.getText().toString();
-        if ( /* from == null || */ from.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_begin_required );
-          mETdumpfrom.setError( error );
-          return;
-        }
-        if ( /* to == null || */ to.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_end_required );
-          mETdumpto.setError( error );
-          return;
-        }
-        try {
-          ht[0] = Integer.parseInt( from ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETdumpfrom.setError( error );
-          return;
-        }
-        try {
-          ht[1] = Integer.parseInt( to ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETdumpto.setError( error );
-          return;
-        }
-        String dumpfile = null;
-        if ( mETdumpfile.getText() != null ) dumpfile = mETdumpfile.getText().toString();
-        mParent.readA3Memory( this, ht, dumpfile );
-        break;
-      case R.id.button_read:
-        mParent.readDeviceHeadTail( DeviceA3Details.HeadTail, ht );
-        setText( mTVrhead, mTVrtail, ht );
-        mETfrom.setText( mTVstail.getText() );
-        mETto.setText( mTVrtail.getText() );
-        break;
-      case R.id.button_reset:
-        from = mETfrom.getText().toString().trim();
-        to   = mETto.getText().toString().trim();
-        if ( /* from == null || */ from.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_begin_required );
-          mETfrom.setError( error );
-          return;
-        }
-        if ( /* to == null || */ to.length() == 0 ) {
-          error = mParent.getResources().getString( R.string.error_end_required );
-          mETto.setError( error );
-          return;
-        }
-        try {
-          ht[0] = Integer.parseInt( from ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETfrom.setError( error );
-          return;
-        }
-        try {
-          ht[1] = Integer.parseInt( to ) * 8;
-        } catch ( NumberFormatException e ) {
-          error = mParent.getResources().getString( R.string.error_invalid_number );
-          mETto.setError( error );
-          return;
-        }
-        mParent.resetA3DeviceHeadTail( ht );
-        break;
-      // case R.id.button_cancel:
-      //   dismiss();
-      //   break;
+    int vid = view.getId();
+    if ( vid == R.id.button_store ) {
+      try {
+        ht[0] = Integer.parseInt( mTVrhead.getText().toString() ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mTVrhead.setError( error );
+        return;
+      }
+      try {
+        ht[1] = Integer.parseInt( mTVrtail.getText().toString() ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mTVrtail.setError( error );
+        return;
+      }
+      mParent.storeDeviceHeadTail( ht );
+      mTVshead.setText( mTVrhead.getText() );
+      mTVstail.setText( mTVrtail.getText() );
+    } else if ( vid == R.id.button_dump ) {
+      from = mETdumpfrom.getText().toString();
+      to   = mETdumpto.getText().toString();
+      if ( /* from == null || */ from.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_begin_required );
+        mETdumpfrom.setError( error );
+        return;
+      }
+      if ( /* to == null || */ to.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_end_required );
+        mETdumpto.setError( error );
+        return;
+      }
+      try {
+        ht[0] = Integer.parseInt( from ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETdumpfrom.setError( error );
+        return;
+      }
+      try {
+        ht[1] = Integer.parseInt( to ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETdumpto.setError( error );
+        return;
+      }
+      String dumpfile = null;
+      if ( mETdumpfile.getText() != null ) dumpfile = mETdumpfile.getText().toString();
+      mParent.readA3Memory( this, ht, dumpfile );
+    } else if ( vid == R.id.button_read ) {
+      mParent.readDeviceHeadTail( DeviceA3Details.HeadTail, ht );
+      setText( mTVrhead, mTVrtail, ht );
+      mETfrom.setText( mTVstail.getText() );
+      mETto.setText( mTVrtail.getText() );
+    } else if ( vid == R.id.button_reset ) {
+      from = mETfrom.getText().toString().trim();
+      to   = mETto.getText().toString().trim();
+      if ( /* from == null || */ from.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_begin_required );
+        mETfrom.setError( error );
+        return;
+      }
+      if ( /* to == null || */ to.length() == 0 ) {
+        error = mParent.getResources().getString( R.string.error_end_required );
+        mETto.setError( error );
+        return;
+      }
+      try {
+        ht[0] = Integer.parseInt( from ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETfrom.setError( error );
+        return;
+      }
+      try {
+        ht[1] = Integer.parseInt( to ) * 8;
+      } catch ( NumberFormatException e ) {
+        error = mParent.getResources().getString( R.string.error_invalid_number );
+        mETto.setError( error );
+        return;
+      }
+      mParent.resetA3DeviceHeadTail( ht );
+    // } else if ( vid == case R.id.button_cancel ) {
+    //   dismiss();
+    //   break;
     }
   }
 }

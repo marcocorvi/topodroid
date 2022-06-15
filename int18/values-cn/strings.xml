@@ -14,8 +14,9 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">菜单</string>
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
+    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
     <string name="double_back">再次点击返回键退出</string>
 
     <string name="new_survey_label">新建测量</string>
@@ -31,7 +32,6 @@
   <!-- UNUSED string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string -->
   <string name="r_continue">继续</string>
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
 
@@ -153,7 +153,7 @@
     <string name="auto">自动</string>
     <string name="linear">线性</string>
     <string name="non_linear">非线性</string>
-    <string name="algo_minimum">最小</string>
+    <!-- NO string name="algo_minimum">最小</string -->
    
     <!-- UNUSED string name="device_algo_failed">Algorithm auto-determination failed\nUsing linear algorithm</string -->
     <string name="device_address">地址 %1$s</string>
@@ -358,7 +358,7 @@
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
-    <string name="no_device_found">未发现设备</string>
+    <!-- UNUSED string name="no_device_found">未发现设备</string -->
     <string name="no_feature_audio">音频不支持</string>
     <string name="no_feature_pdf">PDF格式不支持</string>
     <string name="no_gms">校准无数据.\n点击下载按钮</string>
@@ -366,7 +366,7 @@
     <string name="no_leg_first">选择未从主线开始</string>
     <string name="no_leg_intersection">横截面线与主线无交叉</string>
     <string name="no_location_data">无位置数据</string>
-    <string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string>
+    <!-- UNUSED string name="no_paired_device">无配对设备.\n扫描并配对一个DistoX</string -->
     <string name="no_photos">测量无照片</string>
     <string name="no_plots">测量无草图\n点击添加草图</string>
     <string name="no_profile_overview">无投影剖面图预览</string>
@@ -381,7 +381,7 @@
     <string name="no_undelete_paste">没有要恢复/粘贴的项目</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">关于</string>
@@ -390,7 +390,7 @@
     <!-- UNUSED string name="menu_attach">CONNECT</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">清除备份</string>
+    <!-- UNUSED string name="menu_backups">清除备份</string -->
     <string name="menu_calib_check">校准检测</string>
     <string name="menu_close">关闭</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -417,7 +417,7 @@
     <string name="menu_options">设定</string>
     <string name="menu_overview">概览</string>
     <string name="menu_packets">数据包</string>
-    <string name="menu_pair">配对</string>
+    <!-- UNUSED string name="menu_pair">配对</string -->
     <string name="menu_palette">调色板</string>
     <string name="menu_photo">照片</string>
     <string name="menu_sensor">传感器</string>
@@ -435,9 +435,9 @@
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">方格纸</string>
 
-    <string name="start_scan">开始扫描</string>
-    <string name="stop_scan">停止扫描</string>
-    <string name="title_scan">BLE扫描</string>
+    <!-- UNUSED string name="start_scan">开始扫描</string -->
+    <!-- UNUSED string name="stop_scan">停止扫描</string -->
+    <!-- UNUSED string name="title_scan">BLE扫描</string -->
     <!-- UNUSED string name="ble_scan_failed">蓝牙设备扫描失败</string -->
     <!-- UNUSED string name="ble_gatt_failure">蓝牙故障</string -->
     <string name="ble_no_remote">无远程设备</string>
@@ -486,11 +486,11 @@
     <string name="popup_cont_continue">继续</string>
 
     <string name="connection_error">连接错误</string>
-    <string name="connecting">连接 &#8230;</string>
+    <!-- UNUSED string name="connecting">连接 &#8230;</string -->
     <!-- UNUSED string name="connected_none">无连接</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
 
-    <string name="not_available">BT 不可用</string>
+    <!-- UNUSED string name="not_available">BT 不可用</string -->
     <string name="not_enabled">BT 未启动</string>
 
     <!-- UNUSED string name="not_implemented">Not implemented yet</string -->
@@ -588,7 +588,7 @@
     <string name="survey_split">拆分测量 ?</string>
     <string name="survey_not_attached">警告:未连接的测量</string>
     <string name="survey_not_extend">警告:未设置测线扩展</string>
-    <string name="survey_not_attached_extend">警告:未连接的测线和未设置扩展</string>
+    <!-- UNUSED string name="survey_not_attached_extend">警告:未连接的测线和未设置扩展</string -->
     <string name="survey_no_data_reduction">警告:无数据缩减</string>
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -707,7 +707,7 @@
     <!-- UNUSED string name="ask_reset">Reset DistoX memory?</string -->
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">设置GPS服务?</string>
-    <string name="ask_backups_clear">删除草图备份?</string>
+    <!-- UNUSED string name="ask_backups_clear">删除草图备份?</string -->
     <string name="ask_manual_update">升级用户手册翻译?\n现在安装 v. %1$d 已经安装 v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
@@ -913,7 +913,7 @@
     <string name="help_measure_undo">删除最后一个折线点</string>
     
     <string name="help_audio">音频录音列表</string>
-    <string name="help_backups">删除草图备份</string>
+    <!-- UNUSED string name="help_backups">删除草图备份</string -->
     <string name="help_calib_check">校准检验测量</string>
     <string name="help_close">关闭窗口</string>
     <string name="help_close_app">关闭软件</string>
@@ -1028,7 +1028,7 @@
     <string name="help_add_equate">添加等同的测量</string>
     <string name="help_equates">同等显示测量数据</string>
 
-    <string name="export_bgcolor">背景颜色</string>
+    <!-- UNUSED string name="export_bgcolor">背景颜色</string -->
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
     <string name="export_dxf_blocks">DXF块</string>
@@ -1042,7 +1042,7 @@
     <string name="export_prefix_hint">前缀</string>
     <string name="export_suffix_hint">后缀</string>
     <string name="export_roundtrip">往返</string>
-    <string name="export_scale_png">分辨率</string>
+    <!-- UNUSED string name="export_scale_png">分辨率</string -->
     <string name="export_scale_th">比例 1 :</string>
     <string name="export_splays">辐测</string>
     <string name="export_splays_named">辐测名称</string>
@@ -1145,7 +1145,7 @@
 
     <string name="title_settings_sketch">TopoDroid 3d草图设置</string>
     <string name="title_settings_survey">TopoDroid测量设置</string>
-    <string name="title_settings_splay">TopoDroid 侧线设定</string>
+    <!-- UNUSED string name="title_settings_splay">TopoDroid 侧线设定</string -->
     <string name="title_settings_shot">TopoDroid测线数据设置</string>
     <string name="title_settings_units">TopoDroid单位设置</string>
     <string name="title_settings_location">TopoDroid位置设置</string>
@@ -1571,8 +1571,8 @@
   <string name="pref_backup_number_summary">草图文件备份数</string>
   <string name="pref_backup_interval_title">备份间隔</string>
   <string name="pref_backup_interval_summary">两个备份之间的最小间隔 [s]</string>
-  <string name="pref_backups_clear_title">备份清除</string>
-  <string name="pref_backups_clear_summary">启用草图备份清除菜单</string>
+  <!-- UNUSED string name="pref_backups_clear_title">备份清除</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">启用草图备份清除菜单</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">xtherion areas</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Save areas a la xtherion</string -->
   <string name="pref_therion_splays_title">副线</string>
@@ -1656,6 +1656,7 @@
   <string name="pref_walls_xstep_summary">沿着洞壁的点的分离 [m]</string>
 -->
 
+<!-- DO NOT TRANSLATE THESE
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo adjustment factor (in [0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
@@ -1664,6 +1665,7 @@
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+-->
 
 <!-- DO NOT TRANSLATE THESE
   <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
@@ -1720,7 +1722,7 @@
     <string name="perm_microphone">\n话筒</string>
 
 
-    <!-- OK string name="welcome_title">TopoDroid %1$s</string -->
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopoDroid是一个专门配合DistoX使用的开源的免费的洞穴测量软件.
 \n\n免责声明: 要使用这个软件您必须同意作者将不对可能引起的的数据丢失或者损坏负责.
@@ -1822,7 +1824,7 @@
     <string name="cmenu_sketch">草图</string>
     <!-- UNUSED string name="cmenu_fractal">分形计算</string -->
 
-    <string name="fractal_title">分形计算</string>
+    <!-- UNUSED string name="fractal_title">分形计算</string -->
     <string name="info_title">信息</string>
     <string name="info_surveys">测量</string>
     <string name="info_axes">坐标轴: 蓝 北, 绿 东</string>
@@ -1861,7 +1863,7 @@
     <!-- UNUSED string name="proj_near">近</string -->
     <!-- UNUSED string name="proj_far">远</string -->
 
-    <string name="query" formatted="false">测量: %d 测射: %d 站点: %d\n 长度: %d 深度: %d</string>
+    <!-- UNUSED string name="query" formatted="false">测量: %d 测射: %d 站点: %d\n 长度: %d 深度: %d</string -->
     <!-- UNUSED string name="cno_files">没有文件</string -->
     <string name="reading_file">读取文件 %1$s</string>
     <string name="read_survey">读取测量 %1$s\n</string>
@@ -1880,11 +1882,11 @@
     <string name="surface_gps">GPS 路径</string>
     <string name="surface_east">东</string>
     <string name="surface_north">北</string>
-    <!-- OK string name="dem_file">%1$s</string -->
+    <!-- TODO string name="dem_file">%1$s</string -->
     <string name="dem_load">载入 DEM</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>
     <string name="texture_ok">读取纹理失败</string>
@@ -1942,11 +1944,11 @@
 
     <string name="walls_title">墙</string>
     <string name="walls_convexhull">凸面外壳</string>
-    <!-- DO NOT TRANSLATE string name="walls_powercrust">动力外壳</string -->
+    <!-- NO string name="walls_powercrust">动力外壳</string -->
     <string name="walls_hull">外壳</string>
     <string name="walls_bubble">泡装</string>
     <string name="walls_tube">管状</string>
-    <!-- DO NOT TRANSLATE string name="walls_delaunay">三角</string -->
+    <!-- NO string name="walls_delaunay">三角</string -->
 
     <string name="powercrust_few_splays">动力外壳: 侧射太少</string>
     <string name="powercrust_failed">动力外壳失败</string>
@@ -1960,18 +1962,18 @@
     <string name="no_model">无3D模型</string>
     <string name="no_topodroid_model">无TopoDroid模型</string>
 
-    <string name="error_file_not_found">错误: 文件 %1$s 没有发现</string>
-    <string name="error_file_not_readable">错误: 文件 %1$s 无法读取</string>
+    <!-- UNUSED string name="error_file_not_found">错误: 文件 %1$s 没有发现</string -->
+    <!-- UNUSED string name="error_file_not_readable">错误: 文件 %1$s 无法读取</string -->
     <string name="error_file_read">错误: 文件 %1$s 读取失败</string>
     <string name="error_survey_read">错误: 测量 %1$s 读取失败</string>
-    <string name="error_io_exception">错误: 输入输出异常 %1$s</string>
+    <!-- UNUSED string name="error_io_exception">错误: 输入输出异常 %1$s</string -->
     <string name="error_parser_error">错误: 解析 %1$s</string>
     <string name="error_export_failed">错误: 输出 %1$s 失败</string>
     <string name="unsupported_format">不支持的文件格式</string>
 
 
-    <string name="export_gltf_ok">输出 glTF 文件</string>
-    <string name="export_gltf_fail">失败的 glTf 文件输出</string>
+    <!-- UNUSED string name="export_gltf_ok">输出 glTF 文件</string -->
+    <!-- UNUSED string name="export_gltf_fail">失败的 glTf 文件输出</string -->
 
     <string name="warning_not_overwrite">警告: 不覆盖现有文件 %1$s</string>
     <!-- UNUSED string name="warning_not_txt">警告: 无txt文件 %1$s</string -->
@@ -1985,7 +1987,7 @@
     <string name="warning_no_parent">警告: 无法转到父文件夹</string>
     <string name="no_permissions">没有所需权限，应用程序无法运行</string>
 
-    <string name="done_fractals">完成分形会变暗</string>
+    <!-- UNUSED string name="done_fractals">完成分形会变暗</string -->
     <string name="done_convexhull">凸起外壳洞壁已完成</string>
     <string name="fail_convexhull">凸起外壳洞壁失败</string>
     <string name="done_powercrust">动力外壳洞壁已完成</string>

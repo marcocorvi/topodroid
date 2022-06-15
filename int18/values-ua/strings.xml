@@ -5,7 +5,7 @@
     <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
-    <string name="app_name">TopoDroid</string>
+    <!-- NO string name="app_name">TopoDroid</string -->
     <string name="double_back">Натисніть "НАЗАД" ще раз для виходу</string>
 
     <!-- UNUSED string name="version_ask">Оновлення до нової версії TopoDroid.\nВи хочете переінсталювати інструменти малюнків?</string -->
@@ -304,7 +304,7 @@
     <string name="no_undelete">Нічого відновлювати</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">>D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Нахил %5$.1f"</string>
-    <!-- TODO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure">%1$s-%2$s: %3$.1f / %4$.1f m [%5$.1f %6$.1f] %7$.1f (%8$.1f \u00b0)</string -->
 
     <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">Опис</string>
@@ -384,11 +384,11 @@
     <!-- TODO string name="popup_cont_continue">Continue</string -->
 
     <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- TODO string name="connecting">Connecting &#8230;</string -->
+    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Не з\'єднано</string -->
     <!-- UNUSED string name="connected_already">Уже з\'єднано</string -->
 
-    <string name="not_available">Bluetooth недоступний</string>
+    <!-- UNUSED string name="not_available">Bluetooth недоступний</string -->
     <string name="not_enabled">Bluetooth вимкнений</string>
     <!-- UNUSED string name="not_connected">Немає з'єднання</string -->
     <!-- UNUSED string name="not_implemented">Поки не реалізовано</string -->
@@ -723,7 +723,7 @@
     <!-- TODO string name="help_measure_type">Measuring mode: fixed point or polyline</string -->
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
-    <!-- TODO string name="help_backups">Delete sketch backups</string -->
+    <!-- UNUSED string name="help_backups">Delete sketch backups</string -->
     <!-- TODO string name="help_calib_check">Calibration-check shots</string -->
     <string name="help_close">Закрити вікно</string>
     <string name="help_coeff">Показать коэфіцієнти калібрування</string>
@@ -1356,7 +1356,7 @@
     <!-- TODO string name="perm_camera">\nCamera</string -->
     <!-- TODO string name="perm_microphone">\nMicrophone</string -->
 
-    <string name="welcome_title">TopoDroid %1$s</string>
+    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
 
     <string name="welcome_text">
 \nTopoDroid це ПЗ з відкритим вихідним кодом для топозйомки печер за допомогою приладу DistoX.

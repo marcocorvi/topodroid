@@ -32,6 +32,46 @@ public class TDString
 
   public static final String OPTION_SCRAP = "-scrap";
 
+  /** @return string with spaces removes
+   * @param str input string
+   */
+  public static String noSpace( String str )
+  {
+    return (str == null)? null : str.replaceAll("\\s+", "");
+  }
+
+  /** @return string with spaces replaced by underscore
+   * @param str input string
+   */
+  public static String spacesToUnderscore( String str )
+  {
+    return (str == null)? null : str.replaceAll("\\s+", "_");
+  }
+
+  /** @return string with multiple spaces replaced by single space
+   * @param str input string
+   */
+  public static String spacesToSpace( String str )
+  {
+    return (str == null)? null : str.replaceAll("\\s+", " ");
+  }
+
+  /** @return string tokenisation on multiple spaces
+   * @param str input string
+   */
+  public static String[] splitOnSpaces( String str )
+  {
+    return (str == null)? null : str.replaceAll("\\s+", " ").split(" ");
+  }
+
+  /** @return string with comma replaced by point
+   * @param str input string
+   */
+  public static String commaToPoint( String str )
+  {
+    return (str == null)? null : str.replaceAll(",", ".");
+  }
+
   public static String escape( String str )
   {
     if ( str == null ) return "";

@@ -106,13 +106,13 @@ public class CWDActivity extends Activity
 
     // return the result to TDPrefActivuity
     if ( TDPath.checkBasePath( dir_name /*, base_name */ ) ) {
-      TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
+      // TDLog.Log( TDLog.LOG_PATH, "CWD set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
       TopoDroidApp.setCWDPreference( dir_name /* , base_name */ );
       Intent intent = new Intent();
       intent.putExtra( TDTag.TOPODROID_CWD, dir_name );
       setResult( RESULT_OK, intent );
     } else {
-      TDLog.Log( TDLog.LOG_PATH, "CWD Failed to set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
+      // TDLog.Log( TDLog.LOG_PATH, "CWD Failed to set dir <" + dir_name + /* "> base <" + base_name + */ ">" );
       setResult( RESULT_CANCELED );
     }
     return true;

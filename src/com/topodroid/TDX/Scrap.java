@@ -43,6 +43,10 @@ public class Scrap
   public int mScrapIdx;
   private RectF mBBox;   // this scrap bbox
 
+  /** cstr
+   * @param idx       scrap index (in the plot)
+   * @param plot_name name of the plot
+   */
   Scrap( int idx, String plot_name ) 
   {
     mCurrentStack = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
@@ -57,10 +61,16 @@ public class Scrap
     mPlotName = plot_name;
   }
 
+  /** @return true if this scrap has the specified plot name
+   * @param plot_name name of the plot
+   */
   boolean hasPlotName( String plot_name ) { return mPlotName != null && mPlotName.equals( plot_name ); }
 
   // ----------------------------------------------------------
-  // "merge" b1 into b0
+  /** "merge" a second rectangle into a first rectanle
+   * @param b0   first rectangle
+   * @param b1   second rectangle
+   */
   static void union( RectF b0, RectF b1 )
   {
     if ( b0.left   > b1.left   ) b0.left   = b1.left;
@@ -69,12 +79,16 @@ public class Scrap
     if ( b0.bottom < b1.bottom ) b0.bottom = b1.bottom;
   }
 
+  /** @return the next index for an area item
+   */
   int getNextAreaIndex() 
   {
     ++mMaxAreaIndex;
     return mMaxAreaIndex;
   }
 
+  /** clear the sketch items in this scrap
+   */
   void clearSketchItems()
   {
     synchronized( TDPath.mSelectionLock ) { mSelection.clearSelectionPoints(); }
@@ -85,11 +99,15 @@ public class Scrap
   }
 
   // SELECTION -------------------------------------------
+  /** clear the selected items in this scrap (synchronized)
+   */
   void syncClearSelected()
   { 
     synchronized( TDPath.mSelectionLock ) { clearSelected(); }
   }
 
+  /** clear the selected items in this scrap (not synchronized)
+   */
   void clearSelected()
   {
     mSelected.clear();
@@ -99,6 +117,8 @@ public class Scrap
     isMultiselection = false;
   }
 
+  /** @return true if this scrap is selectable
+   */
   boolean isSelectable() { return mSelection != null; }
 
   // FIXME-HIDE UNUSED
@@ -126,9 +146,17 @@ public class Scrap
 
   // end SELECTION -------------------------------------------
   // UNDO/REDO -----------------------------------------------
+
+  /** @return true if there are redo's
+   */
   boolean hasMoreRedo() { return  mRedoStack.toArray().length > 0; }
+
+  /** @return true if there are undo's
+   */
   boolean hasMoreUndo() { return  mCurrentStack.size() > 0; }
 
+  /** perform an undo
+   */
   void undo ()
   {
     final int length = mCurrentStack.size();
@@ -187,6 +215,17 @@ public class Scrap
   // end UNDO/REDO -----------------------------------------------
 
   // ADD etc. ----------------------------------------------------
+  /** select drawing items at a given position
+   * @param x    X coordinate
+   * @param y    Y coordinate
+   * @param radius selection radius
+   * @param mode   ?
+   * @param legs            whether to select also legs
+   * @param splays          whether to select also splays
+   * @param stations        whether to select also stations
+   * @param station_splay   ?
+   * @param selection_fixed ?
+   */
   SelectionSet getItemsAt( float x, float y, float radius, int mode, 
 		           boolean legs, boolean splays, boolean stations, DrawingStationSplay station_splay,
 			   Selection selection_fixed // FIXME-HIDE
@@ -217,6 +256,9 @@ public class Scrap
     }
   }
 
+  /** add drawing items
+   * @param paths   drawing items to add
+   */
   void addCommand( ArrayList< DrawingPath > paths )
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -235,6 +277,9 @@ public class Scrap
 
   // PATH ACTIONS ------------------------------------------------
 
+  /** remove a drawing item
+   * @param path   drawing item to remove
+   */
   private void doDeletePath( DrawingPath path )
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -246,6 +291,10 @@ public class Scrap
     }
   }
 
+  /** remove a drawing item
+   * @param path     drawing item to remove
+   * @param eraseCmd erase command (for UNDO)
+   */
   void deletePath( DrawingPath path, EraseCommand eraseCmd ) // called by DrawingSurface
   {
     doDeletePath( path );
@@ -253,7 +302,12 @@ public class Scrap
     if ( eraseCmd != null ) eraseCmd.addAction( EraseAction.ERASE_REMOVE, path );
   }
 
-  // deleting a section line automatically deletes the associated section point(s)
+  /** remove a section line
+   * @param line     section line to remove
+   * @param scrap    ?
+   * @param eraseCmd erase command (for UNDO)
+   * @note deleting a section line automatically deletes the associated section point(s)
+   */
   void deleteSectionLine( DrawingPath line, String scrap, EraseCommand cmd )
   {
     synchronized( TDPath.mCommandsLock ) {
@@ -277,6 +331,10 @@ public class Scrap
     }
   }
 
+  /** remove a section point
+   * @param scrap_name ?
+   * @param eraseCmd   erase command (for UNDO)
+   */
   void deleteSectionPoint( String scrap_name, EraseCommand cmd )
   {
     int index = BrushManager.getPointSectionIndex();

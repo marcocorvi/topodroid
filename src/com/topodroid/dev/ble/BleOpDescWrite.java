@@ -32,6 +32,6 @@ public class BleOpDescWrite extends BleOperation
   @Override 
   public void execute()
   {
-    TDLog.Log( TDLog.LOG_BT, "BleOp exec desc write");
+    // TDLog.Log( TDLog.LOG_BT, "BleOp exec desc write");
   }
 }

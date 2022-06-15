@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.c3in.ParserException;
 import com.topodroid.c3in.ParserTh;
@@ -189,7 +190,7 @@ public class DEMsurface
           TDLog.Error("TopoGL run out of surface data");
           throw new ParserException( filename, linenr );
         }
-        String[] vals = line.replaceAll("\\s+", " ").split( " " );
+        String[] vals = TDString.splitOnSpaces( line );
         if ( vals.length > 0 ) {
           int idx = ParserTh.nextIndex( vals, -1 );
           if ( vals[idx].equals( "grid_flip" ) ) {

@@ -99,10 +99,10 @@ class SaveFullFileTask extends AsyncTask<Void,Void,String>
   {
     // TDLog.v( "save plot file task post exec");
     if ( filename == null ) {
-      TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFullname );
+      // TDLog.Log( TDLog.LOG_IO, "failed export as CSX " + mFullname );
       if ( mToast ) TDToast.make( R.string.saving_file_failed );
     } else {
-      TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
+      // TDLog.Log( TDLog.LOG_IO, "exported survey as CSX " + filename );
       if ( mToast ) TDToast.make( String.format( mFormat, "csx" ) ); // was filename
     }
   }

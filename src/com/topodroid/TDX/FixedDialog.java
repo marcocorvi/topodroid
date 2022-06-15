@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
@@ -224,7 +225,7 @@ class FixedDialog extends MyDialog
       if ( mButtonDecl.isChecked() && mTVdecl.getText() != null ) {
         String decl_str = mTVdecl.getText().toString();
         if ( /* decl_str != null && */ decl_str.length() > 0 ) {
-          decl_str = decl_str.replaceAll( ",", "." );
+          decl_str = TDString.commaToPoint( decl_str );
           try {
             mParent.setDeclination( Float.parseFloat( decl_str ) );
           } catch ( NumberFormatException e ) {

@@ -14,7 +14,7 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
-    <!-- OK string name="app_name">TopoDroid</string -->
+    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
     <string name="double_back">Appuyez RETOUR une nouvelle fois pour sortir</string>
 
@@ -31,7 +31,6 @@ Refer to the web pages for details.\n
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <!-- TODO string name="r_continue">CONTINUE</string -->
 
-    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
     <string name="symbols_ask">Installer les outils de dessin v.%1$s?\n ? (v. actuelle: v.%2$s) </string>
 
@@ -49,7 +48,7 @@ Refer to the web pages for details.\n
 	    D\'autres paramètres concernent la présentation dans la fenêtre d\'esquisse (taille des icônes, taille des étiquettes, largeur des lignes, etc.).
 	    vous devriez les adapter à vos besoins./n/n
     </string>
-    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <!-- TODO string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">POINT</string>
     <string name="LINE">LIGNE</string>
@@ -153,7 +152,7 @@ Refer to the web pages for details.\n
     <string name="auto">automatique</string>
     <string name="linear">linéaire</string>
     <string name="non_linear">non-linéaire</string>
-    <string name="algo_minimum">minimum</string>
+    <!-- NO string name="algo_minimum">minimum</string -->
 
     <!-- UNUSED string name="device_algo_failed">Échec de détermination automatique de l\'algorithme depuis l\'appareil\n. Utilisation de l\'algorithme linéraire</string -->
     <string name="device_address">Addresse %1$s</string>
@@ -352,7 +351,7 @@ Refer to the web pages for details.\n
     <string name="no_data_reduction">Pas de réduction des données</string>
 <string name="no_db">Pas de base de données</string>
 <string name="no_device_address">Adresse de périphérique non sélectionnée</string>
-<string name="no_device_found">Pas de périphérique trouvé</string>
+<!-- UNUSED string name="no_device_found">Pas de périphérique trouvé</string -->
 <string name="no_feature_audio">Audio non supporté</string>
     <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
 <string name="no_gms">L\'étalonnage ne contient pas de données.\nUtiliser le bouton Télécharger</string>
@@ -360,7 +359,7 @@ Refer to the web pages for details.\n
     <string name="no_leg_first">La sélection ne commence pas par une visée de cheminement</string>
 <string name="no_leg_intersection">La ligne de section transverse ne coupe aucune ligne de cheminement</string>
 <string name="no_location_data">Aucune donnée de géolocalisation</string>
-<string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string>
+<!-- UNUSED string name="no_paired_device">Aucun périphérique appairé.\nRecherchez et appairez un DistoX</string -->
 <string name="no_photos">Le relevé ne contient pas de photo</string>
 <string name="no_plots">Le relevé ne contient pas de croquis.\nUtilisez le bouton Ajouter pour en créer un.</string>
 <string name="no_profile_overview">Pas d\'apercu pour les coupes projetées</string>
@@ -375,7 +374,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
 <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Azimut %5$.1f"</string>
 <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Pente %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
 <string name="menu_3d">3D</string>
 <string name="menu_about">A PROPOS</string>
@@ -384,7 +383,7 @@ Refer to the web pages for details.\n
 <!-- UNUSED string name="menu_attach">CONNECTER</string -->
 <!-- UNUSED string name="menu_attached">Connecté</string -->
 <!-- UNUSED string name="menu_ready">Prêt</string -->
-    <string name="menu_backups">EFFACER SAUVEGARDES</string>
+    <!-- UNUSED string name="menu_backups">EFFACER SAUVEGARDES</string -->
     <string name="menu_calib_check">VERIF. ÉTALONNAGE</string>
     <string name="menu_close">FERMER</string>
     <!-- UNUSED string name="menu_clear">EFFACER</string -->
@@ -411,7 +410,7 @@ Refer to the web pages for details.\n
     <string name="menu_options">OPTIONS</string>
     <string name="menu_overview">APERÇU</string>
     <string name="menu_packets">PAQUETS</string>
-    <string name="menu_pair">APPAIRER</string>
+    <!-- UNUSED string name="menu_pair">APPAIRER</string -->
     <string name="menu_palette">PALETTE</string>
     <string name="menu_photo">PHOTO</string>
     <string name="menu_sensor">CAPTEUR</string>
@@ -428,9 +427,9 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <string name="zoom_fixed">Papier millimétré</string>
 
-    <string name="start_scan">Lancer le scan</string>
-    <string name="stop_scan">Arrêter le scan</string>
-    <string name="title_scan">Scan BLE</string>
+    <!-- UNUSED string name="start_scan">Lancer le scan</string -->
+    <!-- UNUSED string name="stop_scan">Arrêter le scan</string -->
+    <!-- UNUSED string name="title_scan">Scan BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Echec du scan BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Défaillance du BLE</string -->
     <string name="ble_no_remote">Pas d\'appareil distant détecté</string>
@@ -479,11 +478,11 @@ Refer to the web pages for details.\n
     <string name="popup_cont_continue">Continue</string>
 
     <string name="connection_error">Erreur de connexion</string>
-    <string name="connecting">Connecxion &#8230;</string>
+    <!-- UNUSED string name="connecting">Connecxion &#8230;</string -->
     <!-- UNUSED string name="connected_none">Non connecté</string -->
     <!-- UNUSED string name="connected_already">Déjà Connecté</string -->
 
-    <string name="not_available">Bluetooth indisponible</string>
+    <!-- UNUSED string name="not_available">Bluetooth indisponible</string -->
     <string name="not_enabled">Bluetooth désactivé</string>
 
     <!-- UNUSED string name="not_implemented">Pas encore implémenté</string -->
@@ -580,7 +579,7 @@ Refer to the web pages for details.\n
     <string name="survey_split">Diviser le relevé ?</string>
     <string name ="survey_not_attached">ATTENTION : visées non reliées !</string>
     <string name="survey_not_extend">ATTENTION : direction d\'extension des visées non définies !</string>
-    <string name="survey_not_attached_extend">ATTENTION : visées non reliées et dir. ext. non définies</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ATTENTION : visées non reliées et dir. ext. non définies</string -->
     <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
     <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
@@ -697,7 +696,7 @@ Refer to the web pages for details.\n
      <!-- UNUSED string name="ask_reset">Réinitialiser la mémoire du DistoX ?</string -->
      <!-- UNUSED string name="ask_close_survey">Quitter le relevé ?</string -->
     <string name="ask_gps_service">Activer le service GPS ?</string>
-    <string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string>
+    <!-- UNUSED string name="ask_backups_clear">Supprimer des sauvegardes d\'esquisses ?</string -->
     <string name="ask_manual_update">Mise à jour de la traduction du manuel d\'utilisation ?\nCourant v. %1$d Installé v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Ajouter       </string -->
@@ -840,7 +839,7 @@ Refer to the web pages for details.\n
 
     <!-- UNUSED string name="length">Longueur [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
-    <!-- OK string name="clino">Clino [deg]</string -->
+    <!-- TODO string name="clino">Clino [deg]</string -->
 
     <!-- TODO string name="hint_notes">notes</string -->
     <!-- TODO string name="hint_label">label</string -->
@@ -866,7 +865,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="hint_declination">declination</string -->
     <!-- TODO string name="hint_station">station</string -->
 
-    <!-- OK string name="orientation">orientation</string -->
+    <!-- TODO string name="orientation">orientation</string -->
     <string name="contents">Contenus</string>
     <string name="error_distribution">Répartition d\'erreur</string>
     <string name="angle_distribution">Répartition angulaire</string>
@@ -903,7 +902,7 @@ Refer to the web pages for details.\n
     <string name="help_measure_undo">Abandonner le dernier point de la polyligne</string>
 
     <string name="help_audio">Liste des enregistrements audio</string>
-    <string name="help_backups">Supprimer des sauvegardes d\'esquisse</string>
+    <!-- UNUSED string name="help_backups">Supprimer des sauvegardes d\'esquisse</string -->
     <string name="help_calib_check">Visées de contrôle d\'étalonnage</string>
     <string name="help_close">Fermer fenêtre</string>
     <!-- TODO string name="help_close_app">Close app</string -->
@@ -1015,7 +1014,7 @@ Refer to the web pages for details.\n
     <string name="help_add_equate">Ajouter des égalités</string>
     <string name="help_equates">Lister les égalités entre les topographies</string>
 
-    <string name="export_bgcolor">Couleur d\'arrière-plan</string>
+    <!-- UNUSED string name="export_bgcolor">Couleur d\'arrière-plan</string -->
     <!-- TODO string name="export_config">Config commands</string -->
     <string name="export_csv_rawdata">Données brutes</string>
     <string name="export_dxf_blocks">Blocs DXF</string>
@@ -1029,7 +1028,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_prefix_hint">prefix</string -->
     <!-- TODO string name="export_suffix_hint">suffix</string -->
     <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <string name="export_scale_png">Résolution</string>
+    <!-- UNUSED string name="export_scale_png">Résolution</string -->
     <string name="export_scale_th">Echelle 1 :</string>
     <string name="export_splays">Visées latérales d\'habillage</string>
     <!-- TODO string name="export_splays_named">Named splays</string -->
@@ -1132,7 +1131,7 @@ Refer to the web pages for details.\n
 
     <string name="title_settings_sketch">TopoDroid : paramétrage de l\'esquisse 3D</string>
     <string name="title_settings_survey">TopoDroid : paramétrage du relevé topo</string>
-    <string name="title_settings_splay">TopoDroid : paramétrage des visées latérales d\'habillage</string>
+    <!-- UNUSED string name="title_settings_splay">TopoDroid : paramétrage des visées latérales d\'habillage</string -->
     <string name="title_settings_shot">TopoDroid : paramétrage des visées</string>
     <string name="title_settings_units">TopoDroid : paramétrage des unités</string>
     <string name="title_settings_location">TopoDroid : paramétrage de la localisation</string>
@@ -1193,15 +1192,15 @@ Refer to the web pages for details.\n
   <string name="pref_cat_drawing">OPTIONS DE DESSIN</string>
   <string name="pref_cat_import_export">IMPORT - EXPORT</string>
   <string name="pref_cat_exportimport">IMPORT</string>
-  <!-- OK string name="pref_cat_exportth">Therion</string -->
-  <!-- OK string name="pref_cat_exportdat">Compass</string -->
-  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
-  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
-  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- OK string name="pref_cat_exportpng">PNG</string -->
-  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
+  <!-- TODO string name="pref_cat_exportth">Therion</string -->
+  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
+  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
+  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
+  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
+  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">OPTIONS D\'ETALONNAGE</string>
   <string name="pref_cat_device">OPTIONS DU DISTOX</string>
@@ -1550,8 +1549,8 @@ Refer to the web pages for details.\n
   <string name="pref_backup_number_summary">Nombre de sauvegardes de croquis</string>
   <string name="pref_backup_interval_title">Intervalle sauvegarde</string>
   <string name="pref_backup_interval_summary">Intervalle minimum entre deux sauvegardes [s]</string>
-  <string name="pref_backups_clear_title">Effacement Sauvegardes</string>
-  <string name="pref_backups_clear_summary">Activer le menu de nettoyage des sauvegardes de croquis</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Effacement Sauvegardes</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Activer le menu de nettoyage des sauvegardes de croquis</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Aire Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Sauver les Aires Xtherion</string -->
   <string name="pref_therion_splays_title">Visées latérales d\'habillage Therion</string>
@@ -1633,6 +1632,7 @@ Refer to the web pages for details.\n
   <string name="pref_walls_xstep_summary">Distance minimum entres les points formant une ligne de paroi [m]</string>
 -->
 
+<!-- DONT_TRANSLATE
   <string name="pref_algo_min_alpha_title">Min-algo alpha</string>
   <string name="pref_algo_min_alpha_summary">Min-algo facteur d\'ajustment (par[0,1])</string>
   <string name="pref_algo_min_beta_title">Min-algo beta</string>
@@ -1641,6 +1641,7 @@ Refer to the web pages for details.\n
   <string name="pref_algo_min_gamma_summary">Min-algo group G.x M.x weight</string>
   <string name="pref_algo_min_delta_title">Min-algo delta</string>
   <string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string>
+-->
 
 <!-- LEAVE LOG STUFF IN ENGLISH
   <string name="pref_log_stream_summary">Flux de journalisation</string>
@@ -1696,8 +1697,7 @@ Refer to the web pages for details.\n
     <string name="perm_camera">\nCamera</string>
     <string name="perm_microphone">\nMicrophone</string>
 
-    <!-- OK string name="welcome_title">Bienvenue dans TopoDroid %1$s</string -->
-
+    <!-- NO string name="welcome_title">Bienvenue dans TopoDroid %1$s</string -->
     <string name="welcome_text">
 \nTopodroid est une application Open Source pour réaliser des relevés topographiques de cavités souterraines avec un DistoX.
 \n\nAucune garantie : en utilisant ce logiciel vous acceptez que l\'auteur ne puisse être responsable d\'une quelconque perte de données, dommages ou quoi que ce soit d\'autre.
@@ -1825,7 +1825,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <string name="query" formatted="false">Topographie: %d Visées: %d Station: %d\nLongueur : %d Profondeur : %d</string>
+    <!-- UNUSED string name="query" formatted="false">Topographie: %d Visées: %d Station: %d\nLongueur : %d Profondeur : %d</string -->
     <!-- UNUSED string name="cno_files">Pas de fichier archive</string -->
     <string name="clear">Effacer</string>
 
@@ -1839,12 +1839,12 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
     <!-- UNUSED string name="style_fill">Fill</string -->
     <!-- TODO string name="surface_projection">Projection on DEM</string -->
-    <!-- OK string name="dem_file">DEM %1$s</string -->
+    <!-- TODO string name="dem_file">DEM %1$s</string -->
     <!-- TODO string name="dem_load">load</string -->
 
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
+    <!-- TODO string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1893,11 +1893,11 @@ Refer to the web pages for details.\n
 
     <string name="walls_title">Parois</string>
     <string name="walls_convexhull">Enveloppe Convexe</string>
-    <!-- OK string name="walls_powercrust">Enveloppe Powercrust</string -->
+    <!-- NO string name="walls_powercrust">Enveloppe Powercrust</string -->
     <string name="walls_hull">Enveloppe simple</string>
     <!-- TODO string name="walls_bubble">Bubble</string -->
     <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- OK string name="walls_delaunay">Enveloppe Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Enveloppe Delaunay</string -->
 
     <string name="powercrust_few_splays">Enveloppe Powercrust : très peu de visées latérales</string>
     <string name="powercrust_failed">Enveloppe Powercrust en échec</string>
@@ -1909,9 +1909,9 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
-    <string name="error_file_not_found">Erreur : archive  non trouvée</string>
-    <!-- TODO string name="error_file_not_readable">Erreur : fichier illisible</string -->
-    <string name="error_io_exception">Erreur : IO exception</string>
+    <!-- UNUSED string name="error_file_not_found">Erreur : archive  non trouvée</string -->
+    <!-- UNUSED string name="error_file_not_readable">Erreur : fichier illisible</string -->
+    <!-- UNUSED string name="error_io_exception">Erreur : IO exception</string -->
     <string name="error_parser_error">Erreur : erreur de l\'analyseur %1$s</string>
     <string name="error_export_failed">Erreur : exportation défaillante %1$s</string>
 

@@ -103,7 +103,7 @@ public class TDPrefActivity extends Activity
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
       mPrefCategory = extras.getInt( TDPrefCat.PREF_CATEGORY );
-      if ( mPrefCategory < TDPrefCat.PREF_CATEGORY_ALL || mPrefCategory > TDPrefCat.PREF_CATEGORY_LOG ) {
+      if ( mPrefCategory < TDPrefCat.PREF_CATEGORY_ALL || mPrefCategory > TDPrefCat.PREF_CATEGORY_MAX ) {
         mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL;
       }
     }
@@ -207,7 +207,7 @@ public class TDPrefActivity extends Activity
       case TDPrefCat.PREF_GEEK_IMPORT:        mPrefs = TDPref.makeGeekImportPrefs( this, hlp ); break;
       case TDPrefCat.PREF_GEEK_DEVICE:        mPrefs = TDPref.makeGeekDevicePrefs( this, hlp ); break;
       // case TDPrefCat.PREF_CATEGORY_SKETCH:    mPrefs = TDPref.makeSketchPrefs(   this, hlp ); break; // FIXME_SKETCH_3D
-      case TDPrefCat.PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break;
+      // case TDPrefCat.PREF_CATEGORY_LOG:       mPrefs = TDPref.makeLogPrefs(      this, hlp ); break; // NO_LOGS
       default:                      mPrefs = TDPref.makeMainPrefs(     this, hlp ); break;
     }
     int cnt = 0;

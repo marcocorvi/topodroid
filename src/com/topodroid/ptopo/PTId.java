@@ -43,7 +43,7 @@ public class PTId
       return true;
     }
     String[] vals = str.split( "\\." );
-    TDLog.Log( TDLog.LOG_PTOPO, "PT ID set " + str + " vals " + vals.length ); 
+    // TDLog.Log( TDLog.LOG_PTOPO, "PT ID set " + str + " vals " + vals.length ); 
     if ( vals.length > 1 ) {
       int major = 0;
       int minor = 0;

@@ -349,7 +349,7 @@ public class SapComm extends TopoDroidComm
 
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.Log( TDLog.LOG_BT, "SAP comm: readedDesc" );
+    TDLog.v( "SAP comm: readedDesc" );
   }
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
@@ -359,7 +359,7 @@ public class SapComm extends TopoDroidComm
 
   public void completedReliableWrite()
   {
-    TDLog.Log( TDLog.LOG_BT, "SAP comm: reliable write" );
+    TDLog.v( "SAP comm: reliable write" );
   }
 
   public void disconnected()
@@ -462,26 +462,26 @@ public class SapComm extends TopoDroidComm
 
   public boolean enablePNotify( UUID srcUuid, UUID chrtUuid )
   {
-    TDLog.Log( TDLog.LOG_BT, "SAP comm: enable P notify");
+    TDLog.v( "SAP comm: enable P notify");
     return true;
   }
 
   public boolean enablePIndicate( UUID srcUuid, UUID chrtUuid )
   {
-    TDLog.Log( TDLog.LOG_BT, "SAP comm: enable P indicate");
+    TDLog.v( "SAP comm: enable P indicate");
     return true;
   }
 
   public void connectGatt( Context ctx, BluetoothDevice device )
   {
-    // TDLog.Log( TDLog.LOG_BT, "SAP connect Gatt" );
+    // TDLog.v( "SAP connect Gatt" );
     closeChrt();
     mCallback.connectGatt( ctx, device );
   }
 
   public void disconnectGatt()
   {
-    // TDLog.Log( TDLog.LOG_BT, "SAP comm: disconnect Gatt" );
+    // TDLog.v( "SAP comm: disconnect Gatt" );
     closeChrt();
     mCallback.disconnectGatt();
     notifyStatus( ConnectionState.CONN_WAITING );

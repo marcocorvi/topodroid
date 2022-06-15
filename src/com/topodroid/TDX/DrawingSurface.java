@@ -154,7 +154,7 @@ class DrawingSurface extends SurfaceView
 
     if ( mode == DRAWING_PLAN ) {
       if ( fullname != null ) manager = mCache.get( fullname );
-      TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
+      // TDLog.Log( TDLog.LOG_IO, "check out PLAN from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager1 = new DrawingCommandManager( DRAWING_PLAN, fullname );
       } else {
@@ -165,7 +165,7 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager1;
     } else if ( mode == DRAWING_PROFILE ) {
       if ( fullname != null ) manager = mCache.get( fullname );
-      TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
+      // TDLog.Log( TDLog.LOG_IO, "check out PROFILE from cache " + fullname + " found: " + (manager!=null) );
       if ( manager == null ) {
         mCommandManager2 = new DrawingCommandManager( DRAWING_PROFILE, fullname );
 	if ( is_extended ) mCommandManager2.mIsExtended = true;

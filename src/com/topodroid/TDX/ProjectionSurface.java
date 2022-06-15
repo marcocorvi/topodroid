@@ -216,7 +216,7 @@ public class ProjectionSurface extends SurfaceView
     public void surfaceCreated( SurfaceHolder holder ) 
     {
       // TDLog.v( "surface created");
-      TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
+      // TDLog.Log( TDLog.LOG_PLOT, "surfaceCreated " );
       // mHolder = holder;
       // holder.addCallback(this);
 

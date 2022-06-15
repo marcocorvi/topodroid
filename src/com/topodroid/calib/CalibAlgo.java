@@ -105,7 +105,8 @@ public class CalibAlgo
     m = Math.abs( a.z.z ); if ( m > max ) max = m;
     if ( max >= MAX_M_VALUE ) {
       float m1 = (float)(MAX_M_VALUE / (max + 0.00000001) );
-      TDLog.Log( TDLog.LOG_CALIB, "EnforceMax2 scale by " + m1 );
+      // TDLog.Log( TDLog.LOG_CALIB, "EnforceMax2 scale by " + m1 );
+      TDLog.v( "EnforceMax2 scale by " + m1 );
       b.x *= m1;
       b.y *= m1;
       b.z *= m1;
@@ -488,10 +489,10 @@ public class CalibAlgo
     m[idx] = scaledVector( mx, my, mz );
     group[idx] = (group0 < 0)? 0 : group0;
 
-    if ( TDLog.LOG_CALIB ) {
-      TDLog.DoLog(
-        String.format(Locale.US, "Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
-    }
+    // if ( TDLog.LOG_CALIB ) {
+    //   TDLog.DoLog(
+    //     String.format(Locale.US, "Add %d G %d %d %d M %d %d %d Grp %d", idx, gx, gy, gz, mx, my, mz, group0 ) );
+    // }
     idx ++;
   }
 
@@ -511,39 +512,43 @@ public class CalibAlgo
     bG = null;
     aM = null;
     bM = null;
-    TDLog.Log( TDLog.LOG_CALIB, "Reset calibration " + N + " data");
+    // TDLog.Log( TDLog.LOG_CALIB, "Reset calibration " + N + " data");
   }
     
 /* ============================================================ */
 
+  // NO_LOGS
   protected void LogNumber( String msg, int it )
   {
-    TDLog.Log( TDLog.LOG_CALIB, msg + " " + it );
+    // TDLog.Log( TDLog.LOG_CALIB, msg + " " + it );
   }
 
+  // NO_LOGS
   protected void LogMatrixVector( String msg, TDMatrix m1, TDVector v1 ) 
   {
-    if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.DoLog(
-      msg + String.format(Locale.US,
-       " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
-       m1.x.x, m1.x.y, m1.x.z, v1.x, 
-       m1.y.x, m1.y.y, m1.y.z, v1.y, 
-       m1.z.x, m1.z.y, m1.z.z, v1.z ) );
+    // if ( ! TDLog.LOG_CALIB ) return;
+    // TDLog.DoLog(
+    //   msg + String.format(Locale.US,
+    //    " M: %8.4f %8.4f %8.4f V: %8.4f\n    %8.4f %8.4f %8.4f   %8.4f\n    %8.4f %8.4f %8.4f   %8.4f",
+    //    m1.x.x, m1.x.y, m1.x.z, v1.x, 
+    //    m1.y.x, m1.y.y, m1.y.z, v1.y, 
+    //    m1.z.x, m1.z.y, m1.z.z, v1.z ) );
   }
 
+  // NO_LOGS
   protected void LogVectors( String msg, long group, TDVector v1, TDVector v2 )
   {
-    if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.DoLog(
-      msg + String.format(Locale.US,
-      " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
+    // if ( ! TDLog.LOG_CALIB ) return;
+    // TDLog.DoLog(
+    //   msg + String.format(Locale.US,
+    //   " %3d V1 %8.4f %8.4f %8.4f\n    V2 %8.4f %8.4f %8.4f", group, v1.x, v1.y, v1.z, v2.x, v2.y, v2.z ) ); 
   }
 
+  // NO_LOGS
   protected void LogSC( String msg, float s, float c )
   {
-    if ( ! TDLog.LOG_CALIB ) return;
-    TDLog.DoLog( msg + String.format(Locale.US, " S %8.4f C %8.4f", s, c ) );
+    // if ( ! TDLog.LOG_CALIB ) return;
+    // TDLog.DoLog( msg + String.format(Locale.US, " S %8.4f C %8.4f", s, c ) );
   }
 
 /* ============================================================ */

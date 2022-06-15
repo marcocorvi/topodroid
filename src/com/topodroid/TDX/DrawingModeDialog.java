@@ -149,35 +149,30 @@ class DrawingModeDialog extends MyDialog
     public void onClick(View view)
     {
       // TDLog.Log( TDLog.LOG_INPUT, "DrawingModeDialog onClick " + view.toString() );
-      switch (view.getId()){
-        case R.id.button_ok:
-          int mode = DisplayMode.DISPLAY_NONE;
-          if ( mParent != null && ! mParent.isAnySection() ) {
-            if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
-            if ( TDSetting.mShotRecent && mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
-            if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
-              mParent.setShiftDrawing( mCBfixed.isChecked() );
-            }
+      int vid = view.getId();
+      if ( vid == R.id.button_ok ) {
+        int mode = DisplayMode.DISPLAY_NONE;
+        if ( mParent != null && ! mParent.isAnySection() ) {
+          if ( mCBsplay.isChecked() )   mode |= DisplayMode.DISPLAY_SPLAY;
+          if ( TDSetting.mShotRecent && mCBlatest.isChecked() )  mode |= DisplayMode.DISPLAY_LATEST;
+          if ( /* mParent != null && */ TDLevel.overAdvanced && TDSetting.mPlotShift ) {
+            mParent.setShiftDrawing( mCBfixed.isChecked() );
           }
-          if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
-          if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
-          if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
-          if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
-
-          // TDLog.Error( "Mode " + mode );
-          mSurface.setDisplayMode( mode );
-          if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
-            mParent.scrapOutlineDialog();
-          }
-
-          if ( TDSetting.mWithLevels > 0 ) setLevels();
-
-          break;
-        case R.id.button_back:
+        }
+        if ( mCBleg.isChecked() )     mode |= DisplayMode.DISPLAY_LEG;
+        if ( mCBstation.isChecked() ) mode |= DisplayMode.DISPLAY_STATION;
+        if ( mCBgrid.isChecked() )    mode |= DisplayMode.DISPLAY_GRID;
+        if ( mCBscaleRef.isChecked() )mode |= DisplayMode.DISPLAY_SCALEBAR;
+        // TDLog.Error( "Mode " + mode );
+        mSurface.setDisplayMode( mode );
+        if ( TDLevel.overNormal && mCBscrap.isChecked() && mParent != null ) {
+          mParent.scrapOutlineDialog();
+        }
+        if ( TDSetting.mWithLevels > 0 ) setLevels();
+      } else if ( vid == R.id.button_back ) {
           /* nothing */
-          break;
-        // case R.id.button_mode_cancel:
-        //   break;
+      // } else if ( vid == R.id.button_mode_cancel ) {
+      //   /* nothing */
       }
       dismiss();
     }

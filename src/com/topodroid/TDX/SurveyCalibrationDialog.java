@@ -72,28 +72,26 @@ class SurveyCalibrationDialog extends MyDialog
   public void onClick(View view)
   {
     hide();
-    switch (view.getId()) {
-      case R.id.btn_save:
-        if ( mETlength.getText() != null ) {
-          try {
-            ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() ) / TDSetting.mUnitLength;
-          } catch ( NumberFormatException e ) { }
-        }
-        if ( mETazimuth.getText() != null ) {
-          try {
-            ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() ) / TDSetting.mUnitAngle;
-          } catch ( NumberFormatException e ) { }
-        }
-        if ( mETclino.getText() != null ) {
-          try {
-            ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() ) / TDSetting.mUnitAngle;
-          } catch ( NumberFormatException e ) { }
-        }
-        ManualCalibration.mLRUD = mCBlrud.isChecked();
-        break;
-      // case R.id.btn_cancel:
-      //   /* nothing */
-      //   break;
+    int vid = view.getId();
+    if ( vid == R.id.btn_save ) {
+      if ( mETlength.getText() != null ) {
+        try {
+          ManualCalibration.mLength = Float.parseFloat( mETlength.getText().toString() ) / TDSetting.mUnitLength;
+        } catch ( NumberFormatException e ) { }
+      }
+      if ( mETazimuth.getText() != null ) {
+        try {
+          ManualCalibration.mAzimuth = Float.parseFloat( mETazimuth.getText().toString() ) / TDSetting.mUnitAngle;
+        } catch ( NumberFormatException e ) { }
+      }
+      if ( mETclino.getText() != null ) {
+        try {
+          ManualCalibration.mClino = Float.parseFloat( mETclino.getText().toString() ) / TDSetting.mUnitAngle;
+        } catch ( NumberFormatException e ) { }
+      }
+      ManualCalibration.mLRUD = mCBlrud.isChecked();
+    // } else if ( vid == R.id.btn_cancel ) {
+    //   /* nothing */
     }
     dismiss();
   }

@@ -232,7 +232,7 @@ public class DeviceUtil
 
   public static void bindDevice( BluetoothDevice device )
   {
-    TDLog.Log( TDLog.LOG_COMM, " bind device ... " + ((device==null)? "null" : device.getAddress()) );
+    // TDLog.Log( TDLog.LOG_COMM, " bind device ... " + ((device==null)? "null" : device.getAddress()) );
     if ( device == null ) return;
 
     String PIN_CODE = "0000";
@@ -258,7 +258,7 @@ public class DeviceUtil
   public static void checkPairing( String address )
   {
     if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN
-      TDLog.Log( TDLog.LOG_COMM, " check pairing " + address );
+      // TDLog.Log( TDLog.LOG_COMM, " check pairing " + address );
       BluetoothDevice btDevice = getRemoteDevice( address );
       // TDLog.Log( TDLog.LOG_BT, "auto-pairing remote device " + btDevice.getAddress() + " status " + btDevice.getBondState() );
       if ( ! isPaired( btDevice ) ) {

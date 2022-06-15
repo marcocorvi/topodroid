@@ -77,7 +77,7 @@ public class DistoXComm extends TopoDroidComm
   private void resetBTReceiver()
   {
     if ( mBTReceiver == null ) return;
-    // TDLog.Log( TDLog.LOG_COMM, "reset BT receiver");
+    // TDLog.v( "reset BT receiver");
     try {
       mApp.unregisterReceiver( mBTReceiver );
     } catch ( IllegalArgumentException e ) {
@@ -90,7 +90,7 @@ public class DistoXComm extends TopoDroidComm
   private void setupBTReceiver( final int data_type )
   {
     resetBTReceiver();
-    // TDLog.Log( TDLog.LOG_COMM, "setup BT receiver");
+    // TDLog.v( "setup BT receiver");
     mBTReceiver = new BroadcastReceiver() 
     {
       @Override
@@ -108,18 +108,18 @@ public class DistoXComm extends TopoDroidComm
         if ( device.equals(mAddress) ) {
           // TDLog.v( "on receive");
           if ( DeviceUtil.ACTION_ACL_CONNECTED.equals( action ) ) {
-            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_CONNECTED " + device + " addr " + mAddress );
+            // TDLog.v( "[C] ACL_CONNECTED " + device + " addr " + mAddress );
             // TDLog.v( "***** Disto comm: on Receive() CONNECTED" );
             mApp.notifyStatus( ConnectionState.CONN_CONNECTED );
             mApp.mDataDownloader.updateConnected( true );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECT_REQUESTED.equals( action ) ) {
-            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
+            // TDLog.v( "[C] ACL_DISCONNECT_REQUESTED " + device + " addr " + mAddress );
             // TDLog.v( "***** Disto comm: on Receive() DISCONNECT REQUEST" );
             mApp.notifyStatus( ConnectionState.CONN_DISCONNECTED );
             mApp.mDataDownloader.updateConnected( false );
             closeSocket( );
           } else if ( DeviceUtil.ACTION_ACL_DISCONNECTED.equals( action ) ) {
-            // TDLog.Log( TDLog.LOG_BT, "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
+            // TDLog.v( "[C] ACL_DISCONNECTED " + device + " addr " + mAddress );
             // TDLog.v( "***** Disto comm: on Receive() DISCONNECTED" );
             mApp.notifyStatus( ConnectionState.CONN_WAITING );
             mApp.mDataDownloader.updateConnected( false );
@@ -131,11 +131,11 @@ public class DistoXComm extends TopoDroidComm
           final int state     = data.getIntExtra(DeviceUtil.EXTRA_BOND_STATE, DeviceUtil.ERROR);
           final int prevState = data.getIntExtra(DeviceUtil.EXTRA_PREVIOUS_BOND_STATE, DeviceUtil.ERROR);
           if (state == DeviceUtil.BOND_BONDED && prevState == DeviceUtil.BOND_BONDING) {
-            TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED paired (BONDING --> BONDED) " + device );
+            TDLog.v( "BOND STATE CHANGED paired (BONDING --> BONDED) " + device );
           } else if (state == DeviceUtil.BOND_NONE && prevState == DeviceUtil.BOND_BONDED){
-            TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> NONE) " + device );
+            TDLog.v( "BOND STATE CHANGED unpaired (BONDED --> NONE) " + device );
           } else if (state == DeviceUtil.BOND_BONDING && prevState == DeviceUtil.BOND_BONDED) {
-            TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
+            TDLog.v( "BOND STATE CHANGED unpaired (BONDED --> BONDING) " + device );
             if ( mBTSocket != null ) {
               // TDLog.Error( "[*] socket is not null: close and retry connect ");
               mApp.notifyStatus( ConnectionState.CONN_WAITING );
@@ -145,7 +145,7 @@ public class DistoXComm extends TopoDroidComm
               connectSocket( mAddress, data_type ); // returns immediately if mAddress == null
             }
           } else {
-            TDLog.Log( TDLog.LOG_BT, "BOND STATE CHANGED " + prevState + " --> " + state + " " + device );
+            TDLog.v( "BOND STATE CHANGED " + prevState + " --> " + state + " " + device );
           }
 
           // DeviceUtil.bind2Device( data );
@@ -188,7 +188,7 @@ public class DistoXComm extends TopoDroidComm
     // mAddress   = null; done by TopoDroidComm
     mBTDevice  = null;
     mBTSocket  = null;
-    // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm cstr");
+    // TDLog.v( "DistoX Comm cstr");
   }
 
   // public void resume()
@@ -212,11 +212,11 @@ public class DistoXComm extends TopoDroidComm
     // TDLog.v( "Disto comm: close socket() address " + mAddress );
     
     if ( mBTSocket == null ) {
-      // TDLog.Log( TDLog.LOG_COMM, "close socket() already null" );
+      // TDLog.v( "close socket() already null" );
       return;
     }
 
-    // TDLog.Log( TDLog.LOG_COMM, "close socket() address " + mAddress );
+    // TDLog.v( "close socket() address " + mAddress );
     for ( int k=0; k<1 && mBTSocket != null; ++k ) { 
       // TDLog.Error( "try close socket nr " + k );
       cancelCommThread();
@@ -241,7 +241,7 @@ public class DistoXComm extends TopoDroidComm
   protected void destroySocket( ) // boolean wait_thread )
   {
     if ( mBTSocket == null ) return;
-    // TDLog.Log( TDLog.LOG_COMM, "destroy socket() address " + mAddress );
+    // TDLog.v( "destroy socket() address " + mAddress );
     // closeProtocol(); // already in closeSocket()
     closeSocket();
     // mBTSocket = null;
@@ -589,7 +589,7 @@ public class DistoXComm extends TopoDroidComm
   {
     byte[] ret = null;
     if ( connectSocketAny( address ) ) {
-      TDLog.Log( TDLog.LOG_COMM, "DistoX read memory " + addr + " socket ok" );
+      TDLog.v( "DistoX read memory " + addr + " socket ok" );
       ret = mProtocol.readMemory( addr );
       // FIXME ASYNC new CommandThread( mProtocol, READ_MEMORY_LOWLEVEL, addr ) Note...
     }
@@ -609,12 +609,12 @@ public class DistoXComm extends TopoDroidComm
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     if ( mCommThread != null ) {
-      // TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: already connected");
+      // TDLog.v( "DistoX Comm connect: already connected");
       // TDLog.v( "DistoX comm: connect device - comm thread not null");
       return true;
     }
     if ( ! connectSocket( address, data_type ) ) {
-      TDLog.Log( TDLog.LOG_COMM, "DistoX Comm connect: failed");
+      TDLog.Error( "DistoX Comm connect: failed");
       // TDLog.v( "DistoX comm: connect device - failed socket");
       return false;
     }
@@ -626,7 +626,6 @@ public class DistoXComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "disconnect device");
     // TDLog.v( "DistoX comm: disconnect device ");
     cancelCommThread();
     destroySocket( );
@@ -659,7 +658,7 @@ public class DistoXComm extends TopoDroidComm
         byte[] command = ( a3 ? DeviceA3Details.HeadTail : DeviceX310Details.HeadTail );
         int prev_read = -1;
         int to_read = protocol.readToRead( command );
-        // TDLog.Log( TDLog.LOG_COMM, "download data HT: A3 " + a3 + " to-read " + to_read );
+        // TDLog.v( "download data HT: A3 " + a3 + " to-read " + to_read );
         if ( to_read == 0 ) {
           ret = to_read;
 	} else if ( to_read < 0 ) {
@@ -683,14 +682,14 @@ public class DistoXComm extends TopoDroidComm
 	    packets = getNrReadPackets();
 	    if ( packets >= to_read ) break;
             // if ( packets != prev_read ) {
-            //   TDLog.Log( TDLog.LOG_COMM, "download data: read " + packets + " / " + to_read );
+            //   TDLog.v( "download data: read " + packets + " / " + to_read );
             // }
             prev_read = packets;
             TDUtil.slowDown( 100 );
           }
 	  ret = getNrReadPackets();
 	  // if ( ret > to_read ) {
-          //   TDLog.Log( TDLog.LOG_COMM, "download done: read " + ret + " expected " + to_read );
+          //   TDLog.v( "download done: read " + ret + " expected " + to_read );
 	  // }
         }
       } else {
@@ -698,7 +697,7 @@ public class DistoXComm extends TopoDroidComm
         while ( mCommThread != null ) {
           TDUtil.slowDown( 100 );
         }
-        // TDLog.Log( TDLog.LOG_COMM, "download done: read " + getNrReadPacket() );
+        // TDLog.v( "download done: read " + getNrReadPacket() );
         // cancelCommThread(); // called by closeSocket() which is called by destroySocket()
         ret = getNrReadPackets();
       }

@@ -143,21 +143,21 @@ class StationNameDefault extends StationName
     return ret;
   }
 
-  // debug log
-  private void logJump( DBlock blk, String from, String to, Set<String> sts )
-  {
-    if ( TDLog.LOG_SHOT ) {
-      try {
-        int i1 = Integer.parseInt( from );
-        int i2 = Integer.parseInt( to );
-        if ( Math.abs(i2-i1) != 1 ) {
-          StringBuilder sb = new StringBuilder();
-          for ( String st : sts ) sb.append(st).append("," );
-          TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
-        }
-      } catch ( NumberFormatException e ) { }
-    }
-  }
+  // debug log  NO_LOGS
+  // private void logJump( DBlock blk, String from, String to, Set<String> sts )
+  // {
+  //   if ( TDLog.LOG_SHOT ) {
+  //     try {
+  //       int i1 = Integer.parseInt( from );
+  //       int i2 = Integer.parseInt( to );
+  //       if ( Math.abs(i2-i1) != 1 ) {
+  //         StringBuilder sb = new StringBuilder();
+  //         for ( String st : sts ) sb.append(st).append("," );
+  //         TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
+  //       }
+  //     } catch ( NumberFormatException e ) { }
+  //   }
+  // }
 
   /** assign station names to shots
    * @param list         list of dblock, including those to assign
@@ -246,7 +246,7 @@ class StationNameDefault extends StationName
                                                                //                 this-shot-from if splays after shot
                   from = to;                                   // next-shot-from = this-shot-to
                   to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
-                  logJump( blk, from, to, sts );
+                  // logJump( blk, from, to, sts ); // NO_LOGS
                 } else { // backward_shots
                   to   = from;                                     // next-shot-to   = this-shot-from
                   from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
@@ -277,7 +277,7 @@ class StationNameDefault extends StationName
             from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
             to   = from;
             to   = DistoXStationName.incrementName( to, sts );
-            logJump( blk, from, to, sts );
+            // logJump( blk, from, to, sts ); // NO_LOGS
             if ( current_station == null ) {
               if ( blk.isDistoXBacksight() ) {
                 station = shot_after_splay ? blk.mFrom

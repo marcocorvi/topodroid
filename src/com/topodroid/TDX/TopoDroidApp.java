@@ -709,7 +709,7 @@ public class TopoDroidApp extends Application
   {
     TDPrefHelper prefHlp = new TDPrefHelper( this );
     // ***** LOG FRAMEWORK
-    TDLog.loadLogPreferences( prefHlp );
+    TDLog.loadLogPreferences( prefHlp ); 
     // TDLog.v( "log load prefs done");
 
     // mData.compileStatements(); // this method is now empty (and commented)
@@ -1050,7 +1050,7 @@ public class TopoDroidApp extends Application
     if ( cwd.equals( TDInstance.cwd ) ) return;
     // TDInstance.cbd = cbd;
     TDInstance.cwd = cwd;
-    TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
+    // TDLog.Log( TDLog.LOG_PATH, "App set cwd <" + cwd + /* "> cbd <" + cbd + */ ">");
     mData.closeDatabase();
 
     TDPath.setTdPaths( TDInstance.cwd /*, TDInstance.cbd */ );
@@ -1666,7 +1666,7 @@ public class TopoDroidApp extends Application
                                       : TDInstance.survey + "-" + psd1.name;
     // String filename = TDPath.getSurveyCsxFile( fullname );
     // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname + " " + filename );
-    TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
+    // TDLog.Log( TDLog.LOG_IO, "exporting as CSX " + fullname );
     (new SaveFullFileTask( context, uri, TDInstance.sid, mData, info, psd1, psd2, origin, /* filename, */ fullname, 
        /* TDPath.getCsxFile(""), */ toast )).execute();
   }
@@ -2357,7 +2357,7 @@ public class TopoDroidApp extends Application
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if ( ! (mComm instanceof DistoX310Comm) ) return -1;
     File file = TDPath.getBinFile( name ); // PRIVATE FILE
-    TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
+    // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
     // TDLog.LogFile( "Firmware upload file " + file.getPath() );
     TDLog.v("APP FW upload file " + file.getPath() );
     // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );

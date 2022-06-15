@@ -119,7 +119,7 @@ class StationName
     // if ( ! TDSetting.mSplayExtend ) 
     {
       long extend = TDAzimuth.computeLegExtend( blk.mBearing );
-      TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set extend " + extend );
+      // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set extend " + extend );
       blk.setExtend( (int)extend, ExtendType.STRETCH_NONE ); 
       mData.updateShotExtend( blk.mId, mSid, extend, ExtendType.STRETCH_NONE );
     }
@@ -129,7 +129,7 @@ class StationName
   // used to set block extend "fixed"
   protected void setLegFixedExtend( DBlock blk, long extend )
   {
-    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set fixed extend " + extend );
+    // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set fixed extend " + extend );
     blk.setExtend( (int)extend, ExtendType.STRETCH_NONE );
     mData.updateShotExtend( blk.mId, mSid, extend, ExtendType.STRETCH_NONE );
   }
@@ -139,7 +139,7 @@ class StationName
 
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
-    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
+    // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
     //   TDLog.v("station name detect bad sibling (1)");
@@ -151,7 +151,7 @@ class StationName
   protected void setBlockName( DBlock blk, String from, String to )
   {
     // TDLog.v( "set block " + blk.mId + " name " + from + " " + to );
-    TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
+    // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
     //   TDLog.v("station name detect bad sibling (2)");

@@ -76,16 +76,13 @@ class ShotDisplayDialog extends MyDialog
     {
       // TDLog.Log( TDLog.LOG_INPUT, "ShotDisplayDialog onClick " + view.toString() );
       hide();
-      switch (view.getId()) {
-        case R.id.btn_ok:
-          setParent();
-          break;
-        case R.id.btn_cancel:
-          /* nothing */
-          break;
-        // case R.id.button_mode_refresh:
-        //   mParent.updateDisplay( );
-        //   break;
+      int vid = view.getId();
+      if ( vid == R.id.btn_ok ) {
+        setParent();
+      // } else if ( vid == R.id.btn_cancel ) {
+      //   /* nothing */
+      // } else if ( vid == R.id.button_mode_refresh ) {
+      //   mParent.updateDisplay( );
       }
       dismiss();
     }

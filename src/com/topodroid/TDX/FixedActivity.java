@@ -315,7 +315,7 @@ public class FixedActivity extends Activity
       intent.putExtra( "altitude",  fxd.asl ); // geoid altitude
 
       mFixedDialog = dialog;
-      TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
+      // TDLog.Log( TDLog.LOG_LOC, "CONV. REQUEST " + fxd.lng + " " + fxd.lat + " " + fxd.alt );
       startActivityForResult( intent, CRS_CONVERSION_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedDialog = null;
@@ -331,7 +331,7 @@ public class FixedActivity extends Activity
       intent.putExtra( "version", "1.1" );      // Proj4 version
       intent.putExtra( "request", "CRS_INPUT_REQUEST" ); // Proj4 request
       mFixedAddDialog = dialog;
-      TDLog.Log( TDLog.LOG_LOC, "COORD. INPUT REQUEST " );
+      // TDLog.Log( TDLog.LOG_LOC, "COORD. INPUT REQUEST " );
       startActivityForResult( intent, CRS_INPUT_REQUEST );
     } catch ( ActivityNotFoundException e ) {
       mFixedAddDialog = null;

@@ -2833,7 +2833,7 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v( "do start " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null); // not needed - guaranteed by callers
     mIntersectionT = tt;
-    TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
+    // TDLog.Log( TDLog.LOG_PLOT, "do Start() " + mName1 + " " + mName2 );
 
     // mCurrentPoint = ( BrushManager.isPointEnabled(  SymbolLibrary.LABEL  ) )?  1 : 0;
     // mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
@@ -3240,7 +3240,7 @@ public class DrawingWindow extends ItemDrawer
       filename1b = TDPath.getTdrFileWithExt( mFullName1 );
       // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
       filename2b = TDPath.getTdrFileWithExt( mFullName2 );
-      TDLog.Log( TDLog.LOG_PLOT, "load files " + filename1b + " " + filename2b );
+      // TDLog.Log( TDLog.LOG_PLOT, "load files " + filename1b + " " + filename2b );
     } else {
       mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
       if ( mPlot3 == null ) return false;
@@ -3248,7 +3248,7 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v( "load files type " + type + " " + mName3 + " pid " + mPid3 );
       // filename3  = TDPath.getTh2FileWithExt( mFullName3 );
       filename3b = TDPath.getTdrFileWithExt( mFullName3 );
-      TDLog.Log( TDLog.LOG_PLOT, "load file " + filename3b );
+      // TDLog.Log( TDLog.LOG_PLOT, "load file " + filename3b );
     }
 
     // mAllSymbols  = true; // by default there are all the symbols
@@ -7610,7 +7610,7 @@ public class DrawingWindow extends ItemDrawer
     float y = mOffset.y;
     float z = mZoom;
     String tdr  = TDPath.getTdrFile( filename );
-    TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
+    // TDLog.Log( TDLog.LOG_IO, "reload file " + filename + " path " + tdr );
     // TDLog.v("PLOT recover " + type + " <" + filename + "> TRD " + tdr );
     if ( type == PlotType.PLOT_PLAN ) {
       if ( mPlot1 != null ) {

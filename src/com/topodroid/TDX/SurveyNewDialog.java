@@ -211,7 +211,7 @@ class SurveyNewDialog extends MyDialog
     if ( station_text != null ) {
       String station = station_text.toString();
       if ( station.length() > 0 ) {
-        station = station.replaceAll("\\s+", TDString.EMPTY);
+        station = TDString.noSpace( station );
         if ( station.length() > 0 ) init_station = station;
       }
     } // if mEditStation text is empty use setting mInitStation

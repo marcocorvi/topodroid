@@ -74,7 +74,7 @@ public class CalibAlgoBH extends CalibAlgo
   public int Calibrate()
   {
     mDelta = 0.0f;
-    TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx + " algo " + (mNonLinear? "non-" : "") + "linear" );
+    // TDLog.Log( TDLog.LOG_CALIB, "Calibrate: data nr. " + idx + " algo " + (mNonLinear? "non-" : "") + "linear" );
     if ( idx < 16 ) return -1;
     return Optimize( idx, g, m );
   }

@@ -128,7 +128,7 @@ public class DistoX310Comm extends DistoXComm
         byte[] result = null;
         byte[] fw = mProtocol.readMemory( DeviceX310Details.FIRMWARE_ADDRESS ); // read firmware
         if ( fw == null || fw.length < 2 ) {
-          TDLog.Error( "toggle Calib Mode X310 failed read E000" );
+          TDLog.Error( "X310 toggle Calib Mode failed read E000" );
         } else {
           // TDLog.Log( TDLog.LOG_COMM, "firmware " + fw[0] + " " + fw[1] );
           if ( fw[1] >= 0 && fw[1] < DeviceX310Details.STATUS_ADDRESS.length ) {
@@ -139,7 +139,7 @@ public class DistoX310Comm extends DistoXComm
               // TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 " + fw[1] + " to " + mCalibMode );
             } else {
               if ( result.length >= 2 ) {
-                TDLog.Log( TDLog.LOG_COMM, "toggle Calib Mode X310 " + fw[1] + " to " + mCalibMode + " res " + result[0] + " " + result[1] );
+                TDLog.v( "X310 toggle calib mode " + fw[1] + " to " + mCalibMode + " res " + result[0] + " " + result[1] );
               }
               ret = setCalibMode( DeviceX310Details.isNotCalibMode( result[0] ) );
             }
@@ -196,7 +196,7 @@ public class DistoX310Comm extends DistoXComm
     if ( blk == 0 ) return null;
     if ( connectSocketAny( address ) ) {
       if ( mProtocol instanceof DistoX310Protocol ) {
-       TDLog.Log( TDLog.LOG_BT, "comm firmware signature hw " + hw);
+        TDLog.v( "X310 comm firmware signature hw " + hw);
         ret = ((DistoX310Protocol)mProtocol).readFirmwareBlock( blk );
       }
     }
@@ -251,7 +251,7 @@ public class DistoX310Comm extends DistoXComm
         ret = -1;
       }
     } else {
-      TDLog.Log( TDLog.LOG_BT, "Comm Firmware upload socket failure");
+      TDLog.Error( "Comm Firmware upload socket failure");
     }
     destroySocket( );
     return ret;

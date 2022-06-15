@@ -17,6 +17,7 @@ import com.topodroid.c3in.SketchLine;
 import com.topodroid.c3in.SketchPoint;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 
 import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -750,8 +751,8 @@ public class GlSketch extends GlShape
       BufferedReader br = new BufferedReader( fr );
       String line;
       while ( ( line = br.readLine() ) != null ) {
-        line = line.trim().replaceAll("\\s+", " ");
-        String[] vals = line.split(" ");
+        line = line.trim();
+        String[] vals = TDString.splitOnSpaces( line );
         int s = vals.length;
         for (int k=0; k<s; ++k ) {
           if ( vals[k].startsWith( "#" ) ) break;
@@ -771,9 +772,9 @@ public class GlSketch extends GlShape
             line = br.readLine();
             if ( line != null ) {
               // FIXME with StringBuilder sb = new StringBuilder();
-              path_str = line.trim().replaceAll("\\s+", " ");
+              path_str = TDString.spacesToSpace( line.trim() );
               while ( ( line = br.readLine() ) != null ) {
-                line = line.trim().replaceAll("\\s+", " ");
+                line = TDString.spacesToSpace( line.trim() );
                 if ( line.startsWith( "endpath" ) ) break;
                 path_str = path_str + " " + line;
               }
