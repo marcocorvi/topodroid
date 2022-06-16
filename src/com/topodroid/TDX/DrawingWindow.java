@@ -6263,6 +6263,7 @@ public class DrawingWindow extends ItemDrawer
             DrawingPointPath point = (DrawingPointPath)item;
             if ( BrushManager.isPointSection( point.mPointType ) ) {
               String section_name = TDUtil.replacePrefix( TDInstance.survey, point.getOption(TDString.OPTION_SCRAP) );
+              // TDLog.v("POINT section <" + section_name + ">");
               if ( section_name != null ) {
                 openXSectionDraw( section_name );
               } else {

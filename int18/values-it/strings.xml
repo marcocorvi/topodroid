@@ -85,6 +85,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="make_walls">Pareti</string -->
     <string name="missing_station">Caposaldo assente</string>
     <string name="station_not_found">Caposaldo non trovato</string>
+    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
     <string name="bad_sibling">Tiro gemello non corretto</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
@@ -854,16 +855,16 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
-    <!-- TODO string name="hint_cellsize">cell size</string -->
-    <!-- TODO string name="hint_cwd">work folder</string -->
-    <!-- TODO string name="hint_distance">distance</string -->
-    <!-- TODO string name="hint_length">length</string -->
-    <!-- TODO string name="hint_line">line</string -->
-    <!-- TODO string name="hint_origin">origin station</string -->
-    <!-- TODO string name="hint_point">point</string -->
-    <!-- TODO string name="hint_textsize">text size</string -->
-    <!-- TODO string name="hint_units">symbol units</string -->
-    <!-- TODO string name="hint_value">value</string -->
+    <string name="hint_cellsize">lato cella</string>
+    <string name="hint_cwd">folder di lavoro</string>
+    <string name="hint_distance">distanza</string>
+    <string name="hint_length">lunghezza</string>
+    <string name="hint_line">linea</string>
+    <string name="hint_origin">origine</string>
+    <string name="hint_point">punto</string>
+    <string name="hint_textsize">dimensione testo</string>
+    <string name="hint_units">dimensione simboli</string>
+    <string name="hint_value">valore</string>
 
     <string name="hint_notes">note</string>
     <string name="hint_label">etichetta</string>
@@ -1821,8 +1822,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>
 
-    <!-- TODO string name="image_diagram">Direction diagram</string -->
-    <!-- TODO string name="image_photo">Photo</string -->
+    <string name="image_diagram">Diagramma dirrezioni</string>
+    <string name="image_photo">Foto</string>
 
     <!-- 3D VIEWER strings -->
     <string name="cbtn_bind">Rebind</string>

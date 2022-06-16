@@ -85,6 +85,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="make_walls">Falak</string -->
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
+    <!-- TODO string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string -->
     <string name="shot_not_found">Mérés nem található</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <!-- UNUSED string name="missing_area">TERÜLET</string -->

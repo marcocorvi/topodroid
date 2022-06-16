@@ -208,7 +208,8 @@ public class DrawingStationName extends DrawingPointPath
   {
     if ( mStation == null ) return null;
     // east north Z-vertical (upward)
-    return String.format(Locale.US, "E %.2f N %.2f Z %.2f", mStation.e, -mStation.s, -mStation.v );
+    // return String.format(Locale.US, "E %.2f N %.2f Z %.2f", mStation.e, -mStation.s, -mStation.v );
+    return String.format(Locale.US, TDInstance.getResourceString( R.string.station_coords ), mStation.e, -mStation.s, -mStation.v );
   }
 
   /** @return Therion representation

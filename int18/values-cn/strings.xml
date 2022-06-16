@@ -85,6 +85,7 @@
     <!-- UNUSED string name="make_walls">洞壁</string -->
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
+    <!-- TODO string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string -->
     <string name="shot_not_found">未发现测线数据</string>
     <string name="bad_sibling">坏的测量簇</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
