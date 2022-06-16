@@ -9,7 +9,7 @@
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
-    <!-- TODO string name="desc_menu">Menu</string -->
+    <string name="desc_menu">Meniu</string>
 
     <!-- OK string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
@@ -18,15 +18,12 @@
     <string name="new_survey_label">Cartare nouă</string>
     <string name="distox_label">DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
-  </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
+  <string name="r_title">Notificare importantă Android R</string>
+  <string name="r_dialog">Pentru versiunea Android-R, TopoDroid trebuie să folosească folderul său proproiu (al aplicației) din "Android/data".\nTopoDroid nu a găsit acest folder și și-a creat un folder nou acolo.\nPoți importa arhivele zip ale topografiilor vechi.\n\nAtenție: fișierele din nou folder TopoDroid vor fi șterse când vei dezinstala TopoDroid.\n\nConsultă paginile web de documentație pentru detalii.</string>
+  <string name="r_checkboxes">Trebuie să confirmați casetele de bifare.</string>
+  <string name="r_i_understood">Am înțeles pe deplin această notificare</string>
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_continue">CONTINUĂ</string>
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string -->
@@ -84,7 +81,7 @@ Refer to the web pages for details.\n
     <string name="missing_station">Stație lipsă</string>
     <string name="station_not_found">Stație negăsită</string>
     <string name="shot_not_found">Nu există măsurători</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">Măsurătoare geamană invalidă</string>
     <!-- UNUSED string name="missing_area">ZONĂ</string -->
     <!-- UNUSED string name="missing_hint">Activează uneltele lipsă sau reinstalează-le</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -98,20 +95,20 @@ Refer to the web pages for details.\n
     <string name="failed_snap_to_splays">Nici o radiere apropiată la care să se fixeze/alipească linia</string>
     <string name="failed_append_to_line">Nu a putut fi alipită la o altă linie</string>
 
-    <!-- TODO string name="bric_device">Device %1$s</string -->
+    <string name="bric_device">Dispozitiv %1$s</string>
     <!-- TODO string name="bric_ble">BLE %1$s</string -->
     <!-- TODO string name="bric_fw">Firmware %1$s</string -->
     <!-- TODO string name="bric_hw">Hardware %1$s</string -->
-    <!-- TODO string name="bric_battery">Battery %1$d</string -->
-    <!-- TODO string name="bric_battery_wait">Battery &#8230;</string -->
-    <!-- TODO string name="bric_reset_time">Reset time</string -->
-    <!-- TODO string name="bric_clear_memory">Clear memory</string -->
-    <!-- TODO string name="bric_future_time">Refusing to reset to a future time</string -->
-    <!-- TODO string name="bric_ask_memory_clear">Clear BRIC memory ?</string -->
-    <!-- TODO string name="bric_reset_ok">Resetted time</string -->
-    <!-- TODO string name="bric_reset_fail">Time reset failed</string -->
-    <!-- TODO string name="bric_clear_ok">Cleared memory </string -->
-    <!-- TODO string name="bric_clear_fail">Memory clear failed</string -->
+    <string name="bric_battery">Baterie %1$d</string>
+    <string name="bric_battery_wait">Baterie …</string>
+    <string name="bric_reset_time">Resetează timpul</string>
+    <string name="bric_clear_memory">Ștergeți memoria</string>
+    <string name="bric_future_time">Refuză de a reseta la un timp viitor</string>
+    <string name="bric_ask_memory_clear">Șterge memoria BRIC ?</string>
+    <string name="bric_reset_ok">Timp resetat</string>
+    <string name="bric_reset_fail">Resetarea timpului a eșuat</string>
+    <string name="bric_clear_ok">Memoria ștersă </string>
+    <string name="bric_clear_fail">Ștergerea memorie a eșuat</string>
 
     <string name="calibration_title">Calibrare instrumente</string>
     <string name="calibration_length">Distanță</string>
@@ -123,7 +120,7 @@ Refer to the web pages for details.\n
     <string name="calib_delete">Șterge calibrarea</string>
     <string name="calib_device_mismatch">AVERTISMENT: nepotrivire calibrare-dispozitiv</string>
     <string name="calib_no_name">Numele calibrarii este obligatoriu</string>
-    <!-- TODO string name="calib_no_coeff">Calibration coefficients not set</string -->
+    <string name="calib_no_coeff">Coeficienții de calibrare nu sunt configurați</string>
     <!-- REMOVE string name="calib_gm_policy">Metoda</string -->
     <string name="calib_gm_policy">Metodă de grupare</string>
     <string name="calib_gm_undelete">Restaurează datele de calibrare șterse?</string>
@@ -201,15 +198,15 @@ Refer to the web pages for details.\n
     <string name="regroup">Fără regrupare</string>
     <!-- UNUSED string name="few_plots">Schițe?? insuficiente</string -->
     <string name="few_calibs">Calibrări insufficiente</string>
-    <string name="getting_info">Se descarcă informații din DistoX &#8230;</string>
+    <string name="getting_info">Se descarcă informații din DistoX …</string>
 
     <string name="calib_import_title">Importare calibrare</string>
     <string name="import_title">Importare cartare</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <string name="export_data_title">Exportă datele</string>
+    <string name="export_plot_title">Exportă schiță</string>
+    <string name="export_overview_title">Export general</string>
+    <string name="export_model_title">Exportă model 3D</string>
+    <string name="export_tdconfig_title">Exportă proiectul</string>
 
     <!-- UNUSED string name="import_wait">Se importează fișierul &#8230; te rog așteaptă &#8230;</string -->
     <string name="import_already">Cartarea este deja importată</string>
@@ -228,8 +225,8 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="import_zip_wait">Importarea fișierului zip ar putea dura mult. Te rog așteaptă &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Se salvează schița &#8230; așteaptă &#8230;</string -->
     <string name="MT_points_none">Punct MobileTopographer lipsă</string>
-    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
-    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
+    <string name="MT_bad_file">Fișier MobileTopographer invalid</string>
+    <string name="bad_manifest">Fișier manifest invalid</string>
  
     <string name="pleasewait">Așteaptă te rog</string>
     <string name="processing">se procesează …</string>
@@ -243,8 +240,8 @@ Refer to the web pages for details.\n
 
     <string name="photo_title">FOTOGRAFIE</string>
     <string name="photo_text">Introdu comentariu pentru fotografie</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">Fotografie eșuată</string>
+    <string name="photo_max_captures">A fost atinsă limita maximă de captură</string>
     <string name="label_title">ETICHETĂ</string>
     <string name="label_text">Introdu comentariu pentru etichetă</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -284,8 +281,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">Proiectul există</string>
     <string name="error_name_invalid">Numele proiectului e invalid</string>
     <string name="error_name_required">Numele este obligatoriu</string>
-    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
-    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <string name="error_name_duplicate">Denumire duplicată</string>
+    <string name="error_no_section_in_section">Secțiune-X (transversală) în secțiune-X nu este permisă</string>
 
     <!-- UNUSED string name="error_dir_exists">Directorul deja există</string -->
     <!-- UNUSED string name="error_nick_required">Numele Secțiunii-X este obligatoriu</string -->
@@ -319,7 +316,7 @@ Refer to the web pages for details.\n
     <string name="splays_on_off">Radieri</string>
     <string name="splays">radieri</string>
     <string name="legs">Vize</string>
-    <!-- TODO string name="stations">Station</string -->
+    <string name="stations">Stație</string>
     <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -337,7 +334,7 @@ Refer to the web pages for details.\n
     <string name="bad_line">Tip de linie invalid</string>
     <string name="bad_point">Tip de punct invalid</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">Fără înregistrare audio</string>
     <string name="no_bt">Lipsește Bluetooth</string>
     <string name="no_calib">Lipsește calibrarea</string>
     <string name="no_calib_check">Lipsește măsurătoarea verificare calibrare</string>
@@ -349,7 +346,7 @@ Refer to the web pages for details.\n
     <string name="no_device_address">Dispoziv neselectat</string>
     <string name="no_device_found">Nu a fost găsit nici un dispozitiv</string>
     <string name="no_feature_audio">Audio inexistent</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF nu este acceptat</string>
     <string name="no_gms">Calibrarea nu are măsurători.\nFolosește butonul Descarcă</string>
     <string name="no_geo_station">Eroare: lipsește stația geolocalizată</string>
     <string name="no_leg_first">Selecția nu începe cu o viză (segment de drumuire)</string>
@@ -363,11 +360,11 @@ Refer to the web pages for details.\n
     <string name="no_sensors">Cartarea nu are măsurători</string>
     <!-- UNUSED string name="no_shots">Calibrarea nu are nici o măsurătoare.\nFolosește butonul Descarcă pentru a le adăuga</string -->
     <string name="no_survey">Nici o cartare nu a fost selectată.</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+    <string name="no_symbols">Fără paletă de simboluri.</string>
     <!-- UNUSED string name="no_thmanager">Aplicația ThManager nu este instalată</string -->
     <!-- UNUSED string name="no_db_viewer">Aplicația DB_viewer nu a fost gasită</string -->
     <string name="no_undelete">Nici un element de recuperat</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">Nimic de recuperat / lipit</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
     <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
@@ -389,11 +386,11 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="menu_display">AFIȘAJ</string -->
     <string name="menu_show_deleted">ARATĂ ȘTERSE</string>
     <string name="menu_hide_deleted">ASCUNDE ȘTERSE</string>
-    <!-- TODO string name="menu_device">DEVICE</string -->
+    <string name="menu_device">DISPOZITIV</string>
     <string name="menu_export">EXPORT</string>
     <string name="menu_firmware">FIRMWARE</string>
     <string name="menu_recover">RECUPERARE</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">RECUPEREAZĂ/LIPEȘTE</string>
     <string name="menu_reload">REÎNCĂRCARE</string>
     <string name="menu_rename_delete">REDENUMEȘTE/ȘTERGE</string>
     <string name="menu_rename">REDENUMEȘTE</string>
@@ -423,9 +420,9 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
-    <!-- TODO string name="start_scan">Start scan</string -->
-    <!-- TODO string name="stop_scan">Stop scan</string -->
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <string name="start_scan">Pornește scanarea</string>
+    <string name="stop_scan">Oprește scanarea </string>
+    <string name="title_scan">Scanare BLE</string>
     <!-- UNUSED string name="ble_scan_failed">Scanare BLE eșuată</string -->
     <!-- UNUSED string name="ble_gatt_failure">Eșec BLE GATT</string -->
     <string name="ble_no_remote">Nici un dispozitiv BLE extern</string>
@@ -436,7 +433,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
+    <string name="bric_memory">Memorie BRIC</string>
 
 
     <string name="popup_join_pt">Conectează la punctul apropiat</string>
@@ -449,11 +446,11 @@ Refer to the web pages for details.\n
     <string name="popup_curve_pt">Netezește segmentul</string>
     <string name="popup_remove_pt">Șterge punctul</string>
     <string name="popup_append_line">Atașează la linie</string>
-    <!-- TODO string name="popup_multiselect">Multiselection</string -->
-    <!-- TODO string name="popup_finish">Finish</string -->
-    <!-- TODO string name="popup_delete">Delete</string -->
-    <!-- TODO string name="popup_decimate">Decimate</string -->
-    <!-- TODO string name="popup_join">Join</string -->
+    <string name="popup_multiselect">Selecție multiplă</string>
+    <string name="popup_finish">Termină</string>
+    <string name="popup_delete">Șterge</string>
+    <string name="popup_decimate">Decimează</string>
+    <string name="popup_join">Unește</string>
 
     <string name="popup_erase_all">Șterge tot</string>
     <string name="popup_erase_point">Șterge punctele</string>
@@ -474,7 +471,7 @@ Refer to the web pages for details.\n
     <string name="popup_cont_continue">Continuă</string>
 
     <string name="connection_error">Eroare la conexiune</string>
-    <string name="connecting">Se conectează &#8230;</string>
+    <string name="connecting">Se conectează …</string>
     <!-- UNUSED string name="connected_none">Neconectat</string -->
     <!-- UNUSED string name="connected_already">Deja conectat</string -->
 
@@ -526,8 +523,8 @@ Refer to the web pages for details.\n
     <string name="section_name">comentariul secțiunii section comment</string>
     <string name="scrap_outline">Conturul schiței</string>
     <string name="scrap_string">Desen schiță: %1$d / %2$d</string>
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="section_point_not_allowed">punct de secțiune nepermis</string>
+    <string name="section_line_not_allowed">linie de secțiune nepermisă</string>
 
     <!-- UNUSED string name="sensor">senzor</string -->
     <string name="sensor_gravity">gravitație</string>
@@ -542,20 +539,21 @@ Refer to the web pages for details.\n
     <string name="sensor_value">valoare</string>
     <string name="sensor_comment">comentariu</string>
     <!-- UNUSED string name="insufficient_data">date sezor insuficiente</string -->
-    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
-    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
+    <string name="sensor_no_readings">Nu sunt citiri ale senzorului</string>
+    <string name="sensor_failure">Eroare senzor: %1$d</string>
 
     <!-- UNUSED string name="shot_clino">clinometru</string -->
     <!-- UNUSED string name="shot_compass">compas</string -->
     <string name="shot_delete">Șterge măsurătoarea?</string>
     <string name="shots_delete">Șterge măsurătorile?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Puncte stație referențiate de secțiuni\n transversale. Ștergeți măsuratorile?
+</string>
+    <string name="shot_rename_unsafe">Puncte de stație referențiate de secțiuni\n transversale. Redenumiți măsuratoarea?</string>
+    <string name="shots_rename_unsafe">Puncte de stație referențiate de secțiuni\n transversale. Redenumiți măsuratorile?</string>
     <string name="shot_check">Marchează măsurătoarea ca măsurătoare de verificare?</string>
     <string name="shot_from">de la</string>
     <string name="shot_info">Introdu valorile măsurătorii</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Măsuratoare %1$s</string>
     <!-- UNUSED string name="shot_length">lungime</string -->
     <string name="shot_note">notă</string>
     <string name="shot_reverse">inversează</string>
@@ -591,11 +589,11 @@ Refer to the web pages for details.\n
     <string name="cover_calib">Distribuție date calibrate: %1$.2f %%</string>
     <string name="cover_g">Distribuție G: %1$.2f %%</string>
     <string name="cover_m">Distribuție M: %1$.2f %%</string>
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_r">Distribuție unghi rotație: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+    <string name="accuracy_low">Acuratețe scăzută. Este necesară calibrarea</string>
+    <string name="accuracy_medium">Acuratețe scăzută</string>
+    <string name="accuracy_unreliable">Senzori nesiguri</string>
 
     <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
     <string name="declination">Magn. decl.</string>
@@ -609,7 +607,7 @@ Refer to the web pages for details.\n
     <string name="toggle_failed">Nu a putut fi comutat DistoX-ul</string>
     <string name="toggle_ok">DistoX-ul a fost comutat în modul calibrare</string>
     <string name="undelete_text">Atinge elementul pentru recuperare</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">Recuperează/lipește elemente</string>
     <string name="undelete_shot">Măsurători</string>
     <string name="undelete_overshoot">Măsurători depășite</string>
     <string name="undelete_check">Verificări</string>
@@ -669,8 +667,8 @@ Refer to the web pages for details.\n
     <string name="extended">PROFIL</string>
     <string name="profile">PROIECȚIE</string>
     <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
-    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
-    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+    <string name="fmt_extended">%1$s: PROFIL</string>
+    <string name="fmt_profile">%1$s: PROIECȚIE</string>
 
     <string name="extended_profile">Profil extins</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
@@ -689,88 +687,88 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
     <string name="ask_backups_clear">Ștergi copiile de siguranță ale schiței?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <string name="ask_manual_update">Actualizează traducerea manualului de utilizator?\nCurrentă v. %1$d Instalată v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Adaugă    </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
-    <string name="button_back"      >Înapoi    </string>
-    <string name="button_cancel"    >Anulează  </string>
-    <string name="button_change"    >Schimbă   </string>
-    <string name="button_close"     >Închide   </string>
+    <string name="button_apply">Aplică</string>
+    <string name="button_back">Înapoi    </string>
+    <string name="button_cancel">Anulează  </string>
+    <string name="button_change">Schimbă   </string>
+    <string name="button_close">Închide   </string>
     <!-- UNUSED string name="button_create"    >Crează    </string -->
-    <string name="button_color"     >Culoare   </string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
-    <string name="button_convert"   >Conversie </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
-    <string name="button_current"   >Activ     </string>
-    <string name="button_delete"    >Șterge    </string>
-    <string name="button_duplicate" >Duplică   </string>
-    <string name="button_surface"   >Suprafață </string>
-    <string name="button_no_extend" >Fără extensie</string>
-    <string name="button_eval"      >Evaluează </string>
-    <string name="button_evalg"     >G         </string>
-    <string name="button_evalm"     >M         </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
-    <string name="button_eval_cal"  >Evaluează calib. w.</string>
-    <string name="button_gps_start" >GPS       </string>
+    <string name="button_color">Culoare   </string>
+    <string name="button_compute">Calculează</string>
+    <string name="button_convert">Conversie </string>
+    <string name="button_copy">Copiază</string>
+    <string name="button_current">Activ     </string>
+    <string name="button_delete">Șterge    </string>
+    <string name="button_duplicate">Duplică   </string>
+    <string name="button_surface">Suprafață </string>
+    <string name="button_no_extend">Fără extensie</string>
+    <string name="button_eval">Evaluează </string>
+    <string name="button_evalg">G         </string>
+    <string name="button_evalm">M         </string>
+    <string name="button_evalroll">Rotație</string>
+    <string name="button_eval_cal">Evaluează calib. w.</string>
+    <string name="button_gps_start">GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- DONT TRANSLATE string name="button_help">?</string -->
-    <string name="button_manual"    >Manual</string>
+    <string name="button_manual">Manual</string>
     <!-- UNUSED string name="button_measure"   >Măsoară   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
     <!-- UNUSED string name="button_sensor"  >Senzori</string -->
     <!-- UNUSED string name="button_direction">Azimut/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimut</string -->
-    <string name="button_plot"    >Schiță</string>
-    <string name="button_more"    >Mai multe</string>
-    <string name="button_move"    >Mută</string>
-    <string name="button_next"    >Următorul</string>
-    <string name="button_prev"    >Precedentul</string>
-    <string name="button_new"     >Schiță nouă</string>
-    <string name="button_skip"    >Omite</string>
-    <string name="button_done"    >Gata</string>    
-    <string name="button_lrud"    >+ LRUD</string>
-    <string name="button_ok"        >Bine         </string>
-    <string name="button_open"      >Deschide   </string>
-    <string name="button_read"      >Citește    </string>
+    <string name="button_plot">Schiță</string>
+    <string name="button_more">Mai multe</string>
+    <string name="button_move">Mută</string>
+    <string name="button_next">Următorul</string>
+    <string name="button_prev">Precedentul</string>
+    <string name="button_new">Schiță nouă</string>
+    <string name="button_skip">Omite</string>
+    <string name="button_done">Gata</string>    
+    <string name="button_lrud">+ LRUD</string>
+    <string name="button_ok">Bine         </string>
+    <string name="button_open">Deschide   </string>
+    <string name="button_read">Citește    </string>
     <!-- UNUSED string name="button_redo"      >Refă      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrupează</string -->
-    <string name="button_dump"      >Descarcă~  </string>
+    <string name="button_dump">Descarcă~  </string>
     <!-- UNUSED string name="button_rename"    >Redenumește</string -->
-    <string name="button_renumber"  >Renumerotează</string>
-    <string name="button_bedding"   >Strat geologic</string>
-    <string name="button_replace"   >Înlocuiește</string>
-    <string name="button_reset"     >Resetează  </string>
-    <string name="button_left"      >STÂNGA</string>
-    <string name="button_right"     >DREAPTA</string>
-    <string name="button_clear"     >Curăță     </string>
-    <string name="button_clear_day" >Curăță 1z  </string>
+    <string name="button_renumber">Renumerotează</string>
+    <string name="button_bedding">Strat geologic</string>
+    <string name="button_replace">Înlocuiește</string>
+    <string name="button_reset">Resetează  </string>
+    <string name="button_left">STÂNGA</string>
+    <string name="button_right">DREAPTA</string>
+    <string name="button_clear">Curăță     </string>
+    <string name="button_clear_day">Curăță 1z  </string>
     <string name="button_clear_week">Curăță 7z  </string>
     <string name="button_clear_memory">Golește memoria</string>
-    <string name="button_save"      >Salvează   </string>
+    <string name="button_save">Salvează   </string>
     <!-- UNUSED string name="button_select"    >Selectează</string -->
-    <string name="button_search"    >Caută      </string>
-    <string name="button_merge"     >Îmbină     </string>
-    <string name="button_saved"     >Stație salvată</string>
-    <string name="button_split"     >Desparte   </string>
-    <string name="button_station"   >Centrează la</string>
-    <string name="button_store"     >Stochează  </string>
-    <string name="button_swap"      >Comută     </string>
+    <string name="button_search">Caută      </string>
+    <string name="button_merge">Îmbină     </string>
+    <string name="button_saved">Stație salvată</string>
+    <string name="button_split">Desparte   </string>
+    <string name="button_station">Centrează la</string>
+    <string name="button_store">Stochează  </string>
+    <string name="button_swap">Comută     </string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
-    <string name="button_upload"    >Încarcă    </string>
-    <string name="button_view"      >Vizualizează</string>
+    <string name="button_upload">Încarcă    </string>
+    <string name="button_view">Vizualizează</string>
     <!-- UNUSED string name="button_zoomfit"   >Încadrează</string -->
     <!-- UNUSED string name="button_landscape" >Mod peisaj</string --> 
     <!-- UNUSED string name="button_portrait"  >Portret  </string -->
     <string name="button_splays">Radieri</string>
 
 
-    <string name="button_write"     >Încarcă</string>
-    <string name="button_xsection"  >Secțiune-X</string>
+    <string name="button_write">Încarcă</string>
+    <string name="button_xsection">Secțiune-X</string>
     <string name="xsection">Secțiune-X</string>
-    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
-    <!-- TODO string name="buffer_unsorted">unsorted</string -->
+    <string name="buffer_size">Tampon: %1$d data</string>
+    <string name="buffer_unsorted">nesortat</string>
 
 
     <string name="mode_leg">Vize</string>
@@ -802,13 +800,13 @@ Refer to the web pages for details.\n
     <string name="popup_do_leg">Măs. vize</string>
     <string name="popup_do_gm_data">Măs. calibrare</string>
     <!-- TODO string name="popup_do_laser">Laser</string -->
-    <!-- TODO string name="popup_do_scan">Scan</string -->
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
-    <!-- TODO string name="popup_do_off">Off</string -->
+    <string name="popup_do_scan">Scanează</string>
+    <string name="popup_do_shot">Măsoară</string>
+    <string name="popup_do_clear">Șterge</string>
+    <string name="popup_do_off">Oprește</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Exportă</string>
     <string name="btn_import">Importă</string>
     <string name="btn_install">Instalează</string>
 
@@ -823,35 +821,35 @@ Refer to the web pages for details.\n
     <string name="symbol_extra">Speologie (2)</string>
 
     <string name="symbol_reload">Unelte desen</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">Avertisment: paleta încă nu a fost încărcată</string>
 
     <!-- UNUSED string name="length">Lungime [m]</string -->
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="hint_notes">notes</string -->
-    <!-- TODO string name="hint_label">label</string -->
-    <!-- TODO string name="hint_comment">comment</string -->
+    <string name="hint_notes">note</string>
+    <string name="hint_label">eticheta</string>
+    <string name="hint_comment">comentariu</string>
     <!-- TODO string name="hint_text">text</string -->
-    <!-- TODO string name="hint_options">options</string -->
-    <!-- TODO string name="hint_name">name</string -->
-    <!-- TODO string name="hint_from">from</string -->
-    <!-- TODO string name="hint_to">to</string -->
-    <!-- TODO string name="hint_azimuth">azimuth</string -->
-    <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_roll">roll</string -->
-    <!-- TODO string name="hint_year">year</string -->
-    <!-- TODO string name="hint_month">month</string -->
-    <!-- TODO string name="hint_day">day</string -->
-    <!-- TODO string name="hint_hour">hour</string -->
-    <!-- TODO string name="hint_minute">minute</string -->
-    <!-- TODO string name="hint_second">second</string -->
+    <string name="hint_options">opțiuni</string>
+    <string name="hint_name">nume</string>
+    <string name="hint_from">de la</string>
+    <string name="hint_to">la</string>
+    <string name="hint_azimuth">azimut</string>
+    <string name="hint_clino">înclinare</string>
+    <string name="hint_roll">rotație</string>
+    <string name="hint_year">an</string>
+    <string name="hint_month">lună</string>
+    <string name="hint_day">zi</string>
+    <string name="hint_hour">oră</string>
+    <string name="hint_minute">minut</string>
+    <string name="hint_second">secundă</string>
     <!-- UNUSED string name="hint_latitude">latitude</string -->
     <!-- UNUSED string name="hint_longitude">longitude</string -->
     <!-- UNUSED string name="hint_altitude">altitude</string -->
     <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
     <!-- UNUSED string name="hint_declination">declination</string -->
-    <!-- TODO string name="hint_station">station</string -->
+    <string name="hint_station">stație</string>
 
     <string name="orientation">orientare</string>
     <string name="contents">conținut</string>
@@ -1753,9 +1751,9 @@ Refer to the web pages for details.\n
     <string name="overwrite">suprascrie</string>
 
     <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <string name="title_export">Exportă proiectul ca &#8230;</string>
+    <string name="title_export">Exportă proiectul ca …</string>
     <string name="title_equates">Vize echivalente Proiect</string>
-    <string name="title_equate_new">Adaugă viză echivalentă &#8230;</string>
+    <string name="title_equate_new">Adaugă viză echivalentă …</string>
     <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
     <!-- UNUSED string name="title_cwd">Director de lucru actual</string -->
     <string name="title_drop">Înlătură cartări ?</string>
