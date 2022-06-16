@@ -1876,11 +1876,11 @@
     <string name="surface_gps">GPS трек</string>
     <string name="surface_east">Восток</string>
     <string name="surface_north">Север</string>
-    <!-- TODO string name="dem_file">DEM %1$s</string -->
+    <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">загрузить</string>
     <string name="dem_failed">Ошибка загрузки DEM</string>
     <string name="dem_ok">Прочитать данные DEM</string>
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">загрузить текстуру</string>
     <string name="texture_failed">Ошибка загрузки текстуры</string>
     <string name="texture_ok">Прочитать файл текстуры</string>

@@ -1897,11 +1897,11 @@
     <string name="surface_gps">GPS 路径</string>
     <string name="surface_east">东</string>
     <string name="surface_north">北</string>
-    <!-- TODO string name="dem_file">%1$s</string -->
+    <!-- NO string name="dem_file">%1$s</string -->
     <string name="dem_load">载入 DEM</string>
     <string name="dem_failed">DEM载入失败</string>
     <string name="dem_ok">读取 DEM 数据</string>
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">载入纹理</string>
     <string name="texture_failed">纹理载入失败</string>
     <string name="texture_ok">读取纹理失败</string>

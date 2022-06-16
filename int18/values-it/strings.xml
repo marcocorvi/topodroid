@@ -1904,12 +1904,12 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="surface_gps">Traccia GPS</string>
     <string name="surface_east">Est</string>
     <string name="surface_north">Nord</string>
-    <!-- UNUSED string name="dem_file">DEM %1$s</string -->
+    <!-- NO string name="dem_file">DEM %1$s</string -->
     <string name="dem_load">carica</string>
 
     <string name="dem_failed">ERRORE: caricamento DEM</string>
     <string name="dem_ok">Lettura DEM</string>
-    <!-- UNUSED string name="texture_file">%1$s</string -->
+    <!-- NO string name="texture_file">%1$s</string -->
     <string name="texture_load">caricamento trama</string>
     <string name="texture_failed">ERRORE: caricamento trama</string>
     <string name="texture_ok">Lettura file trama</string>
