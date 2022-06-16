@@ -34,6 +34,7 @@
       android:layout_height="wrap_content" 
       android:nextFocusDown="@+id/fix_lat"
       android:singleLine="true"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
   <LinearLayout 
@@ -60,6 +61,7 @@
       android:layout_height="wrap_content" 
       android:nextFocusDown="@+id/fix_alt"
       android:singleLine="true"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -85,6 +87,7 @@
       android:layout_height="wrap_content" 
       android:nextFocusDown="@+id/fix_asl"
       android:singleLine="true"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -110,6 +113,7 @@
       android:layout_height="wrap_content" 
       android:nextFocusDown="@+id/fix_comment"
       android:singleLine="true"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -128,6 +132,7 @@
       android:layout_marginEnd="@dimen/marginh"
       android:inputType="text"
       android:hint="@string/hint_station"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@id/fix_comment" 
       style="@style/edit_text"
@@ -138,6 +143,7 @@
       android:singleLine="true"
       android:inputType="text"
       android:hint="@string/hint_comment"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
    					  
@@ -164,6 +170,7 @@
       android:nextFocusDown="@id/top"
       android:singleLine="true"
       android:inputType="numberDecimal|numberSigned"
+      android:importantForAutofill="no"
     />
     <CheckBox android:id="@+id/fix_save_decl"
       android:layout_width="0dp"

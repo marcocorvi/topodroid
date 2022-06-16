@@ -36,9 +36,9 @@
       android:layout_height="wrap_content"
       android:orientation="vertical"
       android:layout_marginEnd="@dimen/marginh"
-      android:layout_alignParentEnd="true"
       android:gravity="end"
       >
+      <!-- android:layout_alignParentEnd="true" -->
       <!--
       <Button android:id="@+id/button_help"
           style="@style/button_empty"

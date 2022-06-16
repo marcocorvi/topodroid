@@ -25,7 +25,8 @@
     android:singleLine="true"
     android:inputType="text"
     android:hint="@string/hint_label"
-    />
+    android:importantForAutofill="no"
+  />
 
   <LinearLayout android:id="@+id/layer_layout"
     style="@style/base_padding"

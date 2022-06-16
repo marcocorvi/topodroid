@@ -22,6 +22,7 @@
       android:singleLine="true"
       android:nextFocusDown="@+id/comment"
       android:ems="25"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/comment" 
       style="@style/edit_text_light"
@@ -31,6 +32,7 @@
       android:hint="@string/comment"
       android:singleLine="true"
       android:ems="25"
+      android:importantForAutofill="no"
     />
     <LinearLayout android:id="@+id/layout0"
       android:orientation="horizontal"

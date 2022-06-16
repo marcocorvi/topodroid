@@ -20,6 +20,7 @@
       android:imeActionId="6"
       android:imeActionLabel="OK"
       android:imeOptions="actionDone"
+      android:importantForAutofill="no"
       />
  
     <EditText android:id="@+id/comment"
@@ -33,6 +34,7 @@
       android:imeActionId="6"
       android:imeActionLabel="OK"
       android:imeOptions="actionDone"
+      android:importantForAutofill="no"
       />
 
     <LinearLayout android:id="@+id/help"

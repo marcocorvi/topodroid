@@ -32,6 +32,7 @@
     android:layout_marginTop="@dimen/marginv"
     android:layout_width="match_parent"
     android:hint="@string/comment"
+    android:importantForAutofill="no"
   />
 
   <CheckBox android:id="@+id/photo_camera" 

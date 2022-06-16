@@ -410,7 +410,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="menu_switch">CAMBIA/CHIUDI</string>
     <string name="menu_help">AIUTO</string>
     <!-- UNUSED string name="menu_join_survey">CO-RILIEVO</string --> <!-- rilievo cooperativo -->
-    <string name="menu_logs">LOGS</string>
+    <!-- UNUSED string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">Calibrazione</string>
     <string name="menu_options">OPZIONI</string>
     <string name="menu_overview">PANORAMICA</string>
@@ -482,7 +482,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="popup_cont_both">Entrambi i punti</string>
     <string name="popup_cont_continue">Continua</string>
 
-    <string name="connection_error">Errore di connessione</string>
+    <!-- UNUSED string name="connection_error">Errore di connessione</string -->
     <!-- UNUSED string name="connecting">Connessione a &#8230;</string -->
     <!-- UNUSED string name="connected_none">Non connesso</string -->
     <!-- UNUSED string name="connected_already">Gia\' connesso</string -->
@@ -715,7 +715,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_apply"     >Applica</string>
     <string name="button_back"      >Indietro  </string>
     <string name="button_cancel"    >Annulla   </string>
-    <string name="button_change"    >Cambia    </string>
+    <!-- UNUSED string name="button_change"    >Cambia    </string -->
     <string name="button_clipboard" >Appunti</string>
     <string name="button_close"     >Chiudi    </string>
     <!-- UNUSED string name="button_create"    >Crea      </string -->
@@ -854,6 +854,17 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Inclinazione [deg]</string -->
 
+    <!-- TODO string name="hint_cellsize">cell size</string -->
+    <!-- TODO string name="hint_cwd">work folder</string -->
+    <!-- TODO string name="hint_distance">distance</string -->
+    <!-- TODO string name="hint_length">length</string -->
+    <!-- TODO string name="hint_line">line</string -->
+    <!-- TODO string name="hint_origin">origin station</string -->
+    <!-- TODO string name="hint_point">point</string -->
+    <!-- TODO string name="hint_textsize">text size</string -->
+    <!-- TODO string name="hint_units">symbol units</string -->
+    <!-- TODO string name="hint_value">value</string -->
+
     <string name="hint_notes">note</string>
     <string name="hint_label">etichetta</string>
     <string name="hint_comment">commento</string>
@@ -934,7 +945,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_cave3d">Cave3D, visualizzatore 3D</string>
     <!-- UNUSED string name="help_database">App database (SQliteViewer)</string -->
     <string name="help_prefs">Preferenze</string>
-    <string name="help_log">Attiva/disattiva opzioni di log</string>
+    <!-- UNUSED string name="help_log">Attiva/disattiva opzioni di log</string -->
     <!-- UNUSED string name="help_join_survey">Join surveying</string -->
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Scarica dati</string>
@@ -1780,13 +1791,13 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_surveys">No rilievi</string>
     <string name="no_tdconfig">File tdconfig mancante</string>
     <string name="no_th_file">No file Therion</string>
-    <string name="file_exists">Il file esiste</string>
-    <string name="file_create_fail">Errore creazione file</string>
-    <string name="oom">Warning. Fine memoria</string>
+    <!-- UNUSED string name="file_exists">Il file esiste</string -->
+    <!-- UNUSED string name="file_create_fail">Errore creazione file</string -->
+    <!-- UNUSED string name="oom">Warning. Fine memoria</string -->
 
     <string name="ask_delete_tdconfig">Cancella file tdconfig</string>
     <string name="ask_remove_equate">Cancello equivalente %1$s ?</string>
-    <string name="equate_no_station">Nessun caposaldo selezionato</string>
+    <!-- UNUSED string name="equate_no_station">Nessun caposaldo selezionato</string -->
     <string name="equate_no_stations">Troppo pochi capisaldi</string>
     <string name="equate_no_nearby">Nessun caposaldo vicino</string>
 
@@ -1795,7 +1806,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
     <!-- UNUSED string name="menu_save">SALVA</string -->
 
-    <string name="overwrite">Sovrascrivi</string>
+    <!-- UNUSED string name="overwrite">Sovrascrivi</string -->
 
     <string name="title_export_settings">Impostazioni importa/esporta</string>
     <string name="title_export">Esporta progetto come &#8230;</string>
@@ -1809,6 +1820,9 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="exported">Salvato file %1$s</string>
     <string name="export_failed">Esportazione fallita</string>
+
+    <!-- TODO string name="image_diagram">Direction diagram</string -->
+    <!-- TODO string name="image_photo">Photo</string -->
 
     <!-- 3D VIEWER strings -->
     <string name="cbtn_bind">Rebind</string>
@@ -1827,12 +1841,12 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cmenu_rose">Diagramma a rosa</string>
     <string name="cmenu_wall">Modello pareti</string>
     <string name="cmenu_sketch">Disegni</string>
-    <!-- UNUSED string name="cmenu_fractal">Dim. frattale</string -->
+    <!-- NO string name="cmenu_fractal">Dim. frattale</string -->
 
     <!-- UNUSED string name="fractal_title">Computo frattale</string -->
-    <string name="info_title">INFO</string>
+    <!-- UNUSED string name="info_title">INFO</string -->
     <string name="info_surveys">RILIEVI</string>
-    <string name="info_axes">Assi: blu Nord, verde Est</string>
+    <!-- UNUSED string name="info_axes">Assi: blu Nord, verde Est</string -->
     <string name="info_grid">Griglia [m]</string>
     <string name="info_view">Punto di vista</string>
     <string name="info_survey">Rilievi</string>
@@ -1873,13 +1887,13 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="cno_files">Nessun file</string -->
     <string name="reading_file">Lettura file %1$s</string>
     <string name="read_survey">Rilievo %1$s\n</string>
-    <string name="clear">Pulisci</string>
+    <!-- UNUSED string name="clear">Pulisci</string -->
 
     <string name="plan_proj">Pianta</string>
     <string name="profile_proj">Sezione</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Grotta %9$.1f</string>
-    <string name="measure">misura</string>
+    <!-- UNUSED string name="measure">misura</string -->
 
     <!-- UNUSED string name="style_stroke">Tratto</string -->
     <!-- UNUSED string name="style_stroke_fill">Tratto &amp; area</string -->
@@ -1948,7 +1962,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="view_north">Nord</string>
     <string name="view_west">Ovest</string>
     <string name="view_south">Sud</string>
-    <string name="view_point">Punto di vista</string>
+    <!-- UNUSED string name="view_point">Punto di vista</string -->
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">PARETI</string>
@@ -1959,9 +1973,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="walls_tube">Condotta</string>
     <!-- NO string name="walls_delaunay">Delaunay</string -->
 
-    <string name="powercrust_few_splays">Powercrust: pochi splay</string>
-    <string name="powercrust_failed">Powercrust fallito</string>
-    <string name="powercrust_successful">Powercrust ok: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">Powercrust: pochi splay</string -->
+    <!-- UNUSED string name="powercrust_failed">Powercrust fallito</string -->
+    <!-- UNUSED string name="powercrust_successful">Powercrust ok: %1$d / %2$d</string -->
     <string name="powercrust_dxf_not_supported">Powercrust: esportazione DXF non implementata</string>
 
     <string name="ok_export">OK. Esportato %1$s</string>
@@ -1983,7 +1997,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="export_gltf_ok">File glTF salvato</string -->
     <!-- UNUSED string name="export_gltf_fail">Export glTf fallito</string -->
 
-    <string name="warning_not_overwrite">Attenzione: file %1$s non sovrascritto</string>
+    <!-- UNUSED string name="warning_not_overwrite">Attenzione: file %1$s non sovrascritto</string -->
     <!-- UNUSED string name="warning_not_txt">Attenzione: file %1$s non testuale</string -->
     <!-- UNUSED string name="warning_not_kml">Attenzione: file %1$s non KML</string -->
     <!-- UNUSED string name="warning_not_las">Attenzione: file %1$s non LAS</string -->

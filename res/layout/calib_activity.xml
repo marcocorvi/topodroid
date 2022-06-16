@@ -57,7 +57,9 @@
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:hint="@string/name"
-      android:scrollHorizontally="true" />
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
+    />
      		
     <Button android:id="@+id/calib_date" 
       android:layout_marginTop="@dimen/margintiny"
@@ -83,8 +85,9 @@
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:hint="@string/description"
-      android:scrollHorizontally="true" />
-
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
+    />
 
     <TextView 
       android:layout_width="wrap_content"

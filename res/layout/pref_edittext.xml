@@ -38,7 +38,7 @@
         android:layout_width="match_parent"
 	android:layout_height="wrap_content"
 	android:paddingEnd="10dp"
-          android:paddingStart="2dp"
+        android:paddingStart="2dp"
         android:textSize="@dimen/textsize"
         android:textColor="@color/pref_text"
         android:singleLine="true"
@@ -47,6 +47,8 @@
 	android:gravity="end"
 	android:inputType="number"
 	android:background="@color/edit_background"
+        android:hint="@string/hint_value"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
   </LinearLayout>

@@ -30,6 +30,8 @@
       android:textSize="@dimen/textsizebig"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_bearing"
+      android:hint="@string/hint_distance"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_bearing"
       style="@style/edit_decimal"
@@ -38,6 +40,8 @@
       android:textSize="@dimen/textsizebig"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_clino"
+      android:hint="@string/hint_azimuth"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_clino"
       style="@style/edit_signeddecimal"
@@ -46,6 +50,8 @@
       android:textSize="@dimen/textsizebig"
       android:layout_marginEnd="@dimen/marginh"
       android:nextFocusDown="@+id/shot_from"
+      android:hint="@string/hint_clino"
+      android:importantForAutofill="no"
       />
   </LinearLayout>
 
@@ -68,19 +74,22 @@
       style="@style/edit_text"
       android:layout_width="0sp"
       android:layout_weight="50"
-      android:hint="@string/shot_from"
       android:nextFocusDown="@+id/shot_to"
+      android:hint="@string/shot_from"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_to" 
       style="@style/edit_text"
       android:layout_width="0sp"
       android:layout_weight="50"
-      android:hint="@string/shot_to"
       android:nextFocusDown="@+id/shot_comment"
+      android:hint="@string/shot_to"
+      android:importantForAutofill="no"
       />
   </LinearLayout>
    					  
   <LinearLayout android:id="@+id/layout3"
+      style="?android:attr/buttonBarStyle"
       android:layout_below="@id/layout2"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
@@ -89,6 +98,7 @@
       >
 
       <Button android:id="@+id/btn_prev"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="42dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="30"
@@ -105,6 +115,7 @@
         />
 
       <Button android:id="@+id/btn_next"
+        style="?android:attr/buttonBarButtonStyle"
         android:layout_width="42dp" 
         android:layout_height="wrap_content" 
         android:layout_weight="30"
@@ -122,6 +133,7 @@
     android:layout_width="match_parent"
     android:scrollHorizontally="true"
     android:hint="@string/shot_note"
+    android:importantForAutofill="no"
     />
 
   <LinearLayout android:id="@+id/layout5"
@@ -229,6 +241,7 @@
       android:hint="&#x21A4;"
       android:nextFocusEnd="@+id/shot_right"
       android:singleLine="true"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_right" 
       style="@style/edit_text"
@@ -239,6 +252,7 @@
       android:hint="&#x21A6;"
       android:nextFocusEnd="@+id/shot_up"
       android:singleLine="true"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_up" 
       style="@style/edit_text"
@@ -249,6 +263,7 @@
       android:hint="&#x21A5;"
       android:nextFocusEnd="@+id/shot_down"
       android:singleLine="true"
+      android:importantForAutofill="no"
       />
     <EditText android:id="@id/shot_down" 
       style="@style/edit_text"
@@ -258,6 +273,7 @@
       android:layout_height="wrap_content" 
       android:hint="&#x21A7;"
       android:singleLine="true"
+      android:importantForAutofill="no"
       />
   </LinearLayout>
 

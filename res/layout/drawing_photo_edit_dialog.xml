@@ -43,6 +43,7 @@
     android:singleLine="true"
     android:hint="@string/comment"
     android:scrollHorizontally="true"
+    android:importantForAutofill="no"
   />
 
   <LinearLayout android:id="@+id/help"

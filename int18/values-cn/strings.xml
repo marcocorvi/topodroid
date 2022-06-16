@@ -412,7 +412,7 @@
     <string name="menu_switch">切换/关闭</string>
     <string name="menu_help">帮助</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
-    <string name="menu_logs">日志设定</string>
+    <!-- UNUSED string name="menu_logs">日志设定</string -->
     <string name="menu_manual_calibration">校准</string>
     <string name="menu_options">设定</string>
     <string name="menu_overview">概览</string>
@@ -485,7 +485,7 @@
     <string name="popup_cont_both">两点都</string>
     <string name="popup_cont_continue">继续</string>
 
-    <string name="connection_error">连接错误</string>
+    <!-- UNUSED string name="connection_error">连接错误</string -->
     <!-- UNUSED string name="connecting">连接 &#8230;</string -->
     <!-- UNUSED string name="connected_none">无连接</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
@@ -714,7 +714,7 @@
     <string name="button_apply"     >应用</string>
     <string name="button_back"      >返回      </string>
     <string name="button_cancel"    >取消    </string>
-    <string name="button_change"    >更换    </string>
+    <!-- UNUSED string name="button_change"    >更换    </string -->
     <string name="button_clipboard" >剪贴板 </string>
     <string name="button_close"     >关闭     </string>
     <!-- UNUSED string name="button_create"    >创建    </string -->
@@ -852,6 +852,17 @@
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+    <!-- TODO string name="hint_cellsize">cell size</string -->
+    <!-- TODO string name="hint_cwd">work folder</string -->
+    <!-- TODO string name="hint_distance">distance</string -->
+    <!-- TODO string name="hint_length">length</string -->
+    <!-- TODO string name="hint_line">line</string -->
+    <!-- TODO string name="hint_origin">origin station</string -->
+    <!-- TODO string name="hint_point">point</string -->
+    <!-- TODO string name="hint_textsize">text size</string -->
+    <!-- TODO string name="hint_units">symbol units</string -->
+    <!-- TODO string name="hint_value">value</string -->
+
     <string name="hint_notes">注释</string>
     <string name="hint_label">标签</string>
     <string name="hint_comment">评论</string>
@@ -931,7 +942,7 @@
     <string name="help_therion">洞穴项目管理</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
-    <string name="help_log">日志偏好设置</string>
+    <!-- UNUSED string name="help_log">日志偏好设置</string -->
     <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
     <string name="help_info_topodroid">TopoDroid信息</string>
     <string name="help_download">数据下载</string>
@@ -1773,13 +1784,13 @@
     <string name="no_surveys">无测量</string>
     <string name="no_tdconfig">Td配置文件丢失</string>
     <string name="no_th_file">无Therion文件</string>
-    <string name="file_exists">文件存在</string>
-    <string name="file_create_fail">文件建立失败</string>
-    <string name="oom">警告. 内存不足</string>
+    <!-- UNUSED string name="file_exists">文件存在</string -->
+    <!-- UNUSED string name="file_create_fail">文件建立失败</string -->
+    <!-- UNUSED string name="oom">警告. 内存不足</string -->
 
     <string name="ask_delete_tdconfig">删除Td配置文件</string>
     <string name="ask_remove_equate">移除相同 %1$s ?</string>
-    <string name="equate_no_station">无选定的测量点</string>
+    <!-- UNUSED string name="equate_no_station">无选定的测量点</string -->
     <string name="equate_no_stations">测量点太少</string>
     <string name="equate_no_nearby">无附近测量点</string>
 
@@ -1788,7 +1799,7 @@
     <!-- UNUSED string name="menu_equates">相同</string -->
     <!-- UNUSED string name="menu_save">保存</string -->
 
-    <string name="overwrite">重写</string>
+    <!-- UNUSED string name="overwrite">重写</string -->
 
     <string name="title_export_settings">设置 输入/输出</string>
     <string name="title_export">项目输出 &#8230;</string>
@@ -1803,6 +1814,9 @@
     <string name="exported">保存文件 %1$s</string>
     <string name="imported_settings">输入设置</string>
     <string name="export_failed">输出失败</string>
+
+    <!-- TODO string name="image_diagram">Direction diagram</string -->
+    <!-- TODO string name="image_photo">Photo</string -->
 
     <!-- 3D VIEWER strings -->
 
@@ -1822,12 +1836,12 @@
     <string name="cmenu_rose">玫瑰图</string>
     <string name="cmenu_wall">墙模式</string>
     <string name="cmenu_sketch">草图</string>
-    <!-- UNUSED string name="cmenu_fractal">分形计算</string -->
+    <!-- NO string name="cmenu_fractal">分形计算</string -->
 
     <!-- UNUSED string name="fractal_title">分形计算</string -->
-    <string name="info_title">信息</string>
+    <!-- UNUSED string name="info_title">信息</string -->
     <string name="info_surveys">测量</string>
-    <string name="info_axes">坐标轴: 蓝 北, 绿 东</string>
+    <!-- UNUSED string name="info_axes">坐标轴: 蓝 北, 绿 东</string -->
     <string name="info_grid">网格单元</string>
     <string name="info_view">视角</string>
     <string name="info_survey">测量</string>
@@ -1867,12 +1881,12 @@
     <!-- UNUSED string name="cno_files">没有文件</string -->
     <string name="reading_file">读取文件 %1$s</string>
     <string name="read_survey">读取测量 %1$s\n</string>
-    <string name="clear">清除</string>
+    <!-- UNUSED string name="clear">清除</string -->
     <string name="plan_proj">平面图</string>
     <string name="profile_proj">侧视图</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-    <string name="measure">测量</string>
+    <!-- UNUSED string name="measure">测量</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
@@ -1939,7 +1953,7 @@
     <string name="view_north">北</string>
     <string name="view_west">西</string>
     <string name="view_south">南</string>
-    <string name="view_point">视角</string>
+    <!-- UNUSED string name="view_point">视角</string -->
     <string name="view_zoom">缩放 1</string>
 
     <string name="walls_title">墙</string>
@@ -1950,9 +1964,9 @@
     <string name="walls_tube">管状</string>
     <!-- NO string name="walls_delaunay">三角</string -->
 
-    <string name="powercrust_few_splays">动力外壳: 侧射太少</string>
-    <string name="powercrust_failed">动力外壳失败</string>
-    <string name="powercrust_successful">动力外壳成功: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">动力外壳: 侧射太少</string -->
+    <!-- UNUSED string name="powercrust_failed">动力外壳失败</string -->
+    <!-- UNUSED string name="powercrust_successful">动力外壳成功: %1$d / %2$d</string -->
     <string name="powercrust_dxf_not_supported">动力外壳dxf输出不支持</string>
 
     <string name="ok_export">成功. 输出 %1$s</string>
@@ -1975,7 +1989,7 @@
     <!-- UNUSED string name="export_gltf_ok">输出 glTF 文件</string -->
     <!-- UNUSED string name="export_gltf_fail">失败的 glTf 文件输出</string -->
 
-    <string name="warning_not_overwrite">警告: 不覆盖现有文件 %1$s</string>
+    <!-- UNUSED string name="warning_not_overwrite">警告: 不覆盖现有文件 %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">警告: 无txt文件 %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">警告: 无 kml 文件 %1$s</string -->
     <!-- UNUSED string name="warning_not_las">警告: 无 las 文件 %1$s</string -->

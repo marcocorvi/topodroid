@@ -29,6 +29,8 @@
     android:editable="false"
   /> <!-- editable=false is necessary -->
   <!-- 
+    android:hint="@string/hint_from"
+    android:importantForAutofill="no"
     android:inputType="text"
     android:imeOptions="actionDone"
   -->
@@ -51,6 +53,8 @@
     android:editable="false"
   /> <!-- editable=false is necessary -->
   <!-- 
+    android:hint="@string/hint_to"
+    android:importantForAutofill="no"
     android:inputType="text"
     android:imeOptions="actionDone"
   -->

@@ -18,6 +18,7 @@
     android:layout_width="match_parent"
     android:hint="@string/station"
     android:nextFocusDown="@+id/edit_long"
+    android:importantForAutofill="no"
   />
 
   <LinearLayout android:id="@+id/layout1"
@@ -39,6 +40,7 @@
         android:layout_weight="60"
         android:hint="@string/longitude_hint"
         android:nextFocusDown="@+id/edit_lat"
+        android:importantForAutofill="no"
         />
   </LinearLayout>
 
@@ -61,6 +63,7 @@
         android:layout_weight="60"
         android:hint="@string/latitude_hint"
         android:nextFocusDown="@+id/edit_alt"
+        android:importantForAutofill="no"
         />
   </LinearLayout>
   		
@@ -86,6 +89,7 @@
         android:hint="@string/h_ellipsoid_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_asl"
+        android:importantForAutofill="no"
         />
   </LinearLayout>
   		
@@ -114,16 +118,18 @@
         android:hint="@string/h_geoid_hint"
         android:scrollHorizontally="true"
         android:nextFocusDown="@+id/edit_comment"
+        android:importantForAutofill="no"
         />
   </LinearLayout>
 
   <EditText android:id="@id/edit_comment" 
-      style="@style/edit_text_light"
-      android:layout_below="@id/layout3b"
-      android:layout_marginTop="@dimen/margintiny"
-      android:layout_width="match_parent"
-      android:hint="@string/comment"
-      android:nextFocusDown="@id/top"
+    style="@style/edit_text_light"
+    android:layout_below="@id/layout3b"
+    android:layout_marginTop="@dimen/margintiny"
+    android:layout_width="match_parent"
+    android:hint="@string/comment"
+    android:nextFocusDown="@id/top"
+    android:importantForAutofill="no"
   />
 
   <LinearLayout android:id="@+id/help"

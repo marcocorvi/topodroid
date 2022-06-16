@@ -25,6 +25,7 @@
     android:singleLine="true"
     android:inputType="text"
     android:hint="@string/hint_comment"
+    android:importantForAutofill="no"
     />
 
   <CheckBox android:id="@+id/photo_camera" 

@@ -57,6 +57,8 @@
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
         android:inputType="none"
+        android:hint="@string/hint_name"
+        android:importantForAutofill="no"
         /> <!-- android:inputType="none" -->
    		
     <Button android:id="@+id/survey_date" 
@@ -73,6 +75,7 @@
         android:hint="@string/team"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
+        android:importantForAutofill="no"
     />
    		
     <EditText android:id="@+id/survey_decl" 
@@ -80,6 +83,7 @@
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
+        android:importantForAutofill="no"
     />
 
       <EditText android:id="@+id/survey_comment" 
@@ -88,6 +92,7 @@
         android:hint="@string/description"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
+        android:importantForAutofill="no"
       />
 
       <TextView android:id="@+id/survey_xsections" 

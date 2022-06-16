@@ -155,6 +155,7 @@
     android:layout_marginBottom="@dimen/marginv"
     android:inputType="text"
     android:hint="@string/hint_text"
+    android:importantForAutofill="no"
   />
   <EditText android:id="@+id/point_options"
     style="@style/edit_text_light"
@@ -162,6 +163,7 @@
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginv"
     android:hint="@string/hint_options"
+    android:importantForAutofill="no"
   />
 
   <LinearLayout android:id="@+id/help"

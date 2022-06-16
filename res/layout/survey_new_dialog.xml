@@ -23,6 +23,7 @@
       android:layout_width="match_parent"
       android:hint="@string/name"
       android:scrollHorizontally="true"
+      android:importantForAutofill="no"
     />
         	
     <Button android:id="@+id/survey_date" 
@@ -35,11 +36,12 @@
     />
         	
     <EditText android:id="@+id/survey_team" 
-        style="@style/edit_text_light"
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="match_parent"
-        android:hint="@string/team"
-        android:scrollHorizontally="true"
+      style="@style/edit_text_light"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent"
+      android:hint="@string/team"
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
     />
         	
     <EditText android:id="@+id/survey_station" 
@@ -48,39 +50,42 @@
       android:layout_width="match_parent"
       android:hint="@string/init_station"
       android:scrollHorizontally="true"
+      android:importantForAutofill="no"
     />
         	
     <EditText android:id="@+id/survey_decl" 
-        style="@style/edit_signeddecimal_light"
-        android:layout_marginTop="2sp"
-        android:layout_width="match_parent"
-        android:hint="@string/declination"
-        android:scrollHorizontally="true"
+      style="@style/edit_signeddecimal_light"
+      android:layout_marginTop="2sp"
+      android:layout_width="match_parent"
+      android:hint="@string/declination"
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
     />
         	
     <EditText android:id="@+id/survey_comment" 
-        style="@style/edit_text_light"
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="match_parent"
-        android:hint="@string/description"
-        android:scrollHorizontally="true"
-     />
+      style="@style/edit_text_light"
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="match_parent"
+      android:hint="@string/description"
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
+    />
 
     <CheckBox android:id="@+id/survey_xsections" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="wrap_content"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:text="@string/xsections_private"
-     />
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:text="@string/xsections_private"
+    />
 
     <CheckBox android:id="@+id/survey_datamode" 
-        android:layout_marginTop="@dimen/margintiny"
-        android:layout_width="wrap_content"
-      	android:ems="25"
-        android:layout_height="wrap_content" 
-        android:text="@string/datamode_diving"
-     />
+      android:layout_marginTop="@dimen/margintiny"
+      android:layout_width="wrap_content"
+      android:ems="25"
+      android:layout_height="wrap_content" 
+      android:text="@string/datamode_diving"
+    />
 
   </LinearLayout>
   </ScrollView>

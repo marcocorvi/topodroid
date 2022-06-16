@@ -24,6 +24,8 @@
       <EditText android:id="@+id/et_length"
         style="@style/edit_signeddecimal_light"
         android:layout_width="200dp"
+        android:hint="@string/hint_length"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 
@@ -40,6 +42,8 @@
       <EditText android:id="@+id/et_azimuth"
         style="@style/edit_signeddecimal_light"
         android:layout_width="200dp"
+        android:hint="@string/hint_azimuth"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 
@@ -56,6 +60,8 @@
       <EditText android:id="@+id/et_clino"
         style="@style/edit_signeddecimal_light"
         android:layout_width="200dp"
+        android:hint="@string/hint_clino"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 

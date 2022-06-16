@@ -74,6 +74,8 @@
       android:layout_height="wrap_content" 
       android:layout_marginStart="10pt" 
       android:inputType="text"
+      android:hint="@string/hint_station"
+      android:importantForAutofill="no"
       />
   </LinearLayout>
 

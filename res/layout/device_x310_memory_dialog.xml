@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     >
-<LinearLayout
+<LinearLayout 
   style="@style/base_padding"
   android:layout_width="match_parent" 
   android:layout_height="wrap_content"
@@ -27,12 +27,14 @@
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="100dp"
       android:hint="@string/zero"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/et_dumpto" 
       style="@style/edit_number_light"
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="100dp"
       android:hint="@string/x310_max"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -46,6 +48,7 @@
       android:layout_marginTop="@dimen/margintiny"
       android:layout_width="match_parent"
       android:hint="@string/save_as"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 

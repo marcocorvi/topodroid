@@ -106,6 +106,7 @@
         android:layout_marginEnd="10dp"
         android:hint="@string/surface_east"
         android:inputType="numberSigned|numberDecimal"
+        android:importantForAutofill="no"
         />
       <EditText android:id="@+id/north"
         android:layout_width="0dp" 
@@ -114,17 +115,18 @@
         android:layout_marginEnd="10dp"
         android:hint="@string/surface_north"
         android:inputType="numberSigned|numberDecimal"
+        android:importantForAutofill="no"
         />
     </LinearLayout>
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout7"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
     android:gravity="start"
     > 
+    <!-- android:layout_below="@id/layout7" -->
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
       android:text="@string/button_help"

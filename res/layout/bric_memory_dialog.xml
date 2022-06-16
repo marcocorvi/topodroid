@@ -25,7 +25,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_year"
-
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/bric_month" 
       android:layout_marginStart="@dimen/marginhsmall"
@@ -36,6 +36,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_month"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/bric_day" 
       android:layout_marginStart="@dimen/marginhsmall"
@@ -46,6 +47,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_day"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/bric_hour" 
       android:layout_marginStart="@dimen/marginhsmall"
@@ -56,6 +58,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_hour"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/bric_minute" 
       android:layout_marginStart="@dimen/marginhsmall"
@@ -66,6 +69,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_minute"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/bric_second" 
       android:layout_marginStart="@dimen/marginhsmall"
@@ -76,6 +80,7 @@
       android:singleLine="true"
       android:inputType="number"
       android:hint="@string/hint_second"
+      android:importantForAutofill="no"
     />
 
     <!-- EditText android:id="@+id/bric_centisecond" 
@@ -85,6 +90,7 @@
       android:layout_height="wrap_content" 
       android:ems="25"
       android:singleLine="true"
+      android:importantForAutofill="no"
     / -->
 
    </LinearLayout>

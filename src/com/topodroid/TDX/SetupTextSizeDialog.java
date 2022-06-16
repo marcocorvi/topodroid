@@ -74,7 +74,7 @@ class SetupTextSizeDialog extends MyDialog
 
     // mSeekBar   = (SeekBar) findViewById(R.id.seekbar );
     mSample    = (TextView) findViewById(R.id.sample_text);
-    mETsize    = (EditText) findViewById( R.id.textsize );
+    mETsize    = (EditText) findViewById( R.id.text_points );
     mBtnPlus   = (Button) findViewById( R.id.btn_plus );
     mBtnMinus  = (Button) findViewById( R.id.btn_minus );
     mBtnNext   = (Button) findViewById( R.id.btn_next );

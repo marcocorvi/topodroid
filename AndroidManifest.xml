@@ -137,74 +137,72 @@
           />
         </activity>
 
-        <!-- activity android:name=".ItemDrawer"
-          android:theme="@style/Theme.FullScreen"
-          >
-        </activity -->
-
         <activity android:name=".FixedActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".PlotReloadWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".GMActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".CalibActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".SurveyWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".ShotWindow"
 	  android:theme="@style/Theme.FullScreen"
           android:screenOrientation="fullSensor"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".SensorActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:windowSoftInputMode="stateHidden|adjustResize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name=".DeviceActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <!-- activity android:name=".DeviceList"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
+        / -->
+
+        <!-- MUST LIST WINDOWS -->
+        <!-- activity android:name=".ItemDrawer"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          android:exported="false"
           >
+          <intent-filter>
+            <action android:name="android.intent.action.VIEW" />
+            <category android:name="android.intent.category.DEFAULT" />
+          </intent-filter>
         </activity -->
 
         <activity android:name=".DrawingWindow"
@@ -280,27 +278,23 @@
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <activity android:name="com.topodroid.tdm.TdManagerActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
         <activity android:name="com.topodroid.tdm.TdmConfigActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
         <activity android:name="com.topodroid.tdm.TdmViewActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
-          >
-        </activity>
+        />
 
         <!-- receiver android:name=".PairingRequest">
           <intent-filter>

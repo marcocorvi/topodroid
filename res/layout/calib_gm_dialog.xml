@@ -23,6 +23,7 @@
       android:textSize="@dimen/textsizebig"
       android:layout_marginEnd="@dimen/marginh"
       android:hint="@string/hint_azimuth"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/gm_clino"
       style="@style/edit_signeddecimal"
@@ -31,6 +32,7 @@
       android:textSize="@dimen/textsizebig"
       android:layout_marginEnd="@dimen/marginh"
       android:hint="@string/hint_clino"
+      android:importantForAutofill="no"
     />
     <EditText android:id="@+id/gm_roll"
       style="@style/edit_decimal"
@@ -38,6 +40,7 @@
       android:layout_weight="30"
       android:textSize="@dimen/textsizebig"
       android:hint="@string/hint_roll"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -56,6 +59,7 @@
     android:layout_width="match_parent"
     android:layout_marginTop="@dimen/margintiny"
     android:hint="@string/hint_name"
+    android:importantForAutofill="no"
   />
    		
   <LinearLayout android:id="@+id/layout2"

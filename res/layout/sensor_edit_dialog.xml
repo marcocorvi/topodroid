@@ -39,11 +39,13 @@
         />
 
     <EditText android:id="@+id/sensor_comment" 
-        style="@style/edit_text_light"
-        android:layout_marginTop="@dimen/marginv"
-        android:layout_width="match_parent"
-        android:hint="@string/comment"
-        android:scrollHorizontally="true" />
+      style="@style/edit_text_light"
+      android:layout_marginTop="@dimen/marginv"
+      android:layout_width="match_parent"
+      android:hint="@string/comment"
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
+    />
 
     <LinearLayout android:id="@+id/help"
       android:layout_width="wrap_content" 

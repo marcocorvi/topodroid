@@ -29,12 +29,14 @@
 
     <EditText android:id="@+id/edit_plot_name" 
       style="@style/edit_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" 
-      	android:ems="25"
-        android:hint="@string/name"
-        android:singleLine="true"
-        android:scrollHorizontally="true" />
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content" 
+      android:ems="25"
+      android:hint="@string/name"
+      android:singleLine="true"
+      android:scrollHorizontally="true"
+      android:importantForAutofill="no"
+    />
 
     </LinearLayout>
 
@@ -55,16 +57,20 @@
         />
 
       <EditText android:id="@+id/edit_plot_start"
-         style="@style/edit_text"
-         android:layout_width="match_parent"
-         android:hint="@string/plot_start"
-         android:scrollHorizontally="true" />
+        style="@style/edit_text"
+        android:layout_width="match_parent"
+        android:hint="@string/plot_start"
+        android:scrollHorizontally="true"
+        android:importantForAutofill="no"
+      />
    		
       <!-- EditText android:id="@+id/edit_plot_view"
-         style="@style/edit_text"
-         android:layout_width="150dp"
-         android:hint="@string/plot_view"
-         android:scrollHorizontally="true" / -->
+        style="@style/edit_text"
+        android:layout_width="150dp"
+        android:hint="@string/plot_view"
+        android:scrollHorizontally="true"
+        android:importantForAutofill="no"
+      / -->
 
     </LinearLayout>
 
@@ -81,7 +87,9 @@
         android:layout_width="0dp"
         android:layout_weight="50"
         android:hint="0"
-        android:scrollHorizontally="true" / -->
+        android:scrollHorizontally="true"
+        android:importantForAutofill="no"
+      / -->
 
       <CheckBox android:id="@+id/button_extended"
         android:layout_width="0dp"

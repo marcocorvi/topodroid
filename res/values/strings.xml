@@ -418,7 +418,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="menu_switch">SWITCH/CLOSE</string>
     <string name="menu_help">HELP</string>
     <!-- UNUSED string name="menu_join_survey">CO-SURVEY</string -->
-    <string name="menu_logs">LOGS</string>
+    <!-- UNUSED string name="menu_logs">LOGS</string -->
     <string name="menu_manual_calibration">INSTR. OFFSET</string>
     <string name="menu_options">SETTINGS</string>
     <string name="menu_overview">OVERVIEW</string>
@@ -490,7 +490,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="popup_cont_both">Both points</string>
     <string name="popup_cont_continue">Continue</string>
 
-    <string name="connection_error">Connection error</string>
+    <!-- UNUSED string name="connection_error">Connection error</string -->
     <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Not connected</string -->
     <!-- UNUSED string name="connected_already">Already connected</string -->
@@ -726,7 +726,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_apply"     >Apply</string>
     <string name="button_back"      >Back</string>
     <string name="button_cancel"    >Cancel</string>
-    <string name="button_change"    >Change</string>
+    <!-- UNUSED string name="button_change"    >Change</string -->
     <string name="button_clipboard" >Clipboard</string>
     <string name="button_close"     >Close</string>
     <!-- UNUSED string name="button_create"    >Create</string -->
@@ -864,6 +864,17 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+    <string name="hint_cellsize">cell size</string>
+    <string name="hint_cwd">work folder</string>
+    <string name="hint_distance">distance</string>
+    <string name="hint_length">length</string>
+    <string name="hint_line">line</string>
+    <string name="hint_origin">origin station</string>
+    <string name="hint_point">point</string>
+    <string name="hint_textsize">text size</string>
+    <string name="hint_units">symbol units</string>
+    <string name="hint_value">value</string>
+
     <string name="hint_notes">notes</string>
     <string name="hint_label">label</string>
     <string name="hint_comment">comment</string>
@@ -944,7 +955,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_cave3d">Cave3D, 3D viewer</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">Preferences</string>
-    <string name="help_log">Logging preferences</string>
+    <!-- UNUSED string name="help_log">Logging preferences</string -->
     <!-- UNUSED string name="help_join_survey">Joint surveying</string -->
     <string name="help_info_topodroid">TopoDroid info</string>
     <string name="help_download">Data download</string>
@@ -1806,13 +1817,13 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="no_surveys">No surveys</string>
     <string name="no_tdconfig">Missing tdconfig file</string>
     <string name="no_th_file">No Therion file</string>
-    <string name="file_exists">File exists</string>
-    <string name="file_create_fail">Failed file create</string>
-    <string name="oom">Warning. Out of memory</string>
+    <!-- UNUSED string name="file_exists">File exists</string -->
+    <!-- UNUSED string name="file_create_fail">Failed file create</string -->
+    <!-- UNUSED string name="oom">Warning. Out of memory</string -->
 
     <string name="ask_delete_tdconfig">Delete TdConfig file</string>
     <string name="ask_remove_equate">Remove equate %1$s ?</string>
-    <string name="equate_no_station">No station selected</string>
+    <!-- UNUSED string name="equate_no_station">No station selected</string -->
     <string name="equate_no_stations">Too few stations</string>
     <string name="equate_no_nearby">No station nearby</string>
 
@@ -1821,7 +1832,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="menu_equates">EQUATES</string -->
     <!-- UNUSED string name="menu_save">SAVE</string -->
 
-    <string name="overwrite">overwrite</string>
+    <!-- UNUSED string name="overwrite">overwrite</string -->
 
     <string name="title_export_settings">Settings import/export</string>
     <string name="title_export">Export project as &#8230;</string>
@@ -1835,6 +1846,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 
     <string name="exported">Saved file %1$s</string>
     <string name="export_failed">Failed export</string>
+
+    <string name="image_diagram">Direction diagram</string>
+    <string name="image_photo">Photo</string>
 
     <!-- 3D VIEWER strings -->
     <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
@@ -1855,7 +1869,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cmenu_rose">ROSE DIAGRAM</string>
     <string name="cmenu_wall">WALLS</string>
     <string name="cmenu_sketch">SKETCHES</string>
-    <string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string>
+    <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 
     <string name="fractal_title" translatable="false">Fractal result</string>
     <string name="fractal_cnt_total" translatable="false">count</string>
@@ -1865,9 +1879,9 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="fractal_dimension" translatable="false">Fractal dimension</string>
     <string name="illegal_value">Illegal value</string>
 
-    <string name="info_title">MODEL INFO</string>
+    <!-- UNUSED string name="info_title">MODEL INFO</string -->
     <string name="info_surveys">Surveys</string>
-    <string name="info_axes">Axes: blue North, green East</string>
+    <!-- UNUSED string name="info_axes">Axes: blue North, green East</string -->
     <string name="info_grid">Grid cell</string>
     <string name="info_view">Viewpoint</string>
     <string name="info_survey">Surveys</string>
@@ -1908,12 +1922,12 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="cno_files">No files</string -->
     <string name="reading_file">Reading file %1$s</string>
     <string name="read_survey">Read survey %1$s\n</string>
-    <string name="clear">Clear</string>
+    <!-- UNUSED string name="clear">Clear</string -->
     <string name="plan_proj">Plan</string>
     <string name="profile_proj">Profile</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-    <string name="measure">measure</string>
+    <!-- UNUSED string name="measure">measure</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
@@ -1980,7 +1994,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="view_north">North</string>
     <string name="view_west">West</string>
     <string name="view_south">South</string>
-    <string name="view_point">Viewpoint</string>
+    <!-- UNUSED string name="view_point">Viewpoint</string -->
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">WALLS</string>
@@ -1989,11 +2003,11 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="walls_hull">Hull</string>
     <string name="walls_bubble">Bubble</string>
     <string name="walls_tube">Tube</string>
-    <string name="walls_delaunay" translatable="false">Delaunay</string>
+    <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
 
-    <string name="powercrust_few_splays">Powercrust: too few splays</string>
-    <string name="powercrust_failed">Powercrust failed</string>
-    <string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">Powercrust: too few splays</string -->
+    <!-- UNUSED string name="powercrust_failed">Powercrust failed</string -->
+    <!-- UNUSED string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
     <string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string>
 
     <string name="ok_export">OK. Exported %1$s</string>
@@ -2015,7 +2029,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
-    <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
+    <!-- UNUSED string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->

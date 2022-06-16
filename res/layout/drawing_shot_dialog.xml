@@ -37,7 +37,9 @@
       android:text="@string/dash"
       android:nextFocusDown="@+id/shot_to"
       android:hint="@string/hint_from"
-        tools:ignore="Autofill" />
+      android:importantForAutofill="no"
+    />
+      <!--  tools:ignore="Autofill" -->
     <EditText android:id="@+id/shot_to"
       style="@style/edit_text"
       android:layout_marginTop="@dimen/margintiny"
@@ -46,6 +48,7 @@
       android:text="@string/dash"
       android:nextFocusDown="@+id/shot_comment"
       android:hint="@string/hint_to"
+      android:importantForAutofill="no"
       />
     <TextView android:id="@+id/shot_type"
       style="@style/edit_text"
@@ -62,6 +65,7 @@
     android:layout_width="match_parent"
     android:layout_below="@id/layout1"
     android:hint="@string/hint_comment"
+    android:importantForAutofill="no"
     />
 
   <LinearLayout android:id="@+id/layout2"

@@ -414,7 +414,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="menu_switch">VÁLT/BEZÁR</string>
     <string name="menu_help">SÚGÓ</string>
     <!-- UNUSED string name="menu_join_survey">EGYÜTTES FELMÉRÉS</string -->
-    <string name="menu_logs">NAPLÓK</string>
+    <!-- UNUSED string name="menu_logs">NAPLÓK</string -->
     <string name="menu_manual_calibration">NULLPONT</string>
     <string name="menu_options">BEÁLLÍTÁSOK</string>
     <string name="menu_overview">ÁTTEKINTŐ</string>
@@ -486,7 +486,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="popup_cont_both">Mindkét pont</string>
     <string name="popup_cont_continue">Folytat</string>
 
-    <string name="connection_error">Kapcsolódási hiba</string>
+    <!-- UNUSED string name="connection_error">Kapcsolódási hiba</string -->
     <!-- UNUSED string name="connecting">Kapcsolódás &#8230;</string -->
     <!-- UNUSED string name="connected_none">Nincs kapcsolat</string -->
     <!-- UNUSED string name="connected_already">Már összekapcsolt</string -->
@@ -721,7 +721,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_apply"     >Alkalmaz</string>
     <string name="button_back"      >Vissza</string>
     <string name="button_cancel"    >Mégse</string>
-    <string name="button_change"    >Változtat</string>
+    <!-- UNUSED string name="button_change"    >Változtat</string -->
     <string name="button_clipboard" >Vágólap</string>
     <string name="button_close"     >Bezár</string>
     <!-- UNUSED string name="button_create"    >Létrehoz</string -->
@@ -860,6 +860,17 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
+    <!-- TODO string name="hint_cellsize">cell size</string -->
+    <!-- TODO string name="hint_cwd">work folder</string -->
+    <!-- TODO string name="hint_distance">distance</string -->
+    <!-- TODO string name="hint_length">length</string -->
+    <!-- TODO string name="hint_line">line</string -->
+    <!-- TODO string name="hint_origin">origin station</string -->
+    <!-- TODO string name="hint_point">point</string -->
+    <!-- TODO string name="hint_textsize">text size</string -->
+    <!-- TODO string name="hint_units">symbol units</string -->
+    <!-- TODO string name="hint_value">value</string -->
+
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
     <string name="hint_comment">megjegyzés</string>
@@ -940,7 +951,7 @@ A részletekért keresse fel a weboldalakat.\n
 	    <string name="help_cave3d">Cave3D, 3D nézet</string>
     <!-- UNUSED string name="help_database">Adatbázis néző app (SQliteViewer)</string -->
     <string name="help_prefs">Program beállítások szerkesztése</string>
-    <string name="help_log">Naplózási beállítások</string>
+    <!-- UNUSED string name="help_log">Naplózási beállítások</string -->
     <!-- UNUSED string name="help_join_survey">Együttes felmérés</string -->
     <string name="help_info_topodroid">TopoDroid információk</string>
     <string name="help_download">Adatok letöltése</string>
@@ -1796,13 +1807,13 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_surveys">Nincs mérés</string>
     <string name="no_tdconfig">Hiányzó tdconfig fájl</string>
     <string name="no_th_file">Nem Therion fájl</string>
-    <string name="file_exists">Létező fájl</string>
-    <string name="file_create_fail">Fájl létrehozás hiba</string>
-    <string name="oom">Fifyelem! Megtelt a memória</string>
+    <!-- UNUSED string name="file_exists">Létező fájl</string -->
+    <!-- UNUSED string name="file_create_fail">Fájl létrehozás hiba</string -->
+    <!-- UNUSED string name="oom">Fifyelem! Megtelt a memória</string -->
 
     <string name="ask_delete_tdconfig">TdConfig fájl törlése</string>
     <string name="ask_remove_equate">Kapcsolódás megszüntetés %1$s ?</string>
-    <string name="equate_no_station">Nincs kiválasztott pont</string>
+    <!-- UNUSED string name="equate_no_station">Nincs kiválasztott pont</string -->
     <string name="equate_no_stations">Túl kevés pont</string>
     <string name="equate_no_nearby">Nincs közelben pont</string>
 
@@ -1811,7 +1822,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="menu_equates">KAPCSOLÓDÓ PONTOK</string -->
     <!-- UNUSED string name="menu_save">MENTÉS</string -->
 
-    <string name="overwrite">felülírja</string>
+    <!-- UNUSED string name="overwrite">felülírja</string -->
 
     <string name="title_export_settings">Import/export beállítások</string>
     <string name="title_export">Projekt exportálása a &#8230;</string>
@@ -1825,6 +1836,9 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="exported">Mentett fájl %1$s</string>
     <string name="export_failed">Hibás export</string>
+
+    <!-- TODO string name="image_diagram">Direction diagram</string -->
+    <!-- TODO string name="image_photo">Photo</string -->
 
     <!-- 3D VIEWER strings 
     VERY IMPORTANT Fix the "UNUSED" commented strings -->
@@ -1845,12 +1859,12 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cmenu_rose">RÓZSA DIAGRAMM</string>
     <string name="cmenu_wall">FALAK</string>
     <string name="cmenu_sketch">VÁZLATOK</string>
-    <!-- UNUSED string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
+    <!-- NO string name="cmenu_fractal">FRAKTÁL SZÁMÍTÁS</string -->
 
     <!-- UNUSED string name="fractal_title">Fraktál számítás</string -->
-    <string name="info_title">INFO</string>
+    <!-- UNUSED string name="info_title">INFO</string -->
     <string name="info_surveys">MÉRÉSEK</string>
-    <string name="info_axes">Tengelyek: kék Észak, zöld Kelet</string>
+    <!-- UNUSED string name="info_axes">Tengelyek: kék Észak, zöld Kelet</string -->
     <string name="info_grid">Rács cella</string>
     <string name="info_view">Nézőpont</string>
     <string name="info_survey">Felmérések</string>
@@ -1890,12 +1904,12 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="cno_files">Nincsenek fájlok</string -->
     <string name="reading_file">Fájl beolvasás %1$s</string>
     <string name="read_survey">Mérés beolvasás %1$s\n</string>
-    <string name="clear">Törlés</string>
+    <!-- UNUSED string name="clear">Törlés</string -->
     <string name="plan_proj">Alaprajz</string>
     <string name="profile_proj">Oldalnézet</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Barlang %9$.1f</string>
-    <string name="measure">mérés</string>
+    <!-- UNUSED string name="measure">mérés</string -->
 
     <!-- UNUSED string name="style_stroke">Simítás</string -->
     <!-- UNUSED string name="style_stroke_fill">Kitöltés &amp; Simítás</string -->
@@ -1962,7 +1976,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="view_north">Északi</string>
     <string name="view_west">Nyugati</string>
     <string name="view_south">Déli</string>
-    <string name="view_point">Nézőpont</string>
+    <!-- UNUSED string name="view_point">Nézőpont</string -->
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">FALAK</string>
@@ -1973,9 +1987,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="walls_tube">Tube</string>
     <!-- NO string name="walls_delaunay">Delaunay</string -->
 
-    <string name="powercrust_few_splays">Powercrust: túl kevés sün</string>
-    <string name="powercrust_failed">Powercrust hibás</string>
-    <string name="powercrust_successful">Powercrust sikeres: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">Powercrust: túl kevés sün</string -->
+    <!-- UNUSED string name="powercrust_failed">Powercrust hibás</string -->
+    <!-- UNUSED string name="powercrust_successful">Powercrust sikeres: %1$d / %2$d</string -->
     <string name="powercrust_dxf_not_supported">powercrust dxf export nem támogatott</string>
 
     <string name="ok_export">Rendben, Exportálva %1$s</string>
@@ -1997,7 +2011,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="export_gltf_ok">Exportált glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Hibás glTf export</string -->
 
-    <string name="warning_not_overwrite">Figyelem: nem írja felül a meglévő fájlt %1$s</string>
+    <!-- UNUSED string name="warning_not_overwrite">Figyelem: nem írja felül a meglévő fájlt %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Figyelem: nem txt fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Figyelem: nem kml fájl %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Figyelem: nem las fájl %1$s</string -->

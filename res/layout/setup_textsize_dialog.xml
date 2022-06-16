@@ -49,7 +49,7 @@
       style="@style/button_default"
       android:text="@string/dash"
     />
-    <EditText android:id="@+id/textsize"
+    <EditText android:id="@+id/text_points"
       android:layout_width="0dp"
       android:layout_weight="40"
       android:layout_height="wrap_content"
@@ -58,6 +58,8 @@
       android:text="@string/default_textsize"
       style="@style/edit_number"
       android:inputType="none"
+      android:hint="@string/hint_textsize"
+      android:importantForAutofill="no"
     />
     <Button android:id="@+id/btn_plus"
       android:layout_width="0dp"

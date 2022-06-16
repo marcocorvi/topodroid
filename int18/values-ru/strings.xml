@@ -406,7 +406,7 @@
     <string name="menu_switch">ЗАКРЫТЬ/ПЕРЕКЛЮЧИТЬ</string>
     <string name="menu_help">Помощь</string>
     <!-- UNUSED string name="menu_join_survey">СОВМ. СЪЕМКА</string -->
-    <string name="menu_logs">Журнал</string>
+    <!-- UNUSED string name="menu_logs">Журнал</string -->
     <string name="menu_manual_calibration">ПОПРАВКИ</string>
     <string name="menu_options">НАСТРОЙКИ</string>
     <string name="menu_overview">ОБЗОР</string>
@@ -478,7 +478,7 @@
     <string name="popup_cont_both">Обе точки</string>
     <string name="popup_cont_continue">Продолжить</string>
 
-    <string name="connection_error">Ошибка соединения</string>
+    <!-- UNUSED string name="connection_error">Ошибка соединения</string -->
     <!-- UNUSED string name="connecting">Подключение к &#8230;</string -->
     <!-- UNUSED string name="connected_none">Не соединено</string -->
     <!-- UNUSED string name="connected_already">Уже соединено</string -->
@@ -703,7 +703,7 @@
     <string name="button_apply"     >Применить</string>
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
-    <string name="button_change"    >Изменить    </string>
+    <!-- UNUSED string name="button_change"    >Изменить    </string -->
     <string name="button_close"     >Закрыть   </string>
     <!-- UNUSED string name="button_create"    >Создать    </string -->
     <string name="button_color"     >Цвет	</string>
@@ -840,6 +840,17 @@
     <!-- UNUSED string name="azimuth">Азимут [грд]</string -->
     <!-- UNUSED string name="clino">Угол [грд]</string -->
 
+    <!-- TODO string name="hint_cellsize">cell size</string -->
+    <!-- TODO string name="hint_cwd">work folder</string -->
+    <!-- TODO string name="hint_distance">distance</string -->
+    <!-- TODO string name="hint_length">length</string -->
+    <!-- TODO string name="hint_line">line</string -->
+    <!-- TODO string name="hint_origin">origin station</string -->
+    <!-- TODO string name="hint_point">point</string -->
+    <!-- TODO string name="hint_textsize">text size</string -->
+    <!-- TODO string name="hint_units">symbol units</string -->
+    <!-- TODO string name="hint_value">value</string -->
+
     <string name="hint_notes">примечания</string>
     <string name="hint_label">подпись</string>
     <string name="hint_comment">коментарий</string>
@@ -919,7 +930,7 @@
     <string name="help_therion">Управление проектами пещер</string>
     <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
-    <string name="help_log">Вкл/Выкл настройки журнала</string>
+    <!-- UNUSED string name="help_log">Вкл/Выкл настройки журнала</string -->
     <!-- UNUSED string name="help_join_survey">Совместная топосъёмка</string -->
     <string name="help_info_topodroid">Сведения о TopoDroid</string>
     <string name="help_download">Загрузить данные с DistoX</string>
@@ -1751,13 +1762,13 @@
     <string name="no_surveys">Нет съёмок</string>
     <string name="no_tdconfig">Отсутсвует tdconfig файл</string>
     <string name="no_th_file">Нет therion файла</string>
-    <string name="file_exists">Файл уже существует</string>
-    <string name="file_create_fail">Невозможно создать файл</string>
-    <string name="oom">Внимание. Недостаточно памяти</string>
+    <!-- UNUSED string name="file_exists">Файл уже существует</string -->
+    <!-- UNUSED string name="file_create_fail">Невозможно создать файл</string -->
+    <!-- UNUSED string name="oom">Внимание. Недостаточно памяти</string -->
 
     <string name="ask_delete_tdconfig">Удалить TdConfig файл?</string>
     <string name="ask_remove_equate">Удалить соединения %1$s ?</string>
-    <string name="equate_no_station">Пикеты не выбраны</string>
+    <!-- UNUSED string name="equate_no_station">Пикеты не выбраны</string -->
     <string name="equate_no_stations">Слишком мало пикетов</string>
     <string name="equate_no_nearby">Нет пикета поблизости</string>
 
@@ -1766,7 +1777,7 @@
     <!-- UNUSED string name="menu_equates">СОЕДИНЕНИЯ</string -->
     <!-- UNUSED string name="menu_save">СОХРАНИТЬ</string -->
 
-    <string name="overwrite">перезаписать</string>
+    <!-- UNUSED string name="overwrite">перезаписать</string -->
 
     <string name="title_export_settings">Импорт/Экспорт настроек</string>
     <string name="title_export">Экспортировать проект как &#8230;</string>
@@ -1781,7 +1792,10 @@
     <string name="exported">Файл сохранен %1$s</string>
     <string name="imported_settings">Импортрованные настройки</string>
     <string name="export_failed">Ошибка экспорта</string>
-   
+
+    <!-- TODO string name="image_diagram">Direction diagram</string -->
+    <!-- TODO string name="image_photo">Photo</string -->
+
     <!-- 3D VIEWER strings -->
     <!-- TODO string name="cbtn_bind">Rebind</string -->
 
@@ -1799,11 +1813,13 @@
     <string name="cmenu_rose">Rose диаграмма</string>
     <string name="cmenu_wall">Режим стен</string>
     <!-- TODO string name="cmenu_sketch">SKETCHES</string -->
-    <!-- UNUSED string name="cmenu_fractal">Кол-во фракталофф</string -->
+    <!-- NO string name="cmenu_fractal">Кол-во фракталофф</string -->
 
     <!-- UNUSED string name="fractal_title">Кол-во фракталов</string -->
-    <string name="info_title">ИНФО</string>
-    <string name="info_axes">Оси: синий Север, зеленый Восток</string>
+
+    <!-- UNUSED string name="info_title">ИНФО</string -->
+    <!-- TODO string name="info_surveys">Surveys</string -->
+    <!-- UNUSED string name="info_axes">Оси: синий Север, зеленый Восток</string -->
     <string name="info_grid">Шаг сетки [м]</string>
     <string name="info_view">Точка просмотра</string>
     <string name="info_surveys">Съёмки</string>
@@ -1843,13 +1859,13 @@
     <!-- UNUSED string name="query" formatted="false">Съёмки: %d Замеры: %d Пикеты: %d\nДлина: %d Глубина: %d</string -->
     <!-- UNUSED string name="cno_files">Нет файлов</string -->
     <string name="reading_file">Считывание файла %1$s</string>
-    <string name="clear">Очистить</string>
+    <!-- UNUSED string name="clear">Очистить</string -->
 
     <string name="plan_proj">План</string>
     <string name="profile_proj">Разрез</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
     <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-    <string name="measure">измерить</string>
+    <!-- UNUSED string name="measure">измерить</string -->
 
     <!-- UNUSED string name="style_stroke">Линия</string -->
     <!-- UNUSED string name="style_stroke_fill">Заливка &amp; Линии</string -->
@@ -1907,7 +1923,7 @@
     <string name="view_north">Север</string>
     <string name="view_west">Запад</string>
     <string name="view_south">Юг</string>
-    <string name="view_point">Точка обзора</string>
+    <!-- UNUSED string name="view_point">Точка обзора</string -->
     <string name="view_zoom">Зум 1</string>
 
     <string name="walls_title">СТЕНЫ</string>
@@ -1918,9 +1934,9 @@
     <string name="walls_tube">Труба</string>
     <!-- NO string name="walls_delaunay">Делане</string -->
 
-    <string name="powercrust_few_splays">Powercrust: недостаточно боковых замеров</string>
-    <string name="powercrust_failed">Powercrust ошибка</string>
-    <string name="powercrust_successful">Powercrust успешно: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">Powercrust: недостаточно боковых замеров</string -->
+    <!-- UNUSED string name="powercrust_failed">Powercrust ошибка</string -->
+    <!-- UNUSED string name="powercrust_successful">Powercrust успешно: %1$d / %2$d</string -->
     <string name="powercrust_dxf_not_supported">экспорт powercrust в dxf export не поддерживается</string>
 
     <string name="ok_export">OK. Экспортировано %1$s</string>
@@ -1942,7 +1958,7 @@
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
-    <string name="warning_not_overwrite">Внимание: не перезаписывать существующий файл %1$s</string>
+    <!-- UNUSED string name="warning_not_overwrite">Внимание: не перезаписывать существующий файл %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->

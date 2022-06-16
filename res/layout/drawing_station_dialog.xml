@@ -32,6 +32,7 @@
       android:layout_height="wrap_content" 
       android:inputType="text"
       android:hint="@string/comment"
+      android:importantForAutofill="no"
     />
   </LinearLayout>
 
@@ -157,6 +158,7 @@
         style="@style/edit_text_light"
         android:layout_width="match_parent" 
         android:hint="@string/section_name"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 

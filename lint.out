@@ -13,33 +13,30 @@ res/layout/cave3d_sketches_dialog.xml:21: Warning: The vertically scrolling Scro
 res/layout/cave3d_surveys_dialog.xml:11: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
     <ListView android:id="@+id/surveys_list"
      ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:144: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
+res/layout/device_a3_memory_dialog.xml:149: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
   <ListView android:id="@+id/list_memory"
    ~~~~~~~~
-res/layout/device_x310_memory_dialog.xml:52: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
+res/layout/device_x310_memory_dialog.xml:55: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
   <ListView android:id="@+id/list_memory"
    ~~~~~~~~
 res/layout/scrap_outline_dialog.xml:12: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
   <ListView android:id="@+id/list"
    ~~~~~~~~
-AndroidManifest.xml:152: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
+AndroidManifest.xml:146: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".PlotReloadWindow"
                                 ~~~~~~~~~~~~~~~~~
-AndroidManifest.xml:210: Error: DrawingWindow must extend android.app.Activity [Instantiatable]
+AndroidManifest.xml:208: Error: DrawingWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".DrawingWindow"
                                 ~~~~~~~~~~~~~~
-AndroidManifest.xml:221: Error: OverviewWindow must extend android.app.Activity [Instantiatable]
+AndroidManifest.xml:219: Error: OverviewWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".OverviewWindow"
                                 ~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:29: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/dblock_row_noedit.xml:51: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
+res/layout/dblock_row_noedit.xml:53: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-ru/plurals.xml:3: Error: For locale "ru" (Russian) the following quantities should also be defined: many [MissingQuantity]
-  <plurals name="calib_saturated_values">
-  ^
 res/values/strings.xml:36: Error: "tdm_config_project" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
     <string name="tdm_config_project">project.tdconfig</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -151,124 +148,160 @@ res/values/strings.xml:771: Error: "button_recover" is not translated in "cn" [M
 res/values/strings.xml:838: Error: "popup_do_gm_group" is not translated in "cn" [MissingTranslation]
     <string name="popup_do_gm_group">Calib. group</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:944: Error: "help_cave3d" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:867: Error: "hint_cellsize" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_cellsize">cell size</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:868: Error: "hint_cwd" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_cwd">work folder</string>
+            ~~~~~~~~~~~~~~~
+res/values/strings.xml:869: Error: "hint_distance" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_distance">distance</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:870: Error: "hint_length" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_length">length</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:871: Error: "hint_line" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_line">line</string>
+            ~~~~~~~~~~~~~~~~
+res/values/strings.xml:872: Error: "hint_origin" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_origin">origin station</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:873: Error: "hint_point" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_point">point</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:874: Error: "hint_textsize" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_textsize">text size</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:875: Error: "hint_units" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_units">symbol units</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:876: Error: "hint_value" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="hint_value">value</string>
+            ~~~~~~~~~~~~~~~~~
+res/values/strings.xml:955: Error: "help_cave3d" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="help_cave3d">Cave3D, 3D viewer</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1032: Error: "help_splays" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1043: Error: "help_splays" is not translated in "cn" [MissingTranslation]
     <string name="help_splays">Segment/point splays</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1048: Error: "export_dxf_version" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1059: Error: "export_dxf_version" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="export_dxf_version">Version</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1134: Error: "title_photo_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1145: Error: "title_photo_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="title_photo_view">Photo</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1141: Error: "title_reduction_errors" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1152: Error: "title_reduction_errors" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
     <string name="title_reduction_errors">Survey data-reduction anomalies</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1210: Error: "exported_settings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1221: Error: "exported_settings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="exported_settings">Exported settings %1$s</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1212: Error: "imported_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1223: Error: "imported_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="imported_settings_failed">Failed to import settings</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1213: Error: "export_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1224: Error: "export_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="export_settings_failed">Failed to export settings</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1327: Error: "pref_svg_program_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1338: Error: "pref_svg_program_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_svg_program_title">SVG program</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1328: Error: "pref_svg_program_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1339: Error: "pref_svg_program_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_svg_program_summary">Target SVG program</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1442: Error: "pref_editable_stations_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1453: Error: "pref_editable_stations_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1443: Error: "pref_editable_stations_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1454: Error: "pref_editable_stations_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1615: Error: "pref_full_affine_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1626: Error: "pref_full_affine_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1616: Error: "pref_full_affine_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1627: Error: "pref_full_affine_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1650: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1661: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_title">Corner drag</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1651: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1662: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1840: Error: "cbtn_bind" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1850: Error: "image_diagram" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="image_diagram">Direction diagram</string>
+            ~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1851: Error: "image_photo" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="image_photo">Photo</string>
+            ~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1856: Error: "cbtn_bind" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cbtn_bind">Rebind</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1855: Error: "cmenu_sketch" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1871: Error: "cmenu_sketch" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cmenu_sketch">SKETCHES</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1864: Error: "illegal_value" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1880: Error: "illegal_value" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
     <string name="illegal_value">Illegal value</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1871: Error: "info_survey" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1887: Error: "info_survey" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="info_survey">Surveys</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1898: Error: "proj_orthographic" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1914: Error: "proj_orthographic" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="proj_orthographic">Orthographic parameters</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1900: Error: "proj_side" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1916: Error: "proj_side" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="proj_side">Side</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1908: Error: "read_survey" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1924: Error: "read_survey" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="read_survey">Read survey %1$s\n</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1938: Error: "ctitle_sketches" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1954: Error: "ctitle_sketches" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="ctitle_sketches">Sketches</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1939: Error: "ctitle_legs" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1955: Error: "ctitle_legs" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="ctitle_legs">Legs visibility</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1949: Error: "survey_list" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1965: Error: "survey_list" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="survey_list">SURVEYS</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1969: Error: "select_survey_file" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1985: Error: "select_survey_file" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="select_survey_file">Select a survey file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1970: Error: "select_export_file" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1986: Error: "select_export_file" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="select_export_file">Select export file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1973: Error: "select_sketch_file" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:1989: Error: "select_sketch_file" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="select_sketch_file">Select a sketch file</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2011: Error: "unsupported_format" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2027: Error: "unsupported_format" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="unsupported_format">Unsupported file format</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2035: Error: "done_tube" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2051: Error: "done_tube" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="done_tube">Done simple-tube walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2036: Error: "fail_tube" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2052: Error: "fail_tube" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="fail_tube">Failed simple-tube walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2037: Error: "done_bubble" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2053: Error: "done_bubble" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="done_bubble">Done bubble walls</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2038: Error: "fail_bubble" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2054: Error: "fail_bubble" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="fail_bubble">Failed bubble walls</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2045: Error: "viewing_at" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2061: Error: "viewing_at" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2047: Error: "cpref_dem3d" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2063: Error: "cpref_dem3d" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_dem3d">DEM</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2048: Error: "cpref_walls3d" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2064: Error: "cpref_walls3d" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_walls3d">WALL MODEL</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2068: Error: "cpref_grid_extent_summary" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2084: Error: "cpref_grid_extent_summary" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2079: Error: "cpref_splay_use_title" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2095: Error: "cpref_splay_use_title" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_splay_use_title">Splay usage</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2080: Error: "cpref_splay_use_summary" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2096: Error: "cpref_splay_use_summary" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:209: Warning: Formatting %d followed by words ("groups"): This should probably be a plural rather than a string [PluralsCandidate]
@@ -301,63 +334,6 @@ res/values-it/plurals.xml:14: Warning: For language "it" (Italian) the following
 res/values-ru/plurals.xml:18: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
-res/layout/cave3d_diagram.xml:29: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/image"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_info_dialog.xml:258: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/surveys_list"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_legs_dialog.xml:37: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/commented"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_openfile.xml:19: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/sketch_list"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_projection_dialog.xml:81: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/layout7"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_sketches_dialog.xml:30: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/list"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_station_dialog.xml:70: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/st_surface"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_station_distance_dialog.xml:65: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/st_cave_pathlength"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_surface_alpha_dialog.xml:121: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/layout7"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_survey_dialog.xml:102: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/table7"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_surveys_dialog.xml:20: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/surveys_list"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_view_dialog.xml:63: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/view_south"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/cave3d_walls_dialog.xml:100: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/layout7"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout-land/current_station_dialog.xml:52: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-     android:layout_below="@id/layout1"
-     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout-land/current_station_dialog.xml:58: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/comment"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout-land/current_station_dialog.xml:107: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/help"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/fractal_dialog.xml:95: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/fractal_count_group"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/qcam_compass.xml:39: Warning: Invalid layout param in a LinearLayout: layout_alignParentEnd [ObsoleteLayoutParam]
-      android:layout_alignParentEnd="true"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/qcam_compass_two.xml:39: Warning: Invalid layout param in a LinearLayout: layout_alignParentEnd [ObsoleteLayoutParam]
-      android:layout_alignParentEnd="true"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -370,67 +346,13 @@ res/layout/survey_stat_dialog.xml:92: Warning: This tag and its children can be 
 res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
     android:background="@color/menu_background"
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background #333 with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
-      android:background="#333"
-      ~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
+      android:background="@color/menu_background"
+      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/values/strings.xml:493: Warning: The resource R.string.connection_error appears to be unused [UnusedResources]
-    <string name="connection_error">Connection error</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:729: Warning: The resource R.string.button_change appears to be unused [UnusedResources]
-    <string name="button_change"    >Change</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1807: Warning: The resource R.string.file_exists appears to be unused [UnusedResources]
-    <string name="file_exists">File exists</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1808: Warning: The resource R.string.file_create_fail appears to be unused [UnusedResources]
-    <string name="file_create_fail">Failed file create</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1809: Warning: The resource R.string.oom appears to be unused [UnusedResources]
-    <string name="oom">Warning. Out of memory</string>
-            ~~~~~~~~~~
-res/values/strings.xml:1813: Warning: The resource R.string.equate_no_station appears to be unused [UnusedResources]
-    <string name="equate_no_station">No station selected</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1822: Warning: The resource R.string.overwrite appears to be unused [UnusedResources]
-    <string name="overwrite">overwrite</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1856: Warning: The resource R.string.cmenu_fractal appears to be unused [UnusedResources]
-    <string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1866: Warning: The resource R.string.info_title appears to be unused [UnusedResources]
-    <string name="info_title">MODEL INFO</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1868: Warning: The resource R.string.info_axes appears to be unused [UnusedResources]
-    <string name="info_axes">Axes: blue North, green East</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1909: Warning: The resource R.string.clear appears to be unused [UnusedResources]
-    <string name="clear">Clear</string>
-            ~~~~~~~~~~~~
-res/values/strings.xml:1914: Warning: The resource R.string.measure appears to be unused [UnusedResources]
-    <string name="measure">measure</string>
-            ~~~~~~~~~~~~~~
-res/values/strings.xml:1981: Warning: The resource R.string.view_point appears to be unused [UnusedResources]
-    <string name="view_point">Viewpoint</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1990: Warning: The resource R.string.walls_delaunay appears to be unused [UnusedResources]
-    <string name="walls_delaunay" translatable="false">Delaunay</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1992: Warning: The resource R.string.powercrust_few_splays appears to be unused [UnusedResources]
-    <string name="powercrust_few_splays">Powercrust: too few splays</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1993: Warning: The resource R.string.powercrust_failed appears to be unused [UnusedResources]
-    <string name="powercrust_failed">Powercrust failed</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1994: Warning: The resource R.string.powercrust_successful appears to be unused [UnusedResources]
-    <string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2016: Warning: The resource R.string.warning_not_overwrite appears to be unused [UnusedResources]
-    <string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/drawable/distox.png: Warning: Found bitmap drawable res/drawable/distox.png in densityless folder [IconLocation]
 res/drawable/ic_back.png: Warning: Found bitmap drawable res/drawable/ic_back.png in densityless folder [IconLocation]
 res/drawable/ic_forw.png: Warning: Found bitmap drawable res/drawable/ic_forw.png in densityless folder [IconLocation]
@@ -639,25 +561,25 @@ res/drawable/lvrseekbar_background.png: Warning: Found bitmap drawable res/drawa
 res/drawable/lvrseekbar_thumb.png: Warning: Found bitmap drawable res/drawable/lvrseekbar_thumb.png in densityless folder [IconLocation]
 res/drawable/monochrome90.png: Warning: Found bitmap drawable res/drawable/monochrome90.png in densityless folder [IconLocation]
 res/drawable/plus.png: Warning: Found bitmap drawable res/drawable/plus.png in densityless folder [IconLocation]
-res/layout/azimuth_dialog.xml:97: Warning: OK button should be on the right (was "LEFT | OK | RIGHT", should be "LEFT | RIGHT | OK") [ButtonOrder]
+res/layout/azimuth_dialog.xml:98: Warning: OK button should be on the right (was "LEFT | OK | RIGHT", should be "LEFT | RIGHT | OK") [ButtonOrder]
       <Button android:id="@+id/btn_ok"
        ~~~~~~
-res/layout-land/azimuth_dialog.xml:106: Warning: OK button should be on the right (was "LEFT | OK | RIGHT | Cancel", should be "LEFT | Cancel | RIGHT | OK") [ButtonOrder]
+res/layout-land/azimuth_dialog.xml:107: Warning: OK button should be on the right (was "LEFT | OK | RIGHT | Cancel", should be "LEFT | Cancel | RIGHT | OK") [ButtonOrder]
         <Button android:id="@+id/btn_ok"
          ~~~~~~
-res/layout/drawing_shot_dialog.xml:180: Warning: Cancel button should be on the left (was "Cancel | Save", should be "Cancel | Save") [ButtonOrder]
+res/layout/drawing_shot_dialog.xml:184: Warning: Cancel button should be on the left (was "Cancel | Save", should be "Cancel | Save") [ButtonOrder]
       <Button android:id="@+id/btn_cancel"
        ~~~~~~
-res/layout/drawing_station_dialog.xml:44: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
+res/layout/drawing_station_dialog.xml:45: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
     <Button android:id="@+id/btn_ok"
      ~~~~~~
-res/layout/drawing_station_dialog.xml:63: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
+res/layout/drawing_station_dialog.xml:64: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
     <Button android:id="@+id/btn_set"
      ~~~~~~
-res/layout/drawing_station_dialog.xml:84: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
+res/layout/drawing_station_dialog.xml:85: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
     <Button android:id="@+id/btn_break"
      ~~~~~~
-res/layout/drawing_station_dialog.xml:105: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
+res/layout/drawing_station_dialog.xml:106: Warning: OK button should be on the right (was "OK", should be "OK") [ButtonOrder]
       <Button android:id="@+id/btn_hidden"
        ~~~~~~
 res/layout/cave3d_activity.xml:69: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
@@ -678,591 +600,16 @@ res/layout/cave3d_sketches_dialog.xml:61: Warning: Buttons in button bars should
 res/layout/cave3d_sketches_dialog.xml:68: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
       <Button android:id="@+id/btn_ok"
        ~~~~~~
-res/layout/shot_dialog.xml:91: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-      <Button android:id="@+id/btn_prev"
-       ~~~~~~
-res/layout/shot_dialog.xml:107: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-      <Button android:id="@+id/btn_next"
-       ~~~~~~
-res/layout/export_dialog_shot.xml:65: Warning: This text field does not specify an inputType [TextFields]
-    <EditText android:id="@+id/compass_prefix"
-     ~~~~~~~~
-res/layout/export_dialog_shot.xml:151: Warning: This text field does not specify an inputType [TextFields]
-    <EditText android:id="@+id/vtopo_suffix"
-     ~~~~~~~~
-res/layout/export_dialog_shot.xml:165: Warning: This text field does not specify an inputType [TextFields]
-    <EditText android:id="@+id/winkarst_prefix"
-     ~~~~~~~~
-res/layout/setup_drawingunit_dialog.xml:51: Warning: The view name (@+id/textsize) suggests this is a number, but it does not include a numeric inputType (such as 'numberSigned') [TextFields]
-      android:inputType="none"
-      ~~~~~~~~~~~~~~~~~~~~~~~~
-    res/layout/setup_drawingunit_dialog.xml:45: id defined here
-res/layout/setup_textsize_dialog.xml:60: Warning: The view name (@+id/textsize) suggests this is a number, but it does not include a numeric inputType (such as 'numberSigned') [TextFields]
-      android:inputType="none"
-      ~~~~~~~~~~~~~~~~~~~~~~~~
-    res/layout/setup_textsize_dialog.xml:52: id defined here
-res/layout-land/azimuth_dialog.xml:71: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_azimuth"
-       ~~~~~~~~
-res/layout/azimuth_dialog.xml:71: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_azimuth"
-       ~~~~~~~~
-res/layout/bric_memory_dialog.xml:19: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_year" 
-     ~~~~~~~~
-res/layout/bric_memory_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_month" 
-     ~~~~~~~~
-res/layout/bric_memory_dialog.xml:40: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_day" 
-     ~~~~~~~~
-res/layout/bric_memory_dialog.xml:50: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_hour" 
-     ~~~~~~~~
-res/layout/bric_memory_dialog.xml:60: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_minute" 
-     ~~~~~~~~
-res/layout/bric_memory_dialog.xml:70: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/bric_second" 
-     ~~~~~~~~
-res/layout/calib_activity.xml:53: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/calib_name" 
-     ~~~~~~~~
-res/layout/calib_activity.xml:78: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/calib_comment" 
-     ~~~~~~~~
-res/layout/calib_gm_dialog.xml:19: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/gm_bearing"
-     ~~~~~~~~
-res/layout/calib_gm_dialog.xml:27: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/gm_clino"
-     ~~~~~~~~
-res/layout/calib_gm_dialog.xml:35: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/gm_roll"
-     ~~~~~~~~
-res/layout/calib_gm_dialog.xml:52: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/gm_name" 
-   ~~~~~~~~
-res/layout/cave3d_surface_alpha_dialog.xml:102: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/east"
-       ~~~~~~~~
-res/layout/cave3d_surface_alpha_dialog.xml:110: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/north"
-       ~~~~~~~~
-res/layout/current_station_dialog.xml:18: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/name"
-     ~~~~~~~~
-res/layout-land/current_station_dialog.xml:23: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/name"
-     ~~~~~~~~
-res/layout/current_station_dialog.xml:43: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/comment"
-   ~~~~~~~~
-res/layout-land/current_station_dialog.xml:48: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/comment"
-   ~~~~~~~~
-res/layout/cwd_activity.xml:30: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/cwd_text"
-     ~~~~~~~~
-res/layout/dblock_row.xml:17: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/from"
-   ~~~~~~~~
-res/layout/dblock_row.xml:35: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/to"
-   ~~~~~~~~
 res/layout/dblock_row_noedit.xml:18: Warning: Missing autofillHints attribute [Autofill]
   <EditText 
    ~~~~~~~~
-res/layout/dblock_row_noedit.xml:40: Warning: Missing autofillHints attribute [Autofill]
+res/layout/dblock_row_noedit.xml:42: Warning: Missing autofillHints attribute [Autofill]
   <EditText 
    ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:86: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_dumpfrom" 
-       ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:92: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_dumpto" 
-       ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:107: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_dumpfile" 
-       ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:130: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_from" 
-       ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:136: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_to" 
-       ~~~~~~~~
-res/layout/device_name_dialog.xml:34: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/tv_nickname" 
-     ~~~~~~~~
-res/layout/device_x310_memory_dialog.xml:25: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/et_dumpfrom" 
-     ~~~~~~~~
-res/layout/device_x310_memory_dialog.xml:31: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/et_dumpto" 
-     ~~~~~~~~
-res/layout/device_x310_memory_dialog.xml:44: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/et_dumpfile" 
-     ~~~~~~~~
-res/layout/distox_annotations.xml:21: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/note_text"
-       ~~~~~~~~
-res/layout/drawing_label_dialog.xml:20: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/label_text"
-   ~~~~~~~~
-res/layout/drawing_line_dialog.xml:19: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/line_options"
-     ~~~~~~~~
-res/layout/drawing_line_section_dialog.xml:44: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/line_nick"
-   ~~~~~~~~
-res/layout/drawing_photo_dialog.xml:20: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/photo_comment"
-   ~~~~~~~~
-res/layout/drawing_photo_edit_dialog.xml:38: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/photo_comment" 
-   ~~~~~~~~
-res/layout/drawing_point_dialog.xml:151: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/point_text"
-   ~~~~~~~~
-res/layout/drawing_point_dialog.xml:159: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/point_options"
-   ~~~~~~~~
-res/layout/drawing_shot_dialog.xml:41: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/shot_to"
-     ~~~~~~~~
-res/layout/drawing_shot_dialog.xml:59: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/shot_comment"
-   ~~~~~~~~
-res/layout/drawing_station_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/comment"
-     ~~~~~~~~
-res/layout/drawing_station_dialog.xml:156: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/nick"
-       ~~~~~~~~
-res/layout/export_dialog_plot.xml:49: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/therion_scale"
-       ~~~~~~~~
-res/layout/export_dialog_plot.xml:102: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/svg_scale"
-       ~~~~~~~~
-res/layout/export_dialog_shot.xml:65: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/compass_prefix"
-     ~~~~~~~~
-res/layout/export_dialog_shot.xml:151: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/vtopo_suffix"
-     ~~~~~~~~
-res/layout/export_dialog_shot.xml:165: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/winkarst_prefix"
-     ~~~~~~~~
-res/layout/firmware_dialog.xml:27: Warning: Missing autofillHints attribute [Autofill]
-  <EditText 
-   ~~~~~~~~
-res/layout/fixed_add_dialog.xml:15: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/edit_name" 
-   ~~~~~~~~
-res/layout/fixed_add_dialog.xml:35: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/edit_long" 
-       ~~~~~~~~
-res/layout/fixed_add_dialog.xml:57: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/edit_lat"
-       ~~~~~~~~
-res/layout/fixed_add_dialog.xml:82: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/edit_alt"
-       ~~~~~~~~
-res/layout/fixed_add_dialog.xml:107: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/edit_asl"
-       ~~~~~~~~
-res/layout/fixed_add_dialog.xml:120: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@id/edit_comment" 
-   ~~~~~~~~
-res/layout/fixed_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_lng" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:56: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_lat" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:81: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_alt" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:106: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_asl" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:123: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/fix_station" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:132: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_comment" 
-     ~~~~~~~~
-res/layout/fixed_dialog.xml:159: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/fix_decl" 
-     ~~~~~~~~
-res/layout/fixed_gps_dialog.xml:13: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/station"
-     ~~~~~~~~
-res/layout/fixed_gps_dialog.xml:25: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/comment"
-     ~~~~~~~~
-res/layout/fixed_import_dialog.xml:16: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/station" 
-     ~~~~~~~~
-res/layout/fixed_import_dialog.xml:26: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/comment" 
-     ~~~~~~~~
-res/layout/fractal_dialog.xml:51: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/fractal_cell"
-       ~~~~~~~~
-res/layout/multishot_dialog.xml:25: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_from" 
-     ~~~~~~~~
-res/layout/multishot_dialog.xml:31: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_to" 
-     ~~~~~~~~
-res/layout/photo_comment_dialog.xml:29: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/photo_comment_comment" 
-   ~~~~~~~~
-res/layout/photo_edit_dialog.xml:40: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@+id/photo_comment" 
-   ~~~~~~~~
-res/layout/plot_new_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/edit_plot_name" 
-     ~~~~~~~~
-res/layout/plot_new_dialog.xml:57: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/edit_plot_start"
-       ~~~~~~~~
-res/layout/plot_rename_dialog.xml:13: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/et_name" 
-     ~~~~~~~~
-res/layout/plot_rename_dialog.xml:33: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_station" 
-       ~~~~~~~~
-res/layout/plot_zoomfit_dialog.xml:72: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/center_station"
-     ~~~~~~~~
-res/layout/pref_edittext.xml:37: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/edittext"
-       ~~~~~~~~
-res/layout/projection_dialog.xml:49: Warning: Missing autofillHints attribute [Autofill]
-        <EditText android:id="@+id/textform"
-         ~~~~~~~~
-res/layout/pt_cmap_activity.xml:53: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline0"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:60: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint0"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:79: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline1"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:86: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint1"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:105: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline2"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:112: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint2"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:131: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline3"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:138: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint3"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:157: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline4"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:164: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint4"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:183: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline5"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:190: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint5"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:209: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etline6"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:216: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/etpoint6"
-     ~~~~~~~~
-res/layout-land/search_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/name"
-       ~~~~~~~~
-res/layout/search_dialog.xml:30: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/name"
-       ~~~~~~~~
-res/layout/sensor_activity.xml:57: Warning: Missing autofillHints attribute [Autofill]
-    <EditText 
-     ~~~~~~~~
-res/layout/sensor_activity.xml:65: Warning: Missing autofillHints attribute [Autofill]
-    <EditText 
-     ~~~~~~~~
-res/layout/sensor_activity.xml:73: Warning: Missing autofillHints attribute [Autofill]
-    <EditText 
-     ~~~~~~~~
-res/layout/sensor_edit_dialog.xml:41: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/sensor_comment" 
-     ~~~~~~~~
-res/layout/setup_drawingunit_dialog.xml:45: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/textsize"
-     ~~~~~~~~
-res/layout/setup_textsize_dialog.xml:52: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/textsize"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:26: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/shot_distance"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:34: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_bearing"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:42: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_clino"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:67: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_from" 
-     ~~~~~~~~
-res/layout/shot_dialog.xml:74: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_to" 
-     ~~~~~~~~
-res/layout/shot_dialog.xml:117: Warning: Missing autofillHints attribute [Autofill]
-  <EditText android:id="@id/shot_comment" 
-   ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:69: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/station_distance" 
-     ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:86: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/shot_left" 
-     ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:96: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_right" 
-     ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:106: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_up" 
-     ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:116: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@id/shot_down" 
-     ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:32: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/shot_from" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:32: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/shot_from" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:45: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_to" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:45: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_to" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:68: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_distance" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:68: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_distance" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:80: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_bearing" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:80: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_bearing" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:92: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_clino" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:92: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_clino" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:122: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/shot_backdistance" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:122: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/shot_backdistance" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:134: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_backbearing" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:134: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_backbearing" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:146: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_backclino" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:146: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_backclino" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:172: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_left" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:172: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_left" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:184: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_right" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:184: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_right" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:196: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_up" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:196: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_up" 
-       ~~~~~~~~
-res/layout-land/shot_new_dialog.xml:208: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_down" 
-       ~~~~~~~~
-res/layout/shot_new_dialog.xml:208: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@id/shot_down" 
-       ~~~~~~~~
-res/layout/survey_activity.xml:54: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_name" 
-     ~~~~~~~~
-res/layout/survey_activity.xml:70: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_team" 
-     ~~~~~~~~
-res/layout/survey_activity.xml:78: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_decl" 
-     ~~~~~~~~
-res/layout/survey_activity.xml:85: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/survey_comment" 
-       ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:24: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_length"
-       ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:40: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_azimuth"
-       ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:56: Warning: Missing autofillHints attribute [Autofill]
-      <EditText android:id="@+id/et_clino"
-       ~~~~~~~~
-res/layout/survey_new_dialog.xml:20: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_name" 
-     ~~~~~~~~
-res/layout/survey_new_dialog.xml:37: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_team" 
-     ~~~~~~~~
-res/layout/survey_new_dialog.xml:45: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_station" 
-     ~~~~~~~~
-res/layout/survey_new_dialog.xml:53: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_decl" 
-     ~~~~~~~~
-res/layout/survey_new_dialog.xml:61: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/survey_comment" 
-     ~~~~~~~~
-res/layout/survey_rename_dialog.xml:13: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/et_name" 
-     ~~~~~~~~
-res/layout/tdconfig_dialog.xml:22: Warning: Missing autofillHints attribute [Autofill]
-    <EditText android:id="@+id/label_text"
-     ~~~~~~~~
-res/layout/cave3d_diagram.xml:22: Warning: Missing contentDescription attribute on image [ContentDescription]
-    <ImageView android:id="@+id/image"
-     ~~~~~~~~~
-res/layout/photo_dialog.xml:14: Warning: Missing contentDescription attribute on image [ContentDescription]
-  <ImageView android:id="@+id/photo_view"
-   ~~~~~~~~~
-res/layout/cwd_activity.xml:30: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/cwd_text"
-     ~~~~~~~~
 res/layout/dblock_row_noedit.xml:18: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText 
    ~~~~~~~~
-res/layout/dblock_row_noedit.xml:40: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
+res/layout/dblock_row_noedit.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText 
    ~~~~~~~~
-res/layout/fractal_dialog.xml:51: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/fractal_cell"
-       ~~~~~~~~
-res/layout/plot_rename_dialog.xml:13: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/et_name" 
-     ~~~~~~~~
-res/layout/plot_rename_dialog.xml:33: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/et_station" 
-       ~~~~~~~~
-res/layout/plot_zoomfit_dialog.xml:72: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/center_station"
-     ~~~~~~~~
-res/layout/pref_edittext.xml:37: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/edittext"
-       ~~~~~~~~
-res/layout/projection_dialog.xml:49: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-        <EditText android:id="@+id/textform"
-         ~~~~~~~~
-res/layout/pt_cmap_activity.xml:53: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline0"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:60: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint0"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:79: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline1"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:86: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint1"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:105: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline2"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:112: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint2"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:131: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline3"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:138: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint3"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:157: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline4"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:164: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint4"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:183: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline5"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:190: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint5"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:209: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etline6"
-     ~~~~~~~~
-res/layout/pt_cmap_activity.xml:216: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/etpoint6"
-     ~~~~~~~~
-res/layout/setup_drawingunit_dialog.xml:45: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/textsize"
-     ~~~~~~~~
-res/layout/setup_textsize_dialog.xml:52: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/textsize"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:26: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/shot_distance"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:34: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@id/shot_bearing"
-     ~~~~~~~~
-res/layout/shot_dialog.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@id/shot_clino"
-     ~~~~~~~~
-res/layout/shot_edit_more_dialog.xml:69: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/station_distance" 
-     ~~~~~~~~
-res/layout/survey_activity.xml:54: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/survey_name" 
-     ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:24: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/et_length"
-       ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:40: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/et_azimuth"
-       ~~~~~~~~
-res/layout/survey_calibration_dialog.xml:56: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-      <EditText android:id="@+id/et_clino"
-       ~~~~~~~~
-res/layout/survey_rename_dialog.xml:13: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-    <EditText android:id="@+id/et_name" 
-     ~~~~~~~~
-81 errors, 480 warnings
+92 errors, 252 warnings

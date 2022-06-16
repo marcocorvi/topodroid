@@ -51,6 +51,7 @@
         android:layout_weight="50" 
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:importantForAutofill="no"
         />
     </LinearLayout>
   </LinearLayout>
@@ -104,6 +105,7 @@
         android:layout_weight="50" 
         android:layout_height="wrap_content"
         android:inputType="number"
+        android:importantForAutofill="no"
         />
     </LinearLayout>
     <!-- LinearLayout 
@@ -121,6 +123,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -138,6 +141,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -155,6 +159,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -172,6 +177,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -189,6 +195,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -206,6 +213,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
     <!-- LinearLayout 
@@ -223,6 +231,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout -->
   </LinearLayout>
@@ -349,6 +358,7 @@
         android:layout_weight="50" 
         android:layout_height="wrap_content"
           android:inputType="numberDecimal"
+        android:importantForAutofill="no"
         />
     </LinearLayout>
     <!- - LinearLayout 
@@ -366,6 +376,7 @@
         android:layout_width="0dp" 
         android:layout_weight="50" 
         android:layout_height="wrap_content"
+        android:importantForAutofill="no"
         />
     </LinearLayout - ->
   </LinearLayout -->

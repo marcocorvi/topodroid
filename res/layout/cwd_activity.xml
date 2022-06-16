@@ -34,6 +34,8 @@
       android:layout_marginTop="@dimen/marginvbig"
       android:textSize="@dimen/textsizebig"
       android:inputType="text"
+      android:hint="@string/hint_cwd"
+      android:importantForAutofill="no"
     />
 
     <LinearLayout 

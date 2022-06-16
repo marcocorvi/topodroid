@@ -31,6 +31,7 @@
       	android:ems="25"
         android:scrollHorizontally="true"
         android:hint="@string/hint_notes"
+        android:importantForAutofill="no"
         />
     </ScrollView>
    					  

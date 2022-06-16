@@ -86,7 +86,7 @@ class SetupDrawingUnitDialog extends MyDialog
     mSample.resetPaintPath( mPaint, mPath, mSize*1.4f, mSize*1.4f );
 
     mLayout = (LinearLayout) findViewById(R.id.layout2);
-    mETsize = (EditText) findViewById( R.id.textsize );
+    mETsize = (EditText) findViewById( R.id.text_points );
     setETsize( mSize );
 
     mETsize.setKeyListener( null );

@@ -462,14 +462,14 @@
      <item name="huge">2</item>
   </string-array>
 
-  <string-array name="logStream" translatable="false">
+  <!-- UNUSED string-array name="logStream" translatable="false">
      <item name="android">System log</item>
      <item name="file">File log</item>
   </string-array>
   <string-array name="logStreamValue" translatable="false">
      <item name="android">0</item>
      <item name="file">1</item>
-  </string-array>
+  </string-array -->
 
   <string-array name="connMode">
      <item name="batch">On-demand</item>

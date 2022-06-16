@@ -14,15 +14,14 @@
     android:layout_marginStart="15dp" 
   />  
 
-
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/sketch_list"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
     android:gravity="start"
     > 
+    <!-- android:layout_below="@id/sketch_list" -->
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
       android:text="@string/button_help"

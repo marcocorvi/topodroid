@@ -54,6 +54,8 @@
 	android:text="@string/two"
 	android:layout_marginEnd="10dp"
         android:inputType="numberDecimal"
+        android:hint="@string/hint_cellsize"
+        android:importantForAutofill="no"
         />
       <CheckBox android:id="@+id/fractal_splays"
         android:layout_width="wrap_content" 
@@ -92,13 +94,13 @@
     </RadioGroup>
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/fractal_count_group"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:orientation="horizontal"
     android:layout_marginTop="@dimen/marginvbig"
     android:gravity="start"
     > 
+    <!-- android:layout_below="@id/fractal_count_group" -->
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
       android:text="@string/button_help"

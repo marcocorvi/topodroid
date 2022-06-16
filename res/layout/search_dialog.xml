@@ -35,6 +35,7 @@
         android:inputType="text"
         android:layout_marginTop="@dimen/marginv"
         android:hint="@string/station"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 

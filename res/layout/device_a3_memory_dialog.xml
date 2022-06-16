@@ -88,12 +88,14 @@
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
 	android:hint="@string/zero"
+        android:importantForAutofill="no"
       />
       <EditText android:id="@+id/et_dumpto" 
         style="@style/edit_number"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
 	android:hint="@string/a3_max"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 
@@ -109,6 +111,7 @@
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="match_parent" 
         android:hint="@string/save_as"
+        android:importantForAutofill="no"
         />
 
     </LinearLayout>
@@ -132,12 +135,14 @@
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
         android:hint="@string/hint_from"
+        android:importantForAutofill="no"
       />
       <EditText android:id="@+id/et_to" 
         style="@style/edit_number_light"
         android:layout_marginTop="@dimen/margintiny"
         android:layout_width="100dp"
         android:hint="@string/hint_to"
+        android:importantForAutofill="no"
       />
     </LinearLayout>
 

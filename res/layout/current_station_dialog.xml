@@ -23,6 +23,7 @@
       android:singleLine="true"
       android:inputType="text"
       android:hint="@string/hint_name"
+      android:importantForAutofill="no"
     />
     <CheckBox android:id="@+id/button_fixed"
       android:layout_width="0dp"
@@ -41,12 +42,13 @@
   </LinearLayout>
 
   <EditText android:id="@+id/comment"
-      style="@style/edit_text_light"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_below="@id/layout0"
-     android:hint="@string/comment"
-     android:singleLine="true"
+    style="@style/edit_text_light"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_below="@id/layout0"
+    android:hint="@string/comment"
+    android:singleLine="true"
+    android:importantForAutofill="no"
   />
 
   <LinearLayout android:id="@+id/layout1"

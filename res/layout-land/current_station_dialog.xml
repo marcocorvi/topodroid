@@ -28,6 +28,7 @@
       android:singleLine="true"
       android:inputType="text"
       android:hint="@string/hint_name"
+      android:importantForAutofill="no"
     />
     <CheckBox android:id="@+id/button_fixed"
       android:layout_width="0dp"
@@ -46,16 +47,16 @@
   </LinearLayout>
 
   <EditText android:id="@+id/comment"
-      style="@style/edit_text_light"
-     android:layout_width="match_parent"
-     android:layout_height="wrap_content"
-     android:layout_below="@id/layout1"
-     android:hint="@string/comment"
-     android:singleLine="true"
+    style="@style/edit_text_light"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:hint="@string/comment"
+    android:singleLine="true"
+    android:importantForAutofill="no"
   />
+     <!-- android:layout_below="@id/layout1" -->
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/comment"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -63,6 +64,7 @@
     android:layout_marginBottom="@dimen/marginv"
     android:gravity="start"
     >
+    <!-- android:layout_below="@id/comment" -->
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
       android:text="@string/button_help"
@@ -104,8 +106,8 @@
     style="@style/list_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/help"
   />  
+    <!-- android:layout_below="@id/help" -->
   </LinearLayout>
 
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"

@@ -26,6 +26,7 @@
     android:inputType="text"
     android:imeOptions="actionDone"
     android:hint="@string/hint_from"
+    android:importantForAutofill="no"
   />
   <!--
     style="?android:attr/textViewStyle"
@@ -44,6 +45,7 @@
     android:inputType="text"
     android:imeOptions="actionDone"
     android:hint="@string/hint_to"
+    android:importantForAutofill="no"
   />
 
   <TextView android:id="@+id/length"

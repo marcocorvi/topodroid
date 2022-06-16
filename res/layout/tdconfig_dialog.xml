@@ -26,6 +26,7 @@
       android:layout_height="wrap_content" 
       android:singleLine="true"
       android:hint="@string/tdm_config_project"
+      android:importantForAutofill="no"
       />
    		
     <LinearLayout android:id="@+id/help"

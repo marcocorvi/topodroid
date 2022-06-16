@@ -38,6 +38,7 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:hint="@string/nickname"
+        android:importantForAutofill="no"
       />
 
     <CheckBox android:id="@+id/second_device" 
