@@ -861,16 +861,16 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="azimuth">Irányszög [fok]</string -->
     <!-- UNUSED string name="clino">Lejtszög [fok]</string -->
 
-    <!-- TODO string name="hint_cellsize">cell size</string -->
-    <!-- TODO string name="hint_cwd">work folder</string -->
-    <!-- TODO string name="hint_distance">distance</string -->
-    <!-- TODO string name="hint_length">length</string -->
-    <!-- TODO string name="hint_line">line</string -->
-    <!-- TODO string name="hint_origin">origin station</string -->
-    <!-- TODO string name="hint_point">point</string -->
-    <!-- TODO string name="hint_textsize">text size</string -->
-    <!-- TODO string name="hint_units">symbol units</string -->
-    <!-- TODO string name="hint_value">value</string -->
+    <string name="hint_cellsize">cella méret</string>
+    <string name="hint_cwd">munka könyvtár</string>
+    <string name="hint_distance">távolság</string>
+    <string name="hint_length">hossz</string>
+    <string name="hint_line">vonal</string>
+    <string name="hint_origin">kezdőpont</string>
+    <string name="hint_point">pont</string>
+    <string name="hint_textsize">szöveg méret</string>
+    <string name="hint_units">szimbólum egység</string>
+    <string name="hint_value">érték</string>
 
     <string name="hint_notes">jegyzetek</string>
     <string name="hint_label">címke</string>
@@ -1838,8 +1838,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="exported">Mentett fájl %1$s</string>
     <string name="export_failed">Hibás export</string>
 
-    <!-- TODO string name="image_diagram">Direction diagram</string -->
-    <!-- TODO string name="image_photo">Photo</string -->
+    <string name="image_diagram">Irány diagram</string>
+    <string name="image_photo">Fotó</string>
 
     <!-- 3D VIEWER strings 
     VERY IMPORTANT Fix the "UNUSED" commented strings -->
