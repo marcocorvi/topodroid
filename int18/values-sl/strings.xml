@@ -5,7 +5,7 @@
     <!-- TODO string name="user_man_ok">Installed user manual translation</string -->
     <!-- TODO string name="user_man_fail">Failed to install user manual translation</string -->
 
-    <!-- NO string name="app_name">TopoDroid</string -->
+    <string name="app_name">TopoDroid</string>
     <string name="double_back">Klikni ponovno nazaj za izhod</string>
 
     <string name="version_ask">Posodobitev topodroida na novejšo različico.\nŽelite reinstalirati orodje za risanje?</string>
@@ -351,7 +351,7 @@
     <string name="connected_none">Ni povezano</string>
     <string name="connected_already">Že povezano</string>
 
-    <!-- UNUSED string name="not_available">Bluetooth ni na voljo</string -->
+    <string name="not_available">Bluetooth ni na voljo</string>
     <string name="not_enabled">Bluetooth ni aktiven</string>
 
     <!-- UNUSED string name="not_implemented">Non implementato</string -->
@@ -1289,7 +1289,7 @@
 
     <!-- TODO string name="perms_mandatory">TopoDroid cannot run without these permissions:</string -->
     <!-- TODO string name="perms_optional">TopoDroid may fail without these permissions:</string -->
-    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
+    <string name="welcome_title">TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid je app Android odprtega izvora per fare za idelavo jamskih načrtov z DistoX
 \nBrez garancije: ob uprabi avtor ni odgovoren za izgubo podatkov ali kakršno koli škodo nasatalo v zvezi s tem.

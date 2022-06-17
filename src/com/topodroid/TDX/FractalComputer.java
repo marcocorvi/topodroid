@@ -761,7 +761,7 @@ class FractalComputer
     double dz = (zmax - zmin);
     // TDLog.v( "FRACTAL dx " + dx + " dy " + dy + " dz " + dz );
 
-    // dims: make sure tey are multiple of max_side
+    // dims: make shure tey are multiple of max_side
     int max_side = 1<<DIM_ONE;
     // 1 2 4 8 16 32 64 128
     int nx = (int)(dx/one) + 1; nx = max_side*( (nx + max_side-1)/max_side );
@@ -815,8 +815,8 @@ class FractalComputer
   }
 
   /** intersection of a box and a segment
-   * @param b   box
-   * @param ln  segment
+   * @param box   box
+   * @param line  segment
    * @return true if the box intersects the segment
    */
   private boolean intersection( Box b, Line ln )

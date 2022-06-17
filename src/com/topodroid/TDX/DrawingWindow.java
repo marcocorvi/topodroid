@@ -8830,7 +8830,7 @@ public class DrawingWindow extends ItemDrawer
     return true;
   }
 
-  /** set the recent symbols buttons, after the recent symbols  have been loaded
+  /** set the recent symbols buttons, after the recent symbols ahave been loaded
    */
   @Override
   public void onRecentSymbolsLoaded()

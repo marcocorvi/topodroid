@@ -456,6 +456,7 @@ public class Archiver
    * @param zin    zip input stream
    * @param ze     zip entry
    * @param fout   entry output stream
+   * @note the zip inputstream must be aligned to the entry
    * @return ...
    */
   private static int decompressEntry( InputStream zin, ZipEntry ze, FileOutputStream fout )

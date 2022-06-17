@@ -266,6 +266,8 @@
     <string name="loop_none">нет колец</string>
     <!-- UNUSED string name="long_lat">Широта-Долгота</string -->
 
+    <!-- OK string name="line_delete">Удалить линию</string -->
+
     <string name="error_m">Ошибка [м]</string>
     <string name="fmt_error_m">Ошибка %1$.1f м</string>
     <string name="fmt_h_geoid">Ошибка %1$.0f м</string>
@@ -383,7 +385,7 @@
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Уклон %5$.1f"</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <!-- TODO string name="menu_3d">3D</string -->
+    <string name="menu_3d">3D</string>
     <string name="menu_about">Описание</string>
     <string name="menu_area">ОБЛАСТЬ</string>
     <string name="menu_audio">АУДИО</string>
@@ -590,7 +592,7 @@
     <string name="survey_no_data_reduction">ВНИМАНИЕ: нет сокращения данных</string>
     <string name="survey_not_saved">ВНИМАНИЕ: информация о съёмке не сохранена</string>
     <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
-    <!-- TODO string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
@@ -698,7 +700,7 @@
     <!-- TODO string name="plan_view">plan</string -->
     <!-- TODO string name="profile_view">profile</string -->
 
-    <!-- TODO string name="distox_err_ok">OK</string -->
+    <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_headtail_io">DistoX ошибка I/O </string>
     <string name="distox_err_headtail_eof">Ошибка чтения памяти DistoX</string>
@@ -752,7 +754,7 @@
     <string name="button_skip"    >Пропустить</string>
     <string name="button_done"    >Готово</string>
     <string name="button_lrud"    >Добавить ЛПВН</string>
-    <!-- TODO string name="button_ok"        >OK        </string -->
+    <string name="button_ok"        >OK        </string>
     <string name="button_off"       >выкл</string>
     <string name="button_on"        >вкл</string>
     <string name="button_open"      >Откр      </string>
@@ -1244,6 +1246,8 @@
   <string name="pref_cat_geek">СПЕЦ НАСТРОЙКИ</string>
   <!-- UNUSED string name="pref_cat_sketch">НАСТРОЙКИ АБРИСА</string -->
   <!-- UNUSED string name="pref_cat_log">НАСТРОЙКИ ЖУРНАЛА</string -->
+  <!-- OK string name="pref_hide_help_title">Скрыть помощь</string -->
+  <!-- OK string name="pref_hide_help_summary">Скрыть кнопку помощи</string -->
   <string name="pref_locale_title">Язык</string>
   <string name="pref_locale_summary">Переключить язык интерфейса программы</string>
   <string name="pref_orientation_title">Ориентация экрана</string>
@@ -1841,7 +1845,6 @@
     <!-- NO string name="cmenu_fractal">Кол-во фракталофф</string -->
 
     <!-- NO string name="fractal_title">Кол-во фракталов</string -->
-    <!-- NO string name="fractal_title">Fractal result</string -->
     <!-- NO string name="fractal_cnt_total">count</string -->
     <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
@@ -1849,8 +1852,7 @@
     <!-- NO string name="fractal_dimension">Fractal dimension</string -->
     <!-- TODO string name="illegal_value">Illegal value</string -->
 
-    <!-- UNUSED string name="info_title">ИНФО</string -->
-    <!-- TODO string name="info_surveys">Surveys</string -->
+    <!-- NO string name="info_title">ИНФО</stringi -->
     <!-- UNUSED string name="info_axes">Оси: синий Север, зеленый Восток</string -->
     <string name="info_grid">Шаг сетки [м]</string>
     <string name="info_view">Точка просмотра</string>
@@ -2048,7 +2050,7 @@
     <string name="cpref_grid_above_title">Сетка сверху</string>
     <string name="cpref_grid_above_summary">Сетка сверху</string>
     <string name="cpref_grid_extent_title">Размер сетки</string>
-    <string name="cpref_grid_extent_summary">Размер поля сетки вокруг съёмки</string>
+    <!-- UNUSED string name="cpref_grid_extend_summary">Размер поля сетки вокруг съёмки</string -->
     <string name="cpref_neg_clino_title">Обзор снизу вверх</string>
     <string name="cpref_neg_clino_summary">Разрешить точки обзора ниже горизонта</string>
     <string name="cpref_dem_buffer_title">Буфер DEM</string>

@@ -59,7 +59,7 @@ public class FirmwareDialog extends MyDialog
 
   public FirmwareDialog( Context context, Resources res, TopoDroidApp app )
   {
-    super( context, app, R.string.FirmwareDialog ); 
+    super( context, app, R.string.FirmwareDialog );
     mRes     = res;
   }
 

@@ -117,7 +117,6 @@ SRC = \
   ./proguard.cfg \
   ./project.properties \
   ./README.md \
-  ./regression-test.txt \
   ./assets/*/* \
   ./firmware/* \
   ./int18/*/* \

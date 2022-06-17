@@ -158,7 +158,7 @@ public class MyButton extends Button
     b.setBackgroundDrawable( getButtonBackground( ctx, size, res_id ) );
   }
 
-  // --------------- MyButton instance:
+  // --------------- MyButton intanace:
 
   private Context mContext;
   private BitmapDrawable mBitmap;

@@ -1,12 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- TODO string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
+    <!-- OK string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Ръководството не може да бъде изтеглено</string>
     <string name="user_man_ok">Инсталирано е преведеното ръководство</string>
     <string name="user_man_fail">Грешка при инсталиране на ръководството</string>
-
-    <!-- UNUSED string name="string_false">false</string -->
-    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -14,7 +11,7 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <!-- TODO string name="desc_menu">Menu</string -->
 
-    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
+    <!-- OK string name="app_name">TopoDroid</string -->
     <!-- TODO string name="tdm_title">TopoDroid Manager</string -->
     <string name="double_back">Натиснете отново за да излезете</string>
 
@@ -31,6 +28,7 @@ Refer to the web pages for details.\n
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
   <!-- TODO string name="r_continue">CONTINUE</string -->
 
+    <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Обновяване на версията на TopoDroid.\nИскате ли да преинсталирате елементите за рисуване?</string -->
     <string name="symbols_ask">Инсталиране на елементи за рисуване v.%1$s?\n(Текущи v.%2$s)</string>
 
@@ -48,7 +46,7 @@ Refer to the web pages for details.\n
 	    Има и други настройки за скиците (размер на икони, надписи, широчина на линии и др.),
 	    които може да нагласите според нуждите ви./n/n
     </string>
-    <!-- TODO string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
+    <!-- OK string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
     <string name="POINT">Точка</string>
     <string name="LINE">Линия</string>
@@ -208,8 +206,8 @@ Refer to the web pages for details.\n
     <string name="calib_import_title">Импортиране на калибрация</string>
     <string name="import_title">Импортиране на файл</string>
     <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- UNUSED string name="export_plot_title">Sketch export</string -->
-    <!-- UNUSED string name="export_overview_title">Overview export</string -->
+    <!-- TODO string name="export_plot_title">Sketch export</string -->
+    <!-- TODO string name="export_overview_title">Overview export</string -->
     <!-- TODO string name="export_model_title">3D model export</string -->
     <!-- TODO string name="export_tdconfig_title">Project export</string -->
 
@@ -288,7 +286,6 @@ Refer to the web pages for details.\n
     <string name="error_name_required">Необходимо име</string>
     <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
     <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
-    <!-- TODO string name="error_team_required">Team required</string -->
 
     <!-- UNUSED string name="error_dir_exists">Директорията вече съществува</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -298,7 +295,6 @@ Refer to the web pages for details.\n
     <string name="error_station_non_existing">Несъществуващ репер</string>
     <string name="error_sensor_required">Необходим сензор</string>
     <string name="error_value_required">Необходима стойност</string>
-    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
 
     <string name="group_title">Групиране на данните за калибрация</string>
     <!-- UNUSED string name="group_policy_four">Вид групиране: по четворки</string -->
@@ -322,9 +318,6 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="splays_toggle">Показване/скриване на странични изм.</string -->
     <string name="splays_on_off">Странични изм.</string>
     <string name="splays">Странични изм.</string>
-    <!-- TODO string name="with_splays">with splays</string -->
-    <!-- TODO string name="cell_size">Cell size [m]</string -->
-
     <!-- TODO string name="legs">Legs</string -->
     <!-- TODO string name="stations">Station</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
@@ -348,12 +341,12 @@ Refer to the web pages for details.\n
     <string name="no_calib">Липсва калибрация</string>
     <string name="no_calib_check">Липсва контролно измерване</string>
     <string name="no_calibration">Не е избрана калибрация</string>
-    <!-- UNUSED string name="no_capture_app">Липсва програма за камера</string -->
+    <string name="no_capture_app">Липсва програма за камера</string>
     <string name="no_cave3d">Cave3D не е инсталирана</string>
     <!-- TODO string name="no_data_reduction">No data reduction</string -->
     <string name="no_db">Липсва база данни</string>
     <string name="no_device_address">Липсва избрано устройство</string>
-    <!-- UNUSED string name="no_device_found">Не е намерено устройство</string -->
+    <string name="no_device_found">Не е намерено устройство</string>
     <string name="no_feature_audio">Не се поддържа аудио</string>
     <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
     <string name="no_gms">Калибрацията на съдържа данни.\nИзползвайте бутона за изтегляне на данни</string>
@@ -361,7 +354,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="no_leg_first">Selection does not start with a leg</string -->
     <string name="no_leg_intersection">Линията на сечението не пресича нито една отсечка</string>
     <string name="no_location_data">Няма данни за местоположение</string>
-    <!-- UNUSED string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string -->
+    <string name="no_paired_device">Лиспва свързано устройство.\nСканирайте и свържете DistoX</string>
     <string name="no_photos">Картировката не съдържа снимка</string>
     <string name="no_plots">Картировката не съдържа скици\nДобавете нова</string>
     <string name="no_profile_overview">Няма общ преглед за проектиран разрези</string>
@@ -376,16 +369,16 @@ Refer to the web pages for details.\n
     <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Азимут %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Наклон %5$.1f"</string>
-    <!-- TODO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <!-- TODO string name="menu_3d">3D</string -->
+    <!-- OK string name="menu_3d">3D</string -->
     <string name="menu_about">За програмата</string>
     <string name="menu_area">Площ</string>
     <!-- TODO string name="menu_audio">AUDIO</string -->
     <!-- UNUSED string name="menu_attach">Свързване</string -->
     <!-- UNUSED string name="menu_attached">connected</string -->
     <!-- UNUSED string name="menu_ready">ready</string -->
-    <!-- UNUSED string name="menu_backups">CLEAR BACKUPS</string -->
+    <!-- TODO string name="menu_backups">CLEAR BACKUPS</string -->
     <string name="menu_calib_check">Проверка калибрация</string>
     <string name="menu_close">Затваряне</string>
     <!-- UNUSED string name="menu_clear">Изчистване</string -->
@@ -412,7 +405,7 @@ Refer to the web pages for details.\n
     <string name="menu_options">Настройки</string>
     <string name="menu_overview">Общ изглед</string>
     <!-- TODO string name="menu_packets">PACKETS</string -->
-    <!-- UNUSED string name="menu_pair">Сдвояване</string -->
+    <string name="menu_pair">Сдвояване</string>
     <string name="menu_palette">Палитра</string>
     <string name="menu_photo">Снимки</string>
     <string name="menu_sensor">Сензори</string>
@@ -429,9 +422,9 @@ Refer to the web pages for details.\n
     <!-- FIXED_ZOOM -->
     <!-- TODO string name="zoom_fixed">Graph-paper</string -->
 
-    <!-- UNUSED string name="start_scan">Start scan</string -->
-    <!-- UNUSED string name="stop_scan">Stop scan</string -->
-    <!-- UNUSED string name="title_scan">BLE scan</string -->
+    <!-- TODO string name="start_scan">Start scan</string -->
+    <!-- TODO string name="stop_scan">Stop scan</string -->
+    <!-- TODO string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">BLE scan failed</string -->
     <!-- UNUSED string name="ble_gatt_failure">BLE failure</string -->
     <!-- TODO string name="ble_no_remote">No remote device</string -->
@@ -479,11 +472,11 @@ Refer to the web pages for details.\n
     <string name="popup_cont_continue">Продължаване</string>
 
     <!-- TODO string name="connection_error">Connection error</string -->
-    <!-- UNUSED string name="connecting">Connecting &#8230;</string -->
+    <!-- TODO string name="connecting">Connecting &#8230;</string -->
     <!-- UNUSED string name="connected_none">Няма връзка</string -->
     <!-- UNUSED string name="connected_already">Вече има връзка</string -->
 
-    <!-- UNUSED string name="not_available">Bluetooth не е достъпен</string -->
+    <string name="not_available">Bluetooth не е достъпен</string>
     <string name="not_enabled">Bluetooth не е разрешен</string>
 
     <!-- UNUSED string name="not_implemented">Тази функционалност не достъпна все още</string -->
@@ -580,15 +573,10 @@ Refer to the web pages for details.\n
     <string name="survey_split">Разделяне на картировката?</string>
     <string name="survey_not_attached">ВНИМАНИЕ: някои отсечки не са свързани</string>
     <string name="survey_not_extend">Внимание: отсечката не е разгъната</string>
-    <!-- UNUSED string name="survey_not_attached_extend">Внимание: Някои отсечки не са прикачени или разгънати</string -->
-    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
-    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
-    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
-    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <string name="survey_not_attached_extend">Внимание: Някои отсечки не са прикачени или разгънати</string>
     <string name="saturated_coeffs">Внимание: наситени данни за калиб. коефициенти</string>
     <string name="out_of_memory">Внимание: недостатъчна памет!</string>
     <string name="disk_io_error">Грешка при четене/запис на диска!</string>
-
     
     <string name="toporobot_warning">Настройка TopoRobot е експериментална!</string>
     <string name="anomaly_warning">Компенсиране на магн. аномалия е експертна настройка!</string>
@@ -697,7 +685,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="ask_reset">Изчистване на паметта на DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Затваряне на картировката?</string -->
     <string name="ask_gps_service">Избор на GPS услуга?</string>
-    <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
+    <!-- TODO string name="ask_backups_clear">Delete sketch backups?</string -->
     <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
 
     <!-- UNUSED string name="button_add"       >Добавяне  </string -->
@@ -744,7 +732,6 @@ Refer to the web pages for details.\n
     <!-- TODO string name="button_on"        >on</string -->
     <string name="button_open"      >Отваряне  </string>
     <string name="button_read"      >Четене    </string>
-    <!-- TODO string name="button_recover"   >Recover</string -->
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Прегрупиране</string -->
     <string name="button_dump"      >Запис     </string>
@@ -811,7 +798,6 @@ Refer to the web pages for details.\n
     <string name="popup_do_splay">Странично измерване</string>
     <string name="popup_do_leg">Отсечка</string>
     <string name="popup_do_gm_data">Контр. измерване</string>
-    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
     <!-- TODO string name="popup_do_laser">Laser</string -->
     <!-- TODO string name="popup_do_scan">Scan</string -->
     <!-- TODO string name="popup_do_shot">Shot</string -->
@@ -902,7 +888,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="help_measure_undo">Drop the last polyline point</string -->
 
     <!-- TODO string name="help_audio">Audio records list</string -->
-    <!-- UNUSED string name="help_backups">Delete sketch backups</string -->
+    <!-- TODO string name="help_backups">Delete sketch backups</string -->
     <string name="help_calib_check">Контролни измервания</string>
     <string name="help_close">Затваряне на прозореца</string>
     <!-- TODO string name="help_close_app">Close app</string -->
@@ -1004,7 +990,6 @@ Refer to the web pages for details.\n
     <string name="help_cover">Показване на ъгловото разпределение на калибрацията</string>
     <string name="help_compute">Изчисляване на калибрация</string>
     <string name="help_write">Запис на калибр. коефициенти в DistoX</string>
-    <!-- TODO string name="help_splays">Segment/point splays</string -->
 
     <!-- TODO string name="help_add_project">Add cave project</string -->
     <!-- TODO string name="help_add_surveys">Add surveys</string -->
@@ -1016,7 +1001,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="help_add_equate">Add surveys equate</string -->
     <!-- TODO string name="help_equates">List surveys equates</string -->
 
-    <!-- UNUSED string name="export_bgcolor">Background color</string -->
+    <!-- TODO string name="export_bgcolor">Background color</string -->
     <!-- TODO string name="export_config">Config commands</string -->
     <!-- TODO string name="export_csv_rawdata">Raw data</string -->
     <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
@@ -1030,7 +1015,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_prefix_hint">prefix</string -->
     <!-- TODO string name="export_suffix_hint">suffix</string -->
     <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- UNUSED string name="export_scale_png">Resolution</string -->
+    <!-- TODO string name="export_scale_png">Resolution</string -->
     <!-- TODO string name="export_scale_th">Scale 1 :</string -->
     <!-- TODO string name="export_splays">Splays</string -->
     <!-- TODO string name="export_splays_named">Named splays</string -->
@@ -1133,7 +1118,7 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="title_settings_sketch">TopoDroid 3d sketch settings</string -->
     <!-- TODO string name="title_settings_survey">TopoDroid survey settings</string -->
-    <!-- UNUSED string name="title_settings_splay">TopoDroid splay settings</string -->
+    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
     <!-- TODO string name="title_settings_shot">TopoDroid shot data settings</string -->
     <!-- TODO string name="title_settings_units">TopoDroid units settings</string -->
     <!-- TODO string name="title_settings_location">TopoDroid location settings</string -->
@@ -1194,15 +1179,15 @@ Refer to the web pages for details.\n
   <string name="pref_cat_drawing">Настройки Скици</string>
   <string name="pref_cat_import_export">Настройки Импорт/Експорт</string>
   <!-- TODO string name="pref_cat_exportimport">IMPORT</string -->
-  <!-- TODO string name="pref_cat_exportth">Therion</string -->
-  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
-  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
-  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
-  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
-  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
+  <!-- OK string name="pref_cat_exportth">Therion</string -->
+  <!-- OK string name="pref_cat_exportdat">Compass</string -->
+  <!-- OK string name="pref_cat_exporttro">VisualTopo</string -->
+  <!-- OK string name="pref_cat_exportsvg">SVG</string -->
+  <!-- OK string name="pref_cat_exportdxf">DXF</string -->
+  <!-- OK string name="pref_cat_exportshp">Shapefile</string -->
+  <!-- OK string name="pref_cat_exportpng">PNG</string -->
+  <!-- OK string name="pref_cat_exportkml">KML/GeoJSON</string -->
+  <!-- OK string name="pref_cat_exportcsv">CSV</string -->
 
   <string name="pref_cat_calib">Настройки Калибрация</string>
   <string name="pref_cat_device">Настройки DistoX</string>
@@ -1280,8 +1265,8 @@ Refer to the web pages for details.\n
   <string name="pref_survex_splay_summary">Добавяне на ДО в края на стран. изм. в Survex</string>
   <string name="pref_survex_lrud_title">Survex Ляво/Дясно/Горе/Долу</string>
   <string name="pref_survex_lrud_summary">Добавяне на Л/Д/Г/Д в Survex експорт</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
+  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
   <string name="pref_svg_grid_title">SVG мрежа</string>
   <string name="pref_svg_grid_summary">Добавяне на мрежа в SVG експорт</string>
   <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
@@ -1453,10 +1438,10 @@ Refer to the web pages for details.\n
 
   <string name="pref_hthr_title">Граница за хор. сечения</string>
   <string name="pref_hthr_summary">Граница, за считане на сечение за хоризонтално или вертикално</string>
-  <!-- UNUSED string name="pref_bitmap_scale_title">PNG резолюция</string -->
-  <!-- UNUSED string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string -->
-  <!-- UNUSED string name="pref_bitmap_bgcolor_title">PNG фон</string -->
-  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string -->
+  <string name="pref_bitmap_scale_title">PNG резолюция</string>
+  <string name="pref_bitmap_scale_summary">Резолюция на експортирани скици в PNG формат</string>
+  <string name="pref_bitmap_bgcolor_title">PNG фон</string>
+  <string name="pref_bitmap_bgcolor_summary">Цвят на фона на PNG експортирани скици</string>
   <string name="pref_acad_version_title">DXF версия</string>
   <string name="pref_acad_version_summary">DXF версия</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
@@ -1550,8 +1535,8 @@ Refer to the web pages for details.\n
   <string name="pref_backup_number_summary">Брой резервни архиви на скица</string>
   <string name="pref_backup_interval_title">Интервал на архивиране</string>
   <string name="pref_backup_interval_summary">Минимален интервал между два архива на скица [s]</string>
-  <!-- UNUSED string name="pref_backups_clear_title">Backups clear</string -->
-  <!-- UNUSED string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
+  <!-- TODO string name="pref_backups_clear_title">Backups clear</string -->
+  <!-- TODO string name="pref_backups_clear_summary">Enable sketch backups clear menu</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Площи експорт в xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Затваряне на площта с допълнителна точка</string -->
   <string name="pref_therion_splays_title">Therion странични измервания</string>
@@ -1695,7 +1680,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="perm_camera">\nCamera</string -->
     <!-- TODO string name="perm_microphone">\nMicrophone</string -->
 
-    <!-- NO string name="welcome_title">Добре дошли в TopoDroid %1$s</string -->
+    <!-- OK string name="welcome_title">Добре дошли в TopoDroid %1$s</string -->
 
     <string name="welcome_text">
 \nTopoDroid е Андроид приложение с отворен код за картиране на пещери с помощта на на DistoX лазерна рулетка.
@@ -1776,7 +1761,7 @@ Refer to the web pages for details.\n
     <!-- TODO string name="export_failed">Failed export</string -->
 
 
-    <!-- TODO ====== 3D VIEWER strings ========================== -->
+    <!-- OK ====== 3D VIEWER strings ========================== -->
 
     <!-- TODO string name="cbtn_bind">Rebind</string -->
 
@@ -1835,7 +1820,7 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
 
-    <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
+    <!-- TODO string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
     <!-- TODO string name="read_survey">Read survey %1$s\n</string -->
@@ -1854,11 +1839,11 @@ Refer to the web pages for details.\n
     <!-- TODO string name="surface_gps">GPS track</string -->
     <!-- TODO string name="surface_east">East</string -->
     <!-- TODO string name="surface_north">North</string -->
-    <!-- TODO string name="dem_file">%1$s</string -->
+    <!-- OK string name="dem_file">%1$s</string -->
     <!-- TODO string name="dem_load">Load DEM</string -->
     <!-- TODO string name="dem_failed">Failed DEM loading</string -->
     <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- TODO string name="texture_file">%1$s</string -->
+    <!-- OK string name="texture_file">%1$s</string -->
     <!-- TODO string name="texture_load">Load texture</string -->
     <!-- TODO string name="texture_failed">Failed texture loading</string -->
     <!-- TODO string name="texture_ok">Read texture file</string -->
@@ -1916,11 +1901,11 @@ Refer to the web pages for details.\n
 
     <!-- TODO string name="walls_title">WALLS</string -->
     <!-- TODO string name="walls_convexhull">Convex Hull</string -->
-    <!-- NO string name="walls_powercrust">Powercrust</string -->
+    <!-- OK string name="walls_powercrust">Powercrust</string -->
     <!-- TODO string name="walls_hull">Hull</string -->
     <!-- TODO string name="walls_bubble">Bubble</string -->
     <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- NO string name="walls_delaunay">Delaunay</string -->
+    <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
     <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
@@ -1934,17 +1919,18 @@ Refer to the web pages for details.\n
     <!-- TODO string name="no_model">No 3D model</string -->
     <!-- TODO string name="no_topodroid_model">Not a TopoDroid model</string -->
 
-    <!-- UNUSED string name="error_file_not_found">Error: file %1$s not found</string -->
-    <!-- UNUSED string name="error_file_not_readable">Error: file %1$s not readable</string -->
+    <!-- TODO string name="error_file_not_found">Error: file %1$s not found</string -->
+    <!-- TODO string name="error_file_not_readable">Error: file %1$s not readable</string -->
     <!-- TODO string name="error_file_read">Error: file %1$s failed read</string -->
     <!-- TODO string name="error_survey_read">Error: survey %1$s failed read</string -->
-    <!-- UNUSED string name="error_io_exception">Error: IO exception %1$s</string -->
+    <!-- TODO string name="error_io_exception">Error: IO exception %1$s</string -->
     <!-- TODO string name="error_parser_error">Error: parsing %1$s</string -->
     <!-- TODO string name="error_export_failed">Error: export %1$s failed</string -->
     <!-- TODO string name="unsupported_format">Unsupported file format</string -->
 
-    <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
-    <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
+
+    <!-- TODO string name="export_gltf_ok">Exported glTF file</string -->
+    <!-- TODO string name="export_gltf_fail">Failed glTf export</string -->
 
     <!-- TODO string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->

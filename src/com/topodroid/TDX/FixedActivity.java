@@ -35,6 +35,10 @@ import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.res.Configuration;
 
+// import android.widget.TextView;
+// import android.widget.EditText;
+import android.widget.Button;
+import android.view.View;
 
 import android.net.Uri;
 
@@ -51,9 +55,8 @@ import android.app.Activity;
 
 // import android.content.Context;
 
-import android.view.View;
-import android.view.KeyEvent;
 // import android.view.inputmethod.EditorInfo;
+import android.view.KeyEvent;
 // import android.view.ViewGroup.LayoutParams;
 
 // import android.widget.TextView;

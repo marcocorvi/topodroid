@@ -4,7 +4,7 @@
     <string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string>
     <!-- TODO string name="no_manual">Cannot retrieve user manual from the web</string -->
 
-    <!-- NO string name="app_name">TopoDroid</string -->
+    <string name="app_name">TopoDroid</string>
     <!-- TODO string name="double_back">Click BACK again to exit</string -->
 
     <string name="version_ask">به روز رسانی نسخه جدید TopoDroid.\nتمایل به نصب دوباره دارید?</string>
@@ -258,16 +258,16 @@
     <string name="menu_delete">حذف</string>
     <string name="menu_detach">دیسکانکت</string>
     <string name="menu_display">نمایش</string>
-    <!-- TODO string name="menu_distox">DISTOX</string -->
+    <!-- OK string name="menu_distox">DISTOX</string -->
     <string name="menu_export">خروجی</string>
-    <!-- TODO string name="menu_firmware">FIRMWARE</string -->
+    <!-- OK string name="menu_firmware">FIRMWARE</string -->
     <string name="menu_recover">بازیابی</string>
     <string name="menu_reload">خواندن مجدد</string>
     <!-- TODO string name="menu_rename_delete">RENAME/DELETE</string -->
     <!-- TODO string name="menu_rename">RENANE</string -->
     <!-- TODO string name="menu_switch">SWITCH/CLOSE</string -->
     <string name="menu_help">راهنما</string>
-    <!-- TODO string name="menu_join_survey">CO-SURVEY</string -->
+    <!-- OK string name="menu_join_survey">CO-SURVEY</string -->
     <string name="menu_logs">کارنامه عملیات</string>
     <!-- TODO string name="menu_manual_calibration">CALIBRATION</string -->
     <string name="menu_options">تنظیمات</string>
@@ -280,7 +280,7 @@
     <!-- UNUSED string name="menu_station">جایگاه</string -->
     <string name="menu_stats">وضعیت</string>
     <string name="menu_survey">اطلاعات نقشه برداری</string>
-    <!-- TODO string name="menu_sync">SYNC</string -->
+    <!-- OK string name="menu_sync">SYNC</string -->
     <!-- UNUSED string name="menu_tdr2th2">TH2 SKETCHES</string -->
     <!-- TODO string name="menu_validate">VALIDATE</string -->
     <!-- TODO string name="menu_zoom_fit">ZOOM FIT</string -->
@@ -296,7 +296,7 @@
     <string name="connected_none">بدون اتصال</string>
     <string name="connected_already">خواندن مجدد اتصال</string>
 
-    <!-- UNUSED string name="not_available">دکمه فعال نیست</string -->
+    <string name="not_available">دکمه فعال نیست</string>
     <string name="not_enabled">دکمه فعال نیست</string>
 
     <!-- UNUSED string name="not_implemented">هنوز اجرا نشده است</string -->
@@ -1065,12 +1065,12 @@
   <string name="pref_log_photo">عکس</string>
   <string name="pref_log_plot">طرح ها</string>
   <string name="pref_log_proto">DistoX پروتکل</string>
-  <!-- TODO string name="pref_log_ptopo">PocketTopo</string -->
+  <!-- OK string name="pref_log_ptopo">PocketTopo</string -->
   <string name="pref_log_sensor">سنسور</string>
   <string name="pref_log_shot">شات ها</string>
   <string name="pref_log_sync">Cosurveying</string>
   <string name="pref_log_survey">نقشه کشی</string>
-  <!-- TODO string name="pref_log_therion">Therion</string -->
+  <!-- OK string name="pref_log_therion">Therion</string -->
   <string name="pref_log_units">واحدها</string>
   <string name="pref_log_zip">ZIP</string>
 
@@ -1087,7 +1087,7 @@
   <!-- UNUSED string name="alt_ortho">orthometric</string -->
   <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
-    <!-- NO string name="welcome_title">خوش آمدید به TopoDroid %1$s</string -->
+    <string name="welcome_title">خوش آمدید به TopoDroid %1$s</string>
     <string name="welcome_text">
 \nTopoDroid یک برنامه اندرویدی رایگان برای نقشه کشی است.
 \n\nگارانتی ندارد: اگر استفاده می کنید مراقب باشید اطلاعات شما از بین نرود.

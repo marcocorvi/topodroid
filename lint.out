@@ -22,13 +22,16 @@ res/layout/device_x310_memory_dialog.xml:55: Warning: The vertically scrolling S
 res/layout/scrap_outline_dialog.xml:12: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
   <ListView android:id="@+id/list"
    ~~~~~~~~
-AndroidManifest.xml:146: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
+src/com/topodroid/TDX/DialogSketch.java:53: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
+      return ( name.toLowerCase().endsWith( ".c3d" ) );  // Cave3D sketch file
+                    ~~~~~~~~~~~
+AndroidManifest.xml:150: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".PlotReloadWindow"
                                 ~~~~~~~~~~~~~~~~~
-AndroidManifest.xml:208: Error: DrawingWindow must extend android.app.Activity [Instantiatable]
+AndroidManifest.xml:212: Error: DrawingWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".DrawingWindow"
                                 ~~~~~~~~~~~~~~
-AndroidManifest.xml:219: Error: OverviewWindow must extend android.app.Activity [Instantiatable]
+AndroidManifest.xml:223: Error: OverviewWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".OverviewWindow"
                                 ~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:29: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
@@ -76,9 +79,6 @@ res/values/strings.xml:337: Error: "cell_size" is not translated in "cn" [Missin
 res/values/strings.xml:384: Error: "no_symbols" is not translated in "cn" [MissingTranslation]
     <string name="no_symbols">No symbol palette.</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:393: Error: "menu_3d" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="menu_3d">3D</string>
-            ~~~~~~~~~~~~~~
 res/values/strings.xml:531: Error: "swap_hotbit_ok" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="swap_hotbit_ok">Swapped data hot bit</string>
             ~~~~~~~~~~~~~~~~~~~~~
@@ -106,7 +106,7 @@ res/values/strings.xml:599: Error: "survey_not_saved" is not translated in "cn" 
 res/values/strings.xml:600: Error: "survey_bad_siblings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:601: Error: "survey_bad_magnetic" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:601: Error: "survey_bad_magnetic" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
     <string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:620: Error: "accuracy_low" is not translated in "cn" [MissingTranslation]
@@ -130,9 +130,6 @@ res/values/strings.xml:710: Error: "plan_view" is not translated in "ru" (Russia
 res/values/strings.xml:711: Error: "profile_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="profile_view">profile</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:713: Error: "distox_err_ok" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="distox_err_ok">OK</string>
-            ~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:731: Error: "button_clipboard" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="button_clipboard" >Clipboard</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
@@ -142,9 +139,6 @@ res/values/strings.xml:736: Error: "button_clear_convert" is not translated in "
 res/values/strings.xml:749: Error: "button_gps_start" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="button_gps_start" >GPS</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:767: Error: "button_ok" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="button_ok"        >OK</string>
-            ~~~~~~~~~~~~~~~~
 res/values/strings.xml:772: Error: "button_recover" is not translated in "cn" [MissingTranslation]
     <string name="button_recover"   >Recover</string>
             ~~~~~~~~~~~~~~~~~~~~~
@@ -337,9 +331,6 @@ res/values-it/plurals.xml:14: Warning: For language "it" (Italian) the following
 res/values-ru/plurals.xml:18: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
-res/layout/fixed_activity.xml:72: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
-    android:layout_below="@id/layout7"
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -355,12 +346,21 @@ res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints backgrou
 res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
       android:background="@color/menu_background"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/current_station_dialog.xml:6: Warning: The resource R.layout.current_station_dialog appears to be unused [UnusedResources]
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+res/xml/button.xml:2: Warning: The resource R.xml.button appears to be unused [UnusedResources]
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+^
+res/xml/button_border.xml:2: Warning: The resource R.xml.button_border appears to be unused [UnusedResources]
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+^
+res/xml/button_empty.xml:2: Warning: The resource R.xml.button_empty appears to be unused [UnusedResources]
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
+res/drawable/iz_color_temp.png: Warning: The resource R.drawable.iz_color_temp appears to be unused [UnusedResources]
+res/drawable/iz_splays_all.png: Warning: The resource R.drawable.iz_splays_all appears to be unused [UnusedResources]
+res/drawable/iz_ysplays_xsection.png: Warning: The resource R.drawable.iz_ysplays_xsection appears to be unused [UnusedResources]
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
 res/drawable/distox.png: Warning: Found bitmap drawable res/drawable/distox.png in densityless folder [IconLocation]
 res/drawable/ic_back.png: Warning: Found bitmap drawable res/drawable/ic_back.png in densityless folder [IconLocation]
@@ -399,6 +399,7 @@ res/drawable/iz_color.png: Warning: Found bitmap drawable res/drawable/iz_color.
 res/drawable/iz_color_depth.png: Warning: Found bitmap drawable res/drawable/iz_color_depth.png in densityless folder [IconLocation]
 res/drawable/iz_color_surface.png: Warning: Found bitmap drawable res/drawable/iz_color_surface.png in densityless folder [IconLocation]
 res/drawable/iz_color_survey.png: Warning: Found bitmap drawable res/drawable/iz_color_survey.png in densityless folder [IconLocation]
+res/drawable/iz_color_temp.png: Warning: Found bitmap drawable res/drawable/iz_color_temp.png in densityless folder [IconLocation]
 res/drawable/iz_comment_no.png: Warning: Found bitmap drawable res/drawable/iz_comment_no.png in densityless folder [IconLocation]
 res/drawable/iz_comment_ok.png: Warning: Found bitmap drawable res/drawable/iz_comment_ok.png in densityless folder [IconLocation]
 res/drawable/iz_compass.png: Warning: Found bitmap drawable res/drawable/iz_compass.png in densityless folder [IconLocation]
@@ -528,6 +529,7 @@ res/drawable/iz_splay_front.png: Warning: Found bitmap drawable res/drawable/iz_
 res/drawable/iz_splay_front_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_front_black.png in densityless folder [IconLocation]
 res/drawable/iz_splay_none.png: Warning: Found bitmap drawable res/drawable/iz_splay_none.png in densityless folder [IconLocation]
 res/drawable/iz_splay_none_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_none_black.png in densityless folder [IconLocation]
+res/drawable/iz_splays_all.png: Warning: Found bitmap drawable res/drawable/iz_splays_all.png in densityless folder [IconLocation]
 res/drawable/iz_splays_line.png: Warning: Found bitmap drawable res/drawable/iz_splays_line.png in densityless folder [IconLocation]
 res/drawable/iz_splays_no.png: Warning: Found bitmap drawable res/drawable/iz_splays_no.png in densityless folder [IconLocation]
 res/drawable/iz_splays_none.png: Warning: Found bitmap drawable res/drawable/iz_splays_none.png in densityless folder [IconLocation]
@@ -566,6 +568,7 @@ res/drawable/iz_ysplays_horz.png: Warning: Found bitmap drawable res/drawable/iz
 res/drawable/iz_ysplays_no.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_no.png in densityless folder [IconLocation]
 res/drawable/iz_ysplays_plain.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_plain.png in densityless folder [IconLocation]
 res/drawable/iz_ysplays_vert.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_vert.png in densityless folder [IconLocation]
+res/drawable/iz_ysplays_xsection.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_xsection.png in densityless folder [IconLocation]
 res/drawable/lvrseekbar_background.png: Warning: Found bitmap drawable res/drawable/lvrseekbar_background.png in densityless folder [IconLocation]
 res/drawable/lvrseekbar_thumb.png: Warning: Found bitmap drawable res/drawable/lvrseekbar_thumb.png in densityless folder [IconLocation]
 res/drawable/monochrome90.png: Warning: Found bitmap drawable res/drawable/monochrome90.png in densityless folder [IconLocation]
@@ -621,4 +624,4 @@ res/layout/dblock_row_noedit.xml:18: Warning: Missing accessibility label: provi
 res/layout/dblock_row_noedit.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText 
    ~~~~~~~~
-93 errors, 254 warnings
+90 errors, 262 warnings

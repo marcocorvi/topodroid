@@ -109,8 +109,8 @@ public class GMActivity extends Activity
                         R.drawable.iz_compute,
                         R.drawable.iz_cover,
                         R.drawable.iz_read,
-                        R.drawable.iz_write,
-                        R.drawable.iz_empty // EMPTY
+                        R.drawable.iz_write
+                        // R.drawable.iz_empty // EMPTY
                      };
   final static private int BTN_TOGGLE   = 0;
   final static private int BTN_BT       = 1;

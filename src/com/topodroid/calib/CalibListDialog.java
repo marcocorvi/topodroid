@@ -43,7 +43,6 @@ public class CalibListDialog extends MyDialog
                       // , OnItemLongClickListener
 {
   private DeviceActivity mParent;
-  // private TopoDroidApp mApp; // unused
   private ArrayAdapter<String> mArrayAdapter;
   private Button mBtnNew;
   private Button mBtnImport;
