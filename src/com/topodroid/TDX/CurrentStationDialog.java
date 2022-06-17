@@ -88,7 +88,18 @@ class CurrentStationDialog extends MyDialog
   protected void onCreate(Bundle savedInstanceState) 
   {
     super.onCreate( savedInstanceState );
-    initLayout( R.layout.current_station_dialog, R.string.title_current_station );
+    boolean landscape = mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE;
+    doInit( landscape );
+  }
+  
+  public void doInit( boolean landscape )
+  {
+    TDLog.v("Do INIT landcsape " + landscape );
+    if ( landscape ) {
+      initLayout( R.layout.current_station_dialog_landscape, R.string.title_current_station );
+    } else {
+      initLayout( R.layout.current_station_dialog_portrait, R.string.title_current_station );
+    }
 
     mList = (ListView) findViewById(R.id.list);
     mList.setDividerHeight( 2 );
@@ -134,6 +145,8 @@ class CurrentStationDialog extends MyDialog
     setComment( mStation );
 
     updateList();
+
+    findViewById( R.id.current_station ).invalidate();
   }
 
   /** uodate the list of station infos

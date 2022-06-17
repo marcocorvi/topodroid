@@ -106,7 +106,7 @@ res/values/strings.xml:599: Error: "survey_not_saved" is not translated in "cn" 
 res/values/strings.xml:600: Error: "survey_bad_siblings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:601: Error: "survey_bad_magnetic" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:601: Error: "survey_bad_magnetic" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:620: Error: "accuracy_low" is not translated in "cn" [MissingTranslation]
@@ -337,6 +337,9 @@ res/values-it/plurals.xml:14: Warning: For language "it" (Italian) the following
 res/values-ru/plurals.xml:18: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
+res/layout/fixed_activity.xml:72: Warning: Invalid layout param in a LinearLayout: layout_below [ObsoleteLayoutParam]
+    android:layout_below="@id/layout7"
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -352,6 +355,9 @@ res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints backgrou
 res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
       android:background="@color/menu_background"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/layout/current_station_dialog.xml:6: Warning: The resource R.layout.current_station_dialog appears to be unused [UnusedResources]
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+^
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
@@ -615,4 +621,4 @@ res/layout/dblock_row_noedit.xml:18: Warning: Missing accessibility label: provi
 res/layout/dblock_row_noedit.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
   <EditText 
    ~~~~~~~~
-93 errors, 252 warnings
+93 errors, 254 warnings

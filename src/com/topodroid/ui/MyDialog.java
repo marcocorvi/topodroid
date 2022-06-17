@@ -201,6 +201,7 @@ public class MyDialog extends Dialog
 
   /** (re)do the initialization
    * @param landscape   whether screen is landscape
+   * @note if doInit select the content view by the orientation, it must invalidate the top-view
    */
   public void doInit( boolean landscape ) { /* nothing */ }
 

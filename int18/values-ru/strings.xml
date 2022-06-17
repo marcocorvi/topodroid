@@ -142,6 +142,7 @@
     <!-- UNUSED string name="data">данные</string -->
     <string name="using">Использую %1$s</string>
     <string name="calib_error">Средн. Ошибка: %1$.2f градуса (BH дельта %2$.3f)</string>
+    <!-- TODO string name="calib_validate_error">Average error: %1$.2f &#0080;</string -->
     <string name="calib_stddev">Ст-откл ошибок: %1$.4f градуса</string>
     <string name="calib_max_error">Макс. ошибка: %1$.4f градуса</string>
     <string name="calib_ave_std">Точность: %1$.4f +- %2$.4f градуса</string>
@@ -242,7 +243,10 @@
     <string name="head_tail_store_failed">Не удалось сохранить индекс памяти DistoX</string>
     <!-- UNUSED string name="pairing_failed">Не удалось соединить устройства</string -->
 
+    <!-- TODO string name="datamode_normal">Normal data-mode</string -->
+    <!-- TODO string name="datamode_diving">Diving data-mode</string -->
     <string name="illegal_data_value">Недопустимое значение</string>
+
     <string name="photo_title">ФОТО</string>
     <string name="photo_text">Введите коментарий к фото</string>
     <string name="photo_failed">Ошибка фото</string>
@@ -270,6 +274,7 @@
 
     <string name="error_azimuth_required">Требуется азимут</string>
     <string name="error_length_required">Требуется длина</string>
+    <!-- TODO string name="error_depth_required">Depth required</string -->
     <string name="error_clino_required">Требуется угол</string>
     <string name="error_comment_required">Требуется комментарий</string>
     <string name="error_begin_required">Требуется начальный адрес</string>
@@ -515,6 +520,7 @@
     <!-- UNUSED string name="plot_view">Просмотренный пикет</string -->
     <string name="read_fail_with_code">Ошибка чтения: код ошибки </string>
     <string name="read_failed">Ошибка чтения DistoX</string>
+    <!-- TODO string name="swap_hotbit_ok">Swapped data hot bit</string -->
     <!-- UNUSED string name="reading_file_failed">Чтение файла не удалось</string -->
 
     <string name="saved_file_1">Сохраненный файл %1$s</string>
@@ -606,6 +612,7 @@
     <string name="accuracy_medium">Низкая точность</string>
     <string name="accuracy_unreliable">Ненадежные показания датчиков</string>
 
+    <!-- TODO string name="empty_clipboard">Empty clipboard</string -->
     <string name="cannot_rename">Не могу перименовать съёмку</string>
     <string name="declination">Магн. скл.</string>
     <string name="description">описание</string>
@@ -687,6 +694,10 @@
     <!-- UNUSED string name="h_section">Гор-СЕЧЕНИЕ</string -->
     <!-- UNUSED string name="landscape">альбомная</string -->
 
+    <!-- TODO string name="display_view">Display</string -->
+    <!-- TODO string name="plan_view">plan</string -->
+    <!-- TODO string name="profile_view">profile</string -->
+
     <!-- TODO string name="distox_err_ok">OK</string -->
     <string name="distox_err_headtail">Ошибка чтения памяти DistoX</string>
     <string name="distox_err_headtail_io">DistoX ошибка I/O </string>
@@ -705,10 +716,12 @@
     <string name="button_back"      >Назад     </string>
     <string name="button_cancel"    >Отмена    </string>
     <!-- UNUSED string name="button_change"    >Изменить    </string -->
+    <!-- TODO string name="button_clipboard" >Clipboard</string -->
     <string name="button_close"     >Закрыть   </string>
     <!-- UNUSED string name="button_create"    >Создать    </string -->
     <string name="button_color"     >Цвет	</string>
     <string name="button_compute"   >Расчитать</string>
+    <!-- TODO string name="button_clear_convert">Clear convert</string -->
     <string name="button_convert"   >Конвертир.</string>
     <string name="button_copy"      >Копировать</string>
     <string name="button_current"   >Текущий   </string>
@@ -1031,6 +1044,7 @@
     <string name="export_config">Команды config файла</string>
     <string name="export_csv_rawdata">Сырые данные</string>
     <string name="export_dxf_blocks">Блоки DXF</string>
+    <!-- TODO string name="export_dxf_version">Version</string -->
     <string name="export_georeference">Геопривязка</string>
     <string name="export_grid">Сетка</string>
     <string name="export_linedir">Штрих направления линий</string>
@@ -1116,6 +1130,7 @@
     <string name="title_photo">Фото/Измерения</string>
     <string name="title_photo_comment">Описание Фото</string>
     <string name="title_photo_list">Фото</string>
+    <!-- TODO string name="title_photo_view">Photo</string -->
     <string name="title_plot_save">Сохранить абрис как</string>
     <!-- UNUSED string name="title_plot_merge">Присоединить к абрису</string -->
     <!-- UNUSED string name="title_plot_reload">Перезагрузить абрис</string -->
@@ -1191,7 +1206,12 @@
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
 
+  <!-- TODO string name="exported_settings">Exported settings %1$s</string -->
+  <string name="imported_settings">Импортрованные настройки</string>
+  <!-- TODO string name="imported_settings_failed">Failed to import settings</string -->
+  <!-- TODO string name="export_settings_failed">Failed to export settings</string -->
   <string name="pref_export_settings">Экспорт настроек</string>
+
   <!-- UNUSED string name="pref_tcsx">Экспорт cSurvey-1.20 transfer-csx</string -->
 
   <string name="pref_export_plot_title">Формат экспорта абрисов</string>
@@ -1414,6 +1434,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">Авто-экспорт данных</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Автоматический экспорт данных (требуется установить формат по умолчанию)</string -->
+  <!-- TODO string name="pref_editable_stations_title">Editable stations</string -->
+  <!-- TODO string name="pref_editable_stations_summary">Editable station names in the shot list</string -->
   <string name="pref_zipped_symbols_title">Архив условных обозначений</string>
   <string name="pref_zipped_symbols_summary">Добавить/извлечь файлы условных обозначений в/из zip архив</string>
   <string name="pref_fixed_origin_title">Точка отсчета абрисов</string>
@@ -1586,6 +1608,8 @@
   <string name="pref_saved_stations_summary">Сохраненные пикеты оранжевого цвета</string>
   <string name="pref_legonly_update_title">Периодичность обновления нитки</string>
   <string name="pref_legonly_update_summary">Перерисовывать нитку хода только при скачивании данных измерений</string>
+  <!-- TODO string name="pref_full_affine_title">Affine transform</string -->
+  <!-- TODO string name="pref_full_affine_summary">Enable sketch affine transformation</string -->
   <string name="pref_loopClosure_title">Закрывать кольца</string>
   <string name="pref_loopClosure_summary">Автоматически компенсировать невязки при закрытии колец</string>
   <!-- UNUSED string name="pref_splayExtend_title">Развертка бокового замера</string -->
@@ -1792,7 +1816,6 @@
     <string name="title_surveys">Съёмки</string>
 
     <string name="exported">Файл сохранен %1$s</string>
-    <string name="imported_settings">Импортрованные настройки</string>
     <string name="export_failed">Ошибка экспорта</string>
 
     <!-- TODO string name="image_diagram">Direction diagram</string -->
@@ -1903,6 +1926,7 @@
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
+    <!-- TODO string name="survey_list">SURVEYS</string -->
     <string name="survey_legs"> Замеры: </string>
     <string name="survey_legs_length"> Длина замеров: </string>
     <string name="survey_splays"> Сплеи: </string>
@@ -1923,8 +1947,11 @@
     <string name="STATIONS_DISTANCE">УДАЛЁННОСТЬ ПИКЕТОВ</string>
     <!-- UNUSED string name="DISTANCE">РАССТОЯНИЕ</string -->
     <!-- UNUSED string name="CENTER">ЦЕНТР</string -->
+    <!-- TODO string name="select_survey_file">Select a survey file</string -->
+    <!-- TODO string name="select_export_file">Select export file</string -->
     <string name="select_dem_file">Выбрать файл DEM:</string>
     <string name="select_texture_file">Выбрать файл текстуры:</string>
+    <!-- TODO string name="select_sketch_file">Select a sketch file</string -->
 
     <string name="view_title">ТОЧКИ ПРОСМОТРА</string>
     <string name="view_top">Сверху</string>
@@ -1986,12 +2013,20 @@
     <string name="fail_powercrust">Ошибка powercrust стены</string>
     <string name="done_hull">Завершено simple-hull стены</string>
     <string name="fail_hull">Ошибка simple-hull стены</string>
+    <!-- TODO string name="done_tube">Done simple-tube walls</string -->
+    <!-- TODO string name="fail_tube">Failed simple-tube walls</string -->
+    <!-- TODO string name="done_bubble">Done bubble walls</string -->
+    <!-- TODO string name="fail_bubble">Failed bubble walls</string -->
 
     <string name="no_database">Отсутсвует база данных\n</string>
     <string name="cno_survey">Отсутсвует съёмка %1$s\n</string>
     <!-- UNUSED string name="cno_file">Отсутсвует фал %1$s\n</string -->
     <string name="empty_survey">Пустая съёмка %1$s\n</string>
     
+    <!-- TODO string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
+
+    <!-- TODO string name="cpref_dem3d">DEM</string -->
+    <!-- TODO string name="cpref_walls3d">WALL MODEL</string -->
     <!-- UNUSED string name="cpref_base_path_title">Рабочий каталог</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Путь к файлам съёмок</string -->
     <!-- UNUSED string name="cpref_text_size_title">Размер текста</string -->
@@ -2013,7 +2048,7 @@
     <string name="cpref_grid_above_title">Сетка сверху</string>
     <string name="cpref_grid_above_summary">Сетка сверху</string>
     <string name="cpref_grid_extent_title">Размер сетки</string>
-    <!-- UNUSED string name="cpref_grid_extend_summary">Размер поля сетки вокруг съёмки</string -->
+    <string name="cpref_grid_extent_summary">Размер поля сетки вокруг съёмки</string>
     <string name="cpref_neg_clino_title">Обзор снизу вверх</string>
     <string name="cpref_neg_clino_summary">Разрешить точки обзора ниже горизонта</string>
     <string name="cpref_dem_buffer_title">Буфер DEM</string>
@@ -2026,6 +2061,8 @@
   
     <string name="cpref_all_splay_title">Все сплеи</string>
     <string name="cpref_all_splay_summary">Все сплеи для стен</string>
+    <!-- TODO string name="cpref_splay_use_title">Splay usage</string -->
+    <!-- TODO string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string -->
     <string name="cpref_splay_proj_title">Проекция сплеев</string>
     <string name="cpref_splay_proj_summary">Использовать сплеи спроецированные на нормальную плоскость [n]</string>
     <string name="cpref_splay_thr_title">Порог сплеев</string>
