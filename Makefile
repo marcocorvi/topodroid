@@ -166,5 +166,5 @@ version:
 	echo $(VERSION)
 
 archive:
-	tar -chvzf ../topodroid.tgz --exclude-vcs $(SRC)
+	tar -chvzf ../topodroid-`date -I`.tgz --exclude-vcs $(SRC)
 
