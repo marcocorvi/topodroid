@@ -85,7 +85,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="make_walls">Falak</string -->
     <string name="missing_station">Hiányzó mérési pont</string>
     <string name="station_not_found">Mérési pont nem található</string>
-    <!-- TODO string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string -->
+    <string name="station_coords">K %1$.2f É %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Mérés nem található</string>
     <string name="bad_sibling">Rossz mérés ismétlés</string>
     <!-- UNUSED string name="missing_area">TERÜLET</string -->
@@ -1146,7 +1146,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_plot_scraps">Vázlat szintek</string>
     <string name="title_profile_flip">Nézeti vázlat 180 fokos forgatása</string>
     <string name="title_projection">Vetített oldalnézet irányszöge %1$d</string>
-    <!-- TODO string name="title_reduction_errors">Survey data-reduction anomalies</string -->
+    <string name="title_reduction_errors">Mérés adat-redukálás anomalia</string>
     <string name="title_refs">Vázlat rajzelemek</string>
     <string name="title_scraps">Felmérés vázlatok</string>
     <string name="title_scraps_outline">Körvonal felvázolása</string>
@@ -1870,7 +1870,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
     <!-- NO string name="fractal_failed">Fractal compute failed</string -->
     <!-- NO string name="fractal_dimension">Fractal dimension</string -->
-    <!-- TODO string name="illegal_value">Illegal value</string -->
+    <string name="illegal_value">Illegális érték</string>
 
     <!-- UNUSED string name="info_title">INFO</string -->
     <string name="info_surveys">MÉRÉSEK</string>
