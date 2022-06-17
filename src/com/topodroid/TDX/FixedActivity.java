@@ -25,8 +25,6 @@ import com.topodroid.help.UserManualActivity;
 // import java.util.regex.Pattern;
 // import java.util.Locale;
 
-// import android.widget.ArrayAdapter;
-
 import android.os.Bundle;
 
 import android.content.Context;
@@ -34,10 +32,12 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.res.Configuration;
+import android.content.res.Resources;
 
 // import android.widget.TextView;
 // import android.widget.EditText;
 import android.widget.Button;
+import android.widget.ArrayAdapter;
 import android.view.View;
 
 import android.net.Uri;
@@ -90,16 +90,16 @@ public class FixedActivity extends Activity
   private int mNrButton1 = 0;
   private MyHorizontalListView mListView;
   private MyHorizontalButtonView mButtonView1;
-  private Button mBtHelp;  
-  private Button mBtClose;
+  // private Button mBtHelp;  
+  // private Button mBtClose;
 
   private boolean hasGps = false;
 
-  // ListView   mMenu;
-  // Button     mImage;
+  private Button     mMenuImage;
+  private ListView   mMenu;
   // // ArrayAdapter< String > mMenuAdapter;
   // MyMenuAdapter mMenuAdapter;
-  // boolean onMenu;
+  boolean onMenu;
 
   private static final int[] izons = {
                         R.drawable.iz_gps,
@@ -108,6 +108,17 @@ public class FixedActivity extends Activity
                      };
   // private static final int menus[] = {
   //                    };
+
+  private static final int[] menus = {
+                          R.string.menu_close,
+                          R.string.menu_help,
+                          };
+
+  private static final int[] help_menus = {
+                          R.string.help_close_app,
+                          R.string.help_help,
+                        };
+
 
 // -------------------------------------------------------------------
   @Override
@@ -128,10 +139,10 @@ public class FixedActivity extends Activity
     setContentView(R.layout.fixed_activity);
     setTitle( R.string.title_fixed );
 
-    mBtHelp  = (Button) findViewById( R.id.button_help );
-    mBtClose = (Button) findViewById( R.id.button_close );
-    mBtHelp.setOnClickListener( this );
-    mBtClose.setOnClickListener( this );
+    // mBtHelp  = (Button) findViewById( R.id.button_help );
+    // mBtClose = (Button) findViewById( R.id.button_close );
+    // mBtHelp.setOnClickListener( this );
+    // mBtClose.setOnClickListener( this );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlaceholder(true);
@@ -148,14 +159,13 @@ public class FixedActivity extends Activity
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    // NO MENU
-    // mImage = (Button) findViewById( R.id.handle );
-    // mImage.setOnClickListener( this );
-    // mImage.setBackground( MyButton.getButtonBackground( mApp, getResources(), R.drawable.iz_menu ) );
-    // mMenu = (ListView) findViewById( R.id.menu );
-    // setMenuAdapter();
-    // closeMenu();
-    // mMenu.setOnItemClickListener( this );
+    // MENU
+    mMenuImage = (Button) findViewById( R.id.handle );
+    mMenuImage.setOnClickListener( this );
+    mMenu = (ListView) findViewById( R.id.menu );
+    mMenu.setOnItemClickListener( this );
+    setMenuAdapter( ); // in on Start()
+    closeMenu();
 
     mList = (ListView) findViewById(R.id.fx_list);
     mList.setOnItemClickListener( this );
@@ -175,6 +185,15 @@ public class FixedActivity extends Activity
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
+    if ( mMenu == (ListView)parent ) {
+      handleMenu( pos );
+      return;
+    }
+    if ( onMenu ) {
+      closeMenu();
+      return;
+    }
+
     // TDLog.Log( TDLog.LOG_LOC, "Location::onItemClick pos " + pos );
     // CharSequence item = ((TextView) view).getText();
     // String value = item.toString();
@@ -202,27 +221,80 @@ public class FixedActivity extends Activity
     // }
   }
 
-  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo,
-                                 String comment, long source )
+  private FixedInfo addLocation( String station, double lng, double lat, double h_ell, double h_geo, String comment, long source )
   {
     // TDLog.v("FIXED location " + station + ": " + lng + " " + lat );
     long id = TopoDroidApp.mData.insertFixed( TDInstance.sid, -1L, station, lng, lat, h_ell, h_geo, comment, 0L, source );
     return new FixedInfo( id, station, lng, lat, h_ell, h_geo, comment, source ); 
   }
 
+  /** set the adapter of the menu pull-down list
+   */
+  void setMenuAdapter( )
+  {
+    // TDLog.v("MAIN set menu adapter");
+    Resources res = getResources();
+    ArrayAdapter< String > menu_adapter = new ArrayAdapter<String >( this, R.layout.menu );
+
+    menu_adapter.add( res.getString( menus[0] ) ); // CLOSE
+    menu_adapter.add( res.getString( menus[1] ) ); // HELP
+
+    mMenu.setAdapter( menu_adapter );
+    mMenu.invalidate();
+  }
+
+  /** close the menu pull-down list
+   */
+  private void closeMenu()
+  {
+    mMenu.setVisibility( View.GONE );
+    onMenu = false;
+  }
+
+  /** handle a tap on a menu item
+   * @param pos   menu item index
+   */
+  private void handleMenu( int pos ) 
+  {
+    closeMenu();
+    int p = 0;
+    if ( p++ == pos ) { // CLOSE 
+      super.onBackPressed();
+    } else if ( p == pos ) { // HELP
+      doHelp();
+    }
+  }
 
   @Override
   public void onClick(View v) 
   {
-    Button b = (Button) v;
-
-    if ( b == mBtHelp ) {
-      doHelp();
-      return;
-    } else if ( b == mBtClose ) {
-      super.onBackPressed();
+    if ( onMenu ) {
+      closeMenu();
       return;
     }
+    Button b = (Button) v;
+
+    if ( b == mMenuImage ) {
+      if ( mMenu.getVisibility() == View.VISIBLE ) {
+        TDLog.v("MENU-image tapped " + onMenu + " MENU visible ");
+        mMenu.setVisibility( View.GONE );
+        onMenu = false;
+      } else {
+        TDLog.v("MENU-image tapped " + onMenu + " MENU not visible ");
+        mMenu.setVisibility( View.VISIBLE );
+        onMenu = true;
+      }
+      // updateDisplay();
+      return;
+    }
+
+    // if ( b == mBtHelp ) {
+    //   doHelp();
+    //   return;
+    // } else if ( b == mBtClose ) {
+    //   super.onBackPressed();
+    //   return;
+    // }
 
     int k = 0;
     if ( hasGps && /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS

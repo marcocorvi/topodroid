@@ -11,18 +11,7 @@
       android:layout_height="wrap_content"
       android:orientation="horizontal"
       >
-      <!-- LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_toStartOf="@+id/right"
-      -->
-      <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
-          android:layout_width="match_parent"
-          android:layout_height="50dp"
-      />
-      <!-- /LinearLayout -->
-   
-      <!-- LinearLayout android:id="@+id/right"
+      <LinearLayout android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
@@ -34,28 +23,32 @@
             android:background="@drawable/ic_menu"
             android:contentDescription="@string/desc_menu"
       />
-      </LinearLayout -->
+      </LinearLayout>
+      <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toStartOf="@id/right"
+      />
    </RelativeLayout>
 
-<FrameLayout 
-  style="@style/base_padding"
-  android:layout_width="match_parent" 
-  android:layout_height="match_parent"
-  android:orientation="vertical"
-  >
+  <FrameLayout android:id="@+id/frame_list"
+    style="@style/base_padding"
+    android:layout_width="match_parent" 
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
 
    <ListView android:id="@+id/fx_list"
      style="@style/list_top"
+     android:background="#111"
      android:layout_width="match_parent"
      android:layout_height="match_parent"
      android:paddingTop="@dimen/marginvbig"
    />  
 
-
-   <!-- ListView android:id="@+id/menu"
+   <ListView android:id="@+id/menu"
      style="@style/menu_default"
-   / -->
-
+   />
   </FrameLayout>
 
   <!-- TO INCLUDE A TOOLBAR

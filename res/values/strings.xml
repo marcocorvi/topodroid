@@ -1130,11 +1130,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_edit_user_station">Edit user station </string>
     <string name="title_edit_station">Edit station </string>
     <string name="title_erase">Erase</string>
-    <string name="title_fixed">Locations</string>
-    <string name="title_fixed_edit">Location edit</string>
-    <string name="title_fixed_import">Location import</string>
-    <string name="title_fixed_gps">Location GPS</string>
-    <string name="title_fixed_add">Location insert</string>
+    <string name="title_fixed">Geo-localized points</string>
+    <string name="title_fixed_edit">Geo-point edit</string>
+    <string name="title_fixed_import">Geo-point import</string>
+    <string name="title_fixed_gps">GPS geo-point</string>
+    <string name="title_fixed_add">Geo-point insert</string>
     <string name="title_manual">TopoDroid User Manual</string>
     <string name="title_mode">Display Mode</string>
     <string name="title_move">Moving</string>
