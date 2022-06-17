@@ -70,8 +70,8 @@ public class CalibActivity extends Activity
   private static final int[] izons = { // icons when the calibration is in the database
                         R.drawable.iz_save,
                         R.drawable.iz_open,
-                        R.drawable.iz_read,
-			R.drawable.iz_empty
+                        R.drawable.iz_read 
+			// R.drawable.iz_empty // EMPTY
                      };
 
   private BitmapDrawable mBMopen;
@@ -184,7 +184,7 @@ public class CalibActivity extends Activity
       if ( k == 1 )      { mBMopen = MyButton.getButtonBackground( mApp, res, izons[k] ); }
       else if ( k == 2 ) { mBMread = MyButton.getButtonBackground( mApp, res, izons[k] ); }
     }
-    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
     mBMopen_no = MyButton.getButtonBackground( mApp, res, izonsno[1] );
     mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[2] );
 

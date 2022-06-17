@@ -100,7 +100,7 @@ class DrawingShotDialog extends MyDialog
    */
   DrawingShotDialog( Context context, DrawingWindow parent, DrawingPath shot, int flag )
   {
-    super(context, R.string.DrawingShotDialog );
+    super(context, null, R.string.DrawingShotDialog ); // null app
     mParent  = parent;
     mBlock   = shot.mBlock;
     mColor   = mBlock.getPaintColor();

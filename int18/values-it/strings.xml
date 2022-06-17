@@ -1844,7 +1844,15 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cmenu_sketch">Disegni</string>
     <!-- NO string name="cmenu_fractal">Dim. frattale</string -->
 
-    <!-- UNUSED string name="fractal_title">Computo frattale</string -->
+    <!-- NO string name="fractal_title">Computo frattale</string -->
+    <!-- NO string name="fractal_title">Fractal result</string -->
+    <!-- NO string name="fractal_cnt_total">count</string -->
+    <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
+    <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
+    <!-- NO string name="fractal_failed">Fractal compute failed</string -->
+    <!-- NO string name="fractal_dimension">Fractal dimension</string -->
+    <!-- TODO string name="illegal_value">Illegal value</string -->
+
     <!-- UNUSED string name="info_title">INFO</string -->
     <string name="info_surveys">RILIEVI</string>
     <!-- UNUSED string name="info_axes">Assi: blu Nord, verde Est</string -->

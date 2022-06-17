@@ -83,8 +83,8 @@ public class SurveyWindow extends Activity
                         R.drawable.iz_3d,
                         R.drawable.iz_gps,
                         R.drawable.iz_camera,
-                        R.drawable.iz_sensor,
-			R.drawable.iz_empty
+                        R.drawable.iz_sensor
+			// R.drawable.iz_empty // EMPTY
                      };
   private static final int INDEX_3D = 2; // index of button-3D if any
 
@@ -291,7 +291,7 @@ public class SurveyWindow extends Activity
       mButton1[kb++] = MyButton.getButton( mActivity, this, izons[k] );
     }
     mNrButton1 = kb;
-    mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );

@@ -52,7 +52,7 @@ class DrawingLabelDialog extends MyDialog
    */
   DrawingLabelDialog( Context context, DrawingWindow activity, float x, float y )
   {
-    super(context, R.string.DrawingLabelDialog );
+    super(context, null, R.string.DrawingLabelDialog ); // null app
     mActivity = activity;
     mX = x; 
     mY = y;

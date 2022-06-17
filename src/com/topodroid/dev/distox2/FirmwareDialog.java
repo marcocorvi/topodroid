@@ -54,15 +54,13 @@ public class FirmwareDialog extends MyDialog
 
   private EditText mETfile;
 
-  private final TopoDroidApp   mApp;
   private final Resources mRes;
   private KeyListener    mETkeyListener;
 
   public FirmwareDialog( Context context, Resources res, TopoDroidApp app )
   {
-    super( context, R.string.FirmwareDialog );
+    super( context, app, R.string.FirmwareDialog ); 
     mRes     = res;
-    mApp     = app;
   }
 
   @Override

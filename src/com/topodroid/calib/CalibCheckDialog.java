@@ -60,7 +60,7 @@ public class CalibCheckDialog extends MyDialog
    */
   public CalibCheckDialog( Context context, SurveyWindow parent, List< DBlock > shots )
   {
-    super( context, R.string.CalibCheckDialog );
+    super( context, null, R.string.CalibCheckDialog ); // null app
     // mParent = parent;
     mShots  = shots;
   }

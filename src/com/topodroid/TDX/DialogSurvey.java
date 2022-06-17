@@ -28,13 +28,13 @@ class DialogSurvey extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
   private Cave3DSurvey mSurvey;
 
-  public DialogSurvey( TopoGL app, Cave3DSurvey survey )
+  public DialogSurvey( TopoGL topogl, Cave3DSurvey survey )
   {
-    super( app, R.string.DialogSurvey );
-    mApp    = app;
+    super( topogl, null, R.string.DialogSurvey ); // null app
+    mTopoGl = topogl;
     mSurvey = survey;
   }
 

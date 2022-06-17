@@ -84,7 +84,7 @@ class FixedImportDialog extends MyDialog
    */
   FixedImportDialog( Context context, FixedActivity parent, ArrayList<String> gps_points )
   {
-    super( context, R.string.FixedImportDialog );
+    super( context, null, R.string.FixedImportDialog ); // null app
     mParent  = parent;
     mArrayAdapter = new ArrayAdapter<>( mContext, R.layout.message );
     mNrPoints = gps_points.size();

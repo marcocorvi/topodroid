@@ -35,7 +35,7 @@ class TopoDroidPerms extends MyDialog
 
   TopoDroidPerms( Context context, int check_perms )
   {
-    super( context, R.string.TopoDroidPerms );
+    super( context, null, R.string.TopoDroidPerms ); // null app
     // mContext = context;
     initLayout(R.layout.topodroid_perms,
       String.format( context.getResources().getString(R.string.welcome_title), TDVersion.string() ) );

@@ -54,7 +54,7 @@ class ShotPhotoDialog extends MyDialog
    */
   ShotPhotoDialog( Context context, ShotWindow parent, long sid, String name )
   {
-    super( context, R.string.ShotPhotoDialog );
+    super( context, null, R.string.ShotPhotoDialog ); // null app
     mParent = parent;
     mSid    = sid;
     mName   = name;

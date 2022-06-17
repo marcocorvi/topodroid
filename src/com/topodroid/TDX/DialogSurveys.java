@@ -32,18 +32,18 @@ import android.view.View.OnClickListener;
 class DialogSurveys extends MyDialog
                     implements OnClickListener
 {
-  private TopoGL  mApp;
+  private TopoGL  mTopoGl;
   private List< Cave3DSurvey > mSurveys;
 
   private SurveyAdapter mAdapter;
   private ListView mList;
 
-  DialogSurveys( Context context, TopoGL app, List< Cave3DSurvey > surveys )
+  DialogSurveys( Context context, TopoGL topogl, List< Cave3DSurvey > surveys )
   {
-    super( context, R.string.DialogSurveys );
-    mApp     = app;
+    super( context, null, R.string.DialogSurveys ); // null app
+    mTopoGl  = topogl;
     mSurveys = surveys;
-    mAdapter = new SurveyAdapter( mContext, mApp, R.layout.survey_row, surveys );
+    mAdapter = new SurveyAdapter( mContext, mTopoGl, R.layout.survey_row, surveys );
   }
 
   @Override
@@ -65,8 +65,8 @@ class DialogSurveys extends MyDialog
   @Override
   public void onBackPressed()
   {
-    // mApp.toast( "surveys dialog done" );
-    mApp.hideOrShow( mSurveys );
+    // mTopoGl.toast( "surveys dialog done" );
+    mTopoGl.hideOrShow( mSurveys );
     dismiss();
   }
 
@@ -74,7 +74,7 @@ class DialogSurveys extends MyDialog
   public void onClick( View v )
   {
     if ( v.getId() == R.id.button_ok ) {
-      mApp.hideOrShow( mSurveys );
+      mTopoGl.hideOrShow( mSurveys );
     } // else only button_cancel
     dismiss();
   }

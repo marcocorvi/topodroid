@@ -51,7 +51,7 @@ class ShotDeleteDialog extends MyDialog
    */
   ShotDeleteDialog( Context context, ShotWindow parent, DBlock blk )
   {
-    super( context, R.string.ShotDeleteDialog );
+    super( context, null, R.string.ShotDeleteDialog ); // null app
     mParent  = parent;
     mBlk = blk;
     // TDLog.Log( TDLog.LOG_PHOTO, "PhotoSensorDialog");

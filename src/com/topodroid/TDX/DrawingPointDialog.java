@@ -68,7 +68,7 @@ class DrawingPointDialog extends MyDialog
 
   DrawingPointDialog( Context context, DrawingWindow parent, DrawingPointPath point )
   {
-    super( context, R.string.DrawingPointDialog );
+    super( context, null, R.string.DrawingPointDialog ); // null app
     mParent = parent;
     mPoint  = point;
     mPointType = mPoint.mPointType;

@@ -85,7 +85,7 @@ class DrawingStationDialog extends MyDialog
                           boolean is_barrier, boolean is_hidden, // boolean global_xsections,
                           List< DBlock > blk )
     {
-      super( context, R.string.DrawingStationDialog );
+      super( context, null, R.string.DrawingStationDialog ); // null app
       mParent   = parent;
       mApp      = app;
       mStation  = station;

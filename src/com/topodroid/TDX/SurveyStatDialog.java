@@ -44,7 +44,7 @@ class SurveyStatDialog extends MyDialog
 
   SurveyStatDialog( Context context, SurveyStat stat )
   {
-    super( context, R.string.SurveyStatDialog );
+    super( context, null, R.string.SurveyStatDialog ); // null app
     mStat = stat;
     // TDLog.Log(TDLog.LOG_STAT, "SurveyStat cstr");
   }

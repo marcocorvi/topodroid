@@ -52,7 +52,7 @@ class PlotZoomFitDialog extends MyDialog
 
   PlotZoomFitDialog( Context context, DrawingWindow parent )
   {
-    super( context, R.string.PlotZoomFitDialog );
+    super( context, null, R.string.PlotZoomFitDialog ); // null app
     mParent = parent;
   }
 

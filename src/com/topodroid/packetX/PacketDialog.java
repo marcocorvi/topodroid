@@ -56,7 +56,7 @@ public class PacketDialog extends MyDialog
 
   public PacketDialog( Context context )
   {
-    super( context, R.string.PacketDialog );
+    super( context, null, R.string.PacketDialog ); // null app
     // mParent      = parent;
     mLogger = new PacketLogger( mContext );
   }

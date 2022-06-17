@@ -66,7 +66,7 @@ public class DeviceA3MemoryDialog extends MyDialog
 
   public DeviceA3MemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context, R.string.DeviceA3MemoryDialog );
+    super( context, null, R.string.DeviceA3MemoryDialog ); // null app
     mParent = parent;
   }
 

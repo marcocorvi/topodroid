@@ -70,7 +70,7 @@ class DialogIco extends MyDialog
    */
   public DialogIco( Context context, TglParser parser )
   {
-    super( context, R.string.DialogIco );
+    super( context, null, R.string.DialogIco ); // null app
 
     DisplayMetrics dm = context.getResources().getDisplayMetrics();
     // double density  = dm.density;

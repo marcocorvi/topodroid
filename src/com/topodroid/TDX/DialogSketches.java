@@ -34,14 +34,14 @@ class DialogSketches extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
   private GlRenderer mRenderer;
   // private List< GlSketch > sketches;
 
-  public DialogSketches( Context context, TopoGL app, GlRenderer renderer )
+  public DialogSketches( Context context, TopoGL topogl, GlRenderer renderer )
   {
-    super( context, R.string.DialogSketches );
-    mApp      = app;
+    super( context, null, R.string.DialogSketches ); // null app
+    mTopoGl   = topogl;
     mRenderer = renderer;
     // sketches = renderer.getSketches();
     // TDLog.v("TopoGL sketches " + sketches.size() );
@@ -62,7 +62,7 @@ class DialogSketches extends MyDialog
     mOk.setOnClickListener( this );
     // mClose.setOnClickListener( this );
 
-    SketchAdapter sketchAdapter = new SketchAdapter( mContext, mApp, R.layout.sketch_row, new ArrayList<GlSketch>() );
+    SketchAdapter sketchAdapter = new SketchAdapter( mContext, mTopoGl, R.layout.sketch_row, new ArrayList<GlSketch>() );
 
     // TDLog.v("sketch adapter size " + sketchAdapter.size() );
 
@@ -81,7 +81,7 @@ class DialogSketches extends MyDialog
   public void onClick(View view)
   {
     if ( view.getId() == R.id.btn_load ) {
-      mApp.loadSketch();
+      mTopoGl.loadSketch();
     } else if ( view.getId() == R.id.btn_bind ) {
       GlSketch.rebindTexture();
     } else if ( view.getId() == R.id.btn_ok ) {

@@ -43,7 +43,7 @@ class PlotRenameDialog extends MyDialog
 
   PlotRenameDialog( Context context, DrawingWindow parent /*, TopoDroidApp app */ )
   {
-    super( context, R.string.PlotRenameDialog );
+    super( context, null, R.string.PlotRenameDialog ); // null app
     mParent = parent;
     mStation = mParent.getPlotStation();
     mName    = mParent.getPlotName();

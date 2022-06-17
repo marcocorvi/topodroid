@@ -54,7 +54,7 @@ public class CalibImportDialog extends MyDialog
 
   public CalibImportDialog( Context context, DeviceActivity parent )
   {
-    super( context, R.string.CalibImportDialog );
+    super( context, null, R.string.CalibImportDialog ); // null app
     mParent  = parent;
   }
 

@@ -50,7 +50,7 @@ class DialogAnnotations extends MyDialog // Activity
    */
   DialogAnnotations( Context context, String name )
   {
-    super( context, R.string.DialogAnnotations );
+    super( context, null, R.string.DialogAnnotations ); // null app
     mName = name;
   }
 

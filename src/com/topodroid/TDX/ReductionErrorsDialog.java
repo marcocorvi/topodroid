@@ -46,7 +46,7 @@ public class ReductionErrorsDialog extends MyDialog
   public ReductionErrorsDialog( Context context, // DrawingWindow parent,
                     int multi_bad, int magnetic_bad, boolean extend_bad, boolean attached_bad )
   {
-    super( context, R.string.ReductionErrorsDialog );
+    super( context, null, R.string.ReductionErrorsDialog ); // null app
     // mParent = new WeakReference<GMActivity>( parent );
 
     mMultiBad    = multi_bad;

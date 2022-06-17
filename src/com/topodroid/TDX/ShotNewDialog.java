@@ -51,7 +51,6 @@ class ShotNewDialog extends MyDialog
                     , IBearingAndClino
 {
   // private ShotWindow mParent;
-  private final TopoDroidApp mApp;
   private final ILister mLister;
   private DBlock mPrevBlk;
   private boolean  notDone;
@@ -101,8 +100,7 @@ class ShotNewDialog extends MyDialog
    */
   ShotNewDialog( Context context, TopoDroidApp app, ILister lister, DBlock last_blk, long at )
   {
-    super( context, R.string.ShotNewDialog );
-    mApp     = app;
+    super( context, app, R.string.ShotNewDialog );
     mLister  = lister;
     mPrevBlk = last_blk;
     notDone  = true;

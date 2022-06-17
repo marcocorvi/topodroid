@@ -48,7 +48,7 @@ class DialogR extends MyDialog
   //
   DialogR( Context context, MainWindow parent )
   {
-    super(context, R.string.DialogR );
+    super(context, null, R.string.DialogR ); // null app
     mParent = parent;
   }
 

@@ -47,7 +47,7 @@ public class CalibValidateListDialog extends MyDialog
 
   public CalibValidateListDialog( Context context, GMActivity parent, List< String > calibs )
   {
-    super( context, R.string.CalibValidateListDialog );
+    super( context, null, R.string.CalibValidateListDialog ); // null app
     mParent  = parent;
     mCalibs  = calibs;
   }

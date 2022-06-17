@@ -37,7 +37,7 @@ class ShotDisplayDialog extends MyDialog
 
     ShotDisplayDialog( Context context, ShotWindow parent )
     {
-      super( context, R.string.ShotDisplayDialog );
+      super( context, null, R.string.ShotDisplayDialog ); // null app
       mParent = parent;
     }
 

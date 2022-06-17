@@ -37,7 +37,7 @@ class DialogProjection extends MyDialog
    */
   public DialogProjection( Context context, GlRenderer renderer )
   {
-    super( context, R.string.DialogProjection );
+    super( context, null, R.string.DialogProjection ); // null app
     mRenderer = renderer;
   }
 

@@ -698,6 +698,10 @@
     <!-- UNUSED string name="h_section">H-截面图</string -->
     <!-- UNUSED string name="landscape">地形</string -->
 
+    <!-- TODO string name="display_view">Display</string -->
+    <!-- TODO string name="plan_view">plan</string -->
+    <!-- TODO string name="profile_view">profile</string -->
+
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX内存读取失败</string>
     <string name="distox_err_headtail_io">DistoX内存读写错误</string>
@@ -721,6 +725,7 @@
     <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
     <string name="button_compute"   >计算</string>
+    <!-- TODO string name="button_clear_convert">Clear convert</string -->
     <string name="button_convert"   >转换   </string>
     <string name="button_copy"      >拷贝</string>
     <string name="button_current"   >激活    </string>
@@ -941,6 +946,7 @@
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <string name="help_symbol">绘图工具设置</string>
     <string name="help_therion">洞穴项目管理</string>
+    <!-- TODO string name="help_cave3d">Cave3D, 3D viewer</string -->
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <!-- UNUSED string name="help_log">日志偏好设置</string -->
@@ -1044,6 +1050,7 @@
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
     <string name="export_dxf_blocks">DXF块</string>
+    <!-- TODO string name="export_dxf_version">Version</string -->
     <string name="export_georeference">地理参考</string>
     <string name="export_grid">网格</string>
     <string name="export_linedir">线方向</string>
@@ -1129,12 +1136,14 @@
     <string name="title_photo">更多测线编辑</string>
     <string name="title_photo_comment">照片注释</string>
     <string name="title_photo_list">照片</string>
+    <!-- TODO string name="title_photo_view">Photo</string -->
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
     <string name="title_plot_scraps">草图层</string>
     <string name="title_profile_flip">翻转剖面草图 ?</string>
     <string name="title_projection">投影剖面方位 %1$d</string>
+    <!-- TODO string name="title_reduction_errors">Survey data-reduction anomalies</string -->
     <string name="title_refs">草图参考</string>
     <string name="title_scraps">绘制草图</string>
     <string name="title_scraps_outline">草图轮廓</string>
@@ -1203,6 +1212,10 @@
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
 
+  <!-- TODO string name="exported_settings">Exported settings %1$s</string -->
+  <string name="imported_settings">输入设置</string>
+  <!-- TODO string name="imported_settings_failed">Failed to import settings</string -->
+  <!-- TODO string name="export_settings_failed">Failed to export settings</string -->
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
@@ -1813,7 +1826,6 @@
     <string name="title_surveys">测量</string>
 
     <string name="exported">保存文件 %1$s</string>
-    <string name="imported_settings">输入设置</string>
     <string name="export_failed">输出失败</string>
 
     <!-- TODO string name="image_diagram">Direction diagram</string -->
@@ -1839,7 +1851,15 @@
     <string name="cmenu_sketch">草图</string>
     <!-- NO string name="cmenu_fractal">分形计算</string -->
 
-    <!-- UNUSED string name="fractal_title">分形计算</string -->
+    <!-- NO string name="fractal_title">分形计算</string -->
+    <!-- NO string name="fractal_title">Fractal result</string -->
+    <!-- NO string name="fractal_cnt_total">count</string -->
+    <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
+    <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
+    <!-- NO string name="fractal_failed">Fractal compute failed</string -->
+    <!-- NO string name="fractal_dimension">Fractal dimension</string -->
+    <!-- TODO string name="illegal_value">Illegal value</string -->
+
     <!-- UNUSED string name="info_title">信息</string -->
     <string name="info_surveys">测量</string>
     <!-- UNUSED string name="info_axes">坐标轴: 蓝 北, 绿 东</string -->

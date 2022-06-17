@@ -51,7 +51,7 @@ public class CalibValidateResultDialog extends MyDialog
                              double a0, double s0, double a1, double s1,
                              double e1, double e2, double em, String n1, String n2 )
   {
-    super( context, R.string.CalibValidateResultDialog );
+    super( context, null, R.string.CalibValidateResultDialog ); // null app
 
     errors0 = errs0;
     errors1 = errs1;

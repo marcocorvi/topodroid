@@ -70,7 +70,7 @@ class AzimuthDialog extends MyDialog
   // AzimuthDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial ) // FIXME_AZIMUTH_DIAL 2
   AzimuthDialog( Context context, ILister parent, float azimuth, Bitmap dial ) // FIXME_AZIMUTH_DIAL 1
   {
-    super(context, R.string.AzimuthDialog );
+    super(context, null, R.string.AzimuthDialog ); // null app
     mParent  = parent;
     mAzimuth = azimuth;
     // mDialBitmap = dial;

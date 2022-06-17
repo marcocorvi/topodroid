@@ -80,7 +80,7 @@ class AudioDialog extends MyDialog
    */
   AudioDialog( Context ctx, IAudioInserter parent, long bid, DBlock blk )
   {
-    super( ctx, R.string.AudioDialog );
+    super( ctx, null, R.string.AudioDialog ); // null app
 
     mParent = parent;
     mBid = bid;

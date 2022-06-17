@@ -53,7 +53,7 @@ public class DeviceX310InfoDialog extends MyDialog
    */
   public DeviceX310InfoDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context, R.string.DeviceX310InfoDialog );
+    super( context, null, R.string.DeviceX310InfoDialog ); // null app
     mParent = parent;
     mDevice = device;
   }

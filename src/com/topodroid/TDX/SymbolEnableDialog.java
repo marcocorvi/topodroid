@@ -63,7 +63,7 @@ class SymbolEnableDialog extends MyDialog
 
   SymbolEnableDialog( Context context )
   {
-    super( context, R.string.SymbolEnableDialog );
+    super( context, null, R.string.SymbolEnableDialog ); // null app
     mType    = SymbolType.LINE; // default symbols are lines
   }
 

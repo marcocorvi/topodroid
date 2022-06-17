@@ -101,7 +101,7 @@ class FixedGpsDialog extends MyDialog
   @SuppressLint("MissingPermission")
   FixedGpsDialog(Context context, FixedActivity parent )
   {
-    super(context, R.string.FixedGpsDialog );
+    super( context, null, R.string.FixedGpsDialog ); // null app
     mParent = parent;
     if ( TDandroid.checkLocation( context ) ) { // CHECK_PERMISSIONS
       locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );

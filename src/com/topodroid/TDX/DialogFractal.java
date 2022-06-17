@@ -53,7 +53,7 @@ class DialogFractal extends MyDialog
    */
   public DialogFractal( Context context, TglParser parser )
   {
-    super( context, R.string.DialogFractal );
+    super( context, null, R.string.DialogFractal ); // null app
     mParser = parser;
     mResult = new FractalResult( this );
   }

@@ -56,7 +56,7 @@ class SetupDrawingUnitDialog extends MyDialog
 
   SetupDrawingUnitDialog( Context context, MainWindow parent, int setup, float size )
   {
-    super( context, R.string.SetupDrawingUnitDialog ); 
+    super( context, null, R.string.SetupDrawingUnitDialog ); // null app
     mParent = parent;
     mSetup  = setup;
     mSize   = size;

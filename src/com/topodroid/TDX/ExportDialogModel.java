@@ -63,7 +63,7 @@ public class ExportDialogModel extends MyDialog
    */
   public ExportDialogModel( Context context, TopoGL parent, TglParser parser, String[] types, int title )
   {
-    super( context, R.string.ExportDialogModel );
+    super( context, null, R.string.ExportDialogModel ); // null app
     mParent = parent;
     mParser = parser;
     mTypes  = types;

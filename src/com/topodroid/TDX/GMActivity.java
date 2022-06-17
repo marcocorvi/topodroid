@@ -110,7 +110,7 @@ public class GMActivity extends Activity
                         R.drawable.iz_cover,
                         R.drawable.iz_read,
                         R.drawable.iz_write,
-                        R.drawable.iz_empty
+                        R.drawable.iz_empty // EMPTY
                      };
   final static private int BTN_TOGGLE   = 0;
   final static private int BTN_BT       = 1;
@@ -834,7 +834,7 @@ public class GMActivity extends Activity
     for ( int k=0; k < mNrButton1; ++k ) { // add also EMPTY button
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
-    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
     if ( TDLevel.overAdvanced && TDInstance.deviceType() == Device.DISTO_X310 ) {
       mButton1[ BTN_BT ].setOnLongClickListener( this );
     }

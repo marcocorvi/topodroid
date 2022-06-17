@@ -86,7 +86,7 @@ class ShotEditMoreDialog extends MyDialog
    */
   ShotEditMoreDialog( Context context, ShotWindow parent, DBlock blk )
   {
-    super( context, R.string.ShotEditMoreDialog );
+    super( context, null, R.string.ShotEditMoreDialog ); // null app
     mParent  = parent;
     mBlk = blk;
     // TDLog.Log( TDLog.LOG_PHOTO, "Shot EditMore Dialog");

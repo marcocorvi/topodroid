@@ -20,6 +20,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyHorizontalListView;
+import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDPrefActivity;
 import com.topodroid.prefs.TDPrefHelper;
 import com.topodroid.prefs.TDSetting;
@@ -1025,6 +1026,12 @@ public class TopoDroidApp extends Application
     super.attachBaseContext( TDInstance.context );
   }
 
+  private MyDialog mCurrentDialog = null;
+
+  public void popDialog() { mCurrentDialog = null; }
+
+  public void pushDialog( MyDialog dialog ) { mCurrentDialog = dialog; }
+
   /** react to a change of configuration
    * @param cfg  new configuration
    */
@@ -1032,10 +1039,11 @@ public class TopoDroidApp extends Application
   public void onConfigurationChanged( Configuration cfg )
   {
     super.onConfigurationChanged( cfg );
-    // boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
-    TDLog.v("APP config change" );
+    boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
+    TDLog.v("APP config change - landscape " + landscape );
     TDLocale.resetTheLocale( );
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
+    if ( mCurrentDialog != null ) mCurrentDialog.doInit( landscape );
   }
 
   /** set the current work directory

@@ -61,7 +61,7 @@ public class PhotoListDialog extends MyDialog
    */
   public PhotoListDialog( Context ctx, DataHelper data_helper )
   {
-    super( ctx, R.string.PhotoListDialog );
+    super( ctx, null, R.string.PhotoListDialog ); // null app
     mApp_mData = data_helper;
   }
 

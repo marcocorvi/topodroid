@@ -39,7 +39,7 @@ class SurveyCalibrationDialog extends MyDialog
    */
   SurveyCalibrationDialog( Context context )
   {
-    super( context, R.string.SurveyCalibrationDialog );
+    super( context, null, R.string.SurveyCalibrationDialog ); // null app
   }
 
   @Override

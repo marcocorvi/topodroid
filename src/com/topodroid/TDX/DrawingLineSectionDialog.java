@@ -90,7 +90,7 @@ class DrawingLineSectionDialog extends MyDialog
                             DrawingLinePath line, String from, String to, float azimuth, float clino, float tt0,
                             Vector3D center )
   {
-    super( context, R.string.DrawingLineSectionDialog );
+    super( context, null, R.string.DrawingLineSectionDialog ); // null app
     mParent = parent;
     // mApp  = app;
     mExists = exists;      // whether the section exists or it is being created

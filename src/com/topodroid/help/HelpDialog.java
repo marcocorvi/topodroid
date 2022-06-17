@@ -56,7 +56,7 @@ public class HelpDialog extends MyDialog
    */
   public HelpDialog( Context context, int[] icons, int[] menus, int[] texts1, int[] texts2, int n0, int n1, String page )
   {
-    super( context, R.string.HelpDialog ); 
+    super( context, null, R.string.HelpDialog ); // null app
     mIcons = icons;
     mMenus = menus;
     mIconTexts = texts1;

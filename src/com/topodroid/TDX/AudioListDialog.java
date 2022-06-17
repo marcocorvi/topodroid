@@ -56,7 +56,7 @@ class AudioListDialog extends MyDialog
    */
   AudioListDialog( Context context, ShotWindow parent, List< AudioInfo > audios, List< DBlock > shots )
   {
-    super( context, R.string.AudioListDialog );
+    super( context, null, R.string.AudioListDialog ); // null app
     mParent = parent;
     mSurveyAudios = audios;
     mShots  = shots;

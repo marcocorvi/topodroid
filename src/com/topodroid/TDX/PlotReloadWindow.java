@@ -66,8 +66,8 @@ public class PlotReloadWindow extends ItemDrawer
   private static final int[] izons = {
                         R.drawable.iz_back,       // 0
                         R.drawable.iz_forw,          // 1
-                        R.drawable.iz_reload,
-			R.drawable.iz_empty
+                        R.drawable.iz_reload
+			// R.drawable.iz_empty // EMPTY
                       };
   // FIXME_OVER private static int BTN_PLOT = 2;
 
@@ -298,7 +298,7 @@ public class PlotReloadWindow extends ItemDrawer
     for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
     }
-    mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );

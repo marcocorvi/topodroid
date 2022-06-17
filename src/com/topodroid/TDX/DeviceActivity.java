@@ -135,8 +135,8 @@ public class DeviceActivity extends Activity
                         R.drawable.iz_toggle,
                         R.drawable.iz_compute,
                         R.drawable.iz_read,
-                        R.drawable.iz_sdcard,
-			R.drawable.iz_empty
+                        R.drawable.iz_sdcard
+			// R.drawable.iz_empty // EMPTY
                      };
 
   private BitmapDrawable mBMtoggle;
@@ -340,7 +340,7 @@ public class DeviceActivity extends Activity
     for ( int k=0; k < mNrButton1; ++k ) {
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
-    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
     mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[IDX_TOGGLE] );
     mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_TOGGLE] );

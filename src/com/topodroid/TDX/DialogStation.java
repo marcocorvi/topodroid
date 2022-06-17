@@ -33,15 +33,15 @@ class DialogStation extends MyDialog
   private Button mBtCenter;
   private TextView mTvSurface;
 
-  private TopoGL     mApp;
+  private TopoGL     mTopoGl;
   private TglParser  mParser;
   private Cave3DStation  mStation;
   private DEMsurface  mSurface;
 
-  public DialogStation( Context context, TopoGL app, TglParser parser, String fullname, DEMsurface surface )
+  public DialogStation( Context context, TopoGL topogl, TglParser parser, String fullname, DEMsurface surface )
   {
-    super(context, R.string.DialogStation );
-    mApp     = app;
+    super(context, null, R.string.DialogStation ); // null app
+    mTopoGl  = topogl;
     mParser  = parser;
     mStation = mParser.getStation( fullname );
     mSurface = ( surface != null )? surface : parser.getSurface();
@@ -93,14 +93,14 @@ class DialogStation extends MyDialog
   public void onClick(View v)
   {
     // only for button_close
-    mApp.closeCurrentStation();
+    mTopoGl.closeCurrentStation();
     dismiss();
   }
 
   @Override
   public void onBackPressed()
   {
-    mApp.closeCurrentStation();
+    mTopoGl.closeCurrentStation();
     super.onBackPressed();
   }
 }

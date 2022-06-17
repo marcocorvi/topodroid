@@ -39,7 +39,7 @@ public class BricInfoDialog extends MyDialog
    */
   public BricInfoDialog( Context ctx, DeviceActivity parent, Resources res, Device device )
   {
-    super( ctx, R.string.BricInfoDialog );
+    super( ctx, null, R.string.BricInfoDialog ); // null app
     mParent = parent;
     mRes    = res;
     mDevice = device;

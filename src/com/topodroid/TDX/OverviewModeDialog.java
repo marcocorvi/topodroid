@@ -44,7 +44,7 @@ class OverviewModeDialog extends MyDialog
 
     OverviewModeDialog( Context context, OverviewWindow parent, DrawingSurface surface )
     {
-      super(context, R.string.OverviewModeDialog );
+      super(context, null, R.string.OverviewModeDialog ); // null app
       // mParent  = parent;
       mSurface = surface;
     }

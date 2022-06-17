@@ -63,7 +63,7 @@ class FixedAddDialog extends MyDialog
 
   FixedAddDialog( Context context, FixedActivity parent )
   {
-    super( context, R.string.FixedAddDialog );
+    super( context, null, R.string.FixedAddDialog ); // null app
     mParent = parent;
   }
 

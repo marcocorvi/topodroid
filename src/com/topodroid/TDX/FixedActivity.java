@@ -35,10 +35,6 @@ import android.content.Intent;
 import android.content.ActivityNotFoundException;
 import android.content.res.Configuration;
 
-// import android.widget.TextView;
-// import android.widget.EditText;
-import android.widget.Button;
-import android.view.View;
 
 import android.net.Uri;
 
@@ -55,20 +51,20 @@ import android.app.Activity;
 
 // import android.content.Context;
 
-// import android.view.inputmethod.EditorInfo;
+import android.view.View;
 import android.view.KeyEvent;
+// import android.view.inputmethod.EditorInfo;
 // import android.view.ViewGroup.LayoutParams;
 
 // import android.widget.TextView;
 // import android.widget.EditText;
-// import android.widget.Button;
+import android.widget.Button;
+import android.widget.ListView;
 // import android.widget.ArrayAdapter;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.TextView.OnEditorActionListener;
 
-// import android.view.View;
-import android.widget.ListView;
 // import android.inputmethodservice.KeyboardView;
 
 // import android.location.Location;
@@ -91,7 +87,8 @@ public class FixedActivity extends Activity
   private int mNrButton1 = 0;
   private MyHorizontalListView mListView;
   private MyHorizontalButtonView mButtonView1;
-
+  private Button mBtHelp;  
+  private Button mBtClose;
 
   private boolean hasGps = false;
 
@@ -127,6 +124,11 @@ public class FixedActivity extends Activity
 
     setContentView(R.layout.fixed_activity);
     setTitle( R.string.title_fixed );
+
+    mBtHelp  = (Button) findViewById( R.id.button_help );
+    mBtClose = (Button) findViewById( R.id.button_close );
+    mBtHelp.setOnClickListener( this );
+    mBtClose.setOnClickListener( this );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
     // mListView.setEmptyPlaceholder(true);
@@ -210,6 +212,14 @@ public class FixedActivity extends Activity
   public void onClick(View v) 
   {
     Button b = (Button) v;
+
+    if ( b == mBtHelp ) {
+      doHelp();
+      return;
+    } else if ( b == mBtClose ) {
+      super.onBackPressed();
+      return;
+    }
 
     int k = 0;
     if ( hasGps && /* k < mNrButton1 && */ b == mButton1[k++] ) { // GPS
@@ -408,13 +418,17 @@ public class FixedActivity extends Activity
     }
   }
 
+  /** react to a user hw key press
+   * @param code key code
+   * @param event key event
+   * @return true if the key press has been handled
+   */
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
     switch ( code ) {
       case KeyEvent.KEYCODE_MENU:   // HARDWARE MENU (82)
-        String help_page = getResources().getString( R.string.FixedActivity );
-        /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
+        doHelp();
         return true;
       case KeyEvent.KEYCODE_BACK: // HARDWARE BACK (4)
         super.onBackPressed();
@@ -425,6 +439,14 @@ public class FixedActivity extends Activity
         // TDLog.Error( "key down: code " + code );
     }
     return false;
+  }
+
+  /** start user-man window with the help page of this activity
+   */
+  private void doHelp()
+  {
+    String help_page = getResources().getString( R.string.FixedActivity );
+    /* if ( help_page != null ) */ UserManualActivity.showHelpPage( this, help_page );
   }
 
   /** react to a change in the configuration

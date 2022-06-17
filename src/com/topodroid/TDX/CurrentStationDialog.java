@@ -31,6 +31,7 @@ import android.os.Bundle;
 // import android.app.Dialog;
 
 import android.content.Context;
+import android.content.res.Configuration;
 
 import android.view.View;
 // import android.view.View.OnClickListener;
@@ -52,7 +53,6 @@ class CurrentStationDialog extends MyDialog
                            , View.OnLongClickListener
                            , OnItemClickListener
 {
-  private final TopoDroidApp mApp;
   private final ShotWindow mParent;
   private String mStation;    // station name
   private EditText mName;
@@ -79,17 +79,15 @@ class CurrentStationDialog extends MyDialog
    */
   CurrentStationDialog( Context context, ShotWindow parent, TopoDroidApp app, String station )
   {
-    super( context, R.string.CurrentStationDialog );
+    super( context, app, R.string.CurrentStationDialog );
     mParent  = parent;
-    mApp = app;
     mStation = ( station == null )? mApp.getCurrentOrLastStation() : station ;
   }
 
   @Override
   protected void onCreate(Bundle savedInstanceState) 
   {
-    super.onCreate(savedInstanceState);
-
+    super.onCreate( savedInstanceState );
     initLayout( R.layout.current_station_dialog, R.string.title_current_station );
 
     mList = (ListView) findViewById(R.id.list);

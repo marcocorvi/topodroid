@@ -71,7 +71,7 @@ public class ImportDialogShot extends MyDialog
 
   public ImportDialogShot( Context context, MainWindow parent, String[] types, int title )
   {
-    super( context, R.string.ImportDialogShot );
+    super( context, null, R.string.ImportDialogShot ); // null app
     mParent = parent;
     mTypes  = types;
     mSelected = null;

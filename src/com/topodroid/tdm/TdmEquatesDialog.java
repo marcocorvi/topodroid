@@ -48,7 +48,7 @@ class TdmEquatesDialog extends MyDialog
 
   TdmEquatesDialog( Context context, TdmConfig config, TdmViewActivity activity )
   {
-    super( context, R.string.TdmEquatesDialog );
+    super( context, null, R.string.TdmEquatesDialog ); // null app
     mContext = context;
     mConfig  = config;
     mActivity = activity;

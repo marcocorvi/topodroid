@@ -291,7 +291,7 @@ public class MyColorPicker extends MyDialog
      */
     public MyColorPicker( Context context, IColorChanged listener, int initialColor)
     {
-      super(context, 0); // 0 no help
+      super(context, null, 0); // 0 no help // null app
       
       mListener = listener;
       mColor = initialColor;

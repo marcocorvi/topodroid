@@ -70,7 +70,7 @@ public class CalibCoeffDialog extends MyDialog
                     TDVector bg, TDMatrix ag, TDVector bm, TDMatrix am, TDVector nl, float[] errors,
                     float delta_bh, float delta, float delta2, float error, long iter, byte[] coeff /*, boolean saturated */ )
   {
-    super( context, R.string.CalibCoeffDialog );
+    super( context, null, R.string.CalibCoeffDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
     mCoeff = coeff;
 

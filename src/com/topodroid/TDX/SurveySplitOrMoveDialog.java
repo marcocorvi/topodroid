@@ -52,7 +52,7 @@ class SurveySplitOrMoveDialog extends MyDialog
 
   SurveySplitOrMoveDialog( Context context, ShotWindow parent )
   {
-    super( context, R.string.SurveySplitOrMoveDialog );
+    super( context, null, R.string.SurveySplitOrMoveDialog ); // null app
     mParent  = parent;
     mSelected = null;
   }

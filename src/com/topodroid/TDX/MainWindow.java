@@ -136,9 +136,9 @@ public class MainWindow extends Activity
                           R.drawable.iz_import,
                           R.drawable.iz_tools,   // iz_palette
                           R.drawable.iz_3d,      // FIXME CAVE3D
-                          R.drawable.iz_manager, // FIXME THMANAGER
+                          R.drawable.iz_manager  // FIXME THMANAGER
                           // R.drawable.iz_database
-			  R.drawable.iz_empty
+			  // R.drawable.iz_empty // EMPTY
                           };
 
   private static final int[] menus = {
@@ -922,7 +922,7 @@ public class MainWindow extends Activity
       mButton1[k] = MyButton.getButton( mActivity, this, izons[k] );
       // mButton1[k].setElevation(40);
     }
-    mButton1[mNrButton1] = MyButton.getButton( mActivity, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );

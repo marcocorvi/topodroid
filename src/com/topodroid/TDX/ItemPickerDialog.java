@@ -100,7 +100,7 @@ class ItemPickerDialog extends MyDialog
    */
   ItemPickerDialog( Context context, ItemDrawer parent, long type, int item_type  )
   {
-    super( context, R.string.ItemPickerDialog );
+    super( context, null, R.string.ItemPickerDialog ); // null app
     mParent  = new WeakReference<ItemDrawer>( parent );
 
     mPlotType = type;

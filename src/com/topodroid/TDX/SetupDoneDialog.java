@@ -37,7 +37,7 @@ class SetupDoneDialog extends MyDialog
 
   SetupDoneDialog( Context context, MainWindow parent, int setup )
   {
-    super( context, R.string.SetupDoneDialog ); 
+    super( context, null, R.string.SetupDoneDialog ); // null app
     mParent = parent;
     mSetup  = setup;
   }

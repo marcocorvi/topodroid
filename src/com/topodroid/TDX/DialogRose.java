@@ -52,7 +52,7 @@ class DialogRose extends MyDialog
    */
   public DialogRose( Context context, TglParser parser )
   {
-    super( context, R.string.DialogRose );
+    super( context, null, R.string.DialogRose ); // null app
 
     DisplayMetrics dm = context.getResources().getDisplayMetrics();
     // double density  = dm.density;

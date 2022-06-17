@@ -43,7 +43,7 @@ class DrawingPhotoDialog extends MyDialog
 
   DrawingPhotoDialog( Context context, DrawingWindow activity, float x, float y )
   {
-    super(context, R.string.DrawingPhotoDialog );
+    super(context, null, R.string.DrawingPhotoDialog ); // null app
     mActivity = activity;
     mX = x; 
     mY = y;

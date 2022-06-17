@@ -56,7 +56,7 @@ class SearchDialog extends MyDialog
 
   SearchDialog( Context context, ShotWindow parent, String station )
   {
-    super( context, R.string.SearchDialog );
+    super( context, null, R.string.SearchDialog ); // null app
     mParent  = parent;
     mStation = station; // station name if result of a station search
   }

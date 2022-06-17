@@ -78,7 +78,7 @@ public class MyButton extends Button
   {
     Button ret = new Button( ctx );
     ret.setPadding(10,0,10,0);
-    ret.setOnClickListener( click );
+    if ( click != null ) ret.setOnClickListener( click );
     TDandroid.setButtonBackground( ret, getButtonBackground( ctx, ctx.getResources(), res_id ) );
     return ret;
   }
@@ -168,19 +168,18 @@ public class MyButton extends Button
   private float mX, mY;
 
   /** cstr
-   * @param context     context
-   * @param click_listener user-tap listener
+   * @param context context
+   * @param click   user-tap listener
    * @param size    button size
    * @param res_id  ID of the button background
    */
-  public MyButton( Context context, OnClickListener click_listener, int size, int res_id )
+  public MyButton( Context context, OnClickListener click, int size, int res_id )
   {
     super( context );
     mContext = context;
     setPadding(0,0,0,0);
     mSize = size;
-    // mListener = click_listener;
-    setOnClickListener( click_listener );
+    if ( click != null ) setOnClickListener( click );
         
     mBitmap  = getButtonBackground( mContext, size, res_id );
     // mBitmap2 = ( res_id2 > 0 )? getButtonBackground( mContext, size, res_id2 ) : null;

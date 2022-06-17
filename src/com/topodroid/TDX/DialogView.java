@@ -26,7 +26,7 @@ class DialogView extends MyDialog
 {
   private Button mBtnOk;
 
-  private TopoGL  mApp;
+  private TopoGL  mTopoGl;
   private GlRenderer mRenderer;
 
   private Button   mButtonOK;
@@ -40,13 +40,13 @@ class DialogView extends MyDialog
 
   /** cstr
    * @param context  context
-   * @param app      3D viewer activity
+   * @param topogl   3D viewer activity
    * @param renderer screen renderer
    */
-  public DialogView( Context context, TopoGL app, GlRenderer renderer )
+  public DialogView( Context context, TopoGL topogl, GlRenderer renderer )
   {
-    super( context, R.string.DialogView );
-    mApp      = app;
+    super( context, null, R.string.DialogView ); // null app
+    mTopoGl   = topogl;
     mRenderer = renderer;
   }
 
@@ -100,7 +100,7 @@ class DialogView extends MyDialog
         mRenderer.setAngles(  90, 0 );
       }
       if ( mCBzoom.isChecked() ) mRenderer.zoomOne();
-      mApp.refresh();
+      mTopoGl.refresh();
     }
     dismiss();
   }

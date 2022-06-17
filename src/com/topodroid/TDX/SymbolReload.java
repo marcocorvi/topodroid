@@ -35,8 +35,6 @@ import android.view.View;
 class SymbolReload extends MyDialog
                    implements View.OnClickListener
 {
-  private final TopoDroidApp mApp;
-
   private Button mBtnInstall;
   private Button mBtnReplace;
   // private Button mBtnCancel;
@@ -60,8 +58,7 @@ class SymbolReload extends MyDialog
    */
   SymbolReload( Context context, TopoDroidApp app, boolean all )
   {
-    super(context, R.string.SymbolReload );
-    mApp = app;
+    super(context, app, R.string.SymbolReload );
     mAll = all;
   }
 

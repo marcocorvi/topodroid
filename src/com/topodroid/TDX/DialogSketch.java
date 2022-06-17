@@ -41,7 +41,7 @@ class DialogSketch extends MyDialog
                    implements OnItemClickListener
                    , OnClickListener
 {
-  private TopoGL  mApp;
+  private TopoGL  mTopoGl;
   private String  mBaseDir;
 
   private ArrayList< MyFileItem > mItems;
@@ -63,10 +63,10 @@ class DialogSketch extends MyDialog
     }
   }
 
-  DialogSketch( Context context, TopoGL app )
+  DialogSketch( Context context, TopoGL topogl )
   {
-    super( context, R.string.DialogSketch );
-    mApp  = app;
+    super( context, null, R.string.DialogSketch ); // null app
+    mTopoGl  = topogl;
     mBaseDir = TDPath.getC3dPath(); // Cave3DFile.C3D_PATH;
     // TDLog.v("TopoGL sketch base dir " + mBaseDir );
   } 
@@ -141,7 +141,7 @@ class DialogSketch extends MyDialog
       updateList( mBaseDir );
       return;
     }
-    mApp.openSketch( mBaseDir + "/" + name, name );
+    mTopoGl.openSketch( mBaseDir + "/" + name, name );
     dismiss();
   }
 

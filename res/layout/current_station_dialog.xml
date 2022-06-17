@@ -8,8 +8,13 @@
   android:layout_width="match_parent"
   android:layout_height="match_parent"
   >
-
   <LinearLayout android:id="@+id/layout0"
+    android:orientation="vertical"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    >
+
+  <LinearLayout android:id="@+id/layout1"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -45,49 +50,13 @@
     style="@style/edit_text_light"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/layout0"
     android:hint="@string/comment"
     android:singleLine="true"
     android:importantForAutofill="no"
   />
-
-  <LinearLayout android:id="@+id/layout1"
-    android:orientation="horizontal"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_below="@id/comment"
-    android:layout_marginTop="@dimen/marginv"
-    android:layout_marginBottom="@dimen/marginv"
-    android:layout_gravity="end"
-    android:gravity="end"
-    >
-
-    <Button android:id="@+id/button_clear"
-      style="@style/button_default"
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:text="@string/button_clear"
-      android:layout_marginEnd="@dimen/marginh"
-    />
-
-    <Button android:id="@+id/button_push"
-      style="@style/button_default"
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:text="@string/button_save"
-      android:layout_marginEnd="@dimen/marginh"
-    />
-
-    <Button android:id="@+id/button_pop"
-      style="@style/button_default"
-      android:layout_width="0dp"
-      android:layout_weight="25"
-      android:text="@string/button_delete"
-    />
-  </LinearLayout>
+     <!-- android:layout_below="@id/layout1" -->
 
   <LinearLayout android:id="@+id/help"
-    android:layout_below="@id/layout1"
     android:orientation="horizontal"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -95,6 +64,7 @@
     android:layout_marginBottom="@dimen/marginv"
     android:gravity="start"
     >
+    <!-- android:layout_below="@id/comment" -->
     <Button android:id="@+id/button_help"
       style="@style/button_empty"
       android:text="@string/button_help"
@@ -103,15 +73,31 @@
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:gravity="end"
+      android:orientation="horizontal"
       >
       <Button android:id="@+id/button_cancel"
         style="@style/button_default"
         android:text="@string/button_close"
         android:layout_marginEnd="@dimen/marginh"
       />
+      <Button android:id="@+id/button_clear"
+        style="@style/button_default"
+        android:text="@string/button_clear"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_push"
+        style="@style/button_default"
+        android:text="@string/button_save"
+        android:layout_marginEnd="@dimen/marginh"
+      />
       <Button android:id="@+id/button_current"
         style="@style/button_default"
         android:text="@string/button_current"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/button_pop"
+        style="@style/button_default"
+        android:text="@string/button_delete"
       />
     </LinearLayout>
   </LinearLayout>
@@ -120,8 +106,9 @@
     style="@style/list_top"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_below="@id/help"
   />  
+    <!-- android:layout_below="@id/help" -->
+  </LinearLayout>
 
   <android.inputmethodservice.KeyboardView android:id="@+id/keyboardview"
     style="@style/keyboard"

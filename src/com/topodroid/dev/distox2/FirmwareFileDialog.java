@@ -54,7 +54,7 @@ public class FirmwareFileDialog extends MyDialog
 
   public FirmwareFileDialog( Context context, FirmwareDialog parent )
   {
-    super( context, R.string.FirmwareFileDialog );
+    super( context, null, R.string.FirmwareFileDialog ); // null app
     mParent = parent;
   }
 

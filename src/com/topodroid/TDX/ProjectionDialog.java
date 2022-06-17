@@ -99,7 +99,7 @@ class ProjectionDialog extends MyDialog
    */
   ProjectionDialog( Context context, ShotWindow parent, long sid, String name, String from )
   {
-    super( context, R.string.ProjectionDialog ); // FIXME
+    super( context, null, R.string.ProjectionDialog ); // FIXME // null app
     mParent = parent;
     // mDrawingUtil = new DrawingUtilPortrait();
     mSid    = sid;

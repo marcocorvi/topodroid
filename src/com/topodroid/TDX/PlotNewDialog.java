@@ -33,7 +33,6 @@ class PlotNewDialog extends MyDialog
                     implements View.OnClickListener
                     , View.OnLongClickListener
 {
-  private final TopoDroidApp mApp;
   private INewPlot mMaker;
   // private boolean notDone;
 
@@ -56,8 +55,7 @@ class PlotNewDialog extends MyDialog
    */
   PlotNewDialog( Context context, TopoDroidApp app, INewPlot maker, int index )
   {
-    super( context, R.string.PlotNewDialog );
-    mApp    = app;
+    super( context, app, R.string.PlotNewDialog );
     mMaker  = maker;
     mIndex  = index;
     // notDone = true;

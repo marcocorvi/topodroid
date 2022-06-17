@@ -58,7 +58,7 @@ public class DeviceA3InfoDialog extends MyDialog
    */
   public DeviceA3InfoDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context, R.string.DeviceA3InfoDialog );
+    super( context, null, R.string.DeviceA3InfoDialog ); // null app
     mParent = parent;
     mDevice = device;
   }

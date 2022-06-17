@@ -50,7 +50,7 @@ public class DeviceX310MemoryDialog extends MyDialog
 
   public DeviceX310MemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context, R.string.DeviceX310MemoryDialog );
+    super( context, null, R.string.DeviceX310MemoryDialog ); // null app
     mParent = parent;
   }
 

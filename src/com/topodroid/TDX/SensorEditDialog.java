@@ -53,7 +53,7 @@ class SensorEditDialog extends MyDialog
    */
   SensorEditDialog( Context context, SensorListActivity parent, SensorInfo sensor )
   {
-    super( context, R.string.SensorEditDialog );
+    super( context, null, R.string.SensorEditDialog ); // null app
     mParent = parent;
     mSensor  = sensor;
   }

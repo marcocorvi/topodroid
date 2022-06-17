@@ -34,7 +34,7 @@ class DialogLegs extends MyDialog
    */
   public DialogLegs( Context context )
   {
-    super( context, R.string.DialogLegs );
+    super( context, null, R.string.DialogLegs ); // null app
   }
 
   @Override

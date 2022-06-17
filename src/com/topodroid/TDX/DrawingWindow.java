@@ -1980,7 +1980,7 @@ public class DrawingWindow extends ItemDrawer
       else if ( ic == IC_BLUETOOTH ) { mBMbluetooth = MyButton.getButtonBackground( this, res, izons[ic] ); }
       else if ( ic == IC_PLAN ) { mBMplan     = MyButton.getButtonBackground( this, res, izons[ic] ); }
     }
-    mButton1[ mNrButton1 ] = MyButton.getButton( mActivity,this, R.drawable.iz_empty );
+    mButton1[ mNrButton1 ] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
 
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp ); 

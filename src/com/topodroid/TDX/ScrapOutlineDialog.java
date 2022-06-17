@@ -44,7 +44,6 @@ class ScrapOutlineDialog extends MyDialog
                          , View.OnClickListener
 {
   private final DrawingWindow mParent;
-  private final TopoDroidApp mApp;
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnBack;
@@ -61,9 +60,8 @@ class ScrapOutlineDialog extends MyDialog
    */
   ScrapOutlineDialog( Context context, DrawingWindow parent, TopoDroidApp app, List< PlotInfo > plots )
   {
-    super( context, R.string.ScrapOutlineDialog );
+    super( context, app, R.string.ScrapOutlineDialog );
     mParent = parent;
-    mApp    = app;
     mPlots  = plots;
   }
 

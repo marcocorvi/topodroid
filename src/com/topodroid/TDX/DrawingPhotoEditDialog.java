@@ -51,7 +51,7 @@ class DrawingPhotoEditDialog extends MyDialog
    */
   DrawingPhotoEditDialog( Context context, /* DrawingWindow parent, TopoDroidApp app, */ DrawingPhotoPath photo )
   {
-    super( context, R.string.DrawingPhotoEditDialog );
+    super( context, null, R.string.DrawingPhotoEditDialog ); // null app
     // mParent = parent;
     // mApp    = app;
     mPhoto  = photo;

@@ -38,7 +38,7 @@ public class TdmConfigDialog extends MyDialog
 
     public TdmConfigDialog( Context context, TdManagerActivity activity )
     {
-      super(context, R.string.TdmConfigDialog);
+      super(context, null, R.string.TdmConfigDialog); // null app
       mActivity = activity;
     }
 

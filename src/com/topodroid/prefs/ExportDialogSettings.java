@@ -46,7 +46,7 @@ public class ExportDialogSettings extends MyDialog
    */
   public ExportDialogSettings( Context context, TDPrefActivity parent, SharedPreferences prefs, int title )
   {
-    super( context, R.string.ExportSettings );
+    super( context, null, R.string.ExportSettings ); // null app
     mParent = parent;
     mPrefs  = prefs;
     mTitle  = title;

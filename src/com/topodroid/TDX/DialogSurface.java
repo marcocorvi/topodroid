@@ -36,7 +36,7 @@ class DialogSurface extends MyDialog
   // private EditText mDemFile;
   // private EditText mTextureFile;
 
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
 
   private boolean mHasLocation; // WITH-GPS
   private CheckBox mCBgps;
@@ -45,12 +45,12 @@ class DialogSurface extends MyDialog
 
   /** cstr
    * @param context  context
-   * @param app      3D activity
+   * @param topogl      3D activity
    */
-  public DialogSurface( Context context, TopoGL app )
+  public DialogSurface( Context context, TopoGL topogl )
   {
-    super( context, R.string.DialogSurface );
-    mApp  = app;
+    super( context, null, R.string.DialogSurface ); // null app
+    mTopoGl  = topogl;
     // mHasLocation = FeatureChecker.checkLocation( mContext ); // WITH-GPS
     mHasLocation = TDandroid.checkLocation( mContext ); // WITH-GPS
   }
@@ -66,8 +66,8 @@ class DialogSurface extends MyDialog
 
     TextView mDemFile = (TextView) findViewById( R.id.dem_file );
     
-    if ( mApp.mDEMname != null ) {
-      mDemFile.setText( String.format( mContext.getResources().getString( R.string.dem_file ), mApp.mDEMname ) );
+    if ( mTopoGl.mDEMname != null ) {
+      mDemFile.setText( String.format( mContext.getResources().getString( R.string.dem_file ), mTopoGl.mDEMname ) );
     } else {
       mDemFile.setVisibility( View.GONE );
     }
@@ -81,9 +81,9 @@ class DialogSurface extends MyDialog
 
     TextView mTextureFile = (TextView) findViewById( R.id.texture_file );
     Button btn_texture = (Button)findViewById( R.id.texture_load );
-    if ( mApp.hasSurface() ) {
-      if ( mApp.mTextureName != null ) {
-        mTextureFile.setText( String.format( mContext.getResources().getString( R.string.texture_file ), mApp.mTextureName ) );
+    if ( mTopoGl.hasSurface() ) {
+      if ( mTopoGl.mTextureName != null ) {
+        mTextureFile.setText( String.format( mContext.getResources().getString( R.string.texture_file ), mTopoGl.mTextureName ) );
       } else {
         mTextureFile.setVisibility( View.GONE );
       }
@@ -99,7 +99,7 @@ class DialogSurface extends MyDialog
     mCBproj.setChecked( GlModel.surfaceLegsMode );
     mCBtexture.setChecked( GlModel.surfaceTexture );
     if ( mHasLocation ) { // WITH-GPS
-      mCBgps.setChecked( mApp.getGPSstatus() );
+      mCBgps.setChecked( mTopoGl.getGPSstatus() );
     } else {
       mCBgps.setVisibility( View.GONE );
     }
@@ -116,23 +116,23 @@ class DialogSurface extends MyDialog
   public void onClick(View view)
   {
     if ( view.getId() == R.id.dem_load ) {
-      // (new DialogDEM( mContext, mApp )).show();
-      mApp.selectDEMFile();
+      // (new DialogDEM( mContext, mTopoGl )).show();
+      mTopoGl.selectDEMFile();
     } else if ( view.getId() == R.id.texture_load ) {
-      // (new DialogTexture( mContext, mApp )).show();
-      mApp.selectTextureFile();
+      // (new DialogTexture( mContext, mTopoGl )).show();
+      mTopoGl.selectTextureFile();
     } else if ( view.getId() == R.id.button_ok ) {
       GlModel.surfaceLegsMode = mCBproj.isChecked();
       GlModel.surfaceTexture  = mCBtexture.isChecked();
 
       if ( mHasLocation ) { // WITH-GPS
-        mApp.setGPSstatus( mCBgps.isChecked() );
+        mTopoGl.setGPSstatus( mCBgps.isChecked() );
       }
       if ( mEast.getText() != null && mNorth.getText() != null ) {
         try {
           double e = Double.parseDouble( mEast.getText().toString() );
           double n = Double.parseDouble( mNorth.getText().toString() );
-          mApp.addGPSpoint( e, n );
+          mTopoGl.addGPSpoint( e, n );
         } catch ( NumberFormatException e ) { }
       }
 

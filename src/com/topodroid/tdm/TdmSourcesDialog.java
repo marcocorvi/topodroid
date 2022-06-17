@@ -47,7 +47,7 @@ class TdmSourcesDialog extends MyDialog
    */
   TdmSourcesDialog( Context context, TdmConfigActivity parent )
   {
-    super( context, R.string.TdmSourcesDialog );
+    super( context, null, R.string.TdmSourcesDialog ); // null app
     mParent = parent;
     mSources = new ArrayList< TdmSource >();
   }

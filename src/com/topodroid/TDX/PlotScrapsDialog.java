@@ -39,7 +39,7 @@ class PlotScrapsDialog extends MyDialog
 
   PlotScrapsDialog( Context context, DrawingWindow parent )
   {
-    super( context, R.string.PlotScrapsDialog );
+    super( context, null, R.string.PlotScrapsDialog ); // null app
     mParent = parent;
   }
 

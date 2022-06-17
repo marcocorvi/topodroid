@@ -40,7 +40,7 @@ class SurveyRenameDialog extends MyDialog
 
   SurveyRenameDialog( Context context, SurveyWindow parent )
   {
-    super( context, R.string.SurveyRenameDialog );
+    super( context, null, R.string.SurveyRenameDialog ); // null app
     mParent = parent;
   }
 

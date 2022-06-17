@@ -71,7 +71,7 @@ class SurveyNewDialog extends MyDialog
 // -------------------------------------------------------------------
   SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
   {
-    super( context, R.string.SurveyNewDialog );
+    super( context, null, R.string.SurveyNewDialog ); // null app
     mParent = parent;
     mApp    = (TopoDroidApp) mParent.getApplication();
     mOldSid = old_sid;

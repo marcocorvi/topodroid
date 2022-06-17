@@ -52,7 +52,7 @@ class SetupTextSizeDialog extends MyDialog
 
   SetupTextSizeDialog( Context context, MainWindow parent, int setup, int size )
   {
-    super( context, R.string.SetupTextSizeDialog ); 
+    super( context, null, R.string.SetupTextSizeDialog ); // null app
     mParent = parent;
     mSetup  = setup;
     mSize   = size;

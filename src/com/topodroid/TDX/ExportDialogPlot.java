@@ -70,7 +70,7 @@ public class ExportDialogPlot extends MyDialog
    */
   public ExportDialogPlot( Context context, IExporter parent, String[] types, int title, int parent_type, String plotname )
   {
-    super( context, R.string.ExportDialog );
+    super( context, null, R.string.ExportDialog ); // null app
     mParent = parent;
     mTypes  = types;
     mSelected = null;

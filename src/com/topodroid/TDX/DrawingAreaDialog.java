@@ -62,7 +62,7 @@ class DrawingAreaDialog extends MyDialog
 
   DrawingAreaDialog( Context context, DrawingWindow parent, DrawingAreaPath line )
   {
-    super( context, R.string.DrawingAreaDialog );
+    super( context, null, R.string.DrawingAreaDialog ); // null app
     mParent = parent;
     mArea = line;
     mAreaType  = mArea.mAreaType;

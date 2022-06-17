@@ -65,7 +65,7 @@ public class CalibCoverageDialog extends MyDialog
 
   public CalibCoverageDialog( Context context, List< CBlock > list, CalibAlgo cal )
   {
-    super( context, R.string.CalibCoverageDialog );
+    super( context, null, R.string.CalibCoverageDialog ); // null app
     
     mCalib = cal;
     mList  = list;

@@ -25,7 +25,7 @@ import android.widget.SeekBar;
 class DialogWalls extends MyDialog 
                   implements View.OnClickListener
 {
-  private TopoGL  mApp;
+  private TopoGL  mTopoGl;
   private TglParser mParser;
 
   private CheckBox mCBbubble;
@@ -47,10 +47,10 @@ class DialogWalls extends MyDialog
   private CheckBox mCBprofileProj;
   private SeekBar mETalpha;
 
-  public DialogWalls( Context context, TopoGL app, TglParser parser )
+  public DialogWalls( Context context, TopoGL topogl, TglParser parser )
   {
-    super( context, R.string.DialogWalls );
-    mApp     = app;
+    super( context, null, R.string.DialogWalls ); // null app
+    mTopoGl  = topogl;
     mParser  = parser;
   }
 
@@ -199,7 +199,7 @@ class DialogWalls extends MyDialog
         GlModel.projMode = GlModel.PROJ_NONE;
       }
     // } else if ( v.getId() == R.id.button_sketch ) {
-    //   (new DialogSketch( mApp, mApp )).show();
+    //   (new DialogSketch( mTopoGl, mTopoGl )).show();
     // } else if ( v.getId() == R.id.button_cancel ) {
     }
     dismiss();

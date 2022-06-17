@@ -44,7 +44,7 @@ class DrawingProfileFlipDialog extends MyDialog
 
   DrawingProfileFlipDialog( Context context, DrawingWindow parent )
   {
-    super( context, R.string.DrawingProfileFlipDialog );
+    super( context, null, R.string.DrawingProfileFlipDialog ); // null app
     mParent  = parent;
   }
 

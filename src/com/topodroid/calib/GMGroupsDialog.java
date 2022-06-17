@@ -45,7 +45,7 @@ public class GMGroupsDialog extends MyDialog
 
   public GMGroupsDialog( Context context, GMActivity parent /* , String policy */ )
   {
-    super( context, R.string.GMGroupsDialog );
+    super( context, null, R.string.GMGroupsDialog ); // null app
     mParent  = parent;
     // mPolicy  = policy;
   }

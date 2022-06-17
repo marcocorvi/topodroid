@@ -124,8 +124,8 @@ public class ShotWindow extends Activity
                         R.drawable.iz_dial,
                         R.drawable.iz_station,
                         R.drawable.iz_search,
-			R.drawable.iz_refresh,
-			R.drawable.iz_empty
+			R.drawable.iz_refresh
+			// R.drawable.iz_empty // EMPTY
                       };
 
   private static final int[] izonsno = {
@@ -148,8 +148,8 @@ public class ShotWindow extends Activity
                           // R.drawable.iz_bedding,    // compute bedding
                         R.drawable.iz_delete,     // cut shots 
                         R.drawable.iz_copy,       // copy shots 
-                        R.drawable.iz_cancel,     // cancel
-			R.drawable.iz_empty
+                        R.drawable.iz_cancel      // cancel
+			// R.drawable.iz_empty // EMPTY
                       };
   private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
   private static final int BTN_COPY      = 5; // index of iz_copy
@@ -1175,7 +1175,7 @@ public class ShotWindow extends Activity
       int kk = k+boff;
       mButton1[k] = MyButton.getButton( this, this, izons[kk] );
     }
-    mButton1[mNrButton1] = MyButton.getButton( this, this, R.drawable.iz_empty );
+    mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
     // FIXME_AZIMUTH_DIAL 1,2
     mBMdial          = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
     // mBMdial_transp   = BitmapFactory.decodeResource( res, R.drawable.iz_dial_transp );
@@ -1213,7 +1213,7 @@ public class ShotWindow extends Activity
       mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
       ++k0;
     }
-    mButtonF[mNrButtonF] = MyButton.getButton( this, this, R.drawable.iz_empty );
+    mButtonF[mNrButtonF] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
     // TDAzimuth.resetRefAzimuth( this, 90 );
     setRefAzimuthButton( ); 

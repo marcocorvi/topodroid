@@ -45,7 +45,6 @@ class PlotListDialog extends MyDialog
 {
   private final ShotWindow    mParent;
   private final DrawingWindow mParent2;
-  private final TopoDroidApp mApp;   // TopoDroid app - for PlotNewDialog
   private ArrayAdapter<String> mArrayAdapter;
   // private ListItemAdapter mArrayAdapter;
   private Button mBtnPlotNew;
@@ -65,15 +64,14 @@ class PlotListDialog extends MyDialog
   /** cstr
    * @param context   context
    * @param parent    survey data window parent
-   * @param app       TopoDroid app
+   * @param app       TopoDroid app - for PlotNewDialog
    * @param parent2   plot window (second) parent
    */
   PlotListDialog( Context context, ShotWindow parent, TopoDroidApp app, DrawingWindow parent2 )
   {
-    super( context, R.string.PlotListDialog );
+    super( context, app, R.string.PlotListDialog ); 
     mParent  = parent;
     mParent2 = parent2;
-    mApp = app;
     mDoNew = ( mParent2 == null );
   }
 

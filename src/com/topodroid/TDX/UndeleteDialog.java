@@ -78,7 +78,7 @@ class UndeleteDialog extends MyDialog
                          List< DBlock > shots1, List< DBlock > shots2, List< DBlock > shots3,
                          List< PlotInfo > plots, DBlockBuffer buffer )
   {
-    super( context, R.string.UndeleteDialog );
+    super( context, null, R.string.UndeleteDialog ); // null app
     mParent = parent;
     mData   = data;
     mSid    = sid;

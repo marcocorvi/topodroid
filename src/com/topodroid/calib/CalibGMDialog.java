@@ -81,7 +81,7 @@ public class CalibGMDialog extends MyDialog
    */
   public CalibGMDialog( Context context, GMActivity parent, CBlock blk )
   {
-    super( context, R.string.CalibGMDialog );
+    super( context, null, R.string.CalibGMDialog ); // null app
     mParent = new WeakReference<GMActivity>( parent );
     mErrorGroupRequired = parent.getResources().getString( R.string.error_group_required );
     mErrorGroupNonInt   = parent.getResources().getString( R.string.error_group_non_integer );

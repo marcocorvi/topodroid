@@ -54,7 +54,7 @@ public class CalibListDialog extends MyDialog
 
   public CalibListDialog( Context context, DeviceActivity parent /*, TopoDroidApp app */ )
   {
-    super( context, R.string.CalibListDialog );
+    super( context, null, R.string.CalibListDialog ); // null app
     mParent = parent;
     // mApp = app;
   }

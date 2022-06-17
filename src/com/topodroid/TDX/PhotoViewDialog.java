@@ -38,7 +38,7 @@ class PhotoViewDialog extends MyDialog
    */
   PhotoViewDialog( Context context, PhotoInfo photo )
   {
-    super( context, R.string.PhotoViewDialog );
+    super( context, null, R.string.PhotoViewDialog ); // null app
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     // TDLog.v("photo dialog id " + photo.id );
     String filename = TDPath.getSurveyJpgFile( TDInstance.survey, Long.toString(photo.id) );
@@ -52,7 +52,7 @@ class PhotoViewDialog extends MyDialog
    */
   PhotoViewDialog( Context context, String filename )
   {
-    super( context, R.string.PhotoViewDialog );
+    super( context, null, R.string.PhotoViewDialog ); // null app
     // TDLog.v("photo dialog file " + filename );
     // TDLog.Log( TDLog.LOG_PHOTO, "Photo Dialog");
     mTdImage = new TDImage( filename );

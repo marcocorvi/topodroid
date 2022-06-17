@@ -56,7 +56,7 @@ class DrawingModeDialog extends MyDialog
 
     DrawingModeDialog( Context context, DrawingWindow parent, DrawingSurface surface )
     {
-      super(context, R.string.DrawingModeDialog );
+      super(context, null, R.string.DrawingModeDialog ); // null app
       mParent  = parent;
       mSurface = surface;
     }

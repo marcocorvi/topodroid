@@ -48,7 +48,7 @@ class DrawingStatDialog extends MyDialog
 
     DrawingStatDialog( Context context, TDNum num, String origin, float azimuth, SurveyStat stat )
     {
-      super( context, R.string.DrawingStatDialog );
+      super( context, null, R.string.DrawingStatDialog ); // null app
       mNum    = num;
       mOrigin = origin;
       mAzimuth = azimuth;

@@ -53,7 +53,7 @@ class SetupButtonSizeDialog extends MyDialog
 
   SetupButtonSizeDialog( Context context, MainWindow parent, int setup, int size )
   {
-    super( context, R.string.SetupButtonSizeDialog ); 
+    super( context, null, R.string.SetupButtonSizeDialog ); // null app
     mParent = parent;
     mSetup  = setup;
     mSize   = size;

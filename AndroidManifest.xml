@@ -79,7 +79,7 @@
     <!-- uses-permission android:name="android.permission.DEVICE_POWER"/ -->
     <!-- uses-permission android:name="android.permission.WAKE_LOCK"/ -->
 
-    <uses-feature android:name="android.hardware.screen.portrait"      android:required="true" />
+    <!-- uses-feature android:name="android.hardware.screen.portrait"      android:required="true" / -->
     <uses-feature android:name="android.hardware.bluetooth"            android:required="true" />
     <uses-feature android:name="android.hardware.touchscreen"          android:required="true" />
 
@@ -169,10 +169,10 @@
 
         <activity android:name=".ShotWindow"
 	  android:theme="@style/Theme.FullScreen"
-          android:screenOrientation="fullSensor"
           android:configChanges="orientation|screenSize"
           android:exported="false"
         />
+          <!-- android:screenOrientation="fullSensor" -->
 
         <activity android:name=".SensorActivity"
 	  android:theme="@style/Theme.FullScreen"

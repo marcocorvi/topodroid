@@ -40,7 +40,6 @@ class DeviceSelectDialog extends MyDialog
                          , OnClickListener
 {
   private final Context mContext;
-  private final TopoDroidApp mApp;
   private final DataDownloader mDownloader;
   private final ILister mLister;
 
@@ -56,9 +55,8 @@ class DeviceSelectDialog extends MyDialog
    */
   DeviceSelectDialog( Context context, TopoDroidApp app, DataDownloader downloader, ILister lister )
   {
-    super( context, R.string.DeviceSelectDialog );
+    super( context, app, R.string.DeviceSelectDialog );
     mContext = context;
-    mApp = app;
     mDownloader = downloader;
     mLister = lister;
     // TDLog.v( "device select dialog created");

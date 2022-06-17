@@ -37,7 +37,7 @@ class DialogMeasure extends MyDialog
    */
   public DialogMeasure( Context context, TglMeasure measure )
   {
-    super( context, R.string.DialogMeasure );
+    super( context, null, R.string.DialogMeasure ); // null app
     mMeasure   = measure;
   }
 

@@ -36,7 +36,7 @@ class DialogInfo extends MyDialog
 {
   // private Button mBtnOk;
 
-  private TopoGL mApp;
+  private TopoGL mTopoGl;
   private TglParser mParser;
   private GlRenderer   mRenderer;
 
@@ -45,15 +45,15 @@ class DialogInfo extends MyDialog
   private Button   mBTclose;
 
   /** cstr
-   * @param app        Cave3D activity
+   * @param topogl     Cave3D activity
    * @param parser     3D model parser
    * @param renderer   GL renderer
    */
-  public DialogInfo( TopoGL app, TglParser parser, GlRenderer renderer )
+  public DialogInfo( TopoGL topogl, TglParser parser, GlRenderer renderer )
   {
-    super( app, R.string.DialogInfo );
-    mApp   = app;
-    mParser = parser;
+    super( topogl, null, R.string.DialogInfo ); // null app
+    mTopoGl   = topogl;
+    mParser   = parser;
     mRenderer = renderer;
   }
 
@@ -64,7 +64,7 @@ class DialogInfo extends MyDialog
     initLayout( R.layout.cave3d_info_dialog, R.string.INFO );
 
 
-    Resources res = mApp.getResources();
+    Resources res = mTopoGl.getResources();
 
     TextView tv = ( TextView ) findViewById(R.id.info_grid);
     tv.setText( String.format(Locale.US, res.getString(R.string.info_grid_value),  mParser.getGridSize() ) );
@@ -101,7 +101,7 @@ class DialogInfo extends MyDialog
 
     int nr = mParser.getSurveyNumber();
     ListView mList = ( ListView ) findViewById(R.id.surveys_list );
-    mArrayAdapter = new ArrayAdapter<String>( mApp, R.layout.message );
+    mArrayAdapter = new ArrayAdapter<String>( mTopoGl, R.layout.message );
     ArrayList< Cave3DSurvey > surveys = mParser.getSurveys();
     if ( surveys != null ) {
       for ( Cave3DSurvey s : surveys ) {
@@ -139,7 +139,7 @@ class DialogInfo extends MyDialog
     String name = item.toString();
     Cave3DSurvey survey = mParser.getSurvey( name );
     if ( survey != null ) {
-      ( new DialogSurvey( mApp, survey ) ).show();
+      ( new DialogSurvey( mTopoGl, survey ) ).show();
     } else {
       // TODO Toast.makeText( );
     }

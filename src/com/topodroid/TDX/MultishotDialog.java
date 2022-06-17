@@ -68,7 +68,7 @@ class MultishotDialog extends MyDialog
 
   MultishotDialog( Context context, ShotWindow parent, List< DBlock > blks )
   {
-    super( context, R.string.MultishotDialog );
+    super( context, null, R.string.MultishotDialog ); // null app
     mParent = parent;
     mBlks = blks;
     mBlk  = mBlks.get(0); // blks is guaranteed non-null and non-empty

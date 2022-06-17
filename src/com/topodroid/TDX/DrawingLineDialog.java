@@ -72,7 +72,7 @@ class DrawingLineDialog extends MyDialog
 
   DrawingLineDialog( Context context, DrawingWindow parent, DrawingLinePath line, LinePoint lp )
   {
-    super( context, R.string.DrawingLineDialog );
+    super( context, null, R.string.DrawingLineDialog ); // null app
     mParent  = parent;
     mLine  = line;
     mPoint = lp;

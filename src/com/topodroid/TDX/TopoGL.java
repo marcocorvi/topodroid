@@ -844,7 +844,7 @@ public class TopoGL extends Activity
       size = TopoDroidApp.setListViewHeight( this, mListView );
 
       // if ( BLUETOOTH )  ++mNrButton1; 
-      mButton1 = new Button[ mNrButton1 ];
+      mButton1 = new Button[ mNrButton1 + 1 ]; // one extra space for empty button
       mButton1[0] = MyButton.getButton( this, this, izons[0] );
       mButton1[1] = MyButton.getButton( this, this, izons[1] );
       mButton1[2] = MyButton.getButton( this, this, izons[2] );
@@ -854,6 +854,7 @@ public class TopoGL extends Activity
       mButton1[6] = MyButton.getButton( this, this, izons[6] );
       mButton1[7] = MyButton.getButton( this, this, izons[7] );
       // if ( BLUETOOTH ) mButton1[8] = MyButton.getButton( this, this, izons[8] );
+      mButton1[ mNrButton1 ] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
       // mButton1[ 0 ].setOnLongClickListener( this );
       mButton1[ 1 ].setOnLongClickListener( this ); // projection params

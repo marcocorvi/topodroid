@@ -50,7 +50,7 @@ class PhotoEditDialog extends MyDialog
    */
   PhotoEditDialog( Context context, PhotoListDialog parent, PhotoInfo photo )
   {
-    super( context, R.string.PhotoEditDialog );
+    super( context, null, R.string.PhotoEditDialog ); // null app
     // TDLog.v("photo edit dialog id " + photo.id );
     mParent = parent;
     mPhoto  = photo;

@@ -43,7 +43,7 @@ class DanglingShotsDialog extends MyDialog
    */
   DanglingShotsDialog( Context context, TDNum num )
   {
-    super( context, R.string.DanglingShotsDialog );
+    super( context, null, R.string.DanglingShotsDialog ); // null app
     mNum    = num;
   }
 

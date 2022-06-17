@@ -135,7 +135,7 @@ class ShotDialog extends MyDialog
               DBlock prev, DBlock next
             )
   {
-    super( context, R.string.ShotDialog );
+    super( context, null, R.string.ShotDialog ); // null app
     mParent = parent;
     mPos = pos;
     mFirst = true;

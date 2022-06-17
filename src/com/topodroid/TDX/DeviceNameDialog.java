@@ -45,7 +45,7 @@ class DeviceNameDialog extends MyDialog
 
   DeviceNameDialog( Context context, DeviceActivity parent, Device device )
   {
-    super( context, R.string.DeviceNameDialog );
+    super( context, null, R.string.DeviceNameDialog ); // null app
     mParent = parent;
     mDevice = device;
   }

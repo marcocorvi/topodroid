@@ -53,7 +53,7 @@ class TdmEquateNewDialog extends MyDialog
 
   TdmEquateNewDialog( Context context, TdmViewActivity parent, ArrayList< TdmViewCommand > commands )
   {
-    super( context, R.string.TdmEquateNewDialog );
+    super( context, null, R.string.TdmEquateNewDialog ); // null app
     mParent   = parent;
     mCommands = commands;
     size = mCommands.size();

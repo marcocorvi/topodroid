@@ -51,7 +51,7 @@ public class BricMemoryDialog extends MyDialog
 
   public BricMemoryDialog( Context ctx, DeviceActivity parent, Resources res )
   {
-    super( ctx, R.string.BricMemoryDialog );
+    super( ctx, null, R.string.BricMemoryDialog ); // null app
     // TDLog.v( "Bric Memory Dialog cstr");
     mParent = parent;
     mRes    = res;

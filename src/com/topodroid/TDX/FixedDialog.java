@@ -87,7 +87,7 @@ class FixedDialog extends MyDialog
 
   FixedDialog( Context context, FixedActivity parent, FixedInfo fxd )
   {
-    super( context, R.string.FixedDialog );
+    super( context, null, R.string.FixedDialog ); // null app
     mParent      = parent;
     mFxd         = fxd;
     mWMM = new WorldMagneticModel( mContext );
