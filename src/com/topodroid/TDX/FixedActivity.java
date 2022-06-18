@@ -151,17 +151,20 @@ public class FixedActivity extends Activity
     // MOBILE TOPOGRAPHER
     mNrButton1 = 2;
     if ( hasGps ) ++ mNrButton1;
-    mButton1 = new Button[ mNrButton1 ];
+    mButton1 = new Button[ mNrButton1 + 1];
     int kz = (hasGps)? 0 : 1; // index of izons
     for ( int k=0; k<mNrButton1; ++k ) {
-      mButton1[k] = MyButton.getButton( this, this, izons[kz++] );
+      mButton1[k] = MyButton.getButton( mContext, this, izons[kz++] );
     }
+    mButton1[mNrButton1] = MyButton.getButton( mContext, null, R.drawable.iz_empty );
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
     // MENU
     mMenuImage = (Button) findViewById( R.id.handle );
     mMenuImage.setOnClickListener( this );
+    TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( mContext, getResources(), R.drawable.iz_menu ) );
+
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
     setMenuAdapter( ); // in on Start()

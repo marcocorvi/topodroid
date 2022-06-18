@@ -1,21 +1,29 @@
 <html>
 <body>
 
-<h4>LOCATIONS LIST</h4>
+<h4>GEO-POINTS LIST</h4>
 
-This dialog is opened tapping the <u>GPS</u> button in the survey <u>info window</u>.<br><p>
+This window is opened tapping the <u>GPS</u> button in the survey <u>info window</u>.<br><p>
 
-The dialog shows the list of locations, and has three buttons to create a new point.
+The window shows the list of geo-localized points, and has three buttons to insert a new point.
 <br>
-<img src="btn_location.png" alt="location list buttons">
+<img src="btn_location.png" alt="geo-point list buttons">
 <br>
 <ul>
-<li><a href="page_fixed_gps.htm">GPS</a> gets the position with the GPS (if "Location" parmission has been granted)</li>
-<li><a href="page_fixed_add.htm">Add</a> enter the coordinates manually</li>
-<li><a href="page_fixed_import.htm">Import</a> the position from <i>MobileTopographer</i> (only for Android up to 10)</li>
+<li><a href="page_fixed_gps.htm">GPS</a> gets the new point coordinates with the GPS (if "Location" parmission has been granted)</li>
+<li><a href="page_fixed_add.htm">Add</a> enter the coordinates of the new geo-point manually</li>
+<li><a href="page_fixed_import.htm">Import</a> the coordinates from <i>MobileTopographer</i></li>
 </ul>
+<br><p>
 
-Tapping a location entry in the list opens the <a href="page_fixed.htm">Location edit</a> dialog.<br><p>
+<b>Menus</b>:<br>
+<ul>
+<li>Close the window</li>
+<li>Help</li>
+</ul>
+<br><p>
+
+Tapping a geo-point entry in the list opens the <a href="page_fixed.htm">Geo-point edit</a> dialog.<br><p>
 
 Internally TopoDroid stores the coordinates in decimal degrees.
 In the coordinate dialogs you can type them either in decimal degrees or as "dd:mm:ss.ss".

@@ -1,9 +1,9 @@
 <html>
 <body>
 
-<h4>LOCATION EDIT</h4>
+<h4>iGEO-POINT EDIT</h4>
 
-This dialog is opened tapping a fixed point entry in the <a href="page_fixed_list.htm">Locations list</a> dialog.<br><p>
+This dialog is opened tapping a fixed point entry in the <a href="page_fixed_list.htm">Geo-points list</a> window.<br><p>
 
 The dialog shows
 <ul>
@@ -16,23 +16,23 @@ Buttons
 <ul>
 <li><b>View</b> the point in a Location app (provided you have one installed)</li>
 <li><b>Clear</b> converted coordinates. This action is immediate.</li>
-<li><b>Convert</b> the position to another reference system (using the app Proj4)</li>
-<li><b>Delete</b> the location record</li>
+<li><b>Convert</b> the geo-point coordinates to another reference system (using the app Proj4)</li>
+<li><b>Delete</b> the geo-point record</li>
 </ul>
 
-If the coordinates of the fixed point have been entered manually, they can be edited.
+If the coordinates of the geo-point have been entered manually, they can be edited.
 Coordinates taken with GPS or imported from <i>MobileTopographer</i> cannot be changed.<br><p>
 
 The orthometric altitude is computed from the ellipsoidic altitude using the geoid model EGM2008.<br><p>
 
-The <b>Convert</b> button computes the point coordinates in another Coordinate Reference System,
+The <b>Convert</b> button computes the geo-point coordinates in another Coordinate Reference System,
 using the app Proj4. The geoid altitude is used in the conversion.
-The converted coordinates are displayed and stored in the database with the fixed point.<br><p>
+The converted coordinates are displayed and stored in the database with the geo-point.<br><p>
 
-The magnetic declination is computed using the World Magnetic Model for 2015-2020 (this will be replaced 
-with WMM 2020-2025 in Jan. 2020).
+The magnetic declination is computed using the World Magnetic Model for 2020-2025 (this is replaced 
+with a more recent WMM when it is released).
 The uncertainty of the WMM model declination can be as large as 0.4 degrees in temperate ragions.<br>
-Check the <b>save</b> box to set it to the survey.<br><p>
+Check the <b>save</b> box to set the magnetic declination into the survey.<br><p>
 
 The <b>Save</b> button commits the changes to the database.<br><p>
 

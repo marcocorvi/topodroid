@@ -20,7 +20,7 @@
       <Button android:id="@id/handle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/ic_menu"
+            android:background="@drawable/iz_empty"
             android:contentDescription="@string/desc_menu"
       />
       </LinearLayout>

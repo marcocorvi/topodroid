@@ -17,25 +17,27 @@ APPNAME = TopoDroidX
 APPVERSION = $(APPNAME)-$(VERSION)
 LOGNAME = topodroid-X
 PACKAGE = com.topodroid.$(APPCODE)
+VERSION_TARGET = $(VERSION)-$(TARGET_SDK)
 
 default:
 	$(ANT) debug
 
 release:
 	$(ANT) release
-	mv bin/$(APPNAME)-release.apk $(APPVERSION)-release.apk
-	ls -l $(APPVERSION)-release.apk
-	md5sum $(APPVERSION)-release.apk
+	@mv bin/$(APPNAME)-release.apk $(APPVERSION)-release.apk
+	@ls -l $(APPVERSION)-release.apk
+	@md5sum $(APPVERSION)-release.apk
 
 signed:
 	$(ANT) release
-	echo "Version $(VERSION)"
+	@echo "Version $(VERSION)"
 	./howto/sign.sh
-	mv $(APPNAME)-release-keysigned.apk $(APPVERSION).apk
-	ls -l $(APPVERSION).apk
-	md5sum $(APPVERSION).apk
-	mv $(APPVERSION).apk $(APPVERSION)-$(TARGET_SDK).apk
-	rm TopoDroidX-release-keysigned.apk.idsig
+	@mv $(APPNAME)-release-keysigned.apk $(APPVERSION)-$(TARGET_SDK).apk
+	@rm TopoDroidX-release-keysigned.apk.idsig
+
+md5:
+	@echo "Version $(VERSION) target $(TARGET_SDK)"
+	@./howto/update_md5.sh $(VERSION_TARGET)
 
 signed-29:
 	./howto/target.sh 29
@@ -52,7 +54,7 @@ signed-31:
 debug-signed:
 	$(ANT) debug
 	./howto/sign-debug.sh
-	mv $(APPNAME)-debug-keysigned.apk $(APPVERSION)-debug.apk
+	@mv $(APPNAME)-debug-keysigned.apk $(APPVERSION)-debug.apk
 
 perms:
 	adb shell appops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow
