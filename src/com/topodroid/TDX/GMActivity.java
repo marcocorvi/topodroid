@@ -504,7 +504,8 @@ public class GMActivity extends Activity
         if ( result < 0 ) {
           TDToast.makeBad( R.string.few_data );
         } else {
-          TDToast.make( String.format( getResources().getString( R.string.found_groups ), result ) );
+          // TDToast.make( String.format( getResources().getString( R.string.found_groups ), result ) );
+          TDToast.make( getResources().getQuantityString(R.plurals.found_calib_groups, result, result ) );
         }
         break;
       default:

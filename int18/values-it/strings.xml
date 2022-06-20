@@ -200,7 +200,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="few_data">Dati insufficienti</string>
     <string name="few_iter">Iterazione fallita</string>
     <string name="few_groups">Dati con gruppi non sufficienti</string>
-    <string name="found_groups">Trovati %1$d gruppi</string>
+    <!-- UNUSED string name="found_groups">Trovati %1$d gruppi</string -->
     <string name="regroup">Non riaggruppare</string>
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
@@ -1851,7 +1851,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
     <!-- NO string name="fractal_failed">Fractal compute failed</string -->
     <!-- NO string name="fractal_dimension">Fractal dimension</string -->
-    <!-- TODO string name="illegal_value">Illegal value</string -->
+    <string name="illegal_value">Valore inaccettabile</string>
 
     <!-- UNUSED string name="info_title">INFO</string -->
     <string name="info_surveys">RILIEVI</string>

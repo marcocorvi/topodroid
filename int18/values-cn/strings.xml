@@ -201,7 +201,7 @@
     <string name="few_data">数据不足</string>
     <string name="few_iter">失败:迭代太多</string>
     <string name="few_groups">数据组数据不足</string>
-    <string name="found_groups">发现 %1$d 组</string>
+    <!-- UNUSED string name="found_groups">发现 %1$d 组</string -->
     <string name="regroup">无重组</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">校准数据不足</string>

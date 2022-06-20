@@ -1,30 +1,6 @@
 AndroidManifest.xml:60: Warning: The Google Play store has a policy that limits usage of MANAGE_EXTERNAL_STORAGE [ScopedStorage]
     <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
                                    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/audio_list_dialog.xml:10: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-  <ListView android:id="@+id/list"
-   ~~~~~~~~
-res/layout/cave3d_info_dialog.xml:248: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-    <ListView android:id="@+id/surveys_list"
-     ~~~~~~~~
-res/layout/cave3d_sketches_dialog.xml:21: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-  <ListView android:id="@+id/list"
-   ~~~~~~~~
-res/layout/cave3d_surveys_dialog.xml:11: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-    <ListView android:id="@+id/surveys_list"
-     ~~~~~~~~
-res/layout/device_a3_memory_dialog.xml:149: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-  <ListView android:id="@+id/list_memory"
-   ~~~~~~~~
-res/layout/device_x310_memory_dialog.xml:55: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-  <ListView android:id="@+id/list_memory"
-   ~~~~~~~~
-res/layout/scrap_outline_dialog.xml:12: Warning: The vertically scrolling ScrollView should not contain another vertically scrolling widget (ListView) [NestedScrolling]
-  <ListView android:id="@+id/list"
-   ~~~~~~~~
-src/com/topodroid/TDX/DialogSketch.java:53: Warning: Implicitly using the default locale is a common source of bugs: Use toLowerCase(Locale) instead. For strings meant to be internal use Locale.ROOT, otherwise Locale.getDefault(). [DefaultLocale]
-      return ( name.toLowerCase().endsWith( ".c3d" ) );  // Cave3D sketch file
-                    ~~~~~~~~~~~
 AndroidManifest.xml:150: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".PlotReloadWindow"
                                 ~~~~~~~~~~~~~~~~~
@@ -37,13 +13,13 @@ AndroidManifest.xml:223: Error: OverviewWindow must extend android.app.Activity 
 res/layout/dblock_row_noedit.xml:29: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/dblock_row_noedit.xml:53: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
+res/layout/dblock_row_noedit.xml:52: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:36: Error: "tdm_config_project" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="tdm_config_project">project.tdconfig</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:95: Error: "station_coords" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:95: Error: "station_coords" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:151: Error: "calib_validate_error" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
@@ -187,7 +163,7 @@ res/values/strings.xml:1060: Error: "export_dxf_version" is not translated in "r
 res/values/strings.xml:1146: Error: "title_photo_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="title_photo_view">Photo</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1153: Error: "title_reduction_errors" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1153: Error: "title_reduction_errors" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="title_reduction_errors">Survey data-reduction anomalies</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1222: Error: "exported_settings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
@@ -235,7 +211,7 @@ res/values/strings.xml:1857: Error: "cbtn_bind" is not translated in "ru" (Russi
 res/values/strings.xml:1872: Error: "cmenu_sketch" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cmenu_sketch">SKETCHES</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1881: Error: "illegal_value" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1881: Error: "illegal_value" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
     <string name="illegal_value">Illegal value</string>
             ~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1888: Error: "info_survey" is not translated in "ru" (Russian) [MissingTranslation]
@@ -346,233 +322,10 @@ res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints backgrou
 res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
       android:background="@color/menu_background"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/xml/button.xml:2: Warning: The resource R.xml.button appears to be unused [UnusedResources]
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-^
-res/xml/button_border.xml:2: Warning: The resource R.xml.button_border appears to be unused [UnusedResources]
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-^
-res/xml/button_empty.xml:2: Warning: The resource R.xml.button_empty appears to be unused [UnusedResources]
-<selector xmlns:android="http://schemas.android.com/apk/res/android">
-^
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
-res/drawable/iz_color_temp.png: Warning: The resource R.drawable.iz_color_temp appears to be unused [UnusedResources]
-res/drawable/iz_splays_all.png: Warning: The resource R.drawable.iz_splays_all appears to be unused [UnusedResources]
-res/drawable/iz_ysplays_xsection.png: Warning: The resource R.drawable.iz_ysplays_xsection appears to be unused [UnusedResources]
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/drawable/distox.png: Warning: Found bitmap drawable res/drawable/distox.png in densityless folder [IconLocation]
-res/drawable/ic_back.png: Warning: Found bitmap drawable res/drawable/ic_back.png in densityless folder [IconLocation]
-res/drawable/ic_forw.png: Warning: Found bitmap drawable res/drawable/ic_forw.png in densityless folder [IconLocation]
-res/drawable/ic_launcher_background.png: Warning: Found bitmap drawable res/drawable/ic_launcher_background.png in densityless folder [IconLocation]
-res/drawable/ic_launcher_foreground64.png: Warning: Found bitmap drawable res/drawable/ic_launcher_foreground64.png in densityless folder [IconLocation]
-res/drawable/ic_manual.png: Warning: Found bitmap drawable res/drawable/ic_manual.png in densityless folder [IconLocation]
-res/drawable/ic_menu.png: Warning: Found bitmap drawable res/drawable/ic_menu.png in densityless folder [IconLocation]
-res/drawable/ic_mode.png: Warning: Found bitmap drawable res/drawable/ic_mode.png in densityless folder [IconLocation]
-res/drawable/iz_3d.png: Warning: Found bitmap drawable res/drawable/iz_3d.png in densityless folder [IconLocation]
-res/drawable/iz_add.png: Warning: Found bitmap drawable res/drawable/iz_add.png in densityless folder [IconLocation]
-res/drawable/iz_add_leg.png: Warning: Found bitmap drawable res/drawable/iz_add_leg.png in densityless folder [IconLocation]
-res/drawable/iz_angle.png: Warning: Found bitmap drawable res/drawable/iz_angle.png in densityless folder [IconLocation]
-res/drawable/iz_attrib.png: Warning: Found bitmap drawable res/drawable/iz_attrib.png in densityless folder [IconLocation]
-res/drawable/iz_audio.png: Warning: Found bitmap drawable res/drawable/iz_audio.png in densityless folder [IconLocation]
-res/drawable/iz_audio_delete.png: Warning: Found bitmap drawable res/drawable/iz_audio_delete.png in densityless folder [IconLocation]
-res/drawable/iz_audio_play.png: Warning: Found bitmap drawable res/drawable/iz_audio_play.png in densityless folder [IconLocation]
-res/drawable/iz_audio_play_off.png: Warning: Found bitmap drawable res/drawable/iz_audio_play_off.png in densityless folder [IconLocation]
-res/drawable/iz_audio_rec.png: Warning: Found bitmap drawable res/drawable/iz_audio_rec.png in densityless folder [IconLocation]
-res/drawable/iz_audio_rec_on.png: Warning: Found bitmap drawable res/drawable/iz_audio_rec_on.png in densityless folder [IconLocation]
-res/drawable/iz_audio_stop.png: Warning: Found bitmap drawable res/drawable/iz_audio_stop.png in densityless folder [IconLocation]
-res/drawable/iz_back.png: Warning: Found bitmap drawable res/drawable/iz_back.png in densityless folder [IconLocation]
-res/drawable/iz_backleg_no.png: Warning: Found bitmap drawable res/drawable/iz_backleg_no.png in densityless folder [IconLocation]
-res/drawable/iz_backleg_ok.png: Warning: Found bitmap drawable res/drawable/iz_backleg_ok.png in densityless folder [IconLocation]
-res/drawable/iz_bric4.png: Warning: Found bitmap drawable res/drawable/iz_bric4.png in densityless folder [IconLocation]
-res/drawable/iz_bt.png: Warning: Found bitmap drawable res/drawable/iz_bt.png in densityless folder [IconLocation]
-res/drawable/iz_bt_no.png: Warning: Found bitmap drawable res/drawable/iz_bt_no.png in densityless folder [IconLocation]
-res/drawable/iz_camera.png: Warning: Found bitmap drawable res/drawable/iz_camera.png in densityless folder [IconLocation]
-res/drawable/iz_camera_red_transp.png: Warning: Found bitmap drawable res/drawable/iz_camera_red_transp.png in densityless folder [IconLocation]
-res/drawable/iz_camera_transp.png: Warning: Found bitmap drawable res/drawable/iz_camera_transp.png in densityless folder [IconLocation]
-res/drawable/iz_cancel.png: Warning: Found bitmap drawable res/drawable/iz_cancel.png in densityless folder [IconLocation]
-res/drawable/iz_cancel_transp.png: Warning: Found bitmap drawable res/drawable/iz_cancel_transp.png in densityless folder [IconLocation]
-res/drawable/iz_close_no.png: Warning: Found bitmap drawable res/drawable/iz_close_no.png in densityless folder [IconLocation]
-res/drawable/iz_close_ok.png: Warning: Found bitmap drawable res/drawable/iz_close_ok.png in densityless folder [IconLocation]
-res/drawable/iz_color.png: Warning: Found bitmap drawable res/drawable/iz_color.png in densityless folder [IconLocation]
-res/drawable/iz_color_depth.png: Warning: Found bitmap drawable res/drawable/iz_color_depth.png in densityless folder [IconLocation]
-res/drawable/iz_color_surface.png: Warning: Found bitmap drawable res/drawable/iz_color_surface.png in densityless folder [IconLocation]
-res/drawable/iz_color_survey.png: Warning: Found bitmap drawable res/drawable/iz_color_survey.png in densityless folder [IconLocation]
-res/drawable/iz_color_temp.png: Warning: Found bitmap drawable res/drawable/iz_color_temp.png in densityless folder [IconLocation]
-res/drawable/iz_comment_no.png: Warning: Found bitmap drawable res/drawable/iz_comment_no.png in densityless folder [IconLocation]
-res/drawable/iz_comment_ok.png: Warning: Found bitmap drawable res/drawable/iz_comment_ok.png in densityless folder [IconLocation]
-res/drawable/iz_compass.png: Warning: Found bitmap drawable res/drawable/iz_compass.png in densityless folder [IconLocation]
-res/drawable/iz_compass_transp.png: Warning: Found bitmap drawable res/drawable/iz_compass_transp.png in densityless folder [IconLocation]
-res/drawable/iz_compute.png: Warning: Found bitmap drawable res/drawable/iz_compute.png in densityless folder [IconLocation]
-res/drawable/iz_compute_no.png: Warning: Found bitmap drawable res/drawable/iz_compute_no.png in densityless folder [IconLocation]
-res/drawable/iz_compute_transp.png: Warning: Found bitmap drawable res/drawable/iz_compute_transp.png in densityless folder [IconLocation]
-res/drawable/iz_cont_both.png: Warning: Found bitmap drawable res/drawable/iz_cont_both.png in densityless folder [IconLocation]
-res/drawable/iz_cont_continue.png: Warning: Found bitmap drawable res/drawable/iz_cont_continue.png in densityless folder [IconLocation]
-res/drawable/iz_cont_end.png: Warning: Found bitmap drawable res/drawable/iz_cont_end.png in densityless folder [IconLocation]
-res/drawable/iz_cont_none.png: Warning: Found bitmap drawable res/drawable/iz_cont_none.png in densityless folder [IconLocation]
-res/drawable/iz_cont_off.png: Warning: Found bitmap drawable res/drawable/iz_cont_off.png in densityless folder [IconLocation]
-res/drawable/iz_cont_start.png: Warning: Found bitmap drawable res/drawable/iz_cont_start.png in densityless folder [IconLocation]
-res/drawable/iz_copy.png: Warning: Found bitmap drawable res/drawable/iz_copy.png in densityless folder [IconLocation]
-res/drawable/iz_cover.png: Warning: Found bitmap drawable res/drawable/iz_cover.png in densityless folder [IconLocation]
-res/drawable/iz_delete.png: Warning: Found bitmap drawable res/drawable/iz_delete.png in densityless folder [IconLocation]
-res/drawable/iz_delete_off.png: Warning: Found bitmap drawable res/drawable/iz_delete_off.png in densityless folder [IconLocation]
-res/drawable/iz_delete_transp.png: Warning: Found bitmap drawable res/drawable/iz_delete_transp.png in densityless folder [IconLocation]
-res/drawable/iz_dial.png: Warning: Found bitmap drawable res/drawable/iz_dial.png in densityless folder [IconLocation]
-res/drawable/iz_dial_on.png: Warning: Found bitmap drawable res/drawable/iz_dial_on.png in densityless folder [IconLocation]
-res/drawable/iz_dial_transp.png: Warning: Found bitmap drawable res/drawable/iz_dial_transp.png in densityless folder [IconLocation]
-res/drawable/iz_disto1b.png: Warning: Found bitmap drawable res/drawable/iz_disto1b.png in densityless folder [IconLocation]
-res/drawable/iz_disto2b.png: Warning: Found bitmap drawable res/drawable/iz_disto2b.png in densityless folder [IconLocation]
-res/drawable/iz_download.png: Warning: Found bitmap drawable res/drawable/iz_download.png in densityless folder [IconLocation]
-res/drawable/iz_download_no.png: Warning: Found bitmap drawable res/drawable/iz_download_no.png in densityless folder [IconLocation]
-res/drawable/iz_download_on.png: Warning: Found bitmap drawable res/drawable/iz_download_on.png in densityless folder [IconLocation]
-res/drawable/iz_download_wait.png: Warning: Found bitmap drawable res/drawable/iz_download_wait.png in densityless folder [IconLocation]
-res/drawable/iz_drop.png: Warning: Found bitmap drawable res/drawable/iz_drop.png in densityless folder [IconLocation]
-res/drawable/iz_dup_no.png: Warning: Found bitmap drawable res/drawable/iz_dup_no.png in densityless folder [IconLocation]
-res/drawable/iz_dup_ok.png: Warning: Found bitmap drawable res/drawable/iz_dup_ok.png in densityless folder [IconLocation]
-res/drawable/iz_edit.png: Warning: Found bitmap drawable res/drawable/iz_edit.png in densityless folder [IconLocation]
-res/drawable/iz_edit_ok.png: Warning: Found bitmap drawable res/drawable/iz_edit_ok.png in densityless folder [IconLocation]
-res/drawable/iz_empty.png: Warning: Found bitmap drawable res/drawable/iz_empty.png in densityless folder [IconLocation]
-res/drawable/iz_equate.png: Warning: Found bitmap drawable res/drawable/iz_equate.png in densityless folder [IconLocation]
-res/drawable/iz_equates.png: Warning: Found bitmap drawable res/drawable/iz_equates.png in densityless folder [IconLocation]
-res/drawable/iz_erase_all.png: Warning: Found bitmap drawable res/drawable/iz_erase_all.png in densityless folder [IconLocation]
-res/drawable/iz_erase_area.png: Warning: Found bitmap drawable res/drawable/iz_erase_area.png in densityless folder [IconLocation]
-res/drawable/iz_erase_line.png: Warning: Found bitmap drawable res/drawable/iz_erase_line.png in densityless folder [IconLocation]
-res/drawable/iz_erase_point.png: Warning: Found bitmap drawable res/drawable/iz_erase_point.png in densityless folder [IconLocation]
-res/drawable/iz_eraser.png: Warning: Found bitmap drawable res/drawable/iz_eraser.png in densityless folder [IconLocation]
-res/drawable/iz_eraser_ok.png: Warning: Found bitmap drawable res/drawable/iz_eraser_ok.png in densityless folder [IconLocation]
-res/drawable/iz_extended.png: Warning: Found bitmap drawable res/drawable/iz_extended.png in densityless folder [IconLocation]
-res/drawable/iz_flip.png: Warning: Found bitmap drawable res/drawable/iz_flip.png in densityless folder [IconLocation]
-res/drawable/iz_forw.png: Warning: Found bitmap drawable res/drawable/iz_forw.png in densityless folder [IconLocation]
-res/drawable/iz_frame_axes.png: Warning: Found bitmap drawable res/drawable/iz_frame_axes.png in densityless folder [IconLocation]
-res/drawable/iz_frame_grid.png: Warning: Found bitmap drawable res/drawable/iz_frame_grid.png in densityless folder [IconLocation]
-res/drawable/iz_frame_no.png: Warning: Found bitmap drawable res/drawable/iz_frame_no.png in densityless folder [IconLocation]
-res/drawable/iz_gps.png: Warning: Found bitmap drawable res/drawable/iz_gps.png in densityless folder [IconLocation]
-res/drawable/iz_highlight.png: Warning: Found bitmap drawable res/drawable/iz_highlight.png in densityless folder [IconLocation]
-res/drawable/iz_import.png: Warning: Found bitmap drawable res/drawable/iz_import.png in densityless folder [IconLocation]
-res/drawable/iz_info.png: Warning: Found bitmap drawable res/drawable/iz_info.png in densityless folder [IconLocation]
-res/drawable/iz_join.png: Warning: Found bitmap drawable res/drawable/iz_join.png in densityless folder [IconLocation]
-res/drawable/iz_join_no.png: Warning: Found bitmap drawable res/drawable/iz_join_no.png in densityless folder [IconLocation]
-res/drawable/iz_large.png: Warning: Found bitmap drawable res/drawable/iz_large.png in densityless folder [IconLocation]
-res/drawable/iz_left.png: Warning: Found bitmap drawable res/drawable/iz_left.png in densityless folder [IconLocation]
-res/drawable/iz_leg2_no.png: Warning: Found bitmap drawable res/drawable/iz_leg2_no.png in densityless folder [IconLocation]
-res/drawable/iz_leg2_ok.png: Warning: Found bitmap drawable res/drawable/iz_leg2_ok.png in densityless folder [IconLocation]
-res/drawable/iz_legnext_no.png: Warning: Found bitmap drawable res/drawable/iz_legnext_no.png in densityless folder [IconLocation]
-res/drawable/iz_legnext_ok.png: Warning: Found bitmap drawable res/drawable/iz_legnext_ok.png in densityless folder [IconLocation]
-res/drawable/iz_light.png: Warning: Found bitmap drawable res/drawable/iz_light.png in densityless folder [IconLocation]
-res/drawable/iz_manager.png: Warning: Found bitmap drawable res/drawable/iz_manager.png in densityless folder [IconLocation]
-res/drawable/iz_measure.png: Warning: Found bitmap drawable res/drawable/iz_measure.png in densityless folder [IconLocation]
-res/drawable/iz_measure_on.png: Warning: Found bitmap drawable res/drawable/iz_measure_on.png in densityless folder [IconLocation]
-res/drawable/iz_medium.png: Warning: Found bitmap drawable res/drawable/iz_medium.png in densityless folder [IconLocation]
-res/drawable/iz_menu.png: Warning: Found bitmap drawable res/drawable/iz_menu.png in densityless folder [IconLocation]
-res/drawable/iz_menu_red.png: Warning: Found bitmap drawable res/drawable/iz_menu_red.png in densityless folder [IconLocation]
-res/drawable/iz_mode.png: Warning: Found bitmap drawable res/drawable/iz_mode.png in densityless folder [IconLocation]
-res/drawable/iz_move.png: Warning: Found bitmap drawable res/drawable/iz_move.png in densityless folder [IconLocation]
-res/drawable/iz_none.png: Warning: Found bitmap drawable res/drawable/iz_none.png in densityless folder [IconLocation]
-res/drawable/iz_northleft.png: Warning: Found bitmap drawable res/drawable/iz_northleft.png in densityless folder [IconLocation]
-res/drawable/iz_northup.png: Warning: Found bitmap drawable res/drawable/iz_northup.png in densityless folder [IconLocation]
-res/drawable/iz_note.png: Warning: Found bitmap drawable res/drawable/iz_note.png in densityless folder [IconLocation]
-res/drawable/iz_numbers_no.png: Warning: Found bitmap drawable res/drawable/iz_numbers_no.png in densityless folder [IconLocation]
-res/drawable/iz_numbers_ok.png: Warning: Found bitmap drawable res/drawable/iz_numbers_ok.png in densityless folder [IconLocation]
-res/drawable/iz_open.png: Warning: Found bitmap drawable res/drawable/iz_open.png in densityless folder [IconLocation]
-res/drawable/iz_open_no.png: Warning: Found bitmap drawable res/drawable/iz_open_no.png in densityless folder [IconLocation]
-res/drawable/iz_orthogonal.png: Warning: Found bitmap drawable res/drawable/iz_orthogonal.png in densityless folder [IconLocation]
-res/drawable/iz_perspective.png: Warning: Found bitmap drawable res/drawable/iz_perspective.png in densityless folder [IconLocation]
-res/drawable/iz_plan.png: Warning: Found bitmap drawable res/drawable/iz_plan.png in densityless folder [IconLocation]
-res/drawable/iz_plan_profile.png: Warning: Found bitmap drawable res/drawable/iz_plan_profile.png in densityless folder [IconLocation]
-res/drawable/iz_plot.png: Warning: Found bitmap drawable res/drawable/iz_plot.png in densityless folder [IconLocation]
-res/drawable/iz_plot_no.png: Warning: Found bitmap drawable res/drawable/iz_plot_no.png in densityless folder [IconLocation]
-res/drawable/iz_plus.png: Warning: Found bitmap drawable res/drawable/iz_plus.png in densityless folder [IconLocation]
-res/drawable/iz_polyline.png: Warning: Found bitmap drawable res/drawable/iz_polyline.png in densityless folder [IconLocation]
-res/drawable/iz_range_box.png: Warning: Found bitmap drawable res/drawable/iz_range_box.png in densityless folder [IconLocation]
-res/drawable/iz_range_item.png: Warning: Found bitmap drawable res/drawable/iz_range_item.png in densityless folder [IconLocation]
-res/drawable/iz_range_no.png: Warning: Found bitmap drawable res/drawable/iz_range_no.png in densityless folder [IconLocation]
-res/drawable/iz_range_ok.png: Warning: Found bitmap drawable res/drawable/iz_range_ok.png in densityless folder [IconLocation]
-res/drawable/iz_read.png: Warning: Found bitmap drawable res/drawable/iz_read.png in densityless folder [IconLocation]
-res/drawable/iz_read_no.png: Warning: Found bitmap drawable res/drawable/iz_read_no.png in densityless folder [IconLocation]
-res/drawable/iz_redo.png: Warning: Found bitmap drawable res/drawable/iz_redo.png in densityless folder [IconLocation]
-res/drawable/iz_reduce_no.png: Warning: Found bitmap drawable res/drawable/iz_reduce_no.png in densityless folder [IconLocation]
-res/drawable/iz_reduce_ok.png: Warning: Found bitmap drawable res/drawable/iz_reduce_ok.png in densityless folder [IconLocation]
-res/drawable/iz_reduce_ok2.png: Warning: Found bitmap drawable res/drawable/iz_reduce_ok2.png in densityless folder [IconLocation]
-res/drawable/iz_refresh.png: Warning: Found bitmap drawable res/drawable/iz_refresh.png in densityless folder [IconLocation]
-res/drawable/iz_reload.png: Warning: Found bitmap drawable res/drawable/iz_reload.png in densityless folder [IconLocation]
-res/drawable/iz_reverse_no.png: Warning: Found bitmap drawable res/drawable/iz_reverse_no.png in densityless folder [IconLocation]
-res/drawable/iz_reverse_ok.png: Warning: Found bitmap drawable res/drawable/iz_reverse_ok.png in densityless folder [IconLocation]
-res/drawable/iz_right.png: Warning: Found bitmap drawable res/drawable/iz_right.png in densityless folder [IconLocation]
-res/drawable/iz_rock_no.png: Warning: Found bitmap drawable res/drawable/iz_rock_no.png in densityless folder [IconLocation]
-res/drawable/iz_rock_ok.png: Warning: Found bitmap drawable res/drawable/iz_rock_ok.png in densityless folder [IconLocation]
-res/drawable/iz_ruler_off.png: Warning: Found bitmap drawable res/drawable/iz_ruler_off.png in densityless folder [IconLocation]
-res/drawable/iz_ruler_on.png: Warning: Found bitmap drawable res/drawable/iz_ruler_on.png in densityless folder [IconLocation]
-res/drawable/iz_sap5.png: Warning: Found bitmap drawable res/drawable/iz_sap5.png in densityless folder [IconLocation]
-res/drawable/iz_save.png: Warning: Found bitmap drawable res/drawable/iz_save.png in densityless folder [IconLocation]
-res/drawable/iz_save_off_transp.png: Warning: Found bitmap drawable res/drawable/iz_save_off_transp.png in densityless folder [IconLocation]
-res/drawable/iz_save_transp.png: Warning: Found bitmap drawable res/drawable/iz_save_transp.png in densityless folder [IconLocation]
-res/drawable/iz_sdcard.png: Warning: Found bitmap drawable res/drawable/iz_sdcard.png in densityless folder [IconLocation]
-res/drawable/iz_search.png: Warning: Found bitmap drawable res/drawable/iz_search.png in densityless folder [IconLocation]
-res/drawable/iz_select.png: Warning: Found bitmap drawable res/drawable/iz_select.png in densityless folder [IconLocation]
-res/drawable/iz_select_all.png: Warning: Found bitmap drawable res/drawable/iz_select_all.png in densityless folder [IconLocation]
-res/drawable/iz_select_area.png: Warning: Found bitmap drawable res/drawable/iz_select_area.png in densityless folder [IconLocation]
-res/drawable/iz_select_line.png: Warning: Found bitmap drawable res/drawable/iz_select_line.png in densityless folder [IconLocation]
-res/drawable/iz_select_ok.png: Warning: Found bitmap drawable res/drawable/iz_select_ok.png in densityless folder [IconLocation]
-res/drawable/iz_select_point.png: Warning: Found bitmap drawable res/drawable/iz_select_point.png in densityless folder [IconLocation]
-res/drawable/iz_select_shot.png: Warning: Found bitmap drawable res/drawable/iz_select_shot.png in densityless folder [IconLocation]
-res/drawable/iz_select_station.png: Warning: Found bitmap drawable res/drawable/iz_select_station.png in densityless folder [IconLocation]
-res/drawable/iz_sensor.png: Warning: Found bitmap drawable res/drawable/iz_sensor.png in densityless folder [IconLocation]
-res/drawable/iz_sharp_no.png: Warning: Found bitmap drawable res/drawable/iz_sharp_no.png in densityless folder [IconLocation]
-res/drawable/iz_sharp_ok.png: Warning: Found bitmap drawable res/drawable/iz_sharp_ok.png in densityless folder [IconLocation]
-res/drawable/iz_small.png: Warning: Found bitmap drawable res/drawable/iz_small.png in densityless folder [IconLocation]
-res/drawable/iz_splay_back.png: Warning: Found bitmap drawable res/drawable/iz_splay_back.png in densityless folder [IconLocation]
-res/drawable/iz_splay_back_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_back_black.png in densityless folder [IconLocation]
-res/drawable/iz_splay_both.png: Warning: Found bitmap drawable res/drawable/iz_splay_both.png in densityless folder [IconLocation]
-res/drawable/iz_splay_both_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_both_black.png in densityless folder [IconLocation]
-res/drawable/iz_splay_front.png: Warning: Found bitmap drawable res/drawable/iz_splay_front.png in densityless folder [IconLocation]
-res/drawable/iz_splay_front_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_front_black.png in densityless folder [IconLocation]
-res/drawable/iz_splay_none.png: Warning: Found bitmap drawable res/drawable/iz_splay_none.png in densityless folder [IconLocation]
-res/drawable/iz_splay_none_black.png: Warning: Found bitmap drawable res/drawable/iz_splay_none_black.png in densityless folder [IconLocation]
-res/drawable/iz_splays_all.png: Warning: Found bitmap drawable res/drawable/iz_splays_all.png in densityless folder [IconLocation]
-res/drawable/iz_splays_line.png: Warning: Found bitmap drawable res/drawable/iz_splays_line.png in densityless folder [IconLocation]
-res/drawable/iz_splays_no.png: Warning: Found bitmap drawable res/drawable/iz_splays_no.png in densityless folder [IconLocation]
-res/drawable/iz_splays_none.png: Warning: Found bitmap drawable res/drawable/iz_splays_none.png in densityless folder [IconLocation]
-res/drawable/iz_splays_ok.png: Warning: Found bitmap drawable res/drawable/iz_splays_ok.png in densityless folder [IconLocation]
-res/drawable/iz_splays_point.png: Warning: Found bitmap drawable res/drawable/iz_splays_point.png in densityless folder [IconLocation]
-res/drawable/iz_split.png: Warning: Found bitmap drawable res/drawable/iz_split.png in densityless folder [IconLocation]
-res/drawable/iz_station.png: Warning: Found bitmap drawable res/drawable/iz_station.png in densityless folder [IconLocation]
-res/drawable/iz_station_name.png: Warning: Found bitmap drawable res/drawable/iz_station_name.png in densityless folder [IconLocation]
-res/drawable/iz_station_name_dot.png: Warning: Found bitmap drawable res/drawable/iz_station_name_dot.png in densityless folder [IconLocation]
-res/drawable/iz_station_no.png: Warning: Found bitmap drawable res/drawable/iz_station_no.png in densityless folder [IconLocation]
-res/drawable/iz_station_no_dot.png: Warning: Found bitmap drawable res/drawable/iz_station_no_dot.png in densityless folder [IconLocation]
-res/drawable/iz_station_off.png: Warning: Found bitmap drawable res/drawable/iz_station_off.png in densityless folder [IconLocation]
-res/drawable/iz_station_on.png: Warning: Found bitmap drawable res/drawable/iz_station_on.png in densityless folder [IconLocation]
-res/drawable/iz_station_point.png: Warning: Found bitmap drawable res/drawable/iz_station_point.png in densityless folder [IconLocation]
-res/drawable/iz_station_point_dot.png: Warning: Found bitmap drawable res/drawable/iz_station_point_dot.png in densityless folder [IconLocation]
-res/drawable/iz_surface_no.png: Warning: Found bitmap drawable res/drawable/iz_surface_no.png in densityless folder [IconLocation]
-res/drawable/iz_surface_off.png: Warning: Found bitmap drawable res/drawable/iz_surface_off.png in densityless folder [IconLocation]
-res/drawable/iz_surface_ok.png: Warning: Found bitmap drawable res/drawable/iz_surface_ok.png in densityless folder [IconLocation]
-res/drawable/iz_surface_on.png: Warning: Found bitmap drawable res/drawable/iz_surface_on.png in densityless folder [IconLocation]
-res/drawable/iz_toggle.png: Warning: Found bitmap drawable res/drawable/iz_toggle.png in densityless folder [IconLocation]
-res/drawable/iz_toggle_no.png: Warning: Found bitmap drawable res/drawable/iz_toggle_no.png in densityless folder [IconLocation]
-res/drawable/iz_tools.png: Warning: Found bitmap drawable res/drawable/iz_tools.png in densityless folder [IconLocation]
-res/drawable/iz_tools_area.png: Warning: Found bitmap drawable res/drawable/iz_tools_area.png in densityless folder [IconLocation]
-res/drawable/iz_tools_line.png: Warning: Found bitmap drawable res/drawable/iz_tools_line.png in densityless folder [IconLocation]
-res/drawable/iz_tools_point.png: Warning: Found bitmap drawable res/drawable/iz_tools_point.png in densityless folder [IconLocation]
-res/drawable/iz_topodroid.png: Warning: Found bitmap drawable res/drawable/iz_topodroid.png in densityless folder [IconLocation]
-res/drawable/iz_turn.png: Warning: Found bitmap drawable res/drawable/iz_turn.png in densityless folder [IconLocation]
-res/drawable/iz_undo.png: Warning: Found bitmap drawable res/drawable/iz_undo.png in densityless folder [IconLocation]
-res/drawable/iz_view.png: Warning: Found bitmap drawable res/drawable/iz_view.png in densityless folder [IconLocation]
-res/drawable/iz_wall.png: Warning: Found bitmap drawable res/drawable/iz_wall.png in densityless folder [IconLocation]
-res/drawable/iz_wall_no.png: Warning: Found bitmap drawable res/drawable/iz_wall_no.png in densityless folder [IconLocation]
-res/drawable/iz_write.png: Warning: Found bitmap drawable res/drawable/iz_write.png in densityless folder [IconLocation]
-res/drawable/iz_write_no.png: Warning: Found bitmap drawable res/drawable/iz_write_no.png in densityless folder [IconLocation]
-res/drawable/iz_xsplays_ok.png: Warning: Found bitmap drawable res/drawable/iz_xsplays_ok.png in densityless folder [IconLocation]
-res/drawable/iz_ysplays_horz.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_horz.png in densityless folder [IconLocation]
-res/drawable/iz_ysplays_no.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_no.png in densityless folder [IconLocation]
-res/drawable/iz_ysplays_plain.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_plain.png in densityless folder [IconLocation]
-res/drawable/iz_ysplays_vert.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_vert.png in densityless folder [IconLocation]
-res/drawable/iz_ysplays_xsection.png: Warning: Found bitmap drawable res/drawable/iz_ysplays_xsection.png in densityless folder [IconLocation]
-res/drawable/lvrseekbar_background.png: Warning: Found bitmap drawable res/drawable/lvrseekbar_background.png in densityless folder [IconLocation]
-res/drawable/lvrseekbar_thumb.png: Warning: Found bitmap drawable res/drawable/lvrseekbar_thumb.png in densityless folder [IconLocation]
-res/drawable/monochrome90.png: Warning: Found bitmap drawable res/drawable/monochrome90.png in densityless folder [IconLocation]
-res/drawable/plus.png: Warning: Found bitmap drawable res/drawable/plus.png in densityless folder [IconLocation]
 res/layout/azimuth_dialog.xml:98: Warning: OK button should be on the right (was "LEFT | OK | RIGHT", should be "LEFT | RIGHT | OK") [ButtonOrder]
       <Button android:id="@+id/btn_ok"
        ~~~~~~
@@ -603,25 +356,19 @@ res/layout/cave3d_activity.xml:79: Warning: Buttons in button bars should be bor
 res/layout/cave3d_activity.xml:86: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
     <Button android:id="@+id/measure_station"
      ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:54: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+res/layout/cave3d_sketches_dialog.xml:55: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
       <Button android:id="@+id/btn_bind"
        ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:61: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+res/layout/cave3d_sketches_dialog.xml:62: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
       <Button android:id="@+id/btn_load"
        ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:68: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
+res/layout/cave3d_sketches_dialog.xml:69: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
       <Button android:id="@+id/btn_ok"
        ~~~~~~
 res/layout/dblock_row_noedit.xml:18: Warning: Missing autofillHints attribute [Autofill]
   <EditText 
    ~~~~~~~~
-res/layout/dblock_row_noedit.xml:42: Warning: Missing autofillHints attribute [Autofill]
+res/layout/dblock_row_noedit.xml:41: Warning: Missing autofillHints attribute [Autofill]
   <EditText 
    ~~~~~~~~
-res/layout/dblock_row_noedit.xml:18: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-  <EditText 
-   ~~~~~~~~
-res/layout/dblock_row_noedit.xml:42: Warning: Missing accessibility label: provide either a view with an android:labelFor that references this view or provide an android:hint [LabelFor]
-  <EditText 
-   ~~~~~~~~
-90 errors, 262 warnings
+90 errors, 35 warnings

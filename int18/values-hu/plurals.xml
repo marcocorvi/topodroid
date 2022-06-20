@@ -14,4 +14,9 @@
     <item quantity="one">Egy letöltött kalibrációs adat (%2$d csomagban)</item>
     <item quantity="other">%1$d letöltött adat (%2$d csomagban)</item>
   </plurals>
+  <!-- TODO plurals name="found_calib_groups">
+    <item quantity="zero">No group found</item>
+    <item quantity="one">Found %1$d group</item>
+    <item quantity="other">Found %1$d groups</item>
+  </plurals -->
 </resources>

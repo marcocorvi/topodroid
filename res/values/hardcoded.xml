@@ -4,6 +4,9 @@
   <string name="pockettopo" translatable="false">PocketTopo</string>
   <string name="number_sign" translatable="false"> # </string>
   <string name="char_x" translatable="false"> X </string>
+  <!-- UNUSED string name="char_less" translatable="false">&lt;</string -->
+  <!-- UNUSED string name="char_more" translatable="false">&gt;</string -->
+  <string name="char_hyphen" translatable="false">&#x2010;</string>
 
   <string name="zero" translatable="false">0</string>
   <string name="zerod" translatable="false">0.0</string>

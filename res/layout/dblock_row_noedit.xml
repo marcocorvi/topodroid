@@ -27,11 +27,10 @@
     android:gravity="end"
     android:inputType="none"
     android:editable="false"
+    android:hint="@string/char_hyphen"
   /> <!-- editable=false is necessary -->
   <!-- 
-    android:hint="@string/hint_from"
     android:importantForAutofill="no"
-    android:inputType="text"
     android:imeOptions="actionDone"
   -->
   <!--
@@ -51,11 +50,10 @@
     android:gravity="end"
     android:inputType="none"
     android:editable="false"
+    android:hint="@string/char_hyphen"
   /> <!-- editable=false is necessary -->
   <!-- 
-    android:hint="@string/hint_to"
     android:importantForAutofill="no"
-    android:inputType="text"
     android:imeOptions="actionDone"
   -->
 

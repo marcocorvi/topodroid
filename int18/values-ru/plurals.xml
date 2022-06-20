@@ -22,4 +22,9 @@
     <item quantity="many">Считано %1$d измерений (%2$d пакетов)</item>
     <item quantity="other">Считано %1$d измерений (%2$d пакетов)</item>
   </plurals>
+  <!-- TODO plurals name="found_calib_groups">
+    <item quantity="zero">No group found</item>
+    <item quantity="one">Found %1$d group</item>
+    <item quantity="other">Found %1$d groups</item>
+  </plurals -->
 </resources>

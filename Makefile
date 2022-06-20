@@ -85,6 +85,9 @@ rebuild:
 less:
 	$(ANT) debug 2>&1 | less
 
+lint:
+	../../../cmdline-tools/latest/bin/lint --ignore IconLocation . > lint.out
+
 pdf:
 	./howto/pdf.sh
 

@@ -12,4 +12,9 @@
     <item quantity="zero">无校准数据读取</item>
     <item quantity="other">读取 %1$d 数据 (%2$d packets)</item>
   </plurals>
+  <!-- TODO plurals name="found_calib_groups">
+    <item quantity="zero">No group found</item>
+    <item quantity="one">Found %1$d group</item>
+    <item quantity="other">Found %1$d groups</item>
+  </plurals -->
 </resources>

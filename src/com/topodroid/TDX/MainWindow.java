@@ -954,7 +954,7 @@ public class MainWindow extends Activity
   //     mToolbar.addView( mButton1[k], params );
   //   }
 
-  //   mMenuImage = MyButton.getButton( mActivity, this, R.drawable.ic_menu );
+  //   mMenuImage = MyButton.getButton( mActivity, this, R.drawable.iz_menu );
   //   TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, getResources(), R.drawable.iz_menu ) );
   //   mToolbar.addView( mMenuImage, params );
   // }

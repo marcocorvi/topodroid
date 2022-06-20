@@ -16,4 +16,9 @@
     <item quantity="one">Letto un dato (%2$d pacchetti)</item>
     <item quantity="other">Letti %1$d dati (%2$d pacchetti)</item>
   </plurals>
+  <plurals name="found_calib_groups">
+    <item quantity="zero">Trovato nessun gruppo</item>
+    <item quantity="one">Trovato un gruppo</item>
+    <item quantity="other">Trovati %1$d gruppi</item>
+  </plurals>
 </resources>

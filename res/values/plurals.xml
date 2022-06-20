@@ -12,10 +12,10 @@
     <item quantity="zero">No calibration data read</item>
     <item quantity="other">Read %1$d data (%2$d packets)</item>
   </plurals>
-  <!-- TODO plurals name="found_calib_groups">
+  <plurals name="found_calib_groups">
     <item quantity="zero">No group found</item>
     <item quantity="one">Found %1$d group</item>
     <item quantity="other">Found %1$d groups</item>
-  </plurals -->
+  </plurals>
 
 </resources>

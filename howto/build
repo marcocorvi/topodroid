@@ -49,6 +49,12 @@ Therefore use
    make signed
 which creates a v1-3 signed apk.
 
+Next get size and md5
+   make md5
+   [] upload the signed apk to speleoapks
+   mv Topodroid-... APKS
+cd ../speleoapks and git push
+
 ----------------------------------------------------------------
 Howto Build with studio
 
