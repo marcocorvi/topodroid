@@ -112,6 +112,9 @@ git-add:
 git-pull:
 	git pull
 
+git-push:
+	git push < `cat 1token`
+
 SRC = \
   ./AndroidManifest.xml \
   ./ant/* \
