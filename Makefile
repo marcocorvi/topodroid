@@ -113,7 +113,7 @@ git-pull:
 	git pull
 
 git-push:
-	git push < `cat 1token`
+	cat 1tioken | git push
 
 SRC = \
   ./AndroidManifest.xml \
