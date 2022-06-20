@@ -112,8 +112,9 @@ git-add:
 git-pull:
 	git pull
 
-git-push:
-	cat 1tioken | git push
+help:
+	@echo "Actions: [default] install clean lint, signed md5 pdf symbols, git-add git-pull, log perms"
+
 
 SRC = \
   ./AndroidManifest.xml \
