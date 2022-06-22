@@ -22,15 +22,15 @@
     <string name="new_survey_label">Новая съёмка</string>
     <string name="distox_label">Псевдоним DistoX</string>
 
-  <string name="r_title">Важное замечание по Android R</string>
-  <string name="r_dialog">
+  <!-- UNUSED string name="r_title">Важное замечание по Android R</string -->
+  <!-- UNUSED string name="r_dialog">
 В Android-R TopoDroid должен использовать свою папку в "Android/data". Если папкаTopoDroid не найдена она будет создана.\nВы можете импортировать zip-архивы своих старых съёмок.\n\nПомните, что файлы в новой папке TopoDroid удаляются при удалении программы TopoDroid.\n\n
 См. Подробности на веб сайте.\n
-  </string>
-  <string name="r_checkboxes">Вы должны подтвердить следующее:</string>
-  <string name="r_i_understood">Я полностью понял это уведомление.</string>
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">Вы должны подтвердить следующее:</string -->
+  <!-- UNUSED string name="r_i_understood">Я полностью понял это уведомление.</string -->
   <!-- UNUSED string name="r_disclaimer">Я согласен с тем, что автор(ы) приложения не несут ответственности за любой ущерб или потерю данных.</string -->
-  <string name="r_continue">ПРОДОЛЖИТЬ</string>
+  <!-- UNUSED string name="r_continue">ПРОДОЛЖИТЬ</string -->
 
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
@@ -2042,8 +2042,10 @@
     <string name="cpref_station_toast_summary">Диалог данных пикетов instead of box [n]</string>
     <string name="cpref_station_points_title">Точки пикетов</string>
     <string name="cpref_station_points_summary">Всегда отображать прикеты [n]</string>
-    <string name="cpref_station_size_title">Размер точкек пикетов</string>
-    <string name="cpref_station_size_summary">Размер точек пикетов [8 pxl]</string>
+    <string name="cpref_station_point_size_title">Размер точкек пикетов</string>
+    <string name="cpref_station_point_size_summary">Размер точек пикетов [8 pxl]</string>
+    <!-- TODO string name="cpref_station_text_size_title">Station text size</string -->
+    <!-- TODO string name="cpref_station_text_size_summary">Size of station text [20 pt]</string -->
     <string name="cpref_measure_dialog_title">Сообщение расстояния</string>
     <string name="cpref_measure_dialog_summary">Сообщение расстояния вместо диалога [n]</string>
  

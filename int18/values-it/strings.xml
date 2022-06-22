@@ -22,15 +22,15 @@
     <string name="new_survey_label">Nuovo rilievo</string>
     <string name="distox_label">DistoX</string>
 
-  <string name="r_title">Android-R: avviso importante</string>
-  <string name="r_dialog">
+  <!-- UNUSED string name="r_title">Android-R: avviso importante</string -->
+  <!-- UNUSED string name="r_dialog">
 Con Android-R TopoDroid deve usare la propria cartella in "Android/data". TopoDroid non l\'ha trovata e quindi l\'ha creata.\nPuoi copiare in questa cartella i file zip dei tuoi vecchi rilievi.\n\nAttenzione: i file nella nuova cartella verranno cancellati se disinstalli TopoDroid.\n\n
 Fai riferimento alle pagine web per i dettagli.\n
-  </string>
-  <string name="r_checkboxes">Devi confermare tramite le checkbox.</string>
-  <string name="r_i_understood">Ho compreso appieno questo avviso</string>
-  <!-- UNUSED string name="r_disclaimer">Sono convinto che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
-  <string name="r_continue">CONTINUA</string>
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">Devi confermare tramite le checkbox.</string -->
+  <!-- UNUSED string name="r_i_understood">Ho compreso appieno questo avviso</string -->
+  <!-- UNUSED string name="r_disclaimer">Riconosco che gli autori della app non sono responsabili per qualsiasi danno o perdita di dati.</string -->
+  <!-- UNUSED string name="r_continue">CONTINUA</string -->
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
@@ -2050,8 +2050,10 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="cpref_station_toast_summary">Dati caposaldo in dialog invece che in box [n]</string>
     <string name="cpref_station_points_title">Punti capisaldi</string>
     <string name="cpref_station_points_summary">Mostra sempre capisaldi [n]</string>
-    <string name="cpref_station_size_title">Grandezza punti capisaldi</string>
-    <string name="cpref_station_size_summary">Grandezza punti capisaldi [8 px]</string>
+    <string name="cpref_station_point_size_title">Grandezza punti capisaldi</string>
+    <string name="cpref_station_point_size_summary">Grandezza punti capisaldi [8 px]</string>
+    <string name="cpref_station_text_size_title">Dimensione testo capisaldi</string>
+    <string name="cpref_station_text_size_summary">Dimensione dei nomi dei capisaldi [20 pt]</string>
     <string name="cpref_measure_dialog_title">Messaggio distanza</string>
     <string name="cpref_measure_dialog_summary">Messaggio distanza invece di dialog [n]</string>
  

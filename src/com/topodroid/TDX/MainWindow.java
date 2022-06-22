@@ -1026,6 +1026,9 @@ public class MainWindow extends Activity
     super.onStart();
     // restoreInstanceFromFile();
     // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
+    if ( ! TDandroid.canManageExternalStorage( this ) ) {
+      TDandroid.requestExternalStorage( this, this );
+    }
 
     // TDLog.Profile("Main Window on Start");
     // TDLog.v("MAIN on Start");
@@ -1354,6 +1357,7 @@ public class MainWindow extends Activity
 
   /* FIXME-23 */
   // this is called only for androidx.appcompat.app.AppCompatActivity so it is pretty useless
+  // it is called on Android-11 API-30
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
@@ -1369,7 +1373,7 @@ public class MainWindow extends Activity
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
         TDLog.v("PERM " + "MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
         if ( ! TDandroid.canRun( mApp, this ) ) { // if ( not_granted > 0 /* && ! say_dialogR */ )
-          TDToast.makeLong( "Permissions not granted. Goodbye" );
+          // TDToast.makeLong( "Permissions not granted. Goodbye" );
           if ( mRequestPermissionTime > 2 ) { 
             finish();
           }

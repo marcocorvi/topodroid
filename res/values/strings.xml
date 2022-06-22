@@ -8,7 +8,7 @@
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
-    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant these permissions using the appops command in an adb shell:\nappops set com.topodroid.TDX READ_EXTERNAL_STORAGE allow\nappops set com.topodroid.TDX WRITE_EXTERNAL_STORAGE allow\nappops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow\n\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html</string>
+    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
     <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
     <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
 
@@ -18,18 +18,18 @@
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Menu</string>
 
-  <string name="r_title">Important notice for Android-11+</string>
-  <string name="r_dialog">
+  <!-- UNUSED string name="r_title">Important notice for Android-11+</string -->
+  <!-- UNUSED string name="r_dialog">
 On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
-  </string>
+  </string -->
   <!-- UNUSED string name="r_old_dialog">
 With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
 Refer to the web pages for details.\n
   </string -->
-  <string name="r_checkboxes">You must confirm the checkbox to continue.</string>
-  <string name="r_i_understood">I fully understood this notice</string>
+  <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
+  <!-- UNUSED string name="r_i_understood">I fully understood this notice</string -->
   <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <string name="r_continue">CONTINUE</string>
+  <!-- UNUSED string name="r_continue">CONTINUE</string -->
 
     <string name="app_name" translatable="false">TopoDroid-X</string>
     <string name="tdm_title">TopoDroid Manager</string>
@@ -2075,8 +2075,10 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string>
     <string name="cpref_station_points_title">Station points</string>
     <string name="cpref_station_points_summary">Display stations always [n]</string>
-    <string name="cpref_station_size_title">Station point size</string>
-    <string name="cpref_station_size_summary">Size of station points [8 pxl]</string>
+    <string name="cpref_station_point_size_title">Station point size</string>
+    <string name="cpref_station_point_size_summary">Size of station points [8 pxl]</string>
+    <string name="cpref_station_text_size_title">Station text size</string>
+    <string name="cpref_station_text_size_summary">Size of station text [20 pt]</string>
     <string name="cpref_measure_dialog_title">Distance message</string>
     <string name="cpref_measure_dialog_summary">Distance message instead of dialog [n]</string>
     <string name="cpref_grid_above_title">Top grid</string>

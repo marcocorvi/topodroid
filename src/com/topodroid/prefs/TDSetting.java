@@ -933,11 +933,12 @@ public class TDSetting
     GlRenderer.mMinClino = b ? 90 : 0;
     GlModel.mStationPoints  = prefs.getBoolean( keyCave3D[1], bool(defCave3D[1]) );
     GlNames.setPointSize( tryInt(   prefs,  keyCave3D[2], defCave3D[2] ) );
-    TopoGL.mSelectionRadius = tryFloat( prefs,  keyCave3D[3], defCave3D[3] );
-    TopoGL.mMeasureToast    = prefs.getBoolean( keyCave3D[4], bool(defCave3D[4]) );
-    TopoGL.mStationDialog   = prefs.getBoolean( keyCave3D[5], bool(defCave3D[5]) );
-    GlModel.mGridAbove      = prefs.getBoolean( keyCave3D[6], bool(defCave3D[6]) );
-    GlModel.mGridExtent     = tryInt(   prefs,  keyCave3D[7], defCave3D[7] );
+    GlNames.setTextSize( tryInt(   prefs,  keyCave3D[3], defCave3D[3] ) );
+    TopoGL.mSelectionRadius = tryFloat( prefs,  keyCave3D[4], defCave3D[4] );
+    TopoGL.mMeasureToast    = prefs.getBoolean( keyCave3D[5], bool(defCave3D[5]) );
+    TopoGL.mStationDialog   = prefs.getBoolean( keyCave3D[6], bool(defCave3D[6]) );
+    GlModel.mGridAbove      = prefs.getBoolean( keyCave3D[7], bool(defCave3D[7]) );
+    GlModel.mGridExtent     = tryInt(   prefs,  keyCave3D[8], defCave3D[8] );
 
     String[] keyDem3D = TDPrefKey.DEM3D;
     String[] defDem3D = TDPrefKey.DEM3Ddef;
@@ -1518,19 +1519,21 @@ public class TDSetting
       GlRenderer.mMinClino = b ? 90 : 0;
     } else if ( k.equals( key[1] ) ) { // CAVE3D_STATION_POINTS
       GlModel.mStationPoints = tryBooleanValue( hlp, k, v, bool(def[1]) );
-    } else if ( k.equals( key[2] ) ) { // CAVE3D_STATION_SIZE def=8
+    } else if ( k.equals( key[2] ) ) { // CAVE3D_STTAION_POINT_SIZE def=8
       GlNames.setPointSize( tryIntValue( hlp, k, v, def[2] ) );
-    } else if ( k.equals( key[3] ) ) { // CAVE3D_SELECTION_RADIUS
-      float radius = tryFloatValue( hlp, k, v, def[3] );
+    } else if ( k.equals( key[3] ) ) { // CAVE3D_STATION_TEXT_SIZE def=20
+      GlNames.setTextSize( tryIntValue( hlp, k, v, def[3] ) );
+    } else if ( k.equals( key[4] ) ) { // CAVE3D_SELECTION_RADIUS
+      float radius = tryFloatValue( hlp, k, v, def[4] );
       if ( radius > 10.0f ) TopoGL.mSelectionRadius = radius;
-    } else if ( k.equals( key[4] ) ) { // CAVE3D_MEASURE_DIALOG
-      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(def[4]) ); 
-    } else if ( k.equals( key[5] ) ) { // CAVE3D_STATION_TOAST
-      TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(def[5]) ); 
-    } else if ( k.equals( key[6] ) ) { // CAVE3D_GRID_ABOVE
-      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
-    } else if ( k.equals( key[7] ) ) { // CAVE3D_GRID_EXTENT
-      int extent = tryIntValue( hlp, k, v, def[7] ); 
+    } else if ( k.equals( key[5] ) ) { // CAVE3D_MEASURE_DIALOG
+      TopoGL.mMeasureToast = tryBooleanValue( hlp, k, v, bool(def[5]) ); 
+    } else if ( k.equals( key[6] ) ) { // CAVE3D_STATION_TOAST
+      TopoGL.mStationDialog = tryBooleanValue( hlp, k, v, bool(def[6]) ); 
+    } else if ( k.equals( key[7] ) ) { // CAVE3D_GRID_ABOVE
+      GlModel.mGridAbove = tryBooleanValue( hlp, k, v, bool(def[7]) ); 
+    } else if ( k.equals( key[8] ) ) { // CAVE3D_GRID_EXTENT
+      int extent = tryIntValue( hlp, k, v, def[8] ); 
       if ( extent > 1 && extent < 100 ) GlModel.mGridExtent = extent;
     } else {
       TDLog.Error("missing Cave3D key: " + k );

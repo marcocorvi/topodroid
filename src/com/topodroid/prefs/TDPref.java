@@ -1547,15 +1547,16 @@ public class TDPref implements AdapterView.OnItemSelectedListener
     return new TDPref[ ] {
       makeCbx( cat, key[0], tit[0], dsc[0], N, def[0],  ctx, hlp ), // NEG-CLINO
       // BT DEVICE
-      makeCbx( cat, key[1], tit[1], dsc[1], N, def[1],            ctx, hlp ), // STATION-POINT SUMMARY
-      makeEdt( cat, key[2], tit[2], dsc[2], A, def[2], INTEGER,   ctx, hlp ), // STATION SIZE
-      makeEdt( cat, key[3], tit[3], dsc[3], A, def[3], FLOAT,     ctx, hlp ), // SELECT RADIUS
-      makeCbx( cat, key[4], tit[4], dsc[4], N, def[4],            ctx, hlp ), // MEASURE DIALOG
-      makeCbx( cat, key[5], tit[5], dsc[5], N, def[5],            ctx, hlp ), // STATION TOAST 
-      makeCbx( cat, key[6], tit[6], dsc[6], N, def[6],            ctx, hlp ), // GRID ABOVE
-      makeEdt( cat, key[7], tit[7], dsc[7], A, def[7], INTEGER,   ctx, hlp ), // GRID SIZE
-      makeFwd( cat, key[8], tit[8],         N,                    ctx, hlp ), // DEM3D
-      makeFwd( cat, key[9], tit[9],         A,                    ctx, hlp )  // WALLS3D
+      makeCbx( cat, key[ 1], tit[ 1], dsc[ 1], N, def[ 1],            ctx, hlp ), // STATION-POINT SUMMARY
+      makeEdt( cat, key[ 2], tit[ 2], dsc[ 2], A, def[ 2], INTEGER,   ctx, hlp ), // STATION POINT SIZE
+      makeEdt( cat, key[ 3], tit[ 3], dsc[ 3], A, def[ 3], INTEGER,   ctx, hlp ), // STATION TEXT SIZE
+      makeEdt( cat, key[ 4], tit[ 4], dsc[ 4], A, def[ 4], FLOAT,     ctx, hlp ), // SELECT RADIUS
+      makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], N, def[ 5],            ctx, hlp ), // MEASURE DIALOG
+      makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], N, def[ 6],            ctx, hlp ), // STATION TOAST 
+      makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], N, def[ 7],            ctx, hlp ), // GRID ABOVE
+      makeEdt( cat, key[ 8], tit[ 8], dsc[ 8], A, def[ 8], INTEGER,   ctx, hlp ), // GRID SIZE
+      makeFwd( cat, key[ 9], tit[ 9],          N,                     ctx, hlp ), // DEM3D
+      makeFwd( cat, key[10], tit[10],          A,                     ctx, hlp )  // WALLS3D
     };
   }
 

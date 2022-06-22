@@ -22,15 +22,15 @@
     <string name="new_survey_label">新建测量</string>
     <string name="distox_label">DistoX</string>
 
-  <string name="r_title">Android R 重要通知</string>
-  <string name="r_dialog">
+  <!-- UNUSED string name="r_title">Android R 重要通知</string -->
+  <!-- UNUSED string name="r_dialog">
 使用 Android-R，TopoDroid 必须使用"Android/data"下的文件夹. TopoDroid 没有找到它并创建了它的文件夹.\n您可以导入旧的测量zip档案.\n\n请注意，卸载 TopoDroid 时会删除新 TopoDroid 文件夹中的文件.\n\n
 详情请参阅网页.\n
-  </string>
-  <string name="r_checkboxes">您必须确认复选框.</string>
-  <string name="r_i_understood">我完全理解这个通知</string>
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">您必须确认复选框.</string -->
+  <!-- UNUSED string name="r_i_understood">我完全理解这个通知</string -->
   <!-- UNUSED string name="r_disclaimer">我同意应用程序作者不承担任何损坏或数据丢失的责任.</string -->
-  <string name="r_continue">继续</string>
+  <!-- UNUSED string name="r_continue">继续</string -->
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
@@ -2055,8 +2055,10 @@
     <string name="cpref_station_toast_summary">站点数据对话框代替框 [n]</string>
     <string name="cpref_station_points_title">站点</string>
     <string name="cpref_station_points_summary">总是显示站点 [n]</string>
-    <string name="cpref_station_size_title">站点尺寸</string>
-    <string name="cpref_station_size_summary">站点的尺寸 [8 pxl]</string>
+    <string name="cpref_station_point_size_title">站点尺寸</string>
+    <string name="cpref_station_point_size_summary">站点的尺寸 [8 pxl]</string>
+    <!-- TODO string name="cpref_station_text_size_title">Station text size</string -->
+    <!-- TODO string name="cpref_station_text_size_summary">Size of station text [20 pt]</string -->
     <string name="cpref_measure_dialog_title">距离信息</string>
     <string name="cpref_measure_dialog_summary">距离信息替代对话框 [n]</string>
     <string name="cpref_grid_above_title">顶部网格</string>

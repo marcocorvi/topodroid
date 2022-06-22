@@ -20,8 +20,16 @@ import android.content.SharedPreferences.Editor;
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.content.Context;
+import android.content.Intent;
+
 // import java.lang.reflect.Method;
+
 import android.os.Build;
+import android.os.Environment;
+
+import android.provider.Settings;
+import android.net.Uri;
+
 // import android.os.Build.VERSION_CODES;
 import android.content.pm.PackageManager;
 // import android.content.pm.PackageManager.NameNotFoundException;
@@ -69,8 +77,9 @@ public class TDandroid
       android.Manifest.permission.BLUETOOTH_ADMIN,
       android.Manifest.permission.BLUETOOTH_CONNECT, // API-31
       // android.Manifest.permission.INTERNET,
+      // android.Manifest.permission.MANAGE_EXTERNAL_STORAGE, // will always be denied from API-30
       android.Manifest.permission.WRITE_EXTERNAL_STORAGE,
-      // android.Manifest.permission.READ_EXTERNAL_STORAGE,
+      android.Manifest.permission.READ_EXTERNAL_STORAGE,
       android.Manifest.permission.ACCESS_FINE_LOCATION,
       android.Manifest.permission.CAMERA,
       android.Manifest.permission.RECORD_AUDIO
@@ -81,25 +90,39 @@ public class TDandroid
       "BLUETOOTH", 
       "BLUETOOTH_ADMIN",
       "BLUETOOTH_CONNECT", // API-31
-      // "INTERNET",
+      // "MANAGE_EXTERNAL_STORAGE", // API-30
       "WRITE_EXTERNAL_STORAGE",
-      // "READ_EXTERNAL_STORAGE",
+      "READ_EXTERNAL_STORAGE",
+      // "INTERNET",
       "ACCESS_FINE_LOCATION",
       "CAMERA",
       "RECORD_AUDIO"
       // "ACCESS_MEDIA_LOCATION"
   };
 
+  static final String[] permShortNames = {
+      "BLUETOOTH", 
+      "BT_ADMIN",
+      "BT_CONNECT", // API-31
+      // "MANAGE_FILE", // API-30
+      "WRITE_FILE",
+      "READ_FILE",
+      // "INTERNET",
+      "LOCATION",
+      "CAMERA",
+      "AUDIO"
+      // "ACCESS_MEDIA_LOCATION"
+  };
+
   // static final String mPermissionManageExternalStorage = android.Manifest.permission.MANAGE_EXTERNAL_STORAGE; // API-30
   static final String mPermissionManageExternalStorage = "android.permission.MANAGE_EXTERNAL_STORAGE";
 
-  static final int NR_PERMS_D = 4; // 4 API-31
+  static final int NR_PERMS_D = 5; // 5 API-31 
   static final int NR_PERMS   = NR_PERMS_D + 3;
 
   // private static final int PERM_BT         = 0;
   // private static final int PERM_BT_ADMIN   = 1;
-  private static final int PERM_BT_CONNECT = 2; // 2 API-31, use -1 to fail tests and skip
-  // private static final int PERM_STORAGE    = 2;
+  private static final int PERM_BT_CONNECT  = 2; // 2 API-31, use -1 to fail test and skip
 
   // private static final int PERM_LOCATION   = NR_PERMS_D + 0;
   private static final int PERM_CAMERA     = NR_PERMS_D + 1; 
@@ -134,7 +157,7 @@ public class TDandroid
   }
 
   static boolean MustRestart = false; // whether need to restart app
-  static boolean[] GrantedPermission = { false, false, false, false, false, false, false };
+  static boolean[] GrantedPermission = { false, false, false, false, false, false, false, false }; // size = NR_PERMS
 
   // number of times permissions are requested
 
@@ -163,7 +186,7 @@ public class TDandroid
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) { // BT_CONNECT only for API >= 31 - API-31
         GrantedPermission[k] = true;
         continue;
-      }
+      } 
 
       if ( k == PERM_CAMERA && BELOW_API_21 ) { // CAMERA only for API >= 21
         // GrantedPermission[k] = false;
@@ -172,8 +195,14 @@ public class TDandroid
 
       GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
       if ( ! GrantedPermission[k] ) {
-        ++not_granted;
         TDLog.v( "PERM " + permNames[k] + " not granted ");
+        if ( time > 1 ) {
+          activity.requestPermissions( new String[] { perms[k] }, REQUEST_PERMISSIONS );
+          GrantedPermission[k] = ( context.checkSelfPermission( perms[k] ) == PackageManager.PERMISSION_GRANTED );
+          if ( ! GrantedPermission[k] ) ++not_granted;
+        } else {
+          ++not_granted;
+        }
         // if ( k < NR_PERMS_D ) MustRestart = true;
       // } else {
       //   // TDLog.v( "Perm " + permNames[k] + " granted ");
@@ -208,7 +237,22 @@ public class TDandroid
   static boolean canManageExternalStorage( Context context )
   {
     if ( BELOW_API_30 ) return true;
-    return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
+    // return ( context.checkSelfPermission( mPermissionManageExternalStorage ) == PackageManager.PERMISSION_GRANTED );
+    return Environment.isExternalStorageManager();
+  }
+
+  /** request external storage access 
+   * @param context    context
+   * @param activity   activity
+   * #see ourcodeworld.com/articles/read/1559/how-does-manage-external-storage-permission-work-in-android
+   */
+  static void requestExternalStorage(  Context context, Activity activity )
+  {
+    Intent intent = new Intent();
+    intent.setAction( Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION );
+    Uri uri = Uri.fromParts( "package", context.getPackageName(), null );
+    intent.setData( uri );
+    activity.startActivity( intent );
   }
 
   /** check if the app has the minimal permissions
@@ -223,11 +267,13 @@ public class TDandroid
       if ( k == PERM_BT_CONNECT && BELOW_API_31 ) continue; // BT_CONNECT only for API >= 31 - API-31
       // if ( k == PERM_CAMERA && AT_LEAST_API_21 ) continue; // CAMERA only for API >= 21
       if ( context.checkSelfPermission( perms[k] ) != PackageManager.PERMISSION_GRANTED ) {
-        TDLog.v("TD cannot run because of " + k + ": " + perms[k] );
+        // TDLog.v("TD cannot run because of " + k + ": " + perms[k] );
+        TDToast.makeLong( permShortNames[k] + " is needed to run. Bye.");
         return false;
       }
     }
-    return true;
+    // return true;
+    return canManageExternalStorage( context );
   }
 
   public static void setButtonBackground( Button btn, BitmapDrawable drawable ) { btn.setBackground( drawable ); }
@@ -328,15 +374,17 @@ public class TDandroid
     // TDLog.v( "check permissions" );
     int k;
     for ( k=0; k<NR_PERMS_D; ++k ) {
-      int res;
-      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) res = PackageManager.PERMISSION_GRANTED; // API-31
-      res = context.checkCallingOrSelfPermission( perms[k] );
-      if ( res != PackageManager.PERMISSION_GRANTED ) {
-        // TDLog.v("PERM " + "Check permission " + permNames[k] + " not granted ");
-        // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
-	return -1;
+      if ( k == PERM_BT_CONNECT && BELOW_API_31 ) {
+        // nothing: res = PackageManager.PERMISSION_GRANTED; // API-31
       } else {
-        // TDLog.v("PERM " + "Check permission " + permNames[k] + " granted ");
+        int res = context.checkCallingOrSelfPermission( perms[k] );
+        if ( res != PackageManager.PERMISSION_GRANTED ) {
+          TDLog.v("PERM " + "Check permission " + permNames[k] + " not granted ");
+          // TDToast.make( mActivity, "TopoDroid must have " + perms[k] );
+          return -1;
+        } else {
+          // TDLog.v("PERM " + "Check permission " + permNames[k] + " granted ");
+        }
       }
     }
     int ret = 0;

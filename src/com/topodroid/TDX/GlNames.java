@@ -96,11 +96,12 @@ public class GlNames extends GlShape
   public static void setPointSize( float size )
   { 
     if ( size <= 1 ) return;
+    // TDLog.v("GL NAME point size " + size );
     mPointSize  = size;
     mPointSize4 = 2*size;
   }
 
-  static void setTextSize( int size ) 
+  public static void setTextSize( int size ) 
   { 
     if ( size <= 1 ) return;
     mTextSizeP = size / 20.0f; 

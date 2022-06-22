@@ -1747,19 +1747,26 @@ public class TopoGL extends Activity
   // static final String CAVE3D_BASE_PATH        = "CAVE3D_BASE_PATH";
   // static final String CAVE3D_TEXT_SIZE        = "CAVE3D_TEXT_SIZE";
   // static final String CAVE3D_BUTTON_SIZE      = "CAVE3D_BUTTON_SIZE";
-  static final String CAVE3D_SELECTION_RADIUS = "CAVE3D_SELECTION_RADIUS";
-  static final String CAVE3D_STATION_TOAST    = "CAVE3D_STATION_TOAST";
-  static final String CAVE3D_STATION_SIZE     = "CAVE3D_STATION_SIZE";
-  static final String CAVE3D_STATION_POINTS   = "CAVE3D_STATION_POINTS";
-  static final String CAVE3D_MEASURE_DIALOG   = "CAVE3D_MEASURE_DIALOG";
-  static final String CAVE3D_GRID_ABOVE       = "CAVE3D_GRID_ABOVE";
-  static final String CAVE3D_GRID_EXTENT      = "CAVE3D_GRID_EXTEND";
-  static final String CAVE3D_NEG_CLINO        = "CAVE3D_NEG_CLINO";
+
+  // same as TDPrefKey.CAVE3D[]
+  static final String CAVE3D_NEG_CLINO          = "CAVE3D_NEG_CLINO";
+  static final String CAVE3D_STATION_POINTS     = "CAVE3D_STATION_POINTS";
+  static final String CAVE3D_STATION_POINT_SIZE = "CAVE3D_STATION_POINT_SIZE";
+  static final String CAVE3D_STATION_TEXT_SIZE  = "CAVE3D_STATION_TEXT_SIZE";
+  static final String CAVE3D_SELECTION_RADIUS   = "CAVE3D_SELECTION_RADIUS";
+  static final String CAVE3D_MEASURE_DIALOG     = "CAVE3D_MEASURE_DIALOG";
+  static final String CAVE3D_STATION_TOAST      = "CAVE3D_STATION_TOAST";
+  static final String CAVE3D_GRID_ABOVE         = "CAVE3D_GRID_ABOVE";
+  static final String CAVE3D_GRID_EXTENT        = "CAVE3D_GRID_EXTEND";
+
   // static final String CAVE3D_BLUETOOTH_DEVICE = "CAVE3D_BLUETOOTH_DEVICE"; // FIXME BLUETOOTH SETTING
+
+  // same as TDPrefKey.DEM3D[]
   static final String CAVE3D_DEM_BUFFER       = "CAVE3D_DEM_BUFFER";
   static final String CAVE3D_DEM_MAXSIZE      = "CAVE3D_DEM_MAXSIZE";
   static final String CAVE3D_DEM_REDUCE       = "CAVE3D_DEM_REDUCE";
-  // WALLS category
+
+  // WALLS category - same as TDPrefKey.WALLS3D
   static final String CAVE3D_SPLAY_USE        = "CAVE3D_SPLAY_USE";
   static final String CAVE3D_ALL_SPLAY        = "CAVE3D_ALL_SPLAY";
   static final String CAVE3D_SPLAY_PROJ       = "CAVE3D_SPLAY_PROJ";
@@ -1801,12 +1808,16 @@ public class TopoGL extends Activity
       } catch ( NumberFormatException e ) { }
     } else if ( k.equals( CAVE3D_STATION_TOAST ) ) { 
       mStationDialog = sp.getBoolean( k, false );
-    } else if ( k.equals( CAVE3D_STATION_SIZE ) ) { 
+    } else if ( k.equals( CAVE3D_STATION_POINTS ) ) { 
+      GlModel.mStationPoints = sp.getBoolean( k, false );
+    } else if ( k.equals( CAVE3D_STATION_POINT_SIZE ) ) { 
       try {
         GlNames.setPointSize( Integer.parseInt( sp.getString( k, "8" ) ) );
       } catch ( NumberFormatException e ) { }
-    } else if ( k.equals( CAVE3D_STATION_POINTS ) ) { 
-      GlModel.mStationPoints = sp.getBoolean( k, false );
+    } else if ( k.equals( CAVE3D_STATION_TEXT_SIZE ) ) { 
+      try {
+        GlNames.setTextSize( Integer.parseInt( sp.getString( k, "20" ) ) );
+      } catch ( NumberFormatException e ) { }
     } else if ( k.equals( CAVE3D_MEASURE_DIALOG ) ) { 
       mMeasureToast  = sp.getBoolean( k, false );
     } else if ( k.equals( CAVE3D_GRID_ABOVE ) ) { 
@@ -1918,41 +1929,60 @@ public class TopoGL extends Activity
     try {
       float radius = Float.parseFloat( sp.getString( CAVE3D_SELECTION_RADIUS, "50.0" ) );
       if ( radius > 0.0f ) mSelectionRadius = radius;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      mSelectionRadius = 50;
+    }
     mStationDialog = sp.getBoolean( CAVE3D_STATION_TOAST, false );
-    try {
-      GlNames.setPointSize( Integer.parseInt( sp.getString( CAVE3D_STATION_SIZE, "8" ) ) );
-    } catch ( NumberFormatException e ) { }
     GlModel.mStationPoints = sp.getBoolean( CAVE3D_STATION_POINTS, false );
+    try {
+      GlNames.setPointSize( Integer.parseInt( sp.getString( CAVE3D_STATION_POINT_SIZE, "8" ) ) );
+    } catch ( NumberFormatException e ) {
+      GlNames.setPointSize( 8 );
+    }
+    try {
+      GlNames.setTextSize( Integer.parseInt( sp.getString( CAVE3D_STATION_TEXT_SIZE, "20" ) ) );
+    } catch ( NumberFormatException e ) { 
+      GlNames.setTextSize( 20 );
+    }
     mMeasureToast  = sp.getBoolean( CAVE3D_MEASURE_DIALOG, false );
     GlModel.mGridAbove = sp.getBoolean( CAVE3D_GRID_ABOVE, false );
     try {
       int extent = Integer.parseInt( sp.getString( CAVE3D_GRID_EXTENT, "10" ) );
       if ( extent > 1 && extent < 1000 ) GlModel.mGridExtent = extent;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      GlModel.mGridExtent = 10;
+    }
     GlRenderer.mMinClino  = sp.getBoolean( CAVE3D_NEG_CLINO, false ) ? 90 : 0;
-    GlModel.mAllSplay  = sp.getBoolean( CAVE3D_ALL_SPLAY, true );
-    TglParser.mSplayUse = Integer.parseInt( sp.getString( CAVE3D_SPLAY_USE, "1" ) );
+    GlModel.mAllSplay     = sp.getBoolean( CAVE3D_ALL_SPLAY, true );
+    TglParser.mSplayUse   = Integer.parseInt( sp.getString( CAVE3D_SPLAY_USE, "1" ) );
     // TDLog.v("TopoGL load BT preference");
     // checkBluetooth( sp.getString( CAVE3D_BLUETOOTH_DEVICE, "" ) ); // FIXME BLUETOOTH SETTING
     mSplayProj = sp.getBoolean( CAVE3D_SPLAY_PROJ, false );
     try {
       float buffer = Float.parseFloat( sp.getString( CAVE3D_SPLAY_THR, "0.5" ) );
       mSplayThr = buffer;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      mSplayThr = 0.5f;
+    }
     try {
       float buffer = Float.parseFloat( sp.getString( CAVE3D_DEM_BUFFER, "200" ) );
       if ( buffer >= 0 ) mDEMbuffer = buffer;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      mDEMbuffer = 200;
+    }
     try {
       int size = Integer.parseInt( sp.getString( CAVE3D_DEM_MAXSIZE, "400" ) );
       if ( size >= 50 ) mDEMmaxsize = size;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      mDEMmaxsize = 400;
+    }
     try {
       int reduce = Integer.parseInt( sp.getString( CAVE3D_DEM_REDUCE, "1" ) );
       if ( reduce == 1 ) mDEMreduce = DEM_SHRINK;
       else               mDEMreduce = DEM_CUT;
-    } catch ( NumberFormatException e ) { }
+    } catch ( NumberFormatException e ) {
+      mDEMreduce = DEM_SHRINK;
+    }
 
     // mPreprojection  = sp.getBoolean( CAVE3D_PREPROJECTION, true );
     GlModel.mSplitTriangles = sp.getBoolean( CAVE3D_SPLIT_TRIANGLES, true );
@@ -1963,8 +1993,10 @@ public class TopoGL extends Activity
         GlModel.mSplitRandomizeDelta = r;
         GlModel.mSplitRandomize = true;
       }
-    } catch ( NumberFormatException e ) { }
-    GlModel.mSplitStretch = false;
+    } catch ( NumberFormatException e ) {
+      GlModel.mSplitRandomizeDelta = 0.1f;
+      GlModel.mSplitRandomize = true;
+    }
     try {
       r = Float.parseFloat( sp.getString( CAVE3D_SPLIT_STRETCH, "0.1" ) );
       if ( r > 0.0001f ) {
@@ -1972,8 +2004,8 @@ public class TopoGL extends Activity
         GlModel.mSplitStretch = true;
       }
     } catch ( NumberFormatException e ) {
-      GlModel.mSplitStretchDelta = 0.1f;
-      GlModel.mSplitStretch = true;
+      // GlModel.mSplitStretchDelta = 0.1f;
+      GlModel.mSplitStretch = false;
     }
     // mWallConvexHull = sp.getBoolean( CAVE3D_CONVEX_HULL, true );
     // mWallPowercrust = sp.getBoolean( CAVE3D_POWERCRUST,  false );

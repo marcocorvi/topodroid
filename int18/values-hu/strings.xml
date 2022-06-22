@@ -22,15 +22,15 @@
     <string name="new_survey_label">Új mérés</string>
     <string name="distox_label">DistoX</string>
 
-  <string name="r_title">Android R fontos megjegyzés</string>
-  <string name="r_dialog">
+  <!-- UNUSED string name="r_title">Android R fontos megjegyzés</string -->
+  <!-- UNUSED string name="r_dialog">
 Android-R-nél a TopoDroid-nak az "Android/data" alatt található mappáját kell használnia. TopoDroid nem találta meg, és létrehozta a mappáját.\nA régi felmérések zip archívumait importálhatja.\n\nVigyázzon, a TopoDroid eltávolításakor az új TopoDroid mappában lévő fájlok törlődnek!\n\n
 A részletekért keresse fel a weboldalakat.\n
-  </string>
-  <string name="r_checkboxes">Nyugtáznod kell a jelölőnégyzettel.</string>
-  <string name="r_i_understood">Teljesen megértettem ezt az értesítést</string>
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">Nyugtáznod kell a jelölőnégyzettel.</string -->
+  <!-- UNUSED string name="r_i_understood">Teljesen megértettem ezt az értesítést</string -->
   <!-- UNUSED string name="r_disclaimer">Egyetértek azzal, hogy az alkalmazás szerzői nem felelősek semmilyen kárért vagy adatvesztésért.</string -->
-  <string name="r_continue">FOLYTATÁS</string>
+  <!-- UNUSED string name="r_continue">FOLYTATÁS</string -->
 
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
@@ -2066,8 +2066,10 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="cpref_station_toast_summary">Pont párbeszédpanel helyett doboz [n]</string>
     <string name="cpref_station_points_title">Mérési pont</string>
     <string name="cpref_station_points_summary">Mindig mutassa a pontokat [n]</string>
-    <string name="cpref_station_size_title">Mérési pont mérete</string>
-    <string name="cpref_station_size_summary">Mérési pont mérete [8 pxl]</string>
+    <string name="cpref_station_point_size_title">Mérési pont mérete</string>
+    <string name="cpref_station_point_size_summary">Mérési pont mérete [8 pxl]</string>
+    <!-- TODO string name="cpref_station_text_size_title">Station text size</string -->
+    <!-- TODO string name="cpref_station_text_size_summary">Size of station text [20 pt]</string -->
     <string name="cpref_measure_dialog_title">Távolság üzenet</string>
     <string name="cpref_measure_dialog_summary">Távolság üzenet párbeszédablak helyett [n]</string>
     <string name="cpref_grid_above_title">Felső rács</string>
