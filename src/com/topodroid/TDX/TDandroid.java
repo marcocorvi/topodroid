@@ -244,7 +244,11 @@ public class TDandroid
   /** request external storage access 
    * @param context    context
    * @param activity   activity
-   * #see ourcodeworld.com/articles/read/1559/how-does-manage-external-storage-permission-work-in-android
+   * #see https://stackoverflow.com/questions/64250814/how-to-obtain-manage-external-storage-permission
+   *
+   * TODO TO TRY
+   * if called from onCreate could use startActivityForResult with requestCode >= 0
+   * but I am not sure Settings return a result 
    */
   static void requestExternalStorage(  Context context, Activity activity )
   {
@@ -252,7 +256,11 @@ public class TDandroid
     intent.setAction( Settings.ACTION_MANAGE_APP_ALL_FILES_ACCESS_PERMISSION );
     Uri uri = Uri.fromParts( "package", context.getPackageName(), null );
     intent.setData( uri );
-    activity.startActivity( intent );
+    try {
+      activity.startActivity( intent );
+    } catch ( ActivityNotFoundException e ) {
+      TDLog.Error("Error " + e.getMessage() );
+    }
   }
 
   /** check if the app has the minimal permissions
