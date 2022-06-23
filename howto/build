@@ -60,10 +60,25 @@ Howto Build with studio
 
 [2] TopoDroid studio setup
 
-Home:
-~/ApkProjects/TopoDroid
+create an empty Studio project with name TDX
+package com.topodroid.TDX
+minSdk 18
+targetSdk 29 or higher
+compileOptions:
+  sourceCompatibility JavaVersion.VERSION_1_8
+  targetCompatibility JavaVersion.VERSION_1_8
 
-it includes:
+Home: i chose samples/android-8/TDX, but you can choose whatever you want
+
+Next you have to copy/symlink the source file. They go inside "app/src/main".
+The important folders are:
+  "assets"  a symlink to the repo "assets"
+  "java"    a copy of the repo "src"
+  "jniLibs" a symlink to the repo "libs" (native libs)
+  "res"     contains symlinks to the repo subfolders of "res"
+You can do without jniLibs if you comment out native calls.
+The other important file is "AndroidManifest.xml", a copy of the repo file.
+The other files are bloated by Studio.
   app/
       app.iml
       build.bundle
@@ -89,7 +104,7 @@ it includes:
                  gradle-wrapper.properties
   build.gradle
   gradle.properties
-  gradle.bat
   local.properties ( ndk.dir and sdk.dir )
+  gradlew.bat
+  gradlew
   settings.gradle
-  TopoDroid.iml

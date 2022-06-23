@@ -731,9 +731,17 @@ class DrawingSurface extends SurfaceView
   }
 
   /** set the zoom "fixed"
-   * @param fixed_zoom  whether to set the zoom fixed or not
+   * @param fixed_zoom  value if fixed-zoom (0 = non-fixed)
    */
-  void setFixedZoom( boolean fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
+  void setFixedZoom( int fixed_zoom ) { commandManager.setFixedZoom( fixed_zoom ); }
+
+  /** @return the value of current fixed-zoom (0 = non-fixed)
+   */
+  int getFixedZoom( ) { return commandManager.getFixedZoom(); }
+
+  /** @return true if the zoom of the current manager is fixed
+   */
+  boolean isFixedZoom() { return commandManager.isFixedZoom(); }
 
   // only for X-Sections autowalls
   List< DrawingSplayPath > getSplays() { return commandManager.getSplays(); }

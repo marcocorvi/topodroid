@@ -45,7 +45,7 @@ import java.io.DataOutputStream;
 public class DrawingCommandManager
 {
   // FIXED_ZOOM 
-  private boolean mFixedZoom = false;
+  private int mFixedZoom = 0;
 
   private static final int BORDER = 20; // for the bitmap
   private int mMode = 0;  // command manager mode type (PLAN PROFILE SECTION OVERVIEW)
@@ -156,8 +156,17 @@ public class DrawingCommandManager
   // FIXED_ZOOM
   /** set whether the zoom is fixed
    * @param fixed_zoom whether the zoom is fixed
+   * @note called by DrawingWindow
    */
-  void setFixedZoom( boolean fixed_zoom ) { mFixedZoom = fixed_zoom; }
+  void setFixedZoom( int fixed_zoom ) { mFixedZoom = fixed_zoom; }
+
+  /** @return the value of fixed-zoom (0 = non-fixed)
+   */
+  int getFixedZoom( ) { return mFixedZoom; }
+
+  /** @return true if the zoom is fixed
+   */
+  boolean isFixedZoom() { return mFixedZoom > 0; }
 
   /** @return the display scale
    */
@@ -1354,9 +1363,13 @@ public class DrawingCommandManager
 
     synchronized( TDPath.mGridsLock ) {
       if( grids && mGridStack1 != null ) {
-        if ( mFixedZoom ) {
-          // 1 in = 2.54 cm
-          float step = 0.9f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
+        if ( isFixedZoom() ) {
+          // 1 m = 20 pxl   ( android dp are pixels )
+          // 0.89605485 = 1 / 1.1160031107 = 8.46666 / 9.4488188975 
+          // where  9.4488188975 = dpi/(2.54 * 20)
+          //        8.46666 = zoom = 1600 / (dp / cm) [magic number]
+          float step = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
+
           int i = (int)( mOffx / step );
           float x = mOffx - ( i * step );
           i = -i;

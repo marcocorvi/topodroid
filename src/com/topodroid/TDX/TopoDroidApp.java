@@ -284,6 +284,21 @@ public class TopoDroidApp extends Application
     return Resources.getSystem().getDisplayMetrics().densityDpi;
   }
 
+  /** @return the X dpi
+   */
+  public static float getDisplayXDpi( )
+  {
+    return Resources.getSystem().getDisplayMetrics().xdpi;
+  }
+
+  /** @return the Y dpi
+   */
+  public static float getDisplayYDpi( )
+  {
+    return Resources.getSystem().getDisplayMetrics().ydpi;
+  }
+
+
   /** set the height of the button list-view
    * @param context   context
    * @param listView  list view

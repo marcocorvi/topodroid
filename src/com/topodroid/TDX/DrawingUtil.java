@@ -28,23 +28,59 @@ public class DrawingUtil
 
   // private static final PointF mCenter = new PointF( CENTER_X, CENTER_Y );
 
+  /** @return scene X-coord
+   * @param p    point (x,y) [world]
+   */
   public static float toSceneX( Point2D p ) { return CENTER_X + p.x * SCALE_FIX; }
+
+  /** @return scene Y-coord
+   * @param p    point (x,y) [world]
+   */
   public static float toSceneY( Point2D p ) { return CENTER_Y + p.y * SCALE_FIX; }
 
+  /** @return world X-coord
+   * @param p    point (x,y) [scene]
+   */
   public static float sceneToWorldX( Point2D p ) { return (p.x - CENTER_X) / SCALE_FIX; }
+
+  /** @return world Y-coord
+   * @param p    point (x,y) [scene]
+   */
   public static float sceneToWorldY( Point2D p ) { return (p.y - CENTER_Y) / SCALE_FIX; }
 
   // float toSceneX( float x, float y ) { return x; } 
   // float toSceneY( float x, float y ) { return y; } 
+
+  /** @return scene X-coord
+   * @param x    X coord [world]
+   * @param y    Y coord [world] (unused)
+   */
   public static float toSceneX( double x, double y ) { return (float)(CENTER_X + x * SCALE_FIX); }
+
+  /** @return scene Y-coord
+   * @param x    X coord [world] (unused)
+   * @param y    Y coord [world]
+   */
   public static float toSceneY( double x, double y ) { return (float)(CENTER_Y + y * SCALE_FIX); }
+
   // public static float toSceneX( float x, float y ) { return (CENTER_X + x * SCALE_FIX); }
   // public static float toSceneY( float x, float y ) { return (CENTER_Y + y * SCALE_FIX); }
 
   // float sceneToWorldX( float x, float y ) { return x; } 
   // float sceneToWorldY( float x, float y ) { return y; }
+
+  /** @return world X-coord
+   * @param x    X coord [scene]
+   * @param y    Y coord [scene] (unused)
+   */
   public static float sceneToWorldX( double x, double y ) { return (float)((x - CENTER_X)/SCALE_FIX); }
+
+  /** @return world Y-coord
+   * @param x    X coord [scene] (unused)
+   * @param y    Y coord [scene]
+   */
   public static float sceneToWorldY( double x, double y ) { return (float)((y - CENTER_Y)/SCALE_FIX); }
+
   // public static float sceneToWorldX( float x, float y ) { return ((x - CENTER_X)/SCALE_FIX); }
   // public static float sceneToWorldY( float x, float y ) { return ((y - CENTER_Y)/SCALE_FIX); }
     

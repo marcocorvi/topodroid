@@ -523,8 +523,8 @@ public class DrawingWindow extends ItemDrawer
   private boolean mZoomBtnsCtrlOn = false;
  
   // FIXED_ZOOM
-  private int mFixedZoom = 0; // 0= variable, 1= 1:100, 2= 1:200
-  private static final float[] gZoom = { 1.0f, 0.10f, 0.20f, 0.30f, 0.40f, 0.50f };
+  // private int mFixedZoom = 0; // 0= variable, 1= 1:100, 2= 1:200
+  // private static final float[] gZoom = { 1.0f, 0.10f, 0.20f, 0.30f, 0.40f, 0.50f };
 
   // FIXME_ZOOM_CTRL ZoomControls mZoomCtrl = null;
   // ZoomButton mZoomOut;
@@ -874,16 +874,21 @@ public class DrawingWindow extends ItemDrawer
   // -------------------------------------------------------------------
   // ZOOM CONTROLS
 
+  /** react to a change of visibility of zoom -controls
+   * @param visible  whether controls should become visible
+   */
   @Override
   public void onVisibilityChanged(boolean visible)
   {
-    // FIXED_ZOOM 
-    if ( mFixedZoom > 0 ) return;
+    if ( mDrawingSurface.isFixedZoom() ) return;
     if ( mZoomBtnsCtrlOn && mZoomBtnsCtrl != null ) {
       mZoomBtnsCtrl.setVisible( visible || ( TDSetting.mZoomCtrl > 1 ) );
     }
   }
 
+  /** react to the user change of zoom
+   * @param zoomin   whether to zoom-in (increase the zoom)
+   */
   @Override
   public void onZoom( boolean zoomin )
   {
@@ -891,10 +896,13 @@ public class DrawingWindow extends ItemDrawer
     else changeZoom( ZOOM_DEC );
   }
 
+  /** change the zoom
+   * @param f  zoom scale factor (current zoom is multiplied by f)
+   */
   private void changeZoom( float f ) 
   {
-    // FIXED_ZOOM 
-    if ( mFixedZoom > 0 ) return;
+    TDLog.v("CHANGE ZOOM fixed-zoom " + mDrawingSurface.getFixedZoom() );
+    if ( mDrawingSurface.isFixedZoom() ) return;
     if ( f < 0.05f || f > 4.0f ) return;
     float zoom = mZoom;
     mZoom     *= f;
@@ -907,20 +915,40 @@ public class DrawingWindow extends ItemDrawer
     // if ( mZoomBtnsCtrlOn ) mZoomBtnsCtrl.setVisible( false );
   }
 
-  // FIXED_ZOOM
-  int getFixedZoom() { return mFixedZoom; }
+  /** @return the value of the fixed-zoom (0 = zoom not fixed)
+   * @note used by PlotZoomFitDialog
+   */
+  int getFixedZoom() { return mDrawingSurface.getFixedZoom(); }
   
+  /** set zoom fixed
+   * @param fixed_zoom    fixed value: 0 = not-fixed, 1 .. 5 fixed-zoom value
+   * @note called by PlotZoomFitDualog
+   */
   void setFixedZoom( int fixed_zoom )
   {
-    mFixedZoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
-    mDrawingSurface.setFixedZoom( mFixedZoom > 0 );
-    if ( mFixedZoom > 0 ) {
+    fixed_zoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
+    mDrawingSurface.setFixedZoom( fixed_zoom );
+    if ( fixed_zoom > 0 ) {  // compute the zoom value
       int dpi = TopoDroidApp.getDisplayDensityDpi();
-      // 1 in = 2.54 cm
-      // float dp2mm = dpi / (mFixedZoom * 25.4f); // 25.4 is a scale of 2 cm : 10 m (1:500)
-      float dp2mm = dpi * mFixedZoom / 127.0f; // 50.8 is a scale of 2 cm : 2 m (1:100)
-      float zoom = 32 / dp2mm; // 32 = 40 / 1.25
-      // TDLog.v("set zoom " + mZoom + " -> " + zoom + " dpi " + dpi );
+      // TDLog.v("ZOOM dpi " + dpi + " " + getResources().getSystem().getDisplayMetrics().xdpi + " " +  getResources().getSystem().getDisplayMetrics().ydpi );
+      // MiA2 gives  dpi: 480   xdpi: 397.565   ydi: 474.688
+      
+      // Android dp are pixels
+      // conversion: 1 m [world] = 20 units [scene]
+      // not-used:   1 pt = 1.333333 pxl     1 pxl = 0.75 pt
+      //
+      // the dp per cm are: dp1cm = dpi * in/cm = 480 / 2.54 = 188.97637795 pxl/cm (correct 188.97638)
+      // now 1 m becomes 20 pxl, 
+      // therefore the scale 1:100 should have a zoom (188.97637795 pxl/cm) / (20 pxl/m) = 9.4488188975
+
+      // 1 in = 2.54 cm = 25.4 mm, 
+      // float dp2mm = dpi * fixed_zoom / 127.0f; // dot_per_5mm:  127 = 25.4 * 5
+      // float zoom = 32 / dp2mm; // 32 = 40 / 1.25
+      // zoom 8.466666
+
+      float dp1cm = dpi * fixed_zoom / 2.54f; // dot_per_1cm
+      float zoom = 1600 / dp1cm; // 32 = 40 / 1.25
+      TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " dpi " + dpi + " dp1cm " + dp1cm );
       mOffset.x *= mZoom / zoom;
       mOffset.y *= mZoom / zoom;
       mZoom = zoom;
@@ -930,8 +958,14 @@ public class DrawingWindow extends ItemDrawer
     }
   }
 
+  /** increase zoom
+   */
   public void zoomIn()  { changeZoom( ZOOM_INC ); }
+
+  /** decrease zoom
+   */
   public void zoomOut() { changeZoom( ZOOM_DEC ); }
+
   // public void zoomOne() { resetZoom( ); }
 
   // public void zoomView( )
@@ -1020,11 +1054,14 @@ public class DrawingWindow extends ItemDrawer
   }
     
 
-  /** @return a drawing (leg) path
+  /** create a DrawingPath for a leg
+   * @return a drawing (leg) path
    * @param type    plot type
    * @param blk     data block
-   * @param x1,y1   first endpoint
-   * @param x2,y2   second endpoint
+   * @param x1      first endpoint X coord [world]
+   * @param y1      first endpoint Y coord [world]
+   * @param x2      second endpoint X coord [world]
+   * @param y2      second endpoint Y coord [world]
    */
   private DrawingPath makeFixedLeg( long type, DBlock blk, float x1, float y1, float x2, float y2 )
   {
@@ -1933,7 +1970,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v( "DEBUG switchZoomCtrl " + ctrl + " ctrl is " + ((mZoomBtnsCtrl == null )? "null" : "not null") );
     // FIXED_ZOOM 
-    if ( mFixedZoom > 0 ) return;
+    if ( mDrawingSurface.isFixedZoom() ) return;
 
     if ( mZoomBtnsCtrl == null ) return;
     mZoomBtnsCtrlOn = (ctrl > 0);
@@ -3928,7 +3965,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // if ( mZoomBtnsCtrl == null ) return; // not necessary
     // FIXED_ZOOM 
-    if ( mFixedZoom > 0 ) return;
+    if ( mDrawingSurface.isFixedZoom() ) return;
     if ( TDSetting.mZoomCtrl == 2 && ! mZoomBtnsCtrl.isVisible() ) {
       mZoomBtnsCtrl.setVisible( true );
     }
@@ -4534,7 +4571,7 @@ public class DrawingWindow extends ItemDrawer
     // if ( mMode == MODE_DRAW ) bottom += ZOOM_TRANSLATION;
 
     if ( yc > TopoDroidApp.mBorderBottom ) {
-      if ( (mFixedZoom == 0) && mZoomBtnsCtrlOn && xc > TopoDroidApp.mBorderInnerLeft && xc < TopoDroidApp.mBorderInnerRight ) {
+      if ( ( ! mDrawingSurface.isFixedZoom() ) && mZoomBtnsCtrlOn && xc > TopoDroidApp.mBorderInnerLeft && xc < TopoDroidApp.mBorderInnerRight ) {
         mTouchMode = MODE_ZOOM;
         mZoomBtnsCtrl.setVisible( true );
         // mZoomCtrl.show( );
@@ -7339,7 +7376,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void doZoomFit()
   {
-    if ( mFixedZoom > 0 ) return;
+    if ( mDrawingSurface.isFixedZoom() ) return;
     // FIXME FIXED_ZOOM for big sketches this leaves out some bits at the ends
     // maybe should increase the bitmap bounds by a small factor ...
     RectF b = mDrawingSurface.getBitmapBounds();
