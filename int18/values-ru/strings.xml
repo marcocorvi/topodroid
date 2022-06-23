@@ -2044,8 +2044,8 @@
     <string name="cpref_station_points_summary">Всегда отображать прикеты [n]</string>
     <string name="cpref_station_point_size_title">Размер точкек пикетов</string>
     <string name="cpref_station_point_size_summary">Размер точек пикетов [8 pxl]</string>
-    <!-- TODO string name="cpref_station_text_size_title">Station text size</string -->
-    <!-- TODO string name="cpref_station_text_size_summary">Size of station text [20 pt]</string -->
+    <string name="cpref_station_text_size_title">Размер номеров пикетов</string>
+    <string name="cpref_station_text_size_summary">Размер текста номеров пикетов [20 pt]</string>
     <string name="cpref_measure_dialog_title">Сообщение расстояния</string>
     <string name="cpref_measure_dialog_summary">Сообщение расстояния вместо диалога [n]</string>
  
