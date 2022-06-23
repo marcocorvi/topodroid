@@ -1,6 +1,3 @@
-AndroidManifest.xml:60: Warning: The Google Play store has a policy that limits usage of MANAGE_EXTERNAL_STORAGE [ScopedStorage]
-    <uses-permission android:name="android.permission.MANAGE_EXTERNAL_STORAGE" />
-                                   ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 AndroidManifest.xml:150: Error: PlotReloadWindow must extend android.app.Activity [Instantiatable]
         <activity android:name=".PlotReloadWindow"
                                 ~~~~~~~~~~~~~~~~~
@@ -16,34 +13,28 @@ res/layout/dblock_row_noedit.xml:29: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:52: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:36: Error: "tdm_config_project" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:36: Error: "tdm_config_project" is not translated in "cn" [MissingTranslation]
     <string name="tdm_config_project">project.tdconfig</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:95: Error: "station_coords" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:95: Error: "station_coords" is not translated in "cn" [MissingTranslation]
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:151: Error: "calib_validate_error" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:151: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
     <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:251: Error: "datamode_normal" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="datamode_normal">Normal data-mode</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:252: Error: "datamode_diving" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="datamode_diving">Diving data-mode</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:210: Error: "found_groups" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+    <string name="found_groups">Found %1$d groups</string>
+            ~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:257: Error: "photo_failed" is not translated in "cn" [MissingTranslation]
     <string name="photo_failed">Failed photo</string>
             ~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:258: Error: "photo_max_captures" is not translated in "cn" [MissingTranslation]
     <string name="photo_max_captures">Reached maximum capture limit</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:283: Error: "error_depth_required" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="error_depth_required">Depth required</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:302: Error: "error_team_required" is not translated in "cn" [MissingTranslation]
     <string name="error_team_required">Team required</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:312: Error: "error_bad_fixes" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:312: Error: "error_bad_fixes" is not translated in "cn" [MissingTranslation]
     <string name="error_bad_fixes">Fix points not in the survey</string>
             ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:336: Error: "with_splays" is not translated in "cn" [MissingTranslation]
@@ -55,9 +46,6 @@ res/values/strings.xml:337: Error: "cell_size" is not translated in "cn" [Missin
 res/values/strings.xml:384: Error: "no_symbols" is not translated in "cn" [MissingTranslation]
     <string name="no_symbols">No symbol palette.</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:531: Error: "swap_hotbit_ok" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="swap_hotbit_ok">Swapped data hot bit</string>
-            ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:564: Error: "sensor_no_readings" is not translated in "cn" [MissingTranslation]
     <string name="sensor_no_readings">No sensor readings</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -79,7 +67,7 @@ res/values/strings.xml:577: Error: "shot_name" is not translated in "cn" [Missin
 res/values/strings.xml:599: Error: "survey_not_saved" is not translated in "cn" [MissingTranslation]
     <string name="survey_not_saved">WARNING: survey info not saved</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:600: Error: "survey_bad_siblings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:600: Error: "survey_bad_siblings" is not translated in "cn" [MissingTranslation]
     <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:601: Error: "survey_bad_magnetic" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
@@ -94,61 +82,52 @@ res/values/strings.xml:621: Error: "accuracy_medium" is not translated in "cn" [
 res/values/strings.xml:623: Error: "accuracy_unreliable" is not translated in "cn" [MissingTranslation]
     <string name="accuracy_unreliable">Unreliable sensors</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:625: Error: "empty_clipboard" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="empty_clipboard">Empty clipboard</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:709: Error: "display_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:709: Error: "display_view" is not translated in "cn" [MissingTranslation]
     <string name="display_view">Display</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:710: Error: "plan_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:710: Error: "plan_view" is not translated in "cn" [MissingTranslation]
     <string name="plan_view">plan</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:711: Error: "profile_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:711: Error: "profile_view" is not translated in "cn" [MissingTranslation]
     <string name="profile_view">profile</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:731: Error: "button_clipboard" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="button_clipboard" >Clipboard</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:736: Error: "button_clear_convert" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:736: Error: "button_clear_convert" is not translated in "cn" [MissingTranslation]
     <string name="button_clear_convert">Clear convert</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:749: Error: "button_gps_start" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="button_gps_start" >GPS</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:772: Error: "button_recover" is not translated in "cn" [MissingTranslation]
     <string name="button_recover"   >Recover</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:839: Error: "popup_do_gm_group" is not translated in "cn" [MissingTranslation]
     <string name="popup_do_gm_group">Calib. group</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:868: Error: "hint_cellsize" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:868: Error: "hint_cellsize" is not translated in "cn" [MissingTranslation]
     <string name="hint_cellsize">cell size</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:869: Error: "hint_cwd" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:869: Error: "hint_cwd" is not translated in "cn" [MissingTranslation]
     <string name="hint_cwd">work folder</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:870: Error: "hint_distance" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:870: Error: "hint_distance" is not translated in "cn" [MissingTranslation]
     <string name="hint_distance">distance</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:871: Error: "hint_length" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:871: Error: "hint_length" is not translated in "cn" [MissingTranslation]
     <string name="hint_length">length</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:872: Error: "hint_line" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:872: Error: "hint_line" is not translated in "cn" [MissingTranslation]
     <string name="hint_line">line</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:873: Error: "hint_origin" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:873: Error: "hint_origin" is not translated in "cn" [MissingTranslation]
     <string name="hint_origin">origin station</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:874: Error: "hint_point" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:874: Error: "hint_point" is not translated in "cn" [MissingTranslation]
     <string name="hint_point">point</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:875: Error: "hint_textsize" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:875: Error: "hint_textsize" is not translated in "cn" [MissingTranslation]
     <string name="hint_textsize">text size</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:876: Error: "hint_units" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:876: Error: "hint_units" is not translated in "cn" [MissingTranslation]
     <string name="hint_units">symbol units</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:877: Error: "hint_value" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:877: Error: "hint_value" is not translated in "cn" [MissingTranslation]
     <string name="hint_value">value</string>
             ~~~~~~~~~~~~~~~~~
 res/values/strings.xml:956: Error: "help_cave3d" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
@@ -157,22 +136,22 @@ res/values/strings.xml:956: Error: "help_cave3d" is not translated in "ru" (Russ
 res/values/strings.xml:1044: Error: "help_splays" is not translated in "cn" [MissingTranslation]
     <string name="help_splays">Segment/point splays</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1060: Error: "export_dxf_version" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1060: Error: "export_dxf_version" is not translated in "cn" [MissingTranslation]
     <string name="export_dxf_version">Version</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1146: Error: "title_photo_view" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1146: Error: "title_photo_view" is not translated in "cn" [MissingTranslation]
     <string name="title_photo_view">Photo</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1153: Error: "title_reduction_errors" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1153: Error: "title_reduction_errors" is not translated in "cn" [MissingTranslation]
     <string name="title_reduction_errors">Survey data-reduction anomalies</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1222: Error: "exported_settings" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1222: Error: "exported_settings" is not translated in "cn" [MissingTranslation]
   <string name="exported_settings">Exported settings %1$s</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1224: Error: "imported_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1224: Error: "imported_settings_failed" is not translated in "cn" [MissingTranslation]
   <string name="imported_settings_failed">Failed to import settings</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1225: Error: "export_settings_failed" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1225: Error: "export_settings_failed" is not translated in "cn" [MissingTranslation]
   <string name="export_settings_failed">Failed to export settings</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1339: Error: "pref_svg_program_title" is not translated in "cn" [MissingTranslation]
@@ -181,16 +160,16 @@ res/values/strings.xml:1339: Error: "pref_svg_program_title" is not translated i
 res/values/strings.xml:1340: Error: "pref_svg_program_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_svg_program_summary">Target SVG program</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1454: Error: "pref_editable_stations_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1454: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1455: Error: "pref_editable_stations_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1455: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1627: Error: "pref_full_affine_title" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1627: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1628: Error: "pref_full_affine_summary" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1628: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1662: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
@@ -199,19 +178,13 @@ res/values/strings.xml:1662: Error: "pref_side_drag_title" is not translated in 
 res/values/strings.xml:1663: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1851: Error: "image_diagram" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1851: Error: "image_diagram" is not translated in "cn" [MissingTranslation]
     <string name="image_diagram">Direction diagram</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1852: Error: "image_photo" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1852: Error: "image_photo" is not translated in "cn" [MissingTranslation]
     <string name="image_photo">Photo</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1857: Error: "cbtn_bind" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cbtn_bind">Rebind</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1872: Error: "cmenu_sketch" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cmenu_sketch">SKETCHES</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1881: Error: "illegal_value" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:1881: Error: "illegal_value" is not translated in "cn" [MissingTranslation]
     <string name="illegal_value">Illegal value</string>
             ~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1888: Error: "info_survey" is not translated in "ru" (Russian) [MissingTranslation]
@@ -232,51 +205,15 @@ res/values/strings.xml:1955: Error: "ctitle_sketches" is not translated in "ru" 
 res/values/strings.xml:1956: Error: "ctitle_legs" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="ctitle_legs">Legs visibility</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1966: Error: "survey_list" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="survey_list">SURVEYS</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1986: Error: "select_survey_file" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="select_survey_file">Select a survey file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1987: Error: "select_export_file" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="select_export_file">Select export file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1990: Error: "select_sketch_file" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="select_sketch_file">Select a sketch file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2028: Error: "unsupported_format" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="unsupported_format">Unsupported file format</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2052: Error: "done_tube" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="done_tube">Done simple-tube walls</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2053: Error: "fail_tube" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="fail_tube">Failed simple-tube walls</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2054: Error: "done_bubble" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="done_bubble">Done bubble walls</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2055: Error: "fail_bubble" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="fail_bubble">Failed bubble walls</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2062: Error: "viewing_at" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2064: Error: "cpref_dem3d" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cpref_dem3d">DEM</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2065: Error: "cpref_walls3d" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cpref_walls3d">WALL MODEL</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2085: Error: "cpref_grid_extent_summary" is not translated in "ru" (Russian) [MissingTranslation]
+res/values/strings.xml:2080: Error: "cpref_station_text_size_title" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+    <string name="cpref_station_text_size_title">Station text size</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2081: Error: "cpref_station_text_size_summary" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+    <string name="cpref_station_text_size_summary">Size of station text [20 pt]</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:2087: Error: "cpref_grid_extent_summary" is not translated in "ru" (Russian) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2096: Error: "cpref_splay_use_title" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cpref_splay_use_title">Splay usage</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2097: Error: "cpref_splay_use_summary" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:210: Warning: Formatting %d followed by words ("groups"): This should probably be a plural rather than a string [PluralsCandidate]
     <string name="found_groups">Found %1$d groups</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -304,8 +241,14 @@ res/values-hu/plurals.xml:12: Warning: For language "hu" (Hungarian) the followi
 res/values-it/plurals.xml:14: Warning: For language "it" (Italian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
   ^
+res/values-hu/plurals.xml:17: Warning: For language "hu" (Hungarian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="found_calib_groups">
+  ^
 res/values-ru/plurals.xml:18: Warning: For language "ru" (Russian) the following quantities are not relevant: zero [UnusedQuantity]
   <plurals name="read_calib_data">
+  ^
+res/values-it/plurals.xml:19: Warning: For language "it" (Italian) the following quantities are not relevant: zero [UnusedQuantity]
+  <plurals name="found_calib_groups">
   ^
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
@@ -322,10 +265,16 @@ res/layout/menu.xml:11: Warning: Possible overdraw: Root element paints backgrou
 res/layout/tdinput_adapter.xml:6: Warning: Possible overdraw: Root element paints background @color/menu_background with a theme that also paints a background (inferred theme is @android:style/Theme.Holo) [Overdraw]
       android:background="@color/menu_background"
       ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/help_pages.xml:146: Warning: The resource R.string.DialogR appears to be unused [UnusedResources]
+  <string name="DialogR" translatable="false">page_dialog_r.htm</string>
+          ~~~~~~~~~~~~~~
 res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic_launcher_round appears to be unused [UnusedResources]
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
+res/values/strings.xml:210: Warning: The resource R.string.found_groups appears to be unused [UnusedResources]
+    <string name="found_groups">Found %1$d groups</string>
+            ~~~~~~~~~~~~~~~~~~~
 res/layout/azimuth_dialog.xml:98: Warning: OK button should be on the right (was "LEFT | OK | RIGHT", should be "LEFT | RIGHT | OK") [ButtonOrder]
       <Button android:id="@+id/btn_ok"
        ~~~~~~
@@ -371,4 +320,4 @@ res/layout/dblock_row_noedit.xml:18: Warning: Missing autofillHints attribute [A
 res/layout/dblock_row_noedit.xml:41: Warning: Missing autofillHints attribute [Autofill]
   <EditText 
    ~~~~~~~~
-90 errors, 35 warnings
+70 errors, 38 warnings

@@ -1294,10 +1294,12 @@ public class DrawingCommandManager
    */
   void addLineToLine( DrawingLinePath line, DrawingLinePath line0 ) { mCurrentScrap.addLineToLine( line, line0 ); }
 
-  // N.B. doneHandler is not used
-  // @param canvas where to draw
-  // @param zoom   used for scalebar and selection points (use < negative zoom for pdf print)
-  // @param station_splay
+  /** draw the sketch on the canvas (display)
+   * N.B. doneHandler is not used
+   * @param canvas where to draw
+   * @param zoom   used for scalebar and selection points (use < negative zoom for pdf print)
+   * @param station_splay ???
+   */
   void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
   {
     if ( canvas == null ) {
@@ -1364,19 +1366,18 @@ public class DrawingCommandManager
     synchronized( TDPath.mGridsLock ) {
       if( grids && mGridStack1 != null ) {
         if ( isFixedZoom() ) {
-          // 1 m = 20 pxl   ( android dp are pixels )
-          // 0.89605485 = 1 / 1.1160031107 = 8.46666 / 9.4488188975 
-          // where  9.4488188975 = dpi/(2.54 * 20)
-          //        8.46666 = zoom = 1600 / (dp / cm) [magic number]
-          float step = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
+          // the sketch is scaled with zoom computed in DrawingWindow
 
-          int i = (int)( mOffx / step );
-          float x = mOffx - ( i * step );
-          i = -i;
+          // 1 m --> 20 dp
+          // 2 dp --> 0.1 m that at scale 1:100 is 1 mm
+          float step = 2 * zoom * mFixedZoom;
+
+          int i = - (int)( mOffx / step );
+          float x = mOffx + i * step;
           for ( ; x<TopoDroidApp.mDisplayWidth; x += step ) {
             DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
             if ( i % 10 == 0 ) { 
-              dpath.setPathPaint( BrushManager.fixedGrid10Paint );
+              dpath.setPathPaint( BrushManager.fixedGrid100Paint );
             } else {
               dpath.setPathPaint( BrushManager.fixedGridPaint );
             }
@@ -1386,13 +1387,12 @@ public class DrawingCommandManager
             dpath.mPath.lineTo( x, TopoDroidApp.mDisplayHeight );
             dpath.draw( canvas );
           }
-          int j = (int)( mOffy / step );
-          float y = mOffy - ( j * step );
-          j = - j;
+          int j = - (int)( mOffy / step );
+          float y = mOffy + j * step;
           for ( ; y<TopoDroidApp.mDisplayHeight; y += step ) {
             DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
             if ( j % 10 == 0 ) { 
-              dpath.setPathPaint( BrushManager.fixedGrid10Paint );
+              dpath.setPathPaint( BrushManager.fixedGrid100Paint );
             } else {
               dpath.setPathPaint( BrushManager.fixedGridPaint );
             }

@@ -901,7 +901,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void changeZoom( float f ) 
   {
-    TDLog.v("CHANGE ZOOM fixed-zoom " + mDrawingSurface.getFixedZoom() );
+    // TDLog.v("CHANGE ZOOM fixed-zoom " + mDrawingSurface.getFixedZoom() );
     if ( mDrawingSurface.isFixedZoom() ) return;
     if ( f < 0.05f || f > 4.0f ) return;
     float zoom = mZoom;
@@ -945,6 +945,18 @@ public class DrawingWindow extends ItemDrawer
       // float dp2mm = dpi * fixed_zoom / 127.0f; // dot_per_5mm:  127 = 25.4 * 5
       // float zoom = 32 / dp2mm; // 32 = 40 / 1.25
       // zoom 8.466666
+
+      // 1 m = 20 pxl   ( android dp are pixels )
+      // 0.89605485 = 1 / 1.1160031107 = 8.46666 / 9.4488188975 
+      // where  9.4488188975 = DPI/(2.54 * 20) = DPI dp/in / (cm/in * 20 dp/m) = DPI/(50.8 cm/m) 
+      //        8.4666666665 = zoom = 1600 / (DPI/2.54 dp / cm)
+      // 1600 is magic-number
+      // thus   0.89605485 = (1600 * 2.54 / DPI cm/dp) / (DPI/50.8 m/cm)
+      //                   = 1600 * 20 / (100*DPI/2.54)^2 
+      // this is wierd
+      //
+      // old command-manager step
+      // float step_old = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
 
       float dp1cm = dpi * fixed_zoom / 2.54f; // dot_per_1cm
       float zoom = 1600 / dp1cm; // 32 = 40 / 1.25
@@ -1370,7 +1382,7 @@ public class DrawingWindow extends ItemDrawer
   private void startSaveTdrTask( final long type, int save_mode, int maxTasks, int rotate )
   {
     if ( ( save_mode == PlotSave.TOGGLE || save_mode == PlotSave.MODIFIED ) && ! mModified ) {
-      TDLog.v("SAVE TDR: save_mode toggle or modified, but not modified ");
+      // TDLog.v("SAVE TDR: save_mode toggle or modified, but not modified ");
       return;
     }
     // TDLog.v( "start save TDR task - save_mode " + save_mode + " modified " + mModified );
@@ -1662,7 +1674,7 @@ public class DrawingWindow extends ItemDrawer
             h2 = sp.e * cosp + sp.s * sinp;
             // cosine of the angle between the splay and the direction of projection
             float cosine = TDMath.sind( blk.mBearing ) * sinp + TDMath.cosd( blk.mBearing ) * cosp; // instead of sp.getCosine()
-            TDLog.v("splay " + blk.mBearing + " cosine " + cosine + " " + cosp + " " + sinp );
+            // TDLog.v("splay " + blk.mBearing + " cosine " + cosine + " " + cosp + " " + sinp );
             addFixedLine( type, blk, h1, st.v, h2, sp.v, cosine, true, true );
           }
         }
@@ -2004,7 +2016,7 @@ public class DrawingWindow extends ItemDrawer
   private void makeButtons( )
   {
     Resources res = getResources();
-    TDLog.v("Buttons " + mNrButton1 + " " + mNrButton2 + " " + mNrButton3 + " " + mNrButton5 );
+    // TDLog.v("Buttons " + mNrButton1 + " " + mNrButton2 + " " + mNrButton3 + " " + mNrButton5 );
 
     // if ( ! TDLevel.overNormal ) mNrButton1 -= 2; // AZIMUTH, REFRESH requires advanced level
     mButton1 = new Button[ mNrButton1 + 1 ]; // MOVE
@@ -3309,7 +3321,7 @@ public class DrawingWindow extends ItemDrawer
       }
 
       if ( ! mDrawingSurface.resetManager( DrawingSurface.DRAWING_PLAN, mFullName1, false ) ) {
-        TDLog.v( "modeload data stream 1 " + mName1 + " " + mFullName1);
+        // TDLog.v( "modeload data stream 1 " + mName1 + " " + mFullName1);
         // mAllSymbols =
         mDrawingSurface.modeloadDataStream( filename1b, mFullName1, false /*, FIXME-MISSING missingSymbols */ );
         // DrawingSurface.addManagerToCache( mFullName1 );
@@ -6315,7 +6327,7 @@ public class DrawingWindow extends ItemDrawer
         }
       }
     } else if ( b == mMenuImage ) { // MENU long click
-      TDLog.v("MENU LONG CLICK");
+      // TDLog.v("MENU LONG CLICK");
       if ( nr_multi_bad == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached ) {
         onClick( view );
       } else {
@@ -6985,7 +6997,7 @@ public class DrawingWindow extends ItemDrawer
   void doSaveWithExt( Uri uri, TDNum num, DrawingCommandManager manager, long type, final String filename, final String ext, boolean toast )
   {
     // TDLog.Log( TDLog.LOG_IO, "save with ext: " + filename + " ext " + ext );
-    TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext );
+    // TDLog.v( "SAVE with ext: filename " + filename + " ext " + ext );
     // mActivity = context (only to toast)
     SurveyInfo info  = mApp_mData.selectSurveyInfo( mSid );
     PlotInfo   plot  = null;

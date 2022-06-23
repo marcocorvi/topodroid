@@ -47,7 +47,7 @@ public class DrawingSplayPath extends DrawingPath
   static final int SPLAY_MODE_POINT = 2;
   static int mSplayMode = SPLAY_MODE_LINE; // splay display mode
 
-  public float xEnd, yEnd; // drawing circle center = endpoint
+  public float xEnd, yEnd; // drawing circle center = endpoint (scene coords)
 
   /** toggle the display mode of splays , between LINE and POINT
    */
@@ -76,14 +76,14 @@ public class DrawingSplayPath extends DrawingPath
   DrawingSplayPath( DBlock blk, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_SPLAY, blk, scrap );
-    xEnd= x2;
+    xEnd = x2;
     yEnd = y2;
   }
 
   /** make the path copying from another path
    * @param path   the path to copy or null for an empty path
    * @param m      transform matrix
-   * @param off_x  offset X
+   * @param off_x  offset X (scene ?)
    * @param off_y  offset Y
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
@@ -98,7 +98,7 @@ public class DrawingSplayPath extends DrawingPath
   }
 
   /** make the path a straight line between the two endpoints
-   * @param x1   first endpoint X coord
+   * @param x1   first endpoint X coord [scene]
    * @param y1   first endpoint Y coord
    * @param x2   second endpoint X coord
    * @param y2   second endpoint Y coord

@@ -293,7 +293,7 @@ public class DrawingPath extends RectF
   /** make the path copying from another path
    * @param path   the path to copy or null for an empty path
    * @param m      transform matrix
-   * @param off_x  offset X coord
+   * @param off_x  offset X coord [scene ?]
    * @param off_y  offset Y coord
    */
   void makePath( Path path, Matrix m, float off_x, float off_y )
@@ -315,7 +315,7 @@ public class DrawingPath extends RectF
   }
 
   /** make a segment path (x1,y1)--(x2,y2)
-   * @param x1    X coord of the first endpoint
+   * @param x1    X coord of the first endpoint [scene]
    * @param y1    Y coord of the first endpoint
    * @param x2    X coord of the second endpoint
    * @param y2    Y coord of the second endpoint
