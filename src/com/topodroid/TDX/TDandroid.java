@@ -18,9 +18,10 @@ import com.topodroid.prefs.TDSetting;
 import android.content.SharedPreferences.Editor;
 
 import android.app.Activity;
-import android.content.pm.ActivityInfo;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 
 // import java.lang.reflect.Method;
 
