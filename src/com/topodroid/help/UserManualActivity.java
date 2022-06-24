@@ -35,8 +35,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.content.Context;
 import android.content.Intent;
-// import android.content.ActivityNotFoundException;
-// import android.net.Uri;
+import android.content.ActivityNotFoundException;
+import android.net.Uri;
 
 // import android.widget.TextView;
 import android.widget.ImageView;
@@ -56,6 +56,7 @@ import android.webkit.WebViewClient;
 public class UserManualActivity extends Activity
                                 implements OnItemClickListener, OnClickListener
 {
+  private static final String WEBSITE = "https://sites.google.com/site/speleoapps";
   private static final String NEEDLE = "DistoX/files/man";
   private WebView mTV_text;
   private int mCloseOnBack = 0;
@@ -144,14 +145,14 @@ public class UserManualActivity extends Activity
   //   }
   // }
  
-  // private void viewUrl( String uri_string )
-  // {
-  //   try {
-  //     startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( uri_string )));
-  //   } catch ( ActivityNotFoundException e ) {
-  //     TDToast.makeBad( R.string.no_manual );
-  //   }
-  // }
+  private void viewUrl( String uri_string )
+  {
+    try {
+      startActivity( new Intent( Intent.ACTION_VIEW, Uri.parse( uri_string )));
+    } catch ( ActivityNotFoundException e ) {
+      TDToast.makeBad( R.string.no_manual );
+    }
+  }
 
 // -------------------------------------------------------------------
   // SlidingDrawer mDrawer;
@@ -294,6 +295,8 @@ public class UserManualActivity extends Activity
       } catch ( IOException e ) {
         TDLog.Error("User-man pos " + pos + " error " + e.getMessage() );
       }
+    } else if ( pos == 17 ) { // website
+      viewUrl( WEBSITE );
     } else {
       // getManualFromWeb();
       TDToast.makeBad( R.string.no_manual );

@@ -62,7 +62,7 @@ class Cave3DTube
     triangles.add( new Triangle3D( p1, p2, p3, color ) );
   }
 
-  /** compute the tube
+  /** compute the walls tube
    */
   private void computeTube()
   {

@@ -28,6 +28,10 @@ public class ConvexHullComputer
   ArrayList<CWConvexHull> mWalls;
   ArrayList<CWBorder> mBorders;
 
+  /** cstr
+   * @param parser    model parser
+   * @param shots     model shots
+   */
   public ConvexHullComputer( TglParser parser, List<Cave3DShot> shots )
   {
     mParser  = parser;
@@ -37,12 +41,26 @@ public class ConvexHullComputer
   }
 
   // boolean hasWalls() { return mWalls != null; }
+
+  /** @return the list of the convex-hulls
+   */
   public ArrayList<CWConvexHull> getWalls()   { return mWalls; }
+
+  /** @return the list of the borders
+   */
   public ArrayList<CWBorder>     getBorders() { return mBorders; }
+
+  /** @return the number of convex-hulls
+   */
   public int getWallsSize()   { return mWalls.size(); }
+
+  /** @return the number of borders
+   */
   public int getBordersSize() { return mBorders.size(); }
 
-  public boolean computeConvexHull( )
+  /** compute the walls model
+   */
+  public boolean computeWalls( )
   {
     for ( Cave3DShot sh : mShots ) {
       Cave3DStation sf = sh.from_station;
@@ -93,7 +111,8 @@ public class ConvexHullComputer
     return true;
   }
 
-
+  /** @return the estimate of the volume of the model
+   */
   public double getVolume()
   {
     double vol = 0;

@@ -41,13 +41,24 @@ class Cave3DHull
   //  */
   // int projSize( int k ) { return (k==0)? projs1.size() : projs2.size(); }
 
+  /** @return the number of triangles
+   */
   int size() { return triangles == null ? 0 : triangles.size(); }
 
-  Cave3DHull( Cave3DShot sh,                   // shot
-              ArrayList< Cave3DShot > splays1, // splays at FROM station
-              ArrayList< Cave3DShot > splays2, // splays at TO station
-              Cave3DStation sf,                // shot FROM station
-              Cave3DStation st,                // shot TO station
+  /** cstr
+   * @param sh      leg shot
+   * @param splays1 list of splays at first station
+   * @param splays2 list of splays at second station
+   * @param sf      FROM station
+   * @param st      TO station
+   * @param af      (?) angle at FROM station
+   * @param at      (?) angle at TO station
+   */
+  Cave3DHull( Cave3DShot sh,
+              ArrayList< Cave3DShot > splays1,
+              ArrayList< Cave3DShot > splays2,
+              Cave3DStation sf,
+              Cave3DStation st,
               HullAngle af,
               HullAngle at )
   {
@@ -88,12 +99,19 @@ class Cave3DHull
   //   // }
   // }
 
+  /** add a triangle with vertices the vectors of three projections
+   * @param p1    first projection
+   * @param p2    second projection
+   * @param p3    third projection
+   */
   private void addTriangle( HullProjection p1, HullProjection p2, HullProjection p3 )
   {
     triangles.add( new Triangle3D( p1.vector, p2.vector, p3.vector, color ) );
   }
 
-  // N.B. the two arrays are sorted by the angle
+  /** construct the triangles (?)
+   * @note the two arrays are sorted by the angle
+   */
   private void makeTriangles()
   {
     triangles = new ArrayList< Triangle3D >();
@@ -158,6 +176,8 @@ class Cave3DHull
     }
   }
 
+  /** compute the hull
+   */
   private void computeHull()
   {
     // TDLog.v( "compute Hull [0]: splays " + rays1.size() + " " + rays2.size() );
@@ -196,11 +216,12 @@ class Cave3DHull
     // TDLog.v( "compute Hull [3]: projs " + projs1.size() + " " + projs2.size() );
   }
 
-  // compute the projections of the rays at a given station
-  // @param rays    rays (splays) at the station
-  // @param projs   result projections (array)
-  // @param st      station
-  // @param dir     outside direction (-1 at FROM, 1 at TO)
+  /** compute the projections of the rays at a given station
+   * @param rays    rays (splays) at the station
+   * @param projs   result projections (array)
+   * @param st      station
+   * @param dir     outside direction (-1 at FROM, 1 at TO)
+   */
   private void computeHullProjs( ArrayList< Cave3DShot > rays, ArrayList< HullProjection > projs, Cave3DStation st, HullAngle angles )
   {
     // N.B. the HullProjection has a vector that depends on setting mSplayProj (ie use splay as 3D vector or on the projection plane)
@@ -229,9 +250,10 @@ class Cave3DHull
     for ( HullProjection p : projs ) p.proj.subtracted( center );
   }
  
-  // @param ref     reference unit (projection) vector
-  // @param projs   array of projections
-  // the projections "angle" are computed and the array is sorted by increasing angles
+  /** the projections "angle" are computed and the array is sorted by increasing angles
+   * @param ref     reference unit (projection) vector
+   * @param projs   array of projections
+   */
   private void computeAnglesAndSort( Vector3D ref, ArrayList< HullProjection > projs )
   {
     // normalize projected vectors and compute the angles
@@ -261,8 +283,11 @@ class Cave3DHull
     for ( HullProjection proj : projs ) proj.dump();
   }
 
-  // @pre projections are sorted by the angle
-  // TODO it might be useful to allow a bit of concavity 
+  /** ...
+   * @param proj   list of projections
+   * @pre projections are sorted by the angle
+   * TODO it might be useful to allow a bit of concavity 
+   */
   private void removeInsideProjs( ArrayList< HullProjection > projs )
   {
     int s = projs.size();
@@ -289,7 +314,10 @@ class Cave3DHull
     }
   }
 
-  // angle between two unit vectors in the projection plane - radians [0, 2 PI]
+  /** @return the angle between two unit vectors in the projection plane - radians [0, 2 PI]
+   * @param p0    first vector
+   * @param p1    second vector
+   */
   private double computeAngle( Vector3D p0, Vector3D p1 )
   {
     Vector3D p = normal.crossProduct( p1 );

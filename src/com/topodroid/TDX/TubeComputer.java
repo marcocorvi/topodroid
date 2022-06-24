@@ -21,17 +21,26 @@ class TubeComputer implements WallComputer
   private ArrayList< Cave3DShot > shots;
   private ArrayList< Triangle3D > triangles = null;
 
+  /** cstr
+   * @param parser    model parser
+   * @param s         list of model shots
+   */
   TubeComputer( TglParser parser, ArrayList< Cave3DShot > s )
   {
     mParser = parser;
     shots = s;
   }
 
+  /** @return the list of truiangles
+   */
   public ArrayList< Triangle3D > getTriangles() { return triangles; }
 
+  // colors:             red         yellow      green       cyan        blue        violet
   final int[] colors = { 0xffff0000, 0xffffff00, 0xff00ff00, 0xff00ffff, 0xff0000ff, 0xffff00ff };
 
-  boolean computeTube()
+  /** compute the walls
+   */
+  public boolean computeWalls()
   {
     if ( mParser.getXSectionNumber() == 0 ) return false;
     ArrayList< Cave3DTube > tubes = new ArrayList<>();

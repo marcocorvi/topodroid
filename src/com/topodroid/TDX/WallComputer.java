@@ -17,5 +17,9 @@ import java.util.ArrayList;
  */
 public interface WallComputer
 {
+
+  /** @return the list of triangles
+   */
   ArrayList< Triangle3D > getTriangles();
+
 }

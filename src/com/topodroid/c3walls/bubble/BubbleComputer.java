@@ -35,6 +35,8 @@ public class BubbleComputer implements WallComputer
     stations = parser.getStations();
   }
 
+  /** @return the list of triangles
+   */
   public ArrayList< Triangle3D > getTriangles() { return triangles; }
 
   final int[] colors = { 0xffff0000, 0xffffff00, 0xff00ff00, 0xff00ffff, 0xff0000ff, 0xffff00ff };
@@ -45,7 +47,9 @@ public class BubbleComputer implements WallComputer
     return null;
   }
 
-  public boolean computeBubble()
+  /** compute the walls model
+   */
+  public boolean computeWalls()
   {
     // TDLog.v( "Bubble computer: " + stations.size() + " " + shots.size() + " " + splays.size() );
     ArrayList< Bubble > bubbles = new ArrayList<>();

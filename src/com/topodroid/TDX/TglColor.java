@@ -15,6 +15,10 @@ class TglColor
 {
   float[] color;
 
+  /** copy cstr
+   * @param c   TGL color
+   * @note copy the color-array of c
+   */
   TglColor( TglColor c ) 
   {
     color = new float[4];
@@ -24,9 +28,18 @@ class TglColor
     color[3] = c.color[3];
   }
 
+  /** cstr
+   * @param c   array of the colot four (float) components (RGBA)
+   * @note set the color-array in this object to point the passed array
+   */
   TglColor( float[] c ) 
   {
-    color = c;
+    color = new float[4];
+    color[0] = c[0];
+    color[1] = c[1];
+    color[2] = c[2];
+    color[3] = c[3];
+    // WAS color = c;
   }
 
   // TglColor( float red, float green, float blue, float alpha )
@@ -61,6 +74,10 @@ class TglColor
   static final int SURVEY_COLOR_NR = surveyColor.length; 
   static final int AXIS_COLOR_NR   = axisColor.length; 
 
+  /** fill the RGB color-array with a survey color
+   * @param index   survey index
+   * @param color   color-array 
+   */
   static void getSurveyColor( int index, float[] color ) 
   {
     int col = surveyColor[ index % SURVEY_COLOR_NR ];
@@ -69,6 +86,10 @@ class TglColor
     color[2] = (float)( (col    )&0xff )/255.0f;
   }
 
+  /** fill the RGB color-array with an axis color
+   * @param index   axis index
+   * @param color   color-array 
+   */
   static void getAxisColor( int index, float[] color ) 
   {
     int col = axisColor[ index % AXIS_COLOR_NR ];

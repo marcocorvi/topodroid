@@ -777,7 +777,7 @@ public class TglParser
       if ( convexhullcomputer != null ) {
         (new AsyncTask<Void, Void, Boolean>() {
           public Boolean doInBackground( Void ... v ) {
-            return convexhullcomputer.computeConvexHull( );
+            return convexhullcomputer.computeWalls( );
           }
           public void onPostExecute( Boolean b )
           {
@@ -801,7 +801,7 @@ public class TglParser
       if ( tubecomputer != null ) {
         (new AsyncTask< Void, Void, Boolean >() {
           public Boolean doInBackground( Void ... v ) {
-            return tubecomputer.computeTube();
+            return tubecomputer.computeWalls();
           }
           public void onPostExecute( Boolean b ) {
             if ( ! b ) tubecomputer = null;
@@ -829,7 +829,7 @@ public class TglParser
         // TDLog.v("compute bubble");
         (new AsyncTask< Void, Void, Boolean >() {
           public Boolean doInBackground( Void ... v ) {
-            return bubblecomputer.computeBubble();
+            return bubblecomputer.computeWalls();
           }
           public void onPostExecute( Boolean b ) {
             // TDLog.v("compute bubble: " + b );
@@ -852,7 +852,7 @@ public class TglParser
       if ( hullcomputer != null ) {
         (new AsyncTask< Void, Void, Boolean >() {
           public Boolean doInBackground( Void ... v ) {
-            return hullcomputer.computeHull();
+            return hullcomputer.computeWalls();
           }
           public void onPostExecute( Boolean b ) {
             if ( ! b ) hullcomputer = null;

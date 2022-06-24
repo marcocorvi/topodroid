@@ -26,17 +26,25 @@ public class HullComputer implements WallComputer
   private ArrayList< Cave3DShot > shots;
   private ArrayList< Triangle3D > triangles = null;
 
+  /** cstr
+   * @param parser    model parser
+   * @param s         model shots
+   */
   public HullComputer( TglParser parser, ArrayList< Cave3DShot > s )
   {
     mParser = parser;
     shots = s;
   }
 
+  /** @return the list of triangles
+   */
   public ArrayList< Triangle3D > getTriangles() { return triangles; }
 
   final int[] colors = { 0xffff0000, 0xffffff00, 0xff00ff00, 0xff00ffff, 0xff0000ff, 0xffff00ff };
 
-  public boolean computeHull()
+  /** compute the walls model
+   */
+  public boolean computeWalls()
   {
     ArrayList< Cave3DHull > hulls = new ArrayList<>();
     int k_col = 0;

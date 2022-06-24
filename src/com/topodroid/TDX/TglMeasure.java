@@ -37,7 +37,7 @@ class TglMeasure
    * @param res     resources
    * @param s1      start station
    * @param s2      end station
-   * @param dc      ...
+   * @param dc      distance along the cave
    * @param dpos    positive denivelation
    * @param dneg    negative denivelation
    */
@@ -67,6 +67,8 @@ class TglMeasure
    */
   double getDistNeg() { return dist_neg; }
 
+  /** @return string presentation of the measurement
+   */
   String getString()
   {
     if ( dcave < Float.MAX_VALUE-1 ) {
