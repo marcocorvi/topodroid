@@ -58,7 +58,7 @@ public class DrawingCommandManager
   private DrawingMeasureEndPath   mSecondReference;
 
   private DrawingPath mNorthLine;
-  private DrawingScaleReference mScaleRef; /*[AR] this is the instance of scale reference line*/
+  private DrawingScaleReference      mScaleRef; /*[AR] this is the instance of scale reference line*/
   private List< DrawingPath >        mGridStack1;
   private List< DrawingPath >        mGridStack10;
   private List< DrawingPath >        mGridStack100;
@@ -763,7 +763,7 @@ public class DrawingCommandManager
    * @param act    activity
    * @param dx     X shift
    * @param dy     Y shift
-   * @param s      scale
+   * @param s      zoom
    * @param landscape whether landscape-presentation
    * 
    * The matrix is diag(s*dx, s*dy)
@@ -1414,10 +1414,11 @@ public class DrawingCommandManager
       }
       if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, bbox );
       if ( scaleRef && (mScaleRef != null)) {
+        float sketch_unit = isFixedZoom()? 1.0f : TDSetting.mUnitGrid;
         if ( sidebars ) {
-          mScaleRef.draw(canvas, zoom, mLandscape);
+          mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit );
         } else {
-          mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top );
+          mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit );
         }
       }
     }

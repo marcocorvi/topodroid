@@ -471,6 +471,7 @@ public class TDSetting
 
   // public static boolean mWithLayers  = true; // false;
   public static int mWithLevels = 0;  // 0: no, 1: by class, 2: by item
+  public static int mGraphPaperScale = 0;  // correction subtracted to the system display density
 
   public static float mStationSize    = 20;   // size of station names [pt]
   public static float mLabelSize      = 24;   // size of labels [pt]
@@ -1132,6 +1133,7 @@ public class TDSetting
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
+    // mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_GRAPH_PAPER_SCALE
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -1708,6 +1710,8 @@ public class TDSetting
       mFullAffine    = tryBooleanValue( hlp, k, v, bool(def[ 7 ]) );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_WITH_LEVELS
       mWithLevels    = tryIntValue( hlp, k, v, def[ 8 ] );
+    // } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_GRAPH_PAPER_SCALE - handled by a dialog
+    //   mGraphPaperScale = tryIntValue( hlp, k, v, def[ 9 ] );
     } else {
       TDLog.Error("missing GEEK_PLOT key: " + k );
     }
@@ -3671,7 +3675,7 @@ public class TDSetting
     mTherionScale = scale;
     mToTherion = THERION_SCALE / mTherionScale;
     mToSvg     = SVG_SCALE / mTherionScale;
-    TDLog.v("Set export scale " + scale + " SVG " + mToSvg );
+    // TDLog.v("Set export scale " + scale + " SVG " + mToSvg );
     return ret;
   }
 

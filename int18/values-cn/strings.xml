@@ -1211,6 +1211,8 @@
 
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
+    <!-- TODO string name="title_graph_paper">Graph paper 1:100 scale</string -->
+    <!-- TODO string name="graph_paper_scale">Adjust the line to be 5 cm long</string -->
 
   <!-- TODO string name="exported_settings">Exported settings %1$s</string -->
   <string name="imported_settings">输入设置</string>
@@ -1538,6 +1540,8 @@
   <string name="pref_lineacc_summary">贝塞尔三次插值精度</string>
   <string name="pref_linecorner_title">贝塞尔转折临界值</string>
   <string name="pref_linecorner_summary">贝塞尔角检测阈值</string>
+  <!-- TODO string name="pref_graph_paper_scale_title">Graph-paper scale</string -->
+  <!-- TODO string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string -->
   <string name="pref_weeddistance_title">点清除段距离</string>
   <string name="pref_weeddistance_summary">线中清除点的最大距离[m]</string>
   <string name="pref_weedlength_title">点清除的分段长度</string>

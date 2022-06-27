@@ -1212,6 +1212,8 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
+    <string name="title_graph_paper">Carta milimetrata in scala 1:100</string>
+    <string name="graph_paper_scale">Regola la linea a 5 cm</string>
 
   <string name="exported_settings">Impostazioni esportate %1$s</string>
   <string name="imported_settings">Impostazioni importate</string>
@@ -1533,6 +1535,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
+  <string name="pref_graph_paper_scale_title">Scala carta millimetrata</string -->
+  <string name="pref_graph_paper_scale_summary">Correzione scala carta millimetrata</string -->
   <string name="pref_weeddistance_title">Buffer segmento di pulizia punti</string>
   <string name="pref_weeddistance_summary">Distanza massima da un segmento ai punti superflui</string>
   <string name="pref_weedlength_title">Lunghezza massima segmento di pulizia punti</string>

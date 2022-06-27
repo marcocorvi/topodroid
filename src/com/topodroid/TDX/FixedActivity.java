@@ -90,7 +90,7 @@ public class FixedActivity extends Activity
   private int mNrButton1 = 0;
   private MyHorizontalListView mListView;
   private MyHorizontalButtonView mButtonView1;
-  // private Button mBtHelp;  
+  // private Button mBtHelp;   // TOOLBAR
   // private Button mBtClose;
 
   private boolean hasGps = false;
@@ -139,9 +139,9 @@ public class FixedActivity extends Activity
     setContentView(R.layout.fixed_activity);
     setTitle( R.string.title_fixed );
 
-    // mBtHelp  = (Button) findViewById( R.id.button_help );
-    // mBtClose = (Button) findViewById( R.id.button_close );
+    // mBtHelp  = (Button) findViewById( R.id.button_help ); // TOOLBAR
     // mBtHelp.setOnClickListener( this );
+    // mBtClose = (Button) findViewById( R.id.button_close );
     // mBtClose.setOnClickListener( this );
 
     mListView = (MyHorizontalListView) findViewById(R.id.listview);
@@ -291,7 +291,7 @@ public class FixedActivity extends Activity
       return;
     }
 
-    // if ( b == mBtHelp ) {
+    // if ( b == mBtHelp ) { // TOOLBAR
     //   doHelp();
     //   return;
     // } else if ( b == mBtClose ) {

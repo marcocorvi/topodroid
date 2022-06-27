@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601015"
-      android:versionName="6.1.15"
+      android:versionCode="601016"
+      android:versionName="6.1.16"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -271,6 +271,14 @@
         </activity>
 
         <activity android:name=".PtCmapActivity"
+	  android:theme="@style/Theme.FullScreen"
+          android:configChanges="orientation|screenSize"
+          android:exported="false"
+          >
+	  <!-- android:screenOrientation="portrait" -->
+        </activity>
+
+        <activity android:name=".GraphPaperScaleActivity"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"

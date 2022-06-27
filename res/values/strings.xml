@@ -1218,6 +1218,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
+    <string name="title_graph_paper">Graph paper 1:100 scale</string>
+    <string name="graph_paper_scale">Adjust the line to be 5 cm long</string>
 
   <string name="exported_settings">Exported settings %1$s</string>
   <string name="imported_settings">Imported settings</string>
@@ -1548,6 +1550,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_lineacc_summary">Bezier cubic interpolation accuracy</string>
   <string name="pref_linecorner_title">Bezier corner threshold</string>
   <string name="pref_linecorner_summary">Bezier corner detection threshold</string>
+  <string name="pref_graph_paper_scale_title">Graph-paper scale</string>
+  <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
   <string name="pref_weeddistance_title">Weeding point distance</string>
   <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
   <string name="pref_weedlength_title">Weeding segment length</string>

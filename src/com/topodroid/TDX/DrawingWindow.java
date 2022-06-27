@@ -929,38 +929,12 @@ public class DrawingWindow extends ItemDrawer
     fixed_zoom = ( fixed_zoom < 0 )? 0 : ( fixed_zoom > 5 )? 5 : fixed_zoom;
     mDrawingSurface.setFixedZoom( fixed_zoom );
     if ( fixed_zoom > 0 ) {  // compute the zoom value
-      int dpi = TopoDroidApp.getDisplayDensityDpi();
-      // TDLog.v("ZOOM dpi " + dpi + " " + getResources().getSystem().getDisplayMetrics().xdpi + " " +  getResources().getSystem().getDisplayMetrics().ydpi );
-      // MiA2 gives  dpi: 480   xdpi: 397.565   ydi: 474.688
-      
-      // Android dp are pixels
-      // conversion: 1 m [world] = 20 units [scene]
-      // not-used:   1 pt = 1.333333 pxl     1 pxl = 0.75 pt
-      //
-      // the dp per cm are: dp1cm = dpi * in/cm = 480 / 2.54 = 188.97637795 pxl/cm (correct 188.97638)
-      // now 1 m becomes 20 pxl, 
-      // therefore the scale 1:100 should have a zoom (188.97637795 pxl/cm) / (20 pxl/m) = 9.4488188975
+      float density = TopoDroidApp.getDensity() - TDSetting.mGraphPaperScale;
 
-      // 1 in = 2.54 cm = 25.4 mm, 
-      // float dp2mm = dpi * fixed_zoom / 127.0f; // dot_per_5mm:  127 = 25.4 * 5
-      // float zoom = 32 / dp2mm; // 32 = 40 / 1.25
-      // zoom 8.466666
-
-      // 1 m = 20 pxl   ( android dp are pixels )
-      // 0.89605485 = 1 / 1.1160031107 = 8.46666 / 9.4488188975 
-      // where  9.4488188975 = DPI/(2.54 * 20) = DPI dp/in / (cm/in * 20 dp/m) = DPI/(50.8 cm/m) 
-      //        8.4666666665 = zoom = 1600 / (DPI/2.54 dp / cm)
-      // 1600 is magic-number
-      // thus   0.89605485 = (1600 * 2.54 / DPI cm/dp) / (DPI/50.8 m/cm)
-      //                   = 1600 * 20 / (100*DPI/2.54)^2 
-      // this is wierd
-      //
-      // old command-manager step
-      // float step_old = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
-
-      float dp1cm = dpi * fixed_zoom / 2.54f; // dot_per_1cm
+      float dp1cm = density * fixed_zoom / 2.54f; // dot_per_1cm
       float zoom = 1600 / dp1cm; // 32 = 40 / 1.25
-      TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " dpi " + dpi + " dp1cm " + dp1cm );
+
+      TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " density " + density + " dp1cm " + dp1cm + " adjust " + TDSetting.mGraphPaperScale );
       mOffset.x *= mZoom / zoom;
       mOffset.y *= mZoom / zoom;
       mZoom = zoom;

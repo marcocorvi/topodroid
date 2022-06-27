@@ -40,9 +40,9 @@ import java.util.ArrayList;
  */
 public class BrushManager
 {
-  static final private int WIDTH_CURRENT = 1;
-  static final private int WIDTH_FIXED   = 1;
-  static final         int WIDTH_PREVIEW = 1;
+  static final int WIDTH_CURRENT = 1;
+  static final int WIDTH_FIXED   = 1;
+  static final int WIDTH_PREVIEW = 1;
 
   // TODO make private
   static private SymbolPointLibrary mPointLib = null;

@@ -1458,6 +1458,7 @@ public class TDPrefKey
     "DISTOX_LEGONLY_UPDATE",  // whether to update drawing windows at every shot
     "DISTOX_FULL_AFFINE",     // whether to do full affine transform or shift+scale only
     "DISTOX_WITH_LEVELS",    
+    "DISTOX_GRAPH_PAPER_SCALE",
     null
   };
 
@@ -1474,6 +1475,7 @@ public class TDPrefKey
     R.string.pref_legonly_update_title,
     R.string.pref_full_affine_title,
     R.string.pref_with_levels_title,
+    R.string.pref_graph_paper_scale_title,
     -1
   };
 
@@ -1490,6 +1492,7 @@ public class TDPrefKey
     R.string.pref_legonly_update_summary,
     R.string.pref_full_affine_summary,
     R.string.pref_with_levels_summary,
+    R.string.pref_graph_paper_scale_summary,
     -1
   };
 
@@ -1505,6 +1508,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     FALSE,
+    TDString.ZERO,
     TDString.ZERO,
     null
   };

@@ -30,6 +30,7 @@ public class TDTag
   public static final String TOPODROID_PLOT_LANDSCAPE = "plot_landscape";
   public static final String TOPODROID_HELP_PAGE    = "help_page";
   public static final String TOPODROID_PLOT_FILENAME = "plot_filename";
+  public static final String TOPODROID_GRAPH_PAPER_SCALE = "graph_paper_scale";
 
   /* FIXME_SKETCH_3D *
   static final String TOPODROID_SKETCH_ID   = "sketch_id";

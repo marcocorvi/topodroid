@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- do not put a ScrollView -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
+  android:orientation="vertical"
+  android:layout_width="fill_parent"
+  android:layout_height="fill_parent"
+  >
+
+  <TextView 
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_marginStart="@dimen/marginh"
+    android:layout_marginEnd="@dimen/marginh"
+    android:text="@string/graph_paper_scale"
+  />
+
+  <TextView android:id="@+id/graph_paper_density"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_marginStart="@dimen/marginh"
+    android:layout_marginEnd="@dimen/marginh"
+    android:text="@string/empty"
+  />
+
+  <com.topodroid.TDX.GraphPaperScaleSurface android:id="@+id/graph_paper_surface"
+    android:layout_width="match_parent"
+    android:layout_height="100dp"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:layout_marginStart="@dimen/marginh"
+    android:layout_marginEnd="@dimen/marginh"
+    android:clickable="false"
+    android:focusable="false"
+  />
+
+  <LinearLayout android:id="@+id/controls"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginStart="@dimen/marginh"
+    android:layout_marginEnd="@dimen/marginh"
+    android:layout_marginTop="@dimen/marginv"
+    >
+    <Button android:id="@+id/btn_double_minus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginEnd="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/doubleminus"
+    />
+    <Button android:id="@+id/btn_minus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginEnd="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/minus"
+    />
+    <Button android:id="@+id/btn_plus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginEnd="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/plus"
+    />
+    <Button android:id="@+id/btn_double_plus"
+      android:layout_width="0dp"
+      android:layout_weight="20"
+      android:layout_marginEnd="@dimen/marginh"
+      style="@style/button_default"
+      android:text="@string/doubleplus"
+    />
+  </LinearLayout>
+  <LinearLayout android:id="@+id/help"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:layout_marginTop="@dimen/marginv"
+    android:layout_marginBottom="@dimen/marginv"
+    android:gravity="start"
+    >
+    <Button android:id="@+id/button_help"
+        style="@style/button_empty"
+        android:text="@string/button_help"
+    />
+    <LinearLayout 
+      android:layout_width="fill_parent" 
+      android:layout_height="wrap_content"
+      android:gravity="end"
+      >
+      <Button android:id="@+id/btn_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/marginh"
+        style="@style/button_default"
+        android:text="@string/button_cancel"
+      />
+      <Button android:id="@+id/btn_ok"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        style="@style/button_default"
+        android:text="@string/button_ok"
+      />
+    </LinearLayout>
+  </LinearLayout>
+
+</LinearLayout>

@@ -33,8 +33,12 @@
   <string name="size_l" translatable="false">L</string>
   <string name="size_xl" translatable="false">XL</string>
   <string name="dash" translatable="false">-</string>
-  <string name="plus" translatable="false">+</string>
-  <string name="minus_plus" translatable="false">-/+</string>
+  <!-- UNUSED string name="mdash" translatable="false">&#2014;</string -->
+  <string name="plus" translatable="false">&#x002b;</string>
+  <string name="minus" translatable="false">&#x2212;</string>
+  <string name="doubleplus" translatable="false">&#x002b;&#x002b;</string>
+  <string name="doubleminus" translatable="false">&#x2212;&#x2212;</string>
+  <string name="minus_plus" translatable="false">&#x2212;/&#x002b;</string>
   <string name="arrow_left" translatable="false">&#x21a4;</string>
   <string name="arrow_right" translatable="false">&#x21a6;</string>
   <string name="arrow_up" translatable="false">&#x21a5;</string>

@@ -298,6 +298,48 @@ public class TopoDroidApp extends Application
     return Resources.getSystem().getDisplayMetrics().ydpi;
   }
 
+  /** @return the system display density - for graph-paper
+   */
+  public static float getDensity()
+  {
+    int dpi = getDisplayDensityDpi();
+    int dds = TDandroid.BELOW_API_24 ?  dpi 
+            : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE;
+
+    TDLog.v("ZOOM " + TDandroid.BELOW_API_24 + " dpi " + dpi + " " + Resources.getSystem().getDisplayMetrics().density + " " +  dds + " " + Resources.getSystem().getDisplayMetrics().xdpi + " " +  Resources.getSystem().getDisplayMetrics().ydpi );
+    //                                                                           
+    //          Android below-24 dpi density sys-density xpdi    ypdi     density       dp1cm 1:100
+    // Nexus 4    5 21  true     320 2.0     320                          640 (needed)
+    // Note 3     7 24  false    480 3.0     480         386.366 387.047  530 (needed)  208.66142 (needed)
+    // MiA2      10 29  false    408 2.55    480         397.565 474.688  480 (ok)      188.97638
+    //                           480 3.0    
+    //                           540 3.375
+    // Smsung A3 11 30  false    420 2.625   420
+    //                           450 2.8125
+    //                           480 3.0
+    //                           510 3.1875
+    //                           540 3.375
+    
+    // Android dp are pixels
+    // conversion: 1 m [world] = 20 units [scene]
+    // not-used:   1 pt = 1.333333 pxl     1 pxl = 0.75 pt
+    //
+    // the dp per cm are: dp1cm = dpi * in/cm = 480 / 2.54 = 188.97637795 pxl/cm (correct 188.97638)
+    // now 1 m becomes 20 pxl, 
+    // therefore the scale 1:100 should have a zoom (188.97637795 pxl/cm) / (20 pxl/m) = 9.4488188975
+    // 1600 is magic-number
+    //
+    // old command-manager step
+    // float step_old = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
+
+    float density = 480 + (480 - dds)/3.0f; // why 3.0 ? because 480 corresponds to 3.0
+    // if ( TDandroid.BELOW_API_24 ) density = 480 + (480 - dpi);
+    // if ( TDandroid.BELOW_API_24 ) density = 2 * dpi;
+    if ( TDandroid.BELOW_API_24 ) density = 2 * dpi;
+
+    return density;
+  }
+
 
   /** set the height of the button list-view
    * @param context   context

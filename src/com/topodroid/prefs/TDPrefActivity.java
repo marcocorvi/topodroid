@@ -52,11 +52,13 @@ public class TDPrefActivity extends Activity
   static final int REQUEST_ACCURACY    = 5;
   static final int REQUEST_SHOT_DATA   = 6;
   static final int REQUEST_PT_CMAP     = 7;
+  static final int REQUEST_GRAPH_PAPER_SCALE = 8;
 
   private int mPrefCategory = TDPrefCat.PREF_CATEGORY_ALL; // preference category
 
   private TDPref mCwdPref;
   private TDPref mPtCmapPref;
+  private TDPref mGraphPaperScalePref;
 
   // private TopoDroidApp mApp;
   private Context mCtx;
@@ -303,6 +305,21 @@ public class TDPrefActivity extends Activity
       linkPreference( "DISTOX_GEEK_DEVICE",         TDPrefCat.PREF_GEEK_DEVICE );
       linkPreference( "DISTOX_GEEK_IMPORT",         TDPrefCat.PREF_GEEK_IMPORT );
       // linkPreference( "DISTOX_SKETCH_PREF",         TDPrefCat.PREF_CATEGORY_SKETCH ); // FIXME_SKETCH_3D
+    } else if (mPrefCategory == TDPrefCat.PREF_GEEK_PLOT ) {
+      mGraphPaperScalePref = findPreference( "DISTOX_GRAPH_PAPER_SCALE" );
+      if ( mGraphPaperScalePref != null ) {
+        // TDLog.v("GRAPH_PAPER setting " + TDSetting.mGraphPaperScale );
+        mGraphPaperScalePref.setButtonValue( Integer.toString( TDSetting.mGraphPaperScale ) );
+        View v = mGraphPaperScalePref.getView();
+        if ( v != null ) {
+          final Intent pt_intent = new Intent( mCtx, com.topodroid.TDX.GraphPaperScaleActivity.class ); // this
+          v.setOnClickListener( 
+            new OnClickListener() {
+              @Override
+              public void onClick( View v ) { startActivityForResult( pt_intent, REQUEST_GRAPH_PAPER_SCALE ); }
+          } );
+        }
+      }
     }
 
     return true;
@@ -394,6 +411,15 @@ public class TDPrefActivity extends Activity
         if ( extras != null ) {
           String cmap = extras.getString( TDTag.TOPODROID_CMAP );
           // mPtCmapPref.
+        }
+        break;
+      case REQUEST_GRAPH_PAPER_SCALE:
+        if ( result == RESULT_OK && extras != null ) {  
+          int density = (int)(intent.getIntExtra( TDTag.TOPODROID_GRAPH_PAPER_SCALE, -1 ));
+          // TDLog.v("GRAPH_PAPER set density " + density );
+          TDSetting.mGraphPaperScale = density;
+          mGraphPaperScalePref.setButtonValue( Integer.toString( density ) );
+          // TODO save setting ?
         }
         break;
     }

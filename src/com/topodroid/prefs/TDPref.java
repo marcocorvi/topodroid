@@ -1472,7 +1472,8 @@ public class TDPref implements AdapterView.OnItemSelectedListener
       makeCbx( cat, key[ 5], tit[ 5], dsc[ 5], T, def[ 5],          ctx, hlp ), // SAVED_STATIONS
       makeCbx( cat, key[ 6], tit[ 6], dsc[ 6], T, def[ 6],          ctx, hlp ), // ALWAYS_UPDATE
       makeCbx( cat, key[ 7], tit[ 7], dsc[ 7], T, def[ 7],          ctx, hlp ), // FULL_AFFINE
-      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp )  // WITH LEVELS
+      makeLst( cat, key[ 8], tit[ 8], dsc[ 8], T, def[ 8], R.array.canvasLevels, R.array.canvasLevelsValue, ctx, hlp ),  // WITH LEVELS
+      makeBtn( cat, key[ 9], tit[ 9], dsc[ 9], T, def[ 9], ctx, hlp ), // GRAPH_PAPER_SCALE
     };
   }
 

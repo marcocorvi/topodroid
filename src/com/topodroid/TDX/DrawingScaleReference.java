@@ -37,7 +37,7 @@ class DrawingScaleReference
   private Point mLocation;
   private float mMaxWidthPercent;
   private Paint mPaint;
-  private String mUnits;
+  // private String mUnits;
   // private boolean mExtendAzimuth = false;
 
   private final static float[] mValues = { 0, 0.01f, 0.05f, 0.1f, 0.5f, 1, 2, 5, 10, 20, 50, 100, 200, 500 };
@@ -80,10 +80,19 @@ class DrawingScaleReference
     else mMaxWidthPercent = widthPercent;
 
     mLocation = loc;
-    mUnits = ( TDSetting.mUnitGrid > 0.99f)? " m" 
-           : ( TDSetting.mUnitGrid > 0.8f)? " yd"
-           : ( TDSetting.mUnitGrid > 0.2f)? " ft" : " dm";
+    // mUnits = getUnits( TDSetting.mUnitGrid )
     // mExtendAzimuth = with_azimuth;
+  }
+
+  /** @return the units of unit
+   * @param sketch_unit    sketch_unit length [m]
+   */
+  private String getUnits( float sketch_unit )
+  {
+    return  ( sketch_unit > 0.99f)? " m"  // 1.0 m
+          : ( sketch_unit > 0.8f)? " yd"  // about 0.98 m
+          : ( sketch_unit > 0.2f)? " ft"  // about 0.33 m
+          : " dm";                 // 0.1 m
   }
 
   /** @return scale reference current color (or white)
@@ -107,14 +116,18 @@ class DrawingScaleReference
     if ( size > 0 ) mPaint.setTextSize( size );
   }
 
-  // Calculate reference scale
-  // @param width canvas width
-  private float getReferenceLength( float width, float units )
+  /** Calculate reference scale
+   * @param width canvas width
+   * @param canvas_unit  canvas unit
+   * @param sketch_unit  sketch unit
+   * @return reference length
+   */
+  private float getReferenceLength( float width, float canvas_unit, float sketch_unit )
   {
-    float refLen = width * mMaxWidthPercent / units;
-    // units 1:m 0.914:y 0.6096:2ft
-    if ( TDSetting.mUnitGrid < 0.2f )      { refLen *= 10; } // using m instead of dm
-    else if ( TDSetting.mUnitGrid < 0.8f ) { refLen *=  2; } // using ft instead of 2ft
+    float refLen = width * mMaxWidthPercent / canvas_unit;
+    // canvas_unit 1:m 0.914:y 0.6096:2ft
+    if ( sketch_unit < 0.2f )      { refLen *= 10; } // using m instead of dm
+    else if ( sketch_unit < 0.8f ) { refLen *=  2; } // using ft instead of 2ft
       
     int k = mValues.length - 1;
     while ( k > 0 && refLen < mValues[k] ) --k;
@@ -122,23 +135,25 @@ class DrawingScaleReference
     return (k > 0)? refLen : -1; // neg. --> cannot draw
   }
 
-  /** draw the scale reference
+  /** display the scale reference
    * @param canvas canvas to draw in
    * @param zoom zoom factor used
+   * @param sketch_unit  sketch unit length
    */
-  void draw( Canvas canvas, float zoom, boolean landscape )
+  void draw( Canvas canvas, float zoom, boolean landscape, float sketch_unit )
   {
-    draw( canvas, zoom, landscape, mLocation.x, mLocation.y );
+    draw( canvas, zoom, landscape, mLocation.x, mLocation.y, sketch_unit );
   }
 
-  /** draw the scale reference
+  /** display the scale reference
    * @param canvas     canvas to draw in
    * @param zoom       zoom factor used
    * @param landscape  whether in landscape presentation
    * @param locx       X coord of the point where to draw the scale-reference
    * @param locy       Y coord of the point where to draw the scale-reference
+   * @param sketch_unit  sketch unit length
    */
-  void draw( Canvas canvas, float zoom, boolean landscape, float locx, float locy )
+  void draw( Canvas canvas, float zoom, boolean landscape, float locx, float locy, float sketch_unit )
   {
     if (canvas != null)
     {
@@ -148,20 +163,20 @@ class DrawingScaleReference
       float arrowtip = arrowlen / 5;
 
       /* Calculate reference scale */
-      float referenceLen = getReferenceLength( canvas.getWidth(), canvasUnit );
+      float referenceLen = getReferenceLength( canvas.getWidth(), canvasUnit, sketch_unit );
 
       /* Draw reference scale */
       if ( referenceLen > 0 ) 
       {
         float canvasLen = canvasUnit * referenceLen;
-        canvasLen *= TDSetting.mUnitGrid;
-        if ( TDSetting.mUnitGrid < 0.2f ) { } // using m instead of dm
-	    else if ( TDSetting.mUnitGrid < 0.8f ) canvasLen /= 2;
+        canvasLen *= sketch_unit;
+        if ( sketch_unit < 0.2f ) { } // using m instead of dm
+	else if ( sketch_unit < 0.8f ) canvasLen /= 2;
 
-        String refstr = (( referenceLen < 1 )?  Float.toString(referenceLen) : Integer.toString((int)referenceLen)) + mUnits;
+        String refstr = (( referenceLen < 1 )?  Float.toString(referenceLen) : Integer.toString((int)referenceLen)) + getUnits( sketch_unit );
         float locX = (locx > 0) ? locx : canvas.getWidth()  + locx - referenceLen;
         float locY = (locy > 0) ? locy : canvas.getHeight() + locy;
-	// TDLog.v( "reference " + referenceLen + mUnits );
+	// TDLog.v( "reference " + referenceLen + units );
 
         canvas.drawLine( locX, locY, locX + canvasLen, locY, mPaint);
         canvas.drawLine( locX, locY, locX, locY - HEIGHT_BARS, mPaint);

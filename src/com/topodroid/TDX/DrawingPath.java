@@ -557,7 +557,7 @@ public class DrawingPath extends RectF
   {
     if ( intersects( bbox ) ) {
       if ( mType == DRAWING_PATH_AREA ) {
-        // TDLog.Log( TDLog.LOG_PLOT, "DrawingPath::draw area" );
+        // TDLog.Log( TDLog.LOG_PLOT, "Drawing Path::draw area" );
         mPath.close();
       }
       drawPath( mPath, canvas );
@@ -650,7 +650,7 @@ public class DrawingPath extends RectF
    * @param dos   output stream
    * @param scrap scrap index
    */
-  void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR DrawingPath toDataStream with scrap executed"); }
+  void toDataStream( DataOutputStream dos, int scrap ) { TDLog.Error( "ERROR Drawing Path toDataStream with scrap executed"); }
 
   /** write the path in cSurvey format - it does nothing by default
    * @param pw     output writer
