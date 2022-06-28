@@ -1214,8 +1214,8 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="title_import_shot">Felmérés import</string>
     <string name="title_import_gps">GPS pont import</string>
-    <!-- TODO string name="title_graph_paper">Graph paper 1:100 scale</string -->
-    <!-- TODO string name="graph_paper_scale">Adjust the line to be 5 cm long</string -->
+    <string name="title_graph_paper">Grafikon papír 1:100 skála</string>
+    <string name="graph_paper_scale">Igazítsd a vonalat 5cm hosszúra</string>
 
   <string name="exported_settings">Beállítások exportálása %1$s</string>
   <string name="imported_settings">Importált beállítások</string>
@@ -1546,8 +1546,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_lineacc_summary">Négyzetes Bezier interpoláció pontossága</string>
   <string name="pref_linecorner_title">Bezier küszöb</string>
   <string name="pref_linecorner_summary">Küszöbérték szöglet detektáláshoz Bezier interpolációnál</string>
-  <!-- TODO string name="pref_graph_paper_scale_title">Graph-paper scale</string -->
-  <!-- TODO string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string -->
+  <string name="pref_graph_paper_scale_title">Mm-papír scale</string>
+  <string name="pref_graph_paper_scale_summary">Mm-papír skála beállítás</string>
   <string name="pref_weeddistance_title">Pont távolság</string>
   <string name="pref_weeddistance_summary">Maximális távolság a vonal és az összehúzott pont között összeolvasztásnál [m]</string>
   <string name="pref_weedlength_title">Szegmens hossz</string>
