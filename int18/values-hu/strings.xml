@@ -1547,8 +1547,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_lineacc_summary">Négyzetes Bezier interpoláció pontossága</string>
   <string name="pref_linecorner_title">Bezier küszöb</string>
   <string name="pref_linecorner_summary">Küszöbérték szöglet detektáláshoz Bezier interpolációnál</string>
-  <string name="pref_graph_paper_scale_title">Mm-papír scale</string>
-  <string name="pref_graph_paper_scale_summary">Mm-papír skála beállítás</string>
+  <string name="pref_graph_paper_scale_title">mm-papír skála</string>
+  <string name="pref_graph_paper_scale_summary">mm-papír skála beállítás</string>
   <string name="pref_weeddistance_title">Pont távolság</string>
   <string name="pref_weeddistance_summary">Maximális távolság a vonal és az összehúzott pont között összeolvasztásnál [m]</string>
   <string name="pref_weedlength_title">Szegmens hossz</string>
