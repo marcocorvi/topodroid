@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2016
  *
- * @brief TopoDroid profile azimuth: projection surface (canvas)
+ * @brief TopoDroid graph-paper density adjustment canvas (for the 5 cm bar)
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.

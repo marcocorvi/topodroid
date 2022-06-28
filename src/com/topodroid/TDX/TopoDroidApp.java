@@ -298,28 +298,36 @@ public class TopoDroidApp extends Application
     return Resources.getSystem().getDisplayMetrics().ydpi;
   }
 
+  private static float CACHED_DENSITY = -1.0f;
+
   /** @return the system display density - for graph-paper
    */
   public static float getDensity()
   {
-    int dpi = getDisplayDensityDpi();
-    int dds = TDandroid.BELOW_API_24 ?  dpi 
-            : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE;
+    if ( CACHED_DENSITY > 0 ) return CACHED_DENSITY;
 
-    TDLog.v("ZOOM " + TDandroid.BELOW_API_24 + " dpi " + dpi + " " + Resources.getSystem().getDisplayMetrics().density + " " +  dds + " " + Resources.getSystem().getDisplayMetrics().xdpi + " " +  Resources.getSystem().getDisplayMetrics().ydpi );
-    //                                                                           
-    //          Android below-24 dpi density sys-density xpdi    ypdi     density       dp1cm 1:100
-    // Nexus 4    5 21  true     320 2.0     320                          640 (needed)
-    // Note 3     7 24  false    480 3.0     480         386.366 387.047  530 (needed)  208.66142 (needed)
-    // MiA2      10 29  false    408 2.55    480         397.565 474.688  480 (ok)      188.97638
-    //                           480 3.0    
-    //                           540 3.375
-    // Smsung A3 11 30  false    420 2.625   420
-    //                           450 2.8125
-    //                           480 3.0
-    //                           510 3.1875
-    //                           540 3.375
-    
+    double log_xdpi = Math.log( Resources.getSystem().getDisplayMetrics().xdpi / 100.0 );
+    double log_ydpi = Math.log( Resources.getSystem().getDisplayMetrics().ydpi / 100.0 );
+
+    //              Android below-24 dpi density sys-density xpdi    ypdi     density    adjust dp1cm 1:100A      
+    // Nexus 4        5 21  true     320 2.0     320 *       319.79  318.745  640 (need)    ?         251.9685 (needed)   
+    // Note 3         7 24  false    480 3.0     480         386.366 387.047  530 (need)  -50         208.66142 (needed) 
+    // MiA2          10 29  false    408 2.55    480         397.565 474.688  480 (ok)      0         188.97638          
+    //                               480 3.0                                                   
+    //                               540 3.375                                                   
+    // Smsung A3     11 30  false    420 2.625   420         409,432 411.891  500 (ok)      0         196.8504           
+    //                               450 2.8125                                                  
+    //                               480 3.0                                                     
+    //                               510 3.1875                                                  
+    //                               540 3.375                                                   
+    // Note Pro       5     true     320 2.0     320 *       239.94  236.28   830        -190         327.1653     
+    // CAT S41        8     false    420 2.625   420         449.70  443.34   465          35         183.07086    
+    // Tab S6        12 31  false    320 2.0     360         286.197 286.449  720 (710)  -200 (-190)  282.2835 (needed) 
+    // Note 4         6     true     640 4.0     640 *       508     516.06   400         880         156.29921 
+    // Xperia M2      5     true     240 1.5     240 *       232.47  234.46   900        -420         354.72443    
+    // Galaxy S4      5     true     480 3.0     480 *       442.45  439.35   470         490         183.858
+    // Xcover        11 30  false    320 2.0                 309.96  310.67                 ?                      
+    //
     // Android dp are pixels
     // conversion: 1 m [world] = 20 units [scene]
     // not-used:   1 pt = 1.333333 pxl     1 pxl = 0.75 pt
@@ -327,19 +335,30 @@ public class TopoDroidApp extends Application
     // the dp per cm are: dp1cm = dpi * in/cm = 480 / 2.54 = 188.97637795 pxl/cm (correct 188.97638)
     // now 1 m becomes 20 pxl, 
     // therefore the scale 1:100 should have a zoom (188.97637795 pxl/cm) / (20 pxl/m) = 9.4488188975
-    // 1600 is magic-number
+    // 1600 is magic-number = 10 * 160
     //
-    // old command-manager step
-    // float step_old = 0.89605485f * TopoDroidApp.getDisplayDensityDpi() / 25.4f; // pixel/mm
-
-    float density = 480 + (480 - dds)/3.0f; // why 3.0 ? because 480 corresponds to 3.0
-    // if ( TDandroid.BELOW_API_24 ) density = 480 + (480 - dpi);
-    // if ( TDandroid.BELOW_API_24 ) density = 2 * dpi;
-    if ( TDandroid.BELOW_API_24 ) density = 2 * dpi;
-
-    return density;
+    // Ys = 100 * exp( 3.00521 + -0.90490 * log(  dds/100 ) )
+    // Yx = 100 * exp( 3.01876 + -1.00301 * log( xdpi/100 ) )
+    // Yy = 100 * exp( 2.96281 + -0.94614 * log( ydpi/100 ) )
+    int yx = 10 * (int)( 10 * Math.exp( 3.01876 + -1.00301 * log_xdpi ) );
+    int yy = 10 * (int)( 10 * Math.exp( 2.96281 + -0.94614 * log_ydpi ) );
+    if ( yx > yy ) { 
+      int dpi = getDisplayDensityDpi();
+      int dds = TDandroid.BELOW_API_24 ?  dpi : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE;
+      double log_sdpi = Math.log( dds / 100.0 );
+      int ys = 10 * (int)( 10 * Math.exp( 3.00521 + -0.90490 * log_sdpi ) );
+      CACHED_DENSITY = ys;
+    } else {
+      CACHED_DENSITY = yy;
+    }
+    TDLog.v("ZOOM " + TDandroid.BELOW_API_24 + " dpi " + getDisplayDensityDpi()
+                    + " " + TopoDroidApp.getDisplayDensity()
+                    + " density " + Resources.getSystem().getDisplayMetrics().density 
+                    + " DDS " +  ( TDandroid.BELOW_API_24 ?  getDisplayDensityDpi() : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE )
+                    + " xdpi " + Resources.getSystem().getDisplayMetrics().xdpi 
+                    + " ydpi " + Resources.getSystem().getDisplayMetrics().ydpi );
+    return CACHED_DENSITY;
   }
-
 
   /** set the height of the button list-view
    * @param context   context
@@ -773,10 +792,10 @@ public class TopoDroidApp extends Application
     // mData.compileStatements(); // this method is now empty (and commented)
 
     PtCmapActivity.setMap( prefHlp.getString( "DISTOX_PT_CMAP", null ) );
-    TDLog.v( "PCmap set map done");
+    // TDLog.v( "PCmap set map done");
 
     TDSetting.loadSecondaryPreferences( prefHlp );
-    TDLog.v( "load secondary done");
+    // TDLog.v( "load secondary done");
     checkAutoPairing();
 
     // if ( TDLog.LOG_DEBUG ) {
@@ -1077,7 +1096,7 @@ public class TopoDroidApp extends Application
   @Override
   protected void attachBaseContext( Context ctx )
   {
-    TDLog.v("APP attach base context");
+    // TDLog.v("APP attach base context");
     TDInstance.context = ctx;
     TDLocale.resetTheLocale();
     super.attachBaseContext( TDInstance.context );
@@ -1097,7 +1116,7 @@ public class TopoDroidApp extends Application
   {
     super.onConfigurationChanged( cfg );
     boolean landscape = cfg.orientation == Configuration.ORIENTATION_LANDSCAPE;
-    TDLog.v("APP config change - landscape " + landscape );
+    // TDLog.v("APP config change - landscape " + landscape );
     TDLocale.resetTheLocale( );
     setDisplayParams( getResources().getDisplayMetrics() /* , landscape */ );
     if ( mCurrentDialog != null ) mCurrentDialog.doInit( landscape );

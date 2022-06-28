@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date mar 2016
  *
- * @brief TopoDroid graph-paper scale adjustment: commands manager
+ * @brief TopoDroid graph-paper density adjustment: commands manager
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -22,10 +22,7 @@ import android.graphics.Paint;
 
 class GraphPaperScaleCommandManager
 {
-  private static final int BORDER = 20;
-
   // private RectF mBBox = null;
-
   private DrawingPath mPath;
   private GraphPaperScaleActivity mParent = null;
 
@@ -34,26 +31,37 @@ class GraphPaperScaleCommandManager
   private int  mDensity;
   private int  mY;
 
+  /** change the density adjustment
+   * @param change   amount of change
+   */
   void changeDensity( int change )
   {
     int density = mDensity + change;
     if ( TopoDroidApp.getDensity() - density >= 120 ) {
       mDensity = density;
       mZoom = 1600 * 2.54f / ( TopoDroidApp.getDensity() - density );
-      TDLog.v("GRAPH_PAPER zoom " + mZoom + " density " + density + " dp1cm " + ( TopoDroidApp.getDensity() - density )/2.54f );
+      TDLog.v("ZOOM " + mZoom + " adjust " + density + " dp1cm " + ( TopoDroidApp.getDensity() - density )/2.54f );
       setTransform( 0, 0, mZoom );
       if ( mParent != null ) mParent.setDensityTextView( density );
     }
   }
 
+  /** set the parent activity
+   * @param parent   parent activity
+   */
   void setGraphPaperScaleActivity( GraphPaperScaleActivity parent ) { mParent = parent; }
 
+  /** set the Y coordinate of the bar
+   * @param y   Y coordinate [units ?]
+   */
   void setY( int y )
   {
     // TDLog.v("GRAPH_PAPER set Y " + y );
     mY = y;
   }
 
+  /** @return the density adjustment
+   */
   int getGraphPaperDensity() { return mDensity; }
 
   /** cstr
@@ -76,9 +84,9 @@ class GraphPaperScaleCommandManager
     changeDensity( 0 );
   }
 
-  void clearDrawing()
-  {
-  }
+  // void clearDrawing()
+  // {
+  // }
 
   /** set the transformation matrix
    * @param dx   X translation
@@ -97,9 +105,9 @@ class GraphPaperScaleCommandManager
     // mScale  = 1 / s;
   }
 
-  // oooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooooo
-  static int cnt = 0;
-
+  /** draw the 5 cm bar
+   * @param canvas  canvas
+   */
   void executeAll( Canvas canvas )
   {
     if ( canvas == null ) {
@@ -108,7 +116,6 @@ class GraphPaperScaleCommandManager
     }
 
     synchronized( mPath ) {
-      if ( cnt < 4 ) { TDLog.v("GRAPH_PAPER draw "); ++cnt; }
       mPath.draw( canvas, mMatrix, null ); // null mBBox
     }
   }

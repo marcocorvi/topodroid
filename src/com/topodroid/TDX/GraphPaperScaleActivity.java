@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid main drawing activity
+ * @brief TopoDroid graph-paper density adjustment activity
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -119,6 +119,9 @@ public class GraphPaperScaleActivity extends Activity
     if ( mSurface != null ) mSurface.changeDensity( change );
   }
 
+  /** display the density adjustment value
+   * @param density    adjustment value
+   */
   void setDensityTextView( int density )
   {
     mTVdensity.setText( Integer.toString( density ) );

@@ -1133,7 +1133,7 @@ public class TDSetting
     mLegOnlyUpdate  = prefs.getBoolean( keyGPlot[ 6], bool(defGPlot[ 6]) ); // DISTOX_LEGONLY_UPDATE
     mFullAffine     = prefs.getBoolean( keyGPlot[ 7], bool(defGPlot[ 7]) ); // DISTOX_FULL_UPDATE
     mWithLevels     = tryInt( prefs,   keyGPlot[ 8],      defGPlot[ 8] );   // DISTOX_WITH_LEVELS
-    // mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_GRAPH_PAPER_SCALE
+    mGraphPaperScale = tryInt( prefs,   keyGPlot[ 9],      defGPlot[ 9] );   // DISTOX_GRAPH_PAPER_SCALE
     // TDLog.v("SETTING load secondary GEEK plot done");
 
     String[] keyGPlotSplay = TDPrefKey.GEEKsplay;
@@ -2751,7 +2751,7 @@ public class TDSetting
    * @param value preference value
    * @return true if successful
    */
-  private static boolean setPreference( SharedPreferences sp, String name, String value )
+  public static boolean setPreference( SharedPreferences sp, String name, String value )
   {
     // TDLog.v("Setting set pref " + name + " " + value );
     Editor editor = sp.edit();

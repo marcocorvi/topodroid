@@ -1535,8 +1535,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_lineacc_summary">Accuratezza di interpolazione per le curve Bezier</string>
   <string name="pref_linecorner_title">Angolatura Bezier</string>
   <string name="pref_linecorner_summary">Soglia angolatura curve Bezier</string>
-  <string name="pref_graph_paper_scale_title">Scala carta millimetrata</string -->
-  <string name="pref_graph_paper_scale_summary">Correzione scala carta millimetrata</string -->
+  <string name="pref_graph_paper_scale_title">Scala carta millimetrata</string>
+  <string name="pref_graph_paper_scale_summary">Correzione scala carta millimetrata</string>
   <string name="pref_weeddistance_title">Buffer segmento di pulizia punti</string>
   <string name="pref_weeddistance_summary">Distanza massima da un segmento ai punti superflui</string>
   <string name="pref_weedlength_title">Lunghezza massima segmento di pulizia punti</string>

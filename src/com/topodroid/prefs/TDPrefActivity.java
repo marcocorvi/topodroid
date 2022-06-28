@@ -149,6 +149,7 @@ public class TDPrefActivity extends Activity
   }
 
   /** start the dialog to export/import settings
+   * @param prefs    shared preferences
    */
   void startExportDialog( SharedPreferences prefs )
   {
@@ -419,7 +420,10 @@ public class TDPrefActivity extends Activity
           // TDLog.v("GRAPH_PAPER set density " + density );
           TDSetting.mGraphPaperScale = density;
           mGraphPaperScalePref.setButtonValue( Integer.toString( density ) );
-          // TODO save setting ?
+          // save setting 
+          TDPrefHelper pref_hlp = new TDPrefHelper( mCtx ); // TopoDroidApp.mPrefHlp;
+          SharedPreferences prefs = pref_hlp.getSharedPrefs();
+          TDSetting.setPreference( prefs, "DISTOX_GRAPH_PAPER_SCALE", Integer.toString(density) );
         }
         break;
     }
