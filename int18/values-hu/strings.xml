@@ -906,7 +906,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="split_nothing">Nem megosztható</string>
     <string name="flip_shots">Mérések_megfordítása </string>
     <string name="copy_items">Tételek másolása</string>
-    <!-- TODO string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string -->
+    <string name="current_station_format">%1$s: K %2$.1f É %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Előszó</string>
     <string name="man_intro">1. Bevezetés</string>
