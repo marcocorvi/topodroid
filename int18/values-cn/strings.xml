@@ -903,6 +903,7 @@
     <string name="split_nothing">无分割项</string>
     <string name="flip_shots">点击测量</string>
     <string name="copy_items">拷贝项目</string>
+    <!-- TODO string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string -->
 
     <string name="man_preface">引言</string>
     <string name="man_intro">1. 介绍</string>

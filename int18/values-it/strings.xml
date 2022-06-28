@@ -900,6 +900,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="split_nothing">Nulla da dividere</string>
     <string name="flip_shots">Capovolgi battute</string>
     <string name="copy_items">Copia elemento</string>
+    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Prefazione</string>
     <string name="man_intro">1. Introduzione</string>

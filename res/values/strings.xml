@@ -910,6 +910,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="split_nothing">Nothing to split</string>
     <string name="flip_shots">Flip shots</string>
     <string name="copy_items">Copy items</string>
+    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Preface</string>
     <string name="man_intro">1. Introduction</string>
