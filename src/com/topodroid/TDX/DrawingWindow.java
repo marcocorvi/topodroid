@@ -896,6 +896,12 @@ public class DrawingWindow extends ItemDrawer
     else changeZoom( ZOOM_DEC );
   }
 
+  private void adjustOffset( float old_zoom, float new_zoom ) 
+  {
+    mOffset.x -= mDisplayCenter.x*(1/old_zoom-1/new_zoom);
+    mOffset.y -= mDisplayCenter.y*(1/old_zoom-1/new_zoom);
+  }
+
   /** change the zoom
    * @param f  zoom scale factor (current zoom is multiplied by f)
    */
@@ -907,8 +913,9 @@ public class DrawingWindow extends ItemDrawer
     float zoom = mZoom;
     mZoom     *= f;
     // TDLog.v( "zoom " + mZoom );
-    mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
-    mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
+    // mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
+    // mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
+    adjustOffset( zoom, mZoom );
     // TDLog.v( "change zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // mZoomCtrl.hide();
@@ -935,8 +942,9 @@ public class DrawingWindow extends ItemDrawer
       float zoom = 1600 / dp1cm; // 32 = 40 / 1.25
 
       TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " density " + density + " dp1cm " + dp1cm + " adjust " + TDSetting.mGraphPaperScale );
-      mOffset.x *= mZoom / zoom;
-      mOffset.y *= mZoom / zoom;
+      // mOffset.x *= mZoom / zoom;
+      // mOffset.y *= mZoom / zoom;
+      adjustOffset( mZoom, zoom );
       mZoom = zoom;
       // TDLog.v( "fixed zoom " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
@@ -1455,12 +1463,13 @@ public class DrawingWindow extends ItemDrawer
   // ---------------------------------------------------------------------------------------
 
   /** execute a "move to" on both plan and profile view
+   * @note called by loadFile
    */
   private void doMoveTo()
   {
     if ( mMoveTo != null ) {
-      moveTo( mPlot1.type, mMoveTo );
-      moveTo( mPlot2.type, mMoveTo );
+      moveTo( mPlot1.type, mMoveTo, true );
+      moveTo( mPlot2.type, mMoveTo, true );
       mMoveTo = null;
     }
   }
@@ -1468,15 +1477,17 @@ public class DrawingWindow extends ItemDrawer
   /** movo to a station
    * @param type    plot type
    * @param move_to station name
+   * @param set_zoom whether to set zoom
+   * @note called by doMoveTo and centerAtStation
    */
-  private void moveTo( int type, String move_to )
+  private void moveTo( int type, String move_to, boolean set_zoom )
   {
     // if ( move_to == null ) return; // move_to guaranteed non-null
     if ( mNum == null ) return; // WHY ??? unexpected crash report
     NumStation st = mNum.getStation( move_to );
     if ( st != null ) {
       if ( type == PlotType.PLOT_PLAN ) {
-        mZoom     = mPlot1.zoom;
+        if ( set_zoom) mZoom = mPlot1.zoom;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.e, st.s );
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.e, st.s );
         saveReference( mPlot1, mPid1 );
@@ -1485,7 +1496,7 @@ public class DrawingWindow extends ItemDrawer
         // return;
         // TDLog.v( "PLAN offset at " + mOffset.x + " " + mOffset.y );
       } else if ( type == PlotType.PLOT_EXTENDED ) {
-        mZoom     = mPlot2.zoom;
+        if ( set_zoom ) mZoom = mPlot2.zoom;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( st.h, st.v );
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( st.h, st.v );
         saveReference( mPlot2, mPid2 );
@@ -1495,7 +1506,7 @@ public class DrawingWindow extends ItemDrawer
       } else { // if ( type == PlotType.PLOT_PROJECTED ) 
         double cosp = TDMath.cosDd( mPlot2.azimuth );
         double sinp = TDMath.sinDd( mPlot2.azimuth );
-        mZoom     = mPlot2.zoom;
+        if ( set_zoom ) mZoom = mPlot2.zoom;
 	double xx = st.e * cosp + st.s * sinp;
         mOffset.x = TopoDroidApp.mDisplayWidth/(2 * mZoom)  - DrawingUtil.toSceneX( xx, st.v );
         mOffset.y = TopoDroidApp.mDisplayHeight/(2 * mZoom) - DrawingUtil.toSceneY( xx, st.v );
@@ -7379,9 +7390,9 @@ public class DrawingWindow extends ItemDrawer
       TDToast.makeBad( R.string.missing_station );
     } else {
       // TDLog.v( "center at station " + station );
-      // moveTo( mPlot1.type, station );
-      // moveTo( mPlot2.type, station );
-      moveTo( (int)mType, station );
+      // moveTo( mPlot1.type, station, false );
+      // moveTo( mPlot2.type, station, false );
+      moveTo( (int)mType, station, false );
       // TDLog.v( "PLOT center station " + mOffset.x + " " + mOffset.y + " " + mZoom );
       mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     }
