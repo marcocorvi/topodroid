@@ -490,7 +490,7 @@ public class TdmViewActivity extends Activity
     R.string.help_help
   };
 
-  private static final int HELP_PAGE = R.string.TdmConfigWindow;
+  private static final int HELP_PAGE = R.string.TdmViewActivity;
 
   private void resetButtonBar()
   {

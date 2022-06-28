@@ -102,7 +102,7 @@ public class TdmConfigActivity extends Activity
     R.string.help_delete_config,
     R.string.help_help
   };
-  private static final int HELP_PAGE = R.string.TdmConfigWindow;
+  private static final int HELP_PAGE = R.string.TdmConfigActivity;
 
   private TdmInputAdapter mTdmInputAdapter;
   // TdManagerApp mApp;
