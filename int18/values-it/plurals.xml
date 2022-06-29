@@ -1,22 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
   <plurals name="calib_saturated_values">
     <item quantity="one">ATTENZIONE. Un dato saturato.</item>
     <item quantity="other">ATTENZIONE. %1$d dati saturati</item>
   </plurals>
 
-  <plurals name="read_data">
+  <plurals name="read_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Nessun dato letto</item>
     <item quantity="one">Letto un dato</item>
     <item quantity="other">Letti %1$d dati</item>
   </plurals>
 
-  <plurals name="read_calib_data">
+  <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Nessun dato letto</item>
     <item quantity="one">Letto un dato (%2$d pacchetti)</item>
     <item quantity="other">Letti %1$d dati (%2$d pacchetti)</item>
   </plurals>
-  <plurals name="found_calib_groups">
+  <plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
     <item quantity="zero">Trovato nessun gruppo</item>
     <item quantity="one">Trovato un gruppo</item>
     <item quantity="other">Trovati %1$d gruppi</item>

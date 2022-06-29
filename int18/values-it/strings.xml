@@ -2104,7 +2104,7 @@ Fai riferimento alle pagine web per i dettagli.\n
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permessi</string -->
-    <string name="cperms_mandatory">Cave3D può non funzionare senza questi permessi:</string>
+    <!-- UNUSED string name="cperms_mandatory">Cave3D può non funzionare senza questi permessi:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D può non funzionare senza questi permessi:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 

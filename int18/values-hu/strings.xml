@@ -594,7 +594,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
     <string name="survey_not_saved">FIGYELEM: mérés infó nincs mentve</string>
     <string name="survey_bad_siblings">FIGYELMEZTETÉS: rossz poligon mérés különbségek</string>
-    <!-- UNUSED string name="survey_bad_magnetic">FIGYELMEZTETÉS: rossz mágneses poligon</string -->
+    <string name="survey_bad_magnetic">FIGYELMEZTETÉS: rossz mágneses poligon</string>
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
     <string name="out_of_memory">FIGYELEM: megtelt a memória!</string>
     <string name="disk_io_error">KRITIKUS: diszk i/o hiba!</string>
@@ -2117,7 +2117,7 @@ A részletekért keresse fel a weboldalakat.\n
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Engedélyek</string -->
-    <string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string>
+    <!-- UNUSED string name="cperms_mandatory">Cave3D nem tud futni ennélkül:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D nem teljes funkciójú enélkül:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 

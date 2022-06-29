@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601019"
-      android:versionName="6.1.19"
+      android:versionCode="601020"
+      android:versionName="6.1.20"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -147,7 +147,7 @@
           android:exported="false"
         />
 
-        <activity android:name=".PlotReloadWindow"
+        <activity android:name=".PlotReloadWindow" tools:ignore="Instantiatable"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="false"
@@ -209,7 +209,7 @@
           </intent-filter>
         </activity -->
 
-        <activity android:name=".DrawingWindow"
+        <activity android:name=".DrawingWindow" tools:ignore="Instantiatable"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"
@@ -220,7 +220,7 @@
           </intent-filter>
         </activity>
 
-        <activity android:name=".OverviewWindow"
+        <activity android:name=".OverviewWindow" tools:ignore="Instantiatable"
 	  android:theme="@style/Theme.FullScreen"
           android:configChanges="orientation|screenSize"
           android:exported="true"

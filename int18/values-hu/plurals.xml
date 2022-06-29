@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
   <plurals name="calib_saturated_values">
     <item quantity="one">FIGYELEM. Egy telített adat </item>
     <item quantity="other" >FIGYELEM. %1$d telített adat</item>
   </plurals>
-  <plurals name="read_data">
+  <plurals name="read_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Nincs letöltött adat</item>
     <item quantity="one">Egy letöltött adat</item>
     <item quantity="other">%1$d letöltött adat </item>
   </plurals>
-  <plurals name="read_calib_data">
+  <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Nincs letöltött kalibrációs adat</item>
     <item quantity="one">Egy letöltött kalibrációs adat (%2$d csomagban)</item>
     <item quantity="other">%1$d letöltött adat (%2$d csomagban)</item>
   </plurals>
-  <plurals name="found_calib_groups">
+  <plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
     <item quantity="zero">Nem található csoport</item>
     <item quantity="one">%1$d csoport</item>
     <item quantity="other">%1$d csoport</item>

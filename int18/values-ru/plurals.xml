@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
   <plurals name="calib_saturated_values">
     <item quantity="one">ВНИМАНИЕ. %1$d "насыщенный" замер</item>
     <item quantity="few">ВНИМАНИЕ. %1$d "насыщенных" замеров</item>
@@ -7,7 +9,7 @@
     <item quantity="other">ВНИМАНИЕ. %1$d "насыщенных" замеров</item>
   </plurals>
 
-  <plurals name="read_data">
+  <plurals name="read_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Данные не считаны</item>
     <item quantity="one">Считано %1$d измерение</item>
     <item quantity="few">Считано %1$d измерения</item>
@@ -15,14 +17,14 @@
     <item quantity="other">Считано %1$d измерений</item>
   </plurals>
 
-  <plurals name="read_calib_data">
+  <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
     <item quantity="zero">Данных для калибровки не считано</item>
     <item quantity="one">Считано %1$d измерение (%2$d пакетов)</item>
     <item quantity="few">Считано %1$d измерения (%2$d пакетов)</item>
     <item quantity="many">Считано %1$d измерений (%2$d пакетов)</item>
     <item quantity="other">Считано %1$d измерений (%2$d пакетов)</item>
   </plurals>
-  <!-- TODO plurals name="found_calib_groups">
+  <!-- TODO plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
     <item quantity="zero">Не найдено групп</item>
     <item quantity="one">Найдена %1$d группа</item>
     <item quantity="other">Найдено %1$d групп</item>

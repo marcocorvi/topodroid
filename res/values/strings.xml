@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Cannot retrieve user manual from the web</string>
     <string name="user_man_ok">Installed user manual translation</string>
@@ -207,7 +209,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="few_data">Too few calibration data</string>
     <string name="few_iter">Failed: too many iterations\nCheck your data</string>
     <string name="few_groups">Not enough data with group</string>
-    <string name="found_groups">Found %1$d groups</string>
+    <!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
     <string name="regroup">No regroup</string>
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
@@ -663,7 +665,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="stat_component">Components %1$d</string>
     <string name="stat_depth">Depth %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Duplicate shots %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Legs %1$d Length %2$.1f %3$.1f H-length %4$.1f %5$s</string>
+    <string name="stat_leg" tools:ignore="PluralsCandidate">Legs %1$d Length %2$.1f %3$.1f H-length %4$.1f %5$s</string>
     <string name="stat_length">Sketch length %1$.1f %2$s</string>
     <string name="stat_extlen">3D length %1$.1f %2$s</string>
     <string name="stat_projlen">plan length %1$.1f %2$s</string>
@@ -721,7 +723,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="ask_close_survey">Close survey?</string -->
     <string name="ask_gps_service">Set GPS service?</string>
     <!-- UNUSED string name="ask_backups_clear">Delete sketch backups?</string -->
-    <string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
+    <string name="ask_manual_update" tools:ignore="PluralsCandidate">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Add       </string -->
     <string name="button_apply"     >Apply</string>
@@ -806,7 +808,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_write"     >Upload</string>
     <string name="button_xsection"  >X-Section</string>
     <string name="xsection">X-Section</string>
-    <string name="buffer_size">Buffer: %1$d data</string>
+    <string name="buffer_size">Buffer size: %1$d</string>
     <string name="buffer_unsorted">unsorted</string>
 
     <string name="mode_leg">Legs</string>
@@ -2126,7 +2128,7 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <string name="cperms_mandatory">Cave3D cannot run without:</string>
+    <!-- UNUSED string name="cperms_mandatory">Cave3D cannot run without:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 

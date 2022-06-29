@@ -592,7 +592,7 @@
     <string name="survey_no_data_reduction">ВНИМАНИЕ: нет сокращения данных</string>
     <string name="survey_not_saved">ВНИМАНИЕ: информация о съёмке не сохранена</string>
     <string name="survey_bad_siblings">ВНИМАНИЕ: плохой соседний замер</string>
-    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <!-- TODO string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
     <string name="saturated_coeffs">ВНИМАНИЕ: насыщенные коэфициенты калибровки</string>
     <string name="out_of_memory">ВНИМАНИЕ: out of memory !</string>
     <string name="disk_io_error">ОШИБКА: ошибка ввода/вывода !</string>
@@ -945,6 +945,7 @@
     <string name="help_import">Импорт zip архива или файла съёмки</string>
     <string name="help_symbol">Вкл/Выкл инструментов рисования</string>
     <string name="help_therion">Управление проектами пещер</string>
+    <!-- TODO string name="help_cave3d">Cave3D, 3D viewer</string -->
     <!-- UNUSED string name="help_database">Просмотр базы данных (SQliteViewer)</string -->
     <string name="help_prefs">Изменить настройки</string>
     <!-- UNUSED string name="help_log">Вкл/Выкл настройки журнала</string -->
@@ -1861,6 +1862,7 @@
     <!-- UNUSED string name="info_axes">Оси: синий Север, зеленый Восток</string -->
     <string name="info_grid">Шаг сетки [м]</string>
     <string name="info_view">Точка просмотра</string>
+    <!-- TODO string name="info_survey">Surveys</string -->
     <string name="info_surveys">Съёмки</string>
     <string name="info_shot">Замеры</string>
     <string name="info_station">Пикеты</string>
@@ -1889,15 +1891,16 @@
     <string name="legs_commented">Закоментированный</string>
 
     <string name="proj_perspective">Настройки перспективы</string>
-    <!-- UNUSED string name="proj_orthographic">Настройки орографической проекции</string -->
+    <!-- TODO string name="proj_orthographic">Настройки орографической проекции</string -->
     <string name="proj_focal">Фокальный</string>
-    <!-- UNUSED string name="proj_side">Сбоку</string -->
+    <!-- TODO string name="proj_side">Сбоку</string -->
     <!-- UNUSED string name="proj_near">Вблизи</string -->
     <!-- UNUSED string name="proj_far">Вдали</string -->
 
     <!-- UNUSED string name="query" formatted="false">Съёмки: %d Замеры: %d Пикеты: %d\nДлина: %d Глубина: %d</string -->
     <!-- UNUSED string name="cno_files">Нет файлов</string -->
     <string name="reading_file">Считывание файла %1$s</string>
+    <!-- TODO string name="read_survey">Read survey %1$s\n</string -->
     <!-- UNUSED string name="clear">Очистить</string -->
 
     <string name="plan_proj">План</string>
@@ -1928,8 +1931,8 @@
 
     <string name="ctitle">%1$s  Наклон: %2$.0f  Азимут: %3$.0f</string>
     <string name="ctitle_surface_alpha">Прозрачность поверхности</string>
-    <!-- UNUSED string name="ctitle_sketches">Абрисы</string -->
-    <!-- UNUSED string name="ctitle_legs">Видимость нитки хода</string -->
+    <!-- TODO string name="ctitle_sketches">Абрисы</string -->
+    <!-- TODO string name="ctitle_legs">Видимость нитки хода</string -->
     <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
@@ -2057,7 +2060,7 @@
     <string name="cpref_grid_above_title">Сетка сверху</string>
     <string name="cpref_grid_above_summary">Сетка сверху</string>
     <string name="cpref_grid_extent_title">Размер сетки</string>
-    <!-- UNUSED string name="cpref_grid_extend_summary">Размер поля сетки вокруг съёмки</string -->
+    <!-- TODO string name="cpref_grid_extent_summary">Размер поля сетки вокруг съёмки</string -->
     <string name="cpref_neg_clino_title">Обзор снизу вверх</string>
     <string name="cpref_neg_clino_summary">Разрешить точки обзора ниже горизонта</string>
     <string name="cpref_dem_buffer_title">Буфер DEM</string>
@@ -2095,7 +2098,7 @@
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Разрешения</string -->
-    <string name="cperms_mandatory">Cave3D не может работать без этих разрешений:</string>
+    <!-- UNUSED string name="cperms_mandatory">Cave3D не может работать без этих разрешений:</string -->
     <!-- UNUSED string name="cperms_optional">В Cave3D может произойти сбой без этих разрешений:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 

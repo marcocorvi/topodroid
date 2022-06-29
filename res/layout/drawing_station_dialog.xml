@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android" 
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    >
+  xmlns:tools="http://schemas.android.com/tools"
+  android:layout_width="match_parent"
+  android:layout_height="match_parent"
+  >
 <LinearLayout
   style="@style/base_padding"
   android:layout_width="match_parent" 
@@ -36,7 +37,7 @@
     />
   </LinearLayout>
 
-  <LinearLayout 
+  <LinearLayout tools:ignore="ButtonOrder"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginsmall"
@@ -54,14 +55,14 @@
     />
   </LinearLayout>
 
-  <LinearLayout 
+  <LinearLayout tools:ignore="ButtonOrder"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginBottom="@dimen/marginv"
     android:orientation="horizontal" 
     >
 
-    <Button android:id="@+id/btn_set"
+    <Button android:id="@+id/btn_set" 
       android:layout_marginEnd="@dimen/marginh"
       style="@style/button_default"
       android:text="@string/button_ok"
@@ -75,7 +76,7 @@
     />
   </LinearLayout>
 
-  <LinearLayout 
+  <LinearLayout tools:ignore="ButtonOrder"
     android:layout_width="match_parent" 
     android:layout_height="wrap_content"
     android:layout_marginTop="@dimen/marginv"
@@ -96,7 +97,7 @@
       />
   </LinearLayout>
 
-  <LinearLayout 
+  <LinearLayout tools:ignore="ButtonOrder"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:layout_marginBottom="@dimen/marginh"
