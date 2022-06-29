@@ -901,7 +901,7 @@
     <string name="split_nothing">Нечего разделять</string>
     <string name="flip_shots">Развернуть пикеты</string>
     <string name="copy_items">Копировать объекты</string>
-    <!-- TODO string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string -->
+    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Предисловие</string>
     <string name="man_intro">1. Введение</string>
