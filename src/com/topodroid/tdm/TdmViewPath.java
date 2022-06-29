@@ -22,6 +22,11 @@ class TdmViewPath
   TdmViewStation mSt2;
   Path mPath;
 
+  /** cstr
+   * @param st1   first station-view
+   * @param st2   second station-view
+   * @note a straight segment joining the two station-views
+   */
   TdmViewPath( TdmViewStation st1, TdmViewStation st2 )
   {
     mSt1 = st1;
@@ -31,6 +36,11 @@ class TdmViewPath
     mPath.lineTo( st2.x, st2.y );
   }
 
+  /** draw the path-view on the display
+   * @param canvas   display canvas
+   * @param matrix   transform matrix
+   * @param paint    drawing paint
+   */
   void draw( Canvas canvas, Matrix matrix, Paint paint )
   {
     Path path = new Path( mPath );

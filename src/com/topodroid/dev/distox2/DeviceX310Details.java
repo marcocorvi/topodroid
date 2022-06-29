@@ -44,15 +44,28 @@ public class DeviceX310Details
   // packet to address:  segment = packet / 2
   //                     packet_nr = packet % 2
 
+  /** @return the memory address of a given segment
+   * @param segment memory segment
+   */
   static private int segmentToAddress( int segment )
   { return ( segment / 56 ) * 1024 + ( segment % 56 ) * 18; }
 
+  /** @return the address (???) of a given packet
+   * @param packet packet
+   */
   static int packetToAddress( int packet ) 
   { return segmentToAddress( packet/2 ); }
 
+  /** convert number of packets to number of data
+   * @param packet  number of packets
+   * @return number of data (half the number of packets)
+   */
   static int packetToNumber( int packet ) 
   { return packet % 2; }
 
+  /** @return memory address for a given memory position (index)
+   * @param index    memory position
+   */
   static int index2addr( int index )
   {
     int addr = 0;

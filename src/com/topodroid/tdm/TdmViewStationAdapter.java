@@ -42,6 +42,13 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
   private TextView mTextView;
   private TdmViewCommand mCommand;
 
+  /** cstr
+   * @param ctx     context
+   * @param id      resource id ?
+   * @param items   station-view items
+   * @param text    text-view for the station name
+   * @param command survey view command
+   */
   public TdmViewStationAdapter( Context ctx, int id, ArrayList< TdmViewStation > items, TextView text, TdmViewCommand command )
   {
     super( ctx, id, items );
@@ -52,6 +59,8 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
     mCommand = command;
   }
 
+  /** @return the station of the (first) checked station-view - or null
+   */
   public TdmStation getCheckedStation( ) 
   { 
     for ( TdmViewStation tv : mItems ) {
@@ -60,22 +69,37 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
     return null;
   }
 
+  /** @return the station name
+   */
   public String getStationName() 
   {
     if ( mTextView.getText() != null ) return mTextView.getText().toString();
     return null;
   }
 
+  /** @return the station-view at a given position
+   * @param pos   position (index)
+   */
   public TdmViewStation get( int pos ) { return mItems.get(pos); }
 
+  /** @return the number of station views
+   */
   public int size() { return mItems.size(); }
 
+  /** helper class view-holder
+   */
   private class ViewHolder
   { 
     CheckBox cb;
     TdmViewStation st;
   }
 
+  /** get a view 
+   * @param pos   item position
+   * @param convertView   convertible view
+   * @param parent        view-group parent
+   * @return either the converted view or a new view filled with the item data
+   */
   @Override
   public View getView( int pos, View convertView, ViewGroup parent )
   {
@@ -113,6 +137,9 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
   //   }
   // }
 
+  /** react on a user click
+   * @param v  tapped view
+   */
   @Override
   public void onClick( View v )
   {
@@ -127,8 +154,6 @@ class TdmViewStationAdapter extends ArrayAdapter< TdmViewStation >
       }
     }
   }
-
-   
 
 }
 

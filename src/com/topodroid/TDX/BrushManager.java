@@ -368,8 +368,9 @@ public class BrushManager
    * @param width   paint stroke width
    * @param style   paint type (STROKE, FILL, or FILL_AND_STROKE)
    * @return the paint
+   * @note used by TdmViewCommand
    */
-  static private Paint makePaint( int color, int width, Paint.Style style )
+  static public Paint makePaint( int color, int width, Paint.Style style )
   {
     Paint paint = new Paint();
     paint.setDither(true);

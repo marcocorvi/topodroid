@@ -74,6 +74,8 @@ public class DistoXComm extends TopoDroidComm
 
   private BroadcastReceiver mBTReceiver = null;
 
+  /** reset the BT receiver
+   */
   private void resetBTReceiver()
   {
     if ( mBTReceiver == null ) return;
@@ -86,7 +88,10 @@ public class DistoXComm extends TopoDroidComm
     mBTReceiver = null;
   }
 
-  // called only by connectSocket
+  /** set up the BT receiver
+   * @param data_type   expected data type (unused)
+   * @note called only by connectSocket
+   */
   private void setupBTReceiver( final int data_type )
   {
     resetBTReceiver();
@@ -182,6 +187,9 @@ public class DistoXComm extends TopoDroidComm
 
 // --------------------------------------------------
 
+  /** cstr
+   * @param app   TopoDroid application
+   */
   public DistoXComm( TopoDroidApp app )
   {
     super( app );
@@ -410,8 +418,15 @@ public class DistoXComm extends TopoDroidComm
   /** connect the socket to the device
    * @param address   remote device address
    */
-  protected boolean connectSocketAny( String address ) { return connectSocket( address, DataType.DATA_ALL); }
+  protected boolean connectSocketAny( String address )
+  {
+    return connectSocket( address, DataType.DATA_ALL);
+  }
 
+  /** connect the socket to the device
+   * @param address    remote device address
+   * @param data_type  expected data type(s) (unused)
+   */
   protected boolean connectSocket( String address, int data_type )
   {
     if ( address == null ) return false;
@@ -506,6 +521,8 @@ public class DistoXComm extends TopoDroidComm
   //   return false;
   // }
 
+  /** dsiconnect the remote DistoX device
+   */
   public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
@@ -583,8 +600,11 @@ public class DistoXComm extends TopoDroidComm
     return ret;
   }
 
-  // low-level memory read
-  // called by TopoDroidApp.readMemory
+  /** low-level memory read
+   * @param address    device address
+   * @param addr       mmeory address to read
+   * @note called by TopoDroidApp.readMemory
+   */
   public byte[] readMemory( String address, int addr )
   {
     byte[] ret = null;
@@ -623,6 +643,8 @@ public class DistoXComm extends TopoDroidComm
     return true;
   }
 
+  /** disconnect the device
+   */
   @Override
   public boolean disconnectDevice()
   {

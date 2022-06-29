@@ -65,8 +65,12 @@ public class DeviceUtil
 
   // static byte[] convertPinToBytes( String pin ) { return BluetoothDevice.convertPinToBytes(pin); }
 
+  /** @return true if the BT is enabled
+   */
   public static boolean isAdapterEnabled() { return BluetoothAdapter.getDefaultAdapter().isEnabled(); }
 
+  /** @return true if there is a BT adapter
+   */
   public static boolean hasAdapter() { return BluetoothAdapter.getDefaultAdapter() != null; }
 
   /** @return the set of bonded devices
@@ -84,6 +88,9 @@ public class DeviceUtil
     return null;
   }
 
+  /** @return the remote device with a given address
+   * @param address   device address
+   */
   public static BluetoothDevice getRemoteDevice( String address ) 
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -91,6 +98,8 @@ public class DeviceUtil
     return adapter.getRemoteDevice( address );
   }
 
+  /** start BT devices discovery
+   */
   public static void startDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -104,6 +113,8 @@ public class DeviceUtil
     }
   }
 
+  /** cancel BT devices discovery
+   */
   public static void cancelDiscovery()
   {
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
@@ -134,6 +145,9 @@ public class DeviceUtil
   // final static String EXTRA_PAIRING_VARIANT = "android.bluetooth.device.extra.PAIRING_VARIANT";
   // final static int PAIRING_VARIANT_PIN = 0;
 
+  /** @return true if the remote device is paired
+   * @param device  remote device
+   */
   public static boolean isPaired( BluetoothDevice device )
   {
     if ( device != null ) {
@@ -147,10 +161,13 @@ public class DeviceUtil
     return false;
   }
 
-  // @return 0: null device
-  //         1:
-  //         2: already paired
-  //        -1: failed
+  /** pair android with a remote device
+   * @param device  remote device
+   * @return 0: null device
+   *         1:
+   *         2: already paired
+   *        -1: failed
+   */
   public static int pairDevice( BluetoothDevice device )
   {
     if ( device == null ) return 0;
@@ -173,6 +190,10 @@ public class DeviceUtil
     return 1;
   }
 
+  /** unpair android from a remote device
+   * @param device  remote device
+   * @return ??
+   */
   public static int unpairDevice( BluetoothDevice device )
   {
     if ( device == null ) return 0;
@@ -230,6 +251,9 @@ public class DeviceUtil
   //   }
   // }
 
+  /** bind a remote device
+   * @param device  remote device
+   */
   public static void bindDevice( BluetoothDevice device )
   {
     // TDLog.Log( TDLog.LOG_COMM, " bind device ... " + ((device==null)? "null" : device.getAddress()) );
@@ -255,6 +279,9 @@ public class DeviceUtil
     }
   }
 
+  /** check that a remote device is paired
+   * @param  address  remote device address
+   */
   public static void checkPairing( String address )
   {
     if ( TDSetting.mAutoPair ) { // try to get the system ask for the PIN

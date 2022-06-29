@@ -26,6 +26,15 @@ public class MemoryOctet
   public static final byte BIT_BACKSIGHT2 = 0x20;
   public static final byte BIT_BACKSIGHT  = 0x40; // backsight bit of vector packet
 
+  public static final byte BYTE_PACKET_DATA   = 0x01;
+  public static final byte BYTE_PACKET_G      = 0x02;
+  public static final byte BYTE_PACKET_M      = 0x03;
+  public static final byte BYTE_PACKET_VECTOR = 0x04;
+  public static final byte BYTE_PACKET_REPLY  = 0x38;
+  public static final byte BYTE_PACKET_REQST  = 0x39;
+  // public static final byte BYTE_PACKET_38     = 0x38;
+  // public static final byte BYTE_PACKET_39     = 0x39;
+
   // ------------------------------------------------------------
 
   private static double toDistance( byte b0, byte b1, byte b2 )

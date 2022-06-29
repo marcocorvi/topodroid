@@ -27,6 +27,9 @@ class TdmViewEquate
    
   Path mPath;
 
+  /** cstr
+   * @param equate   equate
+   */
   TdmViewEquate( TdmEquate equate )
   {
     mEquate = equate;
@@ -34,12 +37,20 @@ class TdmViewEquate
     mPath = null;
   }
 
+  /** add a station-view to this equate-view
+   * @param st   station view
+   */
   void addViewStation( TdmViewStation st )
   {
     mStations.add( st );
     makePath();
   }
 
+  /** shift the equate-view
+   * @param dx   X shift [canvas ?]
+   * @param dy   Y shift
+   * @param command  survey command-view
+   */
   void shift( float dx, float dy, TdmViewCommand command )
   {
     for ( TdmViewStation st : mStations ) {
@@ -52,6 +63,8 @@ class TdmViewEquate
     }
   }
 
+  /** make the equate-view display path
+   */
   void makePath()
   {
     if ( mStations.size() > 1 ) {
@@ -74,6 +87,11 @@ class TdmViewEquate
   //     TDLog.v("  station: " + vst.mStation.mName + " " + vst.mCommand.name() );
   // }
 
+  /** draw the equate-view on the display
+   * @param canvas   display canvas
+   * @param matrix   transform matrix
+   * @param paint    drawing paint
+   */
   void draw( Canvas canvas, Matrix matrix, Paint paint )
   {
     if ( mPath != null ) {

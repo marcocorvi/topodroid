@@ -52,7 +52,7 @@ public class DistoXA3Protocol extends DistoXProtocol
   public boolean swapA3HotBit( int addr, boolean on_off ) // only A3
   {
     try {
-      mBuffer[0] = (byte) 0x38;
+      mBuffer[0] = (byte) MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
       mBuffer[1] = (byte)( addr & 0xff );
       mBuffer[2] = (byte)( (addr>>8) & 0xff );
       mOut.write( mBuffer, 0, 3 );
@@ -62,7 +62,7 @@ public class DistoXA3Protocol extends DistoXProtocol
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
       // TDLog.v( "A3 swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
 
-      if ( mBuffer[0] != (byte)0x38 ) { 
+      if ( mBuffer[0] != (byte)MemoryOctet.BYTE_PACKET_REPLY ) { // 0x38 
         TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
         return false;
       }
@@ -73,7 +73,7 @@ public class DistoXA3Protocol extends DistoXProtocol
         TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
-      mBuffer[0] = (byte)0x39;
+      mBuffer[0] = (byte)MemoryOctet.BYTE_PACKET_REQST; // 0x39;
       // mBuffer[1] = (byte)( addr & 0xff );
       // mBuffer[2] = (byte)( (addr>>8) & 0xff );
       if ( mBuffer[3] == 0x00 ) {
@@ -93,7 +93,7 @@ public class DistoXA3Protocol extends DistoXProtocol
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
       // TDLog.v( "A3 swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
 
-      if ( mBuffer[0] != (byte)0x38 ) {
+      if ( mBuffer[0] != (byte) MemoryOctet.BYTE_PACKET_REPLY ) {  // 0x38
         TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
         return false;
       }
@@ -136,7 +136,7 @@ public class DistoXA3Protocol extends DistoXProtocol
       // if ( TDSetting.mPacketLog ) logPacket( 0L );
       // TDLog.v( "A3 read A3 head-tail: " + String.format(" %02x", mBuffer[0] ) );
 
-      if ( mBuffer[0] != (byte)( 0x38 ) ) { return null; }
+      if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return null; } // 0x38
       if ( mBuffer[1] != command[1] ) { return null; }
       if ( mBuffer[2] != command[2] ) { return null; }
       // TODO value of Head-Tail in byte[3-7]
@@ -167,7 +167,7 @@ public class DistoXA3Protocol extends DistoXProtocol
   //     mIn.readFully( mBuffer, 0, 8 );
   //     // if ( TDSetting.mPacketLog ) logPacket( 0L );
 
-  //     if ( mBuffer[0] != (byte)( 0x38 ) ) { return false; }
+  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) { return false; } // 0x38
   //     if ( mBuffer[1] != mAddr8000[1] ) { return false; }
   //     if ( mBuffer[2] != mAddr8000[2] ) { return false; }
   //     result[0] = mBuffer[3];

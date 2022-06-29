@@ -42,7 +42,7 @@ import java.util.List;
 /**
  */
 public class TdmViewSurface extends SurfaceView
-                           implements SurfaceHolder.Callback
+                            implements SurfaceHolder.Callback
 {
     private Boolean _run;
     protected DrawThread thread;
@@ -65,12 +65,32 @@ public class TdmViewSurface extends SurfaceView
     private Matrix mMatrix;
     private Paint  mPaint;  // equate paint
 
+    /** @return X scene coord from the X canvas coord
+     * @param x_canvas   X canvas coord
+     */
     float canvasToSceneX( float x_canvas ) { return (x_canvas + mXoffset)/mZoom; }
+
+    /** @return Y scene coord from the Y canvas coord
+     * @param y_canvas   Y canvas coord
+     */
     float canvasToSceneY( float y_canvas ) { return (y_canvas + mYoffset)/mZoom; }
+
+    /** @return X canvas coord from the X scene coord
+     * @param x_scene   X scene coord
+     */
     float sceneToCanvasX( float x_scene ) { return x_scene*mZoom - mXoffset; }
+
+    /** @return Y canvas coord from the Y scene coord
+     * @param y_scene   Y scene coord
+     */
     float sceneToCanvasY( float y_scene ) { return y_scene*mZoom - mYoffset; }
 
+    /** @return the canvas width
+     */
     public int width()  { return mWidth; }
+
+    /** @return the canvas height
+     */
     public int height() { return mHeight; }
 
     /** set the parent activity
@@ -318,7 +338,8 @@ public class TdmViewSurface extends SurfaceView
 
 
     // ------------------------------------------------------------------------
-
+    /** refresh the canvas
+     */
     void refresh()
     {
       Canvas canvas = null;
@@ -350,6 +371,8 @@ public class TdmViewSurface extends SurfaceView
       }
     };
 
+    /** canvas drawing thread
+     */
     class DrawThread extends  Thread
     {
       private SurfaceHolder mSurfaceHolder;

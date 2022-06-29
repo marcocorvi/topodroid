@@ -141,6 +141,7 @@ public class TopoDroidProtocol
   // PACKETS HANDLING -----------------------------------------------------------
 
   /** packet dispatcher
+   * @param buffer 8-byte packet
    */
   protected int handlePacket( byte[] buffer )
   {
@@ -157,7 +158,7 @@ public class TopoDroidProtocol
 
     // int high, low;
     switch ( type ) {
-      case 0x01: // Data
+      case MemoryOctet.BYTE_PACKET_DATA: // Data 0x01
         mBackshot = false;
         int dhh = (int)( buffer[0] & 0x40 );
         double d =  dhh * 1024.0 + MemoryOctet.toInt( buffer[2], buffer[1] );
@@ -206,7 +207,7 @@ public class TopoDroidProtocol
         // }
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
-      case 0x02: // G
+      case MemoryOctet.BYTE_PACKET_G: // G 0x02
         mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
         mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
         mGZ = MemoryOctet.toInt( buffer[6], buffer[5] );
@@ -216,7 +217,7 @@ public class TopoDroidProtocol
         if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
         // TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
         return DataType.PACKET_G;
-      case 0x03: // M
+      case MemoryOctet.BYTE_PACKET_M: // M 0x03
         mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
         mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
         mMZ = MemoryOctet.toInt( buffer[6], buffer[5] );
@@ -226,7 +227,7 @@ public class TopoDroidProtocol
         if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
         // TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
         return DataType.PACKET_M;
-      case 0x04: // Vector data packet
+      case MemoryOctet.BYTE_PACKET_VECTOR: // Vector data packet 0x04
         if ( mDeviceType == Device.DISTO_X310 ) {
           mBackshot = ( (buffer[0] & 0x40) == 0x40 );
           double acc = MemoryOctet.toInt( buffer[2], buffer[1] );
@@ -244,7 +245,7 @@ public class TopoDroidProtocol
           // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
         }
         return DataType.PACKET_VECTOR;
-      case 0x38:  // Reply packet
+      case MemoryOctet.BYTE_PACKET_REPLY: // Reply packet 0x38
         mAddress[0] = buffer[1];
         mAddress[1] = buffer[2];
         {
@@ -270,9 +271,11 @@ public class TopoDroidProtocol
 
   // PACKETS I/O ------------------------------------------------------------------------
 
-  // must be overridden
-  // @param no_timeout
-  // @param data_type  packet data type (to filter packet of different type)
+  /** read a packet
+   * @note must be overridden
+   * @param no_timeout whether not to timeout
+   * @param data_type  packet data type (to filter packet of different type) (unused ?)
+   */
   public int readPacket( boolean no_timeout, int data_type )
   {
     TDLog.v( "TD proto: read_packet returns NONE");

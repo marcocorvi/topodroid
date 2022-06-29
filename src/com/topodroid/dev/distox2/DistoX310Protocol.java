@@ -136,7 +136,7 @@ public class DistoX310Protocol extends DistoXProtocol
       int end_addr = addr + BYTE_PER_DATA;
       // TDLog.v( start + " addr " + addr + " end " + end_addr );
       for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        mBuffer[0] = (byte)( 0x38 );
+        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY );  // 0x38
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
         try {
@@ -150,7 +150,7 @@ public class DistoX310Protocol extends DistoXProtocol
           TDLog.Error( "read memory() IO failed" );
           break;
         }
-        if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+        if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
         int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
         if ( reply_addr != addr ) break;
         // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
@@ -164,7 +164,7 @@ public class DistoX310Protocol extends DistoXProtocol
       addr = index2addrX310( start ) + 8;
       // end_addr = addr + BYTE_PER_DATA;
       // for ( ; addr < end_addr && k < 8; addr += 4, k+=4 ) {
-        mBuffer[0] = (byte)( 0x38 );
+        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
         try {
@@ -178,7 +178,7 @@ public class DistoX310Protocol extends DistoXProtocol
           TDLog.Error( "read memory() IO failed" );
           break;
         }
-      //   if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+      //   if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
       //   int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1]);
       //   if ( reply_addr != addr ) break;
       //   // for (int i=3; i<7; ++i) result.data[k+i-3] = mBuffer[i];
@@ -187,7 +187,7 @@ public class DistoX310Protocol extends DistoXProtocol
       //   result2.data[k+2] = mBuffer[5];
       //   result2.data[k+3] = mBuffer[6];
       // }
-      if ( mBuffer[0] == (byte)( 0x38 ) && addr == MemoryOctet.toInt( mBuffer[2], mBuffer[1]) ) {
+      if ( mBuffer[0] == (byte)( MemoryOctet.BYTE_PACKET_REPLY ) && addr == MemoryOctet.toInt( mBuffer[2], mBuffer[1]) ) { // 0x38
         if ( ( mBuffer[3] & MemoryOctet.BIT_BACKSIGHT) == MemoryOctet.BIT_BACKSIGHT ) {
           result.data[0] |= MemoryOctet.BIT_BACKSIGHT2;
         }
@@ -195,7 +195,7 @@ public class DistoX310Protocol extends DistoXProtocol
 
       if ( k == 8 ) {
         addr = index2addrX310( start ) + 16;
-        mBuffer[0] = (byte)( 0x38 );
+        mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
         mBuffer[1] = (byte)( addr & 0xff );
         mBuffer[2] = (byte)( (addr>>8) & 0xff );
         try {
@@ -209,7 +209,7 @@ public class DistoX310Protocol extends DistoXProtocol
           TDLog.Error( "read memory() IO failed" );
           break;
         }
-        if ( mBuffer[0] != (byte)( 0x38 ) ) break;
+        if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
         if ( mBuffer[3] == (byte)( 0xff ) ) result.data[0] |= (byte)( 0x80 ); 
         data.add( result );
         // if ( mBuffer[4] == (byte)( 0xff ) ) result2.data[0] |= (byte)( 0x80 ); 
@@ -231,11 +231,11 @@ public class DistoX310Protocol extends DistoXProtocol
   //   int cnt = start;
   //   while ( start < end ) {
   //     int addr = index2addrX310( start ) + 16;
-  //     mBuffer[0] = (byte)( 0x38 );
+  //     mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REPLY ); // 0x38
   //     mBuffer[1] = (byte)( addr & 0xff );
   //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
   //     TDLog.Error( "resetMemory() address " + mBuffer[1] + " " + mBuffer[2] );
-
+  // 
   //     // TODO write and read
   //     try {
   //       mOut.write( mBuffer, 0, 3 );
@@ -248,15 +248,15 @@ public class DistoX310Protocol extends DistoXProtocol
   //       TDLog.Error( "resetMemory() IO nr. 1 failed" );
   //       break;
   //     }
-  //     if ( mBuffer[0] != (byte)( 0x38 ) ||
+  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
   //          mBuffer[1] != (byte)( addr & 0xff ) ||
   //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
   //       TDLog.Error( "resetMemory() bad read reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
   //       break;
   //     }
   //     TDLog.Error( "resetMemory() ok read reply " + mBuffer[3] + " " + mBuffer[4] + " " + mBuffer[5] + " " + mBuffer[6] );
-
-  //     mBuffer[0] = (byte)( 0x39 );
+  // 
+  //     mBuffer[0] = (byte)( MemoryOctet.BYTE_PACKET_REQST ); // 0x39
   //     mBuffer[1] = (byte)( addr & 0xff );
   //     mBuffer[2] = (byte)( (addr>>8) & 0xff );
   //     mBuffer[3] = (byte)( 0xff );
@@ -272,7 +272,7 @@ public class DistoX310Protocol extends DistoXProtocol
   //       TDLog.Error( "resetMemory() IO nr. 2 failed" );
   //       break;
   //     }
-  //     if ( mBuffer[0] != (byte)( 0x38 ) ||
+  //     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) || // 0x38
   //          mBuffer[1] != (byte)( addr & 0xff ) ||
   //          mBuffer[2] != (byte)( (addr>>8) & 0xff ) ) {
   //       TDLog.Error( "resetMemory() bad write reply " + mBuffer[0] + " addr " + mBuffer[1] + " " + mBuffer[2] );
