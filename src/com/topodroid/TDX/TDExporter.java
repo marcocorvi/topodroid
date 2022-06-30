@@ -3151,7 +3151,7 @@ public class TDExporter
 
   static int exportSurveyAsGtx( BufferedWriter bw, long sid, DataHelper data, SurveyInfo info, String surveyname )
   {
-    String date = info.date.replace( '.', '-' );
+    String date = info.date.replace( '.', '-' ); // MySQL date format YYYY-MM-DD
     try {
       // TDLog.Log( TDLog.LOG_IO, "export GHTopo " + file.getName() );
       // BufferedWriter bw = TDFile.getMSwriter( "gtx", surveyname + ".gtx", "text/gtx" );
@@ -3162,6 +3162,10 @@ public class TDExporter
       pw.format("    <Cavite FolderName=\"%s created by TopoDroid v %s\" CoordsSystem=\"\" CoordsSystemEPSG=\"4978\" FolderObservations=\"\"/>\n",
                 TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() );
       pw.format("  </General>\n");
+
+      pw.format("  <Namespaces>\n");
+      pw.format("    <Namespace Name=\"\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Namespace=\"0\" Description=\"\" />\n");
+      pw.format("  </Namespaces>\n");
 
       List< DBlock > list = data.selectAllExportShots( sid, TDStatus.NORMAL );
       checkShotsClino( list );
@@ -3177,12 +3181,18 @@ public class TDExporter
           TRobotPoint pt = trobot.getPoint( fixed.name );
           if ( pt != null ) {
             pw.format(Locale.US, "    <Entrance X=\"%.10f\" Y=\"%.10f\" Z=\"%.2f\" ", fixed.lng, fixed.lat, fixed.alt );
-            pw.format("Name=\"%s\" Numero=\"%d\" Comments=\"%s\" RefPoint=\"%d\" RefSerie=\"%d\" IdTerrain=\"\" />\n",
+            pw.format("Name=\"%s\" Numero=\"%d\" Comments=\"%s\" RefPoint=\"%d\" RefSerie=\"%d\" IdTerrain=\"\" Colour=\"$255000000\" />\n",
                    fixed.name, ce, fixed.comment, pt.mNumber, pt.mSeries.mNumber );
           }
         }
         pw.format("  </Entrances>\n");
       }
+
+      // Secteur are optional ... TODO
+      // pw.format("  <Secteurs>\n");
+      // pw.format("  </Secteurs>\n");
+
+      // Network are optional
       pw.format("  <Networks>\n");
       pw.format("    <Network Name=\"%s\" Type=\"0\" ColorB=\"0\" ColorG=\"0\" ColorR=\"255\" Numero=\"1\" Comments=\"\"/>\n", info.name );
       pw.format("  </Networks>\n");
@@ -3232,6 +3242,8 @@ public class TDExporter
               az, pt.mName, up, down, incl );
             pw.format(Locale.US, "Left=\"%.2f\" Trip=\"1\" Label=\"%s\" Right=\"%.2f\" Length=\"%.3f\" ",
               left, blk.Name(), right, len );
+            pw.format(Locale.US, "Horodate=\"\" Humidity=\"\" Tempertaure=\"\" ",
+              date );
             pw.format(Locale.US, "Secteur=\"0\" Comments=\"%s\" TypeShot=\"%d\" />\n",
               blk.mComment, ( blk.isSurface() ? 7 : 0 ) );
           }
@@ -3250,6 +3262,8 @@ public class TDExporter
         TRobotPoint pt = trobot.getPoint( blk.mFrom );
         if ( pt == null ) continue;
         ++ number;
+        // Comment: unused (by experience)
+        // Trip and Code Label: Unused here (inherits from <PtDep> and <SerDep>)
         if ( blk.isCommented() ) {
           pw.format(Locale.US, "    <!-- AntennaShot Az=\"%.2f\" Code=\"1\" Incl=\"%.2f\" Trip=\"1\" Label=\"\" PtDep=\"%d\" ",
             blk.mBearing, blk.mClino, pt.mNumber );
