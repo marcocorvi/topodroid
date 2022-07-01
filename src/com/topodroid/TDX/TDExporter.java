@@ -3157,23 +3157,25 @@ public class TDExporter
       // BufferedWriter bw = TDFile.getMSwriter( "gtx", surveyname + ".gtx", "text/gtx" );
       PrintWriter pw = new PrintWriter( bw );
 
-      pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<GHTopo>\n");
+      pw.format("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+      pw.format("<!-- %s created by TopoDroid v %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
+      pw.format("<GHTopo>\n");
 
-      // Mandatory - cave name
+      // mandatory - cave name
       pw.format("<General>\n");
       pw.format("<Cavite"); 
       pw.format(" FolderName=\"%s\"", info.name );
       pw.format(" CoordsSystem=\"\"");          // Coord system (optional)  
       pw.format(" CoordsSystemEPSG=\"4978\"");  // EPSG code
-      pw.format(" FolderObservations=\"%s created by TopoDroid v %s\"", TDUtil.getDateString("yyyy/MM/dd"), TDVersion.string() ); // Folder
+      pw.format(" FolderObservations=\"\"");
       pw.format("/>\n");
       pw.format("</General>\n");
 
-      // Optional - TopoDroid generates only one default namspace
+      // optional - TopoDroid generates only one default namspace
       pw.format("<Namespaces>\n");
       pw.format("<Namespace");
       pw.format(" Name=\"\"");
-      pw.format(" ColorB=\"0\"");       // Color R (int in [0..255]
+      pw.format(" ColorB=\"0\"");       // Color R (int in [0..255])
       pw.format(" ColorG=\"0\"");
       pw.format(" ColorR=\"255\"");
       pw.format(" NamespaceIdx=\"0\""); // Index of namespace
@@ -3181,7 +3183,7 @@ public class TDExporter
       pw.format("/>\n");
       pw.format("</Namespaces>\n");
 
-      // Optional - N.B. do not generate section <Filtres>
+      // optional - N.B. do not generate section <Filtres>
       // pw.format("<Filters>\n");
       // pw.format("<Filters");
       // pw.format(" Filtre=\"\"");
@@ -3197,7 +3199,7 @@ public class TDExporter
       TRobot trobot = new TRobot( list );
       // trobot.dump(); // DEBUG
 
-      // Mandatory - N.B. only one entrance, typically main entrance
+      // mandatory - N.B. only one entrance, typically main entrance
       List< FixedInfo > fixeds = data.selectAllFixed( sid, TDStatus.NORMAL );
       boolean entrance_todo = true;
       pw.format("<Entrances>\n");
@@ -3229,9 +3231,9 @@ public class TDExporter
         TRobotSeries sr = trobot.mSeries.get(0);
         TRobotPoint  pt = sr.mBegin;
         pw.format("<Entrance");
-        pw.format(Locale.US, " X=\"%.2f\"", 0 ); // Unknown coords set to 0.00
-        pw.format(Locale.US, " Y=\"%.2f\"", 0 );
-        pw.format(Locale.US, " Z=\"%.2f\"", 0 );
+        pw.format(" X=\"0.00\"" ); // Unknown coords set to 0.00
+        pw.format(" Y=\"0.00\"" );
+        pw.format(" Z=\"0.00\"" );
         pw.format(" Name=\"First Station\"");       // name of entrance
         pw.format(" Numero=\"0\"");
         pw.format(" Comments=\"\"");
@@ -3244,7 +3246,7 @@ public class TDExporter
       }
       pw.format("</Entrances>\n");
 
-      // Optional - TopoDroid should not generate it
+      // optional - TopoDroid should not generate it
       // pw.format("<Secteurs>\n");
       // pw.format("<Secteur");
       // pw.format(" Name=\"\"");       // ...
@@ -3252,7 +3254,7 @@ public class TDExporter
       // pw.format("/>\n");
       // pw.format("</Secteurs>\n");
 
-      // Optional - TopoDroid should not generate it
+      // optional - TopoDroid should not generate it
       // pw.format("<Networks>\n");
       // pw.format("<Network");
       // pw.format(" Name=\"%s\"", info.name ); // name of netwrok
@@ -3265,7 +3267,7 @@ public class TDExporter
       // pw.format("/>\n" );
       // pw.format("</Networks>\n");
 
-      // Mandatory: instruments code
+      // mandatory: instruments code
       pw.format("<Codes>\n");
       pw.format("<Code");
       pw.format(" Numero=\"1\"");             // index of code instruments
@@ -3290,23 +3292,23 @@ public class TDExporter
       pw.format("/>\n");
       pw.format("</Codes>\n");
 
-      // Mandatory
+      // mandatory
       float declination = ( info.hasDeclination() )? info.getDeclination() : 0;
       pw.format("<Seances>\n");
       pw.format("<Trip");
       pw.format(" Date=\"%s\"", date );             // date YYYY-MM-DD
-      pw.format(" Color=\"%d\"", randomColor() );   // index of TopoRobot palette, in 1..255: Black = 1; Red = 6; Green = 11; Blue = 211; Fuchsia = 73
+      pw.format(" ColorIndex=\"%d\"", randomColor() ); // index of TopoRobot palette, in 1..255: Black=1 Red=6 Green=11 Blue=211 Fuchsia=73
       pw.format(" Numero=\"1\"");                   // index of session
       pw.format(" Comments=\"%s\"", info.comment ); // optional
       pw.format(" Surveyor1=\"%s\"", info.team );   // N.B. info.team is not parsed - main operator
       pw.format(" Surveyor2=\"\"");                 // assistant(s)
       pw.format(" ModeDeclination=\"0\"");          // 0 or 1, GHTopo will calculate automatically from date and coordinates. Typically = 0
       pw.format(Locale.US, " Declination=\"%.2f\"", declination);  // magnetic declination
-      pw.format(" Inclination=\"0\"");              // deprecated - set to 0
+      // pw.format(" Inclination=\"0\"");              // deprecated - set to 0 or omit
       pw.format("/>\n");
       pw.format("</Seances>\n");
 
-      // Mandatory
+      // mandatory
       pw.format("<Series>\n");
       for ( TRobotSeries series : trobot.mSeries ) {
         TRobotPoint dep = series.mBegin;
@@ -3314,7 +3316,7 @@ public class TDExporter
         pw.format("<Serie");
         pw.format(" Numero=\"%d\" ", series.mNumber );      // series number
         pw.format(" Name=\"\"");                            // series name
-        pw.format(" Color=\"#0000FF\"");                    // For GHTopo future usage - Must be set to #0000FF
+        // pw.format(" Color=\"#0000FF\"");                    // For GHTopo future usage - Must be set to #0000FF - Unused: omit
         pw.format(" SerDep=\"%d\"",  dep.mSeries.mNumber ); // TOPOROBOT notation of the starting station SerDep.PtDep ; eg: 14.18
         pw.format(" PtDep=\"%d\"",   dep.mNumber );         // TOPOROBOT notation of the starting station SerDep.PtDep ; eg: 14.18
         pw.format(" SerArr=\"%d\"",  arr.mSeries.mNumber ); // TOPOROBOT notation of the ending station SerDep.PtDep ; eg: 39.45
@@ -3339,16 +3341,17 @@ public class TDExporter
               incl = - incl;
             }
             float len = blk.mLength;
-            float up    = 0; // TODO compute from splays as in COMPASS
-            float left  = 0;
-            float down  = 0;
-            float right = 0;
+            LRUD lrud = computeLRUD( blk, list, true ); // LRUD at FROM station
+            // float up    = 0; // TODO compute from splays as in COMPASS
+            // float left  = 0;
+            // float down  = 0;
+            // float right = 0;
             pw.format("<Shot");
-            pw.format(" ID=\"%s\"",       pt.mName );
+            pw.format(" ID=\"%s\"", pt.mName );
             pw.format(" Code=\"1\"");          // index of instrument - if unknown 1
             pw.format(" Trip=\"1\"");          // index of session - if unknown 1
             pw.format(" Secteur=\"0\"");       // Index of 'Seecteur' (subnetwork) - Typically = 0
-            // pw.format(Locale.US, " Label=\"\"");       // Label ID terrain (eg: AB123) - Optional
+            // pw.format(Locale.US, " Label=\"\"");       // Label ID terrain (eg: AB123) - optional
             pw.format(" Horodate=\"%s 00:00:00.00\"", date ); // horodating YYYY-MM-DD HH:MN:SS.MSd. If unknown now() or empty string
             pw.format(" Humidity=\"0.00\"");                  // Humidity ; If unknown or unsuported, set to 0.00
             pw.format(" Tempertaure=\"0.00\"");               // Temperature. If unknown or unsuported, set to 0.00
@@ -3357,10 +3360,10 @@ public class TDExporter
             pw.format(Locale.US, " Length=\"%.3f\"", len );
             pw.format(Locale.US, " Az=\"%.2f\"",     az );
             pw.format(Locale.US, " Incl=\"%.2f\"",   incl );
-            pw.format(Locale.US, " Left=\"%.2f\"",   left );
-            pw.format(Locale.US, " Right=\"%.2f\"",  right );
-            pw.format(Locale.US, " Up=\"%.2f\"",     up );
-            pw.format(Locale.US, " Down=\"%.2f\"",   down );
+            pw.format(Locale.US, " Left=\"%.2f\"",   lrud.l ); // left );
+            pw.format(Locale.US, " Right=\"%.2f\"",  lrud.r ); // right );
+            pw.format(Locale.US, " Up=\"%.2f\"",     lrud.u ); // up );
+            pw.format(Locale.US, " Down=\"%.2f\"",   lrud.d ); // down );
             pw.format("/>\n");
           }
           from = pt;
@@ -3370,7 +3373,7 @@ public class TDExporter
       }
       pw.format("</Series>\n");
 
-      // Optional (splays)
+      // optional (splays)
       pw.format("<AntennaShots>\n");
       // for all splays
       int number = 0;
@@ -3388,8 +3391,8 @@ public class TDExporter
           pw.format(Locale.US, " Az=\"%.2f\"",     blk.mBearing );
           pw.format(Locale.US, " Incl=\"%.2f\"",   blk.mClino );
           pw.format(Locale.US, " Length=\"%.3f\"", blk.mLength );
-          pw.format(Locale.US, " Network=\"0\"");  // deprecated - set to 0
-          pw.format(Locale.US, " Secteur=\"0\"");  // deprecated - set to 0
+          // pw.format(Locale.US, " Network=\"0\"");  // deprecated - set to 0 or omit
+          // pw.format(Locale.US, " Secteur=\"0\"");  // deprecated - set to 0 or omit
           pw.format(Locale.US, " Comments=\"%s\"", blk.mComment );
           pw.format("/ -->\n");
         } else {
@@ -3400,8 +3403,8 @@ public class TDExporter
           pw.format(Locale.US, " Az=\"%.2f\"",     blk.mBearing );
           pw.format(Locale.US, " Incl=\"%.2f\"",   blk.mClino );
           pw.format(Locale.US, " Length=\"%.3f\"", blk.mLength );
-          pw.format(Locale.US, " Network=\"0\"");  // deprecated - set to 0
-          pw.format(Locale.US, " Secteur=\"0\"");  // deprecated - set to 0
+          // pw.format(Locale.US, " Network=\"0\"");  // deprecated - set to 0 or omit
+          // pw.format(Locale.US, " Secteur=\"0\"");  // deprecated - set to 0 or omit
           pw.format(Locale.US, " Comments=\"%s\"", blk.mComment );
           pw.format("/>\n");
         }
@@ -4392,9 +4395,18 @@ public class TDExporter
     LRUD lrud = computeLRUD( item, list, ! TDSetting.mVTopoLrudAtFrom ); // default: mVTopoLrudAtFrom = false
     String station = TDSetting.mVTopoLrudAtFrom ? item.mTo : item.mFrom;
     if ( suffix != null && suffix.length() > 0 ) station = station + suffix;
-    pw.format(Locale.US, "    <Visee Dep=\"%s\" Arr=\"%s\" Long=\"0.00\" Az=\"0.0\" Pte=\"0.0\" ", station, station );
-    pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
-    // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
+    pw.format("<Visee");
+    pw.format(" Dep=\"%s\"", station );
+    pw.format(" Arr=\"%s\"", station );
+    pw.format(" Long=\"0.00\"");
+    pw.format(" Az=\"0.0\"");
+    pw.format(" Pte=\"0.0\"");
+    pw.format(Locale.US, " G=\"%.2f\"", lrud.l );
+    pw.format(Locale.US, " D=\"%.2f\"", lrud.r );
+    pw.format(Locale.US, " H=\"%.2f\"", lrud.u );
+    pw.format(Locale.US, " B=\"%.2f\"", lrud.d );
+    // pw.format(" Ref=\"%d\"",  ref );
+    // pw.format(" Suiv=\"%d\"", suiv );
     if ( item.mComment != null && item.mComment.length() > 0 ) {
       // pw.format(" ;%s", item.mComment );
     }
@@ -4426,17 +4438,25 @@ public class TDExporter
   {
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
-    pw.format("    <Visee ");
+    pw.format("<Visee");
     if ( suffix == null || suffix.length() == 0 ) {
-      pw.format(Locale.US, "Dep=\"%s\" Arr=\"%s\" ", item.mFrom, item.mTo );
+      pw.format(" Dep=\"%s\"", item.mFrom );
+      pw.format(" Arr=\"%s\"", item.mTo );
     } else {
-      pw.format(Locale.US, "Dep=\"%s%s\" Arr=\"%s%s\" ", item.mFrom, suffix, item.mTo, suffix );
+      pw.format(" Dep=\"%s%s\"", item.mFrom, suffix );
+      pw.format(" Arr=\"%s%s\"", item.mTo, suffix );
     }
-    pw.format(Locale.US, "Long=\"%.2f\" Az=\"%.1f\" Pte=\"%.1f\" ", leg.length(), leg.bearing(), leg.clino() );
+    pw.format(Locale.US, " Long=\"%.2f\"", leg.length() );
+    pw.format(Locale.US, " Az=\"%.1f\"",   leg.bearing() );
+    pw.format(Locale.US, " Pte=\"%.1f\"",  leg.clino() );
     leg.reset();
-    pw.format(Locale.US, "G=\"%.2f\" D=\"%.2f\" H=\"%.2f\" B=\"%.2f\" ", lrud.l, lrud.r, lrud.u, lrud.d );
-    // pw.format(Locale.US, "Ref=\"%d\" Suiv=\"%d\" ", ref, suiv );
-    if ( item.isDuplicate() ) pw.format("Exc=\"E\" ");
+    pw.format(Locale.US, " G=\"%.2f\"", lrud.l );
+    pw.format(Locale.US, " D=\"%.2f\"", lrud.r );
+    pw.format(Locale.US, " H=\"%.2f\"", lrud.u );
+    pw.format(Locale.US, " B=\"%.2f\"", lrud.d );
+    // pw.format(" Ref=\"%d\"",  ref );
+    // pw.format(" Suiv=\"%d\"", suiv );
+    if ( item.isDuplicate() ) pw.format(" Exc=\"E\"");
     // if ( surface ) pw.forma(" #|S#");
     pw.format(">");
     if ( item.mComment != null && item.mComment.length() > 0 ) {
@@ -4713,39 +4733,54 @@ public class TDExporter
       pw.format("<?xml version=\"1.0\" encoding=\"UTF-8\" standalone=\"no\"?>\r\n" );
       pw.format("<!-- %s created by TopoDroid v %s -->\r\n", TDUtil.getDateString("yyyy.MM.dd"), TDVersion.string() );
       pw.format("<VisualTopo>\r\n");
-      pw.format("  <Version>5.15</Version>\r\n");
-      pw.format("  <Lignes>%d</Lignes>\r\n", lignes );
+      pw.format("<Version>5.15</Version>\r\n");
+      pw.format("<Lignes>%d</Lignes>\r\n", lignes );
 
-      pw.format("  <Cavite>\r\n");
-      pw.format("    <Nom>%s</Nom>\r\n", info.name );
+      pw.format("<Cavite>\r\n");
+      pw.format("<Nom>%s</Nom>\r\n", info.name );
       if ( fixed.size() > 0 ) { 
         FixedInfo fix = fixed.get(0);
         if ( fix != null ) {
-          pw.format(Locale.US, "    <Coordonnees X=\"%.7f\" Y=\"%.7f\" Z=\"%.2f\" Projection=\"WGS84\" />\r\n", fix.lng, fix.lat, fix.asl );
-          pw.format("    <Entree>%s</Entree>\r\n", fix.name );
+          pw.format(Locale.US, "<Coordonnees");
+          pw.format(Locale.US, " X=\"%.7f\"", fix.lng );
+          pw.format(Locale.US, " Y=\"%.7f\"", fix.lat );
+          pw.format(Locale.US, " Z=\"%.2f\"", fix.asl );
+          pw.format(" Projection=\"WGS84\"");
+          pw.format("/>\r\n");
+          pw.format("<Entree>%s</Entree>\r\n", fix.name );
         } else { // this should never happen
-          pw.format("    <Entree>%s</Entree>\r\n", list.get(0).mFrom );
+          pw.format("<Entree>%s</Entree>\r\n", list.get(0).mFrom );
         }
       } else {
-        pw.format("    <Entree>%s</Entree>\r\n", list.get(0).mFrom );
+        pw.format("<Entree>%s</Entree>\r\n", list.get(0).mFrom );
       }
       if ( info.team != null && info.team.length() > 0 ) {
-        pw.format("    <Club>%s</Club>\r\n", info.team );
+        pw.format("<Club>%s</Club>\r\n", info.team );
       }
-      pw.format("    <Toporobot>0</Toporobot>\r\n");
-      pw.format("    <Coleur>0,0,0</Coleur>\r\n");
-      pw.format("  </Cavite>\r\n");
-      pw.format("  <Mesures>\r\n");
+      pw.format("<Toporobot>0</Toporobot>\r\n");
+      pw.format("<Coleur>0,0,0</Coleur>\r\n");
+      pw.format("</Cavite>\r\n");
+      pw.format("<Mesures>\r\n");
       
       // VISUALTOPO: use 0 if declination is undefined
-      pw.format("    <Param InstrDist=\"Deca\" UnitDir=\"Degd\" InstrPte=\"Clino\" UnitPte=\"Degd\" ");
-      pw.format(Locale.US, "Declin=\"%.4f\" SensDir=\"Dir\" SensPte=\"Dir\" SensLar=\"Dir\" DimPt=\"%s\" Coul=\"0,0,0\" ", info.getDeclination(), ( TDSetting.mVTopoLrudAtFrom ? "Dep" : "Arr" ) );
-      pw.format("Date=\"%s\" ", TDUtil.toVTopoDate( info.date ) );
+      pw.format("<Param");
+      pw.format(" InstrDist=\"Deca\"");
+      pw.format(" UnitDir=\"Degd\"");
+      pw.format(" InstrPte=\"Clino\"");
+      pw.format(" UnitPte=\"Degd\"");
+      pw.format(Locale.US, " Declin=\"%.4f\"", info.getDeclination() );
+      pw.format(" SensDir=\"Dir\"");
+      pw.format(" SensPte=\"Dir\"");
+      pw.format(" SensLar=\"Dir\"");
+      pw.format(" DimPt=\"%s\"", ( TDSetting.mVTopoLrudAtFrom ? "Dep" : "Arr" ) );
+      pw.format(" Coul=\"0,0,0\"");
+      pw.format(" Date=\"%s\" ", TDUtil.toVTopoDate( info.date ) );
       if ( fixed.size() > 0 ) {
-        pw.format("DeclinAuto=\"A\">\r\n" );
+        pw.format(" DeclinAuto=\"A\"" );
       } else {
-        pw.format("DeclinAuto=\"M\">\r\n" );
+        pw.format(" DeclinAuto=\"M\"" );
       }
+      pw.format(">\r\n" );
 
       AverageLeg leg = new AverageLeg(0);
       DBlock ref_item = null;
@@ -4822,8 +4857,8 @@ public class TDExporter
       } else {
         pw.format( sw.toString() );
       }
-      pw.format("    </Param>\r\n");
-      pw.format("  </Mesures>\r\n");
+      pw.format("</Param>\r\n");
+      pw.format("</Mesures>\r\n");
       pw.format("</VisualTopo>\r\n");
       bw.flush();
       bw.close();
