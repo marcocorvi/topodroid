@@ -207,6 +207,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>
+    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>

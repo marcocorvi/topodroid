@@ -207,6 +207,7 @@
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">校准数据不足</string>
     <string name="getting_info">获取DistoX信息 &#8230;</string>
+    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>

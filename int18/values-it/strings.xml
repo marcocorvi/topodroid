@@ -206,6 +206,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="few_plots">Troppo pochi disegni</string -->
     <string name="few_calibs">Calibrazioni non sufficienti</string>
     <string name="getting_info">Scarico info dal DistoX&#8230;</string>
+    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
 
     <string name="calib_import_title">Importa calibrazione</string>
     <string name="import_title">Importazione file</string>

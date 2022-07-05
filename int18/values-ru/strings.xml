@@ -207,6 +207,7 @@
     <!-- UNUSED string name="few_plots">Недостаточно абрисов</string -->
     <string name="few_calibs">Недостаточно калиб. замеров</string>
     <string name="getting_info">Получение информации о DistoX&#8230;</string>
+    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
 
     <string name="calib_import_title">Импорт калибровки</string>
     <string name="import_title">Импорт файла</string>
