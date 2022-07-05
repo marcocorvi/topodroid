@@ -39,7 +39,8 @@ Refer to the web pages for details.\n
     <string name="double_back">Click BACK again to exit</string>
 
     <string name="new_survey_label">New survey</string>
-    <string name="distox_label">DistoX</string>
+    <string name="distox_label" translatable="false">DistoX</string>
+    <string name="cave3d_label" translatable="false">Cave3D</string>
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">Install drawing tools v.%1$s?\n(Current v.%2$s)</string>
@@ -214,6 +215,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">Not enough calibrations</string>
     <string name="getting_info">Getting DistoX info &#8230;</string>
+    <string name="gettingble_info">Getting DistoX-BLE info &#8230;</string>
 
     <string name="calib_import_title">Calibration import</string>
     <string name="import_title">Survey import</string>

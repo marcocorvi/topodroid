@@ -3326,7 +3326,7 @@ public class TDExporter
         pw.format(" Entrance=\"0\"");   // Index of rattachment entrance - Typically = 0
         pw.format(" Obstacle=\"0\"");   // TOPOROBOT index of obstacle - Typically = 0
         // pw.format(" Comments=\"\"");    // optional
-        pw.format("/>\n");
+        pw.format(">\n");
         pw.format("<Stations>\n");
         TRobotPoint from = series.mBegin;
         for ( TRobotPoint pt : series.mPoints ) {

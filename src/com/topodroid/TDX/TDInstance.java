@@ -31,6 +31,7 @@ import android.bluetooth.BluetoothAdapter;
 // import androidx.documentfile.provider.DocumentFile;
 
 // static class (singleton) with instance data
+// SIWEI_TIAN changed on Jun 2022
 public class TDInstance
 {
   public static Context context; // must be the application context FIXME LEAK AND BREAKS INSTANT RUN
@@ -91,6 +92,11 @@ public class TDInstance
    */
   static boolean isDeviceBric()   { return deviceA != null && deviceA.isBric(); }
 
+  /** @return true if the primary device is set and is of type DistoXBLE
+   * SIWEI_TIAN
+   */
+  static boolean isDeviceDistoXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
+
   /** @return primary bluetooth device
    */
   public static Device getDeviceA() 
@@ -150,13 +156,15 @@ public class TDInstance
   static boolean hasBleDevice() { return mBleDevice != null; }
 
   /** @return true if the primary device is LE
+   * SIWEI_TIAN
    */
-  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() ); }
+  static boolean isDeviceBLE()    { return deviceA != null && ( deviceA.isBric() || deviceA.isSap() || deviceA.isDistoXBLE()); }
 
   /** @return true if the device is LE
    * @param device   bluetooth device
+   * SIWEI_TIAN
    */
-  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() ); }
+  private static boolean isDeviceBLE( Device device )    { return device != null && ( device.isBric() || device.isSap() || device.isDistoXBLE()); }
 
   /** @return true if the connection is set in continuous mode
    */

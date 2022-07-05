@@ -15,6 +15,7 @@ package com.topodroid.dev;
 
 // import com.topodroid.utils.TDLog;
 
+// SIWEI_TIAN changed on Jun 2022
 public class Device
 {
   // commands
@@ -41,9 +42,11 @@ public class Device
   // public final static int DISTO_BLEX  = 4;
   public final static int DISTO_SAP5  = 5; 
   public final static int DISTO_BRIC4 = 6;
+  public final static int DISTO_XBLE = 7; // SIWEI_TIAN
 
-  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4" };
-  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4" };
+  // SIWEI_TIAN
+  final static String[] typeString = { "Unknown", "A3", "X310", "X000", "BLEX", "SAP5", "BRIC4", "XBLE" };
+  private final static String[] typeSimpleString = { "Unknown", "DistoX", "DistoX2", "DistoX0", "BleX", "Sap5", "Bric4", "DistoXBLE" };
   
   public static String typeToString( int type )
   {
@@ -60,21 +63,24 @@ public class Device
   }
 
   public boolean isBT( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
-  public boolean isBLE( ) { return mType == DISTO_BRIC4 || mType == DISTO_SAP5 /* || mType == DISTO_BLEX */ ; }
-  public static boolean isBle( int type ) { return type == DISTO_BRIC4 || type == DISTO_SAP5 /* || mType == DISTO_BLEX */ ; }
+  public boolean isBLE( ) { return mType == DISTO_BRIC4 || mType == DISTO_SAP5  || mType == DISTO_XBLE; } // SIWEI_TIAN
+  public static boolean isBle( int type ) { return type == DISTO_BRIC4 || type == DISTO_SAP5 || type == DISTO_XBLE; } // SIWEI_TIAN
 
-  public boolean isDistoX( )  { return mType == DISTO_X310  || mType == DISTO_A3; }
-  public boolean isA3( )      { return mType == DISTO_A3; }
-  public boolean isX310( )    { return mType == DISTO_X310; }
-  public boolean isSap( )     { return mType == DISTO_SAP5; }
-  public boolean isBric( )    { return mType == DISTO_BRIC4; }
+  public boolean isDistoX( )    { return mType == DISTO_X310  || mType == DISTO_A3; }
+  public boolean isA3( )        { return mType == DISTO_A3; }
+  public boolean isX310( )      { return mType == DISTO_X310; }
+  public boolean isSap( )       { return mType == DISTO_SAP5; }
+  public boolean isBric( )      { return mType == DISTO_BRIC4; }
+  public boolean isDistoXBLE( ) { return mType == DISTO_XBLE; } // SIWEI_TIAN
 
-  public static boolean isDistoX( int type )  { return type == DISTO_X310 || type == DISTO_A3; }
-  public static boolean isA3( int type )      { return type == DISTO_A3; }
-  public static boolean isX310( int type )    { return type == DISTO_X310; }
-  public static boolean isSap( int type )     { return type == DISTO_SAP5; }
-  public static boolean isBric( int type )    { return type == DISTO_BRIC4; }
+  public static boolean isDistoX( int type )    { return type == DISTO_X310 || type == DISTO_A3; }
+  public static boolean isA3( int type )        { return type == DISTO_A3; }
+  public static boolean isX310( int type )      { return type == DISTO_X310; }
+  public static boolean isSap( int type )       { return type == DISTO_SAP5; }
+  public static boolean isBric( int type )      { return type == DISTO_BRIC4; }
+  public static boolean isDistoXBLE( int type ) { return type == DISTO_XBLE; } // SIWEI_TIAN
 
+  // SIWEI_TIAN
   public boolean canSendCommand() { return mType == DISTO_X310 || mType == DISTO_BRIC4; }
   public static boolean canSendCommand( int type ) { return type == DISTO_X310 || type == DISTO_BRIC4; }
 
@@ -90,6 +96,9 @@ public class Device
     if ( model.startsWith("BRIC4_") ) {
       return model.replace("BRIC4_", "" );
     }
+    if ( model.startsWith("DistoXBLE-") ) { // SIWEI_TIAN
+      return model.replace("DistoXBLE-", "" );
+    }
     // if ( model.startsWith("Ble-") ) { // FIXME BLE_5
     //   return model.replace("Ble-", "" );
     // }
@@ -100,6 +109,7 @@ public class Device
   {
     if ( model != null ) {
       // TDLog.Log( TDLog.LOG_DEBUG, "modelToType " + model );
+      if ( model.equals( "XBLE" )  || model.startsWith( "DistoXBLE-" ) )  return DISTO_XBLE; // SIWEI_TIAN
       if ( model.equals( "X310" )  || model.startsWith( "DistoX-" ) )   return DISTO_X310;
       if ( model.equals( "A3" )    || model.equals( "DistoX" ) )        return DISTO_A3;
       if ( model.equals( "BRIC4" ) || model.startsWith( "BRIC4" ) )     return DISTO_BRIC4; 
@@ -158,6 +168,7 @@ public class Device
     if ( name == null || name.length() == 0 || name.equals("null") ){
       name = mModel;
     }
+    if ( name.startsWith("DistoXBLE-") ) return name.replace("DistoXBLE-", ""); // SIWEI_TIAN
     if ( name.startsWith("DistoX-") ) return name.replace("DistoX-", "");
     if ( name.startsWith("SAP5_" ) ) return name.replace("SAP5_", "");
     if ( name.startsWith("BRIC-" ) ) return name.replace("BRIC-", "");

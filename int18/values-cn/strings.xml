@@ -20,7 +20,8 @@
     <string name="double_back">再次点击返回键退出</string>
 
     <string name="new_survey_label">新建测量</string>
-    <string name="distox_label">DistoX</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <!-- UNUSED string name="r_title">Android R 重要通知</string -->
   <!-- UNUSED string name="r_dialog">

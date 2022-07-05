@@ -20,7 +20,8 @@
     <string name="double_back">Per uscire premi INDIETRO di nuovo</string>
 
     <string name="new_survey_label">Nuovo rilievo</string>
-    <string name="distox_label">DistoX</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <!-- UNUSED string name="r_title">Android-R: avviso importante</string -->
   <!-- UNUSED string name="r_dialog">

@@ -20,7 +20,8 @@
     <string name="double_back">Нажмите "НАЗАД" еще раз для выхода</string>
 
     <string name="new_survey_label">Новая съёмка</string>
-    <string name="distox_label">Псевдоним DistoX</string>
+    <!-- NO string name="distox_label">Псевдоним DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <!-- UNUSED string name="r_title">Важное замечание по Android R</string -->
   <!-- UNUSED string name="r_dialog">

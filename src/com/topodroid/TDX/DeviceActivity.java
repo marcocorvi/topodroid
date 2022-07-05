@@ -11,6 +11,9 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog; // SIWEI_TIAN
+import com.topodroid.dev.distox_ble.DistoXBLEInfoReadTask;
+
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDTag;
@@ -555,7 +558,8 @@ public class DeviceActivity extends Activity
 
   public void showDistoXButtons( )
   {
-    if ( TDInstance.isDeviceDistoX() ) {
+    // SIWEI_TIAN
+    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) {              //Siwei Tian Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
@@ -611,6 +615,11 @@ public class DeviceActivity extends Activity
         } else if ( currDeviceA().mType == Device.DISTO_X310 ) {
           // currDeviceA().dump();
           new DeviceX310InfoDialog( this, this, currDeviceA() ).show();
+        } else if ( currDeviceA().mType == Device.DISTO_XBLE ) { // SIWEI_TIAN
+          // currDeviceA().dump();
+          DistoXBLEInfoDialog info =  new DistoXBLEInfoDialog( this, this, currDeviceA(), mApp );
+          info.show();
+          (new DistoXBLEInfoReadTask( mApp, info )).execute();
         } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
           BricInfoDialog info = new BricInfoDialog( this, this, getResources(), currDeviceA() );
           info.show();

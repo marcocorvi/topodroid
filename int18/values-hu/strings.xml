@@ -20,7 +20,8 @@
     <string name="double_back">Nyomd meg a vissza gombot újra a kilépéshez</string>
 
     <string name="new_survey_label">Új mérés</string>
-    <string name="distox_label">DistoX</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
   <!-- UNUSED string name="r_title">Android R fontos megjegyzés</string -->
   <!-- UNUSED string name="r_dialog">

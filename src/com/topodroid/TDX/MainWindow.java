@@ -963,7 +963,7 @@ public class MainWindow extends Activity
    */
   public void setButtonDevice()
   {
-    if ( TDInstance.isDeviceX310() ) {
+    if ( TDInstance.isDeviceX310() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_TIAN            //Siwei Tian changed on Jun 2022
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX2 );
     } else if ( TDInstance.isDeviceA3() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX1 );

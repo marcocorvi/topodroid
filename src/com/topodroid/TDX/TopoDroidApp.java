@@ -11,6 +11,10 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.dev.distox_ble.DistoXBLEComm; // SIWEI_TIAN
+import com.topodroid.dev.distox_ble.DistoXBLEConst;
+import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog;
+
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
@@ -116,6 +120,7 @@ import android.bluetooth.BluetoothDevice;
 // import android.bluetooth.BluetoothAdapter;
 // import android.bluetooth.BluetoothDevice; // COSURVEY
 
+// SIWEI_TIAN changed on Jun 2022
 public class TopoDroidApp extends Application
 {
   // static final String EMPTY = "";
@@ -577,6 +582,9 @@ public class TopoDroidApp extends Application
         // } else if ( Device.isX000( model ) ) { // FIXME VirtualDistoX
         //   mDData.updateDeviceModel( device.getAddress(), "DistoX0" );
         //   device.mType = model;
+        } else if ( Device.isDistoXBLE( model ) ) { // SIWEI_TIAN
+          mDData.updateDeviceModel(device.getAddress(), "DistoXBLE-0000");
+          device.mType = model;
         }
       }
     }
@@ -838,6 +846,10 @@ public class TopoDroidApp extends Application
       //   BluetoothDevice bt_device = TDInstance.getBleDevice();
       //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
+      } else if (TDInstance.isDeviceDistoXBLE()){ // SIWEI_TIAN changed on Jun 2022
+        String address = TDInstance.deviceAddress();
+        BluetoothDevice bt_device = TDInstance.getBleDevice();
+        mComm = new DistoXBLEComm( this,this, address, bt_device );
       }
     // }
   }
@@ -2293,6 +2305,43 @@ public class TopoDroidApp extends Application
     }
     return CalibInfo.ALGO_LINEAR; // default
   }  
+
+  //--------------DISTOXBLE Functions------------------------
+  // SIWEI_TIAN Added on Jun 2022
+  /** retrieve the DISTOXBLE info
+   * @param info   info display dialog
+   * @return true if successful
+   */
+  public boolean getDistoXBLEInfo( DistoXBLEInfoDialog info )
+  {
+    if ( mComm != null && mComm instanceof DistoXBLEComm ) {
+      DistoXBLEComm comm = (DistoXBLEComm)mComm;
+      //boolean bisconnect = comm.isConnected();
+      if ( ! comm.isConnected() ) {
+        connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
+        // TDLog.v("BRIC info: wait 4 secs");
+        TDUtil.yieldDown( 1000 ); // FIXME was 4000
+      }
+      int waitcnt = 0;
+      while(!comm.isConnected())
+      {
+        TDUtil.yieldDown( 500 );
+        waitcnt++;
+        if(waitcnt > 10) {
+          TDLog.Error("DistoXBLE info: failed to connect");
+          return false;
+        }
+      }
+      comm.registerInfo( info );
+      comm.writeGetInfoCmd();
+      if ( comm.isConnected() ) {
+          TDUtil.yieldDown( 1000 );
+          disconnectComm();
+      }
+      return true;
+    }
+    return false;
+  }
 
   // --------------------------------------------------------
 
