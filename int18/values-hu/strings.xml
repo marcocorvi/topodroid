@@ -387,7 +387,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">3D</string>
-    <string name="menu_about">INFO</string>
+    <string name="menu_about">NÉVJEGY</string>
     <string name="menu_area">TERÜLET</string>
     <string name="menu_audio">HANG</string>
     <!-- UNUSED string name="menu_attach">KAPCSOL</string -->
@@ -592,7 +592,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="survey_not_extend">FIGYELEM: nincs beállítva a mérés kiterítése</string>
     <!-- UNUSED string name="survey_not_attached_extend">FIGYELEM: nincs kapcsolódó mérés és kiterítés</string -->
     <string name="survey_no_data_reduction">FIGYELEM: nincs adat redukálás</string>
-    <string name="survey_not_saved">FIGYELEM: mérés infó nincs mentve</string>
+    <string name="survey_not_saved">FIGYELEM: mérés információ nincs mentve</string>
     <string name="survey_bad_siblings">FIGYELMEZTETÉS: rossz poligon mérés különbségek</string>
     <string name="survey_bad_magnetic">FIGYELMEZTETÉS: rossz mágneses poligon</string>
     <string name="saturated_coeffs">FIGYELEM: telített kalibrácoós eggyütthatók</string>
@@ -652,7 +652,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="zoom_in_out">Nagyítás/kicsinyítés</string -->
 
 	
-    <string name="survey_info">Felmérés info</string>
+    <string name="survey_info">Felmérés információ</string>
     <string name="stat_stddev_m">M norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_g">G norm. szór. %1$.1f százalék</string>
     <string name="stat_stddev_dip">Inklináció norm. szór. %1$.1f fok (átlag %2$.1f fok)</string>
@@ -1017,7 +1017,7 @@ A részletekért keresse fel a weboldalakat.\n
 	
     <string name="help_manual_calibration">Kézi műszerek kalibrálása</string>
     <string name="help_note_plot">A kiválasztott vázlat-elem tulajdonságainak szerkesztése</string>
-    <!-- UNUSED string name="help_save">Változtatások mentése a mérési informácoókba</string -->
+    <!-- UNUSED string name="help_save">Változtatások mentése a mérési informácókba</string -->
     <string name="help_save_calib">Változtatások mentése a kalibrációs információkhoz</string>
     <string name="help_export_survey">Felmérés exportálása</string>
     <string name="help_loc">GPS koordináta</string>
@@ -1861,7 +1861,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="cmenu_files">MÉRÉSEK</string -->
     <!-- UNUSED string name="cmenu_frame">KERET</string -->
     <!-- UNUSED string name="cmenu_color">SZÍN</string -->
-    <string name="cmenu_info">INFÓ</string>
+    <string name="cmenu_info">INFORMÁCIÓK</string>
     <string name="cmenu_ico">3D-RÓZSA DIAGRAMM</string>
     <string name="cmenu_rose">RÓZSA DIAGRAMM</string>
     <string name="cmenu_wall">FALAK</string>
@@ -1877,7 +1877,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- NO string name="fractal_dimension">Fractal dimension</string -->
     <string name="illegal_value">Illegális érték</string>
 
-    <!-- UNUSED string name="info_title">INFO</string -->
+    <!-- UNUSED string name="info_title">INFORMÁCIÓ</string -->
     <string name="info_surveys">MÉRÉSEK</string>
     <!-- UNUSED string name="info_axes">Tengelyek: kék Észak, zöld Kelet</string -->
     <string name="info_grid">Rács cella</string>
@@ -2123,7 +2123,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="help_open_3d">3D fájl megnyitás</string>
     <string name="help_export_3d">3D fájl export</string>
-    <string name="help_info_3d">3D info</string>
+    <string name="help_info_3d">3D információk</string>
     <string name="help_ico_3d">3D poligon eloszlás</string>
     <string name="help_rose_3d">Rózsa diagramm</string>
     <string name="help_reset_3d">3D nézet visszaállítása</string>
