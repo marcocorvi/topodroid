@@ -871,7 +871,7 @@ class ShotDialog extends MyDialog
       shot_from = TDUtil.noSpaces( shot_from );
       shot_to = mETto.getText().toString();
       shot_to = TDUtil.noSpaces( shot_to );
-      if ( shot_to.length() > 0 && shot_from.length() > 0 ) {
+      if ( shot_to.length() > 0 && shot_from.length() > 0 ) { // TODO REVERSE SPLAY ?
         String temp = shot_from; // new String( shot_from );
         shot_from = shot_to;
         shot_to = temp;
@@ -887,7 +887,7 @@ class ShotDialog extends MyDialog
 	  mRBright.setChecked( false );
           // shot_extend = ExtendType.EXTEND_LEFT;
 	}
-      }
+       }
     // } else if ( b == mButtonDrop ) {
     //   mParent.dropShot( mBlk );
     //   onBackPressed();

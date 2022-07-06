@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 
 
@@ -152,7 +153,7 @@ class PlotZoomFitDialog extends MyDialog
         mParent.setFixedZoom( (mSelectedPos < 0)? 0 : mSelectedPos );
       } else if ( btn == mBtnStation ) {
         String station = mETstation.getText().toString();
-	if ( station == null || station.length() == 0 ) {
+	if ( TDString.isNullOrEmpty( station ) ) {
           mETstation.setError( mContext.getResources().getString( R.string.error_station_required ) );
 	  return;
 	}

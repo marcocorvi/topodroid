@@ -37,6 +37,11 @@ class SapProtocol extends TopoDroidProtocol
   // private SapComm mComm; // UNUSED
   ArrayList< byte[] > mWriteBuffer;  // write buffer
   
+  /** cstr
+   * @param comm    communication class
+   * @param device  BT device
+   * @param context context
+   */
   SapProtocol( SapComm comm, Device device, Context context )
   {
     super( device, context );
@@ -45,6 +50,9 @@ class SapProtocol extends TopoDroidProtocol
     // TDLog.v( "SAP proto: cstr");
   }
 
+  /** add an array of bytes to the write buffer
+   * @param bytes   array of bytes to add
+   */
   public void addToWriteBuffer( byte[] bytes )
   {
     int pos =  0;
@@ -56,22 +64,24 @@ class SapProtocol extends TopoDroidProtocol
     }
   }
 
-  // @param chrt   GATT write characteristic
-  // @return number of bytes set into the write characteristic
+  /** remove a byte array from the write wueue
+   */
   public byte[] handleWrite( )
   {
     // TDLog.v( "SAP proto: write - pending " + mWriteBuffer.size() );
     byte[] bytes = null;
     synchronized ( mWriteBuffer ) { // FIXME SYNCH_ON_NON_FINAL
-      while ( ! mWriteBuffer.isEmpty() ) {
+      if ( ! mWriteBuffer.isEmpty() ) { // FIXME this was a while-loop
         bytes = mWriteBuffer.remove(0);
       }
     }
     return bytes;
   }
 
-  // @param chrt   GATT read characteristic
-  // @param bytes  return byte array
+  /** handle the reading of a received array of bytes
+   * @param bytes  byte array that has been received
+   * @return result code
+   */
   public int handleRead( byte[] bytes )
   {
     // TDLog.v( "SAP proto: read bytes " + bytes.length );
@@ -84,15 +94,22 @@ class SapProtocol extends TopoDroidProtocol
     return handlePacket( buffer );
   }
 
-  // @param chrt   Sap Gatt characteristic
+  /** handle a notification on the GATT READ characteristics
+   * @param chrt   Sap Gatt characteristic
+   * @return result code
+   */
   public int handleReadNotify( BluetoothGattCharacteristic chrt )
   {
     return handleRead( chrt.getValue() );
   }
 
+  /** handle a notification on the GATT WRITE characteristics
+   * @param chrt   Sap Gatt characteristic
+   * @return true if the write queue has more data
+   */
   public byte[] handleWriteNotify( BluetoothGattCharacteristic chrt )
   {
-    return handleWrite( );
+    return handleWrite();
   }
 
 }

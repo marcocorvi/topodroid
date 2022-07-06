@@ -888,11 +888,15 @@ public class ShotWindow extends Activity
       // }
     } else if ( TDLevel.overNormal && (! TDInstance.isDivingMode()) && p++ == pos ) { // DEVICE
       if ( DeviceUtil.isAdapterEnabled() ) {
-        // referrer
-        // Intent intent = new Intent( mActivity, com.topodroid.TDX.DeviceActivity.class );
-        // intent.putExtra( TDTag.TOPODROID_DEVICE_REF, Integer.toString( DeviceActivity.REFERRER_SHOT ) );
-        // mActivity.startActivity( intent );
-        mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
+        if ( mDataDownloader.isDownloading() ) {
+          TDToast.makeWarn( R.string.no_device_window );
+        } else {
+          // int mode = mDataDownloader.isDownloading() ? DeviceActivity.MODE_SELECT : DeviceActivity.MODE_NORMAL;
+          // Intent intent = new Intent( mActivity, com.topodroid.TDX.DeviceActivity.class );
+          // intent.putExtra( TDTag.TOPODROID_DEVICE_MODE, Integer.toString( mode ) );
+          // mActivity.startActivity( intent );
+          mActivity.startActivity( new Intent( Intent.ACTION_VIEW ).setClass( mActivity, DeviceActivity.class ) );
+        }
       }
     } else  if ( p++ == pos ) { // OPTIONS
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
@@ -1645,6 +1649,9 @@ public class ShotWindow extends Activity
     // }
   }
 
+  /** serah shots that satisfy a specified flag
+   * @param flag  search flag (see DBlock)
+   */
   void searchShot( long flag ) 
   {
     // if ( mSearch != null ) {

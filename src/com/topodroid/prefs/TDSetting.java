@@ -104,7 +104,9 @@ public class TDSetting
    */
   public static void clearFlagLocale() { mMainFlag &= ~FLAG_LOCALE; }
 
-
+  /** set the size of the texts
+   * @param ts   text size [dip]
+   */
   public static String setTextSize( int ts )
   {
     float ds = TopoDroidApp.getDisplayDensity() / 3.0f;
@@ -117,13 +119,19 @@ public class TDSetting
     return null;
   }
 
-  // get tentative text size
+  /** @return tentative text size
+   * @param ts   text size [dip]
+   */
   public static int getTextSize( int ts )
   {
     float ds = TopoDroidApp.getDisplayDensity() / 3.0f;
     return (int)( ( ds * ts ) );
   }
 
+  /** set the size of the label text
+   * @param f      label text size [pt]
+   * @param brush  if true set the text sizes also in the BruchManager
+   */
   public static boolean setLabelSize( float f, boolean brush )
   {
     if ( f >= 1 && f != mLabelSize ) {
@@ -134,6 +142,10 @@ public class TDSetting
     return false;
   }
 
+  /** set the size of the station names
+   * @param f      station name size [pt]
+   * @param brush  if true set the text sizes also in the BruchManager
+   */
   public static boolean setStationSize( float f, boolean brush )
   {
     if ( f >= 1 && f != mStationSize ) {
@@ -144,6 +156,9 @@ public class TDSetting
     return false;
   }
 
+  /** set the size of the sketching icons
+   * @param f      unit size for icons [pt]
+   */
   public static void setDrawingUnitIcons( float f )
   {
     if ( f > 0.1f && f != mUnitIcons ) {
@@ -152,6 +167,9 @@ public class TDSetting
     }
   }
 
+  /** set the size of the sketching lines
+   * @param f      unit size for lines [pt]
+   */
   public static void setDrawingUnitLines( float f )
   {
     if ( f > 0.1f && f != mUnitLines ) {
@@ -404,10 +422,11 @@ public class TDSetting
   public static String mUnitAngleStr  = "deg";  // N.B. Therion syntax: "deg", "grad"
 
   // public static final String EXTEND_THR = TDString.TEN; 
-  public static float mExtendThr = 10;             // extend vertically splays in [90-30, 90+30] of the leg
+  public static float mExtendThr = 10;          // extend vertically splays in [90-30, 90+30] of the leg
+  public static boolean mBlunderShot = false;   // skip intermediate leg blunder-shot
 
-  public static int mThumbSize = 200;               // thumbnail size
-  public static boolean mWithSensors = false;       // whether sensors are enabled
+  public static int mThumbSize = 200;           // thumbnail size
+  public static boolean mWithSensors = false;   // whether sensors are enabled
   // public static boolean mWithTdManager  = false;       // whether TdManager is enabled
   // public static boolean mSplayActive = false;       // whether splays are attached to active station (if defined)
   // public static boolean mWithRename  = false;       // whether survey rename is enabled
@@ -1118,6 +1137,7 @@ public class TDSetting
     mWithAzimuth   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_ANDROID_AZIMUTH
     mTimerWait     = tryInt(   prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_BEEP_VOLUME
+    mBlunderShot   = prefs.getBoolean( keyGShot[11], bool(defGShot[11]) ); // DISTOX_BLUNDER_SHOT
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -1656,6 +1676,8 @@ public class TDSetting
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
     } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
       ret = setBeepVolume( tryIntValue( hlp, k, v, def[10] ) );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BLUNDER_SHOT
+      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[11]) );
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
@@ -2895,7 +2917,7 @@ public class TDSetting
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
-      pw.printf(Locale.US, "L/R extend %c\n", tf(mLRExtend) );
+      pw.printf(Locale.US, "L/R extend %c BlunderShot %c\n", tf(mLRExtend), tf(mBlunderShot) );
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
 
       pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) ); //  tf(mExportTcsx) );
@@ -3380,6 +3402,9 @@ public class TDSetting
         if ( line.startsWith("L/R extend") ) {
           if ( vals.length > 2 ) {
             mLRExtend = getBoolean( vals, 2 ); setPreference( editor, "DISTOX_SPLAY_EXTEND", mLRExtend );
+          }
+          if ( vals.length > 4 ) {
+            mBlunderShot = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_BLUNDER_SHOT", mBlunderShot );
           }
           continue;
         }

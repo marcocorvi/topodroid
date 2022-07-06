@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 
 import android.content.Context;
@@ -81,7 +82,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   void searchStation( String name, boolean splays )
   {
     mSearch.reset( name );
-    if ( name == null || name.length() == 0 ) return; // null;
+    if ( TDString.isNullOrEmpty( name ) ) return; // null;
     int size = getCount();
     for ( int pos=START; pos < size; ++pos ) {
       DBlock b = (DBlock)( getItem( pos ) );
@@ -109,6 +110,14 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       for ( int pos=START; pos < size; ++pos ) {
         DBlock b = (DBlock)( getItem( pos ) );
         if ( b.getIntExtend( ) > 1 && b.isLeg() ) {
+          mSearch.add( pos );
+          b.setBackgroundColor( TDColor.SEARCH );
+        }
+      }
+    } else if ( flag == DBlock.FLAG_REVERSE_SPLAY ) {
+      for ( int pos=START; pos < size; ++pos ) {
+        DBlock b = (DBlock)( getItem( pos ) );
+        if ( b.isReverseSplay() ) {
           mSearch.add( pos );
           b.setBackgroundColor( TDColor.SEARCH );
         }

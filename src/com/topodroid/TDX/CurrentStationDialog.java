@@ -190,7 +190,7 @@ class CurrentStationDialog extends MyDialog
    */
   private void setNameAndComment( String name )
   {
-    if ( name == null || name.length() == 0 ) return; // safety check
+    if ( TDString.isNullOrEmpty( name ) ) return; // safety check
     mStation = name;
     StationInfo cs = TopoDroidApp.mData.getStation( TDInstance.sid, name, null ); // null: do not create
     if ( cs == null ) {

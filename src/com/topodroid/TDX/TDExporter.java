@@ -31,6 +31,7 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
@@ -1528,8 +1529,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null &&
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -1562,7 +1563,7 @@ public class TDExporter
             pw.format(Locale.US, "%.2f %.1f %.1f\n", item.mLength * ul, item.mBearing * ua, item.mClino * ua );
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeThLeg( pw, leg, ul, ua );
               if ( duplicate ) {
@@ -1884,8 +1885,8 @@ public class TDExporter
         for ( DBlock item : list ) {
           String from = item.mFrom;
           String to   = item.mTo;
-          if ( from == null || from.length() == 0 ) {
-            if ( to == null || to.length() == 0 ) { // no station: not exported
+          if ( TDString.isNullOrEmpty( from ) ) {
+            if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
               if ( ref_item != null &&
                  ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
                 leg.add( item.mLength, item.mBearing, item.mClino );
@@ -1913,7 +1914,7 @@ public class TDExporter
               }
             }
           } else { // with FROM station
-            if ( to == null || to.length() == 0 ) { // splay shot
+            if ( TDString.isNullOrEmpty( to ) ) { // splay shot
               if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
                 duplicate = writeSurvexLeg( pw, first, duplicate, leg, ref_item, ul, ua );
                 if ( TDSetting.mSurvexLRUD ) st_blk.add( ref_item );
@@ -2065,7 +2066,7 @@ public class TDExporter
         }
         // for ( int k=0; k<st_blk.size(); ++k ) { // remove duplicate FROM stations
         //   String from = st_blk.get(k).mFrom;
-        //   if ( from == null || from.length() == 0 ) {
+        //   if ( TDString.isNullOrEmpty( from ) ) {
         //     st_blk.remove(k);
         //     --k;
         //   } else {
@@ -2159,7 +2160,7 @@ public class TDExporter
         pw.format(Locale.US, "%.3f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c%.2f%c",
 	  b.mLength, sep, b.mBearing, sep, b.mClino, sep, b.mRoll, sep, b.mAcceleration, sep, b.mMagnetic, sep, b.mDip, sep );
         String address = b.mAddress;
-        if ( address == null || address.length() == 0 ) address = "-";
+        if ( TDString.isNullOrEmpty( address ) ) address = "-";
         pw.format(Locale.US, "%d%c%d%c%s%c", b.mTime, sep, b.mShotType, sep, address, sep );
         pw.format(Locale.US, "%d%c%d%c%d%c%d%c%s%s", b.mExtend, sep, b.mFlag, sep, b.mLeg, sep, b.mStatus, sep, b.mComment, newline );
       }
@@ -2213,8 +2214,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -2243,7 +2244,7 @@ public class TDExporter
             // }
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               writeCsvLeg( pw, leg, ul, ua, leg_extend, sep );
               writeCsvFlag( pw, duplicate, surface, ref_item.isCommented(), sep, newline );
@@ -2452,8 +2453,8 @@ public class TDExporter
     for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
-      if ( from == null || from.length() == 0 ) { // skip blank
-        // if ( to == null || to.length() == 0 ) continue;
+      if ( TDString.isNullOrEmpty( from ) ) { // skip blank
+        // if ( TDString.isNullOrEmpty( to ) ) continue;
         continue;
       } else { // skip leg
         if ( to != null && to.length() > 0 ) continue;
@@ -2502,8 +2503,8 @@ public class TDExporter
     for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
-      if ( from == null || from.length() == 0 ) { // skip blank
-        // if ( to == null || to.length() == 0 ) continue;
+      if ( TDString.isNullOrEmpty( from ) ) { // skip blank
+        // if ( TDString.isNullOrEmpty( to ) ) continue;
         continue;
       } else { // skip leg
         if ( to != null && to.length() > 0 ) continue;
@@ -2687,8 +2688,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -2708,7 +2709,7 @@ public class TDExporter
 	    }
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
               writeDatFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo );
@@ -2904,8 +2905,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -2924,7 +2925,7 @@ public class TDExporter
           //   pw.format("%6d%6d%4d%4d%4d%8d%8d%8d%8d%8d%8d%8d\r\n",
           //     s, -1, 1, 1, 1, start_sr[s], start_st[s], s, end_st[s], nr_st[s], 0, 0 );
           // }
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               int srt = getTrbSeries( ref_item.mTo );
               int stt = getTrbStation( ref_item.mTo );
@@ -3085,8 +3086,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -3101,7 +3102,7 @@ public class TDExporter
             }
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
               writeSurFromTo( pw, prefix, ref_item.mFrom, ref_item.mTo, duplicate );
@@ -3490,8 +3491,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from    = item.mFrom;
         String to      = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null &&
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -3507,7 +3508,7 @@ public class TDExporter
             }
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               if ( first ) writeGrtFix( pw, ref_from, fixed );
               writeGrtLeg( pw, leg, ref_from, ref_to, first, ref_item, list );
@@ -3647,8 +3648,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from    = item.mFrom;
         String to      = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null &&
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -3676,7 +3677,7 @@ public class TDExporter
             writeSrvComment( pw, item.mComment );
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // finish writing previous leg shot
               writeSrvLeg( pw, leg, ul, ua );
               writeSrvComment( pw, ref_item.mComment );
@@ -3889,8 +3890,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
               ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -3905,7 +3906,7 @@ public class TDExporter
             // TODO export TO splay
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               flag = printFlagToCav( pw, flag, ref_item.getFlag(), eol );
               printShotToCav( pw, leg, ref_item, eol, ents );
@@ -4082,8 +4083,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               leg.add( item.mLength, item.mBearing, item.mClino );
@@ -4102,7 +4103,7 @@ public class TDExporter
             }
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               lrud = computeLRUD( ref_item, list, true );
               // FIXME_P pw.format("%s\t%s\t", ref_item.mFrom, ref_item.mTo );
@@ -4418,7 +4419,7 @@ public class TDExporter
   {
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
-    if ( suffix == null || suffix.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( suffix ) ) {
       pw.format("%s %s ", item.mFrom, item.mTo );
     } else {
       pw.format("%s%s %s%s ", item.mFrom, suffix, item.mTo, suffix );
@@ -4439,7 +4440,7 @@ public class TDExporter
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("<Visee");
-    if ( suffix == null || suffix.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( suffix ) ) {
       pw.format(" Dep=\"%s\"", item.mFrom );
       pw.format(" Arr=\"%s\"", item.mTo );
     } else {
@@ -4471,7 +4472,7 @@ public class TDExporter
     if ( item == null ) return; // false;
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     if ( direct ) {
-      if ( suffix == null || suffix.length() == 0 ) {
+      if ( TDString.isNullOrEmpty( suffix ) ) {
         pw.format("%s * ", item.mFrom );
       } else {
         pw.format("%s%s * ", item.mFrom, suffix );
@@ -4480,7 +4481,7 @@ public class TDExporter
     } else {
       // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
       float b = TDMath.add180( item.mBearing );
-      if ( suffix == null || suffix.length() == 0 ) {
+      if ( TDString.isNullOrEmpty( suffix ) ) {
         pw.format("%s * ", item.mTo );
       } else {
         pw.format("%s%s * ", item.mTo, suffix );
@@ -4503,7 +4504,7 @@ public class TDExporter
     // TDLog.v( "shot " + item.mFrom + "-" + item.mTo + " " + l/n + " " + b + " " + c/n );
     pw.format("    <Visee ");
     if ( direct ) {
-      if ( suffix == null || suffix.length() == 0 ) {
+      if ( TDString.isNullOrEmpty( suffix ) ) {
         pw.format("Dep=\"%s\" ", item.mFrom );
       } else {
         pw.format("Dep=\"%s%s\" ", item.mFrom, suffix );
@@ -4512,7 +4513,7 @@ public class TDExporter
     } else {
       // float b = item.mBearing + 180; if ( b >= 360 ) b -= 360;
       float b = TDMath.add180( item.mBearing );
-      if ( suffix == null || suffix.length() == 0 ) {
+      if ( TDString.isNullOrEmpty( suffix ) ) {
         pw.format("Dep=\"%s\" ", item.mTo );
       } else {
         pw.format("Dep=\"%s%s\" ", item.mTo, suffix );
@@ -4575,8 +4576,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               // TDLog.v( "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
@@ -4599,7 +4600,7 @@ public class TDExporter
 	    printSplayToTro( psw, item, false, suffix );
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               if ( ! started ) {
                 started = printStartShotToTro( pw, ref_item, list, suffix );
@@ -4663,8 +4664,8 @@ public class TDExporter
     for ( DBlock item : list ) {
       String from = item.mFrom;
       String to   = item.mTo;
-      if ( from == null || from.length() == 0 ) {
-        if ( to == null || to.length() == 0 ) { // no station: not exported
+      if ( TDString.isNullOrEmpty( from ) ) {
+        if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
           if ( ref_item != null && ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
             // TDLog.v( "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
             leg.add( item.mLength, item.mBearing, item.mClino );
@@ -4681,7 +4682,7 @@ public class TDExporter
           ++ret;
         }
       } else { // with FROM station
-        if ( to == null || to.length() == 0 ) { // splay shot
+        if ( TDString.isNullOrEmpty( to ) ) { // splay shot
           if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
             if ( ! started ) {
               started = true;
@@ -4797,8 +4798,8 @@ public class TDExporter
       for ( DBlock item : list ) {
         String from = item.mFrom;
         String to   = item.mTo;
-        if ( from == null || from.length() == 0 ) {
-          if ( to == null || to.length() == 0 ) { // no station: not exported
+        if ( TDString.isNullOrEmpty( from ) ) {
+          if ( TDString.isNullOrEmpty( to ) ) { // no station: not exported
             if ( ref_item != null && 
                ( item.isSecLeg() || item.isRelativeDistance( ref_item ) ) ) {
               // TDLog.v( "data " + item.mLength + " " + item.mBearing + " " + item.mClino );
@@ -4819,7 +4820,7 @@ public class TDExporter
             printSplayToTrox( psw, item, false, suffix ); // , ref );
           }
         } else { // with FROM station
-          if ( to == null || to.length() == 0 ) { // splay shot
+          if ( TDString.isNullOrEmpty( to ) ) { // splay shot
             if ( leg.mCnt > 0 && ref_item != null ) { // write pervious leg shot
               if ( ! started ) started = printStartShotToTrox( pw, ref_item, list, suffix ); // , ref, suiv );
               pw.format( sw.toString() );

@@ -675,7 +675,7 @@ public class DeviceHelper extends DataSetObservable
       TDLog.Error( ERROR_NULL_DB + "get value" );
       return null;
     }
-    if ( key == null || key.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( key ) ) {
       TDLog.Error( "DeviceHelper::getValue null key");
       return null;
     }
@@ -704,11 +704,11 @@ public class DeviceHelper extends DataSetObservable
       TDLog.Error( ERROR_NULL_DB + "set value" );
       return;
     }
-    if ( key == null || key.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( key ) ) {
       TDLog.Error( "DeviceHelper::setValue null key");
       return;
     }
-    if ( value == null || value.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( value ) ) {
       TDLog.Error( "DeviceHelper::setValue null value");
       return;
     }

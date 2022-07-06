@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 
 import java.util.List;
 import java.util.ArrayList;
@@ -133,7 +134,7 @@ public class Cave3DSurvey
    */
   public Cave3DStation getStation( String name ) 
   {
-    if ( name == null || name.length() == 0 ) return null;
+    if ( TDString.isNullOrEmpty( name ) ) return null;
     if ( name.equals("-") || name.equals(".") ) return null;
     for ( Cave3DStation st : mStations ) if ( name.equals( st.getFullName() ) ) return st;
     return null;
@@ -210,7 +211,7 @@ public class Cave3DSurvey
    */
   private Cave3DStation getStation( String name, int idx ) 
   {
-    if ( name == null || name.length() == 0 ) return null;
+    if ( TDString.isNullOrEmpty( name ) ) return null;
     if ( name.equals("-") || name.equals(".") ) return null;
     for ( ; idx < mStations.size(); ++idx ) {
       Cave3DStation st = mStations.get(idx);

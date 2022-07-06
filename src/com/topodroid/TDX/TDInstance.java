@@ -15,6 +15,7 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.dev.Device;
 import com.topodroid.common.PlotType;
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -250,13 +251,13 @@ public class TDInstance
     secondLastShotId = b.getLong( "TOPODROID_SECOND_LAST_SHOT_ID" );
     xsections = b.getBoolean( "TOPODROID_XSECTIONS" );
     String addr = b.getString( "TOPODROID_DEVICE" );
-    if ( addr == null || addr.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( addr ) ) {
       deviceA = null;
     // } else {
       // deviceA = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC
     }
     addr = b.getString( "TOPODROID_SECOND_DEVICE" );
-    if ( addr == null || addr.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( addr ) ) {
       deviceB = null;
     // } else {
       // deviceB = TopoDroidApp.getDevice( addr ); // FIXME_DEVICE_STATIC

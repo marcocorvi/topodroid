@@ -330,12 +330,13 @@
     <string name="hidden_show">Показать нитку хода после этого пикета</string>
     <!-- UNUSED string name="splays_toggle">Показать/скрыть сплеи</string -->
     <string name="splays_on_off">Вкл/Выкл бок. замер</string>
-    <string name="splays">бок. замеры</string>
+    <string name="including_splays">бок. замеры</string>
     <string name="with_splays">со сплеями</string>
     <string name="cell_size">Размер сетки [m]</string>
 
     <string name="legs">Замеры м-у пикетами</string>
     <string name="stations">Пикет</string>
+    <!-- TODO string name="splays">Splays</string -->
     <!-- UNUSED string name="fmt_listen">СЛУШАТЬ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Широта %1$s</string>
@@ -362,6 +363,7 @@
     <string name="no_data_reduction">Нет сокращения данных</string>
     <string name="no_db">Отсутствует база данных</string>
     <string name="no_device_address">Прибор не выбран</string>
+    <!-- TODO string name="no_device_window">Device window not available while downloading</string -->
     <!-- UNUSED string name="no_device_found">Прибор не обнаружен</string -->
     <string name="no_feature_audio">Аудио не поддерживается</string>
     <string name="no_feature_pdf">PDF не поддерживается</string>
@@ -762,6 +764,7 @@
     <string name="button_open"      >Откр      </string>
     <string name="button_read"      >Считать   </string>
     <string name="button_recover"   >Восстановить</string>
+    <!-- TODO string name="button_reverse"   >Reverse</string -->
     <!-- UNUSED string name="button_redo"      >Повторить      </string -->
     <!-- UNUSED string name="button_regroup"   >Перегруппировать   </string -->
     <string name="button_dump"      >Дамп      </string>
@@ -1289,6 +1292,8 @@
   <string name="pref_with_sensors_summary">Включить данные "датчиков"</string>
   <string name="pref_with_android_azimuth_title">Компас телефона</string>
   <string name="pref_with_android_azimuth_summary">Использовать датчики телефона компас/клинометр</string>
+  <!-- TODO string name="pref_blunder_shot_title">Blunder shots</string -->
+  <!-- TODO string name="pref_blunder_shot_summary">Skip blunder leg-shots</string -->
   <string name="pref_with_levels_title">Слои</string>
   <string name="pref_with_levels_summary">Включть слои абриса</string>
   <string name="pref_palettes_title">Доп. Знаки</string>

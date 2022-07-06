@@ -63,7 +63,7 @@ public class MyButton extends Button
    * @param size    new global size
    * @note called with context = mApp
    */
-  public static void resetCache( int size )
+  public static void resetButtonCache( int size )
   {
     if ( size > 0 ) mGlobalSize = size;
     if ( USE_CACHE ) mBitmapCache.clear();

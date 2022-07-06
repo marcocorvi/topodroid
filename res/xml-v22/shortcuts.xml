@@ -28,4 +28,18 @@
      </intent>
      <categories android:name="android.shortcut.conversation" />
   </shortcut>
+  <shortcut
+     android:shortcutId="Cave3D"
+     android:enabled="true"
+     android:icon="@drawable/cave3d"
+     android:shortcutShortLabel="@string/cave3d_label"
+     >
+     <intent 
+       android:action="android.intent.action.VIEW"
+       android:targetPackage="com.topodroid.TDX"
+       android:targetClass="com.topodroid.TDX.TopoGL">
+       <extra android:name="action" android:value="cave3d" />
+     </intent>
+     <categories android:name="android.shortcut.conversation" />
+  </shortcut>
 </shortcuts>

@@ -708,7 +708,7 @@ public class TopoDroidApp extends Application
     byte[] ret = readMemory( address, 0x8008 );
     if ( ret == null ) {
       TDLog.Error("Failed read 8008");
-      // TDLog.v( "read 8008 failed");
+      // info.setError( DeviceX310Info.ERR_8008 );
       return null;
     }
     // TDLog.Log( TDLog.LOG_COMM, "Addr 8008 (code): " + ret[0] + " " + ret[1] );
@@ -719,6 +719,7 @@ public class TopoDroidApp extends Application
     ret = readMemory( address, DeviceX310Details.FIRMWARE_ADDRESS );
     if ( ret == null ) {
       TDLog.Error("Failed read e000" );
+      // info.setError( DeviceX310Info.ERR_E000 );
       return null;
     }
     // TDLog.Log( TDLog.LOG_COMM, "Addr e000 (fw): " + ret[0] + " " + ret[1] );
@@ -730,6 +731,7 @@ public class TopoDroidApp extends Application
     ret = readMemory( address, DeviceX310Details.HARDWARE_ADDRESS );
     if ( ret == null ) {
       TDLog.Error("Failed read e004" );
+      // info.setError( DeviceX310Info.ERR_E004 );
       return null;
     }
     // TDLog.Log( TDLog.LOG_COMM, "Addr e004 (hw): " + ret[0] + " " + ret[1] );
@@ -1140,7 +1142,7 @@ public class TopoDroidApp extends Application
    */
   public static void setCWD( String cwd /* , String cbd */ )
   {
-    if ( cwd == null || cwd.length() == 0 ) cwd = TDInstance.cwd;
+    if ( TDString.isNullOrEmpty( cwd ) ) cwd = TDInstance.cwd;
     // TDLog.v( "App set CWD " + cwd + " CBD " + cbd );
 
     if ( cwd.equals( TDInstance.cwd ) ) return;
@@ -1296,7 +1298,7 @@ public class TopoDroidApp extends Application
    */
   boolean renameCurrentSurvey( long sid, String name )
   {
-    if ( name == null || name.length() == 0 ) return false;
+    if ( TDString.isNullOrEmpty( name ) ) return false;
     if ( name.equals( TDInstance.survey ) ) return true;
     if ( mData == null ) return false;
     if ( mData.renameSurvey( sid, name ) ) {  

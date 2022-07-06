@@ -43,6 +43,7 @@ public class TDTag
   public static final String TOPODROID_SURVEY_ID   = "survey_id";  // DrawingWindow
 
   public static final String TOPODROID_DEVICE_ACTION  = "device_action";
+  public static final String TOPODROID_DEVICE_MODE    = "device_mode";
   // public static final String TOPODROID_DEVICE_REF     = "device_referrer";
   // static final String TOPODROID_DEVICE_ADDR = "device_addr";
   // static final String TOPODROID_DEVICE_CNCT = "device_cnct";

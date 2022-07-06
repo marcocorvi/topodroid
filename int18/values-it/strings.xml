@@ -327,12 +327,13 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="hidden_show">Mostra battute oltre il caposaldo</string>
     <!-- UNUSED string name="splays_toggle">Mostra o Nascondi gli splay</string -->
     <string name="splays_on_off">Splays</string>
-    <string name="splays">inclusi splay</string>
+    <string name="including_splays">inclusi splay</string>
     <string name="with_splays">con splays</string>
     <string name="cell_size">Lato cella [m]</string>
 
     <string name="legs">Battute</string>
     <string name="stations">Caposaldo</string>
+    <string name="splays">Splay</string>
     <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -359,6 +360,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="no_data_reduction">Nessuna riduzione dei dati</string>
     <string name="no_db">Nessun database</string>
     <string name="no_device_address">Dispositivo non selezionato</string>
+    <string name="no_device_window">Finestra dispositivi disabilitata durante scaricamento</string>
     <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
     <string name="no_feature_audio">Audio non supportato</string>
     <string name="no_feature_pdf">PDF non supportato</string>
@@ -761,6 +763,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_open"      >Apri      </string>
     <string name="button_read"      >Leggi     </string>
     <string name="button_recover"   >Recupera</string>
+    <string name="button_reverse"   >Inversi</string>
     <!-- UNUSED string name="button_redo"      >Ripeti azione</string -->
     <!-- UNUSED string name="button_regroup"   >Raggruppare   </string -->
     <string name="button_dump"      >Scarica   </string>
@@ -1287,6 +1290,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_with_sensors_summary">Abilita dati "sensori"</string>
   <string name="pref_with_android_azimuth_title">Bussola Android</string>
   <string name="pref_with_android_azimuth_summary">Abilita bussola/clino Android</string>
+  <string name="pref_blunder_shot_title">Falsi tiri</string>
+  <string name="pref_blunder_shot_summary">Salta tiri di battuta falsi</string>
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>

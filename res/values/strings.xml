@@ -336,12 +336,13 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="hidden_show">Show shots beyond station</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">Splays</string>
-    <string name="splays">including splays</string>
+    <string name="including_splays">including splays</string>
     <string name="with_splays">with splays</string>
     <string name="cell_size">Cell size [m]</string>
 
     <string name="legs">Legs</string>
     <string name="stations">Station</string>
+    <string name="splays">Splays</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitude %1$s</string>
@@ -369,6 +370,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_data_reduction">No data reduction</string>
     <string name="no_db">No database</string>
     <string name="no_device_address">Device not selected</string>
+    <string name="no_device_window">Device window not available while downloading</string>
     <!-- UNUSED string name="no_device_found">Found no device</string -->
     <string name="no_feature_audio">Audio not supported</string>
     <string name="no_feature_pdf">PDF not supported</string>
@@ -774,6 +776,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_open"      >Open</string>
     <string name="button_read"      >Read</string>
     <string name="button_recover"   >Recover</string>
+    <string name="button_reverse"   >Reverse</string>
     <!-- UNUSED string name="button_redo"      >Redo</string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Dump</string>
@@ -1300,6 +1303,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
   <string name="pref_with_android_azimuth_title">Android compass</string>
   <string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string>
+  <string name="pref_blunder_shot_title">Blunder shots</string>
+  <string name="pref_blunder_shot_summary">Skip blunder leg-shots</string>
   <string name="pref_with_levels_title">Layers</string>
   <string name="pref_with_levels_summary">Canvas layers</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

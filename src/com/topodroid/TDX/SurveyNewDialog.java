@@ -195,7 +195,7 @@ class SurveyNewDialog extends MyDialog
 
     String date = mEditDate.getText().toString();
     String team = mEditTeam.getText().toString();
-    if ( team == null || team.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( team ) ) {
       mEditTeam.setError( mContext.getResources().getString( R.string.error_team_required ) );
       return false;
     } 
@@ -215,7 +215,7 @@ class SurveyNewDialog extends MyDialog
         if ( station.length() > 0 ) init_station = station;
       }
     } // if mEditStation text is empty use setting mInitStation
-    if ( init_station == null || init_station.length() == 0 ) init_station = TDString.ZERO;
+    if ( TDString.isNullOrEmpty( init_station ) ) init_station = TDString.ZERO;
 
     // date, team, comment always non-null
     /* if ( date != null ) */ { date = date.trim(); } // else { date = TDString.EMPTY; }

@@ -32,6 +32,14 @@ public class TDString
 
   public static final String OPTION_SCRAP = "-scrap";
 
+  /** @return true is the given string is null or empty
+   * @param str    string
+   */
+  public static boolean isNullOrEmpty( String str )
+  {
+    return str == null || str.length() == 0;
+  }
+
   /** @return string with spaces removes
    * @param str input string
    */

@@ -903,7 +903,8 @@ public class MainWindow extends Activity
   void resetButtonBar()
   {
     int size = TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
-    MyButton.resetCache( size );
+    MyButton.resetButtonCache( size );
+
     // TDToast.make( "SIZE " + size );
     Resources res = getResources();
 

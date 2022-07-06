@@ -80,7 +80,9 @@ public class DBlock
   static final long FLAG_NONE       = 24; // 16 | 8
   // static final long FLAG_BACKSHOT   = 32;
 
-  static final long FLAG_NO_EXTEND  = 256; // used only in search dialog
+  static final long FLAG_NO_EXTEND     = 257; // used only in search dialog 256+1
+  static final long FLAG_REVERSE_SPLAY = 258; // used only in search dialog 256+2
+
 
   /** test if a flag is set
    * @param flag     flag to test
@@ -254,6 +256,10 @@ public class DBlock
   /** return true if the block type is (any) SPLAY
    */
   public boolean isSplay()      { return mBlockType >= BLOCK_SPLAY; }
+
+  /** return true if the block type is (any) SPLAY and is reverse
+   */
+  public boolean isReverseSplay() { return mBlockType >= BLOCK_SPLAY && TDString.isNullOrEmpty( mFrom ); }
 
   /** return true if the block type is a special SPLAY
    */
@@ -641,13 +647,13 @@ public class DBlock
   // }
 
   // {
-  //   if ( mFrom == null || mFrom.length() == 0 ) {
-  //     if ( mTo == null || mTo.length() == 0 ) {
+  //   if ( TDString.isNullOrEmpty( mFrom ) ) {
+  //     if ( TDString.isNullOrEmpty( mTo ) ) {
   //       return BLOCK_BLANK;
   //     }
   //     return BLOCK_SPLAY;
   //   }
-  //   if ( mTo == null || mTo.length() == 0 ) {
+  //   if ( TDString.isNullOrEmpty( mTo ) ) {
   //     return BLOCK_SPLAY;
   //   }
   //   return BLOCK_MAIN_LEG;
@@ -903,7 +909,7 @@ public class DBlock
    */
   private void formatComment( PrintWriter pw )
   {
-    if ( mComment == null || mComment.length() == 0 ) return;
+    if ( TDString.isNullOrEmpty( mComment ) ) return;
     pw.format(" %s", mComment);
   }
 

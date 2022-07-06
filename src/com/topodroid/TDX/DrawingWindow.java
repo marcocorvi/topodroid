@@ -760,7 +760,7 @@ public class DrawingWindow extends ItemDrawer
    */
   void renamePlot( String name ) 
   {
-    if ( name == null || name.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( name ) ) {
       return;
     }
     if ( PlotType.isAnySection( mType ) ) {

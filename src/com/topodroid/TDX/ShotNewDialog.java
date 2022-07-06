@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyCheckBox;
 import com.topodroid.ui.MyDialog;
@@ -407,13 +408,12 @@ class ShotNewDialog extends MyDialog
         if ( shot_to.equals(".") || shot_to.equals("-") ) shot_to = "";
       }
 
-      // if ( ( shot_from == null || shot_from.length() == 0 ) &&
-      //        ( shot_to == null || shot_to.length() == 0 ) ) {
+      // if ( TDString.isNullOrEmpty( shot_from ) && TDString.isNullOrEmpty( shot_to ) ) {
       //   shot_from = mETfrom.getHint().toString();
       //   shot_to = mETto.getHint().toString();
       // }
 
-      if ( shot_from == null || shot_from.length() == 0 ) {
+      if ( TDString.isNullOrEmpty( shot_from ) ) {
         mETfrom.setError( mContext.getResources().getString( R.string.error_from_required ) );
         return;
       }

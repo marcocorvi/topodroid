@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.prefs.TDSetting;
+import com.topodroid.utils.TDString;
 
 import java.util.ArrayList;
 
@@ -56,7 +57,7 @@ class DrawingStationSplay
     DBlock blk = p.mBlock;
     if ( blk == null ) return false;
     String station = blk.mFrom;
-    if ( station == null || station.length() == 0 ) return false;
+    if ( TDString.isNullOrEmpty( station ) ) return false;
     return splays.contains( station );
   }
 

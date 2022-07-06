@@ -55,10 +55,11 @@ public class InfoReadX310Task extends AsyncTask<Void, Integer, Boolean>
   @Override
   protected void onPostExecute( Boolean result )
   {
-    if ( result && mDialog.get() != null ) {
-      mDialog.get().updateInfo( mInfo );
-    } else {
-      TDToast.makeBad( R.string.read_failed );
+    if ( mDialog.get() != null ) {
+      mDialog.get().updateInfo( result ? mInfo : null );
+      // mDialog.get().updateInfo( mInfo ); // mInfo is null is result is false
+    // } else {
+    //   TDToast.makeBad( R.string.read_failed ); // FIXME DialogFailed
     }
   }
 

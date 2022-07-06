@@ -47,7 +47,7 @@ public class TDLocale
   public static void resetTheLocale( )
   {
     // if ( ! TDSetting.isFlagLocale() ) return;
-    TDLog.v( "LOCALE RESET <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
+    // TDLog.v( "LOCALE RESET <" + ((mLocaleStr == null)? "null" : mLocaleStr) + "> " + ((mLocale == null)? "null" : mLocale.toString() ) );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();
@@ -76,7 +76,7 @@ public class TDLocale
   {
     mLocaleStr = locale;
     mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr ); // from API-21 Locale.forLanguageTag( locale )
-    TDLog.v( "LOCALE SET <" + mLocaleStr + "> " + mLocale.toString() );
+    // TDLog.v( "LOCALE SET <" + mLocaleStr + "> " + mLocale.toString() );
 
     // mLocale = (mLocaleStr.equals(TDString.EMPTY))? Locale.getDefault() : new Locale( mLocaleStr );
     Resources res = TDInstance.getResources();

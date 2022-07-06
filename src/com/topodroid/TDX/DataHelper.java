@@ -1339,8 +1339,8 @@ public class DataHelper extends DataSetObservable
 
   // public boolean makesCycle( long id, long sid, String f, String t )
   // {
-  //   if ( t == null || t.length() == 0 ) return false;
-  //   if ( f == null || f.length() == 0 ) return false;
+  //   if ( TDString.isNullOrEmpty( t ) ) return false;
+  //   if ( TDString.isNullOrEmpty( f ) ) return false;
   //   int cnt = 0;
   //   if ( hasShotAtStation( id, sid, f ) ) ++cnt;
   //   if ( hasShotAtStation( id, sid, t ) ) ++cnt;
@@ -3324,7 +3324,7 @@ public class DataHelper extends DataSetObservable
   List< DBlock > selectShotsAt( long sid, String station, boolean leg )
   {
     List< DBlock > list = new ArrayList<>();
-    if ( station == null || station.length() == 0 ) return list;
+    if ( TDString.isNullOrEmpty( station ) ) return list;
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                     "surveyId=? and status=? and (fStation=? or tStation=?)",
@@ -3368,7 +3368,7 @@ public class DataHelper extends DataSetObservable
   List< DBlock > selectSplaysAt( long sid, String station, boolean leg )
   {
     List< DBlock > list = new ArrayList<>();
-    if ( station == null || station.length() == 0 ) return list;
+    if ( TDString.isNullOrEmpty( station ) ) return list;
     if ( myDB == null ) return list;
     Cursor cursor = myDB.query(SHOT_TABLE, mShotFields,
                     "surveyId=? and status=? and (fStation=? or tStation=?)",
@@ -3806,7 +3806,7 @@ public class DataHelper extends DataSetObservable
       // TDLog.Error( "Data Helper::getValue null DB");
       return null;
     }
-    if ( key == null || key.length() == 0 ) { // this is not an error
+    if ( TDString.isNullOrEmpty( key ) ) { // this is not an error
       return null;
     }
     String value = null;
@@ -3834,11 +3834,11 @@ public class DataHelper extends DataSetObservable
       // TDLog.Error( "Data Helper::setValue null DB");
       return;
     }
-    if ( key == null || key.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( key ) ) {
       TDLog.Error( "DB config: null key");
       return;
     }
-    if ( value == null || value.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( value ) ) {
       TDLog.Error( "DB config: null value");
       return;
     }
@@ -3885,7 +3885,7 @@ public class DataHelper extends DataSetObservable
    */
   void setSymbolEnabled( String name, boolean enabled ) 
   { 
-    // if ( name == null || name.length() == 0 ) return; // already handled by setValue
+    // if ( TDString.isNullOrEmpty( name ) ) return; // already handled by setValue
     setValue( name, enabled? TDString.ONE : TDString.ZERO );
   }
 
@@ -3895,7 +3895,7 @@ public class DataHelper extends DataSetObservable
    */
   boolean getSymbolEnabled( String name )
   { 
-    // if ( name == null || name.length() == 0 ) return false; // already handled by getValue
+    // if ( TDString.isNullOrEmpty( name ) ) return false; // already handled by getValue
     String enabled = getValue( name );
     if ( enabled != null ) {
       return enabled.equals(TDString.ONE);
@@ -3966,7 +3966,7 @@ public class DataHelper extends DataSetObservable
   private long setName( String table, String name, int datamode )
   {
     long id = -1;
-    if ( name == null || name.length() == 0 ) return 0; 
+    if ( TDString.isNullOrEmpty( name ) ) return 0; 
     if ( myDB == null ) return 0;
     Cursor cursor = myDB.query( table, new String[] { "id" },
                                 "name = ?", new String[] { name },
@@ -4845,7 +4845,7 @@ public class DataHelper extends DataSetObservable
    */
   private boolean hasName( String name, String table )
   {
-    if ( name == null || name.length() == 0 ) return false;
+    if ( TDString.isNullOrEmpty( name ) ) return false;
     if ( myDB == null ) {
       TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
@@ -4870,7 +4870,7 @@ public class DataHelper extends DataSetObservable
    */
   private boolean hasName( long sid, String name, String table )
   {
-    if ( name == null || name.length() == 0 ) return false;
+    if ( TDString.isNullOrEmpty( name ) ) return false;
     if ( myDB == null ) {
       TDLog.Error( DeviceHelper.ERROR_NULL_DB + "DB data has name");
       return false;
@@ -5796,7 +5796,7 @@ public class DataHelper extends DataSetObservable
    */
   StationInfo getStation( long sid, String name, String presentation )
   {
-    if ( name == null || name.length() == 0 ) return null;
+    if ( TDString.isNullOrEmpty( name ) ) return null;
     StationInfo cs = null;
     if ( myDB != null ) {
       Cursor cursor = myDB.query( STATION_TABLE, mStationFields,

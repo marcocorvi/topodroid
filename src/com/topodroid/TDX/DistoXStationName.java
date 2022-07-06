@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -30,7 +31,7 @@ public class DistoXStationName
    */
   public static void setInitialStation( String init )
   {
-    if ( init == null || init.length() == 0 ) init = TDSetting.mInitStation;
+    if ( TDString.isNullOrEmpty( init ) ) init = TDSetting.mInitStation;
     mInitialStation = init;
     mSecondStation  = incrementName( init );
   }

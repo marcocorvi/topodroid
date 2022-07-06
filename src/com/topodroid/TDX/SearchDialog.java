@@ -48,6 +48,7 @@ class SearchDialog extends MyDialog
   private Button mBtnSurface;
   private Button mBtnSearch;
   private Button mBtnExtend;
+  private Button mBtnReverse; // reversed splays
   // private Button mBtnCancel;
 
   private CheckBox mBtnSplays;
@@ -76,9 +77,11 @@ class SearchDialog extends MyDialog
     // mBtnSplays.setVisibility( View.GONE ); 
 
     LinearLayout ll3 = (LinearLayout) findViewById( R.id.layout3 );
+    LinearLayout ll4 = (LinearLayout) findViewById( R.id.layout4 );
     mBtnDuplicate = (Button) findViewById(R.id.btn_duplicate );
     mBtnSurface   = (Button) findViewById(R.id.btn_surface );
     mBtnExtend    = (Button) findViewById(R.id.btn_extend );
+    mBtnReverse   = (Button) findViewById(R.id.btn_reverse );
 
     mBtnSearch = (Button) findViewById(R.id.btn_search);
     mBtnSearch.setOnClickListener( this );    // SEARCH
@@ -92,6 +95,14 @@ class SearchDialog extends MyDialog
       // mBtnSurface.setVisibility( View.GONE );
       // mBtnExtend.setVisibility( View.GONE );
     }
+
+    if ( TDLevel.overExpert ) {
+      mBtnReverse.setOnClickListener( this );    // REVERSED SPLAYS
+    } else {
+      ll4.setVisibility( View.GONE );
+      // mBtnReverse.setVisibility( View.GONE );
+    }
+
     // mBtnCancel = (Button) findViewById(R.id.btn_cancel);
     // mBtnCancel.setOnClickListener( this ); // CANCEL
     ( (Button) findViewById(R.id.btn_cancel) ).setOnClickListener( this ); // CANCEL
@@ -141,6 +152,8 @@ class SearchDialog extends MyDialog
       mParent.searchShot( DBlock.FLAG_SURFACE );
     } else if ( b == mBtnExtend ) { // SEARCH unset extend
       mParent.searchShot( DBlock.FLAG_NO_EXTEND );
+    } else if ( b == mBtnReverse ) { // SEARCH reverse splays
+      mParent.searchShot( DBlock.FLAG_REVERSE_SPLAY );
 
     // } else if ( b == mBtnCancel ) {
     //   /* nothing : dismiss */

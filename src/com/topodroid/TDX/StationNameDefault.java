@@ -30,10 +30,13 @@ class StationNameDefault extends StationName
 
   // ------------------------------------------------------------------------------------------------
 
-  // this is called to renumber a list of blocks - therefore the extend need not be updated
-  // @param blk0         reference dblock
-  // @param list         list of dblock to assign
-  // @param sts          station names already in use
+  /** assign station names to a number of shots
+   * @note this is called to renumber a list of blocks - therefore the extend need not be updated
+   * @param blk0   reference dblock
+   * @param list   list of dblock to assign
+   * @param sts    station names already in use
+   * @return ???
+   */
   @Override
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
@@ -183,6 +186,7 @@ class StationNameDefault extends StationName
     // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = null;
+    DBlock prev_prev = null; // prev of prev (for BLUNDER SHOT)
     String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                                    : DistoXStationName.mSecondStation;
     String to   = ( forward_shots )? DistoXStationName.mSecondStation   // next TO station
@@ -207,18 +211,29 @@ class StationNameDefault extends StationName
         if ( blk.isScan() ) {
           nrLegShots = 0;
           setSplayName( blk, station );
+          prev_prev = null;
           prev = null;
           continue;
         }
         // TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
         if ( blk.mTo.length() == 0 ) {
+          prev_prev = prev;
           if ( prev == null ) {
             prev = blk;
             // blk.mFrom = station;
             setSplayName( blk, station );
             // TDLog.Log( TDLog.LOG_DATA, "set prev [1] " + blk.mId + " F<" + blk.mFrom + ">" );
           } else {
-            if ( prev.isRelativeDistance( blk ) ) {
+            boolean is_relative_distance = false;
+            // BLUNDER SHOT SKIP
+            if ( TDSetting.mBlunderShot && prev_prev != null && prev_prev.isRelativeDistance( blk ) ) {
+              prev = prev_prev;
+              prev_prev = null;
+              is_relative_distance = true;
+            } else if ( prev.isRelativeDistance( blk ) ) {
+              is_relative_distance = true;
+            }
+            if ( is_relative_distance ) {
               sec_legs.add( blk );
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
@@ -263,12 +278,14 @@ class StationNameDefault extends StationName
             } else { // distance from prev > "closeness" setting
               nrLegShots = 0;
               setSplayName( blk, station );
+              prev_prev = prev;
               prev = blk;
               // TDLog.Log( TDLog.LOG_DATA, "set prev [2] " + blk.mId + " F<" + blk.mFrom + ">" );
             }
           }
         } else { // blk.mTo.length() > 0 : blk already SPLAY
           nrLegShots = 0;
+          prev_prev = prev;
           prev = blk;
         }
       } else { // blk.mFrom.length > 0
@@ -308,6 +325,7 @@ class StationNameDefault extends StationName
         } else { // FROM non-empty, TO empty --> SPLAY
           nrLegShots = 0;
         }
+        prev_prev = prev;
         prev = blk;
       }
     }

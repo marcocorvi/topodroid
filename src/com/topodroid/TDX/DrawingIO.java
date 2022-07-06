@@ -2148,7 +2148,7 @@ public class DrawingIO
   //           // special toCsurvey for cross-section points
   //           float x = DrawingUtil.sceneToWorldX( pp.cx, pp.cy ); // convert to world coords.
   //           float y = DrawingUtil.sceneToWorldY( pp.cx, pp.cy );
-  //           String text = ( section.nick == null || section.nick.length() == 0 )? section.name : section.nick;
+  //           String text = TDString.isNullOrEmpty( section.nick )? section.name : section.nick;
   //           pw.format("  <item layer=\"6\" cave=\"%s\" branch=\"%s\" type=\"9\" category=\"96\" direction=\"0\" ", cave, branch );
   //           pw.format("text=\"%s\" textdistance=\"2\" crosswidth=\"4\" crossheight=\"4\" name=\"%s\" ", text, section.name );
   //           // pw.format("crosssection=\"%d\" ", section.csxIndex );
@@ -2267,7 +2267,7 @@ public class DrawingIO
     int azimuth = (int)(plot.azimuth);
 
     if ( PlotType.isAnySection( plot.type ) ) {
-      if ( plot.start == null || plot.start.length() == 0 ) return false;
+      if ( TDString.isNullOrEmpty( plot.start ) ) return false;
       NumStation start = num.getStation( plot.start );
       if ( start == null ) return false;
 

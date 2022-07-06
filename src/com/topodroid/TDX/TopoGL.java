@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 
 // import com.topodroid.TDX.TDandroid;
@@ -326,9 +327,6 @@ public class TopoGL extends Activity
 
     GlModel.setWidthAndHeight( TopoDroidApp.mDisplayWidth, TopoDroidApp.mDisplayHeight );
     
-    mListView = (MyHorizontalListView) findViewById(R.id.listview);
-    int size = resetButtonBar();
-
     mLayoutStation = (LinearLayout) findViewById( R.id.layout_station );
     mCurrentStation = (Button) findViewById( R.id.current_station );
     mCurrentStation.setOnClickListener( this );
@@ -343,12 +341,14 @@ public class TopoGL extends Activity
     
     // setWallButton( mRenderer.wall_mode );
 
-
-    mMenuImage = (Button) findViewById( R.id.handle );
-    mMenuImage.setOnClickListener( this );
-    TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
-    mMenu = (ListView) findViewById( R.id.menu );
-    mMenu.setOnItemClickListener( this );
+    // FIXME moved to onStart
+    // mListView = (MyHorizontalListView) findViewById(R.id.listview);
+    // int size = resetButtonBar();
+    // mMenuImage = (Button) findViewById( R.id.handle );
+    // mMenuImage.setOnClickListener( this );
+    // TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
+    // mMenu = (ListView) findViewById( R.id.menu );
+    // mMenu.setOnItemClickListener( this );
 
     // glSurfaceView = (GLSurfaceView) findViewById( R.id.view );
 
@@ -372,9 +372,9 @@ public class TopoGL extends Activity
         // Uri uri = Uri.parse( uri_str );
         // TDLog.v("URI + uri.toString() );
 
-        mSurveyBase = extras.getString( "SURVEY_BASE" ); // TopoDroid CWD fullpath
+        mSurveyBase   = extras.getString( "SURVEY_BASE" ); // TopoDroid CWD fullpath
         mThconfigName = extras.getString( "INPUT_THCONFIG" );  // thconfig
-        mSurveyName = extras.getString( "INPUT_SURVEY" );
+        mSurveyName   = extras.getString( "INPUT_SURVEY" );
         // TDLog.v("extras: base " + mSurveyBase + " survey " + mSurveyName );
       // }
     }
@@ -407,7 +407,39 @@ public class TopoGL extends Activity
   {
     super.onStart();
     // TDLog.v("TopoGL on start");
+    if ( ! TDandroid.canManageExternalStorage( this ) ) {
+      TDandroid.requestExternalStorage( this, this );
+    }
+    if ( TDandroid.canRun( this, this ) ) {
+      TopoDroidApp app = (TopoDroidApp) getApplication();
+      app.initEnvironmentFirst( );
+    } else {
+    // copied from MainWindow
+    //   ++ mRequestPermissionTime;
+    //   TDLog.v("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
+    //   if ( TDandroid.createPermissions( this, this, mRequestPermissionTime ) == 0 ) {
+    //     app.initEnvironmentFirst( );
+    //     // TDLog.v("MAIN show init dialogs [2]");
+    //     showInitDialogs( false /* ! TopoDroidApp.hasTopoDroidDatabase() */ );
+    //     // resetButtonBar();
+    //   // } else {  // the followings are delayed after the permissions have been granted
+    //   //   app.initEnvironmentFirst( );
+    //   //   if ( perms == 0 ) showInitDialogs( ! TopoDroidApp.hasTopoDroidDatabase() );
+    //   }
+    }
+    // if ( TDSetting.isFlagButton() ) resetButtonBar(); // 6.0.33
+
     TDLocale.resetTheLocale();
+
+    mListView = (MyHorizontalListView) findViewById(R.id.listview);
+    int size = resetButtonBar();
+
+    mMenuImage = (Button) findViewById( R.id.handle );
+    mMenuImage.setOnClickListener( this );
+    TDandroid.setButtonBackground( mMenuImage, MyButton.getButtonBackground( this, size, R.drawable.iz_menu ) );
+    mMenu = (ListView) findViewById( R.id.menu );
+    mMenu.setOnItemClickListener( this );
+
     setMenuAdapter( getResources() );
     closeMenu();
     makeSurface();
@@ -842,6 +874,7 @@ public class TopoGL extends Activity
     int size = 42;
     if ( mListView != null ) {
       size = TopoDroidApp.setListViewHeight( this, mListView );
+      MyButton.resetButtonCache( size );
 
       // if ( BLUETOOTH )  ++mNrButton1; 
       mButton1 = new Button[ mNrButton1 + 1 ]; // one extra space for empty button
@@ -2494,7 +2527,7 @@ public class TopoGL extends Activity
     mBtRemoteName   = null;
     mBtRemoteDevice = null;
     if ( ! BLUETOOTH ) return false;
-    if ( name == null || name.length() == 0 ) return false;
+    if ( TDString.isNullOrEmpty( name ) ) return false;
     // WARNING BT name must have a prefix "++"
     // if ( ! ( name.startsWith("++") ) ) return false;
     // name = name.substring( 2 );

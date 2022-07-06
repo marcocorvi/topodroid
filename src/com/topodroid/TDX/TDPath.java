@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
+import com.topodroid.utils.TDString;
 
 // import android.provider.DocumentsContract;
 
@@ -228,7 +229,7 @@ public class TDPath
    */
   static void setSurveyPaths( String survey )
   {
-    if ( survey == null || survey.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( survey ) ) {
       // TDLog.v( "PATH set survey path NULL");
       clearAppPaths();
     } else {

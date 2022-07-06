@@ -102,18 +102,21 @@ public class DeviceA3InfoDialog extends MyDialog
   }
 
   /** update the display of the DistoX2 info
-   * @param info   DistoX info
+   * @param info   DistoX info (null on error)
    */
   void updateInfo( DeviceA3Info info )
   {
-    if ( info == null ) return;
     mParent.runOnUiThread( new Runnable() {
       public void run() {
-        tv_serial.setText( info.mCode );
-        tv_statusAngle.setText(   info.mAngle   );
-        tv_statusCompass.setText( info.mCompass );
-        tv_statusCalib.setText(   info.mCalib   );
-        tv_statusSilent.setText(  info.mSilent  );
+        if ( info == null ) {
+          tv_serial.setText( mParent.getResources().getString( R.string.read_failed ) );
+        } else {
+          tv_serial.setText( info.mCode );
+          tv_statusAngle.setText(   info.mAngle   );
+          tv_statusCompass.setText( info.mCompass );
+          tv_statusCalib.setText(   info.mCalib   );
+          tv_statusSilent.setText(  info.mSilent  );
+        }
       }
     } );
   }

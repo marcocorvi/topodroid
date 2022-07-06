@@ -89,16 +89,20 @@ public class DeviceX310InfoDialog extends MyDialog
   }
 
   /** update the display of the DistoX2 info
-   * @param info   DistoX2 info
+   * @param info   DistoX2 info (null indicates a read error)
    */
-  void updateInfo( DeviceX310Info info )
+  void updateInfo( final DeviceX310Info info )
   {
-    if ( info == null ) return;
+    // if ( info == null ) return;
     mParent.runOnUiThread( new Runnable() {
       public void run() {
-        tv_code.setText(     info.mCode );
-        tv_firmware.setText( info.mFirmware );
-        tv_hardware.setText( info.mHardware );
+        if ( info == null ) {
+          tv_code.setText( mParent.getResources().getString( R.string.read_failed ) );
+        } else {
+          tv_code.setText(     info.mCode );
+          tv_firmware.setText( info.mFirmware );
+          tv_hardware.setText( info.mHardware );
+        }
       }
     } );
   }

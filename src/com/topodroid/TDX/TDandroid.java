@@ -266,7 +266,7 @@ public class TDandroid
 
   /** check if the app has the minimal permissions
    * @param context    context
-   * @param activity   activity
+   * @param activity   activity (unused)
    * @return true is the app can run
    */
   static boolean canRun( Context context, Activity activity )

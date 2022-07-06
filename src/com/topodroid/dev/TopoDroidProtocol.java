@@ -142,6 +142,7 @@ public class TopoDroidProtocol
 
   /** packet dispatcher
    * @param buffer 8-byte packet
+   * @note can be overwritten
    */
   protected int handlePacket( byte[] buffer )
   {
@@ -191,6 +192,9 @@ public class TopoDroidProtocol
             // TDLog.v( "TD proto: handle packet SAP");
             mDistance = d / 1000.0;
             break;
+          case Device.DISTO_XBLE:
+            // TODO
+            break;
           default:
             mDistance = d / 1000.0;
             break;
@@ -208,25 +212,29 @@ public class TopoDroidProtocol
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case MemoryOctet.BYTE_PACKET_G: // G 0x02
-        mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
-        mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
-        mGZ = MemoryOctet.toInt( buffer[6], buffer[5] );
-
-        if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
-        if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
-        if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
-        return DataType.PACKET_G;
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+          mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
+          mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
+          mGZ = MemoryOctet.toInt( buffer[6], buffer[5] );
+          if ( mGX > TDUtil.ZERO ) mGX = mGX - TDUtil.NEG;
+          if ( mGY > TDUtil.ZERO ) mGY = mGY - TDUtil.NEG;
+          if ( mGZ > TDUtil.ZERO ) mGZ = mGZ - TDUtil.NEG;
+          // TDLog.Log( TDLog.LOG_PROTO, "Proto packet G " + String.format(" %x %x %x", mGX, mGY, mGZ ) );
+          return DataType.PACKET_G;
+        }
+        break;
       case MemoryOctet.BYTE_PACKET_M: // M 0x03
-        mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
-        mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
-        mMZ = MemoryOctet.toInt( buffer[6], buffer[5] );
-
-        if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
-        if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
-        if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
-        // TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
-        return DataType.PACKET_M;
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+          mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
+          mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
+          mMZ = MemoryOctet.toInt( buffer[6], buffer[5] );
+          if ( mMX > TDUtil.ZERO ) mMX = mMX - TDUtil.NEG;
+          if ( mMY > TDUtil.ZERO ) mMY = mMY - TDUtil.NEG;
+          if ( mMZ > TDUtil.ZERO ) mMZ = mMZ - TDUtil.NEG;
+          // TDLog.Log( TDLog.LOG_PROTO, "Proto packet M " + String.format(" %x %x %x", mMX, mMY, mMZ ) );
+          return DataType.PACKET_M;
+        }
+        break;
       case MemoryOctet.BYTE_PACKET_VECTOR: // Vector data packet 0x04
         if ( mDeviceType == Device.DISTO_X310 ) {
           mBackshot = ( (buffer[0] & 0x40) == 0x40 );
@@ -243,21 +251,27 @@ public class TopoDroidProtocol
           //   TDLog.DoLog( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
 	  // }
           // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
+          return DataType.PACKET_VECTOR;
+        } else if ( mDeviceType == Device.DISTO_XBLE ) {
+          // FIXME
         }
-        return DataType.PACKET_VECTOR;
+        break;
       case MemoryOctet.BYTE_PACKET_REPLY: // Reply packet 0x38
-        mAddress[0] = buffer[1];
-        mAddress[1] = buffer[2];
-        {
-          byte[] mReplyBuffer = new byte[4];
-          mReplyBuffer[0] = buffer[3];
-          mReplyBuffer[1] = buffer[4];
-          mReplyBuffer[2] = buffer[5];
-          mReplyBuffer[3] = buffer[6];
-          // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
-          // TODO
-        }
-        return DataType.PACKET_REPLY;
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+          mAddress[0] = buffer[1];
+          mAddress[1] = buffer[2];
+          {
+            byte[] mReplyBuffer = new byte[4];
+            mReplyBuffer[0] = buffer[3];
+            mReplyBuffer[1] = buffer[4];
+            mReplyBuffer[2] = buffer[5];
+            mReplyBuffer[3] = buffer[6];
+            // TDLog.Log( TDLog.LOG_PROTO, "handle Packet mReplyBuffer" );
+            // TODO
+          }
+          return DataType.PACKET_REPLY;
+        } 
+        break;
       default:
         TDLog.Error( 
           "packet error. type " + type + " " + 

@@ -328,12 +328,13 @@
     <string name="hidden_show">显示测点之外的测量</string>
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
-    <string name="splays">副线</string>
+    <string name="including_splays">副线</string>
     <!-- TODO string name="with_splays">with splays</string -->
     <!-- TODO string name="cell_size">Cell size [m]</string -->
 
     <string name="legs">主线</string>
     <string name="stations">站点</string>
+    <!-- TODO string name="splays">Splays</string -->
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -361,6 +362,7 @@
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
+    <!-- TODO string name="no_device_window">Device window not available while downloading</string -->
     <!-- UNUSED string name="no_device_found">未发现设备</string -->
     <string name="no_feature_audio">音频不支持</string>
     <string name="no_feature_pdf">PDF格式不支持</string>
@@ -764,6 +766,7 @@
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
     <!-- TODO string name="button_recover"   >Recover</string -->
+    <!-- TODO string name="button_reverse"   >Reverse</string -->
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >回收站      </string>
@@ -1290,6 +1293,8 @@
   <string name="pref_with_sensors_summary">启用 "传感器" 数据</string>
   <string name="pref_with_android_azimuth_title">安卓手机罗盘</string>
   <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
+  <!-- TODO string name="pref_blunder_shot_title">Blunder shots</string -->
+  <!-- TODO string name="pref_blunder_shot_summary">Skip blunder leg-shots</string -->
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

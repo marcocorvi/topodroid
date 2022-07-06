@@ -27,6 +27,11 @@ public class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
   // int mType; // DistoX type
   private final String mAddress;
 
+  /** cstr
+   * @param app     application
+   * @param dialog  info display dialog
+   * @param address device BT address
+   */
   public InfoReadA3Task( TopoDroidApp app, DeviceA3InfoDialog dialog, String address )
   {
     mApp      = new WeakReference<TopoDroidApp>( app );
@@ -47,11 +52,15 @@ public class InfoReadA3Task extends AsyncTask<Void, Integer, Boolean>
   // {
   // }
 
+  /** post the result on the user interface
+   * @param result whether reading the info was successful
+   */
   @Override
   protected void onPostExecute( Boolean result )
   {
-    if ( result && mDialog.get() != null ) {
-      mDialog.get().updateInfo( mInfo );
+    if ( mDialog.get() != null ) {
+      mDialog.get().updateInfo( result ? mInfo : null ); 
+      // mDialog.get().updateInfo( mInfo );  // mInfo is null if result is false
     }
   }
 

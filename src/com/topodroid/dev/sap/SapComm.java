@@ -308,7 +308,6 @@ public class SapComm extends TopoDroidComm
 
   public void readedRemoteRssi( int rssi ) { }
 
-
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     // TDLog.v( "SAP comm: changedChrt" );

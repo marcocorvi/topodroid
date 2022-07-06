@@ -111,11 +111,9 @@ public class DeviceActivity extends Activity
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
 
-  // referrer ( getReferrer() is from API-22 )
-  // public final int REFERRER_NONE = 0;
-  // public final int REFERRER_MAIN = 1;
-  // public final int REFERRER_SHOT = 2;
-  // private int mReferrer = REFERRER_NONE;
+  // public static final int MODE_NORMAL = 0;
+  // public static final int MODE_SELECT = 1;
+  // private int mMode = MODE_NORMAL; // modw of work of the activity
 
   public static boolean mDeviceActivityVisible = false;
 
@@ -213,8 +211,6 @@ public class DeviceActivity extends Activity
     }
   };
 
-  // public int getMyReferrer() { return mReferrer; }
-
 // -------------------------------------------------------------------
   private void setState()
   {
@@ -295,20 +291,16 @@ public class DeviceActivity extends Activity
 
     TDandroid.setScreenOrientation( this );
 
-    // mReferrer = REFERRER_NONE;
+    // mMode = MODE_NORMAL;
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     //   try { 
     //     String mode = extras.getString( TDTag.TOPODROID_DEVICE_MODE );
-    //     if ( mode != null ) mReferrer = Interger.parseInt( mode );
+    //     if ( mode != null ) mMode = Integer.parseInt( mode );
     //   } catch ( Exception e ) { }
     // }
-    // TDLog.v( "device mode " + mReferrer );
+    // TDLog.v( "device mode " + mMode );
     
-    // Uri referrer = getReferrer(); // API 22 (5.1)
-    // TDLog.v( "device referre " + referrer.toString() );
-    
-
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData  = TopoDroidApp.mDData;
@@ -328,9 +320,13 @@ public class DeviceActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     Resources res = getResources();
-    mNrButton1 = 4;
-    if ( TDLevel.overNormal )   mNrButton1 += 1; // CALIB-READ
-    if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
+    // if ( mMode == MODE_NORMAL ) {
+      mNrButton1 = 4;
+      if ( TDLevel.overNormal )   mNrButton1 += 1; // CALIB-READ
+      if ( TDLevel.overAdvanced ) mNrButton1 += 1; // MEMORY
+    // } else { // if ( mMode == MODE_SELECT ) 
+    //   mNrButton1 = 1; // only BT reset
+    // }
     mButton1 = new Button[ mNrButton1 + 1 ];
 
     // int k=0; 
@@ -345,12 +341,14 @@ public class DeviceActivity extends Activity
     }
     mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
 
-    mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[IDX_TOGGLE] );
-    mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_TOGGLE] );
-    mBMcalib    = MyButton.getButtonBackground( mApp, res, izons[IDX_CALIB] );
-    mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_CALIB] );
-    mBMread    = MyButton.getButtonBackground( mApp, res, izons[IDX_READ] );
-    mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_READ] );
+    // if ( mMode == MODE_NORMAL ) {
+      mBMtoggle    = MyButton.getButtonBackground( mApp, res, izons[IDX_TOGGLE] );
+      mBMtoggle_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_TOGGLE] );
+      mBMcalib    = MyButton.getButtonBackground( mApp, res, izons[IDX_CALIB] );
+      mBMcalib_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_CALIB] );
+      mBMread    = MyButton.getButtonBackground( mApp, res, izons[IDX_READ] );
+      mBMread_no = MyButton.getButtonBackground( mApp, res, izonsno[IDX_READ] );
+    // }
 
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
@@ -443,7 +441,12 @@ public class DeviceActivity extends Activity
     }
   }
     
-
+  /** react on user tap on an item in the list
+   * @param parent
+   * @param view
+   * @param pos
+   * @param id
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -487,7 +490,8 @@ public class DeviceActivity extends Activity
     }
   }
 
-  // clear the current device
+  /** clear the current (active) device
+   */
   private void detachDevice()
   {
     // if ( currDeviceB() != null ) {
@@ -533,6 +537,7 @@ public class DeviceActivity extends Activity
   // @Implements
   public void enableButtons( boolean enable ) 
   {
+    // if ( mMode == MODE_SELECT ) return; // nothing in mode SELECT
     mButton1[1].setEnabled( enable );
     if ( TDLevel.overNormal ) {
       for ( int k=2; k<mNrButton1; ++k ) {
@@ -556,10 +561,12 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** display the buttons for device actions
+   */
   public void showDistoXButtons( )
   {
-    // SIWEI_TIAN
-    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) {              //Siwei Tian Changed on Jun 2022
+    // if ( mMode == MODE_SELECT ) return; // nothing in mode SELECT
+    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_TIAN Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
@@ -670,12 +677,22 @@ public class DeviceActivity extends Activity
     setState();
   }
 
+  /** set of BRIC4 datetime
+   * @param yy   year [YYYY]
+   * @param mm   month [1..12]
+   * @param dd   day of the month [1..31]
+   * @param HH   hour [0..23]
+   * @param MM   minute [0..59]
+   * @param SS   second [0..59]
+   */
   public void doBricMemoryReset( int yy, int mm, int dd, int HH, int MM, int SS )
   {
     // TDLog.v( "Device activity - BRIC memory reset " + yy + " " + mm + " " + dd + " " + HH + " " + MM + " " + SS );
     new MemoryBricTask( mApp, yy, mm, dd, HH, MM, SS  ).execute();
   }
 
+  /** clear BRIC4 memory
+   */
   public void doBricMemoryClear()
   {
     // TDLog.v( "Device activity - BRIC memory clear ");
@@ -722,6 +739,8 @@ public class DeviceActivity extends Activity
 
   // -----------------------------------------------------------------------------
 
+  /** clear A3 memory
+   */
   public void doClearA3Memory()
   {
     int[] ht = new int[2]; // ht[0] (head) is ahead of ht[1] (tail)
@@ -731,7 +750,12 @@ public class DeviceActivity extends Activity
   }
     
 
-  // called only by DeviceA3MemoryDialog
+  /** read a block of DistoX A3 memory
+   * @param command ...
+   * @param head_tail  memory block bounds
+   * @return true on success
+   * @note called only by DeviceA3MemoryDialog
+   */
   public boolean readDeviceHeadTail( byte[] command, int[] head_tail )
   {
     // TDLog.Log( TDLog.LOG_DEVICE, "onClick mBtnHeadTail. Is connected " + mApp.isConnected() );
@@ -742,6 +766,11 @@ public class DeviceActivity extends Activity
     return true;
   }
 
+  /** check a block of DistoX A3 memory
+   * @param head_tail  memory block bounds [addesses]
+   * @return true on success
+   * @note when is this used ?
+   */
   private boolean checkA3headtail( int[] ht )
   {
     if ( ! DeviceA3Details.checkHeadTail( ht ) ) {
@@ -751,8 +780,10 @@ public class DeviceActivity extends Activity
     return true;
   }
 
-  // reset data from stored-tail (inclusive) to current-tail (exclusive)
-  // @param on_off true: set, false: clear
+  /** reset data from stored-tail (inclusive) to current-tail (exclusive)
+   * @param head_tail  memory block bounds [addesses]
+   * @param on_off true: set, false: clear
+   */
   private void doResetA3DeviceHeadTail( int[] head_tail, boolean on_off )
   {
     int from = head_tail[1]; // tail
@@ -766,6 +797,10 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** store the memory bounds in the database
+   * @param head_tail  memory block bounds
+   * @note A3 head_tail are addresses, X310 indices
+   */
   public void storeDeviceHeadTail( int[] head_tail )
   {
     // TDLog.v("store HeadTail " + currDeviceA().getAddress() + " : " + head_tail[0] + " " + head_tail[1] );
@@ -774,6 +809,9 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** retrieve the memory bounds from the database
+   * @param head_tail  memory block bounds
+   */
   public void retrieveDeviceHeadTail( int[] head_tail )
   {
     // TDLog.v("store Head Tail " + currDeviceA().getAddress() + " : " + head_tail[0] + " " + head_tail[1] );
@@ -790,13 +828,21 @@ public class DeviceActivity extends Activity
     ( new InfoReadA3Task( mApp, dialog, currDeviceA().getAddress() ) ).execute();
   }
 
-  // @param head_tail indices
+  /** read X310 memory
+   * @param dialog     memory display dialog
+   * @param head_tail  memory block bounds [indices]
+   * @param dumpfile   filename to dump
+   */
   public void readX310Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
   }
  
-  // @param head_tail addresses
+  /** read A3 memory
+   * @param dialog     memory display dialog
+   * @param head_tail  memory block bounds [addresses]
+   * @param dumpfile   filename to dump
+   */
   public void readA3Memory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
   {
     if ( checkA3headtail( head_tail ) ) {
@@ -811,8 +857,10 @@ public class DeviceActivity extends Activity
   //   TDToast.make("X310 memory reset " + n + " data" );
   // }
 
-  // reset device from stored-tail to given tail
-  // called only by DeviceA3MemoryDialog
+  /** reset device from stored-tail to given tail
+   * @param head_tail  memory block bounds
+   * @note called only by DeviceA3MemoryDialog
+   */
   public void resetA3DeviceHeadTail( final int[] head_tail )
   {
     // TDLog.v("reset device from " + head_tail[0] + " to " + head_tail[1] );
@@ -910,6 +958,9 @@ public class DeviceActivity extends Activity
 
   // ---------------------------------------------------------
 
+  /** create the menu list
+   * @param res   app resources
+   */
   private void setMenuAdapter( Resources res )
   {
     ArrayAdapter< String > nemu_adapter = new ArrayAdapter<>(this, R.layout.menu );
@@ -928,12 +979,17 @@ public class DeviceActivity extends Activity
     mMenu.invalidate();
   }
 
+  /** hide menu list
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** handle a tap on a menu
+   * @param pos  index of the tapped menu
+   */
   private void handleMenu( int pos )
   {
     closeMenu();
@@ -978,6 +1034,9 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** ask confirm for a calibration reset
+   * @param b ???
+   */
   public void askCalibReset( final Button b )
   {
     TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.calib_reset ),
@@ -990,6 +1049,9 @@ public class DeviceActivity extends Activity
     );
   }
 
+  /** perform a calibration reset
+   * @param b ???
+   */
   private void doCalibReset( Button b )
   {
     // TDLog.v( "CALIB RESET");
@@ -1035,6 +1097,9 @@ public class DeviceActivity extends Activity
     return true;
   }
     
+  /** set secondary device
+   * @param address  BT address of secondary device
+   */
   void setSecondDevice( String address )
   {  
     if ( currDeviceB() == null || ! address.equals( currDeviceB().getAddress() ) ) {
@@ -1045,6 +1110,9 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** open a calibration
+   * @param name   calibration name
+   */
   public void openCalibration( String name )
   {
     int mustOpen = 0;
@@ -1054,6 +1122,8 @@ public class DeviceActivity extends Activity
     startActivity( calibIntent );
   }
 
+  /** open the calibration-import dialog
+   */
   public void openCalibrationImportDialog()
   {
     if ( currDeviceA() != null ) {
@@ -1061,6 +1131,9 @@ public class DeviceActivity extends Activity
     }
   }
 
+  /** import a calibration file
+   * @param name   calibration file
+   */
   public void importCalibFile( String name )
   {
     // String filename = TDPath.getCCsvFile( name );

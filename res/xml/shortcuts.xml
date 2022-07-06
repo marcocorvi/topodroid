@@ -38,7 +38,7 @@
        android:action="android.intent.action.VIEW"
        android:targetPackage="com.topodroid.TDX"
        android:targetClass="com.topodroid.TDX.TopoGL">
-       <!-- extra android:name="action" android:value="distox" / -->
+       <extra android:name="action" android:value="cave3d" />
      </intent>
      <categories android:name="android.shortcut.conversation" />
   </shortcut>

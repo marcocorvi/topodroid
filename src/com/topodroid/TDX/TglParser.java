@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDFile;
 import com.topodroid.c3out.ExportData;
 import com.topodroid.c3out.ExportKML;
@@ -981,7 +982,7 @@ public class TglParser
   { 
     Cave3DStation fstation = getStation( shot.from );
     shot.setFromStation( fstation );
-    if ( shot.to == null || shot.to.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( shot.to ) ) {
       splays.add( shot );
       shot.to = "";
       shot.setToStation( null );

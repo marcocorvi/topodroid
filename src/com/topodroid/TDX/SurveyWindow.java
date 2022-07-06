@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDRequest;
@@ -497,7 +498,7 @@ public class SurveyWindow extends Activity
     // if ( name == null || name.length == 0 ) {
     // }
     String team = mEditTeam.getText().toString();
-    if ( team == null || team.length() == 0 ) {
+    if ( TDString.isNullOrEmpty( team ) ) {
       mEditTeam.setError( getResources().getString( R.string.error_team_required ) );
       TDToast.makeBad( R.string.survey_not_saved );
       return false;

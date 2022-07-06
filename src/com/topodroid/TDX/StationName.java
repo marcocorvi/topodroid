@@ -13,6 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
@@ -99,11 +100,11 @@ class StationName
     DBlock last = data.selectLastNonBlankShot( sid );
     if ( last == null ) return TDSetting.mInitStation;
     if ( last.isDistoXBacksight() ) {
-      if ( last.mFrom == null || last.mFrom.length() == 0 ) return last.mTo;
+      if ( TDString.isNullOrEmpty( last.mFrom ) ) return last.mTo;
       if ( StationPolicy.mSurveyStations == 1 ) return last.mFrom;  // forward-shot
       return last.mTo;
     } else {
-      if ( last.mTo == null || last.mTo.length() == 0 ) return last.mFrom;
+      if ( TDString.isNullOrEmpty( last.mTo ) ) return last.mFrom;
       if ( StationPolicy.mSurveyStations == 1 ) return last.mTo;  // forward-shot
       return last.mFrom;
     }
