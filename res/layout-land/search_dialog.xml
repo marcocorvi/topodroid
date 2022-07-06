@@ -82,6 +82,27 @@
       />
     </LinearLayout>
 
+    <LinearLayout android:id="@+id/layout4"
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+	android:layout_marginTop="@dimen/marginv"
+	android:layout_marginBottom="@dimen/marginv"
+      >
+      <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:singleLine="true"
+        android:text="@string/splays"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_reverse"
+        style="@style/button_default"
+        android:text="@string/button_reverse"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+    </LinearLayout>
+
     <LinearLayout android:id="@+id/help"
       android:orientation="horizontal"
       android:layout_width="match_parent"
