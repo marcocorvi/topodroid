@@ -76,7 +76,7 @@ public class TopoDroidProtocol
     // TDLog.v( "TD proto: type " + device.mType + " addr " + device.mAddress );
     mDeviceType    = device.mType;
     mDeviceAddress = device.getAddress();
-    mPacketLogger  = new PacketLogger( context );
+    mPacketLogger  = new PacketLogger( context, TDSetting.mPacketLog );
 
     // allocated buffers
     // mBuffer        = new byte[8];
@@ -85,7 +85,10 @@ public class TopoDroidProtocol
     // mRequest_Buffer = new byte[8];
   }
 
-  public void closeIOstreams() { }
+  public void closeIOstreams() 
+  { 
+    if ( mPacketLogger != null ) mPacketLogger.closeDatabase();
+  }
 
   // PACKET LOGGER ----------------------------------------------------------------
   protected void logPacket( long dir, byte[] buf )

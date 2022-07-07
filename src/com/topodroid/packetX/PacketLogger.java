@@ -66,22 +66,33 @@ public class PacketLogger extends DataSetObservable
 
   public SQLiteDatabase getDb() { return myDB; }
 
-  public PacketLogger( Context context /* , TopoDroidApp app */ )
+  /** cstr
+   * @param context context
+   * @param do_open whether to open the database 
+   * @note the db can be opened only from the cstr, if the db is not opened the class does not do anything
+   */
+  public PacketLogger( Context context, boolean do_open /* , TopoDroidApp app */ )
   {
     mContext = context;
     // mApp     = app;
-    openDatabase();
+    if ( do_open ) openDatabase();
   }
 
-  void closeDatabase()
+  /** close the database (as a cleanup in the dstr)
+   */
+  public void closeDatabase()
   {
     if ( myDB == null ) return;
     myDB.close();
     myDB = null;
   }
 
-  void openDatabase()
+  /** open the database
+   */
+  private void openDatabase()
   {
+    closeDatabase(); // in case it is open
+
     String database_name = TDFile.getPacketDatabase().getAbsolutePath();
     DistoXOpenHelper openHelper = new DistoXOpenHelper( mContext, database_name );
 
@@ -127,6 +138,7 @@ public class PacketLogger extends DataSetObservable
 
   private long doInsert( String table, ContentValues cv )
   {
+    if ( myDB == null ) return -1L;
     long ret = 0L;
     try { 
       myDB.beginTransaction();
@@ -142,15 +154,17 @@ public class PacketLogger extends DataSetObservable
   private boolean doExecSQL( StringWriter sw )
   {
     boolean ret = false;
-    try {
-      myDB.beginTransaction();
-      myDB.execSQL( sw.toString() );
-      myDB.setTransactionSuccessful();
-      ret = true;
-    } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
-    } catch ( SQLiteException e1 )       { logError("delete", e1 );
-    // } catch ( IllegalStateException e2 ) { logError("delete", e2 );
-    } finally { myDB.endTransaction(); }
+    if ( myDB != null ) {
+      try {
+        myDB.beginTransaction();
+        myDB.execSQL( sw.toString() );
+        myDB.setTransactionSuccessful();
+        ret = true;
+      } catch ( SQLiteDiskIOException e )  { handleDiskIOError( e );
+      } catch ( SQLiteException e1 )       { logError("delete", e1 );
+      // } catch ( IllegalStateException e2 ) { logError("delete", e2 );
+      } finally { myDB.endTransaction(); }
+    }
     return ret;
   }
 
@@ -167,6 +181,7 @@ public class PacketLogger extends DataSetObservable
 
   private void clearOldest( long secs )
   {
+    if ( myDB == null ) return;
     long time = System.currentTimeMillis() - (1000L * secs);
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
@@ -196,6 +211,7 @@ public class PacketLogger extends DataSetObservable
   // @param secs    max packet age
   List< PacketData > selectPackets( long secs ) 
   {
+    if ( myDB == null ) return null; 
     ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,
@@ -220,6 +236,7 @@ public class PacketLogger extends DataSetObservable
   //               64 X
   List< PacketData > selectPackets( long secs, int filter )
   {
+    if ( myDB == null ) return null; 
     ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,
@@ -242,6 +259,7 @@ public class PacketLogger extends DataSetObservable
   // @param addr    packet address
   List< PacketData > selectPackets( long secs, String addr )
   {
+    if ( myDB == null ) return null; 
     ArrayList< PacketData > ret = new ArrayList<>();
     long time = System.currentTimeMillis() - (1000 * secs);
     Cursor cursor = myDB.query( PACKET_TABLE,

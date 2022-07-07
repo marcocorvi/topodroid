@@ -111,6 +111,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       try { mOut.close(); } catch ( IOException e ) { TDLog.Error("Stream out close"); }
       mOut = null;
     }
+    super.closeIOstreams(); // to possibly close packet logger db
   }
 
 

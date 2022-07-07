@@ -54,11 +54,14 @@ public class PacketDialog extends MyDialog
 
   private ListView mList;
 
+  /** cstr
+   * @param context context
+   */
   public PacketDialog( Context context )
   {
     super( context, null, R.string.PacketDialog ); // null app
     // mParent      = parent;
-    mLogger = new PacketLogger( mContext );
+    mLogger = new PacketLogger( mContext, true ); // open database
   }
   
   // -------------------------------------------------------------------
@@ -101,6 +104,8 @@ public class PacketDialog extends MyDialog
     updateDisplay();
   }
 
+  /** update the display
+   */
   private void updateDisplay()
   {
     int filter = 0;
@@ -122,13 +127,20 @@ public class PacketDialog extends MyDialog
   }
 
 
+  /** react to a user tap
+   * @param v tapped view
+   * @note active views:
+   *    - cancel: close the dialog
+   *    - clear day: ...
+   *    - clear week: ...
+   */
   @Override
   public void onClick(View v) 
   {
     long id = v.getId();
 
     if ( id == R.id.cancel ) {
-      dismiss();
+      onBackPressed();
       return;
     } else if ( id == R.id.clear_day ) {
       mLogger.clearDayOlder();
@@ -140,9 +152,12 @@ public class PacketDialog extends MyDialog
     updateDisplay();
   }
 
+  /** react to a HW BACK tap: close the dialog
+   */
   @Override
   public void onBackPressed()
   {
+    mLogger.closeDatabase();
     dismiss();
   }
 

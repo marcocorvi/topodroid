@@ -17,6 +17,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
+import com.topodroid.common.LegType;
 
 import java.util.List;
 import java.util.Set;
@@ -41,6 +42,15 @@ class StationName
     mData    = data;
     mSid     = sid;
   }
+
+  /** debug
+   */
+  protected String id( DBlock blk ) { return (blk==null)? "null" : Long.toString(blk.mId); }
+
+  /** debug
+   */
+  protected String name( DBlock blk ) { return (blk==null)? "<->" : "<" + blk.mFrom + "-" + blk.mTo + ">"; }
+
 
   boolean assignStations( List< DBlock > list, Set<String> sts )
   {
@@ -138,6 +148,13 @@ class StationName
   // ------------------------------------------------------------------------------------------------
   // station assignments
 
+  /** set the block stations (only for legs)
+   * @param blk     block
+   * @param from    FROM station
+   * @param to      TO station
+   * @param is_backleg whether the shot is a back-leg
+   * @note the block name is updated into the database
+   */
   protected void setBlockName( DBlock blk, String from, String to, boolean is_backleg ) 
   {
     // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
@@ -149,6 +166,12 @@ class StationName
     mData.updateShotName( blk.mId, mSid, from, to );
   }
 
+  /** set the block stations
+   * @param blk     block
+   * @param from    FROM station
+   * @param to      TO station
+   * @note the block name is updated into the database
+   */
   protected void setBlockName( DBlock blk, String from, String to )
   {
     // TDLog.v( "set block " + blk.mId + " name " + from + " " + to );
@@ -162,11 +185,18 @@ class StationName
   }
 
   // ------------------------------------------------------------------------------------------------
-  // called in assignStationsAfter_Backsight
-  //           assignStations_BacksightBackshot
-  //           assignStations_Backsight
-  // note backsight-shot is a shot taken backsight (ie backward)
-  //      backshot is a distox mode, in which direction data are stored reversed
+  /** @return true if the block is a backsight
+   * @param blk     block
+   * @param length  reference length (block is backsight if its length is close to length)
+   * @param bearing reference azimuth (block is backsight if its azimuth is 180 degrees from this)
+   * @param clino   reference clino (block is backsight if its clino is the negative of this)
+   *
+   * called in assignStationsAfter_Backsight
+   *           assignStations_BacksightBackshot
+   *           assignStations_Backsight
+   * note backsight-shot is a shot taken backsight (ie backward)
+   *      backshot is a distox mode, in which direction data are stored reversed
+   */
   protected static boolean checkBacksightShot( DBlock blk, float length, float bearing, float clino )
   {
     float d_thr = TDSetting.mCloseDistance * (blk.mLength+length);
@@ -188,6 +218,11 @@ class StationName
     return true;
   }
 
+  /** set the stations of a leg
+   * @param blk    leg block
+   * @param from    FROM station
+   * @param to      TO station
+   */
   protected void setLegName( DBlock blk, String from, String to )
   {
     // TDLog.v( "set leg " + blk.mId + " " + from + " " + to );
@@ -198,6 +233,12 @@ class StationName
     }
   }
 
+  /** set the stations of a leg
+   * @param blk    leg block
+   * @param from    FROM station
+   * @param to      TO station
+   * @param is_backsight_shot whether the leg is backsight
+   */
   protected void setLegName( DBlock blk, String from, String to, boolean is_backsight_shot )
   {
     // TDLog.v( "set leg " + from + " " + to + " bs " + is_backsight_shot );
@@ -208,13 +249,43 @@ class StationName
     }
   }
  
+  /** set the block type to "secondary leg"
+   * @param blk   leg secondary-block
+   */
   protected void setSecLegName( DBlock blk )
   {
     // TDLog.v( "set sec leg " + blk.mId );
     // setBlockName( blk, "", "" );
     blk.setTypeSecLeg();
   }
+ 
+  /** set the block type to "secondary leg"
+   * @param blk   leg secondary-block
+   * @param update_db whether to update leg type in the database
+   * @note called when the block comes after a blunder shot 
+   */
+  protected void setSecLegNameAndType( DBlock blk, boolean update_db )
+  {
+    // TDLog.v( "set sec leg " + blk.mId );
+    // setBlockName( blk, "", "" );
+    blk.setTypeSecLeg();
+    if ( update_db ) mData.updateShotLeg( blk.mId, mSid, LegType.EXTRA ); // must be done only if previous block is blunder
+  }
 
+  /** clear the block stations and set its type to "blank"
+   * @param blk   blunder block
+   */
+  protected void setBlunderName( DBlock blk )
+  { 
+    setBlockName( blk, "", "" );
+    blk.setTypeBlank();
+  }
+
+  /** set the station of a splay
+   * @param splay  splay block
+   * @param name   station 
+   * @note if the DistoX is in normal mode the station is FROM, if it is backsight the station is TO
+   */
   protected void setSplayName( DBlock splay, String name ) 
   {
     // TDLog.v( "set splay " + splay.mId + " " + name );
@@ -224,6 +295,5 @@ class StationName
       setBlockName( splay, name, "" );
     }
   }
-
 
 }

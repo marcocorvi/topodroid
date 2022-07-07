@@ -214,6 +214,10 @@ public class DBlock
    */
   void setTypeSplay()   { mBlockType = BLOCK_SPLAY; }
   
+  /** set the type BLANK
+   */
+  void setTypeBlank()   { mBlockType = BLOCK_BLANK; }
+  
   /** set the block type
    * @param type   new block type
    */

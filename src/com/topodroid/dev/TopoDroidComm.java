@@ -313,7 +313,7 @@ public class TopoDroidComm
   protected void closeProtocol()
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm close protocol");
-    // if ( mProtocol != null ) mProtocol.closeIOstreams();
+    // if ( mProtocol != null ) mProtocol.closeIOstreams(); // FIXME somewhere closeIOStreams must be called
     mProtocol = null;
   }
 
