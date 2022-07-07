@@ -1,7 +1,7 @@
-res/layout/dblock_row_noedit.xml:29: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
+res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/layout/dblock_row_noedit.xml:52: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
+res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:38: Error: "tdm_config_project" is not translated in "cn" [MissingTranslation]
@@ -13,7 +13,7 @@ res/values/strings.xml:98: Error: "station_coords" is not translated in "cn" [Mi
 res/values/strings.xml:154: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
     <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:218: Error: "gettingble_info" is not translated in "ru" (Russian), "cn", "it" (Italian), "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:218: Error: "gettingble_info" is not translated in "cn" [MissingTranslation]
     <string name="gettingble_info">Getting DistoX-BLE info &#8230;</string>
             ~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:261: Error: "photo_failed" is not translated in "cn" [MissingTranslation]
@@ -34,10 +34,10 @@ res/values/strings.xml:340: Error: "with_splays" is not translated in "cn" [Miss
 res/values/strings.xml:341: Error: "cell_size" is not translated in "cn" [MissingTranslation]
     <string name="cell_size">Cell size [m]</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:345: Error: "splays" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:345: Error: "splays" is not translated in "cn" [MissingTranslation]
     <string name="splays">Splays</string>
             ~~~~~~~~~~~~~
-res/values/strings.xml:373: Error: "no_device_window" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:373: Error: "no_device_window" is not translated in "cn" [MissingTranslation]
     <string name="no_device_window">Device window not available while downloading</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:390: Error: "no_symbols" is not translated in "cn" [MissingTranslation]
@@ -94,7 +94,7 @@ res/values/strings.xml:742: Error: "button_clear_convert" is not translated in "
 res/values/strings.xml:778: Error: "button_recover" is not translated in "cn" [MissingTranslation]
     <string name="button_recover"   >Recover</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:779: Error: "button_reverse" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:779: Error: "button_reverse" is not translated in "cn" [MissingTranslation]
     <string name="button_reverse"   >Reverse</string>
             ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:846: Error: "popup_do_gm_group" is not translated in "cn" [MissingTranslation]
@@ -163,10 +163,10 @@ res/values/strings.xml:1234: Error: "imported_settings_failed" is not translated
 res/values/strings.xml:1235: Error: "export_settings_failed" is not translated in "cn" [MissingTranslation]
   <string name="export_settings_failed">Failed to export settings</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1306: Error: "pref_blunder_shot_title" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1306: Error: "pref_blunder_shot_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_blunder_shot_title">Blunder shots</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1307: Error: "pref_blunder_shot_summary" is not translated in "ru" (Russian), "cn", "hu" (Hungarian) [MissingTranslation]
+res/values/strings.xml:1307: Error: "pref_blunder_shot_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_blunder_shot_summary">Skip blunder leg-shots</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:1351: Error: "pref_svg_program_title" is not translated in "cn" [MissingTranslation]
@@ -233,31 +233,4 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-res/layout-land/azimuth_dialog.xml:107: Warning: OK button should be on the right (was "LEFT | OK | RIGHT | Cancel", should be "LEFT | Cancel | RIGHT | OK") [ButtonOrder]
-        <Button android:id="@+id/btn_ok"
-         ~~~~~~
-res/layout/cave3d_activity.xml:69: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-    <Button android:id="@+id/current_station"
-     ~~~~~~
-res/layout/cave3d_activity.xml:79: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-    <Button android:id="@+id/fix_station"
-     ~~~~~~
-res/layout/cave3d_activity.xml:86: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-    <Button android:id="@+id/measure_station"
-     ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:55: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-      <Button android:id="@+id/btn_bind"
-       ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:62: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-      <Button android:id="@+id/btn_load"
-       ~~~~~~
-res/layout/cave3d_sketches_dialog.xml:69: Warning: Buttons in button bars should be borderless; use style="?android:attr/buttonBarButtonStyle" (and ?android:attr/buttonBarStyle on the parent) [ButtonStyle]
-      <Button android:id="@+id/btn_ok"
-       ~~~~~~
-res/layout/dblock_row_noedit.xml:18: Warning: Missing autofillHints attribute [Autofill]
-  <EditText 
-   ~~~~~~~~
-res/layout/dblock_row_noedit.xml:41: Warning: Missing autofillHints attribute [Autofill]
-  <EditText 
-   ~~~~~~~~
-70 errors, 18 warnings
+70 errors, 9 warnings

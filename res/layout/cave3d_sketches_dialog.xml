@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     -->
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+  xmlns:tools="http://schemas.android.com/tools"
   android:layout_width="fill_parent" 
   android:layout_height="wrap_content"
   android:orientation="vertical"
@@ -39,7 +40,7 @@
       style="@style/button_empty"
       android:text="@string/button_help"
     />
-    <LinearLayout
+    <LinearLayout tools:ignore="ButtonStyle"
       android:layout_width="fill_parent" 
       android:layout_height="wrap_content"
       android:orientation="horizontal"
