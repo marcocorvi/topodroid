@@ -639,6 +639,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="undelete_shot">Mérések</string>
     <string name="undelete_overshoot">Túlmérések</string>
     <string name="undelete_check">Ellenőrző mérések</string>
+    <!-- TODO string name="undelete_blunder">Blunders</string -->
     <string name="undelete_plot">Vázlatok</string>
     <string name="delete_whole_leg">Mérés törlése</string>
     <string name="visible_border">látható határ</string>

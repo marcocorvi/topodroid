@@ -18,6 +18,7 @@ import com.topodroid.c3in.SketchPoint;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 
 import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -156,7 +157,7 @@ public class GlSketch extends GlShape
    */
   void logMinMax()
   {
-    if ( mPoints.size() == 0 ) return;
+    if ( TDUtil.isEmpty(mPoints) ) return;
     double xmin, xmax, ymin, ymax, zmin, zmax;
     Vector3D v0 = mPoints.get(0);
     xmin = xmax = v0.x;
@@ -231,7 +232,7 @@ public class GlSketch extends GlShape
    */
   static void unbindTexture() 
   {
-    // if ( mSymbols.size() == 0 ) return;
+    // if ( TDUtil.isEmpty(mSymbols) ) return;
     // if ( mTexId < 0 ) return;
     // GL.unbindTextTexture( mTexId );
     // mTexId = -1;

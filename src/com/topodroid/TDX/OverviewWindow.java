@@ -19,6 +19,7 @@ import com.topodroid.utils.TDsafUri;
 import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -584,7 +585,7 @@ public class OverviewWindow extends ItemDrawer
     // TDLog.Log( TDLog.LOG_PLOT, "do Start " + mName1 + " " + mName2 );
     // mBlockList = mData.selectAllLegShots( mSid, TDStatus.NORMAL );
     mBlockList = mData.selectAllShots( mSid, TDStatus.NORMAL );
-    if ( mBlockList.size() == 0 ) {
+    if ( TDUtil.isEmpty(mBlockList) ) {
       TDToast.makeBad( R.string.few_data );
       finish();
     } else {

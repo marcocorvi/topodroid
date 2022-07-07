@@ -374,4 +374,21 @@ public class TDUtil
     return surveyname + scrapname.substring( pos );
   }
 
+  /** @return true if the list is not empty
+   * @param list   list to check
+   */
+  public static <E> boolean isNonEmpty( List< E > list ) 
+  {
+    return list != null && list.size() > 0;
+  }
+
+  /** @return true if the list is empty
+   * @param list   list to check
+   */
+  public static <E> boolean isEmpty( List< E > list ) 
+  {
+    return list == null || list.size() == 0;
+  }
+
+
 }

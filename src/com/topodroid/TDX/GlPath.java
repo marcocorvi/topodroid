@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
@@ -67,7 +68,7 @@ class GlPath extends GlShape
   private float[] prepareData( )
   { 
     vertexCount = points.size();
-    if ( points.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(points) ) return null;
 
     float[] data = new float[ vertexCount * STRIDE ];
     int k = 0;
@@ -90,9 +91,7 @@ class GlPath extends GlShape
   /* LOG
   void logMinMax() 
   {
-    if ( points.size() == 0 ) {
-      return;
-    }
+    if ( TDUtil.isEmpty(points) ) return;
     float xmin, xmax, ymin, ymax, zmin, zmax;
     Vector3D v0 = points.get( 0 );
     xmin = xmax = v0.x;

@@ -1523,12 +1523,21 @@ public class DataHelper extends DataSetObservable
   //   doExecShotSQL( id, sw );
   // }
 
+  /** set the status of a shot record
+   * @param id     shot id
+   * @param sid    survey id
+   * @param status new status of the shot record
+   */
   void deleteShot( long id, long sid, int status )
   {
     // if ( myDB == null ) return;
     updateStatus( SHOT_TABLE, id, sid, status );
   }
 
+  /** undelete a shot, ie set its status to "normal"
+   * @param id     shot id
+   * @param sid    survey id
+   */
   void undeleteShot( long id, long sid )
   {
     // if ( myDB == null ) return;

@@ -17,11 +17,16 @@ public class LegType
   public static final int NORMAL  = 0;
   public static final int EXTRA   = 1; // additional leg shots
   public static final int XSPLAY  = 2; // cross splay
-  public static final int BACK    = 3; 
+  public static final int BACK    = 3; // back leg
   public static final int HSPLAY  = 4; // horizontal splay
   public static final int VSPLAY  = 5; // vertical splay
   public static final int SCAN    = 6; // scan splay
+  // public static final int BLUNDER = 7; // blunder leg
 
+  /** @return the next splay type in cycle fashon
+   * @param type current type
+   * @note scan-splay do not enter the cycle
+   */
   public static int nextSplayClass( int type ) 
   {
     switch( type ) {

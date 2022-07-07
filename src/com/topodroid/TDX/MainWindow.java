@@ -18,6 +18,7 @@ import com.topodroid.utils.TDTag;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
@@ -194,7 +195,7 @@ public class MainWindow extends Activity
     if ( TopoDroidApp.mData != null ) {
       List< String > list = TopoDroidApp.mData.selectAllSurveys();
       updateList( list );
-      if ( /* ! say_dialogR && */ say_no_survey && list.size() == 0 ) {
+      if ( /* ! say_dialogR && */ say_no_survey && TDUtil.isEmpty(list) ) {
         say_no_survey = false;
         TDToast.make( R.string.no_survey );
       } 

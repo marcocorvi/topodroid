@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 // import com.topodroid.c3in.ParserSketch;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 
 // import java.nio.ByteOrder;
 // import java.nio.ByteBuffer;
@@ -399,7 +400,7 @@ public class GlLines extends GlShape
    */
   void computeBBox()
   {
-    if ( lines.size() == 0 ) return;
+    if ( TDUtil.isEmpty(lines) ) return;
     Vector3D v1 = lines.get(0).v1;
     xmin = xmax = v1.x;
     ymin = ymax = v1.y;
@@ -416,9 +417,7 @@ public class GlLines extends GlShape
    */
   void logMinMax() 
   {
-    if ( lines.size() == 0 ) {
-      return;
-    }
+    if ( TDUtil.isEmpty(lines) ) return;
     double xmin, xmax, ymin, ymax, zmin, zmax;
     Vector3D v = lines.get( 0 ).v1;
     xmin = xmax = v.x;
@@ -481,7 +480,7 @@ public class GlLines extends GlShape
    */
   private float[] prepareData( )
   { 
-    if ( lines.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(lines) ) return null;
     lineCount   = lines.size();
     // TDLog.v("lines " + lineCount + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
     int vertexCount = lineCount * 2;

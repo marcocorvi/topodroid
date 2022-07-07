@@ -36,7 +36,7 @@ public class DBlock
 
   private View mView;           // view of this dblock in the list
   // private int    mPos;     // position in the list
-  int     mVisible;       // whether this data is visible in the list
+  private int mVisible;       // whether this data is visible in the list
   boolean mMultiSelected; // whether the block is in multiselect list
   private Paint mPaint;   // user-set block color
 
@@ -124,7 +124,19 @@ public class DBlock
   //  * @param flag   flag value(s) to clear
   //  */
   // void clearFlag( long flag ) { mFlag &= ~flag; }
+
+  /** @return the block flag
+   */
   public long getFlag() { return mFlag; }
+
+  /** set the block visibility
+   * @param visible  block visibility - must be one of View.VISIBLE, View.INVISIBLE, View.GONE
+   */
+  public void setVisible( int visible ) { mVisible = visible; }
+
+  /** @return the block visibility - one of View.VISIBLE, View.INVISIBLE, View.GONE
+   */
+  public int getVisible() { return mVisible; }
 
   /** get the reduced flag (lowest three bits)
    * @return the reduced flag
@@ -134,17 +146,18 @@ public class DBlock
   // ------------------------------------------------------------------
   // BLOCK TYPE
 
-  private static final int BLOCK_BLANK      = 0;
-  public  static final int BLOCK_MAIN_LEG   = 1; // primary leg shot
-  private static final int BLOCK_SEC_LEG    = 2; // additional shot of a centerline leg
-  private static final int BLOCK_BLANK_LEG  = 3; // blank centerline leg-shot
-  private static final int BLOCK_BACK_LEG   = 4; // 
+  private static final int BLOCK_BLANK       =  0;
+  public  static final int BLOCK_MAIN_LEG    =  1; // primary leg shot
+  private static final int BLOCK_SEC_LEG     =  2; // additional shot of a centerline leg
+  private static final int BLOCK_BLANK_LEG   =  3; // blank centerline leg-shot
+  private static final int BLOCK_BACK_LEG    =  4; // 
   // splays must come last
-  private static final int BLOCK_SPLAY      = 5;
-  private static final int BLOCK_X_SPLAY    = 6; // FIXME_X_SPLAY cross splay
-  private static final int BLOCK_H_SPLAY    = 7; // FIXME_H_SPLAY horizontal splay
-  private static final int BLOCK_V_SPLAY    = 8; // FIXME_V_SPLAY vertical splay
-  private static final int BLOCK_SCAN       = 9; // FIXME_S_SPLAY scan splay
+  private static final int BLOCK_SPLAY       =  5;
+  private static final int BLOCK_X_SPLAY     =  6; // FIXME_X_SPLAY cross splay
+  private static final int BLOCK_H_SPLAY     =  7; // FIXME_H_SPLAY horizontal splay
+  private static final int BLOCK_V_SPLAY     =  8; // FIXME_V_SPLAY vertical splay
+  private static final int BLOCK_SCAN        =  9; // FIXME_S_SPLAY scan splay
+  // private static final int BLOCK_BLUNDER_LEG = 10; // 
 
   /** block-type to leg-type table
    */
@@ -159,6 +172,7 @@ public class DBlock
     LegType.HSPLAY, // 4
     LegType.VSPLAY, // 5
     LegType.SCAN,   // 6
+    // LegType.BLUNDER,// 3 BLUNDER_LEG
   };
 
   /** array of block-type of splays
@@ -181,6 +195,7 @@ public class DBlock
     TDColor.LIGHT_GRAY,   // 3 sec. leg
     TDColor.VIOLET,       // 4 blank leg
     TDColor.LIGHT_YELLOW, // 6 back leg
+    // TDColor.VIOLET,       // 4 blunder leg
     TDColor.LIGHT_BLUE,   // 2 splay
     TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
     TDColor.DARK_BLUE,    // 7 H_SPLAY
@@ -298,6 +313,7 @@ public class DBlock
   //   if ( mBlockType == BLOCK_H_SPLAY )  return LegType.HSPLAY;
   //   if ( mBlockType == BLOCK_V_SPLAY )  return LegType.VSPLAY;
   //   if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
+  //   if ( mBlockType == BLOCK_BLUNDER_LEG ) return LegType.BLUNDER;
   //   // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
   //   return LegType.NORMAL;
   // }
@@ -308,12 +324,13 @@ public class DBlock
   void setBlockType( int leg_type )
   {
      switch ( leg_type ) {
-       case LegType.EXTRA:  mBlockType = BLOCK_SEC_LEG;  break;
-       case LegType.XSPLAY: mBlockType = BLOCK_X_SPLAY;  break;
-       case LegType.BACK:   mBlockType = BLOCK_BACK_LEG; break;
-       case LegType.HSPLAY: mBlockType = BLOCK_H_SPLAY;  break;
-       case LegType.VSPLAY: mBlockType = BLOCK_V_SPLAY;  break;
-       case LegType.SCAN:   mBlockType = BLOCK_SCAN;     break;
+       case LegType.EXTRA:   mBlockType = BLOCK_SEC_LEG;     break;
+       case LegType.XSPLAY:  mBlockType = BLOCK_X_SPLAY;     break;
+       case LegType.BACK:    mBlockType = BLOCK_BACK_LEG;    break;
+       case LegType.HSPLAY:  mBlockType = BLOCK_H_SPLAY;     break;
+       case LegType.VSPLAY:  mBlockType = BLOCK_V_SPLAY;     break;
+       case LegType.SCAN:    mBlockType = BLOCK_SCAN;        break;
+       // case LegType.BLUNDER: mBlockType = BLOCK_BLUNDER_LEG; break;
        default: /* nothing */
      }
   }

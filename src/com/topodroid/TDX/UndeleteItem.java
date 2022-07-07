@@ -14,10 +14,11 @@ package com.topodroid.TDX;
 class UndeleteItem 
 {
   // item types:
-  final static int UNDELETE_PLOT = 0;
-  final static int UNDELETE_SHOT = 1;
-  final static int UNDELETE_OVERSHOOT = 2;
+  final static int UNDELETE_PLOT        = 0;
+  final static int UNDELETE_SHOT        = 1;
+  final static int UNDELETE_OVERSHOOT   = 2;
   final static int UNDELETE_CALIB_CHECK = 3;
+  final static int UNDELETE_BLUNDER     = 4;
 
   long id;      // ID of the item to recover
   long id2;     // ID of the associated item (for plots)

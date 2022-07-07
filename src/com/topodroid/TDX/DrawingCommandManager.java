@@ -12,9 +12,10 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDMath;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.TDGreenDot;
 import com.topodroid.num.TDNum;
-import com.topodroid.utils.TDMath;
 import com.topodroid.math.TDVector;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
@@ -1830,7 +1831,7 @@ public class DrawingCommandManager
    */
   boolean hasXSectionOutline( String name ) 
   { 
-    if ( mXSectionOutlines == null || mXSectionOutlines.size() == 0 ) return false;
+    if ( TDUtil.isEmpty(mXSectionOutlines) ) return false;
     synchronized( TDPath.mXSectionsLock )  {
       for ( DrawingOutlinePath path : mXSectionOutlines ) {
         if ( path.isScrapName( name ) ) return true;

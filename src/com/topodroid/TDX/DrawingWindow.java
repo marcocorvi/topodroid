@@ -8548,7 +8548,7 @@ public class DrawingWindow extends ItemDrawer
       return;
     }
     List< DrawingPath > paths = mDrawingSurface.splitPlot( mSplitBorder, mSplitRemove );
-    if ( paths.size() == 0 ) { // nothing to split
+    if ( TDUtil.isEmpty(paths) ) { // nothing to split
       TDToast.makeWarn( R.string.split_nothing );
       return;
     }

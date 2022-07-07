@@ -450,6 +450,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         return false;
       }
 
+    /** fill the textviews with the data of a block
+     * @param b        block
+     * @param listener listener of long-taps on the view
+     */
     void setViewText( DBlock b, OnLongClickListener listener )
     {
       if ( b == null ) return;
@@ -510,6 +514,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       setColor( b );
    }
 
+   /** set the color of a bleck 
+    * @param b  block
+    * @note this implements the TopoDroid data coloring policy
+    */
    void setColor( DBlock b )
    {
       if ( b == null ) return;
@@ -604,7 +612,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       } else {
         b.setBackgroundColor( b.mMultiSelected ? TDColor.GRID : TDColor.TRANSPARENT );
       }
-      convertView.setVisibility( b.mVisible );
+      // TDLog.v( "DBlock adapter " + b.mId + " get view: view is " + ((convertView == null)? "null" : "non-null") );
+      convertView.setVisibility( b.getVisible() );
     }
     return convertView;
   }
@@ -631,14 +640,14 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = (DBlock)( getItem( pos ) );
       if ( b.mId == blk_id ) { // use block id instead of block itself
         View v = b.getView();
-        // TDLog.v( "DBlock adapter " + blk_id + " view is " + ((v == null)? "null" : "non-null") );
+        // TDLog.v( "DBlock adapter " + b.mId + " get tupe: view is " + ((v == null)? "null" : "non-null") );
         if ( v != null ) {
           ViewHolder holder = (ViewHolder) v.getTag();
           if ( holder != null ) {
             // TDLog.v( "holder set view text <" + b.mFrom + "> <" + b.mTo + ">" );
             holder.setViewText( b, this );
           }
-          v.setVisibility( b.mVisible );
+          v.setVisibility( b.getVisible() );
           v.invalidate();
         }
         return b;
@@ -683,7 +692,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
             } else if ( mParent.isCurrentStationName( b.mTo ) ) {
               tvTo.setTextColor( TDColor.LIGHT_GREEN );
             }
-            v.setVisibility( b.mVisible );
+            // TDLog.v( "DBlock adapter " + b.mId + " update name, view is " + ((v == null)? "null" : "non-null") );
+            v.setVisibility( b.getVisible() );
             v.invalidate();
           }
         // }
@@ -743,6 +753,21 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   //   }
   //   return revised;
   // }
+
+  /** this is used to drop blunder shots from the list
+   */
+  void dropBlunders()
+  {
+    int pos = 0; 
+    while ( pos < getCount() ) {
+      DBlock blk = (DBlock)getItem(pos);
+      if ( blk.getVisible() == View.GONE ) {
+        remove( blk );
+      } else {
+        ++pos;
+      }
+    }
+  }
 
 }
 

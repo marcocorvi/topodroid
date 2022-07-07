@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -107,7 +108,7 @@ class SurveyAccuracy
    */
   private void setBlocks( List< DBlock > blks ) 
   {
-    if ( blks == null || blks.size() == 0 ) return;
+    if ( TDUtil.isEmpty(blks) ) return;
     for ( DBlock blk : blks ) {
       if ( blk.mAcceleration > 10.0 ) { 
         mAccelerationMean += blk.mAcceleration;

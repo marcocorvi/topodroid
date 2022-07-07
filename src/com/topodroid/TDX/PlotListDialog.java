@@ -13,6 +13,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.common.PlotType;
 
@@ -133,10 +134,10 @@ class PlotListDialog extends MyDialog
         if ( TopoDroidApp.mSketches ) {
           slist = TopoDroidApp.mData.selectAllSketches( TDInstance.sid, TDStatus.NORMAL );
         }
-      if ( list.size() == 0 && ( slist == null || slist.size() == 0 ) ) 
+      if ( TDUtil.isEmpty(list)  && TDUtil.isEmpty(slist) ) 
        * END_SKETCH_3D */
       // TDLog("DistoX-PLOT", "list size " + list.size() );
-      if ( list.size() == 0 )
+      if ( TDUtil.isEmpty(list) )
       {
         TDToast.make( R.string.no_plots );
         dismiss();

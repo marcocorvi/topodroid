@@ -635,6 +635,7 @@
     <string name="undelete_shot">Замеры</string>
     <string name="undelete_overshoot">Сл.длинные замеры</string>
     <string name="undelete_check">Проверочные</string>
+    <!-- TODO string name="undelete_blunder">Blunders</string -->
     <string name="undelete_plot">Абрисы</string>
     <string name="delete_whole_leg">Удалить все замеры</string>
     <string name="visible_border">видимая граница</string>

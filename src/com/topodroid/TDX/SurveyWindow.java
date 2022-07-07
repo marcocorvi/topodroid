@@ -696,7 +696,7 @@ public class SurveyWindow extends Activity
       new SurveyCalibrationDialog( mActivity /*, mApp */ ).show();
     } else if ( TDLevel.overAdvanced && p++ == pos ) { // CALIBRATION CHECK SHOTS
       List< DBlock > shots = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
-      if ( shots.size() == 0 ) {
+      if ( TDUtil.isEmpty(shots) ) {
         TDToast.makeWarn( R.string.no_calib_check );
       } else {
         new CalibCheckDialog( mActivity, this, shots ).show();

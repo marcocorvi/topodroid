@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 // import com.topodroid.c3in.ParserBluetooth;
 // import com.topodroid.c3in.ParserSketch;
 
@@ -104,7 +105,7 @@ class GlWalls extends GlShape
 
   void logMinMax()
   {
-    if ( triangles.size() == 0 ) return;
+    if ( TDUtil.isEmpty(triangles) ) return;
     double xmin, xmax, ymin, ymax, zmin, zmax;
     Vector3D v0 = triangles.get(0).v1;
     xmin = xmax = v0.x;
@@ -145,7 +146,7 @@ class GlWalls extends GlShape
   {
     triangleCount = triangles.size();
     sideCount = triangleCount * 3;
-    if ( triangles.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(triangles) ) return null;
     // TDLog.v("TopoGL prepare faces: triangles " + triangleCount );
     // logMinMax();
 
@@ -189,7 +190,7 @@ class GlWalls extends GlShape
   {
     triangleCount = triangles.size();
     sideCount = triangleCount * 3;
-    if ( triangles.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(triangles) ) return null;
     // TDLog.v("TopoGL prepare sides: sides " + sideCount );
     // logMinMax();
 

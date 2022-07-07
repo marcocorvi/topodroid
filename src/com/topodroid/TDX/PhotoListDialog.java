@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDFile;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 
@@ -114,7 +115,7 @@ public class PhotoListDialog extends MyDialog
     // TDLog.Log(TDLog.LOG_PHOTO, "updatePhotoList size " + list.size() );
     // TDLog.v( "photo activity, update photo list " );
     // TDLog.v( "photo activity, update photo list. size " + list.size() );
-    if ( list.size() == 0 ) {
+    if ( TDUtil.isEmpty(list) ) {
       TDToast.makeBad( R.string.no_photos );
       dismiss();
     }

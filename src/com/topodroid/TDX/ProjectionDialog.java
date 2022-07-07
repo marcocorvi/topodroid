@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -484,7 +485,7 @@ class ProjectionDialog extends MyDialog
   synchronized private void doStart()
   {
     mList = TopoDroidApp.mData.selectAllShots( mSid, TDStatus.NORMAL );
-    if ( mList.size() == 0 ) {
+    if ( TDUtil.isEmpty(mList) ) {
       dismiss();
       TDToast.makeBad( R.string.few_data );
     } else {

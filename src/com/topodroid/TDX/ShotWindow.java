@@ -467,6 +467,7 @@ public class ShotWindow extends Activity
       mList.post( new Runnable() {
         @Override public void run() {
           // TDLog.v( "shot window notify data set changed " + mDataAdapter.getCount() );
+          // mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
           mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
         }
@@ -497,7 +498,7 @@ public class ShotWindow extends Activity
     // TDLog.Log( TDLog.LOG_SHOT, "updateShotList shots " + list.size() + " photos " + photos.size() );
     mDataAdapter.clear();
     // mList.setAdapter( mDataAdapter );
-    if ( list.size() == 0 ) {
+    if ( TDUtil.isEmpty(list) ) {
       // TDToast.makeWarn( R.string.no_shots );
       return;
     }
@@ -837,19 +838,20 @@ public class ShotWindow extends Activity
       List< DBlock > shots1 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.DELETED );
       List< DBlock > shots2 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
+      List< DBlock > shots4 = (TDLevel.overExpert)? mApp_mData.selectAllShots( TDInstance.sid, TDStatus.BLUNDER ) : null;
       List< PlotInfo > plots   = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       // the list of deleted plots contains an even number of items: plan-profile pairs
       if (  TDLevel.overAdvanced ) {
-        if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 && mDBlockBuffer.size() == 0 ) {
+        if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) && mDBlockBuffer.size() == 0 ) {
           TDToast.makeWarn( R.string.no_undelete_paste );
         } else {
-          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, mDBlockBuffer ) ).show();
+          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots, mDBlockBuffer ) ).show();
         }
       } else {
-        if ( shots1.size() == 0 && shots2.size() == 0 && shots3.size() == 0 && plots.size() == 0 ) {
+        if ( TDUtil.isEmpty(shots1) && TDUtil.isEmpty(shots2) && TDUtil.isEmpty(shots3) && TDUtil.isEmpty(shots4) && TDUtil.isEmpty(plots) ) {
           TDToast.makeWarn( R.string.no_undelete );
         } else {
-          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, plots, null ) ).show();
+          (new UndeleteDialog(mActivity, this, mApp_mData, TDInstance.sid, shots1, shots2, shots3, shots4, plots, null ) ).show();
         }
       }
       // updateDisplay( );
@@ -1612,7 +1614,7 @@ public class ShotWindow extends Activity
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
       } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
-        // ( blks == null || blks.size() == 0 ) cannot happen
+        // ( blks == null || blks.size() == 0 ) cannot happen // TDUtil.isEmpty(blks)
         (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
       //   highlightBlocks( mDataAdapter.mSelect );
       //   // clearMultiSelect( );
@@ -2000,7 +2002,7 @@ public class ShotWindow extends Activity
   {
     mApp.setHighlighted( blks );
     // TDLog.v( "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
-    if ( blks == null || blks.size() == 0 ) return;
+    if ( blks == null || blks.size() == 0 ) return; // TDUtil.isEmpty(blks)
     // now if there is a plot open it
     if ( TDInstance.recentPlot != null ) {
       startExistingPlot( TDInstance.recentPlot, TDInstance.recentPlotType, blks.get(0).mFrom );
@@ -2014,7 +2016,7 @@ public class ShotWindow extends Activity
   void colorBlocks( List< DBlock > blks, int color )  // HIGHLIGHT
   {
     // TDLog.v( "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
-    if ( blks == null || blks.size() == 0 ) return;
+    if ( TDUtil.isEmpty(blks) ) return;
     for ( DBlock blk : blks ) {
       blk.clearPaint();
       // mApp_mData.updateShotColor( blk.mId, TDInstance.sid, color );
@@ -2111,7 +2113,7 @@ public class ShotWindow extends Activity
    */
   private boolean checkXSections( List< DBlock > blks, String from, String to )
   {
-    if ( blks.size() == 0 ) return true;
+    if ( TDUtil.isEmpty(blks) ) return true;
     ArrayList<String> names = mApp_mData.getXSectionStations( TDInstance.sid );
     // for ( String name : names ) TDLog.v("check xsection [2] station: " + name );
     if (  ( from != null && from.length() > 0 && names.contains( from ) ) 

@@ -112,7 +112,7 @@ public class TglParser
   double lngToEast( double lng, double lat, double alt ) { return (mOrigin != null)? mOrigin.lngToEast( lng, lat, alt ) : 0.0; }
   double latToNorth( double lat, double alt ) { return (mOrigin != null)? mOrigin.latToNorth( lat, alt ) : 0.0; }
 
-  boolean isEmpty() { return shots.size() == 0 && splays.size() == 0; }
+  boolean isModelEmpty() { return shots.size() == 0 && splays.size() == 0; }
 
   // void setStartStation( Cave3DStation station ) { mStartStation = station; }
   void clearStartStation( ) { mStartStation = null; }

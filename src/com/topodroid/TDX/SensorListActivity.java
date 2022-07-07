@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDStatus;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.help.UserManualActivity;
 
 import java.util.List;
@@ -80,7 +81,7 @@ public class SensorListActivity extends Activity
     // TDLog.Log(TDLog.LOG_SENSOR, "updateSensorList size " + list.size() );
     mDataAdapter.clear();
     mList.setAdapter( mDataAdapter );
-    if ( list.size() == 0 ) {
+    if ( TDUtil.isEmpty(list) ) {
       TDToast.makeBad( R.string.no_sensors );
       finish();
     }

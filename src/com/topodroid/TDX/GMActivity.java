@@ -15,6 +15,7 @@ import com.topodroid.utils.TDMath;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDLocale;
+import com.topodroid.utils.TDUtil;
 import com.topodroid.math.TDMatrix;
 import com.topodroid.math.TDVector;
 import com.topodroid.ui.MyButton;
@@ -689,7 +690,7 @@ public class GMActivity extends Activity
   private void updateGMList( List< CBlock > list )
   {
     int n_saturated = 0;
-    if ( list.size() == 0 ) {
+    if ( TDUtil.isEmpty(list) ) {
       TDToast.makeBad( R.string.no_gms );
       return;
     }
@@ -1343,7 +1344,7 @@ public class GMActivity extends Activity
           break;
         }
       }
-      if ( list.size() == 0 ) {
+      if ( TDUtil.isEmpty(list) ) {
         TDToast.makeBad( R.string.few_calibs );
       } else {
         (new CalibValidateListDialog( this, this, list )).show();

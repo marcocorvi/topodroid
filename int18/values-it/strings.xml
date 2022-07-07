@@ -632,8 +632,9 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="undelete_text">Seleziona oggetto da recuoperare</string>
     <string name="undelete_paste_text">Elementi Ripristina/Incolla</string>
     <string name="undelete_shot">Tiri</string>
-    <string name="undelete_overshoot">Tiri troppo lunghi</string>
+    <string name="undelete_overshoot">Tiri lunghi</string>
     <string name="undelete_check">Controlli</string>
+    <string name="undelete_blunder">Falsi tiri</string>
     <string name="undelete_plot">Disegni</string>
     <string name="delete_whole_leg">Cancella l\'intera battuta</string>
     <string name="visible_border">bordo visibile</string>

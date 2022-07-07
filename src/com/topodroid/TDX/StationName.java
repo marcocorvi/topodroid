@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
+import com.topodroid.utils.TDStatus;
 import com.topodroid.utils.TDFeedback;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
@@ -24,6 +25,8 @@ import java.util.Set;
 // import java.util.ArrayList;
 
 import android.content.Context;
+
+import android.view.View;
 
 class StationName
 {
@@ -272,13 +275,15 @@ class StationName
     if ( update_db ) mData.updateShotLeg( blk.mId, mSid, LegType.EXTRA ); // must be done only if previous block is blunder
   }
 
-  /** clear the block stations and set its type to "blank"
+  /** clear the block stations and set its type to "blank" and status to "blunder"
    * @param blk   blunder block
    */
   protected void setBlunderName( DBlock blk )
   { 
     setBlockName( blk, "", "" );
     blk.setTypeBlank();
+    mData.deleteShot( blk.mId, mSid, TDStatus.BLUNDER );
+    blk.setVisible( View.GONE );
   }
 
   /** set the station of a splay

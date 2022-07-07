@@ -15,6 +15,7 @@ package com.topodroid.TDX;
 // import com.topodroid.c3in.ParserSketch;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 
 import java.nio.FloatBuffer;
 // import java.nio.ShortBuffer;
@@ -199,7 +200,7 @@ public class GlNames extends GlShape
 
   void logMinMax()
   {
-    if ( mNames.size() == 0 ) return;
+    if ( TDUtil.isEmpty(mNames) ) return;
     double xmin, xmax, ymin, ymax, zmin, zmax;
     Vector3D v0 = mNames.get(0).pos;
     xmin = xmax = v0.x;
@@ -226,7 +227,7 @@ public class GlNames extends GlShape
   void computeBBox()
   {
     xmin = xmax = ymin = ymax = zmin = zmax = 0;
-    if ( mNames.size() == 0 ) return;
+    if ( TDUtil.isEmpty(mNames) ) return;
     Vector3D v0 = mNames.get(0).pos;
     xmin = xmax = v0.x;
     ymin = ymax = v0.y;
@@ -246,7 +247,7 @@ public class GlNames extends GlShape
   {
     nameCount = mNames.size();
     // TDLog.v("NAMES init data " + nameCount );
-    if ( mNames.size() == 0 ) return;
+    if ( TDUtil.isEmpty(mNames) ) return;
     // FIXME INCREMENTAL : was initBuffer( Names )
     if ( mDataBuffer == null ) {
       initBuffer();
@@ -261,7 +262,7 @@ public class GlNames extends GlShape
   // force texture rebind 
   void unbindTexture() 
   {
-    if ( mNames.size() == 0 ) return;
+    if ( TDUtil.isEmpty(mNames) ) return;
     if ( mTexId < 0 ) return;
     GL.unbindTextTexture( mTexId );
     mTexId = -1;
@@ -269,7 +270,7 @@ public class GlNames extends GlShape
 
   void draw( float[] mvpMatrix )
   {
-    if ( stationMode == STATION_NONE || mNames.size() == 0 ) return;
+    if ( stationMode == STATION_NONE || TDUtil.isEmpty(mNames) ) return;
     if ( showStationNames() ) {
       // ------- BIND TEXT BITMAP
       if ( mBitmap != null ) {
@@ -396,7 +397,7 @@ public class GlNames extends GlShape
   // dim      minimum distance
   String checkName( float x, float y, float[] matrix, double dmin, boolean highlight )
   {
-    if ( mNames.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(mNames) ) return null;
     dmin /= GlModel.mHalfWidth;
     // TDLog.v("dmin " + dmin + " width " + GlModel.mWidth );
     float[] w = new float[4];
@@ -419,7 +420,7 @@ public class GlNames extends GlShape
   // dmin distance in world space
   // String checkName( float[] zn, float[] zf, double dmin, boolean highlight )
   // {
-  //   if ( mNames.size() == 0 ) return null;
+  //   if ( TDUtil.isEmpty(mNames) ) return null;
   //   dmin = dmin * dmin;
   //   int idx = -1;
   //   final float[] dz = { zf[0] - zn[0], zf[1] - zn[1], zf[2] - zn[2] };

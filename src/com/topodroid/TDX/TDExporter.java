@@ -650,7 +650,7 @@ public class TDExporter
   {
     List< FixedInfo > fixeds = data.selectAllFixed( sid, 0 );
     // TDLog.v( "get geoloc. data. Decl " + decl + " fixeds " + fixeds.size() );
-    if ( fixeds.size() == 0 ) return null;
+    if ( TDUtil.isEmpty(fixeds) ) return null;
 
     List< TDNum > nums = new ArrayList< TDNum >();
     List< DBlock > shots_data = data.selectAllExportShots( sid, 0 );
@@ -734,7 +734,7 @@ public class TDExporter
     final String coordinates6 = "    %.8f,%.8f,%.1f %.8f,%.8f,%.1f\n";
     // TDLog.v( "export as KML " + file.getFilename() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
-    if ( nums == null || nums.size() == 0 ) {
+    if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed KML export: no geolocalized station");
       return 2;
     }
@@ -873,7 +873,7 @@ public class TDExporter
   static int exportSurveyAsShp( OutputStream os, long sid, DataHelper data, SurveyInfo info, String survey, String dirname )
   {
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, false ); // false: Geoid altitude
-    if ( nums == null || nums.size() == 0 ) {
+    if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed SHP export: no geolocalized station");
       return 0;
     }
@@ -1003,7 +1003,7 @@ public class TDExporter
     final String feature = "\"Feature\"";
     // TDLog.v( "export as GeoJSON " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), 1.0f, true ); // true: ellipsoid altitude
-    if ( nums == null || nums.size() == 0 ) {
+    if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed GeoJSON export: no geolocalized station");
       return 2;
     }
@@ -1092,7 +1092,7 @@ public class TDExporter
   {
     // TDLog.v( "export as trackfile: " + file.getName() );
     List< TDNum > nums = getGeolocalizedData( sid, data, info.getDeclination(), TDUtil.M2FT, false ); // false: ... 
-    if ( nums == null || nums.size() == 0 ) {
+    if ( TDUtil.isEmpty(nums) ) {
       TDLog.Error( "Failed PLT export: no geolocalized station");
       return 2;
     }
@@ -1294,7 +1294,7 @@ public class TDExporter
    */
   static private void doTherionMaps( PrintWriter pw, SurveyInfo info, List< PlotInfo > plots )
   {
-    if ( plots.size() == 0 ) return;
+    if ( TDUtil.isEmpty(plots) ) return;
     for ( PlotInfo plt : plots ) {
       String subdir = TDInstance.survey + "/tdr"; // plot files
       String plotname =  info.name + "-" + plt.name;

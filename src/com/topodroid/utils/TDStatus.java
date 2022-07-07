@@ -17,6 +17,7 @@ public class TDStatus
   public static final int DELETED   = 1;  
   public static final int OVERSHOOT = 2;  
   public static final int CHECK     = 3;  
+  public static final int BLUNDER   = 4;   // blunder leg-shot
 
   // static final int CALIB     = 11;  
   // static final int GM        = 12;  

@@ -12,6 +12,7 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
 
 import java.util.ArrayList;
 
@@ -48,7 +49,7 @@ class SearchResult
   int nextPos( )
   {
     // TDLog.v( "size " + mPos.size() + " current index " + mIdx );
-    if ( mPos.size() == 0 ) return -1;
+    if ( TDUtil.isEmpty(mPos) ) return -1;
     mIdx = ( mIdx + 1 ) % mPos.size(); // move index forward
     return mPos.get( mIdx ).intValue();
   }
@@ -59,7 +60,7 @@ class SearchResult
 
   boolean contains( int pos ) 
   {
-    // if ( mPos.size() == 0 ) return false; 
+    // if ( TDUtil.isEmpty(mPos) ) return false; 
     for ( Integer i : mPos ) if ( i.equals( pos ) ) return true;
     return false;
   }

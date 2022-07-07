@@ -636,6 +636,7 @@
     <string name="undelete_shot">测线</string>
     <string name="undelete_overshoot">无效测线</string>
     <string name="undelete_check">检测</string>
+    <!-- TODO string name="undelete_blunder">Blunders</string -->
     <string name="undelete_plot">草图</string>
     <string name="delete_whole_leg">删除全部主线</string>
     <string name="visible_border">可见边框</string>

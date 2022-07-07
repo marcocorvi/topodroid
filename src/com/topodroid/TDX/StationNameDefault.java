@@ -191,13 +191,13 @@ class StationNameDefault extends StationName
     for ( DBlock blk : list ) {
       // TDLog.v( "BLOCK " + id(blk) + " " + name(blk) + " F " + from + " T " + to + " S " + station );
       if ( blk.mFrom.length() == 0 ) {
-        TDLog.v( "BLOCK " + id(blk) + " F EMPTY: prev " + id(prev) + " " + id(prev_prev) );
+        // TDLog.v( "BLOCK " + id(blk) + " F EMPTY: prev " + id(prev) + " " + id(prev_prev) );
         if ( blk.isScan() ) {
           nrLegShots = 0;
           setSplayName( blk, station );
           prev_prev = null;
           prev = null;
-          TDLog.v( "BLOCK " + id(blk) + " is scan: nulling prevs");
+          // TDLog.v( "BLOCK " + id(blk) + " is scan: nulling prevs");
           continue;
         }
         if ( blk.mTo.length() == 0 ) {
@@ -205,7 +205,7 @@ class StationNameDefault extends StationName
           if ( prev == null ) {
             prev_prev = prev;
             prev = blk;
-            TDLog.v( "BLOCK Null prev: set prev [1] " + id(prev) + " nulling prev_prev");
+            // TDLog.v( "BLOCK Null prev: set prev [1] " + id(prev) + " nulling prev_prev");
             // blk.mFrom = station;
             setSplayName( blk, station );
             // TDLog.v( "set prev [1] " + blk.mId + " " + name(blk) );
@@ -218,7 +218,7 @@ class StationNameDefault extends StationName
               blunder = prev;
               prev = prev_prev;
               prev_prev = null;
-              TDLog.v( "BLOCK blunder shot skip reset prev " + id(prev) + " nulling prev_prev" );
+              // TDLog.v( "BLOCK blunder shot skip reset prev " + id(prev) + " nulling prev_prev" );
               is_relative_distance = true;
             }
             if ( is_relative_distance ) {
@@ -233,14 +233,14 @@ class StationNameDefault extends StationName
                   }
                 }
                 nrLegShots = 2; // prev and this shot
-                TDLog.v( "BLOCK set leg 2: F " + from + " T " + to + " S " + station + " prev " + id(prev) + " blk " + id(blk) );
+                // TDLog.v( "BLOCK set leg 2: F " + from + " T " + to + " S " + station + " prev " + id(prev) + " blk " + id(blk) );
               } else {
                 nrLegShots ++;  // one more centerline shot
               }
               if ( nrLegShots == TDSetting.mMinNrLegShots ) {
                 legFeedback( );
                 current_station = null;
-                TDLog.v( "BLOCK leg " + nrLegShots + ": prev " + id(prev) + " set PREV " + from + "-" + to + " blk " + id(blk) + " blunder " + id(blunder) );
+                // TDLog.v( "BLOCK leg " + nrLegShots + ": prev " + id(prev) + " set PREV " + from + "-" + to + " blk " + id(blk) + " blunder " + id(blunder) );
                 setLegName( prev, from, to );
                 if ( blunder != null ) {
                   with_blunder = true;
@@ -264,12 +264,12 @@ class StationNameDefault extends StationName
                 }
                 // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
                 for ( DBlock b : sec_legs ) {
-                  TDLog.v( "BLOCK secondary leg [1b] " + b.mId );
+                  // TDLog.v( "BLOCK secondary leg [1b] " + b.mId );
                   setSecLegNameAndType( b, with_blunder );
                 }
                 sec_legs.clear();
               } else {
-                TDLog.v( "BLOCK secondary leg [2] " + blk.mId );
+                // TDLog.v( "BLOCK secondary leg [2] " + blk.mId );
                 setSecLegNameAndType( blk, with_blunder );
               }
             } else { // distance from prev > "closeness" setting
@@ -327,7 +327,7 @@ class StationNameDefault extends StationName
         }
         prev_prev = prev;
         prev = blk;
-        TDLog.v( "BLOCK " + id(blk) + " " + name(blk) + ": set prev [4] " + id(prev) + " prev_prev " + id(prev_prev) );
+        // TDLog.v( "BLOCK " + id(blk) + " " + name(blk) + ": set prev [4] " + id(prev) + " prev_prev " + id(prev_prev) );
       }
     }
     mCurrentStationName = current_station; // reset current station name

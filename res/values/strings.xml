@@ -645,6 +645,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="undelete_shot">Shots</string>
     <string name="undelete_overshoot">Overshoots</string>
     <string name="undelete_check">Checks</string>
+    <string name="undelete_blunder">Blunders</string>
     <string name="undelete_plot">Sketches</string>
     <string name="delete_whole_leg">Delete whole leg</string>
     <string name="visible_border">visible border</string>
