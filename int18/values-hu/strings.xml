@@ -207,7 +207,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="few_plots">Nincs elég vázlat</string -->
     <string name="few_calibs">Nincs elegendő kalibráció</string>
     <string name="getting_info">DistoX információk letöltése &#8230;</string>
-    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
+    <string name="gettingble_info">Letöltött DistoX-BLE információk &#8230;</string>
 
     <string name="calib_import_title">Kalibráció importálása</string>
     <string name="import_title">Felmérés importálása</string>
@@ -336,7 +336,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="legs">Poligon mérések</string>
     <string name="stations">Poligon-pont</string>
-    <!-- TODO string name="splays">Splays</string -->
+    <string name="splays">Sünök</string>
     <!-- UNUSED string name="fmt_listen">HALLGAT | %1$s</string -->
     <string name="fmt_id">Azonosító %1$s</string>
     <string name="fmt_latitude">Szélesség %1$s</string>
@@ -364,7 +364,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="no_data_reduction">Nincs adat redukálás</string>
     <string name="no_db">Nincs adatbázis</string>
     <string name="no_device_address">Nincs kiválasztott műszer</string>
-    <!-- TODO string name="no_device_window">Device window not available while downloading</string -->
+    <string name="no_device_window">Műszar ablak nem elérhető a letöltés közben</string>
     <!-- UNUSED string name="no_device_found">Nem talált műszert</string -->
     <string name="no_feature_audio">Hang nem támogatott</string>
     <string name="no_feature_pdf">PDF nem támogatott</string>
@@ -769,7 +769,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_open"      >Megnyit</string>
     <string name="button_read"      >Olvas  </string>
     <string name="button_recover"   >Visszaállít</string>
-    <!-- TODO string name="button_reverse"   >Reverse</string -->
+    <string name="button_reverse"   >Fordított</string>
     <!-- UNUSED string name="button_redo"      >Újra      </string -->
     <!-- UNUSED string name="button_regroup"   >Újra csoport</string -->
     <string name="button_dump"      >Letöltés</string>
@@ -1297,8 +1297,8 @@ A részletekért keresse fel a weboldalakat.\n
   <!-- UNUSED string name="pref_tdmanager_summary">TdManager használata</string -->
   <string name="pref_with_android_azimuth_title">Android iránytű</string>
   <string name="pref_with_android_azimuth_summary">Android iránytű/lejtszögmérő engedélyezése</string>
-  <!-- TODO string name="pref_blunder_shot_title">Blunder shots</string -->
-  <!-- TODO string name="pref_blunder_shot_summary">Skip blunder leg-shots</string -->
+  <string name="pref_blunder_shot_title">Baklövések</string>
+  <string name="pref_blunder_shot_summary">Poligon baklövés kihagyása</string>
   <string name="pref_with_levels_title">Rétegek</string>
   <string name="pref_with_levels_summary">Rajzlap rétegek használata</string>
   <!-- UNUSED string name="pref_with_rename_title">Mérés átnevezés</string -->
