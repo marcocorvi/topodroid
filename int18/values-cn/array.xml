@@ -17,11 +17,11 @@
      <item name="view">视图</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">无</item>
+     <item name="all">所有</item>
+     <item name="palette">调色板</item>
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">无</item>
@@ -348,15 +348,15 @@
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
-  <!-- FIXME string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">不显示</item>
      <item name="dec">十进制</item>
      <item name="hex">十六进制</item>
-     <item name="decg">G Decimal</item>
-     <item name="hexg">G Hex</item>
-     <item name="decm">M Decimal</item>
-     <item name="hexm">M Hex</item>
-  </string-array -->
+     <item name="decg">G 十进制</item>
+     <item name="hexg">G 十六进制</item>
+     <item name="decm">M 十进制</item>
+     <item name="hexm">M 十六进制</item>
+  </string-array>
 
   <!-- UNUSED string-array name="modelType">
      <item name="none">无</item>
@@ -366,10 +366,10 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array name="demReduce">
+     <item name="shrink">子样品</item>
+     <item name="cut">截取</item>
+  </string-array>
 
   <string-array name="splayUse">
      <item name="skip">跳过</item>
