@@ -1,3 +1,11 @@
+THIS TRANSLATION IS TOO INCOMPLETE
+In order to bring it back in the app you need to:
+  [1] translate all the untranslated strings
+  [2] copy the missing strings from the English strings.xml file and translate them
+  [3] send an email informing that the translation is ready for inclusion
+Translation with more than 20 lint errors are not accepted.
+Translation with more than 70 lint errors are dropped from the app.
+
 <?xml version="1.0" encoding="utf-8"?>
 <!-- TODO PLEASE, DO NOT FORGET TO REMOVE THE ENDING OF COMMENTS WHEN YOU TRANSLATE A STRING -->
 <resources>
