@@ -16,7 +16,7 @@
 
     <!-- NO string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
-    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
+    <string name="tdm_config_project">TD配置项目</string>
     <string name="double_back">再次点击返回键退出</string>
 
     <string name="new_survey_label">新建测量</string>
