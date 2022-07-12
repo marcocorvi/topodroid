@@ -16,7 +16,7 @@
 
     <!-- NO string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid管理</string>
-    <!-- TODO string name="tdm_config_project">project.tdconfig</string -->
+    <string name="tdm_config_project">TD配置项目</string>
     <string name="double_back">再次点击返回键退出</string>
 
     <string name="new_survey_label">新建测量</string>
@@ -86,7 +86,7 @@
     <!-- UNUSED string name="make_walls">洞壁</string -->
     <string name="missing_station">测点丢失</string>
     <string name="station_not_found">未发现测点</string>
-    <!-- TODO string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string -->
+    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">未发现测线数据</string>
     <string name="bad_sibling">坏的测量簇</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
@@ -207,7 +207,7 @@
     <!-- UNUSED string name="few_plots">Not enough sketches</string -->
     <string name="few_calibs">校准数据不足</string>
     <string name="getting_info">获取DistoX信息 &#8230;</string>
-    <!-- TODO string name="gettingble_info">Getting DistoX-BLE info &#8230;</string -->
+    <string name="gettingble_info">获取DistoX-BLE 信息 &#8230;</string>
 
     <string name="calib_import_title">校准输入</string>
     <string name="import_title">测量导入</string>
@@ -251,8 +251,8 @@
 
     <string name="photo_title">照片</string>
     <string name="photo_text">输入照片注释</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">照片失败</string>
+    <string name="photo_max_captures">超过最大照片限定</string>
     <string name="label_title">标注</string>
     <string name="label_text">输入标注文本</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
@@ -295,7 +295,7 @@
     <string name="error_name_required">输入名称</string>
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
-    <!-- TODO string name="error_team_required">Team required</string -->
+    <string name="error_team_required">团队规则</string>
 
     <!-- UNUSED string name="error_dir_exists">目录已经存在</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -305,7 +305,7 @@
     <string name="error_station_non_existing">不存在的测点</string>
     <string name="error_sensor_required">输入传感器</string>
     <string name="error_value_required">输入赋值</string>
-    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
+    <string name="error_bad_fixes">修正点不在测量数据中</string>
 
     <string name="group_title">校准数据组</string>
     <!-- UNUSED string name="group_policy_four">原则: 四个一组</string -->
@@ -329,12 +329,12 @@
     <!-- UNUSED string name="splays_toggle">Toggle splays display</string -->
     <string name="splays_on_off">副线开关</string>
     <string name="including_splays">副线</string>
-    <!-- TODO string name="with_splays">with splays</string -->
-    <!-- TODO string name="cell_size">Cell size [m]</string -->
+    <string name="with_splays">侧线跟随</string>
+    <string name="cell_size">单元尺寸 [m]</string>
 
     <string name="legs">主线</string>
     <string name="stations">站点</string>
-    <!-- TODO string name="splays">Splays</string -->
+    <string name="splays">侧线</string>
     <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">纬度 %1$s</string>
@@ -362,7 +362,7 @@
     <string name="no_data_reduction">无数据缩减</string>
     <string name="no_db">无数据库</string>
     <string name="no_device_address">设备未选定</string>
-    <!-- TODO string name="no_device_window">Device window not available while downloading</string -->
+    <string name="no_device_window">下载时设备窗口不可用</string>
     <!-- UNUSED string name="no_device_found">未发现设备</string -->
     <string name="no_feature_audio">音频不支持</string>
     <string name="no_feature_pdf">PDF格式不支持</string>
@@ -379,7 +379,7 @@
     <string name="no_sensors">测量无数据</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
     <string name="no_survey">未选定测量.</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+    <string name="no_symbols">没有符号面板.</string>
     <!-- UNUSED string name="no_thmanager">ThManager应用未安装</string -->
     <!-- UNUSED string name="no_db_viewer">DB_viewer app not found</string -->
     <string name="no_undelete">没有项目要恢复</string>
@@ -560,20 +560,20 @@
     <string name="sensor_value">值</string>
     <string name="sensor_comment">注释</string>
     <!-- UNUSED string name="insufficient_data">insufficient sensor data</string -->
-    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
-    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
+    <string name="sensor_no_readings">没有传感器读数</string>
+    <string name="sensor_failure">传感器失败: %1$d</string>
 
     <!-- UNUSED string name="shot_clino">clino</string -->
     <!-- UNUSED string name="shot_compass">compass</string -->
     <string name="shot_delete">删除测线 ?</string>
     <string name="shots_delete">删除多个测线 ?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">由X剖面图参考的站点.\n删除测射 ?</string>
+    <string name="shot_rename_unsafe">由X剖面图参考的站点.\n重命名测射 ?</string>
+    <string name="shots_rename_unsafe">由X剖面图参考的站点.\n重命名测射 ?</string>
     <string name="shot_check">标记测线为检测测线?</string>
     <string name="shot_from">从</string>
     <string name="shot_info">进入测量数据</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">测射 %1$s</string>
     <!-- UNUSED string name="shot_length">length</string -->
     <string name="shot_note">注释</string>
     <string name="shot_reverse">反测</string>
@@ -595,9 +595,9 @@
     <string name="survey_not_extend">警告:未设置测线扩展</string>
     <!-- UNUSED string name="survey_not_attached_extend">警告:未连接的测线和未设置扩展</string -->
     <string name="survey_no_data_reduction">警告:无数据缩减</string>
-    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
-    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
-    <!-- TODO string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <string name="survey_not_saved">警告: 测量信息未保存</string>
+    <string name="survey_bad_siblings">警告: 坏的主线空白数据</string>
+    <string name="survey_bad_magnetic">警告: 主线磁场异常</string>
     <string name="saturated_coeffs">警告:饱和校正系数</string>
     <string name="out_of_memory">警告:内存不足!</string>
     <string name="disk_io_error">危险:磁盘读写错误!</string>
@@ -615,9 +615,9 @@
     <string name="cover_m">M 分布: %1$.2f %%</string>
     <string name="cover_r">滚动分布: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
+    <string name="accuracy_low">低精度. 需要校准</string>
+    <string name="accuracy_medium">低精度</string>
+    <string name="accuracy_unreliable">传感器异常</string>
 
     <string name="empty_clipboard">清空剪贴板</string>
     <string name="cannot_rename">不能重命名测量</string>
@@ -636,7 +636,7 @@
     <string name="undelete_shot">测线</string>
     <string name="undelete_overshoot">无效测线</string>
     <string name="undelete_check">检测</string>
-    <!-- TODO string name="undelete_blunder">Blunders</string -->
+    <string name="undelete_blunder">错误</string>
     <string name="undelete_plot">草图</string>
     <string name="delete_whole_leg">删除全部主线</string>
     <string name="visible_border">可见边框</string>
@@ -703,9 +703,9 @@
     <!-- UNUSED string name="h_section">H-截面图</string -->
     <!-- UNUSED string name="landscape">地形</string -->
 
-    <!-- TODO string name="display_view">Display</string -->
-    <!-- TODO string name="plan_view">plan</string -->
-    <!-- TODO string name="profile_view">profile</string -->
+    <string name="display_view">显示</string>
+    <string name="plan_view">平面图</string>
+    <string name="profile_view">侧视图</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">DistoX内存读取失败</string>
@@ -730,7 +730,7 @@
     <!-- UNUSED string name="button_create"    >创建    </string -->
     <string name="button_color"     >颜色</string>
     <string name="button_compute"   >计算</string>
-    <!-- TODO string name="button_clear_convert">Clear convert</string -->
+    <string name="button_clear_convert">清除转换</string>
     <string name="button_convert"   >转换   </string>
     <string name="button_copy"      >拷贝</string>
     <string name="button_current"   >激活    </string>
@@ -766,8 +766,8 @@
     <string name="button_on"        >开启</string>
     <string name="button_open"      >打开      </string>
     <string name="button_read"      >读取      </string>
-    <!-- TODO string name="button_recover"   >Recover</string -->
-    <!-- TODO string name="button_reverse"   >Reverse</string -->
+    <string name="button_recover"   >恢复</string>
+    <string name="button_reverse"   >反向</string>
     <!-- UNUSED string name="button_redo"      >Redo      </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >回收站      </string>
@@ -787,7 +787,7 @@
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
-    <!-- FIXME SAME AS PREVIOUS string name="button_saved"     >保存测点</string -->
+    <string name="button_saved"     >保存站点</string>
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
@@ -835,7 +835,7 @@
     <string name="popup_do_splay">侧线测量</string>
     <string name="popup_do_leg">主线测量</string>
     <string name="popup_do_gm_data">校准测量</string>
-    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
+    <string name="popup_do_gm_group">校准. 数据组</string>
     <string name="popup_do_laser">激光</string>
     <string name="popup_do_scan">扫描</string>
     <string name="popup_do_shot">测射</string>
@@ -864,16 +864,16 @@
     <!-- UNUSED string name="azimuth">Azimuth [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="hint_cellsize">cell size</string -->
-    <!-- TODO string name="hint_cwd">work folder</string -->
-    <!-- TODO string name="hint_distance">distance</string -->
-    <!-- TODO string name="hint_length">length</string -->
-    <!-- TODO string name="hint_line">line</string -->
-    <!-- TODO string name="hint_origin">origin station</string -->
-    <!-- TODO string name="hint_point">point</string -->
-    <!-- TODO string name="hint_textsize">text size</string -->
-    <!-- TODO string name="hint_units">symbol units</string -->
-    <!-- TODO string name="hint_value">value</string -->
+    <string name="hint_cellsize">栅格尺寸</string>
+    <string name="hint_cwd">工作文件夹</string>
+    <string name="hint_distance">距离</string>
+    <string name="hint_length">长度</string>
+    <string name="hint_line">线</string>
+    <string name="hint_origin">起始站点</string>
+    <string name="hint_point">点</string>
+    <string name="hint_textsize">文字大小</string>
+    <string name="hint_units">符号单元</string>
+    <string name="hint_value">值</string>
 
     <string name="hint_notes">注释</string>
     <string name="hint_label">标签</string>
@@ -909,7 +909,7 @@
     <string name="split_nothing">无分割项</string>
     <string name="flip_shots">点击测量</string>
     <string name="copy_items">拷贝项目</string>
-    <!-- TODO string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string -->
+    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">引言</string>
     <string name="man_intro">1. 介绍</string>
@@ -953,7 +953,7 @@
     <string name="help_import">输入压缩的存档或者测量文件</string>
     <string name="help_symbol">绘图工具设置</string>
     <string name="help_therion">洞穴项目管理</string>
-    <!-- TODO string name="help_cave3d">Cave3D, 3D viewer</string -->
+    <string name="help_cave3d">Cave3D, 3D 视图</string>
     <!-- UNUSED string name="help_database">Database viewer app (SQliteViewer)</string -->
     <string name="help_prefs">编辑参考选项</string>
     <!-- UNUSED string name="help_log">日志偏好设置</string -->
@@ -1041,7 +1041,7 @@
     <string name="help_cover">校准数据的角度分布</string>
     <string name="help_compute">计算校准</string>
     <string name="help_write">将校准系数写入DistoX</string>
-    <!-- TODO string name="help_splays">Segment/point splays</string -->
+    <string name="help_splays">分割/侧线点</string>
 
     <string name="help_add_project">添加洞穴项目</string>
     <string name="help_add_surveys">添加测量</string>
@@ -1057,7 +1057,7 @@
     <string name="export_config">配置文件</string>
     <string name="export_csv_rawdata">Raw数据</string>
     <string name="export_dxf_blocks">DXF块</string>
-    <!-- TODO string name="export_dxf_version">Version</string -->
+    <string name="export_dxf_version">版本</string>
     <string name="export_georeference">地理参考</string>
     <string name="export_grid">网格</string>
     <string name="export_linedir">线方向</string>
@@ -1143,14 +1143,14 @@
     <string name="title_photo">更多测线编辑</string>
     <string name="title_photo_comment">照片注释</string>
     <string name="title_photo_list">照片</string>
-    <!-- TODO string name="title_photo_view">Photo</string -->
+    <string name="title_photo_view">照片</string>
     <string name="title_plot_save">输出草图</string>
     <!-- UNUSED string name="title_plot_merge">Merge sketch in</string -->
     <!-- UNUSED string name="title_plot_reload">重新导入草图</string -->
     <string name="title_plot_scraps">草图层</string>
     <string name="title_profile_flip">翻转剖面草图 ?</string>
     <string name="title_projection">投影剖面方位 %1$d</string>
-    <!-- TODO string name="title_reduction_errors">Survey data-reduction anomalies</string -->
+    <string name="title_reduction_errors">测量数据减少异常</string>
     <string name="title_refs">草图参考</string>
     <string name="title_scraps">绘制草图</string>
     <string name="title_scraps_outline">草图轮廓</string>
@@ -1218,13 +1218,13 @@
 
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
-    <!-- TODO string name="title_graph_paper">Graph paper 1:100 scale</string -->
-    <!-- TODO string name="graph_paper_scale">Adjust the line to be 5 cm long</string -->
+    <string name="title_graph_paper">方格比例 1:100</string>
+    <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 
-  <!-- TODO string name="exported_settings">Exported settings %1$s</string -->
+  <tring name="exported_settings">导出设置 %1$s</string>
   <string name="imported_settings">输入设置</string>
-  <!-- TODO string name="imported_settings_failed">Failed to import settings</string -->
-  <!-- TODO string name="export_settings_failed">Failed to export settings</string -->
+  <string name="imported_settings_failed">导入设置失败</string>
+  <string name="export_settings_failed">输出设置失败</string>
   <string name="pref_export_settings">输出设置</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
@@ -1294,8 +1294,8 @@
   <string name="pref_with_sensors_summary">启用 "传感器" 数据</string>
   <string name="pref_with_android_azimuth_title">安卓手机罗盘</string>
   <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
-  <!-- TODO string name="pref_blunder_shot_title">Blunder shots</string -->
-  <!-- TODO string name="pref_blunder_shot_summary">Skip blunder leg-shots</string -->
+  <string name="pref_blunder_shot_title">错误的测射</string>
+  <string name="pref_blunder_shot_summary">跳过错误的主线测射</string>
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
@@ -1339,8 +1339,8 @@
   <string name="pref_survex_splay_summary">在Survex中添加测点到辐测中</string>
   <string name="pref_survex_lrud_title">Survex/Therion的左右上下</string>
   <string name="pref_survex_lrud_summary">添加左右上下到Survex/Therion输出</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
+  <string name="pref_svg_program_title">SVG 程序</string>
+  <string name="pref_svg_program_summary">SVG程序目标</string>
   <string name="pref_svg_grid_title">参考线</string>
   <string name="pref_svg_grid_summary">添加参考线到SVG/PNG输出</string>
   <string name="pref_svg_roundtrip_title">SVG延迟</string>
@@ -1549,8 +1549,8 @@
   <string name="pref_lineacc_summary">贝塞尔三次插值精度</string>
   <string name="pref_linecorner_title">贝塞尔转折临界值</string>
   <string name="pref_linecorner_summary">贝塞尔角检测阈值</string>
-  <!-- TODO string name="pref_graph_paper_scale_title">Graph-paper scale</string -->
-  <!-- TODO string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string -->
+  <string name="pref_graph_paper_scale_title">方格纸比例</string>
+  <string name="pref_graph_paper_scale_summary">方格纸比例调整</string>
   <string name="pref_weeddistance_title">点清除段距离</string>
   <string name="pref_weeddistance_summary">线中清除点的最大距离[m]</string>
   <string name="pref_weedlength_title">点清除的分段长度</string>
@@ -1841,8 +1841,8 @@
     <string name="exported">保存文件 %1$s</string>
     <string name="export_failed">输出失败</string>
 
-    <!-- TODO string name="image_diagram">Direction diagram</string -->
-    <!-- TODO string name="image_photo">Photo</string -->
+    <string name="image_diagram">方向图</string>
+    <string name="image_photo">照片</string>
 
     <!-- 3D VIEWER strings -->
 
@@ -1871,7 +1871,7 @@
     <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
     <!-- NO string name="fractal_failed">Fractal compute failed</string -->
     <!-- NO string name="fractal_dimension">Fractal dimension</string -->
-    <!-- TODO string name="illegal_value">Illegal value</string -->
+    <string name="illegal_value">不合理值</string>
 
     <!-- UNUSED string name="info_title">信息</string -->
     <string name="info_surveys">测量</string>
@@ -2070,8 +2070,8 @@
     <string name="cpref_station_points_summary">总是显示站点 [n]</string>
     <string name="cpref_station_point_size_title">站点尺寸</string>
     <string name="cpref_station_point_size_summary">站点的尺寸 [8 pxl]</string>
-    <!-- TODO string name="cpref_station_text_size_title">Station text size</string -->
-    <!-- TODO string name="cpref_station_text_size_summary">Size of station text [20 pt]</string -->
+    <string name="cpref_station_text_size_title">站点文字尺寸</string>
+    <string name="cpref_station_text_size_summary">站点文字尺寸 [20 pt]</string>
     <string name="cpref_measure_dialog_title">距离信息</string>
     <string name="cpref_measure_dialog_summary">距离信息替代对话框 [n]</string>
     <string name="cpref_grid_above_title">顶部网格</string>
