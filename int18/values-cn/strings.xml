@@ -787,7 +787,6 @@
     <string name="button_search"    >搜索    </string>
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
-    <string name="button_saved"     >保存站点</string>
     <string name="button_split"     >分割     </string>
     <string name="button_station"   >以 为中心</string>
     <string name="button_store"     >存储库     </string>
@@ -1221,7 +1220,7 @@
     <string name="title_graph_paper">方格比例 1:100</string>
     <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 
-  <tring name="exported_settings">导出设置 %1$s</string>
+  <string name="exported_settings">导出设置 %1$s</string>
   <string name="imported_settings">输入设置</string>
   <string name="imported_settings_failed">导入设置失败</string>
   <string name="export_settings_failed">输出设置失败</string>
