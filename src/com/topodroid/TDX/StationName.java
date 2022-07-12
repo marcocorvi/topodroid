@@ -48,11 +48,11 @@ class StationName
 
   /** debug
    */
-  protected String id( DBlock blk ) { return (blk==null)? "null" : Long.toString(blk.mId); }
+  protected String id( DBlock blk ) { return (blk==null)? "-" : Long.toString(blk.mId); }
 
   /** debug
    */
-  protected String name( DBlock blk ) { return (blk==null)? "<->" : "<" + blk.mFrom + "-" + blk.mTo + ">"; }
+  protected String name( DBlock blk ) { return (blk==null)? "<->" : "<" + Long.toString(blk.mId) + ":" + blk.mFrom + "-" + blk.mTo + ">"; }
 
 
   boolean assignStations( List< DBlock > list, Set<String> sts )
@@ -225,6 +225,7 @@ class StationName
    * @param blk    leg block
    * @param from    FROM station
    * @param to      TO station
+   * @note the block name is saved to the database
    */
   protected void setLegName( DBlock blk, String from, String to )
   {
@@ -241,6 +242,7 @@ class StationName
    * @param from    FROM station
    * @param to      TO station
    * @param is_backsight_shot whether the leg is backsight
+   * @note the block name is saved to the database
    */
   protected void setLegName( DBlock blk, String from, String to, boolean is_backsight_shot )
   {
@@ -254,6 +256,7 @@ class StationName
  
   /** set the block type to "secondary leg"
    * @param blk   leg secondary-block
+   * @note the block name is NOT saved to the database
    */
   protected void setSecLegName( DBlock blk )
   {
@@ -264,32 +267,44 @@ class StationName
  
   /** set the block type to "secondary leg"
    * @param blk   leg secondary-block
-   * @param update_db whether to update leg type in the database
-   * @note called when the block comes after a blunder shot 
+   * @param update_db whether to update leg type in the database - done in case of BLUNDER
+   * @note called when the block comes after a blunder shot
    */
   protected void setSecLegNameAndType( DBlock blk, boolean update_db )
   {
     // TDLog.v( "set sec leg " + blk.mId );
     // setBlockName( blk, "", "" );
     blk.setTypeSecLeg();
-    if ( update_db ) mData.updateShotLeg( blk.mId, mSid, LegType.EXTRA ); // must be done only if previous block is blunder
+    if ( update_db ) mData.updateShotLeg( blk.mId, mSid, LegType.EXTRA ); // must be done only if previous block is BLUNDER
   }
 
   /** clear the block stations and set its type to "blank" and status to "blunder"
    * @param blk   blunder block
+   * @note this should be called only if TDSetting.mBlunderShot is true
+   * @note the block name and blunder status are saved to the database
    */
-  protected void setBlunderName( DBlock blk )
+  protected void setBlunderName( DBlock blk ) // BLUNDER
   { 
+    // if ( ! TDSetting.mBlunderShot ) return; // unnecessary
     setBlockName( blk, "", "" );
     blk.setTypeBlank();
     mData.deleteShot( blk.mId, mSid, TDStatus.BLUNDER );
     blk.setVisible( View.GONE );
   }
 
+  /** clear the blunder status of the block record in the datebase
+   */
+  protected void clearBlunder( DBlock blk ) 
+  {
+    mData.undeleteShot( blk.mId, mSid );
+    blk.setVisible( View.VISIBLE );
+  }
+
   /** set the station of a splay
    * @param splay  splay block
    * @param name   station 
    * @note if the DistoX is in normal mode the station is FROM, if it is backsight the station is TO
+   * @note the block name is saved to the database
    */
   protected void setSplayName( DBlock splay, String name ) 
   {

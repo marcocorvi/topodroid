@@ -138,6 +138,11 @@ public class DBlock
    */
   public int getVisible() { return mVisible; }
 
+  /** test if the block is not visible (ie it is a bunder)
+   * @return true if the block is not visible
+   */
+  public boolean isNotVisible() { return mVisible == View.GONE; }
+
   /** get the reduced flag (lowest three bits)
    * @return the reduced flag
    */
@@ -146,18 +151,18 @@ public class DBlock
   // ------------------------------------------------------------------
   // BLOCK TYPE
 
-  private static final int BLOCK_BLANK       =  0;
-  public  static final int BLOCK_MAIN_LEG    =  1; // primary leg shot
-  private static final int BLOCK_SEC_LEG     =  2; // additional shot of a centerline leg
-  private static final int BLOCK_BLANK_LEG   =  3; // blank centerline leg-shot
-  private static final int BLOCK_BACK_LEG    =  4; // 
+  private static final int BLOCK_BLANK     =  0;
+  public  static final int BLOCK_MAIN_LEG  =  1; // primary leg shot
+  private static final int BLOCK_SEC_LEG   =  2; // additional shot of a centerline leg
+  private static final int BLOCK_BLANK_LEG =  3; // blank centerline leg-shot
+  private static final int BLOCK_BACK_LEG  =  4; // 
   // splays must come last
-  private static final int BLOCK_SPLAY       =  5;
-  private static final int BLOCK_X_SPLAY     =  6; // FIXME_X_SPLAY cross splay
-  private static final int BLOCK_H_SPLAY     =  7; // FIXME_H_SPLAY horizontal splay
-  private static final int BLOCK_V_SPLAY     =  8; // FIXME_V_SPLAY vertical splay
-  private static final int BLOCK_SCAN        =  9; // FIXME_S_SPLAY scan splay
-  // private static final int BLOCK_BLUNDER_LEG = 10; // 
+  private static final int BLOCK_SPLAY     =  5;
+  private static final int BLOCK_X_SPLAY   =  6; // FIXME_X_SPLAY cross splay
+  private static final int BLOCK_H_SPLAY   =  7; // FIXME_H_SPLAY horizontal splay
+  private static final int BLOCK_V_SPLAY   =  8; // FIXME_V_SPLAY vertical splay
+  private static final int BLOCK_SCAN      =  9; // FIXME_S_SPLAY scan splay
+  // private static final int BLOCK_BLUNDER   = 10; // 
 
   /** block-type to leg-type table
    */
@@ -195,13 +200,13 @@ public class DBlock
     TDColor.LIGHT_GRAY,   // 3 sec. leg
     TDColor.VIOLET,       // 4 blank leg
     TDColor.LIGHT_YELLOW, // 6 back leg
-    // TDColor.VIOLET,       // 4 blunder leg
     TDColor.LIGHT_BLUE,   // 2 splay
     TDColor.GREEN,        // 5 FIXME_X_SPLAY X splay
     TDColor.DARK_BLUE,    // 7 H_SPLAY
     TDColor.DEEP_BLUE,    // 8 V_SPLAY
     TDColor.YELLOW_GREEN, // 9 SCAN
     TDColor.GREEN
+    // TDColor.VIOLET,       // 4 blunder leg BLUNDER
   };
 
   /** get the type of this block
@@ -249,23 +254,27 @@ public class DBlock
 
   /** return true if the block type is BLANK
    */
-  public boolean isBlank()      { return mBlockType == BLOCK_BLANK; }
+  public boolean isBlank() { return mBlockType == BLOCK_BLANK; }
 
   /** return true if the block type is MAIN_LEG or BACK_LEG
    */
-  public boolean isLeg()        { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
+  public boolean isLeg() { return mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
 
   /** return true if the block type is MAIN_LEG
    */
-  public boolean isMainLeg()    { return mBlockType == BLOCK_MAIN_LEG; }
+  public boolean isMainLeg() { return mBlockType == BLOCK_MAIN_LEG; }
 
   /** return true if the block type is BACK_LEG
    */
-  public boolean isBackLeg()    { return mBlockType == BLOCK_BACK_LEG; }
+  public boolean isBackLeg() { return mBlockType == BLOCK_BACK_LEG; }
 
   /** return true if the block type is SEC_LEG
    */
-  public boolean isSecLeg()     { return mBlockType == BLOCK_SEC_LEG; }
+  public boolean isSecLeg() { return mBlockType == BLOCK_SEC_LEG; }
+
+  /** return true if the block type is any LEG
+   */
+  public boolean isAnyLeg() { return mBlockType == BLOCK_SEC_LEG || mBlockType == BLOCK_MAIN_LEG || mBlockType == BLOCK_BACK_LEG; }
 
   /** return true if the given type is (any) SPLAY
    * @param t   given type
@@ -313,7 +322,7 @@ public class DBlock
   //   if ( mBlockType == BLOCK_H_SPLAY )  return LegType.HSPLAY;
   //   if ( mBlockType == BLOCK_V_SPLAY )  return LegType.VSPLAY;
   //   if ( mBlockType == BLOCK_BACK_LEG ) return LegType.BACK;
-  //   if ( mBlockType == BLOCK_BLUNDER_LEG ) return LegType.BLUNDER;
+  //   if ( mBlockType == BLOCK_BLUNDER )  return LegType.BLUNDER;
   //   // if ( mBlockType == BLOCK_BLANK    ) return LegType.INVALID;
   //   return LegType.NORMAL;
   // }
@@ -330,7 +339,7 @@ public class DBlock
        case LegType.HSPLAY:  mBlockType = BLOCK_H_SPLAY;     break;
        case LegType.VSPLAY:  mBlockType = BLOCK_V_SPLAY;     break;
        case LegType.SCAN:    mBlockType = BLOCK_SCAN;        break;
-       // case LegType.BLUNDER: mBlockType = BLOCK_BLUNDER_LEG; break;
+       // case LegType.BLUNDER: mBlockType = BLOCK_BLUNDER; break;
        default: /* nothing */
      }
   }

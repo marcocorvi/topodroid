@@ -13,6 +13,8 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDStatus;
+import com.topodroid.common.LegType;
 import com.topodroid.prefs.TDSetting;
 
 import java.util.List;
@@ -20,6 +22,7 @@ import java.util.Set;
 import java.util.ArrayList;
 
 import android.content.Context;
+import android.view.View;
 
 class StationNameDefault extends StationName
 {
@@ -44,18 +47,20 @@ class StationNameDefault extends StationName
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
 
     boolean ret = false;
-    TDLog.v("DATA " + "assign station after " + id(blk0) + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
+    // TDLog.v("DATA " + "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
     ArrayList< DBlock > sec_legs = new ArrayList<>();
+    // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = StationPolicy.mShotAfterSplays;
     // String  current_station = mCurrentStationName;
-    // TDLog.v( "default assign stations after. blk0 " + id(blk0) + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
+    // TDLog.v( "default assign stations after. blk0 " + blk0.mId + " bs " + bs + " survey_stations " + survey_stations + " shot_after_splay " + shot_after_splays );
 
     String main_from = null;
     String main_to   = null;
 
     // boolean increment = true;
+    // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = blk0;
     String from = blk0.mFrom;
@@ -76,7 +81,14 @@ class StationNameDefault extends StationName
       next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? next : from;
     }
+
     // TDLog.v( "F " + from + " T " + to + " N " + next + " S " + station );
+    // if ( TDLog.LOG_DATA ) {
+    //   TDLog.Log( TDLog.LOG_DATA, "assign after: F<" + from + "> T<" + to + "> N<" + next + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
+    //   StringBuilder sb = new StringBuilder();
+    //   for ( String st : sts ) sb.append(st + " " );
+    //   TDLog.Log(TDLog.LOG_DATA, "set " + sb.toString() );
+    // }
 
     for ( DBlock blk : list ) {
       if ( blk.mId == blk0.mId ) continue;
@@ -108,17 +120,18 @@ class StationNameDefault extends StationName
         ret = true;
 	sts.add( from );
 	sts.add( to );
-        // TDLog.v( "main leg: " + id(blk) + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
+        // TDLog.Log( TDLog.LOG_DATA, "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
+        // TDLog.v( "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
 	  prev = blk;
           setLegName( blk, main_to, main_from );
           ret = true;
-          // TDLog.v( "back leg: " + id(blk) + " F<" + main_from + "> T<" + main_to + "> bs " + bs );
+          // TDLog.Log( TDLog.LOG_DATA, "back leg: " + blk.mId + " F<" + main_from + "> T<" + main_to + "> bs " + bs );
 	}
 	main_from = main_to = null;
       } else {
-        // TDLog.v( "blk is skipped " + id(blk) + " prev " + id(prev) );
+        // TDLog.v( "blk is skipped " + blk.mId + " prev " + prev.mId );
 	if ( ! blk.isRelativeDistance( prev ) ) {
           sec_legs.add( blk );
         } else {
@@ -146,7 +159,7 @@ class StationNameDefault extends StationName
   //       if ( Math.abs(i2-i1) != 1 ) {
   //         StringBuilder sb = new StringBuilder();
   //         for ( String st : sts ) sb.append(st).append("," );
-  //         TDLog.Error( from + "-" + to + " blk " + id(blk) + " set " + sb.toString() );
+  //         TDLog.Error( from + "-" + to + " blk " + blk.mId + " set " + sb.toString() );
   //       }
   //     } catch ( NumberFormatException e ) { }
   //   }
@@ -161,10 +174,15 @@ class StationNameDefault extends StationName
   @Override
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
-    TDLog.v("BLOCK DATA " + "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
+    // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
+    // TDLog.v("DATA " + "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
 
     int survey_stations = StationPolicy.mSurveyStations;
     if ( survey_stations <= 0 ) return false; // assign always false with no policy
+
+    if ( TDSetting.mBlunderShot ) {
+      return (new StationNameDefaultBlunder( mContext, mData, mSid )).assignStations( list, sts );
+    }
 
     boolean ret = false;
     boolean forward_shots = ( survey_stations == 1 );
@@ -172,10 +190,9 @@ class StationNameDefault extends StationName
     String  current_station  = mCurrentStationName; // steal current station name
     mCurrentStationName = null;
 
-    // // TDLog.v( "BLOCK assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
+    // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
     DBlock prev = null;
-    DBlock prev_prev = null; // prev of prev (for BLUNDER SHOT)
     String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                                    : DistoXStationName.mSecondStation;
     String to   = ( forward_shots )? DistoXStationName.mSecondStation   // next TO station
@@ -183,45 +200,35 @@ class StationNameDefault extends StationName
     String station = ( current_station != null )? current_station
                    : (shot_after_splay ? from : "");  // splays station
 
+    // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
+    // if ( TDLog.LOG_DATA ) {
+    //   StringBuilder sb = new StringBuilder();
+    //   for ( String st : sts ) sb.append(st + " " );
+    //   TDLog.Log(TDLog.LOG_DATA, "set " + sb.toString() );
+    // }
+
     int nrLegShots = 0;
+
     ArrayList< DBlock > sec_legs = new ArrayList<>();
-    DBlock blunder = null;
-    boolean with_blunder = false;
 
     for ( DBlock blk : list ) {
-      // TDLog.v( "BLOCK " + id(blk) + " " + name(blk) + " F " + from + " T " + to + " S " + station );
+      // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> F " + from + " T " + to + " S " + station );
       if ( blk.mFrom.length() == 0 ) {
-        // TDLog.v( "BLOCK " + id(blk) + " F EMPTY: prev " + id(prev) + " " + id(prev_prev) );
         if ( blk.isScan() ) {
           nrLegShots = 0;
           setSplayName( blk, station );
-          prev_prev = null;
           prev = null;
-          // TDLog.v( "BLOCK " + id(blk) + " is scan: nulling prevs");
           continue;
         }
+        // TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
         if ( blk.mTo.length() == 0 ) {
-          // TDLog.v( "BLOCK " + blk.mId + " T EMPTY");
           if ( prev == null ) {
-            prev_prev = prev;
             prev = blk;
-            // TDLog.v( "BLOCK Null prev: set prev [1] " + id(prev) + " nulling prev_prev");
             // blk.mFrom = station;
             setSplayName( blk, station );
-            // TDLog.v( "set prev [1] " + blk.mId + " " + name(blk) );
+            // TDLog.Log( TDLog.LOG_DATA, "set prev [1] " + blk.mId + " F<" + blk.mFrom + ">" );
           } else {
-            boolean is_relative_distance = false;
-            // BLUNDER SHOT SKIP
             if ( prev.isRelativeDistance( blk ) ) {
-              is_relative_distance = true;
-            } else if ( TDSetting.mBlunderShot && prev_prev != null && prev_prev.isRelativeDistance( blk ) ) {
-              blunder = prev;
-              prev = prev_prev;
-              prev_prev = null;
-              // TDLog.v( "BLOCK blunder shot skip reset prev " + id(prev) + " nulling prev_prev" );
-              is_relative_distance = true;
-            }
-            if ( is_relative_distance ) {
               sec_legs.add( blk );
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
@@ -233,20 +240,15 @@ class StationNameDefault extends StationName
                   }
                 }
                 nrLegShots = 2; // prev and this shot
-                // TDLog.v( "BLOCK set leg 2: F " + from + " T " + to + " S " + station + " prev " + id(prev) + " blk " + id(blk) );
+                // TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
               } else {
                 nrLegShots ++;  // one more centerline shot
               }
               if ( nrLegShots == TDSetting.mMinNrLegShots ) {
                 legFeedback( );
                 current_station = null;
-                // TDLog.v( "BLOCK leg " + nrLegShots + ": prev " + id(prev) + " set PREV " + from + "-" + to + " blk " + id(blk) + " blunder " + id(blunder) );
+                // TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
                 setLegName( prev, from, to );
-                if ( blunder != null ) {
-                  with_blunder = true;
-                  setBlunderName( blunder );
-                  blunder = null;
-                }
                 ret = true;
                 setLegExtend( prev );
                 if ( forward_shots ) {
@@ -263,30 +265,21 @@ class StationNameDefault extends StationName
                   // logJump( blk, to, from, sts );
                 }
                 // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
-                for ( DBlock b : sec_legs ) {
-                  // TDLog.v( "BLOCK secondary leg [1b] " + b.mId );
-                  setSecLegNameAndType( b, with_blunder );
-                }
+                for ( DBlock b : sec_legs ) setSecLegName( b );
                 sec_legs.clear();
               } else {
-                // TDLog.v( "BLOCK secondary leg [2] " + blk.mId );
-                setSecLegNameAndType( blk, with_blunder );
+                setSecLegName( blk );
               }
             } else { // distance from prev > "closeness" setting
               nrLegShots = 0;
               setSplayName( blk, station );
-              prev_prev = prev;
               prev = blk;
-              with_blunder = false;
-              // TDLog.v( "BLOCK not close: set prev [2] " + id(prev) + " prev_prev " + id(prev_prev) );
+              // TDLog.Log( TDLog.LOG_DATA, "set prev [2] " + blk.mId + " F<" + blk.mFrom + ">" );
             }
           }
         } else { // blk.mTo.length() > 0 : blk already SPLAY
           nrLegShots = 0;
-          prev_prev = prev;
           prev = blk;
-          with_blunder = false;
-          // TDLog.v( "BLOCK T " + id(blk) + ": set prev [3] " + id(prev) + " prev_prev " + id(prev_prev) );
         }
       } else { // blk.mFrom.length > 0
         if ( blk.mTo.length() > 0 ) { // FROM non-empty, TO non-empty --> LEG
@@ -319,15 +312,13 @@ class StationNameDefault extends StationName
                                          : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
             }
           }
-          // TDLog.Log( TDLog.LOG_DATA, "ID " + id(blk) + ": " + name(blk) + " F " + from + " T " + to + " S " + station );
+          // TDLog.Log( TDLog.LOG_DATA, "ID " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " F " + from + " T " + to + " S " + station );
 
           nrLegShots = TDSetting.mMinNrLegShots;
         } else { // FROM non-empty, TO empty --> SPLAY
           nrLegShots = 0;
         }
-        prev_prev = prev;
         prev = blk;
-        // TDLog.v( "BLOCK " + id(blk) + " " + name(blk) + ": set prev [4] " + id(prev) + " prev_prev " + id(prev_prev) );
       }
     }
     mCurrentStationName = current_station; // reset current station name

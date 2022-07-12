@@ -755,9 +755,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   // }
 
   /** this is used to drop blunder shots from the list
+   * @note this should be called only if TDSetting.mBlunderShot is true
    */
-  void dropBlunders()
+  void dropBlunders() // BLUNDER
   {
+    // if ( ! TDSetting.mBlunderShot ) return; // not necessary
     int pos = 0; 
     while ( pos < getCount() ) {
       DBlock blk = (DBlock)getItem(pos);

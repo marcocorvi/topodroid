@@ -467,7 +467,7 @@ public class ShotWindow extends Activity
       mList.post( new Runnable() {
         @Override public void run() {
           // TDLog.v( "shot window notify data set changed " + mDataAdapter.getCount() );
-          // mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
+          // if ( TDSetting.mBlunderShot )  mDataAdapter.dropBlunders(); // BLUNDER uncomment to drop the blunder from the shot list immediately
           mDataAdapter.notifyDataSetChanged(); // THIS IS IMPORTANT TO REFRESH THE DATA LIST
           mList.setSelection( mDataAdapter.getCount() - 1 );
         }
@@ -838,7 +838,7 @@ public class ShotWindow extends Activity
       List< DBlock > shots1 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.DELETED );
       List< DBlock > shots2 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.OVERSHOOT );
       List< DBlock > shots3 = mApp_mData.selectAllShots( TDInstance.sid, TDStatus.CHECK );
-      List< DBlock > shots4 = (TDLevel.overExpert)? mApp_mData.selectAllShots( TDInstance.sid, TDStatus.BLUNDER ) : null;
+      List< DBlock > shots4 = (TDLevel.overExpert && TDSetting.mBlunderShot)? mApp_mData.selectAllShots( TDInstance.sid, TDStatus.BLUNDER ) : null;
       List< PlotInfo > plots   = mApp_mData.selectAllPlots( TDInstance.sid, TDStatus.DELETED );
       // the list of deleted plots contains an even number of items: plan-profile pairs
       if (  TDLevel.overAdvanced ) {

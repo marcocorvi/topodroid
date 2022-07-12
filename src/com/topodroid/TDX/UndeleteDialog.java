@@ -15,6 +15,7 @@ import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
 // import com.topodroid.utils.TDStatus;
 import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -62,7 +63,7 @@ class UndeleteDialog extends MyDialog
   private ArrayList< UndeleteItem > mShots1 = null; // deleted
   private ArrayList< UndeleteItem > mShots2 = null; // overshoot
   private ArrayList< UndeleteItem > mShots3 = null; // check
-  private ArrayList< UndeleteItem > mShots4 = null; // blunder
+  private ArrayList< UndeleteItem > mShots4 = null; // blunder BLUNDER
 
   private int mStatus;
 
@@ -71,10 +72,10 @@ class UndeleteDialog extends MyDialog
    * @param parent    parent window
    * @param data      data database
    * @param sid       survey ID
-   * @param shots1    ... 
-   * @param shots2    ... 
-   * @param shots3    ... 
-   * @param shots4    ... 
+   * @param shots1    deleted shots
+   * @param shots2    overshhoted shots
+   * @param shots3    check shots
+   * @param shots4    blunder shots
    * @param plots     deleted plots (plan-profile pairs)
    * @param buffer    data-block buffer (copy/cut and paste)
    * @note the choice of two separate lists of plots: plans and profiles is brittle
@@ -106,7 +107,7 @@ class UndeleteDialog extends MyDialog
         mShots3.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_CALIB_CHECK ) );
       }
     }
-    if ( TDUtil.isNonEmpty(shots4) ) {
+    if ( TDSetting.mBlunderShot && TDUtil.isNonEmpty(shots4) ) { // BLUNDER
       mShots4 = new ArrayList< UndeleteItem >();
       for ( DBlock b : shots4 ) {
         mShots4.add( new UndeleteItem( b.mId, String.format(Locale.US, "%d %.2f %.1f %.1f", b.mId, b.mLength, b.mBearing, b.mClino ), UndeleteItem.UNDELETE_BLUNDER ) );
@@ -229,8 +230,8 @@ class UndeleteDialog extends MyDialog
           }
         }
         break;
-      case 4:
-        if ( mShots4 != null ) {
+      case 4: // BLUNDER
+        if ( /* TDSetting.mBlunderShot && */ mShots4 != null ) { 
           for ( UndeleteItem item : mShots4 ) if ( item.flag ) {
             update = true;
             mData.undeleteShot( item.id, mSid );
@@ -253,7 +254,7 @@ class UndeleteDialog extends MyDialog
     if ( mShots1 != null ) mArrayAdapter1 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots1 );
     if ( mShots2 != null ) mArrayAdapter2 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots2 );
     if ( mShots3 != null ) mArrayAdapter3 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots3 );
-    if ( mShots4 != null ) mArrayAdapter4 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots4 );
+    if ( /* TDSetting.mBlunderShot && */ mShots4 != null ) mArrayAdapter4 = new UndeleteAdapter( mContext, this, R.layout.undelete_row, mShots4 );
 
     mList = (ListView) findViewById(R.id.list_undelete);
     // mList.setOnItemClickListener( this );
@@ -297,24 +298,34 @@ class UndeleteDialog extends MyDialog
   {
     switch ( mStatus ) {
       case 0:
-        mBtnStatus.setText( R.string.undelete_plot );
-        mList.setAdapter( mArrayAdapter0 );
+        if ( mArrayAdapter0 != null ) {
+          mBtnStatus.setText( R.string.undelete_plot );
+          mList.setAdapter( mArrayAdapter0 );
+        }
         break;
       case 1:
-        mBtnStatus.setText( R.string.undelete_shot );
-        mList.setAdapter( mArrayAdapter1 );
+        if ( mArrayAdapter1 != null ) {
+          mBtnStatus.setText( R.string.undelete_shot );
+          mList.setAdapter( mArrayAdapter1 );
+        }
         break;
       case 2:
-        mBtnStatus.setText( R.string.undelete_overshoot );
-        mList.setAdapter( mArrayAdapter2 );
+        if ( mArrayAdapter2 != null ) {
+          mBtnStatus.setText( R.string.undelete_overshoot );
+          mList.setAdapter( mArrayAdapter2 );
+        }
         break;
       case 3:
-        mBtnStatus.setText( R.string.undelete_check );
-        mList.setAdapter( mArrayAdapter3 );
+        if ( mArrayAdapter3 != null ) {
+          mBtnStatus.setText( R.string.undelete_check );
+          mList.setAdapter( mArrayAdapter3 );
+        }
         break;
-      case 4:
-        mBtnStatus.setText( R.string.undelete_blunder );
-        mList.setAdapter( mArrayAdapter4 );
+      case 4: // BLUNDER
+        if ( /* TDSetting.mBlunderShot && */ mArrayAdapter4 != null ) {
+          mBtnStatus.setText( R.string.undelete_blunder );
+          mList.setAdapter( mArrayAdapter4 );
+        }
         break;
     }
     // mList.invalidate( );
@@ -334,8 +345,8 @@ class UndeleteDialog extends MyDialog
         if ( mShots2 != null ) break;
       } else if ( mStatus == 3 ) {
         if ( mShots3 != null ) break;
-      } else if ( mStatus == 4 ) {
-        if ( mShots4 != null ) break;
+      } else if ( mStatus == 4 ) { // BLUNDER
+        if ( /* TDSetting.mBlunderShot && */ mShots4 != null ) break;
       }
     }
     // TDLog.v( "Undelete status " + mStatus );
