@@ -17,11 +17,16 @@ class TdmEquate
 {
   ArrayList< String > mStations; // full station names
 
+  /** cstr
+   */
   TdmEquate()
   {
     mStations = new ArrayList< String >();
   }
 
+  /** return true if the equate contains the given station
+   * @param name   station name
+   */
   boolean contains( String name )
   {
     for ( String st : mStations ) {
@@ -30,8 +35,10 @@ class TdmEquate
     return false;
   }
 
-  // get the station name of the station@survey in this equate
-  // return null if there is no ...@survey 
+  /** get the station name of the station@survey in this equate
+   * @param survey   survey name
+   * @return null if there is no ...@survey 
+   */
   String getSurveyStation( String survey )
   {
     // TDLog.v("Equate: get survey station " + survey );
@@ -43,6 +50,9 @@ class TdmEquate
     return null;
   }
 
+  /** remove the stations of a given survey
+   * @param survey   survey name
+   */
   int dropStations( String survey )
   {
     ArrayList< String > stations = new ArrayList<>();
@@ -68,11 +78,17 @@ class TdmEquate
   //   return false;
   // }
 
-
+  /** add a station to the equate
+   * @param station  station name
+   */
   void addStation( String station ) { mStations.add( station ); }
 
+  /** @return the number of stations in the equate
+   */
   int size() { return mStations.size(); }
-
+  
+  /** @return the string presentation of the stations in the equate
+   */
   String stationsString()
   {
     StringBuilder sb = new StringBuilder();

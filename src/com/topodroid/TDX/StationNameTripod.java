@@ -23,13 +23,23 @@ import android.content.Context;
 
 class StationNameTripod extends StationName
 {
+  /** cstr
+   * @param ctx   context
+   * @param data  database helper
+   * @param sid   survey ID
+   */
   StationNameTripod( Context ctx, DataHelper data, long sid ) 
   {
     super( ctx, data, sid );
   }
 
   // ----------------------------------------------------------------
-  // @param list list of dblock to assign
+  /** assign stations to the blocks after a specified block
+   * @param blk0  start block
+   * @param list  list of dblock to assign
+   * @param sts   set of station names (used in the survey)
+   * @return ???
+   */
   @Override
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   { 
@@ -122,6 +132,11 @@ class StationNameTripod extends StationName
     return ret;
   }
 
+  /** assign stations to the blocks of a list
+   * @param list  list of dblock to assign
+   * @param sts   set of station names (used in the survey)
+   * @return true if a leg has been assigned
+   */
   @Override
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 

@@ -32,6 +32,11 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
   private Context mContext;
   private LayoutInflater mLayoutInflater;
 
+  /** cstr
+   * @param ctx    context
+   * @param id     resource id
+   * @param items  items in the adapter
+   */
   public TdmSourceAdapter( Context ctx, int id, ArrayList< TdmSource > items )
   {
     super( ctx, id, items );
@@ -44,8 +49,17 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
     }
   }
 
-  public TdmSource get( int pos ) { return mItems.get(pos); }
+  /** @return the source at a given position (null if position out of bounds)
+   * @param pos   position (in the source array)
+   */
+  public TdmSource get( int pos )
+  {
+    return (pos < 0 || pos >- mItems.size())? null : mItems.get(pos);
+  }
 
+  /** @return the source with a given name (or null if not found)
+   * @param name  source name
+   */
   public TdmSource get( String name ) 
   {
     for ( TdmSource source : mItems ) {
@@ -54,10 +68,17 @@ class TdmSourceAdapter extends ArrayAdapter< TdmSource >
     return null;
   }
 
+  /** add a source to the list
+   * @param source  source to add
+   */
   void addTdmSource( TdmSource source ) { mItems.add( source ); }
 
+  /** @return the number of sources
+   */
   public int size() { return mItems.size(); }
 
+  /** private view holder class
+   */
   private class ViewHolder
   { 
     CheckBox checkBox;

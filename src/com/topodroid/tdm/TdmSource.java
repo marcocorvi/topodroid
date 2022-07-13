@@ -22,6 +22,9 @@ class TdmSource extends TdmFile
 {
   boolean mChecked;
 
+  /** cstr
+   * @param surveyname  name of the survey
+   */
   public TdmSource( String surveyname )
   {
     super( null, surveyname );
@@ -30,8 +33,14 @@ class TdmSource extends TdmFile
 
   // void toggleChecked() { mChecked = ! mChecked; }
 
+  /** @return true if the source is "checked" (selected)
+   */
   boolean isChecked() { return mChecked; }
 
+  /** react to user taps
+   * @param v  tapped view
+   * @note the tapped view is the source checkbox and a tap toggle the "checked" state
+   */
   @Override
   public void onClick( View v ) 
   {

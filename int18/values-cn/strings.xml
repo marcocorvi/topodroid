@@ -142,8 +142,9 @@
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">使用 %1$s</string>
-    <!-- OLD string name="calib_error">平均误差: %1$.4f 度</string -->
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
+    <!-- OLD IS THIS THE NEXT ? string name="calib_error">平均误差: %1$.4f 度</string -->
+    <!-- TODO string name="calib_validate_error">Average error: %1$.2f &#0080;</string -->
     <string name="calib_stddev">标准差: %1$.4f degrees</string>
     <string name="calib_max_error">最大误差: %1$.4f degrees</string>
     <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f degrees</string>
@@ -1453,6 +1454,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">数据自动输出</string -->
   <!-- UNUSED string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string -->
+  <!-- TODO string name="pref_editable_stations_title">Editable stations</string -->
+  <!-- TODO string name="pref_editable_stations_summary">Editable station names in the shot list</string -->
   <string name="pref_zipped_symbols_title">压缩符号文件</string>
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
@@ -1626,6 +1629,8 @@
   <string name="pref_saved_stations_summary">保存测点颜色为橙色</string>
   <string name="pref_legonly_update_title">只更新主线</string>
   <string name="pref_legonly_update_summary">只在主线下载时重画中线</string>
+  <!-- TODO string name="pref_full_affine_title">Affine transform</string -->
+  <!-- TODO string name="pref_full_affine_summary">Enable sketch affine transformation</string -->
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1657,8 +1662,8 @@
   <string name="pref_station_size_summary">测点名称尺寸</string>
   <string name="pref_zoom_controls_title">缩放控制</string>
   <string name="pref_zoom_controls_summary">多点控制缩放</string>
-  <!-- FIXME string name="pref_side_drag_title">边框拖动</string -->
-  <!-- FIXME string name="pref_side_drag_summary">启用草图窗口中的边框拖动</string -->
+  <!-- TODO string name="pref_side_drag_title">Corner drag</string -->
+  <!-- TODO string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string -->
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
   <string name="pref_unit_measure_title">标尺单位</string>

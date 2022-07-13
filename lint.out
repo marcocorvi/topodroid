@@ -4,216 +4,30 @@ res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:38: Error: "tdm_config_project" is not translated in "cn" [MissingTranslation]
-    <string name="tdm_config_project">project.tdconfig</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:98: Error: "station_coords" is not translated in "cn" [MissingTranslation]
-    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
-            ~~~~~~~~~~~~~~~~~~~~~
 res/values/strings.xml:154: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
     <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:218: Error: "gettingble_info" is not translated in "cn" [MissingTranslation]
-    <string name="gettingble_info">Getting DistoX-BLE info &#8230;</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:261: Error: "photo_failed" is not translated in "cn" [MissingTranslation]
-    <string name="photo_failed">Failed photo</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:262: Error: "photo_max_captures" is not translated in "cn" [MissingTranslation]
-    <string name="photo_max_captures">Reached maximum capture limit</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:306: Error: "error_team_required" is not translated in "cn" [MissingTranslation]
-    <string name="error_team_required">Team required</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:316: Error: "error_bad_fixes" is not translated in "cn" [MissingTranslation]
-    <string name="error_bad_fixes">Fix points not in the survey</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:340: Error: "with_splays" is not translated in "cn" [MissingTranslation]
-    <string name="with_splays">with splays</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:341: Error: "cell_size" is not translated in "cn" [MissingTranslation]
-    <string name="cell_size">Cell size [m]</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:345: Error: "splays" is not translated in "cn" [MissingTranslation]
-    <string name="splays">Splays</string>
-            ~~~~~~~~~~~~~
-res/values/strings.xml:373: Error: "no_device_window" is not translated in "cn" [MissingTranslation]
-    <string name="no_device_window">Device window not available while downloading</string>
+res/values/strings.xml:648: Error: "undelete_blunder" is not translated in "ru" (Russian) [MissingTranslation]
+    <string name="undelete_blunder">Blunders</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:390: Error: "no_symbols" is not translated in "cn" [MissingTranslation]
-    <string name="no_symbols">No symbol palette.</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:570: Error: "sensor_no_readings" is not translated in "cn" [MissingTranslation]
-    <string name="sensor_no_readings">No sensor readings</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:571: Error: "sensor_failure" is not translated in "cn" [MissingTranslation]
-    <string name="sensor_failure">Sensor failure: %1$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:577: Error: "shots_delete_unsafe" is not translated in "cn" [MissingTranslation]
-    <string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:578: Error: "shot_rename_unsafe" is not translated in "cn" [MissingTranslation]
-    <string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:579: Error: "shots_rename_unsafe" is not translated in "cn" [MissingTranslation]
-    <string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:583: Error: "shot_name" is not translated in "cn" [MissingTranslation]
-    <string name="shot_name">Shot %1$s</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:605: Error: "survey_not_saved" is not translated in "cn" [MissingTranslation]
-    <string name="survey_not_saved">WARNING: survey info not saved</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:606: Error: "survey_bad_siblings" is not translated in "cn" [MissingTranslation]
-    <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:607: Error: "survey_bad_magnetic" is not translated in "cn" [MissingTranslation]
-    <string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:626: Error: "accuracy_low" is not translated in "cn" [MissingTranslation]
-    <string name="accuracy_low">Low accuracy. Calibration needed</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:627: Error: "accuracy_medium" is not translated in "cn" [MissingTranslation]
-    <string name="accuracy_medium">Low accuracy</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:629: Error: "accuracy_unreliable" is not translated in "cn" [MissingTranslation]
-    <string name="accuracy_unreliable">Unreliable sensors</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:715: Error: "display_view" is not translated in "cn" [MissingTranslation]
-    <string name="display_view">Display</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:716: Error: "plan_view" is not translated in "cn" [MissingTranslation]
-    <string name="plan_view">plan</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:717: Error: "profile_view" is not translated in "cn" [MissingTranslation]
-    <string name="profile_view">profile</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:742: Error: "button_clear_convert" is not translated in "cn" [MissingTranslation]
-    <string name="button_clear_convert">Clear convert</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:778: Error: "button_recover" is not translated in "cn" [MissingTranslation]
-    <string name="button_recover"   >Recover</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:779: Error: "button_reverse" is not translated in "cn" [MissingTranslation]
-    <string name="button_reverse"   >Reverse</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:846: Error: "popup_do_gm_group" is not translated in "cn" [MissingTranslation]
-    <string name="popup_do_gm_group">Calib. group</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:875: Error: "hint_cellsize" is not translated in "cn" [MissingTranslation]
-    <string name="hint_cellsize">cell size</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:876: Error: "hint_cwd" is not translated in "cn" [MissingTranslation]
-    <string name="hint_cwd">work folder</string>
-            ~~~~~~~~~~~~~~~
-res/values/strings.xml:877: Error: "hint_distance" is not translated in "cn" [MissingTranslation]
-    <string name="hint_distance">distance</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:878: Error: "hint_length" is not translated in "cn" [MissingTranslation]
-    <string name="hint_length">length</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:879: Error: "hint_line" is not translated in "cn" [MissingTranslation]
-    <string name="hint_line">line</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:880: Error: "hint_origin" is not translated in "cn" [MissingTranslation]
-    <string name="hint_origin">origin station</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:881: Error: "hint_point" is not translated in "cn" [MissingTranslation]
-    <string name="hint_point">point</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:882: Error: "hint_textsize" is not translated in "cn" [MissingTranslation]
-    <string name="hint_textsize">text size</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:883: Error: "hint_units" is not translated in "cn" [MissingTranslation]
-    <string name="hint_units">symbol units</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:884: Error: "hint_value" is not translated in "cn" [MissingTranslation]
-    <string name="hint_value">value</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:920: Error: "current_station_format" is not translated in "cn" [MissingTranslation]
-    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:964: Error: "help_cave3d" is not translated in "cn" [MissingTranslation]
-    <string name="help_cave3d">Cave3D, 3D viewer</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1052: Error: "help_splays" is not translated in "cn" [MissingTranslation]
-    <string name="help_splays">Segment/point splays</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1068: Error: "export_dxf_version" is not translated in "cn" [MissingTranslation]
-    <string name="export_dxf_version">Version</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1154: Error: "title_photo_view" is not translated in "cn" [MissingTranslation]
-    <string name="title_photo_view">Photo</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1161: Error: "title_reduction_errors" is not translated in "cn" [MissingTranslation]
-    <string name="title_reduction_errors">Survey data-reduction anomalies</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1229: Error: "title_graph_paper" is not translated in "cn" [MissingTranslation]
-    <string name="title_graph_paper">Graph paper 1:100 scale</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1230: Error: "graph_paper_scale" is not translated in "cn" [MissingTranslation]
-    <string name="graph_paper_scale">Adjust the line to be 5 cm long</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1232: Error: "exported_settings" is not translated in "cn" [MissingTranslation]
-  <string name="exported_settings">Exported settings %1$s</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1234: Error: "imported_settings_failed" is not translated in "cn" [MissingTranslation]
-  <string name="imported_settings_failed">Failed to import settings</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1235: Error: "export_settings_failed" is not translated in "cn" [MissingTranslation]
-  <string name="export_settings_failed">Failed to export settings</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1306: Error: "pref_blunder_shot_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_blunder_shot_title">Blunder shots</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1307: Error: "pref_blunder_shot_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_blunder_shot_summary">Skip blunder leg-shots</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1351: Error: "pref_svg_program_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_svg_program_title">SVG program</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1352: Error: "pref_svg_program_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_svg_program_summary">Target SVG program</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1466: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1467: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1467: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1468: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1563: Error: "pref_graph_paper_scale_title" is not translated in "cn" [MissingTranslation]
-  <string name="pref_graph_paper_scale_title">Graph-paper scale</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1564: Error: "pref_graph_paper_scale_summary" is not translated in "cn" [MissingTranslation]
-  <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1641: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1642: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1642: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1643: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1676: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1677: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_title">Corner drag</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1677: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1678: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1865: Error: "image_diagram" is not translated in "cn" [MissingTranslation]
-    <string name="image_diagram">Direction diagram</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1866: Error: "image_photo" is not translated in "cn" [MissingTranslation]
-    <string name="image_photo">Photo</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1895: Error: "illegal_value" is not translated in "cn" [MissingTranslation]
-    <string name="illegal_value">Illegal value</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2094: Error: "cpref_station_text_size_title" is not translated in "cn" [MissingTranslation]
-    <string name="cpref_station_text_size_title">Station text size</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2095: Error: "cpref_station_text_size_summary" is not translated in "cn" [MissingTranslation]
-    <string name="cpref_station_text_size_summary">Size of station text [20 pt]</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -233,4 +47,4 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 <adaptive-icon xmlns:android="http://schemas.android.com/apk/res/android">
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
-70 errors, 9 warnings
+8 errors, 9 warnings

@@ -23,6 +23,11 @@ import android.content.Context;
 
 class StationNameTRobot extends StationName
 {
+  /** cstr
+   * @param ctx   context
+   * @param data  database helper
+   * @param sid   survey ID
+   */
   StationNameTRobot( Context ctx, DataHelper data, long sid ) 
   {
     super( ctx, data, sid );
@@ -31,11 +36,18 @@ class StationNameTRobot extends StationName
   // ---------------------------------- TopoRobot policy -----------------------------------
   // TopoRobot policy is splay-first then forward leg 
 
+  /** @return the TopoRobot station name
+   * @param sr    series
+   * @param pt    point
+   */
   private static String getTRobotStation( int sr, int pt )
   {
     return sr + "." + pt; // Integer.toString( sr ) + "." + Integer.toString( pt );
   }
 
+  /** @return the maximum series (number) occurring in a list of shots
+   * @param list  list of shots
+   */
   private static int getMaxTRobotSeries( List< DBlock > list )
   {
     int ret = 1;
@@ -67,8 +79,12 @@ class StationNameTRobot extends StationName
     return ret;
   }
 
-  // WARNING TopoRobot renumbering consider all the shots in a single series
-  // @param list list of dblock to assign
+  /** WARNING TopoRobot renumbering consider all the shots in a single series
+   * @param blk0  start block
+   * @param list  list of dblock to assign
+   * @param sts   set of station names (used in the survey)
+   * @return ???
+   */
   @Override
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
@@ -127,15 +143,20 @@ class StationNameTRobot extends StationName
     return ret;
   }
 
+  /** assign station names
+   * @param list  list of dblock to assign
+   * @param sts   set of station names (used in the survey)
+   * @return true if a leg has been assigned
+   */
   @Override
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
     boolean ret = false;
-    int series = getMaxTRobotSeries( list );
+    int series = getMaxTRobotSeries( list ); // current max series
     // TDLog.v( "TRobot assign stations. size " + list.size() );
     DBlock prev = null;
-    String from = getTRobotStation( 1, 0 );
-    String to   = getTRobotStation( 1, 1 );
+    String from = getTRobotStation( 1, 0 ); // from = 1.0
+    String to   = getTRobotStation( 1, 1 ); // to   = 1.1
     String station = mCurrentStationName;
     if ( station == null ) station = from;
 
@@ -159,7 +180,7 @@ class StationNameTRobot extends StationName
                 if ( mCurrentStationName != null ) {
                   ++series;
                   from = mCurrentStationName;
-                  to   = getTRobotStation( series, 1 );
+                  to   = getTRobotStation( series, 1 ); // to = serise.1
                 }
                 nrLegShots = 2; // prev and this shot
               } else {
