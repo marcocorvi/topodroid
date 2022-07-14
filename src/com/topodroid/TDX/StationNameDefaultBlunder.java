@@ -50,10 +50,12 @@ class StationNameDefaultBlunder extends StationName
   /** reset shot refereneces
    * @param reset_leg whether to reset the leg reference and leg number
    */
-  private void resetRefs( boolean reset_leg )
+  private void resetRefs( boolean reset_leg, boolean reset_prev )
   {
     prev_prev  = null;
-    prev    = null;
+    if ( reset_prev ) {
+      prev = null;
+    }
     if ( reset_leg ) {
       blunder = null;
       leg = null;
@@ -75,12 +77,14 @@ class StationNameDefaultBlunder extends StationName
   /** set the leg main-shot 
    * @param blk   new leg main shot
    * @note clears prev_prev
+   * @note if leg coincide with the tentative blunder this is cleared
    */
-  private void setLeg( DBlock blk, int nr_legs ) 
+  private void setLeg( String msg, DBlock blk, int nr_legs ) 
   {
-    TDLog.v("set leg " + id(leg) + " -> " + id(blk) + " nr legs " + nr_legs );
+    TDLog.v("set leg " + id(leg) + " " + msg + " -> " + id(blk) + " nr legs " + nr_legs );
     if ( leg == null ) {
       leg = blk;
+      if ( leg == blunder ) blunder = null;
     }
     nrLegShots = nr_legs;
     prev_prev = null;
@@ -90,8 +94,12 @@ class StationNameDefaultBlunder extends StationName
    */
   private void markLeg()
   {
-    TDLog.v( "mark " + id(leg) + " leg: " + from + "-" + to );
-    if ( leg == null ) return;
+    if ( leg == null ) return; // safety protection
+    if ( leg.isLeg() ) {
+      TDLog.v( "mark leg " + id(leg) + " is altready leg" );
+      return;
+    }
+    TDLog.v( "mark leg " + id(leg) + " : " + from + "-" + to );
     setLegName( leg, from, to );
     setLegExtend( leg );
     // leg = null;
@@ -102,10 +110,10 @@ class StationNameDefaultBlunder extends StationName
    */
   private void markSplay( DBlock blk ) 
   {
-    if ( blk == null ) return;
+    if ( blk == null ) return; // safety protection
     if ( blk.isAnyLeg() ) return;
     if ( ! station.equals( blk.mFrom ) ) {
-      TDLog.v( "mark " + id(blk) + " splay: " + blk.mFrom + " -> " + station );
+      TDLog.v( "mark splay " + id(blk) + " : " + blk.mFrom + " -> " + station );
       setSplayName( blk, station ); // saved to DB
     }
   }
@@ -114,13 +122,15 @@ class StationNameDefaultBlunder extends StationName
    */
   private void markBlunder(String msg)
   {
-    if ( blunder == null ) return;
-    TDLog.v( msg + " mark " + id(blunder) + " blunder");
-    setBlunderName( blunder ); // saved to DB
+    if ( blunder == null ) return; // safety protection
+    if ( blunder != leg ) {
+      TDLog.v( msg + " mark blunder " + id(blunder) );
+      setBlunderName( blunder ); // saved to DB
+    }
     blunder = null;
   }
 
-  private void flushLeg( DBlock blk, String msg, boolean reset_leg )
+  private void flushLeg( DBlock blk, String msg, boolean reset_leg, boolean reset_prev )
   {
     if ( nrLegShots > 0 ) {
       StringBuilder sb = new StringBuilder();
@@ -136,12 +146,13 @@ class StationNameDefaultBlunder extends StationName
         markLeg();
         for ( DBlock b : sec_legs ) setSecLegName( b );
       }
-      resetRefs( reset_leg );
+      resetRefs( reset_leg, reset_prev );
     }
   }
 
   private void increaseNrLegShots( DBlock blk, Set< String > sts, String msg ) 
   {
+    TDLog.v( msg + " increase leg shots at " + id(blk) + " leg " + id(leg) + " prev " + id(prev) );
     sec_legs.add( blk );
     if ( nrLegShots == 0 ) {
       // checkCurrentStationName
@@ -152,7 +163,7 @@ class StationNameDefaultBlunder extends StationName
           to = current_station;
         }
       }
-      setLeg( prev, 2 ); // nrLegShots = 2; prev and this shot
+      setLeg( "from increase", prev, 2 ); // nrLegShots = 2; prev and this shot
       // prev_prev = null; 
       // prev      = null;
       TDLog.v( msg + " started nr_leg " + nrLegShots + "/" + sec_legs.size() + " at " + id(blk) + " leg " + id(leg) );
@@ -225,7 +236,7 @@ class StationNameDefaultBlunder extends StationName
     mCurrentStationName = null;
 
     mRet = false;
-    resetRefs( true );
+    resetRefs( true, true );
 
     from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                             : DistoXStationName.mSecondStation;
@@ -243,12 +254,13 @@ class StationNameDefaultBlunder extends StationName
       if ( blk.mTo.length() == 0 ) {
         // if ( blk.mFrom.length() == 0 ) {
         //   if ( blk.isScan() ) {
-        //     flushLeg(blk, "[scan splay]", true ); // true = reset leg & nr_legs
+        //     flushLeg(blk, "[scan splay]", true, true ); // true = reset leg & nr_legs
         //     markSplay( blk );
         //     continue;
         //   }
         // }
         if ( prev == null ) {
+          TDLog.v("null prev at " + id(blk) );
           setPrev( blk );
           // blk.mFrom = station;
           markSplay( blk );
@@ -257,21 +269,26 @@ class StationNameDefaultBlunder extends StationName
           markBlunder("[close to leg]");
           increaseNrLegShots( blk, sts, "[close to leg]" );
         } else if ( /* prev != null && */ prev.isRelativeDistance( blk ) ) {
-          flushLeg(blk, "[close to prev]", true); // true = reset leg & nr_legs
-          if ( leg == null ) leg = prev;
+          flushLeg(blk, "[close to prev]", false, false ); // true = reset leg & nr_legs
+          if ( leg != null && ! prev.isRelativeDistance( leg ) ) {
+            TDLog.v("clear leg " + id(leg) );
+            leg = null;
+            nrLegShots = 0;
+          }
+          // if ( leg == null ) setLeg( "from pref", prev, 0 );
           increaseNrLegShots( blk, sts, "[close to prev]" );
         } else if ( prev_prev != null && prev_prev.isRelativeDistance( blk ) ) {
-          setLeg( prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
+          setLeg( "fron prev_prev", prev_prev, 0 ); // nrLegShots = 0; it will be set in increaseNrLegShots
           blunder = prev;
           increaseNrLegShots(  blk, sts, "[close to prev_prev]" );
           prev = blk;
         } else {
           if ( blunder != null ) { // two splays in a row
-            blunder = null;
-            flushLeg(blk, "[new splay]", true );
+            blunder = null;        // clear blunder before flush
+            flushLeg(blk, "[new splay]", true, true );
           } else if ( leg != null ) { // first splay after a leg
             blunder = blk; // tentative blunder
-            flushLeg(blk, "[new splay]", false );
+            flushLeg(blk, "[new splay]", false, true );
           }
           markSplay( blk );
           setPrev( blk );

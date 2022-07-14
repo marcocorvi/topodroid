@@ -48,7 +48,7 @@ class StationName
 
   /** debug
    */
-  protected String id( DBlock blk ) { return (blk==null)? "-" : Long.toString(blk.mId); }
+  protected String id( DBlock blk ) { return (blk==null)? "<->" : "<" +Long.toString(blk.mId) + ">"; }
 
   /** debug
    */
