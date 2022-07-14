@@ -96,7 +96,7 @@ class StationNameDefaultBlunder extends StationName
   {
     if ( leg == null ) return; // safety protection
     if ( leg.isLeg() ) {
-      TDLog.v( "mark leg " + id(leg) + " is altready leg" );
+      TDLog.v( "mark leg " + name(leg) + " is altready leg" );
       return;
     }
     TDLog.v( "mark leg " + id(leg) + " : " + from + "-" + to );
@@ -115,6 +115,27 @@ class StationNameDefaultBlunder extends StationName
     if ( ! station.equals( blk.mFrom ) ) {
       TDLog.v( "mark splay " + id(blk) + " : " + blk.mFrom + " -> " + station );
       setSplayName( blk, station ); // saved to DB
+    }
+  }
+
+  /** mark shot as secondary leg
+   * @param blk    secondary leg shot
+   */
+  private void markSecLeg( DBlock blk )
+  {
+    setSecLegName( blk );
+  }
+
+  /** mark shot as secondary leg or splay according to whether it is close to the leg
+   * @param leg    leg
+   * @param blk    shot
+   */
+  private void markSecLegOrSplay( DBlock leg, DBlock blk )
+  {
+    if ( blk.isRelativeDistance( leg ) ) {
+      markSecLeg( blk );
+    } else {
+      markSplay( blk );
     }
   }
 
@@ -139,12 +160,17 @@ class StationNameDefaultBlunder extends StationName
       TDLog.v( msg + " flush at " + id(blk) + " legs " + nrLegShots + "/" + sec_legs.size() + " " + sb.toString() + " ) reset legs " + reset_leg );
       if ( nrLegShots < TDSetting.mMinNrLegShots ) {
         // if ( prev_prev != null ) markSplay( prev_prev );
-        if ( prev    != null ) markSplay( prev );
         if ( blunder != null ) markSplay( blunder );
-        for ( DBlock b : sec_legs ) markSplay( b );
+        // if ( leg != null && leg.isLeg() ) { // FIXME_BLUNDER this is not necessary
+        //   if ( prev    != null ) markSecLegOrSplay( leg, prev );
+        //   for ( DBlock b : sec_legs ) markSecLegOrSplay( leg, b );
+        // } else {
+          if ( prev    != null ) markSplay( prev );
+          for ( DBlock b : sec_legs ) markSplay( b );
+        // }
       } else {
         markLeg();
-        for ( DBlock b : sec_legs ) setSecLegName( b );
+        for ( DBlock b : sec_legs ) markSecLeg( b );
       }
       resetRefs( reset_leg, reset_prev );
     }
@@ -170,7 +196,7 @@ class StationNameDefaultBlunder extends StationName
       // TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
     } else {
       nrLegShots ++;  // one more centerline shot
-      TDLog.v( msg + " increased nr_leg " + nrLegShots + " at " + id(blk) );
+      TDLog.v( msg + " increased nr_leg " + nrLegShots + "/" + sec_legs.size() + " at " + id(blk) );
     }
 
     if ( nrLegShots == TDSetting.mMinNrLegShots ) {
@@ -192,12 +218,11 @@ class StationNameDefaultBlunder extends StationName
                                                          //                = this-shot-from if splay after shot
         // logJump( blk, to, from, sts );
       }
-      // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
-      for ( DBlock b : sec_legs ) setSecLegName( b );
+      for ( DBlock b : sec_legs ) markSecLeg( b );
       sec_legs.clear();
       markBlunder("[incr.nr.leg]");
     } else if ( nrLegShots > TDSetting.mMinNrLegShots ) {
-      setSecLegName( blk );
+      markSecLeg( blk );
     }
   }
 
@@ -259,15 +284,15 @@ class StationNameDefaultBlunder extends StationName
         //     continue;
         //   }
         // }
-        if ( prev == null ) {
+        if ( prev == null ) { // FIXME_BLUNDER this block came first among the if's, but it can be also second after the "leg"
           TDLog.v("null prev at " + id(blk) );
           setPrev( blk );
           // blk.mFrom = station;
           markSplay( blk );
-          // TDLog.Log( TDLog.LOG_DATA, "set prev [1] " + blk.mId + " F<" + blk.mFrom + ">" );
         } else if ( leg != null && leg.isRelativeDistance( blk ) ) {
           markBlunder("[close to leg]");
           increaseNrLegShots( blk, sts, "[close to leg]" );
+          // if ( leg.isLeg() ) markSecLeg( blk ); // FIXME_BLUNDER not necessary
         } else if ( /* prev != null && */ prev.isRelativeDistance( blk ) ) {
           flushLeg(blk, "[close to prev]", false, false ); // true = reset leg & nr_legs
           if ( leg != null && ! prev.isRelativeDistance( leg ) ) {

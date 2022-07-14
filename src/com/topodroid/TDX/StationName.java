@@ -256,12 +256,12 @@ class StationName
  
   /** set the block type to "secondary leg"
    * @param blk   leg secondary-block
-   * @note the block name is NOT saved to the database
+   * @note the block name is set and saved to the database
    */
   protected void setSecLegName( DBlock blk )
   {
     // TDLog.v( "set sec leg " + blk.mId );
-    // setBlockName( blk, "", "" );
+    setBlockName( blk, "", "" ); // FIXME_BLUNDER This is important for blunder-shot
     blk.setTypeSecLeg();
   }
  
