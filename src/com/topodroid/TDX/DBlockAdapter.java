@@ -326,9 +326,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   }
 
   /** @return the list of blocks to assign station names
-   * @note called only by ShotWindow.updateDBlockList
+   *    the list contains on the final shots beginning with the n-th last leg-shot
+   * @param nth   n-th last leg
+   * @note called only by ShotWindow.updateDBlockList with nth 1 or 2
    */
-  List< DBlock > getItemsForAssign()
+  List< DBlock > getItemsForAssign( int nth )
   {
     List< DBlock > ret = new ArrayList<>();
     int size = getCount();
@@ -336,7 +338,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       int k = size-1;
       for ( ; k >= START; --k ) { // scan from last backword until a leg is found
         DBlock b = (DBlock)( getItem( k ) );
-        if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) break;
+        if ( b.mFrom.length() > 0 && b.mTo.length() > 0 ) {
+          -- nth;
+          if ( nth <= 0 ) break;
+        }
       }
       if ( k < START ) k = START;
       for ( ; k < size; ++k ) { // insert into return from the leg onward

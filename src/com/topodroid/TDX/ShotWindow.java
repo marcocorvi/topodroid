@@ -456,9 +456,10 @@ public class ShotWindow extends Activity
       if ( ! scan ) { // normal data
         mSurveyAccuracy.addBlockAMD( blk );
         if ( StationPolicy.doBacksight() || StationPolicy.doTripod() ) {
-          ret = mApp.assignStationsAll( mDataAdapter.getItems() );
+          // FIXME UNTESTED it was: ret = mApp.assignStationsAll( mDataAdapter.getItems( ) ); 
+          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 2 ) ); // fron the 2-nd last leg
         } else {
-          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign() );
+          ret = mApp.assignStationsAll( mDataAdapter.getItemsForAssign( 1 ) ); // from 1-st last leg
         }
         // mApp_mData.getShotName( TDInstance.sid, blk );
         // TDLog.v("DATA " + "shot window block " + blk.mId + " station assign return " + ret );

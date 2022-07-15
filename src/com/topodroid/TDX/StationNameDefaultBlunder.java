@@ -277,13 +277,13 @@ class StationNameDefaultBlunder extends StationName
     for ( DBlock blk : list ) {
       TDLog.v("process " + name(blk) + " " + id(leg) + "." + id(prev) + "." + id(blunder) );
       if ( blk.mTo.length() == 0 ) {
-        // if ( blk.mFrom.length() == 0 ) {
-        //   if ( blk.isScan() ) {
-        //     flushLeg(blk, "[scan splay]", true, true ); // true = reset leg & nr_legs
-        //     markSplay( blk );
-        //     continue;
-        //   }
-        // }
+        if ( blk.mFrom.length() == 0 ) {
+          if ( blk.isScan() ) {
+            flushLeg(blk, "[scan splay]", true, true ); // true = reset leg & nr_legs
+            markSplay( blk );
+            continue;
+          }
+        }
         if ( prev == null ) { // FIXME_BLUNDER this block came first among the if's, but it can be also second after the "leg"
           TDLog.v("null prev at " + id(blk) );
           setPrev( blk );

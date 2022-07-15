@@ -49,7 +49,6 @@ class StationNameDefault extends StationName
     boolean ret = false;
     // TDLog.v("DATA " + "assign station after " + blk0.mId + " list " + list.size() + " sts " + ((sts!=null)?sts.size():"-") );
     ArrayList< DBlock > sec_legs = new ArrayList<>();
-    // TDLog.Log( TDLog.LOG_DATA, "assign stations after " + list.size() + " " + (sts!=null? sts.size():0) );
 
     boolean forward_shots = ( survey_stations == 1 );
     boolean shot_after_splays = StationPolicy.mShotAfterSplays;
@@ -174,7 +173,6 @@ class StationNameDefault extends StationName
   @Override
   boolean assignStations( List< DBlock > list, Set<String> sts )
   { 
-    // TDLog.Log( TDLog.LOG_DATA, "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():0) );
     // TDLog.v("DATA " + "assign stations: list " + list.size() + " sts " + (sts!=null? sts.size():"-") );
 
     int survey_stations = StationPolicy.mSurveyStations;
@@ -190,8 +188,6 @@ class StationNameDefault extends StationName
     String  current_station  = mCurrentStationName; // steal current station name
     mCurrentStationName = null;
 
-    // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
-
     DBlock prev = null;
     String from = ( forward_shots )? DistoXStationName.mInitialStation  // next FROM station
                                    : DistoXStationName.mSecondStation;
@@ -200,19 +196,15 @@ class StationNameDefault extends StationName
     String station = ( current_station != null )? current_station
                    : (shot_after_splay ? from : "");  // splays station
 
-    // TDLog.Log( TDLog.LOG_DATA, "F<" + from + "> T<" + to + "> S<" + station + "> CS " + ( (current_station==null)? "null" : current_station ) );
-    // if ( TDLog.LOG_DATA ) {
-    //   StringBuilder sb = new StringBuilder();
-    //   for ( String st : sts ) sb.append(st + " " );
-    //   TDLog.Log(TDLog.LOG_DATA, "set " + sb.toString() );
-    // }
+    StringBuilder sb = new StringBuilder();
+    for ( DBlock b : list ) sb.append( name(b) + " " );
+    TDLog.v( "DEFAULT F " + from + " T " + to + " S " + station + " List " + sb.toString() );
 
     int nrLegShots = 0;
-
     ArrayList< DBlock > sec_legs = new ArrayList<>();
 
     for ( DBlock blk : list ) {
-      // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " <" + blk.mFrom + "-" + blk.mTo + "> F " + from + " T " + to + " S " + station );
+      TDLog.v("process " + name(blk) + " prev " + id(prev) );
       if ( blk.mFrom.length() == 0 ) {
         if ( blk.isScan() ) {
           nrLegShots = 0;
@@ -220,15 +212,15 @@ class StationNameDefault extends StationName
           prev = null;
           continue;
         }
-        // TDLog.Log( TDLog.LOG_DATA, blk.mId + " EMPTY FROM. prev " + ( (prev==null)? "null" : prev.mId ) );
         if ( blk.mTo.length() == 0 ) {
           if ( prev == null ) {
             prev = blk;
             // blk.mFrom = station;
             setSplayName( blk, station );
-            // TDLog.Log( TDLog.LOG_DATA, "set prev [1] " + blk.mId + " F<" + blk.mFrom + ">" );
+            TDLog.v("[prev null] set splay " + id(blk) + " : " + station );
           } else {
             if ( prev.isRelativeDistance( blk ) ) {
+              TDLog.v("[close to prev] set sec-leg " + id(blk) + " prev " + id(prev) );
               sec_legs.add( blk );
               if ( nrLegShots == 0 ) {
                 // checkCurrentStationName
@@ -240,14 +232,12 @@ class StationNameDefault extends StationName
                   }
                 }
                 nrLegShots = 2; // prev and this shot
-                // TDLog.Log( TDLog.LOG_DATA, "leg-2 F " + from + " T " + to + " S " + station );
               } else {
                 nrLegShots ++;  // one more centerline shot
               }
               if ( nrLegShots == TDSetting.mMinNrLegShots ) {
                 legFeedback( );
                 current_station = null;
-                // TDLog.Log( TDLog.LOG_DATA, "PREV " + prev.mId + " nrLegShots " + nrLegShots + " set PREV " + from + "-" + to );
                 setLegName( prev, from, to );
                 ret = true;
                 setLegExtend( prev );
@@ -264,22 +254,24 @@ class StationNameDefault extends StationName
                                                                    //                = this-shot-from if splay after shot
                   // logJump( blk, to, from, sts );
                 }
-                // TDLog.Log( TDLog.LOG_DATA, "increment F " + from + " T " + to + " S " + station );
+                TDLog.v(" set leg " + name(prev) + " next " + from + "-" + to + " station " + station );
                 for ( DBlock b : sec_legs ) setSecLegName( b );
                 sec_legs.clear();
               } else {
                 setSecLegName( blk );
+                TDLog.v(" set sec=leg " + id(blk) );
               }
             } else { // distance from prev > "closeness" setting
               nrLegShots = 0;
               setSplayName( blk, station );
               prev = blk;
-              // TDLog.Log( TDLog.LOG_DATA, "set prev [2] " + blk.mId + " F<" + blk.mFrom + ">" );
+              TDLog.v("[set to splay] " + name(blk) + " set prev " + id(prev) );
             }
           }
         } else { // blk.mTo.length() > 0 : blk already SPLAY
           nrLegShots = 0;
           prev = blk;
+          TDLog.v("[already splay] " + name(blk) + " set prev " + id(prev) );
         }
       } else { // blk.mFrom.length > 0
         if ( blk.mTo.length() > 0 ) { // FROM non-empty, TO non-empty --> LEG
@@ -312,11 +304,10 @@ class StationNameDefault extends StationName
                                          : blk.mFrom; // 2-1, 2, 2, 2,   [ 3-2, 3, 3, ... 3 ] ...
             }
           }
-          // TDLog.Log( TDLog.LOG_DATA, "ID " + blk.mId + ": " + blk.mFrom + " - " + blk.mTo + " F " + from + " T " + to + " S " + station );
-
           nrLegShots = TDSetting.mMinNrLegShots;
         } else { // FROM non-empty, TO empty --> SPLAY
           nrLegShots = 0;
+          TDLog.v("[already splay] " + name(blk) + " will set prev : old " + id(prev) );
         }
         prev = blk;
       }
