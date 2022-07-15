@@ -172,6 +172,8 @@ public class TdmConfigActivity extends Activity
     }
   }
 
+  /** lifecycle: on start
+   */
   @Override
   public void onStart()
   {
@@ -181,6 +183,8 @@ public class TdmConfigActivity extends Activity
     closeMenu();
   }
 
+  /** lifecycle: on pause
+   */
   @Override
   protected void onPause()
   {
@@ -189,6 +193,9 @@ public class TdmConfigActivity extends Activity
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
   }
 
+  /** @return true if the cave-project contains a survey
+   * @param name   name of the survey
+   */
   boolean hasSource( String name ) 
   {
     return mTdmConfig.hasInput( name );
@@ -211,6 +218,8 @@ public class TdmConfigActivity extends Activity
   
   // -------------------------------------------------
 
+  /** build the button bar
+   */
   private void resetButtonBar()
   {
     if ( mNrButton1 > 0 ) {
@@ -242,6 +251,9 @@ public class TdmConfigActivity extends Activity
     }
   }
 
+  /** build the menus
+   * @param res   resources
+   */
   private void setMenuAdapter( Resources res )
   {
     mMenuAdapter = new ArrayAdapter<String>( this, R.layout.menu );
@@ -252,12 +264,17 @@ public class TdmConfigActivity extends Activity
     mMenu.invalidate();
   }
 
+  /** close th menu
+   */
   private void closeMenu()
   {
     mMenu.setVisibility( View.GONE );
     onMenu = false;
   }
 
+  /** handle the tap on a menu
+   * @param pos   position of the tapped menu
+   */
   private void handleMenu( int pos ) 
   {
     closeMenu();
@@ -276,6 +293,8 @@ public class TdmConfigActivity extends Activity
   }
 
   // ------------------------ DISPLAY -----------------------------
+  /** start the cave-manager survey activity
+   */
   private void startTdmSurveysActivity()
   {
     TdmSurvey mySurvey = new TdmSurvey( "." );
@@ -303,8 +322,11 @@ public class TdmConfigActivity extends Activity
   }
 
   // ------------------------ ADD ------------------------------
-  // called by TdmSourcesDialog with a list of sources filenames
-  //
+  /** add one or more sources to the configuration
+   * @param survey_names  names of the surveys to add
+   *
+   * @note called by TdmSourcesDialog with a list of sources filenames
+   */
   void addSources( List< String > survey_names )
   {
     for ( String name : survey_names ) {
@@ -318,6 +340,8 @@ public class TdmConfigActivity extends Activity
   }
 
   // ------------------------ DELETE ------------------------------
+  /** confirm dialog before deleting the cave-project configuration
+   */
   private void askDelete()
   {
     TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.ask_delete_tdconfig ),
@@ -330,6 +354,8 @@ public class TdmConfigActivity extends Activity
     );
   }
 
+  /** close the window and ask the parent to delete the cave-project
+   */
   void doDelete()
   {
     // if ( ! TdManagerApp.deleteTdmConfigFile( mTdmConfig.getFilepath() ) ) { 
@@ -339,6 +365,9 @@ public class TdmConfigActivity extends Activity
     // }
   }
 
+  /** close the window 
+   * @param result   result for the parent activity
+   */
   void doFinish( int result )
   {
     Intent intent = new Intent();
@@ -353,6 +382,8 @@ public class TdmConfigActivity extends Activity
     finish();
   }
   // ---------------------- DROP SURVEYS ----------------------------
+  /** drop the "checked" surveys from the cave-project
+   */
   void dropSurveys()
   {
     TopoDroidAlertDialog.makeAlert( this, getResources(), getResources().getString( R.string.title_drop ), 
@@ -379,6 +410,8 @@ public class TdmConfigActivity extends Activity
 
   // ---------------------- SAVE -------------------------------------
 
+  /** react to a BACK press
+   */
   @Override
   public void onBackPressed()
   {
@@ -387,6 +420,10 @@ public class TdmConfigActivity extends Activity
     doFinish( TDRequest.RESULT_TDCONFIG_OK );
   }
 
+  /** react to a user tap 
+   * @param view   tapped view
+   * The tapped view can the the menu-image or a button
+   */
   @Override
   public void onClick(View view)
   { 
@@ -500,6 +537,10 @@ public class TdmConfigActivity extends Activity
   }
 
   // FIXME_URI
+  /** start a request to get an export resuorce
+   * @param index    export type 
+   * @param filename name of the export file (used as "title" in the request)
+   */
   private void selectExportFromProvider( int index, String filename ) // EXPORT
   {
     // if ( ! TDSetting.mExportUri ) return; // FIXME-URI
@@ -514,6 +555,11 @@ public class TdmConfigActivity extends Activity
     startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.export_tdconfig_title ) ), TDRequest.REQUEST_GET_EXPORT );
   }
 
+  /** react to the result of an export request
+   * @param request   request code (must be REQUEST_GET_EXPORT )
+   * @param result    result code
+   * @param intent    result data
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     if ( intent == null ) return;
@@ -528,9 +574,13 @@ public class TdmConfigActivity extends Activity
         }
     }
   }
-  //
 
-
+  /** react to a user click on an item in the list
+   * @param parent   list
+   * @param view     item entry
+   * @param pos      item position
+   * @param id       ???
+   */
   @Override
   public void onItemClick( AdapterView<?> parent, View view, int pos, long id )
   {

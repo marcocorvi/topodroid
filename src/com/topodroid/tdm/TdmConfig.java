@@ -42,6 +42,10 @@ class TdmConfig extends TdmFile
   private boolean mRead;        // whether this Tdm_Config has read the file
   private boolean mSave;        // whether this Tdm_Config needs to be saved
 
+  /** cstr
+   * @param filepath ...
+   * @param save     ...
+   */
   public TdmConfig( String filepath, boolean save )
   {
     super( filepath, null );
@@ -55,8 +59,13 @@ class TdmConfig extends TdmFile
     mSurveyName = getNameFromFilepath( filepath );
   }
 
+  /** @return the survey name
+   */
   public String getSurveyName() { return mSurveyName; }
 
+  /** create and populate the list of survey-views
+   * @param surveys   surveys
+   */
   void populateViewSurveys( ArrayList< TdmSurvey > surveys )
   {
     mViewSurveys = new ArrayList< TdmSurvey >(); // current view surveys
@@ -67,6 +76,9 @@ class TdmConfig extends TdmFile
     }
   }
 
+  /** drop the equates with a given survey
+   * @param survey    survey
+   */
   void dropEquates( String survey )
   {
     // TDLog.v("drop equates with " + survey + " before " + mEquates.size() );
@@ -82,6 +94,9 @@ class TdmConfig extends TdmFile
     // TDLog.v("dropped equates with " + survey + " after " + mEquates.size() );
   }
 
+  /** insert an equate
+   * @param equate  equate
+   */
   void addEquate( TdmEquate equate ) 
   {
     if ( equate == null ) return;
@@ -90,13 +105,18 @@ class TdmConfig extends TdmFile
     // TDLog.v("nr. equates " + mEquates.size() );
   }
 
-  // unconditionally remove an equate
+  /** unconditionally remove an equate
+   * @param equate  equate to remove
+   */
   void removeEquate( TdmEquate equate ) 
   { 
     mEquates.remove( equate );
     setSave();
   }
     
+  /** @return true if the cave-project has a given input
+   * @param input   input survey name
+   */
   boolean hasInput( String name )
   {
     if ( name == null ) return false;
@@ -108,7 +128,10 @@ class TdmConfig extends TdmFile
     return false;
   }
 
-  // this is called by readFile
+  /** insert an input
+   * @param name  input name
+   * @note this is called by readFile
+   */
   private void insertInput( String name )
   {
     if ( name == null ) return;
@@ -116,7 +139,10 @@ class TdmConfig extends TdmFile
     mInputs.add( new TdmInput( name ) );
   }
 
-  // this is called by the Config activity 
+  /** insert an input
+   * @param input   input
+   * @note this is called by the Config activity 
+   */
   void addInput( TdmInput input )
   {
     if ( input == null ) return;
@@ -125,16 +151,29 @@ class TdmConfig extends TdmFile
     setSave();
   }
 
+  /** @return an iterator on the inputs
+   */
   Iterator getInputsIterator() { return mInputs.iterator(); }
 
+  /** @return the number of inputs
+   */
   int getInputsSize() { return mInputs.size(); }
 
+  /** @return the array of inputs
+   */
   ArrayList< TdmInput > getInputs() { return mInputs; }
 
+  /** @return the array of survey views
+   */
   ArrayList< TdmSurvey > getViewSurveys() { return mViewSurveys; }
 
+  /** @return the array of equates
+   */
   ArrayList< TdmEquate > getEquates() { return mEquates; }
 
+  /** remove an input
+   * @param name   input name
+   */
   private void dropInput( String name )
   {
     if ( name == null ) return;
@@ -148,7 +187,10 @@ class TdmConfig extends TdmFile
     }
   }
 
-  // this is called by the Config Activity
+  /** set the array of inputs
+   * @param inputs   array of inputs
+   * @note this is called by the Config Activity
+   */
   void setInputs( ArrayList< TdmInput > inputs ) 
   {
     if ( inputs != null ) {
@@ -158,7 +200,9 @@ class TdmConfig extends TdmFile
     }
   }
 
-  // used also by Config Activity when a source is added
+  /** set the "save" flag
+   * @note used also by Config Activity when a source is added
+   */
   void setSave() { mSave = true; }
 
   // ---------------------------------------------------------------

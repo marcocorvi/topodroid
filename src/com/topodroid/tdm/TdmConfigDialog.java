@@ -36,6 +36,10 @@ public class TdmConfigDialog extends MyDialog
 
     private TdManagerActivity mActivity;
 
+    /** cstr
+     * @param contex    context
+     * @param actcivity parent activity
+     */
     public TdmConfigDialog( Context context, TdManagerActivity activity )
     {
       super(context, null, R.string.TdmConfigDialog); // null app
@@ -57,6 +61,10 @@ public class TdmConfigDialog extends MyDialog
 
     }
 
+    /** react to a user tap
+     * @param view tapped view
+     * if the view is the button "OK" a new cave-project is added
+     */
     public void onClick(View view)
     {
       if (view.getId() == R.id.label_ok ) {

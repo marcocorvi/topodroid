@@ -30,6 +30,14 @@ Sequence a-b-c-d for the first (foreshot) and the second (backshot) policies.<br
 <img src="survey_policy.png">
 <br><p>
 
+Each time the automatic station assignment is carried out, it starts from the last leg
+(or second to last for the <i>backsight</i> and <i>tripod</i> policies).
+If the survey has yet no leg, it starts from the first shot. 
+Therefore shots before the last leg are not modified, while stations are 
+assigned to all the shots following the last leg.
+This may affect the station of splays immediately following the last leg, when the station-assignment
+policy is changed.<br><p>
+
 <b>Backsight</b> policy<br>
 At each station you take the backshot to the previous station, next the splay shots, and finally the forward shot to the next station.<br>
 Backsight shots are checked: if a shot is not close to the opposite of the previous leg, it is not considered a backsight shot.<br>
