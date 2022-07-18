@@ -6766,8 +6766,65 @@ public class DrawingWindow extends ItemDrawer
   }
 
   // --------------------------------------------------------------------------
+  // PNM
+  
+  /** save the sketch as PNM image
+   * @param uri   output URI
+   * @param type  plot type
+   */
+  private void savePnm( Uri uri, long type )
+  {
+    String fullname = null;
+    if ( PlotType.isAnySection( type ) ) { 
+      fullname = mFullName3;
+    } else if ( PlotType.isProfile( type ) ) { 
+      fullname = mFullName2;
+    } else {
+      fullname = mFullName1;
+    }
+    // TDLog.v("save PNM. uri " + ( (uri!=null)? uri.toString() : "null" ) );
+  
+    if ( fullname != null ) {
+      DrawingCommandManager manager = mDrawingSurface.getManager( type );
+      if ( PlotType.isAnySection( type ) ) { 
+        doSavePnm( uri, manager, type, fullname );
+      } else if ( PlotType.isProfile( type ) ) { 
+        // Nota Bene OK for projected profile (to check)
+        doSavePnm( uri, manager, (int)PlotType.PLOT_EXTENDED, fullname );
+      } else {
+        // doSavePnm( manager, (int)PlotType.PLOT_PLAN, fullname );
+        doSavePnm( uri, manager, type, fullname );
+      }
+    }
+  }
 
+  /** internal save the sketch as PNM image
+   * @param uri       output URI
+   * @param manager   plot items 
+   * @param type      plot type
+   * @param filename  ...
+   */
+  private void doSavePnm( Uri uri, DrawingCommandManager manager, long type, final String filename )
+  {
+    if ( manager == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    Bitmap bitmap = manager.getBitmap( );
+    if ( bitmap == null ) {
+      TDToast.makeBad( R.string.null_bitmap );
+      return;
+    }
+    float scale = manager.getBitmapScale();
+    String format = getResources().getString( R.string.saved_file_2 );
+    // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
+    // TDLog.v( "do save PNG - uri " + ((uri!=null)? uri.toString() : "null") + " filename " + filename );
+    new ExportBitmapToPnm( uri, format, bitmap, scale, filename, true ).execute();
+  }
+
+  // --------------------------------------------------------------------------
   // NO_PNG
+
   // /** save the sketch as PNG image
   //  * @param uri   output URI
   //  * @param type  plot type
@@ -6798,7 +6855,6 @@ public class DrawingWindow extends ItemDrawer
   //   }
   // }
 
-  // NO_PNG
   // /** internal save the sketch as PNG image
   //  * @param uri       output URI
   //  * @param manager   plot items 
@@ -7616,6 +7672,7 @@ public class DrawingWindow extends ItemDrawer
           break;
         } // else fall-through and savePng
       // case TDConst.SURVEY_FORMAT_PNG: savePng( uri, mType ); break; // NO_PNG
+      case TDConst.SURVEY_FORMAT_PNM: savePnm( uri, mType ); break; // NO_PNG
       case TDConst.SURVEY_FORMAT_DXF: saveWithExt( uri, mType, "dxf" ); break;
       case TDConst.SURVEY_FORMAT_SVG: saveWithExt( uri, mType, "svg" ); break;
       case TDConst.SURVEY_FORMAT_SHP: saveWithExt( uri, mType, "shp" ); break;

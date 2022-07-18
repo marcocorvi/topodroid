@@ -58,6 +58,7 @@ public class TDConst
   public static final int SURVEY_FORMAT_STL_BIN = 34;
   public static final int SURVEY_FORMAT_LAS_BIN = 35;
   public static final int SURVEY_FORMAT_SERIAL  = 36;
+  public static final int SURVEY_FORMAT_PNM     = 37; // PNM
 
   public static final String[] mMimeType = {
     "application/octet-stream",  // 0 // Therion
@@ -98,7 +99,8 @@ public class TDConst
     "application/octet-stream", // 33 STL
     "application/octet-stream", // STL binary
     "application/octet-stream", // LAS binary
-    "test/plain"                // 36 serialized
+    "test/plain",               // 36 serialized
+    "image/x-portable-pixmap",  // 37 PNM
   };
 
   // ======= IMPORT ======
@@ -283,7 +285,8 @@ public class TDConst
       "PDF",
       "XVI",
       "Tunnel",
-      "Cave3D"
+      "Cave3D",
+      // "PNM", TODO_PNM
   };
 
   static final int[] mPlotExportIndex = {
@@ -296,7 +299,8 @@ public class TDConst
     SURVEY_FORMAT_PDF,
     SURVEY_FORMAT_XVI,
     SURVEY_FORMAT_TNL,
-    SURVEY_FORMAT_C3D
+    SURVEY_FORMAT_C3D,
+    // SURVEY_FORMAT_PNM, TODO_PNM
   };
 
   private static final String[] mPlotExportExt = {
@@ -309,7 +313,8 @@ public class TDConst
     "pdf",
     "xvi",
     "xml",
-    "c3d"
+    "c3d",
+    // "pnm", TODO_PNM
   };
 
   public static String getPlotFilename( int type, String name )
@@ -325,6 +330,7 @@ public class TDConst
       case 6: return name + ".xvi";
       case 7: return name + ".xml"; // Tunnel
       case 8: return name + ".c3d";
+      // case 9: return name + ".pnm"; TODO_PNM
     }
     return name;
   }

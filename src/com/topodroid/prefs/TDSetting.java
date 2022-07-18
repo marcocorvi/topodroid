@@ -254,12 +254,13 @@ public class TDSetting
   public static final int SVG_ILLUSTRATOR = 1;
   public static int mSvgProgram = SVG_ILLUSTRATOR;
 
-  // public static float mBitmapScale = 1.5f; // NO_PNG
   public static float mBezierStep  = 0.2f;
   public static float getBezierStep() { return ( mBezierStep < 0.1f )? 0.05f : (mBezierStep/2); }
  
   // public static float mDxfScale    = 1.0f;
-  // public static int mBitmapBgcolor = 0x000000; // NO_PNG
+
+  public static float mBitmapScale = 1.5f; // NO_PNG
+  public static int mBitmapBgcolor = 0x000000; // NO_PNG
 
   public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
   public static boolean mAcadSpline = true; // interpolated cubic
