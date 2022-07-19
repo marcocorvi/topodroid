@@ -62,8 +62,8 @@ public class DrawingLabelPath extends DrawingPointPath
   /** deserialize from an input stream
    * @param version   stream version
    * @param dis       input stream
-   * @param x         ...
-   * @param y         ...
+   * @param x         offset X coord [scene ?]
+   * @param y         offset Y coord
    */
   public static DrawingLabelPath loadDataStream( int version, DataInputStream dis, float x, float y )
   {

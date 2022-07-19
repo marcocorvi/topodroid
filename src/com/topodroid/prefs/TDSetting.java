@@ -259,8 +259,12 @@ public class TDSetting
  
   // public static float mDxfScale    = 1.0f;
 
-  public static float mBitmapScale = 1.5f; // NO_PNG
-  public static int mBitmapBgcolor = 0x000000; // NO_PNG
+  // NO_PNG NO_PNM
+  // raster image export has the issue of no control on the resolution (scale)
+  // because the app cannot guarantee the siz of the bitmap
+  //
+  // public static float mBitmapScale = 1.5f;
+  // public static int mBitmapBgcolor = 0x000000;
 
   public static int mAcadVersion = 9;       // AutoCAD version 9, or 13, or 16
   public static boolean mAcadSpline = true; // interpolated cubic
@@ -286,9 +290,8 @@ public class TDSetting
 
   // calibration data grouping policies
   public static final int GROUP_BY_DISTANCE = 0; // DEPRECATED
-  public static final int GROUP_BY_FOUR     = 1;
-  public static final int GROUP_BY_ONLY_16  = 2;
-  // public static final String GROUP_BY  = TDString.ONE;     // GROUP_BY_FOUR
+  public static final int GROUP_BY_FOUR     = 1; // TopoDroid convention
+  public static final int GROUP_BY_ONLY_16  = 2; // PocketTopo convention
   public static int mGroupBy = GROUP_BY_FOUR;  // how to group calib data
 
   // public static boolean mRawData = false;   // whether to display calibration raw data as well
@@ -297,16 +300,16 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DEVICE
-  private final static int CONN_MODE_BATCH      = 0;      // DistoX connection mode
-  private final static int CONN_MODE_CONTINUOUS = 1;
+  private final static int CONN_MODE_BATCH      = 0; // on-demand connection mode
+  private final static int CONN_MODE_CONTINUOUS = 1; // continuous connection mode
   private final static int CONN_MODE_MULTI      = 2;
   // private final static int CONN_MODE_DOUBLE     = 3;
-  private static int mConnectionMode    = CONN_MODE_BATCH; 
+  private static int mConnectionMode = CONN_MODE_BATCH; // DistoX connection mode
 
-  public static boolean isConnectionModeBatch() { return mConnectionMode != CONN_MODE_CONTINUOUS; }
+  public static boolean isConnectionModeBatch()      { return mConnectionMode != CONN_MODE_CONTINUOUS; }
   public static boolean isConnectionModeContinuous() { return mConnectionMode == CONN_MODE_CONTINUOUS; }
+  public static boolean isConnectionModeMulti()      { return mConnectionMode == CONN_MODE_MULTI; }
   // public static boolean isConnectionModeDouble() { return mConnectionMode == CONN_MODE_DOUBLE; }
-  public static boolean isConnectionModeMulti()  { return mConnectionMode == CONN_MODE_MULTI; }
 
   public static boolean mZ6Workaround  = true;
 
@@ -342,16 +345,16 @@ public class TDSetting
   public static int mWaitCommand = 100;
   public static int mConnectFeedback  = FEEDBACK_NONE;
 
-  public static boolean mCheckAttached = false;    // whether to check is there are shots non-attached
+  public static boolean mCheckAttached = false; // whether to check is there are shots non-attached
   public static boolean mCheckExtend   = true;
-  public static boolean mPrevNext = true;    // whether to display prev-next buttons in shot dialog
+  public static boolean mPrevNext      = true;  // whether to display prev-next buttons in shot dialog
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // SHOTS
   public static float mVThreshold = 80f;   // vertical threshold (LRUD)
   public static float mHThreshold;         // horizontal plot threshold
   // public static boolean mDataBackup = false; // whether to export data when shot-window is closed
-  public static boolean mDistoXBackshot = false;
+  public static boolean mDistoXBackshot   = false;
   public static boolean mEditableStations = false;
   // public static int mTitleColor = TDColor.TITLE_NORMAL;
   

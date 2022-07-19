@@ -115,7 +115,13 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mLevel = BrushManager.getAreaLevel( type );
   }
 
-
+  /** factory: create a area path from the data stream
+   * @param version serialize version
+   * @param dis     input data stream
+   * @param x       offset X coord [scene ?]
+   * @param y       offset Y coord
+   * @return the deserialized area path
+   */
   public static DrawingAreaPath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {
     int type, cnt;

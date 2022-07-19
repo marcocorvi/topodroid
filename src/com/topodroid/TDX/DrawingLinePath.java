@@ -83,8 +83,8 @@ public class DrawingLinePath extends DrawingPointLinePath
   /** factory: deserialize a line from a data stream
    * @param version   serialized version
    * @param dis       data input stream
-   * @param x         X coord
-   * @param y         Y coord
+   * @param x         offset X coord [scene ?]
+   * @param y         offset Y coord
    */
   public static DrawingLinePath loadDataStream( int version, DataInputStream dis, float x, float y /*, SymbolsPalette missingSymbols */ )
   {

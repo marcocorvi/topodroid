@@ -168,10 +168,10 @@ public class DrawingPointPath extends DrawingPath
   }
 
   /** factory: create a point path from the data stream
-   * @param version     serialize version
-   * @param dis         input data stream
-   * @param x       X coord
-   * @param y       Y coord
+   * @param version serialize version
+   * @param dis     input data stream
+   * @param x       offset X coord [scene ?]
+   * @param y       offset Y coord
    * @return the deserialized point path
    */
   public static DrawingPointPath loadDataStream( int version, DataInputStream dis, float x, float y /* , SymbolsPalette missingSymbols */ ) 
