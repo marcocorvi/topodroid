@@ -551,6 +551,15 @@ public class DrawingPath extends RectF
 
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param xor_color xoring color
+   */
+  public void draw( Canvas canvas, int xor_color )
+  {
+    drawPath( mPath, canvas, xor_color );
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
    * @param bbox     clipping rectangle
    */
   public void draw( Canvas canvas, RectF bbox )
@@ -561,6 +570,22 @@ public class DrawingPath extends RectF
         mPath.close();
       }
       drawPath( mPath, canvas );
+    }
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param bbox     clipping rectangle
+   * @param xor_color xoring color
+   */
+  public void draw( Canvas canvas, RectF bbox, int xor_color )
+  {
+    if ( intersects( bbox ) ) {
+      if ( mType == DRAWING_PATH_AREA ) {
+        // TDLog.Log( TDLog.LOG_PLOT, "Drawing Path::draw area" );
+        mPath.close();
+      }
+      drawPath( mPath, canvas, xor_color );
     }
   }
 
@@ -582,11 +607,40 @@ public class DrawingPath extends RectF
   /** draw the path on a canvas
    * @param canvas   canvas - N.B. canvas is guaranteed not null
    * @param matrix   transform matrix
+   * @param bbox     clipping rectangle
+   * @param xor_color xoring color
+   */
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox, int xor_color )
+  {
+    if ( intersects( bbox ) ) 
+    {
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      drawPath( mTransformedPath, canvas, xor_color );
+    }
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
    * @param scale    rescaling factor - used only for point items
    * @param bbox     clipping rectangle
    * @note default implementation falls back to draw( Canvas, Matrix, RectF )
    */
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
+  {
+    draw( canvas, matrix, bbox );
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param scale    rescaling factor - used only for point items
+   * @param bbox     clipping rectangle
+   * @param xor_color xoring color
+   * @note default implementation falls back to draw( Canvas, Matrix, RectF )
+   */
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
     draw( canvas, matrix, bbox );
   }
@@ -634,6 +688,36 @@ public class DrawingPath extends RectF
       }
     } 
     if ( mPaint != null ) canvas.drawPath( path, mPaint );
+  }
+ 
+  /** draw this path on a canvas
+   * @param path      path to draw
+   * @param canvas    canvas
+   * @param xor_color xoring color
+   *
+   * FIXME apparently this can be called when mPaint is still null and when fixedBluePaint is null
+   *
+   * @note DrawingAreaPath overrides this
+   */
+  void drawPath( Path path, Canvas canvas, int xor_color )
+  {
+    if (    mType == DRAWING_PATH_SPLAY  // FIXME_X_SPLAY
+         && mBlock != null ) {
+      if ( TDSetting.mSplayColor ) {
+        if ( mBlock.isRecent( ) ) { 
+          canvas.drawPath( path, BrushManager.lightBluePaint );
+          return;
+        }
+        if ( TDLevel.overExpert ) { // splay user-color only at tester level
+          Paint paint = mBlock.getPaint();
+          if ( paint != null ) {
+            canvas.drawPath( path, paint );
+            return;
+          }
+        }
+      }
+    } 
+    if ( mPaint != null ) canvas.drawPath( path, xorPaint( mPaint, xor_color ) );
   }
 
   /** set the orientation - empty by default
@@ -758,6 +842,17 @@ public class DrawingPath extends RectF
     float x0 = DrawingUtil.sceneToWorldX( x, y );
     float y0 = DrawingUtil.sceneToWorldY( x, y );
     return V1.times(x0).plus( V2.times(y0) );
+  }
+
+  /** @return a paint with xor-ed color
+   * @param paint     input paint
+   * @param xor_color xoring color
+   */
+  static Paint xorPaint( Paint paint, int xor_color ) 
+  {
+    Paint ret = new Paint( paint );
+    ret.setColor( xor_color ^ ret.getColor() );
+    return ret;
   }
 
 }

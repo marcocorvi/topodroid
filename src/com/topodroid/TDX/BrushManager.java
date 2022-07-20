@@ -259,6 +259,7 @@ public class BrushManager
   public static Paint fixedStationBarrierPaint = makePaint( TDColor.FULL_RED, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static Paint fixedStationHiddenPaint  = makePaint( 0xFF9966ff,  WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static Paint labelPaint = makePaint( TDColor.WHITE, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
+  public static Paint blackPaint = makePaint( TDColor.BLACK, WIDTH_FIXED, Paint.Style.FILL_AND_STROKE);
   public static final Paint borderPaint = makePaint( 0x99ffffff, WIDTH_FIXED, Paint.Style.STROKE);
   // public static final Paint stationPaint = makePaint( 0xFFFF6666, WIDTH_FIXED, Paint.Style.STROKE);
   public static final Paint duplicateStationPaint = makePaint( 0xFFFF66FF, WIDTH_FIXED, Paint.Style.STROKE);
@@ -303,7 +304,7 @@ public class BrushManager
    */
   static void loadAllLibraries( Context ctx, Resources res ) 
   {
-    TDLog.v("BRUSH load libraries" );
+    // TDLog.v("BRUSH load libraries" );
     mHasSymbolLibraries = false;
     makeStationSymbol( res );
     reloadPointLibrary( ctx, res );
@@ -318,7 +319,7 @@ public class BrushManager
    */
   public static void reloadPointLibrary( Context ctx, Resources res )
   {
-    TDLog.v("BRUSH load point library" );
+    // TDLog.v("BRUSH load point library" );
     mPointLib = new SymbolPointLibrary( ctx, res );
     // mPointLib.loadUserPoints();
   }
@@ -328,7 +329,7 @@ public class BrushManager
    */
   public static void reloadLineLibrary( Resources res )
   {
-    TDLog.v("BRUSH load line library" );
+    // TDLog.v("BRUSH load line library" );
     mLineLib = new SymbolLineLibrary( res );
     // mLineLib.loadUserLines();
   }
@@ -338,7 +339,7 @@ public class BrushManager
    */
   public static void reloadAreaLibrary( Resources res )
   {
-    TDLog.v("BRUSH load area library" );
+    // TDLog.v("BRUSH load area library" );
     mAreaLib = new SymbolAreaLibrary( res );
     // mAreaLib.loadUserAreas();
   }

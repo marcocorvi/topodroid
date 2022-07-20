@@ -1165,116 +1165,112 @@ public class DrawingCommandManager
   }
 
   // NO_PNG
-  private float mBitmapScale = 1;
+  // private float mBitmapScale = 1;
 
   // NO_PNG
-  /** @return the last used bitmap scale
-   */
-  float getBitmapScale() { return mBitmapScale; }
+  // /** @return the last used bitmap scale
+  //  */
+  // float getBitmapScale() { return mBitmapScale; }
 
   // NO_PNG
-  public Bitmap getBitmap()
-  {
-    RectF bounds = getBitmapBounds();
-    // TDLog.Log( TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
-    mBitmapScale = TDSetting.mBitmapScale;
-    int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
-    int height = (int)((bounds.bottom - bounds.top + 2 * BORDER) );
-    int max = (int)( 8 * 1024 * 1024 / (mBitmapScale * mBitmapScale) );  // 16 MB 2 B/pixel
-    while ( width*height > max ) {
-      mBitmapScale /= 2;
-      max *= 4;
-    }
-    width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
-    height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
-   
-    Bitmap bitmap = null;
-    while ( bitmap == null && mBitmapScale > 0.05 ) {
-      if ( width <= 0 || height <= 0 ) return null; 
-      try {
-        // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
-        bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
-      } catch ( OutOfMemoryError e ) {
-        mBitmapScale /= 2;
-        width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
-        height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
-      } catch ( IllegalArgumentException e ) {
-        TDLog.Error("create bitmap illegal arg " + e.getMessage() );
-        return null;
-      }
-    }
-    if ( bitmap == null ) return null;
-    if ( mBitmapScale <= 0.05 ) {
-      bitmap.recycle();
-      return null;
-    }
-    // TDLog.v( "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
-    Canvas c = new Canvas (bitmap);
-    // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
-    c.drawColor( TDSetting.mBitmapBgcolor );
-  
-    // commandManager.execute All(c,previewDoneHandler);
-    c.drawBitmap (bitmap, 0, 0, null);
-  
-    Matrix mat = new Matrix();
-    float scale = 1 / mBitmapScale;
-    mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
-    mat.postScale( mBitmapScale, mBitmapScale );
-    if ( TDSetting.mSvgGrid ) {
-      if ( mGridStack1 != null ) {
-        synchronized( TDPath.mGridsLock ) {
-          for ( DrawingPath p1 : mGridStack1 ) {
-            p1.draw( c, mat, null );
-          }
-          for ( DrawingPath p10 : mGridStack10 ) {
-            p10.draw( c, mat, null );
-          }
-          for ( DrawingPath p100 : mGridStack100 ) {
-            p100.draw( c, mat, null );
-          }
-          if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
-          // no extend line for bitmap
-        }
-      }
-    }
-  
-    synchronized( TDPath.mShotsLock ) {
-      if ( TDSetting.mTherionSplays ) {
-        if ( mSplaysStack != null ) {
-          for ( DrawingSplayPath path : mSplaysStack ) {
-            path.draw( c, mat, scale, null, true ); // true = not_edit
-          }
-        }
-      }
-      if ( mLegsStack != null ) {
-        for ( DrawingPath path : mLegsStack ) {
-          path.draw( c, mat, null );
-        }
-      }
-    }
-  
-    if ( TDSetting.mAutoStations ) {
-      if ( mStations != null ) {  
-        synchronized( TDPath.mStationsLock ) {
-          for ( DrawingStationName st : mStations ) {
-            st.draw( c, mat, null );
-          }
-        }
-        // synchronized( TDPath.mFixedsLock ) {
-        //   for ( DrawingFixedName fx : mFixeds ) {
-        //     fx.draw( c, mat, null );
-        //   }
-        // }
-      }
-    }
-  
-    synchronized( mScraps ) {
-      for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
-    }
-  
-    // checkLines();
-    return bitmap;
-  }
+  // public Bitmap getBitmap()
+  // {
+  //   RectF bounds = getBitmapBounds();
+  //   // TDLog.Log( TDLog.LOG_PLOT, "getBitmap Bounds " + bounds.left + " " + bounds.top + " " + bounds.right + " " + bounds.bottom );
+  //   mBitmapScale = TDSetting.mBitmapScale;
+  //   int width  = (int)((bounds.right - bounds.left + 2 * BORDER) );
+  //   int height = (int)((bounds.bottom - bounds.top + 2 * BORDER) );
+  //   int max = (int)( 8 * 1024 * 1024 / (mBitmapScale * mBitmapScale) );  // 16 MB 2 B/pixel
+  //   while ( width*height > max ) {
+  //     mBitmapScale /= 2;
+  //     max *= 4;
+  //   }
+  //   width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+  //   height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
+  //  
+  //   Bitmap bitmap = null;
+  //   while ( bitmap == null && mBitmapScale > 0.05 ) {
+  //     if ( width <= 0 || height <= 0 ) return null; 
+  //     try {
+  //       // bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.ARGB_8888);
+  //       bitmap =  Bitmap.createBitmap (width, height, Bitmap.Config.RGB_565);
+  //     } catch ( OutOfMemoryError e ) {
+  //       mBitmapScale /= 2;
+  //       width  = (int)((bounds.right - bounds.left + 2 * BORDER) * mBitmapScale );
+  //       height = (int)((bounds.bottom - bounds.top + 2 * BORDER) * mBitmapScale );
+  //     } catch ( IllegalArgumentException e ) {
+  //       TDLog.Error("create bitmap illegal arg " + e.getMessage() );
+  //       return null;
+  //     }
+  //   }
+  //   if ( bitmap == null ) return null;
+  //   if ( mBitmapScale <= 0.05 ) {
+  //     bitmap.recycle();
+  //     return null;
+  //   }
+  //   // TDLog.v( "PNG mBitmapScale " + mBitmapScale + "/" + TDSetting.mBitmapScale + " " + width + "x" + height );
+  //   Canvas c = new Canvas (bitmap);
+  //   // c.drawColor(TDSetting.mBitmapBgcolor, PorterDuff.Mode.CLEAR);
+  //   c.drawColor( TDSetting.mBitmapBgcolor );
+  // 
+  //   // commandManager.execute All(c,previewDoneHandler);
+  //   c.drawBitmap (bitmap, 0, 0, null);
+  // 
+  //   Matrix mat = new Matrix();
+  //   float scale = 1 / mBitmapScale;
+  //   mat.postTranslate( BORDER - bounds.left, BORDER - bounds.top );
+  //   mat.postScale( mBitmapScale, mBitmapScale );
+  //   if ( TDSetting.mSvgGrid ) {
+  //     if ( mGridStack1 != null ) {
+  //       synchronized( TDPath.mGridsLock ) {
+  //         for ( DrawingPath p1 : mGridStack1 ) {
+  //           p1.draw( c, mat, null );
+  //         }
+  //         for ( DrawingPath p10 : mGridStack10 ) {
+  //           p10.draw( c, mat, null );
+  //         }
+  //         for ( DrawingPath p100 : mGridStack100 ) {
+  //           p100.draw( c, mat, null );
+  //         }
+  //         if ( mNorthLine != null ) mNorthLine.draw( c, mat, null );
+  //         // no extend line for bitmap
+  //       }
+  //     }
+  //   }
+  //   synchronized( TDPath.mShotsLock ) {
+  //     if ( TDSetting.mTherionSplays ) {
+  //       if ( mSplaysStack != null ) {
+  //         for ( DrawingSplayPath path : mSplaysStack ) {
+  //           path.draw( c, mat, scale, null, true ); // true = not_edit
+  //         }
+  //       }
+  //     }
+  //     if ( mLegsStack != null ) {
+  //       for ( DrawingPath path : mLegsStack ) {
+  //         path.draw( c, mat, null );
+  //       }
+  //     }
+  //   }
+  //   if ( TDSetting.mAutoStations ) {
+  //     if ( mStations != null ) {  
+  //       synchronized( TDPath.mStationsLock ) {
+  //         for ( DrawingStationName st : mStations ) {
+  //           st.draw( c, mat, null );
+  //         }
+  //       }
+  //       // synchronized( TDPath.mFixedsLock ) {
+  //       //   for ( DrawingFixedName fx : mFixeds ) {
+  //       //     fx.draw( c, mat, null );
+  //       //   }
+  //       // }
+  //     }
+  //   }
+  //   synchronized( mScraps ) {
+  //     for ( Scrap scrap : mScraps ) scrap.draw( c, mat, scale );
+  //   }
+  //   // checkLines();
+  //   return bitmap;
+  // }
 
   // static final String actionName[] = { "remove", "insert", "modify" }; // DEBUG LOG
 
@@ -1299,9 +1295,10 @@ public class DrawingCommandManager
    * N.B. doneHandler is not used
    * @param canvas where to draw
    * @param zoom   used for scalebar and selection points (use < negative zoom for pdf print)
-   * @param station_splay ???
+   * @param station_splay ??? whether to draw splays as dots
+   * @param inverted_colors   whether colors must be inverted
    */
-  void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay )
+  void executeAll( Canvas canvas, float zoom, DrawingStationSplay station_splay, boolean inverted_colors )
   {
     if ( canvas == null ) {
       TDLog.Error( "drawing execute all: null canvas");
@@ -1366,6 +1363,12 @@ public class DrawingCommandManager
 
     synchronized( TDPath.mGridsLock ) {
       if( grids && mGridStack1 != null ) {
+        Paint paint_grid    = BrushManager.fixedGridPaint;
+        Paint paint_grid100 = BrushManager.fixedGrid100Paint;
+        if ( inverted_colors ) {
+          paint_grid    = DrawingPath.xorPaint( paint_grid, 0xffffff );
+          paint_grid100 = DrawingPath.xorPaint( paint_grid100, 0xffffff );
+        }
         if ( isFixedZoom() ) {
           // the sketch is scaled with zoom computed in DrawingWindow
 
@@ -1378,9 +1381,9 @@ public class DrawingCommandManager
           for ( ; x<TopoDroidApp.mDisplayWidth; x += step ) {
             DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
             if ( i % 10 == 0 ) { 
-              dpath.setPathPaint( BrushManager.fixedGrid100Paint );
+              dpath.setPathPaint( paint_grid100 );
             } else {
-              dpath.setPathPaint( BrushManager.fixedGridPaint );
+              dpath.setPathPaint( paint_grid );
             }
             ++i;
             dpath.mPath  = new Path();
@@ -1393,9 +1396,9 @@ public class DrawingCommandManager
           for ( ; y<TopoDroidApp.mDisplayHeight; y += step ) {
             DrawingPath dpath = new DrawingPath( DrawingPath.DRAWING_PATH_GRID, null, -1 );
             if ( j % 10 == 0 ) { 
-              dpath.setPathPaint( BrushManager.fixedGrid100Paint );
+              dpath.setPathPaint( paint_grid100 );
             } else {
-              dpath.setPathPaint( BrushManager.fixedGridPaint );
+              dpath.setPathPaint( paint_grid );
             }
             ++j;
             dpath.mPath  = new Path();
@@ -1413,25 +1416,47 @@ public class DrawingCommandManager
           for ( DrawingPath p100 : mGridStack100 ) p100.draw( canvas, mm, bbox );
         }
       }
-      if ( mNorthLine != null ) mNorthLine.draw( canvas, mm, bbox );
+      if ( mNorthLine != null ) {
+        if ( inverted_colors ) {
+          mNorthLine.draw( canvas, mm, bbox, 0xffffff );
+        } else {
+          mNorthLine.draw( canvas, mm, bbox );
+        }
+      }
       if ( scaleRef && (mScaleRef != null)) {
         float sketch_unit = isFixedZoom()? 1.0f : TDSetting.mUnitGrid;
-        if ( sidebars ) {
-          mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit );
+        if ( inverted_colors ) {
+          if ( sidebars ) {
+            mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit, 0xffffff );
+          } else {
+            mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit, 0xffffff );
+          }
         } else {
-          mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit );
+          if ( sidebars ) {
+            mScaleRef.draw(canvas, zoom, mLandscape, sketch_unit );
+          } else {
+            mScaleRef.draw(canvas, zoom, mLandscape, 20, bbox.bottom - bbox.top, sketch_unit );
+          }
         }
       }
     }
 
     synchronized( TDPath.mShotsLock ) {
       if ( legs && mLegsStack != null ) {
-        for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox );
+        if ( inverted_colors ) {
+          for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox, 0xffffff );
+        } else {
+          for ( DrawingPath leg: mLegsStack ) leg.draw( canvas, mm, bbox );
+        }
       }
       if ( mSplaysStack != null ) {
         if ( station_splay == null ) {
           if ( splays ) {
-            for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
+            if ( inverted_colors ) {
+              for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints, 0xffffff );
+            } else {
+              for ( DrawingSplayPath path : mSplaysStack ) path.draw( canvas, mm, scale, bbox, ! mDisplayPoints );
+            }
           }
         } else {
           if ( splays ) { // draw all splays except the splays-off
@@ -1462,7 +1487,11 @@ public class DrawingCommandManager
     if ( stations ) {
       if ( mStations != null ) {  
         synchronized( TDPath.mStationsLock ) {
-          for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
+          if ( inverted_colors ) {
+            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox, 0xffffff );
+          } else {
+            for ( DrawingStationName st : mStations ) st.draw( canvas, mm, bbox );
+          }
         }
       }
       // if ( mFixeds != null ) {  
@@ -1483,17 +1512,23 @@ public class DrawingCommandManager
         }
       } else {
         synchronized( mScraps ) {
-          for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox );
+          if ( inverted_colors ) {
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
+          } else {
+            for ( Scrap scrap : mScraps ) scrap.drawAll( canvas, mm, scale, bbox );
+          }
         }
       }
     } else { // not DRAWING_OVERVIEW
       synchronized( mScraps ) {
         for ( Scrap scrap : mScraps ) {
-          if ( scrap == mCurrentScrap ) {
-            scrap.drawAll( canvas, mm, scale, bbox );
-          } else {
-            scrap.drawGreyOutline( canvas, mm, bbox );
-          }
+          if ( scrap == mCurrentScrap ) continue;
+          scrap.drawGreyOutline( canvas, mm, bbox );
+        }
+        if ( inverted_colors ) {
+          mCurrentScrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
+        } else { 
+          mCurrentScrap.drawAll( canvas, mm, scale, bbox );
         }
       }
       if ( sidebars && mDisplayPoints ) {

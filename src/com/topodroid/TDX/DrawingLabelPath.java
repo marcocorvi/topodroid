@@ -141,6 +141,7 @@ public class DrawingLabelPath extends DrawingPointPath
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox )
   {
+    Paint paint = (bbox != null)? mPaint : BrushManager.blackPaint;
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       setTextSize();
@@ -152,6 +153,35 @@ public class DrawingLabelPath extends DrawingPointPath
       }
       mTransformedPath.transform( matrix );
       canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, mPaint );
+    }
+  }
+
+  /** draw the label on the screen
+   * @param canvas    canvas
+   * @param matrix    transform matrix
+   * @param scale     scaling factor - not used
+   * @param bbox      clipping rectangle
+   * @param xor_color xor color
+   * @note scale is not used but this signature is necessary because DrawingLabelPath extends DrawingPointPath
+   * @note text size is reduced by 25 %
+   */
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  {
+    TDLog.v("DRAW xor color " + xor_color + " scale " + scale );
+    if ( intersects( bbox ) ) {
+      // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
+      setTextSize();
+      mTransformedPath = new Path( mPath );
+      if ( mLandscape ) {
+        Matrix rot = new Matrix();
+        rot.postRotate( 90, cx, cy );
+        mTransformedPath.transform( rot );
+      }
+      mTransformedPath.transform( matrix );
+      Paint paint = xorPaint( mPaint, xor_color );
+      paint.setTextSize( 0.25f * paint.getTextSize() );
+      canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, paint );
     }
   }
 
@@ -199,7 +229,7 @@ public class DrawingLabelPath extends DrawingPointPath
   {
     mScale = scale;
     float f = fontSize();
-    mPaint = new Paint( BrushManager.labelPaint );
+    mPaint = BrushManager.labelPaint; // was new Paint( ... )
     mPaint.setTextSize( TDSetting.mLabelSize * f );
     makeLabelPath( /* f */ );
   }

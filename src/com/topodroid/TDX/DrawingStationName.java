@@ -13,7 +13,7 @@
 package com.topodroid.TDX;
 
 import com.topodroid.utils.TDMath;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.num.NumStation;
 // import com.topodroid.math.Point2D;
 import com.topodroid.prefs.TDSetting;
@@ -28,6 +28,7 @@ import java.io.IOException;
 
 import android.graphics.Canvas;
 import android.graphics.Path;
+import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Matrix;
 
@@ -166,13 +167,37 @@ public class DrawingStationName extends DrawingPointPath
   public void draw( Canvas canvas, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw LABEL " + mName );
+      // TDLog.v( "PLOT station name " + mName );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, mPaint );
       if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
         path.moveTo( cx, cy );
         path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
         canvas.drawPath( path, BrushManager.mSectionPaint );
+      }
+    }
+  }
+
+  /** draw the station on the screen
+   * @param canvas    canvas
+   * @param bbox      clipping box
+   * @param xor_color xoring color
+   * @note text size is reduced by 25 %
+   */
+  @Override
+  public void draw( Canvas canvas, RectF bbox, int xor_color )
+  {
+    if ( intersects( bbox ) ) {
+      // TDLog.v( "PLOT station name " + mName + " xor color " + xor_color );
+      // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
+      Paint paint = new Paint( mPaint );
+      paint.setTextSize( 0.25f * mPaint.getTextSize() );
+      canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
+        canvas.drawPath( path, DrawingPath.xorPaint( BrushManager.mSectionPaint, xor_color ) );
       }
     }
   }
@@ -186,7 +211,7 @@ public class DrawingStationName extends DrawingPointPath
   public void draw( Canvas canvas, Matrix matrix, RectF bbox )
   {
     if ( intersects( bbox ) ) {
-      // TDLog.Log( TDLog.LOG_PATH, "DrawingStationName::draw[matrix] LABEL " + mName );
+      // TDLog.v( "PLOT station name " + mName + " with matrix" );
       if ( mName != null && mPaint != null ) {
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
@@ -201,7 +226,37 @@ public class DrawingStationName extends DrawingPointPath
       }
     }
   }
-  
+
+  /** draw the station on the screen
+   * @param canvas    canvas
+   * @param matrix    transform matrix
+   * @param bbox      clipping box
+   * @param xor_color xoring color
+   * @note text size is reduced by 25 %
+   */
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox, int xor_color )
+  {
+    if ( intersects( bbox ) ) {
+      // TDLog.v( "PLOT station name " + mName + " with matrix. xor color " + xor_color );
+      if ( mName != null && mPaint != null ) {
+        // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
+        Paint paint = new Paint( mPaint );
+        paint.setTextSize( 0.25f * mPaint.getTextSize() );
+        mTransformedPath = new Path( mPath );
+        mTransformedPath.transform( matrix );
+        canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );
+      }
+      if ( mXSectionType != PlotType.PLOT_NULL ) {
+        Path path = new Path();
+        path.moveTo( cx, cy );
+        path.lineTo( cx+mDX*TDSetting.mArrowLength, cy+mDY*TDSetting.mArrowLength );
+        path.transform( matrix );
+        canvas.drawPath( path, DrawingPath.xorPaint( BrushManager.mSectionPaint, xor_color ) );
+      }
+    }
+  }
+
   /** @return the coordinates (E,N,Z) as a string
    */
   String getCoordsString()

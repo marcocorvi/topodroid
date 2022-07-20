@@ -304,7 +304,7 @@ public class ExportDialogPlot extends MyDialog
         {
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mPdfBgcolor = 0;
           // if ( ((CheckBox) findViewById( R.id.pdf_bgcolor )).isChecked() ) TDSetting.mBitmapBgcolor = 0xffffffff;
-          TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.pdf_splays )).isChecked();
+          // TDSetting.mTherionSplays = ((CheckBox) findViewById( R.id.pdf_splays )).isChecked();
         }
         break;
     }
@@ -340,7 +340,7 @@ public class ExportDialogPlot extends MyDialog
     // ((EditText) findViewById( R.id.png_scale )).setText( Float.toString( TDSetting.mBitmapScale ) ); // NO_PNG
 
     // ((CheckBox) findViewById( R.id.pdf_bgcolor )).setChecked( TDSetting.mBitmapBgcolor == 0xffffffff );
-    ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
+    // ((CheckBox) findViewById( R.id.pdf_splays )).setChecked( TDSetting.mTherionSplays );
   }
 }
 

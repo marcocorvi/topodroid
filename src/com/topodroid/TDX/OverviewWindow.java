@@ -851,17 +851,19 @@ public class OverviewWindow extends ItemDrawer
       // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
       RectF bnds = manager.getBitmapBounds();
-      float zw = (bnds.right - bnds.left);
-      float zh = (bnds.bottom - bnds.top);
+      int zw = 40 + (int)(bnds.right - bnds.left); // margin 20+20
+      int zh = 40 + (int)(bnds.bottom - bnds.top);
       // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
-      PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
+      PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
       PageInfo info = builder.create();
 
       PdfDocument pdf = new PdfDocument( );
       Page page = pdf.startPage( info );
 
-      page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
-      manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
+      // page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
+      // page.getCanvas().drawRect( new RectF(0,0,zw,zh), BrushManager.blackPaint ); // TDSetting.mBitmapBgcolor );
+      manager.executeAll( page.getCanvas(), -1.0f, null, false ); // zoom is 1.0, false = no inverted_color
+      // manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
       pdf.finishPage( page );
       pdf.writeTo( fos );
       pdf.close();

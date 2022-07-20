@@ -175,6 +175,22 @@ public class DrawingSplayPath extends DrawingPath
   }
 
   /** draw the splay on the canvas
+   * @param canvas   canvas
+   * @param matrix   transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping bounding box
+   * @param xor_color xoring color (not used)
+   * 
+   * @note the circle radius is fixed and does not increase with the zoom
+   * @note canvas is guaranteed ! null
+   */
+  // @Override
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  {
+    draw( canvas, matrix, scale, bbox, true );
+  }
+
+  /** draw the splay on the canvas
    * @param canvas   canvas - @note canvas is guaranteed ! null
    * @param matrix   transform matrix
    * @param scale    transform scale: to keep the circle radius fixed
@@ -195,6 +211,31 @@ public class DrawingSplayPath extends DrawingPath
       }
     }
   }
+
+  /** draw the splay on the canvas
+   * @param canvas   canvas - @note canvas is guaranteed ! null
+   * @param matrix   transform matrix
+   * @param scale    transform scale: to keep the circle radius fixed
+   * @param bbox     clipping bounding box
+   * @param not_edit whether the splay is drawn not editable (only for splay mode POINT)
+   * @param xor_color xoring color
+   * 
+   * @note the circle radius is fixed and does not increase with the zoom
+   */
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, boolean not_edit, int xor_color )
+  {
+    if ( intersects( bbox ) ) {
+      if ( not_edit && mSplayMode == SPLAY_MODE_POINT ) {
+        TDGreenDot.draw( canvas, matrix, xEnd, yEnd, TDSetting.mDotRadius*1.5f*scale, mPaint );
+      } else {
+        mTransformedPath = new Path( mPath );
+        mTransformedPath.transform( matrix );
+        drawPath( mTransformedPath, canvas, xor_color );
+      }
+    }
+  }
+
+  // -------------------------------------------------------------------------------------------------
 
   /** set splay paint - default behaviour
    * @param h_paint  H-splay paint

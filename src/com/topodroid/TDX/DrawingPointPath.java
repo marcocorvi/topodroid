@@ -424,6 +424,44 @@ public class DrawingPointPath extends DrawingPath
     }
   }
 
+  /** draw the point on the canvas
+   * @param canvas    canvas
+   * @param matrix    transform matrix
+   * @param scale     scale factor
+   * @param bbox      clipping rectangle
+   * @param xor_color xoring color
+   * @note canvas is guaranteed not null
+   */
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  {
+    if ( intersects( bbox ) ) {
+      if ( TDSetting.mUnscaledPoints ) {
+        resetPath( 4 * scale );
+      }
+      mTransformedPath = new Path( mPath );
+      if ( mLandscape && ! BrushManager.isPointOrientable( mPointType ) ) {
+	Matrix rot = new Matrix();
+	rot.postRotate( 90, cx, cy );
+	mTransformedPath.transform( rot );
+      }
+      mTransformedPath.transform( matrix );
+      drawPath( mTransformedPath, canvas, xor_color );
+      if ( mLink != null ) {
+        Path link = new Path();
+        link.moveTo( cx, cy );
+	link.lineTo( mLink.getLinkX(), mLink.getLinkY() );
+        if ( mLandscape ) {
+	  Matrix rot = new Matrix();
+	  rot.postRotate( 90, cx, cy );
+	  link.transform( rot );
+	}
+        link.transform( matrix );
+        canvas.drawPath( link, BrushManager.fixedOrangePaint );
+      }
+    }
+  }
+
   /** set the scale index
    * @param scale   new scale index
    */

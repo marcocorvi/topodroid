@@ -26,6 +26,7 @@ public interface ICanvasCommand
     void draw(Canvas canvas, RectF bbox );
     void draw(Canvas canvas, Matrix mat, RectF bbox );
     void draw(Canvas canvas, Matrix mat, float scale, RectF bbox );
+    void draw(Canvas canvas, Matrix mat, float scale, RectF bbox, int xor_color );
 
     // public void undoCommand();
 

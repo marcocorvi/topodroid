@@ -317,6 +317,18 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   @Override
+  void drawPath( Path path, Canvas canvas, int xor_color )
+  {
+    if ( mPaint != null ) {
+      canvas.save();
+      canvas.clipPath( path );
+      canvas.drawPaint( xorPaint( mPaint, xor_color ) );
+      if ( isVisible() ) canvas.drawPath( path, BrushManager.borderPaint ); // ??? NullPointerException reported here`
+      canvas.restore();
+    }
+  }
+
+  @Override
   String toTherion( )
   {
     if ( mLast == null || mFirst == null ) return null;

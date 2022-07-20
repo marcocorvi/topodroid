@@ -94,9 +94,17 @@ class EraseCommand implements ICanvasCommand
    * @param mat      transform matrix
    * @param scale    transform scale
    * @param bbox     clipping box
-   * @note nothing to draw - could fall back on draw( Canvas, Matrix, RectF )
    */
   public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox ) { }
+
+  /** draw the command - it does nothing
+   * @param canvas   canvas
+   * @param mat      transform matrix
+   * @param scale    transform scale
+   * @param bbox     clipping box
+   * @param xor_color xoring color
+   */
+  public void draw(Canvas canvas, Matrix mat, float scale, RectF bbox, int xor_color ) { }
 
   // ------------- from ICanvasCommand
   /** flip X axis - it does nothing

@@ -941,7 +941,7 @@ public class DrawingWindow extends ItemDrawer
       float dp1cm = density * fixed_zoom / 2.54f; // dot_per_1cm
       float zoom = 1600 / dp1cm; // 32 = 40 / 1.25
 
-      TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " density " + density + " dp1cm " + dp1cm + " adjust " + TDSetting.mGraphPaperScale );
+      // TDLog.v("ZOOM set zoom " + mZoom + " -> " + zoom + " density " + density + " dp1cm " + dp1cm + " adjust " + TDSetting.mGraphPaperScale );
       // mOffset.x *= mZoom / zoom;
       // mOffset.y *= mZoom / zoom;
       adjustOffset( mZoom, zoom );
@@ -1201,7 +1201,7 @@ public class DrawingWindow extends ItemDrawer
   public void onConfigurationChanged( Configuration new_cfg )
   {
     super.onConfigurationChanged( new_cfg );
-    TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom + " orientation " + new_cfg.orientation );
+    // TDLog.v( "PLOT config changed " + mOffset.x + " " + mOffset.y + " " + mZoom + " orientation " + new_cfg.orientation );
     TDLocale.resetTheLocale();
     mDrawingSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
     // setMenuAdapter( getResources(), mType );
@@ -2276,7 +2276,7 @@ public class DrawingWindow extends ItemDrawer
       mFullName2 = TDInstance.survey + "-" + mName2;
       mFullName3 = null;
       mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
-      // TDLog.v( "name1 " + mName1 + " " + mFullName1 + " name2 " + mName2 + " " + mFullName2 );
+      // TDLog.v( "PLOT name1 " + mName1 + " (" + mFullName1 + ") name2 " + mName2 + " (" + mFullName2 + ")" );
 
       mName    = (mType == PlotType.PLOT_PLAN)? mName1 : mName2;
       mFrom    = extras.getString( TDTag.TOPODROID_PLOT_FROM );
@@ -3274,7 +3274,7 @@ public class DrawingWindow extends ItemDrawer
       filename1b = TDPath.getTdrFileWithExt( mFullName1 );
       // filename2  = TDPath.getTh2FileWithExt( mFullName2 );
       filename2b = TDPath.getTdrFileWithExt( mFullName2 );
-      // TDLog.Log( TDLog.LOG_PLOT, "load files " + filename1b + " " + filename2b );
+      // TDLog.v( "PLOT load files " + filename1b + " " + filename2b );
     } else {
       mPlot3 = mApp_mData.getPlotInfo( mSid, mName3 );
       if ( mPlot3 == null ) return false;
@@ -6936,10 +6936,10 @@ public class DrawingWindow extends ItemDrawer
       // PrintedPdfDocument pdf = new PrintedPdfDocument( TDInstance.context, builder.build() );
 
       RectF bnds = manager.getBitmapBounds();
-      float zw = (bnds.right - bnds.left);
-      float zh = (bnds.bottom - bnds.top);
+      int zw = 40 + (int)(bnds.right - bnds.left); // margin 20 + 20
+      int zh = 40 + (int)(bnds.bottom - bnds.top);
       // TDLog.v( "rect " + bnds.right + " " + bnds.left + " == " + bnds.bottom + " " + bnds.top );
-      PageInfo.Builder builder = new PageInfo.Builder( 40 + (int)zw, 40 + (int)zh, 1 ); // margin 20+20
+      PageInfo.Builder builder = new PageInfo.Builder( zw, zh, 1 );
       PageInfo info = builder.create();
 
       PdfDocument pdf = new PdfDocument( );
@@ -6949,8 +6949,11 @@ public class DrawingWindow extends ItemDrawer
       // float zw = (bnds.right - bnds.left) / ( 300.0f * 11.69f );
       // float zh = (bnds.bottom - bnds.top) / ( 300.0f * 16.54f );
       // float zoom = 1.00f / ( (zw > zh)? zw : zh );
-      page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
-      manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
+
+      // page.getCanvas().drawColor( 0 ); // TDSetting.mBitmapBgcolor );
+      // page.getCanvas().drawRect( new RectF(0,0,zw,zh), BrushManager.blackPaint ); // TDSetting.mBitmapBgcolor );
+      manager.executeAll( page.getCanvas(), -1.0f, null, true ); // zoom is 1.0, true = inverted_color
+      // manager.executeAll( page.getCanvas(), -1.0f, null ); // zoom is 1.0
       pdf.finishPage( page );
       pdf.writeTo( fos );
       pdf.close();

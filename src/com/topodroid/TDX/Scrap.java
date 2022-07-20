@@ -2275,8 +2275,65 @@ public class Scrap
   }
 
   /** draw all sketch items
+   * @param canvas    canvas
+   * @param matrix    transform matrix
+   * @param scale     rescaling factor
+   * @param bbox      clipping rectangle
+   * @param xor_color xor for colors
+   */
+  void drawAll( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  {
+    if ( mCurrentStack == null ) return;
+    synchronized( TDPath.mCommandsLock ) {
+      if ( TDSetting.mWithLevels == 0 ) { // treat no-levels case by itself
+        for ( ICanvasCommand cmd : mCurrentStack  ) {
+          if ( cmd.commandType() == 0 ) {
+            DrawingPath path = (DrawingPath)cmd;
+            cmd.draw( canvas, matrix, scale, bbox, xor_color );
+            if ( path.isLine() ) { // path instanceof DrawingLinePath
+              DrawingLinePath line = (DrawingLinePath)path;
+              if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
+                Paint paint = new Paint( BrushManager.mSectionPaint );
+                paint.setColor( xor_color ^ paint.getColor() );
+                LinePoint lp = line.mFirst;
+                Path path1 = new Path();
+                path1.moveTo( lp.x, lp.y );
+                path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
+                path1.transform( matrix );
+                canvas.drawPath( path1, paint );
+              }
+            }
+          }
+        }
+      } else {
+        for ( ICanvasCommand cmd : mCurrentStack  ) {
+          if ( cmd.commandType() == 0 ) {
+            DrawingPath path = (DrawingPath)cmd;
+            if ( DrawingLevel.isLevelVisible( (DrawingPath)cmd ) ) {
+              cmd.draw( canvas, matrix, scale, bbox, xor_color );
+              if ( path.isLine() ) { // path instanceof DrawingLinePath
+                DrawingLinePath line = (DrawingLinePath)path;
+                if ( BrushManager.isLineSection( line.mLineType ) ) { // add direction-tick to section-lines
+                  Paint paint = new Paint( BrushManager.mSectionPaint );
+                  paint.setColor( xor_color ^ paint.getColor() );
+                  LinePoint lp = line.mFirst;
+                  Path path1 = new Path();
+                  path1.moveTo( lp.x, lp.y );
+                  path1.lineTo( lp.x+line.mDx*TDSetting.mArrowLength, lp.y+line.mDy*TDSetting.mArrowLength );
+                  path1.transform( matrix );
+                  canvas.drawPath( path1, paint );
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /** draw all sketch items
    * @param canvas   canvas
-   * @param matrix      transform matrix
+   * @param matrix   transform matrix
    * @param scale    rescaling factor
    * @param bbox     clipping rectangle
    */

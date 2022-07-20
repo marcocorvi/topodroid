@@ -1591,9 +1591,9 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_line_units_summary">Scale of line drawing styles</string>
   <string name="pref_linesnap_title">Line/Area snap</string>
   <string name="pref_linesnap_summary">Enable line/area snap action</string>
-  <string name="pref_linecurve_title">Smooth/Straigten segment</string>
+  <string name="pref_linecurve_title">Smooth/Straighten segment</string>
   <string name="pref_linecurve_summary">Enable smooth/straighten line segment action</string>
-  <string name="pref_linestraight_title">Straigten lines</string>
+  <string name="pref_linestraight_title">Straighten lines</string>
   <string name="pref_linestraight_summary">Enable straighten whole line action</string>
   <string name="pref_path_multiselect_title">Path multiselection</string>
   <string name="pref_path_multiselect_summary">Enable path multiselection action</string>

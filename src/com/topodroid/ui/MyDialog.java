@@ -189,13 +189,13 @@ public class MyDialog extends Dialog
 
   public void onAttachedToWindow()
   {
-    TDLog.v("DIALOG onAttachedToWindow");
+    // TDLog.v("DIALOG onAttachedToWindow");
     if ( mApp != null ) mApp.pushDialog( this );
   }
 
   public void onDetachedFromWindow()
   {
-    TDLog.v("DIALOG onDetachedFromWindow");
+    // TDLog.v("DIALOG onDetachedFromWindow");
     if ( mApp != null ) mApp.popDialog( );
   }
 

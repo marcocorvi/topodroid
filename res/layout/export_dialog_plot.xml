@@ -392,11 +392,11 @@
       android:layout_height="wrap_content"
       android:text="@string/export_bgcolor"
       / -->
-    <CheckBox android:id="@+id/pdf_splays"
+    <!-- CheckBox android:id="@+id/pdf_splays"
       android:layout_width="match_parent" 
       android:layout_height="wrap_content"
       android:text="@string/export_splays"
-      />
+      / -->
   </LinearLayout>
       				  
   <LinearLayout android:id="@+id/help"

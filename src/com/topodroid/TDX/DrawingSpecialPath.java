@@ -160,6 +160,28 @@ public class DrawingSpecialPath extends DrawingPath
     }
   }
 
+  // /** draw the label on the screen
+  //  * @param canvas   canvas - note canvas is guaranteed not null
+  //  * @param matrix   transform matrix
+  //  * @param scale    rescaling factor
+  //  * @param bbox     clipping rectangle
+  //  * @param xor_color xoring color
+  //  */
+  // @Override
+  // public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
+  // {
+  //   if ( intersects( bbox ) ) {
+  //     mTransformedPath = new Path( mPath );
+  //     if ( mLandscape ) {
+  //       Matrix rot = new Matrix();
+  //       rot.postRotate( 90, cx, cy );
+  //       mTransformedPath.transform( rot );
+  //     }
+  //     mTransformedPath.transform( matrix );
+  //     drawPath( mTransformedPath, canvas, xor_color );
+  //   }
+  // }
+
   public void shiftTo( float x, float y ) // x,y scene coords
   {
     mPath.offset( x-cx, y-cy );

@@ -168,6 +168,8 @@ public class SurveyWindow extends Activity
     if ( mApp.renameCurrentSurvey( TDInstance.sid, name ) ) {
       mTextName.setText( name );
       mTextName.setTextColor( mNameColor );
+      DrawingSurface.clearManagersCache();
+      TDPath.setSurveyPaths( name );
     } else {
       TDToast.makeBad( R.string.cannot_rename );
     }
@@ -515,7 +517,7 @@ public class SurveyWindow extends Activity
     /* if ( team != null ) */ { team = team.trim(); } // else { team = ""; }
     /* if ( comment != null ) */ { comment = comment.trim(); } // else { comment = ""; }
 
-    TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
+    // TDLog.v( "UPDATE survey id " + TDInstance.sid + " team " + team + " date " + date + " comment " + comment );
     mApp_mData.updateSurveyInfo( TDInstance.sid, date, team, decl, comment, mInitStation, mXSections );
     return true;
   }

@@ -111,6 +111,7 @@ class DrawingSurface extends SurfaceView
   static private HashMap<String, DrawingCommandManager> mCache = new HashMap<String, DrawingCommandManager>();
 
   /** clear the cache of managers
+   * @note the cache is cleared when the survey is renamed
    */
   static void clearManagersCache()
   {
@@ -568,7 +569,8 @@ class DrawingSurface extends SurfaceView
         mWidth  = canvas.getWidth();
         mHeight = canvas.getHeight();
         canvas.drawColor(0, PorterDuff.Mode.CLEAR);
-        commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay );
+        commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay, false ); // false = no inverted_color
+        // commandManager.executeAll( canvas, mZoomer.zoom(), mStationSplay ); 
         if ( mPreviewPath != null ) mPreviewPath.draw(canvas, null);
       }
     } finally {
