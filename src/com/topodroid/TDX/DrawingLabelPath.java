@@ -33,6 +33,8 @@ import java.util.Locale;
 
 public class DrawingLabelPath extends DrawingPointPath
 {
+  private final static float PDF_SCALE = 0.4f;
+
   /** cstr
    * @param text     label text
    * @param off_x    X coord
@@ -180,7 +182,7 @@ public class DrawingLabelPath extends DrawingPointPath
       }
       mTransformedPath.transform( matrix );
       Paint paint = xorPaint( mPaint, xor_color );
-      paint.setTextSize( 0.25f * paint.getTextSize() );
+      paint.setTextSize( PDF_SCALE * paint.getTextSize() );
       canvas.drawTextOnPath( mPointText, mTransformedPath, 0f, 0f, paint );
     }
   }

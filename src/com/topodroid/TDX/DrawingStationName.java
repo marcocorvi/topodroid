@@ -35,6 +35,8 @@ import android.graphics.Matrix;
 public class DrawingStationName extends DrawingPointPath
                                 implements IDrawingLink
 {
+  private final static float PDF_SCALE = 0.3f;
+
   private String mName; // station name
   private NumStation mStation;
   // float mX;     // scene coordinates (cx, cy)
@@ -191,7 +193,7 @@ public class DrawingStationName extends DrawingPointPath
       // TDLog.v( "PLOT station name " + mName + " xor color " + xor_color );
       // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
       Paint paint = new Paint( mPaint );
-      paint.setTextSize( 0.25f * mPaint.getTextSize() );
+      paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
       canvas.drawTextOnPath( mName, mPath, 0f, 0f, paint );
       if ( mXSectionType != PlotType.PLOT_NULL ) {
         Path path = new Path();
@@ -242,7 +244,7 @@ public class DrawingStationName extends DrawingPointPath
       if ( mName != null && mPaint != null ) {
         // Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
         Paint paint = new Paint( mPaint );
-        paint.setTextSize( 0.25f * mPaint.getTextSize() );
+        paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
         mTransformedPath = new Path( mPath );
         mTransformedPath.transform( matrix );
         canvas.drawTextOnPath( mName, mTransformedPath, 0f, 0f, paint );

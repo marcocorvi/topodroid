@@ -30,6 +30,8 @@ import android.graphics.Point;
 
 class DrawingScaleReference
 {
+  private final static float PDF_SCALE = 0.25f;
+
   private static final float MIN_WIDTH_PERCENT = 0.2f;
   private static final float MAX_WIDTH_PERCENT = 1.0f;
   private static final int HEIGHT_BARS = 6;
@@ -244,7 +246,7 @@ class DrawingScaleReference
       if ( referenceLen > 0 ) 
       {
         Paint paint = DrawingPath.xorPaint( mPaint, xor_color );
-        paint.setTextSize( 0.25f * mPaint.getTextSize() );
+        paint.setTextSize( PDF_SCALE * mPaint.getTextSize() );
         float canvasLen = canvasUnit * referenceLen;
         canvasLen *= sketch_unit;
         if ( sketch_unit < 0.2f ) { } // using m instead of dm
