@@ -93,13 +93,13 @@ public class OverviewWindow extends ItemDrawer
 				      , IExporter
 {
   private static final int[] izons = {
-                        R.drawable.iz_measure,       // 0
-                        R.drawable.iz_mode,          // 1
-                        R.drawable.iz_angle,   // 2
-			R.drawable.iz_undo     // 3
-                        // FIXME_OVER R.drawable.iz_plan,          // 3
-                        // R.drawable.iz_menu,          // 4
-                        // R.drawable.iz_measure_on,
+                        R.drawable.iz_ruler_off,       // iz_measure
+                        R.drawable.iz_mode,
+                        R.drawable.iz_angle,
+			R.drawable.iz_undo
+                        // FIXME_OVER R.drawable.iz_plan,
+                        // R.drawable.iz_menu,
+                        // R.drawable.iz_ruler_on, // iz_measure_on,
                         // R.drawable.iz_polyline
 			// R.drawable.iz_empty // EMPTY
                       };
@@ -483,7 +483,7 @@ public class OverviewWindow extends ItemDrawer
         // FIXME_OVER   mBMplan = bm;
       }
       mButton1[mNrButton1] = MyButton.getButton( mActivity, null, R.drawable.iz_empty );
-      mBMselectOn   = MyButton.getButtonBackground( this, res, R.drawable.iz_measure_on );
+      mBMselectOn   = MyButton.getButtonBackground( this, res, R.drawable.iz_ruler_on ); // iz_measure_on
       mBMcontinueOn = MyButton.getButtonBackground( this, res, R.drawable.iz_polyline );
       // FIXME_OVER mBMextend  = MyButton.getButtonBackground( this, res, izons[IC_EXTEND] ); 
 

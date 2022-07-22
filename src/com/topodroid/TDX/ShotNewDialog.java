@@ -260,13 +260,13 @@ class ShotNewDialog extends MyDialog
     layout4.setMinimumHeight( size + 10 );
 
     if ( sensorCheck ) {
-      mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
+      mBtnSensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass );  // both was iz_compass_transp
       layout4.addView( mBtnSensor );
       TDLayout.setMargins( mBtnSensor, 0, -10, 40, 10 );
       mBtnSensor.setOnClickListener( this );
     }
     if ( cameraCheck && ! diving ) {
-      mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera_transp, R.drawable.iz_camera_transp ); 
+      mBtnCamera = new MyCheckBox( mContext, size, R.drawable.iz_camera, R.drawable.iz_camera ); // both was iz_camera_transp
       layout4.addView( mBtnCamera );
       TDLayout.setMargins( mBtnCamera, 0, -10, 40, 10 );
       mBtnCamera.setOnClickListener( this );

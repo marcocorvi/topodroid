@@ -152,7 +152,7 @@ class AzimuthDialog extends MyDialog
 
     LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 0, 10, 20, 10 );
 
-    mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_compass_transp, R.drawable.iz_compass_transp ); 
+    mBTsensor = new MyCheckBox( mContext, size, R.drawable.iz_compass, R.drawable.iz_compass );  // both was iz_compass_transp
     layout4.addView( mBTsensor, lp );
 
     // mBTback.setOnClickListener( this );
