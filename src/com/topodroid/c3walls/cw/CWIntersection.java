@@ -138,25 +138,25 @@ public class CWIntersection
   //   CWTriangle t2 = mV2.mSide.otherTriangle( mV2.mTri );
   //     
   //   if ( j == 1 ) { // first 1 then 2
-  //     TDLog.v( "CW " + mCnt + " " + mType + ": " + mTriA.mCnt + "-" + mTriB.mCnt 
+  //     tdlog.v( "CW " + mCnt + " " + mType + ": " + mTriA.mCnt + "-" + mTriB.mCnt 
   //       + " " + t1.mCnt + "/" + mV1.mSide.mCnt + "/" + mV1.mTri.mCnt
   //       + " " + mV2.mTri.mCnt + "/" + mV2.mSide.mCnt + "/" + t2.mCnt
   //     );
   //   } else { // first 2 then 1
-  //     TDLog.v( "CW " + mCnt + " " + mType + ": " + mTriA.mCnt + "-" + mTriB.mCnt 
+  //     tdlog.v( "CW " + mCnt + " " + mType + ": " + mTriA.mCnt + "-" + mTriB.mCnt 
   //         + " " + mV2.mTri.mCnt + "/" + mV2.mSide.mCnt + "/" + t2.mCnt
   //         + " " + mV1.mTri.mCnt + "/" + mV1.mSide.mCnt + "/" + t1.mCnt
   //     );
   //   }
-  //     // if ( mV1 != null ) mV1.dump( out );
-  //     // if ( mV2 != null ) mV2.dump( out );
+  //   // if ( mV1 != null ) mV1.dump( out );
+  //   // if ( mV2 != null ) mV2.dump( out );
   // }
 
-  // void dump()
+  // void dump( )
   // {
   //   CWTriangle t1 = mV1.mSide.otherTriangle( mV1.mTri );
   //   CWTriangle t2 = mV2.mSide.otherTriangle( mV2.mTri );
-  //   TDLog.v( "CW: I " + mCnt + " [" + mType + ": tri " + mTriA.mCnt + " " + mTriB.mCnt
+  //   tdlog.v( "CW: I " + mCnt + " [" + mType + ": tri " + mTriA.mCnt + " " + mTriB.mCnt
   //                  + " ] " + t1.mCnt + "/" + mV1.mSide.mCnt + "/" + mV1.mTri.mCnt
   //                  + " -- " + mV2.mTri.mCnt + "/" + mV2.mSide.mCnt + "/" + t2.mCnt 
   //                  + " next " + ( (mNext != null)? mNext.mCnt : -1 ) );

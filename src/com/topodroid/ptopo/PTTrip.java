@@ -153,11 +153,11 @@ public class PTTrip
       PTFile.writeShort( fs, _declination );
     }
 
-    // void print()
+    // void print( )
     // {
     //   float declination = ((float)_declination) * PTFile.INT16_2_DEG;
     //   if ( declination > 180.0f ) declination -= 360.0f;
-    //   TDLog.v( "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
+    //   tdlog.v( "trip: date " + _year + "-" + _month + "-" + _day + " decl. " + declination );
     //   _comment.print();
     // }
 

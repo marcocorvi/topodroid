@@ -72,8 +72,8 @@ class SelectionBucket
   { return x >= x0-dx && x < x1+dx && y >= y0-dy && y < y1+dy; }
 
 
-  // void dump()
+  // void dump( )
   // {
-  //   TDLog.v("SELECT B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
+  //   tdlog.v("SELECT B " + size() + " " + x0 + ":" + x1 + " " + y0 + ":" + y1 );
   // }
 }

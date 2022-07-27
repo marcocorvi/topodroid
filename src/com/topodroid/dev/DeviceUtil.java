@@ -226,10 +226,10 @@ public class DeviceUtil
   // public static void bind2Device( Intent intent )
   // {
   //   BluetoothDevice device = intent.getParcelableExtra(EXTRA_DEVICE);
-  //   TDLog.v( "PAIRING: " + device.getName() + " " + device.getAddress() );
+  //   // TDLog.v( "PAIRING: " + device.getName() + " " + device.getAddress() );
   //   try { 
   //     device.getClass().getMethod("setPairingConfirmation", boolean.class).invoke(device, true);
-  //     TDLog.v( "done setPairingConfirmation");
+  //     // TDLog.v( "done setPairingConfirmation");
   //     // device.getClass().getMethod("cancelPairingUserInput", boolean.class).invoke(device, true);
   //     byte[] pin = ByteBuffer.allocate(4).putInt(0000).array();
   //     // byte[] pinBytes = convertPinToBytes("0000");
@@ -237,17 +237,17 @@ public class DeviceUtil
   //     Method ms = device.getClass().getMethod("setPin", byte[].class);
   //     // Method ms = device.getClass().getMethod("setPasskey", int.class);
   //     ms.invoke( device, pin );
-  //     TDLog.v( "done setPin");
+  //     // TDLog.v( "done setPin");
   //     Class[] classes3 = new Class[ 0 ];
   //     Method m_createBond = device.getClass().getMethod( "createBond", classes3 );
   //     m_createBond.invoke( device );
-  //     TDLog.v( "done createBond");
+  //     // TDLog.v( "done createBond");
   //   } catch ( NoSuchMethodException e ) {
-  //     TDLog.v( "No Such method: " + e.getMessage() );
+  //     TDLog.Error "No Such method: " + e.getMessage() );
   //   } catch ( IllegalAccessException e ) {
-  //     TDLog.v( "Illegal access: " + e.getMessage() );
+  //     TDLog.Error "Illegal access: " + e.getMessage() );
   //   } catch ( InvocationTargetException e ) {
-  //     TDLog.v( "Invocation target: " + e.getMessage() );
+  //     TDLog.Error "Invocation target: " + e.getMessage() );
   //   }
   // }
 

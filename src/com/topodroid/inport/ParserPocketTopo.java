@@ -83,9 +83,7 @@ class ParserPocketTopo extends ImportParser
   private void readPocketTopoFile( InputStream fis, String filename, String tdr_dir ) throws ParserException
   {
     PTFile ptfile = new PTFile();
-    // TDLog.Log( TDLog.LOG_IO, "read PocketTopo file " + filename );
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT survey " + mName + " read file " + filename );
-    TDLog.v( "Parser PT survey " + mName + " read file " + filename );
+    // TDLog.v( "Parser PT survey " + mName + " read file " + filename );
     try {
       if ( fis == null ) fis = new FileInputStream( filename );
       ptfile.read( fis );
@@ -98,8 +96,7 @@ class ParserPocketTopo extends ImportParser
       throw new ParserException();
     }
     int nr_trip = ptfile.tripCount();
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT trip count " + nr_trip );
-    TDLog.v( "PT trip count " + nr_trip );
+    // TDLog.v( "PT trip count " + nr_trip );
     mComment = "";
     // mTeam = "";
     if ( nr_trip > 0 ) { // use only the first trip
@@ -113,8 +110,7 @@ class ParserPocketTopo extends ImportParser
     }
 
     int shot_count = ptfile.shotCount();
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT shots count " + shot_count );
-    TDLog.v( "PT shots count " + shot_count );
+    // TDLog.v( "PT shots count " + shot_count );
     int extend = ExtendType.EXTEND_NONE;
     int ext_flag = extend;
     // DBlock b     = null;  // temporary block pointer
@@ -134,7 +130,7 @@ class ParserPocketTopo extends ImportParser
       float ba = TDMath.in360( shot.azimuth() );
       float ca = shot.inclination();
       float ra = shot.roll();
-      TDLog.v("Parser PT shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
+      // TDLog.v("Parser PT shot <" + from + ">-<" + to + ">: " + da + " " + ba + " " + ca );
       from = from.replaceAll( "^0+", "" );
       to   = to.replaceAll( "^0+", "" );
       if ( from.equals("-") ) from = "";
@@ -173,8 +169,7 @@ class ParserPocketTopo extends ImportParser
       //   data.add( new DBlock( from, to,  da, ba, ca, ra, extend, ExtendType.BLOCK_MAIN_LEG ) );
       // }
     }
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT parser shot count " + shot_count + " size " + shots.size() );
-    TDLog.v( "PT parser shot count " + shot_count + " size " + shots.size() );
+    // TDLog.v( "PT parser shot count " + shot_count + " size " + shots.size() );
 
     // TDLog.v("Parser PT start from " + mStartFrom );
     // float declination = mData.getSurveyDeclination( mSid );
@@ -196,16 +191,14 @@ class ParserPocketTopo extends ImportParser
       String scrap_name1 = mName + "-1p";
       // String filename1 = TDPath.getTh2File( mName + "-1p.th2" );
       String filename1 = TDPath.getTdrFileWithExt( tdr_dir, scrap_name1 );
-      // TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap p: " + filename1 );
-      TDLog.v( "PT parser scrap p: " + filename1 );
+      // TDLog.v( "PT parser scrap p: " + filename1 );
       writeDrawing( filename1, scrap_name1, outline, PlotType.PLOT_PLAN, over_scale );
 
       PTDrawing sideview = ptfile.getSideview();
       String scrap_name2 = mName + "-1s";
       // String filename2 = TDPath.getTh2File( mName + "-1s.th2" );
       String filename2 = TDPath.getTdrFileWithExt( tdr_dir, scrap_name2 );
-      // TDLog.Log( TDLog.LOG_PTOPO, "PT parser scrap s: " + filename2 );
-      TDLog.v( "PT parser scrap s: " + filename2 );
+      // TDLog.v( "PT parser scrap s: " + filename2 );
       writeDrawing( filename2, scrap_name2, sideview, PlotType.PLOT_EXTENDED, over_scale );
       // TDLog.v( "display " + TopoDroidApp.mDisplayWidth + " " + TopoDroidApp.mDisplayHeight ); 
 
@@ -225,9 +218,7 @@ class ParserPocketTopo extends ImportParser
     float yoff = DrawingUtil.CENTER_Y; // * 5;
 
     int elem_count = drawing.elementNumber();
-    // TDLog.Log( TDLog.LOG_PTOPO, "PT drawing elements " + elem_count );
-    TDLog.v( "PT drawing elements " + elem_count );
-    // TDLog.Log( TDLog.LOG_IO, "PocketTopo to Therion: file " + filename + " elements " + elem_count );
+    // TDLog.v( "PT drawing elements " + elem_count );
 
     TDPath.checkPath( filename );
     // File file = new File( filename );
@@ -283,7 +274,7 @@ class ParserPocketTopo extends ImportParser
                 // FIXME drawer->insertLinePoint( x1, y1, type, canvas );
                 // pw.format("  %d %d \n", x1, -y1 ); FIXME_TH2
 		line.addStartPoint( x1, y1 );
-                TDLog.v("Parser PT elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
+                // TDLog.v("Parser PT elem " + h + ":0 " + x1 + " " + y1 + " point " + point.x() + " " + point.y() );
 
                 for (++k; k<point_count; ++k ) {
                   point = elem.point(k);
@@ -316,7 +307,7 @@ class ParserPocketTopo extends ImportParser
 		if ( y < ymin ) { ymin = y; } if ( y > ymax ) { ymax = y; }
                 // FIXME drawer->insertPoint(x, y, type, canvas );
                 // pw.format("point %d %d %s \n", x, -y, th_name ); // FIXME_TH2
-                TDLog.v("Parser PT elem " + h + " single " + x + " " + y );
+                // TDLog.v("Parser PT elem " + h + " single " + x + " " + y );
 		paths.add( new DrawingPointPath( point_type, x, y, PointScale.SCALE_M, "", "", 0 ) ); // no text, no options
               }
             }

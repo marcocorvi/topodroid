@@ -356,12 +356,12 @@ public class TopoDroidApp extends Application
     } else {
       CACHED_DENSITY = yy;
     }
-    TDLog.v("ZOOM " + TDandroid.BELOW_API_24 + " dpi " + getDisplayDensityDpi()
-                    + " " + TopoDroidApp.getDisplayDensity()
-                    + " density " + Resources.getSystem().getDisplayMetrics().density 
-                    + " DDS " +  ( TDandroid.BELOW_API_24 ?  getDisplayDensityDpi() : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE )
-                    + " xdpi " + Resources.getSystem().getDisplayMetrics().xdpi 
-                    + " ydpi " + Resources.getSystem().getDisplayMetrics().ydpi );
+    // TDLog.v("ZOOM " + TDandroid.BELOW_API_24 + " dpi " + getDisplayDensityDpi()
+    //                 + " " + TopoDroidApp.getDisplayDensity()
+    //                 + " density " + Resources.getSystem().getDisplayMetrics().density 
+    //                 + " DDS " +  ( TDandroid.BELOW_API_24 ?  getDisplayDensityDpi() : Resources.getSystem().getDisplayMetrics().DENSITY_DEVICE_STABLE )
+    //                 + " xdpi " + Resources.getSystem().getDisplayMetrics().xdpi 
+    //                 + " ydpi " + Resources.getSystem().getDisplayMetrics().ydpi );
     return CACHED_DENSITY;
   }
 
@@ -955,7 +955,7 @@ public class TopoDroidApp extends Application
     // TDLog.v( "APP has external dir: " + hasTDXDir + " " + TDFile.hasExternalDir("TopoDroid") );
     // TDLog.v( "APP has old TopoDroid dir: " + hasTopoDroidDir );
     // if ( hasTopoDroidDir && ! hasTDXDir ) {
-    //   TDLog.v("APP move to 6");
+    //   // TDLog.v("APP move to 6");
     //   TDPath.moveTo6( this );
     // }
 
@@ -1566,7 +1566,11 @@ public class TopoDroidApp extends Application
     TDPrefHelper.update( "DISTOX_LINE_UNITS", Float.toString(u) );
   }
 
-  // used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
+  /** set a boolean preference
+   * @param preference  preference name
+   * @param val         preference value
+   * @note used for "DISTOX_WELCOME_SCREEN" and "DISTOX_TD_SYMBOL"
+   */
   static void setBooleanPreference( String preference, boolean val ) { TDPrefHelper.update( preference, val ); }
 
   // FIXME_DEVICE_STATIC
@@ -1671,14 +1675,39 @@ public class TopoDroidApp extends Application
   // StationName mStationName;
 
   // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
+
+  /** set the name of the "current station" or unset it
+   * @param st   "current station" name
+   * @return true if the "current station" is set
+   * @note if the given name equals the "current station" this is unset
+   */
   boolean setCurrentStationName( String name ) { return StationName.setCurrentStationName( name ); }
+
+  /** @return the "current station" name or null (if unset)
+   */
   String getCurrentStationName() { return StationName.getCurrentStationName(); }
+
+  /** @return true if the given name is the "current station"
+   * @param name   name
+   */
   boolean isCurrentStationName( String name ) { return StationName.isCurrentStationName( name ); }
+
   // void clearCurrentStation() { StationName.clearCurrentStation(); }
+
+  /** @return the "current station" or the "last station" (if unset) 
+   */
   String getCurrentOrLastStation( ) { return StationName.getCurrentOrLastStation( mData, TDInstance.sid); }
+
+  /** @return the "first station" name
+   */
   String getFirstStation( ) { return StationName.getFirstStation( mData, TDInstance.sid); }
+
+  /** set the "current station" to the "last station" if the current station is unset
+   */
   private void resetCurrentOrLastStation( ) { StationName.resetCurrentOrLastStation( mData, TDInstance.sid); }
 
+  /** @return the origin station of the first plot
+   */
   String getFirstPlotOrigin() { return ( TDInstance.sid < 0 )? null : mData.getFirstPlotOrigin( TDInstance.sid ); }
 
 
@@ -1804,7 +1833,7 @@ public class TopoDroidApp extends Application
    */
   static private void installFirmware( boolean overwrite )
   {
-    TDLog.v("APP FW install firmware. overwrite: " + overwrite );
+    TDLog.f("APP FW install firmware. overwrite: " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
@@ -1899,7 +1928,7 @@ public class TopoDroidApp extends Application
    */
   static private void symbolsUncompress( InputStream fis, boolean overwrite )
   {
-    TDLog.v("APP uncompressing symbols - overwrite " + overwrite );
+    // TDLog.v("APP uncompressing symbols - overwrite " + overwrite );
     // TDPath.symbolsCheckDirs();
     try {
       // byte buffer[] = new byte[36768];
@@ -2445,7 +2474,7 @@ public class TopoDroidApp extends Application
    */
   public byte[] readFirmwareSignature( int hw )
   {
-    TDLog.v("APP FW read signature - HW " + hw );
+    TDLog.f("APP FW read signature - HW " + hw );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2462,7 +2491,7 @@ public class TopoDroidApp extends Application
    */
   public int dumpFirmware( String name )
   {
-    TDLog.v("APP FW dump " + name );
+    TDLog.f("APP FW dump " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2480,21 +2509,21 @@ public class TopoDroidApp extends Application
    */
   public int uploadFirmware( String name )
   {
-    TDLog.v("APP FW upload " + name );
+    TDLog.f("APP FW upload " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // String pathname = TDPath.getBinFilename( name );
-    // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
-    // TDLog.LogFile( "Firmware upload file " + pathname );
+    // TDLog.f( "Firmware upload address " + TDInstance.deviceAddress() );
+    // TDLog.f( "Firmware upload file " + pathname );
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, name )).execute( ); 
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if ( ! (mComm instanceof DistoX310Comm) ) return -1;
     File file = TDPath.getBinFile( name ); // PRIVATE FILE
-    // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
-    // TDLog.LogFile( "Firmware upload file " + file.getPath() );
-    TDLog.v("APP FW upload file " + file.getPath() );
+    // TDLog.f( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
+    // TDLog.f( "Firmware upload file " + file.getPath() );
+    TDLog.f("APP FW upload file " + file.getPath() );
     // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
     return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
   }

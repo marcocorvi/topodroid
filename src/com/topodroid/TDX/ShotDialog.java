@@ -665,7 +665,7 @@ class ShotDialog extends MyDialog
         set_xsplay = -1;
       // } else { // this is useless: replaced by long-tap on shot list 
       //   if ( mCBhighlight.isChecked() ) {
-      //     TDLog.v("SHOT " + "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
+      //     // TDLog.v("SHOT " + "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
       //     mParent.highlightBlock( mBlk );
       //   }
 

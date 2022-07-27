@@ -342,20 +342,20 @@ public class PTFile
       _sideview.write( fs );
     }
 
-    // void print()
+    // void print( )
     // { 
-    //   TDLog.v( "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
-    //   TDLog.v( "TRIPS");
+    //   tdlog.v( "FILE trips " + _trips.size() + " shots " + _shots.size() + " refs " + _references.size() );
+    //   tdlog.v( "TRIPS");
     //   for ( PTTrip t : _trips ) t.print();
-    //   TDLog.v( "SHOTS");
+    //   tdlog.v( "SHOTS");
     //   for ( PTShot s : _shots ) s.print();
-    //   TDLog.v( "REFERENCES");
+    //   tdlog.v( "REFERENCES");
     //   for ( PTReference r : _references ) r.print();
-    //   TDLog.v( "OVERVIEW");
+    //   tdlog.v( "OVERVIEW");
     //   _overview.print();
-    //   TDLog.v( "OUTLINE");
+    //   tdlog.v( "OUTLINE");
     //   _outline.print();
-    //   TDLog.v( "SIDEVIEW");
+    //   tdlog.v( "SIDEVIEW");
     //   _sideview.print();
     // }
 

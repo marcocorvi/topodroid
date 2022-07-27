@@ -1028,7 +1028,7 @@ class DrawingSurface extends SurfaceView
     boolean ret = false;
     SymbolsPalette localPalette = BrushManager.preparePalette();
     if ( (TDFile.getTopoDroidFile(tdr)).exists() ) {
-      TDLog.v( "add file " + tdr + " loading ... " + plotname );
+      // TDLog.v( "add file " + tdr + " loading ... " + plotname );
       ret = DrawingIO.doLoadDataStream( this, tdr, xdelta, ydelta, /* missingSymbols, */ localPalette, null, false, plotname );
     }
     if ( ret ) {

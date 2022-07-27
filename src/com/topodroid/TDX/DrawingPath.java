@@ -65,7 +65,7 @@ public class DrawingPath extends RectF
   //   } else {
   //     mSplayMode = SPLAY_MODE_LINE;
   //   }
-  //   TDLog.v("SPLAY MODE " + mSplayMode );
+  //   // TDLog.v("SPLAY MODE " + mSplayMode );
   //   return mSplayMode;
   // }
 
@@ -287,7 +287,7 @@ public class DrawingPath extends RectF
 
   // void log()
   // {
-  //   TDLog.v("PATH " + "Path " + x1 + " " + y1 + "   " + x2 + " " + y2 );
+  //   // TDLog.v("PATH " + "Path " + x1 + " " + y1 + "   " + x2 + " " + y2 );
   // }
 
   /** make the path copying from another path

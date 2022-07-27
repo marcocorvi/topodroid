@@ -170,7 +170,7 @@ public class DrawingLabelPath extends DrawingPointPath
   @Override
   public void draw( Canvas canvas, Matrix matrix, float scale, RectF bbox, int xor_color )
   {
-    TDLog.v("DRAW xor color " + xor_color + " scale " + scale );
+    // TDLog.v("DRAW xor color " + xor_color + " scale " + scale );
     if ( intersects( bbox ) ) {
       // TDLog.Log( TDLog.LOG_PATH, "Drawing Label Path::draw[matrix] " + mPointText );
       setTextSize();

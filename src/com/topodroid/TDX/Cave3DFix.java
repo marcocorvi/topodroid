@@ -69,7 +69,7 @@ public class Cave3DFix extends Vector3D
 
   // void log()
   // {
-  //   TDLog.v("origin " + name + " CS " + cs.name + " " + longitude + " " + latitude );
+  //   // TDLog.v("origin " + name + " CS " + cs.name + " " + longitude + " " + latitude );
   // }
 
   /** cstr

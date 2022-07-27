@@ -111,7 +111,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
     // xoff + xmax = xmax - xmin = width
     // xmin xmax are used only for the grids
 
-    TDLog.v( "SVG Walls X " + xoff + " " + xmin + " " + xmax + " W " + width + " Y " + yoff + " " + ymin + " " + ymax + " H " + height ); 
+    // TDLog.v( "SVG Walls X " + xoff + " " + xmin + " " + xmax + " W " + width + " Y " + yoff + " " + ymin + " " + ymax + " H " + height ); 
 
     ArrayList< XSection > xsections = getXSections( plot, xoff, yoff );
 

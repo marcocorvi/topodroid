@@ -44,7 +44,7 @@ public class ImportPocketTopoTask extends ImportTask
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( mUri );
     if ( pfd == null ) return -1L;
     try {
-      TDLog.v( "import PocketTopo: survey " + str[1] );
+      // TDLog.v( "import PocketTopo: survey " + str[1] );
       fis = TDsafUri.docFileInputStream( pfd ); // super.fis
       // import PocketTopo (only data for the first trip)
       ParserPocketTopo parser = new ParserPocketTopo( fis, str[0], str[1], true ); // apply_declination = true

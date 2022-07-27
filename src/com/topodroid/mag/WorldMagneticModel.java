@@ -65,7 +65,7 @@ public class WorldMagneticModel
 
   public MagElement computeMagElement( double latitude, double longitude, double height, double dec_year )
   {
-    TDLog.v( "Mag date " + dec_year );
+    // TDLog.v( "Mag date " + dec_year );
     MagDate date = new MagDate( dec_year );
     return doComputeMagElement( latitude, longitude, height, date );
   }

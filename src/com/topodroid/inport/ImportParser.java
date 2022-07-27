@@ -64,16 +64,16 @@ class ImportParser
   protected void checkValid() 
   {
     if ( mName == null ) {
-      TDLog.v("invalid: null name"); 
+      TDLog.Error("invalid: null name"); 
       mValid = false;
     } else if ( mName.length() == 0 ) {
-      TDLog.v("invalid: empty name"); 
+      TDLog.Error("invalid: empty name"); 
       mValid = false;
     } else if ( mDate == null ) {
-      TDLog.v("invalid: null date"); 
+      TDLog.Error("invalid: null date"); 
       mValid = false;
     } else if ( shots.size() == 0 ) {
-      TDLog.v("invalid: no shots" );
+      TDLog.Error("invalid: no shots" );
       mValid = false;
     } else {
       mValid = true;

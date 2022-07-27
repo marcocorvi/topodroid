@@ -119,6 +119,10 @@ public class DistoXStationName
     return n;
   }
 
+  /** @return the increment of a name string
+   * @param name   name to increment
+   * @param sts    values to skip
+   */
   static String incrementName( String name, ArrayList< String > sts )
   {
     String n = name;
@@ -323,5 +327,18 @@ public class DistoXStationName
     }
     a.add( n2, s ); // add s after a[n1] at pos n2
   }
+
+  // DEBUG_NAMES
+  // @return true if there is jump between FROM and TO
+  // static boolean isJump( String from, String to ) 
+  // {
+  //   try {
+  //     int f = Integer.parseInt( from );
+  //     int t = Integer.parseInt( to );
+  //     return t - f > 1;
+  //   } catch ( NumberFormatException e ) { }
+  //   return false;
+  // }
+      
 
 }

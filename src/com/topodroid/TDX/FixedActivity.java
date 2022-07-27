@@ -279,11 +279,11 @@ public class FixedActivity extends Activity
 
     if ( b == mMenuImage ) {
       if ( mMenu.getVisibility() == View.VISIBLE ) {
-        TDLog.v("MENU-image tapped " + onMenu + " MENU visible ");
+        // TDLog.v("MENU-image tapped " + onMenu + " MENU visible ");
         mMenu.setVisibility( View.GONE );
         onMenu = false;
       } else {
-        TDLog.v("MENU-image tapped " + onMenu + " MENU not visible ");
+        // TDLog.v("MENU-image tapped " + onMenu + " MENU not visible ");
         mMenu.setVisibility( View.VISIBLE );
         onMenu = true;
       }

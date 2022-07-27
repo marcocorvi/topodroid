@@ -63,8 +63,8 @@ class HullProjection
     }
   }
 
-  void dump()
-  {
-    TDLog.v("PROJ " + proj.x + " " + proj.y + " " + proj.z + " angle " + angle );
-  }
+  // void dump( )
+  // {
+  //   tdlog.v("PROJ " + proj.x + " " + proj.y + " " + proj.z + " angle " + angle );
+  // }
 }

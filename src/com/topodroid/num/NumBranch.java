@@ -34,12 +34,12 @@ public class NumBranch
   public double we, ws, wv; // east, south, vert closure weights
   public double len;        // branch length
 
-  // void dump()
+  // void dump( )
   // {
   //   StringBuilder sb = new StringBuilder();
   //   sb.append("Branch ");
   //   for ( NumShot sh : shots ) sb.append( sh.from.name ).append("-").append( sh.to.name ).append(" ");
-  //   TDLog.Log( TDLog.LOG_NUM, sb.toString() );
+  //   tdlog.v( sb.toString() );
   // }
 
   NumBranch( int t, NumNode n )

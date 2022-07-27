@@ -130,10 +130,10 @@ public class UserManualActivity extends Activity
 
     // try { 
     //   URI pageuri = pagefile.toURI();
-    //   TDLog.v( "MAN url " +  pageuri.toURL().toString() );
+    //   // TDLog.v( "MAN url " +  pageuri.toURL().toString() );
     //   view.loadUrl( pageuri.toURL().toString() );
     // } catch ( MalformedURLException e ) {
-    //   TDLog.v( "MAN error " + e.getMessage() );
+    //   TDLog.Error( "MAN error " + e.getMessage() );
     // }
   }
 

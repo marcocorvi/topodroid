@@ -389,8 +389,7 @@ public class CWConvexHull
     // boolean cs = checkSideConsistency();
     // boolean cv = checkVertexConsistency();
     // if ( ! cs || ! cv )
-    //   TDLog.v( "CW-HUll consistency before: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size()
-    //     + " S-check " + cs + " V-check " + cv );
+    //   // TDLog.v( "CW-HUll consistency before: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
    
     // int nv = mVertex.nv();
     ArrayList<CWTriangle> faceToRemove = new ArrayList<CWTriangle>();
@@ -488,7 +487,7 @@ public class CWConvexHull
         TDLog.Error( "CW-Hull Warning next side not found");
         // for ( int j=0; j<size; ++j  ) {
         //   CWSide side = sideToKeep.get(j);
-        //   TDLog.v( "CW-Hull: " + j + ": " + side.p1.mCnt + " " + side.p2.mCnt );
+        //   // TDLog.v( "CW-Hull: " + j + ": " + side.p1.mCnt + " " + side.p2.mCnt );
         // }
         // dump();
         // TDLog.v( "CW-Hull sides to keep " + sideToKeep.size() );
@@ -518,8 +517,7 @@ public class CWConvexHull
     // cs = checkSideConsistency();
     // cv = checkVertexConsistency();
     // if ( ! cs || ! cv )
-    //   TDLog.v( "CW-Hull consistency after: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() 
-    //     + " S-check " + cs + " V-check " + cv );
+    //   // TDLog.v( "CW-Hull consistency after: V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() + " S-check " + cs + " V-check " + cv );
 
     // remove small area triangles
     // TDLog.v( "CW-Hull small area V " + mVertex.size() + " S " + mSide.size() + " T " + mFace.size() );
@@ -677,14 +675,14 @@ public class CWConvexHull
   //   if ( ret ) {
   //     tot_vol = Math.round( tot_vol*100 )/100;
   //     double angle = solidAngle( v, 0.0001f );
-  //     TDLog.v( "CW-Hull Volume " + tot_vol + " " + ret + " angle " + angle );
+  //     // TDLog.v( "CW-Hull Volume " + tot_vol + " " + ret + " angle " + angle );
   //   }
   //   return ret;
   // } 
 
   // void dump( )
   // {
-  //   TDLog.v( "CW-Hull v " + mVertex.size() + " s " + mSide.size() + " t " + mFace.size() );
+  //   // TDLog.v( "CW-Hull v " + mVertex.size() + " s " + mSide.size() + " t " + mFace.size() );
   //   // for ( CWPoint v :  mVertex ) v.dump( );
   //   // for ( CWSide s : mSide )     s.dump( );
   //   for ( CWTriangle f : mFace ) f.dump( );
@@ -1111,7 +1109,7 @@ public class CWConvexHull
         }
       }
       // if ( pts2.size() > 0 ) {
-      //   TDLog.v( "CW-Hull  split with 2 vertex inside. apposite-side points " + pts2.size() );
+      //   // TDLog.v( "CW-Hull  split with 2 vertex inside. apposite-side points " + pts2.size() );
       // }
     }
     for ( CWTriangle t : mSplits ) mFace.add( t );

@@ -160,7 +160,7 @@ public class TopoGL extends Activity
   //   final TopoGL app = this;
   //   runOnUiThread( new Runnable() {
   //     @Override public void run() {
-  //       TDLog.v("TopoGL got message - type " + msg.what );
+  //       // TDLog.v("TopoGL got message - type " + msg.what );
   //       if ( msg == null ) return;
   //       Bundle data = msg.getData();
   //       switch ( msg.what ) {
@@ -416,7 +416,7 @@ public class TopoGL extends Activity
     } else {
     // copied from MainWindow
     //   ++ mRequestPermissionTime;
-    //   TDLog.v("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
+    //   // TDLog.v("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
     //   if ( TDandroid.createPermissions( this, this, mRequestPermissionTime ) == 0 ) {
     //     app.initEnvironmentFirst( );
     //     // TDLog.v("MAIN show init dialogs [2]");
@@ -1003,7 +1003,7 @@ public class TopoGL extends Activity
     } else if ( b == mButton1[ BTN_FRAME ] ) {
       new DialogLegs( this ).show();
     // } else if ( BLUETOOTH && b == mButton1[ BTN_BLE ] ) {
-    //   TDLog.v("BT button long click ");
+    //   // TDLog.v("BT button long click ");
     //   if ( mWithBluetooth ) {
     //     doBluetoothLongClick();
     //   } else {
@@ -1605,7 +1605,7 @@ public class TopoGL extends Activity
         String file = files[0];
         bitmap = (Bitmap)( TiffFactory.getBitmap( pathname, bounds.left, bounds.bottom, bounds.right, bounds.top ) );
         // if ( bitmap != null ) {
-        //   TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
+        //   // TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
         // }
 
         return (bitmap != null);
@@ -1644,7 +1644,7 @@ public class TopoGL extends Activity
         OsmFactory osm = new OsmFactory( bounds.left, bounds.bottom, bounds.right, bounds.top, origin );
         bitmap = osm.getBitmap( isr, pathname );
         // if ( bitmap != null ) {
-        //   TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
+        //   // TDLog.v("texture " + file + " size " + bitmap.getWidth() + " " + bitmap.getHeight() );
         // }
 
         return (bitmap != null);
@@ -1692,12 +1692,12 @@ public class TopoGL extends Activity
   @Override
   public void onRequestPermissionsResult( int code, final String[] perms, int[] results )
   {
-    TDLog.v("PERM req code " + code + " results length " + results.length );
+    // TDLog.v("PERM req code " + code + " results length " + results.length );
     if ( code == FeatureChecker.REQUEST_PERMISSIONS ) {
       if ( results.length > 0 ) {
 	for ( int k = 0; k < results.length; ++ k ) {
 	  FeatureChecker.GrantedPermission[k] = ( results[k] == PackageManager.PERMISSION_GRANTED );
-	  TDLog.v( "PERM " + k + " perms " + perms[k] + " result " + results[k] );
+	  // TDLog.v( "PERM " + k + " perms " + perms[k] + " result " + results[k] );
 	}
         ++ mRequestPermissionTime;
         checkPermissions();
@@ -1708,7 +1708,7 @@ public class TopoGL extends Activity
   private void checkPermissions()
   {
     boolean granted = FeatureChecker.createPermissions( this, this, mRequestPermissionTime );
-    TDLog.v("PERM check perms: granted " + granted + " at time " + mRequestPermissionTime );
+    // TDLog.v("PERM check perms: granted " + granted + " at time " + mRequestPermissionTime );
     // if ( ! TDandroid.canRun( mApp, this ) ) 
     if ( FeatureChecker.checkPermissions( this ) < 0 ) {
       if ( mRequestPermissionTime > 2 ) { 
@@ -1863,7 +1863,7 @@ public class TopoGL extends Activity
     } else if ( k.equals( CAVE3D_NEG_CLINO ) ) { 
       GlRenderer.mMinClino = sp.getBoolean( k, false ) ? 90: 0;
     // } else if ( k.equals( CAVE3D_BLUETOOTH_DEVICE ) ) { // FIXME BLUETOOTH SETTING
-    //   TDLog.v("on bluetooth preference changed");
+    //   // TDLog.v("on bluetooth preference changed");
     //   checkBluetooth( sp.getString( k, "" ) );
     } else if ( k.equals( CAVE3D_ALL_SPLAY ) ) { 
       GlModel.mAllSplay = sp.getBoolean( k, true );
@@ -2421,7 +2421,7 @@ public class TopoGL extends Activity
 
   public void notifyStatus( int status )
   {
-    TDLog.v("Topo GL app notify status " + ConnectionState.statusString[ status ] );
+    // TDLog.v("Topo GL app notify status " + ConnectionState.statusString[ status ] );
     mBleStatus = status;
     switch ( status ) {
       case ConnectionState.CONN_DISCONNECTED:
@@ -2438,7 +2438,7 @@ public class TopoGL extends Activity
 
   public void onShotData()
   {
-    TDLog.v("Topo GL on shot data ... BT state " + BtState[ mBluetoothState ] );
+    // TDLog.v("Topo GL on shot data ... BT state " + BtState[ mBluetoothState ] );
     if ( mBluetoothState == BLUETOOTH_SHOT ) {
       setBluetoothState( BLUETOOTH_READY );
     }
@@ -2446,7 +2446,7 @@ public class TopoGL extends Activity
 
   private boolean startBluetooth()
   {
-    TDLog.v("starting bluetooth - remote " + mBtRemoteName );
+    // TDLog.v("starting bluetooth - remote " + mBtRemoteName );
     if ( mBluetoothComm == null ) {
       // mBluetoothComm = new BluetoothComm( this, this, mBtRemoteDevice );
       if ( mBtRemoteName.startsWith("BRIC4_" ) ) {
@@ -2468,10 +2468,10 @@ public class TopoGL extends Activity
       //   //   @Override public void onPostExecute( Boolean ret )
       //   //   {
       //       if ( ret ) {
-      //         TDLog.v("connect OK");
+      //         // TDLog.v("connect OK");
       //         setBluetoothState( BLUETOOTH_READY );
       //       } else {
-      //         TDLog.v("connect failed");
+      //         // TDLog.v("connect failed");
       //         setBluetoothState( BLUETOOTH_OFF );
       //       }
       //   //   }
@@ -2484,7 +2484,7 @@ public class TopoGL extends Activity
 
   private void stopBluetooth()
   {
-    TDLog.v("stop bluetooth - remote " + ( (mBtRemoteName != null)? mBtRemoteName : "null") );
+    // TDLog.v("stop bluetooth - remote " + ( (mBtRemoteName != null)? mBtRemoteName : "null") );
     if ( hasBluetoothComm() ) {
       mBluetoothComm.disconnectDevice();
       // mBluetoothComm = null;
@@ -2497,7 +2497,7 @@ public class TopoGL extends Activity
 
   private void shutdownBluetooth( boolean set_state )
   {
-    TDLog.v("shutdown bluetooth - remote " + ( (mBtRemoteName != null)? mBtRemoteName : "null") );
+    // TDLog.v("shutdown bluetooth - remote " + ( (mBtRemoteName != null)? mBtRemoteName : "null") );
     if ( hasBluetoothComm() ) {
       mBluetoothComm.disconnectDevice();
     }
@@ -2513,7 +2513,7 @@ public class TopoGL extends Activity
   {
     if ( ! BLUETOOTH ) return;
     boolean with_bluetooth = checkBluetoothName( name );
-    TDLog.v("check bluetooth " + name + " " + with_bluetooth );
+    // TDLog.v("check bluetooth " + name + " " + with_bluetooth );
     mWithBluetooth = with_bluetooth;
     if ( mButton1 != null ) {
       setBluetoothState( hasBluetoothName()? BLUETOOTH_OFF : BLUETOOTH_DOWN );
@@ -2531,7 +2531,7 @@ public class TopoGL extends Activity
     // WARNING BT name must have a prefix "++"
     // if ( ! ( name.startsWith("++") ) ) return false;
     // name = name.substring( 2 );
-    TDLog.v("check BT name <" + name + ">" );
+    // TDLog.v("check BT name <" + name + ">" );
 
     BluetoothAdapter adapter = BluetoothAdapter.getDefaultAdapter();
     if ( adapter == null ) {
@@ -2554,13 +2554,13 @@ public class TopoGL extends Activity
         return true;
       }
     }
-    TDLog.v("check BT name : device not found");
+    // TDLog.v("check BT name : device not found");
     return false;
   }
 
   private void doConnectDevice()
   {
-    TDLog.v("Cave3D connect device");
+    // TDLog.v("Cave3D connect device");
     if ( mBluetoothComm != null ) {
       (new AsyncTask<Void, Void, Void>() {
         @Override public Void doInBackground(Void ... v ) {
@@ -2629,9 +2629,9 @@ public class TopoGL extends Activity
     } else {
       Toast.makeText( this, R.string.bt_no_comm, Toast.LENGTH_SHORT ).show();
       // if ( mBluetoothState == BLUETOOTH_OFF ) {
-      //   TDLog.v("start BT ...");
+      //   // TDLog.v("start BT ...");
       //   boolean ret = startBluetooth();
-      //   TDLog.v("start BT returns " + ret );
+      //   // TDLog.v("start BT returns " + ret );
       //   setBluetoothState( (mBluetoothComm == null)? BLUETOOTH_OFF : BLUETOOTH_ON );
       // }
     }
@@ -2720,11 +2720,11 @@ public class TopoGL extends Activity
   void openBluetoothSurvey( BluetoothSurvey bt_survey )
   {
     if  ( bt_survey == null ) {
-      TDLog.v("start BT survey null");
+      // TDLog.v("start BT survey null");
       closeBluetoothSurvey();
       return;
     }
-    TDLog.v("start BT survey " + bt_survey.getNickname() );
+    // TDLog.v("start BT survey " + bt_survey.getNickname() );
     mBtSurvey = bt_survey;
     setSurveyName( mBtSurvey.getNickname() );
     if ( ! startBluetooth() ) {
@@ -2737,7 +2737,7 @@ public class TopoGL extends Activity
 
   void closeBluetoothSurvey() 
   {
-    TDLog.v("close BT survey " + ( (mBtSurvey == null)? "null" : mBtSurvey.getNickname() ) );
+    // TDLog.v("close BT survey " + ( (mBtSurvey == null)? "null" : mBtSurvey.getNickname() ) );
     if ( mBtSurvey != null ) {
       // String filename = Cave3DFile.getBluetoothFilename( mBtSurvey.getNickname() ); // filename is in ParserBluetooth
       mBtSurvey.saveSurvey( );
@@ -2748,7 +2748,7 @@ public class TopoGL extends Activity
   private void setBluetoothParser( )
   {
     // if ( bt_survey == null ) return; // this is guaranteed
-    TDLog.v("TopoGL set BT parser " + mBtSurvey.getNickname() );
+    // TDLog.v("TopoGL set BT parser " + mBtSurvey.getNickname() );
     try {
       String filename = mBtSurvey.getFilename();
       String filepath = Cave3DFile.getBluetoothFilename( filename );
@@ -2807,7 +2807,7 @@ public class TopoGL extends Activity
     double z = dist * Math.sin( clino * Cave3DShot.DEG2RAD );
     double n = h * Math.cos( bear * Cave3DShot.DEG2RAD );
     double e = h * Math.sin( bear * Cave3DShot.DEG2RAD );
-    TDLog.v( String.format("TopoGL handle regular data %.2f %.1f %.1f --> %.2f %.2f %.2f", dist, bear, clino, e, n, z ) );
+    // TDLog.v( String.format("TopoGL handle regular data %.2f %.1f %.1f --> %.2f %.2f %.2f", dist, bear, clino, e, n, z ) );
     DataLog data_log = new DataLog( e, n, z );
     boolean is_shot = data_log.isClose( mDataLog[0], EPS ) && data_log.isClose( mDataLog[1], EPS );
     mDataLog[1] = mDataLog[0];
@@ -2872,7 +2872,7 @@ public class TopoGL extends Activity
       // TDLog.v( "export with URI - survey " + mSurveyName );
       selectFile( REQUEST_EXPORT_FILE, Intent.ACTION_CREATE_DOCUMENT, mExport.mMime, R.string.select_export_file, TDConst.getModelFilename( mExport.mType, mSurveyName ) );
     //} else {
-    //  TDLog.v( "export with task - survey " + mSurveyName );
+    //  // TDLog.v( "export with task - survey " + mSurveyName );
     //  (new ExportTask( this, mParser, null, mExport )).execute(); // null = URI
     //}
   }

@@ -119,7 +119,7 @@ class LoxFile
         }
         type = Endian.toIntLEndian( int32 );
         if ( type < 1 || type > 6 ) {
-          TDLog.v(  "LOX Unexpected chunk type " + type );
+          TDLog.Error(  "LOX Unexpected chunk type " + type );
           done = true;
           continue;
         }
@@ -228,7 +228,7 @@ class LoxFile
       comment = getString( data, tp, ts );
       mStations.add( new LoxStation( id, sid, name, comment, fl, c0, c1, c2 ) );
       // if ( i < 3 ) {
-      //   TDLog.v( "LOX station " + id + " / " + sid + " <" + name + "> " + np + "-" + ns + " flag " + fl + " " + c0 + " " + c1 + " " + c2 );
+      //   // TDLog.v( "LOX station " + id + " / " + sid + " <" + name + "> " + np + "-" + ns + " flag " + fl + " " + c0 + " " + c1 + " " + c2 );
       // }
     }
   }
@@ -267,7 +267,7 @@ class LoxFile
   
       mShots.add( new LoxShot( fr, to, sid, fl, ty, tr, f0, f1, f2, f3, t0, t1, t2, t3 ) );
       // if ( i < 3 ) {
-      //   TDLog.v( "LOX Shot " + fr + " " + to + " (" + sid + ") flag " + fl + " type " + ty );
+      //   // TDLog.v( "LOX Shot " + fr + " " + to + " (" + sid + ") flag " + fl + " type " + ty );
       // }
     }
   }

@@ -37,7 +37,7 @@ public class TDNum
    */
   public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
   {
-    // TDLog.Log( TDLog.LOG_NUM, "data reduction: decl " + decl + " start " + start );
+    // TDLog.v( "data reduction: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
     surveyAttached = computeNum( data, start, format );
@@ -45,15 +45,15 @@ public class TDNum
     setStationsBarr( view );
   }
 
-  // public void dump()
+  // public void dump( )
   // {
-  //   TDLog.Log( TDLog.LOG_NUM, "TDNum Stations:" );
+  //   tdlog.v( "TDNum Stations:" );
   //   for ( NumStation st : mStations ) {
-  //     TDLog.Log( TDLog.LOG_NUM, "   " + st.name + " S: " + st.s + " E: " + st.e );
+  //     tdlog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
-  //   TDLog.Log( TDLog.LOG_NUM, "Shots:" );
+  //   tdlog.v( "Shots:" );
   //   for ( NumShot sh : mShots ) {
-  //     TDLog.Log( TDLog.LOG_NUM, "   From: " + sh.from.name + " To: " + sh.to.name );
+  //     tdlog.v( "   From: " + sh.from.name + " To: " + sh.to.name );
   //   }
   // } 
 

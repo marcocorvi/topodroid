@@ -961,11 +961,11 @@ public class TDPath
   // public static void moveTo6( Context context /* , TextView tv */ )
   // {
   //   // if ( TDFile.hasExternalDir(null) ) {
-  //   //   TDLog.v("PATH MOVE TO 6 has already external dir CBD");
+  //   //   // TDLog.v("PATH MOVE TO 6 has already external dir CBD");
   //   //   return;
   //   // }
   //   final boolean dry_run = false;
-  //   TDLog.v("PATH move to 6 create CBD");
+  //   // TDLog.v("PATH move to 6 create CBD");
   //   File cbd = TDFile.getExternalDir( null );
   //   if ( ! cbd.exists() ) {
   //     TDLog.Error("PATH move to 6 failed create CBD");
@@ -1002,7 +1002,7 @@ public class TDPath
   //   f = TDFile.getTopoDroidFile( sdcard + "/Documents/TopoDroid/thconfig" );
   //   copyDir( f, new File( cwd, "thconfig" ), dry_run );
   //   // open database and create survey folders, and move survey files
-  //   TDLog.v("PATH move to 6: database " + f2.getAbsolutePath() );
+  //   // TDLog.v("PATH move to 6: database " + f2.getAbsolutePath() );
   //   DataHelper db = new DataHelper( context, f2.getAbsolutePath() );
   //   List<String> surveys = db.selectAllSurveys( );
   //   for ( String survey : surveys ) {
@@ -1061,7 +1061,7 @@ public class TDPath
   //     }
   //     if ( ! out.isDirectory() ) return false;
   //   // } else {
-  //   //   TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
+  //   //   // TDLog.v("PATH copy dir " + in.getName() + " -> " + out.getName() + " dry run");
   //   }
   //   boolean ret = true;
   //   File[] files = in.listFiles();
@@ -1095,7 +1095,7 @@ public class TDPath
   //     return true;
   //   }
   //   if ( dry_run ) {
-  //     TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " dry run");
+  //     // TDLog.v("PATH copy file " + in.getName() + " -> " + out.getName() + " dry run");
   //     return true;
   //   }
   //   byte[] buf = new byte[4096];

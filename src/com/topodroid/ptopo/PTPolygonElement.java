@@ -90,9 +90,9 @@ public class PTPolygonElement extends PTElement
     }
 
     // @Override
-    // void print()
+    // void print( )
     // {
-    //   TDLog.v( "polygon: count " + _points.size() + " color " + _color );
+    //   tdlog.v( "polygon: count " + _points.size() + " color " + _color );
     //   for ( PTPoint p : _points ) p.print();
     // }
 

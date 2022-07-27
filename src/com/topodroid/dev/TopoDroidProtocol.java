@@ -295,7 +295,7 @@ public class TopoDroidProtocol
    */
   public int readPacket( boolean no_timeout, int data_type )
   {
-    TDLog.v( "TD proto: read_packet returns NONE");
+    // TDLog.v( "TD proto: read_packet returns NONE");
     return DataType.PACKET_NONE;
   }
 

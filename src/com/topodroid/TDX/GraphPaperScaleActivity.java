@@ -108,7 +108,7 @@ public class GraphPaperScaleActivity extends Activity
   //  */
   // public void setSize( int w, int h )
   // {
-  //   TDLog.v("GRAPH_PAPER activity set size " + w + " " + h );
+  //   // TDLog.v("GRAPH_PAPER activity set size " + w + " " + h );
   // }
 
   /** change the graph-paper density

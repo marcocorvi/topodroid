@@ -99,7 +99,7 @@ class ShotPhotoDialog extends MyDialog
       // mParent.insertPhoto( mETcomment.getText().toString() );
       // int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_INTENT;
       int camera = ( cameraCheck && mCamera.isChecked() )? PhotoInfo.CAMERA_TOPODROID : PhotoInfo.CAMERA_TOPODROID_2;
-      TDLog.v("camera " + camera + " check " + cameraCheck + " is checked " + mCamera.isChecked() );
+      // TDLog.v("camera " + camera + " check " + cameraCheck + " is checked " + mCamera.isChecked() );
       // int camera = PhotoInfo.CAMERA_TOPODROID;
       mParent.doTakePhoto( mSid, mETcomment.getText().toString(), camera );
     // } else if ( b == mButtonCancel ) {

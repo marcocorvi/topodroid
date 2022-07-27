@@ -269,9 +269,9 @@ class Selection
     }
 
     // if ( pt != null ) {
-    //   TDLog.v("SELECT insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
+    //   // TDLog.v("SELECT insert item path type " + path.mType + " pt " + pt.x + " " + pt.y );
     // } else {
-    //   TDLog.v("SELECT insert item path type " + path.mType + " null pt ");
+    //   // TDLog.v("SELECT insert item path type " + path.mType + " null pt ");
     // }
     // sp.mBucket.dump();
     // dumpBuckets();
@@ -741,14 +741,14 @@ class Selection
     }
   }
 
-  // private void dumpBuckets()
-  // {a
+  // private void dumpBuckets( )
+  // {
   //   for ( SelectionBucket bucket : mBuckets ) {
   //     bucket.dump();
   //   }
   // }
 
-  // private void dumpPointsTypes()
+  // private void dumpPointsTypes( )
   // {
   //   int nfxd = 0;
   //   int nspl = 0;
@@ -774,7 +774,7 @@ class Selection
   //       default: noth ++;
   //     }
   //   }
-  //   TDLog.v("SELECT Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
+  //   tdlog.v("SELECT Selection points " + mPoints.size() + " " + nfxd + " " + nspl + " " + ngrd + " " + nsta 
   //                   + " " + npnt + " " + nlin + " " + nare + " " + nnam + " " + nnrt + " " + noth  );
   // }
 }

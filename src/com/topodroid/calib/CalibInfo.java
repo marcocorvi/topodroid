@@ -39,6 +39,6 @@ public class CalibInfo
 
   // void debug()
   // {
-  //   TDLog.v("CALIB " + id + " " + name + " " + date + " " + device ); // this is DEBUG
+  //   // TDLog.v("CALIB " + id + " " + name + " " + date + " " + device ); // this is DEBUG
   // }
 }

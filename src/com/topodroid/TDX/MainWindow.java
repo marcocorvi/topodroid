@@ -732,8 +732,8 @@ public class MainWindow extends Activity
     //     content://com.android.externalstorage.documents/tree/primary%3ADocuments
     // 
     // if ( ! TDInstance.hasFolderPermission() ) {
-    //   TDLog.v("no folder permission ");
-    //   TDLog.v("request TREE URI");
+    //   // TDLog.v("no folder permission ");
+    //   // TDLog.v("request TREE URI");
     //   Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT_TREE );
     //   intent.addFlags( Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION
     //                  | Intent.FLAG_GRANT_WRITE_URI_PERMISSION 
@@ -756,7 +756,7 @@ public class MainWindow extends Activity
     // TDLog.v( "INIT dialogs: app_dir <" + app_dir + ">" );
     say_dialogR = say_dialog_r;
     // if ( false && say_dialogR ) { // FIXME_R
-    //   TDLog.v( "DIALOG R: delaying init environment second");
+    //   // TDLog.v( "DIALOG R: delaying init environment second");
     //   (new DialogR( this, this)).show();
     //   return;
     // } 
@@ -766,7 +766,7 @@ public class MainWindow extends Activity
 
     // TDLog.v( "INIT environment second done " + ok_folder );
     // if ( TDVersion.targetSdk() > 29 ) { // FIXME_TARGET_29
-    //   TDLog.v( "init environment target " + TDVersion.targetSdk() );
+    //   // TDLog.v( "init environment target " + TDVersion.targetSdk() );
     //   TopoDroidAlertDialog.makeAlert( this, getResources(), ( ok_folder ? R.string.target_sdk : R.string.target_sdk_stale ),
     //     new DialogInterface.OnClickListener() {
     //       @Override public void onClick( DialogInterface dialog, int btn ) { finish(); }
@@ -1064,7 +1064,7 @@ public class MainWindow extends Activity
     // if ( ! TDLevel.mDeveloper ) new TDVersionDownload( this ).execute(); 
 
     // if ( ! TDandroid.canManageExternalStorage( this ) ) {
-    //   TDLog.v("MAIN cannot manage external storage");
+    //   // TDLog.v("MAIN cannot manage external storage");
     //   (new DialogR( this, this)).show(); // FIXME_R
     // } else
     {

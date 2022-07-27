@@ -61,7 +61,7 @@ class GlPath extends GlShape
   // FIXME INCREMENTAL
   // void addBluetoothVertex( Vector3D w1 )
   // { 
-  //   TDLog.v("GlPath add BT vertex " + w1.x + " " + w1.y + " " + w1.z );
+  //   // TDLog.v("GlPath add BT vertex " + w1.x + " " + w1.y + " " + w1.z );
   //   points.add( ParserBluetooth.bluetoothToVector( w1 ) );
   // }
 

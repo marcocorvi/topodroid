@@ -146,7 +146,7 @@ public class PlotReloadWindow extends ItemDrawer
   {
     float zoom = mZoom;
     mZoom     *= f;
-    //  TDLog.v( "zoom " + mZoom );
+    // TDLog.v( "zoom " + mZoom );
     mOffset.x -= mDisplayCenter.x*(1/zoom-1/mZoom);
     mOffset.y -= mDisplayCenter.y*(1/zoom-1/mZoom);
     mReloadSurface.setTransform( this, mOffset.x, mOffset.y, mZoom, mLandscape );
@@ -319,7 +319,7 @@ public class PlotReloadWindow extends ItemDrawer
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
     
-    //  TDLog.v("Reload " + filename + " offset " + mOffset.x + " " + mOffset.y );
+    // TDLog.v("Reload " + filename + " offset " + mOffset.x + " " + mOffset.y );
     doStart();
 
     mOffset.x   += extras.getFloat( TDTag.TOPODROID_PLOT_XOFF );

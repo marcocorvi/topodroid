@@ -240,7 +240,7 @@ public class TdManagerActivity extends Activity
         @Override
         public void onClick( View v ) {
           String survey = ((TextView)v).getText().toString();
-	  TDLog.v( "view on click " + survey );
+	  // TDLog.v( "view on click " + survey );
           TdmConfig tdconfig = mTdmConfigAdapter.getTdmConfig( survey );
 	  if ( tdconfig != null ) {
             startTdmConfigActivity( tdconfig );
@@ -251,7 +251,7 @@ public class TdManagerActivity extends Activity
     String[] tdconfigs = TDPath.scanTdconfigDir(); // full pathnames
     if ( tdconfigs != null ) {
       for ( String tdconfig : tdconfigs ) {
-        TDLog.v( "activity update: path <" + tdconfig + ">" );
+        // TDLog.v( "activity update: path <" + tdconfig + ">" );
         mTdmConfigAdapter.add( new TdmConfig( tdconfig, false ) ); // false: no save
       }
     } else {
@@ -266,7 +266,7 @@ public class TdManagerActivity extends Activity
    */
   void startTdmConfigActivity( TdmConfig tdconfig )
   {
-    TDLog.v( "start tdconfig activity for " + tdconfig.toString() );
+    // TDLog.v( "start tdconfig activity for " + tdconfig.toString() );
     Intent intent = new Intent( this, TdmConfigActivity.class );
     intent.putExtra( TDRequest.TDCONFIG_PATH, tdconfig.getFilepath() );
     try {
@@ -297,7 +297,7 @@ public class TdManagerActivity extends Activity
     TdmConfig tdconfig = new TdmConfig( path, true ); // true: save
     // updateTdmConfigList();
     mTdmConfigAdapter.add( tdconfig );
-    TDLog.v( "add config: " + name + " path >" + path + "< size " + mTdmConfigAdapter.size() );
+    // TDLog.v( "add config: " + name + " path >" + path + "< size " + mTdmConfigAdapter.size() );
     // mList.setAdapter( mTdmConfigAdapter );
     mList.invalidate();
   }
@@ -323,10 +323,10 @@ public class TdManagerActivity extends Activity
     switch ( request ) {
       case TDRequest.REQUEST_TDCONFIG:
         if ( result == TDRequest.RESULT_TDCONFIG_OK ) {
-          TDLog.v( "**** TdmConfig OK" );
+          // TDLog.v( "**** TdmConfig OK" );
           // nothing 
         } else if ( result == TDRequest.RESULT_TDCONFIG_DELETE ) {
-          TDLog.v( "**** TdmConfig DELETE" );
+          // TDLog.v( "**** TdmConfig DELETE" );
           // get TdmConfig name and delete it
           String path = extras.getString( TDRequest.TDCONFIG_PATH );
           mTdmConfigAdapter.deleteTdmConfig( path );
@@ -430,7 +430,7 @@ public class TdManagerActivity extends Activity
     }
 
     TdmConfig tdconfig = mTdmConfigAdapter.getItem( pos );
-    TDLog.v( "On Item Click: pos " + pos + " TdmConfig " + tdconfig.getFilepath() );
+    // TDLog.v( "On Item Click: pos " + pos + " TdmConfig " + tdconfig.getFilepath() );
     // TODO start TdmConfigActivity or Dialog
     startTdmConfigActivity( tdconfig );
   }

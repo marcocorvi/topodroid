@@ -38,13 +38,13 @@ public class ParserSketch
   // sketch points has model_coords: offset + sketch_vector
 
   // ------------------------------------------------- LOG
-  void log()
-  {
-    TDLog.v("Sketch Pts " + mPoints.size() + " lines " + mLines.size() + " areas " + mAreas.size() );
-    for ( SketchPoint pt : mPoints ) TDLog.v("Pt " + pt.thname + " " + pt.x + " " + pt.y + " " + pt.z );
-    for ( SketchLine  ln : mLines  ) TDLog.v("Ln " + ln.thname + " " + ln.size() );
-    for ( SketchLine  ln : mAreas  ) TDLog.v("Ar " + ln.thname + " " + ln.size() );
-  }
+  // void log()
+  // {
+  //   // TDLog.v("Sketch Pts " + mPoints.size() + " lines " + mLines.size() + " areas " + mAreas.size() );
+  //   for ( SketchPoint pt : mPoints ) TDLog.v("Pt " + pt.thname + " " + pt.x + " " + pt.y + " " + pt.z );
+  //   for ( SketchLine  ln : mLines  ) TDLog.v("Ln " + ln.thname + " " + ln.size() );
+  //   for ( SketchLine  ln : mAreas  ) TDLog.v("Ar " + ln.thname + " " + ln.size() );
+  // }
 
   // ------------------------------------------------- 
 

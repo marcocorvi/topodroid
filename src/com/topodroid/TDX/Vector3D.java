@@ -329,9 +329,9 @@ public class Vector3D
     if ( m1.z > z ) m1.z = z; else if ( m2.z < z ) m2.z = z;
   }
 
-  // void dump() 
+  // void dump( ) 
   // {
-  //   TDLog.v("TopoGL " + x + " " + y + " " + z );
+  //   tdlog.v("TopoGL " + x + " " + y + " " + z );
   // } 
 }
 

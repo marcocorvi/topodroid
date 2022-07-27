@@ -197,7 +197,7 @@ public class ParserTh extends TglParser
       // TDLog.v( "       E: " + emin + " " + emax );
       // TDLog.v( "       Z: " + zmin + " " + zmax );
       // for ( Cave3DFix f : fixes ) {
-      //   TDLog.v( "fix " + f.name + " " + f.e + " " + f.n );
+      //   // TDLog.v( "fix " + f.name + " " + f.e + " " + f.n );
       // }
     } else {
       if ( sw != null ) TDToast.make( sw.toString() );
@@ -372,8 +372,8 @@ public class ParserTh extends TglParser
     String surveyname = "--";
     String path = basepath;
     int linenr = 0;
-    TDLog.v( "Th basepath <" + basepath + ">");
-    TDLog.v( "Th filename <" + filename + ">");
+    // TDLog.v( "Th basepath <" + basepath + ">");
+    // TDLog.v( "Th filename <" + filename + ">");
     Cave3DCS cs = null;
     int in_data = 0; // 0 none, 1 normal, 2 dimension
 
@@ -894,7 +894,7 @@ public class ParserTh extends TglParser
     // TDLog.v( "Th shots " + shots.size() + " splays " + splays.size() + " ok_fixes " + ok_fixes.size() );
 
     // for ( Cave3DShot sh : shots ) {
-    //   TDLog.v( "Th shot " + sh.from + " " + sh.to );
+    //   // TDLog.v( "Th shot " + sh.from + " " + sh.to );
     // }
 
     int used_cnt = 0; // number of used shots

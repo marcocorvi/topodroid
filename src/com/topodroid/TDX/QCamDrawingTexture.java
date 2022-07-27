@@ -766,7 +766,7 @@ public class QCamDrawingTexture extends TextureView
   // private void endCapturePicture()
   // {
   //   if ( mCamera == null ) return;
-  //   TDLog.v("CAM2 end capture picture");
+  //   // TDLog.v("CAM2 end capture picture");
   //   try {
   //     mCaptureSession.stopRepeating(); 
   //     mCaptureSession.abortCaptures(); 
@@ -789,13 +789,13 @@ public class QCamDrawingTexture extends TextureView
   //  */
   // private void restartPreview()
   // {
-  //   TDLog.v("CAM2 restart preview");
+  //   // TDLog.v("CAM2 restart preview");
   //   try {
   //     mPreviewRequestBuilder.set( CaptureRequest.CONTROL_AF_TRIGGER, CameraMetadata.CONTROL_AF_TRIGGER_CANCEL );
   //     setAutoFlash( mPreviewRequestBuilder );
   //     mCaptureSession.capture( mPreviewRequestBuilder.build(), mCaptureCallback, mBackgroundHandler );
   //     mState = STATE_PREVIEW;
-  //     TDLog.v("CAM2 state --> PREVIEW");
+  //     // TDLog.v("CAM2 state --> PREVIEW");
   //     mCaptureSession.setRepeatingRequest( mPreviewRequest, mCaptureCallback, mBackgroundHandler );
   //   } catch ( CameraAccessException e ) {
   //     TDLog.Error("CAM2 access " + e.getMessage() );
@@ -852,7 +852,7 @@ public class QCamDrawingTexture extends TextureView
   //   {
   //     if ( mImage != null ) {
   //       Image.Plane[] planes = mImage.getPlanes();
-  //       TDLog.v("CAM2 planes " + planes.length );
+  //       // TDLog.v("CAM2 planes " + planes.length );
   //       if ( planes.length > 0 ) {
   //         ByteBuffer data = planes[0].getBuffer();
   //         if ( data != null ) {

@@ -394,7 +394,7 @@ public class TDPref implements AdapterView.OnItemSelectedListener
    */ 
   private static TDPref makeBtn( int cat, String nm, int tit, int sum, int lvl, String def_val, Context ctx, TDPrefHelper hlp )
   { 
-    TDLog.v("BTN " + nm + " " + def_val );
+    // TDLog.v("BTN " + nm + " " + def_val );
     String val = hlp.getString( nm, def_val );
     return new TDPref( cat, nm, BUTTON, tit, sum, lvl, PREF, val, def_val, ctx, hlp );
   }

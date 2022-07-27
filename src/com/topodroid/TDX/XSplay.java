@@ -71,9 +71,9 @@ class XSplay extends Vector3D
     throw new ClassCastException();
   }
 
-  // void dump()
+  // void dump( )
   // {
-  //   TDLog.v("TopoGL " + String.format("   %6.1f  %8.2f %8.2f %8.2f", angle, x, y, z ) );
+  //   tdlog.v("TopoGL " + String.format("   %6.1f  %8.2f %8.2f %8.2f", angle, x, y, z ) );
   // }
 
   /** serialize the XSplay

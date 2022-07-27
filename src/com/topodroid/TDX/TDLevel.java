@@ -56,7 +56,7 @@ public class TDLevel
       } catch ( NameNotFoundException e ) {
       }
       test_debug = false;
-      TDLog.v("DEBUG " + debug );
+      // TDLog.v("DEBUG " + debug );
     }
     overBasic    = mLevel > BASIC;
     overNormal   = mLevel > NORMAL;

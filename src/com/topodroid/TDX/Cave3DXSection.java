@@ -105,11 +105,11 @@ public class Cave3DXSection
   }
 
 
-  //void dump()
-  //{
-  //  TDLog.v("XS " + size() + " C " + center.x + " " + center.y + " " + center.z + " N " + normal.x + " " + normal.y + " " + normal.z );
-  //  for ( int k=0; k < splays.length; ++k ) splays[k].dump();
-  //}
+  // void dump( )
+  // {
+  //   tdlog.v("XS " + size() + " C " + center.x + " " + center.y + " " + center.z + " N " + normal.x + " " + normal.y + " " + normal.z );
+  //   for ( int k=0; k < splays.length; ++k ) splays[k].dump();
+  // }
 
   // --------------------------------------------------------------------
   /** compute the normal, from a set of 3D points

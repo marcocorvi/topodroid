@@ -123,14 +123,14 @@ public class PTId
     PTFile.writeInt( fs, _id );
   }
 
-  // void print() 
+  // void print( ) 
   // { 
   //   if ( (int)_id == ID_UNDEFINED ) {
-  //     TDLog.v( "ID undef" );
+  //     tdlog.v( "ID undef" );
   //   } else if ( _id < 0 ) {
-  //     TDLog.v( "ID number " + (_id + 0x80000001 ) );
+  //     tdlog.v( "ID number " + (_id + 0x80000001 ) );
   //   } else {
-  //     TDLog.v( "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
+  //     tdlog.v( "ID major " + (_id>>16) + " minor " + (_id & 0xffff) );
   //   }
   // }
 

@@ -161,9 +161,9 @@ public class GlSurface extends GlShape
   //   // if ( mTexId <= 0 ) {
   //   //   mTexId = GL.bindTexture( mBitmap );
   //   //   mBitmapBounded = true;
-  //   //   TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId );
+  //   //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId );
   //   // } else {
-  //   //   TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId + " aleady bound " + mBitmapBounded );
+  //   //   // TDLog.v("GL SURFACE rebind texture bitmap: " + mTexId + " aleady bound " + mBitmapBounded );
   //   // }
   // }
 
@@ -442,7 +442,7 @@ public class GlSurface extends GlShape
     for ( int k=0; k<nx*ny; ++k ) {
       if ( zmin > data[k] ) { zmin = data[k]; } else if ( zmax < data[k] ) { zmax = data[k]; }
     }
-    TDLog.v("Surface E " + x1 + " " + x2 + " N " + y1 + " " + y2 + "Z " + zmin + " " + zmax );
+    // TDLog.v("Surface E " + x1 + " " + x2 + " N " + y1 + " " + y2 + "Z " + zmin + " " + zmax );
   }
   */
  

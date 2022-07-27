@@ -654,7 +654,7 @@ public class GlModel
   // void prepareTemperatures()
   // {
   //   double inv_temp_zmax = prepareStationTemperatureDepth( mParser );
-  //   TDLog.v("Model prepare temperatures - inv zmax " + inv_temp_zmax );
+  //   // TDLog.v("Model prepare temperatures - inv zmax " + inv_temp_zmax );
   //   glLegs.prepareTemperatureBuffer(  legsSurvey );
   //   glLegsS.prepareTemperatureBuffer( legsSurface );
   //   glLegsD.prepareTemperatureBuffer( legsDuplicate );
@@ -1009,7 +1009,7 @@ public class GlModel
   // {
   //   if ( st == null ) return;
   //   String name = st.short_name;
-  //   TDLog.v("Model add BT station " + st.short_name + " " + st.name );
+  //   // TDLog.v("Model add BT station " + st.short_name + " " + st.name );
   //   synchronized( glNames ) {
   //     glNames.addBluetoothName( st, st.short_name, st.name ); // mXmed, mYmed, mZmed );
   //     glNames.initData();
@@ -1038,7 +1038,7 @@ public class GlModel
 
   // void prepareEmptyModel( TglParser parser )
   // {
-  //   TDLog.v("GL model prepare empty" );
+  //   // TDLog.v("GL model prepare empty" );
   //   modelCreated = false;
   //   mParser = parser;
   //   mZ0Min  = 0;

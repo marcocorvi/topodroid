@@ -83,7 +83,7 @@ public class TopoDroidComm
     long status = ( d > TDSetting.mMaxShotLength )? TDStatus.OVERSHOOT : TDStatus.NORMAL;
     // TODO split the data insert in three places: one for each data packet
 
-    TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
+    // TDLog.v( "TD comm: HANDLE PACKET " + index + " " + d + " " + b + " " + c );
     int leg = ( data_type == DataType.DATA_SCAN )? LegType.SCAN : LegType.NORMAL;
     if ( comment == null ) comment = "";
     mLastShotId = TopoDroidApp.mData.insertBricShot( TDInstance.sid, index, d, b, c, r, clino_error, azimuth_error, dip, ExtendType.EXTEND_IGNORE, leg, status, comment, TDInstance.deviceAddress() );
@@ -100,7 +100,7 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      TDLog.v( "TD comm: null Lister");
+      TDLog.Error( "TD comm: null Lister");
     }
     return true;
   }
@@ -129,7 +129,7 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      TDLog.v( "TD comm: null Lister");
+      TDLog.Error( "TD comm: null Lister");
     }
   }
 
@@ -166,7 +166,7 @@ public class TopoDroidComm
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       } else {
-        TDLog.v( "TD comm: null Lister");
+        TDLog.Error( "TD comm: null Lister");
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );

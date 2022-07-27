@@ -36,7 +36,7 @@ public class ImportTherionTask extends ImportTask
   @Override
   protected Long doInBackground( String... str )
   {
-    TDLog.v( "import Therion task: " + str[0] + " survey " + str[1] );
+    // TDLog.v( "import Therion task: " + str[0] + " survey " + str[1] );
     long sid = 0;
     try {
       // if fr == null, str[0] is the filename, otherwise it is the survey name

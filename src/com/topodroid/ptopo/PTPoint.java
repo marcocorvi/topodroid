@@ -46,6 +46,6 @@ public class PTPoint
     PTFile.writeInt( fs, _y );
   }
 
-  // void print() { TDLog.v( "PT point " + _x + " " + _y ); }
+  // void print( ) { TDLog.v( "PT point " + _x + " " + _y ); }
 
 }

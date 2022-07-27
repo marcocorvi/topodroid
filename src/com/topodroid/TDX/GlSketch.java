@@ -153,35 +153,34 @@ public class GlSketch extends GlShape
   // --------------------------------------------------------
   // LOG
 
-  /** log - debug
-   */
-  void logMinMax()
-  {
-    if ( TDUtil.isEmpty(mPoints) ) return;
-    double xmin, xmax, ymin, ymax, zmin, zmax;
-    Vector3D v0 = mPoints.get(0);
-    xmin = xmax = v0.x;
-    ymin = ymax = v0.y;
-    zmin = zmax = v0.z;
-    for ( SketchPoint point : mPoints ) {
-      Vector3D v = point;
-      // TDLog.v("TopoGL Point " + v.x + " " + v.y + " " + v.z );
-      if ( v.x < xmin ) { xmin = v.x; } else if ( v.x > xmax ) { xmax = v.x; }
-      if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
-      if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }
-    }
-    TDLog.v("SKETCH points " + mPoints.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
-
-    for ( SketchLine line : mLines ) { 
-      TDLog.v("SKETCH line size " + line.size() + " color " + line.red + " " + line.green + " " + line.blue );
-      for ( Vector3D v : line.pts ) {
-        if ( v.x < xmin ) { xmin = v.x; } else if ( v.x > xmax ) { xmax = v.x; }
-        if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
-        if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }
-      }
-    }
-    TDLog.v("SKETCH lines " + mLines.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
-  }
+  // /** log - debug
+  //  */
+  // void logMinMax()
+  // {
+  //   if ( TDUtil.isEmpty(mPoints) ) return;
+  //   double xmin, xmax, ymin, ymax, zmin, zmax;
+  //   Vector3D v0 = mPoints.get(0);
+  //   xmin = xmax = v0.x;
+  //   ymin = ymax = v0.y;
+  //   zmin = zmax = v0.z;
+  //   for ( SketchPoint point : mPoints ) {
+  //     Vector3D v = point;
+  //     // TDLog.v("TopoGL Point " + v.x + " " + v.y + " " + v.z );
+  //     if ( v.x < xmin ) { xmin = v.x; } else if ( v.x > xmax ) { xmax = v.x; }
+  //     if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
+  //     if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }
+  //   }
+  //   // TDLog.v("SKETCH points " + mPoints.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
+  //   for ( SketchLine line : mLines ) { 
+  //     // TDLog.v("SKETCH line size " + line.size() + " color " + line.red + " " + line.green + " " + line.blue );
+  //     for ( Vector3D v : line.pts ) {
+  //       if ( v.x < xmin ) { xmin = v.x; } else if ( v.x > xmax ) { xmax = v.x; }
+  //       if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
+  //       if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }
+  //     }
+  //   }
+  //   // TDLog.v("SKETCH lines " + mLines.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
+  // }
   //
 
   // ----------------------------------------------------

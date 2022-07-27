@@ -40,7 +40,7 @@ class GraphPaperScaleCommandManager
     if ( TopoDroidApp.getDensity() - density >= 120 ) {
       mDensity = density;
       mZoom = 1600 * 2.54f / ( TopoDroidApp.getDensity() - density );
-      TDLog.v("ZOOM " + mZoom + " adjust " + density + " dp1cm " + ( TopoDroidApp.getDensity() - density )/2.54f );
+      // TDLog.v("ZOOM " + mZoom + " adjust " + density + " dp1cm " + ( TopoDroidApp.getDensity() - density )/2.54f );
       setTransform( 0, 0, mZoom );
       if ( mParent != null ) mParent.setDensityTextView( density );
     }

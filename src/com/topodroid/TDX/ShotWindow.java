@@ -426,8 +426,15 @@ public class ShotWindow extends Activity
     mActivity.setTitle( sb.toString() );
   }
 
+  /** @return true if the "current station" name is the specified name
+   * @param name   specified name
+   */
   boolean isCurrentStationName( String st ) { return mApp.isCurrentStationName( st ); }
 
+  /** set the name of the "current station"
+   * @param st   "current station" name
+   * @return true if successful (?)
+   */
   boolean setCurrentStationName( String st ) 
   { 
     mSkipItemClick = true;
@@ -435,10 +442,11 @@ public class ShotWindow extends Activity
     // updateDisplay( );
   }
 
-  // add a block to the adapter (ILister interface)
-  // called by the RFcommThread after receiving a data packet
-  // this is the only place where assignStationsAll is called: 
-  // synchronize it
+  /** add a block to the adapter (ILister interface)
+   * @param blk_id   block ID
+   * @note called by the RFcommThread after receiving a data packet
+   *       this is the only place where assignStationsAll is called: synchronize it
+   */
   @Override
   synchronized public void updateBlockList( long blk_id )
   {
@@ -447,7 +455,9 @@ public class ShotWindow extends Activity
       // TDLog.v("DATA " + "null block");
       return;
     }
-    // TDLog.v("DATA " + "Shot window: update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
+    if ( TDLog.isStreamFile() ) {
+      TDLog.f("SHOT WINDOW " + Thread.currentThread().getId() + " update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
+    }
     // FIXME 3.3.0
     boolean add_block = mDataAdapter.addDataBlock( blk ); // avoid double block-adding
     if ( add_block ) {
@@ -484,7 +494,7 @@ public class ShotWindow extends Activity
         }
       }
     // } else {
-    //   TDLog.v( "block " + blk_id + " already on the list");
+    //   if ( TDLog.isStreamFile() ) TDLog.f( "block " + blk_id + " already on the list");
     }
   }
 
@@ -940,7 +950,7 @@ public class ShotWindow extends Activity
     //     Intent intent = new Intent( android.provider.MediaStore.ACTION_IMAGE_CAPTURE );
     //     if ( intent.resolveActivity( getPackageManager() ) != null ) {
     //       String path = TDPath.getSurveyPhotoDir( TDInstance.survey ) + "/";
-    //       TDLog.v("DistoX photo path " + path );
+    //       // TDLog.v("DistoX photo path " + path );
     //       // the URI must be a content resolver Uri
     //       intent.putExtra( android.provider.MediaStore.EXTRA_OUTPUT, Uri.fromFile( new File( path ) ) );
     //       intent.putExtra( "return-data", true );
@@ -1080,7 +1090,7 @@ public class ShotWindow extends Activity
 
   // void refreshList()
   // {
-  //   TDLog.v("SHOT " + "refresh display" );
+  //   // TDLog.v("SHOT " + "refresh display" );
   //   mDataAdapter.notifyDataSetChanged();
   //   mList.invalidate();
   // }

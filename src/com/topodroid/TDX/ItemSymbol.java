@@ -165,7 +165,7 @@ class ItemSymbol
   //  */
   // void clearChecked()
   // {
-  //   TDLog.v( "Item " + mType + "/" + mIndex + " clear checked " );
+  //   // TDLog.v( "Item " + mType + "/" + mIndex + " clear checked " );
   //   // if ( mUseText ) {
   //     mCheckBox.setChecked( false );
   //   // }

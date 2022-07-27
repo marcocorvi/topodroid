@@ -294,13 +294,13 @@ class TdmConfig extends TdmFile
     try {
       BufferedReader br = TDFile.getTopoDroidFileReader( filepath );
       if ( br == null ) { // file does not exists (or is not readable)
-        TDLog.v("file no-exist or no-read: " + filepath );
+        TDLog.Error("file no-exist or no-read: " + filepath );
         mSurveyName = getNameFromFilepath( filepath );
         writeTdmConfig( true );
         return;
       }
 
-      TDLog.v( "read config " + filepath );
+      // TDLog.v( "read config " + filepath );
       String line = br.readLine();
       int cnt = 1;
       // TDLog.v( Integer.toString(cnt) + ":" + line );

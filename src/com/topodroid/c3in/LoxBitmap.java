@@ -143,7 +143,7 @@ public class LoxBitmap
       // TDLog.v("Bitmap PNG image type " + type + " length " + len + " size " + size );
       image = BitmapFactory.decodeByteArray( data, data_offset, size );
     } else {
-      TDLog.v("Bitmap Unexpected image type " + type );
+      TDLog.Error("Bitmap Unexpected image type " + type );
     }
     if ( image != null ) {
       width  = image.getWidth();

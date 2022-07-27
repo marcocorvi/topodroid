@@ -110,7 +110,7 @@ public class CWPoint extends Vector3D
   //{
   //  StringBuilder sb = new StringBuilder();
   //  for ( CWTriangle t : mTriangle ) sb.append( "-" + t.mCnt );
-  //  TDLog.v( "CW Point " + mCnt + " T" + sb.toString() + " " + x + " " + y + " " + z );
+  //  // TDLog.v( "CW Point " + mCnt + " T" + sb.toString() + " " + x + " " + y + " " + z );
   //}
   
   public void writePoint( PrintWriter out )

@@ -48,7 +48,7 @@ class Icosahedron
     //   for (int k2=0; k2<12; ++k2 ) {
     //     pw.format(Locale.US, "%1d ", mNghb[ k1*12 + k2 ] );
     //   }
-    //   TDLog.v( "ICO " + sw.getBuffer().toString() );
+    //   // TDLog.v( "ICO " + sw.getBuffer().toString() );
     // }
   }
 

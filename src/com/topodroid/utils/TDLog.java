@@ -33,13 +33,26 @@ public class TDLog
 
   static final public String TAG = "topodroid-X";
 
+  static final public int LOG_SYSLOG = 0;
+  static final public int LOG_FILE   = 1;
+
   // NO_LOGS these are final
-  static final private int mLogStream = 0;    // log stream: 0 syslog, 1 logfile
+  static /* final */ private int mLogStream = LOG_SYSLOG; // log stream: 0 syslog, 1 logfile
   static final private boolean mLogAppend = true; // false;
 
   static private PrintWriter mLog = null;
   static private FileWriter  mLogFile = null;
   static private long mMillis;
+
+  static public void setLogStream( int log_stream )
+  {
+    if ( mLogStream != log_stream ) {
+      mLogStream = log_stream;
+      if ( mLog == null ) setLogTarget();
+    }
+  }
+
+  static public boolean isStreamFile() { return mLogStream == LOG_FILE; }
 
   // static public boolean LOG_DEBUG  = false;
   // static public boolean LOG_ERR    = true;
@@ -152,10 +165,13 @@ public class TDLog
     Log.v( TAG, msg + " " + millis );
   }
   
-  static public void LogFile( String msg )
+  /** log on file stream
+   * @param msg  log message
+   */
+  static public void f( String msg )
   {
     mMillis = System.currentTimeMillis() % 600000;
-    if ( mLogStream == 0 || mLog == null ) {
+    if ( mLogStream == LOG_SYSLOG || mLog == null ) {
       Log.v( TAG, mMillis + " " + msg );
     } else {
       mLog.format( "%d: %s\n", mMillis, msg );
@@ -167,7 +183,7 @@ public class TDLog
   // {
   //   if ( LOG_DEBUG && msg != null ) {
   //     mMillis = System.currentTimeMillis() % 600000;
-  //     if ( mLogStream == 0 || mLog == null ) {
+  //     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
   //       Log.v( TAG, mMillis + " " + msg );
   //     } else {
   //       mLog.format( "%d: %s\n", mMillis, msg );
@@ -180,7 +196,7 @@ public class TDLog
   {
     if ( /* LOG_ERR && */ msg != null ) { // NO_LOGS
       mMillis = System.currentTimeMillis() % 600000;
-      if ( mLogStream == 0 || mLog == null ) {
+      if ( mLogStream == LOG_SYSLOG || mLog == null ) {
         Log.v( TAG, mMillis + " " + msg );
       } else {
         mLog.format( "%d: %s\n", mMillis, msg );
@@ -194,7 +210,7 @@ public class TDLog
   // {
   //   if ( flag && msg != null ) {
   //     mMillis = System.currentTimeMillis() % 600000;
-  //     if ( mLogStream == 0 || mLog == null ) {
+  //     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
   //       Log.v( TAG, mMillis + " " + msg );
   //     } else {
   //       mLog.format( "%d: %s\n", mMillis, msg );
@@ -208,7 +224,7 @@ public class TDLog
   // {
   //   if ( msg != null ) {
   //     mMillis = System.currentTimeMillis() % 600000;
-  //     if ( mLogStream == 0 || mLog == null ) {
+  //     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
   //       Log.v( TAG, mMillis + " " + msg );
   //     } else {
   //       mLog.format( "%d: %s\n", mMillis, msg );
@@ -228,7 +244,7 @@ public class TDLog
   {
     StackTraceElement[] trace = e.getStackTrace();
     if ( trace == null ) return;
-    if ( mLogStream == 0 || mLog == null ) {
+    if ( mLogStream == LOG_SYSLOG || mLog == null ) {
       for ( StackTraceElement st : trace ) Log.v( TAG, st.toString() );
     } else {
       for ( StackTraceElement st : trace ) mLog.format( "%s\n", st.toString() );
@@ -237,7 +253,7 @@ public class TDLog
 
   private static void setLogTarget( )
   {
-    if ( mLogStream == 0 ) return;
+    if ( mLogStream == LOG_SYSLOG ) return;
     if ( mLogFile != null ) {
       try {
         mLogFile.close();
@@ -311,6 +327,7 @@ public class TDLog
   //   // Log.v( TAG, "Log key " + k + " value " + v );
   //   if ( k.equals( "DISTOX_LOG_STREAM" ) ) { // "DISTOX_LOG_STREAM",
   //     mLogStream = Integer.parseInt( v ); // ( sp.getString(k, "0") );
+  //     // TODO enforce values LOG_SYSLOG or LOG_FILE
   //   }
   // }
 

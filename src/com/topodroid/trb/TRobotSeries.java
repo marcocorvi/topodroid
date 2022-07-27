@@ -43,9 +43,9 @@ public class TRobotSeries
     mPoints.add( pt );
   }
 
-  // void dump()
+  // void dump( )
   // {
-    // TDLog.v( "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
-    // for ( TRobotPoint pt : mPoints ) pt.dump();
+  //   tdlog.v( "Series " + mNumber + " (Pts " + mPtCnt + ") start " + mBegin.mSeries.mNumber + "." + mBegin.mNumber );
+  //   for ( TRobotPoint pt : mPoints ) pt.dump();
   // }
 }

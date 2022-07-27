@@ -244,7 +244,7 @@ public class CalibCoverage
   //       ++ cnt;
   //     }
   //   }
-  //   TDLog.v("COVER size " + sz + " count " + cnt );
+  //   // TDLog.v("COVER size " + sz + " count " + cnt );
   //   return error;
   // }
 
@@ -287,7 +287,7 @@ public class CalibCoverage
   //     b1.setOffGroup( ( cnt > 0 && dev/cnt > thr ) );
   //     if ( b1.isOffGroup() ) ++ ret;
   //   }
-  //   TDLog.v("COVER off-group " + ret );
+  //   // TDLog.v("COVER off-group " + ret );
   //   return ret;
   // }
 

@@ -55,17 +55,31 @@ class StationName
   protected String name( DBlock blk ) { return (blk==null)? "<->" : "<" + Long.toString(blk.mId) + ":" + blk.mFrom + "-" + blk.mTo + ">"; }
 
 
+  /** assign station names to shots
+   * @param list  list of dblock, including those to assign
+   * @param sts   station names already in use
+   * @return true if a leg has been assigned
+   */
   boolean assignStations( List< DBlock > list, Set<String> sts )
   {
     return false;
   }
 
+  /** assign station names to shots after a given shot
+   * @param blk0  given shot
+   * @param list  list of dblock, including those to assign
+   * @param sts   station names already in use
+   * @return true if a leg has been assigned
+   */
   boolean assignStationsAfter( DBlock blk0, List< DBlock > list, Set<String> sts )
   {
     return false;
   }
 
   // ----------------------------------------------------------------
+
+  /** generate a visual/audio feedback 
+   */
   protected void legFeedback( ) 
   {
     TDFeedback.legFeedback( mContext );
@@ -75,12 +89,24 @@ class StationName
   // current station(s)
   protected static volatile String mCurrentStationName = null;
 
+  /** @return the name of the "current station", or null (if unset)
+   */
   static String getCurrentStationName() { return mCurrentStationName; }
 
+  /** @return true if the "current station" name is the specified name
+   * @param name   specified name
+   */
   static boolean isCurrentStationName( String name ) { return name.equals(mCurrentStationName); }
 
+  /** unset the "current station"
+   */
   static void clearCurrentStation() { mCurrentStationName = null; }
 
+  /** set the "current station" (or clear it(
+   * @param name   name of the "current station"
+   * @return true if the "current station" is set
+   * @note if the given name equals the "current station" this is unset
+   */
   static boolean setCurrentStationName( String name ) 
   { 
     if ( name == null || name.equals(mCurrentStationName) ) {
@@ -94,20 +120,36 @@ class StationName
   // unused
   // static void resetCurrentStationName( String name ) { mCurrentStationName = name; }
 
+  /** set the "current station" to the "last station" if the current station is unset
+   * @param data   database helper
+   * @param sid    survey ID
+   */
   static void resetCurrentOrLastStation( DataHelper data, long sid )
   {
     if ( mCurrentStationName == null ) mCurrentStationName = getLastStationName( data, sid );
   }
 
+  /** @return the "current station" or the "last station" (if the current station is unset)
+   * @param data   database helper
+   * @param sid    survey ID
+   */
   static String getCurrentOrLastStation( DataHelper data, long sid )
   {
     return ( mCurrentStationName != null )? mCurrentStationName : getLastStationName( data, sid );
   }
   
-  // String getFirstStation( ) { return mData.getFirstStation( mSid ); }
+  /** @return the "first station"
+   * @param data   database helper
+   * @param sid    survey ID
+   */
   static String getFirstStation( DataHelper data, long sid ) { return data.getFirstStation( sid ); }
+  // String getFirstStation( ) { return mData.getFirstStation( mSid ); }
   
-  // @note used only to reset/getCurrentOrLastStation name
+  /** @return the "last station"
+   * @param data   database helper
+   * @param sid    survey ID
+   * @note used only to reset/getCurrentOrLastStation name
+   */
   static private String getLastStationName( DataHelper data, long sid )
   {
     DBlock last = data.selectLastNonBlankShot( sid );
@@ -125,8 +167,10 @@ class StationName
   }
 
   // ------------------------------------------------------------------------------------------------
-  // setting the leg extend automatically, sets also stretch to 0
 
+  /** set the leg extend automatically, sets also stretch to 0
+   * @param blk   data block
+   */
   protected void setLegExtend( DBlock blk )
   {
     // FIXME_EXTEND what has "splay extend" to do with "leg extend" ???
@@ -139,8 +183,11 @@ class StationName
     }
   }
 
-
-  // used to set block extend "fixed"
+  /** set the leg extend to a given value, sets also stretch to 0
+   * @param blk     data block
+   * @param extend  extend value
+   * @note used to set block extend "fixed"
+   */
   protected void setLegFixedExtend( DBlock blk, long extend )
   {
     // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set fixed extend " + extend );
@@ -163,7 +210,7 @@ class StationName
     // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to + " backleg " + is_backleg );
     blk.setBlockName( from, to, is_backleg );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
-    //   TDLog.v("station name detect bad sibling (1)");
+    //   // TDLog.v("station name detect bad sibling (1)");
     //   TDToast.makeWarn( R.string.bad_sibling );
     // }
     mData.updateShotName( blk.mId, mSid, from, to );
@@ -181,7 +228,7 @@ class StationName
     // TDLog.Log( TDLog.LOG_SHOT, blk.mId + " set name " + from + "-" + to );
     blk.setBlockName( from, to );
     // if ( mData.checkSiblings( blk.mId, mSid, from, to, blk.mLength, blk.mBearing, blk.mClino ) ) { // bad sibling
-    //   TDLog.v("station name detect bad sibling (2)");
+    //   // TDLog.v("station name detect bad sibling (2)");
     //   TDToast.makeWarn( R.string.bad_sibling );
     // }
     mData.updateShotName( blk.mId, mSid, from, to );

@@ -816,7 +816,7 @@ public class DrawingWindow extends ItemDrawer
     if ( st != null ) {
       mDrawingSurface.shiftXSections( st );
     // } else {
-    //   TDLog.v("not found old station " + old_station + " new " + station );
+    //   // TDLog.v("not found old station " + old_station + " new " + station );
     }
   }
 
@@ -1672,7 +1672,7 @@ public class DrawingWindow extends ItemDrawer
           // DrawingStationName dst =
           mDrawingSurface.addDrawingStationName( name, st, DrawingUtil.toSceneX(h1, st.v), DrawingUtil.toSceneY(h1, st.v), true, xhsections, saved );
         // } else {
-        //   TDLog.v("PLOT station not showing " + st.name );
+        //   // TDLog.v("PLOT station not showing " + st.name );
         }
       }
     }
@@ -5002,7 +5002,7 @@ public class DrawingWindow extends ItemDrawer
   //     // // FIXME NOTIFY ? no
   //     createPhotoPoint();
   //   } else {
-  //     TDLog.v("PLOT PHOTO failed to save photo");
+  //     // TDLog.v("PLOT PHOTO failed to save photo");
   //   }
   // }
 
@@ -7128,7 +7128,7 @@ public class DrawingWindow extends ItemDrawer
   //   super.onCreateContextMenu( menu, v, info );
   //   getMenuInflater().inflate( R.menu.popup, menu );
   //   menu.setHeaderTitle( "Context Menu" );
-  //   TDLog.v( "PLOT on Create Context Menu view " + v.toString()  );
+  //   // TDLog.v( "PLOT on Create Context Menu view " + v.toString()  );
   // }
 
   // @Override
@@ -7340,6 +7340,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( long blk_id )
   {
+    // TDLog.v("DRAWING " + Thread.currentThread().getId() + " update block list" );
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
     }

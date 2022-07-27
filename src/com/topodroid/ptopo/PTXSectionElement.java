@@ -79,9 +79,9 @@ public class PTXSectionElement extends PTElement
     }
 
     // @Override
-    // void print() 
+    // void print( ) 
     // {
-    //   TDLog.v( "xsection: dir " + _direction );
+    //   tdlog.v( "xsection: dir " + _direction );
     //   _pos.print();
     //   _station.print();
     // }

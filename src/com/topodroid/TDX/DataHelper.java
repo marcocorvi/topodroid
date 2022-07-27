@@ -5219,7 +5219,7 @@ public class DataHelper extends DataSetObservable
 
    void dumpToFile( String filename, long sid )
    {
-     // TDLog.Log( TDLog.LOG_IO, "dump DB to file " + filename );
+     // TDLog.v( "dump DB to file " + filename );
      // String where = "surveyId=" + Long.toString(sid);
      if ( myDB == null ) return;
      try {

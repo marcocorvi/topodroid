@@ -1137,7 +1137,7 @@ public class TglParser
   //   double sum = 0;
   //   int nr_fix = 0;
   //   try {
-  //     TDLog.v("filename: " + filename );
+  //     // TDLog.v("filename: " + filename );
   //     BufferedReader br = getBufferedReader( isr, filename );
   //     String line;
   //     while ( (line = br.readLine() ) != null ) {
@@ -1145,7 +1145,7 @@ public class TglParser
   //       // fullname = vals[0]   temp = vals[1]
   //       int idx = getStationIndex( vals[0] );
   //       if ( idx < 0 ) {
-  //         TDLog.v("missing station " + vals[0] );
+  //         // TDLog.v("missing station " + vals[0] );
   //       } else {
   //         kfix[idx] = true;
   //         double t = Double.parseDouble( vals[1] );
@@ -1199,7 +1199,7 @@ public class TglParser
   //     ++ iter;
   //     if ( iter % 10 == 0 ) TDLog.v("Temp-relax " + iter + " delta " + delta );
   //   } while ( delta > 0.01 && iter < 1000 );
-  //   TDLog.v("Temp-relax final delta " + delta + " iter " + iter );
+  //   // TDLog.v("Temp-relax final delta " + delta + " iter " + iter );
   //   has_temperature = true;
   //   return true;
   // }

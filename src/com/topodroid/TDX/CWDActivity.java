@@ -64,7 +64,7 @@ public class CWDActivity extends Activity
 
   // void setBasename( String basename ) 
   // { 
-  //   TDLog.v( "set  base name " + basename );
+  //   // TDLog.v( "set  base name " + basename );
   //   mBaseName = basename;
   //   updateDisplay();
   // }

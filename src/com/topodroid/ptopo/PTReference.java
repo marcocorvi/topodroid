@@ -85,9 +85,9 @@ class PTReference
       _comment.write( fs );
     }
 
-    // void print()
+    // void print( )
     // { 
-    //   TDLog.v( "reference: east " + _east + " north " + _north + " alt " + _altitude );
+    //   tdlog.v( "reference: east " + _east + " north " + _north + " alt " + _altitude );
     //   _station.print();
     //   _comment.print();
     // }

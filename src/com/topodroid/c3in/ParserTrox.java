@@ -158,7 +158,7 @@ public class ParserTrox extends TglParser
       if ( line == null ) return false;
       line = line.trim().replaceAll("\\s+", " ");
       if ( ! line.startsWith( "<?xml " ) ) { // NOT XML
-        TDLog.v( "VTopo trox not an xml file");
+        TDLog.Error( "VTopo trox not an xml file");
         return false;
       }
 
@@ -334,7 +334,7 @@ public class ParserTrox extends TglParser
         // ignore if ( line.startsWith("<Couleur>") ) continue;
       }
     } catch ( IOException e ) {
-      TDLog.v( "ERROR " + linenr + ": " + line );
+      TDLog.Error( "ERROR " + linenr + ": " + line );
       throw new ParserException( getName(), linenr );
     }
     return true;

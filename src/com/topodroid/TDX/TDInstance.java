@@ -341,7 +341,7 @@ public class TDInstance
   //     String treeUri = preferences.getString( TDX_TREE_URI, "");
   //     Uri uri = Uri.parse(treeUri);
   //     ret = DocumentFile.fromTreeUri( context, uri).canWrite();
-  //     TDLog.v("folder " + treeUri + " has permission " + ret );
+  //     // TDLog.v("folder " + treeUri + " has permission " + ret );
   //   } catch (Exception e) {
   //     TDLog.Error("has folder permission error: " + e.getMessage() );
   //   }
@@ -360,10 +360,10 @@ public class TDInstance
   //   DocumentFile file = DocumentFile.fromTreeUri( context, treeUri );
   //   if ( file == null ) return false;
   //   boolean ret = file.canWrite();
-  //   TDLog.v("result TREE URI return " + ret );
+  //   // TDLog.v("result TREE URI return " + ret );
   //   if ( ret ) {
   //     if ( takePersistentPermissions( treeUri, data.getFlags() ) ) {
-  //       TDLog.v("result TREE URI taken persistent permissions" );
+  //       // TDLog.v("result TREE URI taken persistent permissions" );
   //       SharedPreferences preferences = getPrefs();
   //       SharedPreferences.Editor editor = preferences.edit();
   //       editor.putString( TDX_TREE_URI, data.getDataString() );

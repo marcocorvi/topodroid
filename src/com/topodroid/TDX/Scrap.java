@@ -124,7 +124,7 @@ public class Scrap
   // FIXME-HIDE UNUSED
   // void clearShotsAndStations()
   // {
-  //   TDLog.v("HIDE scrap clear shots and stations");
+  //   // TDLog.v("HIDE scrap clear shots and stations");
   //   mSelection.clearReferencePoints();
   //   clearSelected();
   // }
@@ -132,7 +132,7 @@ public class Scrap
   // FIXME-HIDE UNUSED
   // void deleteSplay( SelectionPoint sp )
   // {
-  //   TDLog.v("HIDE scrap clear splay");
+  //   // TDLog.v("HIDE scrap clear splay");
   //   mSelection.removePoint( sp );
   //   clearSelected();
   // }
@@ -140,7 +140,7 @@ public class Scrap
   // used to insert leg-path and splay-path FIXME-HIDE UNUSED
   // void insertPathInSelection( DrawingPath path )
   // {
-  //   TDLog.v("HIDE scrap insert path" );
+  //   // TDLog.v("HIDE scrap insert path" );
   //   mSelection.insertPath( path );
   // }
 
@@ -271,7 +271,7 @@ public class Scrap
   // FIXME-HIDE UNUSED
   // void addStationToSelection( DrawingStationName st )
   // {
-  //   TDLog.v("HIDE scrap add station");
+  //   // TDLog.v("HIDE scrap add station");
   //   mSelection.insertStationName( st );
   // }
 
@@ -820,7 +820,7 @@ public class Scrap
     // if ( path.isLine() ) { // path instanceof DrawingLinePath
     //   DrawingLinePath line = (DrawingLinePath)path;
     //   LinePoint lp = line.mFirst;
-    //   TDLog.v("CMD add path. size " + line.size() + " start " + lp.x + " " + lp.y );
+    //   // TDLog.v("CMD add path. size " + line.size() + " start " + lp.x + " " + lp.y );
     // }
     
     synchronized( TDPath.mCommandsLock ) {
@@ -2415,14 +2415,14 @@ public class Scrap
               continue;
             }
             // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
-            //   TDLog.v("HIDE scrap display fixed 1");
+            //   // TDLog.v("HIDE scrap display fixed 1");
             //   if ( ! legs_sshots ) continue;
             // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
-            //   TDLog.v("HIDE scrap display station name 1");
+            //   // TDLog.v("HIDE scrap display station name 1");
             //   if ( ! sstations ) continue;
             // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
             // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-            //   TDLog.v("HIDE scrap display splay 1");
+            //   // TDLog.v("HIDE scrap display splay 1");
             //   // FIXME_LATEST latest splays
             //   if ( splays ) {
             //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;
@@ -2449,14 +2449,14 @@ public class Scrap
               continue;
             } 
             // else if ( type == DrawingPath.DRAWING_PATH_FIXED ) {
-            //   TDLog.v("HIDE scrap display fixed 2");
+            //   // TDLog.v("HIDE scrap display fixed 2");
             //   if ( ! legs_sshots ) continue;
             // } else if ( type == DrawingPath.DRAWING_PATH_NAME ) {
-            //   TDLog.v("HIDE scrap display station name 2");
+            //   // TDLog.v("HIDE scrap display station name 2");
             //   if ( ! (sstations) ) continue;
             // // else if ( type == DrawingPath.DRAWING_PATH_SPLAY && ! (splays && sshots) )
             // } else if ( type == DrawingPath.DRAWING_PATH_SPLAY ) {
-            //   TDLog.v("HIDE scrap display splay 2");
+            //   // TDLog.v("HIDE scrap display splay 2");
             //   // FIXME_LATEST latest splays
             //   if ( splays ) {
             //     if ( station_splay.isStationOFF( pt.mItem ) ) continue;

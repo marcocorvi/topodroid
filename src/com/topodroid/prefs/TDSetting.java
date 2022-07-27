@@ -1780,11 +1780,11 @@ public class TDSetting
       if ( mSectionSplay > 91 ) { mSectionSplay = 91; ret = TDString.NINETYONE; }
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_SPLAY_DASH_COLOR
       mSplayDashColor = tryColorValue( hlp, k, v, def[ 7] ); 
-      TDLog.v("dash color " + mSplayDashColor );
+      // TDLog.v("dash color " + mSplayDashColor );
       BrushManager.setSplayDashColor( mSplayDashColor );
     } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_SPLAY_DOT_COLOR
       mSplayDotColor = tryColorValue( hlp, k, v, def[ 8] ); 
-      TDLog.v("dot color " + mSplayDotColor );
+      // TDLog.v("dot color " + mSplayDotColor );
       BrushManager.setSplayDotColor( mSplayDotColor );
     } else {
       TDLog.Error("missing GEEK_SPLAY key: " + k );

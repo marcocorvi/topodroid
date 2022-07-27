@@ -613,7 +613,7 @@ class ShotNewDialog extends MyDialog
         }
         resetData( shot_to );
         if ( mLister !=  null ) {
-          TDLog.v("new shot - lister refresh display" );
+          // TDLog.v("new shot - lister refresh display" );
           mLister.refreshDisplay( 1, false );
         }
         notDone = true;

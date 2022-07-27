@@ -54,7 +54,7 @@ public class ParserDat extends TglParser
   public ParserDat( TopoGL app, InputStreamReader isr, String name, String pathname ) throws ParserException
   {
     super( app, name );
-    TDLog.v( "Parser MAK " + pathname );
+    // TDLog.v( "Parser MAK " + pathname );
     readFileMak( isr, pathname );
     // processShots();
     setShotSurveys();
@@ -70,7 +70,7 @@ public class ParserDat extends TglParser
   {
     super( app, name );
 
-    TDLog.v( "Parser DAT " + name );
+    // TDLog.v( "Parser DAT " + name );
     readFileDat( isr, name, null, 0.0f, 0.0f, 0.0f );
     // processShots();
     setShotSurveys();
@@ -86,7 +86,7 @@ public class ParserDat extends TglParser
     String dirname = "./";
     int i = pathname.lastIndexOf('/');
     if ( i > 0 ) dirname = pathname.substring(0, i+1);
-    TDLog.v( "MAK file " + pathname + " dir " + dirname );
+    // TDLog.v( "MAK file " + pathname + " dir " + dirname );
 
     int linenr = 0;
     try {
@@ -169,7 +169,7 @@ public class ParserDat extends TglParser
     double length, bearing, clino, left, up, down, right, back_bearing, back_clino;
 
     try {
-      TDLog.v( "DAT survey " + survey );
+      // TDLog.v( "DAT survey " + survey );
 
       BufferedReader br = new BufferedReader( isr );
       ++linenr;

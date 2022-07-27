@@ -49,7 +49,7 @@ class Cave3DTube
 
   // void dumpTube()
   // {
-  //   TDLog.v("Tube " + xs1.name() + "--" + xs2.name() + " triangles " + triangles.size() );
+  //   tdlog.v("Tube " + xs1.name() + "--" + xs2.name() + " triangles " + triangles.size() );
   // }
 
   /** add a triangle

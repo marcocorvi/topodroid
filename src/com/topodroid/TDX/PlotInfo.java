@@ -65,9 +65,9 @@ public class PlotInfo
     return hide;
   }
        
-  // void dump()
+  // void dump( )
   // {
-  //   TDLog.v( "PLOT " + surveyId + "-" + id + " " + name + " type " + type + " start " + start );
+  //   tdlog.v( "PLOT " + surveyId + "-" + id + " " + name + " type " + type + " start " + start );
   // }
 
   /** set the plot ID

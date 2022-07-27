@@ -88,14 +88,14 @@ class Cave3DHull
   // {
   //   int s1 = projs1.size();
   //   int s2 = projs2.size();
-  //   TDLog.v("Hull at station " + mStationFrom.getFullName() + " size " + s1 + " " + mStationTo.getFullName() + " " + s2 );
+  //   // TDLog.v("Hull at station " + mStationFrom.getFullName() + " size " + s1 + " " + mStationTo.getFullName() + " " + s2 );
   //   // for (int k=0; k<s1; ++k ) {
   //   //   HullProjection p = projs1.get(k);
-  //   //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
+  //   //   // TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
   //   // }
   //   // for (int k=0; k<s2; ++k ) {
   //   //   HullProjection p = projs2.get(k);
-  //   //   TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
+  //   //   // TDLog.v( "Hull: " + k + ": " + p.angle + " - " + p.proj.x + " " + p.proj.y + " " + p.proj.z );
   //   // }
   // }
 
@@ -280,7 +280,7 @@ class Cave3DHull
         }
       }
     }
-    for ( HullProjection proj : projs ) proj.dump();
+    // for ( HullProjection proj : projs ) proj.dump();
   }
 
   /** ...

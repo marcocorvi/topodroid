@@ -77,7 +77,7 @@ class TdmSourcesDialog extends MyDialog
     List< String > surveys = TopoDroidApp.mData.selectAllSurveys();
     for ( String name : surveys ) {
       if ( ! mParent.hasSource( name ) ) {
-        TDLog.v("source name " + name );
+        // TDLog.v("source name " + name );
         mTdmSourceAdapter.addTdmSource( new TdmSource( name ) );
       }
     }

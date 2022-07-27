@@ -32,7 +32,7 @@ class TdmFile
     } else {
       mName = surveyname;
     }
-    TDLog.v( "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
+    // TDLog.v( "TdmFile: name <" + mName + "> file <" + mFilepath + ">" );
   }
 
   /** @return true is this TDM file has a specified filepath

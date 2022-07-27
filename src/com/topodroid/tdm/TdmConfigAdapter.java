@@ -44,7 +44,7 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
     mContext = ctx;
     mItems   = items;
     mOnClick = onClick;
-    TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
+    // TDLog.v( "TdmConfigAdapter nr. items " + items.size() );
   }
 
   /** @return the configuration at a given index
@@ -52,7 +52,7 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
    */
   public TdmConfig get( int pos ) 
   { 
-    TDLog.v("TdmConfig get item at pos " + pos );
+    // TDLog.v("TdmConfig get item at pos " + pos );
     return mItems.get(pos);
   }
 
@@ -61,10 +61,10 @@ class TdmConfigAdapter extends ArrayAdapter< TdmConfig >
    */
   public TdmConfig getTdmConfig( String survey ) 
   {
-    TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
+    // TDLog.v("TdmConfig get survey >" + survey + "< size " + mItems.size() );
     if ( survey == null || survey.length() == 0 ) return null;
     for ( TdmConfig tdconfig : mItems ) {
-      TDLog.v("TdmConfig item >" + tdconfig.getSurveyName() + "<" );
+      // TDLog.v("TdmConfig item >" + tdconfig.getSurveyName() + "<" );
       if ( tdconfig.getSurveyName().equals( survey ) ) return tdconfig;
     }
     return null;

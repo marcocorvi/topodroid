@@ -838,7 +838,7 @@ public class OverviewWindow extends ItemDrawer
         // TDLog.v( "Export overview PDF: uri " + uri.toString() );
         fos = TDsafUri.docFileOutputStream( pfd );
       // } else {
-      //   TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
+      //   // TDLog.v( "Export overview PDF " + fullname + " --> " + TDPath.getPdfFileWithExt( fullname ) );
       //   fos = new FileOutputStream( TDPath.getPdfFileWithExt( fullname ) );
       // }
 

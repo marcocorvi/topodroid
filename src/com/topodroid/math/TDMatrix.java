@@ -23,7 +23,8 @@ public class TDMatrix
                                   new TDVector(0.0f, 1.0f, 0.0f),
                                   new TDVector(0.0f, 0.0f, 1.0f) );
 
-  // Default cstr: zero matrix
+  /** default cstr: zero matrix
+   */
   public TDMatrix()
   {
     x = new TDVector();
@@ -31,6 +32,15 @@ public class TDMatrix
     z = new TDVector();
   }
 
+  /** cstr
+   * @param x0   X-vector
+   * @param y0   Y-vector
+   * @param z0   Z-vector
+   * @note the matrix is row-wise (?):
+   *    -- X --
+   *    -- Y --
+   *    -- Z --
+   */
   public TDMatrix( TDVector x0, TDVector y0, TDVector z0 )
   {
     x = new TDVector(x0);
@@ -38,7 +48,13 @@ public class TDMatrix
     z = new TDVector(z0);
   }
 
-  // OUTER PRODUCT: a & b
+  /** outer product: a &amp; b
+   *     a.x * b.x   a.x * b.y   a.x * b.z 
+   *     a.y * b.x   a.y * b.y   a.y * b.z 
+   *     a.z * b.x   a.z * b.y   a.z * b.z 
+   * @param a  left vector
+   * @param b  right vector
+   */
   public TDMatrix( TDVector a, TDVector b )
   {
     x = b.times(a.x);
@@ -46,6 +62,9 @@ public class TDMatrix
     z = b.times(a.z);
   }
 
+  /** copy cstr
+   * @param a  matrix
+   */
   public TDMatrix( TDMatrix a )
   {
     x = new TDVector( a.x );
@@ -53,6 +72,8 @@ public class TDMatrix
     z = new TDVector( a.z );
   }
 
+  /** @return te maximum absolute value of the matrix entries
+   */
   public float maxAbsValue()
   {
     double mx = x.maxAbsValue();
@@ -62,6 +83,9 @@ public class TDMatrix
                                : ( ( my > mz )? my : mz ) );
   }
 
+  /** add another matrix to this one
+   * @param b  the other matrix
+   */
   public void plusEqual( TDMatrix b )
   {
     x.plusEqual( b.x );
@@ -69,16 +93,25 @@ public class TDMatrix
     z.plusEqual( b.z );
   }
 
+  /** @return the sum of this matrix and another matrix
+   * @param b  the other matrix
+   */
   public TDMatrix plus( TDMatrix b )
   {
     return new TDMatrix( x.plus(b.x), y.plus(b.y), z.plus(b.z) );
   }
 
+  /** @return the difference of this matrix and another matrix
+   * @param b  the other matrix
+   */
   public TDMatrix minus( TDMatrix b )
   {
     return new TDMatrix( x.minus(b.x), y.minus(b.y), z.minus(b.z) );
   }
 
+  /** multiply this matrix by a scalar
+   * @param b   scalar value
+   */
   public void timesEqual( float b )
   {
     x.timesEqual( b );
@@ -86,28 +119,52 @@ public class TDMatrix
     z.timesEqual( b );
   }
 
+  /** @return the matrix obtained multiplying this matrix with a scalar value
+   * @param b   scalar value
+   */
   public TDMatrix timesF( float b )
   {
     return new TDMatrix( x.times(b), y.times(b), z.times(b) );
   }
 
+  /** return the vector ovtaimen by multiplying this matrix with a vector
+   * @param b  vector
+   * @note the result is
+   *     -- X --     b.x
+   *     -- Y --  *  b.y  = ( X * b,  Y * b,  Z * b )
+   *     -- Z --     b.z
+   */
   public TDVector timesV( TDVector b )
   {
     return new TDVector( x.dot(b), y.dot(b), z.dot(b) );
   }
 
-  // multiplication with the transposed: this * B^t
+  /** @return the multiplication with the transposed: this * B^t
+   * @param b  the other matrix
+   * @note return the matrix
+   *    X * b.X     X * b.Y     X * b.Z        -- b * X --
+   *    Y * b.X     Y * b.Y     Y * b.Z   =    -- b * Y --
+   *    Z * b.X     Z * b.Y     Z * b.Z        -- b * Z --
+   */
   public TDMatrix timesT( TDMatrix b )
   {
     return new TDMatrix( b.timesV(x), b.timesV(y), b.timesV(z) );
   }
 
+  /** @return the multiplication with another matrix: this * B
+   * @param b  the other matrix
+   * @note return the matrix
+   *    X * bt.X     X * bt.Y     X * bt.Z        -- bt * X --
+   *    Y * bt.X     Y * bt.Y     Y * bt.Z   =    -- bt * Y --
+   *    Z * bt.X     Z * bt.Y     Z * bt.Z        -- bt * Z --
+   */
   public TDMatrix timesM( TDMatrix b )
   {
     return this.timesT( b.Transposed() );
   }
 
-  // inverse of the transposed: (this^t)^-1
+  /** @return inverse of the transposed: (this^t)^-1
+   */
   public TDMatrix InverseT()
   {
     TDMatrix ad = new TDMatrix( y.cross(z), z.cross(x), x.cross(y) );
@@ -116,13 +173,20 @@ public class TDMatrix
     return ad;
   }
 
-  // inverse 
+  /** @return the inverse matrix
+   */
   public TDMatrix InverseM()
   {
     TDMatrix at = this.Transposed();
     return at.InverseT();
   }
 
+  /** @return the transposed matrix
+   * @note the result is 
+   *             |   |   |
+   *             X   Y   Z
+   *             |   |   |
+   */
   public TDMatrix Transposed()
   {
     TDMatrix ret = new TDMatrix();
@@ -138,6 +202,9 @@ public class TDMatrix
     return ret;
   }
 
+  /** @returns the maximum difference of elemnts between this matrix and another one
+   * @param b  the other matrix
+   */
   public float MaxDiff( TDMatrix b )
   {
     float dx = x.MaxDiff( b.x );

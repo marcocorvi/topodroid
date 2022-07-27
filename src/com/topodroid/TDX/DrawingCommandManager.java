@@ -521,7 +521,7 @@ public class DrawingCommandManager
 
   // void debug()
   // {
-  //   TDLog.v("CMD Manager grid " + mGridStack1.toArray().length + " " 
+  //   // TDLog.v("CMD Manager grid " + mGridStack1.toArray().length + " " 
   //                                   + mGridStack10.toArray().length + " " 
   //                                   + mGridStack100.toArray().length + " legs "
   //                                   + mLegsStack.toArray().length + " "
@@ -627,7 +627,7 @@ public class DrawingCommandManager
     synchronized( TDPath.mShotsLock ) {
       mLegsStack   = mTmpLegsStack;
       mSplaysStack = mTmpSplaysStack;
-      TDLog.v("commit refs: legs " + mLegsStack.size() + " splays " + mSplaysStack.size() );
+      // TDLog.v("commit refs: legs " + mLegsStack.size() + " splays " + mSplaysStack.size() );
     }
     synchronized( TDPath.mStationsLock ) { 
       mStations = mTmpStations;
@@ -833,7 +833,7 @@ public class DrawingCommandManager
     //     if ( bucket.intersects( mBBox ) ) { ++ cnt; pts += bucket.size(); }
     //   }
     //   pts /= cnt;
-    //   TDLog.v("CMD visible buckets " + cnt + " avg pts/bucket " + pts );
+    //   // TDLog.v("CMD visible buckets " + cnt + " avg pts/bucket " + pts );
     // }
   }
 

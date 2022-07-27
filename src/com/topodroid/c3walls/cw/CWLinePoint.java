@@ -62,7 +62,7 @@ public class CWLinePoint extends Vector3D
   // void dump( PrintStream out )
   // {
   //   CWTriangle t = mSide.otherTriangle( mTri );
-  //   TDLog.v("CW LP " + mTri.mCnt + "/" + mSide.mCnt + "/" + t.mCnt );
+  //   // TDLog.v("CW LP " + mTri.mCnt + "/" + mSide.mCnt + "/" + t.mCnt );
   // }
 
   public void writeLinePoint( PrintWriter out )

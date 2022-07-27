@@ -133,7 +133,7 @@ public class TdmConfigActivity extends Activity
     Bundle extras = getIntent().getExtras();
     if ( extras != null ) {
       String path = extras.getString( TDRequest.TDCONFIG_PATH );
-      TDLog.v("TDM config " + path );
+      // TDLog.v("TDM config " + path );
       if ( path != null ) {
         mTdmConfig = new TdmConfig( path, false ); // false: no save 
         if ( mTdmConfig != null ) {
@@ -150,7 +150,7 @@ public class TdmConfigActivity extends Activity
     if ( mTdmConfig == null ) {
       doFinish( TDRequest.RESULT_TDCONFIG_NONE );
     } else {
-      TDLog.v( "TdmConfig " + mTdmConfig.toString() );
+      // TDLog.v( "TdmConfig " + mTdmConfig.toString() );
       setContentView(R.layout.tdconfig_activity);
       // getWindow().setLayout( LayoutParams.MATCH_PARENT, LayoutParams.WRAP_CONTENT );
 
@@ -189,7 +189,7 @@ public class TdmConfigActivity extends Activity
   protected void onPause()
   {
     super.onPause();
-    TDLog.v( "TdmConfig activity on pause");
+    // TDLog.v( "TdmConfig activity on pause");
     if ( mTdmConfig != null ) mTdmConfig.writeTdmConfig( false );
   }
 
@@ -372,7 +372,7 @@ public class TdmConfigActivity extends Activity
   {
     Intent intent = new Intent();
     if ( mTdmConfig != null ) {
-      TDLog.v("TDM config finish with path " + mTdmConfig.getFilepath() );
+      // TDLog.v("TDM config finish with path " + mTdmConfig.getFilepath() );
       intent.putExtra( TDRequest.TDCONFIG_PATH, mTdmConfig.getFilepath() );
     } else {
       TDLog.Error("TDM config finish with no path" );
@@ -569,7 +569,7 @@ public class TdmConfigActivity extends Activity
         if ( result == Activity.RESULT_OK ) {
           // int index = intent.getIntExtra( "exporttype", -1 );
           Uri uri = intent.getData();
-          TDLog.v( "Export: index " + mExportIndex + " uri " + uri.toString() );
+          // TDLog.v( "Export: index " + mExportIndex + " uri " + uri.toString() );
           doRealExport( uri );
         }
     }

@@ -273,7 +273,7 @@ public class DEMsurface
     // for ( int j=0; j<mNr2; ++j ) {
     //   StringBuilder sb = new StringBuilder();
     //   for ( int i=0; i<mNr1; ++i ) { sb.append( " " + Float.toString( mZ[j*mNr1+i] ) ); }
-    //   TDLog.v("SURFACE " + sb.toString() );
+    //   // TDLog.v("SURFACE " + sb.toString() );
     // }
   }
 

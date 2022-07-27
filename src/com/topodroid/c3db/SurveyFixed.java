@@ -25,10 +25,10 @@ public class SurveyFixed
   public double mCsLatitude;
   public double mCsAltitude;
 
-  public void log()
-  { 
-    TDLog.v("fix " + station + " " + mLongitude + " " + mLatitude + " <" + ((mCsName != null)? mCsName : "null" ) + ">" );
-  }
+  // public void log()
+  // { 
+  //   // TDLog.v("fix " + station + " " + mLongitude + " " + mLatitude + " <" + ((mCsName != null)? mCsName : "null" ) + ">" );
+  // }
 
   public SurveyFixed( String name )
   {

@@ -625,7 +625,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   // @Override
   // public int getCount() { 
-  //   TDLog.v( "get count " + mItems.size() );
+  //   // TDLog.v( "get count " + mItems.size() );
   //   return mItems.size(); 
   // }
 

@@ -97,7 +97,7 @@ public class TDPrefHelper
   // unused
   // public static void update( String[] name, String[] value )
   // {
-  //   TDLog.v( "TDPrefHelper set pref " + name[0] + " " + value[0] + " ... ");
+  //   // TDLog.v( "TDPrefHelper set pref " + name[0] + " " + value[0] + " ... ");
   //   SharedPreferences.Editor editor = TDInstance.getPrefs().edit();
   //   for ( int k = 0; k < name.length; ++k ) {
   //     editor.putString( name[k], value[k] );

@@ -153,13 +153,10 @@ public class Device
     mTail = 0;
   }
 
-  /*
-  public void dump()
-  {
-    TDLog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName 
-      + " nick " + ((mNickname == null)? "null" : mNickname ) );
-  }
-  */
+  // public void dump( )
+  // {
+  //   tdlog.v( "Device addr " + mAddress + " model " + mModel + " type " + mType + " name " + mName + " nick " + ((mNickname == null)? "null" : mNickname ) );
+  // }
 
   private String fromName( String name )
   {

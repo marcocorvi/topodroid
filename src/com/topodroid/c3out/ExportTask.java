@@ -70,7 +70,7 @@ public class ExportTask extends AsyncTask< Void, Void, Boolean >
     String pathname = TDPath.getC3exportPath( mExport.mName ); // .../TDX/TopoDroid/c3export/name
     TDFile.makeTopoDroidDir( pathname );
 
-    TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType + " pathname " + pathname );
+    // TDLog.v("export task. name " + mExport.mName + " type " + mExport.mType + " pathname " + pathname );
 
     ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
     if ( pfd == null ) return false;

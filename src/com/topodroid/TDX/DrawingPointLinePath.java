@@ -140,13 +140,13 @@ public class DrawingPointLinePath extends DrawingPath
   @Override
   float getY() { return (top+bottom)/2; }
 
-  // void dump() // DEBUG
+  // void dump( ) // DEBUG
   // {
   //   int k=0;
   //   for (LinePoint l1 = mFirst; l1 != null; l1=l1.mNext ) {
   //     // if ( k < 2 || k > mSize-2 ) 
   //     {
-  //       TDLog.v("PATH " + k + ": " + l1.x + " " + l1.y );
+  //       tdlog.v("PATH " + k + ": " + l1.x + " " + l1.y );
   //     }
   //     ++k;
   //   }

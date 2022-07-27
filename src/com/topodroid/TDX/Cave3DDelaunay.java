@@ -304,34 +304,34 @@ class Cave3DDelaunay
   //   for ( DelaunaySide s0 : mSide ) {
   //     DelaunaySide sh = s0.otherHalf;
   //     if ( sh == null ) {
-  //       TDLog.v("MISSING opposite sides of " + s0.p1.index + "-" + s0.p2.index );
+  //       // TDLog.v("MISSING opposite sides of " + s0.p1.index + "-" + s0.p2.index );
   //       return false; 
   //     }
   //     if ( s0.p1 != sh.p2 || s0.p2 != sh.p1 ) {
-  //       TDLog.v("BAD opposite sides S0 " + s0.p1.index + "-" + s0.p2.index + " SH " + sh.p1.index + "-" + sh.p2.index );
+  //       // TDLog.v("BAD opposite sides S0 " + s0.p1.index + "-" + s0.p2.index + " SH " + sh.p1.index + "-" + sh.p2.index );
   //       return false; 
   //     }
   //     DelaunayTriangle t0 = s0.t;
   //     if ( t0 == null ) {
-  //       TDLog.v("MISSING triangle" );
+  //       // TDLog.v("MISSING triangle" );
   //       return false; 
   //     }
   //     if ( t0.s1 != s0 && t0.s2 != s0 && t0.s3 != s0 ) {
-  //       TDLog.v("Bad triangle" );
+  //       // TDLog.v("Bad triangle" );
   //       return false; 
   //     }
   //   }
   //   for ( DelaunayTriangle t : mTri ) {
   //     if ( t.s1.p2 != t.s2.p1 ) {
-  //       TDLog.v("MISMATCH 1-2 " + t.s1.p2.index + " " + t.s2.p1.index );
+  //       // TDLog.v("MISMATCH 1-2 " + t.s1.p2.index + " " + t.s2.p1.index );
   //       return false;
   //     }
   //     if ( t.s2.p2 != t.s3.p1 ) {
-  //       TDLog.v("MISMATCH 2-3 " + t.s2.p2.index + " " + t.s3.p1.index );
+  //       // TDLog.v("MISMATCH 2-3 " + t.s2.p2.index + " " + t.s3.p1.index );
   //       return false;
   //     }
   //     if ( t.s3.p2 != t.s1.p1 ) {
-  //       TDLog.v("MISMATCH 3-1 " + t.s3.p2.index + " " + t.s1.p1.index );
+  //       // TDLog.v("MISMATCH 3-1 " + t.s3.p2.index + " " + t.s1.p1.index );
   //       return false;
   //     }
   //   }

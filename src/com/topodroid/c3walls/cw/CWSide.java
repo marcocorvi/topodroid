@@ -139,9 +139,7 @@ public class CWSide
 
   // void dump( )
   // {
-  //   TDLog.v( "CW Side " + mCnt + " P " + p1.mCnt + "-" + p2.mCnt 
-  //               + " T " + ((t1 == null)? "-" : t1.mCnt) + " " + ((t2 == null)? "-" : t2.mCnt)
-  //   );
+  //   // TDLog.v( "CW Side " + mCnt + " P " + p1.mCnt + "-" + p2.mCnt + " T " + ((t1 == null)? "-" : t1.mCnt) + " " + ((t2 == null)? "-" : t2.mCnt) );
   // }
 
   public void writeSide( PrintWriter out )

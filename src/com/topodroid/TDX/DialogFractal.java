@@ -90,7 +90,7 @@ class DialogFractal extends MyDialog
 
   void showResult( FractalResult result )
   {
-    TDLog.v("show fractal result");
+    // TDLog.v("show fractal result");
     Bitmap bitmap = result.makeImage();
     mImage.setImageBitmap( bitmap );
     mTVcount.setText( result.countsString() );
@@ -123,7 +123,7 @@ class DialogFractal extends MyDialog
     // } else if ( v.getId() == R.id.button_cancel ) {
     //   // nothing
     }
-    TDLog.v("dismiss fractal dialog");
+    // TDLog.v("dismiss fractal dialog");
     dismiss();
   }
 

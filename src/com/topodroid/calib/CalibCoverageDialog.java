@@ -76,7 +76,7 @@ public class CalibCoverageDialog extends MyDialog
     // mDeviations = mCoverage.evalDeviations( list );
     // for ( int k= 180; k>=0; --k ) {
     //   if ( mDeviations[k] > 0 ) {
-    //     TDLog.v("COVER" + k + " " + mDeviations[k] );
+    //     // TDLog.v("COVER" + k + " " + mDeviations[k] );
     //   }
     // }
 
@@ -201,10 +201,10 @@ public class CalibCoverageDialog extends MyDialog
           float d1 = c1 - i11;
           float d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //        TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //   // TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //        TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //   // TDLog.v("COVER OOB north " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           float v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
           float v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;
@@ -229,10 +229,10 @@ public class CalibCoverageDialog extends MyDialog
           d1 = c1 - i11;
           d2 = c2 - i21;
 	  // if ( j1off+i11 >= t_dim || j1off+i12 >= t_dim ) {
-	  //         TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //   // TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
 	  // if ( j2off+i21 >= t_dim || j2off+i22 >= t_dim ) {
-	  //         TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
+	  //   // TDLog.v("COVER OOB south " + i0 + " " + j0 + " J " + j1 + " " + j2 + " I11 " + i11 + " " + i21 );
 	  // }
           v1 = angles[j1off+i11].getValue() * (1-d1) + angles[j1off+i12].getValue() * d1;
           v2 = angles[j2off+i21].getValue() * (1-d2) + angles[j2off+i22].getValue() * d2;

@@ -269,7 +269,7 @@ public class SensorActivity extends Activity
     public void onAccuracyChanged( Sensor sensor, int accuracy )
     {
       // TODO see TimerTask onAccuracyChanged
-      TDLog.v( "sensor type " + sensor.getType() + " accuracy changed " + accuracy );
+      // TDLog.v( "sensor type " + sensor.getType() + " accuracy changed " + accuracy );
       mFirst = true;
       mAlpha = 0.8f;
     }

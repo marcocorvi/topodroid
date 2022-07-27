@@ -54,7 +54,7 @@ public class PTMapping
       PTFile.writeInt( fs, _scale );
     }
 
-    // void print() { TDLog.v( "PT mapping: scale " + _scale ); _origin.print(); }
+    // void print( ) { TDLog.v( "PT mapping: scale " + _scale ); _origin.print(); }
 
     void clear()
     {

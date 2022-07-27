@@ -92,9 +92,12 @@ class CurrentStationDialog extends MyDialog
     doInit( landscape );
   }
   
+  /** initilaize the dialog screen presentation
+   * @param landscape  wheter the app is in landscape mode
+   */
   public void doInit( boolean landscape )
   {
-    TDLog.v("Do INIT landcsape " + landscape );
+    // TDLog.v("Do INIT landcsape " + landscape );
     if ( landscape ) {
       initLayout( R.layout.current_station_dialog_landscape, R.string.title_current_station );
     } else {
@@ -179,7 +182,7 @@ class CurrentStationDialog extends MyDialog
     int pos = name.indexOf(' ');
     if ( pos > 0 ) name = name.substring(0,pos);
     name = name.trim();
-    TDLog.v( "STATION <" + name + ">" );
+    // TDLog.v( "STATION <" + name + ">" );
     setNameAndComment( name );
   }
 

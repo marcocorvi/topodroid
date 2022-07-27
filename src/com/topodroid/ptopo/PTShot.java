@@ -188,14 +188,14 @@ public class PTShot
       }
     }
 
-    // void print()
+    // void print( )
     // {
     //   float azimuth = (_azimuth * 360.0f) / (1<<16);
     //   float inclination = (_inclination * 360.0f) / (1<<16);
     //   float roll = (((int)_roll) * 360.0f) / (1<<8);
 
     //   if ( inclination > 180.0f ) inclination -= 360.0f;
-    //   TDLog.v( "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
+    //   tdlog.v( "shot: D " + _dist + " A " + azimuth + " I " + inclination + " R " + roll + " trip " + _trip_index + " flags " + _flags );
     //   _from.print();
     //   _to.print();
     //   if ( (_flags & (byte)0x02) != 0 ) _comment.print();

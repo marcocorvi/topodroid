@@ -83,9 +83,9 @@ public class PTDrawing
       PTFile.writeByte( fs, id );
     }
 
-    // void print()
+    // void print( )
     // {
-    //   // TDLog.v( "PT drawing: size " + _elements.size() );
+    //   tdlog.v( "PT drawing: size " + _elements.size() );
     //   _mapping.print();
     //   for ( PTElement el : _elements ) el.print();
     // }

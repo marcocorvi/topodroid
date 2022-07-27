@@ -175,7 +175,7 @@ public class GlNames extends GlShape
   // FIXME INCREMENTAL BLUETOOTH_COORDS
   // void addBluetoothName( Vector3D pos, String name, String fullname )
   // {
-  //   TDLog.v("NAMES add BT name " + name );
+  //   // TDLog.v("NAMES add BT name " + name );
   //   Vector3D p = ParserBluetooth.bluetoothToVector( pos );
   //   addName( p, name, fullname );
   // }
@@ -212,7 +212,7 @@ public class GlNames extends GlShape
       if ( v.y < ymin ) { ymin = v.y; } else if ( v.y > ymax ) { ymax = v.y; }
       if ( v.z < zmin ) { zmin = v.z; } else if ( v.z > zmax ) { zmax = v.z; }
     }
-    TDLog.v("size " + mNames.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
+    // TDLog.v("size " + mNames.size() + " X " + xmin + " " + xmax + " Y " + ymin + " " + ymax + " Z " + zmin + " " + zmax );
   }
   */
   double xmin, xmax, ymin, ymax, zmin, zmax;

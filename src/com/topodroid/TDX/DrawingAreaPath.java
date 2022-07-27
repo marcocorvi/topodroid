@@ -77,7 +77,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
-    //   TDLog.v("PAINT area (1) not in lib " + mAreaType + " out of " + BrushManager.mAreaLib.size() );
+    //   // TDLog.v("PAINT area (1) not in lib " + mAreaType + " out of " + BrushManager.mAreaLib.size() );
     }
     mOrientation = 0.0;
     if ( BrushManager.isAreaOrientable( mAreaType ) ) {
@@ -110,7 +110,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
     if ( BrushManager.hasArea( mAreaType ) ) {
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
-    //   TDLog.v("PAINT area (2) not in lib " + mAreaType );
+    //   // TDLog.v("PAINT area (2) not in lib " + mAreaType );
     }
     mLevel = BrushManager.getAreaLevel( type );
   }

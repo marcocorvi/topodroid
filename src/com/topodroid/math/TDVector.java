@@ -50,6 +50,7 @@ public class TDVector
   /** cstr a unit vector from bearing and clino (as used by the calibration class)
    * @param b   bearing [radians]
    * @param c   clino [radians]
+   * @note the vector is ( cos(c)*cos(b), cos(c)*sin(b), sin(c) );
    */
   public TDVector( float b, float c )
   {
@@ -70,6 +71,7 @@ public class TDVector
   }
 
   /** @return this vector cross (1,0,0)
+   * @note the result is ( 0, z, -y )
    */
   public TDVector crossX() { return new TDVector( 0, z, -y ); }
 
@@ -114,6 +116,11 @@ public class TDVector
   /** @return the vector right-hand turned around the X axis 
    * @param s   sine of the turn angle
    * @param c   cosine of the turn angle
+   * @note returns the multiplication of the matrix
+   *     1   0   0
+   *     0   c  -s
+   *     0   s   c
+   * and this vector
    */
   public TDVector TurnX( float s, float c )
   {

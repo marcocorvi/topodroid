@@ -297,7 +297,7 @@ public class DistoX310Protocol extends DistoXProtocol
   // public int uploadFirmware( String filepath )
   public int uploadFirmware( File fp )
   {
-    // TDLog.LogFile( "Firmware upload: protocol starts. file " + fp.getPath() );
+    // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
     TDLog.v( "Firmware upload: protocol starts. file " + fp.getPath() );
     byte[] buf = new byte[259];
     buf[0] = (byte)0x3b;
@@ -314,12 +314,12 @@ public class DistoX310Protocol extends DistoXProtocol
 
       try {
         for ( int addr = 0; /* addr < end_addr */; ++ addr ) {
-          TDLog.LogFile( "Firmware upload: addr " + addr + " count " + cnt );
+          TDLog.f( "Firmware upload: addr " + addr + " count " + cnt );
           // memset(buf+3, 0, 256)
           for (int k=0; k<256; ++k) buf[3+k] = (byte)0xff;
           int nr = dis.read( buf, 3, 256 );
           if ( nr <= 0 ) {
-            TDLog.LogFile( "Firmware upload: file read failure. Result " + nr );
+            TDLog.f( "Firmware upload: file read failure. Result " + nr );
             break;
           }
           cnt += nr;
@@ -336,28 +336,28 @@ public class DistoX310Protocol extends DistoXProtocol
 
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
             if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
-              TDLog.LogFile( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+              TDLog.f( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
             } else {
-              TDLog.LogFile( "Firmware upload: reply address ok");
+              TDLog.f( "Firmware upload: reply address ok");
             }
           } else {
-            TDLog.LogFile( "Firmware upload: skip address " + addr );
+            TDLog.f( "Firmware upload: skip address " + addr );
           }
         }
         fis.close();
       } catch ( EOFException e ) { // OK
-        TDLog.LogFile( "Firmware update: EOF " + e.getMessage() );
+        TDLog.f( "Firmware update: EOF " + e.getMessage() );
       } catch ( IOException e ) { 
-        TDLog.LogFile( "Firmware update: IO error " + e.getMessage() );
+        TDLog.f( "Firmware update: IO error " + e.getMessage() );
         ok = false;
       }
     } catch ( FileNotFoundException e ) {
-      TDLog.LogFile( "Firmware update: Not Found error " + e.getMessage() );
+      TDLog.f( "Firmware update: Not Found error " + e.getMessage() );
       return 0;
     }
-    TDLog.LogFile( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    TDLog.f( "Firmware update: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
 
@@ -365,7 +365,7 @@ public class DistoX310Protocol extends DistoXProtocol
   // public int dumpFirmware( String filepath )
   public int dumpFirmware( File fp )
   {
-    // TDLog.LogFile( "Proto Firmware dump: output filepath " + fp.getPath() );
+    // TDLog.f( "Proto Firmware dump: output filepath " + fp.getPath() );
     TDLog.v( "Proto Firmware dump: output filepath " + fp.getPath() );
     byte[] buf = new byte[256];
 
@@ -378,7 +378,7 @@ public class DistoX310Protocol extends DistoXProtocol
       DataOutputStream dos = new DataOutputStream( fos );
       try {
         for ( int addr = 0; ; ++ addr ) {
-        // TDLog.LogFile( "Firmware dump: addr " + addr + " count " + cnt );
+        // TDLog.f( "Firmware dump: addr " + addr + " count " + cnt );
           buf[0] = (byte)0x3a;
           buf[1] = (byte)( addr & 0xff );
           buf[2] = 0; // not necessary
@@ -391,11 +391,11 @@ public class DistoX310Protocol extends DistoXProtocol
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
           if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-            TDLog.LogFile( "Proto Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
+            TDLog.f( "Proto Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
             ok = false;
             break;
           // } else {
-          //   TDLog.LogFile( "Firmware dump: reply addr ok");
+          //   TDLog.f( "Firmware dump: reply addr ok");
           }
 
           mIn.readFully( buf, 0, 256 );
@@ -425,7 +425,7 @@ public class DistoX310Protocol extends DistoXProtocol
     } catch ( FileNotFoundException e ) {
       return 0;
     }
-    // TDLog.LogFile( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
+    // TDLog.f( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     TDLog.v( "Proto Firmware dump: result is " + (ok? "OK" : "FAIL") + " count " + cnt );
     return ( ok ? cnt : -cnt );
   }
@@ -451,10 +451,10 @@ public class DistoX310Protocol extends DistoXProtocol
 
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
       if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
-        TDLog.LogFile( "Firmware read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
+        TDLog.f( "Firmware read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
         // ok = false;
       } else {
-        TDLog.LogFile( "Firmware read block " + nr + ": ok");
+        TDLog.f( "Firmware read block " + nr + ": ok");
       }
 
       mIn.readFully( buf, 0, 256 );

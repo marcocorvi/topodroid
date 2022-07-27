@@ -73,9 +73,9 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
     File file = TDPath.getBinFile( mFilename );
     mLength = file.length(); // file must exists
     TDLog.v( "task upload file " + mFilename + " length " + mLength );
-    // TDLog.LogFile( "Firmware upload address " + TDInstance.deviceAddress() );
+    // TDLog.f( "Firmware upload address " + TDInstance.deviceAddress() );
     // if ( ! pathname.endsWith( TDPath.DIR_BIN ) ) {
-    //   TDLog.LogFile( "Firmware upload file does not end with \"bin\"");
+    //   TDLog.f( "Firmware upload file does not end with \"bin\"");
     //   return 0;
     // }
     // return mComm.uploadFirmware( TDInstance.deviceAddress(), pathname );
@@ -106,13 +106,13 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
   {
     int ret = res.intValue();
     if ( mMode == FIRMWARE_READ ) {
-      // TDLog.LogFile( "Firmware dump to " + mFilename + " result: " + ret );
+      // TDLog.f( "Firmware dump to " + mFilename + " result: " + ret );
       TDLog.v( "Task Firmware dump to " + mFilename + " result: " + ret );
       if ( ret > 0 ) { 
         TDToast.makeLong( String.format( TDInstance.getResources().getString(R.string.firmware_file_dumped), mFilename, ret ) );
       }
     } else if ( mMode == FIRMWARE_WRITE ) {
-      // TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + mLength );
+      // TDLog.f( "Firmware upload result: written " + ret + " bytes of " + mLength );
       TDLog.v( "Task Firmware upload result: written " + ret + " bytes of " + mLength );
       TDToast.makeLong( String.format( TDInstance.getResources().getString(R.string.firmware_file_uploaded), mFilename, ret, mLength ) );
     }

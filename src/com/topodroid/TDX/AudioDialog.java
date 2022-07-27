@@ -185,7 +185,7 @@ class AudioDialog extends MyDialog
             startPlay();
           }
         // } else {
-	//   TDLog.v( "audio play cannot play");
+	//   // TDLog.v( "audio play cannot play");
 	}
         return;
       } else if ( b == mBtnRec ) {
@@ -212,7 +212,7 @@ class AudioDialog extends MyDialog
             }
           }
 	// } else {
-	//   TDLog.v( "audio record cannot record");
+	//   // TDLog.v( "audio record cannot record");
         }
         return;
       }
@@ -231,7 +231,7 @@ class AudioDialog extends MyDialog
             return;
           }
         // } else {
-	//   TDLog.v( "audio confirm undefined");
+	//   // TDLog.v( "audio confirm undefined");
 	}
       } catch ( ClassCastException e ) { /* THIS IS OK */ }
     }

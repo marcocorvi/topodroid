@@ -81,7 +81,7 @@ class PTString
     }
   }
 
-  // void print() { TDLog.v( "PT string " + _str ); }
+  // void print( ) { TDLog.v( "PT string " + _str ); }
 
   void set( String val ) { _str = (val == null)? "" : val; }
 

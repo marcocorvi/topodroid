@@ -21,25 +21,37 @@ public class Point2D // extends PointF
   public float x;  // X coord
   public float y;  // Y coord
 
+  /** default cstr (0, 0)
+   */
   public Point2D( )
   {
     x = 0f;
     y = 0f;
   }
 
+  /** cstr
+   * @param x0   X
+   * @param y0   Y
+   */
   public Point2D( float x0, float y0 ) 
   {
     x = x0;
     y = y0;
   }
 
-  public Point2D( Point2D p ) // copy cstr.
+  /** copy cstr
+   * @param p  another point
+   */
+  public Point2D( Point2D p )
   { 
     x = p.x;
     y = p.y;
   }
 
-  public void set( Point2D p ) // copy assignment
+  /** copy assignment
+   * @param p  another point
+   */
+  public void set( Point2D p )
   {
     x = p.x;
     y = p.y;
@@ -47,23 +59,69 @@ public class Point2D // extends PointF
 
   // use PointF implementation
   public void set( float x0, float y0 ) { x = x0; y = y0; }
+
+  /** reverse (opposite) this point
+   */
   public void negate() { x = -x; y = -y; }
 
+  /** @return a new point obtained multiplying this with a scalar
+   * @param t   scalar value
+   */
   public Point2D times( float t ) { return new Point2D( x*t, y*t ); }             // this * t
 
+  /** @return a new point obtained dividing this by a scalar
+   * @param t   scalar value
+   */
   public Point2D divideBy( float t ) { return new Point2D( x/t, y/t ); }          // this / t
 
+  /** @return the addition of this point and another
+   * @param c  the other point
+   */
   public Point2D add( Point2D c )          { return new Point2D( x + c.x, y + c.y ); } // this + c
+
+  /** @return the addition of this point and another
+   * @param x0  the other point X value
+   * @param y0  the other point Y value
+   */
   public Point2D add( float x0, float y0 ) { return new Point2D( x + x0, y + y0 ); } // this + (x0,y0)
+
+  /** @return the addition of two points
+   * @param a   first point
+   * @param b   second point
+   */
   public void add2( Point2D a, Point2D b ) { x = a.x+b.x; y=a.y+b.y; }          // this = a + b
 
+  /** @return the difference between this point and another
+   * @param c  the other point
+   */
   public Point2D sub( Point2D c )          { return new Point2D( x - c.x, y - c.y ); } // this - c
+
+  /** @return the difference between this point and another
+   * @param x0  the other point X value
+   * @param y0  the other point Y value
+   */
   public Point2D sub( float x0, float y0 ) { return new Point2D( x - x0, y - y0 ); } // this - (x0,y0)
 
+  /** @return the scalar product with another point
+   * @param c  the other point
+   */
   public float dot( Point2D c )          { return x * c.x + y * c.y; }                   // this * c
+
+  /** @return the scalar product with another point
+   * @param x0  the other point X value
+   * @param y0  the other point Y value
+   */
   public float dot( float x0, float y0 ) { return x * x0 + y * y0; }                   // this * (x0,y0)
 
+  /** @return the cross product with another point
+   * @param c  the other point
+   */
   public float cross( Point2D c )          { return x * c.y - y * c.x; }                   // this ^ c
+
+  /** @return the cross product with another point
+   * @param x0  the other point X value
+   * @param y0  the other point Y value
+   */
   public float cross( float x0, float y0 ) { return x * y0 - y * x0; }                   // this ^ (x0,y0)
 
 
@@ -73,15 +131,22 @@ public class Point2D // extends PointF
   //   y += c.y;
   // }
 
-  // use PointF implementation (Euclidean length)
+  /** @return the Euclidean length of the point
+   * TODO use PointF implementation (Euclidean length)
+   */
   public float length() 
   { 
     float l2 = x*x + y*y;
     return ( l2 > 0 )? (float)Math.sqrt( l2 ) : 0;
   }
 
+  /** @return the squared Euclidean length of the point
+   */
   public float squareLength() { return x*x + y*y; }
 
+  /** @return the Eucidean distance betwwen this point and another
+   * @param p  the other point
+   */
   public float distance( Point2D p ) // { return distance( p.x, p.y ); }
   {
     float dx = x - p.x;
@@ -90,6 +155,10 @@ public class Point2D // extends PointF
     return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
+  /** @return the Eucidean distance betwwen this point and another
+   * @param x0  the other point X value
+   * @param y0  the other point Y value
+   */
   public float distance( float x0, float y0 )
   { 
     float dx = x - x0;
@@ -98,6 +167,8 @@ public class Point2D // extends PointF
     return ( d > 0 )? (float)Math.sqrt(d) : 0;
   }
 
+  /** normalize this point to unit length
+   */
   public void normalize()
   {
     float d = length();

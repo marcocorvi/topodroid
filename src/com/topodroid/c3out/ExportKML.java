@@ -106,7 +106,7 @@ public class ExportKML
 
     // TDLog.v( "KML export " + filename );
     if ( ! getGeolocalizedData( data, 0.0f, 1.0f ) ) { // FIXME declination 0.0f
-      TDLog.v( "KML no geolocalized station");
+      TDLog.Error( "KML no geolocalized station");
       return false;
     }
 
@@ -315,7 +315,7 @@ public class ExportKML
       osw.close();
       return true;
     } catch ( IOException e ) {
-      TDLog.v( "KML IO error " + e.getMessage() );
+      TDLog.Error( "KML IO error " + e.getMessage() );
       return false;
     }
   }
