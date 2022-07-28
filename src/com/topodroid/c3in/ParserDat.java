@@ -83,6 +83,11 @@ public class ParserDat extends TglParser
   private boolean readFileMak( InputStreamReader isr, String pathname )
                   throws ParserException
   {
+    if ( isr == null ) {
+      TDLog.Error("Parser Mak: null input stream reader");
+      return false;
+    }
+
     String dirname = "./";
     int i = pathname.lastIndexOf('/');
     if ( i > 0 ) dirname = pathname.substring(0, i+1);
@@ -150,6 +155,11 @@ public class ParserDat extends TglParser
   {
     ArrayList< Cave3DShot > temp_shots  = new ArrayList<>();
     ArrayList< Cave3DShot > temp_splays = new ArrayList<>();
+
+    if ( isr == null ) {
+      TDLog.Error("Parser Dat: null input stream reader");
+      return false;
+    }
 
     int linenr = 0;
     // TDLog.v( "DAT file <" + filename + "> station " + station );

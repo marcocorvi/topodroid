@@ -23,7 +23,7 @@ $BUILD_TOOLDIR/zipalign -f 4  bin/${APP_RELEASE}-unsigned.apk  bin/${APP_RELEASE
 # --cert cert.x509.pem
 #
 # --v4-signing-enabled <true | false | only> see https://developer.android.com/studio/command-line/apksigner
-$BUILD_TOOLDIR/apksigner sign --out ${APP_RELEASE}-keysigned.apk -ks ../../../keystore --ks-key-alias TopoDroid bin/${APP_RELEASE}-aligned.apk
+$BUILD_TOOLDIR/apksigner sign --out ${APP_RELEASE}-keysigned.apk -ks ../../../keystore  -ks-pass env:TOPODROID_PSWD --ks-key-alias TopoDroid bin/${APP_RELEASE}-aligned.apk
 # Keystore password for signer #1: 
 
 # --print-certs

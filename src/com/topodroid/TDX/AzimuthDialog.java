@@ -68,6 +68,13 @@ class AzimuthDialog extends MyDialog
   private SeekBar mSeekBar;
 
   // AzimuthDialog( Context context, ILister parent, float azimuth, MyTurnBitmap dial ) // FIXME_AZIMUTH_DIAL 2
+
+  /** cstr
+   * @param context  context
+   * @param parent   shot-lister parent (ShotWindow)
+   * @param azimuth  ???
+   * @param dial     ???
+   */
   AzimuthDialog( Context context, ILister parent, float azimuth, Bitmap dial ) // FIXME_AZIMUTH_DIAL 1
   {
     super(context, null, R.string.AzimuthDialog ); // null app
@@ -77,6 +84,10 @@ class AzimuthDialog extends MyDialog
     mBMdial = dial;
   }
 
+  /** @return the source bitmap CW rotated by an angle 
+   * @param azimuth   angle [degrees]
+   * @param source    bitmap
+   */
   static Bitmap getRotatedBitmap( float azimuth, Bitmap source )
   {
     Matrix m = new Matrix();
@@ -90,6 +101,8 @@ class AzimuthDialog extends MyDialog
     // Bitmap bm2 = Bitmap.createBitmap( mPxl, 96, 96, Bitmap.Config.ALPHA_8 );
   }
 
+  /** refresh the azimuth button
+   */
   private void updateView()
   {
     Bitmap bm2 = getRotatedBitmap( mAzimuth, mBMdial );
@@ -99,8 +112,12 @@ class AzimuthDialog extends MyDialog
     // TDandroid.setButtonBackground( mBTazimuth, new BitmapDrawable( mContext.getResources(), bm2 ) );
   }
 
+  /** refresh the editable text
+   */
   private void updateEditText() { mETazimuth.setText( String.format(Locale.US, "%d", (int)mAzimuth ) ); }
 
+  /** refresh the slider bar
+   */
   private void updateSeekBar() { mSeekBar.setProgress( ((int)mAzimuth + 180)%360 ); }
 
 // -------------------------------------------------------------------

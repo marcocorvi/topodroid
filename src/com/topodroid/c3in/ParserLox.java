@@ -18,7 +18,7 @@ import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DSurvey;
 import com.topodroid.TDX.DEMsurface;
 
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDMath;
 
 // import java.io.File;
@@ -65,6 +65,11 @@ public class ParserLox extends TglParser
   // @param name   name for error report
   private void readfile( DataInputStream dis ) throws ParserException
   {
+    if ( dis == null ) {
+      TDLog.Error("Parser Lox: null input stream");
+      throw new ParserException( "null LOX input", 0 );
+    }
+
     LoxFile lox = new LoxFile( dis, getName() );
     // Log.v("TopoGL-LOX", "file " + name );
 

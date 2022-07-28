@@ -353,6 +353,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
     <string name="bad_line">Rossz vonaltípus</string>
     <string name="bad_point">Rossz pont típus</string>
+    <!-- TODO string name="index_oob">Index out of bounds %1$d</string -->
 
     <string name="no_audio">Nincs hang felvétel</string>
     <string name="no_bt">Nincs bluetooth</string>

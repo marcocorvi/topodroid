@@ -123,6 +123,10 @@ public class ParserTrox extends TglParser
    */
   private boolean readFile( InputStreamReader isr ) throws ParserException
   {
+    if ( isr == null ) {
+      TDLog.Error("Parser Trox: null input stream reader");
+      throw new ParserException( "null TROX input", 0 );
+    }
     int linenr = 0;
     String mEntrance = null;
     String mCS = null;

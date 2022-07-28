@@ -349,6 +349,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="bad_cwd">Il nome di un progetto non deve avere directory</string>
     <string name="bad_line">Tipo linea errato</string>
     <string name="bad_point">Tipo punto errato</string>
+    <string name="index_oob">Indice fuori limiti %1$d</string>
 
     <string name="no_audio">No registrazione audio</string>
     <string name="no_bt">No Bluetooth</string>

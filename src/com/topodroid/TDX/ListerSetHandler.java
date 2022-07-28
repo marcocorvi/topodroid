@@ -73,7 +73,7 @@ class ListerSetHandler extends ListerHandler
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
         // TDLog.v("DATA " + "lister set handler msg blk id " + blk_id + " size " + mListers.size() );
-        if ( TDLog.isStreamFile() ) TDLog.f("LISTER SET " + Thread.currentThread().getId() + " handle msg blk id " + blk_id );
+        if ( TDLog.isStreamFile() ) TDLog.f("LISTER SET " + TDLog.threadId() + " handle: blk id " + blk_id );
         // TDUtil.slowDown( (int)(400 + Math.random() * 600) );
         for ( ILister lister : mListers ) lister.updateBlockList( blk_id );
         break;

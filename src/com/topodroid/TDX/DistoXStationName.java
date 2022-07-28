@@ -98,11 +98,11 @@ public class DistoXStationName
    */
   static String incrementName( String name, Set<String> set )
   {
-    String n = name;
+    // String n = name; // String is immutable - no need to make a copy
     do {
-      n = incrementName( n ); 
-    } while ( set.contains( n ) );
-    return n;
+      name = incrementName( name ); 
+    } while ( set.contains( name ) );
+    return name;
   }
 
   /** @return the increment of a string
@@ -112,33 +112,32 @@ public class DistoXStationName
    */
   static String incrementName( String name, List< DBlock > list )
   {
-    String n = name;
+    // String n = name; // String is immutable - no need to make a copy
     do {
-      n = incrementName( n ); 
-    } while ( listHasName( list, n ) );
-    return n;
+      name = incrementName( name ); 
+    } while ( listHasName( list, name ) );
+    return name;
   }
 
-  /** @return the increment of a name string
-   * @param name   name to increment
-   * @param sts    values to skip
-   */
-  static String incrementName( String name, ArrayList< String > sts )
-  {
-    String n = name;
-    do {
-      n = incrementName( n ); 
-    } while ( orderContains( sts, n ) );
-    return n;
-  }
+  // /** @return the increment of a name string (apparently unused)
+  //  * @param name   name to increment
+  //  * @param sts    values to skip
+  //  */
+  // static String incrementName( String name, ArrayList< String > sts )
+  // {
+  //   // String n = name; // String is immutable - no need to make a copy
+  //   do {
+  //     name = incrementName( name ); 
+  //   } while ( orderContains( sts, name ) );
+  //   return name;
+  // }
 
   /** @return the increment of a string
    * @param name   string to increment
    */
   static String incrementName( String name )
   {
-    // if name is numeric
-    // TDLog.v( "Station name: incrementing " + name );
+    // TDLog.v( "NAME: incrementing <" + name + ">" );
 
     if ( name != null /* && name.length() > 0 */ ) {
       int len = name.length();
@@ -147,12 +146,12 @@ public class DistoXStationName
         int k = Character.getNumericValue( ch );
         if ( k >= 10 && k < 35 ) {
           k -= 9; // - 10 + 1
-          // TDLog.Log( TDLog.LOG_NAME, "not numeric " + k );
+          // TDLog.v( "NAME not numeric " + k );
           return name.substring( 0, len - 1 ) + ( Character.isLowerCase( ch )? lc[k] : uc[k] );
         } else if ( k >= 0 && k < 10 ) {
           int n = 0;
           int s = 1;
-          // TDLog.Log( TDLog.LOG_NAME, "name >" + name + "< n " + n );
+          // TDLog.v( "NAME numeric " + k );
           int digits = 0;
           int leading = -1;
           while ( len > 0 ) {
@@ -163,8 +162,9 @@ public class DistoXStationName
             s *= 10;
             ++digits;
             leading = k;
-            // TDLog.Log( TDLog.LOG_NAME, "k " + k + " n " + n + " len " + len);
+            // TDLog.v( "k " + k + " n " + n + " len " + len );
           }
+          // TDLog.v( "final k " + k + " n " + n + " len " + len );
           if ( len > 0 ) {
             if ( leading == 0 ) {
               String fmt = String.format( Locale.US, "%%0%dd", digits );
@@ -246,87 +246,87 @@ public class DistoXStationName
     return ret;
   }
 
-  /** check if the ordered list of names contains a name
-   * @param a   array (list) of names
-   * @param s   station name
-   * @return true if the station name is in the list
-   */
-  static private boolean orderContains( ArrayList< String > a, String s )
-  {
-    int n1 = 0;
-    int n2 = a.size();
-    if ( n2 == 0 ) {
-      return false;
-    }
-    int cmp = s.compareTo( a.get(n1) );
-    if ( cmp == 0 ) {
-      return true;
-    } else if ( cmp < 0 ) {
-      return false;
-    }
-    n2 --;
-    cmp = s.compareTo( a.get(n2) );
-    if ( cmp == 0 ) {
-      return true;
-    } else if ( cmp > 0 ) {
-      return false;
-    }
-    // here a[n1] < s < a[n2]
-    while ( n1+1 < n2 ) {
-      int n0 = (n1+n2)/2;
-      cmp = s.compareTo( a.get(n0) );
-      if ( cmp == 0 ) {
-        return true;
-      } else if ( cmp < 0 ) {
-        n2 = n0;
-      } else /* if ( cmp > 0 ) */ {
-        n1 = n0;
-      }
-    }
-    return false;
-  }
+  // /** check if the ordered list of names contains a name (apparently unused)
+  //  * @param a   array (list) of names
+  //  * @param s   station name
+  //  * @return true if the station name is in the list
+  //  */
+  // static private boolean orderContains( ArrayList< String > a, String s )
+  // {
+  //   int n1 = 0;
+  //   int n2 = a.size();
+  //   if ( n2 == 0 ) {
+  //     return false;
+  //   }
+  //   int cmp = s.compareTo( a.get(n1) );
+  //   if ( cmp == 0 ) {
+  //     return true;
+  //   } else if ( cmp < 0 ) {
+  //     return false;
+  //   }
+  //   n2 --;
+  //   cmp = s.compareTo( a.get(n2) );
+  //   if ( cmp == 0 ) {
+  //     return true;
+  //   } else if ( cmp > 0 ) {
+  //     return false;
+  //   }
+  //   // here a[n1] < s < a[n2]
+  //   while ( n1+1 < n2 ) {
+  //     int n0 = (n1+n2)/2;
+  //     cmp = s.compareTo( a.get(n0) );
+  //     if ( cmp == 0 ) {
+  //       return true;
+  //     } else if ( cmp < 0 ) {
+  //       n2 = n0;
+  //     } else /* if ( cmp > 0 ) */ {
+  //       n1 = n0;
+  //     }
+  //   }
+  //   return false;
+  // }
 
-  /** insert a name in the ordered list of names
-   * @param a   array (list) of names
-   * @param s   station name
-   */
-  static void orderInsert( ArrayList< String > a, String s )
-  {
-    int n1 = 0;
-    int n2 = a.size();
-    if ( n2 == 0 ) {
-      a.add( s );
-      return;
-    }
-    int cmp = s.compareTo( a.get(n1) );
-    if ( cmp == 0 ) {
-      return;
-    } else if ( cmp < 0 ) {
-      a.add(0, s); // insert at head
-      return;
-    }
-    n2 --;
-    cmp = s.compareTo( a.get(n2) );
-    if ( cmp == 0 ) {
-      return;
-    } else if ( cmp > 0 ) {
-      a.add( s ); // add at end
-      return;
-    }
-    // here a[n1] < s < a[n2]
-    while ( n1+1 < n2 ) {
-      int n0 = (n1+n2)/2;
-      cmp = s.compareTo( a.get(n0) );
-      if ( cmp == 0 ) {
-        return;
-      } else if ( cmp < 0 ) {
-        n2 = n0;
-      } else /* if ( cmp > 0 ) */ {
-        n1 = n0;
-      }
-    }
-    a.add( n2, s ); // add s after a[n1] at pos n2
-  }
+  // /** insert a name in the ordered list of names (apparently unused)
+  //  * @param a   array (list) of names
+  //  * @param s   station name
+  //  */
+  // static void orderInsert( ArrayList< String > a, String s )
+  // {
+  //   int n1 = 0;
+  //   int n2 = a.size();
+  //   if ( n2 == 0 ) {
+  //     a.add( s );
+  //     return;
+  //   }
+  //   int cmp = s.compareTo( a.get(n1) );
+  //   if ( cmp == 0 ) {
+  //     return;
+  //   } else if ( cmp < 0 ) {
+  //     a.add(0, s); // insert at head
+  //     return;
+  //   }
+  //   n2 --;
+  //   cmp = s.compareTo( a.get(n2) );
+  //   if ( cmp == 0 ) {
+  //     return;
+  //   } else if ( cmp > 0 ) {
+  //     a.add( s ); // add at end
+  //     return;
+  //   }
+  //   // here a[n1] < s < a[n2]
+  //   while ( n1+1 < n2 ) {
+  //     int n0 = (n1+n2)/2;
+  //     cmp = s.compareTo( a.get(n0) );
+  //     if ( cmp == 0 ) {
+  //       return;
+  //     } else if ( cmp < 0 ) {
+  //       n2 = n0;
+  //     } else /* if ( cmp > 0 ) */ {
+  //       n1 = n0;
+  //     }
+  //   }
+  //   a.add( n2, s ); // add s after a[n1] at pos n2
+  // }
 
   // DEBUG_NAMES
   // @return true if there is jump between FROM and TO

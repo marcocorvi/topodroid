@@ -50,7 +50,7 @@ public class ListerHandler extends Handler
         break;
       case Lister.LIST_UPDATE:
         long blk_id = bundle.getLong( Lister.BLOCK_ID );
-        if ( TDLog.isStreamFile() ) TDLog.f("LISTER " + Thread.currentThread().getId() + " lister " + this.toString() + " msg blk id " + blk_id );
+        if ( TDLog.isStreamFile() ) TDLog.f("LISTER " + TDLog.threadId() + " lister " + this.toString() + " blk id " + blk_id );
         mLister.updateBlockList( blk_id );
         break;
       case Lister.LIST_REF_AZIMUTH:

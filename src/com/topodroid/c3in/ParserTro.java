@@ -109,6 +109,11 @@ public class ParserTro extends TglParser
    */
   private boolean readFile( InputStreamReader isr ) throws ParserException
   {
+    if ( isr == null ) {
+      TDLog.Error("Parser Tro: null input stream reader");
+      throw new ParserException( "null TRO input", 0 );
+    }
+
     int linenr = 0;
     String entrance = null;
     String coords   = null;

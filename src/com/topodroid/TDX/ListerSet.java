@@ -58,7 +58,7 @@ class ListerSet implements ILister
    */
   public void updateBlockList( long blk_id ) 
   {
-    if ( TDLog.isStreamFile() ) TDLog.f("LISTER SET " + Thread.currentThread().getId() + " update block list blk id " + blk_id );
+    if ( TDLog.isStreamFile() ) TDLog.f("LISTER SET " + TDLog.threadId() + " update block list: blk id " + blk_id );
     for ( ILister lister : mLister ) lister.updateBlockList( blk_id );
   }
 

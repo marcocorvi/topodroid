@@ -46,11 +46,16 @@ public class TDLog
 
   static public void setLogStream( int log_stream )
   {
+    Log.v( TAG, "LOG settong stream " + log_stream );
     if ( mLogStream != log_stream ) {
       mLogStream = log_stream;
       if ( mLog == null ) setLogTarget();
     }
   }
+
+  /** @return the thread ID string ("T-" followed by the thread id)
+   */
+  static public String threadId() { return "T-" + Thread.currentThread().getId(); }
 
   static public boolean isStreamFile() { return mLogStream == LOG_FILE; }
 
@@ -266,6 +271,7 @@ public class TDLog
     if ( mLog == null ) {
       try {
         File log_file = TDFile.getLogFile();
+        Log.v( TAG, "LOG on file " + log_file.getPath() );
         mLogFile = new FileWriter( log_file, mLogAppend ); // true = append
         mLog = new PrintWriter( mLogFile, true ); // true = auto-flush
         mLog.format( "TopoDroid version %s\n", TDVersion.string() );

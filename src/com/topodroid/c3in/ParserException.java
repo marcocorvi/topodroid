@@ -16,12 +16,18 @@ public class ParserException extends Exception
   String filename;
   int linenr;
 
+  /** cstr
+   * @param name   message (usually filename)
+   * @param nr     line number
+   */
   public ParserException( String name, int nr ) 
   {
     filename = name;
     linenr   = nr;
   }
 
+  /** @return string presentation
+   */
   public String msg() { return filename + ":" + linenr; }
 
 }

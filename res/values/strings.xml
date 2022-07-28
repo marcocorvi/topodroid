@@ -359,6 +359,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="bad_cwd">Project name cannot be path</string>
     <string name="bad_line">Bad line type</string>
     <string name="bad_point">Bad point type</string>
+    <string name="index_oob">Index out of bounds %1$d</string>
 
     <string name="no_audio">No audio record</string>
     <string name="no_bt">No Bluetooth</string>
@@ -1787,6 +1788,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 \n\nHelp: menu "HELP"
 \nMan pages: Book icon in the Help dialog
 \nDocs: http://sites.google.com/site/speleoapps
+\nPrivacy policy: http://marcocorvi.altervista.org/policy/TopoDroid-PrivacyPolicy.txt
 \nComments, bug reports, feature requests: marco.corvi@gmail.com
 \n
     </string>

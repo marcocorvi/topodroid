@@ -368,6 +368,10 @@ public class ParserTh extends TglParser
     // }
 
     // Toast.makeText( mApp, "Reading " + filename, Toast.LENGTH_SHORT ).show();
+    if ( isr == null ) {
+      TDLog.Error("Parser Therion: null input stream reader");
+      return ERR_NO_FILE;
+    }
 
     String surveyname = "--";
     String path = basepath;

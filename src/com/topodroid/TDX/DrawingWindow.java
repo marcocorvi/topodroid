@@ -7340,7 +7340,7 @@ public class DrawingWindow extends ItemDrawer
   @Override
   public void updateBlockList( long blk_id )
   {
-    // TDLog.v("DRAWING " + Thread.currentThread().getId() + " update block list" );
+    // TDLog.v("DRAWING " + TDLog.threadId() + " update block list" );
     if ( TopoDroidApp.mShotWindow != null ) {
       TopoDroidApp.mShotWindow.updateBlockList( blk_id ); // FIXME_EXTEND needed to update sketch splays immediately on download
     }

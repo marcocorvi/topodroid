@@ -188,8 +188,12 @@ public class MainWindow extends Activity
 
   // -------------------------------------------------------------------
 
+  /** @return the application
+   */
   public TopoDroidApp getApp() { return mApp; }
     
+  /** update the display
+   */
   public void updateDisplay( )
   {
     if ( TopoDroidApp.mData != null ) {
@@ -202,6 +206,9 @@ public class MainWindow extends Activity
     }
   }
 
+  /** update the list of surveys
+   * @param list   new list of survey names
+   */
   private void updateList( List< String > list )
   {
     mArrayAdapter.clear();
@@ -350,6 +357,11 @@ public class MainWindow extends Activity
     (new SurveyNewDialog( mActivity, this, old_sid, old_id )).show(); // WITH SPLIT
   }
 
+  /** start to move survey data to a new survey
+   * @param old_sid    source survey ID
+   * @param old_id     start data ID
+   * @param new_survey name of the new survey
+   */
   void startMoveSurvey( long old_sid, long old_id, String new_survey )
   {
     // TDLog.v( "start move survey");
@@ -359,6 +371,12 @@ public class MainWindow extends Activity
     }
   }
 
+  /** react to a user long tap on an item in the survey list or on a manu
+   * @param parent   view container
+   * @param view     tapped view
+   * @param pos      entry position
+   * @param id       ???
+   */
   @Override 
   public boolean onItemLongClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -371,6 +389,9 @@ public class MainWindow extends Activity
     return true;
   }
 
+  /** open a survey
+   * @param name survey name
+   */
   void doOpenSurvey( String name )
   {
     mApp.setSurveyFromName( name, -1, true ); // open survey: tell app to update survey name+id
@@ -378,6 +399,12 @@ public class MainWindow extends Activity
     startActivity( openIntent );
   }
 
+  /** react to a user tap on an entry in the survey list
+   * @param parent   view container
+   * @param view     tapped view
+   * @param pos      entry position
+   * @param id       ???
+   */
   @Override 
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
@@ -406,6 +433,9 @@ public class MainWindow extends Activity
     // }
   }
 
+  /** start the shot window actuvity
+   * @param item   survey name
+   */
   public void startShowWindow( CharSequence item )
   {
     mApp.setSurveyFromName( item.toString(), -1, true ); 
@@ -413,6 +443,8 @@ public class MainWindow extends Activity
     startActivity( openIntent );
   }
 
+  /** deafult window title: current work directory
+   */
   public void setTheTitle()
   {
     // setTitle( getResources().getString( R.string.app_name ) + ": " + TDInstance.cwd );
@@ -425,6 +457,8 @@ public class MainWindow extends Activity
   // ---------------------------------------------------------------
   // FILE IMPORT
 
+  /** set the title while importing a survey from file
+   */
   private void setTitleImport()
   {
     mActivity.setTitle( R.string.import_title );
@@ -1113,7 +1147,7 @@ public class MainWindow extends Activity
     // setMenuAdapter();
     // closeMenu();
 
-    // TDLog.v( "onResume runs on " + Thread.currentThread().getId() );
+    // TDLog.v( "onResume runs on " + TDLog.threadId() );
 
     // TDLog.Profile("TDActivity onResume");
     // TDLog.Log( TDLog.LOG_MAIN, "onResume " );
@@ -1223,7 +1257,7 @@ public class MainWindow extends Activity
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.v( "Main Window on Activity Result " + request + " " + result );
-    // TDLog.v( "onActivityResult runs on " + Thread.currentThread().getId() );
+    // TDLog.v( "onActivityResult runs on " + TDLog.threadId() );
     // TDLog.Log( TDLog.LOG_MAIN, "on Activity Result: request " + mRequestName[request] + " result: " + result );
     Bundle extras = (intent != null )? intent.getExtras() : null;
     switch ( request ) {
@@ -1512,7 +1546,12 @@ public class MainWindow extends Activity
 
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT
   {
-    // TDLog.v( "selectImportFromProvider runs on " + Thread.currentThread().getId() );
+    if ( index < 0 || index >= TDConst.mMimeType.length ) {
+      TDLog.Error("Bad import index " + index );
+      TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
+      return;
+    } 
+    // TDLog.v( "selectImportFromProvider runs on " + TDLog.threadId() );
     Intent intent = new Intent( Intent.ACTION_OPEN_DOCUMENT );
     intent.setType( TDConst.mMimeType[ index ] );
     // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );

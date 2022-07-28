@@ -352,6 +352,7 @@
     <string name="bad_cwd">项目名称不能是路径</string>
     <string name="bad_line">错误的线型</string>
     <string name="bad_point">错误的点型</string>
+    <!-- TODO string name="index_oob">Index out of bounds %1$d</string -->
 
     <string name="no_audio">无音频录音</string>
     <string name="no_bt">蓝牙未启动</string>

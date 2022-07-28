@@ -235,7 +235,7 @@ public class ShotWindow extends Activity
   // private String mRecentPlot     = null; // moved to TDInstance
   // long   mRecentPlotType = PlotType.PLOT_PLAN;
 
-  private int mButtonSize = 42;
+  private int mButtonSize = 42; // used only by the DialButton
   private Button[] mButton1;
   private int mNrButton1 = 0;
 
@@ -456,7 +456,7 @@ public class ShotWindow extends Activity
       return;
     }
     if ( TDLog.isStreamFile() ) {
-      TDLog.f("SHOT WINDOW " + Thread.currentThread().getId() + " update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
+      TDLog.f("SHOT WINDOW " + TDLog.threadId() + " update block list. Id: " + blk_id + " is scan: " +  blk.isScan() );
     }
     // FIXME 3.3.0
     boolean add_block = mDataAdapter.addDataBlock( blk ); // avoid double block-adding
