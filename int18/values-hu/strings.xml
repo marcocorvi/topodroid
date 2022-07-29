@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>Index out of bounds
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Nem lehet letölteni a felhasználói kézikönyvet az internetről</string>
@@ -353,7 +353,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="bad_cwd">Projekt neve nem lehet elérési útvonal</string>
     <string name="bad_line">Rossz vonaltípus</string>
     <string name="bad_point">Rossz pont típus</string>
-    <!-- TODO string name="index_oob">Index out of bounds %1$d</string -->
+    <string name="index_oob">Tartományon kívüli index %1$d</string>
 
     <string name="no_audio">Nincs hang felvétel</string>
     <string name="no_bt">Nincs bluetooth</string>
