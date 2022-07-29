@@ -1,41 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android" 
-      android:layout_width="match_parent" 
-      android:layout_height="match_parent"
-      android:orientation="vertical"
-      >
+  android:layout_width="match_parent" 
+  android:layout_height="match_parent"
+  android:orientation="vertical"
+  >
 
-    <RelativeLayout
+  <RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="#111"
+    >
+    <LinearLayout android:id="@+id/right"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_alignParentEnd="true"
+      >
+      <Button android:id="@+id/handle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/iz_empty"
+        android:contentDescription="@string/desc_menu"
+      />
+    </LinearLayout>
+
+    <!-- LinearLayout
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
-      android:orientation="horizontal"
-      >
-      <LinearLayout android:id="@+id/right"
-          android:layout_width="wrap_content"
-          android:layout_height="wrap_content"
-          android:layout_alignParentEnd="true"
-          >
-          <Button android:id="@+id/handle"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/iz_empty"
-                android:contentDescription="@string/desc_menu"
-          />
-      </LinearLayout>
-
-      <!-- LinearLayout
+      android:layout_toStartOf="@id/right"
+      -->
+      <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-	android:layout_toStartOf="@id/right"
-        -->
-        <com.topodroid.ui.MyHorizontalListView android:id="@+id/listview"
-          android:layout_width="match_parent"
-          android:layout_height="wrap_content"
-	  android:layout_toStartOf="@id/right"
-        />
-      <!-- /LinearLayout -->
-     
-    </RelativeLayout>
+        android:layout_toStartOf="@id/right"
+      />
+    <!-- /LinearLayout -->
+   
+  </RelativeLayout>
    					  
   <FrameLayout 
      android:layout_width="match_parent" 
@@ -51,7 +52,7 @@
       android:orientation="vertical"
       >
    					  
-    <EditText android:id="@+id/survey_name" 
+      <EditText android:id="@+id/survey_name" 
         style="@style/edit_text_light"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"
@@ -60,31 +61,31 @@
         android:hint="@string/hint_name"
         android:importantForAutofill="no"
         /> <!-- android:inputType="none" -->
-   		
-    <Button android:id="@+id/survey_date" 
+          	
+      <Button android:id="@+id/survey_date" 
         android:maxLines="1" 
         android:layout_width="match_parent"
-      	android:ems="25"
+        android:ems="25"
         android:layout_height="wrap_content" 
         android:layout_marginTop="@dimen/marginv"
-    />
-   		
-    <EditText android:id="@+id/survey_team" 
+      />
+          	
+      <EditText android:id="@+id/survey_team" 
         style="@style/edit_text_light"
         android:layout_width="match_parent"
         android:hint="@string/team"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
         android:importantForAutofill="no"
-    />
-   		
-    <EditText android:id="@+id/survey_decl" 
+      />
+          	
+      <EditText android:id="@+id/survey_decl" 
         style="@style/edit_signeddecimal_light"
         android:layout_width="match_parent"
         android:layout_marginTop="@dimen/marginv"
         android:scrollHorizontally="true"
         android:importantForAutofill="no"
-    />
+      />
 
       <EditText android:id="@+id/survey_comment" 
         style="@style/edit_text_light"
@@ -100,16 +101,16 @@
       	android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-	android:text="@string/empty"
+        android:text="@string/empty"
         android:layout_marginTop="@dimen/marginv"
       />
 
       <TextView android:id="@+id/survey_datamode" 
         android:layout_width="match_parent"
-      	android:ems="25"
+        android:ems="25"
         android:layout_height="wrap_content" 
         android:singleLine="true"
-	android:text="@string/empty"
+        android:text="@string/empty"
         android:layout_marginTop="@dimen/marginv"
       />
 

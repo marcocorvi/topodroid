@@ -119,14 +119,13 @@ class StationNameDefault extends StationName
         ret = true;
 	sts.add( from );
 	sts.add( to );
-        // TDLog.Log( TDLog.LOG_DATA, "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
         // TDLog.v( "main leg: " + blk.mId + " F<" + from + "> T<" + to + "> S<" + station + "> bs " + bs );
       } else if ( blk.isBackLeg() ) {
 	if ( main_from != null /* && main_to != null */ ) {
 	  prev = blk;
           setLegName( blk, main_to, main_from );
           ret = true;
-          // TDLog.Log( TDLog.LOG_DATA, "back leg: " + blk.mId + " F<" + main_from + "> T<" + main_to + "> bs " + bs );
+          // TDLog.v( "back leg: " + blk.mId + " F<" + main_from + "> T<" + main_to + "> bs " + bs );
 	}
 	main_from = main_to = null;
       } else {

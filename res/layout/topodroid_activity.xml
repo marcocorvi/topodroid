@@ -18,12 +18,12 @@
       android:layout_width="match_parent"
       android:layout_height="wrap_content"
       android:orientation="horizontal"
+      android:background="#111"
       >
       <LinearLayout android:id="@+id/right"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentEnd="true"
-        android:background="#111"
         >
         <Button android:id="@+id/handle"
               android:layout_width="wrap_content"

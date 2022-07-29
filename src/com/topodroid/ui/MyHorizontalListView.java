@@ -211,7 +211,8 @@ public class MyHorizontalListView extends AdapterView<ListAdapter>
       //   @Override public void run() { requestLayout(); }
       // });
     }
-    setBackgroundColor( 0x00ffffff );
+    // setBackgroundColor( 0x00ffffff );
+    setBackgroundColor( 0x00000000 );
   }
  
   private void fillList(final int dx) 

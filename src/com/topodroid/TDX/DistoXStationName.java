@@ -99,25 +99,33 @@ public class DistoXStationName
   static String incrementName( String name, Set<String> set )
   {
     // String n = name; // String is immutable - no need to make a copy
+    StringBuilder sb = null;
+    if ( TDLog.isStreamFile() ) {
+      sb = new StringBuilder();
+      sb.append("NAME increment ");
+      sb.append( name );
+      sb.append( " -> " );
+    }
     do {
       name = incrementName( name ); 
     } while ( set.contains( name ) );
+    if ( sb != null ) TDLog.f( sb.toString() + name );
     return name;
   }
 
-  /** @return the increment of a string
-   * @param name   string to increment
-   * @param list   list of data block 
-   * @note the given name is incremented until a string not among the stations of the list is found
-   */
-  static String incrementName( String name, List< DBlock > list )
-  {
-    // String n = name; // String is immutable - no need to make a copy
-    do {
-      name = incrementName( name ); 
-    } while ( listHasName( list, name ) );
-    return name;
-  }
+  // /** @return the increment of a string (unused)
+  //  * @param name   string to increment
+  //  * @param list   list of data block 
+  //  * @note the given name is incremented until a string not among the stations of the list is found
+  //  */
+  // static private String incrementName( String name, List< DBlock > list )
+  // {
+  //   // String n = name; // String is immutable - no need to make a copy
+  //   do {
+  //     name = incrementName( name ); 
+  //   } while ( listHasName( list, name ) );
+  //   return name;
+  // }
 
   // /** @return the increment of a name string (apparently unused)
   //  * @param name   name to increment
@@ -134,6 +142,7 @@ public class DistoXStationName
 
   /** @return the increment of a string
    * @param name   string to increment
+   * @note used by ShotDialog
    */
   static String incrementName( String name )
   {

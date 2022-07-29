@@ -12,6 +12,8 @@
 package com.topodroid.utils;
 
 import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TDString
 {
@@ -95,7 +97,9 @@ public class TDString
   }
 
   // -----------------------------------------------------------
-  private char[] mChr;
+  // mutable string
+
+  private char[] mChr;  // array of char's (char is 16 bits)
   private int    mCapacity;
   private int    mSize;
   private final static int CAPACITY = 16;
@@ -132,35 +136,6 @@ public class TDString
     mChr = Arrays.copyOf( str.mChr, mCapacity );
     nullTerminate();
   }
- 
-  /** append a string to this
-   * @param str  string to append
-   */
-  public TDString append( TDString str )
-  {
-    int size2 = str.size();
-    int size = mSize + size2;
-    setCapacity( size + CAPACITY );
-    for ( int i=0; i<size2; ++i ) {
-      mChr[mSize] = str.mChr[i];
-    }
-    nullTerminate();
-    return this;
-  }
-
-  /** append a char
-   * @param ch   char to append
-   */
-  public TDString append( char ch )
-  {
-    if ( mSize + 1 >= mCapacity ) {
-      setCapacity( mCapacity + CAPACITY );
-    }
-    mChr[mSize] = ch;
-    ++ mSize;
-    nullTerminate();
-    return this;
-  }
 
   /** @return true if this striung is equal to the given string
    * @param str    string to compare with
@@ -196,11 +171,82 @@ public class TDString
     }
   }
 
-  /** replace the char in this string with the given string
-   * @param str   string to replace
-   * @param k     index where to replace
+  /** @return true if this string is less than a given string
+   * @param str    given string
    */
-  public TDString replace( TDString str, int k )
+  public boolean isLessThan( TDString str )
+  {
+    int sz = str.size();
+    if ( mSize <= sz ) {
+      for ( int i=0; i<mSize; ++i ) {
+        if ( mChr[i] < str.mChr[i] ) return true;
+        if ( mChr[i] > str.mChr[i] ) return false;
+      }
+      return ( mSize < sz );
+    } else { // mSize > sz
+      for ( int i=0; i<sz; ++i ) {
+        if ( mChr[i] < str.mChr[i] ) return true;
+        if ( mChr[i] > str.mChr[i] ) return false;
+      }
+      return false;
+    }
+  }
+
+  /** @return true if this string is less than a given string
+   * @param str    given string
+   */
+  public boolean isLessThan( String str )
+  {
+    int sz = str.length();
+    if ( mSize <= sz ) {
+      for ( int i=0; i<mSize; ++i ) {
+        if ( mChr[i] < str.charAt(i) ) return true;
+        if ( mChr[i] > str.charAt(i) ) return false;
+      }
+      return ( mSize < sz );
+    } else { // mSize > sz
+      for ( int i=0; i<sz; ++i ) {
+        if ( mChr[i] < str.charAt(i) ) return true;
+        if ( mChr[i] > str.charAt(i) ) return false;
+      }
+      return false;
+    }
+  }
+ 
+  /** append a string to this
+   * @param str  string to append
+   */
+  public TDString append( TDString str )
+  {
+    int size2 = str.size();
+    int size = mSize + size2;
+    setCapacity( size + CAPACITY );
+    for ( int i=0; i<size2; ++i ) {
+      mChr[mSize] = str.mChr[i];
+    }
+    nullTerminate();
+    return this;
+  }
+
+  /** append a char
+   * @param ch   char to append
+   */
+  public TDString append( char ch )
+  {
+    if ( mSize + 1 >= mCapacity ) {
+      setCapacity( mCapacity + CAPACITY );
+    }
+    mChr[mSize] = ch;
+    ++ mSize;
+    nullTerminate();
+    return this;
+  }
+
+  /** replace the char in this string with the given string
+   * @param k     index where to replace
+   * @param str   string to replace
+   */
+  public TDString set( int k, TDString str )
   {
     int size2 = str.size();
     if ( k + size2 >= mCapacity ) {
@@ -220,10 +266,10 @@ public class TDString
   }
 
   /** replace the char in this string with the given string
-   * @param str   string to replace
    * @param k     index where to replace
+   * @param str   string to replace
    */
-  public TDString replace( String str, int k )
+  public TDString set( int k, String str )
   {
     int size2 = str.length();
     if ( k + size2 >= mCapacity ) {
@@ -243,10 +289,10 @@ public class TDString
   }
 
   /** set a char
-   * @param ch  char to set
    * @param k   index 
+   * @param ch  char to set
    */
-  public void set( char ch, int k ) 
+  public void set( int k, char ch )
   {
     assert( k >= 0 && k < mSize );
     mChr[k] = ch;
@@ -287,6 +333,120 @@ public class TDString
   /** null-terminate the char array
    */
   private void nullTerminate() { mChr[mSize] = 0; }
+
+  /** @return an immutable String
+   */
+  @Override
+  public String toString() { return new String( mChr, 0, mSize ); }
     
+
+  /** @return true is this string is null or empty
+   */
+  public boolean isNullOrEmpty( ) { return mSize == 0; }
+
+  /** @return string with spaces removes
+   */
+  public TDString noSpace( )
+  {
+    int j = 0;
+    for ( int i=0; i<mSize; ++i ) {
+      if ( ! Character.isSpaceChar( mChr[i] ) ) {
+        mChr[j] = mChr[i];
+        ++j;
+      }
+    }
+    mSize = j;
+    nullTerminate();
+    return this;
+  }
+
+  /** @return this string with spaces replaced by underscore
+   */
+  public TDString spacesToUnderscore( )
+  {
+    for ( int i=0; i<mSize; ++i ) {
+      if ( Character.isSpaceChar( mChr[i] ) ) mChr[i] = '_';
+    }
+    return this;
+  }
+
+  /** @return this string with multiple spaces replaced by single space, and trimmed at the ends
+   */
+  public TDString spacesToSpace( )
+  {
+    int j = 0;
+    boolean in_space = true;
+    for ( int i=0; i<mSize; ++i ) {
+      if ( Character.isSpaceChar( mChr[i] ) ) {
+        if ( ! in_space ) {
+          in_space = true;
+          mChr[j] = ' ';
+          ++j;
+        }
+      } else {
+        in_space = false;
+        mChr[j] = mChr[i];
+        ++j;
+      }
+    }
+    mSize = j;
+    while ( mSize > 0 && Character.isSpaceChar( mChr[mSize] ) ) -- mSize;
+    nullTerminate();
+    return this;
+  }
+
+  /** @return this string tokenisation on multiple spaces
+   * @param str input string
+   */
+  public List<String> splitOnSpaces( )
+  {
+    ArrayList< String > ret = new ArrayList<>();
+    int off = -1;
+    int cnt = 0;
+    for ( int i=0; i<mSize; ++i ) {
+      if ( Character.isSpaceChar( mChr[i] ) ) {
+        if ( cnt > 0 ) {
+          ret.add( new String( mChr, off, cnt ) );
+          cnt = 0;
+          off = -1;
+        }
+      } else {
+        if ( off < 0 ) off = i;
+        ++ cnt;
+      }
+    }
+    if ( cnt > 0 ) ret.add( new String( mChr, off, cnt ) );
+    return ret;
+  }
+
+  /** @return this string with comma replaced by point
+   */
+  public TDString commaToPoint( )
+  {
+    for ( int i=0; i<mSize; ++i ) {
+      if ( mChr[i] == ',' ) mChr[i] = '.';
+    }
+    return this;
+  }
+
+  /** @return this string with double-quotes escaped
+   */
+  public TDString escape( )
+  {
+    for ( int i=0; i<mSize; ++i ) {
+      if ( mChr[i] == '"' ) mChr[i] = '\u001b';
+    }
+    return this;
+  }
+
+  /** @return this string with double-quotes unescaped
+   */
+  public TDString unescape( )
+  {
+    for ( int i=0; i<mSize; ++i ) {
+      if ( mChr[i] == '\u001b' ) mChr[i] = '"';
+    }
+    return this;
+  }
     
 }

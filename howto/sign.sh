@@ -7,7 +7,8 @@
 # WARNING use zipalign BEFORE apksigner
 # BUILD_TOOLDIR="../../../build-tools/29.0.3"
 # BUILD_TOOLDIR="../../../build-tools/30.0.2"
-BUILD_TOOLDIR="../../../build-tools/31.0.0"
+# BUILD_TOOLDIR="../../../build-tools/31.0.0"
+BUILD_TOOLDIR="../../../build-tools/33.0.0-rc2"
 
 APP_NAME=TopoDroidX
 APP_RELEASE=${APP_NAME}-release
@@ -23,8 +24,9 @@ $BUILD_TOOLDIR/zipalign -f 4  bin/${APP_RELEASE}-unsigned.apk  bin/${APP_RELEASE
 # --cert cert.x509.pem
 #
 # --v4-signing-enabled <true | false | only> see https://developer.android.com/studio/command-line/apksigner
-$BUILD_TOOLDIR/apksigner sign --out ${APP_RELEASE}-keysigned.apk -ks ../../../keystore  -ks-pass env:TOPODROID_PSWD --ks-key-alias TopoDroid bin/${APP_RELEASE}-aligned.apk
+# $BUILD_TOOLDIR/apksigner sign --out ${APP_RELEASE}-keysigned.apk -ks ../../../keystore -ks-pass env:TOPODROID_PSWD --ks-key-alias TopoDroid bin/${APP_RELEASE}-aligned.apk
 # Keystore password for signer #1: 
+$BUILD_TOOLDIR/apksigner sign --out ${APP_RELEASE}-keysigned.apk -ks ../../../keystore --ks-key-alias TopoDroid bin/${APP_RELEASE}-aligned.apk
 
 # --print-certs
 $BUILD_TOOLDIR/apksigner verify --verbose ${APP_RELEASE}-keysigned.apk
