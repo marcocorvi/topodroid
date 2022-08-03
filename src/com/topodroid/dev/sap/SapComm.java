@@ -109,7 +109,7 @@ public class SapComm extends TopoDroidComm
     mContext = context;
     if ( mRemoteBtDevice == null ) {
       // TDToast.makeBad( R.string.ble_no_remote );
-      TDLog.Error("SAP comm: error: null remote device");
+      TDLog.e("SAP comm: error: null remote device");
     } else {
       // check that device.mAddress.equals( mRemoteBtDevice.getAddress() 
       // TDLog.v( "SAP comm: connect remote addr " + mRemoteBtDevice.getAddress() + " " + device.mAddress );
@@ -250,7 +250,7 @@ public class SapComm extends TopoDroidComm
   // protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
   // {
   //   if ( mCommThread != null ) {
-  //     TDLog.Error( "SAP comm start Comm Thread already running");
+  //     TDLog.e( "SAP comm start Comm Thread already running");
   //   }
   //   // TDLog.v( "SAP comm start comm thread");
   //   mCommThread = new CommThread( TopoDroidComm.COMM_GATT, mProtocol, to_read, lister, data_type );
@@ -388,14 +388,14 @@ public class SapComm extends TopoDroidComm
       mWriteInitialized = gatt.setCharacteristicNotification(mWriteChrt, true);
       mReadInitialized = gatt.setCharacteristicNotification(mReadChrt, true);
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY CHRT notiofication " + e.getMessage() );
+      TDLog.e("SECURITY CHRT notiofication " + e.getMessage() );
       // TDToast.makeBad("Security error: CHRT notification");
       // TODO closeGatt() ?
       return -1;
     }
     BluetoothGattDescriptor readDesc = mReadChrt.getDescriptor( BleUtils.CCCD_UUID );
     if ( readDesc == null ) {
-      TDLog.Error("SAP callback FAIL no R-desc CCCD ");
+      TDLog.e("SAP callback FAIL no R-desc CCCD ");
       return -1;
     }
 
@@ -404,17 +404,17 @@ public class SapComm extends TopoDroidComm
 
     byte[] notify = BleUtils.getChrtPNotify( mReadChrt );
     if ( notify == null ) {
-      TDLog.Error("SAP callback FAIL no indicate/notify R-property ");
+      TDLog.e("SAP callback FAIL no indicate/notify R-property ");
       return -2;
     } else {
       readDesc.setValue( notify );
       try {
         if (!gatt.writeDescriptor(readDesc)) {
-          TDLog.Error("SAP callback ERROR writing readDesc");
+          TDLog.e("SAP callback ERROR writing readDesc");
           return -3;
         }
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY write descriptor " + e.getMessage() );
+        TDLog.e("SECURITY write descriptor " + e.getMessage() );
         // TDToast.makeBad("Security error: write descriptor");
         // TODO closeGatt() ?
         return -3;
@@ -439,21 +439,21 @@ public class SapComm extends TopoDroidComm
 
   public void error( int status, String extra )
   {
-    TDLog.Error("SAP comm: error " + status + " " + extra );
+    TDLog.e("SAP comm: error " + status + " " + extra );
   }
 
   public void failure( int status, String extra )
   {
-    TDLog.Error("SAP comm: failure " + status + " " + extra );
+    TDLog.e("SAP comm: failure " + status + " " + extra );
     switch ( status ) {
       case -1:
-        // TDLog.Error("SAP comm: FAIL no R-desc CCCD ");
+        // TDLog.e("SAP comm: FAIL no R-desc CCCD ");
         break;
       case -2:
-        // TDLog.Error("SAP comm: FAIL no indicate/notify R-property ");
+        // TDLog.e("SAP comm: FAIL no indicate/notify R-property ");
         break;
       case -3:
-        // TDLog.Error("SAP comm: ERROR writing readDesc");
+        // TDLog.e("SAP comm: ERROR writing readDesc");
         break;
       default:
     }

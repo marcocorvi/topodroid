@@ -40,7 +40,7 @@ public class BleOpChrtWrite extends BleOperation
   public void execute()
   {
     if ( mPipe == null ) { 
-      TDLog.Error( "BleOp chrt write error: null pipe" );
+      TDLog.e( "BleOp chrt write error: null pipe" );
       return;
     }
     // boolean ret = 

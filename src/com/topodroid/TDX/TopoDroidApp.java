@@ -213,7 +213,7 @@ public class TopoDroidApp extends Application
       try {
         new ReconnectTask( mDataDownloader, data_type, 500 ).execute();
       } catch ( RuntimeException e ) {
-        TDLog.Error("reconnect error: " + e.getMessage() );
+        TDLog.e("reconnect error: " + e.getMessage() );
       }
     }
   }
@@ -707,7 +707,7 @@ public class TopoDroidApp extends Application
     DeviceX310Info info = new DeviceX310Info();
     byte[] ret = readMemory( address, 0x8008 );
     if ( ret == null ) {
-      TDLog.Error("Failed read 8008");
+      TDLog.e("Failed read 8008");
       // info.setError( DeviceX310Info.ERR_8008 );
       return null;
     }
@@ -718,7 +718,7 @@ public class TopoDroidApp extends Application
     // ret = readMemory( address, 0xe000 );
     ret = readMemory( address, DeviceX310Details.FIRMWARE_ADDRESS );
     if ( ret == null ) {
-      TDLog.Error("Failed read e000" );
+      TDLog.e("Failed read e000" );
       // info.setError( DeviceX310Info.ERR_E000 );
       return null;
     }
@@ -730,7 +730,7 @@ public class TopoDroidApp extends Application
     // ret = readMemory( address, 0xe004 );
     ret = readMemory( address, DeviceX310Details.HARDWARE_ADDRESS );
     if ( ret == null ) {
-      TDLog.Error("Failed read e004" );
+      TDLog.e("Failed read e004" );
       // info.setError( DeviceX310Info.ERR_E004 );
       return null;
     }
@@ -760,7 +760,7 @@ public class TopoDroidApp extends Application
       resetComm();
       return ret;
     } else {
-      TDLog.Error("read A3 HeadTail: class cast exception");
+      TDLog.e("read A3 HeadTail: class cast exception");
     }
     return null;
   }
@@ -780,7 +780,7 @@ public class TopoDroidApp extends Application
       resetComm();
       return ret;
     } else {
-      TDLog.Error("swap A3 HeadTail: not A3 comm");
+      TDLog.e("swap A3 HeadTail: not A3 comm");
     }
     return -1; // failure
   }
@@ -1236,7 +1236,7 @@ public class TopoDroidApp extends Application
       resetComm();
       return ret;
     } else {
-      TDLog.Error("read X310 memory: not X310 comm");
+      TDLog.e("read X310 memory: not X310 comm");
     }
     return -1;
   }
@@ -1257,7 +1257,7 @@ public class TopoDroidApp extends Application
       resetComm();
       return ret;
     } else {
-      TDLog.Error("read A3 memory: not A3 comm");
+      TDLog.e("read A3 memory: not A3 comm");
     }
     return -1;
   }
@@ -1656,7 +1656,7 @@ public class TopoDroidApp extends Application
     TDInstance.secondLastShotId = lastShotId();
     int ret = 0;
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
-      TDLog.Error( "Comm or Device null ");
+      TDLog.e( "Comm or Device null ");
     } else {
       // TDLog.Log( TDLog.LOG_DATA, "Download Data Batch() device " + TDInstance.deviceAddress() + " comm " + mComm.toString() );
       // TDLog.v( "App: Download Data Batch() device " + TDInstance.deviceAddress() + " " + TDInstance.getDeviceA().getAddress() + " comm " + mComm.toString() );
@@ -2359,7 +2359,7 @@ public class TopoDroidApp extends Application
         TDUtil.yieldDown( 500 );
         waitcnt++;
         if(waitcnt > 10) {
-          TDLog.Error("DistoXBLE info: failed to connect");
+          TDLog.e("DistoXBLE info: failed to connect");
           return false;
         }
       }
@@ -2387,7 +2387,7 @@ public class TopoDroidApp extends Application
       mComm.sendCommand( cmd );
       // TDToast( R.string.bric_command_fail ); // should never happen to fail
     // } else {
-    //   TDLog.Error("Comm is null or not BRIC");
+    //   TDLog.e("Comm is null or not BRIC");
     }
     // return ret;
   }
@@ -2412,7 +2412,7 @@ public class TopoDroidApp extends Application
         if ( disconnect ) disconnectComm();
         return true;
       } else {
-        TDLog.Error("BRIC info: failed to connect");
+        TDLog.e("BRIC info: failed to connect");
       }
     }
     return false;
@@ -2439,7 +2439,7 @@ public class TopoDroidApp extends Application
         if ( disconnect ) disconnectComm();
         return true;
       } else {
-        TDLog.Error( "BRIC memory: failed to connect");
+        TDLog.e( "BRIC memory: failed to connect");
       }
     }
     return ret;
@@ -2459,7 +2459,7 @@ public class TopoDroidApp extends Application
       DistoX310Comm comm = (DistoX310Comm)mComm;
       if ( comm != null ) comm.setX310Laser( TDInstance.deviceAddress(), what, nr, lister, data_type );
     } else {
-      TDLog.Error("set X310 laser: not X310 comm");
+      TDLog.e("set X310 laser: not X310 comm");
     }
   }
 

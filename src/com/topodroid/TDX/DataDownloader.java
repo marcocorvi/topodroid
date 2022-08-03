@@ -210,9 +210,9 @@ public class DataDownloader
     } else {
       mDownload = false;
       notifyConnectionStatus( ConnectionState.CONN_DISCONNECTED );
-      TDLog.Error( "download data: no device selected" );
+      TDLog.e( "download data: no device selected" );
       // if ( TDInstance.sid < 0 ) {
-      //   TDLog.Error( "download data: no survey selected" );
+      //   TDLog.e( "download data: no survey selected" );
       // // } else {
       //   // DBlock last_blk = mApp.mData.selectLastLegShot( TDInstance.sid );
       //   // (new ShotNewDialog( mContext, mApp, lister, last_blk, -1L )).show();

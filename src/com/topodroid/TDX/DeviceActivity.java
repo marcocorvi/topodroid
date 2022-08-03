@@ -793,7 +793,7 @@ public class DeviceActivity extends Activity
     int n = mApp.swapA3HotBit( currDeviceA().getAddress(), from, to, on_off );
     // ( new SwapHotBitTask( mApp, Device.DISTO_A3, currDeviceA().getAddress(), head_tail, on_off ) ).execute();
     if ( n < 0 ) {
-      TDLog.Error("failed reset A3 device HeadTail");
+      TDLog.e("failed reset A3 device HeadTail");
     }
   }
 
@@ -888,7 +888,7 @@ public class DeviceActivity extends Activity
     try {
       name = device.getName();
     } catch( SecurityException e ) {
-      TDLog.Error("SECUTITY " + e.getMessage() );
+      TDLog.e("SECUTITY " + e.getMessage() );
     }
     // if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
       mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
@@ -912,7 +912,7 @@ public class DeviceActivity extends Activity
           String address = extras.getString( TDTag.TOPODROID_DEVICE_ACTION );
           // TDLog.Log(TDLog.LOG_DISTOX, "OK " + address );
           if ( address == null ) {
-            TDLog.Error( "onActivityResult REQUEST DEVICE: null address");
+            TDLog.e( "onActivityResult REQUEST DEVICE: null address");
           } else if ( currDeviceA() == null || ! address.equals( currDeviceA().getAddress() ) ) { // N.B. address != null
             mApp.disconnectRemoteDevice( true ); // new DataStopTask( mApp, null, null );
             mApp.setDevicePrimary( address, null, null, null );

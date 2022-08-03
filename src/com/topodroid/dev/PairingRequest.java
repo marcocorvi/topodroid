@@ -41,11 +41,11 @@ public class PairingRequest extends BroadcastReceiver
         // Method ms = device.getClass().getMethod("setPasskey", int.class);
         ms.invoke( device, pin );
       } catch ( NoSuchMethodException e ) {
-        TDLog.Error( "No Such method: " + e.getMessage() );
+        TDLog.e( "No Such method: " + e.getMessage() );
       } catch ( IllegalAccessException e ) {
-        TDLog.Error( "Illegal access: " + e.getMessage() );
+        TDLog.e( "Illegal access: " + e.getMessage() );
       } catch ( InvocationTargetException e ) {
-        TDLog.Error( "Invocation target: " + e.getMessage() );
+        TDLog.e( "Invocation target: " + e.getMessage() );
       // } finally {
 	// stopPairingRequest(); // NOTE leave pairing request on
       }

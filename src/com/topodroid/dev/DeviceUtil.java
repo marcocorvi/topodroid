@@ -82,7 +82,7 @@ public class DeviceUtil
     try {
       return adapter.getBondedDevices();
     } catch ( SecurityException e ) { // FIXME ANDROID-12
-      TDLog.Error("SECURITY get bonded devices " + e.getMessage() );
+      TDLog.e("SECURITY get bonded devices " + e.getMessage() );
       // TDToast.makeBad("Security error: get bonded devices");
     }
     return null;
@@ -107,7 +107,7 @@ public class DeviceUtil
       try {
         adapter.startDiscovery();
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY start discovery " + e.getMessage() );
+        TDLog.e("SECURITY start discovery " + e.getMessage() );
         // TDToast.makeBad("Security error: start discovery");
       }
     }
@@ -122,7 +122,7 @@ public class DeviceUtil
       try {
         adapter.cancelDiscovery();
       } catch ( SecurityException e ) {
-        TDLog.Error("SECURITY cancel discovery " + e.getMessage() );
+        TDLog.e("SECURITY cancel discovery " + e.getMessage() );
         // TDToast.makeBad("Security error: cancel discovery");
       }
     }
@@ -154,7 +154,7 @@ public class DeviceUtil
       try {
         return device.getBondState() == BOND_BONDED;
       } catch (SecurityException e) {
-        TDLog.Error("SECURITY is paired " + e.getMessage());
+        TDLog.e("SECURITY is paired " + e.getMessage());
         // TDToast.makeBad("Security error: is paired");
       }
     }
@@ -176,7 +176,7 @@ public class DeviceUtil
         return 2;
       }
     } catch (SecurityException e) {
-      TDLog.Error("SECURITY pair device " + e.getMessage());
+      TDLog.e("SECURITY pair device " + e.getMessage());
       // TDToast.makeBad("Security error: pair device");
       return -1;
     }
@@ -184,7 +184,7 @@ public class DeviceUtil
       Method m = device.getClass().getMethod( "createBond", (Class[]) null );
       m.invoke( device, (Object[]) null );
     } catch ( Exception e ) {
-      TDLog.Error("Error create bond " + e.getMessage());
+      TDLog.e("Error create bond " + e.getMessage());
       return -1;
     }
     return 1;
@@ -202,7 +202,7 @@ public class DeviceUtil
         return 2;
       }
     } catch ( SecurityException e ) {
-      TDLog.Error( "SECURITY unpair device " + e.getMessage() );
+      TDLog.e( "SECURITY unpair device " + e.getMessage() );
       // TDToast.makeBad("Security error: unpair device");
     }
 
@@ -210,7 +210,7 @@ public class DeviceUtil
       Method m = device.getClass().getMethod( "removeBond", (Class[]) null );
       m.invoke( device, (Object[]) null );
     } catch ( Exception e ) {
-      TDLog.Error("Error remove bond " + e.getMessage());
+      TDLog.e("Error remove bond " + e.getMessage());
       return -1;
     }
     return 1;
@@ -243,11 +243,11 @@ public class DeviceUtil
   //     m_createBond.invoke( device );
   //     // TDLog.v( "done createBond");
   //   } catch ( NoSuchMethodException e ) {
-  //     TDLog.Error "No Such method: " + e.getMessage() );
+  //     TDLog.e "No Such method: " + e.getMessage() );
   //   } catch ( IllegalAccessException e ) {
-  //     TDLog.Error "Illegal access: " + e.getMessage() );
+  //     TDLog.e "Illegal access: " + e.getMessage() );
   //   } catch ( InvocationTargetException e ) {
-  //     TDLog.Error "Invocation target: " + e.getMessage() );
+  //     TDLog.e "Invocation target: " + e.getMessage() );
   //   }
   // }
 
@@ -271,11 +271,11 @@ public class DeviceUtil
       Method m_createBond = device.getClass().getMethod( "createBond", classes3 );
       m_createBond.invoke( device );
     } catch ( NoSuchMethodException e ) {
-      TDLog.Error( "Failed to set PIN: no method " + e.getMessage() );
+      TDLog.e( "Failed to set PIN: no method " + e.getMessage() );
     } catch ( InvocationTargetException e ) {
-      TDLog.Error( "Failed to set PIN: invoke " + e.getMessage() );
+      TDLog.e( "Failed to set PIN: invoke " + e.getMessage() );
     } catch (IllegalAccessException e ) {
-      TDLog.Error( "Failed to set PIN: illegal access " + e.getMessage() );
+      TDLog.e( "Failed to set PIN: illegal access " + e.getMessage() );
     }
   }
 

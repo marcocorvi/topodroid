@@ -111,7 +111,7 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
       fw.flush();
       fw.close();
     } catch ( IOException e ) {
-      TDLog.Error("IO error " + e.getMessage() );
+      TDLog.e("IO error " + e.getMessage() );
     }
   }
 }

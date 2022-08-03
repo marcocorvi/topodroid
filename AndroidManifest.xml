@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
       package="com.topodroid.TDX"
       android:installLocation="auto"
-      android:versionCode="601031"
-      android:versionName="6.1.31"
+      android:versionCode="601032"
+      android:versionName="6.1.32"
     >
     <!-- android:debuggable="true" -->
     <!-- Android SDK dependencies:
@@ -101,6 +101,8 @@
           android:hasFragileUserData="true"
 	  android:requestLegacyExternalStorage="true"
           android:supportsRtl="false"
+
+          android:networkSecurityConfig="@xml/network_security_config"
 	  >
           <!-- request legacy is not necessary on android-11 but it is ok to leave it in
 	  android:requestLegacyExternalStorage="true"

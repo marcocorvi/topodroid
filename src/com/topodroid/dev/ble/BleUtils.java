@@ -43,7 +43,7 @@ public class BleUtils
     try {
       name = device.getName();
     } catch ( SecurityException e ) {
-      TDLog.Error("SECURITY device name " + e.getMessage() );
+      TDLog.e("SECURITY device name " + e.getMessage() );
       // TDToast.makeBad("Security error: device name");
       return "-- --";
     }
@@ -148,7 +148,7 @@ public class BleUtils
   {
     int prop = chrt.getProperties();
     if ( isChrtPIndicate( prop ) ) return BluetoothGattDescriptor.ENABLE_INDICATION_VALUE;
-    TDLog.Error("char is not INDICATE " + chrt.getUuid().toString() );
+    TDLog.e("char is not INDICATE " + chrt.getUuid().toString() );
     return null;
   }
 

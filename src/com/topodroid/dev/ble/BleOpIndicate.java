@@ -52,7 +52,7 @@ public class BleOpIndicate extends BleOperation
   {
     // TDLog.v( "BleOp exec indicate " + mEnable + " " + mChrtUuid.toString() );
     if ( mPipe == null ) { 
-      TDLog.Error("BleOp notify error: null pipe " + mChrtUuid.toString() );
+      TDLog.e("BleOp notify error: null pipe " + mChrtUuid.toString() );
       return;
     }
     if ( mEnable ) {

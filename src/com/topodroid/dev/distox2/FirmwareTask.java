@@ -46,7 +46,7 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
    */
   public FirmwareTask( /* TopoDroidApp app, */ DistoX310Comm comm, int mode, String filename )
   {
-    // TDLog.Error( "Data Download Task cstr" );
+    // TDLog.e( "Data Download Task cstr" );
     // TDLog.v( "data download task cstr");
     // mApp  = new WeakReference<TopoDroidApp>( app );
     mComm = comm;
@@ -65,7 +65,7 @@ public class FirmwareTask extends AsyncTask< Void, Void, Integer >
   private int uploadFirmware( )
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) {
-      TDLog.Error( "Comm or Device null");
+      TDLog.e( "Comm or Device null");
       return -1;
     }
     // String pathname = TDPath.getBinFile( mFilename );

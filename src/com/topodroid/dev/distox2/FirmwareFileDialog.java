@@ -105,7 +105,7 @@ public class FirmwareFileDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("firmware file view instance of " + view.toString() );
+      TDLog.e("firmware file view instance of " + view.toString() );
       return;
     }
     String item = ((TextView) view).getText().toString();

@@ -144,7 +144,7 @@ public class FirmwareDialog extends MyDialog
         // File fp = new File( TDPath.getBinFile( filename ) );
         File fp = TDPath.getBinFile( filename );
         if ( ! fp.exists() ) {
-          TDLog.Error( "non-existent upload firmware file " + filename );
+          TDLog.e( "non-existent upload firmware file " + filename );
           return;    
         }
         int fw = FirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version

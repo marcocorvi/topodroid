@@ -92,7 +92,7 @@ public class DistoXProtocol extends TopoDroidProtocol
     //   }
     // } catch ( IOException e ) {
     //   // NOTE socket is null there is nothing we can do
-    //   TDLog.Error( "Proto cstr conn failed " + e.getMessage() );
+    //   TDLog.e( "Proto cstr conn failed " + e.getMessage() );
     // }
     mIn  = in;
     mOut = out;
@@ -104,11 +104,11 @@ public class DistoXProtocol extends TopoDroidProtocol
   public void closeIOstreams()
   {
     if ( mIn != null ) {
-      try { mIn.close(); } catch ( IOException e ) { TDLog.Error("Stream in close"); }
+      try { mIn.close(); } catch ( IOException e ) { TDLog.e("Stream in close"); }
       mIn = null;
     }
     if ( mOut != null ) {
-      try { mOut.close(); } catch ( IOException e ) { TDLog.Error("Stream out close"); }
+      try { mOut.close(); } catch ( IOException e ) { TDLog.e("Stream out close"); }
       mOut = null;
     }
     super.closeIOstreams(); // to possibly close packet logger db
@@ -154,7 +154,7 @@ public class DistoXProtocol extends TopoDroidProtocol
             dataRead[0] += count[0];
           }
         } catch ( ClosedByInterruptException e ) {
-          TDLog.Error( "reader closed by interrupt");
+          TDLog.e( "reader closed by interrupt");
         } catch ( IOException e ) {
           maybeException[0] = e;
         }
@@ -176,7 +176,7 @@ public class DistoXProtocol extends TopoDroidProtocol
             // synchronized ( dataRead ) 
             {
               if ( dataRead[0] > 0 && toRead[0] > 0 ) { // FIXME
-                try { wait( 100 ); } catch ( InterruptedException e ) { TDLog.Error("Interrupted wait"); }
+                try { wait( 100 ); } catch ( InterruptedException e ) { TDLog.e("Interrupted wait"); }
               } else {
                 if ( reader.isAlive() ) reader.interrupt(); 
                 break;
@@ -258,12 +258,12 @@ public class DistoXProtocol extends TopoDroidProtocol
         if ( ok ) return handlePacket( mBuffer );
       } // else timed-out with no packet
     } catch ( EOFException e ) {
-      TDLog.Error( "Proto read packet EOFException" + e.toString() );
+      TDLog.e( "Proto read packet EOFException" + e.toString() );
     } catch (ClosedByInterruptException e ) {
-      TDLog.Error( "Proto read packet ClosedByInterruptException" + e.toString() );
+      TDLog.e( "Proto read packet ClosedByInterruptException" + e.toString() );
     } catch (IOException e ) {
       // this is OK: the DistoX has been turned off
-      TDLog.Error( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
+      TDLog.e( "Proto read packet IOException " + e.toString() + " OK distox turned off" );
       // mError = DistoX.DISTOX_ERR_OFF;
       return DistoX.DISTOX_ERR_OFF;
     }
@@ -287,7 +287,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       mOut.flush();
       // if ( TDSetting.mPacketLog ) logPacket1( 1L, buffer );
     } catch (IOException e ) {
-      // TDLog.Error( "send command failed" );
+      // TDLog.e( "send command failed" );
       return false;
     }
     return true;
@@ -331,11 +331,11 @@ public class DistoXProtocol extends TopoDroidProtocol
       // }
       return ret;
     } catch ( EOFException e ) {
-      // TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
+      // TDLog.e( "Proto read-to-read Head-Tail read() failed" );
       mError = DistoX.DISTOX_ERR_HEADTAIL_EOF;
       return DistoX.DISTOX_ERR_HEADTAIL_EOF;
     } catch (IOException e ) {
-      // TDLog.Error( "Proto read-to-read Head-Tail read() failed" );
+      // TDLog.e( "Proto read-to-read Head-Tail read() failed" );
       mError = DistoX.DISTOX_ERR_HEADTAIL_IO;
       return DistoX.DISTOX_ERR_HEADTAIL_IO;
     }
@@ -365,10 +365,10 @@ public class DistoXProtocol extends TopoDroidProtocol
   //     return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
   //     // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
   //   } catch ( EOFException e ) {
-  //     TDLog.Error( "read Head Tail read() EOF failed" );
+  //     TDLog.e( "read Head Tail read() EOF failed" );
   //     return null;
   //   } catch (IOException e ) {
-  //     TDLog.Error( "read Head Tail read() IO failed" );
+  //     TDLog.e( "read Head Tail read() IO failed" );
   //     return null;
   //   }
   // }
@@ -392,7 +392,7 @@ public class DistoXProtocol extends TopoDroidProtocol
       // checkDataType( mBuffer[0], data_type );
 
     } catch ( IOException e ) {
-      // TDLog.Error( "read memory() IO failed" );
+      // TDLog.e( "read memory() IO failed" );
       return null;
     }
     if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) return null; // 0x38
@@ -440,7 +440,7 @@ public class DistoXProtocol extends TopoDroidProtocol
           // checkDataType( mBuffer[0], data_type );
 
         } catch ( IOException e ) {
-          TDLog.Error( "read memory() IO failed" );
+          TDLog.e( "read memory() IO failed" );
           break;
         }
         if ( mBuffer[0] != (byte)( MemoryOctet.BYTE_PACKET_REPLY ) ) break; // 0x38
@@ -502,10 +502,10 @@ public class DistoXProtocol extends TopoDroidProtocol
         addr += 4;
       }
     } catch ( EOFException e ) {
-      // TDLog.Error( "write calibration EOF failed" );
+      // TDLog.e( "write calibration EOF failed" );
       return false;
     } catch (IOException e ) {
-      // TDLog.Error( "write calibration IO failed" );
+      // TDLog.e( "write calibration IO failed" );
       return false;
     }
     return true;  
@@ -549,10 +549,10 @@ public class DistoXProtocol extends TopoDroidProtocol
         addr += 4;
       }
     } catch ( EOFException e ) {
-      // TDLog.Error( "read calibration EOF failed" );
+      // TDLog.e( "read calibration EOF failed" );
       return false;
     } catch (IOException e ) {
-      // TDLog.Error( "read calibration IO failed" );
+      // TDLog.e( "read calibration IO failed" );
       return false;
     }
     return true;  

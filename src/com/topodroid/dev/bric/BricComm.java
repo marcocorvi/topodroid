@@ -169,7 +169,7 @@ public class BricComm extends TopoDroidComm
               do_consume = false;
               break;
             default:
-              TDLog.Error("BRIC comm: Queue - unknown buffer type " + buffer.type );
+              TDLog.e("BRIC comm: Queue - unknown buffer type " + buffer.type );
           }
         }
       } 
@@ -233,11 +233,11 @@ public class BricComm extends TopoDroidComm
   {
     BluetoothGattCharacteristic chrt = mCallback.getReadChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
-      TDLog.Error("BRIC comm enlist read: null read chrt");
+      TDLog.e("BRIC comm enlist read: null read chrt");
       return false;
     }
     if ( ! BleUtils.isChrtRead( chrt ) ) {
-      TDLog.Error("BRIC comm enlist read: chrt not permission readable");
+      TDLog.e("BRIC comm enlist read: chrt not permission readable");
       // return false;
     }
     // TDLog.v( "BRIC comm: enlist chrt read " + chrtUuid.toString() );
@@ -251,11 +251,11 @@ public class BricComm extends TopoDroidComm
   // {
   //   BluetoothGattCharacteristic chrt = mCallback.getWriteChrt( srvUuid, chrtUuid );
   //   if ( chrt == null ) {
-  //     TDLog.Error("BRIC comm enlist write: null write chrt");
+  //     TDLog.e("BRIC comm enlist write: null write chrt");
   //     return false;
   //   }
   //   if ( ! BleUtils.isChrtWrite( chrt ) ) {
-  //     TDLog.Error("BRIC comm enlist write: cannot write chrt");
+  //     TDLog.e("BRIC comm enlist write: cannot write chrt");
   //     return false;
   //   }
   //   // TDLog.v( "BRIC comm: enlist chrt write " + chrtUuid.toString() );
@@ -501,7 +501,7 @@ public class BricComm extends TopoDroidComm
       // mQueue.put( DATA_TIME, chrt.getValue() ); 
       // // TDLog.v( "BRIC comm last time " + BleUtils.bytesToString( chrt.getValue() ) );
     } else {
-      TDLog.Error("Bric comm UNKNOWN chrt changed " + chrt_uuid );
+      TDLog.e("Bric comm UNKNOWN chrt changed " + chrt_uuid );
     }
     // this is not necessary
     // clearPending();
@@ -521,19 +521,19 @@ public class BricComm extends TopoDroidComm
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH: 
-        TDLog.Error("BRIC COMM: invalid attr length " + extra );
+        TDLog.e("BRIC COMM: invalid attr length " + extra );
         break;
       case BluetoothGatt.GATT_WRITE_NOT_PERMITTED:
-        TDLog.Error("BRIC COMM: write not permitted " + extra );
+        TDLog.e("BRIC COMM: write not permitted " + extra );
         break;
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
-        TDLog.Error("BRIC COMM: read not permitted " + extra );
+        TDLog.e("BRIC COMM: read not permitted " + extra );
         break;
       case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION:
-        TDLog.Error("BRIC COMM: insufficient encrypt " + extra );
+        TDLog.e("BRIC COMM: insufficient encrypt " + extra );
         break;
       case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-        TDLog.Error("BRIC COMM: insufficient auth " + extra );
+        TDLog.e("BRIC COMM: insufficient auth " + extra );
         break;
       case BleCallback.CONNECTION_TIMEOUT:
       case BleCallback.CONNECTION_133: // unfortunately this happens
@@ -542,7 +542,7 @@ public class BricComm extends TopoDroidComm
         reconnectDevice();
         break;
       default:
-        TDLog.Error("BRIC comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.e("BRIC comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     clearPending();
@@ -562,7 +562,7 @@ public class BricComm extends TopoDroidComm
   {
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
-      // TDLog.Error("BRIC comm ERROR null remote device");
+      // TDLog.e("BRIC comm ERROR null remote device");
       // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device: null = [3b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
       return false;

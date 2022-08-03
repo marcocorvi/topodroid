@@ -119,7 +119,7 @@ public class DistoX310Comm extends DistoXComm
   public boolean toggleCalibMode( String address, int type )
   {
     if ( ! isCommThreadNull() ) {
-      TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
+      TDLog.e( "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
     boolean ret = false;
@@ -128,7 +128,7 @@ public class DistoX310Comm extends DistoXComm
         byte[] result = null;
         byte[] fw = mProtocol.readMemory( DeviceX310Details.FIRMWARE_ADDRESS ); // read firmware
         if ( fw == null || fw.length < 2 ) {
-          TDLog.Error( "X310 toggle Calib Mode failed read E000" );
+          TDLog.e( "X310 toggle Calib Mode failed read E000" );
         } else {
           // TDLog.Log( TDLog.LOG_COMM, "firmware " + fw[0] + " " + fw[1] );
           if ( fw[1] >= 0 && fw[1] < DeviceX310Details.STATUS_ADDRESS.length ) {
@@ -251,7 +251,7 @@ public class DistoX310Comm extends DistoXComm
         ret = -1;
       }
     } else {
-      TDLog.Error( "Comm Firmware upload socket failure");
+      TDLog.e( "Comm Firmware upload socket failure");
     }
     destroySocket( );
     return ret;

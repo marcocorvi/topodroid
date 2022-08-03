@@ -142,7 +142,7 @@ public class BricProto extends TopoDroidProtocol
     // TDLog.v( "BRIC proto: added Meta " + mIndex + "/" + mLastIndex + " type " + mType );
     if ( mType == 0 ) { 
       if ( mIndex > mLastIndex+1 ) { // LOST SHOTS
-        TDLog.Error("BRIC proto: missed data, last " + mLastIndex + " current " + mIndex );
+        TDLog.e("BRIC proto: missed data, last " + mLastIndex + " current " + mIndex );
         if ( TDSetting.mBricMode != BricMode.MODE_PRIM_ONLY && TopoDroidApp.mMainActivity != null ) {
           final String lost = "missed " + (mIndex - mLastIndex -1) + " data";
           TopoDroidApp.mMainActivity.runOnUiThread( new Runnable() { 
@@ -183,7 +183,7 @@ public class BricProto extends TopoDroidProtocol
         }
         int data_type = ( mType == 1 )? DataType.DATA_SCAN : DataType.DATA_SHOT;
         if ( ! mComm.handleBricPacket( index, mLister, data_type, clino, azimuth, mComment ) ) {
-          TDLog.Error( "BRIC proto: skipped existing index " + index );
+          TDLog.e( "BRIC proto: skipped existing index " + index );
         }
       } else {
         TDLog.v( "BRIC proto: skipping 0-length data");

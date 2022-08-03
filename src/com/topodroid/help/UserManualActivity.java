@@ -71,9 +71,15 @@ public class UserManualActivity extends Activity
     // String filepath = TDPath.getManFile( filename );
     // view.loadUrl( filepath );
     // setWebViewSettings( mTVtext );
-    // TDLog.v( "MAN-0 filename " + filename );
+    // TDLog.v( "MAN-0 filename <" + filename + ">" );
 
-    if ( filename.startsWith("file:///data" ) ) {
+    if ( filename.startsWith("http://" ) ) {
+      // ++mCloseOnBack;
+      // onBackPressed(); // close message "net::ERR_CLEARTEXT_NOT_PERMITTED"
+      // viewUrl( filename );
+      view.loadUrl( filename );
+      return;
+    } else if ( filename.startsWith("file:///data" ) ) {
       if ( TDSetting.mLocalManPages ) {
         int pos = filename.indexOf( NEEDLE );
         // TDLog.v( "MAN-1 filename " + filename + " index " + pos );
@@ -217,7 +223,7 @@ public class UserManualActivity extends Activity
       @Override
       public void onReceivedError(WebView view, int errorCode, String description, String failingUrl)
       {
-        TDLog.Error( "UserMan load error: " + description + " url " + failingUrl );
+        TDLog.Error( "UserMan load error " + errorCode + ": " + description + " url " + failingUrl );
       }
     } );
 

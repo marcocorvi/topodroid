@@ -46,11 +46,10 @@ public class TDLog
 
   static public void setLogStream( int log_stream )
   {
-    Log.v( TAG, "LOG settong stream " + log_stream );
-    if ( mLogStream != log_stream ) {
-      mLogStream = log_stream;
-      if ( mLog == null ) setLogTarget();
-    }
+    if ( mLogStream == log_stream ) return;
+    Log.v( TAG, "LOG setting stream " + log_stream );
+    mLogStream = log_stream;
+    if ( mLog == null ) setLogTarget();
   }
 
   /** @return the thread ID string ("T-" followed by the thread id)
@@ -175,6 +174,23 @@ public class TDLog
    */
   static public void f( String msg )
   {
+    mMillis = System.currentTimeMillis() % 600000;
+    if ( mLogStream == LOG_SYSLOG || mLog == null ) {
+      Log.v( TAG, mMillis + " " + msg );
+    } else {
+      mLog.format( "%d: %s\n", mMillis, msg );
+    }
+  }
+  
+  /** set log file stream and log on file stream
+   * @param msg  log message
+   */
+  static public void e( String msg )
+  {
+    if ( mLogStream == LOG_FILE ) {
+      mLogStream = LOG_FILE;
+      if ( mLog == null ) setLogTarget();
+    }
     mMillis = System.currentTimeMillis() % 600000;
     if ( mLogStream == LOG_SYSLOG || mLog == null ) {
       Log.v( TAG, mMillis + " " + msg );

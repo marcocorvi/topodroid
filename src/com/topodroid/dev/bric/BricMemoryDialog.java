@@ -128,7 +128,7 @@ public class BricMemoryDialog extends MyDialog
       if ( v > max ) return max;
       return v;
     } catch ( NumberFormatException e ) {
-      TDLog.Error( "BRIC Memory: parser Number Format Error <" + s + "> " );
+      TDLog.e( "BRIC Memory: parser Number Format Error <" + s + "> " );
     }
     return min;
   }

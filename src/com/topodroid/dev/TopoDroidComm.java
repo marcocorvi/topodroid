@@ -100,7 +100,7 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      TDLog.Error( "TD comm: null Lister");
+      TDLog.e( "TD comm: null Lister");
     }
     return true;
   }
@@ -129,7 +129,7 @@ public class TopoDroidComm
         TDUtil.slowDown( TDSetting.mWaitData );
       }
     } else {
-      TDLog.Error( "TD comm: null Lister");
+      TDLog.e( "TD comm: null Lister");
     }
   }
 
@@ -166,7 +166,7 @@ public class TopoDroidComm
           TDUtil.slowDown( TDSetting.mWaitData );
         }
       } else {
-        TDLog.Error( "TD comm: null Lister");
+        TDLog.e( "TD comm: null Lister");
       }
       // if ( lister != null ) {
       //   DBlock blk = new DBlock( );
@@ -199,7 +199,7 @@ public class TopoDroidComm
         lister.sendMessage(msg);
       }
       if ( ! mHasG ) {
-        TDLog.Error( "data without G packet " + mNrPacketsRead /* getNrReadPackets() */ );
+        TDLog.e( "data without G packet " + mNrPacketsRead /* getNrReadPackets() */ );
         // if ( TopoDroidApp.mActivity != null ) { // skip toast
         //   TopoDroidApp.mActivity.runOnUiThread( new Runnable() {
         //     public void run() {
@@ -252,7 +252,7 @@ public class TopoDroidComm
         }
       }
     } else {
-      TDLog.Error("DistoX packet UNKNOWN");
+      TDLog.e("DistoX packet UNKNOWN");
     }
   }
 
@@ -297,7 +297,7 @@ public class TopoDroidComm
       try {
         mCommThread.join();
       } catch ( InterruptedException e ) {
-        // TDLog.Error( "cancel thread interrupt " + e.getMessage() );
+        // TDLog.e( "cancel thread interrupt " + e.getMessage() );
       } finally {
         // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: nulling thread");
         mCommThread = null;
@@ -372,8 +372,7 @@ public class TopoDroidComm
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
   {
-    TDLog.Error("TD comm: generic download data always fails");
-    // TDLog.v( "TD comm: generic download data always fails");
+    TDLog.e("TD comm: generic download data always fails");
     return -1;
   }
 

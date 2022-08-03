@@ -67,7 +67,7 @@ public class DistoXA3Comm extends DistoXComm
   public boolean toggleCalibMode( String address, int type )
   {
     if ( ! isCommThreadNull() ) {
-      TDLog.Error( "toggle Calib Mode address " + address + " not null RFcomm thread" );
+      TDLog.e( "toggle Calib Mode address " + address + " not null RFcomm thread" );
       return false;
     }
     boolean ret = false;
@@ -77,7 +77,7 @@ public class DistoXA3Comm extends DistoXComm
       // if ( ! mProtocol.read8000( result ) ) { // FIXME ASYNC
       byte[] result = mProtocol.readMemory( DeviceA3Details.STATUS_ADDRESS ); // TODO TEST THIS
       if ( result == null ) { 
-        TDLog.Error( "toggle Calib Mode A3 failed read 8000" );
+        TDLog.e( "toggle Calib Mode A3 failed read 8000" );
       } else {
         ret = setCalibMode( DeviceA3Details.isNotCalibMode( result[0] ) );
         // if ( DeviceA3Details.isNotCalibMode( result[0] ) ) {

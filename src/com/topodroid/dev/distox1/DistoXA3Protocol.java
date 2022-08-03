@@ -63,21 +63,21 @@ public class DistoXA3Protocol extends DistoXProtocol
       // TDLog.v( "A3 swap hot bit: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte)MemoryOctet.BYTE_PACKET_REPLY ) { // 0x38 
-        TDLog.Error( "HotBit-38 wrong reply packet addr " + addr );
+        TDLog.e( "HotBit-38 wrong reply packet addr " + addr );
         return false;
       }
 
       int reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // TDLog.v( "A3 proto read ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TDLog.Error( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.e( "HotBit-38 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
       mBuffer[0] = (byte)MemoryOctet.BYTE_PACKET_REQST; // 0x39;
       // mBuffer[1] = (byte)( addr & 0xff );
       // mBuffer[2] = (byte)( (addr>>8) & 0xff );
       if ( mBuffer[3] == 0x00 ) {
-        TDLog.Error( "HotBit refusing to swap addr " + addr );
+        TDLog.e( "HotBit refusing to swap addr " + addr );
         return false;
       }  
 
@@ -94,20 +94,20 @@ public class DistoXA3Protocol extends DistoXProtocol
       // TDLog.v( "A3 swap hot bit[2]: " + String.format(" %02x", mBuffer[0] ) );
 
       if ( mBuffer[0] != (byte) MemoryOctet.BYTE_PACKET_REPLY ) {  // 0x38
-        TDLog.Error( "HotBit-39 wrong reply packet addr " + addr );
+        TDLog.e( "HotBit-39 wrong reply packet addr " + addr );
         return false;
       }
       reply_addr = MemoryOctet.toInt( mBuffer[2], mBuffer[1] );
       // TDLog.v( "A3 proto reset ... addr " + addr + " reply addr " + reply_addr );
       if ( reply_addr != addr ) {
-        TDLog.Error( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
+        TDLog.e( "HotBit-39 wrong reply addr " + reply_addr + " addr " + addr );
         return false;
       }
     } catch ( EOFException e ) {
-      TDLog.Error( "HotBit EOF failed addr " + addr );
+      TDLog.e( "HotBit EOF failed addr " + addr );
       return false;
     } catch (IOException e ) {
-      TDLog.Error( "HotBit IO failed addr " + addr );
+      TDLog.e( "HotBit IO failed addr " + addr );
       return false;
     }
     return true;
@@ -145,10 +145,10 @@ public class DistoXA3Protocol extends DistoXProtocol
       return String.format("%02x%02x-%02x%02x", mBuffer[4], mBuffer[3], mBuffer[6], mBuffer[5] );
       // TDLog.Log( TDLog.LOG_PROTO, "read Head Tail " + res );
     } catch ( EOFException e ) {
-      TDLog.Error( "read Head Tail read() EOF failed" );
+      TDLog.e( "read Head Tail read() EOF failed" );
       return null;
     } catch (IOException e ) {
-      TDLog.Error( "read Head Tail read() IO failed" );
+      TDLog.e( "read Head Tail read() IO failed" );
       return null;
     }
   }
@@ -175,10 +175,10 @@ public class DistoXA3Protocol extends DistoXProtocol
   //     result[2] = mBuffer[5];
   //     result[3] = mBuffer[6];
   //   } catch ( EOFException e ) {
-  //     TDLog.Error( "read 8000 read() EOF failed" );
+  //     TDLog.e( "read 8000 read() EOF failed" );
   //     return false;
   //   } catch (IOException e ) {
-  //     TDLog.Error( "read 8000 read() IO failed" );
+  //     TDLog.e( "read 8000 read() IO failed" );
   //     return false;
   //   }
   //   return true;
