@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
+  <string-array name="orientation">
      <item name="unspecified">Sin especificar</item>
      <item name="portrait">Retrato</item>
-     <item name="landscape">Paisaje</item>
+     <item name="landscape">Dirección</item>
   </string-array -->
 
   <string-array name="splayDash">
@@ -14,10 +14,10 @@
      <item name="view">vista</item>
   </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
+  <string-array name="splayColors">
+     <item name="none">nada</item>
+     <item name="all">todo</item>
+     <item name="palette">paleta</item>
   </string-arrayi -->
 
   <string-array name="feedbackMode">
@@ -52,10 +52,10 @@
      <item name="ten_cm">10 cm</item>
   </string-array>
 
-  <!-- TODO string-array name="unitMeasure">
+  <string-array name="unitMeasure">
      <item name="grid_cell">Cuadrícula</item>
      <item name="meter">metros</item>
-     <item name="tf">pies</item>
+     <item name="tf">piés</item>
   </string-array -->
 
   <string-array name="loopClosure">
