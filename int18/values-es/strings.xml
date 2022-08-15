@@ -211,10 +211,10 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
     <string name="export_data_title">Exportación de datos</string>
-    <string name="export_plot_title">Exportación de croquis</string>
-    <string name="export_overview_title">Exportación de todo</string>
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <!-- UNUSED string name="export_plot_title">Exportación de croquis</string>
+    <!-- UNUSED string name="export_overview_title">Exportación de todo</string>
+    <string name="export_model_title">Exportar modelo 3D</string>
+    <string name="export_tdconfig_title">Exportar proyecto</string>
 
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
@@ -228,15 +228,15 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_calib_mismatch">Calib. desajuste dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
-    <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <string name="import_zip_newer">Zip importado de una versión más reciente</string>
-    <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
+    <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
+    <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
+    <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
-    <string name="MT_points_none">No hay punto móvil Topográfico</string>
-    <string name="MT_bad_file">Archivo de topografía del movil incorrecto</string>
-    <string name="bad_manifest">Archivo de manifiesto incorrecto</string>
+    <string name="MT_points_none">No hay punto GPS</string>
+    <string name="MT_bad_file">Archivo de topografía del movil corrupto</string>
+    <string name="bad_manifest">Archivo de manifiesto corrupto</string>
 
-    <string name="pleasewait">Por favor espere</string>
+    <string name="pleasewait">Por favor espere &#8230;</string>
     <string name="processing">procesando &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
@@ -244,19 +244,22 @@ debe ajustarlos a sus necesidades./n/n
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
     <!-- UNUSED string name="pairing_failed">Falló en el emparejamiento</string -->
 
+    <string name="datamode_normal">Modo de datos normales</string>
+    <string name="datamode_diving">Modo de datos profundos</string>
     <string name="illegal_data_value">Valores de datos no válidos</string>
+	
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">foto fallida</string>
+    <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H elip. </string>
+    <string name="h_ellipsoid">H elipsoide </string>
     <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H elip. [metros]</string>
+    <string name="h_ellipsoid_hint">H elipsoide [metros]</string>
     <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -272,6 +275,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
+    <string name="error_depth_required">Profundidad\' faltante</string>
     <string name="error_clino_required">Introducir Clino</string>
     <string name="error_comment_required">Introducir comentario</string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
@@ -285,11 +289,12 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="error_invalid_name">Nombre no válido</string -->
     <string name="error_lat_required">Se requiere Latitud</string>
     <string name="error_long_required">Se requiere Longitud</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Proyecto existente</string>
+    <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
-    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
-    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <string name="error_name_duplicate">Nombre duplicado</string>
+    <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
+    <string name="error_team_required">Faltan nombres de detectores</string>
 
     <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -299,6 +304,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="error_station_non_existing">No existe estación</string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
+    <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -308,7 +314,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <!-- UNUSED string name="scale">Escala</string -->
     <!-- UNUSED string name="reversed">Inverso</string -->
-    <string name="options">Nota</string>
+    <string name="options">Opciones</string>
     <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
