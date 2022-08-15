@@ -46,9 +46,9 @@ Consulte las páginas web para más detalles..\n
     <string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
     <string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
+	    Si tiene problemas con la conexion DistoX, intente configurar el socket no seguro.\n\n
+Otras configuraciones se refieren a la presentacion en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de linea, etc.)
+debe ajustarlos a sus necesidades./n/n
     </string>
     <!-- NO TRANSLATION string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
@@ -59,15 +59,14 @@ Consulte las páginas web para más detalles..\n
     <string name="STATION">Estación</string>
     <string name="UP">HACIA ARRIBA</string>
     <string name="DOWN">HACIA ABAJO</string>
-
-    <string name="xsplay">X</string>
-    <string name="hsplay">H</string>
-    <string name="vsplay">V</string>
+    <string name="xsplay">Xsplay</string>
+    <string name="hsplay">Hsplay</string>
+    <string name="vsplay">Vsplay</string>
 
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
-    <!-- FIXME string name="copied">Copiado al portapapeles</string -->
+    <string name="copied">Copiado al portapapeles</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -80,7 +79,7 @@ Consulte las páginas web para más detalles..\n
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
     <string name="thl_wall">Pared</string>
-    <string name="thl_section">sección</string>
+    <string name="thl_section">Sección</string>
     <string name="tha_user">Usuario</string>
     <string name="tha_water">Agua</string>
 
