@@ -488,12 +488,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <string name="connection_error">Error conexión</string>
-    <string name="connecting">Conectando &#8230;</string>
+    <!-- UNUSED string name="connection_error">Error conexión</string-->
+    <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
 
-    <string name="not_available">BT No disponible</string>
+    <!-- UNUSED string name="not_available">BT No disponible</string-->
     <string name="not_enabled">BT No habilitado</string>
 
     <!-- UNUSED string name="not_implemented">No implantado</string -->
