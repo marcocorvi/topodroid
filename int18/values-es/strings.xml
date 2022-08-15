@@ -453,7 +453,6 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="bric_off">Off</string -->
     <string name="bric_memory">Memoria interna BRIC</string>
 
-
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
     <string name="popup_snap_to_splays">Ajustar a anchuras cercanas</string>
@@ -464,11 +463,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
     <string name="popup_append_line">Agregar a la línea</string>
-    <!-- TODO string name="popup_multiselect">Multiselection</string -->
-    <!-- TODO string name="popup_finish">Finish</string -->
-    <!-- TODO string name="popup_delete">Delete</string -->
-    <!-- TODO string name="popup_decimate">Decimate</string -->
-    <!-- TODO string name="popup_join">Join</string -->
+    <string name="popup_multiselect">Multiselección</string>
+    <!-- Doble string name="popup_finish">final</string -->
+    <string name="popup_finish">final</string>
+    <string name="popup_delete">Cancelar</string>
+    <string name="popup_decimate">Diezmar</string>
+    <string name="popup_join">Unirse</string>
 
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
@@ -481,6 +481,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_select_area">Seleccionar áreas</string>
     <string name="popup_select_shot">Seleccionar tomas</string>
     <string name="popup_select_station">Seleccionar estación</string>
+
     <string name="popup_cont_none">Nada</string>
     <string name="popup_cont_start">Inicio de punto</string>
     <string name="popup_cont_end">final de punto</string>
