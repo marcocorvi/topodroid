@@ -194,18 +194,19 @@ debe ajustarlos a sus necesidades./n/n
     <string name="extend_right">Drch.</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
-    <string name="splay_at_to">LRUD en la estación</string>
+    <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
-    <string name="strike_dip">Paro %1$.0f Dip %2$.0f</string>
+    <string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
-    <string name="found_groups">Se encontraron %1$d grupos</string>
+    <!-- UNUSED string name="found_groups">Se encontraron %1$d grupos</string -->
     <string name="regroup">No reagrupar</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
+    <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
