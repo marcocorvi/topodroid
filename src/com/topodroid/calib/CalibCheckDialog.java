@@ -164,6 +164,14 @@ public class CalibCheckDialog extends MyDialog
               k2 = k;
               n2 = 1;
               in_leg = true;
+            } else if ( TDMath.abs( b.mLength - blk.mLength ) < 0.1 ) {
+              if ( TDMath.abs( b.mClino - blk.mClino ) < 1.0 && TDMath.angleDifference( b.mBearing, blk.mBearing ) < 1.0 ) {
+                // FIXME using values instead of station names:
+                b2 = b.mFrom + "-" + b.mTo;
+                k2 = k;
+                n2 = 1;
+                in_leg = true;
+              }
             }
           }
         } else {
