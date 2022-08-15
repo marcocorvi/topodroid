@@ -1,17 +1,12 @@
-THIS TRANSLATION IS TOO INCOMPLETE
-In order to bring it back in the app you need to:
-  [1] translate all the untranslated strings
-  [2] copy the missing strings from the English strings.xml file and translate them
-  [3] send an email informing that the translation is ready for inclusion
-Translation with more than 20 lint errors are not accepted.
-Translation with more than 70 lint errors are dropped from the app.
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
+
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -21,18 +16,22 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <!-- NO TRANSLATION string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="new_survey_label">Nueva topografía</string>
-    <string name="distox_label">DistoX</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
-  <string name="r_title">Aviso importante sobre Android R</string>
-  <string name="r_dialog">Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\NConsulte las páginas web para más detalles..\n
-  </string>
-  <string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
-  <string name="r_i_understood">He entendido perfectamente este aviso</string>
-  <!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
-  <string name="r_continue">CONTINUAR</string>
+<!-- UNUSED string name="r_title">Aviso importante sobre Android R</string-->
+<!-- UNUSED string name="r_dialog">
+Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\N
+Consulte las páginas web para más detalles..\n
+  </string-->
+<!-- UNUSED string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
+<!-- UNUSED string name="r_i_understood">He entendido perfectamente este aviso</string>
+<!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
+<!-- UNUSED string name="r_continue">CONTINUAR</string-->
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
