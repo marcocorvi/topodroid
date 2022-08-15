@@ -326,7 +326,13 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="hidden_del">Mostrar el croquis de la poligonal principal</string -->
     <string name="hidden_show">Mostrar tomas más allá de la estación</string>
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Tomas laterales</string>
+    <string name="including_splays">incluyendo tomas laterales</string>
+    <string name="with_splays">con tomas laterales</string>
+    <string name="cell_size">Tamaño de la celda [m]</string>
+
+    <string name="legs">Battute</string>
+    <string name="stations">Caposaldo</string>
     <string name="splays">Tomas laterales</string>
     <string name="legs">Trayecto</string>
     <!-- TODO string name="stations">Station</string -->
