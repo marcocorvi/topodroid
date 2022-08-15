@@ -5,7 +5,7 @@
      <item name="unspecified">Sin especificar</item>
      <item name="portrait">Retrato</item>
      <item name="landscape">Dirección</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="splayDash">
      <item name="none">nada</item>
@@ -18,12 +18,12 @@
      <item name="none">nada</item>
      <item name="all">todo</item>
      <item name="palette">paleta</item>
-  </string-arrayi -->
+  </string-array>
 
   <string-array name="feedbackMode">
      <item name="none">nada</item>
      <item name="sound">sonido</item>
-     <item name="heptic">háptico</item>
+     <item name="heptic">táctil</item>
   </string-array>
 
   <string-array name="canvasLevels">
@@ -53,23 +53,23 @@
   </string-array>
 
   <string-array name="unitMeasure">
-     <item name="grid_cell">Cuadrícula</item>
+     <item name="grid_cell">Cuadricula</item>
      <item name="meter">metros</item>
      <item name="tf">piés</item>
-  </string-array -->
+  </string-array>
 
   <string-array name="loopClosure">
      <item name="none">Nada</item>
      <item name="normal">Normal</item>
      <item name="weighted">ponderado</item>
-     <item name="triangles">Triángulos</item>
+     <item name="triangles">Triangulos</item>
   </string-array>
 
   <!-- UNUSED string-array name="wallsType">
      <item name="none">Nada</item>
      <item name="convex">Convexa</item>
      <item name="delaunay">Todo</item>
-  </string-array -->
+  </string-array-->
 
   <string-array name="zoomCtrl">
      <item name="0">Ocultar</item>
@@ -78,8 +78,8 @@
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Alfanuméricas</item>
-     <item name="number">Numéricas</item>
+     <item name="alpha">Alfanumericas</item>
+     <item name="number">Numericas</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -87,7 +87,7 @@
      <item>Vert.</item>
      <item>Drch.</item>
      <item>- -</item>
-  </string-array -->
+  </string-array-->
 
   <!-- UNUSED string-array name="exportShots">
      <item name="none">Nada</item>
@@ -136,8 +136,8 @@
   </string-array>
 
   <!-- DO NOT TRANSLATE string-array name="logStream">
-     <item name="android">Registro del sistema</item>
-     <item name="file">Archivo de registro</item>
+     <item name="android">System log</item>
+     <item name="file">File log</item>
   </string-array -->
 
   <string-array name="connMode">
@@ -237,7 +237,7 @@
      <item name="two">Normal</item>
      <item name="two">Pocos</item>
      <item name="bezier">Bezier</item>
-     <item name="simplified">Simplificado</item> <!-- TODO -->
+     <item name="simplified">Simplificado</item>
   </string-array>
 
   <string-array name="groupBy">
@@ -248,7 +248,7 @@
 
   <string-array name="unitLength">
      <item name="meters">Metros</item>
-     <item name="feet">Piés</item>
+     <item name="feet">Pies</item>
   </string-array>
 
   <string-array name="unitAngle">
@@ -258,7 +258,7 @@
 
   <string-array name="unitLocation">
      <item name="degrees">Grados</item>
-     <item name="ddmmss">Grados, minutos, segundos</item>
+     <item name="ddmmss">Grados minutos segundos</item>
   </string-array>
 
   <string-array name="calibAlgo">
@@ -267,7 +267,7 @@
      <item name="nonlinear">No lineal</item>
   </string-array>
 
-  <!-- FIXME string-array name="rawCData">
+  <string-array name="rawCData">
      <item name="none">Nada</item>
      <item name="dec">Decimal</item>
      <item name="hex">hexadecimales</item>
@@ -275,7 +275,7 @@
      <item name="hexg">G Hex</item>
      <item name="decm">M Decimal</item>
      <item name="hexm">M Hex</item>
-  </string-array -->
+  </string-array>
 
   <!-- 3D VIEWER array strings -->
 
@@ -284,10 +284,10 @@
      <item name="cut">Cortar</item>
   </string-array>
 
-  <!-- TODO string-array name="splayUse">
+  <string-array name="splayUse">
      <item name="skip">Saltar</item>
      <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+     <item name="xsection">Seccion transversal</item>
+  </string-array>
 
 </resources>
