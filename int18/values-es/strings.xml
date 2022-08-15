@@ -332,12 +332,10 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cell_size">Tamaño de la celda [m]</string>
 
     <string name="legs">Battute</string>
-    <string name="stations">Caposaldo</string>
+    <string name="stations">Estaciones</string>
     <string name="splays">Tomas laterales</string>
-    <string name="legs">Trayecto</string>
-    <!-- TODO string name="stations">Station</string -->
-    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
+    <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitud %1$s</string>
     <string name="fmt_longitude">Longitud %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
@@ -351,29 +349,31 @@ debe ajustarlos a sus necesidades./n/n
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
+    <string name="index_oob">Índice fuera de los límites %1$d</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">No graba audio</string>
     <string name="no_bt">No hay Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
     <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
-    <string name="no_capture_app">No hay aplicación para capturar imagen</string>
+    <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
     <string name="no_cave3d">Cave3D No instalado</string>
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
-    <string name="no_device_found">No se encuentra dispositivos</string>
+    <string name="no_device_window">Ventana del dispositivo deshabilitada durante la descarga</string>
+    <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
     <string name="no_feature_audio">Audio no compatible</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF no soportado</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
-    <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
+    <!-- UNUSED string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string-->
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin croquis.\nPulse el botón para añadir uno</string>
-    <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
+    <string name="no_plots">Topografía sin croquis</string>
+    <string name="no_profile_overview">Sin descripción general de los perfiles proyectados</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
@@ -382,10 +382,10 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">No hay elementos para restaurar</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
@@ -394,7 +394,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string>
+    <!-- UNUSED string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string-->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -408,20 +408,20 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">RECUPERAR/PEGAR</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">Residuos</string>
     <string name="menu_switch">Cerrar/Cambiar</string>
     <string name="menu_help">Ayuda</string>
     <!-- UNUSED string name="menu_join_survey">Unir topografías</string -->
-    <string name="menu_logs">Registros</string>
+    <!-- UNUSED string name="menu_logs">Registros</string-->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
-    <string name="menu_overview">Medir distancia</string>
+    <string name="menu_overview">Panorámica</string>
     <string name="menu_packets">PAQUETES</string>
-    <string name="menu_pair">Emparejar</string>
+    <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
@@ -436,11 +436,11 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_zoom_fit">Ajustar a pantalla</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Papel cuadriculado</string>
 
-    <string name="start_scan">Inicio escaneo</string>
-    <string name="stop_scan">Fin de escaneo</string>
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <!-- UNUSED string name="start_scan">Inicio escaneo</string-->
+    <!-- UNUSED string name="stop_scan">Fin de escaneo</string-->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
     <string name="ble_no_remote">Sin dispositivo remoto</string>
@@ -451,7 +451,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
+    <string name="bric_memory">Memoria interna BRIC</string>
 
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
