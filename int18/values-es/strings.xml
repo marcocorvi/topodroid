@@ -86,8 +86,9 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
+    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
-    <string name="bad_sibling">Toma mala</string>
+    <string name="bad_sibling">Toma incorrecta</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -119,7 +120,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
     <string name="calibration_azimuth">Brújula</string>
-    <string name="calibration_clino">Clino</string>
+    <string name="calibration_clino">Clinometro</string>
 
     <string name="calib_new">Nueva calibración</string>
     <string name="calib_exists">La calibración ya existe</string>
@@ -127,21 +128,21 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
-    <!-- REMOVE string name="calib_gm_policy">Política</string-->
     <string name="calib_gm_policy">Politica de grupo</string>
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
-    <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos &#8230;</string>
-    <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  &#8230;</string>
-    <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración &#8230;</string -->
-    <string name="calib_write_coeffs">Escribir coeficientes de calibración &#8230;</string>
+    <string name="calib_compute_groups">Agrupación de datos en curso</string>
+    <string name="calib_compute_coeffs">Cálculo de coeficientes en curso</string>
+    <!-- UNUSED string name="calib_read_coeffs">Lectura de coeficientes en curso</string -->
+    <string name="calib_write_coeffs">Escritura de coeficientes en curso</string>
     <string name="calib_validation">Validación de %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s</string>
     <string name="calib_error">Error: %1$.2f grados (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Errore medio: %1$.2f grados</string>
     <string name="calib_stddev">Error stddev: %1$.4f grados</string>
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
     <string name="calib_ave_std">Precisión: %1$.4f %2$.4f grados</string>
@@ -168,6 +169,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Unidad de ángulos: gradiente</string>
     <string name="device_status_angle_degree">Unidad de ángulos: grados</string>
     <string name="device_status_compass_on">Compass/clino: on</string>
