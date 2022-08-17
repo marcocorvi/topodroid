@@ -591,9 +591,13 @@ debe ajustarlos a sus necesidades./n/n
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
-    <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
-    <string name="saturated_coeffs">ADVERTENCIA: coeficientes de calibración saturados</string>
-    <string name="out_of_memory">ADVERTENCIA: sin memoria!</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
+    <string name="survey_no_data_reduction">ATENCIÓN: datos sin procesar</string>
+    <string name="survey_not_saved">ATENCIÓN: información de la topografía no guardada</string>
+    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente</string>
+    <string name="survey_bad_magnetic">ATENCIÓN: proyecto poco preciso</string>
+    <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
+    <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
     
     <string name="toporobot_warning">¡La política de TopoRobot es experimental!</string>
