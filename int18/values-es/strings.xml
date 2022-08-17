@@ -521,10 +521,11 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
-    <string name="plot_start">Base estación</string>
-    <!-- UNUSED string name="plot_view">Vista Estación</string -->
-    <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
+    <string name="plot_start">Punto de origen</string>
+    <!-- UNUSED string name="plot_view">Punto de referencia</string -->
+    <string name="read_fail_with_code">Fallo de lectura: código de error </string>
     <string name="read_failed">Error al leer DistoX</string>
+    <string name="swap_hotbit_ok">Cambiato hot-bit dei dati</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
 
     <string name="saved_file_1">Guardar archivo %1$s</string>
@@ -540,9 +541,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="section_area">Sección de área: %1$.1f</string>
     <string name="section_name">comentario de la sección</string>
     <string name="scrap_outline">Contornos de otros croquis</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="scrap_string">Diseño descartado: %1$d / %2$d</string>
+    <string name="section_point_not_allowed">Punto de sección no permitido</string -->
+    <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Gravedad</string>
@@ -557,33 +558,24 @@ debe ajustarlos a sus necesidades./n/n
     <string name="sensor_value">Valor</string>
     <string name="sensor_comment">Commentario</string>
     <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
-    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
-    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
+    <string name="sensor_no_readings">Medidas insuficientes</string>
+    <string name="sensor_failure">Fallo del sensor: %1$d</string>
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shots_delete">¿Quiere eliminar las tomas?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Eliminar tomas?</string>
+    <string name="shot_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar toma?</string>
+    <string name="shots_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar tomas?</string>
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Toma %1$s</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
-<!-- NOT USED -->
-    <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
-    <!-- UNUSED string name="sketch3d_name">Nombre</string -->
-    <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
-    <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
-    <!-- UNUSED string name="sketch3d_null_name">Falta dibujo 3D Sig. estación</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Falta dibujo 3D Sig. estación</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Falta dibujo 3D estación base</string -->
-    <!-- UNUSED string name="sketch3d_start">Estación base</string -->
 
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>
@@ -595,7 +587,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="survey_exists">Nombre de Topografía ya existe</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Mover tomas a la topografia %1$s ?</string>
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
