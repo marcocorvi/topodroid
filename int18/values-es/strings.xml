@@ -607,32 +607,35 @@ debe ajustarlos a sus necesidades./n/n
     <string name="delta_warning">Error promedio superior %1$.1f\nEscribir coeficientes?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_data">Distribución de datos sin procesar: %1$.2f %%</string>
+    <string name="cover_calib">Distribución de datos calibrados: %1$.2f %%</string>
+    <string name="cover_g">Distribución de datos G: %1$.2f %%</string>
+    <string name="cover_m">Distribución de datos M: %1$.2f %%</string>
+    <string name="cover_r">Distribución de rotación: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
-
+    <string name="accuracy_low">Baja precisión. Calibración recomendada.</string>
+    <string name="accuracy_medium">Precision baja</string>
+    <!-- UNUSED string name="accuracy_high">Buena precisión</string -->
+    <string name="accuracy_unreliable">Sensores poco fiables</string>
+    
+    <string name="empty_clipboard">sin notas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="second_device">second device</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">Estación inicial</string>
+    <string name="second_device">segundo dispositivo</string>
+    <string name="start_station">Estación inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
     <string name="undelete_shot">Toma</string>
     <string name="undelete_overshoot">Exceso</string>
     <string name="undelete_check">Verificar</string>
+    <string name="undelete_blunder">Tomas falsas</string>
     <string name="undelete_plot">Dibujos</string>
     <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
@@ -660,6 +663,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <string name="stat_extlen">3D longitud %1$.1f %2$s</string>
     <string name="stat_projlen">Longitud de la planta %1$.1f %2$s</string>
+    <string name="stat_cycle">Ciclos %1$d</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_azimuth">Perfil proyección Brújula: %1$.1f</string>
@@ -672,8 +676,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
-
+    <string name="survey_split_move_title">Dividir / Mover alivio</string>
+	
     <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Tomas laterales %1$d</string>
     <string name="survey_stat_station">Estaciones %1$d</string>
@@ -685,17 +689,21 @@ debe ajustarlos a sus necesidades./n/n
     <string name="hide_splay">Visualizar las tomas radiales</string>
 
     <!-- UNUSED string name="plan">Planta</string -->
-    <string name="extended">Alzado</string>
-    <string name="extended_profile">Alzado desarrollado</string>
-    <string name="profile">PROYECTO</string>
-    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
-    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
-    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+   <string name="extended">SECCIÓN LONG.</string>
+    <string name="profile">PROYECCIÓN</string>
+    <string name="fmt_plan">%1$s: PLANTA</string>
+    <string name="fmt_extended">%1$s: SECCIÓN LONG.</string>
+    <string name="fmt_profile">%1$s: PROYECCIÓN</string>
 
+    <string name="extended_profile">Alzado extendido</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-sección</string -->
     <!-- UNUSED string name="h_section">H-sección</string -->
     <!-- UNUSED string name="landscape">Paisaje</string -->
+
+    <string name="display_view">vista</string>
+    <string name="plan_view">planta</string>
+    <string name="profile_view">sección</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
@@ -707,20 +715,22 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
-    <string name="ask_backups_clear">Eliminar copia seguridad de croquis?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
+    <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Añadir    </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Applicar</string>
     <string name="button_back"      >Atrás     </string>
     <string name="button_cancel"    >Cancelar  </string>
-    <string name="button_change"    >Cambio    </string>
+    <!-- UNUSED string name="button_change"    >Cambio    </string -->
+    <string name="button_clipboard" >Notas</string>
     <string name="button_close"     >Cerrar     </string>
     <!-- UNUSED string name="button_create"    >Crear    </string -->
     <string name="button_color"     >Color  </string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >Calcular</string>
+    <string name="button_clear_convert">Limpiar la conversión</string>
     <string name="button_convert"   >Convertir </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
+    <string name="button_copy"      >Copia</string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
@@ -729,12 +739,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
-    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
+    <string name="button_evalroll"  >Rotación</string>
+    <string name="button_eval_cal"  >Calcular con calibre</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- DONT TRANSLATE string name="button_help">?</string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <string name="button_manual"    >Manual de usuario</string>
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <!-- UNUSED string name="button_photo"   >Fotos</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
@@ -742,10 +752,10 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
-    <!-- TODO string name="button_move"    >Move</string -->
-    <string name="button_next"    >Siguiente</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_move"    >Mueve</string>
+    <string name="button_next"    >próximo</string>
+    <string name="button_prev"    >Anterior</string>
+    <string name="button_new"     >nuevo exceso</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -754,6 +764,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
+    <string name="button_recover"   >Recupera</string>
+    <string name="button_reverse"   >Inversi</string>
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
