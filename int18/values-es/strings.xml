@@ -1185,16 +1185,16 @@ debe ajustarlos a sus necesidades./n/n
     <string name="title_settings_edit">Ajustes de edición en TopoDroid</string>
     <string name="title_settings_device">Ajustes del dispositivo en TopoDroid</string>
     <string name="title_settings_calib">Ajustes de calibración en TopoDroid</string>
-    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
-    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
-    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string-->
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_3d">Configuración del visor 3d de TopoDroid</string>
+    <string name="title_settings_dem">Configuración DEM de TopoDroid </string>
+    <string name="title_settings_walls3d"> Configuración del modelo 3d de TopoDroid</string>
+    <string name="title_settings_geek">Indicador de configuración para principiantes </string>
+    <string name="title_settings_geek_survey">Principiantes: Configuración de la topografía</string>
+    <string name="title_settings_geek_splay">Principiantes: configuración de visualización </string>
+    <string name="title_settings_geek_plot">Principiantes: configuración de dibujo </string>
+    <string name="title_settings_geek_line"> Principiantes: configuración de línea </string>
+    <string name="title_settings_geek_device">Principiantes: configuración de DistoX</string>
+    <string name="title_settings_geek_import">Principiantes: configuración de importación</string>
     <string name="title_settings_log">Ajustes de registro en TopoDroid</string>
 
     <string name="title_shift">Cambio</string>
@@ -1209,7 +1209,6 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_sketch_select">Seleccionar elemento</string -->
 
     <string name="title_stats">Estadísticas</string>
-    <!-- UNUSED string name="title_step">Medida</string -->
     <string name="title_survey">Info. topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
@@ -1219,21 +1218,27 @@ debe ajustarlos a sus necesidades./n/n
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
-
+  <string name="title_import_shot">Importar Topografía</string>
+  <string name="title_import_gps">Importar punto GPS</string>
+  <string name="title_graph_paper">Papel milimétrico en escala 1: 100</string>
+  <string name="graph_paper_scale">Ajusta la línea a 5 cm</string>
+	
+  <string name="exported_settings">Configuración exportada %1$s</string>
+  <string name="imported_settings">Configuración importada</string>
+  <string name="imported_settings_failed">Configuración de importación fallida</string>
+  <string name="export_settings_failed">Configuración de exportación fallida</string>
   <string name="pref_export_settings">Ajustes de exportación</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
-
+  <string name="pref_export_plot_title">Formato de exportación de croquis</string>
+  <string name="pref_export_plot_summary">Formato de exportación de croquis predeterminado</string>
+  <string name="pref_export_shots_title">Formato de exportación de datos</string>
+  <string name="pref_export_shots_summary">Formato de exportación de datos predeterminado</string>
+  <string name="pref_auto_plot_export_title">Formato de exportación de croquis automático</string>
+  <string name="pref_auto_plot_export_summary"Formato de exportación automática de dibujos</string>
+	
   <string name="pref_cat_survey">Ajustes de topografía</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">DATOS SPLAY</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1249,16 +1254,14 @@ debe ajustarlos a sus necesidades./n/n
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
-  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
+  <string name="pref_cat_cave3d">VISOR 3D</string>
+  <string name="pref_cat_geek">FLAG Principiante</string>
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
-
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Seleccione idioma</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientación de Pantalla</string>
+  <string name="pref_orientation_summary">Orientación Pantalla App </string>
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -1274,9 +1277,11 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
   <!-- UNUSED string name="pref_cosurvey_title">Cosurvey</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string -->
+  <string name="pref_import_datamode_title"> Formato de importación</string>
+  <string name="pref_import_datamode_summary">Formato de datos de importación</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
+  <string name="pref_therion_config_title">Comandos de configuración de Therion</string>
+  <string name="pref_therion_config_summary">Insertar comandos de configuración de Therion</string>
   <string name="pref_therion_maps_title">Mapa Therion primero</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes de los datos de la topografía</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
@@ -1287,6 +1292,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_with_sensors_summary">Habilitar datos de "sensores"</string>
   <string name="pref_with_android_azimuth_title">Brújula Android</string>
   <string name="pref_with_android_azimuth_summary">Activar Brújula/clino Android</string>
+  <string name="pref_blunder_shot_title">Tomas falsas</string>
+  <string name="pref_blunder_shot_summary">Omitir tomas falsas</string>
   <string name="pref_with_levels_title">Capas</string>
   <string name="pref_with_levels_summary">Usa capas en dibujo</string>
   <string name="pref_palettes_title">Paletas</string>
@@ -1300,7 +1307,6 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
-  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
@@ -1313,8 +1319,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
   <string name="pref_vtopo_lrud_title">A partir de LRUD</string>
   <string name="pref_vtopo_lrud_summary">LRUD en la estación VisualTopo</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Formato Trox</string>
+  <string name="pref_vtopo_trox_summary"> Exportar VisualTopo en formato trox</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
@@ -1329,12 +1335,12 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <string name="pref_svg_program_title">Programa SVG</string>
+  <string name="pref_svg_program_summary">Programa SVG utilizado</string>
   <string name="pref_svg_grid_title">Parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG/PNG</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
+  <string name="pref_svg_roundtrip_title">SVG de ida y vuelta</string>
+  <string name="pref_svg_roundtrip_summary">Exportar SVG con capa de ida y vuelta</string>
   <string name="pref_svg_splays_title">Biscelado SVG</string>
   <string name="pref_svg_splays_summary">Incluir biscelado en la exportación SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
@@ -1353,21 +1359,20 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_svg_linedirstroke_summary">Ancho de orientación de línea en SVG</string>
   <string name="pref_svg_line_dir_title">Flecha de orientación SVG</string>
   <string name="pref_svg_line_dir_summary">Agregue flecha de orientación a la exportación de SVG</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
-  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
-  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
+  <string name="pref_svg_stationsize_title"> Tamaño objetivo</string>
+  <string name="pref_svg_stationsize_summary">Tamaño de texto de los nombres de destino</string>
+  <string name="pref_svg_labelsize_title">Tamaño de etiqueta</string>
+  <string name="pref_svg_labelsize_summary">Tamaño de etiqueta de texto</string>
   <string name="pref_kml_stations_title">Estaciones en KML</string>
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
   <string name="pref_kml_splays_title">Tomas radiales en KML</string>
   <string name="pref_kml_splays_summary">Añadir tomas radiales a la exportación de KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <string name="pref_csv_raw_title">CSV sin formato</string>
   <string name="pref_csv_raw_summary">Exportar datos raw a CSV</string>
   <string name="pref_csv_sep_title">Separación CSV</string>
   <string name="pref_csv_sep_summary">Filas separadas CSV</string>
   <string name="pref_csv_eol_title">CSV conocido</string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
-
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->
@@ -1386,8 +1391,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Autoconectar</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Vuelva a conectar si se pierde la conexión</string -->
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Topografía con 2 DistoX</string>
+  <string name="pref_second_distox_summary">Detectar con 2 DistoX</string>
   <string name="pref_auto_pair_title">Emparejamiento automático</string>
   <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
   <string name="pref_head_tail_title">Número de datos nuevos</string>
@@ -1396,16 +1401,16 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Verificación de firmware</string>
+  <string name="pref_firmware_sanity_summary">Realizar comprobaciones de estado\' firmware</string>
   <string name="pref_crs_title">CRS</string>
   <string name="pref_crs_summary">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+  <string name="pref_bric_mode_title">Modo BRIC</string>
+  <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
+  <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
+  <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
 
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
@@ -1436,15 +1441,17 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_horiz_splay_message">Separe el rumbo más de lo que esta discontínuo</string>
   <string name="pref_section_splay_title">Umbral del ángulo del tablero de separación</string>
   <string name="pref_section_splay_message">Sobre este ángulo con el plano de sección,los guiones se puntean</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+  <string name="pref_splay_dash_color_title">Color discontinuo</string>
+  <string name="pref_splay_dash_color_summary">Color de las líneas de puntos</string>
+  <string name="pref_splay_dot_color_title">Color punteado</string>
+  <string name="pref_splay_dot_color_summary">Color de las líneas punteadas</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Autoexportación de datos</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string -->
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_editable_stations_title">Puntos de referencia editables </string>
+  <string name="pref_editable_stations_summary">Puntos de referencia editables en la lista de datos</string>
+  <string name="pref_zipped_symbols_title">Archivo de símbolos en formato ZIP</string>
+  <string name="pref_zipped_symbols_summary">Guardar / Cargar símbolos a / desde archivo ZIP</string>
   <string name="pref_fixed_origin_title">Origen del dibujo</string>
   <string name="pref_fixed_origin_summary">Origen de dibujo fijo</string>
   <string name="pref_shared_xsections_title">Secciones x compartidas</string>
@@ -1473,13 +1480,13 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_backshot_title">visual inversa DistoX</string>
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backshot_summary">Invertir puntos de destino en datos de backshot</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
-  <string name="pref_azimuth_manual_title">Toma extendida</string>
-  <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
+  <string name="pref_azimuth_manual_title">"extender" manual</string>
+  <string name="pref_azimuth_manual_summary">Establecer "extender" las líneas manualmente</string>
 
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
