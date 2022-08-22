@@ -1066,11 +1066,15 @@ public class TopoDroidApp extends Application
     if ( version == null || ( ! version.equals( TDVersion.string() ) ) ) {
       mDData.setValue( "version",  TDVersion.string()  );
       // FIXME INSTALL_SYMBOL installSymbols( false ); // this updates symbol_version in the database
-      if ( mDData.getValue( "symbol_version" ) == null ) {
+      String symbol_version = mDData.getValue( "symbol_version" );
+      if ( symbol_version == null ) {
         // TDLog.v("PATH " + "symbol version " + symbol_version );
         installSymbols( true );
       }
-      installFirmware( false );
+      String firmware_version = mDData.getValue( "firmware_version" );
+      if ( firmware_version == null || ( ! firmware_version.equals( TDVersion.FIRMWARE_VERSION ) ) ) {
+        installFirmware( false ); // false = do not overwrite
+      }
       // installUserManual( );
       mCheckManualTranslation = true;
     }
@@ -1837,6 +1841,7 @@ public class TopoDroidApp extends Application
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
+    mDData.setValue( "firmware_version", TDVersion.FIRMWARE_VERSION );
   }
  
   // -------------------------------------------------------------

@@ -92,7 +92,7 @@ public class FirmwareDialog extends MyDialog
     
   }
 
-  public void setFile( String filename )
+  public void setFirmwareFile( String filename )
   {
     mETfile.setText( filename );
   }

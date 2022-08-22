@@ -67,7 +67,7 @@ public class TDsafUri
   {
     if ( uri != null ) {
       try {
-        return TDInstance.getContentResolver().openFileDescriptor( uri, "w" );
+        return TDInstance.getContentResolver().openFileDescriptor( uri, "wt" ); // FIXME beacuase "wt" is not documented
       } catch ( IOException e ) {
         e.printStackTrace();
       }

@@ -604,7 +604,6 @@ public class DrawingIO
     int what, type; // , dir;
     int version = 0;
     int flag = 0;
-    // float x, y;
     int kmax = 3; // number of header entries 
     try {
       for ( int k=0; k<kmax; ++k ) {
@@ -624,20 +623,23 @@ public class DrawingIO
 	  // TDLog.v("TDR header scrap: " + name + " type " + type );
         } else if ( what == 'I' ) {
           flag |= 0x04;
-          /* x = */ dis.readFloat();
-          /* y = */ dis.readFloat();
-	  // TDLog.v("TDR header bbox from: " + x + " " + y );
-          /* x = */ dis.readFloat();
-          /* y = */ dis.readFloat();
-	  // TDLog.v("TDR header bbox to:   " + x + " " + y );
+          /* float x1 = */ dis.readFloat();
+          /* float y1 = */ dis.readFloat();
+          /* float x2 = */ dis.readFloat();
+          /* float y2 = */ dis.readFloat();
           if ( dis.readInt() == 1 ) {
-            /* x = */ dis.readFloat();
-            /* y = */ dis.readFloat();
-            /* x = */ dis.readFloat();
-            /* y = */ dis.readFloat();
+	    // TDLog.v("TDR header bbox from " + x1 + " " + y1 + " to " + x2 + " " + y2 + " with north");
+            /* x1 = */ dis.readFloat();
+            /* y1 = */ dis.readFloat();
+            /* x2 = */ dis.readFloat();
+            /* y2 = */ dis.readFloat();
+          // } else {
+	  //   TDLog.v("TDR header bbox from " + x1 + " " + y1 + " to " + x2 + " " + y2 + " no north");
           }
         } else if ( what == 'N' ) { // scrap index
-          /* scrap_index = */ dis.readInt();
+          // int scrap_index = 
+            dis.readInt();
+          // TDLog.v("TDR scrap index " + scrap_index );
         } else {
           break;
         }
@@ -645,6 +647,7 @@ public class DrawingIO
     } catch ( IOException e ) {
       e.printStackTrace();
     } 
+    // TDLog.v("TDR header flag " + flag );
     return (flag == 0x07)? version : 0;
   }
 

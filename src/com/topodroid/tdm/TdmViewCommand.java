@@ -169,7 +169,8 @@ public class TdmViewCommand
     synchronized( mStations ) { // FIXME SYNCH_ON_NON_FINAL
       float zoom = mScale / 50;
       for ( TdmViewStation st : mStations ) {
-        st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
+        // st.draw( canvas, mMatrix, mPaint, mFillPaint, zoom );
+        st.draw( canvas, mMatrix, BrushManager.fixedStationPaint, mFillPaint, zoom );
       }
       if ( mSelected != null ) {
         mSelected.drawCircle( canvas, mMatrix, mPaint, zoom );

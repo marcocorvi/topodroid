@@ -375,7 +375,7 @@ public class PTFile
 //   const char * sideviewfile = oss_ext.str().c_str();
 // 
 //   TDPath.checkPath( oss.str().c_str() );
-//   OutputStream fp = fopen( oss.str().c_str(), "w" );
+//   OutputStream fp = fopen( oss.str().c_str(), "wt" );
 //   if ( fp == NULL ) return; // FIXME
 //   fprintf(fp, "encoding UTF-8\n");
 //   fprintf(fp, "survey survey_name\n\n");
@@ -417,13 +417,13 @@ public class PTFile
 //   fprintf(fp, "endsurvey\n");
 //   fclose( fp );
 // 
-//   fp = fopen( outlinefile, "w" );
+//   fp = fopen( outlinefile, "wt" );
 //   if ( fp ) {
 //     _outline.printTherion( fp, "outline", "plan", _color_point, _color_line );
 //     fclose( fp );
 //   }
 // 
-//   fp = fopen( sideviewfile, "w" );
+//   fp = fopen( sideviewfile, "wt" );
 //   if ( fp ) {
 //     _sideview.printTherion( fp, "sideview", "extended", _color_point, _color_line );
 //     fclose( fp );

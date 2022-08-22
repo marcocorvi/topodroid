@@ -700,6 +700,7 @@ public class MainWindow extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
+    TDLog.v("MAIN on create");
     
     TDandroid.setScreenOrientation( this );
 
@@ -1062,6 +1063,7 @@ public class MainWindow extends Activity
     super.onStart();
     // restoreInstanceFromFile();
     // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
+    TDLog.v( "MAIN onStart check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
       TDandroid.requestExternalStorage( this, this );
     }
@@ -1142,7 +1144,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    // TDLog.v("MAIN on Resume");
+    TDLog.v("MAIN on Resume");
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1215,6 +1217,8 @@ public class MainWindow extends Activity
     }
   };
 
+  /** handle the HW back-key press
+   */
   @Override
   public void onBackPressed () // askClose
   {
@@ -1253,7 +1257,11 @@ public class MainWindow extends Activity
     super.attachBaseContext( TDInstance.context );
   }
 
-
+  /** handle the result of an activity request
+   * @param request   request code
+   * @param result    result code
+   * @param intent    result intent
+   */
   public void onActivityResult( int request, int result, Intent intent ) 
   {
     // TDLog.v( "Main Window on Activity Result " + request + " " + result );
@@ -1285,10 +1293,10 @@ public class MainWindow extends Activity
           TDLog.Error("SETTINGS canceled");
         }
         break;
-      case TDRequest.REQUEST_GET_IMPORT:
+      case TDRequest.REQUEST_GET_IMPORT: // handle a survey/zip import 
         if ( result == Activity.RESULT_OK ) {
-          String filename;
-          Uri uri = intent.getData();
+          String filename;              // import filename
+          Uri uri = intent.getData();   // import uri
           String mimetype = TDsafUri.getDocumentType( uri );
           if ( mimetype == null ) {
             String path = TDsafUri.getDocumentPath(this, uri);
@@ -1373,6 +1381,11 @@ public class MainWindow extends Activity
     }
   }
 
+  /** handle a HW key press
+   * @param code   key code
+   * @param event  key event
+   * @return true if the key-press has been handled
+   */
   @Override
   public boolean onKeyDown( int code, KeyEvent event )
   {
@@ -1462,7 +1475,8 @@ public class MainWindow extends Activity
     }
   }
 
-  // check whether to ask user to update manual translation
+  /** check whether to ask user to update manual translation
+   */
   private void checkManualTranslation()
   {
     if ( TDFile.hasManFile( "manifest" ) ) {
@@ -1532,11 +1546,17 @@ public class MainWindow extends Activity
     }
   }
 
-  private static int mImportType; 
+  // private static int mImportType;  // UNUSED
   private static ImportData mImportData = new ImportData();
 
+  /** @return the import parameters
+   */ 
   ImportData getImportData() { return mImportData; }
 
+  /** import a survey
+   * @param type   survey file format
+   * @param data   import parameters
+   */
   public void doImport( String type, ImportData data )
   {
     int index = TDConst.surveyFormatIndex( type );
@@ -1544,6 +1564,11 @@ public class MainWindow extends Activity
     selectImportFromProvider( index, data );
   }
 
+  /** get the import stream from the data provider
+   * @param index  file format index (@see TDConst.surveyFormatIndex)
+   * @param data   import parameters
+   * this method saves the import parameters and starts a choice of a file (of the given type)
+   */
   private void selectImportFromProvider( int index, ImportData data ) // IMPORT
   {
     if ( index < 0 || index >= TDConst.mMimeType.length ) {

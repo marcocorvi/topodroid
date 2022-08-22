@@ -763,7 +763,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="button_sensor"  >Sensors</string -->
     <!-- UNUSED string name="button_direction">Azimuth/Clino</string -->
     <!-- UNUSED string name="button_azimuth">Azimuth</string -->
-    <string name="button_plot"    >Sketch</string>
+    <string name="button_plot"    >Draw</string>
     <string name="button_more"    >More</string>
     <string name="button_move"    >Move</string>
     <string name="button_next"    >Next</string>

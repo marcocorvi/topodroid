@@ -114,7 +114,7 @@ public class FirmwareFileDialog extends MyDialog
     mList.setOnItemClickListener( null );
     dismiss();
 
-    mParent.setFile( item );
+    mParent.setFirmwareFile( item );
   }
 
 }

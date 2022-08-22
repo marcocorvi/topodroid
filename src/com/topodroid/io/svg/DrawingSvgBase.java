@@ -422,9 +422,11 @@ public class DrawingSvgBase
       boolean done = false;
       while ( ! done ) {
         int what = dis.read();
+        // TDLog.v("TDR2SVG read code " + what );
         switch ( what ) {
           case 'N': // scrap index ( v. >= 401160 )
-            // int scrap = dis.readInt();
+            // int scrap = 
+              dis.readInt();
             break;
           case 'P':
             path = DrawingPointPath.loadDataStream( version, dis, dx, dy /*, null */ );

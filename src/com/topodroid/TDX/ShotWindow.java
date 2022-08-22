@@ -143,7 +143,6 @@ public class ShotWindow extends Activity
                         R.drawable.iz_flip,       // extend flip
                         R.drawable.iz_right,      // extend RIGHT
                         R.drawable.iz_highlight,  // multishot dialog: includes // highlight in sketch
-                          // R.drawable.iz_highlight,  // highlight in sketch
 			  // R.drawable.iz_numbers_no, // renumber shots (first must be leg)
                           // R.drawable.iz_bedding,    // compute bedding
                         R.drawable.iz_delete,     // cut shots 
@@ -151,7 +150,7 @@ public class ShotWindow extends Activity
                         R.drawable.iz_cancel      // cancel
 			// R.drawable.iz_empty // EMPTY
                       };
-  private static final int BTN_HIGHLIGHT = 3; // index of iz_highlight
+  private static final int BTN_MULTISHOT = 3; // index of iz_highlight
   private static final int BTN_COPY      = 5; // index of iz_copy
 
   private static final int[] menus = { // menu labels
@@ -1225,7 +1224,7 @@ public class ShotWindow extends Activity
     mButtonF = new Button[ mNrButtonF + 1 ];
     int k0 = 0;
     for ( int k=0; k < mNrButtonF; ++k ) {
-      if ( k == BTN_HIGHLIGHT && ! TDLevel.overExpert ) continue; 
+      if ( k == BTN_MULTISHOT && ! TDLevel.overExpert ) continue; 
       if ( k == BTN_COPY      && ! TDLevel.overExpert ) continue; 
       mButtonF[k0] = MyButton.getButton( this, this, izonsF[k] );
       ++k0;
@@ -1453,6 +1452,14 @@ public class ShotWindow extends Activity
     mApp.doBluetoothButton( mActivity, this, b, mDataAdapter.getCount() );
   }
 
+  /** react to a long tap
+   * @param view   tapped view 
+   * @return true if the long tap has been handled
+   * the tapped view can be:
+   * - SEARCH: move to the next search result
+   * - PLOT: open the most recent plot
+   * - MANUAL: open the manual-instruments calibration-dialog
+   */
   @Override 
   public boolean onLongClick( View view )
   {
@@ -1624,7 +1631,7 @@ public class ShotWindow extends Activity
         clearMultiSelect( );
         updateDisplay();
         // mList.invalidate(); // NOTE not enough to see the change in the list immediately
-      } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // HIGHLIGHT
+      } else if ( TDLevel.overExpert && kf < mNrButtonF && b == mButtonF[kf++] ) { // MULTISHOT
         // ( blks == null || blks.size() == 0 ) cannot happen // TDUtil.isEmpty(blks)
         (new MultishotDialog( mActivity, this, mDataAdapter.mSelect )).show();
       //   highlightBlocks( mDataAdapter.mSelect );
@@ -2006,9 +2013,12 @@ public class ShotWindow extends Activity
     }
   }
 
-  /* FIXME_HIGHLIGHT
-  // open the sketch and highlight block in the sketch
-  // called by MultishotDialog
+  // FIXME_HIGHLIGHT
+  // /** open the sketch and highlight block in the sketch
+  //  * @param blks  data blocks list
+  //  * @note called by MultishotDialog
+  //  */
+  /*
   void highlightBlocks( List< DBlock > blks )  // HIGHLIGHT
   {
     mApp.setHighlighted( blks );
@@ -2022,8 +2032,11 @@ public class ShotWindow extends Activity
   }
   */
 
-  // open the sketch and highlight block in the sketch
-  // called by MultishotDialog
+  /** open the sketch and highlight block in the sketch
+   * @param blks  data blocks list
+   * @param color shot color
+   * @note called by MultishotDialog
+   */
   void colorBlocks( List< DBlock > blks, int color )  // HIGHLIGHT
   {
     // TDLog.v( "highlight blocks [0] " + ( (blks==null)? "null" : blks.size() ) );
@@ -2680,7 +2693,7 @@ public class ShotWindow extends Activity
    * @param plot2_name profile view name
    * @param plot2_id   profile view id
    * @param type       type of plot to show in the window
-   * @param station    ???
+   * @param station    station where to center the plot on opening
    * @param landscape  whether to use landscape presentation
    */
   private void startDrawingWindow( String start, String plot1_name, long plot1_id,

@@ -149,7 +149,7 @@ public class DrawingWindow extends ItemDrawer
 
   private static final int IC_DOWNLOAD     =  3;
   private static final int IC_BLUETOOTH    =  4;
-  private static final int IC_PLAN         =  7;
+  private static final int IC_PLAN         =  6;
   private static final int IC_DIAL         =  8;
   private static final int IC_TOOLS_LINE   = 12;
   private static final int IC_SPLAYS_LINE  = 13;
@@ -194,7 +194,7 @@ public class DrawingWindow extends ItemDrawer
 
   private static final int BTN_DOWNLOAD = 3;  // index of mButton1 download button
   private static final int BTN_BLUETOOTH = 4; // index of mButton1 bluetooth button
-  private static final int BTN_PLOT   = 7;    // index of mButton1 plot button
+  private static final int BTN_PLAN   = 6;    // index of mButton1 plot button
   private static final int BTN_DIAL   = 8;    // index of mButton1 azimuth button (level > normal)
 
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
@@ -221,8 +221,8 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_download,      // 3 MOVE Nr 3+6
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,          // 5
-                        R.drawable.iz_note,          // 6
-                        R.drawable.iz_plan,          // 7
+                        R.drawable.iz_plan,          // 6
+                        R.drawable.iz_note,          // 7
                         R.drawable.iz_dial,          // 8
                         R.drawable.iz_refresh,       // 9
 
@@ -325,8 +325,8 @@ public class DrawingWindow extends ItemDrawer
                         R.drawable.iz_download,      // 3 MOVE Nr 3+6
                         R.drawable.iz_bt,
                         R.drawable.iz_mode,          // 5
-                        R.drawable.iz_note,          // 6
-                        R.drawable.iz_plan,          // 7
+                        R.drawable.iz_plan,          // 6
+                        R.drawable.iz_note,          // 7
                         R.drawable.iz_dial,          // 8
                         R.drawable.iz_refresh
   };
@@ -338,8 +338,8 @@ public class DrawingWindow extends ItemDrawer
                         R.string.help_download,
                         R.string.help_remote,
                         R.string.help_refs,
-                        R.string.help_note,
                         R.string.help_toggle_plot,
+                        R.string.help_note,
                         R.string.help_azimuth,
                         R.string.help_refresh
                       };
@@ -2251,7 +2251,7 @@ public class DrawingWindow extends ItemDrawer
       mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
     }
     if ( TDLevel.overBasic ) {
-      if ( BTN_PLOT   < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+      if ( BTN_PLAN   < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( this );
       if ( BTN_REMOVE < mNrButton3 ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
 
@@ -2481,8 +2481,8 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.VISIBLE );
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.VISIBLE );
 
-    // mButton1[ BTN_PLOT ].setVisibility( View.VISIBLE );
-    if ( ! TDLevel.overExpert && BTN_PLOT < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( this );
+    // mButton1[ BTN_PLAN ].setVisibility( View.VISIBLE );
+    if ( ! TDLevel.overExpert && BTN_PLAN < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( this );
     if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.VISIBLE );
   }
 
@@ -2522,8 +2522,8 @@ public class DrawingWindow extends ItemDrawer
     // FIXME_SK mButton1[ BTN_DOWNLOAD ].setVisibility( View.GONE );
     // FIXME_SK mButton1[ BTN_BLUETOOTH ].setVisibility( View.GONE );
 
-    // mButton1[ BTN_PLOT ].setVisibility( View.GONE );
-    if ( ! TDLevel.overExpert && BTN_PLOT < mNrButton1 ) mButton1[BTN_PLOT].setOnLongClickListener( null );
+    // mButton1[ BTN_PLAN ].setVisibility( View.GONE );
+    if ( ! TDLevel.overExpert && BTN_PLAN < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( null );
     if ( TDLevel.overNormal && BTN_DIAL < mNrButton1 ) mButton1[ BTN_DIAL ].setVisibility( View.GONE );
   }
 
@@ -2535,7 +2535,7 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0: // hide splays at FROM and at TO
-        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
+        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -2545,7 +2545,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 1: // hide splays at FROM show splays at TO
-        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
+        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2555,7 +2555,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 2: // show splays at FROM and at TO
-        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
+        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2565,7 +2565,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 3: // show splays at FROM, hide splays at TO
-        if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
+        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -6082,7 +6082,7 @@ public class DrawingWindow extends ItemDrawer
       mName = mName3;
       mType = mPlot3.type;
       // TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
-      // if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
+      // if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3, params );
       setTheTitle();
@@ -6100,7 +6100,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
-      if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMextend );
+      if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
@@ -6128,7 +6128,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
-      if ( BTN_PLOT < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLOT ], mBMplan );
+      if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
@@ -6243,7 +6243,7 @@ public class DrawingWindow extends ItemDrawer
       } else {
         onClick( view );
       }
-    } else if ( b == mButton1[ BTN_PLOT ] ) {
+    } else if ( b == mButton1[ BTN_PLAN ] ) {
       if ( PlotType.isSketch2D( mType ) ) {
         if ( /* TDLevel.overBasic && */ mType == PlotType.PLOT_EXTENDED ) {
           new DrawingProfileFlipDialog( mActivity, this ).show();
@@ -6753,8 +6753,9 @@ public class DrawingWindow extends ItemDrawer
   void openXSectionDraw( String scrapname )
   { 
     // remove survey name from scrap-name (if necessary)
-    String name = scrapname.replace( TDInstance.survey + "-", "" );
-    // TDLog.v( "PLOT open section: scrapname " + scrapname + " plot name " + name );
+    int pos = TDInstance.survey.length() + 1; // TDInstance.survey + "-" (at the begenning)
+    String name = scrapname.substring( pos );
+    TDLog.v( "iPLOT open xsection: scrapname " + scrapname + " plot name " + name );
     // TDLog.v( "PLOT open section: current line " + mCurrentLine );
 
     PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );

@@ -29,6 +29,9 @@ public class TDVersion
   // symbol version of installed symbols is stored in the database
   // symbol version of the current  symbols is in the app
   public static final String SYMBOL_VERSION = "37";
+
+  // last version of DistoX2 firmware
+  public static final String FIRMWARE_VERSION = "26";
   
   // database version
   public static final String DB_VERSION = "46"; // NOTE agrees with Cave3DThParser values
