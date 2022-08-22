@@ -1790,67 +1790,72 @@ debe ajustarlos a sus necesidades./n/n
    <string name="ask_dump">¿Quiere cargar el firmware?</string>
    <string name="ask_upload">¿Quiere subir el firmware?</string>
    <string name="ask_upload_not_compatible">Firmware el archivo no parece correcto. \n¿Quiere probar a cargarlo?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">Error al verificar dell\'HW el DistoX</string>
+   <string name="firmware_upload_bad_sign">HW DistoX incompatible</string>
    <string name="firmware_file_dumped">Archivo de firmware guardado %1$s tamaño %2$d</string>
    <string name="firmware_file_uploaded">Archivo de firmware cargado %1$s escribir %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
+   <string name="firmware_file_dump_fail">Error al descargar el firmware</string>
+   <string name="firmware_file_upload_fail">Error al cargar el firmware</string>
    <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">Proyecto %1$s</string>
+    <string name="no_editor">Editor no encontrado</string>
+    <string name="no_file">Archivo no encontrado</string>
+    <string name="no_path">Ruta del archivo no encontrada</string>
+    <string name="no_equate">Sin equivalente</string>
+    <string name="no_surveys">Sin Relieve</string>
+    <string name="no_tdconfig">Falta el archivo tdconfig</string>
+    <string name="no_th_file">No hay archivos Therion</string>
+    <!-- UNUSED string name="file_exists">El archivo existe</string -->
+    <!-- UNUSED string name="file_create_fail">Error de creación de archivo</string -->
+    <!-- UNUSED string name="oom">Advertencia. Sin memoria</string -->
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Eliminar archivo tdconfig</string>
+    <string name="ask_remove_equate">¿Eliminar equivalente %1$s ?</string>
+    <!-- UNUSED string name="equate_no_station">No se seleccionó ningún punto de referencia</string -->
+    <string name="equate_no_stations">Muy pocos puntos fuertes</string>
+    <string name="equate_no_nearby">No hay punto fuerte</string>
 
-    <!-- UNUSED string name="menu_new">NEW</string -->
-    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
-    <!-- UNUSED string name="menu_equates">EQUATES</string -->
-    <!-- UNUSED string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_new">NUEVO</string -->
+    <!-- UNUSED string name="menu_equate">AGREGAR EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_save">GUARDAR</string -->
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <!-- UNUSED string name="overwrite">Sobrescribir</string -->
 
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
-    <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_export_settings">Ajustes de importación/exportación</string>
+    <string name="title_export">Exportar proyecto como &#8230;</string>
+    <string name="title_equates">Enlaces</string>
+    <string name="title_equate_new">Agregar enlace &#8230;</string>
+    <string name="title_equate_with">Enlace %1$s e %2$s</string>
+    <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
+    <string name="title_drop">¿Eliminar relieves? </string>
+    <string name="title_tdconfig">Ingrese el nombre del proyecto</string>
+    <string name="title_surveys">Relieves</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Archivo guardado %1$s</string>
+    <string name="export_failed">Exportación fallida</string>
 
-    <!-- 3D VIEWER strings-->
+    <string name="image_diagram">Diagrama de dirección</string>
+    <string name="image_photo">Fotos</string>
 
-    <string name="cmenu_open">Abrir Archivo</string>
-    <string name="cmenu_reset">Resetear</string>
+    <!-- 3D VIEWER strings -->
+    <string name="cbtn_bind">Reenlazar</string>
+
+    <string name="cmenu_open">Abrir archivo</string>
+    <string name="cmenu_reset">Restablecer</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
-    <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
-    <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
-    <!-- UNUSED string name="cmenu_files">Proyecto</string -->
-    <!-- UNUSED string name="cmenu_frame">Encuadre</string -->
-    <!-- UNUSED string name="cmenu_color">Color</string -->
+    <string name="cmenu_alpha">Transparencia DEM </string>
+    <string name="cmenu_viewpoint">Punto de vista</string>
+    <!-- UNUSED string name="cmenu_files">Relieves</string -->
+    <!-- UNUSED string name="cmenu_frame">Referencia</string -->
+    <!-- UNUSED string name="cmenu_color">Colores</string -->
     <string name="cmenu_info">Información</string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
+    <string name="cmenu_sketch">Dibujos</string>
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
