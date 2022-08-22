@@ -1759,12 +1759,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
+\n\nManual: Botón de menú
 \n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios.
 \nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com.
 \n
 \nTraducción al español Manu Guerrero manuguerreros@gmail.com
     </string>
-
 
   <! - LAS CADENAS DE DIÁLOGO DE FIRMWARE SE PUEDEN DEJAR SIN TRADUCIR: marque OK cadenas sin traducir ->
   <string name="firmware_title">Actualizar de firmware</string>
@@ -1856,95 +1856,128 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
     <string name="cmenu_sketch">Dibujos</string>
-    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
+    <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
-    <!-- TODO string name="fractal_title">Fractal counts</string -->
+    <!-- NO string name="fractal_title">Computo frattale</string -->
+    <!-- NO string name="fractal_title">Fractal result</string -->
+    <!-- NO string name="fractal_cnt_total">count</string -->
+    <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
+    <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
+    <!-- NO string name="fractal_failed">Fractal compute failed</string -->
+    <!-- NO string name="fractal_dimension">Fractal dimension</string -->
+    <string name="illegal_value">Valor inaceptable</string>
+	
     <!-- UNUSED string name="info_title">Información</string -->
     <!-- TODO string name="info_surveys">SURVEYS</string -->
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
     <string name="info_surveys">Proyecto</string>
-    <!-- TODO string name="info_shot">Shots</string -->
-    <!-- TODO string name="info_station">Stations</string -->
+    <string name="info_shot">toma</string>
+    <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
     <string name="info_depth">Profundidad</string>
     <string name="info_volume">Volumen</string>
 
-    <!-- TODO string name="info_east">East</string -->
-    <!-- TODO string name="info_north">North</string -->
-    <!-- TODO string name="info_z">Altitude</string -->
-    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
-    <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
-    <!-- TODO string name="info_survey_value">%1$d</string -->
-    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
-    <!-- TODO string name="info_station_value">%1$d</string -->
-    <!-- TODO string name="info_length_value">%1$.1f m</string -->
-    <!-- TODO string name="info_depth_value">%1$.1f m</string -->
+    <string name="info_east">Este</string>
+    <string name="info_north">Norte</string>
+    <string name="info_z">Altitud</string>
+    <string name="info_grid_value">%1$.0f m</string>
+    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
+    <string name="info_survey_value">%1$d</string>
+    <string name="info_shot_value">Tiri %1$d, Splay %2$d</string>
+    <string name="info_station_value">%1$d</string>
+    <string name="info_length_value">%1$.1f m</string>
+    <string name="info_depth_value">%1$.1f m</string>
     <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <!-- TODO string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string -->
-    <!-- TODO string name="info_east_value">W %1$.1f E %2$.1f</string -->
-    <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
-    <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
+    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_east_value">W %1$.1f E %2$.1f</string>
+    <string name="info_north_value">S %1$.1f N %2$.1f</string>
+    <string name="info_z_value">%1$.1f  %2$.1f</string>
+	
+    <string name="legs_surface">Externo</string>
+    <string name="legs_duplicate">Doble</string>
+    <string name="legs_commented">Comentar</string>
+
+    <string name="proj_perspective">Parámetros de perspectiva</string>
+    <string name="proj_orthographic">Parámetros ortográficos</string>
+    <string name="proj_focal">Focal</string>
+    <string name="proj_side">Lato</string>
+    <!-- UNUSED string name="proj_near">Cerca</string -->
+    <!-- UNUSED string name="proj_far">lejos</string -->
 
     <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
-    <!-- TODO string name="reading_file">Reading file %1$s</string -->
+    <string name="reading_file">Lectura de archivo %1$s</string>
+    <string name="read_survey">Topografia %1$s\n</string>
     <!-- UNUSED string name="clear">Limpiar</string -->
 
-    <!-- TODO string name="plan_proj">Plan</string -->
-    <!-- TODO string name="profile_proj">Profile</string -->
-    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string -->
-    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string -->
-    <!-- TODO string name="measure">measure</string -->
+    <string name="plan_proj">Planta</string>
+    <string name="profile_proj">Secciones</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cueva %9$.1f</string>
+    <!-- UNUSED string name="measure">medida</string -->
 
-    <!-- UNUSED string name="style_stroke">Stroke</string -->
-    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
-    <!-- UNUSED string name="style_fill">Fill</string -->
-    <!-- TODO string name="surface_projection">Projection on DEM</string -->
-    <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- OK string name="dem_file">DEM %1$s</string -->
-    <!-- TODO string name="dem_load">load</string -->
+    <!-- UNUSED string name="style_stroke">Trazo</string -->
+    <!-- UNUSED string name="style_stroke_fill">Trazo &amp; área</string -->
+    <!-- UNUSED string name="style_fill">Area</string -->
+    <string name="surface_projection">Proyección en DEM</string>
+    <string name="surface_texture">Textura superficial</string>
+    <string name="surface_gps">Seguimiento GPS</string>
+    <string name="surface_east">Este</string>
+    <string name="surface_north">Norte</string>
+    <!-- NO string name="dem_file">DEM %1$s</string -->
+    <string name="dem_load">cargar</string>
 
-    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
-    <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
-    <!-- TODO string name="texture_load">load texture</string -->
-    <!-- TODO string name="texture_failed">Failed texture loading</string -->
-    <!-- TODO string name="texture_ok">Read texture file</string -->
-    <!-- TODO string name="sketch_load">Load</string -->
-    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
-    <!-- TODO string name="sketch_ok">Read sketch data</string -->
+    <string name="dem_failed">ERROR: DEM cargando</string>
+    <string name="dem_ok">Lectura DEM</string>
+    <!-- NO string name="texture_file">%1$s</string -->
+    <string name="texture_load">cargando texturas</string>
+    <string name="texture_failed">ERROR: carga de textura</string>
+    <string name="texture_ok">Leyendo archivo de textura</string>
+    <string name="sketch_load">cargar</string>
+    <string name="sketch_failed">ERROR: cargando dibujo</string>
+    <string name="sketch_ok">Dibujo de lectura</string>
 
-    <string name="ctitle">%1$s  Clino: %2$.0f  Rumbo: %3$.0f</string>
-    <!-- TODO string name="ctitle_surface_alpha">Surface opacity</string -->
-    <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
-    <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
-    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
+    <string name="ctitle_surface_alpha">Transparencia DEM</string>
+    <string name="ctitle_sketches">Dibujos</string>
+    <string name="ctitle_legs">Visual</string>
+    <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
+	
+    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_scan">Scan</string -->
+    <!-- UNUSED string name="cbtn_shot">Shot</string -->
+    <!-- UNUSED string name="cbtn_start">Start</string -->
+    <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
+    <string name="survey_list">RILIEVE</string>
     <string name="survey_legs"> Visual: </string>
     <string name="survey_legs_length"> Longitud toma: </string>
     <string name="survey_splays"> Tomas laterales: </string>
     <string name="survey_splays_length"> Longitud tomas laterales: </string>
 
-    <!-- TODO string name="cave_east"> E: %1$.1f</string -->
-    <!-- TODO string name="cave_north"> N: %1$.1f</string -->
-    <!-- TODO string name="cave_vert"> Z: %1$.1f</string -->
+    <string name="cave_east"> E: %1$.1f</string>
+    <string name="cave_north"> N: %1$.1f</string>
+    <string name="cave_vert"> Z: %1$.1f</string>
 
     <string name="cave_distance"> 3D distancia: %1$.2f</string>
-    <!-- TODO string name="horz_distance"> 2D horizontal distance: %1$.1f</string -->
+    <string name="horz_distance"> 2D distancia horizontal: %1$.1f</string>
     <string name="cave_length"> Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
-    <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
+    <string name="cave_angle"> Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
-    <!-- UNUSED string name="SURVEYS">P r o y e c t o</string -->
-    <string name="INFO">I n f o r m a c i ó n</string>
-    <string name="STATIONS">E s t a c i ó n</string>
-    <string name="STATIONS_DISTANCE">Distancia estación</string>
-    <!-- UNUSED string name="DISTANCE">Distancia</string -->
-    <!-- UNUSED string name="CENTER">CENTER</string -->
-    <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
-    <!-- TODO string name="select_texture_file">Select a texture file:</string -->
+    <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
+    <string name="INFO">I N F O R M A C I Ó N</string>
+    <string name="STATIONS">e S T A C I Ó N</string>
+    <string name="STATIONS_DISTANCE">dISTANCIA ESTACIÓN</string>
+    <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
+    <!-- UNUSED string name="CENTER">CENTRO</string -->
+    <string name="select_survey_file">Seleccionar archivo de topografia</string>
+    <string name="select_export_file">Seleccionar archivo de exportación</string>
+    <string name="select_dem_file">Seleccionar DEM</string>
+    <string name="select_texture_file">Seleccionar textura</string>
+    <string name="select_sketch_file">Seleccionar diseño</string>
 
     <string name="view_title">PUNTOS DE VISTA</string>
     <string name="view_top">Parte superior</string>
@@ -1959,14 +1992,14 @@ debe ajustarlos a sus necesidades./n/n
     <string name="walls_convexhull">Recubrimiento Convexo</string>
     <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
     <string name="walls_hull">Recubrimiento</string>
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
+    <string name="walls_bubble">Burbuja</string>
+    <string name="walls_tube">condominio</string>
     <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string -->
     <!-- UNUSED string name="powercrust_failed">Recubrimiento fuerte falló</string -->
     <!-- UNUSED string name="powercrust_successful">Recubrimiento fuerte se aplicó con éxito: %1$d / %2$d</string -->
-    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
+<string name="powercrust_dxf_not_supported">Powercrust: exportación DXF no implementada</string>
 
     <string name="ok_export">OK. Exportado %1$s</string>
 
