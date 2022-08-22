@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
   <plurals name="calib_saturated_values">
-    <item quantity="one">ATENIÓN. Datos saturados</item>
-    <item quantity="other" >ATENCIÓN. %1$d saturación de datos</item>
+    <item quantity="one">ATENION. Datos saturados</item>
+    <item quantity="other" >ATENCION. %1$d saturacion de datos</item>
   </plurals>
-  <plurals name="read_data">
-    <item quantity="zero">No hay datos leídos</item>
-    <!-- TODO item quantity="one"></item -->
+  
+  <plurals name="read_data" tools:ignore="UnusedQuantity">
+    <item quantity="zero">No hay datos leidos</item>
+    <item quantity="one">Leer un dato</item>
     <item quantity="other">Leer %1$d datos</item>
   </plurals>
-  <plurals name="read_calib_data">
-    <item quantity="zero">No hay datos leídos</item>
-    <!-- TODO item quantity="one"></item -->
-    <item quantity="other">Leer %1$d datos (%2$d Paquetes)</item>
+  
+  <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
+    <item quantity="zero">No hay datos leidos</item>
+    <item quantity="one">Leer datos (%2$d paquetes)</item>
+    <item quantity="other">Leer %1$d datos (%2$d paquetes)</item>
+  </plurals>
+  <plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
+    <item quantity="zero">No se encontraron grupos</item>
+    <item quantity="one">Grupo encontrado</item>
+    <item quantity="other">grupos %1$d encontrados</item>
   </plurals>
 </resources>

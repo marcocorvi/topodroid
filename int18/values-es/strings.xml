@@ -1,17 +1,12 @@
-THIS TRANSLATION IS TOO INCOMPLETE
-In order to bring it back in the app you need to:
-  [1] translate all the untranslated strings
-  [2] copy the missing strings from the English strings.xml file and translate them
-  [3] send an email informing that the translation is ready for inclusion
-Translation with more than 20 lint errors are not accepted.
-Translation with more than 70 lint errors are dropped from the app.
-
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs/2.7-es-UserManual.pdf</string -->
     <string name="no_manual">No se puede recuperar el manual de usuario de la web</string>
     <string name="user_man_ok">Instalado traducción manual de usuario</string>
     <string name="user_man_fail">Error al instalar la traducción del manual del usuario</string>
+
+    <!-- UNUSED string name="string_false">false</string -->
+    <!-- UNUSED string name="string_true">true</string -->
 
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
@@ -21,18 +16,22 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <!-- NO TRANSLATION string name="app_name">TopoDroid</string -->
     <string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">proyecto.tdconfig</string>
     <string name="double_back">Haga doble click para salir</string>
 
     <string name="new_survey_label">Nueva topografía</string>
-    <string name="distox_label">DistoX</string>
+    <!-- NO string name="distox_label">DistoX</string -->
+    <!-- NO string name="cave3d_label">Cave3D</string -->
 
-  <string name="r_title">Aviso importante sobre Android R</string>
-  <string name="r_dialog">Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\NConsulte las páginas web para más detalles..\n
-  </string>
-  <string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
-  <string name="r_i_understood">He entendido perfectamente este aviso</string>
-  <!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
-  <string name="r_continue">CONTINUAR</string>
+<!-- UNUSED string name="r_title">Aviso importante sobre Android R</string-->
+<!-- UNUSED string name="r_dialog">
+Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\N
+Consulte las páginas web para más detalles..\n
+  </string-->
+<!-- UNUSED string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
+<!-- UNUSED string name="r_i_understood">He entendido perfectamente este aviso</string>
+<!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
+<!-- UNUSED string name="r_continue">CONTINUAR</string-->
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
@@ -47,9 +46,9 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
     <string name="setup_done">The basic setup in done.\n\n
-	    If you experience problems with the DistoX connection, try and set the insecure socket.\n\n
-	    Other settings concern the presentation in the sketching window (icon size, label size, line width, etc.)
-	    you should set them to your needs./n/n
+	    Si tiene problemas con la conexion DistoX, intente configurar el socket no seguro.\n\n
+Otras configuraciones se refieren a la presentacion en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de linea, etc.)
+debe ajustarlos a sus necesidades./n/n
     </string>
     <!-- NO TRANSLATION string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
 
@@ -60,15 +59,14 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="STATION">Estación</string>
     <string name="UP">HACIA ARRIBA</string>
     <string name="DOWN">HACIA ABAJO</string>
-
-    <string name="xsplay">X</string>
-    <string name="hsplay">H</string>
-    <string name="vsplay">V</string>
+    <string name="xsplay">Xsplay</string>
+    <string name="hsplay">Hsplay</string>
+    <string name="vsplay">Vsplay</string>
 
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
-    <!-- FIXME string name="copied">Copiado al portapapeles</string -->
+    <string name="copied">Copiado al portapapeles</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -81,15 +79,16 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="thp_danger">Peligro</string -->
     <string name="thl_user">Usuario</string>
     <string name="thl_wall">Pared</string>
-    <string name="thl_section">sección</string>
+    <string name="thl_section">Sección</string>
     <string name="tha_user">Usuario</string>
     <string name="tha_water">Agua</string>
 
     <!-- UNUSED string name="make_walls">Paredes</string -->
     <string name="missing_station">Falta Estación</string>
     <string name="station_not_found">Estación no encontrada</string>
+    <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No se encontró ninguna toma</string>
-    <string name="bad_sibling">Toma mala</string>
+    <string name="bad_sibling">Toma incorrecta</string>
     <!-- UNUSED string name="missing_area">Área</string -->
     <!-- UNUSED string name="missing_hint">Por favor, instale los símbolos con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">Línea</string -->
@@ -121,7 +120,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="calibration_title">Calibración de instrumentos</string>
     <string name="calibration_length">Cinta</string>
     <string name="calibration_azimuth">Brújula</string>
-    <string name="calibration_clino">Clino</string>
+    <string name="calibration_clino">Clinometro</string>
 
     <string name="calib_new">Nueva calibración</string>
     <string name="calib_exists">La calibración ya existe</string>
@@ -129,21 +128,21 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
-    <!-- REMOVE string name="calib_gm_policy">Política</string-->
     <string name="calib_gm_policy">Politica de grupo</string>
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
     <string name="calib_updated">Descargar calibración</string>
-    <string name="calib_compute_groups">Cálculo de calibración de lo grupos de datos &#8230;</string>
-    <string name="calib_compute_coeffs">Cálculo de coeficientes de calibración  &#8230;</string>
-    <!-- UNUSED string name="calib_read_coeffs">leer coeficientes de calibración &#8230;</string -->
-    <string name="calib_write_coeffs">Escribir coeficientes de calibración &#8230;</string>
+    <string name="calib_compute_groups">Agrupación de datos en curso</string>
+    <string name="calib_compute_coeffs">Cálculo de coeficientes en curso</string>
+    <!-- UNUSED string name="calib_read_coeffs">Lectura de coeficientes en curso</string -->
+    <string name="calib_write_coeffs">Escritura de coeficientes en curso</string>
     <string name="calib_validation">Validación de %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s</string>
     <string name="calib_error">Error: %1$.2f grados (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Errore medio: %1$.2f grados</string>
     <string name="calib_stddev">Error stddev: %1$.4f grados</string>
     <string name="calib_max_error">Max. error: %1$.4f grados</string>
     <string name="calib_ave_std">Precisión: %1$.4f %2$.4f grados</string>
@@ -170,6 +169,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="device_code">DistoX código %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
     <string name="device_hardware">Hardware  %1$d.%2$d</string>
+    <!-- UNUSED string name="device_memory">Memory  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Unidad de ángulos: gradiente</string>
     <string name="device_status_angle_degree">Unidad de ángulos: grados</string>
     <string name="device_status_compass_on">Compass/clino: on</string>
@@ -194,26 +194,27 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="extend_right">Drch.</string>
     <string name="extend_vert">Vert.</string>
     <!-- UNUSED string name="external_prompt">Introducir medición</string -->
-    <string name="splay_at_to">LRUD en la estación</string>
+    <string name="splay_at_to">LRUD en el punto de llegada</string>
     <string name="lrud">LRUD</string>
-    <string name="strike_dip">Paro %1$.0f Dip %2$.0f</string>
+    <string name="strike_dip">Tomas %1$.0f incluidas %2$.0f</string>
 
     <string name="few_data">No hay suficientes datos</string>
     <string name="few_iter">Interacción fallida</string>
     <string name="few_groups">No hay suficientes datos del grupo</string>
-    <string name="found_groups">Se encontraron %1$d grupos</string>
+    <!-- UNUSED string name="found_groups">Se encontraron %1$d grupos</string -->
     <string name="regroup">No reagrupar</string>
     <!-- UNUSED string name="few_plots">No hay suficientes dibujos</string -->
     <string name="few_calibs">No hay suficientes calibraciones</string>
     <string name="getting_info">Obteniendo información DistoX &#8230;</string>
+    <string name="gettingble_info">Descargando información de DistoX-BLE &#8230;</string>
 
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
     <string name="export_data_title">Exportación de datos</string>
-    <string name="export_plot_title">Exportación de croquis</string>
-    <string name="export_overview_title">Exportación de todo</string>
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <!-- UNUSED string name="export_plot_title">Exportación de croquis</string>
+    <!-- UNUSED string name="export_overview_title">Exportación de todo</string>
+    <string name="export_model_title">Exportar modelo 3D</string>
+    <string name="export_tdconfig_title">Exportar proyecto</string>
 
     <!-- UNUSED string name="import_wait">Importando archivo, espere&#8230;</string -->
     <string name="import_already">Topografía importada con éxito</string>
@@ -227,15 +228,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="import_calib_mismatch">Calib. desajuste dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
-    <string name="import_zip_ok">Archivo zip importados con éxito</string>
-    <string name="import_zip_newer">Zip importado de una versión más reciente</string>
-    <!-- UNUSED string name="import_zip_wait">El archivo zip importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
+    <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
+    <string name="import_zip_newer">ZIP importado de una versión más reciente</string>
+    <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
-    <string name="MT_points_none">No hay punto móvil Topográfico</string>
-    <string name="MT_bad_file">Archivo de topografía del movil incorrecto</string>
-    <string name="bad_manifest">Archivo de manifiesto incorrecto</string>
+    <string name="MT_points_none">No hay punto GPS</string>
+    <string name="MT_bad_file">Archivo de topografía del movil corrupto</string>
+    <string name="bad_manifest">Archivo de manifiesto corrupto</string>
 
-    <string name="pleasewait">Por favor espere</string>
+    <string name="pleasewait">Por favor espere &#8230;</string>
     <string name="processing">procesando &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memoria: </string -->
@@ -243,19 +244,22 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="head_tail_store_failed">Error al almacenar en la memoria DistoX</string>
     <!-- UNUSED string name="pairing_failed">Falló en el emparejamiento</string -->
 
+    <string name="datamode_normal">Modo de datos normales</string>
+    <string name="datamode_diving">Modo de datos profundos</string>
     <string name="illegal_data_value">Valores de datos no válidos</string>
+	
     <string name="photo_title">FOTO</string>
     <string name="photo_text">Introducir comentario de foto</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+    <string name="photo_failed">foto fallida</string>
+    <string name="photo_max_captures">Número máximo de fotos alcanzado</string>
     <string name="label_title">Texto</string>
     <string name="label_text">Introducir texto en la etiqueta</string>
     <!-- UNUSED string name="altitude">Alt. </string -->
-    <string name="h_ellipsoid">H elip. </string>
+    <string name="h_ellipsoid">H elipsoide </string>
     <string name="h_geoid">H geoide </string>
     <string name="latitude">Lat. </string>
     <string name="longitude">Long. </string>
-    <string name="h_ellipsoid_hint">H elip. [metros]</string>
+    <string name="h_ellipsoid_hint">H elipsoide [metros]</string>
     <string name="h_geoid_hint">H geoide [metros]</string>
     <string name="latitude_hint">Lat. dd:mm:ss.sss</string>
     <string name="longitude_hint">Long. dd:mm:ss.sss</string>
@@ -271,6 +275,7 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <string name="error_azimuth_required">Introducir rumbo</string>
     <string name="error_length_required">Introducir Longitud</string>
+    <string name="error_depth_required">Profundidad\' faltante</string>
     <string name="error_clino_required">Introducir Clino</string>
     <string name="error_comment_required">Introducir comentario</string>
     <string name="error_begin_required">Introducir dirección de inicio</string>
@@ -284,11 +289,12 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="error_invalid_name">Nombre no válido</string -->
     <string name="error_lat_required">Se requiere Latitud</string>
     <string name="error_long_required">Se requiere Longitud</string>
-    <!-- TODO string name="error_name_exists">Existing project</string -->
-    <!-- TODO string name="error_name_invalid">Invalid project name</string -->
+    <string name="error_name_exists">Proyecto existente</string>
+    <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
-    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
-    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <string name="error_name_duplicate">Nombre duplicado</string>
+    <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
+    <string name="error_team_required">Faltan nombres de detectores</string>
 
     <!-- UNUSED string name="error_dir_exists">El directorio ya existe</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
@@ -298,6 +304,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="error_station_non_existing">No existe estación</string>
     <string name="error_sensor_required">Introducir sensor</string>
     <string name="error_value_required">Introducir valor</string>
+    <string name="error_bad_fixes">Geo-puntos no presentes en la topografía</string>
     
     <string name="group_title">Asignar grupos de datos de calibración</string>
     <!-- UNUSED string name="group_policy_four">Política: Grupo de cuatro</string -->
@@ -307,7 +314,7 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <!-- UNUSED string name="scale">Escala</string -->
     <!-- UNUSED string name="reversed">Inverso</string -->
-    <string name="options">Nota</string>
+    <string name="options">Opciones</string>
     <string name="outline">Contorno</string>
     <string name="out">Fuera</string>
     <string name="in">Dentro</string>
@@ -319,12 +326,16 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="hidden_del">Mostrar el croquis de la poligonal principal</string -->
     <string name="hidden_show">Mostrar tomas más allá de la estación</string>
     <!-- UNUSED string name="splays_toggle">Cambiar a tomas laterales</string -->
-    <!-- TODO string name="splays_on_off">Splays</string -->
+    <string name="splays_on_off">Tomas laterales</string>
+    <string name="including_splays">incluyendo tomas laterales</string>
+    <string name="with_splays">con tomas laterales</string>
+    <string name="cell_size">Tamaño de la celda [m]</string>
+
+    <string name="legs">Battute</string>
+    <string name="stations">Estaciones</string>
     <string name="splays">Tomas laterales</string>
-    <string name="legs">Trayecto</string>
-    <!-- TODO string name="stations">Station</string -->
-    <!-- UNUSED string name="fmt_listen">LISTEN | %1$s</string -->
-    <!-- TODO string name="fmt_id">ID %1$s</string -->
+    <!-- UNUSED string name="fmt_listen">ASCOLTA | %1$s</string -->
+    <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitud %1$s</string>
     <string name="fmt_longitude">Longitud %1$s</string>
     <string name="fmt_savetext">%1$d &lt;%2$s&gt; %3$s</string> 
@@ -338,29 +349,31 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="bad_cwd">El nombre del proyecto no puede ser la ruta</string>
     <string name="bad_line">Tipo de línea mala</string>
     <string name="bad_point">Tipo de punto malo</string>
+    <string name="index_oob">Índice fuera de los límites %1$d</string>
 
-    <!-- TODO string name="no_audio">No audio record</string -->
+    <string name="no_audio">No graba audio</string>
     <string name="no_bt">No hay Bluetooth</string>
     <string name="no_calib">No hay calibración</string>
     <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
-    <string name="no_capture_app">No hay aplicación para capturar imagen</string>
+    <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
     <string name="no_cave3d">Cave3D No instalado</string>
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
-    <string name="no_device_found">No se encuentra dispositivos</string>
+    <string name="no_device_window">Ventana del dispositivo deshabilitada durante la descarga</string>
+    <!-- UNUSED string name="no_device_found">Dispositivo non trovato</string -->
     <string name="no_feature_audio">Audio no compatible</string>
-    <!-- TODO string name="no_feature_pdf">PDF not supported</string -->
+    <string name="no_feature_pdf">PDF no soportado</string>
     <string name="no_gms">La calibración no tiene datos.\nPulse el botón Descargar</string>
     <string name="no_geo_station">Error: estación no geolocalizada</string>
     <string name="no_leg_first">La selección no comienza con un trayecto</string>
     <string name="no_leg_intersection">La línea de la sección no atraviesa ninguna visual</string>
     <string name="no_location_data">Sin datos de calibración</string>
-    <string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string>
+    <!-- UNUSED string name="no_paired_device">Dispositivo no emparejado.\nEscanee y empareje DistoX</string-->
     <string name="no_photos">Topografía sin foto</string>
-    <string name="no_plots">Topografía sin croquis.\nPulse el botón para añadir uno</string>
-    <string name="no_profile_overview">Hay descripción para perfiles de proyectos</string>
+    <string name="no_plots">Topografía sin croquis</string>
+    <string name="no_profile_overview">Sin descripción general de los perfiles proyectados</string>
     <string name="no_proj4">Proj4 no instalado</string>
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
@@ -369,10 +382,10 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
-    <!-- TODO string name="no_undelete_paste">No item to recover/paste</string -->
+    <string name="no_undelete_paste">No hay elementos para restaurar</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f rodado %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
-    <!-- OK string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
     <string name="menu_3d">Cave3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
@@ -381,7 +394,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="menu_attach">Conectar</string -->
     <!-- UNUSED string name="menu_attached">Connected</string -->
     <!-- UNUSED string name="menu_ready">Ready</string -->
-    <string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string>
+    <!-- UNUSED string name="menu_backups">LIMPIAR COPIAS DE SEGURIDAD</string-->
     <string name="menu_calib_check">Verificar calibración</string>
     <string name="menu_close">Cerrar</string>
     <!-- UNUSED string name="menu_clear">CLEAR</string -->
@@ -395,20 +408,20 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
-    <!-- TODO string name="menu_recover_paste">RECOVER/PASTE</string -->
+    <string name="menu_recover_paste">RECUPERAR/PEGAR</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
-    <!-- TODO string name="menu_plot_scrap">SCRAPS</string -->
+    <string name="menu_plot_scrap">Residuos</string>
     <string name="menu_switch">Cerrar/Cambiar</string>
     <string name="menu_help">Ayuda</string>
     <!-- UNUSED string name="menu_join_survey">Unir topografías</string -->
-    <string name="menu_logs">Registros</string>
+    <!-- UNUSED string name="menu_logs">Registros</string-->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
-    <string name="menu_overview">Medir distancia</string>
+    <string name="menu_overview">Panorámica</string>
     <string name="menu_packets">PAQUETES</string>
-    <string name="menu_pair">Emparejar</string>
+    <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
     <string name="menu_sensor">Tomas con sensor</string>
@@ -423,11 +436,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="menu_zoom_fit">Ajustar a pantalla</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Papel cuadriculado</string>
 
-    <string name="start_scan">Inicio escaneo</string>
-    <string name="stop_scan">Fin de escaneo</string>
-    <!-- TODO string name="title_scan">BLE scan</string -->
+    <!-- UNUSED string name="start_scan">Inicio escaneo</string-->
+    <!-- UNUSED string name="stop_scan">Fin de escaneo</string-->
+    <!-- UNUSED string name="title_scan">BLE scan</string -->
     <!-- UNUSED string name="ble_scan_failed">Fallo escaneo BLE</string -->
     <!-- UNUSED string name="ble_gatt_failure">Fallo BLE</string -->
     <string name="ble_no_remote">Sin dispositivo remoto</string>
@@ -438,8 +451,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="bric_shot">Shot</string -->
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
-    <!-- TODO string name="bric_memory">BRIC memory</string -->
-
+    <string name="bric_memory">Memoria interna BRIC</string>
 
     <string name="popup_join_pt">Unir al punto más cercano</string>
     <string name="popup_snap_ln">Ajustar a la línea más cercana</string>
@@ -451,11 +463,12 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="popup_curve_pt">Segmento curvo</string>
     <string name="popup_remove_pt">Eliminar punto</string>
     <string name="popup_append_line">Agregar a la línea</string>
-    <!-- TODO string name="popup_multiselect">Multiselection</string -->
-    <!-- TODO string name="popup_finish">Finish</string -->
-    <!-- TODO string name="popup_delete">Delete</string -->
-    <!-- TODO string name="popup_decimate">Decimate</string -->
-    <!-- TODO string name="popup_join">Join</string -->
+    <string name="popup_multiselect">Multiselección</string>
+    <!-- Doble string name="popup_finish">final</string -->
+    <string name="popup_finish">final</string>
+    <string name="popup_delete">Cancelar</string>
+    <string name="popup_decimate">Diezmar</string>
+    <string name="popup_join">Unirse</string>
 
     <string name="popup_erase_all">Borrar Todo</string>
     <string name="popup_erase_point">Borrar puntos</string>
@@ -468,18 +481,19 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="popup_select_area">Seleccionar áreas</string>
     <string name="popup_select_shot">Seleccionar tomas</string>
     <string name="popup_select_station">Seleccionar estación</string>
+
     <string name="popup_cont_none">Nada</string>
     <string name="popup_cont_start">Inicio de punto</string>
     <string name="popup_cont_end">final de punto</string>
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <string name="connection_error">Error conexión</string>
-    <string name="connecting">Conectando &#8230;</string>
+    <!-- UNUSED string name="connection_error">Error conexión</string-->
+    <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
 
-    <string name="not_available">BT No disponible</string>
+    <!-- UNUSED string name="not_available">BT No disponible</string-->
     <string name="not_enabled">BT No habilitado</string>
 
     <!-- UNUSED string name="not_implemented">No implantado</string -->
@@ -507,10 +521,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="plot_null_name">Falta nombre dibujo</string -->
     <!-- UNUSED string name="plot_null_start">Falta base estación</string -->
     <!-- UNUSED string name="plot_recover">¿Actualizar copia de seguridad de la topografía?</string -->
-    <string name="plot_start">Base estación</string>
-    <!-- UNUSED string name="plot_view">Vista Estación</string -->
-    <!-- UNUSED string name="read_fail_with_code">Fallo de lectura: código de error </string -->
+    <string name="plot_start">Punto de origen</string>
+    <!-- UNUSED string name="plot_view">Punto de referencia</string -->
+    <string name="read_fail_with_code">Fallo de lectura: código de error </string>
     <string name="read_failed">Error al leer DistoX</string>
+    <string name="swap_hotbit_ok">Cambiato hot-bit dei dati</string>
     <!-- UNUSED string name="reading_file_failed">Error al leer el archivo</string -->
 
     <string name="saved_file_1">Guardar archivo %1$s</string>
@@ -526,9 +541,9 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="section_area">Sección de área: %1$.1f</string>
     <string name="section_name">comentario de la sección</string>
     <string name="scrap_outline">Contornos de otros croquis</string>
-    <!-- TODO string name="scrap_string">Sketch scrap: %1$d / %2$d</string -->
-    <!-- TODO string name="section_point_not_allowed">section point not allowed</string -->
-    <!-- TODO string name="section_line_not_allowed">section line not allowed</string -->
+    <string name="scrap_string">Diseño descartado: %1$d / %2$d</string>
+    <string name="section_point_not_allowed">Punto de sección no permitido</string -->
+    <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
     <string name="sensor_gravity">Gravedad</string>
@@ -543,33 +558,24 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="sensor_value">Valor</string>
     <string name="sensor_comment">Commentario</string>
     <!-- UNUSED string name="insufficient_data">Datos insuficientes del sensor</string -->
-    <!-- TODO string name="sensor_no_readings">No sensor readings</string -->
-    <!-- TODO string name="sensor_failure">Sensor failure: %1$d</string -->
+    <string name="sensor_no_readings">Medidas insuficientes</string>
+    <string name="sensor_failure">Fallo del sensor: %1$d</string>
 
     <!-- UNUSED string name="shot_clino">Clino</string -->
     <!-- UNUSED string name="shot_compass">Brújula</string -->
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shots_delete">¿Quiere eliminar las tomas?</string>
-    <!-- TODO string name="shots_delete_unsafe">Stations referenced by xsections.\nDelete shots ?</string -->
-    <!-- TODO string name="shot_rename_unsafe">Stations referenced by xsections.\nRename shot ?</string -->
-    <!-- TODO string name="shots_rename_unsafe">Stations referenced by xsections.\nRename shots ?</string -->
+    <string name="shots_delete_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Eliminar tomas?</string>
+    <string name="shot_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar toma?</string>
+    <string name="shots_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar tomas?</string>
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>
-    <!-- TODO string name="shot_name">Shot %1$s</string -->
+    <string name="shot_name">Toma %1$s</string>
     <!-- UNUSED string name="shot_length">Longitud de la toma</string -->
     <string name="shot_note">Nota de toma</string>
     <string name="shot_reverse">Toma Inversa</string>
     <string name="shot_to">Toma hasta</string>
-<!-- NOT USED -->
-    <!-- UNUSED string name="make_surface">Ya existe en superficie ¿Reemplazar?</string -->
-    <!-- UNUSED string name="sketch3d_name">Nombre</string -->
-    <!-- UNUSED string name="sketch3d_new">Nuevo dibujo 3D</string -->
-    <!-- UNUSED string name="sketch3d_next">Falta nombre de dibujo 3D</string -->
-    <!-- UNUSED string name="sketch3d_null_name">Falta dibujo 3D Sig. estación</string -->
-    <!-- UNUSED string name="sketch3d_null_next">Falta dibujo 3D Sig. estación</string -->
-    <!-- UNUSED string name="sketch3d_null_start">Falta dibujo 3D estación base</string -->
-    <!-- UNUSED string name="sketch3d_start">Estación base</string -->
 
     <string name="station">Estación</string>
     <string name="station_ask">¿Quiere Insertar estación?</string>
@@ -581,13 +587,17 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="survey_exists">Nombre de Topografía ya existe</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">¿Quiere eliminar la topografía?</string>
-    <!-- TODO string name="survey_move">Move shots to survey %1$s ?</string -->
+    <string name="survey_move">Mover tomas a la topografia %1$s ?</string>
     <string name="survey_split">¿Quiere dividir la topografía?</string>
     <string name="survey_not_attached">ADVERTENCIA: Medidas no insertadas</string>
     <string name="survey_not_extend">ADVERTENCIA: la toma desvinculada sin extensión</string>
-    <string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string>
-    <string name="saturated_coeffs">ADVERTENCIA: coeficientes de calibración saturados</string>
-    <string name="out_of_memory">ADVERTENCIA: sin memoria!</string>
+    <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
+    <string name="survey_no_data_reduction">ATENCIÓN: datos sin procesar</string>
+    <string name="survey_not_saved">ATENCIÓN: información de la topografía no guardada</string>
+    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente</string>
+    <string name="survey_bad_magnetic">ATENCIÓN: proyecto poco preciso</string>
+    <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
+    <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
     <string name="disk_io_error">ERROR CRÍTICO: error de E/S de disco!</string>
     
     <string name="toporobot_warning">¡La política de TopoRobot es experimental!</string>
@@ -597,32 +607,35 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="delta_warning">Error promedio superior %1$.1f\nEscribir coeficientes?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
 
-    <!-- TODO string name="cover_data">Raw data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_calib">Calibrated data distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_g">G distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_m">M distribution: %1$.2f %%</string -->
-    <!-- TODO string name="cover_r">Roll distribution: %1$.2f %%</string -->
+    <string name="cover_data">Distribución de datos sin procesar: %1$.2f %%</string>
+    <string name="cover_calib">Distribución de datos calibrados: %1$.2f %%</string>
+    <string name="cover_g">Distribución de datos G: %1$.2f %%</string>
+    <string name="cover_m">Distribución de datos M: %1$.2f %%</string>
+    <string name="cover_r">Distribución de rotación: %1$.2f %%</string>
 
-    <!-- TODO string name="accuracy_low">Low accuracy. Calibration needed</string -->
-    <!-- TODO string name="accuracy_medium">Low accuracy</string -->
-    <!-- TODO string name="accuracy_unreliable">Unreliable sensors</string -->
-
+    <string name="accuracy_low">Baja precisión. Calibración recomendada.</string>
+    <string name="accuracy_medium">Precision baja</string>
+    <!-- UNUSED string name="accuracy_high">Buena precisión</string -->
+    <string name="accuracy_unreliable">Sensores poco fiables</string>
+    
+    <string name="empty_clipboard">sin notas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
     <string name="declination">Declinación magnética </string>
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
-    <!-- TODO string name="init_station">start station</string -->
-    <!-- TODO string name="second_device">second device</string -->
-    <!-- TODO string name="start_station">start station [%1$s]</string -->
+    <string name="init_station">Estación inicial</string>
+    <string name="second_device">segundo dispositivo</string>
+    <string name="start_station">Estación inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
     <string name="toggle_failed">Error al alternar DistoX</string>
     <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
-    <!-- TODO string name="undelete_paste_text">Recover/paste items</string -->
+    <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
     <string name="undelete_shot">Toma</string>
     <string name="undelete_overshoot">Exceso</string>
     <string name="undelete_check">Verificar</string>
+    <string name="undelete_blunder">Tomas falsas</string>
     <string name="undelete_plot">Dibujos</string>
     <string name="delete_whole_leg">Eliminar toda la visual</string>
     <string name="visible_border">Borde visible</string>
@@ -650,6 +663,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="stat_length">Desarrollo %1$.1f %2$s</string>
     <string name="stat_extlen">3D longitud %1$.1f %2$s</string>
     <string name="stat_projlen">Longitud de la planta %1$.1f %2$s</string>
+    <string name="stat_cycle">Ciclos %1$d</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Estación cero: %1$s</string>
     <string name="stat_azimuth">Perfil proyección Brújula: %1$.1f</string>
@@ -662,8 +676,8 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="stat_angle_error">Error de ángulo %1$.2f ± %2$.2f"</string>
     <string name="shot_title">Toma %1$s - %2$s"</string>
     <string name="shot_data">L %1$.2f  N %2$.1f  I %3$.1f"</string>
-    <!-- TODO string name="survey_split_move_title">Survey split/move</string -->
-
+    <string name="survey_split_move_title">Dividir / Mover alivio</string>
+	
     <string name="survey_stat_duplicate">Mediciones duplicadas %1$d %2$.1f %3$s</string>
     <string name="survey_stat_splay">Tomas laterales %1$d</string>
     <string name="survey_stat_station">Estaciones %1$d</string>
@@ -675,17 +689,21 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="hide_splay">Visualizar las tomas radiales</string>
 
     <!-- UNUSED string name="plan">Planta</string -->
-    <string name="extended">Alzado</string>
-    <string name="extended_profile">Alzado desarrollado</string>
-    <string name="profile">PROYECTO</string>
-    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
-    <!-- TODO string name="fmt_extended">%1$s: PROFILE</string -->
-    <!-- TODO string name="fmt_profile">%1$s: PROJECTED</string -->
+   <string name="extended">SECCIÓN LONG.</string>
+    <string name="profile">PROYECCIÓN</string>
+    <string name="fmt_plan">%1$s: PLANTA</string>
+    <string name="fmt_extended">%1$s: SECCIÓN LONG.</string>
+    <string name="fmt_profile">%1$s: PROYECCIÓN</string>
 
+    <string name="extended_profile">Alzado extendido</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-sección</string -->
     <!-- UNUSED string name="h_section">H-sección</string -->
     <!-- UNUSED string name="landscape">Paisaje</string -->
+
+    <string name="display_view">vista</string>
+    <string name="plan_view">planta</string>
+    <string name="profile_view">sección</string>
 
     <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Fallo conexión bluetooth</string>
@@ -697,20 +715,22 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="ask_reset">¿Quiere reiniciar la memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Â¿Cerrar Topografía?</string -->
     <string name="ask_gps_service">¿Quiere establecer el servicio de GPS?</string>
-    <string name="ask_backups_clear">Eliminar copia seguridad de croquis?</string>
-    <!-- TODO string name="ask_manual_update">Update user manual translation?\nCurrent v. %1$d Installed v. %2$d</string -->
+    <!-- UNUSED string name="ask_backups_clear">Cancellare backup disegni?</string -->
+    <string name="ask_manual_update">¿Actualizar la traducción del manual?\nActual V. %1$d Instalado v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Añadir    </string -->
-    <!-- TODO string name="button_apply"     >Apply</string -->
+    <string name="button_apply"     >Applicar</string>
     <string name="button_back"      >Atrás     </string>
     <string name="button_cancel"    >Cancelar  </string>
-    <string name="button_change"    >Cambio    </string>
+    <!-- UNUSED string name="button_change"    >Cambio    </string -->
+    <string name="button_clipboard" >Notas</string>
     <string name="button_close"     >Cerrar     </string>
     <!-- UNUSED string name="button_create"    >Crear    </string -->
     <string name="button_color"     >Color  </string>
-    <!-- TODO string name="button_compute"   >Compute</string -->
+    <string name="button_compute"   >Calcular</string>
+    <string name="button_clear_convert">Limpiar la conversión</string>
     <string name="button_convert"   >Convertir </string>
-    <!-- TODO string name="button_copy"      >Copy</string -->
+    <string name="button_copy"      >Copia</string>
     <string name="button_current"   >Corriente   </string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
@@ -719,12 +739,12 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="button_eval"      >Eval      </string>
     <string name="button_evalg"     >G      </string>
     <string name="button_evalm"     >M      </string>
-    <!-- TODO string name="button_evalroll"  >Roll</string -->
-    <!-- TODO string name="button_eval_cal"  >Eval w. calib.</string -->
+    <string name="button_evalroll"  >Rotación</string>
+    <string name="button_eval_cal"  >Calcular con calibre</string>
     <string name="button_gps_start" >GPS       </string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
     <!-- DONT TRANSLATE string name="button_help">?</string -->
-    <!-- TODO string name="button_manual"    >User Manual</string -->
+    <string name="button_manual"    >Manual de usuario</string>
     <!-- UNUSED string name="button_measure"   >Medida   </string -->
     <!-- UNUSED string name="button_photo"   >Fotos</string -->
     <!-- UNUSED string name="button_sensor"  >Sensores</string -->
@@ -732,10 +752,10 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="button_azimuth">Rumbo</string -->
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
-    <!-- TODO string name="button_move"    >Move</string -->
-    <string name="button_next"    >Siguiente</string>
-    <!-- TODO string name="button_prev"    >Prevous</string -->
-    <!-- TODO string name="button_new"     >New scrap</string -->
+    <string name="button_move"    >Mueve</string>
+    <string name="button_next"    >próximo</string>
+    <string name="button_prev"    >Anterior</string>
+    <string name="button_new"     >nuevo exceso</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
     <string name="button_lrud"    >Añadir LRUD</string>
@@ -744,6 +764,8 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="button_on"        >on</string>
     <string name="button_open"      >Abrir     </string>
     <string name="button_read"      >Leer      </string>
+    <string name="button_recover"   >Recupera</string>
+    <string name="button_reverse"   >Inversi</string>
     <!-- UNUSED string name="button_redo"      >Rehacer    </string -->
     <!-- UNUSED string name="button_regroup"   >Regroup   </string -->
     <string name="button_dump"      >Enviar    </string>
@@ -757,12 +779,12 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="button_clear"     >Borrar    </string>
     <string name="button_clear_day" >limpiar 1d  </string>
     <string name="button_clear_week">limpiar 7d  </string>
-    <!-- TODO string name="button_clear_memory">Clear memory</string -->
+    <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
     <string name="button_search"    >Buscar    </string>
     <string name="button_merge"     >Unir     </string>
-    <!-- TODO string name="button_saved"     >Saved station</string -->
+    <string name="button_saved"     >Estación guardada</string>
     <string name="button_split"     >Dividir     </string>
     <string name="button_station"   >Centro at</string>
     <string name="button_store"     >Recibir   </string>
@@ -774,18 +796,18 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="button_zoomfit"   >Ajuste de zoom  </string -->
     <!-- UNUSED string name="button_landscape" >Paisaje </string -->
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
-    <!-- TODO string name="button_splays">Splays</string -->
+    <string name="button_splays">Splays</string>
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
-    <string name="button_xsection"  >Secciones</string>
-    <string name="xsection">Secciones</string>
-    <!-- TODO string name="buffer_size">Buffer: %1$d data</string -->
-    <!-- TODO string name="buffer_unsorted">unsorted</string -->
+    <string name="button_xsection"  >Secciones transversales</string>
+    <string name="xsection">Secciones transversales</string>
+    <string name="buffer_size">Búfer: %1$d datos</string>
+    <string name="buffer_unsorted">Sin clasificar</string>
 
     <string name="mode_leg">Visuales</string>
     <string name="mode_splay">Radiales</string>
-    <!-- TODO string name="mode_latest">Latest splays</string -->
+    <string name="mode_latest">Últimas reproducciones</string>
     <string name="mode_station">Estaciones</string>
     <string name="mode_grid">Cuadrículas</string>
     <string name="mode_fixed">Desplazar objetos</string>
@@ -810,12 +832,13 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <string name="popup_do_splay">Tomas radiales</string>
     <string name="popup_do_leg">Tomas principales</string>
-    <string name="popup_do_gm_data">Toma calib.</string>
-    <!-- TODO string name="popup_do_laser">Laser</string -->
-    <!-- TODO string name="popup_do_scan">Scan</string -->
-    <!-- TODO string name="popup_do_shot">Shot</string -->
-    <!-- TODO string name="popup_do_clear">Clear</string -->
-    <!-- TODO string name="popup_do_off">Off</string -->
+    <string name="popup_do_gm_data">Toma de calibración</string>
+    <string name="popup_do_gm_group">grupo calibración</string>
+    <string name="popup_do_laser">Laser</string>
+    <string name="popup_do_scan">Escanear</string>
+    <string name="popup_do_shot">Toma</string>
+    <string name="popup_do_clear">Limpiar</string>
+    <string name="popup_do_off">Apagado</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
     <!-- TODO string name="btn_export">Export</string -->
@@ -823,7 +846,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="btn_install">Instalar</string>
 
     <string name="symbol_archeo">Arqueología</string>
-    <!-- TODO string name="symbol_anthro">Anthro</string -->
+    <string name="symbol_anthro">antrópico</string>
     <string name="symbol_bio">Biología</string>
     <string name="symbol_geo">Geología</string>
     <string name="symbol_karst">Karst</string>
@@ -833,36 +856,47 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="symbol_extra">Espeleo(2)</string>
 
     <string name="symbol_reload">Herramientas dibujo</string>
-    <!-- TODO string name="warning_no_palette">Warning: palette not yet loaded</string -->
+    <string name="warning_no_palette">Atención: paleta no cargada</string>
 
     <!-- UNUSED string name="length">Longitud [m]</string -->
     <!-- UNUSED string name="azimuth">Rumbo [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
-    <!-- TODO string name="hint_notes">notes</string -->
-    <!-- TODO string name="hint_label">label</string -->
-    <!-- TODO string name="hint_comment">comment</string -->
-    <!-- TODO string name="hint_text">text</string -->
-    <!-- TODO string name="hint_options">options</string -->
-    <!-- TODO string name="hint_name">name</string -->
-    <!-- TODO string name="hint_from">from</string -->
-    <!-- TODO string name="hint_to">to</string -->
-    <!-- TODO string name="hint_azimuth">azimuth</string -->
-    <!-- TODO string name="hint_clino">clino</string -->
-    <!-- TODO string name="hint_roll">roll</string -->
-    <!-- TODO string name="hint_year">year</string -->
-    <!-- TODO string name="hint_month">month</string -->
-    <!-- TODO string name="hint_day">day</string -->
-    <!-- TODO string name="hint_hour">hour</string -->
-    <!-- TODO string name="hint_minute">minute</string -->
-    <!-- TODO string name="hint_second">second</string -->
-    <!-- UNUSED string name="hint_latitude">latitude</string -->
-    <!-- UNUSED string name="hint_longitude">longitude</string -->
-    <!-- UNUSED string name="hint_altitude">altitude</string -->
-    <!-- UNUSED string name="hint_altitude_asl">altitude (asl)</string -->
-    <!-- UNUSED string name="hint_declination">declination</string -->
-    <!-- TODO string name="hint_station">station</string -->
+    <string name="hint_cellsize">Lado de la celda</string>
+    <string name="hint_cwd">Carpeta de trabajo</string>
+    <string name="hint_distance">Distancia</string>
+    <string name="hint_length">Longitud</string>
+    <string name="hint_line">Línea</string>
+    <string name="hint_origin">Origen</string>
+    <string name="hint_point">Punto</string>
+    <string name="hint_textsize">Tamano del texto</string>
+    <string name="hint_units">Tamaño del símbolo</string>
+    <string name="hint_value">Valor</string>
 
+    <string name="hint_notes">Nota</string>
+    <string name="hint_label">Etiqueta</string>
+    <string name="hint_comment">Comentario</string>
+    <string name="hint_text">Texto</string>
+    <string name="hint_options">Opciones</string>
+    <string name="hint_name">Nombre</string>
+    <string name="hint_from">de</string>
+    <string name="hint_to">a</string>
+    <string name="hint_azimuth">Rumbo</string>
+    <string name="hint_clino">Inclinación</string>
+    <string name="hint_roll">Rotación</string>
+    <string name="hint_year">Año</string>
+    <string name="hint_month">Mes</string>
+    <string name="hint_day">Día</string>
+    <string name="hint_hour">Hora</string>
+    <string name="hint_minute">Minuto</string>
+    <string name="hint_second">Segundo</string>
+    <!-- UNUSED string name="hint_latitude">latitudine</string -->
+    <!-- UNUSED string name="hint_longitude">longitudine</string -->
+    <!-- UNUSED string name="hint_altitude">altitudine</string -->
+    <!-- UNUSED string name="hint_altitude_asl">altitudine (asl)</string -->
+    <!-- UNUSED string name="hint_declination">declinatione</string -->
+    <string name="hint_station">Estación principal</string>
+	
     <string name="orientation">Orientación</string>
     <string name="contents">Contenido</string>
     <string name="error_distribution">Error distribucción</string>
@@ -873,6 +907,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="split_nothing">Nada para dividir</string>
     <string name="flip_shots">Tomas contínuas</string>
     <string name="copy_items">Copiar elementos</string>
+    <string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface"> Prefacio </string>
     <string name="man_intro">1. Introducción </string>
@@ -888,7 +923,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="man_xsection">11. Secciones transversales </string>
     <string name="man_overview">12. Pantalla de descripción general </string>
     <string name="man_export">13.  Importar / exportar </string>
-    <!-- TODO string name="man_project">14. Cave projects</string -->
+    <string name="man_project">14. Topografias de cuevas</string>
     <string name="man_threed">15. Visor Cave3D </string>
     <string name="man_index">16. Índice </string>
     <string name="man_website">* Sitio web </string>
@@ -899,15 +934,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_measure_type">Modo de medición: punto fijo o polilínea</string>
     <string name="help_measure_undo">Suelta el último punto de polilínea</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
-    <string name="help_backups">Eliminar copia de seguridad de croquis</string>
+    <string name="help_audio">Lista de grabaciones de audio</string>
+    <!-- UNUSED string name="help_backups">Eliminar copia de seguridad de croquis</string-->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
-    <!-- TODO string name="help_close_app">Close app</string -->
+    <string name="help_close_app">Cerrar l\'app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
-    <!-- UNUSED string name="help_contour">Editar Contorno</string -->
+    <!-- NO string name="help_contour">Editar Contorno</string -->
     <string name="help_current_station">Última estación guardada</string>
     <string name="help_azimuth">Asistente referencia del rumbo</string>
     <string name="help_refresh">Actualizar pantalla</string>
@@ -915,10 +950,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_add_topodroid">Crear nueva Topografía/calibración</string>
     <string name="help_import">Importar archivo zip o Therion</string>
     <string name="help_symbol">Activar/desactivar los símbolos de dibujo</string>
-    <!-- TODO string name="help_therion">Cave project manager</string -->
+    <string name="help_therion">Gestor topografías cuevas</string>
+    <string name="help_cave3d">Cave3D, visualización 3D</string>
     <!-- UNUSED string name="help_database">Aplicación Database viewer(SQliteViewer)</string -->
     <string name="help_prefs">Editar preferencias</string>
-    <string name="help_log">Activar/desactivar las opciones de registro</string>
+    <!-- UNUSED string name="help_log">Activar/desactivar las opciones de registro</string-->
     <!-- UNUSED string name="help_join_survey">Unir dos topografías</string -->
     <string name="help_info_topodroid">Info TopoDroid</string>
     <string name="help_download">Descargar datos</string>
@@ -945,7 +981,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_refs">Ajustes de visualización del dibujo</string>
     <string name="help_rename">Cambio nombre topografía</string>
     <string name="help_plot_rename">Eliminar/Renombrar dibujo</string>
-    <!-- TODO string name="help_plot_scrap">Sketch scraps</string -->
+    <string name="help_plot_scrap">Residuos de dibujo</string>
     <string name="help_plot_switch">Activación dibujo</string>
     <string name="help_search">Búsqueda de estación</string>
     <string name="help_stats">Estadísticas de Topografía</string>
@@ -963,13 +999,13 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_select_mode">Herramienta de selección</string>
     <string name="help_erase_mode">Tipo de goma de borrar</string>
     <string name="help_erase_size">Tamaño goma de borrar [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Select tool size [S/M/L]</string -->
+    <!-- TODO string name="help_select_size">Seleccione el tamaño de la herramienta[S/M/L]</string -->
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
-    <!-- TODO string name="help_reload_prev">Display newer backup</string -->
-    <!-- TODO string name="help_reload_next">Display older backup</string -->
-    <!-- TODO string name="help_reload_plot">Reload sketch backup</string -->
+    <string name="help_reload_prev">Mostrar copia de seguridad reciente</string>
+    <string name="help_reload_next">Mostrar copia de seguridad antigua</string>
+    <string name="help_reload_plot">Volver a cargar la copia de seguridad del croquis</string>
     <string name="help_zoom_fit">Ajustar dibujo a la pantalla</string>
    
     <string name="help_line_point">Editar punto o línea: unir, separar, cortar, eliminar</string>
@@ -1002,71 +1038,72 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
+    <string name="help_splays">Splays como líneas o puntos</string>
 
-    <!-- TODO string name="help_add_project">Add cave project</string -->
-    <!-- TODO string name="help_add_surveys">Add surveys</string -->
-    <!-- TODO string name="help_drop_surveys">Drop surveys</string -->
-    <!-- TODO string name="help_view_surveys">Display surveys</string -->
-    <!-- TODO string name="help_view_equates">List equates</string -->
-    <!-- TODO string name="help_export_config">Export project</string -->
-    <!-- TODO string name="help_delete_config">Delete project</string -->
-    <!-- TODO string name="help_add_equate">Add surveys equate</string -->
-    <!-- TODO string name="help_equates">List surveys equates</string -->
+    <string name="help_add_project">Agregar proyecto</string>
+    <string name="help_add_surveys">Agregar relieve</string>
+    <string name="help_drop_surveys">Eliminar relieve</string>
+    <string name="help_view_surveys">Mostra relieve</string>
+    <string name="help_view_equates">Lista de equivalentes</string>
+    <string name="help_export_config">Exportar topografía</string>
+    <string name="help_delete_config">Eliminar topografia</string>
+    <string name="help_add_equate">Agregar relieves similares</string>
+    <string name="help_equates">Lista relieves similares</string>
 
-    <!-- TODO string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config commands</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_prefix_hint">prefix</string -->
-    <!-- TODO string name="export_suffix_hint">suffix</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
-    <!-- TODO string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_surface">Surface</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_trox">Trox format</string -->
-    <!-- TODO string name="export_walls">Walls</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
-    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
-    <!-- TODO string name="export_with_reference">Include XY reference</string -->
+    <!-- UNUSED string name="export_bgcolor">Color de fondo</string -->
+    <string name="export_config">Comandos de configuración</string>
+    <string name="export_csv_rawdata">Datos sin procesar</string>
+    <string name="export_dxf_blocks">Bloques DXF</string>
+    <string name="export_dxf_version">Versión</string>
+    <string name="export_georeference">Georeferencia</string>
+    <string name="export_grid">Cuadrícula</string>
+    <string name="export_linedir">Línea de dirección</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD a estación DA</string>
+    <string name="export_maps">Mapa antes de datos</string>
+    <string name="export_prefix">Prefijo de cueva en nombres de destino</string>
+    <string name="export_prefix_hint">prefijo</string>
+    <string name="export_suffix_hint">sufijo</string>
+    <string name="export_roundtrip">Ida y vuelta </string>
+    <!-- UNUSED string name="export_scale_png">Resolución </string -->
+    <string name="export_scale_th">Escala 1:</string>
+    <string name="export_splays">Splay</string>
+    <string name="export_splays_named">Mostrar con nombre</string>
+    <string name="export_stations">Capisaldi</string>
+    <string name="export_surface">Superfice</string>
+    <string name="export_swap_lr">Intercambiar  L/R</string>
+    <string name="export_trox">Formato Trox</string>
+    <string name="export_walls">Paredes</string>
+    <string name="export_xvi">Imágenes Xvi</string>
+    <string name="export_with_xsections">Incluir X-sección</string>
+    <string name="export_with_reference">Incluir referencias XY</string>
 
-    <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
-    <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
-    <!-- UNUSED string name="export_grid_stroke">Grid stroke</string -->
-    <!-- UNUSED string name="export_line_stroke">Line stroke</string -->
-    <!-- UNUSED string name="export_shot_stroke">Shot stroke</string -->
-    <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
-    <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
+    <!-- UNUSED string name="export_linedir_stroke"> Trazo de dirección de línea</string -->
+    <!-- UNUSED string name="export_station_stroke">Trazo de estación</string -->
+    <!-- UNUSED string name="export_grid_stroke">Trazo de cuadrícula</string -->
+    <!-- UNUSED string name="export_line_stroke">Trazo de línea</string -->
+    <!-- UNUSED string name="export_shot_stroke"> Trazo de toma</string -->
+    <!-- UNUSED string name="export_point_stroke">Trazo de punto</string -->
+    <!-- UNUSED string name="export_label_stroke">Trazo de etiqueta</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
-    <!-- TODO string name="audio_paused">Paused</string -->
-    <!-- TODO string name="audio_playing">Playing</string -->
-    <!-- TODO string name="audio_recording">Recording</string -->
-    <!-- TODO string name="audio_delete">Delete ?</string -->
-    <!-- TODO string name="audio_overwrite">Overwrite ?</string -->
-    <!-- UNUSED string name="playing">Playing %1$s</string -->
+    <string name="audio_id_shot">Registro: toma %1$s %2$s</string>
+    <string name="audio_id_plot">Registro: dibujo %1$d</string>
+    <string name="audio_paused">En pausa</string>
+    <string name="audio_playing">Reproducir</string>
+    <string name="audio_recording">Grabación </string>
+    <string name="audio_delete">¿Eliminar?</string>
+    <string name="audio_overwrite">¿Sobrescribir?</string>
+    <!-- UNUSED string name="playing">Reproduciendo %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
-    <!-- TODO string name="import_trox">Trox file format</string -->
-    <!-- TODO string name="import_lrud">Import LRUD</string -->
-    <!-- TODO string name="import_leg_first">Leg before LRUD splays</string -->
-    <!-- TODO string name="import_diving_datamode">Diving datamode</string -->
-
+    <string name="import_functional">Importar solo configuraciones funcionales</string>
+    <string name="import_trox">archivo de formato Trox</string>
+    <string name="import_lrud">Importar LRUD</string>
+    <string name="import_leg_first">Pulsación de tecla antes de los LRUD</string>
+    <string name="import_diving_datamode">Modo de datos de inmersión </string>
 
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Registros de audio</string>
     <string name="title_calib">Calibración</string>
     <string name="title_calib_check">Calibración: compruebe las tomas</string>
     <!-- UNUSED string name="title_check">Calibration-check</string -->
@@ -1079,7 +1116,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_search">Búsqueda de estación/trayecto</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
-    <!-- TODO string name="title_device_select">Select DistoX device</string -->
+    <string name="title_device_select">Selecciona DistoX</string>
     <!-- UNUSED string name="title_discover">Buscar dispositivos DistoX &#8230; espere</string -->
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
@@ -1102,13 +1139,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_packet_dialog">Paquetes</string>
     <string name="title_photo">Foto/Medidas</string>
     <string name="title_photo_comment">Comentario Foto</string>
-    <!-- TODO string name="title_photo_list">Photos</string -->
+    <string name="title_photo_list">Fotos</string>
+    <string name="title_photo_view">Foto</string>
     <string name="title_plot_save">Guardar dibujo como</string>
     <!-- UNUSED string name="title_plot_merge">Combinar dibujo</string -->
     <!-- UNUSED string name="title_plot_reload">Actualizar dibujo</string -->
-    <!-- TODO string name="title_plot_scraps">Sketch scraps</string -->
+    <string name="title_plot_scraps">topografías bloc de notas</string>
     <string name="title_profile_flip">¿Quiere cambiar al alzado del dibujo?</string>
     <string name="title_projection">Perfil de proyeccción de brújula %1$d</string>
+    <string name="title_reduction_errors">Anomalías de reducción de datos</string>
     <string name="title_refs">Referencias de dibujo</string>
     <string name="title_scraps">Dibujo</string>
     <string name="title_scraps_outline">Esquema del dibujo</string>
@@ -1121,17 +1160,17 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_settings_svx">Configuración de exportación Survex</string>
     <string name="title_settings_th">Configuración de exportación Therion</string>
     <string name="title_settings_dat">Configuración de exportación Compass</string>
-    <!-- TODO string name="title_settings_csx">cSurvey export settings</string -->
+    <string name="title_settings_csx">Configuración de exportación cSurvey</string>
     <string name="title_settings_tro">Configuración de exportación VisualTopo</string>
-    <string name="title_settings_svg">Configuración de exportación SVG export</string>
-    <string name="title_settings_dxf">Configuración de exportación DXF export</string>
-    <!-- TODO string name="title_settings_shp">Shapefile export settings</string -->
-    <string name="title_settings_png">Configuración de exportación PNG export</string>
+    <string name="title_settings_svg">Configuración de exportación SVG</string>
+    <string name="title_settings_dxf">Configuración de exportación DXF</string>
+    <string name="title_settings_shp">Configuración de exportación Shapefile</string>
+    <string name="title_settings_png">Configuración de exportación PNG</string>
     <string name="title_settings_kml">Configuración de exportación KML</string>
 
     <string name="title_settings_sketch">Ajuste de dibujo 3D en TopoDroid</string>
     <string name="title_settings_survey">Ajustes de la topografía en TopoDroid</string>
-    <!-- TODO string name="title_settings_splay">TopoDroid splay settings</string -->
+    <!-- UNUSED string name="title_settings_splay">Configuración de visualización de TopoDroid</string -->
     <string name="title_settings_shot">Ajustes de datos de tomas en TopoDroid</string>
     <string name="title_settings_units">Ajustes de las unidades en TopoDroid</string>
     <string name="title_settings_location">Ajustes de ubicación en TopoDroid</string>
@@ -1146,16 +1185,16 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_settings_edit">Ajustes de edición en TopoDroid</string>
     <string name="title_settings_device">Ajustes del dispositivo en TopoDroid</string>
     <string name="title_settings_calib">Ajustes de calibración en TopoDroid</string>
-    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
-    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
-    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
-    <!-- TODO string name="title_settings_geek">TopoDroid geek flags settings</string-->
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_3d">Configuración del visor 3d de TopoDroid</string>
+    <string name="title_settings_dem">Configuración DEM de TopoDroid </string>
+    <string name="title_settings_walls3d"> Configuración del modelo 3d de TopoDroid</string>
+    <string name="title_settings_geek">Indicador de configuración para principiantes </string>
+    <string name="title_settings_geek_survey">Principiantes: Configuración de la topografía</string>
+    <string name="title_settings_geek_splay">Principiantes: configuración de visualización </string>
+    <string name="title_settings_geek_plot">Principiantes: configuración de dibujo </string>
+    <string name="title_settings_geek_line"> Principiantes: configuración de línea </string>
+    <string name="title_settings_geek_device">Principiantes: configuración de DistoX</string>
+    <string name="title_settings_geek_import">Principiantes: configuración de importación</string>
     <string name="title_settings_log">Ajustes de registro en TopoDroid</string>
 
     <string name="title_shift">Cambio</string>
@@ -1170,7 +1209,6 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="title_sketch_select">Seleccionar elemento</string -->
 
     <string name="title_stats">Estadísticas</string>
-    <!-- UNUSED string name="title_step">Medida</string -->
     <string name="title_survey">Info. topografía</string>
     <string name="title_survey_new">Nueva topografía</string>
     <string name="title_survey_export">Exportar topografías</string>
@@ -1180,21 +1218,27 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_calib_export">Exportar topografía como&#8230;</string>
     <!-- UNUSED string name="title_zoom">Zoom</string -->
 
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
-
+  <string name="title_import_shot">Importar Topografía</string>
+  <string name="title_import_gps">Importar punto GPS</string>
+  <string name="title_graph_paper">Papel milimétrico en escala 1: 100</string>
+  <string name="graph_paper_scale">Ajusta la línea a 5 cm</string>
+	
+  <string name="exported_settings">Configuración exportada %1$s</string>
+  <string name="imported_settings">Configuración importada</string>
+  <string name="imported_settings_failed">Configuración de importación fallida</string>
+  <string name="export_settings_failed">Configuración de exportación fallida</string>
   <string name="pref_export_settings">Ajustes de exportación</string>
   <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
-
+  <string name="pref_export_plot_title">Formato de exportación de croquis</string>
+  <string name="pref_export_plot_summary">Formato de exportación de croquis predeterminado</string>
+  <string name="pref_export_shots_title">Formato de exportación de datos</string>
+  <string name="pref_export_shots_summary">Formato de exportación de datos predeterminado</string>
+  <string name="pref_auto_plot_export_title">Formato de exportación de croquis automático</string>
+  <string name="pref_auto_plot_export_summary"Formato de exportación automática de dibujos</string>
+	
   <string name="pref_cat_survey">Ajustes de topografía</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
+  <string name="pref_cat_splay">DATOS SPLAY</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1210,16 +1254,14 @@ Translation with more than 70 lint errors are dropped from the app.
 
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
-  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
-  <!-- TODO string name="pref_cat_geek">GEEK FLAGS</string -->
-  <!-- NO string name="pref_cat_sketch">Opciones de dibujo</string -->
+  <string name="pref_cat_cave3d">VISOR 3D</string>
+  <string name="pref_cat_geek">FLAG Principiante</string>
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
-
 
   <string name="pref_locale_title">Idioma</string>
   <string name="pref_locale_summary">Seleccione idioma</string>
-  <!-- TODO string name="pref_orientation_title">Screen orientation</string -->
-  <!-- TODO string name="pref_orientation_summary">App screen orientation</string -->
+  <string name="pref_orientation_title">Orientación de Pantalla</string>
+  <string name="pref_orientation_summary">Orientación Pantalla App </string>
 
   <string name="pref_raw_data_title">Datos sin procesar</string>
   <string name="pref_raw_data_summary">Mostrar datos sin procesar</string>
@@ -1235,9 +1277,11 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_local_help_summary">Activar la traducción del Manual</string>
   <!-- UNUSED string name="pref_cosurvey_title">Cosurvey</string -->
   <!-- UNUSED string name="pref_cosurvey_summary">Activar/Desactivar topografías compartidas</string -->
+  <string name="pref_import_datamode_title"> Formato de importación</string>
+  <string name="pref_import_datamode_summary">Formato de datos de importación</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
+  <string name="pref_therion_config_title">Comandos de configuración de Therion</string>
+  <string name="pref_therion_config_summary">Insertar comandos de configuración de Therion</string>
   <string name="pref_therion_maps_title">Mapa Therion primero</string>
   <string name="pref_therion_maps_summary">Mapas Therion antes de los datos de la topografía</string>
   <string name="pref_extra_buttons_title">Nivel de usuario</string>
@@ -1248,6 +1292,8 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_with_sensors_summary">Habilitar datos de "sensores"</string>
   <string name="pref_with_android_azimuth_title">Brújula Android</string>
   <string name="pref_with_android_azimuth_summary">Activar Brújula/clino Android</string>
+  <string name="pref_blunder_shot_title">Tomas falsas</string>
+  <string name="pref_blunder_shot_summary">Omitir tomas falsas</string>
   <string name="pref_with_levels_title">Capas</string>
   <string name="pref_with_levels_summary">Usa capas en dibujo</string>
   <string name="pref_palettes_title">Paletas</string>
@@ -1261,7 +1307,6 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_leg_shots_summary">Número mínimo de tomas por visual</string>
   <string name="pref_recent_timeout_title">Tiempo de espera de datos reciente</string>
   <string name="pref_recent_timeout_summary">Tiempo de espera después del cual los datos ya no son recientes</string>
-  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
   <string name="pref_triple_shot_title">Campana de la toma de una visual</string>
   <string name="pref_triple_shot_summary">Avisos sonoros sobre el reconocimiento de la toma de una visual</string>
   <string name="pref_connect_feedback_title">Conectar avisos</string>
@@ -1274,8 +1319,8 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_vtopo_splays_summary">Exportar reproducciones en archivos de VisualTopo</string>
   <string name="pref_vtopo_lrud_title">A partir de LRUD</string>
   <string name="pref_vtopo_lrud_summary">LRUD en la estación VisualTopo</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
+  <string name="pref_vtopo_trox_title">Formato Trox</string>
+  <string name="pref_vtopo_trox_summary"> Exportar VisualTopo en formato trox</string>
   <!-- UNUSED string name="pref_trobot_names_title">TopoRobot Nombres de estaciones</string -->
   <!-- UNUSED string name="pref_trobot_names_summary">Los nombres de las estaciones están en el estilo TopoRobot</string -->
   <string name="pref_ortho_lrud_title">LRUD ángulo de apertura</string>
@@ -1290,12 +1335,12 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_survex_splay_summary">Añadir a la estación toma radial en Survex</string>
   <string name="pref_survex_lrud_title">LRUD Survex</string>
   <string name="pref_survex_lrud_summary">Añadir toma radial a exportación Survex</string>
-  <!-- UNUSED string name="pref_svg_program_title">SVG program</string -->
-  <!-- UNUSED string name="pref_svg_program_summary">Target SVG program</string -->
+  <string name="pref_svg_program_title">Programa SVG</string>
+  <string name="pref_svg_program_summary">Programa SVG utilizado</string>
   <string name="pref_svg_grid_title">Parrilla</string>
   <string name="pref_svg_grid_summary">Añadir una parrilla a la exportación SVG/PNG</string>
-  <!-- TODO string name="pref_svg_roundtrip_title">SVG round-trip</string -->
-  <!-- TODO string name="pref_svg_roundtrip_summary">Round-trip ready SVG export</string -->
+  <string name="pref_svg_roundtrip_title">SVG de ida y vuelta</string>
+  <string name="pref_svg_roundtrip_summary">Exportar SVG con capa de ida y vuelta</string>
   <string name="pref_svg_splays_title">Biscelado SVG</string>
   <string name="pref_svg_splays_summary">Incluir biscelado en la exportación SVG</string>
   <!-- UNUSED string name="pref_svg_in_html_title">SVG en HTML</string -->
@@ -1314,21 +1359,20 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_svg_linedirstroke_summary">Ancho de orientación de línea en SVG</string>
   <string name="pref_svg_line_dir_title">Flecha de orientación SVG</string>
   <string name="pref_svg_line_dir_summary">Agregue flecha de orientación a la exportación de SVG</string>
-  <!-- TODO string name="pref_svg_stationsize_title">Station size</string -->
-  <!-- TODO string name="pref_svg_stationsize_summary">Station names text size</string -->
-  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
-  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
+  <string name="pref_svg_stationsize_title"> Tamaño objetivo</string>
+  <string name="pref_svg_stationsize_summary">Tamaño de texto de los nombres de destino</string>
+  <string name="pref_svg_labelsize_title">Tamaño de etiqueta</string>
+  <string name="pref_svg_labelsize_summary">Tamaño de etiqueta de texto</string>
   <string name="pref_kml_stations_title">Estaciones en KML</string>
   <string name="pref_kml_stations_summary">Añadir estaciones a la exportación de KML</string>
   <string name="pref_kml_splays_title">Tomas radiales en KML</string>
   <string name="pref_kml_splays_summary">Añadir tomas radiales a la exportación de KML</string>
-  <!-- TODO string name="pref_csv_raw_title">Raw CSV</string -->
+  <string name="pref_csv_raw_title">CSV sin formato</string>
   <string name="pref_csv_raw_summary">Exportar datos raw a CSV</string>
   <string name="pref_csv_sep_title">Separación CSV</string>
   <string name="pref_csv_sep_summary">Filas separadas CSV</string>
   <string name="pref_csv_eol_title">CSV conocido</string>
   <string name="pref_csv_eol_summary">Grabar separación CSV</string>
-
   <string name="pref_sock_type_title">Emparejar</string>
   <string name="pref_sock_type_summary">Crear emparejamiento</string>
   <!-- UNUSED string name="pref_device_type_title">Tipo Disto</string -->
@@ -1347,8 +1391,8 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_conn_mode_summary">Modo conexión con DistoX</string>
   <!-- UNUSED string name="pref_auto_reconnect_title">Autoconectar</string -->
   <!-- UNUSED string name="pref_auto_reconnect_summary">Vuelva a conectar si se pierde la conexión</string -->
-  <!-- TODO string name="pref_second_distox_title">Two-DistoX survey</string -->
-  <!-- TODO string name="pref_second_distox_summary">Surveying with two DistoX</string -->
+  <string name="pref_second_distox_title">Topografía con 2 DistoX</string>
+  <string name="pref_second_distox_summary">Detectar con 2 DistoX</string>
   <string name="pref_auto_pair_title">Emparejamiento automático</string>
   <string name="pref_auto_pair_summary">Dispositivo emparejado</string>
   <string name="pref_head_tail_title">Número de datos nuevos</string>
@@ -1357,16 +1401,16 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_socket_delay_summary">La conexión tarda mucho para emparejarse [0.1 sec]</string>
   <string name="pref_z6_workaround_title">Solución Z6</string>
   <string name="pref_z6_workaround_summary">Descarga de datos de solución Z6</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
+  <string name="pref_firmware_sanity_title">Verificación de firmware</string>
+  <string name="pref_firmware_sanity_summary">Realizar comprobaciones de estado\' firmware</string>
   <string name="pref_crs_title">CRS</string>
   <string name="pref_crs_summary">Introducir el CRS nombrar como en Proj4</string>
   <!-- UNUSED string name="pref_gps_averaging_title">Promedio GPS</string -->
   <!-- UNUSED string name="pref_gps_averaging_summary">Uso promedio GPS</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+  <string name="pref_bric_mode_title">Modo BRIC</string>
+  <string name="pref_bric_mode_summary">Modo operativo BRIC</string>
+  <string name="pref_bric_zero_length_title">Toma cero BRIC </string>
+  <string name="pref_bric_zero_length_summary">Grabar toma BRIC de longitud cero</string>
 
   <string name="pref_plot_screen_title">Ajustes de pantalla de croquis</string>
   <string name="pref_tool_line_title">Ajustes de línea</string>
@@ -1397,15 +1441,17 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_horiz_splay_message">Separe el rumbo más de lo que esta discontínuo</string>
   <string name="pref_section_splay_title">Umbral del ángulo del tablero de separación</string>
   <string name="pref_section_splay_message">Sobre este ángulo con el plano de sección,los guiones se puntean</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+  <string name="pref_splay_dash_color_title">Color discontinuo</string>
+  <string name="pref_splay_dash_color_summary">Color de las líneas de puntos</string>
+  <string name="pref_splay_dot_color_title">Color punteado</string>
+  <string name="pref_splay_dot_color_summary">Color de las líneas punteadas</string>
 
   <!-- UNUSED string name="pref_data_backup_title">Autoexportación de datos</string -->
   <!-- UNUSED string name="pref_data_backup_summary">Exportación automática de datos (necesita formato predeterminado)</string -->
-  <!-- TODO string name="pref_zipped_symbols_title">Zipped symbols files</string -->
-  <!-- TODO string name="pref_zipped_symbols_summary">Store/load symbol files to/from zip archive</string -->
+  <string name="pref_editable_stations_title">Puntos de referencia editables </string>
+  <string name="pref_editable_stations_summary">Puntos de referencia editables en la lista de datos</string>
+  <string name="pref_zipped_symbols_title">Archivo de símbolos en formato ZIP</string>
+  <string name="pref_zipped_symbols_summary">Guardar / Cargar símbolos a / desde archivo ZIP</string>
   <string name="pref_fixed_origin_title">Origen del dibujo</string>
   <string name="pref_fixed_origin_summary">Origen de dibujo fijo</string>
   <string name="pref_shared_xsections_title">Secciones x compartidas</string>
@@ -1434,13 +1480,13 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_backsight_title">Toma duplicada visual</string>
   <string name="pref_backsight_summary">Se duplican los datos en el diálogo de la toma manual</string>
   <string name="pref_backshot_title">visual inversa DistoX</string>
-  <!-- TODO string name="pref_backshot_summary">Swap stations to DistoX backshots</string -->
+  <string name="pref_backshot_summary">Invertir puntos de destino en datos de backshot</string>
   <string name="pref_prev_next_title">Añadir botón Ant./Sig.</string>
   <string name="pref_prev_next_summary">Añade un botón Anterior/Sguiente en diálogo de toma</string>
   <!-- UNUSED string name="pref_mag_anomaly_title">Compensación magnética</string -->
   <!-- UNUSED string name="pref_mag_anomaly_summary">Compensar declinación magnética local</string -->
-  <string name="pref_azimuth_manual_title">Toma extendida</string>
-  <string name="pref_azimuth_manual_summary">fijas o con relación a la referencia extendida</string>
+  <string name="pref_azimuth_manual_title">"extender" manual</string>
+  <string name="pref_azimuth_manual_summary">Establecer "extender" las líneas manualmente</string>
 
   <string name="pref_team_title">Equipo</string>
   <string name="pref_team_summary">Equipo de topógrafos por defecto</string>
