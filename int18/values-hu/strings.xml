@@ -756,7 +756,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="button_sensor"  >Szenzorok</string -->
     <!-- UNUSED string name="button_direction">Irány/Lejtés</string -->
     <!-- UNUSED string name="button_azimuth">Irány</string -->
-    <string name="button_plot"    >Vázlat</string>
+    <string name="button_plot"    >Rajzol</string>
     <string name="button_more"    >Több</string>
     <string name="button_move"    >Mozgat</string>
     <string name="button_next"    >Következő</string>
