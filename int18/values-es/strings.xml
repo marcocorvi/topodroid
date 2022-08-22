@@ -28,8 +28,8 @@
 Con Android-R TopoDroid debe utilizar la carpeta "Android/data".\NTopoDroid no la ha encontrado y ha creado esta carpeta.\NPuedes importar los archivos zip de tus antiguas topografías.\NCuidado con los archivos de la nueva carpeta de TopoDroid que se eliminan cuando desinstalas TopoDroid.\N
 Consulte las páginas web para más detalles..\n
   </string-->
-<!-- UNUSED string name="r_checkboxes">Debe confirmar las casillas de verificación.</string>
-<!-- UNUSED string name="r_i_understood">He entendido perfectamente este aviso</string>
+<!-- UNUSED string name="r_checkboxes">Debe confirmar las casillas de verificación.</string -->
+<!-- UNUSED string name="r_i_understood">He entendido perfectamente este aviso</string -->
 <!-- UNUSED string name="r_disclaimer">Acepto que el autor o autores de la aplicación no son responsables de ningún daño o pérdida de datos.</string -->
 <!-- UNUSED string name="r_continue">CONTINUAR</string-->
 
@@ -211,8 +211,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calib_import_title">Importar calibración</string>
     <string name="import_title">Importar archivo</string>
     <string name="export_data_title">Exportación de datos</string>
-    <!-- UNUSED string name="export_plot_title">Exportación de croquis</string>
-    <!-- UNUSED string name="export_overview_title">Exportación de todo</string>
+    <!-- UNUSED string name="export_plot_title">Exportación de croquis</string -->
+    <!-- UNUSED string name="export_overview_title">Exportación de todo</string -->
     <string name="export_model_title">Exportar modelo 3D</string>
     <string name="export_tdconfig_title">Exportar proyecto</string>
 
@@ -542,7 +542,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="section_name">comentario de la sección</string>
     <string name="scrap_outline">Contornos de otros croquis</string>
     <string name="scrap_string">Diseño descartado: %1$d / %2$d</string>
-    <string name="section_point_not_allowed">Punto de sección no permitido</string -->
+    <string name="section_point_not_allowed">Punto de sección no permitido</string>
     <string name="section_line_not_allowed">Línea de sección no permitida</string>
 
     <!-- UNUSED string name="sensor">Sensor</string -->
@@ -1235,7 +1235,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_export_shots_title">Formato de exportación de datos</string>
   <string name="pref_export_shots_summary">Formato de exportación de datos predeterminado</string>
   <string name="pref_auto_plot_export_title">Formato de exportación de croquis automático</string>
-  <string name="pref_auto_plot_export_summary"Formato de exportación automática de dibujos</string>
+  <string name="pref_auto_plot_export_summary">Formato de exportación automática de dibujos</string>
 	
   <string name="pref_cat_survey">Ajustes de topografía</string>
   <string name="pref_cat_splay">DATOS SPLAY</string>
@@ -1505,10 +1505,10 @@ debe ajustarlos a sus necesidades./n/n
 
   <string name="pref_hthr_title">Tolerancia de las secciones Transversales</string>
   <string name="pref_hthr_summary">Tolerancia de las secciones transversales horizontales</string>
-  <string name="pref_bitmap_scale_title">Escala PNG</string>
-  <string name="pref_bitmap_scale_summary">Tamaño de escala de exportación del dibujo PNG</string>
-  <string name="pref_bitmap_bgcolor_title">Color de Fondo PNG</string>
-  <string name="pref_bitmap_bgcolor_summary">Color de fondo de imagen PNG en dibujos</string>
+  <!-- UNUSED string name="pref_bitmap_scale_title">Escala PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_scale_summary">Tamaño de escala de exportación del dibujo PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Color de Fondo PNG</string -->
+  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Color de fondo de imagen PNG en dibujos</string -->
   <string name="pref_acad_version_title">Versión de DXF</string>
   <string name="pref_acad_version_summary">Versión de DXF</string>
   <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
@@ -1602,8 +1602,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
   <string name="pref_backup_interval_summary">Intervalo mínimo entre dos copias de seguridad [s]</string>
-  <string name="pref_backups_clear_title">Eliminar copias de seguridad</string>
-  <string name="pref_backups_clear_summary">Habilitar copias de seguridad de croquis borrar menú</string>
+  <!-- UNUSED string name="pref_backups_clear_title">Eliminar copias de seguridad</string -->
+  <!-- UNUSED string name="pref_backups_clear_summary">Habilitar copias de seguridad de croquis borrar menú</string -->
   <!-- UNUSED string name="pref_xtherion_areas_title">Áreas Xtherion</string -->
   <!-- UNUSED string name="pref_xtherion_areas_summary">Guardar áreas a xtherion</string -->
   <string name="pref_therion_splays_title">Radiales therion</string>
@@ -1838,9 +1838,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
 
     <!-- TODO string name="fractal_title">Fractal counts</string -->
-    <string name="info_title">Información</string>
+    <!-- UNUSED string name="info_title">Información</string -->
     <!-- TODO string name="info_surveys">SURVEYS</string -->
-    <string name="info_axes">Ejes: Norte azul, Este verde</string>
+    <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
     <string name="info_surveys">Proyecto</string>
@@ -1866,10 +1866,10 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
     <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
 
-    <string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string>
+    <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
     <!-- TODO string name="reading_file">Reading file %1$s</string -->
-    <string name="clear">Limpiar</string>
+    <!-- UNUSED string name="clear">Limpiar</string -->
 
     <!-- TODO string name="plan_proj">Plan</string -->
     <!-- TODO string name="profile_proj">Profile</string -->
@@ -1931,7 +1931,7 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="view_north">Norte</string>
     <string name="view_west">Oeste</string>
     <string name="view_south">Sur</string>
-    <string name="view_point">Punto de vista</string>
+    <!-- UNUSED string name="view_point">Punto de vista</string -->
     <string name="view_zoom">Zoom 1</string>
 
     <string name="walls_title">Paredes</string>
@@ -1942,9 +1942,9 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- TODO string name="walls_tube">Tube</string -->
     <!-- OK string name="walls_delaunay">Delaunay</string -->
 
-    <string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string>
-    <string name="powercrust_failed">Recubrimiento fuerte falló</string>
-    <string name="powercrust_successful">Recubrimiento fuerte se aplicó con éxito: %1$d / %2$d</string>
+    <!-- UNUSED string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string -->
+    <!-- UNUSED string name="powercrust_failed">Recubrimiento fuerte falló</string -->
+    <!-- UNUSED string name="powercrust_successful">Recubrimiento fuerte se aplicó con éxito: %1$d / %2$d</string -->
     <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
 
     <string name="ok_export">OK. Exportado %1$s</string>
@@ -1952,13 +1952,13 @@ it is correct but i need to use english to tell a user which log to enable when 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
 
-    <string name="error_file_not_found">Error: archivo no encontrado</string>
+    <!-- UNUSED string name="error_file_not_found">Error: archivo no encontrado</string -->
     <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->
-    <string name="error_io_exception">Error: IO excepción</string>
+    <!-- UNUSED string name="error_io_exception">Error: IO excepción</string -->
     <string name="error_parser_error">Error: error del analizador %1$s</string>
     <string name="error_export_failed">Error: Fallo de exportación %1$s</string>
 
-    <string name="warning_not_overwrite">Advertencia: no sobrescribir el archivo existente %1$s</string>
+    <!-- UNUSED string name="warning_not_overwrite">Advertencia: no sobrescribir el archivo existente %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Advertencia: No hay archivo txt %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Advertencia: No hay archivo Kml %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Advertencia: No hay archivo %1$s</string -->
@@ -2037,7 +2037,7 @@ it is correct but i need to use english to tell a user which log to enable when 
 -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <string name="cperms_mandatory">Cave3D no puede ejecutarse sin estos permisos:</string>
+    <!-- UNUSED string name="cperms_mandatory">Cave3D no puede ejecutarse sin estos permisos:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
 
