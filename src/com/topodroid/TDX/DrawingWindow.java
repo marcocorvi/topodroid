@@ -6373,10 +6373,6 @@ public class DrawingWindow extends ItemDrawer
       }
       return;
     }
-    int k1 = 3;
-    int k2 = 3;
-    int k3 = 3;
-    int k5 = 3;
     if ( ( b == mButton2[0] && mMode == MODE_DRAW ) || 
          ( b == mButton5[1] && mMode == MODE_ERASE ) || 
          ( b == mButton3[2] && ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) ) ) { 
@@ -6396,207 +6392,233 @@ public class DrawingWindow extends ItemDrawer
     // if ( b == mButton1[0] || b == mButton2[0] || b == mButton3[0] || b == mButton5[0] ) {
     //   makeModePopup( b );
 
-    } else if ( b == mButton1[k1++] ) { // DOWNLOAD
-      // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
-      resetFixedPaint();
-      updateReference();
-      if ( TDInstance.getDeviceA() == null ) {
-        DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
-        (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
-        // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
-      } else {
-        mDataDownloader.toggleDownload();
-        // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
-        mDataDownloader.doDataDownload( DataType.DATA_SHOT );
-      }
-    } else if ( b == mButton1[k1++] ) { // BLUETOOTH
-      doBluetooth( b, dismiss );
-    } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
-      new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
-
-    } else if ( b == mButton1[k1++] ) { //  NOTE
-      (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
-
-    } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
-      if ( PlotType.isSketch2D( mType ) ) { 
-        // TDLog.v( "saving TOGGLE ...");
-        startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
-        // mDrawingSurface.clearDrawing();
-        switchPlotType();
-      } else if ( PlotType.isLegSection( mType ) ) {
-        updateSplays( (mApp.mSplayMode + 1)%4 );
-      } else if ( PlotType.isStationSection( mType ) ) {
-        updateSplays( (mApp.mSplayMode + 2)%4 );
-      }
-    } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
-      if ( PlotType.isSketch2D( mType ) ) { 
-        if ( TDSetting.mAzimuthManual ) {
-          setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
-        } else {
-          (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
-          // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
-        }
-      }
-    } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
-      updateDisplay();
-
-    } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // UNDO
-      mDrawingSurface.undo();
-      // if ( ! mDrawingSurface.hasMoreUndo() ) {
-      //   // undoBtn.setEnabled( false );
-      // }
-      // redoBtn.setEnabled( true );
-      // canRedo = true;/
-      mLastLinePath = null;
-      modified();
-    } else if ( b == mButton2[k2++] || b == mButton5[k5++] ) { // REDO
-      if ( mDrawingSurface.hasMoreRedo() ) {
-        mDrawingSurface.redo();
-        mLastLinePath = null;
-      }
-    } else if ( b == mButton2[k2++] ) { // TOOLS
-      // if ( ! TDSetting.mTripleToolbar ) {
-        rotateRecentToolset();
-      // } else {
-      //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
-      // }
-    } else if ( b == mButton2[k2++] ) { // SPLAYS
-      toggleSplayMode();
-    } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
-      if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
-        // setButtonContinue( (mContinueLine+1) % CONT_MAX );
-        makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
-      }
-
-    } else if ( b == mButton3[k3++] ) { // PREV
-      if ( mHasSelected ) {
-        SelectionPoint pt = mDrawingSurface.prevHotItem( );
-        if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
-        setButton3Item( pt );
-      } else {
-        makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
-      }
-    } else if ( b == mButton3[k3++] ) { // NEXT
-      if ( mHasSelected ) {
-        SelectionPoint pt = mDrawingSurface.nextHotItem( );
-        if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
-        setButton3Item( pt );
-      } else {
-        setButtonSelectSize( mSelectScale + 1 ); // toggle select size
-      }
-    } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
-      SelectionPoint sp = mDrawingSurface.hotItem();
-      if ( sp != null ) {
-        int t = sp.type();
-        if ( t == DrawingPath.DRAWING_PATH_POINT ||
-             t == DrawingPath.DRAWING_PATH_LINE  ||
-             t == DrawingPath.DRAWING_PATH_AREA  ) {
-          String name = "";
-          DrawingPath p = sp.mItem;
-          switch ( t ) {
-            case DrawingPath.DRAWING_PATH_POINT:
-              name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
-              break;
-            case DrawingPath.DRAWING_PATH_LINE:
-              name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
-              break;
-            case DrawingPath.DRAWING_PATH_AREA:
-              name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
-              break;
-          }
-          askDeleteItem( p, t, name );
-        } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
-          if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
-            DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
-            DBlock blk = p.mBlock;
-            if ( blk != null ) {
-              askDeleteSplay( p, sp, blk );
-            }
-          }
-        }
-      }
-    } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
-      SelectionPoint sp = mDrawingSurface.hotItem();
-      if ( sp != null ) {
-        DrawingPath item = sp.mItem;
-        if ( item != null ) {
-          if ( item instanceof DrawingStationName ) {
-            DrawingStationName st = (DrawingStationName)(item);
-            DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
-            boolean barrier = mNum.isBarrier( st.getName() );
-            boolean hidden  = mNum.isHidden( st.getName() );
-            List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
-            new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
-          } else if ( item instanceof DrawingPointPath ) {
-            DrawingPointPath point = (DrawingPointPath)(item);
-            // TDLog.v( "edit point type " + point.mPointType );
-            if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
-              new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
-            } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
-              if ( audioCheck ) {
-                DrawingAudioPath audio = (DrawingAudioPath)point;
-                new AudioDialog( mActivity, this, audio.mId, null ).show();
-              } else {
-                TDToast.makeWarn( R.string.no_feature_audio );
-              }
-            } else if ( BrushManager.isPointSection( point.mPointType ) ) {
-              new DrawingPointSectionDialog( mActivity, this, point ).show();
-            } else {
-              new DrawingPointDialog( mActivity, this, point ).show();
-            }
-            // modified()
-          } else if ( item instanceof DrawingLinePath ) {
-            DrawingLinePath line = (DrawingLinePath)(item);
-            if ( BrushManager.isLineSection( line.mLineType ) ) {
-              // TDLog.v( "edit section line " ); // default azimuth = 0 clino = 0
-              // cross-section exists already
-              boolean h_section = PlotType.isProfile( mType ); // not really necessary
-              String id = line.getOption( "-id" );
-              if ( id != null ) {
-                new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
-              } else {
-                TDLog.Error("edit section line with null id" );
-              }
-            } else {
-              new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
-            }
-            // modified()
-          } else if ( item instanceof DrawingAreaPath ) {
-              new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(item) ).show();
-              // modified()
-          } else {
-            // TDLog.v( "centerline path type " + sp.type() );
-            if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
-              int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
-              new DrawingShotDialog( mActivity, this, item, flag ).show();
-            } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
-              new DrawingShotDialog( mActivity, this, item, 0 ).show();
-            }
-          }
-        } else {
-          TDLog.Error("selected point has null item");
-        }
-      }
-      clearSelected();
-    } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
-      // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
-      if ( hasPointActions ) {
-        makePopupEdit( b, dismiss );
-      // } else {
-        // SelectionPoint sp = mDrawingSurface.hotItem();
-        // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
-        //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
-        //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
+    } else if ( mMode == MODE_DRAW ) {
+      int k2 = 3;
+      if ( b == mButton2[k2++] ) { // UNDO
+        mDrawingSurface.undo();
+        // if ( ! mDrawingSurface.hasMoreUndo() ) {
+        //   // undoBtn.setEnabled( false );
         // }
+        // redoBtn.setEnabled( true );
+        // canRedo = true;/
+        mLastLinePath = null;
+        modified();
+      } else if ( b == mButton2[k2++] ) { // REDO
+        if ( mDrawingSurface.hasMoreRedo() ) {
+          mDrawingSurface.redo();
+          mLastLinePath = null;
+        }
+      } else if ( b == mButton2[k2++] ) { // TOOLS
+        // if ( ! TDSetting.mTripleToolbar ) {
+          rotateRecentToolset();
+        // } else {
+        //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
+        // }
+      } else if ( b == mButton2[k2++] ) { // SPLAYS
+        toggleSplayMode();
+      } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
+        if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
+          // setButtonContinue( (mContinueLine+1) % CONT_MAX );
+          makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
+        }
       }
-    } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
-      mDoEditRange = SelectionRange.rotateType( mDoEditRange );
-      setButtonRange();
-    } else if ( b == mButton5[k5++] ) { // ERASE MODE
-      makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
-    } else if ( b == mButton5[k5++] ) { // ERASE SIZE
-      setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
+
+    } else if ( mMode == MODE_ERASE ) {
+      int k5 = 3;
+      if ( b == mButton5[k5++] ) { // UNDO same as in mButton2[]
+        mDrawingSurface.undo();
+        // if ( ! mDrawingSurface.hasMoreUndo() ) {
+        //   // undoBtn.setEnabled( false );
+        // }
+        // redoBtn.setEnabled( true );
+        // canRedo = true;/
+        mLastLinePath = null;
+        modified();
+      } else if ( b == mButton5[k5++] ) { // REDO same as in mButton2[]
+        if ( mDrawingSurface.hasMoreRedo() ) {
+          mDrawingSurface.redo();
+          mLastLinePath = null;
+        }
+      } else if ( b == mButton5[k5++] ) { // ERASE MODE
+        makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
+      } else if ( b == mButton5[k5++] ) { // ERASE SIZE
+        setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
+      }
+
+    } else if ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) {
+      int k3 = 3;
+      if ( b == mButton3[k3++] ) { // PREV
+        if ( mHasSelected ) {
+          SelectionPoint pt = mDrawingSurface.prevHotItem( );
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+          setButton3Item( pt );
+        } else {
+          makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
+        }
+      } else if ( b == mButton3[k3++] ) { // NEXT
+        if ( mHasSelected ) {
+          SelectionPoint pt = mDrawingSurface.nextHotItem( );
+          if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
+          setButton3Item( pt );
+        } else {
+          setButtonSelectSize( mSelectScale + 1 ); // toggle select size
+        }
+      } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
+        SelectionPoint sp = mDrawingSurface.hotItem();
+        if ( sp != null ) {
+          int t = sp.type();
+          if ( t == DrawingPath.DRAWING_PATH_POINT ||
+               t == DrawingPath.DRAWING_PATH_LINE  ||
+               t == DrawingPath.DRAWING_PATH_AREA  ) {
+            String name = "";
+            DrawingPath p = sp.mItem;
+            switch ( t ) {
+              case DrawingPath.DRAWING_PATH_POINT:
+                name = BrushManager.getPointName( ((DrawingPointPath)p).mPointType );
+                break;
+              case DrawingPath.DRAWING_PATH_LINE:
+                name = BrushManager.getLineName( ((DrawingLinePath)p).mLineType );
+                break;
+              case DrawingPath.DRAWING_PATH_AREA:
+                name = BrushManager.getAreaName( ((DrawingAreaPath)p).mAreaType );
+                break;
+            }
+            askDeleteItem( p, t, name );
+          } else if ( t == DrawingPath.DRAWING_PATH_SPLAY ) {
+            if ( PlotType.isSketch2D( mType ) && ( sp.mItem instanceof DrawingSplayPath ) ) { 
+              DrawingSplayPath p = (DrawingSplayPath)(sp.mItem);
+              DBlock blk = p.mBlock;
+              if ( blk != null ) {
+                askDeleteSplay( p, sp, blk );
+              }
+            }
+          }
+        }
+      } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
+        SelectionPoint sp = mDrawingSurface.hotItem();
+        if ( sp != null ) {
+          DrawingPath item = sp.mItem;
+          if ( item != null ) {
+            if ( item instanceof DrawingStationName ) {
+              DrawingStationName st = (DrawingStationName)(item);
+              DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
+              boolean barrier = mNum.isBarrier( st.getName() );
+              boolean hidden  = mNum.isHidden( st.getName() );
+              List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
+              new DrawingStationDialog( mActivity, this, mApp, st, path, barrier, hidden, /* TDInstance.xsections, */ legs ).show();
+            } else if ( item instanceof DrawingPointPath ) {
+              DrawingPointPath point = (DrawingPointPath)(item);
+              // TDLog.v( "edit point type " + point.mPointType );
+              if ( point instanceof DrawingPhotoPath ) { // BrushManager.isPointPhoto( point.mPointType )
+                new DrawingPhotoEditDialog( mActivity, (DrawingPhotoPath)point ).show();
+              } else if ( point instanceof DrawingAudioPath ) { // BrushManager.isPointAudio( point.mPointType )
+                if ( audioCheck ) {
+                  DrawingAudioPath audio = (DrawingAudioPath)point;
+                  new AudioDialog( mActivity, this, audio.mId, null ).show();
+                } else {
+                  TDToast.makeWarn( R.string.no_feature_audio );
+                }
+              } else if ( BrushManager.isPointSection( point.mPointType ) ) {
+                new DrawingPointSectionDialog( mActivity, this, point ).show();
+              } else {
+                new DrawingPointDialog( mActivity, this, point ).show();
+              }
+              // modified()
+            } else if ( item instanceof DrawingLinePath ) {
+              DrawingLinePath line = (DrawingLinePath)(item);
+              if ( BrushManager.isLineSection( line.mLineType ) ) {
+                // TDLog.v( "edit section line " ); // default azimuth = 0 clino = 0
+                // cross-section exists already
+                boolean h_section = PlotType.isProfile( mType ); // not really necessary
+                String id = line.getOption( "-id" );
+                if ( id != null ) {
+                  new DrawingLineSectionDialog( mActivity, this, h_section, true, id, line, null, null, 0, 0, -1, null ).show();
+                } else {
+                  TDLog.Error("edit section line with null id" );
+                }
+              } else {
+                new DrawingLineDialog( mActivity, this, line, sp.mPoint ).show();
+              }
+              // modified()
+            } else if ( item instanceof DrawingAreaPath ) {
+                new DrawingAreaDialog( mActivity, this, (DrawingAreaPath)(item) ).show();
+                // modified()
+            } else {
+              // TDLog.v( "centerline path type " + sp.type() );
+              if ( sp.type() == DrawingPath.DRAWING_PATH_FIXED ) {
+                int flag = ( item.mBlock != null )? mNum.canBarrierHidden( item.mBlock.mFrom, item.mBlock.mTo ) : 0;
+                new DrawingShotDialog( mActivity, this, item, flag ).show();
+              } else if ( sp.type() == DrawingPath.DRAWING_PATH_SPLAY ) {
+                new DrawingShotDialog( mActivity, this, item, 0 ).show();
+              }
+            }
+          } else {
+            TDLog.Error("selected point has null item");
+          }
+        }
+        clearSelected();
+      } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
+        // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
+        if ( hasPointActions ) {
+          makePopupEdit( b, dismiss );
+        // } else {
+          // SelectionPoint sp = mDrawingSurface.hotItem();
+          // if ( sp != null && sp.mItem.mType == DrawingPath.DRAWING_PATH_NAME ) {
+          //   DrawingStationName sn = (DrawingStationName)(sp.mItem);
+          //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
+          // }
+        }
+      } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
+        mDoEditRange = SelectionRange.rotateType( mDoEditRange );
+        setButtonRange();
+      }
+    } else {
+      int k1 = 3;
+      if ( b == mButton1[k1++] ) { // DOWNLOAD
+        // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
+        resetFixedPaint();
+        updateReference();
+        if ( TDInstance.getDeviceA() == null ) {
+          DBlock last_blk = mApp_mData.selectLastLegShot( TDInstance.sid );
+          (new ShotNewDialog( mActivity, mApp, this, last_blk, -1L )).show();
+          // (new ShotNewDialog( mActivity, mApp, this, null, -1L )).show();
+        } else {
+          mDataDownloader.toggleDownload();
+          // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
+          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
+        }
+      } else if ( b == mButton1[k1++] ) { // BLUETOOTH
+        doBluetooth( b, dismiss );
+      } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
+        new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
+      } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
+        if ( PlotType.isSketch2D( mType ) ) { 
+          // TDLog.v( "saving TOGGLE ...");
+          startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
+          // mDrawingSurface.clearDrawing();
+          switchPlotType();
+        } else if ( PlotType.isLegSection( mType ) ) {
+          updateSplays( (mApp.mSplayMode + 1)%4 );
+        } else if ( PlotType.isStationSection( mType ) ) {
+          updateSplays( (mApp.mSplayMode + 2)%4 );
+        }
+      } else if ( b == mButton1[k1++] ) { //  NOTE
+        (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
+
+      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
+        if ( PlotType.isSketch2D( mType ) ) { 
+          if ( TDSetting.mAzimuthManual ) {
+            setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
+          } else {
+            (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mBMdial )).show(); // FIXME_AZIMUTH_DIAL 1
+            // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
+          }
+        }
+      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
+        updateDisplay();
+      }
     }
+
   }
 
   /** toggle the splay display mode
