@@ -35,6 +35,10 @@ Consulte las páginas web para más detalles..\n
 
     <!-- UNUSED string name="version_ask">Usted va a actualizar a una nueva versión de topodroid.\n¿Quiere volver a instalar los elementos de dibujo?</string -->
     <string name="symbols_ask">¿Quiere instalar simbologías para el croquis v.%1$s?\n(Actualiza v.%2$s)</string>
+    <!-- UNUSED string name="version_check">Last version</string -->
+    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
+    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
 
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
@@ -1549,8 +1553,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
-  <string name="pref_weedlength_title">Longitud máxima del segmento de linea de punto</string>
-  <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea</string>
+  <!-- TODO string name="pref_weeddistance_title">TODO</string -->
+  <!-- TODO string name="pref_weeddistance_summary">TODO</string -->
   <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
   <string name="pref_weedbuffer_summary">Zona de influencia alrededor de los segmentos de eliminación [pxl]</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
@@ -1766,7 +1770,7 @@ debe ajustarlos a sus necesidades./n/n
 \nTraducción al español Manu Guerrero manuguerreros@gmail.com
     </string>
 
-  <! - LAS CADENAS DE DIÁLOGO DE FIRMWARE SE PUEDEN DEJAR SIN TRADUCIR: marque OK cadenas sin traducir ->
+  <!-- LAS CADENAS DE DIÁLOGO DE FIRMWARE SE PUEDEN DEJAR SIN TRADUCIR: marque OK cadenas sin traducir -->
   <string name="firmware_title">Actualizar de firmware</string>
   <string name="firmware_file_title">Archivos de firmware</string>
   <string name="firmware_text">

@@ -4,583 +4,244 @@ res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Us
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:154: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:50: Error: "version_check_newer" is not translated in "ru" (Russian), "cn", "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+    <string name="version_check_newer">Newer version available: %1$d</string>
+            ~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:158: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
     <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:362: Error: "index_oob" is not translated in "ru" (Russian) or "cn" [MissingTranslation]
+res/values/strings.xml:366: Error: "index_oob" is not translated in "cn" [MissingTranslation]
     <string name="index_oob">Index out of bounds %1$d</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:391: Error: "no_symbols" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:395: Error: "no_symbols" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="no_symbols">No symbol palette.</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:649: Error: "undelete_blunder" is not translated in "ru" (Russian) [MissingTranslation]
-    <string name="undelete_blunder">Blunders</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:856: Error: "btn_export" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:860: Error: "btn_export" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="btn_export">Export</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1015: Error: "help_select_size" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1019: Error: "help_select_size" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_select_size">Select tool size [S/M/L]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1468: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1472: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1469: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1473: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1531: Error: "pref_acad_spline_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_acad_spline_title">DXF splines</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1532: Error: "pref_acad_spline_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_acad_spline_summary">DXF interpolated cubics</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1533: Error: "pref_dxf_reference_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_dxf_reference_title">DXF reference</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1534: Error: "pref_dxf_reference_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1539: Error: "pref_shp_georef_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_shp_georef_title">Georeferenced sketch plan export</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1540: Error: "pref_shp_georef_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string>
+res/values/strings.xml:1571: Error: "pref_weeddistance_title" is not translated in "es" (Spanish) [MissingTranslation]
+  <string name="pref_weeddistance_title">Weeding point distance</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1565: Error: "pref_graph_paper_scale_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_graph_paper_scale_title">Graph-paper scale</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1566: Error: "pref_graph_paper_scale_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_graph_paper_scale_summary">Graph-paper scale adjustment</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1571: Error: "pref_weedbuffer_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_weedbuffer_title">Weeding segment buffer</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1572: Error: "pref_weedbuffer_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_weedbuffer_summary">Buffer around a line segment [pxl]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1601: Error: "pref_composite_actions_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_composite_actions_title">Composite actions</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1602: Error: "pref_composite_actions_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_composite_actions_summary">Enable line/area long-tap actions</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1607: Error: "pref_stylus_size_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_stylus_size_title">Stylus only drawing</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1608: Error: "pref_stylus_size_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_stylus_size_summary">Stylus maximum size [0: ignore]</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1619: Error: "pref_toolbarSize_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_toolbarSize_title">Toolbar size</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1620: Error: "pref_toolbarSize_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1639: Error: "pref_saved_stations_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_saved_stations_title">Saved stations</string>
+res/values/strings.xml:1572: Error: "pref_weeddistance_summary" is not translated in "es" (Spanish) [MissingTranslation]
+  <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1640: Error: "pref_saved_stations_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_saved_stations_summary">Color saved stations orange</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1641: Error: "pref_legonly_update_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_legonly_update_title">Legs-only refresh</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1642: Error: "pref_legonly_update_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_legonly_update_summary">Redraw midline only on legs download</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1643: Error: "pref_full_affine_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1647: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1644: Error: "pref_full_affine_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1648: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1678: Error: "pref_side_drag_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1682: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_title">Corner drag</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1679: Error: "pref_side_drag_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1683: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1682: Error: "pref_unit_measure_title" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_unit_measure_title">Ruler units</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1683: Error: "pref_unit_measure_summary" is not translated in "es" (Spanish) [MissingTranslation]
-  <string name="pref_unit_measure_summary">Length units of measure-tool</string>
-          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1822: Error: "firmware_upload_no_sign" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1823: Error: "firmware_upload_bad_sign" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1826: Error: "firmware_file_dump_fail" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_file_dump_fail">Failed firmware dump</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1827: Error: "firmware_file_upload_fail" is not translated in "es" (Spanish) [MissingTranslation]
-   <string name="firmware_file_upload_fail">Failed firmware upload</string>
-           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1830: Error: "project" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="project">Project %1$s</string>
-            ~~~~~~~~~~~~~~
-res/values/strings.xml:1831: Error: "no_editor" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_editor">Editor not found</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1832: Error: "no_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_file">File not found</string>
-            ~~~~~~~~~~~~~~
-res/values/strings.xml:1833: Error: "no_path" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_path">Missing filepath</string>
-            ~~~~~~~~~~~~~~
-res/values/strings.xml:1834: Error: "no_equate" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_equate">No equate</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1835: Error: "no_surveys" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_surveys">No surveys</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1836: Error: "no_tdconfig" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_tdconfig">Missing tdconfig file</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1837: Error: "no_th_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="no_th_file">No Therion file</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1842: Error: "ask_delete_tdconfig" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="ask_delete_tdconfig">Delete TdConfig file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1843: Error: "ask_remove_equate" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="ask_remove_equate">Remove equate %1$s ?</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1845: Error: "equate_no_stations" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="equate_no_stations">Too few stations</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1846: Error: "equate_no_nearby" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="equate_no_nearby">No station nearby</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1855: Error: "title_export_settings" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_export_settings">Settings import/export</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1856: Error: "title_export" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_export">Export project as &#8230;</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1857: Error: "title_equates" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_equates">Project Equates</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1858: Error: "title_equate_new" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_equate_new">Add equate &#8230;</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1859: Error: "title_equate_with" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_equate_with">Equate %1$s and %2$s</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1861: Error: "title_drop" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_drop">Drop surveys ?</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1862: Error: "title_tdconfig" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_tdconfig">Enter project name</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1863: Error: "title_surveys" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="title_surveys">Surveys</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1865: Error: "exported" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="exported">Saved file %1$s</string>
-            ~~~~~~~~~~~~~~~
-res/values/strings.xml:1866: Error: "export_failed" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="export_failed">Failed export</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1868: Error: "image_diagram" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="image_diagram">Direction diagram</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1869: Error: "image_photo" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="image_photo">Photo</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1874: Error: "cbtn_bind" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cbtn_bind">Rebind</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1879: Error: "cmenu_alpha" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cmenu_alpha">SURFACE</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1881: Error: "cmenu_viewpoint" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cmenu_viewpoint">VIEWPOINT</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1889: Error: "cmenu_sketch" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cmenu_sketch">SKETCHES</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1898: Error: "illegal_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="illegal_value">Illegal value</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1905: Error: "info_survey" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1909: Error: "info_survey" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="info_survey">Surveys</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1906: Error: "info_shot" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_shot">Shots</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1907: Error: "info_station" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_station">Stations</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1911: Error: "info_east" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_east">East</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1912: Error: "info_north" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_north">North</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1913: Error: "info_z" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_z">Altitude</string>
-            ~~~~~~~~~~~~~
-res/values/strings.xml:1914: Error: "info_grid_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_grid_value">%1$.0f m</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1915: Error: "info_view_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1916: Error: "info_survey_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_survey_value">%1$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1917: Error: "info_shot_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_shot_value">Legs %1$d, Splays %2$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1918: Error: "info_station_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_station_value">%1$d</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1919: Error: "info_length_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_length_value">%1$.1f m</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1920: Error: "info_depth_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_depth_value">%1$.1f m</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1922: Error: "info_volume_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1923: Error: "info_east_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_east_value">W %1$.1f E %2$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1924: Error: "info_north_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_north_value">S %1$.1f N %2$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1925: Error: "info_z_value" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="info_z_value">%1$.1f  %2$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1927: Error: "legs_surface" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="legs_surface">Surface</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1928: Error: "legs_duplicate" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="legs_duplicate">Duplicate</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1929: Error: "legs_commented" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="legs_commented">Commented</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1931: Error: "proj_perspective" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="proj_perspective">Perspective parameters</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1932: Error: "proj_orthographic" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="proj_orthographic">Orthographic parameters</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1933: Error: "proj_focal" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="proj_focal">Focal</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1934: Error: "proj_side" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="proj_side">Side</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1941: Error: "reading_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="reading_file">Reading file %1$s</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1942: Error: "read_survey" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="read_survey">Read survey %1$s\n</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1944: Error: "plan_proj" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="plan_proj">Plan</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1945: Error: "profile_proj" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="profile_proj">Profile</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1946: Error: "dist_no_path" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1947: Error: "dist_path" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1953: Error: "surface_projection" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="surface_projection">Projection on surface</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1954: Error: "surface_texture" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="surface_texture">Surface texture</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1955: Error: "surface_gps" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="surface_gps">GPS track</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1956: Error: "surface_east" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="surface_east">East</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1957: Error: "surface_north" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="surface_north">North</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1959: Error: "dem_load" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dem_load">Load DEM</string>
-            ~~~~~~~~~~~~~~~
-res/values/strings.xml:1960: Error: "dem_failed" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dem_failed">Failed DEM loading</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1961: Error: "dem_ok" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="dem_ok">Read DEM data</string>
-            ~~~~~~~~~~~~~
-res/values/strings.xml:1963: Error: "texture_load" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="texture_load">Load texture</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1964: Error: "texture_failed" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="texture_failed">Failed texture loading</string>
-            ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1965: Error: "texture_ok" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="texture_ok">Read texture file</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1966: Error: "sketch_load" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="sketch_load">Load</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1967: Error: "sketch_failed" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="sketch_failed">Failed sketch loading</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1968: Error: "sketch_ok" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="sketch_ok">Read sketch data</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1971: Error: "ctitle_surface_alpha" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="ctitle_surface_alpha">Surface transparency</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1972: Error: "ctitle_sketches" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="ctitle_sketches">Sketches</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1973: Error: "ctitle_legs" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="ctitle_legs">Legs visibility</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1983: Error: "survey_list" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="survey_list">SURVEYS</string>
-            ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1988: Error: "cave_east" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cave_east"> E: %1$.1f</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1989: Error: "cave_north" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cave_north"> N: %1$.1f</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1990: Error: "cave_vert" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cave_vert"> Z: %1$.1f</string>
-            ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1992: Error: "horz_distance" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
-            ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1994: Error: "cave_angle" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2003: Error: "select_survey_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="select_survey_file">Select a survey file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2004: Error: "select_export_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="select_export_file">Select export file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2005: Error: "select_dem_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="select_dem_file">Select a DEM file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2006: Error: "select_texture_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="select_texture_file">Select a texture file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2007: Error: "select_sketch_file" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="select_sketch_file">Select a sketch file</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2022: Error: "walls_bubble" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="walls_bubble">Bubble</string>
-            ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2023: Error: "walls_tube" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="walls_tube">Tube</string>
-            ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2029: Error: "powercrust_dxf_not_supported" is not translated in "es" (Spanish) [MissingTranslation]
-    <string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string>
-            ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2035: Error: "no_model" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2039: Error: "no_model" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="no_model">No 3D model</string>
             ~~~~~~~~~~~~~~~
-res/values/strings.xml:2036: Error: "no_topodroid_model" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2040: Error: "no_topodroid_model" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="no_topodroid_model">Not a TopoDroid model</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2040: Error: "error_file_read" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2044: Error: "error_file_read" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="error_file_read">Error: file %1$s failed read</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2041: Error: "error_survey_read" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2045: Error: "error_survey_read" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="error_survey_read">Error: survey %1$s failed read</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2045: Error: "unsupported_format" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2049: Error: "unsupported_format" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="unsupported_format">Unsupported file format</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2059: Error: "warning_no_parent" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2063: Error: "warning_no_parent" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="warning_no_parent">Warning: cannot go to parent folder</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2060: Error: "no_permissions" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2064: Error: "no_permissions" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="no_permissions">The app cannot run without the required permissions</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2063: Error: "done_convexhull" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2067: Error: "done_convexhull" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="done_convexhull">Done convex-hull walls</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2064: Error: "fail_convexhull" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2068: Error: "fail_convexhull" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="fail_convexhull">Failed convex-hull walls</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2065: Error: "done_powercrust" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2069: Error: "done_powercrust" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="done_powercrust">Done powercrust walls</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2066: Error: "fail_powercrust" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2070: Error: "fail_powercrust" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="fail_powercrust">Failed powercrust walls</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2067: Error: "done_hull" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2071: Error: "done_hull" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="done_hull">Done simple-hull walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2068: Error: "fail_hull" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2072: Error: "fail_hull" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="fail_hull">Failed simple-hull walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2069: Error: "done_tube" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2073: Error: "done_tube" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="done_tube">Done simple-tube walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2070: Error: "fail_tube" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2074: Error: "fail_tube" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="fail_tube">Failed simple-tube walls</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:2071: Error: "done_bubble" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2075: Error: "done_bubble" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="done_bubble">Done bubble walls</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2072: Error: "fail_bubble" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2076: Error: "fail_bubble" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="fail_bubble">Failed bubble walls</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2074: Error: "no_database" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2078: Error: "no_database" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="no_database">No database\n</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2075: Error: "cno_survey" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2079: Error: "cno_survey" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cno_survey">No survey %1$s\n</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2077: Error: "empty_survey" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2081: Error: "empty_survey" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="empty_survey">Empty survey %1$s\n</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2079: Error: "viewing_at" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2083: Error: "viewing_at" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string>
             ~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2081: Error: "cpref_dem3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2085: Error: "cpref_dem3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem3d">DEM</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2082: Error: "cpref_walls3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2086: Error: "cpref_walls3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_walls3d">WALL MODEL</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2091: Error: "cpref_station_toast_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2095: Error: "cpref_station_toast_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_toast_title">Station dialog</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2092: Error: "cpref_station_toast_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2096: Error: "cpref_station_toast_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2093: Error: "cpref_station_points_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2097: Error: "cpref_station_points_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_points_title">Station points</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2094: Error: "cpref_station_points_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2098: Error: "cpref_station_points_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_points_summary">Display stations always [n]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2095: Error: "cpref_station_point_size_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2099: Error: "cpref_station_point_size_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_point_size_title">Station point size</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2096: Error: "cpref_station_point_size_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2100: Error: "cpref_station_point_size_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_point_size_summary">Size of station points [8 pxl]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2097: Error: "cpref_station_text_size_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2101: Error: "cpref_station_text_size_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_text_size_title">Station text size</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2098: Error: "cpref_station_text_size_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2102: Error: "cpref_station_text_size_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_station_text_size_summary">Size of station text [20 pt]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2099: Error: "cpref_measure_dialog_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2103: Error: "cpref_measure_dialog_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_measure_dialog_title">Distance message</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2100: Error: "cpref_measure_dialog_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2104: Error: "cpref_measure_dialog_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_measure_dialog_summary">Distance message instead of dialog [n]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2103: Error: "cpref_grid_extent_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2107: Error: "cpref_grid_extent_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_grid_extent_title">Grid extent</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2104: Error: "cpref_grid_extent_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2108: Error: "cpref_grid_extent_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2107: Error: "cpref_dem_buffer_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2111: Error: "cpref_dem_buffer_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_buffer_title">DEM buffer</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2108: Error: "cpref_dem_buffer_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2112: Error: "cpref_dem_buffer_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_buffer_summary">Extension of the DEM around survey [200]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2109: Error: "cpref_dem_maxsize_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2113: Error: "cpref_dem_maxsize_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_maxsize_title">DEM max size</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2110: Error: "cpref_dem_maxsize_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2114: Error: "cpref_dem_maxsize_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2111: Error: "cpref_dem_reduce_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2115: Error: "cpref_dem_reduce_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_reduce_title">DEM reduce</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2112: Error: "cpref_dem_reduce_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2116: Error: "cpref_dem_reduce_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2115: Error: "cpref_splay_use_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2119: Error: "cpref_splay_use_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_use_title">Splay usage</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2116: Error: "cpref_splay_use_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2120: Error: "cpref_splay_use_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [normal]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2117: Error: "cpref_splay_proj_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2121: Error: "cpref_splay_proj_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_proj_title">Projected splays</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2118: Error: "cpref_splay_proj_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2122: Error: "cpref_splay_proj_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2119: Error: "cpref_splay_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2123: Error: "cpref_splay_thr_title" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_thr_title">Splay threshold</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2120: Error: "cpref_splay_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2124: Error: "cpref_splay_thr_summary" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2145: Error: "help_open_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2149: Error: "help_open_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_open_3d">Open 3D file</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2146: Error: "help_export_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2150: Error: "help_export_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_export_3d">Export 3D file</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2147: Error: "help_info_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2151: Error: "help_info_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_info_3d">3D info</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2148: Error: "help_ico_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2152: Error: "help_ico_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_ico_3d">3D leg distribution</string>
             ~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2149: Error: "help_rose_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2153: Error: "help_rose_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_rose_3d">Rose diagram</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2150: Error: "help_reset_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2154: Error: "help_reset_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_reset_3d">Reset 3D view</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2151: Error: "help_viewpoint_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2155: Error: "help_viewpoint_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_viewpoint_3d">3D viewpoint</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2152: Error: "help_alpha_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2156: Error: "help_alpha_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_alpha_3d">D.E.M.</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2153: Error: "help_wall_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2157: Error: "help_wall_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_wall_3d">3D model</string>
             ~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2155: Error: "help_sketch_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2159: Error: "help_sketch_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_sketch_3d">3D sketch lifting</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2158: Error: "help_light_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2162: Error: "help_light_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_light_3d">Pan and light</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2159: Error: "help_projection_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2163: Error: "help_projection_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_projection_3d">3D projection</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2160: Error: "help_stations_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2164: Error: "help_stations_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_stations_3d">Stations</string>
             ~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2161: Error: "help_splays_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2165: Error: "help_splays_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_splays_3d">Splays</string>
             ~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2162: Error: "help_walls_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2166: Error: "help_walls_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_walls_3d">Walls</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2163: Error: "help_surface_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2167: Error: "help_surface_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_surface_3d">Terrain</string>
             ~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2164: Error: "help_color_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2168: Error: "help_color_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_color_3d">Colors</string>
             ~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:2165: Error: "help_frame_3d" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:2169: Error: "help_frame_3d" is not translated in "es" (Spanish) [MissingTranslation]
     <string name="help_frame_3d">Frame</string>
             ~~~~~~~~~~~~~~~~~~~~
 res/values-es/strings.xml:50: Warning: "linea" is a common misspelling; did you mean "línea"? [Typos]
@@ -595,10 +256,10 @@ res/values-es/strings.xml:236: Warning: "movil" is a common misspelling; did you
 res/values-es/strings.xml:1436: Warning: "guión" is a common misspelling; did you mean "guion"? [Typos]
   <string name="pref_dash_splay_title">Los trazos con coherencia del guión</string>
                                                                      ^
-res/values-es/strings.xml:1577: Warning: "lineas" is a common misspelling; did you mean "líneas"? [Typos]
+res/values-es/strings.xml:1578: Warning: "lineas" is a common misspelling; did you mean "líneas"? [Typos]
   <string name="pref_linestraight_title">Enderezar lineas</string>
                                                    ^
-res/values/strings.xml:78: Warning: Inconsistent number of arguments in formatting string copied; found both 1 here and 0 in values-es/strings.xml [StringFormatCount]
+res/values/strings.xml:82: Warning: Inconsistent number of arguments in formatting string copied; found both 1 here and 0 in values-es/strings.xml [StringFormatCount]
     <string name="copied">Copied %1$s to clipboard</string>
     ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     res/values-es/strings.xml:69: Conflicting number of arguments (0) here
@@ -622,4 +283,4 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-193 errors, 16 warnings
+80 errors, 16 warnings
