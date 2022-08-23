@@ -16,14 +16,18 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.R;
 import com.topodroid.TDX.TDToast;
+import com.topodroid.utils.TDsafUri;
+import com.topodroid.utils.TDLog;
 
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.io.IOException;
 
 import android.os.AsyncTask;
+import android.os.ParcelFileDescriptor;
 
 import android.app.ProgressDialog;
 
@@ -33,14 +37,15 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   final WeakReference<TopoDroidApp> mApp; // FIXME LEAK used by inheriting classes
   ProgressDialog mProgress = null;
 
-  protected InputStream fis;
-  protected InputStreamReader isr;
+  protected InputStream fis = null;
+  protected InputStreamReader isr = null;
+  protected ParcelFileDescriptor mPfd = null;
 
   ImportTask( MainWindow main )
   {
     super();
-    this.fis = null;
-    this.isr = null;
+    // this.fis = null;
+    // this.isr = null;
     mMain = new WeakReference<MainWindow>( main );
     mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
     mProgress = ProgressDialog.show( main,
@@ -62,11 +67,30 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   //       	    true );
   // }
 
-  ImportTask( MainWindow main, InputStreamReader isr )
+  // ImportTask( MainWindow main, InputStreamReader isr )
+  // {
+  //   super();
+  //   // this.fis = null;
+  //   this.isr = isr;
+  //   mMain = new WeakReference<MainWindow>( main );
+  //   mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
+  //   mProgress = ProgressDialog.show( main,
+  //       	    main.getResources().getString(R.string.pleasewait),
+  //       	    main.getResources().getString(R.string.processing),
+  //       	    true );
+  // }
+
+  ImportTask( MainWindow main, ParcelFileDescriptor pfd )
   {
     super();
-    this.fis = null;
-    this.isr = isr;
+    // this.fis = null;
+    try {
+      this.mPfd = pfd.dup();
+      this.isr = new InputStreamReader( TDsafUri.docFileInputStream( mPfd ) );
+    } catch ( IOException e ) {
+      TDLog.Error("IO error " + e.getMessage() );
+    }
+
     mMain = new WeakReference<MainWindow>( main );
     mApp  = new WeakReference<TopoDroidApp>( main.getApp() );
     mProgress = ProgressDialog.show( main,
@@ -81,6 +105,10 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
   @Override
   protected void onPostExecute(Long result)
   {
+    try {
+      if ( mPfd != null ) mPfd.close();
+    } catch ( IOException e ) { }
+
     mProgress.dismiss();
     MainWindow main = mMain.get();
     if ( main != null && ! main.isFinishing() ) {
@@ -97,6 +125,9 @@ abstract class ImportTask extends AsyncTask< String, Integer, Long >
     }
   }
 
+  /** @return true if the survey (name) already exists
+   * @param name   survey name
+   */
   protected boolean hasSurveyName( String name )
   {
     return ((DataHelper)(TopoDroidApp.mData)).hasSurveyName( name );

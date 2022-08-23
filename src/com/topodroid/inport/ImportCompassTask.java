@@ -18,6 +18,8 @@ import com.topodroid.TDX.SurveyInfo;
 
 import java.util.ArrayList;
 
+import android.os.ParcelFileDescriptor;
+
 import java.io.InputStreamReader;
  
 public class ImportCompassTask extends ImportTask
@@ -26,13 +28,22 @@ public class ImportCompassTask extends ImportTask
   private boolean mLrud;
   private boolean mLegFirst;
 
-  public ImportCompassTask( MainWindow main, InputStreamReader isr, ImportData data )
+  // public ImportCompassTask( MainWindow main, InputStreamReader isr, ImportData data )
+  // {
+  //   super( main, isr );
+  //   mDatamode = data.mDatamode; 
+  //   mLrud     = data.mLrud;
+  //   mLegFirst = data.mLeg;
+  // }
+
+  public ImportCompassTask( MainWindow main, ParcelFileDescriptor pfd, ImportData data )
   {
-    super( main, isr );
+    super( main, pfd );
     mDatamode = data.mDatamode; 
     mLrud     = data.mLrud;
     mLegFirst = data.mLeg;
   }
+
 
   @Override
   protected Long doInBackground( String... str )

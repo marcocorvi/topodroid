@@ -38,8 +38,7 @@ signed:
 
 md5:
 	@echo "Version $(VERSION) target $(TARGET_SDK)"
-	@./howto/update_md5.sh $(VERSION_TARGET)
-	@echo $(VERSION_CODE) > ../speleoapks/tdversion.txt
+	@./howto/update_md5.sh $(VERSION_TARGET) $(VERSION_CODE)
 
 signed-29:
 	./howto/target.sh 29

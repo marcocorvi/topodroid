@@ -560,28 +560,28 @@ public class MainWindow extends Activity
     // FIXME connect-title string
     // TDLog.v( "import with reader <" + name + "> type <" + type + ">" );
     ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
-    InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
+    // InputStreamReader isr = new InputStreamReader( TDsafUri.docFileInputStream( pfd ) );
     if ( type.equals(".th") ) {
       setTitleImport();
-      new ImportTherionTask( this, isr ).execute( name, name );
+      new ImportTherionTask( this, pfd ).execute( name, name );
     } else if ( type.equals(".dat") ) {
       setTitleImport();
-      new ImportCompassTask( this, isr, data ).execute( name, name );
-      // (new ImportDatDialog( this, this, isr, name )).show();
+      new ImportCompassTask( this, pfd, data ).execute( name, name );
+      // (new ImportDatDialog( this, this, pfd, name )).show();
     } else if ( type.equals(".tro") || type.equals(".trox") ) {
       setTitleImport();
       // TDLog.v("type " + type + " data.trox " + data.mTrox );
-      new ImportVisualTopoTask( this, isr, data ).execute( name, name );
-      // (new ImportTroDialog( this, this, isr, name )).show();
+      new ImportVisualTopoTask( this, pfd, data ).execute( name, name );
+      // (new ImportTroDialog( this, this, pfd, name )).show();
     } else if ( type.equals(".svx") ) {
       setTitleImport();
-      new ImportSurvexTask( this, isr ).execute( name ); 
+      new ImportSurvexTask( this, pfd ).execute( name ); 
     } else if ( type.equals(".srv") ) {
       setTitleImport();
-      new ImportWallsTask( this, isr ).execute( name ); 
+      new ImportWallsTask( this, pfd ).execute( name ); 
     } else if ( type.equals(".csn") ) {
       setTitleImport();
-      new ImportCaveSniperTask( this, isr ).execute( name ); 
+      new ImportCaveSniperTask( this, pfd ).execute( name ); 
     // } else {
     //   setTheTitle( );
     }

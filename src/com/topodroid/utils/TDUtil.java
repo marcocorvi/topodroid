@@ -51,8 +51,11 @@ public class TDUtil
 
   // STRINGS --------------------------------------------------------------
   
-  // concatenate strings using a single-space separator
-  // empty strings are skipped
+  /** concatenate strings using a single-space separator
+   * @param vals strings array
+   * @param k    start index in the strings array
+   * @note empty strings are skipped
+   */
   public static String concat( String[] vals, int k )
   {
     if ( k < vals.length ) {
@@ -69,15 +72,21 @@ public class TDUtil
     return "";
   }
 
-  public static void concat( StringBuffer sb, String[] vals, int k )
+  /** concatenate the missing strings to the string buffer
+   * @param sb   string buffer
+   * @param vals strings array
+   * @param k    start index in the strings array
+   * @note used to parse "team" commands
+   */
+  public static void concatMissings( StringBuffer sb, String[] vals, int k )
   {
     if ( k < vals.length ) {
-      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 ) {
+      for ( ; k<vals.length; ++k ) if ( vals[k].length() > 0 && sb.indexOf( vals[k] ) < 0 ) {
         sb.append(vals[k]);
         break;
       }
       for (++k; k < vals.length; ++k) {
-        if ( vals[k].length() > 0 ) sb.append(" ").append(vals[k]);
+        if ( vals[k].length() > 0 && sb.indexOf( vals[k] ) < 0 ) sb.append(" ").append(vals[k]);
       }
       sb.append(" ");
     }

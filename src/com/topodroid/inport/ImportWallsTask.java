@@ -17,6 +17,7 @@ import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.MainWindow;
 
+import android.os.ParcelFileDescriptor;
 
 // import java.lang.ref.WeakReference;
 
@@ -27,13 +28,22 @@ import java.io.InputStreamReader;
 // NOTE survey name must be guaranteed not be in the db
 public class ImportWallsTask extends ImportTask
 {
+  // /** cstr 
+  //  * @param main   main application window
+  //  * @param isr    input reader
+  //  */
+  // public ImportWallsTask( MainWindow main, InputStreamReader isr )
+  // {
+  //   super( main, isr );
+  // }
+
   /** cstr 
    * @param main   main application window
-   * @param isr    input reader
+   * @param pfd    parcel file descriptor
    */
-  public ImportWallsTask( MainWindow main, InputStreamReader isr )
+  public ImportWallsTask( MainWindow main, ParcelFileDescriptor pfd )
   {
-    super( main, isr );
+    super( main, pfd );
   }
 
   /** execute import task

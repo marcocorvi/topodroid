@@ -18,6 +18,7 @@ import com.topodroid.TDX.SurveyInfo;
 // import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.TDX.MainWindow;
 
+import android.os.ParcelFileDescriptor;
 
 // import java.lang.ref.WeakReference;
 
@@ -30,9 +31,18 @@ public class ImportVisualTopoTask extends ImportTask
   private boolean mLegFirst;
   private boolean mTrox;
 
-  public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, ImportData data )
+  // public ImportVisualTopoTask( MainWindow main, InputStreamReader isr, ImportData data )
+  // {
+  //   super( main, isr );
+  //   mLrud     = data.mLrud;
+  //   mLegFirst = data.mLeg;
+  //   mTrox     = data.mTrox;
+  //   // TDLog.v("Import VTopo " + mTrox );
+  // }
+
+  public ImportVisualTopoTask( MainWindow main, ParcelFileDescriptor pfd, ImportData data )
   {
-    super( main, isr );
+    super( main, pfd );
     mLrud     = data.mLrud;
     mLegFirst = data.mLeg;
     mTrox     = data.mTrox;

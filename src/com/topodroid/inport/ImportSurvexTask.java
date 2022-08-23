@@ -17,6 +17,7 @@ import com.topodroid.TDX.DataHelper;
 import com.topodroid.TDX.SurveyInfo;
 import com.topodroid.TDX.MainWindow;
 
+import android.os.ParcelFileDescriptor;
 
 // import java.lang.ref.WeakReference;
 
@@ -27,9 +28,14 @@ import java.io.InputStreamReader;
 // NOTE survey name must be guaranteed not be in the db
 public class ImportSurvexTask extends ImportTask
 {
-  public ImportSurvexTask( MainWindow main, InputStreamReader isr )
+  // public ImportSurvexTask( MainWindow main, InputStreamReader isr )
+  // {
+  //   super( main, isr );
+  // }
+
+  public ImportSurvexTask( MainWindow main, ParcelFileDescriptor pfd )
   {
-    super( main, isr );
+    super( main, pfd );
   }
 
   @Override

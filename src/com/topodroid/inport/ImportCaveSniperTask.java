@@ -14,6 +14,8 @@ package com.topodroid.inport;
 import com.topodroid.TDX.MainWindow;
 import com.topodroid.TDX.SurveyInfo;
 
+import android.os.ParcelFileDescriptor;
+
 // import java.lang.ref.WeakReference;
 
 import java.util.ArrayList;
@@ -21,9 +23,14 @@ import java.io.InputStreamReader;
  
 public class ImportCaveSniperTask extends ImportTask
 {
-  public ImportCaveSniperTask( MainWindow main, InputStreamReader isr )
+  // public ImportCaveSniperTask( MainWindow main, InputStreamReader isr )
+  // {
+  //   super( main, isr );
+  // }
+
+  public ImportCaveSniperTask( MainWindow main, ParcelFileDescriptor pfd )
   {
-    super( main, isr );
+    super( main, pfd );
   }
 
   @Override

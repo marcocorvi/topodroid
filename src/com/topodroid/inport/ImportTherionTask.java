@@ -20,6 +20,7 @@ import com.topodroid.TDX.MainWindow;
 
 import java.io.InputStreamReader;
 
+import android.os.ParcelFileDescriptor;
 
 // import java.lang.ref.WeakReference;
 
@@ -31,7 +32,9 @@ public class ImportTherionTask extends ImportTask
 {
   public ImportTherionTask( MainWindow main ) { super( main ); }
 
-  public ImportTherionTask( MainWindow main, InputStreamReader isr ) { super( main, isr ); }
+  // public ImportTherionTask( MainWindow main, InputStreamReader isr ) { super( main, isr ); }
+
+  public ImportTherionTask( MainWindow main, ParcelFileDescriptor pfd ) { super( main, pfd ); }
 
   @Override
   protected Long doInBackground( String... str )
