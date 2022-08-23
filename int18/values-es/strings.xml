@@ -1511,17 +1511,16 @@ debe ajustarlos a sus necesidades./n/n
   <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Color de fondo de imagen PNG en dibujos</string -->
   <string name="pref_acad_version_title">Versión de DXF</string>
   <string name="pref_acad_version_summary">Versión de DXF</string>
-  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
-  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
-  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
+  <string name="pref_acad_spline_title">Spline DXF</string>
+  <string name="pref_acad_spline_summary">DXF interpolado cúbico</string>
+  <string name="pref_dxf_reference_title">Referencia DXF</string>
+  <string name="pref_dxf_reference_summary">Los ejes X-Y son exportaciones de dibujos DXF</string>
   <!-- UNUSED string name="pref_dxf_scale_title">Escala de dibujo DXF</string -->
   <!-- UNUSED string name="pref_dxf_scale_summary">Factor de escala del dibujo DXF</string -->
   <string name="pref_dxf_blocks_title">Puntos finales de exportación tomas laterales DXF </string>
   <string name="pref_dxf_blocks_summary">Puntos finales de exploración DXF</string>
-  <!-- TODO string name="pref_shp_georef_title">Georeferenced sketch plan export</string -->
-  <!-- TODO string name="pref_shp_georef_summary">Sketch plan exported in WGS84 long-lat</string -->
-  <!-- TODO string name="imported_settings">Imported settings</string -->
+  <string name="pref_shp_georef_title">Exportar dibujos georreferenciados</string>
+  <string name="pref_shp_georef_summary">Exportar plano de dibujos a WGS84 geográfico</string>
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_shot_timer_title">Contador de tiempo</string> 
@@ -1546,10 +1545,14 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_lineacc_summary">Precisión Bezier interpolación cúbica</string>
   <string name="pref_linecorner_title">Esquina Bezier</string>
   <string name="pref_linecorner_summary">Detección del límite del ángulo de línea Bezier</string>
-  <string name="pref_weeddistance_title">Distancia los puntos de entramado</string>
-  <string name="pref_weeddistance_summary">Distancia máxima del segmento a los puntos de entramado [m]</string>
+  <string name="pref_graph_paper_scale_title">Escala de papel cuadriculado</string>
+  <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
+  <string name="pref_weedlength_title">Longitud máxima del segmento de linea de punto</string>
+  <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea</string>
+  <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
+  <string name="pref_weedbuffer_summary">Zona de influencia alrededor de los segmentos de eliminación [pxl]</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
   <string name="pref_calib_algo_summary">Algoritmo Calibración</string>
   <string name="pref_group_by_title">Política del grupo</string>
@@ -1578,14 +1581,14 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_linestraight_summary">Enderezar toda la acción de la línea</string>
   <string name="pref_path_multiselect_title">Ruta multiselección</string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>
-  <!-- TODO string name="pref_composite_actions_title">Composite actions</string -->
-  <!-- TODO string name="pref_composite_actions_summary">Enable line/area long-tap actions</string -->
+  <string name="pref_composite_actions_title">Acciones compuestas</string>
+  <string name="pref_composite_actions_summary">Habilitar acciones de toque prolongado por línea/área</string>
   <string name="pref_plane_interpolation_title">Interpolación plana</string>
   <string name="pref_plane_interpolation_summary">Acción de interpolación plana</string>
   <string name="pref_plot_split_title">Dibujar dividir/fusionar</string>
   <string name="pref_plot_split_summary">Dibujar acciones de división y fusión</string>
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
+  <string name="pref_stylus_size_title">Tamaño del lápiz</string>
+  <string name="pref_stylus_size_summary">Tamaño del lápiz óptico [0: ignorar]</string>
   <string name="pref_fixed_thickness_title">Grosor de la línea topografía</string>
   <string name="pref_fixed_thickness_summary">Grosor de la línea topografía</string>
   <!-- UNUSED string name="pref_device_title">Dispositivo</string -->
@@ -1596,8 +1599,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_checkAttached_summary">Compruebe si se adjunta la estación</string>
   <string name="pref_checkExtend_title">Control de la extensión</string>
   <string name="pref_checkExtend_summary">Verifique si se extienden las mediciones</string>
-  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
-  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
+  <string name="pref_toolbarSize_title">Tamaño de la barra de herramientas </string>
+  <string name="pref_toolbarSize_summary">Tamaño de la barra de herramientas para dibujar</string>
   <string name="pref_backup_number_title">Número de copias de seguridad</string>
   <string name="pref_backup_number_summary">Número de copias de seguridad de los archivos de dibujo</string>
   <string name="pref_backup_interval_title">Intervalo de copia de seguridad</string>
@@ -1616,10 +1619,12 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_autoStations_summary">Añadir estación automáticamente</string>
   <string name="pref_auto_xsections_title">Auto X-sección</string>
   <string name="pref_auto_xsections_summary">Añadir x-sección automaticas para guardar/exportar [csx/svg/dxf/xvi]</string>
-  <!-- TODO string name="pref_saved_stations_title">Saved stations</string -->
-  <!-- TODO string name="pref_saved_stations_summary">Color saved stations orange</string -->
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
+  <string name="pref_saved_stations_title">Hitos guardados</string>
+  <string name="pref_saved_stations_summary">Colorea los puntos de referencia guardados en naranja</string>
+  <string name="pref_legonly_update_title">Actualizar solo tomas</string>
+  <string name="pref_legonly_update_summary">Vuelve a dibujar las líneas solo al descargar tomas</string>
+  <string name="pref_full_affine_title">Transformación afín</string>
+  <string name="pref_full_affine_summary">Habilitar transformación afín de dibujos</string>
   <string name="pref_loopClosure_title">Cierre de bucle</string>
   <string name="pref_loopClosure_summary">Error en cierre de bucle</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1632,6 +1637,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_diving_mode_summary">Habilitar el modo de buceo</string>
   <string name="pref_splay_classes_title">clases de tomas secundarias</string>
   <string name="pref_splay_classes_summary">Habilitar clases y colores de tomas secundarias</string>
+  <!-- UNUSED string name="pref_splay_as_dot_title">Finale di splay</string -->
+  <!-- UNUSED string name="pref_splay_as_dot_summary">Mostra splay come finali</string -->
   <string name="pref_splay_color_title">Colores de tomas secundarias</string>
   <string name="pref_splay_color_summary">Habilitar colores de tomas secundarias</string>
   <string name="pref_plot_shift_title">Cambio de croquis / escala</string>
@@ -1649,12 +1656,12 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_station_size_summary">Tamaño de la etiqueta de la estación</string>
   <string name="pref_zoom_controls_title">Visualizar botón del Zoom</string>
   <string name="pref_zoom_controls_summary">Control de Zoom multitouch</string>
-  <!-- FIXME string name="pref_side_drag_title">Arrastre lateral</string -->
-  <!-- FIXME string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string -->
+  <string name="pref_side_drag_title">Arrastre lateral</string>
+  <string name="pref_side_drag_summary">Habilitar el lado y arrastre en la ventana de dibujo</string>
   <string name="pref_unit_grid_title">Unidades de dibujo</string>
   <string name="pref_unit_grid_summary">Tamaño de celda de la cuadrícula del dibujo</string>
-  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
-  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
+  <string name="pref_unit_measure_title">Unidad de distancia</string>
+  <string name="pref_unit_measure_summary">Unidad de distancia</string>
   <!-- UNUSED string name="pref_recent_nr_title">Herramientas utilizadas recientemente</string -->
   <!-- UNUSED string name="pref_recent_nr_summary">Número de herramientas más recientes seleccionadas</string -->
   <string name="pref_area_border_title">Visibilidad borde área</string> 
@@ -1694,9 +1701,7 @@ debe ajustarlos a sus necesidades./n/n
   <!-- NO string name="pref_algo_min_delta_title">Min-algo delta</string -->
   <!-- NO string name="pref_algo_min_delta_summary">Min-algo group G^M.x weight</string -->
 
-<!-- LEAVE LOG STUFF IN ENGLISH   =========- WHY? Isn't the translation correct?
-it is correct but i need to use english to tell a user which log to enable when there is a problem 
-
+<!-- LEAVE LOG STUFF IN ENGLISH es correcto, pero necesito usar inglés
   <string name="pref_log_stream_summary">Salida secuencia de registros</string>
   <string name="pref_log_stream_title">Secuencia de registros</string>
   <string name="pref_log_bt">Bluetooth</string>
@@ -1731,9 +1736,18 @@ it is correct but i need to use english to tell a user which log to enable when 
 -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
-  <!-- UNUSED string name="line_fine">fina</string -->
-  <!-- UNUSED string name="line_normal">normal</string -->
-  <!-- UNUSED string name="line_coarse">gruesa</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
+  <!-- UNUSED string name="line_normal">normale</string -->
+  <!-- UNUSED string name="line_coarse">grossolana</string -->
+  <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
+  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
+	
 
     <string name="perms_mandatory">TopoDroid no puede ejecutarse sin estos permisos:</string>
     <string name="perms_optional">TopoDroid puede fallar sin estos permisos:</string>
@@ -1745,13 +1759,14 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="welcome_text">
 \nTopoDroid es una aplicación de código abierto destinado a dispositivos Android, con la finalidad de hacer topografías en cavidades con el dispositivo DistoX.
 \nNo existen garantías: Al utilizar TopoDoid, usted acepta las condiciones de uso. El autor no se hace responsable de las pédidas de datos que puedan ocurrir.
+\n\nManual: Botón de menú
 \n\nVisite http://sites.google.com/site/speleoapps para las aplicaciones y documentos complementarios.
 \nEnvíe sus comentarios, informes de errores, peticiones de características, a marco.corvi@gmail.com.
-\nTraducción al español Manu Guerrero manuguerreros@gmail.com
 \n
+\nTraducción al español Manu Guerrero manuguerreros@gmail.com
     </string>
 
-
+  <! - LAS CADENAS DE DIÁLOGO DE FIRMWARE SE PUEDEN DEJAR SIN TRADUCIR: marque OK cadenas sin traducir ->
   <string name="firmware_title">Actualizar de firmware</string>
   <string name="firmware_file_title">Archivos de firmware</string>
   <string name="firmware_text">
@@ -1764,6 +1779,7 @@ it is correct but i need to use english to tell a user which log to enable when 
 \n[7] Apague el DistoX2 con la tecla CLR.
 \n
    </string>
+
    <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
    <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
    <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
@@ -1774,156 +1790,194 @@ it is correct but i need to use english to tell a user which log to enable when 
    <string name="ask_dump">¿Quiere cargar el firmware?</string>
    <string name="ask_upload">¿Quiere subir el firmware?</string>
    <string name="ask_upload_not_compatible">Firmware el archivo no parece correcto. \n¿Quiere probar a cargarlo?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
+   <string name="firmware_upload_no_sign">Error al verificar dell\'HW el DistoX</string>
+   <string name="firmware_upload_bad_sign">HW DistoX incompatible</string>
    <string name="firmware_file_dumped">Archivo de firmware guardado %1$s tamaño %2$d</string>
    <string name="firmware_file_uploaded">Archivo de firmware cargado %1$s escribir %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
+   <string name="firmware_file_dump_fail">Error al descargar el firmware</string>
+   <string name="firmware_file_upload_fail">Error al cargar el firmware</string>
    <string name="firmware_not_supported">El dispositivo no admite funciones de firmware</string>
 
-    <!-- TODO string name="project">Project %1$s</string -->
-    <!-- TODO string name="no_editor">Editor not found</string -->
-    <!-- TODO string name="no_file">File not found</string -->
-    <!-- TODO string name="no_path">Missing filepath</string -->
-    <!-- TODO string name="no_equate">No equate</string -->
-    <!-- TODO string name="no_surveys">No surveys</string -->
-    <!-- TODO string name="no_tdconfig">Missing tdconfig file</string -->
-    <!-- TODO string name="no_th_file">No Therion file</string -->
-    <!-- TODO string name="file_exists">File exists</string -->
-    <!-- TODO string name="file_create_fail">File create fail</string -->
-    <!-- TODO string name="oom">Warning. Out of memory</string -->
+    <string name="project">Proyecto %1$s</string>
+    <string name="no_editor">Editor no encontrado</string>
+    <string name="no_file">Archivo no encontrado</string>
+    <string name="no_path">Ruta del archivo no encontrada</string>
+    <string name="no_equate">Sin equivalente</string>
+    <string name="no_surveys">Sin Relieve</string>
+    <string name="no_tdconfig">Falta el archivo tdconfig</string>
+    <string name="no_th_file">No hay archivos Therion</string>
+    <!-- UNUSED string name="file_exists">El archivo existe</string -->
+    <!-- UNUSED string name="file_create_fail">Error de creación de archivo</string -->
+    <!-- UNUSED string name="oom">Advertencia. Sin memoria</string -->
 
-    <!-- TODO string name="ask_delete_tdconfig">Delete TdConfig file</string -->
-    <!-- TODO string name="ask_remove_equate">Remove equate %1$s ?</string -->
-    <!-- TODO string name="equate_no_station">No station selected</string -->
-    <!-- TODO string name="equate_no_stations">Too few stations</string -->
-    <!-- TODO string name="equate_no_nearby">No station nearby</string -->
+    <string name="ask_delete_tdconfig">Eliminar archivo tdconfig</string>
+    <string name="ask_remove_equate">¿Eliminar equivalente %1$s ?</string>
+    <!-- UNUSED string name="equate_no_station">No se seleccionó ningún punto de referencia</string -->
+    <string name="equate_no_stations">Muy pocos puntos fuertes</string>
+    <string name="equate_no_nearby">No hay punto fuerte</string>
 
-    <!-- UNUSED string name="menu_new">NEW</string -->
-    <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
-    <!-- UNUSED string name="menu_equates">EQUATES</string -->
-    <!-- UNUSED string name="menu_save">SAVE</string -->
+    <!-- UNUSED string name="menu_new">NUEVO</string -->
+    <!-- UNUSED string name="menu_equate">AGREGAR EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
+    <!-- UNUSED string name="menu_save">GUARDAR</string -->
 
-    <!-- TODO string name="overwrite">overwrite</string -->
+    <!-- UNUSED string name="overwrite">Sobrescribir</string -->
 
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <!-- TODO string name="title_export">Export project as &#8230;</string -->
-    <!-- TODO string name="title_equates">Project Equates</string -->
-    <!-- TODO string name="title_equate_new">Add equate &#8230;</string -->
-    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
-    <!-- UNUSED string name="title_cwd">Current Work Directory</string -->
-    <!-- TODO string name="title_drop">Drop surveys ?</string -->
-    <!-- TODO string name="title_tdconfig">Enter project name</string -->
-    <!-- TODO string name="title_surveys">Surveys</string -->
+    <string name="title_export_settings">Ajustes de importación/exportación</string>
+    <string name="title_export">Exportar proyecto como &#8230;</string>
+    <string name="title_equates">Enlaces</string>
+    <string name="title_equate_new">Agregar enlace &#8230;</string>
+    <string name="title_equate_with">Enlace %1$s e %2$s</string>
+    <!-- UNUSED string name="title_cwd">Carpeta de trabajo actual</string -->
+    <string name="title_drop">¿Eliminar relieves? </string>
+    <string name="title_tdconfig">Ingrese el nombre del proyecto</string>
+    <string name="title_surveys">Relieves</string>
 
-    <!-- TODO string name="exported">Saved file %1$s</string -->
-    <!-- TODO string name="export_failed">Failed export</string -->
+    <string name="exported">Archivo guardado %1$s</string>
+    <string name="export_failed">Exportación fallida</string>
 
-    <!-- 3D VIEWER strings-->
+    <string name="image_diagram">Diagrama de dirección</string>
+    <string name="image_photo">Fotos</string>
 
-    <string name="cmenu_open">Abrir Archivo</string>
-    <string name="cmenu_reset">Resetear</string>
+    <!-- 3D VIEWER strings -->
+    <string name="cbtn_bind">Reenlazar</string>
+
+    <string name="cmenu_open">Abrir archivo</string>
+    <string name="cmenu_reset">Restablecer</string>
     <!-- UNUSED string name="menu_zoom_one">Zoom 1</string -->
 
-    <!-- TODO string name="cmenu_alpha">DEM opacity</string -->
-    <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
-    <!-- UNUSED string name="cmenu_files">Proyecto</string -->
-    <!-- UNUSED string name="cmenu_frame">Encuadre</string -->
-    <!-- UNUSED string name="cmenu_color">Color</string -->
+    <string name="cmenu_alpha">Transparencia DEM </string>
+    <string name="cmenu_viewpoint">Punto de vista</string>
+    <!-- UNUSED string name="cmenu_files">Relieves</string -->
+    <!-- UNUSED string name="cmenu_frame">Referencia</string -->
+    <!-- UNUSED string name="cmenu_color">Colores</string -->
     <string name="cmenu_info">Información</string>
     <string name="cmenu_ico">Diagrama ico</string>
     <string name="cmenu_rose">Diagrama de rosas</string>
     <string name="cmenu_wall">Modo con paredes</string>
-    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
+    <string name="cmenu_sketch">Dibujos</string>
+    <!-- NO string name="cmenu_fractal">Fractal counts</string -->
 
-    <!-- TODO string name="fractal_title">Fractal counts</string -->
+    <!-- NO string name="fractal_title">Computo frattale</string -->
+    <!-- NO string name="fractal_title">Fractal result</string -->
+    <!-- NO string name="fractal_cnt_total">count</string -->
+    <!-- NO string name="fractal_cnt_six">6-neighbor</string -->
+    <!-- NO string name="fractal_cnt_twentysix">26-neighbor</string -->
+    <!-- NO string name="fractal_failed">Fractal compute failed</string -->
+    <!-- NO string name="fractal_dimension">Fractal dimension</string -->
+    <string name="illegal_value">Valor inaceptable</string>
+	
     <!-- UNUSED string name="info_title">Información</string -->
     <!-- TODO string name="info_surveys">SURVEYS</string -->
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
     <string name="info_surveys">Proyecto</string>
-    <!-- TODO string name="info_shot">Shots</string -->
-    <!-- TODO string name="info_station">Stations</string -->
+    <string name="info_shot">toma</string>
+    <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
     <string name="info_depth">Profundidad</string>
     <string name="info_volume">Volumen</string>
 
-    <!-- TODO string name="info_east">East</string -->
-    <!-- TODO string name="info_north">North</string -->
-    <!-- TODO string name="info_z">Altitude</string -->
-    <!-- TODO string name="info_grid_value">%1$.0f m</string -->
-    <!-- TODO string name="info_view_value">A. %1$.0f C. %2$.0f</string -->
-    <!-- TODO string name="info_survey_value">%1$d</string -->
-    <!-- TODO string name="info_shot_value">Legs %1$d, Splays %2$d</string -->
-    <!-- TODO string name="info_station_value">%1$d</string -->
-    <!-- TODO string name="info_length_value">%1$.1f m</string -->
-    <!-- TODO string name="info_depth_value">%1$.1f m</string -->
+    <string name="info_east">Este</string>
+    <string name="info_north">Norte</string>
+    <string name="info_z">Altitud</string>
+    <string name="info_grid_value">%1$.0f m</string>
+    <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
+    <string name="info_survey_value">%1$d</string>
+    <string name="info_shot_value">Tiri %1$d, Splay %2$d</string>
+    <string name="info_station_value">%1$d</string>
+    <string name="info_length_value">%1$.1f m</string>
+    <string name="info_depth_value">%1$.1f m</string>
     <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-    <!-- TODO string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string -->
-    <!-- TODO string name="info_east_value">W %1$.1f E %2$.1f</string -->
-    <!-- TODO string name="info_north_value">S %1$.1f N %2$.1f</string -->
-    <!-- TODO string name="info_z_value">%1$.1f  %2$.1f</string -->
+    <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
+    <string name="info_east_value">W %1$.1f E %2$.1f</string>
+    <string name="info_north_value">S %1$.1f N %2$.1f</string>
+    <string name="info_z_value">%1$.1f  %2$.1f</string>
+	
+    <string name="legs_surface">Externo</string>
+    <string name="legs_duplicate">Doble</string>
+    <string name="legs_commented">Comentar</string>
+
+    <string name="proj_perspective">Parámetros de perspectiva</string>
+    <string name="proj_orthographic">Parámetros ortográficos</string>
+    <string name="proj_focal">Focal</string>
+    <string name="proj_side">Lato</string>
+    <!-- UNUSED string name="proj_near">Cerca</string -->
+    <!-- UNUSED string name="proj_far">lejos</string -->
 
     <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
-    <!-- TODO string name="reading_file">Reading file %1$s</string -->
+    <string name="reading_file">Lectura de archivo %1$s</string>
+    <string name="read_survey">Topografia %1$s\n</string>
     <!-- UNUSED string name="clear">Limpiar</string -->
 
-    <!-- TODO string name="plan_proj">Plan</string -->
-    <!-- TODO string name="profile_proj">Profile</string -->
-    <!-- TODO string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string -->
-    <!-- TODO string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string -->
-    <!-- TODO string name="measure">measure</string -->
+    <string name="plan_proj">Planta</string>
+    <string name="profile_proj">Secciones</string>
+    <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cueva %9$.1f</string>
+    <!-- UNUSED string name="measure">medida</string -->
 
-    <!-- UNUSED string name="style_stroke">Stroke</string -->
-    <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
-    <!-- UNUSED string name="style_fill">Fill</string -->
-    <!-- TODO string name="surface_projection">Projection on DEM</string -->
-    <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- OK string name="dem_file">DEM %1$s</string -->
-    <!-- TODO string name="dem_load">load</string -->
+    <!-- UNUSED string name="style_stroke">Trazo</string -->
+    <!-- UNUSED string name="style_stroke_fill">Trazo &amp; área</string -->
+    <!-- UNUSED string name="style_fill">Area</string -->
+    <string name="surface_projection">Proyección en DEM</string>
+    <string name="surface_texture">Textura superficial</string>
+    <string name="surface_gps">Seguimiento GPS</string>
+    <string name="surface_east">Este</string>
+    <string name="surface_north">Norte</string>
+    <!-- NO string name="dem_file">DEM %1$s</string -->
+    <string name="dem_load">cargar</string>
 
-    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
-    <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- OK string name="texture_file">%1$s</string -->
-    <!-- TODO string name="texture_load">load texture</string -->
-    <!-- TODO string name="texture_failed">Failed texture loading</string -->
-    <!-- TODO string name="texture_ok">Read texture file</string -->
-    <!-- TODO string name="sketch_load">Load</string -->
-    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
-    <!-- TODO string name="sketch_ok">Read sketch data</string -->
+    <string name="dem_failed">ERROR: DEM cargando</string>
+    <string name="dem_ok">Lectura DEM</string>
+    <!-- NO string name="texture_file">%1$s</string -->
+    <string name="texture_load">cargando texturas</string>
+    <string name="texture_failed">ERROR: carga de textura</string>
+    <string name="texture_ok">Leyendo archivo de textura</string>
+    <string name="sketch_load">cargar</string>
+    <string name="sketch_failed">ERROR: cargando dibujo</string>
+    <string name="sketch_ok">Dibujo de lectura</string>
 
-    <string name="ctitle">%1$s  Clino: %2$.0f  Rumbo: %3$.0f</string>
-    <!-- TODO string name="ctitle_surface_alpha">Surface opacity</string -->
-    <!-- UNUSED string name="ctitle_sketches">Sketches</string -->
-    <!-- UNUSED string name="ctitle_legs">Legs visibility</string -->
-    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
+    <string name="ctitle_surface_alpha">Transparencia DEM</string>
+    <string name="ctitle_sketches">Dibujos</string>
+    <string name="ctitle_legs">Visual</string>
+    <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
+	
+    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_scan">Scan</string -->
+    <!-- UNUSED string name="cbtn_shot">Shot</string -->
+    <!-- UNUSED string name="cbtn_start">Start</string -->
+    <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
+    <string name="survey_list">RILIEVE</string>
     <string name="survey_legs"> Visual: </string>
     <string name="survey_legs_length"> Longitud toma: </string>
     <string name="survey_splays"> Tomas laterales: </string>
     <string name="survey_splays_length"> Longitud tomas laterales: </string>
 
-    <!-- TODO string name="cave_east"> E: %1$.1f</string -->
-    <!-- TODO string name="cave_north"> N: %1$.1f</string -->
-    <!-- TODO string name="cave_vert"> Z: %1$.1f</string -->
+    <string name="cave_east"> E: %1$.1f</string>
+    <string name="cave_north"> N: %1$.1f</string>
+    <string name="cave_vert"> Z: %1$.1f</string>
 
     <string name="cave_distance"> 3D distancia: %1$.2f</string>
-    <!-- TODO string name="horz_distance"> 2D horizontal distance: %1$.1f</string -->
+    <string name="horz_distance"> 2D distancia horizontal: %1$.1f</string>
     <string name="cave_length"> Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
-    <!-- TODO string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string -->
+    <string name="cave_angle"> Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
-    <!-- UNUSED string name="SURVEYS">P r o y e c t o</string -->
-    <string name="INFO">I n f o r m a c i ó n</string>
-    <string name="STATIONS">E s t a c i ó n</string>
-    <string name="STATIONS_DISTANCE">Distancia estación</string>
-    <!-- UNUSED string name="DISTANCE">Distancia</string -->
-    <!-- UNUSED string name="CENTER">CENTER</string -->
-    <!-- TODO string name="select_dem_file">Select a DEM file:</string -->
-    <!-- TODO string name="select_texture_file">Select a texture file:</string -->
+    <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
+    <string name="INFO">I N F O R M A C I Ó N</string>
+    <string name="STATIONS">e S T A C I Ó N</string>
+    <string name="STATIONS_DISTANCE">dISTANCIA ESTACIÓN</string>
+    <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
+    <!-- UNUSED string name="CENTER">CENTRO</string -->
+    <string name="select_survey_file">Seleccionar archivo de topografia</string>
+    <string name="select_export_file">Seleccionar archivo de exportación</string>
+    <string name="select_dem_file">Seleccionar DEM</string>
+    <string name="select_texture_file">Seleccionar textura</string>
+    <string name="select_sketch_file">Seleccionar diseño</string>
 
     <string name="view_title">PUNTOS DE VISTA</string>
     <string name="view_top">Parte superior</string>
@@ -1938,14 +1992,14 @@ it is correct but i need to use english to tell a user which log to enable when 
     <string name="walls_convexhull">Recubrimiento Convexo</string>
     <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
     <string name="walls_hull">Recubrimiento</string>
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
+    <string name="walls_bubble">Burbuja</string>
+    <string name="walls_tube">condominio</string>
     <!-- OK string name="walls_delaunay">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string -->
     <!-- UNUSED string name="powercrust_failed">Recubrimiento fuerte falló</string -->
     <!-- UNUSED string name="powercrust_successful">Recubrimiento fuerte se aplicó con éxito: %1$d / %2$d</string -->
-    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
+<string name="powercrust_dxf_not_supported">Powercrust: exportación DXF no implementada</string>
 
     <string name="ok_export">OK. Exportado %1$s</string>
 

@@ -356,7 +356,7 @@
     <string name="bad_cwd">Название проекта не может совпадать с путем к папке</string>
     <string name="bad_line">Недопустимый тип линии</string>
     <string name="bad_point">Недопустимый тип точки</string>
-    <!-- TODO string name="index_oob">Index out of bounds %1$d</string -->
+    <string name="index_oob">Индекс выходит за пределы %1$d</string>
 
     <string name="no_audio">Отсутсвует аудио запись</string>
     <string name="no_bt">Нет Блютуфа</string>
@@ -640,7 +640,7 @@
     <string name="undelete_shot">Замеры</string>
     <string name="undelete_overshoot">Сл.длинные замеры</string>
     <string name="undelete_check">Проверочные</string>
-    <!-- TODO string name="undelete_blunder">Blunders</string -->
+    <string name="undelete_blunder">Промахи</string>
     <string name="undelete_plot">Абрисы</string>
     <string name="delete_whole_leg">Удалить все замеры</string>
     <string name="visible_border">видимая граница</string>
