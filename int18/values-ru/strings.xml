@@ -36,10 +36,10 @@
     <!-- UNUSED string name="version_ask">Обновление до новой версии TopoDroid.\nВы хотите переустановить инструменты рисования?</string -->
     <!-- REPLACED string name="symbols_ask">Вы хотите переустановить инструменты рисования?</string -->
     <string name="symbols_ask">Установить инструменты рисования v.%1$s?\n(Текущая v.%2$s)</string>
-    <!-- UNUSED string name="version_check">Last version</string -->
-    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
-    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
-    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
+    <!-- UNUSED string name="version_check">Последняя версия</string -->
+    <!-- UNUSED string name="version_check_failed">Сбой проверки версии</string -->
+    <!-- UNUSED string name="version_check_latest">Установлена самая последняя версия</string -->
+    <string name="version_check_newer">Доступна более новая версия: %1$d</string>
 
     <string name="setup_textsize_title">Настройка TopoDroid. Размер текста</string>
     <string name="setup_buttonsize_title">Настройка TopoDroid. Размер кнопок</string>
