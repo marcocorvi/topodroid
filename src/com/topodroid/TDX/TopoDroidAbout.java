@@ -14,6 +14,7 @@ package com.topodroid.TDX;
 
 import com.topodroid.utils.TDVersion;
 import com.topodroid.help.UserManualActivity;
+import com.topodroid.help.TDVersionCheck;
 
 import android.content.Context;
 // import android.content.Intent;
@@ -49,6 +50,8 @@ class TopoDroidAbout extends Dialog
 
     ((Button)findViewById(R.id.btn_ok)).setOnClickListener( this );
     ((Button)findViewById(R.id.btn_manual)).setOnClickListener( this );
+    // ((Button)findViewById(R.id.btn_version)).setOnClickListener( this );
+    (new TDVersionCheck()).execute();
   }
 
   // @Override
@@ -64,6 +67,9 @@ class TopoDroidAbout extends Dialog
       dismiss();
       UserManualActivity.showHelpPage( mContext, null );
       return;
+    // } else if ( v.getId() == R.id.btn_version ) {
+    //   (new TDVersionCheck()).execute();
+    //   return;  
     // } else if ( v.getId() == R.id.btn_ok ) {
     }
     dismiss();

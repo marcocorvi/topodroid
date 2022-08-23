@@ -9,6 +9,7 @@ AFLAGS = -v
 
 VERSION = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionName=//' | sed -e 's/"//g' `
 TARGET_SDK = `grep targetSdkVersion AndroidManifest.xml | sed -e 's/ *android:targetSdkVersion=//' | sed -e 's/"//g' `
+VERSION_CODE = `grep versionName AndroidManifest.xml | sed -e 's/ *android:versionCode=//' | sed -e 's/"//g' `
 
 # APPCODE must coincide with the main source folder
 APPCODE = TDX
@@ -38,6 +39,7 @@ signed:
 md5:
 	@echo "Version $(VERSION) target $(TARGET_SDK)"
 	@./howto/update_md5.sh $(VERSION_TARGET)
+	@echo $(VERSION_CODE) > ../speleoapks/tdversion.txt
 
 signed-29:
 	./howto/target.sh 29

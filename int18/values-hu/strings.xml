@@ -35,6 +35,10 @@ A részletekért keresse fel a weboldalakat.\n
 
     <!-- UNUSED string name="version_ask">A TopoDroid frissítése.\nSzeretnéd újratelepíteni a rajzeszközöket?</string -->
     <string name="symbols_ask">Telepíted a rajzeszközök következő verzióját v.%1$s?\n(Jelenlegi v.%2$s)</string>
+    <!-- UNUSED string name="version_check">Last version</string -->
+    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
+    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
 
     <string name="setup_textsize_title">TopoDroid beállítások. Szöveg méret</string>
     <string name="setup_buttonsize_title">TopoDroid beállítások. Gomb méret</string>

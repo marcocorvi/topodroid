@@ -293,6 +293,15 @@ public class TDInstance
     return String.format( context.getResources().getString( r ), arg );
   }
 
+  /** @return string formatted with a resource
+   * @param r   resource index
+   * @param arg integer argument
+   */
+  public static String formatString( int r, int arg ) 
+  {
+    return String.format( context.getResources().getString( r ), arg );
+  }
+
   /** @return the application shared preferences
    */
   public static SharedPreferences getPrefs() { return PreferenceManager.getDefaultSharedPreferences( context ); }

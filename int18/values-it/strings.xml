@@ -35,6 +35,10 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <!-- UNUSED string name="version_ask">Stai aggiornando ad una nuova versione di TopoDroid.\nVuoi reinstallare prototipi grafici?</string -->
     <string name="symbols_ask">Installare gli strumenti di disegno v.%1$s?\n(Current v.%2$s)</string>
+    <!-- UNUSED string name="version_check">Ultima versione</string -->
+    <!-- UNUSED string name="version_check_failed">Verifica versione fallita</string -->
+    <!-- UNUSED string name="version_check_latest">Versione già ultima</string -->
+    <string name="version_check_newer">Disponibile nuova versione: %1$d</string>
 
     <string name="setup_textsize_title">Configura TopoDroid. Dimensione testo</string>
     <string name="setup_buttonsize_title">Configura TopoDroid. Dimensione pulsanti</string>

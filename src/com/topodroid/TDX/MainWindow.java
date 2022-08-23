@@ -701,7 +701,7 @@ public class MainWindow extends Activity
   {
     super.onCreate( savedInstanceState );
     TDLog.v("MAIN on create");
-    
+
     TDandroid.setScreenOrientation( this );
 
     // TDLog.Profile("TDActivity onCreate");

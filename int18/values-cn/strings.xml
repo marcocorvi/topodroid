@@ -35,6 +35,10 @@
 
     <!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
     <string name="symbols_ask">安装绘图工具 v.%1$s?\n(Current v.%2$s)</string>
+    <!-- UNUSED string name="version_check">Last version</string -->
+    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
+    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
 
     <string name="setup_textsize_title">TopoDroid设置. 文字大小</string>
     <string name="setup_buttonsize_title">TopoDroid设置. 按钮大小</string>
