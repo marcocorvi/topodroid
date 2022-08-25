@@ -28,7 +28,7 @@
 
   <string-array name="canvasLevels">
      <item name="none">nada</item>
-     <item name="class">por simbolo</item>
+     <item name="class">por símbolo</item>
      <item name="instance">por artículo</item>
   </string-array>
 
@@ -287,7 +287,7 @@
   <string-array name="splayUse">
      <item name="skip">Saltar</item>
      <item name="normal">Normal</item>
-     <item name="xsection">Seccion transversal</item>
+     <item name="xsection">Sección transversal</item>
   </string-array>
 
 </resources>

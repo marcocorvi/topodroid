@@ -38,7 +38,7 @@ Consulte las páginas web para más detalles..\n
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
-    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
+    <!-- TODO string name="version_check_newer">Versión más reciente disponible: %1$d</string -->
 
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
@@ -382,7 +382,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_sensors">Topografía sin mediciones</string>
     <!-- UNUSED string name="no_shots">Topografía sin mediciones.\nPulse el botón para descargar mediciones</string -->
     <string name="no_survey">Topografía no seleccionada</string>
-    <!-- TODO string name="no_symbols">No symbol palette.</string -->
+    <string name="no_symbols">Sin paleta de símbolos.</string>
     <!-- UNUSED string name="no_thmanager">ThManager no instalado</string -->
     <!-- UNUSED string name="no_db_viewer">app DB_viewer no instalada</string -->
     <string name="no_undelete">No hay medida para recuperar</string>
@@ -845,7 +845,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_do_off">Apagado</string>
 
     <!-- UNUSED string name="btn_3d">3D</string -->
-    <!-- TODO string name="btn_export">Export</string -->
+    <string name="btn_export">Exportar</string>
     <string name="btn_import">Importar</string>
     <string name="btn_install">Instalar</string>
 
@@ -1003,7 +1003,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_select_mode">Herramienta de selección</string>
     <string name="help_erase_mode">Tipo de goma de borrar</string>
     <string name="help_erase_size">Tamaño goma de borrar [S/M/L]</string>
-    <!-- TODO string name="help_select_size">Seleccione el tamaño de la herramienta[S/M/L]</string -->
+    <string name="help_select_size">Seleccione el tamaño de la herramienta[S/M/L]</string>
     <string name="help_previous">Anterior elemento de la selección</string>
     <string name="help_next">Siguiente elemento de la selección</string>
     <string name="help_recover">Recuperar dibujo de copia de seguridad</string>
@@ -1553,8 +1553,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
-  <!-- TODO string name="pref_weeddistance_title">TODO</string -->
-  <!-- TODO string name="pref_weeddistance_summary">TODO</string -->
+  <string name="pref_weedlength_title">Longitud máxima del segmento de limpieza de punto</string>
+  <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea</string>
   <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
   <string name="pref_weedbuffer_summary">Zona de influencia alrededor de los segmentos de eliminación [pxl]</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
@@ -1872,7 +1872,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="illegal_value">Valor inaceptable</string>
 	
     <!-- UNUSED string name="info_title">Información</string -->
-    <!-- TODO string name="info_surveys">SURVEYS</string -->
+    <string name="info_surveys">PROYECTO</string>
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
@@ -1998,7 +1998,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="walls_hull">Recubrimiento</string>
     <string name="walls_bubble">Burbuja</string>
     <string name="walls_tube">condominio</string>
-    <!-- OK string name="walls_delaunay">Delaunay</string -->
+    <!-- NO string name="walls_delaunay">Delaunay</string -->
 
     <!-- UNUSED string name="powercrust_few_splays">Recubrimiento fuerte: muy pocas tomas radiales</string -->
     <!-- UNUSED string name="powercrust_failed">Recubrimiento fuerte falló</string -->
@@ -2009,12 +2009,20 @@ debe ajustarlos a sus necesidades./n/n
 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
+    <string name="no_model">Sin modelo 3D</string>
+    <string name="no_topodroid_model">Modelo no TopoDroid</string>
 
-    <!-- UNUSED string name="error_file_not_found">Error: archivo no encontrado</string -->
-    <!-- TODO string name="error_file_not_readable">Error: file not readable</string -->
-    <!-- UNUSED string name="error_io_exception">Error: IO excepción</string -->
-    <string name="error_parser_error">Error: error del analizador %1$s</string>
-    <string name="error_export_failed">Error: Fallo de exportación %1$s</string>
+    <!-- UNUSED string name="error_file_not_found">Errore: Archivo %1$s no encontrado</string -->
+    <!-- UNUSED string name="error_file_not_readable">Error: archivo %1$s no legible</string -->
+    <string name="error_file_read">Error: No se pudo leer el archivo %1$s</string>
+    <string name="error_survey_read">Error: no se pudo leer la topografía %1$s</string>
+    <!-- UNUSED string name="error_io_exception">Error: error de I/O %1$s</string -->
+    <string name="error_parser_error">Error: error de lectura %1$s</string>
+    <string name="error_export_failed">Error: exportación fallida %1$s</string>
+    <string name="unsupported_format">Formato de archivo no admitido</string>
+
+    <!-- UNUSED string name="export_gltf_ok">Archivo glTF guardado</string -->
+    <!-- UNUSED string name="export_gltf_fail">Error al exportar glTf</string -->
 
     <!-- UNUSED string name="warning_not_overwrite">Advertencia: no sobrescribir el archivo existente %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Advertencia: No hay archivo txt %1$s</string -->
@@ -2022,22 +2030,31 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="warning_not_las">Advertencia: No hay archivo %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Advertencia: No hay archivo de texto CGAL %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Advertencia: No hay archivo stl %1$s</string -->
-    <string name="warning_no_cwd">Advertencia: falta el directorio inicial</string>
-    <!-- TODO string name="warning_no_parent">Warning: cannot go to parent folder</string -->
+    <string name="warning_no_cwd">Advertencia: la carpeta base no existe</string>
+    <string name="warning_no_parent">Advertencia: no es posible subir una carpeta</string>
+    <string name="no_permissions">La aplicación no puede ejecutarse sin los permisos requeridos</string>
 
-    <!-- TODO string name="done_fractals">Done fractals dims</string -->
-    <!-- TODO string name="done_convexhull">Done convex-hull walls</string -->
-    <!-- TODO string name="fail_convexhull">Failed convex-hull walls</string -->
-    <!-- TODO string name="done_powercrust">Done powercrust walls</string -->
-    <!-- TODO string name="fail_powercrust">Failed powercrust walls</string -->
-    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
-    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
+    <!-- UNUSED string name="done_fractals">Tamaño de fractal calculado</string -->
+    <string name="done_convexhull">Sobre convexo calculado</string>
+    <string name="fail_convexhull">Cálculo de envolvente convexa falló</string>
+    <string name="done_powercrust">Powercrust calculado </string>
+    <string name="fail_powercrust">Powercrust falló</string>
+    <string name="done_hull">Hizo paredes de una sola capa</string>
+    <string name="fail_hull">Las paredes de una sola capa fallaron</string>
+    <string name="done_tube">Hizo paredes de tubo simples</string>
+    <string name="fail_tube">Las paredes de un solo tubo fallaron</string>
+    <string name="done_bubble">Hizo paredes de burbujas</string>
+    <string name="fail_bubble">Paredes de burbujas fallidas</string>
 
-    <!-- TODO string name="no_database">No database\n</string -->
-    <!-- TODO string name="no_survey">No survey %1$s\n</string -->
-    <!-- TODO string name="no_file">No file %1$s\n</string -->
-    <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
+    <string name="no_database">Base de datos no encontrada\n</string>
+    <string name="cno_survey">topografía %1$s no encontrada\n</string>
+    <!-- UNUSED string name="cno_file">Archivo %1$s no encontrado\n</string -->
+    <string name="empty_survey">Topografia %1$s vacia\n</string>
 
+    <string name="viewing_at">Punto de vista hacia clino %1$.0f azimut %2$.0f</string>
+
+    <string name="cpref_dem3d">DEM</string>
+    <string name="cpref_walls3d">MODELO DE PAREDES</string>
     <!-- UNUSED string name="cpref_base_path_title">Directorio de la base de datos</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamaño Texto</string -->
@@ -2047,35 +2064,39 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cpref_selection_radius_title">Selección radio</string>
     <string name="cpref_selection_radius_summary">Selección radio</string>
 
-    <!-- TODO string name="cpref_station_toast_title">Station dialog</string -->
-    <!-- TODO string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string -->
-    <!-- TODO string name="cpref_station_points_title">Station points</string -->
-    <!-- TODO string name="cpref_station_points_summary">Display stations always [n]</string -->
-    <!-- TODO string name="cpref_station_size_title">Station point size</string -->
-    <!-- TODO string name="cpref_station_size_summary">Size of station points [8 pxl]</string -->
-    <!-- TODO string name="cpref_measure_dialog_title">Distance message</string -->
-    <!-- TODO string name="cpref_measure_dialog_summary">Distance message instead of doalog [n]</string -->
+    <string name="cpref_station_toast_title">Diálogo de puntos de referencia</string>
+    <string name="cpref_station_toast_summary">Datos de destino en el cuadro de diálogo en lugar del cuadro [n]</string>
+    <string name="cpref_station_points_title">Puntos de referencia</string>
+    <string name="cpref_station_points_summary">Mostrar siempre los puntos [n]</string>
+    <string name="cpref_station_point_size_title">Tamaño del punto objetivo</string>
+    <string name="cpref_station_point_size_summary">Tamaño del punto objetivo [8 px]</string>
+    <string name="cpref_station_text_size_title">Tamaño de texto de destino</string>
+    <string name="cpref_station_text_size_summary">Tamaño de los nombres de destino [20 pt]</string>
+    <string name="cpref_measure_dialog_title">Mensaje de distancia</string>
+    <string name="cpref_measure_dialog_summary">Mensaje de distancia en lugar de diálogo [n]</string>
  
     <string name="cpref_grid_above_title">Situación de la cuadrícula</string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
-    <!-- TODO string name="cpref_grid_extent_title">Grid extent</string -->
-    <!-- TODO string name="cpref_grid_extend_summary">Grid extent arond the survey</string -->
+    <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
+    <string name="cpref_grid_extent_summary">xtensión de cuadrícula alrededor del relieve </string>
     <string name="cpref_neg_clino_title">Vistas por debajo del horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir puntos de vista por debajo del horizonte</string>
-    <!-- TODO string name="cpref_dem_buffer_title">DEM buffer</string -->
-    <!-- TODO string name="cpref_dem_buffer_summary">DEM extent around survey</string -->
+    <string name="cpref_dem_buffer_title">buffer del DEM</string>
+    <string name="cpref_dem_buffer_summary">Extensión DEM alrededor del relieve</string>
    
-    <!-- TODO string name="cpref_dem_maxsize_title">DEM max size</string -->
-    <!-- TODO string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string -->
-    <!-- TODO string name="cpref_dem_reduce_title">DEM reduce</string -->
-    <!-- TODO string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string -->
+    <string name="cpref_dem_maxsize_title">Tamaño máximo de DEM</string>
+    <string name="cpref_dem_maxsize_summary">Número máximo de celdas [400]</string>
+    <string name="cpref_dem_reduce_title">Reducir DEM</string>
+    <string name="cpref_dem_reduce_summary">Método de reducción DEM [shrink] </string>
   
     <string name="cpref_all_splay_title">Todas las tomas radiales</string>
     <string name="cpref_all_splay_summary">Todas las tomas radiales para paredes</string>
-    <!-- TODO string name="cpref_splay_proj_title">Projected splays</string -->
-    <!-- TODO string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string -->
-    <!-- TODO string name="cpref_splay_thr_title">Splay threshold</string -->
-    <!-- TODO string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string -->
+    <string name="cpref_splay_use_title">Usar splay </string>
+    <string name="cpref_splay_use_summary">Usar splay: ninguno, normal, secciones [normal] </string>
+    <string name="cpref_splay_proj_title">Splays proyectados</string>
+    <string name="cpref_splay_proj_summary">¿Usar splays proyectados en plano? [n]</string>
+    <string name="cpref_splay_thr_title">Umbral de Splay</string>
+    <string name="cpref_splay_thr_summary">Separar fuera de la barra para mantener [0.5] </string>
 
     <string name="cpref_split_triangles_title">Dividir triángulos</string>
     <string name="cpref_split_triangles_summary">Dividir triángulos de paredes</string>
@@ -2083,6 +2104,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cpref_split_random_summary">Selección aleatoria de puntos de pared</string>
     <string name="cpref_split_stretch_title">Estiramiento de paredes</string>
     <string name="cpref_split_stretch_summary">puntos de pared de estiramiento a lo largo de la toma</string>
+    
     <string name="cpref_powercrust_delta_title">Recubrimiento fuerte Delta</string>
     <string name="cpref_powercrust_delta_summary">Filtrado de tomas radiales</string>
 <!--
@@ -2098,5 +2120,27 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="cperms_mandatory">Cave3D no puede ejecutarse sin estos permisos:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D may fail without these permissions:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
+
+    <string name="help_open_3d">Abrir archivo 3D</string>
+    <string name="help_export_3d">Exportar archivo 3D</string>
+    <string name="help_info_3d">Información 3D </string>
+    <string name="help_ico_3d">Distribución de tomas en 3D</string>
+    <string name="help_rose_3d">Diagrama de rosas</string>
+    <string name="help_reset_3d">Restablecer vista 3D</string>
+    <string name="help_viewpoint_3d">Punto de vista 3D</string>
+    <string name="help_alpha_3d">D.E.M.</string>
+    <string name="help_wall_3d">modelo 3D</string>
+    <!-- UNUSED string name="help_temperature">Temperatura</string -->
+    <string name="help_sketch_3d">dibujo 3D levantando</string>
+    <!-- UNUSED string name="help_fractal">Análisis Fractal</string -->
+
+    <string name="help_light_3d">Panoramica y luz</string>
+    <string name="help_projection_3d">Proyección 3D</string>
+    <string name="help_stations_3d">Puntos fuertes </string>
+    <string name="help_splays_3d">Splay</string>
+    <string name="help_walls_3d">Paredes</string>
+    <string name="help_surface_3d">Tsuperficie</string>
+    <string name="help_color_3d">Colores</string>
+    <string name="help_frame_3d">Cuadro</string>
 
 </resources>

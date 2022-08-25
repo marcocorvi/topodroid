@@ -3,8 +3,8 @@
   xmlns:tools="http://schemas.android.com/tools"
   >
   <plurals name="calib_saturated_values">
-    <item quantity="one">ATENION. Datos saturados</item>
-    <item quantity="other" >ATENCION. %1$d saturacion de datos</item>
+    <item quantity="one">ATENCIÓN. Datos saturados</item>
+    <item quantity="other" >ATENCIÓN. %1$d saturación de datos</item>
   </plurals>
   
   <plurals name="read_data" tools:ignore="UnusedQuantity">
