@@ -44,7 +44,7 @@ import android.content.Context;
 
 
 public class FirmwareFileDialog extends MyDialog
-                         implements OnItemClickListener
+                                implements OnItemClickListener
 { 
   private final FirmwareDialog mParent;
 

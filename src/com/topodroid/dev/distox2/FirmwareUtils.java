@@ -28,12 +28,14 @@ public class FirmwareUtils
   public static final int HW_NONE    = 0;
   public static final int HW_HEEB    = 1;
   public static final int HW_LANDOLT = 2;
+  public static final int HW_TIAN    = 3;
 
   // ------------------------------------------------------------------------------
   static int getHardware( int fw ) 
   {
     if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
     if ( fw == 2610 || fw == 2630 || fw == 2640 ) return HW_LANDOLT;
+    if ( fw == 2700 ) return HW_TIAN;
     return HW_NONE;
   }
 
@@ -48,9 +50,11 @@ public class FirmwareUtils
   // return <= 0 (failure) or one of
   //    2100 2200 2300 2400 2412 2500 2501 2512
   //    2610 2630 2640
+  //    2700
   //
   // od -j 2048 -N 64 -x ... <-- HEEB block
   // od -j 4096 -N 64 -x ... <-- LANDOLT block
+  // od -j    0 -N 64 -x ... <-- TIAN block
 
   public static int readFirmwareFirmware( File fp )
   {
@@ -60,12 +64,27 @@ public class FirmwareUtils
       TDLog.v( "X310 read firmware file " + fp.getPath() );
       fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
-      if ( dis.skipBytes( 2048 ) != 2048 ) {
-        TDLog.v( "failed skip 2048");
-        return 0; // skip 8 bootloader blocks
-      }
+	  
+	  // SIWEI FIXME
+      // if ( dis.skipBytes( 2048 ) != 2048 ) {
+      //   TDLog.v( "failed skip 2048");
+      //   return 0; // skip 8 bootloader blocks
+      // }
       byte[] buf = new byte[SIGNATURE_SIZE];
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
+        TDLog.v( "failed read first block");
+        return 0;
+      }
+	  if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
+        TDLog.v( "TIAN fw " + readFirmwareHeeb( buf ) );
+        return readFirmwareHeeb( buf );
+      }
+	  
+	  if ( dis.skipBytes( 1984 ) != 1984 ) { // 1984 = 2048 - 64
+        TDLog.v( "failed skip 1984");
+        return 0; // skip to 2048: bootloader blocks
+      }
+	  if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
         TDLog.v( "failed read first block");
         return 0;
       }
@@ -76,7 +95,7 @@ public class FirmwareUtils
 
       if ( dis.skipBytes( 1984 ) != 1984 ) {
         TDLog.v( "failed skip 1984");
-        return 0; // skip 8 bootloader blocks
+        return 0; // skip to 4096: bootloader blocks
       }
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
         TDLog.v( "failed read second block");
@@ -113,6 +132,7 @@ public class FirmwareUtils
       case 2610: len = 25040; break;
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
+      case 2700: len = 15476; break;
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
@@ -143,12 +163,15 @@ public class FirmwareUtils
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
+      case 2700: return ( checksum == 0x9EAC8AC7 );
     }
     return false;
   }
 
-  // check 64 bytes on the device
-  // @param signature   256-byte signature block on the DistoX af offset 2048
+  /** check 64 bytes on the device
+   * @param signature   256-byte signature block on the DistoX af offset 2048
+   * @return hardware type
+   */
   static int getDeviceHardware( byte[] signature )
   {
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
@@ -158,6 +181,10 @@ public class FirmwareUtils
     if ( verifySignatureLandolt( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
+    }
+    if ( verifySignatureTian( signature ) == SIGNATURE_SIZE ) {
+      TDLog.v( "device hw TIAN" );
+      return HW_TIAN; // FIXME was HW_HEEB
     }
     return HW_NONE;
   }
@@ -205,11 +232,12 @@ public class FirmwareUtils
   //      0010060  f835  f000  f834  4e24  f000  f830  1b00  1b49
   //
 
-  // signature is 64 bytes after the first 2048
-  //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
-  //                             -12    d5    d5    d5    f5    f5    d5    d5    d5
-  //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+  /** HEEB signature is 64 bytes after the first 2048
+   *                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
+   * signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  f894
+   *                             -12    d5    d5    d5    f5    f5    d5    d5    d5
+   *                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+   */
   static final private byte[] signatureHeeb = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
@@ -221,15 +249,28 @@ public class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  // signature is 64 bytes after the first 4096
-  //                        2.61  2.63  2.63
-  //                 13-12  5ba1  5da9  5dcd
-  //                   -16    b8    c0    c0
-  //
+  /** LANDOLT signature is 64 bytes after the first 4096
+   *                        2.61  2.63  2.63
+   *                 13-12  5ba1  5da9  5dcd
+   *                   -16    b8    c0    c0
+   */
   static final private byte[] signatureLandolt = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x00, (byte)0xf0, (byte)0xa2, (byte)0xf8,
     (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xa1, (byte)0x5b, (byte)0x00, (byte)0x08,
     (byte)0xb8, (byte)0x13, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
+    (byte)0x01, (byte)0x23, (byte)0x00, (byte)0x22, (byte)0xc0, (byte)0x46, (byte)0xf0, (byte)0xb5,
+    (byte)0xdb, (byte)0x07, (byte)0x27, (byte)0x4e, (byte)0x00, (byte)0xf0, (byte)0x3b, (byte)0xf8,
+    (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b, (byte)0x25, (byte)0x4e, (byte)0x00, (byte)0xf0,
+    (byte)0x35, (byte)0xf8, (byte)0x00, (byte)0xf0, (byte)0x34, (byte)0xf8, (byte)0x24, (byte)0x4e,
+    (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
+  };
+
+  /** LANDOLT signature is 64 bytes after the first ????
+   */
+  static final private byte[] signatureTian = {
+    (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
+    (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
+    (byte)0x40, (byte)0x0c, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
     (byte)0x01, (byte)0x23, (byte)0x00, (byte)0x22, (byte)0xc0, (byte)0x46, (byte)0xf0, (byte)0xb5,
     (byte)0xdb, (byte)0x07, (byte)0x27, (byte)0x4e, (byte)0x00, (byte)0xf0, (byte)0x3b, (byte)0xf8,
     (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b, (byte)0x25, (byte)0x4e, (byte)0x00, (byte)0xf0,
@@ -247,8 +288,10 @@ public class FirmwareUtils
   //   return false;
   // }
 
-  // verify the 64-byte signature block
-  // @param buf   signature block at 2048-offset
+  /** verify the 64-byte HEEB signature block
+   * @param buf   signature block at 2048-offset
+   * @return neg of failed byte or signature size
+   */
   private static int verifySignatureHeeb( byte[] buf )
   {
     for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
@@ -258,7 +301,10 @@ public class FirmwareUtils
     return SIGNATURE_SIZE; // success
   }
 
-  // @param buf   signature block at 4096-offset
+  /** verify the 64-byte LANDOLT signature block
+   * @param buf   signature block at 4096-offset
+   * @return neg of failed byte or signature size
+   */
   private static int verifySignatureLandolt( byte[] buf )
   {
     for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
@@ -268,12 +314,30 @@ public class FirmwareUtils
     return SIGNATURE_SIZE; // success
   }
 
+  /** verify the 64-byte TIAN signature block
+   * @param buf   signature block at ????-offset
+   * @return neg of failed byte or signature size
+   */
+  private static int verifySignatureTian( byte[] buf )
+  {
+    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
+      if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
+      if ( buf[k] != signatureTian[k] )
+        return -k;
+    }
+    return SIGNATURE_SIZE; // success
+  }
 
-  // guess the firmware version from a 64-byte block read from the file
-  //                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
-  // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  fb94
-  //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
-  //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+
+  /** @return the code of the HEEB firmware
+   * @param buf   signature block
+   *
+   * guess the firmware version from a 64-byte block read from the file
+   *                                   2.1   2.2   2.3   2.4  2.4c   2.5  2.5c  2.51
+   * signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  fb94
+   *                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
+   *                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
+   */
   private static int readFirmwareHeeb( byte[] buf )
   {
     if ( buf[7] == (byte)0xf8 ) {       // 2.1 2.2
@@ -314,9 +378,13 @@ public class FirmwareUtils
     return -99; // failed on byte[7]
   }
 
-  //                        261    263    264
-  //                 12-13  a1 5b  a9 5d  cd 5d
-  //                 16     b8     c0     c0
+  /** @return the code of the LANDOLT firmware
+   * @param buf   signature block
+   *
+   *                        261    263    264
+   *                 12-13  a1 5b  a9 5d  cd 5d
+   *                 16     b8     c0     c0
+   */
   private static int readFirmwareLandolt( byte[] buf )
   {
     if ( buf[12] == (byte)0xa1 &&  buf[13] == (byte)0x5b && buf[16] == (byte)0xb8 ) return 2610;
@@ -325,4 +393,16 @@ public class FirmwareUtils
     return -99; 
   }
 
+  /** @return the code of the TIAN firmware
+   * @param buf   signature block
+   */
+  private static int readFirmwareTian( byte[] buf )
+  {
+    if ( buf[7] == (byte)0xfb ) { 
+      if ( buf[6] == (byte)0x8A ) {
+        return 2700;
+      }
+    }
+    return -99; // failed on byte[7]
+  }
 }

@@ -13,29 +13,38 @@
  */
 package com.topodroid.dev.distox_ble;
 
-import android.content.Context;
+import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDUtil;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.R;
+
+import java.io.File;
+// import java.util.Set;
+import java.util.ArrayList;
+// import java.util.Comparator;
+// import java.util.Collections;
+
+// import android.app.Activity;
+// import android.app.Dialog;
 import android.os.Bundle;
+
+// import android.content.Intent;
+
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemClickListener;
 
-import com.topodroid.TDX.R;
-import com.topodroid.TDX.TDPath;
-import com.topodroid.TDX.TDToast;
-import com.topodroid.dev.distox2.FirmwareDialog;
-import com.topodroid.ui.MyDialog;
-import com.topodroid.utils.TDLog;
-import com.topodroid.utils.TDUtil;
-
-import java.io.File;
-import java.util.ArrayList;
+// import android.content.IntentFilter;
+import android.content.Context;
 
 
 public class XBLEFirmwareFileDialog extends MyDialog
-                         implements OnItemClickListener
+                                    implements OnItemClickListener
 {
   private final XBLEFirmwareDialog mParent;
 
@@ -96,7 +105,7 @@ public class XBLEFirmwareFileDialog extends MyDialog
   public void onItemClick(AdapterView<?> parent, View view, int position, long id)
   {
     if ( ! ( view instanceof TextView ) ) {
-      TDLog.Error("firmware file view instance of " + view.toString() );
+      TDLog.e("firmware file view instance of " + view.toString() );
       return;
     }
     String item = ((TextView) view).getText().toString();
@@ -105,7 +114,7 @@ public class XBLEFirmwareFileDialog extends MyDialog
     mList.setOnItemClickListener( null );
     dismiss();
 
-    mParent.setFile( item );
+    mParent.setFirmwareFile( item );
   }
 
 }

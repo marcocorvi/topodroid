@@ -21,6 +21,8 @@ import com.topodroid.TDX.TopoDroidAlertDialog;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TDPath;
 import com.topodroid.TDX.R;
+// import com.topodroid.dev.distox2.FirmwareFileDialog;
+// import com.topodroid.dev.distox2.FirmwareUtils;
 
 import java.io.File;
 // import java.io.FileInputStream;
@@ -45,7 +47,7 @@ import android.widget.EditText;
 import android.text.method.KeyListener;
 
 public class FirmwareDialog extends MyDialog
-                     implements View.OnClickListener
+                            implements View.OnClickListener
 {
   private RadioButton mBtnDump;
   private RadioButton mBtnUpload;
@@ -197,6 +199,7 @@ public class FirmwareDialog extends MyDialog
     // get the hardware version from the signature of the firmware on the DistoX
     // FIXME ASYNC_FIRMWARE_TASK
     // TDToast.makeLong( R.string.firmware_wait_check );
+	// SIWEI FIXME the signature should be checked
     byte[] signature = mApp.readFirmwareSignature( hw );
 
     if ( signature == null ) { // could not get firmware signature

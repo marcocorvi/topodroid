@@ -13,28 +13,38 @@
  */
 package com.topodroid.dev.distox_ble;
 
-import android.content.Context;
-import android.content.DialogInterface;
-import android.content.res.Resources;
-import android.os.Bundle;
-import android.text.method.KeyListener;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.RadioButton;
-
-import com.topodroid.TDX.R;
-import com.topodroid.TDX.TDPath;
-import com.topodroid.TDX.TDToast;
-import com.topodroid.TDX.TopoDroidAlertDialog;
-import com.topodroid.TDX.TopoDroidApp;
-import com.topodroid.dev.distox2.FirmwareFileDialog;
-import com.topodroid.dev.distox2.FirmwareUtils;
-import com.topodroid.prefs.TDSetting;
-import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
+import com.topodroid.ui.MyDialog;
+import com.topodroid.prefs.TDSetting;
+import com.topodroid.TDX.TopoDroidApp;
+import com.topodroid.TDX.TopoDroidAlertDialog;
+import com.topodroid.TDX.TDToast;
+import com.topodroid.TDX.TDPath;
+import com.topodroid.TDX.R;
+// import com.topodroid.dev.distox2.FirmwareFileDialog;
+// import com.topodroid.dev.distox2.FirmwareUtils;
 
 import java.io.File;
+// import java.io.FileInputStream;
+// import java.io.DataInputStream;
+// import java.io.IOException;
+
+import android.os.Bundle;
+
+import android.content.Context;
+import android.content.res.Resources;
+// import android.content.Intent;
+import android.content.DialogInterface;
+// import android.content.DialogInterface.OnCancelListener;
+// import android.content.DialogInterface.OnDismissListener;
+
+import android.view.View;
+import android.widget.Button;
+import android.widget.RadioButton;
+import android.widget.EditText;
+// import android.widget.TextView;
+
+import android.text.method.KeyListener;
 
 public class XBLEFirmwareDialog extends MyDialog
                      implements View.OnClickListener
@@ -84,7 +94,7 @@ public class XBLEFirmwareDialog extends MyDialog
     
   }
 
-  public void setFile( String filename )
+  public void setFirmwareFile( String filename )
   {
     mETfile.setText( filename );
   }
@@ -121,7 +131,7 @@ public class XBLEFirmwareDialog extends MyDialog
       }
       if ( mBtnDump.isChecked() ) {
         if ( ! filename.endsWith(".bin") ) filename = filename + ".bin";
-        // TDLog.LogFile( "Firmware dump to " + filename );
+        // TDLog.f( "Firmware dump to " + filename );
         TDLog.v( "Firmware dump to " + filename );
         // File fp = new File( TDPath.getBinFile( filename ) );
         File fp = TDPath.getBinFile( filename );
@@ -131,16 +141,16 @@ public class XBLEFirmwareDialog extends MyDialog
         }
         askDump( filename );
       } else if ( mBtnUpload.isChecked() ) {
-        // TDLog.LogFile( "Firmware upload from " + filename );
+        // TDLog.f( "Firmware upload from " + filename );
         TDLog.v( "Firmware upload from " + filename );
         // File fp = new File( TDPath.getBinFile( filename ) );
         File fp = TDPath.getBinFile( filename );
         if ( ! fp.exists() ) {
-          TDLog.Error( "non-existent upload firmware file " + filename );
+          TDLog.e( "non-existent upload firmware file " + filename );
           return;    
         }
         int fw = XBLEFirmwareUtils.readFirmwareFirmware( fp ); // guess firmware version
-        // TDLog.LogFile( "Detected Firmware version " + fw );
+        // TDLog.f( "Detected Firmware version " + fw );
         TDLog.v( "Detected Firmware version " + fw );
         boolean check = (fw > 0) && XBLEFirmwareUtils.firmwareChecksum( fw, fp );
         askUpload( filename, fw, check );
@@ -152,16 +162,16 @@ public class XBLEFirmwareDialog extends MyDialog
   private void askDump( final String filename )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mRes, R.string.ask_dump,
-      new OnClickListener() {
+      new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
-          // TDLog.LogFile( "Firmware dump to file " + filename );
+          // TDLog.f( "Firmware dump to file " + filename );
           TDLog.v( "Firmware dump to file " + filename );
           // FIXME ASYNC_FIRMWARE_TASK
           // TDToast.makeLong( R.string.firmware_wait_dump );
           // mApp.dumpFirmware( filename );
           int ret = mApp.dumpFirmware( filename );
-          // TDLog.LogFile( "Firmware dump to " + filename + " result: " + ret );
+          // TDLog.f( "Firmware dump to " + filename + " result: " + ret );
           TDLog.v( "Firmware dump to " + filename + " result: " + ret );
           if ( ret > 0 ) {
             TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_dumped), filename, ret ) );
@@ -182,14 +192,14 @@ public class XBLEFirmwareDialog extends MyDialog
     // final String pathname = TDPath.getBinFile( filename );
     int hw = XBLEFirmwareUtils.getHardware( fw );
     boolean compatible = XBLEFirmwareUtils.isCompatible( fw );
-    // TDLog.LogFile( "FW/HW compatible " + compatible + " FW check " + check );
+    // TDLog.f( "FW/HW compatible " + compatible + " FW check " + check );
     TDLog.v( "FW " + fw + " compatible " + compatible + " check " + check );
     compatible = compatible && check;
 
     // get the hardware version from the signature of the firmware on the DistoX
     // FIXME ASYNC_FIRMWARE_TASK
     // TDToast.makeLong( R.string.firmware_wait_check );
-    /*byte[] signature = mApp.readFirmwareSignature( hw );
+    byte[] signature = mApp.readFirmwareSignature( hw );
 
     if ( signature == null ) { // could not get firmware signature
       TDToast.makeLong( R.string.firmware_upload_no_sign );
@@ -197,11 +207,11 @@ public class XBLEFirmwareDialog extends MyDialog
     } else if ( hw != XBLEFirmwareUtils.getDeviceHardware( signature ) ) {
       TDToast.makeLong( R.string.firmware_upload_bad_sign );
       if ( TDSetting.mFirmwareSanity ) return;    
-    }*/
+    }
     String title = mRes.getString( compatible? R.string.ask_upload : R.string.ask_upload_not_compatible );
 
     TopoDroidAlertDialog.makeAlert( mContext, mRes, title,
-      new OnClickListener() {
+      new DialogInterface.OnClickListener() {
         @Override
         public void onClick( DialogInterface dialog, int btn ) {
           // String pathname = TDPath.getBinFile( filename );
@@ -210,11 +220,11 @@ public class XBLEFirmwareDialog extends MyDialog
           // mApp.uploadFirmware( filename );
           // File file = new File( pathname ); // file must exists
           File file = TDPath.getBinFile( filename );
-          // TDLog.LogFile( "Firmware uploading from " + file.getPath() );
+          // TDLog.f( "Firmware uploading from " + file.getPath() );
           TDLog.v( "Firmware uploading from " + file.getPath() );
           long len = file.length();
           int ret  = mApp.uploadFirmware( filename );
-          // TDLog.LogFile( "Firmware upload result: written " + ret + " bytes of " + len );
+          // TDLog.f( "Firmware upload result: written " + ret + " bytes of " + len );
           TDLog.v( "Dialog Firmware upload result: written " + ret + " bytes of " + len );
           if ( ret > 0 ) {
             TDToast.makeLong( String.format( mRes.getString(R.string.firmware_file_uploaded), filename, ret, len ) );
