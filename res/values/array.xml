@@ -222,7 +222,7 @@
      <item name="default">default</item>
      <item name="english">English</item>
      <!-- item name="french">Français</item -->
-     <!-- item name="spanish">Español</item -->
+     <item name="spanish">Español</item>
      <item name="italian">Italiano</item>
      <item name="russian">Русский</item>
      <!-- item name="german">Deutsch</item -->
@@ -240,7 +240,7 @@
      <item name="default"></item>
      <item name="english">en</item>
      <!-- item name="french">fr</item -->
-     <!-- item name="spanish">es</item -->
+     <item name="spanish">es</item>
      <item name="italian">it</item>
      <item name="russian">ru</item>
      <!-- item name="german">de</item -->

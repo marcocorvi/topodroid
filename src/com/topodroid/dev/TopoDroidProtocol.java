@@ -187,15 +187,19 @@ public class TopoDroidProtocol
               mDistance = 100 + (d-100000) / 100.0;
             }
             break;
+          case Device.DISTO_XBLE: // SIWEI TIAN
+            if ( d < 99999 ) {
+              mDistance = d / 1000.0;
+            } else {
+              mDistance = 100 + (d-100000) / 100.0;
+            }
+            break;
           case Device.DISTO_BRIC4: 
             TDLog.e("TD proto: does not handle packet BLE");
             break;
           case Device.DISTO_SAP5: 
             // TDLog.v( "TD proto: handle packet SAP");
             mDistance = d / 1000.0;
-            break;
-          case Device.DISTO_XBLE:
-            // TODO
             break;
           default:
             mDistance = d / 1000.0;
@@ -214,7 +218,7 @@ public class TopoDroidProtocol
         // TDLog.v( String.format(Locale.US, "TD proto: Packet-D %7.2f %6.1f %6.1f (%6.1f)", mDistance, mBearing, mClino, mRoll ) );
         return DataType.PACKET_DATA;
       case MemoryOctet.BYTE_PACKET_G: // G 0x02
-        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE || mDeviceType == Device.DISTO_A3 ) { // SIWEI FIXME
           mGX = MemoryOctet.toInt( buffer[2], buffer[1] );
           mGY = MemoryOctet.toInt( buffer[4], buffer[3] );
           mGZ = MemoryOctet.toInt( buffer[6], buffer[5] );
@@ -226,7 +230,7 @@ public class TopoDroidProtocol
         }
         break;
       case MemoryOctet.BYTE_PACKET_M: // M 0x03
-        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE || mDeviceType == Device.DISTO_A3 ) { // SIWEI FIXME
           mMX = MemoryOctet.toInt( buffer[2], buffer[1] );
           mMY = MemoryOctet.toInt( buffer[4], buffer[3] );
           mMZ = MemoryOctet.toInt( buffer[6], buffer[5] );
@@ -254,12 +258,10 @@ public class TopoDroidProtocol
 	  // }
           // TDLog.v( "Proto packet V " + String.format(Locale.US, " %.2f %.2f %.2f roll %.1f", mAcceleration, mMagnetic, mDip, mRoll ) );
           return DataType.PACKET_VECTOR;
-        } else if ( mDeviceType == Device.DISTO_XBLE ) {
-          // FIXME
         }
         break;
       case MemoryOctet.BYTE_PACKET_REPLY: // Reply packet 0x38
-        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_A3 ) {
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE || mDeviceType == Device.DISTO_A3 ) { // SIWEI FIXME
           mAddress[0] = buffer[1];
           mAddress[1] = buffer[2];
           {

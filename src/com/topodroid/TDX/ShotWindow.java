@@ -900,6 +900,7 @@ public class ShotWindow extends Activity
       // }
     } else if ( TDLevel.overNormal && (! TDInstance.isDivingMode()) && p++ == pos ) { // DEVICE
       if ( DeviceUtil.isAdapterEnabled() ) {
+	    // referrer ? SIWEI
         if ( mDataDownloader.isDownloading() ) {
           TDToast.makeWarn( R.string.no_device_window );
         } else {
@@ -1669,7 +1670,7 @@ public class ShotWindow extends Activity
     // }
   }
 
-  /** serah shots that satisfy a specified flag
+  /** search shots that satisfy a specified flag
    * @param flag  search flag (see DBlock)
    */
   void searchShot( long flag ) 

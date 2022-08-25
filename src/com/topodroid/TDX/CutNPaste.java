@@ -14,6 +14,8 @@ package com.topodroid.TDX;
 // import com.topodroid.utils.TDLog;
 import static android.view.Gravity.LEFT;
 
+import com.topodroid.dev.distox_ble.DistoXBLETakeShot; // SIWEI
+
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
@@ -324,7 +326,89 @@ public class CutNPaste
         ww = textview4.getPaint().measureText( text );
         if ( ww > w ) w = ww;
       }
-    } 
+    } else if ( TDInstance.deviceType() == Device.DISTO_XBLE ) { // SIWEI
+      // ----- TURN LASER ON
+      text = res.getString(R.string.remote_on);
+      textview1 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+        new View.OnClickListener( ) {
+          @Override public void onClick(View v) {
+            app.setXBLELaser( Device.LASER_ON, 0, null, DataType.DATA_ALL, true );
+            dismissPopupBT();
+          }
+        }
+	  );
+      float ww = textview1.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      // ----- TURN LASER OFF
+      text = res.getString(R.string.remote_off);
+      textview2 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+              new View.OnClickListener( ) {
+                @Override public void onClick(View v) {
+                  app.setXBLELaser( Device.LASER_OFF, 0, null, DataType.DATA_ALL,true );
+                  dismissPopupBT();
+                }
+              } );
+      ww = textview2.getPaint().measureText( text );
+      if ( ww > w ) w = ww;
+
+      if ( gm_data ) {
+        // ----- MEASURE ONE CALIB DATA AND DOWNLOAD IF MODE IS CONTINUOUS
+        text = res.getString( R.string.popup_do_gm_data );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  @Override public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    new DistoXBLETakeShot( i_lister, (TDSetting.mCalibShotDownload ? lister : null), app, 1, DataType.DATA_CALIB ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+
+        if ( TDSetting.isConnectionModeContinuous() ) {
+          // ----- MEASURE ONE CALIB GROUP AND DOWNLOAD : NEED MODE CONTINUOUS
+          text = res.getString( R.string.popup_do_gm_group );
+          textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                  new View.OnClickListener( ) {
+                    public void onClick(View v) {
+                      // i_lister.enableBluetoothButton(false);
+                      new DistoXBLETakeShot( i_lister, lister, app, 4, DataType.DATA_CALIB ).execute();
+                      dismissPopupBT();
+                    }
+                  } );
+          ww = textview3.getPaint().measureText( text );
+          if ( ww > w ) w = ww;
+        }
+
+      } else {
+        // ----- MEASURE ONE SPLAY AND DOWNLOAD IT IF MODE IS CONTINUOUS
+        text = res.getString( R.string.popup_do_splay );
+        textview3 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous() ? lister : null), app, 1, DataType.DATA_SHOT ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview3.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+
+        // ----- MEASURE ONE LEG AND DOWNLOAD IT IF MODE IS CONTINUOUS
+        text = res.getString(R.string.popup_do_leg);
+        textview4 = makePopupButton( context, text, popup_layout, lWidth, lHeight,
+                new View.OnClickListener( ) {
+                  public void onClick(View v) {
+                    // i_lister.enableBluetoothButton(false);
+                    new DistoXBLETakeShot( i_lister, (TDSetting.isConnectionModeContinuous()? lister : null), app, TDSetting.mMinNrLegShots, DataType.DATA_SHOT ).execute();
+                    dismissPopupBT();
+                  }
+                } );
+        ww = textview4.getPaint().measureText( text );
+        if ( ww > w ) w = ww;
+      }
+    }
     else if ( TDInstance.deviceType() == Device.DISTO_BRIC4 ) // -----------------------------------------------------
     {
       // ----- TURN LASER ON/OFF

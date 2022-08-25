@@ -171,6 +171,9 @@ public class TDInstance
    */
   static boolean isContinuousMode() 
   {
+    if ( isDeviceDistoXBLE() ) { // SIWEI
+      return TDSetting.isConnectionModeContinuous();
+    }
     return TDSetting.isConnectionModeContinuous() || isDeviceBLE();
   }
 
@@ -178,7 +181,7 @@ public class TDInstance
    */
   static boolean hasDeviceRemoteControl() 
   {
-    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() ); 
+    return deviceA != null && ( deviceA.isX310() || deviceA.isBric() || deviceA.isDistoXBLE() ); // SIWEI
   }
 
   // FIXME VirtualDistoX

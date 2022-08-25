@@ -1837,7 +1837,7 @@ public class TopoDroidApp extends Application
    */
   static private void installFirmware( boolean overwrite )
   {
-    TDLog.f("APP FW install firmware. overwrite: " + overwrite );
+    TDLog.v("APP FW install firmware. overwrite: " + overwrite );
     InputStream is = TDInstance.getResources().openRawResource( R.raw.firmware );
     firmwareUncompress( is, overwrite );
     try { is.close(); } catch ( IOException e ) { }
@@ -2369,9 +2369,11 @@ public class TopoDroidApp extends Application
         }
       }
       comm.registerInfo( info );
-      comm.writeGetInfoCmd();
+      // comm.writeGetInfoCmd();
+	  comm.GetXBLEInfo();
+	  
       if ( comm.isConnected() ) {
-          TDUtil.yieldDown( 1000 );
+          TDUtil.yieldDown( 1000 ); // 500
           disconnectComm();
       }
       return true;
@@ -2468,6 +2470,26 @@ public class TopoDroidApp extends Application
     }
   }
 
+  /** set the Disto-XBLE laser
+   * @param what      what to do:  0: off, 1: on, 2: measure
+   * @param nr        number od data to download
+  # @param lister    optional lister
+   * @param data_type type of expected data
+   *                  SIWEI TIAN added on Jul
+   */
+  public void setXBLELaser( int what, int nr, Handler /* ILister */ lister, int data_type, boolean closeBT ) // FIXME_LISTER
+  {
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return;
+    if ( mComm instanceof DistoXBLEComm ) {
+      DistoXBLEComm comm = (DistoXBLEComm)mComm;
+      if ( comm != null ) {
+        comm.setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT);
+      }
+    } else {
+      TDLog.Error("set XBLE laser: not XBLE comm");
+    }
+  }
+
   // int readFirmwareHardware()
   // {
   //   return mComm.readFirmwareHardware( TDInstance.getDeviceA().getAddress() );
@@ -2479,14 +2501,14 @@ public class TopoDroidApp extends Application
    */
   public byte[] readFirmwareSignature( int hw )
   {
-    TDLog.f("APP FW read signature - HW " + hw );
+    TDLog.v("APP FW read signature - HW " + hw );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_SIGN, filename )).execute( );
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return null;
-    if ( ! (mComm instanceof DistoX310Comm) ) return null;
+    if ( ! (mComm instanceof DistoX310Comm) && ! (mComm instanceof DistoXBLEComm)) return null;              //SIWEI TIAN
     return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
   }
 
@@ -2496,7 +2518,7 @@ public class TopoDroidApp extends Application
    */
   public int dumpFirmware( String name )
   {
-    TDLog.f("APP FW dump " + name );
+    TDLog.v("APP FW dump " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
@@ -2510,27 +2532,35 @@ public class TopoDroidApp extends Application
 
   /** read a firmware reading it from a file - only X310
    * @param name   filename including ".bin" extension
-   * @return ...
+   * @return ... (-1 on error)
    */
   public int uploadFirmware( String name )
   {
-    TDLog.f("APP FW upload " + name );
+    TDLog.v("APP FW upload " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // String pathname = TDPath.getBinFilename( name );
-    // TDLog.f( "Firmware upload address " + TDInstance.deviceAddress() );
-    // TDLog.f( "Firmware upload file " + pathname );
+    // TDLog.v( "Firmware upload address " + TDInstance.deviceAddress() );
+    // TDLog.v( "Firmware upload file " + pathname );
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_WRITE, name )).execute( ); 
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    if ( ! (mComm instanceof DistoX310Comm) ) return -1;
+    if ( ! (mComm instanceof DistoX310Comm) && ! (mComm instanceof DistoXBLEComm)) return -1;     //SIWEI TIAN
     File file = TDPath.getBinFile( name ); // PRIVATE FILE
-    // TDLog.f( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
-    // TDLog.f( "Firmware upload file " + file.getPath() );
-    TDLog.f("APP FW upload file " + file.getPath() );
+    // TDLog.v( "Firmware upload address " + TDInstance.deviceAddress() + " file " + file.getPath() );
+    // TDLog.v( "Firmware upload file " + file.getPath() );
+    TDLog.v("APP FW upload file " + file.getPath() );
     // return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), pathname );
-    return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+    //SIWEI TIAN
+    if ( mComm instanceof DistoX310Comm ) {
+      return ((DistoX310Comm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+    } else if ( mComm instanceof DistoXBLEComm ) {
+      return ((DistoXBLEComm)mComm).uploadFirmware( TDInstance.deviceAddress(), file );
+    } else {
+      TDLog.e("DistoX device with no firmware upload");
+    }
+    return -1;
   }
 
   // ----------------------------------------------------------------------

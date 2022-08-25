@@ -13,6 +13,8 @@ package com.topodroid.TDX;
 
 import com.topodroid.dev.distox_ble.DistoXBLEInfoDialog; // SIWEI_TIAN
 import com.topodroid.dev.distox_ble.DistoXBLEInfoReadTask;
+import com.topodroid.dev.distox_ble.DistoXBLEMemoryDialog;
+import com.topodroid.dev.distox_ble.XBLEFirmwareDialog;
 
 import com.topodroid.utils.TDLog;
 // import com.topodroid.utils.TDString;
@@ -111,10 +113,16 @@ public class DeviceActivity extends Activity
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
 
+  // referrer ( getReferrer() is from API-22 ) // SIWEI
+  // public final int REFERRER_NONE = 0;
+  // public final int REFERRER_MAIN = 1;
+  // public final int REFERRER_SHOT = 2;
+  // private int mReferrer = REFERRER_NONE;
+
   // public static final int MODE_NORMAL = 0;
   // public static final int MODE_SELECT = 1;
   // private int mMode = MODE_NORMAL; // modw of work of the activity
-
+  
   public static boolean mDeviceActivityVisible = false;
 
   private TextView mTvAddress;
@@ -211,6 +219,8 @@ public class DeviceActivity extends Activity
     }
   };
 
+  // public int getMyReferrer() { return mReferrer; } // SIWEI
+
 // -------------------------------------------------------------------
   private void setState()
   {
@@ -291,7 +301,20 @@ public class DeviceActivity extends Activity
 
     TDandroid.setScreenOrientation( this );
 
-    // mMode = MODE_NORMAL;
+    // mReferrer = REFERRER_NONE; // SIWEI
+    // Bundle extras = getIntent().getExtras();
+    // if ( extras != null ) {
+    //   try { 
+    //     String mode = extras.getString( TDTag.TOPODROID_DEVICE_MODE );
+    //     if ( mode != null ) mReferrer = Interger.parseInt( mode );
+    //   } catch ( Exception e ) { }
+    // }
+    // TDLog.v( "device mode " + mReferrer );
+    
+    // Uri referrer = getReferrer(); // API 22 (5.1)
+    // TDLog.v( "device referre " + referrer.toString() );
+    
+	// mMode = MODE_NORMAL;
     // Bundle extras = getIntent().getExtras();
     // if ( extras != null ) {
     //   try { 
@@ -300,7 +323,7 @@ public class DeviceActivity extends Activity
     //   } catch ( Exception e ) { }
     // }
     // TDLog.v( "device mode " + mMode );
-    
+
     // TDLog.Debug("device activity on create");
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData  = TopoDroidApp.mDData;
@@ -566,7 +589,7 @@ public class DeviceActivity extends Activity
   public void showDistoXButtons( )
   {
     // if ( mMode == MODE_SELECT ) return; // nothing in mode SELECT
-    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_TIAN Changed on Jun 2022
+    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_Changed on Jun 2022
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
@@ -667,7 +690,9 @@ public class DeviceActivity extends Activity
         } else if ( currDeviceA().mType == Device.DISTO_X310 ) {
           new DeviceX310MemoryDialog( this, this ).show();
         } else if ( currDeviceA().mType == Device.DISTO_BRIC4 ) {
-          (new BricMemoryDialog( this, this, getResources() )).show();
+          (new BricMemoryDialog(this, this, getResources())).show();
+        } else if(currDeviceA().mType == Device.DISTO_XBLE) { // SIWEI                   //SIWEI TIAN
+          new DistoXBLEMemoryDialog(this,this).show();
         } else {
           TDToast.makeBad( "Unknown device type " + currDeviceA().mType );
         }
@@ -1017,6 +1042,9 @@ public class DeviceActivity extends Activity
           mApp.resetComm();
           (new FirmwareDialog( this, getResources(), mApp )).show();
         // }
+      } else if(TDInstance.deviceType() == Device.DISTO_XBLE) { //SIWEI TIAN
+        mApp.resetComm();
+        (new XBLEFirmwareDialog( this, getResources(), mApp )).show();
       } else {
         TDToast.makeLong( R.string.firmware_not_supported );
       }
