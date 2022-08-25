@@ -1551,10 +1551,10 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_linecorner_summary">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_graph_paper_scale_title">Escala de papel cuadriculado</string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
+  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
+  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
-  <string name="pref_weedlength_title">Longitud máxima del segmento de limpieza de punto</string>
-  <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea</string>
   <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
   <string name="pref_weedbuffer_summary">Zona de influencia alrededor de los segmentos de eliminación [pxl]</string>
   <string name="pref_calib_algo_title">Algoritmo</string>
@@ -1876,7 +1876,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
-    <string name="info_surveys">Proyecto</string>
+    <string name="info_survey">Proyecto</string>
     <string name="info_shot">toma</string>
     <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
