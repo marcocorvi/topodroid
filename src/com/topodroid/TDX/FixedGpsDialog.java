@@ -55,19 +55,20 @@ import android.location.LocationManager;
 import android.location.GpsStatus;
 import android.location.GpsSatellite;
 // import android.location.GpsStatus.Listener;
+import android.location.GnssStatus; // TODO
 
 import android.net.Uri;
 
 class FixedGpsDialog extends MyDialog
-                            implements View.OnClickListener
-                                     , View.OnLongClickListener
-                                     , TextView.OnEditorActionListener
-                                     , LocationListener
-                                     , GpsStatus.Listener
+                     implements View.OnClickListener
+                              , View.OnLongClickListener
+                              , TextView.OnEditorActionListener
+                              , LocationListener
+                              , GpsStatus.Listener
 {
   private final FixedActivity mParent;
   // private boolean  mLocated;
-  private LocationManager locManager = null;
+  private LocationManager mLocManager = null;
   private WorldMagneticModel mWMM;
 
   private TextView mTVlat;
@@ -93,8 +94,12 @@ class FixedGpsDialog extends MyDialog
   private boolean mHasLocation;
   private int mNrSatellites = 0;
 
-  private GpsStatus mStatus;
+  private boolean useGps = TDandroid.BELOW_API_24;
+  // private GpsStatus mGpsStatus = null;   // deprecated API-24 crash API-31
+  // private GnssStatus mGnssStatus = null; // added API-24
+  private GnssStatus.Callback mGnssStatusCallback = null; // added API-24
   private boolean mLocating; // whether is locating
+  private boolean mGpsEnabled = false;
 
   private MyKeyboard mKeyboard;
 
@@ -104,9 +109,15 @@ class FixedGpsDialog extends MyDialog
     super( context, null, R.string.FixedGpsDialog ); // null app
     mParent = parent;
     if ( TDandroid.checkLocation( context ) ) { // CHECK_PERMISSIONS
-      locManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
-      if ( locManager != null ) {
-        mStatus = locManager.getGpsStatus( null );
+      mLocManager = (LocationManager) mContext.getSystemService( Context.LOCATION_SERVICE );
+      if ( mLocManager != null ) {
+        if ( useGps /* TDandroid.BELOW_API_31 */ ) {
+          // mGpsStatus = mLocManager.getGpsStatus( null );
+          mGpsEnabled = true; // FIXME
+        } else { // TODO
+          mGpsEnabled = mLocManager.isProviderEnabled( LocationManager.GPS_PROVIDER );
+          // TDLog.v("GNSS gps enabled " + mGpsEnabled );
+        }
       }
     }
     mHasLocation = false;
@@ -247,6 +258,7 @@ class FixedGpsDialog extends MyDialog
         do_toast = true;
       }
     } else if ( b == mBtnLoc ) {
+      // TDLog.v("GNSS locating " + mLocating );
       if ( mLocating ) {
         setGPSoff();
       } else {      
@@ -320,9 +332,20 @@ class FixedGpsDialog extends MyDialog
   {
     mBtnLoc.setText( mContext.getResources().getString( R.string.button_gps_start ) );
     mBtnStatus.setBackgroundColor( 0xff3366ff );
-    if ( locManager != null ) {
-      locManager.removeUpdates( this );
-      locManager.removeGpsStatusListener( this );
+    stopLocating();
+  }
+
+  private void stopLocating()
+  {
+    if ( mLocManager != null ) {
+      // TDLog.v("GNSS stop locating ");
+      mLocManager.removeUpdates( this );
+      if ( useGps /* TDandroid.BELOW_API_31 */ ) {
+        mLocManager.removeGpsStatusListener( this );
+      } else { // TODO
+        mLocManager.unregisterGnssStatusCallback( mGnssStatusCallback );
+        mGnssStatusCallback = null;
+      }
     }
     mLocating = false;
   }
@@ -335,9 +358,33 @@ class FixedGpsDialog extends MyDialog
     mBtnStatus.setText( TDString.ZERO );
     mBtnStatus.setBackgroundColor( 0x80ff0000 );
     mErr2 = -1; // restart location averaging
-    if ( locManager != null ) {
-      locManager.addGpsStatusListener( this );
-      locManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
+    if ( mLocManager != null && mGpsEnabled ) {
+      // TDLog.v("GNSS start locating ");
+      if ( useGps /* TDandroid.BELOW_API_31 */ ) { 
+        mLocManager.addGpsStatusListener( this );
+      } else { // TODO
+        if ( mGnssStatusCallback == null ) {
+          mGnssStatusCallback = new GnssStatus.Callback() {
+            @Override public void onFirstFix( int millis ) { TDLog.v("GNSS first fix " + millis ); }
+
+            @Override public void onSatelliteStatusChanged( GnssStatus status )
+            {
+              int nr = status.getSatelliteCount();
+              int nr_sat = 0;
+              for ( int k = 0; k<nr; ++k ) if ( status.usedInFix( k ) ) nr_sat++;
+              // TDLog.v("GNSS satellites " + nr_sat );
+              setNrSatellites( nr_sat );
+            }
+
+            @Override public void onStarted() { TDLog.v("GNSS started" ); }
+
+            @Override public void  onStopped() { TDLog.v("GNSS stopped" ); }
+
+          };       
+        }
+        mLocManager.registerGnssStatusCallback( mGnssStatusCallback );
+      }
+      mLocManager.requestLocationUpdates( LocationManager.GPS_PROVIDER, 1000, 0, this );
       mLocating = true;
     }
   }
@@ -350,65 +397,86 @@ class FixedGpsDialog extends MyDialog
     // mLocated = true;
   }
 
+  @Override
   public void onProviderDisabled( String provider )
   {
   }
 
+  @Override
   public void onProviderEnabled( String provider )
   {
   }
 
+  @Override
   public void onStatusChanged( String provider, int status, Bundle extras )
   {
-    // TDLog.Log(TDLog.LOG_LOC, "onStatusChanged status " + status );
+    // TDLog.v("onStatusChanged provider " + provider + " status " + status );
   }
 
   @SuppressLint("MissingPermission")
   private int getNrSatellites()
   {
-    locManager.getGpsStatus( mStatus );
-    Iterator< GpsSatellite > sats = mStatus.getSatellites().iterator();
     int  nr = 0;
-    while( sats.hasNext() ) {
-      GpsSatellite sat = sats.next();
-      if ( sat.usedInFix() ) ++nr;
+    if ( useGps /* TDandroid.BELOW_API_31 */ ) {
+      GpsStatus gps_status = mLocManager.getGpsStatus( null );
+      Iterator< GpsSatellite > sats = gps_status.getSatellites().iterator();
+      while( sats.hasNext() ) {
+        GpsSatellite sat = sats.next();
+        if ( sat.usedInFix() ) ++nr;
+      }
+    } else { // TODO
+      // GnssStatus gnss_status = (new GnssStatus.Builder()).build();
+      // nr = gnss_status.getSatelliteCount();
+      // TDLog.v("GNSS satellites " + nr );
+      nr = mNrSatellites;
     }
     return nr;
   }
 
+  @Override
   public void onGpsStatusChanged( int event ) 
   {
+    // TDLog.v("GNSS gps status change " + event );
     if ( event == GpsStatus.GPS_EVENT_SATELLITE_STATUS ) {
-      if ( locManager == null ) {
+      // TDLog.v("GNSS gps status satellite change");
+      if ( mLocManager == null ) {
         return;
       }
-      mNrSatellites = getNrSatellites();
-      // TDLog.Log(TDLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + mNrSatellites );
-      // TDLog.v( "GPS Status Changed nr satellites used in fix " + mNrSatellites );
-      mBtnStatus.setText( String.format(Locale.US, "%d", mNrSatellites ) );
+      setNrSatellites( getNrSatellites() );
+    }
+  }
 
-      switch ( mNrSatellites ) {
-        case 0: mBtnStatus.setBackgroundColor( 0x80ff0000 );
-                break;
-        case 1: mBtnStatus.setBackgroundColor( 0x80993333 );
-                break;
-        case 2: mBtnStatus.setBackgroundColor( 0x80666633 );
-                break;
-        case 3: mBtnStatus.setBackgroundColor( 0x80339933 );
-                break;
-        default: mBtnStatus.setBackgroundColor( 0x8000ff00 );
-                break;
-      }
+  /** set the number of satellites (used in fix) and update interface accordingly
+   * @param nr number of satellites
+   */
+  private void setNrSatellites( int nr )
+  {
+    mNrSatellites = nr;
+    // TDLog.Log(TDLog.LOG_LOC, "onGpsStatusChanged nr satellites used in fix " + mNrSatellites );
+    // TDLog.v( "GPS Status Changed nr satellites used in fix " + mNrSatellites );
+    mBtnStatus.setText( String.format(Locale.US, "%d", mNrSatellites ) );
 
-      if ( mNrSatellites > 3 ) {
-        try {
-          Location loc = locManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
-          if ( loc != null ) displayLocation( loc /*, false*/ );
-        } catch ( IllegalArgumentException e ) {
-          TDLog.Error( "onGpsStatusChanged IllegalArgumentException " );
-        } catch ( SecurityException e ) {
-          TDLog.Error( "onGpsStatusChanged SecurityException " );
-        }
+    switch ( mNrSatellites ) {
+      case 0: mBtnStatus.setBackgroundColor( 0x80ff0000 );
+              break;
+      case 1: mBtnStatus.setBackgroundColor( 0x80993333 );
+              break;
+      case 2: mBtnStatus.setBackgroundColor( 0x80666633 );
+              break;
+      case 3: mBtnStatus.setBackgroundColor( 0x80339933 );
+              break;
+      default: mBtnStatus.setBackgroundColor( 0x8000ff00 );
+              break;
+    }
+
+    if ( mNrSatellites > 3 ) {
+      try {
+        Location loc = mLocManager.getLastKnownLocation( LocationManager.GPS_PROVIDER );
+        if ( loc != null ) displayLocation( loc /*, false*/ );
+      } catch ( IllegalArgumentException e ) {
+        TDLog.Error( "onGpsStatusChanged IllegalArgumentException " );
+      } catch ( SecurityException e ) {
+        TDLog.Error( "onGpsStatusChanged SecurityException " );
       }
     }
   }
@@ -420,13 +488,7 @@ class FixedGpsDialog extends MyDialog
   {
     if ( CutNPaste.dismissPopup() ) return;
     if ( MyKeyboard.close( mKeyboard ) ) return;
-    if ( mLocating ) {
-      if ( locManager != null ) {
-        locManager.removeUpdates( this );
-        locManager.removeGpsStatusListener( this );
-      }
-      mLocating = false;
-    }
+    stopLocating();
     dismiss();
   }
 

@@ -700,7 +700,7 @@ public class MainWindow extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    TDLog.v("MAIN on create");
+    TDLog.v("MAIN on Create");
 
     TDandroid.setScreenOrientation( this );
 
@@ -1062,8 +1062,7 @@ public class MainWindow extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    // TDLog.Log( TDLog.LOG_MAIN, "onStart check BT " + mApp.mCheckBT + " enabled " + DeviceUtil.isAdapterEnabled() );
-    TDLog.v( "MAIN onStart check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
+    TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
       TDandroid.requestExternalStorage( this, this );
     }
@@ -1149,6 +1148,12 @@ public class MainWindow extends Activity
     // setMenuAdapter();
     // closeMenu();
 
+    // FIXME added three calls - but they should not be necessary ...
+    mListView.invalidate();
+    mMenuImage.invalidate();
+    updateDisplay( ); // this was already done
+    ((ListView) findViewById(R.id.td_list)).invalidate();
+
     // TDLog.v( "onResume runs on " + TDLog.threadId() );
 
     // TDLog.Profile("TDActivity onResume");
@@ -1160,7 +1165,6 @@ public class MainWindow extends Activity
     // This is necessary: switching display off/on there is the call sequence
     //    [off] onSaveInstanceState
     //    [on]  onResume
-    updateDisplay( );
     if ( TopoDroidApp.mCheckManualTranslation ) {
       TopoDroidApp.mCheckManualTranslation = false;
       checkManualTranslation();
