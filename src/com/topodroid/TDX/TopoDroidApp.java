@@ -848,7 +848,7 @@ public class TopoDroidApp extends Application
       //   BluetoothDevice bt_device = TDInstance.getBleDevice();
       //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
-      } else if (TDInstance.isDeviceDistoXBLE()){ // SIWEI_TIAN changed on Jun 2022
+      } else if (TDInstance.isDeviceXBLE()){ // SIWEI_TIAN changed on Jun 2022
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );

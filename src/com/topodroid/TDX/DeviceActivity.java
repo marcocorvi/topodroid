@@ -585,12 +585,15 @@ public class DeviceActivity extends Activity
   }
 
   /** display the buttons for device actions
+   * @note the set of buttons depends on the current device
    */
   public void showDistoXButtons( )
   {
     // if ( mMode == MODE_SELECT ) return; // nothing in mode SELECT
-    if ( TDInstance.isDeviceDistoX() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_Changed on Jun 2022
+    if ( TDInstance.isDeviceDistoX() ) {
       for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE );
+    } else if ( TDInstance.isDeviceXBLE()) { // SIWEI Changed on Jun 2022
+      for ( int k=1; k<mNrButton1; ++k ) mButton1[k].setVisibility( View.VISIBLE ); // FIXME is this OK ?
     } else if ( TDInstance.isDeviceBric() ) {
       mButton1[IDX_INFO].setVisibility( View.VISIBLE );
       for ( int k=2; k<mNrButton1; ++k ) mButton1[k].setVisibility( (k == IDX_MEMORY )? View.VISIBLE : View.GONE );

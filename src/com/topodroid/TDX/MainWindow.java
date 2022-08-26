@@ -126,6 +126,7 @@ public class MainWindow extends Activity
   private Button[] mButton1;
   private BitmapDrawable  mButtonDistoX1;
   private BitmapDrawable  mButtonDistoX2;
+  private BitmapDrawable  mButtonDistoX3;
   private BitmapDrawable  mButtonSap5;
   private BitmapDrawable  mButtonBric4;
 
@@ -964,8 +965,9 @@ public class MainWindow extends Activity
     mButtonView1 = new MyHorizontalButtonView( mButton1 );
     mListView.setAdapter( mButtonView1.mAdapter );
 
-    mButtonDistoX2 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto2b );
     mButtonDistoX1 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto1b );
+    mButtonDistoX2 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto2b );
+    mButtonDistoX3 = MyButton.getButtonBackground( this, res, R.drawable.iz_disto3b );
     mButtonSap5    = MyButton.getButtonBackground( this, res, R.drawable.iz_sap5 );
     mButtonBric4   = MyButton.getButtonBackground( this, res, R.drawable.iz_bric4 );
 
@@ -1000,8 +1002,10 @@ public class MainWindow extends Activity
    */
   public void setButtonDevice()
   {
-    if ( TDInstance.isDeviceX310() || TDInstance.isDeviceDistoXBLE()) { // SIWEI_TIAN            //Siwei Tian changed on Jun 2022
+    if ( TDInstance.isDeviceX310() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX2 );
+    } else if ( TDInstance.isDeviceXBLE() ) { 
+      TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX3 );
     } else if ( TDInstance.isDeviceA3() ) {
       TDandroid.setButtonBackground( mButton1[BTN_DEVICE], mButtonDistoX1 );
     } else if ( TDInstance.isDeviceSap() ) {
