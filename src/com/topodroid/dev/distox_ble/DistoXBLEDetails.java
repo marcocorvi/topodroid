@@ -13,7 +13,7 @@ package com.topodroid.dev.distox_ble;
 
 public class DistoXBLEDetails 
 {
-  static final int MAX_INDEX_X310 = 1064;
+  static final int MAX_INDEX_XBLE = 1064;
 
   // address of status word in DistoX2 memory
   /*final static int[] STATUS_ADDRESS = {
@@ -31,7 +31,7 @@ public class DistoXBLEDetails
   public static boolean boundHeadTail( int[] ht )
   {
     if ( ht[0] < 0 ) ht[0] = 0;
-    if ( ht[1] > MAX_INDEX_X310 ) ht[1] = MAX_INDEX_X310;
+    if ( ht[1] > MAX_INDEX_XBLE ) ht[1] = MAX_INDEX_XBLE;
     return ( ht[0] < ht[1] );
   }
 

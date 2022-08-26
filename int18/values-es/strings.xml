@@ -74,6 +74,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
+    <string name="memoryXBLE">Memoria DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Datos DistoX</string -->
 
     <string name="thp_user">Usuario</string>

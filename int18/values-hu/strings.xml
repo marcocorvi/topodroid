@@ -74,6 +74,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="memoryA3">DistoX A3 memória </string>
     <string name="memoryX310">DistoX X310 memória</string>
+    <string name="memoryXBLE">DistoX-BLE memória</string>
     <!-- UNUSED string name="memory_data">DistoX adat</string -->
 
     <string name="thp_user">felhasználó</string>

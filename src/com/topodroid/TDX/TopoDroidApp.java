@@ -1245,6 +1245,27 @@ public class TopoDroidApp extends Application
     return -1;
   }
 
+  /** read the DistoX-BLE memory
+   * @param address   device address
+   * @param h0        from address (?)
+   * @param h1        to address (?)
+   * @param memory    array of octets to be filled by the memory-read
+   * @return number of octets that have been read (-1 on error)
+   */
+  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  {
+    if ( mComm == null || isCommConnected() ) return -1;
+    if ( mComm instanceof DistoXBLEComm ) {
+      DistoXBLEComm comm = (DistoXBLEComm)mComm;
+      int ret = comm.readXBLEMemory( address, h0, h1, memory );
+      resetComm();
+      return ret;
+    } else {
+      TDLog.e("read XBLE memory: not XBLE comm");
+    }
+    return -1;
+  }
+
   /** read the DistoX (A3) memory
    * @param address   device address
    * @param h0        ?

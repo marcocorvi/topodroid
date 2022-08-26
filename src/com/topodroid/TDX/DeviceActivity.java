@@ -862,6 +862,16 @@ public class DeviceActivity extends Activity
   {
     ( new MemoryReadTask( mApp, dialog, Device.DISTO_X310, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
   }
+
+  /** read XBLE memory
+   * @param dialog     memory display dialog
+   * @param head_tail  memory block bounds [indices]
+   * @param dumpfile   filename to dump
+   */
+  public void readXBLEMemory( IMemoryDialog dialog, int[] head_tail, String dumpfile )
+  {
+    ( new MemoryReadTask( mApp, dialog, Device.DISTO_XBLE, currDeviceA().getAddress(), head_tail, dumpfile ) ).execute();
+  }
  
   /** read A3 memory
    * @param dialog     memory display dialog

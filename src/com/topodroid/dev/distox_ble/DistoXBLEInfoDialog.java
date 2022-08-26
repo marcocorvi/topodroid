@@ -25,9 +25,6 @@ import com.topodroid.TDX.TopoDroidApp;
 import com.topodroid.dev.DataType;
 import com.topodroid.dev.Device;
 import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.dev.bric.BricComm;
-import com.topodroid.dev.distox2.DeviceX310Info;
-import com.topodroid.dev.distox2.DistoX310Comm;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDUtil;
@@ -54,11 +51,11 @@ public class DistoXBLEInfoDialog extends MyDialog
   /** cstr
    * @param context   context
    * @param parent    parent activity
-   * @param device    current device (DistoX2 X310)
+   * @param device    current device (DistoX-BLE)
    */
   public DistoXBLEInfoDialog(Context context, DeviceActivity parent, Device device, TopoDroidApp app )
   {
-    super( context, null, R.string.DeviceX310InfoDialog ); // null app
+    super( context, null, R.string.DeviceXBLEInfoDialog ); // null app FIXME DeviceXBLEInfoDialog is the help page of this dialog (need writing)
     mParent = parent;
     mDevice = device;
     mApp    = new WeakReference<TopoDroidApp>( app );
@@ -86,8 +83,8 @@ public class DistoXBLEInfoDialog extends MyDialog
     tv_code.setText( res.getString( R.string.gettingble_info ) );
     // tv_firmware.setText( TDString.EMPTY );
     // tv_hardware.setText( TDString.EMPTY );
-    //mParent.readX310Info( this )
-    //mApp.get().getDistoXBLEInfo(this);  only for test
+    // mParent.readXBLEInfo( this )
+    // mApp.get().getDistoXBLEInfo(this);  only for test
 
     // mBTok = (Button) findViewById( R.id.btn_ok );
     // mBTok.setOnClickListener( this );
@@ -117,7 +114,7 @@ public class DistoXBLEInfoDialog extends MyDialog
   /** update the display of the DistoX2 info
    * @param info   DistoX2 info
    */
-  void updateInfo( DeviceX310Info info )
+  void updateInfo( DistoXBLEInfo info )
   {
     if ( info == null ) return;
     mParent.runOnUiThread( new Runnable() {

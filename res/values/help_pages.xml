@@ -45,6 +45,8 @@
   <string name="DeviceSelectDialog" translatable="false">page_device_select.htm</string>
   <string name="DeviceX310InfoDialog" translatable="false">page_x310_info.htm</string>
   <string name="DeviceX310MemoryDialog" translatable="false">page_memory.htm</string>
+  <string name="DeviceXBLEInfoDialog" translatable="false">page_xble_info.htm</string>
+  <string name="DeviceXBLEMemoryDialog" translatable="false">page_memory.htm</string>
   <string name="BricInfoDialog" translatable="false">page_bric_info.htm</string>
   <string name="BricMemoryDialog" translatable="false">page_bric_memory.htm</string>
   <string name="DanglingShotsDialog" translatable="false">page_dangling.htm</string>

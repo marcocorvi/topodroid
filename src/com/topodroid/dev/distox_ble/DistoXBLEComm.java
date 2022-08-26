@@ -33,11 +33,7 @@ import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpNotify;
 import com.topodroid.dev.ble.BleOperation;
 import com.topodroid.dev.ble.BleUtils;
-import com.topodroid.dev.bric.BricConst;
-import com.topodroid.dev.bric.BricInfoDialog;
-import com.topodroid.dev.bric.BricProto;
 import com.topodroid.dev.distox.DistoX;
-import com.topodroid.dev.distox2.DeviceX310Details;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDLog;
@@ -52,6 +48,8 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentLinkedQueue;
+
+import java.util.ArrayList;
 
 public class DistoXBLEComm extends TopoDroidComm
         implements BleComm
@@ -822,6 +820,20 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( ! is_log_file ) TDLog.setLogStream( TDLog.LOG_SYSLOG ); // reset log stream if necessary
     return ( ok ? cnt : -cnt );
   }
+
+  /** read the DistoX-BLE memory
+   * @param address   device address
+   * @param h0        from address (?)
+   * @param h1        to address (?)
+   * @param memory    array of octets to be filled by the memory-read
+   * @return number of octets that have been read (-1 on error)
+   */
+  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  {
+    // TODO
+    return 0;
+  }
+
 }
 
 
