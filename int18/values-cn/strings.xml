@@ -1301,6 +1301,8 @@
   <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
   <string name="pref_blunder_shot_title">错误的测射</string>
   <string name="pref_blunder_shot_summary">跳过错误的主线测射</string>
+  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
+  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

@@ -59,7 +59,7 @@ public class DistoXBLEComm extends TopoDroidComm
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private Context mContext;
   BleCallback mCallback;
-  private String          mRemoteAddress;
+  // private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
   private DistoXBLEInfoDialog mDistoXBLEInfoDialog = null;
 
@@ -77,16 +77,22 @@ public class DistoXBLEComm extends TopoDroidComm
 
   Object mNewDataFlag;
 
+  /** cstr
+   * @param ctx       context
+   * @param app       application
+   * @param address   device address (not used: TODO drop)
+   * @param bt_device remote device
+   */
   public DistoXBLEComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
       super( app );
-      mRemoteAddress = address;
+      // mRemoteAddress = address;
       mRemoteBtDevice  = bt_device;
       mContext = ctx;
       mNewDataFlag = new Object();
       // TDLog.v( "SAP comm: cstr, addr " + address );
-      //mOps = new ConcurrentLinkedQueue<BleOperation>();
-      //clearPending();
+      // mOps = new ConcurrentLinkedQueue<BleOperation>();
+      // clearPending();
   }
 
   // -------------------------------------------------------------
@@ -94,15 +100,20 @@ public class DistoXBLEComm extends TopoDroidComm
    * connection and data handling must run on a separate thread
    */
 
-  // Device has mAddress, mModel, mName, mNickname, mType
-  // the only thing that coincide with the remote_device is the address
-  //
-  private boolean connectDistoXBLEDevice( Device device, Handler lister, int data_type ) // FIXME BLEX_DATA_TYPE
+  /** connect to the remote DistoXBLE device
+   * @param device    device (info)
+   * @param lister    data lister
+   // * @param data_type expected type of data (unused)
+   * @return ???
+   * @note Device has mAddress, mModel, mName, mNickname, mType
+   * the only thing that coincide with the remote_device is the address
+   */
+  private boolean connectDistoXBLEDevice( Device device, Handler lister /*, int data_type */ )
   {
     if ( mRemoteBtDevice == null ) {
       TDToast.makeBad( R.string.ble_no_remote );
-      // TDLog.Error("BRIC comm ERROR null remote device");
-      // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device: null = [3b] status DISCONNECTED" );
+      // TDLog.Error("XBLE comm ERROR null remote device");
+      // TDLog.v( "XBLE comm ***** connect Device: null = [3b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
       return false;
     }
@@ -124,29 +135,41 @@ public class DistoXBLEComm extends TopoDroidComm
     return true;
   }
 
+  /** open connection to the GATT
+   * @param ctx       context
+   * @param bt_device (remote) bluetooth device
+   */
   public void connectGatt( Context ctx, BluetoothDevice bt_device ) // called from BleOpConnect
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect GATT");
+    // TDLog.v( "XBLE comm ***** connect GATT");
     mContext = ctx;
     mCallback.connectGatt( mContext, bt_device );
-    // setupNotifications(); // FIXME_BRIC
+    // setupNotifications(); // FIXME_XBLE
   }
 
+  /** connect to the remote device
+   * @param address   device address (unused)
+   * @param lister    data lister
+   * @param data_type expected type of data (unused)
+   * @return ???
+   */
   @Override
-  public boolean connectDevice(String address, Handler /* ILister */ lister, int data_type )
+  public boolean connectDevice(String address, Handler /* ILister */ lister, int data_type ) // FIXME XBLE_DATA_TYPE ?
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** connect Device");
+    // TDLog.v( "XBLE comm ***** connect Device");
     mNrPacketsRead = 0;
     mDataType      = data_type;
-    return connectDistoXBLEDevice( TDInstance.getDeviceA(), lister, data_type );
+    return connectDistoXBLEDevice( TDInstance.getDeviceA(), lister /*, data_type */ );
   }
+
   // ----------------- DISCONNECT -------------------------------
 
-  // from onConnectionStateChange STATE_DISCONNECTED
+  /** notified that the device has disconnected
+   * @note from onConnectionStateChange STATE_DISCONNECTED
+   */
   public void disconnected()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** disconnected" );
-    TDLog.v( "DISTOX-BLE comm ***** disconnected" );
+    TDLog.v( "XBLE comm disconnected" );
     clearPending();
     mOps.clear();
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
@@ -161,7 +184,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   public void disconnectGatt()  // called from BleOpDisconnect
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** disconnect GATT" );
+    // TDLog.v( "XBLE comm ***** disconnect GATT" );
     notifyStatus( ConnectionState.CONN_DISCONNECTED );
     mCallback.closeGatt();
   }
@@ -169,7 +192,7 @@ public class DistoXBLEComm extends TopoDroidComm
   @Override
   public boolean disconnectDevice()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** disconnect device = connected:" + mBTConnected );
+    // TDLog.v( "XBLE comm ***** disconnect device = connected:" + mBTConnected );
     return closeDevice();
   }
 
@@ -180,10 +203,10 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( mBTConnected ) {
       mBTConnected = false;
       notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
-      // TDLog.Log( TDLog.LOG_COMM, "BRIC comm ***** close device");
+      // TDLog.v( "XBLE comm ***** close device");
       int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
       doNextOp();
-      TDLog.v( "DISTOX-BLE comm: close Device - disconnect ... ops " + ret );
+      TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
@@ -191,6 +214,8 @@ public class DistoXBLEComm extends TopoDroidComm
   // --------------------------------------------------------------------------
   private BleOperation mPendingOp = null;
 
+  /** clear the pending op and do the next if the queue is not empty
+   */
   private void clearPending()
   {
     mPendingOp = null;
@@ -198,7 +223,10 @@ public class DistoXBLEComm extends TopoDroidComm
     if ( ! mOps.isEmpty() ) doNextOp();
   }
 
-  // @return the length of the ops queue
+  /** add a BLE op to the queue
+   * @param op   BLE op
+   * @return the length of the ops queue
+   */
   private int enqueueOp( BleOperation op )
   {
     mOps.add( op );
@@ -206,15 +234,17 @@ public class DistoXBLEComm extends TopoDroidComm
     return mOps.size();
   }
 
-  // access by BricChrtChanged
+ /** do the next op on the queue
+  * @note access by BricChrtChanged
+  */
   private void doNextOp()
   {
     if ( mPendingOp != null ) {
-      // TDLog.v( "BRIC comm: next op with pending not null, ops " + mOps.size() );
+      // TDLog.v( "XBLE comm: next op with pending not null, ops " + mOps.size() );
       return;
     }
     mPendingOp = mOps.poll();
-    // TDLog.v( "BRIC comm: polled, ops " + mOps.size() );
+    // TDLog.v( "XBLE comm: polled, ops " + mOps.size() );
     if ( mPendingOp != null ) {
       mPendingOp.execute();
     }
@@ -226,16 +256,25 @@ public class DistoXBLEComm extends TopoDroidComm
 
   // BleComm interface
 
+  /** notified that the MTU (max transmit unit) has changed
+   * @param mtu    max transmit unit
+   */
   public void changedMtu( int mtu )
   {
     clearPending();
   }
 
+  /** notified that the remote RSSI has been read
+   * @param rssi   remote rssi
+   */
   public void readedRemoteRssi( int rssi )
   {
     clearPending();
   }
 
+  /** notifies that a characteristics has changed
+   * @param chrt    changed characteristics
+   */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     // TDLog.v( "SAP comm: changedChrt" );
@@ -251,27 +290,47 @@ public class DistoXBLEComm extends TopoDroidComm
     }
   }
 
+  /** notified that bytes have been read from the read characteristics
+   * @param srvUuid  service UUID string
+   * @param bytes    array of read bytes 
+   */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
     // TDLog.v( "SAP comm: readedChrt" );
   }
 
+  /** notified that bytes have been written to the write characteristics
+   * @param srvUuid  service UUID string
+   * @param bytes    array of written bytes 
+   */
   public void writtenChrt( String uuid_str, byte[] bytes )
   {
     clearPending();
   }
 
+  /** notified that bytes have been read
+   * @param srvUuid  service UUID string
+   * @param chrtUuid characteristics UUID string
+   * @param bytes    array of read bytes 
+   */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    TDLog.v( "DISTOXBLE comm: readedDesc" );
+    TDLog.v( "XBLE comm: readedDesc" );
   }
 
+  /** notified that bytes have been written
+   * @param srvUuid  service UUID string
+   * @param chrtUuid characteristics UUID string
+   * @param bytes    array of written bytes 
+   */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
     // TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
     clearPending();
   }
 
+  /** notified that a reliable write was completed
+   */
   public void completedReliableWrite()
   {
     TDLog.v( "DistoXBLE comm: reliable write" );
@@ -285,19 +344,20 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public boolean readChrt(UUID srvUuid, UUID chrtUuid )
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: read chrt " + chrtUuid.toString() );
+    // TDLog.v( "XBLE comm: read chrt " + chrtUuid.toString() );
     return mCallback.readChrt( srvUuid, chrtUuid );
   }
 
   /** write a characteristics
    * @param srvUuid  service UUID
    * @param chrtUuid characteristics UUID
+   * @param bytes    array of bytes to write
    * @return true if successful
    * @note this is run by BleOpChrtWrite
    */
   public boolean writeChrt( UUID srvUuid, UUID chrtUuid, byte[] bytes )
   {
-    // TDLog.Log( TDLog.LOG_COMM, "BRIC comm: write chrt " + chrtUuid.toString() );
+    // TDLog.v( "XBLE comm: write chrt " + chrtUuid.toString() );
     return mCallback.writeChrt( srvUuid, chrtUuid, bytes );
   }
 
@@ -309,50 +369,64 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
-
-    mBTConnected = true;
+    mBTConnected  = true;
     mPatketToRead = 0;
-    TDLog.v( "DISTOX-BLE comm discovered services status CONNECTED" );
+    TDLog.v( "XBLE comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED );
-
     return 0;
   }
 
+  /** enable P-notify
+   * @param srvUuid  service UUID
+   * @param chrtUuid characteristics UUID
+   * @return ???
+   */
   public boolean enablePNotify( UUID srvUuid, UUID chrtUuid ) { return mCallback.enablePNotify( srvUuid, chrtUuid ); }
+
+  /** enable P-indicate
+   * @param srvUuid  service UUID
+   * @param chrtUuid characteristics UUID
+   * @return ???
+   */
   public boolean enablePIndicate( UUID srvUuid, UUID chrtUuid ) { return mCallback.enablePIndicate( srvUuid, chrtUuid ); }
 
+  /** react to an error
+   * @param status   GATT error status
+   * @param extra    error extra message
+   */
   public void error( int status, String extra )
   {
     switch ( status ) {
       case BluetoothGatt.GATT_INVALID_ATTRIBUTE_LENGTH:
-        TDLog.Error("DISTOX-BLE COMM: invalid attr length " + extra );
+        TDLog.Error("XBLE COMM: invalid attr length " + extra );
         break;
       case BluetoothGatt.GATT_WRITE_NOT_PERMITTED:
-        TDLog.Error("DISTOX-BLE COMM: write not permitted " + extra );
+        TDLog.Error("XBLE COMM: write not permitted " + extra );
         break;
       case BluetoothGatt.GATT_READ_NOT_PERMITTED:
-        TDLog.Error("DISTOX-BLE COMM: read not permitted " + extra );
+        TDLog.Error("XBLE COMM: read not permitted " + extra );
         break;
       case BluetoothGatt.GATT_INSUFFICIENT_ENCRYPTION:
-        TDLog.Error("DISTOX-BLE COMM: insufficient encrypt " + extra );
+        TDLog.Error("XBLE COMM: insufficient encrypt " + extra );
         break;
       case BluetoothGatt.GATT_INSUFFICIENT_AUTHENTICATION:
-        TDLog.Error("DISTOX-BLE COMM: insufficient auth " + extra );
+        TDLog.Error("XBLE COMM: insufficient auth " + extra );
         break;
       case BleCallback.CONNECTION_TIMEOUT:
       case BleCallback.CONNECTION_133: // unfortunately this happens
-        // TDLog.v( "BRIC comm: connection timeout or 133");
+        // TDLog.v( "XBLE comm: connection timeout or 133");
         // notifyStatus( ConnectionState.CONN_WAITING );
         reconnectDevice();
         break;
       default:
-        TDLog.Error("DISTOX-BLE comm ***** ERROR " + status + ": reconnecting ...");
+        TDLog.Error("XBLE comm ***** ERROR " + status + ": reconnecting ...");
         reconnectDevice();
     }
     clearPending();
   }
 
-  // try to recover from an error ...
+  /** try to recover from an error ... and reconnect
+   */
   private void reconnectDevice()
   {
     mOps.clear();
@@ -360,25 +434,32 @@ public class DistoXBLEComm extends TopoDroidComm
     clearPending();
     mCallback.closeGatt();
     if ( mReconnect ) {
-      TDLog.v( "DISTOX-BLE comm ***** reconnect yes Device = [4a] status WAITING" );
+      TDLog.v( "XBLE comm ***** reconnect yes Device = [4a] status WAITING" );
       notifyStatus( ConnectionState.CONN_WAITING );
       enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
       doNextOp();
       mBTConnected = true;
     } else {
-      TDLog.v( "DISTOX-BLE comm ***** reconnect no Device = [4b] status DISCONNECTED" );
+      TDLog.v( "XBLE comm ***** reconnect no Device = [4b] status DISCONNECTED" );
       notifyStatus( ConnectionState.CONN_DISCONNECTED );
     }
   }
 
+  /** react to a failure (unrecoverable error): clear pending op and close the connection to the remote device
+   * @param status   GATT error status (unused)
+   * @param extra    failure extra message (unused)
+   */
   public void failure( int status, String extra )
   {
     // notifyStatus( ConnectionState.CONN_DISCONNECTED ); // this will be called by disconnected
     clearPending();
-    // TDLog.v( "BRIC comm Failure: disconnecting ...");
+    // TDLog.v( "XBLE comm Failure: disconnecting ...");
     closeDevice();
   }
 
+  /** forward status notification to the application
+   * @param status   new status
+   */
   public void notifyStatus( int status )
   {
     mApp.notifyStatus( status );
@@ -389,15 +470,15 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     BluetoothGattCharacteristic chrt = mCallback.getWriteChrt( srvUuid, chrtUuid );
     if ( chrt == null ) {
-      TDLog.Error("DISTOXBLE comm enlist write: null write chrt");
+      TDLog.Error("XLE comm enlist write: null write chrt");
       return false;
     }
     //Chrt.getPermission() always returns 0, I don't know why. Siwei Tian deleted
     // if ( ! BleUtils.isChrtWrite( chrt ) ) {
-    //   TDLog.Error("DISTOXBLE comm enlist write: cannot write chrt");
+    //   TDLog.Error("XLE comm enlist write: cannot write chrt");
     //   return false;
     // }
-    // TDLog.v( "BRIC comm: enlist chrt write " + chrtUuid.toString() );
+    // TDLog.v( "XBLE comm: enlist chrt write " + chrtUuid.toString() );
     byte[] framebytes = new byte[bytes.length + 8];
     framebytes[0] = 'D';framebytes[1] = 'a';framebytes[2] = 't';framebytes[3] = 'a';framebytes[4] = ':';
     framebytes[5] = (byte)(bytes.length);
@@ -473,7 +554,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     if ( ! isConnected() ) return false;
     if ( cmd != 0 ) {
-      // TDLog.v( "BRIC comm send cmd " + cmd );
+      // TDLog.v( "XBLE comm send cmd " + cmd );
       enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
     }
     return true;

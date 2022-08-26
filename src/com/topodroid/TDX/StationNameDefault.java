@@ -95,8 +95,10 @@ class StationNameDefault extends StationName
         setSplayName( blk, station );
 	sts.add( station );
       } else if ( blk.isSplay() ) {
-        setSplayName( blk, station );
-	sts.add( station );
+        if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) {
+          setSplayName( blk, station );
+	  sts.add( station );
+        }
         // TDLog.Log( TDLog.LOG_DATA, "splay " + blk.mId + " S<" + station + "> bs " + bs );
       } else if ( blk.isMainLeg() ) {
 	prev = blk;
@@ -215,7 +217,7 @@ class StationNameDefault extends StationName
           prev = null;
           continue;
         }
-        if ( blk.mTo.length() == 0 ) {
+        if ( blk.mTo.length() == 0 ) { // un-assigned splay
           if ( prev == null ) {
             prev = blk;
             // blk.mFrom = station;
