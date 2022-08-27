@@ -407,13 +407,13 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
-    <string name="menu_show_deleted">MOSTRAR ELIMINADOS</string>
-    <string name="menu_hide_deleted">OCULTAR ELIMINADO</string>
+    <string name="menu_show_deleted">Mostrar eliminadas</string>
+    <string name="menu_hide_deleted">Ocultar eliminadas</string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
-    <string name="menu_recover_paste">RECUPERAR/PEGAR</string>
+    <string name="menu_recover_paste">Restaurar/Pegar</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
@@ -425,7 +425,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
     <string name="menu_overview">Panorámica</string>
-    <string name="menu_packets">PAQUETES</string>
+    <string name="menu_packets">Paquetes</string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
@@ -625,7 +625,7 @@ debe ajustarlos a sus necesidades./n/n
     
     <string name="empty_clipboard">sin notas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
-    <string name="declination">Declinación magnética </string>
+    <string name="declination">Declinación magnética</string>
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
@@ -1126,7 +1126,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
     <string name="title_draw_line">Línea %1$s</string>
-    <string name="title_draw_line_no_stations">LINEA %1$s: Sin estación</string>
+    <string name="title_draw_line_no_stations">LÍNEA %1$s: Sin estación</string>
     <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
     <string name="title_edit_user_station">Editar estación de usuario</string>
@@ -1875,11 +1875,11 @@ debe ajustarlos a sus necesidades./n/n
     <string name="illegal_value">Valor inaceptable</string>
 	
     <!-- UNUSED string name="info_title">Información</string -->
-    <string name="info_surveys">PROYECTO</string>
+    <string name="info_surveys">TOPOGRAFÍA</string>
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
-    <string name="info_survey">Proyecto</string>
+    <string name="info_survey">Topografía</string>
     <string name="info_shot">toma</string>
     <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
@@ -1976,8 +1976,8 @@ debe ajustarlos a sus necesidades./n/n
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
-    <string name="STATIONS">e S T A C I Ó N</string>
-    <string name="STATIONS_DISTANCE">dISTANCIA ESTACIÓN</string>
+    <string name="STATIONS">E S T A C I Ó N</string>
+    <string name="STATIONS_DISTANCE">DISTANCIA ESTACIÓN</string>
     <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
     <!-- UNUSED string name="CENTER">CENTRO</string -->
     <string name="select_survey_file">Seleccionar archivo de topografia</string>
