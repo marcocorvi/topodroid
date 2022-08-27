@@ -78,8 +78,8 @@
   </string-array>
 
   <string-array name="stationNames">
-     <item name="alpha">Alfanumericas</item>
-     <item name="number">Numericas</item>
+     <item name="alpha">Alfanuméricas</item>
+     <item name="number">Numéricas</item>
   </string-array>
 
   <!-- UNUSED string-array name="extend_name">
@@ -248,7 +248,7 @@
 
   <string-array name="unitLength">
      <item name="meters">Metros</item>
-     <item name="feet">Pies</item>
+     <item name="feet">Piés</item>
   </string-array>
 
   <string-array name="unitAngle">
