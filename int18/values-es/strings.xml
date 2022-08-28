@@ -758,8 +758,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
     <string name="button_move"    >Mueve</string>
-    <string name="button_next"    >próximo</string>
-    <string name="button_prev"    >Anterior</string>
+    <string name="button_next"    >Siguiente</string>
+    <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >nuevo exceso</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
