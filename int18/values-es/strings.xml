@@ -38,7 +38,7 @@ Consulte las páginas web para más detalles..\n
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
-    <!-- TODO string name="version_check_newer">Versión más reciente disponible: %1$d</string -->
+    <string name="version_check_newer">Versión más reciente disponible: %1$d</string>
 
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
