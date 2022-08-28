@@ -49,9 +49,9 @@ Consulte las páginas web para más detalles..\n
     <string name="setup_textsize">Establezca el tamaño del texto. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
-    <string name="setup_done">The basic setup in done.\n\n
-	    Si tiene problemas con la conexion DistoX, intente configurar el socket no seguro.\n\n
-Otras configuraciones se refieren a la presentacion en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de linea, etc.)
+    <string name="setup_done">La configuración básica está lista.\n\n
+	    Si tiene problemas con la conexión DistoX, intente configurar el modo de conexión emparejamiento inestable.\n\n
+Otras configuraciones se refieren a la presentación en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de línea, etc.)
 debe ajustarlos a sus necesidades./n/n
     </string>
     <!-- NO TRANSLATION string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
