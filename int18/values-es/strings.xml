@@ -424,7 +424,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="menu_logs">Registros</string-->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
-    <string name="menu_overview">Panorámica</string>
+    <string name="menu_overview">Pantalla Medidas</string>
     <string name="menu_packets">Paquetes</string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
@@ -1260,7 +1260,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
   <string name="pref_cat_cave3d">VISOR 3D</string>
-  <string name="pref_cat_geek">FLAG Principiante</string>
+  <string name="pref_cat_geek">Ajustes para frikis</string>
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
 
   <string name="pref_locale_title">Idioma</string>
