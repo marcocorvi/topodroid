@@ -493,7 +493,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <!-- UNUSED string name="connection_error">Error conexión</string-->
+    <!-- UNUSED string name="connection_error">Error DE conexión</string-->
     <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
@@ -633,8 +633,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="second_device">segundo dispositivo</string>
     <string name="start_station">Estación inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
-    <string name="toggle_failed">Error al alternar DistoX</string>
-    <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
+    <string name="toggle_failed">Error al conectar con DistoX</string>
+    <string name="toggle_ok">Cambiar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
     <string name="undelete_shot">Toma</string>
