@@ -1299,8 +1299,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_with_android_azimuth_summary">Activar Brújula/clino Android</string>
   <string name="pref_blunder_shot_title">Tomas falsas</string>
   <string name="pref_blunder_shot_summary">Omitir tomas falsas</string>
-  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
-  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
+  <!-- UNUSED string name="pref_splay_station_title">Splay station re-assignment</string -->
+  <!-- UNUSED string name="pref_splay_station_summary">Re-assign station to splays</string -->
   <string name="pref_with_levels_title">Capas</string>
   <string name="pref_with_levels_summary">Usa capas en dibujo</string>
   <string name="pref_palettes_title">Paletas</string>

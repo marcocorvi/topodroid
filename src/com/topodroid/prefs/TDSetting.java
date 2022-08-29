@@ -428,7 +428,7 @@ public class TDSetting
   // public static final String EXTEND_THR = TDString.TEN; 
   public static float mExtendThr = 10;          // extend vertically splays in [90-30, 90+30] of the leg
   public static boolean mBlunderShot  = false;  // skip intermediate leg blunder-shot
-  public static boolean mSplayStation = true;   // re-assign station to splays even if already have it
+  // public static boolean mSplayStation = true;   // re-assign station to splays even if already have it , USELESS
 
   public static int mThumbSize = 200;           // thumbnail size
   public static boolean mWithSensors = false;   // whether sensors are enabled
@@ -1143,7 +1143,7 @@ public class TDSetting
     mTimerWait     = tryInt(   prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_SHOT_TIMER
     mBeepVolume    = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_BEEP_VOLUME
     mBlunderShot   = prefs.getBoolean( keyGShot[11], bool(defGShot[11]) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation  = prefs.getBoolean( keyGShot[12], bool(defGShot[12]) ); // DISTOX_SPLAY_STATION
+    // mSplayStation  = prefs.getBoolean( keyGShot[12], bool(defGShot[12]) ); // DISTOX_SPLAY_STATION , USELESS
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -1684,8 +1684,8 @@ public class TDSetting
       ret = setBeepVolume( tryIntValue( hlp, k, v, def[10] ) );
     } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BLUNDER_SHOT
       mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_SPLAY_STATION
-      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[12]) );
+    // } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_SPLAY_STATION , USELESS
+    //   mSplayStation = tryBooleanValue( hlp, k, v, bool(def[12]) );
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
@@ -2925,7 +2925,8 @@ public class TDSetting
       pw.printf(Locale.US, "Shots: vthr %.1f, hthr %.1f \n", mVThreshold, mHThreshold );
       pw.printf(Locale.US, "Data: DistoX-backshot-swap %c, diving-mode %c \n", tf(mDistoXBackshot), tf(mDivingMode) );
       pw.printf(Locale.US, "Data input: backsight %c, prev/next %c\n", tf(mBacksightInput), tf(mPrevNext) );
-      pw.printf(Locale.US, "L/R extend %c BlunderShot %c SplayStation %c\n", tf(mLRExtend), tf(mBlunderShot), tf(mSplayStation) );
+      pw.printf(Locale.US, "L/R extend %c BlunderShot %c\n", tf(mLRExtend), tf(mBlunderShot) );
+      // pw.printf(Locale.US, "L/R extend %c BlunderShot %c SplayStation %c\n", tf(mLRExtend), tf(mBlunderShot), tf(mSplayStation) ); USELESS
       pw.printf(Locale.US, "U/D vertical %.1f, L/R horicontal %.1f\n", mLRUDvertical, mLRUDhorizontal );
 
       pw.printf(Locale.US, "Geek Import - data mode %d, zipped symbols %c\n", mImportDatamode, tf( mZipWithSymbols) ); //  tf(mExportTcsx) );
@@ -3414,9 +3415,9 @@ public class TDSetting
           if ( vals.length > 4 ) {
             mBlunderShot = getBoolean( vals, 4 ); setPreference( editor, "DISTOX_BLUNDER_SHOT", mBlunderShot );
           }
-          if ( vals.length > 6 ) {
-            mSplayStation = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_SPLAY_STATION", mSplayStation );
-          }
+          // if ( vals.length > 6 ) { // USELESS
+          //   mSplayStation = getBoolean( vals, 6 ); setPreference( editor, "DISTOX_SPLAY_STATION", mSplayStation );
+          // }
           continue;
         }
         if ( line.startsWith("U/D") ) {

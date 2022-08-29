@@ -95,7 +95,7 @@ class StationNameDefault extends StationName
         setSplayName( blk, station );
 	sts.add( station );
       } else if ( blk.isSplay() ) {
-        if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) {
+        if ( /* TDSetting.mSplayStation || */ blk.mFrom.length() == 0 ) { // mSplayStation USELESS
           setSplayName( blk, station );
 	  sts.add( station );
         }
