@@ -38,7 +38,7 @@ Consulte las páginas web para más detalles..\n
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
-    <!-- TODO string name="version_check_newer">Versión más reciente disponible: %1$d</string -->
+    <string name="version_check_newer">Versión más reciente disponible: %1$d</string>
 
     <string name="setup_textsize_title">Configuración de TopoDroid. Tamano del texto</string>
     <string name="setup_buttonsize_title">Configuración de TopoDroid. Tamaño del botón</string>
@@ -49,9 +49,9 @@ Consulte las páginas web para más detalles..\n
     <string name="setup_textsize">Establezca el tamaño del texto. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_buttonsize">Establezca el tamaño del botón. \ Puede cambiarlo más tarde a través de la configuración de la ventana principal.</string>
     <string name="setup_drawingunit">Establezca el tamaño del icono de boceto. \ Puede cambiarlo más tarde a través de la configuración de la ventana de croquis.</string>
-    <string name="setup_done">The basic setup in done.\n\n
-	    Si tiene problemas con la conexion DistoX, intente configurar el socket no seguro.\n\n
-Otras configuraciones se refieren a la presentacion en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de linea, etc.)
+    <string name="setup_done">La configuración básica está lista.\n\n
+	    Si tiene problemas con la conexión DistoX, intente configurar el modo de conexión emparejamiento inestable.\n\n
+Otras configuraciones se refieren a la presentación en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de línea, etc.)
 debe ajustarlos a sus necesidades./n/n
     </string>
     <!-- NO TRANSLATION string name="lorem_ipsum">Lorem ipsum dolor sit amet</string -->
@@ -407,13 +407,13 @@ debe ajustarlos a sus necesidades./n/n
     <string name="menu_delete">Eliminar</string>
     <string name="menu_detach">Desconectar</string>
     <!-- UNUSED string name="menu_display">Pantalla</string -->
-    <string name="menu_show_deleted">MOSTRAR ELIMINADOS</string>
-    <string name="menu_hide_deleted">OCULTAR ELIMINADO</string>
+    <string name="menu_show_deleted">Mostrar eliminadas</string>
+    <string name="menu_hide_deleted">Ocultar eliminadas</string>
     <string name="menu_device">Dispositivo</string>
     <string name="menu_export">Exportar</string>
     <string name="menu_firmware">Firmware</string>
     <string name="menu_recover">Tomas eliminadas</string>
-    <string name="menu_recover_paste">RECUPERAR/PEGAR</string>
+    <string name="menu_recover_paste">Restaurar/Pegar</string>
     <string name="menu_reload">Importar</string>
     <string name="menu_rename_delete">Eliminar/Renombrar</string>
     <string name="menu_rename">Renombrar</string>
@@ -424,8 +424,8 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="menu_logs">Registros</string-->
     <string name="menu_manual_calibration">Calibración</string>
     <string name="menu_options">Ajustes</string>
-    <string name="menu_overview">Panorámica</string>
-    <string name="menu_packets">PAQUETES</string>
+    <string name="menu_overview">Pantalla Medidas</string>
+    <string name="menu_packets">Paquetes</string>
     <!-- UNUSED string name="menu_pair">Emparejar</string-->
     <string name="menu_palette">Simbología</string>
     <string name="menu_photo">Tomas con foto</string>
@@ -493,7 +493,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="popup_cont_both">Ambos puntos</string>
     <string name="popup_cont_continue">Continuar</string>
 
-    <!-- UNUSED string name="connection_error">Error conexión</string-->
+    <!-- UNUSED string name="connection_error">Error DE conexión</string-->
     <!-- UNUSED string name="connecting">Conectando &#8230;</string-->
     <!-- UNUSED string name="connected_none">No conctado</string -->
     <!-- UNUSED string name="connected_already">Ya esta conectado</string -->
@@ -625,7 +625,7 @@ debe ajustarlos a sus necesidades./n/n
     
     <string name="empty_clipboard">sin notas</string>
     <string name="cannot_rename">No se puede cambiar el nombre de la topografía</string>
-    <string name="declination">Declinación magnética </string>
+    <string name="declination">Declinación magnética</string>
     <string name="description">Descripción</string>
     <string name="name">Nombre</string>
     <string name="team">Grupo</string>
@@ -633,8 +633,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="second_device">segundo dispositivo</string>
     <string name="start_station">Estación inicial [%1$s]</string>
     <!-- UNUSED string name="toggle_device">Toggle device calibration mode</string -->
-    <string name="toggle_failed">Error al alternar DistoX</string>
-    <string name="toggle_ok">Alternar a modo de calibración DistoX</string>
+    <string name="toggle_failed">Error al conectar con DistoX</string>
+    <string name="toggle_ok">Cambiar a modo de calibración DistoX</string>
     <string name="undelete_text">Pulse sobre la toma a recuperar</string>
     <string name="undelete_paste_text">Restaurar / Pegar elementos</string>
     <string name="undelete_shot">Toma</string>
@@ -758,8 +758,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_plot"    >Dibujo</string>
     <string name="button_more"    >Más</string>
     <string name="button_move"    >Mueve</string>
-    <string name="button_next"    >próximo</string>
-    <string name="button_prev"    >Anterior</string>
+    <string name="button_next"    >Siguiente</string>
+    <string name="button_prev"    >Atrás</string>
     <string name="button_new"     >nuevo exceso</string>
     <string name="button_skip"    >Omitir</string>
     <string name="button_done"    >Hecho</string>
@@ -1126,7 +1126,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_draw">Dibujo</string -->
     <string name="title_draw_area">Área %1$s</string>
     <string name="title_draw_line">Línea %1$s</string>
-    <string name="title_draw_line_no_stations">LINEA %1$s: Sin estación</string>
+    <string name="title_draw_line_no_stations">LÍNEA %1$s: Sin estación</string>
     <string name="title_draw_point">Punto %1$s</string>
     <string name="title_edit">Editar</string>
     <string name="title_edit_user_station">Editar estación de usuario</string>
@@ -1260,7 +1260,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_cat_calib">Ajustes de calibración</string>
   <string name="pref_cat_device">Ajustes de distoX</string>
   <string name="pref_cat_cave3d">VISOR 3D</string>
-  <string name="pref_cat_geek">FLAG Principiante</string>
+  <string name="pref_cat_geek">Ajustes para frikis</string>
   <!-- UNUSED string name="pref_cat_log">Ajustes de dibujo</string -->
 
   <string name="pref_locale_title">Idioma</string>
@@ -1875,11 +1875,11 @@ debe ajustarlos a sus necesidades./n/n
     <string name="illegal_value">Valor inaceptable</string>
 	
     <!-- UNUSED string name="info_title">Información</string -->
-    <string name="info_surveys">PROYECTO</string>
+    <string name="info_surveys">TOPOGRAFÍA</string>
     <!-- UNUSED string name="info_axes">Ejes: Norte azul, Este verde</string -->
     <string name="info_grid">Cuadros de la cuadrícula (m)</string>
     <string name="info_view">Punto de vista</string>
-    <string name="info_survey">Proyecto</string>
+    <string name="info_survey">Topografía</string>
     <string name="info_shot">toma</string>
     <string name="info_station">Estación</string>
     <string name="info_length">Longitud</string>
@@ -1976,8 +1976,8 @@ debe ajustarlos a sus necesidades./n/n
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
-    <string name="STATIONS">e S T A C I Ó N</string>
-    <string name="STATIONS_DISTANCE">dISTANCIA ESTACIÓN</string>
+    <string name="STATIONS">E S T A C I Ó N</string>
+    <string name="STATIONS_DISTANCE">DISTANCIA ESTACIÓN</string>
     <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
     <!-- UNUSED string name="CENTER">CENTRO</string -->
     <string name="select_survey_file">Seleccionar archivo de topografia</string>
