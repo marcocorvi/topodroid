@@ -1301,8 +1301,8 @@
   <string name="pref_with_android_azimuth_summary">Использовать датчики телефона компас/клинометр</string>
   <string name="pref_blunder_shot_title">Промах при 3х замере</string>
   <string name="pref_blunder_shot_summary">Пропускать грубые промахи при выполненни замеров</string>
-  <!-- UNUSED string name="pref_splay_station_title">Splay station re-assignment</string -->
-  <!-- UNUSED string name="pref_splay_station_summary">Re-assign station to splays</string -->
+  <!-- UNUSED string name="pref_splay_station_title">Переназначить пикет сплеям</string -->
+  <!-- UNUSED string name="pref_splay_station_summary">Изменить пикет к которому принадлежит сплей</string -->
   <string name="pref_with_levels_title">Слои</string>
   <string name="pref_with_levels_summary">Включть слои абриса</string>
   <string name="pref_palettes_title">Доп. Знаки</string>
