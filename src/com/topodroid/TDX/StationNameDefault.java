@@ -58,9 +58,12 @@ class StationNameDefault extends StationName
     String main_from = null;
     String main_to   = null;
 
+    NativeName mNativeName = new NativeName();
+
     // boolean increment = true;
     // // TDLog.Log( TDLog.LOG_DATA, "assign Stations() policy " + survey_stations + "/" + shot_after_splay  + " nr. shots " + list.size() );
 
+    // [1] initialize prev (DBlock), and strings from, to, next, station
     DBlock prev = blk0;
     String from = blk0.mFrom;
     String to   = blk0.mTo;
@@ -68,16 +71,17 @@ class StationNameDefault extends StationName
       from = blk0.mTo;
       to   = blk0.mFrom;
     }
-
     String next;
     String station;
     if ( forward_shots ) {
       next = to;
-      next = DistoXStationName.incrementName( next, sts );
+      next = mNativeName.incrementName( next, sts );
+      // next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? to : from;
     } else {
       next = from;
-      next = DistoXStationName.incrementName( next, sts );
+      next = mNativeName.incrementName( next, sts );
+      // next = DistoXStationName.incrementName( next, sts );
       station = shot_after_splays ? next : from;
     }
 
@@ -89,6 +93,7 @@ class StationNameDefault extends StationName
     //   TDLog.Log(TDLog.LOG_DATA, "set " + sb.toString() );
     // }
 
+    // [2] scan the list of DBlock's
     for ( DBlock blk : list ) {
       if ( blk.mId == blk0.mId ) continue;
       if ( blk.isScan() ) {
@@ -105,12 +110,14 @@ class StationNameDefault extends StationName
         if ( forward_shots ) {
           from = to;
           to   = next;
-          next = DistoXStationName.incrementName( next, sts ); // to, sts
+          next = mNativeName.incrementName( next, sts );
+          // next = DistoXStationName.incrementName( next, sts ); // to, sts
           station = shot_after_splays ? to : from;
         } else {
           to   = from;
           from = next;
-          next = DistoXStationName.incrementName( next, sts ); // from, sts
+          next = mNativeName.incrementName( next, sts );
+          // next = DistoXStationName.incrementName( next, sts ); // from, sts
           station = shot_after_splays ? next : from;
         }
 	main_from = from;
@@ -181,6 +188,7 @@ class StationNameDefault extends StationName
       return (new StationNameDefaultBlunder( mContext, mData, mSid )).assignStations( list, sts );
     }
 
+    NativeName mNativeName = new NativeName();
 
     boolean ret = false;
     boolean forward_shots = ( survey_stations == 1 );
@@ -268,11 +276,13 @@ class StationNameDefault extends StationName
                   station = shot_after_splay  ? to : from;     // splay-station = this-shot-to if splays before shot
                                                                //                 this-shot-from if splays after shot
                   from = to;                                   // next-shot-from = this-shot-to
-                  to   = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
+                  to = mNativeName.incrementName( to, sts );
+                  // to = DistoXStationName.incrementName( to, sts );  // next-shot-to   = increment next-shot-from
                   // logJump( blk, from, to, sts ); // NO_LOGS
                 } else { // backward_shots
                   to   = from;                                     // next-shot-to   = this-shot-from
-                  from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
+                  from = mNativeName.incrementName( from, sts );
+                  // from = DistoXStationName.incrementName( from, sts ); // next-shot-from = increment this-shot-from
                   station = shot_after_splay ? from : to;          // splay-station  = next-shot-from if splay before shot
                                                                    //                = this-shot-from if splay after shot
                   // logJump( blk, to, from, sts );
@@ -301,7 +311,8 @@ class StationNameDefault extends StationName
           if ( forward_shots ) {  // : ..., 0-1, 1-2 ==> from=(2) to=Next(2)=3 ie 2-3
             from = blk.isDistoXBacksight()? blk.mFrom : blk.mTo;
             to   = from;
-            to   = DistoXStationName.incrementName( to, sts );
+            to  = mNativeName.incrementName( to, sts );
+            // to   = DistoXStationName.incrementName( to, sts );
             // logJump( blk, from, to, sts ); // NO_LOGS
             if ( current_station == null ) {
               if ( blk.isDistoXBacksight() ) {
@@ -315,7 +326,8 @@ class StationNameDefault extends StationName
           } else { // backward shots: ..., 1-0, 2-1 ==> from=Next(2)=3 to=2 ie 3-2
             to = blk.isDistoXBacksight()? blk.mTo : blk.mFrom;
             from = to;
-            from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
+            from = mNativeName.incrementName( from, sts );
+            // from = DistoXStationName.incrementName( from, sts ); // FIXME it was old from
             // logJump( blk, to, from, sts );
 
 	    // station must be set even if there is a "currentStation"
