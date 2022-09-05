@@ -618,8 +618,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cover_m">Distribución de datos M: %1$.2f %%</string>
     <string name="cover_r">Distribución de rotación: %1$.2f %%</string>
 
-    <string name="accuracy_low">Baja precisión. Calibración recomendada.</string>
-    <string name="accuracy_medium">Precision baja</string>
+    <string name="accuracy_low">Baja precisión. Se recomienda Calibración.</string>
+    <string name="accuracy_medium">Precisión baja</string>
     <!-- UNUSED string name="accuracy_high">Buena precisión</string -->
     <string name="accuracy_unreliable">Sensores poco fiables</string>
     
@@ -801,7 +801,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="button_zoomfit"   >Ajuste de zoom  </string -->
     <!-- UNUSED string name="button_landscape" >Paisaje </string -->
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
-    <string name="button_splays">Splays</string>
+    <string name="button_splays">Tomas</string>
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
@@ -1051,7 +1051,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_view_surveys">Mostra relieve</string>
     <string name="help_view_equates">Lista de equivalentes</string>
     <string name="help_export_config">Exportar topografía</string>
-    <string name="help_delete_config">Eliminar topografia</string>
+    <string name="help_delete_config">Eliminar topografía</string>
     <string name="help_add_equate">Agregar relieves similares</string>
     <string name="help_equates">Lista relieves similares</string>
 
@@ -1072,7 +1072,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="export_roundtrip">Ida y vuelta </string>
     <!-- UNUSED string name="export_scale_png">Resolución </string -->
     <string name="export_scale_th">Escala 1:</string>
-    <string name="export_splays">Splay</string>
+    <string name="export_splays">Tomas</string>
     <string name="export_splays_named">Mostrar con nombre</string>
     <string name="export_stations">Capisaldi</string>
     <string name="export_surface">Superfice</string>
@@ -1104,7 +1104,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_trox">archivo de formato Trox</string>
     <string name="import_lrud">Importar LRUD</string>
     <string name="import_leg_first">Pulsación de tecla antes de los LRUD</string>
-    <string name="import_diving_datamode">Modo de datos de inmersión </string>
+    <string name="import_diving_datamode">Modo de datos de inmersión</string>
 
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
@@ -1916,7 +1916,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
     <string name="reading_file">Lectura de archivo %1$s</string>
-    <string name="read_survey">Topografia %1$s\n</string>
+    <string name="read_survey">Topografía %1$s\n</string>
     <!-- UNUSED string name="clear">Limpiar</string -->
 
     <string name="plan_proj">Planta</string>
@@ -1959,7 +1959,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="cbtn_start">Start</string -->
     <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
-    <string name="survey_list">RILIEVE</string>
+    <string name="survey_list">RELIEVE</string>
     <string name="survey_legs"> Visual: </string>
     <string name="survey_legs_length"> Longitud toma: </string>
     <string name="survey_splays"> Tomas laterales: </string>
@@ -2042,9 +2042,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="fail_convexhull">Cálculo de envolvente convexa falló</string>
     <string name="done_powercrust">Powercrust calculado </string>
     <string name="fail_powercrust">Powercrust falló</string>
-    <string name="done_hull">Hizo paredes de una sola capa</string>
+    <string name="done_hull">Paredes de una sola capa realizadas</string>
     <string name="fail_hull">Las paredes de una sola capa fallaron</string>
-    <string name="done_tube">Hizo paredes de tubo simples</string>
+    <string name="done_tube">Paredes de tubo simples realizadas</string>
     <string name="fail_tube">Las paredes de un solo tubo fallaron</string>
     <string name="done_bubble">Hizo paredes de burbujas</string>
     <string name="fail_bubble">Paredes de burbujas fallidas</string>
@@ -2062,8 +2062,8 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamaño Texto</string -->
     <!-- UNUSED string name="cpref_text_size_summary">Tamaño de la etiqueta estación</string -->
-    <!-- UNUSED string name="cpref_size_buttons_title">Tamaño Botones</string -->
-    <!-- UNUSED string name="cpref_size_buttons_summary">Tamaño Botones</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Tamaño botones</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Tamaño botones</string -->
     <string name="cpref_selection_radius_title">Selección radio</string>
     <string name="cpref_selection_radius_summary">Selección radio</string>
 
@@ -2081,7 +2081,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cpref_grid_above_title">Situación de la cuadrícula</string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
     <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
-    <string name="cpref_grid_extent_summary">xtensión de cuadrícula alrededor del relieve </string>
+    <string name="cpref_grid_extent_summary">Extensión de cuadrícula alrededor del relieve</string>
     <string name="cpref_neg_clino_title">Vistas por debajo del horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir puntos de vista por debajo del horizonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>
@@ -2094,11 +2094,11 @@ debe ajustarlos a sus necesidades./n/n
   
     <string name="cpref_all_splay_title">Todas las tomas radiales</string>
     <string name="cpref_all_splay_summary">Todas las tomas radiales para paredes</string>
-    <string name="cpref_splay_use_title">Usar splay </string>
-    <string name="cpref_splay_use_summary">Usar splay: ninguno, normal, secciones [normal] </string>
+    <string name="cpref_splay_use_title">Usar Tomas</string>
+    <string name="cpref_splay_use_summary">Usar Tomas: ninguno, normal, secciones [normal] </string>
     <string name="cpref_splay_proj_title">Splays proyectados</string>
-    <string name="cpref_splay_proj_summary">¿Usar splays proyectados en plano? [n]</string>
-    <string name="cpref_splay_thr_title">Umbral de Splay</string>
+    <string name="cpref_splay_proj_summary">¿Usar tomas proyectadas en plano? [n]</string>
+    <string name="cpref_splay_thr_title">Umbral de Tomas</string>
     <string name="cpref_splay_thr_summary">Separar fuera de la barra para mantener [0.5] </string>
 
     <string name="cpref_split_triangles_title">Dividir triángulos</string>
@@ -2139,11 +2139,11 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="help_light_3d">Panoramica y luz</string>
     <string name="help_projection_3d">Proyección 3D</string>
-    <string name="help_stations_3d">Puntos fuertes </string>
-    <string name="help_splays_3d">Splay</string>
+    <string name="help_stations_3d">Estaciones</string>
+    <string name="help_splays_3d">Tomas</string>
     <string name="help_walls_3d">Paredes</string>
-    <string name="help_surface_3d">Tsuperficie</string>
+    <string name="help_surface_3d">superficie</string>
     <string name="help_color_3d">Colores</string>
-    <string name="help_frame_3d">Cuadro</string>
+    <string name="help_frame_3d">Cuadrícula</string>
 
 </resources>
