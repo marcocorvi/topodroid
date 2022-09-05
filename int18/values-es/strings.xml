@@ -111,8 +111,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
-    <string name="bric_battery">Bateria %1$d</string>
-    <string name="bric_battery_wait">Bateria &#8230;</string>
+    <string name="bric_battery">Batería %1$d</string>
+    <string name="bric_battery_wait">Batería &#8230;</string>
     <string name="bric_reset_time">Resetear hora</string>
     <string name="bric_clear_memory">limpiar memoria</string>
     <string name="bric_future_time">No resetear a un hora futura</string>
@@ -1903,9 +1903,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
 	
-    <string name="legs_surface">Externo</string>
-    <string name="legs_duplicate">Doble</string>
-    <string name="legs_commented">Comentar</string>
+    <string name="legs_surface">Superficiales</string>
+    <string name="legs_duplicate">Duplicadas</string>
+    <string name="legs_commented">Cometadas</string>
 
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>
