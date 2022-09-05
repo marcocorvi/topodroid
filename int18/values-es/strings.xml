@@ -1908,7 +1908,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>
-    <string name="proj_focal">Focal</string>
+    <string name="proj_focal">Opacidad</string>
     <string name="proj_side">Lado</string>
     <!-- UNUSED string name="proj_near">Cerca</string -->
     <!-- UNUSED string name="proj_far">lejos</string -->
@@ -1947,7 +1947,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="sketch_ok">Dibujo de lectura</string>
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
-    <string name="ctitle_surface_alpha">Transparencia DEM</string>
+    <string name="ctitle_surface_alpha">Opacidad DEM</string>
     <string name="ctitle_sketches">Dibujos</string>
     <string name="ctitle_legs">Visual</string>
     <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
@@ -1969,10 +1969,10 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cave_north"> N: %1$.1f</string>
     <string name="cave_vert"> Z: %1$.1f</string>
 
-    <string name="cave_distance"> 3D distancia: %1$.2f</string>
-    <string name="horz_distance"> 2D distancia horizontal: %1$.1f</string>
-    <string name="cave_length"> Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
-    <string name="cave_angle"> Rumbo: %1$.0f  inclinación: %2$.0f</string>
+    <string name="cave_distance">Distancia 3D : %1$.2f</string>
+    <string name="horz_distance">Distancia 2D horizontal: %1$.1f</string>
+    <string name="cave_length">Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
+    <string name="cave_angle">Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
