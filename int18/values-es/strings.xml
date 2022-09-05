@@ -21,7 +21,7 @@
 
     <string name="new_survey_label">Nueva topografía</string>
     <!-- NO string name="distox_label">DistoX</string -->
-    <!-- NO string name="cave3d_label">Cave3D</string -->
+    <!-- NO string name="cave3d_label">Visor 3D</string -->
 
 <!-- UNUSED string name="r_title">Aviso importante sobre Android R</string-->
 <!-- UNUSED string name="r_dialog">
@@ -230,7 +230,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_calib_ok">Calibración importada con éxito</string>
     <string name="import_calib_no_header">Archivo de calib: Error de cabecera</string>
     <string name="import_calib_already">Calib. ya existe</string>
-    <string name="import_calib_mismatch">Calib. desajuste dispositivo</string>
+    <string name="import_calib_mismatch">Desajuste Calib. dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
     <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
@@ -362,7 +362,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
-    <string name="no_cave3d">Cave3D No instalado</string>
+    <string name="no_cave3d">Visor 3D No instalado</string>
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
@@ -392,7 +392,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <string name="menu_3d">Cave3D</string>
+    <string name="menu_3d">Visor 3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
     <string name="menu_area">Área</string>
     <string name="menu_audio">AUDIO</string>
@@ -1194,12 +1194,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="title_settings_dem">Configuración DEM de TopoDroid </string>
     <string name="title_settings_walls3d"> Configuración del modelo 3d de TopoDroid</string>
     <string name="title_settings_geek">Indicador de configuración para principiantes </string>
-    <string name="title_settings_geek_survey">Principiantes: Configuración de la topografía</string>
-    <string name="title_settings_geek_splay">Principiantes: configuración de visualización </string>
-    <string name="title_settings_geek_plot">Principiantes: configuración de dibujo </string>
-    <string name="title_settings_geek_line"> Principiantes: configuración de línea </string>
-    <string name="title_settings_geek_device">Principiantes: configuración de DistoX</string>
-    <string name="title_settings_geek_import">Principiantes: configuración de importación</string>
+    <string name="title_settings_geek_survey">Frikis: Configuración de la topografía</string>
+    <string name="title_settings_geek_splay">Frikis: configuración de visualización </string>
+    <string name="title_settings_geek_plot">Frikis: configuración de dibujo </string>
+    <string name="title_settings_geek_line">Frikis: configuración de línea </string>
+    <string name="title_settings_geek_device">Frikis: configuración de DistoX</string>
+    <string name="title_settings_geek_import">Frikis: configuración de importación</string>
     <string name="title_settings_log">Ajustes de registro en TopoDroid</string>
 
     <string name="title_shift">Cambio</string>
@@ -1243,7 +1243,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_auto_plot_export_summary">Formato de exportación automática de dibujos</string>
 	
   <string name="pref_cat_survey">Ajustes de topografía</string>
-  <string name="pref_cat_splay">DATOS SPLAY</string>
+  <string name="pref_cat_splay">DATOS TOMAS</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1727,15 +1727,15 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Posicionamiento</string>
   <string name="pref_log_num">Reducción de datos</string>
-  <string name="pref_log_path">File paths</string>
-  <string name="pref_log_perm">Permissions</string>
+  <string name="pref_log_path">Rutas de archivos</string>
+  <string name="pref_log_perm">Permisos</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
-  <string name="pref_log_sync">Cosurveying</string>
+  <string name="pref_log_sync">Topografía Conjunta</string>
   <string name="pref_log_survey">Topografía</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
@@ -1892,7 +1892,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
-    <string name="info_shot_value">Tiri %1$d, Splay %2$d</string>
+    <string name="info_shot_value">Toma %1$d, lateral %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
@@ -1909,7 +1909,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>
     <string name="proj_focal">Focal</string>
-    <string name="proj_side">Lato</string>
+    <string name="proj_side">Lado</string>
     <!-- UNUSED string name="proj_near">Cerca</string -->
     <!-- UNUSED string name="proj_far">lejos</string -->
 
@@ -1953,7 +1953,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 	
-    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_laser">Láser</string -->
     <!-- UNUSED string name="cbtn_scan">Scan</string -->
     <!-- UNUSED string name="cbtn_shot">Shot</string -->
     <!-- UNUSED string name="cbtn_start">Start</string -->
@@ -1980,7 +1980,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="STATIONS_DISTANCE">DISTANCIA ESTACIÓN</string>
     <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
     <!-- UNUSED string name="CENTER">CENTRO</string -->
-    <string name="select_survey_file">Seleccionar archivo de topografia</string>
+    <string name="select_survey_file">Seleccionar archivo de topografía</string>
     <string name="select_export_file">Seleccionar archivo de exportación</string>
     <string name="select_dem_file">Seleccionar DEM</string>
     <string name="select_texture_file">Seleccionar textura</string>
@@ -1997,7 +1997,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="walls_title">Paredes</string>
     <string name="walls_convexhull">Recubrimiento Convexo</string>
-    <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
+    <string name="walls_powercrust">Recubrimiento fuerte</string>
     <string name="walls_hull">Recubrimiento</string>
     <string name="walls_bubble">Burbuja</string>
     <string name="walls_tube">condominio</string>
