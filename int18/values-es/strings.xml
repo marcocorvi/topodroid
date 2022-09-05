@@ -943,7 +943,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="help_backups">Eliminar copia de seguridad de croquis</string-->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
-    <string name="help_close_app">Cerrar l\'app</string>
+    <string name="help_close_app">Cerrar la app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
@@ -1043,7 +1043,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
-    <string name="help_splays">Splays como líneas o puntos</string>
+    <string name="help_splays">Tomas como líneas o puntos</string>
 
     <string name="help_add_project">Agregar proyecto</string>
     <string name="help_add_surveys">Agregar relieve</string>
@@ -1074,7 +1074,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="export_scale_th">Escala 1:</string>
     <string name="export_splays">Tomas</string>
     <string name="export_splays_named">Mostrar con nombre</string>
-    <string name="export_stations">Capisaldi</string>
+    <string name="export_stations">Estaciones</string>
     <string name="export_surface">Superfice</string>
     <string name="export_swap_lr">Intercambiar  L/R</string>
     <string name="export_trox">Formato Trox</string>
@@ -1118,7 +1118,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
-    <string name="title_search">Búsqueda de estación/trayecto</string>
+    <string name="title_search">Búsqueda de estación/toma</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1531,6 +1531,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_shot_timer_title">Contador de tiempo</string> 
+	
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
