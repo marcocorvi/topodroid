@@ -8,13 +8,13 @@
   </plurals>
   
   <plurals name="read_data" tools:ignore="UnusedQuantity">
-    <item quantity="zero">No hay datos leídos</item>
+    <item quantity="zero">No Se puede leer los datos</item>
     <item quantity="one">Leer un dato</item>
     <item quantity="other">Leer %1$d datos</item>
   </plurals>
   
   <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
-    <item quantity="zero">No hay datos leídos</item>
+    <item quantity="zero">No Se puede leer los datos</item>
     <item quantity="one">Leer datos (%2$d paquetes)</item>
     <item quantity="other">Leer %1$d datos (%2$d paquetes)</item>
   </plurals>
