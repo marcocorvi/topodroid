@@ -735,8 +735,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_compute"   >Calcular</string>
     <string name="button_clear_convert">Limpiar la conversión</string>
     <string name="button_convert"   >Convertir </string>
-    <string name="button_copy"      >Copia</string>
-    <string name="button_current"   >Corriente   </string>
+    <string name="button_copy"      >Copiar</string>
+    <string name="button_current"   >Activa</string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
     <string name="button_surface"   >Superficie   </string>
