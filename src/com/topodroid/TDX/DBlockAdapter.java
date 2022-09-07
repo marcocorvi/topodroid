@@ -223,6 +223,8 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
 
   /** get all the splays around a splay-block (from the prev leg to the next leg)
    * @param id    id of the given splay-block
+   * @param name  expected splay station
+   * @note the list is interrupted when there is a splay with station different from the given "name"
    */
   ArrayList< DBlock > getSplaysAtId( long id, String name )
   {
@@ -232,9 +234,11 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
       DBlock b = (DBlock)( getItem( k ) );
       if ( b.mId == id ) {
         int k1 = k-1;
-        for ( ; k1 >= START; --k1 ) {
-          DBlock b1 = (DBlock)( getItem( k1 ) );
-          if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
+        if ( ! TDSetting.mSplayOnlyForward ) {
+          for ( ; k1 >= START; --k1 ) {
+            DBlock b1 = (DBlock)( getItem( k1 ) );
+            if ( ! b1.isSplay() || ! name.equals( b1.mFrom ) ) break;
+          }
         }
         int k2 = k;
         for ( ; k2 < size; ++k2 ) {

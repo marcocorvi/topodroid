@@ -1,62 +1,48 @@
-.: Error: No .class files were found in project ".", so none of the classfile based checks could be run. Does the project need to be built first? [LintError]
 res/layout/dblock_row_noedit.xml:31: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/dblock_row_noedit.xml:54: Warning: android:editable is deprecated: Use inputType instead [Deprecated]
     android:editable="false"
     ~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:50: Error: "version_check_newer" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:50: Error: "version_check_newer" is not translated in "cn" [MissingTranslation]
     <string name="version_check_newer">Newer version available: %1$d</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:158: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:159: Error: "calib_validate_error" is not translated in "cn" [MissingTranslation]
     <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
             ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:366: Error: "index_oob" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:367: Error: "index_oob" is not translated in "cn" [MissingTranslation]
     <string name="index_oob">Index out of bounds %1$d</string>
             ~~~~~~~~~~~~~~~~
-res/values/strings.xml:1472: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1315: Error: "pref_splay_station_title" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+  <string name="pref_splay_station_title">Splay station re-assignment</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1316: Error: "pref_splay_station_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
+  <string name="pref_splay_station_summary">Re-assign station to splays</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1475: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1473: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1476: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1571: Error: "pref_weeddistance_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1574: Error: "pref_weeddistance_title" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_weeddistance_title">Weeding point distance</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1572: Error: "pref_weeddistance_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1575: Error: "pref_weeddistance_summary" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1647: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1650: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1648: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1651: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1682: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1685: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_title">Corner drag</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1683: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1686: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values-es/strings.xml:54: Warning: "linea" is a common misspelling; did you mean "línea"? [Typos]
-Otras configuraciones se refieren a la presentacion en la ventana de dibujo (tamaño del icono, tamaño de la etiqueta, ancho de linea, etc.)
-                                                                                                                               ^
-res/values-es/strings.xml:135: Warning: "Politica" is a common misspelling; did you mean "Política"? [Typos]
-    <string name="calib_gm_policy">Politica de grupo</string>
-                                   ^
-res/values-es/strings.xml:240: Warning: "movil" is a common misspelling; did you mean "móvil"? [Typos]
-    <string name="MT_bad_file">Archivo de topografía del movil corrupto</string>
-                                                         ^
-res/values-es/strings.xml:1440: Warning: "guión" is a common misspelling; did you mean "guion"? [Typos]
-  <string name="pref_dash_splay_title">Los trazos con coherencia del guión</string>
-                                                                     ^
-res/values-es/strings.xml:1584: Warning: "lineas" is a common misspelling; did you mean "líneas"? [Typos]
-  <string name="pref_linestraight_title">Enderezar lineas</string>
-                                                   ^
-res/values/strings.xml:82: Warning: Inconsistent number of arguments in formatting string copied; found both 1 here and 0 in values-es/strings.xml [StringFormatCount]
-    <string name="copied">Copied %1$s to clipboard</string>
-    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    res/values-es/strings.xml:73: Conflicting number of arguments (0) here
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
     <LinearLayout 
      ~~~~~~~~~~~~
@@ -77,4 +63,4 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-12 errors, 16 warnings
+13 errors, 15 warnings

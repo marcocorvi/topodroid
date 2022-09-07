@@ -26,9 +26,8 @@ Buttons:
 <li><img src="btn_leg_after.png" > the shot belongs to the immediately preceding leg.</li>
 <li><img src="btn_leg_before.png" > the shot belongs to the immediately following leg.</li>
 <li><img src="btn_backleg.png" > the shot is a backsight leg.</li>
-<li><img src="btn_renumber.png" > renumber shots from this leg onward following the current station naming policy. Both stations must have been specified</li>
-<li><img src="btn_splay_group.png" > apply the station change to all splays in the group of the splay shot. It applies only to the splays with same station as the edit shot.
-Only FROM station must have been specified. (A group of splays is the set of splays between two legs)</li>
+<li><img src="btn_renumber.png" > reassign shot stations from this leg onward following the current station naming policy. Both FROM and TO stations must have been specified</li>
+<li><img src="btn_splay_group.png" > apply the station change to all splays in the group of the splay shot.</li>
 <li><img src="btn_plan_profile.png" > hide the splay in either the plan, or the profile view, or both (splay only) [A]</li>
 <li><img src="btn_xsplay.png" > clear (or set) splay class for this splay, and possibly the previous splays [A]</li>
 <li><b>OK</b>: save the changes and close the dialog</li>
@@ -56,6 +55,33 @@ Long-tapping the station entry field opens the drop-down menu with the three opt
 </ul>
 
 <div style="font-size=90%">
+<b>Station reassignment</b><br>
+Station reassignment can be iniiated only from a leg.
+By default the reassignment affects all the shots following the leg up to the end.
+If the custom setting <i>splay station</i> is disabled, the stations of splay shots are not reassigned.
+<br><p>
+
+Normal reassignment should be used only for very last few legs, in case a leg
+has not been detected (eg. only two data), or erroneously detected (very close splays
+taken as a leg).<br><p>
+
+More control on the shots that are reassigned is achieved with the "multishot" selection,
+where the user can pick the shots to reassign individually.
+<br><p>
+</div>
+
+<div style="font-size=90%">
+<b>Splay group</b><br>
+A group of splays consists of all the splays between two legs.
+Splay group station change applies only to the contiguous set of splays with same station as the edit shot.
+Only FROM station must have been specified.
+<br><p>
+
+If the custom setting "Splay group" is set, only the splays after the editing shot are modified.
+<br><p>
+</div>
+
+<div style="font-size=90%">
 <b>Splay classes</b><br>
 Splay classes are enabled with a "custom setting". There are four classes:
 <ul>
@@ -70,8 +96,8 @@ The splay shot is set to the chosen class, when the data are saved.
 If the "all splay" button is checked, the class is set also to all previous contiguous
 "normal" splays.<br><p>
 
-Splay claases can also be set with the multiselection "special actions" button.
-In multiselection you can select splays that are not contiguous and assign them all a splay class.<br><p>
+Splay claases can also be set with the "multishot" selection.
+In multishot you can select splays that are not contiguous and assign them all a splay class.<br><p>
 
 If you take splays shots in a consistent way, splay classes can be set editing the leg shot and ckecking the
 splay group button.

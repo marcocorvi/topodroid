@@ -85,8 +85,10 @@ class StationNameBacksight extends StationName
     for ( DBlock blk : list ) {
       if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
-        setSplayName( blk, station );
-	sts.add( station );
+        if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
+          setSplayName( blk, station );
+          sts.add( station );
+        }
       } else if ( blk.isLeg() ) {
 	prev = blk;
         String p_to;

@@ -108,9 +108,11 @@ class StationNameTRobot extends StationName
     for ( DBlock blk : list ) {
       if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
-        // blk.mFrom = station;
-        setSplayName( blk, station );
-	sts.add( from );
+        if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
+          // blk.mFrom = station;
+          setSplayName( blk, station );
+	  sts.add( from );
+        }
       } else if ( blk.isMainLeg() ) { 
         prev = blk;
         from = to;

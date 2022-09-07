@@ -70,7 +70,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cut">Cortar</string>
     <string name="copy">Copiar</string>
     <string name="paste">Pegar</string>
-    <string name="copied">Copiado al portapapeles</string>
+    <string name="copied">Copiado %1$d al portapapeles</string>
 
     <string name="memoryA3">Memoria DistoX A3</string>
     <string name="memoryX310">Memoria DistoX X310</string>
@@ -133,7 +133,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="calib_device_mismatch">ADVERTENCIA: Desajuste en la calibración del dispositivo</string>
     <string name="calib_no_name">Escriba el nombre de la calibración</string>
     <string name="calib_no_coeff">Coeficientes de calibración no establecidos</string>
-    <string name="calib_gm_policy">Politica de grupo</string>
+    <string name="calib_gm_policy">Política de grupo</string>
     <string name="calib_gm_undelete">¿Quiere eliminar los datos de calibración?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Guardar calibración</string>
@@ -238,7 +238,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="import_zip_wait">El archivo ZIP importado puede tardar mucho tiempo. Por favor espere &#8230;</string -->
     <!-- UNUSED string name="sketch_saving">Exportando dibujo &#8230; espere &#8230;</string -->
     <string name="MT_points_none">No hay punto GPS</string>
-    <string name="MT_bad_file">Archivo de topografía del movil corrupto</string>
+    <string name="MT_bad_file">Archivo de topografía del móvil corrupto</string>
     <string name="bad_manifest">Archivo de manifiesto corrupto</string>
 
     <string name="pleasewait">Por favor espere &#8230;</string>
@@ -1299,8 +1299,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_with_android_azimuth_summary">Activar Brújula/clino Android</string>
   <string name="pref_blunder_shot_title">Tomas falsas</string>
   <string name="pref_blunder_shot_summary">Omitir tomas falsas</string>
-  <!-- UNUSED string name="pref_splay_station_title">Splay station re-assignment</string -->
-  <!-- UNUSED string name="pref_splay_station_summary">Re-assign station to splays</string -->
+  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
+  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
   <string name="pref_with_levels_title">Capas</string>
   <string name="pref_with_levels_summary">Usa capas en dibujo</string>
   <string name="pref_palettes_title">Paletas</string>
@@ -1440,7 +1440,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_min_shift_message">Sensibilidad para mover dibujo</string>
   <string name="pref_pointing_title">Orientación nodo</string>
   <string name="pref_pointing_message">Sensibilidad para orientar el punto verde (nodo)</string>
-  <string name="pref_dash_splay_title">Los trazos con coherencia del guión</string>
+  <string name="pref_dash_splay_title">Los trazos con coherencia del guion</string>
   <string name="pref_dash_splay_message">Los trazos se alinearon coherentemente entre el plan y el perfil.</string>
   <string name="pref_vert_splay_title">Límite de trazos del borde</string>
   <string name="pref_vert_splay_message">Límite de trazos del borde</string>
@@ -1584,7 +1584,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_linesnap_summary">Habilitar acción de alineación de línea/área</string>
   <string name="pref_linecurve_title">Segmento liso/derecho</string>
   <string name="pref_linecurve_summary">Acción de segmento de línea suave/enderezado</string>
-  <string name="pref_linestraight_title">Enderezar lineas</string>
+  <string name="pref_linestraight_title">Enderezar líneas</string>
   <string name="pref_linestraight_summary">Enderezar toda la acción de la línea</string>
   <string name="pref_path_multiselect_title">Ruta multiselección</string>
   <string name="pref_path_multiselect_summary">Acción de multiselección de ruta</string>

@@ -112,6 +112,7 @@ class StationNameDefaultBlunder extends StationName
   {
     if ( blk == null ) return; // safety protection
     if ( blk.isAnyLeg() ) return;
+    if ( blk.mFrom.length() > 0 ) return; // skip splay already marked 20220907
     if ( ! station.equals( blk.mFrom ) ) {
       if ( TDLog.isStreamFile() ) TDLog.f( "mark splay " + id(blk) + " : " + blk.mFrom + " -> " + station );
       setSplayName( blk, station ); // saved to DB
