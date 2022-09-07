@@ -1308,6 +1308,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_blunder_shot_summary">Poligon baklövés kihagyása</string>
   <string name="pref_splay_station_title">Sün pont újbóli hozzárendelése</string>
   <string name="pref_splay_station_summary">Pont hozzárendelése újra a sünökhöz</string>
+  <!-- TODO string name="pref_splay_group_title">Splay group-rename</string -->
+  <!-- TODO string name="pref_splay_group_summary">Splay group only-forward rename</string -->
   <string name="pref_with_levels_title">Rétegek</string>
   <string name="pref_with_levels_summary">Rajzlap rétegek használata</string>
   <!-- UNUSED string name="pref_with_rename_title">Mérés átnevezés</string -->

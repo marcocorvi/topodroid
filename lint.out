@@ -19,28 +19,34 @@ res/values/strings.xml:1315: Error: "pref_splay_station_title" is not translated
 res/values/strings.xml:1316: Error: "pref_splay_station_summary" is not translated in "cn" or "es" (Spanish) [MissingTranslation]
   <string name="pref_splay_station_summary">Re-assign station to splays</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1475: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1317: Error: "pref_splay_group_title" is not translated in "ru" (Russian), "cn", "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+  <string name="pref_splay_group_title">Splay group-rename</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1318: Error: "pref_splay_group_summary" is not translated in "ru" (Russian), "cn", "hu" (Hungarian), "es" (Spanish) [MissingTranslation]
+  <string name="pref_splay_group_summary">Splay group only-forward rename</string>
+          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+res/values/strings.xml:1477: Error: "pref_editable_stations_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_title">Editable stations</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1476: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1478: Error: "pref_editable_stations_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_editable_stations_summary">Editable station names in the shot list</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1574: Error: "pref_weeddistance_title" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1576: Error: "pref_weeddistance_title" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_weeddistance_title">Weeding point distance</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1575: Error: "pref_weeddistance_summary" is not translated in "es" (Spanish) [MissingTranslation]
+res/values/strings.xml:1577: Error: "pref_weeddistance_summary" is not translated in "es" (Spanish) [MissingTranslation]
   <string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1650: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1652: Error: "pref_full_affine_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_title">Affine transform</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1651: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1653: Error: "pref_full_affine_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1685: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1687: Error: "pref_side_drag_title" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_title">Corner drag</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~
-res/values/strings.xml:1686: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
+res/values/strings.xml:1688: Error: "pref_side_drag_summary" is not translated in "cn" [MissingTranslation]
   <string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string>
           ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 res/layout/survey_stat_dialog.xml:51: Warning: This tag and its children can be replaced by one <TextView/> and a compound drawable [UseCompoundDrawables]
@@ -63,4 +69,4 @@ res/mipmap-anydpi-v26/ic_launcher_round.xml:2: Warning: The resource R.mipmap.ic
 ^
 res/raw/name_pos_hl_geometry.glsl: Warning: The resource R.raw.name_pos_hl_geometry appears to be unused [UnusedResources]
 res/mipmap-xhdpi/ic_launcher.png: Warning: The following unrelated icon files have identical contents: iz_topodroid.png, ic_launcher.png [IconDuplicates]
-13 errors, 15 warnings
+15 errors, 10 warnings

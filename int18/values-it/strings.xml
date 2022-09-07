@@ -1301,6 +1301,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_blunder_shot_summary">Salta tiri di battuta falsi</string>
   <string name="pref_splay_station_title">Riassegnazione capisaldi splay</string>
   <string name="pref_splay_station_summary">Riassegna capisaldi agli splay</string>
+  <string name="pref_splay_group_title">Riassegnazione gruppo splay</string>
+  <string name="pref_splay_group_summary">Riassegna caposalso solo agli splay successivi</string>
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>
