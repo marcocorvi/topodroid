@@ -21,7 +21,7 @@
 
     <string name="new_survey_label">Nueva topografía</string>
     <!-- NO string name="distox_label">DistoX</string -->
-    <!-- NO string name="cave3d_label">Cave3D</string -->
+    <!-- NO string name="cave3d_label">Visor 3D</string -->
 
 <!-- UNUSED string name="r_title">Aviso importante sobre Android R</string-->
 <!-- UNUSED string name="r_dialog">
@@ -111,8 +111,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="bric_ble">BLE %1$s</string>
     <string name="bric_fw">Firmware %1$s</string>
     <string name="bric_hw">Hardware %1$s</string>
-    <string name="bric_battery">Bateria %1$d</string>
-    <string name="bric_battery_wait">Bateria &#8230;</string>
+    <string name="bric_battery">Batería %1$d</string>
+    <string name="bric_battery_wait">Batería &#8230;</string>
     <string name="bric_reset_time">Resetear hora</string>
     <string name="bric_clear_memory">limpiar memoria</string>
     <string name="bric_future_time">No resetear a un hora futura</string>
@@ -230,7 +230,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_calib_ok">Calibración importada con éxito</string>
     <string name="import_calib_no_header">Archivo de calib: Error de cabecera</string>
     <string name="import_calib_already">Calib. ya existe</string>
-    <string name="import_calib_mismatch">Calib. desajuste dispositivo</string>
+    <string name="import_calib_mismatch">Desajuste Calib. dispositivo</string>
     <string name="import_calib_no_data">Archivo de calib: sin datos</string>
     <string name="import_calib_io_error">Archivo de calib.: error lectura</string>
     <string name="import_zip_ok">Archivo ZIP importados con éxito</string>
@@ -362,7 +362,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="no_calib_check">Ninguna toma de calibración</string>
     <string name="no_calibration">Calibración no seleccionada</string>
     <!-- UNUSED string name="no_capture_app">No hay aplicaciones de foto</string -->
-    <string name="no_cave3d">Cave3D No instalado</string>
+    <string name="no_cave3d">Visor 3D No instalado</string>
     <string name="no_data_reduction">Sin reducción de datos</string>
     <string name="no_db">No hay base de datos</string>
     <string name="no_device_address">Dispositivo no seleccionado</string>
@@ -392,7 +392,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="format_measure_profile">D %1$.2f %2$.2f Dx %3$.2f Dy %4$.2f Clino %5$.1f"</string>
     <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
 
-    <string name="menu_3d">Cave3D</string>
+    <string name="menu_3d">Visor 3D</string>
     <string name="menu_about">Acerca de &#8230;</string>
     <string name="menu_area">Área</string>
     <string name="menu_audio">AUDIO</string>
@@ -618,8 +618,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cover_m">Distribución de datos M: %1$.2f %%</string>
     <string name="cover_r">Distribución de rotación: %1$.2f %%</string>
 
-    <string name="accuracy_low">Baja precisión. Calibración recomendada.</string>
-    <string name="accuracy_medium">Precision baja</string>
+    <string name="accuracy_low">Baja precisión. Se recomienda Calibración.</string>
+    <string name="accuracy_medium">Precisión baja</string>
     <!-- UNUSED string name="accuracy_high">Buena precisión</string -->
     <string name="accuracy_unreliable">Sensores poco fiables</string>
     
@@ -735,8 +735,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_compute"   >Calcular</string>
     <string name="button_clear_convert">Limpiar la conversión</string>
     <string name="button_convert"   >Convertir </string>
-    <string name="button_copy"      >Copia</string>
-    <string name="button_current"   >Corriente   </string>
+    <string name="button_copy"      >Copiar</string>
+    <string name="button_current"   >Activa</string>
     <string name="button_delete"    >Eliminar  </string>
     <string name="button_duplicate" >Duplicada </string>
     <string name="button_surface"   >Superficie   </string>
@@ -801,7 +801,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="button_zoomfit"   >Ajuste de zoom  </string -->
     <!-- UNUSED string name="button_landscape" >Paisaje </string -->
     <!-- UNUSED string name="button_portrait"  >Retrato  </string -->
-    <string name="button_splays">Splays</string>
+    <string name="button_splays">Tomas</string>
 
 
     <string name="button_write"     >Enviar calibración a distoX</string>
@@ -943,7 +943,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="help_backups">Eliminar copia de seguridad de croquis</string-->
     <string name="help_calib_check">Calibración: compruebe las tomas</string>
     <string name="help_close">Cerrar ventana</string>
-    <string name="help_close_app">Cerrar l\'app</string>
+    <string name="help_close_app">Cerrar la app</string>
     <string name="help_coeff">Mostrar coeficientes de calibración</string>
     <string name="help_color">Colores claros</string>
     <string name="help_continue">Continuar el dibujo de una línea</string>
@@ -1043,7 +1043,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_cover">Distribución del ángulo de visualización de los datos de calibración</string>
     <string name="help_compute">Cálculo de calibración</string>
     <string name="help_write">Enviar calibración a DistoX</string>
-    <string name="help_splays">Splays como líneas o puntos</string>
+    <string name="help_splays">Tomas como líneas o puntos</string>
 
     <string name="help_add_project">Agregar proyecto</string>
     <string name="help_add_surveys">Agregar relieve</string>
@@ -1051,7 +1051,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="help_view_surveys">Mostra relieve</string>
     <string name="help_view_equates">Lista de equivalentes</string>
     <string name="help_export_config">Exportar topografía</string>
-    <string name="help_delete_config">Eliminar topografia</string>
+    <string name="help_delete_config">Eliminar topografía</string>
     <string name="help_add_equate">Agregar relieves similares</string>
     <string name="help_equates">Lista relieves similares</string>
 
@@ -1072,9 +1072,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="export_roundtrip">Ida y vuelta </string>
     <!-- UNUSED string name="export_scale_png">Resolución </string -->
     <string name="export_scale_th">Escala 1:</string>
-    <string name="export_splays">Splay</string>
+    <string name="export_splays">Tomas</string>
     <string name="export_splays_named">Mostrar con nombre</string>
-    <string name="export_stations">Capisaldi</string>
+    <string name="export_stations">Estaciones</string>
     <string name="export_surface">Superfice</string>
     <string name="export_swap_lr">Intercambiar  L/R</string>
     <string name="export_trox">Formato Trox</string>
@@ -1104,7 +1104,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="import_trox">archivo de formato Trox</string>
     <string name="import_lrud">Importar LRUD</string>
     <string name="import_leg_first">Pulsación de tecla antes de los LRUD</string>
-    <string name="import_diving_datamode">Modo de datos de inmersión </string>
+    <string name="import_diving_datamode">Modo de datos de inmersión</string>
 
     <string name="title_azimut">Referencia declinación Magnética</string>
     <string name="title_audio">Comentario de audio</string>
@@ -1118,7 +1118,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_contour">Contorno</string -->
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
-    <string name="title_search">Búsqueda de estación/trayecto</string>
+    <string name="title_search">Búsqueda de estación/toma</string>
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>
@@ -1194,12 +1194,12 @@ debe ajustarlos a sus necesidades./n/n
     <string name="title_settings_dem">Configuración DEM de TopoDroid </string>
     <string name="title_settings_walls3d"> Configuración del modelo 3d de TopoDroid</string>
     <string name="title_settings_geek">Indicador de configuración para principiantes </string>
-    <string name="title_settings_geek_survey">Principiantes: Configuración de la topografía</string>
-    <string name="title_settings_geek_splay">Principiantes: configuración de visualización </string>
-    <string name="title_settings_geek_plot">Principiantes: configuración de dibujo </string>
-    <string name="title_settings_geek_line"> Principiantes: configuración de línea </string>
-    <string name="title_settings_geek_device">Principiantes: configuración de DistoX</string>
-    <string name="title_settings_geek_import">Principiantes: configuración de importación</string>
+    <string name="title_settings_geek_survey">Frikis: Configuración de la topografía</string>
+    <string name="title_settings_geek_splay">Frikis: configuración de visualización </string>
+    <string name="title_settings_geek_plot">Frikis: configuración de dibujo </string>
+    <string name="title_settings_geek_line">Frikis: configuración de línea </string>
+    <string name="title_settings_geek_device">Frikis: configuración de DistoX</string>
+    <string name="title_settings_geek_import">Frikis: configuración de importación</string>
     <string name="title_settings_log">Ajustes de registro en TopoDroid</string>
 
     <string name="title_shift">Cambio</string>
@@ -1243,7 +1243,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_auto_plot_export_summary">Formato de exportación automática de dibujos</string>
 	
   <string name="pref_cat_survey">Ajustes de topografía</string>
-  <string name="pref_cat_splay">DATOS SPLAY</string>
+  <string name="pref_cat_splay">DATOS TOMAS</string>
   <string name="pref_cat_drawing">Ajustes de dibujo</string>
   <string name="pref_cat_import_export">Importar/Exportar</string>
   <string name="pref_cat_exportimport">IMPORTAR</string>
@@ -1531,6 +1531,7 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_thumbnail_title">Tamaño miniaturas</string>
   <string name="pref_thumbnail_summary">Tamaño de las imágenes en miniatura</string>
   <string name="pref_shot_timer_title">Contador de tiempo</string> 
+	
   <string name="pref_shot_timer_summary">Tiempo en segundos antes de medir la dirección</string>
   <string name="pref_beep_volume_title">Volumen del sonido del contador</string>
   <string name="pref_beep_volume_summary">Nivel %% del volumen del pitido del contador</string>
@@ -1727,15 +1728,15 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_log_io">Sketch i/o</string>
   <string name="pref_log_loc">Posicionamiento</string>
   <string name="pref_log_num">Reducción de datos</string>
-  <string name="pref_log_path">File paths</string>
-  <string name="pref_log_perm">Permissions</string>
+  <string name="pref_log_path">Rutas de archivos</string>
+  <string name="pref_log_perm">Permisos</string>
   <string name="pref_log_photo">Foto</string>
   <string name="pref_log_plot">Dibujo</string>
   <string name="pref_log_proto">Protocolo DistoX</string>
   <string name="pref_log_ptopo">PocketTopo</string>
   <string name="pref_log_sensor">Sensores</string>
   <string name="pref_log_shot">Toma</string>
-  <string name="pref_log_sync">Cosurveying</string>
+  <string name="pref_log_sync">Topografía Conjunta</string>
   <string name="pref_log_survey">Topografía</string>
   <string name="pref_log_therion">Therion</string>
   <string name="pref_log_units">Unidades</string>
@@ -1892,7 +1893,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
-    <string name="info_shot_value">Tiri %1$d, Splay %2$d</string>
+    <string name="info_shot_value">Toma %1$d, lateral %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
@@ -1902,21 +1903,21 @@ debe ajustarlos a sus necesidades./n/n
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
 	
-    <string name="legs_surface">Externo</string>
-    <string name="legs_duplicate">Doble</string>
-    <string name="legs_commented">Comentar</string>
+    <string name="legs_surface">Superficiales</string>
+    <string name="legs_duplicate">Duplicadas</string>
+    <string name="legs_commented">Cometadas</string>
 
     <string name="proj_perspective">Parámetros de perspectiva</string>
     <string name="proj_orthographic">Parámetros ortográficos</string>
-    <string name="proj_focal">Focal</string>
-    <string name="proj_side">Lato</string>
+    <string name="proj_focal">Opacidad</string>
+    <string name="proj_side">Lado</string>
     <!-- UNUSED string name="proj_near">Cerca</string -->
     <!-- UNUSED string name="proj_far">lejos</string -->
 
     <!-- UNUSED string name="query" formatted="false">Proyecto: %d Tomas: %d Estación: %d\nLongitud: %d Profundidad: %d</string -->
     <!-- UNUSED string name="cno_files">No hay archivos</string -->
     <string name="reading_file">Lectura de archivo %1$s</string>
-    <string name="read_survey">Topografia %1$s\n</string>
+    <string name="read_survey">Topografía %1$s\n</string>
     <!-- UNUSED string name="clear">Limpiar</string -->
 
     <string name="plan_proj">Planta</string>
@@ -1947,19 +1948,19 @@ debe ajustarlos a sus necesidades./n/n
     <string name="sketch_ok">Dibujo de lectura</string>
 
     <string name="ctitle">%1$s  Clino: %2$.0f  Azimut: %3$.0f</string>
-    <string name="ctitle_surface_alpha">Transparencia DEM</string>
+    <string name="ctitle_surface_alpha">Opacidad DEM</string>
     <string name="ctitle_sketches">Dibujos</string>
     <string name="ctitle_legs">Visual</string>
     <!-- UNUSED string name="ctitle_manual_leg">nueva poligonal</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 	
-    <!-- UNUSED string name="cbtn_laser">Laser</string -->
+    <!-- UNUSED string name="cbtn_laser">Láser</string -->
     <!-- UNUSED string name="cbtn_scan">Scan</string -->
     <!-- UNUSED string name="cbtn_shot">Shot</string -->
     <!-- UNUSED string name="cbtn_start">Start</string -->
     <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
-    <string name="survey_list">RILIEVE</string>
+    <string name="survey_list">RELIEVE</string>
     <string name="survey_legs"> Visual: </string>
     <string name="survey_legs_length"> Longitud toma: </string>
     <string name="survey_splays"> Tomas laterales: </string>
@@ -1969,10 +1970,10 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cave_north"> N: %1$.1f</string>
     <string name="cave_vert"> Z: %1$.1f</string>
 
-    <string name="cave_distance"> 3D distancia: %1$.2f</string>
-    <string name="horz_distance"> 2D distancia horizontal: %1$.1f</string>
-    <string name="cave_length"> Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
-    <string name="cave_angle"> Rumbo: %1$.0f  inclinación: %2$.0f</string>
+    <string name="cave_distance">Distancia 3D : %1$.2f</string>
+    <string name="horz_distance">Distancia 2D horizontal: %1$.1f</string>
+    <string name="cave_length">Longitud de la cueva: %1$.2f %2$.1f %3$.1f</string>
+    <string name="cave_angle">Rumbo: %1$.0f  inclinación: %2$.0f</string>
 
     <!-- UNUSED string name="SURVEYS">R E L I E V E</string -->
     <string name="INFO">I N F O R M A C I Ó N</string>
@@ -1980,7 +1981,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="STATIONS_DISTANCE">DISTANCIA ESTACIÓN</string>
     <!-- UNUSED string name="DISTANCE">DISTANCIA</string -->
     <!-- UNUSED string name="CENTER">CENTRO</string -->
-    <string name="select_survey_file">Seleccionar archivo de topografia</string>
+    <string name="select_survey_file">Seleccionar archivo de topografía</string>
     <string name="select_export_file">Seleccionar archivo de exportación</string>
     <string name="select_dem_file">Seleccionar DEM</string>
     <string name="select_texture_file">Seleccionar textura</string>
@@ -1997,7 +1998,7 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="walls_title">Paredes</string>
     <string name="walls_convexhull">Recubrimiento Convexo</string>
-    <!-- OK string name="walls_powercrust">Recubrimiento fuerte</string -->
+    <string name="walls_powercrust">Recubrimiento fuerte</string>
     <string name="walls_hull">Recubrimiento</string>
     <string name="walls_bubble">Burbuja</string>
     <string name="walls_tube">condominio</string>
@@ -2042,9 +2043,9 @@ debe ajustarlos a sus necesidades./n/n
     <string name="fail_convexhull">Cálculo de envolvente convexa falló</string>
     <string name="done_powercrust">Powercrust calculado </string>
     <string name="fail_powercrust">Powercrust falló</string>
-    <string name="done_hull">Hizo paredes de una sola capa</string>
+    <string name="done_hull">Paredes de una sola capa realizadas</string>
     <string name="fail_hull">Las paredes de una sola capa fallaron</string>
-    <string name="done_tube">Hizo paredes de tubo simples</string>
+    <string name="done_tube">Paredes de tubo simples realizadas</string>
     <string name="fail_tube">Las paredes de un solo tubo fallaron</string>
     <string name="done_bubble">Hizo paredes de burbujas</string>
     <string name="fail_bubble">Paredes de burbujas fallidas</string>
@@ -2062,8 +2063,8 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="cpref_base_path_summary">Directorio que contiene los archivos de Therion.</string -->
     <!-- UNUSED string name="cpref_text_size_title">Tamaño Texto</string -->
     <!-- UNUSED string name="cpref_text_size_summary">Tamaño de la etiqueta estación</string -->
-    <!-- UNUSED string name="cpref_size_buttons_title">Tamaño Botones</string -->
-    <!-- UNUSED string name="cpref_size_buttons_summary">Tamaño Botones</string -->
+    <!-- UNUSED string name="cpref_size_buttons_title">Tamaño botones</string -->
+    <!-- UNUSED string name="cpref_size_buttons_summary">Tamaño botones</string -->
     <string name="cpref_selection_radius_title">Selección radio</string>
     <string name="cpref_selection_radius_summary">Selección radio</string>
 
@@ -2081,7 +2082,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="cpref_grid_above_title">Situación de la cuadrícula</string>
     <string name="cpref_grid_above_summary">Situar la cuadrícula en la parte superior</string>
     <string name="cpref_grid_extent_title">Extensión de cuadrícula</string>
-    <string name="cpref_grid_extent_summary">xtensión de cuadrícula alrededor del relieve </string>
+    <string name="cpref_grid_extent_summary">Extensión de cuadrícula alrededor del relieve</string>
     <string name="cpref_neg_clino_title">Vistas por debajo del horizonte</string>
     <string name="cpref_neg_clino_summary">Permitir puntos de vista por debajo del horizonte</string>
     <string name="cpref_dem_buffer_title">buffer del DEM</string>
@@ -2094,11 +2095,11 @@ debe ajustarlos a sus necesidades./n/n
   
     <string name="cpref_all_splay_title">Todas las tomas radiales</string>
     <string name="cpref_all_splay_summary">Todas las tomas radiales para paredes</string>
-    <string name="cpref_splay_use_title">Usar splay </string>
-    <string name="cpref_splay_use_summary">Usar splay: ninguno, normal, secciones [normal] </string>
+    <string name="cpref_splay_use_title">Usar Tomas</string>
+    <string name="cpref_splay_use_summary">Usar Tomas: ninguno, normal, secciones [normal] </string>
     <string name="cpref_splay_proj_title">Splays proyectados</string>
-    <string name="cpref_splay_proj_summary">¿Usar splays proyectados en plano? [n]</string>
-    <string name="cpref_splay_thr_title">Umbral de Splay</string>
+    <string name="cpref_splay_proj_summary">¿Usar tomas proyectadas en plano? [n]</string>
+    <string name="cpref_splay_thr_title">Umbral de Tomas</string>
     <string name="cpref_splay_thr_summary">Separar fuera de la barra para mantener [0.5] </string>
 
     <string name="cpref_split_triangles_title">Dividir triángulos</string>
@@ -2139,11 +2140,11 @@ debe ajustarlos a sus necesidades./n/n
 
     <string name="help_light_3d">Panoramica y luz</string>
     <string name="help_projection_3d">Proyección 3D</string>
-    <string name="help_stations_3d">Puntos fuertes </string>
-    <string name="help_splays_3d">Splay</string>
+    <string name="help_stations_3d">Estaciones</string>
+    <string name="help_splays_3d">Tomas</string>
     <string name="help_walls_3d">Paredes</string>
-    <string name="help_surface_3d">Tsuperficie</string>
+    <string name="help_surface_3d">superficie</string>
     <string name="help_color_3d">Colores</string>
-    <string name="help_frame_3d">Cuadro</string>
+    <string name="help_frame_3d">Cuadrícula</string>
 
 </resources>
