@@ -713,7 +713,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_extended">%1$s: PROFILE</string>
     <string name="fmt_profile">%1$s: PROJECTED</string>
 
-    <string name="extended_profile">Extended profile</string>
+    <!-- UNUSED string name="extended_profile">Extended profile</string -->
+    <string name="projected_profile">Projected profile</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <!-- UNUSED string name="h_section">H-SECTION</string -->

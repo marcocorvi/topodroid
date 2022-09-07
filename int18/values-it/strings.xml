@@ -700,7 +700,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="fmt_extended">%1$s: SEZIONE LONG.</string>
     <string name="fmt_profile">%1$s: PROJEZIONE</string>
 
-    <string name="extended_profile">Profilo esteso</string>
+    <!-- UNUSED string name="extended_profile">Profilo esteso</string -->
+    <string name="projected_profile">Profilo projettato</string>
     <!-- UNUSED string name="x_section">SEZIONE-X</string -->
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <!-- UNUSED string name="h_section">SEZIONE ORIZZ.</string -->

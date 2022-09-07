@@ -706,7 +706,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fmt_extended">%1$s: KIT.OLDALNÉZET</string>
     <string name="fmt_profile">%1$s: VET.OLDALNÉZET</string>
 
-    <string name="extended_profile">Kiterített Oldalnézet</string>
+    <!-- UNUSED string name="extended_profile">Kiterített Oldalnézet</string -->
+    <!-- TODO string name="projected_profile">Projected profile</string -->
     <!-- UNUSED string name="x_section">KERESZTMETSZET</string -->
     <!-- UNUSED string name="v_section">V-METSZET</string -->
     <!-- UNUSED string name="h_section">Horizontális keresztszelvény</string -->

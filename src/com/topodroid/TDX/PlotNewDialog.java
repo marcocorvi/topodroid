@@ -42,7 +42,7 @@ class PlotNewDialog extends MyDialog
 
   private Button   mBtnOK;
   private Button   mBtnBack;
-  private CheckBox mCBextended;
+  private CheckBox mCBprojected;
   private CheckBox mCBdangling;
   private int mIndex;
   private MyKeyboard mKeyboard = null;
@@ -97,21 +97,16 @@ class PlotNewDialog extends MyDialog
 
     mBtnBack.setOnClickListener( this );
 
-    mCBextended = (CheckBox)findViewById( R.id.button_extended );
-    mCBextended.setChecked( true );
+    mCBprojected = (CheckBox)findViewById( R.id.button_projected );
+    if ( ! TDLevel.overAdvanced ) {
+      mCBprojected.setVisibility( View.GONE );
+    }
     mCBdangling = (CheckBox)findViewById( R.id.button_dangling );
     mCBdangling.setChecked( false );
     if ( ! TDLevel.overExpert ) {
       mCBdangling.setVisibility( View.GONE );
     }
 
-    // mEditProject.setVisibility( View.INVISIBLE );
-    // mCBextended.setOnClickListener( new View.OnClickListener() {
-    //   public void onClick( View v ) {
-    //     mEditProject.setVisibility( mCBextended.isChecked() ? View.INVISIBLE : View.VISIBLE );
-    //   }
-    // } );
-         
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
     if ( TDSetting.mKeyboard ) {
@@ -210,21 +205,15 @@ class PlotNewDialog extends MyDialog
       return false;
     }
 
-    boolean extended = true;
-    // int project = 0;
+    boolean projected = false;
     if ( TDLevel.overAdvanced ) {
-      extended = mCBextended.isChecked();
-      // if ( ! extended ) {
-      //   try {
-      //     project = Integer.parseInt( mEditProject.getText().toString() );
-      //   } catch ( NumberFormatException e ) {  }
-      // }
+      projected = mCBprojected.isChecked();
     }
 
-    if ( extended ) {
-      mMaker.makeNewPlot( name, start, true, 0 ); // true = extended
-    } else {
+    if ( projected ) {
       mMaker.doProjectionDialog( name, start );
+    } else {
+      mMaker.makeNewPlot( name, start, true, 0 ); // true = extended
     }
     return true;
   }

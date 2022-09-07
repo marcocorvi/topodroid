@@ -701,7 +701,8 @@
     <string name="fmt_extended">%1$s: РАЗРЕЗ</string>
     <string name="fmt_profile">%1$s: ПРОЕКЦИЯ</string>
 
-    <string name="extended_profile">Разрез-развертка</string>
+    <!-- UNUSED string name="extended_profile">Разрез-развертка</string -->
+    <!-- TODO string name="projected_profile">Projected profile</string -->
     <!-- UNUSED string name="x_section">Поперечное-СЕЧЕНИЕ</string -->
     <!-- UNUSED string name="v_section">Верт-СЕЧЕНИЕ</string -->
     <!-- UNUSED string name="h_section">Гор-СЕЧЕНИЕ</string -->

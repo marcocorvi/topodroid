@@ -700,7 +700,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="fmt_extended">%1$s: SECCIÓN LONG.</string>
     <string name="fmt_profile">%1$s: PROYECCIÓN</string>
 
-    <string name="extended_profile">Alzado extendido</string>
+    <!-- UNUSED string name="extended_profile">Alzado extendido</string -->
+    <!-- TODO string name="projected_profile">Projected profile</string -->
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-sección</string -->
     <!-- UNUSED string name="h_section">H-sección</string -->

@@ -10,8 +10,8 @@ It has two text field and a confirmation button.
 <li><b>name</b> is the name assigned to the sketch.</li>
 <li><b>reference station</b></li>
 <!-- li><b>landscape</b> mode [T] [default no]</li -->
-<li><b>extended/projected</b> profile view checkbox</li>
-<li><b>projection azimuth</b>, for projected profile view</li>
+<li><b>projected</b> profile checkbox (by default the profile is "extended") [E]</li>
+<li><b>projection azimuth</b>, for projected profile view [E]</li>
 <li><b>dangling</b> sketch (origin not attached to midline)</li>
 </ul><br><p>
 
@@ -43,7 +43,7 @@ is possible to hide the display of portion of the midline, either
 after a station, or before it (i.e., between the reference station and the station).
 This is explained in the "Sketch station" dialog.<br><p>
 
-If the survey has "fixed station origin", TopoDroid prefills the "reference station" with the first survey station.
+If the survey has "fixed station origin" [setting], TopoDroid prefills the "reference station" with the first survey station.
 Otherwise it uses the last station or the active station if this is set.
 You can change it if you want another station as sketch reference.<br><p>
 
@@ -52,8 +52,10 @@ It can be forced to use an non-existing station by checking the "dangling" check
 In this case the sketch will not have a midline reference, neither splays nor stations,
 until the reference station is assigned to a leg.<br><p>
 
-If the <b>extended</b> checkbox is checked the sketch profile is extended, and <b>projection azimuth</b> is not shown.
-Otherwise the sketch profile is projected with direction of view the projection azimuth.<br><p>
+If the <b>projected</b> checkbox is checked the sketch profile is projected,
+The direction of view, ie, the projection azimuth, is chosen with a graphical dialog that allows to rotate the
+survey midline around a vertical axis.<br><p>
+Otherwise the sketch profile is extended and the  <b>projection azimuth</b> is not shown.<br><p>
 
 <div style="font-size=90%">
 In <b>landscape</b> mode the North and the vertical are towards the left side of the screen, in plan and profile views, respectively.
