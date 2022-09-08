@@ -40,8 +40,8 @@ import android.view.View.OnFocusChangeListener;
 // import android.widget.AdapterView.OnItemClickListener;
 
 class SurveyNewDialog extends MyDialog
-                             implements View.OnClickListener
-                             , View.OnLongClickListener
+                      implements View.OnClickListener
+                      , View.OnLongClickListener
 {
   // private final static String EMPTY = "";
 
@@ -69,6 +69,12 @@ class SurveyNewDialog extends MyDialog
   private long mOldId  = -1L;
 
 // -------------------------------------------------------------------
+  /** cstr
+   * @param context  context
+   * @param parent   parent activity, ie, MainWindow
+   * @param old_sid  old survey ID, from which to populate the new survey
+   * @param old_id   old shot ID, to start populating the new survey
+   */
   SurveyNewDialog( Context context, MainWindow parent, long old_sid, long old_id )
   {
     super( context, null, R.string.SurveyNewDialog ); // null app
@@ -180,6 +186,9 @@ class SurveyNewDialog extends MyDialog
 
   // ---------------------------------------------------------------
 
+  /** save the new survey 
+   * @param name   name of the new survey
+   */
   private boolean saveSurvey( String name )
   {
     // if ( name == null ) return false; // guaranteed

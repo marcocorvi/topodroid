@@ -1411,7 +1411,7 @@ public class TopoDroidApp extends Application
   }
 
   /**
-   * @param name      survey name
+   * @param name      survey name - if name is null, survey refs in TDInstance are cleared 
    * @param datamode  survey datamode
    * @param update    whether to call a display update
    * @return survey ID

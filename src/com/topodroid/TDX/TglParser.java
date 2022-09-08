@@ -74,6 +74,8 @@ public class TglParser
   public static final int SPLAY_USE_XSECTION = 2;
   public static int mSplayUse = SPLAY_USE_NORMAL;
 
+  protected static int linenr;
+
   boolean do_render; // whether ready to render
   protected TopoGL mApp;
   // boolean has_temperature = false; // TEMPERATURE
@@ -1203,5 +1205,15 @@ public class TglParser
   //   has_temperature = true;
   //   return true;
   // }
+
+  /** get next line and increment line number
+   * @return next line, trimmed
+   */
+  protected static String nextLine( BufferedReader br ) throws IOException
+  {
+    ++ linenr;
+    String line = br.readLine();
+    return ( line == null )? null : line.trim();
+  }
 
 }

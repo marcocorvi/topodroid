@@ -93,29 +93,25 @@ public class ParserDat extends TglParser
     if ( i > 0 ) dirname = pathname.substring(0, i+1);
     // TDLog.v( "MAK file " + pathname + " dir " + dirname );
 
-    int linenr = 0;
     try {
       BufferedReader br = new BufferedReader( isr );
-      ++linenr;
-      String line = br.readLine();
-      // TDLog.v( "MAK " + linenr + ":" + line );
-      while ( line != null ) {
+      linenr = 0;
+      for ( String line = nextLine( br ); line != null; line = nextLine( br ) ) {
         // line = line.trim();
         if ( line.startsWith( "#" ) ) {
           i = line.lastIndexOf( ',' );
           String file = line.substring(1,i);
           String filename0 = dirname + file;
 
-          ++linenr; line = br.readLine();
-          line = line.trim();
-          if ( line.length() == 0 ) continue; // no georeference
+          line = nextLine( br );
+          if ( line == null || line.length() == 0 ) continue; // no georeference
 	  i = line.indexOf( '[' );
           if ( i <= 0 ) continue; // missing station name
 	  String station = line.substring(0,i);
 	  int j = line.indexOf( ']' );
           if ( j <= i+3 ) continue; // bad syntax
+
 	  String data = line.substring( i+3, j );
-          // TDLog.v( "++ " + linenr + ": " + station + " - " + data );
           String[] vals = data.split( "," );
           if ( vals.length >= 3 ) {
             try {
@@ -135,9 +131,6 @@ public class ParserDat extends TglParser
 	    }
 	  }
 	}
-      
-        ++linenr; line = br.readLine();
-        // TDLog.v( "MAK " + linenr + ":" + line );
       }
     } catch ( IOException e ) {
       TDLog.Error(  "MAK I/O error " + e.getMessage() );
@@ -161,7 +154,6 @@ public class ParserDat extends TglParser
       return false;
     }
 
-    int linenr = 0;
     // TDLog.v( "DAT file <" + filename + "> station " + station );
     Cave3DCS cs = null;
     // int in_data = 0; // 0 none, 1 normal, 2 dimension
@@ -179,18 +171,10 @@ public class ParserDat extends TglParser
     double length, bearing, clino, left, up, down, right, back_bearing, back_clino;
 
     try {
-      // TDLog.v( "DAT survey " + survey );
-
-      BufferedReader br = new BufferedReader( isr );
-      ++linenr;
-      String line = br.readLine();
-      // TDLog.v( "DAT " + linenr + ":" + line );
       int cnt_shot = 0;
-      while ( line != null ) {
-        line = line.trim();
-        // "SURVEY NAME" not used
-        // "SURVEY DATE" not used
-        // "SURVEY TEAM" not used
+      BufferedReader br = new BufferedReader( isr );
+      linenr = 0;
+      for ( String line = nextLine( br ); line != null; line = nextLine( br ) ) {
 	if ( line.startsWith( "DECLINATION:" ) ) {
           String[] vals = splitLine( line );
           idx = nextIndex( vals, -1 );
@@ -200,16 +184,10 @@ public class ParserDat extends TglParser
 	    // TDLog.v( "DAT declination " + declination );
 	  } catch ( NumberFormatException e ) {
 	    TDLog.Error("Non-number declination");
-      }
+          }
 	} else if ( line.contains("FROM") && line.contains("TO" ) ) {
-          ++linenr; line = br.readLine();
-          // TDLog.v( "DAT " + linenr + ":" + line );
-	  for ( ; line != null; ) {
-	    if ( line.length() == 0 ) {
-              ++linenr; line = br.readLine();
-              // TDLog.v( "DAT " + linenr + ":" + line );
-              continue;
-	    }
+	  for ( line = nextLine( br ); line != null; line = nextLine( br ) ) {
+	    if ( line.length() == 0 ) continue;
 	    if ( line.charAt(0) == 0x0c ) {
               // TDLog.v( "DAT form-feed");
               break; // form-feed
@@ -315,14 +293,14 @@ public class ParserDat extends TglParser
 
 	      } catch ( NumberFormatException e ) {
 	        TDLog.Error("Non-number data value");
-          }
+              }
 	    }
-            ++linenr; line = br.readLine();
-            // TDLog.v( "DAT " + linenr + ":" + line );
 	  }
-	}
-        ++linenr; line = br.readLine();
-        // TDLog.v( "DAT " + linenr + ":" + line );
+	// } else {
+           // "SURVEY NAME" not used
+           // "SURVEY DATE" not used
+           // "SURVEY TEAM" not used
+        }
       }
       if ( station != null ) {
         // TDLog.v( "DAT add fix station " +  station + survey );
@@ -417,7 +395,7 @@ public class ParserDat extends TglParser
       }
       if ( found ) { // skip fixed stations that are already included in the model
         // TDLog.v( "found fix " + fix.name );
-        continue;
+        continue; // go to next fix
       }
       // TDLog.v( "start station " + fix.name + " N " + fix.y + " E " + fix.x + " Z " + fix.z );
       stations.add( new Cave3DStation( fix.getFullName(), fix.x, fix.y, fix.z ) );
@@ -428,7 +406,7 @@ public class ParserDat extends TglParser
         // TDLog.v( "scanning the t_shots");
         repeat = false;
         for ( Cave3DShot sh : t_shots ) {
-          if ( sh.isUsed() ) continue;
+          if ( sh.isUsed() ) continue; // go to next sh
           // TDLog.v( "check shot " + sh.from + " " + sh.to );
           // Cave3DStation sf = sh.from_station;
           // Cave3DStation st = sh.to_station;
@@ -485,8 +463,7 @@ public class ParserDat extends TglParser
     // 3D splay shots
     if ( mSplayUse > SPLAY_USE_SKIP ) {
       for ( Cave3DShot sh : t_splays ) {
-        if ( sh.isUsed() ) continue;
-        if (  sh.from_station != null ) continue;
+        if ( sh.isUsed() || sh.from_station != null ) continue; // go to next sh
         // TDLog.v( "check shot " + sh.from + " " + sh.to );
         for ( Cave3DStation s : stations ) {
           if ( sh.from.equals( s.getFullName() ) ) { // s.name

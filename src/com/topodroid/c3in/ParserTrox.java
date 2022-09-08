@@ -127,7 +127,6 @@ public class ParserTrox extends TglParser
       TDLog.Error("Parser Trox: null input stream reader");
       throw new ParserException( "null TROX input", 0 );
     }
-    int linenr = 0;
     String mEntrance = null;
     String mCS = null;
     double mLat = 0;
@@ -154,13 +153,12 @@ public class ParserTrox extends TglParser
     boolean duplicate = false;
     final boolean surface   = false; // TODO ...
 
-    String line = null;
     try {
+      linenr = 0;
       BufferedReader br = new BufferedReader( isr );
-      ++linenr;
-      line = br.readLine();
+      String line = nextLine( br );
       if ( line == null ) return false;
-      line = line.trim().replaceAll("\\s+", " ");
+      line = line.replaceAll("\\s+", " ");
       if ( ! line.startsWith( "<?xml " ) ) { // NOT XML
         TDLog.Error( "VTopo trox not an xml file");
         return false;
@@ -174,11 +172,8 @@ public class ParserTrox extends TglParser
       int cnt_shot  = 0;
       boolean isSplay = false;
 
-      for ( ; ; ) {
-        ++linenr;
-        line = br.readLine();
-        if ( line == null ) break;
-        line = line.trim().replaceAll("\\s+", " ");
+      for ( line = nextLine( br ); line != null; line = nextLine( br ) ) {
+        line = line.replaceAll("\\s+", " ");
         // TDLog.v( "LINE: " + line );
 
         if ( line.startsWith("<Cavite>") )          { inCavite = true;
@@ -338,7 +333,7 @@ public class ParserTrox extends TglParser
         // ignore if ( line.startsWith("<Couleur>") ) continue;
       }
     } catch ( IOException e ) {
-      TDLog.Error( "ERROR " + linenr + ": " + line );
+      TDLog.Error( "ERROR " + linenr + ": " + linenr );
       throw new ParserException( getName(), linenr );
     }
     return true;

@@ -126,17 +126,21 @@ class DEMgridParser extends ParserDEM
       // fr = TDFile.getFileReader( mFilename );
       // BufferedReader mBr = new BufferedReader( fr );
       String line = null;
-      boolean ready = false;
-      while ( ! ready ) {
-        line = mBr.readLine().trim();
+      boolean not_done = true;
+      while ( not_done &&  ( line = mBr.readLine() ) != null ) {
+        line = line.trim();
         if ( line.length() == 0 ) continue;
         if ( line.startsWith("#") || line.startsWith("grid") ) continue;
         try { 
           String[] vals = TDString.splitOnSpaces( line );
           Float.parseFloat( vals[0] );
-          ready = true;
+          not_done = false;
         } catch ( NumberFormatException e ) { continue; }
       } 
+      if ( not_done ) {
+        mValid = false;
+        return false;
+      }
       int j = flip_vert ? 0 : mNr2-1;
       int k = 0; // grid-line number
       for ( ; k < yoff; ++k ) {
