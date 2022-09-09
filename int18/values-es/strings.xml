@@ -146,11 +146,11 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="connect_failed">Fallo de conexión</string -->
     <!-- UNUSED string name="data"> Datos</string -->
     <string name="using">Utilizar %1$s</string>
-    <string name="calib_error">Error: %1$.2f grados (BH delta %2$.3f)</string>
-    <string name="calib_validate_error">Errore medio: %1$.2f grados</string>
-    <string name="calib_stddev">Error stddev: %1$.4f grados</string>
-    <string name="calib_max_error">Max. error: %1$.4f grados</string>
-    <string name="calib_ave_std">Precisión: %1$.4f %2$.4f grados</string>
+    <string name="calib_error">Error: %1$.2f &#xb0; (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Errore medio: %1$.2f &#xb0;</string>
+    <string name="calib_stddev">Error stddev: %1$.4f &#xb0;</string>
+    <string name="calib_max_error">Max. error: %1$.4f &#xb0;</string>
+    <string name="calib_ave_std">Precisión: %1$.4f %2$.4f &#xb0;</string>
     <string name="calib_precision">Precisión</string>
     <string name="calib_iter">Iteraciones: %1$d</string>
     <string name="calib_reset">¿Quiere restablecer la calibración DistoX?</string>

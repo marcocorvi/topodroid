@@ -147,11 +147,11 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
-    <string name="calib_error">Átlagos hiba: %1$.2f &#0080; (BH delta %2$.3f)</string>
-    <string name="calib_validate_error">Átlagos hiba: %1$.2f &#0080;</string>
-    <string name="calib_stddev">Hiba szórása:  %1$.4f &#0080;</string>
-    <string name="calib_max_error">Max. hiba: %1$.4f &#0080;</string>
-    <string name="calib_ave_std">Pontosság: %1$.4f ± %2$.4f &#0080;</string>
+    <string name="calib_error">Átlagos hiba: %1$.2f &#xb0; (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Átlagos hiba: %1$.2f &#xb0;</string>
+    <string name="calib_stddev">Hiba szórása:  %1$.4f &#xb0;</string>
+    <string name="calib_max_error">Max. hiba: %1$.4f &#xb0;</string>
+    <string name="calib_ave_std">Pontosság: %1$.4f ± %2$.4f &#xb0;</string>
 
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>

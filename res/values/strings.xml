@@ -155,11 +155,11 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="connect_failed">Failed connect</string -->
     <!-- UNUSED string name="data"> data</string -->
     <string name="using">Using %1$s</string>
-    <string name="calib_error">Average error: %1$.2f &#0080; (BH delta %2$.3f)</string>
-    <string name="calib_validate_error">Average error: %1$.2f &#0080;</string>
-    <string name="calib_stddev">Error stddev: %1$.2f &#0080;</string>
-    <string name="calib_max_error">Max. error: %1$.2f &#0080;</string>
-    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f &#0080;</string>
+    <string name="calib_error">Average error: %1$.2f &#xb0; (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Average error: %1$.2f &#xb0;</string>
+    <string name="calib_stddev">Error stddev: %1$.2f &#xb0;</string>
+    <string name="calib_max_error">Max. error: %1$.2f &#xb0;</string>
+    <string name="calib_ave_std">Accuracy: %1$.2f ± %2$.2f &#xb0;</string>
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
