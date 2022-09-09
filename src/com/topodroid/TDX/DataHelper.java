@@ -1852,7 +1852,13 @@ public class DataHelper extends DataSetObservable
 */
   }
 
-
+  /** transfer plots, at a given station, from a survey to another
+   * @param old_survey_name   name of the source survey
+   * @param new_survey_name   name of the target survey
+   * @param sid               ID of the target survey
+   * @param old_sid           ID of the source survey
+   * @param station           plot origin station
+   */
   private void transferPlots( String old_survey_name, String new_survey_name, long sid, long old_sid, String station )
   {
     if ( myDB == null ) return;
@@ -1881,26 +1887,46 @@ public class DataHelper extends DataSetObservable
   }
    * END_SKETCH_3D */
 
+  /** transfer shots from a survey to another
+   * @param sid     target survey ID
+   * @param old_sid source survey ID
+   * @param old_id  ID of first shot of the source survey that is transferrred
+   */
   void transferShots( long sid, long old_sid, long old_id )
   {
     if ( myDB == null ) return;
     SurveyInfo old_survey = selectSurveyInfo( old_sid );
     SurveyInfo new_survey = selectSurveyInfo( sid );
-    long max_id = maxId( SHOT_TABLE, old_sid );
+    long max_old_id = maxId( SHOT_TABLE, old_sid );
+    // TDLog.v("max shot ID " + max_old_id );
+
+    // // transfer shots could be as simple as 
+    // long delta_id =  maxId( SHOT_TABLE, sid ) + 1 - old_id;
+    // transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=" + sid + ", id=(id+" + delta_id + ") where surveyId=" + old_sid + " and idi>=" + old_id );
+    // // however care must be taken about fxeds, photos, audios and plots
 
     ContentValues vals0 = new ContentValues();
     vals0.put( "surveyId", sid );
     String[] where0 = new String[2];
     where0[0] = Long.toString( old_sid );
 
-    try {
-      while ( old_id < max_id ) {
-        DBlock blk = selectShot( old_id, old_sid );
-        if ( blk == null ) continue;
+    Set<String> stations = new TreeSet<>();
 
+    try {
+      myDB.beginTransaction();
+      ContentValues cv = new ContentValues();
+      cv.put( "surveyId", sid );
+      for ( ; old_id < max_old_id; ++old_id ) {
+        DBlock blk = selectShot( old_id, old_sid );
+        if ( blk == null ) {
+          TDLog.Error("null block at ID " + old_id );
+          continue;
+        }
         if ( transferShotStmt == null ) {
+          // TDLog.v("compile transfer stmt");
           transferShotStmt = myDB.compileStatement( "UPDATE shots SET surveyId=?, id=? where surveyId=? and id=?" );
         }
+        // TDLog.v("trasfer shot ID " + old_id + " to " + myNextId );
         transferShotStmt.bindLong(1, sid);
         transferShotStmt.bindLong(2, myNextId);
         transferShotStmt.bindLong(3, old_sid);
@@ -1908,45 +1934,25 @@ public class DataHelper extends DataSetObservable
         transferShotStmt.execute();
         
         // transfer fixeds, stations, plots and sketches
+        // UPDATE fixeds SET surveyId=? where surveyId=? and station=\"?\" 
+        //  sid, old_sid, blk.mFrom
         // TODO FIXME cross-sections 
-        if ( blk.mFrom.length() > 0 ) {
-          List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
-          for ( FixedInfo fixed : fixeds ) {
-            where0[1] = Long.toString( fixed.id );
-            myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
-          }
-          where0[1] = blk.mFrom;
-          myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
+        if ( blk.mFrom.length() > 0 ) stations.add( blk.mFrom );
+        if ( blk.mTo.length() > 0 ) stations.add( blk.mTo );
 
-          transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
-          // transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom ); // FIXME_SKETCH_3D
-        }
-        if ( blk.mTo.length() > 0 ) {
-          List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mTo );
-          for ( FixedInfo fixed : fixeds ) {
-            where0[1] = Long.toString( fixed.id );
-            myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
-          }
-          where0[1] = blk.mTo;
-          myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 ); 
-          
-          transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mTo );
-          // transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom ); // FIXME_SKETCH_3D
-        }
-
-        ContentValues cv = new ContentValues();
-        cv.put( "surveyId", sid );
         cv.put( "shotId",   myNextId );
         String[] where = new String[2];
         where[0] = Long.toString( old_sid );
         List< SensorInfo > sensors = selectSensorsAtShot( old_sid, old_id ); // transfer sensors
-        for ( SensorInfo sensor : sensors ) {
+        // TDLog.v("sensors " + sensors.size() );
+        if ( sensors.size() > 0 ) for ( SensorInfo sensor : sensors ) {
           where[1] = Long.toString( sensor.id );
           myDB.update( SENSOR_TABLE, cv, WHERE_SID_ID, where );
         }
 
         AudioInfo audio = getAudio( old_sid, old_id ); // transfer audio
         if ( audio != null ) {
+          // TDLog.v("audio");
           where[1] = Long.toString( audio.fileIdx );
           myDB.update( AUDIO_TABLE, cv, WHERE_SID_SHOTID, where );
           String oldname = TDPath.getSurveyWavFile( old_survey.name, Long.toString(audio.fileIdx) );
@@ -1955,7 +1961,8 @@ public class DataHelper extends DataSetObservable
         }
 
         List< PhotoInfo > photos = selectPhotoAtShot( old_sid, old_id ); // transfer photos
-        for ( PhotoInfo photo : photos ) {
+        // TDLog.v("photos " + photos.size( ) );
+        if ( photos.size() > 0 ) for ( PhotoInfo photo : photos ) {
           where[1] = Long.toString( photo.id );
           myDB.update( PHOTO_TABLE, cv, WHERE_SID_ID, where );
           String oldname = TDPath.getSurveyJpgFile( old_survey.name, Long.toString(photo.id) );
@@ -1964,10 +1971,33 @@ public class DataHelper extends DataSetObservable
         }
 
         ++ myNextId;
-        ++ old_id;
       }
+
+      // TDLog.v("transfer stations " + stations.size() );
+      for ( String st : stations ) {
+        // if ( transferShotFixedStmt == null ) {
+        //   transferShotFixedStmt = myDB.compileStatement( "UPDATE fixeds SET surveyId=? where surveyId=? and station=\"?\"" );
+        // }
+        // transferShotFixedStmt.bindLong(1, sid);
+        // transferShotFixedStmt.bindLong(2, old_sid);
+        // transferShotFixedStmt.bindString(2, blk.mFrom);
+        // transferShotFixedStmt.execute();
+
+        List< FixedInfo > fixeds = selectFixedAtStation( old_sid, st );
+        for ( FixedInfo fixed : fixeds ) {
+          where0[1] = Long.toString( fixed.id );
+          myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
+        }
+        where0[1] = st;
+        myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
+
+        transferPlots( old_survey.name, new_survey.name, sid, old_sid, st );
+        // transferSketches( old_survey.name, new_survey.name, sid, old_sid, st ); // FIXME_SKETCH_3D
+      }
+      myDB.setTransactionSuccessful();
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e) { logError("transfer shots", e); }
+    } catch (SQLiteException e) { logError("transfer shots", e);
+    } finally { myDB.endTransaction(); }
   }
 
   long insertManualShotAt( long sid, long at, long millis, long color, double d, double b, double c, double r,
@@ -4414,9 +4444,12 @@ public class DataHelper extends DataSetObservable
   //   try { transferStationStmt.execute(); } catch (SQLiteException e ) { logError("...", e);  }
   // }
   
-
-  // myDB is checked non-null before transfer methods are called
-  //
+  /** transfer a plot from one survey to another
+   * @param sid      ID of the target survey
+   * @param old_sid  ID of the source survey
+   * @param pid      plot ID
+   * @note myDB is checked non-null before transfer methods are called
+   */
   private void transferPlot( long sid, long old_sid, long pid )
   {
     if ( transferPlotStmt == null ) {
@@ -4431,20 +4464,25 @@ public class DataHelper extends DataSetObservable
     } catch (SQLiteException e ) { logError("plot transf", e); }
   }
 
-  private void transferSketch( long sid, long old_sid, long pid )
-  {
-    if ( transferSketchStmt == null ) {
-      transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
-    }
-    transferSketchStmt.bindLong( 1, sid );
-    transferSketchStmt.bindLong( 2, old_sid );
-    transferSketchStmt.bindLong( 3, pid );
-    try {
-      transferSketchStmt.execute();
-    } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
-    } catch (SQLiteException e ) { logError("sketch transf", e); }
-  }
-
+  // /** transfer a sketch from one survey to another
+  //  * @param sid      ID of the target survey
+  //  * @param old_sid  ID of the source survey
+  //  * @param pid      sketch ID
+  //  * @note myDB is checked non-null before transfer methods are called
+  //  */
+  // private void transferSketch( long sid, long old_sid, long pid )
+  // {
+  //   if ( transferSketchStmt == null ) {
+  //     transferSketchStmt = myDB.compileStatement( "UPDATE sketches set surveyId=? WHERE surveyId=? AND id=?" );
+  //   }
+  //   transferSketchStmt.bindLong( 1, sid );
+  //   transferSketchStmt.bindLong( 2, old_sid );
+  //   transferSketchStmt.bindLong( 3, pid );
+  //   try {
+  //     transferSketchStmt.execute();
+  //   } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
+  //   } catch (SQLiteException e ) { logError("sketch transf", e); }
+  // }
 
   boolean hasFixed( long sid, String station )
   {
@@ -4863,7 +4901,7 @@ public class DataHelper extends DataSetObservable
     Cursor cursor = null;
     try {
       String query = String.format("SELECT name FROM %s WHERE name='%s' COLLATE NOCASE", table, name );
-      TDLog.v("DB query string <" + query + ">" );
+      // TDLog.v("DB query string <" + query + ">" );
       cursor = myDB.rawQuery( query, new String[] { } );
       ret = ( cursor != null && cursor.moveToFirst() ); 
     } catch ( SQLiteDiskIOException e ) { handleDiskIOError( e );
@@ -6272,7 +6310,7 @@ public class DataHelper extends DataSetObservable
      {
         // FIXME this is called at each start when the database file exists
         // TDLog.Log( TDLog.LOG_DB, "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
-        TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
+        // TDLog.v( "DB open helper - upgrade old " + oldVersion + " new " + newVersion );
         switch ( oldVersion ) {
           case 14: 
             db.execSQL( "ALTER TABLE surveys ADD COLUMN declination REAL default 0" );

@@ -91,12 +91,12 @@
         android:importantForAutofill="no"
       / -->
 
-      <CheckBox android:id="@+id/button_extended"
+      <CheckBox android:id="@+id/button_projected"
         android:layout_width="0dp"
         android:layout_height="wrap_content" 
         android:layout_weight="50"
         android:layout_marginEnd="@dimen/marginh"
-        android:text="@string/extended_profile"
+        android:text="@string/projected_profile"
       />
 
       <CheckBox android:id="@+id/button_dangling"

@@ -74,6 +74,7 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="memoryA3">DistoX A3</string>
     <string name="memoryX310">DistoX X310</string>
+    <string name="memoryXBLE">DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Dati DistoX</string -->
 
     <string name="thp_user">utente</string>
@@ -699,7 +700,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="fmt_extended">%1$s: SEZIONE LONG.</string>
     <string name="fmt_profile">%1$s: PROJEZIONE</string>
 
-    <string name="extended_profile">Profilo esteso</string>
+    <!-- UNUSED string name="extended_profile">Profilo esteso</string -->
+    <string name="projected_profile">Profilo projettato</string>
     <!-- UNUSED string name="x_section">SEZIONE-X</string -->
     <!-- UNUSED string name="v_section">SEZIONE VERT.</string -->
     <!-- UNUSED string name="h_section">SEZIONE ORIZZ.</string -->
@@ -1298,6 +1300,10 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_with_android_azimuth_summary">Abilita bussola/clino Android</string>
   <string name="pref_blunder_shot_title">Falsi tiri</string>
   <string name="pref_blunder_shot_summary">Salta tiri di battuta falsi</string>
+  <string name="pref_splay_station_title">Riassegnazione capisaldi splay</string>
+  <string name="pref_splay_station_summary">Riassegna capisaldi agli splay</string>
+  <string name="pref_splay_group_title">Riassegnazione gruppo splay</string>
+  <string name="pref_splay_group_summary">Riassegna caposalso solo agli splay successivi</string>
   <string name="pref_with_levels_title">Strati</string>
   <string name="pref_with_levels_summary">Usa strati di tele</string>
   <string name="pref_palettes_title">Tavolozze</string>

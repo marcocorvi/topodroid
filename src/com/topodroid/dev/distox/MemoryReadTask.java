@@ -66,6 +66,8 @@ public class MemoryReadTask extends AsyncTask<Void, Integer, Integer>
     if ( mApp.get() != null ) {
       if ( mType == Device.DISTO_X310 ) {
         res = mApp.get().readX310Memory( mAddress, mHT[0], mHT[1], mMemory );
+      } else if ( mType == Device.DISTO_XBLE ) {
+        res = mApp.get().readXBLEMemory( mAddress, mHT[0], mHT[1], mMemory );
       } else if ( mType == Device.DISTO_A3 ) {
         res = mApp.get().readA3Memory( mAddress, mHT[0], mHT[1], mMemory );
       }

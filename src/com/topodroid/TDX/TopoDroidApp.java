@@ -848,7 +848,7 @@ public class TopoDroidApp extends Application
       //   BluetoothDevice bt_device = TDInstance.getBleDevice();
       //   // TDLog.v( "App: create ble comm. address " + address + " BT " + ((bt_device==null)? "null" : bt_device.getAddress() ) );
       //   mComm = new BleComm( this, address, bt_device );
-      } else if (TDInstance.isDeviceDistoXBLE()){ // SIWEI_TIAN changed on Jun 2022
+      } else if (TDInstance.isDeviceXBLE()){ // SIWEI_TIAN changed on Jun 2022
         String address = TDInstance.deviceAddress();
         BluetoothDevice bt_device = TDInstance.getBleDevice();
         mComm = new DistoXBLEComm( this,this, address, bt_device );
@@ -1245,6 +1245,27 @@ public class TopoDroidApp extends Application
     return -1;
   }
 
+  /** read the DistoX-BLE memory
+   * @param address   device address
+   * @param h0        from address (?)
+   * @param h1        to address (?)
+   * @param memory    array of octets to be filled by the memory-read
+   * @return number of octets that have been read (-1 on error)
+   */
+  public int readXBLEMemory( String address, int h0, int h1, ArrayList< MemoryOctet > memory )
+  {
+    if ( mComm == null || isCommConnected() ) return -1;
+    if ( mComm instanceof DistoXBLEComm ) {
+      DistoXBLEComm comm = (DistoXBLEComm)mComm;
+      int ret = comm.readXBLEMemory( address, h0, h1, memory );
+      resetComm();
+      return ret;
+    } else {
+      TDLog.e("read XBLE memory: not XBLE comm");
+    }
+    return -1;
+  }
+
   /** read the DistoX (A3) memory
    * @param address   device address
    * @param h0        ?
@@ -1390,7 +1411,7 @@ public class TopoDroidApp extends Application
   }
 
   /**
-   * @param name      survey name
+   * @param name      survey name - if name is null, survey refs in TDInstance are cleared 
    * @param datamode  survey datamode
    * @param update    whether to call a display update
    * @return survey ID
@@ -1681,7 +1702,7 @@ public class TopoDroidApp extends Application
   // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
 
   /** set the name of the "current station" or unset it
-   * @param name   "current station" name
+   * @param st   "current station" name
    * @return true if the "current station" is set
    * @note if the given name equals the "current station" this is unset
    */
@@ -2521,14 +2542,15 @@ public class TopoDroidApp extends Application
    * @param name   filename including ".bin" extension
    * @return ...
    */
-  public int dumpFirmware( String name ) {
-    TDLog.v("APP FW dump " + name);
+  public int dumpFirmware( String name )
+  {
+    TDLog.v("APP FW dump " + name );
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_READ, filename )).execute( );
 
-    if (mComm == null || TDInstance.getDeviceA() == null) return -1;
+    if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
     if (mComm instanceof DistoX310Comm){
       return ((DistoX310Comm) mComm).dumpFirmware(TDInstance.deviceAddress(), TDPath.getBinFile(name));
     } else if ( mComm instanceof DistoXBLEComm ) {

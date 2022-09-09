@@ -375,7 +375,6 @@ public class ParserTh extends TglParser
 
     String surveyname = "--";
     String path = basepath;
-    int linenr = 0;
     // TDLog.v( "Th basepath <" + basepath + ">");
     // TDLog.v( "Th filename <" + filename + ">");
     Cave3DCS cs = null;
@@ -407,11 +406,8 @@ public class ParserTh extends TglParser
 
       // FileReader fr = new FileReader( filename );
       BufferedReader br = new BufferedReader( isr );
-      ++linenr;
-      String line = br.readLine();
-      // TDLog.v("Th linenr + ":" + line );
-      while ( line != null ) {
-        line = line.trim();
+      linenr = 0;
+      for ( String line = nextLine( br ); line != null; line = nextLine( br ) ) {
         int pos = line.indexOf( '#' );
         if ( pos >= 0 ) {
           line = line.substring( 0, pos );
@@ -777,9 +773,6 @@ public class ParserTh extends TglParser
             }
           }
         }
-        ++linenr;
-        line = br.readLine();
-        // TDLog.v( "Th " + linenr + ":" + line );
       }
     } catch ( IOException e ) {
       TDLog.Error( "Th IO error " + e.getMessage() );
@@ -910,7 +903,7 @@ public class ParserTh extends TglParser
       }
       if ( found ) { // skip fixed stations that are already included in the model
         // TDLog.v( "Th fix " + f.getFullName() + " already used" );
-        continue;
+        continue; // go to next fix
       }
       // TDLog.v( "Th add start station " + f.getFullName() + " N " + f.y + " E " + f.x + " Z " + f.z );
       stations.add( new Cave3DStation( f.getFullName(), f.x, f.y, f.z ) );
@@ -921,7 +914,7 @@ public class ParserTh extends TglParser
         // TDLog.v( "Th scanning the shots");
         repeat = false;
         for ( Cave3DShot sh : shots ) {
-          if ( sh.isUsed() ) continue;
+          if ( sh.isUsed() ) continue; // go to next sh
           // TDLog.v( "Th check shot " + sh.from + " " + sh.to );
           // Cave3DStation sf = sh.from_station;
           // Cave3DStation st = sh.to_station;
@@ -991,8 +984,7 @@ public class ParserTh extends TglParser
       for ( Cave3DStation s : stations ) {
         ArrayList< Vector3D > station_splays = new ArrayList<>();
         for ( Cave3DShot sh : splays ) {
-          if ( sh.isUsed() ) continue;
-          if ( sh.from_station != null ) continue;
+          if ( sh.isUsed() || sh.from_station != null ) continue; // go to next sh
           if ( s.hasName( sh.from ) ) {
             sh.from_station = s;
             sh.setUsed();

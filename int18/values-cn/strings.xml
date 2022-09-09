@@ -74,6 +74,7 @@
 
     <string name="memoryA3">DistoX A3 存储器</string>
     <string name="memoryX310">DistoX X310 存储器</string>
+    <string name="memoryXBLE">DistoX-BLE 存储器</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">用户</string>
@@ -703,7 +704,8 @@
     <string name="fmt_extended">%1$s: 侧视图</string>
     <string name="fmt_profile">%1$s: 项目</string>
 
-    <string name="extended_profile">延展剖面图</string>
+    <!-- UNUSED string name="extended_profile">延展剖面图</string -->
+    <!-- TODO string name="projected_profile">Projected profile</string -->
     <!-- UNUSED string name="x_section">X-断面</string -->
     <!-- UNUSED string name="v_section">V-断面</string -->
     <!-- UNUSED string name="h_section">H-截面图</string -->
@@ -1301,6 +1303,10 @@
   <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
   <string name="pref_blunder_shot_title">错误的测射</string>
   <string name="pref_blunder_shot_summary">跳过错误的主线测射</string>
+  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
+  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
+  <!-- TODO string name="pref_splay_group_title">Splay group-rename</string -->
+  <!-- TODO string name="pref_splay_group_summary">Splay group only-forward rename</string -->
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

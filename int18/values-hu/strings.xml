@@ -74,6 +74,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="memoryA3">DistoX A3 memória </string>
     <string name="memoryX310">DistoX X310 memória</string>
+    <string name="memoryXBLE">DistoX-BLE memória</string>
     <!-- UNUSED string name="memory_data">DistoX adat</string -->
 
     <string name="thp_user">felhasználó</string>
@@ -146,11 +147,12 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="connect_failed">Hibás kapcsolat</string -->
     <!-- UNUSED string name="data"> adat</string -->
     <string name="using">%1$s használata</string>
-    <string name="calib_error">Átlagos hiba: %1$.2f fok (BH delta %2$.3f)</string>
-	<string name="calib_validate_error">Átlagos hiba: %1$.2f fok</string>
-    <string name="calib_stddev">Hiba szórása:  %1$.4f fok</string>
-    <string name="calib_max_error">Max. hiba: %1$.4f fok</string>
-    <string name="calib_ave_std">Pontosság: %1$.4f ± %2$.4f fok</string>
+    <string name="calib_error">Átlagos hiba: %1$.2f &#0080; (BH delta %2$.3f)</string>
+    <string name="calib_validate_error">Átlagos hiba: %1$.2f &#0080;</string>
+    <string name="calib_stddev">Hiba szórása:  %1$.4f &#0080;</string>
+    <string name="calib_max_error">Max. hiba: %1$.4f &#0080;</string>
+    <string name="calib_ave_std">Pontosság: %1$.4f ± %2$.4f &#0080;</string>
+
     <string name="calib_precision">Precizitás</string>
     <string name="calib_iter">Iterációk száma: %1$d</string>
     <string name="calib_reset">Visszaállítja a DistoX kalibrációját?</string>
@@ -705,7 +707,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="fmt_extended">%1$s: KIT.OLDALNÉZET</string>
     <string name="fmt_profile">%1$s: VET.OLDALNÉZET</string>
 
-    <string name="extended_profile">Kiterített Oldalnézet</string>
+    <!-- UNUSED string name="extended_profile">Kiterített Oldalnézet</string -->
+    <!-- TODO string name="projected_profile">Projected profile</string -->
     <!-- UNUSED string name="x_section">KERESZTMETSZET</string -->
     <!-- UNUSED string name="v_section">V-METSZET</string -->
     <!-- UNUSED string name="h_section">Horizontális keresztszelvény</string -->
@@ -1305,6 +1308,10 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_with_android_azimuth_summary">Android iránytű/lejtszögmérő engedélyezése</string>
   <string name="pref_blunder_shot_title">Baklövések</string>
   <string name="pref_blunder_shot_summary">Poligon baklövés kihagyása</string>
+  <string name="pref_splay_station_title">Sün pont újbóli hozzárendelése</string>
+  <string name="pref_splay_station_summary">Pont hozzárendelése újra a sünökhöz</string>
+  <string name="pref_splay_group_title">Sün csoport átnevezés</string>
+  <string name="pref_splay_group_summary">Sün csoport átnevezése csak előreméréskor</string>
   <string name="pref_with_levels_title">Rétegek</string>
   <string name="pref_with_levels_summary">Rajzlap rétegek használata</string>
   <!-- UNUSED string name="pref_with_rename_title">Mérés átnevezés</string -->

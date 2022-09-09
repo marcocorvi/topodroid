@@ -84,7 +84,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    */
   public int packetProcess( byte[] databuf )
   {
-    if(databuf.length == 0) return PACKET_NONE;
+    if ( databuf.length == 0 ) return PACKET_NONE;
     byte command = databuf[0];
     if ( command == 0x38 || command == 0x39 ) {
       int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
@@ -105,10 +105,14 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         return PACKET_REPLY;
       } else if (command == 0x39) {
         return PACKET_WRITE_REPLY;
+	  // } else if (command == 0x3d) {
+      //   return PACKET_REPLY;
+      // } else if (command == 0x3e) {
+      //   return PACKET_WRITE_REPLY;
         // } else {
         //   return PACKET_ERROR;
       }
-    } else if(command == 0x3c && databuf.length == 3){              //signature:hardware ver.
+    } else if ( command == 0x3c && databuf.length == 3 ){ // FIXME signature: hardware ver.
       mRepliedData[0] = databuf[1];
       mRepliedData[1] = databuf[2];
       return PACKET_SIGNATURE;

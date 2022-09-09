@@ -13,7 +13,7 @@ package com.topodroid.dev.distox_ble;
 
 public class DistoXBLEInfo 
 {
-  public String mCode;     // device X310 code
-  public String mFirmware; // device X310 firmware
-  public String mHardware; // device X310 hardware
+  public String mCode;     // device XBLE code
+  public String mFirmware; // device XBLE firmware
+  public String mHardware; // device XBLE hardware
 }

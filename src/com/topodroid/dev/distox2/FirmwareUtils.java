@@ -31,6 +31,9 @@ public class FirmwareUtils
   public static final int HW_TIAN    = 3;
 
   // ------------------------------------------------------------------------------
+  /** @return compatible hardware type for a given firmware
+   * @param fw  firmware number
+   */
   static int getHardware( int fw ) 
   {
     if ( fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 ) return HW_HEEB;
@@ -39,23 +42,26 @@ public class FirmwareUtils
     return HW_NONE;
   }
 
-  // say if the file fw code is compatible with some known hardware
-  // the real hardware is not known at this point - therefore can only check the firmware file signature
+  /** say if the file fw code is compatible with some known hardware
+   * the real hardware is not known at this point - therefore can only check the firmware file signature
+   * @return true if the hardwrae type is known
+   */
   static boolean isCompatible( int fw )
   {
     return getHardware( fw ) != HW_NONE;
   }
 
-  // try to guess firmware version reading bytes from the file
-  // return <= 0 (failure) or one of
-  //    2100 2200 2300 2400 2412 2500 2501 2512
-  //    2610 2630 2640
-  //    2700
-  //
-  // od -j 2048 -N 64 -x ... <-- HEEB block
-  // od -j 4096 -N 64 -x ... <-- LANDOLT block
-  // od -j    0 -N 64 -x ... <-- TIAN block
-
+  /** try to guess firmware version reading bytes from the file
+   * @param fp   firmware file
+   * @return <= 0 (failure) or one of
+   *    2100 2200 2300 2400 2412 2500 2501 2512
+   *    2610 2630 2640
+   *    2700
+   *
+   * od -j 2048 -N 64 -x ... <-- HEEB block
+   * od -j 4096 -N 64 -x ... <-- LANDOLT block
+   * od -j    0 -N 64 -x ... <-- TIAN block
+   */
   public static int readFirmwareFirmware( File fp )
   {
     FileInputStream fis = null;
@@ -115,8 +121,13 @@ public class FirmwareUtils
     return 0;
   }
 
-  // ./utils/firmware_checksum ... <-- provides length and checksum
-  //
+  /** check the firmware checksum
+   * @param fw_version   firmware version
+   * @param fp           firmware file
+   * @return true if the checksum passed
+   *
+   * ./utils/firmware_checksum ... <-- provides length and checksum
+   */
   public static boolean firmwareChecksum( int fw_version, File fp )
   {
     int len = 0;
@@ -174,10 +185,11 @@ public class FirmwareUtils
    */
   static int getDeviceHardware( byte[] signature )
   {
-    if ( signature[0] == 0x0D && signature[1] == 0x00 ) {
-      TDLog.v( "device hw TIAN" );
-      return HW_TIAN; // FIXME was HW_HEEB
-    }
+    // FIXME use verifySignatureTian() as shown below
+    // if ( signature[0] == 0x0D && signature[1] == 0x00 ) {
+    //   TDLog.v( "device hw TIAN" );
+    //   return HW_TIAN;
+    // }
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw HEEB" );
       return HW_HEEB;
@@ -185,6 +197,10 @@ public class FirmwareUtils
     if ( verifySignatureLandolt( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
+    }
+    if ( verifySignatureTian( signature ) == SIGNATURE_SIZE ) {
+      TDLog.v( "device hw TIAN" );
+      return HW_TIAN;
     }
     return HW_NONE;
   }
@@ -265,7 +281,7 @@ public class FirmwareUtils
     (byte)0x00, (byte)0xf0, (byte)0x30, (byte)0xf8, (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b
   };
 
-  /** LANDOLT signature is 64 bytes after the first ????
+  /** TIAN signature is 64 bytes after the first ????
    */
   static final private byte[] signatureTian = {
     (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0xd8, (byte)0xfb,
@@ -321,7 +337,7 @@ public class FirmwareUtils
   private static int verifySignatureTian( byte[] buf )
   {
     for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
-      if ( k==6 || k==7 || k==12 || k==16 || k==17) continue;
+      if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
       if ( buf[k] != signatureTian[k] )
         return -k;
     }

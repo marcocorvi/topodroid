@@ -59,6 +59,11 @@ public class FirmwareDialog extends MyDialog
   private final Resources mRes;
   private KeyListener    mETkeyListener;
 
+  /** cstr
+   * @param context  context
+   * @param res      resources
+   * @param app      application
+   */
   public FirmwareDialog( Context context, Resources res, TopoDroidApp app )
   {
     super( context, app, R.string.FirmwareDialog );
@@ -94,6 +99,9 @@ public class FirmwareDialog extends MyDialog
     
   }
 
+  /** set the firmware filename in the edit textbox
+   * @param filename   name of the firmware file
+   */
   public void setFirmwareFile( String filename )
   {
     mETfile.setText( filename );
@@ -158,7 +166,10 @@ public class FirmwareDialog extends MyDialog
     }
   }
 
-  // @param filename   file name including ".bin" extension
+
+  /** ask the user whether to dump the firmware
+   * @param filename   firmware file name including ".bin" extension
+   */
   private void askDump( final String filename )
   {
     TopoDroidAlertDialog.makeAlert( mContext, mRes, R.string.ask_dump,
@@ -185,7 +196,11 @@ public class FirmwareDialog extends MyDialog
     );
   }
 
-  // @param fw   firmware version
+  /** ask the user whether to upload the firmware
+   * @param filename  name of the firmware file
+   * @param fw        firmware version
+   * @param check     ???
+   */
   private void askUpload( final String filename, int fw, boolean check )
   {
     // boolean compatible = (fw == 2100 || fw == 2200 || fw == 2300 || fw == 2400 || fw == 2500 || fw == 2412 || fw == 2501 || fw == 2512 );

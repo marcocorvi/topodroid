@@ -15,7 +15,6 @@ import com.topodroid.ui.MyDialog;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.TDX.DeviceActivity;
 import com.topodroid.TDX.R;
-// import com.topodroid.dev.DeviceX310Details;
 import com.topodroid.dev.distox.IMemoryDialog;
 
 import java.util.ArrayList;
@@ -54,7 +53,7 @@ public class DistoXBLEMemoryDialog extends MyDialog
    */
   public DistoXBLEMemoryDialog( Context context, DeviceActivity parent )
   {
-    super( context, null, R.string.DeviceX310MemoryDialog ); // null app
+    super( context, null, R.string.DeviceXBLEMemoryDialog ); // null app FIXME DeviceXBLEMemoryDialog dialog help page
     mParent = parent;
   }
 
@@ -62,7 +61,7 @@ public class DistoXBLEMemoryDialog extends MyDialog
   public void onCreate( Bundle bundle )
   {
     super.onCreate( bundle );
-    initLayout( R.layout.device_x310_memory_dialog, R.string.memoryX310 );
+    initLayout( R.layout.device_x310_memory_dialog, R.string.memoryXBLE );
 
     mETdumpfrom  = (EditText) findViewById( R.id.et_dumpfrom );
     mETdumpto    = (EditText) findViewById( R.id.et_dumpto );
@@ -127,26 +126,13 @@ public class DistoXBLEMemoryDialog extends MyDialog
       if ( DistoXBLEDetails.boundHeadTail( ht ) ) {
         String file = null;
         if ( mETdumpfile.getText() != null ) file = mETdumpfile.getText().toString();
-        mParent.readX310Memory( this, ht, file );
+        mParent.readXBLEMemory( this, ht, file ); 
       }
       // } else if ( view.getId() == R.id.button_cancel ) {
       //   dismiss();
       //   break;
     }
   }
-
-  // void askReset( final int ht[] )
-  // {
-  //   TopoDroidAlertDialog.makeAlert( mParent, mParent.getResources(), R.string.ask_reset,
-  //     new DialogInterface.OnClickListener() {
-  //       @Override
-  //       public void onClick( DialogInterface dialog, int btn ) {
-  //         mParent.resetX310DeviceHeadTail( ht );
-  //         // finish();
-  //       }
-  //     }
-  //   );
-  // }
 
 }
 

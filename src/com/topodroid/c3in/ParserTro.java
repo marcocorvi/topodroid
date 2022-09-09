@@ -114,7 +114,6 @@ public class ParserTro extends TglParser
       throw new ParserException( "null TRO input", 0 );
     }
 
-    int linenr = 0;
     String entrance = null;
     String coords   = null;
     // Cave3DCS cs = null;
@@ -127,18 +126,14 @@ public class ParserTro extends TglParser
     String comment = "";
     long millis = 0;
 
-    String line = null;
     try {
-      BufferedReader br = new BufferedReader( isr );
-
       int cnt_shot = 0;
       int cnt_splay = 0;
-      for ( ; ; ) {
-        ++linenr;
-        line = br.readLine();
-        if ( line == null ) break;
-        line = line.trim().replaceAll("\\s+", " ");
+      BufferedReader br = new BufferedReader( isr );
+      linenr = 0;
+      for ( String line = nextLine( br ); line != null; line = nextLine( br ) ) {
         if ( line.length() == 0 ) continue;
+        line = line.replaceAll("\\s+", " ");
         if ( line.startsWith("[Configuration") ) break;
         // TDLog.v( "TRO LINE: " + line );
 
@@ -150,7 +145,6 @@ public class ParserTro extends TglParser
         } else {
           comment = "";
         }
-
         if ( line.length() == 0 ) continue;    // comment
         
         String[] vals = splitLine( line ); 
@@ -276,7 +270,6 @@ public class ParserTro extends TglParser
             }
           }
         }
-        
       }
     } catch ( IOException e ) {
       TDLog.Error( "TRO IO error " + e.getMessage() );

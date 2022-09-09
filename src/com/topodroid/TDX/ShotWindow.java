@@ -2546,7 +2546,7 @@ public class ShotWindow extends Activity
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, TDInstance.sid, TDStatus.NORMAL );
     // }
-    // TDLog.v( "shots " + shots.size() );
+    TDLog.v( "shots " + shots.size() );
     mApp.assignStationsAfter( blk, shots /*, stations */ );
 
     // DEBUG re-assign all the stations

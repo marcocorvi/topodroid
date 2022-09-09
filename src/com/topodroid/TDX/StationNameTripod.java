@@ -85,8 +85,10 @@ class StationNameTripod extends StationName
       if ( blk.mId == blk0.mId ) continue;
       if ( blk.isSplay() ) {
         if ( flip ) flip = false;
-        setSplayName( blk, station );
-	sts.add( station );
+        if ( TDSetting.mSplayStation || blk.mFrom.length() == 0 ) { // mSplayStation 
+          setSplayName( blk, station );
+	  sts.add( station );
+        }
         // TDLog.v( "S:"+ station + "   " + oldFrom + " " + from + "-" + back + "-" + next + ":" + station + " flip=" + (flip?"y":"n") );
       } else if ( blk.isMainLeg() ) { // tripod renumber includes only main legs
         prev = blk;

@@ -3195,10 +3195,10 @@ public class DrawingWindow extends ItemDrawer
           TDVector vt = new TDVector( ytt - (float)sp.s,   (float)sp.e - xtt,   ztt - (float)sp.v );
           TDVector vft = new TDVector( (float)st_f.s - (float)sp.s, (float)sp.e - (float)st_f.e, (float)st_f.v - (float)sp.v );
           float cosine = vft.dot(V0)/vft.Length();
-          xfrom = vf.dot(V1); 
-          yfrom = vf.dot(V2);
-          xto   = vt.dot(V1); 
-          yto   = vt.dot(V2);
+          xfrom =   vf.dot(V1); 
+          yfrom = - vf.dot(V2);
+          xto   =   vt.dot(V1); 
+          yto   = - vt.dot(V2);
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto + " cosine " + cosine );
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, cosine, true, false ); // splay, not-selectable
         } else {
@@ -3217,10 +3217,10 @@ public class DrawingWindow extends ItemDrawer
           //                af      at
           float tt = Math.abs( af / ( af - at ) );
 
-          xfrom = vf.dot(V1); 
-          yfrom = vf.dot(V2);
-          xto   = vt.dot(V1); 
-          yto   = vt.dot(V2);
+          xfrom =   vf.dot(V1); 
+          yfrom = - vf.dot(V2);
+          xto   =   vt.dot(V1); 
+          yto   = - vt.dot(V2);
           // TDLog.v("leg " + b.mFrom + " " + xfrom + " " + yfrom + " - " + b.mTo + " " + xto + " " + yto );
           addFixedLine( mType, b, xfrom, yfrom, xto, yto, 1.0f, false, false ); // cosine 1.0 not used, not-splay, not-selectable
           mDrawingSurface.addDrawingStationName( b.mFrom, DrawingUtil.toSceneX(xfrom, yfrom), DrawingUtil.toSceneY(xfrom, yfrom) );

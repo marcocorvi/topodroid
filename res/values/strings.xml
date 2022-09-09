@@ -83,6 +83,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="memoryA3">DistoX A3 memory</string>
     <string name="memoryX310">DistoX X310 memory</string>
+    <string name="memoryXBLE">DistoX-BLE memory</string>
     <!-- UNUSED string name="memory_data">DistoX data</string -->
 
     <string name="thp_user">user</string>
@@ -712,7 +713,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="fmt_extended">%1$s: PROFILE</string>
     <string name="fmt_profile">%1$s: PROJECTED</string>
 
-    <string name="extended_profile">Extended profile</string>
+    <!-- UNUSED string name="extended_profile">Extended profile</string -->
+    <string name="projected_profile">Projected profile</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">V-SECTION</string -->
     <!-- UNUSED string name="h_section">H-SECTION</string -->
@@ -1311,6 +1313,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_with_android_azimuth_summary">Enable Android compass/clino</string>
   <string name="pref_blunder_shot_title">Blunder shots</string>
   <string name="pref_blunder_shot_summary">Skip blunder leg-shots</string>
+  <string name="pref_splay_station_title">Splay station re-assignment</string>
+  <string name="pref_splay_station_summary">Re-assign station to splays</string>
+  <string name="pref_splay_group_title">Splay group-rename</string>
+  <string name="pref_splay_group_summary">Splay group only-forward rename</string>
   <string name="pref_with_levels_title">Layers</string>
   <string name="pref_with_levels_summary">Canvas layers</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->

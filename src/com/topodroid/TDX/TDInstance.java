@@ -81,7 +81,7 @@ public class TDInstance
    */
   static boolean isDeviceX310()   { return deviceA != null && deviceA.isX310(); }
 
-  /** @return true if the primary device is set and is of type DistoX
+  /** @return true if the primary device is set and is of type DistoX (not XBLE)
    */
   static boolean isDeviceDistoX() { return deviceA != null && deviceA.isDistoX(); }
 
@@ -96,7 +96,7 @@ public class TDInstance
   /** @return true if the primary device is set and is of type DistoXBLE
    * SIWEI_TIAN
    */
-  static boolean isDeviceDistoXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
+  static boolean isDeviceXBLE()   { return deviceA != null && deviceA.isDistoXBLE(); }
 
   /** @return primary bluetooth device
    */
@@ -171,7 +171,7 @@ public class TDInstance
    */
   static boolean isContinuousMode() 
   {
-    if ( isDeviceDistoXBLE() ) { // SIWEI
+    if ( isDeviceXBLE() ) { // SIWEI
       return TDSetting.isConnectionModeContinuous();
     }
     return TDSetting.isConnectionModeContinuous() || isDeviceBLE();
