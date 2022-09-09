@@ -71,7 +71,7 @@ public class DistoXBLEComm extends TopoDroidComm
 
   private int mDataType;
   private int mPacketType;
-  private Handler mLister;
+  // private Handler mLister; // 2022-09-09 no need to store the lister
 
   private int mPatketToRead = 0;
 
@@ -735,10 +735,10 @@ public class DistoXBLEComm extends TopoDroidComm
   public int downloadData( String address, Handler /* ILister */ lister, int data_type ) // FIXME_LISTER
   {
     //mConnectionMode = 0;
-    mLister = lister;
+    // mLister = lister;
     mDataType = data_type;
     int ret = 0;
-    if ( ! tryConnectDevice( address, null, 0 ) ) return -1;  // FIXME should not pass the lister to this ???
+    if ( ! tryConnectDevice( address, lister, 0 ) ) return -1;  // FIXME 2022-09-09 added the lister, was null
 
     //sendCommand( 0x40 );     // start send measure packet ???
     TDUtil.yieldDown( 500 );
