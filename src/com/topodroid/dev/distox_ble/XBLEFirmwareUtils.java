@@ -70,8 +70,8 @@ public class XBLEFirmwareUtils
         return 0;
       }
       if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
-        TDLog.v( "HEEB fw " + readFirmwareHeeb( buf ) );
-        return readFirmwareHeeb( buf );
+        TDLog.v( "HEEB fw " + readFirmwareTian( buf ) );
+        return readFirmwareTian( buf );
       }
     } catch ( IOException e ) {
       TDLog.Error("IO " + e.getMessage() );
@@ -234,10 +234,10 @@ public class XBLEFirmwareUtils
   // signatures differ in bytes 7- 6  f834  f83a  f990  fa0a  fe94  fb7e  fc10  fb94
   //                             -12  08d5  08d5  08d5  08f5  08f5  08d5  08d5  08d5
   //                           17-16  0c40  0c40  0c50  0c30  0c38  0c40  0c48  0c40
-  private static int readFirmwareHeeb( byte[] buf )
+  private static int readFirmwareTian( byte[] buf )
   {
-    if ( buf[7] == (byte)0xfb ) { // 2.5  2.51
-      if ( buf[6] == (byte)0x8A ) {      // 2.5
+    if ( buf[7] == (byte)0xfb ) { // 2.7
+      if ( buf[6] == (byte)0x8A ) {
         return 2700;
       }
     }

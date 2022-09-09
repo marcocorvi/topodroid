@@ -1681,7 +1681,7 @@ public class TopoDroidApp extends Application
   // void resetCurrentStationName( String name ) { StationName.resetCurrentStationName( name ); }
 
   /** set the name of the "current station" or unset it
-   * @param st   "current station" name
+   * @param name   "current station" name
    * @return true if the "current station" is set
    * @note if the given name equals the "current station" this is unset
    */
@@ -2352,7 +2352,7 @@ public class TopoDroidApp extends Application
   {
     if ( mComm != null && mComm instanceof DistoXBLEComm ) {
       DistoXBLEComm comm = (DistoXBLEComm)mComm;
-      //boolean bisconnect = comm.isConnected();
+      /*boolean bisconnect = comm.isConnected();
       if ( ! comm.isConnected() ) {
         connectDevice( TDInstance.deviceAddress(), DataType.DATA_ALL );
         // TDLog.v("BRIC info: wait 4 secs");
@@ -2367,7 +2367,8 @@ public class TopoDroidApp extends Application
           TDLog.e("DistoXBLE info: failed to connect");
           return false;
         }
-      }
+      }*/
+      comm.tryConnectDevice(TDInstance.deviceAddress(),null,DataType.DATA_ALL);
       comm.registerInfo( info );
       // comm.writeGetInfoCmd();
 	  comm.GetXBLEInfo();
@@ -2508,26 +2509,35 @@ public class TopoDroidApp extends Application
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_SIGN, filename )).execute( );
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return null;
-    if ( ! (mComm instanceof DistoX310Comm) && ! (mComm instanceof DistoXBLEComm)) return null;              //SIWEI TIAN
-    return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
+    //SIWEI TIAN
+    if(mComm instanceof DistoX310Comm)
+      return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
+    else if(mComm instanceof DistoXBLEComm)
+      return ((DistoXBLEComm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
+    else return null;
   }
 
   /** read the firmware and save it to a file - only X310
    * @param name   filename including ".bin" extension
    * @return ...
    */
-  public int dumpFirmware( String name )
-  {
-    TDLog.v("APP FW dump " + name );
+  public int dumpFirmware( String name ) {
+    TDLog.v("APP FW dump " + name);
     // FIXME ASYNC_FIRMWARE_TASK
     // if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     // if ( ! (mComm instanceof DistoX310Comm) ) return;
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_READ, filename )).execute( );
 
-    if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    if ( ! (mComm instanceof DistoX310Comm) ) return -1;
-    // return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFilename(name) );
-    return ((DistoX310Comm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile( name ) );
+    if (mComm == null || TDInstance.getDeviceA() == null) return -1;
+    if (mComm instanceof DistoX310Comm){
+      return ((DistoX310Comm) mComm).dumpFirmware(TDInstance.deviceAddress(), TDPath.getBinFile(name));
+    } else if ( mComm instanceof DistoXBLEComm ) {
+      return ((DistoXBLEComm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(name));
+    } else {
+      TDLog.e("DistoX device with no firmware upload");
+    }
+
+    return -1;
   }
 
   /** read a firmware reading it from a file - only X310

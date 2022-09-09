@@ -242,7 +242,7 @@ public class TopoDroidProtocol
         }
         break;
       case MemoryOctet.BYTE_PACKET_VECTOR: // Vector data packet 0x04
-        if ( mDeviceType == Device.DISTO_X310 ) {
+        if ( mDeviceType == Device.DISTO_X310 || mDeviceType == Device.DISTO_XBLE) {
           mBackshot = ( (buffer[0] & 0x40) == 0x40 );
           double acc = MemoryOctet.toInt( buffer[2], buffer[1] );
           double mag = MemoryOctet.toInt( buffer[4], buffer[3] );

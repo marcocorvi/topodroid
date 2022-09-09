@@ -76,8 +76,8 @@ public class FirmwareUtils
         return 0;
       }
 	  if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
-        TDLog.v( "TIAN fw " + readFirmwareHeeb( buf ) );
-        return readFirmwareHeeb( buf );
+        TDLog.v( "TIAN fw " + readFirmwareTian( buf ) );
+        return readFirmwareTian( buf );
       }
 	  
 	  if ( dis.skipBytes( 1984 ) != 1984 ) { // 1984 = 2048 - 64
@@ -132,7 +132,7 @@ public class FirmwareUtils
       case 2610: len = 25040; break;
       case 2630: len = 25568; break;
       case 2640: len = 25604; break;
-      case 2700: len = 15476; break;
+      case 2700: len = 15632; break;
     }
     if ( len == 0 ) return false; // bad firmware version
     len /= 4; // number of int to read
@@ -163,7 +163,7 @@ public class FirmwareUtils
       case 2610: return ( checksum == 0xcae98256 );
       case 2630: return ( checksum == 0x1b1488c5 );
       case 2640: return ( checksum == 0xee2d70ff ); // fixed error in magnetic calib matrix
-      case 2700: return ( checksum == 0x9EAC8AC7 );
+      case 2700: return ( checksum == 0xf463405e );
     }
     return false;
   }
@@ -174,6 +174,10 @@ public class FirmwareUtils
    */
   static int getDeviceHardware( byte[] signature )
   {
+    if ( signature[0] == 0x0D && signature[1] == 0x00 ) {
+      TDLog.v( "device hw TIAN" );
+      return HW_TIAN; // FIXME was HW_HEEB
+    }
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw HEEB" );
       return HW_HEEB;
@@ -181,10 +185,6 @@ public class FirmwareUtils
     if ( verifySignatureLandolt( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
-    }
-    if ( verifySignatureTian( signature ) == SIGNATURE_SIZE ) {
-      TDLog.v( "device hw TIAN" );
-      return HW_TIAN; // FIXME was HW_HEEB
     }
     return HW_NONE;
   }
@@ -268,9 +268,9 @@ public class FirmwareUtils
   /** LANDOLT signature is 64 bytes after the first ????
    */
   static final private byte[] signatureTian = {
-    (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0x34, (byte)0xf8,
-    (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xf5, (byte)0x08, (byte)0x00, (byte)0x08,
-    (byte)0x40, (byte)0x0c, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
+    (byte)0x03, (byte)0x48, (byte)0x85, (byte)0x46, (byte)0x03, (byte)0xf0, (byte)0xd8, (byte)0xfb,
+    (byte)0x00, (byte)0x48, (byte)0x00, (byte)0x47, (byte)0xd5, (byte)0x08, (byte)0x00, (byte)0x08,
+    (byte)0x60, (byte)0x0c, (byte)0x00, (byte)0x20, (byte)0x00, (byte)0x23, (byte)0x02, (byte)0xe0,
     (byte)0x01, (byte)0x23, (byte)0x00, (byte)0x22, (byte)0xc0, (byte)0x46, (byte)0xf0, (byte)0xb5,
     (byte)0xdb, (byte)0x07, (byte)0x27, (byte)0x4e, (byte)0x00, (byte)0xf0, (byte)0x3b, (byte)0xf8,
     (byte)0x00, (byte)0x1b, (byte)0x49, (byte)0x1b, (byte)0x25, (byte)0x4e, (byte)0x00, (byte)0xf0,
@@ -321,7 +321,7 @@ public class FirmwareUtils
   private static int verifySignatureTian( byte[] buf )
   {
     for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
-      if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
+      if ( k==6 || k==7 || k==12 || k==16 || k==17) continue;
       if ( buf[k] != signatureTian[k] )
         return -k;
     }
@@ -398,8 +398,8 @@ public class FirmwareUtils
    */
   private static int readFirmwareTian( byte[] buf )
   {
-    if ( buf[7] == (byte)0xfb ) { 
-      if ( buf[6] == (byte)0x8A ) {
+    if ( buf[7] == (byte)0xfb ) {
+      if ( buf[6] == (byte)0xD8 ) {
         return 2700;
       }
     }

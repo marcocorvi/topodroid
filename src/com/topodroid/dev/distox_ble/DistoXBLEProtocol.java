@@ -38,6 +38,9 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public static final int PACKET_FLASH_CHECKSUM = 0x17;
   public static final int PACKET_INFO_SHOTDATA  = 3;
   public static final int PACKET_INFO_CALIDATA  = 4;
+  public static final int PACKET_FLASH_BYTES_1  = 0x18;
+  public static final int PACKET_FLASH_BYTES_2  = 0x19;
+  public static final int PACKET_SIGNATURE      = 0x1A;
 
   public static final int PACKET_MEASURE_DATA   = 0x20;
 
@@ -51,6 +54,9 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
 
   public byte[] mMeasureDataPacket1;
   public byte[] mMeasureDataPacket2;
+
+  public byte[] mFlashBytes;
+  public boolean   mFlashFirstPacketReiceved;
   //public int mPacketType;
 
   /** cstr
@@ -68,6 +74,8 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
     mRepliedData = new byte[4];
     mMeasureDataPacket1 = new byte[8];
     mMeasureDataPacket2 = new byte[8];
+    mFlashFirstPacketReiceved = false;
+    mFlashBytes = new byte[256];
   }
 
   /** process a data array
@@ -76,29 +84,34 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
    */
   public int packetProcess( byte[] databuf )
   {
-    if ( databuf.length == 8 ) {
-      if(databuf[0] != 0x38 && databuf[0] != 0x39) return PACKET_ERROR;
+    if(databuf.length == 0) return PACKET_NONE;
+    byte command = databuf[0];
+    if ( command == 0x38 || command == 0x39 ) {
       int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
-      mRepliedData[0] = databuf[3];
-      mRepliedData[1] = databuf[4];
-      mRepliedData[2] = databuf[5];
-      mRepliedData[3] = databuf[6];
-      if ( addr == DistoXBLEDetails.FIRMWARE_ADDRESS ) {
-        mFirmVer = Integer.toString(databuf[3]) + "." + Integer.toString(databuf[4]);
+      int len = databuf[3];
+      mRepliedData = new byte[len];
+      for (int i = 0; i < len; i++)
+        mRepliedData[i] = databuf[i + 4];
+      if (addr == DistoXBLEDetails.FIRMWARE_ADDRESS) {
+        mFirmVer = Integer.toString(databuf[4]) + "." + Integer.toString(databuf[5]);
         return PACKET_INFO_FIRMWARE;
-      } else if ( addr == DistoXBLEDetails.HARDWARE_ADDRESS ) {
-        float HardVer = ((float)databuf[3]) / 10;
+      } else if (addr == DistoXBLEDetails.HARDWARE_ADDRESS) {
+        float HardVer = ((float) databuf[4]) / 10;
         mHardVer = Float.toString(HardVer);
         return PACKET_INFO_HARDWARE;
-      } else if ( addr == DistoXBLEDetails.STATUS_ADDRESS ) {
+      } else if (addr == DistoXBLEDetails.STATUS_ADDRESS) {
         return PACKET_STATUS;
-      } else if ( databuf[0] == 0x38 ) {
+      } else if (command == 0x38) {
         return PACKET_REPLY;
-      } else if ( databuf[0] == 0x39 ) {
+      } else if (command == 0x39) {
         return PACKET_WRITE_REPLY;
-      // } else {
-      //   return PACKET_ERROR;
+        // } else {
+        //   return PACKET_ERROR;
       }
+    } else if(command == 0x3c && databuf.length == 3){              //signature:hardware ver.
+      mRepliedData[0] = databuf[1];
+      mRepliedData[1] = databuf[2];
+      return PACKET_SIGNATURE;
     } else if ( databuf.length == 16 ) {       //shot data
       System.arraycopy(databuf,0,mMeasureDataPacket1,0,8);
       System.arraycopy(databuf,8,mMeasureDataPacket2,0,8);
@@ -117,6 +130,18 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
         return PACKET_FLASH_CHECKSUM;
       }
+    }
+    else if(command == 0x3A && databuf.length == 247)          //firmware first packet (MTU=247)
+    {
+      mFlashFirstPacketReiceved = true;
+      for(int i=3;i<247;i++) mFlashBytes[i-3] = databuf[i];
+      return PACKET_FLASH_BYTES_1;
+    }
+    else if(mFlashFirstPacketReiceved && databuf.length == 12)     //firmware second packet
+    {
+      mFlashFirstPacketReiceved = false;
+      for(int i=0;i<12;i++) mFlashBytes[i+244] = databuf[i];
+      return PACKET_FLASH_BYTES_2;
     }
     return PACKET_ERROR;
   }
