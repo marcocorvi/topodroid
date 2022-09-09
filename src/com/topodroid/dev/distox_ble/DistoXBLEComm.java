@@ -738,7 +738,7 @@ public class DistoXBLEComm extends TopoDroidComm
     mLister = lister;
     mDataType = data_type;
     int ret = 0;
-    if ( ! tryConnectDevice( address, null, 0 ) ) return -1;
+    if ( ! tryConnectDevice( address, null, 0 ) ) return -1;  // FIXME should not pass the lister to this ???
 
     //sendCommand( 0x40 );     // start send measure packet ???
     TDUtil.yieldDown( 500 );
