@@ -154,6 +154,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           return PACKET_ERROR;
         }
       }
+    }
     return PACKET_ERROR;
   }
 
