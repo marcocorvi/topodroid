@@ -60,8 +60,6 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
     mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType,false );
     TDUtil.slowDown( TDSetting.mWaitLaser );
 
-
-
     // TDUtil.slowDown( TDSetting.mWaitLaser ); 
     return 0;
   }
