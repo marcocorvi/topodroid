@@ -52,12 +52,12 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
     }
     for ( ; i>1; --i ) {
       // TDLog.v( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
-      mApp.setXBLELaser( Device.LASER_ON, 0, null, mDataType,false );
+      mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType,false );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
-      mApp.setXBLELaser( Device.MEASURE, 0, null, mDataType ,false);
+      mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType ,false);
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
-    mApp.setXBLELaser( Device.LASER_ON, 0, null, mDataType,false );
+    mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType,false );
     TDUtil.slowDown( TDSetting.mWaitLaser );
 
 

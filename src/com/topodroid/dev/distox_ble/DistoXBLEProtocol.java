@@ -86,7 +86,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   {
     if ( databuf.length == 0 ) return PACKET_NONE;
     byte command = databuf[0];
-    if ( command == 0x38 || command == 0x39 ) {
+    if ( command == 0x3d || command == 0x3e ) {
       int addr = (databuf[2] << 8 | (databuf[1] & 0xff)) & 0xFFFF;
       int len = databuf[3];
       mRepliedData = new byte[len];
@@ -101,9 +101,9 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         return PACKET_INFO_HARDWARE;
       } else if (addr == DistoXBLEDetails.STATUS_ADDRESS) {
         return PACKET_STATUS;
-      } else if (command == 0x38) {
+      } else if (command == 0x3d) {
         return PACKET_REPLY;
-      } else if (command == 0x39) {
+      } else if (command == 0x3e) {
         return PACKET_WRITE_REPLY;
 	  // } else if (command == 0x3d) {
       //   return PACKET_REPLY;
