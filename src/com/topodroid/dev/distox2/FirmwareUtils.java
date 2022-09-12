@@ -200,11 +200,6 @@ public class FirmwareUtils
    */
   static int getDeviceHardwareSignature( byte[] signature )
   {
-    // FIXME use verifySignatureTian() as shown below
-    // if ( signature[0] == 0x0D && signature[1] == 0x00 ) {
-    //   TDLog.v( "device hw TIAN" );
-    //   return HW_TIAN;
-    // }
     if ( verifySignatureHeeb( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw HEEB" );
       return HW_HEEB;
@@ -346,7 +341,7 @@ public class FirmwareUtils
   }
 
   /** verify the 64-byte TIAN signature block
-   * @param buf   signature block at ????-offset, either in the firmware file or in the firmware on the device
+   * @param buf   signature block at ????-offset, either in the firmware file 
    * @return neg of failed byte or signature size
    */
   private static int verifySignatureTian( byte[] buf )
@@ -362,12 +357,17 @@ public class FirmwareUtils
     return SIGNATURE_SIZE; // success
   }
 
+  /** verify the 2-byte TIAN hardware signature
+   * @param buf   signature code
+   * @return neg of failed byte or signature size on success
+   * @note the signature code must be read from the device
+   */
   private static int verifyHardwareSignatureTian( byte[] buf )
   {
     //reply from command 0x3c, the hardware version 1.3
     if ( buf[0] == 0x0D && buf[1] == 0x00 )       // signature read from hardware
        return SIGNATURE_SIZE;     //valid
-    return 0; // invalid
+    return -1; // invalid
   }
 
   /** @return the code of the HEEB firmware

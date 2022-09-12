@@ -103,7 +103,7 @@ public class DistoXBLEComm extends TopoDroidComm
                   if ( buffer == null ) continue;
                   if ( buffer.data == null) continue;
                   int res = ((DistoXBLEProtocol)mProtocol).packetProcess(buffer.data);
-                  if (res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1) return;   //not complete packet received
+                  if (res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1) continue;   // non-complete packet received
                   synchronized (mNewDataFlag) {
                       mPacketType = res;
                       mNewDataFlag.notifyAll();

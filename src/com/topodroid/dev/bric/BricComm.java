@@ -109,15 +109,16 @@ public class BricComm extends TopoDroidComm
     mConsumer = new Thread(){
       public void run()
       {
+        TDLog.v("BRIC comm tread start");
         boolean do_consume = true;
         while ( do_consume ) {
-          TDLog.v( "BRIC comm: Queue size " + mQueue.size );
+          // TDLog.v( "BRIC comm: Queue size " + mQueue.size );
           BricBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
-          TDLog.v( "BRIC comm: Queue buffer type " + buffer.type );
+          // TDLog.v( "BRIC comm: Queue buffer type " + buffer.type );
           switch ( buffer.type ) {
             case DATA_PRIM:
-              TDLog.v( "BRIC comm: Queue buffer PRIM");
+              // TDLog.v( "BRIC comm: Queue buffer PRIM");
               // BricDebug.logMeasPrim( buffer.data );
               if ( TDSetting.mBricMode == BricMode.MODE_PRIM_ONLY ) {
                 ((BricProto)mProtocol).addMeasPrimAndProcess( buffer.data );
@@ -126,14 +127,14 @@ public class BricComm extends TopoDroidComm
               }
               break;
             case DATA_META:
-              TDLog.v( "BRIC comm: Queue buffer META");
+              // TDLog.v( "BRIC comm: Queue buffer META");
               // BricDebug.logMeasMeta( buffer.data );
               if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasMeta( buffer.data );
               }
               break;
             case DATA_ERR:
-              TDLog.v( "BRIC comm: Queue buffer ERR");
+              // TDLog.v( "BRIC comm: Queue buffer ERR");
               // BricDebug.logMeasErr( buffer.data );
               if ( TDSetting.mBricMode >= BricMode.MODE_ALL ) {
                 ((BricProto)mProtocol).addMeasErr( buffer.data );
@@ -174,6 +175,7 @@ public class BricComm extends TopoDroidComm
               TDLog.e("BRIC comm: Queue - unknown buffer type " + buffer.type );
           }
         }
+        TDLog.v("BRIC comm tread exit");
       } 
     };
     mConsumer.start();
@@ -182,8 +184,10 @@ public class BricComm extends TopoDroidComm
   /* terminate the consumer thread - put a "quit" buffer on the queue
    * @note this method has still to be used
    */
-  public void terminateConsumer()
+  @Override
+  public void terminate()
   {
+    TDLog.v("BRIC comm terminate");
     if ( mConsumer != null ) {
       // put a DATA_QUIT buffer on the queue
       mQueue.put( DATA_QUIT, new byte[0] );

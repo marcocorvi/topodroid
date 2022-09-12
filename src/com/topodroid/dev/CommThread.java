@@ -14,7 +14,7 @@ package com.topodroid.dev;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.utils.TDUtil;
-// import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDLog;
 
 import android.os.Handler;
 
@@ -66,15 +66,16 @@ public class CommThread extends Thread
     doWork = true;
     mComm.setHasG( false );
 
-    // TDLog.Log( TDLog.LOG_COMM, "RF comm thread running ... to_read " + toRead );
-    // Log.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
+    TDLog.v("RF Comm Thread start");
+
+    // TDLog.v( "DistoX-BLE", "TD comm: RF thread ... to_read " + toRead );
     if ( mType == TopoDroidComm.COMM_RFCOMM ) {
       while ( doWork && mComm.getNrReadPackets() != toRead ) {
-        // TDLog.Log( TDLog.LOG_COMM, "RF comm loop: read " + mComm.getNrReadPackets() + " to-read " + toRead );
+        // TDLog.v( "RF comm loop: read " + mComm.getNrReadPackets() + " to-read " + toRead );
         
         // int res = mProtocol.readPacket( (toRead >= 0), mDataType );
         int res = mComm.readingPacket( (toRead >= 0), mDataType );
-        // TDLog.Log( TDLog.LOG_COMM, "RF comm read_packet returns " + res );
+        // TDLog.v( "RF comm read_packet returns " + res );
         if ( res == DataType.PACKET_NONE ) {
           if ( toRead == -1 ) {
             doWork = false;
@@ -106,5 +107,6 @@ public class CommThread extends Thread
 
     // FIXME_COMM
     // mApp.notifyConnState( );
+    TDLog.v("RF Comm Thread exit");
   }
 }

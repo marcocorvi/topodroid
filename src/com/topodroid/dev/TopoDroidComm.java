@@ -298,8 +298,9 @@ public class TopoDroidComm
   /** dstr
    * terminate the Comm - by default cancel the Comm thread
    */
-  protected void terminate()
+  public void terminate()
   {
+    TDLog.v("TD comm terminate");
     cancelCommThread();
   }
 
@@ -321,7 +322,7 @@ public class TopoDroidComm
    */
   protected void cancelCommThread()
   {
-    // TDLog.Log( TDLog.LOG_COMM, "VD comm cancel Comm thread");
+    TDLog.v( "TD comm cancel Comm thread");
     if ( mCommThread != null ) { // FIXME check that comm-thread is really alive
       // TDLog.Log( TDLog.LOG_COMM, "cancel Comm thread: thread is active");
       mCommThread.cancelWork();

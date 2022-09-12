@@ -639,13 +639,17 @@ public class TopoDroidApp extends Application
     }
   }
 
-  private void deleteComm() // FIXME BLE5
+  /** delete the comm object, if not null
+   * @param disconnect   if true force call disconnectRemoteDevice (? always false may be safe)
+   */
+  private void deleteComm( boolean disconnect ) // FIXME BLE5
   {
     // TDLog.v( "App: delete comm");
     if ( mComm != null ) {
-      if ( mComm.isConnected() ) {
+      if ( disconnect || mComm.isConnected() ) {
         mComm.disconnectRemoteDevice(); 
       }
+      mComm.terminate();
       mComm = null;
     }
   }
@@ -820,10 +824,7 @@ public class TopoDroidApp extends Application
    */
   private void createComm()
   {
-    if ( mComm != null ) {
-      mComm.disconnectRemoteDevice( );
-      mComm = null;
-    }
+    deleteComm( true ); // if mComm is null this is nothing
     // if ( TDInstance.isDeviceAddress( Device.ZERO_ADDRESS ) ) { // FIXME VirtualDistoX
     //   mComm = new VirtualDistoXComm( this, mVirtualDistoX );
     // } else {
@@ -1607,7 +1608,7 @@ public class TopoDroidApp extends Application
    */
   void setDevicePrimary( String address, String model, String name, BluetoothDevice bt_device )
   { 
-    deleteComm();
+    deleteComm( false );
     if ( address == null ) { // null, ..., ...
       TDInstance.setDeviceA( null );
       address = TDString.EMPTY;
