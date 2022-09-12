@@ -91,9 +91,9 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public int packetProcess( byte[] databuf )
   {
     if ( databuf.length == 0 ) return PACKET_NONE;
-    if ( databuf.length == 16 ) {       //shot data
-      System.arraycopy(databuf,0,mMeasureDataPacket1,0,8);
-      System.arraycopy(databuf,8,mMeasureDataPacket2,0,8);
+    if ( (databuf[0] == 0x01 || databuf[0] == 0x02) && databuf.length == 17 ) {       //shot data
+      System.arraycopy(databuf,1,mMeasureDataPacket1,0,8);
+      System.arraycopy(databuf,9,mMeasureDataPacket2,0,8);
       int res1 = handlePacket(mMeasureDataPacket1);
       int res2 = handlePacket(mMeasureDataPacket2);
       if ( res1 != PACKET_NONE && res2 != PACKET_NONE ) {
@@ -128,7 +128,8 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         // } else {
         //   return PACKET_ERROR;
         }
-      } else if ( command == 0x3c ) { // FIXME signature: hardware ver. // doe snot this do the same as 0x3d/0x3e with HARDWARE_ADDRESS ?
+      } else if ( command == 0x3c ) { // FIXME signature: hardware ver. // 0x3d 0x3e only works in App mode not in the bootloader mode.
+        // 0x3a 0x3b 0x3c are commands work in bootloader mode
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
           mRepliedData[1] = databuf[2];
@@ -139,15 +140,13 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
-      } else if ( command == 0x3A ) {
-        if ( databuf.length == 247 ) {        // firmware first packet (MTU=247)
+      } else if ( command == 0x3A && databuf.length == 131) {   //3 headers + 128 payloadsda
+        if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
           // mFlashFirstPacketReiceved = true;
-          for ( int i=3; i<247; i++) mFlashBytes[i-3] = databuf[i]; // FIXME only 244 bytes copied ? here databuf is copied from offset 3
+          for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // FIXME only 244 bytes copied ? here databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;
-        } else if ( /* mFlashFirstPacketReiceved && */ databuf.length == 12 ) {   // firmware second packet
-          // mFlashFirstPacketReiceved = false;
-          // SHOULD THE LOOP GO FROM 3 TO 15 ????
-          for ( int i=0; i<12; i++) mFlashBytes[i+244] = databuf[i]; // 244 + 12 = 256 // here databuf is copied from offset 0
+        } else if ( databuf[2] == 0x01 ) {   // firmware second packet
+          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i]; // 244 + 12 = 256 // here databuf is copied from offset 0
           return PACKET_FLASH_BYTES_2;
         } else {
           // TDLog.Error("XBLE ...");
