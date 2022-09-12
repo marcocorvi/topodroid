@@ -213,7 +213,7 @@ public class FirmwareUtils
       TDLog.v( "device hw LANDOLT" );
       return HW_LANDOLT;
     }
-    if ( verifySignatureTian( signature ) == SIGNATURE_SIZE ) {
+    if ( verifyHardwareSignatureTian( signature ) == SIGNATURE_SIZE ) {
       TDLog.v( "device hw TIAN" );
       return HW_TIAN;
     }
@@ -362,6 +362,13 @@ public class FirmwareUtils
     return SIGNATURE_SIZE; // success
   }
 
+  private static int verifyHardwareSignatureTian( byte[] buf )
+  {
+    //reply from command 0x3c, the hardware version 1.3
+    if ( buf[0] == 0x0D && buf[1] == 0x00 )       // signature read from hardware
+       return SIGNATURE_SIZE;     //valid
+    return 0; // invalid
+  }
 
   /** @return the code of the HEEB firmware
    * @param buf   signature block
@@ -437,6 +444,7 @@ public class FirmwareUtils
         return 2700;
       }
     }
-    return -99; // failed on byte[7]
+    return 2700;  //only for debug
+    //return -99; // failed on byte[7]
   }
 }
