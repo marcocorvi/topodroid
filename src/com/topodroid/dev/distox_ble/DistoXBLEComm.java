@@ -32,7 +32,6 @@ import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpNotify;
 import com.topodroid.dev.ble.BleOperation;
-import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.prefs.TDSetting;
@@ -74,8 +73,12 @@ public class DistoXBLEComm extends TopoDroidComm
   // private Handler mLister; // 2022-09-09 no need to store the lister
 
   private int mPatketToRead = 0;
+  Thread mConsumer;
 
   Object mNewDataFlag;
+  private DistoXBLEQueue mQueue;
+
+  boolean mThreadConsumerWorking = false;
 
   /** cstr
    * @param ctx       context
@@ -90,6 +93,25 @@ public class DistoXBLEComm extends TopoDroidComm
       mRemoteBtDevice  = bt_device;
       mContext = ctx;
       mNewDataFlag = new Object();
+      mQueue = new DistoXBLEQueue();
+      Thread Consumer = new Thread() {
+          public void run() {
+              //mThreadConsumerWorking = true;
+              while(true){
+                  TDLog.v( "DistoXBLE comm: Queue size " + mQueue.size );
+                  DistoXBLEBuffer buffer = mQueue.get();
+                  if ( buffer == null ) continue;
+                  if ( buffer.data == null) continue;
+                  int res = ((DistoXBLEProtocol)mProtocol).packetProcess(buffer.data);
+                  if (res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1) return;   //not complete packet received
+                  synchronized (mNewDataFlag) {
+                      mPacketType = res;
+                      mNewDataFlag.notifyAll();
+                  }
+              }
+          }
+      };
+      Consumer.start();
       // TDLog.v( "SAP comm: cstr, addr " + address );
       // mOps = new ConcurrentLinkedQueue<BleOperation>();
       // clearPending();
@@ -201,12 +223,13 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     mReconnect = false;
     if ( mBTConnected ) {
-      mBTConnected = false;
-      notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
+        //mThreadConsumerWorking = false;
+        mBTConnected = false;
+        notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
       // TDLog.v( "XBLE comm ***** close device");
-      int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
-      doNextOp();
-      TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
+        int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
+        doNextOp();
+        TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
@@ -280,19 +303,14 @@ public class DistoXBLEComm extends TopoDroidComm
     // TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID_STR ) ) {
-        int res = ((DistoXBLEProtocol)mProtocol).packetProcess(chrt.getValue());
-        if (res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1) return;   //not complete packet received
-        synchronized (mNewDataFlag) {
-            mPacketType = res;
-            mNewDataFlag.notifyAll();
-        }
+        mQueue.put(chrt.getValue());
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
         return;
     }
   }
 
   /** notified that bytes have been read from the read characteristics
-   * @param srvUuid  service UUID string
+   * @param uuid_str  service UUID string
    * @param bytes    array of read bytes 
    */
   public void readedChrt( String uuid_str, byte[] bytes )
@@ -301,7 +319,7 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** notified that bytes have been written to the write characteristics
-   * @param srvUuid  service UUID string
+   * @param uuid_str  service UUID string
    * @param bytes    array of written bytes 
    */
   public void writtenChrt( String uuid_str, byte[] bytes )
@@ -310,8 +328,8 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** notified that bytes have been read
-   * @param srvUuid  service UUID string
-   * @param chrtUuid characteristics UUID string
+   * @param uuid_str  service UUID string
+   * @param uuid_chrt_str characteristics UUID string
    * @param bytes    array of read bytes 
    */
   public void readedDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
@@ -320,8 +338,8 @@ public class DistoXBLEComm extends TopoDroidComm
   }
 
   /** notified that bytes have been written
-   * @param srvUuid  service UUID string
-   * @param chrtUuid characteristics UUID string
+   * @param uuid_str  service UUID string
+   * @param uuid_chrt_str characteristics UUID string
    * @param bytes    array of written bytes 
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
@@ -372,6 +390,10 @@ public class DistoXBLEComm extends TopoDroidComm
     doNextOp();
     mBTConnected  = true;
     mPatketToRead = 0;
+    /*if(!mThreadConsumerWorking) {
+        mThreadConsumerWorking = true;
+        mConsumer.start();
+    }*/
     TDLog.v( "XBLE comm discovered services status CONNECTED" );
     notifyStatus( ConnectionState.CONN_CONNECTED );
     return 0;
