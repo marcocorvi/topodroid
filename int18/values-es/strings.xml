@@ -1300,10 +1300,10 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_with_android_azimuth_summary">Activar Brújula/clino Android</string>
   <string name="pref_blunder_shot_title">Tomas falsas</string>
   <string name="pref_blunder_shot_summary">Omitir tomas falsas</string>
-  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
-  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
-  <!-- TODO string name="pref_splay_group_title">Splay group-rename</string -->
-  <!-- TODO string name="pref_splay_group_summary">Splay group only-forward rename</string -->
+  <string name="pref_splay_station_title">Reasignación de la estación Splay</string>
+  <string name="pref_splay_station_summary">Reasignar estación a pantallas</string>
+  <string name="pref_splay_group_title">Renombrar grupo de Splay</string>
+  <string name="pref_splay_group_summary">Cambio de nombre de solo grupo de reproducción</string>
   <string name="pref_with_levels_title">Capas</string>
   <string name="pref_with_levels_summary">Usa capas en dibujo</string>
   <string name="pref_palettes_title">Paletas</string>
@@ -1558,8 +1558,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_linecorner_summary">Detección del límite del ángulo de línea Bezier</string>
   <string name="pref_graph_paper_scale_title">Escala de papel cuadriculado</string>
   <string name="pref_graph_paper_scale_summary">Corrección de escala de papel cuadriculado</string>
-  <!-- TODO string name="pref_weeddistance_title">Weeding point distance</string -->
-  <!-- TODO string name="pref_weeddistance_summary">Max distance from segment to weed points [m]</string -->
+  <string name="pref_weeddistance_title">Distancia del punto de desmalezado</string>
+  <string name="pref_weeddistance_summary">Distancia máxima desde el segmento hasta los puntos de desmalezado [m]</string>
   <string name="pref_weedlength_title">Longitud del segmento de entramado puntual</string>
   <string name="pref_weedlength_summary">Longitud máxima de un segmento de línea.</string>
   <string name="pref_weedbuffer_title">Búfer de segmento de eliminación</string>
