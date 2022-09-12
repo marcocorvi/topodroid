@@ -43,6 +43,8 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public static final int PACKET_SIGNATURE      = 0x1A;
 
   public static final int PACKET_MEASURE_DATA   = 0x20;
+  // public static final int PACKET_SHOT_DATA   = 0x21; // PACKET_MEASURE_DATA | 0x01
+  // public static final int PACKET_CALIB_DATA  = 0x22; // PACKET_MEASURE_DATA | 0x02
 
   public static final int PACKET_NONE           = 0;
   public static final int PACKET_ERROR          = 0x80;
@@ -56,7 +58,6 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public byte[] mMeasureDataPacket2;
 
   public byte[] mFlashBytes;
-  // public boolean   mFlashFirstPacketReiceved; // not necessary because packet type can be distinguished by databuf length
   //public int mPacketType;
 
   /** cstr
@@ -74,7 +75,6 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
     mRepliedData = new byte[4];
     mMeasureDataPacket1 = new byte[8];
     mMeasureDataPacket2 = new byte[8];
-    // mFlashFirstPacketReiceved = false;
     mFlashBytes = new byte[256];
   }
 
@@ -91,7 +91,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
   public int packetProcess( byte[] databuf )
   {
     if ( databuf.length == 0 ) return PACKET_NONE;
-    if ( (databuf[0] == 0x01 || databuf[0] == 0x02) && databuf.length == 17 ) {       //shot data
+    if ( (databuf[0] == 0x01 || databuf[0] == 0x02) && databuf.length == 17 ) { // shot / calib data
       System.arraycopy(databuf,1,mMeasureDataPacket1,0,8);
       System.arraycopy(databuf,9,mMeasureDataPacket2,0,8);
       int res1 = handlePacket(mMeasureDataPacket1);
@@ -100,7 +100,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         mComm.sendCommand(( mMeasureDataPacket1[0] & 0x80 ) | 0x55);
         mComm.handleRegularPacket(res1, mLister, 0);
         mComm.handleRegularPacket(res2, mLister, 0);
-        return PACKET_MEASURE_DATA;
+        return PACKET_MEASURE_DATA; // with ( PACKET_MEASURE_DATA | databuf[0]) shots would be distinguished from calib
       // } else {
       //   return PACKET_ERROR;
       }
@@ -128,7 +128,7 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
         // } else {
         //   return PACKET_ERROR;
         }
-      } else if ( command == 0x3c ) { // FIXME signature: hardware ver. // 0x3d 0x3e only works in App mode not in the bootloader mode.
+      } else if ( command == 0x3c ) { // signature: hardware ver. - 0x3d 0x3e only works in App mode not in the bootloader mode.
         // 0x3a 0x3b 0x3c are commands work in bootloader mode
         if ( databuf.length == 3 ) { 
           mRepliedData[0] = databuf[1];
@@ -140,17 +140,16 @@ public class DistoXBLEProtocol extends TopoDroidProtocol
           mCheckSum = ((databuf[4] << 8) | (databuf[3] & 0xff)) & 0xffff;
           return PACKET_FLASH_CHECKSUM;
         }
-      } else if ( command == 0x3A && databuf.length == 131) {   //3 headers + 128 payloadsda
+      } else if ( command == 0x3A && databuf.length == 131) {   // 3 headers + 128 payloadsda
         if ( databuf[2] == 0x00 ) {        // firmware first packet (MTU=247)
-          // mFlashFirstPacketReiceved = true;
-          for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // FIXME only 244 bytes copied ? here databuf is copied from offset 3
+          for ( int i=3; i<131; i++) mFlashBytes[i-3] = databuf[i]; // databuf is copied from offset 3
           return PACKET_FLASH_BYTES_1;
         } else if ( databuf[2] == 0x01 ) {   // firmware second packet
-          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i]; // 244 + 12 = 256 // here databuf is copied from offset 0
+          for ( int i=3; i<131; i++) mFlashBytes[i+128-3] = databuf[i]; 
           return PACKET_FLASH_BYTES_2;
-        } else {
-          // TDLog.Error("XBLE ...");
-          return PACKET_ERROR;
+        // } else {
+        //   // TDLog.Error("XBLE ...");
+        //   return PACKET_ERROR;
         }
       }
     }
