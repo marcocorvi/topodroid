@@ -336,7 +336,9 @@ public class FirmwareUtils
    */
   private static int verifySignatureTian( byte[] buf )
   {
-    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {
+    if ( buf[0] == 0x0D && buf[1] == 0x00 )       //signature read from hardware
+      return SIGNATURE_SIZE;
+    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {      //signature read from firmware
       if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
       if ( buf[k] != signatureTian[k] )
         return -k;
