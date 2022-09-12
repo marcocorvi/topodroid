@@ -220,7 +220,7 @@ public class FirmwareDialog extends MyDialog
     if ( signature == null ) { // could not get firmware signature
       TDToast.makeLong( R.string.firmware_upload_no_sign );
       if ( TDSetting.mFirmwareSanity ) return;    
-    } else if ( hw != FirmwareUtils.getDeviceHardware( signature ) ) {
+    } else if ( hw != FirmwareUtils.getDeviceHardwareSignature( signature ) ) {
       TDToast.makeLong( R.string.firmware_upload_bad_sign );
       if ( TDSetting.mFirmwareSanity ) return;    
     }

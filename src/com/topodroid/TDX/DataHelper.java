@@ -1973,6 +1973,21 @@ public class DataHelper extends DataSetObservable
         ++ myNextId;
       }
 
+      // NOTE transfer fixeds and plots was done for each shot considering blk.mFrom (and same for blk.mTo)
+      // now the following code is replaced by a for-loop over the stations at the end
+      //
+      // if ( blk.mFrom.length() > 0 ) {
+      //   List< FixedInfo > fixeds = selectFixedAtStation( old_sid, blk.mFrom ); 
+      //   for ( FixedInfo fixed : fixeds ) {
+      //     where0[1] = Long.toString( fixed.id );
+      //     myDB.update( FIXED_TABLE, vals0, WHERE_SID_ID, where0 );
+      //   }
+      //   where0[1] = blk.mFrom;
+      //   myDB.update( STATION_TABLE, vals0, WHERE_SID_NAME, where0 );
+      //   transferPlots( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom );
+      //   // transferSketches( old_survey.name, new_survey.name, sid, old_sid, blk.mFrom ); // FIXME_SKETCH_3D
+      // }
+
       // TDLog.v("transfer stations " + stations.size() );
       for ( String st : stations ) {
         // if ( transferShotFixedStmt == null ) {

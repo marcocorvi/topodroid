@@ -2518,8 +2518,10 @@ public class TopoDroidApp extends Application
   // }
 
   /** read the firmware signature - only X310
-   * @param hw expected device hardware
+   * @param hw        expected device hardware
    * @return firmware signature (or null if failure)
+   * @note the firmware signature block is read by the Comm class which can be either X2 or XBLE
+   *       and which block is read is specific to the class (ie, to the device)
    */
   public byte[] readFirmwareSignature( int hw )
   {
@@ -2530,17 +2532,17 @@ public class TopoDroidApp extends Application
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_SIGN, filename )).execute( );
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return null;
-    //SIWEI TIAN
-    if(mComm instanceof DistoX310Comm)
+    if ( mComm instanceof DistoX310Comm ) {
       return ((DistoX310Comm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
-    else if(mComm instanceof DistoXBLEComm)
+    } else if( mComm instanceof DistoXBLEComm ) {
       return ((DistoXBLEComm)mComm).readFirmwareSignature( TDInstance.deviceAddress(), hw );
-    else return null;
+    } 
+    return null;
   }
 
   /** read the firmware and save it to a file - only X310
    * @param name   filename including ".bin" extension
-   * @return ...
+   * @return -1 on error; ...
    */
   public int dumpFirmware( String name )
   {
@@ -2551,14 +2553,13 @@ public class TopoDroidApp extends Application
     // (new FirmwareTask( (DistoX310Comm)mComm, FirmwareTask.FIRMWARE_READ, filename )).execute( );
 
     if ( mComm == null || TDInstance.getDeviceA() == null ) return -1;
-    if (mComm instanceof DistoX310Comm){
+    if ( mComm instanceof DistoX310Comm ) {
       return ((DistoX310Comm) mComm).dumpFirmware(TDInstance.deviceAddress(), TDPath.getBinFile(name));
     } else if ( mComm instanceof DistoXBLEComm ) {
       return ((DistoXBLEComm)mComm).dumpFirmware( TDInstance.deviceAddress(), TDPath.getBinFile(name));
     } else {
       TDLog.e("DistoX device with no firmware upload");
     }
-
     return -1;
   }
 

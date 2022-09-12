@@ -30,6 +30,11 @@ public class FirmwareUtils
   public static final int HW_LANDOLT = 2;
   public static final int HW_TIAN    = 3;
 
+  private static final int OFFSET_TIAN    = 0;
+  private static final int OFFSET_HEEB    = 2048;
+  private static final int OFFSET_LANDOLT = 4096;
+
+
   // ------------------------------------------------------------------------------
   /** @return compatible hardware type for a given firmware
    * @param fw  firmware number
@@ -51,9 +56,9 @@ public class FirmwareUtils
     return getHardware( fw ) != HW_NONE;
   }
 
-  /** try to guess firmware version reading bytes from the file
+  /** try to guess firmware version reading bytes from the firmware file
    * @param fp   firmware file
-   * @return <= 0 (failure) or one of
+   * @return <= 0 (failure) or one of the known firmware codes:
    *    2100 2200 2300 2400 2412 2500 2501 2512
    *    2610 2630 2640
    *    2700
@@ -70,45 +75,54 @@ public class FirmwareUtils
       TDLog.v( "X310 read firmware file " + fp.getPath() );
       fis = new FileInputStream( fp );
       DataInputStream dis = new DataInputStream( fis );
-	  
-	  // SIWEI FIXME
-      // if ( dis.skipBytes( 2048 ) != 2048 ) {
-      //   TDLog.v( "failed skip 2048");
-      //   return 0; // skip 8 bootloader blocks
-      // }
+
+      int offset = 0; // offset where signature block is read
+      int skip = 0;   // bytes to skip in order to reach the offset
+
+      // SIWEI FIXME
+      skip = OFFSET_TIAN - offset;
+      if ( dis.skipBytes( skip ) != skip ) {
+        TDLog.v( "failed tian skip");
+        return 0; // skip 8 bootloader blocks
+      }
+      offset += skip;
       byte[] buf = new byte[SIGNATURE_SIZE];
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed read first block");
+        TDLog.v( "failed tian read");
         return 0;
       }
-	  if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
+      if ( verifySignatureTian( buf ) == SIGNATURE_SIZE ) {
         TDLog.v( "TIAN fw " + readFirmwareTian( buf ) );
         return readFirmwareTian( buf );
       }
-	  
-	  if ( dis.skipBytes( 1984 ) != 1984 ) { // 1984 = 2048 - 64
-        TDLog.v( "failed skip 1984");
-        return 0; // skip to 2048: bootloader blocks
+      offset += SIGNATURE_SIZE;
+
+      skip = OFFSET_HEEB - offset; // 1984 = 2048 - (0 + 64)
+      if ( dis.skipBytes( skip ) != skip ) {  // skip to 2048: heeb bootloader blocks
+        TDLog.v( "failed heeb skip");
+        return 0;
       }
-	  if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed read first block");
+      if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
+        TDLog.v( "failed heeb read");
         return 0;
       }
       if ( verifySignatureHeeb( buf ) == SIGNATURE_SIZE ) {
-        TDLog.v( "HEEB fw " + readFirmwareHeeb( buf ) );
+        // TDLog.v( "HEEB fw " + readFirmwareHeeb( buf ) );
         return readFirmwareHeeb( buf );
       }
+      offset += SIGNATURE_SIZE;
 
-      if ( dis.skipBytes( 1984 ) != 1984 ) {
-        TDLog.v( "failed skip 1984");
-        return 0; // skip to 4096: bootloader blocks
+      skip = OFFSET_LANDOLT - offset; // 1984 = 4096 - (2048 + 64)
+      if ( dis.skipBytes( skip ) != skip ) { // skip to 4096: landolt bootloader blocks
+        TDLog.v( "failed landolt skip");
+        return 0; 
       }
       if ( dis.read( buf, 0, SIGNATURE_SIZE ) != SIGNATURE_SIZE ) {
-        TDLog.v( "failed read second block");
+        TDLog.v( "failed landolt read");
         return 0;
       }
       if ( verifySignatureLandolt( buf ) == SIGNATURE_SIZE ) {
-        TDLog.v( "LANDOLT fw " + readFirmwareLandolt( buf ) );
+        // TDLog.v( "LANDOLT fw " + readFirmwareLandolt( buf ) );
         return readFirmwareLandolt( buf );
       }
     } catch ( IOException e ) {
@@ -180,10 +194,11 @@ public class FirmwareUtils
   }
 
   /** check 64 bytes on the device
-   * @param signature   256-byte signature block on the DistoX af offset 2048
+   * @param signature   256-byte signature block of the firmware on the DistoX 
    * @return hardware type
+   * @note the block is read by TopoDroidApp.readFirmwareSignature()
    */
-  static int getDeviceHardware( byte[] signature )
+  static int getDeviceHardwareSignature( byte[] signature )
   {
     // FIXME use verifySignatureTian() as shown below
     // if ( signature[0] == 0x0D && signature[1] == 0x00 ) {
@@ -305,7 +320,7 @@ public class FirmwareUtils
   // }
 
   /** verify the 64-byte HEEB signature block
-   * @param buf   signature block at 2048-offset
+   * @param buf   signature block at 2048-offset, either in the firmware file or in the firmware on the device
    * @return neg of failed byte or signature size
    */
   private static int verifySignatureHeeb( byte[] buf )
@@ -318,7 +333,7 @@ public class FirmwareUtils
   }
 
   /** verify the 64-byte LANDOLT signature block
-   * @param buf   signature block at 4096-offset
+   * @param buf   signature block at 4096-offset, either in the firmware file or in the firmware on the device
    * @return neg of failed byte or signature size
    */
   private static int verifySignatureLandolt( byte[] buf )
@@ -331,14 +346,15 @@ public class FirmwareUtils
   }
 
   /** verify the 64-byte TIAN signature block
-   * @param buf   signature block at ????-offset
+   * @param buf   signature block at ????-offset, either in the firmware file or in the firmware on the device
    * @return neg of failed byte or signature size
    */
   private static int verifySignatureTian( byte[] buf )
   {
-    if ( buf[0] == 0x0D && buf[1] == 0x00 )       //signature read from hardware
-      return SIGNATURE_SIZE;
-    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {      //signature read from firmware
+    // FIXME: a check on only 2 bytes should not be sufficient for a signature validation
+    // if ( buf[0] == 0x0D && buf[1] == 0x00 )       // signature read from hardware
+    //   return SIGNATURE_SIZE;
+    for ( int k=0; k<SIGNATURE_SIZE; ++k ) {      // signature read from firmware
       if ( k==6 || k==7 || k==12 || k==16 || k==17 ) continue;
       if ( buf[k] != signatureTian[k] )
         return -k;
