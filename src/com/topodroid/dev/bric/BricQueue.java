@@ -21,13 +21,17 @@ import java.util.concurrent.locks.Condition;
 
 class BricQueue
 {
-  final Lock mLock = new ReentrantLock();
-  final Condition notEmpty = mLock.newCondition();
+  final Lock mLock = new ReentrantLock(); // mutex
+  final Condition notEmpty = mLock.newCondition(); // condition variable
 
   BricBuffer mHead = null;
   BricBuffer mTail = null;
   int size = 0;
 
+  /** thread-safe putter
+   * @param type   buffer type
+   * @param bytes  buffer data
+   */
   void put( int type, byte[] bytes )
   {
     // TDLog.v( "BRIC queue put " + BleUtils.bytesToHexString( bytes ) );
@@ -47,6 +51,9 @@ class BricQueue
     }
   }
 
+  /** thread-safe getter
+   * @return buffer
+   */
   BricBuffer get()
   {
     mLock.lock();

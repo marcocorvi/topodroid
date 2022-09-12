@@ -82,18 +82,20 @@ public class BricComm extends TopoDroidComm
   // final static int DATA_DEVICE_01   = 301;
   // final static int DATA_DEVICE_04   = 304;
   // final static int DATA_DEVICE_06   = 306;
-  final static int DATA_QUIT = -1;
+  final static int DATA_QUIT = -1;  // used to tell the consumer thread to exit
 
   private Context mContext;
   BleCallback mCallback;
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
-  private int mDataType;   // packet datatype 
-  private BricQueue mQueue;
+  private int mDataType;    // packet datatype 
+  private BricQueue mQueue; // buffer queue - filled with buffers from the reading
+                            // and emptied by the consumer thread
   private boolean mReconnect = false;
 
   private Timer mTimer = null;
   private long onData = 0;
+  private Thread mConsumer = null;
 
   public BricComm( Context ctx, TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
@@ -104,7 +106,7 @@ public class BricComm extends TopoDroidComm
     mRemoteBtDevice = bt_device;
     mQueue = new BricQueue();
     mBricInfoDialog = null;
-    Thread consumer = new Thread(){
+    mConsumer = new Thread(){
       public void run()
       {
         boolean do_consume = true;
@@ -174,7 +176,18 @@ public class BricComm extends TopoDroidComm
         }
       } 
     };
-    consumer.start();
+    mConsumer.start();
+  }
+
+  /* terminate the consumer thread - put a "quit" buffer on the queue
+   * @note this method has still to be used
+   */
+  public void terminateConsumer()
+  {
+    if ( mConsumer != null ) {
+      // put a DATA_QUIT buffer on the queue
+      mQueue.put( DATA_QUIT, new byte[0] );
+    }
   }
 
   /** register an info-dialog
@@ -380,7 +393,7 @@ public class BricComm extends TopoDroidComm
     return 0;
   }
 
-  /** react after a characteristics has been read
+  /** react after a characteristics has been read: the read bytes are put on the buffer queue
    * @param uuid_str characteristics string UUID
    * @param bytes    read bytes
    * @note from onCharacteristicRead
@@ -479,8 +492,10 @@ public class BricComm extends TopoDroidComm
     clearPending();
   }
 
-  // from onCharacteristicChanged - this is called when the BRIC4 signals
-  // MEAS_META, MEAS_ERR, and LAST_TIME are change-notified 
+  /** from onCharacteristicChanged - this is called when the BRIC4 signals
+   *  MEAS_META, MEAS_ERR, and LAST_TIME are change-notified 
+   * @param chrt   read characteristic
+   */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
     String chrt_uuid = chrt.getUuid().toString();

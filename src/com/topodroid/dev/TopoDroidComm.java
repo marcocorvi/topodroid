@@ -51,12 +51,18 @@ public class TopoDroidComm
 
   public boolean mBTConnected;
 
+  public CommThread mCommThread = null;
+
   public byte[] mCoeff;
 
-// -----------------------------------------------------------
+  boolean mHasG = false; // whether the last received packet was G type
+  long mLastShotId;   // last shot id
 
   // private AtomicInteger mNrPacketsRead; // FIXME_ATOMIC_INT
   protected volatile int mNrPacketsRead;
+
+
+// -----------------------------------------------------------
 
   // int getNrPacketsRead() { return ( mNrPacketsRead == null )? 0 : mNrPacketsRead.get(); } // FIXME_ATOMIC_INT 
   public int  getNrReadPackets() { return mNrPacketsRead; }
@@ -65,11 +71,19 @@ public class TopoDroidComm
   // void incNrReadPackets() { ++mNrPacketsRead; }
   // void resetNrReadPackets() { mNrPacketsRead = 0; }
 
+  /** @return true if the BT is connected
+   */
   public boolean isConnected() { return mBTConnected; }
 
-  // @param index      bric shot index
-  // @param lister
-  // @param data_type bric datatype (0: normal, 1: scan )
+  /** handle a BRIC packet
+   * @param index      bric shot index
+   * @param lister
+   * @param data_type bric datatype (0: normal, 1: scan )
+   * @param clino_error    error between clino readings
+   * @param azimuth_error  error between azimuth readings
+   * @param comment        device data comment (?)
+   * @return ...
+   */
   public boolean handleBricPacket( long index, Handler lister, int data_type, float clino_error, float azimuth_error, String comment )
   {
     // TDLog.v( "TD comm: packet DATA");
@@ -256,17 +270,21 @@ public class TopoDroidComm
     }
   }
 
-  public CommThread mCommThread = null;
-
+  /** @return true if the Comm thread is null
+   */
   public boolean isCommThreadNull( ) { return ( mCommThread == null ); }
 
+  /** set the Comm thread to null
+   */
   void doneCommThread() { mCommThread = null; }
 
-  boolean mHasG = false;
-  long mLastShotId;   // last shot id
-
+  /** @return true if the last-received packet was G type
+   */
   public void setHasG( boolean has_g ) { mHasG = has_g; }
 
+  /** cstr
+   * @param app  TopoDroid app
+   */
   public TopoDroidComm( TopoDroidApp app )
   {
     mApp          = app;
@@ -277,17 +295,30 @@ public class TopoDroidComm
     // TDLog.Log( TDLog.LOG_COMM, "TopoDroid Comm cstr");
   }
 
+  /** dstr
+   * terminate the Comm - by default cancel the Comm thread
+   */
+  protected void terminate()
+  {
+    cancelCommThread();
+  }
+
+  /** resume work - nothing for deafault
+   */
   public void resume()
   {
     // if ( mCommThread != null ) { mCommThread.resume(); }
   }
 
+  /** supend work - nothing for deafault
+   */
   public void suspend()
   {
     // if ( mCommThread != null ) { mCommThread.suspend(); }
   }
 
-
+  /** cancel the Comm thread
+   */
   protected void cancelCommThread()
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm cancel Comm thread");
@@ -317,11 +348,19 @@ public class TopoDroidComm
     mProtocol = null;
   }
 
+  /** start the Comm thread
+   * @param to_read   number of packets to read
+   * @param lister    data lister
+   * @param data_type expected data type (?)
+   * @return always false (ie, thread not started) by default
+   */
   protected boolean startCommThread( int to_read, Handler /* ILister */ lister, int data_type ) 
   {
     return false;
   }
 
+  /** disconnect the remote device
+   */
   public void disconnectRemoteDevice( )
   {
     // TDLog.Log( TDLog.LOG_COMM, "disconnect remote device ");
@@ -329,6 +368,10 @@ public class TopoDroidComm
     closeProtocol();
   }
 
+  /** send a command 
+   * @param cmd   command code
+   * @return ???
+   */
   public boolean sendCommand( int cmd )
   {
     // TDLog.Log( TDLog.LOG_COMM, "VD comm send cmd " + cmd );
@@ -344,30 +387,60 @@ public class TopoDroidComm
     return ret;
   }
 
+  /** toggle DistoX calibration mode
+   * @param address   device address
+   * @param type      ???
+   * @return ???
+   */
   public boolean toggleCalibMode( String address, int type ) { return false; }
 
+  /** write DistoX calibration coeffs
+   * @param address   device address
+   * @param coeff     calib coeff array
+   * @return ???
+   */
   public boolean writeCoeff( String address, byte[] coeff ) { return false; }
 
+  /** read DistoX calibration coeffs
+   * @param address   device address
+   * @param coeff     calib coeff array
+   * @return ???
+   */
   public boolean readCoeff( String address, byte[] coeff ) { return false; }
 
+  /** read DistoX (??? bytes) memory
+   * @param address   device address
+   * @param addr      memory address
+   * @return array of read bytes
+   */
   public byte[] readMemory( String address, int addr ) { return null; }
 
   // ------------------------------------------------------------------------------------
   // CONTINUOUS DATA DOWNLOAD
 
+  /** connect to a device 
+   * @param address   devuce address
+   * @param lister    data lister
+   * @param data_type ???
+   * @return always false (ie, failure) by default
+   */
   public boolean connectDevice( String address, Handler /* ILister */ lister, int data_type )
   {
     return false;
   }
 
+  /** disconnect from the remote device
+   * @return always true, ie disconnected, by default
+   */
   public boolean disconnectDevice() { return true; }
 
   // -------------------------------------------------------------------------------------
   // ON-DEMAND DATA DOWNLOAD
 
-  /** 
+  /** download data from the remote device
+   * @param address   devuce address
    * @param lister    data lister
-   * @param data_type packet datatype, either shot or calib (or all)
+   * @param data_type packet datatype, either shot or calib (or all) (not used)
    * @return always -1: number of packet received - must be overridden
    */
   public int downloadData( String address, Handler /* ILister */ lister, int data_type )
@@ -376,11 +449,18 @@ public class TopoDroidComm
     return -1;
   }
 
+  /** read a number of packets
+   * @param to_read    nyumber of packets to read
+   * @param data_type  ???
+   * @return ???
+   */
   int readingPacket( boolean to_read, int data_type )
   {
     return mProtocol.readPacket( to_read, data_type );
   }
 
+  /** cancel the work in progress
+   */
   void cancelWork() 
   {
     if ( mProtocol != null ) mProtocol.mMaxTimeout = 0;

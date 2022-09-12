@@ -104,7 +104,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param device    device (info)
    * @param lister    data lister
    // * @param data_type expected type of data (unused)
-   * @return ???
+   * @return true if success
    * @note Device has mAddress, mModel, mName, mNickname, mType
    * the only thing that coincide with the remote_device is the address
    */
@@ -151,7 +151,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param address   device address (unused)
    * @param lister    data lister
    * @param data_type expected type of data (unused)
-   * @return ???
+   * @return true if success
    */
   @Override
   public boolean connectDevice(String address, Handler /* ILister */ lister, int data_type ) // FIXME XBLE_DATA_TYPE ?
@@ -466,7 +466,13 @@ public class DistoXBLEComm extends TopoDroidComm
     mApp.notifyStatus( status );
   }
 
-
+  /** prepare a write op and put it on the queue - call the next op
+   * @param srvUuid   service UUID
+   * @param chrtUuid  chracteristic UUID
+   * @param bytes     data array byte
+   * @param addHeader whether to add a (6-byte) header "data:#"
+   * @return ...
+   */
   public boolean enlistWrite( UUID srvUuid, UUID chrtUuid, byte[] bytes, boolean addHeader )
   {
     BluetoothGattCharacteristic chrt = mCallback.getWriteChrt( srvUuid, chrtUuid );
@@ -480,16 +486,20 @@ public class DistoXBLEComm extends TopoDroidComm
     //   return false;
     // }
     // TDLog.v( "XBLE comm: enlist chrt write " + chrtUuid.toString() );
-    byte[] framebytes = new byte[bytes.length + 8];
-    framebytes[0] = 'd';framebytes[1] = 'a';framebytes[2] = 't';framebytes[3] = 'a';framebytes[4] = ':';
-    framebytes[5] = (byte)(bytes.length);
-    int i = 0;
-    for ( i = 0;i < bytes.length; i++ ) {
-      framebytes[i+6] = bytes[i];
-    }
-    framebytes[i+6] = '\r';
-    framebytes[i+7] = '\n';
     if ( addHeader ) {
+      byte[] framebytes = new byte[bytes.length + 8];
+      framebytes[0] = 'd';
+      framebytes[1] = 'a';
+      framebytes[2] = 't';
+      framebytes[3] = 'a';
+      framebytes[4] = ':';
+      framebytes[5] = (byte)(bytes.length);
+      int i = 0;
+      for ( i = 0;i < bytes.length; i++ ) {
+        framebytes[i+6] = bytes[i];
+      }
+      framebytes[i+6] = '\r';
+      framebytes[i+7] = '\n';
       enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, framebytes ) );
     } else {
       enqueueOp( new BleOpChrtWrite( mContext, this, srvUuid, chrtUuid, bytes ) );
@@ -499,13 +509,16 @@ public class DistoXBLEComm extends TopoDroidComm
     return true;
   }
 
+  /** get DistoX-BLE hw/fw info, and display that on the Info dialog
+   */
   public void GetXBLEInfo()
   {
-    if ( readMemory(DistoXBLEDetails.FIRMWARE_ADDRESS,4) != null ) { // ?? there was not 4
-      if(mDistoXBLEInfoDialog != null) mDistoXBLEInfoDialog.SetVal(mPacketType,((DistoXBLEProtocol)mProtocol).mFirmVer);
+    if ( mDistoXBLEInfoDialog == null ) return;
+    if ( readMemory(DistoXBLEDetails.FIRMWARE_ADDRESS, 4) != null ) { // ?? there was not 4
+      mDistoXBLEInfoDialog.SetVal(mPacketType,((DistoXBLEProtocol)mProtocol).mFirmVer);
     }
-    if ( readMemory(DistoXBLEDetails.HARDWARE_ADDRESS,4) != null ) {
-      if(mDistoXBLEInfoDialog != null) mDistoXBLEInfoDialog.SetVal(mPacketType,((DistoXBLEProtocol)mProtocol).mHardVer);
+    if ( readMemory(DistoXBLEDetails.HARDWARE_ADDRESS, 4) != null ) {
+      mDistoXBLEInfoDialog.SetVal(mPacketType,((DistoXBLEProtocol)mProtocol).mHardVer);
     }
   }
 
