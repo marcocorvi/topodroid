@@ -28,6 +28,8 @@ import com.topodroid.dev.ble.BleOpChrtRead;
 import com.topodroid.dev.ble.BleOpChrtWrite;
 import com.topodroid.dev.ble.BleUtils;
 import com.topodroid.dev.ble.BleConst;
+import com.topodroid.dev.ble.BleBuffer;
+import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.TDX.TDInstance;
 import com.topodroid.TDX.TDToast;
 import com.topodroid.TDX.TopoDroidApp;
@@ -89,7 +91,7 @@ public class BricComm extends TopoDroidComm
   private String          mRemoteAddress;
   private BluetoothDevice mRemoteBtDevice;
   private int mDataType;    // packet datatype 
-  private BricQueue mQueue; // buffer queue - filled with buffers from the reading
+  private BleQueue mQueue; // buffer queue - filled with buffers from the reading
                             // and emptied by the consumer thread
   private boolean mReconnect = false;
 
@@ -104,7 +106,7 @@ public class BricComm extends TopoDroidComm
     mContext  = ctx;
     mRemoteAddress = address;
     mRemoteBtDevice = bt_device;
-    mQueue = new BricQueue();
+    mQueue = new BleQueue();
     mBricInfoDialog = null;
     mConsumer = new Thread(){
       public void run()
@@ -113,7 +115,7 @@ public class BricComm extends TopoDroidComm
         boolean do_consume = true;
         while ( do_consume ) {
           // TDLog.v( "BRIC comm: Queue size " + mQueue.size );
-          BricBuffer buffer = mQueue.get();
+          BleBuffer buffer = mQueue.get();
           if ( buffer == null ) continue;
           // TDLog.v( "BRIC comm: Queue buffer type " + buffer.type );
           switch ( buffer.type ) {

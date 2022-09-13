@@ -1,15 +1,15 @@
-/* @file BricQueue.java
+/* @file BleQueue.java
  *
  * @author marco corvi
  * @date jan 2021
  *
- * @brief BRIC4 packet-buffer queue
+ * @brief BLE packet-buffer queue
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
  * --------------------------------------------------------
  */
-package com.topodroid.dev.bric;
+package com.topodroid.dev.ble;
 
 // import com.topodroid.dev.ble.BleUtils;
 
@@ -19,23 +19,23 @@ import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 import java.util.concurrent.locks.Condition;
 
-class BricQueue
+public class BleQueue
 {
   final Lock mLock = new ReentrantLock(); // mutex
   final Condition notEmpty = mLock.newCondition(); // condition variable
 
-  BricBuffer mHead = null;
-  BricBuffer mTail = null;
-  int size = 0;
+  BleBuffer mHead = null;
+  BleBuffer mTail = null;
+  public int size = 0;
 
   /** thread-safe putter
    * @param type   buffer type
-   * @param bytes  buffer data
+   * @param bytes  buffer data (can be null)
    */
-  void put( int type, byte[] bytes )
+  public void put( int type, byte[] bytes )
   {
-    // TDLog.v( "BRIC queue put " + BleUtils.bytesToHexString( bytes ) );
-    BricBuffer buffer = new BricBuffer( type, bytes );
+    // TDLog.v( "BLE queue put " + BleUtils.bytesToHexString( bytes ) );
+    BleBuffer buffer = new BleBuffer( type, bytes );
     mLock.lock();
     try {
       if ( mTail == null ) {
@@ -54,7 +54,7 @@ class BricQueue
   /** thread-safe getter
    * @return buffer
    */
-  BricBuffer get()
+  public BleBuffer get()
   {
     mLock.lock();
     try {
@@ -65,7 +65,7 @@ class BricQueue
           TDLog.v("INTERRUPT " + e.getMessage() );
         }
       }
-      BricBuffer ret = mHead;
+      BleBuffer ret = mHead;
       mHead = mHead.next;
       if ( mHead == null ) mTail = null;
       // ret.next = null;

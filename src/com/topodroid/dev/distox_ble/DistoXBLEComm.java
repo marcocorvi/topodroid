@@ -32,6 +32,8 @@ import com.topodroid.dev.ble.BleOpConnect;
 import com.topodroid.dev.ble.BleOpDisconnect;
 import com.topodroid.dev.ble.BleOpNotify;
 import com.topodroid.dev.ble.BleOperation;
+import com.topodroid.dev.ble.BleBuffer;
+import com.topodroid.dev.ble.BleQueue;
 import com.topodroid.dev.distox.DistoX;
 import com.topodroid.packetX.MemoryOctet;
 import com.topodroid.prefs.TDSetting;
@@ -55,6 +57,9 @@ import java.util.ArrayList;
 public class DistoXBLEComm extends TopoDroidComm
         implements BleComm
 {
+  final static int DATA_PRIM = 1;   // same as Bric DATA_PRIM
+  final static int DATA_QUIT = -1;  // same as Bric 
+
   private ConcurrentLinkedQueue< BleOperation > mOps;
   private Context mContext;
   BleCallback mCallback;
@@ -73,10 +78,10 @@ public class DistoXBLEComm extends TopoDroidComm
   // private Handler mLister; // 2022-09-09 no need to store the lister
 
   private int mPatketToRead = 0;
-  Thread mConsumer;
+  Thread mConsumer = null;
 
   Object mNewDataFlag;
-  private DistoXBLEQueue mQueue;
+  private BleQueue mQueue;
 
   boolean mThreadConsumerWorking = false;
 
@@ -88,35 +93,52 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public DistoXBLEComm(Context ctx,TopoDroidApp app, String address, BluetoothDevice bt_device )
   {
-      super( app );
-      // mRemoteAddress = address;
-      mRemoteBtDevice  = bt_device;
-      mContext = ctx;
-      mNewDataFlag = new Object();
-      mQueue = new DistoXBLEQueue();
-      Thread Consumer = new Thread() {
-          public void run() {
-              //mThreadConsumerWorking = true;
-              while(true){
-                  TDLog.v( "DistoXBLE comm: Queue size " + mQueue.size );
-                  DistoXBLEBuffer buffer = mQueue.get();
-                  if ( buffer == null ) continue;
-                  if ( buffer.data == null) continue;
-                  int res = ((DistoXBLEProtocol)mProtocol).packetProcess(buffer.data);
-                  if (res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1) continue;   // non-complete packet received
-                  synchronized (mNewDataFlag) {
-                      mPacketType = res;
-                      mNewDataFlag.notifyAll();
-                  }
-              }
+    super( app );
+    // mRemoteAddress = address;
+    mRemoteBtDevice  = bt_device;
+    mContext = ctx;
+    mNewDataFlag = new Object();
+    mQueue = new BleQueue();
+    mConsumer = new Thread() {
+      @Override public void run() {
+        //mThreadConsumerWorking = true;
+        while ( true ) {
+          TDLog.v( "XBLE comm: Queue size " + mQueue.size );
+          BleBuffer buffer = mQueue.get();
+          if ( buffer == null ) continue;
+          if ( buffer.type == DATA_PRIM ) {
+            if ( buffer.data == null) continue;
+            int res = ((DistoXBLEProtocol)mProtocol).packetProcess( buffer.data );
+            if ( res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1 ) continue;   // non-complete packet received
+            synchronized (mNewDataFlag) {
+              mPacketType = res;
+              mNewDataFlag.notifyAll();
+            }
+          } else if ( buffer.type == DATA_QUIT ) {
+            break;
           }
-      };
-      Consumer.start();
-      // TDLog.v( "SAP comm: cstr, addr " + address );
-      // mOps = new ConcurrentLinkedQueue<BleOperation>();
-      // clearPending();
+        }
+      }
+    };
+    mConsumer.start();
+    // TDLog.v( "XBLE comm: cstr, addr " + address );
+    // mOps = new ConcurrentLinkedQueue<BleOperation>();
+    // clearPending();
   }
 
+
+  /* terminate the consumer thread - put a "quit" buffer on the queue
+   * @note this method has still to be used
+   */
+  @Override
+  public void terminate()
+  {
+    TDLog.v("BRIC comm terminate");
+    if ( mConsumer != null ) {
+      // put a DATA_QUIT buffer on the queue
+      mQueue.put( DATA_QUIT, new byte[0] );
+    }
+  }
   // -------------------------------------------------------------
   /**
    * connection and data handling must run on a separate thread
@@ -150,9 +172,9 @@ public class DistoXBLEComm extends TopoDroidComm
     // mPendingCommands = 0; // FIXME COMPOSITE_COMMANDS
     // clearPending();
 
-    TDLog.v( "DistoX-BLE comm ***** connect Device = [3a] status WAITING" );
+    TDLog.v( "XBLE comm ***** connect Device = [3a] status WAITING" );
     int ret = enqueueOp( new BleOpConnect( mContext, this, mRemoteBtDevice ) ); // exec connectGatt()
-    TDLog.v( "DistoX-BLE connects ... " + ret);
+    TDLog.v( "XBLE connects ... " + ret);
     clearPending();
     return true;
   }
@@ -300,12 +322,12 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void changedChrt( BluetoothGattCharacteristic chrt )
   {
-    // TDLog.v( "SAP comm: changedChrt" );
     String uuid_str = chrt.getUuid().toString();
     if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID_STR ) ) {
-        mQueue.put(chrt.getValue());
+      TDLog.v( "XBLE comm: changed read chrt" );
+      mQueue.put( DATA_PRIM, chrt.getValue() );
     } else if ( uuid_str.equals( DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID_STR ) ) {
-        return;
+      TDLog.v( "XBLE comm: changed write chrt" );
     }
   }
 
@@ -315,7 +337,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void readedChrt( String uuid_str, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: readedChrt" );
+    // TDLog.v( "XBLE comm: readedChrt" );
   }
 
   /** notified that bytes have been written to the write characteristics
@@ -344,7 +366,7 @@ public class DistoXBLEComm extends TopoDroidComm
    */
   public void writtenDesc( String uuid_str, String uuid_chrt_str, byte[] bytes )
   {
-    // TDLog.v( "SAP comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
+    // TDLog.v( "XBLE comm: ====== written desc " + uuid_str + " " + uuid_chrt_str );
     clearPending();
   }
 
