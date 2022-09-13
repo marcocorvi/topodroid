@@ -872,7 +872,9 @@ public class DistoXBLEComm extends TopoDroidComm
     byte[] coefftmp = readMemory( addr, 52 );
     disconnectDevice();
     if ( coefftmp == null || coefftmp.length != 52 ) return false;
-    coeff = Arrays.copyOf( coefftmp, 52 );
+    //coeff = Arrays.copyOf( coefftmp, 52 );  //calling this functions cause a problem: all the params shown in dialog are zero.
+    //calling the following is ok. I don't know why. both the 2 functions can copy the right value to coeff[]
+    for(int i = 0;i < 52;i++) coeff[i] = coefftmp[i];
     return true;
   }
 
