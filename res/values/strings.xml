@@ -996,6 +996,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_3d">3D view (Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">Drawing mode</string>
+    <string name="help_drawing">Drawing</string>
     <string name="help_edit">Editing mode</string>
     <string name="help_refs">Sketching references</string>
     <string name="help_rename">Change survey name</string>
@@ -1234,6 +1235,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
 
     <string name="title_import_shot">Survey import</string>
     <string name="title_import_gps">GPS point import</string>
+    <string name="title_import_th2">Therion th2 file</string>
     <string name="title_graph_paper">Graph paper 1:100 scale</string>
     <string name="graph_paper_scale">Adjust the line to be 5 cm long</string>
 
@@ -1325,6 +1327,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_palettes_summary">Enable additional palettes</string>
   <string name="pref_packet_logger_title">Packets log</string>
   <string name="pref_packet_logger_summary">Enable packets logging</string>
+  <string name="pref_th2_edit_title" translatable="false">Sketch editing</string>
+  <string name="pref_th2_edit_summary" translatable="false">Enable sketch editing</string>
 
   <string name="pref_bezier_step_title">Point spacing</string>
   <string name="pref_bezier_step_summary">Max. point spacing (polyline approx. of curves) [m]</string>
@@ -1858,7 +1862,8 @@ READ THE HELP BEFORE ATTEMPTING A FIRMWARE UPLOAD
     <!-- UNUSED string name="menu_new">NEW</string -->
     <!-- UNUSED string name="menu_equate">ADD EQUATE</string -->
     <!-- UNUSED string name="menu_equates">EQUATES</string -->
-    <!-- UNUSED string name="menu_save">SAVE</string -->
+    <string name="menu_open">OPEN</string>
+    <string name="menu_save">SAVE</string>
 
     <!-- UNUSED string name="overwrite">overwrite</string -->
 

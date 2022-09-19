@@ -37,7 +37,7 @@ import android.graphics.RectF;
  *      - DrawingLinePath
  *      - DrawingAreaPath
  *   - DrawingPointPath
- *   - DrawingStationPath
+ *   - DrawingStationUser
  */
 
 public class DrawingPath extends RectF
@@ -141,7 +141,7 @@ public class DrawingPath extends RectF
    * @param blk    shot data block, associated to the path, or null
    * @param scrap  path scrap (index)
    */
-  DrawingPath( int type, DBlock blk, int scrap )
+  public DrawingPath( int type, DBlock blk, int scrap ) // TH2EDIT package
   {
     mType    = type;
     mOptions = null;
@@ -806,7 +806,7 @@ public class DrawingPath extends RectF
   /** set the options string
    * @param options   new options string
    */
-  void setOptions( String options ) { mOptions = options; }
+  public void setOptions( String options ) { mOptions = options; } // TH2EDIT package
 
   void prepareCave3D() 
   {

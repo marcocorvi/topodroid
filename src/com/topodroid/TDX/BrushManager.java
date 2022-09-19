@@ -45,9 +45,9 @@ public class BrushManager
   static final int WIDTH_PREVIEW = 1;
 
   // TODO make private
-  static private SymbolPointLibrary mPointLib = null;
-  static private SymbolLineLibrary  mLineLib  = null;
-  static private SymbolAreaLibrary  mAreaLib  = null;
+  static public  SymbolPointLibrary mPointLib = null; // TH2EDIT private
+  static public  SymbolLineLibrary  mLineLib  = null; // TH2EDIT private
+  static public  SymbolAreaLibrary  mAreaLib  = null; // TH2EDIT private
   static private SymbolPoint mStationSymbol   = null;
   static private int mAlpha = 0xff; // splay alpha
   static private boolean mHasSymbolLibraries = false;
@@ -89,7 +89,7 @@ public class BrushManager
 
   public static int getPointIndexByThName( String thname ) { return (mPointLib == null)? -1 : mPointLib.getSymbolIndexByThName( thname ); }
   public static int getLineIndexByThName( String thname )  { return (mLineLib  == null)? -1 : mLineLib.getSymbolIndexByThName( thname ); }
-  static int getAreaIndexByThName( String thname )  { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndexByThName( thname ); }
+  public static int getAreaIndexByThName( String thname )  { return (mAreaLib  == null)? -1 : mAreaLib.getSymbolIndexByThName( thname ); } // TH2EDIT package
 
   static Symbol getPointByThName( String thname ) { return (mPointLib == null)? null : mPointLib.getSymbolByThName( thname ); }
   static Symbol getLineByThName( String thname )  { return (mLineLib  == null)? null : mLineLib.getSymbolByThName( thname ); }
@@ -172,11 +172,11 @@ public class BrushManager
   // static int getAreaCsxBrush( int index )    { return (mAreaLib == null)? 0 : mAreaLib.areaCsxBrush( index ); }
   static int getAreaLevel( int idx )         { return (mAreaLib == null)? DrawingLevel.LEVEL_BASE : mAreaLib.getSymbolLevel( idx ); }
 
-  static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); }
+  public static boolean isPointOrientable( int index )  { return mPointLib != null && mPointLib.isSymbolOrientable( index ); } // TH2EDIT package
   static double getPointOrientation( int index ) { return (mPointLib == null)? 0 : mPointLib.getPointOrientation( index ); }
   // test should not be necessary but Xperia Z Ultra Android 5.1 crashed 2019-10-07
-  static void resetPointOrientations( )              { if ( mPointLib != null ) mPointLib.resetOrientations(); }
-  static void rotateGradPoint( int index, double a ) { if ( mPointLib != null ) mPointLib.rotateGrad( index, a ); }
+  public static void resetPointOrientations( )              { if ( mPointLib != null ) mPointLib.resetOrientations(); } // TH2EDIT package
+  public static void rotateGradPoint( int index, double a ) { if ( mPointLib != null ) mPointLib.rotateGrad( index, a ); } // TH2EDIT package
   static Path getPointPath( int i )                  { return (mPointLib == null)? null : mPointLib.getPointPath( i ); }
   static Path getPointOrigPath( int i )              { return (mPointLib == null)? null : mPointLib.getPointOrigPath( i ); }
 
@@ -189,7 +189,7 @@ public class BrushManager
   static boolean isLineEnabled( String name )  { return mLineLib  != null && mLineLib.isSymbolEnabled( name ); }
   static boolean isAreaEnabled( String name )  { return mAreaLib  != null && mAreaLib.isSymbolEnabled( name ); }
 
-  static int getPointLabelIndex()   { return (mPointLib == null)? 1 : mPointLib.mPointLabelIndex; }
+  public static int getPointLabelIndex()   { return (mPointLib == null)? 1 : mPointLib.mPointLabelIndex; } // TH2EDIT package
   static int getPointPhotoIndex()   { return (mPointLib == null)? 0 : mPointLib.mPointPhotoIndex; }
   static int getPointAudioIndex()   { return (mPointLib == null)? 0 : mPointLib.mPointAudioIndex; }
   static int getPointSectionIndex() { return (mPointLib == null)? 2 : mPointLib.mPointSectionIndex; }

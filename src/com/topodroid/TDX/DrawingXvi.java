@@ -164,7 +164,7 @@ class DrawingXvi
           out.write( sw6.getBuffer().toString() );
           out.flush();
         } else {
-          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+          for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
             toXvi( pw6, st_path, xoff, yoff );
           }
           out.write( sw6.getBuffer().toString() );
@@ -214,7 +214,7 @@ class DrawingXvi
         StringWriter sw5 = new StringWriter();
         PrintWriter pw5  = new PrintWriter(sw5);
         if ( path.mType == DrawingPath.DRAWING_PATH_STATION ) {
-          toXvi( pw5, (DrawingStationPath)path, xoff, yoff );
+          toXvi( pw5, (DrawingStationUser)path, xoff, yoff );
         } else if ( path.mType == DrawingPath.DRAWING_PATH_LINE ) {
           toXvi( pw5, (DrawingLinePath)path, xoff, yoff );
         } else if ( path.mType == DrawingPath.DRAWING_PATH_AREA ) {
@@ -262,7 +262,7 @@ class DrawingXvi
     pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+st.cx), TDSetting.mToTherion*(yoff-st.cy), st.getName() );
   }
 
-  static private void toXvi( PrintWriter pw, DrawingStationPath sp, float xoff, float yoff )
+  static private void toXvi( PrintWriter pw, DrawingStationUser sp, float xoff, float yoff )
   {
     pw.format(Locale.US, "  { %.2f %.2f %s }\n", TDSetting.mToTherion*(xoff+sp.cx), TDSetting.mToTherion*(yoff-sp.cy), sp.name() );
   }
@@ -476,7 +476,7 @@ class DrawingXvi
             /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
             break;
           case 'U':
-            /* path = */ DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationUser.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'X':
             /* path = */ DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data

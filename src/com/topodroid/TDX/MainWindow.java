@@ -19,6 +19,7 @@ import com.topodroid.utils.TDColor;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.TDString;
 // import com.topodroid.utils.TDVersion;
 
 import com.topodroid.ui.MyButton;
@@ -93,6 +94,8 @@ import android.graphics.drawable.BitmapDrawable;
 
 import java.util.Locale;
 
+// import java.io.File;
+
 /*
   Method m = device.getClass().getMethod( "createRfcommSocket", new Class[] (int.class) );
   socket = (BluetoothSocket) m.invoke( device, 2 );
@@ -137,8 +140,9 @@ public class MainWindow extends Activity
                           R.drawable.iz_plus,
                           R.drawable.iz_import,
                           R.drawable.iz_tools,   // iz_palette
-                          R.drawable.iz_3d,      // FIXME CAVE3D
-                          R.drawable.iz_manager  // FIXME THMANAGER
+                          R.drawable.iz_3d,      // CAVE3D
+                          R.drawable.iz_manager, // THMANAGER
+                          R.drawable.iz_plot     // TH2EDIT
                           // R.drawable.iz_database
 			  // R.drawable.iz_empty // EMPTY
                           };
@@ -160,7 +164,8 @@ public class MainWindow extends Activity
                           R.string.help_import,
                           R.string.help_symbol,
                           R.string.help_cave3d,
-                          R.string.help_therion, // FIXME THMANAGER
+                          R.string.help_therion, // THMANAGER
+                          R.string.help_drawing, // TH2EDIT
                           // R.string.help_database
                           };
   private static final int[] help_menus = {
@@ -332,6 +337,15 @@ public class MainWindow extends Activity
         } catch ( ActivityNotFoundException e ) {
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
+        }
+      } else if ( TDLevel.overTester && TDSetting.mTh2Edit && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // TH2EDIT DRAWING
+        try {
+          Intent plotIntent = new Intent( Intent.ACTION_VIEW ).setClass( this,  DrawingWindow.class );
+          plotIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, -1L );
+          startActivity( plotIntent );
+        } catch ( ActivityNotFoundException e ) {
+          // TDToast.makeBad( R.string.no_thmanager );
+          TDLog.Error( "Th2 edit activity not started" );
         }
       }
     }
@@ -949,9 +963,12 @@ public class MainWindow extends Activity
     mNrButton1 = 4;
     if ( TDLevel.overNormal ) {
       ++mNrButton1; // CAVE3D
-    }
-    if ( TDLevel.overExpert ) {
-      ++ mNrButton1; // TH MANAGER
+      if ( TDLevel.overExpert ) {
+        ++ mNrButton1; // TH MANAGER
+        if ( TDLevel.overTester ) {
+          if ( TDSetting.mTh2Edit ) ++ mNrButton1; // TH2EDIT DRAWING
+        }
+      }
     }
     mButton1 = new Button[ mNrButton1 + 1 ];
 
@@ -1318,7 +1335,7 @@ public class MainWindow extends Activity
                 int pos = filename.lastIndexOf("/");
                 filename = filename.substring( pos+1 );
               }
-              TDLog.Error( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
+              // TDLog.v( "URI to import: " + uri.toString() + " null mime, null path, filename <" + filename + ">" );
             } else {
               // filename = (new File(path)).getName(); // FILE to get the survey name
               int pos = path.lastIndexOf('/');
@@ -1326,10 +1343,11 @@ public class MainWindow extends Activity
               int ros = filename.indexOf(":"); // drop the "content" header
               if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
               // TDLog.v("import path " + path + " filename " + filename );
-              TDLog.Error( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
+              // TDLog.v( "URI to import: " + uri.toString() + " null mime, filename <" + filename + ">" );
             }
-          } else {
+          } else { // mime not null
             filename = uri.getLastPathSegment();
+            // TDLog.v( "URI to import: " + uri.toString() + " mime " + mimetype + " filename <" + filename + ">" );
             int ros = filename.indexOf(":"); // drop the "content" header
             if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
             int pos   = filename.lastIndexOf("."); 
@@ -1355,37 +1373,26 @@ public class MainWindow extends Activity
                 TDToast.makeBad( R.string.bad_manifest );
               }
             } else {
+              // TDLog.v( "import non-zip, ext " + ext );
               String type = TDPath.checkImportTypeStream( ext );
               if ( type != null ) {
+                // TDLog.v( "import stream type " + type + " name " + name );
                 importStream( uri, name, type );
               } else {
                 type = TDPath.checkImportTypeReader( ext );
                 if ( type != null ) {
-                  // TDLog.v( "import reader type " + type + " name " + name);
+                  // TDLog.v( "import reader type " + type + " filename " + filename );
                   importReader( uri, name, type, mImportData );
                 } else {
                   TDLog.Error("import unsupported " + ext);
                 }
               }
             }
-            // Cursor returnCursor = getContentResolver().query(returnUri, null, null, null, null);
-            // int nameIndex = returnCursor.getColumnIndex(OpenableColumns.DISPLAY_NAME);
-            // int sizeIndex = returnCursor.getColumnIndex(OpenableColumns.SIZE);
-            // returnCursor.moveToFirst();
-            // filename = returnCursor.getString(nameIndex);
-            // String size = Long.toString(returnCursor.getLong(sizeIndex));
           }
-          // sample URI: content://com.mixplorer.file/509!s/TopoDroid-03/zip/580test.zip
-          // importFile( item );
         } else {
           TDLog.Error("IMPORT canceled");
         }
         break;
-      // case TDRequest.REQUEST_TREE_URI:
-      //   if ( result == Activity.RESULT_OK ) {
-      //     TDInstance.handleRequestTreeUri( intent );
-      //   }
-      //   break;
     }
   }
 
@@ -1496,7 +1503,7 @@ public class MainWindow extends Activity
         while ( lang == null || version < 0 ) {
           String line = br.readLine();
           if ( line == null ) break;
-          String[] token = line.trim().replaceAll("\\s+", "").split("=");
+          String[] token = TDString.noSpace(line.trim() ).split("="); // line.trim().replaceAll("\\s+", "").split("=");
           if ( token.length > 1 ) {
             String key = token[0].toUpperCase( Locale.getDefault() );
             if ( key.equals("LANG") ) { 
@@ -1567,13 +1574,13 @@ public class MainWindow extends Activity
    */
   public void doImport( String type, ImportData data )
   {
-    int index = TDConst.surveyFormatIndex( type );
-    // TDLog.v( "import " + type + " " + index );
+    int index = TDConst.surveyImportFormatIndex( type );
+    // TDLog.v( "MAIN import " + type + " " + index );
     selectImportFromProvider( index, data );
   }
 
   /** get the import stream from the data provider
-   * @param index  file format index (@see TDConst.surveyFormatIndex)
+   * @param index  file format index (@see TDConst.surveyImportFormatIndex)
    * @param data   import parameters
    * this method saves the import parameters and starts a choice of a file (of the given type)
    */

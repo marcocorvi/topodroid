@@ -64,7 +64,7 @@ class DrawingStationDialog extends MyDialog
 
     private final DrawingWindow mParent;
     private final DrawingStationName mStation; // num station point
-    private final DrawingStationPath mPath;
+    private final DrawingStationUser mPath;
     private final TopoDroidApp mApp;
 
     private String mStationName;
@@ -81,7 +81,7 @@ class DrawingStationDialog extends MyDialog
     private boolean mSensors;    // whether use compass or delete x-section
 
     DrawingStationDialog( Context context, DrawingWindow parent, TopoDroidApp app,
-                          DrawingStationName station, DrawingStationPath path,
+                          DrawingStationName station, DrawingStationUser path,
                           boolean is_barrier, boolean is_hidden, // boolean global_xsections,
                           List< DBlock > blk )
     {

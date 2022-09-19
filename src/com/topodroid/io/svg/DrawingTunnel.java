@@ -20,7 +20,7 @@ import com.topodroid.num.NumStation;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-// import com.topodroid.TDX.DrawingStationPath;
+// import com.topodroid.TDX.DrawingStationUser;
 // import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingLinePath;
@@ -279,7 +279,7 @@ public class DrawingTunnel extends DrawingSvgBase
         //     toSvg( pw6, name, xoff, yoff );
         //   }
         // } else {
-        //   for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+        //   for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
         //     toSvg( pw6, st_path, xoff, yoff );
         //   }
         // }

@@ -50,11 +50,18 @@ class PlotZoomFitDialog extends MyDialog
   private Spinner mSpinZoom;
   private int mSelectedPos;
   private static final String[] mZooms = { "---", "1 : 100", "1 : 200", "1 : 300", "1 : 400", "1 : 500" };
+  private boolean mSkipSaving; // = false; TH2EDIT 
 
-  PlotZoomFitDialog( Context context, DrawingWindow parent )
+  /** cstr
+   * @param context      context
+   * @param parent       parent activity
+   * @param skip_saving  whether the parent is skipping auto-saving
+   */
+  PlotZoomFitDialog( Context context, DrawingWindow parent, boolean skip_saving ) // TH2EDIT added skip_saving
   {
     super( context, null, R.string.PlotZoomFitDialog ); // null app
     mParent = parent;
+    mSkipSaving = skip_saving; // TH2EDIT 
   }
 
   @Override
@@ -117,7 +124,14 @@ class PlotZoomFitDialog extends MyDialog
 
     mBtnStation  = (Button) findViewById( R.id.button_station );
     mETstation = (EditText) findViewById( R.id.center_station );
-    mBtnStation.setOnClickListener( this );
+    if ( mSkipSaving ) { // TH2EDIT
+      LinearLayout layout_station = (LinearLayout) findViewById( R.id.layout_station );
+      // mBtnStation.setVisibility( View.GONE );
+      // mETstation.setVisibility( View.GONE );
+      layout_station.setVisibility( View.GONE );
+    } else {
+      mBtnStation.setOnClickListener( this );
+    }
   }
  
   // ---------------------------------------------------------------

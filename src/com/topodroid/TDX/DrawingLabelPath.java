@@ -43,7 +43,7 @@ public class DrawingLabelPath extends DrawingPointPath
    * @param options  additional Therion point options
    * @param scrap    point scrap index
    */
-  DrawingLabelPath( String text, float off_x, float off_y, int scale, String options, int scrap )
+  public DrawingLabelPath( String text, float off_x, float off_y, int scale, String options, int scrap ) // TH2EDIT package
   {
     super( BrushManager.getPointLabelIndex(), off_x, off_y, scale, text, options, scrap );
     // mPointText = text;
@@ -240,7 +240,7 @@ public class DrawingLabelPath extends DrawingPointPath
    * @param angle   orientation [degrees] - 0 = vertical
    */
   @Override
-  void setOrientation( double angle ) 
+  public void setOrientation( double angle )  // TH2EDIT package
   { 
     mOrientation = TDMath.in360( angle );
     makeLabelPath( /* fontSize() */ );

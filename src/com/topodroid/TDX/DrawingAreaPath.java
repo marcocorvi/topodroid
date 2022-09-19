@@ -55,7 +55,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   int mAreaType;
   int mAreaCnt;
   double mOrientation;
-  String mPrefix;      // border/area name prefix (= scrap name)
+  public String mPrefix;      // border/area name prefix (= scrap name) // TH2EDIT package
   // boolean mVisible; // visible border in DrawingPointLinePath
   private Shader mLocalShader = null;
 
@@ -68,12 +68,43 @@ public class DrawingAreaPath extends DrawingPointLinePath
   //   return ret;
   // }
 
-  DrawingAreaPath( int type, int cnt, String prefix, boolean visible, int scrap )
+  // this method is used only for TH2EDIT to prevent area index change
+  public DrawingAreaPath( int type, int cnt, String id, boolean visible, int scrap, boolean th2_edit ) // TH2EDIT
+  {
+    super( DrawingPath.DRAWING_PATH_AREA, visible, true, scrap );
+    mAreaType = type;
+    mAreaCnt  = cnt;
+    mPrefix   = id;
+    int pos = 1 + id.lastIndexOf("a");
+    if ( pos > 0 && pos < id.length() ) {
+      try {
+        mAreaCnt = Integer.parseInt( id.substring( pos ) );
+        mPrefix  = id.substring(0, pos);
+      } catch ( NumberFormatException e ) { }
+    }
+    TDLog.v("AREA " + id + " count " + mPrefix + " " + mAreaCnt );
+    if ( BrushManager.hasArea( mAreaType ) ) { 
+      setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
+    // } else {
+    //   // TDLog.v("PAINT area (1) not in lib " + mAreaType + " out of " + BrushManager.mAreaLib.size() );
+    }
+    mOrientation = 0.0;
+    // if ( BrushManager.isAreaOrientable( mAreaType ) ) {
+    //   mOrientation = BrushManager.getAreaOrientation( type );
+    //   mLocalShader = BrushManager.cloneAreaShader( mAreaType );
+    //   resetPathPaint();
+    //   mPaint.setShader( mLocalShader );
+    // }
+    mLevel = BrushManager.getAreaLevel( type );
+  }
+
+  public DrawingAreaPath( int type, int cnt, String prefix, boolean visible, int scrap ) // TH2EDIT package
   {
     super( DrawingPath.DRAWING_PATH_AREA, visible, true, scrap );
     mAreaType = type;
     mAreaCnt  = cnt;
     mPrefix   = (prefix != null && prefix.length() > 0)? prefix : "a";
+    TDLog.v("AREA " + prefix + " count " + cnt );
     if ( BrushManager.hasArea( mAreaType ) ) { 
       setPathPaint( BrushManager.getAreaPaint( mAreaType ) );
     // } else {
@@ -92,7 +123,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
   }
 
   // @param id   string "area id" (mPrefix + mAreaCnt )
-  DrawingAreaPath( int type, String id, boolean visible, int scrap )
+  public DrawingAreaPath( int type, String id, boolean visible, int scrap ) // TH2EDIT package
   {
     // visible = ?,   closed = true
     super( DrawingPath.DRAWING_PATH_AREA, visible, true, scrap );
@@ -104,6 +135,7 @@ public class DrawingAreaPath extends DrawingPointLinePath
       int pos = id.lastIndexOf("a") + 1;
       mPrefix  = id.substring(0, pos);
       mAreaCnt = Integer.parseInt( id.substring(pos) );
+      TDLog.v("AREA id <" + id + "> prefix " + mPrefix + " count " + mAreaCnt );
     } catch ( NumberFormatException e ) {
       TDLog.Error( "Drawing Area Path AreaCnt parse int error: " + id.substring(1) );
     }
@@ -235,7 +267,10 @@ public class DrawingAreaPath extends DrawingPointLinePath
   //   }
   // }
 
-  void setAreaType( int t )
+  /** set the area type (index)
+   * @param t   area new type
+   */
+  public void setAreaType( int t ) // TH2EDIT package
   {
     mAreaType = t;
     if ( BrushManager.hasArea( mAreaType ) ) {
@@ -244,6 +279,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
     }
   }
 
+  /** set the area paint
+   * @param paint  area paint
+   */
   @Override
   void setPathPaint( Paint paint ) 
   { 
@@ -252,6 +290,9 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mPaint.setStyle( isVisible() ? Paint.Style.FILL_AND_STROKE : Paint.Style.FILL );
   }
 
+  /** set the area border-visibility
+   * @param visible   visibility of the border
+   */
   @Override
   void setVisible( boolean visible )
   {
@@ -259,12 +300,19 @@ public class DrawingAreaPath extends DrawingPointLinePath
     mPaint.setStyle( visible ? Paint.Style.FILL_AND_STROKE : Paint.Style.FILL );
   }
 
+  /** @return the area index (ie, type)
+   */
   int areaType() { return mAreaType; }
 
+  /** @return the area Therion name
+   */
   public String getThName() { return BrushManager.getAreaThName( mAreaType ); }
 
+  /** set the area orientation angle
+   * @param angle  orientation angle [degrees]
+   */
   @Override
-  void setOrientation( double angle ) 
+  public void setOrientation( double angle )  // TH2EDIT package
   { 
     // TDLog.v( "Area path set orientation " + angle );
     if ( ! BrushManager.isAreaOrientable( mAreaType ) ) return;

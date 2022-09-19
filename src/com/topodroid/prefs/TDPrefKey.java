@@ -1713,6 +1713,7 @@ public class TDPrefKey
     "DISTOX_PALETTES",
     // "DISTOX_BACKUPS_CLEAR", // CLEAR_BACKUPS
     "DISTOX_PACKET_LOGGER",
+    "DISTOX_TH2_EDIT",         // SKETCH EDIT
     "DISTOX_GEEK_SHOT",       // FORWARD
     "DISTOX_GEEK_SPLAY",      // FORWARD
     "DISTOX_GEEK_PLOT",       // FORWARD
@@ -1728,6 +1729,7 @@ public class TDPrefKey
     R.string.pref_palettes_title,
     // R.string.pref_backups_clear_title, // CLEAR_BACKUPS
     R.string.pref_packet_logger_title,
+    R.string.pref_th2_edit_title,
     R.string.pref_cat_survey,
     R.string.pref_cat_splay,
     R.string.pref_cat_drawing,
@@ -1743,6 +1745,7 @@ public class TDPrefKey
     R.string.pref_palettes_summary,
     // R.string.pref_backups_clear_summary, // CLEAR_BACKUPS
     R.string.pref_packet_logger_summary,
+    R.string.pref_th2_edit_summary,
     -1,
     -1,
     -1,
@@ -1756,6 +1759,7 @@ public class TDPrefKey
   public static String[] GEEKdef = {
     FALSE,
     // FALSE, // CLEAR_BACKUPS
+    FALSE,
     FALSE,
     TDString.EMPTY,
     TDString.EMPTY,

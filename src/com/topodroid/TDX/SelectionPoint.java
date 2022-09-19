@@ -20,7 +20,7 @@ public class SelectionPoint
   // scene coord (x, y )
   // for DrawingStationName (x,y) = st.(x,y)
   // for DrawingPath        (x,y) = (cx,cy)
-  // for DrawingStationPath (x,y) = path.(xpos,ypos)
+  // for DrawingStationUser (x,y) = path.(xpos,ypos)
   // for DrawingPointPath   (x,y) = path.(xpos,ypos)
   // for DrawingLinePath    (x.y) = midpoint between each two line points
   // for DrawingAreaPath    (x,y) = midpoint between each two border points

@@ -51,7 +51,7 @@ import java.io.PrintWriter;
 
 /**
  */
-class DrawingSurface extends SurfaceView
+public class DrawingSurface extends SurfaceView // TH2EDIT was package
                             implements SurfaceHolder.Callback
                             , IDrawingSurface
 {
@@ -98,13 +98,21 @@ class DrawingSurface extends SurfaceView
   int scrapMaxIndex()           { return ( commandManager == null )? 0 : commandManager.scrapMaxIndex(); }
 
   /** get a new scrap index 
+   * @param force   whether to do also for command-3 // TH2EDIT no force param
    */
-  int newScrapIndex( )          { return ( commandManager == null )? 0 : commandManager.newScrapIndex( ); }
+  public int newScrapIndex( boolean force )   { return ( commandManager == null )? 0 : commandManager.newScrapIndex( force ); }
 
   /** toggle the scrap index
+   * @param force   whether to do also for command-3 // TH2EDIT no force param
    * @param k  ...
    */
-  int toggleScrapIndex( int k ) { return ( commandManager == null )? 0 : commandManager.toggleScrapIndex( k ); }
+  int toggleScrapIndex( boolean force, int k ) { return ( commandManager == null )? 0 : commandManager.toggleScrapIndex( force, k ); }
+
+  // TH2EDIT
+  public boolean setScrapOptions( int idx, String options )
+  {
+    return ( commandManager != null )? commandManager.setScrapOptions( idx, options ) : false;
+  }
 
   // -----------------------------------------------------
   // MANAGER CACHE
@@ -178,7 +186,7 @@ class DrawingSurface extends SurfaceView
       commandManager = mCommandManager2;
     } else {
       if ( mCommandManager3 == null ) {
-          mCommandManager3 = new DrawingCommandManager( mode, fullname );
+        mCommandManager3 = new DrawingCommandManager( mode, fullname );
       } else {
         mCommandManager3.clearDrawing();
       }
@@ -590,7 +598,13 @@ class DrawingSurface extends SurfaceView
     return commandManager.splitPlot( border, remove );
   }
 
-  // void clearDrawing() { commandManager.clearDrawing(); }
+  // TH2EDIT this method was commented
+  /** clear the drawing (only for mSkipSaving)
+   */
+  void clearDrawing() { 
+    assert( commandManager == mCommandManager3 );
+    commandManager.clearDrawing(); 
+  }
 
   /** set the paint of a station-name
    * @param st      station-name item
@@ -662,8 +676,8 @@ class DrawingSurface extends SurfaceView
    * @return the new station-name item
    * @note called by DrawingWindow::computeReference
    */
-  DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
-		                             List< PlotInfo > xsections, List< StationInfo > saved )
+  public DrawingStationName addDrawingStationName ( String parent, NumStation num_st, float x, float y, boolean selectable, 
+		                             List< PlotInfo > xsections, List< StationInfo > saved ) // TH2EDIT was package
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + num_st.name + " " + x + " " + y );
     // FIXME STATION_XSECTION
@@ -712,7 +726,7 @@ class DrawingSurface extends SurfaceView
    * @note called by DrawingWindow (for SECTION)
    * @note not selectable
    */
-  DrawingStationName addDrawingStationName( String name, float x, float y )
+  public DrawingStationName addDrawingStationName( String name, float x, float y ) // TH2EDIT was package
   {
     // TDLog.Log( TDLog.LOG_PLOT, "add Drawing Station Name " + name + " " + x + " " + y );
     // NOTE No station_XSection in X-Sections
@@ -803,6 +817,9 @@ class DrawingSurface extends SurfaceView
   // public int getGrid1Size() { return commandManager.getGrid1().size(); }
   // public int getGrid10Size() { return commandManager.getGrid10().size(); }
 
+  /** add a drawing item
+   * @param drawingPath  drawing item
+   */
   public void addDrawingPath (DrawingPath drawingPath) { commandManager.addCommand(drawingPath); }
 
   // public void addDrawingDotPath (DrawingPath drawingPath) { commandManager.addDotCommand(drawingPath); }
@@ -840,19 +857,19 @@ class DrawingSurface extends SurfaceView
 
   // public boolean hasStationName( String name ) { return commandManager.hasUserStation( name ); }
 
-  DrawingStationPath getStationPath( String name )
+  DrawingStationUser getStationPath( String name )
   {
     if ( commandManager == null ) return null;
     return commandManager.getUserStation( name );
   }
 
-  void addDrawingStationPath( DrawingStationPath path )
+  public void addDrawingStationUser( DrawingStationUser path )
   {
     if ( commandManager == null ) return;
     commandManager.addUserStation( path );
   }
  
-  void removeDrawingStationPath( DrawingStationPath path )
+  void removeDrawingStationUser( DrawingStationUser path )
   {
     if ( commandManager == null ) return;
     commandManager.removeUserStation( path );

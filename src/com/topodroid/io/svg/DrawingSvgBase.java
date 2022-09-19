@@ -21,7 +21,7 @@ import com.topodroid.math.BezierCurve;
 import com.topodroid.prefs.TDSetting;
 
 import com.topodroid.TDX.TDPath;
-import com.topodroid.TDX.DrawingStationPath;
+import com.topodroid.TDX.DrawingStationUser;
 import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingPointLinePath;
@@ -299,7 +299,7 @@ public class DrawingSvgBase
     pw.format(">%s</text>\n", st.getName() );
   }
 
-  static protected void toSvg( PrintWriter pw, DrawingStationPath sp, float xoff, float yoff )
+  static protected void toSvg( PrintWriter pw, DrawingStationUser sp, float xoff, float yoff )
   {
     // pw.format("<text font-size=\"20\" font-family=\"sans-serif\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"");
     pw.format("<text font-size=\"%d\" fill=\"black\" stroke=\"none\" text-anchor=\"middle\"", TDSetting.mSvgStationSize );
@@ -448,7 +448,7 @@ public class DrawingSvgBase
             /* path = */ DrawingSpecialPath.loadDataStream( version, dis, dx, dy );
             break;
           case 'U':
-            /* path = */ DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationUser.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'X':
             /* path = */ DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data

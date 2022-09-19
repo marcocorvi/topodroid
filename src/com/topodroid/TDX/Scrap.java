@@ -31,7 +31,7 @@ import android.graphics.PointF;
 public class Scrap
 {
   final List< ICanvasCommand >   mCurrentStack;
-  List< DrawingStationPath >     mUserStations;  // user-inserted stations
+  List< DrawingStationUser >     mUserStations;  // user-inserted stations
   private List< ICanvasCommand > mRedoStack;
   private Selection mSelection;
   private SelectionSet mSelected;
@@ -42,15 +42,16 @@ public class Scrap
   public String mPlotName;              // name of the plot this scrap belongs to
   public int mScrapIdx;
   private RectF mBBox;   // this scrap bbox
+  public String mScrapOptions = null; // TH2EDIT
 
   /** cstr
    * @param idx       scrap index (in the plot)
    * @param plot_name name of the plot
    */
-  Scrap( int idx, String plot_name ) 
+  public Scrap( int idx, String plot_name ) // TH2EDIT was package
   {
     mCurrentStack = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
-    mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationPath >());
+    mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationUser >());
     mRedoStack    = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
     mSelection    = new Selection();
     mSelected     = new SelectionSet();
@@ -760,25 +761,28 @@ public class Scrap
   }
 
   // USER STATION ---------------------------------------------------------
-  void addUserStationsToList( ArrayList< DrawingStationPath > ret )
+  void addUserStationsToList( ArrayList< DrawingStationUser > ret )
   {
     synchronized( TDPath.mStationsLock ) {
-      // for ( DrawingStationPath st : mUserStations ) ret.add( st );
+      // for ( DrawingStationUser st : mUserStations ) ret.add( st );
       ret.addAll( mUserStations );
     }
   }
 
   boolean hasUserStations() { return mUserStations.size() > 0; }
 
-  DrawingStationPath getUserStation( String name )
+  DrawingStationUser getUserStation( String name )
   {
     if ( name != null ) {
-      for ( DrawingStationPath sp : mUserStations ) if ( name.equals( sp.name() ) ) return sp;
+      for ( DrawingStationUser sp : mUserStations ) if ( name.equals( sp.name() ) ) return sp;
     }
     return null;
   }
 
-  void removeUserStation( DrawingStationPath path )
+  /** remove a user station point 
+   * @param path   user station
+   */
+  void removeUserStation( DrawingStationUser path )
   {
     // TDLog.v( "remove user station " + path.mName );
     synchronized( TDPath.mStationsLock ) {
@@ -788,16 +792,22 @@ public class Scrap
 
   // boolean hasUserStation( String name )
   // {
-  //   for ( DrawingStationPath p : mUserStations ) if ( p.mName.equals( name ) ) return true;
+  //   for ( DrawingStationUser p : mUserStations ) if ( p.mName.equals( name ) ) return true;
   //   return false;
   // }
   
 
-  void addUserStation( DrawingStationPath path )
+  /** add a user station point 
+   * @param path   user station
+   */
+  void addUserStation( DrawingStationUser path )
   {
     // TDLog.v( "add user station " + path.mName );
     synchronized( TDPath.mStationsLock ) {
       mUserStations.add( path );
+      synchronized( TDPath.mSelectionLock ) {
+        mSelection.insertPath( path );
+      }
     }
   }
   // end USER STATION ---------------------------------------------------------
@@ -1119,7 +1129,7 @@ public class Scrap
       mSelection = selection;
     }
     synchronized( TDPath.mStationsLock ) {
-      for ( DrawingStationPath p : mUserStations ) {
+      for ( DrawingStationUser p : mUserStations ) {
         p.flipXAxis(z);
       }
     }
@@ -2391,7 +2401,7 @@ public class Scrap
   void drawUserStations( Canvas canvas, Matrix matrix, RectF bbox )
   {
     synchronized( TDPath.mStationsLock ) {
-      for ( DrawingStationPath p : mUserStations ) p.draw( canvas, matrix, bbox );
+      for ( DrawingStationUser p : mUserStations ) p.draw( canvas, matrix, bbox );
     }
   }
 

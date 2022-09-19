@@ -2496,18 +2496,16 @@ public class TopoDroidApp extends Application
   /** set the Disto-XBLE laser
    * @param what      what to do:  0: off, 1: on, 2: measure
    * @param nr        number od data to download
-  # @param lister    optional lister
+   # @param lister    optional lister
    * @param data_type type of expected data
+   # @param closeBT   whether to close the connection at the end 
    *                  SIWEI TIAN added on Jul
    */
   public void setXBLELaser( int what, int nr, Handler /* ILister */ lister, int data_type, boolean closeBT ) // FIXME_LISTER
   {
     if ( mComm == null || TDInstance.getDeviceA() == null ) return;
     if ( mComm instanceof DistoXBLEComm ) {
-      DistoXBLEComm comm = (DistoXBLEComm)mComm;
-      if ( comm != null ) {
-        comm.setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT);
-      }
+      ((DistoXBLEComm)mComm).setXBLELaser(TDInstance.deviceAddress(), what, nr, lister, data_type, closeBT );
     } else {
       TDLog.Error("set XBLE laser: not XBLE comm");
     }

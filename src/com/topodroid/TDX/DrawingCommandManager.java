@@ -90,7 +90,7 @@ public class DrawingCommandManager
   private Scrap mCurrentScrap; // mScraps[ mScrapIdx ]
 
   // final private List< ICanvasCommand >     mCurrentStack;
-  // final private List< DrawingStationPath > mUserStations;  // user-inserted stations
+  // final private List< DrawingStationUser > mUserStations;  // user-inserted stations
   // final private List< ICanvasCommand >     mRedoStack;
   private Selection mSelectionFixed;
   // private SelectionSet mSelected;
@@ -131,7 +131,7 @@ public class DrawingCommandManager
     mScraps.add( mCurrentScrap );
 
     // mCurrentStack = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
-    // mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationPath >());
+    // mUserStations = Collections.synchronizedList(new ArrayList< DrawingStationUser >());
     // mRedoStack    = Collections.synchronizedList(new ArrayList< ICanvasCommand >());
     // // mHighlight = Collections.synchronizedList(new ArrayList< DrawingPath >());
     // // PATH_MULTISELECT
@@ -177,9 +177,9 @@ public class DrawingCommandManager
   // SCRAPS management
   int scrapIndex() { return mScrapIdx; }
 
-  int toggleScrapIndex( int k )
+  int toggleScrapIndex( boolean force, int k ) // TH2EDIT no force
   { 
-    if ( mMode < 3 ) {
+    if ( force || mMode < 3 ) { // TH2EDIT no force
       int size = mScraps.size();
       mScrapIdx += k;
       if ( mScrapIdx >= size ) { mScrapIdx = 0; } 
@@ -189,9 +189,10 @@ public class DrawingCommandManager
     return mScrapIdx;
   }
 
-  int newScrapIndex( ) { 
-    if ( mMode < 3 ) {
-      // TDLog.v( mPlotName + " new scrap. currently " + mScraps.size() );
+  int newScrapIndex( boolean force )  // TH2EDIT no force
+  { 
+    if ( force || mMode < 3 ) { // TH2EDIT no force
+      TDLog.v( "plot: " + mPlotName + " - new scrap. currently " + mScraps.size() );
       mScrapIdx = mScraps.size();
       mCurrentScrap = new Scrap( mScrapIdx, mPlotName );
       mScraps.add( mCurrentScrap ); 
@@ -200,11 +201,12 @@ public class DrawingCommandManager
     return mScrapIdx;
   }
 
-  private void setCurrentScrap( int idx ) {
+  private void setCurrentScrap( int idx ) // force = false // TH2EDIT no force
+  {
     if ( mMode < 3 ) {
       if ( idx != mScrapIdx ) {
         if ( idx < 0 ) return; // -1;
-        while ( idx >= mScraps.size() ) newScrapIndex();
+        while ( idx >= mScraps.size() ) newScrapIndex( false ); // TH2EDIT no false
         mScrapIdx = idx;
         mCurrentScrap = mScraps.get( mScrapIdx );
       }
@@ -217,6 +219,18 @@ public class DrawingCommandManager
   // for export classes
   public List< Scrap > getScraps() { return mScraps; }
   
+  // TH2EDIT scrap options are used only for TH2EDIT
+  public boolean setScrapOptions( int idx, String options )
+  {
+    for ( Scrap scrap : mScraps ) {
+      if ( idx == scrap.mScrapIdx ) {
+        scrap.mScrapOptions = options;
+        return true;
+      }
+    }
+    return false;
+  }
+
   // ----------------------------------------------------------------
   // PATH_MULTISELECT
   boolean isMultiselection() { return mCurrentScrap.isMultiselection; }
@@ -252,10 +266,10 @@ public class DrawingCommandManager
   public List< DrawingSplayPath >   getSplays()       { return mSplaysStack;  }
   public List< DrawingStationName > getStations()     { return mStations;     } 
   // List< DrawingFixedName >   getFixeds()       { return mFixeds;     } 
-  // List< DrawingStationPath > getUserStations() { return mUserStations; }
-  public List< DrawingStationPath > getUserStations() 
+  // List< DrawingStationUser > getUserStations() { return mUserStations; }
+  public List< DrawingStationUser > getUserStations() 
   {
-    ArrayList< DrawingStationPath > ret = new ArrayList<>();
+    ArrayList< DrawingStationUser > ret = new ArrayList<>();
     synchronized( mScraps ) {
       for ( Scrap scrap : mScraps ) scrap.addUserStationsToList( ret ); 
     }
@@ -647,6 +661,9 @@ public class DrawingCommandManager
     synchronized( mScraps ) {
       for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
     }
+    // FIXME: two line added 20220916
+    mScraps.clear();      // TH2EDIT added
+    mCurrentScrap = null; // TH2EDIT added
     syncClearSelected();
     mDisplayPoints = false;
   }
@@ -1117,20 +1134,40 @@ public class DrawingCommandManager
   //   }
   // }
 
-  DrawingStationPath getUserStation( String name ) { return mCurrentScrap.getUserStation( name ); }
-  void removeUserStation( DrawingStationPath path ) { mCurrentScrap.removeUserStation( path ); }
+  /** @return the user station (in the current scrap) for a given station name (or ull)
+   * @param name    station name
+   */
+  DrawingStationUser getUserStation( String name ) { return mCurrentScrap.getUserStation( name ); }
+
+  /** remove the user station (from the current scrap) for a given station name (or ull)
+   * @param name    station name
+   */
+  void removeUserStation( DrawingStationUser path ) { mCurrentScrap.removeUserStation( path ); }
+
   // boolean hasUserStation( String name ) { return mCurrentScrap.hasUserStation( name ); }
 
-  void addUserStation( DrawingStationPath path ) { 
+  /** add a user station point (and set the current scrap)
+   * @param path   user station
+   */
+  void addUserStation( DrawingStationUser path ) 
+  { 
+    TDLog.v("USER STATION " + path.name() );
     setCurrentScrap( path.mScrap );
     mCurrentScrap.addUserStation( path );
   }
 
+  /** add a drawing item (and set the current scrap)
+   * @param path    item
+   */
   void addCommand( DrawingPath path ) { 
     setCurrentScrap( path.mScrap );
     mCurrentScrap.addCommand( path ); 
   }
 
+  /** delete a point "section"
+   * @param scrap_name
+   * @param cmd
+   */
   void deleteSectionPoint( String scrap_name, EraseCommand cmd ) { mCurrentScrap.deleteSectionPoint( scrap_name, cmd ); }
 
   // called by DrawingSurface.getBitmap()
@@ -1502,7 +1539,7 @@ public class DrawingCommandManager
     }
     
     if ( ! TDSetting.mAutoStations ) {
-      mCurrentScrap.drawUserStations( canvas, mm, bbox );
+      if ( mCurrentScrap != null ) mCurrentScrap.drawUserStations( canvas, mm, bbox );
     }
 
     if ( mMode == DrawingSurface.DRAWING_OVERVIEW ) {
@@ -1520,41 +1557,43 @@ public class DrawingCommandManager
         }
       }
     } else { // not DRAWING_OVERVIEW
-      synchronized( mScraps ) {
-        for ( Scrap scrap : mScraps ) {
-          if ( scrap == mCurrentScrap ) continue;
-          scrap.drawGreyOutline( canvas, mm, bbox );
+      if ( mCurrentScrap != null ) { 
+        synchronized( mScraps ) {
+          for ( Scrap scrap : mScraps ) {
+            if ( scrap == mCurrentScrap ) continue;
+            scrap.drawGreyOutline( canvas, mm, bbox );
+          }
+          if ( inverted_colors ) {
+            mCurrentScrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
+          } else { 
+            mCurrentScrap.drawAll( canvas, mm, scale, bbox );
+          }
         }
-        if ( inverted_colors ) {
-          mCurrentScrap.drawAll( canvas, mm, scale, bbox, 0xffffff );
-        } else { 
-          mCurrentScrap.drawAll( canvas, mm, scale, bbox );
+        if ( sidebars && mDisplayPoints ) {
+          float dot_radius = TDSetting.mDotRadius/zoom;
+          synchronized( TDPath.mSelectionLock ) {
+            displayFixedPoints( canvas, mm, bbox, dot_radius, splays, (legs && sshots), sstations, station_splay );
+            mCurrentScrap.displayPoints( canvas, mm, bbox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations /* , station_splay */ );
+
+            // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
+            //   float x, y;
+            //   if ( pt.mPoint != null ) { // line-point
+            //     x = pt.mPoint.x;
+            //     y = pt.mPoint.y;
+            //   } else {  
+            //     x = pt.mItem.cx;
+            //     y = pt.mItem.cy;
+            //   }
+            //   Path path = new Path();
+            //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
+            //   path.transform( mm );
+            //   canvas.drawPath( path, BrushManager.highlightPaint2 );
+            // }
+
+            mCurrentScrap.drawSelection( canvas, mm, zoom, scale, mIsExtended );
+
+          }  // synch( mSelectedLock ) mSelectionLock
         }
-      }
-      if ( sidebars && mDisplayPoints ) {
-        float dot_radius = TDSetting.mDotRadius/zoom;
-        synchronized( TDPath.mSelectionLock ) {
-          displayFixedPoints( canvas, mm, bbox, dot_radius, splays, (legs && sshots), sstations, station_splay );
-          mCurrentScrap.displayPoints( canvas, mm, bbox, dot_radius, spoints, slines, sareas, splays, (legs && sshots), sstations /* , station_splay */ );
-
-          // for ( SelectionPoint pt : mSelection.mPoints ) { // FIXME SELECTION
-          //   float x, y;
-          //   if ( pt.mPoint != null ) { // line-point
-          //     x = pt.mPoint.x;
-          //     y = pt.mPoint.y;
-          //   } else {  
-          //     x = pt.mItem.cx;
-          //     y = pt.mItem.cy;
-          //   }
-          //   Path path = new Path();
-          //   path.addCircle( x, y, dot_radius, Path.Direction.CCW );
-          //   path.transform( mm );
-          //   canvas.drawPath( path, BrushManager.highlightPaint2 );
-          // }
-
-          mCurrentScrap.drawSelection( canvas, mm, zoom, scale, mIsExtended );
-
-        }  // synch( mSelectedLock ) mSelectionLock
       }
     }
 
@@ -1645,7 +1684,7 @@ public class DrawingCommandManager
   //       if ( cmd.commandType() == 0 ) {
   //         DrawingPath p = (DrawingPath) cmd;
   //         if ( p.mType == DrawingPath.DRAWING_PATH_STATION ) {
-  //           DrawingStationPath sp = (DrawingStationPath)p;
+  //           DrawingStationUser sp = (DrawingStationUser)p;
   //           if ( name.equals( sp.mName ) ) return true;
   //         }
   //       }
@@ -1772,7 +1811,8 @@ public class DrawingCommandManager
   // @param proj_name   
   // @param proj_dir    directoin of projected profile (if applicable)
   // @param multiscrap  whether the sketch has several scraps
-  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch )
+  // @param th2_edit    therion th2 editing TH2EDIT
+  void exportTherion( int type, BufferedWriter out, String full_name, String proj_name, int proj_dir, boolean multisketch, boolean th2_edit ) 
   {
     // TDLog.v("Export Therion " + full_name + " splays " + mSplaysStack.size() );
     RectF bbox = getBoundingBox( );
@@ -1781,8 +1821,8 @@ public class DrawingCommandManager
       // BBox computed by export multiscrap
       DrawingIO.exportTherionMultiPlots( type, out, full_name, proj_name, proj_dir, /* bbox, mNorthLine, */ mScraps, mStations, mSplaysStack );
                                          // mCurrentStack, mUserStations, mStations, mSplaysStack 
-    } else {
-      DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir, bbox, mNorthLine, mScraps, mStations, mSplaysStack );
+    } else { 
+      DrawingIO.exportTherion( type, out, full_name, proj_name, proj_dir, bbox, mNorthLine, mScraps, mStations, mSplaysStack, th2_edit );
                                  // scrap, mCurrentStack, mUserStations, mStations, mSplaysStack 
     }
   }

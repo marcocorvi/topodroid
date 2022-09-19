@@ -1,4 +1,4 @@
-/* @file DrawingStationPath.java
+/* @file DrawingStationUser.java
  *
  * @author marco corvi
  * @date jan 2013
@@ -19,6 +19,11 @@ import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PointScale;
 
 import android.graphics.Matrix;
+import android.graphics.Canvas;
+import android.graphics.RectF;
+import android.graphics.Path;
+// import android.graphics.Paint;
+
 import java.util.Locale;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
@@ -28,7 +33,7 @@ import java.io.PrintWriter;
 /**
  * station points do not shift (!)
  */
-public class DrawingStationPath extends DrawingPath
+public class DrawingStationUser extends DrawingPath
                                 implements IDrawingLink
 {
   // float mXpos, mYpos;         // X-Y station position (scene): use cx, cy
@@ -39,7 +44,7 @@ public class DrawingStationPath extends DrawingPath
   // @Override
   // DrawingPath copyPath()
   // {
-  //   DrawingStationPath ret = new DrawingStationPath( mName, cx, cy, mScale );
+  //   DrawingStationUser ret = new DrawingStationUser( mName, cx, cy, mScale );
   //   copyTo( ret );
   //   return ret;
   // }
@@ -51,7 +56,7 @@ public class DrawingStationPath extends DrawingPath
    * @param scale   point scale
    * @param scrap   point scrap (index)
    */
-  DrawingStationPath( String name, float x, float y, int scale, int scrap )
+  public DrawingStationUser( String name, float x, float y, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + x + " Y " + y );
@@ -76,7 +81,7 @@ public class DrawingStationPath extends DrawingPath
    * @param scale   point scale
    * @param scrap   point scrap (index)
    */
-  public DrawingStationPath( DrawingStationName st, int scale, int scrap )
+  public DrawingStationUser( DrawingStationName st, int scale, int scrap )
   {
     super( DrawingPath.DRAWING_PATH_STATION, null, scrap );
     // TDLog.Log( TDLog.LOG_PATH, "Point " + mType + " X " + st.cx + " Y " + st.cy );
@@ -181,7 +186,7 @@ public class DrawingStationPath extends DrawingPath
    * @param dis      input stream
    * @return new station point
    */
-  public static DrawingStationPath loadDataStream( int version, DataInputStream dis )
+  public static DrawingStationUser loadDataStream( int version, DataInputStream dis )
   {
     try {
       float x = dis.readFloat();
@@ -192,7 +197,7 @@ public class DrawingStationPath extends DrawingPath
       int scrap = ( version >= 401160 )? dis.readInt() : 0;
       String name = dis.readUTF();
       // TDLog.Log( TDLog.LOG_PLOT, "S " + name + " " + x + " " + y );
-      return new DrawingStationPath( name, x, y, scale, scrap );
+      return new DrawingStationUser( name, x, y, scale, scrap );
     } catch ( IOException e ) {
       TDLog.Error( "ERROR-dis station " + e.getMessage() );
     }
@@ -259,6 +264,55 @@ public class DrawingStationPath extends DrawingPath
     pw.format(Locale.US, " <points data=\"%.2f %.2f \" />\n", x, y );
     pw.format("</item>\n");
     // TDLog.v( "toCSurvey() Point " + mPointType + " (" + x + " " + y + ") orientation " + mOrientation );
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   */
+  @Override
+  public void draw( Canvas canvas )
+  {
+    drawPath( mPath, canvas );
+    mPaint.setTextSize( 2 * TDSetting.mLabelSize );
+    canvas.drawText( " " + mName, cx, cy, mPaint );
+  }
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param bbox     clipping rectangle
+   */
+  @Override
+  public void draw( Canvas canvas, RectF bbox )
+  {
+    if ( intersects( bbox ) ) {
+      draw( canvas );
+    }
+  }
+
+  static int cnt = 0;
+
+  /** draw the path on a canvas
+   * @param canvas   canvas - N.B. canvas is guaranteed not null
+   * @param matrix   transform matrix
+   * @param bbox     clipping rectangle
+   */
+  @Override
+  public void draw( Canvas canvas, Matrix matrix, RectF bbox )
+  {
+    if ( intersects( bbox ) ) 
+    {
+      float d = TDSetting.mLabelSize;
+      mTransformedPath = new Path( mPath );
+      mTransformedPath.transform( matrix );
+      drawPath( mTransformedPath, canvas );
+
+      mPaint.setTextSize( 2 * TDSetting.mLabelSize );
+      float[] pt = new float[2];
+      pt[0] = cx;
+      pt[1] = cy;
+      matrix.mapPoints( pt );
+      canvas.drawText( " " + mName, pt[0], pt[1], mPaint );
+    }
   }
 
 }

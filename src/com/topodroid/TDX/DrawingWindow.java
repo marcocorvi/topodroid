@@ -53,8 +53,11 @@ import com.topodroid.common.ExtendType;
 import com.topodroid.common.LegType;
 import com.topodroid.common.SymbolType;
 import com.topodroid.common.PointScale;
+import com.topodroid.io.th.DrawingTh; // TH2EDIT
 
 import java.io.File;
+import java.io.FileReader; // TH2EDIT
+import java.io.FileWriter; // TH2EDIT
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.io.IOException;
@@ -63,6 +66,7 @@ import java.util.List;
 import java.util.Set;
 import java.util.TreeSet;
 import java.util.ArrayList;
+import java.util.Locale; // TH2EDIT
 
 import java.util.concurrent.RejectedExecutionException;
 // import java.util.Deque; // REQUIRES API-9
@@ -199,7 +203,7 @@ public class DrawingWindow extends ItemDrawer
 
   private static final int BTN_TOOL   = 5;    // index of mButton2 tools
   private static final int BTN_SPLAYS = 6;    // index of mButton2 splays
-  private static final int BTN_CONT   = 7;    // index of mButton2 continue button (level > normal)
+  private static       int BTN_CONT   = 7;    // index of mButton2 continue button (level > normal) // TH2EDIT was final
   private static final int BTN_REMOVE = 5;    // index of mButton3 remove
   private static final int BTN_ATTRIB = 6;    // index of mButton3 attributes
   private static final int BTN_JOIN   = 7;    // index of mButton3 join button
@@ -286,11 +290,15 @@ public class DrawingWindow extends ItemDrawer
                         R.string.menu_options,
                         R.string.menu_help,
                         R.string.menu_area,       // 11
-                        R.string.menu_close       // 12
+                        R.string.menu_close,      // 12
+                        R.string.menu_save,      // 13 TH2EDIT
+                        R.string.menu_open       // 14 TH2EDIT
                      };
 
   private static final int MENU_AREA  = 11;
   private static final int MENU_CLOSE = 12;
+  private static final int MENU_SAVE  = 13; // TH2EDIT
+  private static final int MENU_OPEN  = 14; // TH2EDIT
 /*
   private static final int[] help_icons = {
                         R.string.help_draw,
@@ -444,6 +452,7 @@ public class DrawingWindow extends ItemDrawer
   private DataHelper   mApp_mData;
   private DataDownloader mDataDownloader;
   private MediaManager   mMediaManager;
+  private boolean mTh2Edit = false;  // whether to skip saving at modifications // TH2EDIT
 
   private boolean mLandscape;
   private boolean audioCheck;
@@ -712,6 +721,11 @@ public class DrawingWindow extends ItemDrawer
 
   private int mNrSaveTh2Task = 0; // current number of save tasks
 
+  private void setButton1( int k, BitmapDrawable bm ) { if ( k < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ k ], bm ); }
+  private void setButton2( int k, BitmapDrawable bm ) { if ( k < mNrButton2 ) TDandroid.setButtonBackground( mButton2[ k ], bm ); }
+  private void setButton3( int k, BitmapDrawable bm ) { if ( k < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ k ], bm ); }
+  private void setButton5( int k, BitmapDrawable bm ) { if ( k < mNrButton5 ) TDandroid.setButtonBackground( mButton5[ k ], bm ); }
+
   // ----------------------------------------------------------
 
   /** @return the set of station names
@@ -855,6 +869,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void modified()
   {
+    if ( mTh2Edit ) return; // TH2EDIT
     if ( ! mModified ) {
       mModified = true;
       saveHandler.postDelayed( saveRunnable, TDSetting.mBackupInterval * 1000 ); // Backup Interval is in seconds
@@ -866,6 +881,7 @@ public class DrawingWindow extends ItemDrawer
   private void resetModified()
   {
     mModified = false;
+    if ( mTh2Edit ) return; // TH2EDIT
     if ( saveHandler != null && saveRunnable != null ) {
       saveHandler.removeCallbacks( saveRunnable );
     }
@@ -1282,22 +1298,26 @@ public class DrawingWindow extends ItemDrawer
   public void onBackPressed () // askClose
   {
     if ( dismissPopups() != DISMISS_NONE ) return;
-    if ( PlotType.isAnySection( mType ) ) {
-      // Modified = true; // force saving
-      startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
-      popInfo();
-      doStart( false, -1, null );
-      // FIXME_POPINFO recomputeReferences( mNum, mZoom );
+    if ( mTh2Edit ) { // TH2EDIT
+      super.onBackPressed();
     } else {
-      if ( doubleBack ) {
-        if ( doubleBackToast != null ) doubleBackToast.cancel();
-        doubleBackToast = null;
-        // TDLog.v( "double back pressed ...");
-        super.onBackPressed();
+      if ( PlotType.isAnySection( mType ) ) {
+        // Modified = true; // force saving
+        startSaveTdrTask( mType, PlotSave.SAVE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP );
+        popInfo();
+        doStart( false, -1, null );
+        // FIXME_POPINFO recomputeReferences( mNum, mZoom );
       } else {
-        doubleBack = true;
-        doubleBackToast = TDToast.makeToast( R.string.double_back );
-        doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+        if ( doubleBack ) {
+          if ( doubleBackToast != null ) doubleBackToast.cancel();
+          doubleBackToast = null;
+          // TDLog.v( "double back pressed ...");
+          super.onBackPressed();
+        } else {
+          doubleBack = true;
+          doubleBackToast = TDToast.makeToast( R.string.double_back );
+          doubleBackHandler.postDelayed( doubleBackRunnable, 1000 );
+        }
       }
     }
   }
@@ -1446,14 +1466,14 @@ public class DrawingWindow extends ItemDrawer
     if ( psd2 != null ) {
       // TDLog.Log( TDLog.LOG_IO, "save plot [2] " + psd2.fname );
       try { 
-        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r )).execute();
+        (new SavePlotFileTask( mActivity, null, this, null, psd2.num, /* psd2.util, */ psd2.cm, psd2.plot, psd2.fname, psd2.type, psd2.azimuth, psd2.suffix, r, mTh2Edit )).execute(); // TH2EDIT
       } catch ( RejectedExecutionException e ) { 
         TDLog.Error("rejected exec save plot " + psd2.fname );
       }
     }
     try { 
       // TDLog.Log( TDLog.LOG_IO, "save plot [1] " + psd1.fname );
-      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r )).execute();
+      (new SavePlotFileTask( mActivity, null, this, saveHandler, psd1.num, /* psd1.util, */ psd1.cm, psd1.plot, psd1.fname, psd1.type, psd1.azimuth, psd1.suffix, r, mTh2Edit )).execute(); // TH2EDIT
     } catch ( RejectedExecutionException e ) { 
       TDLog.Error("rejected exec save plot " + psd1.fname );
       -- mNrSaveTh2Task;
@@ -1722,11 +1742,11 @@ public class DrawingWindow extends ItemDrawer
         // Bitmap bm2 = Bitmap.createBitmap( bm1, 0, 0, mButtonSize, mButtonSize, m, true);
         // FIXME_AZIMUTH_DIAL 1
         Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-        TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
+        setButton1( BTN_DIAL, new BitmapDrawable( getResources(), bm2 ) );
       } else if ( TDAzimuth.mFixedExtend == -1L ) {
-        TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMleft );
+        setButton1( BTN_DIAL, mBMleft );
       } else {
-        TDandroid.setButtonBackground( mButton1[BTN_DIAL], mBMright );
+        setButton1( BTN_DIAL, mBMright );
       } 
     }
   }
@@ -1769,7 +1789,7 @@ public class DrawingWindow extends ItemDrawer
           break;
         case DrawingPath.DRAWING_PATH_STATION:
           title = getResources().getString( R.string.title_edit_user_station );
-          mActivity.setTitle( title + " " + ((DrawingStationPath)item).name() );
+          mActivity.setTitle( title + " " + ((DrawingStationUser)item).name() );
 	  deletable = true;
           break;
         case DrawingPath.DRAWING_PATH_NAME:
@@ -1783,8 +1803,8 @@ public class DrawingWindow extends ItemDrawer
       mHotItemType = -1;
       mActivity.setTitle( title );
     }
-    if ( BTN_REMOVE < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (deletable ? mBMdelete_on : mBMdelete_off) );
-    if ( TDLevel.overNormal && BTN_JOIN < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_JOIN ], bm );
+    setButton3( BTN_REMOVE, (deletable ? mBMdelete_on : mBMdelete_off) );
+    if ( TDLevel.overNormal ) setButton3( BTN_JOIN, bm );
   }
 
   /** set the button3 to display "prev/next" 
@@ -1792,8 +1812,8 @@ public class DrawingWindow extends ItemDrawer
   private void setButton3PrevNext( )
   {
     if ( mHasSelected ) {
-      TDandroid.setButtonBackground( mButton3[ BTN_SELECT_PREV ], mBMprev );
-      TDandroid.setButtonBackground( mButton3[ BTN_SELECT_NEXT ], mBMnext );
+      setButton3( BTN_SELECT_PREV, mBMprev );
+      setButton3( BTN_SELECT_NEXT, mBMnext );
     } else {
       setButtonFilterMode( mSelectMode, Drawing.CODE_SELECT );
       setButtonSelectSize( mSelectScale );
@@ -1812,22 +1832,22 @@ public class DrawingWindow extends ItemDrawer
         mButton2[ BTN_CONT ].setVisibility( View.VISIBLE );
         switch ( mContinueLine ) {
           case CONT_NONE:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_none  );
+            setButton2( BTN_CONT, mBMcont_none  );
             break;
           case CONT_START:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_start  );
+            setButton2( BTN_CONT, mBMcont_start  );
             break;
           case CONT_END:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_end   );
+            setButton2( BTN_CONT, mBMcont_end   );
             break;
           case CONT_BOTH:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_both  );
+            setButton2( BTN_CONT, mBMcont_both  );
             break;
           case CONT_CONTINUE:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_continue  );
+            setButton2( BTN_CONT, mBMcont_continue  );
             break;
           case CONT_OFF:
-            TDandroid.setButtonBackground( mButton2[ BTN_CONT ], mBMcont_off  );
+            setButton2( BTN_CONT, mBMcont_off  );
         }
       } else {
         mButton2[ BTN_CONT ].setVisibility( View.GONE );
@@ -1856,16 +1876,16 @@ public class DrawingWindow extends ItemDrawer
       mEraseMode = filter_mode;
       switch ( mEraseMode ) {
         case Drawing.FILTER_ALL:
-          TDandroid.setButtonBackground( mButton5[ BTN_ERASE_MODE ], mBMeraseAll );
+          setButton5( BTN_ERASE_MODE, mBMeraseAll );
           break;
         case Drawing.FILTER_POINT:
-          TDandroid.setButtonBackground( mButton5[ BTN_ERASE_MODE ], mBMerasePoint );
+          setButton5( BTN_ERASE_MODE, mBMerasePoint );
           break;
         case Drawing.FILTER_LINE:
-          TDandroid.setButtonBackground( mButton5[ BTN_ERASE_MODE ], mBMeraseLine );
+          setButton5( BTN_ERASE_MODE, mBMeraseLine );
           break;
         case Drawing.FILTER_AREA:
-          TDandroid.setButtonBackground( mButton5[ BTN_ERASE_MODE ], mBMeraseArea );
+          setButton5( BTN_ERASE_MODE, mBMeraseArea );
           break;
       }
     } else if ( code == Drawing.CODE_SELECT ) {
@@ -1873,22 +1893,22 @@ public class DrawingWindow extends ItemDrawer
       mDrawingSurface.setSelectMode( mSelectMode );
       switch ( mSelectMode ) {
         case Drawing.FILTER_ALL:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectAll );
+          setButton3( BTN_SELECT_MODE, mBMselectAll );
           break;
         case Drawing.FILTER_POINT:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectPoint );
+          setButton3( BTN_SELECT_MODE, mBMselectPoint );
           break;
         case Drawing.FILTER_LINE:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectLine );
+          setButton3( BTN_SELECT_MODE, mBMselectLine );
           break;
         case Drawing.FILTER_AREA:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectArea );
+          setButton3( BTN_SELECT_MODE, mBMselectArea );
           break;
         case Drawing.FILTER_SHOT:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectShot );
+          setButton3( BTN_SELECT_MODE, mBMselectShot );
           break;
         case Drawing.FILTER_STATION:
-          TDandroid.setButtonBackground( mButton3[ BTN_SELECT_MODE ], mBMselectStation );
+          setButton3( BTN_SELECT_MODE, mBMselectStation );
           break;
       }
     }
@@ -1903,15 +1923,15 @@ public class DrawingWindow extends ItemDrawer
     switch ( mEraseScale ) {
       case Drawing.SCALE_SMALL:
         mEraseSize = 0.5f * TDSetting.mEraseness;
-        TDandroid.setButtonBackground( mButton5[ BTN_ERASE_SIZE ], mBMsmall );
+        setButton5( BTN_ERASE_SIZE, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
         mEraseSize = 1.0f * TDSetting.mEraseness;
-        TDandroid.setButtonBackground( mButton5[ BTN_ERASE_SIZE ], mBMmedium );
+        setButton5( BTN_ERASE_SIZE, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
         mEraseSize = 2.0f * TDSetting.mEraseness;
-        TDandroid.setButtonBackground( mButton5[ BTN_ERASE_SIZE ], mBMlarge );
+        setButton5( BTN_ERASE_SIZE, mBMlarge );
         break;
     }
   }
@@ -1921,7 +1941,7 @@ public class DrawingWindow extends ItemDrawer
    */
   private void setButtonDelete( boolean on ) 
   {
-    if ( BTN_REMOVE < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_REMOVE ], (on ? mBMdelete_on : mBMdelete_off) );
+    setButton3( BTN_REMOVE, (on ? mBMdelete_on : mBMdelete_off) );
   }
 
   /** set button "size" to display a given scale
@@ -1933,15 +1953,15 @@ public class DrawingWindow extends ItemDrawer
     switch ( mSelectScale ) {
       case Drawing.SCALE_SMALL:
         mSelectSize = 0.5f * TDSetting.mSelectness;
-        TDandroid.setButtonBackground( mButton3[ BTN_SELECT_NEXT ], mBMsmall );
+        setButton3( BTN_SELECT_NEXT, mBMsmall );
         break;
       case Drawing.SCALE_MEDIUM:
         mSelectSize = 1.0f * TDSetting.mSelectness;
-        TDandroid.setButtonBackground( mButton3[ BTN_SELECT_NEXT ], mBMmedium );
+        setButton3( BTN_SELECT_NEXT, mBMmedium );
         break;
       case Drawing.SCALE_LARGE:
         mSelectSize = 2.0f * TDSetting.mSelectness;
-        TDandroid.setButtonBackground( mButton3[ BTN_SELECT_NEXT ], mBMlarge );
+        setButton3( BTN_SELECT_NEXT, mBMlarge );
         break;
     }
   }
@@ -2042,6 +2062,7 @@ public class DrawingWindow extends ItemDrawer
     off = (NR_BUTTON1 - 3); 
     for ( int k=0; k<mNrButton2; ++k ) {
       ic = ( k < 3 )? k : off+k;
+      if ( mTh2Edit && k == BTN_SPLAYS ) ++ ic; // TH2EDIT BTN_CONT 
       mButton2[k] = MyButton.getButton( mActivity, this, ((k==0)? izons_ok[ic] : izons[ic]) );
       if ( ic == IC_CONT_NONE ) mBMcont_none = MyButton.getButtonBackground( this, res, ((k==0)? izons_ok[ic] : izons[ic]));
     }
@@ -2227,6 +2248,48 @@ public class DrawingWindow extends ItemDrawer
     mMenu = (ListView) findViewById( R.id.menu );
     mMenu.setOnItemClickListener( this );
 
+    // redoBtn.setEnabled(false);
+    // undoBtn.setEnabled(false); // let undo always be there
+
+    // mBezierInterpolator = new BezierInterpolator( );
+
+    String pathname = null;
+    Bundle extras = getIntent().getExtras();
+    if ( extras != null ) {
+      mSid  = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
+      // TDLog.v("Th2 survey ID " + mSid );
+      mDecl = 0; // FIXME do not correct declination in sketches
+      if ( mSid < 0 ) { // TH2EDIT load th2 file
+        mDataDownloader = null;
+        mTh2Edit = true;
+        TDSetting.mAutoStations = false;
+        mNrButton1 = 3;
+        mNrButton2 = 7;
+        BTN_CONT   = 6;
+      } else {
+        // mDecl = mApp_mData.getSurveyDeclination( mSid );
+
+        mName1 = extras.getString( TDTag.TOPODROID_PLOT_NAME );
+        mName2 = extras.getString( TDTag.TOPODROID_PLOT_NAME2 );
+        mFullName1 = TDInstance.survey + "-" + mName1;
+        mFullName2 = TDInstance.survey + "-" + mName2;
+        mFullName3 = null;
+        mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
+        // TDLog.v( "PLOT name1 " + mName1 + " (" + mFullName1 + ") name2 " + mName2 + " (" + mFullName2 + ")" );
+
+        mName    = (mType == PlotType.PLOT_PLAN)? mName1 : mName2;
+        mFrom    = extras.getString( TDTag.TOPODROID_PLOT_FROM );
+        mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );
+        mAzimuth = extras.getFloat( TDTag.TOPODROID_PLOT_AZIMUTH );
+        mClino   = extras.getFloat( TDTag.TOPODROID_PLOT_CLINO );
+        mMoveTo  = extras.getString( TDTag.TOPODROID_PLOT_MOVE_TO );
+        mLandscape = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
+        // TDLog.v( "from " + mFrom );
+      }
+    } 
+    // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
+    // mDrawingUtil = new DrawingUtilPortrait();
+
     // mEraseScale = 0;  done in makeButtons()
     // mSelectScale = 0;
     makeButtons( );
@@ -2241,54 +2304,19 @@ public class DrawingWindow extends ItemDrawer
       mButton2[0].setOnLongClickListener( this );
       mButton5[1].setOnLongClickListener( this );
     }
-
-    mButton2[ BTN_TOOL ].setOnLongClickListener( this );
-
-
+    // setConnectionStatus( mDataDownloader.getStatus() ); // 20201123 this is done in onResume
+    if ( BTN_TOOL < mNrButton2 ) mButton2[ BTN_TOOL ].setOnLongClickListener( this );
     if ( TDLevel.overAdvanced ) {
-      mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
-      mButton1[BTN_DIAL].setOnLongClickListener( this );
-      mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
+      if ( BTN_DOWNLOAD  < mNrButton1 && mDataDownloader != null ) mButton1[BTN_DOWNLOAD].setOnLongClickListener( this );
+      if ( BTN_DIAL      < mNrButton1 ) mButton1[BTN_DIAL].setOnLongClickListener( this );
+      if ( BTN_ITEM_EDIT < mNrButton3 ) mButton3[BTN_ITEM_EDIT].setOnLongClickListener( this );
     }
     if ( TDLevel.overBasic ) {
       if ( BTN_PLAN   < mNrButton1 ) mButton1[BTN_PLAN].setOnLongClickListener( this );
       if ( BTN_REMOVE < mNrButton3 ) mButton3[BTN_REMOVE].setOnLongClickListener( this );
     }
-
-    // setConnectionStatus( mDataDownloader.getStatus() ); // 20201123 this is done in onResume
     mListView.setAdapter( mButtonView1.mAdapter );
     // mListView.invalidate();
-
-    // redoBtn.setEnabled(false);
-    // undoBtn.setEnabled(false); // let undo always be there
-
-    // mBezierInterpolator = new BezierInterpolator( );
-
-    Bundle extras = getIntent().getExtras();
-    if ( extras != null ) {
-      mSid   = extras.getLong( TDTag.TOPODROID_SURVEY_ID );
-      // mDecl = mApp_mData.getSurveyDeclination( mSid );
-      mDecl = 0; // FIXME do not correct declination in sketches
-
-      mName1 = extras.getString( TDTag.TOPODROID_PLOT_NAME );
-      mName2 = extras.getString( TDTag.TOPODROID_PLOT_NAME2 );
-      mFullName1 = TDInstance.survey + "-" + mName1;
-      mFullName2 = TDInstance.survey + "-" + mName2;
-      mFullName3 = null;
-      mType = extras.getLong( TDTag.TOPODROID_PLOT_TYPE );
-      // TDLog.v( "PLOT name1 " + mName1 + " (" + mFullName1 + ") name2 " + mName2 + " (" + mFullName2 + ")" );
-
-      mName    = (mType == PlotType.PLOT_PLAN)? mName1 : mName2;
-      mFrom    = extras.getString( TDTag.TOPODROID_PLOT_FROM );
-      mTo      = extras.getString( TDTag.TOPODROID_PLOT_TO );
-      mAzimuth = extras.getFloat( TDTag.TOPODROID_PLOT_AZIMUTH );
-      mClino   = extras.getFloat( TDTag.TOPODROID_PLOT_CLINO );
-      mMoveTo  = extras.getString( TDTag.TOPODROID_PLOT_MOVE_TO );
-      mLandscape = extras.getBoolean( TDTag.TOPODROID_PLOT_LANDSCAPE );
-      // TDLog.v( "from " + mFrom );
-    } 
-    // // mDrawingUtil = mLandscape ? (new DrawingUtilLandscape()) : ( new DrawingUtilPortrait());
-    // mDrawingUtil = new DrawingUtilPortrait();
 
     if ( mMoveTo != null && mMoveTo.length() == 0 ) mMoveTo = null; // test for Xiaomi redmi note
     mSectionName  = null; // resetStatus
@@ -2315,7 +2343,13 @@ public class DrawingWindow extends ItemDrawer
     if ( mCurrentLine < 0 )  mCurrentLine  = ( BrushManager.isLineEnabled( SymbolLibrary.WALL ) )?  1 : 0;
     if ( mCurrentArea < 0 )  mCurrentArea  = ( BrushManager.isAreaEnabled( SymbolLibrary.WATER ) )?  1 : 0;
 
-    doStart( true, -1, null );
+    if ( ! mTh2Edit ) { // TH2EDIT
+      doStart( true, -1, null );
+    } else {
+      resetReference( null, false );
+      mDrawingSurface.resetManager( DrawingSurface.DRAWING_SECTION, null, false );
+      mDrawingSurface.addScaleRef( DrawingSurface.DRAWING_SECTION, (int)PlotType.PLOT_NULL );
+    }
 
     mLayoutTools  = (LinearLayout) findViewById( R.id.layout_tools );
     mLayoutToolsP = (LinearLayout) findViewById( R.id.layout_tool_p );
@@ -2404,7 +2438,6 @@ public class DrawingWindow extends ItemDrawer
       }
     );
 
-
     setToolsToolbarParams();
     // setBtnRecentAll(); done on Start
     // mRecentTools = mRecentLine; // done on Start
@@ -2447,6 +2480,7 @@ public class DrawingWindow extends ItemDrawer
   }
   
   /** restore the saved status
+   * @note called by onBackPressed() and doStart()
    */
   private void popInfo()
   {
@@ -2535,7 +2569,7 @@ public class DrawingWindow extends ItemDrawer
     mApp.mSplayMode = mode;
     switch ( mode ) {
       case 0: // hide splays at FROM and at TO
-        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
+        setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayNone : mBMsplayNoneBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -2545,7 +2579,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 1: // hide splays at FROM show splays at TO
-        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
+        setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayFront : mBMsplayFrontBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.hideStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2555,7 +2589,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 2: // show splays at FROM and at TO
-        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
+        setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBoth : mBMsplayBothBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.showStationSplays( to );
@@ -2565,7 +2599,7 @@ public class DrawingWindow extends ItemDrawer
         }
         break;
       case 3: // show splays at FROM, hide splays at TO
-        if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
+        setButton1( BTN_PLAN, (mApp.mShowSectionSplays? mBMsplayBack : mBMsplayBackBlack) );
         if ( PlotType.isMultilegSection( mType, mTo ) ) {
           for ( String from : mFroms ) mDrawingSurface.showStationSplays( from );
           for ( String to   : mTos ) mDrawingSurface.hideStationSplays( to );
@@ -2585,6 +2619,8 @@ public class DrawingWindow extends ItemDrawer
    */
   void switchNameAndType( String name, long tt ) // SWITCH
   {
+    if ( mTh2Edit ) return;
+
     // TopoDroidApp.mShotWindow.setRecentPlot( name, tt );
     TDInstance.setRecentPlot( name, tt );
 
@@ -2736,18 +2772,20 @@ public class DrawingWindow extends ItemDrawer
     // TDLog.v("restore drawing display mode");
     String mode = mApp_mData.getValue( "DISTOX_PLOT_MODE" );
     DrawingCommandManager.setDisplayMode( DisplayMode.parseString( mode ) );
+    mLastLinePath = null; // necessary ??? these two were at the end
+    switchZoomCtrl( TDSetting.mZoomCtrl );
 
-    PlotInfo info = mApp_mData.getPlotInfo( mSid, mName );
-    mOffset.x = info.xoffset;
-    mOffset.y = info.yoffset;
-    mZoom     = info.zoom;
-    // TDLog.v("PLOT resume: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+    if ( ! mTh2Edit ) { // TH2EDIT
+      PlotInfo info = mApp_mData.getPlotInfo( mSid, mName );
+      mOffset.x = info.xoffset;
+      mOffset.y = info.yoffset;
+      mZoom     = info.zoom;
+      // TDLog.v("PLOT resume: " + mOffset.x + " " + mOffset.y + " " + mZoom );
+      setPlotType( mType, PARAMS_YES );
+    }
     mDrawingSurface.isDrawing = true;
     // TDLog.v("doResume " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
-    mLastLinePath = null; // necessary ???
-    switchZoomCtrl( TDSetting.mZoomCtrl );
     // TDLog.v( "do Resume. offset " + mOffset.x + " " + mOffset.y + " zoom " + mZoom );
-    setPlotType( mType, PARAMS_YES );
   }
 
   /** lifecycle: implement PAUSE
@@ -3406,7 +3444,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v("resetReference " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     mLastLinePath = null;
-    if ( params ) {
+    if ( params && plot != null ) { // TH2EDIT no "&& plot != null"
       mOffset.x = plot.xoffset; 
       mOffset.y = plot.yoffset; 
       mZoom     = plot.zoom;
@@ -3456,7 +3494,7 @@ public class DrawingWindow extends ItemDrawer
         //   return;
         // }
         if ( SelectionRange.isRange( mDoEditRange ) ) {
-          // if ( BTN_BORDER < mNrButton3 ) TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
+          // setButton3( BTN_BORDER, mBMedit_no );
           if ( mDrawingSurface.setRangeAt( x, y, mZoom, mDoEditRange, size ) ) {
             mMode = MODE_SHIFT;
             return;
@@ -4159,7 +4197,7 @@ public class DrawingWindow extends ItemDrawer
       mRotateAzimuth = false;
       if ( BTN_DIAL < mNrButton1 ) {
         Bitmap bm2 = mDialBitmap.getBitmap( TDAzimuth.mRefAzimuth, mButtonSize );
-        TDandroid.setButtonBackground( mButton1[BTN_DIAL], new BitmapDrawable( getResources(), bm2 ) );
+        setButton1( BTN_DIAL, new BitmapDrawable( getResources(), bm2 ) );
       }
     }
 
@@ -5448,8 +5486,8 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v("addStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
     assert( mLastLinePath == null );
-    DrawingStationPath path = new DrawingStationPath( st, PointScale.SCALE_M, mDrawingSurface.scrapIndex() );
-    mDrawingSurface.addDrawingStationPath( path );
+    DrawingStationUser path = new DrawingStationUser( st, PointScale.SCALE_M, mDrawingSurface.scrapIndex() );
+    mDrawingSurface.addDrawingStationUser( path );
     modified();
   }
 
@@ -5457,11 +5495,11 @@ public class DrawingWindow extends ItemDrawer
      * @param st    (user) station point
      * @param path  path to drop
      */
-    public void removeStationPoint( DrawingStationName st, DrawingStationPath path )
+    public void removeStationPoint( DrawingStationName st, DrawingStationUser path )
     {
       // TDLog.v("removeStationPoint " + ( (mLastLinePath != null)? mLastLinePath.mLineType : "null" ) );
       assert( mLastLinePath == null);
-      mDrawingSurface.removeDrawingStationPath( path );
+      mDrawingSurface.removeDrawingStationUser( path );
       modified();
     }
 
@@ -6082,7 +6120,7 @@ public class DrawingWindow extends ItemDrawer
       mName = mName3;
       mType = mPlot3.type;
       // TDLog.v( "set plot type 3 mType " + mType + " " + mName + " pid " + mPid3 );
-      // if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMextend );
+      // setButton1( BTN_PLAN, mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_SECTION, (int)mType );
       resetReference( mPlot3, params );
       setTheTitle();
@@ -6100,7 +6138,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid2;
       mName = mName2;
       mType = mPlot2.type; // FIXME if ( mPlot2 == null ) { what ? }
-      if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMextend );
+      setButton1( BTN_PLAN, mBMextend );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PROFILE, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, false );
@@ -6128,7 +6166,7 @@ public class DrawingWindow extends ItemDrawer
       mPid  = mPid1;
       mName = mName1;
       mType = mPlot1.type;
-      if ( BTN_PLAN < mNrButton1 ) TDandroid.setButtonBackground( mButton1[ BTN_PLAN ], mBMplan );
+      setButton1( BTN_PLAN, mBMplan );
       mDrawingSurface.setManager( DrawingSurface.DRAWING_PLAN, (int)mType );
       if ( compute && mNum != null ) {
         computeReferences( mNum, mPlot1.type, mPlot1.name, TopoDroidApp.mScaleFactor, false );
@@ -6203,16 +6241,16 @@ public class DrawingWindow extends ItemDrawer
     if ( BTN_BORDER < mNrButton3 ) {
       switch ( mDoEditRange ) {
         case SelectionRange.RANGE_POINT:
-          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_no );
+          setButton3( BTN_BORDER, mBMedit_no );
           break;
         case SelectionRange.RANGE_SOFT:
-          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_ok );
+          setButton3( BTN_BORDER, mBMedit_ok );
           break;
         case SelectionRange.RANGE_HARD:
-          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_box );
+          setButton3( BTN_BORDER, mBMedit_box );
           break;
         case SelectionRange.RANGE_ITEM:
-          TDandroid.setButtonBackground( mButton3[ BTN_BORDER ], mBMedit_item );
+          setButton3( BTN_BORDER, mBMedit_item );
           break;
       }
     }
@@ -6223,18 +6261,20 @@ public class DrawingWindow extends ItemDrawer
   {
     Button b = (Button)view;
     if ( TDLevel.overAdvanced && b == mButton1[ BTN_DOWNLOAD ] ) {
-      if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
-        if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
-          mApp.switchSecondDevice();
-          setTheTitle();
-          // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+      if ( mDataDownloader != null ) { // TH2EDIT added this test 
+        if (  ! mDataDownloader.isDownloading() && TDSetting.isConnectionModeMulti() && TopoDroidApp.mDData.getDevices().size() > 1 ) {
+          if ( TDSetting.mSecondDistoX && TDInstance.getDeviceB() != null ) {
+            mApp.switchSecondDevice();
+            setTheTitle();
+            // TDToast.make( String.format( getResources().getString(R.string.using), TDInstance.deviceNickname() ) );
+          } else {
+            (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+          }
         } else {
-          (new DeviceSelectDialog( this, mApp, mDataDownloader, this )).show();
+          mDataDownloader.toggleDownload();
+          setConnectionStatus( mDataDownloader.getStatus() );
+          mDataDownloader.doDataDownload( DataType.DATA_SHOT );
         }
-      } else {
-        mDataDownloader.toggleDownload();
-        setConnectionStatus( mDataDownloader.getStatus() );
-        mDataDownloader.doDataDownload( DataType.DATA_SHOT );
       }
     } else if ( TDLevel.overAdvanced && b == mButton1[ BTN_DIAL ] ) {
       if ( /* TDLevel.overAdvanced && */ mType == PlotType.PLOT_PLAN && TDAzimuth.mFixedExtend == 0 ) {
@@ -6256,7 +6296,7 @@ public class DrawingWindow extends ItemDrawer
         mDrawingSurface.setSplayAlpha( mApp.mShowSectionSplays );
         updateSplays( mApp.mSplayMode );
       }
-    } else if ( b == mButton2[ BTN_TOOL ] /* && ! TDSetting.mTripleToolbar */ ) {
+    } else if ( BTN_TOOL < mNrButton2 && b == mButton2[ BTN_TOOL ] /* && ! TDSetting.mTripleToolbar */ ) {
       mRecentToolsForward = ! mRecentToolsForward;
       rotateRecentToolset();
 
@@ -6394,7 +6434,7 @@ public class DrawingWindow extends ItemDrawer
 
     } else if ( mMode == MODE_DRAW ) {
       int k2 = 3;
-      if ( b == mButton2[k2++] ) { // UNDO
+      if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // UNDO
         mDrawingSurface.undo();
         // if ( ! mDrawingSurface.hasMoreUndo() ) {
         //   // undoBtn.setEnabled( false );
@@ -6403,20 +6443,20 @@ public class DrawingWindow extends ItemDrawer
         // canRedo = true;/
         mLastLinePath = null;
         modified();
-      } else if ( b == mButton2[k2++] ) { // REDO
+      } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // REDO
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
           mLastLinePath = null;
         }
-      } else if ( b == mButton2[k2++] ) { // TOOLS
+      } else if ( k2 < mNrButton2 && b == mButton2[k2++] ) { // TOOLS
         // if ( ! TDSetting.mTripleToolbar ) {
           rotateRecentToolset();
         // } else {
         //   new ItemPickerDialog(mActivity, this, mType, mSymbol ).show();
         // }
-      } else if ( b == mButton2[k2++] ) { // SPLAYS
+      } else if ( ( ! mTh2Edit) && k2 < mNrButton2 && b == mButton2[k2++] ) { // SPLAYS TH2EDIT
         toggleSplayMode();
-      } else if ( TDLevel.overNormal && b == mButton2[k2++] ) { //  CONT continuation popup menu
+      } else if ( TDLevel.overNormal && k2 < mNrButton2 && b == mButton2[k2++] ) { //  CONT continuation popup menu
         if ( mSymbol == SymbolType.LINE && BrushManager.getLineGroup( mCurrentLine ) != null ) {
           // setButtonContinue( (mContinueLine+1) % CONT_MAX );
           makePopupJoin( b, Drawing.mJoinModes, 5, 0, dismiss );
@@ -6425,7 +6465,7 @@ public class DrawingWindow extends ItemDrawer
 
     } else if ( mMode == MODE_ERASE ) {
       int k5 = 3;
-      if ( b == mButton5[k5++] ) { // UNDO same as in mButton2[]
+      if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // UNDO same as in mButton2[]
         mDrawingSurface.undo();
         // if ( ! mDrawingSurface.hasMoreUndo() ) {
         //   // undoBtn.setEnabled( false );
@@ -6434,20 +6474,20 @@ public class DrawingWindow extends ItemDrawer
         // canRedo = true;/
         mLastLinePath = null;
         modified();
-      } else if ( b == mButton5[k5++] ) { // REDO same as in mButton2[]
+      } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // REDO same as in mButton2[]
         if ( mDrawingSurface.hasMoreRedo() ) {
           mDrawingSurface.redo();
           mLastLinePath = null;
         }
-      } else if ( b == mButton5[k5++] ) { // ERASE MODE
+      } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE MODE
         makePopupFilter( b, Drawing.mEraseModes, 4, Drawing.CODE_ERASE, dismiss ); // pulldown menu to select erase mode
-      } else if ( b == mButton5[k5++] ) { // ERASE SIZE
+      } else if ( k5 < mNrButton5 && b == mButton5[k5++] ) { // ERASE SIZE
         setButtonEraseSize( mEraseScale + 1 ); // toggle erase size
       }
 
     } else if ( mMode == MODE_EDIT || mMode == MODE_SHIFT ) {
       int k3 = 3;
-      if ( b == mButton3[k3++] ) { // PREV
+      if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // PREV
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.prevHotItem( );
           if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
@@ -6455,7 +6495,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           makePopupFilter( b, Drawing.mSelectModes, 6, Drawing.CODE_SELECT, dismiss );
         }
-      } else if ( b == mButton3[k3++] ) { // NEXT
+      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // NEXT
         if ( mHasSelected ) {
           SelectionPoint pt = mDrawingSurface.nextHotItem( );
           if ( SelectionRange.isPointOrItem( mDoEditRange ) ) mMode = MODE_SHIFT;
@@ -6463,7 +6503,7 @@ public class DrawingWindow extends ItemDrawer
         } else {
           setButtonSelectSize( mSelectScale + 1 ); // toggle select size
         }
-      } else if ( b == mButton3[k3++] ) { // EDIT ITEM DELETE
+      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // EDIT ITEM DELETE
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           int t = sp.type();
@@ -6494,14 +6534,14 @@ public class DrawingWindow extends ItemDrawer
             }
           }
         }
-      } else if ( b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
+      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // EDIT ITEM PROPERTIES
         SelectionPoint sp = mDrawingSurface.hotItem();
         if ( sp != null ) {
           DrawingPath item = sp.mItem;
           if ( item != null ) {
             if ( item instanceof DrawingStationName ) {
               DrawingStationName st = (DrawingStationName)(item);
-              DrawingStationPath path = mDrawingSurface.getStationPath( st.getName() );
+              DrawingStationUser path = mDrawingSurface.getStationPath( st.getName() );
               boolean barrier = mNum.isBarrier( st.getName() );
               boolean hidden  = mNum.isHidden( st.getName() );
               List< DBlock > legs = mApp_mData.selectShotsAt( TDInstance.sid, st.getName(), true ); // select "independent" legs
@@ -6557,7 +6597,7 @@ public class DrawingWindow extends ItemDrawer
           }
         }
         clearSelected();
-      } else if ( b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
+      } else if ( k3 < mNrButton3 && b == mButton3[k3++] ) { // ITEM/POINT EDITING: move, split, remove, etc.
         // TDLog.v( "Button3[5] hasPointActions " + hasPointActions );
         if ( hasPointActions ) {
           makePopupEdit( b, dismiss );
@@ -6568,13 +6608,13 @@ public class DrawingWindow extends ItemDrawer
           //   new DrawingBarrierDialog( this, this, sn.getName(), mNum.isBarrier( sn.getName() ) ).show();
           // }
         }
-      } else if ( TDLevel.overExpert && b == mButton3[ k3++ ] ) { // RANGE EDIT
+      } else if ( TDLevel.overExpert && k3 < mNrButton3 && b == mButton3[ k3++ ] ) { // RANGE EDIT
         mDoEditRange = SelectionRange.rotateType( mDoEditRange );
         setButtonRange();
       }
-    } else {
+    } else if ( ! mTh2Edit ) { // TH2EDIT
       int k1 = 3;
-      if ( b == mButton1[k1++] ) { // DOWNLOAD
+      if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DOWNLOAD
         // setConnectionStatus( ConnectionState.CONN_WAITING ); // FIXME DistoXDOWN was not commented
         resetFixedPaint();
         updateReference();
@@ -6587,11 +6627,11 @@ public class DrawingWindow extends ItemDrawer
           // setConnectionStatus( mDataDownloader.getStatus() ); // FIXME DistoXDOWN was not commented
           mDataDownloader.doDataDownload( DataType.DATA_SHOT );
         }
-      } else if ( b == mButton1[k1++] ) { // BLUETOOTH
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // BLUETOOTH
         doBluetooth( b, dismiss );
-      } else if ( b == mButton1[k1++] ) { // DISPLAY MODE 
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // DISPLAY MODE 
         new DrawingModeDialog( mActivity, this, mDrawingSurface ).show();
-      } else if ( b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // TOGGLE PLAN/EXTENDED
         if ( PlotType.isSketch2D( mType ) ) { 
           // TDLog.v( "saving TOGGLE ...");
           startSaveTdrTask( mType, PlotSave.TOGGLE, TDSetting.mBackupNumber+2, TDPath.NR_BACKUP ); 
@@ -6602,10 +6642,10 @@ public class DrawingWindow extends ItemDrawer
         } else if ( PlotType.isStationSection( mType ) ) {
           updateSplays( (mApp.mSplayMode + 2)%4 );
         }
-      } else if ( b == mButton1[k1++] ) { //  NOTE
+      } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { //  NOTE
         (new DialogAnnotations( mActivity, mApp_mData.getSurveyFromId(mSid) )).show();
 
-      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  AZIMUTH
+      } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  AZIMUTH
         if ( PlotType.isSketch2D( mType ) ) { 
           if ( TDSetting.mAzimuthManual ) {
             setRefAzimuth( 0, - TDAzimuth.mFixedExtend );
@@ -6614,7 +6654,7 @@ public class DrawingWindow extends ItemDrawer
             // (new AzimuthDialog( mActivity, this, TDAzimuth.mRefAzimuth, mDialBitmap )).show(); // FIXME_AZIMUTH_DIAL 2
           }
         }
-      } else if ( TDLevel.overNormal && b == mButton1[k1++] ) { //  REFRESH
+      } else if ( TDLevel.overNormal && k1 < mNrButton1 && b == mButton1[k1++] ) { //  REFRESH
         updateDisplay();
       }
     }
@@ -6627,9 +6667,9 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( BTN_SPLAYS < mNrButton2 ) {
       if ( DrawingSplayPath.toggleSplayMode() == DrawingSplayPath.SPLAY_MODE_LINE ) {
-        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_line );
+        setButton2( BTN_SPLAYS, mBMsplays_line );
       } else {
-        TDandroid.setButtonBackground( mButton2[ BTN_SPLAYS ], mBMsplays_point );
+        setButton2( BTN_SPLAYS, mBMsplays_point );
       }
     }
   }
@@ -6777,7 +6817,7 @@ public class DrawingWindow extends ItemDrawer
     // remove survey name from scrap-name (if necessary)
     int pos = TDInstance.survey.length() + 1; // TDInstance.survey + "-" (at the begenning)
     String name = scrapname.substring( pos );
-    TDLog.v( "iPLOT open xsection: scrapname " + scrapname + " plot name " + name );
+    // TDLog.v( "PLOT open xsection: scrapname " + scrapname + " plot name " + name );
     // TDLog.v( "PLOT open section: current line " + mCurrentLine );
 
     PlotInfo pi = mApp_mData.getPlotInfo( TDInstance.sid, name );
@@ -7138,7 +7178,12 @@ public class DrawingWindow extends ItemDrawer
     try { 
       // TDLog.v( "save th2 origin " + mPlot1.xoffset + " " + mPlot1.yoffset + " toTherion " + TDSetting.mToTherion );
       // if ( ! TDSetting.mExportUri ) uri = null; // FIXME_URI
-      (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, save_mode, 0 )).execute();
+      if ( mTh2Edit ) { // TH2EDIT 
+        // set type by the scrap projection 
+        (new SavePlotFileTask( mActivity, uri, this, th2Handler, null, manager, null, name, type, 0, PlotSave.EXPORT, 0, true )).execute();
+      } else {
+        (new SavePlotFileTask( mActivity, uri, this, th2Handler, mNum, manager, info, name, type, azimuth, save_mode, 0, false )).execute();
+      }
     } catch ( RejectedExecutionException e ) {
       TDLog.Error("Sketch saving exec rejected");
     }
@@ -7413,29 +7458,39 @@ public class DrawingWindow extends ItemDrawer
   private void setMenuAdapter( Resources res, long type )
   {
     ArrayAdapter< String > menu_adapter = new ArrayAdapter<>(mActivity, R.layout.menu );
-    if ( PlotType.isSketch2D( type ) && TDLevel.overNormal ) {
+    if ( PlotType.isSketch2D( type ) && TDLevel.overNormal && ! mTh2Edit ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[0] ) ); // SWITCH/CLOSE
     } else {
       menu_adapter.add( res.getString( menus[MENU_CLOSE] ) );  // CLOSE
     }
-    menu_adapter.add( res.getString( menus[1] ) );  // EXPORT
-    if ( PlotType.isAnySection( type ) ) {
-      menu_adapter.add( res.getString( menus[MENU_AREA] ) );  // AREA
+    if ( mTh2Edit ) { // TH2EDIT
+      menu_adapter.add( res.getString( menus[MENU_SAVE] ) );  // TH2EDIT SAVE
     } else {
-      menu_adapter.add( res.getString( menus[2] ) );  // INFO
+      menu_adapter.add( res.getString( menus[1] ) );  // EXPORT
+    }
+    if ( ! mTh2Edit ) { // TH2EDIT
+      if ( PlotType.isAnySection( type ) ) {
+        menu_adapter.add( res.getString( menus[MENU_AREA] ) );  // AREA
+      } else {
+        menu_adapter.add( res.getString( menus[2] ) );  // INFO
+      }
     }
     if ( TDLevel.overNormal ) {
-      menu_adapter.add( res.getString( menus[3] ) );  // RELOAD
-      menu_adapter.add( res.getString( menus[4] ) );  // ZOOM_FIT
+      if ( mTh2Edit ) { // TH2EDIT
+        menu_adapter.add( res.getString( menus[MENU_OPEN] ) );  // TH2EDIT OPEN
+      } else {
+        menu_adapter.add( res.getString( menus[3] ) );  // RELOAD
+      }
+      menu_adapter.add( res.getString( menus[4] ) );  // ZOOMFIT
     }
-    if ( TDLevel.overAdvanced && PlotType.isSketch2D( type ) ) {
+    if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[5] ) ); // RENAME/DELETE
     }
-    if ( TDLevel.overAdvanced && PlotType.isSketch2D( type ) ) {
+    if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( type ) || mTh2Edit ) ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[6] ) ); // SCRAPS
     }
     menu_adapter.add( res.getString( menus[7] ) ); // PALETTE
-    if ( TDLevel.overBasic && PlotType.isSketch2D( type ) ) {
+    if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( type ) ) { // TH2EDIT
       menu_adapter.add( res.getString( menus[8] ) ); // OVERVIEW
     }
     menu_adapter.add( res.getString( menus[9] ) ); // OPTIONS
@@ -7510,19 +7565,25 @@ public class DrawingWindow extends ItemDrawer
       closeMenu();
       int p = 0;
       if ( p++ == pos ) {
-        if ( PlotType.isSketch2D( mType ) ) { // SWITCH/CLOSE
+        if ( ! mTh2Edit && PlotType.isSketch2D( mType ) ) { // SWITCH - CLOSE TH2EDIT
           if ( TDLevel.overNormal ) {
             new PlotListDialog( mActivity, null, mApp, this ).show();
           } else {
             super.onBackPressed();
           }
-        } else { // CLOSE
+        } else { // close
           super.onBackPressed();
         }
-      } else if ( p++ == pos ) { // EXPORT
-        String plotname = TDInstance.survey + "-" + mName;
-        new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0, plotname ).show();
-      } else if ( p++ == pos ) { // INFO / AREA
+      } else if ( p++ == pos ) { // EXPORT - SAVE
+        if ( mTh2Edit ) { // TH2EDIT export Therion
+          int thpos = 0; // Therion index
+          // TDLog.v("DRAW save therion");
+          selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_EXPORT, Intent.ACTION_CREATE_DOCUMENT );
+        } else {
+          String plotname = TDInstance.survey + "-" + mName;
+          new ExportDialogPlot( mActivity, this, TDConst.mPlotExportTypes, R.string.title_plot_save, 0, plotname ).show();
+        }
+      } else if ( ( ! mTh2Edit ) && p++ == pos ) { // TH2EDIT INFO - AREA
         if ( PlotType.isAnySection( mType ) ) {
           float area = mDrawingSurface.computeSectionArea() / (DrawingUtil.SCALE_FIX * DrawingUtil.SCALE_FIX);
           Resources res = getResources();
@@ -7539,43 +7600,46 @@ public class DrawingWindow extends ItemDrawer
             TDToast.makeBad( R.string.no_data_reduction );
 	  }
 	}
-      } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD
-        Intent intent = new Intent( this, PlotReloadWindow.class );
-        intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
-        intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
-        intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
-        intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
-        intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
-        intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
-        intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
-        if ( PlotType.isProfile( mType ) ) {
-          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName2 );
-          // ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
-        } else if ( mType == PlotType.PLOT_PLAN ) {
-          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName1 );
-          // ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
+      } else if ( TDLevel.overNormal && p++ == pos ) { // RECOVER RELOAD - OPEN
+        if ( mTh2Edit ) { // TH2EDIT
+          selectFromProvider( TDConst.SURVEY_FORMAT_TH2, TDRequest.REQUEST_GET_IMPORT, Intent.ACTION_OPEN_DOCUMENT );
         } else {
-          intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName3 );
-          // ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
+          Intent intent = new Intent( this, PlotReloadWindow.class );
+          intent.putExtra( TDTag.TOPODROID_SURVEY_ID, mSid );
+          intent.putExtra( TDTag.TOPODROID_PLOT_FROM, mFrom );
+          intent.putExtra( TDTag.TOPODROID_PLOT_ZOOM, mZoom );
+          intent.putExtra( TDTag.TOPODROID_PLOT_TYPE, mType );
+          intent.putExtra( TDTag.TOPODROID_PLOT_LANDSCAPE, mLandscape );
+          intent.putExtra( TDTag.TOPODROID_PLOT_XOFF, mOffset.x );
+          intent.putExtra( TDTag.TOPODROID_PLOT_YOFF, mOffset.y );
+          if ( PlotType.isProfile( mType ) ) {
+            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName2 );
+            // ( new PlotRecoverDialog( mActivity, this, mFullName2, mType ) ).show();
+          } else if ( mType == PlotType.PLOT_PLAN ) {
+            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName1 );
+            // ( new PlotRecoverDialog( mActivity, this, mFullName1, mType ) ).show();
+          } else {
+            intent.putExtra( TDTag.TOPODROID_PLOT_FILENAME, mFullName3 );
+            // ( new PlotRecoverDialog( mActivity, this, mFullName3, mType ) ).show();
+          }
+          startActivityForResult( intent, TDRequest.PLOT_RELOAD );
         }
-        startActivityForResult( intent, TDRequest.PLOT_RELOAD );
-      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOM_FIT / ORIENTATION
+      } else if ( TDLevel.overNormal && p++ == pos ) { // ZOOMFIT / ORIENTATION
 	if ( TDLevel.overExpert ) {
-          ( new PlotZoomFitDialog( mActivity, this ) ).show();
+          ( new PlotZoomFitDialog( mActivity, this, mTh2Edit ) ).show(); // TH2EDIT added last param
 	} else {
 	  doZoomFit();
 	}
-      } else if ( TDLevel.overAdvanced && PlotType.isSketch2D( mType ) && p++ == pos ) { // RENAME/DELETE
+      } else if ( TDLevel.overAdvanced && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT RENAME - DELETE
         //   askDelete();
         (new PlotRenameDialog( mActivity, this )).show();
-      } else if ( TDLevel.overAdvanced && PlotType.isSketch2D( mType ) && p++ == pos ) { // SCRAPS
-        //   askDelete();
+      } else if ( TDLevel.overAdvanced && ( PlotType.isSketch2D( mType ) || mTh2Edit ) && p++ == pos ) { // TH2EDIT SCRAPS
         (new PlotScrapsDialog( mActivity, this )).show();
 
       } else if ( p++ == pos ) { // PALETTE
         (new SymbolEnableDialog( mActivity )).show();
 
-      } else if ( TDLevel.overBasic && PlotType.isSketch2D( mType ) && p++ == pos ) { // OVERVIEW
+      } else if ( TDLevel.overBasic && (! mTh2Edit) && PlotType.isSketch2D( mType ) && p++ == pos ) { // TH2EDIT OVERVIEW
         if ( mType == PlotType.PLOT_PROJECTED ) {
           TDToast.makeBad( R.string.no_profile_overview );
         } else {
@@ -7902,27 +7966,27 @@ public class DrawingWindow extends ItemDrawer
   { 
     if ( TDInstance.getDeviceA() == null ) {
       mBTstatus = ConnectionState.CONN_DISCONNECTED;
-      TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMadd );
-      TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+      setButton1( BTN_DOWNLOAD, mBMadd );
+      setButton1( BTN_BLUETOOTH, mBMbluetooth_no );
     } else {
       if ( status != mBTstatus ) {
         mBTstatus = status;
         switch ( status ) {
           case ConnectionState.CONN_CONNECTED:
-            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_on );
+            setButton1( BTN_DOWNLOAD, mBMdownload_on );
             if ( TDInstance.isDeviceBric() ) {
-              TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth );
+              setButton1( BTN_BLUETOOTH, mBMbluetooth );
             } else {
-              TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+              setButton1( BTN_BLUETOOTH, mBMbluetooth_no );
             }
             break;
           case ConnectionState.CONN_WAITING:
-            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload_wait );
-            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth_no );
+            setButton1( BTN_DOWNLOAD,  mBMdownload_wait );
+            setButton1( BTN_BLUETOOTH, mBMbluetooth_no );
             break;
           default:
-            TDandroid.setButtonBackground( mButton1[ BTN_DOWNLOAD ], mBMdownload );
-            TDandroid.setButtonBackground( mButton1[ BTN_BLUETOOTH ], mBMbluetooth );
+            setButton1( BTN_DOWNLOAD,  mBMdownload );
+            setButton1( BTN_BLUETOOTH, mBMbluetooth );
         }
       }
     }
@@ -7932,8 +7996,8 @@ public class DrawingWindow extends ItemDrawer
   {
     if ( TDInstance.isDivingMode() ) return;
     if ( TDInstance.hasBleDevice() ) enable = true;
-    TDandroid.setButtonBackground( mButton1[BTN_BLUETOOTH], enable ? mBMbluetooth : mBMbluetooth_no );
-    mButton1[BTN_BLUETOOTH].setEnabled( enable );
+    setButton1( BTN_BLUETOOTH, enable ? mBMbluetooth : mBMbluetooth_no );
+    if ( BTN_BLUETOOTH < mNrButton1 ) mButton1[BTN_BLUETOOTH].setEnabled( enable );
   }
 
 // -------------------------------------------------------------
@@ -8388,9 +8452,153 @@ public class DrawingWindow extends ItemDrawer
       //     if ( uri != null ) doUriExport( uri );
       //   }
       //   break;
+      case TDRequest.REQUEST_GET_IMPORT: // TH2EDIT handle a th2 import
+        // TDLog.v("DRAW Import");
+        if ( resCode == Activity.RESULT_OK ) {
+          Uri uri = intent.getData();   // import uri
+          String filename = uri.getLastPathSegment();
+          // TDLog.v( "DRAW URI to import: " + uri.toString() + " filename <" + filename + ">" );
+          // int ros = filename.indexOf(":"); // drop the "content" header
+          // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+          int qos_1 = filename.lastIndexOf("/") + 1;
+          mFullName3 = ( qos_1 > 0 )? filename.substring( qos_1 ) : filename;
+          int pos   = mFullName3.lastIndexOf("."); 
+          String ext = (pos >= 0 )? mFullName3.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
+          mName3 = (pos > 0 )? mFullName3.substring( 0, pos ) : mFullName3;
+          // TDLog.v( "DRAW import fullname " + mFullName3 );
+          String type = TDPath.checkImportTypeReader( ext );
+          if ( type != null ) {
+            // TDLog.v( "DRAW import reader type " + type + " filename " + mFullName3 );
+            if ( type.equals(".th2") ) { // N.B. type is extension with '.'
+              if ( TDLevel.overExpert ) {
+                mDrawingSurface.clearDrawing();
+                if ( ! importReader( uri ) ) {
+                  TDLog.Error("DRAW import failed " + mFullName3 );
+                  finish();
+                }
+              } else {
+                // TDLog.v("DRAW not tester level");
+                finish();
+              }
+            } else {
+              TDLog.Error("DRAW import unsupported " + ext);
+              finish();
+            }
+          // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
+          //   TDLog.v( "import stream type " + type + " name " + name );
+          //   // importStream( uri, name, type );
+          }
+        } else {
+          TDLog.Error("DRAW import canceled");
+          finish();
+        }
+        break;
+      case TDRequest.REQUEST_GET_EXPORT: // TH2EDIT handle a th2 export
+        // TDLog.v("DRAW export fullname " + mFullName3 );
+        if ( resCode == Activity.RESULT_OK ) {
+          Uri uri = intent.getData();   // import uri
+          String filename = uri.getLastPathSegment();
+          // TDLog.v( "DRAW URI to export: " + uri.toString() + " filename <" + filename + ">" );
+          // int ros = filename.indexOf(":"); // drop the "content" header
+          // if ( ros >= 0 ) filename = filename.substring( ros+1 ); 
+          int pos   = filename.lastIndexOf("."); 
+          String ext  = (pos >= 0 )? filename.substring( pos ).toLowerCase( Locale.getDefault() ) : ""; // extension with leading '.'
+          // int qos_1 = filename.lastIndexOf("/") + 1;
+          // String name = (pos > qos_1 )? filename.substring( qos_1, pos ) : filename.substring( qos_1 );
+          // TDLog.v( "DRAW export ext " + ext );
+          String type = TDPath.checkImportTypeReader( ext );
+          if ( type != null ) {
+            // TDLog.v( "DRAW export reader type " + type + " filename " + filename );
+            if ( type.equals(".th2") ) { // N.B. type is extension with '.'
+              if ( TDLevel.overExpert ) {
+                // String pathname = (new File( uri )).getAbsolutePath();
+                exportWriter( uri );
+              } else {
+                // TDLog.v("DRAW not tester level");
+                finish();
+              }
+            } else {
+              TDLog.Error("DRAW export unsupported extension " + ext);
+              finish();
+            }
+          // } else if ( (type = TDPath.checkImportTypeStream( ext ) ) != null ) {
+          //   TDLog.v( "import stream type " + type + " name " + name );
+          //   // importStream( uri, name, type );
+          }
+        } else {
+          TDLog.Error("DRAW export canceled");
+          finish();
+        }
+        break;
     }
   }
 
+  // TH2EDIT
+  /** read a th2 file
+   * @param uri   th2 file URI
+   * @return true if success
+   */
+  private boolean importReader( Uri uri )
+  {
+    // mTh2Edit = true;
+    // TDLog.v("DRAW import reader load th2 file " + mName3 + " type " + mType );
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    if ( pfd != null ) {
+      FileReader fr = TDsafUri.docFileReader( pfd );
+      return DrawingTh.doLoadTherion( mDrawingSurface, fr, 0, 0 );
+    } else {
+      TDLog.Error("DRAW null fd");
+    }
+    return false;
+  }
+
+  // TH2EDIT
+  /** save a th2 file
+   * @param uri   th2 file URI
+   * @return true if success
+   */
+  private boolean exportWriter( Uri uri )
+  {
+    // mTh2Edit = true;
+    // TDLog.v("DRAW export writer th2 file - mType " + mType );
+    ParcelFileDescriptor pfd = TDsafUri.docReadFileDescriptor( uri );
+    if ( pfd != null ) {
+      FileWriter fw = TDsafUri.docFileWriter( pfd );
+      // DrawingTh.doLoadTherion( mDrawingSurface, fw, 0, 0 );
+      doSaveTh2( uri, mType, true ); // true = toast
+      return true;
+    } else {
+      TDLog.Error("DRAW null fd");
+    }
+    return false;
+  }
+
+  // TH2EDIT
+  /** get the import stream from the data provider
+   * @param index    file format index (@see TDConst.surveyImportFormatIndex)
+   * @param request  request code
+   * @param mode     intent document mode
+   * this method saves the import parameters and starts a choice of a file (of the given type)
+   */
+  private void selectFromProvider( int index, int request, String mode ) // IMPORT
+  {
+    if ( index < 0 || index >= TDConst.mMimeType.length ) {
+      TDLog.Error("Bad import index " + index );
+      TDToast.makeBad( String.format( getResources().getString( R.string.index_oob ), index ) );
+      return;
+    } 
+    // TDLog.v( "DRAW selectFromProvider runs on " + TDLog.threadId() );
+    Intent intent = new Intent( mode );
+    intent.setType( TDConst.mMimeType[ index ] );
+    // TDLog.v( "Import from provider. index " + index + " mime " + TDConst.mMimeType[ index ] );
+    intent.addCategory(Intent.CATEGORY_OPENABLE);
+    if ( request == TDRequest.REQUEST_GET_EXPORT ) {
+      intent.putExtra( Intent.EXTRA_TITLE, mFullName3 );
+    }
+    intent.addFlags(Intent.FLAG_GRANT_PERSISTABLE_URI_PERMISSION);
+    // intent.putExtra( "importtype", index ); // extra is not returned to the app
+    startActivityForResult( Intent.createChooser(intent, getResources().getString( R.string.title_import_th2 ) ), request );
+  }
 
   // ------------------------------------------------------------------
   // SCRAPS, X-SECTIONS, OUTLINES 
@@ -8405,17 +8613,17 @@ public class DrawingWindow extends ItemDrawer
 
   /** switch to the next scrap of the current ploy
    */
-  void scrapNext() { mDrawingSurface.toggleScrapIndex( 1 ); }
+  void scrapNext() { mDrawingSurface.toggleScrapIndex( mTh2Edit, 1 ); } // TH2EDIT no first param
 
   /** switch to the previous scrap of the current ploy
    */
-  void scrapPrev() { mDrawingSurface.toggleScrapIndex( -1 ); }
+  void scrapPrev() { mDrawingSurface.toggleScrapIndex( mTh2Edit, -1 ); } // TH2EDIT no first param
 
   /** make a new scrap in the current plot 
    */
   void scrapNew() 
   { 
-    int scrap_idx = mDrawingSurface.newScrapIndex( );
+    int scrap_idx = mDrawingSurface.newScrapIndex( false ); // TH2EDIT no false param
     mApp_mData.updatePlotMaxScrap( mSid, mPid, scrap_idx );
   }
 
@@ -8645,7 +8853,7 @@ public class DrawingWindow extends ItemDrawer
     String fullname = TDInstance.survey + "-" + name;
     // TDLog.v("Split Plot " + paths.size() + " paths: " + name );
     PlotInfo info = mApp_mData.getPlotInfo( TDInstance.sid, name );
-    (new SavePlotFileTask( mActivity, null, this, null, /* mApp, */ mNum, /* mDrawingUtil, */ paths, info, fullname, mType, azimuth ) ).execute();
+    (new SavePlotFileTask( mActivity, null, this, null, mNum, paths, info, fullname, mType, azimuth ) ).execute();
     // TODO
     // [1] create the database record
     // [2] save the Tdr for the new plot and remove the items from the commandManager
@@ -8715,7 +8923,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentPointIndex();
         pointSelected( mCurrentPoint, false );
         setHighlight( SymbolType.POINT, k );
-        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsPoint );
+        setButton2( BTN_TOOL, mBMtoolsPoint );
       } else if ( mRecentTools == mRecentLine ) {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.VISIBLE );
@@ -8724,7 +8932,7 @@ public class DrawingWindow extends ItemDrawer
         // TDLog.v("Set tools toolbars: Current line index " + k );
         lineSelected( mCurrentLine, false );
         setHighlight( SymbolType.LINE, k );
-        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsLine );
+        setButton2( BTN_TOOL, mBMtoolsLine );
       } else {
         mLayoutToolsP.setVisibility( View.GONE );
         mLayoutToolsL.setVisibility( View.GONE );
@@ -8732,7 +8940,7 @@ public class DrawingWindow extends ItemDrawer
         k = getCurrentAreaIndex();
         areaSelected( mCurrentArea, false );
         setHighlight( SymbolType.AREA, k );
-        if ( BTN_TOOL < mNrButton2 ) TDandroid.setButtonBackground( mButton2[BTN_TOOL], mBMtoolsArea );
+        setButton2( BTN_TOOL, mBMtoolsArea );
       }
     // }
     mLayoutTools.invalidate();

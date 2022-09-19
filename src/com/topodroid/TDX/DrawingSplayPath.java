@@ -38,7 +38,7 @@ import android.graphics.RectF;
  *      - DrawingLinePath
  *      - DrawingAreaPath
  *   - DrawingPointPath
- *   - DrawingStationPath
+ *   - DrawingStationUser
  */
 
 public class DrawingSplayPath extends DrawingPath

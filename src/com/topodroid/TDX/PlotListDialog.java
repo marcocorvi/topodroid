@@ -3,7 +3,7 @@
  * @author marco corvi
  * @date nov 2011
  *
- * @brief TopoDroid option list
+ * @brief TopoDroid survey plot listing
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -40,9 +40,9 @@ import android.widget.AdapterView.OnItemClickListener;
 // import android.widget.AdapterView.OnItemLongClickListener;
 
 class PlotListDialog extends MyDialog
-                        implements OnItemClickListener
-                        // , OnItemLongClickListener
-                        , View.OnClickListener
+                     implements OnItemClickListener
+                     // , OnItemLongClickListener
+                     , View.OnClickListener
 {
   private final ShotWindow    mParent;
   private final DrawingWindow mParent2;

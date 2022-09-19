@@ -89,7 +89,7 @@ public class SymbolLibrary
     mSymbols = new ArrayList<>();
   }
 
-  int size() { return mSymbols.size(); }
+  public int size() { return mSymbols.size(); } // TH2EDIT package
 
   // ----------------------------------------------------
 

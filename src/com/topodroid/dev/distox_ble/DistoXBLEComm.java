@@ -76,7 +76,7 @@ public class DistoXBLEComm extends TopoDroidComm
   private int mDataType;
   private int mPacketType;  // type of the last incoming packet that has been read
 
-  private int mPatketToRead = 0;
+  private int mPacketToRead = 0; // number of packet to read with laser-commands
   Thread mConsumer = null;
 
   Object mNewDataFlag;
@@ -110,6 +110,7 @@ public class DistoXBLEComm extends TopoDroidComm
             int res = ((DistoXBLEProtocol)mProtocol).packetProcess( buffer.data );
             if ( res == DistoXBLEProtocol.PACKET_FLASH_BYTES_1 ) continue;   // first-half of firmware block received
             synchronized (mNewDataFlag) {
+              if ( mPacketToRead > 0 ) mPacketToRead --; // only for shot data from laser task
               mPacketType = res;
               mNewDataFlag.notifyAll(); // wake sleeping threads
             }
@@ -244,13 +245,13 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     mReconnect = false;
     if ( mBTConnected ) {
-        //mThreadConsumerWorking = false;
-        mBTConnected = false;
-        notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
+      //mThreadConsumerWorking = false;
+      mBTConnected = false;
+      notifyStatus( ConnectionState.CONN_DISCONNECTED ); // not necessary
       // TDLog.v( "XBLE comm ***** close device");
-        int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
-        doNextOp();
-        TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
+      int ret = enqueueOp( new BleOpDisconnect( mContext, this ) ); // exec disconnectGatt
+      doNextOp();
+      TDLog.v( "XBLE comm: close Device - disconnect ... ops " + ret );
     }
     return true;
   }
@@ -411,7 +412,7 @@ public class DistoXBLEComm extends TopoDroidComm
     enqueueOp( new BleOpNotify( mContext, this, DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_READ_UUID, true ) );
     doNextOp();
     mBTConnected  = true;
-    mPatketToRead = 0;
+    mPacketToRead = 0;
     /*if(!mThreadConsumerWorking) {
         mThreadConsumerWorking = true;
         mConsumer.start();
@@ -573,10 +574,14 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param what      command to send to the remote device
    * @param lister    callback handler
    * @param data_type packet datatype
+   * @param closeBT   whether to close the connection at the end
    */
   public void setXBLELaser( String address, int what, int to_read, Handler /* ILister */ lister, int data_type, Boolean closeBT ) // FIXME_LISTER
   {
-    if ( ! tryConnectDevice( address, lister, 0 ) ) return; // ??? lister was null
+    if ( ! tryConnectDevice( address, lister, 0 ) ) {
+      TDLog.v("XBLE laser failed connect device");
+      return; 
+    }
     switch ( what ) {
       case DistoX.DISTOX_OFF:
         sendCommand( (byte)DistoX.DISTOX_OFF );
@@ -600,21 +605,32 @@ public class DistoXBLEComm extends TopoDroidComm
         sendCommand( (byte)DistoX.CALIB_ON );
         break;
     }
-    mPatketToRead = to_read;
-    TDUtil.slowDown(700);
+    mPacketToRead = to_read; // set the number of packet to read
+    TDUtil.slowDown(600);
     if ( closeBT ) {
+      synchronized ( mNewDataFlag ) {
+        try {
+          while ( mPacketToRead > 0 ) mNewDataFlag.wait( 200 ); // 0.2 seconds
+        } catch ( InterruptedException e ) { 
+          e.printStackTrace();
+        }
+      }
+      TDLog.v("XBLE laser disconnect device");
       disconnectDevice();
     }
   }
 
   // ----------------- SEND COMMAND -------------------------------
+  /** send a command to the DistoXBLE
+   * @param cmd    command code
+   * @return true if the command was scheduled
+   */
   public boolean sendCommand( int cmd )
   {
     if ( ! isConnected() ) return false;
-    if ( cmd != 0 ) {
-      // TDLog.v( "XBLE comm send cmd " + cmd );
-      enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
-    }
+    if ( cmd == 0 ) return false;
+    TDLog.v( "XBLE comm send cmd " + cmd );
+    enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, new byte[] {(byte)cmd}, true);
     return true;
   }
 
@@ -628,7 +644,7 @@ public class DistoXBLEComm extends TopoDroidComm
   public byte[] readMemory( int addr )
   {
     byte[] cmd = new byte[3];
-    cmd[0] = 0x38;
+    cmd[0] = MemoryOctet.BYTE_PACKET_REPLY; // 0x38;
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     mPacketType = DistoXBLEProtocol.PACKET_NONE;
@@ -694,7 +710,7 @@ public class DistoXBLEComm extends TopoDroidComm
   {
     if ( data.length < 4 ) return false;
     byte[] cmd = new byte[7];
-    cmd[0] = 0x39;
+    cmd[0] = MemoryOctet.BYTE_PACKET_REQST; // 0x39;
     cmd[1] = (byte)(addr & 0xFF);
     cmd[2] = (byte)((addr >> 8) & 0xFF);
     cmd[3] = data[0];
@@ -837,7 +853,7 @@ public class DistoXBLEComm extends TopoDroidComm
    * @param data_type expected type of data
    * @return ...
    */
-  public boolean tryConnectDevice(String address, Handler lister, int data_type)
+  public boolean tryConnectDevice( String address, Handler lister, int data_type )
   {
     if ( ! mBTConnected ) {
       if ( ! connectDevice( address, lister, data_type ) ) {
@@ -908,7 +924,7 @@ public class DistoXBLEComm extends TopoDroidComm
     int ret = 0;
 
     byte[] buf = new byte[259];
-    buf[0] = (byte)0x3b;
+    buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
     buf[1] = (byte)0;
     buf[2] = (byte)0;
     boolean ok = true;
@@ -933,13 +949,13 @@ public class DistoXBLEComm extends TopoDroidComm
           int flashaddr = addr + 8;
           addr++;
           byte[] seperated_buf = new byte[131]; // 131 = 3 (cmd, addr, index) + 128 (payload) 
-          seperated_buf[0] = (byte) 0x3b;
+          seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
           seperated_buf[1] = (byte) (flashaddr & 0xff);
           seperated_buf[2] = 0; //packet index
           System.arraycopy(buf, 0, seperated_buf, 3, 128);
           enlistWrite( DistoXBLEConst.DISTOXBLE_SERVICE_UUID, DistoXBLEConst.DISTOXBLE_CHRT_WRITE_UUID, seperated_buf, true);
           seperated_buf = new byte[131];
-          seperated_buf[0] = (byte) 0x3b;
+          seperated_buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte) 0x3b;
           seperated_buf[1] = (byte) (flashaddr & 0xff);
           seperated_buf[2] = 1;
           System.arraycopy(buf, 128, seperated_buf, 3, 128);
@@ -995,7 +1011,7 @@ public class DistoXBLEComm extends TopoDroidComm
   private byte[] readFirmwareBlock(int addr)
   {
     byte[] buf = new byte[3];
-    buf[0] = (byte)0x3a;
+    buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
     buf[1] = (byte)( addr & 0xff );
     buf[2] = 0; // not necessary
     try {
@@ -1032,7 +1048,7 @@ public class DistoXBLEComm extends TopoDroidComm
       // File fp = new File( filepath );
       FileOutputStream fos = new FileOutputStream(file);
       DataOutputStream dos = new DataOutputStream(fos);
-      if ( tryConnectDevice(address, null, 0) ) {
+      if ( tryConnectDevice( address, null, 0 ) ) {
         try {
           for ( int addr = 8; ; addr++ ) {
             buf = readFirmwareBlock(addr);

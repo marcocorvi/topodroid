@@ -377,7 +377,7 @@ public class TDExporter
       pw.format("      </session>\n");
       pw.format("    </sessions>\n");
 
-      String session = info_date + "_" +  cave.replaceAll(" ", "_");
+      String session = info_date + "_" + TDString.spacesToUnderscores( cave );
       session = session.toLowerCase(Locale.US);
 
    // ============== CAVE INFOS and BRANCHES
@@ -1411,7 +1411,7 @@ public class TDExporter
         bw.flush();
       }
 
-      String title = info.name.replaceAll("_", " ");
+      String title = TDString.underscoresToSpaces( info.name );
       pw.format("survey %s -title \"%s\"\n", info.name, title );
       if ( info.comment != null && info.comment.length() > 0 ) {
         pw.format("    # %s \n", info.comment );

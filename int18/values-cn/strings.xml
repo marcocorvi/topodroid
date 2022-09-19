@@ -987,6 +987,7 @@
     <string name="help_3d">3D视图(Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">绘图模式</string>
+    <!-- TODO string name="help_drawing">Drawing</string -->
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">草图引用</string>
     <string name="help_rename">改变测量名称</string>
@@ -1225,6 +1226,7 @@
 
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
+    <!-- TODO string name="title_import_th2">Therion th2 file</string -->
     <string name="title_graph_paper">方格比例 1:100</string>
     <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 
@@ -1839,7 +1841,8 @@
     <!-- UNUSED string name="menu_new">新建</string -->
     <!-- UNUSED string name="menu_equate">添加相同</string -->
     <!-- UNUSED string name="menu_equates">相同</string -->
-    <!-- UNUSED string name="menu_save">保存</string -->
+    <!-- TODO string name="menu_open">OPEN</string -->
+    <string name="menu_save">保存</string>
 
     <!-- UNUSED string name="overwrite">重写</string -->
 

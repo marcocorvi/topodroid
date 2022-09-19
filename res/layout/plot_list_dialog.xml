@@ -59,6 +59,11 @@
           android:text="@string/button_cancel"
           android:layout_marginEnd="@dimen/marginhsmall"
         />
+        <Button android:id="@+id/btn_open"
+          style="@style/button_default"
+          android:text="@string/button_open"
+          android:layout_marginEnd="@dimen/marginhsmall"
+        /> <!-- TH2EDIT -->
         <Button android:id="@+id/btn_close"
           style="@style/button_default"
           android:text="@string/button_close"

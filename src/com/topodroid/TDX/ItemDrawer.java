@@ -108,7 +108,7 @@ abstract class ItemDrawer extends Activity
    * @param symbol    symbol to update
    * @param symbols   set of recent symbols
    * @param ages      set of recent symbols ages
-   * @note used by RecentSymbolTask
+   * @note used by RecentSymbolsTask
    */
   static void updateRecent( Symbol symbol, Symbol[] symbols, int[] ages )
   {

@@ -84,6 +84,23 @@ public class TDString
     return (str == null)? null : str.replaceAll(",", ".");
   }
 
+  /** @return string with spaces replaced by underscores
+   * @param str input string
+   */
+  public static String spacesToUnderscores( String str )
+  {
+    return (str == null)? null : str.replaceAll(" ", "_");
+  }
+
+  /** @return string with underscores replaced by spaces
+   * @param str input string
+   */
+  public static String underscoresToSpaces( String str )
+  {
+    return (str == null)? null : str.replaceAll("_", " ");
+  }
+
+
   public static String escape( String str )
   {
     if ( str == null ) return "";

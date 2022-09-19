@@ -38,7 +38,7 @@ import com.topodroid.TDX.DrawingPointLinePath;
 import com.topodroid.TDX.DrawingSpecialPath;
 import com.topodroid.TDX.DrawingAudioPath;
 import com.topodroid.TDX.DrawingPhotoPath;
-import com.topodroid.TDX.DrawingStationPath;
+import com.topodroid.TDX.DrawingStationUser;
 import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingLabelPath;
 import com.topodroid.TDX.DrawingCommandManager;
@@ -681,7 +681,7 @@ public class DrawingDxf
 
           if ( path.mType == DrawingPath.DRAWING_PATH_STATION )
           {
-            DrawingStationPath sp = (DrawingStationPath)path;
+            DrawingStationUser sp = (DrawingStationUser)path;
             handle = DXF.printText( pw5, handle, model_block_handle, sp.name(), (sp.cx+xoff) * scale, -(sp.cy+yoff) * scale,
                                 0, LABEL_SCALE, "STATION", DXF.style_dejavu, xoff, yoff, z );
           } 
@@ -784,7 +784,7 @@ public class DrawingDxf
           out.write( sw6.getBuffer().toString() );
           out.flush();
         } else {
-          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+          for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
             z = st_path.mScrap;
             handle = toDxf( pw6, handle, model_block_handle, st_path, scale, xoff, yoff, z );
           }
@@ -831,7 +831,7 @@ public class DrawingDxf
    * @param yoff       Y offset
    * @param z          Z "level"
    */
-  static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingStationPath sp, float scale, float xoff, float yoff, float z )
+  static private int toDxf( PrintWriter pw, int handle, int ref_handle, DrawingStationUser sp, float scale, float xoff, float yoff, float z )
   { // FIXME point scale factor is 0.3
     if ( sp == null ) return handle;
     return DXF.printText( pw, handle, ref_handle, sp.name(),  (sp.cx+xoff)*scale, -(sp.cy+yoff)*scale, 0,
@@ -992,7 +992,7 @@ public class DrawingDxf
             handle = toDxf( pw, handle, ref_handle, (DrawingAreaPath)path, scale, xoff, yoff, z );
             break;
           case 'U':
-            /* path = */ DrawingStationPath.loadDataStream( version, dis ); // consume DrawingStationName data
+            /* path = */ DrawingStationUser.loadDataStream( version, dis ); // consume DrawingStationName data
             break;
           case 'X':
             /* path = */ DrawingStationName.loadDataStream( version, dis ); // consume DrawingStationName data

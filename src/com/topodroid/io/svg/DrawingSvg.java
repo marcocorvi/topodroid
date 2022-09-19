@@ -20,7 +20,7 @@ import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.PlotType;
 
-import com.topodroid.TDX.DrawingStationPath;
+import com.topodroid.TDX.DrawingStationUser;
 import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingLinePath;
@@ -245,7 +245,7 @@ public class DrawingSvg extends DrawingSvgBase
               // TDLog.v( "SVG point station");
               StringWriter sw51 = new StringWriter();
               PrintWriter pw51  = new PrintWriter(sw51);
-              toSvg( pw51, (DrawingStationPath)path, xoff, yoff );
+              toSvg( pw51, (DrawingStationUser)path, xoff, yoff );
               out.write( sw51.getBuffer().toString() );
             } else if ( path.mType == DrawingPath.DRAWING_PATH_POINT ) {
               DrawingPointPath point = (DrawingPointPath)path;
@@ -359,7 +359,7 @@ public class DrawingSvg extends DrawingSvgBase
             out.write( sw61.getBuffer().toString() );
           }
         } else {
-          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+          for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
             StringWriter sw62 = new StringWriter();
             PrintWriter pw62  = new PrintWriter(sw62);
             toSvg( pw62, st_path, xoff, yoff );

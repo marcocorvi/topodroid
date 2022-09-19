@@ -45,7 +45,7 @@ public class DrawingPointLinePath extends DrawingPath
    * @param closed     whether the path is closed
    * @param scrap      scrap the pat belongs to
    */
-  DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap )
+  public DrawingPointLinePath( int path_type, boolean visible, boolean closed, int scrap ) // TH2EDIT package
   {
     super( path_type, null, scrap ); // DrawingPath.DRAWING_PATH_AREA );
     // mPoints  = new ArrayList<>();
@@ -262,7 +262,7 @@ public class DrawingPointLinePath extends DrawingPath
   /** set the closed attribute
    * @param closed   new value of the closed attribute
    */
-  void setClosed( boolean closed ) 
+  public void setClosed( boolean closed )  // TH2EDIT package
   { 
     if ( closed != mClosed ) {
       mClosed = closed; 
@@ -449,7 +449,7 @@ public class DrawingPointLinePath extends DrawingPath
 
   /** make the path a straight-segment joining the first and the last points
    */
-  void makeStraight( )
+  public void makeStraight( ) // TH2EDIT package
   {
     // if ( mPoints.size() < 2 ) return;
     // LinePoint first = mPoints.get( 0 );
@@ -509,7 +509,7 @@ public class DrawingPointLinePath extends DrawingPath
    * @param x   X-coord
    * @param y   Y-coord
    */
-  void addPoint3( float x1, float y1, float x2, float y2, float x, float y ) 
+  public void addPoint3( float x1, float y1, float x2, float y2, float x, float y )  // TH2EDIT package
   {
     if ( Float.isNaN(x) || Float.isNaN(y) ) return;
     if ( mFirst == null ) {

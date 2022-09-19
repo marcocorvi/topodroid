@@ -100,8 +100,7 @@ public class TDUtil
 
   public static String dropSpaces( String s )
   {
-    return ( s == null )? null 
-      : s.trim().replaceAll("\\s+", "");
+    return ( s == null )? null : TDString.noSpace( s.trim() );
   }
 
   // sort strings by name (alphabetical order)

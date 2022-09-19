@@ -29,6 +29,13 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
   private final int mNr;               // number of shots to measure before download
   private final int mDataType;
 
+  /** cstr
+   * @param ilister    lister that started the task
+   * @param lister     shot data lister
+   * @param app        application
+   * @param nr         number of shots to take
+   * @param data_type  expected shot type
+   */
   public DistoXBLETakeShot(ILister ilister, ListerHandler lister, TopoDroidApp app, int nr, int data_type )
   {
     super();
@@ -52,12 +59,12 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
     }
     for ( ; i>1; --i ) {
       // TDLog.v( "take shot " + i + " wait " + TDSetting.mWaitLaser + "/" + TDSetting.mWaitShot );
-      mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType,false );
+      mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
       TDUtil.slowDown( TDSetting.mWaitLaser ); 
-      mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType ,false);
+      mApp.setXBLELaser( Device.MEASURE, 0, mLister, mDataType, false);
       TDUtil.slowDown( TDSetting.mWaitShot );
     }
-    mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType,false );
+    mApp.setXBLELaser( Device.LASER_ON, 0, mLister, mDataType, false );
     TDUtil.slowDown( TDSetting.mWaitLaser );
 
     // TDUtil.slowDown( TDSetting.mWaitLaser ); 
@@ -67,17 +74,25 @@ public class DistoXBLETakeShot extends AsyncTask<Integer, Integer, Integer >
   @Override
   protected void onProgressUpdate(Integer... progress) { }
 
+  /** before the execution: tell the lister that started the task to disable the BT button
+   */
   @Override
   protected void onPreExecute( )
   {
     mILister.enableBluetoothButton(false);
   }
 
+  /** after the execution: 
+   *  measure and download if the number of shots is positive and there is a sot lister
+   *  tell the lister that started the task to re-enable the BT button
+   * @param result exec result (unused)
+   * @note post-exec is run on the UI thread
+   */
   @Override
   protected void onPostExecute( Integer result ) 
   {
     int nr = ( mLister == null )? 0 : mNr; // number of shots to download
-    mApp.setXBLELaser( Device.MEASURE, nr, mLister, mDataType,true ); // measure and download if nr > 0
+    mApp.setXBLELaser( Device.MEASURE, nr, mLister, mDataType, true ); // measure and download if nr > 
     mILister.enableBluetoothButton(true);
   }
 }

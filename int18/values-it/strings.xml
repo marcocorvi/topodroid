@@ -983,6 +983,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="help_3d">3D app (Cave3D)</string>
     <!-- UNUSED string name="help_move">Modalità muovi/zoom</string -->
     <string name="help_draw">Modalità disegno</string>
+    <string name="help_drawing">Disegno</string>
     <string name="help_edit">Modalità editing</string>
     <string name="help_refs">Seleziona riferimenti per disegno</string>
     <string name="help_rename">Modifica il nome del rilievo</string>
@@ -1226,6 +1227,7 @@ Fai riferimento alle pagine web per i dettagli.\n
 
     <string name="title_import_shot">Importa rilievo</string>
     <string name="title_import_gps">Importa punto GPS</string>
+    <string name="title_import_th2">File Therion th2</string>
     <string name="title_graph_paper">Carta milimetrata in scala 1:100</string>
     <string name="graph_paper_scale">Regola la linea a 5 cm</string>
 
@@ -1829,7 +1831,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="menu_new">NUOVO</string -->
     <!-- UNUSED string name="menu_equate">AGGIUNGI EQUIVALENTE</string -->
     <!-- UNUSED string name="menu_equates">EQUIVALENTE</string -->
-    <!-- UNUSED string name="menu_save">SALVA</string -->
+    <string name="menu_open">APRI</string>
+    <string name="menu_save">SALVA</string>
 
     <!-- UNUSED string name="overwrite">Sovrascrivi</string -->
 

@@ -991,6 +991,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_3d">3D nézőke (Cave3D)</string>
     <!-- UNUSED string name="help_move">Mozgatás/zoom mód</string -->
     <string name="help_draw">Rajz mód</string>
+    <!-- TODO string name="help_drawing">Drawing</string -->
     <string name="help_edit">Szerkesztés mód</string>
     <string name="help_refs">Vázlat referencia</string>
     <string name="help_rename">Felmérés nevének megváltoztatása</string>
@@ -1229,6 +1230,7 @@ A részletekért keresse fel a weboldalakat.\n
 
     <string name="title_import_shot">Felmérés import</string>
     <string name="title_import_gps">GPS pont import</string>
+    <!-- TODO string name="title_import_th2">Therion th2 file</string -->
     <string name="title_graph_paper">Grafikon papír 1:100 skála</string>
     <string name="graph_paper_scale">Igazítsd a vonalat 5cm hosszúra</string>
 
@@ -1847,7 +1849,8 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="menu_new">ÚJ</string -->
     <!-- UNUSED string name="menu_equate">KAPCSOLÓDÁSOK HOZZÁADÁSA</string -->
     <!-- UNUSED string name="menu_equates">KAPCSOLÓDÓ PONTOK</string -->
-    <!-- UNUSED string name="menu_save">MENTÉS</string -->
+    <!-- TODO string name="menu_open">OPEN</string -->
+    <string name="menu_save">MENTÉS</string>
 
     <!-- UNUSED string name="overwrite">felülírja</string -->
 

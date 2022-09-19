@@ -383,7 +383,12 @@ public class TDConst
   // public static final String[] mSketchExportTypes = { "Therion", "DXF" };
   // private static final int[] mSketchExportIndex = { SURVEY_FORMAT_TH3, SURVEY_FORMAT_DXF };
 
-  private static int exportIndex( String type, String[] types, int[] index )
+  /** @return the format index corresponding to a given type
+   * @param type   format type
+   * @param types  acceptable format types
+   * @param index  corresponding format indices
+   */
+  private static int formatIndex( String type, String[] types, int[] index )
   {
     for ( int k=0; k<types.length; ++k ) {
       if ( types[k].equals( type ) ) return index[k];
@@ -392,11 +397,12 @@ public class TDConst
     return SURVEY_FORMAT_NONE;
   }
 
-  public static int surveyFormatIndex( String type )   { return exportIndex( type, mSurveyExportTypes,   mSurveyExportIndex ); }
-  public static int plotExportIndex( String type )     { return exportIndex( type, mPlotExportTypes,     mPlotExportIndex ); }
-  public static int overviewExportIndex( String type ) { return exportIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
-  public static int calibExportIndex( String type )    { return exportIndex( type, mCalibExportTypes,    mCalibExportIndex ); }
-  // public static int sketchExportIndex( String type ) { return exportIndex( type, mSketchExportTypes, mSketchExportIndex ); }
+  public static int surveyImportFormatIndex( String type ) { return formatIndex( type, mSurveyImportTypes,   mSurveyImportIndex ); }
+  public static int surveyFormatIndex( String type )   { return formatIndex( type, mSurveyExportTypes,   mSurveyExportIndex ); }
+  public static int plotExportIndex( String type )     { return formatIndex( type, mPlotExportTypes,     mPlotExportIndex ); }
+  public static int overviewExportIndex( String type ) { return formatIndex( type, mOverviewExportTypes, mOverviewExportIndex ); }
+  public static int calibExportIndex( String type )    { return formatIndex( type, mCalibExportTypes,    mCalibExportIndex ); }
+  // public static int sketchExportIndex( String type ) { return formatIndex( type, mSketchExportTypes, mSketchExportIndex ); }
 
   private static String exportExt( String type, String[] types, String[] ext )
   {

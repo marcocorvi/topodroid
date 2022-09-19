@@ -300,7 +300,7 @@ public class DistoX310Protocol extends DistoXProtocol
     // TDLog.f( "Firmware upload: protocol starts. file " + fp.getPath() );
     TDLog.v( "Firmware upload: protocol starts. file " + fp.getPath() );
     byte[] buf = new byte[259];
-    buf[0] = (byte)0x3b;
+    buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
     buf[1] = (byte)0;
     buf[2] = (byte)0;
 
@@ -324,7 +324,7 @@ public class DistoX310Protocol extends DistoXProtocol
           }
           cnt += nr;
           if ( addr >= 0x08 ) {
-            buf[0] = (byte)0x3b;
+            buf[0] = MemoryOctet.BYTE_PACKET_FW_WRITE; // (byte)0x3b;
             buf[1] = (byte)( addr & 0xff );
             buf[2] = 0; // not necessary
             mOut.write( buf, 0, 259 );
@@ -335,7 +335,7 @@ public class DistoX310Protocol extends DistoXProtocol
             // TDLog.v( "X310 upload firmware: " + String.format(" %02x", mBuffer[0] ) );
 
             int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-            if ( mBuffer[0] != (byte)0x3b || addr != reply_addr ) {
+            if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_WRITE || addr != reply_addr ) {
               TDLog.f( "Firmware upload: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
               ok = false;
               break;
@@ -379,7 +379,7 @@ public class DistoX310Protocol extends DistoXProtocol
       try {
         for ( int addr = 0; ; ++ addr ) {
         // TDLog.f( "Firmware dump: addr " + addr + " count " + cnt );
-          buf[0] = (byte)0x3a;
+          buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
           buf[1] = (byte)( addr & 0xff );
           buf[2] = 0; // not necessary
           mOut.write( buf, 0, 3 );
@@ -390,7 +390,7 @@ public class DistoX310Protocol extends DistoXProtocol
           // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
           int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-          if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
+          if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
             TDLog.f( "Proto Firmware dump: fail at " + cnt + " buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr + " addr " + addr );
             ok = false;
             break;
@@ -439,7 +439,7 @@ public class DistoX310Protocol extends DistoXProtocol
     // boolean ok = true;
     int addr = nr;
     try {
-      buf[0] = (byte)0x3a;
+      buf[0] = MemoryOctet.BYTE_PACKET_FW_READ; // (byte)0x3a;
       buf[1] = (byte)( addr & 0xff );
       buf[2] = 0; // not necessary
       mOut.write( buf, 0, 3 );
@@ -450,7 +450,7 @@ public class DistoX310Protocol extends DistoXProtocol
       // TDLog.v( "X310 dump firmware: " + String.format(" %02x", mBuffer[0] ) );
 
       int reply_addr = ( ((int)(mBuffer[2]))<<8 ) + ((int)(mBuffer[1]));
-      if ( mBuffer[0] != (byte)0x3a || addr != reply_addr ) {
+      if ( mBuffer[0] != MemoryOctet.BYTE_PACKET_FW_READ || addr != reply_addr ) {
         TDLog.f( "Firmware read block " + nr + ": fail buffer[0]: " + mBuffer[0] + " reply_addr " + reply_addr );
         // ok = false;
       } else {

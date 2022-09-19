@@ -33,7 +33,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, int what )
   {
     mDrawer  = drawer;
-    mData    = data;
+    mData    = TopoDroidApp.mData; // TH2EDIT data;
     mWhat    = what;
   }
 

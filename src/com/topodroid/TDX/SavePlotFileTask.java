@@ -61,6 +61,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   private PlotSaveData psd1 = null;
   private PlotSaveData psd2 = null;
   private Uri mUri;
+  private boolean mTh2Edit = false; // TH2EDIT
 
   /**
    * @param context
@@ -79,7 +80,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    DrawingCommandManager manager, PlotInfo info,
-                    String fullname, long type, int proj_dir, int suffix, int rotate )
+                    String fullname, long type, int proj_dir, int suffix, int rotate, boolean th2_edit )
   {
      mUri      = uri;
      mFormat   = context.getResources().getString(R.string.saved_file_2);
@@ -94,9 +95,10 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mProjDir  = proj_dir;
      mSuffix   = suffix;    // plot save mode
      mRotate   = rotate;
+     mTh2Edit  = th2_edit;
      if ( mRotate > TDPath.NR_BACKUP ) mRotate = TDPath.NR_BACKUP;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [1] " + mFullName + " type " + mType + " suffix " + suffix);
-     // TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
+     TDLog.v( "save plot file task [1] " + mFullName + " type " + mType + " suffix " + suffix );
 
      if ( TDLevel.overExpert && mSuffix == PlotSave.SAVE && TDSetting.mAutoExportPlotFormat == TDConst.SURVEY_FORMAT_CSX ) { // auto-export format cSurvey
        // TDLog.v( "auto export CSX");
@@ -106,6 +108,8 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      }
   }
 
+  /**
+   */
   SavePlotFileTask( Context context, Uri uri, DrawingWindow parent, Handler handler,
 		    TDNum num,
 		    List< DrawingPath > paths, PlotInfo info,
@@ -124,8 +128,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
      mProjDir  = proj_dir;
      mSuffix   = PlotSave.CREATE;
      mRotate   = 0;
+     mTh2Edit  = false;
      // TDLog.Log( TDLog.LOG_PLOT, "Save Plot File Task [2] " + mFullName + " type " + mType );
-     // TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
+     TDLog.v( "save plot file task [2] " + mFullName + " type " + mType + " suffix CREATE");
   }
 
   @Override
@@ -147,7 +152,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       try {
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false, mTh2Edit ); // single sketch
         // bw.flush(); // FIXME system error
         bw.close();
       } catch ( IOException e ) {
@@ -167,7 +172,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       try {
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
-        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true ); // multi-sketch
+        DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, true, false ); // multi-sketch, no th2_edit
         // bw.flush(); // FIXME necessary ???
         bw.close();
       } catch ( IOException e ) {
@@ -191,7 +196,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.SURVEY_FORMAT_TH2:
             // TDLog.v("EXPORT AUTO th2 " + mFullName );
             File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
-            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // false= single sketch
+            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false, mTh2Edit ); // false= single sketch
             break;
           case TDConst.SURVEY_FORMAT_DXF:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()

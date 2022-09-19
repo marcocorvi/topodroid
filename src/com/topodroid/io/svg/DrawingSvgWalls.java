@@ -16,7 +16,7 @@ import com.topodroid.utils.TDVersion;
 import com.topodroid.num.TDNum;
 import com.topodroid.prefs.TDSetting;
 
-import com.topodroid.TDX.DrawingStationPath;
+import com.topodroid.TDX.DrawingStationUser;
 import com.topodroid.TDX.DrawingStationName;
 import com.topodroid.TDX.DrawingPointPath;
 import com.topodroid.TDX.DrawingLinePath;
@@ -327,7 +327,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         if ( plot.hasUserStations() ) {
           StringWriter sw7s = new StringWriter();
           PrintWriter pw7s  = new PrintWriter(sw7s);
-          for ( DrawingStationPath st_path : plot.getUserStations() ) { // user-chosen
+          for ( DrawingStationUser st_path : plot.getUserStations() ) { // user-chosen
             toSvg( pw7s, st_path, xoff, yoff );
           }
           out.write( sw7s.getBuffer().toString() );
@@ -339,7 +339,7 @@ public class DrawingSvgWalls extends DrawingSvgBase
         //   // String color_str = pathToColor( path );
         //   StringWriter sw5s = new StringWriter();
         //   PrintWriter pw5s  = new PrintWriter(sw5s);
-        //   toSvg( pw5s, (DrawingStationPath)path, xoff, yoff );
+        //   toSvg( pw5s, (DrawingStationUser)path, xoff, yoff );
         //   out.write( sw5s.getBuffer().toString() );
         // }
       }

@@ -46,6 +46,7 @@ public class TDPath
   final static String SVX = ".svx"; // Survex
   final static String SRV = ".srv"; // Walls
   final static String TDR = ".tdr";
+  final static String TH2 = ".th2"; // TH2EDIT
   // final static private String TMP = ".tmp";
 
   final static String TOP = ".top"; // PocketTopo
@@ -538,7 +539,7 @@ public class TDPath
   // NOTA BENE extensions include the dot, eg, ".th"
   static final String[] IMPORT_EXT        = { TH, TOP, DAT, TRO, CSN, SVX };
   static final String[] IMPORT_EXT_STREAM = { TOP, ZIP };
-  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV };
+  static final String[] IMPORT_EXT_READER = { TH, DAT, TRO, TROX, CSN, SVX, SRV, TH2 }; // TH2EDIT added TH2
 
   // static File[] getImportFiles() // DistoX-SAF
   // { 
@@ -547,6 +548,10 @@ public class TDPath
 
   static String checkImportTypeStream( String ext ) { return checkType( ext, IMPORT_EXT_STREAM ); }
 
+  /** @return the file type from the extension
+   * @param ext     import type extension (with '.')
+   * @note called only by MainWindow
+   */
   static String checkImportTypeReader( String ext ) { return checkType( ext, IMPORT_EXT_READER ); }
 
   /** @return the array of supported import types

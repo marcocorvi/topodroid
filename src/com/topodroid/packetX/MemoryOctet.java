@@ -34,6 +34,11 @@ public class MemoryOctet
   public static final byte BYTE_PACKET_REQST  = 0x39;
   // public static final byte BYTE_PACKET_38     = 0x38;
   // public static final byte BYTE_PACKET_39     = 0x39;
+  public static final byte BYTE_PACKET_FW_READ  = 0x3a;
+  public static final byte BYTE_PACKET_FW_WRITE = 0x3b;
+  public static final byte BYTE_PACKET_HW_CODE  = 0x3c;
+  public static final byte BYTE_PACKET_3D     = 0x3d;
+  public static final byte BYTE_PACKET_3E     = 0x3e;
 
   // ------------------------------------------------------------
 

@@ -35,10 +35,10 @@ import java.util.Locale;
 
 public class DrawingLinePath extends DrawingPointLinePath
 {
-  static final int OUTLINE_OUT = 1;
-  static final int OUTLINE_IN = -1;
-  static final int OUTLINE_NONE = 0;
-  static final int OUTLINE_UNDEF = -2;
+  public static final int OUTLINE_OUT = 1; // TH2EDIT these were package
+  public static final int OUTLINE_IN = -1;
+  public static final int OUTLINE_NONE = 0;
+  public static final int OUTLINE_UNDEF = -2;
 
   /** test whether the line has the outline
    * @return true if the line has either outline OUT or IN
@@ -48,7 +48,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   // static int mCount = 0;
   // int mCnt;
   int mLineType;
-  int mOutline; 
+  public int mOutline; // TH2EDIT package
   private boolean mReversed;
 
   // FIXME-COPYPATH
@@ -208,7 +208,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   /** compute the unit normal
    */
   @Override
-  void computeUnitNormal()
+  public void computeUnitNormal() // TH2EDIT package
   {
     mDx = mDy = 0;
     if ( mFirst != null && mFirst.mNext != null ) {
@@ -343,7 +343,7 @@ public class DrawingLinePath extends DrawingPointLinePath
   /** set the reversed attribute
    * @param reversed   new reversed attribute
    */
-  void setReversed( boolean reversed )
+  public void setReversed( boolean reversed ) // TH2EDIT package
   {
     if ( reversed != mReversed ) {
       mReversed = reversed;
