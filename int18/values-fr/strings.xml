@@ -26,15 +26,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="new_survey_label">Nouveau relevé</string>
     <string name="distox_label">DistoX</string>
 
-  <!-- TODO string name="r_title">Android R important notice</string -->
-  <!-- TODO string name="r_dialog">
-With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
-Refer to the web pages for details.\n
+  <string name="r_title">Avis important concernant Android R</string -->
+  <string name="r_dialog">
+Avec Android-R, TopoDroid doit placer son dossier sous "Android/data". TopoDroid ne l'a pas trouvé et a créé ce dossier.\nVous pouvez importer les archives zip de vos anciennes topographies.\nVeuillez noter que les fichiers du nouveau dossier TopoDroid sont supprimés lorsque vous désinstallez TopoDroid.\n\n
+Consultez les pages du site Web pour plus de détails.\n
   </string -->
-  <!-- TODO string name="r_checkboxes">You must confirm the checkboxes.</string -->
-  <!-- TODO string name="r_i_understood">I fully understood this notice</string -->
-  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <!-- TODO string name="r_continue">CONTINUE</string -->
+  <string name="r_checkboxes">Vous devez confirmer les cases cochées.</string -->
+  <string name="r_i_understood">J'ai bien compris cet avis.</string -->
+  <!-- UNUSED string name="r_disclaimer">J'accepte que le ou les auteurs de l'application ne soient pas responsables de tout dommage ou perte de données.</string -->
+  <string name="r_continue">CONTINUER</string -->
 
     <!-- OK string name="app_name" translatable="false">TopoDroid</string -->
     <!-- UNUSED string name="version_ask">Vous être en train de mettre à jour vers une nouvelle version de TopoDroid.\n Voulez-vous réinstaller les symboles de dessins ?</string -->
@@ -92,7 +92,7 @@ Refer to the web pages for details.\n
     <string name="missing_station">Station manquante</string>
     <string name="station_not_found">Station introuvable</string>
     <string name="shot_not_found">Visée non trouvée</string>
-    <!-- TODO string name="bad_sibling">Bad shot sibling</string -->
+    <string name="bad_sibling">Mauvaise visée parente</string -->
     <!-- UNUSED string name="missing_area">ZONE</string -->
     <!-- UNUSED string name="missing_hint">Merci d\'installer les symboles avec TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LIGNE</string -->
@@ -212,11 +212,11 @@ Refer to the web pages for details.\n
 
     <string name="calib_import_title">Import de l\'étalonnage</string>
     <string name="import_title">Import fichier</string>
-    <!-- TODO string name="export_data_title">Data export</string -->
-    <!-- TODO string name="export_plot_title">Sketch export</string -->
-    <!-- TODO string name="export_overview_title">Overview export</string -->
-    <!-- TODO string name="export_model_title">3D model export</string -->
-    <!-- TODO string name="export_tdconfig_title">Project export</string -->
+    <string name="export_data_title">Exportation de données</string -->
+    <string name="export_plot_title">Exportation de croquis</string -->
+    <string name="export_overview_title">Aperçu de l'exportation</string -->
+    <string name="export_model_title">Exportation de modèle 3D</string -->
+    <string name="export_tdconfig_title">Exportation de projet</string -->
 
     <!-- UNUSED string name="import_wait">Importation de fichier&#8230; Patientez&#8230;</string -->
     <string name="import_already">Relevé déjà importé</string>
@@ -235,8 +235,8 @@ Refer to the web pages for details.\n
     <!-- UNUSED string name="import_zip_wait">L\'importation du fichier zip peut être longue… Patientez…</string -->
     <!-- UNUSED string name="sketch_saving">Exportation de dessin &#8230; Patientez &#8230;</string -->
     <string name="MT_points_none">Pas de point Mobile Topographer</string>
-    <!-- TODO string name="MT_bad_file">Bad MobileTopographer file</string -->
-    <!-- TODO string name="bad_manifest">Bad manifest file</string -->
+    <string name="MT_bad_file">Mauvais fichier MobileTopographer</string -->
+    <string name="bad_manifest">Mauvais fichier Manifest</string -->
 
     <string name="pleasewait">Attendre SVP</string>
     <string name="processing">Travail en cours &#8230;</string>
@@ -249,8 +249,8 @@ Refer to the web pages for details.\n
 <string name="illegal_data_value">Valeur de donnée incorrecte</string>
 <string name="photo_title">PHOTO</string>
 <string name="photo_text">Saisir un commentaire</string>
-    <!-- TODO string name="photo_failed">Failed photo</string -->
-    <!-- TODO string name="photo_max_captures">Reached maximum capture limit</string -->
+<string name="photo_failed">Échec de la photo</string -->
+<string name="photo_max_captures">Limite de capture maximale atteinte</string -->
 <string name="label_title">ÉTIQUETTE</string>
 <string name="label_text">Saisissez le texte</string>
 <!-- UNUSED string name="altitude">Alt. </string -->
@@ -290,8 +290,8 @@ Refer to the web pages for details.\n
     <string name="error_name_exists">Projet déjà existant</string>
     <string name="error_name_invalid">Nom de projet invelide</string>
 <string name="error_name_required">Nom nécessaire</string>
-    <!-- TODO string name="error_name_duplicate">Duplicate name</string -->
-    <!-- TODO string name="error_no_section_in_section">Xsection in xsection not allowed</string -->
+    <string name="error_name_duplicate">Nom en double</string -->
+    <string name="error_no_section_in_section">Xsection dans xsection non autorisée</string -->
 
 <!-- UNUSED string name="error_dir_exists">Le répertoire existe déjà</string -->
     <!-- UNUSED string name="error_nick_required">X-Section name required</string -->
