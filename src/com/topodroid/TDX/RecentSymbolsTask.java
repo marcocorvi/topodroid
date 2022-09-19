@@ -33,7 +33,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
   RecentSymbolsTask( Context context, ItemDrawer drawer, DataHelper data, int what )
   {
     mDrawer  = drawer;
-    mData    = TopoDroidApp.mData; // TH2EDIT data;
+    mData    = data;
     mWhat    = what;
   }
 
@@ -121,6 +121,7 @@ class RecentSymbolsTask extends AsyncTask<Void, Integer, Boolean>
     BrushManager.setRecentLines(  ItemDrawer.mRecentLine );
     BrushManager.setRecentAreas(  ItemDrawer.mRecentArea );
 
+    if ( mData == null ) return;
     String names = mData.getValue( "recent_points" );
     if ( names != null ) {
       String[] points = names.split(" ");

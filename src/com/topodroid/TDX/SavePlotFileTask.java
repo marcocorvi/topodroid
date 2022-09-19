@@ -149,7 +149,11 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
       // DrawingIO.exportTherion( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false ); // single sketch
       ParcelFileDescriptor pfd = TDsafUri.docWriteFileDescriptor( mUri );
       if ( pfd == null ) return false;
+      float point_spacing = TDSetting.mBezierStep; // TH2EDIT save params that are temporarely changed
       try {
+        if ( mTh2Edit ) { // TH2EDIT special params values:
+          TDSetting.mBezierStep = 0.0f;
+        }
         // BufferedWriter bw = new BufferedWriter( (pfd != null)? TDsafUri.docFileWriter( pfd ) : new FileWriter( TDPath.getTh2FileWithExt( mFullName ) ) );
         BufferedWriter bw = new BufferedWriter( TDsafUri.docFileWriter( pfd ) );
         DrawingIO.exportTherion( mManager, mType, bw, mFullName, PlotType.projName( mType ), mProjDir, false, mTh2Edit ); // single sketch
@@ -160,6 +164,9 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
         e.printStackTrace(); 
         return false;
       } finally {
+        if ( mTh2Edit ) { // TH2EDIT restore params
+          TDSetting.mBezierStep = point_spacing;
+        }
         TDsafUri.closeFileDescriptor( pfd );
       }
       return true; 
@@ -196,7 +203,7 @@ class SavePlotFileTask extends AsyncTask<Intent,Void,Boolean>
           case TDConst.SURVEY_FORMAT_TH2:
             // TDLog.v("EXPORT AUTO th2 " + mFullName );
             File file2 = TDPath.getOutExportFile( mFullName + ".th2" ); // FIXME move to DrawingIO
-            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false, mTh2Edit ); // false= single sketch
+            DrawingIO.exportTherionExport( mManager, mType, file2, mFullName, PlotType.projName( mType ), mProjDir, false, false ); // false= single sketch
             break;
           case TDConst.SURVEY_FORMAT_DXF:
             if ( mParent.get() != null /* && ! mParent.get().isFinishing() */ ) { // APP_OUT_DIR was ! parent.isFinishing()
