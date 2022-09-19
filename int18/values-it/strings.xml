@@ -1074,6 +1074,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_roundtrip">Andata e Ritorno</string>
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
+    <!-- TODO string name="export_spacing_th">Point spacing</string -->
     <string name="export_splays">Splay</string>
     <string name="export_splays_named">Splay con nome</string>
     <string name="export_stations">Capisaldi</string>

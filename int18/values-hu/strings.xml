@@ -1082,6 +1082,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <!-- UNUSED string name="export_scale_png">Felbontás</string -->
     <string name="export_scale_th">Skála 1 :</string>
+    <!-- TODO string name="export_spacing_th">Point spacing</string -->
     <string name="export_splays">Segédmérések</string>
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>

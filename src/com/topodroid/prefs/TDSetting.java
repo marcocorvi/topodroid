@@ -3731,4 +3731,15 @@ public class TDSetting
     return ret;
   }
 
+  /** set the lintpoint spacing (Bezier step)
+   * @param step    point spacing [m]
+   */
+  public static String setBezierStep( float step )
+  {
+    String ret = null;
+    if ( step < 0 ) { step = 0; ret="0"; }
+    mBezierStep = step;
+    return ret;
+  }
+
 }

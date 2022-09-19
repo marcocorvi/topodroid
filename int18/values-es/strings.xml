@@ -1074,6 +1074,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="export_roundtrip">Ida y vuelta </string>
     <!-- UNUSED string name="export_scale_png">Resolución </string -->
     <string name="export_scale_th">Escala 1:</string>
+    <!-- TODO string name="export_spacing_th">Point spacing</string -->
     <string name="export_splays">Tomas</string>
     <string name="export_splays_named">Mostrar con nombre</string>
     <string name="export_stations">Estaciones</string>

@@ -1075,6 +1075,7 @@
     <string name="export_roundtrip">Roundtrip</string>
     <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
+    <!-- TODO string name="export_spacing_th">Point spacing</string -->
     <string name="export_splays">Сплеи</string>
     <string name="export_splays_named">Именованые сплеи</string>
     <string name="export_stations">Пикеты</string>

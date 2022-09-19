@@ -243,7 +243,12 @@ public class ExportDialogPlot extends MyDialog
           try { 
             TDSetting.setExportScale( Integer.parseInt( ((EditText) findViewById( R.id.therion_scale )).getText().toString() ) );
           } catch ( NumberFormatException e ) {
-            TDLog.Error("Not integer export scale");
+            TDLog.Error("export scale: not integer");
+          }
+          try { 
+            TDSetting.setBezierStep( Float.parseFloat( ((EditText) findViewById( R.id.therion_spacing )).getText().toString() ) );
+          } catch ( NumberFormatException e ) {
+            TDLog.Error("export spacing: bad value");
           }
         }
         break;
@@ -317,6 +322,7 @@ public class ExportDialogPlot extends MyDialog
     ((CheckBox) findViewById( R.id.therion_splays )).setChecked( TDSetting.mTherionSplays );
     ((CheckBox) findViewById( R.id.therion_xvi )).setChecked( TDSetting.mTherionXvi );
     ((EditText) findViewById( R.id.therion_scale )).setText( Integer.toString( TDSetting.mTherionScale ) );
+    ((EditText) findViewById( R.id.therion_spacing )).setText( Float.toString( TDSetting.mBezierStep ) );
 
     ((CheckBox) findViewById( R.id.csurvey_prefix )).setChecked( TDSetting.mExportStationsPrefix );
     

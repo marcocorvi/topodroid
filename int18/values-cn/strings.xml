@@ -1078,6 +1078,7 @@
     <string name="export_roundtrip">往返</string>
     <!-- UNUSED string name="export_scale_png">分辨率</string -->
     <string name="export_scale_th">比例 1 :</string>
+    <!-- TODO string name="export_spacing_th">Point spacing</string -->
     <string name="export_splays">辐测</string>
     <string name="export_splays_named">辐测名称</string>
     <string name="export_stations">测量点</string>

@@ -54,6 +54,26 @@
         android:importantForAutofill="no"
         />
     </LinearLayout>
+    <LinearLayout android:id="@+id/layout_therion_spacing"
+      android:layout_width="match_parent" 
+      android:layout_height="wrap_content"
+      android:orientation="horizontal" 
+      >
+      <TextView 
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:text="@string/export_spacing_th"
+        android:labelFor="@+id/therion_spacing"
+        />
+      <EditText android:id="@id/therion_spacing"
+        android:layout_width="0dp" 
+        android:layout_weight="50" 
+        android:layout_height="wrap_content"
+        android:inputType="number"
+        android:importantForAutofill="no"
+        />
+    </LinearLayout>
   </LinearLayout>
 
   <LinearLayout android:id="@+id/layout_svg"

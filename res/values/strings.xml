@@ -1087,6 +1087,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="export_roundtrip">Roundtrip</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
     <string name="export_scale_th">Scale 1 :</string>
+    <string name="export_spacing_th">Point spacing</string>
     <string name="export_splays">Splays</string>
     <string name="export_splays_named">Named splays</string>
     <string name="export_stations">Stations</string>
