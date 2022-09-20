@@ -961,7 +961,7 @@ public class TDPath
   // MOVE_TO_6 ---------------------------------------------------------------
   // /** transfer from 5.1.40 to 6.1.xx
   //  * @param context    context
-  //  * @note when this function is called the external TDX dir does not exists
+  //  * @note when this function is called the external TDX dir does not exist
   //  */
   // public static void moveTo6( Context context /* , TextView tv */ )
   // {

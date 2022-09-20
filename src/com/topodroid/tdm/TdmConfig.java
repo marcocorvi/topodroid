@@ -286,14 +286,14 @@ class TdmConfig extends TdmFile
   }
 
   /** read the config file
-   * @note if the file does not exists creates it and write an empty tdconfig file
+   * @note if the file does not exist creates it and write an empty tdconfig file
    */
   private void readFile( )
   {
     String filepath = getFilepath();
     try {
       BufferedReader br = TDFile.getTopoDroidFileReader( filepath );
-      if ( br == null ) { // file does not exists (or is not readable)
+      if ( br == null ) { // file does not exist (or is not readable)
         TDLog.Error("file no-exist or no-read: " + filepath );
         mSurveyName = getNameFromFilepath( filepath );
         writeTdmConfig( true );

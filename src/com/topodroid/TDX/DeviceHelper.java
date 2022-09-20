@@ -774,7 +774,7 @@ public class DeviceHelper extends DataSetObservable
 
   // ----------------------------------------------------------------------
   /* Set the current survey/calib name.
-   * If the survey/calib name does not exists a new record is inserted in the table
+   * If the survey/calib name does not exist a new record is inserted in the table
    */
 
   /** @return the name field of a given ID

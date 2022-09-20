@@ -12,7 +12,9 @@ It is used in three different situations:
 </ul>
 
 In the last case the dialog displays also an histogram of the residual errors of the calibration data,
-the average error (and the "delta" of the original algorithm), the std deviation, the maximum error, and the number of iterations taken by the calibration computation.<br><p>
+the average error (and the "delta" of the original algorithm), the standard deviation of the error distribution,
+the maximum error, and the number of iterations taken by the calibration computation.<br>
+Assuming that the azimuth-clino error distribution is normal, the standard deviation of the errors should be slightly over half the average value.<br><p>
 
 The error of a calibration data is the angle between the data direction and the average direction of the group the data belongs to, after having taken the calibration correction into account. The errors are reported in degrees.<br><p>
 
@@ -26,5 +28,6 @@ It gives an estimate of the calibration accuracy (precision of the instrument):
 This dialog has a button to <b>write</b> the coefficients to the DistoX.<br>
 A warning is given if the data direction distribution is below 95%, or the calibration average error is above 0.5&deg;.
 <br><p>
+
 
 </body></html>

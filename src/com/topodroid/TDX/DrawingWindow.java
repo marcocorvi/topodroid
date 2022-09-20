@@ -4970,7 +4970,7 @@ public class DrawingWindow extends ItemDrawer
         return;
       }
     }
-    // cross-section does not exists yet
+    // cross-section does not exist yet
     String section_id = mApp_mData.getNextSectionId( TDInstance.sid );
     currentLine.addOption( "-id " + section_id );
     mDrawingSurface.addDrawingPath( currentLine );
@@ -5260,7 +5260,7 @@ public class DrawingWindow extends ItemDrawer
    * @param horiz  (?) whether the section is horizontal 
    * @param nick   section comment
    *
-   * @note if the xsection does not exists it is created
+   * @note if the xsection does not exist it is created
    */
   void openXSection( DrawingStationName st, String st_name, long type, float azimuth, float clino, boolean horiz, String nick )
   {

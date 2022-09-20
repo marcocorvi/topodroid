@@ -715,7 +715,7 @@ public class MainWindow extends Activity
   public void onCreate(Bundle savedInstanceState)
   {
     super.onCreate( savedInstanceState );
-    TDLog.v("MAIN on Create");
+    // TDLog.v("MAIN on Create");
 
     TDandroid.setScreenOrientation( this );
 
@@ -1083,7 +1083,7 @@ public class MainWindow extends Activity
   {
     super.onStart();
     // restoreInstanceFromFile();
-    TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
+    // TDLog.v( "MAIN on Start: check BT " + do_check_bt + " enabled " + DeviceUtil.isAdapterEnabled() );
     if ( ! TDandroid.canManageExternalStorage( this ) ) {
       TDandroid.requestExternalStorage( this, this );
     }
@@ -1125,7 +1125,7 @@ public class MainWindow extends Activity
     // } else
     {
       // the database is opened after the second step of envs initialization
-      TDLog.v("MAIN can manage external storage - has db " + TopoDroidApp.hasTopoDroidDatabase() );
+      // TDLog.v("MAIN can manage external storage - has db " + TopoDroidApp.hasTopoDroidDatabase() );
       // ++ mRequestPermissionTime;
       // int perms = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
 
@@ -1137,7 +1137,7 @@ public class MainWindow extends Activity
         // resetButtonBar();
       } else {
         ++ mRequestPermissionTime;
-        TDLog.v("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
+        TDLog.Error("MAIN cannot run - has db " + TopoDroidApp.hasTopoDroidDatabase() + " request perms time " + mRequestPermissionTime );
         if ( TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime ) == 0 ) {
           mApp.initEnvironmentFirst( );
           // TDLog.v("MAIN show init dialogs [2]");
@@ -1164,7 +1164,7 @@ public class MainWindow extends Activity
   public synchronized void onResume() 
   {
     super.onResume();
-    TDLog.v("MAIN on Resume");
+    // TDLog.v("MAIN on Resume");
     // resetButtonBar();  // 6.0.33
     // setMenuAdapter();
     // closeMenu();
@@ -1435,8 +1435,8 @@ public class MainWindow extends Activity
 	}
         ++ mRequestPermissionTime;
         int not_granted = TDandroid.createPermissions( mApp, mActivity, mRequestPermissionTime );
-        TDLog.v("PERM " + "MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
         if ( ! TDandroid.canRun( mApp, this ) ) { // if ( not_granted > 0 /* && ! say_dialogR */ )
+          TDLog.Error("MAIN perm finish setup with " + not_granted + " at time " + mRequestPermissionTime );
           // TDToast.makeLong( "Permissions not granted. Goodbye" );
           if ( mRequestPermissionTime > 2 ) { 
             finish();

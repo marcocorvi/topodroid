@@ -231,11 +231,11 @@ public class DataHelper extends DataSetObservable
   {
     String db_name = TDPath.getDatabase(); // DistoX-SAF
     if ( myDB != null ) {
-      TDLog.v( "DB open: app already has database " + db_name );
+      // TDLog.v( "DB open: app already has database " + db_name );
       return;
     }
     try {
-      TDLog.v("DB ... try to open RW " + db_name);
+      // TDLog.v("DB ... try to open RW " + db_name);
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         checkUpgrade();
@@ -247,10 +247,10 @@ public class DataHelper extends DataSetObservable
     }
     
     try {
-      TDLog.v("DB ... try to open RW+CREATE " + db_name );
+      // TDLog.v("DB ... try to open RW+CREATE " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE | SQLiteDatabase.CREATE_IF_NECESSARY );
       if ( myDB != null ) {
-        TDLog.v( "DB opened: create tables");
+        // TDLog.v( "DB opened: create tables");
         DistoXOpenHelper.createTables( myDB );
         myDB.setVersion( TDVersion.DATABASE_VERSION );
       } else {
@@ -269,9 +269,9 @@ public class DataHelper extends DataSetObservable
     int oldVersion = myDB.getVersion();
     int newVersion = TDVersion.DATABASE_VERSION;
     boolean need_upgrade = myDB.needUpgrade( TDVersion.DATABASE_VERSION ); 
-    TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
+    // TDLog.v( "DB: version " + oldVersion + " -> " + newVersion + " upgrade: " + need_upgrade );
     if ( oldVersion < newVersion ) {
-      TDLog.v( "DB updating tables ...");
+      // TDLog.v( "DB updating tables ...");
       DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
       myDB.setVersion( TDVersion.DATABASE_VERSION );
     }
@@ -287,14 +287,14 @@ public class DataHelper extends DataSetObservable
   private void openDatabaseWithPath( Context context, String db_name )
   {
     try {
-      TDLog.v( "BD-path open " + db_name );
+      // TDLog.v( "BD-path open " + db_name );
       myDB = SQLiteDatabase.openDatabase( db_name, null, SQLiteDatabase.OPEN_READWRITE );
       if ( myDB != null ) {
         int oldVersion = myDB.getVersion();
         int newVersion = TDVersion.DATABASE_VERSION;
-        TDLog.v( "DB-path version: " + oldVersion + " -> " + newVersion );
+        // TDLog.v( "DB-path version: " + oldVersion + " -> " + newVersion );
         if ( oldVersion < newVersion ) {
-          TDLog.v( "DB-path updating tables ...");
+          // TDLog.v( "DB-path updating tables ...");
           DistoXOpenHelper.updateTables( myDB, oldVersion, newVersion );
           myDB.setVersion( TDVersion.DATABASE_VERSION );
         }
@@ -3986,7 +3986,7 @@ public class DataHelper extends DataSetObservable
 
   // ----------------------------------------------------------------------
   /* Set the current survey/calib name.
-   * If the survey/calib name does not exists a new record is inserted in the table
+   * If the survey/calib name does not exist a new record is inserted in the table
    */
 
   private String getNameFromId( String table, long id )
@@ -5861,7 +5861,7 @@ public class DataHelper extends DataSetObservable
   /** @return a station
    * @param sid          survey ID
    * @param name         station name (ID)
-   * @param presentation station presentation string: if non-null and the station does not exists it is created
+   * @param presentation station presentation string: if non-null and the station does not exist it is created
    */
   StationInfo getStation( long sid, String name, String presentation )
   {

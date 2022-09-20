@@ -232,7 +232,7 @@ public class TdmSurvey
           fs = getStation( sh.mFrom );
           ts = getStation( sh.mTo );
           if ( fs != null ) {
-            if ( ts == null ) {  // FROM exists and TO does not exists
+            if ( ts == null ) {  // FROM exists and TO does not exist
               float h = (float)Math.cos( sh.mClino ) * sh.mLength;
               float v = (float)Math.sin( sh.mClino ) * sh.mLength;
               float e =   h * (float)Math.sin( sh.mBearing + mDeclination );
@@ -244,7 +244,7 @@ public class TdmSurvey
 	      // skip: both shot stations exist
 	    }
             sh.setTdmStations( fs, ts );
-          } else if ( ts != null ) { // FROM does not exists, but TO exists
+          } else if ( ts != null ) { // FROM does not exist, but TO exists
             float h = (float)Math.cos( sh.mClino ) * sh.mLength;
             float v = (float)Math.sin( sh.mClino ) * sh.mLength;
             float e =   h * (float)Math.sin( sh.mBearing + mDeclination );

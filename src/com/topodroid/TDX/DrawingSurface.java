@@ -1093,7 +1093,7 @@ public class DrawingSurface extends SurfaceView // TH2EDIT was package
           TDLog.Error( "file " + tdr1 + " failed to load" );
         }
       } else {
-        TDLog.Error( "file " + tdr1 + " does not exists");
+        TDLog.Error( "file " + tdr1 + " does not exist");
       }
     }
     return ret;

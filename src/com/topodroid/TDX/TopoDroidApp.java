@@ -1060,7 +1060,7 @@ public class TopoDroidApp extends Application
     // ***** DRAWING TOOLS SYMBOLS
     // TDLog.Profile("TDApp symbols");
 
-    // if one of the symbol dirs does not exists all of then are restored
+    // if one of the symbol dirs does not exist all of then are restored
     String version = mDData.getValue( "version" );
     // TDLog.v("PATH " + "version " + version + " " + TDVersion.string() );
     // TDLog.v( "DData version <" + version + "> TDversion <" + TDVersion.string() + ">" );

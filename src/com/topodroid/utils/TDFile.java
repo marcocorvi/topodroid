@@ -94,7 +94,7 @@ public class TDFile
   }
 
   /** ensure that man-dir exists and is writable
-   * @return true if success, false if man-dir does not exists
+   * @return true if success, false if man-dir does not exist
    */
   public static boolean checkManDir( )
   { 
@@ -142,7 +142,7 @@ public class TDFile
   public static boolean hasTopoDroidFile( String dirpath, String name )
   { return name != null && (new File( dirpath + "/" + name )).exists(); }
 
-  /** @return length of the given file (negative if name is null, 0 if the file does not exists)
+  /** @return length of the given file (negative if name is null, 0 if the file does not exist)
    * @param name   filename
    */
   public static long getTopoDroidFileLength( String name )
@@ -232,7 +232,7 @@ public class TDFile
   {
     File file = new File( name ); 
     if ( ! file.exists() || ! file.canRead() ) {
-      TDLog.Error("file does not exists or cannot read file " + name );
+      TDLog.Error("file does not exist or cannot read file " + name );
       return null;
     }
     try {
@@ -364,7 +364,7 @@ public class TDFile
 
   /** @return the current base directory
    * @param type ...
-   * @param create whether to create the directory if it does not exists
+   * @param create whether to create the directory if it does not exist
    */
   private static File getCBD( String type, boolean create )
   {
@@ -647,7 +647,7 @@ public class TDFile
   }
 
   /** rename a file
-   * @param oldname   old pathname (it's ok if it does not exists)
+   * @param oldname   old pathname (it's ok if it does not exist)
    * @param newname   new pathname
    * @pre oldname exists AND ! newname exists
    */
