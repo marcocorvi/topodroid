@@ -1082,7 +1082,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="export_roundtrip">Roundtrip</string><!--Roundtrip-->
     <!-- UNUSED string name="export_scale_png">Felbontás</string -->
     <string name="export_scale_th">Skála 1 :</string>
-    <!-- TODO string name="export_spacing_th">Point spacing</string -->
+    <string name="export_spacing_th">Pont távolság</string>
     <string name="export_splays">Segédmérések</string>
     <string name="export_splays_named">Elnevezett segédmérések</string>
     <string name="export_stations">Mérési pontok</string>
@@ -1495,8 +1495,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_mag_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses térerősségében</string>
   <string name="pref_dip_thr_title">Max. INCL hiba</string>
   <string name="pref_dip_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses lehajlásában</string>
-  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
-  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
+  <string name="pref_sibling_thr_title">Ismétlés küszöb</string>
+  <string name="pref_sibling_thr_summary">Ismételt mérések tűrése [&#37;]</string>
   
   <string name="pref_leg_title">Poligonmérések tűrése</string>
   <string name="pref_leg_summary">Ismételt poligonmérések közötti tűrés</string>
