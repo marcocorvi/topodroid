@@ -142,7 +142,7 @@ public class DistoXStationName
 
   /** @return the increment of a string
    * @param name   string to increment
-   * @note used by ShotDialog
+   * @note used by ShotEditDialog
    */
   static String incrementName( String name )
   {

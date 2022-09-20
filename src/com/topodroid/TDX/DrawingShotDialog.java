@@ -369,7 +369,7 @@ class DrawingShotDialog extends MyDialog
   @Override
   public void onClick(View view)
   {
-    // TDLog.Log( TDLog.LOG_INPUT, "DrawingShotDialog onClick() " + view.toString() );
+    // TDLog.v( "Drawing Shot Dialog onClick() " + view.toString() );
     CutNPaste.dismissPopup();
 
     Button b = (Button)view;

@@ -685,7 +685,7 @@ public class ShotWindow extends Activity
     DBlock nextBlock = null;
     prevBlock = getPreviousLegShot( blk, false );
     nextBlock = getNextLegShot( blk, false );
-    (new ShotDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
+    (new ShotEditDialog( mActivity, this, pos, blk, prevBlock, nextBlock )).show();
   }
 
   /** react to a user long-tap on an item (menu entry)
@@ -786,7 +786,7 @@ public class ShotWindow extends Activity
     updateDisplay();
   }
 
-  // FIXME_X3_SPLAY from ShotDialog
+  // FIXME_X3_SPLAY from ShotEditDialog
   // @param leg1  new leg type
   void updateSplayLegType( DBlock blk, long leg1 )
   {
@@ -812,7 +812,7 @@ public class ShotWindow extends Activity
     clearMultiSelect();
   }
 
-  // called by ShotDialog "More" button
+  // called by ShotEditDialog "More" button
   void onBlockLongClick( DBlock blk )
   {
     mShotId = blk.mId; // save shot id
@@ -1939,7 +1939,7 @@ public class ShotWindow extends Activity
    * @param leg     leg data-helper value (0 normal, 1 sec, 2 x-splay, 3 back, 4 h-splay, 5 v-splay
    * @param comment shot comment
    * @param blk     shot data block
-   * @note called only by ShotDialog 
+   * @note called only by ShotEditDialog 
    */
   void updateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
@@ -2367,7 +2367,7 @@ public class ShotWindow extends Activity
     return strike_dip;
   }
   
-  // NOTE called only by ShotDialog.saveDBlock() with to.length() == 0 ie to == "" and blk splay shot
+  // NOTE called only by ShotEditDialog.saveDBlock() with to.length() == 0 ie to == "" and blk splay shot
   // update stations for all splay blocks with sme from as this block
   // @param extend   this block new extend
   // @param flag     this block new flag
@@ -2531,7 +2531,7 @@ public class ShotWindow extends Activity
 
   // ------------------------------------------------------------------
 
-  // only called by ShotDialog
+  // only called by ShotEditDialog
   // @param blk   shot after which to renumber
   // no need to synchronize
   void renumberShotsAfter( DBlock blk )

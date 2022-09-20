@@ -97,7 +97,7 @@
   <string name="ScrapOutlineDialog" translatable="false">page_scrap_outline.htm</string>
   <string name="SensorEditDialog" translatable="false">page_sensors_edit.htm</string>
   <string name="ShotDeleteDialog" translatable="false">page_shot_edit2.htm</string>
-  <string name="ShotDialog" translatable="false">page_shot_edit1.htm</string>
+  <string name="ShotEditDialog" translatable="false">page_shot_edit1.htm</string>
   <string name="ShotDisplayDialog" translatable="false">page_displaymode.htm</string>
   <string name="ShotNewDialog" translatable="false">page_man_data.htm</string>
   <!-- FIXME_SKETCH_3D string name="Sketch3dNewDialog" translatable="false">page_todo.htm</string -->

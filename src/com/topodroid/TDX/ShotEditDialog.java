@@ -1,4 +1,4 @@
-/* @file ShotDialog.java
+/* @file ShotEditDialog.java
  *
  * @author marco corvi
  * @date nov 2011
@@ -48,9 +48,9 @@ import android.widget.LinearLayout;
 import android.view.View;
 // import android.graphics.drawable.BitmapDrawable;
 
-class ShotDialog extends MyDialog
-                 implements View.OnClickListener
-                          , View.OnLongClickListener
+class ShotEditDialog extends MyDialog
+                     implements View.OnClickListener
+                     , View.OnLongClickListener
 {
   private final ShotWindow mParent;
   private DBlock mBlk;
@@ -131,11 +131,11 @@ class ShotDialog extends MyDialog
   private boolean mFirst;
   private int splay_type; // 0 plain, 2 X, 4 H, 5 V see LegType
 
-  ShotDialog( Context context, ShotWindow parent, int pos, DBlock blk,
+  ShotEditDialog( Context context, ShotWindow parent, int pos, DBlock blk,
               DBlock prev, DBlock next
             )
   {
-    super( context, null, R.string.ShotDialog ); // null app
+    super( context, null, R.string.ShotEditDialog ); // null app
     mParent = parent;
     mPos = pos;
     mFirst = true;
@@ -751,7 +751,6 @@ class ShotDialog extends MyDialog
     MyKeyboard.close( mKeyboard );
 
     Button b = (Button) v;
-    // TDLog.Log( TDLog.LOG_INPUT, "ShotDialog onClick button " + b.getText().toString() );
 
     if ( b == mRBleft ) {
       mRBvert.setChecked( false );
