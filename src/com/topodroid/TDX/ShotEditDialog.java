@@ -531,6 +531,8 @@ class ShotEditDialog extends MyDialog
     mParent.mOnOpenDialog = false;
   }
 
+  /** save the changes to the DBlock
+   */
   private void saveDBlock()
   {
     // add LRUD at station if any is checked and data have been entered
@@ -668,7 +670,6 @@ class ShotEditDialog extends MyDialog
       //     // TDLog.v("SHOT " + "parent to highlight " + mBlk.mFrom + " " + mBlk.mTo );
       //     mParent.highlightBlock( mBlk );
       //   }
-
       }
     }
 

@@ -1483,6 +1483,8 @@ debe ajustarlos a sus necesidades./n/n
   <string name="pref_mag_thr_summary">Precisión sobre las mediciones del campo magnético</string>
   <string name="pref_dip_thr_title">Tolerancia magnética de la inclinación</string>
   <string name="pref_dip_thr_summary">Precisión sobre mediciones magnética de la inclinación</string>
+  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
+  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
 
   <string name="pref_leg_title">Precisión de visual</string>
   <string name="pref_leg_summary">Precisión entre las mediciones de una visual</string>

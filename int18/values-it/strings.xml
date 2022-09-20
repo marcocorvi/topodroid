@@ -1074,7 +1074,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="export_roundtrip">Andata e Ritorno</string>
     <!-- UNUSED string name="export_scale_png">Risoluzione</string -->
     <string name="export_scale_th">Scala 1 :</string>
-    <!-- TODO string name="export_spacing_th">Point spacing</string -->
+    <string name="export_spacing_th">Spazio fra punti Therion</string>
     <string name="export_splays">Splay</string>
     <string name="export_splays_named">Splay con nome</string>
     <string name="export_stations">Capisaldi</string>
@@ -1483,6 +1483,8 @@ Fai riferimento alle pagine web per i dettagli.\n
   <string name="pref_mag_thr_summary">Tolleranza valori di campo magnetico</string>
   <string name="pref_dip_thr_title">Tolleranza immersione magnetica</string>
   <string name="pref_dip_thr_summary">Tolleranza valori di immersione magnetica</string>
+  <string name="pref_sibling_thr_title">Soglia di dissimilarità</string>
+  <string name="pref_sibling_thr_summary">Soglia per la dissimilarità fra battute [&#37;]</string>
 
   <string name="pref_leg_title">Tolleranza battute</string>
   <string name="pref_leg_summary">Tolleranza tra tiri di una battuta</string>

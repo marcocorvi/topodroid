@@ -557,11 +557,14 @@ public class TDSetting
 
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // DATA ACCURACY
-  public static float mAccelerationThr = 1; // acceleration threshold (shot quality)
-  public static float mMagneticThr     = 1; // magnetic threshold
-  public static float mDipThr          = 2; // dip threshold
+  public static float mAccelerationThr =  1; // acceleration threshold (shot quality) [%]
+  public static float mMagneticThr     =  1; // magnetic threshold [%]
+  public static float mDipThr          =  2; // dip threshold [deg]
+  private static float mSiblingThr     = 10; // sibling threshold [%]
+  public static float mSiblingThrA     = 0.56f * 10; // sibling angle threshold [%]
+  public static float mSiblingThrD     = 0.10f;      // sibling distance threshold [%]
   public static float mMaxShotLength   = 50; // max length of a shot (if larger it is overshoot)
-  public static float mMinLegLength    = 0; // min length of a leg (if shorter it is undershoot)
+  public static float mMinLegLength    =  0; // min length of a leg (if shorter it is undershoot)
   // - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
   // AUTOWALLS
   // public static final int WALLS_NONE    = 0;
@@ -588,6 +591,22 @@ public class TDSetting
       if ( i >= 0 && i <= 2 ) mZoomCtrl = i;
       if ( mZoomCtrl == 0 && ! is_multitouch ) mZoomCtrl = 1;
     } catch ( NumberFormatException e ) { }
+  }
+
+  /** set the sibling thresholds 
+   * @param thr   main sibling threshold
+   */
+  private static String setSiblingThr( float thr ) 
+  {
+    String ret = null;
+    if ( thr <= 1 ) {
+      thr = 10.0f;
+      ret = TDString.TEN;
+    }
+    mSiblingThr = thr;
+    mSiblingThrA = thr * 0.56f;
+    mSiblingThrD = thr * 0.01f;
+    return ret;
   }
 
   // NO_PNG background color RGB_565
@@ -1225,6 +1244,7 @@ public class TDSetting
     mAccelerationThr = tryFloat( prefs, keyAcc[0], defAcc[0] ); // DISTOX_ACCEL_PERCENT
     mMagneticThr     = tryFloat( prefs, keyAcc[1], defAcc[1] ); // DISTOX_MAG_PERCENT
     mDipThr          = tryFloat( prefs, keyAcc[2], defAcc[2] ); // DISTOX_DIP_THR
+    setSiblingThr( tryFloat( prefs, keyAcc[3], defAcc[3] ) ); // DISTOX_SIBLING_PERCENT
 
     String[] keyLoc = TDPrefKey.LOCATION;
     String[] defLoc = TDPrefKey.LOCATIONdef;
@@ -2284,6 +2304,8 @@ public class TDSetting
     } else if ( k.equals( key[ 2 ] ) ) { // DISTOX_DIP_THR
       mDipThr          = tryFloatValue( hlp, k, v, def[2] );
       if ( mDipThr < 0 ) { mDipThr = 0; ret = TDString.ZERO; }
+    } else if ( k.equals( key[ 3 ] ) ) { // DISTOX_SIBLING_PERCENT
+      ret = setSiblingThr( tryFloatValue( hlp, k, v, def[3] ) );
     } else {
       TDLog.Error("missing ACCURACY key: " + k );
     }
@@ -2971,7 +2993,7 @@ public class TDSetting
       pw.printf(Locale.US, "Actions: snap %c, curve %c, straight %c %.1f\n", tf(mLineSnap), tf(mLineCurve), tf(mLineStraight), mReduceAngle );
       pw.printf(Locale.US, "Splay: alpha %d, color %d, splay-dash %d, vert %.1f, horiz %.1f, section %.1f color %d %d\n",
         mSplayAlpha, mDiscreteColors, mDashSplay, mVertSplay, mHorizSplay, mSectionSplay, mSplayDashColor, mSplayDotColor );
-      pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f\n", mAccelerationThr, mMagneticThr, mDipThr );
+      pw.printf(Locale.US, "Accuracy: G %.2f, M %.2f, dip %.2f, sibling %.2f\n", mAccelerationThr, mMagneticThr, mDipThr, mSiblingThr );
       // pw.printf(Locale.US, "Sketch: type %d, size %.2f, extrude %.2f\n", mSketchModelType, mSketchSideSize, mDeltaExtrude );
       // AUTOWALLS
       // pw.printf(Locale.US, "Walls: type %d, thr P %.2f E %.2f, close %.2f, step %.2f, concave %.2f\n",
@@ -3688,6 +3710,9 @@ public class TDSetting
             mAccelerationThr = getFloat( vals, 2, 1.0f ); setPreference( editor, "DISTOX_ACCEL_PERCENT", mAccelerationThr );
             mMagneticThr     = getFloat( vals, 4, 1.0f ); setPreference( editor, "DISTOX_MAG_PERCENT",   mMagneticThr );
             mDipThr          = getFloat( vals, 6, 2.0f ); setPreference( editor, "DISTOX_DIP_THR",       mDipThr );
+            if ( vals.length > 8 ) {
+              mSiblingThr    = getFloat( vals, 8, 10.0f ); setPreference( editor, "DISTOX_SIBLING_PERCENT", mSiblingThr );
+            }
           }
           continue;
         }

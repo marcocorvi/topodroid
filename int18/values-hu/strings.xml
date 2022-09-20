@@ -1495,6 +1495,8 @@ A részletekért keresse fel a weboldalakat.\n
   <string name="pref_mag_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses térerősségében</string>
   <string name="pref_dip_thr_title">Max. INCL hiba</string>
   <string name="pref_dip_thr_summary">Eltérések tűrése százalékban a megismételt mérések mágneses lehajlásában</string>
+  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
+  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
   
   <string name="pref_leg_title">Poligonmérések tűrése</string>
   <string name="pref_leg_summary">Ismételt poligonmérések közötti tűrés</string>

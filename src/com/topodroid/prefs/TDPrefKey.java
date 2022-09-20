@@ -952,26 +952,30 @@ public class TDPrefKey
   public static String[] ACCURACY = { // [3]
     "DISTOX_ACCEL_PERCENT", // shot quality G threshold [%]
     "DISTOX_MAG_PERCENT",   // shot quality M threhsold [%]
-    "DISTOX_DIP_THR",       // shot qualoity dip threshold [deg]
+    "DISTOX_DIP_THR",       // shot quality dip threshold [deg]
+    "DISTOX_SIBLING_PERCENT", // shot sibling threshold [%]
     null
   };
 
   static int[] ACCURACYtitle = {
     R.string.pref_accel_thr_title,
     R.string.pref_mag_thr_title,
-    R.string.pref_dip_thr_title
+    R.string.pref_dip_thr_title,
+    R.string.pref_sibling_thr_title,
   };
 
   static int[] ACCURACYdesc = {
     R.string.pref_accel_thr_summary,
     R.string.pref_mag_thr_summary,
-    R.string.pref_dip_thr_summary
+    R.string.pref_dip_thr_summary,
+    R.string.pref_sibling_thr_summary,
   };
 
   public static String[] ACCURACYdef = {
     "1.0",
     "1.0",
-    "2.0"
+    "2.0",
+    "10.0"
   };
 
 

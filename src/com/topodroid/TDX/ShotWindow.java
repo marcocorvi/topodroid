@@ -1908,6 +1908,12 @@ public class ShotWindow extends Activity
     return null;
   }
 
+  /** update the (normal) data of a shot
+   * @param d    length
+   * @param b    azimuth
+   * @param c    clino
+   * @param blk  shot block
+   */
   void updateShotDistanceBearingClino( float d, float b, float c, DBlock blk )
   {
     // TDLog.v( "update shot DBC length " + d );
@@ -1919,6 +1925,13 @@ public class ShotWindow extends Activity
     mDataAdapter.updateBlockView( blk.mId );
   }
 
+  /** update the (depth) data of a shot 
+   * @param @note the params order is depth-azimuth-length
+   * @param p    depth
+   * @param b    azimuth
+   * @param d    length
+   * @param blk  shot block
+   */
   void updateShotDepthBearingDistance( float p, float b, float d, DBlock blk )
   {
     // TDLog.v( "update shot DBC length " + d );
@@ -1943,10 +1956,7 @@ public class ShotWindow extends Activity
    */
   void updateShotNameAndFlags( String from, String to, int extend, float stretch, long flag, long leg, String comment, DBlock blk )
   {
-    // TDLog.Log( TDLog.LOG_SHOT, "update Shot From >" + from + "< To >" + to + "< comment " + comment );
-    // TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType()
-    //       + " blk type " + blk.getBlockType() + " comment " + comment );
-
+    // TDLog.v("update shot " + from + "-" + to + " leg " + leg + "/" + blk.getLegType() + " blk type " + blk.getBlockType() + " comment " + comment );
     if ( checkXSections( blk, from, to ) ) {
       doUpdateShotNameAndFlags( from, to, extend, stretch, flag, leg, comment, blk );
     } else {
@@ -2094,19 +2104,25 @@ public class ShotWindow extends Activity
   }
 
   /** check the sibling shots and toast a warning if there is a bad sibling
-   * @param blk    data block 
+   * @param blk    data block (must be a leg)
    * @param from   FROM station
    * @param to     TO station
    * @param d      distance
    * @param b      azimuth [deg.]
    * @param c      clino [deg.]
+   * @note used also by ShotEditDialog
    */
   private void checkSiblings( DBlock blk,  String from, String to, float d, float b, float c )
   {
-    if ( ! blk.isLeg() ) return;
+    if ( ! blk.isLeg() ) {
+      // TDLog.v("check siblings: block " + blk.mId + " is not a leg");
+      return;
+    }
     if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
-      // TDLog.v("shot window detect bad sibling");
+      // TDLog.v("bad sibling for " + blk.mId );
       TDToast.makeWarn( R.string.bad_sibling );
+    // } else {
+    //   // TDLog.v("no bad sibling for " + blk.mId );
     }
   }
 
@@ -2182,6 +2198,15 @@ public class ShotWindow extends Activity
     }
   }
 
+  /** reassign stations to a set of blocks
+   * @param blks   list of blocks to renumber
+   * @param from   from station
+   * @param to     to station
+   * @note
+   *   - if FROM and TO are empty all blocks get empty stations
+   *   - if FROM and TO are not empty stations are assigned incrementally with the current policy
+   *   - otherwise all blocks are splay and assigned the same stations
+   */
   private void doRenumberBlocks( List< DBlock > blks, String from, String to )  // RENUMBER SELECTED BLOCKS
   {
     if ( from.length() == 0 && to.length() == 0 ) {
@@ -2235,9 +2260,9 @@ public class ShotWindow extends Activity
     }
   }
 
-  /**
+  /** swap from-to stations for a set of blocks
    * @param blks   list of data blocks
-   * @note pacakge for the alert dialog callback
+   * @note package for the alert dialog callback
    */
   void doSwapBlocksName( List< DBlock > blks )  // SWAP SELECTED BLOCKS STATIONS
   {
@@ -2546,7 +2571,7 @@ public class ShotWindow extends Activity
     // } else {
       shots = mApp_mData.selectAllShotsAfter( blk.mId, TDInstance.sid, TDStatus.NORMAL );
     // }
-    TDLog.v( "shots " + shots.size() );
+    // TDLog.v( "shots " + shots.size() );
     mApp.assignStationsAfter( blk, shots /*, stations */ );
 
     // DEBUG re-assign all the stations

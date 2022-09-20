@@ -1348,11 +1348,18 @@ public class DataHelper extends DataSetObservable
   //   return cnt >= 2;
   // }
 
-  // return false if there are no conflicting siblings
+  /** check for possible bad siblings (shots with the given stations and conflicting data)
+   * @return false if there are no conflicting siblings
+   * @param id0    block id to skip
+   * @param sid    survey id
+   * @param from   from station
+   * @param to     to station
+   * @param d0     shot length to check
+   * @param b0     shot azimuth to check
+   * @param c0     shot clino to check
+   */
   boolean checkSiblings( long id0, long sid, String from, String to, float d0, float b0, float c0 )
   {
-    float thr_a = 15;
-    float thr_d = 0.25f;
     boolean ret = false;
     // TDLog.v( "check " + id0 + " siblings " + from + " " + to + " " + d0 + " " + b0 + " " + c0 );
     Cursor cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), from, to } );
@@ -1360,12 +1367,12 @@ public class DataHelper extends DataSetObservable
       cursor.moveToFirst();
       do { 
         if ( cursor.getLong( 0 ) != id0 ) {
-          // TDLog.v( "[1]-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
+          // TDLog.v( "F-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
           double b1 = Math.abs(cursor.getDouble( 2 ) - b0);
           if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
-          if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > thr_d*d0 )
-            || ( b1 > thr_a ) 
-            || ( Math.abs( cursor.getDouble( 3 ) - c0 ) > thr_a ) ) {
+          if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > d0*TDSetting.mSiblingThrD )
+            || ( b1 > TDSetting.mSiblingThrA ) 
+            || ( Math.abs( cursor.getDouble( 3 ) - c0 ) > TDSetting.mSiblingThrA ) ) {
             ret = true;
             break;
           }
@@ -1378,12 +1385,12 @@ public class DataHelper extends DataSetObservable
       if ( cursor.moveToFirst() ) {
         do { 
           if ( cursor.getLong( 0 ) != id0 ) {
-            // TDLog.v( "[2]-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
+            // TDLog.v( "B-sibling " + cursor.getLong(0) + " " + cursor.getDouble(1) + " " + cursor.getDouble(2) + " " + cursor.getDouble(3) );
             double b1 = Math.abs(cursor.getDouble( 2 ) + 180 - b0);
             if ( b1 > 180 ) b1 = Math.abs( b1 - 360 );
-            if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > thr_d*d0 )
-              || ( b1 > thr_a ) 
-              || ( Math.abs( cursor.getDouble( 3 ) + c0 ) > thr_a ) ) {
+            if ( ( Math.abs( cursor.getDouble( 1 ) - d0 ) > d0*TDSetting.mSiblingThrD )
+              || ( b1 > TDSetting.mSiblingThrA ) 
+              || ( Math.abs( cursor.getDouble( 3 ) + c0 ) > TDSetting.mSiblingThrA ) ) {
               ret = true;
               break;
             }

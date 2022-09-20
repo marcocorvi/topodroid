@@ -1490,6 +1490,8 @@
   <string name="pref_mag_thr_summary">测线磁场的容差百分比</string>
   <string name="pref_dip_thr_title">磁偏角容差</string>
   <string name="pref_dip_thr_summary">公差超过测线磁偏角</string>
+  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
+  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
 
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">容差在主线测线之间</string>
