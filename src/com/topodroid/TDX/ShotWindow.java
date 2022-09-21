@@ -1602,7 +1602,7 @@ public class ShotWindow extends Activity
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // SEARCH
         if ( TDLevel.overAdvanced ) {
-          new SearchDialog( mActivity, this, mDataAdapter.getSearchName() ).show();
+          new SearchDialog( mActivity, this, mDataAdapter.getSearchName(), mDataAdapter.isSearchPair() ).show();
         }
       } else if ( k1 < mNrButton1 && b == mButton1[k1++] ) { // REFRESH
         if ( TDLevel.overExpert ) {
@@ -1678,6 +1678,22 @@ public class ShotWindow extends Activity
     // if ( mSearch != null ) {
       // mSearch.set( null, mDataAdapter.searchShot( flag ) );
       mDataAdapter.searchShot( flag );
+      // if ( ! jumpToPos( mSearch.nextPos() ) ) 
+      if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
+        TDToast.make( R.string.shot_not_found );
+      }
+    // }
+  }
+
+  /** search shots that satisfy a specified flag
+   * @param names   station-pair
+   */
+  void searchLeg( String names )
+  {
+    String[] vals = TDString.splitOnSpaces( names );
+    // if ( mSearch != null ) {
+      // mSearch.set( null, mDataAdapter.searchLeg( names ) );
+      mDataAdapter.searchLeg( vals[0], vals[1] );
       // if ( ! jumpToPos( mSearch.nextPos() ) ) 
       if ( ! jumpToPos( mDataAdapter.nextSearchPosition() ) ) {
         TDToast.make( R.string.shot_not_found );

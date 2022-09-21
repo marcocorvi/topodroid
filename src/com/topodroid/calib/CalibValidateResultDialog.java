@@ -70,7 +70,7 @@ public class CalibValidateResultDialog extends MyDialog
   {
     super.onCreate(savedInstanceState);
 
-    setContentView(R.layout.calib_validate_result_dialog);
+    initLayout(R.layout.calib_validate_result_dialog, title );
 
     mBtnClose = (Button) findViewById( R.id.button_close );
     mBtnClose.setOnClickListener( this );
@@ -88,8 +88,6 @@ public class CalibValidateResultDialog extends MyDialog
     hist0.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors0, 400, 100, 40, 5, TDColor.FIXED_BLUE ) );
     hist1.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors1, 400, 100, 40, 5, TDColor.FIXED_ORANGE ) );
     hist2.setImageBitmap( CalibCoeffDialog.makeHistogramBitmap( errors2, 400, 100, 40, 2, TDColor.LIGHT_GRAY ) );
-
-    setTitle( title );
   }
 
   @Override

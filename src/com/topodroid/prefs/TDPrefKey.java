@@ -525,7 +525,7 @@ public class TDPrefKey
   };
   public static String[] EXPORT_CSVdef = { // [1]
     FALSE,
-    "|",
+    TDString.ZERO, // "|" ???
     "lf",
     null
   };

@@ -299,6 +299,7 @@
     <string name="error_name_exists">项目已存在</string>
     <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
+    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
     <string name="error_team_required">团队规则</string>
@@ -603,7 +604,7 @@
     <!-- UNUSED string name="survey_not_attached_extend">警告:未连接的测线和未设置扩展</string -->
     <string name="survey_no_data_reduction">警告:无数据缩减</string>
     <string name="survey_not_saved">警告: 测量信息未保存</string>
-    <string name="survey_bad_siblings">警告: 坏的主线空白数据</string>
+    <string name="survey_bad_siblings">警告: 坏的主线空白数据 %1$s</string>
     <string name="survey_bad_magnetic">警告: 主线磁场异常</string>
     <string name="saturated_coeffs">警告:饱和校正系数</string>
     <string name="out_of_memory">警告:内存不足!</string>
@@ -792,7 +793,10 @@
     <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
-    <string name="button_search"    >搜索    </string>
+    <!-- TODO string name="button_leg_station">Leg stations</string -->
+    <!-- TODO string name="button_all_station">All stations</string -->
+    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <!-- UNUSED string name="button_search"    >搜索    </string -->
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
     <string name="button_split"     >分割     </string>

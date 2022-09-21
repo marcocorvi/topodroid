@@ -21,21 +21,24 @@ class SearchResult
   private String mName; // = null;
   private int   mIdx;    // current result-index in the array
   private ArrayList< Integer > mPos;
+  private boolean mSearchPair;  // whether search is "pair" (ie, leg)
 
   SearchResult()
   {
     mName = null;
     mIdx  = -1;
     mPos  = new ArrayList< Integer >();
+    mSearchPair = false;
   }
 
   ArrayList< Integer > getPositions() { return mPos; }
 
-  void reset( String name )
+  void reset( String name, boolean pair )
   {
     mName = name;
     mPos.clear();
     mIdx  = -1;
+    mSearchPair = pair;
   }
 
   void clearSearch()
@@ -55,6 +58,8 @@ class SearchResult
   }
 
   String getName() { return mName; }
+
+  boolean isSearchPair() { return mSearchPair; }
 
   int size() { return mPos.size(); }
 

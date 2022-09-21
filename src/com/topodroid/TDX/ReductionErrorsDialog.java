@@ -14,11 +14,13 @@ package com.topodroid.TDX;
 import com.topodroid.utils.TDLog;
 import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDColor;
+import com.topodroid.utils.StringPair;
 import com.topodroid.ui.MyDialog;
 // import com.topodroid.prefs.TDSetting;
 
 import java.lang.ref.WeakReference;
 import java.util.Locale;
+import java.util.List;
 
 import android.os.Bundle;
 
@@ -38,13 +40,13 @@ public class ReductionErrorsDialog extends MyDialog
 
   // private Button mButtonBack;
 
-  private int mMultiBad;
+  private List< StringPair >  mMultiBad;
   private int mMagneticBad;
   private boolean mExtendBad;
   private boolean mAttachedBad;
 
   public ReductionErrorsDialog( Context context, // DrawingWindow parent,
-                    int multi_bad, int magnetic_bad, boolean extend_bad, boolean attached_bad )
+                    List< StringPair > multi_bad, int magnetic_bad, boolean extend_bad, boolean attached_bad )
   {
     super( context, null, R.string.ReductionErrorsDialog ); // null app
     // mParent = new WeakReference<GMActivity>( parent );
@@ -64,8 +66,16 @@ public class ReductionErrorsDialog extends MyDialog
     initLayout( R.layout.reduction_errors_dialog, R.string.title_reduction_errors );
 
     TextView textMulti  = (TextView) findViewById(R.id.multi_bad);
-    if ( mMultiBad == 0 ) {
+    if ( mMultiBad.size() == 0 ) {
       textMulti.setVisibility( View.GONE );
+    } else {
+      StringBuilder msg = new StringBuilder();
+      for (StringPair sp : mMultiBad ) {
+        msg.append(" ");
+        msg.append( sp.toString() );
+        // TDLog.v("Bad sibling " + sp.toString() );
+      }
+      textMulti.setText( String.format( mContext.getResources().getString( R.string.survey_bad_siblings ), msg.toString() ) );
     }
       
     TextView textMagn   = (TextView) findViewById(R.id.magnetic_bad);

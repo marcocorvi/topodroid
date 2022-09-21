@@ -93,7 +93,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="station_not_found">Caposaldo non trovato</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Trovato nessun tiro</string>
-    <string name="bad_sibling">Tiro gemello non corretto</string>
+    <string name="bad_sibling">Battuta con dissimili</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Installa i prototipi grafici con TdSymbol</string -->
     <!-- UNUSED string name="missing_line">LINEA</string -->
@@ -297,6 +297,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="error_name_exists">Progetto esistente</string>
     <string name="error_name_invalid">Nome progetto non valido</string>
     <string name="error_name_required">Nome mancante</string>
+    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nome duplicato</string>
     <string name="error_no_section_in_section">No X-section in X-section</string>
     <string name="error_team_required">Nomi rilevatori mancanti</string>
@@ -599,8 +600,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- UNUSED string name="survey_not_attached_extend">ATTENZIONE: tiri non collegati ed extend disabilitati</string -->
     <string name="survey_no_data_reduction">ATTENZIONE: dati non elaborati</string>
     <string name="survey_not_saved">ATTENZIONE: info rilievo non salvate</string>
-    <string name="survey_bad_siblings">ATTENZIONE: battuta ripetuta incoerente</string>
-    <string name="survey_bad_magnetic">ATTENZIONE: battuta poco precisa</string>
+    <string name="survey_bad_siblings">ATTENZIONE: battute ripetute incoerenti %1$s</string>
+    <string name="survey_bad_magnetic">ATTENZIONE: battute poco precise</string>
     <string name="saturated_coeffs">ATTENZIONE: Dati calibrazione saturati</string>
     <string name="out_of_memory">ATTENZIONE: Memoria terminata !</string>
     <string name="disk_io_error">CRITICAL: Errore disco !</string>
@@ -788,7 +789,10 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="button_clear_memory">Pulisci memoria</string>
     <string name="button_save"      >Salva     </string>
     <!-- UNUSED string name="button_select"    >Seleziona </string -->
-    <string name="button_search"    >Cerca     </string>
+    <!-- TODO string name="button_leg_station">Leg stations</string -->
+    <!-- TODO string name="button_all_station">All stations</string -->
+    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <!-- UNUSED string name="button_search"    >Cerca     </string -->
     <string name="button_merge"     >Unisci    </string>
     <string name="button_saved"     >Caposaldo salvato</string>
     <string name="button_split"     >Dividi    </string>

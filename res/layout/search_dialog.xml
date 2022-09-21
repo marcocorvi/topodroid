@@ -46,16 +46,20 @@
 	android:layout_marginTop="@dimen/marginv"
 	android:layout_marginBottom="@dimen/marginv"
       >
-      <CheckBox android:id="@+id/search_splays"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:singleLine="true"
-        android:text="@string/including_splays"
+      <Button android:id="@+id/btn_leg_station"
+        style="@style/button_default"
+        android:text="@string/button_leg_station"
+        android:layout_marginStart="@dimen/marginh"
         android:layout_marginEnd="@dimen/marginh"
       />
-      <Button android:id="@+id/btn_search"
+      <Button android:id="@+id/btn_all_station"
         style="@style/button_default"
-        android:text="@string/button_search"
+        android:text="@string/button_all_station"
+        android:layout_marginEnd="@dimen/marginh"
+      />
+      <Button android:id="@+id/btn_leg_search"
+        style="@style/button_default"
+        android:text="@string/button_leg_search"
         android:layout_marginEnd="@dimen/marginh"
       />
     </LinearLayout>

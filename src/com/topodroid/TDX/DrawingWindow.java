@@ -22,6 +22,7 @@ import com.topodroid.utils.TDString;
 import com.topodroid.utils.TDRequest;
 import com.topodroid.utils.TDLocale;
 import com.topodroid.utils.TDUtil;
+import com.topodroid.utils.StringPair;
 import com.topodroid.num.TDNum;
 import com.topodroid.num.NumStation;
 import com.topodroid.num.NumShot;
@@ -466,7 +467,8 @@ public class DrawingWindow extends ItemDrawer
   private TDNum mNum;
   private float mDecl;
   private String mFormatClosure;
-  private int nr_multi_bad;    // number of bad-sibling leg shots - TODO move to TDNum
+  // private int nr_multi_bad;    // number of bad-sibling leg shots - TODO move to TDNum
+  private ArrayList< StringPair > mMultiBad;
   private int nr_magnetic_bad; // number of bad-magnetic leg shots
 
   private String mSectionName;
@@ -823,6 +825,7 @@ public class DrawingWindow extends ItemDrawer
     String old_station = mPlot1.start;
     mPlot1.start = station;
     mPlot2.start = station;
+    mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     computeReferences( mNum, mPlot2.type, mPlot2.name, mZoom, false );
     computeReferences( mNum, mPlot1.type, mPlot1.name, mZoom, false );
@@ -1062,7 +1065,23 @@ public class DrawingWindow extends ItemDrawer
     DrawingUtil.makeDrawingSplayPath( dpath, x1, y1, x2, y2 );
     return dpath;
   }
-    
+  
+  /** add a string pair
+   * @param f   first string
+   * @param s   second string
+   * @return true if the string pair has been added to the collection
+   */
+  private boolean addStringPair( String f, String s )
+  {
+    if ( f == null || f.length() == 0 ) return false;  
+    if ( s == null || s.length() == 0 ) return false;  
+    for ( StringPair sp : mMultiBad ) {
+      if ( sp.equals( f, s ) ) return false;
+    }
+    mMultiBad.add( new StringPair( f, s ) );
+    // ++ nr_multi_bad;
+    return true;
+  }
 
   /** create a DrawingPath for a leg
    * @return a drawing (leg) path
@@ -1081,7 +1100,7 @@ public class DrawingWindow extends ItemDrawer
     dpath.setPathPaint( BrushManager.fixedShotPaint );
     if ( blk != null ) {
       if ( blk.isMultiBad() ) {
-        ++ nr_multi_bad;
+        addStringPair( blk.mFrom, blk.mTo );
         dpath.setPathPaint( BrushManager.fixedOrangePaint );
       } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
         ++ nr_magnetic_bad;
@@ -1594,7 +1613,7 @@ public class DrawingWindow extends ItemDrawer
 
     String parent = ( TDInstance.xsections? null : name );
 
-    nr_multi_bad    = 0;
+    mMultiBad.clear(); // nr_multi_bad = 0;
     nr_magnetic_bad = 0;
     if ( PlotType.isPlan( type ) ) { // -------------- PLAN VIEW ------------------------------
       for ( NumShot sh : shots ) {
@@ -1700,7 +1719,7 @@ public class DrawingWindow extends ItemDrawer
     mDrawingSurface.commitReferences();
 
     if ( can_toast ) {
-      setMenuImageRed( ! num.surveyAttached || ! num.surveyExtend || nr_multi_bad > 0 /* || nr_magnetic_bad > 0 */ );
+      setMenuImageRed( ! num.surveyAttached || ! num.surveyExtend || mMultiBad.size() > 0 /* || nr_magnetic_bad > 0 */ ); // nr_multi_bad > 0
     }
 
     // if ( can_toast ) {
@@ -1712,7 +1731,7 @@ public class DrawingWindow extends ItemDrawer
     //     }
     //   } else if ( (! num.surveyExtend) && TDSetting.mCheckExtend && type == PlotType.PLOT_EXTENDED ) {
     //     TDToast.makeWarn( R.string.survey_not_extend );
-    //   } else if ( nr_multi_bad > 0 ) {
+    //   } else if ( mMultiBad.size() > 0 ) { //  ( nr_multi_bad > 0 )
     //     TDToast.makeWarn( R.string.survey_bad_siblings );
     //   // } else if ( nr_magnetic_bad > 0 ) {
     //   //   TDToast.makeWarn( R.string.survey_bad_magnetic );
@@ -3334,6 +3353,7 @@ public class DrawingWindow extends ItemDrawer
     if ( PlotType.isSketch2D( type ) ) {
       if ( list.size() > 0 ) {
         // TDLog.v( "data reduction " + list.size() + " start at " + mPlot1.start );
+        mMultiBad = new ArrayList< StringPair >();
         mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       } else {
         mNum = null;
@@ -3626,6 +3646,7 @@ public class DrawingWindow extends ItemDrawer
     assert( mLastLinePath == null );
     if ( mType == PlotType.PLOT_EXTENDED ) { 
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mMultiBad = new ArrayList< StringPair >();
       mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       // if ( mNum != null ) { // always true
         mDrawingSurface.clearShotsAndStations( (int)mType );
@@ -6353,11 +6374,11 @@ public class DrawingWindow extends ItemDrawer
       }
     } else if ( b == mMenuImage ) { // MENU long click
       // TDLog.v("MENU LONG CLICK");
-      if ( nr_multi_bad == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached ) {
+      if ( mMultiBad.size() == 0 /* && nr_magnetic_bad == 0 */ && mNum.surveyExtend && mNum.surveyAttached ) { // nr_multi_bad
         onClick( view );
       } else {
         // onClick( view );
-        new ReductionErrorsDialog( this, /* this, */ nr_multi_bad, nr_magnetic_bad, ! mNum.surveyExtend, ! mNum.surveyAttached ).show();
+        new ReductionErrorsDialog( this, /* this, */ mMultiBad, nr_magnetic_bad, ! mNum.surveyExtend, ! mNum.surveyAttached ).show();
       }
     } else if ( TDLevel.overNormal && b == mButton2[0] ) { // drawing properties
       Intent intent = new Intent( mActivity, com.topodroid.prefs.TDPrefActivity.class );
@@ -7219,6 +7240,7 @@ public class DrawingWindow extends ItemDrawer
   {
     // TDLog.v( "PLOT compute ref type " + mType + " reset " + reset );
     List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+    mMultiBad = new ArrayList< StringPair >();
     mNum = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
     if ( mType == (int)PlotType.PLOT_PLAN ) {
       computeReferences( mNum, mPlot2.type, mPlot2.name, TopoDroidApp.mScaleFactor, true );
@@ -7267,6 +7289,7 @@ public class DrawingWindow extends ItemDrawer
       updateSplays( mApp.mSplayMode );
     } else {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mMultiBad = new ArrayList< StringPair >();
       TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
@@ -7282,6 +7305,7 @@ public class DrawingWindow extends ItemDrawer
     if ( mType != (int)PlotType.PLOT_PLAN && ! PlotType.isProfile( mType ) ) return;
     if ( mNum == null ) {
       List< DBlock > list = mApp_mData.selectAllShots( mSid, TDStatus.NORMAL );
+      mMultiBad = new ArrayList< StringPair >();
       TDNum num = new TDNum( list, mPlot1.start, mPlot1.view, mPlot1.hide, mDecl, mFormatClosure );
       recomputeReferences( num, TopoDroidApp.mScaleFactor );
       mNum = num;
@@ -7292,7 +7316,7 @@ public class DrawingWindow extends ItemDrawer
       // TDLog.v("DATA " + "drawing window calls append data " + blk.mId + " ret " + ret );
       if ( ret ) {
         if ( got_leg ) { // drop last splay - insert last leg
-          nr_multi_bad    = 0;
+          mMultiBad.clear(); // nr_multi_bad = 0;
           nr_magnetic_bad = 0;
           mNum.dropLastSplay();
           mDrawingSurface.dropLastSplayPath( mPlot1.type );
@@ -7322,7 +7346,7 @@ public class DrawingWindow extends ItemDrawer
               mDrawingSurface.appendDrawingStationName( mPlot2.type, st0, DrawingUtil.toSceneX(h0, st0.v), DrawingUtil.toSceneY(h0, st0.v), true );
             } 
           }
-          if ( nr_multi_bad > 0 ) {
+          if ( mMultiBad.size() > 0 ) { // nr_multi_bad > 0
             setMenuImageRed( true );
             // TDToast.makeWarn( R.string.survey_bad_siblings );
           // } else if ( nr_magnetic_bad > 0 ) {

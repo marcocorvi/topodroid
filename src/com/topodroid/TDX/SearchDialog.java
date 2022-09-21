@@ -16,10 +16,10 @@
 package com.topodroid.TDX;
 
 // import com.topodroid.utils.TDLog;
+import com.topodroid.utils.TDString;
 import com.topodroid.ui.MyKeyboard;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.prefs.TDSetting;
-
 
 import android.os.Bundle;
 // import android.app.Dialog;
@@ -43,23 +43,28 @@ class SearchDialog extends MyDialog
   private final ShotWindow mParent;
   private EditText mName;
   private String mStation;
+  private boolean mPair;
 
   private Button mBtnDuplicate;
   private Button mBtnSurface;
-  private Button mBtnSearch;
   private Button mBtnExtend;
   private Button mBtnReverse; // reversed splays
   // private Button mBtnCancel;
 
-  private CheckBox mBtnSplays;
+  // private CheckBox mBtnSplays;
+  private Button mBtnLegStation;
+  private Button mBtnAllStation;
+  private Button mBtnLegSearch;
+
 
   private MyKeyboard mKeyboard = null;
 
-  SearchDialog( Context context, ShotWindow parent, String station )
+  SearchDialog( Context context, ShotWindow parent, String station, boolean pair )
   {
     super( context, null, R.string.SearchDialog ); // null app
     mParent  = parent;
-    mStation = station; // station name if result of a station search
+    mStation = station; // station name if result of a station search, or station pair for leg search
+    mPair    = pair;    // whether the result of a leg search
   }
 
   @Override
@@ -71,10 +76,19 @@ class SearchDialog extends MyDialog
 
     mName = (EditText) findViewById( R.id.name );
     mName.setOnLongClickListener( this );
-    if ( mStation != null ) mName.setText( mStation );
+    if ( mStation != null ) {
+      mName.setText( mStation );
+    }
 
-    mBtnSplays = (CheckBox) findViewById(R.id.search_splays);
+    // mBtnSplays = (CheckBox) findViewById(R.id.search_splays);
     // mBtnSplays.setVisibility( View.GONE ); 
+
+    mBtnLegStation = (Button) findViewById(R.id.btn_leg_station );
+    mBtnAllStation = (Button) findViewById(R.id.btn_all_station );
+    mBtnLegSearch  = (Button) findViewById(R.id.btn_leg_search );
+    mBtnLegStation.setOnClickListener( this );    // SEARCH 
+    mBtnAllStation.setOnClickListener( this );    // SEARCH
+    mBtnLegSearch.setOnClickListener( this );    // SEARCH
 
     LinearLayout ll3 = (LinearLayout) findViewById( R.id.layout3 );
     LinearLayout ll4 = (LinearLayout) findViewById( R.id.layout4 );
@@ -83,8 +97,6 @@ class SearchDialog extends MyDialog
     mBtnExtend    = (Button) findViewById(R.id.btn_extend );
     mBtnReverse   = (Button) findViewById(R.id.btn_reverse );
 
-    mBtnSearch = (Button) findViewById(R.id.btn_search);
-    mBtnSearch.setOnClickListener( this );    // SEARCH
     if ( TDLevel.overExpert ) {
       mBtnDuplicate.setOnClickListener( this ); // SEARCH duplicate legs
       mBtnSurface.setOnClickListener( this );   // SEARCH surface legs
@@ -131,6 +143,24 @@ class SearchDialog extends MyDialog
     return false;
   }
 
+  /**
+   * @param args
+   * @param nr   expebcted number of strings
+   */
+  private boolean checkArgsName( String args, int nr )
+  {
+    if ( args.length() == 0 ) {
+      mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
+      return false;
+    }
+    String[] vals = TDString.splitOnSpaces( args );
+    if ( vals.length != nr ) {
+      mName.setError( mContext.getResources().getString( R.string.error_station_number ) );
+      return false;
+    }
+    return true;
+  }
+
   @Override
   public void onClick(View v) 
   {
@@ -139,13 +169,18 @@ class SearchDialog extends MyDialog
 
     // TDLog.Log(  TDLog.LOG_INPUT, "Search Dialog onClick() " );
     Button b = (Button) v;
-    if ( b == mBtnSearch ) { // SEARCH station
+    if ( b == mBtnLegStation ) { // SEARCH leg station
       String name = mName.getText().toString().trim();
-      if ( name.length() == 0 ) {
-        mName.setError( mContext.getResources().getString( R.string.error_name_required ) );
-        return;
-      }
-      mParent.searchStation( name, mBtnSplays.isChecked() );
+      if ( ! checkArgsName( name, 1 ) ) return;
+      mParent.searchStation( name, false );
+    } else if ( b == mBtnAllStation ) { // SEARCH all station
+      String name = mName.getText().toString().trim();
+      if ( ! checkArgsName( name, 1 ) ) return;
+      mParent.searchStation( name, true );
+    } else if ( b == mBtnLegSearch ) { // SEARCH legs
+      String name = mName.getText().toString().trim();
+      if ( ! checkArgsName( name, 2 ) ) return;
+      mParent.searchLeg( name );
     } else if ( b == mBtnDuplicate ) { // SEARCH duplicate
       mParent.searchShot( DBlock.FLAG_DUPLICATE );
     } else if ( b == mBtnSurface ) { // SEARCH surface

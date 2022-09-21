@@ -102,7 +102,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="station_not_found">Station not found</string>
     <string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">No shot found</string>
-    <string name="bad_sibling">Bad shot sibling</string>
+    <string name="bad_sibling">Bad leg sibling</string>
     <!-- UNUSED string name="missing_area">AREA</string -->
     <!-- UNUSED string name="missing_hint">Please, enable the missing tools or install them</string -->
     <!-- UNUSED string name="missing_line">LINE</string -->
@@ -306,6 +306,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="error_name_exists">Project name already used</string>
     <string name="error_name_invalid">Invalid project name</string>
     <string name="error_name_required">Name required</string>
+    <string name="error_station_number">Wrong number of stations</string>
     <string name="error_name_duplicate">Duplicate name</string>
     <string name="error_no_section_in_section">Xsection in xsection not allowed</string>
     <string name="error_team_required">Team required</string>
@@ -609,7 +610,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="survey_not_attached_extend">WARNING: unattached shots and unset extends</string -->
     <string name="survey_no_data_reduction">WARNING: no data reduction</string>
     <string name="survey_not_saved">WARNING: survey info not saved</string>
-    <string name="survey_bad_siblings">WARNING: bad-siblings leg</string>
+    <string name="survey_bad_siblings">WARNING: bad-siblings leg: %1$s</string>
     <string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string>
     <string name="saturated_coeffs">WARNING: saturated calibration coefficients</string>
     <string name="out_of_memory">WARNING: out of memory !</string>
@@ -801,7 +802,10 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_clear_memory">Clear memory</string>
     <string name="button_save"      >Save</string>
     <!-- UNUSED string name="button_select"    >Select</string -->
-    <string name="button_search"    >Search</string>
+    <string name="button_leg_station">Leg stations</string>
+    <string name="button_all_station">All stations</string>
+    <string name="button_leg_search">Leg search</string>
+    <!-- UNUSED string name="button_search"    >Search</string -->
     <string name="button_merge"     >Merge</string>
     <string name="button_saved"     >Saved station</string>
     <string name="button_split"     >Split</string>
@@ -1168,7 +1172,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="title_plot_scraps">Sketch scraps</string>
     <string name="title_profile_flip">Flip profile sketch ?</string>
     <string name="title_projection">Projected profile azimuth %1$d</string>
-    <string name="title_reduction_errors">Survey data-reduction anomalies</string>
+    <string name="title_reduction_errors">Data-reduction anomalies</string>
     <string name="title_refs">Sketch References</string>
     <string name="title_scraps">Survey sketches</string>
     <string name="title_scraps_outline">Sketch outlines</string>

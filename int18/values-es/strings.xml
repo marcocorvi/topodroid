@@ -297,6 +297,7 @@ debe ajustarlos a sus necesidades./n/n
     <string name="error_name_exists">Proyecto existente</string>
     <string name="error_name_invalid">Nombre de proyecto no válido</string>
     <string name="error_name_required">Introducir nombre</string>
+    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
     <string name="error_name_duplicate">Nombre duplicado</string>
     <string name="error_no_section_in_section">No X-seccion en X-seccion</string>
     <string name="error_team_required">Faltan nombres de detectores</string>
@@ -599,7 +600,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="survey_not_attached_extend">ADVERTENCIA: Tomas no conectadas y desvinculadas</string -->
     <string name="survey_no_data_reduction">ATENCIÓN: datos sin procesar</string>
     <string name="survey_not_saved">ATENCIÓN: información de la topografía no guardada</string>
-    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente</string>
+    <string name="survey_bad_siblings">ATENCIÓN: proyecto repetido incoherente %1$s</string>
     <string name="survey_bad_magnetic">ATENCIÓN: proyecto poco preciso</string>
     <string name="saturated_coeffs">ATENCIÓN: coeficientes de calibración saturados</string>
     <string name="out_of_memory">ATENCIÓN: sin memoria!</string>
@@ -788,7 +789,10 @@ debe ajustarlos a sus necesidades./n/n
     <string name="button_clear_memory">limpiar la memoria</string>
     <string name="button_save"      >Guardar   </string>
     <!-- UNUSED string name="button_select"    >Seleccionar </string -->
-    <string name="button_search"    >Buscar    </string>
+    <!-- TODO string name="button_leg_station">Leg stations</string -->
+    <!-- TODO string name="button_all_station">All stations</string -->
+    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <!-- UNUSED string name="button_search"    >Buscar    </string -->
     <string name="button_merge"     >Unir     </string>
     <string name="button_saved"     >Estación guardada</string>
     <string name="button_split"     >Dividir     </string>

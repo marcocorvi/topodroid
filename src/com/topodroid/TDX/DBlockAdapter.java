@@ -81,7 +81,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
    */
   void searchStation( String name, boolean splays )
   {
-    mSearch.reset( name );
+    mSearch.reset( name, false );
     if ( TDString.isNullOrEmpty( name ) ) return; // null;
     int size = getCount();
     for ( int pos=START; pos < size; ++pos ) {
@@ -98,13 +98,34 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
     // return (mSearch.size() > 0);
   }
 
+  /** search the leg-blocks with given stations
+   * @param st1  first station
+   * @param st2  second station
+   * @note the private search-result is filled with the found blocks
+   */
+  void searchLeg( String st1, String st2 )
+  {
+    mSearch.reset( st1 + " " + st2, true );
+    int size = getCount();
+    for ( int pos=START; pos < size; ++pos ) {
+      DBlock b = (DBlock)( getItem( pos ) );
+      if ( ! b.isLeg() ) continue;
+      if ( ( b.mFrom.equals( st1 ) && b.mTo.equals( st2 ) ) || ( b.mFrom.equals( st2 ) && b.mTo.equals( st1 ) ) ) {
+        mSearch.add( pos );
+        b.setBackgroundColor( TDColor.SEARCH );
+      }
+    } 
+    // TDLog.v( " search shot " + flag + " results " + mSearch.size() );
+    // return (mSearch.size() > 0);
+  }
+
   /** search the data-blocks with a given flag
    * @param flag   flag to search
    * @note the private search-result is filled with the found blocks
    */
   void searchShot( long flag )
   {
-    mSearch.reset( null );
+    mSearch.reset( null, false );
     int size = getCount();
     if ( flag == DBlock.FLAG_NO_EXTEND ) {
       for ( int pos=START; pos < size; ++pos ) {
@@ -204,6 +225,10 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
   /** @return the name of the current result in the search
    */
   String getSearchName()    { return mSearch.getName(); }
+
+  /** @return true if the search result is about legs (station pairs)
+   */
+  boolean isSearchPair() { return mSearch.isSearchPair(); }
 
   /** this is not efficient because it scans the list of shots
    *  skips oven non-mail_leg, still it would be better to keep a tree of 
