@@ -1181,7 +1181,24 @@ public class TopoDroidApp extends Application
     } else if ( ! mComm.writeCoeff( TDInstance.deviceAddress(), coeff ) ) {
       TDToast.makeBad( R.string.write_failed );
     } else {
-      TDToast.make( R.string.write_ok );
+      int len = coeff.length;
+      byte[] coeff2 = new byte[ len ];
+      if ( ! mComm.readCoeff( TDInstance.deviceAddress(), coeff2 ) ) {
+        TDToast.makeBad( R.string.read_failed );
+      } else {
+        boolean success = true;
+        for ( int k=0; k<len; ++k ) {
+          if ( coeff2[k] != coeff[k] ) {
+            success = false;
+            break;
+          }
+        }
+        if ( success ) { 
+          TDToast.make( R.string.write_ok );
+        } else {
+          TDToast.makeBad( R.string.write_failed );
+        }
+      } 
     }
     if ( b != null ) b.setEnabled( true );
     resetComm();
