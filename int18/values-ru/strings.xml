@@ -988,7 +988,7 @@
     <string name="help_3d">3D просмотр (Cave3D)</string>
     <!-- UNUSED string name="help_move">Включть режим перемещения/зума</string -->
     <string name="help_draw">Перейти в режим рисования</string>
-    <!-- TODO string name="help_drawing">Drawing</string -->
+    <string name="help_drawing">Рисование</string>
     <string name="help_edit">Перейти в режим редактирования</string>
     <string name="help_refs">Вид окна абриса</string>
     <string name="help_rename">Изменить название съёмки</string>
@@ -1079,7 +1079,7 @@
     <string name="export_roundtrip">Roundtrip</string>
     <!-- UNUSED string name="export_scale_png">Разрешение</string -->
     <string name="export_scale_th">Масштаб 1 :</string>
-    <!-- TODO string name="export_spacing_th">Point spacing</string -->
+    <string name="export_spacing_th">Расстояние между точками</string>
     <string name="export_splays">Сплеи</string>
     <string name="export_splays_named">Именованые сплеи</string>
     <string name="export_stations">Пикеты</string>
@@ -1228,7 +1228,7 @@
 
     <string name="title_import_shot">Импорт съёмки</string>
     <string name="title_import_gps">Импорт точки GPS</string>
-    <!-- TODO string name="title_import_th2">Therion th2 file</string -->
+    <string name="title_import_th2">Therion th2 файл</string>
     <string name="title_graph_paper">Масштаб миллиметровки 1:100</string>
     <string name="graph_paper_scale">Отрегулируйте длину линии до 5см.</string>
 
@@ -1491,8 +1491,8 @@
   <string name="pref_mag_thr_summary">Процент допустимого отклонения величины магнитного поля при измерении</string>
   <string name="pref_dip_thr_title">Допустимое отклонение магнитного угла</string>
   <string name="pref_dip_thr_summary">Максимальное допустимое отклонениие угла магнитного поля при замере</string>
-  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
-  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
+  <string name="pref_sibling_thr_title">Порог расхождения для замера</string>
+  <string name="pref_sibling_thr_summary">Порог разницы для для объединения отдельных выстрелов в замер [&#37;]</string>
 
   <string name="pref_leg_title">Допустимое расхождение повторных измерений</string>
   <string name="pref_leg_summary">Максимально допустимое расхождение повторных измерений чтобы считать их замером между пикетами</string>
@@ -1839,7 +1839,7 @@
     <!-- UNUSED string name="menu_new">НОВЫЙ</string -->
     <!-- UNUSED string name="menu_equate">ДОБАВИТЬ СОЕДИНЕНИЕ</string -->
     <!-- UNUSED string name="menu_equates">СОЕДИНЕНИЯ</string -->
-    <!-- TODO string name="menu_open">OPEN</string -->
+    <string name="menu_open">ОТКРЫТЬ</string>
     <string name="menu_save">СОХРАНИТЬ</string>
 
     <!-- UNUSED string name="overwrite">перезаписать</string -->
