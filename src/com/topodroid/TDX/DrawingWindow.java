@@ -1101,7 +1101,8 @@ public class DrawingWindow extends ItemDrawer
     if ( blk != null ) {
       if ( blk.isMultiBad() ) {
         addStringPair( blk.mFrom, blk.mTo );
-        dpath.setPathPaint( BrushManager.fixedOrangePaint );
+        // dpath.setPathPaint( BrushManager.fixedOrangePaint );
+        dpath.setPathPaint( BrushManager.wavyPaint );
       } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( blk ) ) {
         ++ nr_magnetic_bad;
         dpath.setPathPaint( BrushManager.fixedRedPaint );

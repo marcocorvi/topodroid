@@ -20,6 +20,8 @@ import com.topodroid.prefs.TDSetting;
 import android.graphics.Paint;
 import android.graphics.Path;
 import android.graphics.DashPathEffect;
+import android.graphics.PathDashPathEffect;
+// import android.graphics.PathEffect;
 // import android.graphics.Matrix;
 import android.graphics.Bitmap;
 import android.graphics.Shader;
@@ -226,6 +228,8 @@ public class BrushManager
 
   // --------------------------------------------------------------------------
 
+  public static final Paint wavyPaint = makeWavyPaint( 0xffbbbbbb, WIDTH_FIXED, Paint.Style.STROKE); // color of fixedShotPaint
+
   public static final Paint sideDragPaint    = makePaint( 0x99333333,           WIDTH_CURRENT, Paint.Style.FILL );
   public static final Paint errorPaint       = makePaint( TDColor.FULL_VIOLET,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE );
   public static final Paint highlightPaint   = makePaint( TDColor.HIGH_PINK,    WIDTH_CURRENT, Paint.Style.STROKE );
@@ -380,6 +384,24 @@ public class BrushManager
     paint.setStrokeJoin(Paint.Join.ROUND);
     paint.setStrokeCap(Paint.Cap.ROUND);
     paint.setStrokeWidth( width );
+    return paint;
+  }
+
+  static public Paint makeWavyPaint( int color, int width, Paint.Style style )
+  {
+    Paint paint = new Paint();
+    paint.setDither(true);
+    paint.setColor( color );
+    paint.setStyle( style );
+    paint.setStrokeJoin(Paint.Join.ROUND);
+    paint.setStrokeCap(Paint.Cap.ROUND);
+    paint.setStrokeWidth( width );
+    Path path = new Path();
+    path.moveTo(  0,  0 );
+    path.lineTo( 10, 10 );
+    path.lineTo( 30,-10 );
+    path.lineTo( 40,  0 );
+    paint.setPathEffect( new PathDashPathEffect( path, 40, 0, PathDashPathEffect.Style.MORPH ) );
     return paint;
   }
 
