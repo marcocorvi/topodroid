@@ -1124,7 +1124,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
-    <string name="title_calib">mációk</string>
+    <string name="title_calib">Kalibrációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
     <string name="title_check">Kalibrációs ellenőrzés</string>
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
