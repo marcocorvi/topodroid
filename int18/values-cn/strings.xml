@@ -38,7 +38,7 @@
     <!-- UNUSED string name="version_check">Last version</string -->
     <!-- UNUSED string name="version_check_failed">Failed version check</string -->
     <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
-    <!-- TODO string name="version_check_newer">Newer version available: %1$d</string -->
+    <string name="version_check_newer">新版本可用: %1$d</string>
 
     <string name="setup_textsize_title">TopoDroid设置. 文字大小</string>
     <string name="setup_buttonsize_title">TopoDroid设置. 按钮大小</string>
@@ -149,7 +149,7 @@
     <string name="using">使用 %1$s</string>
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
     <!-- OLD IS THIS THE NEXT ? string name="calib_error">平均误差: %1$.4f 度</string -->
-    <!-- TODO string name="calib_validate_error">Average error: %1$.2f &#xb0;</string -->
+    <string name="calib_validate_error">平均误差: %1$.2f &#xb0;</string>
     <string name="calib_stddev">标准差: %1$.4f degrees</string>
     <string name="calib_max_error">最大误差: %1$.4f degrees</string>
     <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f degrees</string>
@@ -299,7 +299,7 @@
     <string name="error_name_exists">项目已存在</string>
     <string name="error_name_invalid">无效的项目名称</string>
     <string name="error_name_required">输入名称</string>
-    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
+    <string name="error_station_number">错误的站点数</string>
     <string name="error_name_duplicate">重复名称</string>
     <string name="error_no_section_in_section">X截面操作在X截面中不允许</string>
     <string name="error_team_required">团队规则</string>
@@ -358,7 +358,7 @@
     <string name="bad_cwd">项目名称不能是路径</string>
     <string name="bad_line">错误的线型</string>
     <string name="bad_point">错误的点型</string>
-    <!-- TODO string name="index_oob">Index out of bounds %1$d</string -->
+    <string name="index_oob">索引超出范围 %1$d</string>
 
     <string name="no_audio">无音频录音</string>
     <string name="no_bt">蓝牙未启动</string>
@@ -706,7 +706,7 @@
     <string name="fmt_profile">%1$s: 项目</string>
 
     <!-- UNUSED string name="extended_profile">延展剖面图</string -->
-    <!-- TODO string name="projected_profile">Projected profile</string -->
+    <string name="projected_profile">投影轮廓</string>
     <!-- UNUSED string name="x_section">X-断面</string -->
     <!-- UNUSED string name="v_section">V-断面</string -->
     <!-- UNUSED string name="h_section">H-截面图</string -->
@@ -793,9 +793,9 @@
     <string name="button_clear_memory">清除内存</string>
     <string name="button_save"      >保存      </string>
     <!-- UNUSED string name="button_select"    >Select    </string -->
-    <!-- TODO string name="button_leg_station">Leg stations</string -->
-    <!-- TODO string name="button_all_station">All stations</string -->
-    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <string name="button_leg_station">主线站点</string>
+    <string name="button_all_station">所有站点</string>
+    <string name="button_leg_search">主线搜索</string>
     <!-- UNUSED string name="button_search"    >搜索    </string -->
     <string name="button_merge"     >合并     </string>
     <string name="button_saved"     >保存站点</string>
@@ -991,7 +991,7 @@
     <string name="help_3d">3D视图(Cave3D)</string>
     <!-- UNUSED string name="help_move">Move/zoom mode</string -->
     <string name="help_draw">绘图模式</string>
-    <!-- TODO string name="help_drawing">Drawing</string -->
+    <string name="help_drawing">绘图</string>
     <string name="help_edit">编辑模式</string>
     <string name="help_refs">草图引用</string>
     <string name="help_rename">改变测量名称</string>
@@ -1130,7 +1130,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
     <string name="title_search">站点/主线 查找</string>
-    <!-- TODO string name="title_gm_search">Calib data search</string -->
+    <string name="title_gm_search">校准数据搜索</string>
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
     <string name="title_device_select">选择DistoX设备</string>
@@ -1232,7 +1232,7 @@
 
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
-    <!-- TODO string name="title_import_th2">Therion th2 file</string -->
+    <string name="title_import_th2">Therion th2 文件</string>
     <string name="title_graph_paper">方格比例 1:100</string>
     <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 
@@ -1311,10 +1311,10 @@
   <string name="pref_with_android_azimuth_summary">启用安卓手机罗盘/倾角</string>
   <string name="pref_blunder_shot_title">错误的测射</string>
   <string name="pref_blunder_shot_summary">跳过错误的主线测射</string>
-  <!-- TODO string name="pref_splay_station_title">Splay station re-assignment</string -->
-  <!-- TODO string name="pref_splay_station_summary">Re-assign station to splays</string -->
-  <!-- TODO string name="pref_splay_group_title">Splay group-rename</string -->
-  <!-- TODO string name="pref_splay_group_summary">Splay group only-forward rename</string -->
+  <string name="pref_splay_station_title">侧线站重新分配</string>
+  <string name="pref_splay_station_summary">重新分配站点到侧线</string>
+  <string name="pref_splay_group_title">侧线组重命名</string>
+  <string name="pref_splay_group_summary">仅向前的侧线组重命名</string>
   <string name="pref_with_levels_title">图层</string>
   <string name="pref_with_levels_summary">使用画布图层</string>
   <!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
@@ -1473,8 +1473,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">数据自动输出</string -->
   <!-- UNUSED string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string -->
-  <!-- TODO string name="pref_editable_stations_title">Editable stations</string -->
-  <!-- TODO string name="pref_editable_stations_summary">Editable station names in the shot list</string -->
+  <TODO string name="pref_editable_stations_title">站点可编辑</string>
+  <TODO string name="pref_editable_stations_summary">在数据列表中站点名可编辑</string>
   <string name="pref_zipped_symbols_title">压缩符号文件</string>
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
@@ -1495,8 +1495,8 @@
   <string name="pref_mag_thr_summary">测线磁场的容差百分比</string>
   <string name="pref_dip_thr_title">磁偏角容差</string>
   <string name="pref_dip_thr_summary">公差超过测线磁偏角</string>
-  <!-- TODO string name="pref_sibling_thr_title">Sibling threshold</string -->
-  <!-- TODO string name="pref_sibling_thr_summary">Threshold for sibling shots [&#37;]</string -->
+  <TODO string name="pref_sibling_thr_title">相邻线阈值</string>
+  <TODO string name="pref_sibling_thr_summary">相邻线测射阈值 [&#37;]</string>
 
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">容差在主线测线之间</string>
@@ -1650,8 +1650,8 @@
   <string name="pref_saved_stations_summary">保存测点颜色为橙色</string>
   <string name="pref_legonly_update_title">只更新主线</string>
   <string name="pref_legonly_update_summary">只在主线下载时重画中线</string>
-  <!-- TODO string name="pref_full_affine_title">Affine transform</string -->
-  <!-- TODO string name="pref_full_affine_summary">Enable sketch affine transformation</string -->
+  <string name="pref_full_affine_title">仿射变换</string>
+  <string name="pref_full_affine_summary">启用草图仿射转换</string>
   <string name="pref_loopClosure_title">圈测闭合</string>
   <string name="pref_loopClosure_summary">圈测闭合错误补偿</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
@@ -1683,8 +1683,8 @@
   <string name="pref_station_size_summary">测点名称尺寸</string>
   <string name="pref_zoom_controls_title">缩放控制</string>
   <string name="pref_zoom_controls_summary">多点控制缩放</string>
-  <!-- TODO string name="pref_side_drag_title">Corner drag</string -->
-  <!-- TODO string name="pref_side_drag_summary">Enable corner-drag on the sketch window</string -->
+  <string name="pref_side_drag_title">角拖动</string>
+  <string name="pref_side_drag_summary">在草图窗口上启用角拖动</string>
   <string name="pref_unit_grid_title">草图参考单位</string>
   <string name="pref_unit_grid_summary">草图网格参考单格尺寸</string>
   <string name="pref_unit_measure_title">标尺单位</string>
@@ -1849,7 +1849,7 @@
     <!-- UNUSED string name="menu_new">新建</string -->
     <!-- UNUSED string name="menu_equate">添加相同</string -->
     <!-- UNUSED string name="menu_equates">相同</string -->
-    <!-- TODO string name="menu_open">OPEN</string -->
+    <!-- TODO string name="menu_open">打开</string -->
     <string name="menu_save">保存</string>
 
     <!-- UNUSED string name="overwrite">重写</string -->
