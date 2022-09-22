@@ -53,9 +53,9 @@
         android:layout_height="wrap_content"
         android:gravity="end"
         >
-        <Button android:id="@+id/btn_cancel"
+        <Button android:id="@+id/btn_close"
           style="@style/button_default"
-          android:text="@string/button_cancel"
+          android:text="@string/button_close"
           android:layout_marginEnd="@dimen/marginh"
         />
         <Button android:id="@+id/btn_clear"

@@ -228,7 +228,8 @@ public class BrushManager
 
   // --------------------------------------------------------------------------
 
-  public static final Paint wavyPaint = makeWavyPaint( 0xffbbbbbb, WIDTH_FIXED, Paint.Style.STROKE); // color of fixedShotPaint
+  // public static final Paint wavyPaint = makeWavyPaint( 0xffbbbbbb, WIDTH_FIXED, Paint.Style.STROKE); // color of fixedShotPaint
+  public static final Paint wavyPaint = makeWavyPaint( TDColor.DARK_ORANGE, WIDTH_FIXED, Paint.Style.STROKE); 
 
   public static final Paint sideDragPaint    = makePaint( 0x99333333,           WIDTH_CURRENT, Paint.Style.FILL );
   public static final Paint errorPaint       = makePaint( TDColor.FULL_VIOLET,  WIDTH_CURRENT, Paint.Style.FILL_AND_STROKE );
@@ -397,10 +398,14 @@ public class BrushManager
     paint.setStrokeCap(Paint.Cap.ROUND);
     paint.setStrokeWidth( width );
     Path path = new Path();
-    path.moveTo(  0,  0 );
-    path.lineTo( 10, 10 );
-    path.lineTo( 30,-10 );
-    path.lineTo( 40,  0 );
+    path.moveTo(  0,  1 );
+    path.lineTo( 10, 11 );
+    path.lineTo( 30, -9 );
+    path.lineTo( 40,  1 );
+    path.lineTo( 40, -1 );
+    path.lineTo( 30,-11 );
+    path.lineTo( 10,  9 );
+    path.moveTo(  0, -1 );
     paint.setPathEffect( new PathDashPathEffect( path, 40, 0, PathDashPathEffect.Style.MORPH ) );
     return paint;
   }

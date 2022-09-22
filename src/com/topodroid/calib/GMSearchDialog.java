@@ -71,7 +71,7 @@ public class GMSearchDialog extends MyDialog
     mBtnClear  = (Button) findViewById(R.id.btn_clear );
     mBtnClear.setOnClickListener( this );
 
-    ( (Button) findViewById(R.id.btn_cancel) ).setOnClickListener( this ); // CANCEL
+    ( (Button) findViewById(R.id.btn_close) ).setOnClickListener( this ); // CLOSE
 
     mKeyboard = new MyKeyboard( mContext, (KeyboardView)findViewById( R.id.keyboardview ), 
                                 R.xml.my_keyboard_base_sign, R.xml.my_keyboard_qwerty );
@@ -102,7 +102,7 @@ public class GMSearchDialog extends MyDialog
       mParent.searchData( error );
     } else if ( b == mBtnClear ) {
       mParent.clearSearchResult();
-    // } else if ( b == mBtnCancel ) {
+    // } else if ( b == mBtnClose ) {
     //   /* nothing : dismiss */
     }
     dismiss();

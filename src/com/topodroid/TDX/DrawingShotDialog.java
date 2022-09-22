@@ -18,6 +18,7 @@ import com.topodroid.ui.MyButton;
 import com.topodroid.ui.MyColorPicker;
 import com.topodroid.ui.MyDialog;
 import com.topodroid.ui.TDLayout;
+import com.topodroid.utils.TDColor;
 import com.topodroid.prefs.TDSetting;
 import com.topodroid.common.ExtendType;
 // import com.topodroid.common.PlotType;
@@ -128,6 +129,11 @@ class DrawingShotDialog extends MyDialog
       tvtype.setText( R.string.type_d );
     } else if (mBlock.isManual() ) {
       tvtype.setText( R.string.type_m );
+    }
+    if (mBlock.isMultiBad() ) {
+      tvtype.setTextColor( TDColor.DARK_ORANGE );
+    } else if ( TopoDroidApp.mShotWindow != null && TopoDroidApp.mShotWindow.isBlockMagneticBad( mBlock ) ) {
+      tvtype.setTextColor( TDColor.FIXED_RED );
     }
 
     mETfrom.setOnLongClickListener( this );
