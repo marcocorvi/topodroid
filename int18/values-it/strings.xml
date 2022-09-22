@@ -1125,7 +1125,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <!-- NO string name="title_contour">Contour</string -->
     <!-- UNUSED string name="title_coord">Inserisci le coordinate del punto:</string -->
     <string name="title_current_station">Capisaldi salvati</string>
-    <string name="title_search">Cerca Caposaldo/Battuta</string>
+    <string name="title_search">Ricerca caposaldi/battute</string>
+    <string name="title_gm_search">Ricarca dati calibrazione</string>
     <string name="title_dangling">Tiri non collegati</string>
     <string name="title_device">Dispositivi DistoX</string>
     <string name="title_device_select">Seleziona DistoX</string>

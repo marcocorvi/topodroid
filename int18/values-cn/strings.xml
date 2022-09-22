@@ -1130,6 +1130,7 @@
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">保存测点</string>
     <string name="title_search">站点/主线 查找</string>
+    <!-- TODO string name="title_gm_search">Calib data search</string -->
     <string name="title_dangling">独立测线</string>
     <string name="title_device">DistoX设备</string>
     <string name="title_device_select">选择DistoX设备</string>

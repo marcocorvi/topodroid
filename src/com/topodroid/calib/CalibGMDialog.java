@@ -172,6 +172,7 @@ public class CalibGMDialog extends MyDialog
         } else {
           try {
             long value = Long.parseLong( name );
+            TDLog.v("update GM to " + name );
             parent.updateGM( value, name );
           } catch ( NumberFormatException e ) {
             mET_name.setError( mErrorGroupNonInt );
@@ -194,6 +195,7 @@ public class CalibGMDialog extends MyDialog
     } else if ( b == mButtonDelete ) {
       GMActivity parent = mParent.get();
       if ( parent != null ) {
+        TDLog.v("delete GM" );
         parent.deleteGM( true );
       } else {
         TDLog.Error("GM Dialog null parent [2]" );

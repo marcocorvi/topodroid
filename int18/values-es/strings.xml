@@ -1126,6 +1126,7 @@ debe ajustarlos a sus necesidades./n/n
     <!-- UNUSED string name="title_coord">Introduzca las coordenadas del punto:</string -->
     <string name="title_current_station">Última estación guardada</string>
     <string name="title_search">Búsqueda de estación/toma</string>
+    <!-- TODO string name="title_gm_search">Calib data search</string -->
     <string name="title_dangling">Tomas no adjuntadas</string>
     <string name="title_device">Dispositivo DistoX</string>
     <string name="title_device_select">Selecciona DistoX</string>

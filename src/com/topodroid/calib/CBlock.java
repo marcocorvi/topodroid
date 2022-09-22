@@ -24,6 +24,8 @@ import java.io.StringWriter;
 import java.io.PrintWriter;
 import java.util.Locale;
 
+import android.view.View;
+
 public class CBlock
 {
   private static final int[] colors = { // 0xffcccccc, 0xffffcccc, 0xffccccff
@@ -44,28 +46,56 @@ public class CBlock
   public float mBearing;  // computed compass [degrees]
   public float mClino;    // computed clino [degrees]
   public float mRoll;     // computed roll
-  public float mError;    // error in the calibration algo associated to this data
+  public float mError;    // error in the calibration algo associated to this data [rads]
   public long mStatus;
 
   private boolean mFarness; // farness from reference item (previous item of a group)
   // float   mFarCosine;  // cos(angle) of farness (default 0 is ok)
   private boolean mOffGroup;
 
+  private View mView = null;
+
+  /** set the view that displays this block
+   * @param v view
+   */
+  public void setView( View v ) { mView = v; }
+  
+  /** @return the view that displays this block
+   */
+  public View getView() { return mView; }
+
+  /** @return true if the block data values are saturated
+   */
   public boolean isSaturated()
   { 
     return ( mx >= 32768 || my >= 32768 || mz >= 32768 );
   }
 
+  /** @return true if the block G values are zero
+   */
   public boolean isGZero()
   {
     return ( gx == 0 && gy == 0 && gz == 0 );
   }
 
+  /** set the block off-group
+   * @param b  whether the block is off-group
+   */
   public void setOffGroup( boolean b ) { mOffGroup = b; }
+
+  /** @return true if the block is off-group
+   */
   public boolean isOffGroup() { return mOffGroup; }
 
+  /** set the block far-ness
+   * @param b whether the block is far (from group average)
+   */
   public void setFarness( boolean b ) { mFarness = b; }
+
+  /** @return true if the block is far (from group average)
+   */
   public boolean isFar() { return mFarness; }
+
   // float   getFarCosine() { return mFarCosine; }
 
   // void computeFarness( CBlock ref, float thr )
@@ -73,6 +103,8 @@ public class CBlock
   //   mFarness = isFarFrom( ref.mBearing, ref.mClino, thr );
   // }
 
+  /** default cstr
+   */
   public CBlock()
   {
     mId = 0;
@@ -88,6 +120,11 @@ public class CBlock
     mFarness = false;
   }
 
+  /** @return true if the block is far from a given direction
+   * @param b0  direction azimuth
+   * @param c0  direction clino
+   * @param thr far-ness threshold (cosine of the far-angle)
+   */
   public boolean isFarFrom( float b0, float c0, float thr )
   {
     computeBearingAndClino();
@@ -105,15 +142,21 @@ public class CBlock
     return mFarCosine < thr; // 0.70: approx 45 degrees
   }
 
+  /** set the block ID
+   * @param id   block id
+   * @param cid  calib id 
+   */
   public void setId( long id, long cid )
   {
     mId = id;
     mCalibId = cid;
   }
+
   // FIXME ZERO-DATA
   public void setGroupIfNonZero( long g ) { mGroup = isGZero() ? 0 : g; }
 
   public void setGroup( long g ) { mGroup = g; }
+
   public void setError( float err ) { mError = err; }
 
   public int color() 
@@ -122,6 +165,9 @@ public class CBlock
     return colors[ 1 + (int)(mGroup % 2) ];
   }
 
+  /** set the block status
+   * @param s  new status
+   */
   public void setStatus( long s ) { mStatus = s; }
 
   public void setData( long gx0, long gy0, long gz0, long mx0, long my0, long mz0 )
@@ -180,16 +226,37 @@ public class CBlock
     mRoll    *= TDMath.RAD2DEG;
   }
 
-  // @RecentlyNonNull
-  public String toString()
+  /** @return the ID string
+   */
+  public String idString()
+  {
+    return String.format( Locale.US, "%d", mId );
+  }
+
+  /** @return the GROUP string
+   */
+  public String groupString()
+  {
+    return String.format( Locale.US, "<%d>", mGroup );
+  }
+
+  /** @return the ERROR string
+   */
+  public String errorString() 
+  {
+    return String.format( Locale.US, "%4.2f", mError*TDMath.RAD2DEG );
+  }
+
+  /** @return the DATA-VALUE string
+   */
+  public String dataString()
   {
     float ua = TDSetting.mUnitAngle;
 
     StringWriter sw = new StringWriter();
     PrintWriter pw  = new PrintWriter(sw);
     computeBearingAndClino();
-    pw.format(Locale.US, "%d <%d> %5.1f %5.1f %5.1f %4.2f",
-      mId, mGroup, mBearing*ua, mClino*ua, mRoll*ua, mError*TDMath.RAD2DEG );
+    pw.format(Locale.US, "%5.1f %5.1f %5.1f", mBearing*ua, mClino*ua, mRoll*ua );
     if ( TDSetting.mRawCData == 1 ) {
       pw.format( "  %d %d %d  %d %d %d", gx, gy, gz, mx, my, mz );
     } else if ( TDSetting.mRawCData == 2 ) {

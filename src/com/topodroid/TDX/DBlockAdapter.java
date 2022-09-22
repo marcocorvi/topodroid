@@ -603,7 +603,7 @@ class DBlockAdapter extends ArrayAdapter< DBlock >
         tvLength.setBackgroundColor( TDColor.BLACK );
       }
     }
-  }
+  } // ViewHolder
 
   /** @return the view for a position
    * @param pos         position

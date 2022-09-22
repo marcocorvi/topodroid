@@ -5,18 +5,17 @@ The <u>calibration-data window</u> displays the list of calibration data. If the
 <ul style="margin-top=0">
 <li>index: incremental index that identifies the data</li>
 <li>group: number of the group the data belongs to</li>
-<li>azimuth, inclination, and roll, computed from the raw values without any
-calibration correction</li>
-<li>error: the difference between the calibration-corrected direction and the
-group average direction, in degrees</li>
+<li>error: the difference between the calibration-corrected direction and the group average direction, in degrees</li>
+<li>azimuth, inclination, and roll, computed from the raw values without any calibration correction</li>
 <li>optionally the raw calibration data values, ie, the components of G and M in the DistoX frame, either as decimal or hex values</li>
 </ul><br><p>
 
 <h4>Colors</h4>
 The calibration data are displayed with yellow and blue text-color, alternating between even and odd group numbers. Data with no group are grey.<br><p>
 
-The background color:
+The data values background color are:
 <ul>
+<li>black: normal values</li>
 <li>violet: incomplete data (not used in the calibration, but used for the groups)</li>
 <li>brown: saturated data</li>
 <li>gray: deleted data (only if deleted data are displayed)</li>
@@ -39,6 +38,7 @@ The background color:
 <li><img src="btn_cover.png"> <a href="page_calib_distrib.htm">direction distribution</a> of the calibration data</li>
 <li><img src="btn_read.png"> read and display the coefficients stored in the DistoX</li>
 <li><img src="btn_write.png"> write the calibration coefficients to the DistoX. Enabled only after the calibration coefficients have been computed. The coefficients can also be written directly from the dialog showing the result of the computation. A warning is issued in the data direction coverage is below 95% or the average error is above 0.5&deg;</li>
+<li><img src="btn_search.png"> opens the search dialog</li>
 </ul><br><p>
 
 At the moment only on-demand data download is active for the calibration data. The downloaded data are added to the current calibration. Therefore you can take some calibration measurements, download the data, check if you are satisfied with them, if not take further data and download them, and so on until you are happy with your calibration data. Downloaded data can be "disabled" (by setting the group number to "0" (zero); 

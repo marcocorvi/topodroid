@@ -163,6 +163,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="calib_precision">Precision</string>
     <string name="calib_iter">Iterations: %1$d</string>
     <string name="calib_reset">Reset DistoX calibration ?</string>
+    <string name="calib_min_error">Minimum error</string>
     
     <string name="algorithm">Algorithm:</string>
     <string name="auto">auto</string>
@@ -393,6 +394,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="no_proj4">Proj4 not installed</string>
     <string name="no_sensors">Survey has no measurement</string>
     <!-- UNUSED string name="no_shots">Survey has no shots.\nUse Download button to get some</string -->
+    <string name="no_search_result">No search_result.</string>
     <string name="no_survey">No survey selected.</string>
     <string name="no_symbols">No symbol palette.</string>
     <!-- UNUSED string name="no_thmanager">ThManager not installed</string -->
@@ -805,7 +807,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="button_leg_station">Leg stations</string>
     <string name="button_all_station">All stations</string>
     <string name="button_leg_search">Leg search</string>
-    <!-- UNUSED string name="button_search"    >Search</string -->
+    <string name="button_search"    >Search</string>
     <string name="button_merge"     >Merge</string>
     <string name="button_saved"     >Saved station</string>
     <string name="button_split"     >Split</string>
@@ -1007,7 +1009,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <string name="help_plot_rename">Rename/Delete sketch</string>
     <string name="help_plot_scrap">Sketch scraps</string>
     <string name="help_plot_switch">Switch sketch</string>
-    <string name="help_search">Station search</string>
+    <string name="help_search">Data search</string>
     <string name="help_stats">Survey statistics</string>
     <string name="help_save_plot">Export sketch</string>
     <!-- UNUSED string name="help_tdr2th2">Convert sketch binary files to th2</string -->
@@ -1139,6 +1141,7 @@ There are other settings for the presentation of the sketchs (icon size, label s
     <!-- UNUSED string name="title_coord">Enter the point coordinates:</string -->
     <string name="title_current_station">Saved stations</string>
     <string name="title_search">Station/Leg search</string>
+    <string name="title_gm_search">Calib data search</string>
     <string name="title_dangling">Unattached shots</string>
     <string name="title_device">DistoX devices</string>
     <string name="title_device_select">Select DistoX device</string>

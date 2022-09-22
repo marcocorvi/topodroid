@@ -45,9 +45,11 @@ import com.topodroid.calib.CalibAlgoBH;
 // import com.topodroid.calib.CalibAlgoMin;
 import com.topodroid.calib.ICoeffDisplayer;
 import com.topodroid.calib.GMGroupsDialog;
+import com.topodroid.calib.GMSearchDialog;
 
 
 import java.util.List;
+import java.util.LinkedList;
 import java.util.ArrayList;
 import java.util.Locale;
 
@@ -75,11 +77,11 @@ import android.widget.LinearLayout;
 import android.graphics.drawable.BitmapDrawable;
 
 public class GMActivity extends Activity
-                        implements OnItemClickListener
-                        , ILister
+                        implements ILister
                         , ICoeffDisplayer
                         , OnClickListener
                         , OnLongClickListener
+                        , OnItemClickListener // only for the menus
 {
   private TopoDroidApp mApp;
   private DeviceHelper mApp_mDData;
@@ -88,10 +90,8 @@ public class GMActivity extends Activity
 
   private CalibAlgo mCalibration = null;
 
-  private String mSaveData;                // saved GM text representation
-  private TextView mSaveTextView;          // view of the saved GM
   private CBlock mSaveCBlock = null;  // data of the saved GM
-  private long mGMid = -1;     // id of the GM
+  // private long mGMid = -1;     // id of the GM = mSaveCBlock.mId
   private int mBlkStatus = 0;   // min display Group (can be either 1 [only active] or 0 [all])
   private int mAlgo;            // calibration algorithm
 
@@ -110,7 +110,8 @@ public class GMActivity extends Activity
                         R.drawable.iz_compute,
                         R.drawable.iz_cover,
                         R.drawable.iz_read,
-                        R.drawable.iz_write
+                        R.drawable.iz_write,
+                        R.drawable.iz_search
                         // R.drawable.iz_empty // EMPTY
                      };
   final static private int BTN_TOGGLE   = 0;
@@ -121,6 +122,7 @@ public class GMActivity extends Activity
   final static private int BTN_COVER    = 5;
   final static private int BTN_READ     = 6;
   final static private int BTN_WRITE    = 7;
+  final static private int BTN_SEARCH   = 8;
 
   static final private int[] izonsno = {
                         R.drawable.iz_toggle_no,
@@ -130,7 +132,8 @@ public class GMActivity extends Activity
                         0,
                         0, // R.drawable.iz_cover_no,
                         R.drawable.iz_read_no,
-                        R.drawable.iz_write_no
+                        R.drawable.iz_write_no,
+                        R.drawable.iz_search
                      };
 
   static final private int[] menus = {
@@ -149,7 +152,8 @@ public class GMActivity extends Activity
                         R.string.help_compute,
                         R.string.help_cover,
                         R.string.help_read,
-                        R.string.help_write
+                        R.string.help_write,
+                        R.string.help_search
                       };
   static final private int[] help_menus = {
                         R.string.help_display_calib,
@@ -182,6 +186,8 @@ public class GMActivity extends Activity
   private BitmapDrawable mBMbluetooth;
   private BitmapDrawable mBMbluetooth_no;
 
+  /** set the window title (empty method)
+   */
   public void setTheTitle() { }
 
   // -------------------------------------------------------------------
@@ -763,7 +769,6 @@ public class GMActivity extends Activity
    * @param pos    index of the clicked view
    * @param id     ...
    */ 
-  @Override
   public void onItemClick(AdapterView<?> parent, View view, int pos, long id)
   {
     if ( mMenu == (ListView)parent ) {
@@ -771,36 +776,29 @@ public class GMActivity extends Activity
       return;
     }
     if ( closeMenu() ) return;
+    // nothing else
+  }
 
-    // if ( value.equals( getResources().getString( R.string.back_to_calib ) ) ) {
-    //   setStatus( TDStatus.CALIB );
-    //   updateDisplay( );
-    //   return;
-    // }
-    mSaveCBlock   = mDataAdapter.get( pos );
-    LinearLayout ll = (LinearLayout)view;
-    mSaveTextView = (TextView) ll.findViewById( R.id.row_text );
-    String msg = mSaveTextView.getText().toString();
-    String[] st = msg.split( " ", 3 );
-    try {    
-      mGMid = Long.parseLong(st[0]);
-      // String name = st[1];
-      mSaveData = st[2];
-      if ( mSaveCBlock.mStatus == 0 ) {
-        // startGMDialog( mGMid, st[1] );
-        (new CalibGMDialog( this, this, mSaveCBlock )).show();
-      } else { // FIXME TODO ask whether to undelete
-        TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.calib_gm_undelete,
-          new DialogInterface.OnClickListener() {
-            @Override public void onClick( DialogInterface dialog, int btn ) {
-              // TDLog.Log( TDLog.LOG_INPUT, "calib delete" );
-              deleteGM( false );
-            }
+  /** handle a user tap on the data values
+   * @param pos   item position
+   * @param cblk  data block
+   */
+  public void itemDataClick( int pos, CBlock cblk )
+  {
+    // TDLog.v("ITEM DATA click pos " + pos + " id " + cblk.mId );
+    mSaveCBlock = cblk;
+    // mGMid = cblk.mId;
+    if ( mSaveCBlock.mStatus == 0 ) {
+      (new CalibGMDialog( this, this, mSaveCBlock )).show();
+    } else { // FIXME TODO ask whether to undelete
+      TopoDroidAlertDialog.makeAlert( this, getResources(), R.string.calib_gm_undelete,
+        new DialogInterface.OnClickListener() {
+          @Override public void onClick( DialogInterface dialog, int btn ) {
+            // TDLog.Log( TDLog.LOG_INPUT, "calib delete" );
+            deleteGM( false );
           }
-        );
-      }
-    } catch ( NumberFormatException e ) {
-      TDLog.Error( "error: expected a long, got: " + st[0] );
+        }
+      );
     }
   }
  
@@ -816,11 +814,11 @@ public class GMActivity extends Activity
     mApp = (TopoDroidApp) getApplication();
     mApp_mDData = TopoDroidApp.mDData;
 
-    mDataAdapter  = new CBlockAdapter( this, R.layout.cblock_row, new ArrayList< CBlock >() );
+    mDataAdapter  = new CBlockAdapter( this, this, R.layout.cblock_row, new ArrayList< CBlock >() );
 
     mList = (ListView) findViewById(R.id.list);
     mList.setAdapter( mDataAdapter );
-    mList.setOnItemClickListener( this );
+    // mList.setOnItemClickListener( this );
     mList.setDividerHeight( 2 );
 
     // mHandler = new ConnHandler( mApp, this );
@@ -829,16 +827,18 @@ public class GMActivity extends Activity
     /* int size = */ TopoDroidApp.setListViewHeight( getApplicationContext(), mListView );
 
     mNrButton1 = 5;
-    if ( TDLevel.overBasic  ) mNrButton1 += 1; // COVER
-    if ( TDLevel.overNormal ) mNrButton1 += 2; // READ WRITE
+    if ( TDLevel.overBasic  )   mNrButton1 += 1; // COVER
+    if ( TDLevel.overNormal )   mNrButton1 += 2; // READ WRITE
+    if ( TDLevel.overAdvanced ) mNrButton1 += 1; // SEARCH
     Resources res = getResources();
     mButton1 = new Button[ mNrButton1+1 ];
     for ( int k=0; k < mNrButton1; ++k ) { // add also EMPTY button
       mButton1[k] = MyButton.getButton( this, this, izons[k] );
     }
     mButton1[mNrButton1] = MyButton.getButton( this, null, R.drawable.iz_empty );
-    if ( TDLevel.overAdvanced && TDInstance.deviceType() == Device.DISTO_X310 ) {
-      mButton1[ BTN_BT ].setOnLongClickListener( this );
+    if ( TDLevel.overAdvanced ) {
+      if ( TDInstance.deviceType() == Device.DISTO_X310 ) mButton1[ BTN_BT ].setOnLongClickListener( this );
+      mButton1[ BTN_SEARCH ].setOnLongClickListener( this );
     }
 
     mBMdownload     = MyButton.getButtonBackground( mApp, res, izons[BTN_DOWNLOAD] ); 
@@ -990,6 +990,9 @@ public class GMActivity extends Activity
       // enableBluetoothButton(false);
       new DeviceX310TakeShot( this, (TDSetting.mCalibShotDownload ? new ListerHandler(this) : null), mApp, 1, DataType.DATA_CALIB ).execute();
       return true;
+    } else if ( b == mButton1[ BTN_SEARCH ] ) {
+      clearSearchResult();
+      return true;
     }
     return false;
   }
@@ -1098,10 +1101,35 @@ public class GMActivity extends Activity
             resetTitle( );
           }
         }
+    } else if (TDLevel.overAdvanced && b == mButton1[BTN_SEARCH] ) { // SEARCH
+      (new GMSearchDialog( this, this )).show();
       // }
     // } else if ( b == mButton1[BTN_DISTO] ) { // disto
     //   Intent deviceIntent = new Intent( Intent.ACTION_VIEW ).setClass( this, DeviceActivity.class );
     //   startActivity( deviceIntent );
+    }
+  }
+
+
+  /** highlight the next search result
+   * @note called by long-tap or from the search dialog
+   */
+  public void clearSearchResult()
+  { 
+    if ( mDataAdapter.clearSearchResult() ) {
+      // mList.invalidate( );
+    }
+  }
+
+  /** search the calibration data
+   */
+  public void searchData( float error )
+  {
+    if ( mDataAdapter.searchData( error ) ) {
+      // mList.invalidate( );
+      // TDLog.v("SEARCH children " + mList.getChildCount() );
+    } else {
+      TDToast.make( R.string.no_search_result );
     }
   }
 
@@ -1247,19 +1275,14 @@ public class GMActivity extends Activity
    */
   public void updateGM( long value, String name )
   {
-    mApp_mDData.updateGMName( mGMid, TDInstance.cid, name );
-    // String id = Long.toString(mGMid);
-    // CBlock blk = mApp.mDData.selectGM( mGMid, TDInstance.cid );
+    if ( mSaveCBlock == null ) {
+      TDLog.Error( "GM update: null saved cblock" );
+      return;
+    }
+    mApp_mDData.updateGMName( mSaveCBlock.mId, TDInstance.cid, name );
     mSaveCBlock.setGroup( value );
-
-    // if ( mApp.mListRefresh ) {
-    //   mDataAdapter.notifyDataSetChanged();
-    // } else {
-      mSaveTextView.setText( String.format(Locale.US, getResources().getString(R.string.fmt_savetext), mGMid, name, mSaveData ) );
-      mSaveTextView.setTextColor( mSaveCBlock.color() );
-      // mSaveTextView.invalidate();
-      // updateDisplay( ); // FIXME
-    // }
+    // TDLog.v("GM activity update " + name + " id " + mSaveCBlock.mId );
+    mDataAdapter.updateView( mSaveCBlock );
   }
 
   /** mark a calibration data "deleted"
@@ -1267,7 +1290,8 @@ public class GMActivity extends Activity
    */
   public void deleteGM( boolean delete )
   {
-    mApp_mDData.deleteGM( TDInstance.cid, mGMid, delete );
+    if ( mSaveCBlock == null ) return;
+    mApp_mDData.deleteGM( TDInstance.cid, mSaveCBlock.mId, delete );
     updateDisplay( );
   }
 

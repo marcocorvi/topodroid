@@ -1127,6 +1127,7 @@
     <!-- UNUSED string name="title_coord">Введите координаты точки:</string -->
     <string name="title_current_station">Сохраненные пикеты</string>
     <string name="title_search">Поиск пикетов/замеров</string>
+    <!-- TODO string name="title_gm_search">Calib data search</string -->
     <string name="title_dangling">Неприсоединенные замеры</string>
     <string name="title_device">Устройства DistoX</string>
     <string name="title_device_select">Выберите прибор DistoX</string>
