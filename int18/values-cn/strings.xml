@@ -150,9 +150,9 @@
     <string name="calib_error">平均误差: %1$.2f 度 (BH delta %2$.3f)</string>
     <!-- OLD IS THIS THE NEXT ? string name="calib_error">平均误差: %1$.4f 度</string -->
     <string name="calib_validate_error">平均误差: %1$.2f &#xb0;</string>
-    <string name="calib_stddev">标准差: %1$.4f degrees</string>
-    <string name="calib_max_error">最大误差: %1$.4f degrees</string>
-    <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f degrees</string>
+    <string name="calib_stddev">标准差: %1$.4f 度</string>
+    <string name="calib_max_error">最大误差: %1$.4f 度</string>
+    <string name="calib_ave_std">精确度: %1$.4f ± %2$.4f 度</string>
     <string name="calib_precision">精度</string>
     <string name="calib_iter">迭代次数: %1$d</string>
     <string name="calib_reset">重置DistoX校准 ?</string>
