@@ -1124,9 +1124,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="title_azimut">Kiterítés referencia iránya</string>
     <string name="title_audio">Hangjegyzet</string>
     <string name="title_audio_list">Hang felvétel</string>
-    <string name="title_calib">Kalibrációk</string>
+    <string name="title_calib">mációk</string>
     <string name="title_calib_check">Kalir. ell. mérések</string>
-    <!-- UNUSED string name="title_check">Kalibrációs ellenőrzés</string -->
+    <string name="title_check">Kalibrációs ellenőrzés</string>
     <string name="title_coverage">Kalibrációs adatok eloszlása</string>
     <string name="title_coeff">Kalibrációs együtthatók</string>
     <string name="title_color_picker">Válassz színt</string>
@@ -1134,7 +1134,7 @@ A részletekért keresse fel a weboldalakat.\n
     <!-- UNUSED string name="title_coord">Ird be a pont koordinátáit:</string -->
     <string name="title_current_station">Elmentett mérési pontok</string>
     <string name="title_search">Pont/Mérés keresés</string>
-    <!-- UNUSED string name="title_gm_search">Calib data search</string -->
+    <!-- UNUSED string name="title_gm_search">Kalibrációs adat keresés</string -->
     <string name="title_dangling">Csatolatlan mérés</string>
     <string name="title_device">DistoX-ek</string>
     <string name="title_device_select">Válaszd ki a DistoX-et</string>
