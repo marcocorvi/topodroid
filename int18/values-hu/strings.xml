@@ -300,7 +300,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="error_name_exists">Létező projekt</string>
     <string name="error_name_invalid">Érvénytelen projekt név</string>
     <string name="error_name_required">Név szükséges</string>
-    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
+    <string name="error_station_number">Rossz pont számok</string>
     <string name="error_name_duplicate">Duplikált név</string>
     <string name="error_no_section_in_section">Metszetben metszet nem megengedett</string>
     <string name="error_team_required">Csapat szükséges</string>
@@ -796,9 +796,9 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="button_clear_memory">Memória tisztítás</string>
     <string name="button_save"      >Ment</string>
     <!-- UNUSED string name="button_select"    >Kiválaszt    </string -->
-    <!-- TODO string name="button_leg_station">Leg stations</string -->
-    <!-- TODO string name="button_all_station">All stations</string -->
-    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <string name="button_leg_station">Poligon pontok</string>
+    <string name="button_all_station">Minden pont</string>
+    <string name="button_leg_search">Poligon keresés</string>
     <!-- UNUSED string name="button_search"    >Keres    </string -->
     <string name="button_merge"     >Egyesít     </string>
     <string name="button_saved"     >Mentett pont</string>
