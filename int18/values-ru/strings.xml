@@ -300,7 +300,7 @@
     <string name="error_name_exists">Такой проект уже существует</string>
     <string name="error_name_invalid">Недопустимое название проекта</string>
     <string name="error_name_required">Требуется название</string>
-    <!-- TODO string name="error_station_number">Wrong number of stations</string -->
+    <string name="error_station_number">Неверное кол-во пикетов</string>
     <string name="error_name_duplicate">Повторяющееся имя</string>
     <string name="error_no_section_in_section">Сечение внутри поперечного сечения недопустимо</string>
     <string name="error_team_required">Нужно указать группу съёмки</string>
@@ -790,9 +790,9 @@
     <string name="button_clear_memory">Очистить память</string>
     <string name="button_save"      >Сохр.     </string>
     <!-- UNUSED string name="button_select"    >Выбрать   </string -->
-    <!-- TODO string name="button_leg_station">Leg stations</string -->
-    <!-- TODO string name="button_all_station">All stations</string -->
-    <!-- TODO string name="button_leg_search">Leg search</string -->
+    <string name="button_leg_station">Пикеты замера</string>
+    <string name="button_all_station">Все пикеты</string>
+    <string name="button_leg_search">Поиск замера</string>
     <!-- UNUSED string name="button_search"    >Поиск    </string -->
     <string name="button_merge"     >Объединить     </string>
     <string name="button_saved"     >Сохраненный пикет</string>
