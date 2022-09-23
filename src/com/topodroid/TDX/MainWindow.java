@@ -338,7 +338,7 @@ public class MainWindow extends Activity
           // TDToast.makeBad( R.string.no_thmanager );
           TDLog.Error( "Td Manager activity not started" );
         }
-      } else if ( TDLevel.overTester && TDSetting.mTh2Edit && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // TH2EDIT DRAWING
+      } else if ( TDLevel.overExpert && TDSetting.mTh2Edit && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // TH2EDIT DRAWING
         try {
           Intent plotIntent = new Intent( Intent.ACTION_VIEW ).setClass( this,  DrawingWindow.class );
           plotIntent.putExtra( TDTag.TOPODROID_SURVEY_ID, -1L );
@@ -965,9 +965,7 @@ public class MainWindow extends Activity
       ++mNrButton1; // CAVE3D
       if ( TDLevel.overExpert ) {
         ++ mNrButton1; // TH MANAGER
-        if ( TDLevel.overTester ) {
-          if ( TDSetting.mTh2Edit ) ++ mNrButton1; // TH2EDIT DRAWING
-        }
+        if ( TDSetting.mTh2Edit ) ++ mNrButton1; // TH2EDIT DRAWING
       }
     }
     mButton1 = new Button[ mNrButton1 + 1 ];

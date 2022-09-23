@@ -127,5 +127,23 @@ public class NumShot
   //   return sh.from == from || sh.to == from || sh.from == to || sh.to == to;
   // }
 
+  // DEBUG
+  // public String toString()
+  // { 
+  //   if ( from != null ) {
+  //     if ( to != null ) {
+  //       return from.name + "-" + to.name;
+  //     } else {
+  //       return from.name + "-";
+  //     }
+  //   } else {
+  //     if ( to != null ) {
+  //       return "-" + to.name;
+  //     } else {
+  //       return "-";
+  //     }
+  //   }
+  // }
+
 }
 

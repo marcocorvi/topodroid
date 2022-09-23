@@ -466,7 +466,7 @@ public class DrawingWindow extends ItemDrawer
 
   private TDNum mNum;
   private float mDecl;
-  private String mFormatClosure;
+  private String mFormatClosure;  // loop closure report format
   // private int nr_multi_bad;    // number of bad-sibling leg shots - TODO move to TDNum
   private ArrayList< StringPair > mMultiBad;
   private int nr_magnetic_bad; // number of bad-magnetic leg shots

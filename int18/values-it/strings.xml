@@ -670,7 +670,7 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="stat_extlen">Lunghezza 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Lunghezza piano %1$.1f %2$s</string>
     <string name="stat_cycle">Cicli %1$d</string>
-    <string name="stat_loop">Anelli %1$d</string>
+    <string name="stat_loop">Anelli %1$d [%2$d %3$d]</string>
     <string name="stat_origin">Caposaldo zero: %1$s</string>
     <string name="stat_azimuth">Profilo proiezione azimut: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Tiri  %1$d,   Doppi %2$d,   Superficie %3$d</string -->

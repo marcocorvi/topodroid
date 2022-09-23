@@ -677,7 +677,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="stat_extlen">3D hossz %1$.1f %2$s</string>
     <string name="stat_projlen">Vízszintes vetület %1$.1f %2$s</string>
     <string name="stat_cycle">Ismétléseks %1$d</string>
-    <string name="stat_loop">Hurkok %1$d</string>
+    <string name="stat_loop">Hurkok %1$d [%2$d %3$d]</string>
     <string name="stat_origin">Kezdő pont: %1$s</string>
     <string name="stat_azimuth">Oldalnézet vetítési iránya: %1$.1f</string>
     <!-- UNUSED string name="stat_shot">Mérések  %1$d,   Megkettőzött %2$d,   Felszín %3$d</string -->

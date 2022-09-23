@@ -133,6 +133,18 @@ public class NumBranch
     if ( n == n2 ) return n1;
     return null;
   }
+
+  // DEBUG
+  // /** @return string presentation - sequence of shots
+  //  */
+  // public String toString()
+  // {
+  //   StringBuilder sb = new StringBuilder();
+  //   sb.append("[");
+  //   for ( NumShot sh : shots ) sb.append( sh.toString() ).append(" ");
+  //   sb.append("]");
+  //   return sb.toString();
+  // }
   
 }
 

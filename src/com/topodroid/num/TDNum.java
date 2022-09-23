@@ -29,25 +29,32 @@ import java.util.HashMap;
 
 public class TDNum
 {
+  public int nrCompensatedLoops;
+  public int nrInaccurateLoops;
+
   /** cstr: create the numerical centerline
    * @param data     list of survey data
    * @param start    start station
    * @param view     barriers list
    * @param hide     hiding list
+   * @param decl     magnetic declination
+   * @param loop_fmt loop closure report format
    */
-  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String format )
+  public TDNum( List< DBlock > data, String start, String view, String hide, float decl, String loop_fmt )
   {
     // TDLog.v( "data reduction: decl " + decl + " start " + start );
     mDecl = decl;
     surveyExtend   = true;
-    surveyAttached = computeNum( data, start, format );
+    nrCompensatedLoops = 0;
+    nrInaccurateLoops  = 0;
+    surveyAttached = computeNum( data, start, loop_fmt );
     setStationsHide( hide );
     setStationsBarr( view );
   }
 
   // public void dump( )
   // {
-  //   tdlog.v( "TDNum Stations:" );
+  //   tdlog.v( "Num Stations:" );
   //   for ( NumStation st : mStations ) {
   //     tdlog.v( "   " + st.name + " S: " + st.s + " E: " + st.e );
   //   }
@@ -588,12 +595,13 @@ public class TDNum
   private TriShot      mLastLeg;      // last leg
 
   /** insert a new shot into the survey
-   * @param blk    new shot
-   * @param format loop closure report format
+   * @param blk       new shot
+   * @param leg       ???
+   * @param loop_fmt  loop closure report format
    * @return true if the shot has been appended
    * @note the new shot is assumed not to close any loop
    */
-  public boolean appendData( DBlock blk, DBlock leg, String format )
+  public boolean appendData( DBlock blk, DBlock leg, String loop_fmt )
   {
     if ( blk == null ) return false;
     mBuffer.put( blk );
@@ -601,13 +609,13 @@ public class TDNum
     if ( leg != null && mLastSplay != null ) {
       // TDLog.v( "num got_leg ");
       removeSplay( mLastSplay );
-      appendLeg( mLastSplay.block, leg, format );
+      appendLeg( mLastSplay.block, leg, loop_fmt );
       mLastSplay = null;
     } else {
       if ( blk.isSplay() ) {
         // if ( mLastLeg != null ) {
-        //   TDLog.v( "num insert leg ");
-        //   insertLeg( mLastLeg, format );
+        //   // TDLog.v( "num insert leg ");
+        //   insertLeg( mLastLeg, loop_fmt );
         // }
         mLastLeg = null;  // clear last-leg
         TriSplay splay = null;
@@ -639,7 +647,12 @@ public class TDNum
     return true;
   }
 
-  private boolean appendLeg( DBlock blk, DBlock leg, String format ) 
+  /** append a leg to the survey network (?)
+   * @param blk       new shot
+   * @param leg       ???
+   * @param loop_fmt  loop closure report format
+   */
+  private boolean appendLeg( DBlock blk, DBlock leg, String loop_fmt ) 
   {
     if ( leg.isMainLeg() ) {
       // TDLog.v( "num append with leg " + leg.mId + " <" + leg.mFrom + "-" + leg.mTo + ">" );
@@ -669,17 +682,17 @@ public class TDNum
     for ( ; blk1 != null && blk1 != blk; blk1 = mBuffer.get() ) {
       mLastLeg.addBlock( blk1 );
     }
-    insertLeg( mLastLeg, format );
+    insertLeg( mLastLeg, loop_fmt );
     return true;
   }
 
   void addClosure( NumClosure closure ) { mClosures.add( closure ); }
 
   /** insert a leg shot
-   * @param ts     leg shot
-   * @param format loop closure report format
+   * @param ts       leg shot
+   * @param shot_fmt shot report format
    */
-  private void insertLeg( TriShot ts, String format )
+  private void insertLeg( TriShot ts, String shot_fmt )
   {
     float anomaly = StationPolicy.doMagAnomaly() ? compensateMagneticAnomaly( ts ) : 0;
     // try to see if any temp-shot station is on the list of stations
@@ -692,11 +705,11 @@ public class TDNum
       sf.addAzimuth( ts.b(), aext );
       if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
         // do close loop also on duplicate shots
-        if ( format != null ) {
+        if ( shot_fmt != null ) {
           ArrayList< NumShot > shots = getShortestPathShots( sf, st );
           ArrayList< NumShortpath > paths = new ArrayList<>();
           mStations.initShortestPath( paths, 1000000.0f );
-          (new ClosureTask( this, format, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+          (new ClosureTask( this, shot_fmt, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
         }
         if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
           addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -805,10 +818,10 @@ public class TDNum
   /** survey data reduction 
    * @param data   shot list
    * @param start  start station
-   * @param format loop closure report format
+   * @param path_fmt path report format
    * @return true if all shots are attached
    */
-  private boolean computeNum( List< DBlock > data, String start, String format )
+  private boolean computeNum( List< DBlock > data, String start, String path_fmt )
   {
     if ( TDInstance.datamode == SurveyInfo.DATAMODE_DIVING ) { // preprocess: convert diving-mode data to normal form
       HashMap< String, Float > depths = new HashMap< String, Float >();
@@ -972,11 +985,11 @@ public class TDNum
             sf.addAzimuth( ts.b(), aext );
             if ( st != null ) { // loop-closure -: need the loop length to compute the fractional closure error
               // do close loop also on duplicate shots
-	      if ( format != null ) {
+	      if ( path_fmt != null ) {
                 ArrayList< NumShot > shots = getShortestPathShots( sf, st );
                 ArrayList< NumShortpath > paths = new ArrayList<>();
                 mStations.initShortestPath( paths, 1000000.0f );
-                (new ClosureTask( this, format, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
+                (new ClosureTask( this, path_fmt, shots, paths, sf, st, ts.d(), ts.b(), ts.c() )).execute();
               }
               if ( /* TDSetting.mAutoStations || */ TDSetting.mLoopClosure == TDSetting.LOOP_NONE ) { // do not close loop
                 addOpenLoopShot( sf, ts, iext, aext, fext, anomaly ); // keep loop open: new station( id=ts.to, from=sf, ... )
@@ -1362,13 +1375,14 @@ public class TDNum
   }
 
   /** identifies independent cycles from the set of branches
-   * @param cycles     list of cycles (output)
+   * @return list of independent cycles
    * @param branches   list of branches
    *
    * checked with C++ test, however it seems that it can generate ANR (6.0.33 Android-11)
    */
-  private void makeIndependentCycles( ArrayList< NumCycle > cycles, ArrayList< NumBranch > branches ) 
+  private ArrayList< NumCycle > makeIndependentCycles( ArrayList< NumBranch > branches ) 
   {
+    ArrayList< NumCycle > cycles = new ArrayList<>();
     int bs = branches.size();
     // StringBuilder sb = new StringBuilder();
     // for ( int k0 = 0; k0 < bs; ++k0 ) {
@@ -1423,6 +1437,7 @@ public class TDNum
       b0.use = 2;
       // n0.use = 2;
     }
+    return cycles;
   }
 
   /** make the single loops
@@ -1641,10 +1656,7 @@ public class TDNum
     makeSingleLoops( singleBranches, shots ); // check all shots without branch
     compensateSingleLoops( singleBranches );
 
-    ArrayList< NumCycle > cycles = new ArrayList<>();
-    makeIndependentCycles( cycles, branches );
-
-    ArrayList< NumCycle > indep_cycles = cycles;
+    ArrayList< NumCycle > cycles = makeIndependentCycles( branches );
     // This is not necessary as the cycles are already independent
     // if ( TDSetting.mLoopClosure == ? ) {
     //   indep_cycles = new ArrayList<>(); // independent cycles
@@ -1655,7 +1667,7 @@ public class TDNum
     //   }
     // }
 
-    int ls = indep_cycles.size();
+    int ls = cycles.size();
     int bs = branches.size();
 
     double[] CE = new double[ ls ]; // closure errors : mLoopClosure = NEW
@@ -1664,18 +1676,108 @@ public class TDNum
     for ( NumBranch branch : branches ) { // compute branches and cycles errors
       branch.computeError();
     }
-    for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
-      NumCycle cy = indep_cycles.get(y);
+    for (int y=0; y<ls; ++y ) {  // cycle closure errors
+      NumCycle cy = cycles.get(y);
       cy.computeError();
       CE[y] = cy.e;
       CS[y] = cy.s;
       CV[y] = cy.v;
     }
 
+    // ArrayList< NumCycle > indep_cycles; // 2022-09-23 replaced with cycles
+
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) { // find the basis of loops with smallest error
+      // TDLog.v("LOOP selective policy");
+      // FIXME only up to composition of three cycles are considered
+      ArrayList< NumCycle > tmp_cycles = new ArrayList<>();
+      for ( int k1 = 0; k1 < ls; ++k1 ) {
+        NumCycle c1 = cycles.get( k1 );
+        // TDLog.v("LOOP " + k1 + " error " + c1.error() + " " + c1.toString() );
+        tmp_cycles.add( c1 );
+        for ( int k2 = k1+1; k2 < ls; ++k2 ) {
+          NumCycle c2 = cycles.get( k2 );
+          // TDLog.v("LOOP " + k2 + " error " + c2.error() + " " + c2.toString() );
+          if ( c1.overlap( c2 ) ) {
+            NumCycle c12a = c1.compose( c2, 1 );
+            c12a.computeError();
+            NumCycle c12b = c1.compose( c2, -1 );
+            c12b.computeError();
+            tmp_cycles.add( c12a );
+            tmp_cycles.add( c12b );
+            // TDLog.v("LOOP " + k1 + "+" + k2 + " error A " + c12a.error() + " B " + c12b.error() );
+            for ( int k3 = k2+1; k3 < ls; ++k3 ) {
+              NumCycle c3 = cycles.get( k3 ); 
+              if ( c12a.overlap( c3 ) ) {
+                NumCycle c12a3a = c12a.compose( c3, 1 );
+                c12a3a.computeError();
+                NumCycle c12a3b = c12a.compose( c3, -1 );
+                c12a3b.computeError();
+                tmp_cycles.add( c12a3a );
+                tmp_cycles.add( c12a3b );
+              }
+              if ( c12b.overlap( c3 ) ) {
+                NumCycle c12b3a = c12a.compose( c3, 1 );
+                c12b3a.computeError();
+                NumCycle c12b3b = c12a.compose( c3, -1 );
+                c12b3b.computeError();
+                tmp_cycles.add( c12b3a );
+                tmp_cycles.add( c12b3b );
+              }
+            }
+          }
+        }
+      }
+      int tls = tmp_cycles.size();
+      // TDLog.v("LOOP composite " + tls );
+      // sort tmp_cycles by the (square) error - only first ls cycles
+      for ( int k = 0; k<ls; ++k ) {
+        NumCycle ck = tmp_cycles.get( k );
+        double ckse = ck.error();
+        for ( int j = k+1; j < tls; ++j ) {
+          NumCycle cj = tmp_cycles.get( j );
+          double cjse = cj.error();
+          if ( ckse > cjse ) { // try to swap
+            boolean swap = true;
+            for ( int i = 0; i < k; ++ i ) {
+              NumCycle ci = tmp_cycles.get( i );
+              int overlap_cnt = ci.overlapCount( cj );
+              if ( Math.abs(overlap_cnt) == ci.size() ) {
+                swap = false;
+                // TDLog.v("LOOP " + i + " " + ci.size() + " overlap " + j + ": " + overlap_cnt );
+                break;
+              }
+            }
+            if ( swap ) {
+              // TDLog.v("LOOP swap " + j + " " + cjse + " with " + k + " " + ckse );
+              tmp_cycles.set( k, cj );
+              tmp_cycles.set( j, ck );
+              ck = cj;
+              ckse = cjse;
+            }
+          // } else {
+          //   // TDLog.v("LOOP " + k + " " + ckse + " <= " + j + " " + cjse );
+          }
+        }
+      }
+      cycles = new ArrayList<>(); // indep_cycles
+      for ( int k = 0; k < ls; ++k ) {
+        NumCycle ck = tmp_cycles.get( k );
+        if ( ck.error() < ck.length() * TDSetting.mLoopThr / 100 ) {
+          // TDLog.v("LOOP " + k + " using " + ck.length() + " " + ck.error() + " " + ck.toString() );
+          cycles.add( tmp_cycles.get(k) ); // indep_cycles
+        } else {
+          ++ nrInaccurateLoops;
+        }
+      }
+      ls = cycles.size(); // indep_cycles
+    // } else {
+    //   indep_cycles = cycles;
+    }
+
     // cycle-branch incidence matrix
     int[] alpha = new int[ bs * ls ]; // cycle = row-index, branch = col-index
     for (int y=0; y<ls; ++y ) {  // branch-cycle matrix
-      NumCycle cy = indep_cycles.get(y);
+      NumCycle cy = cycles.get(y); // indep_cycles
       for (int x=0; x<bs; ++x ) {
         alpha[ y*bs + x] = cy.getBranchDir( branches.get(x) );
         /* old way
@@ -1692,6 +1794,8 @@ public class TDNum
     }
 
     if ( TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED ) {
+      nrCompensatedLoops = ls;
+      // nrInaccurateLoops = 0;
       double[] WE = new double[ bs ]; // branch coordinates weights 
       double[] WS = new double[ bs ];
       double[] WV = new double[ bs ];
@@ -1729,33 +1833,38 @@ public class TDNum
       double det = LoopUtil.computeInverse( aa, ls, ls, ls );
 
       for (int y=0; y<ls; ++y ) { // compute the closure compensation values
-        NumCycle cy = indep_cycles.get(y);
+        NumCycle cy = cycles.get(y); // indep_cycles
         cy.resetCorrections();
         for (int x=0; x<ls; ++x ) {
-          NumCycle cx = indep_cycles.get(x);
+          NumCycle cx = cycles.get(x); // indep_cycles
           cy.ce += aa[ y*ls + x] * cx.e;
           cy.cs += aa[ y*ls + x] * cx.s;
           cy.cv += aa[ y*ls + x] * cx.v;
         }
-        cy.applyCorrection = true; // NOTE apply correction is binary [no/yes] - it could be a value in [0,1]
-        if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
-          double dc = cy.ce * cy.ce + cy.cs * cy.cs + cy.cv * cy.cv;
-          if ( dc > 0.0 ) {
-            dc = Math.sqrt( dc );
-            if ( dc > cy.len * TDSetting.mLoopThr / 100.0 ) { // do not compensate loop misclosure (mLoopThr is a percent)
-              cy.applyCorrection = false;
-            }
-          }
-        }
+        // cy.applyCorrection = true; // NOTE apply correction is binary [no/yes] - it could be a value in [0,1]
+        // if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
+        //   double err = cy.error();
+        //   if ( err > 0.0 ) {
+        //     double cy_len = cy.length();
+        //     if ( err > cy_len * TDSetting.mLoopThr / 100.0 ) { // do not compensate loop misclosure (mLoopThr is a percent)
+        //       cy.applyCorrection = false;
+        //       ++ nrInaccurateLoops;
+        //     }
+        //     // TDLog.v("LOOP error " + err + " len " + cy_len + " correct " + cy.applyCorrection );
+        //   }
+        // }
       }
+      // nrCompensatedLoops = ls - nrInaccurateLoops;
+      nrCompensatedLoops = ls;
+
       for (int x=0; x<bs; ++x ) { // correct branches: apply loop compensations
         NumBranch bx = branches.get(x);
         double e = 0;
         double s = 0;
         double v = 0;
         for (int y=0; y<ls; ++y ) {
-          NumCycle cy = indep_cycles.get(y);
-          if ( ! cy.applyCorrection ) continue; // SELECTIVE
+          NumCycle cy = cycles.get(y); // indep_cycles
+          // if ( ! cy.applyCorrection ) continue; // SELECTIVE
           e += alpha[ y*bs + x ] * cy.ce;
           s += alpha[ y*bs + x ] * cy.cs;
           v += alpha[ y*bs + x ] * cy.cv;

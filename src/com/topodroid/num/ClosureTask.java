@@ -31,6 +31,17 @@ class ClosureTask extends AsyncTask< Void, Void, Void >
   String sfname, stname;
   double dv, dl, dh;
 
+  /** cstr
+   * @param num0    data-reduction
+   * @param fmt     format (?)
+   * @param shots0
+   * @param paths0  list of shortest paths (to be filled)
+   * @param sf0     FROM station
+   * @param st0     TO station
+   * @param d0      distance (of what ?)
+   * @param b0      azimuth
+   * @param c0      clino
+   */
   ClosureTask( TDNum num0, String fmt, ArrayList<NumShot> shots0, ArrayList<NumShortpath> paths0, 
                NumStation sf0, NumStation st0, float d0, float b0, float c0 )
   {

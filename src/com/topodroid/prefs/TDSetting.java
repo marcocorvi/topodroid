@@ -748,7 +748,7 @@ public class TDSetting
     mLoopClosure = loop_closure;
     if ( mLoopClosure == LOOP_CYCLES || mLoopClosure == LOOP_WEIGHTED ) {
       if ( ! TDLevel.overAdvanced ) mLoopClosure = LOOP_NONE;
-    } else if ( mLoopClosure == LOOP_TRIANGLES ) {
+    } else if ( mLoopClosure == LOOP_TRIANGLES || mLoopClosure == LOOP_SELECTIVE ) {
       if ( ! TDLevel.overExpert ) mLoopClosure = LOOP_NONE;
     }
   }

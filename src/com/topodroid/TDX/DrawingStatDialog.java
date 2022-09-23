@@ -130,7 +130,7 @@ class DrawingStatDialog extends MyDialog
         if ( nr_loop == 0 ) {
           ((TextView)findViewById( R.id.text_stat_loops )).setText( R.string.loop_none );
         } else {
-          ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop ) );
+          ((TextView)findViewById( R.id.text_stat_loops )).setText( String.format( res.getString(R.string.stat_loop), nr_loop, mNum.nrCompensatedLoops, mNum.nrInaccurateLoops ) );
 	  LinearLayout list = (LinearLayout) findViewById( R.id.list );
           LinearLayout.LayoutParams lp = TDLayout.getLayoutParams( 10, 10, 20, 20 );
 	  for ( NumClosure cl : cls ) {
