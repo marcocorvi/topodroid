@@ -1473,8 +1473,8 @@
 
   <!-- UNUSED string name="pref_data_backup_title">数据自动输出</string -->
   <!-- UNUSED string name="pref_data_backup_summary">自动输出数据 (需要设置默认格式)</string -->
-  <TODO string name="pref_editable_stations_title">站点可编辑</string>
-  <TODO string name="pref_editable_stations_summary">在数据列表中站点名可编辑</string>
+  <string name="pref_editable_stations_title">站点可编辑</string>
+  <string name="pref_editable_stations_summary">在数据列表中站点名可编辑</string>
   <string name="pref_zipped_symbols_title">压缩符号文件</string>
   <string name="pref_zipped_symbols_summary">存储/加载符号文件到/从压缩档案</string>
   <string name="pref_fixed_origin_title">草图原点</string>
@@ -1495,8 +1495,8 @@
   <string name="pref_mag_thr_summary">测线磁场的容差百分比</string>
   <string name="pref_dip_thr_title">磁偏角容差</string>
   <string name="pref_dip_thr_summary">公差超过测线磁偏角</string>
-  <TODO string name="pref_sibling_thr_title">相邻线阈值</string>
-  <TODO string name="pref_sibling_thr_summary">相邻线测射阈值 [&#37;]</string>
+  <string name="pref_sibling_thr_title">相邻线阈值</string>
+  <string name="pref_sibling_thr_summary">相邻线测射阈值 [&#37;]</string>
 
   <string name="pref_leg_title">主线容差</string>
   <string name="pref_leg_summary">容差在主线测线之间</string>
