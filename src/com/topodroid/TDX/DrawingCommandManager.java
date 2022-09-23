@@ -655,15 +655,15 @@ public class DrawingCommandManager
   }
 
   /** clear the sketch items: forward the clear to the scraps
+   * @note called only by clearDrawing
    */
   private void clearSketchItems()
   {
     synchronized( mScraps ) {
       for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
     }
-    // FIXME: two line added 20220916
+    // FIXME: one line added 20220916
     mScraps.clear();      // TH2EDIT added
-    mCurrentScrap = null; // TH2EDIT added
     syncClearSelected();
     mDisplayPoints = false;
   }
@@ -672,6 +672,7 @@ public class DrawingCommandManager
    */
   void clearDrawing()
   {
+    // TDLog.v("COMMAND clear drawing");
     clearReferences();
     clearSketchItems();
     // mMatrix = new Matrix(); // identity
