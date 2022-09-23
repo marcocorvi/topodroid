@@ -1008,8 +1008,10 @@ public class TDNum
     }
 
     // ---------------------------------- LOOP CLOSURE -------------------------------
-    if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED ) { // TDLog.Log( TDLog.LOG_NUM, "loop compensation");
-      // TDLog.Log( TDLog.LOG_NUM, "loop closure compensation");
+    if ( TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
+      || TDSetting.mLoopClosure == TDSetting.LOOP_WEIGHTED 
+      || TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
+      // TDLog.v( "NUM loop closure compensation");
       compensateLoopClosure( mNodes, mShots );
   
       // recompute station positions
@@ -1712,7 +1714,8 @@ public class TDNum
         NumBranch bx = branches.get(x);
         bx.compensateError( DE[x], DS[x], DV[x] );
       }
-    } else { // TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES
+
+    } else { // TDSetting.mLoopClosure == TDSetting.LOOP_CYCLES || TDSetting.LOOP_SELECTIVE 
       double[] aa = new double[ ls * ls ];    // 
       for (int y1=0; y1<ls; ++y1 ) { // cycle-cycle matrix
         for (int y2=0; y2<ls; ++y2 ) {
@@ -1727,24 +1730,32 @@ public class TDNum
 
       for (int y=0; y<ls; ++y ) { // compute the closure compensation values
         NumCycle cy = indep_cycles.get(y);
-        cy.ce = 0; // corrections
-        cy.cs = 0;
-        cy.cv = 0;
+        cy.resetCorrections();
         for (int x=0; x<ls; ++x ) {
           NumCycle cx = indep_cycles.get(x);
           cy.ce += aa[ y*ls + x] * cx.e;
           cy.cs += aa[ y*ls + x] * cx.s;
           cy.cv += aa[ y*ls + x] * cx.v;
         }
+        cy.applyCorrection = true; // NOTE apply correction is binary [no/yes] - it could be a value in [0,1]
+        if ( TDSetting.mLoopClosure == TDSetting.LOOP_SELECTIVE ) {
+          double dc = cy.ce * cy.ce + cy.cs * cy.cs + cy.cv * cy.cv;
+          if ( dc > 0.0 ) {
+            dc = Math.sqrt( dc );
+            if ( dc > cy.len * TDSetting.mLoopThr / 100.0 ) { // do not compensate loop misclosure (mLoopThr is a percent)
+              cy.applyCorrection = false;
+            }
+          }
+        }
       }
-      
-      for (int x=0; x<bs; ++x ) { // correct branches
+      for (int x=0; x<bs; ++x ) { // correct branches: apply loop compensations
         NumBranch bx = branches.get(x);
         double e = 0;
         double s = 0;
         double v = 0;
         for (int y=0; y<ls; ++y ) {
           NumCycle cy = indep_cycles.get(y);
+          if ( ! cy.applyCorrection ) continue; // SELECTIVE
           e += alpha[ y*bs + x ] * cy.ce;
           s += alpha[ y*bs + x ] * cy.cs;
           v += alpha[ y*bs + x ] * cy.cv;

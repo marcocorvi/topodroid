@@ -175,6 +175,19 @@ The first shot entry on the list may not get updated after an editing or a tap, 
 The "Refresh" button can be used to request a reload of the list, if this happen.
 <br><p>
 
+<b>Loop error compensation</b><br>
+It is advisable not to do the compensation, as this allows to see graphically the misclosures, and spot possible survey errors. 
+This is the default behaviour.<br><p>
+
+Nevertheless TopoDroid implements a few "loop error compensation" policies.<br>
+The <i>normal</i> policy distributes the lopp closure errors on the network branches that make the loops.<br>
+In the <i>weighted</i> policy the misclusures of the loops are weighted according to the "branch relevance".<br>
+<!-- i don't recall exacty how this works -->
+The "selective" compensation applies only the corrections of loops with misclosure smaller than a certain percentr
+(the "loop threshold" setting) of the loop length.<br>
+Finally, the special loop compensation based on "triangles" is for <a href="page_trilateration.htm">trilateration</a> [E].
+<br><p>
+
 <a href="manual05.htm">&lt; Calibration data</a> |
 <a href="manual07.htm">Shot list &gt;</a>
 

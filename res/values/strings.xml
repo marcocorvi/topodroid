@@ -1668,6 +1668,8 @@ There are other settings for the presentation of the sketchs (icon size, label s
   <string name="pref_full_affine_summary">Enable sketch affine transformation</string>
   <string name="pref_loopClosure_title">Loop closure</string>
   <string name="pref_loopClosure_summary">Loop closure-error compensation</string>
+  <string name="pref_loop_thr_title">Loop threshold</string>
+  <string name="pref_loop_thr_summary">Loop compensation threshold</string>
   <!-- UNUSED string name="pref_splayExtend_title">Estimate splay extend</string -->
   <!-- UNUSED string name="pref_splayExtend_summary">Estimate splay extend</string -->
   <string name="pref_swapLR_title">Compass swap LR</string>

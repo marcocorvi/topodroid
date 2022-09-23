@@ -410,11 +410,13 @@ public class TDSetting
   public static int     mSplayAlpha    = 80;       // splay alpha [default 80 out of 100]
   // public static boolean mSplayAsDot    = false;    // draw splays as dots
 
-  public static final int LOOP_NONE       = 0;
+  public static final int LOOP_NONE       = 0; // coincide with values in array.xml
   public static final int LOOP_CYCLES     = 1;
   public static final int LOOP_TRIANGLES  = 3;
   public static final int LOOP_WEIGHTED   = 4;
+  public static final int LOOP_SELECTIVE  = 5;
   public static int mLoopClosure = LOOP_NONE;      // loop closure: 0 none, 1 normal, 3 triangles
+  public static float mLoopThr = 1.0f; // selective compensation threshold [%]
   
   public static final  String UNIT_LENGTH         = "meters";
   public static final  String UNIT_ANGLE          = "degrees";
@@ -1161,12 +1163,13 @@ public class TDSetting
     mBedding       = prefs.getBoolean( keyGShot[ 5], bool(defGShot[ 5]) ); // DISTOX_BEDDING
     mWithSensors   = prefs.getBoolean( keyGShot[ 6], bool(defGShot[ 6]) ); // DISTOX_WITH_SENSORS
     setLoopClosure( tryInt(   prefs,   keyGShot[ 7],      defGShot[ 7] ) );// DISTOX_LOOP_CLOSURE_VALUE
-    mWithAzimuth   = prefs.getBoolean( keyGShot[ 8], bool(defGShot[ 8]) ); // DISTOX_ANDROID_AZIMUTH
-    mTimerWait     = tryInt(   prefs,  keyGShot[ 9],      defGShot[ 9] );  // DISTOX_SHOT_TIMER
-    mBeepVolume    = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_BEEP_VOLUME
-    mBlunderShot   = prefs.getBoolean( keyGShot[11], bool(defGShot[11]) ); // DISTOX_BLUNDER_SHOT
-    mSplayStation  = prefs.getBoolean( keyGShot[12], bool(defGShot[12]) ); // DISTOX_SPLAY_STATION
-    mSplayOnlyForward    = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_SPLAY_GROUP
+    mLoopThr       = tryFloat( prefs,  keyGShot[ 8],      defGShot[ 8] );  // DISTOX_LOOP_THR
+    mWithAzimuth   = prefs.getBoolean( keyGShot[ 9], bool(defGShot[ 9]) ); // DISTOX_ANDROID_AZIMUTH
+    mTimerWait     = tryInt(   prefs,  keyGShot[10],      defGShot[10] );  // DISTOX_SHOT_TIMER
+    mBeepVolume    = tryInt(   prefs,  keyGShot[11],      defGShot[11] );  // DISTOX_BEEP_VOLUME
+    mBlunderShot   = prefs.getBoolean( keyGShot[12], bool(defGShot[12]) ); // DISTOX_BLUNDER_SHOT
+    mSplayStation  = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_SPLAY_STATION
+    mSplayOnlyForward    = prefs.getBoolean( keyGShot[14], bool(defGShot[14]) ); // DISTOX_SPLAY_GROUP
     // mWithTdManager = prefs.getBoolean( keyGShot[13], bool(defGShot[13]) ); // DISTOX_TDMANAGER
     // TDLog.v("SETTING load secondary GEEK data done");
 
@@ -1702,19 +1705,21 @@ public class TDSetting
       mWithSensors  = tryBooleanValue( hlp, k, v, bool(def[ 6]) );
     } else if ( k.equals( key[ 7 ] ) ) { // DISTOX_LOOP_CLOSURE_VALUE
       setLoopClosure( tryIntValue( hlp, k, v, def[ 7] ) );
-    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_ANDROID_AZIMUTH
-      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 8]) );
-    } else if ( k.equals( key[ 9  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
-      mTimerWait        = tryIntValue( hlp, k, v, def[ 9] );
+    } else if ( k.equals( key[ 8 ] ) ) { // DISTOX_LOOP_THR
+      mLoopThr = tryFloatValue( hlp, k, v, def[ 8] );
+    } else if ( k.equals( key[ 9 ] ) ) { // DISTOX_ANDROID_AZIMUTH
+      mWithAzimuth  = tryBooleanValue( hlp, k, v, bool(def[ 9]) );
+    } else if ( k.equals( key[10  ] ) ) { // DISTOX_SHOT_TIMER [3 ..)
+      mTimerWait        = tryIntValue( hlp, k, v, def[10] );
       if ( mTimerWait < 0 ) { mTimerWait = 0; ret = TDString.ZERO; }
-    } else if ( k.equals( key[ 10 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
-      ret = setBeepVolume( tryIntValue( hlp, k, v, def[10] ) );
-    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BLUNDER_SHOT
-      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[11]) );
-    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_SPLAY_STATION 
-      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[12]) );
-    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_SPLAY_GROUP
-      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[ 11 ] ) ) { // DISTOX_BEEP_VOLUME [0 .. 100]
+      ret = setBeepVolume( tryIntValue( hlp, k, v, def[11] ) );
+    } else if ( k.equals( key[ 12 ] ) ) { // DISTOX_BLUNDER_SHOT
+      mBlunderShot = tryBooleanValue( hlp, k, v, bool(def[12]) );
+    } else if ( k.equals( key[ 13 ] ) ) { // DISTOX_SPLAY_STATION 
+      mSplayStation = tryBooleanValue( hlp, k, v, bool(def[13]) );
+    } else if ( k.equals( key[ 14 ] ) ) { // DISTOX_SPLAY_GROUP
+      mSplayOnlyForward = tryBooleanValue( hlp, k, v, bool(def[14]) );
     // } else if ( k.equals( key[13 ] ) ) { // DISTOX_TDMANAGER
     //   mWithTdManager = tryBooleanValue( hlp, k, v, bool(def[13]) );
 
@@ -2968,7 +2973,7 @@ public class TDSetting
       pw.printf(Locale.US, "Splay: vthr %.1f, classes %c\n", mSplayVertThrs, tf(mSplayClasses) );
       pw.printf(Locale.US, "Stations: names %d, init \"%s\"\n", mStationNames, mInitStation );
       pw.printf(Locale.US, "Extend: thr %.1f, manual %c, frac %c\n", mExtendThr, tf(mAzimuthManual), tf(mExtendFrac) );
-      pw.printf(Locale.US, "Loop: %d \n", mLoopClosure );
+      pw.printf(Locale.US, "Loop: %d selective %.1f\n", mLoopClosure, mLoopThr );
       pw.printf(Locale.US, "Units: length %.2f [%s], angle %.2f [%s]\n", mUnitLength, mUnitLengthStr, mUnitAngle, mUnitAngleStr );
       pw.printf(Locale.US, "ThumbSize %d, SavedStations %c, LegonlyUpdate %c, WithAzimuth %c, WithSensors %c, Bedding %c \n", // TdManager %c\n",
         mThumbSize, tf(mSavedStations), tf(mLegOnlyUpdate), tf(mWithAzimuth), tf(mWithSensors), tf(mBedding) ); // , tf(mWithTdManager) );
@@ -3526,6 +3531,9 @@ public class TDSetting
         if ( line.startsWith("Loop") ) {
           if ( vals.length > 1 ) {
             mLoopClosure = getInt( vals, 1, 0 ); setPreference( editor, "DISTOX_LOOP_CLOSURE_VALUE", mLoopClosure );
+          }
+          if ( vals.length > 3 ) {
+            mLoopThr = getFloat( vals, 3, 1.0f ); setPreference( editor, "DISTOX_LOOP_THR", mLoopThr );
           }
           continue;
         }

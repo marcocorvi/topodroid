@@ -37,7 +37,18 @@ class NumCycle
   // private ArrayList< NumNode >   nodes;
   // int[]       dirs; // branch direction in the cycle
   double e, s, v;    // displacement = closure error
-  double ce, cs, cv; // corrections
+  double ce, cs, cv; // compensation corrections
+  double len;        // cycle length (sum of branches lengths)
+  boolean applyCorrection; // whether to apply loop correction in the compensation (SELECTIVE case)
+
+  /** reset the loop correction
+   */
+  void resetCorrections()
+  {
+    ce = 0;
+    cs = 0;
+    cv = 0;
+  }
 
   /** @return the number of branches in this cycle
    */
@@ -53,6 +64,8 @@ class NumCycle
     branches = new ArrayList< NumCycleBranch >();
     // nodes = new NumNode[mMax];
     // dirs  = new int[mMax];
+    len = 0;
+    applyCorrection = true;
   }
 
   /** add a branch to this cycle
@@ -61,6 +74,7 @@ class NumCycle
    */
   void addBranch( NumBranch branch, NumNode node )
   {
+    len += branch.len;
     branches.add( new NumCycleBranch( branch, node, ( (node == branch.n2)? 1 : -1 ) ) );
     // if ( mSize < mMax ) {
     //   branches[mSize] = branch;

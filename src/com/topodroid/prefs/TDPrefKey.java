@@ -20,22 +20,22 @@ public class TDPrefKey
   public static final String TRUE  = "true";
 
   public static String[] MAIN = { // [14]
-    "DISTOX_CWD",           // 0 // CWD must be the last of primary preferences
-    "DISTOX_TEXT_SIZE",     // 1 * // size of text [pt]
-    "DISTOX_SIZE_BUTTONS",  // 2 * // size of buttons (S, N, M, L, XL)
-    "DISTOX_EXTRA_BUTTONS", // 3 * // Activity Level
-    "DISTOX_MKEYBOARD",     // 4 * // whether to use TopoDroid keypads
-    "DISTOX_NO_CURSOR",     // 5 * // no cursor for custom keyboard
-    "DISTOX_LOCAL_MAN",     // 6 * // enable local man pages
-    "DISTOX_LOCALE",        // 7 * // language
-    "DISTOX_ORIENTATION",   
-    // "DISTOX_COSURVEY",      // 8 * // whether to enable co-surveying // IF_COSURVEY
-    "DISTOX_EXPORT_PREF",   // 9  FORWARD
-    "DISTOX_SURVEY_PREF",   //    FORWARD
-    "DISTOX_PLOT_PREF",     //    FORWARD
-    "DISTOX_DEVICE_PREF",   // 12 FORWARD
-    "DISTOX_CAVE3D_PREF",   //    FORWARD
-    "DISTOX_GEEK_PREF",     //    FORWARD
+    "DISTOX_CWD",           // CWD must be the last of primary preferences
+    "DISTOX_TEXT_SIZE",     // size of text [pt]
+    "DISTOX_SIZE_BUTTONS",  // size of buttons (S, N, M, L, XL)
+    "DISTOX_EXTRA_BUTTONS", // Activity Level
+    "DISTOX_MKEYBOARD",     // whether to use TopoDroid keypads
+    "DISTOX_NO_CURSOR",     // no cursor for custom keyboard
+    "DISTOX_LOCAL_MAN",     // enable local man pages
+    "DISTOX_LOCALE",        // language
+    "DISTOX_ORIENTATION",   // 0 unspecified, 1 portrait, 2 landscape
+    // "DISTOX_COSURVEY",   // whether to enable co-surveying // IF_COSURVEY
+    "DISTOX_EXPORT_PREF",   // FORWARD
+    "DISTOX_SURVEY_PREF",   // FORWARD
+    "DISTOX_PLOT_PREF",     // FORWARD
+    "DISTOX_DEVICE_PREF",   // FORWARD
+    "DISTOX_CAVE3D_PREF",   // FORWARD
+    "DISTOX_GEEK_PREF",     // FORWARD
     // "DISTOX_SKETCH_PREF",   //    FORWARD
     "DISTOX_EXPORT_SETTINGS", // 15
     null
@@ -508,7 +508,7 @@ public class TDPrefKey
 
   public static String[] EXPORT_CSV = { // [1]
     "DISTOX_CSV_RAW",
-    "DISTOX_CSV_SEP",
+    "DISTOX_CSV_SEP",   // separator: 0 comma, 1 pipe, 2 tab
     "DISTOX_SURVEX_EOL"
   };
   static int[] EXPORT_CSVtitle = { // [1]
@@ -828,7 +828,6 @@ public class TDPrefKey
     "DISTOX_EXTEND_THR2",     // 5 // half angle around 90 where splays have "vert" extend
     "DISTOX_VTHRESHOLD",           // if shot clino is above, LRUD are horizontal
     "DISTOX_AZIMUTH_MANUAL",  // 7 * // whether the "extend" is fixed L or R, selected by hand 
-    // "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
     "DISTOX_PREV_NEXT",       // 9  // whether to put "prev-next" arrows in shot edit dialog
     "DISTOX_BACKSIGHT", // whether to add backsight fields in manual shot input dialog
     "DISTOX_LEG_FEEDBACK",
@@ -1381,7 +1380,8 @@ public class TDPrefKey
     "DISTOX_BACKSHOT",        // using DistoX in backshot mode
     "DISTOX_BEDDING",         // splays bed plane interpolation
     "DISTOX_WITH_SENSORS",    // using sensors
-    "DISTOX_LOOP_CLOSURE_VALUE",     // whether to close loop
+    "DISTOX_LOOP_CLOSURE_VALUE", // loop compensation: 0 no, 1 yes, 2 weighted, 3 selective, 4 triangle
+    "DISTOX_LOOP_THRESHOLD",     // selective loop compensation threshold [%]
     // "DISTOX_DIST_TOLERANCE",  // ratio of distance tolerance to angle tolerance
     // "DISTOX_SPLAY_ACTIVE",    // attach splays to active station, if defined
     // "DISTOX_WITH_RENAME",     // with survey "rename" menu
@@ -1404,6 +1404,7 @@ public class TDPrefKey
     R.string.pref_plane_interpolation_title,
     R.string.pref_with_sensors_title,
     R.string.pref_loopClosure_title,
+    R.string.pref_loop_thr_title,
     // R.string.pref_dist_tolerance_title,
     // R.string.pref_splay_active_title,
     // R.string.pref_with_rename_title,
@@ -1426,6 +1427,7 @@ public class TDPrefKey
     R.string.pref_plane_interpolation_summary,
     R.string.pref_with_sensors_summary,
     R.string.pref_loopClosure_summary,
+    R.string.pref_loop_thr_summary,
     // R.string.pref_dist_tolerance_summary,
     // R.string.pref_splay_active_summary,
     // R.string.pref_with_rename_summary,
@@ -1448,6 +1450,7 @@ public class TDPrefKey
     FALSE,
     FALSE,
     TDString.ZERO,
+    TDString.ONE,
     // "1",
     // FALSE,
     // FALSE,
@@ -1473,7 +1476,7 @@ public class TDPrefKey
     "DISTOX_SAVED_STATIONS",  // whether to color saved stations
     "DISTOX_LEGONLY_UPDATE",  // whether to update drawing windows at every shot
     "DISTOX_FULL_AFFINE",     // whether to do full affine transform or shift+scale only
-    "DISTOX_WITH_LEVELS",    
+    "DISTOX_WITH_LEVELS",     // 0 no, 1 by class, 2 by instance
     "DISTOX_GRAPH_PAPER_SCALE",
     null
   };
@@ -1534,7 +1537,7 @@ public class TDPrefKey
     "DISTOX_DISCRETE_COLORS", // splay color: 0 no, 1 yes, 2 discrete - was DISTOX_SPLAY_COLOR
     // "DISTOX_SPLAY_AS_DOT", // plot splays as dots
     "DISTOX_SPLAY_VERT_THRS", // splays with clino over mSplayVertThrs are not displayed in plan view
-    "DISTOX_SPLAY_DASH",      // whether dash-splay are coherent from plan (1), profile (2), or independent (0)
+    "DISTOX_SPLAY_DASH",      // where dash-splay are coherent from: 0 no, 1 plan, 2 profile, 3 view
     "DISTOX_VERT_SPLAY",      // splays with clino over this are shown with dashed/dotted line
     "DISTOX_HORIZ_SPLAY",     // splays off-azimuth over this are shown with dashed/dotted line
     "DISTOX_SECTION_SPLAY",   // splays with angle over this are shown with dashed/dotted line
@@ -1825,7 +1828,7 @@ public class TDPrefKey
     "DISTOX_WAIT_LASER",           // msec wait after command "laser ON"
     "DISTOX_WAIT_SHOT",       // 11 // msec wait after command "take shot"
     "DISTOX_FIRMWARE_SANITY",       // enforce firmware sanity checks
-    "DISTOX_BRIC_MODE",
+    "DISTOX_BRIC_MODE",       // 1 prim_only, 3 all, 5 no_index
     "DISTOX_BRIC_ZERO_LENGTH",
     null
   };
