@@ -1,13 +1,7 @@
-﻿THIS TRANSLATION IS TOO INCOMPLETE
-In order to bring it back in the app you need to:
-  [1] translate all the untranslated strings
-  [2] copy the missing strings from the English strings.xml file and translate them
-  [3] send an email informing that the translation is ready for inclusion
-Translation with more than 20 lint errors are not accepted.
-Translation with more than 70 lint errors are dropped from the app.
-
-<?xml version="1.0" encoding="utf-8"?>
-<resources>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
     <!-- UNUSED string name="topodroid_man">https://sites.google.com/site/speleoapps/home/topodroid/docs</string -->
     <string name="no_manual">Manualul de utilizare nu a putut fi descărcat de pe internet</string>
     <string name="user_man_ok">Manualul de utilizare tradus a fost instalat</string>
@@ -16,45 +10,60 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="string_false">false</string -->
     <!-- UNUSED string name="string_true">true</string -->
 
+    <string name="tdx_stale" translatable="false">TopoDroid cannot access its old folder.\nClose the app and grant FILES ACCESS using the Settings app.\n\nSee http://marcocorvi.altervista.org/HowtoGrantStorageAccess.pdf</string>
+    <!-- UNUSED string name="target_sdk" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nFinish ?</string -->
+    <!-- UNUSED string name="target_sdk_stale" translatable="false">TopoDroid official app is on http://marcocorvi.altervista.com/TopoDroid.html\nThis version cannot access the old folder and must stop.\nSee http://marcocorvi.altervista.org/TopoDroidAndAndroid11.html.</string -->
+
     <!-- UNUSED string name="desc_user_man">User manual</string -->
     <!-- UNUSED string name="desc_points">Points</string -->
     <!-- UNUSED string name="desc_lines">Lines</string -->
     <!-- UNUSED string name="desc_areas">Areas</string -->
     <string name="desc_menu">Meniu</string>
 
-    <!-- NO string name="app_name" translatable="false">TopoDroid</string -->
-    <string name="tdm_title">TopoDroid Manager</string>
-    <string name="double_back">Apasă încă odată BACK pentru a ieși</string>
+<!-- UNUSED string name="r_title">Important notice for Android-11+</string -->
+  <!-- UNUSED string name="r_dialog">
+On Android-11+ storage access must be granted to TopoDroid.\nYou can do this with the PC program "adb".\nOn Android: enable developer settings and usb-debug.\nConnect Android to the PC with a USB cable.\nOn the PC type "adb shell appops set com.topodroid.TDX MANAGE_EXTERNAL_STORAGE allow".
+  </string -->
+  <!-- UNUSED string name="r_old_dialog">
+With Android-R TopoDroid must use its folder under "Android/data". TopoDroid has not found it and has created its folder.\nYou can import the zip archives of your old surveys.\n\nBeware that the files in the new TopoDroid folder are deleted when you uninstall TopoDroid.\n\n
+Refer to the web pages for details.\n
+  </string -->
+  <!-- UNUSED string name="r_checkboxes">You must confirm the checkbox to continue.</string -->
+  <!-- UNUSED string name="r_i_understood">I fully understood this notice</string -->
+  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
+  <!-- UNUSED string name="r_continue">CONTINUE</string -->
+    
+	<string name="app_name" translatable="false">TopoDroid-X</string>
+	<string name="tdm_title">TopoDroid Manager</string>
+    <string name="tdm_config_project">projekt.tdconfig</string>
+	<string name="double_back">Apasă din nou Înapoi pentru a ieși</string>
 
     <string name="new_survey_label">Cartare nouă</string>
-    <string name="distox_label">DistoX</string>
+   	<string name="distox_label" translatable="false">DistoX</string>
+    <string name="cave3d_label" translatable="false">Cave3D</string>
 
-  <string name="r_title">Notificare importantă Android R</string>
-  <string name="r_dialog">Pentru versiunea Android-R, TopoDroid trebuie să folosească folderul său proproiu (al aplicației) din "Android/data".\nTopoDroid nu a găsit acest folder și și-a creat un folder nou acolo.\nPoți importa arhivele zip ale topografiilor vechi.\n\nAtenție: fișierele din nou folder TopoDroid vor fi șterse când vei dezinstala TopoDroid.\n\nConsultă paginile web de documentație pentru detalii.</string>
-  <string name="r_checkboxes">Trebuie să confirmați casetele de bifare.</string>
-  <string name="r_i_understood">Am înțeles pe deplin această notificare</string>
-  <!-- UNUSED string name="r_disclaimer">I agree that the app author(s) are not liable for any damage or loss of data.</string -->
-  <string name="r_continue">CONTINUĂ</string>
-
-    <!-- UNUSED string name="version_ask">Se actualizează TopoDroid la o nouă versiune.\nVrei să reinstalezi uneltele de desen?</string -->
-    <string name="symbols_ask">Vrei să instalezi uneltele de desen v.%1$s?\n(Current v.%2$s)</string>
+	<!-- UNUSED string name="version_ask">Updating to a new version of TopoDroid.\nDo you want to reinstall drawing tools?</string -->
+    <string name="symbols_ask">Vrei să instalezi uneltele de desen v.%1$s?\n(Actual v.%2$s)</string>
+    <!-- UNUSED string name="version_check">Last version</string -->
+    <!-- UNUSED string name="version_check_failed">Failed version check</string -->
+    <!-- UNUSED string name="version_check_latest">Version already at latest</string -->
+    <string name="version_check_newer">Este disponibil o versiune nouă: %1$d</string>
 
     <string name="setup_textsize_title">Configurare TopoDroid. Mărime text</string>
     <string name="setup_buttonsize_title">Configurare TopoDroid. Mărime butoane</string>
     <string name="setup_drawingunit_title">Configurare TopoDroid. Mărime pictograme</string>
-    <string name="setup_done_title">Configurare TopoDroid. Gata</string>
+    <string name="setup_done_title">Configurare TopoDroid. Finalizat</string>
     <string name="setup_buttonsample">Mărime buton</string>
 
-    <string name="setup_textsize">Introdu mărimea textului.\nO poți schimba mai târziu prin configurația din fereastra principală.</string>
-    <string name="setup_buttonsize">Introdu mărimea butoanelor.\nLe poți schimba mai târziu prin configurația din fereastra principală.</string>
-    <string name="setup_drawingunit">Introdu mărimea pictogramelor de schițare.\nLe poți schimba mai târziu prin configurația din fereastra principală.</string>
+    <string name="setup_textsize">Introdu mărimea textului.\nO poți schimba mai târziu prin setările din fereastra principală.</string>
+    <string name="setup_buttonsize">Introdu mărimea butoanelor.\nLe poți schimba mai târziu prin setările din fereastra principală.</string>
+    <string name="setup_drawingunit">Introdu mărimea pictogramelor de schițare.\nLe poți schimba mai târziu prin setările din fereastra principală.</string>
     <string name="setup_done">Configurarea de bază a fost efectuată.\n\n
-	    Dacă experimentezi probleme cu conexiunea DistoX, încearcă să configurezi o conexiune(socket) nesecurizată.\n\n
-	    Alte setări controlează prezentarea în fereastra de schițare (mărimea pictogramelor și etichetelor, Lățimea liniei etc.)
-        și poți să le schimbi după nevoile proprii.
+		Dacă experimentezi probleme cu conexiunea DistoX, încearcă să configurezi o conexiune(socket) nesecurizată.\n\n
+	    Alte setări controlează prezentarea în fereastra de schițare (mărimea pictogramelor și etichetelor, lățimea liniei etc.); le poți seta mai târziu.\n
     </string>
-    <!-- DO NOT TRANSLATE string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string -->
-
+    <string name="lorem_ipsum" translatable="false">Lorem ipsum dolor sit amet</string>
+	
     <string name="POINT">PUNCT</string>
     <string name="LINE">LINIE</string>
     <string name="AREA">SUPRAFAȚĂ</string>
@@ -74,6 +83,7 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <string name="memoryA3">memoria DistoX A3</string>
     <string name="memoryX310">memoria DistoX X310</string>
+	<string name="memoryXBLE">memoria DistoX-BLE</string>
     <!-- UNUSED string name="memory_data">Date DistoX</string -->
 
     <string name="thp_user">utilizator</string>
@@ -90,8 +100,9 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="make_walls">Pereți</string -->
     <string name="missing_station">Stație lipsă</string>
     <string name="station_not_found">Stație negăsită</string>
+	<string name="station_coords">E %1$.2f N %2$.2f Z %3$.2f</string>
     <string name="shot_not_found">Nu există măsurători</string>
-    <string name="bad_sibling">Măsurătoare geamană invalidă</string>
+    <string name="bad_sibling">Măsurătoare înfrățită invalidă</string>
     <!-- UNUSED string name="missing_area">ZONĂ</string -->
     <!-- UNUSED string name="missing_hint">Activează uneltele lipsă sau reinstalează-le</string -->
     <!-- UNUSED string name="missing_line">LINIE</string -->
@@ -106,11 +117,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="failed_append_to_line">Nu a putut fi alipită la o altă linie</string>
 
     <string name="bric_device">Dispozitiv %1$s</string>
-    <!-- TODO string name="bric_ble">BLE %1$s</string -->
-    <!-- TODO string name="bric_fw">Firmware %1$s</string -->
-    <!-- TODO string name="bric_hw">Hardware %1$s</string -->
+    <string name="bric_ble">BLE %1$s</string>
+    <string name="bric_fw">Firmware %1$s</string>
+    <string name="bric_hw">Hardware %1$s</string>
     <string name="bric_battery">Baterie %1$d</string>
-    <string name="bric_battery_wait">Baterie …</string>
+    <string name="bric_battery_wait">Baterie &#8230;</string>
     <string name="bric_reset_time">Resetează timpul</string>
     <string name="bric_clear_memory">Ștergeți memoria</string>
     <string name="bric_future_time">Refuză de a reseta la un timp viitor</string>
@@ -129,45 +140,46 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="calib_exists">Calibrarea deja există</string>
     <string name="calib_delete">Șterge calibrarea</string>
     <string name="calib_device_mismatch">AVERTISMENT: nepotrivire calibrare-dispozitiv</string>
-    <string name="calib_no_name">Numele calibrarii este obligatoriu</string>
+    <string name="calib_no_name">Numele calibrării este obligatoriu</string>
     <string name="calib_no_coeff">Coeficienții de calibrare nu sunt configurați</string>
-    <!-- REMOVE string name="calib_gm_policy">Metoda</string -->
-    <string name="calib_gm_policy">Metodă de grupare</string>
+        <string name="calib_gm_policy">Metodă de grupare</string>
     <string name="calib_gm_undelete">Restaurează datele de calibrare șterse?</string>
     <!-- UNUSED string name="calib_offgroup_data">Possibly %1$d off-group data</string -->
     <string name="calib_saved">Calibrare salvată</string>
     <string name="calib_updated">Calibrare actualizată</string>
-    <string name="calib_compute_groups">Se calculează grupurile de date de calibrare …</string>
-    <string name="calib_compute_coeffs">Se calculează coeficienții de calibrare …</string>
+    <string name="calib_compute_groups">Se calculează grupurile de date de calibrare &#8230;</string>
+    <string name="calib_compute_coeffs">Se calculează coeficienții de calibrare &#8230;</string>
     <!-- UNUSED string name="calib_read_coeffs">Se citesc coeficienții de calibrare &#8230;</string -->
     <string name="calib_write_coeffs">Se scriu coeficienții de calibrare …</string>
     <string name="calib_validation">Validarea %1$s vs %2$s</string>
     <!-- UNUSED string name="connect_failed">Conexiune eșuată</string -->
     <!-- UNUSED string name="data"> date</string -->
     <string name="using">Se folosește %1$s</string>
-    <string name="calib_error">Eroarea medie: %1$.2f degrees (BH delta %2$.2f)</string>
-    <string name="calib_stddev">Abaterea standard: %1$.4f degrees (dev. medie pătratică - stddev)</string>
-    <string name="calib_max_error">Eroarea maximă: %1$.4f degrees</string>
-    <string name="calib_ave_std">Acuratețe: %1$.4f ± %2$.4f degrees</string>
+    <string name="calib_error">Eroarea medie: %1$.2f &#xb0; (BH delta %2$.3f)</string>
+	<string name="calib_validate_error">Eroare medie: %1$.2f &#xb0;</string>
+    <string name="calib_stddev">Abaterea standard: %1$.2f &#xb0;</string>
+    <string name="calib_max_error">Eroarea maximă: %1$.2f &#xb0;</string>
+    <string name="calib_ave_std">Acuratețe: %1$.2f ± %2$.2f &#xb0;</string>
     <string name="calib_precision">Precizie</string>
     <string name="calib_iter">Iterații: %1$d</string>
     <string name="calib_reset">Resetează calibrarea DistoX-ului?</string>
+	<string name="calib_min_error">Eroare minimă</string>
     
     <string name="algorithm">Algoritm:</string>
-    <string name="auto">auto</string>
+    <string name="auto">automatic</string>
     <string name="linear">liniar</string>
     <string name="non_linear">ne-liniar</string>
-    <!-- NO string name="algo_minimum">minim</string -->
+     <string name="algo_minimum" translatable="false">minimum</string>
    
     <!-- UNUSED string name="device_algo_failed">Auto-determinarea algoritmului a eșuat\nSe folosește algoritmul linear</string -->
     <string name="device_address">Adresa %1$s</string>
-    <!-- UNUSED string name="device_busy">Dispozivul e ocupat</string -->
+    <!-- UNUSED string name="device_busy">Dispozivul este ocupat</string -->
     <string name="device_illegal_addr">Adresă de memorie ilegală</string>
     <string name="device_info">Informații dispozitiv</string>
     <!-- UNUSED string name="device_model_set">Chiar vrei să schimbi modelul dispozitivului?</string -->
     <!-- UNUSED string name="device_none">Nici un DistoX selectat</string -->
     <!-- UNUSED string name="device_paired">Dispozivul este împerecheat</string -->
-    <string name="device_reset">Resetează memoria DistoX</string>
+    <string name="device_reset">Resetează memoria DistoX ?</string>
     <string name="device_clear">Șterge memoria DistoX</string>
     <string name="device_code">Cod DistoX %1$4d</string>
     <string name="device_firmware">Firmware  %1$d.%2$d</string>
@@ -175,17 +187,17 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="device_memory">Memorie  %1$02x.%2$02x</string -->
     <string name="device_status_angle_grad">Unități unghi: grad</string>
     <string name="device_status_angle_degree">Unități unghi: degree</string>
-    <string name="device_status_compass_on">Busolă/clinometru: on</string>
-    <string name="device_status_compass_off">Busolă/clinometru: off</string>
+    <string name="device_status_compass_on">Busolă/clinometru: pornit</string>
+    <string name="device_status_compass_off">Busolă/clinometru: oprit</string>
     <string name="device_status_calib">Mod: calibrare</string>
     <string name="device_status_normal">Mod: normal</string>
     <string name="device_status_silent_on">Silențios: da</string>
     <string name="device_status_silent_off">Silențios: nu</string>
-    <string name="bt_reset">Resetează conexiunea de bluetooth</string>
+    <string name="bt_reset">Resetează conexiunea de Bluetooth</string>
     <string name="save_as">salvează ca</string>
     <string name="nickname">Denumire</string>
 
-    <string name="comment">comentariu</string>
+    <string name="comment">observații</string>
     <!-- UNUSED string name="flag">Fanion</string -->
     <!-- UNUSED string name="backshot">viză inversă</string -->
     <!-- UNUSED string name="dublură">duplicată</string -->
@@ -199,25 +211,25 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="external_prompt">Introduce măsurătoarea</string -->
     <string name="splay_at_to">LRUD la stația dest.</string>
     <string name="lrud">LRUD</string>
-    <string name="strike_dip">Strike?? %1$.0f Pantă %2$.0f</string>
+    <string name="strike_dip">Strike %1$.0f Dip %2$.0f</string>
 
     <string name="few_data">Date insuficiente</string>
-    <string name="few_iter">Eșec: prea multe iterațiis</string>
+    <string name="few_iter">Eșec: prea multe iterații\nVerifică datele</string>
     <string name="few_groups">Date insuficiente în grup</string>
-    <string name="found_groups">Au fost găsite %1$d grupuri</string>
+	<!-- UNUSED string name="found_groups" tools:ignore="PluralsCandidate">Found %1$d groups</string -->
     <string name="regroup">Fără regrupare</string>
     <!-- UNUSED string name="few_plots">Schițe?? insuficiente</string -->
-    <string name="few_calibs">Calibrări insufficiente</string>
-    <string name="getting_info">Se descarcă informații din DistoX …</string>
+    <string name="few_calibs">Calibrări insuficiente</string>
+    <string name="getting_info">Obținere informații DistoX &#8230;</string>
+	<string name="gettingble_info">Obținere informații DistoX-BLE &#8230;</string>
 
     <string name="calib_import_title">Importare calibrare</string>
     <string name="import_title">Importare cartare</string>
     <string name="export_data_title">Exportă datele</string>
-    <string name="export_plot_title">Exportă schiță</string>
-    <string name="export_overview_title">Export general</string>
+    <!-- UNUSED string name="export_plot_title">Exportă schiță</string -->
+    <!-- UNUSED string name="export_overview_title">Export general</string -->
     <string name="export_model_title">Exportă model 3D</string>
     <string name="export_tdconfig_title">Exportă proiectul</string>
-
     <!-- UNUSED string name="import_wait">Se importează fișierul &#8230; te rog așteaptă &#8230;</string -->
     <string name="import_already">Cartarea este deja importată</string>
     <string name="import_bad">Fișier importat invalid</string>
@@ -225,11 +237,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="import_failed">Importarea fișierului a eșuat</string>
     <string name="file_not_found">Fișierul nu a fost găsit</string>
     <string name="import_calib_ok">Calibrare importată cu succes</string>
-    <string name="import_calib_no_header">Fișier calib.: antet greșit</string>
-    <string name="import_calib_already">Calib. există deja</string>
-    <string name="import_calib_mismatch">Nepotrivire calib.-dispozitiv</string>
-    <string name="import_calib_no_data">Fișier calib.: fără date</string>
-    <string name="import_calib_io_error">Fișier calib.: eroare la citire</string>
+    <string name="import_calib_no_header">Fișier calibrare: antet greșit</string>
+    <string name="import_calib_already">Numele calibrării există deja</string>
+    <string name="import_calib_mismatch">Nepotrivire calibrare-dispozitiv</string>
+    <string name="import_calib_no_data">Fișier calibrare: fără date</string>
+    <string name="import_calib_io_error">Fișier calibrare: eroare la citire</string>
     <string name="import_zip_ok">Fișierul arhivă zip importat cu succes</string>
     <string name="import_zip_newer">Fișierul arhivă zip importat dintr-o versiune mai nouă</string>
     <!-- UNUSED string name="import_zip_wait">Importarea fișierului zip ar putea dura mult. Te rog așteaptă &#8230;</string -->
@@ -239,14 +251,16 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="bad_manifest">Fișier manifest invalid</string>
  
     <string name="pleasewait">Așteaptă te rog</string>
-    <string name="processing">se procesează …</string>
+    <string name="processing">se procesează &#8230;</string>
 
     <!-- UNUSED string name="head_tail">Memorie: </string -->
     <string name="head_tail_failed">Indexul memoriei DistoX nu a putut fi citit</string>
     <string name="head_tail_store_failed">Indexul memoriei DistoX nu a putut fi stocat~?</string>
     <!-- UNUSED string name="pairing_failed">Imperechere nereușită</string -->
 
-    <string name="illegal_data_value">Valoare nepermisa a datei</string>
+	<string name="datamode_normal">Mod-dată Normal</string>
+    <string name="datamode_diving">Mod-dată Scafandru</string>
+    <string name="illegal_data_value">Valoarea datelor invalidă</string>
 
     <string name="photo_title">FOTOGRAFIE</string>
     <string name="photo_text">Introdu comentariu pentru fotografie</string>
@@ -266,44 +280,47 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="loop_closure_errors">Erori închidere buclă</string>
     <string name="loop_none">nici o buclă</string>
     <!-- UNUSED string name="long_lat">Long-Lat</string -->
-
+	<!-- UNUSED string name="multistation_plane">Multiple-station plane</string -->
+	
     <string name="error_m">Eroare [m]</string>
     <string name="fmt_error_m">Eroare %1$.1f m</string>
     <string name="fmt_h_geoid">Geoid alt. %1$.0f m</string>
     <string name="fmt_h_ellipsoid">Elipsoid alt. %1$.0f m</string>
     <!-- UNUSED string name="depth_error">Avertisment. Eroare 'data depth'</string -->
 
-    <string name="error_azimuth_required">Azimutul este obligatoriu</string>
-    <string name="error_length_required">Lungimea este obligatorie</string>
-    <string name="error_clino_required">Unghiul vertical este obligatoriu</string>
-    <string name="error_comment_required">Comentariul este obligatoriu</string>
-    <string name="error_begin_required">Adresa de start este obligatorie</string>
+    <string name="error_azimuth_required">Azimut necesar</string>
+    <string name="error_length_required">Lungime necesară</string>
+	<string name="error_depth_required">Adâncime necesară</string>
+    <string name="error_clino_required">Unghi vertical necesar</string>
+    <string name="error_comment_required">Comentariu necesar</string>
+    <string name="error_begin_required">Adresă de start necesar</string>
     <string name="error_declination_number">Declinația trebuie sa fie un număr</string>
-    <string name="error_end_required">Adresa finală este obligatorie</string>
-    <string name="error_from_required">Prima stație este obligatorie</string>
-    <string name="error_group_required">Numărul de grup este obligatoriu</string>
+    <string name="error_end_required">Adresă finală necesară</string>
+    <string name="error_from_required">Prima stație necesară</string>
+    <string name="error_group_required">Număr de grup necesar</string>
     <string name="error_group_non_integer">Grupul trebuie să fie un număr întreg</string>
-    <string name="error_alt_required">Altitudinea este obligatorie</string>
+    <string name="error_alt_required">Altitudine necesară</string>
     <string name="error_invalid_number">Număr invalid</string>
     <!-- UNUSED string name="error_invalid_name">Nume invalid</string -->
-    <string name="error_lat_required">Latitudinea este obligatorie</string>
-    <string name="error_long_required">Longitudinea este obligatorie</string>
+    <string name="error_lat_required">Latitudine necesară</string>
+    <string name="error_long_required">Longitudine necesară</string>
     <string name="error_name_exists">Proiectul există</string>
-    <string name="error_name_invalid">Numele proiectului e invalid</string>
-    <string name="error_name_required">Numele este obligatoriu</string>
+    <string name="error_name_invalid">Nume proiect invalid</string>
+    <string name="error_name_required">Nume necesar</string>
+	<string name="error_station_number">Nume eronat stații</string>
     <string name="error_name_duplicate">Denumire duplicată</string>
     <string name="error_no_section_in_section">Secțiune-X (transversală) în secțiune-X nu este permisă</string>
-    <!-- TODO string name="error_team_required">Team required</string -->
+    <string name="error_team_required">Echipă necesară</string>
 
     <!-- UNUSED string name="error_dir_exists">Directorul deja există</string -->
     <!-- UNUSED string name="error_nick_required">Numele Secțiunii-X este obligatoriu</string -->
-    <string name="error_start_required">Stație de referință este obligatorie</string>
+    <string name="error_start_required">Stație de referință necesară</string>
     <!-- UNUSED string name="error_station_already_fixed">Stația deja are coordonate</string -->
-    <string name="error_station_required">Stația este obligatorie</string>
-    <string name="error_station_non_existing">Staț inexistentă</string>
-    <string name="error_sensor_required">Senzor este obligatorie</string>
-    <string name="error_value_required">Valoarea este obligatorie</string>
-    <!-- TODO string name="error_bad_fixes">Fix points not in the survey</string -->
+    <string name="error_station_required">Stație necesară</string>
+    <string name="error_station_non_existing">Stație inexistentă</string>
+    <string name="error_sensor_required">Senzor necesar</string>
+    <string name="error_value_required">Valoare necesară</string>
+    <string name="error_bad_fixes">Punctele fixe lipsesc din măsurători</string>
 
     <string name="group_title">Grupuri date de calibrare</string>
     <!-- UNUSED string name="group_policy_four">Metodă: grupate câte 4</string -->
@@ -326,12 +343,13 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="hidden_show">Arată măsurătorile după stație</string>
     <!-- UNUSED string name="splays_toggle">Comută afișarea radierilor</string -->
     <string name="splays_on_off">Radieri</string>
-    <string name="splays">radieri</string>
-    <!-- TODO string name="with_splays">with splays</string -->
-    <!-- TODO string name="cell_size">Cell size [m]</string -->
+    <string name="including_splays">cu radieri incluse</string>
+    <string name="with_splays">cu radieri</string>
+    <string name="cell_size">Mărime celulă [m]</string>
 
     <string name="legs">Vize</string>
     <string name="stations">Stație</string>
+	<string name="splays">Radieri</string>
     <!-- UNUSED string name="fmt_listen">ASCULTĂ | %1$s</string -->
     <string name="fmt_id">ID %1$s</string>
     <string name="fmt_latitude">Latitudine %1$s</string>
@@ -348,6 +366,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="bad_cwd">Nume proiectului nu poate fi o cale</string>
     <string name="bad_line">Tip de linie invalid</string>
     <string name="bad_point">Tip de punct invalid</string>
+	<string name="index_oob">Index în afara limitelor %1$d</string>
 
     <string name="no_audio">Fără înregistrare audio</string>
     <string name="no_bt">Lipsește Bluetooth</string>
@@ -359,35 +378,37 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="no_data_reduction">Fără simplificare de date</string>
     <string name="no_db">Lipsește baza de date</string>
     <string name="no_device_address">Dispoziv neselectat</string>
+	<string name="no_device_window">Fereastră dispozitiv nedisponibil pe timpul descărcării</string>
     <!-- UNUSED string name="no_device_found">Nu a fost găsit nici un dispozitiv</string -->
-    <string name="no_feature_audio">Audio inexistent</string>
-    <string name="no_feature_pdf">PDF nu este acceptat</string>
+    <string name="no_feature_audio">Audio nesuportat</string>
+    <string name="no_feature_pdf">PDF nesuportat</string>
     <string name="no_gms">Calibrarea nu are măsurători.\nFolosește butonul Descarcă</string>
     <string name="no_geo_station">Eroare: lipsește stația geolocalizată</string>
     <string name="no_leg_first">Selecția nu începe cu o viză (segment de drumuire)</string>
-    <string name="no_leg_intersection">Linia secțiunii nu intersesctează nici o viză (segment de drumuire)</string>
+    <string name="no_leg_intersection">Linia secțiunii nu intersectează nici o viză (segment de drumuire)</string>
     <string name="no_location_data">Lipsesc datele de localizare</string>
     <!-- UNUSED string name="no_paired_device">Nici un dispozitiv conectat.\nScanează și conectează cu un DistoX</string -->
     <string name="no_photos">Cartarea nu are nici o fotografie</string>
     <string name="no_plots">Cartarea nu are nici o schiță\nFolosește butonul Adaugă pentru a face una</string>
-    <string name="no_profile_overview">Nici un ~overview pentru profilele proiectate</string>
+    <string name="no_profile_overview">Imagine de ansamblu neexistent pentru profilele proiectate</string>
     <string name="no_proj4">Proj4 neinstalat</string>
     <string name="no_sensors">Cartarea nu are măsurători</string>
     <!-- UNUSED string name="no_shots">Calibrarea nu are nici o măsurătoare.\nFolosește butonul Descarcă pentru a le adăuga</string -->
-    <string name="no_survey">Nici o cartare nu a fost selectată.</string>
-    <string name="no_symbols">Fără paletă de simboluri.</string>
+    <string name="no_search_result">Căutare fără rezultat.</string>
+	<string name="no_survey">Cartare neselectată.</string>
+    <string name="no_symbols">Paleta de simboluri neexistentă.</string>
     <!-- UNUSED string name="no_thmanager">Aplicația ThManager nu este instalată</string -->
     <!-- UNUSED string name="no_db_viewer">Aplicația DB_viewer nu a fost gasită</string -->
     <string name="no_undelete">Nici un element de recuperat</string>
     <string name="no_undelete_paste">Nimic de recuperat / lipit</string>
     <string name="format_measure_plan">D %1$.2f %2$.2f X %3$.2f Y %4$.2f A. %5$.1f"</string>
     <string name="format_measure_profile">D %1$.2f %2$.2f X %3$.2f Y %4$.2f C. %5$.1f"</string>
-    <!-- NO string name="format_closure" translatable="false">%1$s-%2$s: %3$d %4$.1f / %5$.1f m [%6$.1f %7$.1f] %8$.1f (%9$.1f \u00b0)</string -->
+    <string name="format_closure" translatable="false">%1$s-%2$s: [%3$d] %4$.1f/%5$.1f (%6$.1f %7$.1f) %8$.1f%% (%9$.1f\u00b0)</string>
 
     <string name="menu_3d">3D</string>
     <string name="menu_about">DESPRE</string>
     <string name="menu_area">SUPRAFAȚA</string>
-    <!-- TODO string name="menu_audio">AUDIO</string -->
+    <string name="menu_audio">AUDIO</string>
     <!-- UNUSED string name="menu_attach">CONECTEAZĂ</string -->
     <!-- UNUSED string name="menu_attached">Conectat</string -->
     <!-- UNUSED string name="menu_ready">Pregătit</string -->
@@ -413,10 +434,10 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="menu_switch">SCHIMBĂ/ÎNCHIDE</string>
     <string name="menu_help">AJUTOR</string>
     <!-- UNUSED string name="menu_join_survey">CO-TOPOGRAFIAZĂ</string -->
-    <string name="menu_logs">JURNALE</string>
+    <!-- UNUSED string name="menu_logs">JURNALE</string -->
     <string name="menu_manual_calibration">CALIBRARE</string>
     <string name="menu_options">SETĂRI</string>
-    <string name="menu_overview">~MĂSOARĂ</string>
+    <string name="menu_overview">IMAGINE DE ANSAMBLU</string>
     <string name="menu_packets">PACHETE</string>
     <!-- UNUSED string name="menu_pair">ÎMPERECHEAZĂ</string -->
     <string name="menu_palette">PALETĂ</string>
@@ -429,18 +450,19 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="menu_survey">INFO CARTARE</string>
     <!-- UNUSED string name="menu_sync">SINCRONIZEAZĂ</string -->
     <!-- UNUSED string name="menu_tdr2th2">SCHIȚE TH2</string -->
+	<!-- UPDATES string name="menu_updates">CHECK UPDATES</string -->
     <string name="menu_validate">VALIDEAZĂ</string>
     <string name="menu_zoom_fit">ÎNCADREAZĂ</string>
 
     <!-- FIXED_ZOOM -->
-    <!-- TODO string name="zoom_fixed">Graph-paper</string -->
+    <string name="zoom_fixed">Suprafată Desen</string>
 
-    <string name="start_scan">Pornește scanarea</string>
-    <string name="stop_scan">Oprește scanarea </string>
-    <string name="title_scan">Scanare BLE</string>
+    <!-- UNUSED string name="start_scan">Pornește scanarea</string -->
+    <!-- UNUSED string name="stop_scan">Oprește scanarea </string -->
+    <!-- UNUSED string name="title_scan">Scanare BLE</string -->
     <!-- UNUSED string name="ble_scan_failed">Scanare BLE eșuată</string -->
     <!-- UNUSED string name="ble_gatt_failure">Eșec BLE GATT</string -->
-    <string name="ble_no_remote">Nici un dispozitiv BLE extern</string>
+    <string name="ble_no_remote">Nici un dispozitiv extern</string>
     <!-- UNUSED string name="ble_control">Control</string -->
     <!-- UNUSED string name="ble_connect">Connect</string -->
     <!-- UNUSED string name="ble_disconnect">Disconnect</string -->
@@ -449,7 +471,6 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="bric_laser">Laser</string -->
     <!-- UNUSED string name="bric_off">Off</string -->
     <string name="bric_memory">Memorie BRIC</string>
-
 
     <string name="popup_join_pt">Conectează la punctul apropiat</string>
     <string name="popup_snap_ln">Conectează la linia apropiată</string>
@@ -485,8 +506,8 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="popup_cont_both">Ambele puncte</string>
     <string name="popup_cont_continue">Continuă</string>
 
-    <string name="connection_error">Eroare la conexiune</string>
-    <string name="connecting">Se conectează …</string>
+    <!-- UNUSED string name="connection_error">Eroare la conexiune</string -->
+    <!-- UNUSED string name="connecting">Se conectează …</string -->
     <!-- UNUSED string name="connected_none">Neconectat</string -->
     <!-- UNUSED string name="connected_already">Deja conectat</string -->
 
@@ -513,7 +534,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="plot_duplicate_name">Duplică numele schiței</string>
     <string name="plot_dangling">Schiță neatașată</string>
     <!-- UNUSED string name="plot_name"> Numele schiței</string -->
-    <string name="plot_new">Schiță</string>
+    <string name="plot_new">Schiță nouă</string>
     <string name="plot_not_found">Schiță negasită</string>
     <!-- UNUSED string name="plot_null_name">Numele shiței lipsește</string -->
     <!-- UNUSED string name="plot_null_start">Stația bază lipsește</string -->
@@ -522,6 +543,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="plot_view">Stația vizibilă</string -->
     <string name="read_fail_with_code">Eroare la citire: cod eroare </string>
     <string name="read_failed">Eroare la citirea DistoX</string>
+	<string name="swap_hotbit_ok">Swapped data hot bit</string>
     <!-- UNUSED string name="reading_file_failed">Eroare la citirea din fișier</string -->
 
     <string name="saved_file_1">Fișier salvat %1$s</string>
@@ -535,7 +557,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="converted_tdr2th2">Fișierele binare ale schiței au fost convertite în format th2</string -->
     <!-- UNUSED string name="convert_tdr2th2">Overwrite th2 sketch files ?</string -->
     <string name="section_area">Aria secțiunii: %1$.1f</string>
-    <string name="section_name">comentariul secțiunii section comment</string>
+    <string name="section_name">comentariul secțiunii</string>
     <string name="scrap_outline">Conturul schiței</string>
     <string name="scrap_string">Desen schiță: %1$d / %2$d</string>
     <string name="section_point_not_allowed">punct de secțiune nepermis</string>
@@ -561,10 +583,9 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="shot_compass">compas</string -->
     <string name="shot_delete">Șterge măsurătoarea?</string>
     <string name="shots_delete">Șterge măsurătorile?</string>
-    <string name="shots_delete_unsafe">Puncte stație referențiate de secțiuni\n transversale. Ștergeți măsuratorile?
-</string>
-    <string name="shot_rename_unsafe">Puncte de stație referențiate de secțiuni\n transversale. Redenumiți măsuratoarea?</string>
-    <string name="shots_rename_unsafe">Puncte de stație referențiate de secțiuni\n transversale. Redenumiți măsuratorile?</string>
+    <string name="shots_delete_unsafe">Puncte stație referențiate de secțiuni transversale.\nȘtergeți măsuratorile?</string>
+    <string name="shot_rename_unsafe">Puncte de stație referențiate de secțiuni transversale.\nRedenumiți măsuratoarea?</string>
+    <string name="shots_rename_unsafe">Puncte de stație referențiate de secțiuni transversale.\nRedenumiți măsuratorile?</string>
     <string name="shot_check">Marchează măsurătoarea ca măsurătoare de verificare?</string>
     <string name="shot_from">de la</string>
     <string name="shot_info">Introdu valorile măsurătorii</string>
@@ -584,25 +605,26 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="survey_exists">Cartarea există deja</string>
     <!-- UNUSED string name="survey_date">yyyy.mm.dd</string -->
     <string name="survey_delete">Șterge schița ?</string>
-    <string name="survey_move">Muți măsurătorile în cartarea %1$s ?</string>
+    <string name="survey_move">Mută măsurătorile în cartarea %1$s ?</string>
     <string name="survey_split"> Desparte cartarea ?</string>
     <string name="survey_not_attached">AVERTISMENT: măsurători neatașate</string>
     <string name="survey_not_extend">AVERTISMENT: extensii măsurători nedefinite</string>
     <!-- UNUSED string name="survey_not_attached_extend">AVERTISMENT: măsurători neatașate și extensii măsurători nedefinite</string -->
-    <!-- TODO string name="survey_no_data_reduction">WARNING: no data reduction</string -->
-    <!-- TODO string name="survey_not_saved">WARNING: survey info not saved</string -->
-    <!-- TODO string name="survey_bad_siblings">WARNING: bad-siblings leg</string -->
-    <!-- UNUSED string name="survey_bad_magnetic">WARNING: bad-magnetic leg</string -->
+    <string name="survey_no_data_reduction">AVERTISMENT: nu este reducție de date</string>
+    <string name="survey_not_saved">AVERTISMENT: informațiile măsurătorilor nu au fost salvate</string>
+    <string name="survey_bad_siblings">AVERTISMENT: eroare viza radiere: %1$s</string>
+    <string name="survey_bad_magnetic">AVERTISMENT: viză magnetică eronată</string>
     <string name="saturated_coeffs">AVERTISMENT: coeficienți calibrare saturați</string>
     <string name="out_of_memory">AVERTISMENT: memorie insuficientă !</string>
-    <string name="disk_io_error">CRITIC: eroare i/o  !</string>
+    <string name="disk_io_error">CRITIC: eroare i/o !</string>
     
     <string name="toporobot_warning">AVERTISMENT: metoda TopoRobot este experimentală !</string>
     <string name="anomaly_warning">Compensarea anomaliilor magnetice este pentru utilizatori experți !</string>
-    <string name="tripod_warning">Metoda tripod este pentru utilizatori avansați !</string>
-    <string name="coverage_warning">Acoperire unghiuri sub %1$d %%\nScrieți coeficienții?</string>
-    <string name="delta_warning">Eroarea medie peste %1$.1f\nScrieți coeficienții?</string>
+    <string name="tripod_warning">Regulile tripod s-au modificat !</string>
+    <string name="coverage_warning">Acoperire unghiuri sub %1$d%%\nScrieți coeficienții?</string>
+    <string name="delta_warning">Eroarea medie peste %1$.1f\u00b0\nScrieți coeficienții?</string>
     <!-- UNUSED string name="sap_warning">Warning\n\nSAP surveys attain only UISv2 grade 3.</string -->
+
 
     <string name="cover_data">Distribuție date brute: %1$.2f %%</string>
     <string name="cover_calib">Distribuție date calibrate: %1$.2f %%</string>
@@ -612,10 +634,12 @@ Translation with more than 70 lint errors are dropped from the app.
 
     <string name="accuracy_low">Acuratețe scăzută. Este necesară calibrarea</string>
     <string name="accuracy_medium">Acuratețe scăzută</string>
+	<!-- UNUSED string name="accuracy_high">Good accuracy</string -->
     <string name="accuracy_unreliable">Senzori nesiguri</string>
 
-    <string name="cannot_rename">Cartarea nu paote fi redenumită</string>
-    <string name="declination">Magn. decl.</string>
+	<string name="empty_clipboard">Clipboard gol</string>
+    <string name="cannot_rename">Cartarea nu poate fi redenumită</string>
+    <string name="declination">Declinație magnetică</string>
     <string name="description">descriere</string>
     <string name="name">nume</string>
     <string name="team">echipă</string>
@@ -625,25 +649,26 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="toggle_device">Schimbă modul de calibrare al dispozitivului</string -->
     <string name="toggle_failed">Nu a putut fi comutat DistoX-ul</string>
     <string name="toggle_ok">DistoX-ul a fost comutat în modul calibrare</string>
-    <string name="undelete_text">Atinge elementul pentru recuperare</string>
+    <string name="undelete_text">Recuperează elemente</string>
     <string name="undelete_paste_text">Recuperează/lipește elemente</string>
     <string name="undelete_shot">Măsurători</string>
     <string name="undelete_overshoot">Măsurători depășite</string>
     <string name="undelete_check">Verificări</string>
+	<string name="undelete_blunder">Greșeli</string>
     <string name="undelete_plot">Schițe</string>
-    <string name="delete_whole_leg">Șterge întreagul segment de drumuri (și cu radieri)?</string>
+    <string name="delete_whole_leg">Șterge întreagul segment de drumuiri (și cu radieri)?</string>
     <string name="visible_border">contur vizibil</string>
     <!-- UNUSED string name="vthreshold">limită verticală</string -->
     <!-- UNUSED string name="wait_scan">Scanează: așteaptă &#8230;</string -->
     <string name="write_failed">Eroare la scrierea DistoX</string>
     <string name="write_ok">Calibrarea a fost scrisă în DistoX</string>
-    <string name="zip_saved">Salvat </string>
+    <string name="zip_saved">Salvat archivă zip </string>
     <string name="zip_failed">Cartarea nu a putut fi arhivată(zip)</string>
     <string name="unzip_fail">Cartarea nu a putut fi dezarhivată(unzip)</string>
     <string name="unzip_fail_sqlite">Eșec SQL: șterge cartarea și reîncearcă</string>
     <string name="unzip_fail_survey">Eroare: numele cartării nu se potrivește</string>
-    <string name="unzip_fail_db">Eroare: verisunile bazei de date nu se potrivesc database version mismatch</string>
-    <string name="unzip_fail_td">Eroare: verisunile TopoDroid nu se potrivesc</string>
+    <string name="unzip_fail_db">Eroare: versiunile bazei de date nu se potrivesc</string>
+    <string name="unzip_fail_td">Eroare: versinile TopoDroid nu se potrivesc</string>
     <!-- UNUSED string name="zoom_in_out">Redimensionează Mărește/micșorează/</string -->
 
 
@@ -654,10 +679,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="stat_component">Componentele %1$d</string>
     <string name="stat_depth">Adâncime %1$.1f %2$s %3$.1f %4$s"</string>
     <string name="stat_duplicate">Măsurători duplicate %1$d # %2$d %3$.1f %4$s</string>
-    <string name="stat_leg">Vize(seg. drum.) %1$d %2$.1f %3$.1f %4$.1f %5$s</string>
-    <string name="stat_length">Lungime %1$.1f %2$s</string>
+    <string name="stat_leg" tools:ignore="PluralsCandidate">Vize %1$d Lungime %2$.1f %3$.1f H-lungime %4$.1f %5$s</string>
+    <string name="stat_length">Lungime schiță %1$.1f %2$s</string>
     <string name="stat_extlen">Lungime 3D %1$.1f %2$s</string>
     <string name="stat_projlen">Lungime în plan %1$.1f %2$s</string>
+	<string name="stat_cycle">Cicluri %1$d</string>
     <string name="stat_loop">Bucle %1$d</string>
     <string name="stat_origin">Stație zero: %1$s</string>
     <string name="stat_azimuth">Azimutul proiecției profilului: %1$.1f</string>
@@ -682,20 +708,26 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="hide_ids">ID-uri măsurători</string>
     <string name="hide_splay">Radieri</string>
 
+	<!-- THESE MUST AGREE WITH THE FMT STRINGS -->
     <!-- UNUSED string name="plan">PLAN</string -->
     <string name="extended">PROFIL</string>
     <string name="profile">PROIECȚIE</string>
-    <!-- TODO string name="fmt_plan">%1$s: PLAN</string -->
+    <string name="fmt_plan">%1$s: PLAN</string>
     <string name="fmt_extended">%1$s: PROFIL</string>
     <string name="fmt_profile">%1$s: PROIECȚIE</string>
 
-    <string name="extended_profile">Profil extins</string>
+    <!-- UNUSED string name="extended_profile">Profil extins</string -->
+	<string name="projected_profile">Profil proiectat</string>
     <!-- UNUSED string name="x_section">X-SECTION</string -->
     <!-- UNUSED string name="v_section">SECȚIUNE-V</string -->
     <!-- UNUSED string name="h_section">SECȚIUNE-H</string -->
     <!-- UNUSED string name="landscape">mod peisaj</string -->
 
-    <string name="distox_err_ok">Bine</string>
+	<string name="display_view">Vizualizare</string>
+    <string name="plan_view">plan</string>
+    <string name="profile_view">profil</string>
+
+    <string name="distox_err_ok">OK</string>
     <string name="distox_err_headtail">Eroare la citirea DistoX</string>
     <string name="distox_err_headtail_io">Eroare memorie I/O DistoX</string>
     <string name="distox_err_headtail_eof">Eroare memorie EOF DistoX</string>
@@ -705,33 +737,35 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="ask_reset">Resetează memoria DistoX?</string -->
     <!-- UNUSED string name="ask_close_survey">Închide cartarea?</string -->
     <string name="ask_gps_service">Definește serviciul GPS?</string>
-    <string name="ask_backups_clear">Ștergi copiile de siguranță ale schiței?</string>
-    <string name="ask_manual_update">Actualizează traducerea manualului de utilizator?\nCurrentă v. %1$d Instalată v. %2$d</string>
+    <!-- UNUSED string name="ask_backups_clear">Ștergi copiile de siguranță ale schiței?</string -->
+    <string name="ask_manual_update" tools:ignore="PluralsCandidate">Actualizează traducerea manualului de utilizator?\nActual v. %1$d Instalată v. %2$d</string>
 
     <!-- UNUSED string name="button_add"       >Adaugă    </string -->
-    <string name="button_apply">Aplică</string>
-    <string name="button_back">Înapoi    </string>
-    <string name="button_cancel">Anulează  </string>
-    <string name="button_change">Schimbă   </string>
-    <string name="button_close">Închide   </string>
+    <string name="button_apply"		>Aplică</string>
+    <string name="button_back"		>Înapoi</string>
+    <string name="button_cancel"	>Anulează</string>
+    <!-- UNUSED string name="button_change">Schimbă   </string -->
+	<string name="button_clipboard"	>Clipboard</string>
+    <string name="button_close"		>Închide</string>
     <!-- UNUSED string name="button_create"    >Crează    </string -->
-    <string name="button_color">Culoare   </string>
-    <string name="button_compute">Calculează</string>
-    <string name="button_convert">Conversie </string>
-    <string name="button_copy">Copiază</string>
-    <string name="button_current">Activ     </string>
-    <string name="button_delete">Șterge    </string>
-    <string name="button_duplicate">Duplică   </string>
-    <string name="button_surface">Suprafață </string>
-    <string name="button_no_extend">Fără extensie</string>
-    <string name="button_eval">Evaluează </string>
-    <string name="button_evalg">G         </string>
-    <string name="button_evalm">M         </string>
-    <string name="button_evalroll">Rotație</string>
-    <string name="button_eval_cal">Evaluează calib. w.</string>
-    <string name="button_gps_start">GPS       </string>
+    <string name="button_color"		>Culoare</string>
+    <string name="button_compute"	>Calculează</string>
+	<string name="button_clear_convert">Șterge conversia</string>
+    <string name="button_convert"	>Conversie</string>
+    <string name="button_copy"		>Copiază</string>
+    <string name="button_current"	>Activ</string>
+    <string name="button_delete"	>Șterge</string>
+    <string name="button_duplicate"	>Duplică</string>
+    <string name="button_surface"	>Suprafață</string>
+    <string name="button_no_extend"	>Fără extensie</string>
+    <string name="button_eval"		>Evaluează</string>
+    <string name="button_evalg"		>G</string>
+    <string name="button_evalm"		>M</string>
+    <string name="button_evalroll"	>Rotație</string>
+    <string name="button_eval_cal"	>Evaluează calib. w.</string>
+    <string name="button_gps_start"	>GPS</string>
     <!-- UNUSED string name="button_gps_stop"  >Stop      </string -->
-    <!-- DONT TRANSLATE string name="button_help">?</string -->
+    <string name="button_help" translatable="false">\?</string>
     <string name="button_manual">Manual</string>
     <!-- UNUSED string name="button_measure"   >Măsoară   </string -->
     <!-- UNUSED string name="button_photo"   >Foto</string -->
@@ -747,36 +781,42 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="button_skip">Omite</string>
     <string name="button_done">Gata</string>    
     <string name="button_lrud">+ LRUD</string>
-    <string name="button_ok">Bine         </string>
-    <string name="button_open">Deschide   </string>
-    <string name="button_read">Citește    </string>
-    <!-- TODO string name="button_recover"   >Recover</string -->
+    <string name="button_ok">OK</string>
+	<string name="button_off">oprit</string>
+    <string name="button_on">pornit</string>
+    <string name="button_open">Deschide</string>
+    <string name="button_read">Citește</string>
+    <string name="button_recover">Recuperează</string>
+    <string name="button_reverse">Inversează</string>
     <!-- UNUSED string name="button_redo"      >Refă      </string -->
     <!-- UNUSED string name="button_regroup"   >Regrupează</string -->
-    <string name="button_dump">Descarcă~  </string>
+    <string name="button_dump">Descarcă~Devarsă</string>
     <!-- UNUSED string name="button_rename"    >Redenumește</string -->
     <string name="button_renumber">Renumerotează</string>
     <string name="button_bedding">Strat geologic</string>
     <string name="button_replace">Înlocuiește</string>
-    <string name="button_reset">Resetează  </string>
+    <string name="button_reset">Resetează</string>
     <string name="button_left">STÂNGA</string>
     <string name="button_right">DREAPTA</string>
-    <string name="button_clear">Curăță     </string>
-    <string name="button_clear_day">Curăță 1z  </string>
-    <string name="button_clear_week">Curăță 7z  </string>
+    <string name="button_clear">Curăță</string>
+    <string name="button_clear_day">Curăță zilnic</string>
+    <string name="button_clear_week">Curăță săptămânal</string>
     <string name="button_clear_memory">Golește memoria</string>
-    <string name="button_save">Salvează   </string>
+    <string name="button_save">Salvează</string>
     <!-- UNUSED string name="button_select"    >Selectează</string -->
-    <string name="button_search">Caută      </string>
-    <string name="button_merge">Îmbină     </string>
+	<string name="button_leg_station">Stații vize</string>
+    <string name="button_all_station">Toate stațiile</string>
+    <string name="button_leg_search">Căută vize</string>
+    <string name="button_search">Caută</string>
+    <string name="button_merge">Îmbină</string>
     <string name="button_saved">Stație salvată</string>
-    <string name="button_split">Desparte   </string>
+    <string name="button_split">Desparte</string>
     <string name="button_station">Centrează la</string>
-    <string name="button_store">Stochează  </string>
-    <string name="button_swap">Comută     </string>
+    <string name="button_store">Stochează</string>
+    <string name="button_swap">Comută</string>
     <!-- UNUSED string name="button_start"     >Start</string -->
     <!-- UNUSED string name="button_stop"      >Stop</string -->
-    <string name="button_upload">Încarcă    </string>
+    <string name="button_upload">Încarcă</string>
     <string name="button_view">Vizualizează</string>
     <!-- UNUSED string name="button_zoomfit"   >Încadrează</string -->
     <!-- UNUSED string name="button_landscape" >Mod peisaj</string --> 
@@ -789,7 +829,6 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="xsection">Secțiune-X</string>
     <string name="buffer_size">Tampon: %1$d data</string>
     <string name="buffer_unsorted">nesortat</string>
-
 
     <string name="mode_leg">Vize</string>
     <string name="mode_splay">Radieri</string>
@@ -808,7 +847,6 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="layer_water">Apă</string -->
     <!-- UNUSED string name="layer_text">Text</string -->
 
-
     <!-- UNUSED string name="remote_title">Control telecomandat dispoziv</string -->
     <string name="remote_on">Laser activ</string>
     <string name="remote_off">Laser inactiv</string>
@@ -816,11 +854,11 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="remote_reset">Resetează BT</string>
     <!-- UNUSED string name="download">Descarcă</string -->
 
-    <string name="popup_do_splay">Măs. radieri</string>
-    <string name="popup_do_leg">Măs. vize</string>
-    <string name="popup_do_gm_data">Măs. calibrare</string>
-    <!-- TODO string name="popup_do_gm_group">Calib. group</string -->
-    <!-- TODO string name="popup_do_laser">Laser</string -->
+    <string name="popup_do_splay">Măsurare radieri</string>
+    <string name="popup_do_leg">Măsurare vize</string>
+    <string name="popup_do_gm_data">Măsurare calibrare</string>
+    <string name="popup_do_gm_group">Grup calibrare</string>
+    <string name="popup_do_laser">Laser</string>
     <string name="popup_do_scan">Scanează</string>
     <string name="popup_do_shot">Măsoară</string>
     <string name="popup_do_clear">Șterge</string>
@@ -837,7 +875,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="symbol_geo">Geologie</string>
     <string name="symbol_karst">Carst</string>
     <string name="symbol_mine">Minerit</string>
-    <string name="symbol_paleo">Paleo</string>
+    <string name="symbol_paleo">Paleontologic</string>
     <string name="symbol_speleo">Speologie</string>
     <string name="symbol_extra">Speologie (2)</string>
 
@@ -848,10 +886,21 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="azimuth">Azimut [deg]</string -->
     <!-- UNUSED string name="clino">Clino [deg]</string -->
 
+	<string name="hint_cellsize">mărime celulă</string>
+    <string name="hint_cwd">director de lucru</string>
+    <string name="hint_distance">distanță</string>
+    <string name="hint_length">lungime</string>
+    <string name="hint_line">linie</string>
+    <string name="hint_origin">statie zero</string>
+    <string name="hint_point">punct</string>
+    <string name="hint_textsize">mărime text</string>
+    <string name="hint_units">unitate simbol</string>
+    <string name="hint_value">valoare</string>
+
     <string name="hint_notes">note</string>
-    <string name="hint_label">eticheta</string>
+    <string name="hint_label">etichetă</string>
     <string name="hint_comment">comentariu</string>
-    <!-- TODO string name="hint_text">text</string -->
+    <string name="hint_text">text</string>
     <string name="hint_options">opțiuni</string>
     <string name="hint_name">nume</string>
     <string name="hint_from">de la</string>
@@ -882,6 +931,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="split_nothing">Nimic de despărțit</string>
     <string name="flip_shots">Inversează măsurătorile</string>
     <string name="copy_items">Copiază elementele</string>
+	<string name="current_station_format">%1$s: E %2$.1f N %3$.1f H %4$.1f</string>
 
     <string name="man_preface">Prefață</string>
     <string name="man_intro">1. Introducere</string>
@@ -900,7 +950,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="man_project">14. Proiecte peșteră</string>
     <string name="man_threed">15. Vizualizare 3D</string>
     <string name="man_index">16. Index</string>
-    <string name="man_website">* Site web</string>
+    <string name="man_website">* Pagină WEB</string>
 
     <string name="help_help">Acest manual</string>
     <!-- UNUSED string name="help_manual">Manual utilizator</string -->
@@ -908,26 +958,27 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_measure_type">Mod măsurătoare: punct fix sau polilinie</string>
     <string name="help_measure_undo">Șterge ultimul punct al poliliniei</string>
     
-    <!-- TODO string name="help_audio">Audio records list</string -->
+    <string name="help_audio">Listă înregistrări audio</string>
     <!-- UNUSED string name="help_backups">Șterge copiile de siguranță ale schiței</string -->
     <string name="help_calib_check">Măsurători verificare-calibrare</string>
     <string name="help_close">Închide fereastra</string>
-    <!-- TODO string name="help_close_app">Close app</string -->
+    <string name="help_close_app">Închide aplicația</string>
     <string name="help_coeff">Arată coeficienții calibrării</string>
     <string name="help_color">Șterge culorile radierilor</string>
     <string name="help_continue">Continuă desenul unei linii</string>
     <!-- UNUSED string name="help_contour">Editare contur</string -->
     <string name="help_current_station">Stații salvate</string>
     <string name="help_azimuth">Referință "extinsă"</string>
-    <string name="help_refresh">Reîmprospatează afișaj</string>
+    <string name="help_refresh">Reîncarcă afișaj</string>
     <string name="help_device">Activitate dispozitiv</string>
     <string name="help_add_topodroid">Cartare/calibrare nouă</string>
-    <string name="help_import">Importă arhivă zip sau fițier cartare</string>
-    <string name="help_symbol">Desenul seturilor de uneltele~</string>
+    <string name="help_import">Importă arhivă zip sau fișier cartare</string>
+    <string name="help_symbol">Setul uneltelor de desen</string>
     <string name="help_therion">Manager proiecte peșteră</string>
+	<string name="help_cave3d">Cave3D, 3D viewer</string>
     <!-- UNUSED string name="help_database">Aplicația de viz. a bazei de date (SQliteViewer)</string -->
     <string name="help_prefs">Preferințe</string>
-    <string name="help_log">Preferințe înregistrare jurnal</string>
+    <!-- UNUSED string name="help_log">Preferințe înregistrare jurnal</string -->
     <!-- UNUSED string name="help_join_survey">Cartare în paralel</string -->
     <string name="help_info_topodroid">Informații TopoDroid</string>
     <string name="help_download">Descarcare date</string>
@@ -935,9 +986,9 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_display">Mod afișare</string>
     <string name="help_display_calib">Schimbă afișarea măsurătorilor șterse</string>
     <string name="help_validate">Validarea calibrării</string>
-    <string name="help_overview">Viz. de ansamblu~</string>
+    <string name="help_overview">Vizualizare de ansamblu~</string>
     <string name="help_packets">Fereastră pachete DistoX</string>
-    <string name="help_plot">Schițare(crochiu)</string>
+    <string name="help_plot">Activitate schițare</string>
     <string name="help_note">Note cartare</string>
     <string name="help_bluetooth">Resetează conexiunea bluetooth</string>
     <string name="help_remote">Control DistoX telecomandat</string>
@@ -945,14 +996,16 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_info_shot">Statistici cartare</string>
     <string name="help_survey_info">Informații cartare</string>
     <string name="help_undelete">Recuperează elemente șterse</string>
+	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
     <string name="help_photo">Fotografii</string>
     <string name="help_sensor">Măsurători</string>
     <string name="help_3d">Vizualizare 3D (Cave3D)</string>
     <!-- UNUSED string name="help_move">Mod mișcare/focalizare</string -->
     <string name="help_draw">Mod desenare</string>
+	<string name="help_drawing">Desenare</string>
     <string name="help_edit">Mod editare</string>
     <string name="help_refs">Referințe schițare</string>
-    <string name="help_rename">Schimbare numele cartării</string>
+    <string name="help_rename">Schimb nume cartare</string>
     <string name="help_plot_rename">Redenumire/Ștergere schiță</string>
     <string name="help_plot_scrap">Schițare</string>
     <string name="help_plot_switch">Schimbarea schiței</string>
@@ -982,12 +1035,12 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_zoom_fit">Încadrează schița pe ecran</string>
    
     <string name="help_line_point">Acțiuni ale punctelor liniei: cuplare/atașare, desparțire, taiere, ștergere</string>
-<!--
-    <string name="help_to_point">Mută punctul selectat să se atașeze la cel mai apropiat punct</string>
-    <string name="help_split_point">Împarte punctul în două [linie/suprafață]</string>
-    <string name="help_split_line">Împarte linia în două la punct</string>
-    <string name="help_kink">Folosește o linie dreaptă la punct [linie/suprafață]</string>
--->
+
+    <!-- UNUSED sstring name="help_to_point">Mută punctul selectat să se atașeze la cel mai apropiat punct</string -->
+    <!-- UNUSED sstring name="help_split_point">Împarte punctul în două [linie/suprafață]</string -->
+    <!-- UNUSED sstring name="help_split_line">Împarte linia în două la punct</string -->
+    <!-- UNUSED sstring name="help_kink">Folosește o linie dreaptă la punct [linie/suprafață]</string -->
+
     <string name="help_manual_calibration">Calibrarea manuală a instrumentelor</string>
     <string name="help_note_plot">Proprietățile elementelor schiței</string>
     <!-- UNUSED string name="help_save">Salvarea schimbărilor la informațiile cartării</string -->
@@ -1011,7 +1064,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_cover">Distribuția anugulară a datelor de calibrare</string>
     <string name="help_compute">Calcularea calibrarea</string>
     <string name="help_write">Scrierea coeficienții calibrării în DistoX</string>
-    <!-- TODO string name="help_splays">Segment/point splays</string -->
+    <string name="help_splays">Segment/puncte radieri</string>
 
     <string name="help_add_project">Adaugă proiect peșteră</string>
     <string name="help_add_surveys">Adaugă cartări</string>
@@ -1024,31 +1077,33 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="help_equates">Afișează vizele echivalente cartărilor</string>
 
     <!-- UNUSED string name="export_bgcolor">Background color</string -->
-    <!-- TODO string name="export_config">Config commands</string -->
-    <!-- TODO string name="export_csv_rawdata">Raw data</string -->
-    <!-- TODO string name="export_dxf_blocks">DXF blocks</string -->
-    <!-- TODO string name="export_georeference">Georeference</string -->
-    <!-- TODO string name="export_grid">Grid</string -->
-    <!-- TODO string name="export_linedir">Line direction</string -->
-    <!-- TODO string name="export_lrud">LRUD</string -->
-    <!-- TODO string name="export_lrud_from">LRUD at FROM station</string -->
-    <!-- TODO string name="export_maps">Maps before data</string -->
-    <!-- TODO string name="export_prefix">Cave-prefix in station names</string -->
-    <!-- TODO string name="export_prefix_hint">prefix</string -->
-    <!-- TODO string name="export_suffix_hint">suffix</string -->
-    <!-- TODO string name="export_roundtrip">Roundtrip</string -->
+    <string name="export_config">Comenzi configurare</string>
+    <string name="export_csv_rawdata">Date brute</string>
+    <string name="export_dxf_blocks">Puncte de final radieri</string>
+    <string name="export_dxf_version">Versiune</string>
+    <string name="export_georeference">Georeferință</string>
+    <string name="export_grid">Caroiaj</string>
+    <string name="export_linedir">Direcție linie</string>
+    <string name="export_lrud">LRUD</string>
+    <string name="export_lrud_from">LRUD de la stația</string>
+    <string name="export_maps">Hărți înainte de date</string>
+    <string name="export_prefix">Prefix-peșteră în numele stațiilor </string>
+    <string name="export_prefix_hint">prefix</string>
+    <string name="export_suffix_hint">sufix</string>
+    <string name="export_roundtrip">Roundtrip</string>
     <!-- UNUSED string name="export_scale_png">Resolution</string -->
-    <!-- TODO string name="export_scale_th">Scale 1 :</string -->
-    <!-- TODO string name="export_splays">Splays</string -->
-    <!-- TODO string name="export_splays_named">Named splays</string -->
-    <!-- TODO string name="export_stations">Stations</string -->
-    <!-- TODO string name="export_surface">Surface</string -->
-    <!-- TODO string name="export_swap_lr">Swap L/R</string -->
-    <!-- TODO string name="export_trox">Trox format</string -->
-    <!-- TODO string name="export_walls">Walls</string -->
-    <!-- TODO string name="export_xvi">Xvi images</string -->
-    <!-- TODO string name="export_with_xsections">Include X-sections</string -->
-    <!-- TODO string name="export_with_reference">Include XY reference</string -->
+    <string name="export_scale_th">Scară 1 :</string>
+    <string name="export_spacing_th">Distanța dintre puncte</string>
+    <string name="export_splays">Radieri</string>
+    <string name="export_splays_named">Redieri denumite</string>
+    <string name="export_stations">Stații</string>
+    <string name="export_surface">Suprafață</string>
+    <string name="export_swap_lr">Schimbă Stâng/Drept</string>
+    <string name="export_trox">Format Trox</string>
+    <string name="export_walls">Walls</string>
+    <string name="export_xvi">Imagini Xvi</string>
+    <string name="export_with_xsections">Include secțiuni-X</string>
+    <string name="export_with_reference">Include referintă-XY</string>
 
     <!-- UNUSED string name="export_linedir_stroke">Line dir stroke</string -->
     <!-- UNUSED string name="export_station_stroke">Station stroke</string -->
@@ -1058,8 +1113,8 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="export_point_stroke">Point stroke</string -->
     <!-- UNUSED string name="export_label_stroke">Label stroke</string -->
   
-    <!-- TODO string name="audio_id_shot">Recording: shot %1$s %2$s</string -->
-    <!-- TODO string name="audio_id_plot">Recording: sketch%1$d</string -->
+    <string name="audio_id_shot">Înregistrare: măsurători %1$s %2$s</string>
+    <string name="audio_id_plot">Înregistrare: schițare %1$d</string>
     <string name="audio_paused">Pauză</string>
     <string name="audio_playing">Redare</string>
     <string name="audio_recording">Înregistrare</string>
@@ -1067,15 +1122,15 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="audio_overwrite">Suprascrie ?</string>
     <!-- UNUSED string name="playing">Playing %1$s</string -->
   
-    <!-- TODO string name="import_functional">Import only functional settings</string -->
-    <!-- TODO string name="import_trox">Trox file format</string -->
-    <string name="import_lrud">Importă LRUD(măs. laterale)</string>
+    <string name="import_functional">Importă doar setările funcționale </string>
+    <string name="import_trox">Format fișier Trox</string>
+    <string name="import_lrud">Importă LRUD(măsurători laterale)</string>
     <string name="import_leg_first">Viză înaintea radierilor LRUD</string>
     <string name="import_diving_datamode">Mod scufundare</string>
 
-    <string name="title_azimut">Extinde referința</string>
+    <string name="title_azimut">Extinde referința azimuth</string>
     <string name="title_audio">Comentariu audio</string>
-    <!-- TODO string name="title_audio_list">Audio records</string -->
+    <string name="title_audio_list">Înregitrări audio</string>
     <string name="title_calib">Calibrări</string>
     <string name="title_calib_check">Măsurători verificare-calibrare</string>
     <!-- UNUSED string name="title_check">Verificare-calibrare</string -->
@@ -1086,6 +1141,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <!-- UNUSED string name="title_coord">Introdu coordonatele punctului:</string -->
     <string name="title_current_station">Stații salvate</string>
     <string name="title_search">Căutare stație/viză</string>
+	<string name="title_gm_search">Căutare date calibrare</string>
     <string name="title_dangling">Măsurători neatașate</string>
     <string name="title_device">Dispozitive DistoX</string>
     <string name="title_device_select">Selectează dispozitivul DistoX</string>
@@ -1111,21 +1167,23 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_packet_dialog">Pachete</string>
     <string name="title_photo">Foto/Măsurători</string>
     <string name="title_photo_comment">Comentariu fotografie</string>
-    <!-- TODO string name="title_photo_list">Photos</string -->
+    <string name="title_photo_list">Fotografii</string>
+    <string name="title_photo_view">Foto</string>
     <string name="title_plot_save">Exportă schița</string>
     <!-- UNUSED string name="title_plot_merge">Îmbină schița</string -->
     <!-- UNUSED string name="title_plot_reload">Reîncarcă schița</string -->
     <string name="title_plot_scraps">Desenele schiței</string>
     <string name="title_profile_flip">Întoarce schița profil ?</string>
     <string name="title_projection"> Azimutul profilului proiectat %1$d</string>
-    <string name="title_refs">Referințe schiță</string>
+    <string name="title_reduction_errors">Anomalii reducții-date</string>
+	<string name="title_refs">Referințe schiță</string>
     <string name="title_scraps">Schițele cartării</string>
     <string name="title_scraps_outline">Contururi schiță</string>
     <!-- UNUSED string name="title_select">Selectează</string -->
 
     <string name="title_settings_main">Parametri principali TopoDroid</string>
-    <string name="title_settings_export">Parametri importare/exportare</string>
-    <string name="title_settings_import">Parametri importare</string>
+    <string name="title_settings_export">Parametri importare/exportare TopoDroid</string>
+    <string name="title_settings_import">Parametri importare TopoDroid</string>
     <string name="title_settings_csv">Parametri exportare CSV</string>
     <string name="title_settings_svx">Parametri exportare Survex</string>
     <string name="title_settings_th">Parametri exportare Therion</string>
@@ -1139,7 +1197,7 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_settings_kml">Parametri exportare KML</string>
 
     <string name="title_settings_sketch">Parametri schițare 3D</string>
-    <string name="title_settings_survey">Parametri topografie</string>
+    <string name="title_settings_survey">Parametri cartare</string>
     <!-- UNUSED string name="title_settings_splay">TopoDroid splay settings</string -->
     <string name="title_settings_shot">Parametri măsurători</string>
     <string name="title_settings_units">Parametri unități de măsură</string>
@@ -1155,20 +1213,20 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_settings_edit">Parametri editare</string>
     <string name="title_settings_device">Parametri dispozitiv</string>
     <string name="title_settings_calib">Parametri calibrare</string>
-    <!-- TODO string name="title_settings_3d">TopoDroid 3d viewer settings</string -->
-    <!-- TODO string name="title_settings_dem">TopoDroid DEM settings</string -->
-    <!-- TODO string name="title_settings_walls3d">TopoDroid 3d model settings</string -->
-    <string name="title_settings_geek">Parametri indicatori</string>
-    <!-- TODO string name="title_settings_geek_survey">Geek survey settings</string -->
-    <!-- TODO string name="title_settings_geek_splay">Geek splay ettings</string -->
-    <!-- TODO string name="title_settings_geek_plot">Geek sketch settings</string -->
-    <!-- TODO string name="title_settings_geek_line">Geek lines settings</string -->
-    <!-- TODO string name="title_settings_geek_device">Geek device settings</string -->
-    <!-- TODO string name="title_settings_geek_import">Geek import settings</string -->
+    <string name="title_settings_3d">Parametri vizualizare 3d</string>
+    <string name="title_settings_dem">Parametri DEM 3d</string>
+    <string name="title_settings_walls3d">Parametri model 3d</string>
+    <string name="title_settings_geek">Parametri geek</string>
+    <string name="title_settings_geek_survey">Parametri cartare geek</string>
+    <string name="title_settings_geek_splay">Parametri radieri geek</string>
+    <string name="title_settings_geek_plot">Parametri schițare geek</string>
+    <string name="title_settings_geek_line">Parametri linie geek</string>
+    <string name="title_settings_geek_device">Parametri dispozitive geek</string>
+    <string name="title_settings_geek_import">Parametri importare/exportare geek</string>
     <string name="title_settings_log">Parametri înregistrare jurnal</string>
 
     <string name="title_shift">Mutare~</string>
-    <string name="title_shot_delete">Ștergi măsurătoarea?</string>
+    <string name="title_shot_delete">Șterge măsurătoarea?</string>
     <string name="title_sensor_edit">Senzor</string>
     <string name="title_split">Împarte schița</string>
 
@@ -1183,447 +1241,483 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="title_calib_export">Exportă calibrare</string>
     <!-- UNUSED string name="title_zoom">Redimensionează</string -->
 
-    <!-- TODO string name="title_import_shot">Survey import</string -->
-    <!-- TODO string name="title_import_gps">GPS point import</string -->
+    <string name="title_import_shot">Importă cartare</string>
+    <string name="title_import_gps">Importă puncte GPS</string>
+	<string name="title_import_th2">Fișier Therion th2</string>
+    <string name="title_graph_paper">Hârtie milimetrică scară 1:100</string>
+    <string name="graph_paper_scale">Adjustează linia la 5 cm lungime</string>
 
-  <string name="pref_export_settings">Parametri exportare</string>
-  <!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
+	<string name="exported_settings">Parametri exportați %1$s</string>
+	<string name="imported_settings">Parametri importați</string>
+	<string name="imported_settings_failed">Importarea parametrilor a eșuat</string>
+	<string name="export_settings_failed">Exportarea parametrilor a eșuat</string>  
+	<string name="pref_export_settings">Parametri importare/exportare</string>
+	<!-- UNUSED string name="pref_tcsx">Export cSurvey-1.20 transfer-csx</string -->
 
-  <!-- TODO string name="pref_export_plot_title">Sketch export format</string -->
-  <!-- TODO string name="pref_export_plot_summary">Default sketch export format</string -->
-  <!-- TODO string name="pref_export_shots_title">Data export format</string -->
-  <!-- TODO string name="pref_export_shots_summary">Default data export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_title">Sketch auto export format</string -->
-  <!-- TODO string name="pref_auto_plot_export_summary">Format of sketch automatic exports</string -->
+	<string name="pref_export_plot_title">Format export schiță</string>
+	<string name="pref_export_plot_summary">Format de bază pentru export schiță</string>
+	<string name="pref_export_shots_title">Format export date</string>
+	<string name="pref_export_shots_summary">Format de bază pentru export date</string>
+	<string name="pref_auto_plot_export_title">Format schită automat pentru export</string>
+	<string name="pref_auto_plot_export_summary">Format automat pentru schită export</string>
 
-  <string name="pref_cat_survey">DATE CARTARE</string>
-  <!-- TODO string name="pref_cat_splay">SPLAY DATA</string -->
-  <string name="pref_cat_drawing">SCHIȚARE</string>
-  <string name="pref_cat_import_export">IMPORT_EXPORT</string>
-  <string name="pref_cat_exportimport">IMPORTĂ</string>
-  <!-- TODO string name="pref_cat_exportth">Therion</string -->
-  <!-- TODO string name="pref_cat_exportdat">Compass</string -->
-  <!-- TODO string name="pref_cat_exporttro">VisualTopo</string -->
-  <!-- TODO string name="pref_cat_exportsvg">SVG</string -->
-  <!-- TODO string name="pref_cat_exportdxf">DXF</string -->
-  <!-- TODO string name="pref_cat_exportshp">Shapefile</string -->
-  <!-- TODO string name="pref_cat_exportpng">PNG</string -->
-  <!-- TODO string name="pref_cat_exportkml">KML/GeoJSON</string -->
-  <!-- TODO string name="pref_cat_exportcsv">CSV</string -->
+	<string name="pref_cat_survey">DATE CARTARE</string>
+	<string name="pref_cat_splay">DATE RADIERI</string>
+	<string name="pref_cat_drawing">SCHIȚARE</string>
+	<string name="pref_cat_import_export">IMPORT_EXPORT</string>
+	<string name="pref_cat_exportimport">IMPORTĂ</string>
+	<string name="pref_cat_exportsvx" translatable="false">Survex</string>
+	<string name="pref_cat_exportth"  translatable="false">Therion</string>
+	<string name="pref_cat_exportdat" translatable="false">Compass</string>
+	<string name="pref_cat_exporttro" translatable="false">VisualTopo</string>
+	<string name="pref_cat_exportsvg" translatable="false">SVG</string>
+	<string name="pref_cat_exportdxf" translatable="false">DXF</string>
+	<string name="pref_cat_exportshp" translatable="false">Shapefile</string>
+	<!-- UNUSED string name="pref_cat_exportpng" translatable="false">PNG</string NO_PNG -->
+	<string name="pref_cat_exportkml" translatable="false">KML/GeoJSON</string>
+	<string name="pref_cat_exportcsx" translatable="false">cSurvey</string>
+	<string name="pref_cat_exportcsv" translatable="false">CSV</string>
 
-  <string name="pref_cat_calib">CALIBRĂRI</string>
-  <!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
-  <string name="pref_cat_device">Dispozitive</string>
-  <!-- TODO string name="pref_cat_cave3d">3D VIEWER</string -->
-  <string name="pref_cat_geek">FANIOANE</string>
-  <!-- UNUSED string name="pref_cat_sketch">MODELE 3D</string -->
-  <!-- UNUSED string name="pref_cat_log">JURNALE</string -->
+	<string name="pref_cat_calib">CALIBRĂRI</string>
+	<!-- UNUSED string name="pref_cat_min_algo">ALGO MIN</string -->
+	<string name="pref_cat_device">DISPOZITIVE</string>
+	<string name="pref_cat_cave3d">VIZUALIZARE 3D</string>
+	<string name="pref_cat_geek">PARAMETRI PERSONALIZAȚI</string>
+    <!-- UNUSED string name="pref_cat_log">JURNALE</string -->
 
-  <string name="pref_locale_title">Limbă</string>
-  <string name="pref_locale_summary">Limbă</string>
-  <string name="pref_orientation_title">Orientare ecran</string>
-  <string name="pref_orientation_summary">Orientare afișaj aplicație</string>
+	<string name="pref_locale_title">Limbă</string>
+	<string name="pref_locale_summary">Limbă aplicație</string>
+	<string name="pref_orientation_title">Orientare ecran</string>
+	<string name="pref_orientation_summary">Orientare afișaj aplicație</string>
 
-  <string name="pref_raw_data_title">Date brute</string>
-  <string name="pref_raw_data_summary">Arată date brute</string>
-  <string name="pref_calib_shot_download_title">Descarcă date de pe dispozitiv</string>
-  <string name="pref_calib_shot_download_summary">Descarcă date de calibrare de pe dispozitiv imediat</string>
-  <!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
-  <!-- UNUSED string name="pref_bootloader_summary">Activează bootloader</string -->
-  <string name="pref_mkeyboard_title">Tastatură</string>
-  <string name="pref_mkeyboard_summary">Activează tastaturi personalizate</string>
-  <string name="pref_no_cursor_title">Fără cursor tastatură</string>
-  <string name="pref_no_cursor_summary">Dezactivează cursorul tastaturii personalizate</string>
-  <string name="pref_local_help_title">Manual tradus</string>
-  <string name="pref_local_help_summary">Activează manualul tradus</string>
-  <!-- UNUSED string name="pref_cosurvey_title">Serviciu de co-cartare</string -->
-  <!-- UNUSED string name="pref_cosurvey_summary">Activează serviciul de co-cartare</string -->
+	<string name="pref_raw_data_title">Date brute</string>
+	<string name="pref_raw_data_summary">Arată date brute calibrare</string>
+	<string name="pref_calib_shot_download_title">Descarcă date de pe dispozitiv</string>
+	<string name="pref_calib_shot_download_summary">Descarcă date de calibrare de pe dispozitiv imediat</string>
+	<!-- UNUSED string name="pref_bootloader_title">Bootloader</string -->
+	<!-- UNUSED string name="pref_bootloader_summary">Activează bootloader</string -->
+	<string name="pref_mkeyboard_title">Tastatură</string>
+	<string name="pref_mkeyboard_summary">Activează tastaturi personalizate</string>
+	<string name="pref_no_cursor_title">Fără cursor tastatură</string>
+	<string name="pref_no_cursor_summary">Dezactivează cursorul tastaturii personalizate</string>
+	<string name="pref_local_help_title">Ghid utilizator</string>
+	<string name="pref_local_help_summary">Activează Ghid utilizator tradus [necesită conexiune internet]</string>
+	<!-- UNUSED string name="pref_cosurvey_title">Serviciu de co-cartare</string -->
+	<!-- UNUSED string name="pref_cosurvey_summary">Activează serviciul de co-cartare</string -->
+	<string name="pref_import_datamode_title">Importă datamod</string>
+	<string name="pref_import_datamode_summary">Datamode pentru importare măsurători</string>
 
-  <!-- TODO string name="pref_therion_config_title">Therion config commands</string -->
-  <!-- TODO string name="pref_therion_config_summary">Create Therion config commands</string -->
-  <string name="pref_therion_maps_title">Harțile Therion primele</string>
-  <string name="pref_therion_maps_summary">Harțile Therion înaintea datelelor de calibrare</string>
-  <string name="pref_extra_buttons_title">Nivel de funcții</string>
-  <string name="pref_extra_buttons_summary">Nivelul funcțiilor activate</string>
-  <string name="pref_size_buttons_title">Mărimea butoanelor</string>
-  <string name="pref_size_buttons_summary">Mărimea butoanelor de pe bara de acțiune</string>
-  <string name="pref_with_sensors_title">Senzori</string>
-  <string name="pref_with_sensors_summary">Activează date "senzori"</string>
-  <string name="pref_with_android_azimuth_title">Busolă Android</string>
-  <string name="pref_with_android_azimuth_summary">Activează busolă/clinometru Android</string>
-  <string name="pref_with_levels_title">Strate</string>
-  <string name="pref_with_levels_summary">Folosește strate desen</string>
-  <string name="pref_palettes_title">Palete</string>
-  <string name="pref_palettes_summary">Activează palete suplimentare</string>
-  <string name="pref_packet_logger_title">Jurnal pachete</string>
-  <string name="pref_packet_logger_summary">Activează înregistrare pachete</string>
+	<string name="pref_therion_config_title">Configurare Therion</string>
+	<string name="pref_therion_config_summary">Comenzi configurare integrate Therion</string>
+	<string name="pref_therion_maps_title">În primul caz harțile Therion</string>
+	<string name="pref_therion_maps_summary">Harțile Therion înaintea datelelor de cartare</string>
+	<string name="pref_extra_buttons_title">Nivel de funcții</string>
+	<string name="pref_extra_buttons_summary">Nivelul funcțiilor activate</string>
+	<string name="pref_size_buttons_title">Mărimea butoanelor</string>
+	<string name="pref_size_buttons_summary">Mărimea butoanelor de pe bara de acțiune</string>
+	<string name="pref_with_sensors_title">Senzori</string>
+	<string name="pref_with_sensors_summary">Activează date "senzori"</string>
+	<!-- UNUSED string name="pref_tdmanager_title">TdManager</string -->
+	<!-- UNUSED string name="pref_tdmanager_summary">Use TdManager</string -->
+	<string name="pref_with_android_azimuth_title">Busolă Android</string>
+	<string name="pref_with_android_azimuth_summary">Activează busolă/clinometru Android</string>
+	<string name="pref_blunder_shot_title">Măsurători greșite</string>
+	<string name="pref_blunder_shot_summary">Evitare măsurători-vize greșite</string>
+	<string name="pref_splay_station_title">Realocare stații radieri</string>
+	<string name="pref_splay_station_summary">Realocare stații la radieri</string>
+	<string name="pref_splay_group_title">Redenumire grup-radieri</string>
+	<string name="pref_splay_group_summary">Redenumire grup-radieri la măsurători înainte</string>
+	<string name="pref_with_levels_title">Strate</string>
+	<string name="pref_with_levels_summary">Folosește strate desen</string>
+	<!-- UNUSED string name="pref_with_rename_title">Survey renaming</string -->
+	<!-- UNUSED string name="pref_with_rename_summary">Enable "survey renaming" menu</string -->
+	<string name="pref_palettes_title">Palete</string>
+	<string name="pref_palettes_summary">Activează palete suplimentare</string>
+	<string name="pref_packet_logger_title">Jurnal pachete</string>
+	<string name="pref_packet_logger_summary">Activează înregistrare pachete</string>
+	<string name="pref_th2_edit_title" translatable="false">Sketch editing</string>
+	<string name="pref_th2_edit_summary" translatable="false">Enable sketch editing</string>
 
-  <string name="pref_bezier_step_title">Spațierea punctelor</string>
-  <string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>
-  <string name="pref_leg_shots_title">Nr. min. măsurători/viză</string>
-  <string name="pref_leg_shots_summary">Nr. minim de măsurători pe viză</string>
-  <string name="pref_recent_timeout_title">Timeout date recente</string>
-  <string name="pref_recent_timeout_summary">Timeout după care datele nu mai sunt recente</string>
-  <!-- TODO CHECK PREVIOUS string name="pref_recent_timeout_summary">Timeout after which a data is no longer recent [s]</string -->
-  <string name="pref_triple_shot_title">Sunet avertizare viză</string>
-  <string name="pref_triple_shot_summary">Sunet avertizare la recunoașterea unei vize noi(segment de drumuire)</string>
-  <string name="pref_connect_feedback_title">Feedback conectare</string>
-  <string name="pref_connect_feedback_summary">Feedback la conectarea dispozitivului</string>
-  <string name="pref_station_prefix_title">Prefix stație Compass</string>
-  <string name="pref_station_prefix_summary">Exportă prefix stație (Compass)~</string>
-  <string name="pref_compass_splays_title">Radieri Compass</string>
-  <string name="pref_compass_splays_summary">Exportă radierile în fișiere Compass</string>
-  <string name="pref_vtopo_splays_title">Radieri VisualTopo</string>
-  <string name="pref_vtopo_splays_summary">Exportă radieri în fișiere VisualTopo</string>
-  <string name="pref_vtopo_lrud_title">LRUD la punctul de stație</string>
-  <string name="pref_vtopo_lrud_summary">LRUD VisualTopo la punctule de stație</string>
-  <!-- TODO string name="pref_vtopo_trox_title">Trox format</string -->
-  <!-- TODO string name="pref_vtopo_trox_summary">Export VisualTopo in trox format</string -->
-  <!-- UNUSED string name="pref_trobot_names_title">TopoRobot nume stații</string -->
-  <!-- UNUSED string name="pref_trobot_names_summary">Numele stațiilor sunt în stil TopoRobot</string -->
-  <string name="pref_ortho_lrud_title">Unghi radieri LRUD</string>
-  <string name="pref_ortho_lrud_summary">Unghi minim radiere-viză pentru radieri LRUD</string>
-  <string name="pref_lrud_vertical_title">Clino(unghi v.) sus-jos pt. radieri</string>
-  <string name="pref_lrud_vertical_summary">Unghi min. pentru radieri sus/jos LRUD</string>
-  <string name="pref_lrud_horizontal_title">St./Dr.(LR) unghi radiere</string>
-  <string name="pref_lrud_horizontal_summary">LRUD unghi max. pentru radieri stânga/dreapta</string>
-  <string name="pref_survex_eol_title">Terminație linie Survex/Topo</string>
-  <string name="pref_survex_eol_summary">Terminație linie Survex/Topo</string>
-  <string name="pref_survex_splay_title">Survex radieri stație</string>
-  <string name="pref_survex_splay_summary">Adaugă stație TO (punct viză) la radieri în Survex</string>
-  <string name="pref_survex_lrud_title">LRUD Survex/Therion</string>
-  <string name="pref_survex_lrud_summary">Adaugă LRUD la exportul Survex/Therion</string>
-  <!-- TODO string name="pref_svg_program_title">SVG program</string -->
-  <!-- TODO string name="pref_svg_program_summary">Target SVG program</string -->
-  <string name="pref_svg_grid_title">Caroiaj</string>
-  <string name="pref_svg_grid_summary">Adaugă caroiaj la exportul SVG/PNG</string>
-  <string name="pref_svg_roundtrip_title">buclă SVG</string>
-  <string name="pref_svg_roundtrip_summary">Export SVG cu buclă activată</string>
-  <string name="pref_svg_splays_title">Radieri SVG</string>
-  <string name="pref_svg_splays_summary">Include radierile în exportul SVG</string>
-  <!-- UNUSED string name="pref_svg_in_html_title">SVG în HTML</string -->
-  <!-- UNUSED string name="pref_svg_in_html_summary">Introdu exportul SVG în HTML</string -->
-  <string name="pref_svg_pointstroke_title">Mărime punct SVG</string>
-  <string name="pref_svg_pointstroke_summary">Grosimea simbolurilor tip punct în SVG</string>
-  <string name="pref_svg_labelstroke_title">SVG mărime etichete</string>
-  <string name="pref_svg_labelstroke_summary">Lățimea textului etichetelor în SVG</string>
-  <string name="pref_svg_linestroke_title">Grosimea liniilor SVG</string>
-  <string name="pref_svg_linestroke_summary">Lățimea liniilor în SVG</string>
-  <string name="pref_svg_gridstroke_title">Grosimea caroiajului SVG </string>
-  <string name="pref_svg_gridstroke_summary">Lățimea liniilor caroiajului în SVG</string>
-  <string name="pref_svg_shotstroke_title">Lățimea măsurătorilor în SVG </string>
-  <string name="pref_svg_shotstroke_summary">Lățimea segmentelor măsurătorilor în SVG</string>
-  <string name="pref_svg_linedirstroke_title">Lățimea lin. orientare SVG</string>
-  <string name="pref_svg_linedirstroke_summary">Lățimea lininilor de orientare în SVG</string>
-  <string name="pref_svg_line_dir_title">SVG - linii orientatare</string>
-  <string name="pref_svg_line_dir_summary">Adaugă semne pentru orientatarea liniilor la exportul SVG</string>
-  <string name="pref_svg_stationsize_title">Mărime punct viză</string>
-  <string name="pref_svg_stationsize_summary">Mărime text nume viză</string>
-  <!-- TODO string name="pref_svg_labelsize_title">Label size</string -->
-  <!-- TODO string name="pref_svg_labelsize_summary">Label text size</string -->
-  <string name="pref_kml_stations_title">Stații KML</string>
-  <string name="pref_kml_stations_summary">Adaugă stații la exportul KML</string>
-  <string name="pref_kml_splays_title">Radieri KML</string>
-  <string name="pref_kml_splays_summary">Adaugă radiero la exportul KML</string>
-  <string name="pref_csv_raw_title">CSV brut</string>
-  <string name="pref_csv_raw_summary">Exportă date brute îm format CSV</string>
-  <string name="pref_csv_sep_title">Separator CSV</string>
-  <string name="pref_csv_sep_summary">Separator câmpuri CSV</string>
-  <string name="pref_csv_eol_title">Caracter CSV eol</string>
-  <string name="pref_csv_eol_summary">Separator înregistrări CSV</string>
+	<string name="pref_bezier_step_title">Spațierea punctelor</string>
+	<string name="pref_bezier_step_summary">Distanța între puncte pe o linie export [m]</string>
+	<string name="pref_leg_shots_title">Nr. min. măsurători/viză</string>
+	<string name="pref_leg_shots_summary">Nr. minim de măsurători pe viză</string>
+	<string name="pref_recent_timeout_title">Timeout date recente</string>
+	<string name="pref_recent_timeout_summary">Timeout după care datele nu mai sunt recente</string>
+	<string name="pref_triple_shot_title">Sunet avertizare viză</string>
+	<string name="pref_triple_shot_summary">Sunet avertizare la recunoașterea unei vize noi(segment de drumuire)</string>
+	<string name="pref_connect_feedback_title">Feedback conectare</string>
+	<string name="pref_connect_feedback_summary">Feedback la conectarea dispozitivului</string>
+	<string name="pref_station_prefix_title">Prefix stație Compass</string>
+	<string name="pref_station_prefix_summary">Exportă prefix stație [Compass/cSurvey]</string>
+	<string name="pref_compass_splays_title">Radieri Compass</string>
+	<string name="pref_compass_splays_summary">Exportă radierile în fișiere Compass</string>
+	<string name="pref_vtopo_splays_title">Radieri VisualTopo</string>
+	<string name="pref_vtopo_splays_summary">Exportă radieri în fișiere VisualTopo</string>
+	<string name="pref_vtopo_lrud_title">LRUD la punctul de stație</string>
+	<string name="pref_vtopo_lrud_summary">LRUD VisualTopo la punctule de stație</string>
+	<string name="pref_vtopo_trox_title">Format Trox</string>
+	<string name="pref_vtopo_trox_summary">Exportă VisualTopo în format Trox</string>
+	<!-- UNUSED string name="pref_trobot_names_title">TopoRobot nume stații</string -->
+	<!-- UNUSED string name="pref_trobot_names_summary">Numele stațiilor sunt în stil TopoRobot</string -->
+	<string name="pref_ortho_lrud_title">Unghi radieri LRUD</string>
+	<string name="pref_ortho_lrud_summary">Unghi minim radiere-viză pentru radieri LRUD</string>
+	<string name="pref_lrud_vertical_title">Clino(unghi v.) sus-jos pt. radieri</string>
+	<string name="pref_lrud_vertical_summary">Unghi min. pentru radieri sus/jos LRUD</string>
+	<string name="pref_lrud_horizontal_title">St./Dr.(LR) unghi radiere</string>
+	<string name="pref_lrud_horizontal_summary">LRUD unghi max. pentru radieri stânga/dreapta</string>
+	<string name="pref_survex_eol_title">Terminație linie Survex/Topo</string>
+	<string name="pref_survex_eol_summary">Terminație linie Survex/Topo</string>
+	<string name="pref_survex_splay_title">Survex radieri stație</string>
+	<string name="pref_survex_splay_summary">Adaugă stație TO (punct viză) la radieri în Survex</string>
+	<string name="pref_survex_lrud_title">LRUD Survex/Therion</string>
+	<string name="pref_survex_lrud_summary">Adaugă LRUD la exportul Survex/Therion</string>
+	<string name="pref_svg_program_title">Program SVG</string>
+	<string name="pref_svg_program_summary">Program SVG țintă</string>
+	<string name="pref_svg_grid_title">Caroiaj</string>
+	<string name="pref_svg_grid_summary">Adaugă caroiaj la exportul SVG/PNG</string>
+	<string name="pref_svg_roundtrip_title">buclă SVG</string>
+	<string name="pref_svg_roundtrip_summary">Export SVG cu buclă activată</string>
+	<string name="pref_svg_splays_title">Radieri SVG</string>
+	<string name="pref_svg_splays_summary">Include radierile în exportul SVG</string>
+	<!-- UNUSED string name="pref_svg_in_html_title">SVG în HTML</string -->
+	<!-- UNUSED string name="pref_svg_in_html_summary">Introdu exportul SVG în HTML</string -->
+	<string name="pref_svg_pointstroke_title">Mărime punct SVG</string>
+	<string name="pref_svg_pointstroke_summary">Grosimea simbolurilor tip punct în SVG</string>
+	<string name="pref_svg_labelstroke_title">SVG mărime etichete</string>
+	<string name="pref_svg_labelstroke_summary">Lățimea textului etichetelor în SVG</string>
+	<string name="pref_svg_linestroke_title">Grosimea liniilor SVG</string>
+	<string name="pref_svg_linestroke_summary">Lățimea liniilor în SVG</string>
+	<string name="pref_svg_gridstroke_title">Grosimea caroiajului SVG </string>
+	<string name="pref_svg_gridstroke_summary">Lățimea liniilor caroiajului în SVG</string>
+	<string name="pref_svg_shotstroke_title">Lățimea măsurătorilor în SVG </string>
+	<string name="pref_svg_shotstroke_summary">Lățimea segmentelor măsurătorilor în SVG</string>
+	<string name="pref_svg_linedirstroke_title">Lățimea lin. orientare SVG</string>
+	<string name="pref_svg_linedirstroke_summary">Lățimea lininilor de orientare în SVG</string>
+	<string name="pref_svg_line_dir_title">SVG - linii orientatare</string>
+	<string name="pref_svg_line_dir_summary">Adaugă semne pentru orientatarea liniilor la exportul SVG</string>
+	<string name="pref_svg_stationsize_title">Mărime punct viză</string>
+	<string name="pref_svg_stationsize_summary">Mărime text nume viză</string>
+	<string name="pref_svg_labelsize_title">Mărime etichetă</string>
+	<string name="pref_svg_labelsize_summary">Mărime text etichetă</string>
+	<string name="pref_kml_stations_title">Stații KML/JSON</string>
+	<string name="pref_kml_stations_summary">Adaugă stații la exportul KML/JSON</string>
+	<string name="pref_kml_splays_title">Radieri KML/JSON</string>
+	<string name="pref_kml_splays_summary">Adaugă radiere la exportul KML/JSON</string>
+	<string name="pref_csv_raw_title">CSV brut</string>
+	<string name="pref_csv_raw_summary">Exportă date brute îm format CSV</string>
+	<string name="pref_csv_sep_title">Separator CSV</string>
+	<string name="pref_csv_sep_summary">Separator câmpuri CSV</string>
+	<string name="pref_csv_eol_title">Caracter CSV eol</string>
+	<string name="pref_csv_eol_summary">Separator înregistrări CSV</string>
 
-  <string name="pref_sock_type_title">Socket</string>
-  <string name="pref_sock_type_summary">Creeare socket</string>
-  <!-- UNUSED string name="pref_device_type_title">Tip Disto</string -->
-  <!-- UNUSED string name="pref_device_type_summary">Modelul DistoX-ului</string -->
-  <!-- UNUSED string name="pref_comm_retry_title">Reîncearcă conexiunea</string -->
-  <!-- UNUSED string name="pref_comm_retry_summary">Nr. reîncercări conexiune</string -->
-  <string name="pref_wait_laser_title">Pauză laser [ms]</string>
-  <string name="pref_wait_laser_summary">Pauză după aprinderea laser-ului [ms]</string>
-  <string name="pref_wait_shot_title">Pauză măsurătoare [ms]</string>
-  <string name="pref_wait_shot_summary">Pauză după măsurătoare [ms]</string>
-  <string name="pref_wait_data_title">Pauză date [ms]</string>
-  <string name="pref_wait_data_summary">Pauză după descărcarea unei măsurători/date [ms]</string>
-  <string name="pref_wait_conn_title">Date pregătite interval așteaptare [ms]</string>
-  <string name="pref_wait_conn_summary">Interval de așteaptare până datele sunt pregătite [ms]</string>
-  <string name="pref_conn_mode_title">Tip conexiune date</string>
-  <string name="pref_conn_mode_summary">Tipul conexiunii cu DistoX-ul</string>
-  <!-- UNUSED string name="pref_auto_reconnect_title">Reconectare automată</string -->
-  <!-- UNUSED string name="pref_auto_reconnect_summary">Reconectează când se pierde conexiunea</string -->
-  <string name="pref_second_distox_title">Cartare dublu-DistoX</string>
-  <string name="pref_second_distox_summary">Cartare cu două DistoX-uri</string>
-  <string name="pref_auto_pair_title">Auto împerechere</string>
-  <string name="pref_auto_pair_summary">Împerechere cu dispozitivul după scanare</string>
-  <string name="pref_head_tail_title">Nr. de date/măsurători noi</string>
-  <string name="pref_head_tail_summary">Citește numărul de date/măsurători înainte de a le descarca</string>
-  <string name="pref_socket_delay_title">Întârziere conexiune</string>
-  <string name="pref_socket_delay_summary">Întârziere conexiune pentru a permite împerecherea [0.1 sec]</string>
-  <string name="pref_z6_workaround_title">Evitare problemă Z6</string>
-  <string name="pref_z6_workaround_summary">Evitare problemă Z6 la descărcarea datelor</string>
-  <!-- TODO string name="pref_firmware_sanity_title">Firmware check</string -->
-  <!-- TODO string name="pref_firmware_sanity_summary">Enforce firmware sanity checks</string -->
-  <string name="pref_crs_title">C R S </string>
-  <string name="pref_crs_summary">Nume CRS ca în Proj4</string>
-  <!-- UNUSED string name="pref_gps_averaging_title">Medierea valorilor GPS</string -->
-  <!-- UNUSED string name="pref_gps_averaging_summary">Activează medierea valorilor GPS</string -->
-  <!-- TODO string name="pref_bric_mode_title">BRIC mode</string -->
-  <!-- TODO string name="pref_bric_mode_summary">BRIC operating mode</string -->
-  <!-- TODO string name="pref_bric_zero_length_title">BRIC zero shot</string -->
-  <!-- TODO string name="pref_bric_zero_length_summary">Record BRIC zero-length shot</string -->
+	<string name="pref_sock_type_title">Socket</string>
+	<string name="pref_sock_type_summary">Creeare socket</string>
+	<!-- UNUSED string name="pref_device_type_title">Tip Disto</string -->
+	<!-- UNUSED string name="pref_device_type_summary">Modelul DistoX-ului</string -->
+	<!-- UNUSED string name="pref_comm_retry_title">Reîncearcă conexiunea</string -->
+	<!-- UNUSED string name="pref_comm_retry_summary">Nr. reîncercări conexiune</string -->
+	<!-- UNUSED string name="pref_comm_retry_dialogtitle">Nr. reîncercări conexiune</string -->
+	<string name="pref_wait_laser_title">Pauză laser [ms]</string>
+	<string name="pref_wait_laser_summary">Pauză după aprinderea laser-ului [ms]</string>
+	<string name="pref_wait_shot_title">Pauză măsurătoare [ms]</string>
+	<string name="pref_wait_shot_summary">Pauză după măsurătoare [ms]</string>
+	<string name="pref_wait_data_title">Pauză date [ms]</string>
+	<string name="pref_wait_data_summary">Pauză după descărcarea unei măsurători/date [ms]</string>
+	<string name="pref_wait_conn_title">Date pregătite interval așteaptare [ms]</string>
+	<string name="pref_wait_conn_summary">Interval de așteaptare până datele sunt pregătite [ms]</string>
+	<string name="pref_conn_mode_title">Tip conexiune date</string>
+	<string name="pref_conn_mode_summary">Tipul conexiunii cu DistoX pentru descărcare date</string>
+	<!-- UNUSED string name="pref_auto_reconnect_title">Reconectare automată</string -->
+	<!-- UNUSED string name="pref_auto_reconnect_summary">Reconectează când se pierde conexiunea</string -->
+	<string name="pref_second_distox_title">Cartare dublu-DistoX</string>
+	<string name="pref_second_distox_summary">Cartare cu două DistoX-uri</string>
+	<string name="pref_auto_pair_title">Auto împerechere</string>
+	<string name="pref_auto_pair_summary">Împerechere cu dispozitivul după scanare</string>
+	<string name="pref_head_tail_title">Nr. de date/măsurători noi</string>
+	<string name="pref_head_tail_summary">Citește numărul de date/măsurători înainte de a le descarca</string>
+	<string name="pref_socket_delay_title">Întârziere conexiune</string>
+	<string name="pref_socket_delay_summary">Întârziere conexiune pentru a permite împerecherea [0.1 sec]</string>
+	<string name="pref_z6_workaround_title">Evitare problemă Z6</string>
+	<string name="pref_z6_workaround_summary">Evitare problemă Z6 la descărcarea datelor</string>
+	<string name="pref_firmware_sanity_title">Verificare Firmware</string>
+	<string name="pref_firmware_sanity_summary">Executare verificare de siguranță firmware</string>
+	<string name="pref_crs_title">C R S </string>
+	<string name="pref_crs_summary">Nume CRS ca în Proj4</string>
+	<!-- UNUSED string name="pref_gps_averaging_title">Medierea valorilor GPS</string -->
+	<!-- UNUSED string name="pref_gps_averaging_summary">Activează medierea valorilor GPS</string -->
+	<string name="pref_bric_mode_title">Mod BRIC</string>
+	<string name="pref_bric_mode_summary">Mod operare BRIC</string>
+	<string name="pref_bric_zero_length_title">Măsurătoare BRIC nul</string>
+	<string name="pref_bric_zero_length_summary">Înregistrare măsurătoare BRIC lungime-nul</string>
 
-  <string name="pref_plot_screen_title">SCHIȚĂ</string>
-  <string name="pref_tool_line_title">LINII</string>
-  <string name="pref_tool_point_title">PUNCTE</string>
-  <string name="pref_location_title">LOCAȚIE</string>
-  <string name="pref_accuracy_title">ACURATEȚE</string>
-  <string name="pref_shot_data_title">DATE MĂSURĂTOARE</string>
-  <string name="pref_shot_units_title">UNITĂȚI</string>
-  <string name="pref_cwd_title">Director de lucru</string>
-  <!-- UNUSED string name="pref_cwd_summary">Director de lucru TopoDroid</string -->
-  <string name="pref_pt_color_map_title">Asociere culori PocketTopo</string>
-  <string name="pref_pt_color_map_summary">PocketTopo grilă asociere(mapare) culori (import PocketTopo)</string>
-  <string name="pref_text_size_title">Mărime text</string>
-  <string name="pref_text_size_summary">Mărime text elemente liste</string>
-  <string name="pref_closeness_title">Rază selecție</string>
-  <string name="pref_closeness_message">Rază selecție a elementelor schiței</string>
-  <string name="pref_eraseness_title">Mărime gumă</string>
-  <string name="pref_eraseness_message">Mărime gumă de șters a elementelor din schiță</string>
-  <string name="pref_min_shift_title">Sensibilitate deplasare</string>
-  <string name="pref_min_shift_message">Viteză maximă de deplasare [pxl/step]</string>
-  <string name="pref_pointing_title">Toleranță punctare/atingere</string>
-  <string name="pref_pointing_message">Toleranță atingere/ridicare pentru selecția punctului</string>
-  <string name="pref_dash_splay_title">Coerență liniuțe radieri</string>
-  <string name="pref_dash_splay_message">Radierile punctate coerent între plan și profile</string>
-  <string name="pref_vert_splay_title">Unghi limită puncte radieri~</string>
-  <string name="pref_vert_splay_message">Radierile peste înclinația limită sunt marcate cu linie intreruptă</string>
-  <string name="pref_horiz_splay_title">Limită azimut radieri întrerupte</string>
-  <string name="pref_horiz_splay_message">Radierile cu azimutul mai mare ca acesta sunt marcate cu linie întreruptă</string>
-  <string name="pref_section_splay_title">Limită unghi linie întreruptă radieri</string>
-  <string name="pref_section_splay_message">Radierile peste acest unghi făcut cu secțiunea plana sunt desenate cu linie întreruptă</string>
-  <!-- TODO string name="pref_splay_dash_color_title">Splay dash color</string -->
-  <!-- TODO string name="pref_splay_dash_color_summary">Color of dashed lines</string -->
-  <!-- TODO string name="pref_splay_dot_color_title">Splay dot color</string -->
-  <!-- TODO string name="pref_splay_dot_color_summary">Color of dotted lines</string -->
+	<string name="pref_plot_screen_title">SCHIȚĂ</string>
+	<string name="pref_tool_line_title">LINII</string>
+	<string name="pref_tool_point_title">PUNCTE</string>
+	<string name="pref_location_title">LOCAȚIE</string>
+	<string name="pref_accuracy_title">ACURATEȚE</string>
+	<string name="pref_shot_data_title">DATE MĂSURĂTOARE</string>
+	<string name="pref_shot_units_title">UNITĂȚI</string>
+	<string name="pref_cwd_title">Director de lucru</string>
+	<!-- UNUSED string name="pref_cwd_summary">Director de lucru TopoDroid</string -->
+	<string name="pref_pt_color_map_title">Asociere culori PocketTopo</string>
+	<string name="pref_pt_color_map_summary">PocketTopo grilă asociere(mapare) culori (import PocketTopo)</string>
+	<string name="pref_text_size_title">Mărime text</string>
+	<string name="pref_text_size_summary">Mărime text elemente liste</string>
+	<string name="pref_closeness_title">Rază selecție</string>
+	<string name="pref_closeness_message">Rază selecție a elementelor schiței</string>
+	<string name="pref_eraseness_title">Mărime gumă de șters</string>
+	<string name="pref_eraseness_message">Mărime gumă de șters a elementelor din schiță</string>
+	<string name="pref_min_shift_title">Sensibilitate deplasare</string>
+	<string name="pref_min_shift_message">Viteză maximă de deplasare [pxl/step]</string>
+	<string name="pref_pointing_title">Toleranță punctare/atingere</string>
+	<string name="pref_pointing_message">Toleranță atingere/ridicare pentru selecția punctului</string>
+	<string name="pref_dash_splay_title">Coerență liniuțe radieri</string>
+	<string name="pref_dash_splay_message">Radierile punctate coerent între plan și profile</string>
+	<string name="pref_vert_splay_title">Unghi limită puncte radieri~</string>
+	<string name="pref_vert_splay_message">Radierile peste înclinația limită sunt marcate cu linie intreruptă</string>
+	<string name="pref_horiz_splay_title">Limită azimut radieri întrerupte</string>
+	<string name="pref_horiz_splay_message">Radierile cu azimutul mai mare ca acesta sunt marcate cu linie întreruptă</string>
+	<string name="pref_section_splay_title">Limită unghi linie întreruptă radieri</string>
+	<string name="pref_section_splay_message">Radierile peste acest unghi făcut cu secțiunea plana sunt desenate cu linie întreruptă</string>
+	<string name="pref_splay_dash_color_title">Culoare liniuță radieri</string>
+	<string name="pref_splay_dash_color_summary">Culoare liniuță la linii</string>
+	<string name="pref_splay_dot_color_title">Culoare punc radieri</string>
+	<string name="pref_splay_dot_color_summary">Culoare punct la linii</string>
 
-  <!-- UNUSED string name="pref_data_backup_title">Export automat date</string -->
-  <!-- UNUSED string name="pref_data_backup_summary">Export datelor se face automat (e nevoie de format implicit definit)</string -->
-  <string name="pref_zipped_symbols_title">Fișiere cu simboluri arhivate (ZIP)</string>
-  <string name="pref_zipped_symbols_summary">Salvează/încarcă fișiere cu simboluri în/din fișiere arhivă ZIP</string>
-  <string name="pref_fixed_origin_title">Origine schiță</string>
-  <string name="pref_fixed_origin_summary">Origine schiță fixă</string>
-  <string name="pref_shared_xsections_title">Secțiuni-X comune</string>
-  <string name="pref_shared_xsections_summary">Secțiunile-X (transversale) definite la stații comune între schițe</string>
-  <string name="xsections_shared">Secțiuni-X (trans.) comune</string>
-  <string name="xsections_private">Secțiuni-X (trans.) private</string>
-  <string name="pref_reduce_angle_title">Unghi de îndreptare</string>
-  <string name="pref_reduce_angle_summary">Unghi-segment minim pt. îndreptarea liniilor~</string>
+	<!-- UNUSED string name="pref_data_backup_title">Export automat date</string -->
+	<!-- UNUSED string name="pref_data_backup_summary">Export datelor se face automat (e nevoie de format implicit definit)</string -->
+	<string name="pref_editable_stations_title">Stații editabile</string>
+	<string name="pref_editable_stations_summary">Nume stații editabile în lista măsurătorilor</string>  
+	<string name="pref_zipped_symbols_title">Fișiere cu simboluri arhivate ZIP</string>
+	<string name="pref_zipped_symbols_summary">Salvează/încarcă fișiere cu simboluri în/din fișiere arhivă ZIP</string>
+	<string name="pref_fixed_origin_title">Origine schiță</string>
+	<string name="pref_fixed_origin_summary">Origine schiță fixă</string>
+	<string name="pref_shared_xsections_title">Secțiuni-X comune</string>
+	<string name="pref_shared_xsections_summary">Secțiunile-X (transversale) definite la stații comune între schițe</string>
+	<string name="xsections_shared">Secțiuni-X (trans.) comune</string>
+	<string name="xsections_private">Secțiuni-X (trans.) private</string>
+	<string name="pref_reduce_angle_title">Unghi de îndreptare</string>
+	<string name="pref_reduce_angle_summary">Unghi-segment minim pt. îndreptarea liniilor~</string>
 
 
-  <string name="pref_survey_stations_title">Metodă stații</string>
-  <string name="pref_survey_stations_summary">Metodă de denumire automată a stațiilor</string>
-  <string name="pref_accel_thr_title">Toleranță accelerare</string>
-  <string name="pref_accel_thr_summary">Procentaj toleranță pentru valoarea accelerării măsurătorilor</string>
-  <string name="pref_mag_thr_title">Toleranță câmp magnetic</string>
-  <string name="pref_mag_thr_summary">Procentaj toleranță pentru valoarea câmpului magnetic al măsurătorilor</string>
-  <string name="pref_dip_thr_title">Toleranță unghi înclinație magnetică</string>
-  <string name="pref_dip_thr_summary">Toleranță pentru unghiul înclinației magnetice a măsurătorilor</string>
+	<string name="pref_survey_stations_title">Metodă stații</string>
+	<string name="pref_survey_stations_summary">Metodă de denumire automată a stațiilor</string>
+	<string name="pref_accel_thr_title">Toleranță accelerare</string>
+	<string name="pref_accel_thr_summary">Procentaj toleranță pentru valoarea accelerării măsurătorilor</string>
+	<string name="pref_mag_thr_title">Toleranță câmp magnetic</string>
+	<string name="pref_mag_thr_summary">Procentaj toleranță pentru valoarea câmpului magnetic al măsurătorilor</string>
+	<string name="pref_dip_thr_title">Toleranță unghi înclinație magnetică</string>
+	<string name="pref_dip_thr_summary">Toleranță pentru unghiul înclinației magnetice a măsurătorilor</string>
+	<string name="pref_sibling_thr_title">Limită înfrățire</string>
+	<string name="pref_sibling_thr_summary">Limită la măsurătorile înfrățite [&#37;]</string>
 
-  <string name="pref_leg_title">Toleranță vize</string>
-  <string name="pref_leg_summary">Toleranța între măsurătorile pentru o viză (segment drumuire)</string>
-  <string name="pref_max_shot_title">Lungime maximă măsurătoare</string>
-  <string name="pref_max_shot_summary">Lungimea maximă a unei măsurători [m]</string>
-  <string name="pref_min_leg_title">Lungime minimă viză</string>
-  <string name="pref_min_leg_summary">Lungimea maximă a unei vize [m]</string>
-  <string name="pref_backsight_title">Vize inverse</string>
-  <string name="pref_backsight_summary">Câmpurile pt viză inversă în fereastra unei măsurători noi</string>
-  <string name="pref_backshot_title">Mod DistoX viză inversă</string>
-  <string name="pref_backshot_summary">Schimbă stațiile cu vize inverse DistoX</string>
-  <string name="pref_prev_next_title">Butoane antecedent/următor</string>
-  <string name="pref_prev_next_summary">Butoane antecedent/următor în fereastra unei măsurători noi</string>
-  <!-- UNUSED string name="pref_mag_anomaly_title">Anomalie Magnetică</string -->
-  <!-- UNUSED string name="pref_mag_anomaly_summary">Compensează Anomalie Magnetică Locală</string -->
-  <string name="pref_azimuth_manual_title">Referință extensie fixă~</string>
-  <string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabilă~</string>
+	<string name="pref_leg_title">Toleranță vize</string>
+	<string name="pref_leg_summary">Toleranța între măsurătorile pentru o viză (segment drumuire)</string>
+	<string name="pref_max_shot_title">Lungime maximă măsurătoare</string>
+	<string name="pref_max_shot_summary">Lungimea maximă a unei măsurători [m]</string>
+	<string name="pref_min_leg_title">Lungime minimă viză</string>
+	<string name="pref_min_leg_summary">Lungimea maximă a unei vize [m]</string>
+	<string name="pref_backsight_title">Vize inverse</string>
+	<string name="pref_backsight_summary">Câmpurile pentru viză inversă în fereastra unei măsurători noi</string>
+	<string name="pref_backshot_title">Mod DistoX viză inversă</string>
+	<string name="pref_backshot_summary">Schimbă stațiile cu vize inverse DistoX</string>
+	<string name="pref_prev_next_title">Butoane antecedent/următor</string>
+	<string name="pref_prev_next_summary">Butoane antecedent/următor în fereastra unei măsurători noi</string>
+	<!-- UNUSED string name="pref_mag_anomaly_title">Anomalie Magnetică</string -->
+	<!-- UNUSED string name="pref_mag_anomaly_summary">Compensează Anomalie Magnetică Locală</string -->
+	<string name="pref_azimuth_manual_title">Referință extensie fixă~</string>
+	<string name="pref_azimuth_manual_summary">Dreapta/Stânga fixată sau Referință extensie configurabilă~</string>
 
-  <string name="pref_team_title">Echipa</string>
-  <string name="pref_team_summary">Echipa de cartare prestabilită</string>
+	<string name="pref_team_title">Echipa</string>
+	<string name="pref_team_summary">Echipa de cartare prestabilită</string>
 
-  <string name="pref_ethr_title">Limită verticală radiere</string>
-  <string name="pref_ethr_summary">Unghi apropiat de 90° pentru extensie verticala (echerare vert.) [deg]</string>
-  <string name="pref_vthr_title">Limită viză verticală</string>
-  <string name="pref_vthr_summary">Limită înclinare viză între LRUD/WENS~</string>
+	<string name="pref_ethr_title">Limită verticală radiere</string>
+	<string name="pref_ethr_summary">Unghi apropiat de 90° pentru extensie verticala (echerare vert.) [deg]</string>
+	<string name="pref_vthr_title">Limită viză verticală</string>
+	<string name="pref_vthr_summary">Limită înclinare viză între LRUD/WENS~</string>
 
-  <string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string>
-  <string name="pref_plan_vthr_summary">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
-  <string name="pref_init_station_title">Numele inițial al stației</string>
-  <string name="pref_init_station_summary">Numele inițial implicit al stației</string>
-  <string name="pref_station_names_title">Numele stațiilor</string>
-  <string name="pref_station_names_summary">Tipul numelor stațiilor</string>
+	<string name="pref_plan_vthr_title">Limită radiere în vizualizare plan</string>
+	<string name="pref_plan_vthr_summary">Ascunde radierile cu înclinație mare în vizualizarea în plan orizontal</string>
+	<string name="pref_init_station_title">Numele inițial al stației</string>
+	<string name="pref_init_station_summary">Numele inițial implicit al stației</string>
+	<string name="pref_station_names_title">Numele stațiilor</string>
+	<string name="pref_station_names_summary">Tipul numelor stațiilor</string>
 
-  <string name="pref_hthr_title">Limită orizontală - secțiune transversală Cross-section h-threshold</string>
-  <string name="pref_hthr_summary">Limită pentru secțiuni transversală orizontale</string>
-  <!-- UNUSED string name="pref_bitmap_scale_title">Rezoluție PNG</string -->
-  <!-- UNUSED string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string -->
-  <!-- UNUSED string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string -->
-  <!-- UNUSED string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string -->
-  <string name="pref_acad_version_title">Versiune DXF</string>
-  <string name="pref_acad_version_summary">Versiune DXF</string>
-  <!-- TODO string name="pref_acad_spline_title">DXF splines</string -->
-  <!-- TODO string name="pref_acad_spline_summary">DXF interpolated cubics</string -->
-  <!-- TODO string name="pref_dxf_reference_title">DXF reference</string -->
-  <!-- TODO string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string -->
-  <!-- UNUSED string name="pref_dxf_scale_title">Scară schiță DXF</string -->
-  <!-- UNUSED string name="pref_dxf_scale_summary">Factor scară schiță DXF</string -->
-  <string name="pref_dxf_blocks_title">Capete radieri DXF</string>
-  <string name="pref_dxf_blocks_summary">Capete radieri DXF</string>
-  <string name="pref_shp_georef_title">Exportare plan schiță georeferențiat</string>
-  <string name="pref_shp_georef_summary">Planul schiței exportat în sistem WGS84 long-lat</string>
-  <string name="pref_thumbnail_title">Mărime imagini miniatură</string>
-  <string name="pref_thumbnail_summary">Mărimea miniaturilor de fotografie(thumbnails)</string>
-  <string name="pref_shot_timer_title">Întârziere măsurare direcție</string>
-  <string name="pref_shot_timer_summary">Timp de așteaptare înaintea măsurării direcției [sec]</string>
-  <string name="pref_beep_volume_title">Volum sunet timer</string>
-  <string name="pref_beep_volume_summary">Procentaj volum sunet de avertizare timer</string>
-  <string name="pref_extend_frac_title">Extensie fracțională</string>
-  <string name="pref_extend_frac_summary">"Extensia" poate avea parte zecimală</string>
-  <string name="pref_recent_shot_title">Măsurători recente</string>
-  <string name="pref_recent_shot_summary">Evidențiere măsurători recente</string>
-  <string name="pref_drawing_unit_title">Scară unelte punct</string>
-  <string name="pref_drawing_unit_summary">Scara uneltelor de desenare tip punct</string>
-  <string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>
-  <string name="pref_unscaled_points_summary">Simbolurile punctelor nu sunt scalate</string>
-  <string name="pref_segment_title">Spațiere linie-punct</string>
-  <string name="pref_segment_message">Distanță minimă între punctele pe o linie</string>
-  <string name="pref_linestyle_title">Stil linie</string>
-  <string name="pref_linestyle_summary">Stil desenare linie</string>  
-  <string name="pref_linecontinue_title">Continuare linie</string>
-  <string name="pref_linecontinue_summary">Mod implicit continuare linie</string>  
-  <string name="pref_lineacc_title">Acuratețe interpolare</string>
-  <string name="pref_lineacc_summary">Acuratețe interpolare cubică Bezier</string>
-  <string name="pref_linecorner_title">Limită colțuri Bezier~</string>
-  <string name="pref_linecorner_summary">Limită detecție colțuri Bezier~</string>
-  <string name="pref_weeddistance_title">Distanță puncte pt. simplificare linie</string>
-  <string name="pref_weeddistance_summary">Distanță maximă dintre segment și puncte (simplificare linie) [m]</string>
-  <string name="pref_weedlength_title">Lungime segment pt. simplificare linie</string>
-  <string name="pref_weedlength_summary">Lungime maximă a unui segment de linie</string>
-  <string name="pref_calib_algo_title">Algoritm</string>
-  <string name="pref_calib_algo_summary">Algoritm calibrare</string>
-  <string name="pref_group_by_title">Metodă grupare</string>
-  <string name="pref_group_by_summary">Metodă de grupare a datelor calibrării</string>
-  <string name="pref_group_title">Toleranță grup</string>
-  <string name="pref_group_summary">Toleranța între măsurătorile din același grup</string>
-  <string name="pref_error_title">Eroare algoritm</string>
-  <string name="pref_error_summary">Eroare terminație algoritm de calibrare</string>
-  <string name="pref_iter_title">Iterații algoritm</string>
-  <string name="pref_iter_summary">Nr. maxim de iterații ale algoritmului de calibrare</string>
-  <string name="pref_label_size_title">Mărime etichete</string>
-  <string name="pref_label_size_summary">Mărime etichetelor</string>
-  <string name="pref_arrow_length_title">Grosimea liniilor de secțiune</string>
-  <string name="pref_arrow_length_message">Grosimea liniilor secțiunii</string>
-  <string name="pref_dot_radius_title">Mărimea punctelor verzi</string>
-  <string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
-  <string name="pref_line_thickness_title">Lățimea liniei</string>
-  <string name="pref_line_thickness_summary">Lățimea liniei de desen</string>
-  <string name="pref_line_units_title">Unități linie</string>
-  <string name="pref_line_units_summary">Unități linie desen</string>
-  <string name="pref_linesnap_title">Alipire linie/suprafață</string>
-  <string name="pref_linesnap_summary">Activează acțiune alipire linie/suprafață</string>
-  <string name="pref_linecurve_title">Netezește/îndreaptă segmentul</string>
-  <string name="pref_linecurve_summary">Acțiune de netezire/îndreaptare a segmentului</string>
-  <string name="pref_linestraight_title">Îndreaptă linii</string>
-  <string name="pref_linestraight_summary">Acțiune de îndreptare a întregii linii</string>
-  <string name="pref_path_multiselect_title">Selecție multiplă rută</string>
-  <string name="pref_path_multiselect_summary">Acțiune de selecție multiplă a rutei</string>
-  <string name="pref_composite_actions_title">Acțiuni compuse</string>
-  <string name="pref_composite_actions_summary">Activează acțiuni la atingere menținută/lungă a liniei/suprafeței</string>
-  <string name="pref_plane_interpolation_title">Interpolare plan</string>
-  <string name="pref_plane_interpolation_summary">Acțiune interpolare plan</string>
-  <string name="pref_plot_split_title">Despărțire/îmbinare schiță</string>
-  <string name="pref_plot_split_summary">Acțiuni de despărțire și îmbinare a schiței</string>
-  <!-- TODO string name="pref_stylus_size_title">Stylus size</string -->
-  <!-- TODO string name="pref_stylus_size_summary">Stylus size [0: ignore]</string -->
-  <string name="pref_fixed_thickness_title">Lățime linie cartare</string>
-  <string name="pref_fixed_thickness_summary">Lățimea liniei de cartare</string>
-  <!-- UNUSED string name="pref_device_title">Dispoziv</string -->
-  <!-- UNUSED string name="pref_device_summary">Numele adresei DistoX</string -->
-  <string name="pref_checkBT_title">Bluetooth</string>
-  <string name="pref_checkBT_summary">Acrivează verificarea bluetooth la pornire</string>
-  <string name="pref_checkAttached_title">Verificare drumuire</string>
-  <string name="pref_checkAttached_summary">Verifică dacă punctele de stație sunt atașate (continuitate)</string>
-  <string name="pref_checkExtend_title">Verificare extensii viză</string>
-  <string name="pref_checkExtend_summary">Verificare dacă extensiile vizei sunt definite</string>
-  <!-- TODO string name="pref_toolbarSize_title">Toolbar size</string -->
-  <!-- TODO string name="pref_toolbarSize_summary">Size of the toolbar of drawing items</string -->
-  <string name="pref_backup_number_title">Număr copii de rezervă</string>
-  <string name="pref_backup_number_summary">Numărul de copii de rezervă pentru schițe</string>
-  <string name="pref_backup_interval_title">Interval de efectuare copii de rezervă(backup)</string>
-  <string name="pref_backup_interval_summary">Interval minim între efectuarea a 2 copii de rezervă(backup-uri) [s]</string>
-  <!-- UNUSED string name="pref_backups_clear_title">Șterge copii de siguranță</string -->
-  <!-- UNUSED string name="pref_backups_clear_summary">Activează meniul pt. ștergerea copiilor de siguranță ale schiței</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_title">suprafețe xtherion</string -->
-  <!-- UNUSED string name="pref_xtherion_areas_summary">Salvează suprafețele ca xtherion</string -->
-  <string name="pref_therion_splays_title">Radieri Therion</string>
-  <string name="pref_therion_splays_summary">Adaugă linii u:splay la fișierele th2</string>
-  <string name="pref_th2_scale_title">Scară Therion</string>
-  <string name="pref_th2_scale_summary">Scară a exportării th2/xvi</string>
-  <string name="pref_th2_xvi_title">imagine xvi</string>
-  <string name="pref_th2_xvi_summary">Inserează imagine xvi în th2</string>
-  <string name="pref_autoStations_title">Stații Therion</string>
-  <string name="pref_autoStations_summary">Adaugă stații automat la fițierele Therion</string>
-  <string name="pref_auto_xsections_title">Secțiuni X automate</string>
-  <string name="pref_auto_xsections_summary">Adaugă secțiuni-X automat la salvare/exporare [csx/svg/dxf/xvi]</string>
-  <!-- TODO string name="pref_saved_stations_title">Saved stations</string -->
-  <!-- TODO string name="pref_saved_stations_summary">Color saved stations orange</string -->
-  <!-- TODO string name="pref_legonly_update_title">Legs-only refresh</string -->
-  <!-- TODO string name="pref_legonly_update_summary">Redraw midline only on legs download</string -->
-  <string name="pref_loopClosure_title">Închidere bucle drumuire</string>
-  <string name="pref_loopClosure_summary">Compensare eroare la închiderea buclelor de drumuire</string>
-  <!-- UNUSED string name="pref_splayExtend_title">Estimare extensie radiere</string -->
-  <!-- UNUSED string name="pref_splayExtend_summary">Estimare extensie radiere</string -->
-  <string name="pref_swapLR_title">Schimbare LR în Compass</string>
-  <string name="pref_swapLR_summary">Schimbă st./dr. (LR) în exportul Compass</string>
-  <string name="pref_LRExtend_title">Estimează extensia Stânga/Dreapta</string>
-  <string name="pref_LRExtend_summary">Estimează extensia Stânga/Dreapta (import Compass/VisualTopo)</string>
-  <string name="pref_diving_mode_title">Mod scufundare</string>
-  <string name="pref_diving_mode_summary">Activează mod scufundare</string>
-  <string name="pref_splay_classes_title">Categorii de radieri</string>
-  <string name="pref_splay_classes_summary">Activează categoriile și colorarea radierilor</string>
-  <string name="pref_splay_color_title">Colorare radieri</string>
-  <string name="pref_splay_color_summary">Activează colorarea radierilor</string>
-  <string name="pref_plot_shift_title">Deplasare/scalare schiță</string>
-  <string name="pref_plot_shift_summary">Activează deplasarea și scalarea schiței</string>
-  <string name="pref_splay_alpha_title">Transparență radieri</string>
-  <string name="pref_splay_alpha_summary">Transparență radieri [0: transparent, 100: opac]</string>
+	<string name="pref_hthr_title">Limită orizontală - secțiune transversală Cross-section h-threshold</string>
+	<string name="pref_hthr_summary">Limită pentru secțiuni transversală orizontale</string>
+	<!-- UNUSED string name="pref_bitmap_scale_title">Rezoluție PNG</string -->
+	<!-- UNUSED string name="pref_bitmap_scale_summary">Rezoluție imaginilor schițelor în PNG</string -->
+	<!-- UNUSED string name="pref_bitmap_bgcolor_title">Culoare fundal PNG</string -->
+	<!-- UNUSED string name="pref_bitmap_bgcolor_summary">Culoarea fundal schițe PNG</string -->
+	<string name="pref_acad_version_title">Versiune DXF</string>
+	<string name="pref_acad_version_summary">Versiune DXF</string>
+	<string name="pref_acad_spline_title">DXF splines</string>
+	<string name="pref_acad_spline_summary">DXF interpolated cubics</string>
+	<string name="pref_dxf_reference_title">DXF reference</string>
+	<string name="pref_dxf_reference_summary">X-Y axes is DXF sketch export</string>
+	<!-- UNUSED string name="pref_dxf_scale_title">Scară schiță DXF</string -->
+	<!-- UNUSED string name="pref_dxf_scale_summary">Factor scară schiță DXF</string -->
+	<string name="pref_dxf_blocks_title">Capete radieri DXF</string>
+	<string name="pref_dxf_blocks_summary">Capete radieri DXF</string>
+	<string name="pref_shp_georef_title">Exportare plan schiță georeferențiat</string>
+	<string name="pref_shp_georef_summary">Planul schiței exportat în sistem WGS84 long-lat</string>
+	<string name="pref_thumbnail_title">Mărime imagini miniatură</string>
+	<string name="pref_thumbnail_summary">Mărimea miniaturilor de fotografie(thumbnails)</string>
+	<string name="pref_shot_timer_title">Întârziere măsurare direcție</string>
+	<string name="pref_shot_timer_summary">Timp de așteaptare înaintea măsurării direcției [sec]</string>
+	<string name="pref_beep_volume_title">Volum sunet timer</string>
+	<string name="pref_beep_volume_summary">Procentaj volum sunet de avertizare timer</string>
+	<string name="pref_extend_frac_title">Extensie fracțională</string>
+	<string name="pref_extend_frac_summary">"Extensia" poate avea parte zecimală</string>
+	<string name="pref_recent_shot_title">Măsurători recente</string>
+	<string name="pref_recent_shot_summary">Evidențiere măsurători recente</string>
+	<string name="pref_drawing_unit_title">Scară unelte punct</string>
+	<string name="pref_drawing_unit_summary">Scara uneltelor de desenare tip punct</string>
+	<string name="pref_unscaled_points_title">Simboluri puncte ne-scalate</string>
+	<string name="pref_unscaled_points_summary">Simbolurile punctelor nu sunt scalate</string>
+	<string name="pref_segment_title">Spațiere linie-punct</string>
+	<string name="pref_segment_message">Distanță minimă între punctele pe o linie</string>
+	<string name="pref_linestyle_title">Stil linie</string>
+	<string name="pref_linestyle_summary">Stil desenare linie</string>  
+	<string name="pref_linecontinue_title">Continuare linie</string>
+	<string name="pref_linecontinue_summary">Mod implicit continuare linie</string>  
+	<string name="pref_lineacc_title">Acuratețe interpolare</string>
+	<string name="pref_lineacc_summary">Acuratețe interpolare cubică Bezier</string>
+	<string name="pref_linecorner_title">Limită colțuri Bezier~</string>
+	<string name="pref_linecorner_summary">Limită detecție colțuri Bezier~</string>
+	<string name="pref_graph_paper_scale_title">Scară hârtie-milimetrică</string>
+	<string name="pref_graph_paper_scale_summary">Adjustare scară hârtie-milimetrică</string>
+	<string name="pref_weeddistance_title">Distanță puncte pt. simplificare linie</string>
+	<string name="pref_weeddistance_summary">Distanță maximă dintre segment și puncte (simplificare linie) [m]</string>
+	<string name="pref_weedlength_title">Lungime segment pt. simplificare linie</string>
+	<string name="pref_weedlength_summary">Lungime maximă a unui segment de linie</string>
+	<string name="pref_weedbuffer_title">Tampon segment pt. simplificare linie</string>
+	<string name="pref_weedbuffer_summary">Tampon în jurul unui segment de linie [pxl]</string>
+	<string name="pref_calib_algo_title">Algoritm</string>
+	<string name="pref_calib_algo_summary">Algoritm calibrare</string>
+	<string name="pref_group_by_title">Metodă grupare</string>
+	<string name="pref_group_by_summary">Metodă de grupare a datelor calibrării</string>
+	<string name="pref_group_title">Toleranță grup</string>
+	<string name="pref_group_summary">Toleranța între măsurătorile din același grup</string>
+	<string name="pref_error_title">Eroare algoritm</string>
+	<string name="pref_error_summary">Eroare terminație algoritm de calibrare</string>
+	<string name="pref_iter_title">Iterații algoritm</string>
+	<string name="pref_iter_summary">Nr. maxim de iterații ale algoritmului de calibrare</string>
+	<string name="pref_label_size_title">Mărime etichete</string>
+	<string name="pref_label_size_summary">Mărime etichetelor</string>
+	<string name="pref_arrow_length_title">Grosimea liniilor de secțiune</string>
+	<string name="pref_arrow_length_message">Grosimea liniilor secțiunii</string>
+	<string name="pref_dot_radius_title">Mărimea punctelor verzi</string>
+	<string name="pref_dot_radius_message">Mărimea punctelor verzi</string>
+	<string name="pref_line_thickness_title">Lățimea liniei</string>
+	<string name="pref_line_thickness_summary">Lățimea liniei de desen</string>
+	<string name="pref_line_units_title">Unități linie</string>
+	<string name="pref_line_units_summary">Unități linie desen</string>
+	<string name="pref_linesnap_title">Alipire linie/suprafață</string>
+	<string name="pref_linesnap_summary">Activează acțiune alipire linie/suprafață</string>
+	<string name="pref_linecurve_title">Netezește/îndreaptă segmentul</string>
+	<string name="pref_linecurve_summary">Acțiune de netezire/îndreaptare a segmentului</string>
+	<string name="pref_linestraight_title">Îndreaptă linii</string>
+	<string name="pref_linestraight_summary">Acțiune de îndreptare a întregii linii</string>
+	<string name="pref_path_multiselect_title">Selecție multiplă rută</string>
+	<string name="pref_path_multiselect_summary">Acțiune de selecție multiplă a rutei</string>
+	<string name="pref_composite_actions_title">Acțiuni compuse</string>
+	<string name="pref_composite_actions_summary">Activează acțiuni la atingere menținută/lungă a liniei/suprafeței</string>
+	<string name="pref_plane_interpolation_title">Interpolare plan</string>
+	<string name="pref_plane_interpolation_summary">Acțiune interpolare plan</string>
+	<string name="pref_plot_split_title">Despărțire/îmbinare schiță</string>
+	<string name="pref_plot_split_summary">Acțiuni de despărțire și îmbinare a schiței</string>
+	<string name="pref_stylus_size_title">Stilou digital pentru desen</string>
+	<string name="pref_stylus_size_summary">Dimensiune maximă Stilou digital [0: nu este]</string>
+	<string name="pref_fixed_thickness_title">Lățime linie cartare</string>
+	<string name="pref_fixed_thickness_summary">Lățimea liniei de cartare</string>
+	<!-- UNUSED string name="pref_device_title">Dispoziv</string -->
+	<!-- UNUSED string name="pref_device_summary">Numele adresei DistoX</string -->
+	<string name="pref_checkBT_title">Bluetooth</string>
+	<string name="pref_checkBT_summary">Activează verificarea bluetooth la pornire</string>
+	<string name="pref_checkAttached_title">Verificare drumuire</string>
+	<string name="pref_checkAttached_summary">Verifică dacă punctele de stație sunt atașate (continuitate)</string>
+	<string name="pref_checkExtend_title">Verificare extensii viză</string>
+	<string name="pref_checkExtend_summary">Verificare dacă extensiile vizei sunt definite</string>
+	<string name="pref_toolbarSize_title">Dimensiune bară de instrumente</string>
+	<	string name="pref_toolbarSize_summary">Dimensiunea bării elementelor de desen</string>
+	<string name="pref_backup_number_title">Număr copii de rezervă</string>
+	<string name="pref_backup_number_summary">Numărul de copii de rezervă pentru schițe</string>
+	<string name="pref_backup_interval_title">Interval de efectuare copii de rezervă(backup)</string>
+	<string name="pref_backup_interval_summary">Interval minim între efectuarea a 2 copii de rezervă(backup-uri) [s]</string>
+	<!-- UNUSED string name="pref_backups_clear_title">Șterge copii de siguranță</string -->
+	<!-- UNUSED string name="pref_backups_clear_summary">Activează meniul pt. ștergerea copiilor de siguranță ale schiței</string -->
+	<!-- UNUSED string name="pref_xtherion_areas_title">suprafețe xtherion</string -->
+	<!-- UNUSED string name="pref_xtherion_areas_summary">Salvează suprafețele ca xtherion</string -->
+	<string name="pref_therion_splays_title">Radieri Therion</string>
+	<string name="pref_therion_splays_summary">Adaugă linii u:splay la fișierele th2/PNG</string>
+	<string name="pref_th2_scale_title">Scară Therion</string>
+	<string name="pref_th2_scale_summary">Scară a exportării th2/xvi</string>
+	<string name="pref_th2_xvi_title">imagine xvi</string>
+	<string name="pref_th2_xvi_summary">Inserează imagine xvi în th2</string>
+	<string name="pref_autoStations_title">Stații Therion</string>
+	<string name="pref_autoStations_summary">Adaugă stații automat la fițierele Therion</string>
+	<string name="pref_auto_xsections_title">Secțiuni X automate</string>
+	<string name="pref_auto_xsections_summary">Adaugă secțiuni-X automat la salvare/exporare [csx/svg/dxf/xvi]</string>
+	<string name="pref_saved_stations_title">Stații salvate</string>
+	<string name="pref_saved_stations_summary">Culoare portocalie stații salvate</string>
+	<string name="pref_legonly_update_title">Reîncarcă doar vize</string>
+	<string name="pref_legonly_update_summary">Redeseneză doar linia mediană la descărcarea vizelor</string>
+	<string name="pref_full_affine_title">Transformare afină</string>
+	<string name="pref_full_affine_summary">Activează transformarea afină la schiță</string>
+	<string name="pref_loopClosure_title">Închidere bucle drumuire</string>
+	<string name="pref_loopClosure_summary">Compensare eroare la închiderea buclelor de drumuire</string>
+	<!-- UNUSED string name="pref_splayExtend_title">Estimare extensie radiere</string -->
+	<!-- UNUSED string name="pref_splayExtend_summary">Estimare extensie radiere</string -->
+	<string name="pref_swapLR_title">Schimbare LR în Compass</string>
+	<string name="pref_swapLR_summary">Schimbă st./dr. (LR) în exportul Compass</string>
+	<string name="pref_LRExtend_title">Estimează extensia Stânga/Dreapta</string>
+	<string name="pref_LRExtend_summary">Estimează extensia Stânga/Dreapta (import Compass/VisualTopo)</string>
+	<string name="pref_diving_mode_title">Mod scufundare</string>
+	<string name="pref_diving_mode_summary">Activează mod scufundare</string>
+	<string name="pref_splay_classes_title">Categorii de radieri</string>
+	<string name="pref_splay_classes_summary">Activează categoriile și colorarea radierilor</string>
+	<string name="pref_splay_color_title">Colorare radieri</string>
+	<string name="pref_splay_color_summary">Activează colorarea radierilor</string>
+	<!-- UNUSED string name="pref_splay_as_dot_title">Splay endpoint</string -->
+	<!-- UNUSED string name="pref_splay_as_dot_summary">Display splays as endpoints</string -->
+	<!-- UNUSED string name="pref_splay_active_title">Splay at active station</string -->
+	<!-- UNUSED string name="pref_splay_active_summary">Enable splay at the active station</string -->
+	<string name="pref_plot_shift_title">Deplasare/scalare schiță</string>
+	<string name="pref_plot_shift_summary">Activează deplasarea și scalarea schiței</string>
+	<string name="pref_splay_alpha_title">Transparență radieri</string>
+	<string name="pref_splay_alpha_summary">Transparență radieri [0: transparent, 100: opac]</string>
 
-  <!-- UNUSED string name="pref_picker_type_title">Selecție unealtă desen</string -->
-  <!-- UNUSED string name="pref_picker_type_summary">Tip selecție unealtă desentype</string -->
-  <!-- UNUSED string name="pref_triple_toolbar_title">Bară inferioară triplă</string -->
-  <!-- UNUSED string name="pref_triple_toolbar_summary">Bară triplă pt. unelte desenare</string -->
-  <!-- UNUSED string name="pref_section_stations_title">Stații Secțiuni-X (transversale)</string -->
-  <!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transversale)</string -->
-  <string name="pref_station_size_title">Mărime nume stații</string>
-  <string name="pref_station_size_summary">Mărimea numelor stațiilor</string>
-  <string name="pref_zoom_controls_title">Comenzi redimensionare</string>
-  <string name="pref_zoom_controls_summary">Comenzi redimensionare(zoom) pe ecran multiatingere(multitouch)</string>
-  <!-- FIXME string name="pref_side_drag_title">Tragere pe margini</string -->
-  <!-- FIXME string name="pref_side_drag_summary">Activează tragerea pe marginile ferestrei de schițare</string -->
-  <string name="pref_unit_grid_title">Unități schițare</string>
-  <string name="pref_unit_grid_summary">Mărime celule ale caroiajului schiței</string>
-  <!-- TODO string name="pref_unit_measure_title">Ruler units</string -->
-  <!-- TODO string name="pref_unit_measure_summary">Length units of measure-tool</string -->
-  <!-- UNUSED string name="pref_recent_nr_title">Număr unelte recente</string -->
-  <!-- UNUSED string name="pref_recent_nr_summary">Numărul de unelte recente în selectorul de elemente de desen</string -->
-  <string name="pref_area_border_title">Vizibilitate margine suprafațe</string>
-  <string name="pref_area_border_summary">Vizibilitate implicită margine suprafațe</string>
-  <string name="pref_auto_section_pt_title">Puncte secțiune</string>
-  <string name="pref_auto_section_pt_summary">Adaugă punct de secțiune la liniile secțiunilor</string>
+	<!-- UNUSED string name="pref_picker_type_title">Selecție unealtă desen</string -->
+	<!-- UNUSED string name="pref_picker_type_summary">Tip selecție unealtă desentype</string -->
+	<!-- UNUSED string name="pref_triple_toolbar_title">Bară inferioară triplă</string -->
+	<!-- UNUSED string name="pref_triple_toolbar_summary">Bară triplă pt. unelte desenare</string -->
+	<!-- UNUSED string name="pref_section_stations_title">Stații Secțiuni-X (transversale)</string -->
+	<!-- UNUSED string name="pref_section_stations_summary">Stații de referință Secțiuni-X (transversale)</string -->
+	<string name="pref_station_size_title">Mărime nume stații</string>
+	<string name="pref_station_size_summary">Mărimea numelor stațiilor</string>
+	<string name="pref_zoom_controls_title">Comenzi redimensionare</string>
+	<string name="pref_zoom_controls_summary">Comenzi redimensionare(zoom) pe ecran multiatingere(multitouch)</string>
+	<string name="pref_side_drag_title">Tragerea marginii</string>
+	<string name="pref_side_drag_summary">Activează tragerea marginilor la fereastră schițare</string>
+	<string name="pref_unit_grid_title">Unități schițare</string>
+	<string name="pref_unit_grid_summary">Mărime celule ale caroiajului schiței</string>
+	<string name="pref_unit_measure_title">Unități instrument de măsură</string>
+	<string name="pref_unit_measure_summary">Unități lungime la instrumentul de măsură</string>
+	<!-- UNUSED string name="pref_recent_nr_title">Număr unelte recente</string -->
+	<!-- UNUSED string name="pref_recent_nr_summary">Numărul de unelte recente în selectorul de elemente de desen</string -->
+	<string name="pref_area_border_title">Vizibilitate margine suprafațe</string>
+	<string name="pref_area_border_summary">Vizibilitate implicită margine suprafațe</string>
+	<string name="pref_auto_section_pt_title">Puncte secțiune</string>
+	<string name="pref_auto_section_pt_summary">Adaugă punct de secțiune la liniile secțiunilor</string>
 
-  <string name="pref_unit_length_title">Unități lungime</string>
-  <string name="pref_unit_length_summary">Afișează unități pentru lungimi</string>
-  <string name="pref_unit_angle_title">Unități unghiuri</string>
-  <string name="pref_unit_angle_summary">Afișează unități pentru unghiuri</string>
-  <string name="pref_unit_location_title">Unități locație</string>
-  <string name="pref_unit_location_summary">Afișează unități pentru locații</string>
+	<string name="pref_unit_length_title">Unități lungime</string>
+	<string name="pref_unit_length_summary">Afișează unități pentru lungimi</string>
+	<string name="pref_unit_angle_title">Unități unghiuri</string>
+	<string name="pref_unit_angle_summary">Afișează unități pentru unghiuri</string>
+	<string name="pref_unit_location_title">Unități locație</string>
+	<string name="pref_unit_location_summary">Afișează unități pentru locații</string>
 
 <!-- UNUSED
   <string name="pref_plot_walls_title">PEREȚI AUTO</string>
@@ -1641,63 +1735,68 @@ Translation with more than 70 lint errors are dropped from the app.
   <string name="pref_walls_xstep_summary">Separarea punctelor de-a lungul peretelui [m]</string>
 -->
 
-<!-- DONT_TRANSLATE
-  <string name="pref_algo_min_alpha_title">Alpha min-algo</string>
-  <string name="pref_algo_min_alpha_summary">Factor ajustare min-algo (in [0,1])</string>
-  <string name="pref_algo_min_beta_title">Beta min-algo</string>
-  <string name="pref_algo_min_beta_summary">Min-algo M dip weight~</string>
-  <string name="pref_algo_min_gamma_title">Gamma min-algo</string>
-  <string name="pref_algo_min_gamma_summary">Pondere(weight) grup G.x M.x în min-algo</string>
-  <string name="pref_algo_min_delta_title">Delta min-algo</string>
-  <string name="pref_algo_min_delta_summary">Pondere(weight) grup G^M.x în min-algo</string>
--->
+	<string name="pref_algo_min_alpha_title" translatable="false">Min-algo alpha</string>
+	<string name="pref_algo_min_alpha_summary" translatable="false">Min-algo adjustment factor (in [0,1])</string>
+	<string name="pref_algo_min_beta_title" translatable="false">Min-algo beta</string>
+	<string name="pref_algo_min_beta_summary" translatable="false">Min-algo M dip weight</string>
+	<string name="pref_algo_min_gamma_title" translatable="false">Min-algo gamma</string>
+	<string name="pref_algo_min_gamma_summary" translatable="false">Min-algo group G.x M.x weight</string>
+	<string name="pref_algo_min_delta_title" translatable="false">Min-algo delta</string>
+	<string name="pref_algo_min_delta_summary" translatable="false">Min-algo group G^M.x weight</string>
 
-<!-- LEAVE LOG STUFF IN ENGLISH
-  <string name="pref_log_stream_summary">Flux scriere jurnal</string>
-  <string name="pref_log_stream_title">Flux jurnal</string>
-  <string name="pref_log_bt">Bluetooth</string>
-  <string name="pref_log_bezier">Curbe Bezier</string>
-  <string name="pref_log_calib">Calibrare</string>
-  <string name="pref_log_comm">Comunicare BT</string>
-  <string name="pref_log_csurvey">cSurvey</string>
-  <string name="pref_log_data">Date cartare</string>
-  <string name="pref_log_db">Bază de date</string>
-  <string name="pref_log_debug">Depanare</string>
-  <string name="pref_log_device">Fereastră dispozitive</string>
-  <string name="pref_log_distox">DistoX</string>
-  <string name="pref_log_err">Eroare</string>
-  <string name="pref_log_fixed">Puncte GPS points</string>
-  <string name="pref_log_input">Introducere utilizator</string>
-  <string name="pref_log_io">Sketch i/o</string>
-  <string name="pref_log_loc">Locație</string>
-  <string name="pref_log_num">Reducere/simpl. date</string>
-  <string name="pref_log_path">Căi fișiere</string>
-  <string name="pref_log_perm">Permisii</string>
-  <string name="pref_log_photo">Foto</string>
-  <string name="pref_log_plot">Schițe</string>
-  <string name="pref_log_proto">Protocol DistoX</string>
-  <string name="pref_log_ptopo">PocketTopo</string>
-  <string name="pref_log_sensor">Senzori</string>
-  <string name="pref_log_shot">Măsurători</string>
-  <string name="pref_log_sync">Co-cartare</string>
-  <string name="pref_log_survey">Cartări</string>
-  <string name="pref_log_therion">Therion</string>
-  <string name="pref_log_units">Unități</string>
-  <string name="pref_log_zip">ZIP</string>
+<!-- UNUSED NO_LOGS
+  <string name="pref_log_stream_summary" translatable="false">Log output stream</string>
+  <string name="pref_log_stream_title" translatable="false">Log stream</string>
+  <string name="pref_log_append" translatable="false">append logs</string>
+
+  <string name="pref_log_debug" translatable="false">Debug</string>
+  <string name="pref_log_err" translatable="false">Error</string>
+  <string name="pref_log_main" translatable="false">Main window</string>
+  <string name="pref_log_perm" translatable="false">Permissions</string>
+  <string name="pref_log_prefs" translatable="false">Preferences</string>
+  <string name="pref_log_input" translatable="false">User input</string>
+  <string name="pref_log_path" translatable="false">File paths</string>
+  <string name="pref_log_io" translatable="false">Sketch i/o</string>
+  <string name="pref_log_bt" translatable="false">Bluetooth</string>
+  <string name="pref_log_comm" translatable="false">BT communication</string>
+  <string name="pref_log_distox" translatable="false">BT device</string>
+  <string name="pref_log_proto" translatable="false">BT protocol</string>
+  <string name="pref_log_device" translatable="false">Device window</string>
+  <string name="pref_log_calib" translatable="false">Calibration</string>
+  <string name="pref_log_db" translatable="false">Database</string>
+  <string name="pref_log_units" translatable="false">Units</string>
+  <string name="pref_log_data" translatable="false">Shot data</string>
+  <string name="pref_log_shot" translatable="false">Shot management</string>
+  <string name="pref_log_name" translatable="false">Station naming</string>
+  <string name="pref_log_survey" translatable="false">Surveys</string>
+  <string name="pref_log_note" translatable="false">Survey notes</string>
+  <string name="pref_log_stats" translatable="false">Statistics</string>
+  <string name="pref_log_num" translatable="false">Data reduction</string>
+  <string name="pref_log_fixed" translatable="false">Fixed points</string>
+  <string name="pref_log_loc" translatable="false">Geolocation</string>
+  <string name="pref_log_photo" translatable="false">Photo</string>
+  <string name="pref_log_sensor" translatable="false">Sensors</string>
+  <string name="pref_log_plot" translatable="false">Sketches</string>
+  <string name="pref_log_bezier" translatable="false">Bezier curves</string>
+  <string name="pref_log_therion" translatable="false">Therion</string>
+  <string name="pref_log_csurvey" translatable="false">cSurvey</string>
+  <string name="pref_log_ptopo" translatable="false">PocketTopo</string>
+  <string name="pref_log_zip" translatable="false">ZIP</string>
+  <!- - UNUSED string name="pref_log_sync" translatable="false">Cosurveying</string - ->
 -->
 
   <!-- UNUSED string name="line_bezier">Bezier</string -->
-  <!-- UNUSED string name="line_fine">fină</string -->
+  <!-- UNUSED string name="line_fine">fine</string -->
   <!-- UNUSED string name="line_normal">normal</string -->
-  <!-- UNUSED string name="line_coarse">grosier</string -->
+  <!-- UNUSED string name="line_coarse">coarse</string -->
   <!-- UNUSED string name="units_ddmmss">ddmmss</string -->
-  <!-- UNUSED string name="units_dd">grade</string -->
-  <!-- UNUSED string name="units_grads">radieni</string -->
-  <!-- UNUSED string name="units_meters">metri</string -->
-  <!-- UNUSED string name="units_feet">picioare</string -->
-  <!-- UNUSED string name="alt_wgs">elipsoid</string -->
-  <!-- UNUSED string name="alt_ortho">ortometric</string -->
-  <!-- UNUSED string name="splay_extend">estimare extensie radieri</string -->
+  <!-- UNUSED string name="units_dd">degrees</string -->
+  <!-- UNUSED string name="units_grads">grads</string -->
+  <!-- UNUSED string name="units_meters">meters</string -->
+  <!-- UNUSED string name="units_feet">feet</string -->
+  <!-- UNUSED string name="alt_wgs">ellipsoid</string -->
+  <!-- UNUSED string name="alt_ortho">orthometric</string -->
+  <!-- UNUSED string name="splay_extend">estimate splay extend</string -->
 
     <string name="perms_mandatory">TopoDroid nu poate rula fără aceste permisiuni:</string>
     <string name="perms_optional">TopoDroid poate da erori fără aceste permisiuni:</string>
@@ -1705,49 +1804,55 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="perm_camera">\nCameră</string>
     <string name="perm_microphone">\nMicrofon</string>
 
-
-    <!-- NO string name="welcome_title">TopoDroid %1$s</string -->
+    <string name="welcome_title" translatable="false">TopoDroid %1$s</string>
     <string name="welcome_text">
-\nTopoDroid este o aplicație Android Open Source pentru cartarea peșterilor cu DistoX-ul.
+\nVă mulțumim că ați ales TopoDroid.
+\nTopoDroid este o aplicație Open Source pe sistemul de operare Android și este folosit pentru cartarea peșterilor cu DistoX, BRIC4, sau Sap5.
 \n\nNici o garanție: prin folosirea acestei aplicații ești de acord că autorul nu este resposabil pentru nici o pierdere de date ce ar putea apărea și nici pentru alte pagube.
-\n\nAjutor: meniu "ajutor"
-\nPagini manual: scurtătură MENIU
+\n\nAjutor: meniu "AJUTOR"
+\nGhid utilizator: Iconul manualului în ferestra Ajutor
 \nDocs: http://sites.google.com/site/speleoapps
+\nPolitică de confidențialitate: http://marcocorvi.altervista.org/policy/TopoDroid-PrivacyPolicy.txt
 \nComentarii, rapoarte bug-uri, cerințe de funcții noi: marco.corvi@gmail.com
 \n
-\nTopoDroid în limba română de Alex Pologea: alex_pologea_tp-sp@yahoo.com
+\nTopoDroid în limba română de:
+\nAlex Pologea: alex_pologea_tp-sp@yahoo.com
+\nVáradi Attila: kiralyerdobarlangjai@gmail.com
+\n
     </string>
 
-<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED : mark OK untranslated strings -->
-  <string name="firmware_title">Actualizare firmware</string>
-  <string name="firmware_file_title">Fișiere firmware</string>
-  <string name="firmware_text">
+<!-- FIRMWARE DIALOG STRINGS CAN BE LEFT UNTRANSLATED -->
+	<string name="firmware_title">Actualizare firmware</string>
+	<string name="firmware_file_title">Fișiere firmware</string>
+	<string name="firmware_text">
+CITEȘTE GHIDUL DE UTILIZARE ÎNAINTE DE ÎNCĂRCARE FIRMWARE
+\nNotă de reamintire:
 \n[1] Selectează opțiunea de încărcare a firmware-ului sau cea de scriere a firmware-ului într-un fișier.
 \n[2] Alege fișierul de încărcat sau de salvat. Fișierele firmware sunt în directorul bin.
-\n[3] Asigură-te că veriunea firmware de încarcat este compatibilă cu versiunea de hardware a DistoX-ului.
+\n[3] Asigură-te că veriunea firmware de încarcat este compatibilă cu versiunea de hardware al DistoX-ului.
 \n[4] Pune DistoX2 în modul bootloader: apasă PLUS și MINUS în timp ce îl porniți cu tasta DIST.
-\n[5] Apasă butonul Bine.
+\n[5] Apasă butonul OK.
 \n[6] Confirmă pentru continuare și așteaptă finalizarea procesului.
 \n[7] Închide DistoX2 cu tasta CLR.
 \n
-   </string>
-   <!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
-   <!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
-   <!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
-   <string name="firmware_none">nici un fișier firmware</string>
-   <string name="firmware_file">fișier firmware</string>
-   <string name="firmware_file_exists">Fișier firmware existent</string>
-   <string name="firmware_file_missing">Fișier firmware inexistent</string>
-   <string name="ask_dump">Citește firmware în fișier?</string>
-   <string name="ask_upload">Încarcă firmware?</string>
-   <string name="ask_upload_not_compatible">Fișierul firmware nu pare corect.\nIgnoră și încarcă oricum?</string>
-   <!-- TODO string name="firmware_upload_no_sign">Failed to check the DistoX hardware</string -->
-   <!-- TODO string name="firmware_upload_bad_sign">Incompatible DistoX hardware</string -->
-   <string name="firmware_file_dumped">Fișier firmware salvat %1$s mărime %2$d</string>
-   <string name="firmware_file_uploaded">Încarcat firmware salvat %1$s scris %2$d / %3$d</string>
-   <!-- TODO string name="firmware_file_dump_fail">Failed firmware dump</string -->
-   <!-- TODO string name="firmware_file_upload_fail">Failed firmware upload</string -->
-   <string name="firmware_not_supported">Dispozitivul nu nu acceptă funcții de firmware</string>
+	</string>
+	<!-- UNUSED string name="firmware_wait_dump">Reading firmware &#8230; wait</string -->
+	<!-- UNUSED string name="firmware_wait_check">Checking hardware &#8230; wait</string -->
+	<!-- UNUSED string name="firmware_wait_upload">Uploading firmware &#8230; wait</string -->
+	<string name="firmware_none">nici un fișier firmware</string>
+	<string name="firmware_file">fișier firmware</string>
+	<string name="firmware_file_exists">Fișier firmware existent</string>
+	<string name="firmware_file_missing">Fișier firmware inexistent</string>
+	<string name="ask_dump">Citește firmware în fișier?</string>
+	<string name="ask_upload">Încarcă firmware?</string>
+	<string name="ask_upload_not_compatible">Fișierul firmware nu pare corect.\nIgnoră și încarcă oricum?</string>
+	<string name="firmware_upload_no_sign">Verificare esuată hardware DistoX</string>
+	<string name="firmware_upload_bad_sign">Incompatibilitate hardware DistoX</string>
+	<string name="firmware_file_dumped">Fișier firmware salvat %1$s mărime %2$d</string>
+	<string name="firmware_file_uploaded">Încarcat firmware salvat %1$s scris %2$d / %3$d</string>
+	<string name="firmware_file_dump_fail">Salvarea de firmware a eșuat</string>
+	<string name="firmware_file_upload_fail">Încărcarea de firmware a eșuat</string>
+	<string name="firmware_not_supported">Dispozitivul nu acceptă funcții de firmware</string>
 
     <string name="project">Proiect %1$s</string>
     <string name="no_editor">Editor negăsit</string>
@@ -1757,330 +1862,335 @@ Translation with more than 70 lint errors are dropped from the app.
     <string name="no_surveys">Lipsă cartări</string>
     <string name="no_tdconfig">Fișierul tdconfig lipsește</string>
     <string name="no_th_file">Fișierul Therion negăsit</string>
-    <string name="file_exists">Fișierul există</string>
-    <string name="file_create_fail">Eroare la creare fișier</string>
-    <string name="oom">Avertisment. Toată memoria consumată</string>
+    <!-- UNUSED string name="file_exists">Fișierul există</string -->
+    <!-- UNUSED string name="file_create_fail">Eroare la creare fișier</string -->
+    <!-- UNUSED string name="oom">Avertisment. Toată memoria consumată</string -->
 
     <string name="ask_delete_tdconfig">Șterge fișerul TdConfig</string>
     <string name="ask_remove_equate">Înlătură viza echivalentă %1$s ?</string>
-    <string name="equate_no_station">Nu e selectată nici o stație/viză</string>
+    <!-- UNUSED string name="equate_no_station">Nu e selectată nici o stație/viză</string -->
     <string name="equate_no_stations">Prea puține stații/vize</string>
     <string name="equate_no_nearby">Nici o stație/viză apropiată</string>
 
     <!-- UNUSED string name="menu_new">NOU</string -->
     <!-- UNUSED string name="menu_equate">ADAUGĂ VIZĂ ECHIVALENTĂ</string -->
     <!-- UNUSED string name="menu_equates">VIZE ECHIVALENTE</string -->
-    <!-- UNUSED string name="menu_save">SALVEAZĂ</string -->
+    <string name="menu_open">DESCHIDE</string>
+    <string name="menu_save">SALVEAZĂ</string>
 
-    <string name="overwrite">suprascrie</string>
+    <!-- UNUSED string name="overwrite">suprascrie</string -->
 
-    <!-- TODO string name="title_export_settings">Settings import/export</string -->
-    <string name="title_export">Exportă proiectul ca …</string>
+    <string name="title_export_settings">Parametri importare/exportare</string>
+    <string name="title_export">Exportă proiectul ca &#8230;</string>
     <string name="title_equates">Vize echivalente Proiect</string>
-    <string name="title_equate_new">Adaugă viză echivalentă …</string>
-    <!-- TODO string name="title_equate_with">Equate %1$s and %2$s</string -->
+    <string name="title_equate_new">Adaugă viză echivalentă &#8230;</string>
+    <string name="title_equate_with">Echivalează %1$s și %2$s</string>
     <!-- UNUSED string name="title_cwd">Director de lucru actual</string -->
     <string name="title_drop">Înlătură cartări ?</string>
     <string name="title_tdconfig">Introdu numele proiectului</string>
     <string name="title_surveys">Cartări</string>
 
     <string name="exported">Fișierul a fost salvat: %1$s</string>
-  <!-- TODO string name="imported_settings">Imported settings</string -->
-    <string name="export_failed">Export eșuat</string>
+	<string name="export_failed">Export eșuat</string>
 
-    <!-- TODO 3D VIEWER strings -->
+	<string name="image_diagram">Diagramă direcție</string>
+    <string name="image_photo">Foto</string>
 
-    <!-- TODO string name="cbtn_bind">Rebind</string -->
+    <!-- 3D VIEWER strings -->
+    <!-- UNUSED string name="capp_name" translatable="false">Cave3D</string -->
 
-    <!-- TODO string name="cmenu_open">Open file</string -->
-    <!-- TODO string name="cmenu_reset">Reset</string -->
+    <string name="cbtn_bind">Relegare</string>
 
-    <!-- TODO string name="cmenu_alpha">Surface</string -->
+    <string name="cmenu_open">DESCHIDE FIȘIER</string>
+    <string name="cmenu_reset">RESETEAZĂ</string>
+
+    <string name="cmenu_alpha">SUPRAFAȚĂ</string>
     <!-- UNUSED string name="cmenu_ble">BT surveys</string -->
-    <!-- TODO string name="cmenu_viewpoint">Viewpoint</string -->
+    <string name="cmenu_viewpoint">PERSPECTIVĂ</string>
     <!-- UNUSED string name="cmenu_files">Surveys</string -->
     <!-- UNUSED string name="cmenu_frame">Frame</string -->
     <!-- UNUSED string name="cmenu_color">Color</string -->
-    <!-- TODO string name="cmenu_info">Info</string -->
-    <!-- TODO string name="cmenu_ico">3D-Rose diagram</string -->
-    <!-- TODO string name="cmenu_rose">Rose diagram</string -->
-    <!-- TODO string name="cmenu_wall">Wall models</string -->
-    <!-- TODO string name="cmenu_sketch">Sketches</string -->
-    <!-- UNUSED string name="cmenu_fractal">Fractal counts</string -->
+    <string name="cmenu_info">INFORMAȚII</string>
+    <string name="cmenu_ico">DIAGRAMĂ 3D-ROSE</string>
+    <string name="cmenu_rose">DIAGRAMĂ ROSE</string>
+    <string name="cmenu_wall">PEREȚI</string>
+    <string name="cmenu_sketch">SCHIȚE</string>
+    <!-- UNUSED string name="cmenu_fractal" translatable="false">FRACTAL DIM.</string -->
 
-<!-- TODO
-    <string name="fractal_title">Fractal counts</string>
-    <string name="info_title">INFO</string>
-    <string name="info_surveys">SURVEYS</string>
-    <string name="info_axes">Axes: blue North, green East</string>
-    <string name="info_grid">Grid cell</string>
-    <string name="info_view">Viewpoint</string>
-    <string name="info_survey">Surveys</string>
-    <string name="info_shot">Shots</string>
-    <string name="info_station">Stations</string>
-    <string name="info_length">Length</string>
-    <string name="info_depth">Depth</string>
-    <string name="info_volume">Volume</string>
-    <string name="info_east">East</string>
-    <string name="info_north">North</string>
-    <string name="info_z">Altitude</string>
+	<string name="fractal_title" translatable="false">Fractal result</string>
+    <string name="fractal_cnt_total" translatable="false">count</string>
+    <string name="fractal_cnt_six" translatable="false">6-neighbor</string>
+    <string name="fractal_cnt_twentysix" translatable="false">26-neighbor</string>
+    <string name="fractal_failed" translatable="false">Fractal compute failed</string>
+    <string name="fractal_dimension" translatable="false">Fractal dimension</string>
+    <string name="illegal_value">Illegal value</string>
+
+    <!-- UNUSED string name="info_title">INFORMAȚII MODEL</string -->
+    <string name="info_surveys">Surveys</string>
+    <!-- UNUSED string name="info_axes">Axes: blue North, green East</string -->
+    <string name="info_grid">Celulă caroiaj</string>
+    <string name="info_view">Perspectivă</string>
+    <string name="info_survey">Cartări</string>
+    <string name="info_shot">Măsurători</string>
+    <string name="info_station">Stații</string>
+    <string name="info_length">Lungime</string>
+    <string name="info_depth">Adâncime</string>
+    <string name="info_volume">Volum</string>
+    <string name="info_east">Est</string>
+    <string name="info_north">Nord</string>
+    <string name="info_z">Altitudine</string>
     <string name="info_grid_value">%1$.0f m</string>
     <string name="info_view_value">A. %1$.0f C. %2$.0f</string>
     <string name="info_survey_value">%1$d</string>
-    <string name="info_shot_value">Legs %1$d, Splays %2$d</string>
+    <string name="info_shot_value">Vize %1$d, Radieri %2$d</string>
     <string name="info_station_value">%1$d</string>
     <string name="info_length_value">%1$.1f m</string>
     <string name="info_depth_value">%1$.1f m</string>
--->
-    <!-- UNUSED string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
-<!-- TODO
+    <!-- string name="info_volume_value">P. %1$.0f m&#00b3; C. %2$.0f m&#00b3;</string -->
     <string name="info_volume_value">P. %1$.0f m³ C. %2$.0f m³</string>
-    <string name="info_east_value">W %1$.1f E %2$.1f</string>
+    <string name="info_east_value">V %1$.1f E %2$.1f</string>
     <string name="info_north_value">S %1$.1f N %2$.1f</string>
     <string name="info_z_value">%1$.1f  %2$.1f</string>
 
-    <string name="legs_surface">Surface</string>
-    <string name="legs_duplicate">Duplicate</string>
-    <string name="legs_commented">Commented</string>
+    <string name="legs_surface">Suprafață</string>
+    <string name="legs_duplicate">Duplicat</string>
+    <string name="legs_commented">Comentat</string>
 
-    <string name="proj_perspective">Perspective parameters</string>
-    <string name="proj_orthographic">Orthographic parameters</string>
+    <string name="proj_perspective">Parametri perspectivă</string>
+    <string name="proj_orthographic">Parametri ortografice</string>
     <string name="proj_focal">Focal</string>
-    <string name="proj_side">Side</string>
--->
+    <string name="proj_side">Parte</string>
     <!-- UNUSED string name="proj_near">Near</string -->
     <!-- UNUSED string name="proj_far">Far</string -->
+    <string name="focal" translatable="false">S</string>
 
     <!-- UNUSED string name="query" formatted="false">Surveys: %d Shots: %d Stations: %d\nLength: %d Depth: %d</string -->
     <!-- UNUSED string name="cno_files">No files</string -->
-<!-- TODO
-    <string name="reading_file">Reading file %1$s</string>
-    <string name="read_survey">Read survey %1$s\n</string>
-    <string name="clear">Clear</string>
+    <string name="reading_file">Citire fișier %1$s</string>
+    <string name="read_survey">Citire cartări %1$s\n</string>
+    <!-- UNUSED string name="clear">Clear</string -->
     <string name="plan_proj">Plan</string>
-    <string name="profile_proj">Profile</string>
+    <string name="profile_proj">Profil</string>
     <string name="dist_no_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f</string>
-    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Cave %9$.1f</string>
-    <string name="measure">measure</string>
--->
+    <string name="dist_path">%1$s %2$s: D %3$.1f (%4$.1f %5$.1f %6$.1f) %7$.1f %8$.1f Peșteră %9$.1f</string>
+    <!-- UNUSED string name="measure">measure</string -->
 
     <!-- UNUSED string name="style_stroke">Stroke</string -->
     <!-- UNUSED string name="style_stroke_fill">Fill &amp; Stroke</string -->
     <!-- UNUSED string name="style_fill">Fill</string -->
-    <!-- TODO string name="surface_projection">Projection on surface</string -->
-    <!-- TODO string name="surface_texture">Surface texture</string -->
-    <!-- TODO string name="surface_gps">GPS track</string -->
-    <!-- TODO string name="surface_east">East</string -->
-    <!-- TODO string name="surface_north">North</string -->
-    <!-- TODO string name="dem_file">%1$s</string -->
-    <!-- TODO string name="dem_load">Load DEM</string -->
-    <!-- TODO string name="dem_failed">Failed DEM loading</string -->
-    <!-- TODO string name="dem_ok">Read DEM data</string -->
-    <!-- TODO string name="texture_file">%1$s</string --> 
-    <!-- TODO string name="texture_load">Load texture</string -->
-    <!-- TODO string name="texture_failed">Failed texture loading</string -->
-    <!-- TODO string name="texture_ok">Read texture file</string -->
-    <!-- TODO string name="sketch_load">Load</string -->
-    <!-- TODO string name="sketch_failed">Failed sketch loading</string -->
-    <!-- TODO string name="sketch_ok">Read sketch data</string -->
+    <string name="surface_projection">Proiectare pe suprafață</string>
+    <string name="surface_texture">Textură suprafață</string>
+    <string name="surface_gps">Traseu GPS</string>
+    <string name="surface_east">Est</string>
+    <string name="surface_north">Nord</string>
+    <string name="dem_file" translatable="false">%1$s</string>
+    <string name="dem_load">Încărcare DEM</string>
+    <string name="dem_failed">Încărcare DEM eșuată</string>
+    <string name="dem_ok">Citește datele DEM</string>
+    <string name="texture_file" translatable="false">%1$s</string>
+    <string name="texture_load">Încărcare textură</string>
+    <string name="texture_failed">Încărcare textură esuată</string>
+    <string name="texture_ok">Citește fișierul cu texturi</string>
+    <string name="sketch_load">Încărcare</string>
+    <string name="sketch_failed">Încărcare schită eșuată</string>
+    <string name="sketch_ok">Citește datele de schiță</string>
 
-    <!-- TODO string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string -->
-    <!-- TODO string name="ctitle_surface_alpha">Surface transparency</string -->
-    <!-- TODO string name="ctitle_sketches">Sketches</string -->
-    <!-- TODO string name="ctitle_legs">Legs visibility</string -->
-    <!-- UNUSED string name="ctitle_manual_leg">New leg</string -->
+    <string name="ctitle">%1$s  Clino: %2$.0f  Azimuth: %3$.0f</string>
+    <string name="ctitle_surface_alpha">Transparență suprafață</string>
+    <string name="ctitle_sketches">Schițe</string>
+    <string name="ctitle_legs">Vizibilitate vize</string>
+    <!-- UNUSED string name="ctitle_manual_leg">Viză nouă</string -->
     <!-- UNUSED string name="ctitle_bluetooth">Bluetooth</string -->
 
     <!-- UNUSED string name="cbtn_laser">Laser</string -->
-    <!-- UNUSED string name="cbtn_scan">Scan</string -->
+    <!-- UNUSED string name="cbtn_scan">Scanare</string -->
     <!-- UNUSED string name="cbtn_shot">Shot</string -->
     <!-- UNUSED string name="cbtn_start">Start</string -->
     <!-- UNUSED string name="cbtn_stop">Stop</string -->
 
-<!-- TODO
-    <string name="survey_list">SURVEYS</string>
-    <string name="survey_legs"> Legs: </string>
-    <string name="survey_legs_length"> Legs length: </string>
-    <string name="survey_splays"> Splays: </string>
-    <string name="survey_splays_length"> Splays length: </string>
+    <string name="survey_list">CARTĂRI</string>
+    <string name="survey_legs"> Vize: </string>
+    <string name="survey_legs_length"> Lungime vize: </string>
+    <string name="survey_splays"> Radieri: </string>
+    <string name="survey_splays_length"> Lungime radieri: </string>
     <string name="cave_east"> E: %1$.1f</string>
     <string name="cave_north"> N: %1$.1f</string>
     <string name="cave_vert"> Z: %1$.1f</string>
-    <string name="cave_distance"> 3D distance: %1$.1f</string>
-    <string name="horz_distance"> 2D horizontal distance: %1$.1f</string>
-    <string name="cave_length"> Cave length: %1$.1f %2$.1f %$3.1f</string>
+    <string name="cave_distance"> distanță 3D: %1$.1f</string>
+    <string name="horz_distance"> distanță orizontală 2D: %1$.1f</string>
+    <string name="cave_length"> Lungime pesteră: %1$.1f D+ %2$.1f D- %3$.1f</string>
     <string name="cave_angle"> Azimuth: %1$.0f  Clino: %2$.0f</string>
--->
 
-    <!-- UNUSED string name="SURVEYS">S U R V E Y S</string -->
-    <!-- TODO string name="INFO">I N F O</string -->
-    <!-- TODO string name="STATIONS">S T A T I O N</string -->
-    <!-- TODO string name="STATIONS_DISTANCE">STATIONS DISTANCE</string -->
-    <!-- UNUSED string name="DISTANCE">DISTANCE</string -->
-    <!-- UNUSED string name="CENTER">CENTER</string -->
-<!-- TODO
-    <string name="select_survey_file">Select a survey file</string>
-    <string name="select_export_file">Select export file</string>
-    <string name="select_dem_file">Select a DEM file</string>
-    <string name="select_texture_file">Select a texture file</string>
-    <string name="select_sketch_file">Select a sketch file</string>
 
-    <string name="view_title">VIEWPOINTS</string>
-    <string name="view_top">Top</string>
-    <string name="view_east">East</string>
-    <string name="view_north">North</string>
-    <string name="view_west">West</string>
-    <string name="view_south">South</string>
-    <string name="view_point">Viewpoint</string>
+    <!-- UNUSED string name="SURVEYS">C A R T Ă R I</string -->
+    <string name="INFO">I N F O</string>
+    <string name="STATIONS">S T A T I I</string>
+    <string name="STATIONS_DISTANCE">DISTANȚĂ STAȚII</string>
+    <!-- UNUSED string name="DISTANCE">DISTANȚĂ</string -->
+    <!-- UNUSED string name="CENTER">CENTRU</string -->
+    <string name="select_survey_file">Selectează fișier cartare</string>
+    <string name="select_export_file">Selectează fișier export</string>
+    <string name="select_dem_file">Selectează fișier DEM</string>
+    <string name="select_texture_file">Selectează fișier textură</string>
+    <string name="select_sketch_file">Selectează fișier schită</string>
+
+    <string name="view_title">PERSPECTIVĂ</string>
+    <string name="view_top">Sus</string>
+    <string name="view_east">Est</string>
+    <string name="view_north">Nord</string>
+    <string name="view_west">Vest</string>
+    <string name="view_south">Sud</string>
+    <!-- UNUSED string name="view_point">Perspectivă</string -->
     <string name="view_zoom">Zoom 1</string>
 
-    <string name="walls_title">WALLS</string>
+    <string name="walls_title">PEREȚI</string>
     <string name="walls_convexhull">Convex Hull</string>
--->
-    <!-- NO string name="walls_powercrust">Powercrust</string -->
-    <!-- TODO string name="walls_hull">Hull</string -->
-    <!-- TODO string name="walls_bubble">Bubble</string -->
-    <!-- TODO string name="walls_tube">Tube</string -->
-    <!-- NO string name="walls_delaunay">Delaunay</string -->
+    <string name="walls_powercrust" translatable="false">Powercrust</string>
+	<string name="walls_hull">Hull</string>
+	<string name="walls_bubble">Bubble</string>
+	<string name="walls_tube">Tube</string>
+    <!-- UNUSED string name="walls_delaunay" translatable="false">Delaunay</string -->
 
-    <!-- TODO string name="powercrust_few_splays">Powercrust: too few splays</string -->
-    <!-- TODO string name="powercrust_failed">Powercrust failed</string -->
-    <!-- TODO string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
-    <!-- TODO string name="powercrust_dxf_not_supported">powercrust dxf export not supported</string -->
+    <!-- UNUSED string name="powercrust_few_splays">Powercrust: too few splays</string -->
+    <!-- UNUSED string name="powercrust_failed">Powercrust failed</string -->
+    <!-- UNUSED string name="powercrust_successful">Powercrust successful: %1$d / %2$d</string -->
+    <string name="powercrust_dxf_not_supported">exportul powercrust dxf nu este suportat</string>
 
-    <!-- TODO string name="ok_export">OK. Exported %1$s</string -->
+    <string name="ok_export">OK. Exportat %1$s</string>
 
     <!-- UNUSED string name="no_planview">No plan view</string -->
     <!-- UNUSED string name="no_surface">No surface DEM</string -->
-
-    <!-- TODO string name="no_model">No 3D model</string -->
-    <!-- TODO string name="no_topodroid_model">Not a TopoDroid model</string -->
+    <string name="no_model">Nu există model 3D</string>
+    <string name="no_topodroid_model">Nu este un model TopoDroid</string>
 
     <!-- UNUSED string name="error_file_not_found">Error: file %1$s not found</string -->
     <!-- UNUSED string name="error_file_not_readable">Error: file %1$s not readable</string -->
-    <!-- TODO string name="error_file_read">Error: file %1$s failed read</string -->
-    <!-- TODO string name="error_survey_read">Error: survey %1$s failed read</string -->
+    <string name="error_file_read">Eroare: citire esuată fișier %1$s</string>
+    <string name="error_survey_read">Eroare: citire eșuată cartare %1$s</string>
     <!-- UNUSED string name="error_io_exception">Error: IO exception %1$s</string -->
-    <!-- TODO string name="error_parser_error">Error: parsing %1$s</string -->
-    <!-- TODO string name="error_export_failed">Error: export %1$s failed</string -->
-    <!-- TODO string name="unsupported_format">Unsupported file format</string -->
+    <string name="error_parser_error">Eroare: analiză %1$s</string>
+    <string name="error_export_failed">Eroare: export eșuat %1$s</string>
+    <string name="unsupported_format">Format fișier nesuportat</string>
 
     <!-- UNUSED string name="export_gltf_ok">Exported glTF file</string -->
     <!-- UNUSED string name="export_gltf_fail">Failed glTf export</string -->
 
-    <!-- TODO string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
-
+    <!-- UNUSED string name="warning_not_overwrite">Warning: not overwriting existing file %1$s</string -->
     <!-- UNUSED string name="warning_not_txt">Warning: not txt file %1$s</string -->
     <!-- UNUSED string name="warning_not_kml">Warning: not kml file %1$s</string -->
     <!-- UNUSED string name="warning_not_las">Warning: not las file %1$s</string -->
     <!-- UNUSED string name="warning_not_cgal">Warning: not CGAL text file %1$s</string -->
     <!-- UNUSED string name="warning_not_stl">Warning: not stl file %1$s</string -->
-    <!-- TODO string name="warning_no_cwd">Warning: no base path</string -->
+    <string name="warning_no_cwd">Avertisment: nu există directoriu de bază</string>
     <!-- UNUSED string name="warning_no_file">Warning: no 3d file found</string -->
     <!-- UNUSED string name="warning_empty_cwd">Warning: empty base path</string -->
-    <!-- TODO string name="warning_no_parent">Warning: cannot go to parent folder</string -->
-    <!-- TODO string name="no_permissions">The app cannot run without the required permissions</string -->
+    <string name="warning_no_parent">Avertisment: nu se poate trece în directoriul superior</string>
+    <string name="no_permissions">Aplicația nu poate rula fără permisiunile necesare</string>
 
-    <!-- TODO string name="done_fractals">Done fractals dims</string -->
-    <!-- TODO string name="done_convexhull">Done convex-hull walls</string -->
-    <!-- TODO string name="fail_convexhull">Failed convex-hull walls</string -->
-    <!-- TODO string name="done_powercrust">Done powercrust walls</string -->
-    <!-- TODO string name="fail_powercrust">Failed powercrust walls</string -->
-    <!-- TODO string name="done_hull">Done simple-hull walls</string -->
-    <!-- TODO string name="fail_hull">Failed simple-hull walls</string -->
-    <!-- TODO string name="done_tube">Done simple-tube walls</string -->
-    <!-- TODO string name="fail_tube">Failed simple-tube walls</string -->
-    <!-- TODO string name="done_bubble">Done bubble walls</string -->
-    <!-- TODO string name="fail_bubble">Failed bubble walls</string -->
+    <string name="done_fractals" translatable="false">Done fractals dims</string>
+    <string name="done_convexhull">Pereți convex-hull finalizați</string>
+    <string name="fail_convexhull">Pereți convex-hull eșuați</string>
+    <string name="done_powercrust">Pereți powercrust finalizați</string>
+    <string name="fail_powercrust">Pereți powercrust eșuați</string>
+    <string name="done_hull">Pereți simple-hull finalizați</string>
+    <string name="fail_hull">Pereți simple-hull eșuați</string>
+    <string name="done_tube">Pereți simple-tube finalizați</string>
+    <string name="fail_tube">Pereți simple-tube eșuați</string>
+    <string name="done_bubble">Pereți bubble finalizați</string>
+    <string name="fail_bubble">Pereți bubble eșuați</string>
 
-    <!-- TODO string name="no_database">No database\n</string -->
-    <!-- TODO string name="cno_survey">No survey %1$s\n</string -->
-    <!-- UNUSED string name="cno_file">No file %1$s\n</string -->
-    <!-- TODO string name="empty_survey">Empty survey %1$s\n</string -->
+    <string name="no_database">Nu există bază de date\n</string>
+    <string name="cno_survey">Nu există cartare %1$s\n</string>
+    <!-- string name="cno_file">No file %1$s\n</string -->
+    <string name="empty_survey">Cartare goală %1$s\n</string>
 
-    <!-- TODO string name="viewing_at">Viewing at clino %1$.0f azimuth %2$.0f</string -->
+    <string name="viewing_at">Vizionare clino %1$.0f azimuth %2$.0f</string>
 
-    <!-- TODO string name="cpref_dem3d">DEM</string -->
-    <!-- TODO string name="cpref_walls3d">WALL MODEL</string -->
+    <string name="cpref_dem3d">DEM</string>
+    <string name="cpref_walls3d">MODEL PERETE</string>
     <!-- UNUSED string name="cpref_base_path_title">App base path</string -->
     <!-- UNUSED string name="cpref_base_path_summary">Directory containing the survey files</string -->
     <!-- UNUSED string name="cpref_text_size_title">Label size</string -->
     <!-- UNUSED string name="cpref_text_size_summary">Station label size [10 pt]</string -->
     <!-- UNUSED string name="cpref_size_buttons_title">Buttons size</string -->
     <!-- UNUSED string name="cpref_size_buttons_summary">Buttons size</string -->
-<!-- TODO
-    <string name="cpref_selection_radius_title">Selection radius</string>
-    <string name="cpref_selection_radius_summary">Radius of selection [20 pxl]</string>
-    <string name="cpref_station_toast_title">Station dialog</string>
-    <string name="cpref_station_toast_summary">Station data dialog instead of box [n]</string>
-    <string name="cpref_station_points_title">Station points</string>
-    <string name="cpref_station_points_summary">Display stations always [n]</string>
-    <string name="cpref_station_size_title">Station point size</string>
-    <string name="cpref_station_size_summary">Size of station points [8 pxl]</string>
-    <string name="cpref_measure_dialog_title">Distance message</string>
-    <string name="cpref_measure_dialog_summary">Distance message instead of dialog [n]</string>
-    <string name="cpref_grid_above_title">Top grid</string>
-    <string name="cpref_grid_above_summary">Grid on the top instead of bottom [n]</string>
-    <string name="cpref_grid_extent_title">Grid extent</string>
-    <string name="cpref_grid_extent_summary">Grid extent around the survey plan-view</string>
-    <string name="cpref_neg_clino_title">Below-horizon views</string>
-    <string name="cpref_neg_clino_summary">Allow below-horizon viewpoints [n]</string>
-    <string name="cpref_dem_buffer_title">DEM buffer</string>
-    <string name="cpref_dem_buffer_summary">Extension of the DEM around survey [200]</string>
-    <string name="cpref_dem_maxsize_title">DEM max size</string>
-    <string name="cpref_dem_maxsize_summary">Maximum number of cells [400]</string>
-    <string name="cpref_dem_reduce_title">DEM reduce</string>
-    <string name="cpref_dem_reduce_summary">DEM reducing mode [shrink]</string>
-    <string name="cpref_all_splay_title">All splays</string>
-    <string name="cpref_all_splay_summary">Whether to use all the splays for the walls [y]</string>
-    <string name="cpref_splay_use_title">Splay usage</string>
-    <string name="cpref_splay_use_summary">Splay use: none, normal, xsections [nornal]</string>
-    <string name="cpref_splay_proj_title">Projected splays</string>
-    <string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string>
-    <string name="cpref_splay_thr_title">Splay threshold</string>
-    <string name="cpref_splay_thr_summary">Splays outside the shot to keep [0.5]</string>
+    <string name="cpref_selection_radius_title">Rază selecție</string>
+    <string name="cpref_selection_radius_summary">Rază selecție [20 pxl]</string>
+	<string name="cpref_station_toast_title">Fereastră dialog stație</string>
+    <string name="cpref_station_toast_summary">Fereastră dialog stație în loc de boxă [n]</string>
+    <string name="cpref_station_points_title">Puncte stații</string>
+    <string name="cpref_station_points_summary">Afișează întotdeauna stațiile [n]</string>
+    <string name="cpref_station_point_size_title">Mărime puncte stații</string>
+    <string name="cpref_station_point_size_summary">Mărimea punctelor de stații [8 pxl]</string>
+    <string name="cpref_station_text_size_title">Mărime text stații</string>
+    <string name="cpref_station_text_size_summary">Mărimea textului la stații [20 pt]</string>
+    <string name="cpref_measure_dialog_title">Mesaj distanță</string>
+    <string name="cpref_measure_dialog_summary">Mesaj distanță în loc de fereastră dialog [n]</string>
+    <string name="cpref_grid_above_title">Caroiaj superior</string>
+    <string name="cpref_grid_above_summary">Caroiaj superior în loc de inferior [n]</string>
+    <string name="cpref_grid_extent_title">Extensie caroiaj</string>
+    <string name="cpref_grid_extent_summary">Extensie caroiaj în jurul planului de cartare</string>
+    <string name="cpref_neg_clino_title">Perspectivă sub-orizont</string>
+    <string name="cpref_neg_clino_summary">Permite perspectiva sub-orizont [n]</string>
+    <string name="cpref_dem_buffer_title">Tampon DEM</string>
+    <string name="cpref_dem_buffer_summary">Extensie DEM în jurul cartării [200]</string>
+    <string name="cpref_dem_maxsize_title">Dimensiune maximă DEM</string>
+    <string name="cpref_dem_maxsize_summary">Număr maxim celule [400]</string>
+    <string name="cpref_dem_reduce_title">Simplifică DEM</string>
+    <string name="cpref_dem_reduce_summary">Mod simplificare DEM [micșorare]</string>
+    <string name="cpref_all_splay_title">Toate radierile</string>
+   <string name="cpref_all_splay_summary">FoloseșteWhether to use all the splays for the walls [y]</string>
+    <string name="cpref_splay_use_title">Folosire radieri</string>
+    <string name="cpref_splay_use_summary">Folosire radieri: nu, normal, xsections [normal]</string>
+    <string name="cpref_splay_proj_title">Radieri proiectate</string>
+   <string name="cpref_splay_proj_summary">Whether to use splays projected on a normal plane [n]</string>
+    <string name="cpref_splay_thr_title">Prag radieri</string>
+    <string name="cpref_splay_thr_summary">Păstrează la măsurători radierile nefolosite [0.5]</string>
 
-    <string name="cpref_split_triangles_title">Split triangles</string>
-    <string name="cpref_split_triangles_summary">Whether to split intersecting wall triangles [y]</string>
-    <string name="cpref_split_random_title">Randomize points</string>
-    <string name="cpref_split_random_summary">Small random vector added to splays [0.1]</string>
-    <string name="cpref_split_stretch_title">Stretch walls</string>
-    <string name="cpref_split_stretch_summary">Stretch of wall points along the leg [0.1]</string>
+    <string name="cpref_split_triangles_title">Triunghiuri despățite</string>
+   <string name="cpref_split_triangles_summary">Whether to split intersecting wall triangles [y]</string>
+    <string name="cpref_split_random_title">Puncte aleatorii</string>
+    <string name="cpref_split_random_summary">Adăugare vector mic aleator la radieri [0.1]</string>
+    <string name="cpref_split_stretch_title">Întindere pereți</string>
+    <string name="cpref_split_stretch_summary">Întindere puncte pereți de-a lungul vizelor [0.1]</string>
 
     <string name="cpref_powercrust_delta_title">Powercrust Delta</string>
     <string name="cpref_powercrust_delta_summary">Exclude splays differing from nearby too much [0.1]</string>
+<!--
+    <string name="cpref_convex_hull_title">Convex hull</string>
+    <string name="cpref_convex_hull_summary">Convex hull walls</string>
+    <string name="cpref_delaunay_title">Delaunay</string>
+    <string name="cpref_delaunay_summary">Delaunay walls</string>
+    <string name="cpref_hull_title">Hull</string>
+    <string name="cpref_hull_summary">Hull walls</string>
 -->
-    <!-- UNUSED string name="cpref_convex_hull_title">Convex hull</string -->
-    <!-- UNUSED string name="cpref_convex_hull_summary">Convex hull walls</string -->
-    <!-- UNUSED string name="cpref_delaunay_title">Delaunay</string -->
-    <!-- UNUSED string name="cpref_delaunay_summary">Delaunay walls</string -->
-    <!-- UNUSED string name="cpref_hull_title">Hull</string -->
-    <!-- UNUSED string name="cpref_hull_summary">Hull walls</string -->
 
     <!-- UNUSED string name="TopoGLPerms">Permissions</string -->
-    <!-- TODO string name="cperms_mandatory">Cave3D cannot run without:</string -->
+    <!-- UNUSED string name="cperms_mandatory">Cave3D cannot run without:</string -->
     <!-- UNUSED string name="cperms_optional">Cave3D not fully-functional without:</string -->
     <!-- UNUSED string name="cwelcome_title">Cave3D %1$s</string -->
-    <!-- TODO string name="help_open_3d">Open 3D file</string -->
-    <!-- TODO string name="help_export_3d">Export 3D file</string -->
-    <!-- TODO string name="help_info_3d">3D info</string -->
-    <!-- TODO string name="help_ico_3d">3D leg distribution</string -->
-    <!-- TODO string name="help_rose_3d">Rose diagram</string -->
-    <!-- TODO string name="help_reset_3d">Reset 3D view</string -->
-    <!-- TODO string name="help_viewpoint_3d">3D viewpoint</string -->
-    <!-- TODO string name="help_alpha_3d">D.E.M.</string -->
-    <!-- TODO string name="help_wall_3d">3D model</string -->
+
+    <string name="help_open_3d">Deschide fișier 3D</string>
+    <string name="help_export_3d">Export fișier 3D</string>
+    <string name="help_info_3d">Informații 3D</string>
+    <string name="help_ico_3d">Distrubuție vize 3D</string>
+    <string name="help_rose_3d">Diagramă Rose</string>
+    <string name="help_reset_3d">Resetează perspectiva 3D</string>
+    <string name="help_viewpoint_3d">Perspectivă 3D</string>
+    <string name="help_alpha_3d">D.E.M.</string>
+    <string name="help_wall_3d">Model 3D</string>
     <!-- UNUSED string name="help_temperature">Tempertaure</string -->
-    <!-- TODO string name="help_sketch_3d">3D sketch lifting</string -->
-    <!-- UNUSED string name="help_fractal">Fractal analysis</string -->
+    <string name="help_sketch_3d">Ridicare schiță 3D</string>
+    <!-- UNUSED string name="help_fractal" translatable="false">Fractal analysis</string -->
 
-    <!-- TODO string name="help_light_3d">Pan and light</string -->
-    <!-- TODO string name="help_projection_3d">3D projection</string -->
-    <!-- TODO string name="help_stations_3d">Stations</string -->
-    <!-- TODO string name="help_splays_3d">Splays</string -->
-    <!-- TODO string name="help_walls_3d">Walls</string -->
-    <!-- TODO string name="help_surface_3d">Terrain</string -->
-    <!-- TODO string name="help_color_3d">Colors</string -->
-    <!-- TODO string name="help_frame_3d">Frame</string -->
+    <string name="help_light_3d">Decalaj și lumină</string>
+    <string name="help_projection_3d">Proiecție 3D</string>
+    <string name="help_stations_3d">Stații</string>
+    <string name="help_splays_3d">Radieri</string>
+    <string name="help_walls_3d">Pereți</string>
+    <string name="help_surface_3d">Teren</string>
+    <string name="help_color_3d">Culori</string>
+    <string name="help_frame_3d">Cadru</string>
 
+   
 </resources>
