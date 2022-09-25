@@ -577,8 +577,8 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="shot_delete">Törli a mérést?</string>
     <string name="shots_delete">Törli a méréseket ?</string>
     <string name="shots_delete_unsafe">Mérési pontokra hivatkozó keresztmetszetek.\nTörli a méréseket?</string>
-    <string name="shot_rename_unsafe">Mérési pontokra hivatkozó keresztmetszetek.\nÁtnevezi a mérést?</string>
-    <string name="shots_rename_unsafe">Mérési ponoktra hivatkozó keresztmetszetek.\nÁtnevezi a méréseket?</string>
+    <string name="shot_rename_unsafe">Mérési pontokra hivatkozó keresztmetszetek:%1$s.\nÁtnevezi a mérést?</string>
+    <string name="shots_rename_unsafe">Mérési ponoktra hivatkozó keresztmetszetek:\n%1$s.\nÁtnevezi a méréseket?</string>
     <string name="shot_check">Mérés megjelölése ellenőrző mérésként</string>
     <string name="shot_from">Honnan</string>
     <string name="shot_info">Írd be a mérés adatait</string>

@@ -572,8 +572,8 @@ Fai riferimento alle pagine web per i dettagli.\n
     <string name="shot_delete">Cancellare la misura?</string>
     <string name="shots_delete">Cancello il tiro?</string>
     <string name="shots_delete_unsafe">Caposaldo con sezione trasversale.\nCancallo battuta ?</string>
-    <string name="shot_rename_unsafe">Caposaldo con sezione trasversale.\nRinomino battuta ?</string>
-    <string name="shots_rename_unsafe">Caposaldo con sezione trasversale.\nRinomino battute ?</string>
+    <string name="shot_rename_unsafe">Caposaldo con sezione trasversale:%1$s.\nRinomino battuta ?</string>
+    <string name="shots_rename_unsafe">Caposaldi con sezione trasversale:\n%1$s.\nRinomino battute ?</string>
     <string name="shot_check">Marco il tiro come di controllo?</string>
     <string name="shot_from">da</string>
     <string name="shot_info">Scrivi i dati</string>

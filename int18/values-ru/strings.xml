@@ -574,8 +574,8 @@
     <string name="shot_delete">Удалить сегмент ?</string>
     <string name="shots_delete">Удалить сегменты ?</string>
     <string name="shots_delete_unsafe">К одному из пикетов привязано поперечное сечение.\nУдалить замеры ?</string>
-    <string name="shot_rename_unsafe">К одному из пикетов привязано поперечное сечение.\nПереименовать заемер ?</string>
-    <string name="shots_rename_unsafe">К одному из пикетов привязано поперечное сечение.\nПереименовать заемеры ?</string>
+    <string name="shot_rename_unsafe">К одному из пикетов привязано поперечное сечение:%1$s.\nПереименовать заемер ?</string>
+    <string name="shots_rename_unsafe">К одному из пикетов привязано поперечное сечение:\n%1$s.\nПереименовать заемеры ?</string>
     <string name="shot_check">Пометить замер как проверочный?</string>
     <string name="shot_from">№ ОТ</string>
     <string name="shot_info">Введите данные измерений</string>

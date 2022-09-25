@@ -572,8 +572,8 @@ debe ajustarlos a sus necesidades./n/n
     <string name="shot_delete">¿Quiere eliminar la toma?</string>
     <string name="shots_delete">¿Quiere eliminar las tomas?</string>
     <string name="shots_delete_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Eliminar tomas?</string>
-    <string name="shot_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar toma?</string>
-    <string name="shots_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales.\n¿Renombrar tomas?</string>
+    <string name="shot_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales:%1$s.\n¿Renombrar toma?</string>
+    <string name="shots_rename_unsafe">Estaciones a las que hacen referencia las secciones transversales:\n%1$s.\n¿Renombrar tomas?</string>
     <string name="shot_check">¿Marcar como una toma?</string>
     <string name="shot_from">Toma desde</string>
     <string name="shot_info">Introducir datos Toma</string>

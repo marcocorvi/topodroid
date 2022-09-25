@@ -576,8 +576,8 @@
     <string name="shot_delete">删除测线 ?</string>
     <string name="shots_delete">删除多个测线 ?</string>
     <string name="shots_delete_unsafe">由X剖面图参考的站点.\n删除测射 ?</string>
-    <string name="shot_rename_unsafe">由X剖面图参考的站点.\n重命名测射 ?</string>
-    <string name="shots_rename_unsafe">由X剖面图参考的站点.\n重命名测射 ?</string>
+    <string name="shot_rename_unsafe">由X剖面图参考的站点:%1$s.\n重命名测射 ?</string>
+    <string name="shots_rename_unsafe">由X剖面图参考的站点:\n%1$s.\n重命名测射 ?</string>
     <string name="shot_check">标记测线为检测测线?</string>
     <string name="shot_from">从</string>
     <string name="shot_info">进入测量数据</string>
