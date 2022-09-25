@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <resources>
-  <!-- TODO string-array name="orientation">
-     <item name="unspecified">unspecified</item>
-     <item name="portrait">portrait</item>
-     <item name="landscape">landscape</item>
-  </string-array -->
+  <string-array name="orientation">
+     <item name="unspecified">nespecificat</item>
+     <item name="portrait">vertical</item>
+     <item name="landscape">orizontal</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayDash">
-     <item name="none">none</item>
-     <item name="plan">clino</item>
-     <item name="profile">azimuth</item>
-     <item name="view">view</item>
-  </string-array -->
+  <string-array name="splayDash">
+     <item name="none">niciuna</item>
+     <item name="plan">înclinare</item>
+     <item name="profile">direcție</item>
+     <item name="view">vizualizare</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayColors">
-     <item name="none">none</item>
-     <item name="all">all</item>
-     <item name="palette">palette</item>
-  </string-arrayi -->
+  <string-array name="splayColors">
+     <item name="none">niciuna</item>
+     <item name="all">toate</item>
+     <item name="palette">paleta</item>
+  </string-array>
 
-  <!-- TODO string-array name="feedbackMode">
-     <item name="none">none</item>
-     <item name="sound">sound</item>
-     <item name="heptic">haptic</item>
-  </string-array -->
+  <string-array name="feedbackMode">
+     <item name="none">niciuna</item>
+     <item name="sound">sunet</item>
+     <item name="heptic">vibrații</item>
+  </string-array>
 
-  <!-- TODO string-array name="canvasLevels">
-     <item name="none">none</item>
-     <item name="class">by symbol</item>
-     <item name="instance">by item</item>
-  </string-array -->
+  <string-array name="canvasLevels">
+     <item name="none">niciuna</item>
+     <item name="class">simboluri</item>
+     <item name="instance">obiect</item>
+  </string-array>
 
   <string-array name="csvSeparator">
      <item name="comma">virgulă</item>
@@ -39,11 +39,11 @@
   </string-array>
 
   <string-array name="lineContinue">
-     <item name="none">fără</item>
-     <item name="start">unește cu punctul capătului de start</item>
-     <item name="end">unește cu capătul ultimului punct</item>
-     <item name="both">unește cu ambele capete</item>
-     <item name="continue">continuu</item>
+     <item name="none">niciuna</item>
+     <item name="start">conectează cu punctul de pornire</item>
+     <item name="end">conectează cu punctul final</item>
+     <item name="both">conectează cu ambele capete</item>
+     <item name="continue">continuare</item>
   </string-array>
 
   <string-array name="unitGrid">
@@ -53,16 +53,16 @@
      <item name="ten_cm">10 cm</item>
   </string-array>
 
-  <!-- TODO string-array name="unitMeasure">
-     <item name="grid_cell">grid cell</item>
-     <item name="meter">meter</item>
-     <item name="tf">feet</item>
-  </string-array -->
+  <string-array name="unitMeasure">
+     <item name="grid_cell">celule caroiaj </item>
+     <item name="meter">metru</item>
+     <item name="tf">picioare</item>
+  </string-array>
 
   <string-array name="loopClosure">
-     <item name="none">Fără</item>
+     <item name="none">Neexistent</item>
      <item name="normal">Normal</item>
-     <item name="weighted">Weighted</item>
+     <item name="weighted">Ponderat</item>
      <item name="triangles">Triunghuri</item>
   </string-array>
 
@@ -276,7 +276,7 @@
 
   <string-array name="unitLength">
      <item name="meters">metri</item>
-     <item name="feet">picioare (feet)</item>
+     <item name="feet">picioare</item>
   </string-array>
   <!-- string-array name="unitLengthNumber">
      <item name="meters">1</item>
@@ -300,15 +300,15 @@
      <!-- item name="minimum">Minimum</item -->
   </string-array>
 
-  <!-- FOXME string-array name="rawCData">
-     <item name="none">Nici unul</item>
+  <string-array name="rawCData">
+     <item name="none">Neexistent</item>
      <item name="dec">Decimal</item>
-     <item name="hex">Hexazecimal</item>
+     <item name="hex">Hexa</item>
      <item name="decg">G Decimal</item>
-     <item name="hexg">G Hex</item>
+     <item name="hexg">G Hexa</item>
      <item name="decm">M Decimal</item>
-     <item name="hexm">M Hex</item>
-  </string-array -->
+     <item name="hexm">M Hexa</item>
+  </string-array>
 
   <!-- UNUSED string-array name="modelType">
      <item name="none">Nici unul</item>
@@ -318,15 +318,15 @@
 
   <!-- 3D VIEWER array strings -->
 
-  <!-- TODO string-array name="demReduce">
-     <item name="shrink">Subsample</item>
-     <item name="cut">Clip</item>
-  </string-array -->
+  <string-array name="demReduce">
+     <item name="shrink">Reducție</item>
+     <item name="cut">Tăiere</item>
+  </string-array>
 
-  <!-- TODO string-array name="splayUse">
-     <item name="skip">Skip</item>
+  <string-array name="splayUse">
+     <item name="skip">Omite</item>
      <item name="normal">Normal</item>
-     <item name="xsection">X-Section</item>
-  </string-array -->
+     <item name="xsection">Secțiune transversală</item>
+  </string-array>
 
 </resources>
