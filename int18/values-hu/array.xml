@@ -62,7 +62,7 @@
      <item name="none">nincs</item>
      <item name="normal">normál</item>
      <item name="weighted">súlyozott</item>
-     <item name="selective">Szelektív</item>
+     <item name="selective">szelektív</item>
      <item name="triangles">háromszögek</item>
   </string-array>
 
