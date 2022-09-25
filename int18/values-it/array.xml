@@ -58,12 +58,15 @@
      <item name="tf">piedi</item>
   </string-array>
 
+  <!-- TODO
   <string-array name="loopClosure">
      <item name="none">Nessuna</item>
      <item name="normal">Normale</item>
      <item name="weighted">Weighted</item>
+     <item name="selective">Selective</item>
      <item name="triangles">Triangoli</item>
   </string-array>
+  -->
 
   <!-- UNUSED string-array name="wallsType">
      <item name="none">Nessuno</item>

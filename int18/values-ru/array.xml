@@ -7,12 +7,15 @@
      <item name="landscape">альбомная</item>
   </string-array>
 
+  <!-- TODO
   <string-array name="splayDash">
      <item name="none">нет</item>
      <item name="plan">по наклону</item>
      <item name="profile">по азимуту</item>
+     <item name="selective">Selective</item>
      <item name="view">по проекции</item>
   </string-array>
+  -->
 
   <string-array name="splayColors">
      <item name="none">нет</item>
@@ -58,12 +61,15 @@
      <item name="tf">футы</item>
   </string-array>
 
+  <!-- TODO
   <string-array name="loopClosure">
      <item name="none">Выкл.</item>
      <item name="normal">Обычное</item>
      <item name="weighted">Взвешенный</item>
+     <item name="selective">Selective</item>
      <item name="triangles">Триангуляция</item>
   </string-array>
+  -->
 
   <!-- UNUSED string-array name="wallsType">
      <item name="none">Нет</item>

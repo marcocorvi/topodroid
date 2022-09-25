@@ -58,12 +58,15 @@
      <item name="tf">láb</item>
   </string-array>
 
+  <!-- TODO
   <string-array name="loopClosure">
      <item name="none">nincs</item>
      <item name="normal">normál</item>
      <item name="weighted">súlyozott</item>
+     <item name="selective">Selective</item>
      <item name="triangles">háromszögek</item>
   </string-array>
+  -->
 
   <string-array name="survexEol">
      <item name="lf">Linux</item>
