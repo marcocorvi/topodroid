@@ -1,15 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
+<resources
+  xmlns:tools="http://schemas.android.com/tools"
+  >
   <plurals name="calib_saturated_values">
-    <item quantity="one">AVERTISMENT. O înregistrare saturată</item>
-    <item quantity="other" >AVERTISMENT. %1$d înregistrări saturate</item>
+    <item quantity="one">AVERTISMENT. O valoare saturată</item>
+    <item quantity="other" >AVERTISMENT. %1$d valori saturate</item>
   </plurals>
-  <plurals name="read_data">
-    <item quantity="zero">Nici o înregistrare nu a fost citită</item>
-    <item quantity="other">Citește %1$d înregistrări</item>
+<plurals name="read_data" tools:ignore="UnusedQuantity">
+    <item quantity="zero">Nu sunt date descărcate</item>
+    <item quantity="one">O valoare descărcată</item>
+    <item quantity="other">%1$d date descărcate </item>
   </plurals>
-  <plurals name="read_calib_data">
-    <item quantity="zero">Nu au fost citite datele de calibrare</item>
-    <item quantity="other">Citește %1$d înregistrări (%2$d pachete)</item>
+  <plurals name="read_calib_data" tools:ignore="UnusedQuantity">
+    <item quantity="zero">Nu sunt descărcate datele de calibrare</item>
+    <item quantity="one">O valoare de calibrare descărcată (%2$d pachete)</item>
+    <item quantity="other">%1$d date descărcate (%2$d pachete)</item>
+  </plurals>
+  <plurals name="found_calib_groups" tools:ignore="UnusedQuantity">
+    <item quantity="zero">Nu există grup</item>
+    <item quantity="one">Există %1$d grup</item>
+    <item quantity="other">Există %1$d grupe</item>
   </plurals>
 </resources>
