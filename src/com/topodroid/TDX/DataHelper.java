@@ -1360,6 +1360,7 @@ public class DataHelper extends DataSetObservable
    */
   boolean checkSiblings( long id0, long sid, String from, String to, float d0, float b0, float c0 )
   {
+    if ( from.length() == 0 || to.length() == 0 ) return false;
     boolean ret = false;
     // TDLog.v( "check " + id0 + " siblings " + from + " " + to + " " + d0 + " " + b0 + " " + c0 );
     Cursor cursor = myDB.rawQuery( qShotsByStations, new String[] { Long.toString( sid ), from, to } );

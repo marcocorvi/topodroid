@@ -662,8 +662,9 @@ public class DrawingCommandManager
     synchronized( mScraps ) {
       for ( Scrap scrap : mScraps ) scrap.clearSketchItems();
     }
-    // FIXME: one line added 20220916
+    // FIXME: two lines added 20220916
     mScraps.clear();      // TH2EDIT added
+    mScraps.add( mCurrentScrap );
     syncClearSelected();
     mDisplayPoints = false;
   }

@@ -2130,12 +2130,11 @@ public class ShotWindow extends Activity
    */
   private void checkSiblings( DBlock blk,  String from, String to, float d, float b, float c )
   {
-    if ( ! blk.isLeg() ) {
+    if ( ! blk.isLeg() ) { // if ( from.length() == 0 || to.length() == 0 )
       // TDLog.v("check siblings: block " + blk.mId + " is not a leg");
       return;
     }
     if ( mApp_mData.checkSiblings( blk.mId, TDInstance.sid, from, to, d, b, c ) ) { // bad sibling
-      // TDLog.v("bad sibling for " + blk.mId );
       TDToast.makeWarn( R.string.bad_sibling );
     // } else {
     //   // TDLog.v("no bad sibling for " + blk.mId );
