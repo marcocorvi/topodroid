@@ -7,15 +7,15 @@
      <item name="landscape">альбомная</item>
   </string-array>
 
-  <!-- TODO
+  
   <string-array name="splayDash">
      <item name="none">нет</item>
      <item name="plan">по наклону</item>
      <item name="profile">по азимуту</item>
-     <item name="selective">Selective</item>
+     <item name="selective">выборочно</item>
      <item name="view">по проекции</item>
   </string-array>
-  -->
+  
 
   <string-array name="splayColors">
      <item name="none">нет</item>
