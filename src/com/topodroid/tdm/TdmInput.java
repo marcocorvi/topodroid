@@ -20,17 +20,23 @@ class TdmInput extends TdmSurvey
 {
   boolean mChecked;
 
-  // @param name   db survey name
+  /** cstr
+   * @param name   db survey name
+   */
   TdmInput( String name )
   {
     super( name );
     mChecked = false;
   }
 
+  /** @return the survey name
+   */
   String getSurveyName() { return getName(); }
 
   // void toggleChecked() { mChecked = ! mChecked; }
 
+  /** @return true if the input is selected
+   */
   boolean isChecked() { return mChecked; }
 
   @Override

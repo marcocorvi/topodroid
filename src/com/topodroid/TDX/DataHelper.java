@@ -2377,6 +2377,8 @@ public class DataHelper extends DataSetObservable
   private static final String qHasFixedStation = "select id from fixeds where surveyId=? and station=? and id!=? and status=0 ";
   private static final String qjShots       =
     "select s.flag, s.distance, s.fStation, s.tStation, s.clino, z.clino, s.extend from shots as s join shots as z on z.fStation=s.tStation where s.surveyId=? AND z.surveyId=? AND s.fStation!=\"\" AND s.tStation!=\"\" AND s.status=0 ";
+  private static final String qFixeds = "select A.station, A.latitude, A.longitude, A.altitude, A.altimetric, A.cs_name, A.cs_latitude, A.cs_longitude, A.cs_altitude from fixeds as A, surveys as B where A.surveyId=B.id and B.name=?";
+  // private static final String qLength = "select count(), sum(A.distance) from shots as A, surveys as B where A.surveyId=B.id and B.name=? and A.fStation!=\"\" and A.tStation!=\"\"";
 
   List< SensorInfo > selectAllSensors( long sid, long status )
   {
@@ -2713,6 +2715,38 @@ public class DataHelper extends DataSetObservable
     // TDLog.Log( TDLog.LOG_DB, "select all fixeds " + sid + " size " + list.size() );
     return list;
   }
+
+  /**
+   * @param name   survey name
+   * @return first fixed data of the survey (station lat-long-alt cs and cs lat-long-alt)
+   * @note alt is altimetric altitude
+   */
+  public FixedInfo selectSurveyFixed( String name )
+  {
+    // ArrayList< FixedInfo > ret = new ArrayList<>();
+    FixedInfo info = null;
+    Cursor cursor = myDB.rawQuery( qFixeds, new String[]{ name } );
+    if (cursor.moveToFirst()) {
+      // do {
+        info = new FixedInfo( -1, cursor.getString(0), 
+          cursor.getDouble(1),
+          cursor.getDouble(2),
+          cursor.getDouble(3),
+          cursor.getDouble(4),
+          "", -1,
+          cursor.getString(5),
+          cursor.getDouble(6),
+          cursor.getDouble(7),
+          cursor.getDouble(8),
+          0 );
+        // ret.add( info );
+      // } while (cursor.moveToNext());
+    }
+    if ( /* cursor != null && */ !cursor.isClosed()) cursor.close();
+    return info;
+  }
+
+
 
    private List< FixedInfo > selectFixedAtStation( long sid, String name )
    {

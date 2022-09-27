@@ -983,6 +983,7 @@
     <string name="help_remote">DistoX遥控</string>
     <string name="help_add_shot">手动添加一个测量数据</string>
     <string name="help_info_shot">测量统计</string>
+    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
     <string name="help_survey_info">测量项目信息</string>
     <string name="help_undelete">恢复删除的项目</string>
     <!-- UPDATES string name="help_updates">Check for app version updates</string -->
@@ -1233,6 +1234,7 @@
     <string name="title_import_shot">测量导入</string>
     <string name="title_import_gps">GPS 点输入</string>
     <string name="title_import_th2">Therion th2 文件</string>
+    <!-- TODO string name="title_infos">Surveys info</string -->
     <string name="title_graph_paper">方格比例 1:100</string>
     <string name="graph_paper_scale">将线调整为 5 厘米长</string>
 

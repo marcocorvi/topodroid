@@ -146,6 +146,14 @@ public class TdmSurvey
     return mName;
   }
 
+  /** @return the number of stations
+   */
+  int getNrStations() { return mStations.size(); }
+
+  /** @return the number of shots
+   */
+  int getNrShots() { return mShots.size(); }
+
   /** get survey id
    * @return the survey id in the database table, or -1 if the survey is not from the database
    */
@@ -196,6 +204,34 @@ public class TdmSurvey
   }
 
   // ---------------------------------------------------------------
+  /** @return the survey bounding volume: West-East, North-South, Down-Up
+   */
+  float[] getBoundingVolume()
+  {
+    float[] ret = new float[6];
+    ret[0] = ret[1] = mStartStation.e;
+    ret[2] = ret[3] = mStartStation.s;
+    ret[4] = ret[5] = mStartStation.v;
+    for ( TdmStation st : mStations ) {
+      if ( st.e < ret[0] ) {
+        ret[0] = st.e;
+      } else if ( st.e > ret[1] ) {
+        ret[1] = st.e;
+      }
+      if ( st.s < ret[2] ) {
+        ret[2] = st.s;
+      } else if ( st.s > ret[3] ) {
+        ret[3] = st.s;
+      }
+      if ( st.v < ret[4] ) {
+        ret[4] = st.v;
+      } else if ( st.v > ret[5] ) {
+        ret[5] = st.v;
+      }
+    } 
+    return ret;
+  }
+
 
   /** compute the stations coordinates (for data reduction)
    */

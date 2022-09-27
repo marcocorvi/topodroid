@@ -289,7 +289,7 @@ public class TopoGL extends Activity
       // }
     } else {
       if ( mFileDialog ) {
-        TDLog.v("open file dialog - not implemented");
+        // TDLog.v("open file dialog - not implemented");
         // (new DialogOpenFile( this, this )).show();
         // // openFile();
       } else {
@@ -375,7 +375,7 @@ public class TopoGL extends Activity
         mSurveyBase   = extras.getString( "SURVEY_BASE" ); // TopoDroid CWD fullpath
         mThconfigName = extras.getString( "INPUT_THCONFIG" );  // thconfig
         mSurveyName   = extras.getString( "INPUT_SURVEY" );
-        // TDLog.v("extras: base " + mSurveyBase + " survey " + mSurveyName );
+        // TDLog.v("3D extras: base " + mSurveyBase + " survey " + mSurveyName + " config " + mThconfigName );
       // }
     }
 
@@ -2094,10 +2094,12 @@ public class TopoGL extends Activity
       if ( mRenderer != null ) mRenderer.clearModel();
       // resetAllPaths();
       if ( ext.equals( "tdconfig" ) ) { // isr not used
+        // TDLog.v("init rendering (2) TDCONGIF"); // TopoDroid TDM projects
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.TDCONFIG ); // tdconfig files are saved with therion syntax
         doSketches = true;
       } else if ( ext.equals( "thconfig" ) ) { // isr not used
+        // TDLog.v("init rendering (2) THCONGIF");
         InputStreamReader isr = ( is == null )? null : new InputStreamReader( is );
         mParser = new ParserTh( this, isr, filepath, ParserTh.THCONFIG ); 
       } else if ( ext.equals( "th" ) ) { // isr not used

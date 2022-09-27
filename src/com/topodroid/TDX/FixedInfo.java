@@ -32,16 +32,16 @@ public class FixedInfo extends MagLatLong
   public final static long SRC_MOBILE_TOP = 3L;
   long   id;       // fixed id
   long   source;   // 0: unknown,  1: topodroid,  2: manual,   3: mobile-topographer
-  String name;     // station name, or whatever
-  // double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
-  // double lng;      // wgs84 longitude [decimal deg]
-  double alt;      // wgs84 altitude [m]
-  double asl;      // geoid altitude [m] 
-  String comment;
-  String cs;       // coordinate system
-  double cs_lng;   // longitude / east
-  double cs_lat;   // latitude / north
-  double cs_alt;   // altitude
+  public String name;     // station name, or whatever
+  // public double lat;      // wgs84 latitude [decimal deg] (from MagLatLong)
+  // public double lng;      // wgs84 longitude [decimal deg]
+  public double alt;      // wgs84 altitude [m]
+  public double asl;      // geoid altitude [m] 
+  public String comment;
+  public String cs;       // coordinate system
+  public double cs_lng;   // longitude / east
+  public double cs_lat;   // latitude / north
+  public double cs_alt;   // altitude
   long   cs_n_dec; // number of decimals in lng/lat
 
   public FixedInfo( long _id, String n, double longitude, double latitude, double h_ellip, double h_geoid, String cmt, long src )

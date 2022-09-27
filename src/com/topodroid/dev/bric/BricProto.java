@@ -4,6 +4,7 @@
  * @date jan 2021
  *
  * @brief BRIC4 protocol
+ * @mote the methods of the BRIC procolor are run on the queue consumer thread
  * --------------------------------------------------------
  *  Copyright This software is distributed under GPL-3.0 or later
  *  See the file COPYING.
@@ -110,6 +111,9 @@ public class BricProto extends TopoDroidProtocol
     return true;
   }
 
+  /** add the primary data byte array
+   * @param bytes  primary data values byte array
+   */
   void addMeasPrim( byte[] bytes ) 
   {
     if ( checkPrim( bytes ) ) { // if Prim is new
@@ -123,14 +127,15 @@ public class BricProto extends TopoDroidProtocol
       mPrimToDo = true;
       mErr1 = 0;
       mErr2 = 0;
-      // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Prim " + mDistance + " " + mBearing + " " + mClino );
       // TDLog.v( "BRIC proto: meas_prim " +  mDistance + " " + mBearing + " " + mClino );
     } else {
-      // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: add Prim - repeated primary" );
       // TDLog.v( "BRIC proto: add Prim - repeated primary" );
     }
   }
 
+  /** add the metainfo byte array
+   * @param bytes  meta info byte array
+   */
   void addMeasMeta( byte[] bytes ) 
   {
     mIndex   = BricConst.getIndex( bytes );
@@ -138,7 +143,6 @@ public class BricProto extends TopoDroidProtocol
     mDip     = BricConst.getDip( bytes );
     mType    = BricConst.getType( bytes ); // 0: regular shot, 1: scan shot
     mSamples = BricConst.getSamples( bytes );
-    // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Meta " + mIndex + " type " + mType );
     // TDLog.v( "BRIC proto: added Meta " + mIndex + "/" + mLastIndex + " type " + mType );
     if ( mType == 0 ) { 
       if ( mIndex > mLastIndex+1 ) { // LOST SHOTS
@@ -153,10 +157,12 @@ public class BricProto extends TopoDroidProtocol
     }
   }
 
+  /** add the error byte array
+   * @param bytes   error byte array
+   */
   void addMeasErr( byte[] bytes ) 
   {
-    // TDLog.Log( TDLog.LOG_PROTO, "BRIC proto: added Err " );
-    TDLog.v( "BRIC proto: added Err " );
+    // TDLog.v( "BRIC proto: added Err " );
     mErr1 = BricConst.firstErrorCode( bytes );
     mErr2 = BricConst.secondErrorCode( bytes );
     mErrVal1 = BricConst.firstErrorValue( bytes, mErr1 );
@@ -166,10 +172,12 @@ public class BricProto extends TopoDroidProtocol
     mComment = ( mErr1 > 0 || mErr2 > 0 )? BricConst.errorString( bytes ) : null;
   }
   
-  // TODO use mType
+  /** process the data
+   * TODO use mType
+   */
   void processData()
   {
-    TDLog.v( "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
+    // TDLog.v( "BRIC proto process data - prim todo " + mPrimToDo + " index " + mIndex + " type " + mType );
     if ( mPrimToDo ) {
       if ( TDSetting.mBricZeroLength || mDistance > 0.01 ) {
         // TDLog.v( "BRIC proto: process - PrimToDo true: " + mIndex + " prev " + mLastIndex );
@@ -202,10 +210,13 @@ public class BricProto extends TopoDroidProtocol
     }
   }
 
+  /** add the primary values and process them
+   * @param bytes   byte array with the primary data
+   */
   void addMeasPrimAndProcess( byte[] bytes )
   {
     if ( checkPrim( bytes ) ) { // if Prim is new
-      TDLog.v( "BRIC proto: add Prim and process" );
+      // TDLog.v( "BRIC proto: add Prim and process" );
       mTime     = mThisTime;
       mDistance = BricConst.getDistance( bytes );
       mBearing  = BricConst.getAzimuth( bytes );
@@ -220,14 +231,21 @@ public class BricProto extends TopoDroidProtocol
     }
   }
 
+  /** save the last time byte array
+   * @param bytes   byte array
+   */
   void setLastTime( byte[] bytes )
   {
     // TDLog.v( "BRIC proto: set last time " + BleUtils.bytesToString( bytes ) );
     mLastTime = Arrays.copyOfRange( bytes, 0, bytes.length );
   }
 
+  /** reset the last time byte array to null
+   */
   void clearLastTime() { mLastTime = null; }
 
+  /** @return the last time byte array
+   */
   byte[] getLastTime() { return mLastTime; }
 
   

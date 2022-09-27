@@ -176,6 +176,7 @@ public class ParserTh extends TglParser
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.printf("Read file " + filename + "\n");
+    // TDLog.v("TH parser Read file " + filename );
     int res = readFile( isr, filename, "", false, 0.0f, 1.0, 1.0, 1.0, pw );
     // Toast.makeText( mApp, sw.toString(), Toast.LENGTH_LONG ).show();
 
@@ -233,7 +234,7 @@ public class ParserTh extends TglParser
       return ERR_NO_DB; 
     }
 
-    // TDLog.v("Th survey " + surveyname );
+    // TDLog.v("TH read survey " + surveyname );
 
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
@@ -290,7 +291,7 @@ public class ParserTh extends TglParser
     }
 
     List<SurveyFixed> fixeds = mData.getSurveyFixeds( sid );
-    // TDLog.v("Th survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
+    // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( fixeds != null && fixeds.size() > 0 ) {
       Cave3DCS cs0 = new Cave3DCS( );
@@ -335,10 +336,10 @@ public class ParserTh extends TglParser
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
             z1 = fx.mCsAltitude;
-            // TDLog.v( "Th fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
+            // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
 	    fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
           } else {
-            // TDLog.v( "Th use CS0 " + x0 + " " + y0 + " " + z0 );
+            // TDLog.v( "Th fix relative use CS0 " + x0 + " " + y0 + " " + z0 );
             fixes.add( new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
           }
         }
@@ -711,11 +712,11 @@ public class ParserTh extends TglParser
                   TDLog.Error( "Th Input file <" + filename + "> has no .th extension");
                 }
               }
-            } else if ( cmd.equals("load") ) {
+            } else if ( cmd.equals("load") ) { // DATABASE SURVEY
               idx = nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 filename = vals[idx]; // survey name
-                // TDLog.v( "Th survey " + filename );
+                // TDLog.v( "TH survey " + filename );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
@@ -727,14 +728,14 @@ public class ParserTh extends TglParser
                     base = dirname;
                   }
                   String db_path = base + "/distox14.sqlite";
-                  // TDLog.v( "Th DB " + db_path );
+                  // TDLog.v( "TH DB " + db_path );
                   if ( (new File(db_path)).exists() ) { // DB FILE
                     mData = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
                   }
                 }
                 int res = readSurvey( filename, path, use_survey_declination, survey_declination, pw );
                 if ( res != SUCCESS ) {
-                  TDLog.Error( "Th read survey " + filename + " failed. Error code " + res );
+                  TDLog.Error( "TH read survey " + filename + " failed. Error code " + res );
                   TDToast.makeBad( TDInstance.formatString( R.string.error_survey_read, filename ) );
                 }
               }
