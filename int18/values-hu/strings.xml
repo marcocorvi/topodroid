@@ -987,7 +987,7 @@ A részletekért keresse fel a weboldalakat.\n
     <string name="help_remote">DistoX távirányítása</string>
     <string name="help_add_shot">Mérés hozzáadása az adatok beírásával</string>
     <string name="help_info_shot">Felmérési statisztikák</string>
-    <!-- TODO string name="help_info_surveys">Surveys informations</string -->
+    <string name="help_info_surveys">Mérés információk</string>
     <string name="help_survey_info">Felmérési információk</string>
     <string name="help_undelete">Törölt elemek visszaállítása</string>
 	<!-- UPDATES string name="help_updates">Check for app version updates</string -->
