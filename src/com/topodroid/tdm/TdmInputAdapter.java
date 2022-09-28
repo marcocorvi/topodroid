@@ -11,7 +11,9 @@
  */
 package com.topodroid.tdm;
 
+import com.topodroid.utils.TDLog;
 import com.topodroid.prefs.TDSetting;
+import com.topodroid.ui.MyColorPicker;
 import com.topodroid.TDX.R;
 
 import java.util.ArrayList;
@@ -21,9 +23,11 @@ import android.content.Context;
 import android.widget.ArrayAdapter;
 import android.widget.TextView;
 import android.widget.CheckBox;
+import android.widget.Button;
 // import android.widget.LinearLayout;
 
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.view.LayoutInflater;
 
@@ -70,13 +74,32 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
     }
   }
 
+  /** @return the number of input items
+   */
   public int size() { return mItems.size(); }
 
-
-  private class ViewHolder
+  private class ViewHolder implements OnClickListener
+                      , MyColorPicker.IColorChanged
   { 
     CheckBox checkBox;
     TextView textView;
+    Button   colorBtn;
+    TdmInput mInput;
+
+    @Override
+    public void onClick( View v ) 
+    {
+      TDLog.v("HOLDER TODO color picker");
+      (new MyColorPicker( mContext, this, mInput.getColor() )).show();
+    }
+
+    // IColorChanged
+    public void colorChanged( int color )
+    {
+      mInput.setColor( color );
+      colorBtn.setBackgroundColor( color );
+    }
+
   }
 
   @Override
@@ -92,13 +115,17 @@ class TdmInputAdapter extends ArrayAdapter< TdmInput >
       holder.checkBox = (CheckBox) convertView.findViewById( R.id.tdinput_checked );
       holder.textView = (TextView) convertView.findViewById( R.id.tdinput_name );
       holder.textView.setTextSize( TDSetting.mTextSize );
+      holder.colorBtn = (Button) convertView.findViewById( R.id.tdinput_color );
       convertView.setTag( holder );
+      holder.colorBtn.setOnClickListener( holder );
     } else {
       holder = (ViewHolder) convertView.getTag();
     }
     holder.checkBox.setOnClickListener( b );
     holder.checkBox.setChecked( b.isChecked() );
     holder.textView.setText( b.getSurveyName() );
+    holder.colorBtn.setBackgroundColor( b.getColor() );
+    holder.mInput = b;
     return convertView;
   }
 

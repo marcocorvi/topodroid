@@ -21,6 +21,7 @@ import com.topodroid.c3db.SurveyInfo;
 import com.topodroid.c3db.DBlock;
 import com.topodroid.TDX.TopoGL;
 import com.topodroid.TDX.TglParser;
+import com.topodroid.TDX.TglColor;
 import com.topodroid.TDX.Cave3DCS;
 import com.topodroid.TDX.Cave3DShot;
 import com.topodroid.TDX.Cave3DStation;
@@ -139,7 +140,8 @@ public class ParserTh extends TglParser
     PrintWriter  pw = new PrintWriter( sw );
     pw.printf( String.format( mApp.getResources().getString( R.string.read_survey ), surveyname ) );
 
-    int res = readSurvey( surveyname, "", false, 0, pw );
+    int color = TglColor.getSurveyColor( );
+    int res = readSurvey( surveyname, "", false, 0, color, pw );
     if ( sw != null ) TDToast.make( sw.toString() );
 
     if ( res == SUCCESS ) {
@@ -176,6 +178,7 @@ public class ParserTh extends TglParser
     StringWriter sw = new StringWriter();
     PrintWriter  pw = new PrintWriter( sw );
     pw.printf("Read file " + filename + "\n");
+    // TDLog.v("TH parser Read file " + filename );
     int res = readFile( isr, filename, "", false, 0.0f, 1.0, 1.0, 1.0, pw );
     // Toast.makeText( mApp, sw.toString(), Toast.LENGTH_LONG ).show();
 
@@ -218,22 +221,23 @@ public class ParserTh extends TglParser
     }
   }
 
-  /** read a survey
+  /** read a survey from the database
    * @param surveyname    name of the survey
    * @param basepath      base folder pathname
    * @param usd           whether to use the given declination
    * @param sd            specified declination
+   * @param color         survey color (only tdconfig)
    * @param pw            error message writer
    * @return success (0) or error code
    */
-  private int readSurvey( String surveyname, String basepath, boolean usd, double sd, PrintWriter pw ) // throws ParserException
+  private int readSurvey( String surveyname, String basepath, boolean usd, double sd, int color, PrintWriter pw ) // throws ParserException
   {
     if ( mData == null ) {
       if ( pw != null ) pw.printf( mApp.getResources().getString( R.string.no_database ) );
       return ERR_NO_DB; 
     }
 
-    // TDLog.v("Th survey " + surveyname );
+    // TDLog.v("TH read survey " + surveyname );
 
     // Toast.makeText( mApp, "Reading " + surveyname, Toast.LENGTH_SHORT ).show();
 
@@ -242,6 +246,7 @@ public class ParserTh extends TglParser
       if ( pw != null ) pw.printf( String.format( mApp.getResources().getString( R.string.cno_survey ), surveyname ) );
       return ERR_NO_SURVEY;
     }
+    info.color = color;
     long sid = info.id;
 
     List< DBlock > blks = mData.getSurveyShots( sid, 0 );
@@ -273,10 +278,10 @@ public class ParserTh extends TglParser
         String from = makeName( blk.mFrom, path );
         if ( blk.mTo.length() > 0 ) {
           String to = makeName( blk.mTo, path );
-          shots.add( new Cave3DShot( from, to, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis ) );
+          shots.add( new Cave3DShot( from, to, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
         } else {
           if ( mSplayUse > SPLAY_USE_SKIP ) {
-            splays.add( new Cave3DShot( from, null, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis ) );
+            splays.add( new Cave3DShot( from, null, blk.mLength, ber, blk.mClino, blk.mFlag, blk.mMillis, color ) );
           }
         }
       } else if ( blk.mTo.length() > 0 ) {
@@ -284,13 +289,13 @@ public class ParserTh extends TglParser
           String to = makeName( blk.mTo, path );
           double ber = 180 + blk.mBearing + declination;
           if ( ber >= 360 ) ber -= 360;
-          splays.add( new Cave3DShot( to, null, blk.mLength, ber, -blk.mClino, blk.mFlag, blk.mMillis ) );
+          splays.add( new Cave3DShot( to, null, blk.mLength, ber, -blk.mClino, blk.mFlag, blk.mMillis, color ) );
         }
       }
     }
 
     List<SurveyFixed> fixeds = mData.getSurveyFixeds( sid );
-    // TDLog.v("Th survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
+    // TDLog.v("TH survey fixed points " + fixeds.size() + " shots " + shots.size() + " splays " + splays.size() );
 
     if ( fixeds != null && fixeds.size() > 0 ) {
       Cave3DCS cs0 = new Cave3DCS( );
@@ -323,11 +328,11 @@ public class ParserTh extends TglParser
             z1 = fx.mCsAltitude;
             // TDLog.v( "Th fix " + name + " CS1 " + fx.mCsName + " " + x1 + " " + y1 + " " + z1 );
             mOrigin = new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude );
-	        fixes.add( mOrigin );
+	    fixes.add( mOrigin );
           } else {
             // TDLog.v( "Th CS0 " + x0 + " " + y0 + " " + z0 );
             mOrigin = new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude );
-	       fixes.add( mOrigin );
+	    fixes.add( mOrigin );
           }
         } else {
           // TDLog.v( "Th Fix relative " + name + " " + x0 + " " + y0 + " " + z0 + " cs1 " + ((fx.mCsName!=null)?fx.mCsName:"null") );
@@ -335,10 +340,10 @@ public class ParserTh extends TglParser
             x1 = fx.mCsLongitude;
             y1 = fx.mCsLatitude;
             z1 = fx.mCsAltitude;
-            // TDLog.v( "Th fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
+            // TDLog.v( "Th fix relative fix " + name + " using " + cs1.name + " " + x1 + " " + y1 + " " + z1 );
 	    fixes.add( new Cave3DFix( name, x1, y1, z1, cs1, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
           } else {
-            // TDLog.v( "Th use CS0 " + x0 + " " + y0 + " " + z0 );
+            // TDLog.v( "Th fix relative use CS0 " + x0 + " " + y0 + " " + z0 );
             fixes.add( new Cave3DFix( name, x0, y0, z0, cs0, fx.mLongitude, fx.mLatitude, fx.mAltitude ) );
           }
         }
@@ -711,11 +716,16 @@ public class ParserTh extends TglParser
                   TDLog.Error( "Th Input file <" + filename + "> has no .th extension");
                 }
               }
-            } else if ( cmd.equals("load") ) {
+            } else if ( cmd.equals("load") ) { // DATABASE SURVEY
               idx = nextIndex( vals, idx );
               if ( idx < vals.length ) {
                 filename = vals[idx]; // survey name
-                // TDLog.v( "Th survey " + filename );
+                int color = 0;
+                if ( (idx = nextIndex( vals, idx )) < vals.length && vals[idx].equals("-color") ) {
+                  if ( (idx = nextIndex( vals, idx )) < vals.length ) color = 0xff000000 | Integer.parseInt( vals[idx] );
+                  // TDLog.v("TH parser color " + color + " " + idx + ": " + vals[idx] );
+                }
+                // TDLog.v( "TH survey " + filename );
                 if ( mData == null ) {
                   String base = null;
                   if ( dirname.toLowerCase( Locale.getDefault() ).endsWith( "tdconfig/" ) ) {
@@ -727,14 +737,14 @@ public class ParserTh extends TglParser
                     base = dirname;
                   }
                   String db_path = base + "/distox14.sqlite";
-                  // TDLog.v( "Th DB " + db_path );
+                  // TDLog.v( "TH DB " + db_path );
                   if ( (new File(db_path)).exists() ) { // DB FILE
                     mData = new DataHelper( mApp, db_path, TDVersion.DATABASE_VERSION );
                   }
                 }
-                int res = readSurvey( filename, path, use_survey_declination, survey_declination, pw );
+                int res = readSurvey( filename, path, use_survey_declination, survey_declination, color, pw );
                 if ( res != SUCCESS ) {
-                  TDLog.Error( "Th read survey " + filename + " failed. Error code " + res );
+                  TDLog.Error( "TH read survey " + filename + " failed. Error code " + res );
                   TDToast.makeBad( TDInstance.formatString( R.string.error_survey_read, filename ) );
                 }
               }
@@ -812,7 +822,7 @@ public class ParserTh extends TglParser
           }
         }
         if ( sh.mSurvey == null ) {
-          Cave3DSurvey survey = new Cave3DSurvey(sv);
+          Cave3DSurvey survey = new Cave3DSurvey(sv, sh.mColor );
           // sh.mSurvey = survey;
           // sh.mSurveyNr = survey.number;
           // survey.addShotInfo( sh );

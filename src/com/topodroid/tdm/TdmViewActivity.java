@@ -253,23 +253,26 @@ public class TdmViewActivity extends Activity
     private void doStart()
     {
       ArrayList< TdmSurvey > surveys = TdmConfigActivity.mTdmConfig.getViewSurveys();
-      if ( surveys == null ) return;
+      if ( surveys == null || surveys.size() == 0 ) {
+        TDToast.make( R.string.no_survey );
+        return;
+      }
       // TdmConfig config = mApp.mConfig;
       ArrayList< TdmEquate > equates = TdmConfigActivity.mTdmConfig.getEquates();
 
       // TDLog.v( "TdmView nr. surveys " + surveys.size() + " equates " + equates.size() );
 
-      int[] color = new int[6];
-      color[0] = 0xffffffff;
-      color[1] = 0xffff00ff;
-      color[2] = 0xffffff00;
-      color[3] = 0xff00ffff;
-      color[4] = 0xffff0000;
-      color[5] = 0xff00ff00;
-      int k = 0;
+      // int[] color = new int[6];
+      // color[0] = 0xffffffff;
+      // color[1] = 0xffff00ff;
+      // color[2] = 0xffffff00;
+      // color[3] = 0xff00ffff;
+      // color[4] = 0xffff0000;
+      // color[5] = 0xff00ff00;
+      // int k = 0;
       for ( TdmSurvey survey : surveys ) {
-        mDrawingSurface.addSurvey( survey, color[k%6], 0, 0, equates );
-        ++k;
+        mDrawingSurface.addSurvey( survey, survey.getColor(), 0, 0, equates );
+        // ++k;
       }
       updateViewEquates();
     }

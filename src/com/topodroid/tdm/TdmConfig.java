@@ -130,13 +130,14 @@ class TdmConfig extends TdmFile
 
   /** insert an input
    * @param name  input name
+   * @param color input color
    * @note this is called by readFile
    */
-  private void insertInput( String name )
+  private void insertInput( String name, int color )
   {
     if ( name == null ) return;
     // TDLog.v( "insert input " + name );
-    mInputs.add( new TdmInput( name ) );
+    mInputs.add( new TdmInput( name, color ) );
   }
 
   /** insert an input
@@ -221,7 +222,7 @@ class TdmConfig extends TdmFile
    */
   void writeTdmConfig( boolean force )
   {
-    // TDLog.v( "save tdconfig " + this + " " + mSave );
+    TDLog.v( "save tdconfig " + this + " save " + mSave + " force " + force );
     if ( mSave || force ) { // was mRead || force
       String filepath = getFilepath();
       try {
@@ -241,7 +242,7 @@ class TdmConfig extends TdmFile
    */
   void readTdmConfig()
   {
-    // TDLog.v( "read tdconfig " + this + " " + mRead );
+    TDLog.v( "read tdconfig " + this + " " + mRead );
     if ( mRead ) return;
     readFile();
     mRead = true;
@@ -263,7 +264,7 @@ class TdmConfig extends TdmFile
       // FIXME path
       String path = input.getSurveyName();
       // TDLog.v("config write add survey " + path );
-      pw.format("    load %s\n", path );
+      pw.format("    load %s -color %d\n", path, (input.getColor() & 0xffffff) );
     }
     for ( TdmEquate equate : mEquates ) {
       pw.format("    equate");
@@ -323,7 +324,15 @@ class TdmConfig extends TdmFile
               for (int k=1; k<vals.length; ++k ) {
                 if ( vals[k].length() > 0 ) {
                   String surveyname = vals[k];
-                  insertInput( surveyname );
+                  int color = 0xffcc9933;
+                  for ( ++k; k<vals.length; ++k ) {
+                    if ( vals[k].length() > 0 ) {
+                      if ( vals[k].equals("-color") ) continue;
+                      color = 0xff000000 | Integer.parseInt( vals[k] );
+                      break;
+                    }
+                  }
+                  insertInput( surveyname, color );
                   break;
                 }
               }    

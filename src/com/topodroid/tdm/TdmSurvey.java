@@ -30,8 +30,9 @@ public class TdmSurvey
   TdmSurvey mParent;
   TdmStation mStartStation;
   SurveyInfo mInfo = null;
-  boolean    mLoadedData = false;
+  private int mLoadedData = -1; // -1 to do, 0 failed, 1 loaded
   float      mDeclination; // declination [radians]
+  int        mColor = 0xffcc9933;
 
   ArrayList< TdmShot >    mShots;
   ArrayList< TdmStation > mStations;
@@ -90,14 +91,17 @@ public class TdmSurvey
 
   /** load survey from the database
    * @param data    database helper
+   * @return true if the survey data have been loaded
    *
    * @note declination is saved in a class field - it could be added to the shot bearing here
    *       however it is added when the stations coords are computed 
    *       see computeStations()
    */
-  void loadSurveyData( DataHelper data ) 
+  boolean loadSurveyData( DataHelper data ) 
   {
-    if ( mLoadedData ) return;
+    if ( mLoadedData == 1 ) return true;
+    if ( mLoadedData == 0 ) return false;
+    
     if ( mInfo == null ) {
       mInfo = data.getSurveyInfo( mName );
     }
@@ -107,11 +111,13 @@ public class TdmSurvey
       for ( DBlock blk : blks ) {
         addShot( blk.mFrom, blk.mTo, blk.mLength, blk.mBearing, blk.mClino, blk.getIntExtend() );
       }
-      mLoadedData = true;
+      mLoadedData = 1;
       // TDLog.v("Survey " + mName + " loaded data " + mShots.size() );
     } else {
       TDLog.Error("TdManager Survey " + mName + ": unable to get survey info");
+      mLoadedData = 0;
     }
+    return (mLoadedData == 1);
   }
 
   // void addFix( TdFix fix ) { mFixes.add( fix ); }
@@ -145,6 +151,14 @@ public class TdmSurvey
     }
     return mName;
   }
+
+  /** @return the number of stations
+   */
+  int getNrStations() { return mStations.size(); }
+
+  /** @return the number of shots
+   */
+  int getNrShots() { return mShots.size(); }
 
   /** get survey id
    * @return the survey id in the database table, or -1 if the survey is not from the database
@@ -196,6 +210,34 @@ public class TdmSurvey
   }
 
   // ---------------------------------------------------------------
+  /** @return the survey bounding volume: West-East, North-South, Down-Up
+   */
+  float[] getBoundingVolume()
+  {
+    float[] ret = new float[6];
+    ret[0] = ret[1] = mStartStation.e;
+    ret[2] = ret[3] = mStartStation.s;
+    ret[4] = ret[5] = mStartStation.v;
+    for ( TdmStation st : mStations ) {
+      if ( st.e < ret[0] ) {
+        ret[0] = st.e;
+      } else if ( st.e > ret[1] ) {
+        ret[1] = st.e;
+      }
+      if ( st.s < ret[2] ) {
+        ret[2] = st.s;
+      } else if ( st.s > ret[3] ) {
+        ret[3] = st.s;
+      }
+      if ( st.v < ret[4] ) {
+        ret[4] = st.v;
+      } else if ( st.v > ret[5] ) {
+        ret[5] = st.v;
+      }
+    } 
+    return ret;
+  }
+
 
   /** compute the stations coordinates (for data reduction)
    */
@@ -293,6 +335,15 @@ public class TdmSurvey
       }
     }
   }
+
+  /** set the input color
+   * @param color   color
+   */
+  public void setColor( int color ) { mColor = color; }
+
+  /** @return the input color
+   */
+  public int getColor() { return mColor; }
 
 }
 

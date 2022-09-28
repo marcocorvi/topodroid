@@ -360,7 +360,7 @@ public class ParserTrox extends TglParser
           }
         }
         if ( sh.mSurvey == null ) {
-          Cave3DSurvey survey = new Cave3DSurvey(sv);
+          Cave3DSurvey survey = new Cave3DSurvey(sv, 0);
           // sh.mSurvey = survey;
           // sh.mSurveyNr = survey.number;
           // survey.addShotInfo( sh );

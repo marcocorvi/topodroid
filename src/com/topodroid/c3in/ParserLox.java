@@ -78,7 +78,7 @@ public class ParserLox extends TglParser
       String name = getLoxSurveyFullname( survey, lox_surveys );
       // String name = survey.name;
       // Log.v("TopoGL-LOX", "survey " + name + " " + survey.id + " " + survey.pid );
-      surveys.add( new Cave3DSurvey( name, survey.Id(), survey.Parent() ) ); // pid = parent_id
+      surveys.add( new Cave3DSurvey( name, survey.Id(), survey.Parent(), 0 ) ); // pid = parent_id
     }
 
     ArrayList< LoxStation > lox_stations = lox.GetStations();
@@ -87,7 +87,7 @@ public class ParserLox extends TglParser
 
     int cnt = 0;
     for ( LoxStation st : lox_stations ) {
-      Cave3DSurvey survey = getSurvey( st.Survey() );
+      Cave3DSurvey survey = getSurveyFromId( st.Survey() );
       String name = (survey != null)? st.Name() + "@" + survey.getName() : st.Name();
       // String name = null;
       // for ( LoxSurvey s : lox_surveys ) if ( s.id == st.sid ) { name = s.name; break; } // no need to get the survey name
@@ -135,7 +135,7 @@ public class ParserLox extends TglParser
         shot.setUsed();
         mCaveLength += len;
 
-        Cave3DSurvey survey = getSurvey( sh.Survey() );
+        Cave3DSurvey survey = getSurveyFromId( sh.Survey() );
         if ( (sh.Flag() & LoxShot.FLAG_SPLAY) != 0 ) {
           if ( mSplayUse > SPLAY_USE_SKIP ) {
             splays.add( shot );

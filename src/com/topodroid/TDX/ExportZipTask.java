@@ -11,6 +11,8 @@
  */
 package com.topodroid.TDX;
 
+import com.topodroid.utils.TDLog;
+
 // import com.topodroid.prefs.TDSetting;
 
 // import java.lang.ref.WeakReference;
@@ -24,12 +26,13 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
   private Archiver mArchiver;
   // private final String   mSaved;
   private final TopoDroidApp mApp;
-  private final Uri      mUri;
+  private final Uri mUri;
   
   /** cstr
    * @param context   context (unused)
    * @param app       application
    * @param uri       zip output URI (or null to use default zipfile)
+   * @note if uri is null the zip is exported in the default path (topodroid/zip/survey.zip)
    */
   ExportZipTask( Context context, TopoDroidApp app, Uri uri )
   {
@@ -37,7 +40,7 @@ class ExportZipTask extends AsyncTask< Void, Void, Boolean >
     mUri   = uri;
     // mSaved    = context.getResources().getString( R.string.zip_saved );
   }
-
+  
   /** execute the task in background
    * @param args  args (unused)
    */

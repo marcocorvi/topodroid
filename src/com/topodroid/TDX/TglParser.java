@@ -257,11 +257,20 @@ public class TglParser
   /** @return a survey by the ID
    * @param id   ID of the survey
    */
-  public Cave3DSurvey getSurvey( int id )
+  public Cave3DSurvey getSurveyFromId( int id )
   {
     if ( id < 0 ) return null;
     for ( Cave3DSurvey s : surveys ) if ( s.mId == id ) return s;
     return null;
+  }
+
+  /** @return the k-th survey
+   * @param k  index
+   */
+  public Cave3DSurvey getSurveyFromIndex( int k ) 
+  { 
+    if ( k < 0 || k >= surveys.size() ) k = 0;
+    return surveys.get(k); 
   }
 
   /** @return a station by the ID
@@ -1040,7 +1049,7 @@ public class TglParser
           for ( int k=0; k<nr; ++k ) {
             Cave3DStation st = Cave3DStation.deserialize( dis, version );
             stations.add( st );
-            Cave3DSurvey survey = getSurvey( st.mSid );
+            Cave3DSurvey survey = getSurveyFromId( st.mSid );
             survey.addStation( st );
           }
           break;
@@ -1050,7 +1059,7 @@ public class TglParser
           for ( int k=0; k<nr; ++k ) {
             Cave3DShot shot = Cave3DShot.deserialize( dis, version );
             shots.add( shot );
-            Cave3DSurvey survey = getSurvey( shot.mSurveyId );
+            Cave3DSurvey survey = getSurveyFromId( shot.mSurveyId );
             survey.addShot( shot );
             Cave3DStation st = getStation( shot.from );
             if ( st != null ) shot.setFromStation( st );
@@ -1064,7 +1073,7 @@ public class TglParser
           for ( int k=0; k<nr; ++k ) {
             Cave3DShot splay = Cave3DShot.deserialize( dis, version );
             splays.add( splay );
-            Cave3DSurvey survey = getSurvey( splay.mSurveyId );
+            Cave3DSurvey survey = getSurveyFromId( splay.mSurveyId );
             survey.addSplay( splay );
             Cave3DStation st = getStation( splay.from );
             if ( st != null ) splay.setFromStation( st );

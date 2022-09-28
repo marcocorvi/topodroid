@@ -11,7 +11,7 @@
  */
 package com.topodroid.TDX;
 
-class TglColor
+public class TglColor
 {
   float[] color;
 
@@ -74,13 +74,38 @@ class TglColor
   static final int SURVEY_COLOR_NR = surveyColor.length; 
   static final int AXIS_COLOR_NR   = axisColor.length; 
 
+  /** @return a survey color
+   * @param k index
+   */
+  public static int getSurveyColor( int k )
+  {
+    if ( k < 0 ) k = -k;
+    return surveyColor[ k % SURVEY_COLOR_NR ];
+  }
+
+  /** @return a random survey color 
+   */
+  public static int getSurveyColor( )
+  {
+    return surveyColor[ (int)( Math.random() * TglColor.SURVEY_COLOR_NR ) ];
+  }
+
   /** fill the RGB color-array with a survey color
    * @param index   survey index
    * @param color   color-array 
    */
-  static void getSurveyColor( int index, float[] color ) 
+  static void indexToSurveyColor( int index, float[] color ) 
   {
     int col = surveyColor[ index % SURVEY_COLOR_NR ];
+    colorToSurveyColor( col, color );
+  }
+
+  /** fill the RGB color-array with a survey color
+   * @param col    integer color
+   * @param color   color-array 
+   */
+  static void colorToSurveyColor( int col, float[] color ) 
+  {
     color[0] = (float)( (col>>16)&0xff )/255.0f;
     color[1] = (float)( (col>> 8)&0xff )/255.0f;
     color[2] = (float)( (col    )&0xff )/255.0f;

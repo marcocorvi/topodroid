@@ -77,6 +77,7 @@ public class TdmConfigActivity extends Activity
     R.drawable.iz_add,
     R.drawable.iz_drop,
     R.drawable.iz_view,
+    R.drawable.iz_gps,
     R.drawable.iz_equates,
     R.drawable.iz_3d
   };
@@ -84,6 +85,7 @@ public class TdmConfigActivity extends Activity
     R.string.help_add_surveys,
     R.string.help_drop_surveys,
     R.string.help_view_surveys,
+    R.string.help_gps_surveys,
     R.string.help_view_equates,
     R.string.help_3d
   };
@@ -104,8 +106,8 @@ public class TdmConfigActivity extends Activity
   };
   private static final int HELP_PAGE = R.string.TdmConfigActivity;
 
+  // private TopoDroidApp mApp;
   private TdmInputAdapter mTdmInputAdapter;
-  // TdManagerApp mApp;
 
   static TdmConfig mTdmConfig = null;  // current config file
 
@@ -126,8 +128,7 @@ public class TdmConfigActivity extends Activity
   public void onCreate( Bundle savedInstanceState )
   {
     super.onCreate( savedInstanceState );
-
-    // mApp = (TdManagerApp) getApplication();
+    // mApp = (TopoDroidApp) getApplication();
 
     mTdmConfig = null;
     Bundle extras = getIntent().getExtras();
@@ -238,7 +239,7 @@ public class TdmConfigActivity extends Activity
       // exclude 3D on Android-R and beyond
       // if ( Build.VERSION.SDK_INT >= Build.VERSION_CODES.R ) mNrButton1 --;
 
-      mNrButton1 = ( TDLevel.overNormal)? 5 : 4; // not necessary because TDM is at Tester Level
+      mNrButton1 = ( TDLevel.overNormal)? 6 : 5; // not necessary because TDM is at Tester Level
       mButton1 = new Button[mNrButton1];
 
       for (int k=0; k<mNrButton1; ++k ) {
@@ -303,8 +304,11 @@ public class TdmConfigActivity extends Activity
     for ( TdmInput input : mTdmConfig.getInputs() ) {
       if ( input.isChecked() ) {
         // DataHelper mAppData = TopoDroidApp.mData;
-        input.loadSurveyData ( TopoDroidApp.mData );
-        mySurvey.addSurvey( input );
+        if ( input.loadSurveyData ( TopoDroidApp.mData ) ) {
+          mySurvey.addSurvey( input );
+        } else {
+          TDToast.makeWarn( String.format( getResources().getString( R.string.error_survey_read ), input.getSurveyName() ) );
+        }
         // TDLog.v( "parse file " + input.getSurveyName() );
         // TdParser parser = new TdParser( mAppData, input.getSurveyName(), mySurvey );
       }
@@ -461,6 +465,8 @@ public class TdmConfigActivity extends Activity
       }
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // VIEW
       startTdmSurveysActivity();
+    } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // INFO
+      (new TdmInfoDialog( this, (TopoDroidApp)getApplication(), mTdmConfig)).show();
     } else if ( k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // EQUATES
       (new TdmEquatesDialog( this, mTdmConfig, null )).show();
     } else if ( TDLevel.overNormal && k1 < mNrButton1 && b0 == mButton1[k1++] ) {  // 3D

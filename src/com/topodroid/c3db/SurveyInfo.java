@@ -22,7 +22,8 @@ public class SurveyInfo
   public String name;
   public String date;
   public String team;
-  public double  declination;
+  public double declination;
+  public int    color;
 
   public boolean hasDeclination() { return declination < DECLINATION_MAX; }
 

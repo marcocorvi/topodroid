@@ -99,6 +99,12 @@ public class BricComm extends TopoDroidComm
   private long onData = 0;
   private Thread mConsumer = null;
 
+  /** cstr
+   * @param ctx        context
+   * @param app        application
+   * @param address    device address
+   * @param bt_device  bluetooth device
+   */
   public BricComm( Context ctx, TopoDroidApp app, String address, BluetoothDevice bt_device ) 
   {
     super( app );

@@ -548,7 +548,8 @@ public class SurveyWindow extends Activity
         // //   mApp.doExportDataAsync( getApplicationContext(), null, index, true ); // uri = null
         // // }
         if ( index == TDConst.SURVEY_FORMAT_ZIP ) { // EXPORT ZIP
-          selectExportFromProvider( index, filename );
+          // selectExportFromProvider( index, filename );
+          mApp.doExportDataAsync( getApplicationContext(), filename, index, mExportPrefix, true ); // uri = null
         } else {
           mApp.doExportDataAsync( getApplicationContext(), filename, index, mExportPrefix, true ); // uri = null
         }
